@@ -1,0 +1,39 @@
+name: KUMI CI
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  gcc-10:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v2
+      - name: Testing KUMI with g++
+        uses: ./.github/actions/run_tests
+        with:
+          compiler: 'g++-10'
+
+  gcc-11:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v2
+      - name: Testing KUMI with g++
+        uses: ./.github/actions/run_tests
+        with:
+          compiler: 'g++-11'
+
+  clang-12:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v2
+      - name: Testing KUMI with clang
+        uses: ./.github/actions/run_tests
+        with:
+          compiler: 'clang++-12'

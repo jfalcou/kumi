@@ -1,0 +1,13 @@
+# action.yml
+name: 'Clone and Build Tests'
+description: 'Clone and build a given repository'
+inputs:
+  compiler:  # compiler
+    description: 'Compiler'
+    required: true
+    default: 'g++-10'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+    - ${{ inputs.compiler }}
