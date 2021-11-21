@@ -9,10 +9,11 @@
 ##==================================================================================================
 add_library(kumi_test INTERFACE)
 
+target_compile_features ( kumi_test INTERFACE  cxx_std_20 )
 if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-  target_compile_options( kumi_test INTERFACE /W3 /EHsc /std:c++latest)
+  target_compile_options( kumi_test INTERFACE /W3 /EHsc)
 else()
-  target_compile_options( kumi_test INTERFACE -std=c++20 -Werror -Wall -Wextra)
+  target_compile_options( kumi_test INTERFACE -Werror -Wall -Wextra)
 endif()
 
 target_include_directories( kumi_test INTERFACE
@@ -23,11 +24,11 @@ target_include_directories( kumi_test INTERFACE
 ##==================================================================================================
 ## Make test
 ##==================================================================================================
-function(generate_test root file)
+function(generate_test file)
   string(REPLACE ".cpp" ".exe" base ${file})
   string(REPLACE "/"    "." base ${base})
   string(REPLACE "\\"   "." base ${base})
-  set(test "${root}.${base}")
+  set(test "${base}")
 
   add_executable( ${test}  "${file}")
   target_link_libraries(${test} PUBLIC kumi_test)
@@ -69,21 +70,21 @@ add_custom_target(unit)
 ##==================================================================================================
 ## Actual tests
 ##==================================================================================================
-generate_test("kumi"  "access.cpp"          )
-generate_test("kumi"  "adapt.cpp"           )
-generate_test("kumi"  "aggregate_ctor.cpp"  )
-generate_test("kumi"  "apply.cpp"           )
-generate_test("kumi"  "cat.cpp"             )
-generate_test("kumi"  "convert.cpp"         )
-generate_test("kumi"  "extract.cpp"         )
-generate_test("kumi"  "flatten.cpp"         )
-generate_test("kumi"  "fold.cpp"            )
-generate_test("kumi"  "for_each.cpp"        )
-generate_test("kumi"  "forward_as_tuple.cpp")
-generate_test("kumi"  "make_tuple.cpp"      )
-generate_test("kumi"  "map.cpp"             )
-generate_test("kumi"  "reorder.cpp"         )
-generate_test("kumi"  "split.cpp"           )
-generate_test("kumi"  "tie.cpp"             )
-generate_test("kumi"  "transpose.cpp"       )
-generate_test("kumi"  "zip.cpp"             )
+generate_test("access.cpp"          )
+generate_test("adapt.cpp"           )
+generate_test("aggregate_ctor.cpp"  )
+generate_test("apply.cpp"           )
+generate_test("cat.cpp"             )
+generate_test("convert.cpp"         )
+generate_test("extract.cpp"         )
+generate_test("flatten.cpp"         )
+generate_test("fold.cpp"            )
+generate_test("for_each.cpp"        )
+generate_test("forward_as_tuple.cpp")
+generate_test("make_tuple.cpp"      )
+generate_test("map.cpp"             )
+generate_test("reorder.cpp"         )
+generate_test("split.cpp"           )
+generate_test("tie.cpp"             )
+generate_test("transpose.cpp"       )
+generate_test("zip.cpp"             )
