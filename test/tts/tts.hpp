@@ -607,20 +607,20 @@ namespace tts
 #define TTS_RELATION_(A, B, OP, T, F)         TTS_RELATION_IMPL(A,B,OP,T,F,TTS_FAIL)
 #define TTS_RELATION_REQUIRED(A, B, OP, T, F) TTS_RELATION_IMPL(A,B,OP,T,F,TTS_FATAL)
 #define TTS_RELATION_IMPL(A, B, OP, T, F, FAILURE)                                                  \
-[&]()                                                                                               \
+[&](auto&& a, auto&& b)                                                                             \
 {                                                                                                   \
-  if( ::tts::detail::OP(A,B) )                                                                      \
+  if( ::tts::detail::OP(a,b) )                                                                      \
   {                                                                                                 \
     ::tts::global_runtime.pass(); return ::tts::logger{false};                                      \
   }                                                                                                 \
   else                                                                                              \
   {                                                                                                 \
     FAILURE (   "Expression: "  << TTS_STRING(A) << " " T " " << TTS_STRING(B)                      \
-            <<  " is false because: " << ::tts::as_string(A) << " " F " " << ::tts::as_string(B)    \
+            <<  " is false because: " << ::tts::as_string(a) << " " F " " << ::tts::as_string(b)    \
             );                                                                                      \
     return ::tts::logger{};                                                                         \
   }                                                                                                 \
-}()                                                                                                 \
+}(A,B)                                                                                              \
 
 #define TTS_EQUAL(LHS, RHS, ...)          TTS_RELATION(LHS,RHS, eq , "==" , "!=" , __VA_ARGS__)
 #define TTS_NOT_EQUAL(LHS, RHS, ...)      TTS_RELATION(LHS,RHS, neq, "!=" , "==" , __VA_ARGS__)
