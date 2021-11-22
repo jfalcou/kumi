@@ -39,11 +39,9 @@ TTS_CASE("Check map(f, {}) behavior")
 
 TTS_CASE("Check map(f, tuple) behavior")
 {
-  TTS_WHEN("Given a tuple t")
   {
     auto t = kumi::tuple {1, 2., 3.4f, '5'};
 
-    TTS_AND_THEN(" - we call map(f,t)")
     {
       auto s = map([](auto m) { return sizeof(m); }, t);
 
@@ -58,7 +56,6 @@ TTS_CASE("Check map(f, tuple) behavior")
       TTS_EQUAL(m3, sizeof(char));
     }
 
-    TTS_AND_THEN(" - we call map(f,t,u)")
     {
       auto u = kumi::tuple {2, 3, 4, 5};
       auto s = map([](auto m, auto n) { return n * sizeof(m); }, t, u);
@@ -78,11 +75,9 @@ TTS_CASE("Check map(f, tuple) behavior")
 
 TTS_CASE("Check map(f, tuple) constexpr behavior")
 {
-  TTS_WHEN("Given a tuple t")
   {
     constexpr auto t = kumi::tuple {1, 2., 3.4f, '5'};
 
-    TTS_AND_THEN(" - we call t.map(f)")
     {
       constexpr auto s = map([](auto m) { return sizeof(m); }, t);
 
@@ -92,7 +87,6 @@ TTS_CASE("Check map(f, tuple) constexpr behavior")
       TTS_CONSTEXPR_EQUAL(get<3>(s), sizeof(char));
     }
 
-    TTS_AND_THEN(" - we call t.map(f,u)")
     {
       constexpr auto u = kumi::tuple {2, 3, 4, 5};
       constexpr auto s = map([](auto m, auto n) { return n * sizeof(m); }, t, u);

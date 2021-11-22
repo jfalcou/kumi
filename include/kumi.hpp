@@ -684,14 +684,15 @@ namespace kumi
     if constexpr(sized_product_type<Tuple,0>) return std::remove_cvref_t<Tuple>{};
     else
     {
+      auto const call = [&]<std::size_t N, typename... Ts>(index_t<N>, Ts &&... args)
+      {
+        return f(get<N>(args)...);
+      };
+
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        auto call = [&]<std::size_t N>(index_t<N>, auto &&...args) {
-          return f(get<N>(args)...);
-        };
         return kumi::make_tuple(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
-      }
-      (std::make_index_sequence<size<Tuple>::value>());
+      }(std::make_index_sequence<size<Tuple>::value>());
     }
   }
 

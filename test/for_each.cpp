@@ -45,7 +45,7 @@ TTS_CASE("Check for_each constexpr behavior")
   TTS_CONSTEXPR_EQUAL(get<3>(t), '6');
 
   constexpr auto t2 = []() {
-    auto it = kumi::tuple {1, 2., 3.4f, '6'};
+    auto it = kumi::tuple {1, 2., 3.4f, char(8)};
     kumi::for_each([](auto &m, auto n) { m *= n; }, it, it);
     return it;
   }();
@@ -53,7 +53,7 @@ TTS_CASE("Check for_each constexpr behavior")
   TTS_CONSTEXPR_EQUAL(get<0>(t2), 1);
   TTS_CONSTEXPR_EQUAL(get<1>(t2), 4.);
   TTS_CONSTEXPR_EQUAL(get<2>(t2), 11.56f);
-  TTS_CONSTEXPR_EQUAL(get<3>(t2), 'd');
+  TTS_CONSTEXPR_EQUAL(get<3>(t2), '@');
 };
 
 TTS_CASE("Check for_each_index behavior")
