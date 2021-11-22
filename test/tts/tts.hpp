@@ -18,14 +18,10 @@ namespace tts
     std::cout << "Usage: " << name  << " [OPTION...]\n";
     std::cout << "\nFlags:\n";
     std::cout << "  -h, --help        Display this help message\n";
-    std::cout << "  -n, --no-color    Disable colored output\n";
-    std::cout << "  -p, --pass        Report passing tests\n";
     std::cout << "  -x, --hex         Print the floating results in hexfloat mode\n";
     std::cout << "  -s, --scientific  Print the floating results in scientific mode\n";
     std::cout << "\nParameters:\n";
-    std::cout << "  --filter=str      Only run tests with `str` in their description\n";
     std::cout << "  --precision=arg   Set the precision for displaying floating pint values\n";
-    std::cout << "  --repeat=arg      Repeat each tests arg times\n";
     std::cout << "  --seed=arg        Set the PRNG seeds (default is time-based)\n";
     std::cout << "\nRange specifics Parameters:\n";
     std::cout << "  --block=arg       Set size of range checks samples (min. 32)\n";
@@ -446,9 +442,9 @@ namespace tts
 #define TTS_EXPECT_(EXPR)         TTS_EXPECT_IMPL((EXPR),TTS_FAIL)
 #define TTS_EXPECT_REQUIRED(EXPR) TTS_EXPECT_IMPL((EXPR),TTS_FATAL)
 #define TTS_EXPECT_IMPL(EXPR,FAILURE)                                                               \
-[&]()                                                                                               \
+[&](auto&& expr)                                                                                    \
 {                                                                                                   \
-  if( TTS_REMOVE_PARENS(EXPR) )                                                                     \
+  if( expr )                                                                                        \
   {                                                                                                 \
     ::tts::global_runtime.pass(); return ::tts::logger{false};                                      \
   }                                                                                                 \
@@ -457,15 +453,15 @@ namespace tts
     FAILURE ( "Expression: "  << TTS_STRING(TTS_REMOVE_PARENS(EXPR)) << " evaluates to false." );   \
     return ::tts::logger{};                                                                         \
   }                                                                                                 \
-}()                                                                                                 \
+}(EXPR)                                                                                             \
 
 #define TTS_EXPECT_NOT(EXPR, ...)       TTS_EXPECT_NOT_ ## __VA_ARGS__ ( EXPR )
 #define TTS_EXPECT_NOT_(EXPR)           TTS_EXPECT_NOT_IMPL(EXPR,TTS_FAIL)
 #define TTS_EXPECT_NOT_REQUIRED(EXPR)   TTS_EXPECT_NOT_IMPL(EXPR,TTS_FATAL)
 #define TTS_EXPECT_NOT_IMPL(EXPR,FAILURE)                                                           \
-[&]()                                                                                               \
+[&](auto&& expr)                                                                                    \
 {                                                                                                   \
-  if( !(TTS_REMOVE_PARENS(EXPR)) )                                                                  \
+  if( !expr )                                                                                       \
   {                                                                                                 \
     ::tts::global_runtime.pass(); return ::tts::logger{false};                                      \
   }                                                                                                 \
@@ -474,7 +470,7 @@ namespace tts
     FAILURE ( "Expression: "  << TTS_STRING(EXPR) << " evaluates to true." );                       \
     return ::tts::logger{};                                                                         \
   }                                                                                                 \
-}()                                                                                                 \
+}(EXPR)                                                                                             \
 
 #define TTS_CONSTEXPR_EXPECT(EXPR)                                                                  \
 [&]()                                                                                               \
@@ -818,10 +814,10 @@ namespace tts
   }
 }
 #define TTS_PRECISION_IMPL(LHS, RHS, N, UNIT, FUNC, FAILURE)                                        \
-[&]()                                                                                               \
+[&](auto&& lhs, auto&& rhs)                                                                         \
 {                                                                                                   \
-  auto eval_a = (LHS);                                                                              \
-  auto eval_b = (RHS);                                                                              \
+  auto eval_a = (lhs);                                                                              \
+  auto eval_b = (rhs);                                                                              \
   auto r      = FUNC (eval_a,eval_b);                                                               \
   auto& fmt_n = N<1000 ? std::defaultfloat : std::scientific;                                       \
   auto& fmt_r = r<1000 ? std::defaultfloat : std::scientific;                                       \
@@ -844,7 +840,8 @@ namespace tts
             );                                                                                      \
     return ::tts::logger{};                                                                         \
   }                                                                                                 \
-}()
+}(LHS,RHS)                                                                                          \
+
 #define TTS_PRECISION(L,R,N,U,F, ...)     TTS_PRECISION_ ## __VA_ARGS__ (L,R,N,U,F)
 #define TTS_PRECISION_(L,R,N,U,F)         TTS_PRECISION_IMPL(L,R,N,U,F,TTS_FAIL)
 #define TTS_PRECISION_REQUIRED(L,R,N,U,F) TTS_PRECISION_IMPL(L,R,N,U,F,TTS_FATAL)
