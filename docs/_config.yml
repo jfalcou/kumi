@@ -5,4 +5,4 @@ relative_links:
   collections: true
 theme: jekyll-theme-slate
 title: KUMI
-description: KUM - A Compact C++20 Tuple Toolset
+description: KUMI - A Compact C++20 Tuple Toolset

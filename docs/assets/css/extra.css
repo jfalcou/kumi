@@ -20,3 +20,10 @@
 .inner {
   max-width: 1024px;
 }
+
+.logo
+{
+  box-shadow: none;
+  border:     none;
+  padding:    10px;
+}
