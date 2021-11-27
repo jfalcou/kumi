@@ -3,9 +3,34 @@
 ## Structured bindinds
 `kumi::tuple` supports structured binding.
 
-<iframe width="100%" height="300px" src="https://godbolt.org/e#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ckumi.hpp%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++kumi::tuple+t+%3D+%7B+1,+2.3,+4.5f,+!'@!'+%7D%3B%0A%0A++auto+%5Ba,b,c,d%5D+%3D+t%3B%0A++std::cout+%3C%3C+a+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+b+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+c+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+d+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:37.12793733681462,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:kumi,ver:trunk)),options:'-std%3Dc%2B%2B20+-O3',source:1,stdinPanelShown:'1',tree:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:62.87206266318538,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4"></iframe>
+**Example:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+#include <kumi.hpp>
+#include <iostream>
 
-## `get`
+int main()
+{
+  kumi::tuple t = { 1, 2.3, 4.5f, '@' };
+
+  auto [a,b,c,d] = t;
+  std::cout << a << "\n";
+  std::cout << b << "\n";
+  std::cout << c << "\n";
+  std::cout << d << "\n";
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Expected output:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1
+2.3
+4.5
+@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+## Single Element Access
+
+### `get`
 
 **Synopsis:**
 ```c++
@@ -25,12 +50,29 @@ Extracts the `I`th element from a `kumi::tuple`. Note that `get` will only parti
 in overload resolution if its parameter is a valid index within [0, `t.size()`[.
 
 **Example:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+#include <kumi.hpp>
+#include <iostream>
 
-<iframe width="100%" height="300px" src="https://godbolt.org/e#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ckumi.hpp%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++kumi::tuple+t+%3D+%7B+1,+2.3,+4.5f,+!'@!'+%7D%3B%0A++std::cout+%3C%3C+get%3C0%3E(t)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+get%3C1%3E(t)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+get%3C2%3E(t)+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+get%3C3%3E(t)+%3C%3C+%22%5Cn%22%3B%0A%7D%0A'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:37.12793733681462,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:kumi,ver:trunk)),options:'-std%3Dc%2B%2B20+-O3',source:1,stdinPanelShown:'1',tree:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:62.87206266318538,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4"></iframe>
+int main()
+{
+  kumi::tuple t = { 1, 2.3, 4.5f, '@' };
+  std::cout << get<0>(t) << "\n";
+  std::cout << get<1>(t) << "\n";
+  std::cout << get<2>(t) << "\n";
+  std::cout << get<3>(t) << "\n";
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+**Expected output:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1
+2.3
+4.5
+@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-## `tuple::operator[]`
-
+### `tuple::operator[]`
 
 **Synopsis:**
 ```c++
@@ -50,6 +92,150 @@ literal constant indexing or the `kumi::index<N>` template variable.
 `operator[]` will only participate in overload resolution if its parameter is a valid index within
 [0, `t.size()`[.
 
-**Example:**
 
-<iframe width="100%" height="300px" src="https://godbolt.org/e#g:!((g:!((g:!((h:codeEditor,i:(filename:'1',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,selection:(endColumn:1,endLineNumber:1,positionColumn:1,positionLineNumber:1,selectionStartColumn:1,selectionStartLineNumber:1,startColumn:1,startLineNumber:1),source:'%23include+%3Ckumi.hpp%3E%0A%23include+%3Ciostream%3E%0A%0Aint+main()%0A%7B%0A++using+namespace+kumi::literals%3B%0A%0A++kumi::tuple+t+%3D+%7B+1,+2.3,+4.5f,+!'@!'+%7D%3B%0A++std::cout+%3C%3C+t%5B0_c%5D+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+t%5B1_c%5D+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+t%5B2_c%5D+%3C%3C+%22%5Cn%22%3B%0A++std::cout+%3C%3C+t%5Bkumi::index%3C3%3E%5D+%3C%3C+%22%5Cn%22%3B%0A%7D'),l:'5',n:'0',o:'C%2B%2B+source+%231',t:'0')),k:37.12793733681462,l:'4',n:'0',o:'',s:0,t:'0'),(g:!((h:executor,i:(argsPanelShown:'1',compilationPanelShown:'0',compiler:g112,compilerOutShown:'0',execArgs:'',execStdin:'',fontScale:14,fontUsePx:'0',j:1,lang:c%2B%2B,libs:!((name:kumi,ver:trunk)),options:'-std%3Dc%2B%2B20+-O3',source:1,stdinPanelShown:'1',tree:'1',wrap:'1'),l:'5',n:'0',o:'Executor+x86-64+gcc+11.2+(C%2B%2B,+Editor+%231)',t:'0')),header:(),k:62.87206266318538,l:'4',n:'0',o:'',s:0,t:'0')),l:'2',n:'0',o:'',t:'0')),version:4"></iframe>
+**Example:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+#include <kumi.hpp>
+#include <iostream>
+
+int main()
+{
+  using namespace kumi::literals;
+
+  kumi::tuple t = { 1, 2.3, 4.5f, '@' };
+  std::cout << t[0_c] << "\n";
+  std::cout << t[1_c] << "\n";
+  std::cout << t[2_c] << "\n";
+  std::cout << t[kumi::index<3>] << "\n";
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Expected output:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+1
+2.3
+4.5
+@
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+## Tuple Slicing
+
+### `tuple::extract`
+
+**Synopsis:**
+```c++
+namespace kumi
+{
+  template<std::size_t I0, std::size_t I1> requires((I1-I0) <= sizeof...(Ts))
+  [[nodiscard]] constexpr auto tuple::extract( index_t<I0> const&, index_t<I1> const&) const noexcept;
+
+  template<std::size_t I0, std::size_t I1> requires((I1-I0) <= sizeof...(Ts))
+  [[nodiscard]] constexpr auto tuple::extract( index_t<I0> const&, index_t<I1> const&) noexcept;
+
+  template<std::size_t I0> requires(I0 <= sizeof...(Ts))
+  [[nodiscard]] constexpr auto tuple::extract( index_t<I0> const&) const noexcept;
+
+  template<std::size_t I0> requires(I0 <= sizeof...(Ts))
+  [[nodiscard]] constexpr auto tuple::extract( index_t<I0> const&) noexcept ;
+}
+```
+
+Extract a `kumi::tuple` from the current object.
+
+`tuple::extract` takes two parameters `i0` and `i1` and will return the tuple containing all
+the elements of the original tuple between index `i0` and `i1` excluded. As for `operator[]`,
+indexes can be passed via the index user-defined literal or the `kumi::index<N>` template variable.
+
+**Example:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+#include <kumi.hpp>
+#include <iostream>
+
+int main()
+{
+  using namespace kumi::literals;
+
+  kumi::tuple a = { 1, 2.3, 4.5f,'6',"7", short{89} };
+
+  auto part = a.extract(1_c,4_c);
+
+  std::cout << a << "\n";
+  std::cout << part << "\n";
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Expected output:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+( 1 2.3 4.5 6 7 89 )
+( 2.3 4.5 6 )
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+If `i1` is omitted, all elements between `i0` and the end of the tuple are extracted.
+
+**Example:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+#include <kumi.hpp>
+#include <iostream>
+
+int main()
+{
+  using namespace kumi::literals;
+
+  kumi::tuple a = { 1, 2.3, 4.5f,'6',"7", short{89} };
+
+  auto part = a.extract(2_c);
+
+  std::cout << a << "\n";
+  std::cout << part << "\n";
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Expected output:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+( 1 2.3 4.5 6 7 89 )
+( 4.5 6 7 89 )
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### `tuple::split`
+
+**Synopsis:**
+```c++
+namespace kumi
+{
+  template<std::size_t I0> requires(I0 <= sizeof...(Ts))
+  [[nodiscard]] constexpr auto tuple::split( index_t<I0> const&) const noexcept;
+
+  template<std::size_t I0> requires(I0 <= sizeof...(Ts))
+  [[nodiscard]] constexpr auto tuple::split( index_t<I0> const&)  noexcept;
+}
+```
+
+Split a `kumi::tuple` in two new `kumi::tuple` containing all the elements before and after
+a given index. As for `tuple::extract`, indexes can be passed via the index user-defined literal
+or the `kumi::index<N>` template variable.
+
+**Example:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+#include <kumi.hpp>
+#include <iostream>
+
+int main()
+{
+  using namespace kumi::literals;
+
+  kumi::tuple a = { 1, 2.3, 4.5f,'6',"7", short{89} };
+
+  auto[first, second] = a.split(3_c);
+
+  std::cout << a      << "\n";
+  std::cout << first  << "\n";
+  std::cout << second << "\n";
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Expected output:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+( 1 2.3 4.5 6 7 89 )
+( 1 2.3 4.5 )
+( 6 7 89 )
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

@@ -42,12 +42,12 @@ TTS_CASE("Check tuple to constructible type conversion")
 {
   kumi::tuple in{std::size_t{9}, 13.37};
 
-  TTS_EQUAL ( kumi::tuple_cast<my_struct>(in), (my_struct{9,13.37}) );
+  TTS_EQUAL ( kumi::from_tuple<my_struct>(in), (my_struct{9,13.37}) );
 };
 
 TTS_CASE("Check tuple to constructible type constexpr conversion")
 {
   constexpr kumi::tuple in{std::size_t{9}, 13.37};
 
-  TTS_CONSTEXPR_EQUAL ( kumi::tuple_cast<my_struct>(in), (my_struct{9,13.37}) );
+  TTS_CONSTEXPR_EQUAL ( kumi::from_tuple<my_struct>(in), (my_struct{9,13.37}) );
 };
