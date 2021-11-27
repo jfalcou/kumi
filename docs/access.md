@@ -214,6 +214,18 @@ Split a `kumi::tuple` in two new `kumi::tuple` containing all the elements befor
 a given index. As for `tuple::extract`, indexes can be passed via the index user-defined literal
 or the `kumi::index<N>` template variable.
 
+**Helper Type:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+namespace kumi::result
+{
+  template<product_type T, std::size_t I0> struct split;
+  template<product_type T, std::size_t I0> using split_t = typename split<T,I0>::type;
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`kumi::result::split<T,I0>` computes the type resulting of the call to `split(index<I0>)` on a
+type of type T.
+
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 #include <kumi.hpp>

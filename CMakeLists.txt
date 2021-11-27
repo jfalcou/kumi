@@ -1,5 +1,5 @@
 ##==================================================================================================
-##  KUMI - One File Wonders
+##  KUMI - Cmpact C++20 Tuple Toolbox
 ##  Copyright : KUMI Contributors & Maintainers
 ##  SPDX-License-Identifier: MIT
 ##==================================================================================================
@@ -18,9 +18,14 @@ if (${PROJECT_SOURCE_DIR} STREQUAL ${PROJECT_BINARY_DIR})
   message(FATAL_ERROR "[kumi]: In-source build is not recommend")
 endif()
 
-##==================================================================================================
-## Install target for people using FetchContent
-##==================================================================================================
+## =================================================================================================
+## Install target
+## =================================================================================================
+install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/kumi TYPE INCLUDE)
+
+## =================================================================================================
+## Exporting target for external use
+## =================================================================================================
 add_library(kumi_lib INTERFACE)
 target_include_directories(kumi_lib INTERFACE $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>)
 
