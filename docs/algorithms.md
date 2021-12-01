@@ -1,21 +1,66 @@
 # Algorithms
 
 ## Transformation
-#### `for_each`
+
+### `apply`
 
 **Synopsis:**
 ```c++
-template<typename Function, typename... Ts>
-constexpr void for_each(Function f, tuple<Ts...>& t);
+namespace kumi
+{
+  template<typename Function, product_type Tuple>
+  constexpr decltype(auto) apply(Function f, Tuple&& t);
+}
+```
 
-template<typename Function, typename... Ts>
-constexpr void for_each(Function f, tuple<Ts...> const& t);
+Invoke the `Function` object `f` with a tuple of arguments and returns the result of this invocation.
+
+**Helper Trait:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
+namespace kumi::result
+{
+  template<typename Function, product_type Tuple> struct apply;
+  template<typename Function, product_type Tuple> using  apply_t = typename apply<Function,Tuple>::type;
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Computes the type returned by a call to `kumi::map` on a given set of parameters.
+
+**Example:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
+#include <kumi.hpp>
+#include <iostream>
+
+int main()
+{
+  auto t = kumi::tuple{1,2.,3.f};
+  std::cout << kumi::apply( [](auto... m) { return (m + ...); }, t);
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Expected output:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+6
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### `for_each`
+
+**Synopsis:**
+```c++
+namespace kumi
+{
+  template<typename Function, typename... Ts>
+  constexpr void for_each(Function f, tuple<Ts...>& t);
+
+  template<typename Function, typename... Ts>
+  constexpr void for_each(Function f, tuple<Ts...> const& t);
+}
 ```
 
 Invoke the `Function` object `f` on each elements of a given tuple.
 
-[**Example:**](https://godbolt.org/z/o3Kh4PdT3)
-```c++
+**Example:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
 #include <kumi.hpp>
 #include <iostream>
 
@@ -25,29 +70,32 @@ int main()
   kumi::for_each( [](auto& m) { m *= 10.f; }, t);
   std::cout << t << "\n";
 }
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Expected output:**
-```bash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ( 10 23 4.3 )
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#### `for_each_index`
+### `for_each_index`
 
 **Synopsis:**
 ```c++
-template<typename Function, typename... Ts>
-constexpr void for_each_index(Function f, tuple<Ts...>& t);
+namespace kumi
+{
+  template<typename Function, typename... Ts>
+  constexpr void for_each_index(Function f, tuple<Ts...>& t);
 
-template<typename Function, typename... Ts>
-constexpr void for_each_index(Function f, tuple<Ts...> const& t);
+  template<typename Function, typename... Ts>
+  constexpr void for_each_index(Function f, tuple<Ts...> const& t);
+}
 ```
 
 Invoke the `Function` object `f` on each elements of a given tuple while passing the constexpr index
 of said elements.
 
-[**Example:**](https://godbolt.org/z/GzcP7Y89h)
-```c++
+**Example:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
 #include <kumi.hpp>
 #include <iostream>
 
@@ -57,26 +105,43 @@ int main()
   kumi::for_each_index( [](auto i, auto& m) { m *= i*2; }, t);
   std::cout << t << "\n";
 }
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Expected output:**
-```bash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ( 0 4.6 1.72 )
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-#### `map`
+### `map`
 
 **Synopsis:**
 ```c++
-template<typename... Ts, typename Function, sized_product_type<sizeof...(Ts)>... Tuples>
-constexpr auto map(Function f, tuple<Ts...> const& t0, Tuples const&... others);
+namespace kumi
+{
+  template<typename... Ts, typename Function, sized_product_type<sizeof...(Ts)>... Tuples>
+  constexpr auto map(Function f, tuple<Ts...> const& t0, Tuples const&... others);
+}
 ```
 
 Applies the given function to all the tuples passed as arguments and stores the result in another
 tuple, keeping the original elements order.
 
-[**Example:**](https://godbolt.org/z/3G8P9shnh)
-```c++
+**Helper Trait:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
+namespace kumi::result
+{
+  template<typename Function, product_type T, sized_product_type<size<T>::value>... Ts>
+  struct map;
+
+  template<typename Function, product_type T, sized_product_type<size<T>::value>... Ts>
+  using map_t = typename map<Function,T,Ts...>::type;
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Computes the type returned by a call to `kumi::map` on a given set of parameters.
+
+**Example:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
 #include <kumi.hpp>
 #include <iostream>
 
@@ -87,14 +152,12 @@ int main()
   auto r = kumi::map( [](auto l, auto r) { return l+r; }, lhs, rhs);
   std::cout << r << "\n";
 }
-```
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 **Expected output:**
-```bash
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 ( 98 100 102 )
-```
-
-## Query
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ## Restructuration
 
@@ -114,16 +177,12 @@ Contructs a `kumi::tuple` containing all elements of each `ts` in succession.
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
 namespace kumi::result
 {
-  template<product_type... Tuples> struct cat
-  {
-    using type = decltype( kumi::cat( std::declval<Tuples>()... ) );
-  };
-
-  template<product_type... Tuples> using cat_t  = typename cat<Tuples...>::type;
+  template<product_type... Tuples> struct cat;
+  template<product_type... Tuples> using  cat_t  = typename cat<Tuples...>::type;
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Computes the result type of a call to `kumi::cat(Tuples{}...)`.
+Computes the type returned by a call to `kumi::cat` on a given set of parameters.
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
@@ -161,6 +220,17 @@ namespace kumi
 
 Converts a tuple of tuples into a tuple of all elements of said tuples. Non-tuple elements are
 kept as-is.
+
+**Helper Traits:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
+namespace kumi::result
+{
+  template<product_type Tuple> struct flatten;
+  template<product_type Tuple> using  flatten_t  = typename flatten<Tuple>::type;
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Computes the type returned by a call to `kumi::flatten` on a given set of parameters.
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
@@ -207,23 +277,13 @@ elements are kept as-is unless a callable object
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
 namespace kumi::result
 {
-  template<product_type Tuple, typename Func = void> struct flatten_all
-  {
-    using type = decltype( kumi::flatten_all( std::declval<Tuple>(), std::declval<Func>() ) );
-  };
-
-  template<product_type Tuple> struct flatten_all<Tuple>
-  {
-    using type = decltype( kumi::flatten_all( std::declval<Tuple>() ) );
-  };
-
+  template<product_type Tuple, typename Func = void> struct flatten_all;
   template<product_type Tuple, typename Func = void>
   using flatten_all_t  = typename flatten_all<Tuple, Func>::type;
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-1. Computes the result of a call to `kumi::flatten_all(Tuple{},Func{})`
-2. Computes the result of a call to `kumi::flatten_all(Tuple{},Func{})`
+Computes the type returned by a call to `kumi::flatten_all` on a given set of parameters.
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
@@ -246,6 +306,54 @@ int main()
 ( 3.5 1 2 3 z 0 1 2 3 4 5.35 a b c )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+### `reorder`
+
+**Synopsis:**
+```c++
+namespace kumi
+{
+  template<std::size_t... Idx, product_type Tuple>
+  requires((Idx < size<Tuple>::value) && ...) [[nodiscard]] constexpr auto reorder(Tuple &&t);
+}
+```
+
+Return a tuple which values are taken from t and reordered following the `Idx...` indexes.
+
+**Helper Traits:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
+namespace kumi::result
+{
+  template<product_type Tuple, std::size_t... Is> struct reorder;
+  template<product_type Tuple, std::size_t... Is> using  reorder_t = typename reorder<Tuple,Is...>::type;
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Computes the type returned by a call to `kumi::reorder` on a given set of parameters.
+
+**Example:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
+#include <kumi.hpp>
+#include <iostream>
+
+int main()
+{
+  auto values = kumi::tuple { 1, 'a', 0.1 };
+
+  std::cout << values << "\n";
+  std::cout << kumi::reorder<2,1,0>(values) << "\n";
+  std::cout << kumi::reorder<2,1,0,1,2>(values) << "\n";
+  std::cout << kumi::reorder<1,1>(values) << "\n";
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Expected output:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+( 1 a 0.1 )
+( 0.1 a 1 )
+( 0.1 a 1 a 0.1 )
+( a a )
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 ### `transpose`
 
 **Synopsis:**
@@ -262,18 +370,12 @@ Transpose a tuple of tuples by shifting elements in their transposed position
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
 namespace kumi::result
 {
-  template<product_type Tuple>
-  struct transpose
-  {
-    using type = decltype( kumi::transpose( std::declval<Tuple>() ) );
-  };
-
-  template<product_type Tuple>
-  using transpose_t = typename transpose<Tuple>::type;
+  template<product_type Tuple> struct transpose;
+  template<product_type Tuple> using  transpose_t = typename transpose<Tuple>::type;
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Computes the result type of a call to `kumi::transpose(Tuple{})`.
+Computes the type returned by a call to `kumi::transpose` on a given set of parameters.
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
@@ -314,18 +416,12 @@ Constructs a tuple where the ith element contains the tuple of all ith elements 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
 namespace kumi::result
 {
-  template<product_type T0, product_type... Ts>
-  struct zip
-  {
-    using type = decltype( kumi::zip( std::declval<T0>(), std::declval<Ts>()... ) );
-  };
-
-  template<product_type T0, product_type... Ts>
-  using zip_t = typename zip<T0,Ts...>::type;
+  template<product_type T0, product_type... Ts> struct zip;
+  template<product_type T0, product_type... Ts> using  zip_t = typename zip<T0,Ts...>::type;
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Compute the result type of a call to `kumi::zip(T0{},Ts{}...)`.
+Computes the type returned by a call to `kumi::zip` on a given set of parameters.
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
@@ -371,22 +467,13 @@ fold_left( f, (1 2 3), 0) = f( f( f(0, 1), 2), 3)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
 namespace kumi::result
 {
-  template<typename Function, product_type Tuple, typename Value>
-  struct fold_left
-  {
-    using type = decltype ( kumi::fold_left( std::declval<Function>()
-                                            , std::declval<Tuple>()
-                                            , std::declval<Value>()
-                                            )
-                          );
-  };
-
+  template<typename Function, product_type Tuple, typename Value> struct fold_left;
   template<typename Function, product_type Tuple, typename Value>
   using fold_left_t = typename fold_left<Function,Tuple,Value>::type;
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Compute the return type of a call to `fold_left(Function{}, Tuple{}, Value{})`.
+Computes the type returned by a call to `kumi::fold_left` on a given set of parameters.
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
@@ -436,22 +523,14 @@ fold_right( f, (1 2 3), 0) = f(1, f(2 , f(3, 0))
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
 namespace kumi::result
 {
-  template<typename Function, product_type Tuple, typename Value>
-  struct fold_right
-  {
-    using type = decltype ( kumi::fold_right( std::declval<Function>()
-                                            , std::declval<Tuple>()
-                                            , std::declval<Value>()
-                                            )
-                          );
-  };
+  template<typename Function, product_type Tuple, typename Value> struct fold_right;
 
   template<typename Function, product_type Tuple, typename Value>
   using fold_right_t = typename fold_right<Function,Tuple,Value>::type;
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Compute the return type of a call to `fold_right(Function{}, Tuple{}, Value{})`.
+Computes the type returned by a call to `kumi::fold_rigth` on a given set of parameters.
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++

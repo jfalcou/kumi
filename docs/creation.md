@@ -73,7 +73,10 @@ int main()
 
 **Synopsis:**
 ```c++
-template <typename... Ts> [[nodiscard]] constexpr tuple<Ts&...> tie(Ts&... ts);
+namespace kumi
+{
+  template <typename... Ts> [[nodiscard]] constexpr tuple<Ts&...> tie(Ts&... ts);
+}
 ```
 
 Creates a `kumi::tuple` of lvalue references to its arguments.
@@ -109,7 +112,10 @@ int main()
 
 **Synopsis:**
 ```c++
-template <typename... Ts> [[nodiscard]] constexpr tuple<Ts&&...> forward_as_tuple(Ts&&... ts);
+namespace kumi
+{
+  template <typename... Ts> [[nodiscard]] constexpr tuple<Ts&&...> forward_as_tuple(Ts&&... ts);
+}
 ```
 
 Constructs a `kumi::tuple` of references to the arguments in `ts`` suitable for forwarding as an
@@ -150,4 +156,42 @@ the text !
 the text !
 the text !
 the text !
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+## Traits
+
+### `as_tuple`
+
+**Synopsis:**
+```c++
+namespace kumi
+{
+  template<product_type Tuple, template<typename...> class Meta = std::type_identity>
+  struct as_tuple;
+
+  template<product_type Tuple, template<typename...> class Meta = std::type_identity>
+  using as_tuple_t =  typename as_tuple<Tuple, Meta>::type;
+}
+```
+
+Compute the exact `kumi::tuple` type containing the same element as `Tuple`, an arbitrary type
+modeling `kumi::product_type`. A template meta-function can be optionnaly passed to be applied
+to each of those types at type computation.
+
+**Example:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+#include <kumi.hpp>
+#include <type_traits>
+#include <array>
+
+template<typename T, std::size_t N>
+struct  kumi::is_product_type<std::array<T,N>>
+      : std::true_type
+{};
+
+using three_floats = kumi::as_tuple_t<std::array<float,3>>;
+using three_pointers = kumi::as_tuple_t<std::array<float,3>, std::add_pointer>;
+
+static_assert( std::same_as<three_floats, kumi::tuple<float,float,float> >);
+static_assert( std::same_as<three_pointers, kumi::tuple<float*,float*,float*> >);
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
