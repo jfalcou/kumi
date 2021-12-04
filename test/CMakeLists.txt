@@ -1,5 +1,5 @@
 ##==================================================================================================
-##  KUMI - One File Wonders
+##  KUMI - Cmpact C++20 Tuple Toolbox
 ##  Copyright : KUMI Contributors & Maintainers
 ##  SPDX-License-Identifier: MIT
 ##==================================================================================================

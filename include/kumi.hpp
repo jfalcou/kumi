@@ -627,7 +627,7 @@ namespace kumi
   //================================================================================================
   template<typename Type, typename... Ts>
   requires(!product_type<Type> && detail::implicit_constructible<Type, Ts...>)
-      [[nodiscard]] constexpr auto tuple_cast(tuple<Ts...> const &t)
+      [[nodiscard]] constexpr auto from_tuple(tuple<Ts...> const &t)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) { return Type {get<I>(t)...}; }
     (std::make_index_sequence<sizeof...(Ts)>());
