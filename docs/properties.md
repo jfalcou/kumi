@@ -27,6 +27,49 @@ int main()
 true
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+## Operators
+
+### Comparison operators
+
+**Synopsis:**
+```c++
+namespace kumi
+{
+  template<sized_product_type<sizeof...(Ts)> Other>
+  constexpr auto operator==(tuple const &lhs, Other const &rhs) noexcept;
+
+  template<sized_product_type<sizeof...(Ts)> Other>
+  constexpr auto operator!=(tuple const &lhs, Other const &rhs) noexcept;
+
+  template<sized_product_type<sizeof...(Ts)> Other>
+  constexpr auto operator<(tuple const &lhs, Other const &rhs) noexcept;
+
+  template<sized_product_type<sizeof...(Ts)> Other>
+  constexpr auto operator<=(tuple const &lhs, Other const &rhs) noexcept;
+
+  template<sized_product_type<sizeof...(Ts)> Other>
+  constexpr auto operator>(tuple const &lhs, Other const &rhs) noexcept;
+
+  template<sized_product_type<sizeof...(Ts)> Other>
+  constexpr auto operator>=(tuple const &lhs, Other const &rhs) noexcept;
+}
+```
+
+1-2. Compares every element of the tuple `lhs` with the corresponding element of the tuple `rhs`.
+3-6. Compares the contents of `lhs` and `rhs` lexicographically.
+
+### Streaming operators
+
+**Synopsis:**
+```c++
+namespace kumi
+{
+  template<typename Stream> Stream& operator<<(Stream& os, tuple const &t);
+}
+```
+
+Insert the content of a given `kumi::tuple` in a standard output stream.
+
 ## Helper Functions
 
 ### `tuple::size`
