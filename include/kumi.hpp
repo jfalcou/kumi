@@ -256,7 +256,7 @@ namespace kumi
     if constexpr(sized_product_type<Tuple,0>) return  KUMI_FWD(f)();
     else
     {
-      return [&]<std::size_t... I>(std::index_sequence<I...>)
+      return [&]<std::size_t... I>(std::index_sequence<I...>) -> decltype(auto)
       {
         return KUMI_FWD(f)(get<I>(KUMI_FWD(t))...);
       }
