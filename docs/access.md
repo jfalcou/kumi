@@ -118,7 +118,51 @@ int main()
 @
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-## Tuple Slicing
+## Field Manipulations
+
+### `tuple::as_flat_ptr`
+
+**Synopsis:**
+```c++
+namespace kumi
+{
+  template<product_type Tuple>
+  [[nodiscard]] auto as_flat_ptr(Tuple&& t) noexcept;
+}
+```
+
+Convert a `kumi::product_type` to a flat tuple containing a pointer to each of the tuple passed as
+an argument.
+
+`tuple::as_flat_ptr` is useful when one needs to access all element of a tuple without having to
+take care of its internal structure and potential nesting.
+
+**Example:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+#include <kumi/tuple.hpp>
+#include <iostream>
+
+int main()
+{
+  kumi::tuple a = { 1, kumi::tuple{ 2.3, 4.5f }, short{89} };
+
+  auto ptr = kumi::as_flat_ptr(a);
+
+  std::cout << a << "\n";
+  std::cout << ptr << "\n";
+
+  kumi::for_each([](auto ptr) { *ptr += 5; }, ptr );
+
+  std::cout << a << "\n";
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Expected output:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+( 1 ( 2.3 4.5 ) 89 )
+( 0x7fffc7c341a0 0x7fffc7c341a8 0x7fffc7c341b0 0x7fffc7c341b8 )
+( 6 ( 7.3 9.5 ) 94 )
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ### `tuple::extract`
 
