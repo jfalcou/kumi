@@ -887,6 +887,15 @@ namespace kumi
   }
 
   //================================================================================================
+  // Return a tuple of pointer to flattened fields of a tuple
+  //================================================================================================
+  template<product_type Tuple>
+  constexpr auto as_flat(Tuple&& t) noexcept
+  {
+    return kumi::flatten_all(KUMI_FWD(t), [](auto& m) { return &m; });
+  }
+
+  //================================================================================================
   // Zip multiple tuples contents
   //================================================================================================
   template<product_type T0, product_type... Ts>
