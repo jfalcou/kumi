@@ -15,7 +15,7 @@ Converts a `kumi::tuple<Ts...>` to a `kumi::tuple<Us...>`.
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()
@@ -51,7 +51,7 @@ Converts a `kumi::tuple<Ts...>` to an instance of a non-product type `Type` cons
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 #include <string>
 
@@ -97,7 +97,7 @@ Converts a `kumi::product_type` instance to an instance of the equivalent `kumi:
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 #include <array>
 

@@ -5,7 +5,7 @@
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()
@@ -51,7 +51,7 @@ in overload resolution if its parameter is a valid index within [0, `t.size()`[.
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()
@@ -95,7 +95,7 @@ literal constant indexing or the `kumi::index<N>` template variable.
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()
@@ -148,7 +148,7 @@ indexes can be passed via the index user-defined literal or the `kumi::index<N>`
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()
@@ -174,7 +174,7 @@ If `i1` is omitted, all elements between `i0` and the end of the tuple are extra
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()
@@ -228,7 +228,7 @@ type of type T.
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()
