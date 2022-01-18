@@ -6,7 +6,7 @@
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()
@@ -86,7 +86,7 @@ Returns the number of elements in a `kumi::tuple`.
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()
@@ -119,7 +119,7 @@ Returns `true` if the number of elements in a `kumi::tuple`is equal to 0 and `fa
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()

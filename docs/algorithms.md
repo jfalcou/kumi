@@ -28,7 +28,7 @@ Computes the type returned by a call to `kumi::map` on a given set of parameters
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()
@@ -61,7 +61,7 @@ Invoke the `Function` object `f` on each elements of a given tuple.
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()
@@ -96,7 +96,7 @@ of said elements.
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()
@@ -142,7 +142,7 @@ Computes the type returned by a call to `kumi::map` on a given set of parameters
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()
@@ -186,7 +186,7 @@ Computes the type returned by a call to `kumi::cat` on a given set of parameters
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()
@@ -234,7 +234,7 @@ Computes the type returned by a call to `kumi::flatten` on a given set of parame
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()
@@ -287,7 +287,7 @@ Computes the type returned by a call to `kumi::flatten_all` on a given set of pa
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()
@@ -332,7 +332,7 @@ Computes the type returned by a call to `kumi::reorder` on a given set of parame
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()
@@ -379,7 +379,7 @@ Computes the type returned by a call to `kumi::transpose` on a given set of para
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()
@@ -425,7 +425,7 @@ Computes the type returned by a call to `kumi::zip` on a given set of parameters
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()
@@ -477,7 +477,7 @@ Computes the type returned by a call to `kumi::fold_left` on a given set of para
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 #include <vector>
 
@@ -534,7 +534,7 @@ Computes the type returned by a call to `kumi::fold_rigth` on a given set of par
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 #include <vector>
 

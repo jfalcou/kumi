@@ -4,7 +4,7 @@
 The main way to construct a `kumi::tuple` is to construct it as an aggregate.
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()
@@ -22,7 +22,7 @@ int main()
 Of course, you can also let the compiler deduce the proper type of the `kumi::tuple`:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()
@@ -54,7 +54,7 @@ Creates a `kumi::tuple` object, deducing the target type from the types of argum
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()
@@ -83,7 +83,7 @@ Creates a `kumi::tuple` of lvalue references to its arguments.
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 auto generate()
@@ -127,7 +127,7 @@ they have to be used before the end of the full expression.
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 #include <vector>
 #include <string>
@@ -180,7 +180,7 @@ to each of those types at type computation.
 
 **Example:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <type_traits>
 #include <array>
 

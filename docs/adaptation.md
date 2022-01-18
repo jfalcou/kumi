@@ -26,7 +26,7 @@ Let's adapt `std::array`. As `std::array`is already compatible with structured b
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 #include <iostream>
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <array>
 
 template<typename T, std::size_t N>
@@ -62,7 +62,7 @@ For user-defined type, you must first adapt it to support structured bindings, t
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 #include <iostream>
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 
 namespace ns
 {

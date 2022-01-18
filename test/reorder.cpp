@@ -6,7 +6,7 @@
 **/
 //==================================================================================================
 #define TTS_MAIN
-#include <kumi.hpp>
+#include <kumi/tuple.hpp>
 #include <tts/tts.hpp>
 
 TTS_CASE("Check result::reorder<Tuple,I...> behavior")
