@@ -964,6 +964,53 @@ namespace kumi
   }
 
   //================================================================================================
+  // Max of properties on tuple types
+  //================================================================================================
+  template<typename T, typename F>
+  constexpr auto max(T const& data, F func) noexcept
+  {
+    if constexpr ( !kumi::product_type<T> ) return func(data);
+    else if constexpr( T::size() == 1 )     return func( get<0>(data) );
+    else
+    {
+      auto base = func( get<0>(data) );
+      return kumi::fold_left( [func]<typename U>(auto cur, U const& u)
+                              {
+                                return cur > func(u) ? cur : func(u);
+                              }
+                            , data, base
+                            );
+    }
+  }
+
+  template<typename T, typename F>
+  constexpr auto max_flat(T const& data, F func) noexcept
+  {
+    if constexpr ( !kumi::product_type<T> ) return func(data);
+    else
+    {
+      auto flat_data = kumi::flatten_all(data);
+      return max(flat_data, func);
+    }
+  }
+
+  namespace result
+  {
+    template<typename T, typename F> struct max
+    {
+      using type = decltype( kumi::max( std::declval<T>(), std::declval<F>() ) );
+    };
+
+    template<typename T, typename F> struct max_flat
+    {
+      using type = decltype( kumi::max_flat( std::declval<T>(), std::declval<F>() ) );
+    };
+
+    template<typename T, typename F> using max_t      = typename max<T,F>::type;
+    template<typename T, typename F> using max_flat_t = typename max_flat<T,F>::type;
+  }
+
+  //================================================================================================
   // Traits for manipulating tuple
   //================================================================================================
   namespace detail
