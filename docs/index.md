@@ -1,13 +1,16 @@
 # KUMI - C++20 Compact Tuple Tools
 
-**KUMI** is a single-header providing a C++20 toolset around tuples including:
+**KUMI** is a fancy C++20 implementation of a tuple-like class. It tries to be as close to
+`std::tuple` as possible but also wants to compile faster, uses a better C++20 oriented interface,
+and new features like:
+
   -  a fast to compile tuple implementation
   -  quality of life improvement over the standard tuple implementation
   -  algorithm on tuples
 
 # A Short Example
 
-[See it live on Compiler Explorer](https://godbolt.org/z/cWshW8GPx)
+[See it live on Compiler Explorer](https://godbolt.org/z/cWKd47sT9)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 #include <iostream>
@@ -54,7 +57,7 @@ int main()
 This library is licensed under the [MIT License](http://opensource.org/licenses/MIT):
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ none
-Copyright : TTS Contributors & Maintainers
+Copyright : KUMI Contributors & Maintainers
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software
 and associated documentation files (the “Software”), to deal in the Software without restriction,
