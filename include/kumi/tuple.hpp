@@ -890,7 +890,7 @@ namespace kumi
   // Return a tuple of pointer to flattened fields of a tuple
   //================================================================================================
   template<product_type Tuple>
-  constexpr auto as_flat(Tuple&& t) noexcept
+  [[nodiscard]] auto as_flat_ptr(Tuple&& t) noexcept
   {
     return kumi::flatten_all(KUMI_FWD(t), [](auto& m) { return &m; });
   }

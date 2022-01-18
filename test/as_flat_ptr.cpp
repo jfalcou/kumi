@@ -9,10 +9,10 @@
 #include <kumi/tuple.hpp>
 #include <tts/tts.hpp>
 
-TTS_CASE("Check tuple::as_flat function behavior")
+TTS_CASE("Check tuple::as_flat_ptr function behavior")
 {
   auto t = kumi::tuple{3.25f, kumi::tuple {2., kumi::tuple {2., 1, short {55}}, short {55}}, 'a'};
-  auto f = kumi::as_flat(t);
+  auto f = kumi::as_flat_ptr(t);
 
   TTS_EQUAL(get<0>(f), &                get<0>(t)   );
   TTS_EQUAL(get<1>(f), &        get<0>( get<1>(t) ) );
