@@ -558,3 +558,106 @@ int main()
 2
 1
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
+### `max`, `max_flat`
+
+**Synopsis:**
+```c++
+namespace kumi
+{
+  template<typename T, typename F>
+  [[nodiscard]] constexpr auto max(T const& data, F func) noexcept;
+
+  template<typename T, typename F>
+  [[nodiscard]] constexpr auto max_flat(T const& data, F func) noexcept;
+}
+```
+
+`kumi::max` computes the maximum value of applications of `func` to all elements of the tuple `data`.
+`kumi::max_flat` computes the maximum value of applications of `func` to all elements of the flattened
+version of the tuple `data`
+
+**Helper Traits:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
+namespace kumi::result
+{
+  template<typename T, typename F> struct max;
+  template<typename T, typename F> struct max_flat;
+  template<typename T, typename F> using max_t = typename max<T,F>::type;
+  template<typename T, typename F> using max_flat_t = typename max_flat<T,F>::type;
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Computes the type returned by a call to `kumi::max` or `kumi::max_flat`on a given set of parameters.
+
+**Example:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
+#include <kumi/tuple.hpp>
+#include <iostream>
+
+int main()
+{
+  auto f0 = kumi::tuple {'e', 2., kumi::tuple {1., 'u', 3. }, 3.f, 'z'};
+
+  std::cout << kumi::max(f0       , [](auto m) { return sizeof(m); }) << "\n";
+  std::cout << kumi::max_flat (f0 , [](auto m) { return sizeof(m); }) << "\n";
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Expected output:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+24
+8
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### `min`, `min_flat`
+
+**Synopsis:**
+```c++
+namespace kumi
+{
+  template<typename T, typename F>
+  [[nodiscard]] constexpr auto min(T const& data, F func) noexcept;
+
+  template<typename T, typename F>
+  [[nodiscard]] constexpr auto min_flat(T const& data, F func) noexcept;
+}
+```
+
+`kumi::min` computes the minimum value of applications of `func` to all elements of the tuple `data`.
+`kumi::min_flat` computes the minimum value of applications of `func` to all elements of the flattened
+version of the tuple `data`
+
+**Helper Traits:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
+namespace kumi::result
+{
+  template<typename T, typename F> struct min;
+  template<typename T, typename F> struct min_flat;
+  template<typename T, typename F> using min_t = typename min<T,F>::type;
+  template<typename T, typename F> using min_flat_t = typename min_flat<T,F>::type;
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Computes the type returned by a call to `kumi::min` or `kumi::min_flat`on a given set of parameters.
+
+**Example:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
+#include <kumi/tuple.hpp>
+#include <iostream>
+
+int main()
+{
+  auto f0 = kumi::tuple {2., kumi::tuple {1., 'u', 3. }, 3.f };
+
+  std::cout << kumi::min(f0       , [](auto m) { return sizeof(m); }) << "\n";
+  std::cout << kumi::min_flat (f0 , [](auto m) { return sizeof(m); }) << "\n";
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Expected output:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+4
+1
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~

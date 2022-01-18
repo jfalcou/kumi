@@ -976,7 +976,7 @@ namespace kumi
   // Max of properties on tuple types
   //================================================================================================
   template<typename T, typename F>
-  constexpr auto max(T const& data, F func) noexcept
+  [[nodiscard]] constexpr auto max(T const& data, F func) noexcept
   {
     if constexpr ( !kumi::product_type<T> ) return func(data);
     else if constexpr( T::size() == 1 )     return func( get<0>(data) );
@@ -993,7 +993,7 @@ namespace kumi
   }
 
   template<typename T, typename F>
-  constexpr auto max_flat(T const& data, F func) noexcept
+  [[nodiscard]] constexpr auto max_flat(T const& data, F func) noexcept
   {
     if constexpr ( !kumi::product_type<T> ) return func(data);
     else
@@ -1023,7 +1023,7 @@ namespace kumi
   // Min of properties on tuple types
   //================================================================================================
   template<typename T, typename F>
-  constexpr auto min(T const& data, F func) noexcept
+  [[nodiscard]] constexpr auto min(T const& data, F func) noexcept
   {
     if constexpr ( !kumi::product_type<T> ) return func(data);
     else if constexpr( T::size() == 1 )     return func( get<0>(data) );
@@ -1040,7 +1040,7 @@ namespace kumi
   }
 
   template<typename T, typename F>
-  constexpr auto min_flat(T const& data, F func) noexcept
+  [[nodiscard]] constexpr auto min_flat(T const& data, F func) noexcept
   {
     if constexpr ( !kumi::product_type<T> ) return func(data);
     else
