@@ -39,7 +39,7 @@ TTS_CASE("Check tuple::min/min_flat behavior")
   TTS_EQUAL((kumi::min_flat (f0 , [](auto m) { return sizeof(m); })),   sizeof(char));
 
   auto t1 = kumi::tuple {1.5,3.6f,8,-3.6,2.4,-0.5};
-  TTS_EQUAL((kumi::min(t1, [](auto m) { return std::abs(m); })), 0.5);
+  TTS_EQUAL((kumi::min(t1, [](auto m) { return m<0 ? -m : m; })), 0.5);
 };
 
 TTS_CASE("Check tuple::min/min_flat constexpr behavior")
@@ -52,5 +52,5 @@ TTS_CASE("Check tuple::min/min_flat constexpr behavior")
   TTS_CONSTEXPR_EQUAL((kumi::min_flat (f0 , [](auto m) { return sizeof(m); })),   sizeof(char));
 
   constexpr auto t1 = kumi::tuple {1.5,3.6f,8,-3.6,2.4,-0.5};
-  TTS_CONSTEXPR_EQUAL((kumi::min(t1, [](auto m) { return std::abs(m); })), 0.5);
+  TTS_CONSTEXPR_EQUAL((kumi::min(t1, [](auto m) { return m<0 ? -m : m; })), 0.5);
 };

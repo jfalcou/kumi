@@ -39,7 +39,7 @@ TTS_CASE("Check tuple::max/max_flat behavior")
   TTS_EQUAL((kumi::max_flat (f0 , [](auto m) { return sizeof(m); })),   sizeof(double));
 
   auto t1 = kumi::tuple {1.5,3.6f,8,-3.6,2.4,0};
-  TTS_EQUAL((kumi::max(t1, [](auto m) { return std::abs(m-5); })), 8.6);
+  TTS_EQUAL((kumi::max(t1, [](auto m) { return (m-5)<0 ? (5-m) : (m-5); })), 8.6);
 };
 
 TTS_CASE("Check tuple::max/max_flat constexpr behavior")
@@ -52,5 +52,5 @@ TTS_CASE("Check tuple::max/max_flat constexpr behavior")
   TTS_CONSTEXPR_EQUAL((kumi::max_flat (f0 , [](auto m) { return sizeof(m); })),   sizeof(double));
 
   constexpr auto t1 = kumi::tuple {1.5,3.6f,8,-3.6,2.4,0};
-  TTS_CONSTEXPR_EQUAL((kumi::max(t1, [](auto m) { return std::abs(m-5); })), 8.6);
+  TTS_CONSTEXPR_EQUAL((kumi::max(t1, [](auto m) { return (m-5)<0 ? (5-m) : (m-5); })), 8.6);
 };
