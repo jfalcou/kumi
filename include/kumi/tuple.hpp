@@ -247,9 +247,15 @@ namespace kumi
         is_applicable<F, std::make_index_sequence<(size<Tuples>::value, ...)>, Tuples...>::value;
 
     // Helper for checking if two tuples can == each others
+    template<typename T, typename U>
+    concept comparable = requires(T t, U u)
+    {
+      { t == u };
+    };
+
     template<typename T, typename U> constexpr auto check_equality()
     {
-      return std::equality_comparable_with<T,U>;
+      return comparable<T,U>;
     }
 
     template<product_type T, product_type U>
