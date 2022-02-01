@@ -246,19 +246,20 @@ namespace kumi
     concept applicable = detail::
         is_applicable<F, std::make_index_sequence<(size<Tuples>::value, ...)>, Tuples...>::value;
 
-    template<typename T, typename U, typename Idx>
-    struct is_all_equality_comparable;
-
-    template<typename T, typename U, std::size_t... I>
-    struct is_all_equality_comparable<T,U,std::index_sequence<I...>>
+    // Helper for checking if two tuples can == each others
+    template<typename T, typename U> constexpr auto check_equality()
     {
-      static constexpr bool value
-      = (std::equality_comparable_with<member_t<I,T>,member_t<I,U>> && ... && true);
-    };
+      return std::equality_comparable_with<T,U>;
+    }
 
-    template<typename T, typename U>
-    concept all_equality_comparable = detail::
-        is_all_equality_comparable<T,U,std::make_index_sequence<size<T>::value>>::value;
+    template<product_type T, product_type U>
+    constexpr auto check_equality()
+    {
+      return []<std::size_t...I>(std::index_sequence<I...>)
+      {
+        return (check_equality<member_t<I,T>,member_t<I,U>>() && ...);
+      }(std::make_index_sequence<size<T>::value>{});
+    }
   }
 
   //================================================================================================
@@ -507,24 +508,32 @@ namespace kumi
     //==============================================================================================
     // Comparison operators
     //==============================================================================================
+    template<sized_product_type<0> Other>
+    friend constexpr auto operator==(tuple const&, Other const &) noexcept
+    {
+      return true;
+    }
+
     template<sized_product_type<sizeof...(Ts)> Other>
     friend constexpr auto operator==(tuple const &self, Other const &other) noexcept
-    requires detail::all_equality_comparable<tuple,Other>
+    requires( (sizeof...(Ts) != 0 ) && detail::check_equality<tuple,Other>() )
     {
-      if constexpr(sized_product_type<tuple,0>) return true;
-      else
+      return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return [&]<std::size_t... I>(std::index_sequence<I...>)
-        {
-          return ((get<I>(self) == get<I>(other)) && ...);
-        }
-        (std::make_index_sequence<sizeof...(Ts)>());
+        return ((get<I>(self) == get<I>(other)) && ...);
       }
+      (std::make_index_sequence<sizeof...(Ts)>());
+    }
+
+    template<sized_product_type<0> Other>
+    friend constexpr auto operator!=(tuple const&, Other const &) noexcept
+    {
+      return false;
     }
 
     template<sized_product_type<sizeof...(Ts)> Other>
     friend constexpr auto operator!=(tuple const &self, Other const &other) noexcept
-    requires detail::all_equality_comparable<tuple,Other>
+    requires( (sizeof...(Ts) != 0 ) && detail::check_equality<tuple,Other>() )
     {
       return !(self == other);
     }
