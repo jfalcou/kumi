@@ -1,4 +1,4 @@
-# Version 1.0 - Amazing Amethyst
+# Version 2.0 - Bedazzling Beryl
 
 ## What's Changed
 
