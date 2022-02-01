@@ -713,6 +713,43 @@ namespace kumi
   }
 
   //================================================================================================
+  // Construct the tuple made of the application of f to elements of each tuples and their indexes
+  //================================================================================================
+  template<product_type Tuple, typename Function, sized_product_type<size<Tuple>::value>... Tuples>
+  constexpr auto map_index(Function     f,Tuple  &&t0,Tuples &&...others)
+  {
+    if constexpr(sized_product_type<Tuple,0>) return std::remove_cvref_t<Tuple>{};
+    else
+    {
+      auto const call = [&]<std::size_t N, typename... Ts>(index_t<N> idx, Ts &&... args)
+      {
+        return f(idx, get<N>(args)...);
+      };
+
+      return [&]<std::size_t... I>(std::index_sequence<I...>)
+      {
+        return kumi::make_tuple(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
+      }(std::make_index_sequence<size<Tuple>::value>());
+    }
+  }
+
+  namespace result
+  {
+    template<typename Function, product_type T, sized_product_type<size<T>::value>... Ts>
+    struct map_index
+    {
+      using type = decltype ( kumi::map_index ( std::declval<Function>()
+                                                , std::declval<T>()
+                                                , std::declval<Ts>()...
+                                                )
+                            );
+    };
+
+    template<typename Function, product_type T, sized_product_type<size<T>::value>... Ts>
+    using map_index_t = typename map_index<Function,T,Ts...>::type;
+  }
+
+  //================================================================================================
   // Generalized sums
   //================================================================================================
   template<typename Function, product_type Tuple, typename Value>
@@ -844,7 +881,6 @@ namespace kumi
     if constexpr(Tuple::size()>1) return t.extract(index<0>, index<Tuple::size()-1>);
     else                          return tuple<>{};
   }
-
 
   namespace result
   {

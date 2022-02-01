@@ -159,6 +159,59 @@ int main()
 ( 98 100 102 )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+
+
+
+
+
+### `map_index`
+
+**Synopsis:**
+```c++
+namespace kumi
+{
+  template<product_type Tuple, typename Function, sized_product_type<size<Tuple>::value>... Tuples>
+  constexpr auto map_index(Function     f,Tuple  &&t0,Tuples &&...others)
+}
+```
+
+Applies the given function to all the tuples passed as arguments with the associated index and
+stores the result in another tuple, keeping the original elements order.
+
+**Helper Trait:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
+namespace kumi::result
+{
+  template<typename Function, product_type T, sized_product_type<size<T>::value>... Ts>
+  struct map_index;
+
+  template<typename Function, product_type T, sized_product_type<size<T>::value>... Ts>
+  using map_index_t = typename map_index<Function,T,Ts...>::type;
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Computes the type returned by a call to `kumi::map_index` on a given set of parameters.
+
+**Example:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
+#include <kumi/tuple.hpp>
+#include <iostream>
+
+int main()
+{
+  auto lhs = kumi::tuple{1,2,3};
+  auto rhs = kumi::tuple{'a','b','c'};
+  auto r = kumi::map_index( [](auto i, auto l, auto r) { return 1000*(i+1)+(l*r); }, lhs, rhs);
+  std::cout << r << "\n";
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Expected output:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+( 1097 2196 3297 )
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 ## Restructuration
 
 ### `cat`
