@@ -1,5 +1,5 @@
 ##==================================================================================================
-##  KUMI - Cmpact C++20 Tuple Toolbox
+##  KUMI - Compact C++20 Tuple Toolbox
 ##  Copyright : KUMI Contributors & Maintainers
 ##  SPDX-License-Identifier: MIT
 ##==================================================================================================
