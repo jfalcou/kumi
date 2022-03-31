@@ -11,7 +11,7 @@
 
 TTS_CASE("Check tuple_element of kumi::tuple")
 {
-  kumi::tuple aggregate = {'1', 2., 3.f};
+  auto aggregate = kumi::tuple{'1', 2., 3.f};
   TTS_TYPE_IS((std::tuple_element_t<0, decltype(aggregate)>), char);
   TTS_TYPE_IS((std::tuple_element_t<1, decltype(aggregate)>), double);
   TTS_TYPE_IS((std::tuple_element_t<2, decltype(aggregate)>), float);
@@ -19,11 +19,11 @@ TTS_CASE("Check tuple_element of kumi::tuple")
 
 TTS_CASE("Check construction of kumi::tuple as an aggregate")
 {
-  kumi::tuple t0 = {};
-  kumi::tuple t1 = {1};
-  kumi::tuple t2 = {1.f, 2};
-  kumi::tuple t3 = {1., 2.f, 3};
-  kumi::tuple t4 = {'1', 2., 3.f, 4};
+  auto t0 = kumi::tuple{};
+  auto t1 = kumi::tuple{1};
+  auto t2 = kumi::tuple{1.f, 2};
+  auto t3 = kumi::tuple{1., 2.f, 3};
+  auto t4 = kumi::tuple{'1', 2., 3.f, 4};
 
   TTS_CONSTEXPR_EXPECT((kumi::sized_product_type<decltype(t0), 0>));
   TTS_EQUAL(t0.size(), 0ULL);
@@ -53,11 +53,11 @@ TTS_CASE("Check construction of kumi::tuple as an aggregate")
 
 TTS_CASE("Check construction of kumi::tuple as a constexpr aggregate")
 {
-  constexpr kumi::tuple t0 = {};
-  constexpr kumi::tuple t1 = {1};
-  constexpr kumi::tuple t2 = {1.f, 2};
-  constexpr kumi::tuple t3 = {1., 2.f, 3};
-  constexpr kumi::tuple t4 = {'1', 2., 3.f, 4};
+  constexpr auto t0 = kumi::tuple{};
+  constexpr auto t1 = kumi::tuple{1};
+  constexpr auto t2 = kumi::tuple{1.f, 2};
+  constexpr auto t3 = kumi::tuple{1., 2.f, 3};
+  constexpr auto t4 = kumi::tuple{'1', 2., 3.f, 4};
 
   TTS_CONSTEXPR_EXPECT((kumi::sized_product_type<decltype(t0), 0>));
   TTS_CONSTEXPR_EQUAL(t0.size(), 0ULL);

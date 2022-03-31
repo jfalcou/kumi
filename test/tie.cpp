@@ -18,8 +18,8 @@ TTS_CASE("Check tuple_element of kumi::tuple")
   float        f {};
   float const  cf {};
 
-  kumi::tuple tied       = kumi::tie(c, d, f);
-  kumi::tuple const_tied = kumi::tie(cc, cd, cf);
+  auto tied       = kumi::tie(c, d, f);
+  auto const_tied = kumi::tie(cc, cd, cf);
 
   TTS_TYPE_IS((std::tuple_element_t<0, decltype(tied)>), char &);
   TTS_TYPE_IS((std::tuple_element_t<1, decltype(tied)>), double &);
@@ -37,10 +37,10 @@ TTS_CASE("Check construction of kumi::tuple via tie")
   auto d = 3.;
   auto c = '4';
 
-  kumi::tuple t1 = kumi::tie(i);
-  kumi::tuple t2 = kumi::tie(i, f);
-  kumi::tuple t3 = kumi::tie(i, f, d);
-  kumi::tuple t4 = kumi::tie(i, f, d, c);
+  auto t1 = kumi::tie(i);
+  auto t2 = kumi::tie(i, f);
+  auto t3 = kumi::tie(i, f, d);
+  auto t4 = kumi::tie(i, f, d, c);
 
   auto &[s1_0] = t1;
   auto& t1_0 = s1_0;

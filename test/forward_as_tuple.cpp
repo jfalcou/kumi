@@ -40,7 +40,7 @@ TTS_CASE("Check tuple_element of kumi::forward_as_tuple")
 {
   int         i;
   float const f {};
-  kumi::tuple forwarded = kumi::forward_as_tuple('z', ctor_tracker(), i, f);
+  auto forwarded = kumi::forward_as_tuple('z', ctor_tracker(), i, f);
 
   TTS_TYPE_IS((std::tuple_element_t<0, decltype(forwarded)>), char &&);
   TTS_TYPE_IS((std::tuple_element_t<1, decltype(forwarded)>), ctor_tracker &&);
