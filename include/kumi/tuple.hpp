@@ -1,11 +1,13 @@
 //==================================================================================================
 /*
   KUMI - Compact Tuple Tools
-  Copyright : OFW Contributors & Maintainers
+  Copyright : KUMI Contributors & Maintainers
   SPDX-License-Identifier: MIT
 */
 //==================================================================================================
-#pragma once
+#ifndef KUMI_TUPLE_HPP_INCLUDED
+#define KUMI_TUPLE_HPP_INCLUDED
+
 #include <concepts>
 #include <iosfwd>
 #include <type_traits>
@@ -1239,3 +1241,4 @@ namespace kumi
 }
 
 #undef KUMI_FWD
+#endif
