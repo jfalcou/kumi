@@ -31,5 +31,8 @@
 *.out
 *.app
 
+# Dev Env
 build/*
 .vscode
+compile_commands.json
+.cache
