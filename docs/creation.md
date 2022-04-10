@@ -158,6 +158,54 @@ the text !
 the text !
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+### `kumi::to_ref`
+
+**Synopsis:**
+```c++
+namespace kumi
+{
+  template<product_type Type>
+  [[nodiscard]] constexpr auto to_ref(Type&& that);
+}
+```
+
+Creates a `kumi::tuple` of references given a reference to a `kuùi::product_type`.
+
+Given an expression `e` so that `decltype((e))` models `kumi::product_type`, `kumi::to_ref(e)` is
+an expression equivalent to
+
+```c++
+kumi::apply([](auto&&... elems){ return kumi::forward_as_tuple(KUMI_FWD(elems)...); }, e)
+```
+
+**Example:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+#include <kumi/tuple.hpp>
+#include <iostream>
+
+int main()
+{
+  auto original = kumi::make_tuple(0,'0',0.f);
+  auto ref = kumi::to_ref( original );
+
+  std::cout << original << "\n";
+
+  kumi::get<0>(ref) = 9;
+  kumi::get<1>(ref) = 'z';
+  kumi::get<2>(ref) = 3.14159f;
+
+  std::cout << original << "\n";
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Expected output:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+( 0 0 0 )
+( 9 z 3.14159 )
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+
 ## Traits
 
 ### `as_tuple`
