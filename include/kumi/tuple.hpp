@@ -174,6 +174,9 @@ namespace kumi
   template<typename T, std::size_t N>
   concept sized_product_type = product_type<T> && (size<T>::value == N);
 
+  template<typename T, std::size_t N>
+  concept sized_product_type_or_more = product_type<T> && (size<T>::value >= N);
+
   //================================================================================================
   // Forward declaration
   //================================================================================================
