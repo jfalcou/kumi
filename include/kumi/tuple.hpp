@@ -667,6 +667,14 @@ namespace kumi
     return apply([](auto &&...elems) { return tuple{elems...}; }, KUMI_FWD(that));
   }
 
+  template<product_type Type>
+  [[nodiscard]] constexpr auto to_ref(Type&& that)
+  {
+    return apply([](auto&&... elems) {
+      return kumi::forward_as_tuple(KUMI_FWD(elems)...);
+    }, KUMI_FWD(that));
+  }
+
   //================================================================================================
   // Access
   //================================================================================================
