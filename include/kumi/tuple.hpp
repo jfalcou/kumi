@@ -667,6 +667,45 @@ namespace kumi
     return apply([](auto &&...elems) { return tuple{elems...}; }, KUMI_FWD(that));
   }
 
+  namespace detail
+  {
+    template<class T, class U>
+    struct copy_qualifiers 
+      : std::type_identity<U> {};
+
+    template<class T, class U>
+    using copy_qualifiers_t = typename copy_qualifiers<T, U>::type;
+  
+    template<class T, class U>
+    struct copy_qualifiers<T&, U>
+      : std::add_lvalue_reference<copy_qualifiers_t<T, U>> {};
+    
+    template<class T, class U>
+    struct copy_qualifiers<T&&, U>
+      : std::add_rvalue_reference<copy_qualifiers_t<T, U>> {};
+  
+    template<class T, class U>
+    struct copy_qualifiers<T const, U>
+      : std::add_const<copy_qualifiers_t<T, U>> {};
+    
+    template<class T, class U>
+    struct copy_qualifiers<T volatile, U>
+      : std::add_volatile<copy_qualifiers_t<T, U>> {};
+
+    template<class T, class U>
+    struct copy_qualifiers<T const volatile, U>
+      : std::add_const<std::add_volatile_t<copy_qualifiers_t<T, U>>> {};
+  }
+
+  template<product_type Type>
+  [[nodiscard]] constexpr auto to_ref(Type&& t)
+  {
+    return [&]<std::size_t... Is>(std::index_sequence<Is...>) 
+      -> tuple<detail::copy_qualifiers_t<Type&&, element_t<Is, Type>>...>
+    { return {get<Is>(KUMI_FWD(t))...}; }
+    (std::make_index_sequence<size<Type>{}>{});
+  }
+
   //================================================================================================
   // Access
   //================================================================================================
