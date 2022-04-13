@@ -855,7 +855,7 @@ namespace kumi
     {
       // count is at least 1 so MSVC don't cry when we use a 0-sized array
       constexpr auto count = (1ULL + ... + kumi::size<Tuples>::value);
-      constexpr auto location = [&]()
+      constexpr auto pos = [&]()
       {
         struct { std::size_t t[count],e[count]; } that{};
         std::size_t k = 0, offset = 0;
@@ -874,7 +874,13 @@ namespace kumi
 
       return [&]<std::size_t... N>(auto&& tuples, std::index_sequence<N...>)
       {
-        return kumi::tuple{get<location.e[N]>(get<location.t[N]>(tuples))...};
+        using ts  = std::remove_cvref_t<decltype(tuples)>;
+        using type =  kumi::tuple
+                      < std::tuple_element_t< pos.e[N]
+                                            , std::remove_cvref_t<std::tuple_element_t<pos.t[N],ts>>
+                                            >...
+                      >;
+        return type{get<pos.e[N]>(get<pos.t[N]>(tuples))...};
       }(kumi::forward_as_tuple(KUMI_FWD(us)...), std::make_index_sequence<count-1>{});
     }
   }
