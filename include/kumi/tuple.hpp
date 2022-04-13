@@ -975,15 +975,18 @@ namespace kumi
     if constexpr(sized_product_type<Tuple,0>) return ts;
     else
     {
-      return kumi::fold_right(
-          []<typename M>(auto acc, M const &m) {
-            if constexpr( product_type<M> )
-              return cat(acc, m);
-            else
-              return cat(acc, kumi::tuple {m});
-          },
-          ts,
-          kumi::tuple {});
+      return kumi::apply( [](auto&&... m)
+                          {
+                            auto v_or_t = []<typename V>(V&& v)
+                            {
+                              if constexpr(product_type<V>) return KUMI_FWD(v);
+                              else                          return kumi::tuple{KUMI_FWD(v)};
+                            };
+
+                            return cat( v_or_t(KUMI_FWD(m))... );
+                          }
+                        , ts
+                        );
     }
   }
 
@@ -992,15 +995,18 @@ namespace kumi
     if constexpr(sized_product_type<Tuple,0>) return ts;
     else
     {
-      return kumi::fold_right(
-          []<typename M>(auto acc, M&& m) {
-            if constexpr( product_type<M> )
-              return cat(acc, flatten_all(KUMI_FWD(m)));
-            else
-              return cat(acc, kumi::tuple{KUMI_FWD(m)});
-          },
-          KUMI_FWD(ts),
-          kumi::tuple {});
+      return kumi::apply( [](auto&&... m)
+                          {
+                            auto v_or_t = []<typename V>(V&& v)
+                            {
+                              if constexpr(product_type<V>) return flatten_all(KUMI_FWD(v));
+                              else                          return kumi::tuple{KUMI_FWD(v)};
+                            };
+
+                            return cat( v_or_t(KUMI_FWD(m))... );
+                          }
+                        , ts
+                        );
     }
   }
 
@@ -1010,15 +1016,20 @@ namespace kumi
     if constexpr(sized_product_type<Tuple,0>) return KUMI_FWD(ts);
     else
     {
-      return kumi::fold_right(
-          [&]<typename M>(auto acc, M&& m) {
-            if constexpr( product_type<M> )
-              return cat(acc, flatten_all(KUMI_FWD(m),KUMI_FWD(f)));
-            else
-              return cat(acc, kumi::tuple{ KUMI_FWD(f)(KUMI_FWD(m)) });
-          },
-          KUMI_FWD(ts),
-          kumi::tuple {});
+      return kumi::apply( [&](auto&&... m)
+                          {
+                            auto v_or_t = [&]<typename V>(V&& v)
+                            {
+                              if constexpr(product_type<V>)
+                                return flatten_all(KUMI_FWD(v),KUMI_FWD(f));
+                              else
+                                return kumi::tuple{KUMI_FWD(f)(KUMI_FWD(v))};
+                            };
+
+                            return cat( v_or_t(KUMI_FWD(m))... );
+                          }
+                        , ts
+                        );
     }
   }
 
