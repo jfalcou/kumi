@@ -170,7 +170,7 @@ namespace kumi
 }
 ```
 
-Creates a `kumi::tuple` of references given a reference to a `kuùi::product_type`.
+Creates a `kumi::tuple` of references given a reference to a `kumi::product_type`.
 
 Given an expression `e` so that `decltype((e))` models `kumi::product_type`, `kumi::to_ref(e)` is
 an expression equivalent to
@@ -205,6 +205,89 @@ int main()
 ( 9 z 3.14159 )
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+
+### `kumi::generate`
+
+**Synopsis:**
+```c++
+namespace kumi
+{
+
+  template<std::size_t N, typename T>
+  [[nodiscard]] constexpr auto generate(T v) noexcept;
+}
+```
+
+Creates a `kumi::tuple` containing `N` copies of `v`.
+
+**Example:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+#include <kumi/tuple.hpp>
+#include <iostream>
+
+int main()
+{
+  std::cout << kumi::generate<7>(99.9) << "\n";
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Expected output:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+( 99.9 99.9 99.9 99.9 99.9 99.9 99.9 )
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Helper Trait:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
+namespace kumi::result
+{
+  template<std::size_t N, typename T> struct generate;
+  template<std::size_t N, typename T> using  generate_t = typename generate<Function,Tuple>::type;
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Computes the type returned by a call to `kumi::generate` on a given set of parameters.
+
+
+### `kumi::iota`
+
+**Synopsis:**
+```c++
+namespace kumi
+{
+
+  template<std::size_t N, typename T>
+  [[nodiscard]] constexpr auto iota(T v) noexcept;
+}
+```
+
+Creates a `kumi::tuple` equivalent to: `kumi::tuple{v, v + 1, ..., v + N-1}`.
+
+**Example:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+#include <kumi/tuple.hpp>
+#include <iostream>
+
+int main()
+{
+  std::cout << kumi::iota<10>(0.) << "\n";
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Expected output:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+( 0 1 2 3 4 5 6 7 8 9 )
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Helper Trait:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
+namespace kumi::result
+{
+  template<std::size_t N, typename T> struct iota;
+  template<std::size_t N, typename T> using  iota_t = typename iota<Function,Tuple>::type;
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Computes the type returned by a call to `kumi::iota` on a given set of parameters.
 
 ## Traits
 
