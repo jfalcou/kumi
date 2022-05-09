@@ -1143,6 +1143,52 @@ namespace kumi
   }
 
   //================================================================================================
+  // Generate tuples
+  //================================================================================================
+  namespace detail
+  {
+    template<std::size_t N, typename T>
+    constexpr auto const& eval(T const& v) noexcept { return v; }
+  }
+
+  template<std::size_t N, typename T>
+  [[nodiscard]] constexpr auto generate(T const& v) noexcept
+  {
+    return [&]<std::size_t... I>(std::index_sequence<I...>)
+    {
+      return kumi::tuple{detail::eval<I>(v)...};
+    }(std::make_index_sequence<N>{});
+  }
+
+  template<std::size_t N, typename T>
+  [[nodiscard]] constexpr auto iota(T v) noexcept
+  {
+    return [&]<std::size_t... I>(std::index_sequence<I...>)
+    {
+      return kumi::tuple{T(v+I)...};
+    }(std::make_index_sequence<N>{});
+  }
+
+  namespace result
+  {
+    template<std::size_t N, typename T> struct generate
+    {
+      using type = decltype( kumi::generate<N>( std::declval<T>() ) );
+    };
+
+    template<std::size_t N, typename T> struct iota
+    {
+      using type = decltype( kumi::iota<N>( std::declval<T>() ) );
+    };
+
+    template<std::size_t N, typename T>
+    using generate_t = typename generate<N,T>::type;
+
+    template<std::size_t N, typename T>
+    using iota_t = typename iota<N,T>::type;
+  }
+
+  //================================================================================================
   // Max of properties on tuple types
   //================================================================================================
   template<typename T, typename F>
