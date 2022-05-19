@@ -1283,6 +1283,64 @@ namespace kumi
   }
 
   //================================================================================================
+  // Adapt a template meta-function as a callable
+  //================================================================================================
+  template<template<class> class Pred> [[nodiscard]] constexpr auto predicate() noexcept
+  {
+    return []<typename T>(T const&) constexpr { return Pred<T>::value; };
+  }
+
+  //================================================================================================
+  // General boolean predicates
+  //================================================================================================
+  template<typename Pred, product_type Tuple>
+  [[nodiscard]] constexpr bool all_of( Tuple const& ts, Pred p) noexcept
+  {
+    return kumi::apply( [&](auto const&... m) { return (p(m) && ... && true); }, ts );
+  }
+
+  template<typename Pred, product_type Tuple>
+  [[nodiscard]] constexpr bool any_of( Tuple const& ts, Pred p) noexcept
+  {
+    return kumi::apply( [&](auto const&... m) { return (p(m) || ... || false); }, ts );
+  }
+
+  template<typename Pred, product_type Tuple>
+  [[nodiscard]] constexpr bool none_of( Tuple const& ts, Pred p) noexcept
+  {
+    return !any_of(ts,p);
+  }
+
+  template<typename Pred, product_type Tuple>
+  [[nodiscard]] constexpr std::size_t count_if( Tuple const& ts, Pred p) noexcept
+  {
+    return kumi::apply( [&](auto const&... m) { return ( (p(m)? 1 : 0)+ ... + 0); }, ts );
+  }
+
+  template<product_type Tuple>
+  [[nodiscard]] constexpr std::size_t count( Tuple const& ts ) noexcept
+  {
+    return count_if(ts, [](auto const& m) { return !!m;} );
+  }
+
+  //================================================================================================
+  // Return the index of a value which type satisfies a given predicate
+  //================================================================================================
+  template<typename Pred, typename... Ts>
+  [[nodiscard]] constexpr auto locate( tuple<Ts...> const& t, Pred p ) noexcept
+  {
+    auto locator = [&](auto const&... m)
+    {
+      bool checks[] = { p(m)...  };
+      for(std::size_t i=0;i<sizeof...(Ts);++i)
+        if(checks[i]) return i;
+      return sizeof...(Ts);
+    };
+
+    return kumi::apply(locator, t);
+  }
+
+  //================================================================================================
   // Traits for manipulating tuple
   //================================================================================================
   namespace detail
