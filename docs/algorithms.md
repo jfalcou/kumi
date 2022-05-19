@@ -1,5 +1,130 @@
 # Algorithms
 
+## Predicates
+
+### `all_of`
+
+**Synopsis:**
+```c++
+namespace kumi
+{
+  template<typename Pred, product_type Tuple>
+  [[nodiscard]] constexpr bool all_of( Tuple const& t, Pred p) noexcept;
+}
+```
+
+Checks if unary predicate `p` returns `true` for all elements in the tuple `t`.
+
+**Example:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
+#include <kumi/tuple.hpp>
+#include <iostream>
+
+int main()
+{
+  auto t = kumi::tuple{1,2.,3.f};
+  std::cout << std::boolalpha << kumi::all_of( t, [](auto e) { return e < 5; }) << "\n";
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Expected output:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+true
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### `any_of`
+
+**Synopsis:**
+```c++
+namespace kumi
+{
+  template<typename Pred, product_type Tuple>
+  [[nodiscard]] constexpr bool any_of( Tuple const& t, Pred p) noexcept;
+}
+```
+
+Checks if unary predicate `p` returns `true` for at least one element in the tuple `t`.
+
+**Example:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
+#include <kumi/tuple.hpp>
+#include <iostream>
+
+int main()
+{
+  auto t = kumi::tuple{1,2.,3.f};
+  std::cout << std::boolalpha << kumi::any_of( t, [](auto e) { return e == 2; }) << "\n";
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Expected output:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+true
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### `none_of`
+
+**Synopsis:**
+```c++
+namespace kumi
+{
+  template<typename Pred, product_type Tuple>
+  [[nodiscard]] constexpr bool none_of( Tuple const& t, Pred p) noexcept;
+}
+```
+
+Checks if unary predicate `p` returns `true` for no elements in the tuple `t`.
+
+**Example:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
+#include <kumi/tuple.hpp>
+#include <iostream>
+
+int main()
+{
+  auto t = kumi::tuple{1,2.,3.f};
+  std::cout << std::boolalpha << kumi::none_of( t, [](auto e) { return e > 10.; }) << "\n";
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Expected output:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+true
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+## Query
+
+### `locate`
+
+**Synopsis:**
+```c++
+namespace kumi
+{
+  template<typename Pred, product_type Tuple>
+  [[nodiscard]] constexpr std::size_t locate( Tuple const& t, Pred p) noexcept;
+}
+```
+
+Return the index of the first element of `t` for which the unary predicate `p` evaluates to `true`.
+
+**Example:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
+#include <kumi/tuple.hpp>
+#include <type_traits>
+#include <iostream>
+
+int main()
+{
+  auto t = kumi::tuple{1,2.,3ULL,4.5f};
+  std::cout << std::boolalpha << kumi::locate(t, kumi::predicate<std::is_unsigned_v>()) << "\n";
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+**Expected output:**
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
 ## Transformation
 
 ### `apply`
@@ -14,7 +139,6 @@ namespace kumi
 ```
 
 Invoke the `Function` object `f` with a tuple of arguments and returns the result of this invocation.
-
 **Helper Trait:**
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~c++
 namespace kumi::result
