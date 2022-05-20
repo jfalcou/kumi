@@ -1341,6 +1341,59 @@ namespace kumi
   }
 
   //================================================================================================
+  // Cartesian product of N product types
+  //================================================================================================
+  namespace detail
+  {
+    template<std::size_t N, std::size_t... S> constexpr auto digits(std::size_t v) noexcept
+    {
+      struct { int data[N]; } digits = {};
+      std::size_t shp[] = {S...};
+      std::size_t i = 0;
+
+      while(v != 0)
+      {
+        digits.data[i] = v % shp[i];
+        v /= shp[i++];
+      }
+
+      return digits;
+    }
+  }
+
+  template<product_type... Ts> [[nodiscard]] constexpr auto cartesian_product(Ts&&... ds)
+  {
+    if constexpr(sizeof...(Ts) == 0) return tuple{};
+    else
+    {
+      constexpr std::size_t nb_tuples = sizeof...(ds);
+      constexpr auto        nb_elem   = (1 * ... * size<Ts>::value);
+
+      return [&]<std::size_t... N>(std::index_sequence<N...>)
+      {
+        auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>)
+        {
+          constexpr auto dg = detail::digits<nb_tuples,size<Ts>::value...>(k);
+          using tuple_t = tuple<std::tuple_element_t<dg.data[I],std::remove_cvref_t<Ts>>...>;
+          return  tuple_t{ get<dg.data[I]>(std::forward<Ts>(ds))... };
+        };
+
+        return kumi::make_tuple(maps( index<N>, std::make_index_sequence<sizeof...(ds)>{})...);
+      }(std::make_index_sequence<nb_elem>{});
+    }
+  }
+
+  namespace result
+  {
+    template<typename... T> struct cartesian_product
+    {
+      using type = decltype( kumi::cartesian_product( std::declval<T>()... ) );
+    };
+
+    template<typename... T> using cartesian_product_t = typename cartesian_product<T...>::type;
+  }
+
+  //================================================================================================
   // Traits for manipulating tuple
   //================================================================================================
   namespace detail
