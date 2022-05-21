@@ -1,8 +1,0 @@
-plugins:
-  - jekyll-relative-links
-relative_links:
-  enabled: true
-  collections: true
-theme: jekyll-theme-slate
-title: KUMI
-description: KUMI - A Compact C++20 Tuple Toolset
