@@ -158,6 +158,9 @@ namespace kumi
   template<typename T> struct size<T const &>   : size<T> {};
   template<typename T> struct size<T const &&>  : size<T> {};
 
+  template<typename T>
+  inline constexpr auto size_v = size<T>::value;
+
   template<typename T> concept non_empty_tuple = requires( T const &t )
   {
     typename std::tuple_element<0,std::remove_cvref_t<T>>::type;
@@ -1347,7 +1350,7 @@ namespace kumi
   {
     template<std::size_t N, std::size_t... S> constexpr auto digits(std::size_t v) noexcept
     {
-      struct { int data[N]; } digits = {};
+      struct { std::size_t data[N]; } digits = {};
       std::size_t shp[] = {S...};
       std::size_t i = 0;
 
@@ -1361,26 +1364,23 @@ namespace kumi
     }
   }
 
-  template<product_type... Ts> [[nodiscard]] constexpr auto cartesian_product(Ts&&... ds)
+  // MSVC chokes on the other code for empty calls
+  [[nodiscard]] constexpr auto cartesian_product() { return kumi::tuple<>{}; }
+
+  template<product_type... Ts>
+  [[nodiscard]] constexpr auto cartesian_product(Ts&&... ds)
   {
-    if constexpr(sizeof...(Ts) == 0) return tuple{};
-    else
+    auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>)
     {
-      constexpr std::size_t nb_tuples = sizeof...(ds);
-      constexpr auto        nb_elem   = (1 * ... * size<Ts>::value);
+      constexpr auto dg = detail::digits<sizeof...(Ts),kumi::size_v<Ts>...>(k);
+      using tuple_t = kumi::tuple<std::tuple_element_t<dg.data[I],std::remove_cvref_t<Ts>>...>;
+      return tuple_t{kumi::get<dg.data[I]>(std::forward<Ts>(ds))...};
+    };
 
-      return [&]<std::size_t... N>(std::index_sequence<N...>)
-      {
-        auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>)
-        {
-          constexpr auto dg = detail::digits<nb_tuples,size<Ts>::value...>(k);
-          using tuple_t = tuple<std::tuple_element_t<dg.data[I],std::remove_cvref_t<Ts>>...>;
-          return  tuple_t{ get<dg.data[I]>(std::forward<Ts>(ds))... };
-        };
-
-        return kumi::make_tuple(maps( index<N>, std::make_index_sequence<sizeof...(ds)>{})...);
-      }(std::make_index_sequence<nb_elem>{});
-    }
+    return [&]<std::size_t... N>(std::index_sequence<N...>)
+    {
+      return kumi::make_tuple(maps( kumi::index<N>, std::make_index_sequence<sizeof...(ds)>{})...);
+    }(std::make_index_sequence<(kumi::size_v<Ts> * ...)>{});
   }
 
   namespace result
