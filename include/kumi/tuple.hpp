@@ -158,6 +158,9 @@ namespace kumi
   template<typename T> struct size<T const &>   : size<T> {};
   template<typename T> struct size<T const &&>  : size<T> {};
 
+  template<typename T>
+  inline constexpr auto size_v = size<T>::value;
+
   template<typename T> concept non_empty_tuple = requires( T const &t )
   {
     typename std::tuple_element<0,std::remove_cvref_t<T>>::type;
@@ -1338,6 +1341,56 @@ namespace kumi
     };
 
     return kumi::apply(locator, t);
+  }
+
+  //================================================================================================
+  // Cartesian product of N product types
+  //================================================================================================
+  namespace detail
+  {
+    template<std::size_t N, std::size_t... S> constexpr auto digits(std::size_t v) noexcept
+    {
+      struct { std::size_t data[N]; } digits = {};
+      std::size_t shp[] = {S...};
+      std::size_t i = 0;
+
+      while(v != 0)
+      {
+        digits.data[i] = v % shp[i];
+        v /= shp[i++];
+      }
+
+      return digits;
+    }
+  }
+
+  // MSVC chokes on the other code for empty calls
+  [[nodiscard]] constexpr auto cartesian_product() { return kumi::tuple<>{}; }
+
+  template<product_type... Ts>
+  [[nodiscard]] constexpr auto cartesian_product(Ts&&... ds)
+  {
+    auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>)
+    {
+      constexpr auto dg = detail::digits<sizeof...(Ts),kumi::size_v<Ts>...>(k);
+      using tuple_t = kumi::tuple<std::tuple_element_t<dg.data[I],std::remove_cvref_t<Ts>>...>;
+      return tuple_t{kumi::get<dg.data[I]>(std::forward<Ts>(ds))...};
+    };
+
+    return [&]<std::size_t... N>(std::index_sequence<N...>)
+    {
+      return kumi::make_tuple(maps( kumi::index<N>, std::make_index_sequence<sizeof...(ds)>{})...);
+    }(std::make_index_sequence<(kumi::size_v<Ts> * ...)>{});
+  }
+
+  namespace result
+  {
+    template<typename... T> struct cartesian_product
+    {
+      using type = decltype( kumi::cartesian_product( std::declval<T>()... ) );
+    };
+
+    template<typename... T> using cartesian_product_t = typename cartesian_product<T...>::type;
   }
 
   //================================================================================================
