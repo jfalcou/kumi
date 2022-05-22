@@ -9,6 +9,7 @@
 //!
 //!   -  a fast to compile tuple implementation
 //!   -  quality of life improvement over the standard tuple implementation
+//!   -  a protocol to adapt user-defined type to act as tuples
 //!   -  algorithm on tuples
 //!
 //! # A Short Example

@@ -27,9 +27,28 @@ namespace kumi
 {
   //================================================================================================
   //! @defgroup utility   Helper types and function
+  //! @brief    Tools for interacting with kumi::tuple
+  //!
   //! @defgroup tuple     Tuple types and function
+  //! @brief    Definition for kumi::tuple class and functions
+  //!
   //! @defgroup algorithm Tuple Algorithms
-  //! @defgroup generator Tuple Generators
+  //! @brief    Algorithms for manipulating kumi::tuple
+  //!
+  //! @ingroup  algorithm
+  //! @{
+  //!   @defgroup transforms Tuple Transformations
+  //!   @brief    Algorithms applying transformation to tuple
+  //!
+  //!   @defgroup predicates Tuple Predicates
+  //!   @brief    Algorithms computing predicates over tuples
+  //!
+  //!   @defgroup reductions Tuple Generalized Reductions
+  //!   @brief    Algorithms performing reductions over tuples
+  //!
+  //!   @defgroup generators Tuple Generators
+  //!   @brief    Algorithms generating tuples
+  //! @}
   //================================================================================================
 
   //================================================================================================
@@ -298,7 +317,10 @@ namespace kumi
   //!
   //! ## Helper type
   //! @code
-  //! template<std::size_t I, typename T> using element_t = typename element<I,T>::type;
+  //! namespace kumi
+  //! {
+  //!   template<std::size_t I, typename T> using element_t = typename element<I,T>::type;
+  //! }
   //! @endcode
   //================================================================================================
   template<std::size_t I, typename T> struct element              : std::tuple_element<I,T> {};
@@ -306,7 +328,6 @@ namespace kumi
   template<std::size_t I, typename T> struct element<I,T&&>       : element<I,T> {};
   template<std::size_t I, typename T> struct element<I,T const&>  : element<I,T> {};
   template<std::size_t I, typename T> struct element<I,T const&&> : element<I,T> {};
-
 
   template<std::size_t I, typename T> using  element_t = typename element<I,T>::type;
 
@@ -319,7 +340,10 @@ namespace kumi
   //!
   //! ## Helper type
   //! @code
-  //! template<std::size_t I, typename T> using member_t = typename member<I,T>::type;
+  //! namespace kumi
+  //! {
+  //!   template<std::size_t I, typename T> using member_t = typename member<I,T>::type;
+  //! }
   //! @endcode
   //================================================================================================
   template<std::size_t I, typename T> struct member
@@ -372,14 +396,25 @@ namespace kumi
   }
 
   //================================================================================================
-  //! @ingroup algorithm
+  //! @ingroup transforms
   //! @brief Invoke the Callable object f with a tuple of arguments.
   //!
   //! @param f	Callable object to be invoked
   //! @param t  kumi::product_type whose elements to be used as arguments to f
   //! @return The value returned by f.
   //!
-  //! @see kumi::result::apply
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<typename Function, product_type Tuple> struct apply;
+  //!
+  //!   template<typename Function, product_type Tuple>
+  //!   using apply_t = typename apply<Function,Tuple>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::apply
   //!
   //! ## Example
   //! @include doc/apply.cpp
@@ -398,26 +433,8 @@ namespace kumi
     }
   }
 
-  //================================================================================================
-  //! @namespace result
-  //! @brief KUMI algorithm related traits namespace
-  //================================================================================================
   namespace result
   {
-    //==============================================================================================
-    //! @ingroup algorithm
-    //! @brief Computes the return type of a call to kumi::apply
-    //!
-    //! @tparam Function	Callable object type to be invoked
-    //! @tparam Tuple     kumi::product_type whose elements to be used as arguments to Function
-    //! @see kumi::apply
-    //!
-    //! ## Helper type
-    //! @code
-    //! template<typename Function, product_type Tuple>
-    //! using apply_t = typename apply<Function,Tuple>::type;
-    //! @endcode
-    //==============================================================================================
     template<typename Function, product_type Tuple>
     struct apply
     {
@@ -429,8 +446,8 @@ namespace kumi
   }
 
   //================================================================================================
-  //! @ingroup algorithm
-  //! @brief Applies the Callable object f to each element of a kumi::product_type.
+  //! @ingroup transforms
+  //! @brief Applies the Callable object f on each element of a kumi::product_type.
   //!
   //! @note This function does not take part in overload resolution if `f` can't be applied to the
   //!       elements of `t` and/or `ts`.
@@ -468,8 +485,8 @@ namespace kumi
   }
 
   //================================================================================================
-  //! @ingroup algorithm
-  //! @brief Applies the Callable object f to each element of a kumi::product_type and its index.
+  //! @ingroup transforms
+  //! @brief Applies the Callable object f on each element of a kumi::product_type and its index.
   //!
   //! @note This function does not take part in overload resolution if `f` can't be applied to the
   //!       elements of `t` and/or `ts` and an integral constant.
@@ -612,6 +629,20 @@ namespace kumi
     //! @param  i0 Compile-time index of the first element to extract.
     //! @return A new kumi::tuple containing the two sub-tuple cut at index I.
     //!
+    //!
+    //! ## Helper type
+    //! @code
+    //! namespace kumi::result
+    //! {
+    //!   template<std::size_t I0, product_type Tuple> struct split;
+    //!
+    //!   template<std::size_t I0, product_type Tuple>
+    //!   using split_t = typename split<I0,Tuple>::type;
+    //! }
+    //! @endcode
+    //!
+    //! Computes the type returned by a call to split.
+    //!
     //! ## Example:
     //! @include doc/split.cpp
     //==============================================================================================
@@ -621,37 +652,6 @@ namespace kumi
     //==============================================================================================
     //! @}
     //==============================================================================================
-
-    //==============================================================================================
-    // Tuple as functional object
-    //==============================================================================================
-    template<typename Function>
-    constexpr decltype(auto)
-    operator()(Function &&f) const &noexcept(noexcept(kumi::apply(KUMI_FWD(f), *this)))
-    {
-      return kumi::apply(KUMI_FWD(f), *this);
-    }
-
-    template<typename Function>
-    constexpr decltype(auto)
-    operator()(Function &&f) &noexcept(noexcept(kumi::apply(KUMI_FWD(f), *this)))
-    {
-      return kumi::apply(KUMI_FWD(f), *this);
-    }
-
-    template<typename Function>
-    constexpr decltype(auto) operator()(Function &&f) const &&noexcept(
-        noexcept(kumi::apply(KUMI_FWD(f), static_cast<tuple const &&>(*this))))
-    {
-      return kumi::apply(KUMI_FWD(f), static_cast<tuple const &&>(*this));
-    }
-
-    template<typename Function>
-    constexpr decltype(auto) operator()(Function &&f) &&noexcept(
-        noexcept(kumi::apply(KUMI_FWD(f), static_cast<tuple &&>(*this))))
-    {
-      return kumi::apply(KUMI_FWD(f), static_cast<tuple &&>(*this));
-    }
 
     //==============================================================================================
     //! @name Properties
@@ -668,17 +668,35 @@ namespace kumi
     //==============================================================================================
 
     //==============================================================================================
-    // Conversion
+    //! @name Conversions
+    //! @{
+    //==============================================================================================
+
+    //==============================================================================================
+    //! @brief  Converts a tuple<Ts...> to a tuple<Us...>.
+    //! @tparam Us Types composing the destination tuple
+    //!
+    //! ## Example:
+    //! @include doc/cast.cpp
     //==============================================================================================
     template<typename... Us>
-    requires(detail::piecewise_convertible<tuple, tuple<Us...>> && (sizeof...(Us) == sizeof...(Ts))
-             && (!std::same_as<Ts, Us> && ...)) [[nodiscard]] inline constexpr auto cast() const
+    requires(   detail::piecewise_convertible<tuple, tuple<Us...>>
+            &&  (sizeof...(Us) == sizeof...(Ts))
+            &&  (!std::same_as<Ts, Us> && ...)
+            )
+    [[nodiscard]] inline constexpr auto cast() const
     {
       return apply([](auto &&...elems) { return tuple<Us...> {static_cast<Us>(elems)...}; }, *this);
     }
 
     //==============================================================================================
-    // Assignment
+    //! @}
+    //==============================================================================================
+
+    //==============================================================================================
+    //! @brief Replaces the contents of the tuple with the contents of another tuple.
+    //! @param other kumi::tuple to copy or move from
+    //! @return `*this`
     //==============================================================================================
     template<typename... Us>
     requires(detail::piecewise_convertible<tuple, tuple<Us...>>) constexpr tuple &
@@ -690,6 +708,7 @@ namespace kumi
       return *this;
     }
 
+    /// @overload
     template<typename... Us>
     requires(detail::piecewise_convertible<tuple, tuple<Us...>>) constexpr tuple &
     operator=(tuple<Us...> &&other)
@@ -704,14 +723,13 @@ namespace kumi
     }
 
     //==============================================================================================
-    // Comparison operators
+    //! @name Comparison operators
+    //! @{
     //==============================================================================================
-    template<sized_product_type<0> Other>
-    friend constexpr auto operator==(tuple const&, Other const &) noexcept
-    {
-      return true;
-    }
 
+    /// @ingroup tuple
+    /// @related kumi::tuple
+    /// @brief Compares a tuple with an other kumi::product_type for equality
     template<sized_product_type<sizeof...(Ts)> Other>
     friend constexpr auto operator==(tuple const &self, Other const &other) noexcept
     requires( (sizeof...(Ts) != 0 ) && detail::check_equality<tuple,Other>() )
@@ -723,12 +741,17 @@ namespace kumi
       (std::make_index_sequence<sizeof...(Ts)>());
     }
 
+#if !defined(KUMI_DOXYGEN_INVOKED)
     template<sized_product_type<0> Other>
-    friend constexpr auto operator!=(tuple const&, Other const &) noexcept
+    friend constexpr auto operator==(tuple const&, Other const &) noexcept
     {
-      return false;
+      return true;
     }
+#endif
 
+    /// @ingroup tuple
+    /// @related kumi::tuple
+    /// @brief Compares a tuple with an other kumi::product_type for inequality
     template<sized_product_type<sizeof...(Ts)> Other>
     friend constexpr auto operator!=(tuple const &self, Other const &other) noexcept
     requires( (sizeof...(Ts) != 0 ) && detail::check_equality<tuple,Other>() )
@@ -736,6 +759,17 @@ namespace kumi
       return !(self == other);
     }
 
+#if !defined(KUMI_DOXYGEN_INVOKED)
+    template<sized_product_type<0> Other>
+    friend constexpr auto operator!=(tuple const&, Other const &) noexcept
+    {
+      return false;
+    }
+#endif
+
+    /// @ingroup tuple
+    /// @related kumi::tuple
+    /// @brief Compares tuple and product type value for lexicographical is less relation
     template<sized_product_type<sizeof...(Ts)> Other>
     friend constexpr auto operator<(tuple const &lhs, Other const &rhs) noexcept
     {
@@ -759,18 +793,27 @@ namespace kumi
       return res;
     }
 
+    /// @ingroup tuple
+    /// @related kumi::tuple
+    /// @brief Compares tuple and product type value for lexicographical is less or equal relation
     template<product_type Other>
     friend constexpr auto operator<=(tuple const &lhs, Other const &rhs) noexcept
     {
       return !(rhs < lhs);
     }
 
+    /// @ingroup tuple
+    /// @related kumi::tuple
+    /// @brief Compares tuple and product type value for lexicographical is greater relation
     template<product_type Other>
     friend constexpr auto operator>(tuple const &lhs, Other const &rhs) noexcept
     {
       return rhs < lhs;
     }
 
+    /// @ingroup tuple
+    /// @related kumi::tuple
+    /// @brief Compares tuple and product type value for lexicographical is greater relation relation
     template<product_type Other>
     friend constexpr auto operator>=(tuple const &lhs, Other const &rhs) noexcept
     {
@@ -778,6 +821,45 @@ namespace kumi
     }
 
     //==============================================================================================
+    //! @}
+    //==============================================================================================
+
+    //==============================================================================================
+    //! @brief Invoke the Callable object f on each element of the current tuple.
+    //!
+    //! @param f	Callable object to be invoked
+    //! @return The value returned by f.
+    //!
+    //==============================================================================================
+    template<typename Function>
+    constexpr decltype(auto) operator()(Function &&f) const&
+    noexcept(noexcept(kumi::apply(KUMI_FWD(f), *this))) { return kumi::apply(KUMI_FWD(f), *this); }
+
+#if !defined(KUMI_DOXYGEN_INVOKED)
+    template<typename Function>
+    constexpr decltype(auto) operator()(Function &&f) &
+    noexcept(noexcept(kumi::apply(KUMI_FWD(f), *this)))
+    {
+      return kumi::apply(KUMI_FWD(f), *this);
+    }
+
+    template<typename Function>
+    constexpr decltype(auto) operator()(Function &&f) const &&noexcept(
+    noexcept(kumi::apply(KUMI_FWD(f), static_cast<tuple const &&>(*this))))
+    {
+      return kumi::apply(KUMI_FWD(f), static_cast<tuple const &&>(*this));
+    }
+
+    template<typename Function>
+    constexpr decltype(auto) operator()(Function &&f) &&noexcept(
+    noexcept(kumi::apply(KUMI_FWD(f), static_cast<tuple &&>(*this))))
+    {
+      return kumi::apply(KUMI_FWD(f), static_cast<tuple &&>(*this));
+    }
+#endif
+
+    //==============================================================================================
+    /// @ingroup tuple
     //! @related kumi::tuple
     //! @brief Inserts a kumi::tuple in an output stream
     //==============================================================================================
@@ -794,27 +876,144 @@ namespace kumi
   };
 
   //================================================================================================
-  // CTAD and other helpers
+  //! @name Tuple construction
+  //! @{
+  //================================================================================================
+
+  //================================================================================================
+  //! @ingroup tuple
+  //! @related kumi::tuple
+  //! @brief kumi::tuple deduction guide
+  //! @tparam Ts  Type lists to build the tuple with.
   //================================================================================================
   template<typename... Ts> tuple(Ts &&...) -> tuple<std::unwrap_ref_decay_t<Ts>...>;
 
+  //================================================================================================
+  //! @ingroup tuple
+  //! @related kumi::tuple
+  //! @brief Creates a kumi::tuple of lvalue references to its arguments.
+  //! @param ts	Zero or more lvalue arguments to construct the tuple from.
+  //! @return A kumi::tuple object containing lvalue references.
+  //! ## Example:
+  //! @include doc/tie.cpp
+  //================================================================================================
   template<typename... Ts> [[nodiscard]] constexpr tuple<Ts &...> tie(Ts &...ts) { return {ts...}; }
 
+  //================================================================================================
+  //! @ingroup tuple
+  //! @related kumi::tuple
+  //! @brief Creates a kumi::tuple of forwarding references to its arguments.
+  //!
+  //! Constructs a tuple of references to the arguments in args suitable for forwarding as an
+  //! argument to a function. The tuple has rvalue reference data members when rvalues are used as
+  //! arguments, and otherwise has lvalue reference data members.
+  //!
+  //! @note If the arguments are temporaries, `forward_as_tuple` does not extend their lifetime;
+  //!       they have to be used before the end of the full expression.
+  //!
+  //! @param ts	Zero or more lvalue arguments to construct the tuple from.
+  //! @return A kumi::tuple constructed as `kumi::tuple<Ts&&...>(std::forward<Ts>(args)...)`
+  //! ## Example:
+  //! @include doc/forward_as_tuple.cpp
+  //================================================================================================
   template<typename... Ts> [[nodiscard]] constexpr tuple<Ts &&...> forward_as_tuple(Ts &&...ts)
   {
     return {KUMI_FWD(ts)...};
   }
 
+  //================================================================================================
+  //! @ingroup tuple
+  //! @related kumi::tuple
+  //! @brief Creates a tuple object, deducing the target type from the types of arguments.
+  //!
+  //! @param ts	Zero or more lvalue arguments to construct the tuple from.
+  //! @return A kumi::tuple constructed from the ts or their inner references when ts is an instance
+  //!         of `std::reference_wrapper`.
+  //! ## Example:
+  //! @include doc/make_tuple.cpp
+  //================================================================================================
   template<typename... Ts>
   [[nodiscard]] constexpr tuple<std::unwrap_ref_decay_t<Ts>...> make_tuple(Ts &&...ts)
   {
     return {KUMI_FWD(ts)...};
   }
 
+  //================================================================================================
+  //! @ingroup tuple
+  //! @related kumi::tuple
+  //! @brief Creates a kumi::tuple of references given a reference to a kumi::product_type.
+  //!
+  //! @param    t Compile-time index of the element to access
+  //! @return   A tuple equivalent to the result of `kumi::apply([]<typename... T>(T&&... e)
+  //!           { return kumi::forward_as_tuple(std::forward<T>(e)...); }, t)`
+  //!
+  //! ## Example:
+  //! @include doc/to_ref.cpp
+  //================================================================================================
+  template<product_type Type> [[nodiscard]] constexpr auto to_ref(Type&& that)
+  {
+    return apply( [](auto&&... elems)
+                  {
+                    return kumi::forward_as_tuple(KUMI_FWD(elems)...);
+                  }
+                , KUMI_FWD(that)
+                );
+  }
+
+  //================================================================================================
+  //! @}
+  //================================================================================================
+
+  //================================================================================================
+  //! @name Conversions
+  //! @{
+  //================================================================================================
+
+  //================================================================================================
+  //! @brief Converts a kumi::tuple to an instance of an arbitrary type
+  //!
+  //! Constructs an instance of `Type` by passing elements of `t` to the appropriate constructor.
+  //!
+  //! @tparam Type Type to generate
+  //! @param  t    kumi::tuple to convert
+  //! @return An instance of `Type` constructed from each element of `t` in order.
+  //!
+  //! ## Example
+  //! @include doc/from_tuple.cpp
+  //================================================================================================
+  template<typename Type, typename... Ts>
+  requires(!product_type<Type> && detail::implicit_constructible<Type, Ts...>)
+  [[nodiscard]] constexpr auto from_tuple(tuple<Ts...> const &t)
+  {
+    return [&]<std::size_t... I>(std::index_sequence<I...>) { return Type {get<I>(t)...}; }
+    (std::make_index_sequence<sizeof...(Ts)>());
+  }
+
+  //================================================================================================
+  //! @brief Converts a kumi::product_type to an instance kumi::tuple
+  //!
+  //! Constructs an instance kumi::tuple from the elements of the kumi::product_type parameters
+  //!
+  //! @param  t    kumi::product_type to convert
+  //! @return An instance of kumi::tuple constructed from each elements of `t` in order.
+  //!
+  //! ## Example
+  //! @include doc/to_tuple.cpp
+  //================================================================================================
+  template<product_type Type>
+  [[nodiscard]] inline constexpr auto to_tuple(Type&& t)
+  {
+    return apply([](auto &&...elems) { return tuple{elems...}; }, KUMI_FWD(t));
+  }
+
+  //================================================================================================
+  //! @}
+  //================================================================================================
+
   template<typename... Ts>
   template<std::size_t I0>
   requires(I0 <= sizeof...(Ts))
-      [[nodiscard]] constexpr auto tuple<Ts...>::split(index_t<I0> const &) const noexcept
+  [[nodiscard]] constexpr auto tuple<Ts...>::split(index_t<I0> const &) const noexcept
   {
     return kumi::make_tuple(extract(index<0>, index<I0>), extract(index<I0>));
   }
@@ -830,32 +1029,9 @@ namespace kumi
   }
 
   //================================================================================================
-  // Conversions to arbitrary types
+  //! @name Accessors
+  //! @{
   //================================================================================================
-  template<typename Type, typename... Ts>
-  requires(!product_type<Type> && detail::implicit_constructible<Type, Ts...>)
-      [[nodiscard]] constexpr auto from_tuple(tuple<Ts...> const &t)
-  {
-    return [&]<std::size_t... I>(std::index_sequence<I...>) { return Type {get<I>(t)...}; }
-    (std::make_index_sequence<sizeof...(Ts)>());
-  }
-
-  //==============================================================================================
-  // Conversion to an actual kumi::tuple
-  //==============================================================================================
-  template<product_type Type>
-  [[nodiscard]] inline constexpr auto to_tuple(Type&& that)
-  {
-    return apply([](auto &&...elems) { return tuple{elems...}; }, KUMI_FWD(that));
-  }
-
-  template<product_type Type>
-  [[nodiscard]] constexpr auto to_ref(Type&& that)
-  {
-    return apply([](auto&&... elems) {
-      return kumi::forward_as_tuple(KUMI_FWD(elems)...);
-    }, KUMI_FWD(that));
-  }
 
   //================================================================================================
   //! @ingroup tuple
@@ -865,7 +1041,7 @@ namespace kumi
   //! @tparam   I Compile-time index of the element to access
   //! @param    t Compile-time index of the element to access
   //! @return   A reference to the selected element of t.
-  //! @relates kumi::tuple
+  //! @related kumi::tuple
   //!
   //! ## Example:
   //! @include doc/get.cpp
@@ -879,7 +1055,7 @@ namespace kumi
   /// @overload
   template<std::size_t I, typename... Ts>
   requires(I < sizeof...(Ts)) [[nodiscard]] constexpr decltype(auto)
-      get(tuple<Ts...> &&arg) noexcept
+  get(tuple<Ts...> &&arg) noexcept
   {
     return static_cast<tuple<Ts...> &&>(arg)[index<I>];
   }
@@ -887,7 +1063,7 @@ namespace kumi
   /// @overload
   template<std::size_t I, typename... Ts>
   requires(I < sizeof...(Ts)) [[nodiscard]] constexpr decltype(auto)
-      get(tuple<Ts...> const &arg) noexcept
+  get(tuple<Ts...> const &arg) noexcept
   {
     return arg[index<I>];
   }
@@ -895,13 +1071,45 @@ namespace kumi
   /// @overload
   template<std::size_t I, typename... Ts>
   requires(I < sizeof...(Ts)) [[nodiscard]] constexpr decltype(auto)
-      get(tuple<Ts...> const &&arg) noexcept
+  get(tuple<Ts...> const &&arg) noexcept
   {
     return static_cast<tuple<Ts...> const &&>(arg)[index<I>];
   }
 
   //================================================================================================
-  // Construct the tuple made of the application of f to elements of each tuples
+  //! @}
+  //================================================================================================
+
+  //================================================================================================
+  //! @ingroup transforms
+  //! @brief Apply the Callable object f on each tuples' elements
+  //!
+  //! Applies the given function to all the tuples passed as arguments and stores the result in
+  //! another tuple, keeping the original elements order.
+  //!
+  //! @note Does not participate in overload resolution if tuples' size are not equal or if `f`
+  //!       can't be called on each tuple's elements.
+  //!
+  //! @param f      Callable function to apply
+  //! @param t0     Tuple  to operate on
+  //! @param others Tuples to operate on
+  //! @return The tuple of `f` calls results.
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<typename Function, product_type T, product_type... Ts> struct map;
+  //!
+  //!   template<typename Function, product_type T, product_type... Ts>
+  //!   using map_t = typename map<Function,Tuple>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::map
+  //!
+  //! ## Example
+  //! @include doc/map.cpp
   //================================================================================================
   template<product_type Tuple, typename Function, sized_product_type<size<Tuple>::value>... Tuples>
   constexpr auto
@@ -941,7 +1149,35 @@ namespace kumi
   }
 
   //================================================================================================
-  // Construct the tuple made of the application of f to elements of each tuples and their indexes
+  //! @ingroup transforms
+  //! @brief Apply the Callable object f on each tuples' elements and their indexes
+  //!
+  //! Applies the given function to all the tuples passed as arguments along with their indexes  and
+  //! stores the result in another tuple, keeping the original elements order.
+  //!
+  //! @note Does not participate in overload resolution if tuples' size are not equal or if `f`
+  //!       can't be called on each tuple's elements and their indexes.
+  //!
+  //! @param f      Callable function to apply
+  //! @param t0     Tuple  to operate on
+  //! @param others Tuples to operate on
+  //! @return The tuple of `f` calls results.
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<typename Function, product_type T, product_type... Ts> struct map_index;
+  //!
+  //!   template<typename Function, product_type T, product_type... Ts>
+  //!   using map_index_t = typename map_index<Function,Tuple>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::map_index
+  //!
+  //! ## Example
+  //! @include doc/map_index.cpp
   //================================================================================================
   template<product_type Tuple, typename Function, sized_product_type<size<Tuple>::value>... Tuples>
   constexpr auto map_index(Function     f,Tuple  &&t0,Tuples &&...others)
@@ -978,7 +1214,29 @@ namespace kumi
   }
 
   //================================================================================================
-  // Generalized sums
+  //! @ingroup reductions
+  //! @brief Computes the generalized sum of all elements using a tail recursive tail.
+  //!
+  //! @param f      Binary callable function to apply
+  //! @param t      Tuple to operate on
+  //! @param init   Initial value of the sum
+  //! @return   The value of `f( f( f(init, get<0>(t)), ...), get<N-1>(t))`
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<typename Function, product_type Tuple, typename Value> struct fold_left;
+  //!
+  //!   template<typename Function, product_type Tuple, typename Value>
+  //!   using fold_left_t = typename fold_left_t<Function,Tuple,Value>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::fold_left
+  //!
+  //! ## Example
+  //! @include doc/fold_left.cpp
   //================================================================================================
   template<typename Function, product_type Tuple, typename Value>
   [[nodiscard]] constexpr auto fold_left(Function f, Tuple&& t, Value init)
@@ -994,6 +1252,31 @@ namespace kumi
     }
   }
 
+  //================================================================================================
+  //! @ingroup reductions
+  //! @brief Computes the generalized sum of all elements using a non-tail recursive tail.
+  //!
+  //! @param f      Binary callable function to apply
+  //! @param t      Tuple to operate on
+  //! @param init   Initial value of the sum
+  //! @return   The value of `f(get<0>(t), f(... , f(get<N-1>(t), init))`
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<typename Function, product_type Tuple, typename Value> struct fold_right;
+  //!
+  //!   template<typename Function, product_type Tuple, typename Value>
+  //!   using fold_right_t = typename fold_right_t<Function,Tuple,Value>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::fold_right
+  //!
+  //! ## Example
+  //! @include doc/fold_right.cpp
+  //================================================================================================
   template<typename Function, product_type Tuple, typename Value>
   [[nodiscard]] constexpr auto fold_right(Function f, Tuple&& t, Value init)
   {
@@ -1038,9 +1321,29 @@ namespace kumi
   }
 
   //================================================================================================
-  // Concatenates tuples
+  //! @ingroup generators
+  //! @brief Concatenates tuples in a single one
+  //!
+  //! @param ts Tuples to concatenate
+  //! @return   A tuple made of all element of all input tuples in order
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<product_type... Tuples> struct cat;
+  //!
+  //!   template<product_type... Tuples>
+  //!   using cat_t = typename cat<Tuples...>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::cat
+  //!
+  //! ## Example
+  //! @include doc/cat.cpp
   //================================================================================================
-  template<product_type... Tuples> [[nodiscard]] constexpr auto cat(Tuples&&... us)
+  template<product_type... Tuples> [[nodiscard]] constexpr auto cat(Tuples&&... ts)
   {
     if constexpr(sizeof...(Tuples) == 0) return tuple{};
     else
@@ -1073,7 +1376,7 @@ namespace kumi
                                             >...
                       >;
         return type{get<pos.e[N]>(get<pos.t[N]>(tuples))...};
-      }(kumi::forward_as_tuple(KUMI_FWD(us)...), std::make_index_sequence<count-1>{});
+      }(kumi::forward_as_tuple(KUMI_FWD(ts)...), std::make_index_sequence<count-1>{});
     }
   }
 
@@ -1087,9 +1390,30 @@ namespace kumi
     template<product_type... Tuples> using cat_t  = typename cat<Tuples...>::type;
   }
 
-  //==============================================================================================
-  // Vector-like modifiers: {push/pop}_{front/back}
-  //==============================================================================================
+  //================================================================================================
+  //! @ingroup generators
+  //! @brief Constructs a tuple by adding a value v at the beginning of t
+  //!
+  //! @param t Base tuple
+  //! @param v Value to insert in front of t
+  //! @return A tuple composed of v followed by all elements of t in order.
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<product_type Tuple, typename T> struct push_front;
+  //!
+  //!   template<product_type Tuple, typename T>
+  //!   using push_front_t = typename push_front<Tuples...>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::push_front
+  //!
+  //! ## Example
+  //! @include doc/push_front.cpp
+  //================================================================================================
   template<product_type Tuple, typename T>
   [[nodiscard]] constexpr auto push_front(Tuple const& t, T&& v)
   {
@@ -1100,6 +1424,29 @@ namespace kumi
     (std::make_index_sequence<Tuple::size()>());
   }
 
+  //================================================================================================
+  //! @ingroup generators
+  //! @brief Remove the first (if any) element of a kumi::product_type.
+  //!
+  //! @param t Base tuple
+  //! @return A tuple composed of all elements of t except its first. Has no effect on empty t.
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<product_type Tuple> struct pop_front;
+  //!
+  //!   template<product_type Tuple>
+  //!   using pop_front_t = typename pop_front<Tuple>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::pop_front
+  //!
+  //! ## Example
+  //! @include doc/push_back.cpp
+  //================================================================================================
   template<product_type Tuple>
   [[nodiscard]] constexpr auto pop_front(Tuple const& t)
   {
@@ -1107,6 +1454,30 @@ namespace kumi
     else                          return tuple<>{};
   }
 
+  //================================================================================================
+  //! @ingroup generators
+  //! @brief Constructs a tuple by adding a value v at the end of t
+  //!
+  //! @param t Base tuple
+  //! @param v Value to insert in front of t
+  //! @return A tuple composed of all elements of t in order followed by v.
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<product_type Tuple, typename T> struct push_back;
+  //!
+  //!   template<product_type Tuple, typename T>
+  //!   using push_back_t = typename push_back<Tuple,T>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::push_back
+  //!
+  //! ## Example
+  //! @include doc/push_back.cpp
+  //================================================================================================
   template<product_type Tuple, typename T>
   [[nodiscard]] constexpr auto push_back(Tuple const& t, T&& v)
   {
@@ -1117,6 +1488,29 @@ namespace kumi
     (std::make_index_sequence<Tuple::size()>());
   }
 
+  //================================================================================================
+  //! @ingroup generators
+  //! @brief Remove the last (if any) element of a kumi::product_type.
+  //!
+  //! @param t Base tuple
+  //! @return A tuple composed of all elements of t except its last. Has no effect on empty t.
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<product_type Tuple> struct pop_back;
+  //!
+  //!   template<product_type Tuple>
+  //!   using pop_back_t = typename pop_back<Tuple>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::pop_back
+  //!
+  //! ## Example
+  //! @include doc/pop_back.cpp
+  //================================================================================================
   template<product_type Tuple>
   [[nodiscard]] constexpr auto pop_back(Tuple const& t)
   {
@@ -1160,7 +1554,27 @@ namespace kumi
   }
 
   //================================================================================================
-  // Flatten nested tuples : one layer at a time or recursively
+  //! @ingroup generators
+  //! @brief Converts a tuple of tuples into a tuple of all elements.
+  //!
+  //! @param ts Tuple to flatten
+  //! @return A tuple composed of all elements of t flattened non-recursively
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<product_type Tuple> struct flatten;
+  //!
+  //!   template<product_type Tuple>
+  //!   using flatten_t = typename flatten<Tuple>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::flatten
+  //!
+  //! ## Example
+  //! @include doc/flatten.cpp
   //================================================================================================
   template<product_type Tuple> [[nodiscard]] constexpr auto flatten(Tuple const &ts)
   {
@@ -1182,6 +1596,34 @@ namespace kumi
     }
   }
 
+  //================================================================================================
+  //! @ingroup generators
+  //! @brief Recursively converts a tuple of tuples into a tuple of all elements.
+  //!
+  //! Recursively converts a tuple of tuples `t` into a tuple of all elements of said tuples.
+  //! If the Callable object f is provided, non-tuple elements are processed by `f` before being
+  //! inserted.
+  //!
+  //! @param ts Tuple to flatten
+  //! @param f  Optional Callable object to apply when a sub-tuple is flattened
+  //! @return A tuple composed of all elements of t flattened recursively
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<product_type Tuple, typename Func = void> struct flatten_all;
+  //!
+  //!   template<product_type Tuple, typename Func = void>
+  //!   using flatten_all_t = typename flatten_all<Tuple, Func>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::flatten_all
+  //!
+  //! ## Example
+  //! @include doc/flatten_all.cpp
+  //================================================================================================
   template<product_type Tuple> [[nodiscard]] constexpr auto flatten_all(Tuple&& ts)
   {
     if constexpr(sized_product_type<Tuple,0>) return ts;
@@ -1202,6 +1644,7 @@ namespace kumi
     }
   }
 
+  /// @overload
   template<product_type Tuple, typename Func>
   [[nodiscard]] constexpr auto flatten_all(Tuple&& ts, Func&& f)
   {
@@ -1227,7 +1670,7 @@ namespace kumi
 
   namespace result
   {
-    template<product_type Tuple, typename Func = void> struct flatten
+    template<product_type Tuple> struct flatten
     {
       using type = decltype( kumi::flatten( std::declval<Tuple>() ) );
     };
@@ -1249,7 +1692,27 @@ namespace kumi
   }
 
   //================================================================================================
-  // Return a tuple of pointer to flattened fields of a tuple
+  //! @ingroup generators
+  //! @brief Convert a kumi::product_type to a flat tuple of pointers to each its components.
+  //!
+  //! @param ts Tuple to convert
+  //! @return A flat tuple composed of pointers to each elements of t.
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<product_type Tuple> struct as_flat_ptr;
+  //!
+  //!   template<product_type Tuple>
+  //!   using as_flat_ptr_t = typename as_flat_ptr<Tuple>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::as_flat_ptr
+  //!
+  //! ## Example
+  //! @include doc/as_flat_ptr.cpp
   //================================================================================================
   template<product_type Tuple>
   [[nodiscard]] auto as_flat_ptr(Tuple&& t) noexcept
@@ -1257,12 +1720,43 @@ namespace kumi
     return kumi::flatten_all(KUMI_FWD(t), [](auto& m) { return &m; });
   }
 
+  namespace result
+  {
+    template<product_type T> struct as_flat_ptr
+    {
+      using type = decltype( kumi::as_flat_ptr( std::declval<T>() ) );
+    };
+
+    template<product_type T>
+    using as_flat_ptr_t = typename as_flat_ptr<T>::type;
+  }
+
   //================================================================================================
-  // Zip multiple tuples contents
+  //! @ingroup generators
+  //! @brief Constructs a tuple where the ith element is the tuple of all ith elements of ts...
+  //!
+  //! @param t0 Tuple to convert
+  //! @param ts Tuples to convert
+  //! @return The tuple of all combination of elements from t0, ts...
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<product_type Tuple> struct zip;
+  //!
+  //!   template<product_type Tuple>
+  //!   using zip_t = typename zip<Tuple>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::zip
+  //!
+  //! ## Example
+  //! @include doc/zip.cpp
   //================================================================================================
-  template<product_type T0, product_type... Ts>
-  requires((size<T0>::value == size<Ts>::value) && ...)
-      [[nodiscard]] constexpr auto zip(T0 const &t0, Ts const &...tuples)
+  template<product_type T0, sized_product_type<size_v<T0>>... Ts>
+  [[nodiscard]] constexpr auto zip(T0 const &t0, Ts const &...tuples)
   {
     return kumi::map([](auto const &m0, auto const &...ms) { return kumi::make_tuple(m0, ms...); },
                      t0,
@@ -1281,8 +1775,29 @@ namespace kumi
     using zip_t = typename zip<T0,Ts...>::type;
   }
 
+
   //================================================================================================
-  // Transpose a tuple of tuples
+  //! @ingroup generators
+  //! @brief Transpose a tuple of tuples by shifting elements in their transposed position
+  //!
+  //! @param t Tuple to transpose
+  //! @return A tuple containing the transposed elements of t.
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<product_type Tuple> struct transpose;
+  //!
+  //!   template<product_type Tuple>
+  //!   using transpose_t = typename transpose<Tuple>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::transpose
+  //!
+  //! ## Example
+  //! @include doc/transpose.cpp
   //================================================================================================
   template<product_type Tuple> [[nodiscard]] constexpr auto transpose(Tuple const &t)
   {
@@ -1303,8 +1818,7 @@ namespace kumi
 
   namespace result
   {
-    template<product_type Tuple>
-    struct transpose
+    template<product_type Tuple> struct transpose
     {
       using type = decltype( kumi::transpose( std::declval<Tuple>() ) );
     };
@@ -1313,8 +1827,34 @@ namespace kumi
     using transpose_t = typename transpose<Tuple>::type;
   }
 
-  //================================================================================================
-  // Reorder elements of a tuple
+//================================================================================================
+  //! @ingroup generators
+  //! @brief Reorder elements of a kumi::product_type
+  //!
+  //! This function does not participate in overload resolution if any IDx is outside [0, size_v<T>[.
+  //!
+  //! @note Nothing prevent the number of reordered index to be lesser or greater than t size or
+  //!       the fact they can appear multiple times.
+  //!
+  //! @tparam Idx Reordered index of elements
+  //! @param  t kumi::product_type to reorder
+  //! @return A tuple equivalent to kumi::make_tuple(t[index<Idx>]...);
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<product_type Tuple,std::size_t... Idx> struct reorder;
+  //!
+  //!   template<product_type Tuple,std::size_t... Idx>
+  //!   using reorder_t = typename reorder<Tuple,Idx...>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::reorder
+  //!
+  //! ## Example
+  //! @include doc/reorder.cpp
   //================================================================================================
   template<std::size_t... Idx, product_type Tuple>
   requires((Idx < size<Tuple>::value) && ...) [[nodiscard]] constexpr auto reorder(Tuple &&t)
@@ -1335,16 +1875,37 @@ namespace kumi
   }
 
   //================================================================================================
-  // Generate tuples
-  //================================================================================================
   namespace detail
   {
     template<std::size_t N, typename T>
     constexpr auto const& eval(T const& v) noexcept { return v; }
   }
 
-  template<std::size_t N, typename T>
-  [[nodiscard]] constexpr auto generate(T const& v) noexcept
+  //================================================================================================
+  //! @ingroup generators
+  //! @brief Creates a kumi::tuple containing `N` copies of `v`.
+  //!
+  //! @tparam N Number of replications
+  //! @param  v Value to replicate
+  //! @return A tuple containing `N` copy of `v`
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<std::size_t N, typename T> struct generate;
+  //!
+  //!   template<std::size_t N, typename T>
+  //!   using generate_t = typename generate<N, T>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::generate
+  //!
+  //! ## Example
+  //! @include doc/generate.cpp
+  //================================================================================================
+  template<std::size_t N, typename T> [[nodiscard]] constexpr auto generate(T const& v) noexcept
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>)
     {
@@ -1352,8 +1913,32 @@ namespace kumi
     }(std::make_index_sequence<N>{});
   }
 
-  template<std::size_t N, typename T>
-  [[nodiscard]] constexpr auto iota(T v) noexcept
+
+  //================================================================================================
+  //! @ingroup generators
+  //! @brief Creates a kumi::tuple containing an increasing ramp of values.
+  //!
+  //! @tparam N Number of replications
+  //! @param  v Seed value
+  //! @return A tuple containing `{v, v + 1, ..., v + N-1}`
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<std::size_t N, typename T> struct iota;
+  //!
+  //!   template<std::size_t N, typename T>
+  //!   using iota_t = typename iota<N, T>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::iota
+  //!
+  //! ## Example
+  //! @include doc/iota.cpp
+  //================================================================================================
+  template<std::size_t N, typename T> [[nodiscard]] constexpr auto iota(T v) noexcept
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>)
     {
@@ -1583,8 +2168,6 @@ namespace kumi
   }
 
   //================================================================================================
-  // Traits for manipulating tuple
-  //================================================================================================
   namespace detail
   {
     template< product_type Tuple
@@ -1611,6 +2194,30 @@ namespace kumi
     };
   }
 
+  //================================================================================================
+  //! @ingroup utility
+  //! @brief Generate a kumi::tuple type from a kumi::product_type
+  //!
+  //! Compute the exact kumi::tuple type containing the same element as `Tuple`, an arbitrary type
+  //! modeling kumi::product_type. A template meta-function can be optionally passed to be applied
+  //! to each of those types when types are computed.
+  //!
+  //! @tparam Tuple kumi::product_type to tranform
+  //! @tparam Meta  Unary template meta-function to apply to each types.
+  //!               Defaults to `std::type_identity`
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<product_type Tuple, template<typename...> class Meta = std::type_identity>
+  //!   using as_tuple_t = typename as_tuple<Tuple, Meta>::type;
+  //! }
+  //! @endcode
+  //!
+  //! ## Example:
+  //! @include doc/as_tuple.cpp
+  //================================================================================================
   template<typename Tuple, template<typename...> class Meta = std::type_identity>
   struct as_tuple : detail::as_tuple< Tuple
                                     , std::make_index_sequence<kumi::size<Tuple>::value>
