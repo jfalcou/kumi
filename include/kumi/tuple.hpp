@@ -40,8 +40,8 @@ namespace kumi
   //!   @defgroup transforms Tuple Transformations
   //!   @brief    Algorithms applying transformation to tuple
   //!
-  //!   @defgroup predicates Tuple Predicates
-  //!   @brief    Algorithms computing predicates over tuples
+  //!   @defgroup queries Tuple Queries
+  //!   @brief    Algorithms querying properties from tuples
   //!
   //!   @defgroup reductions Tuple Generalized Reductions
   //!   @brief    Algorithms performing reductions over tuples
@@ -1966,33 +1966,76 @@ namespace kumi
   }
 
   //================================================================================================
-  // Max of properties on tuple types
+  //! @ingroup reductions
+  //! @brief Computes the maximum value of applications of f to all elements of t.
+  //! @param t Tuple to inspect
+  //! @param f Unary Callable object
+  //! @return The maximum value of f over all elements of t
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T, typename F> struct max;
+  //!
+  //!   template<typename T, typename F>
+  //!   using max_t = typename max<T, F>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the type returned by a call to kumi::max.
+  //!
+  //! ## Example:
+  //! @include doc/max.cpp
   //================================================================================================
   template<typename T, typename F>
-  [[nodiscard]] constexpr auto max(T const& data, F func) noexcept
+  [[nodiscard]] constexpr auto max(T const& t, F f) noexcept
   {
-    if constexpr ( !kumi::product_type<T> ) return func(data);
-    else if constexpr( T::size() == 1 )     return func( get<0>(data) );
+    if constexpr ( !kumi::product_type<T> ) return f(t);
+    else if constexpr( T::size() == 1 )     return f( get<0>(t) );
     else
     {
-      auto base = func( get<0>(data) );
-      return kumi::fold_left( [func]<typename U>(auto cur, U const& u)
+      auto base = f( get<0>(t) );
+      return kumi::fold_left( [f]<typename U>(auto cur, U const& u)
                               {
-                                return cur > func(u) ? cur : func(u);
+                                return cur > f(u) ? cur : f(u);
                               }
-                            , data, base
+                            , t, base
                             );
     }
   }
 
+  //================================================================================================
+  //! @ingroup reductions
+  //! @brief Computes the maximum value of applications of f to all elements of kumi::flatten_all(t).
+  //! @param t Tuple to inspect
+  //! @param f Unary Callable object
+  //! @return The maximum value of f over all elements of a flattened version of t
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T, typename F> struct max_flat;
+  //!
+  //!   template<typename T, typename F>
+  //!   using max_flat_t = typename max_flat<T, F>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the type returned by a call to kumi::max_flat.
+  //!
+  //! ## Example:
+  //! @include doc/max_flat.cpp
+  //================================================================================================
   template<typename T, typename F>
-  [[nodiscard]] constexpr auto max_flat(T const& data, F func) noexcept
+  [[nodiscard]] constexpr auto max_flat(T const& t, F f) noexcept
   {
-    if constexpr ( !kumi::product_type<T> ) return func(data);
+    if constexpr ( !kumi::product_type<T> ) return f(t);
     else
     {
-      auto flat_data = kumi::flatten_all(data);
-      return max(flat_data, func);
+      auto flat_t = kumi::flatten_all(t);
+      return max(flat_t, f);
     }
   }
 
@@ -2013,33 +2056,76 @@ namespace kumi
   }
 
   //================================================================================================
-  // Min of properties on tuple types
+  //! @ingroup reductions
+  //! @brief Computes the minimum value of applications of f to all elements of t.
+  //! @param t Tuple to inspect
+  //! @param f Unary Callable object
+  //! @return The minimum value of f over all elements of t
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T, typename F> struct min;
+  //!
+  //!   template<typename T, typename F>
+  //!   using min_t = typename min<T, F>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the type returned by a call to kumi::min.
+  //!
+  //! ## Example:
+  //! @include doc/min.cpp
   //================================================================================================
   template<typename T, typename F>
-  [[nodiscard]] constexpr auto min(T const& data, F func) noexcept
+  [[nodiscard]] constexpr auto min(T const& t, F f) noexcept
   {
-    if constexpr ( !kumi::product_type<T> ) return func(data);
-    else if constexpr( T::size() == 1 )     return func( get<0>(data) );
+    if constexpr ( !kumi::product_type<T> ) return f(t);
+    else if constexpr( T::size() == 1 )     return f( get<0>(t) );
     else
     {
-      auto base = func( get<0>(data) );
-      return kumi::fold_left( [func]<typename U>(auto cur, U const& u)
+      auto base = f( get<0>(t) );
+      return kumi::fold_left( [f]<typename U>(auto cur, U const& u)
                               {
-                                return cur < func(u) ? cur : func(u);
+                                return cur < f(u) ? cur : f(u);
                               }
-                            , data, base
+                            , t, base
                             );
     }
   }
 
+  //================================================================================================
+  //! @ingroup reductions
+  //! @brief Computes the minimum value of applications of f to all elements of kumi::flatten_all(t).
+  //! @param t Tuple to inspect
+  //! @param f Unary Callable object
+  //! @return The minimum value of f over all elements of a flattened version of t
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T, typename F> struct min_flat;
+  //!
+  //!   template<typename T, typename F>
+  //!   using min_flat_t = typename min_flat<T, F>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the type returned by a call to kumi::min_flat.
+  //!
+  //! ## Example:
+  //! @include doc/min_flat.cpp
+  //================================================================================================
   template<typename T, typename F>
-  [[nodiscard]] constexpr auto min_flat(T const& data, F func) noexcept
+  [[nodiscard]] constexpr auto min_flat(T const& t, F f) noexcept
   {
-    if constexpr ( !kumi::product_type<T> ) return func(data);
+    if constexpr ( !kumi::product_type<T> ) return f(t);
     else
     {
-      auto flat_data = kumi::flatten_all(data);
-      return min(flat_data, func);
+      auto flat_t = kumi::flatten_all(t);
+      return min(flat_t, f);
     }
   }
 
@@ -2060,7 +2146,10 @@ namespace kumi
   }
 
   //================================================================================================
-  // Adapt a template meta-function as a callable
+  //! @ingroup utility
+  //! @brief Convert a unary template meta-program in a running predicate
+  //! @tparam Pred Unary template meta-program to convert.
+  //! @return A Callable Object applying Pred to the type of its arguments
   //================================================================================================
   template<template<class> class Pred> [[nodiscard]] constexpr auto predicate() noexcept
   {
@@ -2068,40 +2157,88 @@ namespace kumi
   }
 
   //================================================================================================
-  // General boolean predicates
+  //! @ingroup queries
+  //! @brief  Checks if unary predicate p returns true for all elements in the tuple t.
+  //! @param  t Tuple to process
+  //! @param  p Unary predicate. p must return a value convertible to `bool` for every element of t.
+  //! @return `true` if all elements of t satisfy p.
+  //! ## Example:
+  //! @include doc/all_of.cpp
   //================================================================================================
   template<typename Pred, product_type Tuple>
-  [[nodiscard]] constexpr bool all_of( Tuple const& ts, Pred p) noexcept
+  [[nodiscard]] constexpr bool all_of( Tuple const& t, Pred p) noexcept
   {
-    return kumi::apply( [&](auto const&... m) { return (p(m) && ... && true); }, ts );
+    return kumi::apply( [&](auto const&... m) { return (p(m) && ... && true); }, t );
   }
 
+  //================================================================================================
+  //! @ingroup queries
+  //! @brief  Checks if unary predicate p returns true for at least one element in the tuple t.
+  //! @param  t Tuple to process
+  //! @param  p Unary predicate. p must return a value convertible to `bool` for every element of t.
+  //! @return `true` if at least one of elements of t satisfy p.
+  //! ## Example:
+  //! @include doc/any_of.cpp
+  //================================================================================================
   template<typename Pred, product_type Tuple>
   [[nodiscard]] constexpr bool any_of( Tuple const& ts, Pred p) noexcept
   {
     return kumi::apply( [&](auto const&... m) { return (p(m) || ... || false); }, ts );
   }
 
+  //================================================================================================
+  //! @ingroup queries
+  //! @brief  Checks if unary predicate p returns true for at no elements in the tuple t.
+  //! @param  t Tuple to process
+  //! @param  p Unary predicate. p must return a value convertible to `bool` for every element of t.
+  //! @return `true` if at no elements of t satisfy p.
+  //! ## Example:
+  //! @include doc/none_of.cpp
+  //================================================================================================
   template<typename Pred, product_type Tuple>
   [[nodiscard]] constexpr bool none_of( Tuple const& ts, Pred p) noexcept
   {
     return !any_of(ts,p);
   }
 
+  //================================================================================================
+  //! @ingroup queries
+  //! @brief  Counts the number of elements of t satisfying predicates p.
+  //! @param  t Tuple to process
+  //! @param  p Unary predicate. p must return a value convertible to `bool` for every element of t.
+  //! @return Number of elements satisfying the condition.
+  //! ## Example:
+  //! @include doc/count_if.cpp
+  //================================================================================================
   template<typename Pred, product_type Tuple>
   [[nodiscard]] constexpr std::size_t count_if( Tuple const& ts, Pred p) noexcept
   {
     return kumi::apply( [&](auto const&... m) { return ( (p(m)? 1 : 0)+ ... + 0); }, ts );
   }
 
+  //================================================================================================
+  //! @ingroup queries
+  //! @brief  Counts the number of elements of t not equivalent to false.
+  //! @param  t Tuple to process
+  //! @return Number of elements not equivalent to `false`.
+  //! ## Example:
+  //! @include doc/count.cpp
+  //================================================================================================
   template<product_type Tuple>
   [[nodiscard]] constexpr std::size_t count( Tuple const& ts ) noexcept
   {
-    return count_if(ts, [](auto const& m) { return !!m;} );
+    return count_if(ts, [](auto const& m) { return static_cast<bool>(m); } );
   }
 
   //================================================================================================
-  // Return the index of a value which type satisfies a given predicate
+  //! @ingroup queries
+  //! @brief  Return the index of a value which type satisfies a given predicate
+  //! @param  t Tuple to process
+  //! @param  p Unary predicate. p must return a value convertible to `bool` for every element of t.
+  //! @return Integral index of the element inside the tuple if present, kumi::size<tuple<T...>>::value
+  //!         otherwise.
+  //! ## Example:
+  //! @include doc/locate.cpp
   //================================================================================================
   template<typename Pred, typename... Ts>
   [[nodiscard]] constexpr auto locate( tuple<Ts...> const& t, Pred p ) noexcept
@@ -2117,8 +2254,6 @@ namespace kumi
     return kumi::apply(locator, t);
   }
 
-  //================================================================================================
-  // Cartesian product of N product types
   //================================================================================================
   namespace detail
   {
@@ -2139,21 +2274,45 @@ namespace kumi
   }
 
   // MSVC chokes on the other code for empty calls
+#if !defined(KUMI_DOXYGEN_INVOKED)
   [[nodiscard]] constexpr auto cartesian_product() { return kumi::tuple<>{}; }
+#endif
 
+  //================================================================================================
+  //! @ingroup generators
+  //! @brief  Return the Cartesian Product of all elements of its arguments product types
+  //! @param  ts Tuples to process
+  //! @return a tuple containing all the tuple build from all combination of all ts' elements
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<product_type... Tuples> struct cartesian_product;
+  //!
+  //!   template<product_type... Tuples>
+  //!   using cartesian_product_t = typename cartesian_product<Tuples...>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the type returned by a call to kumi::cartesian_product.
+  //!
+  //! ## Example:
+  //! @include doc/cartesian_product.cpp
+  //================================================================================================
   template<product_type... Ts>
-  [[nodiscard]] constexpr auto cartesian_product(Ts&&... ds)
+  [[nodiscard]] constexpr auto cartesian_product(Ts&&... ts)
   {
     auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>)
     {
       constexpr auto dg = detail::digits<sizeof...(Ts),kumi::size_v<Ts>...>(k);
       using tuple_t = kumi::tuple<std::tuple_element_t<dg.data[I],std::remove_cvref_t<Ts>>...>;
-      return tuple_t{kumi::get<dg.data[I]>(std::forward<Ts>(ds))...};
+      return tuple_t{kumi::get<dg.data[I]>(std::forward<Ts>(ts))...};
     };
 
     return [&]<std::size_t... N>(std::index_sequence<N...>)
     {
-      return kumi::make_tuple(maps( kumi::index<N>, std::make_index_sequence<sizeof...(ds)>{})...);
+      return kumi::make_tuple(maps( kumi::index<N>, std::make_index_sequence<sizeof...(ts)>{})...);
     }(std::make_index_sequence<(kumi::size_v<Ts> * ...)>{});
   }
 
