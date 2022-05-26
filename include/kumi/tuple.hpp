@@ -1445,7 +1445,7 @@ namespace kumi
   //! Computes the return type of a call to kumi::pop_front
   //!
   //! ## Example
-  //! @include doc/push_back.cpp
+  //! @include doc/pop_front.cpp
   //================================================================================================
   template<product_type Tuple>
   [[nodiscard]] constexpr auto pop_front(Tuple const& t)
