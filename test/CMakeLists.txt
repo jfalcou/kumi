@@ -28,7 +28,7 @@ function(generate_test file)
   string(REPLACE ".cpp" ".exe" base ${file})
   string(REPLACE "/"    "." base ${base})
   string(REPLACE "\\"   "." base ${base})
-  set(test "${base}")
+  set(test "kumi-${base}")
 
   add_executable( ${test}  "${file}")
   target_link_libraries(${test} PUBLIC kumi_test)
@@ -49,12 +49,6 @@ function(generate_test file)
             )
   endif()
 
-  set_target_properties ( ${test} PROPERTIES
-                          EXCLUDE_FROM_DEFAULT_BUILD TRUE
-                          EXCLUDE_FROM_ALL TRUE
-                          ${MAKE_UNIT_TARGET_PROPERTIES}
-                        )
-
   target_include_directories( ${test}
                               PRIVATE
                               ${tts_SOURCE_DIR}/include
@@ -62,10 +56,10 @@ function(generate_test file)
                               ${PROJECT_SOURCE_DIR}/include
                             )
 
-  add_dependencies(unit ${test})
+  add_dependencies(kumi-unit ${test})
 endfunction()
 
-add_custom_target(unit)
+add_custom_target(kumi-unit)
 
 ##==================================================================================================
 ## Actual tests

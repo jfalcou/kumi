@@ -9,8 +9,8 @@ build_script:
 - mkdir build
 - cd build
 - cmake -G "Visual Studio 17 2022" -A x64 ..
-- cmake --build . --target unit --verbose --config Debug
-- cmake --build . --target unit --verbose --config Release
+- cmake --build . --verbose --config Debug
+- cmake --build . --verbose --config Release
 
 test_script:
 - ctest -C Release -VV
