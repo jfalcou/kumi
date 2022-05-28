@@ -7,7 +7,7 @@ cmake .. -G Ninja -DCMAKE_CXX_COMPILER="$1"
 echo "::endgroup::"
 
 echo "::group::Compiling test" ;
-ninja unit -k 0 ;
+ninja -k 0 ;
 if [ "$?" -ne "0" ]
 then
   echo "::error Tests can not be compiled!" ;
