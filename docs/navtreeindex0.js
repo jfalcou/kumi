@@ -85,6 +85,7 @@ var NAVTREEINDEX0 =
 "index.html#autotoc_md73":[0,0],
 "index.html#autotoc_md74":[0,1],
 "licence.html":[3],
+"licence.html#licence":[3,0],
 "md_kumi_doc_page01_setup.html":[1],
 "md_kumi_doc_page01_setup.html#autotoc_md76":[1,0],
 "md_kumi_doc_page01_setup.html#autotoc_md77":[1,1],

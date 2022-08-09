@@ -52,7 +52,9 @@ var NAVTREE =
         [ "First autonomous public release.", "changelog.html#autotoc_md89", null ]
       ] ]
     ] ],
-    [ "Licence", "licence.html", null ],
+    [ "Licence", "licence.html", [
+      [ "Licence", "licence.html#licence", null ]
+    ] ],
     [ "Modules", "modules.html", "modules" ],
     [ "Namespaces", "namespaces.html", [
       [ "Namespace List", "namespaces.html", "namespaces_dup" ],

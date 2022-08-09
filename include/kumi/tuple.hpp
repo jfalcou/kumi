@@ -1,8 +1,8 @@
 //==================================================================================================
 /*
   KUMI - Compact Tuple Tools
-  Copyright : KUMI Contributors & Maintainers
-  SPDX-License-Identifier: MIT
+  Copyright : KUMI Project Contributors
+  SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
 #ifndef KUMI_TUPLE_HPP_INCLUDED

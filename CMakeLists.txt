@@ -1,7 +1,7 @@
 ##==================================================================================================
 ##  KUMI - Compact C++20 Tuple Toolbox
-##  Copyright : KUMI Contributors & Maintainers
-##  SPDX-License-Identifier: MIT
+##  Copyright : KUMI Project Contributors
+##  SPDX-License-Identifier: BSL-1.0
 ##==================================================================================================
 cmake_minimum_required(VERSION 3.2)
 
