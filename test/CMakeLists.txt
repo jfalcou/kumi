@@ -14,6 +14,7 @@ if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   target_compile_options( kumi_test INTERFACE /W3 /EHsc)
 else()
   target_compile_options( kumi_test INTERFACE -Werror -Wall -Wextra)
+  set(KUMI_FORCE_STANDALONE 1)
 endif()
 
 target_include_directories( kumi_test INTERFACE
@@ -33,6 +34,10 @@ function(generate_test file)
   add_executable( ${test}  "${file}")
   target_link_libraries(${test} PUBLIC kumi_test)
 
+  if(KUMI_FORCE_STANDALONE)
+    add_dependencies(${test} kumi-standalone)
+  endif()
+
   set_property( TARGET ${test}
                 PROPERTY RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/unit"
               )
@@ -40,12 +45,12 @@ function(generate_test file)
   if (CMAKE_CROSSCOMPILING_CMD)
     add_test( NAME ${test}
               WORKING_DIRECTORY "${PROJECT_BINARY_DIR}/unit"
-              COMMAND ${CMAKE_CROSSCOMPILING_CMD} $<TARGET_FILE:${test}> --no-color --pass
+              COMMAND ${CMAKE_CROSSCOMPILING_CMD} $<TARGET_FILE:${test}>
             )
   else()
     add_test( NAME ${test}
               WORKING_DIRECTORY "${PROJECT_BINARY_DIR}/unit"
-              COMMAND $<TARGET_FILE:${test}> --no-color --pass
+              COMMAND $<TARGET_FILE:${test}>
             )
   endif()
 

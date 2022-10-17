@@ -62,14 +62,38 @@ if( KUMI_BUILD_DOCS )
     message( STATUS "[kumi] Doxygen need to be installed to generate the doxygen documentation")
   endif (DOXYGEN_FOUND)
 
-
   if (DOXYGEN_FOUND)
     set(DOXYGEN_CONFIG ${PROJECT_SOURCE_DIR}/doc/Doxyfile)
     add_custom_target ( kumi-doxygen
-      COMMAND ${DOXYGEN_EXECUTABLE} ${DOXYGEN_CONFIG}
+      COMMAND KUMI_DOXYGEN_OUPUT=../docs ${DOXYGEN_EXECUTABLE} ${DOXYGEN_CONFIG}
       WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/doc
       COMMENT "[kumi] Generating API documentation with Doxygen"
       VERBATIM
     )
+
+    add_custom_target (  kumi-doxygen-local
+                        COMMAND KUMI_DOXYGEN_OUPUT=${PROJECT_BINARY_DIR}/docs ${DOXYGEN_EXECUTABLE} ${DOXYGEN_CONFIG}
+                        WORKING_DIRECTORY ${PROJECT_SOURCE_DIR}/doc
+                        COMMENT "[kumi] Generating API documentation with Doxygen - Local version"
+                        VERBATIM
+                      )
   endif (DOXYGEN_FOUND)
 endif()
+
+
+##==================================================================================================
+## Standalone generation
+##==================================================================================================
+add_custom_command(OUTPUT tuple.hpp
+  COMMAND "${CMAKE_CURRENT_SOURCE_DIR}/src/embed.py"
+          ${CMAKE_CURRENT_SOURCE_DIR}/src/kumi/tuple.hpp
+          -I src/
+          -o ${CMAKE_CURRENT_SOURCE_DIR}/include/kumi/tuple.hpp
+          --include-match kumi/*
+
+  WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+  COMMENT "Generating standalone headers"
+  VERBATIM
+)
+
+add_custom_target(kumi-standalone DEPENDS tuple.hpp)
