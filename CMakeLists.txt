@@ -73,3 +73,21 @@ if( KUMI_BUILD_DOCS )
     )
   endif (DOXYGEN_FOUND)
 endif()
+
+
+##==================================================================================================
+## Standalone generation
+##==================================================================================================
+add_custom_command(OUTPUT tuple.hpp
+  COMMAND "${CMAKE_CURRENT_SOURCE_DIR}/src/embed.py"
+          ${CMAKE_CURRENT_SOURCE_DIR}/src/kumi/tuple.hpp
+          -I src/
+          -o ${CMAKE_CURRENT_SOURCE_DIR}/include/kumi/tuple.hpp
+          --include-match kumi/*
+
+  WORKING_DIRECTORY "${CMAKE_CURRENT_SOURCE_DIR}"
+  COMMENT "Generating standalone headers"
+  VERBATIM
+)
+
+add_custom_target(kumi-standalone DEPENDS tuple.hpp)
