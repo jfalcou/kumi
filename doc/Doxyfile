@@ -63,7 +63,7 @@ INTERNAL_DOCS          = NO
 CASE_SENSE_NAMES       = YES
 HIDE_SCOPE_NAMES       = NO
 HIDE_COMPOUND_REFERENCE= NO
-SHOW_INCLUDE_FILES     = YES
+SHOW_INCLUDE_FILES     = NO
 
 # If the SHOW_GROUPED_MEMB_INC tag is set to YES then Doxygen will add for each
 # grouped member an include statement to the documentation, telling the reader
@@ -682,8 +682,7 @@ HTML_EXTRA_STYLESHEET  += doxygen-awesome-sidebar-only.css
 # files will be copied as-is; there are no commands or markers available.
 # This tag requires that the tag GENERATE_HTML is set to YES.
 
-HTML_EXTRA_FILES   = doxystrap.js
-HTML_EXTRA_FILES  += godbolt.js
+HTML_EXTRA_FILES   = godbolt.js
 HTML_EXTRA_FILES  += fragment.js
 HTML_EXTRA_FILES  += paragraph.js
 HTML_COLORSTYLE_HUE    = 293
