@@ -3,13 +3,21 @@
 ##  Copyright : KUMI Project Contributors
 ##  SPDX-License-Identifier: BSL-1.0
 ##==================================================================================================
-cmake_minimum_required(VERSION 3.2)
+cmake_minimum_required(VERSION 3.18)
+enable_testing()
 
 ##==================================================================================================
 ## Setup project
 ##==================================================================================================
 project(kumi LANGUAGES CXX)
-set(PROJECT_VERSION 0.1.0)
+
+set(KUMI_MAJOR_VERSION 2)
+set(KUMI_MINOR_VERSION 1)
+set(KUMI_PATCH_VERSION 0)
+set(KUMI_VERSION ${KUMI_MAJOR_VERSION}.${KUMI_MINOR_VERSION}.${KUMI_PATCH_VERSION})
+
+set(PROJECT_VERSION   ${KUMI_VERSION})
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake )
 
 ##==================================================================================================
 ## No in-source build
@@ -26,21 +34,14 @@ install(DIRECTORY ${PROJECT_SOURCE_DIR}/include/kumi TYPE INCLUDE)
 ## =================================================================================================
 ## Exporting target for external use
 ## =================================================================================================
-add_library(kumi_lib INTERFACE)
-target_include_directories(kumi_lib INTERFACE $<BUILD_INTERFACE:${PROJECT_SOURCE_DIR}/include>)
-
-if (CMAKE_CXX_COMPILER_ID STREQUAL "Clang")
-target_compile_options( kumi_lib INTERFACE -Wno-gnu-string-literal-operator-template)
-endif()
-
-target_compile_features(kumi_lib INTERFACE cxx_std_20)
-add_library(kumi::kumi ALIAS kumi_lib)
+include(kumi-install)
 
 ##==================================================================================================
 ## Options
 ##==================================================================================================
-option( KUMI_BUILD_TEST  "Build tests for kumi" ON )
-option( KUMI_BUILD_DOCS  "Build docs for kumi" OFF )
+option( KUMI_BUILD_TEST          "Build tests for kumi" ON )
+option( KUMI_BUILD_DOCUMENTATION "Build docs for kumi" OFF )
+option( KUMI_BUILD_INTEGRATION   "Build integration tests for kumi" OFF )
 
 ##==================================================================================================
 ## Test target
@@ -50,10 +51,15 @@ if( KUMI_BUILD_TEST )
   add_subdirectory(${PROJECT_SOURCE_DIR}/test/)
 endif()
 
+if( KUMI_BUILD_INTEGRATION )
+  include(CTest)
+  add_subdirectory(${PROJECT_SOURCE_DIR}/test/integration)
+endif()
+
 ##==================================================================================================
 ## Add Doxygen building target
 ##==================================================================================================
-if( KUMI_BUILD_DOCS )
+if( KUMI_BUILD_DOCUMENTATION )
   find_package(Doxygen QUIET)
 
   if (DOXYGEN_FOUND)
