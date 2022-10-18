@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Fetch current branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Testing KUMI with g++
         uses: ./.github/actions/run_tests
         with:
@@ -22,8 +22,26 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Fetch current branch
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
       - name: Testing KUMI with clang
         uses: ./.github/actions/run_tests
         with:
           compiler: 'clang++'
+
+  install:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        cfg:
+        - {test: Installation       , mode: 0 }
+        - {test: FetchContents      , mode: 1 }
+        - {test: CPM                , mode: 2 }
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v3
+      - name: Check KUMI works with ${{ matrix.cfg.test }}
+        uses: ./.github/actions/integration
+        with:
+          branch: '${{ github.head_ref }}'
+          mode: '${{ matrix.cfg.mode }}'
