@@ -124,15 +124,15 @@ $(document).ready(function(){initNavTree('conceptkumi_1_1sized__product__type__o
 <p>Concept specifying a type follows the Product Type semantic and has a size lower bound.  
 <a href="conceptkumi_1_1sized__product__type__or__more.html#details">More...</a></p>
 
-<p><code>#include &lt;kumi/tuple.hpp&gt;</code></p>
+<p><code>#include &lt;kumi/utils/concepts.hpp&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p >Concept specifying a type follows the Product Type semantic and has a size lower bound. </p>
 <p >A type <code>T</code> models <code><a class="el" href="conceptkumi_1_1sized__product__type.html" title="Concept specifying a type follows the Product Type semantic and has a known size.">kumi::sized_product_type</a>&lt;N&gt;</code> if it models <code><a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a></code> and has at least <code>N</code> elements. </p>
 </div><h2 class="groupheader">Concept definition</h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, std::<span class="keywordtype">size_t</span> N&gt;</div>
 <div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1sized__product__type__or__more.html">kumi::sized_product_type_or_more</a> =  <a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type&lt;T&gt;</a> &amp;&amp; (size&lt;T&gt;::value &gt;= N)</div>
-<div class="ttc" id="aconceptkumi_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1product__type.html">kumi::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:258</div></div>
-<div class="ttc" id="aconceptkumi_1_1sized__product__type__or__more_html"><div class="ttname"><a href="conceptkumi_1_1sized__product__type__or__more.html">kumi::sized_product_type_or_more</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic and has a size lower bound.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:278</div></div>
+<div class="ttc" id="aconceptkumi_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1product__type.html">kumi::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition:</b> concepts.hpp:48</div></div>
+<div class="ttc" id="aconceptkumi_1_1sized__product__type__or__more_html"><div class="ttname"><a href="conceptkumi_1_1sized__product__type__or__more.html">kumi::sized_product_type_or_more</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic and has a size lower bound.</div><div class="ttdef"><b>Definition:</b> concepts.hpp:68</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->

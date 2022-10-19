@@ -772,6 +772,86 @@ namespace kumi
 }
 namespace kumi
 {
+  namespace detail
+  {
+    template<typename F, typename T> struct foldable
+    {
+      F func;
+      T value;
+      template<typename W>
+      friend constexpr decltype(auto) operator>>(foldable &&x, foldable<F, W> &&y)
+      {
+        return detail::foldable {x.func, x.func(y.value, x.value)};
+      }
+      template<typename W>
+      friend constexpr decltype(auto) operator<<(foldable &&x, foldable<F, W> &&y)
+      {
+        return detail::foldable {x.func, x.func(x.value, y.value)};
+      }
+    };
+    template<class F, class T> foldable(const F &, T &&) -> foldable<F, T>;
+  }
+  template<product_type S1, sized_product_type<S1::size()> S2, typename T>
+  [[nodiscard]] constexpr auto inner_product(S1 const& s1, S2 const& s2, T init) noexcept
+  {
+    if constexpr(sized_product_type<S1,0>) return init;
+    else
+    {
+      return [&]<std::size_t... I>(std::index_sequence<I...>)
+      {
+        return (init + ... + (get<I>(s1) * get<I>(s2)));
+      }(std::make_index_sequence<size<S1>::value>());
+    }
+  }
+  template< product_type S1, sized_product_type<S1::size()> S2, typename T
+          , typename Sum, typename Prod
+          >
+  [[nodiscard]] constexpr auto inner_product( S1 const& s1, S2 const& s2, T init
+                                            , Sum sf, Prod pf
+                                            ) noexcept
+  {
+    if constexpr(sized_product_type<S1,0>) return init;
+    else
+    {
+      return [&]<std::size_t... I>(std::index_sequence<I...>)
+      {
+        return  (  detail::foldable {sf, pf(get<I>(KUMI_FWD(s1)),get<I>(KUMI_FWD(s2)))}
+                >> ...
+                >> detail::foldable {sf, init}
+                ).value;
+      }
+      (std::make_index_sequence<size<S1>::value>());
+    }
+  }
+  namespace result
+  {
+    template< product_type S1, sized_product_type<S1::size()> S2, typename T
+            , typename Sum, typename Prod
+            >
+    struct inner_product
+    {
+      using type = decltype ( kumi::inner_product ( std::declval<S1>(), std::declval<S2>()
+                                                  , std::declval<T>()
+                                                  , std::declval<Sum>(), std::declval<Prod>()
+                                                  )
+                            );
+    };
+    template< product_type S1, sized_product_type<S1::size()> S2, typename T>
+    struct inner_product<S1,S2,T,void,void>
+    {
+      using type = decltype ( kumi::inner_product ( std::declval<S1>(), std::declval<S2>()
+                                                  , std::declval<T>()
+                                                  )
+                            );
+    };
+    template< product_type S1, sized_product_type<S1::size()> S2, typename T
+            , typename Sum = void, typename Prod = void
+            >
+    using inner_product_t  = typename inner_product<S1,S2,T,Sum,Prod>::type;
+  }
+}
+namespace kumi
+{
   template<product_type Tuple, typename Function, sized_product_type<size<Tuple>::value>... Tuples>
   constexpr auto
   map(Function     f,
@@ -838,25 +918,6 @@ namespace kumi
 }
 namespace kumi
 {
-  namespace detail
-  {
-    template<typename F, typename T> struct foldable
-    {
-      F func;
-      T value;
-      template<typename W>
-      friend constexpr decltype(auto) operator>>(foldable &&x, foldable<F, W> &&y)
-      {
-        return detail::foldable {x.func, x.func(y.value, x.value)};
-      }
-      template<typename W>
-      friend constexpr decltype(auto) operator<<(foldable &&x, foldable<F, W> &&y)
-      {
-        return detail::foldable {x.func, x.func(x.value, y.value)};
-      }
-    };
-    template<class F, class T> foldable(const F &, T &&) -> foldable<F, T>;
-  }
   template<typename Function, product_type Tuple, typename Value>
   [[nodiscard]] constexpr auto fold_left(Function f, Tuple&& t, Value init)
   {

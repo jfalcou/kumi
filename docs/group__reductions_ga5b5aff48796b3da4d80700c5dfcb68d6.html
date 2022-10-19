@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>KUMI: kumi::std_tuple_compatible Concept Reference</title>
+<title>KUMI: kumi::inner_product</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -98,7 +98,7 @@ var searchBox = new SearchBox("searchBox", "search",'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('conceptkumi_1_1std__tuple__compatible.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__reductions_ga5b5aff48796b3da4d80700c5dfcb68d6.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -116,30 +116,97 @@ $(document).ready(function(){initNavTree('conceptkumi_1_1std__tuple__compatible.
 </iframe>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">kumi::std_tuple_compatible Concept Reference<div class="ingroups"><a class="el" href="group__tuple.html">Tuple types and function</a></div></div></div>
-</div><!--header-->
 <div class="contents">
+<a id="ga5b5aff48796b3da4d80700c5dfcb68d6" name="ga5b5aff48796b3da4d80700c5dfcb68d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga5b5aff48796b3da4d80700c5dfcb68d6">&#9670;&nbsp;</a></span>inner_product()</h2>
 
-<p>Concept specifying a type is a standard tuple-like type.  
-<a href="conceptkumi_1_1std__tuple__compatible.html#details">More...</a></p>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;product_type S1, sized_product_type&lt; S1::size()&gt; S2, typename T &gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr auto kumi::inner_product </td>
+          <td>(</td>
+          <td class="paramtype">S1 const &amp;&#160;</td>
+          <td class="paramname"><em>s1</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">S2 const &amp;&#160;</td>
+          <td class="paramname"><em>s2</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>init</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
-<p><code>#include &lt;kumi/utils/concepts.hpp&gt;</code></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p >Concept specifying a type is a standard tuple-like type. </p>
-</div><h2 class="groupheader">Concept definition</h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1std__tuple__compatible.html">kumi::std_tuple_compatible</a> =  <a class="code hl_concept" href="conceptkumi_1_1empty__tuple.html">empty_tuple&lt;T&gt;</a> || <a class="code hl_concept" href="conceptkumi_1_1non__empty__tuple.html">non_empty_tuple&lt;T&gt;</a></div>
-<div class="ttc" id="aconceptkumi_1_1empty__tuple_html"><div class="ttname"><a href="conceptkumi_1_1empty__tuple.html">kumi::empty_tuple</a></div><div class="ttdoc">Concept specifying a type is an empty standard tuple-like type.</div><div class="ttdef"><b>Definition:</b> concepts.hpp:32</div></div>
-<div class="ttc" id="aconceptkumi_1_1non__empty__tuple_html"><div class="ttname"><a href="conceptkumi_1_1non__empty__tuple.html">kumi::non_empty_tuple</a></div><div class="ttdoc">Concept specifying a type is non-empty standard tuple-like type.</div><div class="ttdef"><b>Definition:</b> concepts.hpp:22</div></div>
-<div class="ttc" id="aconceptkumi_1_1std__tuple__compatible_html"><div class="ttname"><a href="conceptkumi_1_1std__tuple__compatible.html">kumi::std_tuple_compatible</a></div><div class="ttdoc">Concept specifying a type is a standard tuple-like type.</div><div class="ttdef"><b>Definition:</b> concepts.hpp:38</div></div>
-</div><!-- fragment --></div><!-- contents -->
+<p>Computes inner product (i.e. sum of products) </p>
+<p >Computes the generalized sum of products of the elements of two product types. By default, <code>+</code> and <code>*</code> is used.</p>
+<dl class="section note"><dt>Note</dt><dd>Does not participate in overload resolution if tuples' size are not equal or if any of the binary operations can't be applied on the tuples' elements.</dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">s0</td><td>First tuple to operate on </td></tr>
+    <tr><td class="paramname">s1</td><td>Second tuple to operate on </td></tr>
+    <tr><td class="paramname">init</td><td>Initial value </td></tr>
+    <tr><td class="paramname">sum</td><td>Binary callable function to use as the sum operations </td></tr>
+    <tr><td class="paramname">prod</td><td>Binary callable function to use as the product operations </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>The inner product of <code>s1</code> and <code>s2</code> using the provided binary operations.</dd></dl>
+<h2><a class="anchor" id="autotoc_md19"></a>
+Helper type</h2>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;product_type S1, sized_product_type&lt;S1::size()&gt; S2, <span class="keyword">typename</span> T&gt;</div>
+<div class="line">  <span class="keyword">struct </span><a class="code hl_function" href="group__reductions_ga5b5aff48796b3da4d80700c5dfcb68d6.html#ga5b5aff48796b3da4d80700c5dfcb68d6">inner_product</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">template</span>&lt;product_type S1, sized_product_type&lt;S1::size()&gt; S2, <span class="keyword">typename</span> T</div>
+<div class="line">          , <span class="keyword">typename</span> Sum, <span class="keyword">typename</span> Prod</div>
+<div class="line">          &gt;</div>
+<div class="line">  <span class="keyword">struct </span><a class="code hl_function" href="group__reductions_ga5b5aff48796b3da4d80700c5dfcb68d6.html#ga5b5aff48796b3da4d80700c5dfcb68d6">inner_product</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">template</span>&lt;product_type S1, sized_product_type&lt;S1::size()&gt; S2, <span class="keyword">typename</span> T&gt;</div>
+<div class="line">  <span class="keyword">using </span>inner_product_t = <span class="keyword">typename</span> inner_product&lt;S1,S2,T&gt;::type;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">template</span>&lt; product_type S1, sized_product_type&lt;S1::size()&gt; S2, <span class="keyword">typename</span> T</div>
+<div class="line">          , <span class="keyword">typename</span> Sum, <span class="keyword">typename</span> Prod</div>
+<div class="line">          &gt;</div>
+<div class="line">  <span class="keyword">using </span>inner_product_t = <span class="keyword">typename</span> inner_product&lt;S1,S2,T,Sum,Prod&gt;::type;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__reductions_ga5b5aff48796b3da4d80700c5dfcb68d6_html_ga5b5aff48796b3da4d80700c5dfcb68d6"><div class="ttname"><a href="group__reductions_ga5b5aff48796b3da4d80700c5dfcb68d6.html#ga5b5aff48796b3da4d80700c5dfcb68d6">kumi::inner_product</a></div><div class="ttdeci">constexpr auto inner_product(S1 const &amp;s1, S2 const &amp;s2, T init) noexcept</div><div class="ttdoc">Computes inner product (i.e. sum of products)</div><div class="ttdef"><b>Definition:</b> inner_product.hpp:83</div></div>
+</div><!-- fragment --><p >Computes the return type of a call to <a class="el" href="group__transforms_ga08fd1535a151e381bebea9cd0956afad.html#ga08fd1535a151e381bebea9cd0956afad" title="Apply the Callable object f on each tuples&#39; elements.">kumi::map</a></p>
+<h2><a class="anchor" id="autotoc_md20"></a>
+Example</h2>
+<div class="fragment"></div><!-- fragment --> 
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li><li class="navelem"><a class="el" href="conceptkumi_1_1std__tuple__compatible.html">std_tuple_compatible</a></li>
+    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

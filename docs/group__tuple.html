@@ -176,18 +176,18 @@ template&lt;typename CharT , typename Traits &gt; </td></tr>
 <tr class="separator:gaf6739a069131e315597688e5b3cf5df9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader">Comparison operators</h2></td></tr>
-<tr class="memitem:gad6bb97b2d88a992485ccf2267b224f58"><td class="memTemplParams" colspan="2"><a id="gad6bb97b2d88a992485ccf2267b224f58" name="gad6bb97b2d88a992485ccf2267b224f58"></a>
+<tr class="memitem:ga5ff234ea2bc70980f4ab1aefc4f44af6"><td class="memTemplParams" colspan="2"><a id="ga5ff234ea2bc70980f4ab1aefc4f44af6" name="ga5ff234ea2bc70980f4ab1aefc4f44af6"></a>
 template&lt;sized_product_type&lt; sizeof...(Ts)&gt; Other&gt; <br />
-requires ( (sizeof...(Ts) != 0 ) &amp;&amp; detail::check_equality&lt;<a class="el" href="structkumi_1_1tuple.html">tuple</a>,Other&gt;() )</td></tr>
-<tr class="memitem:gad6bb97b2d88a992485ccf2267b224f58"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator==</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;self, Other const &amp;other) noexcept</td></tr>
-<tr class="memdesc:gad6bb97b2d88a992485ccf2267b224f58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares a tuple with an other <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a> for equality. <br /></td></tr>
-<tr class="separator:gad6bb97b2d88a992485ccf2267b224f58"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaaa17642665dcfcca3db80ffee704dbf4"><td class="memTemplParams" colspan="2"><a id="gaaa17642665dcfcca3db80ffee704dbf4" name="gaaa17642665dcfcca3db80ffee704dbf4"></a>
+requires ( (sizeof...(Ts) != 0 ) &amp;&amp; equality_comparable&lt;<a class="el" href="structkumi_1_1tuple.html">tuple</a>,Other&gt; )</td></tr>
+<tr class="memitem:ga5ff234ea2bc70980f4ab1aefc4f44af6"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator==</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;self, Other const &amp;other) noexcept</td></tr>
+<tr class="memdesc:ga5ff234ea2bc70980f4ab1aefc4f44af6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares a tuple with an other <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a> for equality. <br /></td></tr>
+<tr class="separator:ga5ff234ea2bc70980f4ab1aefc4f44af6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3d60f8ef9f2ddda93ab76a574672049c"><td class="memTemplParams" colspan="2"><a id="ga3d60f8ef9f2ddda93ab76a574672049c" name="ga3d60f8ef9f2ddda93ab76a574672049c"></a>
 template&lt;sized_product_type&lt; sizeof...(Ts)&gt; Other&gt; <br />
-requires ( (sizeof...(Ts) != 0 ) &amp;&amp; detail::check_equality&lt;<a class="el" href="structkumi_1_1tuple.html">tuple</a>,Other&gt;() )</td></tr>
-<tr class="memitem:gaaa17642665dcfcca3db80ffee704dbf4"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator!=</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;self, Other const &amp;other) noexcept</td></tr>
-<tr class="memdesc:gaaa17642665dcfcca3db80ffee704dbf4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares a tuple with an other <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a> for inequality. <br /></td></tr>
-<tr class="separator:gaaa17642665dcfcca3db80ffee704dbf4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+requires ( (sizeof...(Ts) != 0 ) &amp;&amp; equality_comparable&lt;<a class="el" href="structkumi_1_1tuple.html">tuple</a>,Other&gt; )</td></tr>
+<tr class="memitem:ga3d60f8ef9f2ddda93ab76a574672049c"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator!=</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;self, Other const &amp;other) noexcept</td></tr>
+<tr class="memdesc:ga3d60f8ef9f2ddda93ab76a574672049c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares a tuple with an other <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a> for inequality. <br /></td></tr>
+<tr class="separator:ga3d60f8ef9f2ddda93ab76a574672049c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad7f00141d92ec007df2cf911eab8fd68"><td class="memTemplParams" colspan="2"><a id="gad7f00141d92ec007df2cf911eab8fd68" name="gad7f00141d92ec007df2cf911eab8fd68"></a>
 template&lt;sized_product_type&lt; sizeof...(Ts)&gt; Other&gt; </td></tr>
 <tr class="memitem:gad7f00141d92ec007df2cf911eab8fd68"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator&lt;</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;lhs, Other const &amp;rhs) noexcept</td></tr>

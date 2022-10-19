@@ -120,7 +120,7 @@ $(document).ready(function(){initNavTree('md_kumi_doc_page01_setup.html',''); in
   <div class="headertitle"><div class="title">Setup </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><h1><a class="anchor" id="autotoc_md76"></a>
+<div class="textblock"><h1><a class="anchor" id="autotoc_md78"></a>
 Direct file download</h1>
 <ol type="1">
 <li>Download the one header file <code>kumi.hpp</code> : <div class="fragment"><div class="line">wget https://raw.githubusercontent.com/jfalcou/kumi/main/include/kumi.hpp</div>
@@ -129,7 +129,7 @@ Direct file download</h1>
 </ol>
 <p >Using <b>KUMI</b> boils down to including <code>kumi.hpp</code> and compile using C++20.</p>
 <div class="fragment"><div class="line">g++ my_app.cpp -I/path/to/kumi -std=c++20</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md77"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md79"></a>
 CMake FetchContent</h1>
 <p >You can also use CMake FetchContent operation and use the <code>kumi::kumi</code> library target that our CMake exports.</p>
 <div class="fragment"><div class="line">##==================================================================================================</div>
@@ -156,7 +156,7 @@ CMake FetchContent</h1>
 <div class="line">##==================================================================================================</div>
 <div class="line">add_executable( my_app my_app.cpp)</div>
 <div class="line">target_link_libraries(my_app kumi::kumi)</div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md78"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md80"></a>
 CPM Integration</h1>
 <p >You can install <b>KUMI</b> directly via <a href="https://github.com/cpm-cmake/CPM.cmake">CPM</a>. After <a href="https://github.com/cpm-cmake/CPM.cmake#adding-cpm">adding CPM to your CMake setup</a>, just add the following commands:</p>
 <div class="fragment"><div class="line">include(CPM)</div>

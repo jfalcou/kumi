@@ -157,7 +157,7 @@ requires (I0 &lt;= sizeof...(Ts))</div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A new <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> containing the two sub-tuple cut at index I.</dd></dl>
-<h2><a class="anchor" id="autotoc_md70"></a>
+<h2><a class="anchor" id="autotoc_md63"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
@@ -166,9 +166,9 @@ Helper type</h2>
 <div class="line">  <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I0, product_type Tuple&gt;</div>
 <div class="line">  <span class="keyword">using </span>split_t = <span class="keyword">typename</span> split&lt;I0,Tuple&gt;::type;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1tuple_a142f1f28a8907ddc91beb68ce3ec63e0_html_a142f1f28a8907ddc91beb68ce3ec63e0"><div class="ttname"><a href="structkumi_1_1tuple_a142f1f28a8907ddc91beb68ce3ec63e0.html#a142f1f28a8907ddc91beb68ce3ec63e0">kumi::tuple::split</a></div><div class="ttdeci">constexpr auto split(index_t&lt; I0 &gt; const &amp;) const noexcept</div><div class="ttdoc">Split a tuple into two.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:1016</div></div>
+<div class="ttc" id="astructkumi_1_1tuple_a142f1f28a8907ddc91beb68ce3ec63e0_html_a142f1f28a8907ddc91beb68ce3ec63e0"><div class="ttname"><a href="structkumi_1_1tuple_a142f1f28a8907ddc91beb68ce3ec63e0.html#a142f1f28a8907ddc91beb68ce3ec63e0">kumi::tuple::split</a></div><div class="ttdeci">constexpr auto split(index_t&lt; I0 &gt; const &amp;) const noexcept</div><div class="ttdoc">Split a tuple into two.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:514</div></div>
 </div><!-- fragment --><p >Computes the type returned by a call to split.</p>
-<h2><a class="anchor" id="autotoc_md71"></a>
+<h2><a class="anchor" id="autotoc_md64"></a>
 Example:</h2>
 <div class="fragment"><div class="line"><span class="comment">//==================================================================================================</span></div>
 <div class="line"><span class="comment">/*</span></div>
@@ -192,7 +192,7 @@ Example:</h2>
 <div class="line">  std::cout &lt;&lt; first  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; second &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:539</div></div>
+<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:31</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
