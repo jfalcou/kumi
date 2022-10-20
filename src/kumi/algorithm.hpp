@@ -36,6 +36,7 @@ namespace kumi
 #include <kumi/algorithm/find.hpp>
 #include <kumi/algorithm/flatten.hpp>
 #include <kumi/algorithm/generate.hpp>
+#include <kumi/algorithm/inner_product.hpp>
 #include <kumi/algorithm/map.hpp>
 #include <kumi/algorithm/reduce.hpp>
 #include <kumi/algorithm/minmax.hpp>

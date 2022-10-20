@@ -151,7 +151,7 @@ template&lt;product_type Tuple&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A tuple composed of all elements of t except its first. Has no effect on empty t.</dd></dl>
-<h2><a class="anchor" id="autotoc_md28"></a>
+<h2><a class="anchor" id="autotoc_md40"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
@@ -160,9 +160,9 @@ Helper type</h2>
 <div class="line">  <span class="keyword">template</span>&lt;product_type Tuple&gt;</div>
 <div class="line">  <span class="keyword">using </span>pop_front_t = <span class="keyword">typename</span> pop_front&lt;Tuple&gt;::type;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__generators_ga765ba6427ebaa29a76e435fabd799a6d_html_ga765ba6427ebaa29a76e435fabd799a6d"><div class="ttname"><a href="group__generators_ga765ba6427ebaa29a76e435fabd799a6d.html#ga765ba6427ebaa29a76e435fabd799a6d">kumi::pop_front</a></div><div class="ttdeci">constexpr auto pop_front(Tuple const &amp;t)</div><div class="ttdoc">Remove the first (if any) element of a kumi::product_type.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:1451</div></div>
+<div class="ttc" id="agroup__generators_ga765ba6427ebaa29a76e435fabd799a6d_html_ga765ba6427ebaa29a76e435fabd799a6d"><div class="ttname"><a href="group__generators_ga765ba6427ebaa29a76e435fabd799a6d.html#ga765ba6427ebaa29a76e435fabd799a6d">kumi::pop_front</a></div><div class="ttdeci">constexpr auto pop_front(Tuple const &amp;t)</div><div class="ttdoc">Remove the first (if any) element of a kumi::product_type.</div><div class="ttdef"><b>Definition:</b> push_pop.hpp:71</div></div>
 </div><!-- fragment --><p >Computes the return type of a call to <a class="el" href="group__generators_ga765ba6427ebaa29a76e435fabd799a6d.html#ga765ba6427ebaa29a76e435fabd799a6d" title="Remove the first (if any) element of a kumi::product_type.">kumi::pop_front</a></p>
-<h2><a class="anchor" id="autotoc_md29"></a>
+<h2><a class="anchor" id="autotoc_md41"></a>
 Example</h2>
 <div class="fragment"><div class="line"><span class="comment">//==================================================================================================</span></div>
 <div class="line"><span class="comment">/*</span></div>
@@ -182,7 +182,7 @@ Example</h2>
 <div class="line">  std::cout &lt;&lt; t                    &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__generators_ga765ba6427ebaa29a76e435fabd799a6d.html#ga765ba6427ebaa29a76e435fabd799a6d">kumi::pop_front</a>(t)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:539</div></div>
+<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:31</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

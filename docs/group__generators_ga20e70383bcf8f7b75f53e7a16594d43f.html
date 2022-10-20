@@ -151,7 +151,7 @@ template&lt;product_type... Tuples&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A tuple made of all element of all input tuples in order</dd></dl>
-<h2><a class="anchor" id="autotoc_md24"></a>
+<h2><a class="anchor" id="autotoc_md2"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
@@ -160,10 +160,10 @@ Helper type</h2>
 <div class="line">  <span class="keyword">template</span>&lt;<a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type</a>... Tuples&gt;</div>
 <div class="line">  <span class="keyword">using </span>cat_t = <span class="keyword">typename</span> <a class="code hl_function" href="group__generators_ga20e70383bcf8f7b75f53e7a16594d43f.html#ga20e70383bcf8f7b75f53e7a16594d43f">cat</a>&lt;Tuples...&gt;::type;</div>
 <div class="line">}</div>
-<div class="ttc" id="aconceptkumi_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1product__type.html">kumi::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:258</div></div>
-<div class="ttc" id="agroup__generators_ga20e70383bcf8f7b75f53e7a16594d43f_html_ga20e70383bcf8f7b75f53e7a16594d43f"><div class="ttname"><a href="group__generators_ga20e70383bcf8f7b75f53e7a16594d43f.html#ga20e70383bcf8f7b75f53e7a16594d43f">kumi::cat</a></div><div class="ttdeci">constexpr auto cat(Tuples &amp;&amp;... ts)</div><div class="ttdoc">Concatenates tuples in a single one.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:1346</div></div>
+<div class="ttc" id="aconceptkumi_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1product__type.html">kumi::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition:</b> concepts.hpp:48</div></div>
+<div class="ttc" id="agroup__generators_ga20e70383bcf8f7b75f53e7a16594d43f_html_ga20e70383bcf8f7b75f53e7a16594d43f"><div class="ttname"><a href="group__generators_ga20e70383bcf8f7b75f53e7a16594d43f.html#ga20e70383bcf8f7b75f53e7a16594d43f">kumi::cat</a></div><div class="ttdeci">constexpr auto cat(Tuples &amp;&amp;... ts)</div><div class="ttdoc">Concatenates tuples in a single one.</div><div class="ttdef"><b>Definition:</b> cat.hpp:36</div></div>
 </div><!-- fragment --><p >Computes the return type of a call to <a class="el" href="group__generators_ga20e70383bcf8f7b75f53e7a16594d43f.html#ga20e70383bcf8f7b75f53e7a16594d43f" title="Concatenates tuples in a single one.">kumi::cat</a></p>
-<h2><a class="anchor" id="autotoc_md25"></a>
+<h2><a class="anchor" id="autotoc_md3"></a>
 Example</h2>
 <div class="fragment"><div class="line"><span class="comment">//==================================================================================================</span></div>
 <div class="line"><span class="comment">/*</span></div>
@@ -186,7 +186,7 @@ Example</h2>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; b &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; c &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; abc &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:539</div></div>
+<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:31</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

@@ -151,7 +151,7 @@ template&lt;product_type Tuple&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A flat tuple composed of pointers to each elements of t.</dd></dl>
-<h2><a class="anchor" id="autotoc_md38"></a>
+<h2><a class="anchor" id="autotoc_md13"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
@@ -160,9 +160,9 @@ Helper type</h2>
 <div class="line">  <span class="keyword">template</span>&lt;product_type Tuple&gt;</div>
 <div class="line">  <span class="keyword">using </span>as_flat_ptr_t = <span class="keyword">typename</span> as_flat_ptr&lt;Tuple&gt;::type;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__generators_gaf7e27182e03bc27075557fe76ed5979d_html_gaf7e27182e03bc27075557fe76ed5979d"><div class="ttname"><a href="group__generators_gaf7e27182e03bc27075557fe76ed5979d.html#gaf7e27182e03bc27075557fe76ed5979d">kumi::as_flat_ptr</a></div><div class="ttdeci">auto as_flat_ptr(Tuple &amp;&amp;t) noexcept</div><div class="ttdoc">Convert a kumi::product_type to a flat tuple of pointers to each its components.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:1718</div></div>
+<div class="ttc" id="agroup__generators_gaf7e27182e03bc27075557fe76ed5979d_html_gaf7e27182e03bc27075557fe76ed5979d"><div class="ttname"><a href="group__generators_gaf7e27182e03bc27075557fe76ed5979d.html#gaf7e27182e03bc27075557fe76ed5979d">kumi::as_flat_ptr</a></div><div class="ttdeci">auto as_flat_ptr(Tuple &amp;&amp;t) noexcept</div><div class="ttdoc">Convert a kumi::product_type to a flat tuple of pointers to each its components.</div><div class="ttdef"><b>Definition:</b> flatten.hpp:174</div></div>
 </div><!-- fragment --><p >Computes the return type of a call to <a class="el" href="group__generators_gaf7e27182e03bc27075557fe76ed5979d.html#gaf7e27182e03bc27075557fe76ed5979d" title="Convert a kumi::product_type to a flat tuple of pointers to each its components.">kumi::as_flat_ptr</a></p>
-<h2><a class="anchor" id="autotoc_md39"></a>
+<h2><a class="anchor" id="autotoc_md14"></a>
 Example</h2>
 <div class="fragment"><div class="line"><span class="comment">//==================================================================================================</span></div>
 <div class="line"><span class="comment">/*</span></div>
@@ -187,8 +187,8 @@ Example</h2>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__transforms_gad43ec54beb96cffa12d5535e22df6c17_html_gad43ec54beb96cffa12d5535e22df6c17"><div class="ttname"><a href="group__transforms_gad43ec54beb96cffa12d5535e22df6c17.html#gad43ec54beb96cffa12d5535e22df6c17">kumi::for_each</a></div><div class="ttdeci">constexpr void for_each(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a kumi::product_type.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:465</div></div>
-<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:539</div></div>
+<div class="ttc" id="agroup__transforms_gad43ec54beb96cffa12d5535e22df6c17_html_gad43ec54beb96cffa12d5535e22df6c17"><div class="ttname"><a href="group__transforms_gad43ec54beb96cffa12d5535e22df6c17.html#gad43ec54beb96cffa12d5535e22df6c17">kumi::for_each</a></div><div class="ttdeci">constexpr void for_each(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a kumi::product_type.</div><div class="ttdef"><b>Definition:</b> for_each.hpp:30</div></div>
+<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:31</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

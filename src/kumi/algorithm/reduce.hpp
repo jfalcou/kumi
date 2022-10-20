@@ -9,33 +9,6 @@
 
 namespace kumi
 {
-  namespace detail
-  {
-    //==============================================================================================
-    // Fold helpers
-    //==============================================================================================
-    template<typename F, typename T> struct foldable
-    {
-      F func;
-      T value;
-
-      template<typename W>
-      friend constexpr decltype(auto) operator>>(foldable &&x, foldable<F, W> &&y)
-      {
-        return detail::foldable {x.func, x.func(y.value, x.value)};
-      }
-
-      template<typename W>
-      friend constexpr decltype(auto) operator<<(foldable &&x, foldable<F, W> &&y)
-      {
-        return detail::foldable {x.func, x.func(x.value, y.value)};
-      }
-    };
-
-    template<class F, class T> foldable(const F &, T &&) -> foldable<F, T>;
-  }
-
-
   //================================================================================================
   //! @ingroup reductions
   //! @brief Computes the generalized sum of all elements using a tail recursive tail.

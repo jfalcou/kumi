@@ -124,7 +124,7 @@ $(document).ready(function(){initNavTree('structkumi_1_1as__tuple.html',''); ini
 <p>Generate a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> type from a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>.  
  <a href="structkumi_1_1as__tuple.html#details">More...</a></p>
 
-<p><code>#include &lt;kumi/tuple.hpp&gt;</code></p>
+<p><code>#include &lt;kumi/algorithm/convert.hpp&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename Tuple, template&lt; typename... &gt; class Meta = std::type_identity&gt;<br />
 struct kumi::as_tuple&lt; Tuple, Meta &gt;</div><p >Generate a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> type from a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>. </p>
@@ -136,17 +136,17 @@ struct kumi::as_tuple&lt; Tuple, Meta &gt;</div><p >Generate a <a class="el" hre
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md66"></a>
+<h2><a class="anchor" id="autotoc_md6"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">template</span>&lt;<a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type</a> Tuple, <span class="keyword">template</span>&lt;<span class="keyword">typename</span>...&gt; <span class="keyword">class </span>Meta = std::type_identity&gt;</div>
 <div class="line">  <span class="keyword">using </span>as_tuple_t = <span class="keyword">typename</span> <a class="code hl_struct" href="structkumi_1_1as__tuple.html">as_tuple&lt;Tuple, Meta&gt;::type</a>;</div>
 <div class="line">}</div>
-<div class="ttc" id="aconceptkumi_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1product__type.html">kumi::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:258</div></div>
-<div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div></div>
-<div class="ttc" id="astructkumi_1_1as__tuple_html"><div class="ttname"><a href="structkumi_1_1as__tuple.html">kumi::as_tuple</a></div><div class="ttdoc">Generate a kumi::tuple type from a kumi::product_type.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:2385</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md67"></a>
+<div class="ttc" id="aconceptkumi_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1product__type.html">kumi::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition:</b> concepts.hpp:48</div></div>
+<div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition:</b> algorithm.hpp:11</div></div>
+<div class="ttc" id="astructkumi_1_1as__tuple_html"><div class="ttname"><a href="structkumi_1_1as__tuple.html">kumi::as_tuple</a></div><div class="ttdoc">Generate a kumi::tuple type from a kumi::product_type.</div><div class="ttdef"><b>Definition:</b> convert.hpp:109</div></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md7"></a>
 Example:</h2>
 <div class="fragment"><div class="line"><span class="comment">//==================================================================================================</span></div>
 <div class="line"><span class="comment">/*</span></div>
@@ -172,7 +172,7 @@ Example:</h2>
 <div class="line">  <span class="keyword">static_assert</span>( std::same_as&lt;three_floats  , kumi::tuple&lt;float ,float ,float &gt; &gt;);</div>
 <div class="line">  <span class="keyword">static_assert</span>( std::same_as&lt;three_pointers, kumi::tuple&lt;float*,float*,float*&gt; &gt;);</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1is__product__type_html"><div class="ttname"><a href="structkumi_1_1is__product__type.html">kumi::is_product_type</a></div><div class="ttdoc">Opt-in traits for types behaving like a kumi::product_type.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:204</div></div>
+<div class="ttc" id="astructkumi_1_1is__product__type_html"><div class="ttname"><a href="structkumi_1_1is__product__type.html">kumi::is_product_type</a></div><div class="ttdoc">Opt-in traits for types behaving like a kumi::product_type.</div><div class="ttdef"><b>Definition:</b> traits.hpp:30</div></div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->

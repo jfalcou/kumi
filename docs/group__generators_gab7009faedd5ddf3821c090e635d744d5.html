@@ -162,7 +162,7 @@ template&lt;product_type T0, sized_product_type&lt; size_v&lt; T0 &gt; &gt;... T
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The tuple of all combination of elements from t0, ts...</dd></dl>
-<h2><a class="anchor" id="autotoc_md40"></a>
+<h2><a class="anchor" id="autotoc_md54"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
@@ -171,9 +171,9 @@ Helper type</h2>
 <div class="line">  <span class="keyword">template</span>&lt;product_type Tuple&gt;</div>
 <div class="line">  <span class="keyword">using </span>zip_t = <span class="keyword">typename</span> zip&lt;Tuple&gt;::type;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__generators_gab7009faedd5ddf3821c090e635d744d5_html_gab7009faedd5ddf3821c090e635d744d5"><div class="ttname"><a href="group__generators_gab7009faedd5ddf3821c090e635d744d5.html#gab7009faedd5ddf3821c090e635d744d5">kumi::zip</a></div><div class="ttdeci">constexpr auto zip(T0 const &amp;t0, Ts const &amp;...tuples)</div><div class="ttdoc">Constructs a tuple where the ith element is the tuple of all ith elements of ts...</div><div class="ttdef"><b>Definition:</b> tuple.hpp:1759</div></div>
+<div class="ttc" id="agroup__generators_gab7009faedd5ddf3821c090e635d744d5_html_gab7009faedd5ddf3821c090e635d744d5"><div class="ttname"><a href="group__generators_gab7009faedd5ddf3821c090e635d744d5.html#gab7009faedd5ddf3821c090e635d744d5">kumi::zip</a></div><div class="ttdeci">constexpr auto zip(T0 const &amp;t0, Ts const &amp;...tuples)</div><div class="ttdoc">Constructs a tuple where the ith element is the tuple of all ith elements of ts...</div><div class="ttdef"><b>Definition:</b> zip.hpp:37</div></div>
 </div><!-- fragment --><p >Computes the return type of a call to <a class="el" href="group__generators_gab7009faedd5ddf3821c090e635d744d5.html#gab7009faedd5ddf3821c090e635d744d5" title="Constructs a tuple where the ith element is the tuple of all ith elements of ts...">kumi::zip</a></p>
-<h2><a class="anchor" id="autotoc_md41"></a>
+<h2><a class="anchor" id="autotoc_md55"></a>
 Example</h2>
 <div class="fragment"><div class="line"><span class="comment">//==================================================================================================</span></div>
 <div class="line"><span class="comment">/*</span></div>
@@ -194,7 +194,7 @@ Example</h2>
 <div class="line">  <span class="keyword">auto</span> r = <a class="code hl_function" href="group__generators_gab7009faedd5ddf3821c090e635d744d5.html#gab7009faedd5ddf3821c090e635d744d5">kumi::zip</a>( nbrs, ltrs, ratio );</div>
 <div class="line">  std::cout &lt;&lt; r &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:539</div></div>
+<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:31</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

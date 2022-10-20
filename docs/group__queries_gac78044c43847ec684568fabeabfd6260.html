@@ -162,7 +162,7 @@ template&lt;typename Pred , product_type Tuple&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> if all elements of t satisfy p. </dd></dl>
-<h2><a class="anchor" id="autotoc_md58"></a>
+<h2><a class="anchor" id="autotoc_md33"></a>
 Example:</h2>
 <div class="fragment"><div class="line"><span class="comment">//==================================================================================================</span></div>
 <div class="line"><span class="comment">/*</span></div>
@@ -179,8 +179,8 @@ Example:</h2>
 <div class="line">  <span class="keyword">auto</span> t = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1,2.,3.f};</div>
 <div class="line">  std::cout &lt;&lt; std::boolalpha &lt;&lt; <a class="code hl_function" href="group__queries_gac78044c43847ec684568fabeabfd6260.html#gac78044c43847ec684568fabeabfd6260">kumi::all_of</a>( t, [](<span class="keyword">auto</span> e) { <span class="keywordflow">return</span> e &lt; 5; }) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__queries_gac78044c43847ec684568fabeabfd6260_html_gac78044c43847ec684568fabeabfd6260"><div class="ttname"><a href="group__queries_gac78044c43847ec684568fabeabfd6260.html#gac78044c43847ec684568fabeabfd6260">kumi::all_of</a></div><div class="ttdeci">constexpr bool all_of(Tuple const &amp;t, Pred p) noexcept</div><div class="ttdoc">Checks if unary predicate p returns true for all elements in the tuple t.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:2169</div></div>
-<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:539</div></div>
+<div class="ttc" id="agroup__queries_gac78044c43847ec684568fabeabfd6260_html_gac78044c43847ec684568fabeabfd6260"><div class="ttname"><a href="group__queries_gac78044c43847ec684568fabeabfd6260.html#gac78044c43847ec684568fabeabfd6260">kumi::all_of</a></div><div class="ttdeci">constexpr bool all_of(Tuple const &amp;t, Pred p) noexcept</div><div class="ttdoc">Checks if unary predicate p returns true for all elements in the tuple t.</div><div class="ttdef"><b>Definition:</b> predicates.hpp:22</div></div>
+<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:31</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
