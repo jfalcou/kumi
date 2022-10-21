@@ -44,5 +44,6 @@ namespace kumi
 #include <kumi/algorithm/minmax.hpp>
 #include <kumi/algorithm/predicates.hpp>
 #include <kumi/algorithm/reorder.hpp>
+#include <kumi/algorithm/reverse.hpp>
 #include <kumi/algorithm/transpose.hpp>
 #include <kumi/algorithm/zip.hpp>
