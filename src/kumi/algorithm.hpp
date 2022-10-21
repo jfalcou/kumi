@@ -30,6 +30,7 @@ namespace kumi
   //================================================================================================
 }
 
+#include <kumi/algorithm/back-front.hpp>
 #include <kumi/algorithm/cartesian_product.hpp>
 #include <kumi/algorithm/cat.hpp>
 #include <kumi/algorithm/convert.hpp>
@@ -38,10 +39,10 @@ namespace kumi
 #include <kumi/algorithm/generate.hpp>
 #include <kumi/algorithm/inner_product.hpp>
 #include <kumi/algorithm/map.hpp>
+#include <kumi/algorithm/push_pop.hpp>
 #include <kumi/algorithm/reduce.hpp>
 #include <kumi/algorithm/minmax.hpp>
 #include <kumi/algorithm/predicates.hpp>
-#include <kumi/algorithm/push_pop.hpp>
 #include <kumi/algorithm/reorder.hpp>
 #include <kumi/algorithm/transpose.hpp>
 #include <kumi/algorithm/zip.hpp>

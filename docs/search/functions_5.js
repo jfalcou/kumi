@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['inner_5fproduct_0',['inner_product',['../group__reductions_ga5b5aff48796b3da4d80700c5dfcb68d6.html#ga5b5aff48796b3da4d80700c5dfcb68d6',1,'kumi']]],
-  ['iota_1',['iota',['../group__generators_ga19ced0b66d1e3dae7bfa60f7def6914f.html#ga19ced0b66d1e3dae7bfa60f7def6914f',1,'kumi']]]
+  ['generate_0',['generate',['../group__generators_ga148569641f64ccb586aaa65ccb6d1ae6.html#ga148569641f64ccb586aaa65ccb6d1ae6',1,'kumi']]],
+  ['get_1',['get',['../group__tuple_gaf6552a41ee23ce3123143e287dca7bc4.html#gaf6552a41ee23ce3123143e287dca7bc4',1,'kumi::tuple::get()'],['../namespacekumi.html#ac4fd10ae8604dc8f891d7f4717dfa57e',1,'kumi::get(tuple&lt; Ts... &gt; &amp;&amp;arg) noexcept'],['../namespacekumi.html#a954663e8f00c7c0cd39b2c70b78a8f21',1,'kumi::get(tuple&lt; Ts... &gt; const &amp;arg) noexcept'],['../namespacekumi.html#af75adc373689cd5267452785087fe622',1,'kumi::get(tuple&lt; Ts... &gt; const &amp;&amp;arg) noexcept']]]
 ];
