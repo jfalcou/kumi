@@ -18,7 +18,7 @@ namespace kumi
   //! @note Nothing prevent the number of reordered index to be lesser or greater than t size or
   //!       the fact they can appear multiple times.
   //!
-  //! @tparam Idx Reordered index of elements
+  //! @tparam Idx     Reordered index of elements
   //! @param  t kumi::product_type to reorder
   //! @return A tuple equivalent to kumi::make_tuple(t[index<Idx>]...);
   //!
@@ -39,9 +39,9 @@ namespace kumi
   //! @include doc/reorder.cpp
   //================================================================================================
   template<std::size_t... Idx, product_type Tuple>
-  requires((Idx < size<Tuple>::value) && ...) [[nodiscard]] constexpr auto reorder(Tuple &&t)
+  requires((Idx < size_v<Tuple>) && ...) [[nodiscard]] constexpr auto reorder(Tuple &&t)
   {
-    return kumi::make_tuple(KUMI_FWD(t)[index<Idx>]...);
+    return kumi::make_tuple( get<Idx>(KUMI_FWD(t))...);
   }
 
   namespace result

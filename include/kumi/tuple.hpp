@@ -1162,9 +1162,9 @@ namespace kumi
 namespace kumi
 {
   template<std::size_t... Idx, product_type Tuple>
-  requires((Idx < size<Tuple>::value) && ...) [[nodiscard]] constexpr auto reorder(Tuple &&t)
+  requires((Idx < size_v<Tuple>) && ...) [[nodiscard]] constexpr auto reorder(Tuple &&t)
   {
-    return kumi::make_tuple(KUMI_FWD(t)[index<Idx>]...);
+    return kumi::make_tuple( get<Idx>(KUMI_FWD(t))...);
   }
   namespace result
   {
@@ -1175,6 +1175,32 @@ namespace kumi
     };
     template<product_type Tuple, std::size_t... Idx>
     using reorder_t = typename reorder<Tuple,Idx...>::type;
+  }
+}
+namespace kumi
+{
+  template<product_type Tuple>
+  [[nodiscard]] constexpr auto reverse(Tuple &&t)
+  {
+    if constexpr(sized_product_type<Tuple,0>) return kumi::tuple<>{};
+    else
+    {
+      return [&]<std::size_t... I>(std::index_sequence<I...>)
+      {
+        return kumi::make_tuple(get<(size_v<Tuple> - 1 - I)>(KUMI_FWD(t))...);
+      }
+      (std::make_index_sequence<size<Tuple>::value>());
+    }
+  }
+  namespace result
+  {
+    template<product_type Tuple>
+    struct reverse
+    {
+      using type = decltype( kumi::reverse( std::declval<Tuple>() ) );
+    };
+    template<product_type Tuple>
+    using reverse_t = typename reverse<Tuple>::type;
   }
 }
 namespace kumi
