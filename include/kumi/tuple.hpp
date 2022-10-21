@@ -497,6 +497,26 @@ namespace kumi
 }
 namespace kumi
 {
+  template<product_type Tuple>
+  [[nodiscard]] constexpr decltype(auto) front(Tuple&& t) requires( size_v<Tuple> != 0)
+  {
+    return get<0>(KUMI_FWD(t));
+  }
+  template<product_type Tuple>
+  [[nodiscard]] constexpr decltype(auto) back(Tuple&& t) requires( size_v<Tuple> != 0)
+  {
+    return get<size_v<Tuple>-1>(KUMI_FWD(t));
+  }
+  namespace result
+  {
+    template<product_type Tuple> struct front : member<0,Tuple> {};
+    template<product_type Tuple> struct back  : member<size_v<Tuple>-1,Tuple> {};
+    template<product_type Tuple> using front_t = typename front<Tuple>::type;
+    template<product_type Tuple> using back_t  = typename back<Tuple>::type;
+  }
+}
+namespace kumi
+{
   namespace detail
   {
     template<std::size_t N, std::size_t... S> constexpr auto digits(std::size_t v) noexcept
@@ -918,6 +938,66 @@ namespace kumi
 }
 namespace kumi
 {
+  template<product_type Tuple, typename T>
+  [[nodiscard]] constexpr auto push_front(Tuple const& t, T&& v)
+  {
+    return [&]<std::size_t... I>(std::index_sequence<I...>)
+    {
+      return make_tuple(KUMI_FWD(v), get<I>(KUMI_FWD(t))...);
+    }
+    (std::make_index_sequence<Tuple::size()>());
+  }
+  template<product_type Tuple>
+  [[nodiscard]] constexpr auto pop_front(Tuple const& t)
+  {
+    if constexpr(Tuple::size()>0) return t.extract(index<1>);
+    else                          return tuple<>{};
+  }
+  template<product_type Tuple, typename T>
+  [[nodiscard]] constexpr auto push_back(Tuple const& t, T&& v)
+  {
+    return [&]<std::size_t... I>(std::index_sequence<I...>)
+    {
+      return make_tuple(get<I>(KUMI_FWD(t))..., KUMI_FWD(v));
+    }
+    (std::make_index_sequence<Tuple::size()>());
+  }
+  template<product_type Tuple>
+  [[nodiscard]] constexpr auto pop_back(Tuple const& t)
+  {
+    if constexpr(Tuple::size()>1) return t.extract(index<0>, index<Tuple::size()-1>);
+    else                          return tuple<>{};
+  }
+  namespace result
+  {
+    template<product_type Tuple, typename T> struct push_front
+    {
+      using type = decltype( kumi::push_front( std::declval<Tuple>(), std::declval<T>() ) );
+    };
+    template<product_type Tuple> struct pop_front
+    {
+      using type = decltype( kumi::pop_front( std::declval<Tuple>() ) );
+    };
+    template<product_type Tuple, typename T> struct push_back
+    {
+      using type = decltype( kumi::push_back( std::declval<Tuple>(), std::declval<T>() ) );
+    };
+    template<product_type Tuple> struct pop_back
+    {
+      using type = decltype( kumi::pop_back( std::declval<Tuple>() ) );
+    };
+    template<product_type Tuple, typename T>
+    using push_front_t  = typename push_front<Tuple, T>::type;
+    template<product_type Tuple>
+    using pop_front_t  = typename pop_front<Tuple>::type;
+    template<product_type Tuple, typename T>
+    using push_back_t  = typename push_back<Tuple, T>::type;
+    template<product_type Tuple>
+    using pop_back_t  = typename pop_back<Tuple>::type;
+  }
+}
+namespace kumi
+{
   template<typename Function, product_type Tuple, typename Value>
   [[nodiscard]] constexpr auto fold_left(Function f, Tuple&& t, Value init)
   {
@@ -1077,66 +1157,6 @@ namespace kumi
   [[nodiscard]] constexpr std::size_t count( Tuple const& ts ) noexcept
   {
     return count_if(ts, [](auto const& m) { return static_cast<bool>(m); } );
-  }
-}
-namespace kumi
-{
-  template<product_type Tuple, typename T>
-  [[nodiscard]] constexpr auto push_front(Tuple const& t, T&& v)
-  {
-    return [&]<std::size_t... I>(std::index_sequence<I...>)
-    {
-      return make_tuple(KUMI_FWD(v), get<I>(KUMI_FWD(t))...);
-    }
-    (std::make_index_sequence<Tuple::size()>());
-  }
-  template<product_type Tuple>
-  [[nodiscard]] constexpr auto pop_front(Tuple const& t)
-  {
-    if constexpr(Tuple::size()>0) return t.extract(index<1>);
-    else                          return tuple<>{};
-  }
-  template<product_type Tuple, typename T>
-  [[nodiscard]] constexpr auto push_back(Tuple const& t, T&& v)
-  {
-    return [&]<std::size_t... I>(std::index_sequence<I...>)
-    {
-      return make_tuple(get<I>(KUMI_FWD(t))..., KUMI_FWD(v));
-    }
-    (std::make_index_sequence<Tuple::size()>());
-  }
-  template<product_type Tuple>
-  [[nodiscard]] constexpr auto pop_back(Tuple const& t)
-  {
-    if constexpr(Tuple::size()>1) return t.extract(index<0>, index<Tuple::size()-1>);
-    else                          return tuple<>{};
-  }
-  namespace result
-  {
-    template<product_type Tuple, typename T> struct push_front
-    {
-      using type = decltype( kumi::push_front( std::declval<Tuple>(), std::declval<T>() ) );
-    };
-    template<product_type Tuple> struct pop_front
-    {
-      using type = decltype( kumi::pop_front( std::declval<Tuple>() ) );
-    };
-    template<product_type Tuple, typename T> struct push_back
-    {
-      using type = decltype( kumi::push_back( std::declval<Tuple>(), std::declval<T>() ) );
-    };
-    template<product_type Tuple> struct pop_back
-    {
-      using type = decltype( kumi::pop_back( std::declval<Tuple>() ) );
-    };
-    template<product_type Tuple, typename T>
-    using push_front_t  = typename push_front<Tuple, T>::type;
-    template<product_type Tuple>
-    using pop_front_t  = typename pop_front<Tuple>::type;
-    template<product_type Tuple, typename T>
-    using push_back_t  = typename push_back<Tuple, T>::type;
-    template<product_type Tuple>
-    using pop_back_t  = typename pop_back<Tuple>::type;
   }
 }
 namespace kumi
