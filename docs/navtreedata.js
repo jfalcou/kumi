@@ -26,30 +26,30 @@ var NAVTREE =
 [
   [ "KUMI", "index.html", [
     [ "The C++20 Compact Tuple Tools", "index.html", [
-      [ "A Short Example", "index.html#autotoc_md75", null ],
-      [ "Licence", "index.html#autotoc_md76", null ]
+      [ "A Short Example", "index.html#autotoc_md79", null ],
+      [ "Licence", "index.html#autotoc_md80", null ]
     ] ],
     [ "Setup", "md_kumi_doc_page01_setup.html", [
-      [ "Direct file download", "md_kumi_doc_page01_setup.html#autotoc_md78", null ],
-      [ "CMake FetchContent", "md_kumi_doc_page01_setup.html#autotoc_md79", null ],
-      [ "CPM Integration", "md_kumi_doc_page01_setup.html#autotoc_md80", null ]
+      [ "Direct file download", "md_kumi_doc_page01_setup.html#autotoc_md82", null ],
+      [ "CMake FetchContent", "md_kumi_doc_page01_setup.html#autotoc_md83", null ],
+      [ "CPM Integration", "md_kumi_doc_page01_setup.html#autotoc_md84", null ]
     ] ],
     [ "Change Log", "changelog.html", [
-      [ "Version 2.1 - Charming Chrysoprase", "changelog.html#autotoc_md81", [
-        [ "What's Changed", "changelog.html#autotoc_md82", [
-          [ "Bug Fixes", "changelog.html#autotoc_md83", null ],
-          [ "New Features", "changelog.html#autotoc_md84", null ]
-        ] ]
-      ] ],
-      [ "Version 2.0 - Bedazzling Beryl", "changelog.html#autotoc_md85", [
+      [ "Version 2.1 - Charming Chrysoprase", "changelog.html#autotoc_md85", [
         [ "What's Changed", "changelog.html#autotoc_md86", [
-          [ "Infrastructure", "changelog.html#autotoc_md87", null ],
-          [ "Bug Fixes", "changelog.html#autotoc_md88", null ],
-          [ "New Features", "changelog.html#autotoc_md89", null ]
+          [ "Bug Fixes", "changelog.html#autotoc_md87", null ],
+          [ "New Features", "changelog.html#autotoc_md88", null ]
         ] ]
       ] ],
-      [ "Version 1.0 - Amazing Amethyst", "changelog.html#autotoc_md90", [
-        [ "First autonomous public release.", "changelog.html#autotoc_md91", null ]
+      [ "Version 2.0 - Bedazzling Beryl", "changelog.html#autotoc_md89", [
+        [ "What's Changed", "changelog.html#autotoc_md90", [
+          [ "Infrastructure", "changelog.html#autotoc_md91", null ],
+          [ "Bug Fixes", "changelog.html#autotoc_md92", null ],
+          [ "New Features", "changelog.html#autotoc_md93", null ]
+        ] ]
+      ] ],
+      [ "Version 1.0 - Amazing Amethyst", "changelog.html#autotoc_md94", [
+        [ "First autonomous public release.", "changelog.html#autotoc_md95", null ]
       ] ]
     ] ],
     [ "Licence", "licence.html", [

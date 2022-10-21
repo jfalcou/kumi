@@ -1,5 +1,8 @@
 var searchData=
 [
-  ['empty_0',['empty',['../structkumi_1_1tuple.html#af1a74e00134be29916bb7fb6e8cda5f6',1,'kumi::tuple']]],
-  ['extract_1',['extract',['../structkumi_1_1tuple_adb921dddbaec84f53dce004424f5ea2f.html#adb921dddbaec84f53dce004424f5ea2f',1,'kumi::tuple::extract(index_t&lt; I0 &gt; const &amp;, index_t&lt; I1 &gt; const &amp;) const noexcept'],['../structkumi_1_1tuple.html#a2dd191493e3cf4d6a9706f66ea7468d4',1,'kumi::tuple::extract(index_t&lt; I0 &gt; const &amp;) const noexcept']]]
+  ['cartesian_5fproduct_0',['cartesian_product',['../group__generators_ga1a62cf631e1471cf1da2b2f7ae2120b0.html#ga1a62cf631e1471cf1da2b2f7ae2120b0',1,'kumi']]],
+  ['cast_1',['cast',['../structkumi_1_1tuple_a594da40681acf02bd33af52c046bd797.html#a594da40681acf02bd33af52c046bd797',1,'kumi::tuple']]],
+  ['cat_2',['cat',['../group__generators_ga20e70383bcf8f7b75f53e7a16594d43f.html#ga20e70383bcf8f7b75f53e7a16594d43f',1,'kumi']]],
+  ['count_3',['count',['../group__queries_ga515b42809824aaeed9cb5a028d9a9c34.html#ga515b42809824aaeed9cb5a028d9a9c34',1,'kumi']]],
+  ['count_5fif_4',['count_if',['../group__queries_ga216c9d7b27775310e865a4b9d4319218.html#ga216c9d7b27775310e865a4b9d4319218',1,'kumi']]]
 ];
