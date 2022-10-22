@@ -11,8 +11,8 @@ enable_testing()
 ##==================================================================================================
 project(kumi LANGUAGES CXX)
 
-set(KUMI_MAJOR_VERSION 2)
-set(KUMI_MINOR_VERSION 1)
+set(KUMI_MAJOR_VERSION 3)
+set(KUMI_MINOR_VERSION 0)
 set(KUMI_PATCH_VERSION 0)
 set(KUMI_VERSION ${KUMI_MAJOR_VERSION}.${KUMI_MINOR_VERSION}.${KUMI_PATCH_VERSION})
 
