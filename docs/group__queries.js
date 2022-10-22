@@ -1,6 +1,6 @@
 var group__queries =
 [
-    [ "kumi::all_of", "group__queries_gac78044c43847ec684568fabeabfd6260.html#gac78044c43847ec684568fabeabfd6260", null ],
+    [ "kumi::all_of", "group__queries_gadbed4891d9b569ff14594f5b24f6c2ec.html#gadbed4891d9b569ff14594f5b24f6c2ec", null ],
     [ "kumi::any_of", "group__queries_gab94bcef3c4210fd0c1471e71d1009a52.html#gab94bcef3c4210fd0c1471e71d1009a52", null ],
     [ "kumi::count", "group__queries_ga515b42809824aaeed9cb5a028d9a9c34.html#ga515b42809824aaeed9cb5a028d9a9c34", null ],
     [ "kumi::count_if", "group__queries_ga216c9d7b27775310e865a4b9d4319218.html#ga216c9d7b27775310e865a4b9d4319218", null ],

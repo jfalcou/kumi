@@ -40,7 +40,10 @@ namespace kumi
   template<std::size_t I0, std::size_t I1, product_type Tuple>
   requires( (I0 <= size_v<Tuple>) && (I1 <= size_v<Tuple>) )
   [[nodiscard]] constexpr
-  auto extract(Tuple const& t, index_t<I0> const &, index_t<I1> const &) noexcept
+  auto extract( Tuple const& t
+              , [[maybe_unused]] index_t<I0> const& i0
+              , [[maybe_unused]] index_t<I1> const& i1
+              ) noexcept
   {
     return [&]<std::size_t... N>(std::index_sequence<N...>)
     {
@@ -67,7 +70,8 @@ namespace kumi
   //!
   //! @note Does not participate in overload resolution if `I0` is not in `[0, sizeof...(Ts)[`.
   //!
-  //! @param  i0 Compile-time index of the first element to extract.
+  //! @param  t Tuple to split.
+  //! @param  i0 Compile-time index of the split pivot.
   //! @return A new kumi::tuple containing the two sub-tuple cut at index I.
   //!
   //! ## Helper type
@@ -88,7 +92,9 @@ namespace kumi
   //================================================================================================
   template<std::size_t I0, product_type Tuple>
   requires(I0 <= size_v<Tuple>)
-  [[nodiscard]] constexpr auto split(Tuple const& t, index_t<I0> const&) noexcept
+  [[nodiscard]] constexpr auto split( Tuple const& t
+                                    , [[maybe_unused]] index_t<I0> const& i0
+                                    ) noexcept
   {
     return kumi::make_tuple(extract(t,index<0>, index<I0>), extract(t,index<I0>));
   }

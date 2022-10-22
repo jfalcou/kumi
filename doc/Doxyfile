@@ -5,7 +5,7 @@ DOXYFILE_ENCODING      = UTF-8
 
 PROJECT_NAME           = KUMI
 PROJECT_NUMBER         =
-PROJECT_BRIEF          = v2.1 - Charming Chrysoprase
+PROJECT_BRIEF          = v3.0 - Delicious Datolite
 PROJECT_LOGO           = logo.png
 
 OUTPUT_DIRECTORY       = $(KUMI_DOXYGEN_OUPUT)

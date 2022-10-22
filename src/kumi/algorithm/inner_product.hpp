@@ -45,8 +45,8 @@ namespace kumi
   //! @note Does not participate in overload resolution if tuples' size are not equal or if any of
   //!       the binary operations can't be applied on the tuples' elements.
   //!
-  //! @param s0         First tuple to operate on
-  //! @param s1         Second tuple to operate on
+  //! @param s1         First tuple to operate on
+  //! @param s2         Second tuple to operate on
   //! @param init       Initial value
   //! @param sum        Binary callable function to use as the sum operations
   //! @param prod       Binary callable function to use as the product operations
@@ -79,6 +79,28 @@ namespace kumi
   //! ## Example
   //! @include doc/inner_product.cpp
   //================================================================================================
+  template< product_type S1, sized_product_type<S1::size()> S2, typename T
+          , typename Sum, typename Prod
+          >
+  [[nodiscard]] constexpr auto inner_product( S1 const& s1, S2 const& s2, T init
+                                            , Sum sum, Prod prod
+                                            ) noexcept
+  {
+    if constexpr(sized_product_type<S1,0>) return init;
+    else
+    {
+      return [&]<std::size_t... I>(std::index_sequence<I...>)
+      {
+        return  (  detail::foldable {sum, prod(get<I>(KUMI_FWD(s1)),get<I>(KUMI_FWD(s2)))}
+                >> ...
+                >> detail::foldable {sum, init}
+                ).value;
+      }
+      (std::make_index_sequence<size<S1>::value>());
+    }
+  }
+
+  //! @overload
   template<product_type S1, sized_product_type<S1::size()> S2, typename T>
   [[nodiscard]] constexpr auto inner_product(S1 const& s1, S2 const& s2, T init) noexcept
   {
@@ -92,26 +114,6 @@ namespace kumi
     }
   }
 
-  template< product_type S1, sized_product_type<S1::size()> S2, typename T
-          , typename Sum, typename Prod
-          >
-  [[nodiscard]] constexpr auto inner_product( S1 const& s1, S2 const& s2, T init
-                                            , Sum sf, Prod pf
-                                            ) noexcept
-  {
-    if constexpr(sized_product_type<S1,0>) return init;
-    else
-    {
-      return [&]<std::size_t... I>(std::index_sequence<I...>)
-      {
-        return  (  detail::foldable {sf, pf(get<I>(KUMI_FWD(s1)),get<I>(KUMI_FWD(s2)))}
-                >> ...
-                >> detail::foldable {sf, init}
-                ).value;
-      }
-      (std::make_index_sequence<size<S1>::value>());
-    }
-  }
 
   namespace result
   {

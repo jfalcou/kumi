@@ -20,7 +20,7 @@ namespace kumi
   //! @defgroup tuple     Tuple Types and Functions
   //! @brief    Definition for kumi::tuple class and functions
   //!
-  //! @ingroup  tuple
+  //! @addtogroup tuple
   //! @{
   //!   @defgroup concepts     Tuple Related Concepts
   //!   @brief    Definition for product types related Concepts

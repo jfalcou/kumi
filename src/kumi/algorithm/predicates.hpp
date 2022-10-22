@@ -12,22 +12,22 @@ namespace kumi
  //================================================================================================
   //! @ingroup queries
   //! @brief  Checks if unary predicate p returns true for all elements in the tuple t.
-  //! @param  t Tuple to process
+  //! @param  ts Tuple to process
   //! @param  p Unary predicate. p must return a value convertible to `bool` for every element of t.
   //! @return `true` if all elements of t satisfy p.
   //! ## Example:
   //! @include doc/all_of.cpp
   //================================================================================================
   template<typename Pred, product_type Tuple>
-  [[nodiscard]] constexpr bool all_of( Tuple const& t, Pred p) noexcept
+  [[nodiscard]] constexpr bool all_of( Tuple const& ts, Pred p) noexcept
   {
-    return kumi::apply( [&](auto const&... m) { return (p(m) && ... && true); }, t );
+    return kumi::apply( [&](auto const&... m) { return (p(m) && ... && true); }, ts );
   }
 
   //================================================================================================
   //! @ingroup queries
   //! @brief  Checks if unary predicate p returns true for at least one element in the tuple t.
-  //! @param  t Tuple to process
+  //! @param  ts Tuple to process
   //! @param  p Unary predicate. p must return a value convertible to `bool` for every element of t.
   //! @return `true` if at least one of elements of t satisfy p.
   //! ## Example:
@@ -42,7 +42,7 @@ namespace kumi
   //================================================================================================
   //! @ingroup queries
   //! @brief  Checks if unary predicate p returns true for at no elements in the tuple t.
-  //! @param  t Tuple to process
+  //! @param  ts Tuple to process
   //! @param  p Unary predicate. p must return a value convertible to `bool` for every element of t.
   //! @return `true` if at no elements of t satisfy p.
   //! ## Example:
@@ -57,7 +57,7 @@ namespace kumi
   //================================================================================================
   //! @ingroup queries
   //! @brief  Counts the number of elements of t satisfying predicates p.
-  //! @param  t Tuple to process
+  //! @param  ts Tuple to process
   //! @param  p Unary predicate. p must return a value convertible to `bool` for every element of t.
   //! @return Number of elements satisfying the condition.
   //! ## Example:
@@ -72,7 +72,7 @@ namespace kumi
   //================================================================================================
   //! @ingroup queries
   //! @brief  Counts the number of elements of t not equivalent to false.
-  //! @param  t Tuple to process
+  //! @param  ts Tuple to process
   //! @return Number of elements not equivalent to `false`.
   //! ## Example:
   //! @include doc/count.cpp

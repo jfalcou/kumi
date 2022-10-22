@@ -34,11 +34,11 @@ namespace kumi
   //! @include doc/zip.cpp
   //================================================================================================
   template<product_type T0, sized_product_type<size_v<T0>>... Ts>
-  [[nodiscard]] constexpr auto zip(T0 const &t0, Ts const &...tuples)
+  [[nodiscard]] constexpr auto zip(T0 const &t0, Ts const &...ts)
   {
-    return kumi::map([](auto const &m0, auto const &...ms) { return kumi::make_tuple(m0, ms...); },
-                     t0,
-                     tuples...);
+    return kumi::map( [](auto const &m0, auto const &...ms) { return kumi::make_tuple(m0, ms...); }
+                    , t0,ts...
+                    );
   }
 
   namespace result

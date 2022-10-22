@@ -1,9 +1,6 @@
 Licence {#licence}
 =======
 
-Licence {#licence}
-=======
-
 This library is licensed under the [Boost Software License](http://opensource.org/licenses/MIT):
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ none

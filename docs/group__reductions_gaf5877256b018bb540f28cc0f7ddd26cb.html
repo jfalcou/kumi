@@ -56,7 +56,7 @@ MathJax.Hub.Config({
   <td id="projectalign">
    <div id="projectname">KUMI
    </div>
-   <div id="projectbrief">v2.1 - Charming Chrysoprase</div>
+   <div id="projectbrief">v3.0 - Delicious Datolite</div>
   </td>
  </tr>
    <tr><td colspan="2" style="padding: 20px 0px 0px 0px;">        <div id="MSearchBox" class="MSearchBoxInactive">
@@ -98,7 +98,7 @@ var searchBox = new SearchBox("searchBox", "search",'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__reductions_ga5b5aff48796b3da4d80700c5dfcb68d6.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__reductions_gaf5877256b018bb540f28cc0f7ddd26cb.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -117,13 +117,13 @@ $(document).ready(function(){initNavTree('group__reductions_ga5b5aff48796b3da4d8
 </div>
 
 <div class="contents">
-<a id="ga5b5aff48796b3da4d80700c5dfcb68d6" name="ga5b5aff48796b3da4d80700c5dfcb68d6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga5b5aff48796b3da4d80700c5dfcb68d6">&#9670;&nbsp;</a></span>inner_product()</h2>
+<a id="gaf5877256b018bb540f28cc0f7ddd26cb" name="gaf5877256b018bb540f28cc0f7ddd26cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf5877256b018bb540f28cc0f7ddd26cb">&#9670;&nbsp;</a></span>inner_product()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;product_type S1, sized_product_type&lt; S1::size()&gt; S2, typename T &gt; </div>
+template&lt;product_type S1, sized_product_type&lt; S1::size()&gt; S2, typename T , typename Sum , typename Prod &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -144,7 +144,19 @@ template&lt;product_type S1, sized_product_type&lt; S1::size()&gt; S2, typename 
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">T&#160;</td>
-          <td class="paramname"><em>init</em>&#160;</td>
+          <td class="paramname"><em>init</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Sum&#160;</td>
+          <td class="paramname"><em>sum</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Prod&#160;</td>
+          <td class="paramname"><em>prod</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -164,8 +176,8 @@ template&lt;product_type S1, sized_product_type&lt; S1::size()&gt; S2, typename 
 <dl class="section note"><dt>Note</dt><dd>Does not participate in overload resolution if tuples' size are not equal or if any of the binary operations can't be applied on the tuples' elements.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">s0</td><td>First tuple to operate on </td></tr>
-    <tr><td class="paramname">s1</td><td>Second tuple to operate on </td></tr>
+    <tr><td class="paramname">s1</td><td>First tuple to operate on </td></tr>
+    <tr><td class="paramname">s2</td><td>Second tuple to operate on </td></tr>
     <tr><td class="paramname">init</td><td>Initial value </td></tr>
     <tr><td class="paramname">sum</td><td>Binary callable function to use as the sum operations </td></tr>
     <tr><td class="paramname">prod</td><td>Binary callable function to use as the product operations </td></tr>
@@ -178,12 +190,12 @@ Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">template</span>&lt;product_type S1, sized_product_type&lt;S1::size()&gt; S2, <span class="keyword">typename</span> T&gt;</div>
-<div class="line">  <span class="keyword">struct </span><a class="code hl_function" href="group__reductions_ga5b5aff48796b3da4d80700c5dfcb68d6.html#ga5b5aff48796b3da4d80700c5dfcb68d6">inner_product</a>;</div>
+<div class="line">  <span class="keyword">struct </span><a class="code hl_function" href="group__reductions_gaf5877256b018bb540f28cc0f7ddd26cb.html#gaf5877256b018bb540f28cc0f7ddd26cb">inner_product</a>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">template</span>&lt;product_type S1, sized_product_type&lt;S1::size()&gt; S2, <span class="keyword">typename</span> T</div>
 <div class="line">          , <span class="keyword">typename</span> Sum, <span class="keyword">typename</span> Prod</div>
 <div class="line">          &gt;</div>
-<div class="line">  <span class="keyword">struct </span><a class="code hl_function" href="group__reductions_ga5b5aff48796b3da4d80700c5dfcb68d6.html#ga5b5aff48796b3da4d80700c5dfcb68d6">inner_product</a>;</div>
+<div class="line">  <span class="keyword">struct </span><a class="code hl_function" href="group__reductions_gaf5877256b018bb540f28cc0f7ddd26cb.html#gaf5877256b018bb540f28cc0f7ddd26cb">inner_product</a>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">template</span>&lt;product_type S1, sized_product_type&lt;S1::size()&gt; S2, <span class="keyword">typename</span> T&gt;</div>
 <div class="line">  <span class="keyword">using </span>inner_product_t = <span class="keyword">typename</span> inner_product&lt;S1,S2,T&gt;::type;</div>
@@ -193,7 +205,7 @@ Helper type</h2>
 <div class="line">          &gt;</div>
 <div class="line">  <span class="keyword">using </span>inner_product_t = <span class="keyword">typename</span> inner_product&lt;S1,S2,T,Sum,Prod&gt;::type;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__reductions_ga5b5aff48796b3da4d80700c5dfcb68d6_html_ga5b5aff48796b3da4d80700c5dfcb68d6"><div class="ttname"><a href="group__reductions_ga5b5aff48796b3da4d80700c5dfcb68d6.html#ga5b5aff48796b3da4d80700c5dfcb68d6">kumi::inner_product</a></div><div class="ttdeci">constexpr auto inner_product(S1 const &amp;s1, S2 const &amp;s2, T init) noexcept</div><div class="ttdoc">Computes inner product (i.e. sum of products)</div><div class="ttdef"><b>Definition:</b> inner_product.hpp:83</div></div>
+<div class="ttc" id="agroup__reductions_gaf5877256b018bb540f28cc0f7ddd26cb_html_gaf5877256b018bb540f28cc0f7ddd26cb"><div class="ttname"><a href="group__reductions_gaf5877256b018bb540f28cc0f7ddd26cb.html#gaf5877256b018bb540f28cc0f7ddd26cb">kumi::inner_product</a></div><div class="ttdeci">constexpr auto inner_product(S1 const &amp;s1, S2 const &amp;s2, T init, Sum sum, Prod prod) noexcept</div><div class="ttdoc">Computes inner product (i.e. sum of products)</div><div class="ttdef"><b>Definition:</b> inner_product.hpp:85</div></div>
 </div><!-- fragment --><p >Computes the return type of a call to <a class="el" href="group__transforms_ga08fd1535a151e381bebea9cd0956afad.html#ga08fd1535a151e381bebea9cd0956afad" title="Apply the Callable object f on each tuples&#39; elements.">kumi::map</a></p>
 <h2><a class="anchor" id="autotoc_md28"></a>
 Example</h2>
@@ -208,7 +220,7 @@ Example</h2>
 <div class="line">  <span class="keyword">auto</span> base = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{32,16,8,4,2,1};</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; 0b101001L &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga5b5aff48796b3da4d80700c5dfcb68d6.html#ga5b5aff48796b3da4d80700c5dfcb68d6">kumi::inner_product</a>(bits, base, 0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_gaf5877256b018bb540f28cc0f7ddd26cb.html#gaf5877256b018bb540f28cc0f7ddd26cb">kumi::inner_product</a>(bits, base, 0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:31</div></div>
 </div><!-- fragment --> 
