@@ -1,6 +1,35 @@
 Change Log {#changelog}
 ==========
 
+# Version 3.0 - Delicious Datolite
+
+This Release is an API break release.
+
+## What's Changed
+
+### API and Infrastructure Changes
+ - kumi::extract and kumi::split are now free functions (See #40)
+ - KUMI implementation is now done in split file that get aggregated (See #34)
+ - Massive documentation revamping (See #27, #28)
+ - Added proper integration tests (See #35)
+
+### New Features
+ - Implemented kumi::iota and generate (See #23)
+ - Implemented kumi::cartesian_product (See #26)
+ - Implemented predicate based operations on tuple (See #25)
+ - Implemented kumi::inner_product  (See #36)
+ - Implemented kumi::back and kumi::front (See #37)
+ - Implemented kumi::reverse (See #39)
+
+### Bug Fixes
+ - Fix #18 - Bad interaction with tuple of references (See #19)
+ - Improve kumi::flatten implementation (See #20)
+
+## New Contributors
+ - @jehelset made their first contribution in https://github.com/jfalcou/kumi/pull/28
+
+**Full Changelog**: https://github.com/jfalcou/kumi/compare/v2.1...v3.0
+
 # Version 2.1 - Charming Chrysoprase
 
 ## What's Changed
