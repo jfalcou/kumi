@@ -618,8 +618,8 @@ namespace kumi
   requires( (I0 <= size_v<Tuple>) && (I1 <= size_v<Tuple>) )
   [[nodiscard]] constexpr
   auto extract( Tuple const& t
-              , [[maybe_unsued]] index_t<I0> const& i0
-              , [[maybe_unsued]] index_t<I1> const& i1
+              , [[maybe_unused]] index_t<I0> const& i0
+              , [[maybe_unused]] index_t<I1> const& i1
               ) noexcept
   {
     return [&]<std::size_t... N>(std::index_sequence<N...>)
