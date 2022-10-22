@@ -98,6 +98,7 @@ namespace kumi
   template<typename... Ts> struct tuple;
 }
 
+#if !defined(KUMI_DOXYGEN_INVOKED)
 //==================================================================================================
 // Structured binding adaptation
 //==================================================================================================
@@ -121,3 +122,4 @@ template<typename... Ts>
 struct std::tuple_size<kumi::tuple<Ts...>> : std::integral_constant<std::size_t, sizeof...(Ts)>
 {
 };
+#endif

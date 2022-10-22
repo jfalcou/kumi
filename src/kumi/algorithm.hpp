@@ -13,7 +13,7 @@ namespace kumi
   //! @defgroup algorithm Tuple Algorithms
   //! @brief    Algorithms for manipulating kumi::tuple
   //!
-  //! @ingroup  algorithm
+  //! @addtogroup algorithm
   //! @{
   //!   @defgroup transforms Tuple Transformations
   //!   @brief    Algorithms applying transformation to tuple

@@ -80,27 +80,6 @@ namespace kumi
   //! ## Example
   //! @include doc/flatten_all.cpp
   //================================================================================================
-  template<product_type Tuple> [[nodiscard]] constexpr auto flatten_all(Tuple&& ts)
-  {
-    if constexpr(sized_product_type<Tuple,0>) return ts;
-    else
-    {
-      return kumi::apply( [](auto&&... m)
-                          {
-                            auto v_or_t = []<typename V>(V&& v)
-                            {
-                              if constexpr(product_type<V>) return flatten_all(KUMI_FWD(v));
-                              else                          return kumi::tuple{KUMI_FWD(v)};
-                            };
-
-                            return cat( v_or_t(KUMI_FWD(m))... );
-                          }
-                        , ts
-                        );
-    }
-  }
-
-  /// @overload
   template<product_type Tuple, typename Func>
   [[nodiscard]] constexpr auto flatten_all(Tuple&& ts, Func&& f)
   {
@@ -123,6 +102,28 @@ namespace kumi
                         );
     }
   }
+
+  /// @overload
+  template<product_type Tuple> [[nodiscard]] constexpr auto flatten_all(Tuple&& ts)
+  {
+    if constexpr(sized_product_type<Tuple,0>) return ts;
+    else
+    {
+      return kumi::apply( [](auto&&... m)
+                          {
+                            auto v_or_t = []<typename V>(V&& v)
+                            {
+                              if constexpr(product_type<V>) return flatten_all(KUMI_FWD(v));
+                              else                          return kumi::tuple{KUMI_FWD(v)};
+                            };
+
+                            return cat( v_or_t(KUMI_FWD(m))... );
+                          }
+                        , ts
+                        );
+    }
+  }
+
 
   namespace result
   {
@@ -171,9 +172,9 @@ namespace kumi
   //! @include doc/as_flat_ptr.cpp
   //================================================================================================
   template<product_type Tuple>
-  [[nodiscard]] auto as_flat_ptr(Tuple&& t) noexcept
+  [[nodiscard]] auto as_flat_ptr(Tuple&& ts) noexcept
   {
-    return kumi::flatten_all(KUMI_FWD(t), [](auto& m) { return &m; });
+    return kumi::flatten_all(KUMI_FWD(ts), [](auto& m) { return &m; });
   }
 
   namespace result

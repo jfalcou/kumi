@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>KUMI: kumi::extract</title>
+<title>KUMI: kumi::inner_product</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -98,7 +98,7 @@ var searchBox = new SearchBox("searchBox", "search",'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__generators_gab25e3d9aefef1c6f744a3c1d46a2f1c0.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__reductions_gaf5877256b018bb540f28cc0f7ddd26cb.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -117,35 +117,46 @@ $(document).ready(function(){initNavTree('group__generators_gab25e3d9aefef1c6f74
 </div>
 
 <div class="contents">
-<a id="gab25e3d9aefef1c6f744a3c1d46a2f1c0" name="gab25e3d9aefef1c6f744a3c1d46a2f1c0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab25e3d9aefef1c6f744a3c1d46a2f1c0">&#9670;&nbsp;</a></span>extract()</h2>
+<a id="gaf5877256b018bb540f28cc0f7ddd26cb" name="gaf5877256b018bb540f28cc0f7ddd26cb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf5877256b018bb540f28cc0f7ddd26cb">&#9670;&nbsp;</a></span>inner_product()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::size_t I0, std::size_t I1, product_type Tuple&gt; <br />
-requires ( (I0 &lt;= size_v&lt;Tuple&gt;) &amp;&amp; (I1 &lt;= size_v&lt;Tuple&gt;) )</div>
+template&lt;product_type S1, sized_product_type&lt; S1::size()&gt; S2, typename T , typename Sum , typename Prod &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr auto kumi::extract </td>
+          <td class="memname">constexpr auto kumi::inner_product </td>
           <td>(</td>
-          <td class="paramtype">Tuple const &amp;&#160;</td>
-          <td class="paramname"><em>t</em>, </td>
+          <td class="paramtype">S1 const &amp;&#160;</td>
+          <td class="paramname"><em>s1</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structkumi_1_1index__t.html">index_t</a>&lt; I0 &gt; const &amp;&#160;</td>
-          <td class="paramname">, </td>
+          <td class="paramtype">S2 const &amp;&#160;</td>
+          <td class="paramname"><em>s2</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structkumi_1_1index__t.html">index_t</a>&lt; I1 &gt; const &amp;&#160;</td>
-          <td class="paramname">&#160;</td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>init</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Sum&#160;</td>
+          <td class="paramname"><em>sum</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Prod&#160;</td>
+          <td class="paramname"><em>prod</em>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -160,46 +171,56 @@ requires ( (I0 &lt;= size_v&lt;Tuple&gt;) &amp;&amp; (I1 &lt;= size_v&lt;Tuple&g
 </table>
 </div><div class="memdoc">
 
-<p>Extracts a sub-tuple from a product type. </p>
-<dl class="section note"><dt>Note</dt><dd>Does not participate in overload resolution if <code>I0</code> and <code>I1</code> do not verify that <code>0 &lt;= I0 &lt;= I1 &lt;= size_v&lt;T&gt;</code>. </dd></dl>
+<p>Computes inner product (i.e. sum of products) </p>
+<p >Computes the generalized sum of products of the elements of two product types. By default, <code>+</code> and <code>*</code> is used.</p>
+<dl class="section note"><dt>Note</dt><dd>Does not participate in overload resolution if tuples' size are not equal or if any of the binary operations can't be applied on the tuples' elements.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">t</td><td>Tuple to extract from </td></tr>
-    <tr><td class="paramname">i0</td><td>Compile-time index of the first element to extract. </td></tr>
-    <tr><td class="paramname">i1</td><td>Compile-time index past the last element to extract. By default, <code>i1</code> is equal to <code>size_v&lt;T&gt;</code>. </td></tr>
+    <tr><td class="paramname">s1</td><td>First tuple to operate on </td></tr>
+    <tr><td class="paramname">s2</td><td>Second tuple to operate on </td></tr>
+    <tr><td class="paramname">init</td><td>Initial value </td></tr>
+    <tr><td class="paramname">sum</td><td>Binary callable function to use as the sum operations </td></tr>
+    <tr><td class="paramname">prod</td><td>Binary callable function to use as the product operations </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A new <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> containing to the selected elements of the input tuple.</dd></dl>
-<h2><a class="anchor" id="autotoc_md12"></a>
+<dl class="section return"><dt>Returns</dt><dd>The inner product of <code>s1</code> and <code>s2</code> using the provided binary operations.</dd></dl>
+<h2><a class="anchor" id="autotoc_md27"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;<a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type</a> Tuple, std::size_t I0, std::size_t I1=-1&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__generators_gab25e3d9aefef1c6f744a3c1d46a2f1c0.html#gab25e3d9aefef1c6f744a3c1d46a2f1c0">extract</a>;</div>
+<div class="line">  <span class="keyword">template</span>&lt;product_type S1, sized_product_type&lt;S1::size()&gt; S2, <span class="keyword">typename</span> T&gt;</div>
+<div class="line">  <span class="keyword">struct </span><a class="code hl_function" href="group__reductions_gaf5877256b018bb540f28cc0f7ddd26cb.html#gaf5877256b018bb540f28cc0f7ddd26cb">inner_product</a>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">template</span>&lt;<a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type</a> Tuple, std::size_t I0, std::size_t I1=-1&gt;</div>
-<div class="line">  <span class="keyword">using </span>extract_t = <span class="keyword">typename</span> extract&lt;Tuple,I0,I1&gt;::type;</div>
+<div class="line">  <span class="keyword">template</span>&lt;product_type S1, sized_product_type&lt;S1::size()&gt; S2, <span class="keyword">typename</span> T</div>
+<div class="line">          , <span class="keyword">typename</span> Sum, <span class="keyword">typename</span> Prod</div>
+<div class="line">          &gt;</div>
+<div class="line">  <span class="keyword">struct </span><a class="code hl_function" href="group__reductions_gaf5877256b018bb540f28cc0f7ddd26cb.html#gaf5877256b018bb540f28cc0f7ddd26cb">inner_product</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">template</span>&lt;product_type S1, sized_product_type&lt;S1::size()&gt; S2, <span class="keyword">typename</span> T&gt;</div>
+<div class="line">  <span class="keyword">using </span>inner_product_t = <span class="keyword">typename</span> inner_product&lt;S1,S2,T&gt;::type;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">template</span>&lt; product_type S1, sized_product_type&lt;S1::size()&gt; S2, <span class="keyword">typename</span> T</div>
+<div class="line">          , <span class="keyword">typename</span> Sum, <span class="keyword">typename</span> Prod</div>
+<div class="line">          &gt;</div>
+<div class="line">  <span class="keyword">using </span>inner_product_t = <span class="keyword">typename</span> inner_product&lt;S1,S2,T,Sum,Prod&gt;::type;</div>
 <div class="line">}</div>
-<div class="ttc" id="aconceptkumi_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1product__type.html">kumi::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition:</b> concepts.hpp:48</div></div>
-<div class="ttc" id="agroup__generators_gab25e3d9aefef1c6f744a3c1d46a2f1c0_html_gab25e3d9aefef1c6f744a3c1d46a2f1c0"><div class="ttname"><a href="group__generators_gab25e3d9aefef1c6f744a3c1d46a2f1c0.html#gab25e3d9aefef1c6f744a3c1d46a2f1c0">kumi::extract</a></div><div class="ttdeci">constexpr auto extract(Tuple const &amp;t, index_t&lt; I0 &gt; const &amp;, index_t&lt; I1 &gt; const &amp;) noexcept</div><div class="ttdoc">Extracts a sub-tuple from a product type.</div><div class="ttdef"><b>Definition:</b> extract.hpp:43</div></div>
-</div><!-- fragment --><p >Computes the type returned by a call to extract.</p>
-<h2><a class="anchor" id="autotoc_md13"></a>
-Example:</h2>
+<div class="ttc" id="agroup__reductions_gaf5877256b018bb540f28cc0f7ddd26cb_html_gaf5877256b018bb540f28cc0f7ddd26cb"><div class="ttname"><a href="group__reductions_gaf5877256b018bb540f28cc0f7ddd26cb.html#gaf5877256b018bb540f28cc0f7ddd26cb">kumi::inner_product</a></div><div class="ttdeci">constexpr auto inner_product(S1 const &amp;s1, S2 const &amp;s2, T init, Sum sum, Prod prod) noexcept</div><div class="ttdoc">Computes inner product (i.e. sum of products)</div><div class="ttdef"><b>Definition:</b> inner_product.hpp:85</div></div>
+</div><!-- fragment --><p >Computes the return type of a call to <a class="el" href="group__transforms_ga08fd1535a151e381bebea9cd0956afad.html#ga08fd1535a151e381bebea9cd0956afad" title="Apply the Callable object f on each tuples&#39; elements.">kumi::map</a></p>
+<h2><a class="anchor" id="autotoc_md28"></a>
+Example</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/tuple.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line">  <span class="keyword">auto</span> bits = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{ 1, 0,1,0,0,1};</div>
+<div class="line">  <span class="keyword">auto</span> base = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{32,16,8,4,2,1};</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> a = { 1, 2.3, 4.5f,<span class="charliteral">&#39;6&#39;</span>,<span class="stringliteral">&quot;7&quot;</span>, <span class="keywordtype">short</span>{89} };</div>
-<div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> head = <a class="code hl_function" href="group__generators_gab25e3d9aefef1c6f744a3c1d46a2f1c0.html#gab25e3d9aefef1c6f744a3c1d46a2f1c0">extract</a>(a,0_c,1_c);</div>
-<div class="line">  <span class="keyword">auto</span> mid  = <a class="code hl_function" href="group__generators_gab25e3d9aefef1c6f744a3c1d46a2f1c0.html#gab25e3d9aefef1c6f744a3c1d46a2f1c0">extract</a>(a,1_c,3_c);</div>
-<div class="line">  <span class="keyword">auto</span> last = <a class="code hl_function" href="group__generators_gab25e3d9aefef1c6f744a3c1d46a2f1c0.html#gab25e3d9aefef1c6f744a3c1d46a2f1c0">extract</a>(a,kumi::index&lt;3&gt;);</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span> &lt;&lt; head &lt;&lt; <span class="charliteral">&#39; &#39;</span>  &lt;&lt; mid &lt;&lt; <span class="charliteral">&#39; &#39;</span> &lt;&lt; last &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">  std::cout &lt;&lt; 0b101001L &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_gaf5877256b018bb540f28cc0f7ddd26cb.html#gaf5877256b018bb540f28cc0f7ddd26cb">kumi::inner_product</a>(bits, base, 0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:31</div></div>
 </div><!-- fragment --> 
