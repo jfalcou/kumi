@@ -26,7 +26,7 @@ This Release is an API break release.
  - Improve kumi::flatten implementation (See #20)
 
 ## New Contributors
- - @jehelset made their first contribution in https://github.com/jfalcou/kumi/pull/28
+ - **jehelset** made their first contribution in https://github.com/jfalcou/kumi/pull/28
 
 **Full Changelog**: https://github.com/jfalcou/kumi/compare/v2.1...v3.0
 
