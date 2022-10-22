@@ -70,7 +70,7 @@ namespace kumi
   template<product_type Tuple>
   [[nodiscard]] constexpr auto pop_front(Tuple const& t)
   {
-    if constexpr(Tuple::size()>0) return t.extract(index<1>);
+    if constexpr(Tuple::size()>0) return extract(t, index<1>);
     else                          return tuple<>{};
   }
 
@@ -134,7 +134,7 @@ namespace kumi
   template<product_type Tuple>
   [[nodiscard]] constexpr auto pop_back(Tuple const& t)
   {
-    if constexpr(Tuple::size()>1) return t.extract(index<0>, index<Tuple::size()-1>);
+    if constexpr(Tuple::size()>1) return extract(t,index<0>, index<Tuple::size()-1>);
     else                          return tuple<>{};
   }
 

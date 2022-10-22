@@ -9,7 +9,6 @@
 
 namespace kumi
 {
-
   //================================================================================================
   //! @ingroup generators
   //! @brief Concatenates tuples in a single one

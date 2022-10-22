@@ -75,73 +75,6 @@ namespace kumi
     }
 
     //==============================================================================================
-    //! @brief Extracts a sub-tuple from a kumi::tuple
-    //!
-    //! @note Does not participate in overload resolution if `I0` and `I1` do not verify that
-    //!       `0 <= I0 <= I1 <= sizeof...(Ts)`.
-    //! @param  i0 Compile-time index of the first element to extract.
-    //! @param  i1 Compile-time index past the last element to extract. By default, `i1` is equal to
-    //!         `sizeof...(Ts)`.
-    //! @return A new kumi::tuple containing to the selected elements of current tuple.
-    //!
-    //! ## Example:
-    //! @include doc/extract.cpp
-    //==============================================================================================
-    template<std::size_t I0, std::size_t I1>
-    requires((I1 - I0) <= sizeof...(Ts))
-    [[nodiscard]] constexpr auto extract(index_t<I0> const &, index_t<I1> const &) const noexcept
-    {
-      return [&]<std::size_t... N>(std::index_sequence<N...>)
-      {
-        return tuple<std::tuple_element_t<N + I0, tuple>...> {(*this)[index<N + I0>]...};
-      }
-      (std::make_index_sequence<I1 - I0>());
-    }
-
-    /// @overload
-    template<std::size_t I0>
-    requires(I0 <= sizeof...(Ts))
-    [[nodiscard]] constexpr auto extract(index_t<I0> const &) const noexcept
-    {
-      return [&]<std::size_t... N>(std::index_sequence<N...>)
-      {
-        return tuple<std::tuple_element_t<N + I0, tuple>...> {(*this)[index<N + I0>]...};
-      }
-      (std::make_index_sequence<sizeof...(Ts) - I0>());
-    }
-
-    //==============================================================================================
-    //! @brief Split a tuple into two
-    //!
-    //! Split a kumi::tuple in two kumi::tuple containing all the elements before and after
-    //! a given index.
-    //!
-    //! @note Does not participate in overload resolution if `I0` is not in `[0, sizeof...(Ts)[`.
-    //!
-    //! @param  i0 Compile-time index of the first element to extract.
-    //! @return A new kumi::tuple containing the two sub-tuple cut at index I.
-    //!
-    //!
-    //! ## Helper type
-    //! @code
-    //! namespace kumi::result
-    //! {
-    //!   template<std::size_t I0, product_type Tuple> struct split;
-    //!
-    //!   template<std::size_t I0, product_type Tuple>
-    //!   using split_t = typename split<I0,Tuple>::type;
-    //! }
-    //! @endcode
-    //!
-    //! Computes the type returned by a call to split.
-    //!
-    //! ## Example:
-    //! @include doc/split.cpp
-    //==============================================================================================
-    template<std::size_t I0>
-    requires(I0 <= sizeof...(Ts)) [[nodiscard]] constexpr auto split(index_t<I0> const&) const noexcept;
-
-    //==============================================================================================
     //! @}
     //==============================================================================================
 
@@ -507,24 +440,6 @@ namespace kumi
   //================================================================================================
   //! @}
   //================================================================================================
-
-  template<typename... Ts>
-  template<std::size_t I0>
-  requires(I0 <= sizeof...(Ts))
-  [[nodiscard]] constexpr auto tuple<Ts...>::split(index_t<I0> const &) const noexcept
-  {
-    return kumi::make_tuple(extract(index<0>, index<I0>), extract(index<I0>));
-  }
-
-  namespace result
-  {
-    template<product_type T, std::size_t I0> struct split
-    {
-      using type = decltype ( std::declval<T>().split(kumi::index_t<I0>{}) );
-    };
-
-    template<product_type T, std::size_t I0> using split_t = typename split<T,I0>::type;
-  }
 }
 
 #include <kumi/algorithm.hpp>

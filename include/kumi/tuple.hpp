@@ -286,28 +286,6 @@ namespace kumi
     {
       return detail::get_leaf<I>(impl);
     }
-    template<std::size_t I0, std::size_t I1>
-    requires((I1 - I0) <= sizeof...(Ts))
-    [[nodiscard]] constexpr auto extract(index_t<I0> const &, index_t<I1> const &) const noexcept
-    {
-      return [&]<std::size_t... N>(std::index_sequence<N...>)
-      {
-        return tuple<std::tuple_element_t<N + I0, tuple>...> {(*this)[index<N + I0>]...};
-      }
-      (std::make_index_sequence<I1 - I0>());
-    }
-    template<std::size_t I0>
-    requires(I0 <= sizeof...(Ts))
-    [[nodiscard]] constexpr auto extract(index_t<I0> const &) const noexcept
-    {
-      return [&]<std::size_t... N>(std::index_sequence<N...>)
-      {
-        return tuple<std::tuple_element_t<N + I0, tuple>...> {(*this)[index<N + I0>]...};
-      }
-      (std::make_index_sequence<sizeof...(Ts) - I0>());
-    }
-    template<std::size_t I0>
-    requires(I0 <= sizeof...(Ts)) [[nodiscard]] constexpr auto split(index_t<I0> const&) const noexcept;
     [[nodiscard]] static constexpr auto size() noexcept { return sizeof...(Ts); }
     [[nodiscard]] static constexpr bool empty() noexcept { return sizeof...(Ts) == 0; }
     template<typename... Us>
@@ -476,21 +454,6 @@ namespace kumi
   {
     return static_cast<tuple<Ts...> const &&>(arg)[index<I>];
   }
-  template<typename... Ts>
-  template<std::size_t I0>
-  requires(I0 <= sizeof...(Ts))
-  [[nodiscard]] constexpr auto tuple<Ts...>::split(index_t<I0> const &) const noexcept
-  {
-    return kumi::make_tuple(extract(index<0>, index<I0>), extract(index<I0>));
-  }
-  namespace result
-  {
-    template<product_type T, std::size_t I0> struct split
-    {
-      using type = decltype ( std::declval<T>().split(kumi::index_t<I0>{}) );
-    };
-    template<product_type T, std::size_t I0> using split_t = typename split<T,I0>::type;
-  }
 }
 namespace kumi
 {
@@ -645,6 +608,58 @@ namespace kumi
   {};
   template<product_type Tuple, template<typename...> class Meta = std::type_identity>
   using as_tuple_t =  typename as_tuple<Tuple, Meta>::type;
+}
+namespace kumi
+{
+  template<std::size_t I0, std::size_t I1, product_type Tuple>
+  requires( (I0 <= size_v<Tuple>) && (I1 <= size_v<Tuple>) )
+  [[nodiscard]] constexpr
+  auto extract(Tuple const& t, index_t<I0> const &, index_t<I1> const &) noexcept
+  {
+    return [&]<std::size_t... N>(std::index_sequence<N...>)
+    {
+      return kumi::tuple<std::tuple_element_t<N + I0, Tuple>...> {get<N + I0>(t)...};
+    }
+    (std::make_index_sequence<I1 - I0>());
+  }
+  template<std::size_t I0, product_type Tuple>
+  requires(I0<= size_v<Tuple>)
+  [[nodiscard]] constexpr
+  auto extract(Tuple const& t, index_t<I0> const& i0) noexcept
+  {
+    return extract(t,i0, index<size_v<Tuple>>);
+  }
+  template<std::size_t I0, product_type Tuple>
+  requires(I0 <= size_v<Tuple>)
+  [[nodiscard]] constexpr auto split(Tuple const& t, index_t<I0> const&) noexcept
+  {
+    return kumi::make_tuple(extract(t,index<0>, index<I0>), extract(t,index<I0>));
+  }
+  namespace result
+  {
+    template<product_type T, std::size_t I0, std::size_t I1 = std::size_t(-1)>
+    struct extract
+    {
+      using type = decltype ( kumi::extract ( std::declval<T>()
+                                            , kumi::index_t<I0>{},kumi::index_t<I1>{}
+                                            )
+                            );
+    };
+    template<product_type T, std::size_t I0>
+    struct extract<T,I0>
+    {
+      using type = decltype(kumi::extract(std::declval<T>(),kumi::index_t<I0>{}) );
+    };
+    template<product_type T, std::size_t I0>
+    struct split
+    {
+      using type = decltype(kumi::split(std::declval<T>(),kumi::index_t<I0>{}) );
+    };
+    template<product_type T, std::size_t I0, std::size_t I1 = std::size_t(-1)>
+    using extract_t = typename extract<T,I0,I1>::type;
+    template<product_type T, std::size_t I0>
+    using split_t = typename split<T,I0>::type;
+  }
 }
 namespace kumi
 {
@@ -950,7 +965,7 @@ namespace kumi
   template<product_type Tuple>
   [[nodiscard]] constexpr auto pop_front(Tuple const& t)
   {
-    if constexpr(Tuple::size()>0) return t.extract(index<1>);
+    if constexpr(Tuple::size()>0) return extract(t, index<1>);
     else                          return tuple<>{};
   }
   template<product_type Tuple, typename T>
@@ -965,7 +980,7 @@ namespace kumi
   template<product_type Tuple>
   [[nodiscard]] constexpr auto pop_back(Tuple const& t)
   {
-    if constexpr(Tuple::size()>1) return t.extract(index<0>, index<Tuple::size()-1>);
+    if constexpr(Tuple::size()>1) return extract(t,index<0>, index<Tuple::size()-1>);
     else                          return tuple<>{};
   }
   namespace result
