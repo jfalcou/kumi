@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>KUMI: Helper types and function</title>
+<title>KUMI: Helper Types and Functions</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -121,7 +121,7 @@ $(document).ready(function(){initNavTree('group__utility.html',''); initResizabl
 <a href="#nested-classes">Classes</a> &#124;
 <a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
-  <div class="headertitle"><div class="title">Helper types and function</div></div>
+  <div class="headertitle"><div class="title">Helper Types and Functions</div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -144,6 +144,11 @@ requires ( size_v&lt;Tuple&gt; != 0)</td></tr>
 <tr class="memitem:ga6d1e220549b74a2234e7ce58bf791d3e"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_ga6d1e220549b74a2234e7ce58bf791d3e.html#ga6d1e220549b74a2234e7ce58bf791d3e">kumi::back</a> (Tuple &amp;&amp;t)</td></tr>
 <tr class="memdesc:ga6d1e220549b74a2234e7ce58bf791d3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the back of a tuple.  <a href="group__utility_ga6d1e220549b74a2234e7ce58bf791d3e.html#ga6d1e220549b74a2234e7ce58bf791d3e">More...</a><br /></td></tr>
 <tr class="separator:ga6d1e220549b74a2234e7ce58bf791d3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga72dbe13699119936d7a26f4c4b8ff8e5"><td class="memTemplParams" colspan="2">template&lt;typename Type , typename... Ts&gt; <br />
+requires (!product_type&lt;Type&gt; &amp;&amp; detail::implicit_constructible&lt;Type, Ts...&gt;)</td></tr>
+<tr class="memitem:ga72dbe13699119936d7a26f4c4b8ff8e5"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_ga72dbe13699119936d7a26f4c4b8ff8e5.html#ga72dbe13699119936d7a26f4c4b8ff8e5">kumi::from_tuple</a> (<a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Ts... &gt; const &amp;t)</td></tr>
+<tr class="memdesc:ga72dbe13699119936d7a26f4c4b8ff8e5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> to an instance of an arbitrary type.  <a href="group__utility_ga72dbe13699119936d7a26f4c4b8ff8e5.html#ga72dbe13699119936d7a26f4c4b8ff8e5">More...</a><br /></td></tr>
+<tr class="separator:ga72dbe13699119936d7a26f4c4b8ff8e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gae40b8dfe98266c4f62395c369833eef3"><td class="memTemplParams" colspan="2">template&lt;product_type Tuple&gt; <br />
 requires ( size_v&lt;Tuple&gt; != 0)</td></tr>
 <tr class="memitem:gae40b8dfe98266c4f62395c369833eef3"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_gae40b8dfe98266c4f62395c369833eef3.html#gae40b8dfe98266c4f62395c369833eef3">kumi::front</a> (Tuple &amp;&amp;t)</td></tr>
@@ -157,6 +162,10 @@ requires ( size_v&lt;Tuple&gt; != 0)</td></tr>
 <tr class="memitem:ga9c8c29e8a2f4f5e8a663200559fdc983"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_ga9c8c29e8a2f4f5e8a663200559fdc983.html#ga9c8c29e8a2f4f5e8a663200559fdc983">kumi::predicate</a> () noexcept</td></tr>
 <tr class="memdesc:ga9c8c29e8a2f4f5e8a663200559fdc983"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a unary template meta-program in a running predicate.  <a href="group__utility_ga9c8c29e8a2f4f5e8a663200559fdc983.html#ga9c8c29e8a2f4f5e8a663200559fdc983">More...</a><br /></td></tr>
 <tr class="separator:ga9c8c29e8a2f4f5e8a663200559fdc983"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae6de7cdd99f5e217028b93d4bcf3de52"><td class="memTemplParams" colspan="2">template&lt;product_type Type&gt; </td></tr>
+<tr class="memitem:gae6de7cdd99f5e217028b93d4bcf3de52"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_gae6de7cdd99f5e217028b93d4bcf3de52.html#gae6de7cdd99f5e217028b93d4bcf3de52">kumi::to_tuple</a> (Type &amp;&amp;t)</td></tr>
+<tr class="memdesc:gae6de7cdd99f5e217028b93d4bcf3de52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a> to an instance <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>.  <a href="group__utility_gae6de7cdd99f5e217028b93d4bcf3de52.html#gae6de7cdd99f5e217028b93d4bcf3de52">More...</a><br /></td></tr>
+<tr class="separator:gae6de7cdd99f5e217028b93d4bcf3de52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>

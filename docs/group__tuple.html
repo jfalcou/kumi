@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>KUMI: Tuple types and function</title>
+<title>KUMI: Tuple Types and Functions</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -118,53 +118,29 @@ $(document).ready(function(){initNavTree('group__tuple.html',''); initResizable(
 
 <div class="header">
   <div class="summary">
+<a href="#groups">Modules</a> &#124;
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#concepts">Concepts</a> &#124;
 <a href="#friend-members">Friends</a>  </div>
-  <div class="headertitle"><div class="title">Tuple types and function</div></div>
+  <div class="headertitle"><div class="title">Tuple Types and Functions</div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>Definition for <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> class and functions.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
-Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1element.html">kumi::element&lt; I, T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides indexed access to the types of the elements of a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>.  <a href="structkumi_1_1element.html#details">More...</a><br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="groups" name="groups"></a>
+Modules</h2></td></tr>
+<tr class="memitem:group__concepts"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__concepts.html">Tuple Related Concepts</a></td></tr>
+<tr class="memdesc:group__concepts"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definition for product types related Concepts. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1is__product__type.html">kumi::is_product_type&lt; T, Enable &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opt-in traits for types behaving like a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>.  <a href="structkumi_1_1is__product__type.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1member.html">kumi::member&lt; I, T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the return type of a call to <a class="el" href="namespacekumi.html#ac4fd10ae8604dc8f891d7f4717dfa57e" title="This is an overloaded member function, provided for convenience. It differs from the above function o...">kumi::get</a>.  <a href="structkumi_1_1member.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1size.html">kumi::size&lt; T &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the number of elements of a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>.  <a href="structkumi_1_1size.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1tuple.html">kumi::tuple&lt; Ts &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed-size collection of heterogeneous values.  <a href="structkumi_1_1tuple.html#details">More...</a><br /></td></tr>
+<tr class="memitem:group__traits"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="group__traits.html">Tuple Related Traits</a></td></tr>
+<tr class="memdesc:group__traits"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definition for <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> traits and extension points. <br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="concepts" name="concepts"></a>
-Concepts</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conceptkumi_1_1non__empty__tuple.html">kumi::non_empty_tuple</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying a type is non-empty standard tuple-like type. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conceptkumi_1_1empty__tuple.html">kumi::empty_tuple</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying a type is an empty standard tuple-like type. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conceptkumi_1_1std__tuple__compatible.html">kumi::std_tuple_compatible</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying a type is a standard tuple-like type. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conceptkumi_1_1product__type.html">kumi::product_type</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying a type follows the Product Type semantic. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conceptkumi_1_1sized__product__type.html">kumi::sized_product_type</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying a type follows the Product Type semantic and has a known size. <br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">concept &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="conceptkumi_1_1sized__product__type__or__more.html">kumi::sized_product_type_or_more</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying a type follows the Product Type semantic and has a size lower bound. <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
+Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1tuple.html">kumi::tuple&lt; Ts &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Fixed-size collection of heterogeneous values.  <a href="structkumi_1_1tuple.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="friend-members" name="friend-members"></a>
@@ -226,16 +202,16 @@ template&lt;product_type Other&gt; </td></tr>
 <tr class="memitem:ga19e137f478dd0c41fcf1dea1e1436692"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__tuple_ga19e137f478dd0c41fcf1dea1e1436692.html#ga19e137f478dd0c41fcf1dea1e1436692">make_tuple</a> (Ts &amp;&amp;...ts)</td></tr>
 <tr class="memdesc:ga19e137f478dd0c41fcf1dea1e1436692"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a tuple object, deducing the target type from the types of arguments.  <a href="group__tuple_ga19e137f478dd0c41fcf1dea1e1436692.html#ga19e137f478dd0c41fcf1dea1e1436692">More...</a><br /></td></tr>
 <tr class="separator:ga19e137f478dd0c41fcf1dea1e1436692"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga539c272747241a38b6c2612c00880826"><td class="memTemplParams" colspan="2">template&lt;product_type Type&gt; </td></tr>
-<tr class="memitem:ga539c272747241a38b6c2612c00880826"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__tuple_ga539c272747241a38b6c2612c00880826.html#ga539c272747241a38b6c2612c00880826">to_ref</a> (Type &amp;&amp;that)</td></tr>
-<tr class="memdesc:ga539c272747241a38b6c2612c00880826"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> of references given a reference to a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>.  <a href="group__tuple_ga539c272747241a38b6c2612c00880826.html#ga539c272747241a38b6c2612c00880826">More...</a><br /></td></tr>
-<tr class="separator:ga539c272747241a38b6c2612c00880826"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6cde1bebcc6150b864820645ad4cf14f"><td class="memTemplParams" colspan="2">template&lt;product_type Type&gt; </td></tr>
+<tr class="memitem:ga6cde1bebcc6150b864820645ad4cf14f"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__tuple_ga6cde1bebcc6150b864820645ad4cf14f.html#ga6cde1bebcc6150b864820645ad4cf14f">to_ref</a> (Type &amp;&amp;t)</td></tr>
+<tr class="memdesc:ga6cde1bebcc6150b864820645ad4cf14f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> of references given a reference to a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>.  <a href="group__tuple_ga6cde1bebcc6150b864820645ad4cf14f.html#ga6cde1bebcc6150b864820645ad4cf14f">More...</a><br /></td></tr>
+<tr class="separator:ga6cde1bebcc6150b864820645ad4cf14f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader">Accessors</h2></td></tr>
-<tr class="memitem:gaf6552a41ee23ce3123143e287dca7bc4"><td class="memTemplParams" colspan="2">template&lt;std::size_t I, typename... Ts&gt; </td></tr>
-<tr class="memitem:gaf6552a41ee23ce3123143e287dca7bc4"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto) constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__tuple_gaf6552a41ee23ce3123143e287dca7bc4.html#gaf6552a41ee23ce3123143e287dca7bc4">get</a> (<a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Ts... &gt; &amp;arg) noexcept</td></tr>
-<tr class="memdesc:gaf6552a41ee23ce3123143e287dca7bc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the Ith element from a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>.  <a href="group__tuple_gaf6552a41ee23ce3123143e287dca7bc4.html#gaf6552a41ee23ce3123143e287dca7bc4">More...</a><br /></td></tr>
-<tr class="separator:gaf6552a41ee23ce3123143e287dca7bc4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7b9b1b3fbe3d201542691bee350d8a08"><td class="memTemplParams" colspan="2">template&lt;std::size_t I, typename... Ts&gt; </td></tr>
+<tr class="memitem:ga7b9b1b3fbe3d201542691bee350d8a08"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto) constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__tuple_ga7b9b1b3fbe3d201542691bee350d8a08.html#ga7b9b1b3fbe3d201542691bee350d8a08">get</a> (<a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Ts... &gt; &amp;t) noexcept</td></tr>
+<tr class="memdesc:ga7b9b1b3fbe3d201542691bee350d8a08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the Ith element from a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>.  <a href="group__tuple_ga7b9b1b3fbe3d201542691bee350d8a08.html#ga7b9b1b3fbe3d201542691bee350d8a08">More...</a><br /></td></tr>
+<tr class="separator:ga7b9b1b3fbe3d201542691bee350d8a08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
