@@ -35,21 +35,29 @@ var NAVTREE =
       [ "CPM Integration", "md_kumi_doc_page01_setup.html#autotoc_md87", null ]
     ] ],
     [ "Change Log", "changelog.html", [
-      [ "Version 2.1 - Charming Chrysoprase", "changelog.html#autotoc_md88", [
+      [ "Version 3.0 - Delicious Datolite", "changelog.html#autotoc_md88", [
         [ "What's Changed", "changelog.html#autotoc_md89", [
-          [ "Bug Fixes", "changelog.html#autotoc_md90", null ],
-          [ "New Features", "changelog.html#autotoc_md91", null ]
+          [ "API and Infrastructure Changes", "changelog.html#autotoc_md90", null ],
+          [ "New Features", "changelog.html#autotoc_md91", null ],
+          [ "Bug Fixes", "changelog.html#autotoc_md92", null ]
+        ] ],
+        [ "New Contributors", "changelog.html#autotoc_md93", null ]
+      ] ],
+      [ "Version 2.1 - Charming Chrysoprase", "changelog.html#autotoc_md94", [
+        [ "What's Changed", "changelog.html#autotoc_md95", [
+          [ "Bug Fixes", "changelog.html#autotoc_md96", null ],
+          [ "New Features", "changelog.html#autotoc_md97", null ]
         ] ]
       ] ],
-      [ "Version 2.0 - Bedazzling Beryl", "changelog.html#autotoc_md92", [
-        [ "What's Changed", "changelog.html#autotoc_md93", [
-          [ "Infrastructure", "changelog.html#autotoc_md94", null ],
-          [ "Bug Fixes", "changelog.html#autotoc_md95", null ],
-          [ "New Features", "changelog.html#autotoc_md96", null ]
+      [ "Version 2.0 - Bedazzling Beryl", "changelog.html#autotoc_md98", [
+        [ "What's Changed", "changelog.html#autotoc_md99", [
+          [ "Infrastructure", "changelog.html#autotoc_md100", null ],
+          [ "Bug Fixes", "changelog.html#autotoc_md101", null ],
+          [ "New Features", "changelog.html#autotoc_md102", null ]
         ] ]
       ] ],
-      [ "Version 1.0 - Amazing Amethyst", "changelog.html#autotoc_md97", [
-        [ "First autonomous public release.", "changelog.html#autotoc_md98", null ]
+      [ "Version 1.0 - Amazing Amethyst", "changelog.html#autotoc_md103", [
+        [ "First autonomous public release.", "changelog.html#autotoc_md104", null ]
       ] ]
     ] ],
     [ "Licence", "licence.html", [

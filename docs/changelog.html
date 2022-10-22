@@ -56,7 +56,7 @@ MathJax.Hub.Config({
   <td id="projectalign">
    <div id="projectname">KUMI
    </div>
-   <div id="projectbrief">v2.1 - Charming Chrysoprase</div>
+   <div id="projectbrief">v3.0 - Delicious Datolite</div>
   </td>
  </tr>
    <tr><td colspan="2" style="padding: 20px 0px 0px 0px;">        <div id="MSearchBox" class="MSearchBoxInactive">
@@ -122,38 +122,73 @@ $(document).ready(function(){initNavTree('changelog.html',''); initResizable(); 
 <div class="contents">
 <div class="textblock"><p ><a class="anchor" id="md_kumi_doc_page10_changelog"></a></p>
 <h1><a class="anchor" id="autotoc_md88"></a>
-Version 2.1 - Charming Chrysoprase</h1>
+Version 3.0 - Delicious Datolite</h1>
+<p >This Release is an API break release.</p>
 <h2><a class="anchor" id="autotoc_md89"></a>
 What's Changed</h2>
 <h3><a class="anchor" id="autotoc_md90"></a>
+API and Infrastructure Changes</h3>
+<ul>
+<li><a class="el" href="group__generators_gab25e3d9aefef1c6f744a3c1d46a2f1c0.html#gab25e3d9aefef1c6f744a3c1d46a2f1c0" title="Extracts a sub-tuple from a product type.">kumi::extract</a> and <a class="el" href="group__generators_ga87e4fc883e0f16b295a373a1e05a262c.html#ga87e4fc883e0f16b295a373a1e05a262c" title="Split a tuple into two.">kumi::split</a> are now free functions (See #40)</li>
+<li>KUMI implementation is now done in split file that get aggregated (See #34)</li>
+<li>Massive documentation revamping (See #27, #28)</li>
+<li>Added proper integration tests (See #35)</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md91"></a>
+New Features</h3>
+<ul>
+<li>Implemented <a class="el" href="group__generators_ga19ced0b66d1e3dae7bfa60f7def6914f.html#ga19ced0b66d1e3dae7bfa60f7def6914f" title="Creates a kumi::tuple containing an increasing ramp of values.">kumi::iota</a> and generate (See #23)</li>
+<li>Implemented <a class="el" href="group__generators_ga1a62cf631e1471cf1da2b2f7ae2120b0.html#ga1a62cf631e1471cf1da2b2f7ae2120b0" title="Return the Cartesian Product of all elements of its arguments product types.">kumi::cartesian_product</a> (See #26)</li>
+<li>Implemented predicate based operations on tuple (See #25)</li>
+<li>Implemented <a class="el" href="group__reductions_ga5b5aff48796b3da4d80700c5dfcb68d6.html#ga5b5aff48796b3da4d80700c5dfcb68d6" title="Computes inner product (i.e. sum of products)">kumi::inner_product</a> (See #36)</li>
+<li>Implemented <a class="el" href="group__utility_ga6d1e220549b74a2234e7ce58bf791d3e.html#ga6d1e220549b74a2234e7ce58bf791d3e" title="Retrieves the back of a tuple.">kumi::back</a> and <a class="el" href="group__utility_gae40b8dfe98266c4f62395c369833eef3.html#gae40b8dfe98266c4f62395c369833eef3" title="Retrieves the front of a tuple.">kumi::front</a> (See #37)</li>
+<li>Implemented <a class="el" href="group__generators_ga49abf24bfdc3e6c8707cd321d9015212.html#ga49abf24bfdc3e6c8707cd321d9015212" title="Reverse elements of a kumi::product_type.">kumi::reverse</a> (See #39)</li>
+</ul>
+<h3><a class="anchor" id="autotoc_md92"></a>
+Bug Fixes</h3>
+<ul>
+<li>Fix #18 - Bad interaction with tuple of references (See #19)</li>
+<li>Improve <a class="el" href="group__generators_gaeefb24a9d75d8753477bae03bc6e205c.html#gaeefb24a9d75d8753477bae03bc6e205c" title="Converts a tuple of tuples into a tuple of all elements.">kumi::flatten</a> implementation (See #20)</li>
+</ul>
+<h2><a class="anchor" id="autotoc_md93"></a>
+New Contributors</h2>
+<ul>
+<li>@jehelset made their first contribution in <a href="https://github.com/jfalcou/kumi/pull/28">https://github.com/jfalcou/kumi/pull/28</a></li>
+</ul>
+<p ><b>Full Changelog</b>: <a href="https://github.com/jfalcou/kumi/compare/v2.1...v3.0">https://github.com/jfalcou/kumi/compare/v2.1...v3.0</a></p>
+<h1><a class="anchor" id="autotoc_md94"></a>
+Version 2.1 - Charming Chrysoprase</h1>
+<h2><a class="anchor" id="autotoc_md95"></a>
+What's Changed</h2>
+<h3><a class="anchor" id="autotoc_md96"></a>
 Bug Fixes</h3>
 <ul>
 <li>Improve <code><a class="el" href="group__generators_ga20e70383bcf8f7b75f53e7a16594d43f.html#ga20e70383bcf8f7b75f53e7a16594d43f" title="Concatenates tuples in a single one.">kumi::cat</a></code> implementation to perform <code>O(N)</code> copies.</li>
 <li>Use include guards to prevent issue when different project use KUMI concurrently.</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md91"></a>
+<h3><a class="anchor" id="autotoc_md97"></a>
 New Features</h3>
 <ul>
 <li>Added the <code><a class="el" href="conceptkumi_1_1sized__product__type__or__more.html" title="Concept specifying a type follows the Product Type semantic and has a size lower bound.">kumi::sized_product_type_or_more</a></code> concept</li>
 <li>Implements <code>kumi::to_ref</code> to construct a tuple of references form a reference to a tuple.</li>
 </ul>
 <p ><b>Full Changelog</b>: <a href="https://github.com/jfalcou/kumi/compare/v2.0...v2.1">https://github.com/jfalcou/kumi/compare/v2.0...v2.1</a></p>
-<h1><a class="anchor" id="autotoc_md92"></a>
+<h1><a class="anchor" id="autotoc_md98"></a>
 Version 2.0 - Bedazzling Beryl</h1>
-<h2><a class="anchor" id="autotoc_md93"></a>
+<h2><a class="anchor" id="autotoc_md99"></a>
 What's Changed</h2>
-<h3><a class="anchor" id="autotoc_md94"></a>
+<h3><a class="anchor" id="autotoc_md100"></a>
 Infrastructure</h3>
 <ul>
 <li>#6 - Moved kumi.hpp to tuple/kumi.hpp</li>
 </ul>
 <p >This is a slightly API breaking change but as the library gains traction, I hanged the file to a less surprising name.</p>
-<h3><a class="anchor" id="autotoc_md95"></a>
+<h3><a class="anchor" id="autotoc_md101"></a>
 Bug Fixes</h3>
 <ul>
 <li>#12 - Make == and != SFINAE friendly</li>
 </ul>
-<h3><a class="anchor" id="autotoc_md96"></a>
+<h3><a class="anchor" id="autotoc_md102"></a>
 New Features</h3>
 <ul>
 <li>#4 - Add map_index</li>
@@ -162,9 +197,9 @@ New Features</h3>
 <li>#7 - <code><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a></code> supports min and max</li>
 </ul>
 <p ><b>Full Changelog</b>: <a href="https://github.com/jfalcou/kumi/compare/v1.0...v2.0">https://github.com/jfalcou/kumi/compare/v1.0...v2.0</a></p>
-<h1><a class="anchor" id="autotoc_md97"></a>
+<h1><a class="anchor" id="autotoc_md103"></a>
 Version 1.0 - Amazing Amethyst</h1>
-<h2><a class="anchor" id="autotoc_md98"></a>
+<h2><a class="anchor" id="autotoc_md104"></a>
 First autonomous public release.</h2>
 <p ><b>KUMI</b> (組) is now independent of the OFW repository. </p>
 </div></div><!-- contents -->
