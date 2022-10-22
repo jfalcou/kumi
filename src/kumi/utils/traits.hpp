@@ -13,7 +13,7 @@
 namespace kumi
 {
   //================================================================================================
-  //! @ingroup tuple
+  //! @ingroup traits
   //! @brief Opt-in traits for types behaving like a kumi::product_type
   //!
   //! To be treated like a tuple, an user defined type must supports structured bindings opt-in to
@@ -31,7 +31,7 @@ namespace kumi
   template<typename T> struct is_product_type<T, typename T::is_product_type> : std::true_type {};
 
   //================================================================================================
-  //! @ingroup tuple
+  //! @ingroup traits
   //! @brief Computes the number of elements of a kumi::product_type
   //!
   //! @param T kumi::product_type to inspect
@@ -50,7 +50,7 @@ namespace kumi
 
   template<typename T> inline constexpr auto size_v = size<T>::value;
   //================================================================================================
-  //! @ingroup tuple
+  //! @ingroup traits
   //! @brief Provides indexed access to the types of the elements of a kumi::product_type.
   //!
   //! @tparam I Index of the type to retrieve
@@ -73,7 +73,7 @@ namespace kumi
   template<std::size_t I, typename T> using  element_t = typename element<I,T>::type;
 
   //================================================================================================
-  //! @ingroup tuple
+  //! @ingroup traits
   //! @brief Computes the return type of a call to kumi::get
   //!
   //! @tparam I Index of the type to retrieve

@@ -14,11 +14,20 @@
 namespace kumi
 {
   //================================================================================================
-  //! @defgroup utility   Helper types and function
+  //! @defgroup utility   Helper Types and Functions
   //! @brief    Tools for interacting with kumi::tuple
   //!
-  //! @defgroup tuple     Tuple types and function
+  //! @defgroup tuple     Tuple Types and Functions
   //! @brief    Definition for kumi::tuple class and functions
+  //!
+  //! @ingroup  tuple
+  //! @{
+  //!   @defgroup concepts     Tuple Related Concepts
+  //!   @brief    Definition for product types related Concepts
+  //!
+  //!   @defgroup traits     Tuple Related Traits
+  //!   @brief    Definition for kumi::tuple traits and extension points
+  //! @}
   //================================================================================================
 }
 

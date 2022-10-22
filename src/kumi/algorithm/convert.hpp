@@ -36,11 +36,7 @@ namespace kumi
   }
 
   //================================================================================================
-  //! @name Conversions
-  //! @{
-  //================================================================================================
-
-  //================================================================================================
+  //! @ingroup utility
   //! @brief Converts a kumi::tuple to an instance of an arbitrary type
   //!
   //! Constructs an instance of `Type` by passing elements of `t` to the appropriate constructor.
@@ -61,6 +57,7 @@ namespace kumi
   }
 
   //================================================================================================
+  //! @ingroup utility
   //! @brief Converts a kumi::product_type to an instance kumi::tuple
   //!
   //! Constructs an instance kumi::tuple from the elements of the kumi::product_type parameters
@@ -110,8 +107,4 @@ namespace kumi
 
   template<product_type Tuple, template<typename...> class Meta = std::type_identity>
   using as_tuple_t =  typename as_tuple<Tuple, Meta>::type;
-
-  //================================================================================================
-  //! @}
-  //================================================================================================
 }

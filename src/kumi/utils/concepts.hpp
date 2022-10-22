@@ -16,7 +16,7 @@
 namespace kumi
 {
   //================================================================================================
-  //! @ingroup tuple
+  //! @ingroup concepts
   //! @brief Concept specifying a type is non-empty standard tuple-like type.
   //================================================================================================
   template<typename T> concept non_empty_tuple = requires( T const &t )
@@ -26,19 +26,19 @@ namespace kumi
   };
 
   //================================================================================================
-  //! @ingroup tuple
+  //! @ingroup concepts
   //! @brief Concept specifying a type is an empty standard tuple-like type.
   //================================================================================================
   template<typename T> concept empty_tuple = (std::tuple_size<std::remove_cvref_t<T>>::value == 0);
 
   //================================================================================================
-  //! @ingroup tuple
+  //! @ingroup concepts
   //! @brief Concept specifying a type is a standard tuple-like type.
   //================================================================================================
   template<typename T> concept std_tuple_compatible = empty_tuple<T> || non_empty_tuple<T>;
 
   //================================================================================================
-  //! @ingroup tuple
+  //! @ingroup concepts
   //! @brief Concept specifying a type follows the Product Type semantic
   //!
   //! A type `T` models `kumi::product_type` if it opts in for the Product Type semantic and
@@ -48,7 +48,7 @@ namespace kumi
   concept product_type = std_tuple_compatible<T> && is_product_type<std::remove_cvref_t<T>>::value;
 
   //================================================================================================
-  //! @ingroup tuple
+  //! @ingroup concepts
   //! @brief Concept specifying a type follows the Product Type semantic and has a known size
   //!
   //! A type `T` models `kumi::sized_product_type<N>` if it models `kumi::product_type` and has
@@ -58,7 +58,7 @@ namespace kumi
   concept sized_product_type = product_type<T> && (size<T>::value == N);
 
   //================================================================================================
-  //! @ingroup tuple
+  //! @ingroup concepts
   //! @brief Concept specifying a type follows the Product Type semantic and has a size lower bound
   //!
   //! A type `T` models `kumi::sized_product_type<N>` if it models `kumi::product_type` and has

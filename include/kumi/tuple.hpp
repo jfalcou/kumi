@@ -267,7 +267,8 @@ namespace kumi
     using is_product_type = void;
     detail::binder<std::make_index_sequence<sizeof...(Ts)>, Ts...> impl;
     template<std::size_t I>
-    requires(I < sizeof...(Ts)) constexpr decltype(auto) operator[](index_t<I>) &noexcept
+    requires(I < sizeof...(Ts))
+    constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) &noexcept
     {
       return detail::get_leaf<I>(impl);
     }
@@ -422,19 +423,19 @@ namespace kumi
   {
     return {KUMI_FWD(ts)...};
   }
-  template<product_type Type> [[nodiscard]] constexpr auto to_ref(Type&& that)
+  template<product_type Type> [[nodiscard]] constexpr auto to_ref(Type&& t)
   {
     return apply( [](auto&&... elems)
                   {
                     return kumi::forward_as_tuple(KUMI_FWD(elems)...);
                   }
-                , KUMI_FWD(that)
+                , KUMI_FWD(t)
                 );
   }
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts)) [[nodiscard]] constexpr decltype(auto) get(tuple<Ts...> &arg) noexcept
+  requires(I < sizeof...(Ts)) [[nodiscard]] constexpr decltype(auto) get(tuple<Ts...> &t) noexcept
   {
-    return arg[index<I>];
+    return t[index<I>];
   }
   template<std::size_t I, typename... Ts>
   requires(I < sizeof...(Ts)) [[nodiscard]] constexpr decltype(auto)

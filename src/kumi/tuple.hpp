@@ -48,7 +48,8 @@ namespace kumi
     //! @include doc/subscript.cpp
     //==============================================================================================
     template<std::size_t I>
-    requires(I < sizeof...(Ts)) constexpr decltype(auto) operator[](index_t<I>) &noexcept
+    requires(I < sizeof...(Ts))
+    constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) &noexcept
     {
       return detail::get_leaf<I>(impl);
     }
@@ -375,13 +376,13 @@ namespace kumi
   //! ## Example:
   //! @include doc/to_ref.cpp
   //================================================================================================
-  template<product_type Type> [[nodiscard]] constexpr auto to_ref(Type&& that)
+  template<product_type Type> [[nodiscard]] constexpr auto to_ref(Type&& t)
   {
     return apply( [](auto&&... elems)
                   {
                     return kumi::forward_as_tuple(KUMI_FWD(elems)...);
                   }
-                , KUMI_FWD(that)
+                , KUMI_FWD(t)
                 );
   }
 
@@ -400,7 +401,7 @@ namespace kumi
   //!
   //! @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
   //! @tparam   I Compile-time index of the element to access
-  //! @param    t Compile-time index of the element to access
+  //! @tparam   t Tuple to index
   //! @return   A reference to the selected element of t.
   //! @related kumi::tuple
   //!
@@ -408,9 +409,9 @@ namespace kumi
   //! @include doc/get.cpp
   //================================================================================================
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts)) [[nodiscard]] constexpr decltype(auto) get(tuple<Ts...> &arg) noexcept
+  requires(I < sizeof...(Ts)) [[nodiscard]] constexpr decltype(auto) get(tuple<Ts...> &t) noexcept
   {
-    return arg[index<I>];
+    return t[index<I>];
   }
 
   /// @overload

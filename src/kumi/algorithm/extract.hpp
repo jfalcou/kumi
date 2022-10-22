@@ -9,7 +9,8 @@
 
 namespace kumi
 {
-  //==============================================================================================
+  //================================================================================================
+  //! @ingroup generators
   //! @brief Extracts a sub-tuple from a product type
   //!
   //! @note Does not participate in overload resolution if `I0` and `I1` do not verify that
@@ -35,7 +36,7 @@ namespace kumi
   //!
   //! ## Example:
   //! @include doc/extract.cpp
-  //==============================================================================================
+  //================================================================================================
   template<std::size_t I0, std::size_t I1, product_type Tuple>
   requires( (I0 <= size_v<Tuple>) && (I1 <= size_v<Tuple>) )
   [[nodiscard]] constexpr
@@ -48,7 +49,7 @@ namespace kumi
     (std::make_index_sequence<I1 - I0>());
   }
 
-  /// @overload
+  //! @overload
   template<std::size_t I0, product_type Tuple>
   requires(I0<= size_v<Tuple>)
   [[nodiscard]] constexpr
@@ -57,7 +58,8 @@ namespace kumi
     return extract(t,i0, index<size_v<Tuple>>);
   }
 
-  //==============================================================================================
+  //================================================================================================
+  //! @ingroup generators
   //! @brief Split a tuple into two
   //!
   //! Split a kumi::tuple in two kumi::tuple containing all the elements before and after
@@ -83,7 +85,7 @@ namespace kumi
   //!
   //! ## Example:
   //! @include doc/split.cpp
-  //==============================================================================================
+  //================================================================================================
   template<std::size_t I0, product_type Tuple>
   requires(I0 <= size_v<Tuple>)
   [[nodiscard]] constexpr auto split(Tuple const& t, index_t<I0> const&) noexcept
