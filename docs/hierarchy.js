@@ -1,6 +1,6 @@
 var hierarchy =
 [
-    [ "kumi::as_tuple< Tuple, Meta >", "structkumi_1_1as__tuple.html", null ],
+    [ "kumi::as_tuple< T, Meta >", "structkumi_1_1as__tuple.html", null ],
     [ "kumi::element< I, T >", "structkumi_1_1element.html", null ],
     [ "kumi::index_t< N >", "structkumi_1_1index__t.html", null ],
     [ "kumi::is_product_type< T, Enable >", "structkumi_1_1is__product__type.html", null ],
