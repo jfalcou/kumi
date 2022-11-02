@@ -7,6 +7,7 @@
 //==================================================================================================
 #pragma once
 
+#include "kumi/tuple.hpp"
 namespace kumi
 {
   namespace detail
@@ -99,12 +100,23 @@ namespace kumi
   //! @include doc/as_tuple.cpp
   //================================================================================================
   template<typename Tuple, template<typename...> class Meta = std::type_identity>
-  struct as_tuple : detail::as_tuple< Tuple
-                                    , std::make_index_sequence<kumi::size<Tuple>::value>
-                                    , Meta
-                                    >
+  struct as_tuple;
+
+  template<typename Tuple, template<typename...> class Meta>
+  requires( product_type<Tuple> )
+  struct as_tuple<Tuple, Meta> : detail::as_tuple < Tuple
+                                                  , std::make_index_sequence<size_v<Tuple>>
+                                                  , Meta
+                                                  >
   {};
 
-  template<product_type Tuple, template<typename...> class Meta = std::type_identity>
+  template<typename T, template<typename...> class Meta>
+  requires( !product_type<T> )
+  struct as_tuple<T, Meta>
+  {
+    using type = kumi::tuple< typename Meta<T>::type >;
+  };
+
+  template<typename Tuple, template<typename...> class Meta = std::type_identity>
   using as_tuple_t =  typename as_tuple<Tuple, Meta>::type;
 }

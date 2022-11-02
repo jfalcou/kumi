@@ -15,8 +15,12 @@ struct  kumi::is_product_type<std::array<T,N>> : std::true_type
 int main()
 {
   using three_floats   = kumi::as_tuple_t<std::array<float,3>>;
+  using single_type    = kumi::as_tuple_t<float>;
   using three_pointers = kumi::as_tuple_t<std::array<float,3>, std::add_pointer>;
+  using single_pointer = kumi::as_tuple_t<float, std::add_pointer>;
 
   static_assert( std::same_as<three_floats  , kumi::tuple<float ,float ,float > >);
   static_assert( std::same_as<three_pointers, kumi::tuple<float*,float*,float*> >);
+  static_assert( std::same_as<single_type   , kumi::tuple<float>  >);
+  static_assert( std::same_as<single_pointer, kumi::tuple<float*> >);
 }
