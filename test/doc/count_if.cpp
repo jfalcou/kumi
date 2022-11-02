@@ -12,4 +12,6 @@ int main()
   auto t = kumi::tuple{1, 2., 3.f, 'z'};
   std::cout << std::boolalpha
             << kumi::count_if( t, kumi::predicate<std::is_floating_point>() ) << "\n";
+  std::cout << std::boolalpha
+            << kumi::count_if( 2.3, kumi::predicate<std::is_floating_point>() ) << "\n";
 }
