@@ -77,13 +77,15 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup utility
-  //! @brief Generate a kumi::tuple type from a kumi::product_type
+  //! @brief Generate a kumi::tuple type from a type
   //!
-  //! Compute the exact kumi::tuple type containing the same element as `Tuple`, an arbitrary type
-  //! modeling kumi::product_type. A template meta-function can be optionally passed to be applied
-  //! to each of those types when types are computed.
+  //! If `T` is a @ref kumi::product_type, returns the kumi::tuple type containing the same element
+  //! as `T`. Otherwise, it returns `kumi::tuple<T>`.
   //!
-  //! @tparam Tuple kumi::product_type to tranform
+  //! A template meta-function can be optionally passed to be applied to each of those types when
+  //! types are computed.
+  //!
+  //! @tparam T     Type to transform
   //! @tparam Meta  Unary template meta-function to apply to each types.
   //!               Defaults to `std::type_identity`
   //!
@@ -91,23 +93,23 @@ namespace kumi
   //! @code
   //! namespace kumi
   //! {
-  //!   template<product_type Tuple, template<typename...> class Meta = std::type_identity>
-  //!   using as_tuple_t = typename as_tuple<Tuple, Meta>::type;
+  //!   template<typename T, template<typename...> class Meta = std::type_identity>
+  //!   using as_tuple_t = typename as_tuple<T, Meta>::type;
   //! }
   //! @endcode
   //!
   //! ## Example:
   //! @include doc/as_tuple.cpp
   //================================================================================================
-  template<typename Tuple, template<typename...> class Meta = std::type_identity>
+  template<typename T, template<typename...> class Meta = std::type_identity>
   struct as_tuple;
 
-  template<typename Tuple, template<typename...> class Meta>
-  requires( product_type<Tuple> )
-  struct as_tuple<Tuple, Meta> : detail::as_tuple < Tuple
-                                                  , std::make_index_sequence<size_v<Tuple>>
-                                                  , Meta
-                                                  >
+  template<typename T, template<typename...> class Meta>
+  requires( product_type<T> )
+  struct as_tuple<T, Meta> : detail::as_tuple < T
+                                              , std::make_index_sequence<size_v<T>>
+                                              , Meta
+                                              >
   {};
 
   template<typename T, template<typename...> class Meta>
@@ -117,6 +119,6 @@ namespace kumi
     using type = kumi::tuple< typename Meta<T>::type >;
   };
 
-  template<typename Tuple, template<typename...> class Meta = std::type_identity>
-  using as_tuple_t =  typename as_tuple<Tuple, Meta>::type;
+  template<typename T, template<typename...> class Meta = std::type_identity>
+  using as_tuple_t =  typename as_tuple<T, Meta>::type;
 }

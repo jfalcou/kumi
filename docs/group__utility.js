@@ -1,6 +1,6 @@
 var group__utility =
 [
-    [ "kumi::as_tuple< Tuple, Meta >", "structkumi_1_1as__tuple.html", null ],
+    [ "kumi::as_tuple< T, Meta >", "structkumi_1_1as__tuple.html", null ],
     [ "kumi::index_t< N >", "structkumi_1_1index__t.html", [
       [ "operator std::size_t", "structkumi_1_1index__t.html#a4dd6abb0a1663aa1f355ee416ee3083e", null ]
     ] ],
