@@ -17,25 +17,10 @@ namespace kumi
 {
   //================================================================================================
   //! @ingroup concepts
-  //! @brief Concept specifying a type is non-empty standard tuple-like type.
-  //================================================================================================
-  template<typename T> concept non_empty_tuple = requires( T const &t )
-  {
-    typename std::tuple_element<0,std::remove_cvref_t<T>>::type;
-    typename std::tuple_size<std::remove_cvref_t<T>>::type;
-  };
-
-  //================================================================================================
-  //! @ingroup concepts
-  //! @brief Concept specifying a type is an empty standard tuple-like type.
-  //================================================================================================
-  template<typename T> concept empty_tuple = (std::tuple_size<std::remove_cvref_t<T>>::value == 0);
-
-  //================================================================================================
-  //! @ingroup concepts
   //! @brief Concept specifying a type is a standard tuple-like type.
   //================================================================================================
-  template<typename T> concept std_tuple_compatible = empty_tuple<T> || non_empty_tuple<T>;
+  template<typename T>
+  concept std_tuple_compatible = detail::empty_tuple<T> || detail::non_empty_tuple<T>;
 
   //================================================================================================
   //! @ingroup concepts
@@ -66,6 +51,16 @@ namespace kumi
   //================================================================================================
   template<typename T, std::size_t N>
   concept sized_product_type_or_more = product_type<T> && (size<T>::value >= N);
+
+  //================================================================================================
+  //! @ingroup concepts
+  //! @brief Concept specifying a type follows the Product Type semantic and is non-empty
+  //!
+  //! A type `T` models `kumi::non_empty_product_type ` if it models `kumi::product_type` and has
+  //! at least 1 element.
+  //================================================================================================
+  template<typename T>
+  concept non_empty_product_type = product_type<T> && (size<T>::value != 0);
 
   namespace detail
   {
