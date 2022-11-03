@@ -14,6 +14,19 @@
 namespace kumi::detail
 {
   //==============================================================================================
+  // Helper concepts for tuple detection
+  //==============================================================================================
+  // Concept specifying a type is non-empty standard tuple-like type.
+  template<typename T> concept non_empty_tuple = requires( T const &t )
+  {
+    typename std::tuple_element<0,std::remove_cvref_t<T>>::type;
+    typename std::tuple_size<std::remove_cvref_t<T>>::type;
+  };
+
+  // Concept specifying a type is an empty standard tuple-like type.
+  template<typename T> concept empty_tuple = (std::tuple_size<std::remove_cvref_t<T>>::value == 0);
+
+  //==============================================================================================
   // Helper concepts for construction checks
   //==============================================================================================
   template<typename From, typename To> struct is_piecewise_constructible;
