@@ -4,10 +4,25 @@ description: 'Clone and build a given repository'
 inputs:
   compiler:  # compiler
     description: 'Compiler'
-    required: true
-    default: 'g++-10'
+    required: false
+    default: ''
+  cpu:  # How much CPU do we use
+    description: 'CPU Count'
+    required: false
+    default: '8'
+  options:  # Special options
+    description: 'Compiler options'
+    required: false
+    default: ''
+  linker_options:  # Special options
+    description: 'Linker options'
+    required: false
+    default: ''
 runs:
   using: 'docker'
   image: 'Dockerfile'
   args:
     - ${{ inputs.compiler }}
+    - ${{ inputs.cpu }}
+    - ${{ inputs.options }}
+    - ${{ inputs.linker_options }}
