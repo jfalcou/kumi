@@ -280,6 +280,7 @@ namespace kumi
   }
 }
 #include <iosfwd>
+#include <type_traits>
 namespace kumi
 {
   template<typename... Ts> struct tuple
@@ -432,14 +433,14 @@ namespace kumi
       return os;
     }
   };
-  template<typename... Ts> tuple(Ts &&...) -> tuple<std::unwrap_ref_decay_t<Ts>...>;
+  template<typename... Ts> tuple(Ts &&...) -> tuple<typename std::unwrap_ref_decay<Ts>::type...>;
   template<typename... Ts> [[nodiscard]] constexpr tuple<Ts &...> tie(Ts &...ts) { return {ts...}; }
   template<typename... Ts> [[nodiscard]] constexpr tuple<Ts &&...> forward_as_tuple(Ts &&...ts)
   {
     return {KUMI_FWD(ts)...};
   }
   template<typename... Ts>
-  [[nodiscard]] constexpr tuple<std::unwrap_ref_decay_t<Ts>...> make_tuple(Ts &&...ts)
+  [[nodiscard]] constexpr tuple<typename std::unwrap_ref_decay<Ts>::type...> make_tuple(Ts &&...ts)
   {
     return {KUMI_FWD(ts)...};
   }
