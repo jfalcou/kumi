@@ -10,6 +10,7 @@
 #include <kumi/tuple.hpp>
 #include <tts/tts.hpp>
 #include <string>
+#include <compare>
 
 TTS_CASE("Check tuple to tuple conversion")
 {
