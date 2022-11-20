@@ -13,6 +13,7 @@
 #include <kumi/utils.hpp>
 
 #include <iosfwd>
+#include <type_traits>
 
 namespace kumi
 {
@@ -313,7 +314,7 @@ namespace kumi
   //! @brief kumi::tuple deduction guide
   //! @tparam Ts  Type lists to build the tuple with.
   //================================================================================================
-  template<typename... Ts> tuple(Ts &&...) -> tuple<std::unwrap_ref_decay_t<Ts>...>;
+  template<typename... Ts> tuple(Ts &&...) -> tuple<typename std::unwrap_ref_decay<Ts>::type...>;
 
   //================================================================================================
   //! @ingroup tuple
@@ -360,7 +361,7 @@ namespace kumi
   //! @include doc/make_tuple.cpp
   //================================================================================================
   template<typename... Ts>
-  [[nodiscard]] constexpr tuple<std::unwrap_ref_decay_t<Ts>...> make_tuple(Ts &&...ts)
+  [[nodiscard]] constexpr tuple<typename std::unwrap_ref_decay<Ts>::type...> make_tuple(Ts &&...ts)
   {
     return {KUMI_FWD(ts)...};
   }
