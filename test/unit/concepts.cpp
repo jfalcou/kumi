@@ -9,6 +9,7 @@
 #include <kumi/tuple.hpp>
 #include <tts/tts.hpp>
 #include <concepts>
+#include <compare>
 
 struct no_cmp   { };
 struct cmp      { constexpr auto operator<=>(cmp const&) const = default; };
