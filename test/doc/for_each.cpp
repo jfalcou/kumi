@@ -10,7 +10,7 @@ int main()
 {
   auto t = kumi::tuple{ 1, 2.3, 0.43f };
 
-  kumi::for_each( [](auto& m) { m *= 10.f; }
+  kumi::for_each( [](auto& m) { m *= 10; }
                 , t
                 );
 

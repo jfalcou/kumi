@@ -29,7 +29,7 @@ function(generate_test file)
   string(REPLACE ".cpp" ".exe" base ${file})
   string(REPLACE "/"    "." base ${base})
   string(REPLACE "\\"   "." base ${base})
-  set(test "kumi-${base}")
+  set(test "${base}")
 
   add_executable( ${test}  "${file}")
   target_link_libraries(${test} PUBLIC kumi_test)
@@ -61,10 +61,10 @@ function(generate_test file)
                               ${PROJECT_SOURCE_DIR}/include
                             )
 
-  add_dependencies(kumi-unit ${test})
+  add_dependencies(unit ${test})
 endfunction()
 
-add_custom_target(kumi-unit)
+add_custom_target(unit)
 
 ##==================================================================================================
 ## Actual tests

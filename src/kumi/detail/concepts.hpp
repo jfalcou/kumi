@@ -35,7 +35,7 @@ namespace kumi::detail
   template<template<class...> class Box, typename... From, typename... To>
   struct is_piecewise_convertible<Box<From...>, Box<To...>>
   {
-    static constexpr bool value = (... && std::convertible_to<From, To>);
+    static constexpr bool value = (... && kumi::convertible_to<From, To>);
   };
 
   template<template<class...> class Box, typename... From, typename... To>

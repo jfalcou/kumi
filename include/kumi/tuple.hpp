@@ -7,6 +7,21 @@
 //==================================================================================================
 #ifndef KUMI_TUPLE_HPP_INCLUDED
 #define KUMI_TUPLE_HPP_INCLUDED
+#if defined( __ANDROID__ ) || defined(__APPLE__)
+#include <type_traits>
+namespace kumi
+{
+  template<typename From, typename To>
+  concept convertible_to  =   std::is_convertible_v<From, To>
+                          &&  requires { static_cast<To>(std::declval<From>()); };
+}
+#else
+#include <concepts>
+namespace kumi
+{
+  using std::convertible_to;
+}
+#endif
 #include <cstddef>
 #include <utility>
 namespace kumi::detail
@@ -129,7 +144,7 @@ namespace kumi::detail
   template<template<class...> class Box, typename... From, typename... To>
   struct is_piecewise_convertible<Box<From...>, Box<To...>>
   {
-    static constexpr bool value = (... && std::convertible_to<From, To>);
+    static constexpr bool value = (... && kumi::convertible_to<From, To>);
   };
   template<template<class...> class Box, typename... From, typename... To>
   struct is_piecewise_constructible<Box<From...>, Box<To...>>
