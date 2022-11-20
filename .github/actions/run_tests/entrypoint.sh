@@ -1,27 +1,18 @@
 #!/bin/sh -l
 
-echo "::group::Running: 'cmake .. -G Ninja -DCMAKE_CXX_FLAGS="$1" $2'"
+set -e
+echo "::group::Running: 'cmake .. -G Ninja -DCMAKE_CXX_COMPILER=$1 -DCMAKE_CXX_FLAGS="$3"  -DCMAKE_EXE_LINKER_FLAGS="$4"'"
 mkdir build
 cd build
-cmake .. -G Ninja -DCMAKE_CXX_COMPILER="$1"
+cmake .. -G Ninja -DCMAKE_CXX_COMPILER=$1 -DCMAKE_CXX_FLAGS="$3"  -DCMAKE_EXE_LINKER_FLAGS="$4"
 echo "::endgroup::"
 
-echo "::group::Compiling test" ;
-ninja -k 0 ;
-if [ "$?" -ne "0" ]
-then
-  echo "::error Tests can not be compiled!" ;
-  exit 1;
-fi
-echo "::endgroup::" ;
+echo "::group::Compiling tests"
+ninja -j $2
+echo "::endgroup::"
 
-echo "::group::Running test" ;
-ctest ;
-if [ "$?" -ne "0" ]
-then
-  echo "::error Errors running tests!" ;
-  exit 1;
-fi
-echo "::endgroup::" ;
+echo "::group::Running tests"
+ctest --output-on-failure -j $2
+echo "::endgroup::"
 
-exit 0;
+exit 0

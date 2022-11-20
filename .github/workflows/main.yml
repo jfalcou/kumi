@@ -8,26 +8,6 @@ on:
       - main
 
 jobs:
-  gcc-11:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Fetch current branch
-        uses: actions/checkout@v3
-      - name: Testing KUMI with g++
-        uses: ./.github/actions/run_tests
-        with:
-          compiler: 'g++-11'
-
-  clang-12:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Fetch current branch
-        uses: actions/checkout@v3
-      - name: Testing KUMI with clang
-        uses: ./.github/actions/run_tests
-        with:
-          compiler: 'clang++'
-
   install:
     runs-on: ubuntu-latest
     strategy:
@@ -45,3 +25,85 @@ jobs:
         with:
           branch: '${{ github.head_ref }}'
           mode: '${{ matrix.cfg.mode }}'
+
+  gcc-linux:
+    runs-on: [ubuntu-latest]
+    strategy:
+      fail-fast: false
+      matrix:
+        cfg:
+        - { opts: -O0                 }
+        - { opts: "-O3 -flto -DNDEBUG"}
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v3
+      - name: DEBUG - TTS using g++-12 with ${{ matrix.cfg.opts }}
+        uses: ./.github/actions/run_tests
+        with:
+          compiler:       'g++-12'
+          options:        '${{ matrix.cfg.opts }}'
+          linker_options: ''
+          cpu:            2
+
+  clang-linux:
+    runs-on: [ubuntu-latest]
+    strategy:
+      fail-fast: false
+      matrix:
+        cfg:
+        - { opts: -O0                                 , linker:                }
+        - { opts: "-O3 -flto -DNDEBUG"                , linker:                }
+        - { opts: "-O3 -flto -DNDEBUG -stdlib=libc++" , linker: -stdlib=libc++ }
+        - { opts: "-O0 -stdlib=libc++"                , linker: -stdlib=libc++ }
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v3
+      - name: DEBUG - TTS using clang++ with ${{ matrix.cfg.opts }}
+        uses: ./.github/actions/run_tests
+        with:
+          compiler:       'clang++'
+          options:        '${{ matrix.cfg.opts }}'
+          linker_options: '${{ matrix.cfg.linker }}'
+          cpu:            2
+
+  clang-macosx:
+    runs-on: [macos-12]
+    strategy:
+      fail-fast: false
+      matrix:
+        cfg:
+        - { opts: -O0                                 , linker:                 }
+        - { opts: "-O0 -stdlib=libc++"                , linker: -stdlib=libc++  }
+        - { opts: "-O3 -flto -DNDEBUG"                , linker:                 }
+        - { opts: "-O3 -flto -DNDEBUG -stdlib=libc++" , linker: -stdlib=libc++  }
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v3
+      - name: Running CMake for clang++ with ${{ matrix.cfg.opts }}
+        run: |
+          mkdir build && cd build
+          cmake .. -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}" -DCMAKE_EXE_LINKER_FLAGS="${{ matrix.cfg.linker }}"
+      - name: Compiling Unit Tests
+        run:  cd build && make -j 2
+      - name: Running Unit Tests
+        run: cd build && ctest --output-on-failure -j 2
+
+  gcc-macosx:
+    runs-on: [macos-11]
+    strategy:
+      fail-fast: false
+      matrix:
+        cfg:
+        - { opts: -O0                 }
+        - { opts: "-O3 -flto -DNDEBUG"}
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v3
+      - name: Running CMake for g++ with ${{ matrix.cfg.opts }}
+        run: |
+          mkdir build && cd build
+          cmake .. -DCMAKE_CXX_COMPILER=g++-11 -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}"
+      - name: Compiling Unit Tests
+        run:  cd build && make -j 2
+      - name: Running Unit Tests
+        run: cd build && ctest --output-on-failure -j 2
