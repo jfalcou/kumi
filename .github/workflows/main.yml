@@ -37,10 +37,10 @@ jobs:
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v3
-      - name: DEBUG - TTS using g++-12 with ${{ matrix.cfg.opts }}
+      - name: DEBUG - KUMI using g++-11 with ${{ matrix.cfg.opts }}
         uses: ./.github/actions/run_tests
         with:
-          compiler:       'g++-12'
+          compiler:       'g++-11'
           options:        '${{ matrix.cfg.opts }}'
           linker_options: ''
           cpu:            2
@@ -58,7 +58,7 @@ jobs:
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v3
-      - name: DEBUG - TTS using clang++ with ${{ matrix.cfg.opts }}
+      - name: DEBUG - KUMI using clang++ with ${{ matrix.cfg.opts }}
         uses: ./.github/actions/run_tests
         with:
           compiler:       'clang++'
@@ -99,7 +99,7 @@ jobs:
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v3
-      - name: Running CMake for g++ with ${{ matrix.cfg.opts }}
+      - name: Running CMake for g++-11 with ${{ matrix.cfg.opts }}
         run: |
           mkdir build && cd build
           cmake .. -DCMAKE_CXX_COMPILER=g++-11 -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}"
