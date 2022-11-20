@@ -107,3 +107,21 @@ jobs:
         run:  cd build && make -j 2
       - name: Running Unit Tests
         run: cd build && ctest --output-on-failure -j 2
+
+  android:
+    runs-on: [macos-12]
+    strategy:
+      fail-fast: false
+      matrix:
+        cfg:
+        - { opts: -O0                 }
+        - { opts: "-O3 -flto -DNDEBUG"}
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v3
+      - name: Running CMake for g++ with ${{ matrix.cfg.opts }}
+        run: |
+          mkdir build && cd build
+          cmake .. -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_ROOT/build/cmake/android.toolchain.cmake -DANDROID_ABI=arm64-v8a
+      - name: Compiling Unit Tests
+        run:  cd build && make -j 2
