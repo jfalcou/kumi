@@ -9,23 +9,30 @@
 #include <kumi/tuple.hpp>
 #include <tts/tts.hpp>
 #include <concepts>
+#include <compare>
 
 struct no_cmp   { };
 struct cmp      { constexpr auto operator<=>(cmp const&) const = default; };
 struct strange  { constexpr float operator==(strange const&) const { return -1.f; }; };
 
+template<typename T>
+concept check_comparable = requires(T const& t)
+{
+  { t == t };
+};
+
 TTS_CASE("Check equality_comparable for tuple")
 {
-  TTS_CONSTEXPR_EXPECT_NOT(  std::equality_comparable<kumi::tuple<no_cmp>>      );
-  TTS_CONSTEXPR_EXPECT_NOT( (std::equality_comparable<kumi::tuple<cmp,no_cmp>>) );
+  TTS_CONSTEXPR_EXPECT_NOT(  check_comparable<kumi::tuple<no_cmp>>      );
+  TTS_CONSTEXPR_EXPECT_NOT( (check_comparable<kumi::tuple<cmp,no_cmp>>) );
 
-  TTS_CONSTEXPR_EXPECT(  std::equality_comparable<kumi::tuple<cmp>>                   );
-  TTS_CONSTEXPR_EXPECT( (std::equality_comparable<kumi::tuple<cmp,kumi::tuple<cmp>>>) );
+  TTS_CONSTEXPR_EXPECT(  check_comparable<kumi::tuple<cmp>>                   );
+  TTS_CONSTEXPR_EXPECT( (check_comparable<kumi::tuple<cmp,kumi::tuple<cmp>>>) );
 
-  TTS_CONSTEXPR_EXPECT(  std::equality_comparable<kumi::tuple<strange>>                       );
-  TTS_CONSTEXPR_EXPECT( (std::equality_comparable<kumi::tuple<strange,kumi::tuple<strange>>>) );
+  TTS_CONSTEXPR_EXPECT(  check_comparable<kumi::tuple<strange>>                       );
+  TTS_CONSTEXPR_EXPECT( (check_comparable<kumi::tuple<strange,kumi::tuple<strange>>>) );
 
-  TTS_CONSTEXPR_EXPECT( (std::equality_comparable<kumi::tuple<strange,kumi::tuple<cmp>>>) );
+  TTS_CONSTEXPR_EXPECT( (check_comparable<kumi::tuple<strange,kumi::tuple<cmp>>>) );
 };
 
 TTS_CASE("Check product_type for tuple")
@@ -78,13 +85,10 @@ TTS_CASE("Check sized_product_type_or_more for tuple")
   TTS_CONSTEXPR_EXPECT_NOT( (kumi::sized_product_type_or_more<kumi::tuple<strange,int, cmp>, 4>)        );
 };
 
-/*
-  template<typename T>
-  concept product_type = std_tuple_compatible<T> && is_product_type<std::remove_cvref_t<T>>::value;
-
-  template<typename T, std::size_t N>
-  concept sized_product_type = product_type<T> && (size<T>::value == N);
-
-  template<typename T, std::size_t N>
-  concept sized_product_type_or_more = product_type<T> && (size<T>::value >= N);
-*/
+TTS_CASE("Check non_empty_product_type for tuple")
+{
+  TTS_CONSTEXPR_EXPECT_NOT( kumi::non_empty_product_type<int> );
+  TTS_CONSTEXPR_EXPECT_NOT( kumi::non_empty_product_type<kumi::tuple<>> );
+  TTS_CONSTEXPR_EXPECT    (  kumi::non_empty_product_type<kumi::tuple<strange>>                   );
+  TTS_CONSTEXPR_EXPECT    ( (kumi::non_empty_product_type<kumi::tuple<strange,kumi::tuple<cmp>>>) );
+};

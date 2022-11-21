@@ -81,7 +81,7 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup concepts
-  //! @brief Concept specifying if a type is comparable for eahc of its components
+  //! @brief Concept specifying if a type is comparable for each of its components
   //!
   //! A type `T` models `kumi::equality_comparable<T,U>` if it is a non-product type which satisfies
   //! `std::equality_comparable_with<T,U>` or if it's a product type where each of its elements
