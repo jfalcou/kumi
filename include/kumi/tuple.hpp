@@ -1156,7 +1156,7 @@ namespace kumi
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>)
     {
-      return make_tuple(KUMI_FWD(v), get<I>(KUMI_FWD(t))...);
+      return kumi::make_tuple(KUMI_FWD(v), get<I>(KUMI_FWD(t))...);
     }
     (std::make_index_sequence<Tuple::size()>());
   }
@@ -1171,7 +1171,7 @@ namespace kumi
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>)
     {
-      return make_tuple(get<I>(KUMI_FWD(t))..., KUMI_FWD(v));
+      return kumi::make_tuple(get<I>(KUMI_FWD(t))..., KUMI_FWD(v));
     }
     (std::make_index_sequence<Tuple::size()>());
   }
