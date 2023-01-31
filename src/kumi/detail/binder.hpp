@@ -15,36 +15,39 @@ namespace kumi::detail
   //==============================================================================================
   // Tuple leaf binder tricks
   //==============================================================================================
-  template<std::size_t I, typename T> struct leaf
+  template<int I, typename T> struct leaf
   {
     T value;
   };
 
-  template<std::size_t I, typename T> constexpr T &get_leaf(leaf<I, T> &arg) noexcept
+  template<int I, typename T> constexpr T &get_leaf(leaf<I, T> &arg) noexcept
   {
     return arg.value;
   }
 
-  template<std::size_t I, typename T> constexpr T &&get_leaf(leaf<I, T> &&arg) noexcept
+  template<int I, typename T> constexpr T &&get_leaf(leaf<I, T> &&arg) noexcept
   {
     return static_cast<T &&>(arg.value);
   }
 
-  template<std::size_t I, typename T>
+  template<int I, typename T>
   constexpr T const &&get_leaf(leaf<I, T> const &&arg) noexcept
   {
     return static_cast<T const &&>(arg.value);
   }
 
-  template<std::size_t I, typename T> constexpr T const &get_leaf(leaf<I, T> const &arg) noexcept
+  template<int I, typename T> constexpr T const &get_leaf(leaf<I, T> const &arg) noexcept
   {
     return arg.value;
   }
 
   template<typename ISeq, typename... Ts> struct binder;
 
-  template<auto... Is, typename... Ts>
-  struct binder<std::index_sequence<Is...>, Ts...> : leaf<Is, Ts>...
+  // General N-case
+  template<int... Is, typename... Ts>
+  struct binder<std::integer_sequence<int,Is...>, Ts...> : leaf<Is, Ts>...
   {
   };
 }
+
+#include <kumi/detail/optimized.hpp>

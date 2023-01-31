@@ -32,7 +32,7 @@ namespace kumi
   template<typename... Ts> struct tuple
   {
     using is_product_type = void;
-    detail::binder<std::make_index_sequence<sizeof...(Ts)>, Ts...> impl;
+    detail::binder<std::make_integer_sequence<int,sizeof...(Ts)>, Ts...> impl;
 
     //==============================================================================================
     //! @name Accessors
