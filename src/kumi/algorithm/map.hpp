@@ -44,7 +44,7 @@ namespace kumi
   constexpr auto
   map(Function     f,
       Tuple  &&t0,
-      Tuples &&...others) requires detail::applicable<Function, Tuple&&, Tuples&&...>
+      Tuples &&...others) requires _::applicable<Function, Tuple&&, Tuples&&...>
   {
     if constexpr(sized_product_type<Tuple,0>) return std::remove_cvref_t<Tuple>{};
     else

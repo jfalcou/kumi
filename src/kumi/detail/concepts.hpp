@@ -11,7 +11,7 @@
 #include <cstddef>
 #include <utility>
 
-namespace kumi::detail
+namespace kumi::_
 {
   //==============================================================================================
   // Helper concepts for tuple detection
@@ -45,10 +45,10 @@ namespace kumi::detail
   };
 
   template<typename From, typename To>
-  concept piecewise_convertible = detail::is_piecewise_convertible<From, To>::value;
+  concept piecewise_convertible = _::is_piecewise_convertible<From, To>::value;
 
   template<typename From, typename To>
-  concept piecewise_constructible = detail::is_piecewise_constructible<From, To>::value;
+  concept piecewise_constructible = _::is_piecewise_constructible<From, To>::value;
 
   template<typename T, typename... Args> concept implicit_constructible = requires(Args... args)
   {
@@ -70,7 +70,7 @@ namespace kumi::detail
   };
 
   template<typename F, typename... Tuples>
-  concept applicable = detail::
+  concept applicable = _::
       is_applicable<F, std::make_index_sequence<(size<Tuples>::value, ...)>, Tuples...>::value;
 
   // Helper for checking if two tuples can == each others

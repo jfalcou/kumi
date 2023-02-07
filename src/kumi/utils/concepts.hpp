@@ -20,7 +20,7 @@ namespace kumi
   //! @brief Concept specifying a type is a standard tuple-like type.
   //================================================================================================
   template<typename T>
-  concept std_tuple_compatible = detail::empty_tuple<T> || detail::non_empty_tuple<T>;
+  concept std_tuple_compatible = _::empty_tuple<T> || _::non_empty_tuple<T>;
 
   //================================================================================================
   //! @ingroup concepts
@@ -62,11 +62,11 @@ namespace kumi
   template<typename T>
   concept non_empty_product_type = product_type<T> && (size<T>::value != 0);
 
-  namespace detail
+  namespace _
   {
     template<typename T, typename U> constexpr auto check_equality()
     {
-      return detail::comparable<T,U>;
+      return _::comparable<T,U>;
     }
 
     template<product_type T, product_type U>
@@ -88,5 +88,5 @@ namespace kumi
   //! satisfies kumi::equality_comparable for all their respective elements.
   //================================================================================================
   template<typename T, typename U>
-  concept equality_comparable = detail::check_equality<T,U>();
+  concept equality_comparable = _::check_equality<T,U>();
 }

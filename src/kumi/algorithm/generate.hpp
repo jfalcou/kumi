@@ -9,7 +9,7 @@
 
 namespace kumi
 {
-  namespace detail
+  namespace _
   {
     template<std::size_t N, typename T>
     constexpr auto const& eval(T const& v) noexcept { return v; }
@@ -43,7 +43,7 @@ namespace kumi
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>)
     {
-      return kumi::tuple{detail::eval<I>(v)...};
+      return kumi::tuple{_::eval<I>(v)...};
     }(std::make_index_sequence<N>{});
   }
 

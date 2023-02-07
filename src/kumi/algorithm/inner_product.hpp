@@ -9,7 +9,7 @@
 
 namespace kumi
 {
-  namespace detail
+  namespace _
   {
     //==============================================================================================
     // Fold helpers
@@ -22,13 +22,13 @@ namespace kumi
       template<typename W>
       friend constexpr decltype(auto) operator>>(foldable &&x, foldable<F, W> &&y)
       {
-        return detail::foldable {x.func, x.func(y.value, x.value)};
+        return _::foldable {x.func, x.func(y.value, x.value)};
       }
 
       template<typename W>
       friend constexpr decltype(auto) operator<<(foldable &&x, foldable<F, W> &&y)
       {
-        return detail::foldable {x.func, x.func(x.value, y.value)};
+        return _::foldable {x.func, x.func(x.value, y.value)};
       }
     };
 
@@ -91,9 +91,9 @@ namespace kumi
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return  (  detail::foldable {sum, prod(get<I>(KUMI_FWD(s1)),get<I>(KUMI_FWD(s2)))}
+        return  (  _::foldable {sum, prod(get<I>(KUMI_FWD(s1)),get<I>(KUMI_FWD(s2)))}
                 >> ...
-                >> detail::foldable {sum, init}
+                >> _::foldable {sum, init}
                 ).value;
       }
       (std::make_index_sequence<size<S1>::value>());

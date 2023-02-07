@@ -32,7 +32,8 @@ namespace kumi
   template<typename... Ts> struct tuple
   {
     using is_product_type = void;
-    detail::binder<std::make_integer_sequence<int,sizeof...(Ts)>, Ts...> impl;
+    using binder_t  = _::make_binder_t<std::make_integer_sequence<int,sizeof...(Ts)>, Ts...>;
+    binder_t impl;
 
     //==============================================================================================
     //! @name Accessors
@@ -53,28 +54,28 @@ namespace kumi
     requires(I < sizeof...(Ts))
     constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) &noexcept
     {
-      return detail::get_leaf<I>(impl);
+      return _::get_leaf<I>(impl);
     }
 
     /// @overload
     template<std::size_t I>
     requires(I < sizeof...(Ts)) constexpr decltype(auto) operator[](index_t<I>) &&noexcept
     {
-      return detail::get_leaf<I>(static_cast<decltype(impl) &&>(impl));
+      return _::get_leaf<I>(static_cast<decltype(impl) &&>(impl));
     }
 
     /// @overload
     template<std::size_t I>
     requires(I < sizeof...(Ts)) constexpr decltype(auto) operator[](index_t<I>) const &&noexcept
     {
-      return detail::get_leaf<I>(static_cast<decltype(impl) const &&>(impl));
+      return _::get_leaf<I>(static_cast<decltype(impl) const &&>(impl));
     }
 
     /// @overload
     template<std::size_t I>
     requires(I < sizeof...(Ts)) constexpr decltype(auto) operator[](index_t<I>) const &noexcept
     {
-      return detail::get_leaf<I>(impl);
+      return _::get_leaf<I>(impl);
     }
 
     //==============================================================================================
@@ -108,7 +109,7 @@ namespace kumi
     //! @include doc/cast.cpp
     //==============================================================================================
     template<typename... Us>
-    requires(   detail::piecewise_convertible<tuple, tuple<Us...>>
+    requires(   _::piecewise_convertible<tuple, tuple<Us...>>
             &&  (sizeof...(Us) == sizeof...(Ts))
             &&  (!std::same_as<Ts, Us> && ...)
             )
@@ -127,7 +128,7 @@ namespace kumi
     //! @return `*this`
     //==============================================================================================
     template<typename... Us>
-    requires(detail::piecewise_convertible<tuple, tuple<Us...>>) constexpr tuple &
+    requires(_::piecewise_convertible<tuple, tuple<Us...>>) constexpr tuple &
     operator=(tuple<Us...> const &other)
     {
       [&]<std::size_t... I>(std::index_sequence<I...>) { ((get<I>(*this) = get<I>(other)), ...); }
@@ -138,7 +139,7 @@ namespace kumi
 
     /// @overload
     template<typename... Us>
-    requires(detail::piecewise_convertible<tuple, tuple<Us...>>) constexpr tuple &
+    requires(_::piecewise_convertible<tuple, tuple<Us...>>) constexpr tuple &
     operator=(tuple<Us...> &&other)
     {
       [&]<std::size_t... I>(std::index_sequence<I...>)
