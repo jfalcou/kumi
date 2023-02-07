@@ -30,40 +30,31 @@ namespace kumi::detail
   //  - Size is greater than 1
   //  - All types are the same and non-reference
   //================================================================================================
+  template<typename T0, int N> struct binder_n { T0 members[N] = {}; };
+
   template<int... Is, typename T0, typename T1, typename... Ts>
   requires(all_the_same<T0,T1,Ts...> && no_references<T0,T1,Ts...>)
-  struct binder<std::integer_sequence<int,Is...>, T0, T1, Ts...>
+  struct make_binder<std::integer_sequence<int,Is...>, T0, T1, Ts...>
   {
-    using kumi_unique_type = T0;
-    T0 members[2+sizeof...(Ts)] = {};
+    using type = binder_n<T0,2+sizeof...(Ts)>;
   };
 
-  template<std::size_t I,typename Binder>
-  requires requires(Binder) { typename Binder::kumi_unique_type; }
-  constexpr auto& get_leaf(Binder &arg) noexcept
+  template<std::size_t I, typename T0, int N>
+  constexpr auto& get_leaf(binder_n<T0,N> &arg)             noexcept { return arg.members[I]; }
+
+  template<std::size_t I, typename T0, int N>
+  constexpr auto const& get_leaf(binder_n<T0,N> const &arg) noexcept { return arg.members[I]; }
+
+  template<std::size_t I, typename T0, int N>
+  constexpr auto&& get_leaf(binder_n<T0,N> &&arg) noexcept
   {
-    return arg.members[I];
+    return static_cast<T0&&>(arg.members[I]);
   }
 
-  template<std::size_t I,typename Binder>
-  requires requires(Binder) { typename Binder::kumi_unique_type; }
-  constexpr auto&& get_leaf(Binder &&arg) noexcept
+  template<std::size_t I, typename T0, int N>
+  constexpr auto const&& get_leaf(binder_n<T0,N> const &&arg) noexcept
   {
-    return static_cast<typename Binder::kumi_unique_type &&>(arg.members[I]);
-  }
-
-  template<std::size_t I,typename Binder>
-  requires requires(Binder) { typename Binder::kumi_unique_type; }
-  constexpr auto const&& get_leaf(Binder const &&arg) noexcept
-  {
-    return static_cast<typename Binder::kumi_unique_type const &&>(arg.members[I]);
-  }
-
-  template<std::size_t I,typename Binder>
-  requires requires(Binder) { typename Binder::kumi_unique_type; }
-  constexpr auto const& get_leaf(Binder const &arg) noexcept
-  {
-    return arg.members[I];
+    return static_cast<T0 const &&>(arg.members[I]);
   }
 
   //================================================================================================

@@ -52,6 +52,13 @@ namespace kumi::detail
   struct binder<std::integer_sequence<int,Is...>, Ts...> : leaf<Is, Ts>...
   {
   };
+  template<typename ISeq, typename... Ts>
+  struct make_binder
+  {
+    using type = binder<ISeq,Ts...>;
+  };
+  template<typename ISeq, typename... Ts>
+  using make_binder_t = typename make_binder<ISeq,Ts...>::type;
 }
 #include <cstddef>
 #include <utility>
@@ -61,36 +68,26 @@ namespace kumi::detail
   inline constexpr bool no_references = (true && ... && !std::is_reference_v<Ts>);
   template<typename T0, typename... Ts>
   inline constexpr bool all_the_same = (true && ... && std::is_same_v<T0,Ts>);
+  template<typename T0, int N> struct binder_n { T0 members[N] = {}; };
   template<int... Is, typename T0, typename T1, typename... Ts>
   requires(all_the_same<T0,T1,Ts...> && no_references<T0,T1,Ts...>)
-  struct binder<std::integer_sequence<int,Is...>, T0, T1, Ts...>
+  struct make_binder<std::integer_sequence<int,Is...>, T0, T1, Ts...>
   {
-    using kumi_unique_type = T0;
-    T0 members[2+sizeof...(Ts)] = {};
+    using type = binder_n<T0,2+sizeof...(Ts)>;
   };
-  template<std::size_t I,typename Binder>
-  requires requires(Binder) { typename Binder::kumi_unique_type; }
-  constexpr auto& get_leaf(Binder &arg) noexcept
+  template<std::size_t I, typename T0, int N>
+  constexpr auto& get_leaf(binder_n<T0,N> &arg)             noexcept { return arg.members[I]; }
+  template<std::size_t I, typename T0, int N>
+  constexpr auto const& get_leaf(binder_n<T0,N> const &arg) noexcept { return arg.members[I]; }
+  template<std::size_t I, typename T0, int N>
+  constexpr auto&& get_leaf(binder_n<T0,N> &&arg) noexcept
   {
-    return arg.members[I];
+    return static_cast<T0&&>(arg.members[I]);
   }
-  template<std::size_t I,typename Binder>
-  requires requires(Binder) { typename Binder::kumi_unique_type; }
-  constexpr auto&& get_leaf(Binder &&arg) noexcept
+  template<std::size_t I, typename T0, int N>
+  constexpr auto const&& get_leaf(binder_n<T0,N> const &&arg) noexcept
   {
-    return static_cast<typename Binder::kumi_unique_type &&>(arg.members[I]);
-  }
-  template<std::size_t I,typename Binder>
-  requires requires(Binder) { typename Binder::kumi_unique_type; }
-  constexpr auto const&& get_leaf(Binder const &&arg) noexcept
-  {
-    return static_cast<typename Binder::kumi_unique_type const &&>(arg.members[I]);
-  }
-  template<std::size_t I,typename Binder>
-  requires requires(Binder) { typename Binder::kumi_unique_type; }
-  constexpr auto const& get_leaf(Binder const &arg) noexcept
-  {
-    return arg.members[I];
+    return static_cast<T0 const &&>(arg.members[I]);
   }
   template<typename T>
   requires(no_references<T>)
@@ -448,7 +445,8 @@ namespace kumi
   template<typename... Ts> struct tuple
   {
     using is_product_type = void;
-    detail::binder<std::make_integer_sequence<int,sizeof...(Ts)>, Ts...> impl;
+    using binder_t  = detail::make_binder_t<std::make_integer_sequence<int,sizeof...(Ts)>, Ts...>;
+    binder_t impl;
     template<std::size_t I>
     requires(I < sizeof...(Ts))
     constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) &noexcept

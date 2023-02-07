@@ -43,11 +43,22 @@ namespace kumi::detail
 
   template<typename ISeq, typename... Ts> struct binder;
 
+
   // General N-case
   template<int... Is, typename... Ts>
   struct binder<std::integer_sequence<int,Is...>, Ts...> : leaf<Is, Ts>...
   {
   };
+
+  // Specializable binder type constructor
+  template<typename ISeq, typename... Ts>
+  struct make_binder
+  {
+    using type = binder<ISeq,Ts...>;
+  };
+
+  template<typename ISeq, typename... Ts>
+  using make_binder_t = typename make_binder<ISeq,Ts...>::type;
 }
 
 #include <kumi/detail/optimized.hpp>
