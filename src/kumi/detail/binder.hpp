@@ -10,7 +10,7 @@
 #include <cstddef>
 #include <utility>
 
-namespace kumi::detail
+namespace kumi::_
 {
   //==============================================================================================
   // Tuple leaf binder tricks

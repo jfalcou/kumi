@@ -11,7 +11,7 @@ namespace kumi
 {
 
   //================================================================================================
-  namespace detail
+  namespace _
   {
     template<std::size_t N, std::size_t... S> constexpr auto digits(std::size_t v) noexcept
     {
@@ -61,7 +61,7 @@ namespace kumi
   {
     auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>)
     {
-      constexpr auto dg = detail::digits<sizeof...(Ts),kumi::size_v<Ts>...>(k);
+      constexpr auto dg = _::digits<sizeof...(Ts),kumi::size_v<Ts>...>(k);
       using tuple_t = kumi::tuple<std::tuple_element_t<dg.data[I],std::remove_cvref_t<Ts>>...>;
       return tuple_t{kumi::get<dg.data[I]>(std::forward<Ts>(ts))...};
     };

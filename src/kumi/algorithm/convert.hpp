@@ -10,7 +10,7 @@
 #include "kumi/tuple.hpp"
 namespace kumi
 {
-  namespace detail
+  namespace _
   {
     template< product_type Tuple
             , typename IndexSequence
@@ -50,7 +50,7 @@ namespace kumi
   //! @include doc/from_tuple.cpp
   //================================================================================================
   template<typename Type, typename... Ts>
-  requires(!product_type<Type> && detail::implicit_constructible<Type, Ts...>)
+  requires(!product_type<Type> && _::implicit_constructible<Type, Ts...>)
   [[nodiscard]] constexpr auto from_tuple(tuple<Ts...> const &t)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) { return Type {get<I>(t)...}; }
@@ -106,7 +106,7 @@ namespace kumi
 
   template<typename T, template<typename...> class Meta>
   requires( product_type<T> )
-  struct as_tuple<T, Meta> : detail::as_tuple < T
+  struct as_tuple<T, Meta> : _::as_tuple < T
                                               , std::make_index_sequence<size_v<T>>
                                               , Meta
                                               >

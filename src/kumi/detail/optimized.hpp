@@ -10,7 +10,7 @@
 #include <cstddef>
 #include <utility>
 
-namespace kumi::detail
+namespace kumi::_
 {
   //================================================================================================
   // We optimize layout for tuple of size 1->5 and for homogeneous layout
