@@ -76,11 +76,13 @@ namespace kumi
   template<typename Pred, typename T>
   [[nodiscard]] constexpr std::size_t count_if( T const& ts, Pred p) noexcept
   {
-    if constexpr( !product_type<T> ) return p(ts) ? 1 : 0;
+    constexpr std::size_t o = 1ULL;
+    constexpr std::size_t z = 0ULL;
+    if constexpr( !product_type<T> ) return p(ts) ? o : z;
     else
     {
-      if constexpr(size_v<T> == 0) return 0;
-      else return  kumi::apply( [&](auto const&... m) { return ( (p(m)? 1 : 0)+ ... + 0); }, ts );
+      if constexpr(size_v<T> == 0) return z;
+      else return  kumi::apply( [&](auto const&... m) { return ( (p(m)? o : z) + ... + z); }, ts );
     }
   }
 
