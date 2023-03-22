@@ -11,6 +11,45 @@ namespace kumi
 {
   //================================================================================================
   //! @ingroup reductions
+  //! @brief Computes the maximum value all elements of t.
+  //! @param t Tuple to inspect
+  //! @return The maximum value of  all elements of t
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T> struct max;
+  //!
+  //!   template<typename T>
+  //!   using max_t = typename max<T>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the type returned by a call to kumi::max.
+  //!
+  //! ## Example:
+  //! @include doc/max.cpp
+  //================================================================================================
+  template<typename T>
+  [[nodiscard]] constexpr auto max(T const& t) noexcept
+  {
+    if constexpr ( !kumi::product_type<T> ) return t;
+    else if constexpr( T::size() == 1 )     return get<0>(t);
+    else
+    {
+      auto base = get<0>(t);
+      return kumi::fold_left( []<typename U>(auto cur, U u)
+                              {
+                                return cur > u ? cur : u;
+                              }
+                            , t, base
+                            );
+    }
+  }
+
+  //================================================================================================
+  //! @ingroup reductions
   //! @brief Computes the maximum value of applications of f to all elements of t.
   //! @param t Tuple to inspect
   //! @param f Unary Callable object
@@ -85,9 +124,14 @@ namespace kumi
 
   namespace result
   {
-    template<typename T, typename F> struct max
+    template<typename T, typename F = void> struct max
     {
       using type = decltype( kumi::max( std::declval<T>(), std::declval<F>() ) );
+    };
+
+    template<typename T> struct max<T,void>
+    {
+      using type = decltype( kumi::max( std::declval<T>() ) );
     };
 
     template<typename T, typename F> struct max_flat
@@ -95,8 +139,47 @@ namespace kumi
       using type = decltype( kumi::max_flat( std::declval<T>(), std::declval<F>() ) );
     };
 
-    template<typename T, typename F> using max_t      = typename max<T,F>::type;
-    template<typename T, typename F> using max_flat_t = typename max_flat<T,F>::type;
+    template<typename T, typename F = void> using max_t      = typename max<T,F>::type;
+    template<typename T, typename F>        using max_flat_t = typename max_flat<T,F>::type;
+  }
+
+  //================================================================================================
+  //! @ingroup reductions
+  //! @brief Computes the minimum value all elements of t.
+  //! @param t Tuple to inspect
+  //! @return The minimum value of  all elements of t
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T> struct min;
+  //!
+  //!   template<typename T>
+  //!   using min_t = typename min<T>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the type returned by a call to kumi::min.
+  //!
+  //! ## Example:
+  //! @include doc/min.cpp
+  //================================================================================================
+  template<typename T>
+  [[nodiscard]] constexpr auto min(T const& t) noexcept
+  {
+    if constexpr ( !kumi::product_type<T> ) return t;
+    else if constexpr( T::size() == 1 )     return get<0>(t);
+    else
+    {
+      auto base = get<0>(t);
+      return kumi::fold_left( []<typename U>(auto cur, U u)
+                              {
+                                return cur < u ? cur : u;
+                              }
+                            , t, base
+                            );
+    }
   }
 
   //================================================================================================
@@ -175,9 +258,14 @@ namespace kumi
 
   namespace result
   {
-    template<typename T, typename F> struct min
+    template<typename T, typename F = void> struct min
     {
       using type = decltype( kumi::min( std::declval<T>(), std::declval<F>() ) );
+    };
+
+    template<typename T> struct min<T,void>
+    {
+      using type = decltype( kumi::min( std::declval<T>() ) );
     };
 
     template<typename T, typename F> struct min_flat
@@ -185,7 +273,7 @@ namespace kumi
       using type = decltype( kumi::min_flat( std::declval<T>(), std::declval<F>() ) );
     };
 
-    template<typename T, typename F> using min_t      = typename min<T,F>::type;
-    template<typename T, typename F> using min_flat_t = typename min_flat<T,F>::type;
+    template<typename T, typename F = void> using min_t      = typename min<T,F>::type;
+    template<typename T, typename F>        using min_flat_t = typename min_flat<T,F>::type;
   }
 }
