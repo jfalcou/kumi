@@ -150,7 +150,7 @@ Classes</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Opt-in traits for types behaving like a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>.  <a href="structkumi_1_1is__product__type.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1member.html">member</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the return type of a call to <a class="el" href="namespacekumi.html#ac4fd10ae8604dc8f891d7f4717dfa57e" title="This is an overloaded member function, provided for convenience. It differs from the above function o...">kumi::get</a>.  <a href="structkumi_1_1member.html#details">More...</a><br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the return type of a call to <a class="el" href="namespacekumi.html#afd552b12d08f8c779e73d566a3263974" title="This is an overloaded member function, provided for convenience. It differs from the above function o...">kumi::get</a>.  <a href="structkumi_1_1member.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1size.html">size</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the number of elements of a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>.  <a href="structkumi_1_1size.html#details">More...</a><br /></td></tr>
@@ -391,24 +391,24 @@ requires (I0 &lt;= size_v&lt;Tuple&gt;)</td></tr>
 <tr class="memdesc:gae8df7fc3aefbc6551f09c4ce64f6f82b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a tuple where the ith element is the tuple of all ith elements of ts...  <br /></td></tr>
 <tr class="separator:gae8df7fc3aefbc6551f09c4ce64f6f82b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Accessors</div></td></tr>
-<tr class="memitem:ac4fd10ae8604dc8f891d7f4717dfa57e"><td class="memTemplParams" colspan="2"><a id="ac4fd10ae8604dc8f891d7f4717dfa57e" name="ac4fd10ae8604dc8f891d7f4717dfa57e"></a>
+<tr class="memitem:afd552b12d08f8c779e73d566a3263974"><td class="memTemplParams" colspan="2"><a id="afd552b12d08f8c779e73d566a3263974" name="afd552b12d08f8c779e73d566a3263974"></a>
 template&lt;std::size_t I, typename... Ts&gt; <br />
 requires (I &lt; sizeof...(Ts))</td></tr>
-<tr class="memitem:ac4fd10ae8604dc8f891d7f4717dfa57e"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><b>get</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Ts... &gt; &amp;&amp;arg) noexcept</td></tr>
-<tr class="memdesc:ac4fd10ae8604dc8f891d7f4717dfa57e"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
-<tr class="separator:ac4fd10ae8604dc8f891d7f4717dfa57e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a954663e8f00c7c0cd39b2c70b78a8f21"><td class="memTemplParams" colspan="2"><a id="a954663e8f00c7c0cd39b2c70b78a8f21" name="a954663e8f00c7c0cd39b2c70b78a8f21"></a>
+<tr class="memitem:afd552b12d08f8c779e73d566a3263974"><td class="memTemplItemLeft" align="right" valign="top">KUMI_TRIVIAL constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><b>get</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Ts... &gt; &amp;&amp;arg) noexcept</td></tr>
+<tr class="memdesc:afd552b12d08f8c779e73d566a3263974"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
+<tr class="separator:afd552b12d08f8c779e73d566a3263974"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad945fc34cfdd7a1bf500447138bcb8ff"><td class="memTemplParams" colspan="2"><a id="ad945fc34cfdd7a1bf500447138bcb8ff" name="ad945fc34cfdd7a1bf500447138bcb8ff"></a>
 template&lt;std::size_t I, typename... Ts&gt; <br />
 requires (I &lt; sizeof...(Ts))</td></tr>
-<tr class="memitem:a954663e8f00c7c0cd39b2c70b78a8f21"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><b>get</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Ts... &gt; const &amp;arg) noexcept</td></tr>
-<tr class="memdesc:a954663e8f00c7c0cd39b2c70b78a8f21"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
-<tr class="separator:a954663e8f00c7c0cd39b2c70b78a8f21"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af75adc373689cd5267452785087fe622"><td class="memTemplParams" colspan="2"><a id="af75adc373689cd5267452785087fe622" name="af75adc373689cd5267452785087fe622"></a>
+<tr class="memitem:ad945fc34cfdd7a1bf500447138bcb8ff"><td class="memTemplItemLeft" align="right" valign="top">KUMI_TRIVIAL constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><b>get</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Ts... &gt; const &amp;arg) noexcept</td></tr>
+<tr class="memdesc:ad945fc34cfdd7a1bf500447138bcb8ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
+<tr class="separator:ad945fc34cfdd7a1bf500447138bcb8ff"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c7f390e84b24f68e4238d9fab1d09f5"><td class="memTemplParams" colspan="2"><a id="a1c7f390e84b24f68e4238d9fab1d09f5" name="a1c7f390e84b24f68e4238d9fab1d09f5"></a>
 template&lt;std::size_t I, typename... Ts&gt; <br />
 requires (I &lt; sizeof...(Ts))</td></tr>
-<tr class="memitem:af75adc373689cd5267452785087fe622"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><b>get</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Ts... &gt; const &amp;&amp;arg) noexcept</td></tr>
-<tr class="memdesc:af75adc373689cd5267452785087fe622"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
-<tr class="separator:af75adc373689cd5267452785087fe622"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1c7f390e84b24f68e4238d9fab1d09f5"><td class="memTemplItemLeft" align="right" valign="top">KUMI_TRIVIAL constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><b>get</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Ts... &gt; const &amp;&amp;arg) noexcept</td></tr>
+<tr class="memdesc:a1c7f390e84b24f68e4238d9fab1d09f5"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
+<tr class="separator:a1c7f390e84b24f68e4238d9fab1d09f5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
