@@ -1379,6 +1379,22 @@ namespace kumi
 }
 namespace kumi
 {
+  template<typename T>
+  [[nodiscard]] constexpr auto max(T const& t) noexcept
+  {
+    if constexpr ( !kumi::product_type<T> ) return t;
+    else if constexpr( T::size() == 1 )     return get<0>(t);
+    else
+    {
+      auto base = get<0>(t);
+      return kumi::fold_left( []<typename U>(auto cur, U u)
+                              {
+                                return cur > u ? cur : u;
+                              }
+                            , t, base
+                            );
+    }
+  }
   template<typename T, typename F>
   [[nodiscard]] constexpr auto max(T const& t, F f) noexcept
   {
@@ -1407,16 +1423,36 @@ namespace kumi
   }
   namespace result
   {
-    template<typename T, typename F> struct max
+    template<typename T, typename F = void> struct max
     {
       using type = decltype( kumi::max( std::declval<T>(), std::declval<F>() ) );
+    };
+    template<typename T> struct max<T,void>
+    {
+      using type = decltype( kumi::max( std::declval<T>() ) );
     };
     template<typename T, typename F> struct max_flat
     {
       using type = decltype( kumi::max_flat( std::declval<T>(), std::declval<F>() ) );
     };
-    template<typename T, typename F> using max_t      = typename max<T,F>::type;
-    template<typename T, typename F> using max_flat_t = typename max_flat<T,F>::type;
+    template<typename T, typename F = void> using max_t      = typename max<T,F>::type;
+    template<typename T, typename F>        using max_flat_t = typename max_flat<T,F>::type;
+  }
+  template<typename T>
+  [[nodiscard]] constexpr auto min(T const& t) noexcept
+  {
+    if constexpr ( !kumi::product_type<T> ) return t;
+    else if constexpr( T::size() == 1 )     return get<0>(t);
+    else
+    {
+      auto base = get<0>(t);
+      return kumi::fold_left( []<typename U>(auto cur, U u)
+                              {
+                                return cur < u ? cur : u;
+                              }
+                            , t, base
+                            );
+    }
   }
   template<typename T, typename F>
   [[nodiscard]] constexpr auto min(T const& t, F f) noexcept
@@ -1446,16 +1482,20 @@ namespace kumi
   }
   namespace result
   {
-    template<typename T, typename F> struct min
+    template<typename T, typename F = void> struct min
     {
       using type = decltype( kumi::min( std::declval<T>(), std::declval<F>() ) );
+    };
+    template<typename T> struct min<T,void>
+    {
+      using type = decltype( kumi::min( std::declval<T>() ) );
     };
     template<typename T, typename F> struct min_flat
     {
       using type = decltype( kumi::min_flat( std::declval<T>(), std::declval<F>() ) );
     };
-    template<typename T, typename F> using min_t      = typename min<T,F>::type;
-    template<typename T, typename F> using min_flat_t = typename min_flat<T,F>::type;
+    template<typename T, typename F = void> using min_t      = typename min<T,F>::type;
+    template<typename T, typename F>        using min_flat_t = typename min_flat<T,F>::type;
   }
 }
 namespace kumi
@@ -1519,6 +1559,64 @@ namespace kumi
     };
     template<product_type Tuple, std::size_t... Idx>
     using reorder_t = typename reorder<Tuple,Idx...>::type;
+  }
+}
+namespace kumi
+{
+  template<product_type Tuple, typename Value>
+  [[nodiscard]] constexpr auto sum(Tuple&& t, Value init)
+  {
+    if constexpr(_::empty_tuple<Tuple>) return init;
+    else return kumi::apply( [init](auto const&... m) { return (m + ... + init); }, KUMI_FWD(t) );
+  }
+  template<product_type Tuple, typename Value>
+  [[nodiscard]] constexpr auto prod(Tuple&& t, Value init)
+  {
+    if constexpr(_::empty_tuple<Tuple>) return init;
+    else return kumi::apply( [init](auto const&... m) { return (m * ... * init); }, KUMI_FWD(t) );
+  }
+  template<product_type Tuple, typename Value>
+  [[nodiscard]] constexpr auto bit_and(Tuple&& t, Value init)
+  {
+    if constexpr(_::empty_tuple<Tuple>) return init;
+    else return kumi::apply( [init](auto const&... m) { return (m & ... & init); }, KUMI_FWD(t) );
+  }
+  template<product_type Tuple, typename Value>
+  [[nodiscard]] constexpr auto bit_or(Tuple&& t, Value init)
+  {
+    if constexpr(_::empty_tuple<Tuple>) return init;
+    else return kumi::apply( [init](auto const&... m) { return (m | ... | init); }, KUMI_FWD(t) );
+  }
+  namespace result
+  {
+    template<product_type Tuple, typename Value>
+    struct sum
+    {
+      using type = decltype(kumi::sum(std::declval<Tuple>(), std::declval<Value>()));
+    };
+    template<product_type Tuple, typename Value>
+    struct prod
+    {
+      using type = decltype(kumi::prod(std::declval<Tuple>(), std::declval<Value>()));
+    };
+    template<product_type Tuple, typename Value>
+    struct bit_and
+    {
+      using type = decltype(kumi::bit_and(std::declval<Tuple>(), std::declval<Value>()));
+    };
+    template<product_type Tuple, typename Value>
+    struct bit_or
+    {
+      using type = decltype(kumi::bit_or(std::declval<Tuple>(), std::declval<Value>()));
+    };
+    template<product_type Tuple, typename Value>
+    using sum_t = typename sum<Tuple,Value>::type;
+    template<product_type Tuple, typename Value>
+    using prod_t = typename prod<Tuple,Value>::type;
+    template<product_type Tuple, typename Value>
+    using bit_and_t = typename bit_and<Tuple,Value>::type;
+    template<product_type Tuple, typename Value>
+    using bit_or_t = typename bit_or<Tuple,Value>::type;
   }
 }
 namespace kumi
