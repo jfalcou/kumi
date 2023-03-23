@@ -1,0 +1,31 @@
+name: KUMI CI
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  generate-doc:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/jfalcou/compilers:v6
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v3
+      - name: Prepare KUMI
+        run: |
+          mkdir docs && cd docs
+          cmake . -G Ninja -DKUMI_BUILD_TEST=OFF -DKUMI_BUILD_INTEGRATION=OFF -DKUMI_BUILD_DOCUMENTATION=ON
+
+      - name: Generate Doxygen
+        run: |
+          mkdir build && cd build
+          ninja doxygen-local
+
+      - name: Deploy to gh-pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./build/docs
