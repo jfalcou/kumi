@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.5"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>KUMI: kumi::tuple::operator=</title>
+<title>KUMI: kumi::tuple::make_tuple</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -98,7 +98,7 @@ var searchBox = new SearchBox("searchBox", "search",'Search','.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('structkumi_1_1tuple_aad8b2e98e37989dccde54e505064e300.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__tuple_ga90cacfc0953e7e00ea5a13d6685fa6ba.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -117,44 +117,59 @@ $(document).ready(function(){initNavTree('structkumi_1_1tuple_aad8b2e98e37989dcc
 </div>
 
 <div class="contents">
-<a id="aad8b2e98e37989dccde54e505064e300" name="aad8b2e98e37989dccde54e505064e300"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aad8b2e98e37989dccde54e505064e300">&#9670;&nbsp;</a></span>operator=()</h2>
+<a id="ga90cacfc0953e7e00ea5a13d6685fa6ba" name="ga90cacfc0953e7e00ea5a13d6685fa6ba"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga90cacfc0953e7e00ea5a13d6685fa6ba">&#9670;&nbsp;</a></span>make_tuple()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename... Ts&gt; </div>
-<div class="memtemplate">
-template&lt;typename... Us&gt; <br />
-requires (detail::piecewise_convertible&lt;<a class="el" href="structkumi_1_1tuple.html">tuple</a>, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;Us...&gt;&gt;)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr <a class="el" href="structkumi_1_1tuple.html">tuple</a> &amp; <a class="el" href="structkumi_1_1tuple.html">kumi::tuple</a>&lt; Ts &gt;::operator= </td>
+          <td class="memname">constexpr <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; typename std::unwrap_ref_decay&lt; Ts &gt;::type... &gt; make_tuple </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Us... &gt; const &amp;&#160;</td>
-          <td class="paramname"><em>other</em></td><td>)</td>
+          <td class="paramtype">Ts &amp;&amp;...&#160;</td>
+          <td class="paramname"><em>ts</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Replaces the contents of the tuple with the contents of another tuple. </p>
+<p>Creates a tuple object, deducing the target type from the types of arguments. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">other</td><td><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> to copy or move from </td></tr>
+    <tr><td class="paramname">ts</td><td>Zero or more lvalue arguments to construct the tuple from. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><code>*this</code> </dd></dl>
-
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> constructed from the ts or their inner references when ts is an instance of <code>std::reference_wrapper</code>. </dd></dl>
+<h2><a class="anchor" id="autotoc_md80"></a>
+Example:</h2>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/tuple.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;functional&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordtype">int</span> k = 99;</div>
+<div class="line">  <span class="keyword">auto</span> t = kumi::make_tuple( 1, 2.3, 4.5f, <span class="charliteral">&#39;@&#39;</span>, std::ref(k));</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; t &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Reference access</span></div>
+<div class="line">  get&lt;4&gt;(t)++;</div>
+<div class="line">  std::cout &lt;&lt; k &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">}</div>
+</div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->
