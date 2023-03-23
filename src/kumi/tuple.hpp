@@ -8,6 +8,7 @@
 #ifndef KUMI_TUPLE_HPP_INCLUDED
 #define KUMI_TUPLE_HPP_INCLUDED
 
+#include <kumi/detail/abi.hpp>
 #include <kumi/detail/stdfix.hpp>
 #include <kumi/detail/binder.hpp>
 #include <kumi/utils.hpp>
@@ -326,7 +327,7 @@ namespace kumi
   //! ## Example:
   //! @include doc/tie.cpp
   //================================================================================================
-  template<typename... Ts> [[nodiscard]] constexpr tuple<Ts &...> tie(Ts &...ts) { return {ts...}; }
+  template<typename... Ts> [[nodiscard]] KUMI_TRIVIAL constexpr tuple<Ts &...> tie(Ts &...ts) { return {ts...}; }
 
   //================================================================================================
   //! @ingroup tuple
@@ -345,7 +346,7 @@ namespace kumi
   //! ## Example:
   //! @include doc/forward_as_tuple.cpp
   //================================================================================================
-  template<typename... Ts> [[nodiscard]] constexpr tuple<Ts &&...> forward_as_tuple(Ts &&...ts)
+  template<typename... Ts> [[nodiscard]] KUMI_TRIVIAL constexpr tuple<Ts &&...> forward_as_tuple(Ts &&...ts)
   {
     return {KUMI_FWD(ts)...};
   }
@@ -379,7 +380,7 @@ namespace kumi
   //! ## Example:
   //! @include doc/to_ref.cpp
   //================================================================================================
-  template<product_type Type> [[nodiscard]] constexpr auto to_ref(Type&& t)
+  template<product_type Type> [[nodiscard]] KUMI_TRIVIAL constexpr auto to_ref(Type&& t)
   {
     return apply( [](auto&&... elems)
                   {
@@ -412,14 +413,14 @@ namespace kumi
   //! @include doc/get.cpp
   //================================================================================================
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts)) [[nodiscard]] constexpr decltype(auto) get(tuple<Ts...> &t) noexcept
+  requires(I < sizeof...(Ts)) [[nodiscard]] KUMI_TRIVIAL constexpr decltype(auto) get(tuple<Ts...> &t) noexcept
   {
     return t[index<I>];
   }
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts)) [[nodiscard]] constexpr decltype(auto)
+  requires(I < sizeof...(Ts)) [[nodiscard]] KUMI_TRIVIAL constexpr decltype(auto)
   get(tuple<Ts...> &&arg) noexcept
   {
     return static_cast<tuple<Ts...> &&>(arg)[index<I>];
@@ -427,7 +428,7 @@ namespace kumi
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts)) [[nodiscard]] constexpr decltype(auto)
+  requires(I < sizeof...(Ts)) [[nodiscard]] KUMI_TRIVIAL constexpr decltype(auto)
   get(tuple<Ts...> const &arg) noexcept
   {
     return arg[index<I>];
@@ -435,7 +436,7 @@ namespace kumi
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts)) [[nodiscard]] constexpr decltype(auto)
+  requires(I < sizeof...(Ts)) [[nodiscard]] KUMI_TRIVIAL constexpr decltype(auto)
   get(tuple<Ts...> const &&arg) noexcept
   {
     return static_cast<tuple<Ts...> const &&>(arg)[index<I>];

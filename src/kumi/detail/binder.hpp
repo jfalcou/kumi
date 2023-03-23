@@ -1,10 +1,10 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 #include <cstddef>
@@ -12,37 +12,24 @@
 
 namespace kumi::_
 {
-  //==============================================================================================
+  //====================================================================================================================
   // Tuple leaf binder tricks
-  //==============================================================================================
+  //====================================================================================================================
   template<int I, typename T> struct leaf
   {
     T value;
   };
 
-  template<int I, typename T> constexpr T &get_leaf(leaf<I, T> &arg) noexcept
-  {
-    return arg.value;
-  }
-
-  template<int I, typename T> constexpr T &&get_leaf(leaf<I, T> &&arg) noexcept
-  {
-    return static_cast<T &&>(arg.value);
-  }
-
   template<int I, typename T>
-  constexpr T const &&get_leaf(leaf<I, T> const &&arg) noexcept
-  {
-    return static_cast<T const &&>(arg.value);
-  }
-
-  template<int I, typename T> constexpr T const &get_leaf(leaf<I, T> const &arg) noexcept
-  {
-    return arg.value;
-  }
+  KUMI_TRIVIAL constexpr T       &  get_leaf(leaf<I, T>       & a) noexcept { return a.value; }
+  template<int I, typename T>
+  KUMI_TRIVIAL constexpr T       && get_leaf(leaf<I, T>       &&a) noexcept { return static_cast<T&&>(a.value); }
+  template<int I, typename T>
+  KUMI_TRIVIAL constexpr T const && get_leaf(leaf<I, T> const &&a) noexcept { return static_cast<T const &&>(a.value); }
+  template<int I, typename T>
+  KUMI_TRIVIAL constexpr T const &  get_leaf(leaf<I, T> const & a) noexcept { return a.value; }
 
   template<typename ISeq, typename... Ts> struct binder;
-
 
   // General N-case
   template<int... Is, typename... Ts>
