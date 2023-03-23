@@ -25,14 +25,11 @@
 var NAVTREE =
 [
   [ "KUMI", "index.html", [
-    [ "The C++20 Compact Tuple Tools", "index.html", [
-      [ "A Short Example", "index.html#autotoc_md94", null ],
-      [ "Licence", "index.html#autotoc_md95", null ]
-    ] ],
-    [ "Setup", "md_kumi_doc_page01_setup.html", [
-      [ "Direct file download", "md_kumi_doc_page01_setup.html#autotoc_md97", null ],
-      [ "CMake FetchContent", "md_kumi_doc_page01_setup.html#autotoc_md98", null ],
-      [ "CPM Integration", "md_kumi_doc_page01_setup.html#autotoc_md99", null ]
+    [ "The C++20 Compact Tuple Tools", "index.html", "index" ],
+    [ "Setup", "md____w_kumi_kumi_doc_page01_setup.html", [
+      [ "Direct file download", "md____w_kumi_kumi_doc_page01_setup.html#autotoc_md97", null ],
+      [ "CMake FetchContent", "md____w_kumi_kumi_doc_page01_setup.html#autotoc_md98", null ],
+      [ "CPM Integration", "md____w_kumi_kumi_doc_page01_setup.html#autotoc_md99", null ]
     ] ],
     [ "Change Log", "changelog.html", [
       [ "Version 3.0 - Delicious Datolite", "changelog.html#autotoc_md100", [

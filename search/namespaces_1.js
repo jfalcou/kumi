@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['literals_0',['literals',['../namespaceliterals.html',1,'']]]
+  ['kumi_0',['kumi',['../namespacekumi.html',1,'']]]
 ];
