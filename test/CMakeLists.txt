@@ -70,7 +70,17 @@ endfunction()
 add_custom_target(unit)
 
 ##==================================================================================================
+## Generate tests from a GLOB
+##==================================================================================================
+function(glob_unit  relative pattern)
+  file(GLOB files CONFIGURE_DEPENDS RELATIVE ${relative} ${pattern})
+  foreach(file ${files})
+    generate_test(${file})
+  endforeach()
+endfunction()
+
+##==================================================================================================
 ## Actual tests
 ##==================================================================================================
-include(${PROJECT_SOURCE_DIR}/test/unit.cmake)
-include(${PROJECT_SOURCE_DIR}/test/doc.cmake)
+glob_unit("${CMAKE_SOURCE_DIR}/test" "unit/*.cpp" )
+glob_unit("${CMAKE_SOURCE_DIR}/test" "doc/*.cpp" )

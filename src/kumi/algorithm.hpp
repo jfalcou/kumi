@@ -41,10 +41,11 @@ namespace kumi
 #include <kumi/algorithm/inner_product.hpp>
 #include <kumi/algorithm/map.hpp>
 #include <kumi/algorithm/push_pop.hpp>
-#include <kumi/algorithm/reduce.hpp>
+#include <kumi/algorithm/fold.hpp>
 #include <kumi/algorithm/minmax.hpp>
 #include <kumi/algorithm/predicates.hpp>
 #include <kumi/algorithm/reorder.hpp>
+#include <kumi/algorithm/reduce.hpp>
 #include <kumi/algorithm/reverse.hpp>
 #include <kumi/algorithm/transpose.hpp>
 #include <kumi/algorithm/zip.hpp>

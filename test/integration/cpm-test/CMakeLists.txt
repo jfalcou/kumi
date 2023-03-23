@@ -16,9 +16,9 @@ include(cpm.cmake)
 CPMAddPackage ( NAME kumi
                 GIT_REPOSITORY "${kumi_SOURCE_DIR}"
                 GIT_TAG "${kumi_git_head}"
-                OPTIONS "KUMI_BUILD_INTEGRATION=OFF"
-                        "KUMI_BUILD_TEST=OFF"
-                        "KUMI_BUILD_DOCUMENTATION=OFF"
+                OPTIONS "KUMI_BUILD_INTEGRATION OFF"
+                        "KUMI_BUILD_TEST OFF"
+                        "KUMI_BUILD_DOCUMENTATION OFF"
               )
 
 # Use KUMI

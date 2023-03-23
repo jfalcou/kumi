@@ -11,109 +11,165 @@ namespace kumi
 {
   //================================================================================================
   //! @ingroup reductions
-  //! @brief Computes the generalized sum of all elements using a tail recursive tail.
+  //! @brief Computes the sum of all elements.
   //!
-  //! @param f      Binary callable function to apply
   //! @param t      Tuple to operate on
   //! @param init   Initial value of the sum
-  //! @return   The value of `f( f( f(init, get<0>(t)), ...), get<N-1>(t))`
+  //! @return The value of `get<0>(t) + ... + get<N-1>(t) + init`
   //!
   //! ## Helper type
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<typename Function, product_type Tuple, typename Value> struct fold_left;
+  //!   template<product_type Tuple, typename Value> struct sum;
   //!
-  //!   template<typename Function, product_type Tuple, typename Value>
-  //!   using fold_left_t = typename fold_left_t<Function,Tuple,Value>::type;
+  //!   template<product_type Tuple, typename Value>
+  //!   using sum_t = typename sum_t<Tuple,Value>::type;
   //! }
   //! @endcode
   //!
-  //! Computes the return type of a call to kumi::fold_left
+  //! Computes the return type of a call to kumi::sum
   //!
   //! ## Example
-  //! @include doc/fold_left.cpp
+  //! @include doc/sum.cpp
   //================================================================================================
-  template<typename Function, product_type Tuple, typename Value>
-  [[nodiscard]] constexpr auto fold_left(Function f, Tuple&& t, Value init)
+  template<product_type Tuple, typename Value>
+  [[nodiscard]] constexpr auto sum(Tuple&& t, Value init)
   {
-    if constexpr(sized_product_type<Tuple,0>) return init;
-    else
-    {
-      return [&]<std::size_t... I>(std::index_sequence<I...>)
-      {
-        return (_::foldable {f, get<I>(KUMI_FWD(t))} >> ... >> _::foldable {f, init}).value;
-      }
-      (std::make_index_sequence<size<Tuple>::value>());
-    }
+    if constexpr(_::empty_tuple<Tuple>) return init;
+    else return kumi::apply( [init](auto const&... m) { return (m + ... + init); }, KUMI_FWD(t) );
   }
 
   //================================================================================================
   //! @ingroup reductions
-  //! @brief Computes the generalized sum of all elements using a non-tail recursive tail.
+  //! @brief Computes the product of all elements.
   //!
-  //! @param f      Binary callable function to apply
   //! @param t      Tuple to operate on
-  //! @param init   Initial value of the sum
-  //! @return   The value of `f(get<0>(t), f(... , f(get<N-1>(t), init))`
+  //! @param init   Initial value of the product
+  //! @return The value of `get<0>(t) * ... * get<N-1>(t) * init`
   //!
   //! ## Helper type
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<typename Function, product_type Tuple, typename Value> struct fold_right;
+  //!   template<product_type Tuple, typename Value> struct prod;
   //!
-  //!   template<typename Function, product_type Tuple, typename Value>
-  //!   using fold_right_t = typename fold_right_t<Function,Tuple,Value>::type;
+  //!   template<product_type Tuple, typename Value>
+  //!   using prod_t = typename prod_t<Tuple,Value>::type;
   //! }
   //! @endcode
   //!
-  //! Computes the return type of a call to kumi::fold_right
+  //! Computes the return type of a call to kumi::prod
   //!
   //! ## Example
-  //! @include doc/fold_right.cpp
+  //! @include doc/prod.cpp
   //================================================================================================
-  template<typename Function, product_type Tuple, typename Value>
-  [[nodiscard]] constexpr auto fold_right(Function f, Tuple&& t, Value init)
+  template<product_type Tuple, typename Value>
+  [[nodiscard]] constexpr auto prod(Tuple&& t, Value init)
   {
-    if constexpr(size<Tuple>::value ==0) return init;
-    else
-    {
-      return [&]<std::size_t... I>(std::index_sequence<I...>)
-      {
-        return (_::foldable {f, init} << ... << _::foldable {f, get<I>(KUMI_FWD(t))}).value;
-      }
-      (std::make_index_sequence<size<Tuple>::value>());
-    }
+    if constexpr(_::empty_tuple<Tuple>) return init;
+    else return kumi::apply( [init](auto const&... m) { return (m * ... * init); }, KUMI_FWD(t) );
+  }
+
+  //================================================================================================
+  //! @ingroup reductions
+  //! @brief Computes the bitwise AND of all elements.
+  //!
+  //! @param t      Tuple to operate on
+  //! @param init   Initial value of the product
+  //! @return The value of `get<0>(t) & ... & get<N-1>(t) & init`
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<product_type Tuple, typename Value> struct bit_and;
+  //!
+  //!   template<product_type Tuple, typename Value>
+  //!   using prod_t = typename bit_and_t<Tuple,Value>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::bit_and
+  //!
+  //! ## Example
+  //! @include doc/bit_and.cpp
+  //================================================================================================
+  template<product_type Tuple, typename Value>
+  [[nodiscard]] constexpr auto bit_and(Tuple&& t, Value init)
+  {
+    if constexpr(_::empty_tuple<Tuple>) return init;
+    else return kumi::apply( [init](auto const&... m) { return (m & ... & init); }, KUMI_FWD(t) );
+  }
+
+  //================================================================================================
+  //! @ingroup reductions
+  //! @brief Computes the bitwise OR of all elements.
+  //!
+  //! @param t      Tuple to operate on
+  //! @param init   Initial value of the product
+  //! @return The value of `get<0>(t) | ... | get<N-1>(t) & init`
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<product_type Tuple, typename Value> struct bit_or;
+  //!
+  //!   template<product_type Tuple, typename Value>
+  //!   using prod_t = typename bit_or_t<Tuple,Value>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::bit_or
+  //!
+  //! ## Example
+  //! @include doc/bit_or.cpp
+  //================================================================================================
+  template<product_type Tuple, typename Value>
+  [[nodiscard]] constexpr auto bit_or(Tuple&& t, Value init)
+  {
+    if constexpr(_::empty_tuple<Tuple>) return init;
+    else return kumi::apply( [init](auto const&... m) { return (m | ... | init); }, KUMI_FWD(t) );
   }
 
   namespace result
   {
-    template<typename Function, product_type Tuple, typename Value>
-    struct fold_right
+    template<product_type Tuple, typename Value>
+    struct sum
     {
-      using type = decltype ( kumi::fold_right( std::declval<Function>()
-                                              , std::declval<Tuple>()
-                                              , std::declval<Value>()
-                                              )
-                            );
+      using type = decltype(kumi::sum(std::declval<Tuple>(), std::declval<Value>()));
     };
 
-    template<typename Function, product_type Tuple, typename Value>
-    struct fold_left
+    template<product_type Tuple, typename Value>
+    struct prod
     {
-      using type = decltype ( kumi::fold_left ( std::declval<Function>()
-                                              , std::declval<Tuple>()
-                                              , std::declval<Value>()
-                                              )
-                            );
+      using type = decltype(kumi::prod(std::declval<Tuple>(), std::declval<Value>()));
     };
 
-    template<typename Function, product_type Tuple, typename Value>
-    using fold_right_t = typename fold_right<Function,Tuple,Value>::type;
+    template<product_type Tuple, typename Value>
+    struct bit_and
+    {
+      using type = decltype(kumi::bit_and(std::declval<Tuple>(), std::declval<Value>()));
+    };
 
-    template<typename Function, product_type Tuple, typename Value>
-    using fold_left_t = typename fold_left<Function,Tuple,Value>::type;
+    template<product_type Tuple, typename Value>
+    struct bit_or
+    {
+      using type = decltype(kumi::bit_or(std::declval<Tuple>(), std::declval<Value>()));
+    };
+
+    template<product_type Tuple, typename Value>
+    using sum_t = typename sum<Tuple,Value>::type;
+
+    template<product_type Tuple, typename Value>
+    using prod_t = typename prod<Tuple,Value>::type;
+
+    template<product_type Tuple, typename Value>
+    using bit_and_t = typename bit_and<Tuple,Value>::type;
+
+    template<product_type Tuple, typename Value>
+    using bit_or_t = typename bit_or<Tuple,Value>::type;
   }
 }
 
