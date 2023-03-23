@@ -1,4 +1,9 @@
-name: KUMI CI
+####################################################################################################
+##  KUMI - Compact C++20 Tuple Toolbox
+##  Copyright : KUMI Project Contributors
+##  SPDX-License-Identifier: BSL-1.0
+####################################################################################################
+name: KUMI Documentation Generation
 on:
   push:
     branches:
@@ -23,7 +28,6 @@ jobs:
         run: |
           cd build
           ninja doxygen-local
-
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3
