@@ -52,11 +52,23 @@ You can install **KUMI** directly via [CPM](https://github.com/cpm-cmake/CPM.cma
 add the following commands:
 
 ```cmake
-include(CPM)
+CPMAddPackage ( NAME            kumi
+                GIT_REPOSITORY  "https://github.com/jfalcou/kumi"
+                GIT_TAG         "v3.0"
+                OPTIONS         "KUMI_BUILD_INTEGRATION OFF"
+                                "KUMI_BUILD_TEST OFF"
+                                "KUMI_BUILD_DOCUMENTATION OFF"
+              )
+```
 
-CPMAddPackage ( NAME kumi
-                URL https://github.com/jfalcou/kumi/archive/refs/tags/v2.1.zip
-                VERSION 2.1
-                OPTIONS "KUMI_BUILD_TEST OFF"
+If you want to install the latest head of `main`, you can use those commands instead:
+
+```cmake
+CPMAddPackage ( NAME            kumi
+                GIT_REPOSITORY  "https://github.com/jfalcou/kumi"
+                GIT_TAG         "main"
+                OPTIONS         "KUMI_BUILD_INTEGRATION OFF"
+                                "KUMI_BUILD_TEST OFF"
+                                "KUMI_BUILD_DOCUMENTATION OFF"
               )
 ```
