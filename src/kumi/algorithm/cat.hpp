@@ -32,7 +32,8 @@ namespace kumi
   //! ## Example
   //! @include doc/cat.cpp
   //================================================================================================
-  template<product_type... Tuples> [[nodiscard]] constexpr auto cat(Tuples&&... ts)
+  template<product_type... Tuples>
+  KUMI_TRIVIAL_NODISCARD constexpr auto cat(Tuples&&... ts)
   {
     if constexpr(sizeof...(Tuples) == 0) return tuple{};
     else
