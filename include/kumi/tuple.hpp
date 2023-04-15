@@ -9,8 +9,10 @@
 #define KUMI_TUPLE_HPP_INCLUDED
 #if defined(__GNUC__)
 #   define KUMI_TRIVIAL [[gnu::always_inline, gnu::flatten, gnu::artificial]] inline
+#   define KUMI_TRIVIAL_NODISCARD [[nodiscard, gnu::always_inline, gnu::flatten, gnu::artificial]] inline
 #elif defined(_MSC_VER)
 #   define KUMI_TRIVIAL __forceinline
+#   define KUMI_TRIVIAL_NODISCARD [[nodiscard]]
 #endif
 #if defined( __ANDROID__ ) || defined(__APPLE__)
 #include <type_traits>
@@ -535,18 +537,19 @@ namespace kumi
     if constexpr(sized_product_type<Tuple,0>) return;
     else
     {
-      [&]<std::size_t... I>(std::index_sequence<I...>)
+      auto const invoker{[&, f](auto const i)
       {
-        using std::get;
-        [[maybe_unused]] auto call = [&]<typename M>(M idx)
-                                        { f ( idx
-                                            , get<M::value>(KUMI_FWD(t))
-                                            , get<M::value>(KUMI_FWD(ts))...
-                                            );
-                                        };
-        ( call(std::integral_constant<std::size_t, I>{}), ... );
-      }
-      (std::make_index_sequence<size<Tuple>::value>());
+          f
+          (
+            i,
+            get<i.value>(KUMI_FWD(t)),
+            get<i.value>(KUMI_FWD(ts))...
+          );
+      }};
+      [=]<std::size_t... I>(std::index_sequence<I...>)
+      {
+        (invoker( std::integral_constant<unsigned, I>{} ), ...);
+      }(std::make_index_sequence<size<Tuple>::value>());
     }
   }
 }
@@ -817,7 +820,8 @@ namespace kumi
 }
 namespace kumi
 {
-  template<product_type... Tuples> [[nodiscard]] constexpr auto cat(Tuples&&... ts)
+  template<product_type... Tuples>
+  KUMI_TRIVIAL_NODISCARD constexpr auto cat(Tuples&&... ts)
   {
     if constexpr(sizeof...(Tuples) == 0) return tuple{};
     else
@@ -918,8 +922,8 @@ namespace kumi
   requires( (I0 <= size_v<Tuple>) && (I1 <= size_v<Tuple>) )
   [[nodiscard]] constexpr
   auto extract( Tuple const& t
-              , [[maybe_unused]] index_t<I0> const& i0
-              , [[maybe_unused]] index_t<I1> const& i1
+              , [[maybe_unused]] index_t<I0> i0
+              , [[maybe_unused]] index_t<I1> i1
               ) noexcept
   {
     return [&]<std::size_t... N>(std::index_sequence<N...>)
@@ -931,14 +935,14 @@ namespace kumi
   template<std::size_t I0, product_type Tuple>
   requires(I0<= size_v<Tuple>)
   [[nodiscard]] constexpr
-  auto extract(Tuple const& t, index_t<I0> const& i0) noexcept
+  auto extract(Tuple const& t, index_t<I0> i0) noexcept
   {
     return extract(t,i0, index<size_v<Tuple>>);
   }
   template<std::size_t I0, product_type Tuple>
   requires(I0 <= size_v<Tuple>)
   [[nodiscard]] constexpr auto split( Tuple const& t
-                                    , [[maybe_unused]] index_t<I0> const& i0
+                                    , [[maybe_unused]] index_t<I0> i0
                                     ) noexcept
   {
     return kumi::make_tuple(extract(t,index<0>, index<I0>), extract(t,index<I0>));

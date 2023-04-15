@@ -41,8 +41,8 @@ namespace kumi
   requires( (I0 <= size_v<Tuple>) && (I1 <= size_v<Tuple>) )
   [[nodiscard]] constexpr
   auto extract( Tuple const& t
-              , [[maybe_unused]] index_t<I0> const& i0
-              , [[maybe_unused]] index_t<I1> const& i1
+              , [[maybe_unused]] index_t<I0> i0
+              , [[maybe_unused]] index_t<I1> i1
               ) noexcept
   {
     return [&]<std::size_t... N>(std::index_sequence<N...>)
@@ -56,7 +56,7 @@ namespace kumi
   template<std::size_t I0, product_type Tuple>
   requires(I0<= size_v<Tuple>)
   [[nodiscard]] constexpr
-  auto extract(Tuple const& t, index_t<I0> const& i0) noexcept
+  auto extract(Tuple const& t, index_t<I0> i0) noexcept
   {
     return extract(t,i0, index<size_v<Tuple>>);
   }
@@ -93,7 +93,7 @@ namespace kumi
   template<std::size_t I0, product_type Tuple>
   requires(I0 <= size_v<Tuple>)
   [[nodiscard]] constexpr auto split( Tuple const& t
-                                    , [[maybe_unused]] index_t<I0> const& i0
+                                    , [[maybe_unused]] index_t<I0> i0
                                     ) noexcept
   {
     return kumi::make_tuple(extract(t,index<0>, index<I0>), extract(t,index<I0>));

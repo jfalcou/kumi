@@ -71,20 +71,20 @@ namespace kumi
     if constexpr(sized_product_type<Tuple,0>) return;
     else
     {
-      [&]<std::size_t... I>(std::index_sequence<I...>)
+      auto const invoker{[&, f](auto const i)
       {
-        // clang needs this for some reason
-        using std::get;
-        [[maybe_unused]] auto call = [&]<typename M>(M idx)
-                                        { f ( idx
-                                            , get<M::value>(KUMI_FWD(t))
-                                            , get<M::value>(KUMI_FWD(ts))...
-                                            );
-                                        };
+          f
+          (
+            i,
+            get<i.value>(KUMI_FWD(t)),
+            get<i.value>(KUMI_FWD(ts))...
+          );
+      }};
 
-        ( call(std::integral_constant<std::size_t, I>{}), ... );
-      }
-      (std::make_index_sequence<size<Tuple>::value>());
+      [=]<std::size_t... I>(std::index_sequence<I...>)
+      {
+        (invoker( std::integral_constant<unsigned, I>{} ), ...);
+      }(std::make_index_sequence<size<Tuple>::value>());
     }
   }
 }
