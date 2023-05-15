@@ -7,7 +7,6 @@
 //==================================================================================================
 #pragma once
 
-#include "kumi/tuple.hpp"
 namespace kumi
 {
   namespace _
@@ -35,6 +34,12 @@ namespace kumi
       using type = kumi::tuple< typename Meta<element_t<I,Tuple>>::type... >;
     };
   }
+
+  // Specific is_homogeneous overload
+  template<typename T>
+  requires( !requires { T::is_homogeneous; } )
+  struct is_homogeneous<T> : is_homogeneous<typename _::as_tuple<T,std::make_index_sequence<size_v<T>>>::type>
+  {};
 
   //================================================================================================
   //! @ingroup utility
@@ -106,10 +111,7 @@ namespace kumi
 
   template<typename T, template<typename...> class Meta>
   requires( product_type<T> )
-  struct as_tuple<T, Meta> : _::as_tuple < T
-                                              , std::make_index_sequence<size_v<T>>
-                                              , Meta
-                                              >
+  struct as_tuple<T, Meta> : _::as_tuple <T,std::make_index_sequence<size_v<T>>, Meta>
   {};
 
   template<typename T, template<typename...> class Meta>
