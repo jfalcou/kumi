@@ -27,34 +27,34 @@ var NAVTREE =
   [ "KUMI", "index.html", [
     [ "The C++20 Compact Tuple Tools", "index.html", "index" ],
     [ "Setup", "md____w_kumi_kumi_doc_page01_setup.html", [
-      [ "Direct file download", "md____w_kumi_kumi_doc_page01_setup.html#autotoc_md97", null ],
-      [ "CMake FetchContent", "md____w_kumi_kumi_doc_page01_setup.html#autotoc_md98", null ],
-      [ "CPM Integration", "md____w_kumi_kumi_doc_page01_setup.html#autotoc_md99", null ]
+      [ "Direct file download", "md____w_kumi_kumi_doc_page01_setup.html#autotoc_md98", null ],
+      [ "CMake FetchContent", "md____w_kumi_kumi_doc_page01_setup.html#autotoc_md99", null ],
+      [ "CPM Integration", "md____w_kumi_kumi_doc_page01_setup.html#autotoc_md100", null ]
     ] ],
     [ "Change Log", "changelog.html", [
-      [ "Version 3.0 - Delicious Datolite", "changelog.html#autotoc_md100", [
-        [ "What's Changed", "changelog.html#autotoc_md101", [
-          [ "API and Infrastructure Changes", "changelog.html#autotoc_md102", null ],
-          [ "New Features", "changelog.html#autotoc_md103", null ],
-          [ "Bug Fixes", "changelog.html#autotoc_md104", null ]
+      [ "Version 3.0 - Delicious Datolite", "changelog.html#autotoc_md101", [
+        [ "What's Changed", "changelog.html#autotoc_md102", [
+          [ "API and Infrastructure Changes", "changelog.html#autotoc_md103", null ],
+          [ "New Features", "changelog.html#autotoc_md104", null ],
+          [ "Bug Fixes", "changelog.html#autotoc_md105", null ]
         ] ],
-        [ "New Contributors", "changelog.html#autotoc_md105", null ]
+        [ "New Contributors", "changelog.html#autotoc_md106", null ]
       ] ],
-      [ "Version 2.1 - Charming Chrysoprase", "changelog.html#autotoc_md106", [
-        [ "What's Changed", "changelog.html#autotoc_md107", [
-          [ "Bug Fixes", "changelog.html#autotoc_md108", null ],
-          [ "New Features", "changelog.html#autotoc_md109", null ]
+      [ "Version 2.1 - Charming Chrysoprase", "changelog.html#autotoc_md107", [
+        [ "What's Changed", "changelog.html#autotoc_md108", [
+          [ "Bug Fixes", "changelog.html#autotoc_md109", null ],
+          [ "New Features", "changelog.html#autotoc_md110", null ]
         ] ]
       ] ],
-      [ "Version 2.0 - Bedazzling Beryl", "changelog.html#autotoc_md110", [
-        [ "What's Changed", "changelog.html#autotoc_md111", [
-          [ "Infrastructure", "changelog.html#autotoc_md112", null ],
-          [ "Bug Fixes", "changelog.html#autotoc_md113", null ],
-          [ "New Features", "changelog.html#autotoc_md114", null ]
+      [ "Version 2.0 - Bedazzling Beryl", "changelog.html#autotoc_md111", [
+        [ "What's Changed", "changelog.html#autotoc_md112", [
+          [ "Infrastructure", "changelog.html#autotoc_md113", null ],
+          [ "Bug Fixes", "changelog.html#autotoc_md114", null ],
+          [ "New Features", "changelog.html#autotoc_md115", null ]
         ] ]
       ] ],
-      [ "Version 1.0 - Amazing Amethyst", "changelog.html#autotoc_md115", [
-        [ "First autonomous public release.", "changelog.html#autotoc_md116", null ]
+      [ "Version 1.0 - Amazing Amethyst", "changelog.html#autotoc_md116", [
+        [ "First autonomous public release.", "changelog.html#autotoc_md117", null ]
       ] ]
     ] ],
     [ "Licence", "licence.html", null ],
