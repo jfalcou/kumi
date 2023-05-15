@@ -660,15 +660,16 @@ namespace kumi
       (std::make_index_sequence<sizeof...(Ts)>());
       return *this;
     }
-    template<sized_product_type<sizeof...(Ts)> Other>
+    template<product_type Other>
     friend constexpr auto operator==(tuple const &self, Other const &other) noexcept
-    requires( (sizeof...(Ts) != 0 ) && equality_comparable<tuple,Other> )
+    requires(   (sizeof...(Ts) != 0 ) &&  (sizeof...(Ts) == size_v<Other>)
+            &&  equality_comparable<tuple,Other>
+            )
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
         return ((get<I>(self) == get<I>(other)) && ...);
-      }
-      (std::make_index_sequence<sizeof...(Ts)>());
+      } (std::make_index_sequence<sizeof...(Ts)>());
     }
 #if !defined(KUMI_DOXYGEN_INVOKED)
     template<sized_product_type<0> Other>
@@ -677,21 +678,9 @@ namespace kumi
       return true;
     }
 #endif
-    template<sized_product_type<sizeof...(Ts)> Other>
-    friend constexpr auto operator!=(tuple const &self, Other const &other) noexcept
-    requires( (sizeof...(Ts) != 0 ) && equality_comparable<tuple,Other> )
-    {
-      return !(self == other);
-    }
-#if !defined(KUMI_DOXYGEN_INVOKED)
-    template<sized_product_type<0> Other>
-    friend constexpr auto operator!=(tuple const&, Other const &) noexcept
-    {
-      return false;
-    }
-#endif
-    template<sized_product_type<sizeof...(Ts)> Other>
+    template<product_type Other>
     friend constexpr auto operator<(tuple const &lhs, Other const &rhs) noexcept
+    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<Other>) )
     {
       auto res = get<0>(lhs) < get<0>(rhs);
       auto const order = [&]<typename Index>(Index i)
@@ -709,16 +698,19 @@ namespace kumi
     }
     template<product_type Other>
     friend constexpr auto operator<=(tuple const &lhs, Other const &rhs) noexcept
+    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<Other>) )
     {
       return !(rhs < lhs);
     }
     template<product_type Other>
     friend constexpr auto operator>(tuple const &lhs, Other const &rhs) noexcept
+    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<Other>) )
     {
       return rhs < lhs;
     }
     template<product_type Other>
     friend constexpr auto operator>=(tuple const &lhs, Other const &rhs) noexcept
+    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<Other>) )
     {
       return !(lhs < rhs);
     }
