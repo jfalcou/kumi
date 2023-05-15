@@ -49,6 +49,7 @@ namespace kumi::_
   template<int... Is, typename... Ts>
   struct binder<std::integer_sequence<int,Is...>, Ts...> : leaf<Is, Ts>...
   {
+    static constexpr bool is_homogeneous = false;
   };
   template<typename ISeq, typename... Ts>
   struct make_binder
@@ -66,7 +67,11 @@ namespace kumi::_
   inline constexpr bool no_references = (true && ... && !std::is_reference_v<Ts>);
   template<typename T0, typename... Ts>
   inline constexpr bool all_the_same = (true && ... && std::is_same_v<T0,Ts>);
-  template<typename T0, int N> struct binder_n { T0 members[N] = {}; };
+  template<typename T0, int N> struct binder_n
+  {
+    static constexpr bool is_homogeneous = true;
+    T0 members[N] = {};
+  };
   template<int... Is, typename T0, typename T1, typename... Ts>
   requires(all_the_same<T0,T1,Ts...> && no_references<T0,T1,Ts...>)
   struct make_binder<std::integer_sequence<int,Is...>, T0, T1, Ts...>
@@ -87,10 +92,17 @@ namespace kumi::_
   {
     return static_cast<T0 const &&>(arg.members[I]);
   }
+  template<>
+  struct binder<std::integer_sequence<int>>
+  {
+    static constexpr bool is_homogeneous = false;
+    using kumi_specific_layout = void;
+  };
   template<typename T>
   requires(no_references<T>)
   struct binder<std::integer_sequence<int,0>,T>
   {
+    static constexpr bool is_homogeneous = true;
     using kumi_specific_layout = void;
     using member0_type = T;
     member0_type member0;
@@ -99,6 +111,7 @@ namespace kumi::_
   requires(no_references<T0,T1>)
   struct binder<std::integer_sequence<int,0,1>,T0,T1>
   {
+    static constexpr bool is_homogeneous = false;
     using kumi_specific_layout = void;
     using member0_type = T0;
     using member1_type = T1;
@@ -109,6 +122,7 @@ namespace kumi::_
   requires(no_references<T0,T1,T2>)
   struct binder<std::integer_sequence<int,0,1,2>,T0,T1,T2>
   {
+    static constexpr bool is_homogeneous = false;
     using kumi_specific_layout = void;
     using member0_type = T0;
     using member1_type = T1;
@@ -121,6 +135,7 @@ namespace kumi::_
   requires(no_references<T0,T1,T2,T3>)
   struct binder<std::integer_sequence<int,0,1,2,3>,T0,T1,T2,T3>
   {
+    static constexpr bool is_homogeneous = false;
     using kumi_specific_layout = void;
     using member0_type = T0;
     using member1_type = T1;
@@ -135,6 +150,7 @@ namespace kumi::_
   requires(no_references<T0,T1,T2,T3,T4>)
   struct binder<std::integer_sequence<int,0,1,2,3,4>,T0,T1,T2,T3,T4>
   {
+    static constexpr bool is_homogeneous = false;
     using kumi_specific_layout = void;
     using member0_type = T0;
     using member1_type = T1;
@@ -151,6 +167,7 @@ namespace kumi::_
   requires(no_references<T0,T1,T2,T3,T4,T5>)
   struct binder<std::integer_sequence<int,0,1,2,3,4,5>,T0,T1,T2,T3,T4,T5>
   {
+    static constexpr bool is_homogeneous = false;
     using kumi_specific_layout = void;
     using member0_type = T0;
     using member1_type = T1;
@@ -171,6 +188,7 @@ namespace kumi::_
   requires(no_references<T0,T1,T2,T3,T4,T5,T6>)
   struct binder<std::integer_sequence<int,0,1,2,3,4,5,6>,T0,T1,T2,T3,T4,T5,T6>
   {
+    static constexpr bool is_homogeneous = false;
     using kumi_specific_layout = void;
     using member0_type = T0;
     using member1_type = T1;
@@ -193,6 +211,7 @@ namespace kumi::_
   requires(no_references<T0,T1,T2,T3,T4,T5,T6,T7>)
   struct binder<std::integer_sequence<int,0,1,2,3,4,5,6,7>,T0,T1,T2,T3,T4,T5,T6,T7>
   {
+    static constexpr bool is_homogeneous = false;
     using kumi_specific_layout = void;
     using member0_type = T0;
     using member1_type = T1;
@@ -217,6 +236,7 @@ namespace kumi::_
   requires(no_references<T0,T1,T2,T3,T4,T5,T6,T7,T8>)
   struct binder<std::integer_sequence<int,0,1,2,3,4,5,6,7,8>,T0,T1,T2,T3,T4,T5,T6,T7,T8>
   {
+    static constexpr bool is_homogeneous = false;
     using kumi_specific_layout = void;
     using member0_type = T0;
     using member1_type = T1;
@@ -243,6 +263,7 @@ namespace kumi::_
   requires(no_references<T0,T1,T2,T3,T4,T5,T6,T7,T8,T9>)
   struct binder<std::integer_sequence<int,0,1,2,3,4,5,6,7,8,9>,T0,T1,T2,T3,T4,T5,T6,T7,T8,T9>
   {
+    static constexpr bool is_homogeneous = false;
     using kumi_specific_layout = void;
     using member0_type = T0;
     using member1_type = T1;
@@ -334,6 +355,7 @@ namespace kumi
 #endif
 #define KUMI_FWD(...) static_cast<decltype(__VA_ARGS__) &&>(__VA_ARGS__)
 #include <cstddef>
+#include <utility>
 namespace kumi
 {
   template<std::size_t N> struct index_t
@@ -358,6 +380,7 @@ namespace kumi
   }
 }
 #include <cstddef>
+#include <type_traits>
 #include <utility>
 namespace kumi
 {
@@ -381,6 +404,17 @@ namespace kumi
     using type = decltype( get<I>(std::declval<T&>()));
   };
   template<std::size_t I, typename T> using  member_t = typename member<I,T>::type;
+}
+namespace kumi
+{
+  template<typename T>
+  struct is_homogeneous;
+  template<typename T>
+  requires( requires { T::is_homogeneous; } )
+  struct is_homogeneous<T> : std::bool_constant<T::is_homogeneous>
+  {};
+  template<typename T>
+  inline constexpr auto is_homogeneous_v = is_homogeneous<T>::value;
   template<typename... Ts> struct tuple;
 }
 #include <cstddef>
@@ -446,6 +480,8 @@ namespace kumi
   concept sized_product_type_or_more = product_type<T> && (size<T>::value >= N);
   template<typename T>
   concept non_empty_product_type = product_type<T> && (size<T>::value != 0);
+  template<typename T>
+  concept homogeneous_product_type = product_type<T> && is_homogeneous_v<std::remove_cvref_t<T>>;
   namespace _
   {
     template<typename T, typename U> constexpr auto check_equality()
@@ -592,6 +628,7 @@ namespace kumi
   {
     using is_product_type = void;
     using binder_t  = _::make_binder_t<std::make_integer_sequence<int,sizeof...(Ts)>, Ts...>;
+    static constexpr bool is_homogeneous = binder_t::is_homogeneous;
     binder_t impl;
     template<typename... Us>
     requires(   (sizeof...(Us) == sizeof...(Ts))
@@ -928,6 +965,10 @@ namespace kumi
       using type = kumi::tuple< typename Meta<element_t<I,Tuple>>::type... >;
     };
   }
+  template<typename T>
+  requires( !requires { T::is_homogeneous; } )
+  struct is_homogeneous<T> : is_homogeneous<typename _::as_tuple<T,std::make_index_sequence<size_v<T>>>::type>
+  {};
   template<typename Type, typename... Ts>
   requires(!product_type<Type> && _::implicit_constructible<Type, Ts...>)
   [[nodiscard]] constexpr auto from_tuple(tuple<Ts...> const &t)
@@ -944,10 +985,7 @@ namespace kumi
   struct as_tuple;
   template<typename T, template<typename...> class Meta>
   requires( product_type<T> )
-  struct as_tuple<T, Meta> : _::as_tuple < T
-                                              , std::make_index_sequence<size_v<T>>
-                                              , Meta
-                                              >
+  struct as_tuple<T, Meta> : _::as_tuple <T,std::make_index_sequence<size_v<T>>, Meta>
   {};
   template<typename T, template<typename...> class Meta>
   requires( !product_type<T> )

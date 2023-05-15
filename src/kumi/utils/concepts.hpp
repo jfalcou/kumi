@@ -62,6 +62,16 @@ namespace kumi
   template<typename T>
   concept non_empty_product_type = product_type<T> && (size<T>::value != 0);
 
+  //================================================================================================
+  //! @ingroup concepts
+  //! @brief Concept specifying is Product Type which types are all the same
+  //!
+  //! A type `T` models `kumi::homogenous_product_type` if it models `kumi::product_type` and
+  //! contains member of a single, unique type.
+  //================================================================================================
+  template<typename T>
+  concept homogeneous_product_type = product_type<T> && is_homogeneous_v<std::remove_cvref_t<T>>;
+
   namespace _
   {
     template<typename T, typename U> constexpr auto check_equality()

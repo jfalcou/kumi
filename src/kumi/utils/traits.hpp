@@ -8,6 +8,7 @@
 #pragma once
 
 #include <cstddef>
+#include <type_traits>
 #include <utility>
 
 namespace kumi
@@ -93,6 +94,35 @@ namespace kumi
   };
 
   template<std::size_t I, typename T> using  member_t = typename member<I,T>::type;
+}
+
+namespace kumi
+{
+  //================================================================================================
+  //! @ingroup traits
+  //! @brief Detects if a given kwk::product_type instance is homogeneous
+  //!
+  //! @tparam T kumi::product_type to inspect
+  //!
+  //! ## Helper variable
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T>
+  //!   inline constexpr is_homogeneous_v = is_homogeneous<I,T>::value;
+  //! }
+  //! @endcode
+  //================================================================================================
+  template<typename T>
+  struct is_homogeneous;
+
+  template<typename T>
+  requires( requires { T::is_homogeneous; } )
+  struct is_homogeneous<T> : std::bool_constant<T::is_homogeneous>
+  {};
+
+  template<typename T>
+  inline constexpr auto is_homogeneous_v = is_homogeneous<T>::value;
 
   // Forward declaration
   template<typename... Ts> struct tuple;

@@ -30,7 +30,11 @@ namespace kumi::_
   //  - Size is greater than 1
   //  - All types are the same and non-reference
   //================================================================================================
-  template<typename T0, int N> struct binder_n { T0 members[N] = {}; };
+  template<typename T0, int N> struct binder_n
+  {
+    static constexpr bool is_homogeneous = true;
+    T0 members[N] = {};
+  };
 
   template<int... Is, typename T0, typename T1, typename... Ts>
   requires(all_the_same<T0,T1,Ts...> && no_references<T0,T1,Ts...>)
@@ -60,10 +64,18 @@ namespace kumi::_
   //================================================================================================
   // Optimized binder for 1->10 elements, none being reference
   //================================================================================================
+  template<>
+  struct binder<std::integer_sequence<int>>
+  {
+    static constexpr bool is_homogeneous = false;
+    using kumi_specific_layout = void;
+  };
+
   template<typename T>
   requires(no_references<T>)
   struct binder<std::integer_sequence<int,0>,T>
   {
+    static constexpr bool is_homogeneous = true;
     using kumi_specific_layout = void;
     using member0_type = T;
     member0_type member0;
@@ -73,6 +85,7 @@ namespace kumi::_
   requires(no_references<T0,T1>)
   struct binder<std::integer_sequence<int,0,1>,T0,T1>
   {
+    static constexpr bool is_homogeneous = false;
     using kumi_specific_layout = void;
     using member0_type = T0;
     using member1_type = T1;
@@ -84,6 +97,7 @@ namespace kumi::_
   requires(no_references<T0,T1,T2>)
   struct binder<std::integer_sequence<int,0,1,2>,T0,T1,T2>
   {
+    static constexpr bool is_homogeneous = false;
     using kumi_specific_layout = void;
     using member0_type = T0;
     using member1_type = T1;
@@ -97,13 +111,12 @@ namespace kumi::_
   requires(no_references<T0,T1,T2,T3>)
   struct binder<std::integer_sequence<int,0,1,2,3>,T0,T1,T2,T3>
   {
+    static constexpr bool is_homogeneous = false;
     using kumi_specific_layout = void;
-
     using member0_type = T0;
     using member1_type = T1;
     using member2_type = T2;
     using member3_type = T3;
-
     member0_type member0;
     member1_type member1;
     member2_type member2;
@@ -114,14 +127,13 @@ namespace kumi::_
   requires(no_references<T0,T1,T2,T3,T4>)
   struct binder<std::integer_sequence<int,0,1,2,3,4>,T0,T1,T2,T3,T4>
   {
+    static constexpr bool is_homogeneous = false;
     using kumi_specific_layout = void;
-
     using member0_type = T0;
     using member1_type = T1;
     using member2_type = T2;
     using member3_type = T3;
     using member4_type = T4;
-
     member0_type member0;
     member1_type member1;
     member2_type member2;
@@ -133,15 +145,14 @@ namespace kumi::_
   requires(no_references<T0,T1,T2,T3,T4,T5>)
   struct binder<std::integer_sequence<int,0,1,2,3,4,5>,T0,T1,T2,T3,T4,T5>
   {
+    static constexpr bool is_homogeneous = false;
     using kumi_specific_layout = void;
-
     using member0_type = T0;
     using member1_type = T1;
     using member2_type = T2;
     using member3_type = T3;
     using member4_type = T4;
     using member5_type = T5;
-
     member0_type member0;
     member1_type member1;
     member2_type member2;
@@ -156,8 +167,8 @@ namespace kumi::_
   requires(no_references<T0,T1,T2,T3,T4,T5,T6>)
   struct binder<std::integer_sequence<int,0,1,2,3,4,5,6>,T0,T1,T2,T3,T4,T5,T6>
   {
+    static constexpr bool is_homogeneous = false;
     using kumi_specific_layout = void;
-
     using member0_type = T0;
     using member1_type = T1;
     using member2_type = T2;
@@ -165,7 +176,6 @@ namespace kumi::_
     using member4_type = T4;
     using member5_type = T5;
     using member6_type = T6;
-
     member0_type member0;
     member1_type member1;
     member2_type member2;
@@ -181,8 +191,8 @@ namespace kumi::_
   requires(no_references<T0,T1,T2,T3,T4,T5,T6,T7>)
   struct binder<std::integer_sequence<int,0,1,2,3,4,5,6,7>,T0,T1,T2,T3,T4,T5,T6,T7>
   {
+    static constexpr bool is_homogeneous = false;
     using kumi_specific_layout = void;
-
     using member0_type = T0;
     using member1_type = T1;
     using member2_type = T2;
@@ -191,7 +201,6 @@ namespace kumi::_
     using member5_type = T5;
     using member6_type = T6;
     using member7_type = T7;
-
     member0_type member0;
     member1_type member1;
     member2_type member2;
@@ -208,8 +217,8 @@ namespace kumi::_
   requires(no_references<T0,T1,T2,T3,T4,T5,T6,T7,T8>)
   struct binder<std::integer_sequence<int,0,1,2,3,4,5,6,7,8>,T0,T1,T2,T3,T4,T5,T6,T7,T8>
   {
+    static constexpr bool is_homogeneous = false;
     using kumi_specific_layout = void;
-
     using member0_type = T0;
     using member1_type = T1;
     using member2_type = T2;
@@ -219,7 +228,6 @@ namespace kumi::_
     using member6_type = T6;
     using member7_type = T7;
     using member8_type = T8;
-
     member0_type member0;
     member1_type member1;
     member2_type member2;
@@ -237,8 +245,8 @@ namespace kumi::_
   requires(no_references<T0,T1,T2,T3,T4,T5,T6,T7,T8,T9>)
   struct binder<std::integer_sequence<int,0,1,2,3,4,5,6,7,8,9>,T0,T1,T2,T3,T4,T5,T6,T7,T8,T9>
   {
+    static constexpr bool is_homogeneous = false;
     using kumi_specific_layout = void;
-
     using member0_type = T0;
     using member1_type = T1;
     using member2_type = T2;
@@ -249,7 +257,6 @@ namespace kumi::_
     using member7_type = T7;
     using member8_type = T8;
     using member9_type = T9;
-
     member0_type member0;
     member1_type member1;
     member2_type member2;

@@ -35,6 +35,7 @@ namespace kumi::_
   template<int... Is, typename... Ts>
   struct binder<std::integer_sequence<int,Is...>, Ts...> : leaf<Is, Ts>...
   {
+    static constexpr bool is_homogeneous = false;
   };
 
   // Specializable binder type constructor
