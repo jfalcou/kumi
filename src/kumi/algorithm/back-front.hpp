@@ -7,6 +7,8 @@
 //==================================================================================================
 #pragma once
 
+#include <kumi/detail/abi.hpp>
+
 namespace kumi
 {
   //================================================================================================
@@ -33,7 +35,7 @@ namespace kumi
   //! @include doc/back-front.cpp
   //================================================================================================
   template<product_type Tuple>
-  [[nodiscard]] constexpr decltype(auto) front(Tuple&& t) requires( size_v<Tuple> != 0)
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) front(Tuple&& t) requires( size_v<Tuple> != 0)
   {
     return get<0>(KUMI_FWD(t));
   }
@@ -62,7 +64,7 @@ namespace kumi
   //! @include doc/back-front.cpp
   //================================================================================================
   template<product_type Tuple>
-  [[nodiscard]] constexpr decltype(auto) back(Tuple&& t) requires( size_v<Tuple> != 0)
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) back(Tuple&& t) requires( size_v<Tuple> != 0)
   {
     return get<size_v<Tuple>-1>(KUMI_FWD(t));
   }
