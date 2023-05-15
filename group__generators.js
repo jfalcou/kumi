@@ -1,6 +1,6 @@
 var group__generators =
 [
-    [ "kumi::as_flat_ptr", "group__generators_gace4e200f0703bc8ea12f1b43995b69bf.html#gace4e200f0703bc8ea12f1b43995b69bf", null ],
+    [ "kumi::as_flat_ptr", "group__generators_ga592ec585976cc6544c799402a5c4ef1c.html#ga592ec585976cc6544c799402a5c4ef1c", null ],
     [ "kumi::cartesian_product", "group__generators_ga1a62cf631e1471cf1da2b2f7ae2120b0.html#ga1a62cf631e1471cf1da2b2f7ae2120b0", null ],
     [ "kumi::cat", "group__generators_ga48221d9b00705f2cb90230f691334f72.html#ga48221d9b00705f2cb90230f691334f72", null ],
     [ "kumi::extract", "group__generators_ga9d67ce72cbaa5c87a582cc6b913ee8e3.html#ga9d67ce72cbaa5c87a582cc6b913ee8e3", null ],
@@ -12,7 +12,7 @@ var group__generators =
     [ "kumi::pop_front", "group__generators_ga765ba6427ebaa29a76e435fabd799a6d.html#ga765ba6427ebaa29a76e435fabd799a6d", null ],
     [ "kumi::push_back", "group__generators_ga7eb7a6fd2d7e8ebab521c951b0b4f2ac.html#ga7eb7a6fd2d7e8ebab521c951b0b4f2ac", null ],
     [ "kumi::push_front", "group__generators_ga9ee421ee66f4eec5b041be32014b13bc.html#ga9ee421ee66f4eec5b041be32014b13bc", null ],
-    [ "kumi::reorder", "group__generators_ga1e46ab6777b551e4c4357cc24dcbdda3.html#ga1e46ab6777b551e4c4357cc24dcbdda3", null ],
+    [ "kumi::reorder", "group__generators_ga6a0d19d47ea70b25b1ad09ea9202f592.html#ga6a0d19d47ea70b25b1ad09ea9202f592", null ],
     [ "kumi::reverse", "group__generators_ga49abf24bfdc3e6c8707cd321d9015212.html#ga49abf24bfdc3e6c8707cd321d9015212", null ],
     [ "kumi::split", "group__generators_ga502cb965978ae8df41a0605a129577bf.html#ga502cb965978ae8df41a0605a129577bf", null ],
     [ "kumi::transpose", "group__generators_ga1a15bc7904a51c4854d17c177b88027a.html#ga1a15bc7904a51c4854d17c177b88027a", null ],

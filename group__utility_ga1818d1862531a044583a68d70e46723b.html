@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__utility_ga6d1e220549b74a2234e7ce58bf791d3e.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__utility_ga1818d1862531a044583a68d70e46723b.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,8 +121,8 @@ $(document).ready(function(){initNavTree('group__utility_ga6d1e220549b74a2234e7c
 </div>
 
 <div class="contents">
-<a id="ga6d1e220549b74a2234e7ce58bf791d3e" name="ga6d1e220549b74a2234e7ce58bf791d3e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6d1e220549b74a2234e7ce58bf791d3e">&#9670;&#160;</a></span>back()</h2>
+<a id="ga1818d1862531a044583a68d70e46723b" name="ga1818d1862531a044583a68d70e46723b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1818d1862531a044583a68d70e46723b">&#9670;&#160;</a></span>back()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -134,7 +134,7 @@ requires ( size_v&lt;Tuple&gt; != 0)</div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr decltype(auto) kumi::back </td>
+          <td class="memname">KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) kumi::back </td>
           <td>(</td>
           <td class="paramtype">Tuple &amp;&amp;&#160;</td>
           <td class="paramname"><em>t</em></td><td>)</td>
@@ -160,13 +160,13 @@ requires ( size_v&lt;Tuple&gt; != 0)</div>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;product_type Tuple&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__utility_ga6d1e220549b74a2234e7ce58bf791d3e.html#ga6d1e220549b74a2234e7ce58bf791d3e">back</a>;</div>
+<div class="line">  <span class="keyword">template</span>&lt;product_type Tuple&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__utility_ga1818d1862531a044583a68d70e46723b.html#ga1818d1862531a044583a68d70e46723b">back</a>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">template</span>&lt;product_type Tuple&gt;</div>
 <div class="line">  <span class="keyword">using </span>back_t = <span class="keyword">typename</span> back&lt;Tuple&gt;::type;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__utility_ga6d1e220549b74a2234e7ce58bf791d3e_html_ga6d1e220549b74a2234e7ce58bf791d3e"><div class="ttname"><a href="group__utility_ga6d1e220549b74a2234e7ce58bf791d3e.html#ga6d1e220549b74a2234e7ce58bf791d3e">kumi::back</a></div><div class="ttdeci">constexpr decltype(auto) back(Tuple &amp;&amp;t)</div><div class="ttdoc">Retrieves the back of a tuple.</div><div class="ttdef"><b>Definition:</b> back-front.hpp:65</div></div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__utility_ga6d1e220549b74a2234e7ce58bf791d3e.html#ga6d1e220549b74a2234e7ce58bf791d3e" title="Retrieves the back of a tuple.">kumi::back</a></p>
+<div class="ttc" id="agroup__utility_ga1818d1862531a044583a68d70e46723b_html_ga1818d1862531a044583a68d70e46723b"><div class="ttname"><a href="group__utility_ga1818d1862531a044583a68d70e46723b.html#ga1818d1862531a044583a68d70e46723b">kumi::back</a></div><div class="ttdeci">KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) back(Tuple &amp;&amp;t)</div><div class="ttdoc">Retrieves the back of a tuple.</div><div class="ttdef"><b>Definition:</b> back-front.hpp:67</div></div>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__utility_ga1818d1862531a044583a68d70e46723b.html#ga1818d1862531a044583a68d70e46723b" title="Retrieves the back of a tuple.">kumi::back</a></p>
 <h2><a class="anchor" id="autotoc_md3"></a>
 Example</h2>
 <div class="fragment"><div class="line"> </div>
@@ -177,15 +177,15 @@ Example</h2>
 <div class="line">{</div>
 <div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> x{2.3,18, 5.f};</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gae40b8dfe98266c4f62395c369833eef3.html#gae40b8dfe98266c4f62395c369833eef3">kumi::front</a>(x) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_ga6d1e220549b74a2234e7ce58bf791d3e.html#ga6d1e220549b74a2234e7ce58bf791d3e">kumi::back</a>(x)  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_ga0fc57b54b71d2726c24df5ddbab97bd3.html#ga0fc57b54b71d2726c24df5ddbab97bd3">kumi::front</a>(x) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_ga1818d1862531a044583a68d70e46723b.html#ga1818d1862531a044583a68d70e46723b">kumi::back</a>(x)  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_function" href="group__utility_gae40b8dfe98266c4f62395c369833eef3.html#gae40b8dfe98266c4f62395c369833eef3">kumi::front</a>(x) = 98.5;</div>
-<div class="line">  <a class="code hl_function" href="group__utility_ga6d1e220549b74a2234e7ce58bf791d3e.html#ga6d1e220549b74a2234e7ce58bf791d3e">kumi::back</a>(x)  = 66.f;</div>
+<div class="line">  <a class="code hl_function" href="group__utility_ga0fc57b54b71d2726c24df5ddbab97bd3.html#ga0fc57b54b71d2726c24df5ddbab97bd3">kumi::front</a>(x) = 98.5;</div>
+<div class="line">  <a class="code hl_function" href="group__utility_ga1818d1862531a044583a68d70e46723b.html#ga1818d1862531a044583a68d70e46723b">kumi::back</a>(x)  = 66.f;</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; x &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__utility_gae40b8dfe98266c4f62395c369833eef3_html_gae40b8dfe98266c4f62395c369833eef3"><div class="ttname"><a href="group__utility_gae40b8dfe98266c4f62395c369833eef3.html#gae40b8dfe98266c4f62395c369833eef3">kumi::front</a></div><div class="ttdeci">constexpr decltype(auto) front(Tuple &amp;&amp;t)</div><div class="ttdoc">Retrieves the front of a tuple.</div><div class="ttdef"><b>Definition:</b> back-front.hpp:36</div></div>
+<div class="ttc" id="agroup__utility_ga0fc57b54b71d2726c24df5ddbab97bd3_html_ga0fc57b54b71d2726c24df5ddbab97bd3"><div class="ttname"><a href="group__utility_ga0fc57b54b71d2726c24df5ddbab97bd3.html#ga0fc57b54b71d2726c24df5ddbab97bd3">kumi::front</a></div><div class="ttdeci">KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) front(Tuple &amp;&amp;t)</div><div class="ttdoc">Retrieves the front of a tuple.</div><div class="ttdef"><b>Definition:</b> back-front.hpp:38</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:34</div></div>
 </div><!-- fragment --> 
 </div>

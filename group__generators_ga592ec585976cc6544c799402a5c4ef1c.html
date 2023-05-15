@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>KUMI: kumi::count</title>
+<title>KUMI: kumi::as_flat_ptr</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__queries_ga987209230f8f49aba3cfcabd4330a72c.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__generators_ga592ec585976cc6544c799402a5c4ef1c.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,54 +121,71 @@ $(document).ready(function(){initNavTree('group__queries_ga987209230f8f49aba3cfc
 </div>
 
 <div class="contents">
-<a id="ga987209230f8f49aba3cfcabd4330a72c" name="ga987209230f8f49aba3cfcabd4330a72c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga987209230f8f49aba3cfcabd4330a72c">&#9670;&#160;</a></span>count()</h2>
+<a id="ga592ec585976cc6544c799402a5c4ef1c" name="ga592ec585976cc6544c799402a5c4ef1c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga592ec585976cc6544c799402a5c4ef1c">&#9670;&#160;</a></span>as_flat_ptr()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T &gt; </div>
+template&lt;product_type Tuple&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr std::size_t kumi::count </td>
+          <td class="memname">KUMI_TRIVIAL_NODISCARD auto kumi::as_flat_ptr </td>
           <td>(</td>
-          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramtype">Tuple &amp;&amp;&#160;</td>
           <td class="paramname"><em>ts</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Counts the number of elements of t not equivalent to false. </p>
+<p>Convert a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a> to a flat tuple of pointers to each its components. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ts</td><td>Value to process </td></tr>
+    <tr><td class="paramname">ts</td><td>Tuple to convert </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>Number of elements not equivalent to <code>false</code>. </dd></dl>
-<h2><a class="anchor" id="autotoc_md53"></a>
-Example:</h2>
+<dl class="section return"><dt>Returns</dt><dd>A flat tuple composed of pointers to each elements of t.</dd></dl>
+<h2><a class="anchor" id="autotoc_md21"></a>
+Helper type</h2>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;product_type Tuple&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__generators_ga592ec585976cc6544c799402a5c4ef1c.html#ga592ec585976cc6544c799402a5c4ef1c">as_flat_ptr</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">template</span>&lt;product_type Tuple&gt;</div>
+<div class="line">  <span class="keyword">using </span>as_flat_ptr_t = <span class="keyword">typename</span> as_flat_ptr&lt;Tuple&gt;::type;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__generators_ga592ec585976cc6544c799402a5c4ef1c_html_ga592ec585976cc6544c799402a5c4ef1c"><div class="ttname"><a href="group__generators_ga592ec585976cc6544c799402a5c4ef1c.html#ga592ec585976cc6544c799402a5c4ef1c">kumi::as_flat_ptr</a></div><div class="ttdeci">KUMI_TRIVIAL_NODISCARD auto as_flat_ptr(Tuple &amp;&amp;ts) noexcept</div><div class="ttdoc">Convert a kumi::product_type to a flat tuple of pointers to each its components.</div><div class="ttdef"><b>Definition:</b> flatten.hpp:175</div></div>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__generators_ga592ec585976cc6544c799402a5c4ef1c.html#ga592ec585976cc6544c799402a5c4ef1c" title="Convert a kumi::product_type to a flat tuple of pointers to each its components.">kumi::as_flat_ptr</a></p>
+<h2><a class="anchor" id="autotoc_md22"></a>
+Example</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/tuple.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> t = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1, 0, 2., <span class="keyword">nullptr</span>, 3.f, <span class="keyword">false</span>, <span class="charliteral">&#39;z&#39;</span>};</div>
-<div class="line">  std::cout &lt;&lt; std::boolalpha &lt;&lt; <a class="code hl_function" href="group__queries_ga987209230f8f49aba3cfcabd4330a72c.html#ga987209230f8f49aba3cfcabd4330a72c">kumi::count</a>(t ) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; std::boolalpha &lt;&lt; <a class="code hl_function" href="group__queries_ga987209230f8f49aba3cfcabd4330a72c.html#ga987209230f8f49aba3cfcabd4330a72c">kumi::count</a>(7.89) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> a = { 1, <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{ 2.3, 4.5f }, <span class="keywordtype">short</span>{89} };</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">auto</span> ptr = <a class="code hl_function" href="group__generators_ga592ec585976cc6544c799402a5c4ef1c.html#ga592ec585976cc6544c799402a5c4ef1c">kumi::as_flat_ptr</a>(a);</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; ptr &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_function" href="group__transforms_ga0cf882ffbfd8b695ca0c26712291cd66.html#ga0cf882ffbfd8b695ca0c26712291cd66">kumi::for_each</a>([](<span class="keyword">auto</span> ptr) { *ptr += 5; }, ptr );</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__queries_ga987209230f8f49aba3cfcabd4330a72c_html_ga987209230f8f49aba3cfcabd4330a72c"><div class="ttname"><a href="group__queries_ga987209230f8f49aba3cfcabd4330a72c.html#ga987209230f8f49aba3cfcabd4330a72c">kumi::count</a></div><div class="ttdeci">constexpr std::size_t count(T const &amp;ts) noexcept</div><div class="ttdoc">Counts the number of elements of t not equivalent to false.</div><div class="ttdef"><b>Definition:</b> predicates.hpp:98</div></div>
+<div class="ttc" id="agroup__transforms_ga0cf882ffbfd8b695ca0c26712291cd66_html_ga0cf882ffbfd8b695ca0c26712291cd66"><div class="ttname"><a href="group__transforms_ga0cf882ffbfd8b695ca0c26712291cd66.html#ga0cf882ffbfd8b695ca0c26712291cd66">kumi::for_each</a></div><div class="ttdeci">constexpr void for_each(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a kumi::product_type.</div><div class="ttdef"><b>Definition:</b> for_each.hpp:30</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:34</div></div>
 </div><!-- fragment --> 
 </div>
