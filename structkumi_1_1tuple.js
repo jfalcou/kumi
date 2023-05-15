@@ -12,13 +12,12 @@ var structkumi_1_1tuple =
     [ "forward_as_tuple", "group__tuple_gaf7eccdd83cc8ce105ed50d407032afa2.html#gaf7eccdd83cc8ce105ed50d407032afa2", null ],
     [ "get", "group__tuple_ga7b9b1b3fbe3d201542691bee350d8a08.html#ga7b9b1b3fbe3d201542691bee350d8a08", null ],
     [ "make_tuple", "group__tuple_ga90cacfc0953e7e00ea5a13d6685fa6ba.html#ga90cacfc0953e7e00ea5a13d6685fa6ba", null ],
-    [ "operator!=", "group__tuple.html#ga3d60f8ef9f2ddda93ab76a574672049c", null ],
-    [ "operator<", "group__tuple.html#gad7f00141d92ec007df2cf911eab8fd68", null ],
+    [ "operator<", "group__tuple.html#gacaba909f41eadf8e94bf9f1a4c6cdd94", null ],
     [ "operator<<", "group__tuple.html#gaf6739a069131e315597688e5b3cf5df9", null ],
-    [ "operator<=", "group__tuple.html#ga5fe5684cdab8748c35e6efecaebbb533", null ],
-    [ "operator==", "group__tuple.html#ga5ff234ea2bc70980f4ab1aefc4f44af6", null ],
-    [ "operator>", "group__tuple.html#ga90563d023b785625328eeb4e8c3d4853", null ],
-    [ "operator>=", "group__tuple.html#ga89e25051c88bbfba615507e32ff53635", null ],
+    [ "operator<=", "group__tuple.html#gacdefbf22e4d6114bca0bfdfe0420106c", null ],
+    [ "operator==", "group__tuple.html#ga8e18e20a6e9368b891648219c2c83822", null ],
+    [ "operator>", "group__tuple.html#ga37f11be61c78ce8533d7805cd9a1d65e", null ],
+    [ "operator>=", "group__tuple.html#gaa2543614962ac03c2ffe460c8f853022", null ],
     [ "tie", "group__tuple_ga73fbe5e457bb28be38329b608b74fc9e.html#ga73fbe5e457bb28be38329b608b74fc9e", null ],
     [ "to_ref", "group__tuple_ga38c510ee5eb75d282f75f8e0179c9c5a.html#ga38c510ee5eb75d282f75f8e0179c9c5a", null ]
 ];
