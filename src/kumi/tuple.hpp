@@ -36,6 +36,24 @@ namespace kumi
     using binder_t  = _::make_binder_t<std::make_integer_sequence<int,sizeof...(Ts)>, Ts...>;
     binder_t impl;
 
+    template<typename... Us>
+    requires(   (sizeof...(Us) == sizeof...(Ts))
+            && _::piecewise_convertible<tuple<Us...>, tuple>
+            )
+    operator tuple<Us...>()
+    {
+      return  apply([](auto &&...elems) { return tuple<Us...>{KUMI_FWD(elems)...}; }, *this);
+    }
+
+    template<typename... Us>
+    requires(   (sizeof...(Us) == sizeof...(Ts))
+            && _::piecewise_convertible<tuple<Us...>, tuple>
+            )
+    operator tuple<Us...>() const
+    {
+      return  apply([](auto &&...elems) { return tuple<Us...>{KUMI_FWD(elems)...}; }, *this);
+    }
+
     //==============================================================================================
     //! @name Accessors
     //! @{
