@@ -31,7 +31,7 @@ namespace kumi
 
   // MSVC chokes on the other code for empty calls
 #if !defined(KUMI_DOXYGEN_INVOKED)
-  [[nodiscard]] constexpr auto cartesian_product() { return kumi::tuple<>{}; }
+  KUMI_TRIVIAL_NODISCARD constexpr auto cartesian_product() { return kumi::tuple<>{}; }
 #endif
 
   //================================================================================================

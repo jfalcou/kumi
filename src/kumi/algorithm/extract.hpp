@@ -55,8 +55,7 @@ namespace kumi
   //! @overload
   template<std::size_t I0, product_type Tuple>
   requires(I0<= size_v<Tuple>)
-  [[nodiscard]] constexpr
-  auto extract(Tuple const& t, index_t<I0> i0) noexcept
+  KUMI_TRIVIAL_NODISCARD constexpr  auto extract(Tuple const& t, index_t<I0> i0) noexcept
   {
     return extract(t,i0, index<size_v<Tuple>>);
   }

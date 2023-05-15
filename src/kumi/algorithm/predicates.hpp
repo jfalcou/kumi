@@ -95,7 +95,7 @@ namespace kumi
   //! @include doc/count.cpp
   //================================================================================================
   template<typename T>
-  [[nodiscard]] constexpr std::size_t count( T const& ts ) noexcept
+  KUMI_TRIVIAL_NODISCARD constexpr std::size_t count( T const& ts ) noexcept
   {
     return count_if(ts, [](auto const& m) { return static_cast<bool>(m); } );
   }

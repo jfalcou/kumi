@@ -39,7 +39,8 @@ namespace kumi
   //! @include doc/reorder.cpp
   //================================================================================================
   template<std::size_t... Idx, product_type Tuple>
-  requires((Idx < size_v<Tuple>) && ...) [[nodiscard]] constexpr auto reorder(Tuple &&t)
+  requires((Idx < size_v<Tuple>) && ...)
+  KUMI_TRIVIAL_NODISCARD constexpr auto reorder(Tuple &&t)
   {
     return kumi::make_tuple( get<Idx>(KUMI_FWD(t))...);
   }

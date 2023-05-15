@@ -172,7 +172,7 @@ namespace kumi
   //! @include doc/as_flat_ptr.cpp
   //================================================================================================
   template<product_type Tuple>
-  [[nodiscard]] auto as_flat_ptr(Tuple&& ts) noexcept
+  KUMI_TRIVIAL_NODISCARD auto as_flat_ptr(Tuple&& ts) noexcept
   {
     return kumi::flatten_all(KUMI_FWD(ts), [](auto& m) { return &m; });
   }
