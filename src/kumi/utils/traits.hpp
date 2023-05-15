@@ -98,28 +98,3 @@ namespace kumi
   template<typename... Ts> struct tuple;
 }
 
-#if !defined(KUMI_DOXYGEN_INVOKED)
-//==================================================================================================
-// Structured binding adaptation
-//==================================================================================================
-template<std::size_t I, typename Head, typename... Tail>
-struct  std::tuple_element<I, kumi::tuple<Head, Tail...>>
-      : std::tuple_element<I - 1, kumi::tuple<Tail...>>
-{
-};
-
-template<std::size_t I, typename... Ts> struct std::tuple_element<I, kumi::tuple<Ts...> const>
-{
-  using type = typename tuple_element<I, kumi::tuple<Ts...>>::type const;
-};
-
-template<typename Head, typename... Tail> struct std::tuple_element<0, kumi::tuple<Head, Tail...>>
-{
-  using type = Head;
-};
-
-template<typename... Ts>
-struct std::tuple_size<kumi::tuple<Ts...>> : std::integral_constant<std::size_t, sizeof...(Ts)>
-{
-};
-#endif
