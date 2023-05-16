@@ -483,16 +483,12 @@ namespace kumi
   concept homogeneous_product_type = product_type<T> && is_homogeneous_v<std::remove_cvref_t<T>>;
   namespace _
   {
-    template<typename T, typename U> constexpr auto check_equality()
-    {
-      return _::comparable<T,U>;
-    }
-    template<product_type T, product_type U>
+    template<typename T, typename U>
     constexpr auto check_equality()
     {
       return []<std::size_t...I>(std::index_sequence<I...>)
       {
-        return (check_equality<member_t<I,T>,member_t<I,U>>() && ...);
+        return (_::comparable<member_t<I,T>,member_t<I,U>> && ...);
       }(std::make_index_sequence<size<T>::value>{});
     }
   }
@@ -679,37 +675,34 @@ namespace kumi
       (std::make_index_sequence<sizeof...(Ts)>());
       return *this;
     }
-    template<sized_product_type<sizeof...(Ts)> Other>
-    friend constexpr auto operator==(tuple const &self, Other const &other) noexcept
-    requires( (sizeof...(Ts) != 0 ) && equality_comparable<tuple,Other> )
+    constexpr auto operator==(tuple const &other) const noexcept
+    requires( (sizeof...(Ts) != 0 ) && equality_comparable<tuple,tuple> )
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return ((get<I>(self) == get<I>(other)) && ...);
+        return ((get<I>(*this) == get<I>(other)) && ...);
       }
       (std::make_index_sequence<sizeof...(Ts)>());
     }
-    template<sized_product_type<sizeof...(Ts)> Other>
-    friend constexpr auto operator!=(tuple const &self, Other const &other) noexcept
-    requires( (sizeof...(Ts) != 0 ) && equality_comparable<tuple,Other> )
+    KUMI_TRIVIAL constexpr auto operator!=(tuple const &other) const noexcept
+    requires( (sizeof...(Ts) != 0 ) && equality_comparable<tuple,tuple> )
     {
-      return !(self == other);
+      return !(*this == other);
     }
 #if !defined(KUMI_DOXYGEN_INVOKED)
-    friend constexpr auto operator==(tuple const &, tuple const &) noexcept
+    KUMI_TRIVIAL constexpr auto operator==(tuple const &) const noexcept
     requires( (sizeof...(Ts) == 0 ) )
     {
       return true;
     }
-    friend constexpr auto operator!=(tuple const &, tuple const &) noexcept
+    KUMI_TRIVIAL constexpr auto operator!=(tuple const &) const noexcept
     requires( (sizeof...(Ts) == 0 ) )
     {
       return false;
     }
 #endif
-    template<product_type Other>
-    friend constexpr auto operator<(tuple const &lhs, Other const &rhs) noexcept
-    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<Other>) )
+    friend constexpr auto operator<(tuple const &lhs, tuple const &rhs) noexcept
+    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<tuple>) )
     {
       auto res = get<0>(lhs) < get<0>(rhs);
       auto const order = [&]<typename Index>(Index i)
@@ -725,21 +718,18 @@ namespace kumi
       (std::make_index_sequence<sizeof...(Ts)-1>());
       return res;
     }
-    template<product_type Other>
-    KUMI_TRIVIAL friend constexpr auto operator<=(tuple const &lhs, Other const &rhs) noexcept
-    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<Other>) )
+    KUMI_TRIVIAL friend constexpr auto operator<=(tuple const &lhs, tuple const &rhs) noexcept
+    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<tuple>) )
     {
       return !(rhs < lhs);
     }
-    template<product_type Other>
-    KUMI_TRIVIAL friend constexpr auto operator>(tuple const &lhs, Other const &rhs) noexcept
-    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<Other>) )
+    KUMI_TRIVIAL friend constexpr auto operator>(tuple const &lhs, tuple const &rhs) noexcept
+    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<tuple>) )
     {
       return rhs < lhs;
     }
-    template<product_type Other>
-    KUMI_TRIVIAL friend constexpr auto operator>=(tuple const &lhs, Other const &rhs) noexcept
-    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<Other>) )
+    KUMI_TRIVIAL friend constexpr auto operator>=(tuple const &lhs, tuple const &rhs) noexcept
+    requires(sizeof...(Ts) != 0 )
     {
       return !(lhs < rhs);
     }

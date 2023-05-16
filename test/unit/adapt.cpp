@@ -24,9 +24,9 @@ struct some_box
 {
   using is_product_type = void;
 
-  int i;
-  float f;
-  char c;
+  int     i;
+  double  f;
+  char    c;
 
   template<std::size_t I>
   friend constexpr auto const& get(some_box const& s) noexcept requires(I < 3)
@@ -46,9 +46,9 @@ struct some_box
 };
 
 template<> struct std::tuple_size<some_box> : std::integral_constant<std::size_t,3> {};
-template<> struct std::tuple_element<0,some_box> { using type = int;   };
-template<> struct std::tuple_element<1,some_box> { using type = float; };
-template<> struct std::tuple_element<2,some_box> { using type = char;  };
+template<> struct std::tuple_element<0,some_box> { using type = int;    };
+template<> struct std::tuple_element<1,some_box> { using type = double; };
+template<> struct std::tuple_element<2,some_box> { using type = char;   };
 
 // --
 
