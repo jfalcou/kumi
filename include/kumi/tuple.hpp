@@ -675,34 +675,25 @@ namespace kumi
       (std::make_index_sequence<sizeof...(Ts)>());
       return *this;
     }
-    constexpr auto operator==(tuple const &other) const noexcept
-    requires( (sizeof...(Ts) != 0 ) && equality_comparable<tuple,tuple> )
+    template<typename... Us>
+    friend constexpr auto operator==(tuple const &self, tuple<Us...> const &other) noexcept
+    requires( (sizeof...(Ts) == sizeof...(Us) ) && equality_comparable<tuple,tuple<Us...>> )
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return ((get<I>(*this) == get<I>(other)) && ...);
+        return ((get<I>(self) == get<I>(other)) && ...);
       }
       (std::make_index_sequence<sizeof...(Ts)>());
     }
-    KUMI_TRIVIAL constexpr auto operator!=(tuple const &other) const noexcept
-    requires( (sizeof...(Ts) != 0 ) && equality_comparable<tuple,tuple> )
+    template<typename... Us>
+    KUMI_TRIVIAL friend constexpr auto operator!=(tuple const &self, tuple<Us...> const &other) noexcept
+    requires( (sizeof...(Ts) == sizeof...(Us)) && equality_comparable<tuple,tuple<Us...>> )
     {
-      return !(*this == other);
+      return !(self == other);
     }
-#if !defined(KUMI_DOXYGEN_INVOKED)
-    KUMI_TRIVIAL constexpr auto operator==(tuple const &) const noexcept
-    requires( (sizeof...(Ts) == 0 ) )
-    {
-      return true;
-    }
-    KUMI_TRIVIAL constexpr auto operator!=(tuple const &) const noexcept
-    requires( (sizeof...(Ts) == 0 ) )
-    {
-      return false;
-    }
-#endif
-    friend constexpr auto operator<(tuple const &lhs, tuple const &rhs) noexcept
-    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<tuple>) )
+    template<typename... Us>
+    friend constexpr auto operator<(tuple const &lhs, tuple<Us...> const &rhs) noexcept
+    requires(sizeof...(Ts) == sizeof...(Us))
     {
       auto res = get<0>(lhs) < get<0>(rhs);
       auto const order = [&]<typename Index>(Index i)
@@ -718,18 +709,21 @@ namespace kumi
       (std::make_index_sequence<sizeof...(Ts)-1>());
       return res;
     }
+    template<typename... Us>
     KUMI_TRIVIAL friend constexpr auto operator<=(tuple const &lhs, tuple const &rhs) noexcept
-    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<tuple>) )
+    requires(sizeof...(Ts) == sizeof...(Us))
     {
       return !(rhs < lhs);
     }
+    template<typename... Us>
     KUMI_TRIVIAL friend constexpr auto operator>(tuple const &lhs, tuple const &rhs) noexcept
-    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<tuple>) )
+    requires(sizeof...(Ts) == sizeof...(Us))
     {
       return rhs < lhs;
     }
+    template<typename... Us>
     KUMI_TRIVIAL friend constexpr auto operator>=(tuple const &lhs, tuple const &rhs) noexcept
-    requires(sizeof...(Ts) != 0 )
+    requires(sizeof...(Ts) == sizeof...(Us))
     {
       return !(lhs < rhs);
     }

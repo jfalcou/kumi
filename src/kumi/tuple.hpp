@@ -184,41 +184,30 @@ namespace kumi
     /// @ingroup tuple
     /// @related kumi::tuple
     /// @brief Compares a tuple with an other for equality
-    constexpr auto operator==(tuple const &other) const noexcept
-    requires( (sizeof...(Ts) != 0 ) && equality_comparable<tuple,tuple> )
+    template<typename... Us>
+    friend constexpr auto operator==(tuple const &self, tuple<Us...> const &other) noexcept
+    requires( (sizeof...(Ts) == sizeof...(Us) ) && equality_comparable<tuple,tuple<Us...>> )
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return ((get<I>(*this) == get<I>(other)) && ...);
+        return ((get<I>(self) == get<I>(other)) && ...);
       }
       (std::make_index_sequence<sizeof...(Ts)>());
     }
 
-    KUMI_TRIVIAL constexpr auto operator!=(tuple const &other) const noexcept
-    requires( (sizeof...(Ts) != 0 ) && equality_comparable<tuple,tuple> )
+    template<typename... Us>
+    KUMI_TRIVIAL friend constexpr auto operator!=(tuple const &self, tuple<Us...> const &other) noexcept
+    requires( (sizeof...(Ts) == sizeof...(Us)) && equality_comparable<tuple,tuple<Us...>> )
     {
-      return !(*this == other);
+      return !(self == other);
     }
-
-#if !defined(KUMI_DOXYGEN_INVOKED)
-    KUMI_TRIVIAL constexpr auto operator==(tuple const &) const noexcept
-    requires( (sizeof...(Ts) == 0 ) )
-    {
-      return true;
-    }
-
-    KUMI_TRIVIAL constexpr auto operator!=(tuple const &) const noexcept
-    requires( (sizeof...(Ts) == 0 ) )
-    {
-      return false;
-    }
-#endif
 
     /// @ingroup tuple
     /// @related kumi::tuple
     /// @brief Compares tuples for lexicographical is less relation
-    friend constexpr auto operator<(tuple const &lhs, tuple const &rhs) noexcept
-    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<tuple>) )
+    template<typename... Us>
+    friend constexpr auto operator<(tuple const &lhs, tuple<Us...> const &rhs) noexcept
+    requires(sizeof...(Ts) == sizeof...(Us))
     {
       // lexicographical order is defined as
       // (v0 < w0) || ... andnot(wi < vi, vi+1 < wi+1) ... || andnot(wn-1 < vn-1, vn < wn);
@@ -243,8 +232,9 @@ namespace kumi
     /// @ingroup tuple
     /// @related kumi::tuple
     /// @brief Compares tuples for lexicographical is less or equal relation
+    template<typename... Us>
     KUMI_TRIVIAL friend constexpr auto operator<=(tuple const &lhs, tuple const &rhs) noexcept
-    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<tuple>) )
+    requires(sizeof...(Ts) == sizeof...(Us))
     {
       return !(rhs < lhs);
     }
@@ -252,8 +242,9 @@ namespace kumi
     /// @ingroup tuple
     /// @related kumi::tuple
     /// @brief Compares tuples for lexicographical is greater relation
+    template<typename... Us>
     KUMI_TRIVIAL friend constexpr auto operator>(tuple const &lhs, tuple const &rhs) noexcept
-    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<tuple>) )
+    requires(sizeof...(Ts) == sizeof...(Us))
     {
       return rhs < lhs;
     }
@@ -261,8 +252,9 @@ namespace kumi
     /// @ingroup tuple
     /// @related kumi::tuple
     /// @brief Compares tuples for lexicographical is greater relation relation
+    template<typename... Us>
     KUMI_TRIVIAL friend constexpr auto operator>=(tuple const &lhs, tuple const &rhs) noexcept
-    requires(sizeof...(Ts) != 0 )
+    requires(sizeof...(Ts) == sizeof...(Us))
     {
       return !(lhs < rhs);
     }
