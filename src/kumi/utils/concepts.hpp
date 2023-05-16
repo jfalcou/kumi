@@ -74,17 +74,12 @@ namespace kumi
 
   namespace _
   {
-    template<typename T, typename U> constexpr auto check_equality()
-    {
-      return _::comparable<T,U>;
-    }
-
-    template<product_type T, product_type U>
+    template<typename T, typename U>
     constexpr auto check_equality()
     {
       return []<std::size_t...I>(std::index_sequence<I...>)
       {
-        return (check_equality<member_t<I,T>,member_t<I,U>>() && ...);
+        return (_::comparable<member_t<I,T>,member_t<I,U>> && ...);
       }(std::make_index_sequence<size<T>::value>{});
     }
   }

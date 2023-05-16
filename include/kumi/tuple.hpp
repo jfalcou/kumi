@@ -355,7 +355,6 @@ namespace kumi
 #endif
 #define KUMI_FWD(...) static_cast<decltype(__VA_ARGS__) &&>(__VA_ARGS__)
 #include <cstddef>
-#include <utility>
 namespace kumi
 {
   template<std::size_t N> struct index_t
@@ -484,16 +483,12 @@ namespace kumi
   concept homogeneous_product_type = product_type<T> && is_homogeneous_v<std::remove_cvref_t<T>>;
   namespace _
   {
-    template<typename T, typename U> constexpr auto check_equality()
-    {
-      return _::comparable<T,U>;
-    }
-    template<product_type T, product_type U>
+    template<typename T, typename U>
     constexpr auto check_equality()
     {
       return []<std::size_t...I>(std::index_sequence<I...>)
       {
-        return (check_equality<member_t<I,T>,member_t<I,U>>() && ...);
+        return (_::comparable<member_t<I,T>,member_t<I,U>> && ...);
       }(std::make_index_sequence<size<T>::value>{});
     }
   }
@@ -591,33 +586,13 @@ struct std::tuple_size<kumi::tuple<Ts...>> : std::integral_constant<std::size_t,
 {
 };
 #if !defined( __ANDROID__ )
-namespace kumi::_
-{
-  template< kumi::product_type TTuple,kumi::product_type UTuple
-          , template<class> class TQual, template<class> class UQual
-          , typename Indexer = std::make_index_sequence<kumi::size_v<TTuple>>
-          >
-  struct make_basic_common_ref;
-  template< kumi::product_type TTuple,kumi::product_type UTuple
-          , template<class> class TQual, template<class> class UQual
-          , std::size_t... I
-          >
-  struct make_basic_common_ref<TTuple,UTuple,TQual,UQual
-                              , std::index_sequence<I...>
-                              >
-  {
-    using type = kumi::tuple<std::common_reference_t< TQual<std::tuple_element_t<I,TTuple>>
-                                                    , UQual<std::tuple_element_t<I,UTuple>>
-                                                    >...
-                            >;
-  };
-}
-template< kumi::product_type TTuple,kumi::product_type UTuple
+template< typename... Ts, typename... Us
         , template<class> class TQual, template<class> class UQual >
-requires(kumi::size_v<TTuple> == kumi::size_v<UTuple>)
-struct std::basic_common_reference<TTuple, UTuple, TQual, UQual>
-: kumi::_::make_basic_common_ref<TTuple,UTuple,TQual,UQual>
-{};
+requires(sizeof...(Ts) == sizeof...(Us))
+struct std::basic_common_reference<kumi::tuple<Ts...>, kumi::tuple<Us...>, TQual, UQual>
+{
+  using type = kumi::tuple<std::common_reference_t<TQual<Ts>, UQual<Us>>...>;
+};
 #endif
 #endif
 #include <iosfwd>
@@ -630,22 +605,6 @@ namespace kumi
     using binder_t  = _::make_binder_t<std::make_integer_sequence<int,sizeof...(Ts)>, Ts...>;
     static constexpr bool is_homogeneous = binder_t::is_homogeneous;
     binder_t impl;
-    template<typename... Us>
-    requires(   (sizeof...(Us) == sizeof...(Ts))
-            && _::piecewise_convertible<tuple<Us...>, tuple>
-            )
-    KUMI_TRIVIAL constexpr operator tuple<Us...>()
-    {
-      return  apply([](auto &&...elems) { return tuple<Us...>{KUMI_FWD(elems)...}; }, *this);
-    }
-    template<typename... Us>
-    requires(   (sizeof...(Us) == sizeof...(Ts))
-            && _::piecewise_convertible<tuple<Us...>, tuple>
-            )
-    KUMI_TRIVIAL constexpr operator tuple<Us...>() const
-    {
-      return  apply([](auto &&...elems) { return tuple<Us...>{KUMI_FWD(elems)...}; }, *this);
-    }
     template<std::size_t I>
     requires(I < sizeof...(Ts))
     KUMI_TRIVIAL constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) &noexcept
@@ -700,27 +659,25 @@ namespace kumi
       (std::make_index_sequence<sizeof...(Ts)>());
       return *this;
     }
-    template<product_type Other>
-    friend constexpr auto operator==(tuple const &self, Other const &other) noexcept
-    requires(   (sizeof...(Ts) != 0 ) &&  (sizeof...(Ts) == size_v<Other>)
-            &&  equality_comparable<tuple,Other>
-            )
+    template<typename... Us>
+    friend constexpr auto operator==(tuple const &self, tuple<Us...> const &other) noexcept
+    requires( (sizeof...(Ts) == sizeof...(Us) ) && equality_comparable<tuple,tuple<Us...>> )
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
         return ((get<I>(self) == get<I>(other)) && ...);
-      } (std::make_index_sequence<sizeof...(Ts)>());
+      }
+      (std::make_index_sequence<sizeof...(Ts)>());
     }
-#if !defined(KUMI_DOXYGEN_INVOKED)
-    template<sized_product_type<0> Other>
-    KUMI_TRIVIAL friend constexpr auto operator==(tuple const&, Other const &) noexcept
+    template<typename... Us>
+    KUMI_TRIVIAL friend constexpr auto operator!=(tuple const &self, tuple<Us...> const &other) noexcept
+    requires( (sizeof...(Ts) == sizeof...(Us)) && equality_comparable<tuple,tuple<Us...>> )
     {
-      return true;
+      return !(self == other);
     }
-#endif
-    template<product_type Other>
-    friend constexpr auto operator<(tuple const &lhs, Other const &rhs) noexcept
-    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<Other>) )
+    template<typename... Us>
+    friend constexpr auto operator<(tuple const &lhs, tuple<Us...> const &rhs) noexcept
+    requires(sizeof...(Ts) == sizeof...(Us))
     {
       auto res = get<0>(lhs) < get<0>(rhs);
       auto const order = [&]<typename Index>(Index i)
@@ -736,21 +693,21 @@ namespace kumi
       (std::make_index_sequence<sizeof...(Ts)-1>());
       return res;
     }
-    template<product_type Other>
-    KUMI_TRIVIAL friend constexpr auto operator<=(tuple const &lhs, Other const &rhs) noexcept
-    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<Other>) )
+    template<typename... Us>
+    KUMI_TRIVIAL friend constexpr auto operator<=(tuple const &lhs, tuple const &rhs) noexcept
+    requires(sizeof...(Ts) == sizeof...(Us))
     {
       return !(rhs < lhs);
     }
-    template<product_type Other>
-    KUMI_TRIVIAL friend constexpr auto operator>(tuple const &lhs, Other const &rhs) noexcept
-    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<Other>) )
+    template<typename... Us>
+    KUMI_TRIVIAL friend constexpr auto operator>(tuple const &lhs, tuple const &rhs) noexcept
+    requires(sizeof...(Ts) == sizeof...(Us))
     {
       return rhs < lhs;
     }
-    template<product_type Other>
-    KUMI_TRIVIAL friend constexpr auto operator>=(tuple const &lhs, Other const &rhs) noexcept
-    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<Other>) )
+    template<typename... Us>
+    KUMI_TRIVIAL friend constexpr auto operator>=(tuple const &lhs, tuple const &rhs) noexcept
+    requires(sizeof...(Ts) == sizeof...(Us))
     {
       return !(lhs < rhs);
     }

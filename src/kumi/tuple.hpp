@@ -39,24 +39,6 @@ namespace kumi
 
     binder_t impl;
 
-    template<typename... Us>
-    requires(   (sizeof...(Us) == sizeof...(Ts))
-            && _::piecewise_convertible<tuple<Us...>, tuple>
-            )
-    KUMI_TRIVIAL constexpr operator tuple<Us...>()
-    {
-      return  apply([](auto &&...elems) { return tuple<Us...>{KUMI_FWD(elems)...}; }, *this);
-    }
-
-    template<typename... Us>
-    requires(   (sizeof...(Us) == sizeof...(Ts))
-            && _::piecewise_convertible<tuple<Us...>, tuple>
-            )
-    KUMI_TRIVIAL constexpr operator tuple<Us...>() const
-    {
-      return  apply([](auto &&...elems) { return tuple<Us...>{KUMI_FWD(elems)...}; }, *this);
-    }
-
     //==============================================================================================
     //! @name Accessors
     //! @{
@@ -183,33 +165,31 @@ namespace kumi
 
     /// @ingroup tuple
     /// @related kumi::tuple
-    /// @brief Compares a tuple with an other kumi::product_type for equality
-    template<product_type Other>
-    friend constexpr auto operator==(tuple const &self, Other const &other) noexcept
-    requires(   (sizeof...(Ts) != 0 ) &&  (sizeof...(Ts) == size_v<Other>)
-            &&  equality_comparable<tuple,Other>
-            )
+    /// @brief Compares a tuple with an other for equality
+    template<typename... Us>
+    friend constexpr auto operator==(tuple const &self, tuple<Us...> const &other) noexcept
+    requires( (sizeof...(Ts) == sizeof...(Us) ) && equality_comparable<tuple,tuple<Us...>> )
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
         return ((get<I>(self) == get<I>(other)) && ...);
-      } (std::make_index_sequence<sizeof...(Ts)>());
+      }
+      (std::make_index_sequence<sizeof...(Ts)>());
     }
 
-#if !defined(KUMI_DOXYGEN_INVOKED)
-    template<sized_product_type<0> Other>
-    KUMI_TRIVIAL friend constexpr auto operator==(tuple const&, Other const &) noexcept
+    template<typename... Us>
+    KUMI_TRIVIAL friend constexpr auto operator!=(tuple const &self, tuple<Us...> const &other) noexcept
+    requires( (sizeof...(Ts) == sizeof...(Us)) && equality_comparable<tuple,tuple<Us...>> )
     {
-      return true;
+      return !(self == other);
     }
-#endif
 
     /// @ingroup tuple
     /// @related kumi::tuple
-    /// @brief Compares tuple and product type value for lexicographical is less relation
-    template<product_type Other>
-    friend constexpr auto operator<(tuple const &lhs, Other const &rhs) noexcept
-    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<Other>) )
+    /// @brief Compares tuples for lexicographical is less relation
+    template<typename... Us>
+    friend constexpr auto operator<(tuple const &lhs, tuple<Us...> const &rhs) noexcept
+    requires(sizeof...(Ts) == sizeof...(Us))
     {
       // lexicographical order is defined as
       // (v0 < w0) || ... andnot(wi < vi, vi+1 < wi+1) ... || andnot(wn-1 < vn-1, vn < wn);
@@ -233,30 +213,30 @@ namespace kumi
 
     /// @ingroup tuple
     /// @related kumi::tuple
-    /// @brief Compares tuple and product type value for lexicographical is less or equal relation
-    template<product_type Other>
-    KUMI_TRIVIAL friend constexpr auto operator<=(tuple const &lhs, Other const &rhs) noexcept
-    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<Other>) )
+    /// @brief Compares tuples for lexicographical is less or equal relation
+    template<typename... Us>
+    KUMI_TRIVIAL friend constexpr auto operator<=(tuple const &lhs, tuple const &rhs) noexcept
+    requires(sizeof...(Ts) == sizeof...(Us))
     {
       return !(rhs < lhs);
     }
 
     /// @ingroup tuple
     /// @related kumi::tuple
-    /// @brief Compares tuple and product type value for lexicographical is greater relation
-    template<product_type Other>
-    KUMI_TRIVIAL friend constexpr auto operator>(tuple const &lhs, Other const &rhs) noexcept
-    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<Other>) )
+    /// @brief Compares tuples for lexicographical is greater relation
+    template<typename... Us>
+    KUMI_TRIVIAL friend constexpr auto operator>(tuple const &lhs, tuple const &rhs) noexcept
+    requires(sizeof...(Ts) == sizeof...(Us))
     {
       return rhs < lhs;
     }
 
     /// @ingroup tuple
     /// @related kumi::tuple
-    /// @brief Compares tuple and product type value for lexicographical is greater relation relation
-    template<product_type Other>
-    KUMI_TRIVIAL friend constexpr auto operator>=(tuple const &lhs, Other const &rhs) noexcept
-    requires( (sizeof...(Ts) != 0 ) && (sizeof...(Ts) == size_v<Other>) )
+    /// @brief Compares tuples for lexicographical is greater relation relation
+    template<typename... Us>
+    KUMI_TRIVIAL friend constexpr auto operator>=(tuple const &lhs, tuple const &rhs) noexcept
+    requires(sizeof...(Ts) == sizeof...(Us))
     {
       return !(lhs < rhs);
     }

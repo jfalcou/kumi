@@ -32,7 +32,9 @@ jobs:
           mode: '${{ matrix.cfg.mode }}'
 
   gcc-linux:
-    runs-on: [ubuntu-latest]
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/jfalcou/compilers:v6
     strategy:
       fail-fast: false
       matrix:
@@ -42,16 +44,51 @@ jobs:
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v3
-      - name: DEBUG - KUMI using g++-11 with ${{ matrix.cfg.opts }}
-        uses: ./.github/actions/run_tests
-        with:
-          compiler:       'g++-11'
-          options:        '${{ matrix.cfg.opts }}'
-          linker_options: ''
-          cpu:            2
+      - name: KUMI using g++-11 with ${{ matrix.cfg.opts }}
+        run:  |
+          mkdir build
+          cd build
+          cmake ..  -G Ninja -DCMAKE_CXX_COMPILER=g++-11 -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}"
+      - name: Compile Unit Tests
+        run:  |
+          cd build
+          ninja -j 2
+      - name: Running Unit Tests
+        run:  |
+          cd build
+          ctest --output-on-failure -j 2
+
+  gcc12-linux:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/jfalcou/compilers:v6
+    strategy:
+      fail-fast: false
+      matrix:
+        cfg:
+        - { opts: -O0                 }
+        - { opts: "-O3 -flto -DNDEBUG"}
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v3
+      - name: KUMI using g++-12 with ${{ matrix.cfg.opts }}
+        run:  |
+          mkdir build
+          cd build
+          cmake ..  -G Ninja -DCMAKE_CXX_COMPILER=g++ -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}"
+      - name: Compile Unit Tests
+        run:  |
+          cd build
+          ninja -j 2
+      - name: Running Unit Tests
+        run:  |
+          cd build
+          ctest --output-on-failure -j 2
 
   clang-linux:
-    runs-on: [ubuntu-latest]
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/jfalcou/compilers:v6
     strategy:
       fail-fast: false
       matrix:
@@ -63,13 +100,20 @@ jobs:
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v3
-      - name: DEBUG - KUMI using clang++ with ${{ matrix.cfg.opts }}
-        uses: ./.github/actions/run_tests
-        with:
-          compiler:       'clang++'
-          options:        '${{ matrix.cfg.opts }}'
-          linker_options: '${{ matrix.cfg.linker }}'
-          cpu:            2
+      - name: KUMI using clang++ with ${{ matrix.cfg.opts }}
+        run:  |
+          mkdir build
+          cd build
+          cmake ..  -G Ninja  -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}" \
+                              -DCMAKE_EXE_LINKER_FLAGS="${{ matrix.cfg.linker }}"
+      - name: Compile Unit Tests
+        run:  |
+          cd build
+          ninja -j 2
+      - name: Running Unit Tests
+        run:  |
+          cd build
+          ctest --output-on-failure -j 2
 
   clang-macosx:
     runs-on: [macos-12]
