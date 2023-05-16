@@ -605,22 +605,6 @@ namespace kumi
     using binder_t  = _::make_binder_t<std::make_integer_sequence<int,sizeof...(Ts)>, Ts...>;
     static constexpr bool is_homogeneous = binder_t::is_homogeneous;
     binder_t impl;
-    template<typename... Us>
-    requires(   (sizeof...(Us) == sizeof...(Ts))
-            && _::piecewise_convertible<tuple<Us...>, tuple>
-            )
-    KUMI_TRIVIAL constexpr operator tuple<Us...>()
-    {
-      return  apply([](auto &&...elems) { return tuple<Us...>{KUMI_FWD(elems)...}; }, *this);
-    }
-    template<typename... Us>
-    requires(   (sizeof...(Us) == sizeof...(Ts))
-            && _::piecewise_convertible<tuple<Us...>, tuple>
-            )
-    KUMI_TRIVIAL constexpr operator tuple<Us...>() const
-    {
-      return  apply([](auto &&...elems) { return tuple<Us...>{KUMI_FWD(elems)...}; }, *this);
-    }
     template<std::size_t I>
     requires(I < sizeof...(Ts))
     KUMI_TRIVIAL constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) &noexcept

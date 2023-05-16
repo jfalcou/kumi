@@ -39,24 +39,6 @@ namespace kumi
 
     binder_t impl;
 
-    template<typename... Us>
-    requires(   (sizeof...(Us) == sizeof...(Ts))
-            && _::piecewise_convertible<tuple<Us...>, tuple>
-            )
-    KUMI_TRIVIAL constexpr operator tuple<Us...>()
-    {
-      return  apply([](auto &&...elems) { return tuple<Us...>{KUMI_FWD(elems)...}; }, *this);
-    }
-
-    template<typename... Us>
-    requires(   (sizeof...(Us) == sizeof...(Ts))
-            && _::piecewise_convertible<tuple<Us...>, tuple>
-            )
-    KUMI_TRIVIAL constexpr operator tuple<Us...>() const
-    {
-      return  apply([](auto &&...elems) { return tuple<Us...>{KUMI_FWD(elems)...}; }, *this);
-    }
-
     //==============================================================================================
     //! @name Accessors
     //! @{
