@@ -183,24 +183,37 @@ namespace kumi
 
     /// @ingroup tuple
     /// @related kumi::tuple
-    /// @brief Compares a tuple with an other kumi::product_type for equality
-    template<product_type Other>
+    /// @brief Compares a tuple with an other for equality
+    template<sized_product_type<sizeof...(Ts)> Other>
     friend constexpr auto operator==(tuple const &self, Other const &other) noexcept
-    requires(   (sizeof...(Ts) != 0 ) &&  (sizeof...(Ts) == size_v<Other>)
-            &&  equality_comparable<tuple,Other>
-            )
+    requires( (sizeof...(Ts) != 0 ) && equality_comparable<tuple,Other> )
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
         return ((get<I>(self) == get<I>(other)) && ...);
-      } (std::make_index_sequence<sizeof...(Ts)>());
+      }
+      (std::make_index_sequence<sizeof...(Ts)>());
+    }
+
+    template<sized_product_type<sizeof...(Ts)> Other>
+    friend constexpr auto operator!=(tuple const &self, Other const &other) noexcept
+    requires( (sizeof...(Ts) != 0 ) && equality_comparable<tuple,Other> )
+    {
+      return !(self == other);
     }
 
 #if !defined(KUMI_DOXYGEN_INVOKED)
-    template<sized_product_type<0> Other>
-    KUMI_TRIVIAL friend constexpr auto operator==(tuple const&, Other const &) noexcept
+//    template<sized_product_type<0> Other>
+    friend constexpr auto operator==(tuple const &, tuple const &) noexcept
+    requires( (sizeof...(Ts) == 0 ) )
     {
       return true;
+    }
+
+    friend constexpr auto operator!=(tuple const &, tuple const &) noexcept
+    requires( (sizeof...(Ts) == 0 ) )
+    {
+      return false;
     }
 #endif
 
