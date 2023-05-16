@@ -214,37 +214,6 @@ template&lt;typename CharT , typename Traits &gt; </td></tr>
 <tr class="memitem:gaf6739a069131e315597688e5b3cf5df9"><td class="memTemplItemLeft" align="right" valign="top">std::basic_ostream&lt; CharT, Traits &gt; &amp;&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator&lt;&lt;</b> (std::basic_ostream&lt; CharT, Traits &gt; &amp;os, <a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;t) noexcept</td></tr>
 <tr class="memdesc:gaf6739a069131e315597688e5b3cf5df9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> in an output stream. <br /></td></tr>
 <tr class="separator:gaf6739a069131e315597688e5b3cf5df9"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr><td colspan="2"><div class="groupHeader">Comparison operators</div></td></tr>
-<tr class="memitem:ga8e18e20a6e9368b891648219c2c83822"><td class="memTemplParams" colspan="2">
-template&lt;product_type Other&gt; <br />
-requires ( (sizeof...(Ts) != 0 ) &amp;&amp; (sizeof...(Ts) == size_v&lt;Other&gt;) &amp;&amp; equality_comparable&lt;<a class="el" href="structkumi_1_1tuple.html">tuple</a>,Other&gt; )</td></tr>
-<tr class="memitem:ga8e18e20a6e9368b891648219c2c83822"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator==</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;self, Other const &amp;other) noexcept</td></tr>
-<tr class="memdesc:ga8e18e20a6e9368b891648219c2c83822"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares a tuple with an other <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a> for equality. <br /></td></tr>
-<tr class="separator:ga8e18e20a6e9368b891648219c2c83822"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacaba909f41eadf8e94bf9f1a4c6cdd94"><td class="memTemplParams" colspan="2">
-template&lt;product_type Other&gt; <br />
-requires ( (sizeof...(Ts) != 0 ) &amp;&amp; (sizeof...(Ts) == size_v&lt;Other&gt;) )</td></tr>
-<tr class="memitem:gacaba909f41eadf8e94bf9f1a4c6cdd94"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator&lt;</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;lhs, Other const &amp;rhs) noexcept</td></tr>
-<tr class="memdesc:gacaba909f41eadf8e94bf9f1a4c6cdd94"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares tuple and product type value for lexicographical is less relation. <br /></td></tr>
-<tr class="separator:gacaba909f41eadf8e94bf9f1a4c6cdd94"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gad30e0f359c71165d72360cd8eb031110"><td class="memTemplParams" colspan="2">
-template&lt;product_type Other&gt; <br />
-requires ( (sizeof...(Ts) != 0 ) &amp;&amp; (sizeof...(Ts) == size_v&lt;Other&gt;) )</td></tr>
-<tr class="memitem:gad30e0f359c71165d72360cd8eb031110"><td class="memTemplItemLeft" align="right" valign="top">KUMI_TRIVIAL friend constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator&lt;=</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;lhs, Other const &amp;rhs) noexcept</td></tr>
-<tr class="memdesc:gad30e0f359c71165d72360cd8eb031110"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares tuple and product type value for lexicographical is less or equal relation. <br /></td></tr>
-<tr class="separator:gad30e0f359c71165d72360cd8eb031110"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga56611407b851b462ae96952b72277463"><td class="memTemplParams" colspan="2">
-template&lt;product_type Other&gt; <br />
-requires ( (sizeof...(Ts) != 0 ) &amp;&amp; (sizeof...(Ts) == size_v&lt;Other&gt;) )</td></tr>
-<tr class="memitem:ga56611407b851b462ae96952b72277463"><td class="memTemplItemLeft" align="right" valign="top">KUMI_TRIVIAL friend constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator&gt;</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;lhs, Other const &amp;rhs) noexcept</td></tr>
-<tr class="memdesc:ga56611407b851b462ae96952b72277463"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares tuple and product type value for lexicographical is greater relation. <br /></td></tr>
-<tr class="separator:ga56611407b851b462ae96952b72277463"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7fcd364a7b61abbe21842f4893ac92b2"><td class="memTemplParams" colspan="2">
-template&lt;product_type Other&gt; <br />
-requires ( (sizeof...(Ts) != 0 ) &amp;&amp; (sizeof...(Ts) == size_v&lt;Other&gt;) )</td></tr>
-<tr class="memitem:ga7fcd364a7b61abbe21842f4893ac92b2"><td class="memTemplItemLeft" align="right" valign="top">KUMI_TRIVIAL friend constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator&gt;=</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;lhs, Other const &amp;rhs) noexcept</td></tr>
-<tr class="memdesc:ga7fcd364a7b61abbe21842f4893ac92b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares tuple and product type value for lexicographical is greater relation relation. <br /></td></tr>
-<tr class="separator:ga7fcd364a7b61abbe21842f4893ac92b2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Tuple construction</div></td></tr>
 <tr class="memitem:ga446a0931c46caf9cfb2f3977a2492624"><td class="memTemplParams" colspan="2">template&lt;typename... Ts&gt; </td></tr>
 <tr class="memitem:ga446a0931c46caf9cfb2f3977a2492624"><td class="memTemplItemLeft" align="right" valign="top">&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__tuple_ga446a0931c46caf9cfb2f3977a2492624.html#ga446a0931c46caf9cfb2f3977a2492624">tuple</a> (Ts &amp;&amp;...) -&gt; <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; typename std::unwrap_ref_decay&lt; Ts &gt;::type... &gt;</td></tr>
@@ -271,6 +240,43 @@ requires ( (sizeof...(Ts) != 0 ) &amp;&amp; (sizeof...(Ts) == size_v&lt;Other&gt
 <tr class="memitem:ga7b9b1b3fbe3d201542691bee350d8a08"><td class="memTemplItemLeft" align="right" valign="top">decltype(auto) constexpr&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__tuple_ga7b9b1b3fbe3d201542691bee350d8a08.html#ga7b9b1b3fbe3d201542691bee350d8a08">get</a> (<a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Ts... &gt; &amp;t) noexcept</td></tr>
 <tr class="memdesc:ga7b9b1b3fbe3d201542691bee350d8a08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the Ith element from a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>.  <br /></td></tr>
 <tr class="separator:ga7b9b1b3fbe3d201542691bee350d8a08"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader">Comparison operators</h2></td></tr>
+<tr class="memitem:ga15e87e0ad820c81f56073395846cdea0"><td class="memTemplParams" colspan="2">
+template&lt;typename... Us&gt; <br />
+requires ( (sizeof...(Ts) == sizeof...(Us) ) &amp;&amp; equality_comparable&lt;<a class="el" href="structkumi_1_1tuple.html">tuple</a>,<a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;Us...&gt;&gt; )</td></tr>
+<tr class="memitem:ga15e87e0ad820c81f56073395846cdea0"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator==</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;self, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Us... &gt; const &amp;other) noexcept</td></tr>
+<tr class="memdesc:ga15e87e0ad820c81f56073395846cdea0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares a tuple with an other for equality. <br /></td></tr>
+<tr class="separator:ga15e87e0ad820c81f56073395846cdea0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gabee5ae96fdfd2145347fa3b2b212bf12"><td class="memTemplParams" colspan="2">
+template&lt;typename... Us&gt; <br />
+requires (sizeof...(Ts) == sizeof...(Us))</td></tr>
+<tr class="memitem:gabee5ae96fdfd2145347fa3b2b212bf12"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator&lt;</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;lhs, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Us... &gt; const &amp;rhs) noexcept</td></tr>
+<tr class="memdesc:gabee5ae96fdfd2145347fa3b2b212bf12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares tuples for lexicographical is less relation. <br /></td></tr>
+<tr class="separator:gabee5ae96fdfd2145347fa3b2b212bf12"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6ddff5b99398c20cfe9102ae0b4ddde8"><td class="memTemplParams" colspan="2">
+template&lt;typename... Us&gt; <br />
+requires (sizeof...(Ts) == sizeof...(Us))</td></tr>
+<tr class="memitem:ga6ddff5b99398c20cfe9102ae0b4ddde8"><td class="memTemplItemLeft" align="right" valign="top">KUMI_TRIVIAL friend constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator&lt;=</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;lhs, <a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;rhs) noexcept</td></tr>
+<tr class="memdesc:ga6ddff5b99398c20cfe9102ae0b4ddde8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares tuples for lexicographical is less or equal relation. <br /></td></tr>
+<tr class="separator:ga6ddff5b99398c20cfe9102ae0b4ddde8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga09b21c2658b5c797ff9bdf8270c8d683"><td class="memTemplParams" colspan="2">
+template&lt;typename... Us&gt; <br />
+requires (sizeof...(Ts) == sizeof...(Us))</td></tr>
+<tr class="memitem:ga09b21c2658b5c797ff9bdf8270c8d683"><td class="memTemplItemLeft" align="right" valign="top">KUMI_TRIVIAL friend constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator&gt;</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;lhs, <a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;rhs) noexcept</td></tr>
+<tr class="memdesc:ga09b21c2658b5c797ff9bdf8270c8d683"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares tuples for lexicographical is greater relation. <br /></td></tr>
+<tr class="separator:ga09b21c2658b5c797ff9bdf8270c8d683"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gae923674140c5c196e63a60972b71c903"><td class="memTemplParams" colspan="2">
+template&lt;typename... Us&gt; <br />
+requires (sizeof...(Ts) == sizeof...(Us))</td></tr>
+<tr class="memitem:gae923674140c5c196e63a60972b71c903"><td class="memTemplItemLeft" align="right" valign="top">KUMI_TRIVIAL friend constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator&gt;=</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;lhs, <a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;rhs) noexcept</td></tr>
+<tr class="memdesc:gae923674140c5c196e63a60972b71c903"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares tuples for lexicographical is greater relation relation. <br /></td></tr>
+<tr class="separator:gae923674140c5c196e63a60972b71c903"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6577056b416a6f0b16906bebf5fe7475"><td class="memTemplParams" colspan="2">
+template&lt;typename... Us&gt; <br />
+requires ( (sizeof...(Ts) == sizeof...(Us)) &amp;&amp; equality_comparable&lt;<a class="el" href="structkumi_1_1tuple.html">tuple</a>,<a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;Us...&gt;&gt; )</td></tr>
+<tr class="memitem:ga6577056b416a6f0b16906bebf5fe7475"><td class="memTemplItemLeft" align="right" valign="top">KUMI_TRIVIAL friend constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator!=</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;self, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Us... &gt; const &amp;other) noexcept</td></tr>
+<tr class="separator:ga6577056b416a6f0b16906bebf5fe7475"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
