@@ -70,7 +70,7 @@ namespace kumi::_
   template<typename T0, int N> struct binder_n
   {
     static constexpr bool is_homogeneous = true;
-    T0 members[N] = {};
+    T0 members[N];
   };
   template<int... Is, typename T0, typename T1, typename... Ts>
   requires(all_the_same<T0,T1,Ts...> && no_references<T0,T1,Ts...>)
