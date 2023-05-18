@@ -694,19 +694,19 @@ namespace kumi
       return res;
     }
     template<typename... Us>
-    KUMI_TRIVIAL friend constexpr auto operator<=(tuple const &lhs, tuple const &rhs) noexcept
+    KUMI_TRIVIAL friend constexpr auto operator<=(tuple const &lhs, tuple<Us...> const &rhs) noexcept
     requires(sizeof...(Ts) == sizeof...(Us))
     {
       return !(rhs < lhs);
     }
     template<typename... Us>
-    KUMI_TRIVIAL friend constexpr auto operator>(tuple const &lhs, tuple const &rhs) noexcept
+    KUMI_TRIVIAL friend constexpr auto operator>(tuple const &lhs, tuple<Us...> const &rhs) noexcept
     requires(sizeof...(Ts) == sizeof...(Us))
     {
       return rhs < lhs;
     }
     template<typename... Us>
-    KUMI_TRIVIAL friend constexpr auto operator>=(tuple const &lhs, tuple const &rhs) noexcept
+    KUMI_TRIVIAL friend constexpr auto operator>=(tuple const &lhs, tuple<Us...> const &rhs) noexcept
     requires(sizeof...(Ts) == sizeof...(Us))
     {
       return !(lhs < rhs);

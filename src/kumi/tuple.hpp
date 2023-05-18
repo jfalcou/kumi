@@ -215,7 +215,7 @@ namespace kumi
     /// @related kumi::tuple
     /// @brief Compares tuples for lexicographical is less or equal relation
     template<typename... Us>
-    KUMI_TRIVIAL friend constexpr auto operator<=(tuple const &lhs, tuple const &rhs) noexcept
+    KUMI_TRIVIAL friend constexpr auto operator<=(tuple const &lhs, tuple<Us...> const &rhs) noexcept
     requires(sizeof...(Ts) == sizeof...(Us))
     {
       return !(rhs < lhs);
@@ -225,7 +225,7 @@ namespace kumi
     /// @related kumi::tuple
     /// @brief Compares tuples for lexicographical is greater relation
     template<typename... Us>
-    KUMI_TRIVIAL friend constexpr auto operator>(tuple const &lhs, tuple const &rhs) noexcept
+    KUMI_TRIVIAL friend constexpr auto operator>(tuple const &lhs, tuple<Us...> const &rhs) noexcept
     requires(sizeof...(Ts) == sizeof...(Us))
     {
       return rhs < lhs;
@@ -235,7 +235,7 @@ namespace kumi
     /// @related kumi::tuple
     /// @brief Compares tuples for lexicographical is greater relation relation
     template<typename... Us>
-    KUMI_TRIVIAL friend constexpr auto operator>=(tuple const &lhs, tuple const &rhs) noexcept
+    KUMI_TRIVIAL friend constexpr auto operator>=(tuple const &lhs, tuple<Us...> const &rhs) noexcept
     requires(sizeof...(Ts) == sizeof...(Us))
     {
       return !(lhs < rhs);
