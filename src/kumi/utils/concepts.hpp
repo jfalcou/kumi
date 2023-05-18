@@ -93,5 +93,5 @@ namespace kumi
   //! satisfies kumi::equality_comparable for all their respective elements.
   //================================================================================================
   template<typename T, typename U>
-  concept equality_comparable = _::check_equality<T,U>();
+  concept equality_comparable = (size_v<T> == size_v<U>) && _::check_equality<T,U>();
 }

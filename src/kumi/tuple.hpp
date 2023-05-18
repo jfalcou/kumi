@@ -168,7 +168,7 @@ namespace kumi
     /// @brief Compares a tuple with an other for equality
     template<typename... Us>
     friend constexpr auto operator==(tuple const &self, tuple<Us...> const &other) noexcept
-    requires( (sizeof...(Ts) == sizeof...(Us) ) && equality_comparable<tuple,tuple<Us...>> )
+    requires( equality_comparable<tuple,tuple<Us...>> )
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
@@ -179,7 +179,7 @@ namespace kumi
 
     template<typename... Us>
     KUMI_TRIVIAL friend constexpr auto operator!=(tuple const &self, tuple<Us...> const &other) noexcept
-    requires( (sizeof...(Ts) == sizeof...(Us)) && equality_comparable<tuple,tuple<Us...>> )
+    requires( equality_comparable<tuple,tuple<Us...>> )
     {
       return !(self == other);
     }

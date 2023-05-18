@@ -11,28 +11,31 @@
 #include <concepts>
 #include <compare>
 
-struct no_cmp   { };
-struct cmp      { constexpr auto operator<=>(cmp const&) const = default; };
-struct strange  { constexpr float operator==(strange const&) const { return -1.f; }; };
-
-template<typename T>
-concept check_comparable = requires(T const& t)
+struct no_cmp    { };
+struct cmp       { constexpr auto operator<=>(cmp const&) const = default; };
+struct strange   { constexpr float operator==(strange const&) const { return -1.f; }; };
+struct other_cmp
 {
-  { t == t };
+  constexpr float operator==(other_cmp const&) const { return true; };
+  constexpr float operator==(cmp const&) const { return false; };
 };
 
 TTS_CASE("Check equality_comparable for tuple")
 {
-  TTS_CONSTEXPR_EXPECT_NOT(  check_comparable<kumi::tuple<no_cmp>>      );
-  TTS_CONSTEXPR_EXPECT_NOT( (check_comparable<kumi::tuple<cmp,no_cmp>>) );
+  using namespace kumi;
 
-  TTS_CONSTEXPR_EXPECT(  check_comparable<kumi::tuple<cmp>>                   );
-  TTS_CONSTEXPR_EXPECT( (check_comparable<kumi::tuple<cmp,kumi::tuple<cmp>>>) );
+  TTS_CONSTEXPR_EXPECT_NOT(( equality_comparable<tuple<no_cmp>  , tuple<no_cmp>>  ));
+  TTS_CONSTEXPR_EXPECT_NOT(( equality_comparable<tuple<   cmp>  , tuple<no_cmp>>  ));
+  TTS_CONSTEXPR_EXPECT_NOT(( equality_comparable<tuple<   cmp>  , tuple<cmp,cmp>> ));
+  TTS_CONSTEXPR_EXPECT_NOT(( equality_comparable<tuple<cmp,cmp> , tuple<cmp>>     ));
 
-  TTS_CONSTEXPR_EXPECT(  check_comparable<kumi::tuple<strange>>                       );
-  TTS_CONSTEXPR_EXPECT( (check_comparable<kumi::tuple<strange,kumi::tuple<strange>>>) );
+  TTS_CONSTEXPR_EXPECT((equality_comparable<tuple<cmp>,tuple<cmp>>));
+  TTS_CONSTEXPR_EXPECT((equality_comparable<tuple<cmp,tuple<cmp>>, tuple<cmp,tuple<cmp>>>) );
 
-  TTS_CONSTEXPR_EXPECT( (check_comparable<kumi::tuple<strange,kumi::tuple<cmp>>>) );
+  TTS_CONSTEXPR_EXPECT((equality_comparable<tuple<strange>                , tuple<strange>>               ));
+  TTS_CONSTEXPR_EXPECT((equality_comparable<tuple<strange,tuple<strange>> , tuple<strange,tuple<strange>>>));
+
+  TTS_CONSTEXPR_EXPECT(( equality_comparable<tuple<other_cmp,other_cmp>,tuple<other_cmp,cmp>> ));
 };
 
 TTS_CASE("Check product_type for tuple")

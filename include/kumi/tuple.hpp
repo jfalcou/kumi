@@ -493,7 +493,7 @@ namespace kumi
     }
   }
   template<typename T, typename U>
-  concept equality_comparable = _::check_equality<T,U>();
+  concept equality_comparable = (size_v<T> == size_v<U>) && _::check_equality<T,U>();
 }
 namespace kumi
 {
@@ -661,7 +661,7 @@ namespace kumi
     }
     template<typename... Us>
     friend constexpr auto operator==(tuple const &self, tuple<Us...> const &other) noexcept
-    requires( (sizeof...(Ts) == sizeof...(Us) ) && equality_comparable<tuple,tuple<Us...>> )
+    requires( equality_comparable<tuple,tuple<Us...>> )
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
@@ -671,7 +671,7 @@ namespace kumi
     }
     template<typename... Us>
     KUMI_TRIVIAL friend constexpr auto operator!=(tuple const &self, tuple<Us...> const &other) noexcept
-    requires( (sizeof...(Ts) == sizeof...(Us)) && equality_comparable<tuple,tuple<Us...>> )
+    requires( equality_comparable<tuple,tuple<Us...>> )
     {
       return !(self == other);
     }
