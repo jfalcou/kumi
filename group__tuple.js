@@ -17,10 +17,10 @@ var group__tuple =
       [ "make_tuple", "group__tuple_ga7a585805b36bec6b2c275b6f2ced67fe.html#ga7a585805b36bec6b2c275b6f2ced67fe", null ],
       [ "operator<", "group__tuple.html#gabee5ae96fdfd2145347fa3b2b212bf12", null ],
       [ "operator<<", "group__tuple.html#gaf6739a069131e315597688e5b3cf5df9", null ],
-      [ "operator<=", "group__tuple.html#ga6ddff5b99398c20cfe9102ae0b4ddde8", null ],
+      [ "operator<=", "group__tuple.html#gacb8964b73bc72ef131263f9c369d7c26", null ],
       [ "operator==", "group__tuple.html#ga15e87e0ad820c81f56073395846cdea0", null ],
-      [ "operator>", "group__tuple.html#ga09b21c2658b5c797ff9bdf8270c8d683", null ],
-      [ "operator>=", "group__tuple.html#gae923674140c5c196e63a60972b71c903", null ],
+      [ "operator>", "group__tuple.html#ga5994bb012dbb02974dfca54e85613319", null ],
+      [ "operator>=", "group__tuple.html#gad58bee0357526581d8cfd6831a2603e3", null ],
       [ "tie", "group__tuple_ga3b5a893567431a62dce006d10f23854b.html#ga3b5a893567431a62dce006d10f23854b", null ],
       [ "to_ref", "group__tuple_ga8c39a63412ff38a02ffd6bc2394581ca.html#ga8c39a63412ff38a02ffd6bc2394581ca", null ]
     ] ],
@@ -32,8 +32,8 @@ var group__tuple =
     [ "kumi::tuple::to_ref", "group__tuple_ga8c39a63412ff38a02ffd6bc2394581ca.html#ga8c39a63412ff38a02ffd6bc2394581ca", null ],
     [ "kumi::tuple::operator<", "group__tuple.html#gabee5ae96fdfd2145347fa3b2b212bf12", null ],
     [ "kumi::tuple::operator<<", "group__tuple.html#gaf6739a069131e315597688e5b3cf5df9", null ],
-    [ "kumi::tuple::operator<=", "group__tuple.html#ga6ddff5b99398c20cfe9102ae0b4ddde8", null ],
+    [ "kumi::tuple::operator<=", "group__tuple.html#gacb8964b73bc72ef131263f9c369d7c26", null ],
     [ "kumi::tuple::operator==", "group__tuple.html#ga15e87e0ad820c81f56073395846cdea0", null ],
-    [ "kumi::tuple::operator>", "group__tuple.html#ga09b21c2658b5c797ff9bdf8270c8d683", null ],
-    [ "kumi::tuple::operator>=", "group__tuple.html#gae923674140c5c196e63a60972b71c903", null ]
+    [ "kumi::tuple::operator>", "group__tuple.html#ga5994bb012dbb02974dfca54e85613319", null ],
+    [ "kumi::tuple::operator>=", "group__tuple.html#gad58bee0357526581d8cfd6831a2603e3", null ]
 ];
