@@ -24,4 +24,5 @@ if(Python_FOUND)
   )
 
   add_custom_target(kumi-standalone DEPENDS tuple.hpp)
+  set(KUMI_FORCE_STANDALONE 1)
 endif()
