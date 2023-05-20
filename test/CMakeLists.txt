@@ -10,14 +10,17 @@
 add_library(kumi_test INTERFACE)
 
 target_compile_features ( kumi_test INTERFACE  cxx_std_20 )
-if (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
+
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  if(CMAKE_CXX_COMPILER_FRONTEND_VARIANT STREQUAL "MSVC")
+    target_compile_options( kumi_test INTERFACE /W3 /EHsc )
+  else()
+    target_compile_options( kumi_test INTERFACE -Werror -Wall -Wextra -Wunused-variable -Wdocumentation)
+  endif()
+elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
   target_compile_options( kumi_test INTERFACE /W3 /EHsc /Zc:preprocessor)
-elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
-  target_compile_options( kumi_test INTERFACE -Werror -Wall -Wextra -Wunused-variable -Wdocumentation)
-  set(KUMI_FORCE_STANDALONE 1)
 else()
   target_compile_options( kumi_test INTERFACE -Werror -Wall -Wextra -Wunused-variable)
-  set(KUMI_FORCE_STANDALONE 1)
 endif()
 
 target_include_directories( kumi_test INTERFACE
