@@ -35,7 +35,7 @@ namespace kumi
   //! @ingroup traits
   //! @brief Computes the number of elements of a kumi::product_type
   //!
-  //! @param T kumi::product_type to inspect
+  //! @tparam T kumi::product_type to inspect
   //!
   //! ## Helper value
   //! @code

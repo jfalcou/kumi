@@ -1,13 +1,11 @@
-##==================================================================================================
+##======================================================================================================================
 ##  KUMI - Compact C++20 Tuple Toolbox
 ##  Copyright : KUMI Project Contributors
 ##  SPDX-License-Identifier: BSL-1.0
-##==================================================================================================
-cmake_minimum_required(VERSION 3.18)
+##======================================================================================================================
+cmake_minimum_required(VERSION 3.22)
 project(kumi-install-test LANGUAGES CXX)
 enable_testing()
-
-# pass -D kumi_ROOT=path/to-install to cmake if a custom installation prefix was used
 
 find_package(kumi CONFIG REQUIRED)
 add_executable(test_kumi ../main.cpp)

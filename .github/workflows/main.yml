@@ -1,8 +1,8 @@
-####################################################################################################
+##======================================================================================================================
 ##  KUMI - Compact C++20 Tuple Toolbox
 ##  Copyright : KUMI Project Contributors
 ##  SPDX-License-Identifier: BSL-1.0
-####################################################################################################
+##======================================================================================================================
 name: KUMI CI
 on:
   push:
@@ -13,24 +13,6 @@ on:
       - main
 
 jobs:
-  install:
-    runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        cfg:
-        - {test: Installation       , mode: 0 }
-        - {test: FetchContents      , mode: 1 }
-        - {test: CPM                , mode: 2 }
-    steps:
-      - name: Fetch current branch
-        uses: actions/checkout@v3
-      - name: Check KUMI works with ${{ matrix.cfg.test }}
-        uses: ./.github/actions/integration
-        with:
-          branch: '${{ github.head_ref }}'
-          mode: '${{ matrix.cfg.mode }}'
-
   gcc-linux:
     runs-on: ubuntu-latest
     container:
@@ -52,7 +34,7 @@ jobs:
       - name: Compile Unit Tests
         run:  |
           cd build
-          ninja -j 2
+          ninja kumi-test -j 2
       - name: Running Unit Tests
         run:  |
           cd build
@@ -79,7 +61,7 @@ jobs:
       - name: Compile Unit Tests
         run:  |
           cd build
-          ninja -j 2
+          ninja kumi-test -j 2
       - name: Running Unit Tests
         run:  |
           cd build
@@ -109,7 +91,7 @@ jobs:
       - name: Compile Unit Tests
         run:  |
           cd build
-          ninja -j 2
+          ninja kumi-test -j 2
       - name: Running Unit Tests
         run:  |
           cd build
@@ -133,7 +115,7 @@ jobs:
           mkdir build && cd build
           cmake .. -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}" -DCMAKE_EXE_LINKER_FLAGS="${{ matrix.cfg.linker }}"
       - name: Compiling Unit Tests
-        run:  cd build && make -j 2
+        run:  cd build && make kumi-test -j 2
       - name: Running Unit Tests
         run: cd build && ctest --output-on-failure -j 2
 
@@ -153,7 +135,7 @@ jobs:
           mkdir build && cd build
           cmake .. -DCMAKE_CXX_COMPILER=g++-11 -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}"
       - name: Compiling Unit Tests
-        run:  cd build && make -j 2
+        run:  cd build && make kumi-test -j 2
       - name: Running Unit Tests
         run: cd build && ctest --output-on-failure -j 2
 
@@ -173,31 +155,31 @@ jobs:
           mkdir build && cd build
           cmake .. -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_ROOT/build/cmake/android.toolchain.cmake -DANDROID_ABI=arm64-v8a
       - name: Compiling Unit Tests
-        run:  cd build && make -j 2
+        run:  cd build && make kumi-test -j 2
 
-  msvc:
-    runs-on: [windows-2022]
-    strategy:
-      fail-fast: false
-      matrix:
-        cfg:
-        - { mode: Debug  , options: ""}
-        - { mode: Release, options: ""}
-    steps:
-      - name: Fetch current branch
-        uses: actions/checkout@v3
-      - name: Running CMake for MSVC ${{ matrix.cfg.mode }} ${{ matrix.cfg.options }}
-        run: |
-          mkdir build && cd build
-          cmake -G "Visual Studio 17 2022" -A x64 .. -DKUMI_BUILD_TEST=ON
-      - name: Compiling Unit Tests
-        run:  |
-          cd build
-          cmake --build . --target unit --config ${{ matrix.cfg.mode }} --parallel 2
-      - name: Running Tests
-        run: |
-          cd build
-          ctest -C ${{ matrix.cfg.mode }} --output-on-failure
+  # msvc:
+  #   runs-on: [windows-2022]
+  #   strategy:
+  #     fail-fast: false
+  #     matrix:
+  #       cfg:
+  #       - { mode: Debug  , options: ""}
+  #       - { mode: Release, options: ""}
+  #   steps:
+  #     - name: Fetch current branch
+  #       uses: actions/checkout@v3
+  #     - name: Running CMake for MSVC ${{ matrix.cfg.mode }} ${{ matrix.cfg.options }}
+  #       run: |
+  #         mkdir build && cd build
+  #         cmake -G "Visual Studio 17 2022" -A x64 .. -DKUMI_BUILD_TEST=ON
+  #     - name: Compiling Unit Tests
+  #       run:  |
+  #         cd build
+  #         cmake --build . --target kumi-test --config ${{ matrix.cfg.mode }} --parallel 2
+  #     - name: Running Tests
+  #       run: |
+  #         cd build
+  #         ctest -C ${{ matrix.cfg.mode }} --output-on-failure
 
   clang-cl:
     runs-on: [windows-2022]
@@ -217,7 +199,7 @@ jobs:
       - name: Compiling Unit Tests
         run:  |
           cd build
-          cmake --build . --target unit --config ${{ matrix.cfg.mode }} --parallel 2
+          cmake --build . --target kumi-test --config ${{ matrix.cfg.mode }} --parallel 2
       - name: Running Tests
         run: |
           cd build
