@@ -1,0 +1,25 @@
+var NAVTREEINDEX0 =
+{
+"changelog.html":[2,1],
+"group__concepts.html":[1,0,0,2],
+"group__generators.html":[1,0,1,2],
+"group__queries.html":[1,0,1,1],
+"group__reductions.html":[1,0,1,3],
+"group__traits.html":[1,0,0,1],
+"group__transforms.html":[1,0,1,0],
+"group__tuple.html":[1,0,0,0],
+"group__utility.html":[1,0,2],
+"index.html":[],
+"index.html":[0],
+"index.html#autotoc_md112":[0,0],
+"index.html#autotoc_md113":[0,1],
+"licence.html":[2,2],
+"namespacekumi.html":[1,1],
+"pages.html":[],
+"setup.html":[2,0],
+"usergroup0.html":[1],
+"usergroup1.html":[1,0],
+"usergroup2.html":[1,0,0],
+"usergroup3.html":[1,0,1],
+"usergroup4.html":[2]
+};
