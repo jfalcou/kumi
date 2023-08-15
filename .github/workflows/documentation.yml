@@ -1,8 +1,8 @@
-####################################################################################################
+##======================================================================================================================
 ##  KUMI - Compact C++20 Tuple Toolbox
 ##  Copyright : KUMI Project Contributors
 ##  SPDX-License-Identifier: BSL-1.0
-####################################################################################################
+##======================================================================================================================
 name: KUMI Documentation Generation
 on:
   push:
@@ -22,12 +22,12 @@ jobs:
       - name: Prepare KUMI
         run: |
           mkdir build && cd build
-          cmake .. -G Ninja -DKUMI_BUILD_TEST=OFF -DKUMI_BUILD_INTEGRATION=OFF -DKUMI_BUILD_DOCUMENTATION=ON
+          cmake .. -G Ninja -DKUMI_BUILD_TEST=OFF -DKUMI_BUILD_DOCUMENTATION=ON
 
       - name: Generate Doxygen
         run: |
           cd build
-          ninja doxygen
+          ninja kumi-doxygen
 
       - name: Deploy to gh-pages
         uses: peaceiris/actions-gh-pages@v3

@@ -1,21 +1,21 @@
-##==================================================================================================
+##======================================================================================================================
 ##  KUMI - Compact C++20 Tuple Toolbox
 ##  Copyright : KUMI Project Contributors
 ##  SPDX-License-Identifier: BSL-1.0
-##==================================================================================================
-cmake_minimum_required(VERSION 3.18)
+##======================================================================================================================
+cmake_minimum_required(VERSION 3.22)
 project(kumi-fetch-test LANGUAGES CXX)
 enable_testing()
 
-message(STATUS "Testing FetchContent for commit ${kumi_git_head}")
+message(STATUS "Testing FetchContent for branch ${GIT_BRANCH}")
 
 # Enable FetchContent
 include(FetchContent)
 
-# Retrikumi KUMI from relative git directory
+# Retrieve KUMI from relative git directory
 FetchContent_Declare(kumi
-  GIT_REPOSITORY "${kumi_SOURCE_DIR}"
-  GIT_TAG "${kumi_git_head}"
+  GIT_REPOSITORY "https://github.com/jfalcou/kumi.git"
+  GIT_TAG ${GIT_BRANCH}
 )
 
 # make available
