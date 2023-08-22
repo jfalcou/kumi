@@ -16,5 +16,17 @@ int main()
                                 , std::vector<std::size_t>{}
                                 );
 
-  for(auto s : output) std::cout << s << "\n";
+  for(auto s : output) std::cout << s << " ";
+  std::cout << "\n";
+
+  auto u = kumi::tuple{1,3,2,4,0,5,9,6,7};
+
+  std::cout << kumi::fold_left( [](auto acc, auto e)
+                                {
+                                    std::cout << '(' << acc << ',' << e << ")\n";
+                                    return (e <acc) ? e : acc;
+                                }
+                              , u
+                              )
+            << "\n";
 }

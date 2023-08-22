@@ -10,6 +10,6 @@ int main()
 {
   auto t = kumi::tuple{2.,1,short{55},' '};
 
-  std::cout << kumi::sum(t, 0) << "\n";
-
+  std::cout << kumi::sum(t, 100) << "\n";
+  std::cout << kumi::sum(t) << "\n";
 }

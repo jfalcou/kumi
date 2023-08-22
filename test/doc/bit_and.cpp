@@ -11,4 +11,5 @@ int main()
   auto t = kumi::tuple{14,short{7}, 255ULL};
 
   std::cout << kumi::bit_and(t, 65535) << "\n";
+  std::cout << kumi::bit_and(t) << "\n";
 }
