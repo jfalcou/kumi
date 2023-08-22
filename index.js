@@ -1,5 +1,5 @@
 var index =
 [
-    [ "A Short Example", "index.html#autotoc_md112", null ],
-    [ "Licence", "index.html#autotoc_md113", null ]
+    [ "A Short Example", "index.html#autotoc_md127", null ],
+    [ "Licence", "index.html#autotoc_md128", null ]
 ];

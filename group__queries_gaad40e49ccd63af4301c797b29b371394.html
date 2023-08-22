@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.6"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::all_of</title>
+<title>kumi: kumi::none_of</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__queries_ga2c505d0254526f8ffc33bd844f33cb55.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__queries_gaad40e49ccd63af4301c797b29b371394.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -122,21 +122,21 @@ $(document).ready(function(){initNavTree('group__queries_ga2c505d0254526f8ffc33b
 </div>
 
 <div class="contents">
-<a id="ga2c505d0254526f8ffc33bd844f33cb55" name="ga2c505d0254526f8ffc33bd844f33cb55"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga2c505d0254526f8ffc33bd844f33cb55">&#9670;&#160;</a></span>all_of()</h2>
+<a id="gaad40e49ccd63af4301c797b29b371394" name="gaad40e49ccd63af4301c797b29b371394"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaad40e49ccd63af4301c797b29b371394">&#9670;&#160;</a></span>none_of() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Pred , typename T &gt; </div>
+template&lt;typename Pred , typename Tuple &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr bool kumi::all_of </td>
+          <td class="memname">KUMI_TRIVIAL_NODISCARD constexpr bool kumi::none_of </td>
           <td>(</td>
-          <td class="paramtype">T const &amp;&#160;</td>
+          <td class="paramtype">Tuple const &amp;&#160;</td>
           <td class="paramname"><em>ts</em>, </td>
         </tr>
         <tr>
@@ -158,16 +158,16 @@ template&lt;typename Pred , typename T &gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Checks if unary predicate p returns true for all elements in the value t. </p>
+<p>Checks if unary predicate p returns true for no elements in the value t. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ts</td><td>Value to process </td></tr>
-    <tr><td class="paramname">p</td><td>Unary predicate. p must return a value convertible to <code>bool</code> for every element of t. </td></tr>
+    <tr><td class="paramname">ts</td><td>Value to process. </td></tr>
+    <tr><td class="paramname">p</td><td>Unary predicate. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><code>true</code> if all elements of t satisfy p. </dd></dl>
-<h2><a class="anchor" id="autotoc_md49"></a>
+<dl class="section return"><dt>Returns</dt><dd>The evaluation of <code>!any_of(ts,p)</code>. </dd></dl>
+<h2><a class="anchor" id="autotoc_md57"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/tuple.hpp&gt;</span></div>
@@ -176,10 +176,13 @@ Example:</h2>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">auto</span> t = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1,2.,3.f};</div>
-<div class="line">  std::cout &lt;&lt; std::boolalpha &lt;&lt; <a class="code hl_function" href="group__queries_ga2c505d0254526f8ffc33bd844f33cb55.html#ga2c505d0254526f8ffc33bd844f33cb55">kumi::all_of</a>( t, [](<span class="keyword">auto</span> e) { <span class="keywordflow">return</span> e &lt; 5; }) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; std::boolalpha &lt;&lt; <a class="code hl_function" href="group__queries_ga2c505d0254526f8ffc33bd844f33cb55.html#ga2c505d0254526f8ffc33bd844f33cb55">kumi::all_of</a>( -3.3, [](<span class="keyword">auto</span> e) { <span class="keywordflow">return</span> e &lt; 5; }) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; std::boolalpha &lt;&lt; <a class="code hl_function" href="group__queries_gaad40e49ccd63af4301c797b29b371394.html#gaad40e49ccd63af4301c797b29b371394">kumi::none_of</a>( t, [](<span class="keyword">auto</span> e) { <span class="keywordflow">return</span> e &gt; 10.; }) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; std::boolalpha &lt;&lt; <a class="code hl_function" href="group__queries_gaad40e49ccd63af4301c797b29b371394.html#gaad40e49ccd63af4301c797b29b371394">kumi::none_of</a>( 8, [](<span class="keyword">auto</span> e) { <span class="keywordflow">return</span> e &gt; 10.; }) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">auto</span> u = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{0,0.,0.f};</div>
+<div class="line">  std::cout &lt;&lt; std::boolalpha &lt;&lt; <a class="code hl_function" href="group__queries_gaad40e49ccd63af4301c797b29b371394.html#gaad40e49ccd63af4301c797b29b371394">kumi::none_of</a>( u ) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__queries_ga2c505d0254526f8ffc33bd844f33cb55_html_ga2c505d0254526f8ffc33bd844f33cb55"><div class="ttname"><a href="group__queries_ga2c505d0254526f8ffc33bd844f33cb55.html#ga2c505d0254526f8ffc33bd844f33cb55">kumi::all_of</a></div><div class="ttdeci">constexpr bool all_of(T const &amp;ts, Pred p) noexcept</div><div class="ttdoc">Checks if unary predicate p returns true for all elements in the value t.</div><div class="ttdef"><b>Definition:</b> predicates.hpp:22</div></div>
+<div class="ttc" id="agroup__queries_gaad40e49ccd63af4301c797b29b371394_html_gaad40e49ccd63af4301c797b29b371394"><div class="ttname"><a href="group__queries_gaad40e49ccd63af4301c797b29b371394.html#gaad40e49ccd63af4301c797b29b371394">kumi::none_of</a></div><div class="ttdeci">KUMI_TRIVIAL_NODISCARD constexpr bool none_of(Tuple const &amp;ts, Pred p) noexcept</div><div class="ttdoc">Checks if unary predicate p returns true for no elements in the value t.</div><div class="ttdef"><b>Definition:</b> predicates.hpp:104</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition:</b> tuple.hpp:34</div></div>
 </div><!-- fragment --> 
 </div>
