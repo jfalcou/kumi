@@ -8,7 +8,7 @@
 #ifndef KUMI_TUPLE_HPP_INCLUDED
 #define KUMI_TUPLE_HPP_INCLUDED
 
-#include "kumi/detail/concepts.hpp"
+#include <kumi/detail/concepts.hpp>
 #include <kumi/detail/abi.hpp>
 #include <kumi/detail/stdfix.hpp>
 #include <kumi/detail/binder.hpp>
