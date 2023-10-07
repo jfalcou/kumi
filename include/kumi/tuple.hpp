@@ -8,6 +8,7 @@
 #ifndef KUMI_TUPLE_HPP_INCLUDED
 #define KUMI_TUPLE_HPP_INCLUDED
 
+#include "kumi/detail/concepts.hpp"
 #include <kumi/detail/abi.hpp>
 #include <kumi/detail/stdfix.hpp>
 #include <kumi/detail/binder.hpp>
@@ -189,7 +190,7 @@ namespace kumi
     /// @brief Compares tuples for lexicographical is less relation
     template<typename... Us>
     friend constexpr auto operator<(tuple const &lhs, tuple<Us...> const &rhs) noexcept
-    requires(sizeof...(Ts) == sizeof...(Us))
+    requires(sizeof...(Ts) == sizeof...(Us) && _::piecewise_ordered<tuple, tuple<Us...>>)
     {
       // lexicographical order is defined as
       // (v0 < w0) || ... andnot(wi < vi, vi+1 < wi+1) ... || andnot(wn-1 < vn-1, vn < wn);
@@ -216,7 +217,7 @@ namespace kumi
     /// @brief Compares tuples for lexicographical is less or equal relation
     template<typename... Us>
     KUMI_TRIVIAL friend constexpr auto operator<=(tuple const &lhs, tuple<Us...> const &rhs) noexcept
-    requires(sizeof...(Ts) == sizeof...(Us))
+    requires requires { rhs < lhs; }
     {
       return !(rhs < lhs);
     }
@@ -226,7 +227,7 @@ namespace kumi
     /// @brief Compares tuples for lexicographical is greater relation
     template<typename... Us>
     KUMI_TRIVIAL friend constexpr auto operator>(tuple const &lhs, tuple<Us...> const &rhs) noexcept
-    requires(sizeof...(Ts) == sizeof...(Us))
+    requires requires { rhs < lhs; }
     {
       return rhs < lhs;
     }
@@ -236,7 +237,7 @@ namespace kumi
     /// @brief Compares tuples for lexicographical is greater relation relation
     template<typename... Us>
     KUMI_TRIVIAL friend constexpr auto operator>=(tuple const &lhs, tuple<Us...> const &rhs) noexcept
-    requires(sizeof...(Ts) == sizeof...(Us))
+    requires requires { lhs < rhs; }
     {
       return !(lhs < rhs);
     }
