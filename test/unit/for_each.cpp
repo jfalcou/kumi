@@ -9,6 +9,20 @@
 #include <kumi/tuple.hpp>
 #include <tts/tts.hpp>
 
+struct A { void operator()(auto&&) & {} };
+struct B { void operator()(auto&&) && {} };
+
+TTS_CASE("Check for_each SFINAE compliance")
+{
+  A a;
+  B b;
+  auto t = kumi::make_tuple(1,2);
+
+  TTS_EXPECT_COMPILES(a, t, { kumi::for_each(a, t); } );
+  TTS_EXPECT_NOT_COMPILES(b, t, { kumi::for_each(b, t); } );
+};
+
+
 TTS_CASE("Check for_each behavior")
 {
   auto t = kumi::tuple {1, 2., 3.4f, '5'};

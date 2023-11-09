@@ -101,16 +101,25 @@ namespace kumi::_
     T {args...};
   };
   template<typename F, size_t I, typename... Tuples>
-  concept applicable_i = std::is_invocable_v<F, member_t<I,Tuples>...>;
-  template<typename F, typename Indices, typename... Tuples> struct is_applicable;
+  concept supports_call_i = std::is_invocable_v<F, member_t<I,Tuples>...>;
+  template<typename F, typename Indices, typename... Tuples> struct supports_call_t;
   template<typename F, size_t... Is, typename... Tuples>
-  struct is_applicable<F, std::index_sequence<Is...>, Tuples...>
-      : std::bool_constant<(applicable_i<F, Is, Tuples...> && ...)>
+  struct supports_call_t<F, std::index_sequence<Is...>, Tuples...>
+      : std::bool_constant<(supports_call_i<F, Is, Tuples...> && ...)>
   {
   };
+  template<typename F, typename Indices, typename Tuple> struct supports_apply_t;
+  template<typename F, size_t... Is, typename Tuple>
+  struct supports_apply_t<F, std::index_sequence<Is...>, Tuple>
+      : std::is_invocable<F, member_t<Is,Tuple>...>
+  {
+  };
+  template<typename F, typename Tuple>
+  concept supports_apply = _::
+      supports_apply_t<F, std::make_index_sequence<size<Tuple>::value>, Tuple>::value;
   template<typename F, typename... Tuples>
-  concept applicable = _::
-      is_applicable<F, std::make_index_sequence<(size<Tuples>::value, ...)>, Tuples...>::value;
+  concept supports_call = _::
+      supports_call_t<F, std::make_index_sequence<(size<Tuples>::value, ...)>, Tuples...>::value;
   template<typename T, typename U>
   concept comparable = requires(T t, U u)
   {
@@ -509,6 +518,7 @@ namespace kumi
 {
   template<typename Function, product_type Tuple>
   constexpr decltype(auto) apply(Function &&f, Tuple &&t)
+  requires _::supports_apply<Function&&, Tuple&&>
   {
     if constexpr(sized_product_type<Tuple,0>) return  KUMI_FWD(f)();
     else
@@ -535,7 +545,7 @@ namespace kumi
 {
   template<typename Function, product_type Tuple, product_type... Tuples>
   constexpr void for_each(Function f, Tuple&& t, Tuples&&... ts)
-  requires _::applicable<Function, Tuple, Tuples...>
+  requires _::supports_call<Function&, Tuple, Tuples...>
   {
     if constexpr(sized_product_type<Tuple,0>) return;
     else
@@ -1249,7 +1259,7 @@ namespace kumi
   constexpr auto
   map(Function     f,
       Tuple  &&t0,
-      Tuples &&...others) requires _::applicable<Function, Tuple&&, Tuples&&...>
+      Tuples &&...others) requires _::supports_call<Function, Tuple&&, Tuples&&...>
   {
     if constexpr(sized_product_type<Tuple,0>) return std::remove_cvref_t<Tuple>{};
     else

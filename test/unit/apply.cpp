@@ -10,6 +10,19 @@
 #include <sstream>
 #include <tts/tts.hpp>
 
+struct A { void operator()(auto&&...) & {} };
+struct B { void operator()(auto&&) & {} };
+
+TTS_CASE("Check apply SFINAE compliance")
+{
+  A a;
+  B b;
+  auto t = kumi::make_tuple(1,2,3,4);
+
+  TTS_EXPECT_COMPILES(a, t, { kumi::apply(a, t); } );
+  TTS_EXPECT_NOT_COMPILES(b, t, { kumi::apply(b, t); } );
+};
+
 TTS_CASE("Check result::apply<F,Tuple> behavior")
 {
   auto lambda = [](auto... m) { return (m + ...); };

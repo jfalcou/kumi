@@ -73,19 +73,31 @@ namespace kumi::_
   // Concept machinery to make our algorithms SFINAE friendly
   //================================================================================================
   template<typename F, size_t I, typename... Tuples>
-  concept applicable_i = std::is_invocable_v<F, member_t<I,Tuples>...>;
+  concept supports_call_i = std::is_invocable_v<F, member_t<I,Tuples>...>;
 
-  template<typename F, typename Indices, typename... Tuples> struct is_applicable;
+  template<typename F, typename Indices, typename... Tuples> struct supports_call_t;
 
   template<typename F, size_t... Is, typename... Tuples>
-  struct is_applicable<F, std::index_sequence<Is...>, Tuples...>
-      : std::bool_constant<(applicable_i<F, Is, Tuples...> && ...)>
+  struct supports_call_t<F, std::index_sequence<Is...>, Tuples...>
+      : std::bool_constant<(supports_call_i<F, Is, Tuples...> && ...)>
   {
   };
 
+  template<typename F, typename Indices, typename Tuple> struct supports_apply_t;
+
+  template<typename F, size_t... Is, typename Tuple>
+  struct supports_apply_t<F, std::index_sequence<Is...>, Tuple>
+      : std::is_invocable<F, member_t<Is,Tuple>...>
+  {
+  };
+
+  template<typename F, typename Tuple>
+  concept supports_apply = _::
+      supports_apply_t<F, std::make_index_sequence<size<Tuple>::value>, Tuple>::value;
+
   template<typename F, typename... Tuples>
-  concept applicable = _::
-      is_applicable<F, std::make_index_sequence<(size<Tuples>::value, ...)>, Tuples...>::value;
+  concept supports_call = _::
+      supports_call_t<F, std::make_index_sequence<(size<Tuples>::value, ...)>, Tuples...>::value;
 
   // Helper for checking if two tuples can == each others
   template<typename T, typename U>
