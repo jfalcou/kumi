@@ -96,7 +96,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__transforms_gaeeddccfe55a8c97260599a295d38d875.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__transforms_ga8a4e424cfc506fb8fd2939ebe24382ce.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -122,14 +122,14 @@ $(document).ready(function(){initNavTree('group__transforms_gaeeddccfe55a8c97260
 </div>
 
 <div class="contents">
-<a id="gaeeddccfe55a8c97260599a295d38d875" name="gaeeddccfe55a8c97260599a295d38d875"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaeeddccfe55a8c97260599a295d38d875">&#9670;&#160;</a></span>map()</h2>
+<a id="ga8a4e424cfc506fb8fd2939ebe24382ce" name="ga8a4e424cfc506fb8fd2939ebe24382ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8a4e424cfc506fb8fd2939ebe24382ce">&#9670;&#160;</a></span>map()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;product_type Tuple, typename Function , sized_product_type&lt; <a class="el" href="structkumi_1_1size.html">size</a>&lt; Tuple &gt;::value &gt;... Tuples&gt; <br />
-requires _::applicable&lt;Function, Tuple&amp;&amp;, Tuples&amp;&amp;...&gt;</div>
+requires _::supports_call&lt;Function, Tuple&amp;&amp;, Tuples&amp;&amp;...&gt;</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -181,14 +181,14 @@ requires _::applicable&lt;Function, Tuple&amp;&amp;, Tuples&amp;&amp;...&gt;</di
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, <a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type</a> T, <a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type</a>... Ts&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__transforms_gaeeddccfe55a8c97260599a295d38d875.html#gaeeddccfe55a8c97260599a295d38d875">map</a>;</div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, <a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type</a> T, <a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type</a>... Ts&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__transforms_ga8a4e424cfc506fb8fd2939ebe24382ce.html#ga8a4e424cfc506fb8fd2939ebe24382ce">map</a>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, <a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type</a> T, <a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type</a>... Ts&gt;</div>
 <div class="line">  <span class="keyword">using </span>map_t = <span class="keyword">typename</span> map&lt;Function,Tuple&gt;::type;</div>
 <div class="line">}</div>
 <div class="ttc" id="aconceptkumi_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1product__type.html">kumi::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition:</b> concepts.hpp:33</div></div>
-<div class="ttc" id="agroup__transforms_gaeeddccfe55a8c97260599a295d38d875_html_gaeeddccfe55a8c97260599a295d38d875"><div class="ttname"><a href="group__transforms_gaeeddccfe55a8c97260599a295d38d875.html#gaeeddccfe55a8c97260599a295d38d875">kumi::map</a></div><div class="ttdeci">constexpr auto map(Function f, Tuple &amp;&amp;t0, Tuples &amp;&amp;...others)</div><div class="ttdoc">Apply the Callable object f on each tuples' elements.</div><div class="ttdef"><b>Definition:</b> map.hpp:45</div></div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__transforms_gaeeddccfe55a8c97260599a295d38d875.html#gaeeddccfe55a8c97260599a295d38d875" title="Apply the Callable object f on each tuples&#39; elements.">kumi::map</a></p>
+<div class="ttc" id="agroup__transforms_ga8a4e424cfc506fb8fd2939ebe24382ce_html_ga8a4e424cfc506fb8fd2939ebe24382ce"><div class="ttname"><a href="group__transforms_ga8a4e424cfc506fb8fd2939ebe24382ce.html#ga8a4e424cfc506fb8fd2939ebe24382ce">kumi::map</a></div><div class="ttdeci">constexpr auto map(Function f, Tuple &amp;&amp;t0, Tuples &amp;&amp;...others)</div><div class="ttdoc">Apply the Callable object f on each tuples' elements.</div><div class="ttdef"><b>Definition:</b> map.hpp:45</div></div>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__transforms_ga8a4e424cfc506fb8fd2939ebe24382ce.html#ga8a4e424cfc506fb8fd2939ebe24382ce" title="Apply the Callable object f on each tuples&#39; elements.">kumi::map</a></p>
 <h2><a class="anchor" id="autotoc_md38"></a>
 Example</h2>
 <div class="fragment"><div class="line"> </div>
@@ -200,7 +200,7 @@ Example</h2>
 <div class="line">  <span class="keyword">auto</span> lhs = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1,2,3};</div>
 <div class="line">  <span class="keyword">auto</span> rhs = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{2.5,3.6,4.7};</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_function" href="group__transforms_gaeeddccfe55a8c97260599a295d38d875.html#gaeeddccfe55a8c97260599a295d38d875">kumi::map</a>( [](<span class="keyword">auto</span> l, <span class="keyword">auto</span> r) { <span class="keywordflow">return</span> l*r; }, lhs, rhs);</div>
+<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_function" href="group__transforms_ga8a4e424cfc506fb8fd2939ebe24382ce.html#ga8a4e424cfc506fb8fd2939ebe24382ce">kumi::map</a>( [](<span class="keyword">auto</span> l, <span class="keyword">auto</span> r) { <span class="keywordflow">return</span> l*r; }, lhs, rhs);</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; r &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
