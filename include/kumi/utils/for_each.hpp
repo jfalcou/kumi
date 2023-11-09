@@ -28,7 +28,7 @@ namespace kumi
   //================================================================================================
   template<typename Function, product_type Tuple, product_type... Tuples>
   constexpr void for_each(Function f, Tuple&& t, Tuples&&... ts)
-  requires _::applicable<Function, Tuple, Tuples...>
+  requires _::supports_call<Function&, Tuple, Tuples...>
   {
     if constexpr(sized_product_type<Tuple,0>) return;
     else

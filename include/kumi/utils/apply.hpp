@@ -35,6 +35,7 @@ namespace kumi
   //================================================================================================
   template<typename Function, product_type Tuple>
   constexpr decltype(auto) apply(Function &&f, Tuple &&t)
+  requires _::supports_apply<Function&&, Tuple&&>
   {
     if constexpr(sized_product_type<Tuple,0>) return  KUMI_FWD(f)();
     else
