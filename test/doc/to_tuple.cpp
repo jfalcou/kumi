@@ -4,17 +4,47 @@
   SPDX-License-Identifier: BSL-1.0
 **/
 #include <kumi/tuple.hpp>
+#include <cstdint>
 #include <iostream>
-#include <array>
+#include <type_traits>
+#include <utility>
 
-// std::array supports structured bindings so we just need to opt-in the Product Type semantic
-template<typename T, std::size_t N>
-struct  kumi::is_product_type<std::array<T,N>> : std::true_type
+struct pixel
+{
+  int r, g, b;
+};
+
+template<std::size_t I>
+decltype(auto) get(pixel const& p) noexcept
+{
+  if constexpr(I==0) return p.r;
+  if constexpr(I==1) return p.g;
+  if constexpr(I==2) return p.b;
+}
+
+template<std::size_t I>
+decltype(auto) get(pixel& p) noexcept
+{
+  if constexpr(I==0) return p.r;
+  if constexpr(I==1) return p.g;
+  if constexpr(I==2) return p.b;
+}
+
+// Opt-in for Product Type semantic
+template<>
+struct kumi::is_product_type<pixel> : std::true_type
 {};
+
+// Adapt as structured bindable type
+template<>
+struct  std::tuple_size<pixel>
+      : std::integral_constant<std::size_t,3> {};
+
+template<std::size_t I> struct std::tuple_element<I,pixel> { using type = int; };
 
 int main()
 {
-  std::array<int,3> a = { 37, 15, 27};
+  pixel a = { 37, 15, 27 };
   auto b = kumi::to_tuple(a);
 
   std::cout << b << "\n";

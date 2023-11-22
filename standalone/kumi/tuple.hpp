@@ -585,6 +585,7 @@ namespace kumi
     }
   }
 }
+#include <array>
 #include <type_traits>
 #include <utility>
 #if !defined(KUMI_DOXYGEN_INVOKED)
@@ -614,6 +615,8 @@ struct std::basic_common_reference<kumi::tuple<Ts...>, kumi::tuple<Us...>, TQual
   using type = kumi::tuple<std::common_reference_t<TQual<Ts>, UQual<Us>>...>;
 };
 #endif
+template< typename T, std::size_t N >
+struct kumi::is_product_type<std::array<T , N>> : std::true_type {};
 #endif
 #include <iosfwd>
 #include <type_traits>

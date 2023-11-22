@@ -8,14 +8,7 @@
 #define TTS_MAIN
 #include <kumi/tuple.hpp>
 #include <tts/tts.hpp>
-#include <array>
 
-// --
-// -- Adapt a non-modifiable type
-// -- std::array already is already set for structured bindings so we just need to opt-in
-// --
-template<typename T, std::size_t N>
-struct kumi::is_product_type<std::array<T,N>> : std::true_type {};
 
 // --
 // -- Make a pre adapted type

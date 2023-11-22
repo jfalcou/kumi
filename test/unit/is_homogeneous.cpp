@@ -8,6 +8,7 @@
 #define TTS_MAIN
 #include <kumi/tuple.hpp>
 #include <tts/tts.hpp>
+#include <array>
 #include <concepts>
 
 TTS_CASE("Check is_homogeneous for kumi::tuple")
@@ -58,11 +59,6 @@ TTS_CASE("Check is_homogeneous for kumi::tuple derived types")
   TTS_CONSTEXPR_EXPECT_NOT((trivial_product_type<int,false>::is_homogeneous                ));
   TTS_CONSTEXPR_EXPECT_NOT((kumi::homogeneous_product_type<trivial_product_type<int,false>>));
 };
-
-#include <array>
-
-template<typename T, std::size_t N>
-struct kumi::is_product_type<std::array<T,N>> : std::true_type {};
 
 struct some_box
 {
