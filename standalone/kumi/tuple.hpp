@@ -904,7 +904,7 @@ namespace kumi
                                             , std::remove_cvref_t<std::tuple_element_t<pos.t[N],ts>>
                                             >...
                       >;
-        return type{get<pos.e[N]>(get<pos.t[N]>(tuples))...};
+        return type{get<pos.e[N]>(get<pos.t[N]>(KUMI_FWD(tuples)))...};
       }(kumi::forward_as_tuple(KUMI_FWD(ts)...), std::make_index_sequence<count-1>{});
     }
   }
