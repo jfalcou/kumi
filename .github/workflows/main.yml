@@ -157,29 +157,29 @@ jobs:
       - name: Compiling Unit Tests
         run:  cd build && make kumi-test -j 2
 
-  # msvc:
-  #   runs-on: [windows-2022]
-  #   strategy:
-  #     fail-fast: false
-  #     matrix:
-  #       cfg:
-  #       - { mode: Debug  , options: ""}
-  #       - { mode: Release, options: ""}
-  #   steps:
-  #     - name: Fetch current branch
-  #       uses: actions/checkout@v3
-  #     - name: Running CMake for MSVC ${{ matrix.cfg.mode }} ${{ matrix.cfg.options }}
-  #       run: |
-  #         mkdir build && cd build
-  #         cmake -G "Visual Studio 17 2022" -A x64 .. -DKUMI_BUILD_TEST=ON
-  #     - name: Compiling Unit Tests
-  #       run:  |
-  #         cd build
-  #         cmake --build . --target kumi-test --config ${{ matrix.cfg.mode }} --parallel 2
-  #     - name: Running Tests
-  #       run: |
-  #         cd build
-  #         ctest -C ${{ matrix.cfg.mode }} --output-on-failure
+  msvc:
+    runs-on: [windows-2022]
+    strategy:
+      fail-fast: false
+      matrix:
+        cfg:
+        - { mode: Debug  , options: ""}
+        - { mode: Release, options: ""}
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v3
+      - name: Running CMake for MSVC ${{ matrix.cfg.mode }} ${{ matrix.cfg.options }}
+        run: |
+          mkdir build && cd build
+          cmake -G "Visual Studio 17 2022" -A x64 .. -DKUMI_BUILD_TEST=ON
+      - name: Compiling Unit Tests
+        run:  |
+          cd build
+          cmake --build . --target kumi-test --config ${{ matrix.cfg.mode }} --parallel 2
+      - name: Running Tests
+        run: |
+          cd build
+          ctest -C ${{ matrix.cfg.mode }} --output-on-failure
 
   clang-cl:
     runs-on: [windows-2022]
