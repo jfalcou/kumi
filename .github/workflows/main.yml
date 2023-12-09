@@ -231,3 +231,27 @@ jobs:
         run:  |
           cd build
           ctest --output-on-failure -j 2
+
+  icpx:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/jfalcou/compilers:sycl-v1
+    strategy:
+      fail-fast: false
+      matrix:
+        cfg:
+        - { opts: "-O0"                }
+        - { opts: "-O3 -flto -DNDEBUG" }
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v3
+      - name: Running CMake for icpx with ${{ matrix.cfg.opts }}
+        run:  |
+          source /opt/intel/oneapi/setvars.sh
+          mkdir build
+          cd build
+          cmake ..  -G Ninja -DCMAKE_CXX_COMPILER=icpx -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}"
+      - name: Running Unit Tests
+        run:  |
+          cd build
+          ninja kumi-test -j 2 && ctest --output-on-failure -j 2
