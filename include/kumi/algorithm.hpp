@@ -43,6 +43,7 @@ namespace kumi
 #include <kumi/algorithm/push_pop.hpp>
 #include <kumi/algorithm/fold.hpp>
 #include <kumi/algorithm/minmax.hpp>
+#include <kumi/algorithm/partition.hpp>
 #include <kumi/algorithm/predicates.hpp>
 #include <kumi/algorithm/reorder.hpp>
 #include <kumi/algorithm/reduce.hpp>
