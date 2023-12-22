@@ -153,19 +153,49 @@ Helper type</h2>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/tuple.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;concepts&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;array&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;utility&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// std::array supports structured bindings so we just need to opt-in the Product Type semantic</span></div>
-<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, std::<span class="keywordtype">size_t</span> N&gt;</div>
-<div class="line"><span class="keyword">struct  </span><a class="code hl_struct" href="structkumi_1_1is__product__type.html">kumi::is_product_type</a>&lt;std::array&lt;T,N&gt;&gt; : std::true_type</div>
+<div class="line"><span class="keyword">struct </span>vec3</div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordtype">float</span> x, y, z;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I&gt;</div>
+<div class="line"><span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_function" href="namespacekumi.html#afa07a9995292cf82075b2f6855543268">get</a>(vec3 <span class="keyword">const</span>&amp; v) <span class="keyword">noexcept</span></div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==0) <span class="keywordflow">return</span> v.x;</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==1) <span class="keywordflow">return</span> v.y;</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==2) <span class="keywordflow">return</span> v.z;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I&gt;</div>
+<div class="line"><span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_function" href="namespacekumi.html#afa07a9995292cf82075b2f6855543268">get</a>(vec3&amp; v) <span class="keyword">noexcept</span></div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==0) <span class="keywordflow">return</span> v.x;</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==1) <span class="keywordflow">return</span> v.y;</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==2) <span class="keywordflow">return</span> v.z;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Opt-in for Product Type semantic</span></div>
+<div class="line"><span class="keyword">template</span>&lt;&gt;</div>
+<div class="line"><span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1is__product__type.html">kumi::is_product_type</a>&lt;vec3&gt; : std::true_type</div>
 <div class="line">{};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Adapt as structured bindable type</span></div>
+<div class="line"><span class="keyword">template</span>&lt;&gt;</div>
+<div class="line"><span class="keyword">struct  </span>std::tuple_size&lt;vec3&gt;</div>
+<div class="line">      : std::integral_constant&lt;std::size_t,3&gt; {};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I&gt; <span class="keyword">struct </span>std::tuple_element&lt;I,vec3&gt; { <span class="keyword">using </span>type = float; };</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">using </span>three_floats   = kumi::as_tuple_t&lt;std::array&lt;float,3&gt;&gt;;</div>
+<div class="line">  <span class="keyword">using </span>three_floats   = kumi::as_tuple_t&lt;vec3&gt;;</div>
 <div class="line">  <span class="keyword">using </span>single_type    = kumi::as_tuple_t&lt;float&gt;;</div>
-<div class="line">  <span class="keyword">using </span>three_pointers = kumi::as_tuple_t&lt;std::array&lt;float,3&gt;, std::add_pointer&gt;;</div>
+<div class="line">  <span class="keyword">using </span>three_pointers = kumi::as_tuple_t&lt;vec3, std::add_pointer&gt;;</div>
 <div class="line">  <span class="keyword">using </span>single_pointer = kumi::as_tuple_t&lt;float, std::add_pointer&gt;;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">static_assert</span>( std::same_as&lt;three_floats  , kumi::tuple&lt;float ,float ,float &gt; &gt;);</div>
@@ -173,6 +203,7 @@ Example:</h2>
 <div class="line">  <span class="keyword">static_assert</span>( std::same_as&lt;single_type   , kumi::tuple&lt;float&gt;  &gt;);</div>
 <div class="line">  <span class="keyword">static_assert</span>( std::same_as&lt;single_pointer, kumi::tuple&lt;float*&gt; &gt;);</div>
 <div class="line">}</div>
+<div class="ttc" id="anamespacekumi_html_afa07a9995292cf82075b2f6855543268"><div class="ttname"><a href="namespacekumi.html#afa07a9995292cf82075b2f6855543268">kumi::get</a></div><div class="ttdeci">KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) get(tuple&lt; Ts... &gt; &amp;&amp;arg) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition:</b> tuple.hpp:416</div></div>
 <div class="ttc" id="astructkumi_1_1is__product__type_html"><div class="ttname"><a href="structkumi_1_1is__product__type.html">kumi::is_product_type</a></div><div class="ttdoc">Opt-in traits for types behaving like a kumi::product_type.</div><div class="ttdef"><b>Definition:</b> traits.hpp:31</div></div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->

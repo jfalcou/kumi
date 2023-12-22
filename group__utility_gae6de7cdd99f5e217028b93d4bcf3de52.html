@@ -161,22 +161,53 @@ template&lt;product_type Type&gt; </div>
 Example</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/tuple.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;array&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;utility&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// std::array supports structured bindings so we just need to opt-in the Product Type semantic</span></div>
-<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, std::<span class="keywordtype">size_t</span> N&gt;</div>
-<div class="line"><span class="keyword">struct  </span><a class="code hl_struct" href="structkumi_1_1is__product__type.html">kumi::is_product_type</a>&lt;std::array&lt;T,N&gt;&gt; : std::true_type</div>
+<div class="line"><span class="keyword">struct </span>pixel</div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordtype">int</span> r, g, b;</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I&gt;</div>
+<div class="line"><span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_function" href="namespacekumi.html#afa07a9995292cf82075b2f6855543268">get</a>(pixel <span class="keyword">const</span>&amp; p) <span class="keyword">noexcept</span></div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==0) <span class="keywordflow">return</span> p.r;</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==1) <span class="keywordflow">return</span> p.g;</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==2) <span class="keywordflow">return</span> p.b;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I&gt;</div>
+<div class="line"><span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_function" href="namespacekumi.html#afa07a9995292cf82075b2f6855543268">get</a>(pixel&amp; p) <span class="keyword">noexcept</span></div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==0) <span class="keywordflow">return</span> p.r;</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==1) <span class="keywordflow">return</span> p.g;</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==2) <span class="keywordflow">return</span> p.b;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Opt-in for Product Type semantic</span></div>
+<div class="line"><span class="keyword">template</span>&lt;&gt;</div>
+<div class="line"><span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1is__product__type.html">kumi::is_product_type</a>&lt;pixel&gt; : std::true_type</div>
 <div class="line">{};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Adapt as structured bindable type</span></div>
+<div class="line"><span class="keyword">template</span>&lt;&gt;</div>
+<div class="line"><span class="keyword">struct  </span>std::tuple_size&lt;pixel&gt;</div>
+<div class="line">      : std::integral_constant&lt;std::size_t,3&gt; {};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I&gt; <span class="keyword">struct </span>std::tuple_element&lt;I,pixel&gt; { <span class="keyword">using </span>type = int; };</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  std::array&lt;int,3&gt; a = { 37, 15, 27};</div>
+<div class="line">  pixel a = { 37, 15, 27 };</div>
 <div class="line">  <span class="keyword">auto</span> b = <a class="code hl_function" href="group__utility_gae6de7cdd99f5e217028b93d4bcf3de52.html#gae6de7cdd99f5e217028b93d4bcf3de52">kumi::to_tuple</a>(a);</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; b &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__utility_gae6de7cdd99f5e217028b93d4bcf3de52_html_gae6de7cdd99f5e217028b93d4bcf3de52"><div class="ttname"><a href="group__utility_gae6de7cdd99f5e217028b93d4bcf3de52.html#gae6de7cdd99f5e217028b93d4bcf3de52">kumi::to_tuple</a></div><div class="ttdeci">constexpr auto to_tuple(Type &amp;&amp;t)</div><div class="ttdoc">Converts a kumi::product_type to an instance kumi::tuple.</div><div class="ttdef"><b>Definition:</b> convert.hpp:78</div></div>
+<div class="ttc" id="anamespacekumi_html_afa07a9995292cf82075b2f6855543268"><div class="ttname"><a href="namespacekumi.html#afa07a9995292cf82075b2f6855543268">kumi::get</a></div><div class="ttdeci">KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) get(tuple&lt; Ts... &gt; &amp;&amp;arg) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition:</b> tuple.hpp:416</div></div>
 <div class="ttc" id="astructkumi_1_1is__product__type_html"><div class="ttname"><a href="structkumi_1_1is__product__type.html">kumi::is_product_type</a></div><div class="ttdoc">Opt-in traits for types behaving like a kumi::product_type.</div><div class="ttdef"><b>Definition:</b> traits.hpp:31</div></div>
 </div><!-- fragment --> 
 </div>
