@@ -87,13 +87,25 @@ namespace kumi::_
 
   template<typename F, size_t... Is, typename Tuple>
   struct supports_apply_t<F, std::index_sequence<Is...>, Tuple>
-      : std::is_invocable<F, member_t<Is,Tuple>...>
+      : std::is_invocable<F, decltype(get<Is>(std::declval<Tuple &&>()))...>
   {
   };
 
   template<typename F, typename Tuple>
   concept supports_apply = _::
       supports_apply_t<F, std::make_index_sequence<size<Tuple>::value>, Tuple>::value;
+
+  template<typename F, typename Indices, typename Tuple> struct supports_nothrow_apply_t;
+
+  template<typename F, size_t... Is, typename Tuple>
+  struct supports_nothrow_apply_t<F, std::index_sequence<Is...>, Tuple>
+      : std::is_nothrow_invocable<F, decltype(get<Is>(std::declval<Tuple &&>()))...>
+  {
+  };
+
+  template<typename F, typename Tuple>
+  concept supports_nothrow_apply = _::
+      supports_nothrow_apply_t<F, std::make_index_sequence<size<Tuple>::value>, Tuple>::value;
 
   template<typename F, typename... Tuples>
   concept supports_call = _::
