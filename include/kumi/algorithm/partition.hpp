@@ -38,7 +38,8 @@ namespace kumi
   {
     constexpr auto pos = [&]()
     {
-      struct { std::size_t count = {}, cut = {}, t[kumi::size<T>::value]; } that{};
+      // MSVC is allergic to empty array
+      struct { std::size_t count = {}, cut = {}, t[1+kumi::size<T>::value]; } that{};
 
       auto locate = [&]<std::size_t... I>(std::index_sequence<I...>)
       {

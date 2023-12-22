@@ -1597,7 +1597,7 @@ namespace kumi
   {
     constexpr auto pos = [&]()
     {
-      struct { std::size_t count = {}, cut = {}, t[kumi::size<T>::value]; } that{};
+      struct { std::size_t count = {}, cut = {}, t[1+kumi::size<T>::value]; } that{};
       auto locate = [&]<std::size_t... I>(std::index_sequence<I...>)
       {
         (( Pred<kumi::element_t<I,T>>::value ? (that.t[that.count++] = I) : I),...);
