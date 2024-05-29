@@ -38,7 +38,7 @@ kumi::apply_traits_t<std::add_pointer, T> g(T const&)
 }
 
 template<typename... T>
-requires( std::floating_point<T> && ...)
+requires( std::is_floating_point_v<T> && ...)
 struct strict_traits
 {
   using type = bool;
