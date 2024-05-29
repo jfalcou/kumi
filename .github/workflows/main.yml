@@ -25,7 +25,7 @@ jobs:
         - { opts: "-O3 -flto -DNDEBUG"}
     steps:
       - name: Fetch current branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.1.1
       - name: KUMI using g++-11 with ${{ matrix.cfg.opts }}
         run:  |
           mkdir build
@@ -52,7 +52,7 @@ jobs:
         - { opts: "-O3 -flto -DNDEBUG"}
     steps:
       - name: Fetch current branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.1.1
       - name: KUMI using g++-12 with ${{ matrix.cfg.opts }}
         run:  |
           mkdir build
@@ -81,7 +81,7 @@ jobs:
         - { opts: "-O0 -stdlib=libc++"                , linker: -stdlib=libc++ }
     steps:
       - name: Fetch current branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.1.1
       - name: KUMI using clang++ with ${{ matrix.cfg.opts }}
         run:  |
           mkdir build
@@ -109,7 +109,7 @@ jobs:
         - { opts: "-O3 -flto -DNDEBUG -stdlib=libc++" , linker: -stdlib=libc++  }
     steps:
       - name: Fetch current branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.1.1
       - name: Running CMake for clang++ with ${{ matrix.cfg.opts }}
         run: |
           mkdir build && cd build
@@ -129,7 +129,7 @@ jobs:
         - { opts: "-O3 -flto -DNDEBUG"}
     steps:
       - name: Fetch current branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.1.1
       - name: Running CMake for g++-11 with ${{ matrix.cfg.opts }}
         run: |
           mkdir build && cd build
@@ -149,7 +149,7 @@ jobs:
         - { opts: "-O3 -flto -DNDEBUG"}
     steps:
       - name: Fetch current branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.1.1
       - name: Running CMake for g++ with ${{ matrix.cfg.opts }}
         run: |
           mkdir build && cd build
@@ -167,7 +167,7 @@ jobs:
         - { mode: Release, options: ""}
     steps:
       - name: Fetch current branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.1.1
       - name: Running CMake for MSVC ${{ matrix.cfg.mode }} ${{ matrix.cfg.options }}
         run: |
           mkdir build && cd build
@@ -191,7 +191,7 @@ jobs:
         - { mode: Release, options: ""}
     steps:
       - name: Fetch current branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.1.1
       - name: Running CMake for Clang-CL ${{ matrix.cfg.mode }} ${{ matrix.cfg.options }}
         run: |
           mkdir build && cd build
@@ -217,7 +217,7 @@ jobs:
         - { opts: "-O3 -flto -DNDEBUG"}
     steps:
       - name: Fetch current branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.1.1
       - name: KUMI using em++ with ${{ matrix.cfg.opts }}
         run:  |
           mkdir build
@@ -244,7 +244,7 @@ jobs:
         - { opts: "-O3 -flto -DNDEBUG" }
     steps:
       - name: Fetch current branch
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4.1.1
       - name: Running CMake for icpx with ${{ matrix.cfg.opts }}
         run:  |
           source /opt/intel/oneapi/setvars.sh
