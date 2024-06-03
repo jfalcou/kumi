@@ -47,7 +47,7 @@ namespace kumi
   {
     return [&]<std::size_t... N>(std::index_sequence<N...>)
     {
-      return kumi::tuple<element_t<N + I0, Tuple &&>...> {get<N + I0>(KUMI_FWD(t))...};
+      return kumi::tuple<typename element<N + I0, Tuple &&>::type...> {get<N + I0>(KUMI_FWD(t))...};
     }
     (std::make_index_sequence<I1 - I0>());
   }
