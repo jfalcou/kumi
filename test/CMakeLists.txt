@@ -9,9 +9,9 @@ set(root "${CMAKE_SOURCE_DIR}/test")
 ##======================================================================================================================
 ## Documentation tests
 ##======================================================================================================================
-copa_glob_unit(QUIET PATTERN "doc/*.cpp"  INTERFACE kumi_docs)
+copa_glob_unit(QUIET PATTERN "doc/*.cpp"  INTERFACE kumi_docs OPT_RELATIVE ${CMAKE_CURRENT_SOURCE_DIR})
 
 ##======================================================================================================================
 ## Unit tests
 ##======================================================================================================================
-copa_glob_unit(QUIET PATTERN "unit/*.cpp" INTERFACE kumi_test)
+copa_glob_unit(QUIET PATTERN "unit/*.cpp" INTERFACE kumi_test OPT_RELATIVE ${CMAKE_CURRENT_SOURCE_DIR})

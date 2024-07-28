@@ -69,7 +69,6 @@
   project(kumi-fetch LANGUAGES CXX)
 
   include(FetchContent)
-  set(KUMI_BUILD_TEST OFF)
   FetchContent_Declare(kumi GIT_REPOSITORY "https://github.com/jfalcou/kumi.git" GIT_TAG main)
   FetchContent_MakeAvailable(kumi)
 
