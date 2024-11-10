@@ -16,7 +16,7 @@ jobs:
   gcc-linux:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/jfalcou/compilers:v7
+      image: ghcr.io/jfalcou/compilers:v8
     strategy:
       fail-fast: false
       matrix:
@@ -43,7 +43,7 @@ jobs:
   gcc12-linux:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/jfalcou/compilers:v7
+      image: ghcr.io/jfalcou/compilers:v8
     strategy:
       fail-fast: false
       matrix:
@@ -70,7 +70,7 @@ jobs:
   clang-linux:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/jfalcou/compilers:v7
+      image: ghcr.io/jfalcou/compilers:v8
     strategy:
       fail-fast: false
       matrix:
@@ -98,7 +98,7 @@ jobs:
           ctest --output-on-failure -j 2
 
   clang-macosx:
-    runs-on: [macos-12]
+    runs-on: [macos-14]
     strategy:
       fail-fast: false
       matrix:
@@ -119,28 +119,8 @@ jobs:
       - name: Running Unit Tests
         run: cd build && ctest --output-on-failure -j 2
 
-  gcc-macosx:
-    runs-on: [macos-11]
-    strategy:
-      fail-fast: false
-      matrix:
-        cfg:
-        - { opts: -O0                 }
-        - { opts: "-O3 -flto -DNDEBUG"}
-    steps:
-      - name: Fetch current branch
-        uses: actions/checkout@v4.1.1
-      - name: Running CMake for g++-11 with ${{ matrix.cfg.opts }}
-        run: |
-          mkdir build && cd build
-          cmake .. -DCMAKE_CXX_COMPILER=g++-11 -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}"
-      - name: Compiling Unit Tests
-        run:  cd build && make kumi-test -j 2
-      - name: Running Unit Tests
-        run: cd build && ctest --output-on-failure -j 2
-
   android:
-    runs-on: [macos-12]
+    runs-on: [macos-14]
     strategy:
       fail-fast: false
       matrix:
@@ -208,7 +188,7 @@ jobs:
   wasm:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/jfalcou/compilers:v7
+      image: ghcr.io/jfalcou/compilers:v8
     strategy:
       fail-fast: false
       matrix:
