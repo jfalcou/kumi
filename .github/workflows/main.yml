@@ -26,34 +26,7 @@ jobs:
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v4.1.1
-      - name: KUMI using g++-11 with ${{ matrix.cfg.opts }}
-        run:  |
-          mkdir build
-          cd build
-          cmake ..  -G Ninja -DCMAKE_CXX_COMPILER=g++-11 -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}"
-      - name: Compile Unit Tests
-        run:  |
-          cd build
-          ninja kumi-test -j 2
-      - name: Running Unit Tests
-        run:  |
-          cd build
-          ctest --output-on-failure -j 2
-
-  gcc12-linux:
-    runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/jfalcou/compilers:v8
-    strategy:
-      fail-fast: false
-      matrix:
-        cfg:
-        - { opts: -O0                 }
-        - { opts: "-O3 -flto -DNDEBUG"}
-    steps:
-      - name: Fetch current branch
-        uses: actions/checkout@v4.1.1
-      - name: KUMI using g++-12 with ${{ matrix.cfg.opts }}
+      - name: KUMI using g++ with ${{ matrix.cfg.opts }}
         run:  |
           mkdir build
           cd build
@@ -130,7 +103,7 @@ jobs:
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v4.1.1
-      - name: Running CMake for g++ with ${{ matrix.cfg.opts }}
+      - name: Running CMake for clang++ for Android with ${{ matrix.cfg.opts }}
         run: |
           mkdir build && cd build
           cmake .. -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_ROOT/build/cmake/android.toolchain.cmake -DANDROID_ABI=arm64-v8a
