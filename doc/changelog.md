@@ -1,6 +1,51 @@
 Change Log {#changelog}
 ==========
 
+# Version 3.1 - Exquisite Epidote
+
+## What's Changed
+
+### Infrastructure Changes
+  - Migrate CMake infrastructure to [copacabana](https://github.com/jfalcou/copacabana)
+  - Integration tests are now run on merge to main.
+  - Improved warnings setup in Unit Tests
+  - CI now tests for:
+    - Android
+    - ICPX
+    - Mac OS X 14
+    - Visual Studio cl.exe
+    - Visual Studio clang-cl.exe
+    - WASM
+  - Documentation is now automatically built on merge to stop polluting PRs.
+  - People can use https://jfalcou.github.io/kumi/kumi.tag as a Doxygen Tag File in their own documentation.
+
+### New Features
+  - Optimize certain data layout and type computation to reduce symbol length.
+  - Add KUMI_TRIVIAL macro to ensure inlining of key functionalities.
+  - Add support for homogeneous tuple detection.
+  - Implement copy-efficient partition.
+  - Implement apply_traits that computes the result of a traits being applied to all elements of a product type.
+  - Add support for `std::invoke`-like calls in `apply`, contributed  by **jehelset**.
+  - Add `std::array` as a product type, contributed  by **jehelset**.
+  - Allow for automatic std adaptation to be disengaged via macro.
+
+### Bug Fixes
+  - Fix #55 - Shortcut to pure fold expression whenever possible in reduction.
+  - Fix #64 - Adapt kumi::tuple to std::common_reference.
+  - Fix #69 - Better apply and for_each SFINAE compliance.
+  - Fix #70 - Sign issue with iota.
+  - Fix #71 - Support for eductions without init values.
+  - Fix #77 - Adjust type computation of cat, contributed by **jehelset**.
+  - Fix as_tuple to work with non-product type value type.
+  - Fix predicates to work with non-product type.
+  - Fix sign issue with count.
+  - Fix SFINAE compliance of comparisons operator when used on tuples with non-comparables elements.
+  - Fix the definition of the non-empty product type concept.
+  - Fix unqualified make_tuple calls that ADL clashed with std::make_tuple.
+  - Remove useless != and fix size related checks on comparisons operators.
+
+**Full Changelog**: https://github.com/jfalcou/kumi/compare/v3.0...v3.1
+
 # Version 3.0 - Delicious Datolite
 
 This Release is an API break release.
