@@ -18,8 +18,8 @@ TTS_CASE("Check result::cartesian_product<Tuple...> behavior")
               , (kumi::tuple<kumi::tuple<int>,kumi::tuple<float>,kumi::tuple<double>>)
               );
 
-  TTS_TYPE_IS ( (kumi::result::cartesian_product_t<kumi::tuple<int&,float&&,double const&>>)
-              , (kumi::tuple<kumi::tuple<int&>,kumi::tuple<float&&>,kumi::tuple<double const&>>)
+  TTS_TYPE_IS ( (kumi::result::cartesian_product_t<kumi::tuple<int&,float,double const&>>)
+              , (kumi::tuple<kumi::tuple<int&>,kumi::tuple<float>,kumi::tuple<double const&>>)
               );
 
   TTS_TYPE_IS ( (kumi::result::cartesian_product_t<kumi::tuple<int,float,double>, kumi::tuple<int*,float*>>)

@@ -7,28 +7,32 @@
 //==================================================================================================
 #pragma once
 
+#include <kumi/utils/pp_helpers.hpp>
+
 namespace kumi
 {
 
   //================================================================================================
   namespace _
   {
-    template<std::size_t N, std::size_t... S> constexpr auto digits(std::size_t v) noexcept
+    template<std::size_t N, std::size_t... S> struct digits
     {
-      struct { std::size_t data[N]; } digits = {};
-      std::size_t shp[] = {S...};
-      std::size_t i = 0;
-
-      while(v != 0)
+      constexpr auto operator()(std::size_t v) noexcept
       {
-        digits.data[i] = v % shp[i];
-        v /= shp[i++];
+        struct { std::size_t data[N]; } digits = {};
+        std::size_t shp[N] = {S...};
+        std::size_t i = 0;
+
+        while(v != 0)
+        {
+          digits.data[i] = v % shp[i];
+          v /= shp[i++];
+        }
+
+        return digits;
       }
-
-      return digits;
-    }
+    };
   }
-
   // MSVC chokes on the other code for empty calls
 #if !defined(KUMI_DOXYGEN_INVOKED)
   KUMI_TRIVIAL_NODISCARD constexpr auto cartesian_product() { return kumi::tuple<>{}; }
@@ -59,16 +63,28 @@ namespace kumi
   template<product_type... Ts>
   [[nodiscard]] constexpr auto cartesian_product(Ts&&... ts)
   {
+    constexpr auto idx = [&]<std::size_t... I>(std::index_sequence<I...>)
+    {
+      kumi::_::digits<sizeof...(Ts),kumi::size_v<Ts>...> dgt{};
+      using t_t = decltype(dgt(0));
+      struct { t_t data[sizeof...(I)]; } that = {dgt(I)...};
+      return that;
+    }(std::make_index_sequence<(kumi::size_v<Ts> * ...)>{});
+
     auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>)
     {
-      constexpr auto dg = _::digits<sizeof...(Ts),kumi::size_v<Ts>...>(k);
-      using tuple_t = kumi::tuple<std::tuple_element_t<dg.data[I],std::remove_cvref_t<Ts>>...>;
-      return tuple_t{kumi::get<dg.data[I]>(std::forward<Ts>(ts))...};
+      auto tps = kumi::forward_as_tuple(ts...);
+      using tuple_t = kumi::tuple < std::tuple_element_t< idx.data[k].data[I]
+                                                        , std::remove_cvref_t<std::tuple_element_t<I,decltype(tps)>>
+                                                        >...
+                                  >;
+      return tuple_t{kumi::get<idx.data[k].data[I]>(kumi::get<I>(tps))...};
     };
 
     return [&]<std::size_t... N>(std::index_sequence<N...>)
     {
-      return kumi::make_tuple(maps( kumi::index<N>, std::make_index_sequence<sizeof...(ts)>{})...);
+      std::make_index_sequence<sizeof...(ts)> ids;
+      return kumi::make_tuple( maps(kumi::index<N>, ids)...);
     }(std::make_index_sequence<(kumi::size_v<Ts> * ...)>{});
   }
 
