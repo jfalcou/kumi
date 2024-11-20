@@ -69,7 +69,7 @@
   project(kumi-fetch LANGUAGES CXX)
 
   include(FetchContent)
-  FetchContent_Declare(kumi GIT_REPOSITORY "https://github.com/jfalcou/kumi.git")
+  FetchContent_Declare(kumi GIT_REPOSITORY "https://github.com/jfalcou/kumi.git" GIT_TAG main)
   FetchContent_MakeAvailable(kumi)
 
   add_executable(test_kumi ../main.cpp)
