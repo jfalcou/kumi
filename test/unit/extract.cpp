@@ -64,3 +64,19 @@ TTS_CASE("Check tuple::extract constexpr behavior")
   TTS_CONSTEXPR_EQUAL((kumi::extract(t,4_c))      , kumi::tuple {}                  );
   TTS_CONSTEXPR_EQUAL((kumi::extract(t,4_c, 4_c)) , kumi::tuple {}                  );
 };
+
+TTS_CASE("Check tuple::extract forwarding behavior")
+{
+  using namespace kumi::literals;
+
+  struct moveonly{
+    moveonly() = default;
+    moveonly(const moveonly &) = delete;
+    moveonly(moveonly &&) = default;
+    moveonly &operator=(const moveonly &) = delete;
+    moveonly &operator=(moveonly &&) = default;
+  };
+
+  kumi::tuple t = {moveonly{}, 3., 'f'};
+  TTS_EXPECT_COMPILES(t, { kumi::extract(std::move(t),0_c); });
+};
