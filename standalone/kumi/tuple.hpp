@@ -754,14 +754,13 @@ namespace kumi
       {
         auto y_less_x_prev  = rhs[i]  < lhs[i];
         auto x_less_y       = lhs[index_t<Index::value+1>{}] < rhs[index_t<Index::value+1>{}];
-        res                 = res || (x_less_y && !y_less_x_prev);
+        return x_less_y && !y_less_x_prev;
       };
-      [&]<std::size_t... I>(std::index_sequence<I...>)
+      return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        (order(index_t<I>{}),...);
+        return (res || ... || order(index_t<I>{}));
       }
       (std::make_index_sequence<sizeof...(Ts)-1>());
-      return res;
     }
     template<typename... Us>
     KUMI_TRIVIAL friend constexpr auto operator<=(tuple const &lhs, tuple<Us...> const &rhs) noexcept
@@ -906,18 +905,21 @@ namespace kumi
 {
   namespace _
   {
-    template<std::size_t N, std::size_t... S> constexpr auto digits(std::size_t v) noexcept
+    template<std::size_t N, std::size_t... S> struct digits
     {
-      struct { std::size_t data[N]; } digits = {};
-      std::size_t shp[N] = {S...};
-      std::size_t i = 0;
-      while(v != 0)
+      constexpr auto operator()(std::size_t v) noexcept
       {
-        digits.data[i] = v % shp[i];
-        v /= shp[i++];
+        struct { std::size_t data[N]; } digits = {};
+        std::size_t shp[N] = {S...};
+        std::size_t i = 0;
+        while(v != 0)
+        {
+          digits.data[i] = v % shp[i];
+          v /= shp[i++];
+        }
+        return digits;
       }
-      return digits;
-    }
+    };
   }
 #if !defined(KUMI_DOXYGEN_INVOKED)
   KUMI_TRIVIAL_NODISCARD constexpr auto cartesian_product() { return kumi::tuple<>{}; }
@@ -927,8 +929,9 @@ namespace kumi
   {
     constexpr auto idx = [&]<std::size_t... I>(std::index_sequence<I...>)
     {
-      using t_t = decltype(kumi::_::digits<sizeof...(Ts),kumi::size_v<Ts>...>(0));
-      struct { t_t data[sizeof...(I)]; } that = {kumi::_::digits<sizeof...(Ts),kumi::size_v<Ts>...>(I)...};
+      kumi::_::digits<sizeof...(Ts),kumi::size_v<Ts>...> dgt{};
+      using t_t = decltype(dgt(0));
+      struct { t_t data[sizeof...(I)]; } that = {dgt(I)...};
       return that;
     }(std::make_index_sequence<(kumi::size_v<Ts> * ...)>{});
     auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>)
