@@ -200,16 +200,14 @@ namespace kumi
       {
         auto y_less_x_prev  = rhs[i]  < lhs[i];
         auto x_less_y       = lhs[index_t<Index::value+1>{}] < rhs[index_t<Index::value+1>{}];
-        res                 = res || (x_less_y && !y_less_x_prev);
+        return x_less_y && !y_less_x_prev;
       };
 
-      [&]<std::size_t... I>(std::index_sequence<I...>)
+      return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        (order(index_t<I>{}),...);
+        return (res || ... || order(index_t<I>{}));
       }
       (std::make_index_sequence<sizeof...(Ts)-1>());
-
-      return res;
     }
 
     /// @ingroup tuple
