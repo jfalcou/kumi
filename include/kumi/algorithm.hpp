@@ -49,4 +49,5 @@ namespace kumi
 #include <kumi/algorithm/reduce.hpp>
 #include <kumi/algorithm/reverse.hpp>
 #include <kumi/algorithm/transpose.hpp>
+#include <kumi/algorithm/traits.hpp>
 #include <kumi/algorithm/zip.hpp>
