@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['helper_20types_20and_20functions_0',['Helper Types and Functions',['../group__utility.html',1,'']]]
+  ['algorithms_0',['Tuple Algorithms',['../group__algorithm.html',1,'']]],
+  ['and_20functions_1',['and functions',['../group__utility.html',1,'Helper Types and Functions'],['../group__tuple.html',1,'Tuple Types and Functions']]]
 ];

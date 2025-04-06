@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['reorder_0',['reorder',['../group__generators_ga6a0d19d47ea70b25b1ad09ea9202f592.html#ga6a0d19d47ea70b25b1ad09ea9202f592',1,'kumi']]],
-  ['reverse_1',['reverse',['../group__generators_ga49abf24bfdc3e6c8707cd321d9015212.html#ga49abf24bfdc3e6c8707cd321d9015212',1,'kumi']]]
+  ['licence_0',['licence',['../licence.html',1,'Licence'],['../index.html#autotoc_md135',1,'Licence']]],
+  ['literals_1',['literals',['../namespaceliterals.html',1,'']]],
+  ['locate_2',['locate',['../group__queries_ga5b528cf4282e026dc1efb52ab546bf81.html#ga5b528cf4282e026dc1efb52ab546bf81',1,'kumi']]],
+  ['log_3',['Change Log',['../changelog.html',1,'']]]
 ];

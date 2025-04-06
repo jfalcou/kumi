@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['element_0',['element',['../structkumi_1_1element.html',1,'kumi']]],
-  ['empty_1',['empty',['../structkumi_1_1tuple.html#a1528baca5725019f4ef52b2aadd919e6',1,'kumi::tuple']]],
-  ['extract_2',['extract',['../group__generators_ga9d67ce72cbaa5c87a582cc6b913ee8e3.html#ga9d67ce72cbaa5c87a582cc6b913ee8e3',1,'kumi::extract(Tuple const &amp;t, index_t&lt; I0 &gt; i0, index_t&lt; I1 &gt; i1) noexcept'],['../namespacekumi.html#a9d1de1fea414717f4b1fb44c62ead1b3',1,'kumi::extract(Tuple const &amp;t, index_t&lt; I0 &gt; i0) noexcept']]]
+  ['3_200_20delicious_20datolite_0',['Version 3.0 - Delicious Datolite',['../changelog.html#autotoc_md117',1,'']]],
+  ['3_201_20exquisite_20epidote_1',['Version 3.1 - Exquisite Epidote',['../changelog.html#autotoc_md112',1,'']]]
 ];

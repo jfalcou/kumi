@@ -1,17 +1,6 @@
 var searchData=
 [
-  ['the_20c_2b_2b20_20compact_20tuple_20tools_0',['The C++20 Compact Tuple Tools',['../index.html',1,'']]],
-  ['tie_1',['tie',['../group__tuple_ga3b5a893567431a62dce006d10f23854b.html#ga3b5a893567431a62dce006d10f23854b',1,'kumi::tuple']]],
-  ['to_5fref_2',['to_ref',['../group__tuple_ga8c39a63412ff38a02ffd6bc2394581ca.html#ga8c39a63412ff38a02ffd6bc2394581ca',1,'kumi::tuple']]],
-  ['to_5ftuple_3',['to_tuple',['../group__utility_gae6de7cdd99f5e217028b93d4bcf3de52.html#gae6de7cdd99f5e217028b93d4bcf3de52',1,'kumi']]],
-  ['transpose_4',['transpose',['../group__generators_ga1a15bc7904a51c4854d17c177b88027a.html#ga1a15bc7904a51c4854d17c177b88027a',1,'kumi']]],
-  ['tuple_5',['tuple',['../structkumi_1_1tuple.html',1,'kumi::tuple&lt; Ts &gt;'],['../group__tuple_ga446a0931c46caf9cfb2f3977a2492624.html#ga446a0931c46caf9cfb2f3977a2492624',1,'kumi::tuple::tuple()']]],
-  ['tuple_20algorithms_6',['Tuple Algorithms',['../group__algorithm.html',1,'']]],
-  ['tuple_20generalized_20reductions_7',['Tuple Generalized Reductions',['../group__reductions.html',1,'']]],
-  ['tuple_20generators_8',['Tuple Generators',['../group__generators.html',1,'']]],
-  ['tuple_20queries_9',['Tuple Queries',['../group__queries.html',1,'']]],
-  ['tuple_20related_20concepts_10',['Tuple Related Concepts',['../group__concepts.html',1,'']]],
-  ['tuple_20related_20traits_11',['Tuple Related Traits',['../group__traits.html',1,'']]],
-  ['tuple_20transformations_12',['Tuple Transformations',['../group__transforms.html',1,'']]],
-  ['tuple_20types_20and_20functions_13',['Tuple Types and Functions',['../group__tuple.html',1,'']]]
+  ['new_20contributors_0',['New Contributors',['../changelog.html#autotoc_md122',1,'']]],
+  ['new_20features_1',['new features',['../changelog.html#autotoc_md115',1,'New Features'],['../changelog.html#autotoc_md120',1,'New Features'],['../changelog.html#autotoc_md126',1,'New Features'],['../changelog.html#autotoc_md131',1,'New Features']]],
+  ['none_5fof_2',['none_of',['../group__queries_gaad40e49ccd63af4301c797b29b371394.html#gaad40e49ccd63af4301c797b29b371394',1,'kumi::none_of(Tuple const &amp;ts, Pred p) noexcept'],['../group__queries_ga5efc50044b53b7bb4c17ba3a521c289a.html#ga5efc50044b53b7bb4c17ba3a521c289a',1,'kumi::none_of(Tuple const &amp;ts) noexcept']]]
 ];

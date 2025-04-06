@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['change_20log_0',['Change Log',['../changelog.html',1,'']]]
+  ['20_20compact_20tuple_20tools_0',['The C++20 Compact Tuple Tools',['../index.html',1,'']]]
 ];

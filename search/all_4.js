@@ -1,12 +1,16 @@
 var searchData=
 [
-  ['flatten_0',['flatten',['../group__generators_gaeefb24a9d75d8753477bae03bc6e205c.html#gaeefb24a9d75d8753477bae03bc6e205c',1,'kumi']]],
-  ['flatten_5fall_1',['flatten_all',['../group__generators_ga152d59e645273cd17b762b839db88dbb.html#ga152d59e645273cd17b762b839db88dbb',1,'kumi::flatten_all(Tuple &amp;&amp;ts, Func &amp;&amp;f)'],['../namespacekumi.html#a16916472ef4928dc9ed24a99cc4da97f',1,'kumi::flatten_all(Tuple &amp;&amp;ts)']]],
-  ['fold_5fleft_2',['fold_left',['../group__reductions_gaf5c5a77520eb5db15716f55fdb413579.html#gaf5c5a77520eb5db15716f55fdb413579',1,'kumi::fold_left(Function f, Tuple &amp;&amp;t, Value init)'],['../group__reductions_gaed0714239b395a2ac14d3a6a3ec3f44c.html#gaed0714239b395a2ac14d3a6a3ec3f44c',1,'kumi::fold_left(Function f, Tuple &amp;&amp;t)']]],
-  ['fold_5fright_3',['fold_right',['../group__reductions_gaa2bdd088d82f635a5c52c6dd5bdeaaf2.html#gaa2bdd088d82f635a5c52c6dd5bdeaaf2',1,'kumi::fold_right(Function f, Tuple &amp;&amp;t, Value init)'],['../group__reductions_ga20c7d2a3b7e7044f95ec352e64cd1b27.html#ga20c7d2a3b7e7044f95ec352e64cd1b27',1,'kumi::fold_right(Function f, Tuple &amp;&amp;t)']]],
-  ['for_5feach_4',['for_each',['../group__transforms_ga757e3791ec5e2353fa1f52ec6dafdcb1.html#ga757e3791ec5e2353fa1f52ec6dafdcb1',1,'kumi']]],
-  ['for_5feach_5findex_5',['for_each_index',['../group__transforms_gab74a95670c1baa3ec7e7905d42a5f216.html#gab74a95670c1baa3ec7e7905d42a5f216',1,'kumi']]],
-  ['forward_5fas_5ftuple_6',['forward_as_tuple',['../group__tuple_ga2e59034f40a923f671b72a88cc1ed045.html#ga2e59034f40a923f671b72a88cc1ed045',1,'kumi::tuple']]],
-  ['from_5ftuple_7',['from_tuple',['../group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48',1,'kumi']]],
-  ['front_8',['front',['../group__utility_ga0fc57b54b71d2726c24df5ddbab97bd3.html#ga0fc57b54b71d2726c24df5ddbab97bd3',1,'kumi']]]
+  ['a_20short_20example_0',['A Short Example',['../index.html#autotoc_md134',1,'']]],
+  ['algorithms_1',['Tuple Algorithms',['../group__algorithm.html',1,'']]],
+  ['all_5fof_2',['all_of',['../group__queries_ga262f5e099c46aacaf7b117033b22b7e8.html#ga262f5e099c46aacaf7b117033b22b7e8',1,'kumi::all_of(T const &amp;ts, Pred p) noexcept'],['../group__queries_ga40bf2969c7b8a6fdf5c8eecf6a1436a2.html#ga40bf2969c7b8a6fdf5c8eecf6a1436a2',1,'kumi::all_of(T const &amp;ts) noexcept']]],
+  ['amazing_20amethyst_3',['Version 1.0 - Amazing Amethyst',['../changelog.html#autotoc_md132',1,'']]],
+  ['amethyst_4',['Version 1.0 - Amazing Amethyst',['../changelog.html#autotoc_md132',1,'']]],
+  ['and_20functions_5',['and functions',['../group__utility.html',1,'Helper Types and Functions'],['../group__tuple.html',1,'Tuple Types and Functions']]],
+  ['and_20infrastructure_20changes_6',['API and Infrastructure Changes',['../changelog.html#autotoc_md119',1,'']]],
+  ['any_5fof_7',['any_of',['../group__queries_ga8d7de5c00a3b6cfc1fc4a8ed3bea53b2.html#ga8d7de5c00a3b6cfc1fc4a8ed3bea53b2',1,'kumi::any_of(T const &amp;ts, Pred p) noexcept'],['../group__queries_gafdfb5550011004d4306d9c8a67586d66.html#gafdfb5550011004d4306d9c8a67586d66',1,'kumi::any_of(T const &amp;ts) noexcept']]],
+  ['api_20and_20infrastructure_20changes_8',['API and Infrastructure Changes',['../changelog.html#autotoc_md119',1,'']]],
+  ['apply_9',['apply',['../group__transforms_ga612ed868d8ee0ecabcdaa0d6a7c116fb.html#ga612ed868d8ee0ecabcdaa0d6a7c116fb',1,'kumi']]],
+  ['as_5fflat_5fptr_10',['as_flat_ptr',['../group__generators_ga592ec585976cc6544c799402a5c4ef1c.html#ga592ec585976cc6544c799402a5c4ef1c',1,'kumi']]],
+  ['as_5ftuple_11',['as_tuple',['../structkumi_1_1as__tuple.html',1,'kumi']]],
+  ['autonomous_20public_20release_12',['First autonomous public release.',['../changelog.html#autotoc_md133',1,'']]]
 ];
