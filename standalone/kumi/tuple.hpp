@@ -484,7 +484,7 @@ namespace kumi
       ((value = value * 10 + (c - '0')), ...);
       return value;
     }
-    template<char... c> constexpr auto operator"" _c() noexcept { return index<b10<c...>()>; }
+    template<char... c> constexpr auto operator""_c() noexcept { return index<b10<c...>()>; }
   }
   template<template<class> class Pred> [[nodiscard]] constexpr auto predicate() noexcept
   {

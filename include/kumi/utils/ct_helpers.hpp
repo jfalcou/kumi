@@ -52,7 +52,7 @@ namespace kumi
     //! ## Example:
     //! @include doc/index.cpp
     //==============================================================================================
-    template<char... c> constexpr auto operator"" _c() noexcept { return index<b10<c...>()>; }
+    template<char... c> constexpr auto operator""_c() noexcept { return index<b10<c...>()>; }
   }
 
   //================================================================================================
