@@ -18,9 +18,9 @@ struct nary_traits : std::integral_constant<std::size_t, sizeof(T)>
 
 TTS_CASE("Check map_traits behavior")
 {
-  using mapped = kumi::tuple< std::integral_constant<std::size_t, 4>, std::integral_constant<std::size_t, 1>
-                            , std::integral_constant<std::size_t, 8>, std::integral_constant<std::size_t, 4>
-                            , std::integral_constant<std::size_t, 8>, std::integral_constant<std::size_t, 2>
+  using mapped = kumi::tuple< std::integral_constant<std::size_t, sizeof(int)>      , std::integral_constant<std::size_t, sizeof(char)>
+                            , std::integral_constant<std::size_t, sizeof(void*)>    , std::integral_constant<std::size_t, sizeof(float)>
+                            , std::integral_constant<std::size_t, sizeof(double)>   , std::integral_constant<std::size_t, sizeof(short)>
                             >;
 
   TTS_TYPE_IS ( (kumi::map_traits_t < nary_traits
