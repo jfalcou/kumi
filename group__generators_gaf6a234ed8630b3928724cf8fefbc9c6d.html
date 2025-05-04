@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__generators_ga148569641f64ccb586aaa65ccb6d1ae6.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__generators_gaf6a234ed8630b3928724cf8fefbc9c6d.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,13 +121,13 @@ $(document).ready(function(){initNavTree('group__generators_ga148569641f64ccb586
 </div>
 
 <div class="contents">
-<a id="ga148569641f64ccb586aaa65ccb6d1ae6" name="ga148569641f64ccb586aaa65ccb6d1ae6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga148569641f64ccb586aaa65ccb6d1ae6">&#9670;&#160;</a></span>generate()</h2>
+<a id="gaf6a234ed8630b3928724cf8fefbc9c6d" name="gaf6a234ed8630b3928724cf8fefbc9c6d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaf6a234ed8630b3928724cf8fefbc9c6d">&#9670;&#160;</a></span>generate()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::size_t N, <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">typename</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T</a> &gt; </div>
+template&lt;std::size_t N, <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">typename</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Function</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -135,8 +135,8 @@ template&lt;std::size_t N, <a class="el" href="group__utility_gad8e73ef5a6e05c2a
         <tr>
           <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a> kumi::generate </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">const</a> &amp;&#160;</td>
-          <td class="paramname"><em>v</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Function</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">const</a> &amp;&#160;</td>
+          <td class="paramname"><em>f</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -147,7 +147,7 @@ template&lt;std::size_t N, <a class="el" href="group__utility_gad8e73ef5a6e05c2a
 </table>
 </div><div class="memdoc">
 
-<p>Creates a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> containing <code>N</code> copies of <code>v</code>. </p>
+<p>Creates a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> containing <code>N</code> applications of the <code>f</code> Callable. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">N</td><td>Number of replications </td></tr>
@@ -156,23 +156,23 @@ template&lt;std::size_t N, <a class="el" href="group__utility_gad8e73ef5a6e05c2a
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">v</td><td>Value to replicate </td></tr>
+    <tr><td class="paramname">f</td><td>Callable to apply </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A tuple containing <code>N</code> copy of <code>v</code></dd></dl>
-<h2><a class="anchor" id="autotoc_md31"></a>
+<dl class="section return"><dt>Returns</dt><dd>A tuple containing <code>N</code> applications of <code>f</code></dd></dl>
+<h2><a class="anchor" id="autotoc_md33"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, <span class="keyword">typename</span> T&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__generators_ga148569641f64ccb586aaa65ccb6d1ae6.html#ga148569641f64ccb586aaa65ccb6d1ae6">generate</a>;</div>
+<div class="line">  <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, <span class="keyword">typename</span> Function&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__generators_gaf6a234ed8630b3928724cf8fefbc9c6d.html#gaf6a234ed8630b3928724cf8fefbc9c6d">generate</a>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, <span class="keyword">typename</span> T&gt;</div>
-<div class="line">  <span class="keyword">using </span>generate_t = <span class="keyword">typename</span> generate&lt;N, T&gt;::type;</div>
+<div class="line">  <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, <span class="keyword">typename</span> Function&gt;</div>
+<div class="line">  <span class="keyword">using </span>generate_t = <span class="keyword">typename</span> generate&lt;N, Function&gt;::type;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__generators_ga148569641f64ccb586aaa65ccb6d1ae6_html_ga148569641f64ccb586aaa65ccb6d1ae6"><div class="ttname"><a href="group__generators_ga148569641f64ccb586aaa65ccb6d1ae6.html#ga148569641f64ccb586aaa65ccb6d1ae6">kumi::generate</a></div><div class="ttdeci">constexpr auto generate(T const &amp;v) noexcept</div><div class="ttdoc">Creates a kumi::tuple containing N copies of v.</div><div class="ttdef"><b>Definition</b> generate.hpp:42</div></div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__generators_ga148569641f64ccb586aaa65ccb6d1ae6.html#ga148569641f64ccb586aaa65ccb6d1ae6" title="Creates a kumi::tuple containing N copies of v.">kumi::generate</a></p>
-<h2><a class="anchor" id="autotoc_md32"></a>
+<div class="ttc" id="agroup__generators_gaf6a234ed8630b3928724cf8fefbc9c6d_html_gaf6a234ed8630b3928724cf8fefbc9c6d"><div class="ttname"><a href="group__generators_gaf6a234ed8630b3928724cf8fefbc9c6d.html#gaf6a234ed8630b3928724cf8fefbc9c6d">kumi::generate</a></div><div class="ttdeci">constexpr auto generate(Function const &amp;f) noexcept</div><div class="ttdoc">Creates a kumi::tuple containing N applications of the f Callable.</div><div class="ttdef"><b>Definition</b> generate.hpp:69</div></div>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__generators_gaf6a234ed8630b3928724cf8fefbc9c6d.html#gaf6a234ed8630b3928724cf8fefbc9c6d" title="Creates a kumi::tuple containing N applications of the f Callable.">kumi::generate</a></p>
+<h2><a class="anchor" id="autotoc_md34"></a>
 Example</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/tuple.hpp&gt;</span></div>
@@ -180,7 +180,8 @@ Example</h2>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">main</a>()</div>
 <div class="line">{</div>
-<div class="line">  std::cout &lt;&lt; kumi::generate&lt;7&gt;(42.63) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t</a> = [](<span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">p</a>){ <span class="keywordflow">return</span> 42.63 + <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">p</a>; };</div>
+<div class="line">  std::cout &lt;&lt; kumi::generate&lt;7&gt;(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:59</div></div>
 </div><!-- fragment --> 

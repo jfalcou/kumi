@@ -470,6 +470,13 @@
     </member>
     <member kind="function">
       <type>constexpr auto</type>
+      <name>fill</name>
+      <anchorfile>group__generators_gac1f2b67c16429675ca7b9106793f9001.html</anchorfile>
+      <anchor>gac1f2b67c16429675ca7b9106793f9001</anchor>
+      <arglist>(T const &amp;v) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
       <name>flatten</name>
       <anchorfile>group__generators_gaeefb24a9d75d8753477bae03bc6e205c.html</anchorfile>
       <anchor>gaeefb24a9d75d8753477bae03bc6e205c</anchor>
@@ -548,9 +555,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>generate</name>
-      <anchorfile>group__generators_ga148569641f64ccb586aaa65ccb6d1ae6.html</anchorfile>
-      <anchor>ga148569641f64ccb586aaa65ccb6d1ae6</anchor>
-      <arglist>(T const &amp;v) noexcept</arglist>
+      <anchorfile>group__generators_gaf6a234ed8630b3928724cf8fefbc9c6d.html</anchorfile>
+      <anchor>gaf6a234ed8630b3928724cf8fefbc9c6d</anchor>
+      <arglist>(Function const &amp;f) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1053,6 +1060,13 @@
     </member>
     <member kind="function">
       <type>constexpr auto</type>
+      <name>kumi::fill</name>
+      <anchorfile>group__generators_gac1f2b67c16429675ca7b9106793f9001.html</anchorfile>
+      <anchor>gac1f2b67c16429675ca7b9106793f9001</anchor>
+      <arglist>(T const &amp;v) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
       <name>kumi::flatten</name>
       <anchorfile>group__generators_gaeefb24a9d75d8753477bae03bc6e205c.html</anchorfile>
       <anchor>gaeefb24a9d75d8753477bae03bc6e205c</anchor>
@@ -1068,9 +1082,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::generate</name>
-      <anchorfile>group__generators_ga148569641f64ccb586aaa65ccb6d1ae6.html</anchorfile>
-      <anchor>ga148569641f64ccb586aaa65ccb6d1ae6</anchor>
-      <arglist>(T const &amp;v) noexcept</arglist>
+      <anchorfile>group__generators_gaf6a234ed8630b3928724cf8fefbc9c6d.html</anchorfile>
+      <anchor>gaf6a234ed8630b3928724cf8fefbc9c6d</anchor>
+      <arglist>(Function const &amp;f) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
