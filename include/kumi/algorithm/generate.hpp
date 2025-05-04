@@ -9,12 +9,6 @@
 
 namespace kumi
 {
-  namespace _
-  {
-    template<std::size_t N, typename T>
-    constexpr auto const& eval(T const& v) noexcept { return v; }
-  }
-
   //================================================================================================
   //! @ingroup generators
   //! @brief Creates a kumi::tuple containing `N` copies of `v`.
@@ -27,10 +21,43 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<std::size_t N, typename T> struct generate;
+  //!   template<std::size_t N, typename T> struct fill;
   //!
   //!   template<std::size_t N, typename T>
-  //!   using generate_t = typename generate<N, T>::type;
+  //!   using fill_t = typename fill<N, T>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::fill
+  //!
+  //! ## Example
+  //! @include doc/fill.cpp
+  //================================================================================================
+  template<std::size_t N, typename T> [[nodiscard]] constexpr auto fill(T const& v) noexcept
+  {
+    return [&]<std::size_t... I>(std::index_sequence<I...>)
+    {
+      auto eval = [](auto, auto const& v) { return v; };
+      return kumi::tuple{eval(index<I>, v)...};
+    }(std::make_index_sequence<N>{});
+  }
+
+  //================================================================================================
+  //! @ingroup generators
+  //! @brief Creates a kumi::tuple containing `N` applications of the `f` Callable.
+  //!
+  //! @tparam N Number of replications
+  //! @param  f Callable to apply
+  //! @return A tuple containing `N` applications of `f`
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<std::size_t N, typename Function> struct generate;
+  //!
+  //!   template<std::size_t N, typename Function>
+  //!   using generate_t = typename generate<N, Function>::type;
   //! }
   //! @endcode
   //!
@@ -39,11 +66,11 @@ namespace kumi
   //! ## Example
   //! @include doc/generate.cpp
   //================================================================================================
-  template<std::size_t N, typename T> [[nodiscard]] constexpr auto generate(T const& v) noexcept
+  template<std::size_t N, typename Function> [[nodiscard]] constexpr auto generate(Function const& f) noexcept
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>)
     {
-      return kumi::tuple{_::eval<I>(v)...};
+      return kumi::tuple{f(index<I>)...};
     }(std::make_index_sequence<N>{});
   }
 
@@ -81,9 +108,15 @@ namespace kumi
 
   namespace result
   {
-    template<std::size_t N, typename T> struct generate
+    
+    template<std::size_t N, typename T> struct fill
     {
-      using type = decltype( kumi::generate<N>( std::declval<T>() ) );
+      using type = decltype( kumi::fill<N>( std::declval<T>() ) );
+    };
+
+    template<std::size_t N, typename Function> struct generate
+    {
+      using type = decltype( kumi::generate<N>( std::declval<Function>() ) );
     };
 
     template<std::size_t N, typename T> struct iota
@@ -92,7 +125,10 @@ namespace kumi
     };
 
     template<std::size_t N, typename T>
-    using generate_t = typename generate<N,T>::type;
+    using fill_t = typename fill<N,T>::type;
+
+    template<std::size_t N, typename Function>
+    using generate_t = typename generate<N,Function>::type;
 
     template<std::size_t N, typename T>
     using iota_t = typename iota<N,T>::type;

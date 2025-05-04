@@ -8,6 +8,5 @@
 
 int main()
 {
-  auto t = [](auto p){ return 42.63 + p; };
-  std::cout << kumi::generate<7>(t) << "\n";
+  std::cout << kumi::fill<7>(42.63) << "\n";
 }
