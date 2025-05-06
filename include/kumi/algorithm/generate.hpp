@@ -37,7 +37,7 @@ namespace kumi
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>)
     {
-      auto eval = [](auto, auto const& v) { return v; };
+      auto eval = [](auto, auto const& vv) { return vv; };
       return kumi::tuple{eval(index<I>, v)...};
     }(std::make_index_sequence<N>{});
   }
@@ -108,7 +108,7 @@ namespace kumi
 
   namespace result
   {
-    
+
     template<std::size_t N, typename T> struct fill
     {
       using type = decltype( kumi::fill<N>( std::declval<T>() ) );

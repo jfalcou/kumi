@@ -19,17 +19,17 @@ namespace kumi
     {
       constexpr auto operator()(std::size_t v) noexcept
       {
-        struct { std::size_t data[N]; } digits = {};
+        struct { std::size_t data[N]; } values = {};
         std::size_t shp[N] = {S...};
         std::size_t i = 0;
 
         while(v != 0)
         {
-          digits.data[i] = v % shp[i];
+          values.data[i] = v % shp[i];
           v /= shp[i++];
         }
 
-        return digits;
+        return values;
       }
     };
   }
