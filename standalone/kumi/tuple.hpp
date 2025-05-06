@@ -702,15 +702,6 @@ namespace kumi
     KUMI_TRIVIAL_NODISCARD static constexpr  auto size() noexcept { return sizeof...(Ts); }
     KUMI_TRIVIAL_NODISCARD static constexpr  bool empty() noexcept { return sizeof...(Ts) == 0; }
     template<typename... Us>
-    requires(   _::piecewise_convertible<tuple, tuple<Us...>>
-            &&  (sizeof...(Us) == sizeof...(Ts))
-            &&  (!std::same_as<Ts, Us> && ...)
-            )
-    [[nodiscard]] inline constexpr auto cast() const
-    {
-      return apply([](auto &&...elems) { return tuple<Us...> {static_cast<Us>(elems)...}; }, *this);
-    }
-    template<typename... Us>
     requires(_::piecewise_convertible<tuple, tuple<Us...>>) constexpr tuple &
     operator=(tuple<Us...> const &other)
     {
@@ -978,6 +969,43 @@ namespace kumi
       using type = decltype( kumi::cat( std::declval<Tuples>()... ) );
     };
     template<product_type... Tuples> using cat_t  = typename cat<Tuples...>::type;
+  }
+}
+namespace kumi
+{
+  template<product_type Target, product_type Base>
+  requires(  _::piecewise_convertible<Base, std::remove_cvref_t<Target>>
+          && (size_v<Base> == size_v<Target>)
+          && (!std::same_as<Base, Target>)
+          )
+  [[nodiscard]] constexpr Target tuple_cast(Base const& b)
+  {
+    return map_index([](auto idx, auto && elem)
+      {
+        return static_cast<kumi::element_t<idx, Target>>(elem);
+      }
+      , b
+    );
+  }
+  template<typename Target, product_type Base>
+  [[nodiscard]] constexpr auto member_cast(Base const& b)
+  {
+    return map([](auto && elem){ return static_cast<Target>(elem); }, b);
+  }
+  namespace result
+  {
+    template<product_type Target, product_type Base> struct tuple_cast
+    {
+      using type = decltype( kumi::tuple_cast<Target, Base>( std::declval<Base>() ) );
+    };
+    template<typename Target, product_type Base> struct member_cast 
+    {
+      using type = decltype( kumi::member_cast<Target, Base>( std::declval<Base>() ) );
+    };
+    template<product_type Target, product_type Base>
+    using tuple_cast_t = typename tuple_cast<Target,Base>::type;
+    template<typename Target, product_type Base>
+    using member_cast_t = typename member_cast<Target,Base>::type;
   }
 }
 namespace kumi

@@ -12,26 +12,6 @@
 #include <string>
 #include <compare>
 
-TTS_CASE("Check tuple to tuple conversion")
-{
-  kumi::tuple in{short{49},62.5f};
-
-  TTS_EQUAL ( (in.cast<int ,double>() ) , (kumi::tuple{49 ,62.5}) );
-  TTS_EQUAL ( (in.cast<char,int>()    ) , (kumi::tuple{'1',62})   );
-
-  TTS_EQUAL ( kumi::tuple{"some text"}.cast<std::string>()
-            , kumi::tuple{std::string("some text")}
-            );
-};
-
-TTS_CASE("Check tuple to tuple constexpr conversion")
-{
-  constexpr kumi::tuple in{short{49},62.5f};
-
-  TTS_CONSTEXPR_EQUAL ( (in.cast<int ,double>() ) , (kumi::tuple{49 ,62.5}) );
-  TTS_CONSTEXPR_EQUAL ( (in.cast<char,int>()    ) , (kumi::tuple{'1',62})   );
-};
-
 struct my_struct
 {
   std::size_t n;
