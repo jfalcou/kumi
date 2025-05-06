@@ -11,7 +11,7 @@ int main()
   auto lhs = kumi::tuple{1,2,3};
   auto rhs = kumi::tuple{2.5,3.6,4.7};
 
-  auto r = kumi::map( [](auto l, auto r) { return l*r; }, lhs, rhs);
+  auto res = kumi::map( [](auto l, auto r) { return l*r; }, lhs, rhs);
 
-  std::cout << r << "\n";
+  std::cout << res << "\n";
 }

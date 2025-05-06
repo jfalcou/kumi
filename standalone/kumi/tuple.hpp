@@ -888,15 +888,15 @@ namespace kumi
     {
       constexpr auto operator()(std::size_t v) noexcept
       {
-        struct { std::size_t data[N]; } digits = {};
+        struct { std::size_t data[N]; } values = {};
         std::size_t shp[N] = {S...};
         std::size_t i = 0;
         while(v != 0)
         {
-          digits.data[i] = v % shp[i];
+          values.data[i] = v % shp[i];
           v /= shp[i++];
         }
-        return digits;
+        return values;
       }
     };
   }
@@ -961,10 +961,10 @@ namespace kumi
       }();
       return [&]<std::size_t... N>(auto&& tuples, std::index_sequence<N...>)
       {
-        using ts  = std::remove_cvref_t<decltype(tuples)>;
+        using rts  = std::remove_cvref_t<decltype(tuples)>;
         using type =  kumi::tuple
                       < std::tuple_element_t< pos.e[N]
-                                            , std::remove_cvref_t<std::tuple_element_t<pos.t[N],ts>>
+                                            , std::remove_cvref_t<std::tuple_element_t<pos.t[N],rts>>
                                             >...
                       >;
         return type{get<pos.e[N]>(get<pos.t[N]>(KUMI_FWD(tuples)))...};
@@ -1205,7 +1205,7 @@ namespace kumi
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>)
     {
-      auto eval = [](auto, auto const& v) { return v; };
+      auto eval = [](auto, auto const& vv) { return vv; };
       return kumi::tuple{eval(index<I>, v)...};
     }(std::make_index_sequence<N>{});
   }

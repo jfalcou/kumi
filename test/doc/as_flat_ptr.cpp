@@ -15,7 +15,7 @@ int main()
   std::cout << a << "\n";
   std::cout << ptr << "\n";
 
-  kumi::for_each([](auto ptr) { *ptr += 5; }, ptr );
+  kumi::for_each([](auto p) { *p += 5; }, ptr );
 
   std::cout << a << "\n";
 }
