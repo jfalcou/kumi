@@ -8,8 +8,11 @@
 
 int main()
 {
-  kumi::tuple a = { 65, 2.3, 4.5f};
-  auto b = a.cast<char,int,double>();
+  using target_t = kumi::tuple<int, bool, float, long>;
+
+  kumi::tuple a = { 14.f, 42, '7', short{89} };
+  
+  auto b = kumi::tuple_cast<target_t>(a);
 
   std::cout << a << "\n";
   std::cout << b << "\n";
