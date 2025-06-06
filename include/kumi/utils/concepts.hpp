@@ -8,6 +8,7 @@
 #pragma once
 
 #include <kumi/detail/concepts.hpp>
+#include <kumi/detail/str.hpp>
 #include <concepts>
 #include <cstddef>
 #include <type_traits>
@@ -100,27 +101,31 @@ namespace kumi
     template<typename... Ts>
     constexpr bool check_unique_names()
     {
+      constexpr kumi::str empty_str = {""};
       if constexpr (sizeof...(Ts) == 0) return false;
       else
       { 
         kumi::str names[] = {( []()
         {
-          return unwrap_name_v<Ts>;
+          if constexpr( is_member_capture_v<Ts> )
+            return unwrap_name_v<Ts>;
+          else
+            return empty_str;
         }())...};
         
         for(std::size_t i=0;i<sizeof...(Ts);++i)
         {
-          if(names[i] == "") continue;
+          if(names[i] == empty_str) continue;
           for(std::size_t j=i+1;j<sizeof...(Ts);++j)
           {
-            if(names[j] == "") continue;
+            if(names[j] == empty_str) continue;
             else if(names[i] == names[j]) return false;
           }
         }
         return true;
       }
     };
-  }
+   }
  
   //================================================================================================
   //! @ingroup concepts

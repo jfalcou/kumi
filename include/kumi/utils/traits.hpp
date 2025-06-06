@@ -11,7 +11,7 @@
 #include <type_traits>
 #include <utility>
 
-#include <kumi/detail/field.hpp>
+#include <kumi/detail/unit_type.hpp>
 
 namespace kumi
 {
@@ -179,8 +179,8 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup traits
-  //! @brief Returns the underlying name of a kumi::member_capture if it is the type of T
-  //! return an empty kumi::str otherwise 
+  //! @brief Returns the underlying name of a kumi::member_capture if T is a member_capture
+  //!        returns the unit type otherwise 
   //!
   //! @tparam T The type to access
   //!
@@ -188,25 +188,37 @@ namespace kumi
   //! @code
   //! namespace kumi
   //! {
-  //!   template<typename T> using unwrap_name_v = typename unwrap_name<T>::value;
+  //!   template<typename T> using unwrap_name_v = unwrap_name<T>::value;
   //! }
   //! @endcode
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T> using unwrap_name_t = unwrap_name<T>::type;
+  //! }
   //================================================================================================
   template<typename T>
   struct unwrap_name
-  { 
-    static constexpr auto value = kumi::str{""}; 
+  {
+    using type = unit;
+    static constexpr auto value = unit{}; 
   };
 
   template<typename T>
-  requires (requires { T::is_member_capture; })
+  requires ( requires { T::is_member_capture; } )
   struct unwrap_name<T>
-  { 
+  {
+    using type = std::remove_cvref_t<decltype(T::name)>;
     static constexpr auto value = T::name;
   };
 
   template<typename T>
   inline constexpr auto unwrap_name_v = unwrap_name<T>::value;
+    
+  template<typename T>
+  using unwrap_name_t = typename unwrap_name<T>::type;
 
   // Forward declaration
   template<typename... Ts> struct tuple;

@@ -8,7 +8,7 @@
 #pragma once
 
 #include <kumi/utils/pp_helpers.hpp>
-#include <kumi/detail/field.hpp>
+#include <kumi/detail/str.hpp>
 
 namespace kumi
 {
@@ -30,29 +30,7 @@ namespace kumi
 
     static constexpr auto name = ID;
     static constexpr bool is_member_capture = true;
-    //==============================================================================================
-    //! @name Conversions
-    //! @{
-    //==============================================================================================
     
-    //==============================================================================================
-    //! @brief  Converts the member_capture<ID, T> to it's underlying type T.
-    //! @tparam Us Types composing the destination tuple
-    //!
-    //==============================================================================================
-    constexpr operator T () const noexcept 
-    {
-      if constexpr (std::is_rvalue_reference_v<T>)
-        return std::move(value);
-      else
-        return value; 
-    };
-
-    constexpr operator T& () noexcept { return value; };
-    //==============================================================================================
-    //! @}
-    //==============================================================================================
-
     //==============================================================================================
     /// @ingroup member_capture
     //! @related kumi::member_capture
@@ -63,6 +41,18 @@ namespace kumi
       return os << ID << " : " << w.value;
     }
   };
+    
+  namespace _
+  {
+    template<kumi::str ID, typename T>
+    KUMI_TRIVIAL constexpr T       &  get_member(member_capture<ID, T>       & a) noexcept { return a.value; }
+    template<kumi::str ID, typename T>
+    KUMI_TRIVIAL constexpr T       && get_member(member_capture<ID, T>       &&a) noexcept { return static_cast<T&&>(a.value); }
+    template<kumi::str ID, typename T>
+    KUMI_TRIVIAL constexpr T const && get_member(member_capture<ID, T> const &&a) noexcept { return static_cast<T const &&>(a.value); }
+    template<kumi::str ID, typename T>
+    KUMI_TRIVIAL constexpr T const &  get_member(member_capture<ID, T> const & a) noexcept { return a.value; }
+  }
 
   //================================================================================================
   //! @ingroup member_capture
@@ -81,14 +71,14 @@ namespace kumi
     
     //==============================================================================================
     //! @brief Builds a member_capture from the given value.
-    //! @tparam ID the compile time name to associate to the value.
-    //! @param  v the value to capture. 
+    //! @tparam T The type to wrap.
+    //! @param  v The value to capture. 
     //! @return A kumi::member_capture containing the value.
     //==============================================================================================
     template<typename T>
-    constexpr member_capture<ID, typename std::unwrap_ref_decay<T>::type> operator=(T&& v)
+    constexpr member_capture<ID, std::unwrap_ref_decay_t<T>> operator=(T v)
     {
-      return { KUMI_FWD(v) };
+      return { std::move(v) };
     }
 
     //==============================================================================================
@@ -101,24 +91,4 @@ namespace kumi
       return os << ID;
     }
   };
-
-  namespace literals
-  {
-    //==============================================================================================
-    //! @ingroup member_capture
-    //! @brief Forms a constant kumi::member_name of the desired ID.
-    //! @tparam ID the compile time name to build.
-    //! @return An instance of kumi::member_name for the specified string
-    //==============================================================================================
-    template<kumi::str ID>
-    inline constexpr auto member = kumi::member_name<ID>{};
-    
-    //==============================================================================================
-    //! @ingroup member_capture
-    //! @brief Forms a constant string literal of the desired value.
-    //! @return An instance of kumi::member_name for the specified string
-    //==============================================================================================
-    template<kumi::str ID> constexpr auto operator""_m() noexcept { return member<ID>; }
-  }
 }
-

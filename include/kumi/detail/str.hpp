@@ -7,7 +7,7 @@
 //==================================================================================================
 #pragma once
 
-#include <iostream>
+#include <ostream>
 #include <cstdint>
 
 namespace kumi 
@@ -19,7 +19,7 @@ namespace kumi
   //!
   //! kumi::str provides a way to define compile time names.
   //================================================================================================
-  struct str
+  struct str 
   {
     static constexpr std::size_t max_size = 64;
 
@@ -39,33 +39,11 @@ namespace kumi
     constexpr std::size_t       size()  const { return size_; }
     constexpr std::string_view  value() const { return std::string_view(&data_[0], size_); }
 
-    friend constexpr bool operator <=>(str const&, str const&) noexcept = default;
+    friend constexpr auto operator <=>(str const&, str const&) noexcept = default;
 
     friend std::ostream& operator<<(std::ostream& os, str const& s)
     {
         return os << '\'' << s.value() << '\'';
-    }
-  };
-
-  //================================================================================================
-  //! @ingroup str
-  //! @class str_list
-  //! @brief Compile time list of string used to retrieve named fields.
-  //!
-  //! kumi::str_list provides a way to define a compile time list of strings.
-  //!
-  //! @tparam Names A variadic number of non type template parameters kumi::str
-  //================================================================================================
-  template<auto... Names>
-  struct str_list
-  {
-    static constexpr std::size_t size = sizeof...(Names);
-
-    template<std::size_t I>
-    static constexpr auto get()
-    {
-        constexpr kumi::str namelist[] = {Names...};
-        return namelist[I];
     }
   };
 }

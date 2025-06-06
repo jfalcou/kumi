@@ -25,40 +25,15 @@ namespace kumi
 #include <cstddef>
 #include <type_traits>
 #include <utility>
-#include <iostream>
-#include <cstdint>
-namespace kumi 
+#include <ostream>
+namespace kumi
 {
-  struct str
+  struct unit 
   {
-    static constexpr std::size_t max_size = 64;
-    char            data_[max_size+1];
-    std::uint8_t    size_;
-    template<std::size_t N, std::size_t... Is>
-    constexpr str(const char (&s)[N], std::index_sequence<Is...>)
-        : data_{s[Is]...}, size_(N)
-    {}
-    template <std::size_t N>
-    constexpr str(const char (&s)[N])
-        : str{s, std::make_index_sequence<N>{}}
-    {}
-    constexpr std::size_t       size()  const { return size_; }
-    constexpr std::string_view  value() const { return std::string_view(&data_[0], size_); }
-    friend constexpr bool operator <=>(str const&, str const&) noexcept = default;
-    friend std::ostream& operator<<(std::ostream& os, str const& s)
+    friend constexpr auto operator<=>(unit, unit) noexcept = default;
+    friend std::ostream& operator<<(std::ostream& os, unit)
     {
-        return os << '\'' << s.value() << '\'';
-    }
-  };
-  template<auto... Names>
-  struct str_list
-  {
-    static constexpr std::size_t size = sizeof...(Names);
-    template<std::size_t I>
-    static constexpr auto get()
-    {
-        constexpr kumi::str namelist[] = {Names...};
-        return namelist[I];
+      return os << '\'' << "none" << '\'';
     }
   };
 }
@@ -112,17 +87,21 @@ namespace kumi
   using unwrap_member_capture_t = typename unwrap_member_capture<T>::type;
   template<typename T>
   struct unwrap_name
-  { 
-    static constexpr auto value = kumi::str{""}; 
+  {
+    using type = unit;
+    static constexpr auto value = unit{}; 
   };
   template<typename T>
-  requires (requires { T::is_member_capture; })
+  requires ( requires { T::is_member_capture; } )
   struct unwrap_name<T>
-  { 
+  {
+    using type = std::remove_cvref_t<decltype(T::name)>;
     static constexpr auto value = T::name;
   };
   template<typename T>
   inline constexpr auto unwrap_name_v = unwrap_name<T>::value;
+  template<typename T>
+  using unwrap_name_t = typename unwrap_name<T>::type;
   template<typename... Ts> struct tuple;
 }
 #include <cstddef>
@@ -529,6 +508,32 @@ namespace kumi::_
 #  pragma clang diagnostic ignored "-Wmissing-braces"
 #endif
 #define KUMI_FWD(...) static_cast<decltype(__VA_ARGS__) &&>(__VA_ARGS__)
+#include <ostream>
+#include <cstdint>
+namespace kumi 
+{
+  struct str 
+  {
+    static constexpr std::size_t max_size = 64;
+    char            data_[max_size+1];
+    std::uint8_t    size_;
+    template<std::size_t N, std::size_t... Is>
+    constexpr str(const char (&s)[N], std::index_sequence<Is...>)
+        : data_{s[Is]...}, size_(N)
+    {}
+    template <std::size_t N>
+    constexpr str(const char (&s)[N])
+        : str{s, std::make_index_sequence<N>{}}
+    {}
+    constexpr std::size_t       size()  const { return size_; }
+    constexpr std::string_view  value() const { return std::string_view(&data_[0], size_); }
+    friend constexpr auto operator <=>(str const&, str const&) noexcept = default;
+    friend std::ostream& operator<<(std::ostream& os, str const& s)
+    {
+        return os << '\'' << s.value() << '\'';
+    }
+  };
+}
 namespace kumi
 {
   template<kumi::str ID, typename T>
@@ -538,39 +543,36 @@ namespace kumi
     T value;
     static constexpr auto name = ID;
     static constexpr bool is_member_capture = true;
-    constexpr operator T () const noexcept 
-    {
-      if constexpr (std::is_rvalue_reference_v<T>)
-        return std::move(value);
-      else
-        return value; 
-    };
-    constexpr operator T& () noexcept { return value; };
     friend std::ostream& operator<<(std::ostream& os, member_capture const& w)
     {
       return os << ID << " : " << w.value;
     }
   };
+  namespace _
+  {
+    template<kumi::str ID, typename T>
+    KUMI_TRIVIAL constexpr T       &  get_member(member_capture<ID, T>       & a) noexcept { return a.value; }
+    template<kumi::str ID, typename T>
+    KUMI_TRIVIAL constexpr T       && get_member(member_capture<ID, T>       &&a) noexcept { return static_cast<T&&>(a.value); }
+    template<kumi::str ID, typename T>
+    KUMI_TRIVIAL constexpr T const && get_member(member_capture<ID, T> const &&a) noexcept { return static_cast<T const &&>(a.value); }
+    template<kumi::str ID, typename T>
+    KUMI_TRIVIAL constexpr T const &  get_member(member_capture<ID, T> const & a) noexcept { return a.value; }
+  }
   template<kumi::str ID>
   struct member_name
   {
     static constexpr auto name = ID;
     template<typename T>
-    constexpr member_capture<ID, typename std::unwrap_ref_decay<T>::type> operator=(T&& v)
+    constexpr member_capture<ID, std::unwrap_ref_decay_t<T>> operator=(T v)
     {
-      return { KUMI_FWD(v) };
+      return { std::move(v) };
     }
     friend std::ostream& operator<<(std::ostream& os, member_name const&)
     {
       return os << ID;
     }
   };
-  namespace literals
-  {
-    template<kumi::str ID>
-    inline constexpr auto member = kumi::member_name<ID>{};
-    template<kumi::str ID> constexpr auto operator""_m() noexcept { return member<ID>; }
-  }
 }
 namespace kumi
 {
@@ -584,7 +586,7 @@ namespace kumi
     constexpr inline      operator std::size_t() const noexcept { return N; }
   };
   template<std::size_t N> inline constexpr index_t<N> const index = {};
-  namespace literals
+  inline namespace literals
   {
     template<char... c> constexpr auto b10()
     {
@@ -593,6 +595,9 @@ namespace kumi
       return value;
     }
     template<char... c> constexpr auto operator""_c() noexcept { return index<b10<c...>()>; }
+    template<kumi::str ID>
+    inline constexpr auto member = kumi::member_name<ID>{};
+    template<kumi::str ID> constexpr auto operator""_m() noexcept { return member<ID>; }
   }
   template<template<class> class Pred> [[nodiscard]] constexpr auto predicate() noexcept
   {
@@ -635,26 +640,30 @@ namespace kumi
     template<typename... Ts>
     constexpr bool check_unique_names()
     {
+      constexpr kumi::str empty_str = {""};
       if constexpr (sizeof...(Ts) == 0) return false;
       else
       { 
         kumi::str names[] = {( []()
         {
-          return unwrap_name_v<Ts>;
+          if constexpr( is_member_capture_v<Ts> )
+            return unwrap_name_v<Ts>;
+          else
+            return empty_str;
         }())...};
         for(std::size_t i=0;i<sizeof...(Ts);++i)
         {
-          if(names[i] == "") continue;
+          if(names[i] == empty_str) continue;
           for(std::size_t j=i+1;j<sizeof...(Ts);++j)
           {
-            if(names[j] == "") continue;
+            if(names[j] == empty_str) continue;
             else if(names[i] == names[j]) return false;
           }
         }
         return true;
       }
     };
-  }
+   }
   template<typename... Ts>
   concept uniquely_named = _::check_unique_names<Ts...>(); 
 }
@@ -807,32 +816,17 @@ namespace kumi
   template<typename... Ts> struct tuple
   {
     using is_product_type = void;
-    using binder_t  = _::make_binder_t<std::make_integer_sequence<int,sizeof...(Ts)>, unwrap_member_capture_t<Ts>...>;
+    using binder_t  = _::make_binder_t<std::make_integer_sequence<int,sizeof...(Ts)>, Ts...>;
     static constexpr bool is_homogeneous= binder_t::is_homogeneous;
     binder_t impl;
-    template<std::size_t I>
-    requires(I < sizeof...(Ts))
-    KUMI_TRIVIAL constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) &noexcept
+    template<typename U>
+    static constexpr decltype(auto) unwrap_member_value(U&& u) noexcept
     {
-      return _::get_leaf<I>(impl);
-    }
-    template<std::size_t I>
-    requires(I < sizeof...(Ts))
-    KUMI_TRIVIAL constexpr decltype(auto) operator[](index_t<I>) &&noexcept
-    {
-      return _::get_leaf<I>(static_cast<decltype(impl) &&>(impl));
-    }
-    template<std::size_t I>
-    requires(I < sizeof...(Ts))
-    KUMI_TRIVIAL constexpr decltype(auto) operator[](index_t<I>) const &&noexcept
-    {
-      return _::get_leaf<I>(static_cast<decltype(impl) const &&>(impl));
-    }
-    template<std::size_t I>
-    requires(I < sizeof...(Ts))
-    KUMI_TRIVIAL constexpr decltype(auto) operator[](index_t<I>) const &noexcept
-    {
-      return _::get_leaf<I>(impl);
+      using T = std::remove_cvref_t<U>;
+      if constexpr ( is_member_capture_v<T> )
+        return _::get_member(KUMI_FWD(u));
+      else 
+        return KUMI_FWD(u);
     }
     template<auto Name>
     requires ( uniquely_named<Ts...> )
@@ -852,25 +846,64 @@ namespace kumi
       }(std::index_sequence_for<Ts...>{});
       return idx;
     };  
-    template<auto Name>
-    requires((get_name_index<Name>() < sizeof...(Ts)) && uniquely_named<Ts...> )
-    constexpr decltype(auto) operator[](member_name<Name> const&)
+    template<std::size_t I>
+    requires(I < sizeof...(Ts))
+    KUMI_TRIVIAL constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) &noexcept
     {
-      constexpr auto idx = get_name_index<Name>();
-      return get<idx>(*this);
+      return unwrap_member_value(_::get_leaf<I>(impl));
+    }
+    template<std::size_t I>
+    requires(I < sizeof...(Ts))
+    KUMI_TRIVIAL constexpr decltype(auto) operator[](index_t<I>) &&noexcept
+    {
+      return unwrap_member_value(_::get_leaf<I>(static_cast<decltype(impl) &&>(impl)));
+    }
+    template<std::size_t I>
+    requires(I < sizeof...(Ts))
+    KUMI_TRIVIAL constexpr decltype(auto) operator[](index_t<I>) const &&noexcept
+    {
+      return unwrap_member_value(_::get_leaf<I>(static_cast<decltype(impl) const &&>(impl)));
+    }
+    template<std::size_t I>
+    requires(I < sizeof...(Ts))
+    KUMI_TRIVIAL constexpr decltype(auto) operator[](index_t<I>) const &noexcept
+    {
+      return unwrap_member_value(_::get_leaf<I>(impl));
     }
     template<auto Name>
-    requires((get_name_index<Name>() < sizeof...(Ts)) && uniquely_named<Ts...> )
-    constexpr decltype(auto) operator[](member_name<Name> const&) const
+    requires( get_name_index<Name>() < sizeof...(Ts) )
+    constexpr decltype(auto) operator[](member_name<Name> const&) &noexcept
     {
       constexpr auto idx = get_name_index<Name>();
-      return get<idx>(*this);
+      return unwrap_member_value(_::get_leaf<idx>(impl));
+    }
+    template<auto Name>
+    requires( get_name_index<Name>() < sizeof...(Ts) )
+    constexpr decltype(auto) operator[](member_name<Name> const&) &&noexcept
+    {
+      constexpr auto idx = get_name_index<Name>();
+      return unwrap_member_value(_::get_leaf<idx>(static_cast<decltype(impl) &&>(impl)));
+    }
+    template<auto Name>
+    requires( get_name_index<Name>() < sizeof...(Ts) )
+    constexpr decltype(auto) operator[](member_name<Name> const&) const &&noexcept
+    {
+      constexpr auto idx = get_name_index<Name>();
+      return unwrap_member_value(_::get_leaf<idx>(static_cast<decltype(impl) const &&>(impl)));
+    }
+    template<auto Name>
+    requires( get_name_index<Name>() < sizeof...(Ts) )
+    constexpr decltype(auto) operator[](member_name<Name> const&) const &noexcept
+    {
+      constexpr auto idx = get_name_index<Name>();
+      return unwrap_member_value(_::get_leaf<idx>(impl));
     }
     KUMI_TRIVIAL_NODISCARD static constexpr  auto size() noexcept { return sizeof...(Ts); }
     KUMI_TRIVIAL_NODISCARD static constexpr  bool empty() noexcept { return sizeof...(Ts) == 0; }
     KUMI_TRIVIAL_NODISCARD static constexpr auto names() noexcept 
-    { 
-      return kumi::str_list<unwrap_name_v<Ts>...>{}; 
+    {   
+        using tuple_type = tuple<unwrap_name_t<Ts>...>;
+        return tuple_type{ unwrap_name_v<Ts>... };
     }; 
     template<typename... Us>
     requires(   _::piecewise_convertible<tuple, tuple<Us...>>
@@ -984,14 +1017,14 @@ namespace kumi
       return os;
     }
   };
-  template<typename... Ts> tuple(Ts &&...) -> tuple<typename std::unwrap_ref_decay<Ts>::type...>;
+  template<typename... Ts> tuple(Ts &&...) -> tuple<std::unwrap_ref_decay_t<Ts>...>;
   template<typename... Ts> KUMI_TRIVIAL_NODISCARD constexpr tuple<Ts &...> tie(Ts &...ts) { return {ts...}; }
   template<typename... Ts> KUMI_TRIVIAL_NODISCARD constexpr tuple<Ts &&...> forward_as_tuple(Ts &&...ts)
   {
     return {KUMI_FWD(ts)...};
   }
   template<typename... Ts>
-  KUMI_TRIVIAL_NODISCARD constexpr tuple<typename std::unwrap_ref_decay<Ts>::type...> make_tuple(Ts &&...ts)
+  KUMI_TRIVIAL_NODISCARD constexpr tuple<std::unwrap_ref_decay_t<Ts>...> make_tuple(Ts &&...ts)
   {
     return {KUMI_FWD(ts)...};
   }
@@ -1013,7 +1046,7 @@ namespace kumi
   requires(I < sizeof...(Ts)) KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
   get(tuple<Ts...> &&arg) noexcept
   {
-    return static_cast<tuple<Ts...> &&>(arg)[index<I>];
+    return static_cast<tuple<unwrap_member_capture_t<Ts>...> &&>(arg)[index<I>];
   }
   template<std::size_t I, typename... Ts>
   requires(I < sizeof...(Ts)) KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
@@ -1025,33 +1058,33 @@ namespace kumi
   requires(I < sizeof...(Ts)) KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
   get(tuple<Ts...> const &&arg) noexcept
   {
-    return static_cast<tuple<Ts...> const &&>(arg)[index<I>];
+    return static_cast<tuple<unwrap_member_capture_t<Ts>...> const &&>(arg)[index<I>];
   }
   template<member_name Name, typename... Ts>
   requires ( uniquely_named<Ts...> )
-  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
-  get(tuple<Ts...> &t)
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  get(tuple<Ts...> &t) noexcept
   {
       return t[Name];
   }
   template<member_name Name, typename... Ts>
   requires ( uniquely_named<Ts...> )
-  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
-  get(tuple<Ts...> &&arg)
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  get(tuple<Ts...> &&arg) noexcept
   {
     return static_cast<tuple<unwrap_member_capture_t<Ts>...> &&>(arg)[Name];
   }
   template<member_name Name, typename... Ts>
   requires ( uniquely_named<Ts...> )
-  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
-  get(tuple<Ts...> const &arg)
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  get(tuple<Ts...> const &arg) noexcept
   {
     return arg[Name];
   }
   template<member_name Name, typename... Ts>
   requires ( uniquely_named<Ts...> )
-  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
-  get(tuple<Ts...> const &&arg)
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  get(tuple<Ts...> const &&arg) noexcept
   {
     return static_cast<tuple<unwrap_member_capture_t<Ts>...> const &&>(arg)[Name];
   }
