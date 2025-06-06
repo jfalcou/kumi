@@ -94,4 +94,38 @@ namespace kumi
   //================================================================================================
   template<typename T, typename U>
   concept equality_comparable = (size_v<T> == size_v<U>) && _::check_equality<T,U>();
+
+  namespace _
+  {
+    template<typename... Ts>
+    constexpr bool check_unique_names()
+    {
+      if constexpr (sizeof...(Ts) == 0) return false;
+      else
+      { 
+        kumi::str names[] = {( []()
+        {
+          return unwrap_name_v<Ts>;
+        }())...};
+        
+        for(std::size_t i=0;i<sizeof...(Ts);++i)
+        {
+          if(names[i] == "") continue;
+          for(std::size_t j=i+1;j<sizeof...(Ts);++j)
+          {
+            if(names[j] == "") continue;
+            else if(names[i] == names[j]) return false;
+          }
+        }
+        return true;
+      }
+    };
+  }
+ 
+  //================================================================================================
+  //! @ingroup concepts
+  //! @brief Concept specifying a type only holds unique kumi::member_capture names.
+  //================================================================================================
+  template<typename... Ts>
+  concept uniquely_named = _::check_unique_names<Ts...>(); 
 }

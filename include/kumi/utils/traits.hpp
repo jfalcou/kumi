@@ -11,6 +11,8 @@
 #include <type_traits>
 #include <utility>
 
+#include <kumi/detail/field.hpp>
+
 namespace kumi
 {
   //================================================================================================
@@ -124,7 +126,88 @@ namespace kumi
   template<typename T>
   inline constexpr auto is_homogeneous_v = is_homogeneous<T>::value;
 
+
+  //================================================================================================
+  //! @ingroup traits
+  //! @brief Checks if a type is a kumi::member_capture 
+  //!
+  //! @tparam T The type to inspect
+  //!
+  //! ## Helper value
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T> inline constexpr auto member_capture_v = is_member_capture<T>::value;
+  //! }
+  //! @endcode
+  //================================================================================================
+  template<typename T>
+  struct is_member_capture : std::false_type{};
+
+  template<typename T>
+  requires (requires { T::is_member_capture; })
+  struct is_member_capture<T> : std::bool_constant<T::is_member_capture> 
+  {}; 
+
+  template<typename T>
+  inline constexpr bool is_member_capture_v = is_member_capture<T>::value;
+
+  //================================================================================================
+  //! @ingroup traits
+  //! @brief Returns the underlying type of a kumi::member_capture if it is the type of T
+  //! return T otherwise
+  //!
+  //! @tparam T The type to access
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T> using unwrap_member_capture_t = typename unwrap_member_capture<T>::type;
+  //! }
+  //! @endcode
+  //================================================================================================
+  template<typename T>
+  struct unwrap_member_capture { using type = T; };
+    
+  template<typename T> 
+  requires (requires { T::is_member_capture; })
+  struct unwrap_member_capture<T> { using type = T::type; };
+    
+  template<typename T>
+  using unwrap_member_capture_t = typename unwrap_member_capture<T>::type;
+
+  //================================================================================================
+  //! @ingroup traits
+  //! @brief Returns the underlying name of a kumi::member_capture if it is the type of T
+  //! return an empty kumi::str otherwise 
+  //!
+  //! @tparam T The type to access
+  //!
+  //! ## Helper value
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T> using unwrap_name_v = typename unwrap_name<T>::value;
+  //! }
+  //! @endcode
+  //================================================================================================
+  template<typename T>
+  struct unwrap_name
+  { 
+    static constexpr auto value = kumi::str{""}; 
+  };
+
+  template<typename T>
+  requires (requires { T::is_member_capture; })
+  struct unwrap_name<T>
+  { 
+    static constexpr auto value = T::name;
+  };
+
+  template<typename T>
+  inline constexpr auto unwrap_name_v = unwrap_name<T>::value;
+
   // Forward declaration
   template<typename... Ts> struct tuple;
 }
-

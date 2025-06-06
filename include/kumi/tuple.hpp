@@ -12,6 +12,7 @@
 #include <kumi/detail/abi.hpp>
 #include <kumi/detail/stdfix.hpp>
 #include <kumi/detail/binder.hpp>
+#include <kumi/detail/member_capture.hpp>
 #include <kumi/utils.hpp>
 
 #include <iosfwd>
@@ -34,9 +35,9 @@ namespace kumi
   template<typename... Ts> struct tuple
   {
     using is_product_type = void;
-    using binder_t  = _::make_binder_t<std::make_integer_sequence<int,sizeof...(Ts)>, Ts...>;
+    using binder_t  = _::make_binder_t<std::make_integer_sequence<int,sizeof...(Ts)>, unwrap_member_capture_t<Ts>...>;
 
-    static constexpr bool is_homogeneous = binder_t::is_homogeneous;
+    static constexpr bool is_homogeneous= binder_t::is_homogeneous;
 
     binder_t impl;
 
@@ -86,6 +87,57 @@ namespace kumi
       return _::get_leaf<I>(impl);
     }
 
+    /// Static helper to find the index associated to a name if it exists
+    template<auto Name>
+    requires ( uniquely_named<Ts...> )
+    static constexpr decltype(auto) get_name_index()
+    {
+      constexpr auto idx = []<std::size_t... N>(std::index_sequence<N...>)
+      {
+        bool checks[] = {( []()
+        {
+          if constexpr( is_member_capture_v<Ts> ) return Name == Ts::name;
+          else return false;
+        }
+        ())...};
+
+        for(std::size_t i=0;i<sizeof...(Ts);++i) 
+          if(checks[i]) return i;
+
+        return sizeof...(Ts); 
+      }(std::index_sequence_for<Ts...>{});
+      
+      return idx;
+    };  
+ 
+    //==============================================================================================
+    //! @brief Extracts the element labeled Name from a kumi::tuple
+    //!
+    //! @note Does not participate in overload resolution if `get_name_index<Name>` is not in [0, sizeof...(Ts)).
+    //!       or if the names are not unique
+    //! @param  Name Non type template parameter name of the element to access
+    //! @return A reference to the selected element of current tuple.
+    //!
+    //! ## Example:
+    //! @include doc/named_subscript.cpp
+    //==============================================================================================
+    template<auto Name>
+    requires((get_name_index<Name>() < sizeof...(Ts)) && uniquely_named<Ts...> )
+    constexpr decltype(auto) operator[](member_name<Name> const&)
+    {
+      constexpr auto idx = get_name_index<Name>();
+      return get<idx>(*this);
+    }
+
+    /// @overload
+    template<auto Name>
+    requires((get_name_index<Name>() < sizeof...(Ts)) && uniquely_named<Ts...> )
+    constexpr decltype(auto) operator[](member_name<Name> const&) const
+    {
+      constexpr auto idx = get_name_index<Name>();
+      return get<idx>(*this);
+    }
+
     //==============================================================================================
     //! @}
     //==============================================================================================
@@ -100,6 +152,11 @@ namespace kumi
     /// Returns `true` if a kumi::tuple contains 0 elements
     KUMI_TRIVIAL_NODISCARD static constexpr  bool empty() noexcept { return sizeof...(Ts) == 0; }
 
+    /// Returns the names of the elements in a kumi::tuple if there are any and empty string otherwise
+    KUMI_TRIVIAL_NODISCARD static constexpr auto names() noexcept 
+    { 
+      return kumi::str_list<unwrap_name_v<Ts>...>{}; 
+    }; 
     //==============================================================================================
     //! @}
     //==============================================================================================
@@ -430,6 +487,54 @@ namespace kumi
   get(tuple<Ts...> const &&arg) noexcept
   {
     return static_cast<tuple<Ts...> const &&>(arg)[index<I>];
+  }
+ 
+  //================================================================================================
+  //! @ingroup tuple
+  //! @brief Extracts the field labeled Name from a kumi::tuple
+  //!
+  //! @note Does not participate in overload resolution if the names are not unique
+  //! @tparam   Name Non type template parameter name of the element to access
+  //! @param    t Tuple to index
+  //! @return   A reference to the selected element of t.
+  //! @related kumi::tuple
+  //!
+  //! ## Example:
+  //! @include doc/named_get.cpp
+  //================================================================================================
+  template<member_name Name, typename... Ts>
+  requires ( uniquely_named<Ts...> )
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
+  get(tuple<Ts...> &t)
+  {
+      return t[Name];
+  }
+
+  /// @overload
+  template<member_name Name, typename... Ts>
+  requires ( uniquely_named<Ts...> )
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
+  get(tuple<Ts...> &&arg)
+  {
+    return static_cast<tuple<unwrap_member_capture_t<Ts>...> &&>(arg)[Name];
+  }
+
+  /// @overload
+  template<member_name Name, typename... Ts>
+  requires ( uniquely_named<Ts...> )
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
+  get(tuple<Ts...> const &arg)
+  {
+    return arg[Name];
+  }
+
+  /// @overload
+  template<member_name Name, typename... Ts>
+  requires ( uniquely_named<Ts...> )
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
+  get(tuple<Ts...> const &&arg)
+  {
+    return static_cast<tuple<unwrap_member_capture_t<Ts>...> const &&>(arg)[Name];
   }
 
   //================================================================================================
