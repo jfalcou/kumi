@@ -105,7 +105,7 @@ namespace kumi
       if constexpr (sizeof...(Ts) == 0) return false;
       else
       { 
-        kumi::str names[] = {( []()
+        kumi::str names[] = {( [&]()
         {
           if constexpr( is_member_capture_v<Ts> )
             return unwrap_name_v<Ts>;

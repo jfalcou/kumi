@@ -596,8 +596,8 @@ namespace kumi
     }
     template<char... c> constexpr auto operator""_c() noexcept { return index<b10<c...>()>; }
     template<kumi::str ID>
-    inline constexpr auto member = kumi::member_name<ID>{};
-    template<kumi::str ID> constexpr auto operator""_m() noexcept { return member<ID>; }
+    inline constexpr auto member_id = kumi::member_name<ID>{};
+    template<kumi::str ID> constexpr auto operator""_m() noexcept { return member_id<ID>; }
   }
   template<template<class> class Pred> [[nodiscard]] constexpr auto predicate() noexcept
   {
@@ -644,7 +644,7 @@ namespace kumi
       if constexpr (sizeof...(Ts) == 0) return false;
       else
       { 
-        kumi::str names[] = {( []()
+        kumi::str names[] = {( [&]()
         {
           if constexpr( is_member_capture_v<Ts> )
             return unwrap_name_v<Ts>;

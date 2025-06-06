@@ -60,14 +60,14 @@ namespace kumi
     //! @tparam ID the compile time name to build.
     //==============================================================================================
     template<kumi::str ID>
-    inline constexpr auto member = kumi::member_name<ID>{};
+    inline constexpr auto member_id = kumi::member_name<ID>{};
     
     //==============================================================================================
     //! @ingroup member_capture
     //! @brief Forms a constant string literal of the desired value.
     //! @return An instance of kumi::member_name for the specified string
     //==============================================================================================
-    template<kumi::str ID> constexpr auto operator""_m() noexcept { return member<ID>; }
+    template<kumi::str ID> constexpr auto operator""_m() noexcept { return member_id<ID>; }
   }
 
   //================================================================================================
