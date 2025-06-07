@@ -817,7 +817,7 @@ namespace kumi
   {
     using is_product_type = void;
     using binder_t  = _::make_binder_t<std::make_integer_sequence<int,sizeof...(Ts)>, Ts...>;
-    static constexpr bool is_homogeneous= binder_t::is_homogeneous;
+    static constexpr bool is_homogeneous = binder_t::is_homogeneous;
     binder_t impl;
     template<typename U>
     static constexpr decltype(auto) unwrap_member_value(U&& u) noexcept
@@ -830,7 +830,7 @@ namespace kumi
     }
     template<auto Name>
     requires ( uniquely_named<Ts...> )
-    static constexpr decltype(auto) get_name_index()
+    static constexpr decltype(auto) get_name_index() noexcept
     {
       constexpr auto idx = []<std::size_t... N>(std::index_sequence<N...>)
       {

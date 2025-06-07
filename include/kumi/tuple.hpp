@@ -37,7 +37,7 @@ namespace kumi
     using is_product_type = void;
     using binder_t  = _::make_binder_t<std::make_integer_sequence<int,sizeof...(Ts)>, Ts...>;
 
-    static constexpr bool is_homogeneous= binder_t::is_homogeneous;
+    static constexpr bool is_homogeneous = binder_t::is_homogeneous;
 
     binder_t impl;
     
@@ -55,7 +55,7 @@ namespace kumi
     /// Static helper to find the index associated to a name if it exists
     template<auto Name>
     requires ( uniquely_named<Ts...> )
-    static constexpr decltype(auto) get_name_index()
+    static constexpr decltype(auto) get_name_index() noexcept
     {
       constexpr auto idx = []<std::size_t... N>(std::index_sequence<N...>)
       {
@@ -181,7 +181,7 @@ namespace kumi
     /// Returns `true` if a kumi::tuple contains 0 elements
     KUMI_TRIVIAL_NODISCARD static constexpr  bool empty() noexcept { return sizeof...(Ts) == 0; }
 
-    /// Returns the names of the elements in a kumi::tuple if there are any and kumi::unit otherwise
+    /// Returns the names of the elements in a kumi::tuple 
     KUMI_TRIVIAL_NODISCARD static constexpr auto names() noexcept 
     {   
         using tuple_type = tuple<unwrap_name_t<Ts>...>;
