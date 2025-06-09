@@ -129,7 +129,7 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup traits
-  //! @brief Checks if a type is a kumi::member_capture 
+  //! @brief Checks if a type is a kumi::field_capture 
   //!
   //! @tparam T The type to inspect
   //!
@@ -137,24 +137,24 @@ namespace kumi
   //! @code
   //! namespace kumi
   //! {
-  //!   template<typename T> inline constexpr auto member_capture_v = is_member_capture<T>::value;
+  //!   template<typename T> inline constexpr auto field_capture_v = is_field_capture<T>::value;
   //! }
   //! @endcode
   //================================================================================================
   template<typename T>
-  struct is_member_capture : std::false_type{};
+  struct is_field_capture : std::false_type{};
 
   template<typename T>
-  requires (requires { T::is_member_capture; })
-  struct is_member_capture<T> : std::bool_constant<T::is_member_capture> 
+  requires (requires { T::is_field_capture; })
+  struct is_field_capture<T> : std::bool_constant<T::is_field_capture> 
   {}; 
 
   template<typename T>
-  inline constexpr bool is_member_capture_v = is_member_capture<T>::value;
+  inline constexpr bool is_field_capture_v = is_field_capture<T>::value;
 
   //================================================================================================
   //! @ingroup traits
-  //! @brief Returns the underlying type of a kumi::member_capture if it is the type of T
+  //! @brief Returns the underlying type of a kumi::field_capture if it is the type of T
   //! return T otherwise
   //!
   //! @tparam T The type to access
@@ -163,23 +163,23 @@ namespace kumi
   //! @code
   //! namespace kumi
   //! {
-  //!   template<typename T> using unwrap_member_capture_t = typename unwrap_member_capture<T>::type;
+  //!   template<typename T> using unwrap_field_capture_t = typename unwrap_field_capture<T>::type;
   //! }
   //! @endcode
   //================================================================================================
   template<typename T>
-  struct unwrap_member_capture { using type = T; };
+  struct unwrap_field_capture { using type = T; };
     
   template<typename T> 
-  requires (requires { T::is_member_capture; })
-  struct unwrap_member_capture<T> { using type = T::type; };
+  requires (requires { T::is_field_capture; })
+  struct unwrap_field_capture<T> { using type = T::type; };
     
   template<typename T>
-  using unwrap_member_capture_t = typename unwrap_member_capture<T>::type;
+  using unwrap_field_capture_t = typename unwrap_field_capture<T>::type;
 
   //================================================================================================
   //! @ingroup traits
-  //! @brief Returns the underlying name of a kumi::member_capture if T is a member_capture
+  //! @brief Returns the underlying name of a kumi::field_capture if T is a field_capture
   //!        returns the unit type otherwise 
   //!
   //! @tparam T The type to access
@@ -207,7 +207,7 @@ namespace kumi
   };
 
   template<typename T>
-  requires ( requires { T::is_member_capture; } )
+  requires ( requires { T::is_field_capture; } )
   struct unwrap_name<T>
   {
     using type = std::remove_cvref_t<decltype(T::name)>;

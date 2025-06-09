@@ -107,7 +107,7 @@ namespace kumi
       { 
         kumi::str names[] = {( [&]()
         {
-          if constexpr( is_member_capture_v<Ts> )
+          if constexpr( is_field_capture_v<Ts> )
             return unwrap_name_v<Ts>;
           else
             return empty_str;
@@ -129,8 +129,36 @@ namespace kumi
  
   //================================================================================================
   //! @ingroup concepts
-  //! @brief Concept specifying a type only holds unique kumi::member_capture names.
+  //! @brief Concept specifying a type only holds unique kumi::field_capture names.
   //================================================================================================
   template<typename... Ts>
-  concept uniquely_named = _::check_unique_names<Ts...>(); 
+  concept uniquely_named = _::check_unique_names<Ts...>();
+
+  namespace _
+  {
+    /// Static helper to find the index associated to a name if it exists
+    template<auto Name, typename... Ts>
+    requires ( uniquely_named<Ts...> )
+    constexpr decltype(auto) get_name_index() noexcept
+    {
+      constexpr auto idx = []<std::size_t... N>(std::index_sequence<N...>)
+      {
+        bool checks[] = {( []()
+        {
+          if constexpr( is_field_capture_v<Ts> ) return Name == Ts::name;
+          else return false;
+        }
+        ())...};
+
+        for(std::size_t i=0;i<sizeof...(Ts);++i) 
+          if(checks[i]) return i;
+
+        return sizeof...(Ts); 
+      }(std::index_sequence_for<Ts...>{});
+      return idx;
+    }; 
+  }
+
+  template<auto Name, typename... Ts>
+  concept contains_field = _::get_name_index<Name, Ts...>() < sizeof...(Ts);
 }

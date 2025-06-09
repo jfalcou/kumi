@@ -9,15 +9,15 @@
 #include <kumi/tuple.hpp>
 #include <tts/tts.hpp>
 
-TTS_CASE("Check member_capture type coherence")
+TTS_CASE("Check field_capture type coherence")
 {
     int x = 1;
 
-    auto a = kumi::member_capture<"x", int>{x};
-    auto b = kumi::member_capture<"x", const int>{x};
-    auto c = kumi::member_capture<"x", int&>{x};
-    auto d = kumi::member_capture<"x", int const &>{x};
-    auto e = kumi::member_capture<"x", int&&>{std::move(x)};
+    auto a = kumi::field_capture<"x", int>{x};
+    auto b = kumi::field_capture<"x", const int>{x};
+    auto c = kumi::field_capture<"x", int&>{x};
+    auto d = kumi::field_capture<"x", int const &>{x};
+    auto e = kumi::field_capture<"x", int&&>{std::move(x)};
 
     TTS_TYPE_IS((decltype(a.value)), int);
     TTS_TYPE_IS((decltype(b.value)), const int);
@@ -34,7 +34,7 @@ TTS_CASE("Check member_capture type coherence")
     TTS_EQUAL(x, 2);
 };
 
-TTS_CASE("Check member_capture type coherence through member_name")
+TTS_CASE("Check field_capture type coherence through field_name")
 {
     using namespace kumi::literals;
 
@@ -62,7 +62,7 @@ TTS_CASE("Check member_capture type coherence through member_name")
     TTS_EQUAL(x, 2);
 };
 
-TTS_CASE("Check kumi::tuple behavior with member_captures")
+TTS_CASE("Check kumi::tuple behavior with field_captures")
 {
     using namespace kumi::literals;
 
@@ -70,11 +70,11 @@ TTS_CASE("Check kumi::tuple behavior with member_captures")
     const int y = 2;
     int&& z     = std::move(x);
 
-    using f     = kumi::member_capture<"a", int         >; 
-    using fc    = kumi::member_capture<"b", int         >;
-    using fref  = kumi::member_capture<"c", int&        >;
-    using fcref = kumi::member_capture<"d", const int&  >;
-    using furef = kumi::member_capture<"e", int         >;
+    using f     = kumi::field_capture<"a", int         >; 
+    using fc    = kumi::field_capture<"b", int         >;
+    using fref  = kumi::field_capture<"c", int&        >;
+    using fcref = kumi::field_capture<"d", const int&  >;
+    using furef = kumi::field_capture<"e", int         >;
 
     using tpl   = kumi::tuple<f, fc, fref, fcref, furef>;
 

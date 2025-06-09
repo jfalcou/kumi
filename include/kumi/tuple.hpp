@@ -12,7 +12,7 @@
 #include <kumi/detail/abi.hpp>
 #include <kumi/detail/stdfix.hpp>
 #include <kumi/detail/binder.hpp>
-#include <kumi/detail/member_capture.hpp>
+#include <kumi/detail/field_capture.hpp>
 #include <kumi/utils.hpp>
 
 #include <iosfwd>
@@ -41,39 +41,6 @@ namespace kumi
 
     binder_t impl;
     
-    /// Static helper to get access to the underlying value of a kumi::member_capture
-    template<typename U>
-    static constexpr decltype(auto) unwrap_member_value(U&& u) noexcept
-    {
-      using T = std::remove_cvref_t<U>;
-      if constexpr ( is_member_capture_v<T> )
-        return _::get_member(KUMI_FWD(u));
-      else 
-        return KUMI_FWD(u);
-    }
-
-    /// Static helper to find the index associated to a name if it exists
-    template<auto Name>
-    requires ( uniquely_named<Ts...> )
-    static constexpr decltype(auto) get_name_index() noexcept
-    {
-      constexpr auto idx = []<std::size_t... N>(std::index_sequence<N...>)
-      {
-        bool checks[] = {( []()
-        {
-          if constexpr( is_member_capture_v<Ts> ) return Name == Ts::name;
-          else return false;
-        }
-        ())...};
-
-        for(std::size_t i=0;i<sizeof...(Ts);++i) 
-          if(checks[i]) return i;
-
-        return sizeof...(Ts); 
-      }(std::index_sequence_for<Ts...>{});
-      
-      return idx;
-    };  
     //==============================================================================================
     //! @name Accessors
     //! @{
@@ -93,7 +60,7 @@ namespace kumi
     requires(I < sizeof...(Ts))
     KUMI_TRIVIAL constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) &noexcept
     {
-      return unwrap_member_value(_::get_leaf<I>(impl));
+      return unwrap_field_value(_::get_leaf<I>(impl));
     }
 
     /// @overload
@@ -101,7 +68,7 @@ namespace kumi
     requires(I < sizeof...(Ts))
     KUMI_TRIVIAL constexpr decltype(auto) operator[](index_t<I>) &&noexcept
     {
-      return unwrap_member_value(_::get_leaf<I>(static_cast<decltype(impl) &&>(impl)));
+      return unwrap_field_value(_::get_leaf<I>(static_cast<decltype(impl) &&>(impl)));
     }
 
     /// @overload
@@ -109,7 +76,7 @@ namespace kumi
     requires(I < sizeof...(Ts))
     KUMI_TRIVIAL constexpr decltype(auto) operator[](index_t<I>) const &&noexcept
     {
-      return unwrap_member_value(_::get_leaf<I>(static_cast<decltype(impl) const &&>(impl)));
+      return unwrap_field_value(_::get_leaf<I>(static_cast<decltype(impl) const &&>(impl)));
     }
 
     /// @overload
@@ -117,7 +84,7 @@ namespace kumi
     requires(I < sizeof...(Ts))
     KUMI_TRIVIAL constexpr decltype(auto) operator[](index_t<I>) const &noexcept
     {
-      return unwrap_member_value(_::get_leaf<I>(impl));
+      return unwrap_field_value(_::get_leaf<I>(impl));
     }
  
     //==============================================================================================
@@ -133,38 +100,42 @@ namespace kumi
     //! @include doc/named_subscript.cpp
     //==============================================================================================
     template<auto Name>
-    requires( get_name_index<Name>() < sizeof...(Ts) )
-    constexpr decltype(auto) operator[](member_name<Name> const&) &noexcept
+    //requires( get_name_index<Name, Ts...>() < sizeof...(Ts) )
+    requires( contains_field<Name, Ts...> )
+    constexpr decltype(auto) operator[](field_name<Name> const&) &noexcept
     {
-      constexpr auto idx = get_name_index<Name>();
-      return unwrap_member_value(_::get_leaf<idx>(impl));
+      constexpr auto idx = _::get_name_index<Name, Ts...>();
+      return unwrap_field_value(_::get_leaf<idx>(impl));
     }
 
     /// @overload
     template<auto Name>
-    requires( get_name_index<Name>() < sizeof...(Ts) )
-    constexpr decltype(auto) operator[](member_name<Name> const&) &&noexcept
+    //requires( get_name_index<Name, Ts...>() < sizeof...(Ts) )
+    requires( contains_field<Name, Ts...> )
+    constexpr decltype(auto) operator[](field_name<Name> const&) &&noexcept
     {
-      constexpr auto idx = get_name_index<Name>();
-      return unwrap_member_value(_::get_leaf<idx>(static_cast<decltype(impl) &&>(impl)));
+      constexpr auto idx = _::get_name_index<Name, Ts...>();
+      return unwrap_field_value(_::get_leaf<idx>(static_cast<decltype(impl) &&>(impl)));
     }
 
     /// @overload
     template<auto Name>
-    requires( get_name_index<Name>() < sizeof...(Ts) )
-    constexpr decltype(auto) operator[](member_name<Name> const&) const &&noexcept
+    //requires( get_name_index<Name, Ts...>() < sizeof...(Ts) )
+    requires( contains_field<Name, Ts...> )
+    constexpr decltype(auto) operator[](field_name<Name> const&) const &&noexcept
     {
-      constexpr auto idx = get_name_index<Name>();
-      return unwrap_member_value(_::get_leaf<idx>(static_cast<decltype(impl) const &&>(impl)));
+      constexpr auto idx = _::get_name_index<Name, Ts...>();
+      return unwrap_field_value(_::get_leaf<idx>(static_cast<decltype(impl) const &&>(impl)));
     }
 
     /// @overload
     template<auto Name>
-    requires( get_name_index<Name>() < sizeof...(Ts) )
-    constexpr decltype(auto) operator[](member_name<Name> const&) const &noexcept
+    //requires( get_name_index<Name, Ts...>() < sizeof...(Ts) )
+    requires( contains_field<Name, Ts...> )
+    constexpr decltype(auto) operator[](field_name<Name> const&) const &noexcept
     {
-      constexpr auto idx = get_name_index<Name>();
-      return unwrap_member_value(_::get_leaf<idx>(impl));
+      constexpr auto idx = _::get_name_index<Name, Ts...>();
+      return unwrap_field_value(_::get_leaf<idx>(impl));
     }
 
     //==============================================================================================
@@ -500,7 +471,7 @@ namespace kumi
   requires(I < sizeof...(Ts)) KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
   get(tuple<Ts...> &&arg) noexcept
   {
-    return static_cast<tuple<unwrap_member_capture_t<Ts>...> &&>(arg)[index<I>];
+    return static_cast<tuple<unwrap_field_capture_t<Ts>...> &&>(arg)[index<I>];
   }
 
   /// @overload
@@ -516,7 +487,7 @@ namespace kumi
   requires(I < sizeof...(Ts)) KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
   get(tuple<Ts...> const &&arg) noexcept
   {
-    return static_cast<tuple<unwrap_member_capture_t<Ts>...> const &&>(arg)[index<I>];
+    return static_cast<tuple<unwrap_field_capture_t<Ts>...> const &&>(arg)[index<I>];
   }
  
   //================================================================================================
@@ -532,7 +503,7 @@ namespace kumi
   //! ## Example:
   //! @include doc/named_get.cpp
   //================================================================================================
-  template<member_name Name, typename... Ts>
+  template<field_name Name, typename... Ts>
   requires ( uniquely_named<Ts...> )
   KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
   get(tuple<Ts...> &t) noexcept
@@ -541,16 +512,16 @@ namespace kumi
   }
 
   /// @overload
-  template<member_name Name, typename... Ts>
+  template<field_name Name, typename... Ts>
   requires ( uniquely_named<Ts...> )
   KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
   get(tuple<Ts...> &&arg) noexcept
   {
-    return static_cast<tuple<unwrap_member_capture_t<Ts>...> &&>(arg)[Name];
+    return static_cast<tuple<unwrap_field_capture_t<Ts>...> &&>(arg)[Name];
   }
 
   /// @overload
-  template<member_name Name, typename... Ts>
+  template<field_name Name, typename... Ts>
   requires ( uniquely_named<Ts...> )
   KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
   get(tuple<Ts...> const &arg) noexcept
@@ -559,12 +530,12 @@ namespace kumi
   }
 
   /// @overload
-  template<member_name Name, typename... Ts>
+  template<field_name Name, typename... Ts>
   requires ( uniquely_named<Ts...> )
   KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
   get(tuple<Ts...> const &&arg) noexcept
   {
-    return static_cast<tuple<unwrap_member_capture_t<Ts>...> const &&>(arg)[Name];
+    return static_cast<tuple<unwrap_field_capture_t<Ts>...> const &&>(arg)[Name];
   }
 
   //================================================================================================

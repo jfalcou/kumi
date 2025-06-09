@@ -55,19 +55,19 @@ namespace kumi
     template<char... c> constexpr auto operator""_c() noexcept { return index<b10<c...>()>; }
 
     //==============================================================================================
-    //! @ingroup member_capture
-    //! @brief Forms a constant kumi::member_name of the desired ID.
+    //! @ingroup field_capture
+    //! @brief Forms a constant kumi::field_name of the desired ID.
     //! @tparam ID the compile time name to build.
     //==============================================================================================
     template<kumi::str ID>
-    inline constexpr auto member_id = kumi::member_name<ID>{};
+    inline constexpr auto field = kumi::field_name<ID>{};
     
     //==============================================================================================
-    //! @ingroup member_capture
+    //! @ingroup field_capture
     //! @brief Forms a constant string literal of the desired value.
-    //! @return An instance of kumi::member_name for the specified string
+    //! @return An instance of kumi::field_name for the specified string
     //==============================================================================================
-    template<kumi::str ID> constexpr auto operator""_m() noexcept { return member_id<ID>; }
+    template<kumi::str ID> constexpr auto operator""_m() noexcept { return field<ID>; }
   }
 
   //================================================================================================
