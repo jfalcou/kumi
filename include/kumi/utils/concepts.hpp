@@ -98,45 +98,25 @@ namespace kumi
 
   namespace _
   {
-    template<typename... Ts>
-    constexpr bool check_unique_names()
-    {
-      constexpr kumi::str empty_str = {""};
-      if constexpr (sizeof...(Ts) == 0) return false;
-      else
-      { 
-        kumi::str names[] = {( [&]()
-        {
-          if constexpr( is_field_capture_v<Ts> )
-            return unwrap_name_v<Ts>;
-          else
-            return empty_str;
-        }())...};
-        
-        for(std::size_t i=0;i<sizeof...(Ts);++i)
-        {
-          if(names[i] == empty_str) continue;
-          for(std::size_t j=i+1;j<sizeof...(Ts);++j)
-          {
-            if(names[j] == empty_str) continue;
-            else if(names[i] == names[j]) return false;
-          }
-        }
-        return true;
-      }
-    };
-   }
- 
+    template<typename T> struct box { using type = T; };
+  }
+
   //================================================================================================
   //! @ingroup concepts
-  //! @brief Concept specifying a type only holds unique kumi::field_capture names.
+  //! @brief Concept specifying if a parameter pack only holds unique types.
   //================================================================================================
   template<typename... Ts>
-  concept uniquely_named = _::check_unique_names<Ts...>();
+  concept uniquely_typed = all_uniques_v<_::box<Ts>...>;
+
+  //================================================================================================
+  //! @ingroup concepts
+  //! @brief Concept specifying if a parameter pack only holds unique kumi::field_capture names.
+  //================================================================================================
+  template<typename... Ts>
+  concept uniquely_named = all_unique_names_v<_::box<Ts>...>;
 
   namespace _
   {
-    /// Static helper to find the index associated to a name if it exists
     template<auto Name, typename... Ts>
     requires ( uniquely_named<Ts...> )
     constexpr decltype(auto) get_name_index() noexcept
@@ -159,6 +139,10 @@ namespace kumi
     }; 
   }
 
+  //================================================================================================
+  //! @ingroup concepts
+  //! @brief Concept specifying if Name is contained in a parameter pack.
+  //================================================================================================
   template<auto Name, typename... Ts>
   concept contains_field = _::get_name_index<Name, Ts...>() < sizeof...(Ts);
 }

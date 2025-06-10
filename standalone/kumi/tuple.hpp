@@ -103,6 +103,50 @@ namespace kumi
   inline constexpr auto unwrap_name_v = unwrap_name<T>::value;
   template<typename T>
   using unwrap_name_t = typename unwrap_name<T>::type;
+  namespace _
+  {
+    template <std::size_t, typename T> struct unique { operator T(); };
+    template <std::size_t, typename T> struct unique_name 
+    {
+      template<typename U = T, std::enable_if_t<is_field_capture_v<typename U::type>, bool> = true>
+      operator T();
+    };
+    inline std::true_type true_fn(...);
+  }
+  template <typename Ints, typename... Ts>
+  struct all_uniques;
+  template <>
+  struct all_uniques<std::index_sequence<>> { using type = std::true_type; };
+  template <std::size_t... Ints, typename... Ts>
+  struct all_uniques<std::index_sequence<Ints...>, Ts...>
+  {
+    struct all_uniques_inner : _::unique<Ints, Ts>... {};
+    template <typename... Us>
+    static auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
+    static std::false_type is_set(...);
+    using type = decltype(is_set(Ts{}...));
+  };
+  template<typename... Ts>
+  using all_uniques_t = typename all_uniques<std::index_sequence_for<Ts...>, Ts...>::type;
+  template<typename... Ts>
+  inline constexpr auto all_uniques_v = all_uniques_t<Ts...>::value;
+  template <typename Ints, typename... Ts>
+  struct all_unique_names;
+  template <>
+  struct all_unique_names<std::index_sequence<>> { using type = std::true_type; };
+  template <std::size_t... Ints, typename... Ts>
+  struct all_unique_names<std::index_sequence<Ints...>, Ts...>
+  {
+    struct all_uniques_inner : _::unique_name<Ints, Ts>... {};
+    template <typename... Us>
+    static auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
+    static std::false_type is_set(...);
+    using type = decltype(is_set(Ts{}...));
+  };
+  template<typename... Ts>
+  using all_unique_names_t = typename all_unique_names<std::index_sequence_for<Ts...>, Ts...>::type;
+  template<typename... Ts>
+  inline constexpr auto all_unique_names_v = all_unique_names_t<Ts...>::value;
   template<typename... Ts> struct tuple;
 }
 #include <cstddef>
@@ -607,7 +651,7 @@ namespace kumi
     template<char... c> constexpr auto operator""_c() noexcept { return index<b10<c...>()>; }
     template<kumi::str ID>
     inline constexpr auto field = kumi::field_name<ID>{};
-    template<kumi::str ID> constexpr auto operator""_m() noexcept { return field<ID>; }
+    template<kumi::str ID> constexpr auto operator""_f() noexcept { return field<ID>; }
   }
   template<template<class> class Pred> [[nodiscard]] constexpr auto predicate() noexcept
   {
@@ -647,35 +691,12 @@ namespace kumi
   concept equality_comparable = (size_v<T> == size_v<U>) && _::check_equality<T,U>();
   namespace _
   {
-    template<typename... Ts>
-    constexpr bool check_unique_names()
-    {
-      constexpr kumi::str empty_str = {""};
-      if constexpr (sizeof...(Ts) == 0) return false;
-      else
-      { 
-        kumi::str names[] = {( [&]()
-        {
-          if constexpr( is_field_capture_v<Ts> )
-            return unwrap_name_v<Ts>;
-          else
-            return empty_str;
-        }())...};
-        for(std::size_t i=0;i<sizeof...(Ts);++i)
-        {
-          if(names[i] == empty_str) continue;
-          for(std::size_t j=i+1;j<sizeof...(Ts);++j)
-          {
-            if(names[j] == empty_str) continue;
-            else if(names[i] == names[j]) return false;
-          }
-        }
-        return true;
-      }
-    };
-   }
+    template<typename T> struct box { using type = T; };
+  }
   template<typename... Ts>
-  concept uniquely_named = _::check_unique_names<Ts...>();
+  concept uniquely_typed = all_uniques_v<_::box<Ts>...>;
+  template<typename... Ts>
+  concept uniquely_named = all_unique_names_v<_::box<Ts>...>;
   namespace _
   {
     template<auto Name, typename... Ts>
@@ -1052,7 +1073,7 @@ namespace kumi
   requires(I < sizeof...(Ts)) KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
   get(tuple<Ts...> &&arg) noexcept
   {
-    return static_cast<tuple<unwrap_field_capture_t<Ts>...> &&>(arg)[index<I>];
+    return static_cast<tuple<Ts...> &&>(arg)[index<I>];
   }
   template<std::size_t I, typename... Ts>
   requires(I < sizeof...(Ts)) KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
@@ -1064,7 +1085,7 @@ namespace kumi
   requires(I < sizeof...(Ts)) KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
   get(tuple<Ts...> const &&arg) noexcept
   {
-    return static_cast<tuple<unwrap_field_capture_t<Ts>...> const &&>(arg)[index<I>];
+    return static_cast<tuple<Ts...> const &&>(arg)[index<I>];
   }
   template<field_name Name, typename... Ts>
   requires ( uniquely_named<Ts...> )
@@ -1078,7 +1099,7 @@ namespace kumi
   KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
   get(tuple<Ts...> &&arg) noexcept
   {
-    return static_cast<tuple<unwrap_field_capture_t<Ts>...> &&>(arg)[Name];
+    return static_cast<tuple<Ts...> &&>(arg)[Name];
   }
   template<field_name Name, typename... Ts>
   requires ( uniquely_named<Ts...> )
@@ -1092,7 +1113,7 @@ namespace kumi
   KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
   get(tuple<Ts...> const &&arg) noexcept
   {
-    return static_cast<tuple<unwrap_field_capture_t<Ts>...> const &&>(arg)[Name];
+    return static_cast<tuple<Ts...> const &&>(arg)[Name];
   }
 }
 namespace kumi

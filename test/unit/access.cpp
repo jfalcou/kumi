@@ -41,16 +41,19 @@ TTS_CASE("Check access to kumi::tuple via indexing")
   TTS_EQUAL(t4[1_c], 6.9);
   TTS_EQUAL(t4[2_c], 4.2f);
   TTS_EQUAL(t4[3_c], 1337);
+
+  TTS_EQUAL(kumi::get<0>(std::move(t3)), 13.37);
+  TTS_EQUAL(std::move(t3)[1_c], 4.2f);
 };
 
 TTS_CASE("Check access to kumi::tuple with named fields via indexing")
 {
   using namespace kumi::literals;
 
-  kumi::tuple t1 = {"x"_m = 1};
-  kumi::tuple t2 = {"x"_m = 1.f, "y"_m = 2};
-  kumi::tuple t3 = {"x"_m = 1., "y"_m = 2.f, "z"_m = 3};
-  kumi::tuple t4 = {"x"_m = '1', "y"_m = 2., "z"_m = 3.f, "t"_m = 4};
+  kumi::tuple t1 = {"x"_f = 1};
+  kumi::tuple t2 = {"x"_f = 1.f, "y"_f = 2};
+  kumi::tuple t3 = {"x"_f = 1., "y"_f = 2.f, "z"_f = 3};
+  kumi::tuple t4 = {"x"_f = '1', "y"_f = 2., "z"_f = 3.f, "t"_f = 4};
   
   t1[0_c] = 42;
   TTS_EQUAL(t1[0_c], 42);
@@ -75,40 +78,46 @@ TTS_CASE("Check access to kumi::tuple with named fields via indexing")
   TTS_EQUAL(t4[1_c], 6.9);
   TTS_EQUAL(t4[2_c], 4.2f);
   TTS_EQUAL(t4[3_c], 1337);
+
+  TTS_EQUAL(kumi::get<0>(std::move(t3)), 13.37);
+  TTS_EQUAL(std::move(t3)[1_c], 4.2f);
 };
 
 TTS_CASE("Check access to kumi::tuple with names via names")
 {
   using namespace kumi::literals;
 
-  kumi::tuple t1 = {"x"_m = 1};
-  kumi::tuple t2 = {"x"_m = 1.f, "y"_m = 2};
-  kumi::tuple t3 = {"x"_m = 1., "y"_m = 2.f, "z"_m = 3};
-  kumi::tuple t4 = {"x"_m = '1', "y"_m = 2., "z"_m = 3.f, "t"_m = 4};
+  kumi::tuple t1 = {"x"_f = 1};
+  kumi::tuple t2 = {"x"_f = 1.f, "y"_f = 2};
+  kumi::tuple t3 = {"x"_f = 1., "y"_f = 2.f, "z"_f = 3};
+  kumi::tuple t4 = {"x"_f = '1', "y"_f = 2., "z"_f = 3.f, "t"_f = 4};
 
-  t1["x"_m] = 42;
-  TTS_EQUAL(t1["x"_m], 42);
+  t1["x"_f] = 42;
+  TTS_EQUAL(t1["x"_f], 42);
 
-  t2["x"_m] = 4.2f;
-  t2["y"_m] = 69;
-  TTS_EQUAL(t2["x"_m], 4.2f);
-  TTS_EQUAL(t2["y"_m], 69);
+  t2["x"_f] = 4.2f;
+  t2["y"_f] = 69;
+  TTS_EQUAL(t2["x"_f], 4.2f);
+  TTS_EQUAL(t2["y"_f], 69);
 
-  t3["x"_m] = 13.37;
-  t3["y"_m] = 4.2f;
-  t3["z"_m] = 40;
-  TTS_EQUAL(t3["x"_m], 13.37);
-  TTS_EQUAL(t3["y"_m], 4.2f);
-  TTS_EQUAL(t3["z"_m], 40);
+  t3["x"_f] = 13.37;
+  t3["y"_f] = 4.2f;
+  t3["z"_f] = 40;
+  TTS_EQUAL(t3["x"_f], 13.37);
+  TTS_EQUAL(t3["y"_f], 4.2f);
+  TTS_EQUAL(t3["z"_f], 40);
 
-  t4["x"_m] = 'z';
-  t4["y"_m] = 6.9;
-  t4["z"_m] = 4.2f;
-  t4["t"_m] = 1337;
-  TTS_EQUAL(t4["x"_m], 'z');
-  TTS_EQUAL(t4["y"_m], 6.9);
-  TTS_EQUAL(t4["z"_m], 4.2f);
-  TTS_EQUAL(t4["t"_m], 1337);
+  t4["x"_f] = 'z';
+  t4["y"_f] = 6.9;
+  t4["z"_f] = 4.2f;
+  t4["t"_f] = 1337;
+  TTS_EQUAL(t4["x"_f], 'z');
+  TTS_EQUAL(t4["y"_f], 6.9);
+  TTS_EQUAL(t4["z"_f], 4.2f);
+  TTS_EQUAL(t4["t"_f], 1337);
+
+  TTS_EQUAL(kumi::get<"x"_f>(std::move(t3)), 13.37);
+  TTS_EQUAL(std::move(t3)["y"_f], 4.2f);
 };
 
 TTS_CASE("Check constexpr access to kumi::tuple via indexing")
@@ -139,10 +148,10 @@ TTS_CASE("Check constexpr access to kumi::tuple with named fields via indexing")
 {
   using namespace kumi::literals;
 
-  constexpr kumi::tuple t1 = {"x"_m = 1};
-  constexpr kumi::tuple t2 = {"x"_m = 1.f, "y"_m = 2};
-  constexpr kumi::tuple t3 = {"x"_m = 1., "y"_m = 2.f, "z"_m = 3};
-  constexpr kumi::tuple t4 = {"x"_m = '1', "y"_m = 2., "z"_m = 3.f, "t"_m = 4};
+  constexpr kumi::tuple t1 = {"x"_f = 1};
+  constexpr kumi::tuple t2 = {"x"_f = 1.f, "y"_f = 2};
+  constexpr kumi::tuple t3 = {"x"_f = 1., "y"_f = 2.f, "z"_f = 3};
+  constexpr kumi::tuple t4 = {"x"_f = '1', "y"_f = 2., "z"_f = 3.f, "t"_f = 4};
   
   TTS_CONSTEXPR_EQUAL(get<0>(t1), t1[0_c]);
 
@@ -163,22 +172,22 @@ TTS_CASE("Check constexpr access to kumi::tuple with named fields via names")
 {
   using namespace kumi::literals;
 
-  constexpr kumi::tuple t1 = {"x"_m = 1};
-  constexpr kumi::tuple t2 = {"x"_m = 1.f, "y"_m = 2};
-  constexpr kumi::tuple t3 = {"x"_m = 1., "y"_m = 2.f, "z"_m = 3};
-  constexpr kumi::tuple t4 = {"x"_m = '1', "y"_m = 2., "z"_m = 3.f, "t"_m = 4};
+  constexpr kumi::tuple t1 = {"x"_f = 1};
+  constexpr kumi::tuple t2 = {"x"_f = 1.f, "y"_f = 2};
+  constexpr kumi::tuple t3 = {"x"_f = 1., "y"_f = 2.f, "z"_f = 3};
+  constexpr kumi::tuple t4 = {"x"_f = '1', "y"_f = 2., "z"_f = 3.f, "t"_f = 4};
   
-  TTS_CONSTEXPR_EQUAL(get<"x"_m>(t1), t1["x"_m]);
+  TTS_CONSTEXPR_EQUAL(get<"x"_f>(t1), t1["x"_f]);
 
-  TTS_CONSTEXPR_EQUAL(get<"x"_m>(t2), t2["x"_m]);
-  TTS_CONSTEXPR_EQUAL(get<"y"_m>(t2), t2["y"_m]);
+  TTS_CONSTEXPR_EQUAL(get<"x"_f>(t2), t2["x"_f]);
+  TTS_CONSTEXPR_EQUAL(get<"y"_f>(t2), t2["y"_f]);
 
-  TTS_CONSTEXPR_EQUAL(get<"x"_m>(t3), t3["x"_m]);
-  TTS_CONSTEXPR_EQUAL(get<"y"_m>(t3), t3["y"_m]);
-  TTS_CONSTEXPR_EQUAL(get<"z"_m>(t3), t3["z"_m]);
+  TTS_CONSTEXPR_EQUAL(get<"x"_f>(t3), t3["x"_f]);
+  TTS_CONSTEXPR_EQUAL(get<"y"_f>(t3), t3["y"_f]);
+  TTS_CONSTEXPR_EQUAL(get<"z"_f>(t3), t3["z"_f]);
 
-  TTS_CONSTEXPR_EQUAL(get<"x"_m>(t4), t4["x"_m]);
-  TTS_CONSTEXPR_EQUAL(get<"y"_m>(t4), t4["y"_m]);
-  TTS_CONSTEXPR_EQUAL(get<"z"_m>(t4), t4["z"_m]);
-  TTS_CONSTEXPR_EQUAL(get<"t"_m>(t4), t4["t"_m]);
+  TTS_CONSTEXPR_EQUAL(get<"x"_f>(t4), t4["x"_f]);
+  TTS_CONSTEXPR_EQUAL(get<"y"_f>(t4), t4["y"_f]);
+  TTS_CONSTEXPR_EQUAL(get<"z"_f>(t4), t4["z"_f]);
+  TTS_CONSTEXPR_EQUAL(get<"t"_f>(t4), t4["t"_f]);
 };

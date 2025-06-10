@@ -67,7 +67,7 @@ namespace kumi
     //! @brief Forms a constant string literal of the desired value.
     //! @return An instance of kumi::field_name for the specified string
     //==============================================================================================
-    template<kumi::str ID> constexpr auto operator""_m() noexcept { return field<ID>; }
+    template<kumi::str ID> constexpr auto operator""_f() noexcept { return field<ID>; }
   }
 
   //================================================================================================

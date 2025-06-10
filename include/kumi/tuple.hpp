@@ -100,7 +100,6 @@ namespace kumi
     //! @include doc/named_subscript.cpp
     //==============================================================================================
     template<auto Name>
-    //requires( get_name_index<Name, Ts...>() < sizeof...(Ts) )
     requires( contains_field<Name, Ts...> )
     constexpr decltype(auto) operator[](field_name<Name> const&) &noexcept
     {
@@ -110,7 +109,6 @@ namespace kumi
 
     /// @overload
     template<auto Name>
-    //requires( get_name_index<Name, Ts...>() < sizeof...(Ts) )
     requires( contains_field<Name, Ts...> )
     constexpr decltype(auto) operator[](field_name<Name> const&) &&noexcept
     {
@@ -120,7 +118,6 @@ namespace kumi
 
     /// @overload
     template<auto Name>
-    //requires( get_name_index<Name, Ts...>() < sizeof...(Ts) )
     requires( contains_field<Name, Ts...> )
     constexpr decltype(auto) operator[](field_name<Name> const&) const &&noexcept
     {
@@ -130,7 +127,6 @@ namespace kumi
 
     /// @overload
     template<auto Name>
-    //requires( get_name_index<Name, Ts...>() < sizeof...(Ts) )
     requires( contains_field<Name, Ts...> )
     constexpr decltype(auto) operator[](field_name<Name> const&) const &noexcept
     {
@@ -471,7 +467,7 @@ namespace kumi
   requires(I < sizeof...(Ts)) KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
   get(tuple<Ts...> &&arg) noexcept
   {
-    return static_cast<tuple<unwrap_field_capture_t<Ts>...> &&>(arg)[index<I>];
+    return static_cast<tuple<Ts...> &&>(arg)[index<I>];
   }
 
   /// @overload
@@ -487,7 +483,7 @@ namespace kumi
   requires(I < sizeof...(Ts)) KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
   get(tuple<Ts...> const &&arg) noexcept
   {
-    return static_cast<tuple<unwrap_field_capture_t<Ts>...> const &&>(arg)[index<I>];
+    return static_cast<tuple<Ts...> const &&>(arg)[index<I>];
   }
  
   //================================================================================================
@@ -517,7 +513,7 @@ namespace kumi
   KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
   get(tuple<Ts...> &&arg) noexcept
   {
-    return static_cast<tuple<unwrap_field_capture_t<Ts>...> &&>(arg)[Name];
+    return static_cast<tuple<Ts...> &&>(arg)[Name];
   }
 
   /// @overload
@@ -535,7 +531,7 @@ namespace kumi
   KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
   get(tuple<Ts...> const &&arg) noexcept
   {
-    return static_cast<tuple<unwrap_field_capture_t<Ts>...> const &&>(arg)[Name];
+    return static_cast<tuple<Ts...> const &&>(arg)[Name];
   }
 
   //================================================================================================

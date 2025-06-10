@@ -26,10 +26,13 @@ namespace kumi
   template<kumi::str ID, typename T>
   struct field_capture
   {
+    /// Underlying type of a field_capture
     using type = T;
     T value;
 
+    /// Name associated to the field_capture 
     static constexpr auto name = ID;
+
     static constexpr bool is_field_capture = true;
     
     //==============================================================================================

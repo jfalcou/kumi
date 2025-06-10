@@ -198,6 +198,7 @@ namespace kumi
   //! {
   //!   template<typename T> using unwrap_name_t = unwrap_name<T>::type;
   //! }
+  //! @endcode
   //================================================================================================
   template<typename T>
   struct unwrap_name
@@ -220,6 +221,116 @@ namespace kumi
   template<typename T>
   using unwrap_name_t = typename unwrap_name<T>::type;
 
+  /// Helpers for the uniqueness checking
+  namespace _
+  {
+    template <std::size_t, typename T> struct unique { operator T(); };
+    
+    template <std::size_t, typename T> struct unique_name 
+    {
+      template<typename U = T, std::enable_if_t<is_field_capture_v<typename U::type>, bool> = true>
+      operator T();
+    };
+
+    inline std::true_type true_fn(...);
+  }
+
+  template <typename Ints, typename... Ts>
+  struct all_uniques;
+
+  template <>
+  struct all_uniques<std::index_sequence<>> { using type = std::true_type; };
+  //================================================================================================
+  //! @ingroup traits
+  //! @brief   Checks if a parameter pack only contains distinct types.
+  //!
+  //! @tparam Ints The Index of the types in the parameter pack
+  //! @tparam Ts   The types to access
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T> all_uniques_t 
+  //!       = typename all_uniques<std::index_sequence_for<Ts...>, Ts...>::type;
+  //! }
+  //! @endcode
+  //!
+  //! ## Helper value
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T> using all_uniques_v = all_uniques_t<Ts...>::value;
+  //! }
+  //! @endcode
+  //================================================================================================
+  template <std::size_t... Ints, typename... Ts>
+  struct all_uniques<std::index_sequence<Ints...>, Ts...>
+  {
+    struct all_uniques_inner : _::unique<Ints, Ts>... {};
+
+    template <typename... Us>
+    static auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
+    static std::false_type is_set(...);
+
+    using type = decltype(is_set(Ts{}...));
+  };
+
+  template<typename... Ts>
+  using all_uniques_t = typename all_uniques<std::index_sequence_for<Ts...>, Ts...>::type;
+
+  template<typename... Ts>
+  inline constexpr auto all_uniques_v = all_uniques_t<Ts...>::value;
+
+
+  template <typename Ints, typename... Ts>
+  struct all_unique_names;
+
+  template <>
+  struct all_unique_names<std::index_sequence<>> { using type = std::true_type; };
+  //================================================================================================
+  //! @ingroup traits
+  //! @brief   Checks if a parameter pack only contains distinct kumi::field_member names. 
+  //!          Evaluates to false if no type is a kumi::field_member.
+  //!
+  //! @tparam Ints The Index of the types in the parameter pack
+  //! @tparam Ts The types to access
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T> all_unique_names_t 
+  //!       = typename all_unique_names<std::index_sequence_for<Ts...>, Ts...>::type;
+  //! }
+  //! @endcode
+  //!
+  //! ## Helper value
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T> using all_unique_names_v = all_unique_names_t<Ts...>::value;
+  //! }
+  //! @endcode
+  //================================================================================================
+  template <std::size_t... Ints, typename... Ts>
+  struct all_unique_names<std::index_sequence<Ints...>, Ts...>
+  {
+    struct all_uniques_inner : _::unique_name<Ints, Ts>... {};
+
+    template <typename... Us>
+    static auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
+    static std::false_type is_set(...);
+
+    using type = decltype(is_set(Ts{}...));
+  };
+
+  template<typename... Ts>
+  using all_unique_names_t = typename all_unique_names<std::index_sequence_for<Ts...>, Ts...>::type;
+
+  template<typename... Ts>
+  inline constexpr auto all_unique_names_v = all_unique_names_t<Ts...>::value;
+    
   // Forward declaration
   template<typename... Ts> struct tuple;
 }
