@@ -106,9 +106,11 @@ namespace kumi
   namespace _
   {
     template <std::size_t, typename T> struct unique { operator T(); };
-    template <std::size_t, typename T> struct unique_name 
+    template <std::size_t, typename T> struct unique_name{ };
+    template <std::size_t I, typename T> 
+    requires (requires { T::type::is_field_capture; })
+    struct unique_name<I, T> 
     {
-      template<typename U = T, std::enable_if_t<is_field_capture_v<typename U::type>, bool> = true>
       operator T();
     };
     inline std::true_type true_fn(...);
