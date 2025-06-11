@@ -698,9 +698,9 @@ namespace kumi
   template<typename... Ts>
   concept has_named_fields = ( ... || is_field_capture_v<Ts> );
   template<typename... Ts>
-  concept uniquely_typed = has_named_fields<Ts...> && all_uniques_v<_::box<Ts>...>;
+  concept uniquely_typed = ( !has_named_fields<Ts...> ) && all_uniques_v<_::box<Ts>...>;
   template<typename... Ts>
-  concept uniquely_named = !has_named_fields<Ts...> && all_unique_names_v<_::box<Ts>...>;
+  concept uniquely_named = ( has_named_fields<Ts...> ) && all_unique_names_v<_::box<Ts>...>;
   namespace _
   {
     template<auto Name, typename... Ts>
