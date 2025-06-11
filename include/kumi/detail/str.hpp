@@ -13,7 +13,7 @@
 namespace kumi 
 {
   //================================================================================================
-  //! @ingroup str
+  //! @ingroup utility
   //! @class str
   //! @brief Static string used to create named fields.
   //!

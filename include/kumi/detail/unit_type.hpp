@@ -12,7 +12,7 @@
 namespace kumi
 {
   //================================================================================================
-  //! @ingroup unit
+  //! @ingroup utility 
   //! @class unit
   //! @brief A type representing the product of no type also called the unit type 
   //!
@@ -29,7 +29,7 @@ namespace kumi
   };
     
   //==============================================================================================
-  //! @ingroup unit
+  //! @ingroup utility
   //! @brief Inline constant representing a kumi::unit.
   //==============================================================================================
   inline constexpr unit none = {};

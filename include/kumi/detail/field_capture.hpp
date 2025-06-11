@@ -14,7 +14,7 @@
 namespace kumi
 {
   //================================================================================================
-  //! @ingroup field_capture
+  //! @ingroup tuple
   //! @class field_capture
   //! @brief Named wrapper over a type.
   //!
@@ -36,7 +36,7 @@ namespace kumi
     static constexpr bool is_field_capture = true;
     
     //==============================================================================================
-    /// @ingroup field_capture
+    /// @ingroup tuple 
     //! @related kumi::field_capture
     //! @brief Inserts a kumi::field_capture in an output stream
     //==============================================================================================
@@ -59,7 +59,7 @@ namespace kumi
   }
 
   //================================================================================================
-  //! @ingroup field_capture
+  //! @ingroup tuple  
   //! @brief Extracts the value from a kumi::field_capture or returns the parameter 
   //!
   //! @note If the unqualified type of U is not a field_capture, simply forwards the parameter
@@ -79,7 +79,7 @@ namespace kumi
   } 
 
   //================================================================================================
-  //! @ingroup field_capture
+  //! @ingroup tuple 
   //! @class field_name
   //! @brief Named wrapper used to instantiate a kumi::field_capture.
   //!
@@ -106,7 +106,7 @@ namespace kumi
     }
 
     //==============================================================================================
-    /// @ingroup field_capture
+    /// @ingroup tuple 
     //! @related kumi::field_name
     //! @brief Inserts a kumi::field_name in an output stream
     //==============================================================================================

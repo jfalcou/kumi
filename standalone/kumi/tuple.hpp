@@ -25,6 +25,19 @@ namespace kumi
 #include <cstddef>
 #include <type_traits>
 #include <utility>
+#include <cstddef>
+namespace kumi::_
+{
+  template <std::size_t, typename T> struct unique { operator T(); };
+  template <std::size_t, typename T> struct unique_name{ };
+  template <std::size_t I, typename T> 
+  requires (requires { T::type::is_field_capture; })
+  struct unique_name<I, T> 
+  {
+    operator T();
+  };
+  inline std::true_type true_fn(...);
+}
 #include <ostream>
 namespace kumi
 {
@@ -103,18 +116,6 @@ namespace kumi
   inline constexpr auto unwrap_name_v = unwrap_name<T>::value;
   template<typename T>
   using unwrap_name_t = typename unwrap_name<T>::type;
-  namespace _
-  {
-    template <std::size_t, typename T> struct unique { operator T(); };
-    template <std::size_t, typename T> struct unique_name{ };
-    template <std::size_t I, typename T> 
-    requires (requires { T::type::is_field_capture; })
-    struct unique_name<I, T> 
-    {
-      operator T();
-    };
-    inline std::true_type true_fn(...);
-  }
   template <typename Ints, typename... Ts>
   struct all_uniques;
   template <>
@@ -919,28 +920,28 @@ namespace kumi
     }
     template<auto Name>
     requires( contains_field<Name, Ts...> )
-    constexpr decltype(auto) operator[](field_name<Name> const&) &noexcept
+    KUMI_TRIVIAL constexpr decltype(auto) operator[](field_name<Name> const&) &noexcept
     {
       constexpr auto idx = _::get_name_index<Name, Ts...>();
       return unwrap_field_value(_::get_leaf<idx>(impl));
     }
     template<auto Name>
     requires( contains_field<Name, Ts...> )
-    constexpr decltype(auto) operator[](field_name<Name> const&) &&noexcept
+    KUMI_TRIVIAL constexpr decltype(auto) operator[](field_name<Name> const&) &&noexcept
     {
       constexpr auto idx = _::get_name_index<Name, Ts...>();
       return unwrap_field_value(_::get_leaf<idx>(static_cast<decltype(impl) &&>(impl)));
     }
     template<auto Name>
     requires( contains_field<Name, Ts...> )
-    constexpr decltype(auto) operator[](field_name<Name> const&) const &&noexcept
+    KUMI_TRIVIAL constexpr decltype(auto) operator[](field_name<Name> const&) const &&noexcept
     {
       constexpr auto idx = _::get_name_index<Name, Ts...>();
       return unwrap_field_value(_::get_leaf<idx>(static_cast<decltype(impl) const &&>(impl)));
     }
     template<auto Name>
     requires( contains_field<Name, Ts...> )
-    constexpr decltype(auto) operator[](field_name<Name> const&) const &noexcept
+    KUMI_TRIVIAL constexpr decltype(auto) operator[](field_name<Name> const&) const &noexcept
     {
       constexpr auto idx = _::get_name_index<Name, Ts...>();
       return unwrap_field_value(_::get_leaf<idx>(impl));
@@ -1085,7 +1086,8 @@ namespace kumi
                 );
   }
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts)) KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) get(tuple<Ts...> &t) noexcept
+  requires(I < sizeof...(Ts)) KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  get(tuple<Ts...> &t) noexcept
   {
     return t[index<I>];
   }

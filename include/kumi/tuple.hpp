@@ -101,7 +101,7 @@ namespace kumi
     //==============================================================================================
     template<auto Name>
     requires( contains_field<Name, Ts...> )
-    constexpr decltype(auto) operator[](field_name<Name> const&) &noexcept
+    KUMI_TRIVIAL constexpr decltype(auto) operator[](field_name<Name> const&) &noexcept
     {
       constexpr auto idx = _::get_name_index<Name, Ts...>();
       return unwrap_field_value(_::get_leaf<idx>(impl));
@@ -110,7 +110,7 @@ namespace kumi
     /// @overload
     template<auto Name>
     requires( contains_field<Name, Ts...> )
-    constexpr decltype(auto) operator[](field_name<Name> const&) &&noexcept
+    KUMI_TRIVIAL constexpr decltype(auto) operator[](field_name<Name> const&) &&noexcept
     {
       constexpr auto idx = _::get_name_index<Name, Ts...>();
       return unwrap_field_value(_::get_leaf<idx>(static_cast<decltype(impl) &&>(impl)));
@@ -119,7 +119,7 @@ namespace kumi
     /// @overload
     template<auto Name>
     requires( contains_field<Name, Ts...> )
-    constexpr decltype(auto) operator[](field_name<Name> const&) const &&noexcept
+    KUMI_TRIVIAL constexpr decltype(auto) operator[](field_name<Name> const&) const &&noexcept
     {
       constexpr auto idx = _::get_name_index<Name, Ts...>();
       return unwrap_field_value(_::get_leaf<idx>(static_cast<decltype(impl) const &&>(impl)));
@@ -128,7 +128,7 @@ namespace kumi
     /// @overload
     template<auto Name>
     requires( contains_field<Name, Ts...> )
-    constexpr decltype(auto) operator[](field_name<Name> const&) const &noexcept
+    KUMI_TRIVIAL constexpr decltype(auto) operator[](field_name<Name> const&) const &noexcept
     {
       constexpr auto idx = _::get_name_index<Name, Ts...>();
       return unwrap_field_value(_::get_leaf<idx>(impl));
@@ -148,7 +148,7 @@ namespace kumi
     /// Returns `true` if a kumi::tuple contains 0 elements
     KUMI_TRIVIAL_NODISCARD static constexpr  bool empty() noexcept { return sizeof...(Ts) == 0; }
 
-    /// Returns the names of the elements in a kumi::tuple 
+    /// Returns the names of the elements of a kumi::tuple 
     KUMI_TRIVIAL_NODISCARD static constexpr auto names() noexcept 
     {   
         using tuple_type = tuple<unwrap_name_t<Ts>...>;
@@ -457,7 +457,8 @@ namespace kumi
   //! @include doc/get.cpp
   //================================================================================================
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts)) KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) get(tuple<Ts...> &t) noexcept
+  requires(I < sizeof...(Ts)) KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  get(tuple<Ts...> &t) noexcept
   {
     return t[index<I>];
   }

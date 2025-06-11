@@ -11,6 +11,7 @@
 #include <type_traits>
 #include <utility>
 
+#include <kumi/detail/unique.hpp>
 #include <kumi/detail/unit_type.hpp>
 
 namespace kumi
@@ -221,28 +222,6 @@ namespace kumi
   template<typename T>
   using unwrap_name_t = typename unwrap_name<T>::type;
 
-  /// Helpers for the uniqueness checking
-  namespace _
-  {
-    template <std::size_t, typename T> struct unique { operator T(); };
-   
-    template <std::size_t, typename T> struct unique_name{ };
-
-    template <std::size_t I, typename T> 
-    requires (requires { T::type::is_field_capture; })
-    struct unique_name<I, T> 
-    {
-      operator T();
-    };
-     
-    inline std::true_type true_fn(...);
-  }
-
-  template <typename Ints, typename... Ts>
-  struct all_uniques;
-
-  template <>
-  struct all_uniques<std::index_sequence<>> { using type = std::true_type; };
   //================================================================================================
   //! @ingroup traits
   //! @brief   Checks if a parameter pack only contains distinct types.
@@ -267,6 +246,12 @@ namespace kumi
   //! }
   //! @endcode
   //================================================================================================
+  template <typename Ints, typename... Ts>
+  struct all_uniques;
+
+  template <>
+  struct all_uniques<std::index_sequence<>> { using type = std::true_type; };
+
   template <std::size_t... Ints, typename... Ts>
   struct all_uniques<std::index_sequence<Ints...>, Ts...>
   {
@@ -285,12 +270,6 @@ namespace kumi
   template<typename... Ts>
   inline constexpr auto all_uniques_v = all_uniques_t<Ts...>::value;
 
-
-  template <typename Ints, typename... Ts>
-  struct all_unique_names;
-
-  template <>
-  struct all_unique_names<std::index_sequence<>> { using type = std::true_type; };
   //================================================================================================
   //! @ingroup traits
   //! @brief   Checks if a parameter pack only contains distinct kumi::field_member names. 
@@ -316,6 +295,12 @@ namespace kumi
   //! }
   //! @endcode
   //================================================================================================
+  template <typename Ints, typename... Ts>
+  struct all_unique_names;
+
+  template <>
+  struct all_unique_names<std::index_sequence<>> { using type = std::true_type; };
+
   template <std::size_t... Ints, typename... Ts>
   struct all_unique_names<std::index_sequence<Ints...>, Ts...>
   {
