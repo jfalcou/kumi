@@ -144,6 +144,30 @@ TTS_CASE("Check constexpr access to kumi::tuple via indexing")
   TTS_CONSTEXPR_EQUAL(get<3>(t4), t4[3_c]);
 };
 
+TTS_CASE("Check constexpr access to kumi::tuple via types")
+{
+  using namespace kumi::literals;
+
+  constexpr kumi::tuple t1 = {1};
+  constexpr kumi::tuple t2 = {1.f, 2};
+  constexpr kumi::tuple t3 = {1., 2.f, 3};
+  constexpr kumi::tuple t4 = {'1', 2., 3.f, 4};
+
+  TTS_CONSTEXPR_EQUAL(get<int>(t1), t1[0_c]);
+
+  TTS_CONSTEXPR_EQUAL(get<float>(t2), t2[0_c]);
+  TTS_CONSTEXPR_EQUAL(get<int>(t2), t2[1_c]);
+
+  TTS_CONSTEXPR_EQUAL(get<double>(t3), t3[0_c]);
+  TTS_CONSTEXPR_EQUAL(get<float>(t3), t3[1_c]);
+  TTS_CONSTEXPR_EQUAL(get<int>(t3), t3[2_c]);
+
+  TTS_CONSTEXPR_EQUAL(get<char>(t4), t4[0_c]);
+  TTS_CONSTEXPR_EQUAL(get<double>(t4), t4[1_c]);
+  TTS_CONSTEXPR_EQUAL(get<float>(t4), t4[2_c]);
+  TTS_CONSTEXPR_EQUAL(get<int>(t4), t4[3_c]);
+};
+
 TTS_CASE("Check constexpr access to kumi::tuple with named fields via indexing")
 {
   using namespace kumi::literals;

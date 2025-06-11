@@ -62,6 +62,18 @@ TTS_CASE("Check field_capture type coherence through field_name")
     TTS_EQUAL(x, 2);
 };
 
+template<auto name> 
+constexpr bool check_valid_name(auto const t) requires( requires{t[name]; })
+{
+    return true;
+}
+
+template<auto name> 
+constexpr bool check_valid_name(auto const t) requires( !requires{t[name]; })
+{
+    return false;
+}
+
 TTS_CASE("Check kumi::tuple behavior with field_captures")
 {
     using namespace kumi::literals;
@@ -78,11 +90,14 @@ TTS_CASE("Check kumi::tuple behavior with field_captures")
 
     using tpl   = kumi::tuple<f, fc, fref, fcref, furef>;
 
-    auto t = kumi::tuple{ "a"_f = x, "b"_f = y, "c"_f = std::ref(x), "d"_f = std::cref(y), "e"_f = z };
-    auto nl = kumi::tuple{ kumi::str{"a"}, kumi::str{"b"}, kumi::str{"c"}, kumi::str{"d"}, kumi::str{"e"} };
+    auto t  = kumi::tuple{ "a"_f = x     , "b"_f = y     , "c"_f = std::ref(x), "d"_f = std::cref(y), "e"_f = z      };
+    auto nl = kumi::tuple{ kumi::str{"a"}, kumi::str{"b"}, kumi::str{"c"}     , kumi::str{"d"}      , kumi::str{"e"} };
     
-    auto pt = kumi::tuple{"a"_f = x, y, std::ref(x), "d"_f = std::cref(y), z };
-    auto ptnl = kumi::tuple{ kumi::str{"a"}, kumi::unit{},kumi::unit{}, kumi::str{"d"}, kumi::unit{} };
+    auto pt   = kumi::tuple{"a"_f = x      , y         , std::ref(x), "d"_f = std::cref(y), z          };
+    auto ptnl = kumi::tuple{ kumi::str{"a"}, kumi::none, kumi::none , kumi::str{"d"}      , kumi::none };
+
+    constexpr auto dup = kumi::tuple{"a"_f = 3, "a"_f = 8};
+    constexpr auto uni = kumi::tuple{"a"_f = 3, "b"_f = 8};
 
     TTS_TYPE_IS( tpl                    , decltype(t )     );
     TTS_TYPE_IS( decltype(t.names())    , decltype(nl)     );
@@ -91,8 +106,9 @@ TTS_CASE("Check kumi::tuple behavior with field_captures")
     TTS_EQUAL( t.names() , nl    );
     TTS_EQUAL( pt.names(), ptnl  );
 
-    auto rep = kumi::tuple{"a"_f = 3, "a"_f = 8};
-    int a = 0;
-    TTS_EXPECT_NOT_COMPILES (rep, a, { a = rep["a"_f];  });
-    TTS_EXPECT_COMPILES     (rep, a, { a = rep[0_c];    });
+    TTS_EXPECT          (! check_valid_name<"a"_f>(dup));
+    TTS_CONSTEXPR_EXPECT(! check_valid_name<"a"_f>(dup));
+
+    TTS_EXPECT          ( check_valid_name<"a"_f>(uni) );
+    TTS_CONSTEXPR_EXPECT( check_valid_name<"a"_f>(uni) );
 };

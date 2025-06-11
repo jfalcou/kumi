@@ -696,16 +696,18 @@ namespace kumi
     template<typename T> struct box { using type = T; };
   }
   template<typename... Ts>
-  concept uniquely_typed = all_uniques_v<_::box<Ts>...>;
+  concept has_named_fields = ( ... || is_field_capture_v<Ts> );
   template<typename... Ts>
-  concept uniquely_named = all_unique_names_v<_::box<Ts>...>;
+  concept uniquely_typed = has_named_fields<Ts...> && all_uniques_v<_::box<Ts>...>;
+  template<typename... Ts>
+  concept uniquely_named = !has_named_fields<Ts...> && all_unique_names_v<_::box<Ts>...>;
   namespace _
   {
     template<auto Name, typename... Ts>
-    requires ( uniquely_named<Ts...> )
+    requires( uniquely_named<Ts...> )
     constexpr decltype(auto) get_name_index() noexcept
     {
-      constexpr auto idx = []<std::size_t... N>(std::index_sequence<N...>)
+      return []<std::size_t... N>(std::index_sequence<N...>)
       {
         bool checks[] = {( []()
         {
@@ -716,12 +718,28 @@ namespace kumi
         for(std::size_t i=0;i<sizeof...(Ts);++i) 
           if(checks[i]) return i;
         return sizeof...(Ts); 
-      }(std::index_sequence_for<Ts...>{});
-      return idx;
-    }; 
+      }( std::index_sequence_for<Ts...>{} );
+    };
+    template<typename T, typename... Ts>
+    requires ( uniquely_typed<Ts...> )
+    constexpr decltype(auto) get_type_index() noexcept
+    {
+      return []<std::size_t... N>( std::index_sequence<N...> )
+      {
+        bool checks[] = {( []()
+        {
+          if constexpr( std::is_same_v<T, Ts> ) return true;
+          else return false;
+        }
+        ())...};
+        for(std::size_t i=0;i<sizeof...(Ts);++i) 
+          if(checks[i]) return i;
+        return sizeof...(Ts); 
+      }( std::index_sequence_for<Ts...>{} );
+    }
   }
   template<auto Name, typename... Ts>
-  concept contains_field = _::get_name_index<Name, Ts...>() < sizeof...(Ts);
+  concept contains_field = (_::get_name_index<Name, Ts...>() < sizeof...(Ts));
 }
 namespace kumi
 {
@@ -1094,7 +1112,7 @@ namespace kumi
   KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
   get(tuple<Ts...> &t) noexcept
   {
-      return t[Name];
+    return t[Name];
   }
   template<field_name Name, typename... Ts>
   requires ( uniquely_named<Ts...> )
@@ -1116,6 +1134,38 @@ namespace kumi
   get(tuple<Ts...> const &&arg) noexcept
   {
     return static_cast<tuple<Ts...> const &&>(arg)[Name];
+  }
+  template<typename T, typename... Ts>
+  requires ( uniquely_typed<Ts...> )
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  get(tuple<Ts...> &t) noexcept
+  {
+    constexpr auto I = _::get_type_index<T, Ts...>();
+    return t[index<I>];
+  }
+  template<typename T, typename... Ts>
+  requires ( uniquely_typed<Ts...> )
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  get(tuple<Ts...> &&arg) noexcept
+  {
+    constexpr auto I = _::get_type_index<T, Ts...>();
+    return static_cast<tuple<Ts...> &&>(arg)[index<I>];
+  }
+  template<typename T, typename... Ts>
+  requires ( uniquely_typed<Ts...> )
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  get(tuple<Ts...> const &arg) noexcept
+  {
+    constexpr auto I = _::get_type_index<T, Ts...>();
+    return arg[index<I>];
+  }
+  template<typename T, typename... Ts>
+  requires ( uniquely_typed<Ts...> )
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  get(tuple<Ts...> const &&arg) noexcept
+  {
+    constexpr auto I = _::get_type_index<T, Ts...>();
+    return static_cast<tuple<Ts...> const &&>(arg)[index<I>];
   }
 }
 namespace kumi

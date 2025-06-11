@@ -488,7 +488,7 @@ namespace kumi
  
   //================================================================================================
   //! @ingroup tuple
-  //! @brief Extracts the field labeled Name from a kumi::tuple
+  //! @brief Extracts the field labeled Name from a kumi::tuple if it exists
   //!
   //! @note Does not participate in overload resolution if the names are not unique
   //! @tparam   Name Non type template parameter name of the element to access
@@ -504,7 +504,7 @@ namespace kumi
   KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
   get(tuple<Ts...> &t) noexcept
   {
-      return t[Name];
+    return t[Name];
   }
 
   /// @overload
@@ -532,6 +532,58 @@ namespace kumi
   get(tuple<Ts...> const &&arg) noexcept
   {
     return static_cast<tuple<Ts...> const &&>(arg)[Name];
+  }
+
+  //================================================================================================
+  //! @ingroup tuple
+  //! @brief Extracts the field which type is T from a kumi::tuple if it exist
+  //!
+  //! @note Does not participate in overload resolution if the types are not unique
+  //! @tparam   T Type of the element to access
+  //! @param    t Tuple to index
+  //! @return   A reference to the selected element of t.
+  //! @related kumi::tuple
+  //!
+  //! ## Example:
+  //! @include doc/typed_get.cpp
+  //================================================================================================
+  template<typename T, typename... Ts>
+  requires ( uniquely_typed<Ts...> )
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  get(tuple<Ts...> &t) noexcept
+  {
+    constexpr auto I = _::get_type_index<T, Ts...>();
+    return t[index<I>];
+  }
+
+  /// @overload
+  template<typename T, typename... Ts>
+  requires ( uniquely_typed<Ts...> )
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  get(tuple<Ts...> &&arg) noexcept
+  {
+    constexpr auto I = _::get_type_index<T, Ts...>();
+    return static_cast<tuple<Ts...> &&>(arg)[index<I>];
+  }
+
+  /// @overload
+  template<typename T, typename... Ts>
+  requires ( uniquely_typed<Ts...> )
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  get(tuple<Ts...> const &arg) noexcept
+  {
+    constexpr auto I = _::get_type_index<T, Ts...>();
+    return arg[index<I>];
+  }
+
+  /// @overload
+  template<typename T, typename... Ts>
+  requires ( uniquely_typed<Ts...> )
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  get(tuple<Ts...> const &&arg) noexcept
+  {
+    constexpr auto I = _::get_type_index<T, Ts...>();
+    return static_cast<tuple<Ts...> const &&>(arg)[index<I>];
   }
 
   //================================================================================================
