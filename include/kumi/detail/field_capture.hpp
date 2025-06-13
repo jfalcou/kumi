@@ -69,7 +69,7 @@ namespace kumi
   //! @related kumi::field_capture
   //================================================================================================
   template<typename U>
-  constexpr decltype(auto) unwrap_field_value(U&& u) noexcept
+  KUMI_TRIVIAL constexpr decltype(auto) unwrap_field_value(U&& u) noexcept
   {
     using T = std::remove_cvref_t<U>;
     if constexpr ( is_field_capture_v<T> )
@@ -91,6 +91,7 @@ namespace kumi
   template<kumi::str ID>
   struct field_name
   {
+    /// Name associated to the field_name
     static constexpr auto name = ID;
     
     //==============================================================================================

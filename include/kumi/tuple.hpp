@@ -35,7 +35,7 @@ namespace kumi
   template<typename... Ts> struct tuple
   {
     using is_product_type = void;
-    using binder_t  = _::make_binder_t<std::make_integer_sequence<int,sizeof...(Ts)>, Ts...>;
+    using binder_t = _::make_binder_t<std::make_integer_sequence<int,sizeof...(Ts)>, Ts...>;
 
     static constexpr bool is_homogeneous = binder_t::is_homogeneous;
 
@@ -252,7 +252,7 @@ namespace kumi
 
       auto const order = [&]<typename Index>(Index i)
       {
-        auto y_less_x_prev  = rhs[i]  < lhs[i];
+        auto y_less_x_prev  = rhs[i] < lhs[i];
         auto x_less_y       = lhs[index_t<Index::value+1>{}] < rhs[index_t<Index::value+1>{}];
         return x_less_y && !y_less_x_prev;
       };

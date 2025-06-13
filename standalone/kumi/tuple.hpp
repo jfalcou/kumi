@@ -37,6 +37,7 @@ namespace kumi::_
     operator T();
   };
   inline std::true_type true_fn(...);
+  template<typename T> struct box { using type = T; };
 }
 #include <ostream>
 namespace kumi
@@ -85,13 +86,10 @@ namespace kumi
   template<typename T>
   inline constexpr auto is_homogeneous_v = is_homogeneous<T>::value;
   template<typename T>
-  struct is_field_capture : std::false_type{};
+  inline constexpr bool is_field_capture_v = requires { T::is_field_capture; };
   template<typename T>
-  requires (requires { T::is_field_capture; })
-  struct is_field_capture<T> : std::bool_constant<T::is_field_capture> 
-  {}; 
-  template<typename T>
-  inline constexpr bool is_field_capture_v = is_field_capture<T>::value;
+  struct is_field_capture : std::bool_constant<is_field_capture_v<T>>
+  {};
   template<typename T>
   struct unwrap_field_capture { using type = T; };
   template<typename T> 
@@ -608,7 +606,7 @@ namespace kumi
     KUMI_TRIVIAL constexpr T const &  get_field(field_capture<ID, T> const & a) noexcept { return a.value; }
   }
   template<typename U>
-  constexpr decltype(auto) unwrap_field_value(U&& u) noexcept
+  KUMI_TRIVIAL constexpr decltype(auto) unwrap_field_value(U&& u) noexcept
   {
     using T = std::remove_cvref_t<U>;
     if constexpr ( is_field_capture_v<T> )
@@ -692,10 +690,6 @@ namespace kumi
   }
   template<typename T, typename U>
   concept equality_comparable = (size_v<T> == size_v<U>) && _::check_equality<T,U>();
-  namespace _
-  {
-    template<typename T> struct box { using type = T; };
-  }
   template<typename... Ts>
   concept has_named_fields = ( ... || is_field_capture_v<Ts> );
   template<typename... Ts>
@@ -891,7 +885,7 @@ namespace kumi
   template<typename... Ts> struct tuple
   {
     using is_product_type = void;
-    using binder_t  = _::make_binder_t<std::make_integer_sequence<int,sizeof...(Ts)>, Ts...>;
+    using binder_t = _::make_binder_t<std::make_integer_sequence<int,sizeof...(Ts)>, Ts...>;
     static constexpr bool is_homogeneous = binder_t::is_homogeneous;
     binder_t impl;
     template<std::size_t I>
@@ -1004,7 +998,7 @@ namespace kumi
       auto res = get<0>(lhs) < get<0>(rhs);
       auto const order = [&]<typename Index>(Index i)
       {
-        auto y_less_x_prev  = rhs[i]  < lhs[i];
+        auto y_less_x_prev  = rhs[i] < lhs[i];
         auto x_less_y       = lhs[index_t<Index::value+1>{}] < rhs[index_t<Index::value+1>{}];
         return x_less_y && !y_less_x_prev;
       };

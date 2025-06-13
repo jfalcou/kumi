@@ -96,11 +96,6 @@ namespace kumi
   template<typename T, typename U>
   concept equality_comparable = (size_v<T> == size_v<U>) && _::check_equality<T,U>();
 
-  namespace _
-  {
-    template<typename T> struct box { using type = T; };
-  }
-
   //================================================================================================
   //! @ingroup concepts
   //! @brief Concept specifying if parameter pack containes a kumi::field_capture.

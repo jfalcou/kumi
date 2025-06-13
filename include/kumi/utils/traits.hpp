@@ -127,7 +127,6 @@ namespace kumi
   template<typename T>
   inline constexpr auto is_homogeneous_v = is_homogeneous<T>::value;
 
-
   //================================================================================================
   //! @ingroup traits
   //! @brief Checks if a type is a kumi::field_capture 
@@ -138,20 +137,16 @@ namespace kumi
   //! @code
   //! namespace kumi
   //! {
-  //!   template<typename T> inline constexpr auto field_capture_v = is_field_capture<T>::value;
+  //!   template<typename T> inline constexpr bool is_field_capture_v = requires { T::is_field_capture; };
   //! }
   //! @endcode
   //================================================================================================
   template<typename T>
-  struct is_field_capture : std::false_type{};
+  inline constexpr bool is_field_capture_v = requires { T::is_field_capture; };
 
   template<typename T>
-  requires (requires { T::is_field_capture; })
-  struct is_field_capture<T> : std::bool_constant<T::is_field_capture> 
-  {}; 
-
-  template<typename T>
-  inline constexpr bool is_field_capture_v = is_field_capture<T>::value;
+  struct is_field_capture : std::bool_constant<is_field_capture_v<T>>
+  {};
 
   //================================================================================================
   //! @ingroup traits
