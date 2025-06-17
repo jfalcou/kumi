@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['make_5ftuple_0',['make_tuple',['../group__tuple_ga7a585805b36bec6b2c275b6f2ced67fe.html#ga7a585805b36bec6b2c275b6f2ced67fe',1,'kumi::tuple']]],
+  ['make_5ftuple_0',['make_tuple',['../group__tuple_gaca6941a85764a5230fe6d91e473208f6.html#gaca6941a85764a5230fe6d91e473208f6',1,'kumi::tuple']]],
   ['map_1',['map',['../group__transforms_ga8a4e424cfc506fb8fd2939ebe24382ce.html#ga8a4e424cfc506fb8fd2939ebe24382ce',1,'kumi']]],
   ['map_5findex_2',['map_index',['../group__transforms_ga24c0a7632bd20e448dd7ac2d18e1168c.html#ga24c0a7632bd20e448dd7ac2d18e1168c',1,'kumi']]],
   ['max_3',['max',['../group__reductions_ga7cb6c22dc5a7e603a051591859e8ccee.html#ga7cb6c22dc5a7e603a051591859e8ccee',1,'kumi::max(T const &amp;t) noexcept'],['../group__reductions_ga5e11e6a667c808afc39641a25d5190c5.html#ga5e11e6a667c808afc39641a25d5190c5',1,'kumi::max(T const &amp;t, F f) noexcept']]],

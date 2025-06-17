@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['zip_0',['zip',['../group__generators_gae8df7fc3aefbc6551f09c4ce64f6f82b.html#gae8df7fc3aefbc6551f09c4ce64f6f82b',1,'kumi']]]
+  ['what_20s_20changed_0',['what s changed',['../changelog.html#autotoc_md126',1,'What&apos;s Changed'],['../changelog.html#autotoc_md131',1,'What&apos;s Changed'],['../changelog.html#autotoc_md137',1,'What&apos;s Changed'],['../changelog.html#autotoc_md141',1,'What&apos;s Changed']]],
+  ['with_20cpm_1',['Setup with CPM',['../setup.html#setup-cpm',1,'']]]
 ];

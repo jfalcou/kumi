@@ -122,7 +122,8 @@ $(document).ready(function(){initNavTree('group__traits.html',''); initResizable
 
 <div class="header">
   <div class="summary">
-<a href="#nested-classes">Classes</a>  </div>
+<a href="#nested-classes">Classes</a> &#124;
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">Tuple Related Traits</div></div>
 </div><!--header-->
 <div class="contents">
@@ -132,6 +133,12 @@ $(document).ready(function(){initNavTree('group__traits.html',''); initResizable
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1all__unique__names.html">kumi::all_unique_names&lt; Ints, Ts &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a parameter pack only contains distinct <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48" title="Converts a kumi::tuple to an instance of an arbitrary type.">kumi::field_member</a> names. Evaluates to false if no type is a <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48" title="Converts a kumi::tuple to an instance of an arbitrary type.">kumi::field_member</a>.  <a href="structkumi_1_1all__unique__names.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1all__uniques.html">kumi::all_uniques&lt; Ints, Ts &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a parameter pack only contains distinct types.  <a href="structkumi_1_1all__uniques.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1element.html">kumi::element&lt; I, T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides indexed access to the types of the elements of a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>.  <a href="structkumi_1_1element.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -147,6 +154,19 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1size.html">kumi::size&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the number of elements of a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>.  <a href="structkumi_1_1size.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1unwrap__field__capture.html">kumi::unwrap_field_capture&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the underlying type of a <a class="el" href="structkumi_1_1field__capture.html" title="Named wrapper over a type.">kumi::field_capture</a> if it is the type of T return T otherwise.  <a href="structkumi_1_1unwrap__field__capture.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1unwrap__name.html">kumi::unwrap_name&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the underlying name of a <a class="el" href="structkumi_1_1field__capture.html" title="Named wrapper over a type.">kumi::field_capture</a> if T is a <a class="el" href="structkumi_1_1field__capture.html" title="Named wrapper over a type.">field_capture</a> returns the unit type otherwise.  <a href="structkumi_1_1unwrap__name.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ga36e654d6b1df0645cfc9854dee56fa03" id="r_ga36e654d6b1df0645cfc9854dee56fa03"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">typename</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T</a> &gt; </td></tr>
+<tr class="memitem:ga36e654d6b1df0645cfc9854dee56fa03"><td class="memTemplItemLeft" align="right" valign="top"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">bool</a>&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__traits_ga36e654d6b1df0645cfc9854dee56fa03.html#ga36e654d6b1df0645cfc9854dee56fa03">kumi::is_field_capture_v</a> = <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">requires</a> { T::is_field_capture; }</td></tr>
+<tr class="memdesc:ga36e654d6b1df0645cfc9854dee56fa03"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a type is a <a class="el" href="structkumi_1_1field__capture.html" title="Named wrapper over a type.">kumi::field_capture</a>.  <br /></td></tr>
+<tr class="separator:ga36e654d6b1df0645cfc9854dee56fa03"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
