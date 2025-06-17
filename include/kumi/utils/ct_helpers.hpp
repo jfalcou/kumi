@@ -36,7 +36,7 @@ namespace kumi
   //! @namespace literals
   //! @brief KUMI literals namespace
   //================================================================================================
-  namespace literals
+  inline namespace literals
   {
     template<char... c> constexpr auto b10()
     {
@@ -53,6 +53,21 @@ namespace kumi
     //! @include doc/index.cpp
     //==============================================================================================
     template<char... c> constexpr auto operator""_c() noexcept { return index<b10<c...>()>; }
+
+    //==============================================================================================
+    //! @ingroup utility 
+    //! @brief Forms a constant kumi::field_name of the desired ID.
+    //! @tparam ID the compile time name to build.
+    //==============================================================================================
+    template<kumi::str ID>
+    inline constexpr auto field = kumi::field_name<ID>{};
+    
+    //==============================================================================================
+    //! @ingroup utility 
+    //! @brief Forms a constant string literal of the desired value.
+    //! @return An instance of kumi::field_name for the specified string
+    //==============================================================================================
+    template<kumi::str ID> constexpr auto operator""_f() noexcept { return field<ID>; }
   }
 
   //================================================================================================

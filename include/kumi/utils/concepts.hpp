@@ -8,6 +8,7 @@
 #pragma once
 
 #include <kumi/detail/concepts.hpp>
+#include <kumi/detail/str.hpp>
 #include <concepts>
 #include <cstddef>
 #include <type_traits>
@@ -94,4 +95,76 @@ namespace kumi
   //================================================================================================
   template<typename T, typename U>
   concept equality_comparable = (size_v<T> == size_v<U>) && _::check_equality<T,U>();
+
+  //================================================================================================
+  //! @ingroup concepts
+  //! @brief Concept specifying if parameter pack containes a kumi::field_capture.
+  //================================================================================================
+  template<typename... Ts>
+  concept has_named_fields = ( ... || is_field_capture_v<Ts> );
+
+  //================================================================================================
+  //! @ingroup concepts
+  //! @brief Concept specifying if a parameter pack only holds unique types.
+  //================================================================================================
+  template<typename... Ts>
+  concept uniquely_typed = ( !has_named_fields<Ts...> ) && all_uniques_v<_::box<Ts>...>;
+
+  //================================================================================================
+  //! @ingroup concepts
+  //! @brief Concept specifying if a parameter pack only holds unique kumi::field_capture names.
+  //================================================================================================
+  template<typename... Ts>
+  concept uniquely_named = ( has_named_fields<Ts...> ) && all_unique_names_v<_::box<Ts>...>;
+
+  namespace _
+  {
+    template<auto Name, typename... Ts>
+    requires( uniquely_named<Ts...> )
+    constexpr decltype(auto) get_name_index() noexcept
+    {
+      return []<std::size_t... N>(std::index_sequence<N...>)
+      {
+        bool checks[] = {( []()
+        {
+          if constexpr( is_field_capture_v<Ts> ) return Name == Ts::name;
+          else return false;
+        }
+        ())...};
+
+        for(std::size_t i=0;i<sizeof...(Ts);++i) 
+          if(checks[i]) return i;
+
+        return sizeof...(Ts); 
+      }( std::index_sequence_for<Ts...>{} );
+    };
+
+    template<typename T, typename... Ts>
+    requires ( uniquely_typed<Ts...> )
+    constexpr decltype(auto) get_type_index() noexcept
+    {
+      return []<std::size_t... N>( std::index_sequence<N...> )
+      {
+        bool checks[] = {( []()
+        {
+          if constexpr( std::is_same_v<T, Ts> ) return true;
+          else return false;
+        }
+        ())...};
+        
+        for(std::size_t i=0;i<sizeof...(Ts);++i) 
+          if(checks[i]) return i;
+            
+        return sizeof...(Ts); 
+      }( std::index_sequence_for<Ts...>{} );
+    }
+  }
+
+  //================================================================================================
+  //! @ingroup concepts
+  //! @brief Concept specifying if a kumi::field_capture with name Name is present in a parameter pack.
+  //================================================================================================
+  template<auto Name, typename... Ts>
+  concept contains_field = (_::get_name_index<Name, Ts...>() < sizeof...(Ts));
+
 }

@@ -11,6 +11,9 @@
 #include <type_traits>
 #include <utility>
 
+#include <kumi/detail/unique.hpp>
+#include <kumi/detail/unit_type.hpp>
+
 namespace kumi
 {
   //================================================================================================
@@ -124,7 +127,193 @@ namespace kumi
   template<typename T>
   inline constexpr auto is_homogeneous_v = is_homogeneous<T>::value;
 
+  //================================================================================================
+  //! @ingroup traits
+  //! @brief Checks if a type is a kumi::field_capture 
+  //!
+  //! @tparam T The type to inspect
+  //!
+  //! ## Helper value
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T> inline constexpr bool is_field_capture_v = requires { T::is_field_capture; };
+  //! }
+  //! @endcode
+  //================================================================================================
+  template<typename T>
+  inline constexpr bool is_field_capture_v = requires { T::is_field_capture; };
+
+  template<typename T>
+  struct is_field_capture : std::bool_constant<is_field_capture_v<T>>
+  {};
+
+  //================================================================================================
+  //! @ingroup traits
+  //! @brief Returns the underlying type of a kumi::field_capture if it is the type of T
+  //! return T otherwise
+  //!
+  //! @tparam T The type to access
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T> using unwrap_field_capture_t = typename unwrap_field_capture<T>::type;
+  //! }
+  //! @endcode
+  //================================================================================================
+  template<typename T>
+  struct unwrap_field_capture { using type = T; };
+    
+  template<typename T> 
+  requires (requires { T::is_field_capture; })
+  struct unwrap_field_capture<T> { using type = T::type; };
+    
+  template<typename T>
+  using unwrap_field_capture_t = typename unwrap_field_capture<T>::type;
+
+  //================================================================================================
+  //! @ingroup traits
+  //! @brief Returns the underlying name of a kumi::field_capture if T is a field_capture
+  //!        returns the unit type otherwise 
+  //!
+  //! @tparam T The type to access
+  //!
+  //! ## Helper value
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T> using unwrap_name_v = unwrap_name<T>::value;
+  //! }
+  //! @endcode
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T> using unwrap_name_t = unwrap_name<T>::type;
+  //! }
+  //! @endcode
+  //================================================================================================
+  template<typename T>
+  struct unwrap_name
+  {
+    using type = unit;
+    static constexpr auto value = unit{}; 
+  };
+
+  template<typename T>
+  requires ( requires { T::is_field_capture; } )
+  struct unwrap_name<T>
+  {
+    using type = std::remove_cvref_t<decltype(T::name)>;
+    static constexpr auto value = T::name;
+  };
+
+  template<typename T>
+  inline constexpr auto unwrap_name_v = unwrap_name<T>::value;
+    
+  template<typename T>
+  using unwrap_name_t = typename unwrap_name<T>::type;
+
+  //================================================================================================
+  //! @ingroup traits
+  //! @brief   Checks if a parameter pack only contains distinct types.
+  //!
+  //! @tparam Ints The Index of the types in the parameter pack
+  //! @tparam Ts   The types to access
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T> all_uniques_t 
+  //!       = typename all_uniques<std::index_sequence_for<Ts...>, Ts...>::type;
+  //! }
+  //! @endcode
+  //!
+  //! ## Helper value
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T> using all_uniques_v = all_uniques_t<Ts...>::value;
+  //! }
+  //! @endcode
+  //================================================================================================
+  template <typename Ints, typename... Ts>
+  struct all_uniques;
+
+  template <>
+  struct all_uniques<std::index_sequence<>> { using type = std::true_type; };
+
+  template <std::size_t... Ints, typename... Ts>
+  struct all_uniques<std::index_sequence<Ints...>, Ts...>
+  {
+    struct all_uniques_inner : _::unique<Ints, Ts>... {};
+
+    template <typename... Us>
+    static auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
+    static std::false_type is_set(...);
+
+    using type = decltype(is_set(Ts{}...));
+  };
+
+  template<typename... Ts>
+  using all_uniques_t = typename all_uniques<std::index_sequence_for<Ts...>, Ts...>::type;
+
+  template<typename... Ts>
+  inline constexpr auto all_uniques_v = all_uniques_t<Ts...>::value;
+
+  //================================================================================================
+  //! @ingroup traits
+  //! @brief   Checks if a parameter pack only contains distinct kumi::field_member names. 
+  //!          Evaluates to false if no type is a kumi::field_member.
+  //!
+  //! @tparam Ints The Index of the types in the parameter pack
+  //! @tparam Ts The types to access
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T> all_unique_names_t 
+  //!       = typename all_unique_names<std::index_sequence_for<Ts...>, Ts...>::type;
+  //! }
+  //! @endcode
+  //!
+  //! ## Helper value
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T> using all_unique_names_v = all_unique_names_t<Ts...>::value;
+  //! }
+  //! @endcode
+  //================================================================================================
+  template <typename Ints, typename... Ts>
+  struct all_unique_names;
+
+  template <>
+  struct all_unique_names<std::index_sequence<>> { using type = std::true_type; };
+
+  template <std::size_t... Ints, typename... Ts>
+  struct all_unique_names<std::index_sequence<Ints...>, Ts...>
+  {
+    struct all_uniques_inner : _::unique_name<Ints, Ts>... {};
+
+    template <typename... Us>
+    static auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
+    static std::false_type is_set(...);
+
+    using type = decltype(is_set(Ts{}...));
+  };
+
+  template<typename... Ts>
+  using all_unique_names_t = typename all_unique_names<std::index_sequence_for<Ts...>, Ts...>::type;
+
+  template<typename... Ts>
+  inline constexpr auto all_unique_names_v = all_unique_names_t<Ts...>::value;
+   
   // Forward declaration
   template<typename... Ts> struct tuple;
 }
-
