@@ -69,6 +69,69 @@ namespace kumi::_
     T {args...};
   };
 
+  //==============================================================================================
+  // Helper concepts for construction checks on records
+  //==============================================================================================
+  template<typename From, typename To> struct is_fieldwise_constructible;
+  template<typename From, typename To> struct is_fieldwise_convertible;
+  template<typename From, typename To> struct is_fieldwise_ordered;
+
+  template<typename Ref, typename Field>
+  struct check_name
+  {
+    static consteval Field      get(Ref) requires(Ref::name == Field::name) { return {}; }
+    static consteval kumi::unit get(...)                                    { return {}; }
+  };
+
+  /// Helper using inheritance to get the corresponding name in an variadic pack if it exist 
+  template<typename Ref, typename... Fields>
+  struct get_field_by_name : check_name<Ref,Fields>...
+  {
+    using check_name<Ref,Fields>::get...;
+    using type = decltype(get(std::declval<Ref>()));
+  };
+
+  template<typename Ref, typename... Fields>
+  using get_field_by_name_t = typename get_field_by_name<Ref, Fields...>::type;
+
+  template<template<class...> class Box, typename... From, typename... To>
+  struct is_fieldwise_convertible<Box<From...>, Box<To...>>
+  {     
+    static constexpr bool value = ( []() 
+      {
+        using F_field = std::remove_cvref_t<From>;
+        using T_field = std::remove_cvref_t<get_field_by_name_t<From, To...>>;
+        return kumi::convertible_to<unwrap_field_capture_t<F_field>, unwrap_field_capture_t<T_field>>;
+      }() && ...);
+  };
+
+  template<template<class...> class Box, typename... From, typename... To>
+  struct is_fieldwise_constructible<Box<From...>, Box<To...>>
+  {
+    static constexpr bool value = ( []()
+      {
+        using F_field = std::remove_cvref_t<From>;
+        using T_field = std::remove_cvref_t<get_field_by_name_t<From, To...>>;
+        return std::is_constructible_v<unwrap_field_capture_t<F_field>, unwrap_field_capture_t<T_field>>;
+      }() && ...);
+  };
+
+  /// Wrong
+  template<template<class...> class Box, typename... From, typename... To>
+  struct is_fieldwise_ordered<Box<From...>, Box<To...>>
+  {
+    static constexpr bool value = (... && ordered<From,To> );
+  };
+
+  template<typename From, typename To>
+  concept fieldwise_convertible = is_fieldwise_convertible<From, To>::value;
+
+  template<typename From, typename To>
+  concept fieldwise_constructible = is_fieldwise_constructible<From, To>::value;
+
+  template<typename From, typename To>
+  concept fieldwise_ordered = is_fieldwise_ordered<From, To>::value;
+
   //================================================================================================
   // Concept machinery to make our algorithms SFINAE friendly
   //================================================================================================
