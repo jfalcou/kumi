@@ -57,7 +57,7 @@ namespace kumi
     requires(I < sizeof...(Ts))
     KUMI_TRIVIAL constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) &noexcept
     {
-      return _::get_leaf<I>(impl);
+      return unwrap_field_value(_::get_leaf<I>(impl));
     }
 
     /// @overload
@@ -65,7 +65,7 @@ namespace kumi
     requires(I < sizeof...(Ts))
     KUMI_TRIVIAL constexpr decltype(auto) operator[](index_t<I>) &&noexcept
     {
-      return _::get_leaf<I>(static_cast<decltype(impl) &&>(impl));
+      return unwrap_field_value(_::get_leaf<I>(static_cast<decltype(impl) &&>(impl)));
     }
 
     /// @overload
@@ -73,7 +73,7 @@ namespace kumi
     requires(I < sizeof...(Ts))
     KUMI_TRIVIAL constexpr decltype(auto) operator[](index_t<I>) const &&noexcept
     {
-      return _::get_leaf<I>(static_cast<decltype(impl) const &&>(impl));
+      return unwrap_field_value(_::get_leaf<I>(static_cast<decltype(impl) const &&>(impl)));
     }
 
     /// @overload
@@ -81,7 +81,7 @@ namespace kumi
     requires(I < sizeof...(Ts))
     KUMI_TRIVIAL constexpr decltype(auto) operator[](index_t<I>) const &noexcept
     {
-      return _::get_leaf<I>(impl);
+      return unwrap_field_value(_::get_leaf<I>(impl));
     }
  
     //==============================================================================================
@@ -166,7 +166,7 @@ namespace kumi
     { 
       (([&] {
         constexpr auto name = field_name<Ts::name>{};
-        get<name>(*this) = get<name>(other);
+        get<name>(*this)    = get<name>(other);
       } ()), ...);
       return *this;
     }
@@ -178,7 +178,7 @@ namespace kumi
     {
       (([&] {
         constexpr auto name = field_name<Ts::name>{};
-        get<name>(*this) = get<name>(other);
+        get<name>(*this)    = get<name>(other);
       } ()), ...);
       return *this;
     }

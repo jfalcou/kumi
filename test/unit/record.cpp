@@ -15,19 +15,19 @@ TTS_CASE("Check record type coherence")
     int x = 1;
     int y = 1;
 
-    auto a = kumi::field_capture<"a", int>{x};
-    auto b = kumi::field_capture<"b", const int>{x};
-    auto c = kumi::field_capture<"c", int&>{x};
-    auto d = kumi::field_capture<"d", int const &>{x};
+    auto a = kumi::field_capture<"a", int>          {x};
+    auto b = kumi::field_capture<"b", const int>    {x};
+    auto c = kumi::field_capture<"c", int&>         {x};
+    auto d = kumi::field_capture<"d", int const &>  {x};
     auto e = kumi::field_capture<"e", int&&>{std::move(y)};
 
     auto rec = kumi::record{a, b, c, d, std::move(e)};
 
-    TTS_TYPE_IS((decltype(kumi::get<0_c>(rec))), std::add_lvalue_reference_t<decltype(a)>);
-    TTS_TYPE_IS((decltype(kumi::get<1_c>(rec))), std::add_lvalue_reference_t<decltype(b)>);
-    TTS_TYPE_IS((decltype(kumi::get<2_c>(rec))), std::add_lvalue_reference_t<decltype(c)>);
-    TTS_TYPE_IS((decltype(kumi::get<3_c>(rec))), std::add_lvalue_reference_t<decltype(d)>);
-    TTS_TYPE_IS((decltype(kumi::get<4_c>(rec))), std::add_lvalue_reference_t<decltype(e)>);
+    TTS_TYPE_IS((decltype(kumi::get<0_c>(rec))), int&       );
+    TTS_TYPE_IS((decltype(kumi::get<1_c>(rec))), int const& );
+    TTS_TYPE_IS((decltype(kumi::get<2_c>(rec))), int&       );
+    TTS_TYPE_IS((decltype(kumi::get<3_c>(rec))), int const& );
+    TTS_TYPE_IS((decltype(kumi::get<4_c>(rec))), int&       );
 
     kumi::get<"c"_f>(rec) ++;
     TTS_EQUAL(a.value, 1);
@@ -42,9 +42,8 @@ TTS_CASE("Check record equality coherence")
 {
    using namespace kumi::literals; 
 
-   auto t   = kumi::record{"x"_f = 1, "y"_f = 2.f, "z"_f = 3., "t"_f = 'c'};
-   auto t2  = kumi::record{"y"_f = 2.f, "z"_f = 3., "t"_f = 'c', "x"_f = 1};
-
+   auto t  = kumi::record{"x"_f = 1, "y"_f = 2.f, "z"_f = 3., "t"_f = 'c'};
+   auto t2 = kumi::record{"y"_f = 2.f, "z"_f = 3., "t"_f = 'c', "x"_f = 1};
    auto tx = kumi::record{"x"_f = 1.f, "y"_f = 4, "z"_f = 'x', "t"_f = kumi::str{"str"}};
     
    auto a = kumi::record{"x"_f = 0, "z"_f = 0., "t"_f = 'a', "y"_f = 42.f};
