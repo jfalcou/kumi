@@ -10,8 +10,23 @@
 
 #include <kumi/tuple.hpp>
 
+#define KUMI_FWD(...) static_cast<decltype(__VA_ARGS__) &&>(__VA_ARGS__)
+
 namespace kumi
 {
+  //================================================================================================
+  //! @ingroup record
+  //! @class record
+  //! @brief Fixed-size collection of heterogeneous fields necessarily named, names are unique.
+  //!
+  //! kumi::record provides an aggregate based implementation of a record. It provides algorithms and
+  //! functions designed to facilitate record's handling and transformations.
+  //!
+  //! kumi::record is also compatible with standard tuple operations and structured bindings to some
+  //! extent.
+  //!
+  //! @tparam Ts Sequence of fields stored inside kumi::record.
+  //================================================================================================
   template<typename... Ts> 
   requires ( is_fully_named<Ts...> && uniquely_named<Ts...> )
   struct record
@@ -23,6 +38,21 @@ namespace kumi
 
     binder_t impl;
     
+    //==============================================================================================
+    //! @name Accessors
+    //! @{
+    //==============================================================================================
+
+    //==============================================================================================
+    //! @brief Extracts the Ith field from a kumi::record
+    //!
+    //! @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
+    //! @param  i Compile-time index of the field to access
+    //! @return A reference to the selected field of current record.
+    //!
+    //! ## Example:
+    //! @include doc/record_subscript.cpp
+    //==============================================================================================
     template<std::size_t I>
     requires(I < sizeof...(Ts))
     KUMI_TRIVIAL constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) &noexcept
@@ -54,6 +84,18 @@ namespace kumi
       return _::get_leaf<I>(impl);
     }
  
+    //==============================================================================================
+    //! @brief Extracts the element of the field labeled Name from a kumi::record
+    //!
+    //! @note Does not participate in overload resolution if `get_name_index<Name>` 
+    //!       is not in [0, sizeof...(Ts)).
+    //!
+    //! @tparam Name Non type template parameter name of the field to access
+    //! @return A reference to the element of the selected field of current record.
+    //!
+    //! ## Example:
+    //! @include doc/record_named_subscript.cpp
+    //==============================================================================================
     template<auto Name>
     requires( contains_field<Name, Ts...> )
     constexpr decltype(auto) operator[](field_name<Name> const&) &noexcept
@@ -89,6 +131,14 @@ namespace kumi
       return unwrap_field_value(_::get_leaf<idx>(impl));
     }
 
+    //==============================================================================================
+    //! @}
+    //==============================================================================================
+    
+    //==============================================================================================
+    //! @name Properties
+    //! @{
+    //==============================================================================================
     /// Returns the number of elements in a kumi::record
     KUMI_TRIVIAL_NODISCARD static constexpr  auto size() noexcept { return sizeof...(Ts); }
 
@@ -101,7 +151,15 @@ namespace kumi
         using tuple_type = tuple<unwrap_name_t<Ts>...>;
         return tuple_type{ unwrap_name_v<Ts>... };
     }; 
+    //==============================================================================================
+    //! @}
+    //==============================================================================================
 
+    //==============================================================================================
+    //! @brief Replaces the contents of the record with the contents of another record.
+    //! @param other kumi::record to copy or move from
+    //! @return `*this`
+    //==============================================================================================
     template<typename... Us>
     requires( equally_named<record, record<Us...>>  && _::fieldwise_convertible<record, record<Us...>> ) 
     constexpr record &operator=(record<Us...> const &other)
@@ -125,6 +183,11 @@ namespace kumi
       return *this;
     }
  
+    //==============================================================================================
+    //! @name Comparison operators
+    //! @{
+    //==============================================================================================
+    
     /// @ingroup record
     /// @related kumi::record
     /// @brief Compares a record with an other for equality
@@ -208,6 +271,17 @@ namespace kumi
       return !(lhs < rhs);
     }
  
+    //==============================================================================================
+    //! @}
+    //==============================================================================================
+
+    //==============================================================================================
+    //! @brief Invoke the Callable object f on each element of the current record.
+    //!
+    //! @param f	Callable object to be invoked
+    //! @return The value returned by f.
+    //!
+    //==============================================================================================
     template<typename Function>
     KUMI_TRIVIAL constexpr decltype(auto) operator()(Function &&f) const&
     noexcept(noexcept(kumi::apply(KUMI_FWD(f), *this))) { return kumi::apply(KUMI_FWD(f), *this); }
@@ -235,6 +309,11 @@ namespace kumi
     }
 #endif
  
+    //==============================================================================================
+    /// @ingroup record 
+    //! @related kumi::record
+    //! @brief Inserts a kumi::record in an output stream
+    //==============================================================================================
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, Traits> &os,
                                                          record const &t) noexcept
@@ -267,7 +346,7 @@ namespace kumi
   //! @param ts	Zero or more lvalue arguments to construct the record from.
   //! @return A kumi::record object containing lvalue references.
   //! ## Example:
-  //! @include doc/tie.cpp
+  //! @include doc/record_tie.cpp
   //================================================================================================
   template<typename... Ts> KUMI_TRIVIAL_NODISCARD constexpr record<Ts &...> tie(Ts &...ts) { return {ts...}; }
 
@@ -344,16 +423,16 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup record
-  //! @brief Extracts the Ith element from a kumi::record
+  //! @brief Extracts the Ith field from a kumi::record
   //!
   //! @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
-  //! @tparam   I Compile-time index of the element to access
-  //! @param    t record to index
-  //! @return   A reference to the selected element of t.
+  //! @tparam   I Compile-time index of the field to access
+  //! @param    t Record to index
+  //! @return   A reference to the selected field of t.
   //! @related kumi::record
   //!
   //! ## Example:
-  //! @include doc/get.cpp
+  //! @include doc/record_get.cpp
   //================================================================================================
   template<std::size_t I, typename... Ts>
   requires(I < sizeof...(Ts)) KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
@@ -388,16 +467,16 @@ namespace kumi
  
   //================================================================================================
   //! @ingroup record
-  //! @brief Extracts the field labeled Name from a kumi::record if it exists
+  //! @brief Extracts the element of the field labeled Name from a kumi::record if it exists
   //!
   //! @note Does not participate in overload resolution if the names are not unique
-  //! @tparam   Name Non type template parameter name of the element to access
-  //! @param    t record to index
-  //! @return   A reference to the selected element of t.
+  //! @tparam   Name Non type template parameter name of the field to access
+  //! @param    t Record to index
+  //! @return   A reference to the element of the selected field of t.
   //! @related kumi::record
   //!
   //! ## Example:
-  //! @include doc/named_get.cpp
+  //! @include doc/record_named_get.cpp
   //================================================================================================
   template<field_name Name, typename... Ts>
   requires ( uniquely_named<Ts...> )
