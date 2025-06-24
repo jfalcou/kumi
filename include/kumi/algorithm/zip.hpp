@@ -38,11 +38,11 @@ namespace kumi
   template<product_type T0, sized_product_type<size_v<T0>>... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto zip(T0 const &t0, Ts const &...ts)
   {
-    using res_type = kumi::result::common_product_type_t<std::remove_cvref_t<T0>, std::remove_cvref_t<Ts>...>;
+    using res_type = kumi::common_product_type_t<std::remove_cvref_t<T0>, std::remove_cvref_t<Ts>...>;
 
     return kumi::map( [](auto const &m0, auto const &...ms) 
                     { 
-                        return _::builder<res_type>::make(m0, ms...);
+                        return builder<res_type>::make(m0, ms...);
                     }
                     , t0,ts...
                     );

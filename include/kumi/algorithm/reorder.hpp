@@ -44,7 +44,7 @@ namespace kumi
   requires((Idx < size_v<Tuple>) && ...)
   [[nodiscard]] KUMI_ABI constexpr auto reorder(Tuple &&t)
   {
-    return _::builder<std::remove_cvref_t<Tuple>>::make( get<Idx>(KUMI_FWD(t))... );
+    return builder<std::remove_cvref_t<Tuple>>::make( get<Idx>(KUMI_FWD(t))... );
   }
 
   namespace result

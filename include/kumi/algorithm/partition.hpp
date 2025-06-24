@@ -58,11 +58,11 @@ namespace kumi
     auto select = [&]<typename O, std::size_t... I>(O, std::index_sequence<I...>)
     {
       using rts = std::remove_cvref_t<decltype(tup)>;
-      using type = _::builder_t<rts, std::tuple_element_t< pos.t[O::value+I], rts>...>;
+      using type = builder_t<rts, std::tuple_element_t< pos.t[O::value+I], rts>...>;
       return type{get<pos.t[O::value+I]>(KUMI_FWD(tup))...};
     };
     
-    using type = _::builder_t<std::remove_cvref_t<T>, decltype(select(kumi::index<0>       , std::make_index_sequence<pos.cut>{}))
+    using type = builder_t<std::remove_cvref_t<T>, decltype(select(kumi::index<0>       , std::make_index_sequence<pos.cut>{}))
                                                     , decltype(select(kumi::index<pos.cut> , std::make_index_sequence<kumi::size_v<T> - pos.cut>{}))>;
 
     return type{ select(kumi::index<0>      , std::make_index_sequence<pos.cut>{})

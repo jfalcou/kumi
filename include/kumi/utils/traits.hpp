@@ -401,7 +401,68 @@ namespace kumi
 
   template<typename... Ts>
   inline constexpr auto all_unique_names_v = all_unique_names_t<Ts...>::value;
-   
+
+  //================================================================================================
+  //! @ingroup traits
+  //! @brief   Returns the raw template type that wraps the type passed as a parameter 
+  //!
+  //! @tparam T the type from which to extract the template
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T> using template_of_t = typename template_of<T>::type;
+  //! }
+  //! @endcode
+  //================================================================================================
+  template<typename T> 
+  struct template_of
+  {
+    using type = kumi::unit;
+  };
+
+  template<template<class ...> class Box, typename... Ts>
+  struct template_of<Box<Ts...>>
+  {
+        using type = Box<>;
+  };
+
+  template<typename T>
+  using template_of_t = typename template_of<T>::type;
+
+  //================================================================================================
+  //! @ingroup traits
+  //! @brief   Extracts the common product_type of a parameter pack, returns kumi::unit if there are
+  //!          none
+  //!
+  //! @tparam T  The Index of the types in the parameter pack
+  //! @tparam Ts The types to access
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T> using common_product_type_t 
+  //!       = typename common_product_type<<Ts...>::type;
+  //! }
+  //! @endcode
+  //================================================================================================
+  template<typename T, typename... Ts>
+  struct common_product_type
+  {
+    using type = decltype( []()
+    {
+      if constexpr((std::is_same_v<template_of_t<T>, template_of_t<Ts>> && ...))
+        return template_of_t<T>{};
+      else
+        return kumi::none;
+    }() );
+  };
+
+  template<typename... Ts>
+  using common_product_type_t = typename common_product_type<Ts...>::type;
+
   // Forward declaration
   template<typename... Ts> struct tuple;
   template<typename... Ts> struct record;
