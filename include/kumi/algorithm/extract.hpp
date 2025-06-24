@@ -49,7 +49,7 @@ namespace kumi
   {
     return [&]<std::size_t... N>(std::index_sequence<N...>)
     {
-        using final_t = _::builder_t<std::remove_cvref_t<Tuple>
+        using final_t = builder_t<std::remove_cvref_t<Tuple>
                         , std::tuple_element_t<N + I0, Tuple>...>;
 
         return final_t{ get<N + I0>(t)... };
@@ -100,7 +100,7 @@ namespace kumi
                                     , [[maybe_unused]] index_t<I0> i0
                                     ) noexcept
   {
-    return _::builder<std::remove_cvref_t<Tuple>>
+    return builder<std::remove_cvref_t<Tuple>>
             ::make(extract(t,index<0>, index<I0>), extract(t,index<I0>));
   }
 
