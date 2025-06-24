@@ -85,5 +85,5 @@ namespace kumi::_
   }; 
 
   template <typename T, typename... Args>
-  using builder_t = typename builder<T>::to<Args...>;
+  using builder_t = typename builder<T>::template to<Args...>;
 }
