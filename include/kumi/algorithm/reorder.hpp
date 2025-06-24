@@ -38,11 +38,13 @@ namespace kumi
   //! ## Example
   //! @include doc/reorder.cpp
   //================================================================================================
+  #include <kumi/detail/builder.hpp>
+
   template<std::size_t... Idx, product_type Tuple>
   requires((Idx < size_v<Tuple>) && ...)
   [[nodiscard]] KUMI_ABI constexpr auto reorder(Tuple &&t)
   {
-    return kumi::make_tuple( get<Idx>(KUMI_FWD(t))...);
+    return _::builder<std::remove_cvref_t<Tuple>>::make( get<Idx>(KUMI_FWD(t))... );
   }
 
   namespace result

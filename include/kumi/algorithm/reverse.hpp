@@ -7,6 +7,8 @@
 //==================================================================================================
 #pragma once
 
+#include <kumi/detail/builder.hpp>
+
 namespace kumi
 {
   //================================================================================================
@@ -40,7 +42,7 @@ namespace kumi
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return kumi::make_tuple(get<(size_v<Tuple> - 1 - I)>(KUMI_FWD(t))...);
+        return _::builder<std::remove_cvref_t<Tuple>>::make(get<(size_v<Tuple> - 1 - I)>(KUMI_FWD(t))...);
       }
       (std::make_index_sequence<size<Tuple>::value>());
     }
