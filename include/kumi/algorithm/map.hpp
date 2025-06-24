@@ -58,7 +58,7 @@ namespace kumi
 
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return _::builder<std::remove_cvref_t<Tuple>>
+        return builder<std::remove_cvref_t<Tuple>>
                 ::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
       }(std::make_index_sequence<size<Tuple>::value>());
     }
@@ -124,7 +124,7 @@ namespace kumi
 
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return _::builder<std::remove_cvref_t<Tuple>>
+        return builder<std::remove_cvref_t<Tuple>>
                 ::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
       }(std::make_index_sequence<size<Tuple>::value>());
     }

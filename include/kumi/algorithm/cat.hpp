@@ -59,13 +59,13 @@ namespace kumi
         return that;
       }();
     
-      using res_type = kumi::result::common_product_type_t<std::remove_cvref_t<Tuples>...>;
+      using res_type = kumi::common_product_type_t<std::remove_cvref_t<Tuples>...>;
 
       return [&]<std::size_t... N>(auto&& tuples, std::index_sequence<N...>)
       {
         using rts  = std::remove_cvref_t<decltype(tuples)>;
         
-        using final_t = _::builder_t<res_type
+        using final_t = builder_t<res_type
                         , std::tuple_element_t<pos.e[N]
                             , std::remove_cvref_t<std::tuple_element_t<pos.t[N], rts>>
                             >...
