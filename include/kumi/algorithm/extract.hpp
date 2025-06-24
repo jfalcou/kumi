@@ -7,6 +7,8 @@
 //==================================================================================================
 #pragma once
 
+#include <kumi/detail/builder.hpp>
+
 namespace kumi
 {
   //================================================================================================
@@ -47,7 +49,10 @@ namespace kumi
   {
     return [&]<std::size_t... N>(std::index_sequence<N...>)
     {
-      return kumi::tuple<std::tuple_element_t<N + I0, Tuple>...> {get<N + I0>(t)...};
+        using final_t = _::builder_t<std::remove_cvref_t<Tuple>
+                        , std::tuple_element_t<N + I0, Tuple>...>;
+
+        return final_t{ get<N + I0>(t)... };
     }
     (std::make_index_sequence<I1 - I0>());
   }
@@ -95,7 +100,8 @@ namespace kumi
                                     , [[maybe_unused]] index_t<I0> i0
                                     ) noexcept
   {
-    return kumi::make_tuple(extract(t,index<0>, index<I0>), extract(t,index<I0>));
+    return _::builder<std::remove_cvref_t<Tuple>>
+            ::make(extract(t,index<0>, index<I0>), extract(t,index<I0>));
   }
 
   namespace result
