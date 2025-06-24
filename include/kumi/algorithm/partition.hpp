@@ -7,6 +7,8 @@
 //==================================================================================================
 #pragma once
 
+#include <kumi/detail/builder.hpp>
+
 namespace kumi
 {
   //================================================================================================
@@ -55,13 +57,17 @@ namespace kumi
 
     auto select = [&]<typename O, std::size_t... I>(O, std::index_sequence<I...>)
     {
-      using type = kumi::tuple<std::tuple_element_t< pos.t[O::value+I], std::remove_cvref_t<decltype(tup)>>...>;
+      using rts = std::remove_cvref_t<decltype(tup)>;
+      using type = _::builder_t<rts, std::tuple_element_t< pos.t[O::value+I], rts>...>;
       return type{get<pos.t[O::value+I]>(KUMI_FWD(tup))...};
     };
+    
+    using type = _::builder_t<std::remove_cvref_t<T>, decltype(select(kumi::index<0>       , std::make_index_sequence<pos.cut>{}))
+                                                    , decltype(select(kumi::index<pos.cut> , std::make_index_sequence<kumi::size_v<T> - pos.cut>{}))>;
 
-    return kumi::tuple{ select(kumi::index<0>      , std::make_index_sequence<pos.cut>{})
-                      , select(kumi::index<pos.cut>, std::make_index_sequence<kumi::size<T>::value - pos.cut>{})
-                      };
+    return type{ select(kumi::index<0>      , std::make_index_sequence<pos.cut>{})
+               , select(kumi::index<pos.cut>, std::make_index_sequence<kumi::size<T>::value - pos.cut>{})
+               };
   }
 
   namespace result
