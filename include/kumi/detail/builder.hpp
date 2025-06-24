@@ -19,7 +19,6 @@ namespace kumi
     };
 
     template<template<class ...> class Box, typename... Ts>
-    requires requires { typename Box<>; }
     struct template_of<Box<Ts...>>
     {
       using type = Box<>;
@@ -58,6 +57,8 @@ namespace kumi::_
 {
   template<typename T> struct builder
   {
+    static constexpr bool is_primary = true;  
+    
     template<typename... Ts>
     using to = kumi::tuple<Ts...>;
 
@@ -71,6 +72,8 @@ namespace kumi::_
   template<template<class...> class Box, typename... Ts>
   struct builder<Box<Ts...>>
   {
+    static constexpr bool is_primary = false; 
+    
     template<typename... Us>
     using to = Box<Us...>;
 
