@@ -63,7 +63,7 @@ namespace kumi
     };
     
     using type = builder_t<std::remove_cvref_t<T>, decltype(select(kumi::index<0>       , std::make_index_sequence<pos.cut>{}))
-                                                    , decltype(select(kumi::index<pos.cut> , std::make_index_sequence<kumi::size_v<T> - pos.cut>{}))>;
+                                                 , decltype(select(kumi::index<pos.cut> , std::make_index_sequence<kumi::size_v<T> - pos.cut>{}))>;
 
     return type{ select(kumi::index<0>      , std::make_index_sequence<pos.cut>{})
                , select(kumi::index<pos.cut>, std::make_index_sequence<kumi::size<T>::value - pos.cut>{})
