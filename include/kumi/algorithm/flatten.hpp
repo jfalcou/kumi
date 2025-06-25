@@ -7,8 +7,6 @@
 //==================================================================================================
 #pragma once
 
-#include <kumi/detail/builder.hpp>
-
 namespace kumi
 {
   //================================================================================================
@@ -44,10 +42,7 @@ namespace kumi
                             auto v_or_t = []<typename V>(V&& v)
                             {
                               if constexpr(product_type<V>) return KUMI_FWD(v);
-                              else  
-                              {
-                                return kumi::tuple{KUMI_FWD(v)};
-                              }
+                              else                          return kumi::tuple{KUMI_FWD(v)};
                             };
 
                             return cat( v_or_t(KUMI_FWD(m))... );
