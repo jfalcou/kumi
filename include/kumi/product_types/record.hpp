@@ -8,9 +8,7 @@
 #ifndef KUMI_RECORD_HPP_INCLUDED
 #define KUMI_RECORD_HPP_INCLUDED
 
-#include <kumi/tuple.hpp>
-
-#define KUMI_FWD(...) static_cast<decltype(__VA_ARGS__) &&>(__VA_ARGS__)
+#include <kumi/product_types/tuple.hpp>
 
 namespace kumi
 {
@@ -28,10 +26,11 @@ namespace kumi
   //! @tparam Ts Sequence of fields stored inside kumi::record.
   //================================================================================================
   template<typename... Ts> 
-  requires ( is_fully_named<Ts...> && uniquely_named<Ts...> )
-  struct record
+  requires ( sizeof...(Ts) == 0 || ( is_fully_named<Ts...> && uniquely_named<Ts...> ))
+  struct record<Ts...>
   {
-    using is_product_type = void;
+    using is_product_type   = void;
+    using is_record_type    = void;
     using binder_t = _::make_binder_t<std::make_integer_sequence<int,sizeof...(Ts)>, Ts...>;
 
     static constexpr bool is_homogeneous = binder_t::is_homogeneous;
@@ -51,13 +50,13 @@ namespace kumi
     //! @return A reference to the selected field of current record.
     //!
     //! ## Example:
-    //! @include doc/record_subscript.cpp
+    //! @include doc/record/subscript.cpp
     //==============================================================================================
     template<std::size_t I>
     requires(I < sizeof...(Ts))
     KUMI_TRIVIAL constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) &noexcept
     {
-      return unwrap_field_value(_::get_leaf<I>(impl));
+      return _::get_leaf<I>(impl);
     }
 
     /// @overload
@@ -65,7 +64,7 @@ namespace kumi
     requires(I < sizeof...(Ts))
     KUMI_TRIVIAL constexpr decltype(auto) operator[](index_t<I>) &&noexcept
     {
-      return unwrap_field_value(_::get_leaf<I>(static_cast<decltype(impl) &&>(impl)));
+      return _::get_leaf<I>(static_cast<decltype(impl) &&>(impl));
     }
 
     /// @overload
@@ -73,7 +72,7 @@ namespace kumi
     requires(I < sizeof...(Ts))
     KUMI_TRIVIAL constexpr decltype(auto) operator[](index_t<I>) const &&noexcept
     {
-      return unwrap_field_value(_::get_leaf<I>(static_cast<decltype(impl) const &&>(impl)));
+      return _::get_leaf<I>(static_cast<decltype(impl) const &&>(impl));
     }
 
     /// @overload
@@ -81,7 +80,7 @@ namespace kumi
     requires(I < sizeof...(Ts))
     KUMI_TRIVIAL constexpr decltype(auto) operator[](index_t<I>) const &noexcept
     {
-      return unwrap_field_value(_::get_leaf<I>(impl));
+      return _::get_leaf<I>(impl);
     }
  
     //==============================================================================================
@@ -94,7 +93,7 @@ namespace kumi
     //! @return A reference to the element of the selected field of current record.
     //!
     //! ## Example:
-    //! @include doc/record_named_subscript.cpp
+    //! @include doc/record/named_subscript.cpp
     //==============================================================================================
     template<auto Name>
     requires( contains_field<Name, Ts...> )
@@ -213,7 +212,7 @@ namespace kumi
     /// @brief Compares records for lexicographical is less relation
     template<typename... Us>
     friend constexpr auto operator<(record const &lhs, record<Us...> const &rhs) noexcept
-    requires(sizeof...(Ts) == sizeof...(Us)) // && _::piecewise_ordered<record, record<Us...>>)
+    requires(sizeof...(Ts) == sizeof...(Us) && _::fieldwise_ordered<record, record<Us...>>)
     {
       // lexicographical order is defined as
       // (v0 < w0) || ... andnot(wi < vi, vi+1 < wi+1) ... || andnot(wn-1 < vn-1, vn < wn);
@@ -319,7 +318,7 @@ namespace kumi
                                                          record const &t) noexcept
     {
       os << "( ";
-      kumi::for_each([&os](auto const &e) { os << e << " "; }, t);
+      kumi::for_each_field([&os](auto name, auto const &e) { os << name << " : " << e << " "; }, t);
       os << ")";
 
       return os;
@@ -342,17 +341,6 @@ namespace kumi
   //================================================================================================
   //! @ingroup record
   //! @related kumi::record
-  //! @brief Creates a kumi::record of lvalue references to its arguments.
-  //! @param ts	Zero or more lvalue arguments to construct the record from.
-  //! @return A kumi::record object containing lvalue references.
-  //! ## Example:
-  //! @include doc/record_tie.cpp
-  //================================================================================================
-  template<typename... Ts> KUMI_TRIVIAL_NODISCARD constexpr record<Ts &...> tie(Ts &...ts) { return {ts...}; }
-
-  //================================================================================================
-  //! @ingroup record
-  //! @related kumi::record
   //! @brief Creates a kumi::record of forwarding references to its arguments.
   //!
   //! Constructs a record of references to the arguments in args suitable for forwarding as an
@@ -365,11 +353,18 @@ namespace kumi
   //! @param ts	Zero or more lvalue arguments to construct the record from.
   //! @return A kumi::record constructed as `kumi::record<Ts&&...>(std::forward<Ts>(args)...)`
   //! ## Example:
-  //! @include doc/forward_as_record.cpp
+  //! @include doc/record/forward_as_record.cpp
   //================================================================================================
-  template<typename... Ts> KUMI_TRIVIAL_NODISCARD constexpr record<Ts &&...> forward_as_record(Ts &&...ts)
+  template<typename... Ts> 
+  requires ( (sizeof...(Ts)==0) || (is_fully_named<std::remove_cvref_t<Ts>...> 
+                                && uniquely_named<std::remove_cvref_t<Ts>...> ))
+  KUMI_TRIVIAL_NODISCARD constexpr record<field_capture<unwrap_name_v<std::remove_cvref_t<Ts>>
+                                        , result::unwrap_field_value_t<Ts>>...>
+  forward_as_record(Ts &&... ts)
   {
-    return {KUMI_FWD(ts)...};
+    return { (field_capture<unwrap_name_v<std::remove_cvref_t<Ts>>, result::unwrap_field_value_t<Ts>>
+             { unwrap_field_value(KUMI_FWD(ts))}
+             )... };
   }
 
   //================================================================================================
@@ -381,9 +376,10 @@ namespace kumi
   //! @return A kumi::record constructed from the ts or their inner references when ts is an instance
   //!         of `std::reference_wrapper`.
   //! ## Example:
-  //! @include doc/make_record.cpp
+  //! @include doc/record/make_record.cpp
   //================================================================================================
   template<typename... Ts>
+  requires ( (sizeof...(Ts)==0) || (is_fully_named<Ts...> && uniquely_named<Ts...>) )
   KUMI_TRIVIAL_NODISCARD constexpr record<std::unwrap_ref_decay_t<Ts>...> make_record(Ts &&...ts)
   {
     return {KUMI_FWD(ts)...};
@@ -392,25 +388,25 @@ namespace kumi
   //================================================================================================
   //! @ingroup record
   //! @related kumi::record
-  //! @brief Creates a kumi::record of references given a reference to a kumi::product_type.
+  //! @brief Creates a kumi::record of references given a reference to a kumi::record_type.
   //!
   //! @param    t Compile-time index of the element to access
   //! @return   A record equivalent to the result of `kumi::apply([]<typename... T>(T&&... e)
   //!           { return kumi::forward_as_record(std::forward<T>(e)...); }, t)`
   //!
   //! ## Example:
-  //! @include doc/to_ref.cpp
+  //! @include doc/record/to_ref.cpp
   //================================================================================================
-  /*template<product_type Type>
+  template<record_type Type>
   KUMI_TRIVIAL_NODISCARD constexpr auto to_ref(Type&& t)
   {
-    return apply( [](auto&&... elems)
+    return _::apply_field( [](auto&&... elems)
                   {
                     return kumi::forward_as_record(KUMI_FWD(elems)...);
                   }
                 , KUMI_FWD(t)
                 );
-  }*/
+  }
 
   //================================================================================================
   //! @}
@@ -432,7 +428,7 @@ namespace kumi
   //! @related kumi::record
   //!
   //! ## Example:
-  //! @include doc/record_get.cpp
+  //! @include doc/record/get.cpp
   //================================================================================================
   template<std::size_t I, typename... Ts>
   requires(I < sizeof...(Ts)) KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
@@ -476,7 +472,7 @@ namespace kumi
   //! @related kumi::record
   //!
   //! ## Example:
-  //! @include doc/record_named_get.cpp
+  //! @include doc/record/named_get.cpp
   //================================================================================================
   template<field_name Name, typename... Ts>
   requires ( uniquely_named<Ts...> )
@@ -518,7 +514,4 @@ namespace kumi
   //================================================================================================
 }
 
-#include <kumi/algorithm.hpp>
-
-#undef KUMI_FWD
 #endif

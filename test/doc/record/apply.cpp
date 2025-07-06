@@ -3,10 +3,10 @@
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 **/
-#include <kumi/record.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
-template<kumi::product_type Record>
+template<kumi::record_type Record>
 void print(std::ostream& os, Record const& t)
 {
   kumi::apply

@@ -17,9 +17,6 @@ namespace kumi
   //! @defgroup utility   Helper Types and Functions
   //! @brief    Tools for interacting with kumi::tuple
   //!
-  //! @defgroup tuple     Tuple Types and Functions
-  //! @brief    Definition for kumi::tuple class and functions
-  //!
   //! @defgroup concepts     Tuple Related Concepts
   //! @brief    Definition for product types related Concepts
   //!

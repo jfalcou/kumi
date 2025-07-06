@@ -35,6 +35,16 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup concepts
+  //! @brief Concept specifying a type follows the Record Type semantic
+  //!
+  //! A type `T` models `kumi::record_type` if it opts in for the Record Type semantic. 
+  //! A `kumi::record_type` also models `kumi::product_type`
+  //================================================================================================
+  template<typename T>
+  concept record_type = product_type<T> && is_record_type<std::remove_cvref_t<T>>::value;
+
+  //================================================================================================
+  //! @ingroup concepts
   //! @brief Concept specifying a type follows the Product Type semantic and has a known size
   //!
   //! A type `T` models `kumi::sized_product_type<N>` if it models `kumi::product_type` and has
@@ -230,7 +240,17 @@ namespace kumi
   template<typename T, typename U>
   concept named_equality_comparable = equally_named<T,U> && _::check_named_equality_v<T,U>;
 
-  // Forward declaration
-  template<typename... Ts> 
-  requires ( is_fully_named<Ts...> && uniquely_named<Ts...> ) struct record;
+  //================================================================================================
+  //! @ingroup concepts
+  //! @brief Concept specifying if two product types are comparable by matching name
+  //!
+  //! A type `T` models `kumi::named_equality_comparable<T,U>` if it's a product_type that satisfies
+  //! kumi::equally_named<T,U> and if each of its fields satisfies kumi::equality_comparable with
+  //! the corresponding field in `U`
+  //================================================================================================
+  template<typename T, typename... Us>
+  concept compatible_product_types = (product_type<T> && ( product_type<Us> && ...))  &&
+  ( (!record_type<T> && (!record_type<Us> && ...))
+    || (record_type<T> && (record_type<Us> && ...) && (equally_named<T, Us> && ...))
+  );
 }

@@ -3,7 +3,7 @@
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 **/
-#include <kumi/record.hpp>
+#include <kumi/tuple.hpp>
 #include <iostream>
 
 int main()
@@ -16,7 +16,7 @@ int main()
   std::cout << r[1_c] << "\n";
   std::cout << r[2_c] << "\n";
 
-  r[3_c]++;
+  r[3_c].value++;
 
   std::cout << r[kumi::index<3>] << "\n";
 }

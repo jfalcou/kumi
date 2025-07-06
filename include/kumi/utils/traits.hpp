@@ -34,6 +34,25 @@ namespace kumi
   template<typename T, typename Enable = void> struct is_product_type : std::false_type {};
   template<typename T> struct is_product_type<T, typename T::is_product_type> : std::true_type {};
 
+
+  //================================================================================================
+  //! @ingroup traits
+  //! @brief Opt-in traits for types behaving like a kumi::product_type
+  //!
+  //! To be treated like a record, an user defined type must supports structured bindings opt-in to
+  //! kumi::record_type Semantic as well as kumi::product_type Semantic.
+  //!
+  //! This can be done in two ways:
+  //!   - exposing an internal `is_record_type` type that evaluates to `void`
+  //!   - specializing the `kumi::is_record_type` traits so it exposes a static constant member
+  //!     `value` that evaluates to `true`
+  //!
+  //! ## Example:
+  //! @include doc/adapt.cpp
+  //==============================================================================================
+  template<typename T, typename Enable = void> struct is_record_type : std::false_type {};
+  template<typename T> struct is_record_type<T, typename T::is_record_type> : std::true_type {};
+
   //================================================================================================
   //! @ingroup traits
   //! @brief Computes the number of elements of a kumi::product_type
@@ -216,6 +235,78 @@ namespace kumi
     
   template<typename T>
   using unwrap_name_t = typename unwrap_name<T>::type;
+  
+  //================================================================================================
+  //! @ingroup traits
+  //! @brief Computes the return type of a call to kumi::get on a kumi::tuple and unwrap the 
+  //!        field_capture returned by kumi::get on a kumi::record
+  //!
+  //! @tparam I Index of the type to retrieve
+  //! @tparam T kumi::product_type to access
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<std::size_t I, typename T> using raw_member_t = typename raw_member<I,T>::type;
+  //! }
+  //! @endcode
+  //================================================================================================
+  template<std::size_t I, typename T> 
+  struct raw_member     
+  {
+    using type = member_t<I,T>;
+  };
+
+  template<std::size_t I, typename T> 
+  requires( is_record_type<std::remove_cvref_t<T>>::value )
+  struct raw_member<I, T>
+  {
+    using type = std::add_lvalue_reference_t<unwrap_field_capture_t
+                    <
+                        std::remove_cvref_t<member_t<I,T>>
+                    >>;
+  };
+
+  template<std::size_t I, typename T> using raw_member_t = typename raw_member<I,T>::type;
+ 
+  //================================================================================================
+  //! @ingroup traits
+  //! @brief Provides indexed access to the types of the elements of a kumi::product_type and 
+  //!                 unwraps the returned field_capture for kumi::record_type.
+  //!
+  //! @tparam I Index of the type to retrieve
+  //! @tparam T kumi::product_type to access
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<std::size_t I, typename T> 
+  //!   using raw_element_t = unwrap_field_capture_t<element_t<I,T>>;
+  //! }
+  //! @endcode
+  //================================================================================================
+  template<std::size_t I, typename T> using  raw_element_t = unwrap_field_capture_t<element_t<I,T>>;
+
+  //================================================================================================
+  //! @ingroup traits
+  //! @brief Provides indexed access to the names of the elements of a kumi::record_type. 
+  //!
+  //! @tparam I Index of the type to retrieve
+  //! @tparam T kumi::product_type to access
+  //!
+  //! ## Helper value
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<std::size_t I, typename T> 
+  //!   inline constexpr auto member_name_v = unwrap_name_v<std::remove_cvref_t<member_t<I,T>>>;
+  //! }
+  //! @endcode
+  //================================================================================================
+  template<std::size_t I, typename T>
+  inline constexpr auto member_name_v = unwrap_name_v<std::remove_cvref_t<member_t<I,T>>>;
 
   //================================================================================================
   //! @ingroup traits
@@ -316,4 +407,5 @@ namespace kumi
    
   // Forward declaration
   template<typename... Ts> struct tuple;
+  template<typename... Ts> struct record;
 }

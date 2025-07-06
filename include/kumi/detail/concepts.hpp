@@ -116,11 +116,15 @@ namespace kumi::_
       }() && ...);
   };
 
-  /// Wrong
-  template<template<class...> class Box, typename... From, typename... To>
+  template<template<class...>class Box, typename... From, typename... To>
   struct is_fieldwise_ordered<Box<From...>, Box<To...>>
   {
-    static constexpr bool value = (... && ordered<From,To> );
+      static constexpr bool value = ( []()
+      {
+        using F_field = std::remove_cvref_t<From>;
+        using T_field = std::remove_cvref_t<get_field_by_name_t<From, To...>>;
+        return ordered<unwrap_field_capture_t<F_field>, unwrap_field_capture_t<T_field>>;
+      }() && ...);
   };
 
   template<typename From, typename To>
@@ -136,7 +140,7 @@ namespace kumi::_
   // Concept machinery to make our algorithms SFINAE friendly
   //================================================================================================
   template<typename F, size_t I, typename... Tuples>
-  concept supports_call_i = std::is_invocable_v<F, member_t<I,Tuples>...>;
+  concept supports_call_i = std::is_invocable_v<F, raw_member_t<I,Tuples>...>;
 
   template<typename F, typename Indices, typename... Tuples> struct supports_call_t;
 
@@ -154,9 +158,15 @@ namespace kumi::_
   {
   };
 
-  template<typename F, typename Tuple>
-  concept supports_apply = _::
-      supports_apply_t<F, std::make_index_sequence<size<Tuple>::value>, Tuple>::value;
+  template<typename F, size_t... Is, typename Record>
+  requires( is_record_type<std::remove_cvref_t<Record>>::value )
+  struct supports_apply_t<F, std::index_sequence<Is...>, Record>
+      : std::is_invocable<F, std::add_rvalue_reference_t<unwrap_field_capture_t
+        <
+          std::remove_cvref_t<decltype(get<Is>(std::declval<Record &&>()))>
+        >>...>
+  {
+  };
 
   template<typename F, typename Indices, typename Tuple> struct supports_nothrow_apply_t;
 
@@ -165,6 +175,20 @@ namespace kumi::_
       : std::is_nothrow_invocable<F, decltype(get<Is>(std::declval<Tuple &&>()))...>
   {
   };
+
+  template<typename F, size_t... Is, typename Record>
+  requires( is_record_type<std::remove_cvref_t<Record>>::value )
+  struct supports_nothrow_apply_t<F, std::index_sequence<Is...>, Record>
+      : std::is_nothrow_invocable<F, std::add_rvalue_reference_t<unwrap_field_capture_t
+        <
+          std::remove_cvref_t<decltype(get<Is>(std::declval<Record &&>()))>
+        >>...>
+  {
+  };
+
+  template<typename F, typename Tuple>
+  concept supports_apply = _::
+      supports_apply_t<F, std::make_index_sequence<size<Tuple>::value>, Tuple>::value;
 
   template<typename F, typename Tuple>
   concept supports_nothrow_apply = _::

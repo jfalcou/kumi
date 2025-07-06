@@ -3,7 +3,7 @@
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 **/
-#include <kumi/record.hpp>
+#include <kumi/tuple.hpp>
 #include <functional>
 #include <iostream>
 
