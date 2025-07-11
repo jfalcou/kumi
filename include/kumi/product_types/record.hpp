@@ -251,7 +251,10 @@ namespace kumi
                                                          record const &t) noexcept
     {
       os << "( ";
-      kumi::for_each_field([&os](auto name, auto const &e) { os << '\''<< name << '\''<< " : " << e << " "; }, t);
+      kumi::for_each([&os](auto name, auto const &e) 
+      { 
+        os << name << " : " << e << " "; 
+      }, t.names(), t.values());
       os << ")";
 
       return os;
