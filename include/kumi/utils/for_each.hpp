@@ -135,10 +135,9 @@ namespace kumi
     if constexpr(sized_product_type<Tuple,0>) return;
     else
     {
-      auto const fields = t.names();
       auto const invoker{[&, f](auto const i)
       {
-          auto const field = get<i.value>(fields);
+          auto const field = get<i.value>(t.names());
           f
           (
             field.name.value(),
