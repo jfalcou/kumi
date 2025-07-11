@@ -33,19 +33,19 @@ namespace kumi
   requires( (compatible_product_types<std::remove_cvref_t<Tuple>, std::remove_cvref_t<Tuples>...>) 
           && (_::supports_call<Function&, Tuple, Tuples...>))
   {
-    using base_t = std::remove_cvref_t<Tuple>;
-    if constexpr(sized_product_type<Tuple,0>) return;
-    else if constexpr( record_type<base_t> )
+         if constexpr(sized_product_type<Tuple,0>) return;
+    else if constexpr( record_type<Tuple> )
     {
       [&]<std::size_t... I>(std::index_sequence<I...>)
       {
         // clang needs this for some reason
         using std::get;
+        auto const fields = t.names();
         [[maybe_unused]] auto call = [&]<typename M>(M)
-                                        {
-                                          using field_t = field_name<member_name_v<M::value, base_t>>;
-                                          f ( get<field_t{}>(KUMI_FWD(t))
-                                            , get<field_t{}>(KUMI_FWD(ts))...
+                                        { 
+                                          auto const field = get<M::value>(fields); 
+                                          f ( get<field>(KUMI_FWD(t))
+                                            , get<field>(KUMI_FWD(ts))...
                                           );
                                         };
 
@@ -89,8 +89,7 @@ namespace kumi
   //! @include doc/for_each_index.cpp
   //================================================================================================
   template<typename Function, product_type Tuple, product_type... Tuples>
-  requires( !record_type<std::remove_cvref_t<Tuple>> 
-        && (!record_type<std::remove_cvref_t<Tuples>> && ...) )
+  requires( !record_type<Tuple> && (!record_type<Tuples> && ...) )
   constexpr void for_each_index(Function f, Tuple&& t, Tuples&&... ts)
   {
     if constexpr(sized_product_type<Tuple,0>) return;
@@ -133,19 +132,18 @@ namespace kumi
   requires ( compatible_product_types<std::remove_cvref_t<Tuple>, std::remove_cvref_t<Tuples>...> )
   constexpr void for_each_field(Function f, Tuple&& t, Tuples&&... ts)
   {
-    using base_t = std::remove_cvref_t<Tuple>;
     if constexpr(sized_product_type<Tuple,0>) return;
     else
     {
+      auto const fields = t.names();
       auto const invoker{[&, f](auto const i)
       {
-          constexpr auto name = member_name_v<i, base_t>;
-          using field_t = kumi::field_name<name>;
+          auto const field = get<i.value>(fields);
           f
           (
-            name.value(),
-            get<field_t{}>(KUMI_FWD(t)),
-            get<field_t{}>(KUMI_FWD(ts))...
+            field.name.value(),
+            get<field>(KUMI_FWD(t)),
+            get<field>(KUMI_FWD(ts))...
           );
       }};
 

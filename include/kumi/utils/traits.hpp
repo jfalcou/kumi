@@ -112,7 +112,7 @@ namespace kumi
   //================================================================================================
   template<std::size_t I, typename T> struct member
   {
-    using type = decltype( get<I>(std::declval<T&>()));
+    using type = decltype( get<I>(std::declval<T&&>()) );
   };
 
   template<std::size_t I, typename T> using  member_t = typename member<I,T>::type;
@@ -262,10 +262,7 @@ namespace kumi
   requires( is_record_type<std::remove_cvref_t<T>>::value )
   struct raw_member<I, T>
   {
-    using type = std::add_lvalue_reference_t<unwrap_field_capture_t
-                    <
-                        std::remove_cvref_t<member_t<I,T>>
-                    >>;
+    using type = decltype( unwrap_field_value(get<I>(std::declval<T&&>())) );
   };
 
   template<std::size_t I, typename T> using raw_member_t = typename raw_member<I,T>::type;

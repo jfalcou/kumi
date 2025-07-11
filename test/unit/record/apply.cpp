@@ -45,7 +45,7 @@ TTS_CASE("Check apply behavior")
 
   kumi::record some_record {"a"_f = 1, "b"_f = '5', "c"_f = "things"};
 
-  TTS_EQUAL((some_record([](auto... m) {
+  TTS_EQUAL((some_record.values()([](auto... m) {
               std::ostringstream s;
               ((s << m << " "), ...);
               return s.str();
@@ -64,9 +64,8 @@ TTS_CASE("Check apply constexpr behavior")
 
   constexpr auto t2 = []() {
     auto it = kumi::record {"x"_f = 1, "y"_f = 2., "z"_f = 3.f};
-    return it([](auto... m) { return (m + ...); });
+    return it.values()([](auto... m) { return (m + ...); });
   }();
-
   constexpr auto empty = []() { return 99; };
   TTS_CONSTEXPR_EQUAL((kumi::apply( empty, kumi::record{})), 99);
 

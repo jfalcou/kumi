@@ -53,7 +53,7 @@ TTS_CASE("Check for_each constexpr behavior")
 {
   constexpr auto t = []() {
     auto it = kumi::record {"a"_f = 1, "b"_f = 2., "c"_f = 3.4f, "d"_f = '5'};
-    kumi::for_each([](auto &m) { m++; }, it);
+    kumi::for_each([](auto &m) { m++; }, it.values());
     return it;
   }();
 

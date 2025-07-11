@@ -26,14 +26,14 @@ namespace kumi
   //! @tparam Ts Sequence of fields stored inside kumi::record.
   //================================================================================================
   template<typename... Ts> 
-  requires ( sizeof...(Ts) == 0 || ( is_fully_named<Ts...> && uniquely_named<Ts...> ))
+  requires (( entirely_uniquely_named<Ts...> ))
   struct record<Ts...>
   {
     using is_product_type   = void;
     using is_record_type    = void;
     using binder_t = _::make_binder_t<std::make_integer_sequence<int,sizeof...(Ts)>, Ts...>;
 
-    static constexpr bool is_homogeneous = binder_t::is_homogeneous;
+    static constexpr bool is_homogeneous = false;
 
     binder_t impl;
     
@@ -97,7 +97,7 @@ namespace kumi
     //==============================================================================================
     template<auto Name>
     requires( contains_field<Name, Ts...> )
-    constexpr decltype(auto) operator[](field_name<Name> const&) &noexcept
+    KUMI_TRIVIAL constexpr decltype(auto) operator[](field_name<Name> const&) &noexcept
     {
       constexpr auto idx = _::get_name_index<Name, Ts...>();
       return unwrap_field_value(_::get_leaf<idx>(impl));
@@ -106,7 +106,7 @@ namespace kumi
     /// @overload
     template<auto Name>
     requires( contains_field<Name, Ts...> )
-    constexpr decltype(auto) operator[](field_name<Name> const&) &&noexcept
+    KUMI_TRIVIAL constexpr decltype(auto) operator[](field_name<Name> const&) &&noexcept
     {
       constexpr auto idx = _::get_name_index<Name, Ts...>();
       return unwrap_field_value(_::get_leaf<idx>(static_cast<decltype(impl) &&>(impl)));
@@ -115,7 +115,7 @@ namespace kumi
     /// @overload
     template<auto Name>
     requires( contains_field<Name, Ts...> )
-    constexpr decltype(auto) operator[](field_name<Name> const&) const &&noexcept
+    KUMI_TRIVIAL constexpr decltype(auto) operator[](field_name<Name> const&) const &&noexcept
     {
       constexpr auto idx = _::get_name_index<Name, Ts...>();
       return unwrap_field_value(_::get_leaf<idx>(static_cast<decltype(impl) const &&>(impl)));
@@ -124,7 +124,7 @@ namespace kumi
     /// @overload
     template<auto Name>
     requires( contains_field<Name, Ts...> )
-    constexpr decltype(auto) operator[](field_name<Name> const&) const &noexcept
+    KUMI_TRIVIAL constexpr decltype(auto) operator[](field_name<Name> const&) const &noexcept
     {
       constexpr auto idx = _::get_name_index<Name, Ts...>();
       return unwrap_field_value(_::get_leaf<idx>(impl));
@@ -147,9 +147,27 @@ namespace kumi
     /// Returns the names of the elements in a kumi::record 
     KUMI_TRIVIAL_NODISCARD static constexpr auto names() noexcept 
     {   
-        using tuple_type = tuple<unwrap_name_t<Ts>...>;
-        return tuple_type{ unwrap_name_v<Ts>... };
+        return tuple{ field_name<unwrap_name_v<Ts>>{}... };
     }; 
+   
+    /// Returns references to the values of the element in a kumi::record
+    KUMI_TRIVIAL_NODISCARD constexpr auto values() noexcept
+    {
+        return [&]<std::size_t...I>(std::index_sequence<I...>)
+        {
+            return tuple<raw_member_t<I, decltype(*this)>...>{unwrap_field_value(get<I>(*this))...};
+        }(std::make_index_sequence<sizeof...(Ts)>{});
+    };
+    
+    /// @overload
+    KUMI_TRIVIAL_NODISCARD constexpr auto values() const noexcept
+    {
+        return [&]<std::size_t...I>(std::index_sequence<I...>)
+        {
+            return tuple<raw_member_t<I,decltype(*this)>...>{unwrap_field_value(get<I>(*this))...};
+        }(std::make_index_sequence<sizeof...(Ts)>{});
+    };
+  
     //==============================================================================================
     //! @}
     //==============================================================================================
@@ -160,25 +178,33 @@ namespace kumi
     //! @return `*this`
     //==============================================================================================
     template<typename... Us>
-    requires( equally_named<record, record<Us...>>  && _::fieldwise_convertible<record, record<Us...>> ) 
+    requires( equivalent<record, record<Us...>>  && _::fieldwise_convertible<record, record<Us...>> ) 
     constexpr record &operator=(record<Us...> const &other)
     { 
-      (([&] {
-        constexpr auto name = field_name<Ts::name>{};
-        get<name>(*this)    = get<name>(other);
-      } ()), ...);
+      [&]<std::size_t...I>(std::index_sequence<I...>)
+      {
+        (([&]
+        {
+          constexpr auto key  = get<I>(this->names());
+          get<key>(*this)     = get<key>(KUMI_FWD(other));
+        }()), ...);
+      }(std::make_index_sequence<sizeof...(Ts)>{});
       return *this;
     }
 
     /// @overload
     template<typename... Us>
-    requires( equally_named<record, record<Us...>> && _::fieldwise_convertible<record, record<Us...>> ) 
+    requires( equivalent<record, record<Us...>> && _::fieldwise_convertible<record, record<Us...>> ) 
     constexpr record &operator=(record<Us...> &&other)
     {
-      (([&] {
-        constexpr auto name = field_name<Ts::name>{};
-        get<name>(*this)    = get<name>(other);
-      } ()), ...);
+      [&]<std::size_t...I>(std::index_sequence<I...>)
+      {
+        (([&]
+        {
+          constexpr auto key  = get<I>(this->names());
+          get<key>(*this)     = get<key>(KUMI_FWD(other));
+        }()), ...);
+      }(std::make_index_sequence<sizeof...(Ts)>{});
       return *this;
     }
  
@@ -194,10 +220,14 @@ namespace kumi
     friend constexpr auto operator==(record const &self, record<Us...> const &other) noexcept
     requires( named_equality_comparable<record,record<Us...>> )
     {
-      return (([&] {
-        constexpr auto name = field_name<Ts::name>{};
-        return get<name>(self) == get<name>(other);
-      } ()) && ...);
+      [&]<std::size_t...I>(std::index_sequence<I...>)
+      {
+        (([&]
+        {
+          constexpr auto key  = get<I>(self.names());
+          get<key>(self)      = get<key>(KUMI_FWD(other));
+        }()), ...);
+      }(std::make_index_sequence<sizeof...(Ts)>{});
     }
 
     template<typename... Us>
@@ -207,107 +237,10 @@ namespace kumi
       return !(self == other);
     }
 
-    /// @ingroup record
-    /// @related kumi::record
-    /// @brief Compares records for lexicographical is less relation
-    template<typename... Us>
-    friend constexpr auto operator<(record const &lhs, record<Us...> const &rhs) noexcept
-    requires(sizeof...(Ts) == sizeof...(Us) && _::fieldwise_ordered<record, record<Us...>>)
-    {
-      // lexicographical order is defined as
-      // (v0 < w0) || ... andnot(wi < vi, vi+1 < wi+1) ... || andnot(wn-1 < vn-1, vn < wn);
-      // comparison order is based on lhs order, will see what to do here
-      using lhs_type    = std::remove_cvref_t<decltype(lhs)>;
-      auto lhs_names    = lhs_type::names();
-      auto first        = get<0>(lhs_names);
-
-      auto res = get<first>(lhs) < get<first>(rhs);
-
-      auto const order = [&]<typename Index>(Index i)
-      {
-        auto name           = lhs_names[i];
-        auto next           = lhs_names[index_t<Index::value+1>{}];
-
-        auto y_less_x_prev  = rhs[name] < lhs[name];
-        auto x_less_y       = lhs[next] < rhs[next];
-        return x_less_y && !y_less_x_prev;
-      };
-
-      return [&]<std::size_t... I>(std::index_sequence<I...>)
-      {
-        return (res || ... || order(index_t<I>{}));
-      }
-      (std::make_index_sequence<sizeof...(Ts)-1>());
-    }
-
-    /// @ingroup record
-    /// @related kumi::record
-    /// @brief Compares records for lexicographical is less or equal relation
-    template<typename... Us>
-    KUMI_TRIVIAL friend constexpr auto operator<=(record const &lhs, record<Us...> const &rhs) noexcept
-    requires requires { rhs < lhs; }
-    {
-      return !(rhs < lhs);
-    }
-
-    /// @ingroup record
-    /// @related kumi::record
-    /// @brief Compares records for lexicographical is greater relation
-    template<typename... Us>
-    KUMI_TRIVIAL friend constexpr auto operator>(record const &lhs, record<Us...> const &rhs) noexcept
-    requires requires { rhs < lhs; }
-    {
-      return rhs < lhs;
-    }
-
-    /// @ingroup record
-    /// @related kumi::record
-    /// @brief Compares records for lexicographical is greater relation relation
-    template<typename... Us>
-    KUMI_TRIVIAL friend constexpr auto operator>=(record const &lhs, record<Us...> const &rhs) noexcept
-    requires requires { lhs < rhs; }
-    {
-      return !(lhs < rhs);
-    }
- 
     //==============================================================================================
     //! @}
     //==============================================================================================
 
-    //==============================================================================================
-    //! @brief Invoke the Callable object f on each element of the current record.
-    //!
-    //! @param f	Callable object to be invoked
-    //! @return The value returned by f.
-    //!
-    //==============================================================================================
-    template<typename Function>
-    KUMI_TRIVIAL constexpr decltype(auto) operator()(Function &&f) const&
-    noexcept(noexcept(kumi::apply(KUMI_FWD(f), *this))) { return kumi::apply(KUMI_FWD(f), *this); }
-
-#if !defined(KUMI_DOXYGEN_INVOKED)
-    template<typename Function>
-    KUMI_TRIVIAL constexpr decltype(auto) operator()(Function &&f) &
-    noexcept(noexcept(kumi::apply(KUMI_FWD(f), *this)))
-    {
-      return kumi::apply(KUMI_FWD(f), *this);
-    }
-
-    template<typename Function>
-    KUMI_TRIVIAL constexpr decltype(auto) operator()(Function &&f) const &&noexcept(
-    noexcept(kumi::apply(KUMI_FWD(f), static_cast<record const &&>(*this))))
-    {
-      return kumi::apply(KUMI_FWD(f), static_cast<record const &&>(*this));
-    }
-
-    template<typename Function>
-    KUMI_TRIVIAL constexpr decltype(auto) operator()(Function &&f) &&noexcept(
-    noexcept(kumi::apply(KUMI_FWD(f), static_cast<record &&>(*this))))
-    {
-      return kumi::apply(KUMI_FWD(f), static_cast<record &&>(*this));
-    }
-#endif
- 
     //==============================================================================================
     /// @ingroup record 
     //! @related kumi::record
@@ -318,7 +251,7 @@ namespace kumi
                                                          record const &t) noexcept
     {
       os << "( ";
-      kumi::for_each_field([&os](auto name, auto const &e) { os << name << " : " << e << " "; }, t);
+      kumi::for_each_field([&os](auto name, auto const &e) { os << '\''<< name << '\''<< " : " << e << " "; }, t);
       os << ")";
 
       return os;
@@ -356,8 +289,7 @@ namespace kumi
   //! @include doc/record/forward_as_record.cpp
   //================================================================================================
   template<typename... Ts> 
-  requires ( (sizeof...(Ts)==0) || (is_fully_named<std::remove_cvref_t<Ts>...> 
-                                && uniquely_named<std::remove_cvref_t<Ts>...> ))
+  requires ( entirely_uniquely_named<std::remove_cvref_t<Ts>...> )
   KUMI_TRIVIAL_NODISCARD constexpr record<field_capture<unwrap_name_v<std::remove_cvref_t<Ts>>
                                         , result::unwrap_field_value_t<Ts>>...>
   forward_as_record(Ts &&... ts)
@@ -379,7 +311,7 @@ namespace kumi
   //! @include doc/record/make_record.cpp
   //================================================================================================
   template<typename... Ts>
-  requires ( (sizeof...(Ts)==0) || (is_fully_named<Ts...> && uniquely_named<Ts...>) )
+  requires ( entirely_uniquely_named<Ts...> ) 
   KUMI_TRIVIAL_NODISCARD constexpr record<std::unwrap_ref_decay_t<Ts>...> make_record(Ts &&...ts)
   {
     return {KUMI_FWD(ts)...};
@@ -475,7 +407,7 @@ namespace kumi
   //! @include doc/record/named_get.cpp
   //================================================================================================
   template<field_name Name, typename... Ts>
-  requires ( uniquely_named<Ts...> )
+  requires ( entirely_uniquely_named<Ts...> )
   KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
   get(record<Ts...> &t) noexcept
   {
@@ -484,7 +416,7 @@ namespace kumi
 
   /// @overload
   template<field_name Name, typename... Ts>
-  requires ( uniquely_named<Ts...> )
+  requires ( entirely_uniquely_named<Ts...> )
   KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
   get(record<Ts...> &&arg) noexcept
   {
@@ -493,7 +425,7 @@ namespace kumi
 
   /// @overload
   template<field_name Name, typename... Ts>
-  requires ( uniquely_named<Ts...> )
+  requires ( entirely_uniquely_named<Ts...> )
   KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
   get(record<Ts...> const &arg) noexcept
   {
@@ -502,7 +434,7 @@ namespace kumi
 
   /// @overload
   template<field_name Name, typename... Ts>
-  requires ( uniquely_named<Ts...> )
+  requires ( entirely_uniquely_named<Ts...> )
   KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
   get(record<Ts...> const &&arg) noexcept
   {

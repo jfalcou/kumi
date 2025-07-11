@@ -134,6 +134,17 @@ namespace kumi
   template<typename... Ts>
   concept uniquely_named = ( has_named_fields<Ts...> ) && all_unique_names_v<_::box<Ts>...>;
 
+   //================================================================================================
+  //! @ingroup concepts
+  //! @brief Concept specifying if a parameter pack only holds kumi::field_captures each of their   
+  //!        each of their names are unique!
+  //!
+  //! @note  If there are no element in the parameter pack the concept returns true
+  //================================================================================================
+  template<typename... Ts>
+  concept entirely_uniquely_named = (sizeof...(Ts)==0) 
+  || (is_fully_named<Ts...> && uniquely_named<Ts...>);
+
   namespace _
   {
     template<auto Name, typename... Ts>
@@ -201,9 +212,6 @@ namespace kumi
       }() && ...);
     };
 
-    template<typename T, typename U>
-    inline constexpr bool has_same_field_names_v = has_same_field_names<T, U>::value;
-
     template<template<class...> class Box, typename... T, typename... U>
     struct check_named_equality<Box<T...>, Box<U...>>
     {
@@ -216,6 +224,9 @@ namespace kumi
     };
 
     template<typename T, typename U>
+    inline constexpr bool has_same_field_names_v = has_same_field_names<T, U>::value;
+
+    template<typename T, typename U>
     inline constexpr bool check_named_equality_v = check_named_equality<T,U>::value;
   }
 
@@ -223,34 +234,34 @@ namespace kumi
   //! @ingroup concepts
   //! @brief Concept specifying if two types have matching named fields
   //!
-  //! A type `T` models `kumi::equally_named<T,U>` if it is a product type with the same number of 
+  //! A type `T` models `kumi::equivalent<T,U>` if it is a product type with the same number of 
   //! members as `U`, and each of its fields has a corresponding field in `U` with the same name
   //================================================================================================
   template<typename T, typename U>
-  concept equally_named = (size_v<T> == size_v<U>) && _::has_same_field_names_v<T,U>;
+  concept equivalent = (size_v<T> == size_v<U>) && _::has_same_field_names_v<T,U>;
 
   //================================================================================================
   //! @ingroup concepts
   //! @brief Concept specifying if two product types are comparable by matching name 
   //!
   //! A type `T` models `kumi::named_equality_comparable<T,U>` if it's a product_type that satisfies 
-  //! kumi::equally_named<T,U> and if each of its fields satisfies kumi::equality_comparable with
+  //! kumi::equivalent<T,U> and if each of its fields satisfies kumi::equality_comparable with
   //! the corresponding field in `U` 
   //================================================================================================
   template<typename T, typename U>
-  concept named_equality_comparable = equally_named<T,U> && _::check_named_equality_v<T,U>;
+  concept named_equality_comparable = equivalent<T,U> && _::check_named_equality_v<T,U>;
 
   //================================================================================================
   //! @ingroup concepts
   //! @brief Concept specifying if two product types are comparable by matching name
   //!
   //! A type `T` models `kumi::named_equality_comparable<T,U>` if it's a product_type that satisfies
-  //! kumi::equally_named<T,U> and if each of its fields satisfies kumi::equality_comparable with
+  //! kumi::equivalent<T,U> and if each of its fields satisfies kumi::equality_comparable with
   //! the corresponding field in `U`
   //================================================================================================
   template<typename T, typename... Us>
   concept compatible_product_types = (product_type<T> && ( product_type<Us> && ...))  &&
-  ( (!record_type<T> && (!record_type<Us> && ...))
-    || (record_type<T> && (record_type<Us> && ...) && (equally_named<T, Us> && ...))
+    ( (!record_type<T> && (!record_type<Us> && ...))
+    || (record_type<T> && (record_type<Us> && ...) && (equivalent<T, Us> && ...))
   );
 }

@@ -91,54 +91,7 @@ namespace kumi
     template<typename T>
     using unwrap_field_value_t = typename unwrap_field_value<T>::type;
   }
-
-  //================================================================================================
-  //! @ingroup tuple
-  //! @brief Extracts the value from a kumi::field_capture if the given template type is a
-  //!        kumi::record or returns the raw kumi::field_capture otherwise.
-  //!
-  //! @note If the unqualified type of T is not a record, simply forwards the parameter
-  //! @tparam   T The type to check
-  //! @tparam   U The type to unwrap
-  //! @param    u A forwarding reference to the input object.
-  //! @return   A forwarded value of the unwrapped object.
-  //!
-  //! ## Heloer type
-  //! @code
-  //! namespace kumi::result
-  //! {
-  //!   template<typename T, typename U> struct unwrap_if_record;
-  //!
-  //!   template<typename T, typename U>
-  //!   using unwrap_if_record_t = typename unwrap_if_record<T,U>::type;
-  //! }
-  //! @endcode
-  //!
-  //! Computes the return type of a call to kumi::unwrap_if_record
-  //!
-  //! @related kumi::field_capture
-  //================================================================================================
-  template<typename T, typename U>
-  KUMI_TRIVIAL constexpr decltype(auto) unwrap_if_record(U&& u) noexcept
-  {
-      if constexpr ( record_type<std::remove_cvref_t<T>> )
-          return unwrap_field_value<U>(KUMI_FWD(u));
-      else
-          return KUMI_FWD(u);
-  }
-
-  namespace result
-  {
-    template<typename T, typename U>
-    struct unwrap_if_record
-    {
-        using type = decltype(kumi::unwrap_if_record<T>(std::declval<U>()));
-    };
-
-    template<typename T, typename U>
-    using unwrap_if_record_t = typename unwrap_if_record<T, U>::type;
-  }
-
+  
   //================================================================================================
   //! @ingroup product_types 
   //! @class field_name
