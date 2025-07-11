@@ -135,20 +135,20 @@ namespace kumi
     if constexpr(sized_product_type<Tuple,0>) return;
     else
     {
-      auto const invoker{[&, f](auto const i)
+      auto const invoker = [&]<std::size_t I>(std::integral_constant<std::size_t, I>)
       {
-          auto const field = get<i.value>(t.names());
+          auto const field = get<I>(t.names());
           f
           (
-            field.name.value(),
+            field.to_string(),
             get<field>(KUMI_FWD(t)),
             get<field>(KUMI_FWD(ts))...
           );
-      }};
+      };
 
       [=]<std::size_t... I>(std::index_sequence<I...>)
       {
-        (invoker( std::integral_constant<unsigned, I>{} ), ...);
+        (invoker( std::integral_constant<std::size_t, I>{} ), ...);
       }(std::make_index_sequence<size<Tuple>::value>());
     }
   }

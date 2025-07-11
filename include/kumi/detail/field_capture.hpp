@@ -108,6 +108,12 @@ namespace kumi
     /// Name associated to the field_name
     static constexpr auto name = ID;
     
+    /// String view of the name of the field_capture
+    static constexpr auto to_string() 
+    {
+      return ID.value();
+    }
+   
     //==============================================================================================
     //! @brief Builds a field_capture from the given value.
     //! @tparam T The type to wrap.
