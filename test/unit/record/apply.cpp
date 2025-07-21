@@ -10,14 +10,10 @@
 #include <sstream>
 #include <tts/tts.hpp>
 
-struct A { void operator()(auto&&...) & {} };
-struct B { void operator()(auto&&) & {} };
-struct C { void f(int){} int x; };
+using namespace kumi::literals;
 
 TTS_CASE("Check result::apply<F,Record> behavior")
-{
-  using namespace kumi::literals;
- 
+{ 
   auto lambda = [](auto... m) { return (m + ...); };
   using func_t = decltype(lambda);
 
@@ -30,8 +26,6 @@ TTS_CASE("Check result::apply<F,Record> behavior")
 
 TTS_CASE("Check apply behavior")
 {
-  using namespace kumi::literals;
-
   TTS_EQUAL((kumi::apply( []() { return 99; }, kumi::record{})), 99);
 
   TTS_EQUAL((kumi::apply(
