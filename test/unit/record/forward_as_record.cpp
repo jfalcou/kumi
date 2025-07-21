@@ -54,7 +54,7 @@ template<kumi::record_type Tuple>
 operations
 move_ctor_fwd(Tuple &&t)
 {
-  ctor_tracker local = std::forward<Tuple>(t)[kumi::index<0>].value;
+  ctor_tracker local = std::forward<Tuple>(t)["a"_f];
   return local.value;
 }
 
@@ -62,7 +62,7 @@ template<kumi::record_type Tuple>
 operations
 copy_ctor_fwd(Tuple &&t)
 {
-  ctor_tracker local = t[kumi::index<0>].value;
+  ctor_tracker local = t["b"_f];
   return local.value;
 }
 
@@ -71,7 +71,7 @@ operations
 move_assign_fwd(Tuple &&t)
 {
   ctor_tracker local;
-  local = std::forward<Tuple>(t)[kumi::index<0>].value;
+  local = std::forward<Tuple>(t)["c"_f];
   return local.value;
 }
 
@@ -80,11 +80,11 @@ operations
 copy_assign_fwd(Tuple &&t)
 {
   ctor_tracker local;
-  local = t[kumi::index<0>].value;
+  local = t["d"_f];
   return local.value;
 }
 
-/*
+
 TTS_CASE("Check usage of kumi::record via forward_as_tuple")
 {
   TTS_EQUAL(move_ctor_fwd(kumi::forward_as_record("a"_f = ctor_tracker())), operations::move_ctor);
@@ -92,4 +92,3 @@ TTS_CASE("Check usage of kumi::record via forward_as_tuple")
   TTS_EQUAL(move_assign_fwd(kumi::forward_as_record("c"_f = ctor_tracker())), operations::move_assign);
   TTS_EQUAL(copy_assign_fwd(kumi::forward_as_record("d"_f = ctor_tracker())), operations::copy_assign);
 };
-*/

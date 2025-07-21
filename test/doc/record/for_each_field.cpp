@@ -14,9 +14,11 @@ int main()
 
   kumi::for_each_field( [](auto name, auto& m) { 
                         if(name.compare("a") == 0)
-                            m += 10; 
+                            m += 10;
+                        else if (name == "c")
+                            m = (m * 100) -1; 
                         else
-                            m *=10;
+                            m *= 10;
                         }
                       , t
                       );
