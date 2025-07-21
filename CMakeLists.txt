@@ -58,7 +58,7 @@ endif()
 ## Standalone generation
 ##======================================================================================================================
 copa_setup_standalone ( QUIET
-                        FILE tuple.hpp SOURCE include  DESTINATION standalone
+                        FILE kumi.hpp SOURCE include  DESTINATION standalone
                         ROOT kumi     TARGET kumi-standalone
                       )
 
