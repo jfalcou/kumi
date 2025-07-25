@@ -131,7 +131,7 @@ $(document).ready(function(){initNavTree('index.html',''); initResizable(); });
 <li>a protocol to adapt user-defined type to act as tuples</li>
 <li>algorithm on tuples</li>
 </ul>
-<h1><a class="anchor" id="autotoc_md147"></a>
+<h1><a class="anchor" id="autotoc_md159"></a>
 A Short Example</h1>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/tuple.hpp&gt;</span></div>
@@ -162,7 +162,7 @@ A Short Example</h1>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">auto</span> all_students = kumi::make_tuple(get_student(0),get_student(1),get_student(2));</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_function" href="group__transforms_gab74a95670c1baa3ec7e7905d42a5f216.html#gab74a95670c1baa3ec7e7905d42a5f216">kumi::for_each_index</a>( [](<span class="keyword">auto</span> i, <span class="keyword">auto</span> <span class="keyword">const</span>&amp; m) { std::cout &lt;&lt; <span class="stringliteral">&quot;Data #&quot;</span> &lt;&lt; i &lt;&lt; <span class="stringliteral">&quot; : &quot;</span> &lt;&lt; m &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;}</div>
+<div class="line">  <a class="code hl_function" href="group__transforms_ga39e65f96d9880dd5b1e08b8dc01993a1.html#ga39e65f96d9880dd5b1e08b8dc01993a1">kumi::for_each_index</a>( [](<span class="keyword">auto</span> i, <span class="keyword">auto</span> <span class="keyword">const</span>&amp; m) { std::cout &lt;&lt; <span class="stringliteral">&quot;Data #&quot;</span> &lt;&lt; i &lt;&lt; <span class="stringliteral">&quot; : &quot;</span> &lt;&lt; m &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;}</div>
 <div class="line">                      , all_students</div>
 <div class="line">                      );</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
@@ -171,9 +171,9 @@ A Short Example</h1>
 <div class="line">  std::cout &lt;&lt; grades &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__generators_ga1a15bc7904a51c4854d17c177b88027a_html_ga1a15bc7904a51c4854d17c177b88027a"><div class="ttname"><a href="group__generators_ga1a15bc7904a51c4854d17c177b88027a.html#ga1a15bc7904a51c4854d17c177b88027a">kumi::transpose</a></div><div class="ttdeci">constexpr auto transpose(Tuple const &amp;t)</div><div class="ttdoc">Transpose a tuple of tuples by shifting elements in their transposed position.</div><div class="ttdef"><b>Definition</b> transpose.hpp:35</div></div>
-<div class="ttc" id="agroup__transforms_gab74a95670c1baa3ec7e7905d42a5f216_html_gab74a95670c1baa3ec7e7905d42a5f216"><div class="ttname"><a href="group__transforms_gab74a95670c1baa3ec7e7905d42a5f216.html#gab74a95670c1baa3ec7e7905d42a5f216">kumi::for_each_index</a></div><div class="ttdeci">constexpr void for_each_index(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a kumi::product_type and its index.</div><div class="ttdef"><b>Definition</b> for_each.hpp:69</div></div>
+<div class="ttc" id="agroup__transforms_ga39e65f96d9880dd5b1e08b8dc01993a1_html_ga39e65f96d9880dd5b1e08b8dc01993a1"><div class="ttname"><a href="group__transforms_ga39e65f96d9880dd5b1e08b8dc01993a1.html#ga39e65f96d9880dd5b1e08b8dc01993a1">kumi::for_each_index</a></div><div class="ttdeci">constexpr void for_each_index(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a kumi::product_type and its index.</div><div class="ttdef"><b>Definition</b> for_each.hpp:93</div></div>
 <div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:59</div></div>
-</div><!-- fragment --><h1><a class="anchor" id="autotoc_md148"></a>
+</div><!-- fragment --><h1><a class="anchor" id="autotoc_md160"></a>
 Licence</h1>
 <p>This library is licensed under the <a href="https://opensource.org/licenses/BSL-1.0">Boost Software License</a>:</p>
 <div class="fragment"><div class="line"> none</div>

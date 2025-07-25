@@ -1,6 +1,8 @@
 var searchData=
 [
-  ['member_0',['member',['../structkumi_1_1member.html',1,'kumi']]],
-  ['member_3c_200_2c_20tuple_20_3e_1',['member&lt; 0, Tuple &gt;',['../structkumi_1_1member.html',1,'kumi']]],
-  ['member_3c_20size_5fv_3c_20tuple_20_3e_20_2d1_2c_20tuple_20_3e_2',['member&lt; size_v&lt; Tuple &gt; -1, Tuple &gt;',['../structkumi_1_1member.html',1,'kumi']]]
+  ['index_5ft_0',['index_t',['../structkumi_1_1index__t.html',1,'kumi']]],
+  ['is_5fhomogeneous_1',['is_homogeneous',['../structkumi_1_1is__homogeneous.html',1,'kumi']]],
+  ['is_5fhomogeneous_3c_20_5f_3a_3aas_5ftuple_3c_20t_2c_20std_3a_3amake_5findex_5fsequence_3c_20size_5fv_3c_20t_20_3e_20_3e_20_3e_3a_3atype_20_3e_2',['is_homogeneous&lt; _::as_tuple&lt; T, std::make_index_sequence&lt; size_v&lt; T &gt; &gt; &gt;::type &gt;',['../structkumi_1_1is__homogeneous.html',1,'kumi']]],
+  ['is_5fproduct_5ftype_3',['is_product_type',['../structkumi_1_1is__product__type.html',1,'kumi']]],
+  ['is_5frecord_5ftype_4',['is_record_type',['../structkumi_1_1is__record__type.html',1,'kumi']]]
 ];

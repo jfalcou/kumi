@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['queries_0',['Tuple Queries',['../group__queries.html',1,'']]]
+  ['product_5ftypes_20classes_0',['Product_types Classes',['../group__product__types.html',1,'']]]
 ];

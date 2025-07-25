@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::tuple::operator()</title>
+<title>kumi: kumi::compatible_product_types Concept Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('structkumi_1_1tuple_a4dbc1f9afc38da2733510424098948ff.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('conceptkumi_1_1compatible__product__types.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -120,53 +120,36 @@ $(document).ready(function(){initNavTree('structkumi_1_1tuple_a4dbc1f9afc38da273
 </div>
 </div>
 
+<div class="header">
+  <div class="headertitle"><div class="title">kumi::compatible_product_types Concept Reference<div class="ingroups"><a class="el" href="group__concepts.html">Tuple Related Concepts</a></div></div></div>
+</div><!--header-->
 <div class="contents">
-<a id="a4dbc1f9afc38da2733510424098948ff" name="a4dbc1f9afc38da2733510424098948ff"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a4dbc1f9afc38da2733510424098948ff">&#9670;&#160;</a></span>operator()()</h2>
 
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename... Ts&gt; </div>
-<div class="memtemplate">
-template&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">typename</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Function</a> &gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">KUMI_TRIVIAL</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">decltype</a>(<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a>) <a class="el" href="structkumi_1_1tuple.html">kumi::tuple</a>&lt; <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Ts</a> &gt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">::operator</a>() </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Function</a> &amp;&amp;&#160;</td>
-          <td class="paramname"><em>f</em></td><td>)</td>
-          <td> const &amp;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p>Concept specifying if two product types are comparable by matching name.  
+<a href="conceptkumi_1_1compatible__product__types.html#details">More...</a></p>
 
-<p>Invoke the Callable object f on each element of the current tuple. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">f</td><td>Callable object to be invoked </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The value returned by f. </dd></dl>
-
-</div>
-</div>
-</div><!-- contents -->
+<p><code>#include &lt;kumi/utils/concepts.hpp&gt;</code></p>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Concept specifying if two product types are comparable by matching name. </p>
+<p>A type <code>T</code> models <code><a class="el" href="conceptkumi_1_1named__equality__comparable.html" title="Concept specifying if two product types are comparable by matching name.">kumi::named_equality_comparable</a>&lt;T,U&gt;</code> if it's a product_type that satisfies <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48" title="Converts a kumi::tuple to an instance of an arbitrary type.">kumi::equivalent&lt;T,U&gt;</a> and if each of its fields satisfies <a class="el" href="conceptkumi_1_1equality__comparable.html" title="Concept specifying if a type is comparable for each of its components.">kumi::equality_comparable</a> with the corresponding field in <code>U</code> </p>
+</div><h2 class="groupheader">Concept definition</h2>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T</a>, <span class="keyword">typename</span>... <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Us</a>&gt;</div>
+<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1compatible__product__types.html">kumi::compatible_product_types</a> =  (<a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type&lt;T&gt;</a> &amp;&amp; ( <a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type&lt;Us&gt;</a> &amp;&amp; ...))  &amp;&amp;</div>
+<div class="line">    ( (!<a class="code hl_concept" href="conceptkumi_1_1record__type.html">record_type&lt;T&gt;</a> &amp;&amp; (!<a class="code hl_concept" href="conceptkumi_1_1record__type.html">record_type&lt;Us&gt;</a> &amp;&amp; ...))</div>
+<div class="line">    || (<a class="code hl_concept" href="conceptkumi_1_1record__type.html">record_type&lt;T&gt;</a> &amp;&amp; (<a class="code hl_concept" href="conceptkumi_1_1record__type.html">record_type&lt;Us&gt;</a> &amp;&amp; ...) &amp;&amp; (<a class="code hl_concept" href="conceptkumi_1_1equivalent.html">equivalent&lt;T, Us&gt;</a> &amp;&amp; ...))</div>
+<div class="line">  )</div>
+<div class="ttc" id="aconceptkumi_1_1compatible__product__types_html"><div class="ttname"><a href="conceptkumi_1_1compatible__product__types.html">kumi::compatible_product_types</a></div><div class="ttdoc">Concept specifying if two product types are comparable by matching name.</div><div class="ttdef"><b>Definition</b> concepts.hpp:263</div></div>
+<div class="ttc" id="aconceptkumi_1_1equivalent_html"><div class="ttname"><a href="conceptkumi_1_1equivalent.html">kumi::equivalent</a></div><div class="ttdoc">Concept specifying if two types have matching named fields.</div><div class="ttdef"><b>Definition</b> concepts.hpp:241</div></div>
+<div class="ttc" id="aconceptkumi_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1product__type.html">kumi::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:34</div></div>
+<div class="ttc" id="aconceptkumi_1_1record__type_html"><div class="ttname"><a href="conceptkumi_1_1record__type.html">kumi::record_type</a></div><div class="ttdoc">Concept specifying a type follows the Record Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:44</div></div>
+<div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:59</div></div>
+</div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li><li class="navelem"><a class="el" href="structkumi_1_1tuple.html">tuple</a></li>
+    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li><li class="navelem"><a class="el" href="conceptkumi_1_1compatible__product__types.html">compatible_product_types</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

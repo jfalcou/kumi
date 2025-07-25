@@ -154,11 +154,11 @@ template&lt;product_type Type&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A tuple equivalent to the result of <code><a class="el" href="group__transforms_ga612ed868d8ee0ecabcdaa0d6a7c116fb.html#ga612ed868d8ee0ecabcdaa0d6a7c116fb" title="Invoke the Callable object f with a tuple of arguments.">kumi::apply</a>([]&lt;typename... T&gt;(T&amp;&amp;... e) { return kumi::forward_as_tuple(std::forward&lt;T&gt;(e)...); }, t)</code></dd></dl>
-<h2><a class="anchor" id="autotoc_md100"></a>
+<dl class="section return"><dt>Returns</dt><dd>A tuple equivalent to the result of <code><a class="el" href="group__transforms_ga2c808f8956ae85b42b9b8a8ed09cc371.html#ga2c808f8956ae85b42b9b8a8ed09cc371" title="Invoke the Callable object f with a product_type of arguments. f is applied on the values if the give...">kumi::apply</a>([]&lt;typename... T&gt;(T&amp;&amp;... e) { return kumi::forward_as_tuple(std::forward&lt;T&gt;(e)...); }, t)</code></dd></dl>
+<h2><a class="anchor" id="autotoc_md107"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &lt;kumi/tuple.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">main</a>()</div>
 <div class="line">{</div>

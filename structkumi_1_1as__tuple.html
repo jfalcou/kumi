@@ -151,7 +151,7 @@ Helper type</h2>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md11"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &lt;kumi/tuple.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;concepts&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
@@ -163,7 +163,7 @@ Example:</h2>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I&gt;</div>
-<div class="line"><span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_function" href="namespacekumi.html#afa07a9995292cf82075b2f6855543268">get</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">vec3</a> <span class="keyword">const</span>&amp; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">v</a>) <span class="keyword">noexcept</span></div>
+<div class="line"><span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_function" href="namespacekumi.html#abdfc142007dce084de86ecce801b3684">get</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">vec3</a> <span class="keyword">const</span>&amp; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">v</a>) <span class="keyword">noexcept</span></div>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">I</a>==0) <span class="keywordflow">return</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">v</a>.x;</div>
 <div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">I</a>==1) <span class="keywordflow">return</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">v</a>.y;</div>
@@ -171,7 +171,7 @@ Example:</h2>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I&gt;</div>
-<div class="line"><span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_function" href="namespacekumi.html#afa07a9995292cf82075b2f6855543268">get</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">vec3</a>&amp; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">v</a>) <span class="keyword">noexcept</span></div>
+<div class="line"><span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_function" href="namespacekumi.html#abdfc142007dce084de86ecce801b3684">get</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">vec3</a>&amp; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">v</a>) <span class="keyword">noexcept</span></div>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">I</a>==0) <span class="keywordflow">return</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">v</a>.x;</div>
 <div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">I</a>==1) <span class="keywordflow">return</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">v</a>.y;</div>
@@ -203,7 +203,7 @@ Example:</h2>
 <div class="line">  <span class="keyword">static_assert</span>( std::same_as&lt;single_pointer, kumi::tuple&lt;float*&gt; &gt;);</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:59</div></div>
-<div class="ttc" id="anamespacekumi_html_afa07a9995292cf82075b2f6855543268"><div class="ttname"><a href="namespacekumi.html#afa07a9995292cf82075b2f6855543268">kumi::get</a></div><div class="ttdeci">KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) get(tuple&lt; Ts... &gt; &amp;&amp;arg) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition</b> tuple.hpp:469</div></div>
+<div class="ttc" id="anamespacekumi_html_abdfc142007dce084de86ecce801b3684"><div class="ttname"><a href="namespacekumi.html#abdfc142007dce084de86ecce801b3684">kumi::get</a></div><div class="ttdeci">KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) get(record&lt; Ts... &gt; &amp;&amp;arg) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition</b> record.hpp:378</div></div>
 <div class="ttc" id="astructkumi_1_1is__product__type_html"><div class="ttname"><a href="structkumi_1_1is__product__type.html">kumi::is_product_type</a></div><div class="ttdoc">Opt-in traits for types behaving like a kumi::product_type.</div><div class="ttdef"><b>Definition</b> traits.hpp:34</div></div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->
