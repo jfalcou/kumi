@@ -69,47 +69,85 @@ namespace kumi::_
     T {args...};
   };
 
+  //==============================================================================================
+  // Helper meta functions to access a field type by name
+  //============================================================================================== 
+  template<typename Ref, typename Field>
+  struct check_name
+  {
+    static consteval Field      get(Ref) requires(Ref::name == Field::name) { return {}; }
+    static consteval kumi::unit get(...)                                    { return {}; }
+  };
+
+  /// Helper using inheritance to get the corresponding name in an variadic pack if it exist 
+  template<typename Ref, typename... Fields>
+  struct get_field_by_name : check_name<Ref,Fields>...
+  {
+    using check_name<Ref,Fields>::get...;
+    using type = decltype(get(std::declval<Ref>()));
+  };
+
+  template<typename Ref, typename... Fields>
+  using get_field_by_name_t = typename get_field_by_name<Ref, Fields...>::type;
+
+  //==============================================================================================
+  // Helper concepts for construction checks on records
+  //============================================================================================== 
+  template<typename From, typename To> struct is_fieldwise_constructible;
+  template<typename From, typename To> struct is_fieldwise_convertible;
+  template<typename From, typename To> struct is_fieldwise_ordered;
+  
+  template<template<class...> class Box, typename... From, typename... To>
+  struct is_fieldwise_convertible<Box<From...>, Box<To...>>
+  {     
+    static constexpr bool value = ( []() 
+      {
+        using F_field = std::remove_cvref_t<From>;
+        using T_field = std::remove_cvref_t<get_field_by_name_t<From, To...>>;
+        return kumi::convertible_to<unwrap_field_capture_t<F_field>, unwrap_field_capture_t<T_field>>;
+      }() && ...);
+  };
+
+  template<template<class...> class Box, typename... From, typename... To>
+  struct is_fieldwise_constructible<Box<From...>, Box<To...>>
+  {
+    static constexpr bool value = ( []()
+      {
+        using F_field = std::remove_cvref_t<From>;
+        using T_field = std::remove_cvref_t<get_field_by_name_t<From, To...>>;
+        return std::is_constructible_v<unwrap_field_capture_t<F_field>, unwrap_field_capture_t<T_field>>;
+      }() && ...);
+  };
+
+  template<typename From, typename To>
+  concept fieldwise_convertible = is_fieldwise_convertible<From, To>::value;
+
+  template<typename From, typename To>
+  concept fieldwise_constructible = is_fieldwise_constructible<From, To>::value;
+
   //================================================================================================
   // Concept machinery to make our algorithms SFINAE friendly
   //================================================================================================
-  template<typename F, size_t I, typename... Tuples>
-  concept supports_call_i = std::is_invocable_v<F, member_t<I,Tuples>...>;
-
-  template<typename F, typename Indices, typename... Tuples> struct supports_call_t;
-
-  template<typename F, size_t... Is, typename... Tuples>
-  struct supports_call_t<F, std::index_sequence<Is...>, Tuples...>
-      : std::bool_constant<(supports_call_i<F, Is, Tuples...> && ...)>
+  template<typename F, typename PT>
+  concept supports_apply = []<std::size_t...N>(std::index_sequence<N...>)
   {
-  };
+    return std::invocable<F, raw_member_t<N, PT>...>;
+  }(std::make_index_sequence<size<PT>::value>{});
 
-  template<typename F, typename Indices, typename Tuple> struct supports_apply_t;
-
-  template<typename F, size_t... Is, typename Tuple>
-  struct supports_apply_t<F, std::index_sequence<Is...>, Tuple>
-      : std::is_invocable<F, decltype(get<Is>(std::declval<Tuple &&>()))...>
+  template<typename F, typename PT>
+  concept supports_nothrow_apply = []<std::size_t...N>(std::index_sequence<N...>)
   {
-  };
-
-  template<typename F, typename Tuple>
-  concept supports_apply = _::
-      supports_apply_t<F, std::make_index_sequence<size<Tuple>::value>, Tuple>::value;
-
-  template<typename F, typename Indices, typename Tuple> struct supports_nothrow_apply_t;
-
-  template<typename F, size_t... Is, typename Tuple>
-  struct supports_nothrow_apply_t<F, std::index_sequence<Is...>, Tuple>
-      : std::is_nothrow_invocable<F, decltype(get<Is>(std::declval<Tuple &&>()))...>
-  {
-  };
-
-  template<typename F, typename Tuple>
-  concept supports_nothrow_apply = _::
-      supports_nothrow_apply_t<F, std::make_index_sequence<size<Tuple>::value>, Tuple>::value;
-
+      return std::is_nothrow_invocable<F, raw_member_t<N, PT>...>::value;
+  }(std::make_index_sequence<size<PT>::value>{});
+ 
   template<typename F, typename... Tuples>
-  concept supports_call = _::
-      supports_call_t<F, std::make_index_sequence<(size<Tuples>::value, ...)>, Tuples...>::value;
+  concept supports_call = []<std::size_t...I>(std::index_sequence<I...>)
+  {
+    return([]<std::size_t J>(std::integral_constant<std::size_t, J>)
+    {   
+        return std::invocable<F, raw_member_t<J, Tuples>...>;
+    }(std::integral_constant<std::size_t, I>{}) && ...);
+  }(std::make_index_sequence<(size<Tuples>::value, ...)>{});
 
   // Helper for checking if two tuples can == each others
   template<typename T, typename U>

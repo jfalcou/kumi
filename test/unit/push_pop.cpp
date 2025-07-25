@@ -6,7 +6,7 @@
 */
 //==================================================================================================
 #define TTS_MAIN
-#include <kumi/tuple.hpp>
+#include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
 
 TTS_CASE("Check kumi::push_front/pop_front type computation")

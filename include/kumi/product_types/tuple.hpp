@@ -60,7 +60,7 @@ namespace kumi
     requires(I < sizeof...(Ts))
     KUMI_TRIVIAL constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) &noexcept
     {
-      return unwrap_field_value(_::get_leaf<I>(impl));
+      return _::get_leaf<I>(impl);
     }
 
     /// @overload
@@ -68,7 +68,7 @@ namespace kumi
     requires(I < sizeof...(Ts))
     KUMI_TRIVIAL constexpr decltype(auto) operator[](index_t<I>) &&noexcept
     {
-      return unwrap_field_value(_::get_leaf<I>(static_cast<decltype(impl) &&>(impl)));
+      return _::get_leaf<I>(static_cast<decltype(impl) &&>(impl));
     }
 
     /// @overload
@@ -76,7 +76,7 @@ namespace kumi
     requires(I < sizeof...(Ts))
     KUMI_TRIVIAL constexpr decltype(auto) operator[](index_t<I>) const &&noexcept
     {
-      return unwrap_field_value(_::get_leaf<I>(static_cast<decltype(impl) const &&>(impl)));
+      return _::get_leaf<I>(static_cast<decltype(impl) const &&>(impl));
     }
 
     /// @overload
@@ -84,7 +84,7 @@ namespace kumi
     requires(I < sizeof...(Ts))
     KUMI_TRIVIAL constexpr decltype(auto) operator[](index_t<I>) const &noexcept
     {
-      return unwrap_field_value(_::get_leaf<I>(impl));
+      return _::get_leaf<I>(impl);
     }
  
     //==============================================================================================
@@ -306,27 +306,32 @@ namespace kumi
     //!
     //==============================================================================================
     template<typename Function>
-    KUMI_TRIVIAL constexpr decltype(auto) operator()(Function &&f) const&
-    noexcept(noexcept(kumi::apply(KUMI_FWD(f), *this))) { return kumi::apply(KUMI_FWD(f), *this); }
+    KUMI_TRIVIAL constexpr auto operator()(Function &&f) const&
+    noexcept(noexcept(kumi::apply(KUMI_FWD(f), *this))) 
+    -> decltype(kumi::apply(KUMI_FWD(f), *this))
+    { return kumi::apply(KUMI_FWD(f), *this); }
 
 #if !defined(KUMI_DOXYGEN_INVOKED)
     template<typename Function>
-    KUMI_TRIVIAL constexpr decltype(auto) operator()(Function &&f) &
+    KUMI_TRIVIAL constexpr auto operator()(Function &&f) &
     noexcept(noexcept(kumi::apply(KUMI_FWD(f), *this)))
+    -> decltype(kumi::apply(KUMI_FWD(f), *this))
     {
       return kumi::apply(KUMI_FWD(f), *this);
     }
 
     template<typename Function>
-    KUMI_TRIVIAL constexpr decltype(auto) operator()(Function &&f) const &&noexcept(
+    KUMI_TRIVIAL constexpr auto operator()(Function &&f) const &&noexcept(
     noexcept(kumi::apply(KUMI_FWD(f), static_cast<tuple const &&>(*this))))
+    -> decltype(kumi::apply(KUMI_FWD(f), static_cast<tuple const &&>(*this)))
     {
       return kumi::apply(KUMI_FWD(f), static_cast<tuple const &&>(*this));
     }
 
     template<typename Function>
-    KUMI_TRIVIAL constexpr decltype(auto) operator()(Function &&f) &&noexcept(
+    KUMI_TRIVIAL constexpr auto operator()(Function &&f) &&noexcept(
     noexcept(kumi::apply(KUMI_FWD(f), static_cast<tuple &&>(*this))))
+    -> decltype(kumi::apply(KUMI_FWD(f), static_cast<tuple &&>(*this)))
     {
       return kumi::apply(KUMI_FWD(f), static_cast<tuple &&>(*this));
     }
@@ -592,8 +597,4 @@ namespace kumi
   //================================================================================================
 }
 
-#include <kumi/algorithm.hpp>
-
-#undef KUMI_FWD
 #endif
-

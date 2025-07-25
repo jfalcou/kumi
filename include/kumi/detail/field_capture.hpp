@@ -9,12 +9,14 @@
 
 #include <kumi/utils/pp_helpers.hpp>
 #include <kumi/utils/traits.hpp>
+#include <kumi/utils/concepts.hpp>
+#include <kumi/detail/abi.hpp>
 #include <kumi/detail/str.hpp>
 
 namespace kumi
 {
   //================================================================================================
-  //! @ingroup tuple
+  //! @ingroup product_types 
   //! @class field_capture
   //! @brief Named wrapper over a type.
   //!
@@ -36,7 +38,7 @@ namespace kumi
     static constexpr bool is_field_capture = true;
     
     //==============================================================================================
-    /// @ingroup tuple 
+    /// @ingroup product_types 
     //! @related kumi::field_capture
     //! @brief Inserts a kumi::field_capture in an output stream
     //==============================================================================================
@@ -59,7 +61,7 @@ namespace kumi
   }
 
   //================================================================================================
-  //! @ingroup tuple  
+  //! @ingroup product_types 
   //! @brief Extracts the value from a kumi::field_capture or returns the parameter 
   //!
   //! @note If the unqualified type of U is not a field_capture, simply forwards the parameter
@@ -78,8 +80,20 @@ namespace kumi
       return KUMI_FWD(u);
   } 
 
+  namespace result
+  {
+    template<typename T>
+    struct unwrap_field_value
+    {
+        using type = decltype(kumi::unwrap_field_value(std::declval<T>()));
+    };
+
+    template<typename T>
+    using unwrap_field_value_t = typename unwrap_field_value<T>::type;
+  }
+  
   //================================================================================================
-  //! @ingroup tuple 
+  //! @ingroup product_types 
   //! @class field_name
   //! @brief Named wrapper used to instantiate a kumi::field_capture.
   //!
@@ -94,6 +108,12 @@ namespace kumi
     /// Name associated to the field_name
     static constexpr auto name = ID;
     
+    /// String view of the name of the field_capture
+    static constexpr auto to_string() 
+    {
+      return ID.value();
+    }
+   
     //==============================================================================================
     //! @brief Builds a field_capture from the given value.
     //! @tparam T The type to wrap.
@@ -107,7 +127,7 @@ namespace kumi
     }
 
     //==============================================================================================
-    /// @ingroup tuple 
+    /// @ingroup product_types 
     //! @related kumi::field_name
     //! @brief Inserts a kumi::field_name in an output stream
     //==============================================================================================

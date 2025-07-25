@@ -38,6 +38,30 @@ struct std::tuple_size<kumi::tuple<Ts...>> : std::integral_constant<std::size_t,
 {
 };
 
+//==================================================================================================
+// Structured binding adaptation for records
+//==================================================================================================
+template<std::size_t I, typename Head, typename... Tail>
+struct  std::tuple_element<I, kumi::record<Head, Tail...>>
+      : std::tuple_element<I - 1, kumi::tuple<Tail...>>
+{
+};
+
+template<std::size_t I, typename... Ts> struct std::tuple_element<I, kumi::record<Ts...> const>
+{
+  using type = typename tuple_element<I, kumi::record<Ts...>>::type const;
+};
+
+template<typename Head, typename... Tail> struct std::tuple_element<0, kumi::record<Head, Tail...>>
+{
+  using type = Head;
+};
+
+template<typename... Ts>
+struct std::tuple_size<kumi::record<Ts...>> : std::integral_constant<std::size_t, sizeof...(Ts)>
+{
+};
+
 #if !defined( __ANDROID__ )
 //==================================================================================================
 // Common Reference support

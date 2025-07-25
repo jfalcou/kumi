@@ -8,6 +8,7 @@
 #pragma once
 
 #include <cstddef>
+#include <kumi/detail/field_capture.hpp>
 
 namespace kumi
 {

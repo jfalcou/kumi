@@ -37,7 +37,7 @@ namespace kumi
     {}
 
     constexpr std::size_t       size()  const { return size_; }
-    constexpr std::string_view  value() const { return std::string_view(&data_[0], size_); }
+    constexpr std::string_view  value() const { return std::string_view(&data_[0], size_-1); }
 
     friend constexpr auto operator <=>(str const&, str const&) noexcept = default;
 
