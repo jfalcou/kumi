@@ -18,7 +18,7 @@ and new features like:
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 #include <iostream>
-#include <kumi/tuple.hpp>
+#include <kumi/kumi.hpp>
 
 auto get_student(int id)
 {
