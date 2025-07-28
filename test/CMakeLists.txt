@@ -14,4 +14,14 @@ copa_glob_unit(QUIET PATTERN "doc/*.cpp"  INTERFACE kumi_docs OPT_RELATIVE ${CMA
 ##======================================================================================================================
 ## Unit tests
 ##======================================================================================================================
-copa_glob_unit(QUIET PATTERN "unit/*.cpp" INTERFACE kumi_test OPT_RELATIVE ${CMAKE_CURRENT_SOURCE_DIR})
+if(KUMI_BUILD_STANDALONE_TEST)
+  copa_glob_unit( QUIET
+                  PATTERN "unit/*.cpp" INTERFACE kumi_test_standalone
+                  OPT_RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+                )
+else()
+  copa_glob_unit( QUIET
+                  PATTERN "unit/*.cpp" INTERFACE kumi_test
+                  OPT_RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+                )
+endif()
