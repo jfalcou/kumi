@@ -18,8 +18,10 @@ jobs:
       fail-fast: false
       matrix:
         cfg:
-        - { opts: -O0                 }
-        - { opts: "-O3 -flto -DNDEBUG"}
+        - { setup: "", opts: -O0                 }
+        - { setup: "", opts: "-O3 -flto -DNDEBUG"}
+        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON", opts: -O0                 }
+        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON", opts: "-O3 -flto -DNDEBUG"}
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v4.1.1
@@ -27,7 +29,7 @@ jobs:
         run:  |
           mkdir build
           cd build
-          cmake ..  -G Ninja -DCMAKE_CXX_COMPILER=g++-14 -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}"
+          cmake ..  -G Ninja -DCMAKE_CXX_COMPILER=g++-14 -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}" ${{matrix.cfg.setup}}
       - name: Compile Unit Tests
         run:  |
           cd build
@@ -45,10 +47,14 @@ jobs:
       fail-fast: false
       matrix:
         cfg:
-        - { opts: -O0                                 , linker:                }
-        - { opts: "-O3 -flto -DNDEBUG"                , linker:                }
-        - { opts: "-O3 -flto -DNDEBUG -stdlib=libc++" , linker: -stdlib=libc++ }
-        - { opts: "-O0 -stdlib=libc++"                , linker: -stdlib=libc++ }
+        - { setup: "",opts: -O0                                 , linker:                }
+        - { setup: "",opts: "-O3 -flto -DNDEBUG"                , linker:                }
+        - { setup: "",opts: "-O3 -flto -DNDEBUG -stdlib=libc++" , linker: -stdlib=libc++ }
+        - { setup: "",opts: "-O0 -stdlib=libc++"                , linker: -stdlib=libc++ }
+        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: -O0                                 , linker:                }
+        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: "-O3 -flto -DNDEBUG"                , linker:                }
+        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: "-O3 -flto -DNDEBUG -stdlib=libc++" , linker: -stdlib=libc++ }
+        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: "-O0 -stdlib=libc++"                , linker: -stdlib=libc++ }
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v4.1.1
@@ -57,7 +63,7 @@ jobs:
           mkdir build
           cd build
           cmake ..  -G Ninja  -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}" \
-                              -DCMAKE_EXE_LINKER_FLAGS="${{ matrix.cfg.linker }}"
+                              -DCMAKE_EXE_LINKER_FLAGS="${{ matrix.cfg.linker }}" ${{matrix.cfg.setup}}
       - name: Compile Unit Tests
         run:  |
           cd build
@@ -73,17 +79,22 @@ jobs:
       fail-fast: false
       matrix:
         cfg:
-        - { opts: -O0                                 , linker:                 }
-        - { opts: "-O0 -stdlib=libc++"                , linker: -stdlib=libc++  }
-        - { opts: "-O3 -flto -DNDEBUG"                , linker:                 }
-        - { opts: "-O3 -flto -DNDEBUG -stdlib=libc++" , linker: -stdlib=libc++  }
+        - { setup: "",opts: -O0                                 , linker:                 }
+        - { setup: "",opts: "-O0 -stdlib=libc++"                , linker: -stdlib=libc++  }
+        - { setup: "",opts: "-O3 -flto -DNDEBUG"                , linker:                 }
+        - { setup: "",opts: "-O3 -flto -DNDEBUG -stdlib=libc++" , linker: -stdlib=libc++  }
+        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: -O0                                 , linker:                 }
+        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: "-O0 -stdlib=libc++"                , linker: -stdlib=libc++  }
+        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: "-O3 -flto -DNDEBUG"                , linker:                 }
+        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: "-O3 -flto -DNDEBUG -stdlib=libc++" , linker: -stdlib=libc++  }
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v4.1.1
       - name: Running CMake for clang++ with ${{ matrix.cfg.opts }}
         run: |
           mkdir build && cd build
-          cmake .. -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}" -DCMAKE_EXE_LINKER_FLAGS="${{ matrix.cfg.linker }}"
+          cmake .. -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}" \
+                   -DCMAKE_EXE_LINKER_FLAGS="${{ matrix.cfg.linker }}" ${{matrix.cfg.setup}}
       - name: Compiling Unit Tests
         run:  cd build && make kumi-test -j 2
       - name: Running Unit Tests
@@ -95,12 +106,14 @@ jobs:
       fail-fast: false
       matrix:
         cfg:
-        - { opts: -O0                 }
-        - { opts: "-O3 -flto -DNDEBUG"}
+        - { setup: "",opts: -O0                 }
+        - { setup: "",opts: "-O3 -flto -DNDEBUG"}
+        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: -O0                 }
+        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: "-O3 -flto -DNDEBUG"}
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v4.1.1
-      - name: Running CMake for clang++ for Android with ${{ matrix.cfg.opts }}
+      - name: Running CMake for clang++ for Android with ${{ matrix.cfg.opts }} ${{matrix.cfg.setup}}
         run: |
           mkdir build && cd build
           cmake .. -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_ROOT/build/cmake/android.toolchain.cmake -DANDROID_ABI=arm64-v8a
@@ -113,15 +126,17 @@ jobs:
       fail-fast: false
       matrix:
         cfg:
-        - { mode: Debug  , options: ""}
-        - { mode: Release, options: ""}
+        - { setup: "",mode: Debug  , options: ""}
+        - { setup: "",mode: Release, options: ""}
+        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",mode: Debug  , options: ""}
+        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",mode: Release, options: ""}
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v4.1.1
       - name: Running CMake for MSVC ${{ matrix.cfg.mode }} ${{ matrix.cfg.options }}
         run: |
           mkdir build && cd build
-          cmake -G "Visual Studio 17 2022" -A x64 .. -DKUMI_BUILD_TEST=ON
+          cmake -G "Visual Studio 17 2022" -A x64 .. ${{matrix.cfg.setup}}
       - name: Compiling Unit Tests
         run:  |
           cd build
@@ -137,15 +152,17 @@ jobs:
       fail-fast: false
       matrix:
         cfg:
-        - { mode: Debug  , options: ""}
-        - { mode: Release, options: ""}
+        - { setup: "",mode: Debug  , options: ""}
+        - { setup: "",mode: Release, options: ""}
+        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",mode: Debug  , options: ""}
+        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",mode: Release, options: ""}
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v4.1.1
       - name: Running CMake for Clang-CL ${{ matrix.cfg.mode }} ${{ matrix.cfg.options }}
         run: |
           mkdir build && cd build
-          cmake -G "Visual Studio 17 2022" -T ClangCL -A x64 .. -DKUMI_BUILD_TEST=ON
+          cmake -G "Visual Studio 17 2022" -T ClangCL -A x64 .. ${{matrix.cfg.setup}}
       - name: Compiling Unit Tests
         run:  |
           cd build
@@ -163,8 +180,10 @@ jobs:
       fail-fast: false
       matrix:
         cfg:
-        - { opts: -O0                 }
-        - { opts: "-O3 -flto -DNDEBUG"}
+        - { setup: "",opts: -O0                 }
+        - { setup: "",opts: "-O3 -flto -DNDEBUG"}
+        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: -O0                 }
+        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: "-O3 -flto -DNDEBUG"}
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v4.1.1
@@ -172,7 +191,8 @@ jobs:
         run:  |
           mkdir build
           cd build
-          emcmake cmake ..  -G Ninja -DCMAKE_CXX_COMPILER=em++ -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}" -DCMAKE_CROSSCOMPILING_CMD="`pwd`/../cmake/run_wasm.sh"
+          emcmake cmake ..  -G Ninja -DCMAKE_CXX_COMPILER=em++ -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}" \
+                            ${{matrix.cfg.setup}} -DCMAKE_CROSSCOMPILING_CMD="`pwd`/../cmake/run_wasm.sh"
       - name: Compile Unit Tests
         run:  |
           cd build
@@ -190,8 +210,10 @@ jobs:
       fail-fast: false
       matrix:
         cfg:
-        - { opts: "-O0"                }
-        - { opts: "-O3 -flto -DNDEBUG" }
+        - { setup: "",opts: "-O0"                }
+        - { setup: "",opts: "-O3 -flto -DNDEBUG" }
+        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: "-O0"                }
+        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: "-O3 -flto -DNDEBUG" }
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v4.1.1
@@ -200,7 +222,7 @@ jobs:
           source /opt/intel/oneapi/setvars.sh
           mkdir build
           cd build
-          cmake ..  -G Ninja -DCMAKE_CXX_COMPILER=icpx -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}"
+          cmake ..  -G Ninja -DCMAKE_CXX_COMPILER=icpx -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}" ${{matrix.cfg.setup}}
       - name: Running Unit Tests
         run:  |
           cd build

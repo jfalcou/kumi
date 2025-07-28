@@ -5,12 +5,10 @@
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
-#include "kumi/utils/concepts.hpp"
-#include <concepts>
-#include <type_traits>
 #define TTS_MAIN
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
+#include <type_traits>
 
 template<typename T>
 struct nary_traits : std::integral_constant<std::size_t, sizeof(T)>
@@ -26,7 +24,7 @@ TTS_CASE("Check map_traits behavior")
   TTS_TYPE_IS ( (kumi::map_traits_t < nary_traits
                                       , kumi::tuple<int const, char, void*, float, double&, volatile short>
                                       >)
-              , ( mapped ) 
+              , ( mapped )
               );
 };
 

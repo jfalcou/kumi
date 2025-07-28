@@ -7,8 +7,9 @@ cmake_minimum_required(VERSION 3.22)
 project(kumi LANGUAGES CXX)
 
 ##======================================================================================================================
-option( KUMI_BUILD_TEST          "Build tests   for Kumi"   ON  )
-option( KUMI_BUILD_DOCUMENTATION "Build Doxygen for Kumi"   OFF )
+option( KUMI_BUILD_TEST             "Build tests using Kumi headers"            ON  )
+option( KUMI_BUILD_STANDALONE_TEST  "Build tests using Kumi standalone header"  OFF )
+option( KUMI_BUILD_DOCUMENTATION    "Build Doxygen for Kumi"                    OFF )
 
 ##======================================================================================================================
 include(${PROJECT_SOURCE_DIR}/cmake/dependencies.cmake)
@@ -28,11 +29,17 @@ copa_project_version(MAJOR 3 MINOR 1 PATCH 0)
 ## Summary Display
 ##======================================================================================================================
 if(NOT KUMI_QUIET)
+  if(KUMI_BUILD_STANDALONE_TEST)
+    unset(KUMI_BUILD_TEST)
+  endif()
+
   if(CMAKE_BUILD_TYPE)
     message(STATUS "[${PROJECT_NAME}] - Building in ${CMAKE_BUILD_TYPE} mode")
   endif()
-  message(STATUS "[${PROJECT_NAME}] - Unit tests : ${KUMI_BUILD_TEST} (via KUMI_BUILD_TEST)")
-  message(STATUS "[${PROJECT_NAME}] - Doxygen    : ${KUMI_BUILD_DOCUMENTATION} (via KUMI_BUILD_DOCUMENTATION)")
+
+  message(STATUS "[${PROJECT_NAME}] - Unit tests              : ${KUMI_BUILD_TEST} (via KUMI_BUILD_TEST)")
+  message(STATUS "[${PROJECT_NAME}] - Unit tests (standalone) : ${KUMI_BUILD_STANDALONE_TEST} (via KUMI_BUILD_STANDALONE_TEST)")
+  message(STATUS "[${PROJECT_NAME}] - Doxygen                 : ${KUMI_BUILD_DOCUMENTATION} (via KUMI_BUILD_DOCUMENTATION)")
   set(QUIET_OPTION "")
 else()
   set(QUIET_OPTION "QUIET")
