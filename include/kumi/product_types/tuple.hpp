@@ -40,7 +40,7 @@ namespace kumi
     static constexpr bool is_homogeneous = binder_t::is_homogeneous;
 
     binder_t impl;
-    
+
     //==============================================================================================
     //! @name Accessors
     //! @{
@@ -86,11 +86,11 @@ namespace kumi
     {
       return _::get_leaf<I>(impl);
     }
- 
+
     //==============================================================================================
     //! @brief Extracts the element labeled Name from a kumi::tuple
     //!
-    //! @note Does not participate in overload resolution if `get_name_index<Name>` 
+    //! @note Does not participate in overload resolution if `get_name_index<Name>`
     //!       is not in [0, sizeof...(Ts)).
     //!
     //! @tparam Name Non type template parameter name of the element to access
@@ -148,12 +148,12 @@ namespace kumi
     /// Returns `true` if a kumi::tuple contains 0 elements
     KUMI_TRIVIAL_NODISCARD static constexpr  bool empty() noexcept { return sizeof...(Ts) == 0; }
 
-    /// Returns the names of the elements of a kumi::tuple 
-    KUMI_TRIVIAL_NODISCARD static constexpr auto names() noexcept 
-    {   
+    /// Returns the names of the elements of a kumi::tuple
+    KUMI_TRIVIAL_NODISCARD static constexpr auto names() noexcept
+    {
         using tuple_type = tuple<unwrap_name_t<Ts>...>;
         return tuple_type{ unwrap_name_v<Ts>... };
-    }; 
+    };
     //==============================================================================================
     //! @}
     //==============================================================================================
@@ -307,7 +307,7 @@ namespace kumi
     //==============================================================================================
     template<typename Function>
     KUMI_TRIVIAL constexpr auto operator()(Function &&f) const&
-    noexcept(noexcept(kumi::apply(KUMI_FWD(f), *this))) 
+    noexcept(noexcept(kumi::apply(KUMI_FWD(f), *this)))
     -> decltype(kumi::apply(KUMI_FWD(f), *this))
     { return kumi::apply(KUMI_FWD(f), *this); }
 
@@ -355,28 +355,40 @@ namespace kumi
   };
 
   //================================================================================================
-  //! @name Tuple construction
+  //! @name Deduction Guides
   //! @{
   //================================================================================================
 
   //================================================================================================
   //! @ingroup tuple
-  //! @related kumi::tuple
   //! @brief kumi::tuple deduction guide
   //! @tparam Ts  Type lists to build the tuple with.
   //================================================================================================
   template<typename... Ts> tuple(Ts &&...) -> tuple<std::unwrap_ref_decay_t<Ts>...>;
 
   //================================================================================================
+  //! @}
+  //================================================================================================
+
+  //================================================================================================
+  //! @name Tuple construction
+  //! @{
+  //================================================================================================
+
+  //================================================================================================
   //! @ingroup tuple
-  //! @related kumi::tuple
   //! @brief Creates a kumi::tuple of lvalue references to its arguments.
   //! @param ts	Zero or more lvalue arguments to construct the tuple from.
   //! @return A kumi::tuple object containing lvalue references.
   //! ## Example:
   //! @include doc/tie.cpp
   //================================================================================================
-  template<typename... Ts> KUMI_TRIVIAL_NODISCARD constexpr tuple<Ts &...> tie(Ts &...ts) { return {ts...}; }
+  template<typename... Ts>
+  KUMI_TRIVIAL_NODISCARD
+  constexpr auto tie(Ts &...ts) -> tuple<Ts &...>
+  {
+    return {ts...};
+  }
 
   //================================================================================================
   //! @ingroup tuple
@@ -395,14 +407,15 @@ namespace kumi
   //! ## Example:
   //! @include doc/forward_as_tuple.cpp
   //================================================================================================
-  template<typename... Ts> KUMI_TRIVIAL_NODISCARD constexpr tuple<Ts &&...> forward_as_tuple(Ts &&...ts)
+  template<typename... Ts>
+  KUMI_TRIVIAL_NODISCARD
+  constexpr auto forward_as_tuple(Ts &&...ts) -> tuple<Ts &&...>
   {
     return {KUMI_FWD(ts)...};
   }
 
   //================================================================================================
   //! @ingroup tuple
-  //! @related kumi::tuple
   //! @brief Creates a tuple object, deducing the target type from the types of arguments.
   //!
   //! @param ts	Zero or more lvalue arguments to construct the tuple from.
@@ -412,7 +425,8 @@ namespace kumi
   //! @include doc/make_tuple.cpp
   //================================================================================================
   template<typename... Ts>
-  KUMI_TRIVIAL_NODISCARD constexpr tuple<std::unwrap_ref_decay_t<Ts>...> make_tuple(Ts &&...ts)
+  KUMI_TRIVIAL_NODISCARD
+  constexpr auto make_tuple(Ts &&...ts) -> tuple<std::unwrap_ref_decay_t<Ts>...>
   {
     return {KUMI_FWD(ts)...};
   }
@@ -429,7 +443,8 @@ namespace kumi
   //! ## Example:
   //! @include doc/to_ref.cpp
   //================================================================================================
-  template<product_type Type> KUMI_TRIVIAL_NODISCARD constexpr auto to_ref(Type&& t)
+  template<product_type Type>
+  KUMI_TRIVIAL_NODISCARD constexpr auto to_ref(Type&& t)
   {
     return apply( [](auto&&... elems)
                   {
@@ -462,7 +477,7 @@ namespace kumi
   //! @include doc/get.cpp
   //================================================================================================
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts)) KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  requires(I < sizeof...(Ts)) KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
   get(tuple<Ts...> &t) noexcept
   {
     return t[index<I>];
@@ -491,7 +506,7 @@ namespace kumi
   {
     return static_cast<tuple<Ts...> const &&>(arg)[index<I>];
   }
- 
+
   //================================================================================================
   //! @ingroup tuple
   //! @brief Extracts the field labeled Name from a kumi::tuple if it exists
@@ -507,7 +522,7 @@ namespace kumi
   //================================================================================================
   template<field_name Name, typename... Ts>
   requires ( uniquely_named<Ts...> )
-  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
   get(tuple<Ts...> &t) noexcept
   {
     return t[Name];
@@ -516,7 +531,7 @@ namespace kumi
   /// @overload
   template<field_name Name, typename... Ts>
   requires ( uniquely_named<Ts...> )
-  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
   get(tuple<Ts...> &&arg) noexcept
   {
     return static_cast<tuple<Ts...> &&>(arg)[Name];
@@ -525,7 +540,7 @@ namespace kumi
   /// @overload
   template<field_name Name, typename... Ts>
   requires ( uniquely_named<Ts...> )
-  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
   get(tuple<Ts...> const &arg) noexcept
   {
     return arg[Name];
@@ -534,7 +549,7 @@ namespace kumi
   /// @overload
   template<field_name Name, typename... Ts>
   requires ( uniquely_named<Ts...> )
-  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
   get(tuple<Ts...> const &&arg) noexcept
   {
     return static_cast<tuple<Ts...> const &&>(arg)[Name];
@@ -555,7 +570,7 @@ namespace kumi
   //================================================================================================
   template<typename T, typename... Ts>
   requires ( uniquely_typed<Ts...> )
-  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
   get(tuple<Ts...> &t) noexcept
   {
     constexpr auto I = _::get_type_index<T, Ts...>();
@@ -565,7 +580,7 @@ namespace kumi
   /// @overload
   template<typename T, typename... Ts>
   requires ( uniquely_typed<Ts...> )
-  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
   get(tuple<Ts...> &&arg) noexcept
   {
     constexpr auto I = _::get_type_index<T, Ts...>();
@@ -575,7 +590,7 @@ namespace kumi
   /// @overload
   template<typename T, typename... Ts>
   requires ( uniquely_typed<Ts...> )
-  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
   get(tuple<Ts...> const &arg) noexcept
   {
     constexpr auto I = _::get_type_index<T, Ts...>();
@@ -585,7 +600,7 @@ namespace kumi
   /// @overload
   template<typename T, typename... Ts>
   requires ( uniquely_typed<Ts...> )
-  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
   get(tuple<Ts...> const &&arg) noexcept
   {
     constexpr auto I = _::get_type_index<T, Ts...>();
