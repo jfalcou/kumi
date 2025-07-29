@@ -3,31 +3,30 @@
   <!-- Navigation index tabs for HTML output -->
   <navindex>
     <tab type="mainpage" visible="yes" title=""/>
-    <tab type="usergroup" visible="yes" title="Reference Documentation">
-      <tab type="usergroup" visible="yes" title="Main API">
-        <tab type="usergroup" visible="yes" title="Tuple">
-          <tab type="user" url="@ref tuple"  title="Types"/>
-          <tab type="user" url="@ref traits"  title="Traits"/>
-          <tab type="user" url="@ref concepts"     title="Concepts"/>
-        </tab>
-        <tab type="usergroup" visible="yes" title="Algorithms">
-          <tab type="user" url="@ref transforms"  title="Transformations"/>
-          <tab type="user" url="@ref queries"     title="Queries"/>
-          <tab type="user" url="@ref generators"  title="Generators"/>
-          <tab type="user" url="@ref reductions"  title="Reductions"/>
-        </tab>
-
-        <tab type="user" url="@ref utility"     title="Utility"/>
-      </tab>
-      <tab type="user" url="@ref kumi"     title="Kumi Namespace"/>
-    </tab>
-
     <tab type="usergroup" visible="yes" title="About The Library">
       <tab type="user" url="@ref setup"     title="Setup"/>
       <tab type="user" url="@ref changelog" title="Changelog"/>
-      <tab type="user" url="@ref licence" title="Licence"/>
+      <tab type="user" url="@ref licence"   title="Licence"/>
     </tab>
-
+    <tab type="usergroup" visible="yes"   title="Reference Documentation">
+      <tab type="usergroup" visible="yes"   title="Types">
+        <tab type="user" url="@ref tuple"   title="Tuple"/>
+        <tab type="user" url="@ref record"  title="Record"/>
+      </tab>
+      <tab type="usergroup" visible="yes" title="Algorithms">
+        <tab type="user" url="@ref transforms"  title="Transformations"/>
+        <tab type="user" url="@ref queries"     title="Queries"/>
+        <tab type="user" url="@ref generators"  title="Generators"/>
+        <tab type="user" url="@ref reductions"  title="Reductions"/>
+      </tab>
+      <tab type="usergroup" visible="yes" title="Helpers">
+        <tab type="user" url="@ref traits"    title="Traits"/>
+        <tab type="user" url="@ref concepts"  title="Concepts"/>
+        <tab type="user" url="@ref utility"   title="Utility"/>
+      </tab>
+      <tab type="user" url="@ref kumi"    title="Kumi Namespace"/>
+    </tab>
+    <tab type="user" url="mailto:joel.falcou+kumi@gmail.com?subject=The%20KUMI%20Library"    title="Contact"/>
   </navindex>
 
   <!-- Layout definition for a class page -->
