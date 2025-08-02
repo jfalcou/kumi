@@ -67,6 +67,7 @@ TTS_CASE("Check access to kumi::tuple with named fields via indexing")
   t3[0_c] = ( "x"_f = 13.37 );
   t3[1_c] = ( "y"_f = 4.2f  );
   t3[2_c] = ( "z"_f = 40    );
+
   TTS_EQUAL(t3[0_c].value, 13.37);
   TTS_EQUAL(t3[1_c].value, 4.2f);
   TTS_EQUAL(t3[2_c].value, 40);
@@ -75,6 +76,7 @@ TTS_CASE("Check access to kumi::tuple with named fields via indexing")
   t4[1_c] = ( "y"_f = 6.9   );
   t4[2_c] = ( "z"_f = 4.2f  );
   t4[3_c] = ( "t"_f = 1337  );
+
   TTS_EQUAL(t4[0_c].value, 'z');
   TTS_EQUAL(t4[1_c].value, 6.9);
   TTS_EQUAL(t4[2_c].value, 4.2f);
