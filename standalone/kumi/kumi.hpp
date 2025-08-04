@@ -1709,7 +1709,6 @@ namespace kumi
     template<typename... T> using cartesian_product_t = typename cartesian_product<T...>::type;
   }
 }
-#include<kumi/utils/concepts.hpp>
 namespace kumi
 {  
   template<typename T> 
