@@ -7,6 +7,8 @@
 //==================================================================================================
 #pragma once
 
+#include <kumi/detail/builder.hpp>
+
 namespace kumi
 {
   //================================================================================================
@@ -38,7 +40,6 @@ namespace kumi
   //! ## Example
   //! @include doc/reorder.cpp
   //================================================================================================
-  #include <kumi/detail/builder.hpp>
 
   template<std::size_t... Idx, product_type Tuple>
   requires((Idx < size_v<Tuple>) && ...)

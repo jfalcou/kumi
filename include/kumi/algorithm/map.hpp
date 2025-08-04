@@ -43,12 +43,12 @@ namespace kumi
   //! @include doc/map.cpp
   //================================================================================================
   template<product_type Tuple, typename Function, sized_product_type<size<Tuple>::value>... Tuples>
-  [[nodiscard]] KUMI_ABI constexpr auto
-  map(Function     f,
-      Tuple  &&t0,
-      Tuples &&...others) requires _::supports_call<Function, Tuple&&, Tuples&&...>
+  [[nodiscard]] KUMI_ABI constexpr auto map(Function f, Tuple  &&t0, Tuples &&...others) 
+  requires ( compatible_product_types<Tuple, Tuples...> && 
+           _::supports_call<Function, Tuple&&, Tuples&&...> )
   {
-    if constexpr(sized_product_type<Tuple,0>) return std::remove_cvref_t<Tuple>{};
+    using base_t = std::remove_cvref_t<Tuple>;
+    if constexpr(sized_product_type<Tuple,0>) return base_t{};
     else
     {
       auto const call = [&]<std::size_t N, typename... Ts>(index_t<N>, Ts &&... args)
@@ -58,8 +58,7 @@ namespace kumi
 
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return builder<std::remove_cvref_t<Tuple>>
-                ::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
+        return builder<base_t>::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
       }(std::make_index_sequence<size<Tuple>::value>());
     }
   }
@@ -112,9 +111,11 @@ namespace kumi
   //! @include doc/map_index.cpp
   //================================================================================================
   template<product_type Tuple, typename Function, sized_product_type<size<Tuple>::value>... Tuples>
-  [[nodiscard]] KUMI_ABI constexpr auto map_index(Function     f,Tuple  &&t0,Tuples &&...others)
+  [[nodiscard]] KUMI_ABI constexpr auto map_index(Function f, Tuple &&t0,Tuples &&...others)
+  requires(!record_type<Tuple> && (!record_type<Tuples> && ...))
   {
-    if constexpr(sized_product_type<Tuple,0>) return std::remove_cvref_t<Tuple>{};
+    using base_t = std::remove_cvref_t<Tuple>;
+    if constexpr(sized_product_type<Tuple,0>) return base_t{};
     else
     {
       auto const call = [&]<std::size_t N, typename... Ts>(index_t<N> idx, Ts &&... args)
@@ -124,8 +125,7 @@ namespace kumi
 
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return builder<std::remove_cvref_t<Tuple>>
-                ::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
+        return builder<base_t>::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
       }(std::make_index_sequence<size<Tuple>::value>());
     }
   }

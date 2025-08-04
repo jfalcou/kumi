@@ -73,7 +73,7 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto pop_front(Tuple const& t)
   {
     if constexpr(Tuple::size()>0) return extract(t, index<1>);
-    else                          return tuple<>{};
+    else                          return builder<std::remove_cvref_t<Tuple>>::make();
   }
 
   //================================================================================================
@@ -137,7 +137,7 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto pop_back(Tuple const& t)
   {
     if constexpr(Tuple::size()>1) return extract(t,index<0>, index<Tuple::size()-1>);
-    else                          return tuple<>{};
+    else                          return builder<std::remove_cvref_t<Tuple>>::make();
   }
 
   namespace result
