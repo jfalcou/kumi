@@ -164,7 +164,7 @@ namespace kumi
   inline constexpr bool is_field_capture_v = requires { T::is_field_capture; };
 
   template<typename T>
-  struct is_field_capture : std::bool_constant<is_field_capture_v<T>>
+  struct is_field_capture : std::bool_constant<is_field_capture_v<T>> 
   {};
 
   //================================================================================================
