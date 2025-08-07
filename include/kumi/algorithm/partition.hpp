@@ -34,7 +34,7 @@ namespace kumi
   //! @include doc/partition.cpp
   //================================================================================================
   template<template<typename> typename Pred, kumi::product_type T>
-  constexpr auto partition(T&& tup) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto partition(T&& tup) noexcept
   {
     constexpr auto pos = [&]()
     {

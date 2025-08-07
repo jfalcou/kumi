@@ -41,7 +41,7 @@ namespace kumi
   //! @include doc/map.cpp
   //================================================================================================
   template<product_type Tuple, typename Function, sized_product_type<size<Tuple>::value>... Tuples>
-  constexpr auto
+  [[nodiscard]] KUMI_ABI constexpr auto
   map(Function     f,
       Tuple  &&t0,
       Tuples &&...others) requires _::supports_call<Function, Tuple&&, Tuples&&...>
@@ -109,7 +109,7 @@ namespace kumi
   //! @include doc/map_index.cpp
   //================================================================================================
   template<product_type Tuple, typename Function, sized_product_type<size<Tuple>::value>... Tuples>
-  constexpr auto map_index(Function     f,Tuple  &&t0,Tuples &&...others)
+  [[nodiscard]] KUMI_ABI constexpr auto map_index(Function     f,Tuple  &&t0,Tuples &&...others)
   {
     if constexpr(sized_product_type<Tuple,0>) return std::remove_cvref_t<Tuple>{};
     else

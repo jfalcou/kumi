@@ -35,7 +35,7 @@ namespace kumi
   //! @include doc/push_front.cpp
   //================================================================================================
   template<product_type Tuple, typename T>
-  [[nodiscard]] constexpr auto push_front(Tuple const& t, T&& v)
+  [[nodiscard]] KUMI_ABI constexpr auto push_front(Tuple const& t, T&& v)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>)
     {
@@ -68,7 +68,7 @@ namespace kumi
   //! @include doc/pop_front.cpp
   //================================================================================================
   template<product_type Tuple>
-  [[nodiscard]] constexpr auto pop_front(Tuple const& t)
+  [[nodiscard]] KUMI_ABI constexpr auto pop_front(Tuple const& t)
   {
     if constexpr(Tuple::size()>0) return extract(t, index<1>);
     else                          return tuple<>{};
@@ -99,7 +99,7 @@ namespace kumi
   //! @include doc/push_back.cpp
   //================================================================================================
   template<product_type Tuple, typename T>
-  [[nodiscard]] constexpr auto push_back(Tuple const& t, T&& v)
+  [[nodiscard]] KUMI_ABI constexpr auto push_back(Tuple const& t, T&& v)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>)
     {
@@ -132,7 +132,7 @@ namespace kumi
   //! @include doc/pop_back.cpp
   //================================================================================================
   template<product_type Tuple>
-  [[nodiscard]] constexpr auto pop_back(Tuple const& t)
+  [[nodiscard]] KUMI_ABI constexpr auto pop_back(Tuple const& t)
   {
     if constexpr(Tuple::size()>1) return extract(t,index<0>, index<Tuple::size()-1>);
     else                          return tuple<>{};

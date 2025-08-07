@@ -33,7 +33,7 @@ namespace kumi
   //! @include doc/reverse.cpp
   //================================================================================================
   template<product_type Tuple>
-  [[nodiscard]] constexpr auto reverse(Tuple &&t)
+  [[nodiscard]] KUMI_ABI constexpr auto reverse(Tuple &&t)
   {
     if constexpr(sized_product_type<Tuple,0>) return kumi::tuple<>{};
     else

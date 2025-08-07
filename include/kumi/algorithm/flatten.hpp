@@ -32,7 +32,7 @@ namespace kumi
   //! ## Example
   //! @include doc/flatten.cpp
   //================================================================================================
-  template<product_type Tuple> [[nodiscard]] constexpr auto flatten(Tuple const &ts)
+  template<product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto flatten(Tuple const &ts)
   {
     if constexpr(sized_product_type<Tuple,0>) return ts;
     else
@@ -81,7 +81,7 @@ namespace kumi
   //! @include doc/flatten_all.cpp
   //================================================================================================
   template<product_type Tuple, typename Func>
-  [[nodiscard]] constexpr auto flatten_all(Tuple&& ts, Func&& f)
+  [[nodiscard]] KUMI_ABI constexpr auto flatten_all(Tuple&& ts, Func&& f)
   {
     if constexpr(sized_product_type<Tuple,0>) return KUMI_FWD(ts);
     else
@@ -104,7 +104,7 @@ namespace kumi
   }
 
   /// @overload
-  template<product_type Tuple> [[nodiscard]] constexpr auto flatten_all(Tuple&& ts)
+  template<product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto flatten_all(Tuple&& ts)
   {
     if constexpr(sized_product_type<Tuple,0>) return ts;
     else
@@ -172,7 +172,7 @@ namespace kumi
   //! @include doc/as_flat_ptr.cpp
   //================================================================================================
   template<product_type Tuple>
-  KUMI_TRIVIAL_NODISCARD auto as_flat_ptr(Tuple&& ts) noexcept
+  [[nodiscard]] KUMI_ABI auto as_flat_ptr(Tuple&& ts) noexcept
   {
     return kumi::flatten_all(KUMI_FWD(ts), [](auto& m) { return &m; });
   }

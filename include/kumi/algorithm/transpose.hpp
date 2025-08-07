@@ -32,7 +32,7 @@ namespace kumi
   //! ## Example
   //! @include doc/transpose.cpp
   //================================================================================================
-  template<product_type Tuple> [[nodiscard]] constexpr auto transpose(Tuple const &t)
+  template<product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto transpose(Tuple const &t)
   {
     if constexpr(sized_product_type<Tuple,0>) return t;
     else

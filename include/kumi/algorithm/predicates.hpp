@@ -19,7 +19,7 @@ namespace kumi
   //! @include doc/all_of.cpp
   //================================================================================================
   template<typename Pred, typename T>
-  [[nodiscard]] constexpr auto all_of(T const& ts, Pred p) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto all_of(T const& ts, Pred p) noexcept
   {
     if constexpr( !product_type<T> ) return p(ts);
     else
@@ -39,7 +39,7 @@ namespace kumi
   //! @include doc/all_of.cpp
   //================================================================================================
   template<typename T>
-  [[nodiscard]] constexpr auto all_of(T const& ts) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto all_of(T const& ts) noexcept
   {
     if constexpr( !product_type<T> ) return !!ts;
     else
@@ -60,7 +60,7 @@ namespace kumi
   //! @include doc/all_of.cpp
   //================================================================================================
   template<typename Pred, typename T>
-  [[nodiscard]] constexpr auto any_of(T const& ts, Pred p) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto any_of(T const& ts, Pred p) noexcept
   {
     if constexpr( !product_type<T> ) return p(ts);
     else
@@ -80,7 +80,7 @@ namespace kumi
   //! @include doc/all_of.cpp
   //================================================================================================
   template<typename T>
-  [[nodiscard]] constexpr auto any_of(T const& ts) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto any_of(T const& ts) noexcept
   {
     if constexpr( !product_type<T> ) return !!ts;
     else
@@ -101,7 +101,7 @@ namespace kumi
   //! @include doc/none_of.cpp
   //================================================================================================
   template<typename Pred, typename Tuple>
-  KUMI_TRIVIAL_NODISCARD constexpr bool none_of( Tuple const& ts, Pred p) noexcept
+  [[nodiscard]] KUMI_ABI constexpr bool none_of( Tuple const& ts, Pred p) noexcept
   {
     return !any_of(ts,p);
   }
@@ -115,7 +115,7 @@ namespace kumi
   //! @include doc/none_of.cpp
   //================================================================================================
   template<typename Tuple>
-  KUMI_TRIVIAL_NODISCARD constexpr bool none_of(Tuple const& ts) noexcept
+  [[nodiscard]] KUMI_ABI constexpr bool none_of(Tuple const& ts) noexcept
   {
     return !any_of(ts);
   }
@@ -130,7 +130,7 @@ namespace kumi
   //! @include doc/count_if.cpp
   //================================================================================================
   template<typename Pred, typename T>
-  [[nodiscard]] constexpr std::size_t count_if( T const& ts, Pred p) noexcept
+  [[nodiscard]] KUMI_ABI constexpr std::size_t count_if( T const& ts, Pred p) noexcept
   {
     constexpr std::size_t o = 1ULL;
     constexpr std::size_t z = 0ULL;
@@ -151,7 +151,7 @@ namespace kumi
   //! @include doc/count.cpp
   //================================================================================================
   template<typename T>
-  KUMI_TRIVIAL_NODISCARD constexpr std::size_t count( T const& ts ) noexcept
+  [[nodiscard]] KUMI_ABI constexpr std::size_t count( T const& ts ) noexcept
   {
     return count_if(ts, [](auto const& m) { return static_cast<bool>(m); } );
   }
