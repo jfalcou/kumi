@@ -10,5 +10,3 @@
 #include <kumi/utils.hpp>
 #include <kumi/product_types.hpp>
 #include <kumi/algorithm.hpp>
-
-#undef KUMI_FWD
