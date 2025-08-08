@@ -284,7 +284,7 @@ namespace kumi
   //! }
   //! @endcode
   //================================================================================================
-  template<std::size_t I, typename T> using  raw_element_t = unwrap_field_capture_t<element_t<I,T>>;
+  template<std::size_t I, typename T> using raw_element_t = unwrap_field_capture_t<element_t<I,T>>;
 
   //================================================================================================
   //! @ingroup traits

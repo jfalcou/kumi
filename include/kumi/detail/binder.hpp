@@ -21,13 +21,13 @@ namespace kumi::_
   };
 
   template<int I, typename T>
-  KUMI_TRIVIAL constexpr T       &  get_leaf(leaf<I, T>       & a) noexcept { return a.value; }
+  KUMI_ABI constexpr T       &  get_leaf(leaf<I, T>       & a) noexcept { return a.value; }
   template<int I, typename T>
-  KUMI_TRIVIAL constexpr T       && get_leaf(leaf<I, T>       &&a) noexcept { return static_cast<T&&>(a.value); }
+  KUMI_ABI constexpr T       && get_leaf(leaf<I, T>       &&a) noexcept { return static_cast<T&&>(a.value); }
   template<int I, typename T>
-  KUMI_TRIVIAL constexpr T const && get_leaf(leaf<I, T> const &&a) noexcept { return static_cast<T const &&>(a.value); }
+  KUMI_ABI constexpr T const && get_leaf(leaf<I, T> const &&a) noexcept { return static_cast<T const &&>(a.value); }
   template<int I, typename T>
-  KUMI_TRIVIAL constexpr T const &  get_leaf(leaf<I, T> const & a) noexcept { return a.value; }
+  KUMI_ABI constexpr T const &  get_leaf(leaf<I, T> const & a) noexcept { return a.value; }
 
   template<typename ISeq, typename... Ts> struct binder;
 

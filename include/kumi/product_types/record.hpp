@@ -54,7 +54,7 @@ namespace kumi
     //==============================================================================================
     template<std::size_t I>
     requires(I < sizeof...(Ts))
-    KUMI_TRIVIAL constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) &noexcept
+    KUMI_ABI constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) &noexcept
     {
       return _::get_leaf<I>(impl);
     }
@@ -62,7 +62,7 @@ namespace kumi
     /// @overload
     template<std::size_t I>
     requires(I < sizeof...(Ts))
-    KUMI_TRIVIAL constexpr decltype(auto) operator[](index_t<I>) &&noexcept
+    KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) &&noexcept
     {
       return _::get_leaf<I>(static_cast<decltype(impl) &&>(impl));
     }
@@ -70,7 +70,7 @@ namespace kumi
     /// @overload
     template<std::size_t I>
     requires(I < sizeof...(Ts))
-    KUMI_TRIVIAL constexpr decltype(auto) operator[](index_t<I>) const &&noexcept
+    KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) const &&noexcept
     {
       return _::get_leaf<I>(static_cast<decltype(impl) const &&>(impl));
     }
@@ -78,7 +78,7 @@ namespace kumi
     /// @overload
     template<std::size_t I>
     requires(I < sizeof...(Ts))
-    KUMI_TRIVIAL constexpr decltype(auto) operator[](index_t<I>) const &noexcept
+    KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) const &noexcept
     {
       return _::get_leaf<I>(impl);
     }
@@ -97,7 +97,7 @@ namespace kumi
     //==============================================================================================
     template<auto Name>
     requires( contains_field<Name, Ts...> )
-    KUMI_TRIVIAL constexpr decltype(auto) operator[](field_name<Name> const&) &noexcept
+    KUMI_ABI constexpr decltype(auto) operator[](field_name<Name> const&) &noexcept
     {
       constexpr auto idx = _::get_name_index<Name, Ts...>();
       return unwrap_field_value(_::get_leaf<idx>(impl));
@@ -106,7 +106,7 @@ namespace kumi
     /// @overload
     template<auto Name>
     requires( contains_field<Name, Ts...> )
-    KUMI_TRIVIAL constexpr decltype(auto) operator[](field_name<Name> const&) &&noexcept
+    KUMI_ABI constexpr decltype(auto) operator[](field_name<Name> const&) &&noexcept
     {
       constexpr auto idx = _::get_name_index<Name, Ts...>();
       return unwrap_field_value(_::get_leaf<idx>(static_cast<decltype(impl) &&>(impl)));
@@ -115,7 +115,7 @@ namespace kumi
     /// @overload
     template<auto Name>
     requires( contains_field<Name, Ts...> )
-    KUMI_TRIVIAL constexpr decltype(auto) operator[](field_name<Name> const&) const &&noexcept
+    KUMI_ABI constexpr decltype(auto) operator[](field_name<Name> const&) const &&noexcept
     {
       constexpr auto idx = _::get_name_index<Name, Ts...>();
       return unwrap_field_value(_::get_leaf<idx>(static_cast<decltype(impl) const &&>(impl)));
@@ -124,7 +124,7 @@ namespace kumi
     /// @overload
     template<auto Name>
     requires( contains_field<Name, Ts...> )
-    KUMI_TRIVIAL constexpr decltype(auto) operator[](field_name<Name> const&) const &noexcept
+    KUMI_ABI constexpr decltype(auto) operator[](field_name<Name> const&) const &noexcept
     {
       constexpr auto idx = _::get_name_index<Name, Ts...>();
       return unwrap_field_value(_::get_leaf<idx>(impl));
@@ -139,19 +139,19 @@ namespace kumi
     //! @{
     //==============================================================================================
     /// Returns the number of elements in a kumi::record
-    KUMI_TRIVIAL_NODISCARD static constexpr  auto size() noexcept { return sizeof...(Ts); }
+    [[nodiscard]] KUMI_ABI static constexpr  auto size() noexcept { return sizeof...(Ts); }
 
     /// Returns `true` if a kumi::record contains 0 elements
-    KUMI_TRIVIAL_NODISCARD static constexpr  bool empty() noexcept { return sizeof...(Ts) == 0; }
+    [[nodiscard]] KUMI_ABI static constexpr  bool empty() noexcept { return sizeof...(Ts) == 0; }
 
     /// Returns the names of the elements in a kumi::record 
-    KUMI_TRIVIAL_NODISCARD static constexpr auto names() noexcept 
+    [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept 
     {   
         return tuple{ field_name<unwrap_name_v<Ts>>{}... };
     }; 
    
     /// Returns references to the values of the element in a kumi::record
-    KUMI_TRIVIAL_NODISCARD constexpr auto values() noexcept
+    [[nodiscard]] KUMI_ABI constexpr auto values() noexcept
     {
         return [&]<std::size_t...I>(std::index_sequence<I...>)
         {
@@ -160,7 +160,7 @@ namespace kumi
     };
     
     /// @overload
-    KUMI_TRIVIAL_NODISCARD constexpr auto values() const noexcept
+    [[nodiscard]] KUMI_ABI constexpr auto values() const noexcept
     {
         return [&]<std::size_t...I>(std::index_sequence<I...>)
         {
@@ -217,7 +217,7 @@ namespace kumi
     /// @related kumi::record
     /// @brief Compares a record with an other for equality
     template<typename... Us>
-    friend constexpr auto operator==(record const &self, record<Us...> const &other) noexcept
+    KUMI_ABI friend constexpr auto operator==(record const &self, record<Us...> const &other) noexcept
     requires( named_equality_comparable<record,record<Us...>> )
     {
       [&]<std::size_t...I>(std::index_sequence<I...>)
@@ -231,7 +231,7 @@ namespace kumi
     }
 
     template<typename... Us>
-    KUMI_TRIVIAL friend constexpr auto operator!=(record const &self, record<Us...> const &other) noexcept
+    KUMI_ABI friend constexpr auto operator!=(record const &self, record<Us...> const &other) noexcept
     requires( named_equality_comparable<record,record<Us...>> )
     {
       return !(self == other);
@@ -293,7 +293,7 @@ namespace kumi
   //================================================================================================
   template<typename... Ts> 
   requires ( entirely_uniquely_named<std::remove_cvref_t<Ts>...> )
-  KUMI_TRIVIAL_NODISCARD constexpr record<field_capture<unwrap_name_v<std::remove_cvref_t<Ts>>
+  [[nodiscard]] KUMI_ABI constexpr record<field_capture<unwrap_name_v<std::remove_cvref_t<Ts>>
                                         , result::unwrap_field_value_t<Ts>>...>
   forward_as_record(Ts &&... ts)
   {
@@ -315,7 +315,7 @@ namespace kumi
   //================================================================================================
   template<typename... Ts>
   requires ( entirely_uniquely_named<Ts...> ) 
-  KUMI_TRIVIAL_NODISCARD constexpr record<std::unwrap_ref_decay_t<Ts>...> make_record(Ts &&...ts)
+  [[nodiscard]] KUMI_ABI constexpr record<std::unwrap_ref_decay_t<Ts>...> make_record(Ts &&...ts)
   {
     return {KUMI_FWD(ts)...};
   }
@@ -333,7 +333,7 @@ namespace kumi
   //! @include doc/record/to_ref.cpp
   //================================================================================================
   template<record_type Type>
-  KUMI_TRIVIAL_NODISCARD constexpr auto to_ref(Type&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto to_ref(Type&& t)
   {
     return _::apply_field( [](auto&&... elems)
                   {
@@ -366,7 +366,7 @@ namespace kumi
   //! @include doc/record/get.cpp
   //================================================================================================
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts)) KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  requires(I < sizeof...(Ts)) [[nodiscard]] KUMI_ABI constexpr decltype(auto) 
   get(record<Ts...> &t) noexcept
   {
     return t[index<I>];
@@ -374,7 +374,7 @@ namespace kumi
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts)) KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
+  requires(I < sizeof...(Ts)) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> &&arg) noexcept
   {
     return static_cast<record<Ts...> &&>(arg)[index<I>];
@@ -382,7 +382,7 @@ namespace kumi
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts)) KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
+  requires(I < sizeof...(Ts)) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> const &arg) noexcept
   {
     return arg[index<I>];
@@ -390,7 +390,7 @@ namespace kumi
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts)) KUMI_TRIVIAL_NODISCARD constexpr decltype(auto)
+  requires(I < sizeof...(Ts)) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> const &&arg) noexcept
   {
     return static_cast<record<Ts...> const &&>(arg)[index<I>];
@@ -411,7 +411,7 @@ namespace kumi
   //================================================================================================
   template<field_name Name, typename... Ts>
   requires ( entirely_uniquely_named<Ts...> )
-  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) 
   get(record<Ts...> &t) noexcept
   {
     return t[Name];
@@ -420,7 +420,7 @@ namespace kumi
   /// @overload
   template<field_name Name, typename... Ts>
   requires ( entirely_uniquely_named<Ts...> )
-  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) 
   get(record<Ts...> &&arg) noexcept
   {
     return static_cast<record<Ts...> &&>(arg)[Name];
@@ -429,7 +429,7 @@ namespace kumi
   /// @overload
   template<field_name Name, typename... Ts>
   requires ( entirely_uniquely_named<Ts...> )
-  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) 
   get(record<Ts...> const &arg) noexcept
   {
     return arg[Name];
@@ -438,7 +438,7 @@ namespace kumi
   /// @overload
   template<field_name Name, typename... Ts>
   requires ( entirely_uniquely_named<Ts...> )
-  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) 
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) 
   get(record<Ts...> const &&arg) noexcept
   {
     return static_cast<record<Ts...> const &&>(arg)[Name];

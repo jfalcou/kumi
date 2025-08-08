@@ -10,6 +10,8 @@
 #include <ostream>
 #include <cstdint>
 
+#include <kumi/detail/abi.hpp>
+
 namespace kumi 
 {
   //================================================================================================
@@ -36,10 +38,10 @@ namespace kumi
         : str{s, std::make_index_sequence<N>{}}
     {}
 
-    constexpr std::size_t       size()  const { return size_; }
-    constexpr std::string_view  value() const { return std::string_view(&data_[0], size_-1); }
+    KUMI_ABI constexpr std::size_t       size()  const { return size_; }
+    KUMI_ABI constexpr std::string_view  value() const { return std::string_view(&data_[0], size_-1); }
 
-    friend constexpr auto operator <=>(str const&, str const&) noexcept = default;
+    KUMI_ABI friend constexpr auto operator <=>(str const&, str const&) noexcept = default;
 
     friend std::ostream& operator<<(std::ostream& os, str const& s)
     {
