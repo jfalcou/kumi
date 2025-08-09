@@ -26,28 +26,30 @@ var NAVTREE =
 [
   [ "kumi", "index.html", [
     [ "The C++20 Compact Tuple Tools", "index.html", "index" ],
-    [ "Reference Documentation", "usergroup0.html", [
-      [ "Main API", "usergroup1.html", [
-        [ "Tuple", "usergroup2.html", [
-          [ "Types", "group__tuple.html", null ],
-          [ "Traits", "group__traits.html", null ],
-          [ "Concepts", "group__concepts.html", null ]
-        ] ],
-        [ "Algorithms", "usergroup3.html", [
-          [ "Transformations", "group__transforms.html", null ],
-          [ "Queries", "group__queries.html", null ],
-          [ "Generators", "group__generators.html", null ],
-          [ "Reductions", "group__reductions.html", null ]
-        ] ],
+    [ "About The Library", "usergroup0.html", [
+      [ "Setup", "setup.html", null ],
+      [ "Changelog", "changelog.html", null ],
+      [ "Licence", "licence.html", null ]
+    ] ],
+    [ "Reference Documentation", "usergroup1.html", [
+      [ "Types", "usergroup2.html", [
+        [ "Tuple", "group__tuple.html", null ],
+        [ "Record", "group__record.html", null ]
+      ] ],
+      [ "Algorithms", "usergroup3.html", [
+        [ "Transformations", "group__transforms.html", null ],
+        [ "Queries", "group__queries.html", null ],
+        [ "Generators", "group__generators.html", null ],
+        [ "Reductions", "group__reductions.html", null ]
+      ] ],
+      [ "Helpers", "usergroup4.html", [
+        [ "Traits", "group__traits.html", null ],
+        [ "Concepts", "group__concepts.html", null ],
         [ "Utility", "group__utility.html", null ]
       ] ],
       [ "Kumi Namespace", "namespacekumi.html", null ]
     ] ],
-    [ "About The Library", "usergroup4.html", [
-      [ "Setup", "setup.html", null ],
-      [ "Changelog", "changelog.html", null ],
-      [ "Licence", "licence.html", null ]
-    ] ]
+    [ "Contact", "mailto:joel.falcou+kumi@gmail.com?subject=The%20KUMI%20Library", null ]
   ] ]
 ];
 

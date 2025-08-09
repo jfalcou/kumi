@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['back_0',['back',['../group__utility_ga1818d1862531a044583a68d70e46723b.html#ga1818d1862531a044583a68d70e46723b',1,'kumi']]],
+  ['back_0',['back',['../group__utility_ga6d1e220549b74a2234e7ce58bf791d3e.html#ga6d1e220549b74a2234e7ce58bf791d3e',1,'kumi']]],
   ['bedazzling_20beryl_1',['Version 2.0 - Bedazzling Beryl',['../changelog.html#autotoc_md152',1,'']]],
   ['beryl_2',['Version 2.0 - Bedazzling Beryl',['../changelog.html#autotoc_md152',1,'']]],
   ['bit_5fand_3',['bit_and',['../group__reductions_ga491ecadaaedfe84e927302683f108625.html#ga491ecadaaedfe84e927302683f108625',1,'kumi::bit_and(Tuple &amp;&amp;t, Value init)'],['../group__reductions_ga086ae741edfc80131295802c31e08af9.html#ga086ae741edfc80131295802c31e08af9',1,'kumi::bit_and(Tuple &amp;&amp;t)']]],

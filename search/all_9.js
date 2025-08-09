@@ -15,10 +15,10 @@ var searchData=
   ['for_5feach_12',['for_each',['../group__transforms_ga26298eae58692ea21309cbeddeac5607.html#ga26298eae58692ea21309cbeddeac5607',1,'kumi']]],
   ['for_5feach_5ffield_13',['for_each_field',['../group__transforms_ga8e05313a97d85b3fa24c9650d661db74.html#ga8e05313a97d85b3fa24c9650d661db74',1,'kumi']]],
   ['for_5feach_5findex_14',['for_each_index',['../group__transforms_ga39e65f96d9880dd5b1e08b8dc01993a1.html#ga39e65f96d9880dd5b1e08b8dc01993a1',1,'kumi']]],
-  ['forward_5fas_5frecord_15',['forward_as_record',['../group__record_ga76cdb3ea2089fd32024f3418cfaca33c.html#ga76cdb3ea2089fd32024f3418cfaca33c',1,'kumi::record']]],
-  ['forward_5fas_5ftuple_16',['forward_as_tuple',['../group__tuple_ga2e59034f40a923f671b72a88cc1ed045.html#ga2e59034f40a923f671b72a88cc1ed045',1,'kumi::tuple']]],
+  ['forward_5fas_5frecord_15',['forward_as_record',['../group__record_gaae584fd64ac60dfb3f9cf36abdc6ea7e.html#gaae584fd64ac60dfb3f9cf36abdc6ea7e',1,'kumi::record']]],
+  ['forward_5fas_5ftuple_16',['forward_as_tuple',['../group__tuple_ga5c5ba567f7ec305505f44bf70c67b6db.html#ga5c5ba567f7ec305505f44bf70c67b6db',1,'kumi::tuple']]],
   ['from_20the_20source_17',['Install from the source',['../setup.html#setup-source',1,'']]],
   ['from_5ftuple_18',['from_tuple',['../group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48',1,'kumi']]],
-  ['front_19',['front',['../group__utility_ga0fc57b54b71d2726c24df5ddbab97bd3.html#ga0fc57b54b71d2726c24df5ddbab97bd3',1,'kumi']]],
+  ['front_19',['front',['../group__utility_gae40b8dfe98266c4f62395c369833eef3.html#gae40b8dfe98266c4f62395c369833eef3',1,'kumi']]],
   ['functions_20',['functions',['../group__utility.html',1,'Helper Types and Functions'],['../group__record.html',1,'Record Types and Functions'],['../group__tuple.html',1,'Tuple Types and Functions']]]
 ];
