@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::record::make_record</title>
+<title>kumi: kumi::record::forward_as_record</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__record_gae1a59c978c8d2a7b37ef600e784dfabb.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__record_gab2fb855f76baa310870f521f234ec2a9.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,8 +121,8 @@ $(document).ready(function(){initNavTree('group__record_gae1a59c978c8d2a7b37ef60
 </div>
 
 <div class="contents">
-<a id="gae1a59c978c8d2a7b37ef600e784dfabb" name="gae1a59c978c8d2a7b37ef600e784dfabb"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gae1a59c978c8d2a7b37ef600e784dfabb">&#9670;&#160;</a></span>make_record()</h2>
+<a id="gab2fb855f76baa310870f521f234ec2a9" name="gab2fb855f76baa310870f521f234ec2a9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab2fb855f76baa310870f521f234ec2a9">&#9670;&#160;</a></span>forward_as_record()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -133,11 +133,12 @@ template&lt;typename... Ts&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="structkumi_1_1record.html">record</a>&lt; std::unwrap_ref_decay_t&lt; <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Ts</a> &gt;... &gt; make_record </td>
+          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a> forward_as_record </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Ts</a> &amp;&amp;...&#160;</td>
           <td class="paramname"><em>ts</em></td><td>)</td>
-          <td></td>
+          <td> -&gt; <a class="el" href="structkumi_1_1record.html">record</a>&lt;<a class="el" href="structkumi_1_1field__capture.html">field_capture</a>&lt;unwrap_name_v&lt;std::remove_cvref_t&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Ts</a>&gt;&gt;, result::unwrap_field_value_t&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Ts</a>&gt;&gt;...&gt;
+  </td>
         </tr>
       </table>
   </td>
@@ -147,36 +148,42 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Creates a record object, deducing the target type from the types of arguments. </p>
+<p>Creates a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields necessarily named, names are unique.">kumi::record</a> of forwarding references to its arguments. </p>
+<p>Constructs a record of references to the arguments in args suitable for forwarding as an argument to a function. The record has rvalue reference data members when rvalues are used as arguments, and otherwise has lvalue reference data members.</p>
+<dl class="section note"><dt>Note</dt><dd>If the arguments are temporaries, <code>forward_as_record</code> does not extend their lifetime; they have to be used before the end of the full expression.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">ts</td><td>Zero or more lvalue arguments to construct the record from. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields necessarily named, names are unique.">kumi::record</a> constructed from the ts or their inner references when ts is an instance of <code>std::reference_wrapper</code>. </dd></dl>
-<h2><a class="anchor" id="autotoc_md98"></a>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields necessarily named, names are unique.">kumi::record</a> constructed as <code><a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields necessarily named, names are unique.">kumi::record</a>&lt;Ts&amp;&amp;...&gt;(std::forward&lt;Ts&gt;(args)...)</code> </dd></dl>
+<h2><a class="anchor" id="autotoc_md97"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;functional&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Data&gt;</div>
+<div class="line">std::vector&lt;std::string&gt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">build</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Data</a> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">d</a>)</div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordflow">return</span> std::vector&lt;std::string&gt; ( <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::get&lt;&quot;a&quot;_f&gt;</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">d</a>)</div>
+<div class="line">                                  , std::move(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::get&lt;&quot;b&quot;_f&gt;</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">d</a>))</div>
+<div class="line">                                  );</div>
+<div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">main</a>()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">v</a> = <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">build</a>( kumi::forward_as_record(<span class="stringliteral">&quot;a&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = 4,<span class="stringliteral">&quot;b&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = std::string{<span class="stringliteral">&quot;the text !&quot;</span>}));</div>
 <div class="line"> </div>
-<div class="line">  <span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">k</a> = 99;</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t</a> = kumi::make_record( <span class="stringliteral">&quot;x&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = 1, <span class="stringliteral">&quot;y&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = 2.3, <span class="stringliteral">&quot;z&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = 4.5f, <span class="stringliteral">&quot;t&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = <span class="charliteral">&#39;@&#39;</span>, <span class="stringliteral">&quot;m&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = std::ref(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">k</a>));</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">  <span class="comment">// Reference access</span></div>
-<div class="line">  <a class="code hl_function" href="namespacekumi.html#a279ef577d40ca60ccfb6ca3b8ef8c8a1">kumi::get</a>&lt;<span class="stringliteral">&quot;m&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a>&gt;(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t</a>)++;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">k</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keyword">auto</span> <span class="keyword">const</span>&amp; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">s</a> : <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">v</a>)</div>
+<div class="line">    std::<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">cout</a> &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">s</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:59</div></div>
-<div class="ttc" id="anamespacekumi_html_a279ef577d40ca60ccfb6ca3b8ef8c8a1"><div class="ttname"><a href="namespacekumi.html#a279ef577d40ca60ccfb6ca3b8ef8c8a1">kumi::get</a></div><div class="ttdeci">constexpr decltype(auto) get(record&lt; Ts... &gt; &amp;&amp;arg) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition</b> record.hpp:378</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

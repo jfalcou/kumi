@@ -12,7 +12,7 @@ var searchData=
   ['any_5fof_9',['any_of',['../group__queries_gafdfb5550011004d4306d9c8a67586d66.html#gafdfb5550011004d4306d9c8a67586d66',1,'kumi::any_of(T const &amp;ts) noexcept'],['../group__queries_ga8d7de5c00a3b6cfc1fc4a8ed3bea53b2.html#ga8d7de5c00a3b6cfc1fc4a8ed3bea53b2',1,'kumi::any_of(T const &amp;ts, Pred p) noexcept']]],
   ['api_20and_20infrastructure_20changes_10',['API and Infrastructure Changes',['../changelog.html#autotoc_md144',1,'']]],
   ['apply_11',['apply',['../group__transforms_ga2c808f8956ae85b42b9b8a8ed09cc371.html#ga2c808f8956ae85b42b9b8a8ed09cc371',1,'kumi']]],
-  ['as_5fflat_5fptr_12',['as_flat_ptr',['../group__generators_ga592ec585976cc6544c799402a5c4ef1c.html#ga592ec585976cc6544c799402a5c4ef1c',1,'kumi']]],
+  ['as_5fflat_5fptr_12',['as_flat_ptr',['../group__generators_gace4e200f0703bc8ea12f1b43995b69bf.html#gace4e200f0703bc8ea12f1b43995b69bf',1,'kumi']]],
   ['as_5ftuple_13',['as_tuple',['../structkumi_1_1as__tuple.html',1,'kumi']]],
   ['autonomous_20public_20release_14',['First autonomous public release.',['../changelog.html#autotoc_md158',1,'']]]
 ];
