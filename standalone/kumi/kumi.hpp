@@ -6,8 +6,6 @@
 */
 //==================================================================================================
 #pragma once
-/// @brief Main **KUMI** namespace
-namespace kumi {}
 namespace kumi
 {
 }
@@ -34,11 +32,13 @@ namespace kumi::_
   template<typename T> struct box { using type = T; };
 }
 #include <ostream>
-#if defined(KUMI_DEBUG)
+#if defined(KUMI_DOXYGEN_INVOKED)
+#   define KUMI_ABI inline
+#elif defined(KUMI_DEBUG)
 #   define KUMI_ABI
 #elif defined(__GNUC__)
 #   define KUMI_ABI [[gnu::always_inline, gnu::flatten, gnu::artificial]] inline
-#elif defined (_MSC_VER)
+#elif defined(_MSC_VER)
 #   define KUMI_ABI __forceinline
 #endif
 namespace kumi
@@ -1141,7 +1141,7 @@ namespace kumi
     {   
         using tuple_type = tuple<unwrap_name_t<Ts>...>;
         return tuple_type{ unwrap_name_v<Ts>... };
-    }; 
+    };
     template<typename... Us>
     requires(   _::piecewise_convertible<tuple, tuple<Us...>>
             &&  (sizeof...(Us) == sizeof...(Ts))
@@ -1153,7 +1153,7 @@ namespace kumi
     }
     template<typename... Us>
     requires(_::piecewise_convertible<tuple, tuple<Us...>>) constexpr tuple &
-    operator=(tuple<Us...> const &other)
+    KUMI_ABI operator=(tuple<Us...> const &other)
     {
       [&]<std::size_t... I>(std::index_sequence<I...>) { ((get<I>(*this) = get<I>(other)), ...); }
       (std::make_index_sequence<sizeof...(Ts)>());
@@ -1161,7 +1161,7 @@ namespace kumi
     }
     template<typename... Us>
     requires(_::piecewise_convertible<tuple, tuple<Us...>>) constexpr tuple &
-    operator=(tuple<Us...> &&other)
+    KUMI_ABI operator=(tuple<Us...> &&other)
     {
       [&]<std::size_t... I>(std::index_sequence<I...>)
       {
@@ -1260,18 +1260,26 @@ namespace kumi
     }
   };
   template<typename... Ts> tuple(Ts &&...) -> tuple<std::unwrap_ref_decay_t<Ts>...>;
-  template<typename... Ts> [[nodiscard]] KUMI_ABI constexpr tuple<Ts &...> tie(Ts &...ts) { return {ts...}; }
-  template<typename... Ts> 
-  [[nodiscard]] KUMI_ABI constexpr tuple<Ts &&...> forward_as_tuple(Ts &&...ts)
+  template<typename... Ts>
+  [[nodiscard]] KUMI_ABI 
+  constexpr auto tie(Ts &...ts) -> tuple<Ts &...>
+  {
+    return {ts...};
+  }
+  template<typename... Ts>
+  [[nodiscard]] KUMI_ABI 
+  constexpr auto forward_as_tuple(Ts &&...ts) -> tuple<Ts &&...>
   {
     return {KUMI_FWD(ts)...};
   }
   template<typename... Ts>
-  [[nodiscard]] KUMI_ABI constexpr tuple<std::unwrap_ref_decay_t<Ts>...> make_tuple(Ts &&...ts)
+  [[nodiscard]] KUMI_ABI 
+  constexpr auto make_tuple(Ts &&...ts) -> tuple<std::unwrap_ref_decay_t<Ts>...>
   {
     return {KUMI_FWD(ts)...};
   }
-  template<product_type Type> [[nodiscard]] KUMI_ABI constexpr auto to_ref(Type&& t)
+  template<product_type Type> 
+  [[nodiscard]] KUMI_ABI constexpr auto to_ref(Type&& t)
   {
     return apply( [](auto&&... elems)
                   {
@@ -1281,7 +1289,7 @@ namespace kumi
                 );
   }
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts)) [[nodiscard]] KUMI_ABI constexpr decltype(auto) 
+  requires(I < sizeof...(Ts)) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> &t) noexcept
   {
     return t[index<I>];
@@ -1306,35 +1314,35 @@ namespace kumi
   }
   template<field_name Name, typename... Ts>
   requires ( uniquely_named<Ts...> )
-  [[nodiscard]] KUMI_ABI constexpr decltype(auto) 
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> &t) noexcept
   {
     return t[Name];
   }
   template<field_name Name, typename... Ts>
   requires ( uniquely_named<Ts...> )
-  [[nodiscard]] KUMI_ABI constexpr decltype(auto) 
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> &&arg) noexcept
   {
     return static_cast<tuple<Ts...> &&>(arg)[Name];
   }
   template<field_name Name, typename... Ts>
   requires ( uniquely_named<Ts...> )
-  [[nodiscard]] KUMI_ABI constexpr decltype(auto) 
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> const &arg) noexcept
   {
     return arg[Name];
   }
   template<field_name Name, typename... Ts>
   requires ( uniquely_named<Ts...> )
-  [[nodiscard]] KUMI_ABI constexpr decltype(auto) 
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> const &&arg) noexcept
   {
     return static_cast<tuple<Ts...> const &&>(arg)[Name];
   }
   template<typename T, typename... Ts>
   requires ( uniquely_typed<Ts...> )
-  [[nodiscard]] KUMI_ABI constexpr decltype(auto) 
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> &t) noexcept
   {
     constexpr auto I = _::get_type_index<T, Ts...>();
@@ -1342,7 +1350,7 @@ namespace kumi
   }
   template<typename T, typename... Ts>
   requires ( uniquely_typed<Ts...> )
-  [[nodiscard]] KUMI_ABI constexpr decltype(auto) 
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> &&arg) noexcept
   {
     constexpr auto I = _::get_type_index<T, Ts...>();
@@ -1350,7 +1358,7 @@ namespace kumi
   }
   template<typename T, typename... Ts>
   requires ( uniquely_typed<Ts...> )
-  [[nodiscard]] KUMI_ABI constexpr decltype(auto) 
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> const &arg) noexcept
   {
     constexpr auto I = _::get_type_index<T, Ts...>();
@@ -1358,7 +1366,7 @@ namespace kumi
   }
   template<typename T, typename... Ts>
   requires ( uniquely_typed<Ts...> )
-  [[nodiscard]] KUMI_ABI constexpr decltype(auto) 
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> const &&arg) noexcept
   {
     constexpr auto I = _::get_type_index<T, Ts...>();
@@ -1450,7 +1458,7 @@ namespace kumi
     };
     template<typename... Us>
     requires( equivalent<record, record<Us...>>  && _::fieldwise_convertible<record, record<Us...>> ) 
-    constexpr record &operator=(record<Us...> const &other)
+    KUMI_ABI constexpr record &operator=(record<Us...> const &other)
     { 
       [&]<std::size_t...I>(std::index_sequence<I...>)
       {
@@ -1464,7 +1472,7 @@ namespace kumi
     }
     template<typename... Us>
     requires( equivalent<record, record<Us...>> && _::fieldwise_convertible<record, record<Us...>> ) 
-    constexpr record &operator=(record<Us...> &&other)
+    KUMI_ABI constexpr record &operator=(record<Us...> &&other)
     {
       [&]<std::size_t...I>(std::index_sequence<I...>)
       {
