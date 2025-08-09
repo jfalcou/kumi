@@ -179,7 +179,7 @@ namespace kumi
     //==============================================================================================
     template<typename... Us>
     requires( equivalent<record, record<Us...>>  && _::fieldwise_convertible<record, record<Us...>> ) 
-    constexpr record &operator=(record<Us...> const &other)
+    KUMI_ABI constexpr record &operator=(record<Us...> const &other)
     { 
       [&]<std::size_t...I>(std::index_sequence<I...>)
       {
@@ -195,7 +195,7 @@ namespace kumi
     /// @overload
     template<typename... Us>
     requires( equivalent<record, record<Us...>> && _::fieldwise_convertible<record, record<Us...>> ) 
-    constexpr record &operator=(record<Us...> &&other)
+    KUMI_ABI constexpr record &operator=(record<Us...> &&other)
     {
       [&]<std::size_t...I>(std::index_sequence<I...>)
       {
