@@ -32,7 +32,7 @@ namespace kumi
   //! @include doc/max.cpp
   //================================================================================================
   template<typename T>
-  [[nodiscard]] constexpr auto max(T const& t) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto max(T const& t) noexcept
   {
     if constexpr ( !kumi::product_type<T> ) return t;
     else if constexpr( T::size() == 1 )     return get<0>(t);
@@ -72,7 +72,7 @@ namespace kumi
   //! @include doc/max.cpp
   //================================================================================================
   template<typename T, typename F>
-  [[nodiscard]] constexpr auto max(T const& t, F f) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto max(T const& t, F f) noexcept
   {
     if constexpr ( !kumi::product_type<T> ) return f(t);
     else if constexpr( T::size() == 1 )     return f( get<0>(t) );
@@ -112,7 +112,7 @@ namespace kumi
   //! @include doc/max_flat.cpp
   //================================================================================================
   template<typename T, typename F>
-  [[nodiscard]] constexpr auto max_flat(T const& t, F f) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto max_flat(T const& t, F f) noexcept
   {
     if constexpr ( !kumi::product_type<T> ) return f(t);
     else
@@ -166,7 +166,7 @@ namespace kumi
   //! @include doc/min.cpp
   //================================================================================================
   template<typename T>
-  [[nodiscard]] constexpr auto min(T const& t) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto min(T const& t) noexcept
   {
     if constexpr ( !kumi::product_type<T> ) return t;
     else if constexpr( T::size() == 1 )     return get<0>(t);
@@ -206,7 +206,7 @@ namespace kumi
   //! @include doc/min.cpp
   //================================================================================================
   template<typename T, typename F>
-  [[nodiscard]] constexpr auto min(T const& t, F f) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto min(T const& t, F f) noexcept
   {
     if constexpr ( !kumi::product_type<T> ) return f(t);
     else if constexpr( T::size() == 1 )     return f( get<0>(t) );
@@ -246,7 +246,7 @@ namespace kumi
   //! @include doc/min_flat.cpp
   //================================================================================================
   template<typename T, typename F>
-  [[nodiscard]] constexpr auto min_flat(T const& t, F f) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto min_flat(T const& t, F f) noexcept
   {
     if constexpr ( !kumi::product_type<T> ) return f(t);
     else

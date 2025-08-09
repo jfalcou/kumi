@@ -44,19 +44,19 @@ namespace kumi::_
   };
 
   template<std::size_t I, typename T0, int N>
-  KUMI_TRIVIAL constexpr auto& get_leaf(binder_n<T0,N> &arg)             noexcept { return arg.members[I]; }
+  KUMI_ABI constexpr auto& get_leaf(binder_n<T0,N> &arg)             noexcept { return arg.members[I]; }
 
   template<std::size_t I, typename T0, int N>
-  KUMI_TRIVIAL constexpr auto const& get_leaf(binder_n<T0,N> const &arg) noexcept { return arg.members[I]; }
+  KUMI_ABI constexpr auto const& get_leaf(binder_n<T0,N> const &arg) noexcept { return arg.members[I]; }
 
   template<std::size_t I, typename T0, int N>
-  KUMI_TRIVIAL constexpr auto&& get_leaf(binder_n<T0,N> &&arg) noexcept
+  KUMI_ABI constexpr auto&& get_leaf(binder_n<T0,N> &&arg) noexcept
   {
     return static_cast<T0&&>(arg.members[I]);
   }
 
   template<std::size_t I, typename T0, int N>
-  KUMI_TRIVIAL constexpr auto const&& get_leaf(binder_n<T0,N> const &&arg) noexcept
+  KUMI_ABI constexpr auto const&& get_leaf(binder_n<T0,N> const &&arg) noexcept
   {
     return static_cast<T0 const &&>(arg.members[I]);
   }
@@ -274,7 +274,7 @@ namespace kumi::_
   //================================================================================================
   template<std::size_t I,typename Binder>
   requires requires(Binder) { typename Binder::kumi_specific_layout; }
-  KUMI_TRIVIAL constexpr auto &get_leaf(Binder &arg) noexcept
+  KUMI_ABI constexpr auto &get_leaf(Binder &arg) noexcept
   {
     if constexpr(I == 0) return arg.member0;
     if constexpr(I == 1) return arg.member1;
@@ -290,7 +290,7 @@ namespace kumi::_
 
   template<std::size_t I,typename Binder>
   requires requires(Binder) { typename Binder::kumi_specific_layout; }
-  KUMI_TRIVIAL constexpr auto &&get_leaf(Binder &&arg) noexcept
+  KUMI_ABI constexpr auto &&get_leaf(Binder &&arg) noexcept
   {
     if constexpr(I == 0) return static_cast<typename Binder::member0_type &&>(arg.member0);
     if constexpr(I == 1) return static_cast<typename Binder::member1_type &&>(arg.member1);
@@ -306,7 +306,7 @@ namespace kumi::_
 
   template<std::size_t I,typename Binder>
   requires requires(Binder) { typename Binder::kumi_specific_layout; }
-  KUMI_TRIVIAL constexpr auto const &&get_leaf(Binder const &&arg) noexcept
+  KUMI_ABI constexpr auto const &&get_leaf(Binder const &&arg) noexcept
   {
     if constexpr(I == 0) return static_cast<typename Binder::member0_type const&&>(arg.member0);
     if constexpr(I == 1) return static_cast<typename Binder::member1_type const&&>(arg.member1);
@@ -322,7 +322,7 @@ namespace kumi::_
 
   template<std::size_t I,typename Binder>
   requires requires(Binder) { typename Binder::kumi_specific_layout; }
-  KUMI_TRIVIAL constexpr auto const &get_leaf(Binder const &arg) noexcept
+  KUMI_ABI constexpr auto const &get_leaf(Binder const &arg) noexcept
   {
     if constexpr(I == 0) return arg.member0;
     if constexpr(I == 1) return arg.member1;

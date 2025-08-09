@@ -29,8 +29,8 @@ namespace kumi
   //! @include doc/record/for_each.cpp
   //================================================================================================
   template<typename Function, product_type Tuple, product_type... Tuples>
-  constexpr void for_each(Function f, Tuple&& t, Tuples&&... ts)
-  requires( (compatible_product_types<std::remove_cvref_t<Tuple>, std::remove_cvref_t<Tuples>...>) 
+  KUMI_ABI constexpr void for_each(Function f, Tuple&& t, Tuples&&... ts)
+  requires( (compatible_product_types<Tuple, Tuples...>) 
           && (_::supports_call<Function&, Tuple, Tuples...>))
   {
          if constexpr(sized_product_type<Tuple,0>) return;
@@ -90,7 +90,7 @@ namespace kumi
   //================================================================================================
   template<typename Function, product_type Tuple, product_type... Tuples>
   requires( !record_type<Tuple> && (!record_type<Tuples> && ...) )
-  constexpr void for_each_index(Function f, Tuple&& t, Tuples&&... ts)
+  KUMI_ABI constexpr void for_each_index(Function f, Tuple&& t, Tuples&&... ts)
   {
     if constexpr(sized_product_type<Tuple,0>) return;
     else
@@ -130,7 +130,7 @@ namespace kumi
   //================================================================================================
   template<typename Function, record_type Tuple, record_type... Tuples>
   requires ( compatible_product_types<std::remove_cvref_t<Tuple>, std::remove_cvref_t<Tuples>...> )
-  constexpr void for_each_field(Function f, Tuple&& t, Tuples&&... ts)
+  KUMI_ABI constexpr void for_each_field(Function f, Tuple&& t, Tuples&&... ts)
   {
     if constexpr(sized_product_type<Tuple,0>) return;
     else

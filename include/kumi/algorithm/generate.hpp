@@ -33,7 +33,7 @@ namespace kumi
   //! ## Example
   //! @include doc/fill.cpp
   //================================================================================================
-  template<std::size_t N, typename T> [[nodiscard]] constexpr auto fill(T const& v) noexcept
+  template<std::size_t N, typename T> [[nodiscard]] KUMI_ABI constexpr auto fill(T const& v) noexcept
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>)
     {
@@ -66,7 +66,7 @@ namespace kumi
   //! ## Example
   //! @include doc/generate.cpp
   //================================================================================================
-  template<std::size_t N, typename Function> [[nodiscard]] constexpr auto generate(Function const& f) noexcept
+  template<std::size_t N, typename Function> [[nodiscard]] KUMI_ABI constexpr auto generate(Function const& f) noexcept
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>)
     {
@@ -98,7 +98,7 @@ namespace kumi
   //! ## Example
   //! @include doc/iota.cpp
   //================================================================================================
-  template<std::size_t N, typename T> [[nodiscard]] constexpr auto iota(T v) noexcept
+  template<std::size_t N, typename T> [[nodiscard]] KUMI_ABI constexpr auto iota(T v) noexcept
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>)
     {

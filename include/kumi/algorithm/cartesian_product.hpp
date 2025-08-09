@@ -17,7 +17,7 @@ namespace kumi
   {
     template<std::size_t N, std::size_t... S> struct digits
     {
-      constexpr auto operator()(std::size_t v) noexcept
+      KUMI_ABI constexpr auto operator()(std::size_t v) noexcept
       {
         struct { std::size_t data[N]; } values = {};
         std::size_t shp[N] = {S...};
@@ -35,7 +35,7 @@ namespace kumi
   }
   // MSVC chokes on the other code for empty calls
 #if !defined(KUMI_DOXYGEN_INVOKED)
-  KUMI_TRIVIAL_NODISCARD constexpr auto cartesian_product() { return kumi::tuple<>{}; }
+  [[nodiscard]] KUMI_ABI constexpr auto cartesian_product() { return kumi::tuple<>{}; }
 #endif
 
   //================================================================================================
@@ -61,7 +61,7 @@ namespace kumi
   //! @include doc/cartesian_product.cpp
   //================================================================================================
   template<product_type... Ts>
-  [[nodiscard]] constexpr auto cartesian_product(Ts&&... ts)
+  [[nodiscard]] KUMI_ABI constexpr auto cartesian_product(Ts&&... ts)
   {
     constexpr auto idx = [&]<std::size_t... I>(std::index_sequence<I...>)
     {

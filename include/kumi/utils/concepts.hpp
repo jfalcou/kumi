@@ -86,7 +86,7 @@ namespace kumi
   namespace _
   {
     template<typename T, typename U>
-    constexpr auto check_equality()
+    KUMI_ABI constexpr auto check_equality()
     {
       return []<std::size_t...I>(std::index_sequence<I...>)
       {
@@ -149,7 +149,7 @@ namespace kumi
   {
     template<auto Name, typename... Ts>
     requires( uniquely_named<Ts...> )
-    constexpr decltype(auto) get_name_index() noexcept
+    KUMI_ABI constexpr decltype(auto) get_name_index() noexcept
     {
       return []<std::size_t... N>(std::index_sequence<N...>)
       {
@@ -169,7 +169,7 @@ namespace kumi
 
     template<typename T, typename... Ts>
     requires ( uniquely_typed<Ts...> )
-    constexpr decltype(auto) get_type_index() noexcept
+    KUMI_ABI constexpr decltype(auto) get_type_index() noexcept
     {
       return []<std::size_t... N>( std::index_sequence<N...> )
       {
@@ -262,6 +262,7 @@ namespace kumi
   template<typename T, typename... Us>
   concept compatible_product_types = (product_type<T> && ( product_type<Us> && ...))  &&
     ( (!record_type<T> && (!record_type<Us> && ...))
-    || (record_type<T> && (record_type<Us> && ...) && (equivalent<T, Us> && ...))
+    || (record_type<T> && (record_type<Us> && ...) 
+    && (equivalent<std::remove_cvref_t<T>, std::remove_cvref_t<Us>> && ...))
   );
 }

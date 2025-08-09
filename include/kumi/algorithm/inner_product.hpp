@@ -20,13 +20,13 @@ namespace kumi
       T value;
 
       template<typename W>
-      friend constexpr decltype(auto) operator>>(foldable &&x, foldable<F, W> &&y)
+      KUMI_ABI friend constexpr decltype(auto) operator>>(foldable &&x, foldable<F, W> &&y)
       {
         return _::foldable {x.func, x.func(y.value, x.value)};
       }
 
       template<typename W>
-      friend constexpr decltype(auto) operator<<(foldable &&x, foldable<F, W> &&y)
+      KUMI_ABI friend constexpr decltype(auto) operator<<(foldable &&x, foldable<F, W> &&y)
       {
         return _::foldable {x.func, x.func(x.value, y.value)};
       }
@@ -82,7 +82,7 @@ namespace kumi
   template< product_type S1, sized_product_type<S1::size()> S2, typename T
           , typename Sum, typename Prod
           >
-  [[nodiscard]] constexpr auto inner_product( S1 const& s1, S2 const& s2, T init
+  [[nodiscard]] KUMI_ABI constexpr auto inner_product( S1 const& s1, S2 const& s2, T init
                                             , Sum sum, Prod prod
                                             ) noexcept
   {
@@ -102,7 +102,7 @@ namespace kumi
 
   //! @overload
   template<product_type S1, sized_product_type<S1::size()> S2, typename T>
-  [[nodiscard]] constexpr auto inner_product(S1 const& s1, S2 const& s2, T init) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto inner_product(S1 const& s1, S2 const& s2, T init) noexcept
   {
     if constexpr(sized_product_type<S1,0>) return init;
     else

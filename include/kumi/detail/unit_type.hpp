@@ -8,6 +8,7 @@
 #pragma once
 
 #include <ostream>
+#include <kumi/detail/abi.hpp>
 
 namespace kumi
 {
@@ -20,7 +21,7 @@ namespace kumi
   //================================================================================================
   struct unit 
   {
-    friend constexpr auto operator<=>(unit, unit) noexcept = default;
+    KUMI_ABI friend constexpr auto operator<=>(unit, unit) noexcept = default;
 
     friend std::ostream& operator<<(std::ostream& os, unit)
     {

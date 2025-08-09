@@ -34,7 +34,7 @@ namespace kumi
   //! @include doc/sum.cpp
   //================================================================================================
   template<product_type Tuple, typename Value>
-  [[nodiscard]] constexpr auto sum(Tuple&& t, Value init)
+  [[nodiscard]] KUMI_ABI constexpr auto sum(Tuple&& t, Value init)
   {
     if constexpr(_::empty_tuple<Tuple>) return init;
     else return kumi::apply( [init](auto const&... m) { return (m + ... + init); }, KUMI_FWD(t) );
@@ -64,7 +64,7 @@ namespace kumi
   //! @include doc/sum.cpp
   //================================================================================================
   template<product_type Tuple>
-  [[nodiscard]] constexpr auto sum(Tuple&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto sum(Tuple&& t)
   {
     return sum(kumi::extract(t,index<1>),get<0>(t));
   }
@@ -94,7 +94,7 @@ namespace kumi
   //! @include doc/prod.cpp
   //================================================================================================
   template<product_type Tuple, typename Value>
-  [[nodiscard]] constexpr auto prod(Tuple&& t, Value init)
+  [[nodiscard]] KUMI_ABI constexpr auto prod(Tuple&& t, Value init)
   {
     if constexpr(_::empty_tuple<Tuple>) return init;
     else return kumi::apply( [init](auto const&... m) { return (m * ... * init); }, KUMI_FWD(t) );
@@ -124,7 +124,7 @@ namespace kumi
   //! @include doc/prod.cpp
   //================================================================================================
   template<product_type Tuple>
-  [[nodiscard]] constexpr auto prod(Tuple&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto prod(Tuple&& t)
   {
     return prod(kumi::extract(t,index<1>),get<0>(t));
   }
@@ -154,7 +154,7 @@ namespace kumi
   //! @include doc/bit_and.cpp
   //================================================================================================
   template<product_type Tuple, typename Value>
-  [[nodiscard]] constexpr auto bit_and(Tuple&& t, Value init)
+  [[nodiscard]] KUMI_ABI constexpr auto bit_and(Tuple&& t, Value init)
   {
     if constexpr(_::empty_tuple<Tuple>) return init;
     else return kumi::apply( [init](auto const&... m) { return (m & ... & init); }, KUMI_FWD(t) );
@@ -184,7 +184,7 @@ namespace kumi
   //! @include doc/bit_and.cpp
   //================================================================================================
   template<product_type Tuple>
-  [[nodiscard]] constexpr auto bit_and(Tuple&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto bit_and(Tuple&& t)
   {
     return bit_and(kumi::extract(t,index<1>),get<0>(t));
   }
@@ -214,7 +214,7 @@ namespace kumi
   //! @include doc/bit_or.cpp
   //================================================================================================
   template<product_type Tuple, typename Value>
-  [[nodiscard]] constexpr auto bit_or(Tuple&& t, Value init)
+  [[nodiscard]] KUMI_ABI constexpr auto bit_or(Tuple&& t, Value init)
   {
     if constexpr(_::empty_tuple<Tuple>) return init;
     else return kumi::apply( [init](auto const&... m) { return (m | ... | init); }, KUMI_FWD(t) );
@@ -244,7 +244,7 @@ namespace kumi
   //! @include doc/bit_or.cpp
   //================================================================================================
   template<product_type Tuple>
-  [[nodiscard]] constexpr auto bit_or(Tuple&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto bit_or(Tuple&& t)
   {
     return bit_or(kumi::extract(t,index<1>),get<0>(t));
   }

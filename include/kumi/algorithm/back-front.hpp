@@ -35,7 +35,7 @@ namespace kumi
   //! @include doc/back-front.cpp
   //================================================================================================
   template<product_type Tuple>
-  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) front(Tuple&& t) requires( size_v<Tuple> != 0)
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) front(Tuple&& t) requires( size_v<Tuple> != 0)
   {
     return get<0>(KUMI_FWD(t));
   }
@@ -64,7 +64,7 @@ namespace kumi
   //! @include doc/back-front.cpp
   //================================================================================================
   template<product_type Tuple>
-  KUMI_TRIVIAL_NODISCARD constexpr decltype(auto) back(Tuple&& t) requires( size_v<Tuple> != 0)
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) back(Tuple&& t) requires( size_v<Tuple> != 0)
   {
     return get<size_v<Tuple>-1>(KUMI_FWD(t));
   }

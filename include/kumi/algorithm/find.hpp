@@ -20,7 +20,7 @@ namespace kumi
   //! @include doc/locate.cpp
   //================================================================================================
   template<typename Pred, typename... Ts>
-  [[nodiscard]] constexpr auto locate( tuple<Ts...> const& t, Pred p ) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto locate( tuple<Ts...> const& t, Pred p ) noexcept
   {
     auto locator = [&](auto const&... m)
     {

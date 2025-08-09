@@ -51,13 +51,13 @@ namespace kumi
   namespace _
   {
     template<kumi::str ID, typename T>
-    KUMI_TRIVIAL constexpr T       &  get_field(field_capture<ID, T>       & a) noexcept { return a.value; }
+    KUMI_ABI constexpr T       &  get_field(field_capture<ID, T>       & a) noexcept { return a.value; }
     template<kumi::str ID, typename T>
-    KUMI_TRIVIAL constexpr T       && get_field(field_capture<ID, T>       &&a) noexcept { return static_cast<T&&>(a.value); }
+    KUMI_ABI constexpr T       && get_field(field_capture<ID, T>       &&a) noexcept { return static_cast<T&&>(a.value); }
     template<kumi::str ID, typename T>
-    KUMI_TRIVIAL constexpr T const && get_field(field_capture<ID, T> const &&a) noexcept { return static_cast<T const &&>(a.value); }
+    KUMI_ABI constexpr T const && get_field(field_capture<ID, T> const &&a) noexcept { return static_cast<T const &&>(a.value); }
     template<kumi::str ID, typename T>
-    KUMI_TRIVIAL constexpr T const &  get_field(field_capture<ID, T> const & a) noexcept { return a.value; }
+    KUMI_ABI constexpr T const &  get_field(field_capture<ID, T> const & a) noexcept { return a.value; }
   }
 
   //================================================================================================
@@ -71,7 +71,7 @@ namespace kumi
   //! @related kumi::field_capture
   //================================================================================================
   template<typename U>
-  KUMI_TRIVIAL constexpr decltype(auto) unwrap_field_value(U&& u) noexcept
+  KUMI_ABI constexpr decltype(auto) unwrap_field_value(U&& u) noexcept
   {
     using T = std::remove_cvref_t<U>;
     if constexpr ( is_field_capture_v<T> )
