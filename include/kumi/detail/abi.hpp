@@ -7,9 +7,7 @@
 //==================================================================================================
 #pragma once
 
-#if defined(KUMI_DOXYGEN_INVOKED)
-#   define KUMI_ABI inline
-#elif defined(KUMI_DEBUG)
+#if defined(KUMI_DEBUG)
 #   define KUMI_ABI
 #elif defined(__GNUC__)
 #   define KUMI_ABI [[gnu::always_inline, gnu::flatten, gnu::artificial]] inline

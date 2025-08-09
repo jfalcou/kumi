@@ -56,7 +56,7 @@ namespace kumi
   //================================================================================================
   template<typename Type, typename... Ts>
   requires(!product_type<Type> && _::implicit_constructible<Type, Ts...>)
-  [[nodiscard]] constexpr auto from_tuple(tuple<Ts...> const &t)
+  [[nodiscard]] KUMI_ABI constexpr auto from_tuple(tuple<Ts...> const &t)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) { return Type {get<I>(t)...}; }
     (std::make_index_sequence<sizeof...(Ts)>());
@@ -75,7 +75,7 @@ namespace kumi
   //! @include doc/to_tuple.cpp
   //================================================================================================
   template<product_type Type>
-  [[nodiscard]] inline constexpr auto to_tuple(Type&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto to_tuple(Type&& t)
   {
     return apply([](auto &&...elems) { return tuple{elems...}; }, KUMI_FWD(t));
   }

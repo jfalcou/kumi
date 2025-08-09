@@ -262,17 +262,25 @@ namespace kumi
   };
 
   //================================================================================================
-  //! @name record construction
+  //! @name Record Deduction Guides
   //! @{
   //================================================================================================
-
+  
   //================================================================================================
   //! @ingroup record
-  //! @related kumi::record
   //! @brief kumi::record deduction guide
   //! @tparam Ts  Type lists to build the record with.
   //================================================================================================
   template<typename... Ts> record(Ts &&...) -> record<std::unwrap_ref_decay_t<Ts>...>;
+
+  //================================================================================================
+  //! @}
+  //================================================================================================
+
+  //================================================================================================
+  //! @name Record construction
+  //! @{
+  //================================================================================================
 
   //================================================================================================
   //! @ingroup record
@@ -293,9 +301,8 @@ namespace kumi
   //================================================================================================
   template<typename... Ts> 
   requires ( entirely_uniquely_named<std::remove_cvref_t<Ts>...> )
-  [[nodiscard]] KUMI_ABI constexpr record<field_capture<unwrap_name_v<std::remove_cvref_t<Ts>>
-                                        , result::unwrap_field_value_t<Ts>>...>
-  forward_as_record(Ts &&... ts)
+  [[nodiscard]] KUMI_ABI constexpr auto forward_as_record(Ts &&... ts) -> 
+  record<field_capture<unwrap_name_v<std::remove_cvref_t<Ts>>, result::unwrap_field_value_t<Ts>>...>
   {
     return { (field_capture<unwrap_name_v<std::remove_cvref_t<Ts>>, result::unwrap_field_value_t<Ts>>
              { unwrap_field_value(KUMI_FWD(ts))}
@@ -315,7 +322,8 @@ namespace kumi
   //================================================================================================
   template<typename... Ts>
   requires ( entirely_uniquely_named<Ts...> ) 
-  [[nodiscard]] KUMI_ABI constexpr record<std::unwrap_ref_decay_t<Ts>...> make_record(Ts &&...ts)
+  [[nodiscard]] KUMI_ABI constexpr auto make_record(Ts &&...ts) -> 
+  record<std::unwrap_ref_decay_t<Ts>...> 
   {
     return {KUMI_FWD(ts)...};
   }

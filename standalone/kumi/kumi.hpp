@@ -32,9 +32,7 @@ namespace kumi::_
   template<typename T> struct box { using type = T; };
 }
 #include <ostream>
-#if defined(KUMI_DOXYGEN_INVOKED)
-#   define KUMI_ABI inline
-#elif defined(KUMI_DEBUG)
+#if defined(KUMI_DEBUG)
 #   define KUMI_ABI
 #elif defined(__GNUC__)
 #   define KUMI_ABI [[gnu::always_inline, gnu::flatten, gnu::artificial]] inline
@@ -1519,9 +1517,8 @@ namespace kumi
   template<typename... Ts> record(Ts &&...) -> record<std::unwrap_ref_decay_t<Ts>...>;
   template<typename... Ts> 
   requires ( entirely_uniquely_named<std::remove_cvref_t<Ts>...> )
-  [[nodiscard]] KUMI_ABI constexpr record<field_capture<unwrap_name_v<std::remove_cvref_t<Ts>>
-                                        , result::unwrap_field_value_t<Ts>>...>
-  forward_as_record(Ts &&... ts)
+  [[nodiscard]] KUMI_ABI constexpr auto forward_as_record(Ts &&... ts) -> 
+  record<field_capture<unwrap_name_v<std::remove_cvref_t<Ts>>, result::unwrap_field_value_t<Ts>>...>
   {
     return { (field_capture<unwrap_name_v<std::remove_cvref_t<Ts>>, result::unwrap_field_value_t<Ts>>
              { unwrap_field_value(KUMI_FWD(ts))}
@@ -1529,7 +1526,8 @@ namespace kumi
   }
   template<typename... Ts>
   requires ( entirely_uniquely_named<Ts...> ) 
-  [[nodiscard]] KUMI_ABI constexpr record<std::unwrap_ref_decay_t<Ts>...> make_record(Ts &&...ts)
+  [[nodiscard]] KUMI_ABI constexpr auto make_record(Ts &&...ts) -> 
+  record<std::unwrap_ref_decay_t<Ts>...> 
   {
     return {KUMI_FWD(ts)...};
   }
@@ -1750,13 +1748,13 @@ namespace kumi
   {};
   template<typename Type, typename... Ts>
   requires(!product_type<Type> && _::implicit_constructible<Type, Ts...>)
-  [[nodiscard]] constexpr auto from_tuple(tuple<Ts...> const &t)
+  [[nodiscard]] KUMI_ABI constexpr auto from_tuple(tuple<Ts...> const &t)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) { return Type {get<I>(t)...}; }
     (std::make_index_sequence<sizeof...(Ts)>());
   }
   template<product_type Type>
-  [[nodiscard]] inline constexpr auto to_tuple(Type&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto to_tuple(Type&& t)
   {
     return apply([](auto &&...elems) { return tuple{elems...}; }, KUMI_FWD(t));
   }
