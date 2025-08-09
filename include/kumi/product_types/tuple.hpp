@@ -190,8 +190,8 @@ namespace kumi
     //! @return `*this`
     //==============================================================================================
     template<typename... Us>
-    requires(_::piecewise_convertible<tuple, tuple<Us...>>) constexpr tuple &
-    KUMI_ABI operator=(tuple<Us...> const &other)
+    requires(_::piecewise_convertible<tuple, tuple<Us...>>) KUMI_ABI constexpr tuple &
+    operator=(tuple<Us...> const &other)
     {
       [&]<std::size_t... I>(std::index_sequence<I...>) { ((get<I>(*this) = get<I>(other)), ...); }
       (std::make_index_sequence<sizeof...(Ts)>());
@@ -201,8 +201,8 @@ namespace kumi
 
     /// @overload
     template<typename... Us>
-    requires(_::piecewise_convertible<tuple, tuple<Us...>>) constexpr tuple &
-    KUMI_ABI operator=(tuple<Us...> &&other)
+    requires(_::piecewise_convertible<tuple, tuple<Us...>>) KUMI_ABI constexpr tuple &
+    operator=(tuple<Us...> &&other)
     {
       [&]<std::size_t... I>(std::index_sequence<I...>)
       {
