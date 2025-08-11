@@ -32,12 +32,17 @@ namespace kumi::_
   template<typename T> struct box { using type = T; };
 }
 #include <ostream>
+#if defined(__CUDACC__)
+#define KUMI_CUDA __host__ __device__
+#else
+#define KUMI_CUDA
+#endif
 #if defined(KUMI_DEBUG)
 #   define KUMI_ABI
 #elif defined(__GNUC__)
-#   define KUMI_ABI [[gnu::always_inline, gnu::flatten, gnu::artificial]] inline
+#   define KUMI_ABI [[gnu::always_inline, gnu::flatten, gnu::artificial]] KUMI_CUDA inline
 #elif defined(_MSC_VER)
-#   define KUMI_ABI __forceinline
+#   define KUMI_ABI KUMI_CUDA __forceinline
 #endif
 namespace kumi
 {
@@ -550,7 +555,7 @@ namespace kumi
     using apply_object_unwrap_t = typename apply_object_unwrap<T>::type;
   }
   template<typename Function, product_type Tuple>
-  KUMI_ABI constexpr decltype(auto) apply(Function &&f, Tuple &&t) 
+  KUMI_ABI constexpr decltype(auto) apply(Function &&f, Tuple &&t)
   noexcept(_::supports_nothrow_apply<Function &&, Tuple &&>)
   requires _::supports_apply<Function, Tuple>
   {
@@ -1135,8 +1140,8 @@ namespace kumi
     }
     [[nodiscard]] KUMI_ABI static constexpr  auto size() noexcept { return sizeof...(Ts); }
     [[nodiscard]] KUMI_ABI static constexpr  bool empty() noexcept { return sizeof...(Ts) == 0; }
-    [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept 
-    {   
+    [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept
+    {
         using tuple_type = tuple<unwrap_name_t<Ts>...>;
         return tuple_type{ unwrap_name_v<Ts>... };
     };
@@ -1221,7 +1226,7 @@ namespace kumi
     }
     template<typename Function>
     KUMI_ABI constexpr auto operator()(Function &&f) const&
-    noexcept(noexcept(kumi::apply(KUMI_FWD(f), *this))) 
+    noexcept(noexcept(kumi::apply(KUMI_FWD(f), *this)))
     -> decltype(kumi::apply(KUMI_FWD(f), *this))
     { return kumi::apply(KUMI_FWD(f), *this); }
 #if !defined(KUMI_DOXYGEN_INVOKED)
@@ -1257,26 +1262,26 @@ namespace kumi
       return os;
     }
   };
-  template<typename... Ts> tuple(Ts &&...) -> tuple<std::unwrap_ref_decay_t<Ts>...>;
+  template<typename... Ts> KUMI_CUDA tuple(Ts &&...) -> tuple<std::unwrap_ref_decay_t<Ts>...>;
   template<typename... Ts>
-  [[nodiscard]] KUMI_ABI 
+  [[nodiscard]] KUMI_ABI
   constexpr auto tie(Ts &...ts) -> tuple<Ts &...>
   {
     return {ts...};
   }
   template<typename... Ts>
-  [[nodiscard]] KUMI_ABI 
+  [[nodiscard]] KUMI_ABI
   constexpr auto forward_as_tuple(Ts &&...ts) -> tuple<Ts &&...>
   {
     return {KUMI_FWD(ts)...};
   }
   template<typename... Ts>
-  [[nodiscard]] KUMI_ABI 
+  [[nodiscard]] KUMI_ABI
   constexpr auto make_tuple(Ts &&...ts) -> tuple<std::unwrap_ref_decay_t<Ts>...>
   {
     return {KUMI_FWD(ts)...};
   }
-  template<product_type Type> 
+  template<product_type Type>
   [[nodiscard]] KUMI_ABI constexpr auto to_ref(Type&& t)
   {
     return apply( [](auto&&... elems)
@@ -1373,7 +1378,7 @@ namespace kumi
 }
 namespace kumi
 {
-  template<typename... Ts> 
+  template<typename... Ts>
   requires (( entirely_uniquely_named<Ts...> ))
   struct record<Ts...>
   {
@@ -1436,10 +1441,10 @@ namespace kumi
     }
     [[nodiscard]] KUMI_ABI static constexpr  auto size() noexcept { return sizeof...(Ts); }
     [[nodiscard]] KUMI_ABI static constexpr  bool empty() noexcept { return sizeof...(Ts) == 0; }
-    [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept 
-    {   
+    [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept
+    {
         return tuple{ field_name<unwrap_name_v<Ts>>{}... };
-    }; 
+    };
     [[nodiscard]] KUMI_ABI constexpr auto values() noexcept
     {
         return [&]<std::size_t...I>(std::index_sequence<I...>)
@@ -1455,9 +1460,9 @@ namespace kumi
         }(std::make_index_sequence<sizeof...(Ts)>{});
     };
     template<typename... Us>
-    requires( equivalent<record, record<Us...>>  && _::fieldwise_convertible<record, record<Us...>> ) 
+    requires( equivalent<record, record<Us...>>  && _::fieldwise_convertible<record, record<Us...>> )
     KUMI_ABI constexpr record &operator=(record<Us...> const &other)
-    { 
+    {
       [&]<std::size_t...I>(std::index_sequence<I...>)
       {
         (([&]
@@ -1469,7 +1474,7 @@ namespace kumi
       return *this;
     }
     template<typename... Us>
-    requires( equivalent<record, record<Us...>> && _::fieldwise_convertible<record, record<Us...>> ) 
+    requires( equivalent<record, record<Us...>> && _::fieldwise_convertible<record, record<Us...>> )
     KUMI_ABI constexpr record &operator=(record<Us...> &&other)
     {
       [&]<std::size_t...I>(std::index_sequence<I...>)
@@ -1506,18 +1511,18 @@ namespace kumi
                                                          record const &t) noexcept
     {
       os << "( ";
-      kumi::for_each([&os](auto name, auto const &e) 
-      { 
-        os << name << " : " << e << " "; 
+      kumi::for_each([&os](auto name, auto const &e)
+      {
+        os << name << " : " << e << " ";
       }, t.names(), t.values());
       os << ")";
       return os;
     }
   };
-  template<typename... Ts> record(Ts &&...) -> record<std::unwrap_ref_decay_t<Ts>...>;
-  template<typename... Ts> 
+  template<typename... Ts> KUMI_CUDA record(Ts &&...) -> record<std::unwrap_ref_decay_t<Ts>...>;
+  template<typename... Ts>
   requires ( entirely_uniquely_named<std::remove_cvref_t<Ts>...> )
-  [[nodiscard]] KUMI_ABI constexpr auto forward_as_record(Ts &&... ts) -> 
+  [[nodiscard]] KUMI_ABI constexpr auto forward_as_record(Ts &&... ts) ->
   record<field_capture<unwrap_name_v<std::remove_cvref_t<Ts>>, result::unwrap_field_value_t<Ts>>...>
   {
     return { (field_capture<unwrap_name_v<std::remove_cvref_t<Ts>>, result::unwrap_field_value_t<Ts>>
@@ -1525,9 +1530,9 @@ namespace kumi
              )... };
   }
   template<typename... Ts>
-  requires ( entirely_uniquely_named<Ts...> ) 
-  [[nodiscard]] KUMI_ABI constexpr auto make_record(Ts &&...ts) -> 
-  record<std::unwrap_ref_decay_t<Ts>...> 
+  requires ( entirely_uniquely_named<Ts...> )
+  [[nodiscard]] KUMI_ABI constexpr auto make_record(Ts &&...ts) ->
+  record<std::unwrap_ref_decay_t<Ts>...>
   {
     return {KUMI_FWD(ts)...};
   }
@@ -1542,7 +1547,7 @@ namespace kumi
                 );
   }
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts)) [[nodiscard]] KUMI_ABI constexpr decltype(auto) 
+  requires(I < sizeof...(Ts)) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> &t) noexcept
   {
     return t[index<I>];
@@ -1567,28 +1572,28 @@ namespace kumi
   }
   template<field_name Name, typename... Ts>
   requires ( entirely_uniquely_named<Ts...> )
-  [[nodiscard]] KUMI_ABI constexpr decltype(auto) 
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> &t) noexcept
   {
     return t[Name];
   }
   template<field_name Name, typename... Ts>
   requires ( entirely_uniquely_named<Ts...> )
-  [[nodiscard]] KUMI_ABI constexpr decltype(auto) 
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> &&arg) noexcept
   {
     return static_cast<record<Ts...> &&>(arg)[Name];
   }
   template<field_name Name, typename... Ts>
   requires ( entirely_uniquely_named<Ts...> )
-  [[nodiscard]] KUMI_ABI constexpr decltype(auto) 
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> const &arg) noexcept
   {
     return arg[Name];
   }
   template<field_name Name, typename... Ts>
   requires ( entirely_uniquely_named<Ts...> )
-  [[nodiscard]] KUMI_ABI constexpr decltype(auto) 
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> const &&arg) noexcept
   {
     return static_cast<record<Ts...> const &&>(arg)[Name];
