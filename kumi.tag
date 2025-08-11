@@ -1122,10 +1122,10 @@
       <arglist>(T0 const &amp;t0, Ts const &amp;...ts)</arglist>
     </member>
     <member kind="function">
-      <type></type>
+      <type>KUMI_CUDA</type>
       <name>record</name>
-      <anchorfile>group__record_gade7b6bf785b31a80c343f9f4f7ca2f9c.html</anchorfile>
-      <anchor>gade7b6bf785b31a80c343f9f4f7ca2f9c</anchor>
+      <anchorfile>group__record_gaee922438c01912318246dcd9d6a1d158.html</anchorfile>
+      <anchor>gaee922438c01912318246dcd9d6a1d158</anchor>
       <arglist>(Ts &amp;&amp;...) -&gt; record&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
     </member>
     <member kind="function">
@@ -1234,10 +1234,10 @@
       <arglist>(tuple&lt; Ts... &gt; const &amp;&amp;arg) noexcept</arglist>
     </member>
     <member kind="function">
-      <type></type>
+      <type>KUMI_CUDA</type>
       <name>tuple</name>
-      <anchorfile>group__tuple_gae7e90e00614c6024a5c5648b037267e6.html</anchorfile>
-      <anchor>gae7e90e00614c6024a5c5648b037267e6</anchor>
+      <anchorfile>group__tuple_ga7e659d5e732a3a999c93d842903cb74e.html</anchorfile>
+      <anchor>ga7e659d5e732a3a999c93d842903cb74e</anchor>
       <arglist>(Ts &amp;&amp;...) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
     </member>
     <member kind="function">
@@ -1290,10 +1290,10 @@
       <arglist></arglist>
     </member>
     <member kind="function">
-      <type></type>
+      <type>KUMI_CUDA</type>
       <name>record</name>
-      <anchorfile>group__record_gade7b6bf785b31a80c343f9f4f7ca2f9c.html</anchorfile>
-      <anchor>gade7b6bf785b31a80c343f9f4f7ca2f9c</anchor>
+      <anchorfile>group__record_gaee922438c01912318246dcd9d6a1d158.html</anchorfile>
+      <anchor>gaee922438c01912318246dcd9d6a1d158</anchor>
       <arglist>(Ts &amp;&amp;...) -&gt; record&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
     </member>
     <member kind="function">
@@ -1402,10 +1402,10 @@
       <arglist>(tuple&lt; Ts... &gt; const &amp;&amp;arg) noexcept</arglist>
     </member>
     <member kind="function">
-      <type></type>
+      <type>KUMI_CUDA</type>
       <name>tuple</name>
-      <anchorfile>group__tuple_gae7e90e00614c6024a5c5648b037267e6.html</anchorfile>
-      <anchor>gae7e90e00614c6024a5c5648b037267e6</anchor>
+      <anchorfile>group__tuple_ga7e659d5e732a3a999c93d842903cb74e.html</anchorfile>
+      <anchor>ga7e659d5e732a3a999c93d842903cb74e</anchor>
       <arglist>(Ts &amp;&amp;...) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
     </member>
     <member kind="function">
@@ -1556,10 +1556,10 @@
       <arglist>(record const &amp;self, record&lt; Us... &gt; const &amp;other) noexcept</arglist>
     </member>
     <member kind="function">
-      <type></type>
+      <type>KUMI_CUDA</type>
       <name>kumi::record</name>
-      <anchorfile>group__record_gade7b6bf785b31a80c343f9f4f7ca2f9c.html</anchorfile>
-      <anchor>gade7b6bf785b31a80c343f9f4f7ca2f9c</anchor>
+      <anchorfile>group__record_gaee922438c01912318246dcd9d6a1d158.html</anchorfile>
+      <anchor>gaee922438c01912318246dcd9d6a1d158</anchor>
       <arglist>(Ts &amp;&amp;...) -&gt; record&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
     </member>
     <member kind="function">
@@ -2098,10 +2098,10 @@
       <arglist>(tuple const &amp;lhs, tuple&lt; Us... &gt; const &amp;rhs) noexcept</arglist>
     </member>
     <member kind="function">
-      <type></type>
+      <type>KUMI_CUDA</type>
       <name>kumi::tuple</name>
-      <anchorfile>group__tuple_gae7e90e00614c6024a5c5648b037267e6.html</anchorfile>
-      <anchor>gae7e90e00614c6024a5c5648b037267e6</anchor>
+      <anchorfile>group__tuple_ga7e659d5e732a3a999c93d842903cb74e.html</anchorfile>
+      <anchor>ga7e659d5e732a3a999c93d842903cb74e</anchor>
       <arglist>(Ts &amp;&amp;...) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
     </member>
     <member kind="function">

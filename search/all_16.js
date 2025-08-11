@@ -10,7 +10,7 @@ var searchData=
   ['traits_7',['Tuple Related Traits',['../group__traits.html',1,'']]],
   ['transformations_8',['Tuple Transformations',['../group__transforms.html',1,'']]],
   ['transpose_9',['transpose',['../group__generators_ga1a15bc7904a51c4854d17c177b88027a.html#ga1a15bc7904a51c4854d17c177b88027a',1,'kumi']]],
-  ['tuple_10',['tuple',['../structkumi_1_1tuple.html',1,'kumi::tuple&lt; Ts &gt;'],['../group__tuple_gae7e90e00614c6024a5c5648b037267e6.html#gae7e90e00614c6024a5c5648b037267e6',1,'kumi::tuple(Ts &amp;&amp;...) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;']]],
+  ['tuple_10',['tuple',['../structkumi_1_1tuple.html',1,'kumi::tuple&lt; Ts &gt;'],['../group__tuple_ga7e659d5e732a3a999c93d842903cb74e.html#ga7e659d5e732a3a999c93d842903cb74e',1,'kumi::tuple(Ts &amp;&amp;...) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;']]],
   ['tuple_20algorithms_11',['Tuple Algorithms',['../group__algorithm.html',1,'']]],
   ['tuple_20generalized_20reductions_12',['Tuple Generalized Reductions',['../group__reductions.html',1,'']]],
   ['tuple_20generators_13',['Tuple Generators',['../group__generators.html',1,'']]],
