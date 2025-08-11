@@ -52,7 +52,7 @@
   Simply use `wget` to fetch the latest version and place it where you want:
 
   @code
-  wget https://raw.githubusercontent.com/jfalcou/kumi/main/standalone/kumi/kumi.hpp
+  wget https://raw.githubusercontent.com/jfalcou/kumi/refs/heads/standalone/kumi.hpp
   @endcode
 
   Use **KUMI** by just compiling your code with the include path pointing to the location of this single file.

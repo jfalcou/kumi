@@ -20,8 +20,6 @@ jobs:
         cfg:
         - { setup: "", opts: -O0                 }
         - { setup: "", opts: "-O3 -flto -DNDEBUG"}
-        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON", opts: -O0                 }
-        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON", opts: "-O3 -flto -DNDEBUG"}
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v4.1.1
@@ -51,10 +49,6 @@ jobs:
         - { setup: "",opts: "-O3 -flto -DNDEBUG"                , linker:                }
         - { setup: "",opts: "-O3 -flto -DNDEBUG -stdlib=libc++" , linker: -stdlib=libc++ }
         - { setup: "",opts: "-O0 -stdlib=libc++"                , linker: -stdlib=libc++ }
-        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: -O0                                 , linker:                }
-        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: "-O3 -flto -DNDEBUG"                , linker:                }
-        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: "-O3 -flto -DNDEBUG -stdlib=libc++" , linker: -stdlib=libc++ }
-        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: "-O0 -stdlib=libc++"                , linker: -stdlib=libc++ }
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v4.1.1
@@ -83,10 +77,6 @@ jobs:
         - { setup: "",opts: "-O0 -stdlib=libc++"                , linker: -stdlib=libc++  }
         - { setup: "",opts: "-O3 -flto -DNDEBUG"                , linker:                 }
         - { setup: "",opts: "-O3 -flto -DNDEBUG -stdlib=libc++" , linker: -stdlib=libc++  }
-        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: -O0                                 , linker:                 }
-        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: "-O0 -stdlib=libc++"                , linker: -stdlib=libc++  }
-        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: "-O3 -flto -DNDEBUG"                , linker:                 }
-        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: "-O3 -flto -DNDEBUG -stdlib=libc++" , linker: -stdlib=libc++  }
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v4.1.1
@@ -108,8 +98,6 @@ jobs:
         cfg:
         - { setup: "",opts: -O0                 }
         - { setup: "",opts: "-O3 -flto -DNDEBUG"}
-        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: -O0                 }
-        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: "-O3 -flto -DNDEBUG"}
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v4.1.1
@@ -128,8 +116,6 @@ jobs:
         cfg:
         - { setup: "",mode: Debug  , options: ""}
         - { setup: "",mode: Release, options: ""}
-        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",mode: Debug  , options: ""}
-        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",mode: Release, options: ""}
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v4.1.1
@@ -154,8 +140,6 @@ jobs:
         cfg:
         - { setup: "",mode: Debug  , options: ""}
         - { setup: "",mode: Release, options: ""}
-        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",mode: Debug  , options: ""}
-        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",mode: Release, options: ""}
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v4.1.1
@@ -182,8 +166,6 @@ jobs:
         cfg:
         - { setup: "",opts: -O0                 }
         - { setup: "",opts: "-O3 -flto -DNDEBUG"}
-        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: -O0                 }
-        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: "-O3 -flto -DNDEBUG"}
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v4.1.1
@@ -212,8 +194,6 @@ jobs:
         cfg:
         - { setup: "",opts: "-O0"                }
         - { setup: "",opts: "-O3 -flto -DNDEBUG" }
-        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: "-O0"                }
-        - { setup: "-DKUMI_BUILD_STANDALONE_TEST=ON",opts: "-O3 -flto -DNDEBUG" }
     steps:
       - name: Fetch current branch
         uses: actions/checkout@v4.1.1

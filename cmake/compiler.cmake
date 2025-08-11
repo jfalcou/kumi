@@ -31,7 +31,7 @@ add_library(kumi_docs INTERFACE)
 target_link_libraries(kumi_docs INTERFACE kumi_opts)
 target_include_directories( kumi_docs INTERFACE
                             ${PROJECT_SOURCE_DIR}/test
-                            ${PROJECT_SOURCE_DIR}/standalone
+                            ${PROJECT_SOURCE_DIR}/include
                           )
 
 ##======================================================================================================================
@@ -44,9 +44,3 @@ target_include_directories( kumi_test INTERFACE
                             ${PROJECT_SOURCE_DIR}/test
                             ${PROJECT_SOURCE_DIR}/include
                           )
-
-##======================================================================================================================
-## Compiler options for Unit Tests of standalone
-##======================================================================================================================
-add_library(kumi_test_standalone INTERFACE)
-target_link_libraries(kumi_test_standalone INTERFACE kumi_docs tts::tts)
