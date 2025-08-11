@@ -1,0 +1,50 @@
+##======================================================================================================================
+##  KUMI - C++ Informations Broker
+##  Copyright : KUMI Project Contributors
+##  SPDX-License-Identifier: BSL-1.0
+##======================================================================================================================
+name: KUMI Standalone Generation
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  package-standalone:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      pull-requests: write
+    container:
+      image: ghcr.io/jfalcou/compilers:v9
+    strategy:
+      fail-fast: false
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v4.1.1
+
+      - name: Configure KUMI
+        run: |
+          git config --global --add safe.directory /__w/kumi/kumi
+          mkdir build && cd build
+          cmake .. -G Ninja -DKUMI_BUILD_TEST=OFF -DKUMI_BUILD_DOCUMENTATION=OFF
+
+      - name: Generate standalone KUMI header
+        run: |
+          cd build && ninja kumi-standalone
+
+      - name: Update standalone branch
+        run: |
+          git fetch origin
+          git config --global user.email "kumi@nowhere.com"
+          git config --global user.name "KUMI Standalone Generator"
+          git checkout standalone
+          cp build/kumi.hpp kumi.hpp
+          git add kumi.hpp
+          git commit --allow-empty -m "Latest KUMI standalone"
+
+      - name: Push changes
+        uses: ad-m/github-push-action@master
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          branch: "standalone"
