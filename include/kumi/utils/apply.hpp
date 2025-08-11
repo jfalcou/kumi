@@ -38,7 +38,7 @@ namespace kumi
   //================================================================================================
   //! @ingroup transforms
   //! @brief Invoke the Callable object f with a product_type of arguments. f is applied on the
-  //!        values if the given product_type is a kumi::record 
+  //!        values if the given product_type is a kumi::record
   //!
   //! @param f	Callable object to be invoked
   //! @param t  kumi::product_type whose elements to be used as arguments to f
@@ -62,7 +62,7 @@ namespace kumi
   //! @include doc/record/apply.cpp
   //================================================================================================
   template<typename Function, product_type Tuple>
-  KUMI_ABI constexpr decltype(auto) apply(Function &&f, Tuple &&t) 
+  KUMI_ABI constexpr decltype(auto) apply(Function &&f, Tuple &&t)
   noexcept(_::supports_nothrow_apply<Function &&, Tuple &&>)
   requires _::supports_apply<Function, Tuple>
   {

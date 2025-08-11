@@ -148,9 +148,9 @@ namespace kumi
     /// Returns `true` if a kumi::tuple contains 0 elements
     [[nodiscard]] KUMI_ABI static constexpr  bool empty() noexcept { return sizeof...(Ts) == 0; }
 
-    /// Returns the names of the elements of a kumi::tuple 
-    [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept 
-    {   
+    /// Returns the names of the elements of a kumi::tuple
+    [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept
+    {
         using tuple_type = tuple<unwrap_name_t<Ts>...>;
         return tuple_type{ unwrap_name_v<Ts>... };
     };
@@ -307,7 +307,7 @@ namespace kumi
     //==============================================================================================
     template<typename Function>
     KUMI_ABI constexpr auto operator()(Function &&f) const&
-    noexcept(noexcept(kumi::apply(KUMI_FWD(f), *this))) 
+    noexcept(noexcept(kumi::apply(KUMI_FWD(f), *this)))
     -> decltype(kumi::apply(KUMI_FWD(f), *this))
     { return kumi::apply(KUMI_FWD(f), *this); }
 
@@ -364,7 +364,7 @@ namespace kumi
   //! @brief kumi::tuple deduction guide
   //! @tparam Ts  Type lists to build the tuple with.
   //================================================================================================
-  template<typename... Ts> tuple(Ts &&...) -> tuple<std::unwrap_ref_decay_t<Ts>...>;
+  template<typename... Ts> KUMI_CUDA tuple(Ts &&...) -> tuple<std::unwrap_ref_decay_t<Ts>...>;
 
   //================================================================================================
   //! @}
@@ -384,7 +384,7 @@ namespace kumi
   //! @include doc/tie.cpp
   //================================================================================================
   template<typename... Ts>
-  [[nodiscard]] KUMI_ABI 
+  [[nodiscard]] KUMI_ABI
   constexpr auto tie(Ts &...ts) -> tuple<Ts &...>
   {
     return {ts...};
@@ -408,7 +408,7 @@ namespace kumi
   //! @include doc/forward_as_tuple.cpp
   //================================================================================================
   template<typename... Ts>
-  [[nodiscard]] KUMI_ABI 
+  [[nodiscard]] KUMI_ABI
   constexpr auto forward_as_tuple(Ts &&...ts) -> tuple<Ts &&...>
   {
     return {KUMI_FWD(ts)...};
@@ -425,7 +425,7 @@ namespace kumi
   //! @include doc/make_tuple.cpp
   //================================================================================================
   template<typename... Ts>
-  [[nodiscard]] KUMI_ABI 
+  [[nodiscard]] KUMI_ABI
   constexpr auto make_tuple(Ts &&...ts) -> tuple<std::unwrap_ref_decay_t<Ts>...>
   {
     return {KUMI_FWD(ts)...};
@@ -443,7 +443,7 @@ namespace kumi
   //! ## Example:
   //! @include doc/to_ref.cpp
   //================================================================================================
-  template<product_type Type> 
+  template<product_type Type>
   [[nodiscard]] KUMI_ABI constexpr auto to_ref(Type&& t)
   {
     return apply( [](auto&&... elems)
