@@ -7,8 +7,6 @@
 //==================================================================================================
 #pragma once
 
-#include <kumi/detail/builder.hpp>
-
 namespace kumi
 {
   //================================================================================================
@@ -39,12 +37,9 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto zip(T0 const &t0, Ts const &...ts)
   requires ( compatible_product_types<T0, Ts...> )
   {
-    using res_type = kumi::common_product_type_or_t<kumi::tuple, 
-                     std::remove_cvref_t<T0>, std::remove_cvref_t<Ts>...>;
-
     return kumi::map( [](auto const &m0, auto const &...ms) 
                     { 
-                        return builder<res_type>::make(m0, ms...);
+                        return kumi::make_tuple(m0, ms...);
                     }
                     , t0,ts...
                     );

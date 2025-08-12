@@ -47,12 +47,17 @@ namespace kumi
   //!   - specializing the `kumi::is_record_type` traits so it exposes a static constant member
   //!     `value` that evaluates to `true`
   //!
+  //! ## Helper value
+  //! @code
+  //!   template<typename T> inline constexpr auto is_record_type_v = is_record_type<T>::value;
+  //!
   //! ## Example:
   //! @include doc/adapt.cpp
   //==============================================================================================
   template<typename T, typename Enable = void> struct is_record_type : std::false_type {};
   template<typename T> struct is_record_type<T, typename T::is_record_type> : std::true_type {};
 
+  template<typename T> inline constexpr auto is_record_type_v = is_record_type<T>::value;
   //================================================================================================
   //! @ingroup traits
   //! @brief Computes the number of elements of a kumi::product_type
@@ -401,127 +406,6 @@ namespace kumi
 
   template<typename... Ts>
   inline constexpr auto all_unique_names_v = all_unique_names_t<Ts...>::value;
-
-  //================================================================================================
-  //! @ingroup traits
-  //! @brief   Returns the raw template type that wraps the type passed as a parameter 
-  //!
-  //! @tparam T the type from which to extract the template
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<typename T> using template_of_t = typename template_of<T>::type;
-  //! }
-  //! @endcode
-  //================================================================================================
-  template<typename T> 
-  struct template_of
-  {
-    using type = kumi::unit;
-  };
-
-  template<template<class ...> class Box, typename... Ts>
-  struct template_of<Box<Ts...>>
-  {
-    using type = Box<>;
-  };
-
-  template<typename T>
-  using template_of_t = typename template_of<T>::type;
-
-  //================================================================================================
-  //! @ingroup traits
-  //! @brief   Extracts the common product_type of a parameter pack, returns kumi::unit if there are
-  //!          none
-  //!
-  //! @tparam T  The first type of the pack from which to compare  
-  //! @tparam Ts The types to access
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<typename... Ts> using common_product_type_t 
-  //!       = typename common_product_type<Ts...>::type;
-  //! }
-  //! @endcode
-  //!
-  //! ## Helper value 
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<typename... Ts> inline constexpr auto common_product_type_v
-  //!       = common_product_type<Ts...>::value;
-  //! }
-  //! @endcode
-  //================================================================================================
-  template<typename T, typename... Ts>
-  struct common_product_type
-  {
-    static constexpr auto value = ( []()
-    {
-      if constexpr((std::is_same_v<template_of_t<T>, template_of_t<Ts>> && ...))
-        return template_of_t<T>{};
-      else
-        return kumi::none;
-    }() );
-
-    using type = decltype(value);
-  };
-
-  template<typename... Ts>
-  using common_product_type_t = typename common_product_type<Ts...>::type;
-
-  template<typename... Ts>
-  inline constexpr auto common_product_type_v = common_product_type<Ts...>::value;
-
-  //================================================================================================
-  //! @ingroup traits
-  //! @brief   Extracts the common product_type of a parameter pack or returns an instance 
-  //!          of the given fallback type
-  //!
-  //! @tparam Base The fallback product_type in case there is no common product_type available
-  //! @tparam Ts The types to access
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<template<class...> class Base, typename... Ts> 
-  //!   using common_product_type_or_t = typename common_product_type_or<Base, Ts...>::type;
-  //! }
-  //! @endcode
-  //!
-  //! ## Helper value 
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<template<class...> class Base, typename... Ts> 
-  //!   inline constexpr auto common_product_type_or_v = common_product_type_or<Base, Ts...>::value;
-  //! }
-  //! @endcode
-  //================================================================================================
-  template<template<class...> class Base, typename... Ts>
-  struct common_product_type_or
-  {
-    static constexpr auto value = ( []()
-    {
-      if constexpr(std::is_same_v<common_product_type_t<Ts...>, kumi::unit>)
-        return Base<>{};
-      else
-        return common_product_type_v<Ts...>;
-    }() );
-
-    using type = decltype(value);
-  };
-
-  template<template<class...> class Base, typename... Ts>
-  using common_product_type_or_t = typename common_product_type_or<Base, Ts...>::type;
-
-  template<template<class...> class Base, typename... Ts>
-  inline constexpr auto common_product_type_or_v = common_product_type_or<Base, Ts...>::value;
 
   // Forward declaration
   template<typename... Ts> struct tuple;

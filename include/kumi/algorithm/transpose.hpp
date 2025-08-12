@@ -36,17 +36,16 @@ namespace kumi
   //================================================================================================
   template<product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto transpose(Tuple const &t)
   {
-    using base_t = std::remove_cvref_t<Tuple>;
     if constexpr(sized_product_type<Tuple,0>) return t;
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
         constexpr auto uz = []<typename N>(N const &, auto const &u) {
-          return apply([](auto const &...m){return builder<base_t>::make(get<N::value>(m)...);}, u);
+          return apply([](auto const &...m){return _::builder<Tuple>::make(get<N::value>(m)...);}, u);
         };
 
-        return builder<base_t>::make(uz(index_t<I> {}, t)...);
+        return _::builder<Tuple>::make(uz(index_t<I> {}, t)...);
       }
       (std::make_index_sequence<size<element_t<0,Tuple>>::value>());
     }

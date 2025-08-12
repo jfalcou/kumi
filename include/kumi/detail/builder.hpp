@@ -10,67 +10,94 @@
 #include <kumi/utils/concepts.hpp>
 
 namespace kumi
-{  
+{ 
   //================================================================================================
-  //! @ingroup tuple
-  //! @class builder 
-  //! @brief Helper structure to build the correct output `product_type`. Defaults to kumi::tuple if 
-  //!        the given type is not a kumi::product_type
+  //! @ingroup traits 
+  //! @brief   Extracts the common product_type of a parameter pack, if all the types are `record`
+  //!          then it returns an empty record, otherwise returns an empty `kumi::tuple`
   //!
-  //! builder provides a way to instantiate a kumi::product_type depending on the template type 
-  //! given, if the type is not a template template parameter, the output type will be a instance
-  //! of kumi::tuple
+  //! @tparam Ts The `product_types` to access
   //!
-  //! @tparam T the template template type to be built. 
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<typename... Ts> using common_product_type_t 
+  //!       = typename common_product_type<Ts...>::type;
+  //! }
+  //! @endcode
   //================================================================================================
-  template<typename T> 
-  struct builder
+  template<product_type... Ts>
+  constexpr auto common_product_type(Ts...)
   {
-    //==============================================================================================
-    //! @brief Rebinds the current product_type type to wrap the new elements type.
-    //! @tparam Ts The types to wrap.
+      if constexpr (( record_type<Ts> && ... )) return kumi::record{};
+      else                                      return kumi::tuple{};   
+  }
+
+  namespace result 
+  {
+      template<product_type... Ts>
+      struct common_product_type 
+      {
+          using type = decltype(kumi::common_product_type(std::declval<Ts>()...));
+      };
+
+      template<typename... Ts>
+      using common_product_type_t = typename common_product_type<Ts...>::type;
+  }
+
+  namespace _
+  {
+    template<typename T> struct builder_impl {};
+
+    template<product_type Tuple>
+    requires ( !record_type<Tuple> )
+    struct builder_impl<Tuple>
+    {
+      using type = Tuple;
+
+      template<typename... Us>
+      using to = kumi::tuple<Us...>;
+    };
+    
+    template<record_type Record>
+    struct builder_impl<Record>
+    {
+      using type = Record;
+
+      template<typename... Us>
+      using to = kumi::record<Us...>;
+    };
+
+    //================================================================================================
+    //! @ingroup tuple
+    //! @class builder 
+    //! @brief Helper structure to build the correct output `product_type`. If the provided Typle
+    //!        is a not a record_type the builder will output a tuple otherwise a record. 
     //!
-    //!## Helper type
-    //! @code
-    //! namespace kumi
-    //! {
-    //!   template<typename T, typename... Args> builder_t 
-    //!       = typename builder<T>::template to<Args...>;
-    //! }
-    //! @endcode
-    //==============================================================================================
+    //! builder provides a generic way of defining a kumi::product_type which depending on the 
+    //! given semantic (product_type or record_type) will output respectively a kumi::tuple or a 
+    //! kumi::record
+    //!
+    //! @tparam T the template template type to be built. 
+    //================================================================================================
 
-    //==============================================================================================
-    template<typename... Ts>
-    using to = kumi::tuple<Ts...>;
-
-    //==============================================================================================
-    //! @brief Builds a instance of the current product_type from the given arguments. 
-    //! @tparam Args The type to wrap in the product_type.
-    //! @param  args The values to wrap. 
-    //! @return The current product_type containing the value.
-    //==============================================================================================
-    template<typename...Args>
-    static constexpr auto make(Args&&... args)
+    template<kumi::product_type T>
+    struct builder : builder_impl<std::remove_cvref_t<T>> 
     {
-      return kumi::tuple{ KUMI_FWD(args)... };
-    }
-  };
+      template<typename... Args>
+      static constexpr auto make(Args&&... args)
+      {
+        if constexpr ( record_type<T> ) return kumi::record{ KUMI_FWD(args)...};
+        else                            return kumi::tuple { KUMI_FWD(args)...};
+      } 
 
-  template<template<class...> class Box, typename... Ts>
-  requires( product_type<Box<Ts...>> )
-  struct builder<Box<Ts...>>
-  {
-    template<typename... Us>
-    using to = Box<Us...>;
+    };
 
-    template<typename... Args>
-    static constexpr auto make(Args&&... args)
-    {
-      return Box{ KUMI_FWD(args)... };
-    } 
-  };
+    template <kumi::product_type T>
+    using builder_t = typename builder<T>::type;
 
-  template <typename T, typename... Args>
-  using builder_t = typename builder<T>::template to<Args...>;
+    template<kumi::product_type T, typename... Args>
+    using builder_make_t = typename builder<T>::template to<Args...>;
+  }
 }

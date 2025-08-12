@@ -47,8 +47,7 @@ namespace kumi
   requires ( compatible_product_types<Tuple, Tuples...> && 
            _::supports_call<Function, Tuple&&, Tuples&&...> )
   {
-    using base_t = std::remove_cvref_t<Tuple>;
-    if constexpr(sized_product_type<Tuple,0>) return base_t{};
+    if constexpr(sized_product_type<Tuple,0>) return _::builder<Tuple>::make();
     else
     {
       auto const call = [&]<std::size_t N, typename... Ts>(index_t<N>, Ts &&... args)
@@ -58,7 +57,7 @@ namespace kumi
 
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return builder<base_t>::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
+        return _::builder<Tuple>::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
       }(std::make_index_sequence<size<Tuple>::value>());
     }
   }
@@ -114,8 +113,7 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto map_index(Function f, Tuple &&t0,Tuples &&...others)
   requires(!record_type<Tuple> && (!record_type<Tuples> && ...))
   {
-    using base_t = std::remove_cvref_t<Tuple>;
-    if constexpr(sized_product_type<Tuple,0>) return base_t{};
+    if constexpr(sized_product_type<Tuple,0>) return _::builder<Tuple>::make();
     else
     {
       auto const call = [&]<std::size_t N, typename... Ts>(index_t<N> idx, Ts &&... args)
@@ -125,7 +123,7 @@ namespace kumi
 
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return builder<base_t>::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
+        return _::builder<Tuple>::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
       }(std::make_index_sequence<size<Tuple>::value>());
     }
   }
@@ -136,9 +134,9 @@ namespace kumi
     struct map_index
     {
       using type = decltype ( kumi::map_index ( std::declval<Function>()
-                                                , std::declval<T>()
-                                                , std::declval<Ts>()...
-                                                )
+                                              , std::declval<T>()
+                                              , std::declval<Ts>()...
+                                              )
                             );
     };
 

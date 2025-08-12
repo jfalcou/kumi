@@ -41,7 +41,7 @@ namespace kumi
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>)
     {
-      return builder<std::remove_cvref_t<Tuple>>::make( KUMI_FWD(v), get<I>(KUMI_FWD(t))...);
+      return _::builder<std::remove_cvref_t<Tuple>>::make( KUMI_FWD(v), get<I>(KUMI_FWD(t))...);
     }
     (std::make_index_sequence<Tuple::size()>());
   }
@@ -73,7 +73,7 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto pop_front(Tuple const& t)
   {
     if constexpr(Tuple::size()>0) return extract(t, index<1>);
-    else                          return builder<std::remove_cvref_t<Tuple>>::make();
+    else                          return _::builder<std::remove_cvref_t<Tuple>>::make();
   }
 
   //================================================================================================
@@ -105,7 +105,7 @@ namespace kumi
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>)
     {
-      return builder<std::remove_cvref_t<Tuple>>::make(get<I>(KUMI_FWD(t))..., KUMI_FWD(v));
+      return _::builder<std::remove_cvref_t<Tuple>>::make(get<I>(KUMI_FWD(t))..., KUMI_FWD(v));
     }
     (std::make_index_sequence<Tuple::size()>());
   }
@@ -137,7 +137,7 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto pop_back(Tuple const& t)
   {
     if constexpr(Tuple::size()>1) return extract(t,index<0>, index<Tuple::size()-1>);
-    else                          return builder<std::remove_cvref_t<Tuple>>::make();
+    else                          return _::builder<std::remove_cvref_t<Tuple>>::make();
   }
 
   namespace result
