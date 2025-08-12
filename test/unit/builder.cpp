@@ -36,11 +36,6 @@ namespace udt
           if constexpr(I==3) return s.t;
         }
     };
-    struct disabled 
-    {
-        int data;
-        explicit disabled( int x ) noexcept : data(x) {}
-    };
 }
 
 template<> struct std::tuple_size<udt::point_2D> : std::integral_constant<std::size_t,4> {};
