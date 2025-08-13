@@ -23,6 +23,11 @@
     <filename>structkumi_1_1___1_1box.html</filename>
     <templarg>typename T</templarg>
   </compound>
+  <compound kind="class">
+    <name>kumi::_::builder</name>
+    <filename>structkumi_1_1___1_1builder.html</filename>
+    <templarg>kumi::product_type T</templarg>
+  </compound>
   <compound kind="struct">
     <name>kumi::element</name>
     <filename>structkumi_1_1element.html</filename>
@@ -129,12 +134,6 @@
   <compound kind="struct">
     <name>kumi::is_product_type</name>
     <filename>structkumi_1_1is__product__type.html</filename>
-    <templarg>typename T</templarg>
-    <templarg>typename Enable</templarg>
-  </compound>
-  <compound kind="struct">
-    <name>kumi::is_record_type</name>
-    <filename>structkumi_1_1is__record__type.html</filename>
     <templarg>typename T</templarg>
     <templarg>typename Enable</templarg>
   </compound>
@@ -646,7 +645,6 @@
     <class kind="struct">kumi::index_t</class>
     <class kind="struct">kumi::is_homogeneous</class>
     <class kind="struct">kumi::is_product_type</class>
-    <class kind="struct">kumi::is_record_type</class>
     <class kind="struct">kumi::member</class>
     <class kind="struct">kumi::raw_member</class>
     <class kind="class">kumi::record</class>
@@ -767,9 +765,16 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>cat</name>
-      <anchorfile>group__generators_ga20e70383bcf8f7b75f53e7a16594d43f.html</anchorfile>
-      <anchor>ga20e70383bcf8f7b75f53e7a16594d43f</anchor>
+      <anchorfile>group__generators_ga884527f38c96496070b3554a3e93edef.html</anchorfile>
+      <anchor>ga884527f38c96496070b3554a3e93edef</anchor>
       <arglist>(Tuples &amp;&amp;... ts)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>common_product_type</name>
+      <anchorfile>group__traits_ga3226fe6731192617509a4baae1f74655.html</anchorfile>
+      <anchor>ga3226fe6731192617509a4baae1f74655</anchor>
+      <arglist>(Ts...)</arglist>
     </member>
     <member kind="function">
       <type>constexpr std::size_t</type>
@@ -928,15 +933,15 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>map</name>
-      <anchorfile>group__transforms_ga8a4e424cfc506fb8fd2939ebe24382ce.html</anchorfile>
-      <anchor>ga8a4e424cfc506fb8fd2939ebe24382ce</anchor>
+      <anchorfile>group__transforms_ga18c38e2efc4f46e7a4758b0aff9a46ea.html</anchorfile>
+      <anchor>ga18c38e2efc4f46e7a4758b0aff9a46ea</anchor>
       <arglist>(Function f, Tuple &amp;&amp;t0, Tuples &amp;&amp;...others)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>map_index</name>
-      <anchorfile>group__transforms_ga24c0a7632bd20e448dd7ac2d18e1168c.html</anchorfile>
-      <anchor>ga24c0a7632bd20e448dd7ac2d18e1168c</anchor>
+      <anchorfile>group__transforms_ga62f3925c2071557401ba32bde816e49c.html</anchorfile>
+      <anchor>ga62f3925c2071557401ba32bde816e49c</anchor>
       <arglist>(Function f, Tuple &amp;&amp;t0, Tuples &amp;&amp;...others)</arglist>
     </member>
     <member kind="function">
@@ -1117,8 +1122,8 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>zip</name>
-      <anchorfile>group__generators_gae8df7fc3aefbc6551f09c4ce64f6f82b.html</anchorfile>
-      <anchor>gae8df7fc3aefbc6551f09c4ce64f6f82b</anchor>
+      <anchorfile>group__generators_gaa8f23ba342c2cd52adafdcf819c80401.html</anchorfile>
+      <anchor>gaa8f23ba342c2cd52adafdcf819c80401</anchor>
       <arglist>(T0 const &amp;t0, Ts const &amp;...ts)</arglist>
     </member>
     <member kind="function">
@@ -1759,8 +1764,8 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::cat</name>
-      <anchorfile>group__generators_ga20e70383bcf8f7b75f53e7a16594d43f.html</anchorfile>
-      <anchor>ga20e70383bcf8f7b75f53e7a16594d43f</anchor>
+      <anchorfile>group__generators_ga884527f38c96496070b3554a3e93edef.html</anchorfile>
+      <anchor>ga884527f38c96496070b3554a3e93edef</anchor>
       <arglist>(Tuples &amp;&amp;... ts)</arglist>
     </member>
     <member kind="function">
@@ -1871,8 +1876,8 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::zip</name>
-      <anchorfile>group__generators_gae8df7fc3aefbc6551f09c4ce64f6f82b.html</anchorfile>
-      <anchor>gae8df7fc3aefbc6551f09c4ce64f6f82b</anchor>
+      <anchorfile>group__generators_gaa8f23ba342c2cd52adafdcf819c80401.html</anchorfile>
+      <anchor>gaa8f23ba342c2cd52adafdcf819c80401</anchor>
       <arglist>(T0 const &amp;t0, Ts const &amp;...ts)</arglist>
     </member>
   </compound>
@@ -1975,7 +1980,6 @@
     <class kind="struct">kumi::element</class>
     <class kind="struct">kumi::is_homogeneous</class>
     <class kind="struct">kumi::is_product_type</class>
-    <class kind="struct">kumi::is_record_type</class>
     <class kind="struct">kumi::member</class>
     <class kind="struct">kumi::raw_member</class>
     <class kind="struct">kumi::size</class>
@@ -1987,6 +1991,13 @@
       <anchorfile>group__traits_ga2ba4cdaa39155b15879bd370629edf19.html</anchorfile>
       <anchor>ga2ba4cdaa39155b15879bd370629edf19</anchor>
       <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::common_product_type</name>
+      <anchorfile>group__traits_ga3226fe6731192617509a4baae1f74655.html</anchorfile>
+      <anchor>ga3226fe6731192617509a4baae1f74655</anchor>
+      <arglist>(Ts...)</arglist>
     </member>
     <member kind="variable">
       <type>constexpr bool</type>
@@ -2038,15 +2049,15 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::map</name>
-      <anchorfile>group__transforms_ga8a4e424cfc506fb8fd2939ebe24382ce.html</anchorfile>
-      <anchor>ga8a4e424cfc506fb8fd2939ebe24382ce</anchor>
+      <anchorfile>group__transforms_ga18c38e2efc4f46e7a4758b0aff9a46ea.html</anchorfile>
+      <anchor>ga18c38e2efc4f46e7a4758b0aff9a46ea</anchor>
       <arglist>(Function f, Tuple &amp;&amp;t0, Tuples &amp;&amp;...others)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::map_index</name>
-      <anchorfile>group__transforms_ga24c0a7632bd20e448dd7ac2d18e1168c.html</anchorfile>
-      <anchor>ga24c0a7632bd20e448dd7ac2d18e1168c</anchor>
+      <anchorfile>group__transforms_ga62f3925c2071557401ba32bde816e49c.html</anchorfile>
+      <anchor>ga62f3925c2071557401ba32bde816e49c</anchor>
       <arglist>(Function f, Tuple &amp;&amp;t0, Tuples &amp;&amp;...others)</arglist>
     </member>
   </compound>
@@ -2054,6 +2065,7 @@
     <name>tuple</name>
     <title>Tuple Types and Functions</title>
     <filename>group__tuple.html</filename>
+    <class kind="class">kumi::_::builder</class>
     <class kind="class">kumi::tuple</class>
     <member kind="friend">
       <type>friend std::basic_ostream&lt; CharT, Traits &gt; &amp;</type>
