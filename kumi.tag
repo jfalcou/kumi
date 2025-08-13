@@ -771,6 +771,13 @@
     </member>
     <member kind="function">
       <type>constexpr auto</type>
+      <name>chunks</name>
+      <anchorfile>group__generators_ga1467f482eb923d91aa325b84d4b7f283.html</anchorfile>
+      <anchor>ga1467f482eb923d91aa325b84d4b7f283</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
       <name>common_product_type</name>
       <anchorfile>group__traits_ga3226fe6731192617509a4baae1f74655.html</anchorfile>
       <anchor>ga3226fe6731192617509a4baae1f74655</anchor>
@@ -1118,6 +1125,13 @@
       <anchorfile>group__generators_ga1a15bc7904a51c4854d17c177b88027a.html</anchorfile>
       <anchor>ga1a15bc7904a51c4854d17c177b88027a</anchor>
       <arglist>(Tuple const &amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>windows</name>
+      <anchorfile>group__generators_gace8f662d84d957a314a0db8216b8a06c.html</anchorfile>
+      <anchor>gace8f662d84d957a314a0db8216b8a06c</anchor>
+      <arglist>(T const &amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1770,6 +1784,13 @@
     </member>
     <member kind="function">
       <type>constexpr auto</type>
+      <name>kumi::chunks</name>
+      <anchorfile>group__generators_ga1467f482eb923d91aa325b84d4b7f283.html</anchorfile>
+      <anchor>ga1467f482eb923d91aa325b84d4b7f283</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
       <name>kumi::extract</name>
       <anchorfile>group__generators_ga9d67ce72cbaa5c87a582cc6b913ee8e3.html</anchorfile>
       <anchor>ga9d67ce72cbaa5c87a582cc6b913ee8e3</anchor>
@@ -1872,6 +1893,13 @@
       <anchorfile>group__generators_ga1a15bc7904a51c4854d17c177b88027a.html</anchorfile>
       <anchor>ga1a15bc7904a51c4854d17c177b88027a</anchor>
       <arglist>(Tuple const &amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::windows</name>
+      <anchorfile>group__generators_gace8f662d84d957a314a0db8216b8a06c.html</anchorfile>
+      <anchor>gace8f662d84d957a314a0db8216b8a06c</anchor>
+      <arglist>(T const &amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>

@@ -1,13 +1,13 @@
 var searchData=
 [
-  ['features_0',['features',['../changelog.html#autotoc_md156',1,'New Features'],['../changelog.html#autotoc_md151',1,'New Features'],['../changelog.html#autotoc_md145',1,'New Features'],['../changelog.html#autotoc_md140',1,'New Features']]],
+  ['features_0',['features',['../changelog.html#autotoc_md160',1,'New Features'],['../changelog.html#autotoc_md155',1,'New Features'],['../changelog.html#autotoc_md149',1,'New Features'],['../changelog.html#autotoc_md144',1,'New Features']]],
   ['fetchcontent_1',['CMake FetchContent',['../setup.html#setup-fetchcontent',1,'']]],
   ['field_2',['field',['../group__utility_ga57aa18d14a453e4b8519feee16bc6285.html#ga57aa18d14a453e4b8519feee16bc6285',1,'kumi::literals']]],
   ['field_5fcapture_3',['field_capture',['../structkumi_1_1field__capture.html',1,'kumi']]],
   ['field_5fname_4',['field_name',['../structkumi_1_1field__name.html',1,'kumi']]],
   ['fill_5',['fill',['../group__generators_gac1f2b67c16429675ca7b9106793f9001.html#gac1f2b67c16429675ca7b9106793f9001',1,'kumi']]],
-  ['first_20autonomous_20public_20release_6',['First autonomous public release.',['../changelog.html#autotoc_md158',1,'']]],
-  ['fixes_7',['fixes',['../changelog.html#autotoc_md146',1,'Bug Fixes'],['../changelog.html#autotoc_md141',1,'Bug Fixes'],['../changelog.html#autotoc_md150',1,'Bug Fixes'],['../changelog.html#autotoc_md155',1,'Bug Fixes']]],
+  ['first_20autonomous_20public_20release_6',['First autonomous public release.',['../changelog.html#autotoc_md162',1,'']]],
+  ['fixes_7',['fixes',['../changelog.html#autotoc_md150',1,'Bug Fixes'],['../changelog.html#autotoc_md145',1,'Bug Fixes'],['../changelog.html#autotoc_md154',1,'Bug Fixes'],['../changelog.html#autotoc_md159',1,'Bug Fixes']]],
   ['flatten_8',['flatten',['../group__generators_gaeefb24a9d75d8753477bae03bc6e205c.html#gaeefb24a9d75d8753477bae03bc6e205c',1,'kumi']]],
   ['flatten_5fall_9',['flatten_all',['../namespacekumi.html#a16916472ef4928dc9ed24a99cc4da97f',1,'kumi::flatten_all(Tuple &amp;&amp;ts)'],['../group__generators_ga152d59e645273cd17b762b839db88dbb.html#ga152d59e645273cd17b762b839db88dbb',1,'kumi::flatten_all(Tuple &amp;&amp;ts, Func &amp;&amp;f)']]],
   ['fold_5fleft_10',['fold_left',['../group__reductions_gaed0714239b395a2ac14d3a6a3ec3f44c.html#gaed0714239b395a2ac14d3a6a3ec3f44c',1,'kumi::fold_left(Function f, Tuple &amp;&amp;t)'],['../group__reductions_gaf5c5a77520eb5db15716f55fdb413579.html#gaf5c5a77520eb5db15716f55fdb413579',1,'kumi::fold_left(Function f, Tuple &amp;&amp;t, Value init)']]],
