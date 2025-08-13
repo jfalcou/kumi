@@ -28,7 +28,7 @@ namespace kumi
   //! @endcode
   //================================================================================================
   template<product_type... Ts>
-  constexpr auto common_product_type(Ts...)
+  [[nodiscard]] KUMI_ABI constexpr auto common_product_type(Ts...)
   {
       if constexpr (( record_type<Ts> && ... )) return kumi::record{};
       else                                      return kumi::tuple{};   
