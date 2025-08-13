@@ -35,8 +35,12 @@ namespace kumi
   //================================================================================================
   template<product_type T0, sized_product_type<size_v<T0>>... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto zip(T0 const &t0, Ts const &...ts)
+  requires ( compatible_product_types<T0, Ts...> )
   {
-    return kumi::map( [](auto const &m0, auto const &...ms) { return kumi::make_tuple(m0, ms...); }
+    return kumi::map( [](auto const &m0, auto const &...ms) 
+                    { 
+                        return kumi::make_tuple(m0, ms...);
+                    }
                     , t0,ts...
                     );
   }

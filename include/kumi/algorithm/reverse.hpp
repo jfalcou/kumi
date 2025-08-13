@@ -7,6 +7,8 @@
 //==================================================================================================
 #pragma once
 
+#include <kumi/detail/builder.hpp>
+
 namespace kumi
 {
   //================================================================================================
@@ -35,12 +37,13 @@ namespace kumi
   template<product_type Tuple>
   [[nodiscard]] KUMI_ABI constexpr auto reverse(Tuple &&t)
   {
-    if constexpr(sized_product_type<Tuple,0>) return kumi::tuple<>{};
+    using base_t = std::remove_cvref_t<Tuple>;
+    if constexpr(sized_product_type<Tuple,0>) return base_t{}; 
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return kumi::make_tuple(get<(size_v<Tuple> - 1 - I)>(KUMI_FWD(t))...);
+        return _::builder<base_t>::make(get<(size_v<Tuple> - 1 - I)>(KUMI_FWD(t))...);
       }
       (std::make_index_sequence<size<Tuple>::value>());
     }

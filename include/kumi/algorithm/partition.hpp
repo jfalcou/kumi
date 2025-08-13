@@ -7,6 +7,8 @@
 //==================================================================================================
 #pragma once
 
+#include <kumi/detail/builder.hpp>
+
 namespace kumi
 {
   //================================================================================================
@@ -43,9 +45,9 @@ namespace kumi
 
       auto locate = [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        (( Pred<kumi::element_t<I,T>>::value ? (that.t[that.count++] = I) : I),...);
+        (( Pred<kumi::raw_element_t<I,T>>::value ? (that.t[that.count++] = I) : I),...);
         that.cut = that.count;
-        ((!Pred<kumi::element_t<I,T>>::value ? (that.t[that.count++] = I) : I),...);
+        ((!Pred<kumi::raw_element_t<I,T>>::value ? (that.t[that.count++] = I) : I),...);
       };
 
       locate(std::make_index_sequence<kumi::size<T>::value>{});
@@ -55,13 +57,14 @@ namespace kumi
 
     auto select = [&]<typename O, std::size_t... I>(O, std::index_sequence<I...>)
     {
-      using type = kumi::tuple<std::tuple_element_t< pos.t[O::value+I], std::remove_cvref_t<decltype(tup)>>...>;
+      using rts = std::remove_cvref_t<decltype(tup)>;
+      using type = _::builder_make_t<rts, std::tuple_element_t< pos.t[O::value+I], rts>...>;
       return type{get<pos.t[O::value+I]>(KUMI_FWD(tup))...};
     };
 
-    return kumi::tuple{ select(kumi::index<0>      , std::make_index_sequence<pos.cut>{})
-                      , select(kumi::index<pos.cut>, std::make_index_sequence<kumi::size<T>::value - pos.cut>{})
-                      };
+    return kumi::tuple{ 
+      select(kumi::index<0>      , std::make_index_sequence<pos.cut>{}),
+      select(kumi::index<pos.cut>, std::make_index_sequence<kumi::size<T>::value - pos.cut>{})};
   }
 
   namespace result

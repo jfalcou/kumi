@@ -7,6 +7,8 @@
 //==================================================================================================
 #pragma once
 
+#include <kumi/detail/builder.hpp>
+
 namespace kumi
 {
   //================================================================================================
@@ -34,6 +36,7 @@ namespace kumi
   //================================================================================================
   template<product_type... Tuples>
   [[nodiscard]] KUMI_ABI constexpr auto cat(Tuples&&... ts)
+  requires ( (!record_type<Tuples> && ... ) || (record_type<Tuples> && ...) )
   {
     if constexpr(sizeof...(Tuples) == 0) return tuple{};
     else
@@ -56,16 +59,20 @@ namespace kumi
 
         return that;
       }();
+    
+      using res_type = result::common_product_type_t<std::remove_cvref_t<Tuples>...>;
 
       return [&]<std::size_t... N>(auto&& tuples, std::index_sequence<N...>)
       {
         using rts  = std::remove_cvref_t<decltype(tuples)>;
-        using type =  kumi::tuple
-                      < std::tuple_element_t< pos.e[N]
-                                            , std::remove_cvref_t<std::tuple_element_t<pos.t[N],rts>>
-                                            >...
-                      >;
-        return type{get<pos.e[N]>(get<pos.t[N]>(KUMI_FWD(tuples)))...};
+        
+        using type = _::builder_make_t<res_type
+                        , std::tuple_element_t<pos.e[N]
+                            , std::remove_cvref_t<std::tuple_element_t<pos.t[N], rts>>
+                            >...
+                        >;
+
+        return type{ get<pos.e[N]>(get<pos.t[N]>(KUMI_FWD(tuples)))... };
       }(kumi::forward_as_tuple(KUMI_FWD(ts)...), std::make_index_sequence<count-1>{});
     }
   }

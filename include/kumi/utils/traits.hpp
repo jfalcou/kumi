@@ -47,12 +47,17 @@ namespace kumi
   //!   - specializing the `kumi::is_record_type` traits so it exposes a static constant member
   //!     `value` that evaluates to `true`
   //!
+  //! ## Helper value
+  //! @code
+  //!   template<typename T> inline constexpr auto is_record_type_v = is_record_type<T>::value;
+  //!
   //! ## Example:
   //! @include doc/adapt.cpp
   //==============================================================================================
   template<typename T, typename Enable = void> struct is_record_type : std::false_type {};
   template<typename T> struct is_record_type<T, typename T::is_record_type> : std::true_type {};
 
+  template<typename T> inline constexpr auto is_record_type_v = is_record_type<T>::value;
   //================================================================================================
   //! @ingroup traits
   //! @brief Computes the number of elements of a kumi::product_type
@@ -164,7 +169,7 @@ namespace kumi
   inline constexpr bool is_field_capture_v = requires { T::is_field_capture; };
 
   template<typename T>
-  struct is_field_capture : std::bool_constant<is_field_capture_v<T>>
+  struct is_field_capture : std::bool_constant<is_field_capture_v<T>> 
   {};
 
   //================================================================================================
@@ -401,7 +406,7 @@ namespace kumi
 
   template<typename... Ts>
   inline constexpr auto all_unique_names_v = all_unique_names_t<Ts...>::value;
-   
+
   // Forward declaration
   template<typename... Ts> struct tuple;
   template<typename... Ts> struct record;

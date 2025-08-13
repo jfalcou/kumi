@@ -261,7 +261,7 @@ namespace kumi
   //================================================================================================
   template<typename T, typename... Us>
   concept compatible_product_types = (product_type<T> && ( product_type<Us> && ...))  &&
-    ( (!record_type<T> && (!record_type<Us> && ...))
+    ((!record_type<T> && (!record_type<Us> && ...))
     || (record_type<T> && (record_type<Us> && ...) 
     && (equivalent<std::remove_cvref_t<T>, std::remove_cvref_t<Us>> && ...))
   );
