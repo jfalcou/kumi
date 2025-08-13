@@ -2718,6 +2718,50 @@ namespace kumi
 }
 namespace kumi
 {
+  template<std::size_t N, kumi::product_type T>
+  requires ( N > 0 && N <= kumi::size_v<T> )
+  [[nodiscard]] KUMI_ABI constexpr auto windows(T const& t)
+  {
+    if constexpr ( N == kumi::size_v<T> ) return kumi::make_tuple(t);
+    else return kumi::generate<kumi::size_v<T>-N+1>( [&](auto idx)
+    {
+      return kumi::extract(t, kumi::index<idx>, kumi::index<idx+N>);
+    });
+  }
+  template<int N, kumi::product_type T> 
+  requires ( N > 0 && N <= kumi::size_v<T> )
+  [[nodiscard]] KUMI_ABI constexpr auto chunks(T && t)
+  {
+    constexpr auto nb = (kumi::size_v<T>+N-1)/N;
+    constexpr auto sz = kumi::size_v<T>; 
+    if constexpr ( N == kumi::size_v<T> ) return kumi::make_tuple(t);
+    else return kumi::generate<nb>( [&](auto idx)
+    {        
+      constexpr auto chk_sz = (idx+1)*N > sz ? sz - idx*N : N;
+      constexpr auto chk_id = idx*N;
+      return kumi::extract(t, kumi::index<chk_id>, kumi::index<chk_id+chk_sz>);
+    });
+  }
+  namespace result
+  {
+    template<std::size_t N, kumi::product_type T>
+    struct windows 
+    {
+      using type = decltype(kumi::windows<N>(std::declval<T>()));
+    };
+    template<std::size_t N, kumi::product_type T>
+    struct chunks 
+    {
+      using type = decltype(kumi::chunks<N>(std::declval<T>())); 
+    };
+    template<std::size_t N, kumi::product_type T>
+    using windows_t = typename windows<N,T>::type;
+    template<std::size_t N, kumi::product_type T>
+    using chunks_t = typename chunks<N,T>::type;
+  }
+}
+namespace kumi
+{
   template<product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto transpose(Tuple const &t)
   {
     if constexpr(sized_product_type<Tuple,0>) return t;
