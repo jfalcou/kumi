@@ -27,6 +27,10 @@ TTS_CASE("Check result::map_index<F,Tuple...> behavior")
                 )
               , (kumi::tuple<double,double,double,double>)
               );
+
+  auto to_tuple = [](auto, auto){ return kumi::make_tuple(1); };
+  using to_t = decltype(to_tuple);
+  TTS_TYPE_IS((kumi::result::map_index_t<to_t, kumi::tuple<int>>), (kumi::tuple<kumi::tuple<int>>));
 };
 
 TTS_CASE("Check map_index(f, {}) behavior")
