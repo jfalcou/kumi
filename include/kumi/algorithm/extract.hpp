@@ -42,7 +42,7 @@ namespace kumi
   template<std::size_t I0, std::size_t I1, product_type Tuple>
   requires( (I0 <= size_v<Tuple>) && (I1 <= size_v<Tuple>) )
   [[nodiscard]] KUMI_ABI constexpr
-  auto extract( Tuple const& t
+  auto extract( Tuple && t
               , [[maybe_unused]] index_t<I0> i0
               , [[maybe_unused]] index_t<I1> i1
               ) noexcept
@@ -50,9 +50,9 @@ namespace kumi
     return [&]<std::size_t... N>(std::index_sequence<N...>)
     {
         using final_t = _::builder_make_t<std::remove_cvref_t<Tuple>
-                        , std::tuple_element_t<N + I0, Tuple>...>;
+                        , std::tuple_element_t<N + I0, std::remove_cvref_t<Tuple>>...>;
 
-        return final_t{ get<N + I0>(t)... };
+        return final_t{ get<N + I0>(KUMI_FWD(t))... };
     }
     (std::make_index_sequence<I1 - I0>());
   }
@@ -60,9 +60,9 @@ namespace kumi
   //! @overload
   template<std::size_t I0, product_type Tuple>
   requires(I0<= size_v<Tuple>)
-  [[nodiscard]] KUMI_ABI constexpr  auto extract(Tuple const& t, index_t<I0> i0) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto extract(Tuple && t, index_t<I0> i0) noexcept
   {
-    return extract(t,i0, index<size_v<Tuple>>);
+    return extract(KUMI_FWD(t), i0, index<size_v<Tuple>>);
   }
 
   //================================================================================================
@@ -96,12 +96,12 @@ namespace kumi
   //================================================================================================
   template<std::size_t I0, product_type Tuple>
   requires(I0 <= size_v<Tuple>)
-  [[nodiscard]] KUMI_ABI constexpr auto split( Tuple const& t
+  [[nodiscard]] KUMI_ABI constexpr auto split( Tuple && t
                                     , [[maybe_unused]] index_t<I0> i0
                                     ) noexcept
   {
     return _::builder<Tuple>
-            ::make(extract(t,index<0>, index<I0>), extract(t,index<I0>));
+            ::make(extract(KUMI_FWD(t), index<0>, index<I0>), extract(t,index<I0>));
   }
 
   namespace result

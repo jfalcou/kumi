@@ -79,10 +79,10 @@ namespace kumi
   //! ## Example
   //! @include doc/inner_product.cpp
   //================================================================================================
-  template< product_type S1, sized_product_type<S1::size()> S2, typename T
+  template< product_type S1, sized_product_type<size_v<S1>> S2, typename T
           , typename Sum, typename Prod
           >
-  [[nodiscard]] KUMI_ABI constexpr auto inner_product( S1 const& s1, S2 const& s2, T init
+  [[nodiscard]] KUMI_ABI constexpr auto inner_product( S1 && s1, S2 && s2, T init
                                             , Sum sum, Prod prod
                                             ) noexcept
   {
@@ -101,15 +101,15 @@ namespace kumi
   }
 
   //! @overload
-  template<product_type S1, sized_product_type<S1::size()> S2, typename T>
-  [[nodiscard]] KUMI_ABI constexpr auto inner_product(S1 const& s1, S2 const& s2, T init) noexcept
+  template<product_type S1, sized_product_type<size_v<S1>> S2, typename T>
+  [[nodiscard]] KUMI_ABI constexpr auto inner_product(S1 && s1, S2 && s2, T init) noexcept
   {
     if constexpr(sized_product_type<S1,0>) return init;
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return (init + ... + (get<I>(s1) * get<I>(s2)));
+        return (init + ... + (get<I>(KUMI_FWD(s1)) * get<I>(KUMI_FWD(s2))));
       }(std::make_index_sequence<size<S1>::value>());
     }
   }

@@ -42,7 +42,7 @@ namespace kumi
     else
     {
       // count is at least 1 so MSVC don't cry when we use a 0-sized array
-      constexpr auto count = (1ULL + ... + kumi::size<Tuples>::value);
+      constexpr auto count = (1ULL + ... + kumi::size_v<Tuples>);
       constexpr auto pos = [&]()
       {
         struct { std::size_t t[count],e[count]; } that{};
