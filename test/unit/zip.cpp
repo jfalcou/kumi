@@ -24,6 +24,9 @@ TTS_CASE("Check result::zip<Tuple...> behavior")
                               >
                 )
               );
+
+  using one_element_t = kumi::tuple<int>;
+  TTS_TYPE_IS((kumi::result::zip_t<one_element_t>), (kumi::tuple<kumi::tuple<int>>));
 };
 
 TTS_CASE("Check tuple::zip behavior")

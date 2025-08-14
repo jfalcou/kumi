@@ -17,6 +17,9 @@ TTS_CASE("Check result::reorder<Tuple,I...> behavior")
   TTS_TYPE_IS( (kumi::result::reorder_t<tuple_t,1,2,3,0>), (kumi::tuple<short,int,double,char>) );
   TTS_TYPE_IS( (kumi::result::reorder_t<tuple_t,3,3>    ), (kumi::tuple<double,double>)         );
   TTS_TYPE_IS( (kumi::result::reorder_t<tuple_t>        ), kumi::tuple<>                        );
+
+  using nested_t = kumi::tuple<kumi::tuple<int, float>, int>;
+  TTS_TYPE_IS( (kumi::result::reorder_t<nested_t, 0>), (kumi::tuple<kumi::tuple<int, float>>));
 };
 
 TTS_CASE("Check reorder<I...>(tuple) behavior")

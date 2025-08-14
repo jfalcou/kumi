@@ -23,6 +23,9 @@ TTS_CASE("Check result::transpose<Tuple> behavior")
                                                                     >
                                                       )
               );
+
+  using nested_t = kumi::tuple<kumi::tuple<int>>;
+  TTS_TYPE_IS((kumi::result::transpose_t<nested_t>), (kumi::tuple<kumi::tuple<int>>));
 };
 
 TTS_CASE("Check tuple::transpose behavior")
