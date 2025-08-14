@@ -88,10 +88,16 @@ namespace kumi
       template<typename... Args>
       static constexpr auto make(Args&&... args)
       {
+        if constexpr ( record_type<T> ) return kumi::make_record( KUMI_FWD(args)...);
+        else                            return kumi::make_tuple ( KUMI_FWD(args)...);
+      } 
+    
+      template<typename... Args>
+      static constexpr auto build(Args&&... args)
+      {
         if constexpr ( record_type<T> ) return kumi::record{ KUMI_FWD(args)...};
         else                            return kumi::tuple { KUMI_FWD(args)...};
       } 
-
     };
 
     template <kumi::product_type T>
