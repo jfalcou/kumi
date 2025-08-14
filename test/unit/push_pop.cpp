@@ -16,6 +16,7 @@ TTS_CASE("Check kumi::push_front/pop_front type computation")
   TTS_TYPE_IS((push_front_t<kumi::tuple<>,int>), kumi::tuple<int>);
   TTS_TYPE_IS((push_front_t<kumi::tuple<float>,int>),(kumi::tuple<int,float>));
   TTS_TYPE_IS((push_front_t<kumi::tuple<float,char>,int>),(kumi::tuple<int,float,char>));
+  TTS_TYPE_IS((push_front_t<kumi::tuple<>, kumi::tuple<int>>), (kumi::tuple<kumi::tuple<int>>));
 
   TTS_TYPE_IS((pop_front_t<kumi::tuple<>>), kumi::tuple<>);
   TTS_TYPE_IS((pop_front_t<kumi::tuple<float>>), kumi::tuple<>);
@@ -54,6 +55,7 @@ TTS_CASE("Check kumi::push_back/pop_back type computation")
   TTS_TYPE_IS((push_back_t<kumi::tuple<>,int>),kumi::tuple<int>);
   TTS_TYPE_IS((push_back_t<kumi::tuple<float>,int>),(kumi::tuple<float,int>));
   TTS_TYPE_IS((push_back_t<kumi::tuple<float,char>,int>),(kumi::tuple<float,char,int>));
+  TTS_TYPE_IS((push_back_t<kumi::tuple<>, kumi::tuple<int>>), (kumi::tuple<kumi::tuple<int>>));
 
   TTS_TYPE_IS((pop_back_t<kumi::tuple<>>),kumi::tuple<>);
   TTS_TYPE_IS((pop_back_t<kumi::tuple<float>>),kumi::tuple<>);
