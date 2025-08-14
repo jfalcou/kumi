@@ -34,7 +34,7 @@ namespace kumi
   //! ## Example
   //! @include doc/transpose.cpp
   //================================================================================================
-  template<product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto transpose(Tuple const &t)
+  template<product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto transpose(Tuple && t)
   {
     if constexpr(sized_product_type<Tuple,0>) return t;
     else
@@ -47,7 +47,7 @@ namespace kumi
 
         return _::builder<Tuple>::make(uz(index_t<I> {}, t)...);
       }
-      (std::make_index_sequence<size<element_t<0,Tuple>>::value>());
+      (std::make_index_sequence<size_v<std::element_t<0,Tuple>>>());
     }
   }
 

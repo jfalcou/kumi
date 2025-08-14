@@ -31,19 +31,18 @@ namespace kumi
   //! ## Example:
   //! @include doc/max.cpp
   //================================================================================================
-  template<typename T>
-  [[nodiscard]] KUMI_ABI constexpr auto max(T const& t) noexcept
+  template<product_type T>
+  [[nodiscard]] KUMI_ABI constexpr auto max(T && t) noexcept
   {
-    if constexpr ( !kumi::product_type<T> ) return t;
-    else if constexpr( T::size() == 1 )     return get<0>(t);
+    if constexpr( sized_product_type<T,1> ) return get<0>(KUMI_FWD(t));
     else
     {
-      auto base = get<0>(t);
+      auto base = get<0>(KUMI_FWD(t));
       return kumi::fold_left( []<typename U>(auto cur, U u)
                               {
                                 return cur > u ? cur : u;
                               }
-                            , t, base
+                            , KUMI_FWD(t), base
                             );
     }
   }
@@ -71,19 +70,18 @@ namespace kumi
   //! ## Example:
   //! @include doc/max.cpp
   //================================================================================================
-  template<typename T, typename F>
-  [[nodiscard]] KUMI_ABI constexpr auto max(T const& t, F f) noexcept
+  template<product_type T, typename F>
+  [[nodiscard]] KUMI_ABI constexpr auto max(T && t, F f) noexcept
   {
-    if constexpr ( !kumi::product_type<T> ) return f(t);
-    else if constexpr( T::size() == 1 )     return f( get<0>(t) );
+    if constexpr( sized_product_type<T,1> ) return f( get<0>(KUMI_FWD(t)) );
     else
     {
-      auto base = f( get<0>(t) );
+      auto base = f( get<0>(KUMI_FWD(t)) );
       return kumi::fold_left( [f]<typename U>(auto cur, U const& u)
                               {
                                 return cur > f(u) ? cur : f(u);
                               }
-                            , t, base
+                            , KUMI_FWD(t), base
                             );
     }
   }
@@ -111,15 +109,11 @@ namespace kumi
   //! ## Example:
   //! @include doc/max_flat.cpp
   //================================================================================================
-  template<typename T, typename F>
-  [[nodiscard]] KUMI_ABI constexpr auto max_flat(T const& t, F f) noexcept
+  template<product_type T, typename F>
+  [[nodiscard]] KUMI_ABI constexpr auto max_flat(T && t, F f) noexcept
   {
-    if constexpr ( !kumi::product_type<T> ) return f(t);
-    else
-    {
-      auto flat_t = kumi::flatten_all(t);
-      return max(flat_t, f);
-    }
+    auto flat_t = kumi::flatten_all(KUMI_FWD(t));
+    return max(flat_t, f);
   }
 
   namespace result
@@ -165,19 +159,18 @@ namespace kumi
   //! ## Example:
   //! @include doc/min.cpp
   //================================================================================================
-  template<typename T>
-  [[nodiscard]] KUMI_ABI constexpr auto min(T const& t) noexcept
+  template<product_type T>
+  [[nodiscard]] KUMI_ABI constexpr auto min(T && t) noexcept
   {
-    if constexpr ( !kumi::product_type<T> ) return t;
-    else if constexpr( T::size() == 1 )     return get<0>(t);
+    if constexpr( sized_product_type<T,1> ) return get<0>(KUMI_FWD(t));
     else
     {
-      auto base = get<0>(t);
+      auto base = get<0>(KUMI_FWD(t));
       return kumi::fold_left( []<typename U>(auto cur, U u)
                               {
                                 return cur < u ? cur : u;
                               }
-                            , t, base
+                            , KUMI_FWD(t), base
                             );
     }
   }
@@ -205,19 +198,18 @@ namespace kumi
   //! ## Example:
   //! @include doc/min.cpp
   //================================================================================================
-  template<typename T, typename F>
-  [[nodiscard]] KUMI_ABI constexpr auto min(T const& t, F f) noexcept
+  template<product_type T, typename F>
+  [[nodiscard]] KUMI_ABI constexpr auto min(T && t, F f) noexcept
   {
-    if constexpr ( !kumi::product_type<T> ) return f(t);
-    else if constexpr( T::size() == 1 )     return f( get<0>(t) );
+    if constexpr( sized_product_type<T,1> ) return f( get<0>(KUMI_FWD(t)) );
     else
     {
-      auto base = f( get<0>(t) );
+      auto base = f( get<0>(KUMI_FWD(t)) );
       return kumi::fold_left( [f]<typename U>(auto cur, U const& u)
                               {
                                 return cur < f(u) ? cur : f(u);
                               }
-                            , t, base
+                            , KUMI_FWD(t), base
                             );
     }
   }
@@ -245,15 +237,11 @@ namespace kumi
   //! ## Example:
   //! @include doc/min_flat.cpp
   //================================================================================================
-  template<typename T, typename F>
-  [[nodiscard]] KUMI_ABI constexpr auto min_flat(T const& t, F f) noexcept
+  template<product_type T, typename F>
+  [[nodiscard]] KUMI_ABI constexpr auto min_flat(T && t, F f) noexcept
   {
-    if constexpr ( !kumi::product_type<T> ) return f(t);
-    else
-    {
-      auto flat_t = kumi::flatten_all(t);
-      return min(flat_t, f);
-    }
+    auto flat_t = kumi::flatten_all(KUMI_FWD(t));
+    return min(flat_t, f);
   }
 
   namespace result
