@@ -47,7 +47,7 @@ namespace kumi
 
         return _::builder<Tuple>::make(uz(index_t<I> {}, t)...);
       }
-      (std::make_index_sequence<size_v<std::element_t<0,Tuple>>>());
+      (std::make_index_sequence<size_v<element_t<0,Tuple>>>());
     }
   }
 
