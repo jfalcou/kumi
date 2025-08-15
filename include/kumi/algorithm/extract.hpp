@@ -50,7 +50,6 @@ namespace kumi
     return [&]<std::size_t... N>(std::index_sequence<N...>)
     {
         using final_t = _::builder_make_t<Tuple, element_t<N + I0, Tuple>...>;
-
         return final_t{ get<N + I0>(KUMI_FWD(t))... };
     }
     (std::make_index_sequence<I1 - I0>());
@@ -101,8 +100,7 @@ namespace kumi
   {
     auto select = [&]<typename O, std::size_t...I>(O, std::index_sequence<I...>)
     {
-        using rts = std::remove_cvref_t<Tuple>;
-        using type = _::builder_make_t<rts, std::tuple_element_t<O::value+I, rts>...>;
+        using type = _::builder_make_t<Tuple, element_t<O::value+I, Tuple>...>;
         return type{get<O::value+I>(KUMI_FWD(t))...};
     };
 
