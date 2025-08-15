@@ -8,6 +8,7 @@
 #define TTS_MAIN
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
+#include "test.hpp"
 
 TTS_CASE("Check result::split<Tuple,I> behavior")
 {
@@ -77,6 +78,9 @@ TTS_CASE("Check tuple::split behavior")
   auto[s82,s83] = kumi::split(std::move(t),8_c);
   TTS_EQUAL(s82, (kumi::tuple {'1', 2., 3.f, 4, 5, 6.f, 7., '8'}));
   TTS_EQUAL(s83, (kumi::tuple {}));
+
+  auto t2 = kumi::tuple { 1., 'x', moveonly{}, short{22}};
+  TTS_EXPECT_COMPILES(t2, { kumi::split(std::move(t2), 2_c);});
 };
 
 TTS_CASE("Check tuple::split constexpr behavior")

@@ -8,6 +8,7 @@
 #define TTS_MAIN
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
+#include "test.hpp"
 
 TTS_CASE("Check result::map<F,Tuple...> behavior")
 {
@@ -75,18 +76,21 @@ TTS_CASE("Check map(f, tuple) behavior")
       TTS_EQUAL(m3, 5 * sizeof(char));
     }
     {
-      auto u = kumi::tuple {2, 3, 4, 5};
-      auto s = map([](auto m, auto n) { return n * sizeof(m); }, std::move(t), std::move(u));
+      auto t2 = kumi::tuple{1, 2., 3.4f, '5', moveonly{}};
+      auto u = kumi::tuple {2, 3, 4, 5, 6};
+      auto s = map([](auto m, auto n) { return n * sizeof(m); }, std::move(t2), std::move(u));
 
-      auto [s0, s1, s2, s3] = s;
+      auto [s0, s1, s2, s3, s4] = s;
       auto m0 = s0;
       auto m1 = s1;
       auto m2 = s2;
       auto m3 = s3;
+      auto m4 = s4;
       TTS_EQUAL(m0, 2 * sizeof(int));
       TTS_EQUAL(m1, 3 * sizeof(double));
       TTS_EQUAL(m2, 4 * sizeof(float));
       TTS_EQUAL(m3, 5 * sizeof(char));
+      TTS_EQUAL(m4, 6 * sizeof(moveonly));
     }
   }
 };

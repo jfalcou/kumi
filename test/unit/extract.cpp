@@ -8,6 +8,7 @@
 #define TTS_MAIN
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
+#include "test.hpp"
 
 TTS_CASE("Check tuple::extract behavior")
 {
@@ -37,6 +38,9 @@ TTS_CASE("Check tuple::extract behavior")
   TTS_EQUAL((kumi::extract(t,4_c, 4_c)) , kumi::tuple {}                  );
 
   TTS_EQUAL((kumi::extract(std::move(t), 0_c)), (kumi::tuple{'1', 2., 3.f, 4}));
+  
+  kumi::tuple t2 = {moveonly{}, 3., 'f'};
+  TTS_EXPECT_COMPILES(t2, { kumi::extract(std::move(t2),0_c); });
 };
 
 TTS_CASE("Check tuple::extract constexpr behavior")
@@ -65,20 +69,4 @@ TTS_CASE("Check tuple::extract constexpr behavior")
   TTS_CONSTEXPR_EQUAL((kumi::extract(t,3_c, 3_c)) , kumi::tuple {}                  );
   TTS_CONSTEXPR_EQUAL((kumi::extract(t,4_c))      , kumi::tuple {}                  );
   TTS_CONSTEXPR_EQUAL((kumi::extract(t,4_c, 4_c)) , kumi::tuple {}                  );
-};
-
-TTS_CASE("Check tuple::extract forwarding behavior")
-{
-  using namespace kumi::literals;
-
-  struct moveonly{
-    moveonly()                              = default;
-    moveonly(const moveonly &)              = delete;
-    moveonly(moveonly &&)                   = default;
-    moveonly &operator=(const moveonly &)   = delete;
-    moveonly &operator=(moveonly &&)        = default;
-  };
-
-  kumi::tuple t = {moveonly{}, 3., 'f'};
-  TTS_EXPECT_COMPILES(t, { kumi::extract(std::move(t),0_c); });
 };

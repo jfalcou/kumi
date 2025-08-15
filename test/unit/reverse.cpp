@@ -8,6 +8,7 @@
 #define TTS_MAIN
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
+#include "test.hpp"
 
 TTS_CASE("Check result::reverse<Tuple> behavior")
 {
@@ -19,9 +20,12 @@ TTS_CASE("Check result::reverse<Tuple> behavior")
 TTS_CASE("Check reverse(tuple) behavior")
 {
   auto t = kumi::tuple {1, 2., 3.4f, '5'};
+  auto t2 = kumi::tuple { 1, 'x', moveonly{}};
+
   TTS_EQUAL(kumi::reverse(t), (kumi::tuple {'5', 3.4f, 2., 1 }));
   TTS_EQUAL(kumi::reverse(kumi::tuple<>{}), (kumi::tuple{}));
   TTS_EQUAL(kumi::reverse(std::move(t)), (kumi::tuple{'5', 3.4f, 2., 1 }));
+  TTS_EXPECT_COMPILES(t2, {kumi::reverse(std::move(t2)); });
 };
 
 TTS_CASE("Check reverse(tuple) constexpr behavior")

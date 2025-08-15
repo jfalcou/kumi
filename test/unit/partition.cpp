@@ -9,6 +9,7 @@
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
 #include <type_traits>
+#include "test.hpp"
 
 TTS_CASE("Check result::partition<Func,Tuple> behavior")
 {
@@ -58,6 +59,9 @@ TTS_CASE("Check partition() behavior with values")
   TTS_EQUAL ( kumi::partition<std::is_null_pointer>(std::move(original))
             , (kumi::tuple{kumi::tuple{nullptr},kumi::tuple{a,&a,b,&b,c,&c,'z',}})
             );
+
+  auto t = kumi::tuple{1.f, 2, 'x', moveonly{}};
+  TTS_EXPECT_COMPILES(t, {kumi::partition<is_moveonly_type>(std::move(t));});
 };
 
 
