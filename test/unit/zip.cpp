@@ -53,10 +53,9 @@ TTS_CASE("Check tuple::zip behavior")
       (tuple {
           tuple {1, 'a', 1.f}, tuple {2, 'b', 0.5f}, tuple {3, 'c', 0.25}, tuple {4, 'd', 0.01}}));
 
-  //auto t    = tuple{1, 2, 3};
-  //auto t2   = tuple{2.f, moveonly{}, 'x'};
-  //auto t3   = kumi::make_tuple(t, std::move(t2));
-  //TTS_EXPECT_COMPILES(t3, { kumi::zip(get<0>(t3), std::move(get<1>(t3))); });
+  auto t    = tuple{1, 2, 3};
+  auto t2   = tuple{2.f, moveonly{}, 'x'};
+  TTS_EXPECT_COMPILES(t, t2, { kumi::zip(t, std::move(t2)); });
 };
 
 TTS_CASE("Check tuple::zip constexpr behavior")

@@ -39,7 +39,7 @@ namespace kumi
   {
     return kumi::map( [](auto &&m0, auto &&...ms) 
                     { 
-                        return kumi::make_tuple(KUMI_FWD(m0), KUMI_FWD(ms)...);
+                        return kumi::make_tuple(KUMI_FWD(m0), (KUMI_FWD(ms))...);
                     }
                     , KUMI_FWD(t0),KUMI_FWD(ts)...
                     );
