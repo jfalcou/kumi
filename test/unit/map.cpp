@@ -92,6 +92,16 @@ TTS_CASE("Check map(f, tuple) behavior")
       TTS_EQUAL(m3, 5 * sizeof(char));
       TTS_EQUAL(m4, 6 * sizeof(moveonly));
     }
+    {
+        auto tpl    = kumi::tuple{1, 2, 3};
+        auto tpl2   = kumi::tuple{'x', moveonly{}, 5};
+        TTS_EXPECT_COMPILES(tpl, tpl2,{ kumi::map( [](auto &&m0, auto &&ms) 
+                { 
+                    return kumi::make_tuple(KUMI_FWD(m0), KUMI_FWD(ms));
+                }
+                , std::move(tpl2), tpl
+                ); });
+    }
   }
 };
 
