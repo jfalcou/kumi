@@ -71,6 +71,10 @@ TTS_CASE("Check reorder<I...>(tuple) behavior")
       auto s = kumi::reorder<0,1,2,3,2,1,0>(t);
       TTS_EQUAL(s, (kumi::tuple{1,2.,3.4f,'5',3.4f,2.,1}) );
     }
+    {
+      auto s = kumi::reorder<0,1,2,3,2,1,0>(std::move(t));
+      TTS_EQUAL(s, (kumi::tuple{1,2.,3.4f,'5',3.4f,2.,1}) );
+    }
   }
 };
 

@@ -54,6 +54,10 @@ TTS_CASE("Check partition() behavior with values")
   TTS_EQUAL ( kumi::partition<std::is_null_pointer>(original)
             , (kumi::tuple{kumi::tuple{nullptr},kumi::tuple{a,&a,b,&b,c,&c,'z',}})
             );
+
+  TTS_EQUAL ( kumi::partition<std::is_null_pointer>(std::move(original))
+            , (kumi::tuple{kumi::tuple{nullptr},kumi::tuple{a,&a,b,&b,c,&c,'z',}})
+            );
 };
 
 

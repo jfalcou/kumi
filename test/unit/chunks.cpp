@@ -41,6 +41,8 @@ TTS_CASE("Check runtime kumi::chunks behavior")
   TTS_EQUAL ((t_test), (kumi::tuple{2, 5.f, 6., 'z', short{78}, long{24}}));
 
   TTS_EQUAL ( (kumi::chunks<2>(t2)), (kumi::make_tuple(kumi::tuple{112, -18.f}, kumi::make_tuple(kumi::tuple{'1', long{22}, kumi::str{"Yes"}})) ) );
+
+  TTS_EQUAL((kumi::chunks<2>(std::move(t2))), (kumi::make_tuple(kumi::tuple{112, -18.f}, kumi::make_tuple(kumi::tuple{'1', long{22}, kumi::str{"Yes"}})) ) );
 };
 
 TTS_CASE("Check constexpr kumi::chunks behavior")

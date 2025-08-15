@@ -40,6 +40,9 @@ TTS_CASE("Check cartesian_product() behavior with references")
   auto t0 = kumi::tuple<int,int&,int const&>{a,a,a};
   auto cp0 = kumi::cartesian_product(t0);
 
+  auto cp1 = kumi::cartesian_product(std::move(t0));
+  TTS_EQUAL((cp0), (cp1));
+  
   kumi::get<0>(kumi::get<0>(cp0))++;
   kumi::get<0>(kumi::get<1>(cp0)) = 10;
 

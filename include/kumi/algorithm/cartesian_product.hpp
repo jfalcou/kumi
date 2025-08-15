@@ -83,7 +83,7 @@ namespace kumi
 
     return [&]<std::size_t... N>(std::index_sequence<N...>)
     {
-      std::make_index_sequence<sizeof...(ts)> ids;
+      std::make_index_sequence<sizeof...(Ts)> ids;
       return kumi::make_tuple( maps(kumi::index<N>, ids)...);
     }(std::make_index_sequence<(kumi::size_v<Ts> * ...)>{});
   }

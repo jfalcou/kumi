@@ -66,7 +66,8 @@ namespace kumi
   template<product_type Tuple>
   [[nodiscard]] KUMI_ABI constexpr auto sum(Tuple&& t)
   {
-    return sum(kumi::extract(KUMI_FWD(t),index<1>),get<0>(KUMI_FWD(t)));
+    auto&& [head,tail] = kumi::split(KUMI_FWD(t), index<1>);
+    return sum(tail, get<0>(head));
   }
 
   //================================================================================================
@@ -126,7 +127,8 @@ namespace kumi
   template<product_type Tuple>
   [[nodiscard]] KUMI_ABI constexpr auto prod(Tuple&& t)
   {
-    return prod(kumi::extract(KUMI_FWD(t),index<1>),get<0>(KUMI_FWD(t)));
+    auto&& [head,tail] = split(KUMI_FWD(t), index<1>);
+    return prod(tail, get<0>(head));
   }
 
   //================================================================================================
@@ -186,7 +188,8 @@ namespace kumi
   template<product_type Tuple>
   [[nodiscard]] KUMI_ABI constexpr auto bit_and(Tuple&& t)
   {
-    return bit_and(kumi::extract(KUMI_FWD(t),index<1>),get<0>(KUMI_FWD(t)));
+    auto&& [head,tail] = split(KUMI_FWD(t), index<1>);
+    return bit_and(tail, get<0>(head));
   }
 
   //================================================================================================
@@ -246,7 +249,8 @@ namespace kumi
   template<product_type Tuple>
   [[nodiscard]] KUMI_ABI constexpr auto bit_or(Tuple&& t)
   {
-    return bit_or(kumi::extract(KUMI_FWD(t),index<1>),get<0>(KUMI_FWD(t)));
+    auto&& [head,tail] = split(KUMI_FWD(t), index<1>);
+    return bit_or(tail, get<0>(head));
   }
 
   namespace result

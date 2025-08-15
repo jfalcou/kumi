@@ -31,8 +31,9 @@ TTS_CASE("Check access via kumi::back")
   TTS_EQUAL(kumi::back(t4), 4);
   kumi::back(t4) = 357;
   TTS_EQUAL(kumi::back(t4), 357);
-};
 
+  TTS_EQUAL(kumi::back(std::move(t4)), 357);
+};
 
 TTS_CASE("Check access via constexpr kumi::back")
 {
@@ -64,6 +65,8 @@ TTS_CASE("Check access via kumi::front")
   TTS_EQUAL(kumi::front(t4), '1');
   kumi::front(t4) = 'Z';
   TTS_EQUAL(kumi::front(t4), 'Z');
+
+  TTS_EQUAL(kumi::front(std::move(t4)), 'Z');
 };
 
 TTS_CASE("Check access via constexpr kumi::front")

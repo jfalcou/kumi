@@ -55,7 +55,7 @@ namespace kumi
           k++;
         };
 
-        (locate(std::make_index_sequence<kumi::size<Tuples>::value>{}),...);
+        (locate(std::make_index_sequence<size_v<Tuples>>{}),...);
 
         return that;
       }();

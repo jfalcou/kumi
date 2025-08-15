@@ -37,12 +37,12 @@ namespace kumi
   //! ## Example
   //! @include doc/windows.cpp
   //================================================================================================
-  template<std::size_t N, kumi::product_type T>
+  template<std::size_t N, product_type T>
   requires ( N > 0 && N <= size_v<T> )
   [[nodiscard]] KUMI_ABI constexpr auto windows(T && t)
   {
     if constexpr ( N == size_v<T> ) return kumi::make_tuple(t);
-    else return kumi::generate<kumi::size_v<T>-N+1>( [&](auto idx)
+    else return kumi::generate<size_v<T>-N+1>( [&](auto idx)
     {
       return kumi::extract(KUMI_FWD(t), kumi::index<idx>, kumi::index<idx+N>);
     });
@@ -77,7 +77,7 @@ namespace kumi
   //! ## Example
   //! @include doc/chunks.cpp
   //================================================================================================
-  template<int N, kumi::product_type T> 
+  template<int N, product_type T> 
   requires ( N > 0 && N <= size_v<T> )
   [[nodiscard]] KUMI_ABI constexpr auto chunks(T && t)
   {
