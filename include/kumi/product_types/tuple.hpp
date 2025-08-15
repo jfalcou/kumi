@@ -428,7 +428,7 @@ namespace kumi
   [[nodiscard]] KUMI_ABI
   constexpr auto make_tuple(Ts &&...ts) -> tuple<std::unwrap_ref_decay_t<Ts>...>
   {
-    return kumi::tuple<std::unwrap_ref_decay_t<Ts>...>{KUMI_FWD(ts)...};
+    return {KUMI_FWD(ts)...};
   }
 
   //================================================================================================

@@ -37,9 +37,10 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto zip(T0 &&t0, Ts &&...ts)
   requires ( compatible_product_types<T0, Ts...> )
   {
-    return kumi::map( [](auto &&m0, auto &&...ms) 
-                    { 
-                        return kumi::make_tuple(KUMI_FWD(m0), KUMI_FWD(ms)...);
+    return kumi::map( []<typename M, typename... Ms>(M&& m0, Ms&&...ms) 
+                    {
+                        using type = _::builder_make_t<kumi::tuple<>, M, Ms...>;
+                        return type{KUMI_FWD(m0), KUMI_FWD(ms)...};
                     }
                     , KUMI_FWD(t0),KUMI_FWD(ts)...
                     );
