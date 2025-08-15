@@ -820,6 +820,20 @@
     </member>
     <member kind="function">
       <type>constexpr auto</type>
+      <name>filter</name>
+      <anchorfile>group__generators_ga092340ad03e4970fb79d4bc4872e4a2d.html</anchorfile>
+      <anchor>ga092340ad03e4970fb79d4bc4872e4a2d</anchor>
+      <arglist>(T &amp;&amp;tup) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>filter_not</name>
+      <anchorfile>group__generators_gad866fde689ca139c15ddab16cd8be536.html</anchorfile>
+      <anchor>gad866fde689ca139c15ddab16cd8be536</anchor>
+      <arglist>(T &amp;&amp;tup) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
       <name>flatten</name>
       <anchorfile>group__generators_gaeefb24a9d75d8753477bae03bc6e205c.html</anchorfile>
       <anchor>gaeefb24a9d75d8753477bae03bc6e205c</anchor>
@@ -1802,6 +1816,20 @@
       <anchorfile>group__generators_gac1f2b67c16429675ca7b9106793f9001.html</anchorfile>
       <anchor>gac1f2b67c16429675ca7b9106793f9001</anchor>
       <arglist>(T const &amp;v) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::filter</name>
+      <anchorfile>group__generators_ga092340ad03e4970fb79d4bc4872e4a2d.html</anchorfile>
+      <anchor>ga092340ad03e4970fb79d4bc4872e4a2d</anchor>
+      <arglist>(T &amp;&amp;tup) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::filter_not</name>
+      <anchorfile>group__generators_gad866fde689ca139c15ddab16cd8be536.html</anchorfile>
+      <anchor>gad866fde689ca139c15ddab16cd8be536</anchor>
+      <arglist>(T &amp;&amp;tup) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
