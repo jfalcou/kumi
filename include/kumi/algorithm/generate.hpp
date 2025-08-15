@@ -66,7 +66,8 @@ namespace kumi
   //! ## Example
   //! @include doc/generate.cpp
   //================================================================================================
-  template<std::size_t N, typename Function> [[nodiscard]] KUMI_ABI constexpr auto generate(Function const& f) noexcept
+  template<std::size_t N, typename Function> 
+  [[nodiscard]] KUMI_ABI constexpr auto generate(Function const& f) noexcept
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>)
     {

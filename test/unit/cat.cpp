@@ -77,6 +77,11 @@ TTS_CASE("Check cat(tuple) behavior")
 
     TTS_EQUAL(kumi::cat(ref, std::move(rref), val), (kumi::tuple<short&, short &&, float const>{s,std::move(s),3.14f}) );
   }
+  {
+    auto tmp    = kumi::tuple{1,2,3,4,5};
+    auto tmp2   = kumi::tuple{'a', 'b', 'c'};
+    TTS_EQUAL((kumi::cat(std::move(tmp), std::move(tmp2))),(kumi::tuple{1,2,3,4,5,'a','b','c'}) );
+  }
 };
 
 TTS_CASE("Check cat(tuple) constexpr behavior")

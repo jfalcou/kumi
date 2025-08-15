@@ -38,11 +38,15 @@ TTS_CASE("Check tuple::min/min_flat behavior")
   auto t0 = kumi::tuple {'e', 2, 1., short {55}, 'z'};
   TTS_EQUAL( kumi::min(t0), 1.);
   TTS_EQUAL((kumi::min(t0, [](auto m) { return sizeof(m); })), sizeof(char));
-
+  
   auto f0 = kumi::tuple {2., 1.,  kumi::tuple{'u','z'}, 3.f};
+  auto fcp = kumi::tuple {2., 1.,  kumi::tuple{'u','z'}, 3.f};
   TTS_EQUAL((kumi::min      (f0 , [](auto m) { return sizeof(m); })), 2*sizeof(char));
   TTS_EQUAL((kumi::min_flat (f0 , [](auto m) { return sizeof(m); })),   sizeof(char));
 
+  TTS_EQUAL((kumi::min      (std::move(f0), [](auto m) { return sizeof(m); })), 2*sizeof(char));
+  TTS_EQUAL((kumi::min_flat (std::move(fcp) , [](auto m) { return sizeof(m); })),   sizeof(char));
+ 
   auto t1 = kumi::tuple {1.5,3.6f,8,-3.6,2.4,-0.5};
   TTS_EQUAL((kumi::min(t1, [](auto m) { return m<0 ? -m : m; })), 0.5);
 };

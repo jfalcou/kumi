@@ -49,8 +49,7 @@ namespace kumi
   {
     return [&]<std::size_t... N>(std::index_sequence<N...>)
     {
-        using final_t = _::builder_make_t<std::remove_cvref_t<Tuple>
-                        , std::tuple_element_t<N + I0, std::remove_cvref_t<Tuple>>...>;
+        using final_t = _::builder_make_t<Tuple, element_t<N + I0, Tuple>...>;
 
         return final_t{ get<N + I0>(KUMI_FWD(t))... };
     }
@@ -100,8 +99,15 @@ namespace kumi
                                     , [[maybe_unused]] index_t<I0> i0
                                     ) noexcept
   {
-    return _::builder<Tuple>
-            ::make(extract(KUMI_FWD(t), index<0>, index<I0>), extract(t,index<I0>));
+    auto select = [&]<typename O, std::size_t...I>(O, std::index_sequence<I...>)
+    {
+        using rts = std::remove_cvref_t<Tuple>;
+        using type = _::builder_make_t<rts, std::tuple_element_t<O::value+I, rts>...>;
+        return type{get<O::value+I>(KUMI_FWD(t))...};
+    };
+
+    return kumi::tuple{ select(kumi::index<0>   , std::make_index_sequence<I0>{})
+                      , select(kumi::index<I0>  , std::make_index_sequence<size_v<Tuple> - I0>{})};
   }
 
   namespace result

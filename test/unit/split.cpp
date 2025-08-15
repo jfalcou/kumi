@@ -73,6 +73,10 @@ TTS_CASE("Check tuple::split behavior")
   auto[s80,s81] = kumi::split(t,8_c);
   TTS_EQUAL(s80, (kumi::tuple {'1', 2., 3.f, 4, 5, 6.f, 7., '8'}));
   TTS_EQUAL(s81, (kumi::tuple {}));
+
+  auto[s82,s83] = kumi::split(std::move(t),8_c);
+  TTS_EQUAL(s82, (kumi::tuple {'1', 2., 3.f, 4, 5, 6.f, 7., '8'}));
+  TTS_EQUAL(s83, (kumi::tuple {}));
 };
 
 TTS_CASE("Check tuple::split constexpr behavior")
