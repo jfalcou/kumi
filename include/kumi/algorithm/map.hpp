@@ -57,9 +57,7 @@ namespace kumi
 
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        using res_t = _::builder_make_t<Tuple, decltype(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...))...>;
-        return res_t{call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...};
-        //return _::builder<Tuple>::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
+        return _::builder<Tuple>::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
       }(std::make_index_sequence<size_v<Tuple>>());
     }
   }
