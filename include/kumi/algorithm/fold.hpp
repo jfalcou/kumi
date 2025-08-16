@@ -75,7 +75,7 @@ namespace kumi
   template<typename Function, sized_product_type_or_more<1> Tuple>
   [[nodiscard]] KUMI_ABI constexpr auto fold_left(Function f, Tuple&& t)
   {
-    if constexpr(sized_product_type<Tuple,1>) return get<0>(t);
+    if constexpr(sized_product_type<Tuple,1>) return get<0>(KUMI_FWD(t));
     else
     {
       auto&&[heads, tail] = split(KUMI_FWD(t), index<2>);
@@ -149,7 +149,7 @@ namespace kumi
   template<typename Function, sized_product_type_or_more<1> Tuple>
   [[nodiscard]] KUMI_ABI constexpr auto fold_right(Function f, Tuple&& t)
   {
-    if constexpr(sized_product_type<Tuple,1>) return get<0>(t);
+    if constexpr(sized_product_type<Tuple,1>) return get<0>(KUMI_FWD(t));
     else
     {
       auto&&[head, tails] = split(KUMI_FWD(t), index<size_v<Tuple>-2>);

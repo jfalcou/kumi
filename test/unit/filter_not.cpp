@@ -9,6 +9,7 @@
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
 #include <type_traits>
+#include "test.hpp"
 
 TTS_CASE("Check result::filter_not_t<Func,Tuple> behavior")
 {
@@ -54,6 +55,9 @@ TTS_CASE("Check filter_not() behavior with values")
   TTS_EQUAL ( kumi::filter_not<std::is_null_pointer>(original)
             , (kumi::tuple{a,&a,b,&b,c,&c,'z',})
             );
+
+  auto t = kumi::tuple{1.f, 2, 'x', moveonly{}};
+  TTS_EXPECT_COMPILES(t, {kumi::filter_not<is_not_moveonly_type>(std::move(t));});
 };
 
 

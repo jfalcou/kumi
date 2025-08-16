@@ -40,7 +40,6 @@ namespace kumi
   //! ## Example
   //! @include doc/reorder.cpp
   //================================================================================================
-
   template<std::size_t... Idx, product_type Tuple>
   requires((Idx < size_v<Tuple>) && ...)
   [[nodiscard]] KUMI_ABI constexpr auto reorder(Tuple &&t)

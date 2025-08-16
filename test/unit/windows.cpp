@@ -8,6 +8,7 @@
 #define TTS_MAIN
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
+#include "test.hpp"
 
 TTS_CASE("Check kumi::result::windows behavior")
 {
@@ -41,6 +42,9 @@ TTS_CASE("Check runtime kumi::windows behavior")
   TTS_EQUAL ( ( t_test ), ( kumi::tuple{ 2, 6.f, 11., '}', short{80} }));
 
   TTS_EQUAL ( (kumi::windows<2>(t2)), (kumi::tuple{kumi::tuple{112, -18.f}, kumi::tuple{-18.f, kumi::tuple{'1', long{22}, kumi::str{"Yes"}}}} ) );
+
+  auto t4 = kumi::tuple{112, moveonly{}, kumi::tuple{'1', long{22}, kumi::str{"Yes"}}};
+  TTS_EXPECT_COMPILES(t4, { kumi::windows<2>(std::move(t4)); });
 };
 
 TTS_CASE("Check constexpr kumi::windows behavior")

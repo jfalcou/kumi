@@ -8,6 +8,7 @@
 #define TTS_MAIN
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
+#include "test.hpp"
 
 TTS_CASE("Check access via kumi::back")
 {
@@ -31,8 +32,10 @@ TTS_CASE("Check access via kumi::back")
   TTS_EQUAL(kumi::back(t4), 4);
   kumi::back(t4) = 357;
   TTS_EQUAL(kumi::back(t4), 357);
+    
+  kumi::tuple t5 = {3., 'f', moveonly{}};
+  TTS_EXPECT_COMPILES(t5, { kumi::back(std::move(t5)); });
 };
-
 
 TTS_CASE("Check access via constexpr kumi::back")
 {
@@ -64,6 +67,9 @@ TTS_CASE("Check access via kumi::front")
   TTS_EQUAL(kumi::front(t4), '1');
   kumi::front(t4) = 'Z';
   TTS_EQUAL(kumi::front(t4), 'Z');
+
+  kumi::tuple t5 = {moveonly{}, 3., 'f'};
+  TTS_EXPECT_COMPILES(t5, { kumi::back(std::move(t5)); });
 };
 
 TTS_CASE("Check access via constexpr kumi::front")

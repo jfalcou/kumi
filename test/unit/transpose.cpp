@@ -10,6 +10,7 @@
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
 #include <vector>
+#include "test.hpp"
 
 TTS_CASE("Check result::transpose<Tuple> behavior")
 {
@@ -40,6 +41,11 @@ TTS_CASE("Check tuple::transpose behavior")
 
   TTS_EQUAL((kumi::transpose(tuple{ numbers, letters, ratio })),
             (tuple {tuple {1, 'a' , 1.f}, tuple {2, 'b',0.1f}, tuple {3, 'c',0.01f}, tuple {4, 'd',0.001f}}));
+
+  auto t    = kumi::tuple{ 1., 'x', moveonly{}, short{55}};
+  auto t2   = kumi::tuple{ 2., 'y', 3 , short{66}};
+  auto r    = kumi::tuple{ std::move(t), t2 };
+  TTS_EXPECT_COMPILES(r, { kumi::transpose(std::move(r)); });
 };
 
 TTS_CASE("Check constexpr tuple::transpose behavior")

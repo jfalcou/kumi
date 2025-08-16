@@ -28,13 +28,17 @@ namespace kumi
   //!   - specializing the `kumi::is_product_type` traits so it exposes a static constant member
   //!     `value` that evaluates to `true`
   //!
+  //! ## Helper value
+  //! @code
+  //!   template<typename T> inline constexpr auto is_product_type_v = is_product_type<T>::value;
+  //! @endcode
   //! ## Example:
   //! @include doc/adapt.cpp
   //==============================================================================================
   template<typename T, typename Enable = void> struct is_product_type : std::false_type {};
   template<typename T> struct is_product_type<T, typename T::is_product_type> : std::true_type {};
 
-
+  template<typename T> inline constexpr auto is_product_type_v = is_product_type<T>::value;
   //================================================================================================
   //! @ingroup traits
   //! @brief Opt-in traits for types behaving like a kumi::product_type
@@ -50,7 +54,7 @@ namespace kumi
   //! ## Helper value
   //! @code
   //!   template<typename T> inline constexpr auto is_record_type_v = is_record_type<T>::value;
-  //!
+  //! @endcode
   //! ## Example:
   //! @include doc/adapt.cpp
   //==============================================================================================

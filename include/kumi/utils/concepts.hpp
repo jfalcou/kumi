@@ -51,7 +51,7 @@ namespace kumi
   //! exactly `N` elements.
   //================================================================================================
   template<typename T, std::size_t N>
-  concept sized_product_type = product_type<T> && (size<T>::value == N);
+  concept sized_product_type = product_type<T> && (size_v<std::remove_cvref_t<T>> == N);
 
   //================================================================================================
   //! @ingroup concepts
@@ -61,7 +61,7 @@ namespace kumi
   //! at least `N` elements.
   //================================================================================================
   template<typename T, std::size_t N>
-  concept sized_product_type_or_more = product_type<T> && (size<T>::value >= N);
+  concept sized_product_type_or_more = product_type<T> && (size_v<std::remove_cvref_t<T>> >= N);
 
   //================================================================================================
   //! @ingroup concepts
@@ -71,7 +71,7 @@ namespace kumi
   //! at least 1 element.
   //================================================================================================
   template<typename T>
-  concept non_empty_product_type = product_type<T> && (size<T>::value != 0);
+  concept non_empty_product_type = product_type<T> && (size_v<std::remove_cvref_t<T>> != 0);
 
   //================================================================================================
   //! @ingroup concepts

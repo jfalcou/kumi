@@ -42,7 +42,7 @@ namespace kumi
   //! ## Example
   //! @include doc/map.cpp
   //================================================================================================
-  template<product_type Tuple, typename Function, sized_product_type<size<Tuple>::value>... Tuples>
+  template<product_type Tuple, typename Function, sized_product_type<size_v<Tuple>>... Tuples>
   [[nodiscard]] KUMI_ABI constexpr auto map(Function f, Tuple  &&t0, Tuples &&...others) 
   requires ( compatible_product_types<Tuple, Tuples...> && 
            _::supports_call<Function, Tuple&&, Tuples&&...> )
@@ -52,13 +52,13 @@ namespace kumi
     {
       auto const call = [&]<std::size_t N, typename... Ts>(index_t<N>, Ts &&... args)
       {
-        return f(get<N>(args)...);
+        return f(get<N>(KUMI_FWD(args))...);
       };
 
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
         return _::builder<Tuple>::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
-      }(std::make_index_sequence<size<Tuple>::value>());
+      }(std::make_index_sequence<size_v<Tuple>>());
     }
   }
 
@@ -109,7 +109,7 @@ namespace kumi
   //! ## Example
   //! @include doc/map_index.cpp
   //================================================================================================
-  template<product_type Tuple, typename Function, sized_product_type<size<Tuple>::value>... Tuples>
+  template<product_type Tuple, typename Function, sized_product_type<size_v<Tuple>>... Tuples>
   [[nodiscard]] KUMI_ABI constexpr auto map_index(Function f, Tuple &&t0,Tuples &&...others)
   requires(!record_type<Tuple> && (!record_type<Tuples> && ...))
   {
@@ -118,13 +118,13 @@ namespace kumi
     {
       auto const call = [&]<std::size_t N, typename... Ts>(index_t<N> idx, Ts &&... args)
       {
-        return f(idx, get<N>(args)...);
+        return f(idx, get<N>(KUMI_FWD(args))...);
       };
 
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
         return _::builder<Tuple>::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
-      }(std::make_index_sequence<size<Tuple>::value>());
+      }(std::make_index_sequence<size_v<Tuple>>());
     }
   }
 
