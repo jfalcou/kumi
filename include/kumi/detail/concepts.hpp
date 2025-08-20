@@ -149,6 +149,13 @@ namespace kumi::_
     }(std::integral_constant<std::size_t, I>{}) && ...);
   }(std::make_index_sequence<(size<Tuples>::value, ...)>{});
 
+  template<typename Tuple>
+  concept supports_transpose = (size<Tuple>::value <= 1) || 
+  ([]<std::size_t...N>(std::index_sequence<N...>)
+  {
+    return ((kumi::size_v<raw_member_t<0, Tuple>> == kumi::size_v<raw_member_t<N+1, Tuple>>) && ...);
+  }(std::make_index_sequence<size<Tuple>::value -1>{}));
+
   // Helper for checking if two tuples can == each others
   template<typename T, typename U>
   concept comparable = requires(T t, U u)

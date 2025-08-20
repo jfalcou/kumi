@@ -35,6 +35,7 @@ namespace kumi
   //! @include doc/transpose.cpp
   //================================================================================================
   template<product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto transpose(Tuple && t)
+  requires ( _::supports_transpose<Tuple> )
   {
     if constexpr(sized_product_type<Tuple,0>) return t;
     else
