@@ -8,6 +8,7 @@
 #define TTS_MAIN
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
+#include "test.hpp"
 
 TTS_CASE("Check kumi::push_front/pop_front type computation")
 {
@@ -34,6 +35,10 @@ TTS_CASE("Check kumi::push_front function behavior")
   TTS_EQUAL( kumi::pop_front(kumi::tuple{3.5})      , kumi::tuple{}         );
   TTS_EQUAL( kumi::pop_front(kumi::tuple{3.5,'e'})  , kumi::tuple{'e'}      );
   TTS_EQUAL( kumi::pop_front(kumi::tuple{4,3.5,'e'}), (kumi::tuple{3.5,'e'}));
+
+  auto t = kumi::tuple{moveonly{}, 1.f, 'x'};
+  TTS_EXPECT_COMPILES(t, { kumi::push_front(std::move(t), moveonly{}); });
+  TTS_EXPECT_COMPILES(t, { kumi::pop_front(std::move(t)); });
 };
 
 TTS_CASE("Check kumi::push_front/pop_front constexpr behavior")
@@ -73,6 +78,10 @@ TTS_CASE("Check kumi::push_back/pop_back function behavior")
   TTS_EQUAL( kumi::pop_back(kumi::tuple{3.5})      , kumi::tuple{}       );
   TTS_EQUAL( kumi::pop_back(kumi::tuple{3.5,'e'})  , kumi::tuple{3.5}    );
   TTS_EQUAL( kumi::pop_back(kumi::tuple{4,3.5,'e'}), (kumi::tuple{4,3.5}));
+
+  auto t = kumi::tuple{moveonly{}, 1.f, 'x'};
+  TTS_EXPECT_COMPILES(t, { kumi::push_back(std::move(t), moveonly{}); });
+  TTS_EXPECT_COMPILES(t, { kumi::pop_back(std::move(t)); });
 };
 
 TTS_CASE("Check kumi::push_back/pop_back constexpr behavior")

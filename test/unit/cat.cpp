@@ -8,6 +8,8 @@
 #define TTS_MAIN
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
+#include <string>
+#include "test.hpp"
 
 TTS_CASE("Check result::cat<Tuple...> behavior")
 {
@@ -76,6 +78,15 @@ TTS_CASE("Check cat(tuple) behavior")
     auto val = kumi::tuple<float const>{3.14f};
 
     TTS_EQUAL(kumi::cat(ref, std::move(rref), val), (kumi::tuple<short&, short &&, float const>{s,std::move(s),3.14f}) );
+  }
+  {
+    auto tmp    = kumi::tuple{1,2,3,4,5};
+    auto tmp2   = kumi::tuple{std::string{"Peter"},'a', 'b', 'c'};
+    TTS_EQUAL((kumi::cat(std::move(tmp), std::move(tmp2))),(kumi::tuple{1,2,3,4,5,std::string{"Peter"},'a','b','c'}) );
+
+    auto tmp3 = kumi::tuple{moveonly{}, 2, 3}; 
+    auto tmp4 = kumi::tuple{std::string{"Ok"}, 3.f};
+    TTS_EXPECT_COMPILES(tmp3, tmp4, { kumi::cat(std::move(tmp3), std::move(tmp4)); });
   }
 };
 

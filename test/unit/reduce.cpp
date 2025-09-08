@@ -50,9 +50,11 @@ TTS_CASE("Check result::prod/sum/bit_* behavior")
 TTS_CASE("Check tuple::sum behavior")
 {
   constexpr auto t = kumi::tuple {2., 1, short {55}, 'z'};
+  auto t2 = kumi::tuple {2., 1, short{55}, 'z'};  
 
   TTS_EQUAL(kumi::sum(kumi::tuple{}, 42),  42 );
-  TTS_EQUAL(kumi::sum(t, 0)             , 180 );
+  TTS_EQUAL(kumi::sum(t2, 0)            , 180 );
+  TTS_EQUAL(kumi::sum(std::move(t2))    , 180 );
 
   TTS_CONSTEXPR_EQUAL(kumi::sum(kumi::tuple{}, 42),  42 );
   TTS_CONSTEXPR_EQUAL(kumi::sum(t, 0)             , 180 );
@@ -62,9 +64,11 @@ TTS_CASE("Check tuple::sum behavior")
 TTS_CASE("Check tuple::prod behavior")
 {
   constexpr auto t = kumi::tuple {2., 3, short {5}, '\a'};
+  auto t2 = kumi::tuple {2., 3, short {5}, '\a'};
 
   TTS_EQUAL(kumi::prod(kumi::tuple{}, 42),  42 );
-  TTS_EQUAL(kumi::prod(t, 1)             , 210 );
+  TTS_EQUAL(kumi::prod(t2, 1)            , 210 );
+  TTS_EQUAL(kumi::prod(std::move(t), 1)  , 210 );
 
   TTS_CONSTEXPR_EQUAL(kumi::prod(kumi::tuple{}, 42),  42 );
   TTS_CONSTEXPR_EQUAL(kumi::prod(t, 1)             , 210 );
@@ -74,9 +78,11 @@ TTS_CASE("Check tuple::prod behavior")
 TTS_CASE("Check tuple::bit_and behavior")
 {
   constexpr auto t = kumi::tuple {14UL, char{7}, short{6}};
+  auto t2 = kumi::tuple {14UL, char{7}, short{6}};
 
-  TTS_EQUAL(kumi::bit_and(kumi::tuple{}, 42),  42 );
-  TTS_EQUAL(kumi::bit_and(t, 255)           , 6UL );
+  TTS_EQUAL(kumi::bit_and(kumi::tuple{}, 42)  ,  42 );
+  TTS_EQUAL(kumi::bit_and(t2, 255)            , 6UL );
+  TTS_EQUAL(kumi::bit_and(std::move(t2), 255) , 6UL );
 
   TTS_CONSTEXPR_EQUAL(kumi::bit_and(kumi::tuple{}, 42),  42 );
   TTS_CONSTEXPR_EQUAL(kumi::bit_and(t, 255)           , 6UL );
@@ -86,9 +92,11 @@ TTS_CASE("Check tuple::bit_and behavior")
 TTS_CASE("Check tuple::bit_or behavior")
 {
   constexpr auto t = kumi::tuple {2UL, 3, short {5}, char{64}};
+  auto t2 = kumi::tuple {2UL, 3, short {5}, char{64}};
 
   TTS_EQUAL(kumi::bit_or(kumi::tuple{}, 42),  42  );
-  TTS_EQUAL(kumi::bit_or(t, 1)             , 71UL );
+  TTS_EQUAL(kumi::bit_or(t2, 1)            , 71UL );
+  TTS_EQUAL(kumi::bit_or(std::move(t2), 1) , 71UL );
 
   TTS_CONSTEXPR_EQUAL(kumi::bit_or(kumi::tuple{}, 42),  42  );
   TTS_CONSTEXPR_EQUAL(kumi::bit_or(t, 1)             , 71UL );

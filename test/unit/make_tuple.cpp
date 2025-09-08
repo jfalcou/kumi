@@ -9,6 +9,7 @@
 #include <functional>
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
+#include "test.hpp"
 
 TTS_CASE("Check tuple_element of kumi::tuple")
 {
@@ -58,6 +59,9 @@ TTS_CASE("Check construction of kumi::tuple via make_tuple")
   TTS_EQUAL(get<1>(t4), 2.);
   TTS_EQUAL(get<2>(t4), 3.f);
   TTS_EQUAL(get<3>(t4), 4);
+
+  auto m0 = moveonly{};
+  TTS_EXPECT_COMPILES(m0, {kumi::make_tuple(1.f, 'x', 3, std::move(m0));});
 };
 
 TTS_CASE("Check construction of kumi::tuple via constexpr make_tuple")

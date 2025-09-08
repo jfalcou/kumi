@@ -10,6 +10,7 @@
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
 #include <vector>
+#include "test.hpp"
 
 TTS_CASE("Check result::flatten/flatten_all<Tuple> behavior")
 {
@@ -62,6 +63,9 @@ TTS_CASE("Check tuple::flatten behavior")
   TTS_EQUAL((kumi::flatten(kumi::tuple {
                 3.25f, kumi::tuple {2., kumi::tuple {2., 1, short {55}}, short {55}}, 'z'})),
             (kumi::tuple {3.25f, 2., kumi::tuple {2., 1, short {55}}, short {55}, 'z'}));
+
+  auto t = kumi::tuple{1.f, 'x', short{66}, moveonly{}};
+  TTS_EXPECT_COMPILES(t, { kumi::flatten(std::move(t)); });
 };
 
 TTS_CASE("Check tuple::flatten constexpr behavior")
@@ -92,6 +96,10 @@ TTS_CASE("Check tuple::flatten_all behavior")
   TTS_EQUAL((kumi::flatten_all(kumi::tuple {
                 3.25f, kumi::tuple {2., kumi::tuple{}, short {55}}, 'z'})),
             (kumi::tuple {3.25f, 2., short {55}, 'z'}));
+ 
+  auto t = kumi::tuple{1.f, 'x', short{66}, moveonly{}, kumi::tuple{3., moveonly{}}};
+  TTS_EXPECT_COMPILES(t, { kumi::flatten_all(std::move(t)); });
+
 };
 
 TTS_CASE("Check tuple::flatten_all + function behavior")

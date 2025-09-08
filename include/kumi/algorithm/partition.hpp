@@ -66,8 +66,7 @@ namespace kumi
 
     auto select = [&]<typename O, std::size_t... I>(O, std::index_sequence<I...>)
     {
-      using rts = std::remove_cvref_t<T>;
-      using type = _::builder_make_t<rts, std::tuple_element_t< pos.t[O::value+I], rts>...>;
+      using type = _::builder_make_t<T, element_t< pos.t[O::value+I], T>...>;
       return type{get<pos.t[O::value+I]>(KUMI_FWD(tup))...};
     };
 
@@ -106,8 +105,7 @@ namespace kumi
     if constexpr ( sized_product_type<T, 0>) return tuple{};
     else return [&]<std::size_t...I>(std::index_sequence<I...>)
     {
-        using rts = std::remove_cvref_t<T>;
-        using type = _::builder_make_t<rts, std::tuple_element_t<pos.t[I], rts>...>;
+        using type = _::builder_make_t<T, element_t<pos.t[I], T>...>;
         return type{get<pos.t[I]>(KUMI_FWD(tup))...};
     }(std::make_index_sequence<pos.cut>{});
   }
@@ -142,8 +140,7 @@ namespace kumi
     if constexpr ( sized_product_type<T, 0> ) return tuple{};
     else return [&]<std::size_t...I>(std::index_sequence<I...>)
     {
-        using rts = std::remove_cvref_t<T>;
-        using type = _::builder_make_t<rts, std::tuple_element_t<pos.t[pos.cut+I], rts>...>;
+        using type = _::builder_make_t<T, element_t<pos.t[pos.cut+I], T>...>;
         return type{get<pos.t[pos.cut+I]>(KUMI_FWD(tup))...};
     }(std::make_index_sequence<kumi::size_v<T> - pos.cut>{});
   }

@@ -34,20 +34,21 @@ namespace kumi
   //! ## Example
   //! @include doc/transpose.cpp
   //================================================================================================
-  template<product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto transpose(Tuple const &t)
+  template<product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto transpose(Tuple && t)
+  requires ( _::supports_transpose<Tuple> )
   {
     if constexpr(sized_product_type<Tuple,0>) return t;
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        constexpr auto uz = []<typename N>(N const &, auto const &u) {
-          return apply([](auto const &...m){return _::builder<Tuple>::make(get<N::value>(m)...);}, u);
+        constexpr auto uz = []<typename N>(N const &, auto &&u) {
+          return apply([](auto &&...m){return _::builder<Tuple>::make(get<N::value>(KUMI_FWD(m))...);}, KUMI_FWD(u));
         };
 
-        return _::builder<Tuple>::make(uz(index_t<I> {}, t)...);
+        return _::builder<Tuple>::make(uz(index_t<I> {}, KUMI_FWD(t))...);
       }
-      (std::make_index_sequence<size<element_t<0,Tuple>>::value>());
+      (std::make_index_sequence<size_v<element_t<0,Tuple>>>());
     }
   }
 

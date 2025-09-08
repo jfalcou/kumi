@@ -84,8 +84,18 @@ TTS_CASE("Check apply behavior")
                 kumi::tuple {1, '5', "things"})),
             "1 5 things ");
 
-  kumi::tuple some_tuple {1, '5', "things"};
+  auto ref = kumi::tuple {1, '5', "things"};
+  TTS_EQUAL((kumi::apply(
+                [](auto... m) {
+                  std::ostringstream s;
+                  ((s << m << " "), ...);
+                  return s.str();
+                },
+                std::move(ref))),
+            "1 5 things ");
 
+  kumi::tuple some_tuple {1, '5', "things"};
+  
   TTS_EQUAL((some_tuple([](auto... m) {
               std::ostringstream s;
               ((s << m << " "), ...);

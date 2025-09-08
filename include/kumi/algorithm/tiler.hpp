@@ -37,14 +37,14 @@ namespace kumi
   //! ## Example
   //! @include doc/windows.cpp
   //================================================================================================
-  template<std::size_t N, kumi::product_type T>
-  requires ( N > 0 && N <= kumi::size_v<T> )
-  [[nodiscard]] KUMI_ABI constexpr auto windows(T const& t)
+  template<std::size_t N, product_type T>
+  requires ( N > 0 && N <= size_v<T> )
+  [[nodiscard]] KUMI_ABI constexpr auto windows(T && t)
   {
-    if constexpr ( N == kumi::size_v<T> ) return kumi::make_tuple(t);
-    else return kumi::generate<kumi::size_v<T>-N+1>( [&](auto idx)
+    if constexpr ( N == size_v<T> ) return kumi::make_tuple(t);
+    else return kumi::generate<size_v<T>-N+1>( [&](auto idx)
     {
-      return kumi::extract(t, kumi::index<idx>, kumi::index<idx+N>);
+      return kumi::extract(KUMI_FWD(t), kumi::index<idx>, kumi::index<idx+N>);
     });
   }
 
@@ -77,19 +77,19 @@ namespace kumi
   //! ## Example
   //! @include doc/chunks.cpp
   //================================================================================================
-  template<int N, kumi::product_type T> 
-  requires ( N > 0 && N <= kumi::size_v<T> )
+  template<int N, product_type T> 
+  requires ( N > 0 && N <= size_v<T> )
   [[nodiscard]] KUMI_ABI constexpr auto chunks(T && t)
   {
-    constexpr auto nb = (kumi::size_v<T>+N-1)/N;
-    constexpr auto sz = kumi::size_v<T>; 
+    constexpr auto nb = (size_v<T>+N-1)/N;
+    constexpr auto sz = size_v<T>; 
 
-    if constexpr ( N == kumi::size_v<T> ) return kumi::make_tuple(t);
+    if constexpr ( N == size_v<T> ) return kumi::make_tuple(t);
     else return kumi::generate<nb>( [&](auto idx)
     {        
       constexpr auto chk_sz = (idx+1)*N > sz ? sz - idx*N : N;
       constexpr auto chk_id = idx*N;
-      return kumi::extract(t, kumi::index<chk_id>, kumi::index<chk_id+chk_sz>);
+      return kumi::extract(KUMI_FWD(t), kumi::index<chk_id>, kumi::index<chk_id+chk_sz>);
     });
   }
 
