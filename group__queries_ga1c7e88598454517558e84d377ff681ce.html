@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::push_back</title>
+<title>kumi: kumi::any_of</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__generators_ga7eb7a6fd2d7e8ebab521c951b0b4f2ac.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__queries_ga1c7e88598454517558e84d377ff681ce.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,76 +121,55 @@ $(document).ready(function(){initNavTree('group__generators_ga7eb7a6fd2d7e8ebab5
 </div>
 
 <div class="contents">
-<a id="ga7eb7a6fd2d7e8ebab521c951b0b4f2ac" name="ga7eb7a6fd2d7e8ebab521c951b0b4f2ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7eb7a6fd2d7e8ebab521c951b0b4f2ac">&#9670;&#160;</a></span>push_back()</h2>
+<a id="ga1c7e88598454517558e84d377ff681ce" name="ga1c7e88598454517558e84d377ff681ce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1c7e88598454517558e84d377ff681ce">&#9670;&#160;</a></span>any_of() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;product_type Tuple, <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">typename</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T</a> &gt; </div>
+template&lt;product_type T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a> kumi::push_back </td>
+          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a> kumi::any_of </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Tuple</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">const</a> &amp;&#160;</td>
-          <td class="paramname"><em>t</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
           <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T</a> &amp;&amp;&#160;</td>
-          <td class="paramname"><em>v</em>&#160;</td>
-        </tr>
-        <tr>
+          <td class="paramname"><em>ts</em></td><td>)</td>
           <td></td>
-          <td>)</td>
-          <td></td><td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Constructs a tuple by adding a value v at the end of t. </p>
+<p>Computes the reduction of a tuple over the <code>||</code> operator. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">t</td><td>Base tuple </td></tr>
-    <tr><td class="paramname">v</td><td>Value to insert in front of t </td></tr>
+    <tr><td class="paramname">ts</td><td>Value to process. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A tuple composed of all elements of t in order followed by v.</dd></dl>
-<h2><a class="anchor" id="autotoc_md73"></a>
-Helper type</h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;product_type Tuple, <span class="keyword">typename</span> T&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__generators_ga7eb7a6fd2d7e8ebab521c951b0b4f2ac.html#ga7eb7a6fd2d7e8ebab521c951b0b4f2ac">push_back</a>;</div>
-<div class="line"> </div>
-<div class="line">  <span class="keyword">template</span>&lt;product_type Tuple, <span class="keyword">typename</span> T&gt;</div>
-<div class="line">  <span class="keyword">using </span>push_back_t = <span class="keyword">typename</span> push_back&lt;Tuple,T&gt;::type;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__generators_ga7eb7a6fd2d7e8ebab521c951b0b4f2ac_html_ga7eb7a6fd2d7e8ebab521c951b0b4f2ac"><div class="ttname"><a href="group__generators_ga7eb7a6fd2d7e8ebab521c951b0b4f2ac.html#ga7eb7a6fd2d7e8ebab521c951b0b4f2ac">kumi::push_back</a></div><div class="ttdeci">constexpr auto push_back(Tuple const &amp;t, T &amp;&amp;v)</div><div class="ttdoc">Constructs a tuple by adding a value v at the end of t.</div><div class="ttdef"><b>Definition</b> push_pop.hpp:104</div></div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__generators_ga7eb7a6fd2d7e8ebab521c951b0b4f2ac.html#ga7eb7a6fd2d7e8ebab521c951b0b4f2ac" title="Constructs a tuple by adding a value v at the end of t.">kumi::push_back</a></p>
-<h2><a class="anchor" id="autotoc_md74"></a>
-Example</h2>
+<dl class="section return"><dt>Returns</dt><dd>The evaluation of <code>get&lt;0&gt;(ts) || ... || get&lt;N-1&gt;(ts)</code> where <code>N</code> is the size of <code>ts</code>. </dd></dl>
+<h2><a class="anchor" id="autotoc_md64"></a>
+Example:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">main</a>()</div>
 <div class="line">{</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__generators_ga7eb7a6fd2d7e8ebab521c951b0b4f2ac.html#ga7eb7a6fd2d7e8ebab521c951b0b4f2ac">kumi::push_back</a>( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{}, 63.21)  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1,2.,3.f};</div>
+<div class="line">  std::cout &lt;&lt; std::boolalpha &lt;&lt; <a class="code hl_function" href="group__queries_ga91aebbbef8db8781c2c48bc814beed9b.html#ga91aebbbef8db8781c2c48bc814beed9b">kumi::all_of</a>( <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t</a>, [](<span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">e</a>) { <span class="keywordflow">return</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">e</a> &lt; 5; }) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t</a>{1,2.,3.4f};</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t</a>                          &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__generators_ga7eb7a6fd2d7e8ebab521c951b0b4f2ac.html#ga7eb7a6fd2d7e8ebab521c951b0b4f2ac">kumi::push_back</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t</a>, <span class="charliteral">&#39;Z&#39;</span>)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">u</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="keyword">true</span>,<span class="keyword">false</span>,<span class="keyword">true</span>,<span class="keyword">false</span>};</div>
+<div class="line">  std::cout &lt;&lt; std::boolalpha &lt;&lt; <a class="code hl_function" href="group__queries_ga91aebbbef8db8781c2c48bc814beed9b.html#ga91aebbbef8db8781c2c48bc814beed9b">kumi::all_of</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">u</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
+<div class="ttc" id="agroup__queries_ga91aebbbef8db8781c2c48bc814beed9b_html_ga91aebbbef8db8781c2c48bc814beed9b"><div class="ttname"><a href="group__queries_ga91aebbbef8db8781c2c48bc814beed9b.html#ga91aebbbef8db8781c2c48bc814beed9b">kumi::all_of</a></div><div class="ttdeci">constexpr auto all_of(T &amp;&amp;ts, Pred p) noexcept</div><div class="ttdoc">Checks if unary predicate p returns true for all elements in the value t.</div><div class="ttdef"><b>Definition</b> predicates.hpp:22</div></div>
 <div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:59</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:36</div></div>
 </div><!-- fragment --> 

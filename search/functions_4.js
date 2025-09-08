@@ -3,7 +3,7 @@ var searchData=
   ['fill_0',['fill',['../group__generators_gac1f2b67c16429675ca7b9106793f9001.html#gac1f2b67c16429675ca7b9106793f9001',1,'kumi']]],
   ['filter_1',['filter',['../group__generators_ga092340ad03e4970fb79d4bc4872e4a2d.html#ga092340ad03e4970fb79d4bc4872e4a2d',1,'kumi']]],
   ['filter_5fnot_2',['filter_not',['../group__generators_gad866fde689ca139c15ddab16cd8be536.html#gad866fde689ca139c15ddab16cd8be536',1,'kumi']]],
-  ['flatten_3',['flatten',['../group__generators_gaeefb24a9d75d8753477bae03bc6e205c.html#gaeefb24a9d75d8753477bae03bc6e205c',1,'kumi']]],
+  ['flatten_3',['flatten',['../group__generators_ga8352f3f917d14811d3d476490b2030d5.html#ga8352f3f917d14811d3d476490b2030d5',1,'kumi']]],
   ['flatten_5fall_4',['flatten_all',['../group__generators_ga152d59e645273cd17b762b839db88dbb.html#ga152d59e645273cd17b762b839db88dbb',1,'kumi::flatten_all(Tuple &amp;&amp;ts, Func &amp;&amp;f)'],['../namespacekumi.html#a16916472ef4928dc9ed24a99cc4da97f',1,'kumi::flatten_all(Tuple &amp;&amp;ts)']]],
   ['fold_5fleft_5',['fold_left',['../group__reductions_gaf5c5a77520eb5db15716f55fdb413579.html#gaf5c5a77520eb5db15716f55fdb413579',1,'kumi::fold_left(Function f, Tuple &amp;&amp;t, Value init)'],['../group__reductions_gaed0714239b395a2ac14d3a6a3ec3f44c.html#gaed0714239b395a2ac14d3a6a3ec3f44c',1,'kumi::fold_left(Function f, Tuple &amp;&amp;t)']]],
   ['fold_5fright_6',['fold_right',['../group__reductions_gaa2bdd088d82f635a5c52c6dd5bdeaaf2.html#gaa2bdd088d82f635a5c52c6dd5bdeaaf2',1,'kumi::fold_right(Function f, Tuple &amp;&amp;t, Value init)'],['../group__reductions_ga20c7d2a3b7e7044f95ec352e64cd1b27.html#ga20c7d2a3b7e7044f95ec352e64cd1b27',1,'kumi::fold_right(Function f, Tuple &amp;&amp;t)']]],

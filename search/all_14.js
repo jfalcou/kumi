@@ -7,7 +7,7 @@ var searchData=
   ['reductions_4',['Tuple Generalized Reductions',['../group__reductions.html',1,'']]],
   ['related_20concepts_5',['Tuple Related Concepts',['../group__concepts.html',1,'']]],
   ['related_20traits_6',['Tuple Related Traits',['../group__traits.html',1,'']]],
-  ['release_7',['First autonomous public release.',['../changelog.html#autotoc_md166',1,'']]],
+  ['release_7',['First autonomous public release.',['../changelog.html#autotoc_md173',1,'']]],
   ['reorder_8',['reorder',['../group__generators_ga1e46ab6777b551e4c4357cc24dcbdda3.html#ga1e46ab6777b551e4c4357cc24dcbdda3',1,'kumi']]],
   ['reverse_9',['reverse',['../group__generators_ga49abf24bfdc3e6c8707cd321d9015212.html#ga49abf24bfdc3e6c8707cd321d9015212',1,'kumi']]]
 ];

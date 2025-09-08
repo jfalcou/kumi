@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['features_0',['features',['../changelog.html#autotoc_md164',1,'New Features'],['../changelog.html#autotoc_md159',1,'New Features'],['../changelog.html#autotoc_md153',1,'New Features'],['../changelog.html#autotoc_md148',1,'New Features']]],
+  ['features_0',['features',['../changelog.html#autotoc_md171',1,'New Features'],['../changelog.html#autotoc_md166',1,'New Features'],['../changelog.html#autotoc_md160',1,'New Features'],['../changelog.html#autotoc_md155',1,'New Features']]],
   ['fetchcontent_1',['CMake FetchContent',['../setup.html#setup-fetchcontent',1,'']]],
   ['field_2',['field',['../group__utility_ga57aa18d14a453e4b8519feee16bc6285.html#ga57aa18d14a453e4b8519feee16bc6285',1,'kumi::literals']]],
   ['field_5fcapture_3',['field_capture',['../structkumi_1_1field__capture.html',1,'kumi']]],
@@ -8,9 +8,9 @@ var searchData=
   ['fill_5',['fill',['../group__generators_gac1f2b67c16429675ca7b9106793f9001.html#gac1f2b67c16429675ca7b9106793f9001',1,'kumi']]],
   ['filter_6',['filter',['../group__generators_ga092340ad03e4970fb79d4bc4872e4a2d.html#ga092340ad03e4970fb79d4bc4872e4a2d',1,'kumi']]],
   ['filter_5fnot_7',['filter_not',['../group__generators_gad866fde689ca139c15ddab16cd8be536.html#gad866fde689ca139c15ddab16cd8be536',1,'kumi']]],
-  ['first_20autonomous_20public_20release_8',['First autonomous public release.',['../changelog.html#autotoc_md166',1,'']]],
-  ['fixes_9',['fixes',['../changelog.html#autotoc_md154',1,'Bug Fixes'],['../changelog.html#autotoc_md149',1,'Bug Fixes'],['../changelog.html#autotoc_md158',1,'Bug Fixes'],['../changelog.html#autotoc_md163',1,'Bug Fixes']]],
-  ['flatten_10',['flatten',['../group__generators_gaeefb24a9d75d8753477bae03bc6e205c.html#gaeefb24a9d75d8753477bae03bc6e205c',1,'kumi']]],
+  ['first_20autonomous_20public_20release_8',['First autonomous public release.',['../changelog.html#autotoc_md173',1,'']]],
+  ['fixes_9',['fixes',['../changelog.html#autotoc_md161',1,'Bug Fixes'],['../changelog.html#autotoc_md156',1,'Bug Fixes'],['../changelog.html#autotoc_md165',1,'Bug Fixes'],['../changelog.html#autotoc_md170',1,'Bug Fixes']]],
+  ['flatten_10',['flatten',['../group__generators_ga8352f3f917d14811d3d476490b2030d5.html#ga8352f3f917d14811d3d476490b2030d5',1,'kumi']]],
   ['flatten_5fall_11',['flatten_all',['../group__generators_ga152d59e645273cd17b762b839db88dbb.html#ga152d59e645273cd17b762b839db88dbb',1,'kumi::flatten_all(Tuple &amp;&amp;ts, Func &amp;&amp;f)'],['../namespacekumi.html#a16916472ef4928dc9ed24a99cc4da97f',1,'kumi::flatten_all(Tuple &amp;&amp;ts)']]],
   ['fold_5fleft_12',['fold_left',['../group__reductions_gaed0714239b395a2ac14d3a6a3ec3f44c.html#gaed0714239b395a2ac14d3a6a3ec3f44c',1,'kumi::fold_left(Function f, Tuple &amp;&amp;t)'],['../group__reductions_gaf5c5a77520eb5db15716f55fdb413579.html#gaf5c5a77520eb5db15716f55fdb413579',1,'kumi::fold_left(Function f, Tuple &amp;&amp;t, Value init)']]],
   ['fold_5fright_13',['fold_right',['../group__reductions_ga20c7d2a3b7e7044f95ec352e64cd1b27.html#ga20c7d2a3b7e7044f95ec352e64cd1b27',1,'kumi::fold_right(Function f, Tuple &amp;&amp;t)'],['../group__reductions_gaa2bdd088d82f635a5c52c6dd5bdeaaf2.html#gaa2bdd088d82f635a5c52c6dd5bdeaaf2',1,'kumi::fold_right(Function f, Tuple &amp;&amp;t, Value init)']]],
