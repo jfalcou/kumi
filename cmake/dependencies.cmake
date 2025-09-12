@@ -34,7 +34,7 @@ CPMAddPackage(NAME COPACABANA GITHUB_REPOSITORY jfalcou/copacabana GIT_TAG main)
 
 if(KUMI_BUILD_TEST)
   CPMAddPackage ( NAME TTS   GITHUB_REPOSITORY jfalcou/tts
-                  GIT_TAG main
+                  GIT_TAG fix/compile-time
                   OPTIONS "TTS_BUILD_TEST OFF"
                           "TTS_BUILD_DOCUMENTATION OFF"
                           "TTS_QUIET ON"
