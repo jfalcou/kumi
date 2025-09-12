@@ -8,6 +8,7 @@
 #pragma once
 
 #include <ostream>
+#include <kumi/detail/binder.hpp>
 
 namespace kumi
 {
@@ -21,10 +22,13 @@ namespace kumi
   template<indexer... V>
   struct index_map_t
   {
-    using tuple_base      = kumi::tuple<V...>;
     using is_product_type = void;
-  
-    static constexpr bool is_index_map = true;
+    using binder_t        = _::make_binder_t<std::make_integer_sequence<int,sizeof...(V)>, V...>;
+
+    static constexpr bool is_homogeneous    = binder_t::is_homogeneous;
+    static constexpr bool is_index_map      = true;
+    
+    binder_t impl;
      
     //==============================================================================================
     //! @name Properties
@@ -45,7 +49,14 @@ namespace kumi
     //! @name Accessors
     //! @{
     //==============================================================================================
-
+    /// Workaround to avoid depending on kumi::tuple and kumi::index_t
+    template<std::size_t I>
+    requires(I < sizeof...(V))
+    KUMI_ABI constexpr decltype(auto) get_index() const noexcept
+    {
+      return _::get_leaf<I>(impl);
+    }
+    
     //==============================================================================================
     //! @brief Extracts the Ith element from a kumi::index_map_t
     //!
@@ -57,7 +68,7 @@ namespace kumi
     requires( I < sizeof...(V) )
     [[nodiscard]] KUMI_ABI friend constexpr decltype(auto) get(index_map_t& i) noexcept
     {
-      return kumi::get<I>(i.data);
+      return i.get_index<I>();
     }
  
     /// @overload
@@ -65,19 +76,26 @@ namespace kumi
     requires( I < sizeof...(V))
     [[nodiscard]] KUMI_ABI friend constexpr decltype(auto) get(index_map_t const& i) noexcept
     {
-      return kumi::get<I>(i.data);
+      return i.get_index<I>(); 
     }
- 
     //==============================================================================================
     //! @}
     //==============================================================================================
-
-    friend std::ostream& operator<<(std::ostream& os, index_map_t const& i)
+    template<typename CharT, typename Traits>
+    friend std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, Traits> &os,
+                                                         index_map_t const &i) noexcept
     {
-      return os << i.data;
-    }
+      os << "( ";
+      [&]<std::size_t... I>(std::index_sequence<I...>)
+      {
+        [[maybe_unused]] auto call = [&]<typename M>(M){ os << get<M::value>(i); };
+        ( call(std::integral_constant<std::size_t, I>{}), ... );
+      }
+      (std::make_index_sequence<sizeof...(V)>());
+      os << ")";
 
-    tuple_base data;
+      return os;
+    }
   };
 
   template<indexer... V> KUMI_CUDA index_map_t(V...) -> index_map_t<V...>;
@@ -88,13 +106,3 @@ namespace kumi
     return index_map_t{t...};
   }
 }
-
-template<typename... V>
-struct std::tuple_size<kumi::index_map_t<V...>> 
-  : std::integral_constant<std::size_t,sizeof...(V)>
-{};
-  
-template<std::size_t I, typename... V>
-struct std::tuple_element<I, kumi::index_map_t<V...>> 
-  : std::tuple_element<I, typename kumi::index_map_t<V...>::tuple_base>
-{};

@@ -41,10 +41,12 @@ namespace kumi
   //! @ingroup generators
   //! @brief Reorder elements of a kumi::product_type
   //!
-  //! This function does not participate in overload resolution if any IDx is outside [0, size_v<T>[.
+  //! This function does not participate in overload resolution if any Idx is outside [0, size_v<T>[.
   //!
   //! @note Nothing prevent the number of reordered index to be lesser or greater than t size or
   //!       the fact they can appear multiple times.
+  //!
+  //! @note reorder(tuple) works and is equivalent to reorder<>(tuple)
   //!
   //! @tparam Idx     Reordered index of elements
   //! @param  t kumi::product_type to reorder
@@ -63,11 +65,6 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::reorder
   //! 
-  //! @note reorder(tuple) works and is equivalent to reorder<>(tuple)
-  //!
-  //! @warning This function will be deprecated in the next release
-  //!
-  //!
   //! ## Example
   //! @include doc/reorder.cpp
   //================================================================================================
@@ -75,18 +72,47 @@ namespace kumi
   requires((Idx < size_v<Tuple>) && ...)
   [[nodiscard]] KUMI_ABI constexpr auto reorder(Tuple &&t)
   {
-    return reorder<make_index_map(Idx...)>(KUMI_FWD(t));
+    return _::builder<Tuple>::make( get<Idx>(KUMI_FWD(t))... );
   }
 
+  //================================================================================================
+  //! @ingroup generators
+  //! @brief Reindex elements of a kumi::product_type
+  //!
+  //! This function does not participate in overload resolution if any Idx is outside [0, size_v<T>[.
+  //!
+  //! @note Nothing prevent the number of reordered index to be lesser or greater than t size or
+  //!       the fact they can appear multiple times.
+  //!
+  //! @tparam Indexes   A kumi::index_map_t representing the reindexed slot of the elements
+  //! @param  t kumi::product_type to reindex
+  //! @return A potentially nested tuple following the Indexes order 
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<product_type Tuple,std::size_t... Idx> struct reindex;
+  //!
+  //!   template<product_type Tuple,std::size_t... Idx>
+  //!   using reorder_t = typename reindex<Tuple,Idx...>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::reindex
+  //! 
+  //! ## Example
+  //! @include doc/reindex.cpp
+  //================================================================================================
   template<index_map auto Indexes, product_type Tuple>
   requires ( _::in_bound_index<Indexes, Tuple>() )
-  [[nodiscard]] KUMI_ABI constexpr auto reorder(Tuple &&t)
+  [[nodiscard]] KUMI_ABI constexpr auto reindex(Tuple &&t)
   {
     using idx_type = std::remove_cvref_t<decltype(Indexes)>;
     auto mk = [&]<auto Idx>() -> decltype(auto)
     {
-      if constexpr ( product_type<decltype(Idx)> )  return reorder<Idx>(KUMI_FWD(t));
-      else                                          return kumi::get<Idx>(KUMI_FWD(t));                  
+      if constexpr ( product_type<decltype(Idx)> )  return reindex<Idx>(KUMI_FWD(t));
+      else                                          return get<Idx>(KUMI_FWD(t));                  
     };
   
     if constexpr ( sized_product_type<Tuple, 0> )         return _::builder<Tuple>::make();
@@ -105,16 +131,16 @@ namespace kumi
       using type = decltype( kumi::reorder<Idx...>( std::declval<Tuple>() ) );
     };
    
-    template<product_type Tuple, index_map Indexes> 
-    struct reorder
+    template<product_type Tuple, index_map auto Indexes> 
+    struct reindex 
     {
-      using type = decltype( kumi::reorder<Indexes>( std::declval<Tuple>() ) );
+      using type = decltype( kumi::reindex<Indexes>( std::declval<Tuple>() ) );
     };
 
     template<product_type Tuple, std::size_t... Idx>
     using reorder_t = typename reorder<Tuple,Idx...>::type;
      
-    template<product_type Tuple, index_map Indexes>
-    using reorder_t = typename reorder<Tuple,Indexes>::type;
+    template<product_type Tuple, index_map auto Indexes>
+    using reindex_t = typename reindex<Tuple,Indexes>::type;
   }
 }

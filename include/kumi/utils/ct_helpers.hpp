@@ -9,6 +9,7 @@
 
 #include <cstddef>
 #include <kumi/detail/field_capture.hpp>
+#include <kumi/detail/indexes.hpp>
 
 namespace kumi
 {
