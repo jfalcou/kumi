@@ -88,6 +88,7 @@ namespace kumi
       os << "( ";
       [&]<std::size_t... I>(std::index_sequence<I...>)
       {
+        using std::get;
         [[maybe_unused]] auto call = [&]<typename M>(M){ os << get<M::value>(i); };
         ( call(std::integral_constant<std::size_t, I>{}), ... );
       }
