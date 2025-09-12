@@ -77,7 +77,7 @@ namespace kumi
   //! ## Example
   //! @include doc/chunks.cpp
   //================================================================================================
-  template<int N, product_type T> 
+  template<std::size_t N, product_type T> 
   requires ( N > 0 && N <= size_v<T> )
   [[nodiscard]] KUMI_ABI constexpr auto chunks(T && t)
   {
