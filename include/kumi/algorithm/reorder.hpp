@@ -65,11 +65,6 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::reorder
   //! 
-  //! @note reorder(tuple) works and is equivalent to reorder<>(tuple)
-  //!
-  //! @warning This function will be deprecated in the next release
-  //!
-  //!
   //! ## Example
   //! @include doc/reorder.cpp
   //================================================================================================
@@ -142,10 +137,10 @@ namespace kumi
       using type = decltype( kumi::reindex<Indexes>( std::declval<T>() ) );
     };
    
-    template<product_type Tuple, index_map Indexes> 
-    struct reorder
+    template<product_type Tuple, index_map auto Indexes> 
+    struct reindex 
     {
-      using type = decltype( kumi::reorder<Indexes>( std::declval<Tuple>() ) );
+      using type = decltype( kumi::reindex<Indexes>( std::declval<Tuple>() ) );
     };
 
     template<product_type T, std::size_t... Idx>
