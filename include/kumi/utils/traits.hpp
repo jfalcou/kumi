@@ -157,6 +157,27 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup traits
+  //! @brief Checks if a type can be used as a kumi::index_map 
+  //!
+  //! @tparam T The type to inspect
+  //!
+  //! ## Helper value
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T> inline constexpr bool is_index_map_v = is_index_map<T>::value; 
+  //! }
+  //! @endcode
+  //================================================================================================
+  template<typename T>
+  inline constexpr auto is_index_map_v = requires { T::is_index_map; };
+
+  template<typename T>
+  struct is_index_map : std::bool_constant<is_index_map_v<T>>
+  {};
+
+  //================================================================================================
+  //! @ingroup traits
   //! @brief Checks if a type is a kumi::field_capture 
   //!
   //! @tparam T The type to inspect

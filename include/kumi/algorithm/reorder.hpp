@@ -8,9 +8,35 @@
 #pragma once
 
 #include <kumi/detail/builder.hpp>
+#include <kumi/detail/indexes.hpp>
 
 namespace kumi
 {
+
+  namespace _
+  {
+    template<index_map auto idxs, product_type T>
+    consteval auto in_bound_index()
+    {
+      using map_t = std::remove_cvref_t<decltype(idxs)>;
+      if constexpr ( sized_product_type<T,0> )            return false;
+      else if constexpr ( sized_product_type<map_t, 0> )  return true;
+      else return []<std::size_t... N>(std::index_sequence<N...>)
+      {
+        bool checks[] = {( []()
+        {
+          if constexpr ( product_type<element_t<N,map_t>> ) return in_bound_index<get<N>(idxs), T>();
+          else if constexpr( get<N>(idxs) < size_v<T> )     return true;
+          else                                              return false;
+        }())...};
+
+        for(std::size_t i=0;i<idxs.size();++i) 
+          if(!checks[i]) return false;
+
+        return true; 
+      }( std::make_index_sequence<idxs.size()>{} );
+    };
+  }
   //================================================================================================
   //! @ingroup generators
   //! @brief Reorder elements of a kumi::product_type
@@ -36,6 +62,11 @@ namespace kumi
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::reorder
+  //! 
+  //! @note reorder(tuple) works and is equivalent to reorder<>(tuple)
+  //!
+  //! @warning This function will be deprecated in the next release
+  //!
   //!
   //! ## Example
   //! @include doc/reorder.cpp
@@ -44,7 +75,26 @@ namespace kumi
   requires((Idx < size_v<Tuple>) && ...)
   [[nodiscard]] KUMI_ABI constexpr auto reorder(Tuple &&t)
   {
-    return _::builder<Tuple>::make( get<Idx>(KUMI_FWD(t))... );
+    return reorder<make_index_map(Idx...)>(KUMI_FWD(t));
+  }
+
+  template<index_map auto Indexes, product_type Tuple>
+  requires ( _::in_bound_index<Indexes, Tuple>() )
+  [[nodiscard]] KUMI_ABI constexpr auto reorder(Tuple &&t)
+  {
+    using idx_type = std::remove_cvref_t<decltype(Indexes)>;
+    auto mk = [&]<auto Idx>() -> decltype(auto)
+    {
+      if constexpr ( product_type<decltype(Idx)> )  return reorder<Idx>(KUMI_FWD(t));
+      else                                          return kumi::get<Idx>(KUMI_FWD(t));                  
+    };
+  
+    if constexpr ( sized_product_type<Tuple, 0> )         return _::builder<Tuple>::make();
+    else if constexpr( sized_product_type<idx_type, 0> )  return _::builder<Tuple>::make();
+    else return [&]<std::size_t ...I>(std::index_sequence<I...>)
+    {
+      return _::builder<Tuple>::make( mk.template operator()<get<I>(Indexes)>()... );
+    }(std::make_index_sequence<Indexes.size()>{});
   }
 
   namespace result
@@ -54,8 +104,17 @@ namespace kumi
     {
       using type = decltype( kumi::reorder<Idx...>( std::declval<Tuple>() ) );
     };
+   
+    template<product_type Tuple, index_map Indexes> 
+    struct reorder
+    {
+      using type = decltype( kumi::reorder<Indexes>( std::declval<Tuple>() ) );
+    };
 
     template<product_type Tuple, std::size_t... Idx>
     using reorder_t = typename reorder<Tuple,Idx...>::type;
+     
+    template<product_type Tuple, index_map Indexes>
+    using reorder_t = typename reorder<Tuple,Indexes>::type;
   }
 }

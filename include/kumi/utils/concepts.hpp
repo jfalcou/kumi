@@ -75,6 +75,25 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup concepts
+  //! @brief Concept specifying if a type can be used as sequence of indexes in algorithms 
+  //!
+  //! A type `T` models `kumi::index_map` if it models `kumi::product_type` and
+  //! contains members which are themselves either integral types or others `index_map` 
+  //================================================================================================
+  template<typename T>
+  concept index_map = product_type<T> && is_index_map_v<std::remove_cvref_t<T>>;
+
+  //================================================================================================
+  //! @ingroup concepts
+  //! @brief Concept specifying if a type is suitable as an index 
+  //!
+  //! A type `T` models `kumi::indexer` if it models `kumi::index_map` or `std::is_integral` 
+  //================================================================================================
+  template<typename T>
+  concept indexer = std::integral<std::remove_cvref_t<T>> || index_map<T>; 
+
+  //================================================================================================
+  //! @ingroup concepts
   //! @brief Concept specifying is Product Type which types are all the same
   //!
   //! A type `T` models `kumi::homogenous_product_type` if it models `kumi::product_type` and
