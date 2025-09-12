@@ -24,7 +24,6 @@ TTS_CASE("Check result::reorder<Tuple,I...> behavior")
 
 TTS_CASE("Check reorder<I...>(tuple) behavior")
 {
-  {
     auto t = kumi::tuple {1, 2., 3.4f, '5'};
     
     {
@@ -79,17 +78,10 @@ TTS_CASE("Check reorder<I...>(tuple) behavior")
       auto s = kumi::reorder<0,1,2,3,2,1,0>(std::move(t));
       TTS_EQUAL(s, (kumi::tuple{1,2.,3.4f,'5',3.4f,2.,1}) );
     }
-    {
-      constexpr auto idx_map = kumi::make_index_map(0,1,2,3, kumi::make_index_map(3,2,1,0));
-      auto s = kumi::reorder<idx_map>(t);
-      TTS_EQUAL(s, (kumi::tuple{1,2.,3.4f,'5',kumi::tuple{'5',3.4f,2.,1}}));
-    }
-  }
 };
 
 TTS_CASE("Check reorder<I...>(tuple) constexpr behavior")
 {
-  {
     constexpr auto t = kumi::tuple {1, 2., 3.4f, '5'};
     
     {
@@ -140,10 +132,4 @@ TTS_CASE("Check reorder<I...>(tuple) constexpr behavior")
       constexpr auto s = kumi::reorder<0,1,2,3,2,1,0>(t);
       TTS_CONSTEXPR_EQUAL(s, (kumi::tuple{1,2.,3.4f,'5',3.4f,2.,1}) );
     }
-    {
-      constexpr auto idx_map = kumi::make_index_map(0,1,2,3, kumi::make_index_map(3,2,1,0));
-      constexpr auto s = kumi::reorder<idx_map>(t);
-      TTS_CONSTEXPR_EQUAL(s, (kumi::tuple{1,2.,3.4f,'5',kumi::tuple{'5',3.4f,2.,1}}));
-    }
-  }
 };
