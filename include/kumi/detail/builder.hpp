@@ -70,10 +70,10 @@ namespace kumi
     };
 
     //================================================================================================
-    //! @ingroup tuple
+    //! @ingroup product_types
     //! @class builder 
-    //! @brief Helper structure to build the correct output `product_type`. If the provided Typle
-    //!        is a not a record_type the builder will output a tuple otherwise a record. 
+    //! @brief Helper structure to build the correct output `product_type`. If the provided product_type
+    //!        is a record_type the builder will output a kumi::record otherwise a kumi::tuple. 
     //!
     //! builder provides a generic way of defining a kumi::product_type which depending on the 
     //! given semantic (product_type or record_type) will output respectively a kumi::tuple or a 
@@ -81,7 +81,6 @@ namespace kumi
     //!
     //! @tparam T the template template type to be built. 
     //================================================================================================
-
     template<kumi::product_type T>
     struct builder : builder_impl<std::remove_cvref_t<T>> 
     {

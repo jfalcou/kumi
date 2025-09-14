@@ -13,7 +13,7 @@ namespace kumi
   //! @ingroup reductions
   //! @brief Computes the sum of all elements.
   //!
-  //! @param t      Tuple to operate on.
+  //! @param t      Product Type to operate on.
   //! @param init   Optional initial value of the sum.
   //! @return       The value of `get<0>(t) + ... + get<N-1>(t) + init`
   //!
@@ -44,7 +44,7 @@ namespace kumi
   //! @ingroup reductions
   //! @brief Computes the sum of all elements.
   //!
-  //! @param t      Tuple to operate on.
+  //! @param t      Product Type to operate on.
   //! @return       The value of `get<0>(t) + ... + get<N-1>(t)`
   //!
   //! ## Helper type
@@ -74,7 +74,7 @@ namespace kumi
   //! @ingroup reductions
   //! @brief Computes the product of all elements.
   //!
-  //! @param t      Tuple to operate on
+  //! @param t      Product Type to operate on
   //! @param init   Initial value of the product
   //! @return The value of `get<0>(t) * ... * get<N-1>(t) * init`
   //!
@@ -105,7 +105,7 @@ namespace kumi
   //! @ingroup reductions
   //! @brief Computes the product of all elements.
   //!
-  //! @param t      Tuple to operate on
+  //! @param t      Product Type to operate on
   //! @return The value of `get<0>(t) * ... * get<N-1>(t)`
   //!
   //! ## Helper type
@@ -135,7 +135,7 @@ namespace kumi
   //! @ingroup reductions
   //! @brief Computes the bitwise AND of all elements.
   //!
-  //! @param t      Tuple to operate on
+  //! @param t      Product Type to operate on
   //! @param init   Initial value of the product
   //! @return The value of `get<0>(t) & ... & get<N-1>(t) & init`
   //!
@@ -166,7 +166,7 @@ namespace kumi
   //! @ingroup reductions
   //! @brief Computes the bitwise AND of all elements.
   //!
-  //! @param t      Tuple to operate on
+  //! @param t      Product Type to operate on
   //! @return The value of `get<0>(t) & ... & get<N-1>(t)`
   //!
   //! ## Helper type
@@ -196,7 +196,7 @@ namespace kumi
   //! @ingroup reductions
   //! @brief Computes the bitwise OR of all elements.
   //!
-  //! @param t      Tuple to operate on
+  //! @param t      Product Type to operate on
   //! @param init   Initial value of the product
   //! @return The value of `get<0>(t) | ... | get<N-1>(t) & init`
   //!
@@ -227,7 +227,7 @@ namespace kumi
   //! @ingroup reductions
   //! @brief Computes the bitwise OR of all elements.
   //!
-  //! @param t      Tuple to operate on
+  //! @param t      Product Type to operate on
   //! @return The value of `get<0>(t) | ... | get<N-1>(t)`
   //!
   //! ## Helper type

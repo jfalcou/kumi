@@ -11,10 +11,10 @@ namespace kumi
 {
   //================================================================================================
   //! @ingroup generators
-  //! @brief Converts a tuple of tuples into a tuple of all elements.
+  //! @brief Converts a product type of product types into a product type of all elements.
   //!
-  //! @param ts Tuple to flatten
-  //! @return A tuple composed of all elements of t flattened non-recursively
+  //! @param ts Product Type to flatten
+  //! @return A product type composed of all elements of t flattened non-recursively
   //!
   //! ## Helper type
   //! @code
@@ -54,15 +54,15 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief Recursively converts a tuple of tuples into a tuple of all elements.
+  //! @brief Recursively converts a product type of product types into a product type of all elements.
   //!
-  //! Recursively converts a tuple of tuples `t` into a tuple of all elements of said tuples.
-  //! If the Callable object f is provided, non-tuple elements are processed by `f` before being
+  //! Recursively converts a product type of product types `t` into a product type of all elements of said product types.
+  //! If the Callable object f is provided, non-product type elements are processed by `f` before being
   //! inserted.
   //!
-  //! @param ts Tuple to flatten
-  //! @param f  Optional Callable object to apply when a sub-tuple is flattened
-  //! @return A tuple composed of all elements of t flattened recursively
+  //! @param ts Product Type to flatten
+  //! @param f  Optional Callable object to apply when a sub-product type is flattened
+  //! @return A product type composed of all elements of t flattened recursively
   //!
   //! ## Helper type
   //! @code
@@ -150,10 +150,10 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief Convert a kumi::product_type to a flat tuple of pointers to each its components.
+  //! @brief Convert a kumi::product_type to a flat product type of pointers to each its components.
   //!
-  //! @param ts Tuple to convert
-  //! @return A flat tuple composed of pointers to each elements of t.
+  //! @param ts Product Type to convert
+  //! @return A flat product type composed of pointers to each elements of t.
   //!
   //! ## Helper type
   //! @code

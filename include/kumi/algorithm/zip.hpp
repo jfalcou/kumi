@@ -61,13 +61,13 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief Constructs a tuple where the ith element is the tuple of all ith elements of ts...
+  //! @brief Constructs a product type where the ith element is the product_type of all ith elements of ts...
   //!
-  //! @param t0 Tuple to convert
-  //! @param ts Tuples to convert
-  //! @return The tuple of all combination of elements from t0, ts...
+  //! @param t0 Product Type to convert
+  //! @param ts Product Types to convert
+  //! @return The product type of all combination of elements from t0, ts...
   //!
-  //! @ note Every inner tuple should be of the same sizes, otherwise see `zip_min` or `zip_max`
+  //! @note Every inner tuple should be of the same sizes, otherwise see `zip_min` or `zip_max`
   //!
   //! ## Helper type
   //! @code
@@ -94,13 +94,13 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief Constructs a tuple where the ith element is the tuple of all ith elements of ts...
+  //! @brief Constructs a product type where the ith element is the product type of all ith elements of ts...
   //!
-  //! @param t0 Tuple to convert
-  //! @param ts Tuples to convert
+  //! @param t0 Product Type to convert
+  //! @param ts Product Types to convert
   //! @return The tuple of all combination of elements from t0, ts...
   //!
-  //! @ note `zip_min` truncates tuples based on the smallest size.
+  //! @note `zip_min` truncates product types based on the smallest size.
   //!
   //! ## Helper type
   //! @code
@@ -128,11 +128,11 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief Constructs a tuple where the ith element is the tuple of all ith elements of ts...
+  //! @brief Constructs a product type where the ith element is the product type of all ith elements of ts...
   //!
-  //! @param t0 Tuple to convert
-  //! @param ts Tuples to convert
-  //! @return The tuple of all combination of elements from t0, ts...
+  //! @param t0 Product Type to convert
+  //! @param ts Product Types to convert
+  //! @return The product type of all combination of elements from t0, ts...
   //!
   //! @ note `zip_max` fills missing elements to reach the biggest tuple size.
   //!

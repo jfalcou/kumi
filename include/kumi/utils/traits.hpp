@@ -317,7 +317,7 @@ namespace kumi
   template<std::size_t I, typename T> using raw_element_t = unwrap_field_capture_t<element_t<I,T>>;
 
   //================================================================================================
-  //! @ingroup traits
+  //! @ingroup record_traits
   //! @brief Provides indexed access to the names of the elements of a kumi::record_type. 
   //!
   //! @tparam I Index of the type to retrieve

@@ -16,7 +16,7 @@ namespace kumi
   //! @brief Reverse elements of a kumi::product_type
   //!
   //! @param  t kumi::product_type to reverse
-  //! @return A tuple equivalent to kumi::make_tuple(t[index<size_v<T> - 1 - Idx>]...);
+  //! @return A kumi::product_type equivalent to (t[index<size_v<T> - 1 - Idx>]...);
   //!
   //! ## Helper type
   //! @code

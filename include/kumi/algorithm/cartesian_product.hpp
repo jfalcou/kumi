@@ -41,8 +41,8 @@ namespace kumi
   //================================================================================================
   //! @ingroup generators
   //! @brief  Return the Cartesian Product of all elements of its arguments product types
-  //! @param  ts Tuples to process
-  //! @return a tuple containing all the tuple build from all combination of all ts' elements
+  //! @param  ts Product Type to process
+  //! @return a Product Type containing all the product types build from all combination of all ts' elements
   //!
   //! ## Helper type
   //! @code

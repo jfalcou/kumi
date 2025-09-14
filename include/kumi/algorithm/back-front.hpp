@@ -13,10 +13,10 @@ namespace kumi
 {
   //================================================================================================
   //! @ingroup utility
-  //! @brief Retrieves the front of a tuple
+  //! @brief Retrieves the front of a product type
   //!
-  //! @param t Base tuple
-  //! @return A reference to the first element of the tuple `t`
+  //! @param t Base product type
+  //! @return A reference to the first element of the product type `t`
   //!
   //! ## Helper type
   //! @code
@@ -42,10 +42,10 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup utility
-  //! @brief Retrieves the back of a tuple
+  //! @brief Retrieves the back of a product type
   //!
-  //! @param t Base tuple
-  //! @return A reference to the last element of the tuple `t`
+  //! @param t Base product type
+  //! @return A reference to the last element of the product type `t`
   //!
   //! ## Helper type
   //! @code

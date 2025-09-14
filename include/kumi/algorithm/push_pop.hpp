@@ -14,11 +14,11 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief Constructs a tuple by adding a value v at the beginning of t
+  //! @brief Constructs a product type by adding a value v at the beginning of t
   //!
-  //! @param t Base tuple
+  //! @param t Base product type
   //! @param v Value to insert in front of t
-  //! @return A tuple composed of v followed by all elements of t in order.
+  //! @return A product type composed of v followed by all elements of t in order.
   //!
   //! ## Helper type
   //! @code
@@ -50,8 +50,8 @@ namespace kumi
   //! @ingroup generators
   //! @brief Remove the first (if any) element of a kumi::product_type.
   //!
-  //! @param t Base tuple
-  //! @return A tuple composed of all elements of t except its first. Has no effect on empty t.
+  //! @param t Base product type
+  //! @return A product type composed of all elements of t except its first. Has no effect on empty t.
   //!
   //! ## Helper type
   //! @code
@@ -78,11 +78,11 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief Constructs a tuple by adding a value v at the end of t
+  //! @brief Constructs a product type by adding a value v at the end of t
   //!
-  //! @param t Base tuple
+  //! @param t Base product type
   //! @param v Value to insert in front of t
-  //! @return A tuple composed of all elements of t in order followed by v.
+  //! @return A product type composed of all elements of t in order followed by v.
   //!
   //! ## Helper type
   //! @code
@@ -114,8 +114,8 @@ namespace kumi
   //! @ingroup generators
   //! @brief Remove the last (if any) element of a kumi::product_type.
   //!
-  //! @param t Base tuple
-  //! @return A tuple composed of all elements of t except its last. Has no effect on empty t.
+  //! @param t Base product type
+  //! @return A product type composed of all elements of t except its last. Has no effect on empty t.
   //!
   //! ## Helper type
   //! @code

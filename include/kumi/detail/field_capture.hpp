@@ -20,10 +20,10 @@ namespace kumi
   //! @class field_capture
   //! @brief Named wrapper over a type.
   //!
-  //! kumi::field_capture provides a way to define named fields in a kumi::tuple.
+  //! kumi::field_capture provides a way to define named fields in a kumi::product_type.
   //!
   //! @tparam ID a compile time string that is used to retrieve the field.
-  //! @tparam T the type of the value that is wrapped.
+  //! @tparam T the type of the wrapepd value.
   //================================================================================================
   template<kumi::str ID, typename T>
   struct field_capture
@@ -39,7 +39,6 @@ namespace kumi
     
     //==============================================================================================
     /// @ingroup product_types 
-    //! @related kumi::field_capture
     //! @brief Inserts a kumi::field_capture in an output stream
     //==============================================================================================
     friend std::ostream& operator<<(std::ostream& os, field_capture const& w)
@@ -68,7 +67,6 @@ namespace kumi
   //! @tparam   U The type to unwrap 
   //! @param    u A forwarding reference to the input object.
   //! @return   A forwarded value of the unwrapped object.
-  //! @related kumi::field_capture
   //================================================================================================
   template<typename U>
   KUMI_ABI constexpr decltype(auto) unwrap_field_value(U&& u) noexcept
@@ -98,7 +96,7 @@ namespace kumi
   //! @brief Named wrapper used to instantiate a kumi::field_capture.
   //!
   //! kumi::field_name provides a way to instantiate a kumi::field_capture using
-  //! a user defined literal prefix.
+  //! a user defined literal suffix.
   //!
   //! @tparam ID a compile time string that is used to name the field.
   //================================================================================================
@@ -128,7 +126,6 @@ namespace kumi
 
     //==============================================================================================
     /// @ingroup product_types 
-    //! @related kumi::field_name
     //! @brief Inserts a kumi::field_name in an output stream
     //==============================================================================================
     friend std::ostream& operator<<(std::ostream& os, field_name const&)

@@ -13,18 +13,18 @@ namespace kumi
 {
   //================================================================================================
   //! @ingroup transforms
-  //! @brief Apply the Callable object f on each tuples' elements
+  //! @brief Apply the Callable object f on each product types' elements
   //!
-  //! Applies the given function to all the tuples passed as arguments and stores the result in
-  //! another tuple, keeping the original elements order.
+  //! Applies the given function to all the product types passed as arguments and stores the result in
+  //! another product type, keeping the original elements order.
   //!
-  //! @note Does not participate in overload resolution if tuples' size are not equal or if `f`
-  //!       can't be called on each tuple's elements.
+  //! @note Does not participate in overload resolution if product types' size are not equal or if `f`
+  //!       can't be called on each product type's elements.
   //!
   //! @param f      Callable function to apply
-  //! @param t0     Tuple  to operate on
-  //! @param others Tuples to operate on
-  //! @return The tuple of `f` calls results.
+  //! @param t0     Product Type  to operate on
+  //! @param others Product Type to operate on
+  //! @return The product type of `f` calls results.
   //!
   //! ## Helper type
   //! @code

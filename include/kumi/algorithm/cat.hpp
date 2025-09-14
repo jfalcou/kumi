@@ -13,10 +13,10 @@ namespace kumi
 {
   //================================================================================================
   //! @ingroup generators
-  //! @brief Concatenates tuples in a single one
+  //! @brief Concatenates product types in a single one
   //!
-  //! @param ts Tuples to concatenate
-  //! @return   A tuple made of all element of all input tuples in order
+  //! @param ts Product Types to concatenate
+  //! @return   A product type made of all element of all input product type in order
   //!
   //! ## Helper type
   //! @code

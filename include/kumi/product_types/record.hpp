@@ -150,7 +150,7 @@ namespace kumi
         return tuple{ field_name<unwrap_name_v<Ts>>{}... };
     };
 
-    /// Returns references to the values of the element in a kumi::record
+    /// Return references to the values of the elements of a kumi::record as a kumi::tuple
     [[nodiscard]] KUMI_ABI constexpr auto values() noexcept
     {
         return [&]<std::size_t...I>(std::index_sequence<I...>)
@@ -173,7 +173,7 @@ namespace kumi
     //==============================================================================================
 
     //==============================================================================================
-    //! @brief Replaces the contents of the record with the contents of another record.
+    //! @brief Replaces the content of the record with the content of another record.
     //! @param other kumi::record to copy or move from
     //! @return `*this`
     //==============================================================================================
@@ -368,7 +368,6 @@ namespace kumi
   //! @tparam   I Compile-time index of the field to access
   //! @param    t Record to index
   //! @return   A reference to the selected field of t.
-  //! @related kumi::record
   //!
   //! ## Example:
   //! @include doc/record/get.cpp
@@ -412,7 +411,6 @@ namespace kumi
   //! @tparam   Name Non type template parameter name of the field to access
   //! @param    t Record to index
   //! @return   A reference to the element of the selected field of t.
-  //! @related kumi::record
   //!
   //! ## Example:
   //! @include doc/record/named_get.cpp

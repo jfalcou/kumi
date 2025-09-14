@@ -37,11 +37,11 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief  Partition a tuple over a predicate
+  //! @brief  Partition a product type over a predicate
   //! @tparam Pred Compile-time predicate
-  //! @param  tup Tuple to process
-  //! @return A tuple containing the tuple of all values which types satisfies `Pred` and the
-  //!         the tuple of all values which types does not satisfy `Pred`.
+  //! @param  tup Product Type to process
+  //! @return A tuple containing the product type of all values which types satisfies `Pred` and the
+  //!         the product type of all values which types does not satisfy `Pred`.
   //!
   //! ## Helper type
   //! @code
@@ -77,10 +77,10 @@ namespace kumi
     
   //================================================================================================
   //! @ingroup generators
-  //! @brief  Filters a tuple over a predicate
+  //! @brief  Filters a product type over a predicate
   //! @tparam Pred Compile-time predicate
-  //! @param  tup Tuple to process
-  //! @return A tuple containing all values which types satisfies `Pred`.
+  //! @param  tup Product Type to process
+  //! @return A product type containing all values which types satisfies `Pred`.
   //!
   //! ## Helper type
   //! @code
@@ -112,10 +112,10 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief  Filters a tuple over a predicate
+  //! @brief  Filters a product type over a predicate
   //! @tparam Pred Compile-time predicate
-  //! @param  tup Tuple to process
-  //! @return A tuple containing all values which types does not satisfy `Pred`.
+  //! @param  tup Product Type to process
+  //! @return A product type containing all values which types does not satisfy `Pred`.
   //!
   //! ## Helper type
   //! @code
