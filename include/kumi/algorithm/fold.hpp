@@ -14,7 +14,7 @@ namespace kumi
   //! @brief Computes the generalized sum of all elements using a tail recursive call.
   //!
   //! @param f      Binary callable function to apply
-  //! @param t      Tuple to operate on
+  //! @param t      Product Type to operate on
   //! @param init   Initial value of the sum
   //! @return   The value of `f( f( f(init, get<0>(t)), ...), get<N-1>(t))`
   //!
@@ -55,7 +55,7 @@ namespace kumi
   //! @brief Computes the generalized associative sum of all elements using a tail recursive call.
   //!
   //! @param f      Associative binary callable function to apply
-  //! @param t      Tuple of size 1 or more to operate on
+  //! @param t      Product Type of size 1 or more to operate on
   //! @return   The value of `f( f( f(get<0>(t), get<1>(t)), ...), get<N-1>(t))`
   //!
   //! ## Helper type
@@ -92,7 +92,7 @@ namespace kumi
   //! @brief Computes the generalized sum of all elements using a non-tail recursive call.
   //!
   //! @param f      Binary callable function to apply
-  //! @param t      Tuple to operate on
+  //! @param t      Product Type to operate on
   //! @param init   Initial value of the sum
   //! @return   The value of `f(get<0>(t), f(... , f(get<N-1>(t), init))`
   //!
@@ -133,7 +133,7 @@ namespace kumi
   //! @brief Computes the generalized associative sum of all elements using a non-tail recursive call.
   //!
   //! @param f      Associative binary callable function to apply
-  //! @param t      Tuple of size 1 or more to operate on
+  //! @param t      Product Type of size 1 or more to operate on
   //! @return   The value of `f(get<0>(t), f(... , f(get<N-2>(t), get<N-1>(t)))`
   //!
   //! ## Helper type

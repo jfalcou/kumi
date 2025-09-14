@@ -103,7 +103,7 @@ namespace kumi
   concept indexer = index_map<T> || std::integral<std::remove_cvref_t<T>>;
 
   //================================================================================================
-  //! @ingroup concepts
+  //! @ingroup tuple_concepts
   //! @brief Concept specifying is Product Type which types are all the same
   //!
   //! A type `T` models `kumi::homogenous_product_type` if it models `kumi::product_type` and
@@ -199,8 +199,8 @@ namespace kumi
 
    //================================================================================================
   //! @ingroup concepts
-  //! @brief Concept specifying if a parameter pack only holds kumi::field_captures each of their   
-  //!        each of their names are unique!
+  //! @brief Concept specifying if a parameter pack only holds kumi::field_captures and  
+  //!        each of their names are unique.
   //!
   //! @note  If there are no element in the parameter pack the concept returns true
   //================================================================================================
@@ -234,7 +234,7 @@ namespace kumi
                        && _::has_same_field_names<std::remove_cvref_t<T>, std::remove_cvref_t<U>>();
 
   //================================================================================================
-  //! @ingroup concepts
+  //! @ingroup record_concepts
   //! @brief Concept specifying if two product types are comparable by matching name 
   //!
   //! A type `T` models `kumi::named_equality_comparable<T,U>` if it's a product_type that satisfies 
