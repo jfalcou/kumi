@@ -13,11 +13,11 @@ namespace kumi
 {
   //================================================================================================
   //! @ingroup generators
-  //! @brief Extracts a sub-tuple from a product type
+  //! @brief Extracts a sub product type from a product type
   //!
   //! @note Does not participate in overload resolution if `I0` and `I1` do not verify that
   //!       `0 <= I0 <= I1 <= size_v<T>`.
-  //! @param  t  Tuple to extract from
+  //! @param  t  Product Type to extract from
   //! @param  i0 Compile-time index of the first element to extract.
   //! @param  i1 Compile-time index past the last element to extract. By default, `i1` is equal to
   //!         `size_v<T>`.
@@ -65,16 +65,16 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief Split a tuple into two
+  //! @brief Split a product type into two
   //!
-  //! Split a kumi::tuple in two kumi::tuple containing all the elements before and after
-  //! a given index.
+  //! Split a @ref kumi::product_type in two kumi::product_type containing all the elements before
+  //! and after a given index.
   //!
   //! @note Does not participate in overload resolution if `I0` is not in `[0, sizeof...(Ts)[`.
   //!
-  //! @param  t Tuple to split.
+  //! @param  t Product Type to split.
   //! @param  i0 Compile-time index of the split pivot.
-  //! @return A new kumi::tuple containing the two sub-tuple cut at index I.
+  //! @return A new kumi::tuple containing the two sub product types cut at index I.
   //!
   //! ## Helper type
   //! @code

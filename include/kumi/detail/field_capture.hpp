@@ -19,10 +19,10 @@ namespace kumi
   //! @class field_capture
   //! @brief Named wrapper over a type.
   //!
-  //! kumi::field_capture provides a way to define named fields in a kumi::tuple.
+  //! kumi::field_capture provides a way to define named fields in a kumi::product_type.
   //!
   //! @tparam ID a compile time string that is used to retrieve the field.
-  //! @tparam T the type of the value that is wrapped.
+  //! @tparam T the type of the wrapepd value.
   //================================================================================================
   template<str ID, typename T>
   struct field_capture
@@ -38,7 +38,6 @@ namespace kumi
     
     //==============================================================================================
     /// @ingroup product_types 
-    //! @related kumi::field_capture
     //! @brief Inserts a kumi::field_capture in an output stream
     //==============================================================================================
     template<typename CharT, typename Traits>

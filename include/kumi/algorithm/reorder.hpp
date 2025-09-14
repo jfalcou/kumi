@@ -50,7 +50,7 @@ namespace kumi
   //!
   //! @tparam Idx     Reordered index of elements
   //! @param  t kumi::product_type to reorder
-  //! @return A tuple equivalent to kumi::make_tuple(t[index<Idx>]...);
+  //! @return A kumi::product_type equivalent to product_type(t[index<Idx>]...);
   //!
   //! ## Helper type
   //! @code
