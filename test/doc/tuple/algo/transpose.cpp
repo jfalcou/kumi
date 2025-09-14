@@ -12,6 +12,6 @@ int main()
                             , kumi::tuple{ 2, 'b', 0.01  }
                             };
 
-  auto r = kumi::transpose(values );
+  auto r = kumi::transpose( values );
   std::cout << r << "\n";
 }

@@ -235,7 +235,7 @@ namespace kumi
 namespace kumi
 {
   //================================================================================================
-  //! @ingroup traits
+  //! @ingroup tuple_traits
   //! @brief Detects if a given kwk::product_type instance is homogeneous
   //!
   //! @tparam T kumi::product_type to inspect
@@ -328,12 +328,14 @@ namespace kumi
   template<std::size_t I, typename T> using raw_member_t = typename raw_member<I, T>::type;
 
   //================================================================================================
-  //! @ingroup traits
-  //! @brief Provides indexed access to the types of the elements of a kumi::product_type and
-  //!                 unwraps the returned field for kumi::record_type.
+  //! @ingroup record_traits
+  //! @brief Provides indexed access to the types of the elements of a product type and 
+  //!                 unwraps the returned field_capture for record type.
+  //!
+  //! @note is equivalent to element_t on product type that doesnt model record type.
   //!
   //! @tparam I Index of the type to retrieve
-  //! @tparam T kumi::product_type to access
+  //! @tparam T Product type to access
   //!
   //! ## Helper type
   //! @code

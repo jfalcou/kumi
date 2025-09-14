@@ -17,6 +17,8 @@ namespace kumi
   //! @class str
   //! @brief Static string used to create named fields.
   //!
+  //! @note the `.` character is reserved for internal manipulation.
+  //!
   //! kumi::str provides a way to define compile time names.
   //================================================================================================
   struct str

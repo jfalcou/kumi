@@ -45,7 +45,6 @@ namespace kumi
         constexpr auto uz = []<typename N>(N const&, auto&& u) {
           return apply([](auto&&... m) { return builder<T>::make(get<N::value>(KUMI_FWD(m))...); }, KUMI_FWD(u));
         };
-
         return kumi::make_tuple(uz(index<I>, KUMI_FWD(t))...);
       }(std::make_index_sequence<size_v<raw_element_t<0, T>>>());
     }

@@ -16,7 +16,7 @@ namespace kumi
   //! @class unit
   //! @brief A type representing the product of no type also called the unit type
   //!
-  //! kumi::unit provides a way to define the unit type in a constexpr friendly manner .
+  //! kumi::unit provides a way to define the unit type in a constexpr friendly manner.
   //================================================================================================
   struct unit
   {

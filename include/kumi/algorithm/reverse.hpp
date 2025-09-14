@@ -11,19 +11,19 @@ namespace kumi
 {
   //================================================================================================
   //! @ingroup generators
-  //! @brief Reverse elements of a kumi::product_type
+  //! @brief Reverse elements of a product type
   //!
-  //! @param  t kumi::product_type to reverse
-  //! @return A tuple equivalent to kumi::make_tuple(t[index<size_v<T> - 1 - Idx>]...);
+  //! @param  t The product type to reverse
+  //! @return A product type equivalent to product_type(t[index<size_v<T> - 1 - Idx>]...);
   //!
   //! ## Helper type
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<product_type Tuple> struct reverse;
+  //!   template<product_type T> struct reverse;
   //!
-  //!   template<product_type Tuple>
-  //!   using reverse_t = typename reverse<Tuple>::type;
+  //!   template<product_type T>
+  //!   using reverse_t = typename reverse<T>::type;
   //! }
   //! @endcode
   //!
@@ -33,24 +33,24 @@ namespace kumi
   //! @include doc/tuple/algo/reverse.cpp
   //! @include doc/record/algo/reverse.cpp
   //================================================================================================
-  template<concepts::product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto reverse(Tuple&& t)
+  template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto reverse(T&& t)
   {
-    if constexpr (concepts::sized_product_type<Tuple, 0>) return builder<Tuple>::make();
+    if constexpr (concepts::sized_product_type<T, 0>) return builder<T>::make();
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return builder<Tuple>::make(get<(size_v<Tuple> - 1 - I)>(KUMI_FWD(t))...);
-      }(std::make_index_sequence<size<Tuple>::value>());
+        return builder<T>::make(get<(size_v<T> - 1 - I)>(KUMI_FWD(t))...);
+      }(std::make_index_sequence<size<T>::value>());
     }
   }
 
   namespace result
   {
-    template<concepts::product_type Tuple> struct reverse
+    template<concepts::product_type T> struct reverse
     {
-      using type = decltype(kumi::reverse(std::declval<Tuple>()));
+      using type = decltype(kumi::reverse(std::declval<T>()));
     };
 
-    template<concepts::product_type Tuple> using reverse_t = typename reverse<Tuple>::type;
+    template<concepts::product_type T> using reverse_t = typename reverse<T>::type;
   }
 }

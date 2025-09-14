@@ -40,11 +40,11 @@ namespace kumi
   //! Computes the generalized sum of products of the elements of two product types. By default,
   //! `+` and `*` is used.
   //!
-  //! @note Does not participate in overload resolution if tuples' size are not equal or if any of
-  //!       the binary operations can't be applied on the tuples' elements.
+  //! @note Does not participate in overload resolution if product types' size are not equal or if any of
+  //!       the binary operations can't be applied on the product types' elements.
   //!
-  //! @param s1         First tuple to operate on
-  //! @param s2         Second tuple to operate on
+  //! @param s1         First product type to operate on
+  //! @param s2         Second product type to operate on
   //! @param init       Initial value
   //! @param sum        Binary callable function to use as the sum operations
   //! @param prod       Binary callable function to use as the product operations
@@ -72,7 +72,7 @@ namespace kumi
   //! }
   //! @endcode
   //!
-  //! Computes the return type of a call to kumi::map
+  //! Computes the return type of a call to kumi::inner_product
   //!
   //! ## Examples:
   //! @include doc/tuple/algo/inner_product.cpp

@@ -57,7 +57,7 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief Constructs a tuple where the ith element is the prduct type of all ith elements of ts...
+  //! @brief Constructs a tuple where the ith element is the product type of all ith elements of ts...
   //!
   //! @param t0 Product type to convert
   //! @param ts Product types to convert
@@ -91,7 +91,7 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief Constructs a tuple where the ith element is the prudct type of all ith elements of ts...
+  //! @brief Constructs a tuple where the ith element is the product type of all ith elements of ts...
   //!
   //! @param t0 Product type to convert
   //! @param ts Product types to convert

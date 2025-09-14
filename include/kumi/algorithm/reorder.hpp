@@ -35,7 +35,7 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief Reorder elements of a kumi::product_type
+  //! @brief Reorder elements of a product type
   //!
   //! This function does not participate in overload resolution if any Idx is outside [0, size_v<T>[.
   //!
@@ -45,17 +45,17 @@ namespace kumi
   //! @note reorder(tuple) works and is equivalent to reorder<>(tuple)
   //!
   //! @tparam Idx     Reordered index of elements
-  //! @param  t kumi::product_type to reorder
-  //! @return A tuple equivalent to kumi::make_tuple(t[index<Idx>]...);
+  //! @param  t The product type to reorder
+  //! @return A product type equivalent to product_type(t[index<Idx>]...);
   //!
   //! ## Helper type
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<product_type Tuple,std::size_t... Idx> struct reorder;
+  //!   template<product_type T,std::size_t... Idx> struct reorder;
   //!
-  //!   template<product_type Tuple,std::size_t... Idx>
-  //!   using reorder_t = typename reorder<Tuple,Idx...>::type;
+  //!   template<product_type T,std::size_t... Idx>
+  //!   using reorder_t = typename reorder<T,Idx...>::type;
   //! }
   //! @endcode
   //!
