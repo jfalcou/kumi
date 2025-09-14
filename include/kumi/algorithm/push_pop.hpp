@@ -11,11 +11,11 @@ namespace kumi
 {
   //================================================================================================
   //! @ingroup generators
-  //! @brief Constructs a tuple by adding a value v at the beginning of t
+  //! @brief Constructs a product type by adding a value v at the beginning of t
   //!
-  //! @param t Base tuple
+  //! @param t Base product type
   //! @param v Value to insert in front of t
-  //! @return A tuple composed of v followed by all elements of t in order.
+  //! @return A product type composed of v followed by all elements of t in order.
   //!
   //! ## Helper type
   //! @code
@@ -34,19 +34,20 @@ namespace kumi
   //! @include doc/tuple/algo/push_front.cpp
   //! @include doc/record/algo/push_front.cpp
   //================================================================================================
-  template<concepts::product_type T, typename V> [[nodiscard]] KUMI_ABI constexpr auto push_front(T&& t, V&& v)
+  template<concepts::product_type T, typename V> [[nodiscard]] KUMI_ABI constexpr auto push_front(T && t, V && v)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return builder<T>::make(KUMI_FWD(v), get<I>(KUMI_FWD(t))...);
+      return builder<Tuple>::make(KUMI_FWD(v), get<I>(KUMI_FWD(t))...);
     }(std::make_index_sequence<size_v<T>>());
   }
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief Remove the first (if any) element of a kumi::product_type.
+  //! @brief Remove the first (if any) element of a product type.
   //!
-  //! @param t Base tuple
-  //! @return A tuple composed of all elements of t except its first. Has no effect on empty t.
+  //! @param t Base product type
+  //! @return A product type composed of all elements of t except its first. Has no effect on empty 
+  //!         product types.
   //!
   //! ## Helper type
   //! @code
@@ -73,11 +74,11 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief Constructs a tuple by adding a value v at the end of t
+  //! @brief Constructs a product type by adding a value v at the end of t
   //!
-  //! @param t Base tuple
+  //! @param t Base product type
   //! @param v Value to insert in front of t
-  //! @return A tuple composed of all elements of t in order followed by v.
+  //! @return A product type composed of all elements of t in order followed by v.
   //!
   //! ## Helper type
   //! @code
@@ -107,8 +108,8 @@ namespace kumi
   //! @ingroup generators
   //! @brief Remove the last (if any) element of a kumi::product_type.
   //!
-  //! @param t Base tuple
-  //! @return A tuple composed of all elements of t except its last. Has no effect on empty t.
+  //! @param t Base product type
+  //! @return A product type composed of all elements of t except its last. Has no effect on empty t.
   //!
   //! ## Helper type
   //! @code

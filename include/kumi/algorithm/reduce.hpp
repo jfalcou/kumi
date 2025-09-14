@@ -591,6 +591,5 @@ namespace kumi
     template<concepts::product_type T, typename Value = void> using bit_or_t = typename bit_or<T, Value>::type;
 
     template<concepts::product_type T, typename Value = void> using bit_xor_t = typename bit_xor<T, Value>::type;
-
   }
 }

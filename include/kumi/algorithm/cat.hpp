@@ -14,7 +14,7 @@ namespace kumi
   //! @brief Concatenates product types in a single one
   //!
   //! @param ts Product types to concatenate
-  //! @return   A product type made of all element of all input product types in order
+  //! @return   A product type made of all element of all input product types in order.
   //!
   //! ## Helper type
   //! @code
