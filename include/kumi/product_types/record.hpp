@@ -330,7 +330,6 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup record
-  //! @related kumi::record
   //! @brief Creates a record object, deducing the target type from the types of arguments.
   //!
   //! @param ts	Zero or more lvalue arguments to construct the record from.
@@ -349,7 +348,6 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup record
-  //! @related kumi::record
   //! @brief Creates a kumi::record of references given a reference to a kumi::record_type.
   //!
   //! @param    r Record whose elements are to be referenced.  
