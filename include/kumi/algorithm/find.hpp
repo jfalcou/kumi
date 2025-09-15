@@ -19,15 +19,15 @@ namespace kumi
   //! ## Example:
   //! @include doc/locate.cpp
   //================================================================================================
-  template<typename Pred, product_type Tuple>
-  [[nodiscard]] KUMI_ABI constexpr auto locate( Tuple&& t, Pred p ) noexcept
+  template<typename Pred, product_type T>
+  [[nodiscard]] KUMI_ABI constexpr auto locate( T && t, Pred p ) noexcept
   {
     return kumi::apply([&](auto &&...m)
     {
       bool checks[] = { p(m)...  };
-      for(std::size_t i=0;i<size_v<Tuple>;++i)
+      for(std::size_t i=0;i<size_v<T>;++i)
         if(checks[i]) return i;
-      return size_v<Tuple>;
+      return size_v<T>;
     }, KUMI_FWD(t));
   }
 }
