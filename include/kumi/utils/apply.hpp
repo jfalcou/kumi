@@ -62,7 +62,7 @@ namespace kumi
   //! @include doc/record/apply.cpp
   //================================================================================================
   template<typename Function, product_type T>
-  KUMI_ABI constexpr decltype(auto) apply(Function &&f, T &&t)
+  KUMI_ABI constexpr decltype(auto) apply(Function && f, T && t)
   noexcept(_::supports_nothrow_apply<Function &&, T &&>)
   requires _::supports_apply<Function, T>
   {
@@ -107,7 +107,7 @@ namespace kumi
   namespace _
   {
       template<typename Function, record_type Record>
-      KUMI_ABI constexpr decltype(auto) apply_field(Function &&f, Record &&t)
+      KUMI_ABI constexpr decltype(auto) apply_field(Function && f, Record && t)
       {
           return [&]<std::size_t... I>(std::index_sequence<I...>) -> decltype(auto)
           {

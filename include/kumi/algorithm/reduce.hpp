@@ -34,7 +34,7 @@ namespace kumi
   //! @include doc/sum.cpp
   //================================================================================================
   template<product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto sum(T&& t, Value init)
+  [[nodiscard]] KUMI_ABI constexpr auto sum(T && t, Value init)
   {
     if constexpr( sized_product_type<T,0>) return init;
     else return kumi::apply( [init](auto &&... m) { return (m + ... + init); }, KUMI_FWD(t) );
@@ -64,7 +64,7 @@ namespace kumi
   //! @include doc/sum.cpp
   //================================================================================================
   template<product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto sum(T&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto sum(T && t)
   {
     if constexpr ( record_type<T> ) return sum( values_of(KUMI_FWD(t)) );
     else 
@@ -99,7 +99,7 @@ namespace kumi
   //! @include doc/prod.cpp
   //================================================================================================
   template<product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto prod(T&& t, Value init)
+  [[nodiscard]] KUMI_ABI constexpr auto prod(T && t, Value init)
   {
     if constexpr(sized_product_type<T,0>) return init;
     else return kumi::apply( [init](auto &&... m) { return (m * ... * init); }, KUMI_FWD(t) );
@@ -129,7 +129,7 @@ namespace kumi
   //! @include doc/prod.cpp
   //================================================================================================
   template<product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto prod(T&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto prod(T && t)
   {
     if constexpr ( record_type<T> ) return prod( values_of(KUMI_FWD(t)) );
     else
@@ -164,7 +164,7 @@ namespace kumi
   //! @include doc/bit_and.cpp
   //================================================================================================
   template<product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto bit_and(T&& t, Value init)
+  [[nodiscard]] KUMI_ABI constexpr auto bit_and(T && t, Value init)
   {
     if constexpr(sized_product_type<T,0>) return init;
     else return kumi::apply( [init](auto &&... m) { return (m & ... & init); }, KUMI_FWD(t) );
@@ -194,7 +194,7 @@ namespace kumi
   //! @include doc/bit_and.cpp
   //================================================================================================
   template<product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto bit_and(T&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto bit_and(T && t)
   {
     if constexpr ( record_type<T> ) return bit_and( values_of(KUMI_FWD(t)) );
     else
@@ -229,7 +229,7 @@ namespace kumi
   //! @include doc/bit_or.cpp
   //================================================================================================
   template<product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto bit_or(T&& t, Value init)
+  [[nodiscard]] KUMI_ABI constexpr auto bit_or(T && t, Value init)
   {
     if constexpr(sized_product_type<T,0>) return init;
     else return kumi::apply( [init](auto &&... m) { return (m | ... | init); }, KUMI_FWD(t) );

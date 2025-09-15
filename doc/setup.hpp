@@ -5,6 +5,15 @@
   @page  setup  Setup
 
   @tableofcontents
+  @section prerequisit Pre-requisites
+
+  **KUMI** requires a C++20 compliant compiler. Here is the current minimal compiler version supported:
+
+  | Compiler       | Version        |
+  | -------------- | -------------- |
+  | g++            | 14  or above   |
+  | clang++        | 19  or above   |
+  | MSVC           | 19  or above   |
 
   @section setup-source Install from the source
 
