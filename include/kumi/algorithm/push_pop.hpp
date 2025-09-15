@@ -73,7 +73,7 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto pop_front(T && t)
   {
     if constexpr(sized_product_type_or_more<T,1>) return extract(KUMI_FWD(t), index<1>);
-    else                                              return _::builder<T>::make();
+    else                                          return _::builder<T>::make();
   }
 
   //================================================================================================
@@ -137,7 +137,7 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto pop_back(T && t)
   {
     if constexpr(sized_product_type_or_more<T,1>) return extract(KUMI_FWD(t), index<0>, index<size_v<T>-1>);
-    else                                              return _::builder<T>::make();
+    else                                          return _::builder<T>::make();
   }
 
   namespace result

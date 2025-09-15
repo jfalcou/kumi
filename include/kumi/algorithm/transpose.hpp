@@ -13,10 +13,10 @@ namespace kumi
 {
   //================================================================================================
   //! @ingroup generators
-  //! @brief Transpose a kumi::product_type of kumi::product_type by shifting elements in their transposed position
+  //! @brief Transpose a product type of product type by shifting elements in their transposed position
   //!
-  //! @param t A kumi::product_type to transpose
-  //! @return A kumi::product_type containing the transposed elements of t.
+  //! @param t A product type to transpose
+  //! @return A product type containing the transposed elements of t.
   //!
   //! ## Helper type
   //! @code

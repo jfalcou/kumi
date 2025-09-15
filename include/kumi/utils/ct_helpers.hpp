@@ -62,7 +62,7 @@ namespace kumi
     //! @tparam ID the compile time name to build.
     //==============================================================================================
     template<kumi::str ID>
-    inline constexpr auto field = kumi::field_name<ID>{};
+    inline constexpr kumi::field_name<ID> field = {};
     
     //==============================================================================================
     //! @ingroup utility 

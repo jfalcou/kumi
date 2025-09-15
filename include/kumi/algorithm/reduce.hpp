@@ -34,7 +34,7 @@ namespace kumi
   //! @include doc/sum.cpp
   //================================================================================================
   template<product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto sum(T&& t, Value init)
+  [[nodiscard]] KUMI_ABI constexpr auto sum(T && t, Value init)
   {
     if constexpr( sized_product_type<T,0>) return init;
     else return kumi::apply( [init](auto &&... m) { return (m + ... + init); }, KUMI_FWD(t) );
@@ -64,7 +64,7 @@ namespace kumi
   //! @include doc/sum.cpp
   //================================================================================================
   template<product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto sum(T&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto sum(T && t)
   {
     auto&& [head,tail] = kumi::split(KUMI_FWD(t), index<1>);
     return sum(tail, get<0>(head));
@@ -95,7 +95,7 @@ namespace kumi
   //! @include doc/prod.cpp
   //================================================================================================
   template<product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto prod(T&& t, Value init)
+  [[nodiscard]] KUMI_ABI constexpr auto prod(T && t, Value init)
   {
     if constexpr(sized_product_type<T,0>) return init;
     else return kumi::apply( [init](auto &&... m) { return (m * ... * init); }, KUMI_FWD(t) );
@@ -125,7 +125,7 @@ namespace kumi
   //! @include doc/prod.cpp
   //================================================================================================
   template<product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto prod(T&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto prod(T && t)
   {
     auto&& [head,tail] = split(KUMI_FWD(t), index<1>);
     return prod(tail, get<0>(head));
@@ -156,7 +156,7 @@ namespace kumi
   //! @include doc/bit_and.cpp
   //================================================================================================
   template<product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto bit_and(T&& t, Value init)
+  [[nodiscard]] KUMI_ABI constexpr auto bit_and(T && t, Value init)
   {
     if constexpr(sized_product_type<T,0>) return init;
     else return kumi::apply( [init](auto &&... m) { return (m & ... & init); }, KUMI_FWD(t) );
@@ -186,7 +186,7 @@ namespace kumi
   //! @include doc/bit_and.cpp
   //================================================================================================
   template<product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto bit_and(T&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto bit_and(T && t)
   {
     auto&& [head,tail] = split(KUMI_FWD(t), index<1>);
     return bit_and(tail, get<0>(head));
@@ -217,7 +217,7 @@ namespace kumi
   //! @include doc/bit_or.cpp
   //================================================================================================
   template<product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto bit_or(T&& t, Value init)
+  [[nodiscard]] KUMI_ABI constexpr auto bit_or(T && t, Value init)
   {
     if constexpr(sized_product_type<T,0>) return init;
     else return kumi::apply( [init](auto &&... m) { return (m | ... | init); }, KUMI_FWD(t) );

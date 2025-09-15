@@ -72,7 +72,7 @@ namespace kumi
   }
 
   //================================================================================================
-  //! @ingroup transforms
+  //! @ingroup tuple_transforms
   //! @brief Applies the Callable object f on each element of a kumi::product_type and its index.
   //!
   //! @note This function does not take part in overload resolution if `f` can't be applied to the
@@ -113,11 +113,11 @@ namespace kumi
   }
  
   //================================================================================================
-  //! @ingroup transforms
+  //! @ingroup record_transforms
   //! @brief Applies the Callable object f on each element of a kumi::record_type and its field.
   //!
   //! @note This function does not take part in overload resolution if `f` can't be applied to the
-  //!       elements of `t` and/or `ts` and a `kumi::field_capture`.
+  //!       elements of `t` and those of `ts`. This function cannot be applied to `kumi::tuple`
   //!
   //! @param f	  Callable object to be invoked
   //! @param t    kumi::record_type whose elements to be used as arguments to f

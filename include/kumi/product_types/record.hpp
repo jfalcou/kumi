@@ -43,6 +43,7 @@ namespace kumi
     //==============================================================================================
 
     //==============================================================================================
+    //! @ingroup record
     //! @brief Extracts the Ith field from a kumi::record
     //!
     //! @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
@@ -84,6 +85,7 @@ namespace kumi
     }
 
     //==============================================================================================
+    //! @ingroup record
     //! @brief Extracts the element of the field labeled Name from a kumi::record
     //!
     //! @note Does not participate in overload resolution if `get_name_index<Name>`
@@ -138,19 +140,26 @@ namespace kumi
     //! @name Properties
     //! @{
     //==============================================================================================
-    /// Returns the number of elements in a kumi::record
+
+    /// @ingroup record
+    /// @return Returns the number of elements in a kumi::record
     [[nodiscard]] KUMI_ABI static constexpr  auto size() noexcept { return sizeof...(Ts); }
 
-    /// Returns `true` if a kumi::record contains 0 elements
+    /// @ingroup record
+    /// @return Returns `true` if a kumi::record contains 0 elements
     [[nodiscard]] KUMI_ABI static constexpr  bool empty() noexcept { return sizeof...(Ts) == 0; }
 
-    /// Returns the names of the elements in a kumi::record
+    /// @ingroup record
+    /// @return Returns the names of the elements in a kumi::record
     [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept
     {
         return tuple{ field_name<unwrap_name_v<Ts>>{}... };
     };
 
-    /// Return references to the values of the elements of a kumi::record as a kumi::tuple
+    //==============================================================================================
+    //! @ingroup record
+    //! @return Return references to the values of the elements of a kumi::record as a kumi::tuple
+    //==============================================================================================
     [[nodiscard]] KUMI_ABI constexpr auto values() noexcept
     {
         return [&]<std::size_t...I>(std::index_sequence<I...>)
@@ -173,6 +182,7 @@ namespace kumi
     //==============================================================================================
 
     //==============================================================================================
+    //! @ingroup record
     //! @brief Replaces the content of the record with the content of another record.
     //! @param other kumi::record to copy or move from
     //! @return `*this`
@@ -262,7 +272,7 @@ namespace kumi
   };
 
   //================================================================================================
-  //! @name Record Deduction Guides
+  //! @name Deduction Guides
   //! @{
   //================================================================================================
 

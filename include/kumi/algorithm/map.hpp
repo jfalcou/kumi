@@ -43,7 +43,7 @@ namespace kumi
   //! @include doc/map.cpp
   //================================================================================================
   template<product_type T, typename Function, sized_product_type<size_v<T>>... Ts>
-  [[nodiscard]] KUMI_ABI constexpr auto map(Function f, T  &&t0, Ts &&...others) 
+  [[nodiscard]] KUMI_ABI constexpr auto map(Function f, T && t0, Ts &&...others) 
   requires ( compatible_product_types<T, Ts...> && 
            _::supports_call<Function, T&&, Ts&&...> )
   {
@@ -110,7 +110,7 @@ namespace kumi
   //! @include doc/map_index.cpp
   //================================================================================================
   template<product_type T, typename Function, sized_product_type<size_v<T>>... Ts>
-  [[nodiscard]] KUMI_ABI constexpr auto map_index(Function f, T &&t0,Ts &&...others)
+  [[nodiscard]] KUMI_ABI constexpr auto map_index(Function f, T && t0,Ts &&...others)
   requires(!record_type<T> && (!record_type<Ts> && ...))
   {
     if constexpr(sized_product_type<T,0>) return _::builder<T>::make();

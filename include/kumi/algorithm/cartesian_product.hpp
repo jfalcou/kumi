@@ -41,7 +41,7 @@ namespace kumi
   //================================================================================================
   //! @ingroup generators
   //! @brief  Return the Cartesian Product of all elements of its arguments product types
-  //! @param  ts Product Type to process
+  //! @param  ts Product Types to process
   //! @return a Product Type containing all the product types build from all combination of all ts' elements
   //!
   //! ## Helper type
