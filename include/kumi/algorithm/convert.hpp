@@ -81,7 +81,7 @@ namespace kumi
   }
 
   //================================================================================================
-  //! @ingroup utility
+  //! @ingroup tuple_traits
   //! @brief Generate a kumi::tuple type from a type
   //!
   //! If `T` is a @ref kumi::product_type, returns the kumi::tuple type containing the same element

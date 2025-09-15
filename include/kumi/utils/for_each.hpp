@@ -28,13 +28,13 @@ namespace kumi
   //! @include doc/for_each.cpp
   //! @include doc/record/for_each.cpp
   //================================================================================================
-  template<typename Function, product_type Tuple, product_type... Tuples>
-  KUMI_ABI constexpr void for_each(Function f, Tuple&& t, Tuples&&... ts)
-  requires( (compatible_product_types<Tuple, Tuples...>) 
-          && (_::supports_call<Function&, Tuple, Tuples...>))
+  template<typename Function, product_type T, product_type... Ts>
+  KUMI_ABI constexpr void for_each(Function f, T&& t, Ts&&... ts)
+  requires( (compatible_product_types<T, Ts...>) 
+          && (_::supports_call<Function&, T, Ts...>))
   {
-         if constexpr(sized_product_type<Tuple,0>) return;
-    else if constexpr( record_type<Tuple> )
+         if constexpr(sized_product_type<T,0>) return;
+    else if constexpr( record_type<T> )
     {
       [&]<std::size_t... I>(std::index_sequence<I...>)
       {
@@ -51,7 +51,7 @@ namespace kumi
 
           ( call(std::integral_constant<std::size_t, I>{}), ... );
         }
-        (std::make_index_sequence<size_v<Tuple>>{});
+        (std::make_index_sequence<size_v<T>>{});
     }
     else
     {
@@ -67,7 +67,7 @@ namespace kumi
 
         ( call(std::integral_constant<std::size_t, I>{}), ... );
       }
-      (std::make_index_sequence<size<Tuple>::value>());
+      (std::make_index_sequence<size<T>::value>());
     }
   }
 
@@ -88,11 +88,11 @@ namespace kumi
   //! ## Example
   //! @include doc/for_each_index.cpp
   //================================================================================================
-  template<typename Function, product_type Tuple, product_type... Tuples>
-  requires( !record_type<Tuple> && (!record_type<Tuples> && ...) )
-  KUMI_ABI constexpr void for_each_index(Function f, Tuple&& t, Tuples&&... ts)
+  template<typename Function, product_type T, product_type... Ts>
+  requires( !record_type<T> && (!record_type<Ts> && ...) )
+  KUMI_ABI constexpr void for_each_index(Function f, T&& t, Ts&&... ts)
   {
-    if constexpr(sized_product_type<Tuple,0>) return;
+    if constexpr(sized_product_type<T,0>) return;
     else
     {
       auto const invoker{[&, f](auto const i)
@@ -108,7 +108,7 @@ namespace kumi
       [=]<std::size_t... I>(std::index_sequence<I...>)
       {
         (invoker( std::integral_constant<unsigned, I>{} ), ...);
-      }(std::make_index_sequence<size<Tuple>::value>());
+      }(std::make_index_sequence<size<T>::value>());
     }
   }
  
@@ -128,11 +128,11 @@ namespace kumi
   //! ## Example
   //! @include doc/record/for_each_field.cpp
   //================================================================================================
-  template<typename Function, record_type Tuple, record_type... Tuples>
-  requires ( compatible_product_types<std::remove_cvref_t<Tuple>, std::remove_cvref_t<Tuples>...> )
-  KUMI_ABI constexpr void for_each_field(Function f, Tuple&& t, Tuples&&... ts)
+  template<typename Function, record_type T, record_type... Ts>
+  requires ( compatible_product_types<std::remove_cvref_t<T>, std::remove_cvref_t<Ts>...> )
+  KUMI_ABI constexpr void for_each_field(Function f, T&& t, Ts&&... ts)
   {
-    if constexpr(sized_product_type<Tuple,0>) return;
+    if constexpr(sized_product_type<T,0>) return;
     else
     {
       auto const invoker = [&]<std::size_t I>(std::integral_constant<std::size_t, I>)
@@ -149,7 +149,7 @@ namespace kumi
       [=]<std::size_t... I>(std::index_sequence<I...>)
       {
         (invoker( std::integral_constant<std::size_t, I>{} ), ...);
-      }(std::make_index_sequence<size<Tuple>::value>());
+      }(std::make_index_sequence<size<T>::value>());
     }
   }
 }

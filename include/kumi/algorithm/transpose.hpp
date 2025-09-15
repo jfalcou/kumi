@@ -22,10 +22,10 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<product_type Tuple> struct transpose;
+  //!   template<product_type T> struct transpose;
   //!
-  //!   template<product_type Tuple>
-  //!   using transpose_t = typename transpose<Tuple>::type;
+  //!   template<product_type T>
+  //!   using transpose_t = typename transpose<T>::type;
   //! }
   //! @endcode
   //!
@@ -34,32 +34,32 @@ namespace kumi
   //! ## Example
   //! @include doc/transpose.cpp
   //================================================================================================
-  template<product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto transpose(Tuple && t)
-  requires ( _::supports_transpose<Tuple> )
+  template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto transpose(T && t)
+  requires ( _::supports_transpose<T> )
   {
-    if constexpr(sized_product_type<Tuple,0>) return t;
+    if constexpr(sized_product_type<T,0>) return t;
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
         constexpr auto uz = []<typename N>(N const &, auto &&u) {
-          return apply([](auto &&...m){return _::builder<Tuple>::make(get<N::value>(KUMI_FWD(m))...);}, KUMI_FWD(u));
+          return apply([](auto &&...m){return _::builder<T>::make(get<N::value>(KUMI_FWD(m))...);}, KUMI_FWD(u));
         };
 
-        return _::builder<Tuple>::make(uz(index_t<I> {}, KUMI_FWD(t))...);
+        return _::builder<T>::make(uz(index_t<I> {}, KUMI_FWD(t))...);
       }
-      (std::make_index_sequence<size_v<element_t<0,Tuple>>>());
+      (std::make_index_sequence<size_v<element_t<0,T>>>());
     }
   }
 
   namespace result
   {
-    template<product_type Tuple> struct transpose
+    template<product_type T> struct transpose
     {
-      using type = decltype( kumi::transpose( std::declval<Tuple>() ) );
+      using type = decltype( kumi::transpose( std::declval<T>() ) );
     };
 
-    template<product_type Tuple>
-    using transpose_t = typename transpose<Tuple>::type;
+    template<product_type T>
+    using transpose_t = typename transpose<T>::type;
   }
 }

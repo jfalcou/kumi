@@ -48,10 +48,10 @@ namespace kumi
   //! @code
   //! namespace kumi
   //! {
-  //!   template<product_type... Tuples> struct cartesian_product;
+  //!   template<product_type... Ts> struct cartesian_product;
   //!
-  //!   template<product_type... Tuples>
-  //!   using cartesian_product_t = typename cartesian_product<Tuples...>::type;
+  //!   template<product_type... Ts>
+  //!   using cartesian_product_t = typename cartesian_product<Ts...>::type;
   //! }
   //! @endcode
   //!
@@ -61,7 +61,7 @@ namespace kumi
   //! @include doc/cartesian_product.cpp
   //================================================================================================
   template<product_type... Ts>
-  [[nodiscard]] KUMI_ABI constexpr auto cartesian_product(Ts&&... ts)
+  [[nodiscard]] KUMI_ABI constexpr auto cartesian_product(Ts &&... ts)
   {
     constexpr auto idx = [&]<std::size_t... I>(std::index_sequence<I...>)
     {
@@ -90,11 +90,11 @@ namespace kumi
 
   namespace result
   {
-    template<typename... T> struct cartesian_product
+    template<typename... Ts> struct cartesian_product
     {
-      using type = decltype( kumi::cartesian_product( std::declval<T>()... ) );
+      using type = decltype( kumi::cartesian_product( std::declval<Ts>()... ) );
     };
 
-    template<typename... T> using cartesian_product_t = typename cartesian_product<T...>::type;
+    template<typename... Ts> using cartesian_product_t = typename cartesian_product<Ts...>::type;
   }
 }

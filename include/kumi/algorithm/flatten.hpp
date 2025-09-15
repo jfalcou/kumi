@@ -20,10 +20,10 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<product_type Tuple> struct flatten;
+  //!   template<product_type T> struct flatten;
   //!
-  //!   template<product_type Tuple>
-  //!   using flatten_t = typename flatten<Tuple>::type;
+  //!   template<product_type T>
+  //!   using flatten_t = typename flatten<T>::type;
   //! }
   //! @endcode
   //!
@@ -32,9 +32,9 @@ namespace kumi
   //! ## Example
   //! @include doc/flatten.cpp
   //================================================================================================
-  template<product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto flatten(Tuple &&ts)
+  template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto flatten(T &&ts)
   {
-    if constexpr(sized_product_type<Tuple,0>) return ts;
+    if constexpr(sized_product_type<T,0>) return ts;
     else
     {
       return kumi::apply( [](auto&&... m)
@@ -68,10 +68,10 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<product_type Tuple, typename Func = void> struct flatten_all;
+  //!   template<product_type T, typename Func = void> struct flatten_all;
   //!
-  //!   template<product_type Tuple, typename Func = void>
-  //!   using flatten_all_t = typename flatten_all<Tuple, Func>::type;
+  //!   template<product_type T, typename Func = void>
+  //!   using flatten_all_t = typename flatten_all<T, Func>::type;
   //! }
   //! @endcode
   //!
@@ -80,10 +80,10 @@ namespace kumi
   //! ## Example
   //! @include doc/flatten_all.cpp
   //================================================================================================
-  template<product_type Tuple, typename Func>
-  [[nodiscard]] KUMI_ABI constexpr auto flatten_all(Tuple&& ts, Func&& f)
+  template<product_type T, typename Func>
+  [[nodiscard]] KUMI_ABI constexpr auto flatten_all(T&& ts, Func&& f)
   {
-    if constexpr(sized_product_type<Tuple,0>) return ts;
+    if constexpr(sized_product_type<T,0>) return ts;
     else
     {
       return kumi::apply( [&](auto&&... m)
@@ -104,9 +104,9 @@ namespace kumi
   }
 
   /// @overload
-  template<product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto flatten_all(Tuple&& ts)
+  template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto flatten_all(T&& ts)
   {
-    if constexpr(sized_product_type<Tuple,0>) return ts;
+    if constexpr(sized_product_type<T,0>) return ts;
     else
     {
       return kumi::apply( [](auto&&... m)
@@ -127,25 +127,25 @@ namespace kumi
 
   namespace result
   {
-    template<product_type Tuple> struct flatten
+    template<product_type T> struct flatten
     {
-      using type = decltype( kumi::flatten( std::declval<Tuple>() ) );
+      using type = decltype( kumi::flatten( std::declval<T>() ) );
     };
 
-    template<product_type Tuple, typename Func = void> struct flatten_all
+    template<product_type T, typename Func = void> struct flatten_all
     {
-      using type = decltype( kumi::flatten_all( std::declval<Tuple>(), std::declval<Func>() ) );
+      using type = decltype( kumi::flatten_all( std::declval<T>(), std::declval<Func>() ) );
     };
 
-    template<product_type Tuple> struct flatten_all<Tuple>
+    template<product_type T> struct flatten_all<T>
     {
-      using type = decltype( kumi::flatten_all( std::declval<Tuple>() ) );
+      using type = decltype( kumi::flatten_all( std::declval<T>() ) );
     };
 
-    template<product_type Tuple> using flatten_t      = typename flatten<Tuple>::type;
+    template<product_type T> using flatten_t      = typename flatten<T>::type;
 
-    template<product_type Tuple, typename Func = void>
-    using flatten_all_t  = typename flatten_all<Tuple, Func>::type;
+    template<product_type T, typename Func = void>
+    using flatten_all_t  = typename flatten_all<T, Func>::type;
   }
 
   //================================================================================================
@@ -159,10 +159,10 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<product_type Tuple> struct as_flat_ptr;
+  //!   template<product_type T> struct as_flat_ptr;
   //!
-  //!   template<product_type Tuple>
-  //!   using as_flat_ptr_t = typename as_flat_ptr<Tuple>::type;
+  //!   template<product_type T>
+  //!   using as_flat_ptr_t = typename as_flat_ptr<T>::type;
   //! }
   //! @endcode
   //!
@@ -171,8 +171,8 @@ namespace kumi
   //! ## Example
   //! @include doc/as_flat_ptr.cpp
   //================================================================================================
-  template<product_type Tuple>
-  [[nodiscard]] KUMI_ABI auto as_flat_ptr(Tuple&& ts) noexcept
+  template<product_type T>
+  [[nodiscard]] KUMI_ABI auto as_flat_ptr(T&& ts) noexcept
   {
     return kumi::flatten_all(KUMI_FWD(ts), [](auto& m) { return &m; });
   }

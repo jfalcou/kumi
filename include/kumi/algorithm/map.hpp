@@ -33,7 +33,7 @@ namespace kumi
   //!   template<typename Function, product_type T, product_type... Ts> struct map;
   //!
   //!   template<typename Function, product_type T, product_type... Ts>
-  //!   using map_t = typename map<Function,Tuple>::type;
+  //!   using map_t = typename map<Function,T>::type;
   //! }
   //! @endcode
   //!
@@ -42,23 +42,23 @@ namespace kumi
   //! ## Example
   //! @include doc/map.cpp
   //================================================================================================
-  template<product_type Tuple, typename Function, sized_product_type<size_v<Tuple>>... Tuples>
-  [[nodiscard]] KUMI_ABI constexpr auto map(Function f, Tuple  &&t0, Tuples &&...others) 
-  requires ( compatible_product_types<Tuple, Tuples...> && 
-           _::supports_call<Function, Tuple&&, Tuples&&...> )
+  template<product_type T, typename Function, sized_product_type<size_v<T>>... Ts>
+  [[nodiscard]] KUMI_ABI constexpr auto map(Function f, T  &&t0, Ts &&...others) 
+  requires ( compatible_product_types<T, Ts...> && 
+           _::supports_call<Function, T&&, Ts&&...> )
   {
-    if constexpr(sized_product_type<Tuple,0>) return _::builder<Tuple>::make();
+    if constexpr(sized_product_type<T,0>) return _::builder<T>::make();
     else
     {
-      auto const call = [&]<std::size_t N, typename... Ts>(index_t<N>, Ts &&... args)
+      auto const call = [&]<std::size_t N, typename... Us>(index_t<N>, Us &&... args)
       {
         return f(get<N>(KUMI_FWD(args))...);
       };
 
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return _::builder<Tuple>::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
-      }(std::make_index_sequence<size_v<Tuple>>());
+        return _::builder<T>::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
+      }(std::make_index_sequence<size_v<T>>());
     }
   }
 
@@ -89,8 +89,8 @@ namespace kumi
   //!       can't be called on each tuple's elements and their indexes.
   //!
   //! @param f      Callable function to apply
-  //! @param t0     Tuple  to operate on
-  //! @param others Tuples to operate on
+  //! @param t0     T  to operate on
+  //! @param others Ts to operate on
   //! @return The tuple of `f` calls results.
   //!
   //! ## Helper type
@@ -100,7 +100,7 @@ namespace kumi
   //!   template<typename Function, product_type T, product_type... Ts> struct map_index;
   //!
   //!   template<typename Function, product_type T, product_type... Ts>
-  //!   using map_index_t = typename map_index<Function,Tuple>::type;
+  //!   using map_index_t = typename map_index<Function,T>::type;
   //! }
   //! @endcode
   //!
@@ -109,22 +109,22 @@ namespace kumi
   //! ## Example
   //! @include doc/map_index.cpp
   //================================================================================================
-  template<product_type Tuple, typename Function, sized_product_type<size_v<Tuple>>... Tuples>
-  [[nodiscard]] KUMI_ABI constexpr auto map_index(Function f, Tuple &&t0,Tuples &&...others)
-  requires(!record_type<Tuple> && (!record_type<Tuples> && ...))
+  template<product_type T, typename Function, sized_product_type<size_v<T>>... Ts>
+  [[nodiscard]] KUMI_ABI constexpr auto map_index(Function f, T &&t0,Ts &&...others)
+  requires(!record_type<T> && (!record_type<Ts> && ...))
   {
-    if constexpr(sized_product_type<Tuple,0>) return _::builder<Tuple>::make();
+    if constexpr(sized_product_type<T,0>) return _::builder<T>::make();
     else
     {
-      auto const call = [&]<std::size_t N, typename... Ts>(index_t<N> idx, Ts &&... args)
+      auto const call = [&]<std::size_t N, typename... Us>(index_t<N> idx, Us &&... args)
       {
         return f(idx, get<N>(KUMI_FWD(args))...);
       };
 
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return _::builder<Tuple>::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
-      }(std::make_index_sequence<size_v<Tuple>>());
+        return _::builder<T>::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
+      }(std::make_index_sequence<size_v<T>>());
     }
   }
 

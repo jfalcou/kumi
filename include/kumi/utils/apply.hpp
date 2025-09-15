@@ -48,10 +48,10 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<typename Function, product_type Tuple> struct apply;
+  //!   template<typename Function, product_type T> struct apply;
   //!
-  //!   template<typename Function, product_type Tuple>
-  //!   using apply_t = typename apply<Function,Tuple>::type;
+  //!   template<typename Function, product_type T>
+  //!   using apply_t = typename apply<Function,T>::type;
   //! }
   //! @endcode
   //!
@@ -61,13 +61,13 @@ namespace kumi
   //! @include doc/apply.cpp
   //! @include doc/record/apply.cpp
   //================================================================================================
-  template<typename Function, product_type Tuple>
-  KUMI_ABI constexpr decltype(auto) apply(Function &&f, Tuple &&t)
-  noexcept(_::supports_nothrow_apply<Function &&, Tuple &&>)
-  requires _::supports_apply<Function, Tuple>
+  template<typename Function, product_type T>
+  KUMI_ABI constexpr decltype(auto) apply(Function &&f, T &&t)
+  noexcept(_::supports_nothrow_apply<Function &&, T &&>)
+  requires _::supports_apply<Function, T>
   {
-         if constexpr (sized_product_type<Tuple,0> )  return KUMI_FWD(f)();
-    else if constexpr ( record_type<Tuple> )          return apply(KUMI_FWD(f), KUMI_FWD(t).values());
+         if constexpr (sized_product_type<T,0> )  return KUMI_FWD(f)();
+    else if constexpr ( record_type<T> )          return apply(KUMI_FWD(f), KUMI_FWD(t).values());
     else if constexpr (std::is_member_pointer_v<std::decay_t<Function>>)
       return [&]<std::size_t... I>(std::index_sequence<I...>) -> decltype(auto){
         auto &&w = [](auto &&y) -> decltype(auto){
@@ -83,25 +83,25 @@ namespace kumi
         else
           return (KUMI_FWD(w).*f)(get<I + 1>(KUMI_FWD(t))...);
       }
-      (std::make_index_sequence<size<Tuple>::value - 1>());
+      (std::make_index_sequence<size<T>::value - 1>());
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) -> decltype(auto)
       {
         return KUMI_FWD(f)(get<I>(KUMI_FWD(t))...);
       }
-      (std::make_index_sequence<size<Tuple>::value>());
+      (std::make_index_sequence<size<T>::value>());
   }
 
   namespace result
   {
-    template<typename Function, product_type Tuple>
+    template<typename Function, product_type T>
     struct apply
     {
-      using type = decltype(kumi::apply(std::declval<Function>(), std::declval<Tuple>()));
+      using type = decltype(kumi::apply(std::declval<Function>(), std::declval<T>()));
     };
 
-    template<typename Function, product_type Tuple>
-    using apply_t = typename apply<Function,Tuple>::type;
+    template<typename Function, product_type T>
+    using apply_t = typename apply<Function,T>::type;
   }
 
   namespace _

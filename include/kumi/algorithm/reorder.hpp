@@ -56,10 +56,10 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<product_type Tuple,std::size_t... Idx> struct reorder;
+  //!   template<product_type T,std::size_t... Idx> struct reorder;
   //!
-  //!   template<product_type Tuple,std::size_t... Idx>
-  //!   using reorder_t = typename reorder<Tuple,Idx...>::type;
+  //!   template<product_type T,std::size_t... Idx>
+  //!   using reorder_t = typename reorder<T,Idx...>::type;
   //! }
   //! @endcode
   //!
