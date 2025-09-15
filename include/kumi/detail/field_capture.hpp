@@ -15,7 +15,7 @@
 namespace kumi
 {
   //================================================================================================
-  //! @ingroup product_types 
+  //! @ingroup utility 
   //! @class field_capture
   //! @brief Named wrapper over a type.
   //!
@@ -37,7 +37,7 @@ namespace kumi
     static constexpr bool is_field_capture = true;
     
     //==============================================================================================
-    /// @ingroup product_types 
+    /// @ingroup utility 
     //! @brief Inserts a kumi::field_capture in an output stream
     //==============================================================================================
     template<typename CharT, typename Traits>
@@ -61,7 +61,7 @@ namespace kumi
   }
 
   //================================================================================================
-  //! @ingroup product_types 
+  //! @ingroup utility 
   //! @brief Extracts the value from a kumi::field_capture or returns the parameter 
   //!
   //! @note If the unqualified type of T is not a field_capture returns kumi::none.

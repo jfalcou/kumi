@@ -14,7 +14,7 @@ namespace kumi
   //================================================================================================
   //! @ingroup traits 
   //! @brief   Extracts the common product_type of a parameter pack, if all the types are `record`
-  //!          then it returns an empty record, otherwise returns an empty `kumi::tuple`
+  //!          then it returns an empty kumi::record, otherwise returns an empty `kumi::tuple`
   //!
   //! @tparam Ts The `product_types` to access
   //!
@@ -70,7 +70,7 @@ namespace kumi
     };
 
     //================================================================================================
-    //! @ingroup product_types
+    //! @ingroup utility
     //! @class builder 
     //! @brief Helper structure to build the correct output `product_type`. If the provided product_type
     //!        is a record_type the builder will output a kumi::record otherwise a kumi::tuple. 

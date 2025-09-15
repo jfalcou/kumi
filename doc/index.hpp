@@ -15,6 +15,7 @@
 //!
 //! # Examples
 //!
+//! ## Tuple
 //! @code
 //! #include <iostream>
 //! #include <kumi/kumi.hpp>
@@ -55,6 +56,7 @@
 //! }
 //! @endcode
 //!
+//! ## Record
 //! @code
 //! #include <iostream>
 //! #include <kumi/kumi.hpp>
@@ -99,7 +101,7 @@
 //!
 //! This library is licensed under the [Boost Software License](https://opensource.org/licenses/BSL-1.0):
 //!
-//! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ none
+//! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~none
 //! Copyright : KUMI Project Contributors
 //!
 //! Permission is hereby granted, free of charge, to any person or organization obtaining a copy of the

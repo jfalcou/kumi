@@ -18,6 +18,12 @@ namespace kumi
   //!   @defgroup transforms Product Type Transformations
   //!   @brief    Algorithms applying transformation to product types
   //!
+  //!   @defgroup tuple_transforms Tuple Type Specific Transformations
+  //!   @brief    Algorithms applying transformation to tuples
+  //!
+  //!   @defgroup record_transforms Record Type Specific Transformations
+  //!   @brief    Algorithms applying transformation to records
+  //!
   //!   @defgroup queries Product Type Queries
   //!   @brief    Algorithms querying properties from product types
   //!

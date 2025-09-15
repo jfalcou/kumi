@@ -48,6 +48,7 @@ namespace kumi
     //==============================================================================================
 
     //==============================================================================================
+    //! @ingroup tuple
     //! @brief Extracts the Ith element from a kumi::tuple
     //!
     //! @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
@@ -171,7 +172,6 @@ namespace kumi
     {
       return _::get_leaf<Name>(impl);
     }
-
     //==============================================================================================
     //! @}
     //==============================================================================================
@@ -180,13 +180,17 @@ namespace kumi
     //! @name Properties
     //! @{
     //==============================================================================================
-    /// Returns the number of elements in a kumi::tuple
-    [[nodiscard]] KUMI_ABI static constexpr  auto size() noexcept { return sizeof...(Ts); }
 
-    /// Returns `true` if a kumi::tuple contains 0 elements
+    /// @ingroup tuple
+    /// @return Returns the number of elements in a kumi::tuple
+    [[nodiscard]] KUMI_ABI static constexpr  auto size() noexcept { return sizeof...(Ts); }
+ 
+    /// @ingroup tuple
+    /// @return Returns `true` if a kumi::tuple contains 0 elements
     [[nodiscard]] KUMI_ABI static constexpr  bool empty() noexcept { return sizeof...(Ts) == 0; }
 
-    /// Returns the names of the elements of a kumi::tuple
+    /// @ingroup tuple
+    /// @return Returns the names of the elements of a kumi::tuple
     [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept
     -> tuple<decltype(name_of(as<Ts>{}))...>
     {
@@ -202,6 +206,7 @@ namespace kumi
     //==============================================================================================
 
     //==============================================================================================
+    //! @ingroup tuple
     //! @brief  Converts a tuple<Ts...> to a tuple<Us...>.
     //! @tparam Us Types composing the destination tuple
     //==============================================================================================
@@ -220,6 +225,7 @@ namespace kumi
     //==============================================================================================
 
     //==============================================================================================
+    //! @ingroup tuple
     //! @brief Replaces the contents of the tuple with the contents of another tuple.
     //! @param other kumi::tuple to copy or move from
     //! @return `*this`
@@ -267,6 +273,9 @@ namespace kumi
       (std::make_index_sequence<sizeof...(Ts)>());
     }
 
+    /// @ingroup tuple
+    /// @related kumi::tuple
+    /// @brief Compares a tuple with an other for inequality
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator!=(tuple const &self, tuple<Us...> const &other) noexcept
     requires( equality_comparable<tuple,tuple<Us...>> )
@@ -321,7 +330,7 @@ namespace kumi
 
     /// @ingroup tuple
     /// @related kumi::tuple
-    /// @brief Compares tuples for lexicographical is greater relation relation
+    /// @brief Compares tuples for lexicographical is greater or equal relation
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator>=(tuple const &lhs, tuple<Us...> const &rhs) noexcept
     requires requires { lhs < rhs; }
@@ -334,11 +343,11 @@ namespace kumi
     //==============================================================================================
 
     //==============================================================================================
+    //! @ingroup tuple
     //! @brief Invoke the Callable object f on each element of the current tuple.
     //!
     //! @param f	Callable object to be invoked
     //! @return The value returned by f.
-    //!
     //==============================================================================================
     template<typename Function>
     [[deprecated("Use apply() instead")]]KUMI_ABI constexpr auto operator()(Function &&f) const&
@@ -412,7 +421,7 @@ namespace kumi
   };
 
   //================================================================================================
-  //! @name Tuple Deduction Guides
+  //! @name Deduction Guides
   //! @{
   //================================================================================================
 
