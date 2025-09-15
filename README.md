@@ -15,7 +15,7 @@ and new features like:
 
 ## Examples
 
-### Tuple example
+### Tuple
 [See it live on Compiler Explorer](https://godbolt.org/z/c5q1cnax9)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
@@ -58,7 +58,7 @@ int main()
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-### Record example
+### Record
 [See it live on Compiler Explorer](https://godbolt.org/z/rqq8a6ej3)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
