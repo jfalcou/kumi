@@ -88,8 +88,8 @@ namespace kumi
   //! ## Example:
   //! @include doc/none_of.cpp
   //================================================================================================
-  template<typename Pred, product_type Tuple>
-  [[nodiscard]] KUMI_ABI constexpr bool none_of( Tuple && ts, Pred p) noexcept
+  template<typename Pred, product_type T>
+  [[nodiscard]] KUMI_ABI constexpr bool none_of( T && ts, Pred p) noexcept
   {
     return !any_of(KUMI_FWD(ts),p);
   }
@@ -102,8 +102,8 @@ namespace kumi
   //! ## Example:
   //! @include doc/none_of.cpp
   //================================================================================================
-  template<product_type Tuple>
-  [[nodiscard]] KUMI_ABI constexpr bool none_of(Tuple && ts) noexcept
+  template<product_type T>
+  [[nodiscard]] KUMI_ABI constexpr bool none_of(T && ts) noexcept
   {
     return !any_of(KUMI_FWD(ts));
   }

@@ -22,10 +22,10 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<typename Function, product_type Tuple, typename Value> struct fold_left;
+  //!   template<typename Function, product_type T, typename Value> struct fold_left;
   //!
-  //!   template<typename Function, product_type Tuple, typename Value>
-  //!   using fold_left_t = typename fold_left_t<Function,Tuple,Value>::type;
+  //!   template<typename Function, product_type T, typename Value>
+  //!   using fold_left_t = typename fold_left_t<Function,T,Value>::type;
   //! }
   //! @endcode
   //!
@@ -35,8 +35,8 @@ namespace kumi
   //! @include doc/fold_left.cpp
   //! @include doc/record/fold_left.cpp
   //================================================================================================
-  template<typename Function, product_type Tuple, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto fold_left(Function f, Tuple&& t, Value init)
+  template<typename Function, product_type T, typename Value>
+  [[nodiscard]] KUMI_ABI constexpr auto fold_left(Function f, T&& t, Value init)
   {
     if constexpr ( record_type<Tuple> ) return fold_left(f, values_of(KUMI_FWD(t)), init);
     else if constexpr(sized_product_type<Tuple,0>) return init;
@@ -46,7 +46,7 @@ namespace kumi
       {
         return (_::foldable {f, get<I>(KUMI_FWD(t))} >> ... >> _::foldable {f, init}).value;
       }
-      (std::make_index_sequence<size<Tuple>::value>());
+      (std::make_index_sequence<size<T>::value>());
     }
   }
 
@@ -62,10 +62,10 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<typename Function, product_type Tuple> struct fold_left;
+  //!   template<typename Function, product_type T> struct fold_left;
   //!
-  //!   template<typename Function, product_type Tuple>
-  //!   using fold_left_t = typename fold_left_t<Function,Tuple>::type;
+  //!   template<typename Function, product_type T>
+  //!   using fold_left_t = typename fold_left_t<Function,T>::type;
   //! }
   //! @endcode
   //!
@@ -75,8 +75,8 @@ namespace kumi
   //! @include doc/fold_left.cpp
   //! @include doc/record/fold_left.cpp
   //================================================================================================
-  template<typename Function, sized_product_type_or_more<1> Tuple>
-  [[nodiscard]] KUMI_ABI constexpr auto fold_left(Function f, Tuple&& t)
+  template<typename Function, sized_product_type_or_more<1> T>
+  [[nodiscard]] KUMI_ABI constexpr auto fold_left(Function f, T&& t)
   {
     if constexpr ( record_type<Tuple> ) return fold_left(f, values_of(KUMI_FWD(t)));
     else if constexpr(sized_product_type<Tuple,1>) return get<0>(KUMI_FWD(t));
@@ -100,10 +100,10 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<typename Function, product_type Tuple, typename Value> struct fold_right;
+  //!   template<typename Function, product_type T, typename Value> struct fold_right;
   //!
-  //!   template<typename Function, product_type Tuple, typename Value>
-  //!   using fold_right_t = typename fold_right_t<Function,Tuple,Value>::type;
+  //!   template<typename Function, product_type T, typename Value>
+  //!   using fold_right_t = typename fold_right_t<Function,T,Value>::type;
   //! }
   //! @endcode
   //!
@@ -113,8 +113,8 @@ namespace kumi
   //! @include doc/fold_right.cpp
   //! @include doc/record/fold_right.cpp
   //================================================================================================
-  template<typename Function, product_type Tuple, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto fold_right(Function f, Tuple&& t, Value init)
+  template<typename Function, product_type T, typename Value>
+  [[nodiscard]] KUMI_ABI constexpr auto fold_right(Function f, T&& t, Value init)
   {
     if constexpr ( record_type<Tuple> ) return fold_right(f, values_of(KUMI_FWD(t)), init);
     else if constexpr(size<Tuple>::value ==0) return init;
@@ -124,7 +124,7 @@ namespace kumi
       {
         return (_::foldable {f, init} << ... << _::foldable {f, get<I>(KUMI_FWD(t))}).value;
       }
-      (std::make_index_sequence<size<Tuple>::value>());
+      (std::make_index_sequence<size<T>::value>());
     }
   }
 
@@ -140,10 +140,10 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<typename Function, product_type Tuple> struct fold_right;
+  //!   template<typename Function, product_type T> struct fold_right;
   //!
-  //!   template<typename Function, product_type Tuple>
-  //!   using fold_right_t = typename fold_right_t<Function,Tuple>::type;
+  //!   template<typename Function, product_type T>
+  //!   using fold_right_t = typename fold_right_t<Function,T>::type;
   //! }
   //! @endcode
   //!
@@ -153,63 +153,63 @@ namespace kumi
   //! @include doc/fold_right.cpp
   //! @include doc/record/fold_right.cpp
   //================================================================================================
-  template<typename Function, sized_product_type_or_more<1> Tuple>
-  [[nodiscard]] KUMI_ABI constexpr auto fold_right(Function f, Tuple&& t)
+  template<typename Function, sized_product_type_or_more<1> T>
+  [[nodiscard]] KUMI_ABI constexpr auto fold_right(Function f, T&& t)
   {
     if constexpr ( record_type<Tuple> ) return fold_right(f, values_of(KUMI_FWD(t)));
     else if constexpr(sized_product_type<Tuple,1>) return get<0>(KUMI_FWD(t));
     else
     {
-      auto&&[head, tails] = split(KUMI_FWD(t), index<size_v<Tuple>-2>);
+      auto&&[head, tails] = split(KUMI_FWD(t), index<size_v<T>-2>);
       return fold_left(f, head, kumi::apply(f,tails));
     }
   }
 
   namespace result
   {
-    template<typename Function, product_type Tuple, typename Value = void>
+    template<typename Function, product_type T, typename Value = void>
     struct fold_right
     {
       using type = decltype ( kumi::fold_right( std::declval<Function>()
-                                              , std::declval<Tuple>()
+                                              , std::declval<T>()
                                               , std::declval<Value>()
                                               )
                             );
     };
 
-    template<typename Function, product_type Tuple>
-    struct fold_right<Function,Tuple>
+    template<typename Function, product_type T>
+    struct fold_right<Function,T>
     {
       using type = decltype ( kumi::fold_right( std::declval<Function>()
-                                              , std::declval<Tuple>()
+                                              , std::declval<T>()
                                               )
                             );
     };
 
-    template<typename Function, product_type Tuple, typename Value = void>
+    template<typename Function, product_type T, typename Value = void>
     struct fold_left
     {
       using type = decltype ( kumi::fold_left ( std::declval<Function>()
-                                              , std::declval<Tuple>()
+                                              , std::declval<T>()
                                               , std::declval<Value>()
                                               )
                             );
     };
 
-    template<typename Function, product_type Tuple>
-    struct fold_left<Function,Tuple>
+    template<typename Function, product_type T>
+    struct fold_left<Function,T>
     {
       using type = decltype ( kumi::fold_left ( std::declval<Function>()
-                                              , std::declval<Tuple>()
+                                              , std::declval<T>()
                                               )
                             );
     };
 
-    template<typename Function, product_type Tuple, typename Value = void>
-    using fold_right_t = typename fold_right<Function,Tuple,Value>::type;
+    template<typename Function, product_type T, typename Value = void>
+    using fold_right_t = typename fold_right<Function,T,Value>::type;
 
-    template<typename Function, product_type Tuple, typename Value = void>
-    using fold_left_t = typename fold_left<Function,Tuple,Value>::type;
+    template<typename Function, product_type T, typename Value = void>
+    using fold_left_t = typename fold_left<Function,T,Value>::type;
   }
 }
 
