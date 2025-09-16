@@ -89,8 +89,9 @@ namespace kumi
   //!
   //! Computes the type returned by a call to split.
   //!
-  //! ## Example:
+  //! ## Examples:
   //! @include doc/split.cpp
+  //! @include doc/record/split.cpp
   //================================================================================================
   template<std::size_t I0, product_type Tuple>
   requires(I0 <= size_v<Tuple>)

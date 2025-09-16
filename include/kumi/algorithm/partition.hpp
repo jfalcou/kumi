@@ -56,8 +56,9 @@ namespace kumi
   //!
   //! Computes the type returned by a call to kumi::partition.
   //!
-  //! ## Example:
+  //! ## Examples:
   //! @include doc/partition.cpp
+  //! @include doc/record/partition.cpp
   //================================================================================================
   template<template<typename> typename Pred, kumi::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto partition(T&& tup) noexcept

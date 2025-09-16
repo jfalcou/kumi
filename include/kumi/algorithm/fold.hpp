@@ -31,13 +31,15 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::fold_left
   //!
-  //! ## Example
+  //! ## Examples:
   //! @include doc/fold_left.cpp
+  //! @include doc/record/fold_left.cpp
   //================================================================================================
   template<typename Function, product_type Tuple, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto fold_left(Function f, Tuple&& t, Value init)
   {
-    if constexpr(sized_product_type<Tuple,0>) return init;
+    if constexpr ( record_type<Tuple> ) return fold_left(f, KUMI_FWD(t).values(), init);
+    else if constexpr(sized_product_type<Tuple,0>) return init;
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
@@ -69,13 +71,15 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::fold_left
   //!
-  //! ## Example
+  //! ## Examples:
   //! @include doc/fold_left.cpp
+  //! @include doc/record/fold_left.cpp
   //================================================================================================
   template<typename Function, sized_product_type_or_more<1> Tuple>
   [[nodiscard]] KUMI_ABI constexpr auto fold_left(Function f, Tuple&& t)
   {
-    if constexpr(sized_product_type<Tuple,1>) return get<0>(KUMI_FWD(t));
+    if constexpr ( record_type<Tuple> ) return fold_left(f, KUMI_FWD(t).values());
+    else if constexpr(sized_product_type<Tuple,1>) return get<0>(KUMI_FWD(t));
     else
     {
       auto&&[heads, tail] = split(KUMI_FWD(t), index<2>);
@@ -105,13 +109,15 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::fold_right
   //!
-  //! ## Example
+  //! ## Examples:
   //! @include doc/fold_right.cpp
+  //! @include doc/record/fold_right.cpp
   //================================================================================================
   template<typename Function, product_type Tuple, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto fold_right(Function f, Tuple&& t, Value init)
   {
-    if constexpr(size<Tuple>::value ==0) return init;
+    if constexpr ( record_type<Tuple> ) return fold_right(f, KUMI_FWD(t).values(), init);
+    else if constexpr(size<Tuple>::value ==0) return init;
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
@@ -143,13 +149,15 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::fold_right
   //!
-  //! ## Example
+  //! ## Examples:
   //! @include doc/fold_right.cpp
+  //! @include doc/record/fold_right.cpp
   //================================================================================================
   template<typename Function, sized_product_type_or_more<1> Tuple>
   [[nodiscard]] KUMI_ABI constexpr auto fold_right(Function f, Tuple&& t)
   {
-    if constexpr(sized_product_type<Tuple,1>) return get<0>(KUMI_FWD(t));
+    if constexpr ( record_type<Tuple> ) return fold_right(f, KUMI_FWD(t).values());
+    else if constexpr(sized_product_type<Tuple,1>) return get<0>(KUMI_FWD(t));
     else
     {
       auto&&[head, tails] = split(KUMI_FWD(t), index<size_v<Tuple>-2>);

@@ -181,10 +181,10 @@ namespace kumi
   //! @include doc/record/map_field.cpp
   //================================================================================================ 
   template<record_type Tuple, typename Function, sized_product_type<size<Tuple>::value>... Tuples>
-  requires ( compatible_product_types<std::remove_cvref_t<Tuple>, std::remove_cvref_t<Tuples>...> )
+  requires ( compatible_product_types<Tuple, Tuples...> )
   constexpr auto map_field(Function     f,Tuple  &&t0,Tuples &&...others)
   {
-    if constexpr(sized_product_type<Tuple,0>) return std::remove_cvref_t<Tuple>{};
+    if constexpr(sized_product_type<Tuple,0>) return _::builder<Tuple>::make();
     else
     {
       auto const call = [&]<std::size_t N, typename... Ts>(index_t<N>, Ts &&... args)

@@ -65,8 +65,9 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::reorder
   //!
-  //! ## Example
+  //! ## Examples:
   //! @include doc/reorder.cpp
+  //! @include doc/record/reorder.cpp
   //================================================================================================
   template<std::size_t... Idx, product_type T>
   requires((Idx < size_v<T>) && ...)
