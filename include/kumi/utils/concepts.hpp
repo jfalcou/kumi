@@ -144,14 +144,16 @@ namespace kumi
   //! @brief Concept specifying if a parameter pack only holds unique types.
   //================================================================================================
   template<typename... Ts>
-  concept uniquely_typed = ( !has_named_fields<Ts...> ) && all_uniques_v<_::box<Ts>...>;
+  concept uniquely_typed = ( !has_named_fields<Ts...> ) 
+                        && all_uniques_v<_::box<std::remove_cvref_t<Ts>>...>;
 
   //================================================================================================
   //! @ingroup concepts
   //! @brief Concept specifying if a parameter pack only holds unique kumi::field_capture names.
   //================================================================================================
   template<typename... Ts>
-  concept uniquely_named = ( has_named_fields<Ts...> ) && all_unique_names_v<_::box<Ts>...>;
+  concept uniquely_named = ( has_named_fields<Ts...> ) 
+                        && all_unique_names_v<_::box<std::remove_cvref_t<Ts>>...>;
 
    //================================================================================================
   //! @ingroup concepts

@@ -36,7 +36,7 @@ namespace kumi
   template<product_type Tuple, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto sum(Tuple&& t, Value init)
   {
-    if constexpr( sized_product_type<Tuple,0>) return init;
+    if constexpr( sized_product_type<Tuple,0> ) return init;
     else return kumi::apply( [init](auto &&... m) { return (m + ... + init); }, KUMI_FWD(t) );
   }
 
@@ -66,8 +66,12 @@ namespace kumi
   template<product_type Tuple>
   [[nodiscard]] KUMI_ABI constexpr auto sum(Tuple&& t)
   {
-    auto&& [head,tail] = kumi::split(KUMI_FWD(t), index<1>);
-    return sum(tail, get<0>(head));
+    if constexpr ( record_type<Tuple> ) return sum(KUMI_FWD(t).values());
+    else 
+    {
+      auto&& [head,tail] = kumi::split(KUMI_FWD(t), index<1>);
+      return sum(tail, get<0>(head)); 
+    }
   }
 
   //================================================================================================
@@ -127,8 +131,12 @@ namespace kumi
   template<product_type Tuple>
   [[nodiscard]] KUMI_ABI constexpr auto prod(Tuple&& t)
   {
-    auto&& [head,tail] = split(KUMI_FWD(t), index<1>);
-    return prod(tail, get<0>(head));
+    if constexpr ( record_type<Tuple> ) return prod(KUMI_FWD(t).values());
+    else
+    {
+      auto&& [head,tail] = split(KUMI_FWD(t), index<1>);
+      return prod(tail, get<0>(head));
+    }
   }
 
   //================================================================================================
@@ -188,8 +196,12 @@ namespace kumi
   template<product_type Tuple>
   [[nodiscard]] KUMI_ABI constexpr auto bit_and(Tuple&& t)
   {
-    auto&& [head,tail] = split(KUMI_FWD(t), index<1>);
-    return bit_and(tail, get<0>(head));
+    if constexpr ( record_type<Tuple> ) return bit_and(KUMI_FWD(t).values());
+    else
+    {
+      auto&& [head,tail] = split(KUMI_FWD(t), index<1>);
+      return bit_and(tail, get<0>(head));
+    }
   }
 
   //================================================================================================
@@ -249,8 +261,12 @@ namespace kumi
   template<product_type Tuple>
   [[nodiscard]] KUMI_ABI constexpr auto bit_or(Tuple&& t)
   {
-    auto&& [head,tail] = split(KUMI_FWD(t), index<1>);
-    return bit_or(tail, get<0>(head));
+    if constexpr ( record_type<Tuple> ) return bit_or(KUMI_FWD(t).values());
+    else
+    {
+      auto&& [head,tail] = split(KUMI_FWD(t), index<1>);
+      return bit_or(tail, get<0>(head));
+    }
   }
 
   namespace result
