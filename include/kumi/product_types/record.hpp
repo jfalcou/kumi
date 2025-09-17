@@ -181,14 +181,10 @@ namespace kumi
     requires( equivalent<record, record<Us...>>  && _::fieldwise_convertible<record, record<Us...>> )
     KUMI_ABI constexpr record &operator=(record<Us...> const &other)
     {
-      [&]<std::size_t...I>(std::index_sequence<I...>)
-      {
-        (([&]
-        {
-          constexpr auto key  = get<I>(this->names());
-          get<key>(*this)     = get<key>(KUMI_FWD(other));
+        (([&]{
+          constexpr auto name = field_name<Ts::name>{};
+          get<name>(*this)    = get<name>(KUMI_FWD(other));
         }()), ...);
-      }(std::make_index_sequence<sizeof...(Ts)>{});
       return *this;
     }
 
@@ -197,14 +193,10 @@ namespace kumi
     requires( equivalent<record, record<Us...>> && _::fieldwise_convertible<record, record<Us...>> )
     KUMI_ABI constexpr record &operator=(record<Us...> &&other)
     {
-      [&]<std::size_t...I>(std::index_sequence<I...>)
-      {
-        (([&]
-        {
-          constexpr auto key  = get<I>(this->names());
-          get<key>(*this)     = get<key>(KUMI_FWD(other));
-        }()), ...);
-      }(std::make_index_sequence<sizeof...(Ts)>{});
+      (([&] {
+        constexpr auto name  = field_name<Ts::name>{};
+        get<name>(*this)    = get<name>(KUMI_FWD(other));
+      }()), ...);
       return *this;
     }
 
