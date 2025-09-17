@@ -133,7 +133,7 @@ namespace kumi
   //! @note Nothing prevent the number of reordered names to be lesser or greater than t size or
   //!       the fact they can appear multiple times if it is applied on a named tuple. 
   //!
-  //! @tparam Names     Reordered names of elements
+  //! @tparam Name     Reordered names of elements
   //! @param  t kumi::product_type to reorder
   //! @return A product type equivalent to product_type(t[index<Idx>]...);
   //!
