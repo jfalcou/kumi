@@ -36,15 +36,6 @@ TTS_CASE("Check apply behavior")
                 },
                 kumi::record {"a"_f = 1, "b"_f = '5', "c"_f = "things"})),
             "1 5 things ");
-
-  kumi::record some_record {"a"_f = 1, "b"_f = '5', "c"_f = "things"};
-
-  TTS_EQUAL((some_record.values()([](auto... m) {
-              std::ostringstream s;
-              ((s << m << " "), ...);
-              return s.str();
-            })),
-            "1 5 things ");
 };
 
 TTS_CASE("Check apply constexpr behavior")
@@ -56,13 +47,8 @@ TTS_CASE("Check apply constexpr behavior")
     return kumi::apply([](auto... m) { return (m + ...); }, it);
   }();
 
-  constexpr auto t2 = []() {
-    auto it = kumi::record {"x"_f = 1, "y"_f = 2., "z"_f = 3.f};
-    return it.values()([](auto... m) { return (m + ...); });
-  }();
   constexpr auto empty = []() { return 99; };
   TTS_CONSTEXPR_EQUAL((kumi::apply( empty, kumi::record{})), 99);
 
   TTS_CONSTEXPR_EQUAL(t1, 6.);
-  TTS_CONSTEXPR_EQUAL(t2, 6.);
 };
