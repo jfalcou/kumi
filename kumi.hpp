@@ -1158,7 +1158,7 @@ namespace kumi
             &&  (sizeof...(Us) == sizeof...(Ts))
             &&  (!std::same_as<Ts, Us> && ...)
             )
-    [[nodiscard]] inline constexpr auto cast() const
+    [[deprecated("Will be replaced by free functions")]][[nodiscard]] inline constexpr auto cast() const
     {
       return apply([](auto &&...elems) { return tuple<Us...> {static_cast<Us>(elems)...}; }, *this);
     }
@@ -1233,27 +1233,27 @@ namespace kumi
       return !(lhs < rhs);
     }
     template<typename Function>
-    KUMI_ABI constexpr auto operator()(Function &&f) const&
+    [[deprecated("Use apply() instead")]]KUMI_ABI constexpr auto operator()(Function &&f) const&
     noexcept(noexcept(kumi::apply(KUMI_FWD(f), *this)))
     -> decltype(kumi::apply(KUMI_FWD(f), *this))
     { return kumi::apply(KUMI_FWD(f), *this); }
 #if !defined(KUMI_DOXYGEN_INVOKED)
     template<typename Function>
-    KUMI_ABI constexpr auto operator()(Function &&f) &
+    [[deprecated("Use apply() instead")]]KUMI_ABI constexpr auto operator()(Function &&f) &
     noexcept(noexcept(kumi::apply(KUMI_FWD(f), *this)))
     -> decltype(kumi::apply(KUMI_FWD(f), *this))
     {
       return kumi::apply(KUMI_FWD(f), *this);
     }
     template<typename Function>
-    KUMI_ABI constexpr auto operator()(Function &&f) const &&noexcept(
+    [[deprecated("Use apply() instead")]]KUMI_ABI constexpr auto operator()(Function &&f) const &&noexcept(
     noexcept(kumi::apply(KUMI_FWD(f), static_cast<tuple const &&>(*this))))
     -> decltype(kumi::apply(KUMI_FWD(f), static_cast<tuple const &&>(*this)))
     {
       return kumi::apply(KUMI_FWD(f), static_cast<tuple const &&>(*this));
     }
     template<typename Function>
-    KUMI_ABI constexpr auto operator()(Function &&f) &&noexcept(
+    [[deprecated("Use apply() instead")]]KUMI_ABI constexpr auto operator()(Function &&f) &&noexcept(
     noexcept(kumi::apply(KUMI_FWD(f), static_cast<tuple &&>(*this))))
     -> decltype(kumi::apply(KUMI_FWD(f), static_cast<tuple &&>(*this)))
     {
