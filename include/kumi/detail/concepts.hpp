@@ -55,14 +55,14 @@ namespace kumi::_
     static constexpr bool value = (... && ordered<From,To> );
   };
 
-  template<typename From, typename To>
-  concept piecewise_convertible = _::is_piecewise_convertible<From, To>::value;
+  template<typename From, typename To> concept piecewise_convertible = 
+  _::is_piecewise_convertible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
 
-  template<typename From, typename To>
-  concept piecewise_constructible = _::is_piecewise_constructible<From, To>::value;
+  template<typename From, typename To> concept piecewise_constructible = 
+  _::is_piecewise_constructible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
 
-  template<typename From, typename To>
-  concept piecewise_ordered = _::is_piecewise_ordered<From, To>::value;
+  template<typename From, typename To> concept piecewise_ordered = 
+  _::is_piecewise_ordered<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
 
   template<typename T, typename... Args> concept implicit_constructible = requires(Args... args)
   {
@@ -119,42 +119,42 @@ namespace kumi::_
       }() && ...);
   };
 
-  template<typename From, typename To>
-  concept fieldwise_convertible = is_fieldwise_convertible<From, To>::value;
+  template<typename From, typename To> concept fieldwise_convertible = 
+  _::is_fieldwise_convertible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
 
-  template<typename From, typename To>
-  concept fieldwise_constructible = is_fieldwise_constructible<From, To>::value;
+  template<typename From, typename To> concept fieldwise_constructible = 
+  _::is_fieldwise_constructible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
 
   //================================================================================================
   // Concept machinery to make our algorithms SFINAE friendly
   //================================================================================================
-  template<typename F, typename PT>
+  template<typename F, typename T>
   concept supports_apply = []<std::size_t...N>(std::index_sequence<N...>)
   {
-    return std::invocable<F, raw_member_t<N, PT>...>;
-  }(std::make_index_sequence<size<PT>::value>{});
+    return std::invocable<F, raw_member_t<N, T>...>;
+  }(std::make_index_sequence<size<T>::value>{});
 
-  template<typename F, typename PT>
+  template<typename F, typename T>
   concept supports_nothrow_apply = []<std::size_t...N>(std::index_sequence<N...>)
   {
-      return std::is_nothrow_invocable<F, raw_member_t<N, PT>...>::value;
-  }(std::make_index_sequence<size<PT>::value>{});
+      return std::is_nothrow_invocable<F, raw_member_t<N, T>...>::value;
+  }(std::make_index_sequence<size<T>::value>{});
  
-  template<typename F, typename... Tuples>
+  template<typename F, typename... Ts>
   concept supports_call = []<std::size_t...I>(std::index_sequence<I...>)
   {
     return([]<std::size_t J>(std::integral_constant<std::size_t, J>)
     {   
-        return std::invocable<F, raw_member_t<J, Tuples>...>;
+        return std::invocable<F, raw_member_t<J, Ts>...>;
     }(std::integral_constant<std::size_t, I>{}) && ...);
-  }(std::make_index_sequence<(size<Tuples>::value, ...)>{});
+  }(std::make_index_sequence<(size<Ts>::value, ...)>{});
 
-  template<typename Tuple>
-  concept supports_transpose = (size<Tuple>::value <= 1) || 
+  template<typename T>
+  concept supports_transpose = (size<T>::value <= 1) || 
   ([]<std::size_t...N>(std::index_sequence<N...>)
   {
-    return ((kumi::size_v<raw_member_t<0, Tuple>> == kumi::size_v<raw_member_t<N+1, Tuple>>) && ...);
-  }(std::make_index_sequence<size<Tuple>::value -1>{}));
+    return ((kumi::size_v<raw_member_t<0, T>> == kumi::size_v<raw_member_t<N+1, T>>) && ...);
+  }(std::make_index_sequence<size<T>::value -1>{}));
 
   // Helper for checking if two tuples can == each others
   template<typename T, typename U>

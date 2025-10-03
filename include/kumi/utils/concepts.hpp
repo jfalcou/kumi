@@ -118,26 +118,26 @@ namespace kumi
   //! @ingroup concepts
   //! @brief Concept specifying if a type is comparable for each of its components
   //!
-  //! A type `T` models `kumi::equality_comparable<T,U>` if it is a non-product type which satisfies
-  //! `std::equality_comparable_with<T,U>` or if it's a product type where each of its elements
-  //! satisfies kumi::equality_comparable for all their respective elements.
+  //! A type `T` models `kumi::equality_comparable<T,U>`if it's a product type where each of its 
+  //! elements satisfies kumi::equality_comparable for all their respective elements.
   //================================================================================================
   template<typename T, typename U>
-  concept equality_comparable = (size_v<T> == size_v<U>) && _::check_equality<T,U>();
+  concept equality_comparable = ( size_v<std::remove_cvref_t<T>> == size_v<std::remove_cvref_t<U>>) 
+                                && _::check_equality<std::remove_cvref_t<T>,std::remove_cvref_t<U>>();
 
   //================================================================================================
   //! @ingroup concepts
   //! @brief Concept specifying if parameter pack containes a kumi::field_capture.
   //================================================================================================
   template<typename... Ts>
-  concept has_named_fields = ( ... || is_field_capture_v<Ts> );
+  concept has_named_fields = ( ... || is_field_capture_v<std::remove_cvref_t<Ts>> );
 
   //================================================================================================
   //! @ingroup concepts
   //! @brief Concept specifying if parameter pack contains only kumi::field_captures.
   //================================================================================================
   template<typename... Ts>
-  concept is_fully_named = ( ... && is_field_capture_v<Ts> );
+  concept is_fully_named = ( ... && is_field_capture_v<std::remove_cvref_t<Ts>> );
 
   //================================================================================================
   //! @ingroup concepts
@@ -212,7 +212,7 @@ namespace kumi
   //! @brief Concept specifying if a kumi::field_capture with name Name is present in a parameter pack.
   //================================================================================================
   template<auto Name, typename... Ts>
-  concept contains_field = (_::get_name_index<Name, Ts...>() < sizeof...(Ts));
+  concept contains_field = (_::get_name_index<Name, std::remove_cvref_t<Ts>...>() < sizeof...(Ts));
 
   namespace _
   {
@@ -257,7 +257,8 @@ namespace kumi
   //! members as `U`, and each of its fields has a corresponding field in `U` with the same name
   //================================================================================================
   template<typename T, typename U>
-  concept equivalent = (size_v<T> == size_v<U>) && _::has_same_field_names_v<T,U>;
+  concept equivalent = ( size_v<std::remove_cvref_t<T>> == size_v<std::remove_cvref_t<U>>) 
+                       && _::has_same_field_names_v<std::remove_cvref_t<T>,std::remove_cvref_t<U>>;
 
   //================================================================================================
   //! @ingroup concepts
@@ -268,7 +269,8 @@ namespace kumi
   //! the corresponding field in `U` 
   //================================================================================================
   template<typename T, typename U>
-  concept named_equality_comparable = equivalent<T,U> && _::check_named_equality_v<T,U>;
+  concept named_equality_comparable = equivalent<T,U> 
+  && _::check_named_equality_v<std::remove_cvref_t<T>,std::remove_cvref_t<U>>;
 
   //================================================================================================
   //! @ingroup concepts
