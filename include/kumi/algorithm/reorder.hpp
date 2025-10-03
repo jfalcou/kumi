@@ -64,7 +64,7 @@ namespace kumi
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::reorder
-  //! 
+  //!
   //! ## Example
   //! @include doc/reorder.cpp
   //================================================================================================
@@ -137,10 +137,10 @@ namespace kumi
       using type = decltype( kumi::reindex<Indexes>( std::declval<T>() ) );
     };
    
-    template<product_type Tuple, index_map auto Indexes> 
+    template<product_type T, index_map auto Indexes> 
     struct reindex 
     {
-      using type = decltype( kumi::reindex<Indexes>( std::declval<Tuple>() ) );
+      using type = decltype( kumi::reindex<Indexes>( std::declval<T>() ) );
     };
 
     template<product_type T, std::size_t... Idx>
