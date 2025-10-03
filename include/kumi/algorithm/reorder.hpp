@@ -16,7 +16,7 @@ namespace kumi
   namespace _
   {
     template<index_map auto idxs, product_type T>
-    consteval auto in_bound_index()
+    consteval auto in_bound_indexes()
     {
       using map_t = std::remove_cvref_t<decltype(idxs)>;
       if constexpr ( sized_product_type<T,0> )            return false;
@@ -25,7 +25,7 @@ namespace kumi
       {
         bool checks[] = {( []()
         {
-          if constexpr ( product_type<element_t<N,map_t>> ) return in_bound_index<get<N>(idxs), T>();
+          if constexpr ( product_type<element_t<N,map_t>> ) return in_bound_indexes<get<N>(idxs), T>();
           else if constexpr( get<N>(idxs) < size_v<T> )     return true;
           else                                              return false;
         }())...};
@@ -64,15 +64,15 @@ namespace kumi
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::reorder
-  //! 
+  //!
   //! ## Example
   //! @include doc/reorder.cpp
   //================================================================================================
-  template<std::size_t... Idx, product_type Tuple>
-  requires((Idx < size_v<Tuple>) && ...)
-  [[nodiscard]] KUMI_ABI constexpr auto reorder(Tuple &&t)
+  template<std::size_t... Idx, product_type T>
+  requires((Idx < size_v<T>) && ...)
+  [[nodiscard]] KUMI_ABI constexpr auto reorder(T && t)
   {
-    return _::builder<Tuple>::make( get<Idx>(KUMI_FWD(t))... );
+    return _::builder<T>::make( get<Idx>(KUMI_FWD(t))... );
   }
 
   //================================================================================================
@@ -84,7 +84,7 @@ namespace kumi
   //! @note Nothing prevent the number of reordered index to be lesser or greater than t size or
   //!       the fact they can appear multiple times.
   //!
-  //! @tparam Indexes   A kumi::index_map_t representing the reindexed slot of the elements
+  //! @tparam Indexes   A kumi::indexes representing the reindexed slot of the elements
   //! @param  t kumi::product_type to reindex
   //! @return A potentially nested tuple following the Indexes order 
   //!
@@ -92,10 +92,10 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<product_type Tuple,std::size_t... Idx> struct reindex;
+  //!   template<product_type T, index_map auto Idxs> struct reindex;
   //!
-  //!   template<product_type Tuple,std::size_t... Idx>
-  //!   using reorder_t = typename reindex<Tuple,Idx...>::type;
+  //!   template<product_type T, index_map auto Idxs>
+  //!   using reindex_t= typename reindex<T,Idxs>::type;
   //! }
   //! @endcode
   //!
@@ -104,43 +104,43 @@ namespace kumi
   //! ## Example
   //! @include doc/reindex.cpp
   //================================================================================================
-  template<index_map auto Indexes, product_type Tuple>
-  requires ( _::in_bound_index<Indexes, Tuple>() )
-  [[nodiscard]] KUMI_ABI constexpr auto reindex(Tuple &&t)
+  template<index_map auto Indexes, product_type T>
+  requires ( _::in_bound_indexes<Indexes, T>() )
+  [[nodiscard]] KUMI_ABI constexpr auto reindex(T && t)
   {
-    using idx_type = std::remove_cvref_t<decltype(Indexes)>;
+    using idx_t = std::remove_cvref_t<decltype(Indexes)>;
     auto mk = [&]<auto Idx>() -> decltype(auto)
     {
       if constexpr ( product_type<decltype(Idx)> )  return reindex<Idx>(KUMI_FWD(t));
       else                                          return get<Idx>(KUMI_FWD(t));                  
     };
   
-    if constexpr ( sized_product_type<Tuple, 0> )         return _::builder<Tuple>::make();
-    else if constexpr( sized_product_type<idx_type, 0> )  return _::builder<Tuple>::make();
+         if constexpr ( sized_product_type<T, 0> )      return _::builder<T>::make();
+    else if constexpr ( sized_product_type<idx_t, 0> )  return _::builder<T>::make();
     else return [&]<std::size_t ...I>(std::index_sequence<I...>)
     {
-      return _::builder<Tuple>::make( mk.template operator()<get<I>(Indexes)>()... );
+      return _::builder<T>::make( mk.template operator()<get<I>(Indexes)>()... );
     }(std::make_index_sequence<Indexes.size()>{});
   }
 
   namespace result
   {
-    template<product_type Tuple, std::size_t... Idx>
+    template<product_type T, std::size_t... Idx>
     struct reorder
     {
-      using type = decltype( kumi::reorder<Idx...>( std::declval<Tuple>() ) );
+      using type = decltype( kumi::reorder<Idx...>( std::declval<T>() ) );
     };
    
-    template<product_type Tuple, index_map auto Indexes> 
+    template<product_type T, index_map auto Indexes> 
     struct reindex 
     {
-      using type = decltype( kumi::reindex<Indexes>( std::declval<Tuple>() ) );
+      using type = decltype( kumi::reindex<Indexes>( std::declval<T>() ) );
     };
 
-    template<product_type Tuple, std::size_t... Idx>
-    using reorder_t = typename reorder<Tuple,Idx...>::type;
+    template<product_type T, std::size_t... Idx>
+    using reorder_t = typename reorder<T,Idx...>::type;
      
-    template<product_type Tuple, index_map auto Indexes>
-    using reindex_t = typename reindex<Tuple,Indexes>::type;
+    template<product_type T, index_map auto Indexes>
+    using reindex_t = typename reindex<T,Indexes>::type;
   }
 }

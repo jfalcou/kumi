@@ -14,13 +14,13 @@ namespace kumi
 {
   //================================================================================================
   //! @ingroup utility
-  //! @class index_map_t 
-  //! @brief Compile time tuple of index used to pass several index_map_t as NTTP.
+  //! @class indexes_t 
+  //! @brief Compile time tuple of index used to pass several indexes_t as NTTP.
   //!
-  //! kumi::index_map_t provides a way to define compile time tuple of index_map_t.
+  //! kumi::indexes_t provides a way to define compile time tuple of indexes_t.
   //================================================================================================
   template<indexer... V>
-  struct index_map_t
+  struct indexes_t
   {
     using is_product_type = void;
     using binder_t        = _::make_binder_t<std::make_integer_sequence<int,sizeof...(V)>, V...>;
@@ -35,10 +35,10 @@ namespace kumi
     //! @{
     //==============================================================================================
     
-    /// Returns the number of elements in a kumi::index_map_t
+    /// Returns the number of elements in a kumi::indexes_t
     [[nodiscard]] KUMI_ABI static constexpr auto size() noexcept  { return sizeof...(V);      };
     
-    /// Returns `true` if a kumi::index_map_t contains 0 elements
+    /// Returns `true` if a kumi::indexes_t contains 0 elements
     [[nodiscard]] KUMI_ABI static constexpr auto empty() noexcept { return sizeof...(V) == 0; };
   
     //==============================================================================================
@@ -58,15 +58,15 @@ namespace kumi
     }
     
     //==============================================================================================
-    //! @brief Extracts the Ith element from a kumi::index_map_t
+    //! @brief Extracts the Ith element from a kumi::indexes_t
     //!
     //! @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
     //! @param  i Compile-time index of the element to access
-    //! @return A copy of the value of the selected element of current index_map_t.
+    //! @return A copy of the value of the selected element of current indexes_t.
     //==============================================================================================
     template<std::size_t I>
     requires( I < sizeof...(V) )
-    [[nodiscard]] KUMI_ABI friend constexpr decltype(auto) get(index_map_t& i) noexcept
+    [[nodiscard]] KUMI_ABI friend constexpr decltype(auto) get(indexes_t& i) noexcept
     {
       return i.get_index<I>();
     }
@@ -74,7 +74,7 @@ namespace kumi
     /// @overload
     template<std::size_t I>
     requires( I < sizeof...(V))
-    [[nodiscard]] KUMI_ABI friend constexpr decltype(auto) get(index_map_t const& i) noexcept
+    [[nodiscard]] KUMI_ABI friend constexpr decltype(auto) get(indexes_t const& i) noexcept
     {
       return i.get_index<I>(); 
     }
@@ -83,7 +83,7 @@ namespace kumi
     //==============================================================================================
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, Traits> &os,
-                                                         index_map_t const &i) noexcept
+                                                         indexes_t const &i) noexcept
     {
       os << "( ";
       [&]<std::size_t... I>(std::index_sequence<I...>)
@@ -99,11 +99,16 @@ namespace kumi
     }
   };
 
-  template<indexer... V> KUMI_CUDA index_map_t(V...) -> index_map_t<V...>;
+ //================================================================================================
+  //! @ingroup utility 
+  //! @brief kumi::indexes_t deduction guide
+  //! @tparam Ts  Type lists to build the indexes with.
+  //================================================================================================
+  template<indexer... V> KUMI_CUDA indexes_t(V...) -> indexes_t<V...>;
 
   template<indexer... T>
-  KUMI_ABI consteval auto make_index_map(T... t) noexcept
+  [[nodiscard]] KUMI_ABI consteval auto indexes(T... t) noexcept
   {
-    return index_map_t{t...};
+    return indexes_t{t...};
   }
 }
