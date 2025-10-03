@@ -166,9 +166,6 @@ namespace kumi
     //==============================================================================================
     //! @brief  Converts a tuple<Ts...> to a tuple<Us...>.
     //! @tparam Us Types composing the destination tuple
-    //!
-    //! ## Example:
-    //! @include doc/cast.cpp
     //==============================================================================================
     template<typename... Us>
     requires(   _::piecewise_convertible<tuple, tuple<Us...>>

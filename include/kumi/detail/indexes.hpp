@@ -104,11 +104,20 @@ namespace kumi
   //! @brief kumi::indexes_t deduction guide
   //! @tparam Ts  Type lists to build the indexes with.
   //================================================================================================
-  template<indexer... V> KUMI_CUDA indexes_t(V...) -> indexes_t<V...>;
+  template<indexer... Ts> KUMI_CUDA indexes_t(Ts...) -> indexes_t<Ts...>;
 
-  template<indexer... T>
-  [[nodiscard]] KUMI_ABI consteval auto indexes(T... t) noexcept
+  //================================================================================================
+  //! @ingroup utility 
+  //! @brief Creates a kumi::indexes object, deducing the target type from the types of arguments.
+  //!
+  //! @note The arguments should model kumi::indexer 
+  //!
+  //! @param ts	Zero or more indexes to construct the indexes from.
+  //! @return A kumi::indexes constructed from the ts 
+  //================================================================================================
+  template<indexer... Ts>
+  [[nodiscard]] KUMI_ABI consteval auto indexes(Ts... ts) noexcept
   {
-    return indexes_t{t...};
+    return indexes_t{ts...};
   }
 }
