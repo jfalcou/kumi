@@ -259,4 +259,14 @@ namespace kumi
     || (record_type<T> && (record_type<Us> && ...) 
     && (equivalent<std::remove_cvref_t<T>, std::remove_cvref_t<Us>> && ...))
   );
+
+  template<typename T>
+  concept monoid = []()
+  {
+    using M = std::remove_cvref_t<T>;
+    return requires(M m) {
+      { M::identity };
+      { M{}(M::identity, M::identity) }; //-> std::same_as<I>;
+    };
+  }();
 }
