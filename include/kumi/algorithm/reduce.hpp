@@ -9,6 +9,76 @@
 
 namespace kumi
 {
+  namespace _
+  {
+    template<std::size_t N> struct reducer_t
+    {
+      constexpr auto operator()() const noexcept
+      {
+        constexpr std::size_t half = N/2;
+        struct { std::size_t count = {}, remainder = {}, idx1[half], idx2[half]; } that{};
+        that.remainder = N % 2;
+          
+        [&]<std::size_t...I>(std::index_sequence<I...>)
+        {
+          ((that.idx1[that.count] = 2*I, that.idx2[that.count++] = 2*I+1),...);
+        }(std::make_index_sequence<half>{});
+        
+        return that;
+      }
+    };
+
+    template<std::size_t N>
+    inline constexpr reducer_t<N> reducer{};  
+  }
+
+  template<monoid M, product_type T>
+  [[nodiscard]] KUMI_ABI constexpr auto reduce( M && m, T && t) noexcept
+  {
+         if constexpr ( record_type<T> )  return reduce(KUMI_FWD(m), KUMI_FWD(t).values()) ;
+    else if constexpr ( sized_product_type<T, 0> )  return m.identity;
+    else if constexpr ( sized_product_type<T, 1> )  return get<0>(KUMI_FWD(t));
+    else 
+    {
+      constexpr auto pos = _::reducer<size_v<T>>();
+      
+      auto process = [&]<std::size_t I>(index_t<I>)
+      {
+        if constexpr ( I < pos.count ) return KUMI_FWD(m)(get<pos.idx1[I]>(KUMI_FWD(t)), 
+                                                          get<pos.idx2[I]>(KUMI_FWD(t)));
+        else return get<size_v<T>-1>(KUMI_FWD(t));
+      };
+
+      return [&]<std::size_t...I>(std::index_sequence<I...>)
+      {
+        return reduce(KUMI_FWD(m), kumi::tuple{process(index<I>)...});
+      }(std::make_index_sequence<pos.count + pos.remainder>{});
+    }
+  }
+
+  template<product_type T, monoid M, typename Function>
+  [[nodiscard]] KUMI_ABI constexpr auto map_reduce( Function && f, M && m, T && t ) noexcept
+  {
+         if constexpr ( record_type<T> ) return map_reduce(KUMI_FWD(f), KUMI_FWD(m), KUMI_FWD(t).values());
+    else if constexpr ( sized_product_type<T, 0> )  return m.identity;
+    else if constexpr ( sized_product_type<T, 1> )  return KUMI_FWD(f)(get<0>(KUMI_FWD(t)));
+    else 
+    {
+      constexpr auto pos = _::reducer<size_v<T>>();
+      auto process = [&]<std::size_t I>(index_t<I>)
+      {
+        if constexpr ( I < pos.count )
+            return KUMI_FWD(m)(KUMI_FWD(f)(get<pos.idx1[I]>(KUMI_FWD(t))),                                         
+                               KUMI_FWD(f)(get<pos.idx2[I]>(KUMI_FWD(t))));
+        else return KUMI_FWD(f)(get<size_v<T>-1>(KUMI_FWD(t)));
+      };
+
+      return [&]<std::size_t...I>(std::index_sequence<I...>)
+      {
+        return map_reduce(KUMI_FWD(f), KUMI_FWD(m), kumi::tuple{process(index<I>)...});
+      }(std::make_index_sequence<pos.count + pos.remainder>{});
+    }
+  }
   //================================================================================================
   //! @ingroup reductions
   //! @brief Computes the sum of all elements.
@@ -34,6 +104,7 @@ namespace kumi
   //! @include doc/sum.cpp
   //================================================================================================
   template<product_type Tuple, typename Value>
+  [[deprecated("Use folds/reduce/scan with the corresponding monoid")]]
   [[nodiscard]] KUMI_ABI constexpr auto sum(Tuple&& t, Value init)
   {
     if constexpr( sized_product_type<Tuple,0> ) return init;
@@ -64,6 +135,7 @@ namespace kumi
   //! @include doc/sum.cpp
   //================================================================================================
   template<product_type Tuple>
+  [[deprecated("Use folds/reduce/scan with the corresponding monoid")]]
   [[nodiscard]] KUMI_ABI constexpr auto sum(Tuple&& t)
   {
     if constexpr ( record_type<Tuple> ) return sum( values_of(KUMI_FWD(t)) );
@@ -99,6 +171,7 @@ namespace kumi
   //! @include doc/prod.cpp
   //================================================================================================
   template<product_type Tuple, typename Value>
+  [[deprecated("Use folds/reduce/scan with the corresponding monoid")]]
   [[nodiscard]] KUMI_ABI constexpr auto prod(Tuple&& t, Value init)
   {
     if constexpr(sized_product_type<Tuple,0>) return init;
@@ -129,6 +202,7 @@ namespace kumi
   //! @include doc/prod.cpp
   //================================================================================================
   template<product_type Tuple>
+  [[deprecated("Use folds/reduce/scan with the corresponding monoid")]]
   [[nodiscard]] KUMI_ABI constexpr auto prod(Tuple&& t)
   {
     if constexpr ( record_type<Tuple> ) return prod( values_of(KUMI_FWD(t)) );
@@ -164,6 +238,7 @@ namespace kumi
   //! @include doc/bit_and.cpp
   //================================================================================================
   template<product_type Tuple, typename Value>
+  [[deprecated("Use folds/reduce/scan with the corresponding monoid")]]
   [[nodiscard]] KUMI_ABI constexpr auto bit_and(Tuple&& t, Value init)
   {
     if constexpr(sized_product_type<Tuple,0>) return init;
@@ -194,6 +269,7 @@ namespace kumi
   //! @include doc/bit_and.cpp
   //================================================================================================
   template<product_type Tuple>
+  [[deprecated("Use folds/reduce/scan with the corresponding monoid")]]
   [[nodiscard]] KUMI_ABI constexpr auto bit_and(Tuple&& t)
   {
     if constexpr ( record_type<Tuple> ) return bit_and( values_of(KUMI_FWD(t)) );
@@ -229,6 +305,7 @@ namespace kumi
   //! @include doc/bit_or.cpp
   //================================================================================================
   template<product_type Tuple, typename Value>
+  [[deprecated("Use folds/reduce/scan with the corresponding monoid")]]
   [[nodiscard]] KUMI_ABI constexpr auto bit_or(Tuple&& t, Value init)
   {
     if constexpr(sized_product_type<Tuple,0>) return init;
@@ -259,6 +336,7 @@ namespace kumi
   //! @include doc/bit_or.cpp
   //================================================================================================
   template<product_type Tuple>
+  [[deprecated("Use folds/reduce/scan with the corresponding monoid")]]
   [[nodiscard]] KUMI_ABI constexpr auto bit_or(Tuple&& t)
   {
     if constexpr ( record_type<Tuple> ) return bit_or( values_of(KUMI_FWD(t)) );
@@ -271,6 +349,27 @@ namespace kumi
 
   namespace result
   {
+    template<monoid M, product_type T>
+    struct reduce
+    {
+      using type = decltype(kumi::reduce(std::declval<M>(), std::declval<T>()));
+    };
+
+    template<typename F, monoid M, product_type T>
+    struct map_reduce
+    {
+      using type = decltype(kumi::map_reduce( std::declval<F>()
+                                            , std::declval<M>()
+                                            , std::declval<T>()
+                                            ));
+    };
+
+    template<monoid M, product_type T>
+    using reduce_t = typename reduce<M,T>::type;
+
+    template<typename F, monoid M, product_type T>
+    using map_reduce_t = typename map_reduce<F,M,T>::type;
+
     template<product_type Tuple, typename Value = void>
     struct sum
     {

@@ -10,6 +10,6 @@ int main()
 {
   auto t = kumi::tuple{2.,5,short{3},'\4'};
 
-  std::cout << kumi::prod(t, 10) << "\n";
-  std::cout << kumi::prod(t) << "\n";
+  std::cout << kumi::fold_left(kumi::function::plus,t, 10) << "\n";
+  std::cout << kumi::reduce(kumi::function::plus, t) << "\n";
 }
