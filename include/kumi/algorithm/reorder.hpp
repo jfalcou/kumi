@@ -136,12 +136,6 @@ namespace kumi
     {
       using type = decltype( kumi::reindex<Indexes>( std::declval<T>() ) );
     };
-   
-    template<product_type T, index_map auto Indexes> 
-    struct reindex 
-    {
-      using type = decltype( kumi::reindex<Indexes>( std::declval<T>() ) );
-    };
 
     template<product_type T, std::size_t... Idx>
     using reorder_t = typename reorder<T,Idx...>::type;
