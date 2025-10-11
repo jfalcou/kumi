@@ -269,5 +269,14 @@ namespace kumi
   concept compatible_product_types = (follows_same_semantic<T,Us...> 
     && ((!record_type<T>) || (equivalent<std::remove_cvref_t<T>, std::remove_cvref_t<Us>> && ...)));
 
-  
+
+  template<typename T>
+  concept monoid = []()
+  {
+    using M = std::remove_cvref_t<T>;
+    return requires(M m) {
+      { M::identity };
+      { M{}(M::identity, M::identity) }; //-> std::same_as<I>;
+    };
+  }();
 }

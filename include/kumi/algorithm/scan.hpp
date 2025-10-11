@@ -9,6 +9,31 @@
 
 namespace kumi
 {
+  namespace _
+  {
+    //==============================================================================================
+    // Scan helpers
+    //==============================================================================================
+    template<typename F, typename T> struct scannable 
+    {
+      F func;
+      T value;
+
+      template<typename W>
+      KUMI_ABI friend constexpr decltype(auto) operator>>(scannable &&x, scannable<F, W> &&y)
+      {
+        return _::scannable {x.func, kumi::push_back(x.value, x.func(y.value, x.value))};
+      }
+
+      template<typename W>
+      KUMI_ABI friend constexpr decltype(auto) operator<<(scannable &&x, scannable<F, W> &&y)
+      {
+        return _::scannable {x.func, kumi::push_back(x.value, x.func(x.value, y.value))};
+      }
+    };
+
+    template<class F, class T> scannable(const F &, T &&) -> scannable<F, T>;
+  }
   //================================================================================================
   //! @ingroup reductions
   //! @brief Computes the generalized sum of all elements using a tail recursive call.
@@ -31,20 +56,18 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::fold_left
   //!
-  //! ## Examples:
+  //! ## Example
   //! @include doc/fold_left.cpp
-  //! @include doc/record/fold_left.cpp
   //================================================================================================
   template<typename Function, product_type Tuple, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto fold_left(Function f, Tuple&& t, Value init)
+  [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_left(Function f, Tuple&& t, Value init)
   {
-    if constexpr ( record_type<Tuple> ) return fold_left(f, values_of(KUMI_FWD(t)), init);
-    else if constexpr(sized_product_type<Tuple,0>) return init;
+    if constexpr(sized_product_type<Tuple,0>) return kumi::tuple{init};
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return (_::foldable {f, get<I>(KUMI_FWD(t))} >> ... >> _::foldable {f, init}).value;
+        return (_::scannable{f, get<I>(KUMI_FWD(t))} >> ... >> _::scannable{f, kumi::tuple{init}}).value;
       }
       (std::make_index_sequence<size<Tuple>::value>());
     }
@@ -71,19 +94,17 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::fold_left
   //!
-  //! ## Examples:
+  //! ## Example
   //! @include doc/fold_left.cpp
-  //! @include doc/record/fold_left.cpp
   //================================================================================================
   template<typename Function, sized_product_type_or_more<1> Tuple>
-  [[nodiscard]] KUMI_ABI constexpr auto fold_left(Function f, Tuple&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_left(Function f, Tuple&& t)
   {
-    if constexpr ( record_type<Tuple> ) return fold_left(f, values_of(KUMI_FWD(t)));
-    else if constexpr(sized_product_type<Tuple,1>) return get<0>(KUMI_FWD(t));
+    if constexpr(sized_product_type<Tuple,1>) return KUMI_FWD(t);
     else
     {
       auto&&[heads, tail] = split(KUMI_FWD(t), index<2>);
-      return fold_left(f, tail, kumi::apply(f,heads));
+      return inclusive_scan_left(f, tail, kumi::apply(f,heads));
     }
   }
 
@@ -109,20 +130,18 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::fold_right
   //!
-  //! ## Examples:
+  //! ## Example
   //! @include doc/fold_right.cpp
-  //! @include doc/record/fold_right.cpp
   //================================================================================================
   template<typename Function, product_type Tuple, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto fold_right(Function f, Tuple&& t, Value init)
+  [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_right(Function f, Tuple&& t, Value init)
   {
-    if constexpr ( record_type<Tuple> ) return fold_right(f, values_of(KUMI_FWD(t)), init);
-    else if constexpr( sized_product_type<Tuple,0> ) return init;
+    if constexpr( sized_product_type<Tuple,0> ) return kumi::tuple{init};
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return (_::foldable {f, init} << ... << _::foldable {f, get<I>(KUMI_FWD(t))}).value;
+        return (_::scannable {f, kumi::tuple{init}} << ... << _::scannable {f, get<I>(KUMI_FWD(t))}).value;
       }
       (std::make_index_sequence<size<Tuple>::value>());
     }
@@ -149,23 +168,21 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::fold_right
   //!
-  //! ## Examples:
+  //! ## Example
   //! @include doc/fold_right.cpp
-  //! @include doc/record/fold_right.cpp
   //================================================================================================
   template<typename Function, sized_product_type_or_more<1> Tuple>
-  [[nodiscard]] KUMI_ABI constexpr auto fold_right(Function f, Tuple&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_right(Function f, Tuple&& t)
   {
-    if constexpr ( record_type<Tuple> ) return fold_right(f, values_of(KUMI_FWD(t)));
-    else if constexpr(sized_product_type<Tuple,1>) return get<0>(KUMI_FWD(t));
+    if constexpr(sized_product_type<Tuple,1>) return KUMI_FWD(t);
     else
     {
       auto&&[head, tails] = split(KUMI_FWD(t), index<size_v<Tuple>-2>);
-      return fold_right(f, head, kumi::apply(f,tails));
+      return inclusive_scan_right(f, head, kumi::apply(f,tails));
     }
   }
 
-  namespace result
+  /*namespace result
   {
     template<typename Function, product_type Tuple, typename Value = void>
     struct fold_right
@@ -210,6 +227,6 @@ namespace kumi
 
     template<typename Function, product_type Tuple, typename Value = void>
     using fold_left_t = typename fold_left<Function,Tuple,Value>::type;
-  }
+  }*/
 }
 

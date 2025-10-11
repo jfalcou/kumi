@@ -10,6 +10,6 @@ int main()
 {
   auto t = kumi::tuple{1,short{8},' ', 4ULL};
 
-  std::cout << kumi::bit_or(t, 0) << "\n";
-  std::cout << kumi::bit_or(t) << "\n";
+  std::cout << kumi::fold_left(kumi::function::bit_or, t, 0) << "\n";
+  std::cout << kumi::reduce(kumi::function::bit_or, t) << "\n";
 }
