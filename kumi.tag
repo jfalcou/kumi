@@ -126,6 +126,60 @@
       <arglist></arglist>
     </member>
   </compound>
+  <compound kind="class">
+    <name>kumi::indexes_t</name>
+    <filename>structkumi_1_1indexes__t.html</filename>
+    <templarg>indexer... V</templarg>
+    <member kind="function" static="yes">
+      <type>static constexpr auto</type>
+      <name>size</name>
+      <anchorfile>structkumi_1_1indexes__t.html</anchorfile>
+      <anchor>a6562f464b767bcc8b38b05ba378928b5</anchor>
+      <arglist>() noexcept</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static constexpr auto</type>
+      <name>empty</name>
+      <anchorfile>structkumi_1_1indexes__t.html</anchorfile>
+      <anchor>ae57341a487116b86f5d2f9a3a31607a4</anchor>
+      <arglist>() noexcept</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static constexpr auto</type>
+      <name>size</name>
+      <anchorfile>structkumi_1_1indexes__t.html</anchorfile>
+      <anchor>a6562f464b767bcc8b38b05ba378928b5</anchor>
+      <arglist>() noexcept</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static constexpr auto</type>
+      <name>empty</name>
+      <anchorfile>structkumi_1_1indexes__t.html</anchorfile>
+      <anchor>ae57341a487116b86f5d2f9a3a31607a4</anchor>
+      <arglist>() noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr decltype(auto)</type>
+      <name>get_index</name>
+      <anchorfile>structkumi_1_1indexes__t.html</anchorfile>
+      <anchor>ab13af7957b1760751a2615e076454db7</anchor>
+      <arglist>() const noexcept</arglist>
+    </member>
+    <member kind="friend">
+      <type>friend constexpr decltype(auto)</type>
+      <name>get</name>
+      <anchorfile>structkumi_1_1indexes__t_a3fb9428a3c6e9260c0a36fd92a7f8621.html</anchorfile>
+      <anchor>a3fb9428a3c6e9260c0a36fd92a7f8621</anchor>
+      <arglist>(indexes_t &amp;i) noexcept</arglist>
+    </member>
+    <member kind="friend">
+      <type>friend constexpr decltype(auto)</type>
+      <name>get</name>
+      <anchorfile>structkumi_1_1indexes__t.html</anchorfile>
+      <anchor>a4dcaa01fe6d481ace4d5a83576acdcc8</anchor>
+      <arglist>(indexes_t const &amp;i) noexcept</arglist>
+    </member>
+  </compound>
   <compound kind="struct">
     <name>kumi::is_homogeneous</name>
     <filename>structkumi_1_1is__homogeneous.html</filename>
@@ -600,6 +654,14 @@
     <filename>conceptkumi_1_1homogeneous__product__type.html</filename>
   </compound>
   <compound kind="concept">
+    <name>kumi::index_map</name>
+    <filename>conceptkumi_1_1index__map.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>kumi::indexer</name>
+    <filename>conceptkumi_1_1indexer.html</filename>
+  </compound>
+  <compound kind="concept">
     <name>kumi::is_fully_named</name>
     <filename>conceptkumi_1_1is__fully__named.html</filename>
   </compound>
@@ -649,6 +711,7 @@
     <class kind="class">kumi::field_capture</class>
     <class kind="class">kumi::field_name</class>
     <class kind="struct">kumi::index_t</class>
+    <class kind="class">kumi::indexes_t</class>
     <class kind="struct">kumi::is_homogeneous</class>
     <class kind="struct">kumi::is_product_type</class>
     <class kind="struct">kumi::is_record_type</class>
@@ -667,6 +730,8 @@
     <concept>kumi::sized_product_type</concept>
     <concept>kumi::sized_product_type_or_more</concept>
     <concept>kumi::non_empty_product_type</concept>
+    <concept>kumi::index_map</concept>
+    <concept>kumi::indexer</concept>
     <concept>kumi::homogeneous_product_type</concept>
     <concept>kumi::equality_comparable</concept>
     <concept>kumi::has_named_fields</concept>
@@ -931,6 +996,20 @@
       <arglist>(Function const &amp;f) noexcept</arglist>
     </member>
     <member kind="function">
+      <type>consteval auto</type>
+      <name>indexes</name>
+      <anchorfile>group__utility_gad9d978893c5e64520e0b0d83d133c26c.html</anchorfile>
+      <anchor>gad9d978893c5e64520e0b0d83d133c26c</anchor>
+      <arglist>(Ts... ts) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>KUMI_CUDA</type>
+      <name>indexes_t</name>
+      <anchorfile>group__utility_gaccc36e7b78d9da78548eebf22ea28492.html</anchorfile>
+      <anchor>gaccc36e7b78d9da78548eebf22ea28492</anchor>
+      <arglist>(Ts...) -&gt; indexes_t&lt; Ts... &gt;</arglist>
+    </member>
+    <member kind="function">
       <type>constexpr auto</type>
       <name>inner_product</name>
       <anchorfile>namespacekumi.html</anchorfile>
@@ -1100,10 +1179,17 @@
     </member>
     <member kind="function">
       <type>constexpr auto</type>
+      <name>reindex</name>
+      <anchorfile>group__generators_ga6a35aaac7b583b81c4c7d6dd91119f4e.html</anchorfile>
+      <anchor>ga6a35aaac7b583b81c4c7d6dd91119f4e</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
       <name>reorder</name>
-      <anchorfile>group__generators_ga1e46ab6777b551e4c4357cc24dcbdda3.html</anchorfile>
-      <anchor>ga1e46ab6777b551e4c4357cc24dcbdda3</anchor>
-      <arglist>(Tuple &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_ga3e46e6c4fe83aeb9ce77f9002baada79.html</anchorfile>
+      <anchor>ga3e46e6c4fe83aeb9ce77f9002baada79</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1331,6 +1417,13 @@
     </member>
     <member kind="variable">
       <type>constexpr auto</type>
+      <name>is_index_map_v</name>
+      <anchorfile>group__traits_gab5b49ae5dceb172900933f69d976b933.html</anchorfile>
+      <anchor>gab5b49ae5dceb172900933f69d976b933</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
       <name>member_name_v</name>
       <anchorfile>group__traits_gad563635992de7b6e1431b468ed9ef398.html</anchorfile>
       <anchor>gad563635992de7b6e1431b468ed9ef398</anchor>
@@ -1487,6 +1580,7 @@
     <filename>group__utility.html</filename>
     <class kind="struct">kumi::as_tuple</class>
     <class kind="struct">kumi::index_t</class>
+    <class kind="class">kumi::indexes_t</class>
     <class kind="class">kumi::str</class>
     <class kind="class">kumi::unit</class>
     <member kind="function">
@@ -1509,6 +1603,20 @@
       <anchorfile>group__utility_gae40b8dfe98266c4f62395c369833eef3.html</anchorfile>
       <anchor>gae40b8dfe98266c4f62395c369833eef3</anchor>
       <arglist>(Tuple &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>consteval auto</type>
+      <name>kumi::indexes</name>
+      <anchorfile>group__utility_gad9d978893c5e64520e0b0d83d133c26c.html</anchorfile>
+      <anchor>gad9d978893c5e64520e0b0d83d133c26c</anchor>
+      <arglist>(Ts... ts) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>KUMI_CUDA</type>
+      <name>kumi::indexes_t</name>
+      <anchorfile>group__utility_gaccc36e7b78d9da78548eebf22ea28492.html</anchorfile>
+      <anchor>gaccc36e7b78d9da78548eebf22ea28492</anchor>
+      <arglist>(Ts...) -&gt; indexes_t&lt; Ts... &gt;</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1917,10 +2025,17 @@
     </member>
     <member kind="function">
       <type>constexpr auto</type>
+      <name>kumi::reindex</name>
+      <anchorfile>group__generators_ga6a35aaac7b583b81c4c7d6dd91119f4e.html</anchorfile>
+      <anchor>ga6a35aaac7b583b81c4c7d6dd91119f4e</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
       <name>kumi::reorder</name>
-      <anchorfile>group__generators_ga1e46ab6777b551e4c4357cc24dcbdda3.html</anchorfile>
-      <anchor>ga1e46ab6777b551e4c4357cc24dcbdda3</anchor>
-      <arglist>(Tuple &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_ga3e46e6c4fe83aeb9ce77f9002baada79.html</anchorfile>
+      <anchor>ga3e46e6c4fe83aeb9ce77f9002baada79</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -2050,6 +2165,8 @@
     <concept>kumi::sized_product_type</concept>
     <concept>kumi::sized_product_type_or_more</concept>
     <concept>kumi::non_empty_product_type</concept>
+    <concept>kumi::index_map</concept>
+    <concept>kumi::indexer</concept>
     <concept>kumi::homogeneous_product_type</concept>
     <concept>kumi::equality_comparable</concept>
     <concept>kumi::has_named_fields</concept>
@@ -2096,6 +2213,13 @@
       <name>kumi::is_field_capture_v</name>
       <anchorfile>group__traits_ga36e654d6b1df0645cfc9854dee56fa03.html</anchorfile>
       <anchor>ga36e654d6b1df0645cfc9854dee56fa03</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>kumi::is_index_map_v</name>
+      <anchorfile>group__traits_gab5b49ae5dceb172900933f69d976b933.html</anchorfile>
+      <anchor>gab5b49ae5dceb172900933f69d976b933</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">

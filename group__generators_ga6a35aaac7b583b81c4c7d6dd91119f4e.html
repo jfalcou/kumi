@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::tuple::to_ref</title>
+<title>kumi: kumi::reindex</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__tuple_ga6cde1bebcc6150b864820645ad4cf14f.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__generators_ga6a35aaac7b583b81c4c7d6dd91119f4e.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,60 +121,82 @@ $(document).ready(function(){initNavTree('group__tuple_ga6cde1bebcc6150b86482064
 </div>
 
 <div class="contents">
-<a id="ga6cde1bebcc6150b864820645ad4cf14f" name="ga6cde1bebcc6150b864820645ad4cf14f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6cde1bebcc6150b864820645ad4cf14f">&#9670;&#160;</a></span>to_ref()</h2>
+<a id="ga6a35aaac7b583b81c4c7d6dd91119f4e" name="ga6a35aaac7b583b81c4c7d6dd91119f4e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6a35aaac7b583b81c4c7d6dd91119f4e">&#9670;&#160;</a></span>reindex()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;product_type Type&gt; </div>
+template&lt;index_map <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a> Indexes, product_type T&gt; <br />
+requires ( _::in_bound_indexes&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Indexes</a>, <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T</a>&gt;() )</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a> to_ref </td>
+          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a> kumi::reindex </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Type</a> &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T</a> &amp;&amp;&#160;</td>
           <td class="paramname"><em>t</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Creates a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> of references given a reference to a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">t</td><td>Compile-time index of the element to access </td></tr>
+<p>Reindex elements of a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>. </p>
+<p>This function does not participate in overload resolution if any Idx is outside [0, size_v&lt;T&gt;[.</p>
+<dl class="section note"><dt>Note</dt><dd>Nothing prevent the number of reordered index to be lesser or greater than t size or the fact they can appear multiple times.</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Indexes</td><td>A <a class="el" href="group__utility_gad9d978893c5e64520e0b0d83d133c26c.html#gad9d978893c5e64520e0b0d83d133c26c" title="Creates a kumi::indexes object, deducing the target type from the types of arguments.">kumi::indexes</a> representing the reindexed slot of the elements </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A tuple equivalent to the result of <code><a class="el" href="group__transforms_ga2c808f8956ae85b42b9b8a8ed09cc371.html#ga2c808f8956ae85b42b9b8a8ed09cc371" title="Invoke the Callable object f with a product_type of arguments. f is applied on the values if the give...">kumi::apply</a>([]&lt;typename... T&gt;(T&amp;&amp;... e) { return kumi::forward_as_tuple(std::forward&lt;T&gt;(e)...); }, t)</code></dd></dl>
-<h2><a class="anchor" id="autotoc_md122"></a>
-Example:</h2>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td><a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a> to reindex </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A potentially nested tuple following the Indexes order</dd></dl>
+<h2><a class="anchor" id="autotoc_md95"></a>
+Helper type</h2>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;product_type T, index_map auto Idxs&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__generators_ga6a35aaac7b583b81c4c7d6dd91119f4e.html#ga6a35aaac7b583b81c4c7d6dd91119f4e">reindex</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">template</span>&lt;product_type T, index_map auto Idxs&gt;</div>
+<div class="line">  <span class="keyword">using </span>reindex_t= <span class="keyword">typename</span> reindex&lt;T,Idxs&gt;::type;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__generators_ga6a35aaac7b583b81c4c7d6dd91119f4e_html_ga6a35aaac7b583b81c4c7d6dd91119f4e"><div class="ttname"><a href="group__generators_ga6a35aaac7b583b81c4c7d6dd91119f4e.html#ga6a35aaac7b583b81c4c7d6dd91119f4e">kumi::reindex</a></div><div class="ttdeci">constexpr auto reindex(T &amp;&amp;t)</div><div class="ttdoc">Reindex elements of a kumi::product_type.</div><div class="ttdef"><b>Definition</b> reorder.hpp:109</div></div>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__generators_ga6a35aaac7b583b81c4c7d6dd91119f4e.html#ga6a35aaac7b583b81c4c7d6dd91119f4e" title="Reindex elements of a kumi::product_type.">kumi::reindex</a></p>
+<h2><a class="anchor" id="autotoc_md96"></a>
+Example</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">main</a>()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a> = <a class="code hl_function" href="group__tuple_ga7ac66d9df58dd663395f325feb4d1b04.html#ga7ac66d9df58dd663395f325feb4d1b04">kumi::make_tuple</a>(0,<span class="charliteral">&#39;0&#39;</span>,0.f);</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">ref</a>      = kumi::to_ref( <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a> );</div>
+<div class="line">  <span class="keyword">auto</span> values = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> { 1, <span class="charliteral">&#39;a&#39;</span>, 0.1 };</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">  <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::get&lt;0&gt;</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">ref</a>) = 9;</div>
-<div class="line">  <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::get&lt;1&gt;</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">ref</a>) = <span class="charliteral">&#39;z&#39;</span>;</div>
-<div class="line">  <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::get&lt;2&gt;</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">ref</a>) = 3.14159f;</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">basic</a> = <a class="code hl_function" href="group__utility_gad9d978893c5e64520e0b0d83d133c26c.html#gad9d978893c5e64520e0b0d83d133c26c">kumi::indexes</a>(2,1,0);</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">stack</a> = <a class="code hl_function" href="group__utility_gad9d978893c5e64520e0b0d83d133c26c.html#gad9d978893c5e64520e0b0d83d133c26c">kumi::indexes</a>(2,1,0, <a class="code hl_function" href="group__utility_gad9d978893c5e64520e0b0d83d133c26c.html#gad9d978893c5e64520e0b0d83d133c26c">kumi::indexes</a>(0,1,2));</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">pairs</a> = <a class="code hl_function" href="group__utility_gad9d978893c5e64520e0b0d83d133c26c.html#gad9d978893c5e64520e0b0d83d133c26c">kumi::indexes</a>(<a class="code hl_function" href="group__utility_gad9d978893c5e64520e0b0d83d133c26c.html#gad9d978893c5e64520e0b0d83d133c26c">kumi::indexes</a>(0,0), <a class="code hl_function" href="group__utility_gad9d978893c5e64520e0b0d83d133c26c.html#gad9d978893c5e64520e0b0d83d133c26c">kumi::indexes</a>(1,1));</div>
+<div class="line">  </div>
+<div class="line">  std::cout &lt;&lt; values &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; kumi::reindex&lt;basic&gt;(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; kumi::reindex&lt;stack&gt;(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; kumi::reindex&lt;pairs&gt;(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__tuple_ga7ac66d9df58dd663395f325feb4d1b04_html_ga7ac66d9df58dd663395f325feb4d1b04"><div class="ttname"><a href="group__tuple_ga7ac66d9df58dd663395f325feb4d1b04.html#ga7ac66d9df58dd663395f325feb4d1b04">kumi::make_tuple</a></div><div class="ttdeci">constexpr auto make_tuple(Ts &amp;&amp;...ts) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</div><div class="ttdoc">Creates a tuple object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> tuple.hpp:426</div></div>
 <div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:59</div></div>
+<div class="ttc" id="agroup__utility_gad9d978893c5e64520e0b0d83d133c26c_html_gad9d978893c5e64520e0b0d83d133c26c"><div class="ttname"><a href="group__utility_gad9d978893c5e64520e0b0d83d133c26c.html#gad9d978893c5e64520e0b0d83d133c26c">kumi::indexes</a></div><div class="ttdeci">consteval auto indexes(Ts... ts) noexcept</div><div class="ttdoc">Creates a kumi::indexes object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> indexes.hpp:119</div></div>
+<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:36</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -184,7 +206,7 @@ Example:</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li><li class="navelem"><a class="el" href="structkumi_1_1tuple.html">tuple</a></li>
+    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->
