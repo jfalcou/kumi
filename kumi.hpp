@@ -224,12 +224,12 @@ namespace kumi::_
   {
     static constexpr bool value = (... && ordered<From,To> );
   };
-  template<typename From, typename To>
-  concept piecewise_convertible = _::is_piecewise_convertible<From, To>::value;
-  template<typename From, typename To>
-  concept piecewise_constructible = _::is_piecewise_constructible<From, To>::value;
-  template<typename From, typename To>
-  concept piecewise_ordered = _::is_piecewise_ordered<From, To>::value;
+  template<typename From, typename To> concept piecewise_convertible = 
+  _::is_piecewise_convertible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
+  template<typename From, typename To> concept piecewise_constructible = 
+  _::is_piecewise_constructible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
+  template<typename From, typename To> concept piecewise_ordered = 
+  _::is_piecewise_ordered<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
   template<typename T, typename... Args> concept implicit_constructible = requires(Args... args)
   {
     T {args...};
@@ -271,34 +271,34 @@ namespace kumi::_
         return std::is_constructible_v<unwrap_field_capture_t<F_field>, unwrap_field_capture_t<T_field>>;
       }() && ...);
   };
-  template<typename From, typename To>
-  concept fieldwise_convertible = is_fieldwise_convertible<From, To>::value;
-  template<typename From, typename To>
-  concept fieldwise_constructible = is_fieldwise_constructible<From, To>::value;
-  template<typename F, typename PT>
+  template<typename From, typename To> concept fieldwise_convertible = 
+  _::is_fieldwise_convertible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
+  template<typename From, typename To> concept fieldwise_constructible = 
+  _::is_fieldwise_constructible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
+  template<typename F, typename T>
   concept supports_apply = []<std::size_t...N>(std::index_sequence<N...>)
   {
-    return std::invocable<F, raw_member_t<N, PT>...>;
-  }(std::make_index_sequence<size<PT>::value>{});
-  template<typename F, typename PT>
+    return std::invocable<F, raw_member_t<N, T>...>;
+  }(std::make_index_sequence<size<T>::value>{});
+  template<typename F, typename T>
   concept supports_nothrow_apply = []<std::size_t...N>(std::index_sequence<N...>)
   {
-      return std::is_nothrow_invocable<F, raw_member_t<N, PT>...>::value;
-  }(std::make_index_sequence<size<PT>::value>{});
-  template<typename F, typename... Tuples>
+      return std::is_nothrow_invocable<F, raw_member_t<N, T>...>::value;
+  }(std::make_index_sequence<size<T>::value>{});
+  template<typename F, typename... Ts>
   concept supports_call = []<std::size_t...I>(std::index_sequence<I...>)
   {
     return([]<std::size_t J>(std::integral_constant<std::size_t, J>)
     {   
-        return std::invocable<F, raw_member_t<J, Tuples>...>;
+        return std::invocable<F, raw_member_t<J, Ts>...>;
     }(std::integral_constant<std::size_t, I>{}) && ...);
-  }(std::make_index_sequence<(size<Tuples>::value, ...)>{});
-  template<typename Tuple>
-  concept supports_transpose = (size<Tuple>::value <= 1) || 
+  }(std::make_index_sequence<(size<Ts>::value, ...)>{});
+  template<typename T>
+  concept supports_transpose = (size<T>::value <= 1) || 
   ([]<std::size_t...N>(std::index_sequence<N...>)
   {
-    return ((kumi::size_v<raw_member_t<0, Tuple>> == kumi::size_v<raw_member_t<N+1, Tuple>>) && ...);
-  }(std::make_index_sequence<size<Tuple>::value -1>{}));
+    return ((kumi::size_v<raw_member_t<0, T>> == kumi::size_v<raw_member_t<N+1, T>>) && ...);
+  }(std::make_index_sequence<size<T>::value -1>{}));
   template<typename T, typename U>
   concept comparable = requires(T t, U u)
   {
@@ -367,11 +367,12 @@ namespace kumi
     }
   }
   template<typename T, typename U>
-  concept equality_comparable = (size_v<T> == size_v<U>) && _::check_equality<T,U>();
+  concept equality_comparable = ( size_v<std::remove_cvref_t<T>> == size_v<std::remove_cvref_t<U>>) 
+                                && _::check_equality<std::remove_cvref_t<T>,std::remove_cvref_t<U>>();
   template<typename... Ts>
-  concept has_named_fields = ( ... || is_field_capture_v<Ts> );
+  concept has_named_fields = ( ... || is_field_capture_v<std::remove_cvref_t<Ts>> );
   template<typename... Ts>
-  concept is_fully_named = ( ... && is_field_capture_v<Ts> );
+  concept is_fully_named = ( ... && is_field_capture_v<std::remove_cvref_t<Ts>> );
   template<typename... Ts>
   concept uniquely_typed = ( !has_named_fields<Ts...> ) && all_uniques_v<_::box<Ts>...>;
   template<typename... Ts>
@@ -417,7 +418,7 @@ namespace kumi
     }
   }
   template<auto Name, typename... Ts>
-  concept contains_field = (_::get_name_index<Name, Ts...>() < sizeof...(Ts));
+  concept contains_field = (_::get_name_index<Name, std::remove_cvref_t<Ts>...>() < sizeof...(Ts));
   namespace _
   {
     template<typename T, typename U> struct has_same_field_names;
@@ -448,9 +449,11 @@ namespace kumi
     inline constexpr bool check_named_equality_v = check_named_equality<T,U>::value;
   }
   template<typename T, typename U>
-  concept equivalent = (size_v<T> == size_v<U>) && _::has_same_field_names_v<T,U>;
+  concept equivalent = ( size_v<std::remove_cvref_t<T>> == size_v<std::remove_cvref_t<U>>) 
+                       && _::has_same_field_names_v<std::remove_cvref_t<T>,std::remove_cvref_t<U>>;
   template<typename T, typename U>
-  concept named_equality_comparable = equivalent<T,U> && _::check_named_equality_v<T,U>;
+  concept named_equality_comparable = equivalent<T,U> 
+  && _::check_named_equality_v<std::remove_cvref_t<T>,std::remove_cvref_t<U>>;
   template<typename T, typename... Us>
   concept compatible_product_types = (product_type<T> && ( product_type<Us> && ...))  &&
     ((!record_type<T> && (!record_type<Us> && ...))
