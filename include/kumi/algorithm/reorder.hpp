@@ -78,6 +78,42 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup generators
+  //! @brief Reorder elements of a kumi::record
+  //!
+  //! This function does not participate in overload resolution if the names are not in T
+  //!
+  //! @note Nothing prevent the number of reordered names to be lesser or greater than t size or
+  //!       the fact they can appear multiple times if it is applied on a named tuple. 
+  //!
+  //! @tparam Name     Reordered names of elements
+  //! @param  t kumi::product_type to reorder
+  //! @return A product type equivalent to product_type(t[index<Idx>]...);
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<product_type Tuple,std::size_t... Idx> struct reorder_fields;
+  //!
+  //!   template<product_type Tuple,std::size_t... Idx>
+  //!   using reorder_fields_t = typename reorder_fields<Tuple,Idx...>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::reorder_fields
+  //!
+  //! ## Example
+  //! @include doc/record/reorder_fields.cpp
+  //================================================================================================
+  template<field_name... Name, product_type Tuple>
+  requires ( requires { get<Name>(std::declval<Tuple>()); } && ... )
+  KUMI_ABI constexpr auto reorder_fields(Tuple && t)
+  {
+    return _::builder<Tuple>::make( Name = get<Name>(KUMI_FWD(t))... );
+  }
+
+  //================================================================================================
+  //! @ingroup generators
   //! @brief Reindex elements of a kumi::product_type
   //!
   //! This function does not participate in overload resolution if any Idx is outside [0, size_v<T>[.
@@ -122,42 +158,6 @@ namespace kumi
     {
       return _::builder<T>::make( mk.template operator()<get<I>(Indexes)>()... );
     }(std::make_index_sequence<Indexes.size()>{});
-  }
-
-  //================================================================================================
-  //! @ingroup generators
-  //! @brief Reorder elements of a kumi::record
-  //!
-  //! This function does not participate in overload resolution if the names are not in T
-  //!
-  //! @note Nothing prevent the number of reordered names to be lesser or greater than t size or
-  //!       the fact they can appear multiple times if it is applied on a named tuple. 
-  //!
-  //! @tparam Name     Reordered names of elements
-  //! @param  t kumi::product_type to reorder
-  //! @return A product type equivalent to product_type(t[index<Idx>]...);
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi::result
-  //! {
-  //!   template<product_type Tuple,std::size_t... Idx> struct reorder_fields;
-  //!
-  //!   template<product_type Tuple,std::size_t... Idx>
-  //!   using reorder_fields_t = typename reorder_fields<Tuple,Idx...>::type;
-  //! }
-  //! @endcode
-  //!
-  //! Computes the return type of a call to kumi::reorder_fields
-  //!
-  //! ## Example
-  //! @include doc/record/reorder_fields.cpp
-  //================================================================================================
-  template<field_name... Name, product_type Tuple>
-  requires ( requires { get<Name>(std::declval<Tuple>()); } && ... )
-  KUMI_ABI constexpr auto reorder_fields(Tuple && t)
-  {
-    return _::builder<Tuple>::make( field_name<Name.name>{} = get<Name>(KUMI_FWD(t))... );
   }
 
   namespace result
