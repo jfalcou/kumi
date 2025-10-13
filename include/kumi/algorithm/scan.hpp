@@ -24,7 +24,7 @@ namespace kumi
       {
         auto v_or_t = [&]
         {
-            if constexpr ( !product_type<T> ) return kumi::tuple{x.func(x.acc, y.acc)};
+            if constexpr ( !product_type<decltype(x.acc)> ) return kumi::tuple{x.func(x.acc, y.acc)};
             else return kumi::push_back(x.acc, x.func(kumi::get<kumi::size_v<T>-1>(x.acc), y.acc));
         };
         return _::scannable {x.func, v_or_t()};
@@ -35,7 +35,7 @@ namespace kumi
       {
         auto v_or_t = [&]
         {
-            if constexpr ( !product_type<T> ) return kumi::tuple{x.func(y.acc, x.acc)};
+            if constexpr ( !product_type<decltype(x.acc)> ) return kumi::tuple{x.func(y.acc, x.acc)};
             else return kumi::push_front(x.acc, x.func(y.acc, kumi::get<0>(x.acc)));
         };
         return _::scannable {x.func, v_or_t()};
