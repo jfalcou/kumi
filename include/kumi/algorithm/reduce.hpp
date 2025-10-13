@@ -32,10 +32,36 @@ namespace kumi
     inline constexpr reducer_t<N> reducer{};  
   }
 
+  //================================================================================================
+  //! @ingroup reductions
+  //! @brief Performs a tree-like reduction of all elements of a product type.
+  //!
+  //! @note For associative operations, this produces the same result as a left or right fold,
+  //!       but may have different intermediate evaluation order.
+  //!
+  //! @param m   Monoid callable function to apply
+  //! @param t   Tuple to reduce
+  //! @return    The result of reducing `t` by recursively combining elements in a tree structure
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<monoid M, product_type Tuple> struct reduce;
+  //!
+  //!   template<monoid M, product_type Tuple>
+  //!   using reduce_t = typename reduce_t<M,Tuple>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::reduce
+  //! ## Example
+  //! @include doc/reduce.cpp
+  //================================================================================================
   template<monoid M, product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto reduce( M && m, T && t) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto reduce( M && m, T && t ) 
   {
-         if constexpr ( record_type<T> )  return reduce(KUMI_FWD(m), KUMI_FWD(t).values()) ;
+    if constexpr ( record_type<T> ) return reduce(KUMI_FWD(m), KUMI_FWD(t).values()) ;
     else if constexpr ( sized_product_type<T, 0> )  return m.identity;
     else if constexpr ( sized_product_type<T, 1> )  return get<0>(KUMI_FWD(t));
     else 
@@ -56,10 +82,38 @@ namespace kumi
     }
   }
 
+  //================================================================================================
+  //! @ingroup reductions
+  //! @brief Performs a tree-like reduction of all elements of a product type. The given map 
+  //!        function is applied before excution the reduction to each element of the input.
+  //!
+  //! @note For associative operations, this produces the same result as a left or right fold 
+  //!       preceeded by map, but may have different intermediate evaluation order.
+  //!
+  //! @param f   Mapping function to apply
+  //! @param m   Monoid callable function to apply
+  //! @param t   Tuple to reduce
+  //! @return    The result of reducing `t` by recursively combining elements in a tree structure
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<monoid M, product_type Tuple> struct map_reduce;
+  //!
+  //!   template<monoid M, product_type Tuple>
+  //!   using map_reduce_t = typename map_reduce_t<M,Tuple>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::map_reduce
+  //! ## Example
+  //! @include doc/map_reduce.cpp
+  //================================================================================================
   template<product_type T, monoid M, typename Function>
-  [[nodiscard]] KUMI_ABI constexpr auto map_reduce( Function && f, M && m, T && t ) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto map_reduce( Function && f, M && m, T && t ) 
   {
-         if constexpr ( record_type<T> ) return map_reduce(KUMI_FWD(f), KUMI_FWD(m), KUMI_FWD(t).values());
+    if constexpr ( record_type<T> ) return map_reduce(KUMI_FWD(f), KUMI_FWD(m), KUMI_FWD(t).values());
     else if constexpr ( sized_product_type<T, 0> )  return m.identity;
     else if constexpr ( sized_product_type<T, 1> )  return KUMI_FWD(f)(get<0>(KUMI_FWD(t)));
     else 
@@ -99,9 +153,6 @@ namespace kumi
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::sum
-  //!
-  //! ## Example
-  //! @include doc/sum.cpp
   //================================================================================================
   template<product_type Tuple, typename Value>
   [[deprecated("Use folds/reduce/scan with the corresponding monoid")]]
@@ -130,9 +181,6 @@ namespace kumi
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::sum
-  //!
-  //! ## Example
-  //! @include doc/sum.cpp
   //================================================================================================
   template<product_type Tuple>
   [[deprecated("Use folds/reduce/scan with the corresponding monoid")]]
@@ -166,9 +214,6 @@ namespace kumi
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::prod
-  //!
-  //! ## Example
-  //! @include doc/prod.cpp
   //================================================================================================
   template<product_type Tuple, typename Value>
   [[deprecated("Use folds/reduce/scan with the corresponding monoid")]]
@@ -197,9 +242,6 @@ namespace kumi
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::prod
-  //!
-  //! ## Example
-  //! @include doc/prod.cpp
   //================================================================================================
   template<product_type Tuple>
   [[deprecated("Use folds/reduce/scan with the corresponding monoid")]]
@@ -233,9 +275,6 @@ namespace kumi
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::bit_and
-  //!
-  //! ## Example
-  //! @include doc/bit_and.cpp
   //================================================================================================
   template<product_type Tuple, typename Value>
   [[deprecated("Use folds/reduce/scan with the corresponding monoid")]]
@@ -264,9 +303,6 @@ namespace kumi
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::bit_and
-  //!
-  //! ## Example
-  //! @include doc/bit_and.cpp
   //================================================================================================
   template<product_type Tuple>
   [[deprecated("Use folds/reduce/scan with the corresponding monoid")]]
@@ -300,9 +336,6 @@ namespace kumi
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::bit_or
-  //!
-  //! ## Example
-  //! @include doc/bit_or.cpp
   //================================================================================================
   template<product_type Tuple, typename Value>
   [[deprecated("Use folds/reduce/scan with the corresponding monoid")]]
@@ -331,9 +364,6 @@ namespace kumi
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::bit_or
-  //!
-  //! ## Example
-  //! @include doc/bit_or.cpp
   //================================================================================================
   template<product_type Tuple>
   [[deprecated("Use folds/reduce/scan with the corresponding monoid")]]
