@@ -16,7 +16,7 @@ namespace kumi
         template<typename T1, typename T2>
         [[nodiscard]] KUMI_ABI constexpr auto operator()( T1 && a, T2 && b ) const
         noexcept (noexcept(KUMI_FWD(a) + KUMI_FWD(b)) )
-        requires requires(T1 && a, T2 && b) { KUMI_FWD(a) + KUMI_FWD(b); }
+        requires requires(T1 && x, T2 && y) { KUMI_FWD(x) + KUMI_FWD(y); }
         {
             return KUMI_FWD(a) + KUMI_FWD(b);
         };
@@ -29,7 +29,7 @@ namespace kumi
         template<typename T1, typename T2>
         [[nodiscard]] KUMI_ABI constexpr auto operator()( T1 && a, T2 && b ) const
         noexcept (noexcept(KUMI_FWD(a) * KUMI_FWD(b)) )
-        requires requires(T1 && a, T2 && b) { KUMI_FWD(a) * KUMI_FWD(b); }
+        requires requires(T1 && x, T2 && y) { KUMI_FWD(x) * KUMI_FWD(y); }
         {
             return KUMI_FWD(a) * KUMI_FWD(b);
         };
@@ -42,7 +42,7 @@ namespace kumi
         template<typename T1, typename T2>
         [[nodiscard]] KUMI_ABI constexpr auto operator()( T1 && a, T2 && b ) const
         noexcept (noexcept(KUMI_FWD(a) & KUMI_FWD(b)) )
-        requires requires(T1 && a, T2 && b) { KUMI_FWD(a) & KUMI_FWD(b); }
+        requires requires(T1 && x, T2 && y) { KUMI_FWD(x) & KUMI_FWD(y); }
         {
             return KUMI_FWD(a) & KUMI_FWD(b);
         };
@@ -55,7 +55,7 @@ namespace kumi
         template<typename T1, typename T2>
         [[nodiscard]] KUMI_ABI constexpr auto operator()( T1 && a, T2 && b ) const
         noexcept (noexcept(KUMI_FWD(a) | KUMI_FWD(b)) )
-        requires requires(T1 && a, T2 && b) { KUMI_FWD(a) | KUMI_FWD(b); }
+        requires requires(T1 && x, T2 && y) { KUMI_FWD(x) | KUMI_FWD(y); }
         {
             return KUMI_FWD(a) | KUMI_FWD(b);
         };
@@ -68,7 +68,7 @@ namespace kumi
         template<typename T1, typename T2>
         [[nodiscard]] KUMI_ABI constexpr auto operator()( T1 && a, T2 && b ) const
         noexcept (noexcept(KUMI_FWD(a) ^ KUMI_FWD(b)) )
-        requires requires(T1 && a, T2 && b) { KUMI_FWD(a) ^ KUMI_FWD(b); }
+        requires requires(T1 && x, T2 && y) { KUMI_FWD(x) ^ KUMI_FWD(y); }
         {
             return KUMI_FWD(a) ^ KUMI_FWD(b);
         };
