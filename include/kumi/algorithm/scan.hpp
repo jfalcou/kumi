@@ -17,177 +17,391 @@ namespace kumi
     template<typename F, typename T> struct scannable 
     {
       F func;
-      T value;
+      T acc;
 
       template<typename W>
       KUMI_ABI friend constexpr decltype(auto) operator>>(scannable &&x, scannable<F, W> &&y)
       {
-        return _::scannable {x.func, kumi::push_back(x.value, x.func(y.value, x.value))};
+        auto v_or_t = [&]
+        {
+            if constexpr ( !product_type<T> ) return kumi::tuple{x.func(x.acc, y.acc)};
+            else return kumi::push_back(x.acc, x.func(kumi::get<kumi::size_v<T>-1>(x.acc), y.acc));
+        };
+        return _::scannable {x.func, v_or_t()};
       }
 
       template<typename W>
       KUMI_ABI friend constexpr decltype(auto) operator<<(scannable &&x, scannable<F, W> &&y)
       {
-        return _::scannable {x.func, kumi::push_back(x.value, x.func(x.value, y.value))};
+        auto v_or_t = [&]
+        {
+            if constexpr ( !product_type<T> ) return kumi::tuple{x.func(y.acc, x.acc)};
+            else return kumi::push_front(x.acc, x.func(y.acc, kumi::get<0>(x.acc)));
+        };
+        return _::scannable {x.func, v_or_t()};
       }
     };
 
     template<class F, class T> scannable(const F &, T &&) -> scannable<F, T>;
   }
+
   //================================================================================================
   //! @ingroup reductions
-  //! @brief Computes the generalized sum of all elements using a tail recursive call.
+  //! @brief Computes the inclusive prefix scan of all elements of a product type using a 
+  //!        tail recursive call.
+  //!
+  //! @note The first stored value is the result of the application of the function to the provided 
+  //!       initial value and the first element of the product_type.
   //!
   //! @param f      Binary callable function to apply
   //! @param t      Tuple to operate on
   //! @param init   Initial value of the sum
-  //! @return   The value of `f( f( f(init, get<0>(t)), ...), get<N-1>(t))`
+  //! @return       A tuple of prefix partial accumulations where each element 'I' equals 
+  //!               `f( f( f(init, get<0>(t)), ...), get<I-1>(t))`
   //!
   //! ## Helper type
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<typename Function, product_type Tuple, typename Value> struct fold_left;
+  //!   template<typename Function, product_type Tuple, typename Value> struct inclusive_scan_left;
   //!
   //!   template<typename Function, product_type Tuple, typename Value>
-  //!   using fold_left_t = typename fold_left_t<Function,Tuple,Value>::type;
+  //!   using inclusive_scan_left_t = typename inclusive_scan_left_t<Function,Tuple,Value>::type;
   //! }
   //! @endcode
   //!
-  //! Computes the return type of a call to kumi::fold_left
+  //! Computes the return type of a call to kumi::inclusive_scan_left
   //!
   //! ## Example
-  //! @include doc/fold_left.cpp
+  //! @include doc/inclusive_scan_left.cpp
   //================================================================================================
-  template<typename Function, product_type Tuple, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_left(Function f, Tuple&& t, Value init)
+  template<typename Function, product_type T, typename Value>
+  [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_left(Function && f, T && t, Value init)
   {
-    if constexpr(sized_product_type<Tuple,0>) return kumi::tuple{init};
+    if constexpr ( record_type<T> ) return exclusive_scan_left(KUMI_FWD(f), KUMI_FWD(t).values, init);
+    else if constexpr(sized_product_type<T,0>) return kumi::tuple{};
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return (_::scannable{f, get<I>(KUMI_FWD(t))} >> ... >> _::scannable{f, kumi::tuple{init}}).value;
+        return  (_::scannable{f, init} 
+                  >> ... 
+                  >> _::scannable{f, get<I>(KUMI_FWD(t))}
+                ).acc;
       }
-      (std::make_index_sequence<size<Tuple>::value>());
+      (std::make_index_sequence<size_v<T>>());
     }
   }
 
   //================================================================================================
   //! @ingroup reductions
-  //! @brief Computes the generalized associative sum of all elements using a tail recursive call.
+  //! @brief Computes the inclusive prefix scan of all elements of a product type using a 
+  //!        tail recursive call.
   //!
-  //! @param f      Associative binary callable function to apply
-  //! @param t      Tuple of size 1 or more to operate on
-  //! @return   The value of `f( f( f(get<0>(t), get<1>(t)), ...), get<N-1>(t))`
+  //! @note The first stored value is the result of the application of the monoid to it's identity 
+  //!       and the first element of the product_type.
+  //!
+  //! @param m      Monoid callable function to apply
+  //! @param t      Tuple to operate on
+  //! @return       A tuple of prefix partial accumulations where each element 'I' equals 
+  //!               `m( m( m(init, get<0>(t)), ...), get<I-1>(t))`
   //!
   //! ## Helper type
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<typename Function, product_type Tuple> struct fold_left;
+  //!   template<typename Function, product_type Tuple> struct inclusive_scan_left;
   //!
   //!   template<typename Function, product_type Tuple>
-  //!   using fold_left_t = typename fold_left_t<Function,Tuple>::type;
+  //!   using inclusive_scan_left_t = typename inclusive_scan_left_t<Function,Tuple>::type;
   //! }
   //! @endcode
   //!
-  //! Computes the return type of a call to kumi::fold_left
+  //! Computes the return type of a call to kumi::inclusive_scan_left
   //!
   //! ## Example
-  //! @include doc/fold_left.cpp
+  //! @include doc/inclusive_scan_left.cpp
   //================================================================================================
-  template<typename Function, sized_product_type_or_more<1> Tuple>
-  [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_left(Function f, Tuple&& t)
+  template<monoid M, sized_product_type_or_more<1> T>
+  [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_left(M && m, T && t)
   {
-    if constexpr(sized_product_type<Tuple,1>) return KUMI_FWD(t);
+    if constexpr ( record_type<T> ) return inclusive_scan_left(KUMI_FWD(m), KUMI_FWD(t).values);
+    else if constexpr(sized_product_type<T,1>) return KUMI_FWD(t);
     else
     {
-      auto&&[heads, tail] = split(KUMI_FWD(t), index<2>);
-      return inclusive_scan_left(f, tail, kumi::apply(f,heads));
+      auto&&[heads, tail] = split(KUMI_FWD(t), index<1>);
+      return inclusive_scan_left(m, tail, kumi::tuple{m(m.identity, get<0>(heads))});    
     }
   }
 
   //================================================================================================
   //! @ingroup reductions
-  //! @brief Computes the generalized sum of all elements using a non-tail recursive call.
+  //! @brief Computes the exclusive prefix scan of all elements of a product type using a 
+  //!        tail recursive call.
+  //!
+  //! @note The first stored value is the provided initial value.  
   //!
   //! @param f      Binary callable function to apply
   //! @param t      Tuple to operate on
   //! @param init   Initial value of the sum
-  //! @return   The value of `f(get<0>(t), f(... , f(get<N-1>(t), init))`
+  //! @return       A tuple of prefix partial accumulations where each element 'I' equals 
+  //!               `f( f( f(init, get<0>(t)), ...), get<I-1>(t))`
   //!
   //! ## Helper type
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<typename Function, product_type Tuple, typename Value> struct fold_right;
+  //!   template<typename Function, product_type Tuple, typename Value> struct exclusive_scan_left;
   //!
   //!   template<typename Function, product_type Tuple, typename Value>
-  //!   using fold_right_t = typename fold_right_t<Function,Tuple,Value>::type;
+  //!   using exclusive_scan_left_t = typename exclusive_scan_left_t<Function,Tuple,Value>::type;
   //! }
   //! @endcode
   //!
-  //! Computes the return type of a call to kumi::fold_right
+  //! Computes the return type of a call to kumi::exclusive_scan_left
   //!
   //! ## Example
-  //! @include doc/fold_right.cpp
+  //! @include doc/exclusive_scan_left.cpp
   //================================================================================================
-  template<typename Function, product_type Tuple, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_right(Function f, Tuple&& t, Value init)
+  template<typename Function, product_type T, typename Value>
+  [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_left(Function && f, T && t, Value init)
   {
-    if constexpr( sized_product_type<Tuple,0> ) return kumi::tuple{init};
+    if constexpr ( record_type<T> ) return exclusive_scan_left(KUMI_FWD(f), KUMI_FWD(t).values, init);
+    else if constexpr(sized_product_type<T,0>) return kumi::tuple{init};
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return (_::scannable {f, kumi::tuple{init}} << ... << _::scannable {f, get<I>(KUMI_FWD(t))}).value;
+        return  (_::scannable{f, kumi::tuple{init}} 
+                  >> ... 
+                  >> _::scannable{f, get<I>(KUMI_FWD(t))}
+                ).acc;
       }
-      (std::make_index_sequence<size<Tuple>::value>());
+      (std::make_index_sequence<size_v<T>-1>());
     }
   }
 
   //================================================================================================
   //! @ingroup reductions
-  //! @brief Computes the generalized associative sum of all elements using a non-tail recursive call.
+  //! @brief Computes the exclusive prefix scan of all elements of a product type using a 
+  //!        tail recursive call.
   //!
-  //! @param f      Associative binary callable function to apply
-  //! @param t      Tuple of size 1 or more to operate on
-  //! @return   The value of `f(get<0>(t), f(... , f(get<N-2>(t), get<N-1>(t)))`
+  //! @note The first stored value is the identity of the provided monoid.
+  //!
+  //! @param m      Monoid callable function to apply
+  //! @param t      Tuple to operate on
+  //! @return       A tuple of prefix partial accumulations where each element 'I' equals 
+  //!               `m( m( m(init, get<0>(t)), ...), get<I-1>(t))`
   //!
   //! ## Helper type
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<typename Function, product_type Tuple> struct fold_right;
+  //!   template<typename Function, product_type Tuple> struct exclusive_scan_left;
   //!
   //!   template<typename Function, product_type Tuple>
-  //!   using fold_right_t = typename fold_right_t<Function,Tuple>::type;
+  //!   using exclusive_scan_left_t = typename exclusive_scan_left_t<Function,Tuple>::type;
   //! }
   //! @endcode
   //!
-  //! Computes the return type of a call to kumi::fold_right
+  //! Computes the return type of a call to kumi::exclusive_scan_left
   //!
   //! ## Example
-  //! @include doc/fold_right.cpp
+  //! @include doc/exclusive_scan_left.cpp
   //================================================================================================
-  template<typename Function, sized_product_type_or_more<1> Tuple>
-  [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_right(Function f, Tuple&& t)
+  template<monoid M, sized_product_type_or_more<1> T>
+  [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_left(M && m, T && t)
   {
-    if constexpr(sized_product_type<Tuple,1>) return KUMI_FWD(t);
+    if constexpr ( record_type<T> ) return exclusive_scan_left(KUMI_FWD(m), KUMI_FWD(t).values);
+    else if constexpr(sized_product_type<T,1>) return kumi::tuple(m.identity, get<0>(KUMI_FWD(t)));
     else
     {
-      auto&&[head, tails] = split(KUMI_FWD(t), index<size_v<Tuple>-2>);
-      return inclusive_scan_right(f, head, kumi::apply(f,tails));
+      return exclusive_scan_left(m, KUMI_FWD(t), m.identity);
     }
   }
 
-  /*namespace result
+  //================================================================================================
+  //! @ingroup reductions
+  //! @brief Computes the inclusive suffix scan of all elements of a product type using a 
+  //!        non-tail recursive call.
+  //!
+  //! @note The first stored value is the result of the application of the function to the provided 
+  //!       initial value and the last element of the product_type.
+  //!
+  //! @param f      Binary callable function to apply
+  //! @param t      Tuple to operate on
+  //! @param init   Initial value of the sum
+  //! @return       A tuple of suffix partial accumulations where each element 'I' equals 
+  //!               `f(get<0>(t), f(... , f(get<N-1>(t), init))`
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<typename Function, product_type Tuple, typename Value> struct inclusive_scan_right;
+  //!
+  //!   template<typename Function, product_type Tuple, typename Value>
+  //!   using inclusive_scan_right_t = typename inclusive_scan_right_t<Function,Tuple,Value>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::inclusive_scan_right
+  //!
+  //! ## Example
+  //! @include doc/inclusive_scan_right.cpp
+  //================================================================================================
+  template<typename Function, product_type T, typename Value>
+  [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_right(Function && f, T && t, Value init)
+  {
+    if constexpr ( record_type<T> ) return inclusive_scan_right(KUMI_FWD(f), KUMI_FWD(t).values, init);
+    else if constexpr( sized_product_type<T,0> ) return kumi::tuple{};
+    else
+    {
+      return [&]<std::size_t... I>(std::index_sequence<I...>)
+      {
+        return  (_::scannable{f, init} 
+                  << ... 
+                  << _::scannable{ f, get<size_v<T>-1-I>(KUMI_FWD(t)) }
+                ).acc;
+      }
+      (std::make_index_sequence<size_v<T>>());
+    }
+  }
+
+  //================================================================================================
+  //! @ingroup reductions
+  //! @brief Computes the inclusive suffix scan of all elements of a product type using a 
+  //!        non-tail recursive call.
+  //!
+  //! @note The first stored value is the result of the application of the monoid to it's identity 
+  //!       and the last element of the product_type.
+  //!
+  //! @param m      Monoid callable function to apply
+  //! @param t      Tuple to operate on
+  //! @return       A tuple of suffix partial accumulations where each element 'I' equals 
+  //!               `m(get<0>(t), m(... , m(get<N-2>(t), get<N-1>(t)))`
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<typename Function, product_type Tuple> struct inclusive_scan_right;
+  //!
+  //!   template<typename Function, product_type Tuple>
+  //!   using inclusive_scan_right_t = typename inclusive_scan_right_t<Function,Tuple>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::inclusive_scan_right
+  //!
+  //! ## Example
+  //! @include doc/inclusive_scan_right.cpp
+  //================================================================================================
+  template<monoid M, sized_product_type_or_more<1> T>
+  [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_right(M && m, T && t)
+  {
+    if constexpr ( record_type<T> ) return inclusive_scan_right(KUMI_FWD(m), KUMI_FWD(t).values);
+    else if constexpr(sized_product_type<T,1>) return KUMI_FWD(t);
+    else
+    {
+      auto&&[head, tails] = split(KUMI_FWD(t), index<size_v<T>-1>);
+      return inclusive_scan_right(m, head, kumi::tuple{m(get<0>(tails), m.identity)});
+    }
+  }
+
+  //================================================================================================
+  //! @ingroup reductions
+  //! @brief Computes the exclusive suffix scan of all elements of a product type using a 
+  //!        tail recursive call.
+  //!
+  //! @note The first stored value is the provided initial value.  
+  //!
+  //! @param f      Binary callable function to apply
+  //! @param t      Tuple to operate on
+  //! @param init   Initial value of the sum
+  //! @return       A tuple of suffix partial accumulations where each element 'I' equals 
+  //!               `f( f( f(init, get<0>(t)), ...), get<I-1>(t))`
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<typename Function, product_type Tuple, typename Value> struct exclusive_scan_right;
+  //!
+  //!   template<typename Function, product_type Tuple, typename Value>
+  //!   using exclusive_scan_right_t = typename exclusive_scan_right_t<Function,Tuple,Value>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::exclusive_scan_right
+  //!
+  //! ## Example
+  //! @include doc/exclusive_scan_right.cpp
+  //================================================================================================
+  template<typename Function, product_type T, typename Value>
+  [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_right(Function && f, T && t, Value init)
+  {
+    if constexpr ( record_type<T> ) return exclusive_scan_right(KUMI_FWD(f), KUMI_FWD(t).values, init);
+    else if constexpr( sized_product_type<T,0> ) return kumi::tuple{init};
+    else
+    {
+      return [&]<std::size_t... I>(std::index_sequence<I...>)
+      {
+        return  (_::scannable{f, kumi::tuple{init}} 
+                  << ... 
+                  << _::scannable{ f, get<size_v<T>-1-I>(KUMI_FWD(t)) }
+                ).acc;
+      }
+      (std::make_index_sequence<size_v<T>-1>());
+    }
+  }
+
+  //================================================================================================
+  //! @ingroup reductions
+  //! @brief Computes the exclusive suffix scan of all elements of a product type using a 
+  //!        non-tail recursive call.
+  //!
+  //! @note The first stored value is the identity of the provided monoid.
+  //!
+  //! @param m      Monoid callable function to apply
+  //! @param t      Tuple to operate on
+  //! @return       A tuple of prefix partial accumulations where each element 'I' equals 
+  //!               `m( m( m(init, get<0>(t)), ...), get<I-1>(t))`
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<typename Function, product_type Tuple> struct exclusive_scan_right;
+  //!
+  //!   template<typename Function, product_type Tuple>
+  //!   using exclusive_scan_right_t = typename exclusive_scan_right_t<Function,Tuple>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::exclusive_scan_right
+  //!
+  //! ## Example
+  //! @include doc/exclusive_scan_right.cpp
+  //================================================================================================
+  template<monoid M, sized_product_type_or_more<1> T>
+  [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_right(M && m, T && t)
+  {
+    if constexpr ( record_type<T> ) return exclusive_scan_right(KUMI_FWD(m), KUMI_FWD(t).values);
+    else if constexpr (sized_product_type<T,1>) return kumi::tuple{get<0>(KUMI_FWD(t)), m.identity};
+    else
+    {
+      return kumi::exclusive_scan_right(m, KUMI_FWD(t), m.identity);
+    }
+  }
+
+
+  namespace result
   {
     template<typename Function, product_type Tuple, typename Value = void>
-    struct fold_right
+    struct inclusive_scan_right
     {
-      using type = decltype ( kumi::fold_right( std::declval<Function>()
+      using type = decltype ( kumi::inclusive_scan_right( std::declval<Function>()
                                               , std::declval<Tuple>()
                                               , std::declval<Value>()
                                               )
@@ -195,18 +409,18 @@ namespace kumi
     };
 
     template<typename Function, product_type Tuple>
-    struct fold_right<Function,Tuple>
+    struct inclusive_scan_right<Function,Tuple>
     {
-      using type = decltype ( kumi::fold_right( std::declval<Function>()
+      using type = decltype ( kumi::inclusive_scan_right( std::declval<Function>()
                                               , std::declval<Tuple>()
                                               )
                             );
     };
 
     template<typename Function, product_type Tuple, typename Value = void>
-    struct fold_left
+    struct exclusive_scan_right
     {
-      using type = decltype ( kumi::fold_left ( std::declval<Function>()
+      using type = decltype ( kumi::exclusive_scan_right( std::declval<Function>()
                                               , std::declval<Tuple>()
                                               , std::declval<Value>()
                                               )
@@ -214,19 +428,63 @@ namespace kumi
     };
 
     template<typename Function, product_type Tuple>
-    struct fold_left<Function,Tuple>
+    struct exclusive_scan_right<Function,Tuple>
     {
-      using type = decltype ( kumi::fold_left ( std::declval<Function>()
+      using type = decltype ( kumi::exclusive_scan_right( std::declval<Function>()
                                               , std::declval<Tuple>()
                                               )
                             );
     };
 
     template<typename Function, product_type Tuple, typename Value = void>
-    using fold_right_t = typename fold_right<Function,Tuple,Value>::type;
+    struct inclusive_scan_left
+    {
+      using type = decltype ( kumi::inclusive_scan_left ( std::declval<Function>()
+                                              , std::declval<Tuple>()
+                                              , std::declval<Value>()
+                                              )
+                            );
+    };
+
+    template<typename Function, product_type Tuple>
+    struct inclusive_scan_left<Function,Tuple>
+    {
+      using type = decltype ( kumi::inclusive_scan_left ( std::declval<Function>()
+                                              , std::declval<Tuple>()
+                                              )
+                            );
+    };
 
     template<typename Function, product_type Tuple, typename Value = void>
-    using fold_left_t = typename fold_left<Function,Tuple,Value>::type;
-  }*/
+    struct exclusive_scan_left
+    {
+      using type = decltype ( kumi::exclusive_scan_left ( std::declval<Function>()
+                                              , std::declval<Tuple>()
+                                              , std::declval<Value>()
+                                              )
+                            );
+    };
+
+    template<typename Function, product_type Tuple>
+    struct exclusive_scan_left<Function,Tuple>
+    {
+      using type = decltype ( kumi::exclusive_scan_left ( std::declval<Function>()
+                                              , std::declval<Tuple>()
+                                              )
+                            );
+    };
+
+    template<typename Function, product_type Tuple, typename Value = void>
+    using inclusive_scan_right_t = typename inclusive_scan_right<Function,Tuple,Value>::type;
+
+    template<typename Function, product_type Tuple, typename Value = void>
+    using exclusive_scan_right_t = typename exclusive_scan_right<Function,Tuple,Value>::type;
+
+    template<typename Function, product_type Tuple, typename Value = void>
+    using inclusive_scan_left_t = typename inclusive_scan_left<Function,Tuple,Value>::type;
+
+    template<typename Function, product_type Tuple, typename Value = void>
+    using exclusive_scan_left_t = typename exclusive_scan_left<Function,Tuple,Value>::type;
+  }
 }
 
