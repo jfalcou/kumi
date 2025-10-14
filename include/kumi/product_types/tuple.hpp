@@ -351,6 +351,22 @@ namespace kumi
     }
   };
 
+  template<> struct tuple<>  
+  {
+    using is_product_type = void;
+    static constexpr bool is_homogeneous = false;
+
+    static constexpr auto size()  noexcept { return std::size_t{0}; }
+    static constexpr auto empty() noexcept { return true;           }
+    
+    KUMI_ABI friend constexpr auto operator<=>(tuple<>, tuple<>) noexcept = default;
+
+    friend std::ostream& operator<<(std::ostream& os, tuple<>)
+    {
+      return os << "()";
+    }
+  };
+
   //================================================================================================
   //! @name Tuple Deduction Guides
   //! @{
