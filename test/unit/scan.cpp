@@ -38,7 +38,6 @@ struct acc_monoid
     static constexpr std::size_t identity = 0;
 };
 
-
 TTS_CASE("Check result::inclusive_scan_right/inclusive_scan_left<...> behavior")
 {
   using res_tuple = kumi::tuple<std::size_t, std::size_t, std::size_t, std::size_t>;
@@ -51,8 +50,13 @@ TTS_CASE("Check result::inclusive_scan_right/inclusive_scan_left<...> behavior")
 
   TTS_TYPE_IS((kumi::result::inclusive_scan_right_t<right_func_t,kumi::tuple<char,short,int,double>>), res_tuple);
   TTS_TYPE_IS((kumi::result::inclusive_scan_left_t<left_func_t  ,kumi::tuple<char,short,int,double>>), res_tuple);
-};
 
+  TTS_TYPE_IS((kumi::result::exclusive_scan_right_t<right_func_t,kumi::tuple<char,short,int,double>,std::size_t>), res_tuple);
+  TTS_TYPE_IS((kumi::result::exclusive_scan_left_t<left_func_t  ,kumi::tuple<char,short,int,double>,std::size_t>), res_tuple);
+
+  TTS_TYPE_IS((kumi::result::exclusive_scan_right_t<right_func_t,kumi::tuple<char,short,int,double>>), res_tuple);
+  TTS_TYPE_IS((kumi::result::exclusive_scan_left_t<left_func_t  ,kumi::tuple<char,short,int,double>>), res_tuple);
+};
 
 TTS_CASE("Check kumi::inclusive_scan_right behavior")
 {
@@ -69,7 +73,7 @@ TTS_CASE("Check kumi::inclusive_scan_right behavior")
       t,
       0
     );
-     
+    
   auto sizeof_raw = kumi::inclusive_scan_right(sizeof_monoid<Direction::right>{}, t);
 
   auto accumulated_init = kumi::inclusive_scan_right(
@@ -88,6 +92,7 @@ TTS_CASE("Check kumi::inclusive_scan_right behavior")
   TTS_EQUAL(accumulated_init, (res_tuple {15, 7, 3, 1}));
   TTS_EQUAL(accumulated_raw , (res_tuple {15, 7, 3, 1}));
 };
+
 
 TTS_CASE("Check tuple::inclusive_scan_right constexpr behavior")
 {  
