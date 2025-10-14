@@ -22,25 +22,14 @@ namespace kumi
       template<typename W>
       KUMI_ABI friend constexpr decltype(auto) operator>>(scannable &&x, scannable<F, W> &&y)
       {
-        // Lambda parameter is forced due to MSVC, it doesnt like lambda that depends on outer
-        // template parameter for some reason (Here U is equivalent to T)
-        auto v_or_t = [&]<typename U>(U)
-        {
-            if constexpr ( !product_type<U> ) return kumi::tuple{x.func(x.acc, y.acc)};
-            else return kumi::push_back(x.acc, x.func(kumi::get<kumi::size_v<U>-1>(x.acc), y.acc));
-        };
-        return _::scannable {x.func, v_or_t(x.acc)};
+        constexpr auto size = kumi::size_v<T>-1;
+        return _::scannable{x.func, kumi::push_back(x.acc, x.func(kumi::get<size>(x.acc), y.acc))};
       }
 
       template<typename W>
       KUMI_ABI friend constexpr decltype(auto) operator<<(scannable &&x, scannable<F, W> &&y)
       {
-        auto v_or_t = [&]<typename U>(U)
-        {
-            if constexpr ( !product_type<U> ) return kumi::tuple{x.func(y.acc, x.acc)};
-            else return kumi::push_front(x.acc, x.func(y.acc, kumi::get<0>(x.acc)));
-        };
-        return _::scannable {x.func, v_or_t(x.acc)};
+        return _::scannable {x.func, kumi::push_front(x.acc, x.func(y.acc, kumi::get<0>(x.acc)))};
       }
     };
 
@@ -86,12 +75,12 @@ namespace kumi
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return  (_::scannable{f, init} 
+        return  (_::scannable{f, kumi::tuple{f(init, get<0>(KUMI_FWD(t)))}} 
                   >> ... 
-                  >> _::scannable{f, get<I>(KUMI_FWD(t))}
+                  >> _::scannable{f, get<I+1>(KUMI_FWD(t))}
                 ).acc;
       }
-      (std::make_index_sequence<size_v<T>>());
+      (std::make_index_sequence<size_v<T>-1>());
     }
   }
 
@@ -131,8 +120,7 @@ namespace kumi
     else if constexpr(sized_product_type<T,1>) return KUMI_FWD(t);
     else
     {
-      auto&&[heads, tail] = split(KUMI_FWD(t), index<1>);
-      return inclusive_scan_left(m, tail, kumi::tuple{m(m.identity, get<0>(heads))});    
+      return inclusive_scan_left(m, KUMI_FWD(t), m.identity);
     }
   }
 
@@ -261,12 +249,12 @@ namespace kumi
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return  (_::scannable{f, init} 
+        return  (_::scannable{f, kumi::tuple{f(get<size_v<T>-1>(KUMI_FWD(t)),init)}} 
                   << ... 
-                  << _::scannable{ f, get<size_v<T>-1-I>(KUMI_FWD(t)) }
+                  << _::scannable{ f, get<size_v<T>-2-I>(KUMI_FWD(t)) }
                 ).acc;
       }
-      (std::make_index_sequence<size_v<T>>());
+      (std::make_index_sequence<size_v<T>-1>());
     }
   }
 
@@ -306,8 +294,7 @@ namespace kumi
     else if constexpr(sized_product_type<T,1>) return KUMI_FWD(t);
     else
     {
-      auto&&[head, tails] = split(KUMI_FWD(t), index<size_v<T>-1>);
-      return inclusive_scan_right(m, head, kumi::tuple{m(get<0>(tails), m.identity)});
+      return inclusive_scan_right(m, KUMI_FWD(t), m.identity);
     }
   }
 
