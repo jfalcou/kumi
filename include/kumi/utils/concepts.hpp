@@ -270,13 +270,28 @@ namespace kumi
     && ((!record_type<T>) || (equivalent<std::remove_cvref_t<T>, std::remove_cvref_t<Us>> && ...)));
 
 
+  //================================================================================================
+  //! @ingroup concepts
+  //! @brief Concept specifying a type is a Monoid  
+  //!
+  //! A type `T` models `kumi::monoid` if it's a binary associative callable equipped with an 
+  //! identity element acting as the neutral element for that operation.
+  //!
+  //! The identity is defined so that the following property holds for the operation.
+  //! @code
+  //!   monoid(x, indentity) = monoid(identity, x) = x
+  //! @endcode
+  //!
+  //! @note The operation is not required to be commutative; that is monoid(x,y) and monoid(y,x)
+  //!       may yield different results. (Ie : the monoid is not necessarily abelian)
+  //================================================================================================
   template<typename T>
   concept monoid = []()
   {
     using M = std::remove_cvref_t<T>;
     return requires(M m) {
       { M::identity };
-      { M{}(M::identity, M::identity) }; //-> std::same_as<I>;
+      { M{}(M::identity, M::identity) }; 
     };
   }();
 }
