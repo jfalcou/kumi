@@ -29,7 +29,7 @@ namespace kumi
       template<typename W>
       KUMI_ABI friend constexpr decltype(auto) operator<<(scannable &&x, scannable<F, W> &&y)
       {
-        return _::scannable {x.func, kumi::push_front(x.acc, x.func(y.acc, kumi::get<0>(x.acc)))};
+        return _::scannable{x.func, kumi::push_front(x.acc, x.func(y.acc, kumi::get<0>(x.acc)))};
       }
     };
 
@@ -75,7 +75,7 @@ namespace kumi
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return  (_::scannable{f, kumi::tuple{f(init, get<0>(KUMI_FWD(t)))}} 
+        return  (    _::scannable{f, kumi::tuple{f(init, get<0>(KUMI_FWD(t)))}} 
                   >> ... 
                   >> _::scannable{f, get<I+1>(KUMI_FWD(t))}
                 ).acc;
@@ -116,12 +116,9 @@ namespace kumi
   template<monoid M, sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_left(M && m, T && t)
   {
-    if constexpr ( record_type<T> ) return inclusive_scan_left(KUMI_FWD(m), KUMI_FWD(t).values);
+         if constexpr ( record_type<T> ) return inclusive_scan_left(KUMI_FWD(m), KUMI_FWD(t).values);
     else if constexpr(sized_product_type<T,1>) return KUMI_FWD(t);
-    else
-    {
-      return inclusive_scan_left(m, KUMI_FWD(t), m.identity);
-    }
+    else return inclusive_scan_left(KUMI_FWD(m), KUMI_FWD(t), m.identity);
   }
 
   //================================================================================================
@@ -162,7 +159,7 @@ namespace kumi
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return  (_::scannable{f, kumi::tuple{init}} 
+        return  (    _::scannable{f, kumi::tuple{init}} 
                   >> ... 
                   >> _::scannable{f, get<I>(KUMI_FWD(t))}
                 ).acc;
@@ -204,10 +201,7 @@ namespace kumi
   {
     if constexpr ( record_type<T> ) return exclusive_scan_left(KUMI_FWD(m), KUMI_FWD(t).values);
     else if constexpr(sized_product_type<T,1>) return kumi::tuple(m.identity, get<0>(KUMI_FWD(t)));
-    else
-    {
-      return exclusive_scan_left(m, KUMI_FWD(t), m.identity);
-    }
+    else return exclusive_scan_left(KUMI_FWD(m), KUMI_FWD(t), m.identity);
   }
 
   //================================================================================================
@@ -292,10 +286,7 @@ namespace kumi
   {
     if constexpr ( record_type<T> ) return inclusive_scan_right(KUMI_FWD(m), KUMI_FWD(t).values);
     else if constexpr(sized_product_type<T,1>) return KUMI_FWD(t);
-    else
-    {
-      return inclusive_scan_right(m, KUMI_FWD(t), m.identity);
-    }
+    else return inclusive_scan_right(KUMI_FWD(m), KUMI_FWD(t), m.identity);
   }
 
   //================================================================================================
@@ -336,7 +327,7 @@ namespace kumi
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return  (_::scannable{f, kumi::tuple{init}} 
+        return  (    _::scannable{f, kumi::tuple{init}} 
                   << ... 
                   << _::scannable{ f, get<size_v<T>-1-I>(KUMI_FWD(t)) }
                 ).acc;
@@ -378,10 +369,7 @@ namespace kumi
   {
     if constexpr ( record_type<T> ) return exclusive_scan_right(KUMI_FWD(m), KUMI_FWD(t).values);
     else if constexpr (sized_product_type<T,1>) return kumi::tuple{get<0>(KUMI_FWD(t)), m.identity};
-    else
-    {
-      return kumi::exclusive_scan_right(m, KUMI_FWD(t), m.identity);
-    }
+    else return kumi::exclusive_scan_right(KUMI_FWD(m), KUMI_FWD(t), m.identity);
   }
 
 
@@ -391,9 +379,9 @@ namespace kumi
     struct inclusive_scan_right
     {
       using type = decltype ( kumi::inclusive_scan_right( std::declval<Function>()
-                                              , std::declval<T>()
-                                              , std::declval<Value>()
-                                              )
+                                                        , std::declval<T>()
+                                                        , std::declval<Value>()
+                                                        )
                             );
     };
 
@@ -401,8 +389,8 @@ namespace kumi
     struct inclusive_scan_right<Function,T>
     {
       using type = decltype ( kumi::inclusive_scan_right( std::declval<Function>()
-                                              , std::declval<T>()
-                                              )
+                                                        , std::declval<T>()
+                                                        )
                             );
     };
 
@@ -410,9 +398,9 @@ namespace kumi
     struct exclusive_scan_right
     {
       using type = decltype ( kumi::exclusive_scan_right( std::declval<Function>()
-                                              , std::declval<T>()
-                                              , std::declval<Value>()
-                                              )
+                                                        , std::declval<T>()
+                                                        , std::declval<Value>()
+                                                        )
                             );
     };
 
@@ -420,8 +408,8 @@ namespace kumi
     struct exclusive_scan_right<Function,T>
     {
       using type = decltype ( kumi::exclusive_scan_right( std::declval<Function>()
-                                              , std::declval<T>()
-                                              )
+                                                        , std::declval<T>()
+                                                        )
                             );
     };
 
@@ -429,9 +417,9 @@ namespace kumi
     struct inclusive_scan_left
     {
       using type = decltype ( kumi::inclusive_scan_left ( std::declval<Function>()
-                                              , std::declval<T>()
-                                              , std::declval<Value>()
-                                              )
+                                                        , std::declval<T>()
+                                                        , std::declval<Value>()
+                                                        )
                             );
     };
 
@@ -439,8 +427,8 @@ namespace kumi
     struct inclusive_scan_left<Function,T>
     {
       using type = decltype ( kumi::inclusive_scan_left ( std::declval<Function>()
-                                              , std::declval<T>()
-                                              )
+                                                        , std::declval<T>()
+                                                        )
                             );
     };
 
@@ -448,9 +436,9 @@ namespace kumi
     struct exclusive_scan_left
     {
       using type = decltype ( kumi::exclusive_scan_left ( std::declval<Function>()
-                                              , std::declval<T>()
-                                              , std::declval<Value>()
-                                              )
+                                                        , std::declval<T>()
+                                                        , std::declval<Value>()
+                                                        )
                             );
     };
 
@@ -458,8 +446,8 @@ namespace kumi
     struct exclusive_scan_left<Function,T>
     {
       using type = decltype ( kumi::exclusive_scan_left ( std::declval<Function>()
-                                              , std::declval<T>()
-                                              )
+                                                        , std::declval<T>()
+                                                        )
                             );
     };
 
