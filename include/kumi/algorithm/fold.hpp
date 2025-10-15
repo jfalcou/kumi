@@ -111,7 +111,7 @@ namespace kumi
   template<typename Function, product_type Tuple, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto fold_right(Function f, Tuple&& t, Value init)
   {
-    if constexpr(size<Tuple>::value ==0) return init;
+    if constexpr( sized_product_type<Tuple,0> ) return init;
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
@@ -153,7 +153,7 @@ namespace kumi
     else
     {
       auto&&[head, tails] = split(KUMI_FWD(t), index<size_v<Tuple>-2>);
-      return fold_left(f, head, kumi::apply(f,tails));
+      return fold_right(f, head, kumi::apply(f,tails));
     }
   }
 
