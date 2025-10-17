@@ -13,10 +13,10 @@ namespace kumi
   {
     struct zipper_t
     {
-      template<std::size_t Size, product_type Tuple>
-      KUMI_ABI constexpr auto operator()(index_t<Size> const&, Tuple&& t) const noexcept
+      template<std::size_t Size, product_type T>
+      KUMI_ABI constexpr auto operator()(index_t<Size> const&, T&& t) const noexcept
       {
-        if constexpr(sized_product_type<Tuple,0>) return t;
+        if constexpr(sized_product_type<T,0>) return t;
         else
         {
           constexpr auto uz = []<typename N>(N const &, auto &&u)
@@ -28,13 +28,13 @@ namespace kumi
                 if constexpr ( size_v<V> <= N::value ) return none;
                 else                                  return get<N::value>(KUMI_FWD(v));
               };
-              return _::builder<Tuple>::make(zip_(KUMI_FWD(m))...);
+              return _::builder<T>::make(zip_(KUMI_FWD(m))...);
             }, KUMI_FWD(u));
           };
 
           return [&]<std::size_t... I>(std::index_sequence<I...>)
           {
-             return _::builder<Tuple>::make(uz(index_t<I> {}, KUMI_FWD(t))...);
+             return _::builder<T>::make(uz(index_t<I> {}, KUMI_FWD(t))...);
           }(std::make_index_sequence<Size>());
         }
       }
@@ -61,22 +61,22 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief Constructs a tuple where the ith element is the tuple of all ith elements of ts...
+  //! @brief Constructs a product type where the ith element is the product_type of all ith elements of ts...
   //!
-  //! @param t0 Tuple to convert
-  //! @param ts Tuples to convert
-  //! @return The tuple of all combination of elements from t0, ts...
+  //! @param t0 Product Type to convert
+  //! @param ts Product Types to convert
+  //! @return The product type of all combination of elements from t0, ts...
   //!
-  //! @ note Every inner tuple should be of the same sizes, otherwise see `zip_min` or `zip_max`
+  //! @note Every inner tuple should be of the same sizes, otherwise see `zip_min` or `zip_max`
   //!
   //! ## Helper type
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<product_type Tuple> struct zip;
+  //!   template<product_type T> struct zip;
   //!
-  //!   template<product_type Tuple>
-  //!   using zip_t = typename zip<Tuple>::type;
+  //!   template<product_type T>
+  //!   using zip_t = typename zip<T>::type;
   //! }
   //! @endcode
   //!
@@ -94,22 +94,22 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief Constructs a tuple where the ith element is the tuple of all ith elements of ts...
+  //! @brief Constructs a product type where the ith element is the product type of all ith elements of ts...
   //!
-  //! @param t0 Tuple to convert
-  //! @param ts Tuples to convert
+  //! @param t0 Product Type to convert
+  //! @param ts Product Types to convert
   //! @return The tuple of all combination of elements from t0, ts...
   //!
-  //! @ note `zip_min` truncates tuples based on the smallest size.
+  //! @note `zip_min` truncates product types based on the smallest size.
   //!
   //! ## Helper type
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<product_type Tuple> struct zip_min;
+  //!   template<product_type T> struct zip_min;
   //!
-  //!   template<product_type Tuple>
-  //!   using zip_min_t = typename zip<Tuple>::type;
+  //!   template<product_type T>
+  //!   using zip_min_t = typename zip<T>::type;
   //! }
   //! @endcode
   //!
@@ -128,22 +128,22 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief Constructs a tuple where the ith element is the tuple of all ith elements of ts...
+  //! @brief Constructs a product type where the ith element is the product type of all ith elements of ts...
   //!
-  //! @param t0 Tuple to convert
-  //! @param ts Tuples to convert
-  //! @return The tuple of all combination of elements from t0, ts...
+  //! @param t0 Product Type to convert
+  //! @param ts Product Types to convert
+  //! @return The product type of all combination of elements from t0, ts...
   //!
-  //! @ note `zip_max` fills missing elements to reach the biggest tuple size.
+  //! @note `zip_max` fills missing elements to reach the biggest tuple size.
   //!
   //! ## Helper type
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<product_type Tuple> struct zip_max;
+  //!   template<product_type T> struct zip_max;
   //!
-  //!   template<product_type Tuple>
-  //!   using zip_max_t = typename zip<Tuple>::type;
+  //!   template<product_type T>
+  //!   using zip_max_t = typename zip<T>::type;
   //! }
   //! @endcode
   //!

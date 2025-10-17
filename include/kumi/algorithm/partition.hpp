@@ -37,11 +37,11 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief  Partition a tuple over a predicate
+  //! @brief  Partition a product type over a predicate
   //! @tparam Pred Compile-time predicate
-  //! @param  tup Tuple to process
-  //! @return A tuple containing the tuple of all values which types satisfies `Pred` and the
-  //!         the tuple of all values which types does not satisfy `Pred`.
+  //! @param  t Product Type to process
+  //! @return A tuple containing the product type of all values which types satisfies `Pred` and the
+  //!         the product type of all values which types does not satisfy `Pred`.
   //!
   //! ## Helper type
   //! @code
@@ -60,14 +60,14 @@ namespace kumi
   //! @include doc/partition.cpp
   //================================================================================================
   template<template<typename> typename Pred, kumi::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto partition(T&& tup) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto partition(T && t) noexcept
   {
     constexpr auto pos = kumi::_::selector<Pred, T>();
 
     auto select = [&]<typename O, std::size_t... I>(O, std::index_sequence<I...>)
     {
       using type = _::builder_make_t<T, element_t< pos.t[O::value+I], T>...>;
-      return type{get<pos.t[O::value+I]>(KUMI_FWD(tup))...};
+      return type{get<pos.t[O::value+I]>(KUMI_FWD(t))...};
     };
 
     return kumi::tuple{ 
@@ -77,10 +77,10 @@ namespace kumi
     
   //================================================================================================
   //! @ingroup generators
-  //! @brief  Filters a tuple over a predicate
+  //! @brief  Filters a product type over a predicate
   //! @tparam Pred Compile-time predicate
-  //! @param  tup Tuple to process
-  //! @return A tuple containing all values which types satisfies `Pred`.
+  //! @param  t Product Type to process
+  //! @return A product type containing all values which types satisfies `Pred`.
   //!
   //! ## Helper type
   //! @code
@@ -99,23 +99,23 @@ namespace kumi
   //! @include doc/filter.cpp
   //================================================================================================
   template<template<typename> typename Pred, kumi::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto filter(T&& tup) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto filter(T && t) noexcept
   {
     constexpr auto pos = kumi::_::selector<Pred, T>();
     if constexpr ( sized_product_type<T, 0>) return tuple{};
     else return [&]<std::size_t...I>(std::index_sequence<I...>)
     {
         using type = _::builder_make_t<T, element_t<pos.t[I], T>...>;
-        return type{get<pos.t[I]>(KUMI_FWD(tup))...};
+        return type{get<pos.t[I]>(KUMI_FWD(t))...};
     }(std::make_index_sequence<pos.cut>{});
   }
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief  Filters a tuple over a predicate
+  //! @brief  Filters a product type over a predicate
   //! @tparam Pred Compile-time predicate
-  //! @param  tup Tuple to process
-  //! @return A tuple containing all values which types does not satisfy `Pred`.
+  //! @param  t Product Type to process
+  //! @return A product type containing all values which types does not satisfy `Pred`.
   //!
   //! ## Helper type
   //! @code
@@ -134,14 +134,14 @@ namespace kumi
   //! @include doc/filter_not.cpp
   //================================================================================================
   template<template<typename> typename Pred, kumi::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto filter_not(T&& tup) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto filter_not(T && t) noexcept
   {
     constexpr auto pos = kumi::_::selector<Pred, T>();
     if constexpr ( sized_product_type<T, 0> ) return tuple{};
     else return [&]<std::size_t...I>(std::index_sequence<I...>)
     {
         using type = _::builder_make_t<T, element_t<pos.t[pos.cut+I], T>...>;
-        return type{get<pos.t[pos.cut+I]>(KUMI_FWD(tup))...};
+        return type{get<pos.t[pos.cut+I]>(KUMI_FWD(t))...};
     }(std::make_index_sequence<kumi::size_v<T> - pos.cut>{});
   }
 

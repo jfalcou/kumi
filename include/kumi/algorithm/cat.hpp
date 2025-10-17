@@ -13,19 +13,19 @@ namespace kumi
 {
   //================================================================================================
   //! @ingroup generators
-  //! @brief Concatenates tuples in a single one
+  //! @brief Concatenates product types in a single one
   //!
-  //! @param ts Tuples to concatenate
-  //! @return   A tuple made of all element of all input tuples in order
+  //! @param ts Product Types to concatenate
+  //! @return   A product type made of all element of all input product type in order
   //!
   //! ## Helper type
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<product_type... Tuples> struct cat;
+  //!   template<product_type... T> struct cat;
   //!
-  //!   template<product_type... Tuples>
-  //!   using cat_t = typename cat<Tuples...>::type;
+  //!   template<product_type... T>
+  //!   using cat_t = typename cat<T...>::type;
   //! }
   //! @endcode
   //!
@@ -34,15 +34,15 @@ namespace kumi
   //! ## Example
   //! @include doc/cat.cpp
   //================================================================================================
-  template<product_type... Tuples>
-  [[nodiscard]] KUMI_ABI constexpr auto cat(Tuples&&... ts)
-  requires ( (!record_type<Tuples> && ... ) || (record_type<Tuples> && ...) )
+  template<product_type... Ts>
+  [[nodiscard]] KUMI_ABI constexpr auto cat(Ts &&... ts)
+  requires ( (!record_type<Ts> && ... ) || (record_type<Ts> && ...) )
   {
-    if constexpr(sizeof...(Tuples) == 0) return tuple{};
+    if constexpr(sizeof...(Ts) == 0) return tuple{};
     else
     {
       // count is at least 1 so MSVC don't cry when we use a 0-sized array
-      constexpr auto count = (1ULL + ... + kumi::size_v<Tuples>);
+      constexpr auto count = (1ULL + ... + kumi::size_v<Ts>);
       constexpr auto pos = [&]()
       {
         struct { std::size_t t[count],e[count]; } that{};
@@ -55,12 +55,12 @@ namespace kumi
           k++;
         };
 
-        (locate(std::make_index_sequence<size_v<Tuples>>{}),...);
+        (locate(std::make_index_sequence<size_v<Ts>>{}),...);
 
         return that;
       }();
     
-      using res_type = result::common_product_type_t<std::remove_cvref_t<Tuples>...>;
+      using res_type = result::common_product_type_t<std::remove_cvref_t<Ts>...>;
 
       return [&]<std::size_t... N>(auto&& tuples, std::index_sequence<N...>)
       {
@@ -79,11 +79,11 @@ namespace kumi
 
   namespace result
   {
-    template<product_type... Tuples> struct cat
+    template<product_type... Ts> struct cat
     {
-      using type = decltype( kumi::cat( std::declval<Tuples>()... ) );
+      using type = decltype( kumi::cat( std::declval<Ts>()... ) );
     };
 
-    template<product_type... Tuples> using cat_t  = typename cat<Tuples...>::type;
+    template<product_type... Ts> using cat_t  = typename cat<Ts...>::type;
   }
 }
