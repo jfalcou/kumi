@@ -13,6 +13,7 @@
 
 #include <kumi/detail/unique.hpp>
 #include <kumi/detail/unit_type.hpp>
+#include <kumi/detail/as.hpp>
 
 namespace kumi
 {
@@ -374,7 +375,7 @@ namespace kumi
     static auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
     static std::false_type is_set(...);
 
-    using type = decltype(is_set(Ts{}...));
+    using type = decltype(is_set(as<Ts>{}...));
   };
 
   template<typename... Ts>
@@ -423,7 +424,7 @@ namespace kumi
     static auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
     static std::false_type is_set(...);
 
-    using type = decltype(is_set(Ts{}...));
+    using type = decltype(is_set(as<Ts>{}...));
   };
 
   template<typename... Ts>
