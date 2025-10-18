@@ -15,7 +15,7 @@
 namespace kumi::_
 {
   /// Used to detect duplicate types in a pack by enabling unique overload resolution.
-  template <std::size_t, typename T> struct unique { operator T(); };
+  template <std::size_t, typename T> struct unique { operator std::remove_volatile_t<T>(); };
     
   /// Named variant of unique
   template <std::size_t, typename T> struct unique_name{ };
