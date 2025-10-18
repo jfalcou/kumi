@@ -11,16 +11,14 @@ namespace kumi
 {
   //================================================================================================
   //! @addtogroup traits
-  //! @{
-  //! @struct as
+  //!
+  //! @class as
   //! @brief Lightweight type-wrapper
   //!
-  //! Wraps type into a constexpr, trivially constructible empty class to optimize passing type
-  //! parameters via object instead of via template parameters.
+  //! kumi::as Wraps type into a constexpr, trivially constructible empty class to optimize 
+  //! passing type parameters via object instead of via template parameters.
   //!
   //! @tparam T Type to wrap
-  //!
-  //! @}
   //================================================================================================
   template<typename T>
   struct as
