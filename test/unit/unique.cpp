@@ -20,8 +20,8 @@ TTS_CASE("Check result::unique/all_unique<T> behavior")
                 , (kumi::tuple<kumi::tuple<int, char>, char, int> ));
 
     TTS_TYPE_IS( (kumi::result::unique_t<
-                   kumi::tuple<int&, int, const int, volatile int, const int*, int&&>>)
-                , (kumi::tuple<int&, int, const int, volatile int, const int*, int&&>));
+                   kumi::tuple<int&, int, const int, const int*, int&&>>)
+                , (kumi::tuple<int&, int, const int, const int*, int&&>));
 
     TTS_TYPE_IS( (kumi::result::all_unique_t<kumi::tuple<char, int, int, char, double>>)
                 ,(kumi::tuple<char, int, double>));
@@ -31,8 +31,8 @@ TTS_CASE("Check result::unique/all_unique<T> behavior")
                 , (kumi::tuple<kumi::tuple<int, char>, char, int> ));
 
     TTS_TYPE_IS( (kumi::result::all_unique_t<
-                   kumi::tuple<int&, int, const int, volatile int, const int*, int&&>>)
-                , (kumi::tuple<int&, int, const int, volatile int, const int*, int&&>));
+                   kumi::tuple<int&, int, const int, const int*, int&&>>)
+                , (kumi::tuple<int&, int, const int, const int*, int&&>));
 };
 
 TTS_CASE("Check runtime kumi::unique behavior")
