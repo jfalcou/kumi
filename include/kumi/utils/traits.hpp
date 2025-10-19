@@ -13,7 +13,6 @@
 
 #include <kumi/detail/unique.hpp>
 #include <kumi/detail/unit_type.hpp>
-#include <kumi/detail/as.hpp>
 
 namespace kumi
 {
