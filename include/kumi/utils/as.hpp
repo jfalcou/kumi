@@ -12,7 +12,7 @@ namespace kumi
   //================================================================================================
   //! @addtogroup traits
   //!
-  //! @struct as
+  //! @class as
   //! @brief Lightweight type-wrapper
   //!
   //! kumi::as Wraps type into a constexpr, trivially constructible empty class to optimize 
