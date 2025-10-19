@@ -1346,6 +1346,18 @@ namespace kumi
       return os;
     }
   };
+  template<> struct tuple<>  
+  {
+    using is_product_type = void;
+    static constexpr bool is_homogeneous = false;
+    static constexpr auto size()  noexcept { return std::size_t{0}; }
+    static constexpr auto empty() noexcept { return true;           }
+    KUMI_ABI friend constexpr auto operator<=>(tuple<>, tuple<>) noexcept = default;
+    friend std::ostream& operator<<(std::ostream& os, tuple<>)
+    {
+      return os << "()";
+    }
+  };
   template<typename... Ts> KUMI_CUDA tuple(Ts &&...) -> tuple<std::unwrap_ref_decay_t<Ts>...>;
   template<typename... Ts>
   [[nodiscard]] KUMI_ABI
@@ -1589,6 +1601,19 @@ namespace kumi
       }, t.names(), t.values());
       os << ")";
       return os;
+    }
+  };
+  template<> struct record<>  
+  {
+    using is_product_type   = void;
+    using is_record_type    = void;
+    static constexpr bool is_homogeneous = false;
+    static constexpr auto size()  noexcept { return std::size_t{0}; }
+    static constexpr auto empty() noexcept { return true;           }
+    KUMI_ABI friend constexpr auto operator<=>(record<>, record<>) noexcept = default;
+    friend std::ostream& operator<<(std::ostream& os, record<>)
+    {
+      return os << "()";
     }
   };
   template<typename... Ts> KUMI_CUDA record(Ts &&...) -> record<std::unwrap_ref_decay_t<Ts>...>;
