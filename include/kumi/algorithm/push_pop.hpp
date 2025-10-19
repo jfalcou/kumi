@@ -11,7 +11,6 @@
 
 namespace kumi
 {
-
   //================================================================================================
   //! @ingroup generators
   //! @brief Constructs a tuple by adding a value v at the beginning of t
@@ -38,7 +37,7 @@ namespace kumi
   //! @include doc/record/push_front.cpp
   //================================================================================================
   template<product_type Tuple, typename T>
-  [[nodiscard]] KUMI_ABI constexpr auto push_front(Tuple && t, T&& v)
+  [[nodiscard]] KUMI_ABI constexpr auto push_front(Tuple && t, T && v)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>)
     {
