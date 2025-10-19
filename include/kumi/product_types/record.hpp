@@ -249,6 +249,23 @@ namespace kumi
     }
   };
 
+  template<> struct record<>  
+  {
+    using is_product_type   = void;
+    using is_record_type    = void;
+    static constexpr bool is_homogeneous = false;
+
+    static constexpr auto size()  noexcept { return std::size_t{0}; }
+    static constexpr auto empty() noexcept { return true;           }
+    
+    KUMI_ABI friend constexpr auto operator<=>(record<>, record<>) noexcept = default;
+
+    friend std::ostream& operator<<(std::ostream& os, record<>)
+    {
+      return os << "()";
+    }
+  };
+
   //================================================================================================
   //! @name Record Deduction Guides
   //! @{
