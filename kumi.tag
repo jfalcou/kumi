@@ -75,9 +75,9 @@
     <member kind="function">
       <type>constexpr field_capture&lt; ID, std::unwrap_ref_decay_t&lt; T &gt; &gt;</type>
       <name>operator=</name>
-      <anchorfile>structkumi_1_1field__name_aa53069d9e64b2e0ce3d962b96fd16b08.html</anchorfile>
-      <anchor>aa53069d9e64b2e0ce3d962b96fd16b08</anchor>
-      <arglist>(T v)</arglist>
+      <anchorfile>structkumi_1_1field__name_a0821838da7dda6e5d69225c191048a4e.html</anchorfile>
+      <anchor>a0821838da7dda6e5d69225c191048a4e</anchor>
+      <arglist>(T v) const</arglist>
     </member>
     <member kind="function" static="yes">
       <type>static constexpr auto</type>
@@ -1013,14 +1013,14 @@
       <type>constexpr auto</type>
       <name>inner_product</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a7439344b8d49dc212a4431ea13740060</anchor>
+      <anchor>a0ee72852cfb635dcde54be778d008a1f</anchor>
       <arglist>(S1 &amp;&amp;s1, S2 &amp;&amp;s2, T init) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>inner_product</name>
-      <anchorfile>group__reductions_ga21303fd927f9d314f49ee8c9845817a1.html</anchorfile>
-      <anchor>ga21303fd927f9d314f49ee8c9845817a1</anchor>
+      <anchorfile>group__reductions_gaf73310d42c59ac2d79ea21586ea46265.html</anchorfile>
+      <anchor>gaf73310d42c59ac2d79ea21586ea46265</anchor>
       <arglist>(S1 &amp;&amp;s1, S2 &amp;&amp;s2, T init, Sum sum, Prod prod) noexcept</arglist>
     </member>
     <member kind="function">
@@ -1042,6 +1042,13 @@
       <name>map</name>
       <anchorfile>group__transforms_ga18c38e2efc4f46e7a4758b0aff9a46ea.html</anchorfile>
       <anchor>ga18c38e2efc4f46e7a4758b0aff9a46ea</anchor>
+      <arglist>(Function f, Tuple &amp;&amp;t0, Tuples &amp;&amp;...others)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>map_field</name>
+      <anchorfile>group__transforms_ga45789f4ba9e8d862296c5e6fc5178026.html</anchorfile>
+      <anchor>ga45789f4ba9e8d862296c5e6fc5178026</anchor>
       <arglist>(Function f, Tuple &amp;&amp;t0, Tuples &amp;&amp;...others)</arglist>
     </member>
     <member kind="function">
@@ -1193,6 +1200,13 @@
     </member>
     <member kind="function">
       <type>constexpr auto</type>
+      <name>reorder_fields</name>
+      <anchorfile>group__generators_gacacb045909983a11d31bbe8d589b0260.html</anchorfile>
+      <anchor>gacacb045909983a11d31bbe8d589b0260</anchor>
+      <arglist>(Tuple &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
       <name>reverse</name>
       <anchorfile>group__generators_ga49abf24bfdc3e6c8707cd321d9015212.html</anchorfile>
       <anchor>ga49abf24bfdc3e6c8707cd321d9015212</anchor>
@@ -1267,6 +1281,13 @@
       <anchorfile>group__record_gaee922438c01912318246dcd9d6a1d158.html</anchorfile>
       <anchor>gaee922438c01912318246dcd9d6a1d158</anchor>
       <arglist>(Ts &amp;&amp;...) -&gt; record&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>tie</name>
+      <anchorfile>group__record_ga55df1b8f936a230b5fd6db297118dfc0.html</anchorfile>
+      <anchor>ga55df1b8f936a230b5fd6db297118dfc0</anchor>
+      <arglist>(Ts &amp;... ts)</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
@@ -1442,6 +1463,13 @@
       <anchorfile>group__record_gaee922438c01912318246dcd9d6a1d158.html</anchorfile>
       <anchor>gaee922438c01912318246dcd9d6a1d158</anchor>
       <arglist>(Ts &amp;&amp;...) -&gt; record&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>tie</name>
+      <anchorfile>group__record_ga55df1b8f936a230b5fd6db297118dfc0.html</anchorfile>
+      <anchor>ga55df1b8f936a230b5fd6db297118dfc0</anchor>
+      <arglist>(Ts &amp;... ts)</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
@@ -1726,6 +1754,13 @@
     </member>
     <member kind="function">
       <type>constexpr auto</type>
+      <name>kumi::tie</name>
+      <anchorfile>group__record_ga55df1b8f936a230b5fd6db297118dfc0.html</anchorfile>
+      <anchor>ga55df1b8f936a230b5fd6db297118dfc0</anchor>
+      <arglist>(Ts &amp;... ts)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
       <name>kumi::record::forward_as_record</name>
       <anchorfile>group__record_gab2fb855f76baa310870f521f234ec2a9.html</anchorfile>
       <anchor>gab2fb855f76baa310870f521f234ec2a9</anchor>
@@ -1825,8 +1860,8 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::inner_product</name>
-      <anchorfile>group__reductions_ga21303fd927f9d314f49ee8c9845817a1.html</anchorfile>
-      <anchor>ga21303fd927f9d314f49ee8c9845817a1</anchor>
+      <anchorfile>group__reductions_gaf73310d42c59ac2d79ea21586ea46265.html</anchorfile>
+      <anchor>gaf73310d42c59ac2d79ea21586ea46265</anchor>
       <arglist>(S1 &amp;&amp;s1, S2 &amp;&amp;s2, T init, Sum sum, Prod prod) noexcept</arglist>
     </member>
     <member kind="function">
@@ -2036,6 +2071,13 @@
       <anchorfile>group__generators_ga3e46e6c4fe83aeb9ce77f9002baada79.html</anchorfile>
       <anchor>ga3e46e6c4fe83aeb9ce77f9002baada79</anchor>
       <arglist>(T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::reorder_fields</name>
+      <anchorfile>group__generators_gacacb045909983a11d31bbe8d589b0260.html</anchorfile>
+      <anchor>gacacb045909983a11d31bbe8d589b0260</anchor>
+      <arglist>(Tuple &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -2267,6 +2309,13 @@
       <name>kumi::map</name>
       <anchorfile>group__transforms_ga18c38e2efc4f46e7a4758b0aff9a46ea.html</anchorfile>
       <anchor>ga18c38e2efc4f46e7a4758b0aff9a46ea</anchor>
+      <arglist>(Function f, Tuple &amp;&amp;t0, Tuples &amp;&amp;...others)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::map_field</name>
+      <anchorfile>group__transforms_ga45789f4ba9e8d862296c5e6fc5178026.html</anchorfile>
+      <anchor>ga45789f4ba9e8d862296c5e6fc5178026</anchor>
       <arglist>(Function f, Tuple &amp;&amp;t0, Tuples &amp;&amp;...others)</arglist>
     </member>
     <member kind="function">

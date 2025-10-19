@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['tie_0',['tie',['../group__tuple_ga30a5e2ccd11ad77c23e3dfd8dafcda99.html#ga30a5e2ccd11ad77c23e3dfd8dafcda99',1,'kumi']]],
+  ['tie_0',['tie',['../group__record_ga55df1b8f936a230b5fd6db297118dfc0.html#ga55df1b8f936a230b5fd6db297118dfc0',1,'kumi::tie(Ts &amp;... ts)'],['../group__tuple_ga30a5e2ccd11ad77c23e3dfd8dafcda99.html#ga30a5e2ccd11ad77c23e3dfd8dafcda99',1,'kumi::tie(Ts &amp;...ts) -&gt; tuple&lt; Ts &amp;... &gt;']]],
   ['to_5fref_1',['to_ref',['../group__record_ga6cde1bebcc6150b864820645ad4cf14f.html#ga6cde1bebcc6150b864820645ad4cf14f',1,'kumi::record::to_ref()'],['../group__tuple_ga6cde1bebcc6150b864820645ad4cf14f.html#ga6cde1bebcc6150b864820645ad4cf14f',1,'kumi::tuple::to_ref()']]],
   ['to_5fstring_2',['to_string',['../structkumi_1_1field__name.html#acfd90348ba680bc26f69a2ec581ad82f',1,'kumi::field_name']]],
   ['to_5ftuple_3',['to_tuple',['../group__utility_gae6de7cdd99f5e217028b93d4bcf3de52.html#gae6de7cdd99f5e217028b93d4bcf3de52',1,'kumi']]],
