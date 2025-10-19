@@ -181,14 +181,10 @@ namespace kumi
     requires( equivalent<record, record<Us...>>  && _::fieldwise_convertible<record, record<Us...>> )
     KUMI_ABI constexpr record &operator=(record<Us...> const &other)
     {
-      [&]<std::size_t...I>(std::index_sequence<I...>)
-      {
-        (([&]
-        {
-          constexpr auto key  = get<I>(this->names());
-          get<key>(*this)     = get<key>(KUMI_FWD(other));
+        (([&]{
+          constexpr auto name = field_name<Ts::name>{};
+          get<name>(*this)    = get<name>(KUMI_FWD(other));
         }()), ...);
-      }(std::make_index_sequence<sizeof...(Ts)>{});
       return *this;
     }
 
@@ -197,14 +193,10 @@ namespace kumi
     requires( equivalent<record, record<Us...>> && _::fieldwise_convertible<record, record<Us...>> )
     KUMI_ABI constexpr record &operator=(record<Us...> &&other)
     {
-      [&]<std::size_t...I>(std::index_sequence<I...>)
-      {
-        (([&]
-        {
-          constexpr auto key  = get<I>(this->names());
-          get<key>(*this)     = get<key>(KUMI_FWD(other));
-        }()), ...);
-      }(std::make_index_sequence<sizeof...(Ts)>{});
+      (([&] {
+        constexpr auto name  = field_name<Ts::name>{};
+        get<name>(*this)    = get<name>(KUMI_FWD(other));
+      }()), ...);
       return *this;
     }
 
@@ -220,14 +212,10 @@ namespace kumi
     KUMI_ABI friend constexpr auto operator==(record const &self, record<Us...> const &other) noexcept
     requires( named_equality_comparable<record,record<Us...>> )
     {
-      [&]<std::size_t...I>(std::index_sequence<I...>)
-      {
-        (([&]
-        {
-          constexpr auto key  = get<I>(self.names());
-          get<key>(self)      = get<key>(KUMI_FWD(other));
-        }()), ...);
-      }(std::make_index_sequence<sizeof...(Ts)>{});
+      return (([&] {
+        constexpr auto key  = field_name<Ts::name>{};
+        return get<key>(self) == get<key>(other);
+      }()) && ...);
     }
 
     template<typename... Us>
@@ -281,6 +269,21 @@ namespace kumi
   //! @name Record construction
   //! @{
   //================================================================================================
+
+  //================================================================================================
+  //! @ingroup record
+  //! @brief Creates a kumi::record of lvalue references to its arguments.
+  //! @param ts	Zero or more lvalue arguments to construct the record from.
+  //! @return A kumi::record object containing lvalue references.
+  //! ## Example:
+  //! @include doc/record/tie.cpp
+  //================================================================================================
+  template<kumi::field_name... Fields, typename... Ts>
+  requires( sizeof...(Fields) == sizeof...(Ts) )
+  KUMI_ABI constexpr auto tie(Ts&... ts)
+  {
+    return kumi::record{ kumi::field_capture<Fields.name, Ts&>{ts}... };
+  }
 
   //================================================================================================
   //! @ingroup record

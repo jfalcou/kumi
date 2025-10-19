@@ -82,11 +82,24 @@ namespace kumi
   template< product_type S1, sized_product_type<size_v<S1>> S2, typename T
           , typename Sum, typename Prod
           >
+  requires( compatible_product_types<S1, S2> )
   [[nodiscard]] KUMI_ABI constexpr auto inner_product( S1 && s1, S2 && s2, T init
                                             , Sum sum, Prod prod
                                             ) noexcept
   {
     if constexpr(sized_product_type<S1,0>) return init;
+    else if constexpr ( record_type<S1> )
+    {
+      return [&]<std::size_t... I>(std::index_sequence<I...>)
+      {
+        return  (  _::foldable {sum, prod(get<field_name<member_name_v<I,std::remove_cvref_t<S1>>>{}>(KUMI_FWD(s1)),
+                                          get<field_name<member_name_v<I,std::remove_cvref_t<S1>>>{}>(KUMI_FWD(s2)))}
+                >> ...
+                >> _::foldable {sum, init}
+                ).value;
+      }
+      (std::make_index_sequence<size<S1>::value>());
+    }
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
@@ -102,9 +115,18 @@ namespace kumi
 
   //! @overload
   template<product_type S1, sized_product_type<size_v<S1>> S2, typename T>
+  requires( compatible_product_types<S1, S2> )
   [[nodiscard]] KUMI_ABI constexpr auto inner_product(S1 && s1, S2 && s2, T init) noexcept
   {
     if constexpr(sized_product_type<S1,0>) return init;
+    else if constexpr( record_type<S1> )
+    {
+      return [&]<std::size_t... I>(std::index_sequence<I...>)
+      {
+        return (init + ... + (get<field_name<member_name_v<I,std::remove_cvref_t<S1>>>{}>(s1) 
+                            * get<field_name<member_name_v<I,std::remove_cvref_t<S1>>>{}>(s2)));
+      }(std::make_index_sequence<size<S1>::value>());
+    }
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)

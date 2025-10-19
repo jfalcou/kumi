@@ -33,8 +33,9 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::push_front
   //!
-  //! ## Example
+  //! ## Examples:
   //! @include doc/push_front.cpp
+  //! @include doc/record/push_front.cpp
   //================================================================================================
   template<product_type Tuple, typename T>
   [[nodiscard]] KUMI_ABI constexpr auto push_front(Tuple && t, T&& v)
@@ -97,8 +98,9 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::push_back
   //!
-  //! ## Example
+  //! ## Examples:
   //! @include doc/push_back.cpp
+  //! @include doc/record/push_back.cpp
   //================================================================================================
   template<product_type Tuple, typename T>
   [[nodiscard]] KUMI_ABI constexpr auto push_back(Tuple && t, T&& v)

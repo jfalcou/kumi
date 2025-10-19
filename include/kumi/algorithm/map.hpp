@@ -52,7 +52,12 @@ namespace kumi
     {
       auto const call = [&]<std::size_t N, typename... Ts>(index_t<N>, Ts &&... args)
       {
-        return f(get<N>(KUMI_FWD(args))...);
+        if constexpr ( record_type<Tuple> )
+        {
+          using field_t = field_name<member_name_v<N, std::remove_cvref_t<Tuple>>>;
+          return field_t{} = f(get<field_t{}>(args)...);
+        }
+        else return f(get<N>(KUMI_FWD(args))...);
       };
 
       return [&]<std::size_t... I>(std::index_sequence<I...>)
@@ -142,5 +147,73 @@ namespace kumi
 
     template<typename Function, product_type T, sized_product_type<size<T>::value>... Ts>
     using map_index_t = typename map_index<Function,T,Ts...>::type;
+  }
+
+  //================================================================================================
+  //! @ingroup transforms
+  //! @brief Apply the Callable object f on each records' elements and their field names 
+  //!
+  //! Applies the given function to all the records passed as arguments along with their names and
+  //! stores the result in another records, keeping the original elements order.
+  //!
+  //! @note Does not participate in overload resolution if records' size are not equal or if `f`
+  //!       can't be called on each record's elements and their names.
+  //!
+  //! @param f      Callable function to apply
+  //! @param t0     Record  to operate on
+  //! @param others Records to operate on
+  //! @return The record of `f` calls results.
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<typename Function, product_type T, product_type... Ts> struct map_field;
+  //!
+  //!   template<typename Function, product_type T, product_type... Ts>
+  //!   using map_field_t = typename map_field<Function,Tuple>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::map_field
+  //!
+  //! ## Example
+  //! @include doc/record/map_field.cpp
+  //================================================================================================ 
+  template<record_type Tuple, typename Function, sized_product_type<size<Tuple>::value>... Tuples>
+  requires ( compatible_product_types<Tuple, Tuples...> )
+  constexpr auto map_field(Function     f,Tuple  &&t0,Tuples &&...others)
+  {
+    if constexpr(sized_product_type<Tuple,0>) return _::builder<Tuple>::make();
+    else
+    {
+      auto const call = [&]<std::size_t N, typename... Ts>(index_t<N>, Ts &&... args)
+      {
+        constexpr auto name = member_name_v<N, std::remove_cvref_t<Tuple>>; 
+        using field_t = kumi::field_name<name>;
+        return field_t{} = f(name.value(), (get<field_t{}>(args))...);
+      };
+
+      return [&]<std::size_t... I>(std::index_sequence<I...>)
+      {
+        return _::builder<Tuple>::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
+      }(std::make_index_sequence<size<Tuple>::value>());
+    }
+  }
+
+  namespace result
+  {
+    template<typename Function, record_type T, sized_product_type<size<T>::value>... Ts>
+    struct map_field
+    {
+      using type = decltype ( kumi::map_field ( std::declval<Function>()
+                                             , std::declval<T>()
+                                             , std::declval<Ts>()...
+                                             )
+                            );
+    };
+
+    template<typename Function, record_type T, sized_product_type<size<T>::value>... Ts>
+    using map_field_t = typename map_field<Function,T,Ts...>::type;
   }
 }

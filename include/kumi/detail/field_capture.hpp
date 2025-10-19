@@ -121,7 +121,7 @@ namespace kumi
     //! @return A kumi::field_capture containing the value.
     //==============================================================================================
     template<typename T>
-    constexpr field_capture<ID, std::unwrap_ref_decay_t<T>> operator=(T v)
+    constexpr field_capture<ID, std::unwrap_ref_decay_t<T>> operator=(T v) const
     {
       return { std::move(v) };
     }
