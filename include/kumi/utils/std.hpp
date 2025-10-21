@@ -10,6 +10,7 @@
 #include <kumi/utils/concepts.hpp>
 #include <kumi/utils/traits.hpp>
 #include <array>
+#include <span>
 #include <type_traits>
 #include <utility>
 
@@ -91,9 +92,7 @@ struct std::basic_common_reference<kumi::tuple<Ts...>, kumi::tuple<Us...>, TQual
 //==================================================================================================
 // Standard array support
 //==================================================================================================
-#if !defined(KUMI_NO_STD_ADAPTORS)
 template< typename T, std::size_t N >
 struct kumi::is_product_type<std::array<T , N>> : std::true_type {};
-#endif
 
 #endif
