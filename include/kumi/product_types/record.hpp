@@ -255,8 +255,10 @@ namespace kumi
     using is_record_type    = void;
     static constexpr bool is_homogeneous = false;
 
-    static constexpr auto size()  noexcept { return std::size_t{0}; }
-    static constexpr auto empty() noexcept { return true;           }
+    static constexpr auto size()    noexcept { return std::size_t{0}; }
+    static constexpr auto empty()   noexcept { return true;           }
+    static constexpr auto names()   noexcept { return tuple{};        }
+    static constexpr auto values()  noexcept { return tuple{};        }
     
     KUMI_ABI friend constexpr auto operator<=>(record<>, record<>) noexcept = default;
 

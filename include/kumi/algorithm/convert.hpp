@@ -11,6 +11,16 @@ namespace kumi
 {
   namespace _
   {
+    template<typename T> struct is_std_span : std::false_type{}; 
+
+    template<typename T, std::size_t N>
+    struct is_std_span<std::span<T,N>> : std::bool_constant<(N != std::dynamic_extent)>{};
+
+    template<typename T> concept static_std_span = is_std_span<std::remove_cvref_t<T>>::value; 
+  }
+  
+  namespace _
+  {
     template< product_type Tuple
             , typename IndexSequence
             , template<typename...> class Meta = std::type_identity
@@ -71,13 +81,26 @@ namespace kumi
   //! @param  t    kumi::product_type to convert
   //! @return An instance of kumi::tuple constructed from each elements of `t` in order.
   //!
+  //! @note overloads are provided for static std::span and std::array
+  //!
   //! ## Example
   //! @include doc/to_tuple.cpp
   //================================================================================================
   template<product_type Type>
-  [[nodiscard]] KUMI_ABI constexpr auto to_tuple(Type&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto to_tuple(Type && t)
   {
     return apply([](auto &&...elems) { return tuple{elems...}; }, KUMI_FWD(t));
+  }
+
+  template<_::static_std_span S>
+  [[nodiscard]] KUMI_ABI constexpr auto to_tuple( S && s )
+  {
+    constexpr auto N = std::remove_cvref_t<S>::extent;
+    if constexpr ( N == 0 ) return tuple{};
+    else return [&]<std::size_t...I>( std::index_sequence<I...> )
+    {
+      return tuple{ KUMI_FWD(s)[I]... };
+    }(std::make_index_sequence<N>{});
   }
 
   //================================================================================================
