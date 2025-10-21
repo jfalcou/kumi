@@ -12,8 +12,6 @@
 #include <string>
 #include <compare>
 
-#define KUMI_NO_STD_ADAPTORS
-
 struct my_struct
 {
   std::size_t n;
