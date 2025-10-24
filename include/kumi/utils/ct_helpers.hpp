@@ -45,7 +45,6 @@ namespace kumi
   //! @tparam ID a compile time string that is used to name the field.
   //================================================================================================
   template<str ID> struct field_name
-
   {
     /// Name associated to the field_name
     static constexpr auto name = ID;

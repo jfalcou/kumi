@@ -196,6 +196,7 @@ namespace kumi
       else return false;
     };
   }
+
   //================================================================================================
   //! @ingroup concepts
   //! @brief Concept specifying if a kumi::field_capture with name Name is present in a parameter pack.
