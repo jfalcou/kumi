@@ -178,25 +178,25 @@ namespace kumi
 
   namespace _
   {
-    template<auto Name, typename... Ts>
-    requires( uniquely_named<Ts...> )
-    KUMI_ABI constexpr decltype(auto) get_name_index() noexcept
-    {
-      return []<std::size_t... N>(std::index_sequence<N...>)
-      {
-        bool checks[] = {( []()
-        {
-          if constexpr( is_field_capture_v<Ts> ) return Name == Ts::name;
-          else return false;
-        }
-        ())...};
+    //template<auto Name, typename... Ts>
+    //requires( uniquely_named<Ts...> )
+    //KUMI_ABI constexpr decltype(auto) get_name_index() noexcept
+    //{
+    //  return []<std::size_t... N>(std::index_sequence<N...>)
+    //  {
+    //    bool checks[] = {( []()
+    //    {
+    //      if constexpr( is_field_capture_v<Ts> ) return Name == Ts::name;
+    //      else return false;
+    //    }
+    //    ())...};
 
-        for(std::size_t i=0;i<sizeof...(Ts);++i) 
-          if(checks[i]) return i;
+    //    for(std::size_t i=0;i<sizeof...(Ts);++i) 
+    //      if(checks[i]) return i;
 
-        return sizeof...(Ts); 
-      }( std::index_sequence_for<Ts...>{} );
-    };
+    //    return sizeof...(Ts); 
+    //  }( std::index_sequence_for<Ts...>{} );
+    //};
 
     template<typename T, typename... Ts>
     requires ( uniquely_typed<Ts...> )
@@ -223,8 +223,8 @@ namespace kumi
   //! @ingroup concepts
   //! @brief Concept specifying if a kumi::field_capture with name Name is present in a parameter pack.
   //================================================================================================
-  template<auto Name, typename... Ts>
-  concept contains_field = (_::get_name_index<Name, std::remove_cvref_t<Ts>...>() < sizeof...(Ts));
+  template<typename Name, typename... Ts>
+  concept contains_field = (!std::is_same_v<_::get_field_by_name<Name, Ts...>, kumi::unit>);//_::get_name_index<Name, std::remove_cvref_t<Ts>...>() < sizeof...(Ts));
 
   namespace _
   {
@@ -250,7 +250,7 @@ namespace kumi
       {
         using T_field = std::remove_cvref_t<T>;
         using U_field = std::remove_cvref_t<get_field_by_name_t<T_field, U...>>;
-        return _::comparable<unwrap_field_capture_t<T_field>, unwrap_field_capture_t<U_field>>;
+        return _::comparable<typename T_field::type, typename U_field::type>;
       }() && ...);
     };
 

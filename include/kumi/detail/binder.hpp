@@ -10,6 +10,8 @@
 #include <cstddef>
 #include <utility>
 
+#include <kumi/utils/traits.hpp>
+
 namespace kumi::_
 {
   //====================================================================================================================
@@ -20,6 +22,13 @@ namespace kumi::_
     T value;
   };
 
+  // Optimized leaf binder for record
+  template<int I, kumi::str Name, typename T> struct leaf<I, field_capture<Name, T>>
+  {
+      field_capture<Name, T> value;
+  };
+
+  // Used for get_leaf<index>(binder) resolution
   template<int I, typename T>
   KUMI_ABI constexpr T       &  get_leaf(leaf<I, T>       & a) noexcept { return a.value; }
   template<int I, typename T>
@@ -28,6 +37,26 @@ namespace kumi::_
   KUMI_ABI constexpr T const && get_leaf(leaf<I, T> const &&a) noexcept { return static_cast<T const &&>(a.value); }
   template<int I, typename T>
   KUMI_ABI constexpr T const &  get_leaf(leaf<I, T> const & a) noexcept { return a.value; }
+
+  // Used for get_leaf<type>(binder) resolution
+  template< typename T, int I>
+  KUMI_ABI constexpr T       &  get_leaf(leaf<I, T>       & a) noexcept { return a.value; }
+  template< typename T, int I>
+  KUMI_ABI constexpr T       && get_leaf(leaf<I, T>       &&a) noexcept { return static_cast<T&&>(a.value); }
+  template< typename T, int I>
+  KUMI_ABI constexpr T const && get_leaf(leaf<I, T> const &&a) noexcept { return static_cast<T const &&>(a.value); }
+  template< typename T, int I>
+  KUMI_ABI constexpr T const &  get_leaf(leaf<I, T> const & a) noexcept { return a.value; }
+
+  // Used for get_leaf<name>(binder) resolution
+  template<kumi::str Name, int I, typename T>
+  KUMI_ABI constexpr T&         get_leaf(leaf<I, field_capture<Name, T>>       & a) noexcept { return a.value.value; }
+  template<kumi::str Name, int I, typename T>
+  KUMI_ABI constexpr T&&        get_leaf(leaf<I, field_capture<Name, T>>       &&a) noexcept { return static_cast<T&&>(a.value.value); }
+  template<kumi::str Name, int I, typename T>
+  KUMI_ABI constexpr T const&&  get_leaf(leaf<I, field_capture<Name, T>> const &&a) noexcept { return static_cast<T const &&>(a.value.value); }
+  template<kumi::str Name, int I, typename T>
+  KUMI_ABI constexpr T const &  get_leaf(leaf<I, field_capture<Name, T>> const & a) noexcept { return a.value.value; }
 
   template<typename ISeq, typename... Ts> struct binder;
 
@@ -49,4 +78,4 @@ namespace kumi::_
   using make_binder_t = typename make_binder<ISeq,Ts...>::type;
 }
 
-#include <kumi/detail/optimized.hpp>
+//#include <kumi/detail/optimized.hpp>

@@ -104,7 +104,7 @@ namespace kumi::_
       {
         using F_field = std::remove_cvref_t<From>;
         using T_field = std::remove_cvref_t<get_field_by_name_t<From, To...>>;
-        return kumi::convertible_to<unwrap_field_capture_t<F_field>, unwrap_field_capture_t<T_field>>;
+        return kumi::convertible_to<typename F_field::type, typename T_field::type>;
       }() && ...);
   };
 
@@ -115,7 +115,7 @@ namespace kumi::_
       {
         using F_field = std::remove_cvref_t<From>;
         using T_field = std::remove_cvref_t<get_field_by_name_t<From, To...>>;
-        return std::is_constructible_v<unwrap_field_capture_t<F_field>, unwrap_field_capture_t<T_field>>;
+        return std::is_constructible_v<typename F_field::type, typename T_field::type>;
       }() && ...);
   };
 

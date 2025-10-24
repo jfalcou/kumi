@@ -17,7 +17,7 @@ int main()
 
   auto original = kumi::record{"a"_f = a,"b"_f = &a,"c"_f = b,"d"_f = &b,"e"_f = c,"f"_f = &c,"g"_f = 'z',"h"_f = nullptr};
   std::cout << original << "\n";
-
+ 
   std::cout << "Pointers first: " << kumi::partition<std::is_pointer>(original) << "\n";
   std::cout << "Real     first: " << kumi::partition<std::is_floating_point>(original) << "\n";
   std::cout << "nullptr  first: " << kumi::partition<std::is_null_pointer>(original) << "\n";

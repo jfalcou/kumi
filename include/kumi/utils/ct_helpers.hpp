@@ -35,6 +35,62 @@ namespace kumi
   template<std::size_t N> inline constexpr index_t<N> const index = {};
 
   //================================================================================================
+  //! @ingroup utility 
+  //! @class field_name
+  //! @brief Named wrapper used to instantiate a kumi::field_capture.
+  //!
+  //! kumi::field_name provides a way to instantiate a kumi::field_capture using
+  //! a user defined literal prefix.
+  //!
+  //! @tparam ID a compile time string that is used to name the field.
+  //================================================================================================
+  template<kumi::str ID>
+  struct field_name
+  {
+    /// Name associated to the field_name
+    static constexpr auto name = ID;
+    
+    /// String view of the name of the field_capture
+    static constexpr auto to_string() 
+    {
+      return ID.value();
+    }
+
+    /// Conversion operator to kumi::str 
+    constexpr inline      operator kumi::str() const noexcept { return ID; }
+
+    //==============================================================================================
+    //! @brief Builds a field_capture from the given value.
+    //! @tparam T The type to wrap.
+    //! @param  v The value to capture. 
+    //! @return A kumi::field_capture containing the value.
+    //==============================================================================================
+    template<typename T>
+    constexpr field_capture<ID, std::unwrap_ref_decay_t<T>> operator=(T v) const
+    {
+      return { std::move(v) };
+    }
+
+    //==============================================================================================
+    /// @ingroup utility 
+    //! @related kumi::field_name
+    //! @brief Inserts a kumi::field_name in an output stream
+    //==============================================================================================
+    friend std::ostream& operator<<(std::ostream& os, field_name const&)
+    {
+      return os << ID;
+    }
+  };
+
+  //==============================================================================================
+  //! @ingroup utility 
+  //! @brief Forms a constant kumi::field_name of the desired ID.
+  //! @tparam ID the compile time name to build.
+  //==============================================================================================
+  template<kumi::str ID>
+  inline constexpr auto field = kumi::field_name<ID>{};
+
+  //================================================================================================
   //! @namespace literals
   //! @brief KUMI literals namespace
   //================================================================================================
@@ -55,14 +111,6 @@ namespace kumi
     //! @include doc/index.cpp
     //==============================================================================================
     template<char... c> constexpr auto operator""_c() noexcept { return index<b10<c...>()>; }
-
-    //==============================================================================================
-    //! @ingroup utility 
-    //! @brief Forms a constant kumi::field_name of the desired ID.
-    //! @tparam ID the compile time name to build.
-    //==============================================================================================
-    template<kumi::str ID>
-    inline constexpr auto field = kumi::field_name<ID>{};
     
     //==============================================================================================
     //! @ingroup utility 

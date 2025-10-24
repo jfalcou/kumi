@@ -199,75 +199,6 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup traits
-  //! @brief Returns the underlying type of a kumi::field_capture if it is the type of T
-  //! return T otherwise
-  //!
-  //! @tparam T The type to access
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<typename T> using unwrap_field_capture_t = typename unwrap_field_capture<T>::type;
-  //! }
-  //! @endcode
-  //================================================================================================
-  template<typename T>
-  struct unwrap_field_capture { using type = T; };
-    
-  template<typename T> 
-  requires (requires { T::is_field_capture; })
-  struct unwrap_field_capture<T> { using type = typename T::type; };
-    
-  template<typename T>
-  using unwrap_field_capture_t = typename unwrap_field_capture<T>::type;
-
-  //================================================================================================
-  //! @ingroup traits
-  //! @brief Returns the underlying name of a kumi::field_capture if T is a field_capture
-  //!        returns the unit type otherwise 
-  //!
-  //! @tparam T The type to access
-  //!
-  //! ## Helper value
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<typename T> using unwrap_name_v = unwrap_name<T>::value;
-  //! }
-  //! @endcode
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<typename T> using unwrap_name_t = unwrap_name<T>::type;
-  //! }
-  //! @endcode
-  //================================================================================================
-  template<typename T>
-  struct unwrap_name
-  {
-    using type = unit;
-    static constexpr auto value = unit{}; 
-  };
-
-  template<typename T>
-  requires ( requires { T::is_field_capture; } )
-  struct unwrap_name<T>
-  {
-    using type = std::remove_cvref_t<decltype(T::name)>;
-    static constexpr auto value = T::name;
-  };
-
-  template<typename T>
-  inline constexpr auto unwrap_name_v = unwrap_name<T>::value;
-    
-  template<typename T>
-  using unwrap_name_t = typename unwrap_name<T>::type;
-  
-  //================================================================================================
-  //! @ingroup traits
   //! @brief Computes the return type of a call to kumi::get on a kumi::tuple and unwrap the 
   //!        field_capture returned by kumi::get on a kumi::record
   //!
@@ -292,7 +223,7 @@ namespace kumi
   requires( is_record_type<std::remove_cvref_t<T>>::value )
   struct raw_member<I, T>
   {
-    using type = decltype( unwrap_field_value(get<I>(std::declval<T&&>())) );
+    using type = decltype( field_value_of(get<I>(std::declval<T&&>())) );
   };
 
   template<std::size_t I, typename T> using raw_member_t = typename raw_member<I,T>::type;
@@ -314,26 +245,20 @@ namespace kumi
   //! }
   //! @endcode
   //================================================================================================
-  template<std::size_t I, typename T> using raw_element_t = unwrap_field_capture_t<element_t<I,T>>;
-
-  //================================================================================================
-  //! @ingroup traits
-  //! @brief Provides indexed access to the names of the elements of a kumi::record_type. 
-  //!
-  //! @tparam I Index of the type to retrieve
-  //! @tparam T kumi::product_type to access
-  //!
-  //! ## Helper value
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<std::size_t I, typename T> 
-  //!   inline constexpr auto member_name_v = unwrap_name_v<std::remove_cvref_t<member_t<I,T>>>;
-  //! }
-  //! @endcode
-  //================================================================================================
   template<std::size_t I, typename T>
-  inline constexpr auto member_name_v = unwrap_name_v<std::remove_cvref_t<member_t<I,T>>>;
+  struct raw_element
+  {
+    using type = element_t<I,T>;
+  };
+
+  template<std::size_t I, typename T>
+  requires( is_record_type<std::remove_cvref_t<T>>::value )
+  struct raw_element<I,T>
+  {
+    using type = typename element_t<I,T>::type;
+  };
+
+  template<std::size_t I, typename T> using raw_element_t = typename raw_element<I,T>::type; 
 
   //================================================================================================
   //! @ingroup traits
