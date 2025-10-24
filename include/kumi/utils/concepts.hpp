@@ -176,59 +176,22 @@ namespace kumi
   concept entirely_uniquely_named = (sizeof...(Ts)==0) 
   || (is_fully_named<Ts...> && uniquely_named<Ts...>);
 
-  namespace _
-  {
-    //template<auto Name, typename... Ts>
-    //requires( uniquely_named<Ts...> )
-    //KUMI_ABI constexpr decltype(auto) get_name_index() noexcept
-    //{
-    //  return []<std::size_t... N>(std::index_sequence<N...>)
-    //  {
-    //    bool checks[] = {( []()
-    //    {
-    //      if constexpr( is_field_capture_v<Ts> ) return Name == Ts::name;
-    //      else return false;
-    //    }
-    //    ())...};
-
-    //    for(std::size_t i=0;i<sizeof...(Ts);++i) 
-    //      if(checks[i]) return i;
-
-    //    return sizeof...(Ts); 
-    //  }( std::index_sequence_for<Ts...>{} );
-    //};
-
-    template<typename T, typename... Ts>
-    requires ( uniquely_typed<Ts...> )
-    KUMI_ABI constexpr decltype(auto) get_type_index() noexcept
-    {
-      return []<std::size_t... N>( std::index_sequence<N...> )
-      {
-        bool checks[] = {( []()
-        {
-          if constexpr( std::is_same_v<T, Ts> ) return true;
-          else return false;
-        }
-        ())...};
-        
-        for(std::size_t i=0;i<sizeof...(Ts);++i) 
-          if(checks[i]) return i;
-            
-        return sizeof...(Ts); 
-      }( std::index_sequence_for<Ts...>{} );
-    }
-  }
+  //================================================================================================
+  //! @ingroup concepts
+  //! @brief Concept specifying if a Type is present in a parameter pack.
+  //================================================================================================
+  template<typename T, typename... Ts>
+  concept contains_type = (!std::is_same_v<_::get_field_by_type_t<T, Ts...>, kumi::unit>);
 
   //================================================================================================
   //! @ingroup concepts
   //! @brief Concept specifying if a kumi::field_capture with name Name is present in a parameter pack.
   //================================================================================================
   template<typename Name, typename... Ts>
-  concept contains_field = (!std::is_same_v<_::get_field_by_name<Name, Ts...>, kumi::unit>);//_::get_name_index<Name, std::remove_cvref_t<Ts>...>() < sizeof...(Ts));
+  concept contains_field = (!std::is_same_v<_::get_field_by_name_t<Name, Ts...>, kumi::unit>);
 
   namespace _
   {
-
     template<typename T, typename U> struct has_same_field_names;
     template<typename T, typename U> struct check_named_equality;
 

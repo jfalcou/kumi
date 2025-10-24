@@ -70,6 +70,27 @@ namespace kumi::_
   };
 
   //==============================================================================================
+  // Helper meta functions to access a field type by type 
+  //============================================================================================== 
+  template<typename Ref, typename Field>
+  struct check_type
+  {
+    static consteval Field      get(Ref) requires std::is_same_v<Field, Ref>  { return {}; }
+    static consteval kumi::unit get(...)                                      { return {}; }
+  };
+
+  /// Helper using inheritance to get the corresponding name in an variadic pack if it exist 
+  template<typename Ref, typename... Fields>
+  struct get_field_by_type : check_type<Ref,Fields>...
+  {
+    using check_type<Ref,Fields>::get...;
+    using type = decltype(get(std::declval<Ref>()));
+  };
+
+  template<typename Ref, typename... Fields>
+  using get_field_by_type_t = typename get_field_by_type<Ref, Fields...>::type;
+
+  //==============================================================================================
   // Helper meta functions to access a field type by name
   //============================================================================================== 
   template<typename Ref, typename Field>

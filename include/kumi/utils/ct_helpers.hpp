@@ -44,20 +44,14 @@ namespace kumi
   //!
   //! @tparam ID a compile time string that is used to name the field.
   //================================================================================================
-  template<kumi::str ID>
+  template<str ID>
   struct field_name
   {
     /// Name associated to the field_name
     static constexpr auto name = ID;
     
-    /// String view of the name of the field_capture
-    static constexpr auto to_string() 
-    {
-      return ID.value();
-    }
-
     /// Conversion operator to kumi::str 
-    constexpr inline      operator kumi::str() const noexcept { return ID; }
+    constexpr inline operator str() const noexcept { return ID; }
 
     //==============================================================================================
     //! @brief Builds a field_capture from the given value.
@@ -70,16 +64,6 @@ namespace kumi
     {
       return { std::move(v) };
     }
-
-    //==============================================================================================
-    /// @ingroup utility 
-    //! @related kumi::field_name
-    //! @brief Inserts a kumi::field_name in an output stream
-    //==============================================================================================
-    friend std::ostream& operator<<(std::ostream& os, field_name const&)
-    {
-      return os << ID;
-    }
   };
 
   //==============================================================================================
@@ -87,8 +71,8 @@ namespace kumi
   //! @brief Forms a constant kumi::field_name of the desired ID.
   //! @tparam ID the compile time name to build.
   //==============================================================================================
-  template<kumi::str ID>
-  inline constexpr auto field = kumi::field_name<ID>{};
+  template<str ID>
+  inline constexpr auto field = field_name<ID>{};
 
   //================================================================================================
   //! @namespace literals

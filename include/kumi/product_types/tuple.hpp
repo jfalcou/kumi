@@ -95,10 +95,10 @@ namespace kumi
     //! @return A reference to the selected element of current tuple.
     //!
     //! ## Example:
-    //! @include doc/subscript.cpp
+    //! @include doc/typed_subscript.cpp
     //==============================================================================================
     template<typename T>
-    //requires(I < sizeof...(Ts))
+    requires( contains_type<T, Ts...> )
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) &noexcept
     {
       return _::get_leaf<T>(impl);
@@ -106,7 +106,7 @@ namespace kumi
 
     /// @overload
     template<typename T>
-    //requires(I < sizeof...(Ts))
+    requires ( contains_type<T, Ts...> )
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) &&noexcept
     {
       return _::get_leaf<T>(static_cast<decltype(impl) &&>(impl));
@@ -114,7 +114,7 @@ namespace kumi
 
     /// @overload
     template<typename T>
-    //requires(I < sizeof...(Ts))
+    requires ( contains_type<T, Ts...> )
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) const &&noexcept
     {
       return _::get_leaf<T>(static_cast<decltype(impl) const &&>(impl));
@@ -122,7 +122,7 @@ namespace kumi
 
     /// @overload
     template<typename T>
-    //requires(I < sizeof...(Ts))
+    requires (contains_type<T, Ts...> )
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) const &noexcept
     {
       return _::get_leaf<T>(impl);

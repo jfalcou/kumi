@@ -10,7 +10,7 @@
 #include <cstddef>
 #include <utility>
 
-#include <kumi/utils/traits.hpp>
+#include <kumi/detail/field_capture.hpp>
 
 namespace kumi::_
 {
@@ -78,4 +78,4 @@ namespace kumi::_
   using make_binder_t = typename make_binder<ISeq,Ts...>::type;
 }
 
-//#include <kumi/detail/optimized.hpp>
+#include <kumi/detail/optimized.hpp>
