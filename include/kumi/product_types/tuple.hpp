@@ -141,7 +141,7 @@ namespace kumi
     //! @include doc/named_subscript.cpp
     //==============================================================================================
     template<str Name>
-    requires( contains_field<field_name<Name>, Ts...> )
+    requires( uniquely_named<Ts...> && contains_field<field_name<Name>, Ts...> )
     KUMI_ABI constexpr decltype(auto) operator[](field_name<Name>) &noexcept
     {
       return _::get_leaf<Name>(impl);
@@ -149,7 +149,7 @@ namespace kumi
 
     /// @overload
     template<str Name>
-    requires( contains_field<field_name<Name>, Ts...> )
+    requires( uniquely_named<Ts...> && contains_field<field_name<Name>, Ts...> )
     KUMI_ABI constexpr decltype(auto) operator[](field_name<Name>) &&noexcept
     {
       return _::get_leaf<Name>(static_cast<decltype(impl) &&>(impl));
@@ -157,7 +157,7 @@ namespace kumi
 
     /// @overload
     template<str Name>
-    requires( contains_field<field_name<Name>, Ts...> )
+    requires( uniquely_named<Ts...> && contains_field<field_name<Name>, Ts...> )
     KUMI_ABI constexpr decltype(auto) operator[](field_name<Name>) const &&noexcept
     {
       return _::get_leaf<Name>(static_cast<decltype(impl) const &&>(impl));

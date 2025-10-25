@@ -50,11 +50,11 @@ namespace kumi::_
 
   // Used for get_leaf<name>(binder) resolution
   template<kumi::str Name, int I, typename T>
-  KUMI_ABI constexpr T&         get_leaf(leaf<I, field_capture<Name, T>>       & a) noexcept { return a.value.value; }
+  KUMI_ABI constexpr T       &  get_leaf(leaf<I, field_capture<Name, T>>       & a) noexcept { return a.value.value; }
   template<kumi::str Name, int I, typename T>
-  KUMI_ABI constexpr T&&        get_leaf(leaf<I, field_capture<Name, T>>       &&a) noexcept { return static_cast<T&&>(a.value.value); }
+  KUMI_ABI constexpr T       && get_leaf(leaf<I, field_capture<Name, T>>       &&a) noexcept { return static_cast<T&&>(a.value.value); }
   template<kumi::str Name, int I, typename T>
-  KUMI_ABI constexpr T const&&  get_leaf(leaf<I, field_capture<Name, T>> const &&a) noexcept { return static_cast<T const &&>(a.value.value); }
+  KUMI_ABI constexpr T const && get_leaf(leaf<I, field_capture<Name, T>> const &&a) noexcept { return static_cast<T const &&>(a.value.value); }
   template<kumi::str Name, int I, typename T>
   KUMI_ABI constexpr T const &  get_leaf(leaf<I, field_capture<Name, T>> const & a) noexcept { return a.value.value; }
 

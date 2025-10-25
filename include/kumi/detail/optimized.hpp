@@ -14,7 +14,7 @@
 namespace kumi::_
 {
   //================================================================================================
-  // We optimize layout for tuple of size 1->5 and for homogeneous layout
+  // We optimize layout for tuple of size 1->10 and for homogeneous layout
   // This shaves a bit of compile time and it makes symbol length of tuple NTTP shorter
   //================================================================================================
 
@@ -347,154 +347,136 @@ namespace kumi::_
   //================================================================================================
   // Optimized get_leaf<type> for all binders of 1->10 elements
   //================================================================================================
-  template<typename T,typename Binder>
-  requires requires(Binder) { typename Binder::kumi_specific_layout; }
-  KUMI_ABI constexpr auto &get_leaf(Binder &arg) noexcept
-  {
-    if constexpr(binder_size<Binder>::value > 0) if constexpr(std::same_as<T,typename Binder::member0_type>) return arg.member0;
-    if constexpr(binder_size<Binder>::value > 1) if constexpr(std::same_as<T,typename Binder::member1_type>) return arg.member1;
-    if constexpr(binder_size<Binder>::value > 2) if constexpr(std::same_as<T,typename Binder::member2_type>) return arg.member2;
-    if constexpr(binder_size<Binder>::value > 3) if constexpr(std::same_as<T,typename Binder::member3_type>) return arg.member3;
-    if constexpr(binder_size<Binder>::value > 4) if constexpr(std::same_as<T,typename Binder::member4_type>) return arg.member4;
-    if constexpr(binder_size<Binder>::value > 5) if constexpr(std::same_as<T,typename Binder::member5_type>) return arg.member5;
-    if constexpr(binder_size<Binder>::value > 6) if constexpr(std::same_as<T,typename Binder::member6_type>) return arg.member6;
-    if constexpr(binder_size<Binder>::value > 7) if constexpr(std::same_as<T,typename Binder::member7_type>) return arg.member7;
-    if constexpr(binder_size<Binder>::value > 8) if constexpr(std::same_as<T,typename Binder::member8_type>) return arg.member8;
-    if constexpr(binder_size<Binder>::value > 9) if constexpr(std::same_as<T,typename Binder::member9_type>) return arg.member9;
+  template <typename T, typename... Ts>
+  consteval std::size_t index_of_type(){
+    std::size_t idx = 0;
+    [[maybe_unused]] bool b = ((std::same_as<T, Ts> ? true : (++idx, false)) || ...);  
+    return idx;
   }
 
-  template<typename T,typename Binder>
-  requires requires(Binder) { typename Binder::kumi_specific_layout; }
-  KUMI_ABI constexpr auto &&get_leaf(Binder &&arg) noexcept
+  template<typename T,typename ISeq, typename... Ts>
+  requires (sizeof...(Ts) < 10) && 
+  requires(binder<ISeq, Ts...>) { typename binder<ISeq,Ts...>::kumi_specific_layout; }
+  KUMI_ABI constexpr auto &get_leaf(binder<ISeq, Ts...> &arg) noexcept
   {
-    if constexpr(binder_size<Binder>::value > 0) if constexpr(std::same_as<T,typename Binder::member0_type>) return static_cast<typename Binder::member0_type &&>(arg.member0);
-    if constexpr(binder_size<Binder>::value > 1) if constexpr(std::same_as<T,typename Binder::member1_type>) return static_cast<typename Binder::member1_type &&>(arg.member1);
-    if constexpr(binder_size<Binder>::value > 2) if constexpr(std::same_as<T,typename Binder::member2_type>) return static_cast<typename Binder::member2_type &&>(arg.member2);
-    if constexpr(binder_size<Binder>::value > 3) if constexpr(std::same_as<T,typename Binder::member3_type>) return static_cast<typename Binder::member3_type &&>(arg.member3);
-    if constexpr(binder_size<Binder>::value > 4) if constexpr(std::same_as<T,typename Binder::member4_type>) return static_cast<typename Binder::member4_type &&>(arg.member4);
-    if constexpr(binder_size<Binder>::value > 5) if constexpr(std::same_as<T,typename Binder::member5_type>) return static_cast<typename Binder::member5_type &&>(arg.member5);
-    if constexpr(binder_size<Binder>::value > 6) if constexpr(std::same_as<T,typename Binder::member6_type>) return static_cast<typename Binder::member6_type &&>(arg.member6);
-    if constexpr(binder_size<Binder>::value > 7) if constexpr(std::same_as<T,typename Binder::member7_type>) return static_cast<typename Binder::member7_type &&>(arg.member7);
-    if constexpr(binder_size<Binder>::value > 8) if constexpr(std::same_as<T,typename Binder::member8_type>) return static_cast<typename Binder::member8_type &&>(arg.member8);
-    if constexpr(binder_size<Binder>::value > 9) if constexpr(std::same_as<T,typename Binder::member9_type>) return static_cast<typename Binder::member9_type &&>(arg.member9);
+    constexpr std::size_t idx = index_of_type<T, Ts...>();
+    return get_leaf<idx>(KUMI_FWD(arg));
+
   }
 
-  template<typename T,typename Binder>
-  requires requires(Binder) { typename Binder::kumi_specific_layout; }
-  KUMI_ABI constexpr auto const &&get_leaf(Binder const &&arg) noexcept
+  template<typename T,typename ISeq, typename... Ts>
+  requires (sizeof...(Ts) < 10) && 
+  requires(binder<ISeq, Ts...>) { typename binder<ISeq, Ts...>::kumi_specific_layout; }
+  KUMI_ABI constexpr auto &&get_leaf(binder<ISeq, Ts...> &&arg) noexcept
   {
-    if constexpr(binder_size<Binder>::value > 0) if constexpr(std::same_as<T,typename Binder::member0_type>) return static_cast<typename Binder::member0_type const&&>(arg.member0);
-    if constexpr(binder_size<Binder>::value > 1) if constexpr(std::same_as<T,typename Binder::member1_type>) return static_cast<typename Binder::member1_type const&&>(arg.member1);
-    if constexpr(binder_size<Binder>::value > 2) if constexpr(std::same_as<T,typename Binder::member2_type>) return static_cast<typename Binder::member2_type const&&>(arg.member2);
-    if constexpr(binder_size<Binder>::value > 3) if constexpr(std::same_as<T,typename Binder::member3_type>) return static_cast<typename Binder::member3_type const&&>(arg.member3);
-    if constexpr(binder_size<Binder>::value > 4) if constexpr(std::same_as<T,typename Binder::member4_type>) return static_cast<typename Binder::member4_type const&&>(arg.member4);
-    if constexpr(binder_size<Binder>::value > 5) if constexpr(std::same_as<T,typename Binder::member5_type>) return static_cast<typename Binder::member5_type const&&>(arg.member5);
-    if constexpr(binder_size<Binder>::value > 6) if constexpr(std::same_as<T,typename Binder::member6_type>) return static_cast<typename Binder::member6_type const&&>(arg.member6);
-    if constexpr(binder_size<Binder>::value > 7) if constexpr(std::same_as<T,typename Binder::member7_type>) return static_cast<typename Binder::member7_type const&&>(arg.member7);
-    if constexpr(binder_size<Binder>::value > 8) if constexpr(std::same_as<T,typename Binder::member8_type>) return static_cast<typename Binder::member8_type const&&>(arg.member8);
-    if constexpr(binder_size<Binder>::value > 9) if constexpr(std::same_as<T,typename Binder::member9_type>) return static_cast<typename Binder::member9_type const&&>(arg.member9);
+    constexpr std::size_t idx = index_of_type<T, Ts...>();
+    return get_leaf<idx>(KUMI_FWD(arg));
   }
 
-  template<typename T,typename Binder>
-  requires requires(Binder) { typename Binder::kumi_specific_layout; }
-  KUMI_ABI constexpr auto const &get_leaf(Binder const &arg) noexcept
+  template<typename T,typename ISeq, typename... Ts>
+  requires (sizeof...(Ts) < 10) && 
+  requires(binder<ISeq, Ts...>) { typename binder<ISeq,Ts...>::kumi_specific_layout; }
+  KUMI_ABI constexpr auto const &&get_leaf(binder<ISeq, Ts...> const &&arg) noexcept
   {
-    if constexpr(binder_size<Binder>::value > 0) if constexpr(std::same_as<T,typename Binder::member0_type>) return arg.member0;
-    if constexpr(binder_size<Binder>::value > 1) if constexpr(std::same_as<T,typename Binder::member1_type>) return arg.member1;
-    if constexpr(binder_size<Binder>::value > 2) if constexpr(std::same_as<T,typename Binder::member2_type>) return arg.member2;
-    if constexpr(binder_size<Binder>::value > 3) if constexpr(std::same_as<T,typename Binder::member3_type>) return arg.member3;
-    if constexpr(binder_size<Binder>::value > 4) if constexpr(std::same_as<T,typename Binder::member4_type>) return arg.member4;
-    if constexpr(binder_size<Binder>::value > 5) if constexpr(std::same_as<T,typename Binder::member5_type>) return arg.member5;
-    if constexpr(binder_size<Binder>::value > 6) if constexpr(std::same_as<T,typename Binder::member6_type>) return arg.member6;
-    if constexpr(binder_size<Binder>::value > 7) if constexpr(std::same_as<T,typename Binder::member7_type>) return arg.member7;
-    if constexpr(binder_size<Binder>::value > 8) if constexpr(std::same_as<T,typename Binder::member8_type>) return arg.member8;
-    if constexpr(binder_size<Binder>::value > 9) if constexpr(std::same_as<T,typename Binder::member9_type>) return arg.member9;
+    constexpr std::size_t idx = index_of_type<T, Ts...>();
+    return get_leaf<idx>(KUMI_FWD(arg));
+
+  }
+
+  template<typename T,typename ISeq, typename... Ts>
+  requires (sizeof...(Ts) < 10) && 
+  requires(binder<ISeq, Ts...>) { typename binder<ISeq, Ts...>::kumi_specific_layout; }
+  KUMI_ABI constexpr auto const &get_leaf(binder<ISeq, Ts...> const &arg) noexcept
+  {
+    constexpr std::size_t idx = index_of_type<T, Ts...>();
+    return get_leaf<idx>(KUMI_FWD(arg));
   }
 
   //================================================================================================
   // Optimized get_leaf<name> for all binders of 1->10 elements
   //================================================================================================
-  template<kumi::str Name,typename Binder>
-  requires requires(Binder) { typename Binder::kumi_specific_layout; }
-  KUMI_ABI constexpr auto &get_leaf(Binder &arg) noexcept
-  {
-    if constexpr(binder_size<Binder>::value > 0) if constexpr(is_field_capture_v<typename Binder::member0_type> && name_of(as<typename Binder::member0_type>{}) == Name) return arg.member0.value;
-    if constexpr(binder_size<Binder>::value > 1) if constexpr(is_field_capture_v<typename Binder::member1_type> && name_of(as<typename Binder::member1_type>{}) == Name) return arg.member1.value;
-    if constexpr(binder_size<Binder>::value > 2) if constexpr(is_field_capture_v<typename Binder::member2_type> && name_of(as<typename Binder::member2_type>{}) == Name) return arg.member2.value;
-    if constexpr(binder_size<Binder>::value > 3) if constexpr(is_field_capture_v<typename Binder::member3_type> && name_of(as<typename Binder::member3_type>{}) == Name) return arg.member3.value;
-    if constexpr(binder_size<Binder>::value > 4) if constexpr(is_field_capture_v<typename Binder::member4_type> && name_of(as<typename Binder::member4_type>{}) == Name) return arg.member4.value;
-    if constexpr(binder_size<Binder>::value > 5) if constexpr(is_field_capture_v<typename Binder::member5_type> && name_of(as<typename Binder::member5_type>{}) == Name) return arg.member5.value;
-    if constexpr(binder_size<Binder>::value > 6) if constexpr(is_field_capture_v<typename Binder::member6_type> && name_of(as<typename Binder::member6_type>{}) == Name) return arg.member6.value;
-    if constexpr(binder_size<Binder>::value > 7) if constexpr(is_field_capture_v<typename Binder::member7_type> && name_of(as<typename Binder::member7_type>{}) == Name) return arg.member7.value;
-    if constexpr(binder_size<Binder>::value > 8) if constexpr(is_field_capture_v<typename Binder::member8_type> && name_of(as<typename Binder::member8_type>{}) == Name) return arg.member8.value;
-    if constexpr(binder_size<Binder>::value > 9) if constexpr(is_field_capture_v<typename Binder::member9_type> && name_of(as<typename Binder::member9_type>{}) == Name) return arg.member9.value;
+  template <kumi::str Name, typename... Ts>
+  consteval std::size_t index_of_name() {
+    std::size_t idx = 0;
+    [[maybe_unused]] bool found = (([&] {
+      if constexpr (std::same_as<decltype(name_of(as<Ts>{})), kumi::str>) {
+        if (name_of(as<Ts>{}) == Name) return true;
+      } 
+      return (++idx, false);
+    }() || ...));
+    return idx;
   }
 
-  template<kumi::str Name,typename Binder>
-  requires requires(Binder) { typename Binder::kumi_specific_layout; }
-  KUMI_ABI constexpr auto &&get_leaf(Binder &&arg) noexcept
+  template<kumi::str Name,typename ISeq, typename... Ts>
+  requires (sizeof...(Ts) < 10) && 
+  requires(binder<ISeq, Ts...>) { typename binder<ISeq,Ts...>::kumi_specific_layout; }
+  KUMI_ABI constexpr auto &get_leaf(binder<ISeq, Ts...> &arg) noexcept
   {
-    if constexpr(binder_size<Binder>::value > 0) 
-        if constexpr(is_field_capture_v<typename Binder::member0_type> && name_of(as<typename Binder::member0_type>{}) == Name) return field_value_of(KUMI_FWD(arg.member0));
-    if constexpr(binder_size<Binder>::value > 1) 
-        if constexpr(is_field_capture_v<typename Binder::member1_type> && name_of(as<typename Binder::member1_type>{}) == Name) return field_value_of(KUMI_FWD(arg.member1));
-    if constexpr(binder_size<Binder>::value > 2) 
-        if constexpr(is_field_capture_v<typename Binder::member2_type> && name_of(as<typename Binder::member2_type>{}) == Name) return field_value_of(KUMI_FWD(arg.member2));
-    if constexpr(binder_size<Binder>::value > 3) 
-        if constexpr(is_field_capture_v<typename Binder::member3_type> && name_of(as<typename Binder::member3_type>{}) == Name) return field_value_of(KUMI_FWD(arg.member3));
-    if constexpr(binder_size<Binder>::value > 4) 
-        if constexpr(is_field_capture_v<typename Binder::member4_type> && name_of(as<typename Binder::member4_type>{}) == Name) return field_value_of(KUMI_FWD(arg.member4));
-    if constexpr(binder_size<Binder>::value > 5) 
-        if constexpr(is_field_capture_v<typename Binder::member5_type> && name_of(as<typename Binder::member5_type>{}) == Name) return field_value_of(KUMI_FWD(arg.member5));
-    if constexpr(binder_size<Binder>::value > 6) 
-        if constexpr(is_field_capture_v<typename Binder::member6_type> && name_of(as<typename Binder::member6_type>{}) == Name) return field_value_of(KUMI_FWD(arg.member6));
-    if constexpr(binder_size<Binder>::value > 7) 
-        if constexpr(is_field_capture_v<typename Binder::member7_type> && name_of(as<typename Binder::member7_type>{}) == Name) return field_value_of(KUMI_FWD(arg.member7));
-    if constexpr(binder_size<Binder>::value > 8) 
-        if constexpr(is_field_capture_v<typename Binder::member8_type> && name_of(as<typename Binder::member8_type>{}) == Name) return field_value_of(KUMI_FWD(arg.member8));
-    if constexpr(binder_size<Binder>::value > 9) 
-        if constexpr(is_field_capture_v<typename Binder::member9_type> && name_of(as<typename Binder::member9_type>{}) == Name) return field_value_of(KUMI_FWD(arg.member9));
+    constexpr std::size_t idx = index_of_name<Name, Ts...>();
+    if constexpr(idx == 0) return arg.member0.value;
+    if constexpr(idx == 1) return arg.member1.value;
+    if constexpr(idx == 2) return arg.member2.value;
+    if constexpr(idx == 3) return arg.member3.value;
+    if constexpr(idx == 4) return arg.member4.value;
+    if constexpr(idx == 5) return arg.member5.value;
+    if constexpr(idx == 6) return arg.member6.value;
+    if constexpr(idx == 7) return arg.member7.value;
+    if constexpr(idx == 8) return arg.member8.value;
+    if constexpr(idx == 9) return arg.member9.value;
+
   }
 
-  template<kumi::str Name,typename Binder>
-  requires requires(Binder) { typename Binder::kumi_specific_layout; }
-  KUMI_ABI constexpr auto const &&get_leaf(Binder const &&arg) noexcept
+  template<kumi::str Name,typename ISeq, typename... Ts>
+  requires (sizeof...(Ts) < 10) && 
+  requires(binder<ISeq, Ts...>) { typename binder<ISeq, Ts...>::kumi_specific_layout; }
+  KUMI_ABI constexpr auto &&get_leaf(binder<ISeq, Ts...> &&arg) noexcept
   {
-    if constexpr(binder_size<Binder>::value > 0) 
-        if constexpr(is_field_capture_v<typename Binder::member0_type> && name_of(as<typename Binder::member0_type>{}) == Name) return field_value_of(KUMI_FWD(arg.member0));
-    if constexpr(binder_size<Binder>::value > 1) 
-        if constexpr(is_field_capture_v<typename Binder::member1_type> && name_of(as<typename Binder::member1_type>{}) == Name) return field_value_of(KUMI_FWD(arg.member1));
-    if constexpr(binder_size<Binder>::value > 2) 
-        if constexpr(is_field_capture_v<typename Binder::member2_type> && name_of(as<typename Binder::member2_type>{}) == Name) return field_value_of(KUMI_FWD(arg.member2));
-    if constexpr(binder_size<Binder>::value > 3) 
-        if constexpr(is_field_capture_v<typename Binder::member3_type> && name_of(as<typename Binder::member3_type>{}) == Name) return field_value_of(KUMI_FWD(arg.member3));
-    if constexpr(binder_size<Binder>::value > 4) 
-        if constexpr(is_field_capture_v<typename Binder::member4_type> && name_of(as<typename Binder::member4_type>{}) == Name) return field_value_of(KUMI_FWD(arg.member4));
-    if constexpr(binder_size<Binder>::value > 5) 
-        if constexpr(is_field_capture_v<typename Binder::member5_type> && name_of(as<typename Binder::member5_type>{}) == Name) return field_value_of(KUMI_FWD(arg.member5));
-    if constexpr(binder_size<Binder>::value > 6) 
-        if constexpr(is_field_capture_v<typename Binder::member6_type> && name_of(as<typename Binder::member6_type>{}) == Name) return field_value_of(KUMI_FWD(arg.member6));
-    if constexpr(binder_size<Binder>::value > 7) 
-        if constexpr(is_field_capture_v<typename Binder::member7_type> && name_of(as<typename Binder::member7_type>{}) == Name) return field_value_of(KUMI_FWD(arg.member7));
-    if constexpr(binder_size<Binder>::value > 8) 
-        if constexpr(is_field_capture_v<typename Binder::member8_type> && name_of(as<typename Binder::member8_type>{}) == Name) return field_value_of(KUMI_FWD(arg.member8));
-    if constexpr(binder_size<Binder>::value > 9) 
-        if constexpr(is_field_capture_v<typename Binder::member9_type> && name_of(as<typename Binder::member9_type>{}) == Name) return field_value_of(KUMI_FWD(arg.member9));
+    constexpr std::size_t idx = index_of_name<Name, Ts...>();
+    if constexpr(idx == 0) return static_cast<typename binder<ISeq,Ts...>::member0_type::type &&>(arg.member0.value);
+    if constexpr(idx == 1) return static_cast<typename binder<ISeq,Ts...>::member1_type::type &&>(arg.member1.value);
+    if constexpr(idx == 2) return static_cast<typename binder<ISeq,Ts...>::member2_type::type &&>(arg.member2.value);
+    if constexpr(idx == 3) return static_cast<typename binder<ISeq,Ts...>::member3_type::type &&>(arg.member3.value);
+    if constexpr(idx == 4) return static_cast<typename binder<ISeq,Ts...>::member4_type::type &&>(arg.member4.value);
+    if constexpr(idx == 5) return static_cast<typename binder<ISeq,Ts...>::member5_type::type &&>(arg.member5.value);
+    if constexpr(idx == 6) return static_cast<typename binder<ISeq,Ts...>::member6_type::type &&>(arg.member6.value);
+    if constexpr(idx == 7) return static_cast<typename binder<ISeq,Ts...>::member7_type::type &&>(arg.member7.value);
+    if constexpr(idx == 8) return static_cast<typename binder<ISeq,Ts...>::member8_type::type &&>(arg.member8.value);
+    if constexpr(idx == 9) return static_cast<typename binder<ISeq,Ts...>::member9_type::type &&>(arg.member9.value);
   }
 
-  template<kumi::str Name,typename Binder>
-  requires requires(Binder) { typename Binder::kumi_specific_layout; }
-  KUMI_ABI constexpr auto const &get_leaf(Binder const &arg) noexcept
+  template<kumi::str Name,typename ISeq, typename... Ts>
+  requires (sizeof...(Ts) < 10) && 
+  requires(binder<ISeq, Ts...>) { typename binder<ISeq,Ts...>::kumi_specific_layout; }
+  KUMI_ABI constexpr auto const &&get_leaf(binder<ISeq, Ts...> const &&arg) noexcept
   {
-    if constexpr(binder_size<Binder>::value > 0) if constexpr(is_field_capture_v<typename Binder::member0_type> && name_of(as<typename Binder::member0_type>{}) == Name) return arg.member0.value;
-    if constexpr(binder_size<Binder>::value > 1) if constexpr(is_field_capture_v<typename Binder::member1_type> && name_of(as<typename Binder::member1_type>{}) == Name) return arg.member1.value;
-    if constexpr(binder_size<Binder>::value > 2) if constexpr(is_field_capture_v<typename Binder::member2_type> && name_of(as<typename Binder::member2_type>{}) == Name) return arg.member2.value;
-    if constexpr(binder_size<Binder>::value > 3) if constexpr(is_field_capture_v<typename Binder::member3_type> && name_of(as<typename Binder::member3_type>{}) == Name) return arg.member3.value;
-    if constexpr(binder_size<Binder>::value > 4) if constexpr(is_field_capture_v<typename Binder::member4_type> && name_of(as<typename Binder::member4_type>{}) == Name) return arg.member4.value;
-    if constexpr(binder_size<Binder>::value > 5) if constexpr(is_field_capture_v<typename Binder::member5_type> && name_of(as<typename Binder::member5_type>{}) == Name) return arg.member5.value;
-    if constexpr(binder_size<Binder>::value > 6) if constexpr(is_field_capture_v<typename Binder::member6_type> && name_of(as<typename Binder::member6_type>{}) == Name) return arg.member6.value;
-    if constexpr(binder_size<Binder>::value > 7) if constexpr(is_field_capture_v<typename Binder::member7_type> && name_of(as<typename Binder::member7_type>{}) == Name) return arg.member7.value;
-    if constexpr(binder_size<Binder>::value > 8) if constexpr(is_field_capture_v<typename Binder::member8_type> && name_of(as<typename Binder::member8_type>{}) == Name) return arg.member8.value;
-    if constexpr(binder_size<Binder>::value > 9) if constexpr(is_field_capture_v<typename Binder::member9_type> && name_of(as<typename Binder::member9_type>{}) == Name) return arg.member9.value;
+    constexpr std::size_t idx = index_of_name<Name, Ts...>();
+    if constexpr(idx == 0) return static_cast<typename binder<ISeq,Ts...>::member0_type::type const&&>(arg.member0.value);
+    if constexpr(idx == 1) return static_cast<typename binder<ISeq,Ts...>::member1_type::type const&&>(arg.member1.value);
+    if constexpr(idx == 2) return static_cast<typename binder<ISeq,Ts...>::member2_type::type const&&>(arg.member2.value);
+    if constexpr(idx == 3) return static_cast<typename binder<ISeq,Ts...>::member3_type::type const&&>(arg.member3.value);
+    if constexpr(idx == 4) return static_cast<typename binder<ISeq,Ts...>::member4_type::type const&&>(arg.member4.value);
+    if constexpr(idx == 5) return static_cast<typename binder<ISeq,Ts...>::member5_type::type const&&>(arg.member5.value);
+    if constexpr(idx == 6) return static_cast<typename binder<ISeq,Ts...>::member6_type::type const&&>(arg.member6.value);
+    if constexpr(idx == 7) return static_cast<typename binder<ISeq,Ts...>::member7_type::type const&&>(arg.member7.value);
+    if constexpr(idx == 8) return static_cast<typename binder<ISeq,Ts...>::member8_type::type const&&>(arg.member8.value);
+    if constexpr(idx == 9) return static_cast<typename binder<ISeq,Ts...>::member9_type::type const&&>(arg.member9.value);
+  }
+
+  template<kumi::str Name,typename ISeq, typename... Ts>
+  requires (sizeof...(Ts) < 10) && 
+  requires(binder<ISeq, Ts...>) { typename binder<ISeq, Ts...>::kumi_specific_layout; }
+  KUMI_ABI constexpr auto const &get_leaf(binder<ISeq, Ts...> const &arg) noexcept
+  {
+    constexpr std::size_t idx = index_of_name<Name, Ts...>();
+    if constexpr(idx == 0) return arg.member0.value;
+    if constexpr(idx == 1) return arg.member1.value;
+    if constexpr(idx == 2) return arg.member2.value;
+    if constexpr(idx == 3) return arg.member3.value;
+    if constexpr(idx == 4) return arg.member4.value;
+    if constexpr(idx == 5) return arg.member5.value;
+    if constexpr(idx == 6) return arg.member6.value;
+    if constexpr(idx == 7) return arg.member7.value;
+    if constexpr(idx == 8) return arg.member8.value;
+    if constexpr(idx == 9) return arg.member9.value;
   }
 }

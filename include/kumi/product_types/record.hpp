@@ -311,15 +311,6 @@ namespace kumi
   //! ## Example:
   //! @include doc/record/forward_as_record.cpp
   //================================================================================================
-  //template<typename... Ts>
-  //requires ( entirely_uniquely_named<std::remove_cvref_t<Ts>...> )
-  //[[nodiscard]] KUMI_ABI constexpr auto forward_as_record(Ts &&... ts) ->
-  //record<field_capture<name_of(as<Ts>{}), result::unwrap_field_value_t<Ts>>...>
-  //{
-  //  return { (field_capture<unwrap_name_v<std::remove_cvref_t<Ts>>, result::unwrap_field_value_t<Ts>>
-  //           { unwrap_field_value(KUMI_FWD(ts))}
-  //           )... };
-  //}
   template<str... Fields, typename... Ts>
   requires (sizeof...(Fields) == sizeof...(Ts))
   [[nodiscard]] KUMI_ABI constexpr auto forward_as_record( Ts &&... ts ) -> 
@@ -437,7 +428,7 @@ namespace kumi
   //! @include doc/record/named_get.cpp
   //================================================================================================
   template<str Name, typename... Ts>
-  requires ( entirely_uniquely_named<Ts...> )
+  requires ( contains_field<field_name<Name>, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> &r) noexcept
   {
@@ -446,7 +437,7 @@ namespace kumi
 
   /// @overload
   template<str Name, typename... Ts>
-  requires ( entirely_uniquely_named<Ts...> )
+  requires ( contains_field<field_name<Name>, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> &&r) noexcept
   {
@@ -455,7 +446,7 @@ namespace kumi
 
   /// @overload
   template<str Name, typename... Ts>
-  requires ( entirely_uniquely_named<Ts...> )
+  requires ( contains_field<field_name<Name>, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> const &r) noexcept
   {
@@ -464,7 +455,7 @@ namespace kumi
 
   /// @overload
   template<str Name, typename... Ts>
-  requires ( entirely_uniquely_named<Ts...> )
+  requires ( contains_field<field_name<Name>, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> const &&r) noexcept
   {
@@ -480,6 +471,18 @@ namespace kumi
   //! @name Record utilities 
   //! @{
   //================================================================================================
+  
+  //================================================================================================
+  //! @ingroup record
+  //! @brief Extracts the names of the fieldis of a kumi::record. 
+  //!
+  //! @tparam   R the type of the record from which to extract names. 
+  //! @return   A tuple of the names of a kumi::record_type. 
+  //! @related kumi::record
+  //!
+  //! ## Example:
+  //! @include doc/record/members_of.cpp
+  //================================================================================================
   template<record_type R>
   [[nodiscard]] KUMI_ABI constexpr auto members_of(as<R>)
   {
@@ -490,6 +493,18 @@ namespace kumi
     }(std::make_index_sequence<size_v<R>>{});
   }
 
+  //================================================================================================
+  //! @ingroup record
+  //! @brief Extracts the values of the fields of a kumi::record. 
+  //!
+  //! @tparam   R the type of the record from which to extract names.
+  //! @param    r the record from which to extract names.
+  //! @return   A tuple of references to the values of a kumi::record_type. 
+  //! @related kumi::record
+  //!
+  //! ## Example:
+  //! @include doc/record/values_of.cpp
+  //================================================================================================
   template<record_type R>
   [[nodiscard]] KUMI_ABI constexpr auto values_of(R && r)
   {

@@ -79,7 +79,7 @@ namespace kumi::_
     static consteval kumi::unit get(...)                                      { return {}; }
   };
 
-  /// Helper using inheritance to get the corresponding name in an variadic pack if it exist 
+  /// Helper using inheritance to get the corresponding type in an variadic pack if it exist 
   template<typename Ref, typename... Fields>
   struct get_field_by_type : check_type<Ref,Fields>...
   {
@@ -92,24 +92,27 @@ namespace kumi::_
 
   //==============================================================================================
   // Helper meta functions to access a field type by name
-  //============================================================================================== 
-  template<typename Ref, typename Field>
+  //==============================================================================================
+  template<std::size_t, typename Ref, typename Field>
   struct check_name
   {
     static consteval Field      get(Ref) requires(Ref::name == Field::name) { return {}; }
     static consteval kumi::unit get(...)                                    { return {}; }
   };
 
-  /// Helper using inheritance to get the corresponding name in an variadic pack if it exist 
-  template<typename Ref, typename... Fields>
-  struct get_field_by_name : check_name<Ref,Fields>...
+  template<typename Ref, typename Seq, typename...Fields> struct get_field_by_name;
+
+  /// Helper using inheritance to get the corresponding name in an variadic pack if it exist
+  /// The index is used in order to enable mixed named/unnamed packs to work
+  template<typename Ref, std::size_t...I, typename... Fields>
+  struct get_field_by_name<Ref, std::index_sequence<I...>, Fields...> : check_name<I,Ref,Fields>...
   {
-    using check_name<Ref,Fields>::get...;
+    using check_name<I,Ref,Fields>::get...;
     using type = decltype(get(std::declval<Ref>()));
   };
 
   template<typename Ref, typename... Fields>
-  using get_field_by_name_t = typename get_field_by_name<Ref, Fields...>::type;
+  using get_field_by_name_t = typename get_field_by_name<Ref, std::index_sequence_for<Fields...>,Fields...>::type;
 
   //==============================================================================================
   // Helper concepts for construction checks on records

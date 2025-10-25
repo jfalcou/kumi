@@ -241,7 +241,7 @@ namespace kumi
   //! namespace kumi
   //! {
   //!   template<std::size_t I, typename T> 
-  //!   using raw_element_t = unwrap_field_capture_t<element_t<I,T>>;
+  //!   using raw_element_t = typename raw_element_t<I,T>::type;
   //! }
   //! @endcode
   //================================================================================================
@@ -348,7 +348,7 @@ namespace kumi
     static auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
     static std::false_type is_set(...);
 
-    using type = decltype(is_set(as<Ts>{}...));
+    using type = decltype(is_set(_::make_value_as<Ints, Ts>()...));
   };
 
   template<typename... Ts>
