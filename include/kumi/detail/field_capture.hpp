@@ -111,4 +111,5 @@ namespace kumi
 
     template<typename T> using field_value_of_t = typename field_value_of<T>::type;
   }
+
 }
