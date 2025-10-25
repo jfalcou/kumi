@@ -134,4 +134,5 @@ namespace kumi
 
     template<str Name, typename T> using capture_field_t = typename capture_field<Name, T>::type;
   }
+
 }
