@@ -163,7 +163,7 @@ namespace kumi
   //================================================================================================
   template<typename... Ts>
   concept uniquely_named = ( has_named_fields<Ts...> )
-                         && all_unique_names_v<std::remove_cvref_t<Ts>...>;
+                        && all_unique_names_v<std::remove_cvref_t<Ts>...>;
 
    //================================================================================================
   //! @ingroup concepts

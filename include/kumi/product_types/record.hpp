@@ -203,7 +203,7 @@ namespace kumi
     requires( named_equality_comparable<record,record<Us...>> )
     {
       return (([&] {
-        constexpr auto key = name_of( as<Ts>{} );//Ts::name;
+        constexpr auto key = name_of( as<Ts>{} );
         return get<key>(self) == get<key>(other);
       }()) && ...);
     }

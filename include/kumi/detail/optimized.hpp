@@ -270,13 +270,6 @@ namespace kumi::_
     member9_type member9;
   };
 
-
-  template<typename Binder> struct binder_size;
-
-  template<int... Is, typename... Ts>
-  struct binder_size<kumi::_::binder<std::integer_sequence<int, Is...>, Ts...>> {
-    static constexpr std::size_t value = sizeof...(Is);
-  };
   //================================================================================================
   // Optimized get_leaf<index> for all binders of 1->10 elements
   //================================================================================================
