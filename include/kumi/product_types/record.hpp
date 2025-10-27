@@ -45,8 +45,8 @@ namespace kumi
     //==============================================================================================
     //! @brief Extracts the Ith field from a kumi::record
     //!
-    //! @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
-    //! @param  i Compile-time index of the field to access
+    //! @note   Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
+    //! @tparam I Compile-time index of the field to access
     //! @return A reference to the selected field of current record.
     //!
     //! ## Example:
@@ -54,7 +54,7 @@ namespace kumi
     //==============================================================================================
     template<std::size_t I>
     requires(I < sizeof...(Ts))
-    KUMI_ABI constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) &noexcept
+    KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) &noexcept
     {
       return _::get_leaf<I>(impl);
     }
@@ -86,8 +86,7 @@ namespace kumi
     //==============================================================================================
     //! @brief Extracts the element of the field labeled Name from a kumi::record
     //!
-    //! @note Does not participate in overload resolution if `get_name_index<Name>`
-    //!       is not in [0, sizeof...(Ts)).
+    //! @note Does not participate in overload resolution if the name is not present in the record    
     //!
     //! @tparam Name Non type template parameter name of the field to access
     //! @return A reference to the element of the selected field of current record.
@@ -202,10 +201,7 @@ namespace kumi
     KUMI_ABI friend constexpr auto operator==(record const &self, record<Us...> const &other) noexcept
     requires( named_equality_comparable<record,record<Us...>> )
     {
-      return (([&] {
-        constexpr auto key = name_of( as<Ts>{} );
-        return get<key>(self) == get<key>(other);
-      }()) && ...);
+      return ((get<name_of(as<Ts>{})>(self) == get<name_of(as<Ts>{})>(other)) && ...);
     }
 
     template<typename... Us>
@@ -282,6 +278,8 @@ namespace kumi
   //================================================================================================
   //! @ingroup record
   //! @brief Creates a kumi::record of lvalue references to its arguments.
+  //!
+  //! @tparam Fields Non type template parameters names to associate to the each element.
   //! @param ts	Zero or more lvalue arguments to construct the record from.
   //! @return A kumi::record object containing lvalue references.
   //! ## Example:
@@ -306,6 +304,7 @@ namespace kumi
   //! @note If the arguments are temporaries, `forward_as_record` does not extend their lifetime;
   //!       they have to be used before the end of the full expression.
   //!
+  //! @tparam Fields Non type template parameters names to associate to the each element.
   //! @param ts	Zero or more lvalue arguments to construct the record from.
   //! @return A kumi::record constructed as `kumi::record<Ts&&...>(std::forward<Ts>(args)...)`
   //! ## Example:
@@ -343,22 +342,22 @@ namespace kumi
   //! @related kumi::record
   //! @brief Creates a kumi::record of references given a reference to a kumi::record_type.
   //!
-  //! @param    t Compile-time index of the element to access
+  //! @param    r Record whose elements are to be referenced.  
   //! @return   A record equivalent to the result of `kumi::apply([]<typename... T>(T&&... e)
-  //!           { return kumi::forward_as_record(std::forward<T>(e)...); }, t)`
+  //!           { return kumi::forward_as_record<name_of(as<T>{})...>(std::forward<T>(e)...); }, t)`
   //!
   //! ## Example:
   //! @include doc/record/to_ref.cpp
   //================================================================================================
   template<record_type Type>
-  [[nodiscard]] KUMI_ABI constexpr auto to_ref(Type&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto to_ref(Type && r)
   {
     return _::apply_field( [](auto&&... elems)
-                  {
-                    return kumi::forward_as_record<name_of(as<decltype(elems)>{})...>(field_value_of(KUMI_FWD(elems))...);
-                  }
-                , KUMI_FWD(t)
-                );
+              {
+                return kumi::forward_as_record<name_of(as<decltype(elems)>{})...>(field_value_of(KUMI_FWD(elems))...);
+              }
+            , KUMI_FWD(r)
+            );
   }
 
   //================================================================================================
@@ -376,8 +375,8 @@ namespace kumi
   //!
   //! @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
   //! @tparam   I Compile-time index of the field to access
-  //! @param    t Record to index
-  //! @return   A reference to the selected field of t.
+  //! @param    r Record to index
+  //! @return   A reference to the selected field of r.
   //! @related kumi::record
   //!
   //! ## Example:
@@ -420,8 +419,8 @@ namespace kumi
   //!
   //! @note Does not participate in overload resolution if the names are not unique
   //! @tparam   Name Non type template parameter name of the field to access
-  //! @param    t Record to index
-  //! @return   A reference to the element of the selected field of t.
+  //! @param    r Record to index
+  //! @return   A reference to the element of the selected field of r.
   //! @related kumi::record
   //!
   //! ## Example:
@@ -460,59 +459,6 @@ namespace kumi
   get(record<Ts...> const &&r) noexcept
   {
     return static_cast<record<Ts...> const &&>(r)[field<Name>];
-  }
-
-  //================================================================================================
-  //! @}
-  //================================================================================================
-  
-
-  //================================================================================================
-  //! @name Record utilities 
-  //! @{
-  //================================================================================================
-  
-  //================================================================================================
-  //! @ingroup record
-  //! @brief Extracts the names of the fieldis of a kumi::record. 
-  //!
-  //! @tparam   R the type of the record from which to extract names. 
-  //! @return   A tuple of the names of a kumi::record_type. 
-  //! @related kumi::record
-  //!
-  //! ## Example:
-  //! @include doc/record/members_of.cpp
-  //================================================================================================
-  template<record_type R>
-  [[nodiscard]] KUMI_ABI constexpr auto members_of(as<R>)
-  {
-    if constexpr( std::is_empty_v<R> ) return tuple{};
-    else return [&]<std::size_t...I>(std::index_sequence<I...>)
-    {
-      return tuple{ name_of(as<element_t<I,R>>{})... };
-    }(std::make_index_sequence<size_v<R>>{});
-  }
-
-  //================================================================================================
-  //! @ingroup record
-  //! @brief Extracts the values of the fields of a kumi::record. 
-  //!
-  //! @tparam   R the type of the record from which to extract names.
-  //! @param    r the record from which to extract names.
-  //! @return   A tuple of references to the values of a kumi::record_type. 
-  //! @related kumi::record
-  //!
-  //! ## Example:
-  //! @include doc/record/values_of.cpp
-  //================================================================================================
-  template<record_type R>
-  [[nodiscard]] KUMI_ABI constexpr auto values_of(R && r)
-  {
-    if constexpr( std::is_empty_v<R> ) return tuple{};
-    else return [&]<std::size_t...I>(std::index_sequence<I...>)
-    {
-      return tuple{ field_value_of(get<I>(KUMI_FWD(r)))... };
-    }(std::make_index_sequence<size_v<R>>{});
   }
 
   //================================================================================================

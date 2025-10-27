@@ -90,8 +90,9 @@ namespace kumi
     //==============================================================================================
     //! @brief Extracts the Ith element from a kumi::tuple
     //!
-    //! @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
-    //! @param  i Compile-time index of the element to access
+    //! @note Does not participate in overload resolution if `T` is not present in the tuple or if
+    //!       the tuple contains duplicate types
+    //! @tparam T the type to access in the tuple
     //! @return A reference to the selected element of current tuple.
     //!
     //! ## Example:
@@ -131,9 +132,8 @@ namespace kumi
     //==============================================================================================
     //! @brief Extracts the element labeled Name from a kumi::tuple
     //!
-    //! @note Does not participate in overload resolution if `get_name_index<Name>`
-    //!       is not in [0, sizeof...(Ts)).
-    //!
+    //! @note Does not participate in overload resolution if Name is not present in the tuple or if
+    //!       the tuple contains duplicate names.
     //! @tparam Name Non type template parameter name of the element to access
     //! @return A reference to the selected element of current tuple.
     //!
@@ -487,7 +487,7 @@ namespace kumi
   //! @related kumi::tuple
   //! @brief Creates a kumi::tuple of references given a reference to a kumi::product_type.
   //!
-  //! @param    t Compile-time index of the element to access
+  //! @param    t Tuple whose elements are to be referenced.  
   //! @return   A tuple equivalent to the result of `kumi::apply([]<typename... T>(T&&... e)
   //!           { return kumi::forward_as_tuple(std::forward<T>(e)...); }, t)`
   //!
@@ -495,7 +495,7 @@ namespace kumi
   //! @include doc/to_ref.cpp
   //================================================================================================
   template<product_type Type>
-  [[nodiscard]] KUMI_ABI constexpr auto to_ref(Type&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto to_ref(Type && t)
   {
     return apply( [](auto&&... elems)
                   {
@@ -562,7 +562,7 @@ namespace kumi
   //! @ingroup tuple
   //! @brief Extracts the field labeled Name from a kumi::tuple if it exists
   //!
-  //! @note Does not participate in overload resolution if the names are not unique
+  //! @note     Does not participate in overload resolution if the names are not unique
   //! @tparam   Name Non type template parameter name of the element to access
   //! @param    t Tuple to index
   //! @return   A reference to the selected element of t.
@@ -610,7 +610,7 @@ namespace kumi
   //! @ingroup tuple
   //! @brief Extracts the field which type is T from a kumi::tuple if it exist
   //!
-  //! @note Does not participate in overload resolution if the types are not unique
+  //! @note     Does not participate in overload resolution if the types are not unique
   //! @tparam   T Type of the element to access
   //! @param    t Tuple to index
   //! @return   A reference to the selected element of t.
