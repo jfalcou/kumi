@@ -445,7 +445,7 @@ namespace kumi
 
   /// @overload
   template<str Name, typename... Ts>
-  requires ((std::declval<field_name<Name>>()) &&( contains_field<field_name<Name>, Ts...> )
+  requires ((std::declval<field_name<Name>>()) && contains_field<field_name<Name>, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> const &r) noexcept
   {
@@ -454,7 +454,7 @@ namespace kumi
 
   /// @overload
   template<str Name, typename... Ts>
-  requires ((std::declval<field_name<Name>>()) && ( contains_field<field_name<Name>, Ts...> )
+  requires ((std::declval<field_name<Name>>()) &&  contains_field<field_name<Name>, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> const &&r) noexcept
   {
