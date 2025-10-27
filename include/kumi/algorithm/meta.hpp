@@ -22,7 +22,7 @@ namespace kumi
   //! @include doc/members_of.cpp
   //================================================================================================
   template<product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto members_of(as<T>)
+  [[nodiscard]] KUMI_ABI constexpr auto members_of(as<T> ) noexcept
   {
     if constexpr( std::is_empty_v<T> ) return tuple{};
     else return [&]<std::size_t...I>(std::index_sequence<I...>)
@@ -44,7 +44,7 @@ namespace kumi
   //! @include doc/values_of.cpp
   //================================================================================================
   template<product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto values_of(T && t)
+  [[nodiscard]] KUMI_ABI constexpr auto values_of(T && t) noexcept
   {
     if constexpr( std::is_empty_v<T> ) return tuple{};
     else return [&]<std::size_t...I>(std::index_sequence<I...>)
