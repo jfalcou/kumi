@@ -383,7 +383,7 @@ namespace kumi
   //! @include doc/record/get.cpp
   //================================================================================================
   template<std::size_t I, typename... Ts>
-  requires( viable_index<I,Ts...> ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
+  requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> &r) noexcept
   {
     return r[index<I>];
@@ -391,7 +391,7 @@ namespace kumi
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires( viable_index<I,Ts...> ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
+  requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> &&r) noexcept
   {
     return static_cast<record<Ts...> &&>(r)[index<I>];
@@ -399,7 +399,7 @@ namespace kumi
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires( viable_index<I,Ts...> ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
+  requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> const &r) noexcept
   {
     return r[index<I>];
@@ -407,7 +407,7 @@ namespace kumi
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires( viable_index<I,Ts...> ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
+  requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> const &&r) noexcept
   {
     return static_cast<record<Ts...> const &&>(r)[index<I>];

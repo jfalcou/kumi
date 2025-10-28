@@ -100,8 +100,7 @@ namespace kumi
   //! A type `T` models `kumi::indexer` if it models `kumi::index_map` or `std::is_integral` 
   //================================================================================================
   template<typename T>
-  concept indexer = index_map<T> || std::integral<std::remove_cvref_t<T>> 
-                 || _::integral_constant_like<std::remove_cvref_t<T>>;
+  concept indexer = index_map<T> || std::integral<std::remove_cvref_t<T>>;
                    
 
   //================================================================================================
@@ -188,27 +187,21 @@ namespace kumi
   // MSVC workaround for get<>
   // MSVC doesnt SFINAE properly based on NTTP types before requires evaluation
   // so we need this weird lambdas mechanisms.
+  namespace _
+  {
+    template<auto Name, typename... Ts> consteval auto contains_field_impl()
+    {
+      if constexpr( !indexer<std::remove_cvref_t<decltype(Name)>> )
+        return !std::is_same_v<_::get_field_by_name_t<field_capture<Name, unit>, Ts...>, kumi::unit>;
+      else return false;
+    };
+  }
   //================================================================================================
   //! @ingroup concepts
   //! @brief Concept specifying if a kumi::field_capture with name Name is present in a parameter pack.
   //================================================================================================
   template<auto Name, typename... Ts>
-  concept contains_field = [] {
-    if constexpr( !indexer<std::remove_cvref_t<decltype(Name)>> )
-      return !std::is_same_v<_::get_field_by_name_t<field_capture<Name, unit>, Ts...>, kumi::unit>;
-    else return false;
-  }();
-
- //================================================================================================
-  //! @ingroup concepts
-  //! @brief Concept specifying if an NTTP is an index and index is in the pack's limits.
-  //================================================================================================
-  template<auto I, typename... Ts>
-  concept viable_index = [] {
-    if constexpr ( indexer<std::remove_cvref_t<decltype(I)>> )
-      return ( I < sizeof...(Ts) );
-    else return false;
-  }();
+  concept contains_field = _::contains_field_impl<Name, Ts...>(); 
 
   namespace _
   {

@@ -57,7 +57,7 @@ namespace kumi
     //! @include doc/subscript.cpp
     //==============================================================================================
     template<std::size_t I>
-    requires( viable_index<I, Ts...> )
+    requires( I < sizeof...(Ts) )
     KUMI_ABI constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) &noexcept
     {
       return _::get_leaf<I>(impl);
@@ -65,7 +65,7 @@ namespace kumi
 
     /// @overload
     template<std::size_t I>
-    requires( viable_index<I,Ts...> )
+    requires( I < sizeof...(Ts) )
     KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) &&noexcept
     {
       return _::get_leaf<I>(static_cast<decltype(impl) &&>(impl));
@@ -73,7 +73,7 @@ namespace kumi
 
     /// @overload
     template<std::size_t I>
-    requires( viable_index<I,Ts...>)
+    requires( I < sizeof...(Ts) )
     KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) const &&noexcept
     {
       return _::get_leaf<I>(static_cast<decltype(impl) const &&>(impl));
@@ -81,7 +81,7 @@ namespace kumi
 
     /// @overload
     template<std::size_t I>
-    requires( viable_index<I,Ts...> )
+    requires( I < sizeof...(Ts) )
     KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) const &noexcept
     {
       return _::get_leaf<I>(impl);
@@ -528,7 +528,7 @@ namespace kumi
   //! @include doc/get.cpp
   //================================================================================================
   template<std::size_t I, typename... Ts>
-  requires( viable_index<I, Ts...> ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
+  requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> &t) noexcept
   {
     return t[index<I>];
@@ -536,7 +536,7 @@ namespace kumi
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires( viable_index<I,Ts...> ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
+  requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> &&arg) noexcept
   {
     return static_cast<tuple<Ts...> &&>(arg)[index<I>];
@@ -544,7 +544,7 @@ namespace kumi
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires( viable_index<I,Ts...> ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
+  requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> const &arg) noexcept
   {
     return arg[index<I>];
@@ -552,7 +552,7 @@ namespace kumi
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires( viable_index<I,Ts...> ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
+  requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> const &&arg) noexcept
   {
     return static_cast<tuple<Ts...> const &&>(arg)[index<I>];
