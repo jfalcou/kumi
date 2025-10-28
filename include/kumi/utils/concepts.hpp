@@ -100,7 +100,9 @@ namespace kumi
   //! A type `T` models `kumi::indexer` if it models `kumi::index_map` or `std::is_integral` 
   //================================================================================================
   template<typename T>
-  concept indexer = std::integral<std::remove_cvref_t<T>> || index_map<T>; 
+  concept indexer = index_map<T> || std::integral<std::remove_cvref_t<T>> 
+                 || _::integral_constant_like<std::remove_cvref_t<T>>;
+                   
 
   //================================================================================================
   //! @ingroup concepts
@@ -192,7 +194,7 @@ namespace kumi
   //================================================================================================
   template<auto Name, typename... Ts>
   concept contains_field = [] {
-    if constexpr(!std::integral<std::remove_cvref_t<decltype(Name)>>)
+    if constexpr( !indexer<std::remove_cvref_t<decltype(Name)>> )
       return !std::is_same_v<_::get_field_by_name_t<field_capture<Name, unit>, Ts...>, kumi::unit>;
     else return false;
   }();
@@ -203,7 +205,7 @@ namespace kumi
   //================================================================================================
   template<auto I, typename... Ts>
   concept viable_index = [] {
-    if constexpr (std::integral<std::remove_cvref_t<decltype(I)>>)
+    if constexpr ( indexer<std::remove_cvref_t<decltype(I)>> )
       return ( I < sizeof...(Ts) );
     else return false;
   }();
