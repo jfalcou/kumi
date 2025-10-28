@@ -141,7 +141,7 @@ namespace kumi
     //! @include doc/named_subscript.cpp
     //==============================================================================================
     template<str Name>
-    requires( uniquely_named<Ts...> && contains_field<field_name<Name>, Ts...> )
+    requires( uniquely_named<Ts...> && contains_field<Name, Ts...> )
     KUMI_ABI constexpr decltype(auto) operator[](field_name<Name>) &noexcept
     {
       return _::get_leaf<Name>(impl);
@@ -149,7 +149,7 @@ namespace kumi
 
     /// @overload
     template<str Name>
-    requires( uniquely_named<Ts...> && contains_field<field_name<Name>, Ts...> )
+    requires( uniquely_named<Ts...> && contains_field<Name, Ts...> )
     KUMI_ABI constexpr decltype(auto) operator[](field_name<Name>) &&noexcept
     {
       return _::get_leaf<Name>(static_cast<decltype(impl) &&>(impl));
@@ -157,7 +157,7 @@ namespace kumi
 
     /// @overload
     template<str Name>
-    requires( uniquely_named<Ts...> && contains_field<field_name<Name>, Ts...> )
+    requires( uniquely_named<Ts...> && contains_field<Name, Ts...> )
     KUMI_ABI constexpr decltype(auto) operator[](field_name<Name>) const &&noexcept
     {
       return _::get_leaf<Name>(static_cast<decltype(impl) const &&>(impl));
@@ -165,7 +165,7 @@ namespace kumi
 
     /// @overload
     template<str Name>
-    requires( contains_field<field_name<Name>, Ts...> )
+    requires( uniquely_named<Ts...> && contains_field<Name, Ts...> )
     KUMI_ABI constexpr decltype(auto) operator[](field_name<Name>) const &noexcept
     {
       return _::get_leaf<Name>(impl);
@@ -528,7 +528,7 @@ namespace kumi
   //! @include doc/get.cpp
   //================================================================================================
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts)) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
+  requires( viable_index<I, Ts...> ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> &t) noexcept
   {
     return t[index<I>];
@@ -536,7 +536,7 @@ namespace kumi
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts)) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
+  requires( viable_index<I,Ts...> ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> &&arg) noexcept
   {
     return static_cast<tuple<Ts...> &&>(arg)[index<I>];
@@ -544,7 +544,7 @@ namespace kumi
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts)) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
+  requires( viable_index<I,Ts...> ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> const &arg) noexcept
   {
     return arg[index<I>];
@@ -552,7 +552,7 @@ namespace kumi
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts)) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
+  requires( viable_index<I,Ts...> ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> const &&arg) noexcept
   {
     return static_cast<tuple<Ts...> const &&>(arg)[index<I>];
@@ -572,7 +572,7 @@ namespace kumi
   //! @include doc/named_get.cpp
   //================================================================================================
   template<str Name, typename... Ts>
-  requires ( uniquely_named<Ts...> )
+  requires ( uniquely_named<Ts...> && contains_field<Name, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> &t) noexcept
   {
@@ -581,7 +581,7 @@ namespace kumi
 
   /// @overload
   template<str Name, typename... Ts>
-  requires ( uniquely_named<Ts...> )
+  requires ( uniquely_named<Ts...> && contains_field<Name, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> &&t) noexcept
   {
@@ -590,7 +590,7 @@ namespace kumi
 
   /// @overload
   template<str Name, typename... Ts>
-  requires ( uniquely_named<Ts...> )
+  requires ( uniquely_named<Ts...> && contains_field<Name, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> const &t) noexcept
   {
@@ -599,7 +599,7 @@ namespace kumi
 
   /// @overload
   template<str Name, typename... Ts>
-  requires ( uniquely_named<Ts...> )
+  requires ( uniquely_named<Ts...> && contains_field<Name, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> const &&t) noexcept
   {

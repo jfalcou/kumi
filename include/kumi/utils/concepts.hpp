@@ -183,12 +183,30 @@ namespace kumi
   template<typename T, typename... Ts>
   concept contains_type = (!std::is_same_v<_::get_field_by_type_t<T, Ts...>, kumi::unit>);
 
+  // MSVC workaround for get<>
+  // MSVC doesnt SFINAE properly based on NTTP types before requires evaluation
+  // so we need this weird lambdas mechanisms.
   //================================================================================================
   //! @ingroup concepts
   //! @brief Concept specifying if a kumi::field_capture with name Name is present in a parameter pack.
   //================================================================================================
-  template<typename Name, typename... Ts>
-  concept contains_field = (!std::is_same_v<_::get_field_by_name_t<Name, Ts...>, kumi::unit>);
+  template<auto Name, typename... Ts>
+  concept contains_field = [] {
+    if constexpr(!std::integral<std::remove_cvref_t<decltype(Name)>>)
+      return !std::is_same_v<_::get_field_by_name_t<field_capture<Name, unit>, Ts...>, kumi::unit>;
+    else return false;
+  }();
+
+ //================================================================================================
+  //! @ingroup concepts
+  //! @brief Concept specifying if an NTTP is an index and index is in the pack's limits.
+  //================================================================================================
+  template<auto I, typename... Ts>
+  concept viable_index = [] {
+    if constexpr (std::integral<std::remove_cvref_t<decltype(I)>>)
+      return ( I < sizeof...(Ts) );
+    else return false;
+  }();
 
   namespace _
   {
