@@ -211,8 +211,4 @@ namespace kumi::_
   {
     { t == u };
   };
-
-  // Helper to check if a type can be used as an index (mainly used because of MSVC)
-  template<typename T> concept integral_constant_like 
-  = requires{ T::value; } && std::integral<std::remove_cvref_t<decltype(T::value)>>;
 }
