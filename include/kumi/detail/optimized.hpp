@@ -354,7 +354,6 @@ namespace kumi::_
   {
     constexpr std::size_t idx = index_of_type<T, Ts...>();
     return get_leaf<idx>(KUMI_FWD(arg));
-
   }
 
   template<typename T,typename ISeq, typename... Ts>
