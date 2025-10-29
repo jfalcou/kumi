@@ -186,7 +186,7 @@ namespace kumi
 
   // MSVC workaround for get<>
   // MSVC doesnt SFINAE properly based on NTTP types before requires evaluation
-  // so we need this weird lambdas mechanisms.
+  // so we need this weird consteval mechanism for it to pickt the correct version.
   namespace _
   {
     template<auto Name, typename... Ts> consteval auto contains_field_impl()

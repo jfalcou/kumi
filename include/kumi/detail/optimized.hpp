@@ -9,7 +9,7 @@
 
 #include <cstddef>
 #include <utility>
-#include <kumi/detail/field_capture.hpp>
+#include <kumi/detail/concepts.hpp>
 
 namespace kumi::_
 {
@@ -340,19 +340,12 @@ namespace kumi::_
   //================================================================================================
   // Optimized get_leaf<type> for all binders of 1->10 elements
   //================================================================================================
-  template <typename T, typename... Ts>
-  consteval std::size_t index_of_type(){
-    std::size_t idx = 0;
-    [[maybe_unused]] bool b = ((std::same_as<T, Ts> ? true : (++idx, false)) || ...);  
-    return idx;
-  }
-
   template<typename T,typename ISeq, typename... Ts>
   requires (sizeof...(Ts) < 10) && 
   requires(binder<ISeq, Ts...>) { typename binder<ISeq,Ts...>::kumi_specific_layout; }
   KUMI_ABI constexpr auto &get_leaf(binder<ISeq, Ts...> &arg) noexcept
   {
-    constexpr std::size_t idx = index_of_type<T, Ts...>();
+    constexpr std::size_t idx = get_index_by_type_v<T, Ts...>;
     return get_leaf<idx>(KUMI_FWD(arg));
   }
 
@@ -361,7 +354,7 @@ namespace kumi::_
   requires(binder<ISeq, Ts...>) { typename binder<ISeq, Ts...>::kumi_specific_layout; }
   KUMI_ABI constexpr auto &&get_leaf(binder<ISeq, Ts...> &&arg) noexcept
   {
-    constexpr std::size_t idx = index_of_type<T, Ts...>();
+    constexpr std::size_t idx = get_index_by_type_v<T, Ts...>;
     return get_leaf<idx>(KUMI_FWD(arg));
   }
 
@@ -370,7 +363,7 @@ namespace kumi::_
   requires(binder<ISeq, Ts...>) { typename binder<ISeq,Ts...>::kumi_specific_layout; }
   KUMI_ABI constexpr auto const &&get_leaf(binder<ISeq, Ts...> const &&arg) noexcept
   {
-    constexpr std::size_t idx = index_of_type<T, Ts...>();
+    constexpr std::size_t idx = get_index_by_type_v<T, Ts...>;
     return get_leaf<idx>(KUMI_FWD(arg));
 
   }
@@ -380,31 +373,19 @@ namespace kumi::_
   requires(binder<ISeq, Ts...>) { typename binder<ISeq, Ts...>::kumi_specific_layout; }
   KUMI_ABI constexpr auto const &get_leaf(binder<ISeq, Ts...> const &arg) noexcept
   {
-    constexpr std::size_t idx = index_of_type<T, Ts...>();
+    constexpr std::size_t idx = get_index_by_type_v<T, Ts...>;
     return get_leaf<idx>(KUMI_FWD(arg));
   }
 
   //================================================================================================
   // Optimized get_leaf<name> for all binders of 1->10 elements
   //================================================================================================
-  template <kumi::str Name, typename... Ts>
-  consteval std::size_t index_of_name() {
-    std::size_t idx = 0;
-    [[maybe_unused]] bool found = (([&] {
-      if constexpr (std::same_as<decltype(name_of(as<Ts>{})), kumi::str>) {
-        if (name_of(as<Ts>{}) == Name) return true;
-      } 
-      return (++idx, false);
-    }() || ...));
-    return idx;
-  }
-
   template<kumi::str Name,typename ISeq, typename... Ts>
   requires (sizeof...(Ts) < 10) && 
   requires(binder<ISeq, Ts...>) { typename binder<ISeq,Ts...>::kumi_specific_layout; }
   KUMI_ABI constexpr auto &get_leaf(binder<ISeq, Ts...> &arg) noexcept
   {
-    constexpr std::size_t idx = index_of_name<Name, Ts...>();
+    constexpr std::size_t idx = get_index_by_name_v<field_capture<Name, unit>, Ts...>;
     if constexpr(idx == 0) return arg.member0.value;
     if constexpr(idx == 1) return arg.member1.value;
     if constexpr(idx == 2) return arg.member2.value;
@@ -423,7 +404,7 @@ namespace kumi::_
   requires(binder<ISeq, Ts...>) { typename binder<ISeq, Ts...>::kumi_specific_layout; }
   KUMI_ABI constexpr auto &&get_leaf(binder<ISeq, Ts...> &&arg) noexcept
   {
-    constexpr std::size_t idx = index_of_name<Name, Ts...>();
+    constexpr std::size_t idx = get_index_by_name_v<field_capture<Name, unit>, Ts...>;
     if constexpr(idx == 0) return static_cast<typename binder<ISeq,Ts...>::member0_type::type &&>(arg.member0.value);
     if constexpr(idx == 1) return static_cast<typename binder<ISeq,Ts...>::member1_type::type &&>(arg.member1.value);
     if constexpr(idx == 2) return static_cast<typename binder<ISeq,Ts...>::member2_type::type &&>(arg.member2.value);
@@ -441,7 +422,7 @@ namespace kumi::_
   requires(binder<ISeq, Ts...>) { typename binder<ISeq,Ts...>::kumi_specific_layout; }
   KUMI_ABI constexpr auto const &&get_leaf(binder<ISeq, Ts...> const &&arg) noexcept
   {
-    constexpr std::size_t idx = index_of_name<Name, Ts...>();
+    constexpr std::size_t idx = get_index_by_name_v<field_capture<Name, unit>, Ts...>;
     if constexpr(idx == 0) return static_cast<typename binder<ISeq,Ts...>::member0_type::type const&&>(arg.member0.value);
     if constexpr(idx == 1) return static_cast<typename binder<ISeq,Ts...>::member1_type::type const&&>(arg.member1.value);
     if constexpr(idx == 2) return static_cast<typename binder<ISeq,Ts...>::member2_type::type const&&>(arg.member2.value);
@@ -459,7 +440,7 @@ namespace kumi::_
   requires(binder<ISeq, Ts...>) { typename binder<ISeq, Ts...>::kumi_specific_layout; }
   KUMI_ABI constexpr auto const &get_leaf(binder<ISeq, Ts...> const &arg) noexcept
   {
-    constexpr std::size_t idx = index_of_name<Name, Ts...>();
+    constexpr std::size_t idx = get_index_by_name_v<field_capture<Name, unit>, Ts...>;
     if constexpr(idx == 0) return arg.member0.value;
     if constexpr(idx == 1) return arg.member1.value;
     if constexpr(idx == 2) return arg.member2.value;
