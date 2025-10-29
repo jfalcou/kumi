@@ -20,7 +20,7 @@ std::vector<std::string> build(Data d)
 
 int main()
 {
-  auto v = build( kumi::forward_as_record("a"_f = 4,"b"_f = std::string{"the text !"}));
+  auto v = build( kumi::forward_as_record<"a"_f, "b"_f>(4,std::string{"the text !"}));
 
   for(auto const& s : v)
     std::cout << s << "\n";

@@ -54,8 +54,8 @@ namespace kumi
       {
         if constexpr ( record_type<Tuple> )
         {
-          using field_t = field_name<member_name_v<N, std::remove_cvref_t<Tuple>>>;
-          return field_t{} = f(get<field_t{}>(args)...);
+          constexpr auto field = name_of( as<element_t<N,Tuple>>{} );
+          return field_name<field>{} = f(get<field>(args)...);
         }
         else return f(get<N>(KUMI_FWD(args))...);
       };
@@ -189,9 +189,8 @@ namespace kumi
     {
       auto const call = [&]<std::size_t N, typename... Ts>(index_t<N>, Ts &&... args)
       {
-        constexpr auto name = member_name_v<N, std::remove_cvref_t<Tuple>>; 
-        using field_t = kumi::field_name<name>;
-        return field_t{} = f(name.value(), (get<field_t{}>(args))...);
+        constexpr auto field = name_of(as<element_t<N,Tuple>>{});
+        return field_name<field>{} = f(field.value(), (get<field>(args))...);
       };
 
       return [&]<std::size_t... I>(std::index_sequence<I...>)

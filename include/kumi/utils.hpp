@@ -25,6 +25,7 @@ namespace kumi
   //================================================================================================
 }
 
+#include <kumi/utils/as.hpp>
 #include <kumi/utils/pp_helpers.hpp>
 #include <kumi/utils/ct_helpers.hpp>
 #include <kumi/utils/concepts.hpp>

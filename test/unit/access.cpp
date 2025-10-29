@@ -94,6 +94,7 @@ TTS_CASE("Check access to kumi::tuple with names via names")
   kumi::tuple t2 = {"x"_f = 1.f, "y"_f = 2};
   kumi::tuple t3 = {"x"_f = 1., "y"_f = 2.f, "z"_f = 3};
   kumi::tuple t4 = {"x"_f = '1', "y"_f = 2., "z"_f = 3.f, "t"_f = 4};
+  kumi::tuple t5 = {"x"_f = '1', 2., "z"_f = 3.f, 4};
 
   t1["x"_f] = 42;
   TTS_EQUAL(t1["x"_f], 42);
@@ -118,6 +119,15 @@ TTS_CASE("Check access to kumi::tuple with names via names")
   TTS_EQUAL(t4["y"_f], 6.9);
   TTS_EQUAL(t4["z"_f], 4.2f);
   TTS_EQUAL(t4["t"_f], 1337);
+
+  t5["x"_f] = 'z';
+  t5[1_c]   = 6.9;
+  t5["z"_f] = 4.2f;
+  t5[3_c]   = 1337;
+  TTS_EQUAL(t5["x"_f] , 'z');
+  TTS_EQUAL(t5[1_c]   , 6.9);
+  TTS_EQUAL(t5["z"_f] , 4.2f);
+  TTS_EQUAL(t5[3_c]   , 1337);
 
   TTS_EQUAL(kumi::get<"x"_f>(std::move(t3)) , 13.37 );
   TTS_EQUAL(std::move(t3)["y"_f]            , 4.2f  );
@@ -203,6 +213,7 @@ TTS_CASE("Check constexpr access to kumi::tuple with named fields via names")
   constexpr kumi::tuple t2 = {"x"_f = 1.f, "y"_f = 2};
   constexpr kumi::tuple t3 = {"x"_f = 1., "y"_f = 2.f, "z"_f = 3};
   constexpr kumi::tuple t4 = {"x"_f = '1', "y"_f = 2., "z"_f = 3.f, "t"_f = 4};
+  constexpr kumi::tuple t5 = {"x"_f = '1', 2, "z"_f = 3.f, 4};
   
   TTS_CONSTEXPR_EQUAL(get<"x"_f>(t1), t1["x"_f]);
 
@@ -217,4 +228,10 @@ TTS_CASE("Check constexpr access to kumi::tuple with named fields via names")
   TTS_CONSTEXPR_EQUAL(get<"y"_f>(t4), t4["y"_f]);
   TTS_CONSTEXPR_EQUAL(get<"z"_f>(t4), t4["z"_f]);
   TTS_CONSTEXPR_EQUAL(get<"t"_f>(t4), t4["t"_f]);
+
+  TTS_CONSTEXPR_EQUAL(get<"x"_f>(t5), t5["x"_f] );
+  TTS_CONSTEXPR_EQUAL(get<1_c>(t5)  , t5[1_c]   );
+  TTS_CONSTEXPR_EQUAL(get<"z"_f>(t5), t5["z"_f] );
+  TTS_CONSTEXPR_EQUAL(get<3_c>(t5)  , t5[3_c]   );
+
 };

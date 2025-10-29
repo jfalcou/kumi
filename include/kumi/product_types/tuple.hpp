@@ -57,7 +57,7 @@ namespace kumi
     //! @include doc/subscript.cpp
     //==============================================================================================
     template<std::size_t I>
-    requires(I < sizeof...(Ts))
+    requires( I < sizeof...(Ts) )
     KUMI_ABI constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) &noexcept
     {
       return _::get_leaf<I>(impl);
@@ -65,7 +65,7 @@ namespace kumi
 
     /// @overload
     template<std::size_t I>
-    requires(I < sizeof...(Ts))
+    requires( I < sizeof...(Ts) )
     KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) &&noexcept
     {
       return _::get_leaf<I>(static_cast<decltype(impl) &&>(impl));
@@ -73,7 +73,7 @@ namespace kumi
 
     /// @overload
     template<std::size_t I>
-    requires(I < sizeof...(Ts))
+    requires( I < sizeof...(Ts) )
     KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) const &&noexcept
     {
       return _::get_leaf<I>(static_cast<decltype(impl) const &&>(impl));
@@ -81,57 +81,94 @@ namespace kumi
 
     /// @overload
     template<std::size_t I>
-    requires(I < sizeof...(Ts))
+    requires( I < sizeof...(Ts) )
     KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) const &noexcept
     {
       return _::get_leaf<I>(impl);
     }
 
     //==============================================================================================
+    //! @brief Extracts the Ith element from a kumi::tuple
+    //!
+    //! @note Does not participate in overload resolution if `T` is not present in the tuple or if
+    //!       the tuple contains duplicate types
+    //! @tparam T the type to access in the tuple
+    //! @return A reference to the selected element of current tuple.
+    //!
+    //! ## Example:
+    //! @include doc/typed_subscript.cpp
+    //==============================================================================================
+    template<typename T>
+    requires( contains_type<T, Ts...> )
+    KUMI_ABI constexpr decltype(auto) operator[](as<T>) &noexcept
+    {
+      return _::get_leaf<T>(impl);
+    }
+
+    /// @overload
+    template<typename T>
+    requires ( contains_type<T, Ts...> )
+    KUMI_ABI constexpr decltype(auto) operator[](as<T>) &&noexcept
+    {
+      return _::get_leaf<T>(static_cast<decltype(impl) &&>(impl));
+    }
+
+    /// @overload
+    template<typename T>
+    requires ( contains_type<T, Ts...> )
+    KUMI_ABI constexpr decltype(auto) operator[](as<T>) const &&noexcept
+    {
+      return _::get_leaf<T>(static_cast<decltype(impl) const &&>(impl));
+    }
+
+    /// @overload
+    template<typename T>
+    requires (contains_type<T, Ts...> )
+    KUMI_ABI constexpr decltype(auto) operator[](as<T>) const &noexcept
+    {
+      return _::get_leaf<T>(impl);
+    }
+
+    //==============================================================================================
     //! @brief Extracts the element labeled Name from a kumi::tuple
     //!
-    //! @note Does not participate in overload resolution if `get_name_index<Name>`
-    //!       is not in [0, sizeof...(Ts)).
-    //!
+    //! @note Does not participate in overload resolution if Name is not present in the tuple or if
+    //!       the tuple contains duplicate names.
     //! @tparam Name Non type template parameter name of the element to access
     //! @return A reference to the selected element of current tuple.
     //!
     //! ## Example:
     //! @include doc/named_subscript.cpp
     //==============================================================================================
-    template<auto Name>
-    requires( contains_field<Name, Ts...> )
-    KUMI_ABI constexpr decltype(auto) operator[](field_name<Name> const&) &noexcept
+    template<str Name>
+    requires( uniquely_named<Ts...> && contains_field<Name, Ts...> )
+    KUMI_ABI constexpr decltype(auto) operator[](field_name<Name>) &noexcept
     {
-      constexpr auto idx = _::get_name_index<Name, Ts...>();
-      return unwrap_field_value(_::get_leaf<idx>(impl));
+      return _::get_leaf<Name>(impl);
     }
 
     /// @overload
-    template<auto Name>
-    requires( contains_field<Name, Ts...> )
-    KUMI_ABI constexpr decltype(auto) operator[](field_name<Name> const&) &&noexcept
+    template<str Name>
+    requires( uniquely_named<Ts...> && contains_field<Name, Ts...> )
+    KUMI_ABI constexpr decltype(auto) operator[](field_name<Name>) &&noexcept
     {
-      constexpr auto idx = _::get_name_index<Name, Ts...>();
-      return unwrap_field_value(_::get_leaf<idx>(static_cast<decltype(impl) &&>(impl)));
+      return _::get_leaf<Name>(static_cast<decltype(impl) &&>(impl));
     }
 
     /// @overload
-    template<auto Name>
-    requires( contains_field<Name, Ts...> )
-    KUMI_ABI constexpr decltype(auto) operator[](field_name<Name> const&) const &&noexcept
+    template<str Name>
+    requires( uniquely_named<Ts...> && contains_field<Name, Ts...> )
+    KUMI_ABI constexpr decltype(auto) operator[](field_name<Name>) const &&noexcept
     {
-      constexpr auto idx = _::get_name_index<Name, Ts...>();
-      return unwrap_field_value(_::get_leaf<idx>(static_cast<decltype(impl) const &&>(impl)));
+      return _::get_leaf<Name>(static_cast<decltype(impl) const &&>(impl));
     }
 
     /// @overload
-    template<auto Name>
-    requires( contains_field<Name, Ts...> )
-    KUMI_ABI constexpr decltype(auto) operator[](field_name<Name> const&) const &noexcept
+    template<str Name>
+    requires( uniquely_named<Ts...> && contains_field<Name, Ts...> )
+    KUMI_ABI constexpr decltype(auto) operator[](field_name<Name>) const &noexcept
     {
-      constexpr auto idx = _::get_name_index<Name, Ts...>();
-      return unwrap_field_value(_::get_leaf<idx>(impl));
+      return _::get_leaf<Name>(impl);
     }
 
     //==============================================================================================
@@ -150,9 +187,9 @@ namespace kumi
 
     /// Returns the names of the elements of a kumi::tuple
     [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept
+    -> tuple<decltype(name_of(as<Ts>{}))...>
     {
-        using tuple_type = tuple<unwrap_name_t<Ts>...>;
-        return tuple_type{ unwrap_name_v<Ts>... };
+      return { name_of(as<Ts>{})... };
     };
     //==============================================================================================
     //! @}
@@ -358,6 +395,7 @@ namespace kumi
 
     static constexpr auto size()  noexcept { return std::size_t{0}; }
     static constexpr auto empty() noexcept { return true;           }
+    static constexpr auto names() noexcept { return tuple{};        }
     
     KUMI_ABI friend constexpr auto operator<=>(tuple<>, tuple<>) noexcept = default;
 
@@ -449,7 +487,7 @@ namespace kumi
   //! @related kumi::tuple
   //! @brief Creates a kumi::tuple of references given a reference to a kumi::product_type.
   //!
-  //! @param    t Compile-time index of the element to access
+  //! @param    t Tuple whose elements are to be referenced.  
   //! @return   A tuple equivalent to the result of `kumi::apply([]<typename... T>(T&&... e)
   //!           { return kumi::forward_as_tuple(std::forward<T>(e)...); }, t)`
   //!
@@ -457,7 +495,7 @@ namespace kumi
   //! @include doc/to_ref.cpp
   //================================================================================================
   template<product_type Type>
-  [[nodiscard]] KUMI_ABI constexpr auto to_ref(Type&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto to_ref(Type && t)
   {
     return apply( [](auto&&... elems)
                   {
@@ -490,7 +528,7 @@ namespace kumi
   //! @include doc/get.cpp
   //================================================================================================
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts)) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
+  requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> &t) noexcept
   {
     return t[index<I>];
@@ -498,7 +536,7 @@ namespace kumi
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts)) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
+  requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> &&arg) noexcept
   {
     return static_cast<tuple<Ts...> &&>(arg)[index<I>];
@@ -506,7 +544,7 @@ namespace kumi
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts)) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
+  requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> const &arg) noexcept
   {
     return arg[index<I>];
@@ -514,7 +552,7 @@ namespace kumi
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts)) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
+  requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> const &&arg) noexcept
   {
     return static_cast<tuple<Ts...> const &&>(arg)[index<I>];
@@ -524,7 +562,7 @@ namespace kumi
   //! @ingroup tuple
   //! @brief Extracts the field labeled Name from a kumi::tuple if it exists
   //!
-  //! @note Does not participate in overload resolution if the names are not unique
+  //! @note     Does not participate in overload resolution if the names are not unique
   //! @tparam   Name Non type template parameter name of the element to access
   //! @param    t Tuple to index
   //! @return   A reference to the selected element of t.
@@ -533,46 +571,46 @@ namespace kumi
   //! ## Example:
   //! @include doc/named_get.cpp
   //================================================================================================
-  template<field_name Name, typename... Ts>
-  requires ( uniquely_named<Ts...> )
+  template<str Name, typename... Ts>
+  requires ( uniquely_named<Ts...> && contains_field<Name, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> &t) noexcept
   {
-    return t[Name];
+    return t[field<Name>];
   }
 
   /// @overload
-  template<field_name Name, typename... Ts>
-  requires ( uniquely_named<Ts...> )
+  template<str Name, typename... Ts>
+  requires ( uniquely_named<Ts...> && contains_field<Name, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
-  get(tuple<Ts...> &&arg) noexcept
+  get(tuple<Ts...> &&t) noexcept
   {
-    return static_cast<tuple<Ts...> &&>(arg)[Name];
+    return static_cast<tuple<Ts...> &&>(t)[field<Name>];
   }
 
   /// @overload
-  template<field_name Name, typename... Ts>
-  requires ( uniquely_named<Ts...> )
+  template<str Name, typename... Ts>
+  requires ( uniquely_named<Ts...> && contains_field<Name, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
-  get(tuple<Ts...> const &arg) noexcept
+  get(tuple<Ts...> const &t) noexcept
   {
-    return arg[Name];
+    return t[field<Name>];
   }
 
   /// @overload
-  template<field_name Name, typename... Ts>
-  requires ( uniquely_named<Ts...> )
+  template<str Name, typename... Ts>
+  requires ( uniquely_named<Ts...> && contains_field<Name, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
-  get(tuple<Ts...> const &&arg) noexcept
+  get(tuple<Ts...> const &&t) noexcept
   {
-    return static_cast<tuple<Ts...> const &&>(arg)[Name];
+    return static_cast<tuple<Ts...> const &&>(t)[field<Name>];
   }
 
   //================================================================================================
   //! @ingroup tuple
   //! @brief Extracts the field which type is T from a kumi::tuple if it exist
   //!
-  //! @note Does not participate in overload resolution if the types are not unique
+  //! @note     Does not participate in overload resolution if the types are not unique
   //! @tparam   T Type of the element to access
   //! @param    t Tuple to index
   //! @return   A reference to the selected element of t.
@@ -586,38 +624,34 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> &t) noexcept
   {
-    constexpr auto I = _::get_type_index<T, Ts...>();
-    return t[index<I>];
+    return t[as<T>{}];
   }
 
   /// @overload
   template<typename T, typename... Ts>
   requires ( uniquely_typed<Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
-  get(tuple<Ts...> &&arg) noexcept
+  get(tuple<Ts...> &&t) noexcept
   {
-    constexpr auto I = _::get_type_index<T, Ts...>();
-    return static_cast<tuple<Ts...> &&>(arg)[index<I>];
+    return static_cast<tuple<Ts...> &&>(t)[as<T>{}];
   }
 
   /// @overload
   template<typename T, typename... Ts>
   requires ( uniquely_typed<Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
-  get(tuple<Ts...> const &arg) noexcept
+  get(tuple<Ts...> const &t) noexcept
   {
-    constexpr auto I = _::get_type_index<T, Ts...>();
-    return arg[index<I>];
+    return t[as<T>{}];
   }
 
   /// @overload
   template<typename T, typename... Ts>
   requires ( uniquely_typed<Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
-  get(tuple<Ts...> const &&arg) noexcept
+  get(tuple<Ts...> const &&t) noexcept
   {
-    constexpr auto I = _::get_type_index<T, Ts...>();
-    return static_cast<tuple<Ts...> const &&>(arg)[index<I>];
+    return static_cast<tuple<Ts...> const &&>(t)[as<T>{}];
   }
 
   //================================================================================================

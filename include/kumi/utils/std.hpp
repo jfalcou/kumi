@@ -43,7 +43,7 @@ struct std::tuple_size<kumi::tuple<Ts...>> : std::integral_constant<std::size_t,
 //==================================================================================================
 template<std::size_t I, typename Head, typename... Tail>
 struct  std::tuple_element<I, kumi::record<Head, Tail...>>
-      : std::tuple_element<I - 1, kumi::tuple<Tail...>>
+      : std::tuple_element<I - 1, kumi::record<Tail...>>
 {
 };
 
