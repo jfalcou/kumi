@@ -93,4 +93,20 @@ namespace kumi
     else                                              return KUMI_FWD(t);
   }
 
+  namespace result
+  {
+    template<typename T> struct name_of
+    {
+      using type = decltype( kumi::name_of( as<T>{} ));
+    };
+
+    template<typename T> struct field_value_of
+    {
+      using type = decltype( kumi::field_value_of( std::declval<T>() ));
+    };
+
+    template<typename T> using name_of_t = typename name_of<T>::type;
+
+    template<typename T> using field_value_of_t = typename field_value_of<T>::type;
+  }
 }
