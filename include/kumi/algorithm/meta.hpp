@@ -22,9 +22,9 @@ namespace kumi
   //! @include doc/members_of.cpp
   //================================================================================================
   template<product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto members_of(as<T> ) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto members_of( as<T> ) noexcept
   {
-    if constexpr( std::is_empty_v<T> ) return tuple{};
+    if constexpr( sized_product_type<T,0> ) return tuple{};
     else return [&]<std::size_t...I>(std::index_sequence<I...>)
     {
       return tuple{ name_of(as<element_t<I,T>>{})... };
@@ -46,10 +46,11 @@ namespace kumi
   template<product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto values_of(T && t) noexcept
   {
-    if constexpr( std::is_empty_v<T> ) return tuple{};
+    if constexpr( sized_product_type<T,0> ) return tuple{};
     else return [&]<std::size_t...I>(std::index_sequence<I...>)
     {
-      return tuple{ field_value_of(get<I>(KUMI_FWD(t)))... };
+      return tuple<result::field_value_of_t<member_t<I,T>>...>
+            { field_value_of(get<I>(KUMI_FWD(t)))... };
     }(std::make_index_sequence<size_v<T>>{});
   }
 
@@ -58,13 +59,13 @@ namespace kumi
     template<product_type T>
     struct members_of
     {
-      using type = decltype(kumi::members_of( as<T>{} ));
+      using type = decltype( kumi::members_of( as<T>{} ));
     };
 
     template<product_type T>
     struct values_of
     {
-      using type = decltype(kumi::values_of( std::declval<T>() ));
+      using type = decltype( kumi::values_of( std::declval<T>() ));
     };
 
     template<product_type T>

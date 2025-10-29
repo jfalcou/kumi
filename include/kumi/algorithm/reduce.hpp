@@ -66,7 +66,7 @@ namespace kumi
   template<product_type Tuple>
   [[nodiscard]] KUMI_ABI constexpr auto sum(Tuple&& t)
   {
-    if constexpr ( record_type<Tuple> ) return sum(KUMI_FWD(t).values());
+    if constexpr ( record_type<Tuple> ) return sum( values_of(KUMI_FWD(t)) );
     else 
     {
       auto&& [head,tail] = kumi::split(KUMI_FWD(t), index<1>);
@@ -131,7 +131,7 @@ namespace kumi
   template<product_type Tuple>
   [[nodiscard]] KUMI_ABI constexpr auto prod(Tuple&& t)
   {
-    if constexpr ( record_type<Tuple> ) return prod(KUMI_FWD(t).values());
+    if constexpr ( record_type<Tuple> ) return prod( values_of(KUMI_FWD(t)) );
     else
     {
       auto&& [head,tail] = split(KUMI_FWD(t), index<1>);
@@ -196,7 +196,7 @@ namespace kumi
   template<product_type Tuple>
   [[nodiscard]] KUMI_ABI constexpr auto bit_and(Tuple&& t)
   {
-    if constexpr ( record_type<Tuple> ) return bit_and(KUMI_FWD(t).values());
+    if constexpr ( record_type<Tuple> ) return bit_and( values_of(KUMI_FWD(t)) );
     else
     {
       auto&& [head,tail] = split(KUMI_FWD(t), index<1>);
@@ -261,7 +261,7 @@ namespace kumi
   template<product_type Tuple>
   [[nodiscard]] KUMI_ABI constexpr auto bit_or(Tuple&& t)
   {
-    if constexpr ( record_type<Tuple> ) return bit_or(KUMI_FWD(t).values());
+    if constexpr ( record_type<Tuple> ) return bit_or( values_of(KUMI_FWD(t)) );
     else
     {
       auto&& [head,tail] = split(KUMI_FWD(t), index<1>);

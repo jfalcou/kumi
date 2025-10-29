@@ -34,7 +34,7 @@ namespace kumi
   template<product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto max(T && t) noexcept
   {
-    if constexpr ( record_type<T> ) return max(KUMI_FWD(t).values());
+    if constexpr ( record_type<T> ) return max( values_of(KUMI_FWD(t)) );
     else if constexpr( sized_product_type<T,1> ) return get<0>(KUMI_FWD(t));
     else
     {
@@ -74,7 +74,7 @@ namespace kumi
   template<product_type T, typename F>
   [[nodiscard]] KUMI_ABI constexpr auto max(T && t, F f) noexcept
   {
-    if constexpr ( record_type<T> ) return max(KUMI_FWD(t).values(), f);
+    if constexpr ( record_type<T> ) return max( values_of(KUMI_FWD(t)), f);
     else if constexpr( sized_product_type<T,1> ) return f( get<0>(KUMI_FWD(t)) );
     else
     {
@@ -114,7 +114,7 @@ namespace kumi
   template<product_type T, typename F>
   [[nodiscard]] KUMI_ABI constexpr auto max_flat(T && t, F f) noexcept
   {
-    if constexpr ( record_type<T> ) return max_flat(KUMI_FWD(t).values(), f);
+    if constexpr ( record_type<T> ) return max_flat( values_of(KUMI_FWD(t)), f);
     auto flat_t = kumi::flatten_all(KUMI_FWD(t));
     return max(flat_t, f);
   }
@@ -165,7 +165,7 @@ namespace kumi
   template<product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto min(T && t) noexcept
   {
-    if constexpr ( record_type<T> ) return min(KUMI_FWD(t).values());
+    if constexpr ( record_type<T> ) return min( values_of(KUMI_FWD(t)) );
     else if constexpr( sized_product_type<T,1> ) return get<0>(KUMI_FWD(t));
     else
     {
@@ -205,7 +205,7 @@ namespace kumi
   template<product_type T, typename F>
   [[nodiscard]] KUMI_ABI constexpr auto min(T && t, F f) noexcept
   {
-    if constexpr ( record_type<T> ) return min(KUMI_FWD(t).values(), f);
+    if constexpr ( record_type<T> ) return min(values_of(KUMI_FWD(t)), f);
     else if constexpr( sized_product_type<T,1> ) return f( get<0>(KUMI_FWD(t)) );
     else
     {
@@ -245,7 +245,7 @@ namespace kumi
   template<product_type T, typename F>
   [[nodiscard]] KUMI_ABI constexpr auto min_flat(T && t, F f) noexcept
   {
-    if constexpr ( record_type<T> ) return min_flat(KUMI_FWD(t).values(), f);
+    if constexpr ( record_type<T> ) return min_flat( values_of(KUMI_FWD(t)), f);
     auto flat_t = kumi::flatten_all(KUMI_FWD(t));
     return min(flat_t, f);
   }
