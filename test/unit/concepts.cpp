@@ -95,3 +95,11 @@ TTS_CASE("Check non_empty_product_type for tuple")
   TTS_CONSTEXPR_EXPECT    (  kumi::non_empty_product_type<kumi::tuple<strange>>                   );
   TTS_CONSTEXPR_EXPECT    ( (kumi::non_empty_product_type<kumi::tuple<strange,kumi::tuple<cmp>>>) );
 };
+
+TTS_CASE("Check empty_product_type for tuple")
+{
+  TTS_CONSTEXPR_EXPECT_NOT( kumi::empty_product_type<int> );
+  TTS_CONSTEXPR_EXPECT    ( kumi::empty_product_type<kumi::tuple<>> );
+  TTS_CONSTEXPR_EXPECT_NOT(  kumi::empty_product_type<kumi::tuple<strange>>                   );
+  TTS_CONSTEXPR_EXPECT_NOT( (kumi::empty_product_type<kumi::tuple<strange,kumi::tuple<cmp>>>) );
+};
