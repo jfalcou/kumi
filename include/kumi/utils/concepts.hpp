@@ -67,12 +67,11 @@ namespace kumi
   //! @ingroup concepts
   //! @brief Concept specifying a type follows the Product Type semantic and is empty
   //!
-  //! A type `T` models `kumi::empty_product_type ` if it models `kumi::product_type` and either has 
-  //! no element or models `std::is_empty_v`.
+  //! A type `T` models `kumi::empty_product_type ` if it models `kumi::product_type` and has 
+  //! no elements.
   //================================================================================================
   template<typename T>
-  concept empty_product_type = product_type<T> && ((size_v<std::remove_cvref_t<T>> == 0) 
-                                               || std::is_empty_v<std::remove_cvref_t<T>>);
+  concept empty_product_type = product_type<T> && (size_v<std::remove_cvref_t<T>> == 0);
 
   //================================================================================================
   //! @ingroup concepts
