@@ -261,8 +261,10 @@ namespace kumi
     static constexpr auto values()  noexcept { return tuple{};        }
     
     KUMI_ABI friend constexpr auto operator<=>(record<>, record<>) noexcept = default;
-
-    friend std::ostream& operator<<(std::ostream& os, record<>)
+    
+    template<typename CharT, typename Traits>
+    friend std::basic_ostream<CharT, Traits> &operator<<( std::basic_ostream<CharT,Traits> &os
+                                                        , record<>) noexcept
     {
       return os << "()";
     }

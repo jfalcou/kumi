@@ -7,16 +7,20 @@
 //==================================================================================================
 #pragma once
 
+#include <span>
+
 namespace kumi
 {
   namespace _
   {
-    template<typename T> struct is_std_span : std::false_type{}; 
+    // Workaround as span has no tuple_element/tuple_size defined even if it's static
+    // as opposed to ranges::subrange for some reason
+    template<typename T> struct is_static_span : std::false_type{}; 
 
     template<typename T, std::size_t N>
-    struct is_std_span<std::span<T,N>> : std::bool_constant<(N != std::dynamic_extent)>{};
+    struct is_static_span<std::span<T,N>> : std::bool_constant<(N != std::dynamic_extent)>{};
 
-    template<typename T> concept static_std_span = is_std_span<std::remove_cvref_t<T>>::value; 
+    template<typename T> concept static_span = is_static_span<std::remove_cvref_t<T>>::value; 
   }
   
   namespace _
@@ -92,7 +96,7 @@ namespace kumi
     return apply([](auto &&...elems) { return tuple{elems...}; }, KUMI_FWD(t));
   }
 
-  template<_::static_std_span S>
+  template<_::static_span S>
   [[nodiscard]] KUMI_ABI constexpr auto to_tuple( S && s )
   {
     constexpr auto N = std::remove_cvref_t<S>::extent;

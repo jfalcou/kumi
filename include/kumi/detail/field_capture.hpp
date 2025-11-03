@@ -42,7 +42,9 @@ namespace kumi
     //! @related kumi::field_capture
     //! @brief Inserts a kumi::field_capture in an output stream
     //==============================================================================================
-    friend std::ostream& operator<<(std::ostream& os, field_capture const& w)
+    template<typename CharT, typename Traits>
+    friend std::basic_ostream<CharT,Traits> &operator<<( std::basic_ostream<CharT, Traits> &os
+                                                       , field_capture const& w) noexcept
     {
       return os << ID << " : " << w.value;
     }

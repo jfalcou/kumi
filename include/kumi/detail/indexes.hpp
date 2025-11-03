@@ -7,7 +7,7 @@
 //==================================================================================================
 #pragma once
 
-#include <ostream>
+#include <iosfwd>
 #include <kumi/detail/binder.hpp>
 
 namespace kumi
