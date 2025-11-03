@@ -85,7 +85,7 @@ namespace kumi
   //! @param  t    kumi::product_type to convert
   //! @return An instance of kumi::tuple constructed from each elements of `t` in order.
   //!
-  //! @note overloads are provided for static std::span and std::array
+  //! @note An overload is provided for static std::span. 
   //!
   //! ## Example
   //! @include doc/to_tuple.cpp

@@ -9,6 +9,7 @@
 
 #include <kumi/utils/concepts.hpp>
 #include <kumi/utils/traits.hpp>
+#include <array>
 #include <type_traits>
 #include <utility>
 
