@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::field_capture::unwrap_field_value</title>
+<title>kumi: kumi::field_capture::field_value_of</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__product__types_gaa5f8ae37f4583c724a6214543f3d5ea8.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__product__types_gad7a01eb2dfa2f318b75141023ed56d58.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,22 +121,22 @@ $(document).ready(function(){initNavTree('group__product__types_gaa5f8ae37f4583c
 </div>
 
 <div class="contents">
-<a id="gaa5f8ae37f4583c724a6214543f3d5ea8" name="gaa5f8ae37f4583c724a6214543f3d5ea8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaa5f8ae37f4583c724a6214543f3d5ea8">&#9670;&#160;</a></span>unwrap_field_value()</h2>
+<a id="gad7a01eb2dfa2f318b75141023ed56d58" name="gad7a01eb2dfa2f318b75141023ed56d58"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad7a01eb2dfa2f318b75141023ed56d58">&#9670;&#160;</a></span>field_value_of()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">typename</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">U</a> &gt; </div>
+template&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">typename</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">decltype</a>(<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a>) <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> unwrap_field_value </td>
+          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">decltype</a>(<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a>) <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> field_value_of </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">U</a> &amp;&amp;&#160;</td>
-          <td class="paramname"><em>u</em></td><td>)</td>
+          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -148,16 +148,16 @@ template&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de4
 </div><div class="memdoc">
 
 <p>Extracts the value from a <a class="el" href="structkumi_1_1field__capture.html" title="Named wrapper over a type.">kumi::field_capture</a> or returns the parameter. </p>
-<dl class="section note"><dt>Note</dt><dd>If the unqualified type of U is not a <a class="el" href="structkumi_1_1field__capture.html" title="Named wrapper over a type.">field_capture</a>, simply forwards the parameter </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>If the unqualified type of T is not a <a class="el" href="structkumi_1_1field__capture.html" title="Named wrapper over a type.">field_capture</a>, simply forwards the parameter </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">U</td><td>The type to unwrap </td></tr>
+    <tr><td class="paramname">T</td><td>The type to unwrap </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">u</td><td>A forwarding reference to the input object. </td></tr>
+    <tr><td class="paramname">t</td><td>A forwarding reference to the input object. </td></tr>
   </table>
   </dd>
 </dl>
