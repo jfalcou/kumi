@@ -646,6 +646,10 @@
     <filename>conceptkumi_1_1contains__field.html</filename>
   </compound>
   <compound kind="concept">
+    <name>kumi::empty_product_type</name>
+    <filename>conceptkumi_1_1empty__product__type.html</filename>
+  </compound>
+  <compound kind="concept">
     <name>kumi::entirely_uniquely_named</name>
     <filename>conceptkumi_1_1entirely__uniquely__named.html</filename>
   </compound>
@@ -742,6 +746,7 @@
     <concept>kumi::record_type</concept>
     <concept>kumi::sized_product_type</concept>
     <concept>kumi::sized_product_type_or_more</concept>
+    <concept>kumi::empty_product_type</concept>
     <concept>kumi::non_empty_product_type</concept>
     <concept>kumi::index_map</concept>
     <concept>kumi::indexer</concept>
@@ -2247,6 +2252,7 @@
     <concept>kumi::record_type</concept>
     <concept>kumi::sized_product_type</concept>
     <concept>kumi::sized_product_type_or_more</concept>
+    <concept>kumi::empty_product_type</concept>
     <concept>kumi::non_empty_product_type</concept>
     <concept>kumi::index_map</concept>
     <concept>kumi::indexer</concept>
