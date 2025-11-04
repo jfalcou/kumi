@@ -9,6 +9,8 @@
 
 #include <ostream>
 #include <kumi/detail/binder.hpp>
+#include <kumi/utils/traits.hpp>
+#include <kumi/utils/concepts.hpp>
 
 namespace kumi
 {

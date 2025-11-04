@@ -100,7 +100,8 @@ namespace kumi
   //! A type `T` models `kumi::indexer` if it models `kumi::index_map` or `std::is_integral` 
   //================================================================================================
   template<typename T>
-  concept indexer = std::integral<std::remove_cvref_t<T>> || index_map<T>; 
+  concept indexer = index_map<T> || std::integral<std::remove_cvref_t<T>>;
+                   
 
   //================================================================================================
   //! @ingroup concepts
@@ -155,15 +156,15 @@ namespace kumi
   //================================================================================================
   template<typename... Ts>
   concept uniquely_typed = ( !has_named_fields<Ts...> ) 
-                        && all_uniques_v<_::box<std::remove_cvref_t<Ts>>...>;
+                        && all_uniques_v<std::remove_cvref_t<Ts>...>;
 
   //================================================================================================
   //! @ingroup concepts
   //! @brief Concept specifying if a parameter pack only holds unique kumi::field_capture names.
   //================================================================================================
   template<typename... Ts>
-  concept uniquely_named = ( has_named_fields<Ts...> ) 
-                        && all_unique_names_v<_::box<std::remove_cvref_t<Ts>>...>;
+  concept uniquely_named = ( has_named_fields<Ts...> )
+                        && all_unique_names_v<std::remove_cvref_t<Ts>...>;
 
    //================================================================================================
   //! @ingroup concepts
@@ -176,59 +177,34 @@ namespace kumi
   concept entirely_uniquely_named = (sizeof...(Ts)==0) 
   || (is_fully_named<Ts...> && uniquely_named<Ts...>);
 
+  //================================================================================================
+  //! @ingroup concepts
+  //! @brief Concept specifying if a Type is present in a parameter pack.
+  //================================================================================================
+  template<typename T, typename... Ts>
+  concept contains_type = (!std::is_same_v<_::get_field_by_type_t<T, Ts...>, kumi::unit>);
+
+  // MSVC workaround for get<>
+  // MSVC doesnt SFINAE properly based on NTTP types before requires evaluation
+  // so we need this weird consteval mechanism for it to pickt the correct version.
   namespace _
   {
-    template<auto Name, typename... Ts>
-    requires( uniquely_named<Ts...> )
-    KUMI_ABI constexpr decltype(auto) get_name_index() noexcept
+    template<auto Name, typename... Ts> consteval auto contains_field_impl()
     {
-      return []<std::size_t... N>(std::index_sequence<N...>)
-      {
-        bool checks[] = {( []()
-        {
-          if constexpr( is_field_capture_v<Ts> ) return Name == Ts::name;
-          else return false;
-        }
-        ())...};
-
-        for(std::size_t i=0;i<sizeof...(Ts);++i) 
-          if(checks[i]) return i;
-
-        return sizeof...(Ts); 
-      }( std::index_sequence_for<Ts...>{} );
+      if constexpr( !indexer<std::remove_cvref_t<decltype(Name)>> )
+        return !std::is_same_v<_::get_field_by_name_t<field_capture<Name, unit>, Ts...>, kumi::unit>;
+      else return false;
     };
-
-    template<typename T, typename... Ts>
-    requires ( uniquely_typed<Ts...> )
-    KUMI_ABI constexpr decltype(auto) get_type_index() noexcept
-    {
-      return []<std::size_t... N>( std::index_sequence<N...> )
-      {
-        bool checks[] = {( []()
-        {
-          if constexpr( std::is_same_v<T, Ts> ) return true;
-          else return false;
-        }
-        ())...};
-        
-        for(std::size_t i=0;i<sizeof...(Ts);++i) 
-          if(checks[i]) return i;
-            
-        return sizeof...(Ts); 
-      }( std::index_sequence_for<Ts...>{} );
-    }
   }
-
   //================================================================================================
   //! @ingroup concepts
   //! @brief Concept specifying if a kumi::field_capture with name Name is present in a parameter pack.
   //================================================================================================
   template<auto Name, typename... Ts>
-  concept contains_field = (_::get_name_index<Name, std::remove_cvref_t<Ts>...>() < sizeof...(Ts));
+  concept contains_field = _::contains_field_impl<Name, Ts...>(); 
 
   namespace _
   {
-
     template<typename T, typename U> struct has_same_field_names;
     template<typename T, typename U> struct check_named_equality;
 
@@ -250,7 +226,7 @@ namespace kumi
       {
         using T_field = std::remove_cvref_t<T>;
         using U_field = std::remove_cvref_t<get_field_by_name_t<T_field, U...>>;
-        return _::comparable<unwrap_field_capture_t<T_field>, unwrap_field_capture_t<U_field>>;
+        return _::comparable<typename T_field::type, typename U_field::type>;
       }() && ...);
     };
 

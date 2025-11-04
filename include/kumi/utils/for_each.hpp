@@ -40,10 +40,10 @@ namespace kumi
       {
         // clang needs this for some reason
         using std::get;
-        auto const fields = t.names();
+        constexpr auto fields = members_of( as<Tuple>{} );
         [[maybe_unused]] auto call = [&]<typename M>(M)
                                         { 
-                                          auto const field = get<M::value>(fields); 
+                                          constexpr auto field = get<M::value>(fields); 
                                           f ( get<field>(KUMI_FWD(t))
                                             , get<field>(KUMI_FWD(ts))...
                                           );
@@ -135,12 +135,13 @@ namespace kumi
     if constexpr(sized_product_type<Tuple,0>) return;
     else
     {
+      constexpr auto fields = members_of( as<Tuple>{} );
       auto const invoker = [&]<std::size_t I>(std::integral_constant<std::size_t, I>)
       {
-          auto const field = get<I>(t.names());
+          constexpr auto field = get<I>(fields);
           f
           (
-            field.to_string(),
+            field.value(),
             get<field>(KUMI_FWD(t)),
             get<field>(KUMI_FWD(ts))...
           );

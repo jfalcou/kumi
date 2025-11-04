@@ -62,18 +62,6 @@ TTS_CASE("Check field_capture type coherence through field_name")
     TTS_EQUAL(x, 2);
 };
 
-template<auto name> 
-constexpr bool check_valid_name(auto const t) requires( requires{t[name]; })
-{
-    return true;
-}
-
-template<auto name> 
-constexpr bool check_valid_name(auto const t) requires( !requires{t[name]; })
-{
-    return false;
-}
-
 TTS_CASE("Check kumi::tuple behavior with field_captures")
 {
     using namespace kumi::literals;
@@ -102,13 +90,10 @@ TTS_CASE("Check kumi::tuple behavior with field_captures")
     TTS_TYPE_IS( tpl                    , decltype(t )     );
     TTS_TYPE_IS( decltype(t.names())    , decltype(nl)     );
     TTS_TYPE_IS( decltype(pt.names())   , decltype(ptnl)   );
-
+    
     TTS_EQUAL( t.names() , nl    );
     TTS_EQUAL( pt.names(), ptnl  );
 
-    TTS_EXPECT          (! check_valid_name<"a"_f>(dup));
-    TTS_CONSTEXPR_EXPECT(! check_valid_name<"a"_f>(dup));
-
-    TTS_EXPECT          ( check_valid_name<"a"_f>(uni) );
-    TTS_CONSTEXPR_EXPECT( check_valid_name<"a"_f>(uni) );
+    TTS_EXPECT_NOT_COMPILES (dup, { get<"a"_f>(dup); });
+    TTS_EXPECT_COMPILES     (uni, { get<"a"_f>(uni); });
 };

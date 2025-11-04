@@ -21,9 +21,9 @@ namespace kumi
 
         auto locate = [&]<std::size_t... I>(std::index_sequence<I...>)
         {
-          (( Pred<kumi::raw_element_t<I,T>>::value ? (that.t[that.count++] = I) : I),...);
+          (( Pred<raw_element_t<I,T>>::value ? (that.t[that.count++] = I) : I),...);
           that.cut = that.count;
-          ((!Pred<kumi::raw_element_t<I,T>>::value ? (that.t[that.count++] = I) : I),...);
+          ((!Pred<raw_element_t<I,T>>::value ? (that.t[that.count++] = I) : I),...);
         };
 
         locate(std::make_index_sequence<kumi::size<T>::value>{});
