@@ -364,6 +364,8 @@ namespace kumi
   template<typename T, std::size_t N>
   concept sized_product_type_or_more = product_type<T> && (size_v<std::remove_cvref_t<T>> >= N);
   template<typename T>
+  concept empty_product_type = product_type<T> && (size_v<std::remove_cvref_t<T>> == 0);
+  template<typename T>
   concept non_empty_product_type = product_type<T> && (size_v<std::remove_cvref_t<T>> != 0);
   template<typename T>
   concept index_map = product_type<T> && is_index_map_v<std::remove_cvref_t<T>>;
