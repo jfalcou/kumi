@@ -12,6 +12,18 @@
     <templarg>typename Ints</templarg>
     <templarg>typename... Ts</templarg>
   </compound>
+  <compound kind="class">
+    <name>kumi::as</name>
+    <filename>structkumi_1_1as.html</filename>
+    <templarg>typename T</templarg>
+    <member kind="typedef">
+      <type>T</type>
+      <name>type</name>
+      <anchorfile>structkumi_1_1as.html</anchorfile>
+      <anchor>ae0ed33d79b1955359c95eb5e572f7305</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
   <compound kind="struct">
     <name>kumi::as_tuple</name>
     <filename>structkumi_1_1as__tuple.html</filename>
@@ -706,6 +718,7 @@
     <filename>namespacekumi.html</filename>
     <class kind="struct">kumi::all_unique_names</class>
     <class kind="struct">kumi::all_uniques</class>
+    <class kind="class">kumi::as</class>
     <class kind="struct">kumi::as_tuple</class>
     <class kind="struct">kumi::element</class>
     <class kind="class">kumi::field_capture</class>
@@ -763,6 +776,13 @@
       <anchorfile>group__queries_ga91aebbbef8db8781c2c48bc814beed9b.html</anchorfile>
       <anchor>ga91aebbbef8db8781c2c48bc814beed9b</anchor>
       <arglist>(T &amp;&amp;ts, Pred p) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>all_unique</name>
+      <anchorfile>group__generators_gacf670e19ac40c8981f52ad0783a3e483.html</anchorfile>
+      <anchor>gacf670e19ac40c8981f52ad0783a3e483</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1246,6 +1266,13 @@
       <anchorfile>group__generators_ga56ab12227886a7d1084a1aec4ed91ce2.html</anchorfile>
       <anchor>ga56ab12227886a7d1084a1aec4ed91ce2</anchor>
       <arglist>(Tuple &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>unique</name>
+      <anchorfile>group__generators_ga26131fc7a91a6860d0013d4be6151333.html</anchorfile>
+      <anchor>ga26131fc7a91a6860d0013d4be6151333</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1940,6 +1967,13 @@
     <title>Tuple Generators</title>
     <filename>group__generators.html</filename>
     <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::all_unique</name>
+      <anchorfile>group__generators_gacf670e19ac40c8981f52ad0783a3e483.html</anchorfile>
+      <anchor>gacf670e19ac40c8981f52ad0783a3e483</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
       <type>auto</type>
       <name>kumi::as_flat_ptr</name>
       <anchorfile>group__generators_gace4e200f0703bc8ea12f1b43995b69bf.html</anchorfile>
@@ -2099,6 +2133,13 @@
       <anchorfile>group__generators_ga56ab12227886a7d1084a1aec4ed91ce2.html</anchorfile>
       <anchor>ga56ab12227886a7d1084a1aec4ed91ce2</anchor>
       <arglist>(Tuple &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::unique</name>
+      <anchorfile>group__generators_ga26131fc7a91a6860d0013d4be6151333.html</anchorfile>
+      <anchor>ga26131fc7a91a6860d0013d4be6151333</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
