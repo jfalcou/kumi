@@ -381,8 +381,11 @@ namespace kumi
                                                          tuple const &t) noexcept
     {
       os << "( ";
-      kumi::for_each([&os](auto const &e) { os << e << " "; }, t);
-      os << ")";
+      [&]<std::size_t...I>(std::index_sequence<I...>)
+      {
+        ((os << t[index<I>] << " "), ...);
+      }(std::make_index_sequence<size_v<decltype(t)>>{});
+      os << ')';
 
       return os;
     }

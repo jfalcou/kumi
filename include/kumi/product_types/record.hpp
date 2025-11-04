@@ -225,11 +225,11 @@ namespace kumi
                                                          record const &t) noexcept
     {
       os << "( ";
-      kumi::for_each([&os](auto name, auto const &e)
+      [&]<std::size_t...I>(std::index_sequence<I...>)
       {
-        os << name << " : " << e << " ";
-      }, t.names(), t.values());
-      os << ")";
+        ((os << t[index<I>] << " "), ...);
+      }(std::make_index_sequence<size_v<decltype(t)>>{});
+      os << ')';
 
       return os;
     }

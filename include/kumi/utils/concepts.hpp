@@ -120,8 +120,40 @@ namespace kumi
       return []<std::size_t...I>(std::index_sequence<I...>)
       {
         return (_::comparable<member_t<I,T>,member_t<I,U>> && ...);
-      }(std::make_index_sequence<size<T>::value>{});
+      }(std::make_index_sequence<size_v<T>>{});
     }
+
+    template<typename T, typename U>
+    KUMI_ABI constexpr auto has_same_field_names()
+    {
+      return []<std::size_t...I>(std::index_sequence<I...>)
+      {
+        return (!std::is_same_v<get_field_by_name_t<element_t<I,T>, element_t<I,U>...>, kumi::unit> 
+                && ...);  
+      }(std::make_index_sequence<size_v<T>>{});
+    }
+
+    template<typename T, typename U>
+    KUMI_ABI constexpr auto check_named_equality()
+    {
+      return []<std::size_t...I>(std::index_sequence<I...>)
+      {
+        return (_::comparable<raw_element_t<I,T>
+                            , typename get_field_by_name_t<element_t<I,T>, element_t<I,U>...>::type> 
+                && ...);  
+      }(std::make_index_sequence<size_v<T>>{});
+    }
+
+    // MSVC workaround for get<>
+    // MSVC doesnt SFINAE properly based on NTTP types before requires evaluation
+    // so we need this weird mechanism for it to pickt the correct version.
+    template<auto Name, typename... Ts> 
+    KUMI_ABI constexpr auto contains_field()
+    {
+      if constexpr( !indexer<std::remove_cvref_t<decltype(Name)>> )
+        return !std::is_same_v<get_field_by_name_t<field_capture<Name, unit>, Ts...>, kumi::unit>;
+      else return false;
+    };
   }
 
   //================================================================================================
@@ -183,59 +215,12 @@ namespace kumi
   template<typename T, typename... Ts>
   concept contains_type = (!std::is_same_v<_::get_field_by_type_t<T, Ts...>, kumi::unit>);
 
-  // MSVC workaround for get<>
-  // MSVC doesnt SFINAE properly based on NTTP types before requires evaluation
-  // so we need this weird consteval mechanism for it to pickt the correct version.
-  namespace _
-  {
-    template<auto Name, typename... Ts> consteval auto contains_field_impl()
-    {
-      if constexpr( !indexer<std::remove_cvref_t<decltype(Name)>> )
-        return !std::is_same_v<_::get_field_by_name_t<field_capture<Name, unit>, Ts...>, kumi::unit>;
-      else return false;
-    };
-  }
-
   //================================================================================================
   //! @ingroup concepts
   //! @brief Concept specifying if a kumi::field_capture with name Name is present in a parameter pack.
   //================================================================================================
   template<auto Name, typename... Ts>
-  concept contains_field = _::contains_field_impl<Name, Ts...>(); 
-
-  namespace _
-  {
-    template<typename T, typename U> struct has_same_field_names;
-    template<typename T, typename U> struct check_named_equality;
-
-    template<template<class...> class Box, typename... T, typename...U>
-    struct has_same_field_names<Box<T...>, Box<U...>>
-    {
-      static constexpr bool value = ( []()
-      {
-        using T_field = std::remove_cvref_t<T>;
-        using U_field = std::remove_cvref_t<get_field_by_name_t<T_field, U...>>;
-        return !std::is_same_v<U_field, kumi::unit>;
-      }() && ...);
-    };
-
-    template<template<class...> class Box, typename... T, typename... U>
-    struct check_named_equality<Box<T...>, Box<U...>>
-    {
-      static constexpr bool value = ( []()
-      {
-        using T_field = std::remove_cvref_t<T>;
-        using U_field = std::remove_cvref_t<get_field_by_name_t<T_field, U...>>;
-        return _::comparable<typename T_field::type, typename U_field::type>;
-      }() && ...);
-    };
-
-    template<typename T, typename U>
-    inline constexpr bool has_same_field_names_v = has_same_field_names<T, U>::value;
-
-    template<typename T, typename U>
-    inline constexpr bool check_named_equality_v = check_named_equality<T,U>::value;
-  }
+  concept contains_field = _::contains_field<Name, Ts...>(); 
 
   //================================================================================================
   //! @ingroup concepts
@@ -246,7 +231,7 @@ namespace kumi
   //================================================================================================
   template<typename T, typename U>
   concept equivalent = ( size_v<std::remove_cvref_t<T>> == size_v<std::remove_cvref_t<U>>) 
-                       && _::has_same_field_names_v<std::remove_cvref_t<T>,std::remove_cvref_t<U>>;
+                       && _::has_same_field_names<std::remove_cvref_t<T>, std::remove_cvref_t<U>>();
 
   //================================================================================================
   //! @ingroup concepts
@@ -258,7 +243,7 @@ namespace kumi
   //================================================================================================
   template<typename T, typename U>
   concept named_equality_comparable = equivalent<T,U> 
-  && _::check_named_equality_v<std::remove_cvref_t<T>,std::remove_cvref_t<U>>;
+  && _::check_named_equality<std::remove_cvref_t<T>,std::remove_cvref_t<U>>();
 
   //================================================================================================
   //! @ingroup concepts

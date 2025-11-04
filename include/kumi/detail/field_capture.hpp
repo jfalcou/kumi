@@ -95,6 +95,22 @@ namespace kumi
     else                                              return KUMI_FWD(t);
   }
 
+  //================================================================================================
+  //! @ingroup product_types 
+  //! @brief Creates a field_capture from a given value keeping the qualifiers. 
+  //!
+  //! @note If the unqualified type of T is not a field_capture, simply forwards the parameter
+  //! @tparam   Name The name to associate to the field. 
+  //! @param    t A forwarding reference to the input object.
+  //! @return   A `field_capture` that correctly keeps the qualified input type.
+  //! @related kumi::field_capture
+  //================================================================================================
+  template<str Name, typename T>
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) capture_field( T && t ) noexcept
+  {
+    return field_capture<Name, T>{ KUMI_FWD(t) };
+  }
+
   namespace result
   {
     template<typename T> struct name_of
@@ -107,8 +123,15 @@ namespace kumi
       using type = decltype( kumi::field_value_of( std::declval<T>() ));
     };
 
+    template<str Name, typename T> struct capture_field
+    {
+      using type = decltype( kumi::capture_field<Name>(std::declval<T>() ));
+    };
+
     template<typename T> using name_of_t = typename name_of<T>::type;
 
     template<typename T> using field_value_of_t = typename field_value_of<T>::type;
+
+    template<str Name, typename T> using capture_field_t = typename capture_field<Name, T>::type;
   }
 }

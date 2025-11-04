@@ -36,6 +36,7 @@ namespace kumi
 #include <kumi/algorithm/cat.hpp>
 #include <kumi/algorithm/convert.hpp>
 #include <kumi/algorithm/extract.hpp>
+#include <kumi/algorithm/for_each.hpp>
 #include <kumi/algorithm/find.hpp>
 #include <kumi/algorithm/flatten.hpp>
 #include <kumi/algorithm/generate.hpp>
