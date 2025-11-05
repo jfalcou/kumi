@@ -51,7 +51,7 @@ namespace kumi
         return os << '\'' << s.value() << '\'';
     }
   };
-   
+
   template<str... Strs>
   requires ( (Strs.size() + ...) < str::max_size )
   [[nodiscard]] KUMI_ABI constexpr auto concatenate_str()
