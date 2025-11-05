@@ -10,8 +10,7 @@
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
 
-
-TTS_CASE("Check result::prod/sum/bit_* behavior")
+TTS_CASE("Check result::reduce_t with prod/sum/bit_* behavior")
 {
   TTS_TYPE_IS ( (kumi::result::reduce_t<kumi::numeric_add, kumi::tuple<char,short,int,double>>)
               , double
@@ -48,7 +47,6 @@ TTS_CASE("Check result::prod/sum/bit_* behavior")
               , std::size_t
               );
 };
-
 
 TTS_CASE("Check kumi::reduce with kumi::plus behavior")
 {
