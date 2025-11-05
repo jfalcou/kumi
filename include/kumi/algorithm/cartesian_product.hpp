@@ -8,6 +8,7 @@
 #pragma once
 
 #include <kumi/utils/pp_helpers.hpp>
+#include <kumi/detail/builder.hpp>
 
 namespace kumi
 {
@@ -59,48 +60,41 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto cartesian_product( Ts &&... ts )
   requires ((!record_type<Ts> && ...) || (record_type<Ts> && ...))
   {
-    constexpr auto idx = [&]<std::size_t... I>(std::index_sequence<I...>)
+    using res_type = result::common_product_type_t<std::remove_cvref_t<Ts>...>;
+    if constexpr (sizeof...(Ts)==0) return tuple{};
+    else
     {
-      kumi::_::digits<sizeof...(Ts),size_v<Ts>...> dgt{};
-      using t_t = decltype(dgt(0));
-      struct { t_t data[sizeof...(I)]; } that = {dgt(I)...};
-      return that;
-    }(std::make_index_sequence<(size_v<Ts> * ...)>{});
+      constexpr auto idx = [&]<std::size_t... I>(std::index_sequence<I...>)
+      {
+        kumi::_::digits<sizeof...(Ts),kumi::size_v<Ts>...> dgt{};
+        using t_t = decltype(dgt(0));
+        struct { t_t data[sizeof...(I)]; } that = {dgt(I)...};
+        return that;
+      }(std::make_index_sequence<(kumi::size_v<Ts> * ...)>{}); 
 
-    auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>)
-    {
-      auto tps = kumi::forward_as_tuple(ts...);
-      using tuple_t = kumi::tuple <element_t< idx.data[k].data[I]
-                                            , std::remove_cvref_t<element_t<I,decltype(tps)>>
-                                            >...
-                                  >;
-      return tuple_t{kumi::get<idx.data[k].data[I]>(kumi::get<I>(tps))...};
-    };
+      auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>)
+      {
+        auto tps = kumi::forward_as_tuple(ts...);
+        using tuple_t = kumi::tuple <raw_element_t< idx.data[k].data[I]
+                                              , std::remove_cvref_t<element_t<I,decltype(tps)>>
+                                              >...
+                                    >;
+        if constexpr( record_type<res_type> )
+        {
+          constexpr auto name = merge_str<
+              name_of( as<element_t<idx.data[k].data[I],element_t<I, decltype(tps)>>>{})
+          ...>(); 
+          return field_capture<name,tuple_t>{ field_value_of( get<idx.data[k].data[I]>(get<I>(tps))) ...};
+        }
+        else return tuple_t{get<idx.data[k].data[I]>(get<I>(tps))...};
+      };
 
-    auto maps_rec = [&]<std::size_t... I>(auto k, std::index_sequence<I...>)
-    {
-      auto tps = forward_as_tuple(ts...);
-      using tuple_t = tuple <raw_element_t< idx.data[k].data[I]
-                                            , std::remove_cvref_t<element_t<I,decltype(tps)>>
-                                            >...
-                                  >;
-      constexpr auto name = merge_str<unwrap_name_v<element_t<idx.data[k].data[I], element_t<I, decltype(tps)>>>...>(); 
-
-      return field_capture<name,tuple_t>{ unwrap_field_value( get<idx.data[k].data[I]>(get<I>(tps))) ...};
-    };
-
-    if constexpr ( sizeof...(Ts) == 0) return tuple{};
-    else if constexpr ( (record_type<Ts> && ...) ) return 
-    [&]<std::size_t...N>(std::index_sequence<N...>)
-    {
-      std::make_index_sequence<sizeof...(Ts)> ids;
-      return kumi::make_record( maps_rec(kumi::index<N>, ids)...);
-    }(std::make_index_sequence<(size_v<Ts> * ...)>{});
-    else return [&]<std::size_t... N>(std::index_sequence<N...>)
-    {
-      std::make_index_sequence<sizeof...(Ts)> ids;
-      return kumi::make_tuple( maps(kumi::index<N>, ids)...);
-    }(std::make_index_sequence<(size_v<Ts> * ...)>{});
+      return [&]<std::size_t... N>(std::index_sequence<N...>)
+      {
+        std::make_index_sequence<sizeof...(Ts)> ids;
+        return _::builder<res_type>::make( maps(index<N>, ids)...);
+      }(std::make_index_sequence<(size_v<Ts> * ...)>{});
+    }
   }
 
   namespace result

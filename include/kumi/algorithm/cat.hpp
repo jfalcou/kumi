@@ -43,7 +43,7 @@ namespace kumi
     else
     {
       // count is at least 1 so MSVC don't cry when we use a 0-sized array
-      constexpr auto count = (1ULL + ... + kumi::size_v<Tuples>);
+      constexpr auto count = (1ULL + ... + size_v<Tuples>);
       constexpr auto pos = [&]()
       {
         struct { std::size_t t[count],e[count]; } that{};
@@ -68,8 +68,8 @@ namespace kumi
         using rts  = std::remove_cvref_t<decltype(tuples)>;
         
         using type = _::builder_make_t<res_type
-                        , std::tuple_element_t<pos.e[N]
-                            , std::remove_cvref_t<std::tuple_element_t<pos.t[N], rts>>
+                        , element_t<pos.e[N]
+                            , std::remove_cvref_t<element_t<pos.t[N], rts>>
                             >...
                         >;
 

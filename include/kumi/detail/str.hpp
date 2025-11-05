@@ -51,7 +51,7 @@ namespace kumi
         return os << '\'' << s.value() << '\'';
     }
   };
-
+ 
   template<str... Strs>
   requires ( (((Strs.size()-1) + ... )+1) < str::max_size )
   [[nodiscard]] KUMI_ABI constexpr auto merge_str()
@@ -86,11 +86,10 @@ namespace kumi
     
     [&]<std::size_t...I>(std::index_sequence<I...>)
     {
-      ((fill(Strs, std::make_index_sequence<Strs.size()-1>{})
-        , (I +1 < nb_strs ? (that.t[that.count++] = '.', 0) : 0)
+      ((fill(Strs, std::make_index_sequence<Strs.size()-1>{}), 
+        (I+1 < nb_strs ? (that.t[that.count++]='.', 0) : (that.t[that.count++]='\0',0))
       ), ...);
     }(std::make_index_sequence<nb_strs>{});
-    that.t[that.count++] = '\0';
     
     return str(that.t);
   };
