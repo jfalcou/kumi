@@ -8,35 +8,9 @@
 #define TTS_MAIN
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
+#include "test.hpp"
 
 using namespace kumi::literals;
-
-enum class operations
-{
-  def_ctor,
-  move_ctor,
-  move_assign,
-  copy_ctor,
-  copy_assign
-};
-
-struct ctor_tracker
-{
-  operations value = operations::def_ctor;
-  ctor_tracker()   = default;
-  ctor_tracker(ctor_tracker &&) : value(operations::move_ctor) {}
-  ctor_tracker(ctor_tracker const &) : value(operations::copy_ctor) {}
-  ctor_tracker &operator=(ctor_tracker &&)
-  {
-    value = operations::move_assign;
-    return *this;
-  }
-  ctor_tracker &operator=(ctor_tracker const &)
-  {
-    value = operations::copy_assign;
-    return *this;
-  }
-};
 
 TTS_CASE("Check tuple_element of kumi::forward_as_record")
 {
@@ -49,41 +23,6 @@ TTS_CASE("Check tuple_element of kumi::forward_as_record")
   TTS_TYPE_IS((std::tuple_element_t<2, decltype(forwarded)>), (kumi::field_capture<"c", int &>          ));
   TTS_TYPE_IS((std::tuple_element_t<3, decltype(forwarded)>), (kumi::field_capture<"d", float const &>  ));
 };
-
-template<kumi::record_type Tuple>
-operations
-move_ctor_fwd(Tuple &&t)
-{
-  ctor_tracker local = std::forward<Tuple>(t)["a"_f];
-  return local.value;
-}
-
-template<kumi::record_type Tuple>
-operations
-copy_ctor_fwd(Tuple &&t)
-{
-  ctor_tracker local = t["b"_f];
-  return local.value;
-}
-
-template<kumi::record_type Tuple>
-operations
-move_assign_fwd(Tuple &&t)
-{
-  ctor_tracker local;
-  local = std::forward<Tuple>(t)["c"_f];
-  return local.value;
-}
-
-template<kumi::record_type Tuple>
-operations
-copy_assign_fwd(Tuple &&t)
-{
-  ctor_tracker local;
-  local = t["d"_f];
-  return local.value;
-}
-
 
 TTS_CASE("Check usage of kumi::record via forward_as_tuple")
 {

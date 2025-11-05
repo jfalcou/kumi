@@ -22,7 +22,6 @@ TTS_CASE("Check for_each SFINAE compliance")
   TTS_EXPECT_NOT_COMPILES(b, t, { kumi::for_each(b, t); } );
 };
 
-
 TTS_CASE("Check for_each behavior")
 {
   auto t = kumi::tuple {1, 2., 3.4f, '5'};
