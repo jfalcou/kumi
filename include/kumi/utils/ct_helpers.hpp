@@ -25,7 +25,7 @@ namespace kumi
     static constexpr auto value = N;
 
     /// Conversion operator to integer
-    constexpr inline      operator std::size_t() const noexcept { return N; }
+    constexpr inline operator std::size_t() const noexcept { return N; }
   };
 
   //================================================================================================

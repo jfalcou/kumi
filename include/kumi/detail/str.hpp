@@ -8,9 +8,8 @@
 #pragma once
 
 #include <iosfwd>
-#include <string_view>
 #include <cstdint>
-
+#include <utility>
 #include <kumi/detail/abi.hpp>
 
 namespace kumi 
@@ -29,18 +28,19 @@ namespace kumi
     char            data_[max_size+1];
     std::uint8_t    size_;
 
-    template<std::size_t N, std::size_t... Is>
+    template<std::size_t N, std::size_t... Is> requires ( N <= max_size )
     constexpr str(const char (&s)[N], std::index_sequence<Is...>)
         : data_{s[Is]...}, size_(N)
     {}
 
-    template <std::size_t N>
+    template <std::size_t N> requires ( N <= max_size )
     constexpr str(const char (&s)[N])
         : str{s, std::make_index_sequence<N>{}}
     {}
 
-    KUMI_ABI constexpr std::size_t       size()  const { return size_; }
-    KUMI_ABI constexpr std::string_view  value() const { return std::string_view(&data_[0], size_-1); }
+    // There is a minus 1 to ease out conversion to string view, size() represent visible characters 
+    KUMI_ABI constexpr std::size_t  size() const { return size_-1; }
+    KUMI_ABI constexpr auto         data() const { return data_; }
 
     KUMI_ABI friend constexpr auto operator <=>(str const&, str const&) noexcept = default;
 
@@ -48,7 +48,10 @@ namespace kumi
     friend std::basic_ostream<CharT,Traits> &operator<<(  std::basic_ostream<CharT,Traits> &os
                                                         , str const& s) noexcept
     {
-        return os << '\'' << s.value() << '\'';
+        os << '\'';
+        for(std::size_t i=0;i<s.size();++i)
+            os << s.data_[i];
+        return os << '\'';
     }
   };
    

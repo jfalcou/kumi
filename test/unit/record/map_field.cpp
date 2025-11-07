@@ -8,6 +8,7 @@
 #define TTS_MAIN
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
+#include <string_view>
 
 using namespace kumi::literals;
 using namespace std::literals;
@@ -31,7 +32,7 @@ TTS_CASE("Check result::map_field<F,record...> behavior")
 
   auto add = [](auto name, auto a, auto b) 
   { 
-    if (name.compare("a") == 0)
+    if (std::string_view{name.data(), name.size()}.compare("a") == 0)
       return (a*b)/(a+1.); 
     else
       return (a*b)/(b+1.);
@@ -63,9 +64,9 @@ TTS_CASE("Check map_name(f, record) behavior")
     {
       auto s = map_field([](auto name, auto m) 
             { 
-              if (name.ends_with('t'))
+              if (std::string_view{name.data(), name.size()}.ends_with('t'))
                 return sizeof(m); 
-              else if (name.ends_with('c'))
+              else if (std::string_view{name.data(), name.size()}.ends_with('c'))
                 return 1+sizeof(m);
               else
                 return 2+sizeof(m);
@@ -88,7 +89,7 @@ TTS_CASE("Check map_name(f, record) behavior")
       auto u = kumi::record {"whatever"_f = short{2}, "coat"_f = 2.3f, "boat"_f = 4, "biologic"_f = 5., "dystopic"_f = 'a'};
       auto s = map_field([](auto name, auto m, auto n) 
             { 
-              if (name.find('o') < name.size())
+              if (std::string_view{name.data(), name.size()}.find('o') < name.size())
                 return sizeof(m);
               else
                 return static_cast<int>(n) * sizeof(m); 
@@ -127,7 +128,7 @@ TTS_CASE("Check map_field(f, record) constexpr behavior")
       constexpr auto u = kumi::record {"d"_f = 2, "b"_f = 3, "c"_f = 4, "a"_f = 5};
       constexpr auto s = map_field([](auto name, auto m, auto n) 
             { 
-              if (name.compare("a"sv) == 0)
+              if (std::string_view{name.data(), name.size()}.compare("a"sv) == 0)
                 return sizeof(m);
               else
                 return n * sizeof(m); 
