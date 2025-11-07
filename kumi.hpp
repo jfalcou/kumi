@@ -42,7 +42,8 @@ namespace kumi
 #elif defined(_MSC_VER)
 #   define KUMI_ABI KUMI_CUDA __forceinline
 #endif
-#include <ostream>
+#include <iosfwd>
+#include <string_view>
 #include <cstdint>
 namespace kumi 
 {
@@ -62,19 +63,23 @@ namespace kumi
     KUMI_ABI constexpr std::size_t       size()  const { return size_; }
     KUMI_ABI constexpr std::string_view  value() const { return std::string_view(&data_[0], size_-1); }
     KUMI_ABI friend constexpr auto operator <=>(str const&, str const&) noexcept = default;
-    friend std::ostream& operator<<(std::ostream& os, str const& s)
+    template<typename CharT, typename Traits>
+    friend std::basic_ostream<CharT,Traits> &operator<<(  std::basic_ostream<CharT,Traits> &os
+                                                        , str const& s) noexcept
     {
         return os << '\'' << s.value() << '\'';
     }
   };
 }
-#include <ostream>
+#include <iosfwd>
 namespace kumi
 {
   struct unit 
   {
     KUMI_ABI friend constexpr auto operator<=>(unit, unit) noexcept = default;
-    friend std::ostream& operator<<(std::ostream& os, unit)
+    template<typename CharT, typename Traits>
+    friend std::basic_ostream<CharT, Traits> &operator<<( std::basic_ostream<CharT,Traits> &os
+                                                        , unit) noexcept
     {
       return os << '\'' << "none" << '\'';
     }
@@ -90,7 +95,9 @@ namespace kumi
     T value;
     static constexpr auto name = ID;
     static constexpr bool is_field_capture = true;
-    friend std::ostream& operator<<(std::ostream& os, field_capture const& w)
+    template<typename CharT, typename Traits>
+    friend std::basic_ostream<CharT,Traits> &operator<<( std::basic_ostream<CharT, Traits> &os
+                                                       , field_capture const& w) noexcept
     {
       return os << ID << " : " << w.value;
     }
@@ -134,7 +141,7 @@ namespace kumi
     template<typename T> using field_value_of_t = typename field_value_of<T>::type;
   }
 }
-#include <ostream>
+#include <iosfwd>
 #include <cstddef>
 #include <utility>
 namespace kumi::_
@@ -1297,10 +1304,12 @@ struct std::basic_common_reference<kumi::tuple<Ts...>, kumi::tuple<Us...>, TQual
   using type = kumi::tuple<std::common_reference_t<TQual<Ts>, UQual<Us>>...>;
 };
 #endif
-#if !defined(KUMI_NO_STD_ADAPTORS)
 template< typename T, std::size_t N >
 struct kumi::is_product_type<std::array<T , N>> : std::true_type {};
-#endif
+template< typename... Ts >
+struct kumi::is_product_type<std::tuple<Ts...>> : std::true_type {};
+template< typename T1, typename T2 >
+struct kumi::is_product_type<std::pair<T1,T2>> : std::true_type {};
 #endif
 namespace kumi
 {
@@ -1519,7 +1528,9 @@ namespace kumi
     static constexpr auto empty() noexcept { return true;           }
     static constexpr auto names() noexcept { return tuple{};        }
     KUMI_ABI friend constexpr auto operator<=>(tuple<>, tuple<>) noexcept = default;
-    friend std::ostream& operator<<(std::ostream& os, tuple<>)
+    template<typename CharT, typename Traits>
+    friend std::basic_ostream<CharT,Traits> &operator<<( std::basic_ostream<CharT, Traits> &os
+                                                       , tuple<>) noexcept
     {
       return os << "()";
     }
@@ -1762,7 +1773,9 @@ namespace kumi
     static constexpr auto names()   noexcept { return tuple{};        }
     static constexpr auto values()  noexcept { return tuple{};        }
     KUMI_ABI friend constexpr auto operator<=>(record<>, record<>) noexcept = default;
-    friend std::ostream& operator<<(std::ostream& os, record<>)
+    template<typename CharT, typename Traits>
+    friend std::basic_ostream<CharT, Traits> &operator<<( std::basic_ostream<CharT,Traits> &os
+                                                        , record<>) noexcept
     {
       return os << "()";
     }
@@ -2071,8 +2084,16 @@ namespace kumi
     template<product_type... Tuples> using cat_t  = typename cat<Tuples...>::type;
   }
 }
+#include <span>
 namespace kumi
 {
+  namespace _
+  {
+    template<typename T> struct is_static_span : std::false_type{}; 
+    template<typename T, std::size_t N>
+    struct is_static_span<std::span<T,N>> : std::bool_constant<(N != std::dynamic_extent)>{};
+    template<typename T> concept static_span = is_static_span<std::remove_cvref_t<T>>::value; 
+  }
   namespace _
   {
     template< product_type Tuple
@@ -2108,9 +2129,19 @@ namespace kumi
     (std::make_index_sequence<sizeof...(Ts)>());
   }
   template<product_type Type>
-  [[nodiscard]] KUMI_ABI constexpr auto to_tuple(Type&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto to_tuple(Type && t)
   {
     return apply([](auto &&...elems) { return tuple{elems...}; }, KUMI_FWD(t));
+  }
+  template<_::static_span S>
+  [[nodiscard]] KUMI_ABI constexpr auto to_tuple( S && s )
+  {
+    constexpr auto N = std::remove_cvref_t<S>::extent;
+    if constexpr ( N == 0 ) return tuple{};
+    else return [&]<std::size_t...I>( std::index_sequence<I...> )
+    {
+      return tuple{ KUMI_FWD(s)[I]... };
+    }(std::make_index_sequence<N>{});
   }
   template<typename T, template<typename...> class Meta = std::type_identity>
   struct as_tuple;
