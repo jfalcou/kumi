@@ -45,7 +45,7 @@ namespace kumi
   //!       initial value and the first element of the product_type.
   //!
   //! @param f      Binary callable function to apply
-  //! @param t      Tuple to operate on
+  //! @param t      Product type to operate on
   //! @param init   Initial value of the sum
   //! @return       A tuple of prefix partial accumulations where each element 'I' equals 
   //!               `f( f( f(init, get<0>(t)), ...), get<I-1>(t))`
@@ -70,12 +70,12 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_left(Function && f, T && t, Value init)
   {
     if constexpr ( record_type<T> ) return inclusive_scan_left(KUMI_FWD(f), KUMI_FWD(t).values, init);
-    else if constexpr(sized_product_type<T,0>) return kumi::tuple{};
+    else if constexpr(sized_product_type<T,0>) return tuple{};
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return  (    _::scannable{f, kumi::tuple{f(init, get<0>(KUMI_FWD(t)))}} 
+        return  (    _::scannable{f, tuple{f(init, get<0>(KUMI_FWD(t)))}} 
                   >> ... 
                   >> _::scannable{f, get<I+1>(KUMI_FWD(t))}
                 ).acc;
@@ -93,7 +93,7 @@ namespace kumi
   //!       and the first element of the product_type.
   //!
   //! @param m      Monoid callable function to apply
-  //! @param t      Tuple to operate on
+  //! @param t      Product type to operate on
   //! @return       A tuple of prefix partial accumulations where each element 'I' equals 
   //!               `m( m( m(init, get<0>(t)), ...), get<I-1>(t))`
   //!
@@ -129,7 +129,7 @@ namespace kumi
   //! @note The first stored value is the provided initial value.  
   //!
   //! @param f      Binary callable function to apply
-  //! @param t      Tuple to operate on
+  //! @param t      Product type to operate on
   //! @param init   Initial value of the sum
   //! @return       A tuple of prefix partial accumulations where each element 'I' equals 
   //!               `f( f( f(init, get<0>(t)), ...), get<I-1>(t))`
@@ -154,12 +154,12 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_left(Function && f, T && t, Value init)
   {
     if constexpr ( record_type<T> ) return exclusive_scan_left(KUMI_FWD(f), KUMI_FWD(t).values, init);
-    else if constexpr(sized_product_type<T,0>) return kumi::tuple{init};
+    else if constexpr(sized_product_type<T,0>) return tuple{init};
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return  (    _::scannable{f, kumi::tuple{init}} 
+        return  (    _::scannable{f, tuple{init}} 
                   >> ... 
                   >> _::scannable{f, get<I>(KUMI_FWD(t))}
                 ).acc;
@@ -176,7 +176,7 @@ namespace kumi
   //! @note The first stored value is the identity of the provided monoid.
   //!
   //! @param m      Monoid callable function to apply
-  //! @param t      Tuple to operate on
+  //! @param t      Product type to operate on
   //! @return       A tuple of prefix partial accumulations where each element 'I' equals 
   //!               `m( m( m(init, get<0>(t)), ...), get<I-1>(t))`
   //!
@@ -200,7 +200,7 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_left(M && m, T && t)
   {
     if constexpr ( record_type<T> ) return exclusive_scan_left(KUMI_FWD(m), KUMI_FWD(t).values);
-    else if constexpr(sized_product_type<T,1>) return kumi::tuple(m.identity, get<0>(KUMI_FWD(t)));
+    else if constexpr(sized_product_type<T,1>) return tuple(m.identity, get<0>(KUMI_FWD(t)));
     else return exclusive_scan_left(KUMI_FWD(m), KUMI_FWD(t), m.identity);
   }
 
@@ -213,7 +213,7 @@ namespace kumi
   //!       initial value and the last element of the product_type.
   //!
   //! @param f      Binary callable function to apply
-  //! @param t      Tuple to operate on
+  //! @param t      Product type to operate on
   //! @param init   Initial value of the sum
   //! @return       A tuple of suffix partial accumulations where each element 'I' equals 
   //!               `f(get<0>(t), f(... , f(get<N-1>(t), init))`
@@ -238,12 +238,12 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_right(Function && f, T && t, Value init)
   {
     if constexpr ( record_type<T> ) return inclusive_scan_right(KUMI_FWD(f), KUMI_FWD(t).values, init);
-    else if constexpr( sized_product_type<T,0> ) return kumi::tuple{};
+    else if constexpr( sized_product_type<T,0> ) return tuple{};
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return  (_::scannable{f, kumi::tuple{f(get<size_v<T>-1>(KUMI_FWD(t)),init)}} 
+        return  (_::scannable{f, tuple{f(get<size_v<T>-1>(KUMI_FWD(t)),init)}} 
                   << ... 
                   << _::scannable{ f, get<size_v<T>-2-I>(KUMI_FWD(t)) }
                 ).acc;
@@ -261,7 +261,7 @@ namespace kumi
   //!       and the last element of the product_type.
   //!
   //! @param m      Monoid callable function to apply
-  //! @param t      Tuple to operate on
+  //! @param t      Product type to operate on
   //! @return       A tuple of suffix partial accumulations where each element 'I' equals 
   //!               `m(get<0>(t), m(... , m(get<N-2>(t), get<N-1>(t)))`
   //!
@@ -297,7 +297,7 @@ namespace kumi
   //! @note The first stored value is the provided initial value.  
   //!
   //! @param f      Binary callable function to apply
-  //! @param t      Tuple to operate on
+  //! @param t      Product type to operate on
   //! @param init   Initial value of the sum
   //! @return       A tuple of suffix partial accumulations where each element 'I' equals 
   //!               `f( f( f(init, get<0>(t)), ...), get<I-1>(t))`
@@ -322,12 +322,12 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_right(Function && f, T && t, Value init)
   {
     if constexpr ( record_type<T> ) return exclusive_scan_right(KUMI_FWD(f), KUMI_FWD(t).values, init);
-    else if constexpr( sized_product_type<T,0> ) return kumi::tuple{init};
+    else if constexpr( sized_product_type<T,0> ) return tuple{init};
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return  (    _::scannable{f, kumi::tuple{init}} 
+        return  (    _::scannable{f, tuple{init}} 
                   << ... 
                   << _::scannable{ f, get<size_v<T>-1-I>(KUMI_FWD(t)) }
                 ).acc;
@@ -344,7 +344,7 @@ namespace kumi
   //! @note The first stored value is the identity of the provided monoid.
   //!
   //! @param m      Monoid callable function to apply
-  //! @param t      Tuple to operate on
+  //! @param t      Product type to operate on
   //! @return       A tuple of prefix partial accumulations where each element 'I' equals 
   //!               `m( m( m(init, get<0>(t)), ...), get<I-1>(t))`
   //!
@@ -368,7 +368,7 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_right(M && m, T && t)
   {
     if constexpr ( record_type<T> ) return exclusive_scan_right(KUMI_FWD(m), KUMI_FWD(t).values);
-    else if constexpr (sized_product_type<T,1>) return kumi::tuple{get<0>(KUMI_FWD(t)), m.identity};
+    else if constexpr (sized_product_type<T,1>) return tuple{get<0>(KUMI_FWD(t)), m.identity};
     else return kumi::exclusive_scan_right(KUMI_FWD(m), KUMI_FWD(t), m.identity);
   }
 
