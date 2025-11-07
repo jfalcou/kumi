@@ -7,7 +7,8 @@
 //==================================================================================================
 #pragma once
 
-#include <ostream>
+#include <iosfwd>
+#include <string_view>
 #include <cstdint>
 
 #include <kumi/detail/abi.hpp>
@@ -43,7 +44,9 @@ namespace kumi
 
     KUMI_ABI friend constexpr auto operator <=>(str const&, str const&) noexcept = default;
 
-    friend std::ostream& operator<<(std::ostream& os, str const& s)
+    template<typename CharT, typename Traits>
+    friend std::basic_ostream<CharT,Traits> &operator<<(  std::basic_ostream<CharT,Traits> &os
+                                                        , str const& s) noexcept
     {
         return os << '\'' << s.value() << '\'';
     }

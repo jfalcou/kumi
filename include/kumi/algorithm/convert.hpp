@@ -7,8 +7,22 @@
 //==================================================================================================
 #pragma once
 
+#include <span>
+
 namespace kumi
 {
+  namespace _
+  {
+    // Workaround as span has no tuple_element/tuple_size defined even if it's static
+    // as opposed to ranges::subrange for some reason
+    template<typename T> struct is_static_span : std::false_type{}; 
+
+    template<typename T, std::size_t N>
+    struct is_static_span<std::span<T,N>> : std::bool_constant<(N != std::dynamic_extent)>{};
+
+    template<typename T> concept static_span = is_static_span<std::remove_cvref_t<T>>::value; 
+  }
+  
   namespace _
   {
     template< product_type Tuple
@@ -71,13 +85,26 @@ namespace kumi
   //! @param  t    kumi::product_type to convert
   //! @return An instance of kumi::tuple constructed from each elements of `t` in order.
   //!
+  //! @note An overload is provided for static std::span. 
+  //!
   //! ## Example
   //! @include doc/to_tuple.cpp
   //================================================================================================
   template<product_type Type>
-  [[nodiscard]] KUMI_ABI constexpr auto to_tuple(Type&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto to_tuple(Type && t)
   {
     return apply([](auto &&...elems) { return tuple{elems...}; }, KUMI_FWD(t));
+  }
+
+  template<_::static_span S>
+  [[nodiscard]] KUMI_ABI constexpr auto to_tuple( S && s )
+  {
+    constexpr auto N = std::remove_cvref_t<S>::extent;
+    if constexpr ( N == 0 ) return tuple{};
+    else return [&]<std::size_t...I>( std::index_sequence<I...> )
+    {
+      return tuple{ KUMI_FWD(s)[I]... };
+    }(std::make_index_sequence<N>{});
   }
 
   //================================================================================================

@@ -7,7 +7,7 @@
 //==================================================================================================
 #pragma once
 
-#include <ostream>
+#include <iosfwd>
 #include <kumi/detail/abi.hpp>
 
 namespace kumi
@@ -23,7 +23,9 @@ namespace kumi
   {
     KUMI_ABI friend constexpr auto operator<=>(unit, unit) noexcept = default;
 
-    friend std::ostream& operator<<(std::ostream& os, unit)
+    template<typename CharT, typename Traits>
+    friend std::basic_ostream<CharT, Traits> &operator<<( std::basic_ostream<CharT,Traits> &os
+                                                        , unit) noexcept
     {
       return os << '\'' << "none" << '\'';
     }

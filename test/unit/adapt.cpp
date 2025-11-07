@@ -9,7 +9,6 @@
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
 
-
 // --
 // -- Make a pre adapted type
 // --
@@ -49,7 +48,8 @@ TTS_CASE("Check adapted types model kumi::product_type concept")
 {
   TTS_EXPECT    ( kumi::product_type<some_box>              );
   TTS_EXPECT    ( (kumi::product_type<std::array<int,4>>   ));
-  TTS_EXPECT_NOT( (kumi::product_type<std::pair<int,float>>));
+  TTS_EXPECT    ( (kumi::product_type<std::pair<int,float>>));
+  TTS_EXPECT    ( (kumi::product_type<std::tuple<int, char, float>>));
 };
 
 TTS_CASE("Check adapted type behave like a product_type")
