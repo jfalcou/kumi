@@ -75,11 +75,11 @@
       <arglist>(as&lt; T &gt;) noexcept</arglist>
     </member>
     <member kind="friend">
-      <type>friend std::ostream &amp;</type>
+      <type>friend std::basic_ostream&lt; CharT, Traits &gt; &amp;</type>
       <name>operator&lt;&lt;</name>
       <anchorfile>group__product__types.html</anchorfile>
-      <anchor>ga0d43f46ec4c09eb1f9ed64510a43a990</anchor>
-      <arglist>(std::ostream &amp;os, field_capture const &amp;w)</arglist>
+      <anchor>gad9e237c94f8427a7ddfafb8fb0cc4428</anchor>
+      <arglist>(std::basic_ostream&lt; CharT, Traits &gt; &amp;os, field_capture const &amp;w) noexcept</arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -1821,11 +1821,11 @@
       <arglist>(as&lt; T &gt;) noexcept</arglist>
     </member>
     <member kind="friend">
-      <type>friend std::ostream &amp;</type>
+      <type>friend std::basic_ostream&lt; CharT, Traits &gt; &amp;</type>
       <name>kumi::field_capture::operator&lt;&lt;</name>
       <anchorfile>group__product__types.html</anchorfile>
-      <anchor>ga0d43f46ec4c09eb1f9ed64510a43a990</anchor>
-      <arglist>(std::ostream &amp;os, field_capture const &amp;w)</arglist>
+      <anchor>gad9e237c94f8427a7ddfafb8fb0cc4428</anchor>
+      <arglist>(std::basic_ostream&lt; CharT, Traits &gt; &amp;os, field_capture const &amp;w) noexcept</arglist>
     </member>
   </compound>
   <compound kind="group">
