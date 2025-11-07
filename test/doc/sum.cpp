@@ -1,4 +1,3 @@
-
 /**
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
