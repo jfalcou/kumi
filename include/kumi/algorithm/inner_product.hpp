@@ -22,7 +22,7 @@ namespace kumi
       template<typename W>
       KUMI_ABI friend constexpr decltype(auto) operator>>(foldable &&x, foldable<F, W> &&y)
       {
-        return _::foldable {x.func, x.func(y.value, x.value)};
+        return _::foldable {x.func, x.func(x.value, y.value)};
       }
 
       template<typename W>
