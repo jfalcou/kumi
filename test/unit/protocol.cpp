@@ -98,5 +98,4 @@ TTS_CASE("Check get return type on adapted types")
   TTS_TYPE_IS(( decltype(kumi::get<"i">(crb)) ), ( int    const& ));
   TTS_TYPE_IS(( decltype(kumi::get<"f">(crb)) ), ( float  const& ));
   TTS_TYPE_IS(( decltype(kumi::get<"c">(crb)) ), ( char   const& ));
-
 };

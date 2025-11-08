@@ -77,6 +77,8 @@ template<> struct std::tuple_element<2,tuple_box> { using type = char;  };
 
 struct record_box
 {
+  // This is here for testing purpose, if a user defines both traits everything shall still work
+  // and not error out on ambiguous 'is_product_type' resolution.
   using is_product_type = void;
   using is_record_type  = void;
 

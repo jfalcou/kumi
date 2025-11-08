@@ -29,7 +29,6 @@ namespace kumi
   requires (( entirely_uniquely_named<Ts...> ))
   struct record<Ts...>
   {
-    using is_product_type   = void;
     using is_record_type    = void;
     using binder_t = _::make_binder_t<std::make_integer_sequence<int,sizeof...(Ts)>, Ts...>;
 
@@ -237,7 +236,6 @@ namespace kumi
 
   template<> struct record<>  
   {
-    using is_product_type   = void;
     using is_record_type    = void;
     static constexpr bool is_homogeneous = false;
 
