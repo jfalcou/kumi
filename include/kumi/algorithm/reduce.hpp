@@ -49,11 +49,12 @@ namespace kumi
   //!   template<monoid M, product_type T> struct reduce;
   //!
   //!   template<monoid M, product_type T>
-  //!   using reduce_t = typename reduce_t<M,T>::type;
+  //!   using reduce_t = typename reduce<M,T>::type;
   //! }
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::reduce
+  //!
   //! ## Example
   //! @include doc/reduce.cpp
   //================================================================================================
@@ -100,11 +101,12 @@ namespace kumi
   //!   template<monoid M, product_type T, typename Value> struct reduce;
   //!
   //!   template<monoid M, product_type T, typename Value>
-  //!   using reduce_t = typename reduce_t<M,T,Value>::type;
+  //!   using reduce_t = typename reduce<M,T,Value>::type;
   //! }
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::reduce
+  //!
   //! ## Example
   //! @include doc/reduce.cpp
   //================================================================================================
@@ -135,11 +137,12 @@ namespace kumi
   //!   template<monoid M, product_type T> struct map_reduce;
   //!
   //!   template<monoid M, product_type T>
-  //!   using map_reduce_t = typename map_reduce_t<M,T>::type;
+  //!   using map_reduce_t = typename map_reduce<M,T>::type;
   //! }
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::map_reduce
+  //!
   //! ## Example
   //! @include doc/map_reduce.cpp
   //================================================================================================
@@ -188,11 +191,12 @@ namespace kumi
   //!   template<monoid M, product_type T, typename Value> struct map_reduce;
   //!
   //!   template<monoid M, product_type T, typename Value>
-  //!   using map_reduce_t = typename map_reduce_t<M,T,Value>::type;
+  //!   using map_reduce_t = typename map_reduce<M,T,Value>::type;
   //! }
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::map_reduce
+  //!
   //! ## Example
   //! @include doc/map_reduce.cpp
   //================================================================================================
@@ -207,8 +211,8 @@ namespace kumi
   //! @ingroup reductions
   //! @brief Computes the sum of all elements.
   //!
-  //! @param t      Product type to operate on.
-  //! @param init   Optional initial value of the sum.
+  //! @param t      Product type to operate on
+  //! @param init   Optional initial value of the sum
   //! @return       The value of `get<0>(t) + ... + get<N-1>(t) + init`
   //!
   //! ## Helper type
@@ -218,11 +222,14 @@ namespace kumi
   //!   template<product_type T, typename Value> struct sum;
   //!
   //!   template<product_type T, typename Value>
-  //!   using sum_t = typename sum_t<T,Value>::type;
+  //!   using sum_t = typename sum<T,Value>::type;
   //! }
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::sum
+  //!
+  //! ## Example
+  //! @include doc/sum.cpp
   //================================================================================================
   template<product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto sum(T && t, Value init)
@@ -234,7 +241,7 @@ namespace kumi
   //! @ingroup reductions
   //! @brief Computes the sum of all elements.
   //!
-  //! @param t      Product type to operate on.
+  //! @param t      Product type to operate on
   //! @return       The value of `get<0>(t) + ... + get<N-1>(t)`
   //!
   //! ## Helper type
@@ -244,11 +251,14 @@ namespace kumi
   //!   template<product_type T> struct sum;
   //!
   //!   template<product_type Te>
-  //!   using sum_t = typename sum_t<T>::type;
+  //!   using sum_t = typename sum<T>::type;
   //! }
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::sum
+  //!  
+  //! ## Example
+  //! @include doc/sum.cpp
   //================================================================================================
   template<product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto sum(T && t)
@@ -271,11 +281,14 @@ namespace kumi
   //!   template<product_type T, typename Value> struct prod;
   //!
   //!   template<product_type T, typename Value>
-  //!   using prod_t = typename prod_t<T,Value>::type;
+  //!   using prod_t = typename prod<T,Value>::type;
   //! }
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::prod
+  //!
+  //! ## Example
+  //! @include doc/prod.cpp
   //================================================================================================
   template<product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto prod(T && t, Value init)
@@ -297,11 +310,14 @@ namespace kumi
   //!   template<product_type T> struct prod;
   //!
   //!   template<product_type T>
-  //!   using prod_t = typename prod_t<T>::type;
+  //!   using prod_t = typename prod<T>::type;
   //! }
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::prod
+  //!
+  //! ## Example
+  //! @include doc/prod.cpp
   //================================================================================================
   template<product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto prod(T && t)
@@ -314,8 +330,8 @@ namespace kumi
   //! @brief Computes the bitwise AND of all elements.
   //!
   //! @param t      Product type to operate on
-  //! @param init   Initial value of the product
-  //! @return The value of `get<0>(t) & ... & get<N-1>(t) & init`
+  //! @param init   Optional initial value of the reduction
+  //! @return       The value of `get<0>(t) & ... & get<N-1>(t) & init`
   //!
   //! ## Helper type
   //! @code
@@ -324,11 +340,14 @@ namespace kumi
   //!   template<product_type T, typename Value> struct bit_and;
   //!
   //!   template<product_type T, typename Value>
-  //!   using prod_t = typename bit_and_t<T,Value>::type;
+  //!   using bit_and_t = typename bit_and<T,Value>::type;
   //! }
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::bit_and
+  //!
+  //! ## Example
+  //! @include doc/bit_and.cpp
   //================================================================================================
   template<product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto bit_and(T && t, Value init)
@@ -340,8 +359,8 @@ namespace kumi
   //! @ingroup reductions
   //! @brief Computes the bitwise AND of all elements.
   //!
-  //! @param t      Product type to operate on
-  //! @return The value of `get<0>(t) & ... & get<N-1>(t)`
+  //! @param t  Product type to operate on.
+  //! @return   The value of `get<0>(t) & ... & get<N-1>(t)`.
   //!
   //! ## Helper type
   //! @code
@@ -350,11 +369,14 @@ namespace kumi
   //!   template<product_type T> struct bit_and;
   //!
   //!   template<product_type T>
-  //!   using prod_t = typename bit_and_t<T>::type;
+  //!   using bit_and_t = typename bit_and<T>::type;
   //! }
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::bit_and
+  //!
+  //! ## Example
+  //! @include doc/bit_and.cpp
   //================================================================================================
   template<product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto bit_and(T && t)
@@ -367,8 +389,8 @@ namespace kumi
   //! @brief Computes the bitwise OR of all elements.
   //!
   //! @param t      Product type to operate on
-  //! @param init   Initial value of the product
-  //! @return The value of `get<0>(t) | ... | get<N-1>(t) & init`
+  //! @param init   Optional initial value of the reduction 
+  //! @return       The value of `get<0>(t) | ... | get<N-1>(t) | init`
   //!
   //! ## Helper type
   //! @code
@@ -377,11 +399,14 @@ namespace kumi
   //!   template<product_type T, typename Value> struct bit_or;
   //!
   //!   template<product_type T, typename Value>
-  //!   using prod_t = typename bit_or_t<T,Value>::type;
+  //!   using bit_or_t = typename bit_or<T,Value>::type;
   //! }
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::bit_or
+  //!
+  //! ## Example
+  //! @include doc/bit_or.cpp
   //================================================================================================
   template<product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto bit_or(T && t, Value init)
@@ -393,8 +418,8 @@ namespace kumi
   //! @ingroup reductions
   //! @brief Computes the bitwise OR of all elements.
   //!
-  //! @param t      Product type to operate on
-  //! @return The value of `get<0>(t) | ... | get<N-1>(t)`
+  //! @param t  Product type to operate on
+  //! @return   The value of `get<0>(t) | ... | get<N-1>(t)`
   //!
   //! ## Helper type
   //! @code
@@ -403,11 +428,14 @@ namespace kumi
   //!   template<product_type T> struct bit_or;
   //!
   //!   template<product_type T>
-  //!   using prod_t = typename bit_or_t<T>::type;
+  //!   using bit_or_t = typename bit_or<T>::type;
   //! }
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::bit_or
+  //!
+  //! ## Example
+  //! @include doc/bit_or.cpp
   //================================================================================================
   template<product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto bit_or(T && t)
@@ -420,21 +448,24 @@ namespace kumi
   //! @brief Computes the bitwise XOR of all elements.
   //!
   //! @param t      Product type to operate on
-  //! @param init   Initial value of the product
-  //! @return The value of `get<0>(t) | ... | get<N-1>(t) & init`
+  //! @param init   Optional initial value of the reduction 
+  //! @return       The value of `get<0>(t) ^ ... ^ get<N-1>(t) ^ init`
   //!
   //! ## Helper type
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<product_type T, typename Value> struct bit_or;
+  //!   template<product_type T, typename Value> struct bit_xor;
   //!
   //!   template<product_type T, typename Value>
-  //!   using prod_t = typename bit_or_t<T,Value>::type;
+  //!   using bit_xor_t = typename bit_xor<T,Value>::type;
   //! }
   //! @endcode
   //!
-  //! Computes the return type of a call to kumi::bit_or
+  //! Computes the return type of a call to kumi::bit_xor
+  //!
+  //! ## Example
+  //! @include doc/bit_xor.cpp
   //================================================================================================
   template<product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto bit_xor(T && t, Value init)
@@ -446,21 +477,24 @@ namespace kumi
   //! @ingroup reductions
   //! @brief Computes the bitwise XOR of all elements.
   //!
-  //! @param t      Product type to operate on
-  //! @return The value of `get<0>(t) | ... | get<N-1>(t)`
+  //! @param t  Product type to operate on
+  //! @return   The value of `get<0>(t) ^ ... ^ get<N-1>(t)`
   //!
   //! ## Helper type
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<product_type T> struct bit_or;
+  //!   template<product_type T> struct bit_xor;
   //!
   //!   template<product_type T>
-  //!   using prod_t = typename bit_or_t<T>::type;
+  //!   using bit_xor_t = typename bit_xor<T>::type;
   //! }
   //! @endcode
   //!
-  //! Computes the return type of a call to kumi::bit_or
+  //! Computes the return type of a call to kumi::bit_xor
+  //!
+  //! ## Example
+  //! @include doc/bit_xor.cpp
   //================================================================================================
   template<product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto bit_xor(T && t)
