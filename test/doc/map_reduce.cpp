@@ -14,5 +14,5 @@ int main()
 
   auto is_pair = [&](auto e){ return e%2==0; };
   auto t2 = kumi::tuple{2,1,short{55},' '};
-  std::cout << kumi::map_reduce(is_pair, kumi::function::bit_and, t2)        << "\n";
+  std::cout << kumi::map_reduce(is_pair, kumi::function::plus, t2)        << "\n";
 }
