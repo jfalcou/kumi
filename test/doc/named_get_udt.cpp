@@ -30,11 +30,6 @@ namespace ns
   }
 }
 
-// Opt-in for Product Type semantic
-template<>
-struct kumi::is_product_type<ns::people> : std::true_type
-{};
-
 // Opt-in for Record Type semantic
 template<>
 struct kumi::is_record_type<ns::people> : std::true_type
