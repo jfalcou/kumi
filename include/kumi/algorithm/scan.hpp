@@ -46,7 +46,7 @@ namespace kumi
   //!
   //! @param f      Binary callable function to apply
   //! @param t      Product type to operate on
-  //! @param init   Initial value of the sum
+  //! @param init   Optional initial value of the scan  
   //! @return       A tuple of prefix partial accumulations where each element 'I' equals 
   //!               `f( f( f(init, get<0>(t)), ...), get<I-1>(t))`
   //!
@@ -57,7 +57,7 @@ namespace kumi
   //!   template<typename Function, product_type Tuple, typename Value> struct inclusive_scan_left;
   //!
   //!   template<typename Function, product_type Tuple, typename Value>
-  //!   using inclusive_scan_left_t = typename inclusive_scan_left_t<Function,Tuple,Value>::type;
+  //!   using inclusive_scan_left_t = typename inclusive_scan_left<Function,Tuple,Value>::type;
   //! }
   //! @endcode
   //!
@@ -104,7 +104,7 @@ namespace kumi
   //!   template<typename Function, product_type Tuple> struct inclusive_scan_left;
   //!
   //!   template<typename Function, product_type Tuple>
-  //!   using inclusive_scan_left_t = typename inclusive_scan_left_t<Function,Tuple>::type;
+  //!   using inclusive_scan_left_t = typename inclusive_scan_left<Function,Tuple>::type;
   //! }
   //! @endcode
   //!
@@ -130,7 +130,7 @@ namespace kumi
   //!
   //! @param f      Binary callable function to apply
   //! @param t      Product type to operate on
-  //! @param init   Initial value of the sum
+  //! @param init   Optional initial value of the scan 
   //! @return       A tuple of prefix partial accumulations where each element 'I' equals 
   //!               `f( f( f(init, get<0>(t)), ...), get<I-1>(t))`
   //!
@@ -141,7 +141,7 @@ namespace kumi
   //!   template<typename Function, product_type Tuple, typename Value> struct exclusive_scan_left;
   //!
   //!   template<typename Function, product_type Tuple, typename Value>
-  //!   using exclusive_scan_left_t = typename exclusive_scan_left_t<Function,Tuple,Value>::type;
+  //!   using exclusive_scan_left_t = typename exclusive_scan_left<Function,Tuple,Value>::type;
   //! }
   //! @endcode
   //!
@@ -187,7 +187,7 @@ namespace kumi
   //!   template<typename Function, product_type Tuple> struct exclusive_scan_left;
   //!
   //!   template<typename Function, product_type Tuple>
-  //!   using exclusive_scan_left_t = typename exclusive_scan_left_t<Function,Tuple>::type;
+  //!   using exclusive_scan_left_t = typename exclusive_scan_left<Function,Tuple>::type;
   //! }
   //! @endcode
   //!
@@ -214,7 +214,7 @@ namespace kumi
   //!
   //! @param f      Binary callable function to apply
   //! @param t      Product type to operate on
-  //! @param init   Initial value of the sum
+  //! @param init   Optional initial value of the scan 
   //! @return       A tuple of suffix partial accumulations where each element 'I' equals 
   //!               `f(get<0>(t), f(... , f(get<N-1>(t), init))`
   //!
@@ -225,7 +225,7 @@ namespace kumi
   //!   template<typename Function, product_type Tuple, typename Value> struct inclusive_scan_right;
   //!
   //!   template<typename Function, product_type Tuple, typename Value>
-  //!   using inclusive_scan_right_t = typename inclusive_scan_right_t<Function,Tuple,Value>::type;
+  //!   using inclusive_scan_right_t = typename inclusive_scan_right<Function,Tuple,Value>::type;
   //! }
   //! @endcode
   //!
@@ -272,7 +272,7 @@ namespace kumi
   //!   template<typename Function, product_type Tuple> struct inclusive_scan_right;
   //!
   //!   template<typename Function, product_type Tuple>
-  //!   using inclusive_scan_right_t = typename inclusive_scan_right_t<Function,Tuple>::type;
+  //!   using inclusive_scan_right_t = typename inclusive_scan_right<Function,Tuple>::type;
   //! }
   //! @endcode
   //!
@@ -298,7 +298,7 @@ namespace kumi
   //!
   //! @param f      Binary callable function to apply
   //! @param t      Product type to operate on
-  //! @param init   Initial value of the sum
+  //! @param init   Optional initial value of the scan 
   //! @return       A tuple of suffix partial accumulations where each element 'I' equals 
   //!               `f( f( f(init, get<0>(t)), ...), get<I-1>(t))`
   //!
@@ -309,7 +309,7 @@ namespace kumi
   //!   template<typename Function, product_type Tuple, typename Value> struct exclusive_scan_right;
   //!
   //!   template<typename Function, product_type Tuple, typename Value>
-  //!   using exclusive_scan_right_t = typename exclusive_scan_right_t<Function,Tuple,Value>::type;
+  //!   using exclusive_scan_right_t = typename exclusive_scan_right<Function,Tuple,Value>::type;
   //! }
   //! @endcode
   //!
@@ -355,7 +355,7 @@ namespace kumi
   //!   template<typename Function, product_type Tuple> struct exclusive_scan_right;
   //!
   //!   template<typename Function, product_type Tuple>
-  //!   using exclusive_scan_right_t = typename exclusive_scan_right_t<Function,Tuple>::type;
+  //!   using exclusive_scan_right_t = typename exclusive_scan_right<Function,Tuple>::type;
   //! }
   //! @endcode
   //!
