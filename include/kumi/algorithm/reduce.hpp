@@ -162,11 +162,12 @@ namespace kumi
 
       return [&]<std::size_t...I>(std::index_sequence<I...>)
       {
-        return map_reduce(KUMI_FWD(f), KUMI_FWD(m), tuple{process(index<I>)...});
+        return reduce(KUMI_FWD(m), tuple{process(index<I>)...});
       }(std::make_index_sequence<pos.count + pos.remainder>{});
     }
   }
- //================================================================================================
+
+  //================================================================================================
   //! @ingroup reductions
   //! @brief Performs a tree-like reduction of all elements of a product type. The given map 
   //!        function is applied before excution the reduction to each element of the input.
@@ -198,7 +199,7 @@ namespace kumi
   template<monoid M, product_type T, typename Function, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto map_reduce( Function && f, M && m, T && t, Value init)
   {
-    if constexpr ( sized_product_type<T,0> ) return init;
+    if constexpr ( sized_product_type<T,0> ) return KUMI_FWD(f)(init);
     else return KUMI_FWD(m)(KUMI_FWD(f)(init), map_reduce(KUMI_FWD(f), KUMI_FWD(m), KUMI_FWD(t)));
   }
 
