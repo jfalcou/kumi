@@ -36,18 +36,19 @@ namespace kumi
   }
   //================================================================================================
   //! @ingroup generators
-  //! @brief  Return the Cartesian Product of all elements of its arguments product types
-  //! @param  ts Tuples to process
-  //! @return a tuple containing all the tuple build from all combination of all ts' elements
+  //! @brief      Return the Cartesian Product of all elements of its arguments product types
+  //! @param  ts  Product types to process
+  //! @return     A tuple containing all the product types built from all combination of all ts' 
+  //!             elements
   //!
   //! ## Helper type
   //! @code
   //! namespace kumi
   //! {
-  //!   template<product_type... Tuples> struct cartesian_product;
+  //!   template<product_type... Ts> struct cartesian_product;
   //!
-  //!   template<product_type... Tuples>
-  //!   using cartesian_product_t = typename cartesian_product<Tuples...>::type;
+  //!   template<product_type... Ts>
+  //!   using cartesian_product_t = typename cartesian_product<Ts...>::type;
   //! }
   //! @endcode
   //!
@@ -75,24 +76,17 @@ namespace kumi
       auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>)
       {
         auto tps = kumi::forward_as_tuple(ts...);
-        using tuple_t = kumi::tuple <raw_element_t< idx.data[k].data[I]
-                                              , std::remove_cvref_t<element_t<I,decltype(tps)>>
-                                              >...
+        using res_t = _::builder_make_t<res_type, element_t< idx.data[k].data[I]
+                                        , std::remove_cvref_t<element_t<I,decltype(tps)>>
+                                       >...
                                     >;
-        if constexpr( record_type<res_type> )
-        {
-          constexpr auto name = merge_str<
-              name_of( as<element_t<idx.data[k].data[I],element_t<I, decltype(tps)>>>{})
-          ...>(); 
-          return field_capture<name,tuple_t>{ field_value_of( get<idx.data[k].data[I]>(get<I>(tps))) ...};
-        }
-        else return tuple_t{get<idx.data[k].data[I]>(get<I>(tps))...};
+        return res_t{get<idx.data[k].data[I]>(get<I>(tps))...};
       };
 
       return [&]<std::size_t... N>(std::index_sequence<N...>)
       {
         std::make_index_sequence<sizeof...(Ts)> ids;
-        return _::builder<res_type>::make( maps(index<N>, ids)...);
+        return kumi::make_tuple( maps(index<N>, ids)... );
       }(std::make_index_sequence<(size_v<Ts> * ...)>{});
     }
   }
