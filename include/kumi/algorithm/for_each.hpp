@@ -38,8 +38,6 @@ namespace kumi
     {
       [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        // clang needs this for some reason
-        using std::get;
         constexpr auto fields = members_of( as<Tuple>{} );
         [[maybe_unused]] auto call = [&]<typename M>(M)
                                         { 
@@ -57,8 +55,6 @@ namespace kumi
     {
       [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        // clang needs this for some reason
-        using std::get;
         [[maybe_unused]] auto call = [&]<typename M>(M)
                                         { f ( get<M::value>(KUMI_FWD(t))
                                             , get<M::value>(KUMI_FWD(ts))...

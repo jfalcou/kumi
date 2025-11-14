@@ -365,7 +365,6 @@ namespace kumi::_
   {
     constexpr std::size_t idx = get_index_by_type_v<T, Ts...>;
     return get_leaf<idx>(KUMI_FWD(arg));
-
   }
 
   template<typename T,typename ISeq, typename... Ts>
@@ -396,7 +395,6 @@ namespace kumi::_
     if constexpr(idx == 7) return arg.member7.value;
     if constexpr(idx == 8) return arg.member8.value;
     if constexpr(idx == 9) return arg.member9.value;
-
   }
 
   template<kumi::str Name,typename ISeq, typename... Ts>

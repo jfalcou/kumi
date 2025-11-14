@@ -56,11 +56,15 @@ namespace kumi
   //!   template<typename T> inline constexpr auto is_record_type_v = is_record_type<T>::value;
   //! @endcode
   //! ## Example:
-  //! @include doc/adapt.cpp
+  //! @include doc/record/adapt.cpp
   //==============================================================================================
   template<typename T, typename Enable = void> struct is_record_type : std::false_type {};
   template<typename T> struct is_record_type<T, typename T::is_record_type> : std::true_type {};
 
+  template<typename T> 
+  requires ( is_record_type<T>::value && (!requires { typename T::is_product_type; }))
+  struct is_product_type<T, void>  : std::true_type {};
+  
   template<typename T> inline constexpr auto is_record_type_v = is_record_type<T>::value;
   //================================================================================================
   //! @ingroup traits

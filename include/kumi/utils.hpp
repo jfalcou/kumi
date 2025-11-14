@@ -30,5 +30,4 @@ namespace kumi
 #include <kumi/utils/ct_helpers.hpp>
 #include <kumi/utils/concepts.hpp>
 #include <kumi/utils/apply.hpp>
-#include <kumi/utils/for_each.hpp>
 #include <kumi/utils/std.hpp>
