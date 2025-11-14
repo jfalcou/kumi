@@ -62,6 +62,13 @@
     </member>
     <member kind="function">
       <type>decltype(auto) constexpr</type>
+      <name>capture_field</name>
+      <anchorfile>group__product__types_gafc8e80ba53336a0142f3267959c1ba71.html</anchorfile>
+      <anchor>gafc8e80ba53336a0142f3267959c1ba71</anchor>
+      <arglist>(T &amp;&amp;t) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>decltype(auto) constexpr</type>
       <name>field_value_of</name>
       <anchorfile>group__product__types_gad7a01eb2dfa2f318b75141023ed56d58.html</anchorfile>
       <anchor>gad7a01eb2dfa2f318b75141023ed56d58</anchor>
@@ -234,10 +241,17 @@
     <filename>structkumi_1_1record.html</filename>
     <templarg>typename... Ts</templarg>
     <member kind="function">
-      <type>constexpr auto</type>
-      <name>values_of</name>
-      <anchorfile>group__algorithm_gade5f616b3115a74bd4930f70f96ca199.html</anchorfile>
-      <anchor>gade5f616b3115a74bd4930f70f96ca199</anchor>
+      <type>decltype(auto) constexpr</type>
+      <name>get</name>
+      <anchorfile>group__algorithm_ga9ae63f9221db181d1c0f0c8ff3a99b06.html</anchorfile>
+      <anchor>ga9ae63f9221db181d1c0f0c8ff3a99b06</anchor>
+      <arglist>(T &amp;&amp;t) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>decltype(auto) constexpr</type>
+      <name>get</name>
+      <anchorfile>structkumi_1_1record_ga9ae63f9221db181d1c0f0c8ff3a99b06.html</anchorfile>
+      <anchor>ga9ae63f9221db181d1c0f0c8ff3a99b06</anchor>
       <arglist>(T &amp;&amp;t) noexcept</arglist>
     </member>
     <member kind="function">
@@ -1358,6 +1372,13 @@
     </member>
     <member kind="function">
       <type>constexpr auto</type>
+      <name>values_of</name>
+      <anchorfile>group__algorithm_ga62d44b638af9c683a8040a476518990e.html</anchorfile>
+      <anchor>ga62d44b638af9c683a8040a476518990e</anchor>
+      <arglist>(T &amp;&amp;t) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
       <name>windows</name>
       <anchorfile>group__generators_ga8a3301039029674c9d9613373d282c5b.html</anchorfile>
       <anchor>ga8a3301039029674c9d9613373d282c5b</anchor>
@@ -1808,6 +1829,13 @@
     <class kind="class">kumi::field_capture</class>
     <member kind="function">
       <type>decltype(auto) constexpr</type>
+      <name>kumi::field_capture::capture_field</name>
+      <anchorfile>group__product__types_gafc8e80ba53336a0142f3267959c1ba71.html</anchorfile>
+      <anchor>gafc8e80ba53336a0142f3267959c1ba71</anchor>
+      <arglist>(T &amp;&amp;t) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>decltype(auto) constexpr</type>
       <name>kumi::field_capture::field_value_of</name>
       <anchorfile>group__product__types_gad7a01eb2dfa2f318b75141023ed56d58.html</anchorfile>
       <anchor>gad7a01eb2dfa2f318b75141023ed56d58</anchor>
@@ -1899,6 +1927,13 @@
     <subgroup>queries</subgroup>
     <subgroup>transforms</subgroup>
     <member kind="function">
+      <type>decltype(auto) constexpr</type>
+      <name>kumi::record::get</name>
+      <anchorfile>group__algorithm_ga9ae63f9221db181d1c0f0c8ff3a99b06.html</anchorfile>
+      <anchor>ga9ae63f9221db181d1c0f0c8ff3a99b06</anchor>
+      <arglist>(T &amp;&amp;t) noexcept</arglist>
+    </member>
+    <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::members_of</name>
       <anchorfile>group__algorithm_gaba7cff8d6c8c8b6d03ca78df63c9eba0.html</anchorfile>
@@ -1907,9 +1942,9 @@
     </member>
     <member kind="function">
       <type>constexpr auto</type>
-      <name>kumi::record::values_of</name>
-      <anchorfile>group__algorithm_gade5f616b3115a74bd4930f70f96ca199.html</anchorfile>
-      <anchor>gade5f616b3115a74bd4930f70f96ca199</anchor>
+      <name>kumi::values_of</name>
+      <anchorfile>group__algorithm_ga62d44b638af9c683a8040a476518990e.html</anchorfile>
+      <anchor>ga62d44b638af9c683a8040a476518990e</anchor>
       <arglist>(T &amp;&amp;t) noexcept</arglist>
     </member>
   </compound>

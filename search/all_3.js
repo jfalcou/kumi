@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['3_200_20delicious_20datolite_0',['Version 3.0 - Delicious Datolite',['../changelog.html#autotoc_md167',1,'']]],
-  ['3_201_20exquisite_20epidote_1',['Version 3.1 - Exquisite Epidote',['../changelog.html#autotoc_md162',1,'']]]
+  ['3_200_20delicious_20datolite_0',['Version 3.0 - Delicious Datolite',['../changelog.html#autotoc_md169',1,'']]],
+  ['3_201_20exquisite_20epidote_1',['Version 3.1 - Exquisite Epidote',['../changelog.html#autotoc_md164',1,'']]]
 ];

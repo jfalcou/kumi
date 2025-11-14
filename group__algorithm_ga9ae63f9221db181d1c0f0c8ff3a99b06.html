@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::is_record_type&lt; T, Enable &gt; Struct Template Reference</title>
+<title>kumi: kumi::record::get</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('structkumi_1_1is__record__type.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__algorithm_ga9ae63f9221db181d1c0f0c8ff3a99b06.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -120,28 +120,50 @@ $(document).ready(function(){initNavTree('structkumi_1_1is__record__type.html','
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">kumi::is_record_type&lt; T, Enable &gt; Struct Template Reference<div class="ingroups"><a class="el" href="group__traits.html">Tuple Related Traits</a></div></div></div>
-</div><!--header-->
 <div class="contents">
+<a id="ga9ae63f9221db181d1c0f0c8ff3a99b06" name="ga9ae63f9221db181d1c0f0c8ff3a99b06"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9ae63f9221db181d1c0f0c8ff3a99b06">&#9670;&#160;</a></span>get() <span class="overload">[3/4]</span></h2>
 
-<p>Opt-in traits for types behaving like a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>.  
- <a href="structkumi_1_1is__record__type.html#details">More...</a></p>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">typename</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Target</a> , product_type T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">decltype</a>(<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a>) <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> get </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
-<p><code>#include &lt;kumi/utils/traits.hpp&gt;</code></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">typename</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T</a>, <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">typename</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Enable</a> = void&gt;<br />
-struct kumi::is_record_type&lt; T, Enable &gt;</div><p>Opt-in traits for types behaving like a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>. </p>
-<p>To be treated like a record, an user defined type must supports structured bindings opt-in to <a class="el" href="conceptkumi_1_1record__type.html" title="Concept specifying a type follows the Record Type semantic.">kumi::record_type</a> Semantic as well as <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a> Semantic.</p>
-<p>This can be done in two ways:</p><ul>
-<li>exposing an internal <code><a class="el" href="structkumi_1_1is__record__type.html" title="Opt-in traits for types behaving like a kumi::product_type.">is_record_type</a></code> type that evaluates to <code>void</code></li>
-<li>specializing the <code><a class="el" href="structkumi_1_1is__record__type.html" title="Opt-in traits for types behaving like a kumi::product_type.">kumi::is_record_type</a></code> traits so it exposes a static constant member <code>value</code> that evaluates to <code>true</code></li>
-</ul>
-<h2><a class="anchor" id="autotoc_md150"></a>
-Helper value</h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> is_record_type_v = <a class="code hl_struct" href="structkumi_1_1is__record__type.html">is_record_type&lt;T&gt;::value</a>;</div>
-<div class="ttc" id="astructkumi_1_1is__record__type_html"><div class="ttname"><a href="structkumi_1_1is__record__type.html">kumi::is_record_type</a></div><div class="ttdoc">Opt-in traits for types behaving like a kumi::product_type.</div><div class="ttdef"><b>Definition</b> traits.hpp:61</div></div>
-</div><!-- fragment --> <h2><a class="anchor" id="autotoc_md151"></a>
+<p>Extracts the value with type Target of a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>. </p>
+<dl class="section note"><dt>Note</dt><dd>This function is not callable on a product_type with duplicate types. It is provided as an utility for User Defined Types, kumi types have their own overloads.</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Target</td><td>The type of the field to extract from the product type. </td></tr>
+    <tr><td class="paramname">T</td><td>the type of the product_type from which to the field. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>the product_type from which to the field. </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A references to the values of a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>.</dd></dl>
+<h2><a class="anchor" id="autotoc_md50"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -159,21 +181,21 @@ Example:</h2>
 <div class="line">  <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I&gt;</div>
 <div class="line">  <span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_function" href="namespacekumi.html#a58caf3f1c74614bb2224b63a6009c853">get</a>(people <span class="keyword">const</span>&amp; s) <span class="keyword">noexcept</span></div>
 <div class="line">  {</div>
-<div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==0) <span class="keywordflow">return</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::capture_field&lt;&quot;name&quot;&gt;</a>( s.name );</div>
-<div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==1) <span class="keywordflow">return</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::capture_field&lt;&quot;age&quot; &gt;</a>( s.age  );</div>
+<div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==0) <span class="keywordflow">return</span> s.name;</div>
+<div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==1) <span class="keywordflow">return</span> s.age;</div>
 <div class="line">  }</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I&gt;</div>
 <div class="line">  <span class="keyword">decltype</span>(<span class="keyword">auto</span>) get(people&amp; s) <span class="keyword">noexcept</span></div>
 <div class="line">  {</div>
-<div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==0) <span class="keywordflow">return</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::capture_field&lt;&quot;name&quot;&gt;</a>( s.name );</div>
-<div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==1) <span class="keywordflow">return</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::capture_field&lt;&quot;age&quot; &gt;</a>( s.age  );</div>
+<div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==0) <span class="keywordflow">return</span> s.name;</div>
+<div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==1) <span class="keywordflow">return</span> s.age;</div>
 <div class="line">  }</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Opt-in for Record Type semantic</span></div>
+<div class="line"><span class="comment">// Opt-in for Product Type semantic</span></div>
 <div class="line"><span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1is__record__type.html">kumi::is_record_type</a>&lt;<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">ns</a>::<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">people</a>&gt; : std::true_type</div>
+<div class="line"><span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1is__product__type.html">kumi::is_product_type</a>&lt;<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">ns</a>::<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">people</a>&gt; : std::true_type</div>
 <div class="line">{};</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Adapt as structured bindable type</span></div>
@@ -181,33 +203,29 @@ Example:</h2>
 <div class="line"><span class="keyword">struct  </span>std::tuple_size&lt;<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">ns</a>::<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">people</a>&gt;</div>
 <div class="line">      : std::integral_constant&lt;std::size_t,2&gt; {};</div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">template</span>&lt;&gt; <span class="keyword">struct </span>std::tuple_element&lt;0,<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">ns</a>::<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">people</a>&gt; { <span class="keyword">using </span>type = <a class="code hl_class" href="structkumi_1_1field__capture.html">kumi::field_capture</a>&lt;<span class="stringliteral">&quot;name&quot;</span>,std::string&gt;;  };</div>
-<div class="line"><span class="keyword">template</span>&lt;&gt; <span class="keyword">struct </span>std::tuple_element&lt;1,<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">ns</a>::<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">people</a>&gt; { <span class="keyword">using </span>type = <a class="code hl_class" href="structkumi_1_1field__capture.html">kumi::field_capture</a>&lt;<span class="stringliteral">&quot;age&quot;</span> ,<span class="keywordtype">int</span>        &gt;;  };</div>
+<div class="line"><span class="keyword">template</span>&lt;&gt; <span class="keyword">struct </span>std::tuple_element&lt;0,<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">ns</a>::<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">people</a>&gt; { <span class="keyword">using </span>type = std::string;  };</div>
+<div class="line"><span class="keyword">template</span>&lt;&gt; <span class="keyword">struct </span>std::tuple_element&lt;1,<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">ns</a>::<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">people</a>&gt; { <span class="keyword">using </span>type = int;          };</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">main</a>()</div>
 <div class="line">{</div>
 <div class="line">  ns::people <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">peter</a>{<span class="stringliteral">&quot;Peter Parker&quot;</span>, 24};</div>
-<div class="line">  </div>
-<div class="line">  <a class="code hl_function" href="group__transforms_ga8e05313a97d85b3fa24c9650d661db74.html#ga8e05313a97d85b3fa24c9650d661db74">kumi::for_each_field</a>( [](<span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">n</a>, <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">e</a>)</div>
-<div class="line">                        {</div>
-<div class="line">                          std::cout &lt;&lt; <span class="stringliteral">&quot;# &quot;</span>  &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">n</a></div>
-<div class="line">                                    &lt;&lt; <span class="stringliteral">&quot; : &quot;</span> &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">e</a></div>
-<div class="line">                                    &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">                        }</div>
-<div class="line">                      , <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">peter</a></div>
-<div class="line">                      );    </div>
+<div class="line">    </div>
+<div class="line">  std::cout &lt;&lt; kumi::get&lt;std::string&gt; (<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">peter</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; kumi::get&lt;int&gt;         (<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">peter</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__transforms_ga8e05313a97d85b3fa24c9650d661db74_html_ga8e05313a97d85b3fa24c9650d661db74"><div class="ttname"><a href="group__transforms_ga8e05313a97d85b3fa24c9650d661db74.html#ga8e05313a97d85b3fa24c9650d661db74">kumi::for_each_field</a></div><div class="ttdeci">constexpr void for_each_field(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a kumi::record_type and its field.</div><div class="ttdef"><b>Definition</b> for_each.hpp:129</div></div>
 <div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:73</div></div>
 <div class="ttc" id="anamespacekumi_html_a58caf3f1c74614bb2224b63a6009c853"><div class="ttname"><a href="namespacekumi.html#a58caf3f1c74614bb2224b63a6009c853">kumi::get</a></div><div class="ttdeci">constexpr decltype(auto) get(record&lt; Ts... &gt; &amp;&amp;r) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition</b> record.hpp:395</div></div>
-<div class="ttc" id="astructkumi_1_1field__capture_html"><div class="ttname"><a href="structkumi_1_1field__capture.html">kumi::field_capture</a></div><div class="ttdoc">Named wrapper over a type.</div><div class="ttdef"><b>Definition</b> field_capture.hpp:28</div></div>
-</div><!-- fragment --> </div></div><!-- contents -->
+<div class="ttc" id="astructkumi_1_1is__product__type_html"><div class="ttname"><a href="structkumi_1_1is__product__type.html">kumi::is_product_type</a></div><div class="ttdoc">Opt-in traits for types behaving like a kumi::product_type.</div><div class="ttdef"><b>Definition</b> traits.hpp:38</div></div>
+</div><!-- fragment --> 
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li><li class="navelem"><a class="el" href="structkumi_1_1is__record__type.html">is_record_type</a></li>
+    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li><li class="navelem"><a class="el" href="structkumi_1_1record.html">record</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->
