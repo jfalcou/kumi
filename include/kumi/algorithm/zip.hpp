@@ -87,8 +87,7 @@ namespace kumi
   //================================================================================================
   template<product_type T0, sized_product_type<size_v<T0>>... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto zip(T0 && t0, Ts &&... ts)
-  requires (  (record_type<T0> && (record_type<Ts> && ...)) 
-            ||(!record_type<T0> && (!record_type<Ts> && ...)))
+  requires ( follows_same_semantic<T0, Ts...> )
   {
     return _::zipper(index<size_v<T0>>, kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...));
   }
@@ -121,8 +120,7 @@ namespace kumi
   //================================================================================================
   template<product_type T0, product_type... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto zip_min(T0 && t0, Ts &&...ts)
-  requires (  (record_type<T0> && (record_type<Ts> && ...)) 
-            ||(!record_type<T0> && (!record_type<Ts> && ...)))
+  requires ( follows_same_semantic<T0, Ts...> )
   {
     constexpr std::size_t min = _::min_size_v<T0, Ts...>(); 
     return _::zipper(index<min>, kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...));
@@ -156,8 +154,7 @@ namespace kumi
   //================================================================================================
   template<product_type T0, product_type... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto zip_max(T0 &&t0, Ts &&...ts)
-  requires (  (record_type<T0> && (record_type<Ts> && ...)) 
-            ||(!record_type<T0> && (!record_type<Ts> && ...)))
+  requires (  follows_same_semantic<T0,Ts...>)
   {
     constexpr std::size_t max = _::max_size_v<T0, Ts...>();
     return _::zipper(index<max>, kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...));

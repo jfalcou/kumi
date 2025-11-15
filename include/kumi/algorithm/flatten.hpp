@@ -9,21 +9,103 @@
 
 namespace kumi
 {
+  namespace _
+  {
+    //==============================================================================================
+    // Flatten helpers used to handle prefix name concatenation for records without altering API
+    //==============================================================================================
+    template<typename T>
+    KUMI_ABI constexpr auto flat_one(T && t)
+    {
+      if constexpr(sized_product_type<T,0>) return KUMI_FWD(t); 
+      else return [&]<std::size_t...I>(std::index_sequence<I...>)
+      {
+        auto v_or_r = [&]<typename V>(V && v)
+        {
+          using FV = kumi::result::field_value_of_t<V>;
+          constexpr auto name = name_of(as<V>{});
+          
+          if constexpr ( record_type<FV> )
+          {
+            return [&]<std::size_t...J>( std::index_sequence<J...> )
+            {
+                return record { field< concatenate_str<name, name_of(as<element_t<J,FV>>{})>() > 
+                              = (field_value_of(get<J>(field_value_of(KUMI_FWD(v)))))... };
+            }(std::make_index_sequence<size_v<FV>>{});
+          }
+          else return record { KUMI_FWD(v) };
+        };
+
+        return cat( v_or_r(get<I>(KUMI_FWD(t)))... );
+      }(std::make_index_sequence<size_v<T>>{});
+    }
+
+    template<auto Prefix, typename T>
+    KUMI_ABI constexpr auto flat(T && t)
+    {
+      using Prefix_type = std::remove_cvref_t<decltype(Prefix)>;
+      if constexpr(sized_product_type<T,0>) return KUMI_FWD(t); 
+      else return [&]<std::size_t...I>(std::index_sequence<I...>)
+      {
+        auto v_or_r = [&]<typename V>(V && v)
+        {
+          constexpr auto name = [&] {
+            if constexpr( std::is_same_v<Prefix_type, unit> )
+                  return name_of(as<V>{});
+            else  return concatenate_str<Prefix, name_of(as<V>{})>();
+          }();
+
+          if constexpr ( record_type<kumi::result::field_value_of_t<V>>) 
+               return flat<name>(field_value_of(KUMI_FWD(v)));
+          else return record { field<name> = (field_value_of(KUMI_FWD(v))) };
+        };
+
+        return cat( v_or_r(get<I>(KUMI_FWD(t)))... );
+      }(std::make_index_sequence<size_v<T>>{});
+    }
+     
+    template<auto Prefix, typename T, typename F>
+    KUMI_ABI constexpr auto flat_map(T && t, F && f)
+    {
+      if constexpr(sized_product_type<T,0>) return KUMI_FWD(t); 
+      else return [&]<std::size_t...I>(std::index_sequence<I...>)
+      {
+        using Prefix_type = std::remove_cvref_t<decltype(Prefix)>;
+        auto v_or_r = [&]<typename V>(V && v)
+        {
+          constexpr auto name = [&] {
+            if constexpr( std::is_same_v<Prefix_type, unit> )
+                  return name_of(as<V>{});
+            else  return concatenate_str<Prefix, name_of(as<V>{})>();
+          }();
+          
+          if constexpr ( record_type<kumi::result::field_value_of_t<V>> ) 
+               return flat_map<name>(field_value_of(KUMI_FWD(v)), KUMI_FWD(f)) ;
+          else return record { field<name> = KUMI_FWD(f)(field_value_of(v)) };
+        };
+
+          return cat( v_or_r(get<I>(KUMI_FWD(t)))... );
+      }(std::make_index_sequence<size_v<T>>{});
+    }
+  }
+
   //================================================================================================
   //! @ingroup generators
-  //! @brief Converts a tuple of tuples into a tuple of all elements.
+  //! @brief Converts a product type of product types into a product type of all elements.
   //!
-  //! @param ts Tuple to flatten
-  //! @return A tuple composed of all elements of t flattened non-recursively
+  //! @param t  Product type to flatten
+  //! @return   A product type composed of all elements of t flattened non-recursively
+  //!
+  //! @note There is a semantic difference between record and tuples flattening.
   //!
   //! ## Helper type
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<product_type Tuple> struct flatten;
+  //!   template<product_type T> struct flatten;
   //!
-  //!   template<product_type Tuple>
-  //!   using flatten_t = typename flatten<Tuple>::type;
+  //!   template<product_type T>
+  //!   using flatten_t = typename flatten<T>::type;
   //! }
   //! @endcode
   //!
@@ -32,9 +114,10 @@ namespace kumi
   //! ## Example
   //! @include doc/flatten.cpp
   //================================================================================================
-  template<product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto flatten(Tuple &&ts)
+  template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto flatten(T && t)
   {
-    if constexpr(sized_product_type<Tuple,0>) return ts;
+    if constexpr(sized_product_type<T,0>) return t;
+    else if constexpr ( record_type<T> ) return _::flat_one(KUMI_FWD(t));
     else
     {
       return kumi::apply( [](auto&&... m)
@@ -47,31 +130,35 @@ namespace kumi
 
                             return cat( v_or_t(KUMI_FWD(m))... );
                           }
-                        , KUMI_FWD(ts)
+                        , KUMI_FWD(t)
                         );
     }
   }
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief Recursively converts a tuple of tuples into a tuple of all elements.
+  //! @brief Recursively converts a product type of product types into a product type of all elements.
   //!
-  //! Recursively converts a tuple of tuples `t` into a tuple of all elements of said tuples.
-  //! If the Callable object f is provided, non-tuple elements are processed by `f` before being
-  //! inserted.
+  //! Recursively converts a product type of product types `t` into a product type of all elements of 
+  //! said product types.
+  //! 
+  //! If the Callable object f is provided, non-product type elements are processed by `f` before 
+  //! being inserted.
   //!
-  //! @param ts Tuple to flatten
+  //! @note There is a semantic difference between record and tuples flattening.
+  //!
+  //! @param t  Product type to flatten
   //! @param f  Optional Callable object to apply when a sub-tuple is flattened
-  //! @return A tuple composed of all elements of t flattened recursively
+  //! @return   A tuple composed of all elements of t flattened recursively
   //!
   //! ## Helper type
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<product_type Tuple, typename Func = void> struct flatten_all;
+  //!   template<product_type T, typename Func = void> struct flatten_all;
   //!
-  //!   template<product_type Tuple, typename Func = void>
-  //!   using flatten_all_t = typename flatten_all<Tuple, Func>::type;
+  //!   template<product_type T, typename Func = void>
+  //!   using flatten_all_t = typename flatten_all<T, Func>::type;
   //! }
   //! @endcode
   //!
@@ -80,10 +167,11 @@ namespace kumi
   //! ## Example
   //! @include doc/flatten_all.cpp
   //================================================================================================
-  template<product_type Tuple, typename Func>
-  [[nodiscard]] KUMI_ABI constexpr auto flatten_all(Tuple&& ts, Func&& f)
+  template<product_type T, typename Func>
+  [[nodiscard]] KUMI_ABI constexpr auto flatten_all(T && t, Func && f)
   {
-    if constexpr(sized_product_type<Tuple,0>) return ts;
+    if constexpr(sized_product_type<T,0>) return t;
+    else if constexpr ( record_type<T> ) return _::flat_map<none>(KUMI_FWD(t), KUMI_FWD(f));
     else
     {
       return kumi::apply( [&](auto&&... m)
@@ -98,15 +186,16 @@ namespace kumi
 
                             return cat( v_or_t(KUMI_FWD(m))... );
                           }
-                        , KUMI_FWD(ts)
+                        , KUMI_FWD(t)
                         );
     }
   }
 
   /// @overload
-  template<product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto flatten_all(Tuple&& ts)
+  template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto flatten_all(T && t)
   {
-    if constexpr(sized_product_type<Tuple,0>) return ts;
+    if constexpr(sized_product_type<T,0>) return t;
+    else if constexpr ( record_type<T> ) return _::flat<none>(KUMI_FWD(t));
     else
     {
       return kumi::apply( [](auto&&... m)
@@ -119,7 +208,7 @@ namespace kumi
 
                             return cat( v_or_t(KUMI_FWD(m))... );
                           }
-                        , KUMI_FWD(ts)
+                        , KUMI_FWD(t)
                         );
     }
   }
@@ -127,42 +216,42 @@ namespace kumi
 
   namespace result
   {
-    template<product_type Tuple> struct flatten
+    template<product_type T> struct flatten
     {
-      using type = decltype( kumi::flatten( std::declval<Tuple>() ) );
+      using type = decltype( kumi::flatten( std::declval<T>() ) );
     };
 
-    template<product_type Tuple, typename Func = void> struct flatten_all
+    template<product_type T, typename Func = void> struct flatten_all
     {
-      using type = decltype( kumi::flatten_all( std::declval<Tuple>(), std::declval<Func>() ) );
+      using type = decltype( kumi::flatten_all( std::declval<T>(), std::declval<Func>() ) );
     };
 
-    template<product_type Tuple> struct flatten_all<Tuple>
+    template<product_type T> struct flatten_all<T>
     {
-      using type = decltype( kumi::flatten_all( std::declval<Tuple>() ) );
+      using type = decltype( kumi::flatten_all( std::declval<T>() ) );
     };
 
-    template<product_type Tuple> using flatten_t      = typename flatten<Tuple>::type;
+    template<product_type T> using flatten_t      = typename flatten<T>::type;
 
-    template<product_type Tuple, typename Func = void>
-    using flatten_all_t  = typename flatten_all<Tuple, Func>::type;
+    template<product_type T, typename Func = void>
+    using flatten_all_t  = typename flatten_all<T, Func>::type;
   }
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief Convert a kumi::product_type to a flat tuple of pointers to each its components.
+  //! @brief Convert a kumi::product_type to a flat product type of pointers to each its components.
   //!
-  //! @param ts Tuple to convert
-  //! @return A flat tuple composed of pointers to each elements of t.
+  //! @param t  Product type to convert
+  //! @return   A flat product_type composed of pointers to each elements of t.
   //!
   //! ## Helper type
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<product_type Tuple> struct as_flat_ptr;
+  //!   template<product_type T> struct as_flat_ptr;
   //!
-  //!   template<product_type Tuple>
-  //!   using as_flat_ptr_t = typename as_flat_ptr<Tuple>::type;
+  //!   template<product_type T>
+  //!   using as_flat_ptr_t = typename as_flat_ptr<T>::type;
   //! }
   //! @endcode
   //!
@@ -171,10 +260,10 @@ namespace kumi
   //! ## Example
   //! @include doc/as_flat_ptr.cpp
   //================================================================================================
-  template<product_type Tuple>
-  [[nodiscard]] KUMI_ABI auto as_flat_ptr(Tuple&& ts) noexcept
+  template<product_type T>
+  [[nodiscard]] KUMI_ABI auto as_flat_ptr(T && t) noexcept
   {
-    return kumi::flatten_all(KUMI_FWD(ts), [](auto& m) { return &m; });
+    return kumi::flatten_all(KUMI_FWD(t), [](auto& m) { return &m; });
   }
 
   namespace result

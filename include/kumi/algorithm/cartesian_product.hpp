@@ -59,7 +59,7 @@ namespace kumi
   //================================================================================================
   template<product_type... Ts> 
   [[nodiscard]] KUMI_ABI constexpr auto cartesian_product( Ts &&... ts )
-  requires ((!record_type<Ts> && ...) || (record_type<Ts> && ...))
+  requires ( follows_same_semantic<Ts...> )
   {
     using res_type = result::common_product_type_t<std::remove_cvref_t<Ts>...>;
     if constexpr (sizeof...(Ts)==0) return tuple{};

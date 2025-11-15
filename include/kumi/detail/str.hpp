@@ -51,46 +51,26 @@ namespace kumi
         return os << '\'' << s.value() << '\'';
     }
   };
- 
-  //template<str... Strs>
-  //requires ( (((Strs.size()-1) + ... )+1) < str::max_size )
-  //[[nodiscard]] KUMI_ABI constexpr auto merge_str()
-  //{
-  //  struct { std::uint8_t count = {}; char t[((Strs.size()-1) + ...)+1]; } that;
+   
+  template<str... Strs>
+  requires ( (Strs.size() + ...) < str::max_size )
+  [[nodiscard]] KUMI_ABI constexpr auto concatenate_str()
+  {
+    constexpr auto nb_strs = sizeof...(Strs);
+    struct { std::uint8_t count = {}; char t[(Strs.size() + ...)]; } that;
 
-  //  auto fill = [&]<std::size_t...N>(str current, std::index_sequence<N...>)
-  //  {
-  //    ((that.t[that.count++] = current.data_[N]), ...);
-  //  };
-
-  //  [&]<std::size_t...I>(std::index_sequence<I...>)
-  //  {
-  //    ((fill(Strs, std::make_index_sequence<Strs.size()-1>{})), ...);
-  //  }(std::make_index_sequence<sizeof...(Strs)>{});
-  //  that.t[that.count++] = '\0';
-  //  
-  //  return str(that.t);
-  //};
-
-  //template<str... Strs>
-  //requires ( (Strs.size() + ...) < str::max_size )
-  //[[nodiscard]] KUMI_ABI constexpr auto concatenate_str()
-  //{
-  //  constexpr auto nb_strs = sizeof...(Strs);
-  //  struct { std::uint8_t count = {}; char t[(Strs.size() + ...)]; } that;
-
-  //  auto fill = [&]<std::size_t...N>(str current, std::index_sequence<N...>)
-  //  {
-  //    ((that.t[that.count++] = current.data_[N]), ...);
-  //  };
-  //  
-  //  [&]<std::size_t...I>(std::index_sequence<I...>)
-  //  {
-  //    ((fill(Strs, std::make_index_sequence<Strs.size()-1>{}), 
-  //      (I+1 < nb_strs ? (that.t[that.count++]='.', 0) : (that.t[that.count++]='\0',0))
-  //    ), ...);
-  //  }(std::make_index_sequence<nb_strs>{});
-  //  
-  //  return str(that.t);
-  //};
+    auto fill = [&]<std::size_t...N>(str current, std::index_sequence<N...>)
+    {
+      ((that.t[that.count++] = current.data_[N]), ...);
+    };
+    
+    [&]<std::size_t...I>(std::index_sequence<I...>)
+    {
+      ((fill(Strs, std::make_index_sequence<Strs.size()-1>{}), 
+        (I+1 < nb_strs ? (that.t[that.count++]='.', 0) : (that.t[that.count++]='\0',0))
+      ), ...);
+    }(std::make_index_sequence<nb_strs>{});
+    
+    return str(that.t);
+  };
 }
