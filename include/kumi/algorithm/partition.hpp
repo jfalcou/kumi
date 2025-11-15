@@ -17,7 +17,7 @@ namespace kumi
     {
       KUMI_ABI constexpr auto operator()() const noexcept 
       {
-        struct { std::size_t count = {}, cut = {}, t[1+kumi::size<T>::value]; } that{};
+        struct { std::size_t count = {}, cut = {}, t[1+size_v<T>]; } that{};
 
         auto locate = [&]<std::size_t... I>(std::index_sequence<I...>)
         {
@@ -26,7 +26,7 @@ namespace kumi
           ((!Pred<raw_element_t<I,T>>::value ? (that.t[that.count++] = I) : I),...);
         };
 
-        locate(std::make_index_sequence<kumi::size<T>::value>{});
+        locate(std::make_index_sequence<size_v<T>>{});
         return that;
       }
     };

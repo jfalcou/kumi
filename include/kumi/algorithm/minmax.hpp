@@ -114,7 +114,6 @@ namespace kumi
   template<product_type T, typename F>
   [[nodiscard]] KUMI_ABI constexpr auto max_flat(T && t, F f) noexcept
   {
-    if constexpr ( record_type<T> ) return max_flat( values_of(KUMI_FWD(t)), f);
     auto flat_t = kumi::flatten_all(KUMI_FWD(t));
     return max(flat_t, f);
   }
@@ -245,7 +244,6 @@ namespace kumi
   template<product_type T, typename F>
   [[nodiscard]] KUMI_ABI constexpr auto min_flat(T && t, F f) noexcept
   {
-    if constexpr ( record_type<T> ) return min_flat( values_of(KUMI_FWD(t)), f);
     auto flat_t = kumi::flatten_all(KUMI_FWD(t));
     return min(flat_t, f);
   }
