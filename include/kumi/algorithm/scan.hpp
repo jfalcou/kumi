@@ -69,7 +69,7 @@ namespace kumi
   template<typename Function, product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_left(Function && f, T && t, Value init)
   {
-    if constexpr ( record_type<T> ) return inclusive_scan_left(KUMI_FWD(f), KUMI_FWD(t).values, init);
+    if constexpr ( record_type<T> ) return inclusive_scan_left(KUMI_FWD(f), values_of(KUMI_FWD(t)), init);
     else if constexpr(sized_product_type<T,0>) return tuple{};
     else
     {
@@ -116,7 +116,7 @@ namespace kumi
   template<monoid M, sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_left(M && m, T && t)
   {
-         if constexpr ( record_type<T> ) return inclusive_scan_left(KUMI_FWD(m), KUMI_FWD(t).values);
+         if constexpr ( record_type<T> ) return inclusive_scan_left(KUMI_FWD(m), values_of(KUMI_FWD(t)));
     else if constexpr(sized_product_type<T,1>) return KUMI_FWD(t);
     else return inclusive_scan_left(KUMI_FWD(m), KUMI_FWD(t), m.identity);
   }
@@ -153,7 +153,7 @@ namespace kumi
   template<typename Function, product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_left(Function && f, T && t, Value init)
   {
-    if constexpr ( record_type<T> ) return exclusive_scan_left(KUMI_FWD(f), KUMI_FWD(t).values, init);
+    if constexpr ( record_type<T> ) return exclusive_scan_left(KUMI_FWD(f), values_of(KUMI_FWD(t)), init);
     else if constexpr(sized_product_type<T,0>) return tuple{init};
     else
     {
@@ -199,7 +199,7 @@ namespace kumi
   template<monoid M, sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_left(M && m, T && t)
   {
-    if constexpr ( record_type<T> ) return exclusive_scan_left(KUMI_FWD(m), KUMI_FWD(t).values);
+    if constexpr ( record_type<T> ) return exclusive_scan_left(KUMI_FWD(m), values_of(KUMI_FWD(t)));
     else if constexpr(sized_product_type<T,1>) return tuple(m.identity, get<0>(KUMI_FWD(t)));
     else return exclusive_scan_left(KUMI_FWD(m), KUMI_FWD(t), m.identity);
   }
@@ -237,7 +237,7 @@ namespace kumi
   template<typename Function, product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_right(Function && f, T && t, Value init)
   {
-    if constexpr ( record_type<T> ) return inclusive_scan_right(KUMI_FWD(f), KUMI_FWD(t).values, init);
+    if constexpr ( record_type<T> ) return inclusive_scan_right(KUMI_FWD(f), values_of(KUMI_FWD(t)), init);
     else if constexpr( sized_product_type<T,0> ) return tuple{};
     else
     {
@@ -284,7 +284,7 @@ namespace kumi
   template<monoid M, sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_right(M && m, T && t)
   {
-    if constexpr ( record_type<T> ) return inclusive_scan_right(KUMI_FWD(m), KUMI_FWD(t).values);
+    if constexpr ( record_type<T> ) return inclusive_scan_right(KUMI_FWD(m), values_of(KUMI_FWD(t)));
     else if constexpr(sized_product_type<T,1>) return KUMI_FWD(t);
     else return inclusive_scan_right(KUMI_FWD(m), KUMI_FWD(t), m.identity);
   }
@@ -321,7 +321,7 @@ namespace kumi
   template<typename Function, product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_right(Function && f, T && t, Value init)
   {
-    if constexpr ( record_type<T> ) return exclusive_scan_right(KUMI_FWD(f), KUMI_FWD(t).values, init);
+    if constexpr ( record_type<T> ) return exclusive_scan_right(KUMI_FWD(f), values_of(KUMI_FWD(t)), init);
     else if constexpr( sized_product_type<T,0> ) return tuple{init};
     else
     {
@@ -367,7 +367,7 @@ namespace kumi
   template<monoid M, sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_right(M && m, T && t)
   {
-    if constexpr ( record_type<T> ) return exclusive_scan_right(KUMI_FWD(m), KUMI_FWD(t).values);
+    if constexpr ( record_type<T> ) return exclusive_scan_right(KUMI_FWD(m), values_of(KUMI_FWD(t)));
     else if constexpr (sized_product_type<T,1>) return tuple{get<0>(KUMI_FWD(t)), m.identity};
     else return kumi::exclusive_scan_right(KUMI_FWD(m), KUMI_FWD(t), m.identity);
   }
