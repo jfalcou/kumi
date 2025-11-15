@@ -13,6 +13,7 @@
 #include <kumi/detail/stdfix.hpp>
 #include <kumi/detail/binder.hpp>
 #include <kumi/detail/field_capture.hpp>
+#include <kumi/detail/streamable.hpp>
 #include <kumi/utils.hpp>
 
 #include <iosfwd>
@@ -383,7 +384,7 @@ namespace kumi
       os << "( ";
       [&]<std::size_t...I>(std::index_sequence<I...>)
       {
-        ((os << t[index<I>] << " "), ...);
+        ((os << _::make_streamable( t[index<I>] ) << " "), ...);
       }(std::make_index_sequence<size_v<decltype(t)>>{});
       os << ')';
 
