@@ -33,6 +33,7 @@ namespace kumi
 #include <kumi/algorithm/meta.hpp>
 #include <kumi/algorithm/back-front.hpp>
 #include <kumi/algorithm/cartesian_product.hpp>
+#include <kumi/algorithm/cast.hpp>
 #include <kumi/algorithm/cat.hpp>
 #include <kumi/algorithm/convert.hpp>
 #include <kumi/algorithm/extract.hpp>
