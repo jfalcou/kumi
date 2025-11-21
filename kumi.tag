@@ -1776,6 +1776,13 @@
       <arglist>(Ts...) -&gt; indexes_t&lt; Ts... &gt;</arglist>
     </member>
     <member kind="function">
+      <type>auto</type>
+      <name>kumi::_::make_streamable</name>
+      <anchorfile>group__utility_ga887c8b81e291a506cd119c794ca4b727.html</anchorfile>
+      <anchor>ga887c8b81e291a506cd119c794ca4b727</anchor>
+      <arglist>(T const &amp;e)</arglist>
+    </member>
+    <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::literals::operator&quot;&quot;_c</name>
       <anchorfile>group__utility_ga60825dffaa5ee2c50e1d1a24057bdcf1.html</anchorfile>
