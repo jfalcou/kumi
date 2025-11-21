@@ -137,7 +137,7 @@ namespace kumi
           constexpr auto field = get<I>(fields);
           f
           (
-            field.value(),
+            field,
             get<field>(KUMI_FWD(t)),
             get<field>(KUMI_FWD(ts))...
           );

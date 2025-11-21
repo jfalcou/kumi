@@ -7,6 +7,7 @@
 //==================================================================================================
 #define TTS_MAIN
 #include <kumi/kumi.hpp>
+#include <string_view>
 #include <tts/tts.hpp>
 
 struct A { void operator()(auto&&) & {} };
@@ -80,7 +81,7 @@ TTS_CASE("Check for_each_field behavior")
   auto t = kumi::record {"a"_f = 1, "ab"_f = 3., "cr"_f = 3.4f, "de"_f = '5'};
   kumi::for_each_field(
       [](auto name, auto &m) {
-        if ( name.compare("a") == 0){
+        if ( name == "a"){
           m++;}
         else
           m--;
@@ -93,8 +94,8 @@ TTS_CASE("Check for_each_field behavior")
   TTS_EQUAL(get<"de"_f>(t), '4');
   
   kumi::for_each_field(
-      [](auto name, auto &m, auto n) {
-        if ( name.starts_with('a') )
+      [](kumi::str name, auto &m, auto n) {
+        if (name.as<std::string_view>().starts_with('a') )
           m *= n;
         else
           m += n;
@@ -112,8 +113,8 @@ TTS_CASE("Check for_each_field constexpr behavior")
   constexpr auto t = []() {
     auto it = kumi::record {"arg"_f = 1, "beg"_f = 2., "crf"_f = 3.4f, "deg"_f = '5'};
     kumi::for_each_field(
-        [](auto name, auto &m) {
-          if ( name.ends_with('g') )
+        [](kumi::str name, auto &m) {
+          if ( name.as<std::string_view>().ends_with("g") )
             m++;
           else
             m--;
@@ -130,8 +131,9 @@ TTS_CASE("Check for_each_field constexpr behavior")
   constexpr auto t2 = []() {
     auto it = kumi::record {"actually"_f = 1, "bike"_f = 2., "what"_f = 3.4f, "delicious"_f = '5'};
     kumi::for_each_field(
-        [](auto name, auto &m, auto n) {
-          if ( name.starts_with('a') || name.ends_with('t') )
+        [](kumi::str name, auto &m, auto n) {
+          auto s = name.as<std::string_view>(); 
+          if ( s.starts_with('a') || s.ends_with('t') )
             m *= n;
           else
             m +=n;
