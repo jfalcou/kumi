@@ -28,9 +28,10 @@ namespace kumi
     char            data_[max_size+1];
     std::uint8_t    size_;
 
+    // -1 to be on par with std::string
     template<std::size_t N, std::size_t... Is> requires ( N <= max_size )
     constexpr str(const char (&s)[N], std::index_sequence<Is...>)
-        : data_{s[Is]...}, size_(N)
+        : data_{s[Is]...}, size_(N-1)
     {}
 
     template <std::size_t N> requires ( N <= max_size )
@@ -38,9 +39,11 @@ namespace kumi
         : str{s, std::make_index_sequence<N>{}}
     {}
 
-    // There is a minus 1 to ease out conversion to string view, size() represent visible characters 
-    KUMI_ABI constexpr std::size_t  size() const { return size_-1; }
-    KUMI_ABI constexpr auto         data() const { return data_; }
+    KUMI_ABI constexpr std::size_t  size() const noexcept { return size_; }
+    KUMI_ABI constexpr auto         data() const noexcept { return data_; }
+
+    template<typename T>    requires requires { T{ data_, size_ }; }
+    KUMI_ABI constexpr auto as() const { return T{ data_, size_ }; }
 
     KUMI_ABI friend constexpr auto operator <=>(str const&, str const&) noexcept = default;
 
