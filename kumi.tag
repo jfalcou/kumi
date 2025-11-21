@@ -753,6 +753,10 @@
     <filename>conceptkumi_1_1equivalent.html</filename>
   </compound>
   <compound kind="concept">
+    <name>kumi::follows_same_semantic</name>
+    <filename>conceptkumi_1_1follows__same__semantic.html</filename>
+  </compound>
+  <compound kind="concept">
     <name>kumi::has_named_fields</name>
     <filename>conceptkumi_1_1has__named__fields.html</filename>
   </compound>
@@ -851,6 +855,7 @@
     <concept>kumi::contains_field</concept>
     <concept>kumi::equivalent</concept>
     <concept>kumi::named_equality_comparable</concept>
+    <concept>kumi::follows_same_semantic</concept>
     <concept>kumi::compatible_product_types</concept>
     <member kind="function">
       <type>constexpr auto</type>
@@ -897,9 +902,9 @@
     <member kind="function">
       <type>auto</type>
       <name>as_flat_ptr</name>
-      <anchorfile>group__generators_gace4e200f0703bc8ea12f1b43995b69bf.html</anchorfile>
-      <anchor>gace4e200f0703bc8ea12f1b43995b69bf</anchor>
-      <arglist>(Tuple &amp;&amp;ts) noexcept</arglist>
+      <anchorfile>group__generators_ga418f0a47f05b67dbb354d274dee63e4e.html</anchorfile>
+      <anchor>ga418f0a47f05b67dbb354d274dee63e4e</anchor>
+      <arglist>(T &amp;&amp;t) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
@@ -939,16 +944,16 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>cartesian_product</name>
-      <anchorfile>group__generators_ga1a62cf631e1471cf1da2b2f7ae2120b0.html</anchorfile>
-      <anchor>ga1a62cf631e1471cf1da2b2f7ae2120b0</anchor>
+      <anchorfile>group__generators_ga4d1776863d20d012aedf130ead1db453.html</anchorfile>
+      <anchor>ga4d1776863d20d012aedf130ead1db453</anchor>
       <arglist>(Ts &amp;&amp;... ts)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>cat</name>
-      <anchorfile>group__generators_ga884527f38c96496070b3554a3e93edef.html</anchorfile>
-      <anchor>ga884527f38c96496070b3554a3e93edef</anchor>
-      <arglist>(Tuples &amp;&amp;... ts)</arglist>
+      <anchorfile>group__generators_gab6e93bf9bc4d4efb456d07eb820d594e.html</anchorfile>
+      <anchor>gab6e93bf9bc4d4efb456d07eb820d594e</anchor>
+      <arglist>(Ts &amp;&amp;... ts)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1016,23 +1021,23 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>flatten</name>
-      <anchorfile>group__generators_ga8352f3f917d14811d3d476490b2030d5.html</anchorfile>
-      <anchor>ga8352f3f917d14811d3d476490b2030d5</anchor>
-      <arglist>(Tuple &amp;&amp;ts)</arglist>
+      <anchorfile>group__generators_ga6a021e42590689a905a2d8268c860838.html</anchorfile>
+      <anchor>ga6a021e42590689a905a2d8268c860838</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>flatten_all</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a16916472ef4928dc9ed24a99cc4da97f</anchor>
-      <arglist>(Tuple &amp;&amp;ts)</arglist>
+      <anchor>a7fcee37f7e0ccc2adad9f91fa48fd34b</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>flatten_all</name>
-      <anchorfile>group__generators_ga152d59e645273cd17b762b839db88dbb.html</anchorfile>
-      <anchor>ga152d59e645273cd17b762b839db88dbb</anchor>
-      <arglist>(Tuple &amp;&amp;ts, Func &amp;&amp;f)</arglist>
+      <anchorfile>group__generators_ga5c0915917db751d43c4a07eb884945cc.html</anchorfile>
+      <anchor>ga5c0915917db751d43c4a07eb884945cc</anchor>
+      <arglist>(T &amp;&amp;t, Func &amp;&amp;f)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1359,9 +1364,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>transpose</name>
-      <anchorfile>group__generators_ga56ab12227886a7d1084a1aec4ed91ce2.html</anchorfile>
-      <anchor>ga56ab12227886a7d1084a1aec4ed91ce2</anchor>
-      <arglist>(Tuple &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_ga30ecc238fb6ffcfdf9701c80e88e498d.html</anchorfile>
+      <anchor>ga30ecc238fb6ffcfdf9701c80e88e498d</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1387,22 +1392,22 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>zip</name>
-      <anchorfile>group__generators_gaaee402643bed969fbbb612275045251e.html</anchorfile>
-      <anchor>gaaee402643bed969fbbb612275045251e</anchor>
+      <anchorfile>group__generators_ga47ba3094d9bdaeeb08ca289578710d91.html</anchorfile>
+      <anchor>ga47ba3094d9bdaeeb08ca289578710d91</anchor>
       <arglist>(T0 &amp;&amp;t0, Ts &amp;&amp;... ts)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>zip_max</name>
-      <anchorfile>group__generators_gaa88769b0ab4df8413d2516f4a97dd2e6.html</anchorfile>
-      <anchor>gaa88769b0ab4df8413d2516f4a97dd2e6</anchor>
+      <anchorfile>group__generators_ga0f9c5fa8dd048452b74552e65af8978c.html</anchorfile>
+      <anchor>ga0f9c5fa8dd048452b74552e65af8978c</anchor>
       <arglist>(T0 &amp;&amp;t0, Ts &amp;&amp;...ts)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>zip_min</name>
-      <anchorfile>group__generators_ga020c663548b5fa2dc8185366765bfa15.html</anchorfile>
-      <anchor>ga020c663548b5fa2dc8185366765bfa15</anchor>
+      <anchorfile>group__generators_ga4d79fad3c079dcc6714a6796b21e8177.html</anchorfile>
+      <anchor>ga4d79fad3c079dcc6714a6796b21e8177</anchor>
       <arglist>(T0 &amp;&amp;t0, Ts &amp;&amp;...ts)</arglist>
     </member>
     <member kind="function">
@@ -2100,23 +2105,23 @@
     <member kind="function">
       <type>auto</type>
       <name>kumi::as_flat_ptr</name>
-      <anchorfile>group__generators_gace4e200f0703bc8ea12f1b43995b69bf.html</anchorfile>
-      <anchor>gace4e200f0703bc8ea12f1b43995b69bf</anchor>
-      <arglist>(Tuple &amp;&amp;ts) noexcept</arglist>
+      <anchorfile>group__generators_ga418f0a47f05b67dbb354d274dee63e4e.html</anchorfile>
+      <anchor>ga418f0a47f05b67dbb354d274dee63e4e</anchor>
+      <arglist>(T &amp;&amp;t) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::cartesian_product</name>
-      <anchorfile>group__generators_ga1a62cf631e1471cf1da2b2f7ae2120b0.html</anchorfile>
-      <anchor>ga1a62cf631e1471cf1da2b2f7ae2120b0</anchor>
+      <anchorfile>group__generators_ga4d1776863d20d012aedf130ead1db453.html</anchorfile>
+      <anchor>ga4d1776863d20d012aedf130ead1db453</anchor>
       <arglist>(Ts &amp;&amp;... ts)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::cat</name>
-      <anchorfile>group__generators_ga884527f38c96496070b3554a3e93edef.html</anchorfile>
-      <anchor>ga884527f38c96496070b3554a3e93edef</anchor>
-      <arglist>(Tuples &amp;&amp;... ts)</arglist>
+      <anchorfile>group__generators_gab6e93bf9bc4d4efb456d07eb820d594e.html</anchorfile>
+      <anchor>gab6e93bf9bc4d4efb456d07eb820d594e</anchor>
+      <arglist>(Ts &amp;&amp;... ts)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -2156,16 +2161,16 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::flatten</name>
-      <anchorfile>group__generators_ga8352f3f917d14811d3d476490b2030d5.html</anchorfile>
-      <anchor>ga8352f3f917d14811d3d476490b2030d5</anchor>
-      <arglist>(Tuple &amp;&amp;ts)</arglist>
+      <anchorfile>group__generators_ga6a021e42590689a905a2d8268c860838.html</anchorfile>
+      <anchor>ga6a021e42590689a905a2d8268c860838</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::flatten_all</name>
-      <anchorfile>group__generators_ga152d59e645273cd17b762b839db88dbb.html</anchorfile>
-      <anchor>ga152d59e645273cd17b762b839db88dbb</anchor>
-      <arglist>(Tuple &amp;&amp;ts, Func &amp;&amp;f)</arglist>
+      <anchorfile>group__generators_ga5c0915917db751d43c4a07eb884945cc.html</anchorfile>
+      <anchor>ga5c0915917db751d43c4a07eb884945cc</anchor>
+      <arglist>(T &amp;&amp;t, Func &amp;&amp;f)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -2254,9 +2259,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::transpose</name>
-      <anchorfile>group__generators_ga56ab12227886a7d1084a1aec4ed91ce2.html</anchorfile>
-      <anchor>ga56ab12227886a7d1084a1aec4ed91ce2</anchor>
-      <arglist>(Tuple &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_ga30ecc238fb6ffcfdf9701c80e88e498d.html</anchorfile>
+      <anchor>ga30ecc238fb6ffcfdf9701c80e88e498d</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -2275,22 +2280,22 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::zip</name>
-      <anchorfile>group__generators_gaaee402643bed969fbbb612275045251e.html</anchorfile>
-      <anchor>gaaee402643bed969fbbb612275045251e</anchor>
+      <anchorfile>group__generators_ga47ba3094d9bdaeeb08ca289578710d91.html</anchorfile>
+      <anchor>ga47ba3094d9bdaeeb08ca289578710d91</anchor>
       <arglist>(T0 &amp;&amp;t0, Ts &amp;&amp;... ts)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::zip_max</name>
-      <anchorfile>group__generators_gaa88769b0ab4df8413d2516f4a97dd2e6.html</anchorfile>
-      <anchor>gaa88769b0ab4df8413d2516f4a97dd2e6</anchor>
+      <anchorfile>group__generators_ga0f9c5fa8dd048452b74552e65af8978c.html</anchorfile>
+      <anchor>ga0f9c5fa8dd048452b74552e65af8978c</anchor>
       <arglist>(T0 &amp;&amp;t0, Ts &amp;&amp;...ts)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::zip_min</name>
-      <anchorfile>group__generators_ga020c663548b5fa2dc8185366765bfa15.html</anchorfile>
-      <anchor>ga020c663548b5fa2dc8185366765bfa15</anchor>
+      <anchorfile>group__generators_ga4d79fad3c079dcc6714a6796b21e8177.html</anchorfile>
+      <anchor>ga4d79fad3c079dcc6714a6796b21e8177</anchor>
       <arglist>(T0 &amp;&amp;t0, Ts &amp;&amp;...ts)</arglist>
     </member>
   </compound>
@@ -2386,6 +2391,7 @@
     <concept>kumi::contains_field</concept>
     <concept>kumi::equivalent</concept>
     <concept>kumi::named_equality_comparable</concept>
+    <concept>kumi::follows_same_semantic</concept>
     <concept>kumi::compatible_product_types</concept>
   </compound>
   <compound kind="group">

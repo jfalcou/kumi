@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::zip</title>
+<title>kumi: kumi::follows_same_semantic Concept Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__generators_gaaee402643bed969fbbb612275045251e.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('conceptkumi_1_1follows__same__semantic.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -120,92 +120,33 @@ $(document).ready(function(){initNavTree('group__generators_gaaee402643bed969fbb
 </div>
 </div>
 
+<div class="header">
+  <div class="headertitle"><div class="title">kumi::follows_same_semantic Concept Reference<div class="ingroups"><a class="el" href="group__concepts.html">Tuple Related Concepts</a></div></div></div>
+</div><!--header-->
 <div class="contents">
-<a id="gaaee402643bed969fbbb612275045251e" name="gaaee402643bed969fbbb612275045251e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaaee402643bed969fbbb612275045251e">&#9670;&#160;</a></span>zip()</h2>
 
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;product_type T0, sized_product_type&lt; size_v&lt; <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T0</a> &gt; &gt;... Ts&gt; <br />
-requires ( compatible_product_types&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T0</a>, Ts...&gt; )</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a> kumi::zip </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T0</a> &amp;&amp;&#160;</td>
-          <td class="paramname"><em>t0</em>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Ts</a> &amp;&amp;...&#160;</td>
-          <td class="paramname"><em>ts</em>&#160;</td>
-        </tr>
-        <tr>
-          <td></td>
-          <td>)</td>
-          <td></td><td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p>Concept specifying if a pack of types follows the same semantic.  
+<a href="conceptkumi_1_1follows__same__semantic.html#details">More...</a></p>
 
-<p>Constructs a tuple where the ith element is the tuple of all ith elements of ts... </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">t0</td><td>Tuple to convert </td></tr>
-    <tr><td class="paramname">ts</td><td>Tuples to convert </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The tuple of all combination of elements from t0, ts...</dd></dl>
-<p>@ note Every inner tuple should be of the same sizes, otherwise see <code>zip_min</code> or <code>zip_max</code></p>
-<h2><a class="anchor" id="autotoc_md120"></a>
-Helper type</h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;product_type Tuple&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__generators_gaaee402643bed969fbbb612275045251e.html#gaaee402643bed969fbbb612275045251e">zip</a>;</div>
-<div class="line"> </div>
-<div class="line">  <span class="keyword">template</span>&lt;product_type Tuple&gt;</div>
-<div class="line">  <span class="keyword">using </span>zip_t = <span class="keyword">typename</span> zip&lt;Tuple&gt;::type;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__generators_gaaee402643bed969fbbb612275045251e_html_gaaee402643bed969fbbb612275045251e"><div class="ttname"><a href="group__generators_gaaee402643bed969fbbb612275045251e.html#gaaee402643bed969fbbb612275045251e">kumi::zip</a></div><div class="ttdeci">constexpr auto zip(T0 &amp;&amp;t0, Ts &amp;&amp;... ts)</div><div class="ttdoc">Constructs a tuple where the ith element is the tuple of all ith elements of ts...</div><div class="ttdef"><b>Definition</b> zip.hpp:89</div></div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__generators_gaaee402643bed969fbbb612275045251e.html#gaaee402643bed969fbbb612275045251e" title="Constructs a tuple where the ith element is the tuple of all ith elements of ts...">kumi::zip</a></p>
-<h2><a class="anchor" id="autotoc_md121"></a>
-Example</h2>
-<div class="fragment"><div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">main</a>()</div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">nbrs</a>  = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1,2,3};</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">ltrs</a>  = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="charliteral">&#39;a&#39;</span>,<span class="charliteral">&#39;b&#39;</span>,<span class="charliteral">&#39;c&#39;</span>};</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">ratio</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{0.1,0.01,0.001};</div>
-<div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">r</a> = <a class="code hl_function" href="group__generators_gaaee402643bed969fbbb612275045251e.html#gaaee402643bed969fbbb612275045251e">kumi::zip</a>( <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">nbrs</a>, <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">ltrs</a>, <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">ratio</a> );</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">r</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">}</div>
+<p><code>#include &lt;kumi/utils/concepts.hpp&gt;</code></p>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Concept specifying if a pack of types follows the same semantic. </p>
+<p>A pack of type <code>Ts</code> models <code><a class="el" href="conceptkumi_1_1follows__same__semantic.html" title="Concept specifying if a pack of types follows the same semantic.">kumi::follows_same_semantic</a></code> if all of the types comply to the product type semantic and none comply to the record type semantic or if they all comply to the record type semantic. </p>
+</div><h2 class="groupheader">Concept definition</h2>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Ts</a>&gt;</div>
+<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1follows__same__semantic.html">kumi::follows_same_semantic</a> =  (( <a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type&lt;Ts&gt;</a> &amp;&amp; !<a class="code hl_concept" href="conceptkumi_1_1record__type.html">record_type&lt;Ts&gt;</a>) &amp;&amp; ... ) </div>
+<div class="line">    || ((<a class="code hl_concept" href="conceptkumi_1_1record__type.html">record_type&lt;Ts&gt;</a> &amp;&amp; ...))</div>
+<div class="ttc" id="aconceptkumi_1_1follows__same__semantic_html"><div class="ttname"><a href="conceptkumi_1_1follows__same__semantic.html">kumi::follows_same_semantic</a></div><div class="ttdoc">Concept specifying if a pack of types follows the same semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:257</div></div>
+<div class="ttc" id="aconceptkumi_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1product__type.html">kumi::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:34</div></div>
+<div class="ttc" id="aconceptkumi_1_1record__type_html"><div class="ttname"><a href="conceptkumi_1_1record__type.html">kumi::record_type</a></div><div class="ttdoc">Concept specifying a type follows the Record Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:44</div></div>
 <div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:73</div></div>
-<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:36</div></div>
-</div><!-- fragment --> 
-</div>
-</div>
-</div><!-- contents -->
+</div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li>
+    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li><li class="navelem"><a class="el" href="conceptkumi_1_1follows__same__semantic.html">follows_same_semantic</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->
