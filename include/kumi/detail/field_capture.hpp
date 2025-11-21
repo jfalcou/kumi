@@ -10,6 +10,7 @@
 #include <kumi/detail/abi.hpp>
 #include <kumi/detail/str.hpp>
 #include <kumi/detail/unit_type.hpp>
+#include <kumi/detail/streamable.hpp>
 
 namespace kumi
 {
@@ -44,7 +45,7 @@ namespace kumi
     friend std::basic_ostream<CharT,Traits> &operator<<( std::basic_ostream<CharT, Traits> &os
                                                        , field_capture const& w) noexcept
     {
-      return os << ID << " : " << w.value;
+      return os << ID << " : " << _::make_streamable( w.value );
     }
   };
     
