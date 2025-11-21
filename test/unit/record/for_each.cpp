@@ -114,7 +114,7 @@ TTS_CASE("Check for_each_field constexpr behavior")
     auto it = kumi::record {"arg"_f = 1, "beg"_f = 2., "crf"_f = 3.4f, "deg"_f = '5'};
     kumi::for_each_field(
         [](kumi::str name, auto &m) {
-          if ( name.as<std::string_view>().ends_with("g\0") )
+          if ( name.as<std::string_view>().ends_with("g") )
             m++;
           else
             m--;

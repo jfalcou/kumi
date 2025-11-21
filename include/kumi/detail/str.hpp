@@ -59,11 +59,11 @@ namespace kumi
   };
    
   template<str... Strs>
-  requires ( (Strs.size() + ...) < str::max_size )
+  requires ( (Strs.size() + ... + sizeof...(Strs)) < str::max_size )
   [[nodiscard]] KUMI_ABI constexpr auto concatenate_str()
   {
     constexpr auto nb_strs = sizeof...(Strs);
-    struct { std::uint8_t count = {}; char t[(Strs.size() + ...)]; } that;
+    struct { std::uint8_t count = {}; char t[(Strs.size() + ... + sizeof...(Strs))]; } that;
 
     auto fill = [&]<std::size_t...N>(str current, std::index_sequence<N...>)
     {
@@ -72,11 +72,11 @@ namespace kumi
     
     [&]<std::size_t...I>(std::index_sequence<I...>)
     {
-      ((fill(Strs, std::make_index_sequence<Strs.size()-1>{}), 
+      ((fill(Strs, std::make_index_sequence<Strs.size()>{}), 
         (I+1 < nb_strs ? (that.t[that.count++]='.', 0) : (that.t[that.count++]='\0',0))
       ), ...);
     }(std::make_index_sequence<nb_strs>{});
     
-    return str(that.t);
+    return str{that.t};
   };
 }
