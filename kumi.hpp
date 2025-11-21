@@ -104,6 +104,17 @@ namespace kumi
   };
   inline constexpr unit none = {};
 }
+#include <iosfwd>
+namespace kumi::_
+{
+  template<typename T>
+  auto make_streamable(T const& e)
+  {
+         if constexpr( requires(std::ostream& os){ os << e;}) return e;
+    else if constexpr( requires{ as_streamable(e); }        ) return as_streamable(e);
+    else                                                      return "(unknown)";
+  }
+}
 namespace kumi
 {
   template<str ID, typename T>
@@ -117,7 +128,7 @@ namespace kumi
     friend std::basic_ostream<CharT,Traits> &operator<<( std::basic_ostream<CharT, Traits> &os
                                                        , field_capture const& w) noexcept
     {
-      return os << ID << " : " << w.value;
+      return os << ID << " : " << _::make_streamable( w.value );
     }
   };
   namespace _
@@ -1449,7 +1460,7 @@ namespace kumi
       os << "( ";
       [&]<std::size_t...I>(std::index_sequence<I...>)
       {
-        ((os << t[index<I>] << " "), ...);
+        ((os << _::make_streamable( t[index<I>] ) << " "), ...);
       }(std::make_index_sequence<size_v<decltype(t)>>{});
       os << ')';
       return os;
