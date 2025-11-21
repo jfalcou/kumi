@@ -247,16 +247,27 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup concepts
-  //! @brief Concept specifying if two product types are comparable by matching name
+  //! @brief Concept specifying if a pack of types follows the same semantic. 
   //!
-  //! A type `T` models `kumi::named_equality_comparable<T,U>` if it's a product_type that satisfies
-  //! kumi::equivalent<T,U> and if each of its fields satisfies kumi::equality_comparable with
-  //! the corresponding field in `U`
+  //! A pack of type `Ts` models `kumi::follows_same_semantic` if all of the types comply to the 
+  //! product type semantic and none comply to the record type semantic or if they all comply to 
+  //! the record type semantic.
+  //================================================================================================
+  template<typename... Ts>
+  concept follows_same_semantic = (( product_type<Ts> && !record_type<Ts>) && ... ) 
+    || ((record_type<Ts> && ...));
+
+  //================================================================================================
+  //! @ingroup concepts
+  //! @brief Concept specifying if two product types are compatibles. 
+  //!
+  //! A pack of types `Ts` models `kumi::compatible_product_types` if it models 
+  //! `kumi::follows_same_semantic` and if all types model `kumi::equivalent` if the types are 
+  //! `record types`
   //================================================================================================
   template<typename T, typename... Us>
-  concept compatible_product_types = (product_type<T> && ( product_type<Us> && ...))  &&
-    ((!record_type<T> && (!record_type<Us> && ...))
-    || (record_type<T> && (record_type<Us> && ...) 
-    && (equivalent<std::remove_cvref_t<T>, std::remove_cvref_t<Us>> && ...))
-  );
+  concept compatible_product_types = (follows_same_semantic<T,Us...> 
+    && ((!record_type<T>) || (equivalent<std::remove_cvref_t<T>, std::remove_cvref_t<Us>> && ...)));
+
+  
 }
