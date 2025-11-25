@@ -43,8 +43,8 @@ namespace kumi
 #   define KUMI_ABI KUMI_CUDA __forceinline
 #endif
 #include <iosfwd>
-#include <string_view>
 #include <cstdint>
+#include <utility>
 namespace kumi 
 {
   struct str 
@@ -52,41 +52,46 @@ namespace kumi
     static constexpr std::size_t max_size = 64;
     char            data_[max_size+1];
     std::uint8_t    size_;
-    template<std::size_t N, std::size_t... Is>
+    template<std::size_t N, std::size_t... Is> requires ( N <= max_size )
     constexpr str(const char (&s)[N], std::index_sequence<Is...>)
-        : data_{s[Is]...}, size_(N)
+        : data_{s[Is]...}, size_(N-1)
     {}
-    template <std::size_t N>
+    template <std::size_t N> requires ( N <= max_size )
     constexpr str(const char (&s)[N])
         : str{s, std::make_index_sequence<N>{}}
     {}
-    KUMI_ABI constexpr std::size_t       size()  const { return size_; }
-    KUMI_ABI constexpr std::string_view  value() const { return std::string_view(&data_[0], size_-1); }
+    KUMI_ABI constexpr std::size_t  size() const noexcept { return size_; }
+    KUMI_ABI constexpr auto         data() const noexcept { return data_; }
+    template<typename T>    requires requires { T{ data_, size_ }; }
+    KUMI_ABI constexpr auto as() const { return T{ data_, size_ }; }
     KUMI_ABI friend constexpr auto operator <=>(str const&, str const&) noexcept = default;
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT,Traits> &operator<<(  std::basic_ostream<CharT,Traits> &os
                                                         , str const& s) noexcept
     {
-        return os << '\'' << s.value() << '\'';
+        os << '\'';
+        for(std::size_t i=0;i<s.size();++i)
+            os << s.data_[i];
+        return os << '\'';
     }
   };
   template<str... Strs>
-  requires ( (Strs.size() + ...) < str::max_size )
+  requires ( (Strs.size() + ... + sizeof...(Strs)) < str::max_size )
   [[nodiscard]] KUMI_ABI constexpr auto concatenate_str()
   {
     constexpr auto nb_strs = sizeof...(Strs);
-    struct { std::uint8_t count = {}; char t[(Strs.size() + ...)]; } that;
+    struct { std::uint8_t count = {}; char t[(Strs.size() + ... + sizeof...(Strs))]; } that;
     auto fill = [&]<std::size_t...N>(str current, std::index_sequence<N...>)
     {
       ((that.t[that.count++] = current.data_[N]), ...);
     };
     [&]<std::size_t...I>(std::index_sequence<I...>)
     {
-      ((fill(Strs, std::make_index_sequence<Strs.size()-1>{}), 
+      ((fill(Strs, std::make_index_sequence<Strs.size()>{}), 
         (I+1 < nb_strs ? (that.t[that.count++]='.', 0) : (that.t[that.count++]='\0',0))
       ), ...);
     }(std::make_index_sequence<nb_strs>{});
-    return str(that.t);
+    return str{that.t};
   };
 }
 #include <iosfwd>
@@ -1075,7 +1080,7 @@ namespace kumi
   template<std::size_t N> struct index_t
   {
     static constexpr auto value = N;
-    constexpr inline      operator std::size_t() const noexcept { return N; }
+    constexpr inline operator std::size_t() const noexcept { return N; }
   };
   template<std::size_t N> inline constexpr index_t<N> const index = {};
   template<str ID> struct field_name
@@ -2284,7 +2289,7 @@ namespace kumi
           constexpr auto field = get<I>(fields);
           f
           (
-            field.value(),
+            field,
             get<field>(KUMI_FWD(t)),
             get<field>(KUMI_FWD(ts))...
           );
@@ -2702,7 +2707,7 @@ namespace kumi
       auto const call = [&]<std::size_t N, typename... Ts>(index_t<N>, Ts &&... args)
       {
         constexpr auto field = name_of(as<element_t<N,Tuple>>{});
-        return field_name<field>{} = f(field.value(), (get<field>(args))...);
+        return field_name<field>{} = f(field, (get<field>(args))...);
       };
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
