@@ -38,8 +38,8 @@ namespace kumi
   template<typename Function, product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto fold_left(Function f, T&& t, Value init)
   {
-    if constexpr ( record_type<Tuple> ) return fold_left(f, values_of(KUMI_FWD(t)), init);
-    else if constexpr(sized_product_type<Tuple,0>) return init;
+    if constexpr ( record_type<T> ) return fold_left(f, values_of(KUMI_FWD(t)), init);
+    else if constexpr(sized_product_type<T,0>) return init;
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
@@ -78,8 +78,8 @@ namespace kumi
   template<typename Function, sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto fold_left(Function f, T&& t)
   {
-    if constexpr ( record_type<Tuple> ) return fold_left(f, values_of(KUMI_FWD(t)));
-    else if constexpr(sized_product_type<Tuple,1>) return get<0>(KUMI_FWD(t));
+    if constexpr ( record_type<T> ) return fold_left(f, values_of(KUMI_FWD(t)));
+    else if constexpr(sized_product_type<T,1>) return get<0>(KUMI_FWD(t));
     else
     {
       auto&&[heads, tail] = split(KUMI_FWD(t), index<2>);
@@ -116,8 +116,8 @@ namespace kumi
   template<typename Function, product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto fold_right(Function f, T&& t, Value init)
   {
-    if constexpr ( record_type<Tuple> ) return fold_right(f, values_of(KUMI_FWD(t)), init);
-    else if constexpr(size<Tuple>::value ==0) return init;
+    if constexpr ( record_type<T> ) return fold_right(f, values_of(KUMI_FWD(t)), init);
+    else if constexpr(size<T>::value ==0) return init;
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>)
@@ -156,8 +156,8 @@ namespace kumi
   template<typename Function, sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto fold_right(Function f, T&& t)
   {
-    if constexpr ( record_type<Tuple> ) return fold_right(f, values_of(KUMI_FWD(t)));
-    else if constexpr(sized_product_type<Tuple,1>) return get<0>(KUMI_FWD(t));
+    if constexpr ( record_type<T> ) return fold_right(f, values_of(KUMI_FWD(t)));
+    else if constexpr(sized_product_type<T,1>) return get<0>(KUMI_FWD(t));
     else
     {
       auto&&[head, tails] = split(KUMI_FWD(t), index<size_v<T>-2>);

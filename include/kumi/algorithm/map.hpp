@@ -52,9 +52,9 @@ namespace kumi
     {
       auto const call = [&]<std::size_t N, typename... Us>(index_t<N>, Us &&... args)
       {
-        if constexpr ( record_type<Tuple> )
+        if constexpr ( record_type<T> )
         {
-          constexpr auto field = name_of( as<element_t<N,Tuple>>{} );
+          constexpr auto field = name_of( as<element_t<N,T>>{} );
           return field_name<field>{} = f(get<field>(args)...);
         }
         else return f(get<N>(KUMI_FWD(args))...);
@@ -171,7 +171,7 @@ namespace kumi
   //!   template<typename Function, product_type T, product_type... Ts> struct map_field;
   //!
   //!   template<typename Function, product_type T, product_type... Ts>
-  //!   using map_field_t = typename map_field<Function,Tuple>::type;
+  //!   using map_field_t = typename map_field<Function,T>::type;
   //! }
   //! @endcode
   //!
@@ -180,23 +180,23 @@ namespace kumi
   //! ## Example
   //! @include doc/record/map_field.cpp
   //================================================================================================ 
-  template<record_type Tuple, typename Function, sized_product_type<size<Tuple>::value>... Tuples>
-  requires ( compatible_product_types<Tuple, Tuples...> )
-  constexpr auto map_field(Function     f,Tuple  &&t0,Tuples &&...others)
+  template<record_type T, typename Function, sized_product_type<size<T>::value>... Ts>
+  requires ( compatible_product_types<T, Ts...> )
+  constexpr auto map_field(Function f,T && t0,Ts &&... others)
   {
-    if constexpr(sized_product_type<Tuple,0>) return _::builder<Tuple>::make();
+    if constexpr(sized_product_type<T,0>) return _::builder<T>::make();
     else
     {
-      auto const call = [&]<std::size_t N, typename... Ts>(index_t<N>, Ts &&... args)
+      auto const call = [&]<std::size_t N, typename... Us>(index_t<N>, Us &&... args)
       {
-        constexpr auto field = name_of(as<element_t<N,Tuple>>{});
+        constexpr auto field = name_of(as<element_t<N,T>>{});
         return field_name<field>{} = f(field, (get<field>(args))...);
       };
 
       return [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        return _::builder<Tuple>::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
-      }(std::make_index_sequence<size<Tuple>::value>());
+        return _::builder<T>::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
+      }(std::make_index_sequence<size<T>::value>());
     }
   }
 
