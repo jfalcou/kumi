@@ -21,10 +21,10 @@ namespace kumi
   template<typename Pred, product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto all_of(T && t, Pred p) noexcept
   {
-    if constexpr ( record_type<T> ) return all_of( values_of(KUMI_FWD(ts)), p);
+    if constexpr ( record_type<T> ) return all_of( values_of(KUMI_FWD(t)), p);
     else if constexpr(sized_product_type<T,0>) return true;
-    else if constexpr(sized_product_type<T,1>) return p(get<0>(KUMI_FWD(ts)));
-    else return kumi::apply( [&](auto &&... m){ return (p(m) && ...); }, KUMI_FWD(ts) );
+    else if constexpr(sized_product_type<T,1>) return p(get<0>(KUMI_FWD(t)));
+    else return kumi::apply( [&](auto &&... m){ return (p(m) && ...); }, KUMI_FWD(t) );
   }
 
   //================================================================================================
@@ -38,10 +38,10 @@ namespace kumi
   template<product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto all_of(T && t) noexcept
   {
-    if constexpr ( record_type<T> ) return all_of( values_of(KUMI_FWD(ts)) );
+    if constexpr ( record_type<T> ) return all_of( values_of(KUMI_FWD(t)) );
     else if constexpr(sized_product_type<T,0>) return true;
-    else if constexpr(sized_product_type<T,1>) return !!get<0>(KUMI_FWD(ts));
-    else return kumi::apply( [&](auto &&... m) { return (m && ...); }, KUMI_FWD(ts) );
+    else if constexpr(sized_product_type<T,1>) return !!get<0>(KUMI_FWD(t));
+    else return kumi::apply( [&](auto &&... m) { return (m && ...); }, KUMI_FWD(t) );
   }
 
   //================================================================================================
@@ -56,10 +56,10 @@ namespace kumi
   template<typename Pred, product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto any_of(T && t, Pred p) noexcept
   {
-    if constexpr ( record_type<T> ) return any_of( values_of(KUMI_FWD(ts)), p);
+    if constexpr ( record_type<T> ) return any_of( values_of(KUMI_FWD(t)), p);
     else if constexpr(sized_product_type<T,0>) return true;
-    else if constexpr(sized_product_type<T,1>) return p(get<0>(KUMI_FWD(ts)));
-    else return kumi::apply( [&](auto &&... m) { return (p(m) || ...); }, KUMI_FWD(ts) );
+    else if constexpr(sized_product_type<T,1>) return p(get<0>(KUMI_FWD(t)));
+    else return kumi::apply( [&](auto &&... m) { return (p(m) || ...); }, KUMI_FWD(t) );
   }
 
   //================================================================================================
@@ -73,10 +73,10 @@ namespace kumi
   template<product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto any_of(T && t) noexcept
   {
-    if constexpr ( record_type<T> ) return any_of( values_of(KUMI_FWD(ts)) );
+    if constexpr ( record_type<T> ) return any_of( values_of(KUMI_FWD(t)) );
     else if constexpr(sized_product_type<T,0>) return false;
-    else if constexpr(sized_product_type<T,1>) return !!get<0>(KUMI_FWD(ts));
-    else return kumi::apply( [&](auto &&... m) { return (m || ...); }, KUMI_FWD(ts) );
+    else if constexpr(sized_product_type<T,1>) return !!get<0>(KUMI_FWD(t));
+    else return kumi::apply( [&](auto &&... m) { return (m || ...); }, KUMI_FWD(t) );
   }
 
   //================================================================================================
@@ -98,7 +98,7 @@ namespace kumi
   //! @ingroup queries
   //! @brief  Checks no elements of a tuple are true.
   //! @param  t Product Type to process.
-  //! @return The evaluation of `!any_of(ts)`.
+  //! @return The evaluation of `!any_of(t)`.
   //! ## Example:
   //! @include doc/none_of.cpp
   //================================================================================================

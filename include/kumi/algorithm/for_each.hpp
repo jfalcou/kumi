@@ -38,7 +38,7 @@ namespace kumi
     {
       [&]<std::size_t... I>(std::index_sequence<I...>)
       {
-        constexpr auto fields = members_of( as<Tuple>{} );
+        constexpr auto fields = members_of( as<T>{} );
         [[maybe_unused]] auto call = [&]<typename M>(M)
                                         { 
                                           constexpr auto field = get<M::value>(fields); 
@@ -131,7 +131,7 @@ namespace kumi
     if constexpr(sized_product_type<T,0>) return;
     else
     {
-      constexpr auto fields = members_of( as<Tuple>{} );
+      constexpr auto fields = members_of( as<T>{} );
       auto const invoker = [&]<std::size_t I>(std::integral_constant<std::size_t, I>)
       {
           constexpr auto field = get<I>(fields);

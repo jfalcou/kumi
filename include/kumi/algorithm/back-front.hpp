@@ -37,8 +37,8 @@ namespace kumi
   template<product_type T>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) front(T && t) requires( size_v<T> != 0)
   {
-    if constexpr(record_type<Tuple>)  return front( values_of(KUMI_FWD(t)) );
-    else                              return get<0>(KUMI_FWD(t));
+    if constexpr(record_type<T>)  return front( values_of(KUMI_FWD(t)) );
+    else                          return get<0>(KUMI_FWD(t));
   }
 
   //================================================================================================
@@ -67,8 +67,8 @@ namespace kumi
   template<product_type T>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) back(T && t) requires( size_v<T> != 0)
   {
-    if constexpr(record_type<Tuple>)  return back( values_of(KUMI_FWD(t)) );
-    else                              return get<size_v<T>-1>(KUMI_FWD(t));
+    if constexpr(record_type<T>)  return back( values_of(KUMI_FWD(t)) );
+    else                          return get<size_v<T>-1>(KUMI_FWD(t));
   }
 
   namespace result
