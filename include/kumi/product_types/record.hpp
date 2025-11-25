@@ -383,7 +383,7 @@ namespace kumi
   //!
   //! @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
   //! @tparam   I Compile-time index of the field to access
-  //! @param    t Record to index
+  //! @param    r Record to index
   //! @return   A reference to the selected field of t.
   //!
   //! ## Example:
@@ -443,7 +443,7 @@ namespace kumi
   //!
   //! @note Does not participate in overload resolution if the names are not unique
   //! @tparam   Name Non type template parameter name of the field to access
-  //! @param    t Record to index
+  //! @param    r Record to index
   //! @return   A reference to the element of the selected field of t.
   //!
   //! ## Example:
