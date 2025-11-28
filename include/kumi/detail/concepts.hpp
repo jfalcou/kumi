@@ -7,6 +7,7 @@
 //==================================================================================================
 #pragma once
 
+#include <concepts>
 #include <kumi/detail/stdfix.hpp>
 #include <kumi/utils/traits.hpp>
 #include <cstddef>
