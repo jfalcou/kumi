@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['value_0',['value',['../structkumi_1_1index__t.html#ab659f5d62c79ae49fe525448df86765b',1,'kumi::index_t']]]
+  ['multiplies_0',['multiplies',['../group__utility.html#gaaab79e5ddd9913e237c23b6ebbe0d274',1,'kumi::function']]]
 ];

@@ -164,7 +164,7 @@ requires ( <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A product type equivalent to product_type(t[index&lt;Idx&gt;]...);</dd></dl>
-<h2><a class="anchor" id="autotoc_md104"></a>
+<h2><a class="anchor" id="autotoc_md116"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
@@ -173,11 +173,11 @@ Helper type</h2>
 <div class="line">  <span class="keyword">template</span>&lt;<a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type</a> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Tuple</a>,std::size_t... <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Idx</a>&gt;</div>
 <div class="line">  <span class="keyword">using </span>reorder_fields_t = <span class="keyword">typename</span> <a class="code hl_function" href="group__generators_gacacb045909983a11d31bbe8d589b0260.html#gacacb045909983a11d31bbe8d589b0260">reorder_fields</a>&lt;<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Tuple</a>,<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Idx</a>...&gt;::type;</div>
 <div class="line">}</div>
-<div class="ttc" id="aconceptkumi_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1product__type.html">kumi::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:34</div></div>
+<div class="ttc" id="aconceptkumi_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1product__type.html">kumi::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:33</div></div>
 <div class="ttc" id="agroup__generators_gacacb045909983a11d31bbe8d589b0260_html_gacacb045909983a11d31bbe8d589b0260"><div class="ttname"><a href="group__generators_gacacb045909983a11d31bbe8d589b0260.html#gacacb045909983a11d31bbe8d589b0260">kumi::reorder_fields</a></div><div class="ttdeci">constexpr auto reorder_fields(Tuple &amp;&amp;t)</div><div class="ttdoc">Reorder elements of a kumi::record.</div><div class="ttdef"><b>Definition</b> reorder.hpp:110</div></div>
 <div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:73</div></div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__generators_gacacb045909983a11d31bbe8d589b0260.html#gacacb045909983a11d31bbe8d589b0260" title="Reorder elements of a kumi::record.">kumi::reorder_fields</a></p>
-<h2><a class="anchor" id="autotoc_md105"></a>
+<h2><a class="anchor" id="autotoc_md117"></a>
 Example</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>

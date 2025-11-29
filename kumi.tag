@@ -31,6 +31,39 @@
     <templarg>template&lt; typename... &gt; class Meta</templarg>
   </compound>
   <compound kind="class">
+    <name>kumi::boolean_and</name>
+    <filename>structkumi_1_1boolean__and.html</filename>
+    <member kind="variable" static="yes">
+      <type>static constexpr bool</type>
+      <name>identity</name>
+      <anchorfile>structkumi_1_1boolean__and.html</anchorfile>
+      <anchor>a6c913bae350931cb94b298fa084dc4dc</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>kumi::boolean_or</name>
+    <filename>structkumi_1_1boolean__or.html</filename>
+    <member kind="variable" static="yes">
+      <type>static constexpr bool</type>
+      <name>identity</name>
+      <anchorfile>structkumi_1_1boolean__or.html</anchorfile>
+      <anchor>a911bc467c38ab50adb4045058e5340be</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>kumi::boolean_xor</name>
+    <filename>structkumi_1_1boolean__xor.html</filename>
+    <member kind="variable" static="yes">
+      <type>static constexpr bool</type>
+      <name>identity</name>
+      <anchorfile>structkumi_1_1boolean__xor.html</anchorfile>
+      <anchor>a4278a7a826eea1d0843968167b7a458f</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
     <name>kumi::_::builder</name>
     <filename>structkumi_1_1___1_1builder.html</filename>
     <templarg>kumi::product_type T</templarg>
@@ -223,6 +256,28 @@
     <filename>structkumi_1_1member.html</filename>
     <templarg>std::size_t I</templarg>
     <templarg>typename T</templarg>
+  </compound>
+  <compound kind="class">
+    <name>kumi::numeric_add</name>
+    <filename>structkumi_1_1numeric__add.html</filename>
+    <member kind="variable" static="yes">
+      <type>static constexpr auto</type>
+      <name>identity</name>
+      <anchorfile>structkumi_1_1numeric__add.html</anchorfile>
+      <anchor>ab861a751b5a97864feb3e5241411158e</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>kumi::numeric_prod</name>
+    <filename>structkumi_1_1numeric__prod.html</filename>
+    <member kind="variable" static="yes">
+      <type>static constexpr auto</type>
+      <name>identity</name>
+      <anchorfile>structkumi_1_1numeric__prod.html</anchorfile>
+      <anchor>a88d04ea20fb36bc95950974133d88454</anchor>
+      <arglist></arglist>
+    </member>
   </compound>
   <compound kind="struct">
     <name>kumi::raw_element</name>
@@ -777,6 +832,10 @@
     <filename>conceptkumi_1_1is__fully__named.html</filename>
   </compound>
   <compound kind="concept">
+    <name>kumi::monoid</name>
+    <filename>conceptkumi_1_1monoid.html</filename>
+  </compound>
+  <compound kind="concept">
     <name>kumi::named_equality_comparable</name>
     <filename>conceptkumi_1_1named__equality__comparable.html</filename>
   </compound>
@@ -819,6 +878,9 @@
     <class kind="struct">kumi::all_uniques</class>
     <class kind="class">kumi::as</class>
     <class kind="struct">kumi::as_tuple</class>
+    <class kind="class">kumi::boolean_and</class>
+    <class kind="class">kumi::boolean_or</class>
+    <class kind="class">kumi::boolean_xor</class>
     <class kind="struct">kumi::element</class>
     <class kind="class">kumi::field_capture</class>
     <class kind="class">kumi::field_name</class>
@@ -828,6 +890,8 @@
     <class kind="struct">kumi::is_product_type</class>
     <class kind="struct">kumi::is_record_type</class>
     <class kind="struct">kumi::member</class>
+    <class kind="class">kumi::numeric_add</class>
+    <class kind="class">kumi::numeric_prod</class>
     <class kind="struct">kumi::raw_element</class>
     <class kind="struct">kumi::raw_member</class>
     <class kind="class">kumi::record</class>
@@ -857,6 +921,7 @@
     <concept>kumi::named_equality_comparable</concept>
     <concept>kumi::follows_same_semantic</concept>
     <concept>kumi::compatible_product_types</concept>
+    <concept>kumi::monoid</concept>
     <member kind="function">
       <type>constexpr auto</type>
       <name>all_of</name>
@@ -916,30 +981,44 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>bit_and</name>
-      <anchorfile>group__reductions_ga086ae741edfc80131295802c31e08af9.html</anchorfile>
-      <anchor>ga086ae741edfc80131295802c31e08af9</anchor>
-      <arglist>(Tuple &amp;&amp;t)</arglist>
+      <anchorfile>group__reductions_ga2249743d977a87399b3fd98b0cb2e55e.html</anchorfile>
+      <anchor>ga2249743d977a87399b3fd98b0cb2e55e</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>bit_and</name>
-      <anchorfile>group__reductions_ga491ecadaaedfe84e927302683f108625.html</anchorfile>
-      <anchor>ga491ecadaaedfe84e927302683f108625</anchor>
-      <arglist>(Tuple &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_ga14432e4394da47b90f34c962979da853.html</anchorfile>
+      <anchor>ga14432e4394da47b90f34c962979da853</anchor>
+      <arglist>(T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>bit_or</name>
-      <anchorfile>group__reductions_gad66c3ad56b3536942c960c2cad1fabcf.html</anchorfile>
-      <anchor>gad66c3ad56b3536942c960c2cad1fabcf</anchor>
-      <arglist>(Tuple &amp;&amp;t)</arglist>
+      <anchorfile>group__reductions_gaa7d3ae229843ffb2bbcabb1427ef4979.html</anchorfile>
+      <anchor>gaa7d3ae229843ffb2bbcabb1427ef4979</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>bit_or</name>
-      <anchorfile>group__reductions_ga74ca2a5811c0ba2e5b0c07f6aea15d90.html</anchorfile>
-      <anchor>ga74ca2a5811c0ba2e5b0c07f6aea15d90</anchor>
-      <arglist>(Tuple &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_ga4b48b6259301405bba1e0944ffa6e2c7.html</anchorfile>
+      <anchor>ga4b48b6259301405bba1e0944ffa6e2c7</anchor>
+      <arglist>(T &amp;&amp;t, Value init)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>bit_xor</name>
+      <anchorfile>group__reductions_ga19a1070aa59a1fd90bbf39b860058f9d.html</anchorfile>
+      <anchor>ga19a1070aa59a1fd90bbf39b860058f9d</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>bit_xor</name>
+      <anchorfile>group__reductions_ga521dcc4de231768115582401a1a0419b.html</anchorfile>
+      <anchor>ga521dcc4de231768115582401a1a0419b</anchor>
+      <arglist>(T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -982,6 +1061,34 @@
       <anchorfile>group__queries_gafb9e4c9675c1fccd1ba31f1b17ac1387.html</anchorfile>
       <anchor>gafb9e4c9675c1fccd1ba31f1b17ac1387</anchor>
       <arglist>(T &amp;&amp;ts, Pred p) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>exclusive_scan_left</name>
+      <anchorfile>group__reductions_ga4c7de497ac4fbf84207e8b5249e808a5.html</anchorfile>
+      <anchor>ga4c7de497ac4fbf84207e8b5249e808a5</anchor>
+      <arglist>(Function &amp;&amp;f, T &amp;&amp;t, Value init)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>exclusive_scan_left</name>
+      <anchorfile>group__reductions_ga3cba3a0d02a465184302a59f4d05bc89.html</anchorfile>
+      <anchor>ga3cba3a0d02a465184302a59f4d05bc89</anchor>
+      <arglist>(M &amp;&amp;m, T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>exclusive_scan_right</name>
+      <anchorfile>group__reductions_ga7ad77fdfc161a999369fde5f9006d561.html</anchorfile>
+      <anchor>ga7ad77fdfc161a999369fde5f9006d561</anchor>
+      <arglist>(Function &amp;&amp;f, T &amp;&amp;t, Value init)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>exclusive_scan_right</name>
+      <anchorfile>group__reductions_ga33f26f28d0909a45b8e2e62b39a8bf4e.html</anchorfile>
+      <anchor>ga33f26f28d0909a45b8e2e62b39a8bf4e</anchor>
+      <arglist>(M &amp;&amp;m, T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1042,30 +1149,30 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>fold_left</name>
-      <anchorfile>group__reductions_gaed0714239b395a2ac14d3a6a3ec3f44c.html</anchorfile>
-      <anchor>gaed0714239b395a2ac14d3a6a3ec3f44c</anchor>
-      <arglist>(Function f, Tuple &amp;&amp;t)</arglist>
+      <anchorfile>group__reductions_ga74e253f7967cc7f188a979551cf687ef.html</anchorfile>
+      <anchor>ga74e253f7967cc7f188a979551cf687ef</anchor>
+      <arglist>(Function f, T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>fold_left</name>
-      <anchorfile>group__reductions_gaf5c5a77520eb5db15716f55fdb413579.html</anchorfile>
-      <anchor>gaf5c5a77520eb5db15716f55fdb413579</anchor>
-      <arglist>(Function f, Tuple &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_ga0f786372596b4dd7b924bf944871d7ad.html</anchorfile>
+      <anchor>ga0f786372596b4dd7b924bf944871d7ad</anchor>
+      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>fold_right</name>
-      <anchorfile>group__reductions_ga20c7d2a3b7e7044f95ec352e64cd1b27.html</anchorfile>
-      <anchor>ga20c7d2a3b7e7044f95ec352e64cd1b27</anchor>
-      <arglist>(Function f, Tuple &amp;&amp;t)</arglist>
+      <anchorfile>group__reductions_ga0f30eadf94cf474e9e54f4b6d495f4c6.html</anchorfile>
+      <anchor>ga0f30eadf94cf474e9e54f4b6d495f4c6</anchor>
+      <arglist>(Function f, T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>fold_right</name>
-      <anchorfile>group__reductions_gaa2bdd088d82f635a5c52c6dd5bdeaaf2.html</anchorfile>
-      <anchor>gaa2bdd088d82f635a5c52c6dd5bdeaaf2</anchor>
-      <arglist>(Function f, Tuple &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_ga5842a04c6880086a9fb8f3a06bc81469.html</anchorfile>
+      <anchor>ga5842a04c6880086a9fb8f3a06bc81469</anchor>
+      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
       <type>constexpr void</type>
@@ -1108,6 +1215,34 @@
       <anchorfile>group__generators_gaf6a234ed8630b3928724cf8fefbc9c6d.html</anchorfile>
       <anchor>gaf6a234ed8630b3928724cf8fefbc9c6d</anchor>
       <arglist>(Function const &amp;f) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>inclusive_scan_left</name>
+      <anchorfile>group__reductions_ga2593e576e29c20d318f8e763e17c10ff.html</anchorfile>
+      <anchor>ga2593e576e29c20d318f8e763e17c10ff</anchor>
+      <arglist>(Function &amp;&amp;f, T &amp;&amp;t, Value init)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>inclusive_scan_left</name>
+      <anchorfile>group__reductions_ga18e1921f3f9aeb30ed0edf8ec9371577.html</anchorfile>
+      <anchor>ga18e1921f3f9aeb30ed0edf8ec9371577</anchor>
+      <arglist>(M &amp;&amp;m, T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>inclusive_scan_right</name>
+      <anchorfile>group__reductions_gac4836103eaea033fd6ce5e815d21b69a.html</anchorfile>
+      <anchor>gac4836103eaea033fd6ce5e815d21b69a</anchor>
+      <arglist>(Function &amp;&amp;f, T &amp;&amp;t, Value init)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>inclusive_scan_right</name>
+      <anchorfile>group__reductions_ga12e5013494b9498224e311c8cf51a76c.html</anchorfile>
+      <anchor>ga12e5013494b9498224e311c8cf51a76c</anchor>
+      <arglist>(M &amp;&amp;m, T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>consteval auto</type>
@@ -1171,6 +1306,20 @@
       <anchorfile>group__transforms_ga62f3925c2071557401ba32bde816e49c.html</anchorfile>
       <anchor>ga62f3925c2071557401ba32bde816e49c</anchor>
       <arglist>(Function f, Tuple &amp;&amp;t0, Tuples &amp;&amp;...others)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>map_reduce</name>
+      <anchorfile>group__reductions_ga954395275eacfb5006a6fb84c31707c3.html</anchorfile>
+      <anchor>ga954395275eacfb5006a6fb84c31707c3</anchor>
+      <arglist>(Function &amp;&amp;f, M &amp;&amp;m, T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>map_reduce</name>
+      <anchorfile>group__reductions_ga3bdf89343768fdae54a0e33b3240e607.html</anchorfile>
+      <anchor>ga3bdf89343768fdae54a0e33b3240e607</anchor>
+      <arglist>(Function &amp;&amp;f, M &amp;&amp;m, T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1280,16 +1429,16 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>prod</name>
-      <anchorfile>group__reductions_ga8f26159ad4592d129baf258026910f98.html</anchorfile>
-      <anchor>ga8f26159ad4592d129baf258026910f98</anchor>
-      <arglist>(Tuple &amp;&amp;t)</arglist>
+      <anchorfile>group__reductions_ga9c9775c7c76aebd9db20d0e44eec6034.html</anchorfile>
+      <anchor>ga9c9775c7c76aebd9db20d0e44eec6034</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>prod</name>
-      <anchorfile>group__reductions_ga19f0d8f804838dcc33eb3456358bf96f.html</anchorfile>
-      <anchor>ga19f0d8f804838dcc33eb3456358bf96f</anchor>
-      <arglist>(Tuple &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_gad87f59b6ce034ee52f7bf15e67cf7450.html</anchorfile>
+      <anchor>gad87f59b6ce034ee52f7bf15e67cf7450</anchor>
+      <arglist>(T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1304,6 +1453,20 @@
       <anchorfile>group__generators_ga8f969f49a94fb50a8cb6bf27bf78b6b7.html</anchorfile>
       <anchor>ga8f969f49a94fb50a8cb6bf27bf78b6b7</anchor>
       <arglist>(Tuple &amp;&amp;t, T &amp;&amp;v)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>reduce</name>
+      <anchorfile>group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html</anchorfile>
+      <anchor>ga812fe60401e985cc2ebd067bc42f0354</anchor>
+      <arglist>(M &amp;&amp;m, T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>reduce</name>
+      <anchorfile>group__reductions_ga7d1398c56521f65375bb2f2b28e945cb.html</anchorfile>
+      <anchor>ga7d1398c56521f65375bb2f2b28e945cb</anchor>
+      <arglist>(M &amp;&amp;m, T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1343,16 +1506,16 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>sum</name>
-      <anchorfile>group__reductions_gab24f978a257b3974311f19306f211d87.html</anchorfile>
-      <anchor>gab24f978a257b3974311f19306f211d87</anchor>
-      <arglist>(Tuple &amp;&amp;t)</arglist>
+      <anchorfile>group__reductions_gaa96dfd76fe746fe28e1a833ad76c59fc.html</anchorfile>
+      <anchor>gaa96dfd76fe746fe28e1a833ad76c59fc</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>sum</name>
-      <anchorfile>group__reductions_gafbf960e6940d260757abde26e985c878.html</anchorfile>
-      <anchor>gafbf960e6940d260757abde26e985c878</anchor>
-      <arglist>(Tuple &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_ga183fa966de706e5e6c78a9cc50202fe8.html</anchorfile>
+      <anchor>ga183fa966de706e5e6c78a9cc50202fe8</anchor>
+      <arglist>(T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1735,9 +1898,14 @@
     <title>Helper Types and Functions</title>
     <filename>group__utility.html</filename>
     <class kind="struct">kumi::as_tuple</class>
+    <class kind="class">kumi::boolean_and</class>
+    <class kind="class">kumi::boolean_or</class>
+    <class kind="class">kumi::boolean_xor</class>
     <class kind="class">kumi::field_name</class>
     <class kind="struct">kumi::index_t</class>
     <class kind="class">kumi::indexes_t</class>
+    <class kind="class">kumi::numeric_add</class>
+    <class kind="class">kumi::numeric_prod</class>
     <class kind="class">kumi::str</class>
     <class kind="class">kumi::unit</class>
     <member kind="function">
@@ -1811,6 +1979,27 @@
       <arglist>(Type &amp;&amp;t)</arglist>
     </member>
     <member kind="variable">
+      <type>constexpr boolean_and</type>
+      <name>kumi::function::bit_and</name>
+      <anchorfile>group__utility.html</anchorfile>
+      <anchor>gaa04ecc72014400d45d9ebb72bd7447cc</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr boolean_or</type>
+      <name>kumi::function::bit_or</name>
+      <anchorfile>group__utility.html</anchorfile>
+      <anchor>gac095643bedb84ce2b3fdf1bd0c4a9cc3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr boolean_xor</type>
+      <name>kumi::function::bit_xor</name>
+      <anchorfile>group__utility.html</anchorfile>
+      <anchor>gac2d793601af17db10563acf07dc1a29f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
       <type>constexpr auto</type>
       <name>kumi::field</name>
       <anchorfile>group__utility_ga6a8ab73e5c1f8c0f11501e253a37f686.html</anchorfile>
@@ -1825,10 +2014,24 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
+      <type>constexpr numeric_prod</type>
+      <name>kumi::function::multiplies</name>
+      <anchorfile>group__utility.html</anchorfile>
+      <anchor>gaaab79e5ddd9913e237c23b6ebbe0d274</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
       <type>constexpr unit</type>
       <name>kumi::none</name>
       <anchorfile>group__utility.html</anchorfile>
       <anchor>gabe662caa7eff683f6b085c7abb76391b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr numeric_add</type>
+      <name>kumi::function::plus</name>
+      <anchorfile>group__utility.html</anchorfile>
+      <anchor>gab5c0eb8022e7b2df33286d9a15247559</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -1967,58 +2170,128 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::bit_and</name>
-      <anchorfile>group__reductions_ga086ae741edfc80131295802c31e08af9.html</anchorfile>
-      <anchor>ga086ae741edfc80131295802c31e08af9</anchor>
-      <arglist>(Tuple &amp;&amp;t)</arglist>
+      <anchorfile>group__reductions_ga2249743d977a87399b3fd98b0cb2e55e.html</anchorfile>
+      <anchor>ga2249743d977a87399b3fd98b0cb2e55e</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::bit_and</name>
-      <anchorfile>group__reductions_ga491ecadaaedfe84e927302683f108625.html</anchorfile>
-      <anchor>ga491ecadaaedfe84e927302683f108625</anchor>
-      <arglist>(Tuple &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_ga14432e4394da47b90f34c962979da853.html</anchorfile>
+      <anchor>ga14432e4394da47b90f34c962979da853</anchor>
+      <arglist>(T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::bit_or</name>
-      <anchorfile>group__reductions_gad66c3ad56b3536942c960c2cad1fabcf.html</anchorfile>
-      <anchor>gad66c3ad56b3536942c960c2cad1fabcf</anchor>
-      <arglist>(Tuple &amp;&amp;t)</arglist>
+      <anchorfile>group__reductions_gaa7d3ae229843ffb2bbcabb1427ef4979.html</anchorfile>
+      <anchor>gaa7d3ae229843ffb2bbcabb1427ef4979</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::bit_or</name>
-      <anchorfile>group__reductions_ga74ca2a5811c0ba2e5b0c07f6aea15d90.html</anchorfile>
-      <anchor>ga74ca2a5811c0ba2e5b0c07f6aea15d90</anchor>
-      <arglist>(Tuple &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_ga4b48b6259301405bba1e0944ffa6e2c7.html</anchorfile>
+      <anchor>ga4b48b6259301405bba1e0944ffa6e2c7</anchor>
+      <arglist>(T &amp;&amp;t, Value init)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::bit_xor</name>
+      <anchorfile>group__reductions_ga19a1070aa59a1fd90bbf39b860058f9d.html</anchorfile>
+      <anchor>ga19a1070aa59a1fd90bbf39b860058f9d</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::bit_xor</name>
+      <anchorfile>group__reductions_ga521dcc4de231768115582401a1a0419b.html</anchorfile>
+      <anchor>ga521dcc4de231768115582401a1a0419b</anchor>
+      <arglist>(T &amp;&amp;t, Value init)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::exclusive_scan_left</name>
+      <anchorfile>group__reductions_ga4c7de497ac4fbf84207e8b5249e808a5.html</anchorfile>
+      <anchor>ga4c7de497ac4fbf84207e8b5249e808a5</anchor>
+      <arglist>(Function &amp;&amp;f, T &amp;&amp;t, Value init)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::exclusive_scan_left</name>
+      <anchorfile>group__reductions_ga3cba3a0d02a465184302a59f4d05bc89.html</anchorfile>
+      <anchor>ga3cba3a0d02a465184302a59f4d05bc89</anchor>
+      <arglist>(M &amp;&amp;m, T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::exclusive_scan_right</name>
+      <anchorfile>group__reductions_ga7ad77fdfc161a999369fde5f9006d561.html</anchorfile>
+      <anchor>ga7ad77fdfc161a999369fde5f9006d561</anchor>
+      <arglist>(Function &amp;&amp;f, T &amp;&amp;t, Value init)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::exclusive_scan_right</name>
+      <anchorfile>group__reductions_ga33f26f28d0909a45b8e2e62b39a8bf4e.html</anchorfile>
+      <anchor>ga33f26f28d0909a45b8e2e62b39a8bf4e</anchor>
+      <arglist>(M &amp;&amp;m, T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::fold_left</name>
-      <anchorfile>group__reductions_gaed0714239b395a2ac14d3a6a3ec3f44c.html</anchorfile>
-      <anchor>gaed0714239b395a2ac14d3a6a3ec3f44c</anchor>
-      <arglist>(Function f, Tuple &amp;&amp;t)</arglist>
+      <anchorfile>group__reductions_ga74e253f7967cc7f188a979551cf687ef.html</anchorfile>
+      <anchor>ga74e253f7967cc7f188a979551cf687ef</anchor>
+      <arglist>(Function f, T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::fold_left</name>
-      <anchorfile>group__reductions_gaf5c5a77520eb5db15716f55fdb413579.html</anchorfile>
-      <anchor>gaf5c5a77520eb5db15716f55fdb413579</anchor>
-      <arglist>(Function f, Tuple &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_ga0f786372596b4dd7b924bf944871d7ad.html</anchorfile>
+      <anchor>ga0f786372596b4dd7b924bf944871d7ad</anchor>
+      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::fold_right</name>
-      <anchorfile>group__reductions_ga20c7d2a3b7e7044f95ec352e64cd1b27.html</anchorfile>
-      <anchor>ga20c7d2a3b7e7044f95ec352e64cd1b27</anchor>
-      <arglist>(Function f, Tuple &amp;&amp;t)</arglist>
+      <anchorfile>group__reductions_ga0f30eadf94cf474e9e54f4b6d495f4c6.html</anchorfile>
+      <anchor>ga0f30eadf94cf474e9e54f4b6d495f4c6</anchor>
+      <arglist>(Function f, T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::fold_right</name>
-      <anchorfile>group__reductions_gaa2bdd088d82f635a5c52c6dd5bdeaaf2.html</anchorfile>
-      <anchor>gaa2bdd088d82f635a5c52c6dd5bdeaaf2</anchor>
-      <arglist>(Function f, Tuple &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_ga5842a04c6880086a9fb8f3a06bc81469.html</anchorfile>
+      <anchor>ga5842a04c6880086a9fb8f3a06bc81469</anchor>
+      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::inclusive_scan_left</name>
+      <anchorfile>group__reductions_ga2593e576e29c20d318f8e763e17c10ff.html</anchorfile>
+      <anchor>ga2593e576e29c20d318f8e763e17c10ff</anchor>
+      <arglist>(Function &amp;&amp;f, T &amp;&amp;t, Value init)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::inclusive_scan_left</name>
+      <anchorfile>group__reductions_ga18e1921f3f9aeb30ed0edf8ec9371577.html</anchorfile>
+      <anchor>ga18e1921f3f9aeb30ed0edf8ec9371577</anchor>
+      <arglist>(M &amp;&amp;m, T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::inclusive_scan_right</name>
+      <anchorfile>group__reductions_gac4836103eaea033fd6ce5e815d21b69a.html</anchorfile>
+      <anchor>gac4836103eaea033fd6ce5e815d21b69a</anchor>
+      <arglist>(Function &amp;&amp;f, T &amp;&amp;t, Value init)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::inclusive_scan_right</name>
+      <anchorfile>group__reductions_ga12e5013494b9498224e311c8cf51a76c.html</anchorfile>
+      <anchor>ga12e5013494b9498224e311c8cf51a76c</anchor>
+      <arglist>(M &amp;&amp;m, T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -2026,6 +2299,20 @@
       <anchorfile>group__reductions_gaf73310d42c59ac2d79ea21586ea46265.html</anchorfile>
       <anchor>gaf73310d42c59ac2d79ea21586ea46265</anchor>
       <arglist>(S1 &amp;&amp;s1, S2 &amp;&amp;s2, T init, Sum sum, Prod prod) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::map_reduce</name>
+      <anchorfile>group__reductions_ga954395275eacfb5006a6fb84c31707c3.html</anchorfile>
+      <anchor>ga954395275eacfb5006a6fb84c31707c3</anchor>
+      <arglist>(Function &amp;&amp;f, M &amp;&amp;m, T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::map_reduce</name>
+      <anchorfile>group__reductions_ga3bdf89343768fdae54a0e33b3240e607.html</anchorfile>
+      <anchor>ga3bdf89343768fdae54a0e33b3240e607</anchor>
+      <arglist>(Function &amp;&amp;f, M &amp;&amp;m, T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -2072,30 +2359,44 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::prod</name>
-      <anchorfile>group__reductions_ga8f26159ad4592d129baf258026910f98.html</anchorfile>
-      <anchor>ga8f26159ad4592d129baf258026910f98</anchor>
-      <arglist>(Tuple &amp;&amp;t)</arglist>
+      <anchorfile>group__reductions_ga9c9775c7c76aebd9db20d0e44eec6034.html</anchorfile>
+      <anchor>ga9c9775c7c76aebd9db20d0e44eec6034</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::prod</name>
-      <anchorfile>group__reductions_ga19f0d8f804838dcc33eb3456358bf96f.html</anchorfile>
-      <anchor>ga19f0d8f804838dcc33eb3456358bf96f</anchor>
-      <arglist>(Tuple &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_gad87f59b6ce034ee52f7bf15e67cf7450.html</anchorfile>
+      <anchor>gad87f59b6ce034ee52f7bf15e67cf7450</anchor>
+      <arglist>(T &amp;&amp;t, Value init)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::reduce</name>
+      <anchorfile>group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html</anchorfile>
+      <anchor>ga812fe60401e985cc2ebd067bc42f0354</anchor>
+      <arglist>(M &amp;&amp;m, T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::reduce</name>
+      <anchorfile>group__reductions_ga7d1398c56521f65375bb2f2b28e945cb.html</anchorfile>
+      <anchor>ga7d1398c56521f65375bb2f2b28e945cb</anchor>
+      <arglist>(M &amp;&amp;m, T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::sum</name>
-      <anchorfile>group__reductions_gab24f978a257b3974311f19306f211d87.html</anchorfile>
-      <anchor>gab24f978a257b3974311f19306f211d87</anchor>
-      <arglist>(Tuple &amp;&amp;t)</arglist>
+      <anchorfile>group__reductions_gaa96dfd76fe746fe28e1a833ad76c59fc.html</anchorfile>
+      <anchor>gaa96dfd76fe746fe28e1a833ad76c59fc</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::sum</name>
-      <anchorfile>group__reductions_gafbf960e6940d260757abde26e985c878.html</anchorfile>
-      <anchor>gafbf960e6940d260757abde26e985c878</anchor>
-      <arglist>(Tuple &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_ga183fa966de706e5e6c78a9cc50202fe8.html</anchorfile>
+      <anchor>ga183fa966de706e5e6c78a9cc50202fe8</anchor>
+      <arglist>(T &amp;&amp;t, Value init)</arglist>
     </member>
   </compound>
   <compound kind="group">
@@ -2400,6 +2701,7 @@
     <concept>kumi::named_equality_comparable</concept>
     <concept>kumi::follows_same_semantic</concept>
     <concept>kumi::compatible_product_types</concept>
+    <concept>kumi::monoid</concept>
   </compound>
   <compound kind="group">
     <name>traits</name>

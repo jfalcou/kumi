@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::bit_and</title>
+<title>kumi: kumi::inclusive_scan_right</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__reductions_ga491ecadaaedfe84e927302683f108625.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__reductions_gac4836103eaea033fd6ce5e815d21b69a.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,21 +121,27 @@ $(document).ready(function(){initNavTree('group__reductions_ga491ecadaaedfe84e92
 </div>
 
 <div class="contents">
-<a id="ga491ecadaaedfe84e927302683f108625" name="ga491ecadaaedfe84e927302683f108625"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga491ecadaaedfe84e927302683f108625">&#9670;&#160;</a></span>bit_and() <span class="overload">[2/2]</span></h2>
+<a id="gac4836103eaea033fd6ce5e815d21b69a" name="gac4836103eaea033fd6ce5e815d21b69a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac4836103eaea033fd6ce5e815d21b69a">&#9670;&#160;</a></span>inclusive_scan_right() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;product_type Tuple, <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">typename</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Value</a> &gt; </div>
+template&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">typename</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Function</a> , product_type T, <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">typename</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Value</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a> kumi::bit_and </td>
+          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a> kumi::inclusive_scan_right </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Tuple</a> &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Function</a> &amp;&amp;&#160;</td>
+          <td class="paramname"><em>f</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T</a> &amp;&amp;&#160;</td>
           <td class="paramname"><em>t</em>, </td>
         </tr>
         <tr>
@@ -157,27 +163,29 @@ template&lt;product_type Tuple, <a class="el" href="group__utility_gad8e73ef5a6e
 </table>
 </div><div class="memdoc">
 
-<p>Computes the bitwise AND of all elements. </p>
+<p>Computes the inclusive suffix scan of all elements of a product type using a non-tail recursive call. </p>
+<dl class="section note"><dt>Note</dt><dd>The first stored value is the result of the application of the function to the provided initial value and the last element of the product_type.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">t</td><td>Tuple to operate on </td></tr>
-    <tr><td class="paramname">init</td><td>Initial value of the product </td></tr>
+    <tr><td class="paramname">f</td><td>Binary callable function to apply </td></tr>
+    <tr><td class="paramname">t</td><td>Product type to operate on </td></tr>
+    <tr><td class="paramname">init</td><td>Optional initial value of the scan </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value of <code>get&lt;0&gt;(t) &amp; ... &amp; get&lt;N-1&gt;(t) &amp; init</code></dd></dl>
-<h2><a class="anchor" id="autotoc_md94"></a>
+<dl class="section return"><dt>Returns</dt><dd>A tuple of suffix partial accumulations where each element 'I' equals <code>f(get&lt;0&gt;(t), f(... , f(get&lt;N-1&gt;(t), init))</code></dd></dl>
+<h2><a class="anchor" id="autotoc_md130"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;product_type Tuple, <span class="keyword">typename</span> Value&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__reductions_ga491ecadaaedfe84e927302683f108625.html#ga491ecadaaedfe84e927302683f108625">bit_and</a>;</div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type Tuple, <span class="keyword">typename</span> Value&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__reductions_gac4836103eaea033fd6ce5e815d21b69a.html#gac4836103eaea033fd6ce5e815d21b69a">inclusive_scan_right</a>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">template</span>&lt;product_type Tuple, <span class="keyword">typename</span> Value&gt;</div>
-<div class="line">  <span class="keyword">using </span>prod_t = <span class="keyword">typename</span> bit_and_t&lt;Tuple,Value&gt;::type;</div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type Tuple, <span class="keyword">typename</span> Value&gt;</div>
+<div class="line">  <span class="keyword">using </span>inclusive_scan_right_t = <span class="keyword">typename</span> inclusive_scan_right&lt;Function,Tuple,Value&gt;::type;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__reductions_ga491ecadaaedfe84e927302683f108625_html_ga491ecadaaedfe84e927302683f108625"><div class="ttname"><a href="group__reductions_ga491ecadaaedfe84e927302683f108625.html#ga491ecadaaedfe84e927302683f108625">kumi::bit_and</a></div><div class="ttdeci">constexpr auto bit_and(Tuple &amp;&amp;t, Value init)</div><div class="ttdoc">Computes the bitwise AND of all elements.</div><div class="ttdef"><b>Definition</b> reduce.hpp:167</div></div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__reductions_ga491ecadaaedfe84e927302683f108625.html#ga491ecadaaedfe84e927302683f108625" title="Computes the bitwise AND of all elements.">kumi::bit_and</a></p>
-<h2><a class="anchor" id="autotoc_md95"></a>
+<div class="ttc" id="agroup__reductions_gac4836103eaea033fd6ce5e815d21b69a_html_gac4836103eaea033fd6ce5e815d21b69a"><div class="ttname"><a href="group__reductions_gac4836103eaea033fd6ce5e815d21b69a.html#gac4836103eaea033fd6ce5e815d21b69a">kumi::inclusive_scan_right</a></div><div class="ttdeci">constexpr auto inclusive_scan_right(Function &amp;&amp;f, T &amp;&amp;t, Value init)</div><div class="ttdoc">Computes the inclusive suffix scan of all elements of a product type using a non-tail recursive call.</div><div class="ttdef"><b>Definition</b> scan.hpp:238</div></div>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__reductions_gac4836103eaea033fd6ce5e815d21b69a.html#gac4836103eaea033fd6ce5e815d21b69a" title="Computes the inclusive suffix scan of all elements of a product type using a non-tail recursive call.">kumi::inclusive_scan_right</a></p>
+<h2><a class="anchor" id="autotoc_md131"></a>
 Example</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -185,12 +193,24 @@ Example</h2>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">main</a>()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{14,<span class="keywordtype">short</span>{7}, 255ULL};</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{2.,1,<span class="keywordtype">short</span>{55},<span class="charliteral">&#39;z&#39;</span>};</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga491ecadaaedfe84e927302683f108625.html#ga491ecadaaedfe84e927302683f108625">kumi::bit_and</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t</a>, 65535) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga491ecadaaedfe84e927302683f108625.html#ga491ecadaaedfe84e927302683f108625">kumi::bit_and</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">output</a> = <a class="code hl_function" href="group__reductions_gac4836103eaea033fd6ce5e815d21b69a.html#gac4836103eaea033fd6ce5e815d21b69a">kumi::inclusive_scan_right</a>( [](<span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">elt</a>, <span class="keyword">auto</span> acc) </div>
+<div class="line">                  { </div>
+<div class="line">                    <span class="keywordflow">return</span> acc + <span class="keyword">sizeof</span>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">elt</a>); </div>
+<div class="line">                  }</div>
+<div class="line">                  , <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t</a></div>
+<div class="line">                  , std::size_t{42}                </div>
+<div class="line">                );</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">output</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>; </div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">u</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1,3,2,4,0,5,9,6,7};</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_gac4836103eaea033fd6ce5e815d21b69a.html#gac4836103eaea033fd6ce5e815d21b69a">kumi::inclusive_scan_right</a>(<a class="code hl_variable" href="group__utility.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a>, <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">u</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:73</div></div>
+<div class="ttc" id="agroup__utility_html_gab5c0eb8022e7b2df33286d9a15247559"><div class="ttname"><a href="group__utility.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a></div><div class="ttdeci">constexpr numeric_add plus</div><div class="ttdoc">Forms a binary monoid callable that can be used in kumi::algoritm. It represents the addition.</div><div class="ttdef"><b>Definition</b> monoid.hpp:129</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:37</div></div>
 </div><!-- fragment --> 
 </div>
