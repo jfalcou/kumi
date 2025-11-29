@@ -13,7 +13,7 @@ int main()
 
   auto t = kumi::record{"a"_f = 2.,"b"_f = 1,"c"_f = short{55},"d"_f = 'z'};
 
-  auto output  = kumi::fold_right( [](auto a, auto m) { a.push_back(sizeof(m)); return a; }
+  auto output  = kumi::fold_right( [](auto m, auto a) { a.push_back(sizeof(m)); return a; }
                                 , t
                                 , std::vector<std::size_t>{}
                                 );
@@ -24,7 +24,7 @@ int main()
   auto u = kumi::record{"a"_f = 1,"b"_f = 3,"c"_f = 2,"d"_f = 4,"e"_f = 0,
                         "f"_f = 5,"g"_f = 9,"h"_f = 6,"i"_f = 7};
 
-  std::cout << kumi::fold_right(  [](auto acc, auto e)
+  std::cout << kumi::fold_right(  [](auto e, auto acc)
                                   {
                                       std::cout << '(' << acc << ',' << e << ")\n";
                                       return (e <acc) ? e : acc;

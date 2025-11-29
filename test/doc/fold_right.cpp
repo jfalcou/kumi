@@ -11,7 +11,7 @@ int main()
 {
   auto t = kumi::tuple{2.,1,short{55},'z'};
 
-  auto output  = kumi::fold_right( [](auto a, auto m) { a.push_back(sizeof(m)); return a; }
+  auto output  = kumi::fold_right( [](auto m, auto a) { a.push_back(sizeof(m)); return a; }
                                 , t
                                 , std::vector<std::size_t>{}
                                 );
@@ -21,7 +21,7 @@ int main()
 
   auto u = kumi::tuple{1,3,2,4,0,5,9,6,7};
 
-  std::cout << kumi::fold_right(  [](auto acc, auto e)
+  std::cout << kumi::fold_right(  [](auto e, auto acc)
                                   {
                                       std::cout << '(' << acc << ',' << e << ")\n";
                                       return (e <acc) ? e : acc;

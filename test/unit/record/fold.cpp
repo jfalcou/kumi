@@ -40,18 +40,18 @@ TTS_CASE("Check tuple::fold_right behavior")
 
   std::vector<int> output;
 
-  auto empty = kumi::fold_right( [](auto acc, auto) { return acc; }, kumi::record{}, 42);
+  auto empty = kumi::fold_right( [](auto, auto acc) { return acc; }, kumi::record{}, 42);
   TTS_EQUAL(empty, 42);
 
   auto accumulated = kumi::fold_right(
-      [](auto acc, auto m) {
+      [](auto m, auto acc) {
         acc.push_back(sizeof(m));
         return acc;
       },
       t,
       output);
 
-  TTS_EQUAL(accumulated, (std::vector<int> {8, 4, 2, 1}));
+  TTS_EQUAL(accumulated, (std::vector<int> {1, 2, 4, 8}));
 };
 
 TTS_CASE("Check tuple::fold_right constexpr behavior")
@@ -60,11 +60,11 @@ TTS_CASE("Check tuple::fold_right constexpr behavior")
 
   constexpr auto t = kumi::record{"a"_f = 2., "b"_f = 1, "c"_f = short {55}, "d"_f = 'z'};
 
-  constexpr auto empty = kumi::fold_right( [](auto acc, auto) { return acc; }, kumi::record{}, 42);
+  constexpr auto empty = kumi::fold_right( [](auto, auto acc) { return acc; }, kumi::record{}, 42);
   TTS_CONSTEXPR_EQUAL(empty, 42);
 
   constexpr auto accumulated = kumi::fold_right(
-      []<std::size_t N>(std::array<int, N> acc, auto m) {
+      []<std::size_t N>(auto m,std::array<int, N> acc) {
         if constexpr( N == 0 )
         {
           std::array<int, 1> res {sizeof(m)};
@@ -81,7 +81,7 @@ TTS_CASE("Check tuple::fold_right constexpr behavior")
       t,
       std::array<int, 0> {});
 
-  TTS_CONSTEXPR_EQUAL(accumulated, (std::array<int, 4> {8, 4, 2, 1}));
+  TTS_CONSTEXPR_EQUAL(accumulated, (std::array<int, 4> {1, 2, 4, 8}));
 };
 
 TTS_CASE("Check tuple::fold_left behavior")
@@ -103,7 +103,7 @@ TTS_CASE("Check tuple::fold_left behavior")
       t,
       output);
 
-  TTS_EQUAL(accumulated, (std::vector<int> {1, 2, 4, 8}));
+  TTS_EQUAL(accumulated, (std::vector<int> {8, 4, 2, 1}));
 };
 
 TTS_CASE("Check tuple::fold_left constexpr behavior")
@@ -133,5 +133,5 @@ TTS_CASE("Check tuple::fold_left constexpr behavior")
       t,
       std::array<int, 0> {});
 
-  TTS_CONSTEXPR_EQUAL(accumulated, (std::array<int, 4> {1, 2, 4, 8}));
+  TTS_CONSTEXPR_EQUAL(accumulated, (std::array<int, 4> {8, 4, 2, 1}));
 };
