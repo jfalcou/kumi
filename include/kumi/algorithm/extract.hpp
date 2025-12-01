@@ -57,7 +57,7 @@ namespace kumi
 
   //! @overload
   template<std::size_t I0, product_type Tuple>
-  requires(I0<= size_v<Tuple>)
+  requires( I0 <= size_v<Tuple>)
   [[nodiscard]] KUMI_ABI constexpr auto extract(Tuple && t, index_t<I0> i0) noexcept
   {
     return extract(KUMI_FWD(t), i0, index<size_v<Tuple>>);
