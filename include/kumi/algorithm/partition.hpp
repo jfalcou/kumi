@@ -40,7 +40,7 @@ namespace kumi
   //! @brief  Partition a product type over a predicate
   //! @tparam Pred Compile-time predicate
   //! @param  t Product type to process
-  //! @return A product type containing the product type of all values which types satisfies `Pred` 
+  //! @return A tuple containing the product type of all values which types satisfies `Pred` 
   //!         and the product type of all values which types does not satisfy `Pred`.
   //!
   //! ## Helper type
