@@ -250,13 +250,8 @@ namespace kumi
   //! {
   //!   template<product_type T> struct sum;
   //!
-<<<<<<< HEAD
   //!   template<product_type Te>
   //!   using sum_t = typename sum<T>::type;
-=======
-  //!   template<product_type T>
-  //!   using sum_t = typename sum_t<T>::type;
->>>>>>> 33226e3 (renaming of template parameters)
   //! }
   //! @endcode
   //!
