@@ -98,6 +98,7 @@ namespace kumi
   //!
   //! ## Example:
   //! @include doc/filter.cpp
+  //! @include doc/record/filter.cpp
   //================================================================================================
   template<template<typename> typename Pred, product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto filter(T && t) noexcept
@@ -133,6 +134,7 @@ namespace kumi
   //!
   //! ## Example:
   //! @include doc/filter_not.cpp
+  //! @include doc/record/filter_not.cpp
   //================================================================================================
   template<template<typename> typename Pred, product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto filter_not(T && t) noexcept
