@@ -413,6 +413,11 @@ namespace kumi
     return static_cast<record<Ts...> const &&>(r)[index<I>];
   }
 
+  /// Improves diagnostic for out of bounds index
+  template<std::integral auto I, record_type R> 
+  requires ((I >= size_v<R>) || (I < 0)) 
+  constexpr auto get(R && r) = delete;
+
   //================================================================================================
   //! @ingroup record
   //! @brief Extracts the element of the field labeled Name from a kumi::record if it exists
@@ -456,6 +461,11 @@ namespace kumi
   {
     return static_cast<record<Ts...> const &&>(r)[field<Name>];
   }
+
+  /// Improves diagnostic for non present name
+  template<str Name, record_type R> 
+  requires (!(_::named_get_compliant<Name, R>()))
+  constexpr auto get(R && r) = delete;
 
   //================================================================================================
   //! @}

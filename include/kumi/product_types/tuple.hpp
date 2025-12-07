@@ -563,6 +563,11 @@ namespace kumi
   {
     return static_cast<tuple<Ts...> const &&>(arg)[index<I>];
   }
+  
+  /// Improves diagnostic for out of bounds index
+  template<std::integral auto I, product_type T> 
+  requires ((!record_type<T>) && ((I >= size_v<T>) || (I < 0))) 
+  constexpr auto get(T && t) = delete;
 
   //================================================================================================
   //! @ingroup tuple
@@ -612,6 +617,11 @@ namespace kumi
     return static_cast<tuple<Ts...> const &&>(t)[field<Name>];
   }
 
+  /// Improves diagnostic for non present name
+  template<str Name, product_type T> 
+  requires (!record_type<T> && !(_::named_get_compliant<Name, T>()))
+  constexpr auto get(T && t) = delete;
+
   //================================================================================================
   //! @ingroup tuple
   //! @brief Extracts the field which type is T from a kumi::tuple if it exist
@@ -659,6 +669,11 @@ namespace kumi
   {
     return static_cast<tuple<Ts...> const &&>(t)[as<T>{}];
   }
+
+  /// Improves diagnostic for non present name
+  template<typename U, product_type T> 
+  requires (!record_type<T> && !(_::typed_get_compliant<U,T>()))
+  constexpr auto get(T && t) = delete;
 
   //================================================================================================
   //! @}

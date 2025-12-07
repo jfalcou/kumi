@@ -157,7 +157,7 @@ namespace kumi
     else return [&]<std::size_t ...I>(std::index_sequence<I...>)
     {
       return _::builder<T>::make( mk.template operator()<get<I>(Indexes)>()... );
-    }(std::make_index_sequence<Indexes.size()>{});
+    }(std::make_index_sequence<size_v<idx_t>>{});
   }
 
   namespace result
