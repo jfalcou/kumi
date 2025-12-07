@@ -61,7 +61,7 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief Constructs a tuple where the ith element is the prduct type of all ith elements of ts...
+  //! @brief Constructs a tuple where the ith element is the product type of all ith elements of ts...
   //!
   //! @param t0 Product type to convert
   //! @param ts Product types to convert
@@ -84,6 +84,7 @@ namespace kumi
   //!
   //! ## Example
   //! @include doc/zip.cpp
+  //! @include doc/record/zip.cpp
   //================================================================================================
   template<product_type T0, sized_product_type<size_v<T0>>... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto zip(T0 && t0, Ts &&... ts)
@@ -94,7 +95,7 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief Constructs a tuple where the ith element is the prudct type of all ith elements of ts...
+  //! @brief Constructs a tuple where the ith element is the product type of all ith elements of ts...
   //!
   //! @param t0 Product type to convert
   //! @param ts Product types to convert

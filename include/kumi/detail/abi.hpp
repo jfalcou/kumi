@@ -8,9 +8,9 @@
 #pragma once
 
 #if defined(__CUDACC__)
-#define KUMI_CUDA __host__ __device__
+#   define KUMI_CUDA __host__ __device__
 #else
-#define KUMI_CUDA
+#   define KUMI_CUDA
 #endif
 
 #if defined(KUMI_DEBUG)

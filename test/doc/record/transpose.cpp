@@ -10,18 +10,10 @@ int main()
 {
   using namespace kumi::literals;
 
-  auto status = kumi::record{"a"_f = true, "b"_f = false};
-  auto id     = kumi::record{"aa"_f = 'a', "bb"_f = 'b', "cc"_f = 'c'};
-  auto value  = kumi::record{"aaa"_f = 1.0,"bbb"_f = 2.1, "ccc"_f = 4.2, "d"_f = 8.4};
+  auto values = kumi::record{ "first"_f  = kumi::record{"a"_f=1, "b"_f='a', "c"_f=0.1   }
+                            , "second"_f = kumi::record{"d"_f=2, "e"_f='b', "f"_f=0.01  }
+                            };
 
-  auto r = kumi::cartesian_product( status, id, value );
-
-  kumi::for_each_index( [](auto i, auto e)
-                        {
-                          std::cout << "# "  << i
-                                    << ":"  << std::boolalpha
-                                    << e    << "\n";
-                        }
-                      , r
-                      );
+  auto r = kumi::transpose( values );
+  std::cout << r << "\n";
 }

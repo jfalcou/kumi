@@ -7,13 +7,15 @@
 //! `std::tuple` as possible but also wants to compile faster, uses a better C++20 oriented interface,
 //! and new features like:
 //!
-//!   -  a fast to compile tuple implementation
-//!   -  quality of life improvement over the standard tuple implementation
-//!   -  a protocol to adapt user-defined type to act as tuples
-//!   -  algorithm on tuples
+//!   -  A fast to compile tuple implementation
+//!   -  Quality of life improvement over the standard tuple implementation
+//!   -  A protocol to adapt user-defined type to act as tuples
+//!   -  Algorithm on tuples
+//!   -  Record type handling
 //!
-//! # A Short Example
+//! # Examples
 //!
+//! ## Tuple
 //! @code
 //! #include <iostream>
 //! #include <kumi/kumi.hpp>
@@ -23,7 +25,7 @@
 //!         if (id == 0)  return kumi::make_tuple(3.8, 'A', "Lisa Simpson");
 //!   else  if (id == 1)  return kumi::make_tuple(2.9, 'C', "Milhouse Van Houten");
 //!   else  if (id == 2)  return kumi::make_tuple(1.7, 'D', "Ralph Wiggum");
-//!   else                return kumi::make_tuple(0., 'F', "Unknown");
+//!   else                return kumi::make_tuple(0. , 'F', "Unknown");
 //! }
 //!
 //! int main()
@@ -31,20 +33,22 @@
 //!   auto student0 = get_student(0);
 //!
 //!   std::cout << "ID: 0, "
-//!             << "GPA: "    << kumi::get<0>(student0) << ", "
-//!             << "grade: "  << kumi::get<1>(student0) << ", "
-//!             << "name: "   << kumi::get<2>(student0) << '\n';
+//!             << "GPA:   " << kumi::get<0>(student0) << ", "
+//!             << "grade: " << kumi::get<1>(student0) << ", "
+//!             << "name:  " << kumi::get<2>(student0) << '\n';
 //!
 //!   auto [ gpa1, grade1, name1 ] = get_student(1);
 //!   std::cout << "ID: 1, "
-//!             << "GPA: " << gpa1 << ", "
+//!             << "GPA: "   << gpa1   << ", "
 //!             << "grade: " << grade1 << ", "
-//!             << "name: " << name1 << '\n';
+//!             << "name: "  << name1  << '\n';
 //!   std::cout << "\n";
 //!
 //!   auto all_students = kumi::make_tuple(get_student(0),get_student(1),get_student(2));
 //!
-//!   kumi::for_each_index( [](auto i, auto const& m) { std::cout << "Data #" << i << " : " << m << "\n";}
+//!   kumi::for_each_index( [](auto i, auto const& m) { 
+//!                         std::cout << "Data #" << i << " : " << m << "\n";
+//!                       }
 //!                       , all_students
 //!                       );
 //!   std::cout << "\n";
@@ -54,11 +58,54 @@
 //! }
 //! @endcode
 //!
+//! ## Record
+//! @code
+//! #include <iostream>
+//! #include <kumi/kumi.hpp>
+//!
+//! using namespace kumi::literals;
+//! auto get_student(int id)
+//! {
+//!         if (id == 0)  return kumi::make_record("GPA"_f = 3.8, "grade"_f = 'A');
+//!   else  if (id == 1)  return kumi::make_record("GPA"_f = 2.9, "grade"_f = 'C');
+//!   else  if (id == 2)  return kumi::make_record("GPA"_f = 1.7, "grade"_f = 'D');
+//!   else                return kumi::make_record("GPA"_f = 0. , "grade"_f = 'F');
+//! }
+//!
+//! int main()
+//! {
+//!   auto student0 = get_student(0);
+//!
+//!   std::cout << "ID: 0, "
+//!             << "GPA:   "  << kumi::get<"GPA"_f>(student0)   << ", "
+//!             << "grade: "  << kumi::get<"grade"_f>(student0) << '\n';
+//!
+//!   auto [ gpa1, grade1 ] = get_student(1);
+//!   std::cout << "ID: 1, "
+//!             << gpa1   << ", "
+//!             << grade1 << '\n';
+//!   std::cout << "\n";
+//!
+//!   auto all_students = kumi::make_record(
+//!                       "Lisa Simpson"_f        = get_student(0),
+//!                       "Milhouse Van Houten"_f = get_student(1),
+//!                       "Ralph Wiggum"_f        = get_student(2)
+//!                       );
+//!
+//!   kumi::for_each_field( [](auto name, auto const& m) { 
+//!                         std::cout << "Student: " << name << ", Data : " << m << "\n";
+//!                       }
+//!                       , all_students
+//!                       );
+//!   std::cout << "\n";
+//! }
+//! @endcode
+//!
 //! # Licence
 //!
 //! This library is licensed under the [Boost Software License](https://opensource.org/licenses/BSL-1.0):
 //!
-//! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ none
+//! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~none
 //! Copyright : KUMI Project Contributors
 //!
 //! Permission is hereby granted, free of charge, to any person or organization obtaining a copy of the
