@@ -34,6 +34,7 @@ namespace kumi
   //!
   //! ## Example
   //! @include doc/transpose.cpp
+  //! @include doc/record/transpose.cpp
   //================================================================================================
   template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto transpose(T && t)
   requires ( _::supports_transpose<T> )

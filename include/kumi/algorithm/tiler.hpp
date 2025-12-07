@@ -11,12 +11,12 @@ namespace kumi
 {
   //================================================================================================
   //! @ingroup generators
-  //! @brief Creates a kumi::tuple of kumi::product_types, each containing `N` consecutive elements from 
+  //! @brief Creates a tuple of product types, each containing `N` consecutive elements from 
   //!        `t`. Windows starts at 0 and advance by `1` element each time.  
   //!
   //! @tparam N Size of the window to generate
-  //! @param  t the kumi::product_type from which to extract the windows
-  //! @return A tuple of kumi::product_types, each containing `N` consecutive elements of `t`
+  //! @param  t the product type from which to extract the windows
+  //! @return A tuple of product types, each containing `N` consecutive elements of `t`
   //!
   //! @note Windows behaves like overlapping tiles: each inner product_type is a tile over `t`
   //!       starting at index `tile_number`. All the windows are of the same size.
@@ -25,7 +25,7 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<std::size_t N, product_type> struct windows;
+  //!   template<std::size_t N, product_type T> struct windows;
   //!
   //!   template<std::size_t N, product_type T>
   //!   using windows_t = typename windows<N, T>::type;
@@ -36,6 +36,7 @@ namespace kumi
   //!
   //! ## Example
   //! @include doc/windows.cpp
+  //! @include doc/record/windows.cpp
   //================================================================================================
   template<std::size_t N, product_type T>
   requires ( N > 0 && N <= size_v<T> )
@@ -50,12 +51,12 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup generators
-  //! @brief Creates a kumi::tuple of kumi::product_types, each containing `N` consecutive elements from 
+  //! @brief Creates a tuple of product types, each containing `N` consecutive elements from 
   //!        `t`. Chunks starts at 0 and advance by `N` element each time.  
   //!
   //! @tparam N Size of the chunks to generate
-  //! @param  t the kumi::product_type from which to extract the chunks 
-  //! @return A tuple of product_types, each containing `N` consecutive elements of `t`
+  //! @param  t the product type from which to extract the chunks 
+  //! @return A tuple of product types, each containing `N` consecutive elements of `t`
   //!
   //! @note Chunks behaves like paving tiles: each inner product_type is a tile over `t` 
   //!       starting at index `chunk_size * tile_number + 1`. The last chunk will be smaller if the
@@ -65,7 +66,7 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<std::size_t N, product_type> struct chunks;
+  //!   template<std::size_t N, product_type T> struct chunks;
   //!
   //!   template<std::size_t N, product_type T>
   //!   using chunks_t = typename chunks<N, T>::type;
@@ -76,6 +77,7 @@ namespace kumi
   //!
   //! ## Example
   //! @include doc/chunks.cpp
+  //! @include doc/record/chunks.cpp
   //================================================================================================
   template<std::size_t N, product_type T> 
   requires ( N > 0 && N <= size_v<T> )

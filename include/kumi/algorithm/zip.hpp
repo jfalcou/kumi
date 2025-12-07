@@ -84,6 +84,7 @@ namespace kumi
   //!
   //! ## Example
   //! @include doc/zip.cpp
+  //! @include doc/record/zip.cpp
   //================================================================================================
   template<product_type T0, sized_product_type<size_v<T0>>... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto zip(T0 && t0, Ts &&... ts)

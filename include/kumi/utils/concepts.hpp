@@ -145,7 +145,7 @@ namespace kumi
 
     // MSVC workaround for get<>
     // MSVC doesnt SFINAE properly based on NTTP types before requires evaluation
-    // so we need this weird mechanism for it to pickt the correct version.
+    // so we need this weird mechanism for it to pick the correct version.
     template<auto Name, typename... Ts> 
     KUMI_ABI constexpr auto contains_field()
     {
@@ -156,7 +156,7 @@ namespace kumi
   }
 
   //================================================================================================
-  //! @ingroup concepts
+  //! @ingroup tuple_concepts
   //! @brief Concept specifying if a type is comparable for each of its components
   //!
   //! A type `T` models `kumi::equality_comparable<T,U>`if it's a product type where each of its 
@@ -164,7 +164,7 @@ namespace kumi
   //================================================================================================
   template<typename T, typename U>
   concept equality_comparable = ( size_v<std::remove_cvref_t<T>> == size_v<std::remove_cvref_t<U>>) 
-                                && _::check_equality<std::remove_cvref_t<T>,std::remove_cvref_t<U>>();
+  && _::check_equality<std::remove_cvref_t<T>,std::remove_cvref_t<U>>();
 
   //================================================================================================
   //! @ingroup concepts
@@ -194,7 +194,7 @@ namespace kumi
   //================================================================================================
   template<typename... Ts>
   concept uniquely_named = ( has_named_fields<Ts...> )
-                        && all_unique_names_v<std::remove_cvref_t<Ts>...>;
+  && all_unique_names_v<std::remove_cvref_t<Ts>...>;
 
    //================================================================================================
   //! @ingroup concepts
@@ -230,7 +230,7 @@ namespace kumi
   //================================================================================================
   template<typename T, typename U>
   concept equivalent = ( size_v<std::remove_cvref_t<T>> == size_v<std::remove_cvref_t<U>>) 
-                       && _::has_same_field_names<std::remove_cvref_t<T>, std::remove_cvref_t<U>>();
+  && _::has_same_field_names<std::remove_cvref_t<T>, std::remove_cvref_t<U>>();
 
   //================================================================================================
   //! @ingroup record_concepts
@@ -254,7 +254,7 @@ namespace kumi
   //================================================================================================
   template<typename... Ts>
   concept follows_same_semantic = (( product_type<Ts> && !record_type<Ts>) && ... ) 
-    || ((record_type<Ts> && ...));
+  || ((record_type<Ts> && ...));
 
   //================================================================================================
   //! @ingroup concepts
@@ -266,7 +266,7 @@ namespace kumi
   //================================================================================================
   template<typename T, typename... Us>
   concept compatible_product_types = (follows_same_semantic<T,Us...> 
-    && ((!record_type<T>) || (equivalent<std::remove_cvref_t<T>, std::remove_cvref_t<Us>> && ...)));
+  && ((!record_type<T>) || (equivalent<std::remove_cvref_t<T>, std::remove_cvref_t<Us>> && ...)));
 
 
   //================================================================================================

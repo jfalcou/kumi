@@ -72,8 +72,8 @@ namespace kumi
     //================================================================================================
     //! @ingroup utility
     //! @class builder 
-    //! @brief Helper structure to build the correct output `product_type`. If the provided product_type
-    //!        is a record_type the builder will output a kumi::record otherwise a kumi::tuple. 
+    //! @brief Helper structure to build the correct output product type. If the provided product 
+    //!        type is a record_type the builder will output a kumi::record otherwise a kumi::tuple. 
     //!
     //! builder provides a generic way of defining a kumi::product_type which depending on the 
     //! given semantic (product_type or record_type) will output respectively a kumi::tuple or a 

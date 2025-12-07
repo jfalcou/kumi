@@ -8,8 +8,6 @@
 #ifndef KUMI_RECORD_HPP_INCLUDED
 #define KUMI_RECORD_HPP_INCLUDED
 
-#include <kumi/product_types/tuple.hpp>
-
 namespace kumi
 {
   //================================================================================================
@@ -265,7 +263,7 @@ namespace kumi
   };
 
   //================================================================================================
-  //! @name Deduction Guides
+  //! @name Record deduction guides
   //! @{
   //================================================================================================
 
@@ -362,7 +360,8 @@ namespace kumi
   {
     return _::apply_field( [](auto&&... elems)
               {
-                return kumi::forward_as_record<name_of(as<decltype(elems)>{})...>(field_value_of(KUMI_FWD(elems))...);
+                return kumi::forward_as_record<name_of(as<decltype(elems)>{})...>
+                                              (field_value_of(KUMI_FWD(elems))...);
               }
             , KUMI_FWD(r)
             );
@@ -373,7 +372,7 @@ namespace kumi
   //================================================================================================
 
   //================================================================================================
-  //! @name Accessors
+  //! @name Record accessors
   //! @{
   //================================================================================================
 
@@ -392,6 +391,9 @@ namespace kumi
   template<std::size_t I, typename... Ts>
   requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> &r) noexcept
+  #if defined(KUMI_DOXYGEN_INVOKED)
+  -> kumi::element_t<I, record<Ts...>&>
+  #endif 
   {
     return r[index<I>];
   }
@@ -400,6 +402,9 @@ namespace kumi
   template<std::size_t I, typename... Ts>
   requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> &&r) noexcept
+  #if defined(KUMI_DOXYGEN_INVOKED)
+  -> kumi::element_t<I, record<Ts...>&&>
+  #endif 
   {
     return static_cast<record<Ts...> &&>(r)[index<I>];
   }
@@ -408,6 +413,9 @@ namespace kumi
   template<std::size_t I, typename... Ts>
   requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> const &r) noexcept
+  #if defined(KUMI_DOXYGEN_INVOKED)
+  -> kumi::element_t<I, record<Ts...> const&>
+  #endif 
   {
     return r[index<I>];
   }
@@ -416,6 +424,9 @@ namespace kumi
   template<std::size_t I, typename... Ts>
   requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> const &&r) noexcept
+  #if defined(KUMI_DOXYGEN_INVOKED)
+  -> kumi::element_t<I, record<Ts...>const &&>
+  #endif 
   {
     return static_cast<record<Ts...> const &&>(r)[index<I>];
   }
