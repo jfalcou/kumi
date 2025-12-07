@@ -78,6 +78,7 @@ namespace kumi
   //!
   //! ## Example
   //! @include doc/inner_product.cpp
+  //! @include doc/record/inner_product.cpp
   //================================================================================================
   template< product_type S1, sized_product_type<size_v<S1>> S2, typename T
           , typename Sum, typename Prod

@@ -15,15 +15,16 @@ namespace kumi
   //! @ingroup transforms
   //! @brief Apply the Callable object f on each product types' elements
   //!
-  //! Applies the given function to all the product types passed as arguments and stores the result in
-  //! another product type, keeping the original elements order.
+  //! Applies the given function to all the product types passed as arguments and stores the result 
+  //! in another product type, keeping the original elements order.
   //!
-  //! @note Does not participate in overload resolution if product types' size are not equal or if `f`
-  //!       can't be called on each product type's elements.
+  //! @note Does not participate in overload resolution if product types' size are not equal or if 
+  //!       `f` can't be called on each product type's elements. All product type must either be 
+  //!       record types or product types but mixing is not supported.
   //!
   //! @param f      Callable function to apply
   //! @param t0     Product Type  to operate on
-  //! @param others Product Type to operate on
+  //! @param others Product Types to operate on
   //! @return The product type of `f` calls results.
   //!
   //! ## Helper type
@@ -39,11 +40,14 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::map
   //!
+  //! @see kumi::map_index
+  //! @see kumi::map_field
+  //!
   //! ## Example
   //! @include doc/map.cpp
   //================================================================================================
   template<product_type T, typename Function, sized_product_type<size_v<T>>... Ts>
-  [[nodiscard]] KUMI_ABI constexpr auto map(Function f, T && t0, Ts &&...others) 
+  [[nodiscard]] KUMI_ABI constexpr auto map(Function f, T && t0, Ts &&... others) 
   requires ( compatible_product_types<T, Ts...> && 
            _::supports_call<Function, T&&, Ts&&...> )
   {
@@ -84,7 +88,7 @@ namespace kumi
   }
 
   //================================================================================================
-  //! @ingroup transforms
+  //! @ingroup tuple_transforms
   //! @brief Apply the Callable object f on each tuples' elements and their indexes
   //!
   //! Applies the given function to all the tuples passed as arguments along with their indexes  and
@@ -94,8 +98,8 @@ namespace kumi
   //!       can't be called on each tuple's elements and their indexes.
   //!
   //! @param f      Callable function to apply
-  //! @param t0     T  to operate on
-  //! @param others Ts to operate on
+  //! @param t0     Product type  to operate on
+  //! @param others Product types to operate on
   //! @return The tuple of `f` calls results.
   //!
   //! ## Helper type
@@ -111,11 +115,14 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::map_index
   //!
+  //! @see kumi::map
+  //! @see kumi::map_field
+  //!
   //! ## Example
   //! @include doc/map_index.cpp
   //================================================================================================
   template<product_type T, typename Function, sized_product_type<size_v<T>>... Ts>
-  [[nodiscard]] KUMI_ABI constexpr auto map_index(Function f, T && t0,Ts &&...others)
+  [[nodiscard]] KUMI_ABI constexpr auto map_index(Function f, T && t0, Ts &&... others)
   requires(!record_type<T> && (!record_type<Ts> && ...))
   {
     if constexpr(sized_product_type<T,0>) return _::builder<T>::make();
@@ -150,7 +157,7 @@ namespace kumi
   }
 
   //================================================================================================
-  //! @ingroup transforms
+  //! @ingroup record_transforms
   //! @brief Apply the Callable object f on each records' elements and their field names 
   //!
   //! Applies the given function to all the records passed as arguments along with their names and
@@ -177,12 +184,15 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::map_field
   //!
+  //! @see kumi::map
+  //! @see kumi::map_index
+  //!
   //! ## Example
   //! @include doc/record/map_field.cpp
   //================================================================================================ 
   template<record_type T, typename Function, sized_product_type<size<T>::value>... Ts>
   requires ( compatible_product_types<T, Ts...> )
-  constexpr auto map_field(Function f,T && t0,Ts &&... others)
+  constexpr auto map_field(Function f, T && t0, Ts &&... others)
   {
     if constexpr(sized_product_type<T,0>) return _::builder<T>::make();
     else

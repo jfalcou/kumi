@@ -21,7 +21,7 @@ namespace kumi
   //! @param  i0 Compile-time index of the first element to extract.
   //! @param  i1 Compile-time index past the last element to extract. By default, `i1` is equal to
   //!         `size_v<T>`.
-  //! @return A new kumi::tuple containing to the selected elements of the input tuple.
+  //! @return A new product type containing to the selected elements of the input tuple.
   //!
   //! ## Helper type
   //! @code
@@ -38,6 +38,7 @@ namespace kumi
   //!
   //! ## Example:
   //! @include doc/extract.cpp
+  //! @include doc/record/extract.cpp
   //================================================================================================
   template<std::size_t I0, std::size_t I1, product_type T>
   requires( (I0 <= size_v<T>) && (I1 <= size_v<T>) )
@@ -57,7 +58,7 @@ namespace kumi
 
   //! @overload
   template<std::size_t I0, product_type T>
-  requires(I0 <= size_v<T>)
+  requires( I0 <= size_v<T> )
   [[nodiscard]] KUMI_ABI constexpr auto extract(T && t, index_t<I0> i0) noexcept
   {
     return extract(KUMI_FWD(t), i0, index<size_v<T>>);
@@ -67,14 +68,14 @@ namespace kumi
   //! @ingroup generators
   //! @brief Split a product type into two
   //!
-  //! Split a @ref kumi::product_type in two kumi::product_type containing all the elements before
+  //! Split a product type in two product_type containing all the elements before
   //! and after a given index.
   //!
   //! @note Does not participate in overload resolution if `I0` is not in `[0, sizeof...(Ts)[`.
   //!
   //! @param  t Product Type to split.
   //! @param  i0 Compile-time index of the split pivot.
-  //! @return A new kumi::tuple containing the two sub product types cut at index I.
+  //! @return A new tuple containing the two sub product types cut at index I.
   //!
   //! ## Helper type
   //! @code
@@ -94,7 +95,7 @@ namespace kumi
   //! @include doc/record/split.cpp
   //================================================================================================
   template<std::size_t I0, product_type T>
-  requires(I0 <= size_v<T>)
+  requires( I0 <= size_v<T> )
   [[nodiscard]] KUMI_ABI constexpr auto split( T && t
                                     , [[maybe_unused]] index_t<I0> i0
                                     ) noexcept

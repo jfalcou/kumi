@@ -7,11 +7,11 @@
 //! `std::tuple` as possible but also wants to compile faster, uses a better C++20 oriented interface,
 //! and new features like:
 //!
-//!   -  a fast to compile tuple implementation
-//!   -  quality of life improvement over the standard tuple implementation
-//!   -  a protocol to adapt user-defined type to act as tuples
-//!   -  algorithm on tuples
-//!   -  record type handling
+//!   -  A fast to compile tuple implementation
+//!   -  Quality of life improvement over the standard tuple implementation
+//!   -  A protocol to adapt user-defined type to act as tuples
+//!   -  Algorithm on tuples
+//!   -  Record type handling
 //!
 //! # Examples
 //!
@@ -33,9 +33,9 @@
 //!   auto student0 = get_student(0);
 //!
 //!   std::cout << "ID: 0, "
-//!             << "GPA: "    << kumi::get<0>(student0) << ", "
-//!             << "grade: "  << kumi::get<1>(student0) << ", "
-//!             << "name: "   << kumi::get<2>(student0) << '\n';
+//!             << "GPA:   " << kumi::get<0>(student0) << ", "
+//!             << "grade: " << kumi::get<1>(student0) << ", "
+//!             << "name:  " << kumi::get<2>(student0) << '\n';
 //!
 //!   auto [ gpa1, grade1, name1 ] = get_student(1);
 //!   std::cout << "ID: 1, "
@@ -46,7 +46,9 @@
 //!
 //!   auto all_students = kumi::make_tuple(get_student(0),get_student(1),get_student(2));
 //!
-//!   kumi::for_each_index( [](auto i, auto const& m) { std::cout << "Data #" << i << " : " << m << "\n";}
+//!   kumi::for_each_index( [](auto i, auto const& m) { 
+//!                         std::cout << "Data #" << i << " : " << m << "\n";
+//!                       }
 //!                       , all_students
 //!                       );
 //!   std::cout << "\n";
@@ -75,7 +77,7 @@
 //!   auto student0 = get_student(0);
 //!
 //!   std::cout << "ID: 0, "
-//!             << "GPA: "    << kumi::get<"GPA"_f>(student0)   << ", "
+//!             << "GPA:   "  << kumi::get<"GPA"_f>(student0)   << ", "
 //!             << "grade: "  << kumi::get<"grade"_f>(student0) << '\n';
 //!
 //!   auto [ gpa1, grade1 ] = get_student(1);
@@ -90,7 +92,9 @@
 //!                       "Ralph Wiggum"_f        = get_student(2)
 //!                       );
 //!
-//!   kumi::for_each_field( [](auto name, auto const& m) { std::cout << "Student: " << name << ", Data : " << m << "\n";}
+//!   kumi::for_each_field( [](auto name, auto const& m) { 
+//!                         std::cout << "Student: " << name << ", Data : " << m << "\n";
+//!                       }
 //!                       , all_students
 //!                       );
 //!   std::cout << "\n";

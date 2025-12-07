@@ -113,6 +113,7 @@ namespace kumi
   //!
   //! ## Example
   //! @include doc/flatten.cpp
+  //! @include doc/record/flatten.cpp
   //================================================================================================
   template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto flatten(T && t)
   {
@@ -166,6 +167,7 @@ namespace kumi
   //!
   //! ## Example
   //! @include doc/flatten_all.cpp
+  //! @include doc/record/flatten_all.cpp
   //================================================================================================
   template<product_type T, typename Func>
   [[nodiscard]] KUMI_ABI constexpr auto flatten_all(T && t, Func && f)

@@ -12,7 +12,7 @@
 namespace kumi
 {
   //================================================================================================
-  //! @ingroup utility
+  //! @ingroup queries 
   //! @brief Retrieves the front of a product type
   //!
   //! @param t Base product type
@@ -42,7 +42,7 @@ namespace kumi
   }
 
   //================================================================================================
-  //! @ingroup utility
+  //! @ingroup queries 
   //! @brief Retrieves the back of a product type
   //!
   //! @param t Base product type
