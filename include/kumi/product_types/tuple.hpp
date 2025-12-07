@@ -670,7 +670,7 @@ namespace kumi
     return static_cast<tuple<Ts...> const &&>(t)[as<T>{}];
   }
 
-  /// Improves diagnostic for non present name
+  /// Improves diagnostic for non present type 
   template<typename U, product_type T> 
   requires (!record_type<T> && !(_::typed_get_compliant<U,T>()))
   constexpr auto get(T && t) = delete;
