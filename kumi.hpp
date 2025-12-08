@@ -2247,7 +2247,7 @@ namespace kumi
     (std::make_index_sequence<I1 - I0>());
   }
   template<std::size_t I0, product_type Tuple>
-  requires(I0<= size_v<Tuple>)
+  requires( I0 <= size_v<Tuple>)
   [[nodiscard]] KUMI_ABI constexpr auto extract(Tuple && t, index_t<I0> i0) noexcept
   {
     return extract(KUMI_FWD(t), i0, index<size_v<Tuple>>);
@@ -3095,40 +3095,40 @@ namespace kumi
     template<template<typename> typename Pred, product_type T>
     inline constexpr selector_t<Pred, T> selector{};
   }
-  template<template<typename> typename Pred, kumi::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto partition(T&& tup) noexcept
+  template<template<typename> typename Pred, product_type T>
+  [[nodiscard]] KUMI_ABI constexpr auto partition(T && t) noexcept
   {
-    constexpr auto pos = kumi::_::selector<Pred, T>();
+    constexpr auto pos = _::selector<Pred, T>();
     auto select = [&]<typename O, std::size_t... I>(O, std::index_sequence<I...>)
     {
       using type = _::builder_make_t<T, element_t< pos.t[O::value+I], T>...>;
-      return type{get<pos.t[O::value+I]>(KUMI_FWD(tup))...};
+      return type{get<pos.t[O::value+I]>(KUMI_FWD(t))...};
     };
     return kumi::tuple{ 
       select(kumi::index<0>      , std::make_index_sequence<pos.cut>{}),
-      select(kumi::index<pos.cut>, std::make_index_sequence<kumi::size_v<T> - pos.cut>{})};
+      select(kumi::index<pos.cut>, std::make_index_sequence<size_v<T> - pos.cut>{})};
   }
-  template<template<typename> typename Pred, kumi::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto filter(T&& tup) noexcept
+  template<template<typename> typename Pred, product_type T>
+  [[nodiscard]] KUMI_ABI constexpr auto filter(T && t) noexcept
   {
-    constexpr auto pos = kumi::_::selector<Pred, T>();
-    if constexpr ( sized_product_type<T, 0>) return tuple{};
+    constexpr auto pos = _::selector<Pred, T>();
+    if constexpr ( sized_product_type<T, 0>) return _::builder<T>::make();
     else return [&]<std::size_t...I>(std::index_sequence<I...>)
     {
         using type = _::builder_make_t<T, element_t<pos.t[I], T>...>;
-        return type{get<pos.t[I]>(KUMI_FWD(tup))...};
+        return type{get<pos.t[I]>(KUMI_FWD(t))...};
     }(std::make_index_sequence<pos.cut>{});
   }
-  template<template<typename> typename Pred, kumi::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto filter_not(T&& tup) noexcept
+  template<template<typename> typename Pred, product_type T>
+  [[nodiscard]] KUMI_ABI constexpr auto filter_not(T && t) noexcept
   {
-    constexpr auto pos = kumi::_::selector<Pred, T>();
-    if constexpr ( sized_product_type<T, 0> ) return tuple{};
+    constexpr auto pos = _::selector<Pred, T>();
+    if constexpr ( sized_product_type<T, 0> ) return _::builder<T>::make();
     else return [&]<std::size_t...I>(std::index_sequence<I...>)
     {
         using type = _::builder_make_t<T, element_t<pos.t[pos.cut+I], T>...>;
-        return type{get<pos.t[pos.cut+I]>(KUMI_FWD(tup))...};
-    }(std::make_index_sequence<kumi::size_v<T> - pos.cut>{});
+        return type{get<pos.t[pos.cut+I]>(KUMI_FWD(t))...};
+    }(std::make_index_sequence<size_v<T> - pos.cut>{});
   }
   namespace result
   {
