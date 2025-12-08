@@ -100,7 +100,7 @@ namespace kumi
     //! @include doc/typed_subscript.cpp
     //==============================================================================================
     template<typename T>
-    requires( contains_type<T, Ts...> )
+    requires( uniquely_typed<Ts...> && contains_type<T, Ts...> )
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) &noexcept
     {
       return _::get_leaf<T>(impl);
@@ -108,7 +108,7 @@ namespace kumi
 
     /// @overload
     template<typename T>
-    requires ( contains_type<T, Ts...> )
+    requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) &&noexcept
     {
       return _::get_leaf<T>(static_cast<decltype(impl) &&>(impl));
@@ -116,7 +116,7 @@ namespace kumi
 
     /// @overload
     template<typename T>
-    requires ( contains_type<T, Ts...> )
+    requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) const &&noexcept
     {
       return _::get_leaf<T>(static_cast<decltype(impl) const &&>(impl));
@@ -124,7 +124,7 @@ namespace kumi
 
     /// @overload
     template<typename T>
-    requires (contains_type<T, Ts...> )
+    requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) const &noexcept
     {
       return _::get_leaf<T>(impl);
@@ -636,7 +636,7 @@ namespace kumi
   //! @include doc/typed_get.cpp
   //================================================================================================
   template<typename T, typename... Ts>
-  requires ( uniquely_typed<Ts...> )
+  requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> &t) noexcept
   {
@@ -645,7 +645,7 @@ namespace kumi
 
   /// @overload
   template<typename T, typename... Ts>
-  requires ( uniquely_typed<Ts...> )
+  requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> &&t) noexcept
   {
@@ -654,7 +654,7 @@ namespace kumi
 
   /// @overload
   template<typename T, typename... Ts>
-  requires ( uniquely_typed<Ts...> )
+  requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> const &t) noexcept
   {
@@ -663,7 +663,7 @@ namespace kumi
 
   /// @overload
   template<typename T, typename... Ts>
-  requires ( uniquely_typed<Ts...> )
+  requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> const &&t) noexcept
   {

@@ -9,6 +9,10 @@
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
 
+template<int I>       auto f(auto& t) -> decltype( get<I>(t) ) { return get<I>(t); }
+template<kumi::str S> auto g(auto &t) -> decltype( get<S>(t) ) { return get<S>(t); }
+template<typename U>  auto h(auto &t) -> decltype( get<U>(t) ) { return get<U>(t); }
+
 TTS_CASE("Check access to kumi::tuple via indexing")
 {
   using namespace kumi::literals;
@@ -44,6 +48,13 @@ TTS_CASE("Check access to kumi::tuple via indexing")
 
   TTS_EQUAL(kumi::get<0>(std::move(t3)) , 13.37 );
   TTS_EQUAL(std::move(t3)[1_c]          , 4.2f  );
+
+  TTS_EXPECT_NOT_COMPILES( t1, { get<2>(t1);  });
+  TTS_EXPECT_NOT_COMPILES( t1, { get<-1>(t1); });
+
+  TTS_EXPECT_NOT_COMPILES( t1, { f<2>(t1);  });
+  TTS_EXPECT_NOT_COMPILES( t1, { f<-1>(t1); });
+
 };
 
 TTS_CASE("Check access to kumi::tuple with named fields via indexing")
@@ -84,6 +95,9 @@ TTS_CASE("Check access to kumi::tuple with named fields via indexing")
 
   TTS_EQUAL(kumi::get<0>(std::move(t3)).value   , 13.37 );
   TTS_EQUAL(std::move(t3)[1_c].value            , 4.2f  );
+
+  TTS_EXPECT_NOT_COMPILES( t1, { f<2>(t1);  });
+  TTS_EXPECT_NOT_COMPILES( t1, { f<-1>(t1); });
 };
 
 TTS_CASE("Check access to kumi::tuple with names via names")
@@ -131,6 +145,36 @@ TTS_CASE("Check access to kumi::tuple with names via names")
 
   TTS_EQUAL(kumi::get<"x"_f>(std::move(t3)) , 13.37 );
   TTS_EQUAL(std::move(t3)["y"_f]            , 4.2f  );
+
+  TTS_EXPECT_NOT_COMPILES( t1, { get<"y"_f>(t1);  });
+  TTS_EXPECT_NOT_COMPILES( t1, { g<"y"_f>(t1);  });
+};
+
+TTS_CASE("Check access to kumi::tuple via types")
+{
+  using namespace kumi::literals;
+
+  kumi::tuple t1 = {1};
+  kumi::tuple t2 = {1.f, 2};
+  kumi::tuple t3 = {1., 2.f, 3};
+  kumi::tuple t4 = {'1', 2., 3.f, 4};
+
+  TTS_EQUAL(get<int>(t1), t1[0_c]);
+
+  TTS_EQUAL(get<float>(t2), t2[0_c]);
+  TTS_EQUAL(get<int>(t2), t2[1_c]);
+
+  TTS_EQUAL(get<double>(t3), t3[0_c]);
+  TTS_EQUAL(get<float>(t3), t3[1_c]);
+  TTS_EQUAL(get<int>(t3), t3[2_c]);
+
+  TTS_EQUAL(get<char>(t4), t4[0_c]);
+  TTS_EQUAL(get<double>(t4), t4[1_c]);
+  TTS_EQUAL(get<float>(t4), t4[2_c]);
+  TTS_EQUAL(get<int>(t4), t4[3_c]);
+
+  TTS_EXPECT_NOT_COMPILES(t1, { get<float>(t1); });
+  TTS_EXPECT_NOT_COMPILES(t1, { h<float>(t1); });
 };
 
 TTS_CASE("Check constexpr access to kumi::tuple via indexing")

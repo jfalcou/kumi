@@ -72,7 +72,11 @@ namespace kumi::_
 
   //==============================================================================================
   // Helper meta functions to access a field type by type 
-  //============================================================================================== 
+  //==============================================================================================
+
+  // Simple helper for the get_index to work in check_type & check_name (needs a ::value)
+  struct sfinae_unit : kumi::unit { static constexpr auto value = kumi::none; };
+  
   template<typename Ref, typename Field> struct check_type
   {
     static consteval Field      get(Ref) requires std::is_same_v<Field, Ref>  { return {}; }
@@ -82,8 +86,8 @@ namespace kumi::_
   template<std::size_t I, typename Ref, typename Field> struct get_index
   {
     using constant = std::integral_constant<std::size_t, I>;
-    static consteval constant   get(Ref) requires std::is_same_v<Ref,Field> { return {}; }
-    static consteval kumi::unit get(...)                                    { return {}; }
+    static consteval constant    get(Ref) requires std::is_same_v<Ref,Field> { return {}; }
+    static consteval sfinae_unit get(...)                                    { return {}; }
   };
 
   /// Helper using inheritance to get the corresponding type in an variadic pack if it exist 
@@ -108,6 +112,9 @@ namespace kumi::_
   template<typename Ref, typename... Fields> inline constexpr auto get_index_by_type_v = 
       get_index_by_type<Ref, std::index_sequence_for<Fields...>,Fields...>::value;
 
+  template<typename Ref, typename... Fields>
+  concept can_get_field_by_type = !std::is_same_v<get_field_by_type_t<Ref, Fields...>, kumi::unit>;
+
   //==============================================================================================
   // Helper meta functions to access a field type by name
   //==============================================================================================
@@ -117,8 +124,8 @@ namespace kumi::_
     static consteval kumi::unit get(...)                                    { return {}; }
 
     static consteval std::integral_constant<std::size_t,I> get_index(Ref) 
-    requires(Ref::name == Field::name)          { return {}; }
-    static consteval kumi::unit get_index(...)  { return {}; }
+    requires(Ref::name == Field::name)           { return {}; }
+    static consteval sfinae_unit get_index(...)  { return {}; }
   };
 
   template<typename Ref, typename Seq, typename...Fields> struct get_field_by_name;
@@ -140,6 +147,10 @@ namespace kumi::_
 
   template<typename Ref, typename... Fields> inline constexpr auto get_index_by_name_v = 
       get_field_by_name<Ref, std::index_sequence_for<Fields...>, Fields...>::value; 
+
+  template<typename Ref, typename... Fields>
+  concept can_get_field_by_name = !std::is_same_v<get_field_by_name_t<Ref, Fields...>, kumi::unit>;
+
   //==============================================================================================
   // Helper concepts for construction checks on records
   //============================================================================================== 

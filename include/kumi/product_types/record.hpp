@@ -467,6 +467,9 @@ namespace kumi
   requires (!(_::named_get_compliant<Name, R>()))
   constexpr auto get(R && r) = delete;
 
+  /// No get<type> on records 
+  template<typename U, record_type T> constexpr auto get(T && t) = delete;
+
   //================================================================================================
   //! @}
   //================================================================================================
