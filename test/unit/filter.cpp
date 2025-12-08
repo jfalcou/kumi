@@ -34,7 +34,7 @@ TTS_CASE("Check filter(kumi::tuple<>{}) behavior")
             );
 };
 
-TTS_CASE("Check partition() behavior with values")
+TTS_CASE("Check filter() behavior with values")
 {
   int     a = 4;
   double  b = 3.1415;
