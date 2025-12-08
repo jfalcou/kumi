@@ -436,6 +436,7 @@ namespace kumi::_
   {
     T {args...};
   };
+  struct sfinae_unit : kumi::unit { static constexpr auto value = kumi::none; };
   template<typename Ref, typename Field> struct check_type
   {
     static consteval Field      get(Ref) requires std::is_same_v<Field, Ref>  { return {}; }
@@ -444,8 +445,8 @@ namespace kumi::_
   template<std::size_t I, typename Ref, typename Field> struct get_index
   {
     using constant = std::integral_constant<std::size_t, I>;
-    static consteval constant   get(Ref) requires std::is_same_v<Ref,Field> { return {}; }
-    static consteval kumi::unit get(...)                                    { return {}; }
+    static consteval constant    get(Ref) requires std::is_same_v<Ref,Field> { return {}; }
+    static consteval sfinae_unit get(...)                                    { return {}; }
   };
   template<typename Ref, typename... Fields> struct get_field_by_type : check_type<Ref,Fields>...
   {
@@ -463,13 +464,15 @@ namespace kumi::_
   using get_field_by_type_t = typename get_field_by_type<Ref, Fields...>::type;
   template<typename Ref, typename... Fields> inline constexpr auto get_index_by_type_v = 
       get_index_by_type<Ref, std::index_sequence_for<Fields...>,Fields...>::value;
+  template<typename Ref, typename... Fields>
+  concept can_get_field_by_type = !std::is_same_v<get_field_by_type_t<Ref, Fields...>, kumi::unit>;
   template<std::size_t I, typename Ref, typename Field> struct check_name
   {
     static consteval Field      get(Ref) requires(Ref::name == Field::name) { return {}; }
     static consteval kumi::unit get(...)                                    { return {}; }
     static consteval std::integral_constant<std::size_t,I> get_index(Ref) 
-    requires(Ref::name == Field::name)          { return {}; }
-    static consteval kumi::unit get_index(...)  { return {}; }
+    requires(Ref::name == Field::name)           { return {}; }
+    static consteval sfinae_unit get_index(...)  { return {}; }
   };
   template<typename Ref, typename Seq, typename...Fields> struct get_field_by_name;
   template<typename Ref, std::size_t...I, typename... Fields>
@@ -484,6 +487,8 @@ namespace kumi::_
       typename get_field_by_name<Ref, std::index_sequence_for<Fields...>,Fields...>::type;
   template<typename Ref, typename... Fields> inline constexpr auto get_index_by_name_v = 
       get_field_by_name<Ref, std::index_sequence_for<Fields...>, Fields...>::value; 
+  template<typename Ref, typename... Fields>
+  concept can_get_field_by_name = !std::is_same_v<get_field_by_name_t<Ref, Fields...>, kumi::unit>;
   template<typename From, typename To> struct is_fieldwise_constructible;
   template<typename From, typename To> struct is_fieldwise_convertible;
   template<template<class...> class Box, typename... From, typename... To>
@@ -966,7 +971,7 @@ namespace kumi
     {
       return []<std::size_t...I>(std::index_sequence<I...>)
       {
-        return (!std::is_same_v<get_field_by_name_t<element_t<I,T>, element_t<I,U>...>, kumi::unit> 
+        return (can_get_field_by_name<element_t<I,T>, element_t<I,U>...> 
                 && ...);  
       }(std::make_index_sequence<size_v<T>>{});
     }
@@ -984,7 +989,7 @@ namespace kumi
     KUMI_ABI constexpr auto contains_field()
     {
       if constexpr( !indexer<std::remove_cvref_t<decltype(Name)>> )
-        return !std::is_same_v<get_field_by_name_t<field_capture<Name, unit>, Ts...>, kumi::unit>;
+        return can_get_field_by_name<field_capture<Name, unit>, Ts...>;
       else return false;
     };
   }
@@ -1005,9 +1010,34 @@ namespace kumi
   concept entirely_uniquely_named = (sizeof...(Ts)==0) 
   || (is_fully_named<Ts...> && uniquely_named<Ts...>);
   template<typename T, typename... Ts>
-  concept contains_type = (!std::is_same_v<_::get_field_by_type_t<T, Ts...>, kumi::unit>);
+  concept contains_type = _::can_get_field_by_type<T,Ts...>; 
   template<auto Name, typename... Ts>
-  concept contains_field = _::contains_field<Name, Ts...>(); 
+  concept contains_field = _::contains_field<Name, Ts...>();
+  namespace _
+  {
+    template<typename Type, product_type T>
+    consteval bool typed_get_compliant()
+    {
+      if constexpr (sized_product_type<T,0>) return false;
+      else return []<std::size_t...I>(std::index_sequence<I...>)
+      {
+        if constexpr ( uniquely_typed<element_t<I,T>...>)
+             return _::can_get_field_by_type<Type, element_t<I,T>...>;
+        else return false;
+      }(std::make_index_sequence<size_v<T>>{});
+    }
+    template<str Name, product_type T>
+    consteval bool named_get_compliant()
+    {
+      if constexpr (sized_product_type<T,0>) return false;
+      else return []<std::size_t...I>(std::index_sequence<I...>)
+      {
+         if constexpr (uniquely_named<element_t<I,T>...>) 
+              return _::contains_field<Name, element_t<I,T>...>();
+         else return false;
+      }(std::make_index_sequence<size_v<T>>{});
+    }
+  }
   template<typename T, typename U>
   concept equivalent = ( size_v<std::remove_cvref_t<T>> == size_v<std::remove_cvref_t<U>>) 
                        && _::has_same_field_names<std::remove_cvref_t<T>, std::remove_cvref_t<U>>();
@@ -1372,25 +1402,25 @@ namespace kumi
       return _::get_leaf<I>(impl);
     }
     template<typename T>
-    requires( contains_type<T, Ts...> )
+    requires( uniquely_typed<Ts...> && contains_type<T, Ts...> )
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) &noexcept
     {
       return _::get_leaf<T>(impl);
     }
     template<typename T>
-    requires ( contains_type<T, Ts...> )
+    requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) &&noexcept
     {
       return _::get_leaf<T>(static_cast<decltype(impl) &&>(impl));
     }
     template<typename T>
-    requires ( contains_type<T, Ts...> )
+    requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) const &&noexcept
     {
       return _::get_leaf<T>(static_cast<decltype(impl) const &&>(impl));
     }
     template<typename T>
-    requires (contains_type<T, Ts...> )
+    requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) const &noexcept
     {
       return _::get_leaf<T>(impl);
@@ -1614,6 +1644,9 @@ namespace kumi
   {
     return static_cast<tuple<Ts...> const &&>(arg)[index<I>];
   }
+  template<std::integral auto I, product_type T> 
+  requires ((!record_type<T>) && ((I >= size_v<T>) || (I < 0))) 
+  constexpr auto get(T && t) = delete;
   template<str Name, typename... Ts>
   requires ( uniquely_named<Ts...> && contains_field<Name, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
@@ -1642,34 +1675,40 @@ namespace kumi
   {
     return static_cast<tuple<Ts...> const &&>(t)[field<Name>];
   }
+  template<str Name, product_type T> 
+  requires (!record_type<T> && !(_::named_get_compliant<Name, T>()))
+  constexpr auto get(T && t) = delete;
   template<typename T, typename... Ts>
-  requires ( uniquely_typed<Ts...> )
+  requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> &t) noexcept
   {
     return t[as<T>{}];
   }
   template<typename T, typename... Ts>
-  requires ( uniquely_typed<Ts...> )
+  requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> &&t) noexcept
   {
     return static_cast<tuple<Ts...> &&>(t)[as<T>{}];
   }
   template<typename T, typename... Ts>
-  requires ( uniquely_typed<Ts...> )
+  requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> const &t) noexcept
   {
     return t[as<T>{}];
   }
   template<typename T, typename... Ts>
-  requires ( uniquely_typed<Ts...> )
+  requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> const &&t) noexcept
   {
     return static_cast<tuple<Ts...> const &&>(t)[as<T>{}];
   }
+  template<typename U, product_type T> 
+  requires (!record_type<T> && !(_::typed_get_compliant<U,T>()))
+  constexpr auto get(T && t) = delete;
 }
 namespace kumi
 {
@@ -1859,6 +1898,9 @@ namespace kumi
   {
     return static_cast<record<Ts...> const &&>(r)[index<I>];
   }
+  template<std::integral auto I, record_type R> 
+  requires ((I >= size_v<R>) || (I < 0)) 
+  constexpr auto get(R && r) = delete;
   template<str Name, typename... Ts>
   requires ( contains_field<Name, Ts...> ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> &r) noexcept
@@ -1883,35 +1925,16 @@ namespace kumi
   {
     return static_cast<record<Ts...> const &&>(r)[field<Name>];
   }
+  template<str Name, record_type R> 
+  requires (!(_::named_get_compliant<Name, R>()))
+  constexpr auto get(R && r) = delete;
+  template<typename U, record_type T> constexpr auto get(T && t) = delete;
 }
 namespace kumi
 {
 }
 namespace kumi
 {
-  namespace _
-  {
-    template<typename Type, product_type T>
-    consteval bool typed_get_compliant()
-    {
-      if constexpr (sized_product_type<T,0>) return false;
-      else return []<std::size_t...I>(std::index_sequence<I...>)
-      {
-         return contains_type<Type, element_t<I,T>...>;
-      }(std::make_index_sequence<size_v<T>>{});
-    }
-    template<str Name, product_type T>
-    consteval bool named_get_compliant()
-    {
-      if constexpr (sized_product_type<T,0>) return false;
-      else return []<std::size_t...I>(std::index_sequence<I...>)
-      {
-         if constexpr (uniquely_named<element_t<I,T>...>) 
-             return _::contains_field<Name, element_t<I,T>...>();
-         else                                             return false;
-      }(std::make_index_sequence<size_v<T>>{});
-    }
-  }
   template<product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto members_of( as<T> ) noexcept
   {
@@ -3279,7 +3302,7 @@ namespace kumi
     else return [&]<std::size_t ...I>(std::index_sequence<I...>)
     {
       return _::builder<T>::make( mk.template operator()<get<I>(Indexes)>()... );
-    }(std::make_index_sequence<Indexes.size()>{});
+    }(std::make_index_sequence<size_v<idx_t>>{});
   }
   namespace result
   {
