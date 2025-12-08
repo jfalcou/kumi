@@ -127,7 +127,7 @@ namespace kumi
     {
       return []<std::size_t...I>(std::index_sequence<I...>)
       {
-        return (!std::is_same_v<get_field_by_name_t<element_t<I,T>, element_t<I,U>...>, kumi::unit> 
+        return (can_get_field_by_name<element_t<I,T>, element_t<I,U>...> 
                 && ...);  
       }(std::make_index_sequence<size_v<T>>{});
     }
@@ -145,12 +145,12 @@ namespace kumi
 
     // MSVC workaround for get<>
     // MSVC doesnt SFINAE properly based on NTTP types before requires evaluation
-    // so we need this weird mechanism for it to pickt the correct version.
+    // so we need this weird mechanism for it to pick the correct version.
     template<auto Name, typename... Ts> 
     KUMI_ABI constexpr auto contains_field()
     {
       if constexpr( !indexer<std::remove_cvref_t<decltype(Name)>> )
-        return !std::is_same_v<get_field_by_name_t<field_capture<Name, unit>, Ts...>, kumi::unit>;
+        return can_get_field_by_name<field_capture<Name, unit>, Ts...>;
       else return false;
     };
   }
@@ -212,14 +212,41 @@ namespace kumi
   //! @brief Concept specifying if a Type is present in a parameter pack.
   //================================================================================================
   template<typename T, typename... Ts>
-  concept contains_type = (!std::is_same_v<_::get_field_by_type_t<T, Ts...>, kumi::unit>);
+  concept contains_type = _::can_get_field_by_type<T,Ts...>; 
 
   //================================================================================================
   //! @ingroup concepts
   //! @brief Concept specifying if a kumi::field_capture with name Name is present in a parameter pack.
   //================================================================================================
   template<auto Name, typename... Ts>
-  concept contains_field = _::contains_field<Name, Ts...>(); 
+  concept contains_field = _::contains_field<Name, Ts...>();
+
+  namespace _
+  {
+    template<typename Type, product_type T>
+    consteval bool typed_get_compliant()
+    {
+      if constexpr (sized_product_type<T,0>) return false;
+      else return []<std::size_t...I>(std::index_sequence<I...>)
+      {
+        if constexpr ( uniquely_typed<element_t<I,T>...>)
+             return _::can_get_field_by_type<Type, element_t<I,T>...>;
+        else return false;
+      }(std::make_index_sequence<size_v<T>>{});
+    }
+
+    template<str Name, product_type T>
+    consteval bool named_get_compliant()
+    {
+      if constexpr (sized_product_type<T,0>) return false;
+      else return []<std::size_t...I>(std::index_sequence<I...>)
+      {
+         if constexpr (uniquely_named<element_t<I,T>...>) 
+              return _::contains_field<Name, element_t<I,T>...>();
+         else return false;
+      }(std::make_index_sequence<size_v<T>>{});
+    }
+  }
 
   //================================================================================================
   //! @ingroup concepts

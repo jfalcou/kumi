@@ -100,7 +100,7 @@ namespace kumi
     //! @include doc/typed_subscript.cpp
     //==============================================================================================
     template<typename T>
-    requires( contains_type<T, Ts...> )
+    requires( uniquely_typed<Ts...> && contains_type<T, Ts...> )
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) &noexcept
     {
       return _::get_leaf<T>(impl);
@@ -108,7 +108,7 @@ namespace kumi
 
     /// @overload
     template<typename T>
-    requires ( contains_type<T, Ts...> )
+    requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) &&noexcept
     {
       return _::get_leaf<T>(static_cast<decltype(impl) &&>(impl));
@@ -116,7 +116,7 @@ namespace kumi
 
     /// @overload
     template<typename T>
-    requires ( contains_type<T, Ts...> )
+    requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) const &&noexcept
     {
       return _::get_leaf<T>(static_cast<decltype(impl) const &&>(impl));
@@ -124,7 +124,7 @@ namespace kumi
 
     /// @overload
     template<typename T>
-    requires (contains_type<T, Ts...> )
+    requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) const &noexcept
     {
       return _::get_leaf<T>(impl);
@@ -563,6 +563,11 @@ namespace kumi
   {
     return static_cast<tuple<Ts...> const &&>(arg)[index<I>];
   }
+  
+  /// Improves diagnostic for out of bounds index
+  template<std::integral auto I, product_type T> 
+  requires ((!record_type<T>) && ((I >= size_v<T>) || (I < 0))) 
+  constexpr auto get(T && t) = delete;
 
   //================================================================================================
   //! @ingroup tuple
@@ -612,6 +617,11 @@ namespace kumi
     return static_cast<tuple<Ts...> const &&>(t)[field<Name>];
   }
 
+  /// Improves diagnostic for non present name
+  template<str Name, product_type T> 
+  requires (!record_type<T> && !(_::named_get_compliant<Name, T>()))
+  constexpr auto get(T && t) = delete;
+
   //================================================================================================
   //! @ingroup tuple
   //! @brief Extracts the field which type is T from a kumi::tuple if it exist
@@ -626,7 +636,7 @@ namespace kumi
   //! @include doc/typed_get.cpp
   //================================================================================================
   template<typename T, typename... Ts>
-  requires ( uniquely_typed<Ts...> )
+  requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> &t) noexcept
   {
@@ -635,7 +645,7 @@ namespace kumi
 
   /// @overload
   template<typename T, typename... Ts>
-  requires ( uniquely_typed<Ts...> )
+  requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> &&t) noexcept
   {
@@ -644,7 +654,7 @@ namespace kumi
 
   /// @overload
   template<typename T, typename... Ts>
-  requires ( uniquely_typed<Ts...> )
+  requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> const &t) noexcept
   {
@@ -653,12 +663,17 @@ namespace kumi
 
   /// @overload
   template<typename T, typename... Ts>
-  requires ( uniquely_typed<Ts...> )
+  requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(tuple<Ts...> const &&t) noexcept
   {
     return static_cast<tuple<Ts...> const &&>(t)[as<T>{}];
   }
+
+  /// Improves diagnostic for non present type 
+  template<typename U, product_type T> 
+  requires (!record_type<T> && !(_::typed_get_compliant<U,T>()))
+  constexpr auto get(T && t) = delete;
 
   //================================================================================================
   //! @}

@@ -9,6 +9,9 @@
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
 
+template<int I>       auto f(auto& t) -> decltype( get<I>(t) ) { return get<I>(t); }
+template<kumi::str S> auto g(auto &t) -> decltype( get<S>(t) ) { return get<S>(t); }
+
 using namespace kumi::literals;
 
 TTS_CASE("Check access to kumi::record via indexing")
@@ -48,6 +51,11 @@ TTS_CASE("Check access to kumi::record via indexing")
   TTS_EQUAL(kumi::get<0>(std::move(t3)).value   , 13.37 );
   TTS_EQUAL(std::move(t3)[1_c].value            , 4.2f  );
 
+  TTS_EXPECT_NOT_COMPILES( t1, { get<2>(t1);  });
+  TTS_EXPECT_NOT_COMPILES( t1, { get<-1>(t1); });
+
+  TTS_EXPECT_NOT_COMPILES( t1, { f<2>(t1);  });
+  TTS_EXPECT_NOT_COMPILES( t1, { f<-1>(t1); });
 };
 
 TTS_CASE("Check access to kumi::record via names")
@@ -83,6 +91,9 @@ TTS_CASE("Check access to kumi::record via names")
 
   TTS_EQUAL(kumi::get<"x"_f>(std::move(t3)) , 13.37 );
   TTS_EQUAL(std::move(t3)["y"_f]            , 4.2f  );
+
+  TTS_EXPECT_NOT_COMPILES( t1, { get<"y"_f>(t1);  });
+  TTS_EXPECT_NOT_COMPILES( t1, { g<"y"_f>(t1);  });
 };
 
 TTS_CASE("Check constexpr access to kumi::record with named fields via indexing")

@@ -42,10 +42,6 @@ TTS_CASE("Check get methods on adapted types")
   TTS_EQUAL(( get<1>(rb).value ), ( 3.f ));
   TTS_EQUAL(( get<2>(rb).value ), ( 'x' ));
 
-  TTS_EQUAL(( kumi::get<kumi::field_capture<"i",int   >>(rb).value ), (  1  ));
-  TTS_EQUAL(( kumi::get<kumi::field_capture<"f",float >>(rb).value ), ( 3.f ));
-  TTS_EQUAL(( kumi::get<kumi::field_capture<"c",char  >>(rb).value ), ( 'x' ));
-
   TTS_EQUAL(( kumi::get<"i">(rb)), ( 1));
   TTS_EQUAL(( kumi::get<"f">(rb)), (3.f));
   TTS_EQUAL(( kumi::get<"c">(rb)), ('x'));
@@ -71,10 +67,6 @@ TTS_CASE("Check get return type on adapted types")
   TTS_TYPE_IS(( decltype(kumi::get<float>(tb))), ( float & ));
   TTS_TYPE_IS(( decltype(kumi::get<char >(tb))), ( char  & ));
 
-  TTS_TYPE_IS(( decltype(kumi::get<kumi::field_capture<"i", int   >>(rb)) ), ( kumi::field_capture<"i", int  &> ));
-  TTS_TYPE_IS(( decltype(kumi::get<kumi::field_capture<"f", float >>(rb)) ), ( kumi::field_capture<"f", float&> ));
-  TTS_TYPE_IS(( decltype(kumi::get<kumi::field_capture<"c", char  >>(rb)) ), ( kumi::field_capture<"c", char &> ));
-  
   TTS_TYPE_IS(( decltype(kumi::get<"i">(rb)) ), ( int   & ));
   TTS_TYPE_IS(( decltype(kumi::get<"f">(rb)) ), ( float & ));
   TTS_TYPE_IS(( decltype(kumi::get<"c">(rb)) ), ( char  & ));
@@ -91,10 +83,6 @@ TTS_CASE("Check get return type on adapted types")
   TTS_TYPE_IS(( decltype(kumi::get<float>(ctb))), ( float const& ));
   TTS_TYPE_IS(( decltype(kumi::get<char >(ctb))), ( char  const& ));
 
-  TTS_TYPE_IS(( decltype(kumi::get<kumi::field_capture<"i", int   >>(crb)) ), ( kumi::field_capture<"i", int   const&> ));
-  TTS_TYPE_IS(( decltype(kumi::get<kumi::field_capture<"f", float >>(crb)) ), ( kumi::field_capture<"f", float const&> ));
-  TTS_TYPE_IS(( decltype(kumi::get<kumi::field_capture<"c", char  >>(crb)) ), ( kumi::field_capture<"c", char  const&> ));
-  
   TTS_TYPE_IS(( decltype(kumi::get<"i">(crb)) ), ( int    const& ));
   TTS_TYPE_IS(( decltype(kumi::get<"f">(crb)) ), ( float  const& ));
   TTS_TYPE_IS(( decltype(kumi::get<"c">(crb)) ), ( char   const& ));
