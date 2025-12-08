@@ -486,7 +486,6 @@ namespace kumi::_
       get_field_by_name<Ref, std::index_sequence_for<Fields...>, Fields...>::value; 
   template<typename From, typename To> struct is_fieldwise_constructible;
   template<typename From, typename To> struct is_fieldwise_convertible;
-  template<typename From, typename To> struct is_fieldwise_ordered;
   template<template<class...> class Box, typename... From, typename... To>
   struct is_fieldwise_convertible<Box<From...>, Box<To...>>
   {     
@@ -2199,6 +2198,15 @@ namespace kumi
     return [&]<std::size_t... I>(std::index_sequence<I...>) { return Type {get<I>(t)...}; }
     (std::make_index_sequence<sizeof...(Ts)>());
   }
+  template<record_type Type, typename... Ts>
+  requires ( equivalent<Type, record<Ts...>> )
+  [[nodiscard]] KUMI_ABI constexpr auto from_record(record<Ts...> const &r)
+  {
+    return [&]<std::size_t... I>(std::index_sequence<I...>) 
+    { 
+      return Type{ get<name_of(as<element_t<I,Type>>{})>(r)... };
+    }(std::make_index_sequence<size_v<Type>>());
+  }
   template<product_type Type>
   [[nodiscard]] KUMI_ABI constexpr auto to_tuple(Type && t)
   {
@@ -2213,6 +2221,16 @@ namespace kumi
     {
       return tuple{ KUMI_FWD(s)[I]... };
     }(std::make_index_sequence<N>{});
+  }
+  template<record_type Type>
+  [[nodiscard]] KUMI_ABI constexpr auto to_record(Type && r)
+  {
+    if constexpr ( sized_product_type<Type, 0> ) return kumi::record{};
+    else return [&]<std::size_t...I>(std::index_sequence<I...>)
+    {
+      return record{field<name_of(as<element_t<I,Type>>{})> = 
+                      get<name_of(as<element_t<I,Type>>{})>(KUMI_FWD(r))... };
+    }(std::make_index_sequence<size_v<Type>>{});
   }
   template<typename T, template<typename...> class Meta = std::type_identity>
   struct as_tuple;
