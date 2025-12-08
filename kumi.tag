@@ -1094,7 +1094,7 @@
       <type>constexpr auto</type>
       <name>extract</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>acca7201e7087872ec75b51eecfa5c1d6</anchor>
+      <anchor>aee533a0722547c45e5b97128680aafe3</anchor>
       <arglist>(Tuple &amp;&amp;t, index_t&lt; I0 &gt; i0) noexcept</arglist>
     </member>
     <member kind="function">
@@ -1114,16 +1114,16 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>filter</name>
-      <anchorfile>group__generators_ga092340ad03e4970fb79d4bc4872e4a2d.html</anchorfile>
-      <anchor>ga092340ad03e4970fb79d4bc4872e4a2d</anchor>
-      <arglist>(T &amp;&amp;tup) noexcept</arglist>
+      <anchorfile>group__generators_gaafed5030f3115f8fda5f1966a9fdfd38.html</anchorfile>
+      <anchor>gaafed5030f3115f8fda5f1966a9fdfd38</anchor>
+      <arglist>(T &amp;&amp;t) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>filter_not</name>
-      <anchorfile>group__generators_gad866fde689ca139c15ddab16cd8be536.html</anchorfile>
-      <anchor>gad866fde689ca139c15ddab16cd8be536</anchor>
-      <arglist>(T &amp;&amp;tup) noexcept</arglist>
+      <anchorfile>group__generators_ga4252a5ff33d90265f42d4b6c70e48bed.html</anchorfile>
+      <anchor>ga4252a5ff33d90265f42d4b6c70e48bed</anchor>
+      <arglist>(T &amp;&amp;t) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1401,9 +1401,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>partition</name>
-      <anchorfile>group__generators_ga247e68735773ce448a9fc25f02d7dca0.html</anchorfile>
-      <anchor>ga247e68735773ce448a9fc25f02d7dca0</anchor>
-      <arglist>(T &amp;&amp;tup) noexcept</arglist>
+      <anchorfile>group__generators_gaf7926aecf07b881c2005e39f34512851.html</anchorfile>
+      <anchor>gaf7926aecf07b881c2005e39f34512851</anchor>
+      <arglist>(T &amp;&amp;t) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -2455,16 +2455,16 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::filter</name>
-      <anchorfile>group__generators_ga092340ad03e4970fb79d4bc4872e4a2d.html</anchorfile>
-      <anchor>ga092340ad03e4970fb79d4bc4872e4a2d</anchor>
-      <arglist>(T &amp;&amp;tup) noexcept</arglist>
+      <anchorfile>group__generators_gaafed5030f3115f8fda5f1966a9fdfd38.html</anchorfile>
+      <anchor>gaafed5030f3115f8fda5f1966a9fdfd38</anchor>
+      <arglist>(T &amp;&amp;t) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::filter_not</name>
-      <anchorfile>group__generators_gad866fde689ca139c15ddab16cd8be536.html</anchorfile>
-      <anchor>gad866fde689ca139c15ddab16cd8be536</anchor>
-      <arglist>(T &amp;&amp;tup) noexcept</arglist>
+      <anchorfile>group__generators_ga4252a5ff33d90265f42d4b6c70e48bed.html</anchorfile>
+      <anchor>ga4252a5ff33d90265f42d4b6c70e48bed</anchor>
+      <arglist>(T &amp;&amp;t) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -2497,9 +2497,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::partition</name>
-      <anchorfile>group__generators_ga247e68735773ce448a9fc25f02d7dca0.html</anchorfile>
-      <anchor>ga247e68735773ce448a9fc25f02d7dca0</anchor>
-      <arglist>(T &amp;&amp;tup) noexcept</arglist>
+      <anchorfile>group__generators_gaf7926aecf07b881c2005e39f34512851.html</anchorfile>
+      <anchor>gaf7926aecf07b881c2005e39f34512851</anchor>
+      <arglist>(T &amp;&amp;t) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>

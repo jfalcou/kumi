@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::partition</title>
+<title>kumi: kumi::filter_not</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__generators_ga247e68735773ce448a9fc25f02d7dca0.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__generators_ga4252a5ff33d90265f42d4b6c70e48bed.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,22 +121,22 @@ $(document).ready(function(){initNavTree('group__generators_ga247e68735773ce448a
 </div>
 
 <div class="contents">
-<a id="ga247e68735773ce448a9fc25f02d7dca0" name="ga247e68735773ce448a9fc25f02d7dca0"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga247e68735773ce448a9fc25f02d7dca0">&#9670;&#160;</a></span>partition()</h2>
+<a id="ga4252a5ff33d90265f42d4b6c70e48bed" name="ga4252a5ff33d90265f42d4b6c70e48bed"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4252a5ff33d90265f42d4b6c70e48bed">&#9670;&#160;</a></span>filter_not()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">template</a>&lt; <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">typename</a> &gt; <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">typename</a> Pred, <a class="el" href="conceptkumi_1_1product__type.html">kumi::product_type</a> T&gt; </div>
+template&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">template</a>&lt; <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">typename</a> &gt; <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">typename</a> Pred, product_type T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a> kumi::partition </td>
+          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a> kumi::filter_not </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T</a> &amp;&amp;&#160;</td>
-          <td class="paramname"><em>tup</em></td><td>)</td>
+          <td class="paramname"><em>t</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -147,7 +147,7 @@ template&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de4
 </table>
 </div><div class="memdoc">
 
-<p>Partition a tuple over a predicate. </p>
+<p>Filters a product type over a predicate. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Pred</td><td>Compile-time predicate </td></tr>
@@ -156,27 +156,27 @@ template&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de4
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">tup</td><td>Tuple to process </td></tr>
+    <tr><td class="paramname">t</td><td>Product type to process </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A tuple containing the tuple of all values which types satisfies <code>Pred</code> and the the tuple of all values which types does not satisfy <code>Pred</code>.</dd></dl>
-<h2><a class="anchor" id="autotoc_md64"></a>
+<dl class="section return"><dt>Returns</dt><dd>A product type containing all values which types does not satisfy <code>Pred</code>.</dd></dl>
+<h2><a class="anchor" id="autotoc_md68"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Pred</a>, <a class="code hl_concept" href="conceptkumi_1_1product__type.html">kumi::product_type</a> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T</a>&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__generators_ga247e68735773ce448a9fc25f02d7dca0.html#ga247e68735773ce448a9fc25f02d7dca0">partition</a>;</div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Pred</a>, <a class="code hl_concept" href="conceptkumi_1_1product__type.html">kumi::product_type</a> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T</a>&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__generators_ga4252a5ff33d90265f42d4b6c70e48bed.html#ga4252a5ff33d90265f42d4b6c70e48bed">filter_not</a>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Pred</a>, <a class="code hl_concept" href="conceptkumi_1_1product__type.html">kumi::product_type</a> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T</a>&gt;</div>
-<div class="line">  <span class="keyword">using </span>partition_t = <span class="keyword">typename</span> partition&lt;Pred, T&gt;::type;</div>
+<div class="line">  <span class="keyword">using </span>filter_not_t = <span class="keyword">typename</span> filter_not&lt;Pred, T&gt;::type;</div>
 <div class="line">}</div>
 <div class="ttc" id="aconceptkumi_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1product__type.html">kumi::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:33</div></div>
-<div class="ttc" id="agroup__generators_ga247e68735773ce448a9fc25f02d7dca0_html_ga247e68735773ce448a9fc25f02d7dca0"><div class="ttname"><a href="group__generators_ga247e68735773ce448a9fc25f02d7dca0.html#ga247e68735773ce448a9fc25f02d7dca0">kumi::partition</a></div><div class="ttdeci">constexpr auto partition(T &amp;&amp;tup) noexcept</div><div class="ttdoc">Partition a tuple over a predicate.</div><div class="ttdef"><b>Definition</b> partition.hpp:64</div></div>
+<div class="ttc" id="agroup__generators_ga4252a5ff33d90265f42d4b6c70e48bed_html_ga4252a5ff33d90265f42d4b6c70e48bed"><div class="ttname"><a href="group__generators_ga4252a5ff33d90265f42d4b6c70e48bed.html#ga4252a5ff33d90265f42d4b6c70e48bed">kumi::filter_not</a></div><div class="ttdeci">constexpr auto filter_not(T &amp;&amp;t) noexcept</div><div class="ttdoc">Filters a product type over a predicate.</div><div class="ttdef"><b>Definition</b> partition.hpp:140</div></div>
 <div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:73</div></div>
 <div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
-</div><!-- fragment --><p>Computes the type returned by a call to <a class="el" href="group__generators_ga247e68735773ce448a9fc25f02d7dca0.html#ga247e68735773ce448a9fc25f02d7dca0" title="Partition a tuple over a predicate.">kumi::partition</a>.</p>
-<h2><a class="anchor" id="autotoc_md65"></a>
-Examples:</h2>
+</div><!-- fragment --><p>Computes the type returned by a call to <a class="el" href="group__generators_ga4252a5ff33d90265f42d4b6c70e48bed.html#ga4252a5ff33d90265f42d4b6c70e48bed" title="Filters a product type over a predicate.">kumi::filter_not</a>.</p>
+<h2><a class="anchor" id="autotoc_md69"></a>
+Example:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
@@ -191,9 +191,9 @@ Examples:</h2>
 <div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">a</a>,&amp;<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">a</a>,<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">b</a>,&amp;<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">b</a>,<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">c</a>,&amp;<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">c</a>,<span class="charliteral">&#39;z&#39;</span>,<span class="keyword">nullptr</span>};</div>
 <div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Pointers first: &quot;</span> &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::partition&lt;std::is_pointer&gt;</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Real     first: &quot;</span> &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::partition&lt;std::is_floating_point&gt;</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;nullptr  first: &quot;</span> &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::partition&lt;std::is_null_pointer&gt;</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Non Pointers : &quot;</span>  &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::filter_not&lt;std::is_pointer&gt;</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Non Reals     : &quot;</span> &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::filter_not&lt;std::is_floating_point&gt;</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Non nullptr  : &quot;</span>  &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::filter_not&lt;std::is_null_pointer&gt;</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:37</div></div>
 </div><!-- fragment --> <div class="fragment"><div class="line"> </div>
@@ -209,12 +209,12 @@ Examples:</h2>
 <div class="line">  <span class="keywordtype">double</span>  <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">b</a> = 3.1415;</div>
 <div class="line">  <span class="keywordtype">float</span>   <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">c</a> = 0.01f;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a> = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;a&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">a</a>,<span class="stringliteral">&quot;b&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = &amp;<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">a</a>,<span class="stringliteral">&quot;c&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">b</a>,<span class="stringliteral">&quot;d&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = &amp;<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">b</a>,<span class="stringliteral">&quot;e&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">c</a>,<span class="stringliteral">&quot;f&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = &amp;<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">c</a>,<span class="stringliteral">&quot;g&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = <span class="charliteral">&#39;z&#39;</span>,<span class="stringliteral">&quot;h&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = <span class="keyword">nullptr</span>};</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a> = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;a&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a>=<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">a</a>,<span class="stringliteral">&quot;b&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a>=&amp;<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">a</a>,<span class="stringliteral">&quot;c&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a>=<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">b</a>,<span class="stringliteral">&quot;d&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a>=&amp;<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">b</a>,<span class="stringliteral">&quot;e&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a>=<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">c</a>,<span class="stringliteral">&quot;f&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a>=&amp;<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">c</a>,<span class="stringliteral">&quot;g&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a>=<span class="charliteral">&#39;z&#39;</span>,<span class="stringliteral">&quot;h&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a>=<span class="keyword">nullptr</span>};</div>
 <div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Pointers first: &quot;</span> &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::partition&lt;std::is_pointer&gt;</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Real     first: &quot;</span> &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::partition&lt;std::is_floating_point&gt;</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;nullptr  first: &quot;</span> &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::partition&lt;std::is_null_pointer&gt;</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Non Pointers : &quot;</span>  &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::filter_not&lt;std::is_pointer&gt;</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Non Reals     : &quot;</span> &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::filter_not&lt;std::is_floating_point&gt;</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Non nullptr  : &quot;</span>  &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::filter_not&lt;std::is_null_pointer&gt;</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous fields necessarily named, names are unique.</div><div class="ttdef"><b>Definition</b> traits.hpp:366</div></div>
 </div><!-- fragment --> 
