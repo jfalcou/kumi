@@ -445,29 +445,29 @@
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
-      <anchorfile>structkumi_1_1tuple_a8884e1a67d2f48a3ef8cfe619dbb6c28.html</anchorfile>
-      <anchor>a8884e1a67d2f48a3ef8cfe619dbb6c28</anchor>
+      <anchorfile>structkumi_1_1tuple_a78830391e69f3bfa460687d5e6d88dbb.html</anchorfile>
+      <anchor>a78830391e69f3bfa460687d5e6d88dbb</anchor>
       <arglist>(as&lt; T &gt;) &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>abb027a7814d28e064a141ac6badf8ac0</anchor>
+      <anchor>a946289af87af8c3f49b262efff912f23</anchor>
       <arglist>(as&lt; T &gt;) &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a57629c3191e8ac343759f181b37e3069</anchor>
+      <anchor>a5e511019a952ab1bd3429a85a6ec3cda</anchor>
       <arglist>(as&lt; T &gt;) const &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a3fc764a0814b32d175bc54813673c1bd</anchor>
+      <anchor>af4c8cd08c710b3ddae21ff4f15bf8da0</anchor>
       <arglist>(as&lt; T &gt;) const &amp;noexcept</arglist>
     </member>
     <member kind="function">
@@ -599,29 +599,29 @@
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
-      <anchorfile>structkumi_1_1tuple_a8884e1a67d2f48a3ef8cfe619dbb6c28.html</anchorfile>
-      <anchor>a8884e1a67d2f48a3ef8cfe619dbb6c28</anchor>
+      <anchorfile>structkumi_1_1tuple_a78830391e69f3bfa460687d5e6d88dbb.html</anchorfile>
+      <anchor>a78830391e69f3bfa460687d5e6d88dbb</anchor>
       <arglist>(as&lt; T &gt;) &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>abb027a7814d28e064a141ac6badf8ac0</anchor>
+      <anchor>a946289af87af8c3f49b262efff912f23</anchor>
       <arglist>(as&lt; T &gt;) &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a57629c3191e8ac343759f181b37e3069</anchor>
+      <anchor>a5e511019a952ab1bd3429a85a6ec3cda</anchor>
       <arglist>(as&lt; T &gt;) const &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a3fc764a0814b32d175bc54813673c1bd</anchor>
+      <anchor>af4c8cd08c710b3ddae21ff4f15bf8da0</anchor>
       <arglist>(as&lt; T &gt;) const &amp;noexcept</arglist>
     </member>
     <member kind="function">
@@ -1623,6 +1623,13 @@
       <arglist>(record&lt; Ts... &gt; const &amp;&amp;r) noexcept</arglist>
     </member>
     <member kind="function">
+      <type>constexpr auto</type>
+      <name>get</name>
+      <anchorfile>namespacekumi.html</anchorfile>
+      <anchor>a6144a58ea1b4b581e8fcbcc774ee5a42</anchor>
+      <arglist>(R &amp;&amp;r)=delete</arglist>
+    </member>
+    <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
@@ -1642,6 +1649,20 @@
       <anchorfile>namespacekumi.html</anchorfile>
       <anchor>ae765fd8b37c9925ce719772a5ae2c87c</anchor>
       <arglist>(record&lt; Ts... &gt; const &amp;&amp;r) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>get</name>
+      <anchorfile>namespacekumi.html</anchorfile>
+      <anchor>ad57ff2e8e48896c72e1c93d43ed2c136</anchor>
+      <arglist>(R &amp;&amp;r)=delete</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>get</name>
+      <anchorfile>namespacekumi.html</anchorfile>
+      <anchor>ab5527f2f9d28b4287d4f6c033deefbfd</anchor>
+      <arglist>(T &amp;&amp;t)=delete</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
@@ -1665,6 +1686,13 @@
       <arglist>(tuple&lt; Ts... &gt; const &amp;&amp;arg) noexcept</arglist>
     </member>
     <member kind="function">
+      <type>constexpr auto</type>
+      <name>get</name>
+      <anchorfile>namespacekumi.html</anchorfile>
+      <anchor>a79b12ed137721a9c7ee19e731fceeb6b</anchor>
+      <arglist>(T &amp;&amp;t)=delete</arglist>
+    </member>
+    <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
@@ -1686,25 +1714,39 @@
       <arglist>(tuple&lt; Ts... &gt; const &amp;&amp;t) noexcept</arglist>
     </member>
     <member kind="function">
+      <type>constexpr auto</type>
+      <name>get</name>
+      <anchorfile>namespacekumi.html</anchorfile>
+      <anchor>a9add4a76858bddef8f94c63cc17f9814</anchor>
+      <arglist>(T &amp;&amp;t)=delete</arglist>
+    </member>
+    <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a78a823906c703ce3cc5d7bd1a97348ab</anchor>
+      <anchor>a5e8f362c651bf7c05021c58f7de05320</anchor>
       <arglist>(tuple&lt; Ts... &gt; &amp;&amp;t) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a592d6252de24a0bb449cd06e9edf9b73</anchor>
+      <anchor>acc73edee2ef85d71e93bada2befff3b1</anchor>
       <arglist>(tuple&lt; Ts... &gt; const &amp;t) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a848540c0c3a4cdfdf9538cfe6bea0e7c</anchor>
+      <anchor>a9fa88e839da8ddc8b9f3745978776f56</anchor>
       <arglist>(tuple&lt; Ts... &gt; const &amp;&amp;t) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>get</name>
+      <anchorfile>namespacekumi.html</anchorfile>
+      <anchor>a7fcbac9de7bd8cf31da4122529047570</anchor>
+      <arglist>(T &amp;&amp;t)=delete</arglist>
     </member>
     <member kind="function">
       <type>KUMI_CUDA</type>
@@ -1798,6 +1840,13 @@
       <arglist>(record&lt; Ts... &gt; const &amp;&amp;r) noexcept</arglist>
     </member>
     <member kind="function">
+      <type>constexpr auto</type>
+      <name>get</name>
+      <anchorfile>namespacekumi.html</anchorfile>
+      <anchor>a6144a58ea1b4b581e8fcbcc774ee5a42</anchor>
+      <arglist>(R &amp;&amp;r)=delete</arglist>
+    </member>
+    <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
@@ -1817,6 +1866,20 @@
       <anchorfile>namespacekumi.html</anchorfile>
       <anchor>ae765fd8b37c9925ce719772a5ae2c87c</anchor>
       <arglist>(record&lt; Ts... &gt; const &amp;&amp;r) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>get</name>
+      <anchorfile>namespacekumi.html</anchorfile>
+      <anchor>ad57ff2e8e48896c72e1c93d43ed2c136</anchor>
+      <arglist>(R &amp;&amp;r)=delete</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>get</name>
+      <anchorfile>namespacekumi.html</anchorfile>
+      <anchor>ab5527f2f9d28b4287d4f6c033deefbfd</anchor>
+      <arglist>(T &amp;&amp;t)=delete</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
@@ -1840,6 +1903,13 @@
       <arglist>(tuple&lt; Ts... &gt; const &amp;&amp;arg) noexcept</arglist>
     </member>
     <member kind="function">
+      <type>constexpr auto</type>
+      <name>get</name>
+      <anchorfile>namespacekumi.html</anchorfile>
+      <anchor>a79b12ed137721a9c7ee19e731fceeb6b</anchor>
+      <arglist>(T &amp;&amp;t)=delete</arglist>
+    </member>
+    <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
@@ -1861,25 +1931,39 @@
       <arglist>(tuple&lt; Ts... &gt; const &amp;&amp;t) noexcept</arglist>
     </member>
     <member kind="function">
+      <type>constexpr auto</type>
+      <name>get</name>
+      <anchorfile>namespacekumi.html</anchorfile>
+      <anchor>a9add4a76858bddef8f94c63cc17f9814</anchor>
+      <arglist>(T &amp;&amp;t)=delete</arglist>
+    </member>
+    <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a78a823906c703ce3cc5d7bd1a97348ab</anchor>
+      <anchor>a5e8f362c651bf7c05021c58f7de05320</anchor>
       <arglist>(tuple&lt; Ts... &gt; &amp;&amp;t) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a592d6252de24a0bb449cd06e9edf9b73</anchor>
+      <anchor>acc73edee2ef85d71e93bada2befff3b1</anchor>
       <arglist>(tuple&lt; Ts... &gt; const &amp;t) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a848540c0c3a4cdfdf9538cfe6bea0e7c</anchor>
+      <anchor>a9fa88e839da8ddc8b9f3745978776f56</anchor>
       <arglist>(tuple&lt; Ts... &gt; const &amp;&amp;t) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>get</name>
+      <anchorfile>namespacekumi.html</anchorfile>
+      <anchor>a7fcbac9de7bd8cf31da4122529047570</anchor>
+      <arglist>(T &amp;&amp;t)=delete</arglist>
     </member>
     <member kind="function">
       <type>KUMI_CUDA</type>
