@@ -133,7 +133,7 @@ template&lt;product_type... Ts&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a> kumi::common_product_type </td>
+          <td class="memname">constexpr auto kumi::common_product_type </td>
           <td>(</td>
           <td class="paramtype">Ts...&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -154,15 +154,14 @@ template&lt;product_type... Ts&gt; </div>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md154"></a>
+<h2><a class="anchor" id="autotoc_md156"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Ts</a>&gt; <span class="keyword">using </span>common_product_type_t </div>
-<div class="line">      = <span class="keyword">typename</span> <a class="code hl_function" href="group__traits_ga3226fe6731192617509a4baae1f74655.html#ga3226fe6731192617509a4baae1f74655">common_product_type</a>&lt;<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Ts</a>...&gt;::type;</div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt; <span class="keyword">using </span>common_product_type_t </div>
+<div class="line">      = <span class="keyword">typename</span> <a class="code hl_function" href="group__traits_ga3226fe6731192617509a4baae1f74655.html#ga3226fe6731192617509a4baae1f74655">common_product_type</a>&lt;Ts...&gt;::type;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__traits_ga3226fe6731192617509a4baae1f74655_html_ga3226fe6731192617509a4baae1f74655"><div class="ttname"><a href="group__traits_ga3226fe6731192617509a4baae1f74655.html#ga3226fe6731192617509a4baae1f74655">kumi::common_product_type</a></div><div class="ttdeci">constexpr auto common_product_type(Ts...)</div><div class="ttdoc">Extracts the common product_type of a parameter pack, if all the types are record then it returns an ...</div><div class="ttdef"><b>Definition</b> builder.hpp:31</div></div>
-<div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:73</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

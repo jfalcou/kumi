@@ -125,23 +125,22 @@ $(document).ready(function(){initNavTree('conceptkumi_1_1entirely__uniquely__nam
 </div><!--header-->
 <div class="contents">
 
-<p>Concept specifying if a parameter pack only holds <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48" title="Converts a kumi::tuple to an instance of an arbitrary type.">kumi::field_captures</a> each of their <br  />
+<p>Concept specifying if a parameter pack only holds kumi::field_captures each of their <br  />
  each of their names are unique!  
 <a href="conceptkumi_1_1entirely__uniquely__named.html#details">More...</a></p>
 
 <p><code>#include &lt;kumi/utils/concepts.hpp&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Concept specifying if a parameter pack only holds <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48" title="Converts a kumi::tuple to an instance of an arbitrary type.">kumi::field_captures</a> each of their <br  />
+<div class="textblock"><p>Concept specifying if a parameter pack only holds kumi::field_captures each of their <br  />
  each of their names are unique! </p>
 <dl class="section note"><dt>Note</dt><dd>If there are no element in the parameter pack the concept returns true </dd></dl>
 </div><h2 class="groupheader">Concept definition</h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Ts</a>&gt;</div>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
 <div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1entirely__uniquely__named.html">kumi::entirely_uniquely_named</a> =  (<span class="keyword">sizeof</span>...(Ts)==0) </div>
-<div class="line">  || (<a class="code hl_concept" href="conceptkumi_1_1is__fully__named.html">is_fully_named</a>&lt;<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Ts</a>...&gt; &amp;&amp; <a class="code hl_concept" href="conceptkumi_1_1uniquely__named.html">uniquely_named</a>&lt;<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Ts</a>...&gt;)</div>
+<div class="line">  || (<a class="code hl_concept" href="conceptkumi_1_1is__fully__named.html">is_fully_named</a>&lt;Ts...&gt; &amp;&amp; <a class="code hl_concept" href="conceptkumi_1_1uniquely__named.html">uniquely_named</a>&lt;Ts...&gt;)</div>
 <div class="ttc" id="aconceptkumi_1_1entirely__uniquely__named_html"><div class="ttname"><a href="conceptkumi_1_1entirely__uniquely__named.html">kumi::entirely_uniquely_named</a></div><div class="ttdoc">Concept specifying if a parameter pack only holds kumi::field_captures each of their   each of their ...</div><div class="ttdef"><b>Definition</b> concepts.hpp:207</div></div>
 <div class="ttc" id="aconceptkumi_1_1is__fully__named_html"><div class="ttname"><a href="conceptkumi_1_1is__fully__named.html">kumi::is_fully_named</a></div><div class="ttdoc">Concept specifying if parameter pack contains only kumi::field_captures.</div><div class="ttdef"><b>Definition</b> concepts.hpp:181</div></div>
 <div class="ttc" id="aconceptkumi_1_1uniquely__named_html"><div class="ttname"><a href="conceptkumi_1_1uniquely__named.html">kumi::uniquely_named</a></div><div class="ttdoc">Concept specifying if a parameter pack only holds unique kumi::field_capture names.</div><div class="ttdef"><b>Definition</b> concepts.hpp:196</div></div>
-<div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:73</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->

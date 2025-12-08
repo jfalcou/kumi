@@ -128,21 +128,21 @@ $(document).ready(function(){initNavTree('group__generators_ga4d79fad3c079dcc671
 <div class="memproto">
 <div class="memtemplate">
 template&lt;product_type T0, product_type... Ts&gt; <br />
-requires ( follows_same_semantic&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T0</a>, Ts...&gt; )</div>
+requires ( follows_same_semantic&lt;T0, Ts...&gt; )</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a> kumi::zip_min </td>
+          <td class="memname">constexpr auto kumi::zip_min </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T0</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">T0 &amp;&amp;&#160;</td>
           <td class="paramname"><em>t0</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Ts</a> &amp;&amp;...&#160;</td>
+          <td class="paramtype">Ts &amp;&amp;...&#160;</td>
           <td class="paramname"><em>ts</em>&#160;</td>
         </tr>
         <tr>
@@ -168,7 +168,7 @@ requires ( follows_same_semantic&lt;<a class="el" href="group__utility_gad8e73ef
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The tuple of all combination of elements from t0, ts...</dd></dl>
 <p>@ note <code>zip_min</code> truncates product types based on the smallest size.</p>
-<h2><a class="anchor" id="autotoc_md150"></a>
+<h2><a class="anchor" id="autotoc_md152"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
@@ -179,22 +179,21 @@ Helper type</h2>
 <div class="line">}</div>
 <div class="ttc" id="agroup__generators_ga4d79fad3c079dcc6714a6796b21e8177_html_ga4d79fad3c079dcc6714a6796b21e8177"><div class="ttname"><a href="group__generators_ga4d79fad3c079dcc6714a6796b21e8177.html#ga4d79fad3c079dcc6714a6796b21e8177">kumi::zip_min</a></div><div class="ttdeci">constexpr auto zip_min(T0 &amp;&amp;t0, Ts &amp;&amp;...ts)</div><div class="ttdoc">Constructs a tuple where the ith element is the prudct type of all ith elements of ts....</div><div class="ttdef"><b>Definition</b> zip.hpp:122</div></div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__generators_ga4d79fad3c079dcc6714a6796b21e8177.html#ga4d79fad3c079dcc6714a6796b21e8177" title="Constructs a tuple where the ith element is the prudct type of all ith elements of ts....">kumi::zip_min</a></p>
-<h2><a class="anchor" id="autotoc_md151"></a>
+<h2><a class="anchor" id="autotoc_md153"></a>
 Example</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">main</a>()</div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">nbrs</a>  = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1,2,3, 4,5,6};</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">ltrs</a>  = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="charliteral">&#39;a&#39;</span>,<span class="charliteral">&#39;b&#39;</span>,<span class="charliteral">&#39;c&#39;</span>};</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">ratio</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{0.1,0.01,0.001,0.0001};</div>
+<div class="line">  <span class="keyword">auto</span> nbrs  = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1,2,3, 4,5,6};</div>
+<div class="line">  <span class="keyword">auto</span> ltrs  = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="charliteral">&#39;a&#39;</span>,<span class="charliteral">&#39;b&#39;</span>,<span class="charliteral">&#39;c&#39;</span>};</div>
+<div class="line">  <span class="keyword">auto</span> ratio = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{0.1,0.01,0.001,0.0001};</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">r</a> = <a class="code hl_function" href="group__generators_ga4d79fad3c079dcc6714a6796b21e8177.html#ga4d79fad3c079dcc6714a6796b21e8177">kumi::zip_min</a>( <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">nbrs</a>, <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">ltrs</a>, <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">ratio</a> );</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">r</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_function" href="group__generators_ga4d79fad3c079dcc6714a6796b21e8177.html#ga4d79fad3c079dcc6714a6796b21e8177">kumi::zip_min</a>( nbrs, ltrs, ratio );</div>
+<div class="line">  std::cout &lt;&lt; r &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:73</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:37</div></div>
 </div><!-- fragment --> 
 </div>

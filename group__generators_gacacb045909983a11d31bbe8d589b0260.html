@@ -128,15 +128,15 @@ $(document).ready(function(){initNavTree('group__generators_gacacb045909983a11d3
 <div class="memproto">
 <div class="memtemplate">
 template&lt;field_name... Name, product_type Tuple&gt; <br />
-requires ( <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">requires</a> { <a class="el" href="namespacekumi.html#a58caf3f1c74614bb2224b63a6009c853">get</a>&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Name</a>&gt;(std::declval&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Tuple</a>&gt;()); } &amp;&amp; ... )</div>
+requires ( requires { <a class="el" href="namespacekumi.html#a58caf3f1c74614bb2224b63a6009c853">get</a>&lt;Name&gt;(std::declval&lt;Tuple&gt;()); } &amp;&amp; ... )</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a> kumi::reorder_fields </td>
+          <td class="memname">constexpr auto kumi::reorder_fields </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Tuple</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">Tuple &amp;&amp;&#160;</td>
           <td class="paramname"><em>t</em></td><td>)</td>
           <td></td>
         </tr>
@@ -164,33 +164,32 @@ requires ( <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A product type equivalent to product_type(t[index&lt;Idx&gt;]...);</dd></dl>
-<h2><a class="anchor" id="autotoc_md116"></a>
+<h2><a class="anchor" id="autotoc_md118"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;<a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type</a> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Tuple</a>,std::size_t... <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Idx</a>&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__generators_gacacb045909983a11d31bbe8d589b0260.html#gacacb045909983a11d31bbe8d589b0260">reorder_fields</a>;</div>
+<div class="line">  <span class="keyword">template</span>&lt;<a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type</a> Tuple,std::size_t... Idx&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__generators_gacacb045909983a11d31bbe8d589b0260.html#gacacb045909983a11d31bbe8d589b0260">reorder_fields</a>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">template</span>&lt;<a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type</a> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Tuple</a>,std::size_t... <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Idx</a>&gt;</div>
-<div class="line">  <span class="keyword">using </span>reorder_fields_t = <span class="keyword">typename</span> <a class="code hl_function" href="group__generators_gacacb045909983a11d31bbe8d589b0260.html#gacacb045909983a11d31bbe8d589b0260">reorder_fields</a>&lt;<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Tuple</a>,<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Idx</a>...&gt;::type;</div>
+<div class="line">  <span class="keyword">template</span>&lt;<a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type</a> Tuple,std::size_t... Idx&gt;</div>
+<div class="line">  <span class="keyword">using </span>reorder_fields_t = <span class="keyword">typename</span> <a class="code hl_function" href="group__generators_gacacb045909983a11d31bbe8d589b0260.html#gacacb045909983a11d31bbe8d589b0260">reorder_fields</a>&lt;Tuple,Idx...&gt;::type;</div>
 <div class="line">}</div>
 <div class="ttc" id="aconceptkumi_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1product__type.html">kumi::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:33</div></div>
 <div class="ttc" id="agroup__generators_gacacb045909983a11d31bbe8d589b0260_html_gacacb045909983a11d31bbe8d589b0260"><div class="ttname"><a href="group__generators_gacacb045909983a11d31bbe8d589b0260.html#gacacb045909983a11d31bbe8d589b0260">kumi::reorder_fields</a></div><div class="ttdeci">constexpr auto reorder_fields(Tuple &amp;&amp;t)</div><div class="ttdoc">Reorder elements of a kumi::record.</div><div class="ttdef"><b>Definition</b> reorder.hpp:110</div></div>
-<div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:73</div></div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__generators_gacacb045909983a11d31bbe8d589b0260.html#gacacb045909983a11d31bbe8d589b0260" title="Reorder elements of a kumi::record.">kumi::reorder_fields</a></p>
-<h2><a class="anchor" id="autotoc_md117"></a>
+<h2><a class="anchor" id="autotoc_md119"></a>
 Example</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">main</a>()</div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> values = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> { <span class="stringliteral">&quot;a&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = 1, <span class="stringliteral">&quot;b&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = <span class="charliteral">&#39;a&#39;</span>, <span class="stringliteral">&quot;c&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = 0.1 };</div>
+<div class="line">  <span class="keyword">auto</span> values = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> { <span class="stringliteral">&quot;a&quot;</span>_f = 1, <span class="stringliteral">&quot;b&quot;</span>_f = <span class="charliteral">&#39;a&#39;</span>, <span class="stringliteral">&quot;c&quot;</span>_f = 0.1 };</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; values &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__generators_gacacb045909983a11d31bbe8d589b0260.html#gacacb045909983a11d31bbe8d589b0260">kumi::reorder_fields</a>&lt;<span class="stringliteral">&quot;b&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a>,<span class="stringliteral">&quot;a&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a>,<span class="stringliteral">&quot;c&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a>&gt;(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__generators_gacacb045909983a11d31bbe8d589b0260.html#gacacb045909983a11d31bbe8d589b0260">kumi::reorder_fields</a>&lt;<span class="stringliteral">&quot;b&quot;</span>_f,<span class="stringliteral">&quot;a&quot;</span>_f,<span class="stringliteral">&quot;c&quot;</span>_f&gt;(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous fields necessarily named, names are unique.</div><div class="ttdef"><b>Definition</b> traits.hpp:366</div></div>
 </div><!-- fragment --> 

@@ -1197,6 +1197,13 @@
     </member>
     <member kind="function">
       <type>constexpr auto</type>
+      <name>from_record</name>
+      <anchorfile>group__utility_gaa1b52cd0586fc3a8cbacc2f17d1de410.html</anchorfile>
+      <anchor>gaa1b52cd0586fc3a8cbacc2f17d1de410</anchor>
+      <arglist>(record&lt; Ts... &gt; const &amp;r)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
       <name>from_tuple</name>
       <anchorfile>group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html</anchorfile>
       <anchor>gad8e73ef5a6e05c2ae2db0bcfa860de48</anchor>
@@ -1516,6 +1523,13 @@
       <anchorfile>group__reductions_ga183fa966de706e5e6c78a9cc50202fe8.html</anchorfile>
       <anchor>ga183fa966de706e5e6c78a9cc50202fe8</anchor>
       <arglist>(T &amp;&amp;t, Value init)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>to_record</name>
+      <anchorfile>group__utility_ga324cc6775ad5b15767fc2eaae02abd73.html</anchorfile>
+      <anchor>ga324cc6775ad5b15767fc2eaae02abd73</anchor>
+      <arglist>(Type &amp;&amp;r)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1917,6 +1931,13 @@
     </member>
     <member kind="function">
       <type>constexpr auto</type>
+      <name>kumi::from_record</name>
+      <anchorfile>group__utility_gaa1b52cd0586fc3a8cbacc2f17d1de410.html</anchorfile>
+      <anchor>gaa1b52cd0586fc3a8cbacc2f17d1de410</anchor>
+      <arglist>(record&lt; Ts... &gt; const &amp;r)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
       <name>kumi::from_tuple</name>
       <anchorfile>group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html</anchorfile>
       <anchor>gad8e73ef5a6e05c2ae2db0bcfa860de48</anchor>
@@ -1970,6 +1991,13 @@
       <anchorfile>group__utility_ga9c8c29e8a2f4f5e8a663200559fdc983.html</anchorfile>
       <anchor>ga9c8c29e8a2f4f5e8a663200559fdc983</anchor>
       <arglist>() noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::to_record</name>
+      <anchorfile>group__utility_ga324cc6775ad5b15767fc2eaae02abd73.html</anchorfile>
+      <anchor>ga324cc6775ad5b15767fc2eaae02abd73</anchor>
+      <arglist>(Type &amp;&amp;r)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>

@@ -13,6 +13,7 @@ var searchData=
   ['for_5feach_5findex_10',['for_each_index',['../group__transforms_ga39e65f96d9880dd5b1e08b8dc01993a1.html#ga39e65f96d9880dd5b1e08b8dc01993a1',1,'kumi']]],
   ['forward_5fas_5frecord_11',['forward_as_record',['../group__record_ga508677aacba8fa46c42516e15c92ab3c.html#ga508677aacba8fa46c42516e15c92ab3c',1,'kumi::record']]],
   ['forward_5fas_5ftuple_12',['forward_as_tuple',['../group__tuple_ga5c5ba567f7ec305505f44bf70c67b6db.html#ga5c5ba567f7ec305505f44bf70c67b6db',1,'kumi::tuple']]],
-  ['from_5ftuple_13',['from_tuple',['../group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48',1,'kumi']]],
-  ['front_14',['front',['../group__utility_gae40b8dfe98266c4f62395c369833eef3.html#gae40b8dfe98266c4f62395c369833eef3',1,'kumi']]]
+  ['from_5frecord_13',['from_record',['../group__utility_gaa1b52cd0586fc3a8cbacc2f17d1de410.html#gaa1b52cd0586fc3a8cbacc2f17d1de410',1,'kumi']]],
+  ['from_5ftuple_14',['from_tuple',['../group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48',1,'kumi']]],
+  ['front_15',['front',['../group__utility_gae40b8dfe98266c4f62395c369833eef3.html#gae40b8dfe98266c4f62395c369833eef3',1,'kumi']]]
 ];

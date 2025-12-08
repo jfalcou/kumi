@@ -128,21 +128,21 @@ $(document).ready(function(){initNavTree('group__generators_ga30d07f30bbfa319dfa
 <div class="memproto">
 <div class="memtemplate">
 template&lt;std::size_t I0, product_type Tuple&gt; <br />
-requires (<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">I0</a> &lt;= size_v&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Tuple</a>&gt;)</div>
+requires (I0 &lt;= size_v&lt;Tuple&gt;)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a> kumi::split </td>
+          <td class="memname">constexpr auto kumi::split </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Tuple</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">Tuple &amp;&amp;&#160;</td>
           <td class="paramname"><em>t</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structkumi_1_1index__t.html">index_t</a>&lt; <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">I0</a> &gt;&#160;</td>
+          <td class="paramtype"><a class="el" href="structkumi_1_1index__t.html">index_t</a>&lt; I0 &gt;&#160;</td>
           <td class="paramname"><em>i0</em>&#160;</td>
         </tr>
         <tr>
@@ -169,7 +169,7 @@ requires (<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A new <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> containing the two sub-tuple cut at index I.</dd></dl>
-<h2><a class="anchor" id="autotoc_md14"></a>
+<h2><a class="anchor" id="autotoc_md16"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
@@ -180,42 +180,41 @@ Helper type</h2>
 <div class="line">}</div>
 <div class="ttc" id="agroup__generators_ga30d07f30bbfa319dfa78a9e1a5a83a38_html_ga30d07f30bbfa319dfa78a9e1a5a83a38"><div class="ttname"><a href="group__generators_ga30d07f30bbfa319dfa78a9e1a5a83a38.html#ga30d07f30bbfa319dfa78a9e1a5a83a38">kumi::split</a></div><div class="ttdeci">constexpr auto split(Tuple &amp;&amp;t, index_t&lt; I0 &gt; i0) noexcept</div><div class="ttdoc">Split a tuple into two.</div><div class="ttdef"><b>Definition</b> extract.hpp:98</div></div>
 </div><!-- fragment --><p>Computes the type returned by a call to split.</p>
-<h2><a class="anchor" id="autotoc_md15"></a>
+<h2><a class="anchor" id="autotoc_md17"></a>
 Examples:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">main</a>()</div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">a</a> = { 1, 2.3, 4.5f,<span class="charliteral">&#39;6&#39;</span>,<span class="stringliteral">&quot;7&quot;</span>, <span class="keywordtype">short</span>{89} };</div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> a = { 1, 2.3, 4.5f,<span class="charliteral">&#39;6&#39;</span>,<span class="stringliteral">&quot;7&quot;</span>, <span class="keywordtype">short</span>{89} };</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span>[<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">first</a>, <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">second</a>] = <a class="code hl_function" href="group__generators_ga30d07f30bbfa319dfa78a9e1a5a83a38.html#ga30d07f30bbfa319dfa78a9e1a5a83a38">split</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">a</a>, 3<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_c</a>);</div>
+<div class="line">  <span class="keyword">auto</span>[first, second] = <a class="code hl_function" href="group__generators_ga30d07f30bbfa319dfa78a9e1a5a83a38.html#ga30d07f30bbfa319dfa78a9e1a5a83a38">split</a>(a, 3_c);</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">a</a>      &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">first</a>  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">second</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; a      &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; first  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; second &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:73</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:37</div></div>
 </div><!-- fragment --> <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">main</a>()</div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">a</a> = { <span class="stringliteral">&quot;a&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = 1, <span class="stringliteral">&quot;b&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = 2.3, <span class="stringliteral">&quot;c&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = 4.5f,<span class="stringliteral">&quot;d&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = <span class="charliteral">&#39;6&#39;</span>,</div>
-<div class="line">                     <span class="stringliteral">&quot;e&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = <span class="stringliteral">&quot;7&quot;</span>, <span class="stringliteral">&quot;f&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a> = <span class="keywordtype">short</span>{89} };</div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> a = { <span class="stringliteral">&quot;a&quot;</span>_f = 1, <span class="stringliteral">&quot;b&quot;</span>_f = 2.3, <span class="stringliteral">&quot;c&quot;</span>_f = 4.5f,<span class="stringliteral">&quot;d&quot;</span>_f = <span class="charliteral">&#39;6&#39;</span>,</div>
+<div class="line">                     <span class="stringliteral">&quot;e&quot;</span>_f = <span class="stringliteral">&quot;7&quot;</span>, <span class="stringliteral">&quot;f&quot;</span>_f = <span class="keywordtype">short</span>{89} };</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span>[<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">first</a>, <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">second</a>] = <a class="code hl_function" href="group__generators_ga30d07f30bbfa319dfa78a9e1a5a83a38.html#ga30d07f30bbfa319dfa78a9e1a5a83a38">split</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">a</a>, 3<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_c</a>);</div>
+<div class="line">  <span class="keyword">auto</span>[first, second] = <a class="code hl_function" href="group__generators_ga30d07f30bbfa319dfa78a9e1a5a83a38.html#ga30d07f30bbfa319dfa78a9e1a5a83a38">split</a>(a, 3_c);</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">a</a>      &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">first</a>  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">second</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; a      &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; first  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; second &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous fields necessarily named, names are unique.</div><div class="ttdef"><b>Definition</b> traits.hpp:366</div></div>
 </div><!-- fragment --> 

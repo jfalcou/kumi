@@ -133,9 +133,9 @@ template&lt;record_type Type&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a> to_ref </td>
+          <td class="memname">constexpr auto to_ref </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Type</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">Type &amp;&amp;&#160;</td>
           <td class="paramname"><em>r</em></td><td>)</td>
           <td></td>
         </tr>
@@ -156,26 +156,25 @@ template&lt;record_type Type&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A record equivalent to the result of <code><a class="el" href="group__transforms_ga2c808f8956ae85b42b9b8a8ed09cc371.html#ga2c808f8956ae85b42b9b8a8ed09cc371" title="Invoke the Callable object f with a product_type of arguments. f is applied on the values if the give...">kumi::apply</a>([]&lt;typename... T&gt;(T&amp;&amp;... e) { return kumi::forward_as_record&lt;name_of(as&lt;T&gt;{})...&gt;(std::forward&lt;T&gt;(e)...); }, t)</code></dd></dl>
-<h2><a class="anchor" id="autotoc_md159"></a>
+<h2><a class="anchor" id="autotoc_md161"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">main</a>()</div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a> = kumi::make_record(<span class="stringliteral">&quot;a&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a>=0,<span class="stringliteral">&quot;b&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a>=<span class="charliteral">&#39;0&#39;</span>,<span class="stringliteral">&quot;c&quot;</span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_f</a>=0.f);</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">ref</a>      = kumi::to_ref( <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a> );</div>
+<div class="line">  <span class="keyword">auto</span> original = kumi::make_record(<span class="stringliteral">&quot;a&quot;</span>_f=0,<span class="stringliteral">&quot;b&quot;</span>_f=<span class="charliteral">&#39;0&#39;</span>,<span class="stringliteral">&quot;c&quot;</span>_f=0.f);</div>
+<div class="line">  <span class="keyword">auto</span> ref      = kumi::to_ref( original );</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; original &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_function" href="namespacekumi.html#a58caf3f1c74614bb2224b63a6009c853">kumi::get</a>&lt;<span class="stringliteral">&quot;a&quot;</span>&gt;(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">ref</a>) = 9;</div>
-<div class="line">  <a class="code hl_function" href="namespacekumi.html#a58caf3f1c74614bb2224b63a6009c853">kumi::get</a>&lt;<span class="stringliteral">&quot;b&quot;</span>&gt;(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">ref</a>) = <span class="charliteral">&#39;z&#39;</span>;</div>
-<div class="line">  <a class="code hl_function" href="namespacekumi.html#a58caf3f1c74614bb2224b63a6009c853">kumi::get</a>&lt;<span class="stringliteral">&quot;c&quot;</span>&gt;(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">ref</a>) = 3.14159f;</div>
+<div class="line">  <a class="code hl_function" href="namespacekumi.html#a58caf3f1c74614bb2224b63a6009c853">kumi::get</a>&lt;<span class="stringliteral">&quot;a&quot;</span>&gt;(ref) = 9;</div>
+<div class="line">  <a class="code hl_function" href="namespacekumi.html#a58caf3f1c74614bb2224b63a6009c853">kumi::get</a>&lt;<span class="stringliteral">&quot;b&quot;</span>&gt;(ref) = <span class="charliteral">&#39;z&#39;</span>;</div>
+<div class="line">  <a class="code hl_function" href="namespacekumi.html#a58caf3f1c74614bb2224b63a6009c853">kumi::get</a>&lt;<span class="stringliteral">&quot;c&quot;</span>&gt;(ref) = 3.14159f;</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">original</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; original &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:73</div></div>
 <div class="ttc" id="anamespacekumi_html_a58caf3f1c74614bb2224b63a6009c853"><div class="ttname"><a href="namespacekumi.html#a58caf3f1c74614bb2224b63a6009c853">kumi::get</a></div><div class="ttdeci">constexpr decltype(auto) get(record&lt; Ts... &gt; &amp;&amp;r) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition</b> record.hpp:395</div></div>
 </div><!-- fragment --> 
 </div>

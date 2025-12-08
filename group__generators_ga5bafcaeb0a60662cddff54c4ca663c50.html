@@ -128,27 +128,27 @@ $(document).ready(function(){initNavTree('group__generators_ga5bafcaeb0a60662cdd
 <div class="memproto">
 <div class="memtemplate">
 template&lt;std::size_t I0, std::size_t I1, product_type Tuple&gt; <br />
-requires ( (<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">I0</a> &lt;= size_v&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Tuple</a>&gt;) &amp;&amp; (<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">I1</a> &lt;= size_v&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Tuple</a>&gt;) )</div>
+requires ( (I0 &lt;= size_v&lt;Tuple&gt;) &amp;&amp; (I1 &lt;= size_v&lt;Tuple&gt;) )</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a> kumi::extract </td>
+          <td class="memname">constexpr auto kumi::extract </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Tuple</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">Tuple &amp;&amp;&#160;</td>
           <td class="paramname"><em>t</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structkumi_1_1index__t.html">index_t</a>&lt; <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">I0</a> &gt;&#160;</td>
+          <td class="paramtype"><a class="el" href="structkumi_1_1index__t.html">index_t</a>&lt; I0 &gt;&#160;</td>
           <td class="paramname"><em>i0</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="structkumi_1_1index__t.html">index_t</a>&lt; <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">I1</a> &gt;&#160;</td>
+          <td class="paramtype"><a class="el" href="structkumi_1_1index__t.html">index_t</a>&lt; I1 &gt;&#160;</td>
           <td class="paramname"><em>i1</em>&#160;</td>
         </tr>
         <tr>
@@ -175,36 +175,35 @@ requires ( (<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de4
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A new <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> containing to the selected elements of the input tuple.</dd></dl>
-<h2><a class="anchor" id="autotoc_md12"></a>
+<h2><a class="anchor" id="autotoc_md14"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;<a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type</a> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Tuple</a>, std::size_t <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">I0</a>, std::size_t <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">I1</a>=-1&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__generators_ga5bafcaeb0a60662cddff54c4ca663c50.html#ga5bafcaeb0a60662cddff54c4ca663c50">extract</a>;</div>
+<div class="line">  <span class="keyword">template</span>&lt;<a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type</a> Tuple, std::size_t I0, std::size_t I1=-1&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__generators_ga5bafcaeb0a60662cddff54c4ca663c50.html#ga5bafcaeb0a60662cddff54c4ca663c50">extract</a>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">template</span>&lt;<a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type</a> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Tuple</a>, std::size_t <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">I0</a>, std::size_t <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">I1</a>=-1&gt;</div>
+<div class="line">  <span class="keyword">template</span>&lt;<a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type</a> Tuple, std::size_t I0, std::size_t I1=-1&gt;</div>
 <div class="line">  <span class="keyword">using </span>extract_t = <span class="keyword">typename</span> extract&lt;Tuple,I0,I1&gt;::type;</div>
 <div class="line">}</div>
 <div class="ttc" id="aconceptkumi_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1product__type.html">kumi::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:33</div></div>
 <div class="ttc" id="agroup__generators_ga5bafcaeb0a60662cddff54c4ca663c50_html_ga5bafcaeb0a60662cddff54c4ca663c50"><div class="ttname"><a href="group__generators_ga5bafcaeb0a60662cddff54c4ca663c50.html#ga5bafcaeb0a60662cddff54c4ca663c50">kumi::extract</a></div><div class="ttdeci">constexpr auto extract(Tuple &amp;&amp;t, index_t&lt; I0 &gt; i0, index_t&lt; I1 &gt; i1) noexcept</div><div class="ttdoc">Extracts a sub-tuple from a product type.</div><div class="ttdef"><b>Definition</b> extract.hpp:45</div></div>
-<div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:73</div></div>
 </div><!-- fragment --><p>Computes the type returned by a call to extract.</p>
-<h2><a class="anchor" id="autotoc_md13"></a>
+<h2><a class="anchor" id="autotoc_md15"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">main</a>()</div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">a</a> = { 1, 2.3, 4.5f,<span class="charliteral">&#39;6&#39;</span>,<span class="stringliteral">&quot;7&quot;</span>, <span class="keywordtype">short</span>{89} };</div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> a = { 1, 2.3, 4.5f,<span class="charliteral">&#39;6&#39;</span>,<span class="stringliteral">&quot;7&quot;</span>, <span class="keywordtype">short</span>{89} };</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">head</a> = <a class="code hl_function" href="group__generators_ga5bafcaeb0a60662cddff54c4ca663c50.html#ga5bafcaeb0a60662cddff54c4ca663c50">extract</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">a</a>,0<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_c</a>,1<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_c</a>);</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">mid</a>  = <a class="code hl_function" href="group__generators_ga5bafcaeb0a60662cddff54c4ca663c50.html#ga5bafcaeb0a60662cddff54c4ca663c50">extract</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">a</a>,1<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_c</a>,3<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">_c</a>);</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">last</a> = <a class="code hl_function" href="group__generators_ga5bafcaeb0a60662cddff54c4ca663c50.html#ga5bafcaeb0a60662cddff54c4ca663c50">extract</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">a</a>,<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::index&lt;3&gt;</a>);</div>
+<div class="line">  <span class="keyword">auto</span> head = <a class="code hl_function" href="group__generators_ga5bafcaeb0a60662cddff54c4ca663c50.html#ga5bafcaeb0a60662cddff54c4ca663c50">extract</a>(a,0_c,1_c);</div>
+<div class="line">  <span class="keyword">auto</span> mid  = <a class="code hl_function" href="group__generators_ga5bafcaeb0a60662cddff54c4ca663c50.html#ga5bafcaeb0a60662cddff54c4ca663c50">extract</a>(a,1_c,3_c);</div>
+<div class="line">  <span class="keyword">auto</span> last = <a class="code hl_function" href="group__generators_ga5bafcaeb0a60662cddff54c4ca663c50.html#ga5bafcaeb0a60662cddff54c4ca663c50">extract</a>(a,kumi::index&lt;3&gt;);</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">a</a> &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span> &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">head</a> &lt;&lt; <span class="charliteral">&#39; &#39;</span>  &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">mid</a> &lt;&lt; <span class="charliteral">&#39; &#39;</span> &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">last</a> &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span> &lt;&lt; head &lt;&lt; <span class="charliteral">&#39; &#39;</span>  &lt;&lt; mid &lt;&lt; <span class="charliteral">&#39; &#39;</span> &lt;&lt; last &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:37</div></div>
 </div><!-- fragment --> 

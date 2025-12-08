@@ -128,15 +128,15 @@ $(document).ready(function(){initNavTree('group__generators_ga8a3301039029674c9d
 <div class="memproto">
 <div class="memtemplate">
 template&lt;std::size_t N, product_type T&gt; <br />
-requires ( <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">N</a> &gt; 0 &amp;&amp; <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">N</a> &lt;= size_v&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T</a>&gt; )</div>
+requires ( N &gt; 0 &amp;&amp; N &lt;= size_v&lt;T&gt; )</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a> kumi::windows </td>
+          <td class="memname">constexpr auto kumi::windows </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
           <td class="paramname"><em>t</em></td><td>)</td>
           <td></td>
         </tr>
@@ -164,7 +164,7 @@ requires ( <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A tuple of product_types, each containing <code>N</code> consecutive elements of <code>t</code></dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Windows behaves like overlapping tiles: each inner product_type is a tile over <code>t</code> starting at index <code>tile_number</code>. All the windows are of the same size.</dd></dl>
-<h2><a class="anchor" id="autotoc_md138"></a>
+<h2><a class="anchor" id="autotoc_md140"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
@@ -175,38 +175,37 @@ Helper type</h2>
 <div class="line">}</div>
 <div class="ttc" id="agroup__generators_ga8a3301039029674c9d9613373d282c5b_html_ga8a3301039029674c9d9613373d282c5b"><div class="ttname"><a href="group__generators_ga8a3301039029674c9d9613373d282c5b.html#ga8a3301039029674c9d9613373d282c5b">kumi::windows</a></div><div class="ttdeci">constexpr auto windows(T &amp;&amp;t)</div><div class="ttdoc">Creates a kumi::tuple of product_types, each containing N consecutive elements from t....</div><div class="ttdef"><b>Definition</b> tiler.hpp:42</div></div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__generators_ga8a3301039029674c9d9613373d282c5b.html#ga8a3301039029674c9d9613373d282c5b" title="Creates a kumi::tuple of product_types, each containing N consecutive elements from t....">kumi::windows</a></p>
-<h2><a class="anchor" id="autotoc_md139"></a>
+<h2><a class="anchor" id="autotoc_md141"></a>
 Example</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">main</a>()</div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1, <span class="charliteral">&#39;y&#39;</span>, 3.f, <span class="keywordtype">short</span>{55}, -8, 66., <span class="stringliteral">&quot;Pete&quot;</span>};</div>
+<div class="line">  <span class="keyword">auto</span> t = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1, <span class="charliteral">&#39;y&#39;</span>, 3.f, <span class="keywordtype">short</span>{55}, -8, 66., <span class="stringliteral">&quot;Pete&quot;</span>};</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">w</a> = <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::windows&lt;3&gt;</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t</a>); </div>
+<div class="line">  <span class="keyword">auto</span> w = kumi::windows&lt;3&gt;(t); </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;  Standard Windows &quot;</span> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">w</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; w &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_function" href="group__transforms_ga1276dff11987989fc804ebe3d3804678.html#ga1276dff11987989fc804ebe3d3804678">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">tile</a>)</div>
+<div class="line">  <a class="code hl_function" href="group__transforms_ga1276dff11987989fc804ebe3d3804678.html#ga1276dff11987989fc804ebe3d3804678">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
 <div class="line">  {</div>
-<div class="line">    <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">get&lt;0&gt;</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">tile</a>)++;</div>
-<div class="line">  },<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">w</a>);</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">    get&lt;0&gt;(tile)++;</div>
+<div class="line">  },w);</div>
+<div class="line">  std::cout &lt;&lt; t &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">w2</a> = <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::windows&lt;3&gt;</a>(kumi::to_ref(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t</a>)); </div>
+<div class="line">  <span class="keyword">auto</span> w2 = kumi::windows&lt;3&gt;(kumi::to_ref(t)); </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;  Windows with references &quot;</span> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">w2</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; w2 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_function" href="group__transforms_ga1276dff11987989fc804ebe3d3804678.html#ga1276dff11987989fc804ebe3d3804678">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">tile</a>)</div>
+<div class="line">  <a class="code hl_function" href="group__transforms_ga1276dff11987989fc804ebe3d3804678.html#ga1276dff11987989fc804ebe3d3804678">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
 <div class="line">  {</div>
-<div class="line">    <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">get&lt;0&gt;</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">tile</a>)++;</div>
-<div class="line">  },<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">w2</a>);</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;   </div>
+<div class="line">    get&lt;0&gt;(tile)++;</div>
+<div class="line">  },w2);</div>
+<div class="line">  std::cout &lt;&lt; t &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;   </div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__transforms_ga1276dff11987989fc804ebe3d3804678_html_ga1276dff11987989fc804ebe3d3804678"><div class="ttname"><a href="group__transforms_ga1276dff11987989fc804ebe3d3804678.html#ga1276dff11987989fc804ebe3d3804678">kumi::for_each</a></div><div class="ttdeci">constexpr void for_each(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a kumi::product_type. f is applied on the values if ...</div><div class="ttdef"><b>Definition</b> for_each.hpp:32</div></div>
-<div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:73</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:37</div></div>
 </div><!-- fragment --> 
 </div>

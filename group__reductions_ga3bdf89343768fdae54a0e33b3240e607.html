@@ -127,33 +127,33 @@ $(document).ready(function(){initNavTree('group__reductions_ga3bdf89343768fdae54
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;monoid M, product_type T, <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">typename</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Function</a> , <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">typename</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Value</a> &gt; </div>
+template&lt;monoid M, product_type T, typename Function , typename Value &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a> kumi::map_reduce </td>
+          <td class="memname">constexpr auto kumi::map_reduce </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Function</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">Function &amp;&amp;&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">M</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">M &amp;&amp;&#160;</td>
           <td class="paramname"><em>m</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
           <td class="paramname"><em>t</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Value</a>&#160;</td>
+          <td class="paramtype">Value&#160;</td>
           <td class="paramname"><em>init</em>&#160;</td>
         </tr>
         <tr>
@@ -181,7 +181,7 @@ template&lt;monoid M, product_type T, <a class="el" href="group__utility_gad8e73
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The result of reducing <code>t</code> by recursively combining elements in a tree structure</dd></dl>
-<h2><a class="anchor" id="autotoc_md92"></a>
+<h2><a class="anchor" id="autotoc_md94"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
@@ -192,23 +192,22 @@ Helper type</h2>
 <div class="line">}</div>
 <div class="ttc" id="agroup__reductions_ga954395275eacfb5006a6fb84c31707c3_html_ga954395275eacfb5006a6fb84c31707c3"><div class="ttname"><a href="group__reductions_ga954395275eacfb5006a6fb84c31707c3.html#ga954395275eacfb5006a6fb84c31707c3">kumi::map_reduce</a></div><div class="ttdeci">constexpr auto map_reduce(Function &amp;&amp;f, M &amp;&amp;m, T &amp;&amp;t)</div><div class="ttdoc">Performs a tree-like reduction of all elements of a product type. The given map function is applied b...</div><div class="ttdef"><b>Definition</b> reduce.hpp:150</div></div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__reductions_ga954395275eacfb5006a6fb84c31707c3.html#ga954395275eacfb5006a6fb84c31707c3" title="Performs a tree-like reduction of all elements of a product type. The given map function is applied b...">kumi::map_reduce</a></p>
-<h2><a class="anchor" id="autotoc_md93"></a>
+<h2><a class="anchor" id="autotoc_md95"></a>
 Example</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">main</a>()</div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">times_two</a> = [&amp;](<span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">e</a>){ <span class="keywordflow">return</span> 2*<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">e</a>; };</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t1</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{2.,5,<span class="keywordtype">short</span>{3},<span class="charliteral">&#39;\4&#39;</span>};</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga954395275eacfb5006a6fb84c31707c3.html#ga954395275eacfb5006a6fb84c31707c3">kumi::map_reduce</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">times_two</a>, <a class="code hl_variable" href="group__utility.html#gaaab79e5ddd9913e237c23b6ebbe0d274">kumi::function::multiplies</a>, <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t1</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> times_two = [&amp;](<span class="keyword">auto</span> e){ <span class="keywordflow">return</span> 2*e; };</div>
+<div class="line">  <span class="keyword">auto</span> t1 = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{2.,5,<span class="keywordtype">short</span>{3},<span class="charliteral">&#39;\4&#39;</span>};</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga954395275eacfb5006a6fb84c31707c3.html#ga954395275eacfb5006a6fb84c31707c3">kumi::map_reduce</a>(times_two, <a class="code hl_variable" href="group__utility.html#gaaab79e5ddd9913e237c23b6ebbe0d274">kumi::function::multiplies</a>, t1) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">is_pair</a> = [&amp;](<span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">e</a>){ <span class="keywordflow">return</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">e</a>%2==0; };</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t2</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{2,1,<span class="keywordtype">short</span>{55},<span class="charliteral">&#39; &#39;</span>};</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga954395275eacfb5006a6fb84c31707c3.html#ga954395275eacfb5006a6fb84c31707c3">kumi::map_reduce</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">is_pair</a>, <a class="code hl_variable" href="group__utility.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a>, <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t2</a>)        &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> is_pair = [&amp;](<span class="keyword">auto</span> e){ <span class="keywordflow">return</span> e%2==0; };</div>
+<div class="line">  <span class="keyword">auto</span> t2 = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{2,1,<span class="keywordtype">short</span>{55},<span class="charliteral">&#39; &#39;</span>};</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga954395275eacfb5006a6fb84c31707c3.html#ga954395275eacfb5006a6fb84c31707c3">kumi::map_reduce</a>(is_pair, <a class="code hl_variable" href="group__utility.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a>, t2)        &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:73</div></div>
 <div class="ttc" id="agroup__utility_html_gaaab79e5ddd9913e237c23b6ebbe0d274"><div class="ttname"><a href="group__utility.html#gaaab79e5ddd9913e237c23b6ebbe0d274">kumi::function::multiplies</a></div><div class="ttdeci">constexpr numeric_prod multiplies</div><div class="ttdoc">Forms a binary monoid callable that can be used in kumi::algoritm. It represents the multiplication.</div><div class="ttdef"><b>Definition</b> monoid.hpp:136</div></div>
 <div class="ttc" id="agroup__utility_html_gab5c0eb8022e7b2df33286d9a15247559"><div class="ttname"><a href="group__utility.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a></div><div class="ttdeci">constexpr numeric_add plus</div><div class="ttdoc">Forms a binary monoid callable that can be used in kumi::algoritm. It represents the addition.</div><div class="ttdef"><b>Definition</b> monoid.hpp:129</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:37</div></div>

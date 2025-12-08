@@ -133,9 +133,9 @@ template&lt;product_type T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a> kumi::unique </td>
+          <td class="memname">constexpr auto kumi::unique </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
           <td class="paramname"><em>t</em></td><td>)</td>
           <td></td>
         </tr>
@@ -155,7 +155,7 @@ template&lt;product_type T&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A product type containing elements from t with consecutive duplicates removed.</dd></dl>
-<h2><a class="anchor" id="autotoc_md144"></a>
+<h2><a class="anchor" id="autotoc_md146"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
 <div class="line">{</div>
@@ -167,21 +167,20 @@ Helper type</h2>
 <div class="ttc" id="agroup__generators_ga26131fc7a91a6860d0013d4be6151333_html_ga26131fc7a91a6860d0013d4be6151333"><div class="ttname"><a href="group__generators_ga26131fc7a91a6860d0013d4be6151333.html#ga26131fc7a91a6860d0013d4be6151333">kumi::unique</a></div><div class="ttdeci">constexpr auto unique(T &amp;&amp;t)</div><div class="ttdoc">Returns a product type with consecutive duplicate types removed (pairwise uniqueness).</div><div class="ttdef"><b>Definition</b> unique.hpp:86</div></div>
 <div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
 </div><!-- fragment --><p>Computes the type returned by a call to <a class="el" href="group__generators_ga26131fc7a91a6860d0013d4be6151333.html#ga26131fc7a91a6860d0013d4be6151333" title="Returns a product type with consecutive duplicate types removed (pairwise uniqueness).">kumi::unique</a>.</p>
-<h2><a class="anchor" id="autotoc_md145"></a>
+<h2><a class="anchor" id="autotoc_md147"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">main</a>()</div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">    <span class="keyword">using </span><a class="code hl_class" href="structkumi_1_1tuple.html">tuple</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple&lt;int, int, char, int, float, float&gt;</a>;</div>
 <div class="line"> </div>
-<div class="line">    <a class="code hl_class" href="structkumi_1_1tuple.html">tuple</a> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">a</a> = {1, 2, <span class="charliteral">&#39;x&#39;</span>, 3, 1.f, 2.f};</div>
+<div class="line">    <a class="code hl_class" href="structkumi_1_1tuple.html">tuple</a> a = {1, 2, <span class="charliteral">&#39;x&#39;</span>, 3, 1.f, 2.f};</div>
 <div class="line"> </div>
-<div class="line">    std::cout &lt;&lt; <a class="code hl_function" href="group__generators_ga26131fc7a91a6860d0013d4be6151333.html#ga26131fc7a91a6860d0013d4be6151333">kumi::unique</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">a</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">    std::cout &lt;&lt; <a class="code hl_function" href="group__generators_ga26131fc7a91a6860d0013d4be6151333.html#ga26131fc7a91a6860d0013d4be6151333">kumi::unique</a>(a) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:73</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:37</div></div>
 </div><!-- fragment --> 
 </div>

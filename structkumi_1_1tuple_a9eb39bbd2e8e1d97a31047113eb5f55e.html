@@ -130,13 +130,13 @@ $(document).ready(function(){initNavTree('structkumi_1_1tuple_a9eb39bbd2e8e1d97a
 template&lt;typename... Ts&gt; </div>
 <div class="memtemplate">
 template&lt;typename... Us&gt; <br />
-requires ( _::piecewise_convertible&lt;<a class="el" href="structkumi_1_1tuple.html">tuple</a>, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;Us...&gt;&gt; &amp;&amp; (sizeof...(<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Us</a>) == sizeof...(<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Ts</a>)) &amp;&amp; (!std::same_as&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Ts</a>, <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Us</a>&gt; &amp;&amp; ...) )</div>
+requires ( _::piecewise_convertible&lt;<a class="el" href="structkumi_1_1tuple.html">tuple</a>, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;Us...&gt;&gt; &amp;&amp; (sizeof...(Us) == sizeof...(Ts)) &amp;&amp; (!std::same_as&lt;Ts, Us&gt; &amp;&amp; ...) )</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a> <a class="el" href="structkumi_1_1tuple.html">kumi::tuple</a>&lt; <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">Ts</a> &gt;::cast </td>
+          <td class="memname">constexpr auto <a class="el" href="structkumi_1_1tuple.html">kumi::tuple</a>&lt; Ts &gt;::cast </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['features_0',['features',['../changelog.html#autotoc_md212',1,'New Features'],['../changelog.html#autotoc_md207',1,'New Features'],['../changelog.html#autotoc_md201',1,'New Features'],['../changelog.html#autotoc_md196',1,'New Features']]],
+  ['features_0',['features',['../changelog.html#autotoc_md214',1,'New Features'],['../changelog.html#autotoc_md209',1,'New Features'],['../changelog.html#autotoc_md203',1,'New Features'],['../changelog.html#autotoc_md198',1,'New Features']]],
   ['fetchcontent_1',['CMake FetchContent',['../setup.html#setup-fetchcontent',1,'']]],
   ['field_2',['field',['../group__utility_ga6a8ab73e5c1f8c0f11501e253a37f686.html#ga6a8ab73e5c1f8c0f11501e253a37f686',1,'kumi']]],
   ['field_5fcapture_3',['field_capture',['../structkumi_1_1field__capture.html',1,'kumi']]],
@@ -10,8 +10,8 @@ var searchData=
   ['fill_7',['fill',['../group__generators_gac1f2b67c16429675ca7b9106793f9001.html#gac1f2b67c16429675ca7b9106793f9001',1,'kumi']]],
   ['filter_8',['filter',['../group__generators_gaafed5030f3115f8fda5f1966a9fdfd38.html#gaafed5030f3115f8fda5f1966a9fdfd38',1,'kumi']]],
   ['filter_5fnot_9',['filter_not',['../group__generators_ga4252a5ff33d90265f42d4b6c70e48bed.html#ga4252a5ff33d90265f42d4b6c70e48bed',1,'kumi']]],
-  ['first_20autonomous_20public_20release_10',['First autonomous public release.',['../changelog.html#autotoc_md214',1,'']]],
-  ['fixes_11',['fixes',['../changelog.html#autotoc_md211',1,'Bug Fixes'],['../changelog.html#autotoc_md206',1,'Bug Fixes'],['../changelog.html#autotoc_md202',1,'Bug Fixes'],['../changelog.html#autotoc_md197',1,'Bug Fixes']]],
+  ['first_20autonomous_20public_20release_10',['First autonomous public release.',['../changelog.html#autotoc_md216',1,'']]],
+  ['fixes_11',['fixes',['../changelog.html#autotoc_md213',1,'Bug Fixes'],['../changelog.html#autotoc_md208',1,'Bug Fixes'],['../changelog.html#autotoc_md204',1,'Bug Fixes'],['../changelog.html#autotoc_md199',1,'Bug Fixes']]],
   ['flatten_12',['flatten',['../group__generators_ga6a021e42590689a905a2d8268c860838.html#ga6a021e42590689a905a2d8268c860838',1,'kumi']]],
   ['flatten_5fall_13',['flatten_all',['../group__generators_ga5c0915917db751d43c4a07eb884945cc.html#ga5c0915917db751d43c4a07eb884945cc',1,'kumi::flatten_all(T &amp;&amp;t, Func &amp;&amp;f)'],['../namespacekumi.html#a7fcee37f7e0ccc2adad9f91fa48fd34b',1,'kumi::flatten_all(T &amp;&amp;t)']]],
   ['fold_5fleft_14',['fold_left',['../group__reductions_ga74e253f7967cc7f188a979551cf687ef.html#ga74e253f7967cc7f188a979551cf687ef',1,'kumi::fold_left(Function f, T &amp;&amp;t)'],['../group__reductions_ga0f786372596b4dd7b924bf944871d7ad.html#ga0f786372596b4dd7b924bf944871d7ad',1,'kumi::fold_left(Function f, T &amp;&amp;t, Value init)']]],
@@ -22,7 +22,8 @@ var searchData=
   ['forward_5fas_5frecord_19',['forward_as_record',['../group__record_ga508677aacba8fa46c42516e15c92ab3c.html#ga508677aacba8fa46c42516e15c92ab3c',1,'kumi::record']]],
   ['forward_5fas_5ftuple_20',['forward_as_tuple',['../group__tuple_ga5c5ba567f7ec305505f44bf70c67b6db.html#ga5c5ba567f7ec305505f44bf70c67b6db',1,'kumi::tuple']]],
   ['from_20the_20source_21',['Install from the source',['../setup.html#setup-source',1,'']]],
-  ['from_5ftuple_22',['from_tuple',['../group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48',1,'kumi']]],
-  ['front_23',['front',['../group__utility_gae40b8dfe98266c4f62395c369833eef3.html#gae40b8dfe98266c4f62395c369833eef3',1,'kumi']]],
-  ['functions_24',['functions',['../group__utility.html',1,'Helper Types and Functions'],['../group__record.html',1,'Record Types and Functions'],['../group__tuple.html',1,'Tuple Types and Functions']]]
+  ['from_5frecord_22',['from_record',['../group__utility_gaa1b52cd0586fc3a8cbacc2f17d1de410.html#gaa1b52cd0586fc3a8cbacc2f17d1de410',1,'kumi']]],
+  ['from_5ftuple_23',['from_tuple',['../group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48',1,'kumi']]],
+  ['front_24',['front',['../group__utility_gae40b8dfe98266c4f62395c369833eef3.html#gae40b8dfe98266c4f62395c369833eef3',1,'kumi']]],
+  ['functions_25',['functions',['../group__utility.html',1,'Helper Types and Functions'],['../group__record.html',1,'Record Types and Functions'],['../group__tuple.html',1,'Tuple Types and Functions']]]
 ];

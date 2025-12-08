@@ -133,9 +133,9 @@ template&lt;product_type T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">constexpr</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">auto</a> kumi::bit_xor </td>
+          <td class="memname">constexpr auto kumi::bit_xor </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T</a> &amp;&amp;&#160;</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
           <td class="paramname"><em>t</em></td><td>)</td>
           <td></td>
         </tr>
@@ -155,7 +155,7 @@ template&lt;product_type T&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The value of <code>get&lt;0&gt;(t) ^ ... ^ get&lt;N-1&gt;(t)</code></dd></dl>
-<h2><a class="anchor" id="autotoc_md112"></a>
+<h2><a class="anchor" id="autotoc_md114"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
@@ -165,21 +165,20 @@ Helper type</h2>
 <div class="line">  <span class="keyword">using </span>bit_xor_t = <span class="keyword">typename</span> bit_xor&lt;T&gt;::type;</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__reductions_ga521dcc4de231768115582401a1a0419b.html#ga521dcc4de231768115582401a1a0419b" title="Computes the bitwise XOR of all elements.">kumi::bit_xor</a></p>
-<h2><a class="anchor" id="autotoc_md113"></a>
+<h2><a class="anchor" id="autotoc_md115"></a>
 Example</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">main</a>()</div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1,<span class="keywordtype">short</span>{8},<span class="charliteral">&#39; &#39;</span>, 4ULL};</div>
+<div class="line">  <span class="keyword">auto</span> t = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1,<span class="keywordtype">short</span>{8},<span class="charliteral">&#39; &#39;</span>, 4ULL};</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga521dcc4de231768115582401a1a0419b.html#ga521dcc4de231768115582401a1a0419b">kumi::bit_xor</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t</a>, 0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga521dcc4de231768115582401a1a0419b.html#ga521dcc4de231768115582401a1a0419b">kumi::bit_xor</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">t</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga521dcc4de231768115582401a1a0419b.html#ga521dcc4de231768115582401a1a0419b">kumi::bit_xor</a>(t, 0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga521dcc4de231768115582401a1a0419b.html#ga521dcc4de231768115582401a1a0419b">kumi::bit_xor</a>(t) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__reductions_ga521dcc4de231768115582401a1a0419b_html_ga521dcc4de231768115582401a1a0419b"><div class="ttname"><a href="group__reductions_ga521dcc4de231768115582401a1a0419b.html#ga521dcc4de231768115582401a1a0419b">kumi::bit_xor</a></div><div class="ttdeci">constexpr auto bit_xor(T &amp;&amp;t, Value init)</div><div class="ttdoc">Computes the bitwise XOR of all elements.</div><div class="ttdef"><b>Definition</b> reduce.hpp:471</div></div>
-<div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:73</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:37</div></div>
 </div><!-- fragment --> 
 </div>

@@ -128,7 +128,7 @@ $(document).ready(function(){initNavTree('structkumi_1_1as__tuple.html',''); ini
 <p>Generate a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> type from a type.  
  <a href="structkumi_1_1as__tuple.html#details">More...</a></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">typename</a> <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">T</a>, <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">template</a>&lt; typename... &gt; <a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">class</a> Meta = std::type_identity&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T, template&lt; typename... &gt; class Meta = std::type_identity&gt;<br />
 struct kumi::as_tuple&lt; T, Meta &gt;</div><p>Generate a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> type from a type. </p>
 <p>If <code>T</code> is a <a class="el" href="conceptkumi_1_1product__type.html">kumi::product_type</a>, returns the <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> type containing the same element as <code>T</code>. Otherwise, it returns <code><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>&lt;T&gt;</code>.</p>
 <p>A template meta-function can be optionally passed to be applied to each of those types when types are computed.</p>
@@ -139,7 +139,7 @@ struct kumi::as_tuple&lt; T, Meta &gt;</div><p>Generate a <a class="el" href="st
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md10"></a>
+<h2><a class="anchor" id="autotoc_md12"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
 <div class="line">{</div>
@@ -147,8 +147,8 @@ Helper type</h2>
 <div class="line">  <span class="keyword">using </span>as_tuple_t = <span class="keyword">typename</span> <a class="code hl_struct" href="structkumi_1_1as__tuple.html">as_tuple&lt;T, Meta&gt;::type</a>;</div>
 <div class="line">}</div>
 <div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
-<div class="ttc" id="astructkumi_1_1as__tuple_html"><div class="ttname"><a href="structkumi_1_1as__tuple.html">kumi::as_tuple</a></div><div class="ttdoc">Generate a kumi::tuple type from a type.</div><div class="ttdef"><b>Definition</b> convert.hpp:137</div></div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md11"></a>
+<div class="ttc" id="astructkumi_1_1as__tuple_html"><div class="ttname"><a href="structkumi_1_1as__tuple.html">kumi::as_tuple</a></div><div class="ttdoc">Generate a kumi::tuple type from a type.</div><div class="ttdef"><b>Definition</b> convert.hpp:183</div></div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md13"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -157,52 +157,51 @@ Example:</h2>
 <div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;utility&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">struct </span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">vec3</a></div>
+<div class="line"><span class="keyword">struct </span>vec3</div>
 <div class="line">{</div>
 <div class="line">  <span class="keywordtype">float</span> x, y, z;</div>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I&gt;</div>
-<div class="line"><span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_function" href="namespacekumi.html#a58caf3f1c74614bb2224b63a6009c853">get</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">vec3</a> <span class="keyword">const</span>&amp; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">v</a>) <span class="keyword">noexcept</span></div>
+<div class="line"><span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_function" href="namespacekumi.html#a58caf3f1c74614bb2224b63a6009c853">get</a>(vec3 <span class="keyword">const</span>&amp; v) <span class="keyword">noexcept</span></div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">I</a>==0) <span class="keywordflow">return</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">v</a>.x;</div>
-<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">I</a>==1) <span class="keywordflow">return</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">v</a>.y;</div>
-<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">I</a>==2) <span class="keywordflow">return</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">v</a>.z;</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==0) <span class="keywordflow">return</span> v.x;</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==1) <span class="keywordflow">return</span> v.y;</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==2) <span class="keywordflow">return</span> v.z;</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I&gt;</div>
-<div class="line"><span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_function" href="namespacekumi.html#a58caf3f1c74614bb2224b63a6009c853">get</a>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">vec3</a>&amp; <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">v</a>) <span class="keyword">noexcept</span></div>
+<div class="line"><span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_function" href="namespacekumi.html#a58caf3f1c74614bb2224b63a6009c853">get</a>(vec3&amp; v) <span class="keyword">noexcept</span></div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">I</a>==0) <span class="keywordflow">return</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">v</a>.x;</div>
-<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">I</a>==1) <span class="keywordflow">return</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">v</a>.y;</div>
-<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">I</a>==2) <span class="keywordflow">return</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">v</a>.z;</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==0) <span class="keywordflow">return</span> v.x;</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==1) <span class="keywordflow">return</span> v.y;</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==2) <span class="keywordflow">return</span> v.z;</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Opt-in for Product Type semantic</span></div>
 <div class="line"><span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1is__product__type.html">kumi::is_product_type</a>&lt;<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">vec3</a>&gt; : std::true_type</div>
+<div class="line"><span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1is__product__type.html">kumi::is_product_type</a>&lt;vec3&gt; : std::true_type</div>
 <div class="line">{};</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Adapt as structured bindable type</span></div>
 <div class="line"><span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><span class="keyword">struct  </span>std::tuple_size&lt;<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">vec3</a>&gt;</div>
+<div class="line"><span class="keyword">struct  </span>std::tuple_size&lt;vec3&gt;</div>
 <div class="line">      : std::integral_constant&lt;std::size_t,3&gt; {};</div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I&gt; <span class="keyword">struct </span>std::tuple_element&lt;<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">I</a>,<a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">vec3</a>&gt; { <span class="keyword">using </span>type = float; };</div>
+<div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I&gt; <span class="keyword">struct </span>std::tuple_element&lt;I,vec3&gt; { <span class="keyword">using </span>type = float; };</div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">main</a>()</div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">three_floats</a>   = kumi::as_tuple_t&lt;vec3&gt;;</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">single_type</a>    = kumi::as_tuple_t&lt;float&gt;;</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">three_pointers</a> = kumi::as_tuple_t&lt;vec3, std::add_pointer&gt;;</div>
-<div class="line">  <span class="keyword">using </span><a class="code hl_function" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">single_pointer</a> = kumi::as_tuple_t&lt;float, std::add_pointer&gt;;</div>
+<div class="line">  <span class="keyword">using </span>three_floats   = kumi::as_tuple_t&lt;vec3&gt;;</div>
+<div class="line">  <span class="keyword">using </span>single_type    = kumi::as_tuple_t&lt;float&gt;;</div>
+<div class="line">  <span class="keyword">using </span>three_pointers = kumi::as_tuple_t&lt;vec3, std::add_pointer&gt;;</div>
+<div class="line">  <span class="keyword">using </span>single_pointer = kumi::as_tuple_t&lt;float, std::add_pointer&gt;;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">static_assert</span>( std::same_as&lt;three_floats  , kumi::tuple&lt;float ,float ,float &gt; &gt;);</div>
 <div class="line">  <span class="keyword">static_assert</span>( std::same_as&lt;three_pointers, kumi::tuple&lt;float*,float*,float*&gt; &gt;);</div>
 <div class="line">  <span class="keyword">static_assert</span>( std::same_as&lt;single_type   , kumi::tuple&lt;float&gt;  &gt;);</div>
 <div class="line">  <span class="keyword">static_assert</span>( std::same_as&lt;single_pointer, kumi::tuple&lt;float*&gt; &gt;);</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48_html_gad8e73ef5a6e05c2ae2db0bcfa860de48"><div class="ttname"><a href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a></div><div class="ttdeci">constexpr auto from_tuple(tuple&lt; Ts... &gt; const &amp;t)</div><div class="ttdoc">Converts a kumi::tuple to an instance of an arbitrary type.</div><div class="ttdef"><b>Definition</b> convert.hpp:73</div></div>
 <div class="ttc" id="anamespacekumi_html_a58caf3f1c74614bb2224b63a6009c853"><div class="ttname"><a href="namespacekumi.html#a58caf3f1c74614bb2224b63a6009c853">kumi::get</a></div><div class="ttdeci">constexpr decltype(auto) get(record&lt; Ts... &gt; &amp;&amp;r) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition</b> record.hpp:395</div></div>
 <div class="ttc" id="astructkumi_1_1is__product__type_html"><div class="ttname"><a href="structkumi_1_1is__product__type.html">kumi::is_product_type</a></div><div class="ttdoc">Opt-in traits for types behaving like a kumi::product_type.</div><div class="ttdef"><b>Definition</b> traits.hpp:38</div></div>
 </div><!-- fragment --> </div></div><!-- contents -->
