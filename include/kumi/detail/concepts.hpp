@@ -145,7 +145,6 @@ namespace kumi::_
   //============================================================================================== 
   template<typename From, typename To> struct is_fieldwise_constructible;
   template<typename From, typename To> struct is_fieldwise_convertible;
-  template<typename From, typename To> struct is_fieldwise_ordered;
   
   template<template<class...> class Box, typename... From, typename... To>
   struct is_fieldwise_convertible<Box<From...>, Box<To...>>

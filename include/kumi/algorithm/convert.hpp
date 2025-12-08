@@ -78,6 +78,29 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup utility
+  //! @brief Converts a kumi::record to an instance of a type that models kumi::record_type
+  //!
+  //! Constructs an instance of `Type` by passing elements of `t` to the appropriate constructor.
+  //!
+  //! @tparam Type Type to generate
+  //! @param  r    kumi::record to convert
+  //! @return An instance of `Type` constructed from each element of `t` in order.
+  //!
+  //! ## Example
+  //! @include doc/record/from_record.cpp
+  //================================================================================================
+  template<record_type Type, typename... Ts>
+  requires ( equivalent<Type, record<Ts...>> )
+  [[nodiscard]] KUMI_ABI constexpr auto from_record(record<Ts...> const &r)
+  {
+    return [&]<std::size_t... I>(std::index_sequence<I...>) 
+    { 
+      return Type{ get<name_of(as<element_t<I,Type>>{})>(r)... };
+    }(std::make_index_sequence<size_v<Type>>());
+  }
+
+  //================================================================================================
+  //! @ingroup utility
   //! @brief Converts a kumi::product_type to an instance kumi::tuple
   //!
   //! Constructs an instance kumi::tuple from the elements of the kumi::product_type parameters
@@ -105,6 +128,29 @@ namespace kumi
     {
       return tuple{ KUMI_FWD(s)[I]... };
     }(std::make_index_sequence<N>{});
+  }
+
+  //================================================================================================
+  //! @ingroup utility
+  //! @brief Converts a kumi::record_type to an instance kumi::record
+  //!
+  //! Constructs an instance kumi::record from the elements of the kumi::product_type parameters
+  //!
+  //! @param  r    kumi::product_type to convert
+  //! @return An instance of kumi::record constructed from each elements of `t` in order.
+  //!
+  //! ## Example
+  //! @include doc/record/to_record.cpp
+  //================================================================================================
+  template<record_type Type>
+  [[nodiscard]] KUMI_ABI constexpr auto to_record(Type && r)
+  {
+    if constexpr ( sized_product_type<Type, 0> ) return kumi::record{};
+    else return [&]<std::size_t...I>(std::index_sequence<I...>)
+    {
+      return record{field<name_of(as<element_t<I,Type>>{})> = 
+                      get<name_of(as<element_t<I,Type>>{})>(KUMI_FWD(r))... };
+    }(std::make_index_sequence<size_v<Type>>{});
   }
 
   //================================================================================================
