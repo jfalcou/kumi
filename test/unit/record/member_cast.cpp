@@ -32,7 +32,7 @@ TTS_CASE("Check result::member_cast behavior on records")
     using namespace kumi;
     using base  = record<field_capture<"a",int   >, field_capture<"b",char& >, field_capture<"c",float&&>, field_capture<"d",const short>, field_capture<"e", long  >>;
     using t1    = record<field_capture<"a",double>, field_capture<"b",double>, field_capture<"c",double >, field_capture<"d",double     >, field_capture<"e", double>>;
-    using t2    = record<field_capture<"a",char  >, field_capture<"b",char  >, field_capture<"c",char   >, field_capture<"d",char       >, field_capture<"e", char  >>;
+    using t2    = record<field_capture<"a",const char  >, field_capture<"b",const char  >, field_capture<"c",const char   >, field_capture<"d",const char       >, field_capture<"e", const char  >>;
 
     TTS_TYPE_IS( (kumi::result::member_cast_t<double    , base>) , (t1) );
     TTS_TYPE_IS( (kumi::result::member_cast_t<const char, base>) , (t2) );

@@ -27,7 +27,7 @@ TTS_CASE("Check result::member_cast behavior on tuples")
 {
     using base = kumi::tuple<int, char&, float&&, const short, long>;
     using t1 = kumi::tuple<double, double, double, double, double>;
-    using t2 = kumi::tuple<char, char, char, char, char>;
+    using t2 = kumi::tuple<const char, const char, const char, const char, const char>;
 
     TTS_TYPE_IS( (kumi::result::member_cast_t<double    , base>) , (t1) );
     TTS_TYPE_IS( (kumi::result::member_cast_t<const char, base>) , (t2) );
