@@ -11,7 +11,8 @@ namespace kumi
 {
   namespace _
   {
-    template<typename T, auto> using repeat_t = T;
+    template<typename T, auto> struct repeat { using type = T; };
+    template<typename T, auto I> using repeat_t = typename repeat<T,I>::type;
   }
   //================================================================================================
   //! @ingroup utility
