@@ -85,3 +85,23 @@ TTS_CASE("Check type to tuple constexpr conversion")
   TTS_CONSTEXPR_EQUAL(kumi::to_tuple(a), (kumi::tuple{1, 2, 3, 4, 5}));
   TTS_CONSTEXPR_EQUAL(kumi::to_tuple(s), (kumi::tuple{1, 2, 3, 4, 5}));
 };
+
+TTS_CASE("Check tuple to tuple conversion")
+{
+  kumi::tuple in{short{49},62.5f};
+
+  TTS_EQUAL ( (static_cast<kumi::tuple<int, double>>(in) ) , (kumi::tuple{49 ,62.5}) );
+  TTS_EQUAL ( (static_cast<kumi::tuple<char,int>>(in)    ) , (kumi::tuple{'1',62})   );
+   
+  TTS_EQUAL ( static_cast<kumi::tuple<std::string>>(kumi::tuple{"some text"})
+            , kumi::tuple{std::string("some text")}
+            );
+};
+
+TTS_CASE("Check tuple to tuple constexpr conversion")
+{
+  constexpr kumi::tuple in{short{49},62.5f};
+
+  TTS_CONSTEXPR_EQUAL ( (static_cast<kumi::tuple<int ,double>>(in) ) , (kumi::tuple{49 ,62.5}) );
+  TTS_CONSTEXPR_EQUAL ( (static_cast<kumi::tuple<char,int>>(in)    ) , (kumi::tuple{'1',62})   );
+};

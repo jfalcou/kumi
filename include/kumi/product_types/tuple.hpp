@@ -212,6 +212,44 @@ namespace kumi
     {
       return apply([](auto&&... elems) { return tuple<Us...>{static_cast<Us>(elems)...}; }, *this);
     }
+   
+    //==============================================================================================
+    //! @brief  Enables static casting a tuple<Ts...> to a tuple<Us...>.
+    //! @tparam Us Types composing the destination tuple
+    //!
+    //! @note This permits the conversion from a tuple<T>& to a tuple<T&> which makes it suitable
+    //!       for some zip-like cases such as building a structure of arrays iterator.
+    //!
+    //! ## Example : 
+    //! @include doc/cast.cpp
+    //! @include doc/soa.cpp
+    //==============================================================================================
+    template<typename... Us>
+    requires( (sizeof...(Us) == sizeof...(Ts)) 
+              && _::piecewise_convertible<tuple<Ts const&...>, tuple<Us...>> 
+            )
+    [[nodiscard]] KUMI_ABI constexpr operator tuple<Us...>() const
+    {
+      if constexpr ( sizeof...(Ts) == 0) return tuple{};
+      else return [&]<std::size_t...I>(std::index_sequence<I...>)
+      {
+        return tuple<Us...>{ static_cast<Us>(get<I>(*this))... };
+      }(std::make_index_sequence<sizeof...(Ts)>{});
+    }
+
+    /// @overload
+    template<typename... Us>
+    requires( (sizeof...(Us) == sizeof...(Ts)) 
+              && _::piecewise_convertible<tuple<Ts&...>, tuple<Us...>>
+            )
+    [[nodiscard]] KUMI_ABI constexpr operator tuple<Us...>() 
+    {
+      if constexpr ( sizeof...(Ts) == 0) return tuple{};
+      else return [&]<std::size_t...I>(std::index_sequence<I...>)
+      {
+        return tuple<Us...>{ static_cast<Us>(get<I>(*this))... };
+      }(std::make_index_sequence<sizeof...(Ts)>{});
+    }
 
     //==============================================================================================
     //! @}
