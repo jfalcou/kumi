@@ -1644,9 +1644,18 @@ namespace kumi
   {
     return static_cast<tuple<Ts...> const &&>(arg)[index<I>];
   }
-  template<std::integral auto I, product_type T> 
-  requires ((!record_type<T>) && ((I >= size_v<T>) || (I < 0))) 
-  constexpr auto get(T && t) = delete;
+  template<std::integral auto I, typename...Ts> 
+  requires ((I >= sizeof...(Ts))|| (I < 0)) 
+  constexpr auto get(tuple<Ts...> & t) = delete;
+  template<std::integral auto I, typename...Ts> 
+  requires ((I >= sizeof...(Ts)) || (I < 0)) 
+  constexpr auto get(tuple<Ts...> const& t) = delete;
+  template<std::integral auto I, typename...Ts> 
+  requires ((I >= sizeof...(Ts)) || (I < 0)) 
+  constexpr auto get(tuple<Ts...> && t) = delete;
+  template<std::integral auto I, typename...Ts> 
+  requires ((I >= sizeof...(Ts)) || (I < 0)) 
+  constexpr auto get(tuple<Ts...> const&& t) = delete;
   template<str Name, typename... Ts>
   requires ( uniquely_named<Ts...> && contains_field<Name, Ts...> )
   [[nodiscard]] KUMI_ABI constexpr decltype(auto)
@@ -1898,9 +1907,18 @@ namespace kumi
   {
     return static_cast<record<Ts...> const &&>(r)[index<I>];
   }
-  template<std::integral auto I, record_type R> 
-  requires ((I >= size_v<R>) || (I < 0)) 
-  constexpr auto get(R && r) = delete;
+  template<std::integral auto I, typename...Ts> 
+  requires ((I >= sizeof...(Ts))|| (I < 0)) 
+  constexpr auto get(record<Ts...> & t) = delete;
+  template<std::integral auto I, typename...Ts> 
+  requires ((I >= sizeof...(Ts)) || (I < 0)) 
+  constexpr auto get(record<Ts...> const& t) = delete;
+  template<std::integral auto I, typename...Ts> 
+  requires ((I >= sizeof...(Ts)) || (I < 0)) 
+  constexpr auto get(record<Ts...> && t) = delete;
+  template<std::integral auto I, typename...Ts> 
+  requires ((I >= sizeof...(Ts)) || (I < 0)) 
+  constexpr auto get(record<Ts...> const&& t) = delete;
   template<str Name, typename... Ts>
   requires ( contains_field<Name, Ts...> ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
   get(record<Ts...> &r) noexcept
