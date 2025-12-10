@@ -414,9 +414,21 @@ namespace kumi
   }
 
   /// Improves diagnostic for out of bounds index
-  template<std::integral auto I, record_type R> 
-  requires ((I >= size_v<R>) || (I < 0)) 
-  constexpr auto get(R && r) = delete;
+  template<std::integral auto I, typename...Ts> 
+  requires ((I >= sizeof...(Ts))|| (I < 0)) 
+  constexpr auto get(record<Ts...> & t) = delete;
+
+  template<std::integral auto I, typename...Ts> 
+  requires ((I >= sizeof...(Ts)) || (I < 0)) 
+  constexpr auto get(record<Ts...> const& t) = delete;
+
+  template<std::integral auto I, typename...Ts> 
+  requires ((I >= sizeof...(Ts)) || (I < 0)) 
+  constexpr auto get(record<Ts...> && t) = delete;
+
+  template<std::integral auto I, typename...Ts> 
+  requires ((I >= sizeof...(Ts)) || (I < 0)) 
+  constexpr auto get(record<Ts...> const&& t) = delete;
 
   //================================================================================================
   //! @ingroup record
