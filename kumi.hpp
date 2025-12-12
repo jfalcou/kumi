@@ -166,6 +166,15 @@ namespace kumi
   {
     return field_capture<Name, T>{ KUMI_FWD(t) };
   }
+  template<typename U, typename T>
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) field_cast(T && t) noexcept
+  {
+    using W = std::remove_cvref_t<U>;
+    if constexpr ( requires {W::is_field_capture; } )
+      return field_capture<name_of(as<U>{}), typename W::type>{ static_cast<typename W::type>(field_value_of(KUMI_FWD(t))) };
+    else
+      return field_capture<name_of(as<T>{}), U>{ static_cast<U>(field_value_of(KUMI_FWD(t))) };
+  }
   namespace result
   {
     template<typename T> struct name_of
@@ -178,11 +187,16 @@ namespace kumi
     };
     template<str Name, typename T> struct capture_field
     {
-      using type = decltype( kumi::capture_field<Name>(std::declval<T>() ));
+      using type = decltype( kumi::capture_field<Name>( std::declval<T>() ));
+    };
+    template<typename U, typename T> struct field_cast
+    {
+      using type = decltype( kumi::field_cast<U,T>( std::declval<T>() ));
     };
     template<typename T> using name_of_t = typename name_of<T>::type;
     template<typename T> using field_value_of_t = typename field_value_of<T>::type;
     template<str Name, typename T> using capture_field_t = typename capture_field<Name, T>::type;
+    template<typename U, typename T> using field_cast_t = typename field_cast<U,T>::type;
   }
 }
 #include <iosfwd>
@@ -2148,6 +2162,60 @@ namespace kumi
       using type = decltype( kumi::cartesian_product( std::declval<T>()... ) );
     };
     template<typename... T> using cartesian_product_t = typename cartesian_product<T...>::type;
+  }
+}
+namespace kumi
+{
+  namespace _
+  {
+    template<typename T, auto> struct repeat { using type = T; };
+    template<typename T, auto I> using repeat_t = typename repeat<T,I>::type;
+  }
+  template<typename... Ts, product_type T>
+  requires ( sizeof...(Ts) == size_v<T> )
+  [[nodiscard]] KUMI_ABI constexpr auto type_cast(T && t)
+  {
+    if constexpr ( sized_product_type<T,0> ) return t;
+    else if constexpr ( record_type<T> ) return [&]<std::size_t...I>(std::index_sequence<I...>)
+    {
+      using type = _::builder_make_t<T, result::field_cast_t<Ts, element_t<I,T>>...>;
+      return type{ field_cast<Ts>(get<I>(KUMI_FWD(t)))... };
+    }(std::make_index_sequence<size_v<T>>{}); 
+    else return [&]<std::size_t...I>(std::index_sequence<I...>)
+    {
+      using type = _::builder_make_t<T, Ts...>;
+      return type{ static_cast<Ts>(get<I>(KUMI_FWD(t)))... };
+    }(std::make_index_sequence<size_v<T>>{}); 
+  }
+  template<typename Target, product_type T>
+  [[nodiscard]] KUMI_ABI constexpr auto member_cast(T && t)
+  {
+    if constexpr ( sized_product_type<T,0> ) return t;
+    else if constexpr ( record_type<T> ) return [&]<std::size_t...I>(std::index_sequence<I...>)
+    {
+      using type = _::builder_make_t<T, result::field_cast_t<Target, element_t<I,T>>...>;
+      return type { field_cast<Target>(get<I>(KUMI_FWD(t)))... };  
+    }(std::make_index_sequence<size_v<T>>{}); 
+    else return [&]<std::size_t...I>(std::index_sequence<I...>)
+    {
+      using type = _::builder_make_t<T, _::repeat_t<Target,I>...>;
+      return type{ static_cast<Target>(get<I>(KUMI_FWD(t)))... };
+    }(std::make_index_sequence<size_v<T>>{}); 
+  }
+  namespace result
+  {    
+    template<product_type T, typename... Ts> struct type_cast 
+    {
+      using type = decltype( kumi::type_cast<Ts...>( std::declval<T>() ) );
+    };
+    template<typename Target, product_type T> struct member_cast 
+    {
+      using type = decltype( kumi::member_cast<Target, T>( std::declval<T>() ) );
+    };
+    template<product_type T, typename... Ts>
+    using type_cast_t = typename type_cast<T,Ts...>::type;
+    template<typename Target, product_type T>
+    using member_cast_t = typename member_cast<Target,T>::type;
   }
 }
 namespace kumi
