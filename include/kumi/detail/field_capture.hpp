@@ -112,6 +112,25 @@ namespace kumi
     return field_capture<Name, T>{ KUMI_FWD(t) };
   }
 
+  //================================================================================================
+  //! @ingroup product_types 
+  //! @brief Casts the provided value to the target type using `static_cast`.
+  //!
+  //! @tparam   U The type to convert the parameter to. 
+  //! @param    t A forwarding reference to the input object.
+  //! @return   A value of type U. 
+  //! @related kumi::field_capture
+  //================================================================================================
+  template<typename U, typename T>
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) field_cast(T && t) noexcept
+  {
+    using W = std::remove_cvref_t<U>;
+    if constexpr ( requires {W::is_field_capture; } )
+      return field_capture<name_of(as<U>{}), typename W::type>{ static_cast<typename W::type>(field_value_of(KUMI_FWD(t))) };
+    else
+      return field_capture<name_of(as<T>{}), U>{ static_cast<U>(field_value_of(KUMI_FWD(t))) };
+  }
+
   namespace result
   {
     template<typename T> struct name_of
@@ -126,7 +145,12 @@ namespace kumi
 
     template<str Name, typename T> struct capture_field
     {
-      using type = decltype( kumi::capture_field<Name>(std::declval<T>() ));
+      using type = decltype( kumi::capture_field<Name>( std::declval<T>() ));
+    };
+
+    template<typename U, typename T> struct field_cast
+    {
+      using type = decltype( kumi::field_cast<U,T>( std::declval<T>() ));
     };
 
     template<typename T> using name_of_t = typename name_of<T>::type;
@@ -134,5 +158,7 @@ namespace kumi
     template<typename T> using field_value_of_t = typename field_value_of<T>::type;
 
     template<str Name, typename T> using capture_field_t = typename capture_field<Name, T>::type;
+    
+    template<typename U, typename T> using field_cast_t = typename field_cast<U,T>::type;
   }
 }
