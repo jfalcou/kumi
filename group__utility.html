@@ -202,6 +202,10 @@ requires ( size_v&lt;Tuple&gt; != 0)</td></tr>
 <tr class="memitem:ga887c8b81e291a506cd119c794ca4b727"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_ga887c8b81e291a506cd119c794ca4b727.html#ga887c8b81e291a506cd119c794ca4b727">kumi::_::make_streamable</a> (T const &amp;e)</td></tr>
 <tr class="memdesc:ga887c8b81e291a506cd119c794ca4b727"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides an extension point <code>as_streamable</code> in order to output types with no stream operator defined.  <br /></td></tr>
 <tr class="separator:ga887c8b81e291a506cd119c794ca4b727"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga79787185d26368946a74f31ce5f6597c" id="r_ga79787185d26368946a74f31ce5f6597c"><td class="memTemplParams" colspan="2">template&lt;typename Target , product_type T&gt; </td></tr>
+<tr class="memitem:ga79787185d26368946a74f31ce5f6597c"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::member_cast</a> (T &amp;&amp;t)</td></tr>
+<tr class="memdesc:ga79787185d26368946a74f31ce5f6597c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target...&gt;  <br /></td></tr>
+<tr class="separator:ga79787185d26368946a74f31ce5f6597c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga60825dffaa5ee2c50e1d1a24057bdcf1" id="r_ga60825dffaa5ee2c50e1d1a24057bdcf1"><td class="memTemplParams" colspan="2">template&lt;char... c&gt; </td></tr>
 <tr class="memitem:ga60825dffaa5ee2c50e1d1a24057bdcf1"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_ga60825dffaa5ee2c50e1d1a24057bdcf1.html#ga60825dffaa5ee2c50e1d1a24057bdcf1">kumi::operator&quot;&quot;_c</a> () noexcept</td></tr>
 <tr class="memdesc:ga60825dffaa5ee2c50e1d1a24057bdcf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a integral constant literal of the desired value.  <br /></td></tr>
@@ -222,6 +226,11 @@ requires ( size_v&lt;Tuple&gt; != 0)</td></tr>
 <tr class="memitem:gae6de7cdd99f5e217028b93d4bcf3de52"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_gae6de7cdd99f5e217028b93d4bcf3de52.html#gae6de7cdd99f5e217028b93d4bcf3de52">kumi::to_tuple</a> (Type &amp;&amp;t)</td></tr>
 <tr class="memdesc:gae6de7cdd99f5e217028b93d4bcf3de52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a> to an instance <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>.  <br /></td></tr>
 <tr class="separator:gae6de7cdd99f5e217028b93d4bcf3de52"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7559dc61670da58576d55ab3ab12ed0d" id="r_ga7559dc61670da58576d55ab3ab12ed0d"><td class="memTemplParams" colspan="2">template&lt;typename... Ts, product_type T&gt; <br />
+requires ( sizeof...(Ts) == size_v&lt;T&gt; )</td></tr>
+<tr class="memitem:ga7559dc61670da58576d55ab3ab12ed0d"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_ga7559dc61670da58576d55ab3ab12ed0d.html#ga7559dc61670da58576d55ab3ab12ed0d">kumi::type_cast</a> (T &amp;&amp;t)</td></tr>
+<tr class="memdesc:ga7559dc61670da58576d55ab3ab12ed0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a product_type&lt;Types...&gt; to an instance of a product_type&lt;Ts...&gt;  <br /></td></tr>
+<tr class="separator:ga7559dc61670da58576d55ab3ab12ed0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>

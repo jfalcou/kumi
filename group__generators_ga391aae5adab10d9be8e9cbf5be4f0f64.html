@@ -164,7 +164,7 @@ requires ( N &gt; 0 &amp;&amp; N &lt;= size_v&lt;T&gt; )</div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A tuple of product_types, each containing <code>N</code> consecutive elements of <code>t</code></dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Chunks behaves like paving tiles: each inner product_type is a tile over <code>t</code> starting at index <code>chunk_size * tile_number + 1</code>. The last chunk will be smaller if the size of the tuple is not a multiple of the chunk size.</dd></dl>
-<h2><a class="anchor" id="autotoc_md142"></a>
+<h2><a class="anchor" id="autotoc_md146"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
@@ -175,7 +175,7 @@ Helper type</h2>
 <div class="line">}</div>
 <div class="ttc" id="agroup__generators_ga391aae5adab10d9be8e9cbf5be4f0f64_html_ga391aae5adab10d9be8e9cbf5be4f0f64"><div class="ttname"><a href="group__generators_ga391aae5adab10d9be8e9cbf5be4f0f64.html#ga391aae5adab10d9be8e9cbf5be4f0f64">kumi::chunks</a></div><div class="ttdeci">constexpr auto chunks(T &amp;&amp;t)</div><div class="ttdoc">Creates a kumi::tuple of product_types, each containing N consecutive elements from t....</div><div class="ttdef"><b>Definition</b> tiler.hpp:82</div></div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__generators_ga391aae5adab10d9be8e9cbf5be4f0f64.html#ga391aae5adab10d9be8e9cbf5be4f0f64" title="Creates a kumi::tuple of product_types, each containing N consecutive elements from t....">kumi::chunks</a></p>
-<h2><a class="anchor" id="autotoc_md143"></a>
+<h2><a class="anchor" id="autotoc_md147"></a>
 Example</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
