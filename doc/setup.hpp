@@ -10,11 +10,11 @@
 
   The **KUMI** librarie requires a C++20 compliant compiler. Here are the current minimal compiler version supported:
 
-  | Compiler       | Version        |
-  | -------------- | -------------- |
-  | g++            | 14  or above   |
-  | clang++        | 19  or above   |
-  | MSVC           | 19  or above   |
+  | Compiler       | Version          |
+  | -------------- | ---------------- |
+  | g++            | 14  and  above   |
+  | clang++        | 19  and  above   |
+  | MSVC           | 19  and  above   |
 
   @section setup-source Install from the source
 
