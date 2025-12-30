@@ -537,7 +537,7 @@ namespace kumi
                                             , std::declval<T>()
                                             ));
     };
-
+    
     template<product_type T, typename Value = void>
     struct sum
     {
@@ -617,6 +617,5 @@ namespace kumi
 
     template<product_type T, typename Value = void>
     using bit_xor_t = typename bit_xor<T,Value>::type;
-
   }
 }
