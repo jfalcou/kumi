@@ -28,7 +28,7 @@ TTS_CASE("Check reorder<I...>(tuple) behavior")
     
     {
       auto s = kumi::reorder<>(t);
-      TTS_CONSTEXPR_EQUAL(s,kumi::tuple{});
+      TTS_EQUAL(s,kumi::tuple{});
     }
     {
       auto s = kumi::reorder<0,1,2,3>(t);
