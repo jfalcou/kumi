@@ -45,13 +45,11 @@ namespace kumi::_
     static constexpr bool value = (... && ordered<From, To>);
   };
 
-  template<typename From, typename To>
-  concept piecewise_convertible =
-    _::is_piecewise_convertible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
+  template<typename From, typename To> concept piecewise_convertible = (size_v<From> == size_v<To>) &&
+  _::is_piecewise_convertible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
 
-  template<typename From, typename To>
-  concept piecewise_constructible =
-    _::is_piecewise_constructible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
+  template<typename From, typename To> concept piecewise_constructible = (size_v<From> == size_v<To>) &&
+  _::is_piecewise_constructible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
 
   template<typename From, typename To>
   concept piecewise_ordered = _::is_piecewise_ordered<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
@@ -63,34 +61,21 @@ namespace kumi::_
   // Helper meta functions to access a field type by type
   //==============================================================================================
 
-  // Simple helper for the get_index to work in check_type & check_name (needs a ::value)
-  struct sfinae_unit : kumi::unit
-  {
-    static constexpr auto value = kumi::none;
-  };
+  struct bottom;
+  using invalid = std::integral_constant<std::size_t, static_cast<std::size_t>(-1)>;
 
   template<typename Ref, typename Field> struct check_type
   {
-    static consteval Field get(Ref)
-    requires std::is_same_v<Field, Ref>
-    {
-      return {};
-    }
-
-    static consteval kumi::unit get(...) { return {}; }
+    static consteval Field  get(Ref) requires std::is_same_v<Field, Ref>;
+    static consteval bottom get(...);
   };
 
   template<std::size_t I, typename Ref, typename Field> struct get_index
   {
     using constant = std::integral_constant<std::size_t, I>;
-
-    static consteval constant get(Ref)
-    requires std::is_same_v<Ref, Field>
-    {
-      return {};
-    }
-
-    static consteval sfinae_unit get(...) { return {}; }
+    
+    static consteval constant get(Ref) requires std::is_same_v<Ref,Field>; 
+    static consteval invalid  get(...);                                   
   };
 
   /// Helper using inheritance to get the corresponding type in an variadic pack if it exist
@@ -105,7 +90,8 @@ namespace kumi::_
   template<typename Ref, std::size_t... I, typename... Fields>
   struct get_index_by_type<Ref, std::index_sequence<I...>, Fields...> : get_index<I, Ref, Fields>...
   {
-    using get_index<I, Ref, Fields>::get...;
+    using get_index<I,Ref,Fields>::get...;
+    using type = decltype(get(std::declval<Ref>()));
     static constexpr auto value = decltype(get(std::declval<Ref>()))::value;
   };
 
@@ -117,28 +103,20 @@ namespace kumi::_
     get_index_by_type<Ref, std::index_sequence_for<Fields...>, Fields...>::value;
 
   template<typename Ref, typename... Fields>
-  concept can_get_field_by_type = !std::is_same_v<get_field_by_type_t<Ref, Fields...>, kumi::unit>;
+  concept can_get_field_by_type = !std::is_same_v<get_field_by_type_t<Ref, Fields...>, bottom>;
 
   //==============================================================================================
   // Helper meta functions to access a field type by name
   //==============================================================================================
   template<std::size_t I, typename Ref, typename Field> struct check_name
   {
-    static consteval Field get(Ref)
-    requires(Ref::name == Field::name)
-    {
-      return {};
-    }
+    using constant = std::integral_constant<std::size_t, I>;
 
-    static consteval kumi::unit get(...) { return {}; }
-
-    static consteval std::integral_constant<std::size_t, I> get_index(Ref)
-    requires(Ref::name == Field::name)
-    {
-      return {};
-    }
-
-    static consteval sfinae_unit get_index(...) { return {}; }
+    static consteval Field  get(Ref) requires(Ref::value == Field::name);
+    static consteval bottom get(...);                                   
+    //
+    static consteval constant get_index(Ref) requires(Ref::value == Field::name);
+    static consteval invalid  get_index(...);
   };
 
   template<typename Ref, typename Seq, typename... Fields> struct get_field_by_name;
@@ -163,8 +141,18 @@ namespace kumi::_
     get_field_by_name<Ref, std::index_sequence_for<Fields...>, Fields...>::value;
 
   template<typename Ref, typename... Fields>
-  concept can_get_field_by_name = !std::is_same_v<get_field_by_name_t<Ref, Fields...>, kumi::unit>;
+  concept can_get_field_by_name = !std::is_same_v<get_field_by_name_t<Ref, Fields...>, bottom>;
 
+  // MSVC workaround for get<>
+  // MSVC doesnt SFINAE properly based on NTTP types before requires evaluation
+  // so we need this weird mechanism for it to pick the correct version.
+  template<auto Name, typename... Ts> 
+  KUMI_ABI constexpr auto contains_field()
+  {
+    if constexpr( !std::integral<std::remove_cvref_t<decltype(Name)>> )
+      return can_get_field_by_name<value_as<Name>, Ts...>;
+    else return false;
+  };
   //==============================================================================================
   // Helper concepts for construction checks on records
   //==============================================================================================
@@ -173,22 +161,24 @@ namespace kumi::_
 
   template<template<class...> class Box, typename... From, typename... To>
   struct is_fieldwise_convertible<Box<From...>, Box<To...>>
-  {
-    static constexpr bool value = ([]() {
-      using F_field = std::remove_cvref_t<From>;
-      using T_field = std::remove_cvref_t<get_field_by_name_t<From, To...>>;
-      return kumi::convertible_to<typename F_field::type, typename T_field::type>;
-    }() && ...);
+  {     
+    static constexpr bool value = ( []() 
+      {
+        using F_field = std::remove_cvref_t<From>;
+        using T_field = std::remove_cvref_t<get_field_by_name_t<value_as<F_field::name>, To...>>;
+        return kumi::convertible_to<typename F_field::type, typename T_field::type>;
+      }() && ...);
   };
 
   template<template<class...> class Box, typename... From, typename... To>
   struct is_fieldwise_constructible<Box<From...>, Box<To...>>
   {
-    static constexpr bool value = ([]() {
-      using F_field = std::remove_cvref_t<From>;
-      using T_field = std::remove_cvref_t<get_field_by_name_t<From, To...>>;
-      return std::is_constructible_v<typename F_field::type, typename T_field::type>;
-    }() && ...);
+    static constexpr bool value = ( []()
+      {
+        using F_field = std::remove_cvref_t<From>;
+        using T_field = std::remove_cvref_t<get_field_by_name_t<value_as<F_field::name>, To...>>;
+        return std::is_constructible_v<typename F_field::type, typename T_field::type>;
+      }() && ...);
   };
 
   template<typename From, typename To>

@@ -71,7 +71,16 @@ struct std::tuple_element<I, kumi::indexes_t<V...>> : std::tuple_element<I, kumi
 {
 };
 
-#if !defined(__ANDROID__)
+//==================================================================================================
+// Adaptation of unit to the tuple protocol 
+//==================================================================================================
+template<>
+struct std::tuple_size<kumi::unit> : std::integral_constant<std::size_t, 0>{};
+
+template<std::size_t I>
+struct std::tuple_element<I, kumi::unit> : std::tuple_element<I,kumi::tuple<>>{};
+
+#if !defined( __ANDROID__ )
 //==================================================================================================
 // Common Reference support
 //==================================================================================================

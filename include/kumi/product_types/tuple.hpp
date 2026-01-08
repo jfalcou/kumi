@@ -225,13 +225,14 @@ namespace kumi
     //! @include doc/soa.cpp
     //==============================================================================================
     template<typename... Us>
-    requires( (sizeof...(Us) == sizeof...(Ts)) 
-              && _::piecewise_convertible<tuple<Ts const&...>, tuple<Us...>> 
+    requires( ( sizeof...(Us)==sizeof...(Ts) )
+              && ( !std::same_as<tuple<Ts...>,tuple<Us...>> )
+              && _::piecewise_constructible<tuple<Ts const&...>, tuple<Us...>> 
             )
-    [[nodiscard]] KUMI_ABI constexpr operator tuple<Us...>() const
+    [[nodiscard]] KUMI_ABI explicit( !_::piecewise_convertible<tuple<Ts const&...>, tuple<Us...>> ) 
+    constexpr operator tuple<Us...>() const
     {
-      if constexpr ( sizeof...(Ts) == 0) return tuple{};
-      else return [&]<std::size_t...I>(std::index_sequence<I...>)
+      return [&]<std::size_t...I>(std::index_sequence<I...>)
       {
         return tuple<Us...>{ static_cast<Us>(get<I>(*this))... };
       }(std::make_index_sequence<sizeof...(Ts)>{});
@@ -239,13 +240,14 @@ namespace kumi
 
     /// @overload
     template<typename... Us>
-    requires( (sizeof...(Us) == sizeof...(Ts)) 
-              && _::piecewise_convertible<tuple<Ts&...>, tuple<Us...>>
+    requires( ( sizeof...(Us)==sizeof...(Ts) )
+              && ( !std::same_as<tuple<Ts...>,tuple<Us...>> )
+              && _::piecewise_constructible<tuple<Ts&...>, tuple<Us...>>
             )
-    [[nodiscard]] KUMI_ABI constexpr operator tuple<Us...>() 
+    [[nodiscard]] KUMI_ABI explicit( !_::piecewise_convertible<tuple<Ts&...>, tuple<Us...>> ) 
+    constexpr operator tuple<Us...>() 
     {
-      if constexpr ( sizeof...(Ts) == 0) return tuple{};
-      else return [&]<std::size_t...I>(std::index_sequence<I...>)
+      return [&]<std::size_t...I>(std::index_sequence<I...>)
       {
         return tuple<Us...>{ static_cast<Us>(get<I>(*this))... };
       }(std::make_index_sequence<sizeof...(Ts)>{});
@@ -433,6 +435,12 @@ namespace kumi
 
     KUMI_ABI friend constexpr auto operator<=>(tuple<>, tuple<>) noexcept = default;
 
+    template<typename T> requires ( unit_type<T> )
+    [[nodiscard]] KUMI_ABI constexpr operator T() const noexcept { return {}; };
+
+    template<typename T> requires ( unit_type<T> )
+    [[nodiscard]] KUMI_ABI constexpr operator T() noexcept { return {}; };
+    
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, tuple<>) noexcept
     {
