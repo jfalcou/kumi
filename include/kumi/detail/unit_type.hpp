@@ -7,7 +7,7 @@
 //==================================================================================================
 #pragma once
 
-#include <iosfwd>
+#include <kumi/detail/streamable.hpp>
 #include <kumi/detail/abi.hpp>
 
 namespace kumi
