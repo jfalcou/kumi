@@ -16,7 +16,6 @@
 #include <kumi/detail/streamable.hpp>
 #include <kumi/utils.hpp>
 
-#include <iosfwd>
 #include <type_traits>
 
 namespace kumi
@@ -377,14 +376,12 @@ namespace kumi
     //! @related kumi::tuple
     //! @brief Inserts a kumi::tuple in an output stream
     //==============================================================================================
-    template<typename CharT, typename Traits>
-    friend std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, Traits> &os,
-                                                         tuple const &t) noexcept
+    template<_::stream Os> friend auto &operator<<(Os &os, tuple const& t) noexcept
     {
       os << "( ";
       [&]<std::size_t...I>(std::index_sequence<I...>)
       {
-        ((os << _::make_streamable( t[index<I>] ) << " "), ...);
+        ((os << _::make_streamable( t[index<I>] , os) << " "), ...);
       }(std::make_index_sequence<size_v<decltype(t)>>{});
       os << ')';
 
@@ -403,9 +400,7 @@ namespace kumi
     
     KUMI_ABI friend constexpr auto operator<=>(tuple<>, tuple<>) noexcept = default;
     
-    template<typename CharT, typename Traits>
-    friend std::basic_ostream<CharT,Traits> &operator<<( std::basic_ostream<CharT, Traits> &os
-                                                       , tuple<>) noexcept
+    template<_::stream Os> friend auto &operator<<(Os &os, tuple) noexcept
     {
       return os << "()";
     }

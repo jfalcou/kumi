@@ -219,9 +219,7 @@ namespace kumi
     //! @related kumi::record
     //! @brief Inserts a kumi::record in an output stream
     //==============================================================================================
-    template<typename CharT, typename Traits>
-    friend std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, Traits> &os,
-                                                         record const &t) noexcept
+    template<_::stream Os> friend auto &operator<<(Os &os, record const& t) noexcept
     {
       os << "( ";
       [&]<std::size_t...I>(std::index_sequence<I...>)
@@ -246,9 +244,7 @@ namespace kumi
     
     KUMI_ABI friend constexpr auto operator<=>(record<>, record<>) noexcept = default;
     
-    template<typename CharT, typename Traits>
-    friend std::basic_ostream<CharT, Traits> &operator<<( std::basic_ostream<CharT,Traits> &os
-                                                        , record<>) noexcept
+    template<_::stream Os> friend auto &operator<<(Os &os, record) noexcept
     {
       return os << "()";
     }

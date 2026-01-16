@@ -7,7 +7,6 @@
 //==================================================================================================
 #pragma once
 
-#include <iosfwd>
 #include <kumi/detail/binder.hpp>
 #include <kumi/utils/traits.hpp>
 #include <kumi/utils/concepts.hpp>
@@ -83,9 +82,7 @@ namespace kumi
     //==============================================================================================
     //! @}
     //==============================================================================================
-    template<typename CharT, typename Traits>
-    friend std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, Traits> &os,
-                                                         indexes_t const &i) noexcept
+    template<_::stream Os> friend auto &operator<<(Os &os, indexes_t const& i) noexcept
     {
       os << "( ";
       [&]<std::size_t... I>(std::index_sequence<I...>)

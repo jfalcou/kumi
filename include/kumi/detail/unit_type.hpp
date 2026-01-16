@@ -22,10 +22,8 @@ namespace kumi
   struct unit 
   {
     KUMI_ABI friend constexpr auto operator<=>(unit, unit) noexcept = default;
-
-    template<typename CharT, typename Traits>
-    friend std::basic_ostream<CharT, Traits> &operator<<( std::basic_ostream<CharT,Traits> &os
-                                                        , unit) noexcept
+    
+    template<_::stream Os> friend auto &operator<<(Os &os, unit) noexcept
     {
       return os << '\'' << "none" << '\'';
     }
