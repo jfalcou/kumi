@@ -11,8 +11,10 @@ var searchData=
   ['reindex_8',['reindex',['../group__generators_ga6a35aaac7b583b81c4c7d6dd91119f4e.html#ga6a35aaac7b583b81c4c7d6dd91119f4e',1,'kumi']]],
   ['related_20concepts_9',['Tuple Related Concepts',['../group__concepts.html',1,'']]],
   ['related_20traits_10',['Tuple Related Traits',['../group__traits.html',1,'']]],
-  ['release_11',['First autonomous public release.',['../changelog.html#autotoc_md220',1,'']]],
+  ['release_11',['First autonomous public release.',['../changelog.html#autotoc_md224',1,'']]],
   ['reorder_12',['reorder',['../group__generators_ga3e46e6c4fe83aeb9ce77f9002baada79.html#ga3e46e6c4fe83aeb9ce77f9002baada79',1,'kumi']]],
   ['reorder_5ffields_13',['reorder_fields',['../group__generators_gacacb045909983a11d31bbe8d589b0260.html#gacacb045909983a11d31bbe8d589b0260',1,'kumi']]],
-  ['reverse_14',['reverse',['../group__generators_ga49abf24bfdc3e6c8707cd321d9015212.html#ga49abf24bfdc3e6c8707cd321d9015212',1,'kumi']]]
+  ['reverse_14',['reverse',['../group__generators_ga49abf24bfdc3e6c8707cd321d9015212.html#ga49abf24bfdc3e6c8707cd321d9015212',1,'kumi']]],
+  ['rotate_5fleft_15',['rotate_left',['../group__generators_ga969f4ebe05e88580436080ab956e7e37.html#ga969f4ebe05e88580436080ab956e7e37',1,'kumi']]],
+  ['rotate_5fright_16',['rotate_right',['../group__generators_ga7b4c54857ff1b5253b86ae9b05098268.html#ga7b4c54857ff1b5253b86ae9b05098268',1,'kumi']]]
 ];

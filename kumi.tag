@@ -1519,6 +1519,20 @@
     </member>
     <member kind="function">
       <type>constexpr auto</type>
+      <name>rotate_left</name>
+      <anchorfile>group__generators_ga969f4ebe05e88580436080ab956e7e37.html</anchorfile>
+      <anchor>ga969f4ebe05e88580436080ab956e7e37</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>rotate_right</name>
+      <anchorfile>group__generators_ga7b4c54857ff1b5253b86ae9b05098268.html</anchorfile>
+      <anchor>ga7b4c54857ff1b5253b86ae9b05098268</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
       <name>split</name>
       <anchorfile>group__generators_ga30d07f30bbfa319dfa78a9e1a5a83a38.html</anchorfile>
       <anchor>ga30d07f30bbfa319dfa78a9e1a5a83a38</anchor>
@@ -2794,6 +2808,20 @@
       <anchorfile>group__generators_ga49abf24bfdc3e6c8707cd321d9015212.html</anchorfile>
       <anchor>ga49abf24bfdc3e6c8707cd321d9015212</anchor>
       <arglist>(Tuple &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::rotate_left</name>
+      <anchorfile>group__generators_ga969f4ebe05e88580436080ab956e7e37.html</anchorfile>
+      <anchor>ga969f4ebe05e88580436080ab956e7e37</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::rotate_right</name>
+      <anchorfile>group__generators_ga7b4c54857ff1b5253b86ae9b05098268.html</anchorfile>
+      <anchor>ga7b4c54857ff1b5253b86ae9b05098268</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
