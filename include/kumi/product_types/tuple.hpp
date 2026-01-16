@@ -34,7 +34,6 @@ namespace kumi
   //================================================================================================
   template<typename... Ts> struct tuple
   {
-    using is_product_type = void;
     using binder_t = _::make_binder_t<std::make_integer_sequence<int,sizeof...(Ts)>, Ts...>;
 
     static constexpr bool is_homogeneous = binder_t::is_homogeneous;
@@ -391,7 +390,6 @@ namespace kumi
 
   template<> struct tuple<>  
   {
-    using is_product_type = void;
     static constexpr bool is_homogeneous = false;
 
     static constexpr auto size()  noexcept { return std::size_t{0}; }

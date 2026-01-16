@@ -23,7 +23,6 @@ namespace kumi
   template<indexer... V>
   struct indexes_t
   {
-    using is_product_type = void;
     using binder_t        = _::make_binder_t<std::make_integer_sequence<int,sizeof...(V)>, V...>;
 
     static constexpr bool is_homogeneous    = binder_t::is_homogeneous;

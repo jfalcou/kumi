@@ -47,7 +47,6 @@ template<typename T>         struct std::tuple_element<4,trivial_record_type<T,f
 /// Adapted types for tuple/record type semantic
 struct tuple_box
 {
-  using is_product_type = void;
 
   int i;
   float f;
@@ -79,7 +78,6 @@ struct record_box
 {
   // This is here for testing purpose, if a user defines both traits everything shall still work
   // and not error out on ambiguous 'is_product_type' resolution.
-  using is_product_type = void;
   using is_record_type  = void;
 
   int     i;
