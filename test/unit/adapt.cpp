@@ -8,14 +8,15 @@
 #define TTS_MAIN
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
+#include <tuple>
 #include "test.hpp"
 
 TTS_CASE("Check adapted types model kumi::product_type concept")
 {
-  TTS_EXPECT    ( kumi::product_type<tuple_box>             );
-  TTS_EXPECT    ( (kumi::product_type<std::array<int,4>>   ));
-  TTS_EXPECT    ( (kumi::product_type<std::pair<int,float>>));
-  TTS_EXPECT    ( (kumi::product_type<std::tuple<int, char, float>>));
+  TTS_EXPECT( kumi::product_type<tuple_box>             );
+  TTS_EXPECT( (kumi::product_type<std::array<int,4>>   ));
+  TTS_EXPECT( (kumi::product_type<std::pair<int,float>>));
+  TTS_EXPECT( (kumi::product_type<std::tuple<int, char, float>>));
 };
 
 TTS_CASE("Check adapted type behave like a product_type")

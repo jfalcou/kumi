@@ -10,7 +10,7 @@
 #include <tts/tts.hpp>
 
 #include <string>
-#include <iostream>
+#include <sstream>
 #include <cstdint>
 
 namespace ns
@@ -27,7 +27,7 @@ namespace ns
          + std::to_string(p.decimal);
   }
 
-  struct person 
+  struct person
   {
     std::string name;
     std::string surname;
@@ -52,7 +52,7 @@ TTS_CASE("Check make_streamable behavior")
 
   kumi::tuple t = {'t', "rofl", cards, marty, a};
 
-  std::ostringstream s; 
+  std::ostringstream s;
   s << t;
 
   TTS_EQUAL(s.str(), "( t rofl 7.90 Marty Macfly (unknown) )");
