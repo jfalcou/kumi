@@ -12,7 +12,6 @@
 #include <utility>
 
 #include <kumi/detail/unique.hpp>
-#include <kumi/detail/unit_type.hpp>
 
 namespace kumi
 {
@@ -77,7 +76,7 @@ namespace kumi
   //!   template<typename T> inline constexpr auto size_v = size<T>::value;
   //! @endcode
   //================================================================================================
-  template<typename T> struct size : std::tuple_size<T>   {};
+  template<typename T> struct size              : std::tuple_size<T> {};
   template<typename T> struct size<T &>         : size<T> {};
   template<typename T> struct size<T &&>        : size<T> {};
   template<typename T> struct size<T const>     : size<T> {};
