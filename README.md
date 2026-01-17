@@ -1,10 +1,12 @@
-<img src="https://jfalcou.github.io/kumi/logo.png" alt="KUMI Logo: stack of triangles of variable shades of purple" data-canonical-src="https://jfalcou.github.io/kumi/logo.png" align="left"  width="12%" height="12%" />
+<img src="https://jfalcou.github.io/kumi/logo.png" alt="KUMI Logo: stack of triangles of variable shades of purple" data-canonical-src="https://jfalcou.github.io/kumi/logo.png" align="left"  width="8%" height="8%" />
 
 # KUMI - C++20 Compact Tuple Tools
 
 [![Licence](https://img.shields.io/github/license/jfalcou/kumi?style=plastic)](https://img.shields.io/github/license/jfalcou/kumi?style=plastic)
 [![Discord](https://img.shields.io/discord/692734675726237696?style=plastic)](https://discord.com/channels/692734675726237696/692735300522344468)
 [![CI Status](https://github.com/jfalcou/kumi/actions/workflows/unit.yml/badge.svg)](https://github.com/jfalcou/kumi/actions/workflows/unit.yml)
+
+<br clear="left"/>
 
 ## Summary
 
