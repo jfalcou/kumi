@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 260" width="300" height="260">
+  <defs>
+    <style>
+      /* geometricPrecision ensures the triangles fit together perfectly without white hairlines */
+      polygon { shape-rendering: geometricPrecision; }
+    </style>
+  </defs>
+
+  <polygon points="150,0 100,86.6 200,86.6" fill="#F3E6F4" />
+
+  <polygon points="100,86.6 50,173.2 150,173.2" fill="#D8B2D8" />
+  <polygon points="100,86.6 200,86.6 150,173.2" fill="#CFA0CF" />
+  <polygon points="200,86.6 150,173.2 250,173.2" fill="#B37BB3" />
+
+  <polygon points="50,173.2 0,259.8 100,259.8" fill="#7E1E7E" />
+  <polygon points="50,173.2 150,173.2 100,259.8" fill="#9C449C" />
+  <polygon points="150,173.2 100,259.8 200,259.8" fill="#E0C1E0" />
+  <polygon points="150,173.2 250,173.2 200,259.8" fill="#D8B2D8" />
+  <polygon points="250,173.2 200,259.8 300,259.8" fill="#660066" />
+</svg>
