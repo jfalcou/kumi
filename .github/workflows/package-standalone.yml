@@ -16,7 +16,7 @@ jobs:
       contents: write
       pull-requests: write
     container:
-      image: ghcr.io/jfalcou/compilers:v9
+      image: ghcr.io/jfalcou/compilers:v10
     strategy:
       fail-fast: false
     steps:
