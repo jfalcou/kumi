@@ -16,7 +16,6 @@
 #include <kumi/detail/streamable.hpp>
 #include <kumi/utils.hpp>
 
-#include <iosfwd>
 #include <type_traits>
 
 namespace kumi
@@ -35,7 +34,6 @@ namespace kumi
   //================================================================================================
   template<typename... Ts> struct tuple
   {
-    using is_product_type = void;
     using binder_t = _::make_binder_t<std::make_integer_sequence<int,sizeof...(Ts)>, Ts...>;
 
     static constexpr bool is_homogeneous = binder_t::is_homogeneous;
@@ -377,14 +375,12 @@ namespace kumi
     //! @related kumi::tuple
     //! @brief Inserts a kumi::tuple in an output stream
     //==============================================================================================
-    template<typename CharT, typename Traits>
-    friend std::basic_ostream<CharT, Traits> &operator<<(std::basic_ostream<CharT, Traits> &os,
-                                                         tuple const &t) noexcept
+    template<_::stream Os> friend auto &operator<<(Os &os, tuple const& t) noexcept
     {
       os << "( ";
       [&]<std::size_t...I>(std::index_sequence<I...>)
       {
-        ((os << _::make_streamable( t[index<I>] ) << " "), ...);
+        ((os << _::make_streamable( t[index<I>] , os) << " "), ...);
       }(std::make_index_sequence<size_v<decltype(t)>>{});
       os << ')';
 
@@ -394,7 +390,6 @@ namespace kumi
 
   template<> struct tuple<>  
   {
-    using is_product_type = void;
     static constexpr bool is_homogeneous = false;
 
     static constexpr auto size()  noexcept { return std::size_t{0}; }
@@ -403,9 +398,7 @@ namespace kumi
     
     KUMI_ABI friend constexpr auto operator<=>(tuple<>, tuple<>) noexcept = default;
     
-    template<typename CharT, typename Traits>
-    friend std::basic_ostream<CharT,Traits> &operator<<( std::basic_ostream<CharT, Traits> &os
-                                                       , tuple<>) noexcept
+    template<_::stream Os> friend auto &operator<<(Os &os, tuple) noexcept
     {
       return os << "()";
     }

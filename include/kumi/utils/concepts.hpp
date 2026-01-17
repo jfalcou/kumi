@@ -41,6 +41,15 @@ namespace kumi
   //================================================================================================
   template<typename T>
   concept record_type = product_type<T> && is_record_type<std::remove_cvref_t<T>>::value;
+ 
+  //================================================================================================
+  //! @ingroup concepts
+  //! @brief Concept specifying a type follows the Container Type semantic
+  //!
+  //! A type `T` models `kumi::static_container` if it is an homogeneous container of fixed size. 
+  //================================================================================================
+  template <typename T> 
+  concept static_container = is_static_container_v<std::remove_cvref_t<T>>;
 
   //================================================================================================
   //! @ingroup concepts
@@ -294,8 +303,7 @@ namespace kumi
   template<typename T, typename... Us>
   concept compatible_product_types = (follows_same_semantic<T,Us...> 
     && ((!record_type<T>) || (equivalent<std::remove_cvref_t<T>, std::remove_cvref_t<Us>> && ...)));
-
-
+ 
   //================================================================================================
   //! @ingroup concepts
   //! @brief Concept specifying a type is a Monoid  
