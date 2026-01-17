@@ -1,0 +1,237 @@
+##======================================================================================================================
+##  KUMI - Compact C++20 Tuple Toolbox
+##  Copyright : KUMI Project Contributors
+##  SPDX-License-Identifier: BSL-1.0
+##======================================================================================================================
+name: KUMI Unit Tests
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ##################################################################################################
+  ## Preserve pre-commit checks
+  ##################################################################################################
+  precommit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.1
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install pre-commit
+        run: pip install pre-commit
+      - name: Run pre-commit checks
+        run: pre-commit run --all-files --show-diff-on-failure --color=always
+
+  ##################################################################################################
+  ## Build and run unit tests
+  ##################################################################################################
+  gcc-linux:
+    runs-on: ubuntu-latest
+    needs: precommit
+    container:
+      image: ghcr.io/jfalcou/compilers:v10
+    strategy:
+      fail-fast: false
+      matrix:
+        cfg:
+        - { setup: "", opts: -O0                 }
+        - { setup: "", opts: "-O3 -flto -DNDEBUG"}
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v4.1.1
+      - name: KUMI using g++ with ${{ matrix.cfg.opts }}
+        run:  |
+          mkdir build
+          cd build
+          cmake ..  -G Ninja -DCMAKE_CXX_COMPILER=g++-14 -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}" ${{matrix.cfg.setup}}
+      - name: Compile Unit Tests
+        run:  |
+          cd build
+          ninja kumi-test -j 2
+      - name: Running Unit Tests
+        run:  |
+          cd build
+          ctest --output-on-failure -j 2
+
+  clang-linux:
+    runs-on: ubuntu-latest
+    needs: precommit
+    container:
+      image: ghcr.io/jfalcou/compilers:v10
+    strategy:
+      fail-fast: false
+      matrix:
+        cfg:
+        - { setup: "",opts: -O0                                 , linker:                }
+        - { setup: "",opts: "-O3 -flto -DNDEBUG"                , linker:                }
+        - { setup: "",opts: "-O3 -flto -DNDEBUG -stdlib=libc++" , linker: -stdlib=libc++ }
+        - { setup: "",opts: "-O0 -stdlib=libc++"                , linker: -stdlib=libc++ }
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v4.1.1
+      - name: KUMI using clang++ with ${{ matrix.cfg.opts }}
+        run:  |
+          mkdir build
+          cd build
+          cmake ..  -G Ninja  -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}" \
+                              -DCMAKE_EXE_LINKER_FLAGS="${{ matrix.cfg.linker }}" ${{matrix.cfg.setup}}
+      - name: Compile Unit Tests
+        run:  |
+          cd build
+          ninja kumi-test -j 2
+      - name: Running Unit Tests
+        run:  |
+          cd build
+          ctest --output-on-failure -j 2
+
+  clang-macosx:
+    runs-on: [macos-14]
+    needs: precommit
+    strategy:
+      fail-fast: false
+      matrix:
+        cfg:
+        - { setup: "",opts: -O0                                 , linker:                 }
+        - { setup: "",opts: "-O0 -stdlib=libc++"                , linker: -stdlib=libc++  }
+        - { setup: "",opts: "-O3 -flto -DNDEBUG"                , linker:                 }
+        - { setup: "",opts: "-O3 -flto -DNDEBUG -stdlib=libc++" , linker: -stdlib=libc++  }
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v4.1.1
+      - name: Running CMake for clang++ with ${{ matrix.cfg.opts }}
+        run: |
+          mkdir build && cd build
+          cmake .. -DCMAKE_CXX_COMPILER=clang++ -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}" \
+                   -DCMAKE_EXE_LINKER_FLAGS="${{ matrix.cfg.linker }}" ${{matrix.cfg.setup}}
+      - name: Compiling Unit Tests
+        run:  cd build && make kumi-test -j 2
+      - name: Running Unit Tests
+        run: cd build && ctest --output-on-failure -j 2
+
+  android:
+    runs-on: [macos-14]
+    needs: precommit
+    strategy:
+      fail-fast: false
+      matrix:
+        cfg:
+        - { setup: "",opts: -O0                 }
+        - { setup: "",opts: "-O3 -flto -DNDEBUG"}
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v4.1.1
+      - name: Running CMake for clang++ for Android with ${{ matrix.cfg.opts }} ${{matrix.cfg.setup}}
+        run: |
+          mkdir build && cd build
+          cmake .. -DCMAKE_TOOLCHAIN_FILE=$ANDROID_NDK_ROOT/build/cmake/android.toolchain.cmake -DANDROID_ABI=arm64-v8a
+      - name: Compiling Unit Tests
+        run:  cd build && make kumi-test -j 2
+
+  msvc:
+    runs-on: [windows-2022]
+    needs: precommit
+    strategy:
+      fail-fast: false
+      matrix:
+        cfg:
+        - { setup: "",mode: Debug  , options: ""}
+        - { setup: "",mode: Release, options: ""}
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v4.1.1
+      - name: Running CMake for MSVC ${{ matrix.cfg.mode }} ${{ matrix.cfg.options }}
+        run: |
+          mkdir build && cd build
+          cmake -G "Visual Studio 17 2022" -A x64 .. ${{matrix.cfg.setup}}
+      - name: Compiling Unit Tests
+        run:  |
+          cd build
+          cmake --build . --target kumi-test --config ${{ matrix.cfg.mode }} --parallel 2
+      - name: Running Tests
+        run: |
+          cd build
+          ctest -C ${{ matrix.cfg.mode }} --output-on-failure
+
+  clang-cl:
+    runs-on: [windows-2022]
+    needs: precommit
+    strategy:
+      fail-fast: false
+      matrix:
+        cfg:
+        - { setup: "",mode: Debug  , options: ""}
+        - { setup: "",mode: Release, options: ""}
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v4.1.1
+      - name: Running CMake for Clang-CL ${{ matrix.cfg.mode }} ${{ matrix.cfg.options }}
+        run: |
+          mkdir build && cd build
+          cmake -G "Visual Studio 17 2022" -T ClangCL -A x64 .. ${{matrix.cfg.setup}}
+      - name: Compiling Unit Tests
+        run:  |
+          cd build
+          cmake --build . --target kumi-test --config ${{ matrix.cfg.mode }} --parallel 2
+      - name: Running Tests
+        run: |
+          cd build
+          ctest -C ${{ matrix.cfg.mode }} --output-on-failure
+
+  wasm:
+    runs-on: ubuntu-latest
+    needs: precommit
+    container:
+      image: ghcr.io/jfalcou/compilers:v9
+    strategy:
+      fail-fast: false
+      matrix:
+        cfg:
+        - { setup: "",opts: -O0                 }
+        - { setup: "",opts: "-O3 -flto -DNDEBUG"}
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v4.1.1
+      - name: KUMI using em++ with ${{ matrix.cfg.opts }}
+        run:  |
+          mkdir build
+          cd build
+          emcmake cmake ..  -G Ninja -DCMAKE_CXX_COMPILER=em++ -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}" \
+                            ${{matrix.cfg.setup}} -DCMAKE_CROSSCOMPILING_CMD="`pwd`/../cmake/run_wasm.sh"
+      - name: Compile Unit Tests
+        run:  |
+          cd build
+          ninja kumi-test -j 2
+      - name: Running Unit Tests
+        run:  |
+          cd build
+          ctest --output-on-failure -j 2
+
+  icpx:
+    runs-on: ubuntu-latest
+    needs: precommit
+    container:
+      image: ghcr.io/jfalcou/compilers:sycl-v1
+    strategy:
+      fail-fast: false
+      matrix:
+        cfg:
+        - { setup: "",opts: "-O0"                }
+        - { setup: "",opts: "-O3 -flto -DNDEBUG" }
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v4.1.1
+      - name: Running CMake for icpx with ${{ matrix.cfg.opts }}
+        run:  |
+          source /opt/intel/oneapi/setvars.sh
+          mkdir build
+          cd build
+          cmake ..  -G Ninja -DCMAKE_CXX_COMPILER=icpx -DCMAKE_CXX_FLAGS="${{ matrix.cfg.opts }}" ${{matrix.cfg.setup}}
+      - name: Running Unit Tests
+        run:  |
+          cd build
+          ninja kumi-test -j 2 && ctest --output-on-failure -j 2
