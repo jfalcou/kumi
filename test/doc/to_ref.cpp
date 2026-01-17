@@ -5,10 +5,11 @@
 **/
 #include <kumi/kumi.hpp>
 #include <iostream>
+
 int main()
 {
-  auto original = kumi::make_tuple(0,'0',0.f);
-  auto ref      = kumi::to_ref( original );
+  auto original = kumi::make_tuple(0, '0', 0.f);
+  auto ref = kumi::to_ref(original);
 
   std::cout << original << "\n";
 

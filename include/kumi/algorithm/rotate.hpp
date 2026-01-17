@@ -15,29 +15,28 @@ namespace kumi
     {
       KUMI_ABI constexpr auto operator()() const noexcept
       {
-        struct { std::size_t t[1+S]; } that{};
-
-        auto idxs = [&]<std::size_t... I>(std::index_sequence<I...>)
+        struct
         {
-          ((that.t[I] = (I + R) % S), ...);
-        };
+          std::size_t t[1 + S];
+        } that{};
+
+        auto idxs = [&]<std::size_t... I>(std::index_sequence<I...>) { ((that.t[I] = (I + R) % S), ...); };
 
         idxs(std::make_index_sequence<S>{});
         return that;
       }
     };
 
-    template<std::size_t S, std::size_t R>
-    inline constexpr rotate_t<S,R> rotator{};
+    template<std::size_t S, std::size_t R> inline constexpr rotate_t<S, R> rotator{};
   }
 
   //================================================================================================
-  //! @ingroup generators 
-  //! @brief  Rotates the element of a product type R positions to the left, wrapping around when 
+  //! @ingroup generators
+  //! @brief  Rotates the element of a product type R positions to the left, wrapping around when
   //!         getting to the beginning.
   //!
   //! @tparam R Rotation factor
-  //! @param t  Product type to rotate. 
+  //! @param t  Product type to rotate.
   //! @return   A product type equivalent to t with elements rotated R positions to the left.
   //!
   //! ## Helper type
@@ -57,29 +56,27 @@ namespace kumi
   //! @include doc/rotate_left.cpp
   //! @include doc/record/rotate_left.cpp
   //================================================================================================
-  template<std::size_t R, product_type T>
-  constexpr auto rotate_left(T && t)
+  template<std::size_t R, product_type T> constexpr auto rotate_left(T&& t)
   {
-    if constexpr ( sized_product_type<T,0> ) return KUMI_FWD(t);
-    else if constexpr ( (R % size_v<T> ) == 0 ) return KUMI_FWD(t);
+    if constexpr (sized_product_type<T, 0>) return KUMI_FWD(t);
+    else if constexpr ((R % size_v<T>) == 0) return KUMI_FWD(t);
     else
     {
       constexpr auto idxs = _::rotator<size_v<T>, R % size_v<T>>();
-      return [&]<std::size_t...I>(std::index_sequence<I...>)
-      {
-        using type = _::builder_make_t<T, element_t< idxs.t[I], T > ...>;
-        return type { get<idxs.t[I]>(KUMI_FWD(t))... };
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        using type = _::builder_make_t<T, element_t<idxs.t[I], T>...>;
+        return type{get<idxs.t[I]>(KUMI_FWD(t))...};
       }(std::make_index_sequence<size_v<T>>{});
     }
   }
 
   //================================================================================================
-  //! @ingroup generators 
-  //! @brief  Rotates the element of a product type R positions to the right, wrapping around when 
+  //! @ingroup generators
+  //! @brief  Rotates the element of a product type R positions to the right, wrapping around when
   //!         getting to the end.
   //!
   //! @tparam R Rotation factor
-  //! @param t  Product type to rotate. 
+  //! @param t  Product type to rotate.
   //! @return   A product type equivalent to t with elements rotated R positions to the right.
   //!
   //! ## Helper type
@@ -99,41 +96,35 @@ namespace kumi
   //! @include doc/rotate_right.cpp
   //! @include doc/record/rotate_right.cpp
   //================================================================================================
-  template<std::size_t R, product_type T>
-  constexpr auto rotate_right(T && t)
+  template<std::size_t R, product_type T> constexpr auto rotate_right(T&& t)
   {
-    if constexpr ( sized_product_type<T,0> ) return KUMI_FWD(t);
-    else if constexpr ( (R % size_v<T>) == 0 ) return KUMI_FWD(t);
+    if constexpr (sized_product_type<T, 0>) return KUMI_FWD(t);
+    else if constexpr ((R % size_v<T>) == 0) return KUMI_FWD(t);
     else
     {
       constexpr auto F = R % size_v<T>;
       constexpr auto idxs = _::rotator<size_v<T>, size_v<T> - F>();
-      return [&]<std::size_t...I>(std::index_sequence<I...>)
-      {
-        using type = _::builder_make_t<T, element_t< idxs.t[I], T > ...>;
-        return type { get<idxs.t[I]>(KUMI_FWD(t))... };
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        using type = _::builder_make_t<T, element_t<idxs.t[I], T>...>;
+        return type{get<idxs.t[I]>(KUMI_FWD(t))...};
       }(std::make_index_sequence<size_v<T>>{});
     }
   }
 
   namespace result
   {
-    template<std::size_t R, product_type T>
-    struct rotate_left
+    template<std::size_t R, product_type T> struct rotate_left
     {
-      using type = decltype(kumi::rotate_left<R>( std::declval<T>()) );
+      using type = decltype(kumi::rotate_left<R>(std::declval<T>()));
     };
 
-    template<std::size_t R, product_type T>
-    struct rotate_right
+    template<std::size_t R, product_type T> struct rotate_right
     {
-      using type = decltype(kumi::rotate_right<R>( std::declval<T>()) );
+      using type = decltype(kumi::rotate_right<R>(std::declval<T>()));
     };
 
-    template<std::size_t R, product_type T>
-    using rotate_left_t = typename rotate_left<R,T>::type;
+    template<std::size_t R, product_type T> using rotate_left_t = typename rotate_left<R, T>::type;
 
-    template<std::size_t R, product_type T>
-    using rotate_right_t = typename rotate_right<R,T>::type;
+    template<std::size_t R, product_type T> using rotate_right_t = typename rotate_right<R, T>::type;
   }
 }

@@ -14,18 +14,18 @@ TTS_CASE("Check tuple_element of kumi::record")
 {
   using namespace kumi::literals;
 
-  float const                         f {};
-  double                              d;
+  float const f{};
+  double d;
   std::reference_wrapper<float const> rf = f;
-  std::reference_wrapper<double>      rd = d;
+  std::reference_wrapper<double> rd = d;
 
   auto made = kumi::make_record("a"_f = '1', "b"_f = 2., "c"_f = 3.f, "d"_f = rf, "e"_f = rd);
 
-  TTS_TYPE_IS((std::tuple_element_t<0, decltype(made)>), (kumi::field_capture<"a",char>));
-  TTS_TYPE_IS((std::tuple_element_t<1, decltype(made)>), (kumi::field_capture<"b",double>));
-  TTS_TYPE_IS((std::tuple_element_t<2, decltype(made)>), (kumi::field_capture<"c",float>));
-  TTS_TYPE_IS((std::tuple_element_t<3, decltype(made)>), (kumi::field_capture<"d",float const &>));
-  TTS_TYPE_IS((std::tuple_element_t<4, decltype(made)>), (kumi::field_capture<"e",double &>));
+  TTS_TYPE_IS((std::tuple_element_t<0, decltype(made)>), (kumi::field_capture<"a", char>));
+  TTS_TYPE_IS((std::tuple_element_t<1, decltype(made)>), (kumi::field_capture<"b", double>));
+  TTS_TYPE_IS((std::tuple_element_t<2, decltype(made)>), (kumi::field_capture<"c", float>));
+  TTS_TYPE_IS((std::tuple_element_t<3, decltype(made)>), (kumi::field_capture<"d", float const&>));
+  TTS_TYPE_IS((std::tuple_element_t<4, decltype(made)>), (kumi::field_capture<"e", double&>));
 };
 
 TTS_CASE("Check construction of kumi::record via make_record")
@@ -35,8 +35,8 @@ TTS_CASE("Check construction of kumi::record via make_record")
   auto t0 = kumi::make_record();
   auto t1 = kumi::make_record("a"_f = 1);
   auto t2 = kumi::make_record("a"_f = 1.f, "b"_f = 2);
-  auto t3 = kumi::make_record("a"_f = 1. , "b"_f = 2.f, "c"_f = 3);
-  auto t4 = kumi::make_record("a"_f = '1', "b"_f = 2. , "c"_f = 3.f, "d"_f = 4);
+  auto t3 = kumi::make_record("a"_f = 1., "b"_f = 2.f, "c"_f = 3);
+  auto t4 = kumi::make_record("a"_f = '1', "b"_f = 2., "c"_f = 3.f, "d"_f = 4);
 
   TTS_CONSTEXPR_EXPECT((kumi::sized_product_type<decltype(t0), 0>));
   TTS_EQUAL(t0.size(), 0ULL);
@@ -71,8 +71,8 @@ TTS_CASE("Check construction of kumi::record via constexpr make_record")
   constexpr auto t0 = kumi::make_record();
   constexpr auto t1 = kumi::make_record("a"_f = 1);
   constexpr auto t2 = kumi::make_record("a"_f = 1.f, "b"_f = 2);
-  constexpr auto t3 = kumi::make_record("a"_f = 1. , "b"_f = 2.f, "c"_f = 3);
-  constexpr auto t4 = kumi::make_record("a"_f = '1', "b"_f = 2. , "c"_f = 3.f, "d"_f = 4);
+  constexpr auto t3 = kumi::make_record("a"_f = 1., "b"_f = 2.f, "c"_f = 3);
+  constexpr auto t4 = kumi::make_record("a"_f = '1', "b"_f = 2., "c"_f = 3.f, "d"_f = 4);
 
   TTS_CONSTEXPR_EXPECT((kumi::sized_product_type<decltype(t0), 0>));
   TTS_CONSTEXPR_EQUAL(t0.size(), 0ULL);

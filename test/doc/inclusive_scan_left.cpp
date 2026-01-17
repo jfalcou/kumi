@@ -8,19 +8,13 @@
 
 int main()
 {
-  auto t = kumi::tuple{2.,1,short{55},'z'};
+  auto t = kumi::tuple{2., 1, short{55}, 'z'};
 
-  auto output = kumi::inclusive_scan_left( [](auto acc, auto elt) 
-                  { 
-                    return acc + sizeof(elt); 
-                  }
-                  , t
-                  , std::size_t{42}                
-                );
+  auto output = kumi::inclusive_scan_left([](auto acc, auto elt) { return acc + sizeof(elt); }, t, std::size_t{42});
 
-  std::cout << output << "\n"; 
+  std::cout << output << "\n";
 
-  auto u = kumi::tuple{1,3,2,4,0,5,9,6,7};
+  auto u = kumi::tuple{1, 3, 2, 4, 0, 5, 9, 6, 7};
 
   std::cout << kumi::inclusive_scan_left(kumi::function::plus, u) << "\n";
 }

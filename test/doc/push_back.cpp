@@ -8,9 +8,9 @@
 
 int main()
 {
-  std::cout << kumi::push_back( kumi::tuple{}, 63.21)  << "\n";
+  std::cout << kumi::push_back(kumi::tuple{}, 63.21) << "\n";
 
-  kumi::tuple t{1,2.,3.4f};
-  std::cout << t                          << "\n";
-  std::cout << kumi::push_back(t, 'Z')   << "\n";
+  kumi::tuple t{1, 2., 3.4f};
+  std::cout << t << "\n";
+  std::cout << kumi::push_back(t, 'Z') << "\n";
 }

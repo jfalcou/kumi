@@ -10,7 +10,7 @@
 int main()
 {
   int k = 99;
-  auto t = kumi::make_tuple( 1, 2.3, 4.5f, '@', std::ref(k));
+  auto t = kumi::make_tuple(1, 2.3, 4.5f, '@', std::ref(k));
 
   std::cout << t << "\n";
 

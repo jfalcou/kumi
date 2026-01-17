@@ -8,11 +8,11 @@
 
 int main()
 {
-  kumi::tuple a = { 1, 2.3, 4.5f};
-  kumi::tuple b = {  '6' };
-  kumi::tuple c = { "7", short{89} };
+  kumi::tuple a = {1, 2.3, 4.5f};
+  kumi::tuple b = {'6'};
+  kumi::tuple c = {"7", short{89}};
 
-  auto abc = cat(a,b,c);
+  auto abc = cat(a, b, c);
 
   std::cout << a << " " << b << " " << c << "\n";
   std::cout << abc << "\n";

@@ -14,20 +14,20 @@ TTS_CASE("Check std::is_empty behavior for tuple & record")
 {
   using namespace kumi;
 
-  TTS_CONSTEXPR_EXPECT_NOT(( std::is_empty_v<tuple<int>>    ));
-  TTS_CONSTEXPR_EXPECT((     std::is_empty_v<kumi::tuple<>> ));
+  TTS_CONSTEXPR_EXPECT_NOT((std::is_empty_v<tuple<int>>));
+  TTS_CONSTEXPR_EXPECT((std::is_empty_v<kumi::tuple<>>));
 
-  TTS_CONSTEXPR_EXPECT_NOT(( std::is_empty_v<record<field_capture<"toto", int>>> ));
-  TTS_CONSTEXPR_EXPECT(( std::is_empty_v<kumi::record<>> ));
+  TTS_CONSTEXPR_EXPECT_NOT((std::is_empty_v<record<field_capture<"toto", int>>>));
+  TTS_CONSTEXPR_EXPECT((std::is_empty_v<kumi::record<>>));
 };
 
 TTS_CASE("Check std::is_aggregate behavior for tuple & record")
 {
   using namespace kumi;
 
-  TTS_CONSTEXPR_EXPECT(( std::is_aggregate_v<tuple<int>>    ));
-  TTS_CONSTEXPR_EXPECT(( std::is_aggregate_v<kumi::tuple<>> ));
+  TTS_CONSTEXPR_EXPECT((std::is_aggregate_v<tuple<int>>));
+  TTS_CONSTEXPR_EXPECT((std::is_aggregate_v<kumi::tuple<>>));
 
-  TTS_CONSTEXPR_EXPECT(( std::is_aggregate_v<record<field_capture<"toto", int>>> ));
-  TTS_CONSTEXPR_EXPECT(( std::is_aggregate_v<record<>> ));
+  TTS_CONSTEXPR_EXPECT((std::is_aggregate_v<record<field_capture<"toto", int>>>));
+  TTS_CONSTEXPR_EXPECT((std::is_aggregate_v<record<>>));
 };

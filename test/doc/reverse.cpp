@@ -8,7 +8,7 @@
 
 int main()
 {
-  auto values = kumi::tuple { 1, 'a', 0.1 };
+  auto values = kumi::tuple{1, 'a', 0.1};
 
   std::cout << values << "\n";
   std::cout << kumi::reverse(values) << "\n";

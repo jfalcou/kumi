@@ -8,9 +8,9 @@
 
 int main()
 {
-    using tuple = kumi::tuple<int, int, char, int, float, float>;
+  using tuple = kumi::tuple<int, int, char, int, float, float>;
 
-    tuple a = {1, 2, 'x', 3, 1.f, 2.f};
+  tuple a = {1, 2, 'x', 3, 1.f, 2.f};
 
-    std::cout << kumi::all_unique(a) << "\n";
+  std::cout << kumi::all_unique(a) << "\n";
 }

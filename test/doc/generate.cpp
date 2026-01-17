@@ -8,6 +8,6 @@
 
 int main()
 {
-  auto t = [](auto p){ return 42.63 + p; };
+  auto t = [](auto p) { return 42.63 + p; };
   std::cout << kumi::generate<7>(t) << "\n";
 }

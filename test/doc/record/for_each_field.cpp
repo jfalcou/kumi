@@ -10,20 +10,16 @@
 int main()
 {
   using namespace kumi::literals;
-    
-  auto t = kumi::record{"a"_f = 1, "b"_f = 2.3, "c"_f = 0.43f };
 
-  kumi::for_each_field( [](kumi::str name, auto& m) 
-  {
-    if(name.as<std::string_view>().ends_with("a"))
-      m += 10;
-    else if (name == "c")
-      m = (m * 100) -1; 
-    else
-      m *= 10;
-    }
-    , t
-  );
+  auto t = kumi::record{"a"_f = 1, "b"_f = 2.3, "c"_f = 0.43f};
+
+  kumi::for_each_field(
+    [](kumi::str name, auto& m) {
+      if (name.as<std::string_view>().ends_with("a")) m += 10;
+      else if (name == "c") m = (m * 100) - 1;
+      else m *= 10;
+    },
+    t);
 
   std::cout << t << "\n";
 }

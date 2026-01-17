@@ -8,16 +8,16 @@
 
 auto generate()
 {
-  return kumi::tuple{1,2.3,4.56f};
+  return kumi::tuple{1, 2.3, 4.56f};
 }
 
 int main()
 {
-  int    i;
+  int i;
   double d;
-  float  f;
+  float f;
 
-  kumi::tie( i,d,f ) = generate();
+  kumi::tie(i, d, f) = generate();
 
   std::cout << i << " " << d << " " << f << "\n";
 }

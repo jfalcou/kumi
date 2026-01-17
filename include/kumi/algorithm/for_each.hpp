@@ -13,7 +13,7 @@ namespace kumi
   //================================================================================================
   //! @ingroup transforms
   //! @brief Applies the Callable object f on each element of a kumi::product_type. f is applied on the
-  //!        values if the given product_type is a kumi::record 
+  //!        values if the given product_type is a kumi::record
   //!
   //! @note This function does not take part in overload resolution if `f` can't be applied to the
   //!       elements of `t` and/or `ts`.
@@ -30,40 +30,30 @@ namespace kumi
   //================================================================================================
   template<typename Function, product_type Tuple, product_type... Tuples>
   KUMI_ABI constexpr void for_each(Function f, Tuple&& t, Tuples&&... ts)
-  requires( (compatible_product_types<Tuple, Tuples...>) 
-          && (_::supports_call<Function&, Tuple, Tuples...>))
+  requires((compatible_product_types<Tuple, Tuples...>) && (_::supports_call<Function&, Tuple, Tuples...>))
   {
-         if constexpr(sized_product_type<Tuple,0>) return;
-    else if constexpr( record_type<Tuple> )
+    if constexpr (sized_product_type<Tuple, 0>) return;
+    else if constexpr (record_type<Tuple>)
     {
-      [&]<std::size_t... I>(std::index_sequence<I...>)
-      {
-        constexpr auto fields = members_of( as<Tuple>{} );
-        [[maybe_unused]] auto call = [&]<typename M>(M)
-                                        { 
-                                          constexpr auto field = get<M::value>(fields); 
-                                          f ( get<field>(KUMI_FWD(t))
-                                            , get<field>(KUMI_FWD(ts))...
-                                          );
-                                        };
+      [&]<std::size_t... I>(std::index_sequence<I...>) {
+        constexpr auto fields = members_of(as<Tuple>{});
+        [[maybe_unused]] auto call = [&]<typename M>(M) {
+          constexpr auto field = get<M::value>(fields);
+          f(get<field>(KUMI_FWD(t)), get<field>(KUMI_FWD(ts))...);
+        };
 
-          ( call(std::integral_constant<std::size_t, I>{}), ... );
-        }
-        (std::make_index_sequence<size_v<Tuple>>{});
+        (call(std::integral_constant<std::size_t, I>{}), ...);
+      }(std::make_index_sequence<size_v<Tuple>>{});
     }
     else
     {
-      [&]<std::size_t... I>(std::index_sequence<I...>)
-      {
-        [[maybe_unused]] auto call = [&]<typename M>(M)
-                                        { f ( get<M::value>(KUMI_FWD(t))
-                                            , get<M::value>(KUMI_FWD(ts))...
-                                            );
-                                        };
+      [&]<std::size_t... I>(std::index_sequence<I...>) {
+        [[maybe_unused]] auto call = [&]<typename M>(M) {
+          f(get<M::value>(KUMI_FWD(t)), get<M::value>(KUMI_FWD(ts))...);
+        };
 
-        ( call(std::integral_constant<std::size_t, I>{}), ... );
-      }
-      (std::make_index_sequence<size<Tuple>::value>());
+        (call(std::integral_constant<std::size_t, I>{}), ...);
+      }(std::make_index_sequence<size<Tuple>::value>());
     }
   }
 
@@ -85,29 +75,20 @@ namespace kumi
   //! @include doc/for_each_index.cpp
   //================================================================================================
   template<typename Function, product_type Tuple, product_type... Tuples>
-  requires( !record_type<Tuple> && (!record_type<Tuples> && ...) )
+  requires(!record_type<Tuple> && (!record_type<Tuples> && ...))
   KUMI_ABI constexpr void for_each_index(Function f, Tuple&& t, Tuples&&... ts)
   {
-    if constexpr(sized_product_type<Tuple,0>) return;
+    if constexpr (sized_product_type<Tuple, 0>) return;
     else
     {
-      auto const invoker{[&, f](auto const i)
-      {
-          f
-          (
-            i,
-            get<i.value>(KUMI_FWD(t)),
-            get<i.value>(KUMI_FWD(ts))...
-          );
-      }};
+      auto const invoker{[&, f](auto const i) { f(i, get<i.value>(KUMI_FWD(t)), get<i.value>(KUMI_FWD(ts))...); }};
 
-      [=]<std::size_t... I>(std::index_sequence<I...>)
-      {
-        (invoker( std::integral_constant<unsigned, I>{} ), ...);
+      [=]<std::size_t... I>(std::index_sequence<I...>) {
+        (invoker(std::integral_constant<unsigned, I>{}), ...);
       }(std::make_index_sequence<size<Tuple>::value>());
     }
   }
- 
+
   //================================================================================================
   //! @ingroup transforms
   //! @brief Applies the Callable object f on each element of a kumi::record_type and its field.
@@ -125,27 +106,20 @@ namespace kumi
   //! @include doc/record/for_each_field.cpp
   //================================================================================================
   template<typename Function, record_type Tuple, record_type... Tuples>
-  requires ( compatible_product_types<std::remove_cvref_t<Tuple>, std::remove_cvref_t<Tuples>...> )
+  requires(compatible_product_types<std::remove_cvref_t<Tuple>, std::remove_cvref_t<Tuples>...>)
   KUMI_ABI constexpr void for_each_field(Function f, Tuple&& t, Tuples&&... ts)
   {
-    if constexpr(sized_product_type<Tuple,0>) return;
+    if constexpr (sized_product_type<Tuple, 0>) return;
     else
     {
-      constexpr auto fields = members_of( as<Tuple>{} );
-      auto const invoker = [&]<std::size_t I>(std::integral_constant<std::size_t, I>)
-      {
-          constexpr auto field = get<I>(fields);
-          f
-          (
-            field,
-            get<field>(KUMI_FWD(t)),
-            get<field>(KUMI_FWD(ts))...
-          );
+      constexpr auto fields = members_of(as<Tuple>{});
+      auto const invoker = [&]<std::size_t I>(std::integral_constant<std::size_t, I>) {
+        constexpr auto field = get<I>(fields);
+        f(field, get<field>(KUMI_FWD(t)), get<field>(KUMI_FWD(ts))...);
       };
 
-      [=]<std::size_t... I>(std::index_sequence<I...>)
-      {
-        (invoker( std::integral_constant<std::size_t, I>{} ), ...);
+      [=]<std::size_t... I>(std::index_sequence<I...>) {
+        (invoker(std::integral_constant<std::size_t, I>{}), ...);
       }(std::make_index_sequence<size<Tuple>::value>());
     }
   }

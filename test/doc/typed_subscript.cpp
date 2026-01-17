@@ -10,12 +10,12 @@ int main()
 {
   using namespace kumi::literals;
 
-  kumi::tuple t = { 1, 2.3, 4.5f, '@' };
+  kumi::tuple t = {1, 2.3, 4.5f, '@'};
 
   // It is possible to have mixed nammed and unnamed fields
-  std::cout << t[ kumi::as<int>{}    ] << "\n";
-  std::cout << t[ kumi::as<double>{} ] << "\n";
-  std::cout << t[ kumi::as<float>{}  ] << "\n";
+  std::cout << t[kumi::as<int>{}] << "\n";
+  std::cout << t[kumi::as<double>{}] << "\n";
+  std::cout << t[kumi::as<float>{}] << "\n";
 
   t[kumi::as<int>{}]++;
 

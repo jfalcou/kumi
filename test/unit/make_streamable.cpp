@@ -17,14 +17,13 @@ namespace ns
 {
   struct price
   {
-      std::uint64_t integer;
-      std::uint64_t decimal;
+    std::uint64_t integer;
+    std::uint64_t decimal;
   };
 
   auto as_streamable(price const& p)
   {
-    return std::to_string(p.integer) + "."
-         + std::to_string(p.decimal);
+    return std::to_string(p.integer) + "." + std::to_string(p.decimal);
   }
 
   struct person
@@ -32,23 +31,22 @@ namespace ns
     std::string name;
     std::string surname;
 
-    friend auto as_streamable(person const& p)
-    {
-      return p.name + " " + p.surname;
-    }
+    friend auto as_streamable(person const& p) { return p.name + " " + p.surname; }
   };
 
   struct unprintable
   {
-    int t; char s; long z;
+    int t;
+    char s;
+    long z;
   };
 }
 
 TTS_CASE("Check make_streamable behavior")
 {
-  ns::price cards   { 7, 90             };
-  ns::person marty  { "Marty", "Macfly" };
-  ns::unprintable a { 1, 'x', 12        };
+  ns::price cards{7, 90};
+  ns::person marty{"Marty", "Macfly"};
+  ns::unprintable a{1, 'x', 12};
 
   kumi::tuple t = {'t', "rofl", cards, marty, a};
 

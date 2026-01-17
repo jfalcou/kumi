@@ -10,5 +10,5 @@
 int main()
 {
   auto t = kumi::tuple{1, 0, 2., nullptr, 3.f, false, 'z'};
-  std::cout << std::boolalpha << kumi::count(t ) << "\n";
+  std::cout << std::boolalpha << kumi::count(t) << "\n";
 }

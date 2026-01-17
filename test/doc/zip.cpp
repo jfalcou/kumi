@@ -8,10 +8,10 @@
 
 int main()
 {
-  auto nbrs  = kumi::tuple{1,2,3};
-  auto ltrs  = kumi::tuple{'a','b','c'};
-  auto ratio = kumi::tuple{0.1,0.01,0.001};
+  auto nbrs = kumi::tuple{1, 2, 3};
+  auto ltrs = kumi::tuple{'a', 'b', 'c'};
+  auto ratio = kumi::tuple{0.1, 0.01, 0.001};
 
-  auto r = kumi::zip( nbrs, ltrs, ratio );
+  auto r = kumi::zip(nbrs, ltrs, ratio);
   std::cout << r << "\n";
 }

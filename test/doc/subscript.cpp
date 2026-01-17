@@ -10,7 +10,7 @@ int main()
 {
   using namespace kumi::literals;
 
-  kumi::tuple t = { 1, 2.3, 4.5f, '@' };
+  kumi::tuple t = {1, 2.3, 4.5f, '@'};
 
   std::cout << t[0_c] << "\n";
   std::cout << t[1_c] << "\n";
