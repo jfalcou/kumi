@@ -1,4 +1,4 @@
-<img src="https://jfalcou.github.io/kumi/logo.svg" alt="KUMI Logo: stack of triangles of variable shades of purple" data-canonical-src="https://jfalcou.github.io/kumi/logo.svg" align="left"  width="8%" height="8%" />
+<img src="https://raw.githubusercontent.com/jfalcou/kumi/refs/heads/main/doc/logo.svg" alt="KUMI Logo: stack of triangles of variable shades of purple" data-canonical-src="https://jfalcou.github.io/kumi/doc/logo.svg" width="8%" align="left"/>
 
 # KUMI - C++20 Compact Tuple Tools
 
