@@ -3,7 +3,7 @@
 ##  Copyright : KUMI Project Contributors
 ##  SPDX-License-Identifier: BSL-1.0
 ##======================================================================================================================
-name: KUMI CI
+name: KUMI Unit Tests
 on:
   pull_request:
     branches:
@@ -13,7 +13,7 @@ jobs:
   gcc-linux:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/jfalcou/compilers:v9
+      image: ghcr.io/jfalcou/compilers:v10
     strategy:
       fail-fast: false
       matrix:
@@ -40,7 +40,7 @@ jobs:
   clang-linux:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/jfalcou/compilers:v9
+      image: ghcr.io/jfalcou/compilers:v10
     strategy:
       fail-fast: false
       matrix:

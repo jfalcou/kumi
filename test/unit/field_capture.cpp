@@ -8,6 +8,7 @@
 #define TTS_MAIN
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
+#include <functional>
 
 TTS_CASE("Check field_capture type coherence")
 {
@@ -70,7 +71,7 @@ TTS_CASE("Check kumi::tuple behavior with field_captures")
     const int y = 2;
     int&& z     = std::move(x);
 
-    using f     = kumi::field_capture<"a", int         >; 
+    using f     = kumi::field_capture<"a", int         >;
     using fc    = kumi::field_capture<"b", int         >;
     using fref  = kumi::field_capture<"c", int&        >;
     using fcref = kumi::field_capture<"d", const int&  >;
@@ -80,7 +81,7 @@ TTS_CASE("Check kumi::tuple behavior with field_captures")
 
     auto t  = kumi::tuple{ "a"_f = x     , "b"_f = y     , "c"_f = std::ref(x), "d"_f = std::cref(y), "e"_f = z      };
     auto nl = kumi::tuple{ kumi::str{"a"}, kumi::str{"b"}, kumi::str{"c"}     , kumi::str{"d"}      , kumi::str{"e"} };
-    
+
     auto pt   = kumi::tuple{"a"_f = x      , y         , std::ref(x), "d"_f = std::cref(y), z          };
     auto ptnl = kumi::tuple{ kumi::str{"a"}, kumi::none, kumi::none , kumi::str{"d"}      , kumi::none };
 
@@ -90,7 +91,7 @@ TTS_CASE("Check kumi::tuple behavior with field_captures")
     TTS_TYPE_IS( tpl                    , decltype(t )     );
     TTS_TYPE_IS( decltype(t.names())    , decltype(nl)     );
     TTS_TYPE_IS( decltype(pt.names())   , decltype(ptnl)   );
-    
+
     TTS_EQUAL( t.names() , nl    );
     TTS_EQUAL( pt.names(), ptnl  );
 

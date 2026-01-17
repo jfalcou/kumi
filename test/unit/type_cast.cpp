@@ -8,6 +8,7 @@
 #define TTS_MAIN
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
+#include <functional>
 
 struct from_type
 {
@@ -19,7 +20,7 @@ struct from_type
     {
         return a.value == b.value;
     }
-    
+
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT,Traits> &operator<<( std::basic_ostream<CharT, Traits> &os
                                                        , from_type const& w) noexcept
@@ -41,8 +42,8 @@ TTS_CASE("Check runtime kumi::type_cast behavior on tuples")
     auto dest2  = kumi::tuple{1, 3. , 'x', b                    };
 
     TTS_EQUAL ((kumi::type_cast<float,float,int,int,float>   ( base )) , ( t1 ) );
-    TTS_EQUAL ((kumi::type_cast<int,char,int,float,from_type>( base )) , ( t2 ) );    
-    TTS_EQUAL ((kumi::type_cast<int,double,char,from_type>   ( base2)) , ( dest2) );    
+    TTS_EQUAL ((kumi::type_cast<int,char,int,float,from_type>( base )) , ( t2 ) );
+    TTS_EQUAL ((kumi::type_cast<int,double,char,from_type>   ( base2)) , ( dest2) );
 };
 
 TTS_CASE("Check constexpr kumi::type_cast behavior on tuples")
@@ -52,7 +53,7 @@ TTS_CASE("Check constexpr kumi::type_cast behavior on tuples")
     constexpr auto t2     = kumi::tuple{1  , '7'      , 12  , 3.f };
 
     TTS_CONSTEXPR_EQUAL ((kumi::type_cast<float,float,int,int>( base )) , ( t1 ) );
-    TTS_CONSTEXPR_EQUAL ((kumi::type_cast<int,char,int,float >( base )) , ( t2 ) );    
+    TTS_CONSTEXPR_EQUAL ((kumi::type_cast<int,char,int,float >( base )) , ( t2 ) );
 };
 
 TTS_CASE("Check result::type_cast behavior on tuples")

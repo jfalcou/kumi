@@ -9,6 +9,7 @@
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
 #include <type_traits>
+#include <algorithm>
 
 template<typename... T>
 struct nary_traits : std::integral_constant<std::size_t, std::max({sizeof(T)...})>

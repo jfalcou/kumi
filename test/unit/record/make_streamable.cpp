@@ -11,7 +11,7 @@
 #include <tts/tts.hpp>
 
 #include <string>
-#include <iostream>
+#include <sstream>
 #include <cstdint>
 
 namespace ns
@@ -28,7 +28,7 @@ namespace ns
          + std::to_string(p.decimal);
   }
 
-  struct person 
+  struct person
   {
     std::string name;
     std::string surname;
@@ -54,7 +54,7 @@ TTS_CASE("Check make_streamable behavior")
 
   kumi::record r = {"a"_f = 't', "b"_f = "rofl", "c"_f = cards, "d"_f = marty, "e"_f = a};
 
-  std::ostringstream s; 
+  std::ostringstream s;
   s << r;
 
   TTS_EQUAL(s.str(), "( 'a' : t 'b' : rofl 'c' : 7.90 'd' : Marty Macfly 'e' : (unknown) )");
