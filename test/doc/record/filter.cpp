@@ -11,11 +11,12 @@ int main()
 {
   using namespace kumi::literals;
 
-  int     a = 4;
-  double  b = 3.1415;
-  float   c = 0.01f;
+  int a = 4;
+  double b = 3.1415;
+  float c = 0.01f;
 
-  auto original = kumi::record{"a"_f=a,"b"_f=&a,"c"_f=b,"d"_f=&b,"e"_f=c,"f"_f=&c,"g"_f='z',"h"_f=nullptr};
+  auto original =
+    kumi::record{"a"_f = a, "b"_f = &a, "c"_f = b, "d"_f = &b, "e"_f = c, "f"_f = &c, "g"_f = 'z', "h"_f = nullptr};
   std::cout << original << "\n";
 
   std::cout << "Pointers : " << kumi::filter<std::is_pointer>(original) << "\n";

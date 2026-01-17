@@ -13,24 +13,23 @@
 namespace kumi
 {
   //================================================================================================
-  //! @ingroup utility 
+  //! @ingroup utility
   //! @class unit
-  //! @brief A type representing the product of no type also called the unit type 
+  //! @brief A type representing the product of no type also called the unit type
   //!
   //! kumi::unit provides a way to define the unit type in a constexpr friendly manner .
   //================================================================================================
-  struct unit 
+  struct unit
   {
     KUMI_ABI friend constexpr auto operator<=>(unit, unit) noexcept = default;
 
     template<typename CharT, typename Traits>
-    friend std::basic_ostream<CharT, Traits> &operator<<( std::basic_ostream<CharT,Traits> &os
-                                                        , unit) noexcept
+    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, unit) noexcept
     {
       return os << '\'' << "none" << '\'';
     }
   };
-    
+
   //==============================================================================================
   //! @ingroup utility
   //! @brief Inline constant representing a kumi::unit.

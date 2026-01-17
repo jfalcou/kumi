@@ -5,11 +5,12 @@
 **/
 #include <kumi/kumi.hpp>
 #include <iostream>
+
 int main()
 {
   using namespace kumi::literals;
-  auto original = kumi::make_record("a"_f=0,"b"_f='0',"c"_f=0.f);
-  auto ref      = kumi::to_ref( original );
+  auto original = kumi::make_record("a"_f = 0, "b"_f = '0', "c"_f = 0.f);
+  auto ref = kumi::to_ref(original);
 
   std::cout << original << "\n";
 

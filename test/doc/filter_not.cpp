@@ -9,14 +9,14 @@
 
 int main()
 {
-  int     a = 4;
-  double  b = 3.1415;
-  float   c = 0.01f;
+  int a = 4;
+  double b = 3.1415;
+  float c = 0.01f;
 
-  auto original = kumi::tuple{a,&a,b,&b,c,&c,'z',nullptr};
+  auto original = kumi::tuple{a, &a, b, &b, c, &c, 'z', nullptr};
   std::cout << original << "\n";
 
-  std::cout << "Non Pointers : "  << kumi::filter_not<std::is_pointer>(original) << "\n";
+  std::cout << "Non Pointers : " << kumi::filter_not<std::is_pointer>(original) << "\n";
   std::cout << "Non Reals     : " << kumi::filter_not<std::is_floating_point>(original) << "\n";
-  std::cout << "Non nullptr  : "  << kumi::filter_not<std::is_null_pointer>(original) << "\n";
+  std::cout << "Non nullptr  : " << kumi::filter_not<std::is_null_pointer>(original) << "\n";
 }

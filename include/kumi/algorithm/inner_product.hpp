@@ -19,20 +19,18 @@ namespace kumi
       F func;
       T value;
 
-      template<typename W>
-      KUMI_ABI friend constexpr decltype(auto) operator>>(foldable &&x, foldable<F, W> &&y)
+      template<typename W> KUMI_ABI friend constexpr decltype(auto) operator>>(foldable&& x, foldable<F, W>&& y)
       {
-        return _::foldable {x.func, x.func(x.value, y.value)};
+        return _::foldable{x.func, x.func(x.value, y.value)};
       }
 
-      template<typename W>
-      KUMI_ABI friend constexpr decltype(auto) operator<<(foldable &&x, foldable<F, W> &&y)
+      template<typename W> KUMI_ABI friend constexpr decltype(auto) operator<<(foldable&& x, foldable<F, W>&& y)
       {
-        return _::foldable {x.func, x.func(x.value, y.value)};
+        return _::foldable{x.func, x.func(x.value, y.value)};
       }
     };
 
-    template<class F, class T> foldable(const F &, T &&) -> foldable<F, T>;
+    template<class F, class T> foldable(F const&, T&&) -> foldable<F, T>;
   }
 
   //================================================================================================
@@ -79,90 +77,66 @@ namespace kumi
   //! ## Example
   //! @include doc/inner_product.cpp
   //================================================================================================
-  template< product_type S1, sized_product_type<size_v<S1>> S2, typename T
-          , typename Sum, typename Prod
-          >
-  requires( compatible_product_types<S1, S2> )
-  [[nodiscard]] KUMI_ABI constexpr auto inner_product( S1 && s1, S2 && s2, T init
-                                            , Sum sum, Prod prod
-                                            ) noexcept
+  template<product_type S1, sized_product_type<size_v<S1>> S2, typename T, typename Sum, typename Prod>
+  requires(compatible_product_types<S1, S2>)
+  [[nodiscard]] KUMI_ABI constexpr auto inner_product(S1&& s1, S2&& s2, T init, Sum sum, Prod prod) noexcept
   {
-    if constexpr(sized_product_type<S1,0>) return init;
-    else if constexpr ( record_type<S1> )
+    if constexpr (sized_product_type<S1, 0>) return init;
+    else if constexpr (record_type<S1>)
     {
-      return [&]<std::size_t... I>(std::index_sequence<I...>)
-      {
-        return  (  _::foldable {sum, prod(get<name_of(as<element_t<I,S1>>{})>(KUMI_FWD(s1)),
-                                          get<name_of(as<element_t<I,S1>>{})>(KUMI_FWD(s2)))}
-                >> ...
-                >> _::foldable {sum, init}
-                ).value;
-      }
-      (std::make_index_sequence<size<S1>::value>());
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return (_::foldable{sum, prod(get<name_of(as<element_t<I, S1>>{})>(KUMI_FWD(s1)),
+                                      get<name_of(as<element_t<I, S1>>{})>(KUMI_FWD(s2)))} >>
+                ... >> _::foldable{sum, init})
+          .value;
+      }(std::make_index_sequence<size<S1>::value>());
     }
     else
     {
-      return [&]<std::size_t... I>(std::index_sequence<I...>)
-      {
-        return  (  _::foldable {sum, prod(get<I>(KUMI_FWD(s1)),get<I>(KUMI_FWD(s2)))}
-                >> ...
-                >> _::foldable {sum, init}
-                ).value;
-      }
-      (std::make_index_sequence<size<S1>::value>());
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return (_::foldable{sum, prod(get<I>(KUMI_FWD(s1)), get<I>(KUMI_FWD(s2)))} >> ... >> _::foldable{sum, init})
+          .value;
+      }(std::make_index_sequence<size<S1>::value>());
     }
   }
 
   //! @overload
   template<product_type S1, sized_product_type<size_v<S1>> S2, typename T>
-  requires( compatible_product_types<S1, S2> )
-  [[nodiscard]] KUMI_ABI constexpr auto inner_product(S1 && s1, S2 && s2, T init) noexcept
+  requires(compatible_product_types<S1, S2>)
+  [[nodiscard]] KUMI_ABI constexpr auto inner_product(S1&& s1, S2&& s2, T init) noexcept
   {
-    if constexpr(sized_product_type<S1,0>) return init;
-    else if constexpr( record_type<S1> )
+    if constexpr (sized_product_type<S1, 0>) return init;
+    else if constexpr (record_type<S1>)
     {
-      return [&]<std::size_t... I>(std::index_sequence<I...>)
-      {
-        return (init + ... + (get<name_of(as<element_t<I,S1>>{})>(KUMI_FWD(s1)) 
-                            * get<name_of(as<element_t<I,S1>>{})>(KUMI_FWD(s2))));
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return (
+          init + ... +
+          (get<name_of(as<element_t<I, S1>>{})>(KUMI_FWD(s1)) * get<name_of(as<element_t<I, S1>>{})>(KUMI_FWD(s2))));
       }(std::make_index_sequence<size<S1>::value>());
     }
     else
     {
-      return [&]<std::size_t... I>(std::index_sequence<I...>)
-      {
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return (init + ... + (get<I>(KUMI_FWD(s1)) * get<I>(KUMI_FWD(s2))));
       }(std::make_index_sequence<size<S1>::value>());
     }
   }
 
-
   namespace result
   {
-    template< product_type S1, sized_product_type<S1::size()> S2, typename T
-            , typename Sum, typename Prod
-            >
+    template<product_type S1, sized_product_type<S1::size()> S2, typename T, typename Sum, typename Prod>
     struct inner_product
     {
-      using type = decltype ( kumi::inner_product ( std::declval<S1>(), std::declval<S2>()
-                                                  , std::declval<T>()
-                                                  , std::declval<Sum>(), std::declval<Prod>()
-                                                  )
-                            );
+      using type = decltype(kumi::inner_product(
+        std::declval<S1>(), std::declval<S2>(), std::declval<T>(), std::declval<Sum>(), std::declval<Prod>()));
     };
 
-    template< product_type S1, sized_product_type<S1::size()> S2, typename T>
-    struct inner_product<S1,S2,T,void,void>
+    template<product_type S1, sized_product_type<S1::size()> S2, typename T> struct inner_product<S1, S2, T, void, void>
     {
-      using type = decltype ( kumi::inner_product ( std::declval<S1>(), std::declval<S2>()
-                                                  , std::declval<T>()
-                                                  )
-                            );
+      using type = decltype(kumi::inner_product(std::declval<S1>(), std::declval<S2>(), std::declval<T>()));
     };
 
-    template< product_type S1, sized_product_type<S1::size()> S2, typename T
-            , typename Sum = void, typename Prod = void
-            >
-    using inner_product_t  = typename inner_product<S1,S2,T,Sum,Prod>::type;
+    template<product_type S1, sized_product_type<S1::size()> S2, typename T, typename Sum = void, typename Prod = void>
+    using inner_product_t = typename inner_product<S1, S2, T, Sum, Prod>::type;
   }
 }

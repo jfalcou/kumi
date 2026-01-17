@@ -12,10 +12,10 @@
 
 TTS_CASE("Check tuple_element of kumi::to_ref result")
 {
-  float const                         f {};
-  double                              d;
+  float const f{};
+  double d;
   std::reference_wrapper<float const> rf = f;
-  std::reference_wrapper<double>      rd = d;
+  std::reference_wrapper<double> rd = d;
 
   auto made = kumi::make_tuple('1', 2., 3.f, rf, rd);
   auto made_lref = kumi::to_ref(made);
@@ -40,4 +40,3 @@ TTS_CASE("Check tuple_element of kumi::to_ref result")
   TTS_TYPE_IS((std::tuple_element_t<3, decltype(made_cref)>), float const&);
   TTS_TYPE_IS((std::tuple_element_t<4, decltype(made_cref)>), double&);
 };
-

@@ -35,12 +35,11 @@ TTS_CASE("Check access via kumi::back")
   TTS_EQUAL(kumi::back(t4), 357);
 };
 
-
 TTS_CASE("Check access via constexpr kumi::back")
 {
   TTS_CONSTEXPR_EQUAL(kumi::back(kumi::record{"a"_f = 1}), 1);
   TTS_CONSTEXPR_EQUAL(kumi::back(kumi::record{"a"_f = 1.f, "b"_f = 2}), 2);
-  TTS_CONSTEXPR_EQUAL(kumi::back(kumi::record{"a"_f = 1., "b"_f = 2.f, "c"_f = 3}), 3); 
+  TTS_CONSTEXPR_EQUAL(kumi::back(kumi::record{"a"_f = 1., "b"_f = 2.f, "c"_f = 3}), 3);
   TTS_CONSTEXPR_EQUAL(kumi::back(kumi::record{"a"_f = '1', "b"_f = 2., "c"_f = 3.f, "d"_f = 4}), 4);
 };
 
@@ -70,8 +69,8 @@ TTS_CASE("Check access via kumi::front")
 
 TTS_CASE("Check access via constexpr kumi::front")
 {
-  TTS_CONSTEXPR_EQUAL(kumi::front(kumi::record{"a"_f = 1}), 1  );
+  TTS_CONSTEXPR_EQUAL(kumi::front(kumi::record{"a"_f = 1}), 1);
   TTS_CONSTEXPR_EQUAL(kumi::front(kumi::record{"a"_f = 1.f, "b"_f = 2}), 1.f);
-  TTS_CONSTEXPR_EQUAL(kumi::front(kumi::record{"a"_f = 1., "b"_f = 2.f, "c"_f = 3}), 1. );
+  TTS_CONSTEXPR_EQUAL(kumi::front(kumi::record{"a"_f = 1., "b"_f = 2.f, "c"_f = 3}), 1.);
   TTS_CONSTEXPR_EQUAL(kumi::front(kumi::record{"a"_f = '1', "b"_f = 2., "c"_f = 3.f, "d"_f = 4}), '1');
 };

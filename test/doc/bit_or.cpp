@@ -8,7 +8,7 @@
 
 int main()
 {
-  auto t = kumi::tuple{1,short{8},' ', 4ULL};
+  auto t = kumi::tuple{1, short{8}, ' ', 4ULL};
 
   std::cout << kumi::bit_or(t, 0) << "\n";
   std::cout << kumi::bit_or(t) << "\n";

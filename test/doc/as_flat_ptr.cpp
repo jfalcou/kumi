@@ -8,14 +8,14 @@
 
 int main()
 {
-  kumi::tuple a = { 1, kumi::tuple{ 2.3, 4.5f }, short{89} };
+  kumi::tuple a = {1, kumi::tuple{2.3, 4.5f}, short{89}};
 
   auto ptr = kumi::as_flat_ptr(a);
 
   std::cout << a << "\n";
   std::cout << ptr << "\n";
 
-  kumi::for_each([](auto p) { *p += 5; }, ptr );
+  kumi::for_each([](auto p) { *p += 5; }, ptr);
 
   std::cout << a << "\n";
 }

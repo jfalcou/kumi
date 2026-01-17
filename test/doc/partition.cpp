@@ -9,11 +9,11 @@
 
 int main()
 {
-  int     a = 4;
-  double  b = 3.1415;
-  float   c = 0.01f;
+  int a = 4;
+  double b = 3.1415;
+  float c = 0.01f;
 
-  auto original = kumi::tuple{a,&a,b,&b,c,&c,'z',nullptr};
+  auto original = kumi::tuple{a, &a, b, &b, c, &c, 'z', nullptr};
   std::cout << original << "\n";
 
   std::cout << "Pointers first: " << kumi::partition<std::is_pointer>(original) << "\n";

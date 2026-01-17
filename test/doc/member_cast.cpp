@@ -8,7 +8,7 @@
 
 int main()
 {
-  kumi::tuple a = { 14.f, 42, 55, short{89} };
+  kumi::tuple a = {14.f, 42, 55, short{89}};
   auto b = kumi::member_cast<char>(a);
 
   std::cout << a << "\n";

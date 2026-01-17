@@ -8,7 +8,7 @@
 
 int main()
 {
-  auto values = kumi::tuple {'A','B','C','D','E','F'};
+  auto values = kumi::tuple{'A', 'B', 'C', 'D', 'E', 'F'};
 
   std::cout << values << "\n";
   std::cout << kumi::rotate_right<1>(values) << "\n";

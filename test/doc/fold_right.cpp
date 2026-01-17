@@ -9,24 +9,25 @@
 
 int main()
 {
-  auto t = kumi::tuple{2.,1,short{55},'z'};
+  auto t = kumi::tuple{2., 1, short{55}, 'z'};
 
-  auto output  = kumi::fold_right( [](auto m, auto a) { a.push_back(sizeof(m)); return a; }
-                                , t
-                                , std::vector<std::size_t>{}
-                                );
+  auto output = kumi::fold_right(
+    [](auto m, auto a) {
+      a.push_back(sizeof(m));
+      return a;
+    },
+    t, std::vector<std::size_t>{});
 
-  for(auto s : output) std::cout << s << " ";
+  for (auto s : output) std::cout << s << " ";
   std::cout << "\n";
 
-  auto u = kumi::tuple{1,3,2,4,0,5,9,6,7};
+  auto u = kumi::tuple{1, 3, 2, 4, 0, 5, 9, 6, 7};
 
-  std::cout << kumi::fold_right(  [](auto e, auto acc)
-                                  {
-                                      std::cout << '(' << acc << ',' << e << ")\n";
-                                      return (e <acc) ? e : acc;
-                                  }
-                                , u
-                                )
+  std::cout << kumi::fold_right(
+                 [](auto e, auto acc) {
+                   std::cout << '(' << acc << ',' << e << ")\n";
+                   return (e < acc) ? e : acc;
+                 },
+                 u)
             << "\n";
 }

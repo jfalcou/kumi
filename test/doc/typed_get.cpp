@@ -8,11 +8,11 @@
 
 int main()
 {
-  kumi::tuple t = { 1, 2.3, 4.5f, '@' };
-  
-  std::cout << kumi::get<int>(t)    << "\n";
+  kumi::tuple t = {1, 2.3, 4.5f, '@'};
+
+  std::cout << kumi::get<int>(t) << "\n";
   std::cout << kumi::get<double>(t) << "\n";
-  std::cout << kumi::get<float>(t)  << "\n";
+  std::cout << kumi::get<float>(t) << "\n";
 
   kumi::get<char>(t)++;
 

@@ -15,7 +15,7 @@ namespace kumi
   //!
   //! @param f      Binary callable function to apply
   //! @param t      Product type to operate on
-  //! @param init   Optional initial value of the fold 
+  //! @param init   Optional initial value of the fold
   //! @return       The value of `f( f( f(init, get<0>(t)), ...), get<N-1>(t))`
   //!
   //! ## Helper type
@@ -36,17 +36,15 @@ namespace kumi
   //! @include doc/record/fold_left.cpp
   //================================================================================================
   template<typename Function, product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto fold_left(Function f, T && t, Value init)
+  [[nodiscard]] KUMI_ABI constexpr auto fold_left(Function f, T&& t, Value init)
   {
-    if constexpr ( record_type<T> ) return fold_left(f, values_of(KUMI_FWD(t)), init);
-    else if constexpr(sized_product_type<T,0>) return init;
+    if constexpr (record_type<T>) return fold_left(f, values_of(KUMI_FWD(t)), init);
+    else if constexpr (sized_product_type<T, 0>) return init;
     else
     {
-      return [&]<std::size_t... I>(std::index_sequence<I...>)
-      {
-        return (_::foldable {f, init} >> ... >> _::foldable {f, get<I>(KUMI_FWD(t))} ).value;
-      }
-      (std::make_index_sequence<size_v<T>>());
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return (_::foldable{f, init} >> ... >> _::foldable{f, get<I>(KUMI_FWD(t))}).value;
+      }(std::make_index_sequence<size_v<T>>());
     }
   }
 
@@ -76,14 +74,14 @@ namespace kumi
   //! @include doc/record/fold_left.cpp
   //================================================================================================
   template<typename Function, sized_product_type_or_more<1> T>
-  [[nodiscard]] KUMI_ABI constexpr auto fold_left(Function f, T && t)
+  [[nodiscard]] KUMI_ABI constexpr auto fold_left(Function f, T&& t)
   {
-    if constexpr ( record_type<T> ) return fold_left(f, values_of(KUMI_FWD(t)));
-    else if constexpr(sized_product_type<T,1>) return get<0>(KUMI_FWD(t));
+    if constexpr (record_type<T>) return fold_left(f, values_of(KUMI_FWD(t)));
+    else if constexpr (sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
     else
     {
-      auto&&[heads, tail] = split(KUMI_FWD(t), index<2>);
-      return fold_left(f, tail, kumi::apply(f,heads));
+      auto&& [heads, tail] = split(KUMI_FWD(t), index<2>);
+      return fold_left(f, tail, kumi::apply(f, heads));
     }
   }
 
@@ -93,7 +91,7 @@ namespace kumi
   //!
   //! @param f      Binary callable function to apply
   //! @param t      Product type to operate on
-  //! @param init   Optional initial value of the fold 
+  //! @param init   Optional initial value of the fold
   //! @return       The value of `f(get<0>(t), f(... , f(get<N-1>(t), init))`
   //!
   //! ## Helper type
@@ -114,17 +112,15 @@ namespace kumi
   //! @include doc/record/fold_right.cpp
   //================================================================================================
   template<typename Function, product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto fold_right(Function f, T && t, Value init)
+  [[nodiscard]] KUMI_ABI constexpr auto fold_right(Function f, T&& t, Value init)
   {
-    if constexpr ( record_type<T> ) return fold_right(f, values_of(KUMI_FWD(t)), init);
-    else if constexpr( sized_product_type<T,0> ) return init;
+    if constexpr (record_type<T>) return fold_right(f, values_of(KUMI_FWD(t)), init);
+    else if constexpr (sized_product_type<T, 0>) return init;
     else
     {
-      return [&]<std::size_t... I>(std::index_sequence<I...>)
-      {
-        return (_::foldable {f, get<I>(KUMI_FWD(t))} << ... << _::foldable {f, init}).value;
-      }
-      (std::make_index_sequence<size_v<T>>());
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return (_::foldable{f, get<I>(KUMI_FWD(t))} << ... << _::foldable{f, init}).value;
+      }(std::make_index_sequence<size_v<T>>());
     }
   }
 
@@ -154,62 +150,43 @@ namespace kumi
   //! @include doc/record/fold_right.cpp
   //================================================================================================
   template<typename Function, sized_product_type_or_more<1> T>
-  [[nodiscard]] KUMI_ABI constexpr auto fold_right(Function f, T && t)
+  [[nodiscard]] KUMI_ABI constexpr auto fold_right(Function f, T&& t)
   {
-    if constexpr ( record_type<T> ) return fold_right(f, values_of(KUMI_FWD(t)));
-    else if constexpr(sized_product_type<T,1>) return get<0>(KUMI_FWD(t));
+    if constexpr (record_type<T>) return fold_right(f, values_of(KUMI_FWD(t)));
+    else if constexpr (sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
     else
     {
-      auto&&[head, tails] = split(KUMI_FWD(t), index<size_v<T>-2>);
-      return fold_right(f, head, kumi::apply(f,tails));
+      auto&& [head, tails] = split(KUMI_FWD(t), index<size_v<T> - 2>);
+      return fold_right(f, head, kumi::apply(f, tails));
     }
   }
 
   namespace result
   {
-    template<typename Function, product_type T, typename Value = void>
-    struct fold_right
+    template<typename Function, product_type T, typename Value = void> struct fold_right
     {
-      using type = decltype ( kumi::fold_right( std::declval<Function>()
-                                              , std::declval<T>()
-                                              , std::declval<Value>()
-                                              )
-                            );
+      using type = decltype(kumi::fold_right(std::declval<Function>(), std::declval<T>(), std::declval<Value>()));
     };
 
-    template<typename Function, product_type T>
-    struct fold_right<Function,T>
+    template<typename Function, product_type T> struct fold_right<Function, T>
     {
-      using type = decltype ( kumi::fold_right( std::declval<Function>()
-                                              , std::declval<T>()
-                                              )
-                            );
+      using type = decltype(kumi::fold_right(std::declval<Function>(), std::declval<T>()));
     };
 
-    template<typename Function, product_type T, typename Value = void>
-    struct fold_left
+    template<typename Function, product_type T, typename Value = void> struct fold_left
     {
-      using type = decltype ( kumi::fold_left ( std::declval<Function>()
-                                              , std::declval<T>()
-                                              , std::declval<Value>()
-                                              )
-                            );
+      using type = decltype(kumi::fold_left(std::declval<Function>(), std::declval<T>(), std::declval<Value>()));
     };
 
-    template<typename Function, product_type T>
-    struct fold_left<Function,T>
+    template<typename Function, product_type T> struct fold_left<Function, T>
     {
-      using type = decltype ( kumi::fold_left ( std::declval<Function>()
-                                              , std::declval<T>()
-                                              )
-                            );
+      using type = decltype(kumi::fold_left(std::declval<Function>(), std::declval<T>()));
     };
 
     template<typename Function, product_type T, typename Value = void>
-    using fold_right_t = typename fold_right<Function,T,Value>::type;
+    using fold_right_t = typename fold_right<Function, T, Value>::type;
 
     template<typename Function, product_type T, typename Value = void>
-    using fold_left_t = typename fold_left<Function,T,Value>::type;
+    using fold_left_t = typename fold_left<Function, T, Value>::type;
   }
 }
-

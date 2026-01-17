@@ -40,25 +40,21 @@ namespace kumi
   //! @include doc/extract.cpp
   //================================================================================================
   template<std::size_t I0, std::size_t I1, product_type Tuple>
-  requires( (I0 <= size_v<Tuple>) && (I1 <= size_v<Tuple>) )
-  [[nodiscard]] KUMI_ABI constexpr
-  auto extract( Tuple && t
-              , [[maybe_unused]] index_t<I0> i0
-              , [[maybe_unused]] index_t<I1> i1
-              ) noexcept
+  requires((I0 <= size_v<Tuple>) && (I1 <= size_v<Tuple>))
+  [[nodiscard]] KUMI_ABI constexpr auto extract(Tuple&& t,
+                                                [[maybe_unused]] index_t<I0> i0,
+                                                [[maybe_unused]] index_t<I1> i1) noexcept
   {
-    return [&]<std::size_t... N>(std::index_sequence<N...>)
-    {
-        using final_t = _::builder_make_t<Tuple, element_t<N + I0, Tuple>...>;
-        return final_t{ get<N + I0>(KUMI_FWD(t))... };
-    }
-    (std::make_index_sequence<I1 - I0>());
+    return [&]<std::size_t... N>(std::index_sequence<N...>) {
+      using final_t = _::builder_make_t<Tuple, element_t<N + I0, Tuple>...>;
+      return final_t{get<N + I0>(KUMI_FWD(t))...};
+    }(std::make_index_sequence<I1 - I0>());
   }
 
   //! @overload
   template<std::size_t I0, product_type Tuple>
-  requires( I0 <= size_v<Tuple>)
-  [[nodiscard]] KUMI_ABI constexpr auto extract(Tuple && t, index_t<I0> i0) noexcept
+  requires(I0 <= size_v<Tuple>)
+  [[nodiscard]] KUMI_ABI constexpr auto extract(Tuple&& t, index_t<I0> i0) noexcept
   {
     return extract(KUMI_FWD(t), i0, index<size_v<Tuple>>);
   }
@@ -95,47 +91,37 @@ namespace kumi
   //================================================================================================
   template<std::size_t I0, product_type Tuple>
   requires(I0 <= size_v<Tuple>)
-  [[nodiscard]] KUMI_ABI constexpr auto split( Tuple && t
-                                    , [[maybe_unused]] index_t<I0> i0
-                                    ) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto split(Tuple&& t, [[maybe_unused]] index_t<I0> i0) noexcept
   {
-    auto select = [&]<typename O, std::size_t...I>(O, std::index_sequence<I...>)
-    {
-        using type = _::builder_make_t<Tuple, element_t<O::value+I, Tuple>...>;
-        return type{get<O::value+I>(KUMI_FWD(t))...};
+    auto select = [&]<typename O, std::size_t... I>(O, std::index_sequence<I...>) {
+      using type = _::builder_make_t<Tuple, element_t<O::value + I, Tuple>...>;
+      return type{get<O::value + I>(KUMI_FWD(t))...};
     };
 
-    return kumi::tuple{ select(kumi::index<0>   , std::make_index_sequence<I0>{})
-                      , select(kumi::index<I0>  , std::make_index_sequence<size_v<Tuple> - I0>{})};
+    return kumi::tuple{select(kumi::index<0>, std::make_index_sequence<I0>{}),
+                       select(kumi::index<I0>, std::make_index_sequence<size_v<Tuple> - I0>{})};
   }
 
   namespace result
   {
-    template<product_type T, std::size_t I0, std::size_t I1 = std::size_t(-1)>
-    struct extract
+    template<product_type T, std::size_t I0, std::size_t I1 = std::size_t(-1)> struct extract
     {
-      using type = decltype ( kumi::extract ( std::declval<T>()
-                                            , kumi::index_t<I0>{},kumi::index_t<I1>{}
-                                            )
-                            );
+      using type = decltype(kumi::extract(std::declval<T>(), kumi::index_t<I0>{}, kumi::index_t<I1>{}));
     };
 
-    template<product_type T, std::size_t I0>
-    struct extract<T,I0>
+    template<product_type T, std::size_t I0> struct extract<T, I0>
     {
-      using type = decltype(kumi::extract(std::declval<T>(),kumi::index_t<I0>{}) );
+      using type = decltype(kumi::extract(std::declval<T>(), kumi::index_t<I0>{}));
     };
 
-    template<product_type T, std::size_t I0>
-    struct split
+    template<product_type T, std::size_t I0> struct split
     {
-      using type = decltype(kumi::split(std::declval<T>(),kumi::index_t<I0>{}) );
+      using type = decltype(kumi::split(std::declval<T>(), kumi::index_t<I0>{}));
     };
 
     template<product_type T, std::size_t I0, std::size_t I1 = std::size_t(-1)>
-    using extract_t = typename extract<T,I0,I1>::type;
+    using extract_t = typename extract<T, I0, I1>::type;
 
-    template<product_type T, std::size_t I0>
-    using split_t = typename split<T,I0>::type;
+    template<product_type T, std::size_t I0> using split_t = typename split<T, I0>::type;
   }
 }

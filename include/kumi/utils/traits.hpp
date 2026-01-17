@@ -35,10 +35,16 @@ namespace kumi
   //! ## Example:
   //! @include doc/adapt.cpp
   //==============================================================================================
-  template<typename T, typename Enable = void> struct is_product_type : std::false_type {};
-  template<typename T> struct is_product_type<T, typename T::is_product_type> : std::true_type {};
+  template<typename T, typename Enable = void> struct is_product_type : std::false_type
+  {
+  };
+
+  template<typename T> struct is_product_type<T, typename T::is_product_type> : std::true_type
+  {
+  };
 
   template<typename T> inline constexpr auto is_product_type_v = is_product_type<T>::value;
+
   //================================================================================================
   //! @ingroup traits
   //! @brief Opt-in traits for types behaving like a kumi::product_type
@@ -58,14 +64,22 @@ namespace kumi
   //! ## Example:
   //! @include doc/record/adapt.cpp
   //==============================================================================================
-  template<typename T, typename Enable = void> struct is_record_type : std::false_type {};
-  template<typename T> struct is_record_type<T, typename T::is_record_type> : std::true_type {};
+  template<typename T, typename Enable = void> struct is_record_type : std::false_type
+  {
+  };
 
-  template<typename T> 
-  requires ( is_record_type<T>::value && (!requires { typename T::is_product_type; }))
-  struct is_product_type<T, void>  : std::true_type {};
-  
+  template<typename T> struct is_record_type<T, typename T::is_record_type> : std::true_type
+  {
+  };
+
+  template<typename T>
+  requires(is_record_type<T>::value && (!requires { typename T::is_product_type; }))
+  struct is_product_type<T, void> : std::true_type
+  {
+  };
+
   template<typename T> inline constexpr auto is_record_type_v = is_record_type<T>::value;
+
   //================================================================================================
   //! @ingroup traits
   //! @brief Computes the number of elements of a kumi::product_type
@@ -77,14 +91,32 @@ namespace kumi
   //!   template<typename T> inline constexpr auto size_v = size<T>::value;
   //! @endcode
   //================================================================================================
-  template<typename T> struct size : std::tuple_size<T>   {};
-  template<typename T> struct size<T &>         : size<T> {};
-  template<typename T> struct size<T &&>        : size<T> {};
-  template<typename T> struct size<T const>     : size<T> {};
-  template<typename T> struct size<T const &>   : size<T> {};
-  template<typename T> struct size<T const &&>  : size<T> {};
+  template<typename T> struct size : std::tuple_size<T>
+  {
+  };
+
+  template<typename T> struct size<T&> : size<T>
+  {
+  };
+
+  template<typename T> struct size<T&&> : size<T>
+  {
+  };
+
+  template<typename T> struct size<T const> : size<T>
+  {
+  };
+
+  template<typename T> struct size<T const&> : size<T>
+  {
+  };
+
+  template<typename T> struct size<T const&&> : size<T>
+  {
+  };
 
   template<typename T> inline constexpr auto size_v = size<T>::value;
+
   //================================================================================================
   //! @ingroup traits
   //! @brief Provides indexed access to the types of the elements of a kumi::product_type.
@@ -100,13 +132,27 @@ namespace kumi
   //! }
   //! @endcode
   //================================================================================================
-  template<std::size_t I, typename T> struct element              : std::tuple_element<I,T> {};
-  template<std::size_t I, typename T> struct element<I,T&>        : element<I,T> {};
-  template<std::size_t I, typename T> struct element<I,T&&>       : element<I,T> {};
-  template<std::size_t I, typename T> struct element<I,T const&>  : element<I,T> {};
-  template<std::size_t I, typename T> struct element<I,T const&&> : element<I,T> {};
+  template<std::size_t I, typename T> struct element : std::tuple_element<I, T>
+  {
+  };
 
-  template<std::size_t I, typename T> using  element_t = typename element<I,T>::type;
+  template<std::size_t I, typename T> struct element<I, T&> : element<I, T>
+  {
+  };
+
+  template<std::size_t I, typename T> struct element<I, T&&> : element<I, T>
+  {
+  };
+
+  template<std::size_t I, typename T> struct element<I, T const&> : element<I, T>
+  {
+  };
+
+  template<std::size_t I, typename T> struct element<I, T const&&> : element<I, T>
+  {
+  };
+
+  template<std::size_t I, typename T> using element_t = typename element<I, T>::type;
 
   //================================================================================================
   //! @ingroup traits
@@ -125,10 +171,10 @@ namespace kumi
   //================================================================================================
   template<std::size_t I, typename T> struct member
   {
-    using type = decltype( get<I>(std::declval<T&&>()) );
+    using type = decltype(get<I>(std::declval<T&&>()));
   };
 
-  template<std::size_t I, typename T> using  member_t = typename member<I,T>::type;
+  template<std::size_t I, typename T> using member_t = typename member<I, T>::type;
 }
 
 namespace kumi
@@ -148,20 +194,19 @@ namespace kumi
   //! }
   //! @endcode
   //================================================================================================
-  template<typename T>
-  struct is_homogeneous;
+  template<typename T> struct is_homogeneous;
 
   template<typename T>
-  requires( requires { T::is_homogeneous; } )
+  requires(requires { T::is_homogeneous; })
   struct is_homogeneous<T> : std::bool_constant<T::is_homogeneous>
-  {};
+  {
+  };
 
-  template<typename T>
-  inline constexpr auto is_homogeneous_v = is_homogeneous<T>::value;
+  template<typename T> inline constexpr auto is_homogeneous_v = is_homogeneous<T>::value;
 
   //================================================================================================
   //! @ingroup traits
-  //! @brief Checks if a type can be used as a kumi::index_map 
+  //! @brief Checks if a type can be used as a kumi::index_map
   //!
   //! @tparam T The type to inspect
   //!
@@ -169,20 +214,19 @@ namespace kumi
   //! @code
   //! namespace kumi
   //! {
-  //!   template<typename T> inline constexpr bool is_index_map_v = is_index_map<T>::value; 
+  //!   template<typename T> inline constexpr bool is_index_map_v = is_index_map<T>::value;
   //! }
   //! @endcode
   //================================================================================================
-  template<typename T>
-  inline constexpr auto is_index_map_v = requires { T::is_index_map; };
+  template<typename T> inline constexpr auto is_index_map_v = requires { T::is_index_map; };
 
-  template<typename T>
-  struct is_index_map : std::bool_constant<is_index_map_v<T>>
-  {};
+  template<typename T> struct is_index_map : std::bool_constant<is_index_map_v<T>>
+  {
+  };
 
   //================================================================================================
   //! @ingroup traits
-  //! @brief Checks if a type is a kumi::field_capture 
+  //! @brief Checks if a type is a kumi::field_capture
   //!
   //! @tparam T The type to inspect
   //!
@@ -194,16 +238,15 @@ namespace kumi
   //! }
   //! @endcode
   //================================================================================================
-  template<typename T>
-  inline constexpr bool is_field_capture_v = requires { T::is_field_capture; };
+  template<typename T> inline constexpr bool is_field_capture_v = requires { T::is_field_capture; };
 
-  template<typename T>
-  struct is_field_capture : std::bool_constant<is_field_capture_v<T>> 
-  {};
+  template<typename T> struct is_field_capture : std::bool_constant<is_field_capture_v<T>>
+  {
+  };
 
   //================================================================================================
   //! @ingroup traits
-  //! @brief Computes the return type of a call to kumi::get on a kumi::tuple and unwrap the 
+  //! @brief Computes the return type of a call to kumi::get on a kumi::tuple and unwrap the
   //!        field_capture returned by kumi::get on a kumi::record
   //!
   //! @tparam I Index of the type to retrieve
@@ -217,24 +260,23 @@ namespace kumi
   //! }
   //! @endcode
   //================================================================================================
-  template<std::size_t I, typename T> 
-  struct raw_member     
+  template<std::size_t I, typename T> struct raw_member
   {
-    using type = member_t<I,T>;
+    using type = member_t<I, T>;
   };
 
-  template<std::size_t I, typename T> 
-  requires( is_record_type<std::remove_cvref_t<T>>::value )
+  template<std::size_t I, typename T>
+  requires(is_record_type<std::remove_cvref_t<T>>::value)
   struct raw_member<I, T>
   {
-    using type = decltype( field_value_of(get<I>(std::declval<T&&>())) );
+    using type = decltype(field_value_of(get<I>(std::declval<T&&>())));
   };
 
-  template<std::size_t I, typename T> using raw_member_t = typename raw_member<I,T>::type;
- 
+  template<std::size_t I, typename T> using raw_member_t = typename raw_member<I, T>::type;
+
   //================================================================================================
   //! @ingroup traits
-  //! @brief Provides indexed access to the types of the elements of a kumi::product_type and 
+  //! @brief Provides indexed access to the types of the elements of a kumi::product_type and
   //!                 unwraps the returned field_capture for kumi::record_type.
   //!
   //! @tparam I Index of the type to retrieve
@@ -244,25 +286,24 @@ namespace kumi
   //! @code
   //! namespace kumi
   //! {
-  //!   template<std::size_t I, typename T> 
+  //!   template<std::size_t I, typename T>
   //!   using raw_element_t = typename raw_element_t<I,T>::type;
   //! }
   //! @endcode
   //================================================================================================
-  template<std::size_t I, typename T>
-  struct raw_element
+  template<std::size_t I, typename T> struct raw_element
   {
-    using type = element_t<I,T>;
+    using type = element_t<I, T>;
   };
 
   template<std::size_t I, typename T>
-  requires( is_record_type<std::remove_cvref_t<T>>::value )
-  struct raw_element<I,T>
+  requires(is_record_type<std::remove_cvref_t<T>>::value)
+  struct raw_element<I, T>
   {
-    using type = typename element_t<I,T>::type;
+    using type = typename element_t<I, T>::type;
   };
 
-  template<std::size_t I, typename T> using raw_element_t = typename raw_element<I,T>::type; 
+  template<std::size_t I, typename T> using raw_element_t = typename raw_element<I, T>::type;
 
   //================================================================================================
   //! @ingroup traits
@@ -275,7 +316,7 @@ namespace kumi
   //! @code
   //! namespace kumi
   //! {
-  //!   template<typename T> all_uniques_t 
+  //!   template<typename T> all_uniques_t
   //!       = typename all_uniques<std::index_sequence_for<Ts...>, Ts...>::type;
   //! }
   //! @endcode
@@ -288,33 +329,32 @@ namespace kumi
   //! }
   //! @endcode
   //================================================================================================
-  template <typename Ints, typename... Ts>
-  struct all_uniques;
+  template<typename Ints, typename... Ts> struct all_uniques;
 
-  template <>
-  struct all_uniques<std::index_sequence<>> { using type = std::true_type; };
-
-  template <std::size_t... Ints, typename... Ts>
-  struct all_uniques<std::index_sequence<Ints...>, Ts...>
+  template<> struct all_uniques<std::index_sequence<>>
   {
-    struct all_uniques_inner : _::unique<Ints, Ts>... {};
+    using type = std::true_type;
+  };
 
-    template <typename... Us>
-    static auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
+  template<std::size_t... Ints, typename... Ts> struct all_uniques<std::index_sequence<Ints...>, Ts...>
+  {
+    struct all_uniques_inner : _::unique<Ints, Ts>...
+    {
+    };
+
+    template<typename... Us> static auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
     static std::false_type is_set(...);
 
     using type = decltype(is_set(as<Ts>{}...));
   };
 
-  template<typename... Ts>
-  using all_uniques_t = typename all_uniques<std::index_sequence_for<Ts...>, Ts...>::type;
+  template<typename... Ts> using all_uniques_t = typename all_uniques<std::index_sequence_for<Ts...>, Ts...>::type;
 
-  template<typename... Ts>
-  inline constexpr auto all_uniques_v = all_uniques_t<Ts...>::value;
+  template<typename... Ts> inline constexpr auto all_uniques_v = all_uniques_t<Ts...>::value;
 
   //================================================================================================
   //! @ingroup traits
-  //! @brief   Checks if a parameter pack only contains distinct kumi::field_member names. 
+  //! @brief   Checks if a parameter pack only contains distinct kumi::field_member names.
   //!          Evaluates to false if no type is a kumi::field_member.
   //!
   //! @tparam Ints The Index of the types in the parameter pack
@@ -324,7 +364,7 @@ namespace kumi
   //! @code
   //! namespace kumi
   //! {
-  //!   template<typename T> all_unique_names_t 
+  //!   template<typename T> all_unique_names_t
   //!       = typename all_unique_names<std::index_sequence_for<Ts...>, Ts...>::type;
   //! }
   //! @endcode
@@ -337,19 +377,20 @@ namespace kumi
   //! }
   //! @endcode
   //================================================================================================
-  template <typename Ints, typename... Ts>
-  struct all_unique_names;
+  template<typename Ints, typename... Ts> struct all_unique_names;
 
-  template <>
-  struct all_unique_names<std::index_sequence<>> { using type = std::true_type; };
-
-  template <std::size_t... Ints, typename... Ts>
-  struct all_unique_names<std::index_sequence<Ints...>, Ts...>
+  template<> struct all_unique_names<std::index_sequence<>>
   {
-    struct all_uniques_inner : _::unique_name<Ints, Ts>... {};
+    using type = std::true_type;
+  };
 
-    template <typename... Us>
-    static auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
+  template<std::size_t... Ints, typename... Ts> struct all_unique_names<std::index_sequence<Ints...>, Ts...>
+  {
+    struct all_uniques_inner : _::unique_name<Ints, Ts>...
+    {
+    };
+
+    template<typename... Us> static auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
     static std::false_type is_set(...);
 
     using type = decltype(is_set(_::make_value_as<Ints, Ts>()...));
@@ -358,8 +399,7 @@ namespace kumi
   template<typename... Ts>
   using all_unique_names_t = typename all_unique_names<std::index_sequence_for<Ts...>, Ts...>::type;
 
-  template<typename... Ts>
-  inline constexpr auto all_unique_names_v = all_unique_names_t<Ts...>::value;
+  template<typename... Ts> inline constexpr auto all_unique_names_v = all_unique_names_t<Ts...>::value;
 
   // Forward declaration
   template<typename... Ts> struct tuple;

@@ -10,16 +10,16 @@ using namespace kumi::literals;
 
 auto generate()
 {
-  return kumi::record{"i"_f = 1,"d"_f = 2.3,"f"_f = 4.56f};
+  return kumi::record{"i"_f = 1, "d"_f = 2.3, "f"_f = 4.56f};
 }
 
 int main()
 {
-  int    i;
+  int i;
   double d;
-  float  f;
+  float f;
 
-  kumi::tie<"i"_f, "d"_f, "f"_f>( i,d,f ) = generate();
+  kumi::tie<"i"_f, "d"_f, "f"_f>(i, d, f) = generate();
 
   std::cout << i << " " << d << " " << f << "\n";
 }

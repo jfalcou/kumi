@@ -9,30 +9,37 @@
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
 
-struct A { void operator()(auto&&) & {} };
-struct B { void operator()(auto&&) && {} };
+struct A
+{
+  void operator()(auto&&) & {}
+};
+
+struct B
+{
+  void operator()(auto&&) && {}
+};
 
 TTS_CASE("Check for_each SFINAE compliance")
 {
   A a;
   B b;
-  auto t = kumi::make_tuple(1,2);
+  auto t = kumi::make_tuple(1, 2);
 
-  TTS_EXPECT_COMPILES(a, t, { kumi::for_each(a, t); } );
-  TTS_EXPECT_NOT_COMPILES(b, t, { kumi::for_each(b, t); } );
+  TTS_EXPECT_COMPILES(a, t, { kumi::for_each(a, t); });
+  TTS_EXPECT_NOT_COMPILES(b, t, { kumi::for_each(b, t); });
 };
 
 TTS_CASE("Check for_each behavior")
 {
-  auto t = kumi::tuple {1, 2., 3.4f, '5'};
-  kumi::for_each([](auto &m) { m++; }, t);
+  auto t = kumi::tuple{1, 2., 3.4f, '5'};
+  kumi::for_each([](auto& m) { m++; }, t);
 
   TTS_EQUAL(get<0>(t), 2);
   TTS_EQUAL(get<1>(t), 3.);
   TTS_EQUAL(get<2>(t), 4.4f);
   TTS_EQUAL(get<3>(t), '6');
 
-  kumi::for_each([](auto &m, auto n) { m *= n; }, t, t);
+  kumi::for_each([](auto& m, auto n) { m *= n; }, t, t);
 
   TTS_EQUAL(get<0>(t), 4);
   TTS_EQUAL(get<1>(t), 9.);
@@ -47,8 +54,8 @@ TTS_CASE("Check for_each behavior")
 TTS_CASE("Check for_each constexpr behavior")
 {
   constexpr auto t = []() {
-    auto it = kumi::tuple {1, 2., 3.4f, '5'};
-    kumi::for_each([](auto &m) { m++; }, it);
+    auto it = kumi::tuple{1, 2., 3.4f, '5'};
+    kumi::for_each([](auto& m) { m++; }, it);
     return it;
   }();
 
@@ -58,8 +65,8 @@ TTS_CASE("Check for_each constexpr behavior")
   TTS_CONSTEXPR_EQUAL(get<3>(t), '6');
 
   constexpr auto t2 = []() {
-    auto it = kumi::tuple {1, 2., 3.4f, char(8)};
-    kumi::for_each([](auto &m, auto n) { m *= n; }, it, it);
+    auto it = kumi::tuple{1, 2., 3.4f, char(8)};
+    kumi::for_each([](auto& m, auto n) { m *= n; }, it, it);
     return it;
   }();
 
@@ -71,15 +78,13 @@ TTS_CASE("Check for_each constexpr behavior")
 
 TTS_CASE("Check for_each_index behavior")
 {
-  auto t = kumi::tuple {1, 2., 3.4f, '5'};
+  auto t = kumi::tuple{1, 2., 3.4f, '5'};
   kumi::for_each_index(
-      [](auto i, auto &m) {
-        if constexpr( i % 2 == 0 )
-          m++;
-        else
-          m--;
-      },
-      t);
+    [](auto i, auto& m) {
+      if constexpr (i % 2 == 0) m++;
+      else m--;
+    },
+    t);
 
   TTS_EQUAL(get<0>(t), 2);
   TTS_EQUAL(get<1>(t), 1.);
@@ -87,13 +92,11 @@ TTS_CASE("Check for_each_index behavior")
   TTS_EQUAL(get<3>(t), '4');
 
   kumi::for_each_index(
-      [](auto i, auto &m, auto n) {
-        if constexpr( i % 2 == 0 )
-          m *= n;
-        else
-          m += n;
-      },
-      t, t);
+    [](auto i, auto& m, auto n) {
+      if constexpr (i % 2 == 0) m *= n;
+      else m += n;
+    },
+    t, t);
 
   TTS_EQUAL(get<0>(t), 4);
   TTS_EQUAL(get<1>(t), 2.);
@@ -104,15 +107,13 @@ TTS_CASE("Check for_each_index behavior")
 TTS_CASE("Check for_each_index constexpr behavior")
 {
   constexpr auto t = []() {
-    auto it = kumi::tuple {1, 2., 3.4f, '5'};
+    auto it = kumi::tuple{1, 2., 3.4f, '5'};
     kumi::for_each_index(
-        [](auto i, auto &m) {
-          if constexpr( i % 2 == 0 )
-            m++;
-          else
-            m--;
-        },
-        it);
+      [](auto i, auto& m) {
+        if constexpr (i % 2 == 0) m++;
+        else m--;
+      },
+      it);
     return it;
   }();
 
@@ -122,15 +123,13 @@ TTS_CASE("Check for_each_index constexpr behavior")
   TTS_CONSTEXPR_EQUAL(get<3>(t), '4');
 
   constexpr auto t2 = []() {
-    auto it = kumi::tuple {1, 2., 3.4f, '5'};
+    auto it = kumi::tuple{1, 2., 3.4f, '5'};
     kumi::for_each_index(
-        [](auto i, auto &m, auto n) {
-          if constexpr( i % 2 == 0 )
-            m *= n;
-          else
-            m +=n;
-        },
-        it, it);
+      [](auto i, auto& m, auto n) {
+        if constexpr (i % 2 == 0) m *= n;
+        else m += n;
+      },
+      it, it);
     return it;
   }();
 
