@@ -9,7 +9,6 @@
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
 #include <functional>
-#include <iosfwd>
 
 using namespace kumi::literals;
 
