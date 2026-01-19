@@ -140,27 +140,26 @@ Functions</h2></td></tr>
 <tr class="memitem:ga418f0a47f05b67dbb354d274dee63e4e"><td class="memTemplItemLeft" align="right" valign="top">auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga418f0a47f05b67dbb354d274dee63e4e.html#ga418f0a47f05b67dbb354d274dee63e4e">kumi::as_flat_ptr</a> (T &amp;&amp;t) noexcept</td></tr>
 <tr class="memdesc:ga418f0a47f05b67dbb354d274dee63e4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a> to a flat product type of pointers to each its components.  <br /></td></tr>
 <tr class="separator:ga418f0a47f05b67dbb354d274dee63e4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4d1776863d20d012aedf130ead1db453" id="r_ga4d1776863d20d012aedf130ead1db453"><td class="memTemplParams" colspan="2">template&lt;product_type... Ts&gt; <br />
-requires ( follows_same_semantic&lt;Ts...&gt; )</td></tr>
-<tr class="memitem:ga4d1776863d20d012aedf130ead1db453"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga4d1776863d20d012aedf130ead1db453.html#ga4d1776863d20d012aedf130ead1db453">kumi::cartesian_product</a> (Ts &amp;&amp;... ts)</td></tr>
-<tr class="memdesc:ga4d1776863d20d012aedf130ead1db453"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the Cartesian Product of all elements of its arguments product types.  <br /></td></tr>
-<tr class="separator:ga4d1776863d20d012aedf130ead1db453"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab6e93bf9bc4d4efb456d07eb820d594e" id="r_gab6e93bf9bc4d4efb456d07eb820d594e"><td class="memTemplParams" colspan="2">template&lt;product_type... Ts&gt; <br />
-requires ( follows_same_semantic&lt;Ts...&gt; )</td></tr>
-<tr class="memitem:gab6e93bf9bc4d4efb456d07eb820d594e"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_gab6e93bf9bc4d4efb456d07eb820d594e.html#gab6e93bf9bc4d4efb456d07eb820d594e">kumi::cat</a> (Ts &amp;&amp;... ts)</td></tr>
-<tr class="memdesc:gab6e93bf9bc4d4efb456d07eb820d594e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenates product types in a single one.  <br /></td></tr>
-<tr class="separator:gab6e93bf9bc4d4efb456d07eb820d594e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga391aae5adab10d9be8e9cbf5be4f0f64" id="r_ga391aae5adab10d9be8e9cbf5be4f0f64"><td class="memTemplParams" colspan="2">template&lt;std::size_t N, product_type T&gt; <br />
-requires ( N &gt; 0 &amp;&amp; N &lt;= size_v&lt;T&gt; )</td></tr>
-<tr class="memitem:ga391aae5adab10d9be8e9cbf5be4f0f64"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga391aae5adab10d9be8e9cbf5be4f0f64.html#ga391aae5adab10d9be8e9cbf5be4f0f64">kumi::chunks</a> (T &amp;&amp;t)</td></tr>
-<tr class="memdesc:ga391aae5adab10d9be8e9cbf5be4f0f64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> of product_types, each containing <code>N</code> consecutive elements from <code>t</code>. Chunks starts at 0 and advance by <code>N</code> element each time. <br  />
-  <br /></td></tr>
-<tr class="separator:ga391aae5adab10d9be8e9cbf5be4f0f64"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga5bafcaeb0a60662cddff54c4ca663c50" id="r_ga5bafcaeb0a60662cddff54c4ca663c50"><td class="memTemplParams" colspan="2">template&lt;std::size_t I0, std::size_t I1, product_type Tuple&gt; <br />
-requires ( (I0 &lt;= size_v&lt;Tuple&gt;) &amp;&amp; (I1 &lt;= size_v&lt;Tuple&gt;) )</td></tr>
-<tr class="memitem:ga5bafcaeb0a60662cddff54c4ca663c50"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga5bafcaeb0a60662cddff54c4ca663c50.html#ga5bafcaeb0a60662cddff54c4ca663c50">kumi::extract</a> (Tuple &amp;&amp;t, <a class="el" href="structkumi_1_1index__t.html">index_t</a>&lt; I0 &gt; i0, <a class="el" href="structkumi_1_1index__t.html">index_t</a>&lt; I1 &gt; i1) noexcept</td></tr>
-<tr class="memdesc:ga5bafcaeb0a60662cddff54c4ca663c50"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts a sub-tuple from a product type.  <br /></td></tr>
-<tr class="separator:ga5bafcaeb0a60662cddff54c4ca663c50"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga71ccd933cc34850c94a6c51cb831cbaa" id="r_ga71ccd933cc34850c94a6c51cb831cbaa"><td class="memTemplParams" colspan="2">template&lt;product_type... Ts&gt; <br />
+requires (follows_same_semantic&lt;Ts...&gt;)</td></tr>
+<tr class="memitem:ga71ccd933cc34850c94a6c51cb831cbaa"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga71ccd933cc34850c94a6c51cb831cbaa.html#ga71ccd933cc34850c94a6c51cb831cbaa">kumi::cartesian_product</a> (Ts &amp;&amp;... ts)</td></tr>
+<tr class="memdesc:ga71ccd933cc34850c94a6c51cb831cbaa"><td class="mdescLeft">&#160;</td><td class="mdescRight">Return the Cartesian Product of all elements of its arguments product types.  <br /></td></tr>
+<tr class="separator:ga71ccd933cc34850c94a6c51cb831cbaa"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga75156b6b59e7fa8ac478bf87f1636afc" id="r_ga75156b6b59e7fa8ac478bf87f1636afc"><td class="memTemplParams" colspan="2">template&lt;product_type... Ts&gt; <br />
+requires (follows_same_semantic&lt;Ts...&gt;)</td></tr>
+<tr class="memitem:ga75156b6b59e7fa8ac478bf87f1636afc"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga75156b6b59e7fa8ac478bf87f1636afc.html#ga75156b6b59e7fa8ac478bf87f1636afc">kumi::cat</a> (Ts &amp;&amp;... ts)</td></tr>
+<tr class="memdesc:ga75156b6b59e7fa8ac478bf87f1636afc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concatenates product types in a single one.  <br /></td></tr>
+<tr class="separator:ga75156b6b59e7fa8ac478bf87f1636afc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga43733ea12f98401cb32efd3e189c09b9" id="r_ga43733ea12f98401cb32efd3e189c09b9"><td class="memTemplParams" colspan="2">template&lt;std::size_t N, product_type T&gt; <br />
+requires (N &gt; 0 &amp;&amp; N &lt;= size_v&lt;T&gt;)</td></tr>
+<tr class="memitem:ga43733ea12f98401cb32efd3e189c09b9"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga43733ea12f98401cb32efd3e189c09b9.html#ga43733ea12f98401cb32efd3e189c09b9">kumi::chunks</a> (T &amp;&amp;t)</td></tr>
+<tr class="memdesc:ga43733ea12f98401cb32efd3e189c09b9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> of product_types, each containing <code>N</code> consecutive elements from <code>t</code>. Chunks starts at 0 and advance by <code>N</code> element each time.  <br /></td></tr>
+<tr class="separator:ga43733ea12f98401cb32efd3e189c09b9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3b4519e0786eb3e74149c04e13a286c3" id="r_ga3b4519e0786eb3e74149c04e13a286c3"><td class="memTemplParams" colspan="2">template&lt;std::size_t I0, std::size_t I1, product_type Tuple&gt; <br />
+requires ((I0 &lt;= size_v&lt;Tuple&gt;) &amp;&amp; (I1 &lt;= size_v&lt;Tuple&gt;))</td></tr>
+<tr class="memitem:ga3b4519e0786eb3e74149c04e13a286c3"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga3b4519e0786eb3e74149c04e13a286c3.html#ga3b4519e0786eb3e74149c04e13a286c3">kumi::extract</a> (Tuple &amp;&amp;t, <a class="el" href="structkumi_1_1index__t.html">index_t</a>&lt; I0 &gt; i0, <a class="el" href="structkumi_1_1index__t.html">index_t</a>&lt; I1 &gt; i1) noexcept</td></tr>
+<tr class="memdesc:ga3b4519e0786eb3e74149c04e13a286c3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts a sub-tuple from a product type.  <br /></td></tr>
+<tr class="separator:ga3b4519e0786eb3e74149c04e13a286c3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac1f2b67c16429675ca7b9106793f9001" id="r_gac1f2b67c16429675ca7b9106793f9001"><td class="memTemplParams" colspan="2">template&lt;std::size_t N, typename T &gt; </td></tr>
 <tr class="memitem:gac1f2b67c16429675ca7b9106793f9001"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_gac1f2b67c16429675ca7b9106793f9001.html#gac1f2b67c16429675ca7b9106793f9001">kumi::fill</a> (T const &amp;v) noexcept</td></tr>
 <tr class="memdesc:gac1f2b67c16429675ca7b9106793f9001"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> containing <code>N</code> copies of <code>v</code>.  <br /></td></tr>
@@ -209,21 +208,21 @@ requires ( (I0 &lt;= size_v&lt;Tuple&gt;) &amp;&amp; (I1 &lt;= size_v&lt;Tuple&g
 <tr class="memitem:ga8f969f49a94fb50a8cb6bf27bf78b6b7"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga8f969f49a94fb50a8cb6bf27bf78b6b7.html#ga8f969f49a94fb50a8cb6bf27bf78b6b7">kumi::push_front</a> (Tuple &amp;&amp;t, T &amp;&amp;v)</td></tr>
 <tr class="memdesc:ga8f969f49a94fb50a8cb6bf27bf78b6b7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a tuple by adding a value v at the beginning of t.  <br /></td></tr>
 <tr class="separator:ga8f969f49a94fb50a8cb6bf27bf78b6b7"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6a35aaac7b583b81c4c7d6dd91119f4e" id="r_ga6a35aaac7b583b81c4c7d6dd91119f4e"><td class="memTemplParams" colspan="2">template&lt;index_map auto Indexes, product_type T&gt; <br />
-requires ( _::in_bound_indexes&lt;Indexes, T&gt;() )</td></tr>
-<tr class="memitem:ga6a35aaac7b583b81c4c7d6dd91119f4e"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga6a35aaac7b583b81c4c7d6dd91119f4e.html#ga6a35aaac7b583b81c4c7d6dd91119f4e">kumi::reindex</a> (T &amp;&amp;t)</td></tr>
-<tr class="memdesc:ga6a35aaac7b583b81c4c7d6dd91119f4e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reindex elements of a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>.  <br /></td></tr>
-<tr class="separator:ga6a35aaac7b583b81c4c7d6dd91119f4e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga18d76245ac67494ea0fe64d5a3c39bc3" id="r_ga18d76245ac67494ea0fe64d5a3c39bc3"><td class="memTemplParams" colspan="2">template&lt;index_map auto Indexes, product_type T&gt; <br />
+requires (_::in_bound_indexes&lt;Indexes, T&gt;())</td></tr>
+<tr class="memitem:ga18d76245ac67494ea0fe64d5a3c39bc3"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga18d76245ac67494ea0fe64d5a3c39bc3.html#ga18d76245ac67494ea0fe64d5a3c39bc3">kumi::reindex</a> (T &amp;&amp;t)</td></tr>
+<tr class="memdesc:ga18d76245ac67494ea0fe64d5a3c39bc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reindex elements of a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>.  <br /></td></tr>
+<tr class="separator:ga18d76245ac67494ea0fe64d5a3c39bc3"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga3e46e6c4fe83aeb9ce77f9002baada79" id="r_ga3e46e6c4fe83aeb9ce77f9002baada79"><td class="memTemplParams" colspan="2">template&lt;std::size_t... Idx, product_type T&gt; <br />
 requires ((Idx &lt; size_v&lt;T&gt;) &amp;&amp; ...)</td></tr>
 <tr class="memitem:ga3e46e6c4fe83aeb9ce77f9002baada79"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga3e46e6c4fe83aeb9ce77f9002baada79.html#ga3e46e6c4fe83aeb9ce77f9002baada79">kumi::reorder</a> (T &amp;&amp;t)</td></tr>
 <tr class="memdesc:ga3e46e6c4fe83aeb9ce77f9002baada79"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reorder elements of a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>.  <br /></td></tr>
 <tr class="separator:ga3e46e6c4fe83aeb9ce77f9002baada79"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gacacb045909983a11d31bbe8d589b0260" id="r_gacacb045909983a11d31bbe8d589b0260"><td class="memTemplParams" colspan="2">template&lt;field_name... Name, product_type Tuple&gt; <br />
-requires ( requires { <a class="el" href="namespacekumi.html#a58caf3f1c74614bb2224b63a6009c853">get</a>&lt;Name&gt;(std::declval&lt;Tuple&gt;()); } &amp;&amp; ... )</td></tr>
-<tr class="memitem:gacacb045909983a11d31bbe8d589b0260"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_gacacb045909983a11d31bbe8d589b0260.html#gacacb045909983a11d31bbe8d589b0260">kumi::reorder_fields</a> (Tuple &amp;&amp;t)</td></tr>
-<tr class="memdesc:gacacb045909983a11d31bbe8d589b0260"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reorder elements of a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields necessarily named, names are unique.">kumi::record</a>.  <br /></td></tr>
-<tr class="separator:gacacb045909983a11d31bbe8d589b0260"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga09d177328c5c5e6c43e994048236a1d6" id="r_ga09d177328c5c5e6c43e994048236a1d6"><td class="memTemplParams" colspan="2">template&lt;field_name... Name, product_type Tuple&gt; <br />
+requires (requires { <a class="el" href="namespacekumi.html#abd1d4a59b0cddc9d5a5aef185c9f1e46">get</a>&lt;Name&gt;(std::declval&lt;Tuple&gt;()); } &amp;&amp; ...)</td></tr>
+<tr class="memitem:ga09d177328c5c5e6c43e994048236a1d6"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga09d177328c5c5e6c43e994048236a1d6.html#ga09d177328c5c5e6c43e994048236a1d6">kumi::reorder_fields</a> (Tuple &amp;&amp;t)</td></tr>
+<tr class="memdesc:ga09d177328c5c5e6c43e994048236a1d6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reorder elements of a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields necessarily named, names are unique.">kumi::record</a>.  <br /></td></tr>
+<tr class="separator:ga09d177328c5c5e6c43e994048236a1d6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga49abf24bfdc3e6c8707cd321d9015212" id="r_ga49abf24bfdc3e6c8707cd321d9015212"><td class="memTemplParams" colspan="2">template&lt;product_type Tuple&gt; </td></tr>
 <tr class="memitem:ga49abf24bfdc3e6c8707cd321d9015212"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga49abf24bfdc3e6c8707cd321d9015212.html#ga49abf24bfdc3e6c8707cd321d9015212">kumi::reverse</a> (Tuple &amp;&amp;t)</td></tr>
 <tr class="memdesc:ga49abf24bfdc3e6c8707cd321d9015212"><td class="mdescLeft">&#160;</td><td class="mdescRight">Reverse elements of a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>.  <br /></td></tr>
@@ -241,36 +240,35 @@ requires (I0 &lt;= size_v&lt;Tuple&gt;)</td></tr>
 <tr class="memitem:ga30d07f30bbfa319dfa78a9e1a5a83a38"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga30d07f30bbfa319dfa78a9e1a5a83a38.html#ga30d07f30bbfa319dfa78a9e1a5a83a38">kumi::split</a> (Tuple &amp;&amp;t, <a class="el" href="structkumi_1_1index__t.html">index_t</a>&lt; I0 &gt; i0) noexcept</td></tr>
 <tr class="memdesc:ga30d07f30bbfa319dfa78a9e1a5a83a38"><td class="mdescLeft">&#160;</td><td class="mdescRight">Split a tuple into two.  <br /></td></tr>
 <tr class="separator:ga30d07f30bbfa319dfa78a9e1a5a83a38"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga30ecc238fb6ffcfdf9701c80e88e498d" id="r_ga30ecc238fb6ffcfdf9701c80e88e498d"><td class="memTemplParams" colspan="2">template&lt;product_type T&gt; <br />
-requires ( _::supports_transpose&lt;T&gt; )</td></tr>
-<tr class="memitem:ga30ecc238fb6ffcfdf9701c80e88e498d"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga30ecc238fb6ffcfdf9701c80e88e498d.html#ga30ecc238fb6ffcfdf9701c80e88e498d">kumi::transpose</a> (T &amp;&amp;t)</td></tr>
-<tr class="memdesc:ga30ecc238fb6ffcfdf9701c80e88e498d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transpose a product type of product types by shifting elements in their transposed position always returning a tuple as the external product type.  <br /></td></tr>
-<tr class="separator:ga30ecc238fb6ffcfdf9701c80e88e498d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga50bbffc3a4571932d98ffe63499971dd" id="r_ga50bbffc3a4571932d98ffe63499971dd"><td class="memTemplParams" colspan="2">template&lt;product_type T&gt; <br />
+requires (_::supports_transpose&lt;T&gt;)</td></tr>
+<tr class="memitem:ga50bbffc3a4571932d98ffe63499971dd"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga50bbffc3a4571932d98ffe63499971dd.html#ga50bbffc3a4571932d98ffe63499971dd">kumi::transpose</a> (T &amp;&amp;t)</td></tr>
+<tr class="memdesc:ga50bbffc3a4571932d98ffe63499971dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Transpose a product type of product types by shifting elements in their transposed position always returning a tuple as the external product type.  <br /></td></tr>
+<tr class="separator:ga50bbffc3a4571932d98ffe63499971dd"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga26131fc7a91a6860d0013d4be6151333" id="r_ga26131fc7a91a6860d0013d4be6151333"><td class="memTemplParams" colspan="2">template&lt;product_type T&gt; </td></tr>
 <tr class="memitem:ga26131fc7a91a6860d0013d4be6151333"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga26131fc7a91a6860d0013d4be6151333.html#ga26131fc7a91a6860d0013d4be6151333">kumi::unique</a> (T &amp;&amp;t)</td></tr>
 <tr class="memdesc:ga26131fc7a91a6860d0013d4be6151333"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns a product type with consecutive duplicate types removed (pairwise uniqueness).  <br /></td></tr>
 <tr class="separator:ga26131fc7a91a6860d0013d4be6151333"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga8a3301039029674c9d9613373d282c5b" id="r_ga8a3301039029674c9d9613373d282c5b"><td class="memTemplParams" colspan="2">template&lt;std::size_t N, product_type T&gt; <br />
-requires ( N &gt; 0 &amp;&amp; N &lt;= size_v&lt;T&gt; )</td></tr>
-<tr class="memitem:ga8a3301039029674c9d9613373d282c5b"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga8a3301039029674c9d9613373d282c5b.html#ga8a3301039029674c9d9613373d282c5b">kumi::windows</a> (T &amp;&amp;t)</td></tr>
-<tr class="memdesc:ga8a3301039029674c9d9613373d282c5b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> of product_types, each containing <code>N</code> consecutive elements from <code>t</code>. Windows starts at 0 and advance by <code>1</code> element each time. <br  />
-  <br /></td></tr>
-<tr class="separator:ga8a3301039029674c9d9613373d282c5b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga47ba3094d9bdaeeb08ca289578710d91" id="r_ga47ba3094d9bdaeeb08ca289578710d91"><td class="memTemplParams" colspan="2">template&lt;product_type T0, sized_product_type&lt; size_v&lt; T0 &gt; &gt;... Ts&gt; <br />
-requires ( follows_same_semantic&lt;T0, Ts...&gt; )</td></tr>
-<tr class="memitem:ga47ba3094d9bdaeeb08ca289578710d91"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga47ba3094d9bdaeeb08ca289578710d91.html#ga47ba3094d9bdaeeb08ca289578710d91">kumi::zip</a> (T0 &amp;&amp;t0, Ts &amp;&amp;... ts)</td></tr>
-<tr class="memdesc:ga47ba3094d9bdaeeb08ca289578710d91"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a tuple where the ith element is the prduct type of all ith elements of ts...  <br /></td></tr>
-<tr class="separator:ga47ba3094d9bdaeeb08ca289578710d91"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga0f9c5fa8dd048452b74552e65af8978c" id="r_ga0f9c5fa8dd048452b74552e65af8978c"><td class="memTemplParams" colspan="2">template&lt;product_type T0, product_type... Ts&gt; <br />
-requires ( follows_same_semantic&lt;T0,Ts...&gt;)</td></tr>
-<tr class="memitem:ga0f9c5fa8dd048452b74552e65af8978c"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga0f9c5fa8dd048452b74552e65af8978c.html#ga0f9c5fa8dd048452b74552e65af8978c">kumi::zip_max</a> (T0 &amp;&amp;t0, Ts &amp;&amp;...ts)</td></tr>
-<tr class="memdesc:ga0f9c5fa8dd048452b74552e65af8978c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a tuple where the ith element is the product type of all ith elements of ts...  <br /></td></tr>
-<tr class="separator:ga0f9c5fa8dd048452b74552e65af8978c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga4d79fad3c079dcc6714a6796b21e8177" id="r_ga4d79fad3c079dcc6714a6796b21e8177"><td class="memTemplParams" colspan="2">template&lt;product_type T0, product_type... Ts&gt; <br />
-requires ( follows_same_semantic&lt;T0, Ts...&gt; )</td></tr>
-<tr class="memitem:ga4d79fad3c079dcc6714a6796b21e8177"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga4d79fad3c079dcc6714a6796b21e8177.html#ga4d79fad3c079dcc6714a6796b21e8177">kumi::zip_min</a> (T0 &amp;&amp;t0, Ts &amp;&amp;...ts)</td></tr>
-<tr class="memdesc:ga4d79fad3c079dcc6714a6796b21e8177"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a tuple where the ith element is the prudct type of all ith elements of ts...  <br /></td></tr>
-<tr class="separator:ga4d79fad3c079dcc6714a6796b21e8177"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga733dfa174c0e531632cc1b0dd433a593" id="r_ga733dfa174c0e531632cc1b0dd433a593"><td class="memTemplParams" colspan="2">template&lt;std::size_t N, product_type T&gt; <br />
+requires (N &gt; 0 &amp;&amp; N &lt;= size_v&lt;T&gt;)</td></tr>
+<tr class="memitem:ga733dfa174c0e531632cc1b0dd433a593"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga733dfa174c0e531632cc1b0dd433a593.html#ga733dfa174c0e531632cc1b0dd433a593">kumi::windows</a> (T &amp;&amp;t)</td></tr>
+<tr class="memdesc:ga733dfa174c0e531632cc1b0dd433a593"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> of product_types, each containing <code>N</code> consecutive elements from <code>t</code>. Windows starts at 0 and advance by <code>1</code> element each time.  <br /></td></tr>
+<tr class="separator:ga733dfa174c0e531632cc1b0dd433a593"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga8d9c92b3ab597b2fc3454395aefa3800" id="r_ga8d9c92b3ab597b2fc3454395aefa3800"><td class="memTemplParams" colspan="2">template&lt;product_type T0, sized_product_type&lt; size_v&lt; T0 &gt; &gt;... Ts&gt; <br />
+requires (follows_same_semantic&lt;T0, Ts...&gt;)</td></tr>
+<tr class="memitem:ga8d9c92b3ab597b2fc3454395aefa3800"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga8d9c92b3ab597b2fc3454395aefa3800.html#ga8d9c92b3ab597b2fc3454395aefa3800">kumi::zip</a> (T0 &amp;&amp;t0, Ts &amp;&amp;... ts)</td></tr>
+<tr class="memdesc:ga8d9c92b3ab597b2fc3454395aefa3800"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a tuple where the ith element is the prduct type of all ith elements of ts...  <br /></td></tr>
+<tr class="separator:ga8d9c92b3ab597b2fc3454395aefa3800"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga3e199a23061358e19db303266c1fbdb6" id="r_ga3e199a23061358e19db303266c1fbdb6"><td class="memTemplParams" colspan="2">template&lt;product_type T0, product_type... Ts&gt; <br />
+requires (follows_same_semantic&lt;T0, Ts...&gt;)</td></tr>
+<tr class="memitem:ga3e199a23061358e19db303266c1fbdb6"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_ga3e199a23061358e19db303266c1fbdb6.html#ga3e199a23061358e19db303266c1fbdb6">kumi::zip_max</a> (T0 &amp;&amp;t0, Ts &amp;&amp;... ts)</td></tr>
+<tr class="memdesc:ga3e199a23061358e19db303266c1fbdb6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a tuple where the ith element is the product type of all ith elements of ts...  <br /></td></tr>
+<tr class="separator:ga3e199a23061358e19db303266c1fbdb6"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gac93f85fe3a0ddf650d8318426ea983d2" id="r_gac93f85fe3a0ddf650d8318426ea983d2"><td class="memTemplParams" colspan="2">template&lt;product_type T0, product_type... Ts&gt; <br />
+requires (follows_same_semantic&lt;T0, Ts...&gt;)</td></tr>
+<tr class="memitem:gac93f85fe3a0ddf650d8318426ea983d2"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__generators_gac93f85fe3a0ddf650d8318426ea983d2.html#gac93f85fe3a0ddf650d8318426ea983d2">kumi::zip_min</a> (T0 &amp;&amp;t0, Ts &amp;&amp;... ts)</td></tr>
+<tr class="memdesc:gac93f85fe3a0ddf650d8318426ea983d2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a tuple where the ith element is the prudct type of all ith elements of ts...  <br /></td></tr>
+<tr class="separator:gac93f85fe3a0ddf650d8318426ea983d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

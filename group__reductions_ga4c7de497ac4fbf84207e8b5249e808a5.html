@@ -164,8 +164,7 @@ template&lt;typename Function , product_type T, typename Value &gt; </div>
 </div><div class="memdoc">
 
 <p>Computes the exclusive prefix scan of all elements of a product type using a tail recursive call. </p>
-<dl class="section note"><dt>Note</dt><dd>The first stored value is the provided initial value. <br  />
-</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The first stored value is the provided initial value.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Binary callable function to apply </td></tr>
@@ -184,7 +183,7 @@ Helper type</h2>
 <div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type Tuple, <span class="keyword">typename</span> Value&gt;</div>
 <div class="line">  <span class="keyword">using </span>exclusive_scan_left_t = <span class="keyword">typename</span> exclusive_scan_left&lt;Function,Tuple,Value&gt;::type;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__reductions_ga4c7de497ac4fbf84207e8b5249e808a5_html_ga4c7de497ac4fbf84207e8b5249e808a5"><div class="ttname"><a href="group__reductions_ga4c7de497ac4fbf84207e8b5249e808a5.html#ga4c7de497ac4fbf84207e8b5249e808a5">kumi::exclusive_scan_left</a></div><div class="ttdeci">constexpr auto exclusive_scan_left(Function &amp;&amp;f, T &amp;&amp;t, Value init)</div><div class="ttdoc">Computes the exclusive prefix scan of all elements of a product type using a tail recursive call.</div><div class="ttdef"><b>Definition</b> scan.hpp:154</div></div>
+<div class="ttc" id="agroup__reductions_ga4c7de497ac4fbf84207e8b5249e808a5_html_ga4c7de497ac4fbf84207e8b5249e808a5"><div class="ttname"><a href="group__reductions_ga4c7de497ac4fbf84207e8b5249e808a5.html#ga4c7de497ac4fbf84207e8b5249e808a5">kumi::exclusive_scan_left</a></div><div class="ttdeci">constexpr auto exclusive_scan_left(Function &amp;&amp;f, T &amp;&amp;t, Value init)</div><div class="ttdoc">Computes the exclusive prefix scan of all elements of a product type using a tail recursive call.</div><div class="ttdef"><b>Definition</b> scan.hpp:148</div></div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__reductions_ga4c7de497ac4fbf84207e8b5249e808a5.html#ga4c7de497ac4fbf84207e8b5249e808a5" title="Computes the exclusive prefix scan of all elements of a product type using a tail recursive call.">kumi::exclusive_scan_left</a></p>
 <h2><a class="anchor" id="autotoc_md137"></a>
 Example</h2>
@@ -210,7 +209,7 @@ Example</h2>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga4c7de497ac4fbf84207e8b5249e808a5.html#ga4c7de497ac4fbf84207e8b5249e808a5">kumi::exclusive_scan_left</a>(<a class="code hl_variable" href="group__utility.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a>, u) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__utility_html_gab5c0eb8022e7b2df33286d9a15247559"><div class="ttname"><a href="group__utility.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a></div><div class="ttdeci">constexpr numeric_add plus</div><div class="ttdoc">Forms a binary monoid callable that can be used in kumi::algoritm. It represents the addition.</div><div class="ttdef"><b>Definition</b> monoid.hpp:129</div></div>
+<div class="ttc" id="agroup__utility_html_gab5c0eb8022e7b2df33286d9a15247559"><div class="ttname"><a href="group__utility.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a></div><div class="ttdeci">constexpr numeric_add plus</div><div class="ttdoc">Forms a binary monoid callable that can be used in kumi::algoritm. It represents the addition.</div><div class="ttdef"><b>Definition</b> monoid.hpp:124</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:37</div></div>
 </div><!-- fragment --> 
 </div>

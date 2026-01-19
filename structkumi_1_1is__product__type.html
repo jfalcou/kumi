@@ -140,7 +140,7 @@ struct kumi::is_product_type&lt; T, Enable &gt;</div><p>Opt-in traits for types 
 <h2><a class="anchor" id="autotoc_md187"></a>
 Helper value</h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> is_product_type_v = <a class="code hl_struct" href="structkumi_1_1is__product__type.html">is_product_type&lt;T&gt;::value</a>;</div>
-<div class="ttc" id="astructkumi_1_1is__product__type_html"><div class="ttname"><a href="structkumi_1_1is__product__type.html">kumi::is_product_type</a></div><div class="ttdoc">Opt-in traits for types behaving like a kumi::product_type.</div><div class="ttdef"><b>Definition</b> traits.hpp:38</div></div>
+<div class="ttc" id="astructkumi_1_1is__product__type_html"><div class="ttname"><a href="structkumi_1_1is__product__type.html">kumi::is_product_type</a></div><div class="ttdoc">Opt-in traits for types behaving like a kumi::product_type.</div><div class="ttdef"><b>Definition</b> traits.hpp:39</div></div>
 </div><!-- fragment --> <h2><a class="anchor" id="autotoc_md188"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
@@ -157,7 +157,7 @@ Example:</h2>
 <div class="line">  };</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I&gt;</div>
-<div class="line">  <span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_function" href="namespacekumi.html#a58caf3f1c74614bb2224b63a6009c853">get</a>(people <span class="keyword">const</span>&amp; s) <span class="keyword">noexcept</span></div>
+<div class="line">  <span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_function" href="namespacekumi.html#abd1d4a59b0cddc9d5a5aef185c9f1e46">get</a>(people <span class="keyword">const</span>&amp; s) <span class="keyword">noexcept</span></div>
 <div class="line">  {</div>
 <div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==0) <span class="keywordflow">return</span> s.name;</div>
 <div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==1) <span class="keywordflow">return</span> s.age;</div>
@@ -187,7 +187,7 @@ Example:</h2>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  ns::people peter{<span class="stringliteral">&quot;Peter Parker&quot;</span>, 24};</div>
-<div class="line">  <a class="code hl_function" href="group__transforms_ga39e65f96d9880dd5b1e08b8dc01993a1.html#ga39e65f96d9880dd5b1e08b8dc01993a1">kumi::for_each_index</a>( [](<span class="keywordtype">int</span> i, <span class="keyword">auto</span> e)</div>
+<div class="line">  <a class="code hl_function" href="group__transforms_gaccfc046f0abee0e449ddf6935669bd84.html#gaccfc046f0abee0e449ddf6935669bd84">kumi::for_each_index</a>( [](<span class="keywordtype">int</span> i, <span class="keyword">auto</span> e)</div>
 <div class="line">                        {</div>
 <div class="line">                          std::cout &lt;&lt; <span class="stringliteral">&quot;# &quot;</span> &lt;&lt; i</div>
 <div class="line">                                    &lt;&lt; <span class="stringliteral">&quot; : &quot;</span> &lt;&lt; e</div>
@@ -196,8 +196,8 @@ Example:</h2>
 <div class="line">                      , peter</div>
 <div class="line">                      );</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__transforms_ga39e65f96d9880dd5b1e08b8dc01993a1_html_ga39e65f96d9880dd5b1e08b8dc01993a1"><div class="ttname"><a href="group__transforms_ga39e65f96d9880dd5b1e08b8dc01993a1.html#ga39e65f96d9880dd5b1e08b8dc01993a1">kumi::for_each_index</a></div><div class="ttdeci">constexpr void for_each_index(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a kumi::product_type and its index.</div><div class="ttdef"><b>Definition</b> for_each.hpp:89</div></div>
-<div class="ttc" id="anamespacekumi_html_a58caf3f1c74614bb2224b63a6009c853"><div class="ttname"><a href="namespacekumi.html#a58caf3f1c74614bb2224b63a6009c853">kumi::get</a></div><div class="ttdeci">constexpr decltype(auto) get(record&lt; Ts... &gt; &amp;&amp;r) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition</b> record.hpp:395</div></div>
+<div class="ttc" id="agroup__transforms_gaccfc046f0abee0e449ddf6935669bd84_html_gaccfc046f0abee0e449ddf6935669bd84"><div class="ttname"><a href="group__transforms_gaccfc046f0abee0e449ddf6935669bd84.html#gaccfc046f0abee0e449ddf6935669bd84">kumi::for_each_index</a></div><div class="ttdeci">constexpr void for_each_index(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a kumi::product_type and its index.</div><div class="ttdef"><b>Definition</b> for_each.hpp:79</div></div>
+<div class="ttc" id="anamespacekumi_html_abd1d4a59b0cddc9d5a5aef185c9f1e46"><div class="ttname"><a href="namespacekumi.html#abd1d4a59b0cddc9d5a5aef185c9f1e46">kumi::get</a></div><div class="ttdeci">constexpr decltype(auto) get(record&lt; Ts... &gt; &amp;&amp;r) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition</b> record.hpp:387</div></div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->

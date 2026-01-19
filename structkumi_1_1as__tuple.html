@@ -147,7 +147,7 @@ Helper type</h2>
 <div class="line">  <span class="keyword">using </span>as_tuple_t = <span class="keyword">typename</span> <a class="code hl_struct" href="structkumi_1_1as__tuple.html">as_tuple&lt;T, Meta&gt;::type</a>;</div>
 <div class="line">}</div>
 <div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
-<div class="ttc" id="astructkumi_1_1as__tuple_html"><div class="ttname"><a href="structkumi_1_1as__tuple.html">kumi::as_tuple</a></div><div class="ttdoc">Generate a kumi::tuple type from a type.</div><div class="ttdef"><b>Definition</b> convert.hpp:183</div></div>
+<div class="ttc" id="astructkumi_1_1as__tuple_html"><div class="ttname"><a href="structkumi_1_1as__tuple.html">kumi::as_tuple</a></div><div class="ttdoc">Generate a kumi::tuple type from a type.</div><div class="ttdef"><b>Definition</b> convert.hpp:176</div></div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md17"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
@@ -163,7 +163,7 @@ Example:</h2>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I&gt;</div>
-<div class="line"><span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_function" href="namespacekumi.html#a58caf3f1c74614bb2224b63a6009c853">get</a>(vec3 <span class="keyword">const</span>&amp; v) <span class="keyword">noexcept</span></div>
+<div class="line"><span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_function" href="namespacekumi.html#abd1d4a59b0cddc9d5a5aef185c9f1e46">get</a>(vec3 <span class="keyword">const</span>&amp; v) <span class="keyword">noexcept</span></div>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==0) <span class="keywordflow">return</span> v.x;</div>
 <div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==1) <span class="keywordflow">return</span> v.y;</div>
@@ -171,7 +171,7 @@ Example:</h2>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I&gt;</div>
-<div class="line"><span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_function" href="namespacekumi.html#a58caf3f1c74614bb2224b63a6009c853">get</a>(vec3&amp; v) <span class="keyword">noexcept</span></div>
+<div class="line"><span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_function" href="namespacekumi.html#abd1d4a59b0cddc9d5a5aef185c9f1e46">get</a>(vec3&amp; v) <span class="keyword">noexcept</span></div>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==0) <span class="keywordflow">return</span> v.x;</div>
 <div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==1) <span class="keywordflow">return</span> v.y;</div>
@@ -202,8 +202,8 @@ Example:</h2>
 <div class="line">  <span class="keyword">static_assert</span>( std::same_as&lt;single_type   , kumi::tuple&lt;float&gt;  &gt;);</div>
 <div class="line">  <span class="keyword">static_assert</span>( std::same_as&lt;single_pointer, kumi::tuple&lt;float*&gt; &gt;);</div>
 <div class="line">}</div>
-<div class="ttc" id="anamespacekumi_html_a58caf3f1c74614bb2224b63a6009c853"><div class="ttname"><a href="namespacekumi.html#a58caf3f1c74614bb2224b63a6009c853">kumi::get</a></div><div class="ttdeci">constexpr decltype(auto) get(record&lt; Ts... &gt; &amp;&amp;r) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition</b> record.hpp:395</div></div>
-<div class="ttc" id="astructkumi_1_1is__product__type_html"><div class="ttname"><a href="structkumi_1_1is__product__type.html">kumi::is_product_type</a></div><div class="ttdoc">Opt-in traits for types behaving like a kumi::product_type.</div><div class="ttdef"><b>Definition</b> traits.hpp:38</div></div>
+<div class="ttc" id="anamespacekumi_html_abd1d4a59b0cddc9d5a5aef185c9f1e46"><div class="ttname"><a href="namespacekumi.html#abd1d4a59b0cddc9d5a5aef185c9f1e46">kumi::get</a></div><div class="ttdeci">constexpr decltype(auto) get(record&lt; Ts... &gt; &amp;&amp;r) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition</b> record.hpp:387</div></div>
+<div class="ttc" id="astructkumi_1_1is__product__type_html"><div class="ttname"><a href="structkumi_1_1is__product__type.html">kumi::is_product_type</a></div><div class="ttdoc">Opt-in traits for types behaving like a kumi::product_type.</div><div class="ttdef"><b>Definition</b> traits.hpp:39</div></div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->

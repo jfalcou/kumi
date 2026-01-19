@@ -170,26 +170,26 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:ga6d1e220549b74a2234e7ce58bf791d3e" id="r_ga6d1e220549b74a2234e7ce58bf791d3e"><td class="memTemplParams" colspan="2">template&lt;product_type Tuple&gt; <br />
-requires ( size_v&lt;Tuple&gt; != 0)</td></tr>
-<tr class="memitem:ga6d1e220549b74a2234e7ce58bf791d3e"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_ga6d1e220549b74a2234e7ce58bf791d3e.html#ga6d1e220549b74a2234e7ce58bf791d3e">kumi::back</a> (Tuple &amp;&amp;t)</td></tr>
-<tr class="memdesc:ga6d1e220549b74a2234e7ce58bf791d3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the back of a tuple.  <br /></td></tr>
-<tr class="separator:ga6d1e220549b74a2234e7ce58bf791d3e"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gaa1b52cd0586fc3a8cbacc2f17d1de410" id="r_gaa1b52cd0586fc3a8cbacc2f17d1de410"><td class="memTemplParams" colspan="2">template&lt;record_type Type, typename... Ts&gt; <br />
-requires ( equivalent&lt;Type, <a class="el" href="structkumi_1_1record.html">record</a>&lt;Ts...&gt;&gt; )</td></tr>
-<tr class="memitem:gaa1b52cd0586fc3a8cbacc2f17d1de410"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_gaa1b52cd0586fc3a8cbacc2f17d1de410.html#gaa1b52cd0586fc3a8cbacc2f17d1de410">kumi::from_record</a> (<a class="el" href="structkumi_1_1record.html">record</a>&lt; Ts... &gt; const &amp;r)</td></tr>
-<tr class="memdesc:gaa1b52cd0586fc3a8cbacc2f17d1de410"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields necessarily named, names are unique.">kumi::record</a> to an instance of a type that models <a class="el" href="conceptkumi_1_1record__type.html" title="Concept specifying a type follows the Record Type semantic.">kumi::record_type</a>.  <br /></td></tr>
-<tr class="separator:gaa1b52cd0586fc3a8cbacc2f17d1de410"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga7847a3783c337053f6d5f53b24a2583f" id="r_ga7847a3783c337053f6d5f53b24a2583f"><td class="memTemplParams" colspan="2">template&lt;product_type Tuple&gt; <br />
+requires (size_v&lt;Tuple&gt; != 0)</td></tr>
+<tr class="memitem:ga7847a3783c337053f6d5f53b24a2583f"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_ga7847a3783c337053f6d5f53b24a2583f.html#ga7847a3783c337053f6d5f53b24a2583f">kumi::back</a> (Tuple &amp;&amp;t)</td></tr>
+<tr class="memdesc:ga7847a3783c337053f6d5f53b24a2583f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the back of a tuple.  <br /></td></tr>
+<tr class="separator:ga7847a3783c337053f6d5f53b24a2583f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaf34b032f903e869b9f63610867f431de" id="r_gaf34b032f903e869b9f63610867f431de"><td class="memTemplParams" colspan="2">template&lt;record_type Type, typename... Ts&gt; <br />
+requires (equivalent&lt;Type, <a class="el" href="structkumi_1_1record.html">record</a>&lt;Ts...&gt;&gt;)</td></tr>
+<tr class="memitem:gaf34b032f903e869b9f63610867f431de"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_gaf34b032f903e869b9f63610867f431de.html#gaf34b032f903e869b9f63610867f431de">kumi::from_record</a> (<a class="el" href="structkumi_1_1record.html">record</a>&lt; Ts... &gt; const &amp;r)</td></tr>
+<tr class="memdesc:gaf34b032f903e869b9f63610867f431de"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields necessarily named, names are unique.">kumi::record</a> to an instance of a type that models <a class="el" href="conceptkumi_1_1record__type.html" title="Concept specifying a type follows the Record Type semantic.">kumi::record_type</a>.  <br /></td></tr>
+<tr class="separator:gaf34b032f903e869b9f63610867f431de"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad8e73ef5a6e05c2ae2db0bcfa860de48" id="r_gad8e73ef5a6e05c2ae2db0bcfa860de48"><td class="memTemplParams" colspan="2">template&lt;typename Type , typename... Ts&gt; <br />
 requires (!product_type&lt;Type&gt; &amp;&amp; _::implicit_constructible&lt;Type, Ts...&gt;)</td></tr>
 <tr class="memitem:gad8e73ef5a6e05c2ae2db0bcfa860de48"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48">kumi::from_tuple</a> (<a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Ts... &gt; const &amp;t)</td></tr>
 <tr class="memdesc:gad8e73ef5a6e05c2ae2db0bcfa860de48"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> to an instance of an arbitrary type.  <br /></td></tr>
 <tr class="separator:gad8e73ef5a6e05c2ae2db0bcfa860de48"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae40b8dfe98266c4f62395c369833eef3" id="r_gae40b8dfe98266c4f62395c369833eef3"><td class="memTemplParams" colspan="2">template&lt;product_type Tuple&gt; <br />
-requires ( size_v&lt;Tuple&gt; != 0)</td></tr>
-<tr class="memitem:gae40b8dfe98266c4f62395c369833eef3"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_gae40b8dfe98266c4f62395c369833eef3.html#gae40b8dfe98266c4f62395c369833eef3">kumi::front</a> (Tuple &amp;&amp;t)</td></tr>
-<tr class="memdesc:gae40b8dfe98266c4f62395c369833eef3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the front of a tuple.  <br /></td></tr>
-<tr class="separator:gae40b8dfe98266c4f62395c369833eef3"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga0a86710de48273efa390a88ba18b2017" id="r_ga0a86710de48273efa390a88ba18b2017"><td class="memTemplParams" colspan="2">template&lt;product_type Tuple&gt; <br />
+requires (size_v&lt;Tuple&gt; != 0)</td></tr>
+<tr class="memitem:ga0a86710de48273efa390a88ba18b2017"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_ga0a86710de48273efa390a88ba18b2017.html#ga0a86710de48273efa390a88ba18b2017">kumi::front</a> (Tuple &amp;&amp;t)</td></tr>
+<tr class="memdesc:ga0a86710de48273efa390a88ba18b2017"><td class="mdescLeft">&#160;</td><td class="mdescRight">Retrieves the front of a tuple.  <br /></td></tr>
+<tr class="separator:ga0a86710de48273efa390a88ba18b2017"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gad9d978893c5e64520e0b0d83d133c26c" id="r_gad9d978893c5e64520e0b0d83d133c26c"><td class="memTemplParams" colspan="2">template&lt;indexer... Ts&gt; </td></tr>
 <tr class="memitem:gad9d978893c5e64520e0b0d83d133c26c"><td class="memTemplItemLeft" align="right" valign="top">consteval auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_gad9d978893c5e64520e0b0d83d133c26c.html#gad9d978893c5e64520e0b0d83d133c26c">kumi::indexes</a> (Ts... ts) noexcept</td></tr>
 <tr class="memdesc:gad9d978893c5e64520e0b0d83d133c26c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="group__utility_gad9d978893c5e64520e0b0d83d133c26c.html#gad9d978893c5e64520e0b0d83d133c26c" title="Creates a kumi::indexes object, deducing the target type from the types of arguments.">kumi::indexes</a> object, deducing the target type from the types of arguments.  <br /></td></tr>
@@ -226,11 +226,11 @@ requires ( size_v&lt;Tuple&gt; != 0)</td></tr>
 <tr class="memitem:gae6de7cdd99f5e217028b93d4bcf3de52"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_gae6de7cdd99f5e217028b93d4bcf3de52.html#gae6de7cdd99f5e217028b93d4bcf3de52">kumi::to_tuple</a> (Type &amp;&amp;t)</td></tr>
 <tr class="memdesc:gae6de7cdd99f5e217028b93d4bcf3de52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a> to an instance <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>.  <br /></td></tr>
 <tr class="separator:gae6de7cdd99f5e217028b93d4bcf3de52"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga7559dc61670da58576d55ab3ab12ed0d" id="r_ga7559dc61670da58576d55ab3ab12ed0d"><td class="memTemplParams" colspan="2">template&lt;typename... Ts, product_type T&gt; <br />
-requires ( sizeof...(Ts) == size_v&lt;T&gt; )</td></tr>
-<tr class="memitem:ga7559dc61670da58576d55ab3ab12ed0d"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_ga7559dc61670da58576d55ab3ab12ed0d.html#ga7559dc61670da58576d55ab3ab12ed0d">kumi::type_cast</a> (T &amp;&amp;t)</td></tr>
-<tr class="memdesc:ga7559dc61670da58576d55ab3ab12ed0d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a product_type&lt;Types...&gt; to an instance of a product_type&lt;Ts...&gt;  <br /></td></tr>
-<tr class="separator:ga7559dc61670da58576d55ab3ab12ed0d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gaab25de9318837b7e20c2a74b874c6c58" id="r_gaab25de9318837b7e20c2a74b874c6c58"><td class="memTemplParams" colspan="2">template&lt;typename... Ts, product_type T&gt; <br />
+requires (sizeof...(Ts) == size_v&lt;T&gt;)</td></tr>
+<tr class="memitem:gaab25de9318837b7e20c2a74b874c6c58"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_gaab25de9318837b7e20c2a74b874c6c58.html#gaab25de9318837b7e20c2a74b874c6c58">kumi::type_cast</a> (T &amp;&amp;t)</td></tr>
+<tr class="memdesc:gaab25de9318837b7e20c2a74b874c6c58"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a product_type&lt;Types...&gt; to an instance of a product_type&lt;Ts...&gt;  <br /></td></tr>
+<tr class="separator:gaab25de9318837b7e20c2a74b874c6c58"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>

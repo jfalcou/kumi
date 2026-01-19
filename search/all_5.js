@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['back_0',['back',['../group__utility_ga6d1e220549b74a2234e7ce58bf791d3e.html#ga6d1e220549b74a2234e7ce58bf791d3e',1,'kumi']]],
+  ['back_0',['back',['../group__utility_ga7847a3783c337053f6d5f53b24a2583f.html#ga7847a3783c337053f6d5f53b24a2583f',1,'kumi']]],
   ['bedazzling_20beryl_1',['Version 2.0 - Bedazzling Beryl',['../changelog.html#autotoc_md218',1,'']]],
   ['beryl_2',['Version 2.0 - Bedazzling Beryl',['../changelog.html#autotoc_md218',1,'']]],
   ['bit_5fand_3',['bit_and',['../group__utility.html#gaa04ecc72014400d45d9ebb72bd7447cc',1,'kumi::function::bit_and'],['../group__reductions_ga14432e4394da47b90f34c962979da853.html#ga14432e4394da47b90f34c962979da853',1,'kumi::bit_and(T &amp;&amp;t, Value init)'],['../group__reductions_ga2249743d977a87399b3fd98b0cb2e55e.html#ga2249743d977a87399b3fd98b0cb2e55e',1,'kumi::bit_and(T &amp;&amp;t)']]],

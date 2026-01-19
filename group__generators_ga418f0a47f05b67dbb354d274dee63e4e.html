@@ -164,7 +164,7 @@ Helper type</h2>
 <div class="line">  <span class="keyword">template</span>&lt;product_type T&gt;</div>
 <div class="line">  <span class="keyword">using </span>as_flat_ptr_t = <span class="keyword">typename</span> as_flat_ptr&lt;T&gt;::type;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__generators_ga418f0a47f05b67dbb354d274dee63e4e_html_ga418f0a47f05b67dbb354d274dee63e4e"><div class="ttname"><a href="group__generators_ga418f0a47f05b67dbb354d274dee63e4e.html#ga418f0a47f05b67dbb354d274dee63e4e">kumi::as_flat_ptr</a></div><div class="ttdeci">auto as_flat_ptr(T &amp;&amp;t) noexcept</div><div class="ttdoc">Convert a kumi::product_type to a flat product type of pointers to each its components.</div><div class="ttdef"><b>Definition</b> flatten.hpp:264</div></div>
+<div class="ttc" id="agroup__generators_ga418f0a47f05b67dbb354d274dee63e4e_html_ga418f0a47f05b67dbb354d274dee63e4e"><div class="ttname"><a href="group__generators_ga418f0a47f05b67dbb354d274dee63e4e.html#ga418f0a47f05b67dbb354d274dee63e4e">kumi::as_flat_ptr</a></div><div class="ttdeci">auto as_flat_ptr(T &amp;&amp;t) noexcept</div><div class="ttdoc">Convert a kumi::product_type to a flat product type of pointers to each its components.</div><div class="ttdef"><b>Definition</b> flatten.hpp:243</div></div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__generators_ga418f0a47f05b67dbb354d274dee63e4e.html#ga418f0a47f05b67dbb354d274dee63e4e" title="Convert a kumi::product_type to a flat product type of pointers to each its components.">kumi::as_flat_ptr</a></p>
 <h2><a class="anchor" id="autotoc_md28"></a>
 Example</h2>
@@ -181,11 +181,11 @@ Example</h2>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; ptr &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_function" href="group__transforms_ga1276dff11987989fc804ebe3d3804678.html#ga1276dff11987989fc804ebe3d3804678">kumi::for_each</a>([](<span class="keyword">auto</span> p) { *p += 5; }, ptr );</div>
+<div class="line">  <a class="code hl_function" href="group__transforms_gab149989d49d601440eae1057a6065c9b.html#gab149989d49d601440eae1057a6065c9b">kumi::for_each</a>([](<span class="keyword">auto</span> p) { *p += 5; }, ptr );</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__transforms_ga1276dff11987989fc804ebe3d3804678_html_ga1276dff11987989fc804ebe3d3804678"><div class="ttname"><a href="group__transforms_ga1276dff11987989fc804ebe3d3804678.html#ga1276dff11987989fc804ebe3d3804678">kumi::for_each</a></div><div class="ttdeci">constexpr void for_each(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a kumi::product_type. f is applied on the values if ...</div><div class="ttdef"><b>Definition</b> for_each.hpp:32</div></div>
+<div class="ttc" id="agroup__transforms_gab149989d49d601440eae1057a6065c9b_html_gab149989d49d601440eae1057a6065c9b"><div class="ttname"><a href="group__transforms_gab149989d49d601440eae1057a6065c9b.html#gab149989d49d601440eae1057a6065c9b">kumi::for_each</a></div><div class="ttdeci">constexpr void for_each(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a kumi::product_type. f is applied on the values if ...</div><div class="ttdef"><b>Definition</b> for_each.hpp:32</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:37</div></div>
 </div><!-- fragment --> 
 </div>
