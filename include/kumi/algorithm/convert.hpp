@@ -15,45 +15,42 @@ namespace kumi
   {
     // Workaround as span has no tuple_element/tuple_size defined even if it's static
     // as opposed to ranges::subrange for some reason
-    template<typename T> struct is_static_span : std::false_type{}; 
-
-    template<typename T, std::size_t N>
-    struct is_static_span<std::span<T,N>> : std::bool_constant<(N != std::dynamic_extent)>{};
-
-    template<typename T> concept static_span = is_static_span<std::remove_cvref_t<T>>::value; 
-  }
-  
-  namespace _
-  {
-    template< product_type Tuple
-            , typename IndexSequence
-            , template<typename...> class Meta = std::type_identity
-            >
-    struct as_tuple;
-
-    template< product_type Tuple
-            , std::size_t... I
-            >
-    struct as_tuple<Tuple, std::index_sequence<I...>>
+    template<typename T> struct is_static_span : std::false_type
     {
-      using type = kumi::tuple< element_t<I,Tuple>... >;
     };
 
-    template< product_type Tuple
-            , std::size_t... I
-            , template<typename...> class Meta
-            >
+    template<typename T, std::size_t N>
+    struct is_static_span<std::span<T, N>> : std::bool_constant<(N != std::dynamic_extent)>
+    {
+    };
+
+    template<typename T>
+    concept static_span = is_static_span<std::remove_cvref_t<T>>::value;
+  }
+
+  namespace _
+  {
+    template<product_type Tuple, typename IndexSequence, template<typename...> class Meta = std::type_identity>
+    struct as_tuple;
+
+    template<product_type Tuple, std::size_t... I> struct as_tuple<Tuple, std::index_sequence<I...>>
+    {
+      using type = kumi::tuple<element_t<I, Tuple>...>;
+    };
+
+    template<product_type Tuple, std::size_t... I, template<typename...> class Meta>
     struct as_tuple<Tuple, std::index_sequence<I...>, Meta>
     {
-      using type = kumi::tuple< typename Meta<element_t<I,Tuple>>::type... >;
+      using type = kumi::tuple<typename Meta<element_t<I, Tuple>>::type...>;
     };
   }
 
   // Specific is_homogeneous overload
   template<typename T>
-  requires( !requires { T::is_homogeneous; } )
-  struct is_homogeneous<T> : is_homogeneous<typename _::as_tuple<T,std::make_index_sequence<size_v<T>>>::type>
-  {};
+  requires(!requires { T::is_homogeneous; })
+  struct is_homogeneous<T> : is_homogeneous<typename _::as_tuple<T, std::make_index_sequence<size_v<T>>>::type>
+  {
+  };
 
   //================================================================================================
   //! @ingroup utility
@@ -70,10 +67,11 @@ namespace kumi
   //================================================================================================
   template<typename Type, typename... Ts>
   requires(!product_type<Type> && _::implicit_constructible<Type, Ts...>)
-  [[nodiscard]] KUMI_ABI constexpr auto from_tuple(tuple<Ts...> const &t)
+  [[nodiscard]] KUMI_ABI constexpr auto from_tuple(tuple<Ts...> const& t)
   {
-    return [&]<std::size_t... I>(std::index_sequence<I...>) { return Type {get<I>(t)...}; }
-    (std::make_index_sequence<sizeof...(Ts)>());
+    return [&]<std::size_t... I>(std::index_sequence<I...>) {
+      return Type{get<I>(t)...};
+    }(std::make_index_sequence<sizeof...(Ts)>());
   }
 
   //================================================================================================
@@ -90,12 +88,11 @@ namespace kumi
   //! @include doc/record/from_record.cpp
   //================================================================================================
   template<record_type Type, typename... Ts>
-  requires ( equivalent<Type, record<Ts...>> )
-  [[nodiscard]] KUMI_ABI constexpr auto from_record(record<Ts...> const &r)
+  requires(equivalent<Type, record<Ts...>>)
+  [[nodiscard]] KUMI_ABI constexpr auto from_record(record<Ts...> const& r)
   {
-    return [&]<std::size_t... I>(std::index_sequence<I...>) 
-    { 
-      return Type{ get<name_of(as<element_t<I,Type>>{})>(r)... };
+    return [&]<std::size_t... I>(std::index_sequence<I...>) {
+      return Type{get<name_of(as<element_t<I, Type>>{})>(r)...};
     }(std::make_index_sequence<size_v<Type>>());
   }
 
@@ -108,26 +105,24 @@ namespace kumi
   //! @param  t    kumi::product_type to convert
   //! @return An instance of kumi::tuple constructed from each elements of `t` in order.
   //!
-  //! @note An overload is provided for static std::span. 
+  //! @note An overload is provided for static std::span.
   //!
   //! ## Example
   //! @include doc/to_tuple.cpp
   //================================================================================================
-  template<product_type Type>
-  [[nodiscard]] KUMI_ABI constexpr auto to_tuple(Type && t)
+  template<product_type Type> [[nodiscard]] KUMI_ABI constexpr auto to_tuple(Type&& t)
   {
-    return apply([](auto &&...elems) { return tuple{elems...}; }, KUMI_FWD(t));
+    return apply([](auto&&... elems) { return tuple{elems...}; }, KUMI_FWD(t));
   }
 
-  template<_::static_span S>
-  [[nodiscard]] KUMI_ABI constexpr auto to_tuple( S && s )
+  template<_::static_span S> [[nodiscard]] KUMI_ABI constexpr auto to_tuple(S&& s)
   {
     constexpr auto N = std::remove_cvref_t<S>::extent;
-    if constexpr ( N == 0 ) return tuple{};
-    else return [&]<std::size_t...I>( std::index_sequence<I...> )
-    {
-      return tuple{ KUMI_FWD(s)[I]... };
-    }(std::make_index_sequence<N>{});
+    if constexpr (N == 0) return tuple{};
+    else
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return tuple{KUMI_FWD(s)[I]...};
+      }(std::make_index_sequence<N>{});
   }
 
   //================================================================================================
@@ -142,15 +137,14 @@ namespace kumi
   //! ## Example
   //! @include doc/record/to_record.cpp
   //================================================================================================
-  template<record_type Type>
-  [[nodiscard]] KUMI_ABI constexpr auto to_record(Type && r)
+  template<record_type Type> [[nodiscard]] KUMI_ABI constexpr auto to_record(Type&& r)
   {
-    if constexpr ( sized_product_type<Type, 0> ) return kumi::record{};
-    else return [&]<std::size_t...I>(std::index_sequence<I...>)
-    {
-      return record{field<name_of(as<element_t<I,Type>>{})> = 
-                      get<name_of(as<element_t<I,Type>>{})>(KUMI_FWD(r))... };
-    }(std::make_index_sequence<size_v<Type>>{});
+    if constexpr (sized_product_type<Type, 0>) return kumi::record{};
+    else
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return record{field<name_of(as<element_t<I, Type>>{})> =
+                        get<name_of(as<element_t<I, Type>>{})>(KUMI_FWD(r))...};
+      }(std::make_index_sequence<size_v<Type>>{});
   }
 
   //================================================================================================
@@ -179,21 +173,21 @@ namespace kumi
   //! ## Example:
   //! @include doc/as_tuple.cpp
   //================================================================================================
-  template<typename T, template<typename...> class Meta = std::type_identity>
-  struct as_tuple;
+  template<typename T, template<typename...> class Meta = std::type_identity> struct as_tuple;
 
   template<typename T, template<typename...> class Meta>
-  requires( product_type<T> )
-  struct as_tuple<T, Meta> : _::as_tuple <T,std::make_index_sequence<size_v<T>>, Meta>
-  {};
+  requires(product_type<T>)
+  struct as_tuple<T, Meta> : _::as_tuple<T, std::make_index_sequence<size_v<T>>, Meta>
+  {
+  };
 
   template<typename T, template<typename...> class Meta>
-  requires( !product_type<T> )
+  requires(!product_type<T>)
   struct as_tuple<T, Meta>
   {
-    using type = kumi::tuple< typename Meta<T>::type >;
+    using type = kumi::tuple<typename Meta<T>::type>;
   };
 
   template<typename T, template<typename...> class Meta = std::type_identity>
-  using as_tuple_t =  typename as_tuple<T, Meta>::type;
+  using as_tuple_t = typename as_tuple<T, Meta>::type;
 }

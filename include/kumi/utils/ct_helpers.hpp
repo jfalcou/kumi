@@ -35,7 +35,7 @@ namespace kumi
   template<std::size_t N> inline constexpr index_t<N> const index = {};
 
   //================================================================================================
-  //! @ingroup utility 
+  //! @ingroup utility
   //! @class field_name
   //! @brief Named wrapper used to instantiate a kumi::field_capture.
   //!
@@ -48,25 +48,24 @@ namespace kumi
   {
     /// Name associated to the field_name
     static constexpr auto name = ID;
-    
-    /// Conversion operator to kumi::str 
+
+    /// Conversion operator to kumi::str
     constexpr inline operator str() const noexcept { return ID; }
 
     //==============================================================================================
     //! @brief Builds a field_capture from the given value.
     //! @tparam T The type to wrap.
-    //! @param  v The value to capture. 
+    //! @param  v The value to capture.
     //! @return A kumi::field_capture containing the value.
     //==============================================================================================
-    template<typename T>
-    constexpr field_capture<ID, std::unwrap_ref_decay_t<T>> operator=(T v) const
+    template<typename T> constexpr field_capture<ID, std::unwrap_ref_decay_t<T>> operator=(T v) const
     {
-      return { std::move(v) };
+      return {std::move(v)};
     }
   };
 
   //==============================================================================================
-  //! @ingroup utility 
+  //! @ingroup utility
   //! @brief Forms a constant kumi::field_name of the desired ID.
   //! @tparam ID the compile time name to build.
   //==============================================================================================
@@ -92,14 +91,20 @@ namespace kumi
     //! ## Example:
     //! @include doc/index.cpp
     //==============================================================================================
-    template<char... c> constexpr auto operator""_c() noexcept { return index<b10<c...>()>; }
-    
+    template<char... c> constexpr auto operator""_c() noexcept
+    {
+      return index<b10<c...>()>;
+    }
+
     //==============================================================================================
-    //! @ingroup utility 
+    //! @ingroup utility
     //! @brief Forms a constant string literal of the desired value.
     //! @return An instance of kumi::field_name for the specified string
     //==============================================================================================
-    template<kumi::str ID> constexpr auto operator""_f() noexcept { return field<ID>; }
+    template<kumi::str ID> constexpr auto operator""_f() noexcept
+    {
+      return field<ID>;
+    }
   }
 
   //================================================================================================

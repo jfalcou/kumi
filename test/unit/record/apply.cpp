@@ -13,28 +13,28 @@
 using namespace kumi::literals;
 
 TTS_CASE("Check result::apply<F,Record> behavior")
-{ 
+{
   auto lambda = [](auto... m) { return (m + ...); };
   using func_t = decltype(lambda);
 
-  using char_f      = kumi::field_capture<"x", char>;
-  using short_f     = kumi::field_capture<"y", short>;
-  using int_f       = kumi::field_capture<"z", int>;
-  using double_f    = kumi::field_capture<"t", double>;
-  TTS_TYPE_IS((kumi::result::apply_t<func_t,kumi::record<char_f,short_f,int_f,double_f>>), double);
+  using char_f = kumi::field_capture<"x", char>;
+  using short_f = kumi::field_capture<"y", short>;
+  using int_f = kumi::field_capture<"z", int>;
+  using double_f = kumi::field_capture<"t", double>;
+  TTS_TYPE_IS((kumi::result::apply_t<func_t, kumi::record<char_f, short_f, int_f, double_f>>), double);
 };
 
 TTS_CASE("Check apply behavior")
 {
-  TTS_EQUAL((kumi::apply( []() { return 99; }, kumi::record{})), 99);
+  TTS_EQUAL((kumi::apply([]() { return 99; }, kumi::record{})), 99);
 
   TTS_EQUAL((kumi::apply(
-                [](auto... m) {
-                  std::ostringstream s;
-                  ((s << m << " "), ...);
-                  return s.str();
-                },
-                kumi::record {"a"_f = 1, "b"_f = '5', "c"_f = "things"})),
+              [](auto... m) {
+                std::ostringstream s;
+                ((s << m << " "), ...);
+                return s.str();
+              },
+              kumi::record{"a"_f = 1, "b"_f = '5', "c"_f = "things"})),
             "1 5 things ");
 };
 
@@ -43,12 +43,12 @@ TTS_CASE("Check apply constexpr behavior")
   using namespace kumi::literals;
 
   constexpr auto t1 = []() {
-    auto it = kumi::record {"x"_f = 1, "y"_f = 2., "z"_f = 3.f};
+    auto it = kumi::record{"x"_f = 1, "y"_f = 2., "z"_f = 3.f};
     return kumi::apply([](auto... m) { return (m + ...); }, it);
   }();
 
   constexpr auto empty = []() { return 99; };
-  TTS_CONSTEXPR_EQUAL((kumi::apply( empty, kumi::record{})), 99);
+  TTS_CONSTEXPR_EQUAL((kumi::apply(empty, kumi::record{})), 99);
 
   TTS_CONSTEXPR_EQUAL(t1, 6.);
 };

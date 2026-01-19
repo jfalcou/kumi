@@ -35,29 +35,24 @@ namespace kumi
   //! @include doc/reverse.cpp
   //! @include doc/record/reverse.cpp
   //================================================================================================
-  template<product_type Tuple>
-  [[nodiscard]] KUMI_ABI constexpr auto reverse(Tuple &&t)
+  template<product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto reverse(Tuple&& t)
   {
-    if constexpr(sized_product_type<Tuple,0>) return _::builder<Tuple>::make(); 
+    if constexpr (sized_product_type<Tuple, 0>) return _::builder<Tuple>::make();
     else
     {
-      return [&]<std::size_t... I>(std::index_sequence<I...>)
-      {
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return _::builder<Tuple>::make(get<(size_v<Tuple> - 1 - I)>(KUMI_FWD(t))...);
-      }
-      (std::make_index_sequence<size<Tuple>::value>());
+      }(std::make_index_sequence<size<Tuple>::value>());
     }
   }
 
   namespace result
   {
-    template<product_type Tuple>
-    struct reverse
+    template<product_type Tuple> struct reverse
     {
-      using type = decltype( kumi::reverse( std::declval<Tuple>() ) );
+      using type = decltype(kumi::reverse(std::declval<Tuple>()));
     };
 
-    template<product_type Tuple>
-    using reverse_t = typename reverse<Tuple>::type;
+    template<product_type Tuple> using reverse_t = typename reverse<Tuple>::type;
   }
 }
