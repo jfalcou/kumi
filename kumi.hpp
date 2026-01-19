@@ -339,6 +339,25 @@ namespace kumi::_
 }
 namespace kumi
 {
+  namespace _
+  {
+    template<typename T>
+    concept non_empty_tuple = requires(T const& t) {
+      typename std::tuple_element<0, std::remove_cvref_t<T>>::type;
+      typename std::tuple_size<std::remove_cvref_t<T>>::type;
+    };
+    template<typename T>
+    concept empty_tuple = (std::tuple_size<std::remove_cvref_t<T>>::value == 0);
+    template<typename T>
+    concept container_like = requires(T const& t) {
+      typename T::value_type;
+      typename T::size_type;
+      { t.size() } -> kumi::convertible_to<std::size_t>;
+      { t.begin() };
+      { t.end() };
+      { t.data() };
+    };
+  }
   template<typename T, typename Enable = void> struct is_product_type : std::false_type
   {
   };
@@ -398,6 +417,52 @@ namespace kumi
     using type = decltype(get<I>(std::declval<T&&>()));
   };
   template<std::size_t I, typename T> using member_t = typename member<I, T>::type;
+}
+namespace kumi
+{
+  template<typename T> struct is_static_container : std::false_type
+  {
+  };
+  template<template<class, std::size_t> typename Container, typename T, std::size_t N>
+  requires _::container_like<Container<T, N>> && (N != static_cast<std::size_t>(-1))
+  struct is_static_container<Container<T, N>> : std::true_type
+  {
+    using value_type = T;
+    using size = std::integral_constant<std::size_t, N>;
+  };
+  template<typename T> inline constexpr auto is_static_container_v = is_static_container<T>::value;
+  template<typename T> struct container_size : is_static_container<T>::size
+  {
+  };
+  template<typename T> struct container_size<T&> : container_size<T>
+  {
+  };
+  template<typename T> struct container_size<T&&> : container_size<T>
+  {
+  };
+  template<typename T> struct container_size<T const&> : container_size<T>
+  {
+  };
+  template<typename T> struct container_size<T const&&> : container_size<T>
+  {
+  };
+  template<typename T> inline constexpr auto container_size_v = container_size<T>::value;
+  template<typename T> struct container_type : is_static_container<T>::value_type
+  {
+  };
+  template<typename T> struct container_type<T&> : container_type<T>
+  {
+  };
+  template<typename T> struct container_type<T&&> : container_type<T>
+  {
+  };
+  template<typename T> struct container_type<T const&> : container_type<T>
+  {
+  };
+  template<typename T> struct container_type<T const&&> : container_type<T>
+  {
+  };
+  template<typename T> using container_type_t = typename container_type<T>::type;
 }
 namespace kumi
 {
@@ -473,18 +538,16 @@ namespace kumi
   template<typename... Ts> inline constexpr auto all_unique_names_v = all_unique_names_t<Ts...>::value;
   template<typename... Ts> struct tuple;
   template<typename... Ts> struct record;
+  template<typename T>
+  requires(is_static_container_v<T> && (_::non_empty_tuple<T> || _::empty_tuple<T>))
+  struct is_product_type<T> : std::true_type
+  {
+  };
 }
 #include <cstddef>
 #include <utility>
 namespace kumi::_
 {
-  template<typename T>
-  concept non_empty_tuple = requires(T const& t) {
-    typename std::tuple_element<0, std::remove_cvref_t<T>>::type;
-    typename std::tuple_size<std::remove_cvref_t<T>>::type;
-  };
-  template<typename T>
-  concept empty_tuple = (std::tuple_size<std::remove_cvref_t<T>>::value == 0);
   template<typename From, typename To> struct is_piecewise_constructible;
   template<typename From, typename To> struct is_piecewise_convertible;
   template<typename From, typename To> struct is_piecewise_ordered;
@@ -1050,6 +1113,8 @@ namespace kumi
   concept product_type = std_tuple_compatible<T> && is_product_type<std::remove_cvref_t<T>>::value;
   template<typename T>
   concept record_type = product_type<T> && is_record_type<std::remove_cvref_t<T>>::value;
+  template<typename T>
+  concept static_container = is_static_container_v<std::remove_cvref_t<T>>;
   template<typename T, std::size_t N>
   concept sized_product_type = product_type<T> && (size_v<std::remove_cvref_t<T>> == N);
   template<typename T, std::size_t N>
@@ -1318,7 +1383,6 @@ namespace kumi
     }
   }
 }
-#include <array>
 #include <type_traits>
 #include <utility>
 #if !defined(KUMI_DOXYGEN_INVOKED)
@@ -1369,9 +1433,6 @@ struct std::basic_common_reference<kumi::tuple<Ts...>, kumi::tuple<Us...>, TQual
   using type = kumi::tuple<std::common_reference_t<TQual<Ts>, UQual<Us>>...>;
 };
 #endif
-template<typename T, std::size_t N> struct kumi::is_product_type<std::array<T, N>> : std::true_type
-{
-};
 template<typename... Ts> struct kumi::is_product_type<std::tuple<Ts...>> : std::true_type
 {
 };
@@ -2270,21 +2331,8 @@ namespace kumi
     template<product_type... Ts> using cat_t = typename cat<Ts...>::type;
   }
 }
-#include <span>
 namespace kumi
 {
-  namespace _
-  {
-    template<typename T> struct is_static_span : std::false_type
-    {
-    };
-    template<typename T, std::size_t N>
-    struct is_static_span<std::span<T, N>> : std::bool_constant<(N != std::dynamic_extent)>
-    {
-    };
-    template<typename T>
-    concept static_span = is_static_span<std::remove_cvref_t<T>>::value;
-  }
   namespace _
   {
     template<product_type Tuple, typename IndexSequence, template<typename...> class Meta = std::type_identity>
@@ -2324,9 +2372,11 @@ namespace kumi
   {
     return apply([](auto&&... elems) { return tuple{elems...}; }, KUMI_FWD(t));
   }
-  template<_::static_span S> [[nodiscard]] KUMI_ABI constexpr auto to_tuple(S&& s)
+  template<static_container S>
+  [[nodiscard]] KUMI_ABI constexpr auto to_tuple(S&& s)
+  requires(!product_type<S>)
   {
-    constexpr auto N = std::remove_cvref_t<S>::extent;
+    constexpr auto N = container_size_v<S>;
     if constexpr (N == 0) return tuple{};
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
