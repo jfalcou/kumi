@@ -9,6 +9,8 @@
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
 #include "test.hpp"
+#include <array>
+#include <span>
 
 struct my_product_type
 {

@@ -7,27 +7,8 @@
 //==================================================================================================
 #pragma once
 
-#include <span>
-
 namespace kumi
 {
-  namespace _
-  {
-    // Workaround as span has no tuple_element/tuple_size defined even if it's static
-    // as opposed to ranges::subrange for some reason
-    template<typename T> struct is_static_span : std::false_type
-    {
-    };
-
-    template<typename T, std::size_t N>
-    struct is_static_span<std::span<T, N>> : std::bool_constant<(N != std::dynamic_extent)>
-    {
-    };
-
-    template<typename T>
-    concept static_span = is_static_span<std::remove_cvref_t<T>>::value;
-  }
-
   namespace _
   {
     template<product_type Tuple, typename IndexSequence, template<typename...> class Meta = std::type_identity>
@@ -105,7 +86,7 @@ namespace kumi
   //! @param  t    kumi::product_type to convert
   //! @return An instance of kumi::tuple constructed from each elements of `t` in order.
   //!
-  //! @note An overload is provided for static std::span.
+  //! @note An overload is provided for kumi::static_container.
   //!
   //! ## Example
   //! @include doc/to_tuple.cpp
@@ -115,9 +96,11 @@ namespace kumi
     return apply([](auto&&... elems) { return tuple{elems...}; }, KUMI_FWD(t));
   }
 
-  template<_::static_span S> [[nodiscard]] KUMI_ABI constexpr auto to_tuple(S&& s)
+  template<static_container S>
+  [[nodiscard]] KUMI_ABI constexpr auto to_tuple(S&& s)
+  requires(!product_type<S>)
   {
-    constexpr auto N = std::remove_cvref_t<S>::extent;
+    constexpr auto N = container_size_v<S>;
     if constexpr (N == 0) return tuple{};
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {

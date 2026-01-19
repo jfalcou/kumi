@@ -9,6 +9,7 @@
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
 #include <tuple>
+#include <array>
 #include "test.hpp"
 
 TTS_CASE("Check adapted types model kumi::product_type concept")

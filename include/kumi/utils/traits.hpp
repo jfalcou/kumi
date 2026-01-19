@@ -16,6 +16,39 @@
 
 namespace kumi
 {
+
+  namespace _
+  {
+    //==============================================================================================
+    // Helper concepts for tuple detection
+    //==============================================================================================
+    // Concept specifying a type is non-empty standard tuple-like type.
+    template<typename T>
+    concept non_empty_tuple = requires(T const& t) {
+      typename std::tuple_element<0, std::remove_cvref_t<T>>::type;
+      typename std::tuple_size<std::remove_cvref_t<T>>::type;
+    };
+
+    // Concept specifying a type is an empty standard tuple-like type.
+    template<typename T>
+    concept empty_tuple = (std::tuple_size<std::remove_cvref_t<T>>::value == 0);
+
+    //==============================================================================================
+    // Helper concepts for container detection
+    //==============================================================================================
+    // Concept specifying a type is standard container-like type.
+    template<typename T>
+    concept container_like = requires(T const& t) {
+      typename T::value_type;
+      typename T::size_type;
+
+      { t.size() } -> kumi::convertible_to<std::size_t>;
+      { t.begin() };
+      { t.end() };
+      { t.data() };
+    };
+  }
+
   //================================================================================================
   //! @ingroup traits
   //! @brief Opt-in traits for types behaving like a kumi::product_type
@@ -175,6 +208,107 @@ namespace kumi
   };
 
   template<std::size_t I, typename T> using member_t = typename member<I, T>::type;
+}
+
+namespace kumi
+{
+  //================================================================================================
+  //! @ingroup traits
+  //! @brief Traits detecting types behaving like a kumi::static_container.
+  //!
+  //! To be treated like a static_container, a user defined type must expose a type and a
+  //! statically know size encoded in the type. It shall also provide general container utilities.
+  //!
+  //! @note The type shall be templated on the type and the size to be picked up.
+  //!
+  //! ## Helper value
+  //! @code
+  //!   template<typename T> inline constexpr auto is_static_container = is_static_container<T>::value;
+  //! @endcode
+  //! ## Example:
+  //==============================================================================================
+  template<typename T> struct is_static_container : std::false_type
+  {
+  };
+
+  template<template<class, std::size_t> typename Container, typename T, std::size_t N>
+  requires _::container_like<Container<T, N>> && (N != static_cast<std::size_t>(-1))
+  struct is_static_container<Container<T, N>> : std::true_type
+  {
+    using value_type = T;
+    using size = std::integral_constant<std::size_t, N>;
+  };
+
+  template<typename T> inline constexpr auto is_static_container_v = is_static_container<T>::value;
+
+  //================================================================================================
+  //! @ingroup traits
+  //! @brief Returns the number of elements of a kumi::static_container
+  //!
+  //! @tparam T kumi::static_container to inspect
+  //!
+  //! ## Helper value
+  //! @code
+  //!   template<typename T> inline constexpr auto container_size_v = container_size<T>::value;
+  //! @endcode
+  //================================================================================================
+  template<typename T> struct container_size : is_static_container<T>::size
+  {
+  };
+
+  template<typename T> struct container_size<T&> : container_size<T>
+  {
+  };
+
+  template<typename T> struct container_size<T&&> : container_size<T>
+  {
+  };
+
+  template<typename T> struct container_size<T const&> : container_size<T>
+  {
+  };
+
+  template<typename T> struct container_size<T const&&> : container_size<T>
+  {
+  };
+
+  template<typename T> inline constexpr auto container_size_v = container_size<T>::value;
+
+  //================================================================================================
+  //! @ingroup traits
+  //! @brief Provides access to the type of the elements of a kumi::static_container.
+  //!
+  //! @tparam T kumi::static_container to access
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T> using container_type_t = typename container_type<T>::type;
+  //! }
+  //! @endcode
+  //================================================================================================
+  template<typename T> struct container_type : is_static_container<T>::value_type
+  {
+  };
+
+  template<typename T> struct container_type<T&> : container_type<T>
+  {
+  };
+
+  template<typename T> struct container_type<T&&> : container_type<T>
+  {
+  };
+
+  template<typename T> struct container_type<T const&> : container_type<T>
+  {
+  };
+
+  template<typename T> struct container_type<T const&&> : container_type<T>
+  {
+  };
+
+  template<typename T> using container_type_t = typename container_type<T>::type;
 }
 
 namespace kumi
@@ -404,4 +538,10 @@ namespace kumi
   // Forward declaration
   template<typename... Ts> struct tuple;
   template<typename... Ts> struct record;
+
+  template<typename T>
+  requires(is_static_container_v<T> && (_::non_empty_tuple<T> || _::empty_tuple<T>))
+  struct is_product_type<T> : std::true_type
+  {
+  };
 }
