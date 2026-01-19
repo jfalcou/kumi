@@ -9,6 +9,7 @@
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
 #include <functional>
+#include <iosfwd>
 
 using namespace kumi::literals;
 
@@ -21,13 +22,6 @@ struct from_type
   template<typename T, typename U> from_type(kumi::record<T, U>) : value{15} {}
 
   friend constexpr auto operator==(from_type const& a, from_type const& b) noexcept { return a.value == b.value; }
-
-  template<typename CharT, typename Traits>
-  friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os,
-                                                       from_type const& w) noexcept
-  {
-    return os << w.value;
-  }
 };
 
 TTS_CASE("Check runtime kumi::type_cast behavior on records")

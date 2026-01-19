@@ -19,13 +19,6 @@ struct from_type
   template<typename T> from_type(kumi::tuple<T, T>) : value{15} {}
 
   friend constexpr auto operator==(from_type const& a, from_type const& b) noexcept { return a.value == b.value; }
-
-  template<typename CharT, typename Traits>
-  friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os,
-                                                       from_type const& w) noexcept
-  {
-    return os << w.value;
-  }
 };
 
 TTS_CASE("Check runtime kumi::type_cast behavior on tuples")

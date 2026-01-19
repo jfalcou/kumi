@@ -16,7 +16,6 @@
 #include <kumi/detail/streamable.hpp>
 #include <kumi/utils.hpp>
 
-#include <iosfwd>
 #include <type_traits>
 
 namespace kumi
@@ -363,23 +362,6 @@ namespace kumi
       return kumi::apply(KUMI_FWD(f), static_cast<tuple&&>(*this));
     }
 #endif
-
-    //==============================================================================================
-    /// @ingroup tuple
-    //! @related kumi::tuple
-    //! @brief Inserts a kumi::tuple in an output stream
-    //==============================================================================================
-    template<typename CharT, typename Traits>
-    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, tuple const& t) noexcept
-    {
-      os << "( ";
-      [&]<std::size_t... I>(std::index_sequence<I...>) {
-        ((os << _::make_streamable(t[index<I>]) << " "), ...);
-      }(std::make_index_sequence<size_v<decltype(t)>>{});
-      os << ')';
-
-      return os;
-    }
   };
 
   template<> struct tuple<>
@@ -394,13 +376,26 @@ namespace kumi
     static constexpr auto names() noexcept { return tuple{}; }
 
     KUMI_ABI friend constexpr auto operator<=>(tuple<>, tuple<>) noexcept = default;
-
-    template<typename CharT, typename Traits>
-    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, tuple<>) noexcept
-    {
-      return os << "()";
-    }
   };
+
+  //==============================================================================================
+  //! @related kumi::tuple
+  //! @related kumi::record
+  //! @brief Inserts a kumi::product_type in an output stream
+  //==============================================================================================
+  template<_::stream Os, product_type T> auto& operator<<(Os& os, T const& t) noexcept
+  {
+    if constexpr (sized_product_type<T, 0>) os << "()";
+    else
+    {
+      os << "( ";
+      [&]<std::size_t... I>(std::index_sequence<I...>) {
+        ((os << _::make_streamable(get<I>(t), os) << " "), ...);
+      }(std::make_index_sequence<size_v<T>>{});
+      os << ')';
+    }
+    return os;
+  }
 
   //================================================================================================
   //! @name Tuple Deduction Guides

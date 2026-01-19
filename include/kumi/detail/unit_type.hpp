@@ -7,8 +7,8 @@
 //==================================================================================================
 #pragma once
 
-#include <iosfwd>
 #include <kumi/detail/abi.hpp>
+#include <kumi/detail/streamable.hpp>
 
 namespace kumi
 {
@@ -23,11 +23,7 @@ namespace kumi
   {
     KUMI_ABI friend constexpr auto operator<=>(unit, unit) noexcept = default;
 
-    template<typename CharT, typename Traits>
-    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, unit) noexcept
-    {
-      return os << '\'' << "none" << '\'';
-    }
+    template<_::stream Os> friend auto& operator<<(Os& os, unit) noexcept { return os << '\'' << "none" << '\''; }
   };
 
   //==============================================================================================
