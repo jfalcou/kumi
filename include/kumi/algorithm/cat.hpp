@@ -37,44 +37,40 @@ namespace kumi
   //================================================================================================
   template<product_type... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto cat(Ts&&... ts)
-  requires ( follows_same_semantic<Ts...> )
+  requires(follows_same_semantic<Ts...>)
   {
-    if constexpr(sizeof...(Ts) == 0) return tuple{};
+    if constexpr (sizeof...(Ts) == 0) return tuple{};
     else
     {
       // count is at least 1 so MSVC don't cry when we use a 0-sized array
       constexpr auto count = (1ULL + ... + size_v<Ts>);
-      constexpr auto pos = [&]()
-      {
-        struct { std::size_t t[count],e[count]; } that{};
+      constexpr auto pos = [&]() {
+        struct
+        {
+          std::size_t t[count], e[count];
+        } that{};
         std::size_t k = 0, offset = 0;
 
-        auto locate = [&]<std::size_t... I>(std::index_sequence<I...>)
-        {
-          (((that.t[I+offset] = k),(that.e[I+offset] = I)),...);
+        auto locate = [&]<std::size_t... I>(std::index_sequence<I...>) {
+          (((that.t[I + offset] = k), (that.e[I + offset] = I)), ...);
           offset += sizeof...(I);
           k++;
         };
 
-        (locate(std::make_index_sequence<size_v<Ts>>{}),...);
+        (locate(std::make_index_sequence<size_v<Ts>>{}), ...);
 
         return that;
       }();
-    
+
       using res_type = result::common_product_type_t<std::remove_cvref_t<Ts>...>;
 
-      return [&]<std::size_t... N>(auto&& tuples, std::index_sequence<N...>)
-      {
-        using rts  = std::remove_cvref_t<decltype(tuples)>;
-        
-        using type = _::builder_make_t<res_type
-                        , element_t<pos.e[N]
-                            , std::remove_cvref_t<element_t<pos.t[N], rts>>
-                            >...
-                        >;
+      return [&]<std::size_t... N>(auto&& tuples, std::index_sequence<N...>) {
+        using rts = std::remove_cvref_t<decltype(tuples)>;
 
-        return type{ get<pos.e[N]>(get<pos.t[N]>(KUMI_FWD(tuples)))... };
-      }(kumi::forward_as_tuple(KUMI_FWD(ts)...), std::make_index_sequence<count-1>{});
+        using type = _::builder_make_t<res_type, element_t<pos.e[N], std::remove_cvref_t<element_t<pos.t[N], rts>>>...>;
+
+        return type{get<pos.e[N]>(get<pos.t[N]>(KUMI_FWD(tuples)))...};
+      }(kumi::forward_as_tuple(KUMI_FWD(ts)...), std::make_index_sequence<count - 1>{});
     }
   }
 
@@ -82,9 +78,9 @@ namespace kumi
   {
     template<product_type... Ts> struct cat
     {
-      using type = decltype( kumi::cat( std::declval<Ts>()... ) );
+      using type = decltype(kumi::cat(std::declval<Ts>()...));
     };
 
-    template<product_type... Ts> using cat_t  = typename cat<Ts...>::type;
+    template<product_type... Ts> using cat_t = typename cat<Ts...>::type;
   }
 }

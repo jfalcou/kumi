@@ -1,4 +1,4 @@
-exclude: ^doc/.*
+exclude: ^doc/.*|^test/doc/.*
 
 repos:
 - repo: https://github.com/pre-commit/pre-commit-hooks

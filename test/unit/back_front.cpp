@@ -32,7 +32,7 @@ TTS_CASE("Check access via kumi::back")
   TTS_EQUAL(kumi::back(t4), 4);
   kumi::back(t4) = 357;
   TTS_EQUAL(kumi::back(t4), 357);
-    
+
   kumi::tuple t5 = {3., 'f', moveonly{}};
   TTS_EXPECT_COMPILES(t5, { kumi::back(std::move(t5)); });
 };
@@ -74,8 +74,8 @@ TTS_CASE("Check access via kumi::front")
 
 TTS_CASE("Check access via constexpr kumi::front")
 {
-  TTS_CONSTEXPR_EQUAL(kumi::front(kumi::tuple{1}), 1  );
+  TTS_CONSTEXPR_EQUAL(kumi::front(kumi::tuple{1}), 1);
   TTS_CONSTEXPR_EQUAL(kumi::front(kumi::tuple{1.f, 2}), 1.f);
-  TTS_CONSTEXPR_EQUAL(kumi::front(kumi::tuple{1., 2.f, 3}), 1. );
+  TTS_CONSTEXPR_EQUAL(kumi::front(kumi::tuple{1., 2.f, 3}), 1.);
   TTS_CONSTEXPR_EQUAL(kumi::front(kumi::tuple{'1', 2., 3.f, 4}), '1');
 };

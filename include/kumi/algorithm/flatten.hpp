@@ -14,78 +14,69 @@ namespace kumi
     //==============================================================================================
     // Flatten helpers used to handle prefix name concatenation for records without altering API
     //==============================================================================================
-    template<typename T>
-    KUMI_ABI constexpr auto flat_one(T && t)
+    template<typename T> KUMI_ABI constexpr auto flat_one(T&& t)
     {
-      if constexpr(sized_product_type<T,0>) return KUMI_FWD(t); 
-      else return [&]<std::size_t...I>(std::index_sequence<I...>)
-      {
-        auto v_or_r = [&]<typename V>(V && v)
-        {
-          using FV = kumi::result::field_value_of_t<V>;
-          constexpr auto name = name_of(as<V>{});
-          
-          if constexpr ( record_type<FV> )
-          {
-            return [&]<std::size_t...J>( std::index_sequence<J...> )
-            {
-                return record { field< concatenate_str<name, name_of(as<element_t<J,FV>>{})>() > 
-                              = (field_value_of(get<J>(field_value_of(KUMI_FWD(v)))))... };
-            }(std::make_index_sequence<size_v<FV>>{});
-          }
-          else return record { KUMI_FWD(v) };
-        };
+      if constexpr (sized_product_type<T, 0>) return KUMI_FWD(t);
+      else
+        return [&]<std::size_t... I>(std::index_sequence<I...>) {
+          auto v_or_r = [&]<typename V>(V&& v) {
+            using FV = kumi::result::field_value_of_t<V>;
+            constexpr auto name = name_of(as<V>{});
 
-        return cat( v_or_r(get<I>(KUMI_FWD(t)))... );
-      }(std::make_index_sequence<size_v<T>>{});
+            if constexpr (record_type<FV>)
+            {
+              return [&]<std::size_t... J>(std::index_sequence<J...>) {
+                return record{field<concatenate_str<name, name_of(as<element_t<J, FV>>{})>()> =
+                                (field_value_of(get<J>(field_value_of(KUMI_FWD(v)))))...};
+              }(std::make_index_sequence<size_v<FV>>{});
+            }
+            else return record{KUMI_FWD(v)};
+          };
+
+          return cat(v_or_r(get<I>(KUMI_FWD(t)))...);
+        }(std::make_index_sequence<size_v<T>>{});
     }
 
-    template<auto Prefix, typename T>
-    KUMI_ABI constexpr auto flat(T && t)
+    template<auto Prefix, typename T> KUMI_ABI constexpr auto flat(T&& t)
     {
       using Prefix_type = std::remove_cvref_t<decltype(Prefix)>;
-      if constexpr(sized_product_type<T,0>) return KUMI_FWD(t); 
-      else return [&]<std::size_t...I>(std::index_sequence<I...>)
-      {
-        auto v_or_r = [&]<typename V>(V && v)
-        {
-          constexpr auto name = [&] {
-            if constexpr( std::is_same_v<Prefix_type, unit> )
-                  return name_of(as<V>{});
-            else  return concatenate_str<Prefix, name_of(as<V>{})>();
-          }();
+      if constexpr (sized_product_type<T, 0>) return KUMI_FWD(t);
+      else
+        return [&]<std::size_t... I>(std::index_sequence<I...>) {
+          auto v_or_r = [&]<typename V>(V&& v) {
+            constexpr auto name = [&] {
+              if constexpr (std::is_same_v<Prefix_type, unit>) return name_of(as<V>{});
+              else return concatenate_str<Prefix, name_of(as<V>{})>();
+            }();
 
-          if constexpr ( record_type<kumi::result::field_value_of_t<V>>) 
-               return flat<name>(field_value_of(KUMI_FWD(v)));
-          else return record { field<name> = (field_value_of(KUMI_FWD(v))) };
-        };
+            if constexpr (record_type<kumi::result::field_value_of_t<V>>)
+              return flat<name>(field_value_of(KUMI_FWD(v)));
+            else return record{field<name> = (field_value_of(KUMI_FWD(v)))};
+          };
 
-        return cat( v_or_r(get<I>(KUMI_FWD(t)))... );
-      }(std::make_index_sequence<size_v<T>>{});
+          return cat(v_or_r(get<I>(KUMI_FWD(t)))...);
+        }(std::make_index_sequence<size_v<T>>{});
     }
-     
-    template<auto Prefix, typename T, typename F>
-    KUMI_ABI constexpr auto flat_map(T && t, F && f)
-    {
-      if constexpr(sized_product_type<T,0>) return KUMI_FWD(t); 
-      else return [&]<std::size_t...I>(std::index_sequence<I...>)
-      {
-        using Prefix_type = std::remove_cvref_t<decltype(Prefix)>;
-        auto v_or_r = [&]<typename V>(V && v)
-        {
-          constexpr auto name = [&] {
-            if constexpr( std::is_same_v<Prefix_type, unit> )
-                  return name_of(as<V>{});
-            else  return concatenate_str<Prefix, name_of(as<V>{})>();
-          }();
-          
-          if constexpr ( record_type<kumi::result::field_value_of_t<V>> ) 
-               return flat_map<name>(field_value_of(KUMI_FWD(v)), KUMI_FWD(f)) ;
-          else return record { field<name> = KUMI_FWD(f)(field_value_of(v)) };
-        };
 
-          return cat( v_or_r(get<I>(KUMI_FWD(t)))... );
-      }(std::make_index_sequence<size_v<T>>{});
+    template<auto Prefix, typename T, typename F> KUMI_ABI constexpr auto flat_map(T&& t, F&& f)
+    {
+      if constexpr (sized_product_type<T, 0>) return KUMI_FWD(t);
+      else
+        return [&]<std::size_t... I>(std::index_sequence<I...>) {
+          using Prefix_type = std::remove_cvref_t<decltype(Prefix)>;
+          auto v_or_r = [&]<typename V>(V&& v) {
+            constexpr auto name = [&] {
+              if constexpr (std::is_same_v<Prefix_type, unit>) return name_of(as<V>{});
+              else return concatenate_str<Prefix, name_of(as<V>{})>();
+            }();
+
+            if constexpr (record_type<kumi::result::field_value_of_t<V>>)
+              return flat_map<name>(field_value_of(KUMI_FWD(v)), KUMI_FWD(f));
+            else return record{field<name> = KUMI_FWD(f)(field_value_of(v))};
+          };
+
+          return cat(v_or_r(get<I>(KUMI_FWD(t)))...);
+        }(std::make_index_sequence<size_v<T>>{});
     }
   }
 
@@ -114,24 +105,22 @@ namespace kumi
   //! ## Example
   //! @include doc/flatten.cpp
   //================================================================================================
-  template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto flatten(T && t)
+  template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto flatten(T&& t)
   {
-    if constexpr(sized_product_type<T,0>) return t;
-    else if constexpr ( record_type<T> ) return _::flat_one(KUMI_FWD(t));
+    if constexpr (sized_product_type<T, 0>) return t;
+    else if constexpr (record_type<T>) return _::flat_one(KUMI_FWD(t));
     else
     {
-      return kumi::apply( [](auto&&... m)
-                          {
-                            auto v_or_t = []<typename V>(V&& v)
-                            {
-                              if constexpr(product_type<V>) return KUMI_FWD(v);
-                              else                          return kumi::tuple{KUMI_FWD(v)};
-                            };
+      return kumi::apply(
+        [](auto&&... m) {
+          auto v_or_t = []<typename V>(V&& v) {
+            if constexpr (product_type<V>) return KUMI_FWD(v);
+            else return kumi::tuple{KUMI_FWD(v)};
+          };
 
-                            return cat( v_or_t(KUMI_FWD(m))... );
-                          }
-                        , KUMI_FWD(t)
-                        );
+          return cat(v_or_t(KUMI_FWD(m))...);
+        },
+        KUMI_FWD(t));
     }
   }
 
@@ -139,10 +128,10 @@ namespace kumi
   //! @ingroup generators
   //! @brief Recursively converts a product type of product types into a product type of all elements.
   //!
-  //! Recursively converts a product type of product types `t` into a product type of all elements of 
+  //! Recursively converts a product type of product types `t` into a product type of all elements of
   //! said product types.
-  //! 
-  //! If the Callable object f is provided, non-product type elements are processed by `f` before 
+  //!
+  //! If the Callable object f is provided, non-product type elements are processed by `f` before
   //! being inserted.
   //!
   //! @note There is a semantic difference between record and tuples flattening.
@@ -167,74 +156,65 @@ namespace kumi
   //! ## Example
   //! @include doc/flatten_all.cpp
   //================================================================================================
-  template<product_type T, typename Func>
-  [[nodiscard]] KUMI_ABI constexpr auto flatten_all(T && t, Func && f)
+  template<product_type T, typename Func> [[nodiscard]] KUMI_ABI constexpr auto flatten_all(T&& t, Func&& f)
   {
-    if constexpr(sized_product_type<T,0>) return t;
-    else if constexpr ( record_type<T> ) return _::flat_map<none>(KUMI_FWD(t), KUMI_FWD(f));
+    if constexpr (sized_product_type<T, 0>) return t;
+    else if constexpr (record_type<T>) return _::flat_map<none>(KUMI_FWD(t), KUMI_FWD(f));
     else
     {
-      return kumi::apply( [&](auto&&... m)
-                          {
-                            auto v_or_t = [&]<typename V>(V&& v)
-                            {
-                              if constexpr(product_type<V>)
-                                return flatten_all(KUMI_FWD(v),KUMI_FWD(f));
-                              else
-                                return kumi::tuple{KUMI_FWD(f)(v)};
-                            };
+      return kumi::apply(
+        [&](auto&&... m) {
+          auto v_or_t = [&]<typename V>(V&& v) {
+            if constexpr (product_type<V>) return flatten_all(KUMI_FWD(v), KUMI_FWD(f));
+            else return kumi::tuple{KUMI_FWD(f)(v)};
+          };
 
-                            return cat( v_or_t(KUMI_FWD(m))... );
-                          }
-                        , KUMI_FWD(t)
-                        );
+          return cat(v_or_t(KUMI_FWD(m))...);
+        },
+        KUMI_FWD(t));
     }
   }
 
   /// @overload
-  template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto flatten_all(T && t)
+  template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto flatten_all(T&& t)
   {
-    if constexpr(sized_product_type<T,0>) return t;
-    else if constexpr ( record_type<T> ) return _::flat<none>(KUMI_FWD(t));
+    if constexpr (sized_product_type<T, 0>) return t;
+    else if constexpr (record_type<T>) return _::flat<none>(KUMI_FWD(t));
     else
     {
-      return kumi::apply( [](auto&&... m)
-                          {
-                            auto v_or_t = []<typename V>(V&& v)
-                            {
-                              if constexpr(product_type<V>) return flatten_all(KUMI_FWD(v));
-                              else                          return kumi::tuple{KUMI_FWD(v)};
-                            };
+      return kumi::apply(
+        [](auto&&... m) {
+          auto v_or_t = []<typename V>(V&& v) {
+            if constexpr (product_type<V>) return flatten_all(KUMI_FWD(v));
+            else return kumi::tuple{KUMI_FWD(v)};
+          };
 
-                            return cat( v_or_t(KUMI_FWD(m))... );
-                          }
-                        , KUMI_FWD(t)
-                        );
+          return cat(v_or_t(KUMI_FWD(m))...);
+        },
+        KUMI_FWD(t));
     }
   }
-
 
   namespace result
   {
     template<product_type T> struct flatten
     {
-      using type = decltype( kumi::flatten( std::declval<T>() ) );
+      using type = decltype(kumi::flatten(std::declval<T>()));
     };
 
     template<product_type T, typename Func = void> struct flatten_all
     {
-      using type = decltype( kumi::flatten_all( std::declval<T>(), std::declval<Func>() ) );
+      using type = decltype(kumi::flatten_all(std::declval<T>(), std::declval<Func>()));
     };
 
     template<product_type T> struct flatten_all<T>
     {
-      using type = decltype( kumi::flatten_all( std::declval<T>() ) );
+      using type = decltype(kumi::flatten_all(std::declval<T>()));
     };
 
-    template<product_type T> using flatten_t      = typename flatten<T>::type;
+    template<product_type T> using flatten_t = typename flatten<T>::type;
 
-    template<product_type T, typename Func = void>
-    using flatten_all_t  = typename flatten_all<T, Func>::type;
+    template<product_type T, typename Func = void> using flatten_all_t = typename flatten_all<T, Func>::type;
   }
 
   //================================================================================================
@@ -260,8 +240,7 @@ namespace kumi
   //! ## Example
   //! @include doc/as_flat_ptr.cpp
   //================================================================================================
-  template<product_type T>
-  [[nodiscard]] KUMI_ABI auto as_flat_ptr(T && t) noexcept
+  template<product_type T> [[nodiscard]] KUMI_ABI auto as_flat_ptr(T&& t) noexcept
   {
     return kumi::flatten_all(KUMI_FWD(t), [](auto& m) { return &m; });
   }
@@ -270,10 +249,9 @@ namespace kumi
   {
     template<product_type T> struct as_flat_ptr
     {
-      using type = decltype( kumi::as_flat_ptr( std::declval<T>() ) );
+      using type = decltype(kumi::as_flat_ptr(std::declval<T>()));
     };
 
-    template<product_type T>
-    using as_flat_ptr_t = typename as_flat_ptr<T>::type;
+    template<product_type T> using as_flat_ptr_t = typename as_flat_ptr<T>::type;
   }
 }

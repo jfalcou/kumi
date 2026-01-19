@@ -16,31 +16,31 @@ TTS_CASE("Check tuple::extract behavior")
 
   kumi::tuple t = {'1', 2., 3.f, 4};
 
-  TTS_EQUAL((kumi::extract(t,0_c))      , (kumi::tuple{'1', 2., 3.f, 4})  );
-  TTS_EQUAL((kumi::extract(t,0_c, 4_c)) , (kumi::tuple{'1', 2., 3.f, 4})  );
-  TTS_EQUAL((kumi::extract(t,0_c, 3_c)) , (kumi::tuple {'1', 2., 3.f})    );
-  TTS_EQUAL((kumi::extract(t,0_c, 2_c)) , (kumi::tuple {'1', 2.})         );
-  TTS_EQUAL((kumi::extract(t,0_c, 1_c)) , kumi::tuple {'1'}               );
-  TTS_EQUAL((kumi::extract(t,0_c, 0_c)) , kumi::tuple {}                  );
-  TTS_EQUAL((kumi::extract(t,1_c))      , (kumi::tuple {2., 3.f, 4})      );
-  TTS_EQUAL((kumi::extract(t,1_c, 4_c)) , (kumi::tuple {2., 3.f, 4})      );
-  TTS_EQUAL((kumi::extract(t,1_c, 3_c)) , (kumi::tuple {2., 3.f})         );
-  TTS_EQUAL((kumi::extract(t,1_c, 2_c)) , kumi::tuple {2.}                );
-  TTS_EQUAL((kumi::extract(t,1_c, 1_c)) , kumi::tuple {}                  );
-  TTS_EQUAL((kumi::extract(t,2_c))      , (kumi::tuple {3.f, 4})          );
-  TTS_EQUAL((kumi::extract(t,2_c, 4_c)) , (kumi::tuple {3.f, 4})          );
-  TTS_EQUAL((kumi::extract(t,2_c, 3_c)) , (kumi::tuple {3.f})             );
-  TTS_EQUAL((kumi::extract(t,2_c, 2_c)) , kumi::tuple {}                  );
-  TTS_EQUAL((kumi::extract(t,3_c))      , kumi::tuple {4}                 );
-  TTS_EQUAL((kumi::extract(t,3_c, 4_c)) , kumi::tuple {4}                 );
-  TTS_EQUAL((kumi::extract(t,3_c, 3_c)) , kumi::tuple {}                  );
-  TTS_EQUAL((kumi::extract(t,4_c))      , kumi::tuple {}                  );
-  TTS_EQUAL((kumi::extract(t,4_c, 4_c)) , kumi::tuple {}                  );
+  TTS_EQUAL((kumi::extract(t, 0_c)), (kumi::tuple{'1', 2., 3.f, 4}));
+  TTS_EQUAL((kumi::extract(t, 0_c, 4_c)), (kumi::tuple{'1', 2., 3.f, 4}));
+  TTS_EQUAL((kumi::extract(t, 0_c, 3_c)), (kumi::tuple{'1', 2., 3.f}));
+  TTS_EQUAL((kumi::extract(t, 0_c, 2_c)), (kumi::tuple{'1', 2.}));
+  TTS_EQUAL((kumi::extract(t, 0_c, 1_c)), kumi::tuple{'1'});
+  TTS_EQUAL((kumi::extract(t, 0_c, 0_c)), kumi::tuple{});
+  TTS_EQUAL((kumi::extract(t, 1_c)), (kumi::tuple{2., 3.f, 4}));
+  TTS_EQUAL((kumi::extract(t, 1_c, 4_c)), (kumi::tuple{2., 3.f, 4}));
+  TTS_EQUAL((kumi::extract(t, 1_c, 3_c)), (kumi::tuple{2., 3.f}));
+  TTS_EQUAL((kumi::extract(t, 1_c, 2_c)), kumi::tuple{2.});
+  TTS_EQUAL((kumi::extract(t, 1_c, 1_c)), kumi::tuple{});
+  TTS_EQUAL((kumi::extract(t, 2_c)), (kumi::tuple{3.f, 4}));
+  TTS_EQUAL((kumi::extract(t, 2_c, 4_c)), (kumi::tuple{3.f, 4}));
+  TTS_EQUAL((kumi::extract(t, 2_c, 3_c)), (kumi::tuple{3.f}));
+  TTS_EQUAL((kumi::extract(t, 2_c, 2_c)), kumi::tuple{});
+  TTS_EQUAL((kumi::extract(t, 3_c)), kumi::tuple{4});
+  TTS_EQUAL((kumi::extract(t, 3_c, 4_c)), kumi::tuple{4});
+  TTS_EQUAL((kumi::extract(t, 3_c, 3_c)), kumi::tuple{});
+  TTS_EQUAL((kumi::extract(t, 4_c)), kumi::tuple{});
+  TTS_EQUAL((kumi::extract(t, 4_c, 4_c)), kumi::tuple{});
 
   TTS_EQUAL((kumi::extract(std::move(t), 0_c)), (kumi::tuple{'1', 2., 3.f, 4}));
-  
+
   kumi::tuple t2 = {moveonly{}, 3., 'f'};
-  TTS_EXPECT_COMPILES(t2, { kumi::extract(std::move(t2),0_c); });
+  TTS_EXPECT_COMPILES(t2, { kumi::extract(std::move(t2), 0_c); });
 };
 
 TTS_CASE("Check tuple::extract constexpr behavior")
@@ -49,24 +49,24 @@ TTS_CASE("Check tuple::extract constexpr behavior")
 
   constexpr kumi::tuple t = {'1', 2., 3.f, 4};
 
-  TTS_CONSTEXPR_EQUAL( kumi::extract(t,0_c)       , t                               );
-  TTS_CONSTEXPR_EQUAL((kumi::extract(t,0_c, 4_c)) , t                               );
-  TTS_CONSTEXPR_EQUAL((kumi::extract(t,0_c, 3_c)) , (kumi::tuple {'1', 2., 3.f})    );
-  TTS_CONSTEXPR_EQUAL((kumi::extract(t,0_c, 2_c)) , (kumi::tuple {'1', 2.})         );
-  TTS_CONSTEXPR_EQUAL((kumi::extract(t,0_c, 1_c)) , kumi::tuple {'1'}               );
-  TTS_CONSTEXPR_EQUAL((kumi::extract(t,0_c, 0_c)) , kumi::tuple {}                  );
-  TTS_CONSTEXPR_EQUAL((kumi::extract(t,1_c))      , (kumi::tuple {2., 3.f, 4})      );
-  TTS_CONSTEXPR_EQUAL((kumi::extract(t,1_c, 4_c)) , (kumi::tuple {2., 3.f, 4})      );
-  TTS_CONSTEXPR_EQUAL((kumi::extract(t,1_c, 3_c)) , (kumi::tuple {2., 3.f})         );
-  TTS_CONSTEXPR_EQUAL((kumi::extract(t,1_c, 2_c)) , kumi::tuple {2.}                );
-  TTS_CONSTEXPR_EQUAL((kumi::extract(t,1_c, 1_c)) , kumi::tuple {}                  );
-  TTS_CONSTEXPR_EQUAL((kumi::extract(t,2_c))      , (kumi::tuple {3.f, 4})          );
-  TTS_CONSTEXPR_EQUAL((kumi::extract(t,2_c, 4_c)) , (kumi::tuple {3.f, 4})          );
-  TTS_CONSTEXPR_EQUAL((kumi::extract(t,2_c, 3_c)) , (kumi::tuple {3.f})             );
-  TTS_CONSTEXPR_EQUAL((kumi::extract(t,2_c, 2_c)) , kumi::tuple {}                  );
-  TTS_CONSTEXPR_EQUAL((kumi::extract(t,3_c))      , kumi::tuple {4}                 );
-  TTS_CONSTEXPR_EQUAL((kumi::extract(t,3_c, 4_c)) , kumi::tuple {4}                 );
-  TTS_CONSTEXPR_EQUAL((kumi::extract(t,3_c, 3_c)) , kumi::tuple {}                  );
-  TTS_CONSTEXPR_EQUAL((kumi::extract(t,4_c))      , kumi::tuple {}                  );
-  TTS_CONSTEXPR_EQUAL((kumi::extract(t,4_c, 4_c)) , kumi::tuple {}                  );
+  TTS_CONSTEXPR_EQUAL(kumi::extract(t, 0_c), t);
+  TTS_CONSTEXPR_EQUAL((kumi::extract(t, 0_c, 4_c)), t);
+  TTS_CONSTEXPR_EQUAL((kumi::extract(t, 0_c, 3_c)), (kumi::tuple{'1', 2., 3.f}));
+  TTS_CONSTEXPR_EQUAL((kumi::extract(t, 0_c, 2_c)), (kumi::tuple{'1', 2.}));
+  TTS_CONSTEXPR_EQUAL((kumi::extract(t, 0_c, 1_c)), kumi::tuple{'1'});
+  TTS_CONSTEXPR_EQUAL((kumi::extract(t, 0_c, 0_c)), kumi::tuple{});
+  TTS_CONSTEXPR_EQUAL((kumi::extract(t, 1_c)), (kumi::tuple{2., 3.f, 4}));
+  TTS_CONSTEXPR_EQUAL((kumi::extract(t, 1_c, 4_c)), (kumi::tuple{2., 3.f, 4}));
+  TTS_CONSTEXPR_EQUAL((kumi::extract(t, 1_c, 3_c)), (kumi::tuple{2., 3.f}));
+  TTS_CONSTEXPR_EQUAL((kumi::extract(t, 1_c, 2_c)), kumi::tuple{2.});
+  TTS_CONSTEXPR_EQUAL((kumi::extract(t, 1_c, 1_c)), kumi::tuple{});
+  TTS_CONSTEXPR_EQUAL((kumi::extract(t, 2_c)), (kumi::tuple{3.f, 4}));
+  TTS_CONSTEXPR_EQUAL((kumi::extract(t, 2_c, 4_c)), (kumi::tuple{3.f, 4}));
+  TTS_CONSTEXPR_EQUAL((kumi::extract(t, 2_c, 3_c)), (kumi::tuple{3.f}));
+  TTS_CONSTEXPR_EQUAL((kumi::extract(t, 2_c, 2_c)), kumi::tuple{});
+  TTS_CONSTEXPR_EQUAL((kumi::extract(t, 3_c)), kumi::tuple{4});
+  TTS_CONSTEXPR_EQUAL((kumi::extract(t, 3_c, 4_c)), kumi::tuple{4});
+  TTS_CONSTEXPR_EQUAL((kumi::extract(t, 3_c, 3_c)), kumi::tuple{});
+  TTS_CONSTEXPR_EQUAL((kumi::extract(t, 4_c)), kumi::tuple{});
+  TTS_CONSTEXPR_EQUAL((kumi::extract(t, 4_c, 4_c)), kumi::tuple{});
 };

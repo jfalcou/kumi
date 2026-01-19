@@ -14,14 +14,14 @@ using namespace kumi::literals;
 
 TTS_CASE("Check tuple_element of kumi::forward_as_record")
 {
-  int         i {};
-  float const f {};
+  int i{};
+  float const f{};
   auto forwarded = kumi::forward_as_record<"a", "b", "c", "d">('z', ctor_tracker(), i, f);
 
-  TTS_TYPE_IS((std::tuple_element_t<0, decltype(forwarded)>), (kumi::field_capture<"a", char &&>        ));
-  TTS_TYPE_IS((std::tuple_element_t<1, decltype(forwarded)>), (kumi::field_capture<"b", ctor_tracker &&>));
-  TTS_TYPE_IS((std::tuple_element_t<2, decltype(forwarded)>), (kumi::field_capture<"c", int &>          ));
-  TTS_TYPE_IS((std::tuple_element_t<3, decltype(forwarded)>), (kumi::field_capture<"d", float const &>  ));
+  TTS_TYPE_IS((std::tuple_element_t<0, decltype(forwarded)>), (kumi::field_capture<"a", char&&>));
+  TTS_TYPE_IS((std::tuple_element_t<1, decltype(forwarded)>), (kumi::field_capture<"b", ctor_tracker&&>));
+  TTS_TYPE_IS((std::tuple_element_t<2, decltype(forwarded)>), (kumi::field_capture<"c", int&>));
+  TTS_TYPE_IS((std::tuple_element_t<3, decltype(forwarded)>), (kumi::field_capture<"d", float const&>));
 };
 
 TTS_CASE("Check usage of kumi::record via forward_as_tuple")

@@ -13,18 +13,18 @@
 
 TTS_CASE("Check tuple_element of kumi::tuple")
 {
-  float const                         f {};
-  double                              d;
+  float const f{};
+  double d;
   std::reference_wrapper<float const> rf = f;
-  std::reference_wrapper<double>      rd = d;
+  std::reference_wrapper<double> rd = d;
 
   auto made = kumi::make_tuple('1', 2., 3.f, rf, rd);
 
   TTS_TYPE_IS((std::tuple_element_t<0, decltype(made)>), char);
   TTS_TYPE_IS((std::tuple_element_t<1, decltype(made)>), double);
   TTS_TYPE_IS((std::tuple_element_t<2, decltype(made)>), float);
-  TTS_TYPE_IS((std::tuple_element_t<3, decltype(made)>), float const &);
-  TTS_TYPE_IS((std::tuple_element_t<4, decltype(made)>), double &);
+  TTS_TYPE_IS((std::tuple_element_t<3, decltype(made)>), float const&);
+  TTS_TYPE_IS((std::tuple_element_t<4, decltype(made)>), double&);
 };
 
 TTS_CASE("Check construction of kumi::tuple via make_tuple")
@@ -61,7 +61,7 @@ TTS_CASE("Check construction of kumi::tuple via make_tuple")
   TTS_EQUAL(get<3>(t4), 4);
 
   auto m0 = moveonly{};
-  TTS_EXPECT_COMPILES(m0, {kumi::make_tuple(1.f, 'x', 3, std::move(m0));});
+  TTS_EXPECT_COMPILES(m0, { kumi::make_tuple(1.f, 'x', 3, std::move(m0)); });
 };
 
 TTS_CASE("Check construction of kumi::tuple via constexpr make_tuple")

@@ -10,14 +10,14 @@
 namespace kumi
 {
   //================================================================================================
-  //! @defgroup product_types Product_types Classes 
+  //! @defgroup product_types Product_types Classes
   //! @brief    Class definition and functions on kumi::product_types
   //!
-  //! @addtogroup product_types 
+  //! @addtogroup product_types
   //! @{
   //!   @defgroup tuple     Tuple Types and Functions
   //!   @brief    Definition for kumi::tuple class and functions
-  //!   
+  //!
   //!   @defgroup record    Record Types and Functions
   //!   @brief    Definition for kumi::record class and functions
   //! @}
