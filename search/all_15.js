@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['s_20changed_0',['s changed',['../changelog.html#autotoc_md219',1,'What&apos;s Changed'],['../changelog.html#autotoc_md215',1,'What&apos;s Changed'],['../changelog.html#autotoc_md209',1,'What&apos;s Changed'],['../changelog.html#autotoc_md204',1,'What&apos;s Changed']]],
+  ['s_20changed_0',['s changed',['../changelog.html#autotoc_md223',1,'What&apos;s Changed'],['../changelog.html#autotoc_md219',1,'What&apos;s Changed'],['../changelog.html#autotoc_md213',1,'What&apos;s Changed'],['../changelog.html#autotoc_md208',1,'What&apos;s Changed']]],
   ['setup_1',['setup',['../setup.html',1,'Setup'],['../setup.html#setup-standalone',1,'Standalone setup']]],
   ['setup_20with_20cpm_2',['Setup with CPM',['../setup.html#setup-cpm',1,'']]],
-  ['short_20example_3',['A Short Example',['../index.html#autotoc_md225',1,'']]],
+  ['short_20example_3',['A Short Example',['../index.html#autotoc_md229',1,'']]],
   ['size_4',['size',['../structkumi_1_1tuple.html#a0d0957e5314d780693c3d67344a42b3e',1,'kumi::tuple::size()'],['../structkumi_1_1indexes__t.html#a6562f464b767bcc8b38b05ba378928b5',1,'kumi::indexes_t::size()'],['../structkumi_1_1size.html',1,'kumi::size&lt; T &gt;']]],
   ['source_5',['Install from the source',['../setup.html#setup-source',1,'']]],
   ['split_6',['split',['../group__generators_ga30d07f30bbfa319dfa78a9e1a5a83a38.html#ga30d07f30bbfa319dfa78a9e1a5a83a38',1,'kumi']]],

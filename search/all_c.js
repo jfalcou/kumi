@@ -7,8 +7,8 @@ var searchData=
   ['index_5ft_4',['index_t',['../structkumi_1_1index__t.html',1,'kumi']]],
   ['indexes_5',['indexes',['../group__utility_gad9d978893c5e64520e0b0d83d133c26c.html#gad9d978893c5e64520e0b0d83d133c26c',1,'kumi']]],
   ['indexes_5ft_6',['indexes_t',['../structkumi_1_1indexes__t.html',1,'kumi::indexes_t&lt; V &gt;'],['../group__utility_gaccc36e7b78d9da78548eebf22ea28492.html#gaccc36e7b78d9da78548eebf22ea28492',1,'kumi::indexes_t(Ts...) -&gt; indexes_t&lt; Ts... &gt;']]],
-  ['infrastructure_7',['Infrastructure',['../changelog.html#autotoc_md220',1,'']]],
-  ['infrastructure_20changes_8',['infrastructure changes',['../changelog.html#autotoc_md210',1,'API and Infrastructure Changes'],['../changelog.html#autotoc_md205',1,'Infrastructure Changes']]],
+  ['infrastructure_7',['Infrastructure',['../changelog.html#autotoc_md224',1,'']]],
+  ['infrastructure_20changes_8',['infrastructure changes',['../changelog.html#autotoc_md214',1,'API and Infrastructure Changes'],['../changelog.html#autotoc_md209',1,'Infrastructure Changes']]],
   ['inner_5fproduct_9',['inner_product',['../group__reductions_ga7296647c71126e9dc46767d5a3a203bb.html#ga7296647c71126e9dc46767d5a3a203bb',1,'kumi::inner_product(S1 &amp;&amp;s1, S2 &amp;&amp;s2, T init, Sum sum, Prod prod) noexcept'],['../namespacekumi.html#a720dd1d10d09b5da1758f3bec126584b',1,'kumi::inner_product(S1 &amp;&amp;s1, S2 &amp;&amp;s2, T init) noexcept']]],
   ['install_20from_20the_20source_10',['Install from the source',['../setup.html#setup-source',1,'']]],
   ['iota_11',['iota',['../group__generators_ga19ced0b66d1e3dae7bfa60f7def6914f.html#ga19ced0b66d1e3dae7bfa60f7def6914f',1,'kumi']]],
@@ -17,5 +17,6 @@ var searchData=
   ['is_5fhomogeneous_3c_20_5f_3a_3aas_5ftuple_3c_20t_2c_20std_3a_3amake_5findex_5fsequence_3c_20size_5fv_3c_20t_20_3e_20_3e_20_3e_3a_3atype_20_3e_14',['is_homogeneous&lt; _::as_tuple&lt; T, std::make_index_sequence&lt; size_v&lt; T &gt; &gt; &gt;::type &gt;',['../structkumi_1_1is__homogeneous.html',1,'kumi']]],
   ['is_5findex_5fmap_5fv_15',['is_index_map_v',['../group__traits_gab5b49ae5dceb172900933f69d976b933.html#gab5b49ae5dceb172900933f69d976b933',1,'kumi']]],
   ['is_5fproduct_5ftype_16',['is_product_type',['../structkumi_1_1is__product__type.html',1,'kumi']]],
-  ['is_5frecord_5ftype_17',['is_record_type',['../structkumi_1_1is__record__type.html',1,'kumi']]]
+  ['is_5frecord_5ftype_17',['is_record_type',['../structkumi_1_1is__record__type.html',1,'kumi']]],
+  ['is_5fstatic_5fcontainer_18',['is_static_container',['../structkumi_1_1is__static__container.html',1,'kumi']]]
 ];

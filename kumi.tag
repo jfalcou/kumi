@@ -69,6 +69,16 @@
     <templarg>kumi::product_type T</templarg>
   </compound>
   <compound kind="struct">
+    <name>kumi::container_size</name>
+    <filename>structkumi_1_1container__size.html</filename>
+    <templarg>typename T</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::container_type</name>
+    <filename>structkumi_1_1container__type.html</filename>
+    <templarg>typename T</templarg>
+  </compound>
+  <compound kind="struct">
     <name>kumi::element</name>
     <filename>structkumi_1_1element.html</filename>
     <templarg>std::size_t I</templarg>
@@ -257,6 +267,11 @@
     <filename>structkumi_1_1is__record__type.html</filename>
     <templarg>typename T</templarg>
     <templarg>typename Enable</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::is_static_container</name>
+    <filename>structkumi_1_1is__static__container.html</filename>
+    <templarg>typename T</templarg>
   </compound>
   <compound kind="struct">
     <name>kumi::member</name>
@@ -867,6 +882,10 @@
     <filename>conceptkumi_1_1sized__product__type__or__more.html</filename>
   </compound>
   <compound kind="concept">
+    <name>kumi::static_container</name>
+    <filename>conceptkumi_1_1static__container.html</filename>
+  </compound>
+  <compound kind="concept">
     <name>kumi::std_tuple_compatible</name>
     <filename>conceptkumi_1_1std__tuple__compatible.html</filename>
   </compound>
@@ -888,6 +907,8 @@
     <class kind="class">kumi::boolean_and</class>
     <class kind="class">kumi::boolean_or</class>
     <class kind="class">kumi::boolean_xor</class>
+    <class kind="struct">kumi::container_size</class>
+    <class kind="struct">kumi::container_type</class>
     <class kind="struct">kumi::element</class>
     <class kind="class">kumi::field_capture</class>
     <class kind="class">kumi::field_name</class>
@@ -896,6 +917,7 @@
     <class kind="struct">kumi::is_homogeneous</class>
     <class kind="struct">kumi::is_product_type</class>
     <class kind="struct">kumi::is_record_type</class>
+    <class kind="struct">kumi::is_static_container</class>
     <class kind="struct">kumi::member</class>
     <class kind="class">kumi::numeric_add</class>
     <class kind="class">kumi::numeric_prod</class>
@@ -909,6 +931,7 @@
     <concept>kumi::std_tuple_compatible</concept>
     <concept>kumi::product_type</concept>
     <concept>kumi::record_type</concept>
+    <concept>kumi::static_container</concept>
     <concept>kumi::sized_product_type</concept>
     <concept>kumi::sized_product_type_or_more</concept>
     <concept>kumi::empty_product_type</concept>
@@ -2948,6 +2971,7 @@
     <concept>kumi::std_tuple_compatible</concept>
     <concept>kumi::product_type</concept>
     <concept>kumi::record_type</concept>
+    <concept>kumi::static_container</concept>
     <concept>kumi::sized_product_type</concept>
     <concept>kumi::sized_product_type_or_more</concept>
     <concept>kumi::empty_product_type</concept>
@@ -2975,10 +2999,13 @@
     <filename>group__traits.html</filename>
     <class kind="struct">kumi::all_unique_names</class>
     <class kind="struct">kumi::all_uniques</class>
+    <class kind="struct">kumi::container_size</class>
+    <class kind="struct">kumi::container_type</class>
     <class kind="struct">kumi::element</class>
     <class kind="struct">kumi::is_homogeneous</class>
     <class kind="struct">kumi::is_product_type</class>
     <class kind="struct">kumi::is_record_type</class>
+    <class kind="struct">kumi::is_static_container</class>
     <class kind="struct">kumi::member</class>
     <class kind="struct">kumi::raw_element</class>
     <class kind="struct">kumi::raw_member</class>

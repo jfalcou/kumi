@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['tuple_0',['tuple',['../structkumi_1_1tuple.html',1,'kumi']]]
+  ['size_0',['size',['../structkumi_1_1size.html',1,'kumi']]],
+  ['str_1',['str',['../structkumi_1_1str.html',1,'kumi']]]
 ];

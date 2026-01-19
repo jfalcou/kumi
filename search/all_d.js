@@ -21,7 +21,8 @@ var searchData=
   ['kumi_3a_3arecord_5ftype_18',['record_type',['../conceptkumi_1_1record__type.html',1,'kumi']]],
   ['kumi_3a_3asized_5fproduct_5ftype_19',['sized_product_type',['../conceptkumi_1_1sized__product__type.html',1,'kumi']]],
   ['kumi_3a_3asized_5fproduct_5ftype_5for_5fmore_20',['sized_product_type_or_more',['../conceptkumi_1_1sized__product__type__or__more.html',1,'kumi']]],
-  ['kumi_3a_3astd_5ftuple_5fcompatible_21',['std_tuple_compatible',['../conceptkumi_1_1std__tuple__compatible.html',1,'kumi']]],
-  ['kumi_3a_3auniquely_5fnamed_22',['uniquely_named',['../conceptkumi_1_1uniquely__named.html',1,'kumi']]],
-  ['kumi_3a_3auniquely_5ftyped_23',['uniquely_typed',['../conceptkumi_1_1uniquely__typed.html',1,'kumi']]]
+  ['kumi_3a_3astatic_5fcontainer_21',['static_container',['../conceptkumi_1_1static__container.html',1,'kumi']]],
+  ['kumi_3a_3astd_5ftuple_5fcompatible_22',['std_tuple_compatible',['../conceptkumi_1_1std__tuple__compatible.html',1,'kumi']]],
+  ['kumi_3a_3auniquely_5fnamed_23',['uniquely_named',['../conceptkumi_1_1uniquely__named.html',1,'kumi']]],
+  ['kumi_3a_3auniquely_5ftyped_24',['uniquely_typed',['../conceptkumi_1_1uniquely__typed.html',1,'kumi']]]
 ];

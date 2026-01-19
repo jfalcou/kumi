@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['1_200_20amazing_20amethyst_0',['Version 1.0 - Amazing Amethyst',['../changelog.html#autotoc_md223',1,'']]],
-  ['1_20charming_20chrysoprase_1',['Version 2.1 - Charming Chrysoprase',['../changelog.html#autotoc_md214',1,'']]],
-  ['1_20exquisite_20epidote_2',['Version 3.1 - Exquisite Epidote',['../changelog.html#autotoc_md203',1,'']]]
+  ['1_200_20amazing_20amethyst_0',['Version 1.0 - Amazing Amethyst',['../changelog.html#autotoc_md227',1,'']]],
+  ['1_20charming_20chrysoprase_1',['Version 2.1 - Charming Chrysoprase',['../changelog.html#autotoc_md218',1,'']]],
+  ['1_20exquisite_20epidote_2',['Version 3.1 - Exquisite Epidote',['../changelog.html#autotoc_md207',1,'']]]
 ];
