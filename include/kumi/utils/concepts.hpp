@@ -44,6 +44,15 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup concepts
+  //! @brief Concept specifying a type follows the Container Type semantic
+  //!
+  //! A type `T` models `kumi::static_container` if it is an homogeneous container of fixed size.
+  //================================================================================================
+  template<typename T>
+  concept static_container = is_static_container_v<std::remove_cvref_t<T>>;
+
+  //================================================================================================
+  //! @ingroup concepts
   //! @brief Concept specifying a type follows the Product Type semantic and has a known size
   //!
   //! A type `T` models `kumi::sized_product_type<N>` if it models `kumi::product_type` and has

@@ -9,6 +9,7 @@
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
 #include "test.hpp"
+#include <array>
 
 TTS_CASE("Check tuple_element of the output of result::builder_make_t")
 {

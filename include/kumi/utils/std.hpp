@@ -9,7 +9,6 @@
 
 #include <kumi/utils/concepts.hpp>
 #include <kumi/utils/traits.hpp>
-#include <array>
 #include <type_traits>
 #include <utility>
 
@@ -87,10 +86,6 @@ struct std::basic_common_reference<kumi::tuple<Ts...>, kumi::tuple<Us...>, TQual
 //==================================================================================================
 // Standard types support (for those that model `tuple-like` & are declared in `utility`)
 //==================================================================================================
-template<typename T, std::size_t N> struct kumi::is_product_type<std::array<T, N>> : std::true_type
-{
-};
-
 template<typename... Ts> struct kumi::is_product_type<std::tuple<Ts...>> : std::true_type
 {
 };
