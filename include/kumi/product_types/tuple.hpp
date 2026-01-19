@@ -212,7 +212,7 @@ namespace kumi
     {
       return apply([](auto&&... elems) { return tuple<Us...>{static_cast<Us>(elems)...}; }, *this);
     }
-   
+
     //==============================================================================================
     //! @brief  Enables static casting a tuple<Ts...> to a tuple<Us...>.
     //! @tparam Us Types composing the destination tuple
@@ -220,36 +220,30 @@ namespace kumi
     //! @note This permits the conversion from a tuple<T>& to a tuple<T&> which makes it suitable
     //!       for some zip-like cases such as building a structure of arrays iterator.
     //!
-    //! ## Example : 
+    //! ## Example :
     //! @include doc/cast.cpp
     //! @include doc/soa.cpp
     //==============================================================================================
     template<typename... Us>
-    requires( ( sizeof...(Us)==sizeof...(Ts) )
-              && ( !std::same_as<tuple<Ts...>,tuple<Us...>> )
-              && _::piecewise_constructible<tuple<Ts const&...>, tuple<Us...>> 
-            )
-    [[nodiscard]] KUMI_ABI explicit( !_::piecewise_convertible<tuple<Ts const&...>, tuple<Us...>> ) 
-    constexpr operator tuple<Us...>() const
+    requires((sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>) &&
+             _::piecewise_constructible<tuple<Ts const&...>, tuple<Us...>>)
+    [[nodiscard]] KUMI_ABI explicit(!_::piecewise_convertible<tuple<Ts const&...>, tuple<Us...>>) constexpr
+    operator tuple<Us...>() const
     {
-      return [&]<std::size_t...I>(std::index_sequence<I...>)
-      {
-        return tuple<Us...>{ static_cast<Us>(get<I>(*this))... };
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return tuple<Us...>{static_cast<Us>(get<I>(*this))...};
       }(std::make_index_sequence<sizeof...(Ts)>{});
     }
 
     /// @overload
     template<typename... Us>
-    requires( ( sizeof...(Us)==sizeof...(Ts) )
-              && ( !std::same_as<tuple<Ts...>,tuple<Us...>> )
-              && _::piecewise_constructible<tuple<Ts&...>, tuple<Us...>>
-            )
-    [[nodiscard]] KUMI_ABI explicit( !_::piecewise_convertible<tuple<Ts&...>, tuple<Us...>> ) 
-    constexpr operator tuple<Us...>() 
+    requires((sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>) &&
+             _::piecewise_constructible<tuple<Ts&...>, tuple<Us...>>)
+    [[nodiscard]] KUMI_ABI explicit(!_::piecewise_convertible<tuple<Ts&...>, tuple<Us...>>) constexpr operator tuple<
+      Us...>()
     {
-      return [&]<std::size_t...I>(std::index_sequence<I...>)
-      {
-        return tuple<Us...>{ static_cast<Us>(get<I>(*this))... };
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return tuple<Us...>{static_cast<Us>(get<I>(*this))...};
       }(std::make_index_sequence<sizeof...(Ts)>{});
     }
 
@@ -435,12 +429,20 @@ namespace kumi
 
     KUMI_ABI friend constexpr auto operator<=>(tuple<>, tuple<>) noexcept = default;
 
-    template<typename T> requires ( unit_type<T> )
-    [[nodiscard]] KUMI_ABI constexpr operator T() const noexcept { return {}; };
+    template<typename T>
+    requires(unit_type<T>)
+    [[nodiscard]] KUMI_ABI constexpr operator T() const noexcept
+    {
+      return {};
+    };
 
-    template<typename T> requires ( unit_type<T> )
-    [[nodiscard]] KUMI_ABI constexpr operator T() noexcept { return {}; };
-    
+    template<typename T>
+    requires(unit_type<T>)
+    [[nodiscard]] KUMI_ABI constexpr operator T() noexcept
+    {
+      return {};
+    };
+
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, tuple<>) noexcept
     {

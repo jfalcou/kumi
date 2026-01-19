@@ -23,11 +23,19 @@ namespace kumi
     using is_product_type = void;
     KUMI_ABI friend constexpr auto operator<=>(unit, unit) noexcept = default;
 
-    template<typename T> requires ( unit_type<T> )
-    [[nodiscard]] KUMI_ABI constexpr operator T() const noexcept { return {}; };
+    template<typename T>
+    requires(unit_type<T>)
+    [[nodiscard]] KUMI_ABI constexpr operator T() const noexcept
+    {
+      return {};
+    };
 
-    template<typename T> requires ( unit_type<T> )
-    [[nodiscard]] KUMI_ABI constexpr operator T() noexcept { return {}; };
+    template<typename T>
+    requires(unit_type<T>)
+    [[nodiscard]] KUMI_ABI constexpr operator T() noexcept
+    {
+      return {};
+    };
 
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, unit) noexcept

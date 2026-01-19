@@ -53,13 +53,12 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup concepts
-  //! @brief Concept specifying a type represent a Unit Type 
+  //! @brief Concept specifying a type represent a Unit Type
   //!
-  //! A type `T` models `kumi::unit_type` if it models std::is_empty or is nullptr_t. 
+  //! A type `T` models `kumi::unit_type` if it models std::is_empty or is nullptr_t.
   //================================================================================================
   template<typename T>
-  concept unit_type = ( product_type<T> && (size_v<T> == 0) )
-                    || std::is_same_v<std::remove_cvref_t<T>, std::nullptr_t>;
+  concept unit_type = (product_type<T> && (size_v<T> == 0)) || std::is_same_v<std::remove_cvref_t<T>, std::nullptr_t>;
 
   //================================================================================================
   //! @ingroup concepts
@@ -141,20 +140,18 @@ namespace kumi
 
     template<typename T, typename U> KUMI_ABI constexpr auto has_same_field_names()
     {
-      return []<std::size_t...I>(std::index_sequence<I...>)
-      {
-        return (can_get_field_by_name<value_as<name_of(as<element_t<I,T>>{})>, element_t<I,U>...> 
-                && ...);  
+      return []<std::size_t... I>(std::index_sequence<I...>) {
+        return (can_get_field_by_name<value_as<name_of(as<element_t<I, T>>{})>, element_t<I, U>...> && ...);
       }(std::make_index_sequence<size_v<T>>{});
     }
 
     template<typename T, typename U> KUMI_ABI constexpr auto check_named_equality()
     {
-      return []<std::size_t...I>(std::index_sequence<I...>)
-      {
-        return (_::comparable<raw_element_t<I,T>
-              , typename get_field_by_name_t<value_as<name_of(as<element_t<I,T>>{})>, element_t<I,U>...>::type>
-              && ...);  
+      return []<std::size_t... I>(std::index_sequence<I...>) {
+        return (
+          _::comparable<raw_element_t<I, T>, typename get_field_by_name_t<value_as<name_of(as<element_t<I, T>>{})>,
+                                                                          element_t<I, U>...>::type> &&
+          ...);
       }(std::make_index_sequence<size_v<T>>{});
     }
   }
@@ -167,8 +164,8 @@ namespace kumi
   //! elements satisfies kumi::equality_comparable for all their respective elements.
   //================================================================================================
   template<typename T, typename U>
-  concept equality_comparable = ( size_v<T> == size_v<U>) 
-                                && _::check_equality<std::remove_cvref_t<T>,std::remove_cvref_t<U>>();
+  concept equality_comparable =
+    (size_v<T> == size_v<U>) && _::check_equality<std::remove_cvref_t<T>, std::remove_cvref_t<U>>();
 
   //================================================================================================
   //! @ingroup concepts
@@ -253,8 +250,8 @@ namespace kumi
   //! members as `U`, and each of its fields has a corresponding field in `U` with the same name
   //================================================================================================
   template<typename T, typename U>
-  concept equivalent = ( size_v<T> == size_v<U>) 
-                       && _::has_same_field_names<std::remove_cvref_t<T>, std::remove_cvref_t<U>>();
+  concept equivalent =
+    (size_v<T> == size_v<U>) && _::has_same_field_names<std::remove_cvref_t<T>, std::remove_cvref_t<U>>();
 
   //================================================================================================
   //! @ingroup concepts

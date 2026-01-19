@@ -71,8 +71,8 @@ namespace kumi
   }
 
   //================================================================================================
-  //! @ingroup product_types 
-  //! @brief Creates a field_capture from a given value keeping the qualifiers. 
+  //! @ingroup product_types
+  //! @brief Creates a field_capture from a given value keeping the qualifiers.
   //!
   //! @note If the unqualified type of T is not a field_capture, simply forwards the parameter
   //! @tparam   Name The name to associate to the field.
@@ -89,10 +89,10 @@ namespace kumi
   //! @ingroup product_types
   //! @brief Casts the provided value to the target type using `static_cast`.
   //!
-  //! @note Even when passed in a field_capture as the conversion type, this function does not 
+  //! @note Even when passed in a field_capture as the conversion type, this function does not
   //!       rename the input parameter.
   //!
-  //! @tparam   U The type to convert the parameter to. 
+  //! @tparam   U The type to convert the parameter to.
   //! @param    t A forwarding reference to the input object.
   //! @return   A value of type U.
   //! @related kumi::field_capture
@@ -100,13 +100,12 @@ namespace kumi
   template<typename U, typename T> [[nodiscard]] KUMI_ABI constexpr decltype(auto) field_cast(T&& t) noexcept
   {
     using W = std::remove_cvref_t<U>;
-    if constexpr ( requires { W::is_field_capture; } )
-      return field_capture<name_of(as<T>{}), typename W::type>
-      { static_cast<typename W::type>(field_value_of(KUMI_FWD(t))) };
-    else if constexpr ( !requires{ std::remove_cvref_t<T>::is_field_capture; } )
+    if constexpr (requires { W::is_field_capture; })
+      return field_capture<name_of(as<T>{}), typename W::type>{
+        static_cast<typename W::type>(field_value_of(KUMI_FWD(t)))};
+    else if constexpr (!requires { std::remove_cvref_t<T>::is_field_capture; })
       return static_cast<typename W::type>(KUMI_FWD(t));
-    else
-      return field_capture<name_of(as<T>{}), U>{ static_cast<U>(field_value_of(KUMI_FWD(t))) };
+    else return field_capture<name_of(as<T>{}), U>{static_cast<U>(field_value_of(KUMI_FWD(t)))};
   }
 
   namespace result

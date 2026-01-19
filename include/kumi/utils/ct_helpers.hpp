@@ -58,8 +58,7 @@ namespace kumi
     //! @param  v The value to capture.
     //! @return A kumi::field_capture containing the value.
     //==============================================================================================
-    template<typename T>
-    constexpr field_capture<ID, std::unwrap_ref_decay_t<T>> operator=(T v) const noexcept
+    template<typename T> constexpr field_capture<ID, std::unwrap_ref_decay_t<T>> operator=(T v) const noexcept
     {
       return {std::move(v)};
     }
