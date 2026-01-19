@@ -383,7 +383,9 @@ namespace kumi
   //! @related kumi::record
   //! @brief Inserts a kumi::product_type in an output stream
   //==============================================================================================
-  template<_::stream Os, product_type T> auto& operator<<(Os& os, T const& t) noexcept
+  template<typename Os, product_type T>
+  requires(_::stream<Os>)
+  auto& operator<<(Os& os, T const& t) noexcept
   {
     if constexpr (sized_product_type<T, 0>) os << "()";
     else
