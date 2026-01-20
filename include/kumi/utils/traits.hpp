@@ -15,7 +15,6 @@
 
 namespace kumi
 {
-
   namespace _
   {
     //==============================================================================================
@@ -31,6 +30,14 @@ namespace kumi
     // Concept specifying a type is an empty standard tuple-like type.
     template<typename T>
     concept empty_tuple = (std::tuple_size<std::remove_cvref_t<T>>::value == 0);
+
+    //================================================================================================
+    //! @ingroup concepts
+    //! @brief Concept specifying a type is a standard tuple-like type.
+    //! @note Exposition only
+    //================================================================================================
+    template<typename T>
+    concept std_tuple_compatible = _::empty_tuple<T> || _::non_empty_tuple<T>;
 
     //==============================================================================================
     // Helper concepts for container detection
@@ -50,15 +57,10 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup traits
-  //! @brief Opt-in traits for types behaving like a kumi::product_type
+  //! @brief  Detects if a type follows the tuple protocol.
   //!
-  //! To be treated like a tuple, an user defined type must supports structured bindings opt-in to
-  //! kumi::product_type Semantic.
-  //!
-  //! This can be done in two ways:
-  //!   - exposing an internal `is_product_type` type that evaluates to `void`
-  //!   - specializing the `kumi::is_product_type` traits so it exposes a static constant member
-  //!     `value` that evaluates to `true`
+  //! To be treated like a product_type, a user defined type must follow the tuple protocol defined
+  //! in the standard.
   //!
   //! ## Helper value
   //! @code
@@ -67,11 +69,7 @@ namespace kumi
   //! ## Example:
   //! @include doc/adapt.cpp
   //==============================================================================================
-  template<typename T, typename Enable = void> struct is_product_type : std::false_type
-  {
-  };
-
-  template<typename T> struct is_product_type<T, typename T::is_product_type> : std::true_type
+  template<typename T> struct is_product_type : std::false_type
   {
   };
 
@@ -101,12 +99,6 @@ namespace kumi
   };
 
   template<typename T> struct is_record_type<T, typename T::is_record_type> : std::true_type
-  {
-  };
-
-  template<typename T>
-  requires(is_record_type<T>::value && (!requires { typename T::is_product_type; }))
-  struct is_product_type<T, void> : std::true_type
   {
   };
 
@@ -538,8 +530,16 @@ namespace kumi
   template<typename... Ts> struct tuple;
   template<typename... Ts> struct record;
 
+  // A type with the tuple interface is automatically a product_type
   template<typename T>
-  requires(is_static_container_v<T> && (_::non_empty_tuple<T> || _::empty_tuple<T>))
+  requires(_::std_tuple_compatible<T>)
+  struct is_product_type<T> : std::true_type
+  {
+  };
+
+  // A static container with tuple interface is indeed a product_type
+  template<typename T>
+  requires(is_static_container_v<T> && _::std_tuple_compatible<T>)
   struct is_product_type<T> : std::true_type
   {
   };

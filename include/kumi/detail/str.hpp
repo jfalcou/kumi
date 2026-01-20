@@ -8,7 +8,6 @@
 #pragma once
 
 #include <iosfwd>
-#include <cstdint>
 #include <utility>
 #include <kumi/detail/abi.hpp>
 
@@ -26,7 +25,7 @@ namespace kumi
     static constexpr std::size_t max_size = 64;
 
     char data_[max_size + 1];
-    std::uint8_t size_;
+    unsigned int size_;
 
     // -1 to be on par with std::string
     template<std::size_t N, std::size_t... Is>
@@ -71,7 +70,7 @@ namespace kumi
 
     struct
     {
-      std::uint8_t count = {};
+      unsigned int count = {};
       char t[(Strs.size() + ... + sizeof...(Strs))];
     } that;
 

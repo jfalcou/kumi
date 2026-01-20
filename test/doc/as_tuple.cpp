@@ -30,11 +30,6 @@ decltype(auto) get(vec3& v) noexcept
   if constexpr(I==2) return v.z;
 }
 
-// Opt-in for Product Type semantic
-template<>
-struct kumi::is_product_type<vec3> : std::true_type
-{};
-
 // Adapt as structured bindable type
 template<>
 struct  std::tuple_size<vec3>

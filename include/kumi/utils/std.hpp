@@ -94,15 +94,4 @@ struct std::basic_common_reference<kumi::tuple<Ts...>, kumi::tuple<Us...>, TQual
 };
 #endif
 
-//==================================================================================================
-// Standard types support (for those that model `tuple-like` & are declared in `utility`)
-//==================================================================================================
-template<typename... Ts> struct kumi::is_product_type<std::tuple<Ts...>> : std::true_type
-{
-};
-
-template<typename T1, typename T2> struct kumi::is_product_type<std::pair<T1, T2>> : std::true_type
-{
-};
-
 #endif

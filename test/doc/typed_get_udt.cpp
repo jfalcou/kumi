@@ -30,11 +30,6 @@ namespace ns
   }
 }
 
-// Opt-in for Product Type semantic
-template<>
-struct kumi::is_product_type<ns::people> : std::true_type
-{};
-
 // Adapt as structured bindable type
 template<>
 struct  std::tuple_size<ns::people>

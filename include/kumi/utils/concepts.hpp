@@ -17,20 +17,13 @@ namespace kumi
 {
   //================================================================================================
   //! @ingroup concepts
-  //! @brief Concept specifying a type is a standard tuple-like type.
-  //================================================================================================
-  template<typename T>
-  concept std_tuple_compatible = _::empty_tuple<T> || _::non_empty_tuple<T>;
-
-  //================================================================================================
-  //! @ingroup concepts
   //! @brief Concept specifying a type follows the Product Type semantic
   //!
   //! A type `T` models `kumi::product_type` if it opts in for the Product Type semantic and
   //! provides supports for structured bindings.
   //================================================================================================
   template<typename T>
-  concept product_type = std_tuple_compatible<T> && is_product_type<std::remove_cvref_t<T>>::value;
+  concept product_type = is_product_type<std::remove_cvref_t<T>>::value;
 
   //================================================================================================
   //! @ingroup concepts
