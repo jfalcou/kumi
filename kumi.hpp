@@ -51,7 +51,6 @@ namespace kumi
 #pragma clang diagnostic ignored "-Wmissing-braces"
 #endif
 #include <iosfwd>
-#include <cstdint>
 #include <utility>
 namespace kumi
 {
@@ -59,7 +58,7 @@ namespace kumi
   {
     static constexpr std::size_t max_size = 64;
     char data_[max_size + 1];
-    std::uint8_t size_;
+    unsigned int size_;
     template<std::size_t N, std::size_t... Is>
     requires(N <= max_size)
     constexpr str(char const (&s)[N], std::index_sequence<Is...>) : data_{s[Is]...}, size_(N - 1)
@@ -94,7 +93,7 @@ namespace kumi
     constexpr auto nb_strs = sizeof...(Strs);
     struct
     {
-      std::uint8_t count = {};
+      unsigned int count = {};
       char t[(Strs.size() + ... + sizeof...(Strs))];
     } that;
     auto fill = [&]<std::size_t... N>(str current, std::index_sequence<N...>) {
@@ -315,6 +314,8 @@ namespace kumi
     template<typename T>
     concept empty_tuple = (std::tuple_size<std::remove_cvref_t<T>>::value == 0);
     template<typename T>
+    concept std_tuple_compatible = _::empty_tuple<T> || _::non_empty_tuple<T>;
+    template<typename T>
     concept container_like = requires(T const& t) {
       typename T::value_type;
       typename T::size_type;
@@ -324,10 +325,7 @@ namespace kumi
       { t.data() };
     };
   }
-  template<typename T, typename Enable = void> struct is_product_type : std::false_type
-  {
-  };
-  template<typename T> struct is_product_type<T, typename T::is_product_type> : std::true_type
+  template<typename T> struct is_product_type : std::false_type
   {
   };
   template<typename T> inline constexpr auto is_product_type_v = is_product_type<T>::value;
@@ -335,11 +333,6 @@ namespace kumi
   {
   };
   template<typename T> struct is_record_type<T, typename T::is_record_type> : std::true_type
-  {
-  };
-  template<typename T>
-  requires(is_record_type<T>::value && (!requires { typename T::is_product_type; }))
-  struct is_product_type<T, void> : std::true_type
   {
   };
   template<typename T> inline constexpr auto is_record_type_v = is_record_type<T>::value;
@@ -505,7 +498,12 @@ namespace kumi
   template<typename... Ts> struct tuple;
   template<typename... Ts> struct record;
   template<typename T>
-  requires(is_static_container_v<T> && (_::non_empty_tuple<T> || _::empty_tuple<T>))
+  requires(_::std_tuple_compatible<T>)
+  struct is_product_type<T> : std::true_type
+  {
+  };
+  template<typename T>
+  requires(is_static_container_v<T> && _::std_tuple_compatible<T>)
   struct is_product_type<T> : std::true_type
   {
   };
@@ -1078,9 +1076,7 @@ namespace kumi::_
 namespace kumi
 {
   template<typename T>
-  concept std_tuple_compatible = _::empty_tuple<T> || _::non_empty_tuple<T>;
-  template<typename T>
-  concept product_type = std_tuple_compatible<T> && is_product_type<std::remove_cvref_t<T>>::value;
+  concept product_type = is_product_type<std::remove_cvref_t<T>>::value;
   template<typename T>
   concept record_type = product_type<T> && is_record_type<std::remove_cvref_t<T>>::value;
   template<typename T>
@@ -1188,7 +1184,6 @@ namespace kumi
 {
   template<indexer... V> struct indexes_t
   {
-    using is_product_type = void;
     using binder_t = _::make_binder_t<std::make_integer_sequence<int, sizeof...(V)>, V...>;
     static constexpr bool is_homogeneous = binder_t::is_homogeneous;
     static constexpr bool is_index_map = true;
@@ -1248,6 +1243,12 @@ namespace kumi
     template<typename T> constexpr field_capture<ID, std::unwrap_ref_decay_t<T>> operator=(T v) const noexcept
     {
       return {std::move(v)};
+    }
+    template<typename CharT, typename Traits>
+    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os,
+                                                         field_name const& f) noexcept
+    {
+      return os << f.name;
     }
   };
   template<str ID> inline constexpr auto field = field_name<ID>{};
@@ -1433,12 +1434,6 @@ struct std::basic_common_reference<kumi::tuple<Ts...>, kumi::tuple<Us...>, TQual
   using type = kumi::tuple<std::common_reference_t<TQual<Ts>, UQual<Us>>...>;
 };
 #endif
-template<typename... Ts> struct kumi::is_product_type<std::tuple<Ts...>> : std::true_type
-{
-};
-template<typename T1, typename T2> struct kumi::is_product_type<std::pair<T1, T2>> : std::true_type
-{
-};
 #endif
 #include <cstddef>
 namespace kumi
@@ -1555,7 +1550,6 @@ namespace kumi
 {
   template<typename... Ts> struct tuple
   {
-    using is_product_type = void;
     using binder_t = _::make_binder_t<std::make_integer_sequence<int, sizeof...(Ts)>, Ts...>;
     static constexpr bool is_homogeneous = binder_t::is_homogeneous;
     binder_t impl;
@@ -1769,7 +1763,6 @@ namespace kumi
   };
   template<> struct tuple<>
   {
-    using is_product_type = void;
     static constexpr bool is_homogeneous = false;
     static constexpr auto size() noexcept { return std::size_t{0}; }
     static constexpr auto empty() noexcept { return true; }
