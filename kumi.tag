@@ -150,6 +150,13 @@
       <anchor>a5611993be7e766b8058e96ddd8ded5b7</anchor>
       <arglist></arglist>
     </member>
+    <member kind="friend">
+      <type>friend std::basic_ostream&lt; CharT, Traits &gt; &amp;</type>
+      <name>operator&lt;&lt;</name>
+      <anchorfile>group__tuple.html</anchorfile>
+      <anchor>ga2f3ac66be5c3534e9590f806f6a6a6f5</anchor>
+      <arglist>(std::basic_ostream&lt; CharT, Traits &gt; &amp;os, field_name const &amp;f) noexcept</arglist>
+    </member>
   </compound>
   <compound kind="struct">
     <name>kumi::_::get_field_by_name&lt; Ref, std::index_sequence&lt; I... &gt;, Fields... &gt;</name>
@@ -246,7 +253,6 @@
     <name>kumi::is_product_type</name>
     <filename>structkumi_1_1is__product__type.html</filename>
     <templarg>typename T</templarg>
-    <templarg>typename Enable</templarg>
   </compound>
   <compound kind="struct">
     <name>kumi::is_record_type</name>
@@ -816,6 +822,10 @@
     <templarg>auto NTTP</templarg>
   </compound>
   <compound kind="concept">
+    <name>kumi::_::std_tuple_compatible</name>
+    <filename>conceptkumi_1_1___1_1std__tuple__compatible.html</filename>
+  </compound>
+  <compound kind="concept">
     <name>kumi::compatible_product_types</name>
     <filename>conceptkumi_1_1compatible__product__types.html</filename>
   </compound>
@@ -900,10 +910,6 @@
     <filename>conceptkumi_1_1static__container.html</filename>
   </compound>
   <compound kind="concept">
-    <name>kumi::std_tuple_compatible</name>
-    <filename>conceptkumi_1_1std__tuple__compatible.html</filename>
-  </compound>
-  <compound kind="concept">
     <name>kumi::uniquely_named</name>
     <filename>conceptkumi_1_1uniquely__named.html</filename>
   </compound>
@@ -946,7 +952,6 @@
     <class kind="class">kumi::str</class>
     <class kind="class">kumi::tuple</class>
     <class kind="class">kumi::unit</class>
-    <concept>kumi::std_tuple_compatible</concept>
     <concept>kumi::product_type</concept>
     <concept>kumi::record_type</concept>
     <concept>kumi::static_container</concept>
@@ -2987,7 +2992,6 @@
     <name>concepts</name>
     <title>Tuple Related Concepts</title>
     <filename>group__concepts.html</filename>
-    <concept>kumi::std_tuple_compatible</concept>
     <concept>kumi::product_type</concept>
     <concept>kumi::record_type</concept>
     <concept>kumi::static_container</concept>
@@ -3012,6 +3016,7 @@
     <concept>kumi::follows_same_semantic</concept>
     <concept>kumi::compatible_product_types</concept>
     <concept>kumi::monoid</concept>
+    <concept>kumi::_::std_tuple_compatible</concept>
   </compound>
   <compound kind="group">
     <name>traits</name>
@@ -3112,6 +3117,13 @@
     <filename>group__tuple.html</filename>
     <class kind="class">kumi::_::builder</class>
     <class kind="class">kumi::tuple</class>
+    <member kind="friend">
+      <type>friend std::basic_ostream&lt; CharT, Traits &gt; &amp;</type>
+      <name>kumi::field_name::operator&lt;&lt;</name>
+      <anchorfile>group__tuple.html</anchorfile>
+      <anchor>ga2f3ac66be5c3534e9590f806f6a6a6f5</anchor>
+      <arglist>(std::basic_ostream&lt; CharT, Traits &gt; &amp;os, field_name const &amp;f) noexcept</arglist>
+    </member>
     <member kind="friend">
       <type>friend std::basic_ostream&lt; CharT, Traits &gt; &amp;</type>
       <name>kumi::tuple::operator&lt;&lt;</name>

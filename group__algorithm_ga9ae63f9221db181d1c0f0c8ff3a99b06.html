@@ -193,11 +193,6 @@ Example:</h2>
 <div class="line">  }</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="comment">// Opt-in for Product Type semantic</span></div>
-<div class="line"><span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1is__product__type.html">kumi::is_product_type</a>&lt;ns::people&gt; : std::true_type</div>
-<div class="line">{};</div>
-<div class="line"> </div>
 <div class="line"><span class="comment">// Adapt as structured bindable type</span></div>
 <div class="line"><span class="keyword">template</span>&lt;&gt;</div>
 <div class="line"><span class="keyword">struct  </span>std::tuple_size&lt;ns::people&gt;</div>
@@ -214,7 +209,6 @@ Example:</h2>
 <div class="line">  std::cout &lt;&lt; kumi::get&lt;int&gt;         (peter) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="anamespacekumi_html_abd1d4a59b0cddc9d5a5aef185c9f1e46"><div class="ttname"><a href="namespacekumi.html#abd1d4a59b0cddc9d5a5aef185c9f1e46">kumi::get</a></div><div class="ttdeci">constexpr decltype(auto) get(record&lt; Ts... &gt; &amp;&amp;r) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition</b> record.hpp:401</div></div>
-<div class="ttc" id="astructkumi_1_1is__product__type_html"><div class="ttname"><a href="structkumi_1_1is__product__type.html">kumi::is_product_type</a></div><div class="ttdoc">Opt-in traits for types behaving like a kumi::product_type.</div><div class="ttdef"><b>Definition</b> traits.hpp:71</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

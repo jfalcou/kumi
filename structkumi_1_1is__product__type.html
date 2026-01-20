@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::is_product_type&lt; T, Enable &gt; Struct Template Reference</title>
+<title>kumi: kumi::is_product_type&lt; T &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -121,26 +121,22 @@ $(document).ready(function(){initNavTree('structkumi_1_1is__product__type.html',
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">kumi::is_product_type&lt; T, Enable &gt; Struct Template Reference<div class="ingroups"><a class="el" href="group__traits.html">Tuple Related Traits</a></div></div></div>
+  <div class="headertitle"><div class="title">kumi::is_product_type&lt; T &gt; Struct Template Reference<div class="ingroups"><a class="el" href="group__traits.html">Tuple Related Traits</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Opt-in traits for types behaving like a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>.  
+<p>Detects if a type follows the tuple protocol.  
  <a href="structkumi_1_1is__product__type.html#details">More...</a></p>
 
 <p><code>#include &lt;kumi/utils/traits.hpp&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T, typename Enable = void&gt;<br />
-struct kumi::is_product_type&lt; T, Enable &gt;</div><p>Opt-in traits for types behaving like a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>. </p>
-<p>To be treated like a tuple, an user defined type must supports structured bindings opt-in to <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a> Semantic.</p>
-<p>This can be done in two ways:</p><ul>
-<li>exposing an internal <code><a class="el" href="structkumi_1_1is__product__type.html" title="Opt-in traits for types behaving like a kumi::product_type.">is_product_type</a></code> type that evaluates to <code>void</code></li>
-<li>specializing the <code><a class="el" href="structkumi_1_1is__product__type.html" title="Opt-in traits for types behaving like a kumi::product_type.">kumi::is_product_type</a></code> traits so it exposes a static constant member <code>value</code> that evaluates to <code>true</code></li>
-</ul>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
+struct kumi::is_product_type&lt; T &gt;</div><p>Detects if a type follows the tuple protocol. </p>
+<p>To be treated like a product_type, a user defined type must follow the tuple protocol defined in the standard.</p>
 <h2><a class="anchor" id="autotoc_md186"></a>
 Helper value</h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> is_product_type_v = <a class="code hl_struct" href="structkumi_1_1is__product__type.html">is_product_type&lt;T&gt;::value</a>;</div>
-<div class="ttc" id="astructkumi_1_1is__product__type_html"><div class="ttname"><a href="structkumi_1_1is__product__type.html">kumi::is_product_type</a></div><div class="ttdoc">Opt-in traits for types behaving like a kumi::product_type.</div><div class="ttdef"><b>Definition</b> traits.hpp:71</div></div>
+<div class="ttc" id="astructkumi_1_1is__product__type_html"><div class="ttname"><a href="structkumi_1_1is__product__type.html">kumi::is_product_type</a></div><div class="ttdoc">Detects if a type follows the tuple protocol.</div><div class="ttdef"><b>Definition</b> traits.hpp:73</div></div>
 </div><!-- fragment --> <h2><a class="anchor" id="autotoc_md187"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
@@ -170,11 +166,6 @@ Example:</h2>
 <div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==1) <span class="keywordflow">return</span> s.age;</div>
 <div class="line">  }</div>
 <div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Opt-in for Product Type semantic</span></div>
-<div class="line"><span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1is__product__type.html">kumi::is_product_type</a>&lt;ns::people&gt; : std::true_type</div>
-<div class="line">{};</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Adapt as structured bindable type</span></div>
 <div class="line"><span class="keyword">template</span>&lt;&gt;</div>
