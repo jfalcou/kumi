@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::field_capture::field_value_of</title>
+<title>kumi: kumi::field_name::operator=</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__product__types_gad7a01eb2dfa2f318b75141023ed56d58.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('structkumi_1_1field__name_a5966f40f6ea3b63c173fd8efd892af0b.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,47 +121,48 @@ $(document).ready(function(){initNavTree('group__product__types_gad7a01eb2dfa2f3
 </div>
 
 <div class="contents">
-<a id="gad7a01eb2dfa2f318b75141023ed56d58" name="gad7a01eb2dfa2f318b75141023ed56d58"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gad7a01eb2dfa2f318b75141023ed56d58">&#9670;&#160;</a></span>field_value_of()</h2>
+<a id="a5966f40f6ea3b63c173fd8efd892af0b" name="a5966f40f6ea3b63c173fd8efd892af0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a5966f40f6ea3b63c173fd8efd892af0b">&#9670;&#160;</a></span>operator=()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="group__product__types_gafc8e80ba53336a0142f3267959c1ba71.html#gafc8e80ba53336a0142f3267959c1ba71">typename</a> <a class="el" href="group__product__types_gafc8e80ba53336a0142f3267959c1ba71.html#gafc8e80ba53336a0142f3267959c1ba71">T</a> &gt; </div>
+template&lt;<a class="el" href="structkumi_1_1str.html">str</a> ID&gt; </div>
+<div class="memtemplate">
+template&lt;typename T &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__product__types_gafc8e80ba53336a0142f3267959c1ba71.html#gafc8e80ba53336a0142f3267959c1ba71">decltype</a>(<a class="el" href="group__product__types_gafc8e80ba53336a0142f3267959c1ba71.html#gafc8e80ba53336a0142f3267959c1ba71">auto</a>) <a class="el" href="group__product__types_gafc8e80ba53336a0142f3267959c1ba71.html#gafc8e80ba53336a0142f3267959c1ba71">constexpr</a> field_value_of </td>
+          <td class="memname">constexpr <a class="el" href="structkumi_1_1field__capture.html">field_capture</a>&lt; ID, std::unwrap_ref_decay_t&lt; T &gt; &gt; <a class="el" href="structkumi_1_1field__name.html">kumi::field_name</a>&lt; ID &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__product__types_gafc8e80ba53336a0142f3267959c1ba71.html#gafc8e80ba53336a0142f3267959c1ba71">T</a> &amp;&amp;&#160;</td>
-          <td class="paramname"><em>t</em></td><td>)</td>
-          <td></td>
+          <td class="paramtype">T&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Extracts the value from a <a class="el" href="structkumi_1_1field__capture.html" title="Named wrapper over a type.">kumi::field_capture</a> or returns the parameter. </p>
-<dl class="section note"><dt>Note</dt><dd>If the unqualified type of T is not a <a class="el" href="structkumi_1_1field__capture.html" title="Named wrapper over a type.">field_capture</a>, simply forwards the parameter </dd></dl>
+<p>Builds a <a class="el" href="structkumi_1_1field__capture.html" title="Named wrapper over a type.">field_capture</a> from the given value. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>The type to unwrap </td></tr>
+    <tr><td class="paramname">T</td><td>The type to wrap. </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">t</td><td>A forwarding reference to the input object. </td></tr>
+    <tr><td class="paramname">v</td><td>The value to capture. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A forwarded value of the unwrapped object. </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structkumi_1_1field__capture.html" title="Named wrapper over a type.">kumi::field_capture</a> containing the value. </dd></dl>
 
 </div>
 </div>
@@ -171,7 +172,7 @@ template&lt;<a class="el" href="group__product__types_gafc8e80ba53336a0142f32679
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li><li class="navelem"><a class="el" href="structkumi_1_1field__capture.html">field_capture</a></li>
+    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li><li class="navelem"><a class="el" href="structkumi_1_1field__name.html">field_name</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

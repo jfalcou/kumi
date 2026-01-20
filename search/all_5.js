@@ -1,14 +1,20 @@
 var searchData=
 [
-  ['back_0',['back',['../group__utility_ga7847a3783c337053f6d5f53b24a2583f.html#ga7847a3783c337053f6d5f53b24a2583f',1,'kumi']]],
-  ['bedazzling_20beryl_1',['Version 2.0 - Bedazzling Beryl',['../changelog.html#autotoc_md222',1,'']]],
-  ['beryl_2',['Version 2.0 - Bedazzling Beryl',['../changelog.html#autotoc_md222',1,'']]],
-  ['bit_5fand_3',['bit_and',['../group__utility.html#gaa04ecc72014400d45d9ebb72bd7447cc',1,'kumi::function::bit_and'],['../group__reductions_ga14432e4394da47b90f34c962979da853.html#ga14432e4394da47b90f34c962979da853',1,'kumi::bit_and(T &amp;&amp;t, Value init)'],['../group__reductions_ga2249743d977a87399b3fd98b0cb2e55e.html#ga2249743d977a87399b3fd98b0cb2e55e',1,'kumi::bit_and(T &amp;&amp;t)']]],
-  ['bit_5for_4',['bit_or',['../group__utility.html#gac095643bedb84ce2b3fdf1bd0c4a9cc3',1,'kumi::function::bit_or'],['../group__reductions_ga4b48b6259301405bba1e0944ffa6e2c7.html#ga4b48b6259301405bba1e0944ffa6e2c7',1,'kumi::bit_or(T &amp;&amp;t, Value init)'],['../group__reductions_gaa7d3ae229843ffb2bbcabb1427ef4979.html#gaa7d3ae229843ffb2bbcabb1427ef4979',1,'kumi::bit_or(T &amp;&amp;t)']]],
-  ['bit_5fxor_5',['bit_xor',['../group__utility.html#gac2d793601af17db10563acf07dc1a29f',1,'kumi::function::bit_xor'],['../group__reductions_ga521dcc4de231768115582401a1a0419b.html#ga521dcc4de231768115582401a1a0419b',1,'kumi::bit_xor(T &amp;&amp;t, Value init)'],['../group__reductions_ga19a1070aa59a1fd90bbf39b860058f9d.html#ga19a1070aa59a1fd90bbf39b860058f9d',1,'kumi::bit_xor(T &amp;&amp;t)']]],
-  ['boolean_5fand_6',['boolean_and',['../structkumi_1_1boolean__and.html',1,'kumi']]],
-  ['boolean_5for_7',['boolean_or',['../structkumi_1_1boolean__or.html',1,'kumi']]],
-  ['boolean_5fxor_8',['boolean_xor',['../structkumi_1_1boolean__xor.html',1,'kumi']]],
-  ['bug_20fixes_9',['bug fixes',['../changelog.html#autotoc_md211',1,'Bug Fixes'],['../changelog.html#autotoc_md216',1,'Bug Fixes'],['../changelog.html#autotoc_md220',1,'Bug Fixes'],['../changelog.html#autotoc_md225',1,'Bug Fixes']]],
-  ['builder_10',['builder',['../structkumi_1_1___1_1builder.html',1,'kumi::_']]]
+  ['a_20short_20example_0',['A Short Example',['../index.html#autotoc_md228',1,'']]],
+  ['algorithms_1',['Tuple Algorithms',['../group__algorithm.html',1,'']]],
+  ['all_5fof_2',['all_of',['../group__queries_ga91aebbbef8db8781c2c48bc814beed9b.html#ga91aebbbef8db8781c2c48bc814beed9b',1,'kumi::all_of(T &amp;&amp;ts, Pred p) noexcept'],['../group__queries_gabbce9eea5df0239358c6a09bf24fb667.html#gabbce9eea5df0239358c6a09bf24fb667',1,'kumi::all_of(T &amp;&amp;ts) noexcept']]],
+  ['all_5funique_3',['all_unique',['../group__generators_gacf670e19ac40c8981f52ad0783a3e483.html#gacf670e19ac40c8981f52ad0783a3e483',1,'kumi']]],
+  ['all_5funique_5fnames_4',['all_unique_names',['../structkumi_1_1all__unique__names.html',1,'kumi']]],
+  ['all_5funiques_5',['all_uniques',['../structkumi_1_1all__uniques.html',1,'kumi']]],
+  ['amazing_20amethyst_6',['Version 1.0 - Amazing Amethyst',['../changelog.html#autotoc_md226',1,'']]],
+  ['amethyst_7',['Version 1.0 - Amazing Amethyst',['../changelog.html#autotoc_md226',1,'']]],
+  ['and_20functions_8',['and functions',['../group__utility.html',1,'Helper Types and Functions'],['../group__record.html',1,'Record Types and Functions'],['../group__tuple.html',1,'Tuple Types and Functions']]],
+  ['and_20infrastructure_20changes_9',['API and Infrastructure Changes',['../changelog.html#autotoc_md213',1,'']]],
+  ['any_5fof_10',['any_of',['../group__queries_ga4564d211f8b879d1ff2b3fb1a7fa525f.html#ga4564d211f8b879d1ff2b3fb1a7fa525f',1,'kumi::any_of(T &amp;&amp;ts, Pred p) noexcept'],['../group__queries_ga1c7e88598454517558e84d377ff681ce.html#ga1c7e88598454517558e84d377ff681ce',1,'kumi::any_of(T &amp;&amp;ts) noexcept']]],
+  ['api_20and_20infrastructure_20changes_11',['API and Infrastructure Changes',['../changelog.html#autotoc_md213',1,'']]],
+  ['apply_12',['apply',['../group__transforms_ga2c808f8956ae85b42b9b8a8ed09cc371.html#ga2c808f8956ae85b42b9b8a8ed09cc371',1,'kumi']]],
+  ['as_13',['as',['../structkumi_1_1as.html',1,'kumi']]],
+  ['as_5fflat_5fptr_14',['as_flat_ptr',['../group__generators_ga418f0a47f05b67dbb354d274dee63e4e.html#ga418f0a47f05b67dbb354d274dee63e4e',1,'kumi']]],
+  ['as_5ftuple_15',['as_tuple',['../structkumi_1_1as__tuple.html',1,'kumi']]],
+  ['autonomous_20public_20release_16',['First autonomous public release.',['../changelog.html#autotoc_md227',1,'']]]
 ];

@@ -23,5 +23,6 @@ var searchData=
   ['kumi_3a_3astatic_5fcontainer_20',['static_container',['../conceptkumi_1_1static__container.html',1,'kumi']]],
   ['kumi_3a_3astd_5ftuple_5fcompatible_21',['std_tuple_compatible',['../conceptkumi_1_1std__tuple__compatible.html',1,'kumi']]],
   ['kumi_3a_3auniquely_5fnamed_22',['uniquely_named',['../conceptkumi_1_1uniquely__named.html',1,'kumi']]],
-  ['kumi_3a_3auniquely_5ftyped_23',['uniquely_typed',['../conceptkumi_1_1uniquely__typed.html',1,'kumi']]]
+  ['kumi_3a_3auniquely_5ftyped_23',['uniquely_typed',['../conceptkumi_1_1uniquely__typed.html',1,'kumi']]],
+  ['kumi_3a_3aunit_5ftype_24',['unit_type',['../conceptkumi_1_1unit__type.html',1,'kumi']]]
 ];

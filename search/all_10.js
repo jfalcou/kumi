@@ -1,12 +1,18 @@
 var searchData=
 [
-  ['name_0',['name',['../structkumi_1_1field__capture.html#ae51b43553f7b63a2cf9d032e02324086',1,'kumi::field_capture::name'],['../structkumi_1_1field__name.html#a5611993be7e766b8058e96ddd8ded5b7',1,'kumi::field_name::name']]],
-  ['name_5fof_1',['name_of',['../group__product__types_ga05150d8b3720e050874ad6144a164fde.html#ga05150d8b3720e050874ad6144a164fde',1,'kumi::field_capture']]],
-  ['names_2',['names',['../structkumi_1_1tuple.html#a5146296246d19f751e089b380fe31bb1',1,'kumi::tuple']]],
-  ['new_20contributors_3',['New Contributors',['../changelog.html#autotoc_md217',1,'']]],
-  ['new_20features_4',['new features',['../changelog.html#autotoc_md210',1,'New Features'],['../changelog.html#autotoc_md215',1,'New Features'],['../changelog.html#autotoc_md221',1,'New Features'],['../changelog.html#autotoc_md226',1,'New Features']]],
-  ['none_5',['none',['../group__utility.html#gabe662caa7eff683f6b085c7abb76391b',1,'kumi']]],
-  ['none_5fof_6',['none_of',['../group__queries_gac3f39b08030156afeba4800b3a527565.html#gac3f39b08030156afeba4800b3a527565',1,'kumi::none_of(Tuple &amp;&amp;ts, Pred p) noexcept'],['../group__queries_ga642ca90fe3a084caace28ee7d110ed2a.html#ga642ca90fe3a084caace28ee7d110ed2a',1,'kumi::none_of(Tuple &amp;&amp;ts) noexcept']]],
-  ['numeric_5fadd_7',['numeric_add',['../structkumi_1_1numeric__add.html',1,'kumi']]],
-  ['numeric_5fprod_8',['numeric_prod',['../structkumi_1_1numeric__prod.html',1,'kumi']]]
+  ['make_5frecord_0',['make_record',['../group__record_gaaa38d1d378b716e24c974facce426d72.html#gaaa38d1d378b716e24c974facce426d72',1,'kumi::record']]],
+  ['make_5fstreamable_1',['make_streamable',['../group__utility_ga887c8b81e291a506cd119c794ca4b727.html#ga887c8b81e291a506cd119c794ca4b727',1,'kumi::_']]],
+  ['make_5ftuple_2',['make_tuple',['../group__tuple_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007',1,'kumi']]],
+  ['map_3',['map',['../group__transforms_ga95273be2688569470df001771d0f6aba.html#ga95273be2688569470df001771d0f6aba',1,'kumi']]],
+  ['map_5ffield_4',['map_field',['../group__transforms_ga7633017eddbb65a7a7cfd6739cd9bc6e.html#ga7633017eddbb65a7a7cfd6739cd9bc6e',1,'kumi']]],
+  ['map_5findex_5',['map_index',['../group__transforms_ga751b47ecd6f9746919370745fdf9515a.html#ga751b47ecd6f9746919370745fdf9515a',1,'kumi']]],
+  ['map_5freduce_6',['map_reduce',['../group__reductions_ga954395275eacfb5006a6fb84c31707c3.html#ga954395275eacfb5006a6fb84c31707c3',1,'kumi::map_reduce(Function &amp;&amp;f, M &amp;&amp;m, T &amp;&amp;t)'],['../group__reductions_ga3bdf89343768fdae54a0e33b3240e607.html#ga3bdf89343768fdae54a0e33b3240e607',1,'kumi::map_reduce(Function &amp;&amp;f, M &amp;&amp;m, T &amp;&amp;t, Value init)']]],
+  ['max_7',['max',['../group__reductions_ga72159dc27be6b9aed9cc1d12ca019f28.html#ga72159dc27be6b9aed9cc1d12ca019f28',1,'kumi::max(T &amp;&amp;t) noexcept'],['../group__reductions_gae173eedc8b731830ea5df23aec9f14fa.html#gae173eedc8b731830ea5df23aec9f14fa',1,'kumi::max(T &amp;&amp;t, F f) noexcept']]],
+  ['max_5fflat_8',['max_flat',['../group__reductions_gafa660a662111704882e6c9005f34f818.html#gafa660a662111704882e6c9005f34f818',1,'kumi']]],
+  ['member_9',['member',['../structkumi_1_1member.html',1,'kumi']]],
+  ['member_5fcast_10',['member_cast',['../group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c',1,'kumi']]],
+  ['members_5fof_11',['members_of',['../group__algorithm_gaba7cff8d6c8c8b6d03ca78df63c9eba0.html#gaba7cff8d6c8c8b6d03ca78df63c9eba0',1,'kumi']]],
+  ['min_12',['min',['../group__reductions_ga2e588148a9b7eda028da7963770a5010.html#ga2e588148a9b7eda028da7963770a5010',1,'kumi::min(T &amp;&amp;t) noexcept'],['../group__reductions_gab860bed731b3d7499e9d85b1a3ce57b6.html#gab860bed731b3d7499e9d85b1a3ce57b6',1,'kumi::min(T &amp;&amp;t, F f) noexcept']]],
+  ['min_5fflat_13',['min_flat',['../group__reductions_ga931f495837b8f1c878fbb8a625ca9442.html#ga931f495837b8f1c878fbb8a625ca9442',1,'kumi']]],
+  ['multiplies_14',['multiplies',['../group__utility.html#gaaab79e5ddd9913e237c23b6ebbe0d274',1,'kumi::function']]]
 ];

@@ -137,11 +137,11 @@ struct kumi::is_record_type&lt; T, Enable &gt;</div><p>Opt-in traits for types b
 <li>exposing an internal <code><a class="el" href="structkumi_1_1is__record__type.html" title="Opt-in traits for types behaving like a kumi::product_type.">is_record_type</a></code> type that evaluates to <code>void</code></li>
 <li>specializing the <code><a class="el" href="structkumi_1_1is__record__type.html" title="Opt-in traits for types behaving like a kumi::product_type.">kumi::is_record_type</a></code> traits so it exposes a static constant member <code>value</code> that evaluates to <code>true</code></li>
 </ul>
-<h2><a class="anchor" id="autotoc_md189"></a>
+<h2><a class="anchor" id="autotoc_md188"></a>
 Helper value</h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> is_record_type_v = <a class="code hl_struct" href="structkumi_1_1is__record__type.html">is_record_type&lt;T&gt;::value</a>;</div>
-<div class="ttc" id="astructkumi_1_1is__record__type_html"><div class="ttname"><a href="structkumi_1_1is__record__type.html">kumi::is_record_type</a></div><div class="ttdoc">Opt-in traits for types behaving like a kumi::product_type.</div><div class="ttdef"><b>Definition</b> traits.hpp:101</div></div>
-</div><!-- fragment --> <h2><a class="anchor" id="autotoc_md190"></a>
+<div class="ttc" id="astructkumi_1_1is__record__type_html"><div class="ttname"><a href="structkumi_1_1is__record__type.html">kumi::is_record_type</a></div><div class="ttdoc">Opt-in traits for types behaving like a kumi::product_type.</div><div class="ttdef"><b>Definition</b> traits.hpp:100</div></div>
+</div><!-- fragment --> <h2><a class="anchor" id="autotoc_md189"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -198,8 +198,8 @@ Example:</h2>
 <div class="line">                      );    </div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__transforms_gad3668dcbb21c0f05bba31bef051c6734_html_gad3668dcbb21c0f05bba31bef051c6734"><div class="ttname"><a href="group__transforms_gad3668dcbb21c0f05bba31bef051c6734.html#gad3668dcbb21c0f05bba31bef051c6734">kumi::for_each_field</a></div><div class="ttdeci">constexpr void for_each_field(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a kumi::record_type and its field.</div><div class="ttdef"><b>Definition</b> for_each.hpp:110</div></div>
-<div class="ttc" id="anamespacekumi_html_abd1d4a59b0cddc9d5a5aef185c9f1e46"><div class="ttname"><a href="namespacekumi.html#abd1d4a59b0cddc9d5a5aef185c9f1e46">kumi::get</a></div><div class="ttdeci">constexpr decltype(auto) get(record&lt; Ts... &gt; &amp;&amp;r) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition</b> record.hpp:387</div></div>
-<div class="ttc" id="astructkumi_1_1field__capture_html"><div class="ttname"><a href="structkumi_1_1field__capture.html">kumi::field_capture</a></div><div class="ttdoc">Named wrapper over a type.</div><div class="ttdef"><b>Definition</b> field_capture.hpp:28</div></div>
+<div class="ttc" id="anamespacekumi_html_abd1d4a59b0cddc9d5a5aef185c9f1e46"><div class="ttname"><a href="namespacekumi.html#abd1d4a59b0cddc9d5a5aef185c9f1e46">kumi::get</a></div><div class="ttdeci">constexpr decltype(auto) get(record&lt; Ts... &gt; &amp;&amp;r) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition</b> record.hpp:401</div></div>
+<div class="ttc" id="astructkumi_1_1field__capture_html"><div class="ttname"><a href="structkumi_1_1field__capture.html">kumi::field_capture</a></div><div class="ttdoc">Named wrapper over a type.</div><div class="ttdef"><b>Definition</b> field_capture.hpp:27</div></div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->

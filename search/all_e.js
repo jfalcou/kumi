@@ -1,7 +1,29 @@
 var searchData=
 [
-  ['licence_0',['licence',['../licence.html',1,'Licence'],['../index.html#autotoc_md230',1,'Licence']]],
-  ['literals_1',['literals',['../namespaceliterals.html',1,'']]],
-  ['locate_2',['locate',['../group__queries_gaa67dd04ff61ae1741dd46f6a48d6ef21.html#gaa67dd04ff61ae1741dd46f6a48d6ef21',1,'kumi']]],
-  ['log_3',['Change Log',['../changelog.html',1,'']]]
+  ['kumi_0',['kumi',['../namespacekumi.html',1,'']]],
+  ['kumi_3a_3acompatible_5fproduct_5ftypes_1',['compatible_product_types',['../conceptkumi_1_1compatible__product__types.html',1,'kumi']]],
+  ['kumi_3a_3acontains_5ffield_2',['contains_field',['../conceptkumi_1_1contains__field.html',1,'kumi']]],
+  ['kumi_3a_3acontains_5ftype_3',['contains_type',['../conceptkumi_1_1contains__type.html',1,'kumi']]],
+  ['kumi_3a_3aempty_5fproduct_5ftype_4',['empty_product_type',['../conceptkumi_1_1empty__product__type.html',1,'kumi']]],
+  ['kumi_3a_3aentirely_5funiquely_5fnamed_5',['entirely_uniquely_named',['../conceptkumi_1_1entirely__uniquely__named.html',1,'kumi']]],
+  ['kumi_3a_3aequality_5fcomparable_6',['equality_comparable',['../conceptkumi_1_1equality__comparable.html',1,'kumi']]],
+  ['kumi_3a_3aequivalent_7',['equivalent',['../conceptkumi_1_1equivalent.html',1,'kumi']]],
+  ['kumi_3a_3afollows_5fsame_5fsemantic_8',['follows_same_semantic',['../conceptkumi_1_1follows__same__semantic.html',1,'kumi']]],
+  ['kumi_3a_3ahas_5fnamed_5ffields_9',['has_named_fields',['../conceptkumi_1_1has__named__fields.html',1,'kumi']]],
+  ['kumi_3a_3ahomogeneous_5fproduct_5ftype_10',['homogeneous_product_type',['../conceptkumi_1_1homogeneous__product__type.html',1,'kumi']]],
+  ['kumi_3a_3aindex_5fmap_11',['index_map',['../conceptkumi_1_1index__map.html',1,'kumi']]],
+  ['kumi_3a_3aindexer_12',['indexer',['../conceptkumi_1_1indexer.html',1,'kumi']]],
+  ['kumi_3a_3ais_5ffully_5fnamed_13',['is_fully_named',['../conceptkumi_1_1is__fully__named.html',1,'kumi']]],
+  ['kumi_3a_3amonoid_14',['monoid',['../conceptkumi_1_1monoid.html',1,'kumi']]],
+  ['kumi_3a_3anamed_5fequality_5fcomparable_15',['named_equality_comparable',['../conceptkumi_1_1named__equality__comparable.html',1,'kumi']]],
+  ['kumi_3a_3anon_5fempty_5fproduct_5ftype_16',['non_empty_product_type',['../conceptkumi_1_1non__empty__product__type.html',1,'kumi']]],
+  ['kumi_3a_3aproduct_5ftype_17',['product_type',['../conceptkumi_1_1product__type.html',1,'kumi']]],
+  ['kumi_3a_3arecord_5ftype_18',['record_type',['../conceptkumi_1_1record__type.html',1,'kumi']]],
+  ['kumi_3a_3asized_5fproduct_5ftype_19',['sized_product_type',['../conceptkumi_1_1sized__product__type.html',1,'kumi']]],
+  ['kumi_3a_3asized_5fproduct_5ftype_5for_5fmore_20',['sized_product_type_or_more',['../conceptkumi_1_1sized__product__type__or__more.html',1,'kumi']]],
+  ['kumi_3a_3astatic_5fcontainer_21',['static_container',['../conceptkumi_1_1static__container.html',1,'kumi']]],
+  ['kumi_3a_3astd_5ftuple_5fcompatible_22',['std_tuple_compatible',['../conceptkumi_1_1std__tuple__compatible.html',1,'kumi']]],
+  ['kumi_3a_3auniquely_5fnamed_23',['uniquely_named',['../conceptkumi_1_1uniquely__named.html',1,'kumi']]],
+  ['kumi_3a_3auniquely_5ftyped_24',['uniquely_typed',['../conceptkumi_1_1uniquely__typed.html',1,'kumi']]],
+  ['kumi_3a_3aunit_5ftype_25',['unit_type',['../conceptkumi_1_1unit__type.html',1,'kumi']]]
 ];

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['zip_0',['zip',['../group__generators_ga8d9c92b3ab597b2fc3454395aefa3800.html#ga8d9c92b3ab597b2fc3454395aefa3800',1,'kumi']]],
-  ['zip_5fmax_1',['zip_max',['../group__generators_ga3e199a23061358e19db303266c1fbdb6.html#ga3e199a23061358e19db303266c1fbdb6',1,'kumi']]],
-  ['zip_5fmin_2',['zip_min',['../group__generators_gac93f85fe3a0ddf650d8318426ea983d2.html#gac93f85fe3a0ddf650d8318426ea983d2',1,'kumi']]]
+  ['what_20s_20changed_0',['what s changed',['../changelog.html#autotoc_md207',1,'What&apos;s Changed'],['../changelog.html#autotoc_md212',1,'What&apos;s Changed'],['../changelog.html#autotoc_md218',1,'What&apos;s Changed'],['../changelog.html#autotoc_md222',1,'What&apos;s Changed']]],
+  ['windows_1',['windows',['../group__generators_ga733dfa174c0e531632cc1b0dd433a593.html#ga733dfa174c0e531632cc1b0dd433a593',1,'kumi']]],
+  ['with_20cpm_2',['Setup with CPM',['../setup.html#setup-cpm',1,'']]]
 ];
