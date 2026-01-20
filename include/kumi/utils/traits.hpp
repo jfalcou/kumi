@@ -12,7 +12,6 @@
 #include <utility>
 
 #include <kumi/detail/unique.hpp>
-#include <kumi/detail/unit_type.hpp>
 
 namespace kumi
 {

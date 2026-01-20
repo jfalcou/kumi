@@ -24,7 +24,7 @@ namespace kumi::_
 
   template<std::size_t I, typename T> consteval auto make_value_as()
   {
-    if constexpr (std::same_as<decltype(name_of(as<T>{})), kumi::str>) return value_as<name_of(as<T>{})>{};
+    if constexpr (requires { std::remove_cvref_t<T>::is_field_capture; }) return value_as<name_of(as<T>{})>{};
     else return value_as<I>{};
   }
 

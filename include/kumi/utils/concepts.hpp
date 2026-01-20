@@ -53,13 +53,22 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup concepts
+  //! @brief Concept specifying a type represent a Unit Type
+  //!
+  //! A type `T` models `kumi::unit_type` if it models std::is_empty or is nullptr_t.
+  //================================================================================================
+  template<typename T>
+  concept unit_type = (product_type<T> && (size_v<T> == 0)) || std::is_same_v<std::remove_cvref_t<T>, std::nullptr_t>;
+
+  //================================================================================================
+  //! @ingroup concepts
   //! @brief Concept specifying a type follows the Product Type semantic and has a known size
   //!
   //! A type `T` models `kumi::sized_product_type<N>` if it models `kumi::product_type` and has
   //! exactly `N` elements.
   //================================================================================================
   template<typename T, std::size_t N>
-  concept sized_product_type = product_type<T> && (size_v<std::remove_cvref_t<T>> == N);
+  concept sized_product_type = product_type<T> && (size_v<T> == N);
 
   //================================================================================================
   //! @ingroup concepts
@@ -69,7 +78,7 @@ namespace kumi
   //! at least `N` elements.
   //================================================================================================
   template<typename T, std::size_t N>
-  concept sized_product_type_or_more = product_type<T> && (size_v<std::remove_cvref_t<T>> >= N);
+  concept sized_product_type_or_more = product_type<T> && (size_v<T> >= N);
 
   //================================================================================================
   //! @ingroup concepts
@@ -79,7 +88,7 @@ namespace kumi
   //! no elements.
   //================================================================================================
   template<typename T>
-  concept empty_product_type = product_type<T> && (size_v<std::remove_cvref_t<T>> == 0);
+  concept empty_product_type = product_type<T> && (size_v<T> == 0);
 
   //================================================================================================
   //! @ingroup concepts
@@ -89,7 +98,7 @@ namespace kumi
   //! at least 1 element.
   //================================================================================================
   template<typename T>
-  concept non_empty_product_type = product_type<T> && (size_v<std::remove_cvref_t<T>> != 0);
+  concept non_empty_product_type = product_type<T> && (size_v<T> != 0);
 
   //================================================================================================
   //! @ingroup concepts
@@ -132,7 +141,7 @@ namespace kumi
     template<typename T, typename U> KUMI_ABI constexpr auto has_same_field_names()
     {
       return []<std::size_t... I>(std::index_sequence<I...>) {
-        return (can_get_field_by_name<element_t<I, T>, element_t<I, U>...> && ...);
+        return (can_get_field_by_name<value_as<name_of(as<element_t<I, T>>{})>, element_t<I, U>...> && ...);
       }(std::make_index_sequence<size_v<T>>{});
     }
 
@@ -140,20 +149,11 @@ namespace kumi
     {
       return []<std::size_t... I>(std::index_sequence<I...>) {
         return (
-          _::comparable<raw_element_t<I, T>, typename get_field_by_name_t<element_t<I, T>, element_t<I, U>...>::type> &&
+          _::comparable<raw_element_t<I, T>, typename get_field_by_name_t<value_as<name_of(as<element_t<I, T>>{})>,
+                                                                          element_t<I, U>...>::type> &&
           ...);
       }(std::make_index_sequence<size_v<T>>{});
     }
-
-    // MSVC workaround for get<>
-    // MSVC doesnt SFINAE properly based on NTTP types before requires evaluation
-    // so we need this weird mechanism for it to pick the correct version.
-    template<auto Name, typename... Ts> KUMI_ABI constexpr auto contains_field()
-    {
-      if constexpr (!indexer<std::remove_cvref_t<decltype(Name)>>)
-        return can_get_field_by_name<field_capture<Name, unit>, Ts...>;
-      else return false;
-    };
   }
 
   //================================================================================================
@@ -164,8 +164,8 @@ namespace kumi
   //! elements satisfies kumi::equality_comparable for all their respective elements.
   //================================================================================================
   template<typename T, typename U>
-  concept equality_comparable = (size_v<std::remove_cvref_t<T>> == size_v<std::remove_cvref_t<U>>) &&
-                                _::check_equality<std::remove_cvref_t<T>, std::remove_cvref_t<U>>();
+  concept equality_comparable =
+    (size_v<T> == size_v<U>) && _::check_equality<std::remove_cvref_t<T>, std::remove_cvref_t<U>>();
 
   //================================================================================================
   //! @ingroup concepts
@@ -250,8 +250,8 @@ namespace kumi
   //! members as `U`, and each of its fields has a corresponding field in `U` with the same name
   //================================================================================================
   template<typename T, typename U>
-  concept equivalent = (size_v<std::remove_cvref_t<T>> == size_v<std::remove_cvref_t<U>>) &&
-                       _::has_same_field_names<std::remove_cvref_t<T>, std::remove_cvref_t<U>>();
+  concept equivalent =
+    (size_v<T> == size_v<U>) && _::has_same_field_names<std::remove_cvref_t<T>, std::remove_cvref_t<U>>();
 
   //================================================================================================
   //! @ingroup concepts

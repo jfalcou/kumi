@@ -243,6 +243,20 @@ namespace kumi
 
     KUMI_ABI friend constexpr auto operator<=>(record<>, record<>) noexcept = default;
 
+    template<typename T>
+    requires(unit_type<T>)
+    [[nodiscard]] KUMI_ABI constexpr operator T() const noexcept
+    {
+      return {};
+    };
+
+    template<typename T>
+    requires(unit_type<T>)
+    [[nodiscard]] KUMI_ABI constexpr operator T() noexcept
+    {
+      return {};
+    };
+
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, record<>) noexcept
     {

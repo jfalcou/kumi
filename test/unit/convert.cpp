@@ -11,6 +11,7 @@
 #include "test.hpp"
 #include <array>
 #include <span>
+#include <string>
 
 struct my_product_type
 {
@@ -84,4 +85,60 @@ TTS_CASE("Check type to tuple constexpr conversion")
   TTS_CONSTEXPR_EQUAL(kumi::to_tuple(in), (kumi::tuple{std::size_t{9}, std::size_t{13}}));
   TTS_CONSTEXPR_EQUAL(kumi::to_tuple(a), (kumi::tuple{1, 2, 3, 4, 5}));
   TTS_CONSTEXPR_EQUAL(kumi::to_tuple(s), (kumi::tuple{1, 2, 3, 4, 5}));
+};
+
+struct ExpInt
+{
+  explicit ExpInt(int) {}
+};
+
+void takes_tuple_int(kumi::tuple<int, int>);
+void requires_cast(kumi::tuple<ExpInt, ExpInt>);
+void takes_nullptr_t(std::nullptr_t);
+void takes_unit(kumi::unit);
+void takes_empty_tuple(kumi::tuple<>);
+void takes_empty_record(kumi::record<>);
+
+TTS_CASE("Check empty tuple conversions")
+{
+  kumi::tuple empty_t{};
+  // kumi::record empty_r{};
+  kumi::unit n{};
+
+  TTS_EXPECT_COMPILES(empty_t, { takes_nullptr_t(empty_t); });
+  TTS_EXPECT_COMPILES(empty_t, { takes_unit(empty_t); });
+  TTS_EXPECT_COMPILES(empty_t, { takes_empty_tuple(empty_t); });
+  TTS_EXPECT_COMPILES(empty_t, { takes_empty_record(empty_t); });
+
+  // TTS_EXPECT_COMPILES( empty_r, { takes_nullptr_t(empty_r);     });
+  // TTS_EXPECT_COMPILES( empty_r, { takes_unit(empty_r);          });
+  // TTS_EXPECT_COMPILES( empty_r, { takes_empty_tuple(empty_r);   });
+  // TTS_EXPECT_COMPILES( empty_r, { takes_empty_record(empty_r);  });
+
+  TTS_EXPECT_COMPILES(n, { takes_nullptr_t(n); });
+  TTS_EXPECT_COMPILES(n, { takes_unit(n); });
+  TTS_EXPECT_COMPILES(n, { takes_empty_tuple(n); });
+  TTS_EXPECT_COMPILES(n, { takes_empty_record(n); });
+};
+
+TTS_CASE("Check tuple to tuple conversion")
+{
+  kumi::tuple in{short{49}, 62.5f};
+
+  TTS_EQUAL((static_cast<kumi::tuple<int, double>>(in)), (kumi::tuple{49, 62.5}));
+  TTS_EQUAL((static_cast<kumi::tuple<char, int>>(in)), (kumi::tuple{'1', 62}));
+
+  TTS_EQUAL(static_cast<kumi::tuple<std::string>>(kumi::tuple{"some text"}), kumi::tuple{std::string("some text")});
+
+  TTS_EXPECT_COMPILES(in, { takes_tuple_int(in); });
+  TTS_EXPECT_COMPILES(in, { requires_cast(static_cast<kumi::tuple<ExpInt, ExpInt>>(in)); });
+  TTS_EXPECT_NOT_COMPILES(in, { requires_cast(in); });
+};
+
+TTS_CASE("Check tuple to tuple constexpr conversion")
+{
+  constexpr kumi::tuple in{short{49}, 62.5f};
+
+  TTS_CONSTEXPR_EQUAL((static_cast<kumi::tuple<int, double>>(in)), (kumi::tuple{49, 62.5}));
+  TTS_CONSTEXPR_EQUAL((static_cast<kumi::tuple<char, int>>(in)), (kumi::tuple{'1', 62}));
 };
