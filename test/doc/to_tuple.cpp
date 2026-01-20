@@ -30,11 +30,6 @@ decltype(auto) get(pixel& p) noexcept
   if constexpr(I==2) return p.b;
 }
 
-// Opt-in for Product Type semantic
-template<>
-struct kumi::is_product_type<pixel> : std::true_type
-{};
-
 // Adapt as structured bindable type
 template<>
 struct  std::tuple_size<pixel>

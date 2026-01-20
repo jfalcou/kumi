@@ -31,10 +31,6 @@ template<std::size_t I> constexpr decltype(auto) get(my_product_type& m) noexcep
   if constexpr (I == 1) return m.data;
 }
 
-template<> struct kumi::is_product_type<my_product_type> : std::true_type
-{
-};
-
 // Adapt as structured bindable type
 template<> struct std::tuple_size<my_product_type> : std::integral_constant<std::size_t, 2>
 {

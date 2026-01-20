@@ -62,6 +62,18 @@ namespace kumi
     {
       return {std::move(v)};
     }
+
+    //==============================================================================================
+    /// @ingroup tuple
+    //! @related kumi::tuple
+    //! @brief Inserts a kumi::tuple in an output stream
+    //==============================================================================================
+    template<typename CharT, typename Traits>
+    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os,
+                                                         field_name const& f) noexcept
+    {
+      return os << f.name;
+    }
   };
 
   //==============================================================================================
