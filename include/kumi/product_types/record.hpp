@@ -226,6 +226,26 @@ namespace kumi
     KUMI_ABI friend constexpr auto operator<=>(record<>, record<>) noexcept = default;
   };
 
+  //==============================================================================================
+  //! @related kumi::tuple
+  //! @brief Inserts a kumi::product_type in an output stream
+  //==============================================================================================
+  template<typename Os, typename... Ts>
+  requires(_::stream<Os>)
+  auto& operator<<(Os& os, record<Ts...> const& r) noexcept
+  {
+    if constexpr (sizeof...(Ts) == 0) os << "()";
+    else
+    {
+      os << "( ";
+      [&]<std::size_t... I>(std::index_sequence<I...>) {
+        ((os << _::make_streamable(get<I>(r), os) << " "), ...);
+      }(std::make_index_sequence<sizeof...(Ts)>{});
+      os << ')';
+    }
+    return os;
+  }
+
   //================================================================================================
   //! @name Record Deduction Guides
   //! @{
