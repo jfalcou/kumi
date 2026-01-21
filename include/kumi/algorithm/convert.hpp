@@ -69,7 +69,7 @@ namespace kumi
   //! @include doc/record/from_record.cpp
   //================================================================================================
   template<record_type Type, typename... Ts>
-  requires(equivalent<Type, record<Ts...>>)
+  requires(equivalent<typename _::as_tuple<Type, std::make_index_sequence<size_v<Type>>>::type, tuple<Ts...>>)
   [[nodiscard]] KUMI_ABI constexpr auto from_record(record<Ts...> const& r)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
