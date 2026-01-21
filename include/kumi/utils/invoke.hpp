@@ -48,7 +48,7 @@ namespace kumi
   KUMI_ABI constexpr decltype(auto) invoke(C&& c, Ts&&... ts) noexcept(std::is_nothrow_invocable<C, Ts...>::value)
   requires(std::is_invocable<C, Ts...>::value)
   {
-    if constexpr (std::is_member_pointer_v<std::decay_t<C>>) return invoke_memptr(c, KUMI_FWD(ts)...);
+    if constexpr (std::is_member_pointer_v<std::decay_t<C>>) return _::invoke_memptr(c, KUMI_FWD(ts)...);
     else return KUMI_FWD(c)(KUMI_FWD(ts)...);
   };
 
