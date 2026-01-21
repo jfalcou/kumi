@@ -9,6 +9,8 @@
 
 using namespace kumi::literals;
 
+// Cases : crtp, inheritance, type that models the concept
+
 /// Derived types from tuple/record
 template<typename T, bool isHomogeneous> struct trivial_product_type : kumi::tuple<T, T, T, T, T>
 {
