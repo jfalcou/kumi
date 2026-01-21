@@ -21,13 +21,14 @@ namespace kumi
   //================================================================================================
   template<typename Pred, product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto locate(Tuple&& t, Pred p) noexcept
   {
-    return kumi::apply(
-      [&](auto&&... m) {
-        bool checks[] = {p(m)...};
+    if constexpr (sized_product_type<Tuple, 0>) return 0;
+    else if constexpr (record_type<Tuple>) return locate(values_of(KUMI_FWD(t)), p);
+    else
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        bool checks[] = {invoke(p, get<I>(KUMI_FWD(t)))...};
         for (std::size_t i = 0; i < size_v<Tuple>; ++i)
           if (checks[i]) return i;
         return size_v<Tuple>;
-      },
-      KUMI_FWD(t));
+      }(std::make_index_sequence<size_v<Tuple>>{});
   }
 }

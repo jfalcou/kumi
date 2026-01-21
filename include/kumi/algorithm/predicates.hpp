@@ -22,8 +22,8 @@ namespace kumi
   {
     if constexpr (record_type<T>) return all_of(values_of(KUMI_FWD(ts)), p);
     else if constexpr (sized_product_type<T, 0>) return true;
-    else if constexpr (sized_product_type<T, 1>) return p(get<0>(KUMI_FWD(ts)));
-    else return kumi::apply([&](auto&&... m) { return (p(m) && ...); }, KUMI_FWD(ts));
+    else if constexpr (sized_product_type<T, 1>) return invoke(p, get<0>(KUMI_FWD(ts)));
+    else return kumi::apply([&](auto&&... m) { return (invoke(p, m) && ...); }, KUMI_FWD(ts));
   }
 
   //================================================================================================
@@ -55,8 +55,8 @@ namespace kumi
   {
     if constexpr (record_type<T>) return any_of(values_of(KUMI_FWD(ts)), p);
     else if constexpr (sized_product_type<T, 0>) return true;
-    else if constexpr (sized_product_type<T, 1>) return p(get<0>(KUMI_FWD(ts)));
-    else return kumi::apply([&](auto&&... m) { return (p(m) || ...); }, KUMI_FWD(ts));
+    else if constexpr (sized_product_type<T, 1>) return invoke(p, get<0>(KUMI_FWD(ts)));
+    else return kumi::apply([&](auto&&... m) { return (invoke(p, m) || ...); }, KUMI_FWD(ts));
   }
 
   //================================================================================================
@@ -116,7 +116,7 @@ namespace kumi
     constexpr std::size_t o = 1ULL;
     constexpr std::size_t z = 0ULL;
     if constexpr (sized_product_type<T, 0>) return z;
-    else return kumi::apply([&](auto&&... m) { return ((p(m) ? o : z) + ... + z); }, KUMI_FWD(ts));
+    else return kumi::apply([&](auto&&... m) { return ((invoke(p, m) ? o : z) + ... + z); }, KUMI_FWD(ts));
   }
 
   //================================================================================================
