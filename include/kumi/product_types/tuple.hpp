@@ -359,45 +359,6 @@ namespace kumi
     //==============================================================================================
 
     //==============================================================================================
-    //! @brief Invoke the Callable object f on each element of the current tuple.
-    //!
-    //! @param f	Callable object to be invoked
-    //! @return The value returned by f.
-    //!
-    //==============================================================================================
-    template<typename Function>
-    [[deprecated("Use apply() instead")]] KUMI_ABI constexpr auto operator()(Function&& f) const& noexcept(
-      noexcept(kumi::apply(KUMI_FWD(f), *this))) -> decltype(kumi::apply(KUMI_FWD(f), *this))
-    {
-      return kumi::apply(KUMI_FWD(f), *this);
-    }
-
-#if !defined(KUMI_DOXYGEN_INVOKED)
-    template<typename Function>
-    [[deprecated("Use apply() instead")]] KUMI_ABI constexpr auto operator()(Function&& f) & noexcept(
-      noexcept(kumi::apply(KUMI_FWD(f), *this))) -> decltype(kumi::apply(KUMI_FWD(f), *this))
-    {
-      return kumi::apply(KUMI_FWD(f), *this);
-    }
-
-    template<typename Function>
-    [[deprecated("Use apply() instead")]] KUMI_ABI constexpr auto operator()(Function&& f) const&& noexcept(
-      noexcept(kumi::apply(KUMI_FWD(f), static_cast<tuple const&&>(*this))))
-      -> decltype(kumi::apply(KUMI_FWD(f), static_cast<tuple const&&>(*this)))
-    {
-      return kumi::apply(KUMI_FWD(f), static_cast<tuple const&&>(*this));
-    }
-
-    template<typename Function>
-    [[deprecated("Use apply() instead")]] KUMI_ABI constexpr auto operator()(Function&& f) && noexcept(
-      noexcept(kumi::apply(KUMI_FWD(f), static_cast<tuple&&>(*this))))
-      -> decltype(kumi::apply(KUMI_FWD(f), static_cast<tuple&&>(*this)))
-    {
-      return kumi::apply(KUMI_FWD(f), static_cast<tuple&&>(*this));
-    }
-#endif
-
-    //==============================================================================================
     /// @ingroup tuple
     //! @related kumi::tuple
     //! @brief Inserts a kumi::tuple in an output stream
@@ -532,9 +493,11 @@ namespace kumi
   //! ## Example:
   //! @include doc/to_ref.cpp
   //================================================================================================
-  template<product_type Type> [[nodiscard]] KUMI_ABI constexpr auto to_ref(Type&& t)
+  template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto to_ref(T&& t)
   {
-    return apply([](auto&&... elems) { return kumi::forward_as_tuple(KUMI_FWD(elems)...); }, KUMI_FWD(t));
+    return [&]<std::size_t... I>(std::index_sequence<I...>) {
+      return kumi::forward_as_tuple(get<I>(KUMI_FWD(t))...);
+    }(std::make_index_sequence<size_v<T>>{});
   }
 
   //================================================================================================

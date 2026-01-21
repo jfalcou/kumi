@@ -65,14 +65,15 @@ namespace kumi
   //! @include doc/inclusive_scan_left.cpp
   //================================================================================================
   template<typename Function, product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_left(Function&& f, T&& t, Value init)
+  [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_left(Function f, T&& t, Value init)
   {
-    if constexpr (record_type<T>) return inclusive_scan_left(KUMI_FWD(f), values_of(KUMI_FWD(t)), init);
+    if constexpr (record_type<T>) return inclusive_scan_left(f, values_of(KUMI_FWD(t)), init);
     else if constexpr (sized_product_type<T, 0>) return tuple{};
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::scannable{f, tuple{f(init, get<0>(KUMI_FWD(t)))}} >> ... >> _::scannable{f, get<I + 1>(KUMI_FWD(t))})
+        return (_::scannable{f, tuple{invoke(f, init, get<0>(KUMI_FWD(t)))}} >> ... >>
+                _::scannable{f, get<I + 1>(KUMI_FWD(t))})
           .acc;
       }(std::make_index_sequence<size_v<T> - 1>());
     }
@@ -145,9 +146,9 @@ namespace kumi
   //! @include doc/exclusive_scan_left.cpp
   //================================================================================================
   template<typename Function, product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_left(Function&& f, T&& t, Value init)
+  [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_left(Function f, T&& t, Value init)
   {
-    if constexpr (record_type<T>) return exclusive_scan_left(KUMI_FWD(f), values_of(KUMI_FWD(t)), init);
+    if constexpr (record_type<T>) return exclusive_scan_left(f, values_of(KUMI_FWD(t)), init);
     else if constexpr (sized_product_type<T, 0>) return tuple{init};
     else
     {
@@ -224,14 +225,14 @@ namespace kumi
   //! @include doc/inclusive_scan_right.cpp
   //================================================================================================
   template<typename Function, product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_right(Function&& f, T&& t, Value init)
+  [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_right(Function f, T&& t, Value init)
   {
     if constexpr (record_type<T>) return inclusive_scan_right(KUMI_FWD(f), values_of(KUMI_FWD(t)), init);
     else if constexpr (sized_product_type<T, 0>) return tuple{};
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::scannable{f, tuple{f(get<size_v<T> - 1>(KUMI_FWD(t)), init)}}
+        return (_::scannable{f, tuple{invoke(f, get<size_v<T> - 1>(KUMI_FWD(t)), init)}}
                 << ... << _::scannable{f, get<size_v<T> - 2 - I>(KUMI_FWD(t))})
           .acc;
       }(std::make_index_sequence<size_v<T> - 1>());
@@ -305,7 +306,7 @@ namespace kumi
   //! @include doc/exclusive_scan_right.cpp
   //================================================================================================
   template<typename Function, product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_right(Function&& f, T&& t, Value init)
+  [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_right(Function f, T&& t, Value init)
   {
     if constexpr (record_type<T>) return exclusive_scan_right(KUMI_FWD(f), values_of(KUMI_FWD(t)), init);
     else if constexpr (sized_product_type<T, 0>) return tuple{init};
