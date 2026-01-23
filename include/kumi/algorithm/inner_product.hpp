@@ -21,12 +21,12 @@ namespace kumi
 
       template<typename W> KUMI_ABI friend constexpr decltype(auto) operator>>(foldable&& x, foldable<F, W>&& y)
       {
-        return _::foldable{x.func, x.func(x.value, y.value)};
+        return _::foldable{x.func, invoke(x.func, x.value, y.value)};
       }
 
       template<typename W> KUMI_ABI friend constexpr decltype(auto) operator<<(foldable&& x, foldable<F, W>&& y)
       {
-        return _::foldable{x.func, x.func(x.value, y.value)};
+        return _::foldable{x.func, invoke(x.func, x.value, y.value)};
       }
     };
 
@@ -85,8 +85,8 @@ namespace kumi
     else if constexpr (record_type<S1>)
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::foldable{sum, prod(get<name_of(as<element_t<I, S1>>{})>(KUMI_FWD(s1)),
-                                      get<name_of(as<element_t<I, S1>>{})>(KUMI_FWD(s2)))} >>
+        return (_::foldable{sum, invoke(prod, get<name_of(as<element_t<I, S1>>{})>(KUMI_FWD(s1)),
+                                        get<name_of(as<element_t<I, S1>>{})>(KUMI_FWD(s2)))} >>
                 ... >> _::foldable{sum, init})
           .value;
       }(std::make_index_sequence<size<S1>::value>());
@@ -94,7 +94,8 @@ namespace kumi
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::foldable{sum, prod(get<I>(KUMI_FWD(s1)), get<I>(KUMI_FWD(s2)))} >> ... >> _::foldable{sum, init})
+        return (_::foldable{sum, invoke(prod, get<I>(KUMI_FWD(s1)), get<I>(KUMI_FWD(s2)))} >> ... >>
+                _::foldable{sum, init})
           .value;
       }(std::make_index_sequence<size<S1>::value>());
     }

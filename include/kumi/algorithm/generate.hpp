@@ -68,7 +68,7 @@ namespace kumi
   template<std::size_t N, typename Function> [[nodiscard]] KUMI_ABI constexpr auto generate(Function const& f) noexcept
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return kumi::tuple{f(index<I>)...};
+      return kumi::tuple{invoke(f, index<I>)...};
     }(std::make_index_sequence<N>{});
   }
 

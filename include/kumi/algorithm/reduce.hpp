@@ -147,18 +147,18 @@ namespace kumi
   //! @include doc/map_reduce.cpp
   //================================================================================================
   template<product_type T, monoid M, typename Function>
-  [[nodiscard]] KUMI_ABI constexpr auto map_reduce(Function&& f, M&& m, T&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto map_reduce(Function f, M&& m, T&& t)
   {
-    if constexpr (record_type<T>) return map_reduce(KUMI_FWD(f), KUMI_FWD(m), values_of(KUMI_FWD(t)));
+    if constexpr (record_type<T>) return map_reduce(f, KUMI_FWD(m), values_of(KUMI_FWD(t)));
     else if constexpr (sized_product_type<T, 0>) return m.identity;
-    else if constexpr (sized_product_type<T, 1>) return KUMI_FWD(f)(get<0>(KUMI_FWD(t)));
+    else if constexpr (sized_product_type<T, 1>) return invoke(f, get<0>(KUMI_FWD(t)));
     else
     {
       constexpr auto pos = _::reducer<size_v<T>>();
       auto process = [&]<std::size_t I>(index_t<I>) {
         if constexpr (I < pos.count)
-          return KUMI_FWD(m)(KUMI_FWD(f)(get<pos.idx1[I]>(KUMI_FWD(t))), KUMI_FWD(f)(get<pos.idx2[I]>(KUMI_FWD(t))));
-        else return KUMI_FWD(f)(get<size_v<T> - 1>(KUMI_FWD(t)));
+          return KUMI_FWD(m)(invoke(f, get<pos.idx1[I]>(KUMI_FWD(t))), invoke(f, get<pos.idx2[I]>(KUMI_FWD(t))));
+        else return invoke(f, get<size_v<T> - 1>(KUMI_FWD(t)));
       };
 
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
@@ -198,10 +198,10 @@ namespace kumi
   //! @include doc/map_reduce.cpp
   //================================================================================================
   template<monoid M, product_type T, typename Function, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto map_reduce(Function&& f, M&& m, T&& t, Value init)
+  [[nodiscard]] KUMI_ABI constexpr auto map_reduce(Function f, M&& m, T&& t, Value init)
   {
-    if constexpr (sized_product_type<T, 0>) return KUMI_FWD(f)(init);
-    else return KUMI_FWD(m)(KUMI_FWD(f)(init), map_reduce(KUMI_FWD(f), KUMI_FWD(m), KUMI_FWD(t)));
+    if constexpr (sized_product_type<T, 0>) return invoke(f, init);
+    else return KUMI_FWD(m)(invoke(f, init), map_reduce(f, KUMI_FWD(m), KUMI_FWD(t)));
   }
 
   //================================================================================================

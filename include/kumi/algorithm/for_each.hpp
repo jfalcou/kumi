@@ -39,7 +39,7 @@ namespace kumi
         constexpr auto fields = members_of(as<Tuple>{});
         [[maybe_unused]] auto call = [&]<typename M>(M) {
           constexpr auto field = get<M::value>(fields);
-          f(get<field>(KUMI_FWD(t)), get<field>(KUMI_FWD(ts))...);
+          invoke(f, get<field>(KUMI_FWD(t)), get<field>(KUMI_FWD(ts))...);
         };
 
         (call(std::integral_constant<std::size_t, I>{}), ...);
@@ -49,7 +49,7 @@ namespace kumi
     {
       [&]<std::size_t... I>(std::index_sequence<I...>) {
         [[maybe_unused]] auto call = [&]<typename M>(M) {
-          f(get<M::value>(KUMI_FWD(t)), get<M::value>(KUMI_FWD(ts))...);
+          invoke(f, get<M::value>(KUMI_FWD(t)), get<M::value>(KUMI_FWD(ts))...);
         };
 
         (call(std::integral_constant<std::size_t, I>{}), ...);
