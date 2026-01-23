@@ -340,9 +340,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>to_ref</name>
-      <anchorfile>group__record_ga20a4570d5712ffff83908aab1753b614.html</anchorfile>
-      <anchor>ga20a4570d5712ffff83908aab1753b614</anchor>
-      <arglist>(Type &amp;&amp;r)</arglist>
+      <anchorfile>group__record_gabd73478b6d709990c2f81dc83b980c16.html</anchorfile>
+      <anchor>gabd73478b6d709990c2f81dc83b980c16</anchor>
+      <arglist>(R &amp;&amp;r)</arglist>
     </member>
     <member kind="function">
       <type>decltype(auto) constexpr</type>
@@ -375,9 +375,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>to_ref</name>
-      <anchorfile>group__record_ga20a4570d5712ffff83908aab1753b614.html</anchorfile>
-      <anchor>ga20a4570d5712ffff83908aab1753b614</anchor>
-      <arglist>(Type &amp;&amp;r)</arglist>
+      <anchorfile>group__record_gabd73478b6d709990c2f81dc83b980c16.html</anchorfile>
+      <anchor>gabd73478b6d709990c2f81dc83b980c16</anchor>
+      <arglist>(R &amp;&amp;r)</arglist>
     </member>
     <member kind="function">
       <type>decltype(auto) constexpr</type>
@@ -407,13 +407,6 @@
     <name>kumi::tuple</name>
     <filename>structkumi_1_1tuple.html</filename>
     <templarg>typename... Ts</templarg>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>operator()</name>
-      <anchorfile>structkumi_1_1tuple_ab87916d0fe851c409de6cc448521b4da.html</anchorfile>
-      <anchor>ab87916d0fe851c409de6cc448521b4da</anchor>
-      <arglist>(Function &amp;&amp;f) const &amp;noexcept(noexcept(kumi::apply(KUMI_FWD(f), *this))) -&gt; decltype(kumi::apply(KUMI_FWD(f), *this))</arglist>
-    </member>
     <member kind="function">
       <type>constexpr tuple &amp;</type>
       <name>operator=</name>
@@ -571,9 +564,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>to_ref</name>
-      <anchorfile>group__tuple_ga6cde1bebcc6150b864820645ad4cf14f.html</anchorfile>
-      <anchor>ga6cde1bebcc6150b864820645ad4cf14f</anchor>
-      <arglist>(Type &amp;&amp;t)</arglist>
+      <anchorfile>group__tuple_ga27c29bc9a5e31d7ada4ac427a18d8985.html</anchorfile>
+      <anchor>ga27c29bc9a5e31d7ada4ac427a18d8985</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>decltype(auto) constexpr</type>
@@ -767,9 +760,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>to_ref</name>
-      <anchorfile>group__tuple_ga6cde1bebcc6150b864820645ad4cf14f.html</anchorfile>
-      <anchor>ga6cde1bebcc6150b864820645ad4cf14f</anchor>
-      <arglist>(Type &amp;&amp;t)</arglist>
+      <anchorfile>group__tuple_ga27c29bc9a5e31d7ada4ac427a18d8985.html</anchorfile>
+      <anchor>ga27c29bc9a5e31d7ada4ac427a18d8985</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>decltype(auto) constexpr</type>
@@ -1014,9 +1007,9 @@
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>apply</name>
-      <anchorfile>group__transforms_ga2c808f8956ae85b42b9b8a8ed09cc371.html</anchorfile>
-      <anchor>ga2c808f8956ae85b42b9b8a8ed09cc371</anchor>
-      <arglist>(Function &amp;&amp;f, Tuple &amp;&amp;t) noexcept(_::supports_nothrow_apply&lt; Function &amp;&amp;, Tuple &amp;&amp; &gt;)</arglist>
+      <anchorfile>group__transforms_ga570ad42b8992ce6096c05dd6b2bbcf6d.html</anchorfile>
+      <anchor>ga570ad42b8992ce6096c05dd6b2bbcf6d</anchor>
+      <arglist>(Function &amp;&amp;f, T &amp;&amp;t) noexcept(_::supports_nothrow_apply&lt; Function &amp;&amp;, T &amp;&amp; &gt;)</arglist>
     </member>
     <member kind="function">
       <type>auto</type>
@@ -1119,9 +1112,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>exclusive_scan_left</name>
-      <anchorfile>group__reductions_ga4c7de497ac4fbf84207e8b5249e808a5.html</anchorfile>
-      <anchor>ga4c7de497ac4fbf84207e8b5249e808a5</anchor>
-      <arglist>(Function &amp;&amp;f, T &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_gae113f4baf3a17cc22dac25df57c06031.html</anchorfile>
+      <anchor>gae113f4baf3a17cc22dac25df57c06031</anchor>
+      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1133,9 +1126,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>exclusive_scan_right</name>
-      <anchorfile>group__reductions_ga7ad77fdfc161a999369fde5f9006d561.html</anchorfile>
-      <anchor>ga7ad77fdfc161a999369fde5f9006d561</anchor>
-      <arglist>(Function &amp;&amp;f, T &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_gae9b0c7f1e3d7ecc8463c7275dfad5078.html</anchorfile>
+      <anchor>gae9b0c7f1e3d7ecc8463c7275dfad5078</anchor>
+      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1203,9 +1196,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>flatten_all</name>
-      <anchorfile>group__generators_ga5c0915917db751d43c4a07eb884945cc.html</anchorfile>
-      <anchor>ga5c0915917db751d43c4a07eb884945cc</anchor>
-      <arglist>(T &amp;&amp;t, Func &amp;&amp;f)</arglist>
+      <anchorfile>group__generators_ga7416f4db26c4e41360e71dd449de20a6.html</anchorfile>
+      <anchor>ga7416f4db26c4e41360e71dd449de20a6</anchor>
+      <arglist>(T &amp;&amp;t, Func f)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1287,9 +1280,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>inclusive_scan_left</name>
-      <anchorfile>group__reductions_ga2593e576e29c20d318f8e763e17c10ff.html</anchorfile>
-      <anchor>ga2593e576e29c20d318f8e763e17c10ff</anchor>
-      <arglist>(Function &amp;&amp;f, T &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_gab62658d582fe17a5824465ba5e669b26.html</anchorfile>
+      <anchor>gab62658d582fe17a5824465ba5e669b26</anchor>
+      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1301,9 +1294,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>inclusive_scan_right</name>
-      <anchorfile>group__reductions_gac4836103eaea033fd6ce5e815d21b69a.html</anchorfile>
-      <anchor>gac4836103eaea033fd6ce5e815d21b69a</anchor>
-      <arglist>(Function &amp;&amp;f, T &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_gaa626c4c72c6c4f6ac575851c0dbf06bb.html</anchorfile>
+      <anchor>gaa626c4c72c6c4f6ac575851c0dbf06bb</anchor>
+      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1339,6 +1332,20 @@
       <anchorfile>group__reductions_ga7296647c71126e9dc46767d5a3a203bb.html</anchorfile>
       <anchor>ga7296647c71126e9dc46767d5a3a203bb</anchor>
       <arglist>(S1 &amp;&amp;s1, S2 &amp;&amp;s2, T init, Sum sum, Prod prod) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr decltype(auto)</type>
+      <name>invoke</name>
+      <anchorfile>group__utility_gab575cbbe8a1b85d03353f65128d351ac.html</anchorfile>
+      <anchor>gab575cbbe8a1b85d03353f65128d351ac</anchor>
+      <arglist>(C &amp;&amp;c, Ts &amp;&amp;... ts) noexcept(std::is_nothrow_invocable&lt; C, Ts... &gt;::value)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr R</type>
+      <name>invoke_r</name>
+      <anchorfile>group__utility_ga81fb4720ada9b1bff437c3340fcc98b0.html</anchorfile>
+      <anchor>ga81fb4720ada9b1bff437c3340fcc98b0</anchor>
+      <arglist>(C &amp;&amp;c, Ts &amp;&amp;... ts) noexcept(std::is_nothrow_invocable_r&lt; R, C, Ts... &gt;::value)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1378,16 +1385,16 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>map_reduce</name>
-      <anchorfile>group__reductions_ga954395275eacfb5006a6fb84c31707c3.html</anchorfile>
-      <anchor>ga954395275eacfb5006a6fb84c31707c3</anchor>
-      <arglist>(Function &amp;&amp;f, M &amp;&amp;m, T &amp;&amp;t)</arglist>
+      <anchorfile>group__reductions_gace3f0fb4e67066f6f82052efd359b2b4.html</anchorfile>
+      <anchor>gace3f0fb4e67066f6f82052efd359b2b4</anchor>
+      <arglist>(Function f, M &amp;&amp;m, T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>map_reduce</name>
-      <anchorfile>group__reductions_ga3bdf89343768fdae54a0e33b3240e607.html</anchorfile>
-      <anchor>ga3bdf89343768fdae54a0e33b3240e607</anchor>
-      <arglist>(Function &amp;&amp;f, M &amp;&amp;m, T &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_gaa6b16ddb18150ef85f789e80593b68a2.html</anchorfile>
+      <anchor>gaa6b16ddb18150ef85f789e80593b68a2</anchor>
+      <arglist>(Function f, M &amp;&amp;m, T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -2229,6 +2236,20 @@
       <arglist>(Ts...) -&gt; indexes_t&lt; Ts... &gt;</arglist>
     </member>
     <member kind="function">
+      <type>constexpr decltype(auto)</type>
+      <name>kumi::invoke</name>
+      <anchorfile>group__utility_gab575cbbe8a1b85d03353f65128d351ac.html</anchorfile>
+      <anchor>gab575cbbe8a1b85d03353f65128d351ac</anchor>
+      <arglist>(C &amp;&amp;c, Ts &amp;&amp;... ts) noexcept(std::is_nothrow_invocable&lt; C, Ts... &gt;::value)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr R</type>
+      <name>kumi::invoke_r</name>
+      <anchorfile>group__utility_ga81fb4720ada9b1bff437c3340fcc98b0.html</anchorfile>
+      <anchor>ga81fb4720ada9b1bff437c3340fcc98b0</anchor>
+      <arglist>(C &amp;&amp;c, Ts &amp;&amp;... ts) noexcept(std::is_nothrow_invocable_r&lt; R, C, Ts... &gt;::value)</arglist>
+    </member>
+    <member kind="function">
       <type>auto</type>
       <name>kumi::_::make_streamable</name>
       <anchorfile>group__utility_ga887c8b81e291a506cd119c794ca4b727.html</anchorfile>
@@ -2420,9 +2441,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::record::to_ref</name>
-      <anchorfile>group__record_ga20a4570d5712ffff83908aab1753b614.html</anchorfile>
-      <anchor>ga20a4570d5712ffff83908aab1753b614</anchor>
-      <arglist>(Type &amp;&amp;r)</arglist>
+      <anchorfile>group__record_gabd73478b6d709990c2f81dc83b980c16.html</anchorfile>
+      <anchor>gabd73478b6d709990c2f81dc83b980c16</anchor>
+      <arglist>(R &amp;&amp;r)</arglist>
     </member>
     <member kind="function">
       <type>decltype(auto) constexpr</type>
@@ -2511,9 +2532,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::exclusive_scan_left</name>
-      <anchorfile>group__reductions_ga4c7de497ac4fbf84207e8b5249e808a5.html</anchorfile>
-      <anchor>ga4c7de497ac4fbf84207e8b5249e808a5</anchor>
-      <arglist>(Function &amp;&amp;f, T &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_gae113f4baf3a17cc22dac25df57c06031.html</anchorfile>
+      <anchor>gae113f4baf3a17cc22dac25df57c06031</anchor>
+      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -2525,9 +2546,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::exclusive_scan_right</name>
-      <anchorfile>group__reductions_ga7ad77fdfc161a999369fde5f9006d561.html</anchorfile>
-      <anchor>ga7ad77fdfc161a999369fde5f9006d561</anchor>
-      <arglist>(Function &amp;&amp;f, T &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_gae9b0c7f1e3d7ecc8463c7275dfad5078.html</anchorfile>
+      <anchor>gae9b0c7f1e3d7ecc8463c7275dfad5078</anchor>
+      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -2567,9 +2588,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::inclusive_scan_left</name>
-      <anchorfile>group__reductions_ga2593e576e29c20d318f8e763e17c10ff.html</anchorfile>
-      <anchor>ga2593e576e29c20d318f8e763e17c10ff</anchor>
-      <arglist>(Function &amp;&amp;f, T &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_gab62658d582fe17a5824465ba5e669b26.html</anchorfile>
+      <anchor>gab62658d582fe17a5824465ba5e669b26</anchor>
+      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -2581,9 +2602,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::inclusive_scan_right</name>
-      <anchorfile>group__reductions_gac4836103eaea033fd6ce5e815d21b69a.html</anchorfile>
-      <anchor>gac4836103eaea033fd6ce5e815d21b69a</anchor>
-      <arglist>(Function &amp;&amp;f, T &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_gaa626c4c72c6c4f6ac575851c0dbf06bb.html</anchorfile>
+      <anchor>gaa626c4c72c6c4f6ac575851c0dbf06bb</anchor>
+      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -2602,16 +2623,16 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::map_reduce</name>
-      <anchorfile>group__reductions_ga954395275eacfb5006a6fb84c31707c3.html</anchorfile>
-      <anchor>ga954395275eacfb5006a6fb84c31707c3</anchor>
-      <arglist>(Function &amp;&amp;f, M &amp;&amp;m, T &amp;&amp;t)</arglist>
+      <anchorfile>group__reductions_gace3f0fb4e67066f6f82052efd359b2b4.html</anchorfile>
+      <anchor>gace3f0fb4e67066f6f82052efd359b2b4</anchor>
+      <arglist>(Function f, M &amp;&amp;m, T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::map_reduce</name>
-      <anchorfile>group__reductions_ga3bdf89343768fdae54a0e33b3240e607.html</anchorfile>
-      <anchor>ga3bdf89343768fdae54a0e33b3240e607</anchor>
-      <arglist>(Function &amp;&amp;f, M &amp;&amp;m, T &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_gaa6b16ddb18150ef85f789e80593b68a2.html</anchorfile>
+      <anchor>gaa6b16ddb18150ef85f789e80593b68a2</anchor>
+      <arglist>(Function f, M &amp;&amp;m, T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -2775,9 +2796,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::flatten_all</name>
-      <anchorfile>group__generators_ga5c0915917db751d43c4a07eb884945cc.html</anchorfile>
-      <anchor>ga5c0915917db751d43c4a07eb884945cc</anchor>
-      <arglist>(T &amp;&amp;t, Func &amp;&amp;f)</arglist>
+      <anchorfile>group__generators_ga7416f4db26c4e41360e71dd449de20a6.html</anchorfile>
+      <anchor>ga7416f4db26c4e41360e71dd449de20a6</anchor>
+      <arglist>(T &amp;&amp;t, Func f)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -3064,9 +3085,9 @@
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>kumi::apply</name>
-      <anchorfile>group__transforms_ga2c808f8956ae85b42b9b8a8ed09cc371.html</anchorfile>
-      <anchor>ga2c808f8956ae85b42b9b8a8ed09cc371</anchor>
-      <arglist>(Function &amp;&amp;f, Tuple &amp;&amp;t) noexcept(_::supports_nothrow_apply&lt; Function &amp;&amp;, Tuple &amp;&amp; &gt;)</arglist>
+      <anchorfile>group__transforms_ga570ad42b8992ce6096c05dd6b2bbcf6d.html</anchorfile>
+      <anchor>ga570ad42b8992ce6096c05dd6b2bbcf6d</anchor>
+      <arglist>(Function &amp;&amp;f, T &amp;&amp;t) noexcept(_::supports_nothrow_apply&lt; Function &amp;&amp;, T &amp;&amp; &gt;)</arglist>
     </member>
     <member kind="function">
       <type>constexpr void</type>
@@ -3197,9 +3218,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::tuple::to_ref</name>
-      <anchorfile>group__tuple_ga6cde1bebcc6150b864820645ad4cf14f.html</anchorfile>
-      <anchor>ga6cde1bebcc6150b864820645ad4cf14f</anchor>
-      <arglist>(Type &amp;&amp;t)</arglist>
+      <anchorfile>group__tuple_ga27c29bc9a5e31d7ada4ac427a18d8985.html</anchorfile>
+      <anchor>ga27c29bc9a5e31d7ada4ac427a18d8985</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>decltype(auto) constexpr</type>

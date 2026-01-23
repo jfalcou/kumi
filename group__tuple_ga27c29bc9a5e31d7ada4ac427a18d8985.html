@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__tuple_ga6cde1bebcc6150b864820645ad4cf14f.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__tuple_ga27c29bc9a5e31d7ada4ac427a18d8985.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,13 +121,13 @@ $(document).ready(function(){initNavTree('group__tuple_ga6cde1bebcc6150b86482064
 </div>
 
 <div class="contents">
-<a id="ga6cde1bebcc6150b864820645ad4cf14f" name="ga6cde1bebcc6150b864820645ad4cf14f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6cde1bebcc6150b864820645ad4cf14f">&#9670;&#160;</a></span>to_ref()</h2>
+<a id="ga27c29bc9a5e31d7ada4ac427a18d8985" name="ga27c29bc9a5e31d7ada4ac427a18d8985"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga27c29bc9a5e31d7ada4ac427a18d8985">&#9670;&#160;</a></span>to_ref()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;product_type Type&gt; </div>
+template&lt;product_type T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -135,7 +135,7 @@ template&lt;product_type Type&gt; </div>
         <tr>
           <td class="memname">constexpr auto to_ref </td>
           <td>(</td>
-          <td class="paramtype">Type &amp;&amp;&#160;</td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
           <td class="paramname"><em>t</em></td><td>)</td>
           <td></td>
         </tr>
@@ -154,8 +154,8 @@ template&lt;product_type Type&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A tuple equivalent to the result of <code><a class="el" href="group__transforms_ga2c808f8956ae85b42b9b8a8ed09cc371.html#ga2c808f8956ae85b42b9b8a8ed09cc371" title="Invoke the Callable object f with a product_type of arguments. f is applied on the values if the give...">kumi::apply</a>([]&lt;typename... T&gt;(T&amp;&amp;... e) { return kumi::forward_as_tuple(std::forward&lt;T&gt;(e)...); }, t)</code></dd></dl>
-<h2><a class="anchor" id="autotoc_md173"></a>
+<dl class="section return"><dt>Returns</dt><dd>A tuple equivalent to the result of <code><a class="el" href="group__transforms_ga570ad42b8992ce6096c05dd6b2bbcf6d.html#ga570ad42b8992ce6096c05dd6b2bbcf6d" title="Invoke the Callable object f with a product_type of arguments. f is applied on the values if the give...">kumi::apply</a>([]&lt;typename... T&gt;(T&amp;&amp;... e) { return kumi::forward_as_tuple(std::forward&lt;T&gt;(e)...); }, t)</code></dd></dl>
+<h2><a class="anchor" id="autotoc_md175"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -173,7 +173,7 @@ Example:</h2>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; original &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__tuple_ga98e6c367de0e0f526565280a0856b007_html_ga98e6c367de0e0f526565280a0856b007"><div class="ttname"><a href="group__tuple_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007">kumi::make_tuple</a></div><div class="ttdeci">constexpr auto make_tuple(Ts &amp;&amp;... ts) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</div><div class="ttdoc">Creates a tuple object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> tuple.hpp:518</div></div>
+<div class="ttc" id="agroup__tuple_ga98e6c367de0e0f526565280a0856b007_html_ga98e6c367de0e0f526565280a0856b007"><div class="ttname"><a href="group__tuple_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007">kumi::make_tuple</a></div><div class="ttdeci">constexpr auto make_tuple(Ts &amp;&amp;... ts) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</div><div class="ttdoc">Creates a tuple object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> tuple.hpp:479</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

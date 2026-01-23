@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::all_unique</title>
+<title>kumi: kumi::record::to_ref</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__generators_gacf670e19ac40c8981f52ad0783a3e483.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__record_gabd73478b6d709990c2f81dc83b980c16.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,67 +121,60 @@ $(document).ready(function(){initNavTree('group__generators_gacf670e19ac40c8981f
 </div>
 
 <div class="contents">
-<a id="gacf670e19ac40c8981f52ad0783a3e483" name="gacf670e19ac40c8981f52ad0783a3e483"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gacf670e19ac40c8981f52ad0783a3e483">&#9670;&#160;</a></span>all_unique()</h2>
+<a id="gabd73478b6d709990c2f81dc83b980c16" name="gabd73478b6d709990c2f81dc83b980c16"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gabd73478b6d709990c2f81dc83b980c16">&#9670;&#160;</a></span>to_ref()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;product_type T&gt; </div>
+template&lt;record_type R&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr auto kumi::all_unique </td>
+          <td class="memname">constexpr auto to_ref </td>
           <td>(</td>
-          <td class="paramtype">T &amp;&amp;&#160;</td>
-          <td class="paramname"><em>t</em></td><td>)</td>
+          <td class="paramtype">R &amp;&amp;&#160;</td>
+          <td class="paramname"><em>r</em></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel">related</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Return the product type containing the values of the first occurence of each type in the input product type. </p>
+<p>Creates a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields necessarily named, names are unique.">kumi::record</a> of references given a reference to a <a class="el" href="conceptkumi_1_1record__type.html" title="Concept specifying a type follows the Record Type semantic.">kumi::record_type</a>. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">t</td><td>Product type to process </td></tr>
+    <tr><td class="paramname">r</td><td>Record whose elements are to be referenced. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A product type built by keeping the first occurrence of every distinct element type in the input product type.</dd></dl>
-<h2><a class="anchor" id="autotoc_md154"></a>
-Helper type</h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;product_type T&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__generators_gacf670e19ac40c8981f52ad0783a3e483.html#gacf670e19ac40c8981f52ad0783a3e483">all_unique</a>;</div>
-<div class="line"> </div>
-<div class="line">  <span class="keyword">template</span>&lt;product_type T&gt;</div>
-<div class="line">  <span class="keyword">using </span>all_unique_t = <span class="keyword">typename</span> all_unique&lt;T&gt;::type;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__generators_gacf670e19ac40c8981f52ad0783a3e483_html_gacf670e19ac40c8981f52ad0783a3e483"><div class="ttname"><a href="group__generators_gacf670e19ac40c8981f52ad0783a3e483.html#gacf670e19ac40c8981f52ad0783a3e483">kumi::all_unique</a></div><div class="ttdeci">constexpr auto all_unique(T &amp;&amp;t)</div><div class="ttdoc">Return the product type containing the values of the first occurence of each type in the input produc...</div><div class="ttdef"><b>Definition</b> unique.hpp:122</div></div>
-<div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
-</div><!-- fragment --><p>Computes the type returned by a call to <a class="el" href="group__generators_gacf670e19ac40c8981f52ad0783a3e483.html#gacf670e19ac40c8981f52ad0783a3e483" title="Return the product type containing the values of the first occurence of each type in the input produc...">kumi::all_unique</a>.</p>
-<h2><a class="anchor" id="autotoc_md155"></a>
+<dl class="section return"><dt>Returns</dt><dd>A record equivalent to the result of <code><a class="el" href="group__transforms_ga570ad42b8992ce6096c05dd6b2bbcf6d.html#ga570ad42b8992ce6096c05dd6b2bbcf6d" title="Invoke the Callable object f with a product_type of arguments. f is applied on the values if the give...">kumi::apply</a>([]&lt;typename... T&gt;(T&amp;&amp;... e) { return kumi::forward_as_record&lt;name_of(as&lt;T&gt;{})...&gt;(std::forward&lt;T&gt;(e)...); }, t)</code></dd></dl>
+<h2><a class="anchor" id="autotoc_md167"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">    <span class="keyword">using </span><a class="code hl_class" href="structkumi_1_1tuple.html">tuple</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple&lt;int, int, char, int, float, float&gt;</a>;</div>
+<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line">  <span class="keyword">auto</span> original = kumi::make_record(<span class="stringliteral">&quot;a&quot;</span>_f=0,<span class="stringliteral">&quot;b&quot;</span>_f=<span class="charliteral">&#39;0&#39;</span>,<span class="stringliteral">&quot;c&quot;</span>_f=0.f);</div>
+<div class="line">  <span class="keyword">auto</span> ref      = kumi::to_ref( original );</div>
 <div class="line"> </div>
-<div class="line">    <a class="code hl_class" href="structkumi_1_1tuple.html">tuple</a> a = {1, 2, <span class="charliteral">&#39;x&#39;</span>, 3, 1.f, 2.f};</div>
+<div class="line">  std::cout &lt;&lt; original &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">    std::cout &lt;&lt; <a class="code hl_function" href="group__generators_gacf670e19ac40c8981f52ad0783a3e483.html#gacf670e19ac40c8981f52ad0783a3e483">kumi::all_unique</a>(a) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <a class="code hl_function" href="namespacekumi.html#abd1d4a59b0cddc9d5a5aef185c9f1e46">kumi::get</a>&lt;<span class="stringliteral">&quot;a&quot;</span>&gt;(ref) = 9;</div>
+<div class="line">  <a class="code hl_function" href="namespacekumi.html#abd1d4a59b0cddc9d5a5aef185c9f1e46">kumi::get</a>&lt;<span class="stringliteral">&quot;b&quot;</span>&gt;(ref) = <span class="charliteral">&#39;z&#39;</span>;</div>
+<div class="line">  <a class="code hl_function" href="namespacekumi.html#abd1d4a59b0cddc9d5a5aef185c9f1e46">kumi::get</a>&lt;<span class="stringliteral">&quot;c&quot;</span>&gt;(ref) = 3.14159f;</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; original &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:37</div></div>
+<div class="ttc" id="anamespacekumi_html_abd1d4a59b0cddc9d5a5aef185c9f1e46"><div class="ttname"><a href="namespacekumi.html#abd1d4a59b0cddc9d5a5aef185c9f1e46">kumi::get</a></div><div class="ttdeci">constexpr decltype(auto) get(record&lt; Ts... &gt; &amp;&amp;r) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition</b> record.hpp:399</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -191,7 +184,7 @@ Example:</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li>
+    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li><li class="navelem"><a class="el" href="structkumi_1_1record.html">record</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

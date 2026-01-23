@@ -167,18 +167,18 @@ template&lt;monoid M, sized_product_type_or_more&lt; 1 &gt; T&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A tuple of prefix partial accumulations where each element 'I' equals <code>m( m( m(init, get&lt;0&gt;(t)), ...), get&lt;I-1&gt;(t))</code></dd></dl>
-<h2><a class="anchor" id="autotoc_md142"></a>
+<h2><a class="anchor" id="autotoc_md144"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type Tuple&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__reductions_ga7ad77fdfc161a999369fde5f9006d561.html#ga7ad77fdfc161a999369fde5f9006d561">exclusive_scan_right</a>;</div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type Tuple&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__reductions_gae9b0c7f1e3d7ecc8463c7275dfad5078.html#gae9b0c7f1e3d7ecc8463c7275dfad5078">exclusive_scan_right</a>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type Tuple&gt;</div>
 <div class="line">  <span class="keyword">using </span>exclusive_scan_right_t = <span class="keyword">typename</span> exclusive_scan_right&lt;Function,Tuple&gt;::type;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__reductions_ga7ad77fdfc161a999369fde5f9006d561_html_ga7ad77fdfc161a999369fde5f9006d561"><div class="ttname"><a href="group__reductions_ga7ad77fdfc161a999369fde5f9006d561.html#ga7ad77fdfc161a999369fde5f9006d561">kumi::exclusive_scan_right</a></div><div class="ttdeci">constexpr auto exclusive_scan_right(Function &amp;&amp;f, T &amp;&amp;t, Value init)</div><div class="ttdoc">Computes the exclusive suffix scan of all elements of a product type using a tail recursive call.</div><div class="ttdef"><b>Definition</b> scan.hpp:308</div></div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__reductions_ga7ad77fdfc161a999369fde5f9006d561.html#ga7ad77fdfc161a999369fde5f9006d561" title="Computes the exclusive suffix scan of all elements of a product type using a tail recursive call.">kumi::exclusive_scan_right</a></p>
-<h2><a class="anchor" id="autotoc_md143"></a>
+<div class="ttc" id="agroup__reductions_gae9b0c7f1e3d7ecc8463c7275dfad5078_html_gae9b0c7f1e3d7ecc8463c7275dfad5078"><div class="ttname"><a href="group__reductions_gae9b0c7f1e3d7ecc8463c7275dfad5078.html#gae9b0c7f1e3d7ecc8463c7275dfad5078">kumi::exclusive_scan_right</a></div><div class="ttdeci">constexpr auto exclusive_scan_right(Function f, T &amp;&amp;t, Value init)</div><div class="ttdoc">Computes the exclusive suffix scan of all elements of a product type using a tail recursive call.</div><div class="ttdef"><b>Definition</b> scan.hpp:309</div></div>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__reductions_gae9b0c7f1e3d7ecc8463c7275dfad5078.html#gae9b0c7f1e3d7ecc8463c7275dfad5078" title="Computes the exclusive suffix scan of all elements of a product type using a tail recursive call.">kumi::exclusive_scan_right</a></p>
+<h2><a class="anchor" id="autotoc_md145"></a>
 Example</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -188,7 +188,7 @@ Example</h2>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">auto</span> t = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{2.,1,<span class="keywordtype">short</span>{55},<span class="charliteral">&#39;z&#39;</span>};</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> output = <a class="code hl_function" href="group__reductions_ga7ad77fdfc161a999369fde5f9006d561.html#ga7ad77fdfc161a999369fde5f9006d561">kumi::exclusive_scan_right</a>( [](<span class="keyword">auto</span> elt, <span class="keyword">auto</span> acc) </div>
+<div class="line">  <span class="keyword">auto</span> output = <a class="code hl_function" href="group__reductions_gae9b0c7f1e3d7ecc8463c7275dfad5078.html#gae9b0c7f1e3d7ecc8463c7275dfad5078">kumi::exclusive_scan_right</a>( [](<span class="keyword">auto</span> elt, <span class="keyword">auto</span> acc) </div>
 <div class="line">                  { </div>
 <div class="line">                    <span class="keywordflow">return</span> acc + <span class="keyword">sizeof</span>(elt); </div>
 <div class="line">                  }</div>
@@ -200,7 +200,7 @@ Example</h2>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">auto</span> u = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1,3,2,4,0,5,9,6,7};</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga7ad77fdfc161a999369fde5f9006d561.html#ga7ad77fdfc161a999369fde5f9006d561">kumi::exclusive_scan_right</a>(<a class="code hl_variable" href="group__utility.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a>, u) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_gae9b0c7f1e3d7ecc8463c7275dfad5078.html#gae9b0c7f1e3d7ecc8463c7275dfad5078">kumi::exclusive_scan_right</a>(<a class="code hl_variable" href="group__utility.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a>, u) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__utility_html_gab5c0eb8022e7b2df33286d9a15247559"><div class="ttname"><a href="group__utility.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a></div><div class="ttdeci">constexpr numeric_add plus</div><div class="ttdoc">Forms a binary monoid callable that can be used in kumi::algoritm. It represents the addition.</div><div class="ttdef"><b>Definition</b> monoid.hpp:126</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:37</div></div>
