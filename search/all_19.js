@@ -1,7 +1,7 @@
 var searchData=
 [
   ['value_0',['value',['../structkumi_1_1all__unique__names.html#autotoc_md205',1,'Helper value'],['../structkumi_1_1all__uniques.html#autotoc_md203',1,'Helper value'],['../structkumi_1_1is__product__type.html#autotoc_md186',1,'Helper value'],['../structkumi_1_1is__record__type.html#autotoc_md188',1,'Helper value'],['../structkumi_1_1size.html#autotoc_md190',1,'Helper value'],['../structkumi_1_1is__static__container.html#autotoc_md193',1,'Helper value'],['../structkumi_1_1container__size.html#autotoc_md195',1,'Helper value'],['../group__traits_ga36e654d6b1df0645cfc9854dee56fa03.html#autotoc_md199',1,'Helper value'],['../group__traits_gab5b49ae5dceb172900933f69d976b933.html#autotoc_md198',1,'Helper value'],['../structkumi_1_1index__t.html#ab659f5d62c79ae49fe525448df86765b',1,'kumi::index_t::value']]],
-  ['value_5fas_1',['value_as',['../structkumi_1_1___1_1value__as.html',1,'kumi::_']]],
+  ['value_5fidentity_1',['value_identity',['../structkumi_1_1___1_1value__identity.html',1,'kumi::_']]],
   ['values_5fof_2',['values_of',['../group__algorithm_ga62d44b638af9c683a8040a476518990e.html#ga62d44b638af9c683a8040a476518990e',1,'kumi']]],
   ['variable_3',['Helper variable',['../structkumi_1_1is__homogeneous.html#autotoc_md197',1,'']]],
   ['version_201_200_20amazing_20amethyst_4',['Version 1.0 - Amazing Amethyst',['../changelog.html#autotoc_md226',1,'']]],

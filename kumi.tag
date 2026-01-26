@@ -159,16 +159,16 @@
     </member>
   </compound>
   <compound kind="struct">
-    <name>kumi::_::get_field_by_name&lt; Ref, std::index_sequence&lt; I... &gt;, Fields... &gt;</name>
-    <filename>structkumi_1_1___1_1get__field__by__name_3_01Ref_00_01std_1_1index__sequence_3_01I_8_8_8_01_4_00_01Fields_8_8_8_01_4.html</filename>
-    <templarg>typename Ref</templarg>
-    <templarg>std::size_t... I</templarg>
-    <templarg>typename... Fields</templarg>
-  </compound>
-  <compound kind="struct">
     <name>kumi::_::get_field_by_type</name>
     <filename>structkumi_1_1___1_1get__field__by__type.html</filename>
     <templarg>typename Ref</templarg>
+    <templarg>typename... Fields</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::_::get_field_by_value&lt; Ref, std::index_sequence&lt; I... &gt;, Fields... &gt;</name>
+    <filename>structkumi_1_1___1_1get__field__by__value_3_01Ref_00_01std_1_1index__sequence_3_01I_8_8_8_01_4_00_01Fields_8_8_8_01_4.html</filename>
+    <templarg>auto Ref</templarg>
+    <templarg>std::size_t... I</templarg>
     <templarg>typename... Fields</templarg>
   </compound>
   <compound kind="struct">
@@ -810,9 +810,9 @@
     <filename>structkumi_1_1unit.html</filename>
   </compound>
   <compound kind="struct">
-    <name>kumi::_::value_as</name>
-    <filename>structkumi_1_1___1_1value__as.html</filename>
-    <templarg>auto NTTP</templarg>
+    <name>kumi::_::value_identity</name>
+    <filename>structkumi_1_1___1_1value__identity.html</filename>
+    <templarg>auto V</templarg>
   </compound>
   <compound kind="concept">
     <name>kumi::_::std_tuple_compatible</name>
@@ -1252,8 +1252,8 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>from_record</name>
-      <anchorfile>group__utility_gaf34b032f903e869b9f63610867f431de.html</anchorfile>
-      <anchor>gaf34b032f903e869b9f63610867f431de</anchor>
+      <anchorfile>group__utility_ga573f86a808058221ffb883e97b8766cc.html</anchorfile>
+      <anchor>ga573f86a808058221ffb883e97b8766cc</anchor>
       <arglist>(record&lt; Ts... &gt; const &amp;r)</arglist>
     </member>
     <member kind="function">
@@ -2203,8 +2203,8 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::from_record</name>
-      <anchorfile>group__utility_gaf34b032f903e869b9f63610867f431de.html</anchorfile>
-      <anchor>gaf34b032f903e869b9f63610867f431de</anchor>
+      <anchorfile>group__utility_ga573f86a808058221ffb883e97b8766cc.html</anchorfile>
+      <anchor>ga573f86a808058221ffb883e97b8766cc</anchor>
       <arglist>(record&lt; Ts... &gt; const &amp;r)</arglist>
     </member>
     <member kind="function">

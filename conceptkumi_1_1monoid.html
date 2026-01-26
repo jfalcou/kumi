@@ -136,14 +136,11 @@ $(document).ready(function(){initNavTree('conceptkumi_1_1monoid.html',''); initR
 <div class="ttc" id="aconceptkumi_1_1monoid_html"><div class="ttname"><a href="conceptkumi_1_1monoid.html">kumi::monoid</a></div><div class="ttdoc">Concept specifying a type is a Monoid.</div><div class="ttdef"><b>Definition</b> concepts.hpp:301</div></div>
 </div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>The operation is not required to be commutative; that is monoid(x,y) and monoid(y,x) may yield different results. (Ie : the monoid is not necessarily abelian) </dd></dl>
 </div><h2 class="groupheader">Concept definition</h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1monoid.html">kumi::monoid</a> =  []() {</div>
-<div class="line">    <span class="keyword">using </span>M = std::remove_cvref_t&lt;T&gt;;</div>
-<div class="line">    <span class="keywordflow">return</span> <span class="keyword">requires</span>(M m) {</div>
-<div class="line">      { M::identity };</div>
-<div class="line">      { M{}(M::identity, M::identity) };</div>
-<div class="line">    };</div>
-<div class="line">  }()</div>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> M&gt;</div>
+<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1monoid.html">kumi::monoid</a> =  <span class="keyword">requires</span> {</div>
+<div class="line">    { std::remove_cvref_t&lt;M&gt;::identity };</div>
+<div class="line">    { std::remove_cvref_t&lt;M&gt;{}(std::remove_cvref_t&lt;M&gt;::identity, std::remove_cvref_t&lt;M&gt;::identity) };</div>
+<div class="line">  }</div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->

@@ -134,9 +134,8 @@ $(document).ready(function(){initNavTree('conceptkumi_1_1equivalent.html',''); i
 <p>A type <code>T</code> models <code><a class="el" href="conceptkumi_1_1equivalent.html" title="Concept specifying if two types have matching named fields.">kumi::equivalent</a>&lt;T,U&gt;</code> if it is a product type with the same number of members as <code>U</code>, and each of its fields has a corresponding field in <code>U</code> with the same name </p>
 </div><h2 class="groupheader">Concept definition</h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</div>
-<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1equivalent.html">kumi::equivalent</a> = </div>
-<div class="line">    (size_v&lt;T&gt; == size_v&lt;U&gt;) &amp;&amp; _::has_same_field_names&lt;std::remove_cvref_t&lt;T&gt;, std::remove_cvref_t&lt;U&gt;&gt;()</div>
-<div class="ttc" id="aconceptkumi_1_1equivalent_html"><div class="ttname"><a href="conceptkumi_1_1equivalent.html">kumi::equivalent</a></div><div class="ttdoc">Concept specifying if two types have matching named fields.</div><div class="ttdef"><b>Definition</b> concepts.hpp:246</div></div>
+<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1equivalent.html">kumi::equivalent</a> =  (size_v&lt;T&gt; == size_v&lt;U&gt;) &amp;&amp; _::matches_v&lt;std::remove_cvref_t&lt;T&gt;, std::remove_cvref_t&lt;U&gt;&gt;</div>
+<div class="ttc" id="aconceptkumi_1_1equivalent_html"><div class="ttname"><a href="conceptkumi_1_1equivalent.html">kumi::equivalent</a></div><div class="ttdoc">Concept specifying if two types have matching named fields.</div><div class="ttdef"><b>Definition</b> concepts.hpp:248</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->
