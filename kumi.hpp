@@ -278,29 +278,33 @@ namespace kumi
 #include <cstddef>
 namespace kumi::_
 {
-  template<auto NTTP> struct value_as
+  using invalid = std::integral_constant<std::size_t, static_cast<std::size_t>(-1)>;
+  template<typename... Ts> struct type_list
   {
-    using type = decltype(NTTP);
-    static constexpr auto value = NTTP;
   };
-  template<std::size_t I, typename T> consteval auto make_value_as()
+  template<auto V> struct value_identity
   {
-    if constexpr (requires { std::remove_cvref_t<T>::is_field_capture; }) return value_as<name_of(as<T>{})>{};
-    else return value_as<I>{};
+    static constexpr auto value = V;
+  };
+  template<std::size_t I, typename T> consteval auto get_value_identity()
+  {
+    using type = std::remove_cvref_t<T>;
+    if constexpr (requires { type::is_field_capture; }) return value_identity<type::name>{};
+    else return value_identity<I>{};
   }
   template<std::size_t, typename T> struct unique
   {
-    operator T();
+    operator std::type_identity<T>();
   };
   template<std::size_t I, typename T> struct unique_name
   {
-    operator value_as<I>();
+    operator value_identity<I>();
   };
   template<std::size_t I, kumi::str Name, typename T> struct unique_name<I, kumi::field_capture<Name, T>>
   {
-    operator value_as<Name>();
+    operator value_identity<Name>();
   };
-  inline std::true_type true_fn(...);
+  inline consteval std::true_type true_fn(...);
 }
 namespace kumi
 {
@@ -474,7 +478,7 @@ namespace kumi
     };
     template<typename... Us> static auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
     static std::false_type is_set(...);
-    using type = decltype(is_set(as<Ts>{}...));
+    using type = decltype(is_set(std::type_identity<Ts>{}...));
   };
   template<typename... Ts> using all_uniques_t = typename all_uniques<std::index_sequence_for<Ts...>, Ts...>::type;
   template<typename... Ts> inline constexpr auto all_uniques_v = all_uniques_t<Ts...>::value;
@@ -490,7 +494,7 @@ namespace kumi
     };
     template<typename... Us> static auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
     static std::false_type is_set(...);
-    using type = decltype(is_set(_::make_value_as<Ints, Ts>()...));
+    using type = decltype(is_set(_::get_value_identity<Ints, Ts>()...));
   };
   template<typename... Ts>
   using all_unique_names_t = typename all_unique_names<std::index_sequence_for<Ts...>, Ts...>::type;
@@ -512,47 +516,97 @@ namespace kumi
 #include <utility>
 namespace kumi::_
 {
-  template<typename From, typename To> struct is_piecewise_constructible;
-  template<typename From, typename To> struct is_piecewise_convertible;
-  template<typename From, typename To> struct is_piecewise_ordered;
+  template<typename From, typename To>
+  concept ordered = requires(From const& a, To const& b) {
+    { a < b };
+  };
+  template<typename T, typename U>
+  concept comparable = requires(T t, U u) {
+    { t == u };
+  };
+  template<typename T, typename... Args>
+  concept implicit_constructible = requires(Args... args) { T{args...}; };
+  template<typename From, typename To> struct is_piecewise_constructible : std::false_type
+  {
+  };
+  template<typename From, typename To> struct is_piecewise_convertible : std::false_type
+  {
+  };
+  template<typename From, typename To> struct is_piecewise_ordered : std::false_type
+  {
+  };
+  template<typename From, typename To> struct is_piecewise_comparable : std::false_type
+  {
+  };
   template<template<class...> class Box, typename... From, typename... To>
+  requires(sizeof...(From) == sizeof...(To))
   struct is_piecewise_convertible<Box<From...>, Box<To...>>
   {
     static constexpr bool value = (... && kumi::convertible_to<From, To>);
   };
   template<template<class...> class Box, typename... From, typename... To>
+  requires(sizeof...(From) == sizeof...(To))
   struct is_piecewise_constructible<Box<From...>, Box<To...>>
   {
     static constexpr bool value = (... && std::is_constructible_v<To, From>);
   };
-  template<typename From, typename To>
-  concept ordered = requires(From const& a, To const& b) {
-    { a < b };
-  };
   template<template<class...> class Box, typename... From, typename... To>
+  requires(sizeof...(From) == sizeof...(To))
   struct is_piecewise_ordered<Box<From...>, Box<To...>>
   {
     static constexpr bool value = (... && ordered<From, To>);
   };
+  template<template<class...> class Box, typename... Ts, typename... Us>
+  requires(sizeof...(Ts) == sizeof...(Us))
+  struct is_piecewise_comparable<Box<Ts...>, Box<Us...>>
+  {
+    static constexpr bool value = (... && _::comparable<Ts, Us>);
+  };
   template<typename From, typename To>
-  concept piecewise_convertible =
-    (size_v<From> == size_v<To>) &&
-    _::is_piecewise_convertible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
+  concept piecewise_convertible = is_piecewise_convertible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
   template<typename From, typename To>
   concept piecewise_constructible =
-    (size_v<From> == size_v<To>) &&
-    _::is_piecewise_constructible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
+    is_piecewise_constructible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
   template<typename From, typename To>
-  concept piecewise_ordered = _::is_piecewise_ordered<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
-  template<typename T, typename... Args>
-  concept implicit_constructible = requires(Args... args) { T{args...}; };
-  struct bottom;
-  using invalid = std::integral_constant<std::size_t, static_cast<std::size_t>(-1)>;
+  concept piecewise_ordered = is_piecewise_ordered<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
+  template<typename From, typename To>
+  concept piecewise_comparable = is_piecewise_comparable<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
+  template<typename Field> struct check_value
+  {
+    static consteval std::false_type get(...);
+  };
+  template<auto Ref, typename Field> struct check_value<field_capture<Ref, Field>>
+  {
+    template<typename T> static consteval Field get(field_capture<Ref, T>);
+  };
+  template<typename... Ts> struct sort : std::true_type
+  {
+  };
+  template<template<class...> class Box, typename... Ts, typename... Us>
+  requires(sizeof...(Ts) == sizeof...(Us))
+  struct sort<Box<Ts...>, Box<Us...>> : check_value<Ts>...
+  {
+    using check_value<Ts>::get...;
+    using t_list = type_list<decltype(get(std::declval<Us>()))...>;
+    using u_list = type_list<decltype(get(std::declval<Us>()))...>;
+    using is_fieldwise_constructible = is_piecewise_constructible<t_list, u_list>;
+    using is_fieldwise_convertible = is_piecewise_convertible<t_list, u_list>;
+    using is_fieldwise_comparable = is_piecewise_comparable<t_list, u_list>;
+  };
+  template<typename From, typename To>
+  concept fieldwise_convertible =
+    sort<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::is_fieldwise_convertible::value;
+  template<typename From, typename To>
+  concept fieldwise_constructible =
+    sort<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::is_fieldwise_constructible::value;
+  template<typename From, typename To>
+  concept fieldwise_comparable =
+    sort<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::is_fieldwise_comparable::value;
   template<typename Ref, typename Field> struct check_type
   {
     static consteval Field get(Ref)
     requires std::is_same_v<Field, Ref>;
-    static consteval bottom get(...);
+    static consteval std::false_type get(...);
   };
   template<std::size_t I, typename Ref, typename Field> struct get_index
   {
@@ -580,65 +634,40 @@ namespace kumi::_
   inline constexpr auto get_index_by_type_v =
     get_index_by_type<Ref, std::index_sequence_for<Fields...>, Fields...>::value;
   template<typename Ref, typename... Fields>
-  concept can_get_field_by_type = !std::is_same_v<get_field_by_type_t<Ref, Fields...>, bottom>;
-  template<std::size_t I, typename Ref, typename Field> struct check_name
+  concept can_get_field_by_type = !std::is_same_v<get_field_by_type_t<Ref, Fields...>, std::false_type>;
+  template<std::size_t I, auto Ref, typename Field> struct check_field
   {
-    using constant = std::integral_constant<std::size_t, I>;
-    static consteval Field get(Ref)
-    requires(Ref::value == Field::name);
-    static consteval bottom get(...);
-    static consteval constant get_index(Ref)
-    requires(Ref::value == Field::name);
+    static consteval std::false_type get(...);
     static consteval invalid get_index(...);
   };
-  template<typename Ref, typename Seq, typename... Fields> struct get_field_by_name;
-  template<typename Ref, std::size_t... I, typename... Fields>
-  struct get_field_by_name<Ref, std::index_sequence<I...>, Fields...> : check_name<I, Ref, Fields>...
+  template<std::size_t I, auto Ref, typename Field> struct check_field<I, Ref, field_capture<Ref, Field>>
   {
-    using check_name<I, Ref, Fields>::get...;
-    using check_name<I, Ref, Fields>::get_index...;
-    using type = decltype(get(std::declval<Ref>()));
-    static constexpr auto value = decltype(get_index(std::declval<Ref>()))::value;
+    using constant = std::integral_constant<std::size_t, I>;
+    using field = field_capture<Ref, Field>;
+    static consteval field get(decltype(Ref));
+    static consteval constant get_index(decltype(Ref));
   };
-  template<typename Ref, typename... Fields>
-  using get_field_by_name_t = typename get_field_by_name<Ref, std::index_sequence_for<Fields...>, Fields...>::type;
-  template<typename Ref, typename... Fields>
-  inline constexpr auto get_index_by_name_v =
-    get_field_by_name<Ref, std::index_sequence_for<Fields...>, Fields...>::value;
-  template<typename Ref, typename... Fields>
-  concept can_get_field_by_name = !std::is_same_v<get_field_by_name_t<Ref, Fields...>, bottom>;
+  template<auto Ref, typename Seq, typename... Fields> struct get_field_by_value;
+  template<auto Ref, std::size_t... I, typename... Fields>
+  struct get_field_by_value<Ref, std::index_sequence<I...>, Fields...> : check_field<I, Ref, Fields>...
+  {
+    using check_field<I, Ref, Fields>::get...;
+    using check_field<I, Ref, Fields>::get_index...;
+    using type = decltype(get(Ref));
+    static constexpr auto value = decltype(get_index(Ref))::value;
+  };
+  template<auto Ref, typename... Fields>
+  using get_field_by_value_t = typename get_field_by_value<Ref, std::index_sequence_for<Fields...>, Fields...>::type;
+  template<auto Ref, typename... Fields>
+  inline constexpr auto get_index_by_value_v =
+    get_field_by_value<Ref, std::index_sequence_for<Fields...>, Fields...>::value;
+  template<auto Ref, typename... Fields>
+  concept can_get_field_by_value = !std::is_same_v<get_field_by_value_t<Ref, Fields...>, std::false_type>;
   template<auto Name, typename... Ts> KUMI_ABI constexpr auto contains_field()
   {
-    if constexpr (!std::integral<std::remove_cvref_t<decltype(Name)>>)
-      return can_get_field_by_name<value_as<Name>, Ts...>;
+    if constexpr (!std::integral<std::remove_cvref_t<decltype(Name)>>) return can_get_field_by_value<Name, Ts...>;
     else return false;
   };
-  template<typename From, typename To> struct is_fieldwise_constructible;
-  template<typename From, typename To> struct is_fieldwise_convertible;
-  template<template<class...> class Box, typename... From, typename... To>
-  struct is_fieldwise_convertible<Box<From...>, Box<To...>>
-  {
-    static constexpr bool value = ([]() {
-      using F_field = std::remove_cvref_t<From>;
-      using T_field = std::remove_cvref_t<get_field_by_name_t<value_as<F_field::name>, To...>>;
-      return kumi::convertible_to<typename F_field::type, typename T_field::type>;
-    }() && ...);
-  };
-  template<template<class...> class Box, typename... From, typename... To>
-  struct is_fieldwise_constructible<Box<From...>, Box<To...>>
-  {
-    static constexpr bool value = ([]() {
-      using F_field = std::remove_cvref_t<From>;
-      using T_field = std::remove_cvref_t<get_field_by_name_t<value_as<F_field::name>, To...>>;
-      return std::is_constructible_v<typename F_field::type, typename T_field::type>;
-    }() && ...);
-  };
-  template<typename From, typename To>
-  concept fieldwise_convertible =
-    _::is_fieldwise_convertible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
-  template<typename From, typename To>
-  concept fieldwise_constructible =
-    _::is_fieldwise_constructible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
   template<typename F, typename T>
   concept supports_apply = []<std::size_t... N>(std::index_sequence<N...>) {
     return std::invocable<F, raw_member_t<N, T>...>;
@@ -659,10 +688,6 @@ namespace kumi::_
     (size<T>::value <= 1) || ([]<std::size_t... N>(std::index_sequence<N...>) {
       return ((kumi::size_v<raw_member_t<0, T>> == kumi::size_v<raw_member_t<N + 1, T>>) && ...);
     }(std::make_index_sequence<size<T>::value - 1>{}));
-  template<typename T, typename U>
-  concept comparable = requires(T t, U u) {
-    { t == u };
-  };
 }
 namespace kumi::_
 {
@@ -996,7 +1021,7 @@ namespace kumi::_
           requires(binder<ISeq, Ts...>) { typename binder<ISeq, Ts...>::kumi_specific_layout; }
   KUMI_ABI constexpr auto& get_leaf(binder<ISeq, Ts...>& arg) noexcept
   {
-    constexpr std::size_t idx = get_index_by_name_v<value_as<Name>, Ts...>;
+    constexpr std::size_t idx = get_index_by_value_v<Name, Ts...>;
     if constexpr (idx == 0) return arg.member0.value;
     if constexpr (idx == 1) return arg.member1.value;
     if constexpr (idx == 2) return arg.member2.value;
@@ -1013,7 +1038,7 @@ namespace kumi::_
           requires(binder<ISeq, Ts...>) { typename binder<ISeq, Ts...>::kumi_specific_layout; }
   KUMI_ABI constexpr auto&& get_leaf(binder<ISeq, Ts...>&& arg) noexcept
   {
-    constexpr std::size_t idx = get_index_by_name_v<value_as<Name>, Ts...>;
+    constexpr std::size_t idx = get_index_by_value_v<Name, Ts...>;
     if constexpr (idx == 0) return static_cast<typename binder<ISeq, Ts...>::member0_type::type&&>(arg.member0.value);
     if constexpr (idx == 1) return static_cast<typename binder<ISeq, Ts...>::member1_type::type&&>(arg.member1.value);
     if constexpr (idx == 2) return static_cast<typename binder<ISeq, Ts...>::member2_type::type&&>(arg.member2.value);
@@ -1030,7 +1055,7 @@ namespace kumi::_
           requires(binder<ISeq, Ts...>) { typename binder<ISeq, Ts...>::kumi_specific_layout; }
   KUMI_ABI constexpr auto const&& get_leaf(binder<ISeq, Ts...> const&& arg) noexcept
   {
-    constexpr std::size_t idx = get_index_by_name_v<value_as<Name>, Ts...>;
+    constexpr std::size_t idx = get_index_by_value_v<Name, Ts...>;
     if constexpr (idx == 0)
       return static_cast<typename binder<ISeq, Ts...>::member0_type::type const&&>(arg.member0.value);
     if constexpr (idx == 1)
@@ -1057,7 +1082,7 @@ namespace kumi::_
           requires(binder<ISeq, Ts...>) { typename binder<ISeq, Ts...>::kumi_specific_layout; }
   KUMI_ABI constexpr auto const& get_leaf(binder<ISeq, Ts...> const& arg) noexcept
   {
-    constexpr std::size_t idx = get_index_by_name_v<value_as<Name>, Ts...>;
+    constexpr std::size_t idx = get_index_by_value_v<Name, Ts...>;
     if constexpr (idx == 0) return arg.member0.value;
     if constexpr (idx == 1) return arg.member1.value;
     if constexpr (idx == 2) return arg.member2.value;
@@ -1099,31 +1124,28 @@ namespace kumi
   concept homogeneous_product_type = product_type<T> && is_homogeneous_v<std::remove_cvref_t<T>>;
   namespace _
   {
-    template<typename T, typename U> KUMI_ABI constexpr auto check_equality()
+    template<typename Ints, typename... Ts> struct matches;
+    template<> struct matches<std::index_sequence<>>
     {
-      return []<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::comparable<member_t<I, T>, member_t<I, U>> && ...);
-      }(std::make_index_sequence<size_v<T>>{});
-    }
-    template<typename T, typename U> KUMI_ABI constexpr auto has_same_field_names()
+      using type = std::true_type;
+    };
+    template<std::size_t... Is, template<class...> class Box, typename... Ts, typename... Us>
+    struct matches<std::index_sequence<Is...>, Box<Ts...>, Box<Us...>>
     {
-      return []<std::size_t... I>(std::index_sequence<I...>) {
-        return (can_get_field_by_name<value_as<name_of(as<element_t<I, T>>{})>, element_t<I, U>...> && ...);
-      }(std::make_index_sequence<size_v<T>>{});
-    }
-    template<typename T, typename U> KUMI_ABI constexpr auto check_named_equality()
-    {
-      return []<std::size_t... I>(std::index_sequence<I...>) {
-        return (
-          _::comparable<raw_element_t<I, T>, typename get_field_by_name_t<value_as<name_of(as<element_t<I, T>>{})>,
-                                                                          element_t<I, U>...>::type> &&
-          ...);
-      }(std::make_index_sequence<size_v<T>>{});
-    }
+      struct match : _::unique_name<Is, Us>...
+      {
+      };
+      template<typename... Key>
+      static consteval auto is_present(Key...) -> decltype(_::true_fn(static_cast<Key>(match())...));
+      static consteval std::false_type is_present(...);
+      using type = decltype(is_present(_::get_value_identity<Is, Ts>()...));
+    };
+    template<std::size_t S, typename T, typename U>
+    using matches_t = typename matches<std::make_index_sequence<S>, T, U>::type;
+    template<typename T, typename U> inline constexpr auto matches_v = matches_t<size_v<T>, T, U>::value;
   }
   template<typename T, typename U>
-  concept equality_comparable =
-    (size_v<T> == size_v<U>) && _::check_equality<std::remove_cvref_t<T>, std::remove_cvref_t<U>>();
+  concept equality_comparable = (size_v<T> == size_v<U>) && _::piecewise_comparable<T, U>;
   template<typename... Ts>
   concept has_named_fields = (... || is_field_capture_v<std::remove_cvref_t<Ts>>);
   template<typename... Ts>
@@ -1160,25 +1182,20 @@ namespace kumi
     }
   }
   template<typename T, typename U>
-  concept equivalent =
-    (size_v<T> == size_v<U>) && _::has_same_field_names<std::remove_cvref_t<T>, std::remove_cvref_t<U>>();
+  concept equivalent = (size_v<T> == size_v<U>) && _::matches_v<std::remove_cvref_t<T>, std::remove_cvref_t<U>>;
   template<typename T, typename U>
-  concept named_equality_comparable =
-    equivalent<T, U> && _::check_named_equality<std::remove_cvref_t<T>, std::remove_cvref_t<U>>();
+  concept named_equality_comparable = equivalent<T, U> && _::fieldwise_comparable<T, U>;
   template<typename... Ts>
   concept follows_same_semantic = ((product_type<Ts> && !record_type<Ts>) && ...) || ((record_type<Ts> && ...));
   template<typename T, typename... Us>
   concept compatible_product_types =
     (follows_same_semantic<T, Us...> &&
      ((!record_type<T>) || (equivalent<std::remove_cvref_t<T>, std::remove_cvref_t<Us>> && ...)));
-  template<typename T>
-  concept monoid = []() {
-    using M = std::remove_cvref_t<T>;
-    return requires(M m) {
-      { M::identity };
-      { M{}(M::identity, M::identity) };
-    };
-  }();
+  template<typename M>
+  concept monoid = requires {
+    { std::remove_cvref_t<M>::identity };
+    { std::remove_cvref_t<M>{}(std::remove_cvref_t<M>::identity, std::remove_cvref_t<M>::identity) };
+  };
 }
 namespace kumi
 {
@@ -1483,7 +1500,7 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(T&& t) noexcept
   {
     constexpr std::size_t Idx = [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return _::get_index_by_name_v<_::value_as<Name>, element_t<I, T>...>;
+      return _::get_index_by_value_v<Name, element_t<I, T>...>;
     }(std::make_index_sequence<size_v<T>>{});
     return field_value_of(get<Idx>(KUMI_FWD(t)));
   }
@@ -2384,7 +2401,7 @@ namespace kumi
     }(std::make_index_sequence<sizeof...(Ts)>());
   }
   template<record_type Type, typename... Ts>
-  requires(equivalent<Type, record<Ts...>>)
+  requires(equivalent<typename _::as_tuple<Type, std::make_index_sequence<size_v<Type>>>::type, tuple<Ts...>>)
   [[nodiscard]] KUMI_ABI constexpr auto from_record(record<Ts...> const& r)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
