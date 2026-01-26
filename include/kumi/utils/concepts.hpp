@@ -124,29 +124,32 @@ namespace kumi
 
   namespace _
   {
-    template<typename T, typename U> KUMI_ABI constexpr auto check_equality()
-    {
-      return []<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::comparable<member_t<I, T>, member_t<I, U>> && ...);
-      }(std::make_index_sequence<size_v<T>>{});
-    }
+    // This is contains all from raberu but uses inheritance
+    template<typename Ints, typename... Ts> struct matches;
 
-    template<typename T, typename U> KUMI_ABI constexpr auto has_same_field_names()
+    template<> struct matches<std::index_sequence<>>
     {
-      return []<std::size_t... I>(std::index_sequence<I...>) {
-        return (can_get_field_by_name<value_as<name_of(as<element_t<I, T>>{})>, element_t<I, U>...> && ...);
-      }(std::make_index_sequence<size_v<T>>{});
-    }
+      using type = std::true_type;
+    };
 
-    template<typename T, typename U> KUMI_ABI constexpr auto check_named_equality()
+    template<std::size_t... Is, template<class...> class Box, typename... Ts, typename... Us>
+    struct matches<std::index_sequence<Is...>, Box<Ts...>, Box<Us...>>
     {
-      return []<std::size_t... I>(std::index_sequence<I...>) {
-        return (
-          _::comparable<raw_element_t<I, T>, typename get_field_by_name_t<value_as<name_of(as<element_t<I, T>>{})>,
-                                                                          element_t<I, U>...>::type> &&
-          ...);
-      }(std::make_index_sequence<size_v<T>>{});
-    }
+      struct match : _::unique_name<Is, Us>...
+      {
+      };
+
+      template<typename... Key>
+      static consteval auto is_present(Key...) -> decltype(_::true_fn(static_cast<Key>(match())...));
+      static consteval std::false_type is_present(...);
+
+      using type = decltype(is_present(_::get_value_identity<Is, Ts>()...));
+    };
+
+    template<std::size_t S, typename T, typename U>
+    using matches_t = typename matches<std::make_index_sequence<S>, T, U>::type;
+
+    template<typename T, typename U> inline constexpr auto matches_v = matches_t<size_v<T>, T, U>::value;
   }
 
   //================================================================================================
@@ -157,8 +160,7 @@ namespace kumi
   //! elements satisfies kumi::equality_comparable for all their respective elements.
   //================================================================================================
   template<typename T, typename U>
-  concept equality_comparable =
-    (size_v<T> == size_v<U>) && _::check_equality<std::remove_cvref_t<T>, std::remove_cvref_t<U>>();
+  concept equality_comparable = (size_v<T> == size_v<U>) && _::piecewise_comparable<T, U>;
 
   //================================================================================================
   //! @ingroup concepts
@@ -243,8 +245,7 @@ namespace kumi
   //! members as `U`, and each of its fields has a corresponding field in `U` with the same name
   //================================================================================================
   template<typename T, typename U>
-  concept equivalent =
-    (size_v<T> == size_v<U>) && _::has_same_field_names<std::remove_cvref_t<T>, std::remove_cvref_t<U>>();
+  concept equivalent = (size_v<T> == size_v<U>) && _::matches_v<std::remove_cvref_t<T>, std::remove_cvref_t<U>>;
 
   //================================================================================================
   //! @ingroup concepts
@@ -255,8 +256,7 @@ namespace kumi
   //! the corresponding field in `U`
   //================================================================================================
   template<typename T, typename U>
-  concept named_equality_comparable =
-    equivalent<T, U> && _::check_named_equality<std::remove_cvref_t<T>, std::remove_cvref_t<U>>();
+  concept named_equality_comparable = equivalent<T, U> && _::fieldwise_comparable<T, U>;
 
   //================================================================================================
   //! @ingroup concepts
@@ -297,12 +297,9 @@ namespace kumi
   //! @note The operation is not required to be commutative; that is monoid(x,y) and monoid(y,x)
   //!       may yield different results. (Ie : the monoid is not necessarily abelian)
   //================================================================================================
-  template<typename T>
-  concept monoid = []() {
-    using M = std::remove_cvref_t<T>;
-    return requires(M m) {
-      { M::identity };
-      { M{}(M::identity, M::identity) };
-    };
-  }();
+  template<typename M>
+  concept monoid = requires {
+    { std::remove_cvref_t<M>::identity };
+    { std::remove_cvref_t<M>{}(std::remove_cvref_t<M>::identity, std::remove_cvref_t<M>::identity) };
+  };
 }

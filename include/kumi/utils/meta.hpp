@@ -81,7 +81,7 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(T&& t) noexcept
   {
     constexpr std::size_t Idx = [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return _::get_index_by_name_v<_::value_as<Name>, element_t<I, T>...>;
+      return _::get_index_by_value_v<Name, element_t<I, T>...>;
     }(std::make_index_sequence<size_v<T>>{});
     return field_value_of(get<Idx>(KUMI_FWD(t)));
   }

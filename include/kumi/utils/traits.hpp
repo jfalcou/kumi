@@ -11,7 +11,7 @@
 #include <type_traits>
 #include <utility>
 
-#include <kumi/detail/unique.hpp>
+#include <kumi/detail/meta_helpers.hpp>
 
 namespace kumi
 {
@@ -470,7 +470,7 @@ namespace kumi
     template<typename... Us> static auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
     static std::false_type is_set(...);
 
-    using type = decltype(is_set(as<Ts>{}...));
+    using type = decltype(is_set(std::type_identity<Ts>{}...));
   };
 
   template<typename... Ts> using all_uniques_t = typename all_uniques<std::index_sequence_for<Ts...>, Ts...>::type;
@@ -518,7 +518,7 @@ namespace kumi
     template<typename... Us> static auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
     static std::false_type is_set(...);
 
-    using type = decltype(is_set(_::make_value_as<Ints, Ts>()...));
+    using type = decltype(is_set(_::get_value_identity<Ints, Ts>()...));
   };
 
   template<typename... Ts>

@@ -15,64 +15,130 @@
 
 namespace kumi::_
 {
+  template<typename From, typename To>
+  concept ordered = requires(From const& a, To const& b) {
+    { a < b };
+  };
+
+  // Helper for checking if two tuples can == each others
+  template<typename T, typename U>
+  concept comparable = requires(T t, U u) {
+    { t == u };
+  };
+
+  template<typename T, typename... Args>
+  concept implicit_constructible = requires(Args... args) { T{args...}; };
+
   //==============================================================================================
   // Helper concepts for construction checks
   //==============================================================================================
-  template<typename From, typename To> struct is_piecewise_constructible;
-  template<typename From, typename To> struct is_piecewise_convertible;
-  template<typename From, typename To> struct is_piecewise_ordered;
+  template<typename From, typename To> struct is_piecewise_constructible : std::false_type
+  {
+  };
+
+  template<typename From, typename To> struct is_piecewise_convertible : std::false_type
+  {
+  };
+
+  template<typename From, typename To> struct is_piecewise_ordered : std::false_type
+  {
+  };
+
+  template<typename From, typename To> struct is_piecewise_comparable : std::false_type
+  {
+  };
 
   template<template<class...> class Box, typename... From, typename... To>
+  requires(sizeof...(From) == sizeof...(To))
   struct is_piecewise_convertible<Box<From...>, Box<To...>>
   {
     static constexpr bool value = (... && kumi::convertible_to<From, To>);
   };
 
   template<template<class...> class Box, typename... From, typename... To>
+  requires(sizeof...(From) == sizeof...(To))
   struct is_piecewise_constructible<Box<From...>, Box<To...>>
   {
     static constexpr bool value = (... && std::is_constructible_v<To, From>);
   };
 
-  template<typename From, typename To>
-  concept ordered = requires(From const& a, To const& b) {
-    { a < b };
-  };
-
   template<template<class...> class Box, typename... From, typename... To>
+  requires(sizeof...(From) == sizeof...(To))
   struct is_piecewise_ordered<Box<From...>, Box<To...>>
   {
     static constexpr bool value = (... && ordered<From, To>);
   };
 
+  template<template<class...> class Box, typename... Ts, typename... Us>
+  requires(sizeof...(Ts) == sizeof...(Us))
+  struct is_piecewise_comparable<Box<Ts...>, Box<Us...>>
+  {
+    static constexpr bool value = (... && _::comparable<Ts, Us>);
+  };
+
   template<typename From, typename To>
-  concept piecewise_convertible =
-    (size_v<From> == size_v<To>) &&
-    _::is_piecewise_convertible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
+  concept piecewise_convertible = is_piecewise_convertible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
 
   template<typename From, typename To>
   concept piecewise_constructible =
-    (size_v<From> == size_v<To>) &&
-    _::is_piecewise_constructible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
+    is_piecewise_constructible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
 
   template<typename From, typename To>
-  concept piecewise_ordered = _::is_piecewise_ordered<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
+  concept piecewise_ordered = is_piecewise_ordered<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
 
-  template<typename T, typename... Args>
-  concept implicit_constructible = requires(Args... args) { T{args...}; };
+  template<typename From, typename To>
+  concept piecewise_comparable = is_piecewise_comparable<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
+
+  //==============================================================================================
+  // Helper concepts for construction checks on records
+  //==============================================================================================
+  template<typename Field> struct check_value
+  {
+    static consteval std::false_type get(...);
+  };
+
+  template<auto Ref, typename Field> struct check_value<field_capture<Ref, Field>>
+  {
+    template<typename T> static consteval Field get(field_capture<Ref, T>);
+  };
+
+  template<typename... Ts> struct sort : std::true_type
+  {
+  };
+
+  template<template<class...> class Box, typename... Ts, typename... Us>
+  requires(sizeof...(Ts) == sizeof...(Us))
+  struct sort<Box<Ts...>, Box<Us...>> : check_value<Ts>...
+  {
+    using check_value<Ts>::get...;
+    using t_list = type_list<decltype(get(std::declval<Us>()))...>;
+    using u_list = type_list<decltype(get(std::declval<Us>()))...>;
+
+    using is_fieldwise_constructible = is_piecewise_constructible<t_list, u_list>;
+    using is_fieldwise_convertible = is_piecewise_convertible<t_list, u_list>;
+    using is_fieldwise_comparable = is_piecewise_comparable<t_list, u_list>;
+  };
+
+  template<typename From, typename To>
+  concept fieldwise_convertible =
+    sort<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::is_fieldwise_convertible::value;
+
+  template<typename From, typename To>
+  concept fieldwise_constructible =
+    sort<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::is_fieldwise_constructible::value;
+
+  template<typename From, typename To>
+  concept fieldwise_comparable =
+    sort<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::is_fieldwise_comparable::value;
 
   //==============================================================================================
   // Helper meta functions to access a field type by type
   //==============================================================================================
-
-  struct bottom;
-  using invalid = std::integral_constant<std::size_t, static_cast<std::size_t>(-1)>;
-
   template<typename Ref, typename Field> struct check_type
   {
     static consteval Field get(Ref)
     requires std::is_same_v<Field, Ref>;
-    static consteval bottom get(...);
+    static consteval std::false_type get(...);
   };
 
   template<std::size_t I, typename Ref, typename Field> struct get_index
@@ -109,90 +175,57 @@ namespace kumi::_
     get_index_by_type<Ref, std::index_sequence_for<Fields...>, Fields...>::value;
 
   template<typename Ref, typename... Fields>
-  concept can_get_field_by_type = !std::is_same_v<get_field_by_type_t<Ref, Fields...>, bottom>;
+  concept can_get_field_by_type = !std::is_same_v<get_field_by_type_t<Ref, Fields...>, std::false_type>;
 
   //==============================================================================================
   // Helper meta functions to access a field type by name
   //==============================================================================================
-  template<std::size_t I, typename Ref, typename Field> struct check_name
+  template<std::size_t I, auto Ref, typename Field> struct check_field
   {
-    using constant = std::integral_constant<std::size_t, I>;
-
-    static consteval Field get(Ref)
-    requires(Ref::value == Field::name);
-    static consteval bottom get(...);
-    //
-    static consteval constant get_index(Ref)
-    requires(Ref::value == Field::name);
+    static consteval std::false_type get(...);
     static consteval invalid get_index(...);
   };
 
-  template<typename Ref, typename Seq, typename... Fields> struct get_field_by_name;
+  template<std::size_t I, auto Ref, typename Field> struct check_field<I, Ref, field_capture<Ref, Field>>
+  {
+    using constant = std::integral_constant<std::size_t, I>;
+    using field = field_capture<Ref, Field>;
+    static consteval field get(decltype(Ref));
+    static consteval constant get_index(decltype(Ref));
+  };
+
+  template<auto Ref, typename Seq, typename... Fields> struct get_field_by_value;
 
   /// Helper using inheritance to get the corresponding name in an variadic pack if it exist
   /// The index is used in order to enable mixed named/unnamed packs to work
-  template<typename Ref, std::size_t... I, typename... Fields>
-  struct get_field_by_name<Ref, std::index_sequence<I...>, Fields...> : check_name<I, Ref, Fields>...
+  template<auto Ref, std::size_t... I, typename... Fields>
+  struct get_field_by_value<Ref, std::index_sequence<I...>, Fields...> : check_field<I, Ref, Fields>...
   {
-    using check_name<I, Ref, Fields>::get...;
-    using check_name<I, Ref, Fields>::get_index...;
+    using check_field<I, Ref, Fields>::get...;
+    using check_field<I, Ref, Fields>::get_index...;
 
-    using type = decltype(get(std::declval<Ref>()));
-    static constexpr auto value = decltype(get_index(std::declval<Ref>()))::value;
+    using type = decltype(get(Ref));
+    static constexpr auto value = decltype(get_index(Ref))::value;
   };
 
-  template<typename Ref, typename... Fields>
-  using get_field_by_name_t = typename get_field_by_name<Ref, std::index_sequence_for<Fields...>, Fields...>::type;
+  template<auto Ref, typename... Fields>
+  using get_field_by_value_t = typename get_field_by_value<Ref, std::index_sequence_for<Fields...>, Fields...>::type;
 
-  template<typename Ref, typename... Fields>
-  inline constexpr auto get_index_by_name_v =
-    get_field_by_name<Ref, std::index_sequence_for<Fields...>, Fields...>::value;
+  template<auto Ref, typename... Fields>
+  inline constexpr auto get_index_by_value_v =
+    get_field_by_value<Ref, std::index_sequence_for<Fields...>, Fields...>::value;
 
-  template<typename Ref, typename... Fields>
-  concept can_get_field_by_name = !std::is_same_v<get_field_by_name_t<Ref, Fields...>, bottom>;
+  template<auto Ref, typename... Fields>
+  concept can_get_field_by_value = !std::is_same_v<get_field_by_value_t<Ref, Fields...>, std::false_type>;
 
   // MSVC workaround for get<>
   // MSVC doesnt SFINAE properly based on NTTP types before requires evaluation
   // so we need this weird mechanism for it to pick the correct version.
   template<auto Name, typename... Ts> KUMI_ABI constexpr auto contains_field()
   {
-    if constexpr (!std::integral<std::remove_cvref_t<decltype(Name)>>)
-      return can_get_field_by_name<value_as<Name>, Ts...>;
+    if constexpr (!std::integral<std::remove_cvref_t<decltype(Name)>>) return can_get_field_by_value<Name, Ts...>;
     else return false;
   };
-  //==============================================================================================
-  // Helper concepts for construction checks on records
-  //==============================================================================================
-  template<typename From, typename To> struct is_fieldwise_constructible;
-  template<typename From, typename To> struct is_fieldwise_convertible;
-
-  template<template<class...> class Box, typename... From, typename... To>
-  struct is_fieldwise_convertible<Box<From...>, Box<To...>>
-  {
-    static constexpr bool value = ([]() {
-      using F_field = std::remove_cvref_t<From>;
-      using T_field = std::remove_cvref_t<get_field_by_name_t<value_as<F_field::name>, To...>>;
-      return kumi::convertible_to<typename F_field::type, typename T_field::type>;
-    }() && ...);
-  };
-
-  template<template<class...> class Box, typename... From, typename... To>
-  struct is_fieldwise_constructible<Box<From...>, Box<To...>>
-  {
-    static constexpr bool value = ([]() {
-      using F_field = std::remove_cvref_t<From>;
-      using T_field = std::remove_cvref_t<get_field_by_name_t<value_as<F_field::name>, To...>>;
-      return std::is_constructible_v<typename F_field::type, typename T_field::type>;
-    }() && ...);
-  };
-
-  template<typename From, typename To>
-  concept fieldwise_convertible =
-    _::is_fieldwise_convertible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
-
-  template<typename From, typename To>
-  concept fieldwise_constructible =
-    _::is_fieldwise_constructible<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
 
   //================================================================================================
   // Concept machinery to make our algorithms SFINAE friendly
@@ -221,9 +254,4 @@ namespace kumi::_
       return ((kumi::size_v<raw_member_t<0, T>> == kumi::size_v<raw_member_t<N + 1, T>>) && ...);
     }(std::make_index_sequence<size<T>::value - 1>{}));
 
-  // Helper for checking if two tuples can == each others
-  template<typename T, typename U>
-  concept comparable = requires(T t, U u) {
-    { t == u };
-  };
 }
