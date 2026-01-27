@@ -10,7 +10,6 @@
 #include <cstddef>
 #include <utility>
 
-#include <kumi/detail/concepts.hpp>
 #include <kumi/detail/field_capture.hpp>
 
 namespace kumi::_
