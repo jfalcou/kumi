@@ -24,7 +24,7 @@ namespace kumi
         return []<std::size_t... N>(std::index_sequence<N...>) {
           bool checks[] = {([]() {
             if constexpr (product_type<element_t<N, map_t>>) return in_bound_indexes<get<N>(idxs), T>();
-            else if constexpr (get<N>(idxs) < size_v<T>) return true;
+            else if constexpr (static_cast<std::size_t>(get<N>(idxs)) < size_v<T>) return true;
             else return false;
           }())...};
 
