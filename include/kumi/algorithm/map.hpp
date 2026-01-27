@@ -7,8 +7,6 @@
 //==================================================================================================
 #pragma once
 
-#include <kumi/detail/builder.hpp>
-
 namespace kumi
 {
   //================================================================================================
@@ -46,7 +44,7 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto map(Function f, Tuple&& t0, Tuples&&... others)
   requires(compatible_product_types<Tuple, Tuples...> && _::supports_call<Function, Tuple &&, Tuples && ...>)
   {
-    if constexpr (sized_product_type<Tuple, 0>) return _::builder<Tuple>::make();
+    if constexpr (sized_product_type<Tuple, 0>) return builder<Tuple>::make();
     else
     {
       auto const call = [&]<std::size_t N, typename... Ts>(index_t<N>, Ts&&... args) {
@@ -59,7 +57,7 @@ namespace kumi
       };
 
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return _::builder<Tuple>::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
+        return builder<Tuple>::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
       }(std::make_index_sequence<size_v<Tuple>>());
     }
   }
@@ -110,7 +108,7 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto map_index(Function f, Tuple&& t0, Tuples&&... others)
   requires(!record_type<Tuple> && (!record_type<Tuples> && ...))
   {
-    if constexpr (sized_product_type<Tuple, 0>) return _::builder<Tuple>::make();
+    if constexpr (sized_product_type<Tuple, 0>) return builder<Tuple>::make();
     else
     {
       auto const call = [&]<std::size_t N, typename... Ts>(index_t<N> idx, Ts&&... args) {
@@ -118,7 +116,7 @@ namespace kumi
       };
 
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return _::builder<Tuple>::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
+        return builder<Tuple>::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
       }(std::make_index_sequence<size_v<Tuple>>());
     }
   }
@@ -169,7 +167,7 @@ namespace kumi
   requires(compatible_product_types<Tuple, Tuples...>)
   constexpr auto map_field(Function f, Tuple&& t0, Tuples&&... others)
   {
-    if constexpr (sized_product_type<Tuple, 0>) return _::builder<Tuple>::make();
+    if constexpr (sized_product_type<Tuple, 0>) return builder<Tuple>::make();
     else
     {
       auto const call = [&]<std::size_t N, typename... Ts>(index_t<N>, Ts&&... args) {
@@ -178,7 +176,7 @@ namespace kumi
       };
 
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return _::builder<Tuple>::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
+        return builder<Tuple>::make(call(index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
       }(std::make_index_sequence<size<Tuple>::value>());
     }
   }

@@ -14,7 +14,7 @@
 namespace kumi
 {
   //================================================================================================
-  //! @defgroup utility   Helper Types and Functions
+  //! @defgroup details Helper Types and Functions
   //! @brief    Tools for interacting with kumi::tuple
   //!
   //! @defgroup concepts     Tuple Related Concepts
@@ -25,16 +25,18 @@ namespace kumi
   //================================================================================================
 }
 
-#include <kumi/utils/as.hpp>
-#include <kumi/utils/invoke.hpp>
+// Building blocks
+#include <kumi/detail/abi.hpp>
+#include <kumi/detail/streamable.hpp>
+#include <kumi/detail/stdfix.hpp>
 
-#include <kumi/utils/traits.hpp>
-#include <kumi/utils/concepts.hpp>
-#include <kumi/utils/unit_type.hpp>
-#include <kumi/utils/monoid.hpp>
-#include <kumi/utils/meta.hpp>
+// Types
+#include <kumi/detail/str.hpp>
+#include <kumi/detail/field_capture.hpp>
 
-#include <kumi/utils/indexes.hpp>
-#include <kumi/utils/ct_helpers.hpp>
-
-#include <kumi/utils/std.hpp>
+// Functionnalities
+#include <kumi/detail/meta_helpers.hpp>
+#include <kumi/detail/concepts.hpp>
+#include <kumi/detail/binder.hpp>
+#include <kumi/detail/optimized.hpp>
+#include <kumi/detail/builder.hpp>

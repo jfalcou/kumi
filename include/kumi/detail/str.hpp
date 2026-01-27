@@ -9,7 +9,6 @@
 
 #include <iosfwd>
 #include <utility>
-#include <kumi/detail/abi.hpp>
 
 namespace kumi
 {

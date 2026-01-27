@@ -8,7 +8,6 @@
 #pragma once
 
 #include <cstddef>
-#include <kumi/detail/field_capture.hpp>
 
 //==================================================================================================
 // Helpers for uniqueness checking

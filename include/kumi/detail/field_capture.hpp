@@ -7,10 +7,6 @@
 //==================================================================================================
 #pragma once
 
-#include <kumi/detail/abi.hpp>
-#include <kumi/detail/str.hpp>
-#include <kumi/detail/streamable.hpp>
-
 namespace kumi
 {
   //================================================================================================
@@ -101,11 +97,11 @@ namespace kumi
   {
     using W = std::remove_cvref_t<U>;
     if constexpr (requires { W::is_field_capture; })
-      return field_capture<name_of(as<T>{}), typename W::type>{
-        static_cast<typename W::type>(field_value_of(KUMI_FWD(t)))};
+      return field_capture<std::remove_cvref_t<T>::name, typename W::type>{
+        static_cast<typename W::type>(_::get_field(KUMI_FWD(t)))};
     else if constexpr (!requires { std::remove_cvref_t<T>::is_field_capture; })
       return static_cast<typename W::type>(KUMI_FWD(t));
-    else return field_capture<name_of(as<T>{}), U>{static_cast<U>(field_value_of(KUMI_FWD(t)))};
+    else return field_capture<std::remove_cvref_t<T>::name, U>{static_cast<U>(_::get_field(KUMI_FWD(t)))};
   }
 
   namespace result

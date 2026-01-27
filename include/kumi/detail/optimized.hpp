@@ -9,7 +9,6 @@
 
 #include <cstddef>
 #include <utility>
-#include <kumi/detail/concepts.hpp>
 
 namespace kumi::_
 {

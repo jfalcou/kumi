@@ -7,8 +7,6 @@
 //==================================================================================================
 #pragma once
 
-#include <kumi/detail/builder.hpp>
-
 namespace kumi
 {
   //================================================================================================
@@ -46,7 +44,7 @@ namespace kumi
                                                 [[maybe_unused]] index_t<I1> i1) noexcept
   {
     return [&]<std::size_t... N>(std::index_sequence<N...>) {
-      using final_t = _::builder_make_t<Tuple, element_t<N + I0, Tuple>...>;
+      using final_t = builder_make_t<Tuple, element_t<N + I0, Tuple>...>;
       return final_t{get<N + I0>(KUMI_FWD(t))...};
     }(std::make_index_sequence<I1 - I0>());
   }
@@ -94,7 +92,7 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto split(Tuple&& t, [[maybe_unused]] index_t<I0> i0) noexcept
   {
     auto select = [&]<typename O, std::size_t... I>(O, std::index_sequence<I...>) {
-      using type = _::builder_make_t<Tuple, element_t<O::value + I, Tuple>...>;
+      using type = builder_make_t<Tuple, element_t<O::value + I, Tuple>...>;
       return type{get<O::value + I>(KUMI_FWD(t))...};
     };
 

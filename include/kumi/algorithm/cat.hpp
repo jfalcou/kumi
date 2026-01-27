@@ -7,8 +7,6 @@
 //==================================================================================================
 #pragma once
 
-#include <kumi/detail/builder.hpp>
-
 namespace kumi
 {
   //================================================================================================
@@ -62,12 +60,12 @@ namespace kumi
         return that;
       }();
 
-      using res_type = result::common_product_type_t<std::remove_cvref_t<Ts>...>;
+      using res_type = common_product_type_t<std::remove_cvref_t<Ts>...>;
 
       return [&]<std::size_t... N>(auto&& tuples, std::index_sequence<N...>) {
         using rts = std::remove_cvref_t<decltype(tuples)>;
 
-        using type = _::builder_make_t<res_type, element_t<pos.e[N], std::remove_cvref_t<element_t<pos.t[N], rts>>>...>;
+        using type = builder_make_t<res_type, element_t<pos.e[N], std::remove_cvref_t<element_t<pos.t[N], rts>>>...>;
 
         return type{get<pos.e[N]>(get<pos.t[N]>(KUMI_FWD(tuples)))...};
       }(kumi::forward_as_tuple(KUMI_FWD(ts)...), std::make_index_sequence<count - 1>{});

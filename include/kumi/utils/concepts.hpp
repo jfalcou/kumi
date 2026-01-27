@@ -7,14 +7,42 @@
 //==================================================================================================
 #pragma once
 
-#include <kumi/detail/concepts.hpp>
-#include <kumi/detail/str.hpp>
 #include <cstddef>
 #include <type_traits>
 #include <utility>
 
 namespace kumi
 {
+
+  namespace _
+  {
+    //================================================================================================
+    // Concept machinery to make our algorithms SFINAE friendly
+    //================================================================================================
+    template<typename F, typename T>
+    concept supports_apply = []<std::size_t... N>(std::index_sequence<N...>) {
+      return std::invocable<F, raw_member_t<N, T>...>;
+    }(std::make_index_sequence<size<T>::value>{});
+
+    template<typename F, typename T>
+    concept supports_nothrow_apply = []<std::size_t... N>(std::index_sequence<N...>) {
+      return std::is_nothrow_invocable<F, raw_member_t<N, T>...>::value;
+    }(std::make_index_sequence<size<T>::value>{});
+
+    template<typename F, typename... Ts>
+    concept supports_call = []<std::size_t... I>(std::index_sequence<I...>) {
+      return ([]<std::size_t J>(std::integral_constant<std::size_t, J>) {
+        return std::invocable<F, raw_member_t<J, Ts>...>;
+      }(std::integral_constant<std::size_t, I>{}) &&
+              ...);
+    }(std::make_index_sequence<(size<Ts>::value, ...)>{});
+
+    template<typename T>
+    concept supports_transpose = (size<T>::value <= 1) || ([]<std::size_t... N>(std::index_sequence<N...>) {
+                                   return ((size_v<raw_member_t<0, T>> == size_v<raw_member_t<N + 1, T>>) && ...);
+                                 }(std::make_index_sequence<size<T>::value - 1>{}));
+  }
+
   //================================================================================================
   //! @ingroup concepts
   //! @brief Concept specifying a type follows the Product Type semantic

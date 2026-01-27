@@ -489,6 +489,27 @@ namespace kumi
   //================================================================================================
   //! @}
   //================================================================================================
+
+  // Builder protocole
+  template<record_type R> struct builder<R>
+  {
+    using type = R;
+
+    template<typename... Us> using to = kumi::record<Us...>;
+
+    template<typename... Args> static constexpr auto make(Args&&... args)
+    {
+      return kumi::make_record(KUMI_FWD(args)...);
+    }
+
+    template<typename... Args> static constexpr auto build(Args&&... args) { return kumi::record{KUMI_FWD(args)...}; }
+  };
+
+  // As we are lacking a proper mechanism to find the least restrictive subtype, we fallback to a specializable trait
+  template<record_type... Ts> struct common_product_type<Ts...>
+  {
+    using type = kumi::record<>;
+  };
 }
 
 #endif

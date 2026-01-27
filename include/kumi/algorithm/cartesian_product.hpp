@@ -7,8 +7,6 @@
 //==================================================================================================
 #pragma once
 
-#include <kumi/detail/builder.hpp>
-
 namespace kumi
 {
 
@@ -65,10 +63,11 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto cartesian_product(Ts&&... ts)
   requires(follows_same_semantic<Ts...>)
   {
-    using res_type = result::common_product_type_t<std::remove_cvref_t<Ts>...>;
     if constexpr (sizeof...(Ts) == 0) return tuple{};
     else
     {
+      using res_type = common_product_type_t<std::remove_cvref_t<Ts>...>;
+
       constexpr auto idx = [&]<std::size_t... I>(std::index_sequence<I...>) {
         kumi::_::digits<sizeof...(Ts), kumi::size_v<Ts>...> dgt{};
         using t_t = decltype(dgt(0));
@@ -82,8 +81,7 @@ namespace kumi
       auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>) {
         auto tps = kumi::forward_as_tuple(ts...);
         using res_t =
-          _::builder_make_t<res_type,
-                            element_t<idx.data[k].data[I], std::remove_cvref_t<element_t<I, decltype(tps)>>>...>;
+          builder_make_t<res_type, element_t<idx.data[k].data[I], std::remove_cvref_t<element_t<I, decltype(tps)>>>...>;
         return res_t{get<idx.data[k].data[I]>(get<I>(tps))...};
       };
 

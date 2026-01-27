@@ -7,8 +7,6 @@
 //==================================================================================================
 #pragma once
 
-#include <kumi/detail/builder.hpp>
-
 namespace kumi
 {
   namespace _
@@ -67,7 +65,7 @@ namespace kumi
     constexpr auto pos = _::selector<Pred, T>();
 
     auto select = [&]<typename O, std::size_t... I>(O, std::index_sequence<I...>) {
-      using type = _::builder_make_t<T, element_t<pos.t[O::value + I], T>...>;
+      using type = builder_make_t<T, element_t<pos.t[O::value + I], T>...>;
       return type{get<pos.t[O::value + I]>(KUMI_FWD(t))...};
     };
 
@@ -103,10 +101,10 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto filter(T&& t) noexcept
   {
     constexpr auto pos = _::selector<Pred, T>();
-    if constexpr (sized_product_type<T, 0>) return _::builder<T>::make();
+    if constexpr (sized_product_type<T, 0>) return builder<T>::make();
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = _::builder_make_t<T, element_t<pos.t[I], T>...>;
+        using type = builder_make_t<T, element_t<pos.t[I], T>...>;
         return type{get<pos.t[I]>(KUMI_FWD(t))...};
       }(std::make_index_sequence<pos.cut>{});
   }
@@ -139,10 +137,10 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto filter_not(T&& t) noexcept
   {
     constexpr auto pos = _::selector<Pred, T>();
-    if constexpr (sized_product_type<T, 0>) return _::builder<T>::make();
+    if constexpr (sized_product_type<T, 0>) return builder<T>::make();
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = _::builder_make_t<T, element_t<pos.t[pos.cut + I], T>...>;
+        using type = builder_make_t<T, element_t<pos.t[pos.cut + I], T>...>;
         return type{get<pos.t[pos.cut + I]>(KUMI_FWD(t))...};
       }(std::make_index_sequence<size_v<T> - pos.cut>{});
   }
