@@ -29,6 +29,7 @@ namespace kumi
 #include <kumi/utils/invoke.hpp>
 
 #include <kumi/utils/traits.hpp>
+#include <kumi/utils/builder.hpp>
 #include <kumi/utils/concepts.hpp>
 #include <kumi/utils/unit_type.hpp>
 #include <kumi/utils/monoid.hpp>

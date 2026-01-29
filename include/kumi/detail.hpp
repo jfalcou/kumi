@@ -39,4 +39,3 @@ namespace kumi
 #include <kumi/detail/concepts.hpp>
 #include <kumi/detail/binder.hpp>
 #include <kumi/detail/optimized.hpp>
-#include <kumi/detail/builder.hpp>
