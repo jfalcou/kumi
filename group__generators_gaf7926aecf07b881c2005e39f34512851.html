@@ -170,8 +170,8 @@ Helper type</h2>
 <div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Pred, <a class="code hl_concept" href="conceptkumi_1_1product__type.html">kumi::product_type</a> T&gt;</div>
 <div class="line">  <span class="keyword">using </span>partition_t = <span class="keyword">typename</span> partition&lt;Pred, T&gt;::type;</div>
 <div class="line">}</div>
-<div class="ttc" id="aconceptkumi_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1product__type.html">kumi::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:26</div></div>
-<div class="ttc" id="agroup__generators_gaf7926aecf07b881c2005e39f34512851_html_gaf7926aecf07b881c2005e39f34512851"><div class="ttname"><a href="group__generators_gaf7926aecf07b881c2005e39f34512851.html#gaf7926aecf07b881c2005e39f34512851">kumi::partition</a></div><div class="ttdeci">constexpr auto partition(T &amp;&amp;t) noexcept</div><div class="ttdoc">Partition a product type over a predicate.</div><div class="ttdef"><b>Definition</b> partition.hpp:65</div></div>
+<div class="ttc" id="aconceptkumi_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1product__type.html">kumi::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:54</div></div>
+<div class="ttc" id="agroup__generators_gaf7926aecf07b881c2005e39f34512851_html_gaf7926aecf07b881c2005e39f34512851"><div class="ttname"><a href="group__generators_gaf7926aecf07b881c2005e39f34512851.html#gaf7926aecf07b881c2005e39f34512851">kumi::partition</a></div><div class="ttdeci">constexpr auto partition(T &amp;&amp;t) noexcept</div><div class="ttdoc">Partition a product type over a predicate.</div><div class="ttdef"><b>Definition</b> partition.hpp:63</div></div>
 <div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
 </div><!-- fragment --><p>Computes the type returned by a call to <a class="el" href="group__generators_gaf7926aecf07b881c2005e39f34512851.html#gaf7926aecf07b881c2005e39f34512851" title="Partition a product type over a predicate.">kumi::partition</a>.</p>
 <h2><a class="anchor" id="autotoc_md69"></a>
@@ -194,7 +194,7 @@ Examples:</h2>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Real     first: &quot;</span> &lt;&lt; kumi::partition&lt;std::is_floating_point&gt;(original) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;nullptr  first: &quot;</span> &lt;&lt; kumi::partition&lt;std::is_null_pointer&gt;(original) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:37</div></div>
+<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:32</div></div>
 </div><!-- fragment --> <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
@@ -215,7 +215,7 @@ Examples:</h2>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Real     first: &quot;</span> &lt;&lt; kumi::partition&lt;std::is_floating_point&gt;(original) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;nullptr  first: &quot;</span> &lt;&lt; kumi::partition&lt;std::is_null_pointer&gt;(original) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous fields necessarily named, names are unique.</div><div class="ttdef"><b>Definition</b> traits.hpp:531</div></div>
+<div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous fields necessarily named, names are unique.</div><div class="ttdef"><b>Definition</b> traits.hpp:529</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

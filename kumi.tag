@@ -64,9 +64,14 @@
     </member>
   </compound>
   <compound kind="class">
-    <name>kumi::_::builder</name>
-    <filename>structkumi_1_1___1_1builder.html</filename>
-    <templarg>kumi::product_type T</templarg>
+    <name>kumi::builder</name>
+    <filename>structkumi_1_1builder.html</filename>
+    <templarg>typename T</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::common_product_type</name>
+    <filename>structkumi_1_1common__product__type.html</filename>
+    <templarg>typename... Ts</templarg>
   </compound>
   <compound kind="struct">
     <name>kumi::container_size</name>
@@ -924,6 +929,8 @@
     <class kind="class">kumi::boolean_and</class>
     <class kind="class">kumi::boolean_or</class>
     <class kind="class">kumi::boolean_xor</class>
+    <class kind="class">kumi::builder</class>
+    <class kind="struct">kumi::common_product_type</class>
     <class kind="struct">kumi::container_size</class>
     <class kind="struct">kumi::container_type</class>
     <class kind="struct">kumi::element</class>
@@ -1087,13 +1094,6 @@
       <anchorfile>group__generators_ga43733ea12f98401cb32efd3e189c09b9.html</anchorfile>
       <anchor>ga43733ea12f98401cb32efd3e189c09b9</anchor>
       <arglist>(T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>common_product_type</name>
-      <anchorfile>group__traits_ga3226fe6731192617509a4baae1f74655.html</anchorfile>
-      <anchor>ga3226fe6731192617509a4baae1f74655</anchor>
-      <arglist>(Ts...)</arglist>
     </member>
     <member kind="function">
       <type>constexpr std::size_t</type>
@@ -2172,6 +2172,11 @@
     <filename>namespaceliterals.html</filename>
   </compound>
   <compound kind="group">
+    <name>details</name>
+    <title>Helper Types and Functions</title>
+    <filename>group__details.html</filename>
+  </compound>
+  <compound kind="group">
     <name>utility</name>
     <title>Helper Types and Functions</title>
     <filename>group__utility.html</filename>
@@ -2179,6 +2184,7 @@
     <class kind="class">kumi::boolean_and</class>
     <class kind="class">kumi::boolean_or</class>
     <class kind="class">kumi::boolean_xor</class>
+    <class kind="class">kumi::builder</class>
     <class kind="class">kumi::field_name</class>
     <class kind="struct">kumi::index_t</class>
     <class kind="class">kumi::indexes_t</class>
@@ -3045,6 +3051,7 @@
     <filename>group__traits.html</filename>
     <class kind="struct">kumi::all_unique_names</class>
     <class kind="struct">kumi::all_uniques</class>
+    <class kind="struct">kumi::common_product_type</class>
     <class kind="struct">kumi::container_size</class>
     <class kind="struct">kumi::container_type</class>
     <class kind="struct">kumi::element</class>
@@ -3056,13 +3063,6 @@
     <class kind="struct">kumi::raw_element</class>
     <class kind="struct">kumi::raw_member</class>
     <class kind="struct">kumi::size</class>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::common_product_type</name>
-      <anchorfile>group__traits_ga3226fe6731192617509a4baae1f74655.html</anchorfile>
-      <anchor>ga3226fe6731192617509a4baae1f74655</anchor>
-      <arglist>(Ts...)</arglist>
-    </member>
     <member kind="variable">
       <type>constexpr bool</type>
       <name>kumi::is_field_capture_v</name>
@@ -3136,7 +3136,6 @@
     <name>tuple</name>
     <title>Tuple Types and Functions</title>
     <filename>group__tuple.html</filename>
-    <class kind="class">kumi::_::builder</class>
     <class kind="class">kumi::tuple</class>
     <member kind="friend">
       <type>friend std::basic_ostream&lt; CharT, Traits &gt; &amp;</type>

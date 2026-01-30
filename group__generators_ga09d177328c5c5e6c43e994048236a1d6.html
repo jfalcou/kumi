@@ -173,8 +173,8 @@ Helper type</h2>
 <div class="line">  <span class="keyword">template</span>&lt;<a class="code hl_concept" href="conceptkumi_1_1product__type.html">product_type</a> Tuple,std::size_t... Idx&gt;</div>
 <div class="line">  <span class="keyword">using </span>reorder_fields_t = <span class="keyword">typename</span> <a class="code hl_function" href="group__generators_ga09d177328c5c5e6c43e994048236a1d6.html#ga09d177328c5c5e6c43e994048236a1d6">reorder_fields</a>&lt;Tuple,Idx...&gt;::type;</div>
 <div class="line">}</div>
-<div class="ttc" id="aconceptkumi_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1product__type.html">kumi::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:26</div></div>
-<div class="ttc" id="agroup__generators_ga09d177328c5c5e6c43e994048236a1d6_html_ga09d177328c5c5e6c43e994048236a1d6"><div class="ttname"><a href="group__generators_ga09d177328c5c5e6c43e994048236a1d6.html#ga09d177328c5c5e6c43e994048236a1d6">kumi::reorder_fields</a></div><div class="ttdeci">constexpr auto reorder_fields(Tuple &amp;&amp;t)</div><div class="ttdoc">Reorder elements of a kumi::record.</div><div class="ttdef"><b>Definition</b> reorder.hpp:109</div></div>
+<div class="ttc" id="aconceptkumi_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1product__type.html">kumi::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:54</div></div>
+<div class="ttc" id="agroup__generators_ga09d177328c5c5e6c43e994048236a1d6_html_ga09d177328c5c5e6c43e994048236a1d6"><div class="ttname"><a href="group__generators_ga09d177328c5c5e6c43e994048236a1d6.html#ga09d177328c5c5e6c43e994048236a1d6">kumi::reorder_fields</a></div><div class="ttdeci">constexpr auto reorder_fields(Tuple &amp;&amp;t)</div><div class="ttdoc">Reorder elements of a kumi::record.</div><div class="ttdef"><b>Definition</b> reorder.hpp:106</div></div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__generators_ga09d177328c5c5e6c43e994048236a1d6.html#ga09d177328c5c5e6c43e994048236a1d6" title="Reorder elements of a kumi::record.">kumi::reorder_fields</a></p>
 <h2><a class="anchor" id="autotoc_md121"></a>
 Example</h2>
@@ -191,7 +191,7 @@ Example</h2>
 <div class="line">  std::cout &lt;&lt; values &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__generators_ga09d177328c5c5e6c43e994048236a1d6.html#ga09d177328c5c5e6c43e994048236a1d6">kumi::reorder_fields</a>&lt;<span class="stringliteral">&quot;b&quot;</span>_f,<span class="stringliteral">&quot;a&quot;</span>_f,<span class="stringliteral">&quot;c&quot;</span>_f&gt;(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous fields necessarily named, names are unique.</div><div class="ttdef"><b>Definition</b> traits.hpp:531</div></div>
+<div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous fields necessarily named, names are unique.</div><div class="ttdef"><b>Definition</b> traits.hpp:529</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::_::builder&lt; T &gt; Class Template Reference</title>
+<title>kumi: kumi::common_product_type&lt; Ts &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('structkumi_1_1___1_1builder.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('structkumi_1_1common__product__type.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,33 +121,38 @@ $(document).ready(function(){initNavTree('structkumi_1_1___1_1builder.html','');
 </div>
 
 <div class="header">
-  <div class="summary">
-<a href="structkumi_1_1___1_1builder-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">kumi::_::builder&lt; T &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__product__types.html">Product_types Classes</a> &raquo; <a class="el" href="group__tuple.html">Tuple Types and Functions</a></div></div></div>
+  <div class="headertitle"><div class="title">kumi::common_product_type&lt; Ts &gt; Struct Template Reference<div class="ingroups"><a class="el" href="group__traits.html">Tuple Related Traits</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Helper structure to build the correct output <code>product_type</code>. If the provided Typle is a not a record_type the builder will output a tuple otherwise a record.  
- <a href="structkumi_1_1___1_1builder.html#details">More...</a></p>
+<p>Extracts the common product_type of a parameter pack, if all the types are <code>record</code> then it returns an empty record, otherwise returns an empty <code><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a></code>. As we are unable to compute the Least Restrictive Subtypes of a pack, this trait should be specialized for each case one would want to write.  
+ <a href="structkumi_1_1common__product__type.html#details">More...</a></p>
 
-<p><code>#include &lt;kumi/detail/builder.hpp&gt;</code></p>
+<p><code>#include &lt;kumi/utils/builder.hpp&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="conceptkumi_1_1product__type.html">kumi::product_type</a> T&gt;<br />
-class kumi::_::builder&lt; T &gt;</div><p>Helper structure to build the correct output <code>product_type</code>. If the provided Typle is a not a record_type the builder will output a tuple otherwise a record. </p>
-<p>builder provides a generic way of defining a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a> which depending on the given semantic (product_type or record_type) will output respectively a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> or a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields necessarily named, names are unique.">kumi::record</a></p>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename... Ts&gt;<br />
+struct kumi::common_product_type&lt; Ts &gt;</div><p>Extracts the common product_type of a parameter pack, if all the types are <code>record</code> then it returns an empty record, otherwise returns an empty <code><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a></code>. As we are unable to compute the Least Restrictive Subtypes of a pack, this trait should be specialized for each case one would want to write. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>the template template type to be built. </td></tr>
+    <tr><td class="paramname">Ts</td><td>The <code>product_types</code> to access</td></tr>
   </table>
   </dd>
 </dl>
-</div></div><!-- contents -->
+<h2><a class="anchor" id="autotoc_md182"></a>
+Helper type</h2>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt; <span class="keyword">using </span>common_product_type_t</div>
+<div class="line">      = <span class="keyword">typename</span> <a class="code hl_struct" href="structkumi_1_1common__product__type.html">common_product_type</a>&lt;Ts...&gt;::type;</div>
+<div class="line">}</div>
+<div class="ttc" id="astructkumi_1_1common__product__type_html"><div class="ttname"><a href="structkumi_1_1common__product__type.html">kumi::common_product_type</a></div><div class="ttdoc">Extracts the common product_type of a parameter pack, if all the types are record then it returns an ...</div><div class="ttdef"><b>Definition</b> builder.hpp:31</div></div>
+</div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li><li class="navelem"><b>_</b></li><li class="navelem"><a class="el" href="structkumi_1_1___1_1builder.html">builder</a></li>
+    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li><li class="navelem"><a class="el" href="structkumi_1_1common__product__type.html">common_product_type</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

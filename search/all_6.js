@@ -10,5 +10,5 @@ var searchData=
   ['boolean_5for_7',['boolean_or',['../structkumi_1_1boolean__or.html',1,'kumi']]],
   ['boolean_5fxor_8',['boolean_xor',['../structkumi_1_1boolean__xor.html',1,'kumi']]],
   ['bug_20fixes_9',['bug fixes',['../changelog.html#autotoc_md210',1,'Bug Fixes'],['../changelog.html#autotoc_md215',1,'Bug Fixes'],['../changelog.html#autotoc_md219',1,'Bug Fixes'],['../changelog.html#autotoc_md224',1,'Bug Fixes']]],
-  ['builder_10',['builder',['../structkumi_1_1___1_1builder.html',1,'kumi::_']]]
+  ['builder_10',['builder',['../structkumi_1_1builder.html',1,'kumi']]]
 ];

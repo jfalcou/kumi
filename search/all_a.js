@@ -25,5 +25,5 @@ var searchData=
   ['from_5frecord_22',['from_record',['../group__utility_ga573f86a808058221ffb883e97b8766cc.html#ga573f86a808058221ffb883e97b8766cc',1,'kumi']]],
   ['from_5ftuple_23',['from_tuple',['../group__utility_gad8e73ef5a6e05c2ae2db0bcfa860de48.html#gad8e73ef5a6e05c2ae2db0bcfa860de48',1,'kumi']]],
   ['front_24',['front',['../group__utility_ga0a86710de48273efa390a88ba18b2017.html#ga0a86710de48273efa390a88ba18b2017',1,'kumi']]],
-  ['functions_25',['functions',['../group__utility.html',1,'Helper Types and Functions'],['../group__record.html',1,'Record Types and Functions'],['../group__tuple.html',1,'Tuple Types and Functions']]]
+  ['functions_25',['functions',['../group__utility.html',1,'Helper Types and Functions'],['../group__details.html',1,'Helper Types and Functions'],['../group__record.html',1,'Record Types and Functions'],['../group__tuple.html',1,'Tuple Types and Functions']]]
 ];

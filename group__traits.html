@@ -123,7 +123,6 @@ $(document).ready(function(){initNavTree('group__traits.html',''); initResizable
 <div class="header">
   <div class="summary">
 <a href="#nested-classes">Classes</a> &#124;
-<a href="#func-members">Functions</a> &#124;
 <a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">Tuple Related Traits</div></div>
 </div><!--header-->
@@ -139,6 +138,9 @@ Classes</h2></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1all__uniques.html">kumi::all_uniques&lt; Ints, Ts &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Checks if a parameter pack only contains distinct types.  <a href="structkumi_1_1all__uniques.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1common__product__type.html">kumi::common_product_type&lt; Ts &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the common product_type of a parameter pack, if all the types are <code>record</code> then it returns an empty record, otherwise returns an empty <code><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a></code>. As we are unable to compute the Least Restrictive Subtypes of a pack, this trait should be specialized for each case one would want to write.  <a href="structkumi_1_1common__product__type.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1container__size.html">kumi::container_size&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of elements of a <a class="el" href="conceptkumi_1_1static__container.html" title="Concept specifying a type follows the Container Type semantic.">kumi::static_container</a>.  <a href="structkumi_1_1container__size.html#details">More...</a><br /></td></tr>
@@ -173,13 +175,6 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1size.html">kumi::size&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the number of elements of a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>.  <a href="structkumi_1_1size.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ga3226fe6731192617509a4baae1f74655" id="r_ga3226fe6731192617509a4baae1f74655"><td class="memTemplParams" colspan="2">template&lt;product_type... Ts&gt; </td></tr>
-<tr class="memitem:ga3226fe6731192617509a4baae1f74655"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__traits_ga3226fe6731192617509a4baae1f74655.html#ga3226fe6731192617509a4baae1f74655">kumi::common_product_type</a> (Ts...)</td></tr>
-<tr class="memdesc:ga3226fe6731192617509a4baae1f74655"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the common product_type of a parameter pack, if all the types are <code>record</code> then it returns an empty record, otherwise returns an empty <code><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a></code>  <br /></td></tr>
-<tr class="separator:ga3226fe6731192617509a4baae1f74655"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>

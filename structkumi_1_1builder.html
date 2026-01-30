@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::common_product_type</title>
+<title>kumi: kumi::builder&lt; T &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__traits_ga3226fe6731192617509a4baae1f74655.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('structkumi_1_1builder.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -120,58 +120,32 @@ $(document).ready(function(){initNavTree('group__traits_ga3226fe6731192617509a4b
 </div>
 </div>
 
+<div class="header">
+  <div class="headertitle"><div class="title">kumi::builder&lt; T &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__utility.html">Helper Types and Functions</a></div></div></div>
+</div><!--header-->
 <div class="contents">
-<a id="ga3226fe6731192617509a4baae1f74655" name="ga3226fe6731192617509a4baae1f74655"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3226fe6731192617509a4baae1f74655">&#9670;&#160;</a></span>common_product_type()</h2>
 
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;product_type... Ts&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto kumi::common_product_type </td>
-          <td>(</td>
-          <td class="paramtype">Ts...&#160;</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p>Helper structure to build the correct output <code>product_type</code>. If the provided Product type is a not a record_type the builder will output a tuple otherwise a record.  
+ <a href="structkumi_1_1builder.html#details">More...</a></p>
 
-<p>Extracts the common product_type of a parameter pack, if all the types are <code>record</code> then it returns an empty record, otherwise returns an empty <code><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a></code> </p>
+<p><code>#include &lt;kumi/utils/builder.hpp&gt;</code></p>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
+class kumi::builder&lt; T &gt;</div><p>Helper structure to build the correct output <code>product_type</code>. If the provided Product type is a not a record_type the builder will output a tuple otherwise a record. </p>
+<p>builder provides a generic way of defining a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a> which depending on the given semantic (product_type or record_type) will output respectively a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> or a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields necessarily named, names are unique.">kumi::record</a></p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Ts</td><td>The <code>product_types</code> to access</td></tr>
+    <tr><td class="paramname">T</td><td>the template template type to be built. </td></tr>
   </table>
   </dd>
 </dl>
-<h2><a class="anchor" id="autotoc_md162"></a>
-Helper type</h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt; <span class="keyword">using </span>common_product_type_t</div>
-<div class="line">      = <span class="keyword">typename</span> <a class="code hl_function" href="group__traits_ga3226fe6731192617509a4baae1f74655.html#ga3226fe6731192617509a4baae1f74655">common_product_type</a>&lt;Ts...&gt;::type;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__traits_ga3226fe6731192617509a4baae1f74655_html_ga3226fe6731192617509a4baae1f74655"><div class="ttname"><a href="group__traits_ga3226fe6731192617509a4baae1f74655.html#ga3226fe6731192617509a4baae1f74655">kumi::common_product_type</a></div><div class="ttdeci">constexpr auto common_product_type(Ts...)</div><div class="ttdoc">Extracts the common product_type of a parameter pack, if all the types are record then it returns an ...</div><div class="ttdef"><b>Definition</b> builder.hpp:30</div></div>
-</div><!-- fragment --> 
-</div>
-</div>
-</div><!-- contents -->
+</div></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li>
+    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li><li class="navelem"><a class="el" href="structkumi_1_1builder.html">builder</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->
