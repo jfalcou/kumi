@@ -29,6 +29,14 @@ namespace kumi
     using type = T;
     T value;
 
+    KUMI_ABI constexpr type& get() & noexcept { return value; }
+
+    KUMI_ABI constexpr type&& get() && noexcept { return static_cast<type&&>(value); }
+
+    KUMI_ABI constexpr type const&& get() const&& noexcept { return static_cast<type const&&>(value); }
+
+    KUMI_ABI constexpr type const& get() const& noexcept { return value; }
+
     /// Name associated to the field_capture
     static constexpr auto name = ID;
 
@@ -47,26 +55,46 @@ namespace kumi
     }
   };
 
+  // EBO
+  template<str ID, typename T>
+  requires(std::is_empty_v<T>)
+  struct field_capture<ID, T> : T
+  {
+    using type = T;
+
+    KUMI_ABI constexpr T& get() & noexcept { return static_cast<T&>(*this); }
+
+    KUMI_ABI constexpr T&& get() && noexcept { return static_cast<T&&>(*this); }
+
+    KUMI_ABI constexpr T const&& get() const&& noexcept { return static_cast<T const&&>(*this); }
+
+    KUMI_ABI constexpr T const& get() const& noexcept { return static_cast<T const&>(*this); }
+
+    static constexpr auto name = ID;
+
+    static constexpr bool is_field_capture = true;
+  };
+
   namespace _
   {
     template<kumi::str ID, typename T> KUMI_ABI constexpr T& get_field(field_capture<ID, T>& a) noexcept
     {
-      return a.value;
+      return a.get();
     }
 
     template<kumi::str ID, typename T> KUMI_ABI constexpr T&& get_field(field_capture<ID, T>&& a) noexcept
     {
-      return static_cast<T&&>(a.value);
+      return static_cast<T&&>(a.get());
     }
 
     template<kumi::str ID, typename T> KUMI_ABI constexpr T const&& get_field(field_capture<ID, T> const&& a) noexcept
     {
-      return static_cast<T const&&>(a.value);
+      return static_cast<T const&&>(a.get());
     }
 
     template<kumi::str ID, typename T> KUMI_ABI constexpr T const& get_field(field_capture<ID, T> const& a) noexcept
     {
-      return a.value;
+      return a.get();
     }
   }
 
