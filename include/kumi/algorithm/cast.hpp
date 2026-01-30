@@ -58,7 +58,7 @@ namespace kumi
     if constexpr (sized_product_type<T, 0>) return t;
     else if constexpr (record_type<T>)
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = _::builder_make_t<T, result::field_cast_t<Target, element_t<I, T>>...>;
+        using type = builder_make_t<T, result::field_cast_t<Target, element_t<I, T>>...>;
         return type{field_cast<Target>(get<I>(KUMI_FWD(t)))...};
       }(std::make_index_sequence<size_v<T>>{});
     else

@@ -7,8 +7,6 @@
 //==================================================================================================
 #pragma once
 
-#include <kumi/detail/builder.hpp>
-
 namespace kumi
 {
   //================================================================================================
@@ -39,7 +37,7 @@ namespace kumi
   template<product_type Tuple, typename T> [[nodiscard]] KUMI_ABI constexpr auto push_front(Tuple&& t, T&& v)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return _::builder<Tuple>::make(KUMI_FWD(v), get<I>(KUMI_FWD(t))...);
+      return builder<Tuple>::make(KUMI_FWD(v), get<I>(KUMI_FWD(t))...);
     }(std::make_index_sequence<size_v<Tuple>>());
   }
 
@@ -69,7 +67,7 @@ namespace kumi
   template<product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto pop_front(Tuple&& t)
   {
     if constexpr (sized_product_type_or_more<Tuple, 1>) return extract(KUMI_FWD(t), index<1>);
-    else return _::builder<Tuple>::make();
+    else return builder<Tuple>::make();
   }
 
   //================================================================================================
@@ -100,7 +98,7 @@ namespace kumi
   template<product_type Tuple, typename T> [[nodiscard]] KUMI_ABI constexpr auto push_back(Tuple&& t, T&& v)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return _::builder<Tuple>::make(get<I>(KUMI_FWD(t))..., KUMI_FWD(v));
+      return builder<Tuple>::make(get<I>(KUMI_FWD(t))..., KUMI_FWD(v));
     }(std::make_index_sequence<size_v<Tuple>>());
   }
 
@@ -130,7 +128,7 @@ namespace kumi
   template<product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto pop_back(Tuple&& t)
   {
     if constexpr (sized_product_type_or_more<Tuple, 1>) return extract(KUMI_FWD(t), index<0>, index<size_v<Tuple> - 1>);
-    else return _::builder<Tuple>::make();
+    else return builder<Tuple>::make();
   }
 
   namespace result

@@ -7,8 +7,6 @@
 //==================================================================================================
 #pragma once
 
-#include <kumi/utils/concepts.hpp>
-#include <kumi/utils/traits.hpp>
 #include <type_traits>
 #include <utility>
 

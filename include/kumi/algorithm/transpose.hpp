@@ -7,8 +7,6 @@
 //==================================================================================================
 #pragma once
 
-#include <kumi/detail/builder.hpp>
-
 namespace kumi
 {
   //================================================================================================
@@ -44,7 +42,7 @@ namespace kumi
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         constexpr auto uz = []<typename N>(N const&, auto&& u) {
-          return apply([](auto&&... m) { return _::builder<T>::make(get<N::value>(KUMI_FWD(m))...); }, KUMI_FWD(u));
+          return apply([](auto&&... m) { return builder<T>::make(get<N::value>(KUMI_FWD(m))...); }, KUMI_FWD(u));
         };
 
         return kumi::make_tuple(uz(index<I>, KUMI_FWD(t))...);

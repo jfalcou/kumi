@@ -64,7 +64,7 @@ namespace kumi
     {
       constexpr auto idxs = _::rotator<size_v<T>, R % size_v<T>>();
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = _::builder_make_t<T, element_t<idxs.t[I], T>...>;
+        using type = builder_make_t<T, element_t<idxs.t[I], T>...>;
         return type{get<idxs.t[I]>(KUMI_FWD(t))...};
       }(std::make_index_sequence<size_v<T>>{});
     }
@@ -105,7 +105,7 @@ namespace kumi
       constexpr auto F = R % size_v<T>;
       constexpr auto idxs = _::rotator<size_v<T>, size_v<T> - F>();
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = _::builder_make_t<T, element_t<idxs.t[I], T>...>;
+        using type = builder_make_t<T, element_t<idxs.t[I], T>...>;
         return type{get<idxs.t[I]>(KUMI_FWD(t))...};
       }(std::make_index_sequence<size_v<T>>{});
     }

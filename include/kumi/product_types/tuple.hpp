@@ -8,12 +8,7 @@
 #ifndef KUMI_TUPLE_HPP_INCLUDED
 #define KUMI_TUPLE_HPP_INCLUDED
 
-#include <kumi/detail/concepts.hpp>
-#include <kumi/detail/abi.hpp>
-#include <kumi/detail/stdfix.hpp>
-#include <kumi/detail/binder.hpp>
-#include <kumi/detail/field_capture.hpp>
-#include <kumi/detail/streamable.hpp>
+#include <kumi/detail.hpp>
 #include <kumi/utils.hpp>
 
 #include <iosfwd>
@@ -671,6 +666,31 @@ namespace kumi
   //================================================================================================
   //! @}
   //================================================================================================
+
+  // Builder protocole
+  template<product_type T>
+  requires(!record_type<T>)
+  struct builder<T>
+  {
+    using type = T;
+
+    template<typename... Us> using to = kumi::tuple<Us...>;
+
+    template<typename... Args> static constexpr auto make(Args&&... args)
+    {
+      return kumi::make_tuple(KUMI_FWD(args)...);
+    }
+
+    template<typename... Args> static constexpr auto build(Args&&... args) { return kumi::tuple{KUMI_FWD(args)...}; }
+  };
+
+  // As we are lacking a proper mechanism to find the least restrictive subtype, we fallback to a specializable trait
+  template<product_type... Ts>
+  requires(!record_type<Ts> && ...)
+  struct common_product_type<Ts...>
+  {
+    using type = kumi::tuple<>;
+  };
 }
 
 #endif

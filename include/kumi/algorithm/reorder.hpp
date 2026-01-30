@@ -7,9 +7,6 @@
 //==================================================================================================
 #pragma once
 
-#include <kumi/detail/builder.hpp>
-#include <kumi/detail/indexes.hpp>
-
 namespace kumi
 {
 
@@ -72,7 +69,7 @@ namespace kumi
   requires((Idx < size_v<T>) && ...)
   [[nodiscard]] KUMI_ABI constexpr auto reorder(T&& t)
   {
-    return _::builder<T>::make(get<Idx>(KUMI_FWD(t))...);
+    return builder<T>::make(get<Idx>(KUMI_FWD(t))...);
   }
 
   //================================================================================================
@@ -108,7 +105,7 @@ namespace kumi
   requires(requires { get<Name>(std::declval<Tuple>()); } && ...)
   KUMI_ABI constexpr auto reorder_fields(Tuple&& t)
   {
-    return _::builder<Tuple>::make(Name = get<Name>(KUMI_FWD(t))...);
+    return builder<Tuple>::make(Name = get<Name>(KUMI_FWD(t))...);
   }
 
   //================================================================================================
@@ -150,11 +147,11 @@ namespace kumi
       else return get<Idx>(KUMI_FWD(t));
     };
 
-    if constexpr (sized_product_type<T, 0>) return _::builder<T>::make();
-    else if constexpr (sized_product_type<idx_t, 0>) return _::builder<T>::make();
+    if constexpr (sized_product_type<T, 0>) return builder<T>::make();
+    else if constexpr (sized_product_type<idx_t, 0>) return builder<T>::make();
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return _::builder<T>::make(mk.template operator()<get<I>(Indexes)>()...);
+        return builder<T>::make(mk.template operator()<get<I>(Indexes)>()...);
       }(std::make_index_sequence<size_v<idx_t>>{});
   }
 

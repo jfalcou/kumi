@@ -23,7 +23,7 @@ namespace kumi
 
         if constexpr (value)
           return [&]<std::size_t... I>(std::index_sequence<I...>) {
-            using res_t = _::builder_make_t<T, element_t<I, T>..., W>;
+            using res_t = builder_make_t<T, element_t<I, T>..., W>;
             return _::make_unique{res_t{get<I>(KUMI_FWD(x.acc))..., KUMI_FWD(y.acc)}};
           }(std::make_index_sequence<size_v<T>>{});
         else return KUMI_FWD(x);
@@ -89,7 +89,7 @@ namespace kumi
     {
       constexpr auto pos = _::uniqued(as<T>{});
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using ret_t = _::builder_make_t<T, raw_element_t<pos.t[I], T>...>;
+        using ret_t = builder_make_t<T, raw_element_t<pos.t[I], T>...>;
         return ret_t{get<pos.t[I]>(KUMI_FWD(t))...};
       }(std::make_index_sequence<pos.count>{});
     }
@@ -125,7 +125,7 @@ namespace kumi
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::make_unique{_::builder_make_t<T, raw_element_t<0, T>>{get<0>(KUMI_FWD(t))}} | ... |
+        return (_::make_unique{builder_make_t<T, raw_element_t<0, T>>{get<0>(KUMI_FWD(t))}} | ... |
                 _::make_unique<raw_element_t<I + 1, T>>{get<I + 1>(KUMI_FWD(t))})
           .acc;
       }(std::make_index_sequence<size_v<T> - 1>{});

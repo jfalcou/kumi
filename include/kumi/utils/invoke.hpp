@@ -7,8 +7,6 @@
 //==================================================================================================
 #pragma once
 
-#include <kumi/detail/abi.hpp>
-
 namespace kumi
 {
   namespace _

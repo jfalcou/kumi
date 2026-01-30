@@ -11,8 +11,6 @@
 #include <type_traits>
 #include <utility>
 
-#include <kumi/detail/meta_helpers.hpp>
-
 namespace kumi
 {
   namespace _

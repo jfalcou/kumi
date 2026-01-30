@@ -8,8 +8,6 @@
 #pragma once
 
 #include <concepts>
-#include <kumi/detail/stdfix.hpp>
-#include <kumi/utils/traits.hpp>
 #include <cstddef>
 #include <utility>
 
@@ -226,32 +224,4 @@ namespace kumi::_
     if constexpr (!std::integral<std::remove_cvref_t<decltype(Name)>>) return can_get_field_by_value<Name, Ts...>;
     else return false;
   };
-
-  //================================================================================================
-  // Concept machinery to make our algorithms SFINAE friendly
-  //================================================================================================
-  template<typename F, typename T>
-  concept supports_apply = []<std::size_t... N>(std::index_sequence<N...>) {
-    return std::invocable<F, raw_member_t<N, T>...>;
-  }(std::make_index_sequence<size<T>::value>{});
-
-  template<typename F, typename T>
-  concept supports_nothrow_apply = []<std::size_t... N>(std::index_sequence<N...>) {
-    return std::is_nothrow_invocable<F, raw_member_t<N, T>...>::value;
-  }(std::make_index_sequence<size<T>::value>{});
-
-  template<typename F, typename... Ts>
-  concept supports_call = []<std::size_t... I>(std::index_sequence<I...>) {
-    return ([]<std::size_t J>(std::integral_constant<std::size_t, J>) {
-      return std::invocable<F, raw_member_t<J, Ts>...>;
-    }(std::integral_constant<std::size_t, I>{}) &&
-            ...);
-  }(std::make_index_sequence<(size<Ts>::value, ...)>{});
-
-  template<typename T>
-  concept supports_transpose =
-    (size<T>::value <= 1) || ([]<std::size_t... N>(std::index_sequence<N...>) {
-      return ((kumi::size_v<raw_member_t<0, T>> == kumi::size_v<raw_member_t<N + 1, T>>) && ...);
-    }(std::make_index_sequence<size<T>::value - 1>{}));
-
 }
