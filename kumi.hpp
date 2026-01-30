@@ -123,6 +123,10 @@ namespace kumi
   {
     using type = T;
     T value;
+    KUMI_ABI constexpr type& get() & noexcept { return value; }
+    KUMI_ABI constexpr type&& get() && noexcept { return static_cast<type&&>(value); }
+    KUMI_ABI constexpr type const&& get() const&& noexcept { return static_cast<type const&&>(value); }
+    KUMI_ABI constexpr type const& get() const& noexcept { return value; }
     static constexpr auto name = ID;
     static constexpr bool is_field_capture = true;
     template<typename CharT, typename Traits>
@@ -132,23 +136,35 @@ namespace kumi
       return os << ID << " : " << _::make_streamable(w.value);
     }
   };
+  template<str ID, typename T>
+  requires(std::is_empty_v<T>)
+  struct field_capture<ID, T> : T
+  {
+    using type = T;
+    KUMI_ABI constexpr T& get() & noexcept { return static_cast<T&>(*this); }
+    KUMI_ABI constexpr T&& get() && noexcept { return static_cast<T&&>(*this); }
+    KUMI_ABI constexpr T const&& get() const&& noexcept { return static_cast<T const&&>(*this); }
+    KUMI_ABI constexpr T const& get() const& noexcept { return static_cast<T const&>(*this); }
+    static constexpr auto name = ID;
+    static constexpr bool is_field_capture = true;
+  };
   namespace _
   {
     template<kumi::str ID, typename T> KUMI_ABI constexpr T& get_field(field_capture<ID, T>& a) noexcept
     {
-      return a.value;
+      return a.get();
     }
     template<kumi::str ID, typename T> KUMI_ABI constexpr T&& get_field(field_capture<ID, T>&& a) noexcept
     {
-      return static_cast<T&&>(a.value);
+      return static_cast<T&&>(a.get());
     }
     template<kumi::str ID, typename T> KUMI_ABI constexpr T const&& get_field(field_capture<ID, T> const&& a) noexcept
     {
-      return static_cast<T const&&>(a.value);
+      return static_cast<T const&&>(a.get());
     }
     template<kumi::str ID, typename T> KUMI_ABI constexpr T const& get_field(field_capture<ID, T> const& a) noexcept
     {
-      return a.value;
+      return a.get();
     }
   }
   template<str Name, typename T> [[nodiscard]] KUMI_ABI constexpr decltype(auto) capture_field(T&& t) noexcept
@@ -184,65 +200,74 @@ namespace kumi
 #include <utility>
 namespace kumi::_
 {
-  template<int I, typename T> struct leaf
+  template<int N, typename T> struct leaf
   {
     T value;
+    KUMI_ABI constexpr T& get() & noexcept { return value; }
+    KUMI_ABI constexpr T&& get() && noexcept { return static_cast<T&&>(value); }
+    KUMI_ABI constexpr T const&& get() const&& noexcept { return static_cast<T const&&>(value); }
+    KUMI_ABI constexpr T const& get() const& noexcept { return value; }
   };
-  template<int I, kumi::str Name, typename T> struct leaf<I, field_capture<Name, T>>
+  template<int N, typename T>
+  requires(std::is_empty_v<T>)
+  struct leaf<N, T> : T
   {
-    field_capture<Name, T> value;
+    KUMI_ABI constexpr T& get() & noexcept { return static_cast<T&>(*this); }
+    KUMI_ABI constexpr T&& get() && noexcept { return static_cast<T&&>(*this); }
+    KUMI_ABI constexpr T const&& get() const&& noexcept { return static_cast<T const&&>(*this); }
+    KUMI_ABI constexpr T const& get() const& noexcept { return static_cast<T const&>(*this); }
   };
-  template<int I, typename T> KUMI_ABI constexpr T& get_leaf(leaf<I, T>& a) noexcept
+  template<int I, typename T> KUMI_ABI constexpr decltype(auto) get_leaf(leaf<I, T>& a) noexcept
   {
-    return a.value;
+    return a.get();
   }
-  template<int I, typename T> KUMI_ABI constexpr T&& get_leaf(leaf<I, T>&& a) noexcept
+  template<int I, typename T> KUMI_ABI constexpr decltype(auto) get_leaf(leaf<I, T>&& a) noexcept
   {
-    return static_cast<T&&>(a.value);
+    return static_cast<T&&>(a.get());
   }
-  template<int I, typename T> KUMI_ABI constexpr T const&& get_leaf(leaf<I, T> const&& a) noexcept
+  template<int I, typename T> KUMI_ABI constexpr decltype(auto) get_leaf(leaf<I, T> const&& a) noexcept
   {
-    return static_cast<T const&&>(a.value);
+    return static_cast<T const&&>(a.get());
   }
-  template<int I, typename T> KUMI_ABI constexpr T const& get_leaf(leaf<I, T> const& a) noexcept
+  template<int I, typename T> KUMI_ABI constexpr decltype(auto) get_leaf(leaf<I, T> const& a) noexcept
   {
-    return a.value;
+    return a.get();
   }
   template<typename T, int I> KUMI_ABI constexpr T& get_leaf(leaf<I, T>& a) noexcept
   {
-    return a.value;
+    return a.get();
   }
   template<typename T, int I> KUMI_ABI constexpr T&& get_leaf(leaf<I, T>&& a) noexcept
   {
-    return static_cast<T&&>(a.value);
+    return static_cast<T&&>(a.get());
   }
   template<typename T, int I> KUMI_ABI constexpr T const&& get_leaf(leaf<I, T> const&& a) noexcept
   {
-    return static_cast<T const&&>(a.value);
+    return static_cast<T const&&>(a.get());
   }
   template<typename T, int I> KUMI_ABI constexpr T const& get_leaf(leaf<I, T> const& a) noexcept
   {
-    return a.value;
+    return a.get();
   }
   template<kumi::str Name, int I, typename T>
   KUMI_ABI constexpr T& get_leaf(leaf<I, field_capture<Name, T>>& a) noexcept
   {
-    return a.value.value;
+    return _::get_field(a.get());
   }
   template<kumi::str Name, int I, typename T>
   KUMI_ABI constexpr T&& get_leaf(leaf<I, field_capture<Name, T>>&& a) noexcept
   {
-    return static_cast<T&&>(a.value.value);
+    return static_cast<T&&>(_::get_field(a.get()));
   }
   template<kumi::str Name, int I, typename T>
   KUMI_ABI constexpr T const&& get_leaf(leaf<I, field_capture<Name, T>> const&& a) noexcept
   {
-    return static_cast<T const&&>(a.value.value);
+    return static_cast<T const&&>(_::get_field(a.get()));
   }
   template<kumi::str Name, int I, typename T>
   KUMI_ABI constexpr T const& get_leaf(leaf<I, field_capture<Name, T>> const& a) noexcept
   {
-    return a.value.value;
+    return _::get_field(a.get());
   }
   template<typename ISeq, typename... Ts> struct binder;
   template<int... Is, typename... Ts> struct binder<std::integer_sequence<int, Is...>, Ts...> : leaf<Is, Ts>...
@@ -452,7 +477,7 @@ namespace kumi
   requires(is_record_type<std::remove_cvref_t<T>>::value)
   struct raw_member<I, T>
   {
-    using type = decltype(field_value_of(get<I>(std::declval<T&&>())));
+    using type = decltype(_::get_field(get<I>(std::declval<T&&>())));
   };
   template<std::size_t I, typename T> using raw_member_t = typename raw_member<I, T>::type;
   template<std::size_t I, typename T> struct raw_element
@@ -3254,7 +3279,7 @@ namespace kumi
         return []<std::size_t... N>(std::index_sequence<N...>) {
           bool checks[] = {([]() {
             if constexpr (product_type<element_t<N, map_t>>) return in_bound_indexes<get<N>(idxs), T>();
-            else if constexpr (get<N>(idxs) < size_v<T>) return true;
+            else if constexpr (static_cast<std::size_t>(get<N>(idxs)) < size_v<T>) return true;
             else return false;
           }())...};
           for (std::size_t i = 0; i < idxs.size(); ++i)
