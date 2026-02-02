@@ -2060,6 +2060,13 @@ namespace kumi
       return os << "()";
     }
   };
+  template<typename... Ts>
+  requires(!entirely_uniquely_named<Ts...>)
+  struct record<Ts...>
+  {
+    static_assert(entirely_uniquely_named<Ts...>, "Duplicate fields in record definition");
+    record(Ts&&...) = delete;
+  };
   template<typename... Ts> KUMI_CUDA record(Ts&&...) -> record<std::unwrap_ref_decay_t<Ts>...>;
   template<str... Fields, typename... Ts>
   requires(sizeof...(Fields) == sizeof...(Ts))
