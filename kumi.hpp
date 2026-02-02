@@ -146,6 +146,12 @@ namespace kumi
     KUMI_ABI constexpr T const& get() const& noexcept { return static_cast<T const&>(*this); }
     static constexpr auto name = ID;
     static constexpr bool is_field_capture = true;
+    template<typename CharT, typename Traits>
+    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os,
+                                                         field_capture const& w) noexcept
+    {
+      return os << ID << " : " << _::make_streamable(w.get());
+    }
   };
   namespace _
   {
