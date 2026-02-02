@@ -66,11 +66,11 @@ namespace kumi::_
   //================================================================================================
   // Optimized binder for 1->10 elements, none being reference
   //================================================================================================
-  template<> struct binder<std::integer_sequence<int>>
-  {
-    static constexpr bool is_homogeneous = false;
-    using kumi_specific_layout = void;
-  };
+  // template<> struct binder<std::integer_sequence<int>>
+  //{
+  //  static constexpr bool is_homogeneous = false;
+  //  using kumi_specific_layout = void;
+  //};
 
   template<typename T>
   requires(no_references<T>)
