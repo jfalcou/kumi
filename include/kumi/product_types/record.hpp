@@ -265,6 +265,17 @@ namespace kumi
   };
 
   //================================================================================================
+  // Specialisation to clearly signal errors due to duplicate fields
+  //================================================================================================
+  template<typename... Ts>
+  requires(!entirely_uniquely_named<Ts...>)
+  struct record<Ts...>
+  {
+    static_assert(entirely_uniquely_named<Ts...>, "Duplicate fields in record definition");
+    record(Ts&&...) = delete;
+  };
+
+  //================================================================================================
   //! @name Record Deduction Guides
   //! @{
   //================================================================================================
