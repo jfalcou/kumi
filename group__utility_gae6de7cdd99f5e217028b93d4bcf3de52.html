@@ -127,7 +127,7 @@ $(document).ready(function(){initNavTree('group__utility_gae6de7cdd99f5e217028b9
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;product_type Type&gt; </div>
+template&lt;concepts::product_type Type&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -147,16 +147,16 @@ template&lt;product_type Type&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Converts a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a> to an instance <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>. </p>
-<p>Constructs an instance <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> from the elements of the <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a> parameters</p>
+<p>Converts a kumi::product_type to an instance <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>. </p>
+<p>Constructs an instance <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> from the elements of the kumi::product_type parameters</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">t</td><td><a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a> to convert </td></tr>
+    <tr><td class="paramname">t</td><td>kumi::product_type to convert </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>An instance of <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> constructed from each elements of <code>t</code> in order.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>An overload is provided for <a class="el" href="conceptkumi_1_1static__container.html" title="Concept specifying a type follows the Container Type semantic.">kumi::static_container</a>.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>An overload is provided for kumi::static_container.</dd></dl>
 <h2><a class="anchor" id="autotoc_md14"></a>
 Example</h2>
 <div class="fragment"><div class="line"> </div>
@@ -201,7 +201,7 @@ Example</h2>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; b &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__utility_gae6de7cdd99f5e217028b93d4bcf3de52_html_gae6de7cdd99f5e217028b93d4bcf3de52"><div class="ttname"><a href="group__utility_gae6de7cdd99f5e217028b93d4bcf3de52.html#gae6de7cdd99f5e217028b93d4bcf3de52">kumi::to_tuple</a></div><div class="ttdeci">constexpr auto to_tuple(Type &amp;&amp;t)</div><div class="ttdoc">Converts a kumi::product_type to an instance kumi::tuple.</div><div class="ttdef"><b>Definition</b> convert.hpp:94</div></div>
+<div class="ttc" id="agroup__utility_gae6de7cdd99f5e217028b93d4bcf3de52_html_gae6de7cdd99f5e217028b93d4bcf3de52"><div class="ttname"><a href="group__utility_gae6de7cdd99f5e217028b93d4bcf3de52.html#gae6de7cdd99f5e217028b93d4bcf3de52">kumi::to_tuple</a></div><div class="ttdeci">constexpr auto to_tuple(Type &amp;&amp;t)</div><div class="ttdoc">Converts a kumi::product_type to an instance kumi::tuple.</div><div class="ttdef"><b>Definition</b> convert.hpp:96</div></div>
 <div class="ttc" id="anamespacekumi_html_abd1d4a59b0cddc9d5a5aef185c9f1e46"><div class="ttname"><a href="namespacekumi.html#abd1d4a59b0cddc9d5a5aef185c9f1e46">kumi::get</a></div><div class="ttdeci">constexpr decltype(auto) get(record&lt; Ts... &gt; &amp;&amp;r) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition</b> record.hpp:410</div></div>
 </div><!-- fragment --> 
 </div>

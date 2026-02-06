@@ -151,12 +151,12 @@ template&lt;typename CharT , typename Traits &gt; </td></tr>
 <tr class="separator:gaf6739a069131e315597688e5b3cf5df9"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader">Comparison operators</h2></td></tr>
-<tr class="memitem:ga5544b3b084ae69ad34a4ea0e99a00670" id="r_ga5544b3b084ae69ad34a4ea0e99a00670"><td class="memTemplParams" colspan="2"><a id="ga5544b3b084ae69ad34a4ea0e99a00670" name="ga5544b3b084ae69ad34a4ea0e99a00670"></a>
+<tr class="memitem:gacebb3ddeaa684e400b25f48849147641" id="r_gacebb3ddeaa684e400b25f48849147641"><td class="memTemplParams" colspan="2"><a id="gacebb3ddeaa684e400b25f48849147641" name="gacebb3ddeaa684e400b25f48849147641"></a>
 template&lt;typename... Us&gt; <br />
-requires (equality_comparable&lt;<a class="el" href="structkumi_1_1tuple.html">tuple</a>, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;Us...&gt;&gt;)</td></tr>
-<tr class="memitem:ga5544b3b084ae69ad34a4ea0e99a00670"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator==</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;self, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Us... &gt; const &amp;other) noexcept</td></tr>
-<tr class="memdesc:ga5544b3b084ae69ad34a4ea0e99a00670"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares a tuple with an other for equality. <br /></td></tr>
-<tr class="separator:ga5544b3b084ae69ad34a4ea0e99a00670"><td class="memSeparator" colspan="2">&#160;</td></tr>
+requires (concepts::equality_comparable&lt;<a class="el" href="structkumi_1_1tuple.html">tuple</a>, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;Us...&gt;&gt;)</td></tr>
+<tr class="memitem:gacebb3ddeaa684e400b25f48849147641"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator==</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;self, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Us... &gt; const &amp;other) noexcept</td></tr>
+<tr class="memdesc:gacebb3ddeaa684e400b25f48849147641"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares a tuple with an other for equality. <br /></td></tr>
+<tr class="separator:gacebb3ddeaa684e400b25f48849147641"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac0b978b3e13c057400e145cc8ac174b0" id="r_gac0b978b3e13c057400e145cc8ac174b0"><td class="memTemplParams" colspan="2"><a id="gac0b978b3e13c057400e145cc8ac174b0" name="gac0b978b3e13c057400e145cc8ac174b0"></a>
 template&lt;typename... Us&gt; <br />
 requires (sizeof...(Ts) == sizeof...(Us) &amp;&amp; _::piecewise_ordered&lt;<a class="el" href="structkumi_1_1tuple.html">tuple</a>, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;Us...&gt;&gt;)</td></tr>
@@ -201,9 +201,9 @@ requires requires { lhs &lt; rhs; }</td></tr>
 <tr class="memitem:ga4cc5b452c723ee16fdd9a4de143ef0c1"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__tuple_ga4cc5b452c723ee16fdd9a4de143ef0c1.html#ga4cc5b452c723ee16fdd9a4de143ef0c1">forward_as_tuple</a> (Ts &amp;&amp;... ts) -&gt; <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Ts &amp;&amp;... &gt;</td></tr>
 <tr class="memdesc:ga4cc5b452c723ee16fdd9a4de143ef0c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> of forwarding references to its arguments.  <br /></td></tr>
 <tr class="separator:ga4cc5b452c723ee16fdd9a4de143ef0c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga27c29bc9a5e31d7ada4ac427a18d8985" id="r_ga27c29bc9a5e31d7ada4ac427a18d8985"><td class="memTemplParams" colspan="2">template&lt;product_type T&gt; </td></tr>
+<tr class="memitem:ga27c29bc9a5e31d7ada4ac427a18d8985" id="r_ga27c29bc9a5e31d7ada4ac427a18d8985"><td class="memTemplParams" colspan="2">template&lt;concepts::product_type T&gt; </td></tr>
 <tr class="memitem:ga27c29bc9a5e31d7ada4ac427a18d8985"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__tuple_ga27c29bc9a5e31d7ada4ac427a18d8985.html#ga27c29bc9a5e31d7ada4ac427a18d8985">to_ref</a> (T &amp;&amp;t)</td></tr>
-<tr class="memdesc:ga27c29bc9a5e31d7ada4ac427a18d8985"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> of references given a reference to a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>.  <br /></td></tr>
+<tr class="memdesc:ga27c29bc9a5e31d7ada4ac427a18d8985"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> of references given a reference to a kumi::product_type.  <br /></td></tr>
 <tr class="separator:ga27c29bc9a5e31d7ada4ac427a18d8985"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader">Accessors</h2></td></tr>

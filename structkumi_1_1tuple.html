@@ -182,52 +182,52 @@ requires (I &lt; sizeof...(Ts))</td></tr>
 <tr class="memitem:ad9d54c3d6e6d1e22cf1972e2a1088a1a"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator[]</b> (<a class="el" href="structkumi_1_1index__t.html">index_t</a>&lt; I &gt;) const &amp;noexcept</td></tr>
 <tr class="memdesc:ad9d54c3d6e6d1e22cf1972e2a1088a1a"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
 <tr class="separator:ad9d54c3d6e6d1e22cf1972e2a1088a1a"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a177268aec619b2fc2dd02085b5e44c73" id="r_a177268aec619b2fc2dd02085b5e44c73"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
-requires (uniquely_typed&lt;Ts...&gt; &amp;&amp; contains_type&lt;T, Ts...&gt;)</td></tr>
-<tr class="memitem:a177268aec619b2fc2dd02085b5e44c73"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structkumi_1_1tuple_a177268aec619b2fc2dd02085b5e44c73.html#a177268aec619b2fc2dd02085b5e44c73">operator[]</a> (<a class="el" href="structkumi_1_1as.html">as</a>&lt; T &gt;) &amp;noexcept</td></tr>
-<tr class="memdesc:a177268aec619b2fc2dd02085b5e44c73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the Ith element from a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>.  <br /></td></tr>
-<tr class="separator:a177268aec619b2fc2dd02085b5e44c73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:abe7aa375e2d3da5877cabcb16ddaaaa4" id="r_abe7aa375e2d3da5877cabcb16ddaaaa4"><td class="memTemplParams" colspan="2"><a id="abe7aa375e2d3da5877cabcb16ddaaaa4" name="abe7aa375e2d3da5877cabcb16ddaaaa4"></a>
+<tr class="memitem:af6bbf8ab193e8a4d8de340aa150e30dc" id="r_af6bbf8ab193e8a4d8de340aa150e30dc"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; <br />
+requires (concepts::uniquely_typed&lt;Ts...&gt; &amp;&amp; concepts::contains_type&lt;T, Ts...&gt;)</td></tr>
+<tr class="memitem:af6bbf8ab193e8a4d8de340aa150e30dc"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structkumi_1_1tuple_af6bbf8ab193e8a4d8de340aa150e30dc.html#af6bbf8ab193e8a4d8de340aa150e30dc">operator[]</a> (<a class="el" href="structkumi_1_1as.html">as</a>&lt; T &gt;) &amp;noexcept</td></tr>
+<tr class="memdesc:af6bbf8ab193e8a4d8de340aa150e30dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the Ith element from a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>.  <br /></td></tr>
+<tr class="separator:af6bbf8ab193e8a4d8de340aa150e30dc"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f88183ec73ad29ba6edb4a2049b3734" id="r_a0f88183ec73ad29ba6edb4a2049b3734"><td class="memTemplParams" colspan="2"><a id="a0f88183ec73ad29ba6edb4a2049b3734" name="a0f88183ec73ad29ba6edb4a2049b3734"></a>
 template&lt;typename T &gt; <br />
-requires (uniquely_typed&lt;Ts...&gt; &amp;&amp; contains_type&lt;T, Ts...&gt;)</td></tr>
-<tr class="memitem:abe7aa375e2d3da5877cabcb16ddaaaa4"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator[]</b> (<a class="el" href="structkumi_1_1as.html">as</a>&lt; T &gt;) &amp;&amp;noexcept</td></tr>
-<tr class="memdesc:abe7aa375e2d3da5877cabcb16ddaaaa4"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
-<tr class="separator:abe7aa375e2d3da5877cabcb16ddaaaa4"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a8b3ff440507f90b6d78294ba2b934579" id="r_a8b3ff440507f90b6d78294ba2b934579"><td class="memTemplParams" colspan="2"><a id="a8b3ff440507f90b6d78294ba2b934579" name="a8b3ff440507f90b6d78294ba2b934579"></a>
+requires (concepts::uniquely_typed&lt;Ts...&gt; &amp;&amp; concepts::contains_type&lt;T, Ts...&gt;)</td></tr>
+<tr class="memitem:a0f88183ec73ad29ba6edb4a2049b3734"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator[]</b> (<a class="el" href="structkumi_1_1as.html">as</a>&lt; T &gt;) &amp;&amp;noexcept</td></tr>
+<tr class="memdesc:a0f88183ec73ad29ba6edb4a2049b3734"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
+<tr class="separator:a0f88183ec73ad29ba6edb4a2049b3734"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1729c193b404ac36671f4feb4938aeeb" id="r_a1729c193b404ac36671f4feb4938aeeb"><td class="memTemplParams" colspan="2"><a id="a1729c193b404ac36671f4feb4938aeeb" name="a1729c193b404ac36671f4feb4938aeeb"></a>
 template&lt;typename T &gt; <br />
-requires (uniquely_typed&lt;Ts...&gt; &amp;&amp; contains_type&lt;T, Ts...&gt;)</td></tr>
-<tr class="memitem:a8b3ff440507f90b6d78294ba2b934579"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator[]</b> (<a class="el" href="structkumi_1_1as.html">as</a>&lt; T &gt;) const &amp;&amp;noexcept</td></tr>
-<tr class="memdesc:a8b3ff440507f90b6d78294ba2b934579"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
-<tr class="separator:a8b3ff440507f90b6d78294ba2b934579"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:acdf560cae3407b301297a4a333ed95d8" id="r_acdf560cae3407b301297a4a333ed95d8"><td class="memTemplParams" colspan="2"><a id="acdf560cae3407b301297a4a333ed95d8" name="acdf560cae3407b301297a4a333ed95d8"></a>
+requires (concepts::uniquely_typed&lt;Ts...&gt; &amp;&amp; concepts::contains_type&lt;T, Ts...&gt;)</td></tr>
+<tr class="memitem:a1729c193b404ac36671f4feb4938aeeb"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator[]</b> (<a class="el" href="structkumi_1_1as.html">as</a>&lt; T &gt;) const &amp;&amp;noexcept</td></tr>
+<tr class="memdesc:a1729c193b404ac36671f4feb4938aeeb"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
+<tr class="separator:a1729c193b404ac36671f4feb4938aeeb"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab9e82044727515d986bda7cdc56d81ad" id="r_ab9e82044727515d986bda7cdc56d81ad"><td class="memTemplParams" colspan="2"><a id="ab9e82044727515d986bda7cdc56d81ad" name="ab9e82044727515d986bda7cdc56d81ad"></a>
 template&lt;typename T &gt; <br />
-requires (uniquely_typed&lt;Ts...&gt; &amp;&amp; contains_type&lt;T, Ts...&gt;)</td></tr>
-<tr class="memitem:acdf560cae3407b301297a4a333ed95d8"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator[]</b> (<a class="el" href="structkumi_1_1as.html">as</a>&lt; T &gt;) const &amp;noexcept</td></tr>
-<tr class="memdesc:acdf560cae3407b301297a4a333ed95d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
-<tr class="separator:acdf560cae3407b301297a4a333ed95d8"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a761823a07c4e3d8a7aabd3bfb9043ee2" id="r_a761823a07c4e3d8a7aabd3bfb9043ee2"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="structkumi_1_1str.html">str</a> Name&gt; <br />
-requires (uniquely_named&lt;Ts...&gt; &amp;&amp; contains_field&lt;Name, Ts...&gt;)</td></tr>
-<tr class="memitem:a761823a07c4e3d8a7aabd3bfb9043ee2"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structkumi_1_1tuple_a761823a07c4e3d8a7aabd3bfb9043ee2.html#a761823a07c4e3d8a7aabd3bfb9043ee2">operator[]</a> (<a class="el" href="structkumi_1_1field__name.html">field_name</a>&lt; Name &gt;) &amp;noexcept</td></tr>
-<tr class="memdesc:a761823a07c4e3d8a7aabd3bfb9043ee2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the element labeled Name from a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>.  <br /></td></tr>
-<tr class="separator:a761823a07c4e3d8a7aabd3bfb9043ee2"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a48642f2655a07ae69ef64a332ad62f0c" id="r_a48642f2655a07ae69ef64a332ad62f0c"><td class="memTemplParams" colspan="2"><a id="a48642f2655a07ae69ef64a332ad62f0c" name="a48642f2655a07ae69ef64a332ad62f0c"></a>
+requires (concepts::uniquely_typed&lt;Ts...&gt; &amp;&amp; concepts::contains_type&lt;T, Ts...&gt;)</td></tr>
+<tr class="memitem:ab9e82044727515d986bda7cdc56d81ad"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator[]</b> (<a class="el" href="structkumi_1_1as.html">as</a>&lt; T &gt;) const &amp;noexcept</td></tr>
+<tr class="memdesc:ab9e82044727515d986bda7cdc56d81ad"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
+<tr class="separator:ab9e82044727515d986bda7cdc56d81ad"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a3c97a3c04b71101d9f43f51de6c2fcac" id="r_a3c97a3c04b71101d9f43f51de6c2fcac"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="structkumi_1_1str.html">str</a> Name&gt; <br />
+requires (concepts::uniquely_named&lt;Ts...&gt; &amp;&amp; concepts::contains_field&lt;Name, Ts...&gt;)</td></tr>
+<tr class="memitem:a3c97a3c04b71101d9f43f51de6c2fcac"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="structkumi_1_1tuple_a3c97a3c04b71101d9f43f51de6c2fcac.html#a3c97a3c04b71101d9f43f51de6c2fcac">operator[]</a> (<a class="el" href="structkumi_1_1field__name.html">field_name</a>&lt; Name &gt;) &amp;noexcept</td></tr>
+<tr class="memdesc:a3c97a3c04b71101d9f43f51de6c2fcac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the element labeled Name from a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>.  <br /></td></tr>
+<tr class="separator:a3c97a3c04b71101d9f43f51de6c2fcac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aebac633e90ae125e92f051d74ebe2b6b" id="r_aebac633e90ae125e92f051d74ebe2b6b"><td class="memTemplParams" colspan="2"><a id="aebac633e90ae125e92f051d74ebe2b6b" name="aebac633e90ae125e92f051d74ebe2b6b"></a>
 template&lt;<a class="el" href="structkumi_1_1str.html">str</a> Name&gt; <br />
-requires (uniquely_named&lt;Ts...&gt; &amp;&amp; contains_field&lt;Name, Ts...&gt;)</td></tr>
-<tr class="memitem:a48642f2655a07ae69ef64a332ad62f0c"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator[]</b> (<a class="el" href="structkumi_1_1field__name.html">field_name</a>&lt; Name &gt;) &amp;&amp;noexcept</td></tr>
-<tr class="memdesc:a48642f2655a07ae69ef64a332ad62f0c"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
-<tr class="separator:a48642f2655a07ae69ef64a332ad62f0c"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5c7db0cabac5165c874edc859b050e70" id="r_a5c7db0cabac5165c874edc859b050e70"><td class="memTemplParams" colspan="2"><a id="a5c7db0cabac5165c874edc859b050e70" name="a5c7db0cabac5165c874edc859b050e70"></a>
+requires (concepts::uniquely_named&lt;Ts...&gt; &amp;&amp; concepts::contains_field&lt;Name, Ts...&gt;)</td></tr>
+<tr class="memitem:aebac633e90ae125e92f051d74ebe2b6b"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator[]</b> (<a class="el" href="structkumi_1_1field__name.html">field_name</a>&lt; Name &gt;) &amp;&amp;noexcept</td></tr>
+<tr class="memdesc:aebac633e90ae125e92f051d74ebe2b6b"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
+<tr class="separator:aebac633e90ae125e92f051d74ebe2b6b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ab8ffd3475c94cf4593afaaf38ab549ca" id="r_ab8ffd3475c94cf4593afaaf38ab549ca"><td class="memTemplParams" colspan="2"><a id="ab8ffd3475c94cf4593afaaf38ab549ca" name="ab8ffd3475c94cf4593afaaf38ab549ca"></a>
 template&lt;<a class="el" href="structkumi_1_1str.html">str</a> Name&gt; <br />
-requires (uniquely_named&lt;Ts...&gt; &amp;&amp; contains_field&lt;Name, Ts...&gt;)</td></tr>
-<tr class="memitem:a5c7db0cabac5165c874edc859b050e70"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator[]</b> (<a class="el" href="structkumi_1_1field__name.html">field_name</a>&lt; Name &gt;) const &amp;&amp;noexcept</td></tr>
-<tr class="memdesc:a5c7db0cabac5165c874edc859b050e70"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
-<tr class="separator:a5c7db0cabac5165c874edc859b050e70"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aeed0eed1cd17796a449ac10c00cbee00" id="r_aeed0eed1cd17796a449ac10c00cbee00"><td class="memTemplParams" colspan="2"><a id="aeed0eed1cd17796a449ac10c00cbee00" name="aeed0eed1cd17796a449ac10c00cbee00"></a>
+requires (concepts::uniquely_named&lt;Ts...&gt; &amp;&amp; concepts::contains_field&lt;Name, Ts...&gt;)</td></tr>
+<tr class="memitem:ab8ffd3475c94cf4593afaaf38ab549ca"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator[]</b> (<a class="el" href="structkumi_1_1field__name.html">field_name</a>&lt; Name &gt;) const &amp;&amp;noexcept</td></tr>
+<tr class="memdesc:ab8ffd3475c94cf4593afaaf38ab549ca"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
+<tr class="separator:ab8ffd3475c94cf4593afaaf38ab549ca"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a0f6878d9f3977cf12c7d6d5fe26a941f" id="r_a0f6878d9f3977cf12c7d6d5fe26a941f"><td class="memTemplParams" colspan="2"><a id="a0f6878d9f3977cf12c7d6d5fe26a941f" name="a0f6878d9f3977cf12c7d6d5fe26a941f"></a>
 template&lt;<a class="el" href="structkumi_1_1str.html">str</a> Name&gt; <br />
-requires (uniquely_named&lt;Ts...&gt; &amp;&amp; contains_field&lt;Name, Ts...&gt;)</td></tr>
-<tr class="memitem:aeed0eed1cd17796a449ac10c00cbee00"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator[]</b> (<a class="el" href="structkumi_1_1field__name.html">field_name</a>&lt; Name &gt;) const &amp;noexcept</td></tr>
-<tr class="memdesc:aeed0eed1cd17796a449ac10c00cbee00"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
-<tr class="separator:aeed0eed1cd17796a449ac10c00cbee00"><td class="memSeparator" colspan="2">&#160;</td></tr>
+requires (concepts::uniquely_named&lt;Ts...&gt; &amp;&amp; concepts::contains_field&lt;Name, Ts...&gt;)</td></tr>
+<tr class="memitem:a0f6878d9f3977cf12c7d6d5fe26a941f"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator[]</b> (<a class="el" href="structkumi_1_1field__name.html">field_name</a>&lt; Name &gt;) const &amp;noexcept</td></tr>
+<tr class="memdesc:a0f6878d9f3977cf12c7d6d5fe26a941f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
+<tr class="separator:a0f6878d9f3977cf12c7d6d5fe26a941f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Conversions</div></td></tr>
 <tr class="memitem:a3967e3eb2c5a06d125fe6a68dc1c8c00" id="r_a3967e3eb2c5a06d125fe6a68dc1c8c00"><td class="memTemplParams" colspan="2">template&lt;typename... Us&gt; <br />
 requires (_::piecewise_convertible&lt;<a class="el" href="structkumi_1_1tuple.html">tuple</a>, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;Us...&gt;&gt; &amp;&amp; (sizeof...(Us) == sizeof...(Ts)) &amp;&amp; (!std::same_as&lt;Ts, Us&gt; &amp;&amp; ...))</td></tr>
@@ -276,9 +276,9 @@ template&lt;typename CharT , typename Traits &gt; </td></tr>
 <tr class="memitem:ga4cc5b452c723ee16fdd9a4de143ef0c1"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__tuple_ga4cc5b452c723ee16fdd9a4de143ef0c1.html#ga4cc5b452c723ee16fdd9a4de143ef0c1">forward_as_tuple</a> (Ts &amp;&amp;... ts) -&gt; <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Ts &amp;&amp;... &gt;</td></tr>
 <tr class="memdesc:ga4cc5b452c723ee16fdd9a4de143ef0c1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> of forwarding references to its arguments.  <br /></td></tr>
 <tr class="separator:ga4cc5b452c723ee16fdd9a4de143ef0c1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga27c29bc9a5e31d7ada4ac427a18d8985" id="r_ga27c29bc9a5e31d7ada4ac427a18d8985"><td class="memTemplParams" colspan="2">template&lt;product_type T&gt; </td></tr>
+<tr class="memitem:ga27c29bc9a5e31d7ada4ac427a18d8985" id="r_ga27c29bc9a5e31d7ada4ac427a18d8985"><td class="memTemplParams" colspan="2">template&lt;concepts::product_type T&gt; </td></tr>
 <tr class="memitem:ga27c29bc9a5e31d7ada4ac427a18d8985"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__tuple_ga27c29bc9a5e31d7ada4ac427a18d8985.html#ga27c29bc9a5e31d7ada4ac427a18d8985">to_ref</a> (T &amp;&amp;t)</td></tr>
-<tr class="memdesc:ga27c29bc9a5e31d7ada4ac427a18d8985"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> of references given a reference to a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>.  <br /></td></tr>
+<tr class="memdesc:ga27c29bc9a5e31d7ada4ac427a18d8985"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> of references given a reference to a kumi::product_type.  <br /></td></tr>
 <tr class="separator:ga27c29bc9a5e31d7ada4ac427a18d8985"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr><td colspan="2"><div class="groupHeader">Accessors</div></td></tr>
 <tr class="memitem:ga7b9b1b3fbe3d201542691bee350d8a08" id="r_ga7b9b1b3fbe3d201542691bee350d8a08"><td class="memTemplParams" colspan="2">template&lt;std::size_t I, typename... Ts&gt; </td></tr>
@@ -295,12 +295,12 @@ template&lt;typename CharT , typename Traits &gt; </td></tr>
 <tr class="separator:ga7b9b1b3fbe3d201542691bee350d8a08"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader">Comparison operators</h2></td></tr>
-<tr class="memitem:ga5544b3b084ae69ad34a4ea0e99a00670" id="r_ga5544b3b084ae69ad34a4ea0e99a00670"><td class="memTemplParams" colspan="2">
+<tr class="memitem:gacebb3ddeaa684e400b25f48849147641" id="r_gacebb3ddeaa684e400b25f48849147641"><td class="memTemplParams" colspan="2">
 template&lt;typename... Us&gt; <br />
-requires (equality_comparable&lt;<a class="el" href="structkumi_1_1tuple.html">tuple</a>, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;Us...&gt;&gt;)</td></tr>
-<tr class="memitem:ga5544b3b084ae69ad34a4ea0e99a00670"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator==</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;self, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Us... &gt; const &amp;other) noexcept</td></tr>
-<tr class="memdesc:ga5544b3b084ae69ad34a4ea0e99a00670"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares a tuple with an other for equality. <br /></td></tr>
-<tr class="separator:ga5544b3b084ae69ad34a4ea0e99a00670"><td class="memSeparator" colspan="2">&#160;</td></tr>
+requires (concepts::equality_comparable&lt;<a class="el" href="structkumi_1_1tuple.html">tuple</a>, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;Us...&gt;&gt;)</td></tr>
+<tr class="memitem:gacebb3ddeaa684e400b25f48849147641"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator==</b> (<a class="el" href="structkumi_1_1tuple.html">tuple</a> const &amp;self, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Us... &gt; const &amp;other) noexcept</td></tr>
+<tr class="memdesc:gacebb3ddeaa684e400b25f48849147641"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares a tuple with an other for equality. <br /></td></tr>
+<tr class="separator:gacebb3ddeaa684e400b25f48849147641"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gac0b978b3e13c057400e145cc8ac174b0" id="r_gac0b978b3e13c057400e145cc8ac174b0"><td class="memTemplParams" colspan="2">
 template&lt;typename... Us&gt; <br />
 requires (sizeof...(Ts) == sizeof...(Us) &amp;&amp; _::piecewise_ordered&lt;<a class="el" href="structkumi_1_1tuple.html">tuple</a>, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;Us...&gt;&gt;)</td></tr>

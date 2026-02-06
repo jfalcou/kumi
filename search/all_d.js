@@ -9,7 +9,7 @@ var searchData=
   ['indexes_5ft_6',['indexes_t',['../structkumi_1_1indexes__t.html',1,'kumi::indexes_t&lt; V &gt;'],['../group__utility_gaccc36e7b78d9da78548eebf22ea28492.html#gaccc36e7b78d9da78548eebf22ea28492',1,'kumi::indexes_t(Ts...) -&gt; indexes_t&lt; Ts... &gt;']]],
   ['infrastructure_7',['Infrastructure',['../changelog.html#autotoc_md223',1,'']]],
   ['infrastructure_20changes_8',['infrastructure changes',['../changelog.html#autotoc_md213',1,'API and Infrastructure Changes'],['../changelog.html#autotoc_md208',1,'Infrastructure Changes']]],
-  ['inner_5fproduct_9',['inner_product',['../group__reductions_ga7296647c71126e9dc46767d5a3a203bb.html#ga7296647c71126e9dc46767d5a3a203bb',1,'kumi::inner_product(S1 &amp;&amp;s1, S2 &amp;&amp;s2, T init, Sum sum, Prod prod) noexcept'],['../namespacekumi.html#a720dd1d10d09b5da1758f3bec126584b',1,'kumi::inner_product(S1 &amp;&amp;s1, S2 &amp;&amp;s2, T init) noexcept']]],
+  ['inner_5fproduct_9',['inner_product',['../group__reductions_gae9e0f77ffe8399c701ba32532db19d11.html#gae9e0f77ffe8399c701ba32532db19d11',1,'kumi::inner_product(S1 &amp;&amp;s1, S2 &amp;&amp;s2, T init, Sum sum, Prod prod) noexcept'],['../namespacekumi.html#aecc2a0ba7a4f6dce228e0c5181889668',1,'kumi::inner_product(S1 &amp;&amp;s1, S2 &amp;&amp;s2, T init) noexcept']]],
   ['install_20from_20the_20source_10',['Install from the source',['../setup.html#setup-source',1,'']]],
   ['invoke_11',['invoke',['../group__utility_gab575cbbe8a1b85d03353f65128d351ac.html#gab575cbbe8a1b85d03353f65128d351ac',1,'kumi']]],
   ['invoke_5fr_12',['invoke_r',['../group__utility_ga81fb4720ada9b1bff437c3340fcc98b0.html#ga81fb4720ada9b1bff437c3340fcc98b0',1,'kumi']]],

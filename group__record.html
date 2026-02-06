@@ -146,12 +146,12 @@ template&lt;typename CharT , typename Traits &gt; </td></tr>
 <tr class="separator:ga3e776cea74b6cbba98d32566764b3571"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader">Comparison operators</h2></td></tr>
-<tr class="memitem:ga14b23264019a7e10c1867a16b2c500c0" id="r_ga14b23264019a7e10c1867a16b2c500c0"><td class="memTemplParams" colspan="2"><a id="ga14b23264019a7e10c1867a16b2c500c0" name="ga14b23264019a7e10c1867a16b2c500c0"></a>
+<tr class="memitem:ga451ebda777651647641516bddd22e1b1" id="r_ga451ebda777651647641516bddd22e1b1"><td class="memTemplParams" colspan="2"><a id="ga451ebda777651647641516bddd22e1b1" name="ga451ebda777651647641516bddd22e1b1"></a>
 template&lt;typename... Us&gt; <br />
-requires (named_equality_comparable&lt;<a class="el" href="structkumi_1_1record.html">record</a>, <a class="el" href="structkumi_1_1record.html">record</a>&lt;Us...&gt;&gt;)</td></tr>
-<tr class="memitem:ga14b23264019a7e10c1867a16b2c500c0"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator==</b> (<a class="el" href="structkumi_1_1record.html">record</a> const &amp;self, <a class="el" href="structkumi_1_1record.html">record</a>&lt; Us... &gt; const &amp;other) noexcept</td></tr>
-<tr class="memdesc:ga14b23264019a7e10c1867a16b2c500c0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares a record with an other for equality. <br /></td></tr>
-<tr class="separator:ga14b23264019a7e10c1867a16b2c500c0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+requires (concepts::named_equality_comparable&lt;<a class="el" href="structkumi_1_1record.html">record</a>, <a class="el" href="structkumi_1_1record.html">record</a>&lt;Us...&gt;&gt;)</td></tr>
+<tr class="memitem:ga451ebda777651647641516bddd22e1b1"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><b>operator==</b> (<a class="el" href="structkumi_1_1record.html">record</a> const &amp;self, <a class="el" href="structkumi_1_1record.html">record</a>&lt; Us... &gt; const &amp;other) noexcept</td></tr>
+<tr class="memdesc:ga451ebda777651647641516bddd22e1b1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares a record with an other for equality. <br /></td></tr>
+<tr class="separator:ga451ebda777651647641516bddd22e1b1"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader">Record Deduction Guides</h2></td></tr>
 <tr class="memitem:gaee922438c01912318246dcd9d6a1d158" id="r_gaee922438c01912318246dcd9d6a1d158"><td class="memTemplParams" colspan="2">template&lt;typename... Ts&gt; </td></tr>
@@ -173,9 +173,9 @@ requires (sizeof...(Fields) == sizeof...(Ts))</td></tr>
 <tr class="memitem:gaaa38d1d378b716e24c974facce426d72"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__record_gaaa38d1d378b716e24c974facce426d72.html#gaaa38d1d378b716e24c974facce426d72">make_record</a> (Ts &amp;&amp;... ts) -&gt; <a class="el" href="structkumi_1_1record.html">record</a>&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</td></tr>
 <tr class="memdesc:gaaa38d1d378b716e24c974facce426d72"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a record object, deducing the target type from the types of arguments.  <br /></td></tr>
 <tr class="separator:gaaa38d1d378b716e24c974facce426d72"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gabd73478b6d709990c2f81dc83b980c16" id="r_gabd73478b6d709990c2f81dc83b980c16"><td class="memTemplParams" colspan="2">template&lt;record_type R&gt; </td></tr>
+<tr class="memitem:gabd73478b6d709990c2f81dc83b980c16" id="r_gabd73478b6d709990c2f81dc83b980c16"><td class="memTemplParams" colspan="2">template&lt;concepts::record_type R&gt; </td></tr>
 <tr class="memitem:gabd73478b6d709990c2f81dc83b980c16"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__record_gabd73478b6d709990c2f81dc83b980c16.html#gabd73478b6d709990c2f81dc83b980c16">to_ref</a> (R &amp;&amp;r)</td></tr>
-<tr class="memdesc:gabd73478b6d709990c2f81dc83b980c16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields necessarily named, names are unique.">kumi::record</a> of references given a reference to a <a class="el" href="conceptkumi_1_1record__type.html" title="Concept specifying a type follows the Record Type semantic.">kumi::record_type</a>.  <br /></td></tr>
+<tr class="memdesc:gabd73478b6d709990c2f81dc83b980c16"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields necessarily named, names are unique.">kumi::record</a> of references given a reference to a kumi::record_type.  <br /></td></tr>
 <tr class="separator:gabd73478b6d709990c2f81dc83b980c16"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader">Accessors</h2></td></tr>

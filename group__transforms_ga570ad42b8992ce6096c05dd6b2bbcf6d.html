@@ -127,7 +127,7 @@ $(document).ready(function(){initNavTree('group__transforms_ga570ad42b8992ce6096
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Function , product_type T&gt; <br />
+template&lt;typename Function , concepts::product_type T&gt; <br />
 requires _::supports_apply&lt;Function, T&gt;</div>
 <table class="mlabels">
   <tr>
@@ -162,7 +162,7 @@ requires _::supports_apply&lt;Function, T&gt;</div>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Callable object to be invoked </td></tr>
-    <tr><td class="paramname">t</td><td><a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a> whose elements to be used as arguments to f </td></tr>
+    <tr><td class="paramname">t</td><td>kumi::product_type whose elements to be used as arguments to f </td></tr>
   </table>
   </dd>
 </dl>
@@ -184,7 +184,7 @@ Example</h2>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">template</span>&lt;kumi::product_type Tuple&gt;</div>
+<div class="line"><span class="keyword">template</span>&lt;kumi::concepts::product_type Tuple&gt;</div>
 <div class="line"><span class="keywordtype">void</span> print(std::ostream&amp; os, Tuple <span class="keyword">const</span>&amp; t)</div>
 <div class="line">{</div>
 <div class="line">  <a class="code hl_function" href="group__transforms_ga570ad42b8992ce6096c05dd6b2bbcf6d.html#ga570ad42b8992ce6096c05dd6b2bbcf6d">kumi::apply</a></div>
@@ -217,7 +217,7 @@ Example</h2>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">template</span>&lt;kumi::record_type Record&gt;</div>
+<div class="line"><span class="keyword">template</span>&lt;kumi::concepts::record_type Record&gt;</div>
 <div class="line"><span class="keywordtype">void</span> print(std::ostream&amp; os, Record <span class="keyword">const</span>&amp; t)</div>
 <div class="line">{</div>
 <div class="line">  <a class="code hl_function" href="group__transforms_ga570ad42b8992ce6096c05dd6b2bbcf6d.html#ga570ad42b8992ce6096c05dd6b2bbcf6d">kumi::apply</a></div>

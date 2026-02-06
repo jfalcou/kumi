@@ -130,7 +130,7 @@ $(document).ready(function(){initNavTree('structkumi_1_1as__tuple.html',''); ini
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T, template&lt; typename... &gt; class Meta = std::type_identity&gt;<br />
 struct kumi::as_tuple&lt; T, Meta &gt;</div><p>Generate a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> type from a type. </p>
-<p>If <code>T</code> is a <a class="el" href="conceptkumi_1_1product__type.html">kumi::product_type</a>, returns the <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> type containing the same element as <code>T</code>. Otherwise, it returns <code><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>&lt;T&gt;</code>.</p>
+<p>If <code>T</code> is a <a class="el" href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type</a>, returns the <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> type containing the same element as <code>T</code>. Otherwise, it returns <code><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>&lt;T&gt;</code>.</p>
 <p>A template meta-function can be optionally passed to be applied to each of those types when types are computed.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -147,7 +147,7 @@ Helper type</h2>
 <div class="line">  <span class="keyword">using </span>as_tuple_t = <span class="keyword">typename</span> <a class="code hl_struct" href="structkumi_1_1as__tuple.html">as_tuple&lt;T, Meta&gt;::type</a>;</div>
 <div class="line">}</div>
 <div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
-<div class="ttc" id="astructkumi_1_1as__tuple_html"><div class="ttname"><a href="structkumi_1_1as__tuple.html">kumi::as_tuple</a></div><div class="ttdoc">Generate a kumi::tuple type from a type.</div><div class="ttdef"><b>Definition</b> convert.hpp:159</div></div>
+<div class="ttc" id="astructkumi_1_1as__tuple_html"><div class="ttname"><a href="structkumi_1_1as__tuple.html">kumi::as_tuple</a></div><div class="ttdoc">Generate a kumi::tuple type from a type.</div><div class="ttdef"><b>Definition</b> convert.hpp:161</div></div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md17"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>

@@ -127,7 +127,7 @@ $(document).ready(function(){initNavTree('group__generators_ga18d76245ac67494ea0
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;index_map auto Indexes, product_type T&gt; <br />
+template&lt;concepts::index_map auto Indexes, concepts::product_type T&gt; <br />
 requires (_::in_bound_indexes&lt;Indexes, T&gt;())</div>
 <table class="mlabels">
   <tr>
@@ -148,7 +148,7 @@ requires (_::in_bound_indexes&lt;Indexes, T&gt;())</div>
 </table>
 </div><div class="memdoc">
 
-<p>Reindex elements of a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a>. </p>
+<p>Reindex elements of a kumi::product_type. </p>
 <p>This function does not participate in overload resolution if any Idx is outside [0, size_v&lt;T&gt;[.</p>
 <dl class="section note"><dt>Note</dt><dd>Nothing prevent the number of reordered index to be lesser or greater than t size or the fact they can appear multiple times.</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -159,7 +159,7 @@ requires (_::in_bound_indexes&lt;Indexes, T&gt;())</div>
 </dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">t</td><td><a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a> to reindex </td></tr>
+    <tr><td class="paramname">t</td><td>kumi::product_type to reindex </td></tr>
   </table>
   </dd>
 </dl>

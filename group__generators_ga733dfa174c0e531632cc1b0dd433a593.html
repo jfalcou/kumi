@@ -127,7 +127,7 @@ $(document).ready(function(){initNavTree('group__generators_ga733dfa174c0e531632
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;std::size_t N, product_type T&gt; <br />
+template&lt;std::size_t N, concepts::product_type T&gt; <br />
 requires (N &gt; 0 &amp;&amp; N &lt;= size_v&lt;T&gt;)</div>
 <table class="mlabels">
   <tr>
@@ -188,7 +188,7 @@ Example</h2>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;  Standard Windows &quot;</span> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; w &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_function" href="group__transforms_gab149989d49d601440eae1057a6065c9b.html#gab149989d49d601440eae1057a6065c9b">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
+<div class="line">  <a class="code hl_function" href="group__transforms_gacfc6eb17686b7570f768de71198d8812.html#gacfc6eb17686b7570f768de71198d8812">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
 <div class="line">  {</div>
 <div class="line">    get&lt;0&gt;(tile)++;</div>
 <div class="line">  },w);</div>
@@ -198,13 +198,13 @@ Example</h2>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;  Windows with references &quot;</span> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; w2 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_function" href="group__transforms_gab149989d49d601440eae1057a6065c9b.html#gab149989d49d601440eae1057a6065c9b">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
+<div class="line">  <a class="code hl_function" href="group__transforms_gacfc6eb17686b7570f768de71198d8812.html#gacfc6eb17686b7570f768de71198d8812">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
 <div class="line">  {</div>
 <div class="line">    get&lt;0&gt;(tile)++;</div>
 <div class="line">  },w2);</div>
 <div class="line">  std::cout &lt;&lt; t &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;   </div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__transforms_gab149989d49d601440eae1057a6065c9b_html_gab149989d49d601440eae1057a6065c9b"><div class="ttname"><a href="group__transforms_gab149989d49d601440eae1057a6065c9b.html#gab149989d49d601440eae1057a6065c9b">kumi::for_each</a></div><div class="ttdeci">constexpr void for_each(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a kumi::product_type. f is applied on the values if ...</div><div class="ttdef"><b>Definition</b> for_each.hpp:32</div></div>
+<div class="ttc" id="agroup__transforms_gacfc6eb17686b7570f768de71198d8812_html_gacfc6eb17686b7570f768de71198d8812"><div class="ttname"><a href="group__transforms_gacfc6eb17686b7570f768de71198d8812.html#gacfc6eb17686b7570f768de71198d8812">kumi::for_each</a></div><div class="ttdeci">constexpr void for_each(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a kumi::product_type. f is applied on the values if ...</div><div class="ttdef"><b>Definition</b> for_each.hpp:32</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:32</div></div>
 </div><!-- fragment --> 
 </div>

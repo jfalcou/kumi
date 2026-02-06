@@ -193,9 +193,9 @@ API and Infrastructure Changes</h3>
 New Features</h3>
 <ul>
 <li>Implemented <a class="el" href="group__generators_ga19ced0b66d1e3dae7bfa60f7def6914f.html#ga19ced0b66d1e3dae7bfa60f7def6914f" title="Creates a kumi::tuple containing an increasing ramp of values.">kumi::iota</a> and generate (See #23)</li>
-<li>Implemented <a class="el" href="group__generators_ga71ccd933cc34850c94a6c51cb831cbaa.html#ga71ccd933cc34850c94a6c51cb831cbaa" title="Return the Cartesian Product of all elements of its arguments product types.">kumi::cartesian_product</a> (See #26)</li>
+<li>Implemented <a class="el" href="group__generators_ga0cf18e9f5c176d132be6afbfcb6652ae.html#ga0cf18e9f5c176d132be6afbfcb6652ae" title="Return the Cartesian Product of all elements of its arguments product types.">kumi::cartesian_product</a> (See #26)</li>
 <li>Implemented predicate based operations on tuple (See #25)</li>
-<li>Implemented <a class="el" href="group__reductions_ga7296647c71126e9dc46767d5a3a203bb.html#ga7296647c71126e9dc46767d5a3a203bb" title="Computes inner product (i.e. sum of products)">kumi::inner_product</a> (See #36)</li>
+<li>Implemented <a class="el" href="group__reductions_gae9e0f77ffe8399c701ba32532db19d11.html#gae9e0f77ffe8399c701ba32532db19d11" title="Computes inner product (i.e. sum of products)">kumi::inner_product</a> (See #36)</li>
 <li>Implemented <a class="el" href="group__utility_ga7847a3783c337053f6d5f53b24a2583f.html#ga7847a3783c337053f6d5f53b24a2583f" title="Retrieves the back of a tuple.">kumi::back</a> and <a class="el" href="group__utility_ga0a86710de48273efa390a88ba18b2017.html#ga0a86710de48273efa390a88ba18b2017" title="Retrieves the front of a tuple.">kumi::front</a> (See #37)</li>
 <li>Implemented <a class="el" href="group__generators_ga49abf24bfdc3e6c8707cd321d9015212.html#ga49abf24bfdc3e6c8707cd321d9015212" title="Reverse elements of a kumi::product_type.">kumi::reverse</a> (See #39)</li>
 </ul>
@@ -218,13 +218,13 @@ What's Changed</h2>
 <h3><a class="anchor" id="autotoc_md219"></a>
 Bug Fixes</h3>
 <ul>
-<li>Improve <code><a class="el" href="group__generators_ga75156b6b59e7fa8ac478bf87f1636afc.html#ga75156b6b59e7fa8ac478bf87f1636afc" title="Concatenates product types in a single one.">kumi::cat</a></code> implementation to perform <code>O(N)</code> copies.</li>
+<li>Improve <code><a class="el" href="group__generators_ga3786266bedb7981ba0df79cc5b49b261.html#ga3786266bedb7981ba0df79cc5b49b261" title="Concatenates product types in a single one.">kumi::cat</a></code> implementation to perform <code>O(N)</code> copies.</li>
 <li>Use include guards to prevent issue when different project use KUMI concurrently.</li>
 </ul>
 <h3><a class="anchor" id="autotoc_md220"></a>
 New Features</h3>
 <ul>
-<li>Added the <code><a class="el" href="conceptkumi_1_1sized__product__type__or__more.html" title="Concept specifying a type follows the Product Type semantic and has a size lower bound.">kumi::sized_product_type_or_more</a></code> concept</li>
+<li>Added the <code>kumi::sized_product_type_or_more</code> concept</li>
 <li>Implements <code>kumi::to_ref</code> to construct a tuple of references form a reference to a tuple.</li>
 </ul>
 <p><b>Full Changelog</b>: <a href="https://github.com/jfalcou/kumi/compare/v2.0...v2.1">https://github.com/jfalcou/kumi/compare/v2.0...v2.1</a></p>

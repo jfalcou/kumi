@@ -127,7 +127,7 @@ $(document).ready(function(){initNavTree('group__generators_ga418f0a47f05b67dbb3
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;product_type T&gt; </div>
+template&lt;concepts::product_type T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -147,7 +147,7 @@ template&lt;product_type T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Convert a <a class="el" href="conceptkumi_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::product_type</a> to a flat product type of pointers to each its components. </p>
+<p>Convert a kumi::product_type to a flat product type of pointers to each its components. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">t</td><td>Product type to convert </td></tr>
@@ -181,11 +181,11 @@ Example</h2>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; ptr &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_function" href="group__transforms_gab149989d49d601440eae1057a6065c9b.html#gab149989d49d601440eae1057a6065c9b">kumi::for_each</a>([](<span class="keyword">auto</span> p) { *p += 5; }, ptr );</div>
+<div class="line">  <a class="code hl_function" href="group__transforms_gacfc6eb17686b7570f768de71198d8812.html#gacfc6eb17686b7570f768de71198d8812">kumi::for_each</a>([](<span class="keyword">auto</span> p) { *p += 5; }, ptr );</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__transforms_gab149989d49d601440eae1057a6065c9b_html_gab149989d49d601440eae1057a6065c9b"><div class="ttname"><a href="group__transforms_gab149989d49d601440eae1057a6065c9b.html#gab149989d49d601440eae1057a6065c9b">kumi::for_each</a></div><div class="ttdeci">constexpr void for_each(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a kumi::product_type. f is applied on the values if ...</div><div class="ttdef"><b>Definition</b> for_each.hpp:32</div></div>
+<div class="ttc" id="agroup__transforms_gacfc6eb17686b7570f768de71198d8812_html_gacfc6eb17686b7570f768de71198d8812"><div class="ttname"><a href="group__transforms_gacfc6eb17686b7570f768de71198d8812.html#gacfc6eb17686b7570f768de71198d8812">kumi::for_each</a></div><div class="ttdeci">constexpr void for_each(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a kumi::product_type. f is applied on the values if ...</div><div class="ttdef"><b>Definition</b> for_each.hpp:32</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:32</div></div>
 </div><!-- fragment --> 
 </div>
