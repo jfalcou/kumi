@@ -32,11 +32,11 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/back-front.cpp
   //================================================================================================
-  template<product_type Tuple>
+  template<concepts::product_type Tuple>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) front(Tuple&& t)
   requires(size_v<Tuple> != 0)
   {
-    if constexpr (record_type<Tuple>) return front(values_of(KUMI_FWD(t)));
+    if constexpr (concepts::record_type<Tuple>) return front(values_of(KUMI_FWD(t)));
     else return get<0>(KUMI_FWD(t));
   }
 
@@ -63,25 +63,25 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/back-front.cpp
   //================================================================================================
-  template<product_type Tuple>
+  template<concepts::product_type Tuple>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) back(Tuple&& t)
   requires(size_v<Tuple> != 0)
   {
-    if constexpr (record_type<Tuple>) return back(values_of(KUMI_FWD(t)));
+    if constexpr (concepts::record_type<Tuple>) return back(values_of(KUMI_FWD(t)));
     else return get<size_v<Tuple> - 1>(KUMI_FWD(t));
   }
 
   namespace result
   {
-    template<product_type Tuple> struct front : raw_member<0, Tuple>
+    template<concepts::product_type Tuple> struct front : raw_member<0, Tuple>
     {
     };
 
-    template<product_type Tuple> struct back : raw_member<size_v<Tuple> - 1, Tuple>
+    template<concepts::product_type Tuple> struct back : raw_member<size_v<Tuple> - 1, Tuple>
     {
     };
 
-    template<product_type Tuple> using front_t = typename front<Tuple>::type;
-    template<product_type Tuple> using back_t = typename back<Tuple>::type;
+    template<concepts::product_type Tuple> using front_t = typename front<Tuple>::type;
+    template<concepts::product_type Tuple> using back_t = typename back<Tuple>::type;
   }
 }

@@ -6,7 +6,7 @@
 #include <kumi/kumi.hpp>
 #include <iostream>
 
-template<kumi::record_type Record>
+template<kumi::concepts::record_type Record>
 void print(std::ostream& os, Record const& t)
 {
   kumi::apply

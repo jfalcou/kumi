@@ -21,12 +21,12 @@ TTS_CASE("Check apply_traits behavior")
               (std::integral_constant<std::size_t, 8>));
 };
 
-template<kumi::product_type T> kumi::apply_traits_t<nary_traits, T> f(T const&)
+template<kumi::concepts::product_type T> kumi::apply_traits_t<nary_traits, T> f(T const&)
 {
   return {};
 }
 
-template<kumi::product_type T> kumi::apply_traits_t<std::add_pointer, T> g(T const&)
+template<kumi::concepts::product_type T> kumi::apply_traits_t<std::add_pointer, T> g(T const&)
 {
   return {};
 }
@@ -38,7 +38,7 @@ struct strict_traits
   using type = bool;
 };
 
-template<kumi::product_type T> kumi::apply_traits_t<strict_traits, T> h(T const&)
+template<kumi::concepts::product_type T> kumi::apply_traits_t<strict_traits, T> h(T const&)
 {
   return true;
 }

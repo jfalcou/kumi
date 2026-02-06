@@ -12,13 +12,13 @@
 
 using namespace kumi::literals;
 
-TTS_CASE("Check adapted types model kumi::product_type concept")
+TTS_CASE("Check adapted types model kumi::concepts::product_type concept")
 {
-  TTS_EXPECT(kumi::product_type<tuple_box>);
-  TTS_EXPECT(kumi::product_type<record_box>);
+  TTS_EXPECT(kumi::concepts::product_type<tuple_box>);
+  TTS_EXPECT(kumi::concepts::product_type<record_box>);
 
-  TTS_EXPECT_NOT(kumi::record_type<tuple_box>);
-  TTS_EXPECT(kumi::record_type<record_box>);
+  TTS_EXPECT_NOT(kumi::concepts::record_type<tuple_box>);
+  TTS_EXPECT(kumi::concepts::record_type<record_box>);
 };
 
 TTS_CASE("Check get methods on adapted types")

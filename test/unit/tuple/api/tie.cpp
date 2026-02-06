@@ -44,14 +44,14 @@ TTS_CASE("Check construction of kumi::tuple via tie")
 
   auto& [s1_0] = t1;
   auto& t1_0 = s1_0;
-  TTS_CONSTEXPR_EXPECT((kumi::sized_product_type<decltype(t1), 1>));
+  TTS_CONSTEXPR_EXPECT((kumi::concepts::sized_product_type<decltype(t1), 1>));
   TTS_EQUAL(t1.size(), 1ULL);
   TTS_EQUAL(&t1_0, &i);
 
   auto& [s2_0, s2_1] = t2;
   auto& t2_0 = s2_0;
   auto& t2_1 = s2_1;
-  TTS_CONSTEXPR_EXPECT((kumi::sized_product_type<decltype(t2), 2>));
+  TTS_CONSTEXPR_EXPECT((kumi::concepts::sized_product_type<decltype(t2), 2>));
   TTS_EQUAL(t2.size(), 2ULL);
   TTS_EQUAL(&t2_0, &i);
   TTS_EQUAL(&t2_1, &f);
@@ -60,7 +60,7 @@ TTS_CASE("Check construction of kumi::tuple via tie")
   auto& t3_0 = s3_0;
   auto& t3_1 = s3_1;
   auto& t3_2 = s3_2;
-  TTS_CONSTEXPR_EXPECT((kumi::sized_product_type<decltype(t3), 3>));
+  TTS_CONSTEXPR_EXPECT((kumi::concepts::sized_product_type<decltype(t3), 3>));
   TTS_EQUAL(t3.size(), 3ULL);
   TTS_EQUAL(&t3_0, &i);
   TTS_EQUAL(&t3_1, &f);
@@ -71,7 +71,7 @@ TTS_CASE("Check construction of kumi::tuple via tie")
   auto& t4_1 = s4_1;
   auto& t4_2 = s4_2;
   auto& t4_3 = s4_3;
-  TTS_CONSTEXPR_EXPECT((kumi::sized_product_type<decltype(t4), 4>));
+  TTS_CONSTEXPR_EXPECT((kumi::concepts::sized_product_type<decltype(t4), 4>));
   TTS_EQUAL(t4.size(), 4ULL);
   TTS_EQUAL(&t4_0, &i);
   TTS_EQUAL(&t4_1, &f);

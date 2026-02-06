@@ -94,7 +94,7 @@ namespace kumi
     //! @include doc/tuple/api/typed_subscript.cpp
     //==============================================================================================
     template<typename T>
-    requires(uniquely_typed<Ts...> && contains_type<T, Ts...>)
+    requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) & noexcept
     {
       return _::get_leaf<T>(impl);
@@ -102,7 +102,7 @@ namespace kumi
 
     /// @overload
     template<typename T>
-    requires(uniquely_typed<Ts...> && contains_type<T, Ts...>)
+    requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) && noexcept
     {
       return _::get_leaf<T>(static_cast<decltype(impl)&&>(impl));
@@ -110,7 +110,7 @@ namespace kumi
 
     /// @overload
     template<typename T>
-    requires(uniquely_typed<Ts...> && contains_type<T, Ts...>)
+    requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) const&& noexcept
     {
       return _::get_leaf<T>(static_cast<decltype(impl) const&&>(impl));
@@ -118,7 +118,7 @@ namespace kumi
 
     /// @overload
     template<typename T>
-    requires(uniquely_typed<Ts...> && contains_type<T, Ts...>)
+    requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) const& noexcept
     {
       return _::get_leaf<T>(impl);
@@ -136,7 +136,7 @@ namespace kumi
     //! @include doc/tuple/api/named_subscript.cpp
     //==============================================================================================
     template<str Name>
-    requires(uniquely_named<Ts...> && contains_field<Name, Ts...>)
+    requires(concepts::uniquely_named<Ts...> && concepts::contains_field<Name, Ts...>)
     KUMI_ABI constexpr decltype(auto) operator[](field_name<Name>) & noexcept
     {
       return _::get_leaf<Name>(impl);
@@ -144,7 +144,7 @@ namespace kumi
 
     /// @overload
     template<str Name>
-    requires(uniquely_named<Ts...> && contains_field<Name, Ts...>)
+    requires(concepts::uniquely_named<Ts...> && concepts::contains_field<Name, Ts...>)
     KUMI_ABI constexpr decltype(auto) operator[](field_name<Name>) && noexcept
     {
       return _::get_leaf<Name>(static_cast<decltype(impl)&&>(impl));
@@ -152,7 +152,7 @@ namespace kumi
 
     /// @overload
     template<str Name>
-    requires(uniquely_named<Ts...> && contains_field<Name, Ts...>)
+    requires(concepts::uniquely_named<Ts...> && concepts::contains_field<Name, Ts...>)
     KUMI_ABI constexpr decltype(auto) operator[](field_name<Name>) const&& noexcept
     {
       return _::get_leaf<Name>(static_cast<decltype(impl) const&&>(impl));
@@ -160,7 +160,7 @@ namespace kumi
 
     /// @overload
     template<str Name>
-    requires(uniquely_named<Ts...> && contains_field<Name, Ts...>)
+    requires(concepts::uniquely_named<Ts...> && concepts::contains_field<Name, Ts...>)
     KUMI_ABI constexpr decltype(auto) operator[](field_name<Name>) const& noexcept
     {
       return _::get_leaf<Name>(impl);
@@ -283,7 +283,7 @@ namespace kumi
     /// @brief Compares a tuple with an other for equality
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator==(tuple const& self, tuple<Us...> const& other) noexcept
-    requires(equality_comparable<tuple, tuple<Us...>>)
+    requires(concepts::equality_comparable<tuple, tuple<Us...>>)
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return ((get<I>(self) == get<I>(other)) && ...);
@@ -292,7 +292,7 @@ namespace kumi
 
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator!=(tuple const& self, tuple<Us...> const& other) noexcept
-    requires(equality_comparable<tuple, tuple<Us...>>)
+    requires(concepts::equality_comparable<tuple, tuple<Us...>>)
     {
       return !(self == other);
     }
@@ -384,14 +384,14 @@ namespace kumi
     KUMI_ABI friend constexpr auto operator<=>(tuple<>, tuple<>) noexcept = default;
 
     template<typename T>
-    requires(unit_type<T>)
+    requires(concepts::unit_type<T>)
     [[nodiscard]] KUMI_ABI constexpr operator T() const noexcept
     {
       return {};
     };
 
     template<typename T>
-    requires(unit_type<T>)
+    requires(concepts::unit_type<T>)
     [[nodiscard]] KUMI_ABI constexpr operator T() noexcept
     {
       return {};
@@ -488,7 +488,7 @@ namespace kumi
   //! ## Example:
   //! @include doc/tuple/api/to_ref.cpp
   //================================================================================================
-  template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto to_ref(T&& t)
+  template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto to_ref(T&& t)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
       return kumi::forward_as_tuple(get<I>(KUMI_FWD(t))...);
@@ -579,7 +579,7 @@ namespace kumi
   //! @include doc/tuple/api/named_get.cpp
   //================================================================================================
   template<str Name, typename... Ts>
-  requires(uniquely_named<Ts...> && contains_field<Name, Ts...>)
+  requires(concepts::uniquely_named<Ts...> && concepts::contains_field<Name, Ts...>)
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>& t) noexcept
   {
     return t[field<Name>];
@@ -587,7 +587,7 @@ namespace kumi
 
   /// @overload
   template<str Name, typename... Ts>
-  requires(uniquely_named<Ts...> && contains_field<Name, Ts...>)
+  requires(concepts::uniquely_named<Ts...> && concepts::contains_field<Name, Ts...>)
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>&& t) noexcept
   {
     return static_cast<tuple<Ts...>&&>(t)[field<Name>];
@@ -595,7 +595,7 @@ namespace kumi
 
   /// @overload
   template<str Name, typename... Ts>
-  requires(uniquely_named<Ts...> && contains_field<Name, Ts...>)
+  requires(concepts::uniquely_named<Ts...> && concepts::contains_field<Name, Ts...>)
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const& t) noexcept
   {
     return t[field<Name>];
@@ -603,15 +603,15 @@ namespace kumi
 
   /// @overload
   template<str Name, typename... Ts>
-  requires(uniquely_named<Ts...> && contains_field<Name, Ts...>)
+  requires(concepts::uniquely_named<Ts...> && concepts::contains_field<Name, Ts...>)
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const&& t) noexcept
   {
     return static_cast<tuple<Ts...> const&&>(t)[field<Name>];
   }
 
   /// Improves diagnostic for non present name
-  template<str Name, product_type T>
-  requires(!record_type<T> && !(_::named_get_compliant<Name, T>()))
+  template<str Name, concepts::product_type T>
+  requires(!concepts::record_type<T> && !(_::named_get_compliant<Name, T>()))
   constexpr auto get(T&& t) = delete;
 
   //================================================================================================
@@ -628,7 +628,7 @@ namespace kumi
   //! @include doc/tuple/api/typed_get.cpp
   //================================================================================================
   template<typename T, typename... Ts>
-  requires(uniquely_typed<Ts...> && contains_type<T, Ts...>)
+  requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>& t) noexcept
   {
     return t[as<T>{}];
@@ -636,7 +636,7 @@ namespace kumi
 
   /// @overload
   template<typename T, typename... Ts>
-  requires(uniquely_typed<Ts...> && contains_type<T, Ts...>)
+  requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>&& t) noexcept
   {
     return static_cast<tuple<Ts...>&&>(t)[as<T>{}];
@@ -644,7 +644,7 @@ namespace kumi
 
   /// @overload
   template<typename T, typename... Ts>
-  requires(uniquely_typed<Ts...> && contains_type<T, Ts...>)
+  requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const& t) noexcept
   {
     return t[as<T>{}];
@@ -652,15 +652,15 @@ namespace kumi
 
   /// @overload
   template<typename T, typename... Ts>
-  requires(uniquely_typed<Ts...> && contains_type<T, Ts...>)
+  requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const&& t) noexcept
   {
     return static_cast<tuple<Ts...> const&&>(t)[as<T>{}];
   }
 
   /// Improves diagnostic for non present type
-  template<typename U, product_type T>
-  requires(!record_type<T> && !(_::typed_get_compliant<U, T>()))
+  template<typename U, concepts::product_type T>
+  requires(!concepts::record_type<T> && !(_::typed_get_compliant<U, T>()))
   constexpr auto get(T&& t) = delete;
 
   //================================================================================================
@@ -668,8 +668,8 @@ namespace kumi
   //================================================================================================
 
   // Builder protocole
-  template<product_type T>
-  requires(!record_type<T>)
+  template<concepts::product_type T>
+  requires(!concepts::record_type<T>)
   struct builder<T>
   {
     using type = T;
@@ -685,8 +685,8 @@ namespace kumi
   };
 
   // As we are lacking a proper mechanism to find the least restrictive subtype, we fallback to a specializable trait
-  template<product_type... Ts>
-  requires(!record_type<Ts> && ...)
+  template<concepts::product_type... Ts>
+  requires(!concepts::record_type<Ts> && ...)
   struct common_product_type<Ts...>
   {
     using type = kumi::tuple<>;

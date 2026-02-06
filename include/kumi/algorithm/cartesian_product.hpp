@@ -59,9 +59,9 @@ namespace kumi
   //! ## Example:
   //! @include doc/tuple/algo/cartesian_product.cpp
   //================================================================================================
-  template<product_type... Ts>
+  template<concepts::product_type... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto cartesian_product(Ts&&... ts)
-  requires(follows_same_semantic<Ts...>)
+  requires(concepts::follows_same_semantic<Ts...>)
   {
     if constexpr (sizeof...(Ts) == 0) return tuple{};
     else

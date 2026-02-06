@@ -214,52 +214,52 @@ struct ctor_tracker
   }
 };
 
-template<kumi::product_type T> operations move_ctor_fwd(T&& t)
+template<kumi::concepts::product_type T> operations move_ctor_fwd(T&& t)
 {
   ctor_tracker local = std::forward<T>(t)[kumi::index<0>];
   return local.value;
 }
 
-template<kumi::product_type T> operations copy_ctor_fwd(T&& t)
+template<kumi::concepts::product_type T> operations copy_ctor_fwd(T&& t)
 {
   ctor_tracker local = t[kumi::index<0>];
   return local.value;
 }
 
-template<kumi::product_type T> operations move_assign_fwd(T&& t)
+template<kumi::concepts::product_type T> operations move_assign_fwd(T&& t)
 {
   ctor_tracker local;
   local = std::forward<T>(t)[kumi::index<0>];
   return local.value;
 }
 
-template<kumi::product_type T> operations copy_assign_fwd(T&& t)
+template<kumi::concepts::product_type T> operations copy_assign_fwd(T&& t)
 {
   ctor_tracker local;
   local = t[kumi::index<0>];
   return local.value;
 }
 
-template<kumi::record_type R> operations move_ctor_fwd(R&& r)
+template<kumi::concepts::record_type R> operations move_ctor_fwd(R&& r)
 {
   ctor_tracker local = std::forward<R>(r)["a"_f];
   return local.value;
 }
 
-template<kumi::record_type R> operations copy_ctor_fwd(R&& r)
+template<kumi::concepts::record_type R> operations copy_ctor_fwd(R&& r)
 {
   ctor_tracker local = r["b"_f];
   return local.value;
 }
 
-template<kumi::record_type R> operations move_assign_fwd(R&& r)
+template<kumi::concepts::record_type R> operations move_assign_fwd(R&& r)
 {
   ctor_tracker local;
   local = std::forward<R>(r)["c"_f];
   return local.value;
 }
 
-template<kumi::record_type R> operations copy_assign_fwd(R&& r)
+template<kumi::concepts::record_type R> operations copy_assign_fwd(R&& r)
 {
   ctor_tracker local;
   local = r["d"_f];

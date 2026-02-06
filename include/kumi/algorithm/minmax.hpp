@@ -31,10 +31,10 @@ namespace kumi
   //! ## Example:
   //! @include doc/tuple/algo/max.cpp
   //================================================================================================
-  template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto max(T&& t) noexcept
+  template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto max(T&& t) noexcept
   {
-    if constexpr (record_type<T>) return max(values_of(KUMI_FWD(t)));
-    else if constexpr (sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
+    if constexpr (concepts::record_type<T>) return max(values_of(KUMI_FWD(t)));
+    else if constexpr (concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
     else
     {
       auto base = get<0>(KUMI_FWD(t));
@@ -65,10 +65,10 @@ namespace kumi
   //! ## Example:
   //! @include doc/tuple/algo/max.cpp
   //================================================================================================
-  template<product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto max(T&& t, F f) noexcept
+  template<concepts::product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto max(T&& t, F f) noexcept
   {
-    if constexpr (record_type<T>) return max(values_of(KUMI_FWD(t)), f);
-    else if constexpr (sized_product_type<T, 1>) return invoke(f, get<0>(KUMI_FWD(t)));
+    if constexpr (concepts::record_type<T>) return max(values_of(KUMI_FWD(t)), f);
+    else if constexpr (concepts::sized_product_type<T, 1>) return invoke(f, get<0>(KUMI_FWD(t)));
     else
     {
       auto base = f(get<0>(KUMI_FWD(t)));
@@ -100,7 +100,7 @@ namespace kumi
   //! ## Example:
   //! @include doc/tuple/algo/max_flat.cpp
   //================================================================================================
-  template<product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto max_flat(T&& t, F f) noexcept
+  template<concepts::product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto max_flat(T&& t, F f) noexcept
   {
     auto flat_t = kumi::flatten_all(KUMI_FWD(t));
     return max(flat_t, f);
@@ -149,10 +149,10 @@ namespace kumi
   //! ## Example:
   //! @include doc/tuple/algo/min.cpp
   //================================================================================================
-  template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto min(T&& t) noexcept
+  template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto min(T&& t) noexcept
   {
-    if constexpr (record_type<T>) return min(values_of(KUMI_FWD(t)));
-    else if constexpr (sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
+    if constexpr (concepts::record_type<T>) return min(values_of(KUMI_FWD(t)));
+    else if constexpr (concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
     else
     {
       auto base = get<0>(KUMI_FWD(t));
@@ -183,10 +183,10 @@ namespace kumi
   //! ## Example:
   //! @include doc/tuple/algo/min.cpp
   //================================================================================================
-  template<product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto min(T&& t, F f) noexcept
+  template<concepts::product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto min(T&& t, F f) noexcept
   {
-    if constexpr (record_type<T>) return min(values_of(KUMI_FWD(t)), f);
-    else if constexpr (sized_product_type<T, 1>) return invoke(f, get<0>(KUMI_FWD(t)));
+    if constexpr (concepts::record_type<T>) return min(values_of(KUMI_FWD(t)), f);
+    else if constexpr (concepts::sized_product_type<T, 1>) return invoke(f, get<0>(KUMI_FWD(t)));
     else
     {
       auto base = f(get<0>(KUMI_FWD(t)));
@@ -218,7 +218,7 @@ namespace kumi
   //! ## Example:
   //! @include doc/tuple/algo/min_flat.cpp
   //================================================================================================
-  template<product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto min_flat(T&& t, F f) noexcept
+  template<concepts::product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto min_flat(T&& t, F f) noexcept
   {
     auto flat_t = kumi::flatten_all(KUMI_FWD(t));
     return min(flat_t, f);

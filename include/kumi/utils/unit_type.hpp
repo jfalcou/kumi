@@ -20,18 +20,17 @@ namespace kumi
   //================================================================================================
   struct unit
   {
-    using is_product_type = void;
     KUMI_ABI friend constexpr auto operator<=>(unit, unit) noexcept = default;
 
     template<typename T>
-    requires(unit_type<T>)
+    requires(concepts::unit_type<T>)
     [[nodiscard]] KUMI_ABI constexpr operator T() const noexcept
     {
       return {};
     };
 
     template<typename T>
-    requires(unit_type<T>)
+    requires(concepts::unit_type<T>)
     [[nodiscard]] KUMI_ABI constexpr operator T() noexcept
     {
       return {};

@@ -12,15 +12,15 @@ namespace kumi
 
   namespace _
   {
-    template<index_map auto idxs, product_type T> consteval auto in_bound_indexes()
+    template<concepts::index_map auto idxs, concepts::product_type T> consteval auto in_bound_indexes()
     {
       using map_t = std::remove_cvref_t<decltype(idxs)>;
-      if constexpr (sized_product_type<T, 0>) return false;
-      else if constexpr (sized_product_type<map_t, 0>) return true;
+      if constexpr (concepts::sized_product_type<T, 0>) return false;
+      else if constexpr (concepts::sized_product_type<map_t, 0>) return true;
       else
         return []<std::size_t... N>(std::index_sequence<N...>) {
           bool checks[] = {([]() {
-            if constexpr (product_type<element_t<N, map_t>>) return in_bound_indexes<get<N>(idxs), T>();
+            if constexpr (concepts::product_type<element_t<N, map_t>>) return in_bound_indexes<get<N>(idxs), T>();
             else if constexpr (static_cast<std::size_t>(get<N>(idxs)) < size_v<T>) return true;
             else return false;
           }())...};
@@ -65,7 +65,7 @@ namespace kumi
   //! @include doc/tuple/algo/reorder.cpp
   //! @include doc/record/algo/reorder.cpp
   //================================================================================================
-  template<std::size_t... Idx, product_type T>
+  template<std::size_t... Idx, concepts::product_type T>
   requires((Idx < size_v<T>) && ...)
   [[nodiscard]] KUMI_ABI constexpr auto reorder(T&& t)
   {
@@ -101,7 +101,7 @@ namespace kumi
   //! ## Example
   //! @include doc/record/algo/reorder_fields.cpp
   //================================================================================================
-  template<field_name... Name, product_type Tuple>
+  template<field_name... Name, concepts::product_type Tuple>
   requires(requires { get<Name>(std::declval<Tuple>()); } && ...)
   KUMI_ABI constexpr auto reorder_fields(Tuple&& t)
   {
@@ -137,18 +137,18 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/reindex.cpp
   //================================================================================================
-  template<index_map auto Indexes, product_type T>
+  template<concepts::index_map auto Indexes, concepts::product_type T>
   requires(_::in_bound_indexes<Indexes, T>())
   [[nodiscard]] KUMI_ABI constexpr auto reindex(T&& t)
   {
     using idx_t = std::remove_cvref_t<decltype(Indexes)>;
     auto mk = [&]<auto Idx>() -> decltype(auto) {
-      if constexpr (product_type<decltype(Idx)>) return reindex<Idx>(KUMI_FWD(t));
+      if constexpr (concepts::product_type<decltype(Idx)>) return reindex<Idx>(KUMI_FWD(t));
       else return get<Idx>(KUMI_FWD(t));
     };
 
-    if constexpr (sized_product_type<T, 0>) return builder<T>::make();
-    else if constexpr (sized_product_type<idx_t, 0>) return builder<T>::make();
+    if constexpr (concepts::sized_product_type<T, 0>) return builder<T>::make();
+    else if constexpr (concepts::sized_product_type<idx_t, 0>) return builder<T>::make();
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return builder<T>::make(mk.template operator()<get<I>(Indexes)>()...);
@@ -157,26 +157,27 @@ namespace kumi
 
   namespace result
   {
-    template<product_type T, std::size_t... Idx> struct reorder
+    template<concepts::product_type T, std::size_t... Idx> struct reorder
     {
       using type = decltype(kumi::reorder<Idx...>(std::declval<T>()));
     };
 
-    template<product_type Tuple, field_name... Name> struct reorder_fields
+    template<concepts::product_type Tuple, field_name... Name> struct reorder_fields
     {
       using type = decltype(kumi::reorder_fields<Name...>(std::declval<Tuple>()));
     };
 
-    template<product_type T, index_map auto Indexes> struct reindex
+    template<concepts::product_type T, concepts::index_map auto Indexes> struct reindex
     {
       using type = decltype(kumi::reindex<Indexes>(std::declval<T>()));
     };
 
-    template<product_type T, std::size_t... Idx> using reorder_t = typename reorder<T, Idx...>::type;
+    template<concepts::product_type T, std::size_t... Idx> using reorder_t = typename reorder<T, Idx...>::type;
 
-    template<product_type Tuple, field_name... Name>
+    template<concepts::product_type Tuple, field_name... Name>
     using reorder_fields_t = typename reorder_fields<Tuple, Name...>::type;
 
-    template<product_type T, index_map auto Indexes> using reindex_t = typename reindex<T, Indexes>::type;
+    template<concepts::product_type T, concepts::index_map auto Indexes>
+    using reindex_t = typename reindex<T, Indexes>::type;
   }
 }

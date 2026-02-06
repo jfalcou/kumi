@@ -56,9 +56,9 @@ namespace kumi
   //! @include doc/tuple/algo/rotate_left.cpp
   //! @include doc/tuple/algo/rotate_left.cpp
   //================================================================================================
-  template<std::size_t R, product_type T> constexpr auto rotate_left(T&& t)
+  template<std::size_t R, concepts::product_type T> constexpr auto rotate_left(T&& t)
   {
-    if constexpr (sized_product_type<T, 0>) return KUMI_FWD(t);
+    if constexpr (concepts::sized_product_type<T, 0>) return KUMI_FWD(t);
     else if constexpr ((R % size_v<T>) == 0) return KUMI_FWD(t);
     else
     {
@@ -96,9 +96,9 @@ namespace kumi
   //! @include doc/tuple/algo/rotate_right.cpp
   //! @include doc/tuple/algo/rotate_right.cpp
   //================================================================================================
-  template<std::size_t R, product_type T> constexpr auto rotate_right(T&& t)
+  template<std::size_t R, concepts::product_type T> constexpr auto rotate_right(T&& t)
   {
-    if constexpr (sized_product_type<T, 0>) return KUMI_FWD(t);
+    if constexpr (concepts::sized_product_type<T, 0>) return KUMI_FWD(t);
     else if constexpr ((R % size_v<T>) == 0) return KUMI_FWD(t);
     else
     {
@@ -113,18 +113,18 @@ namespace kumi
 
   namespace result
   {
-    template<std::size_t R, product_type T> struct rotate_left
+    template<std::size_t R, concepts::product_type T> struct rotate_left
     {
       using type = decltype(kumi::rotate_left<R>(std::declval<T>()));
     };
 
-    template<std::size_t R, product_type T> struct rotate_right
+    template<std::size_t R, concepts::product_type T> struct rotate_right
     {
       using type = decltype(kumi::rotate_right<R>(std::declval<T>()));
     };
 
-    template<std::size_t R, product_type T> using rotate_left_t = typename rotate_left<R, T>::type;
+    template<std::size_t R, concepts::product_type T> using rotate_left_t = typename rotate_left<R, T>::type;
 
-    template<std::size_t R, product_type T> using rotate_right_t = typename rotate_right<R, T>::type;
+    template<std::size_t R, concepts::product_type T> using rotate_right_t = typename rotate_right<R, T>::type;
   }
 }

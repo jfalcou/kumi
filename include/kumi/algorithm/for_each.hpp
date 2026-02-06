@@ -28,12 +28,12 @@ namespace kumi
   //! @include doc/tuple/algo/for_each.cpp
   //! @include doc/record/algo/for_each.cpp
   //================================================================================================
-  template<typename Function, product_type Tuple, product_type... Tuples>
+  template<typename Function, concepts::product_type Tuple, concepts::product_type... Tuples>
   KUMI_ABI constexpr void for_each(Function f, Tuple&& t, Tuples&&... ts)
-  requires((compatible_product_types<Tuple, Tuples...>) && (_::supports_call<Function&, Tuple, Tuples...>))
+  requires((concepts::compatible_product_types<Tuple, Tuples...>) && (_::supports_call<Function&, Tuple, Tuples...>))
   {
-    if constexpr (sized_product_type<Tuple, 0>) return;
-    else if constexpr (record_type<Tuple>)
+    if constexpr (concepts::sized_product_type<Tuple, 0>) return;
+    else if constexpr (concepts::record_type<Tuple>)
     {
       [&]<std::size_t... I>(std::index_sequence<I...>) {
         constexpr auto fields = members_of(as<Tuple>{});
@@ -74,11 +74,11 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/for_each_index.cpp
   //================================================================================================
-  template<typename Function, product_type Tuple, product_type... Tuples>
-  requires(!record_type<Tuple> && (!record_type<Tuples> && ...))
+  template<typename Function, concepts::product_type Tuple, concepts::product_type... Tuples>
+  requires(!concepts::record_type<Tuple> && (!concepts::record_type<Tuples> && ...))
   KUMI_ABI constexpr void for_each_index(Function f, Tuple&& t, Tuples&&... ts)
   {
-    if constexpr (sized_product_type<Tuple, 0>) return;
+    if constexpr (concepts::sized_product_type<Tuple, 0>) return;
     else
     {
       auto const invoker{[&, f](auto const i) { f(i, get<i.value>(KUMI_FWD(t)), get<i.value>(KUMI_FWD(ts))...); }};
@@ -105,11 +105,11 @@ namespace kumi
   //! ## Example
   //! @include doc/record/algo/for_each_field.cpp
   //================================================================================================
-  template<typename Function, record_type Tuple, record_type... Tuples>
-  requires(compatible_product_types<std::remove_cvref_t<Tuple>, std::remove_cvref_t<Tuples>...>)
+  template<typename Function, concepts::record_type Tuple, concepts::record_type... Tuples>
+  requires(concepts::compatible_product_types<std::remove_cvref_t<Tuple>, std::remove_cvref_t<Tuples>...>)
   KUMI_ABI constexpr void for_each_field(Function f, Tuple&& t, Tuples&&... ts)
   {
-    if constexpr (sized_product_type<Tuple, 0>) return;
+    if constexpr (concepts::sized_product_type<Tuple, 0>) return;
     else
     {
       constexpr auto fields = members_of(as<Tuple>{});

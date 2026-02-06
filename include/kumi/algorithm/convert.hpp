@@ -11,15 +11,17 @@ namespace kumi
 {
   namespace _
   {
-    template<product_type Tuple, typename IndexSequence, template<typename...> class Meta = std::type_identity>
+    template<concepts::product_type Tuple,
+             typename IndexSequence,
+             template<typename...> class Meta = std::type_identity>
     struct as_tuple;
 
-    template<product_type Tuple, std::size_t... I> struct as_tuple<Tuple, std::index_sequence<I...>>
+    template<concepts::product_type Tuple, std::size_t... I> struct as_tuple<Tuple, std::index_sequence<I...>>
     {
       using type = kumi::tuple<element_t<I, Tuple>...>;
     };
 
-    template<product_type Tuple, std::size_t... I, template<typename...> class Meta>
+    template<concepts::product_type Tuple, std::size_t... I, template<typename...> class Meta>
     struct as_tuple<Tuple, std::index_sequence<I...>, Meta>
     {
       using type = kumi::tuple<typename Meta<element_t<I, Tuple>>::type...>;
@@ -47,7 +49,7 @@ namespace kumi
   //! @include doc/tuple/api/from_tuple.cpp
   //================================================================================================
   template<typename Type, typename... Ts>
-  requires(!product_type<Type> && _::implicit_constructible<Type, Ts...>)
+  requires(!concepts::product_type<Type> && _::implicit_constructible<Type, Ts...>)
   [[nodiscard]] KUMI_ABI constexpr auto from_tuple(tuple<Ts...> const& t)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
@@ -68,8 +70,8 @@ namespace kumi
   //! ## Example
   //! @include doc/record/api/from_record.cpp
   //================================================================================================
-  template<record_type Type, typename... Ts>
-  requires(equivalent<typename _::as_tuple<Type, std::make_index_sequence<size_v<Type>>>::type, tuple<Ts...>>)
+  template<concepts::record_type Type, typename... Ts>
+  requires(concepts::equivalent<typename _::as_tuple<Type, std::make_index_sequence<size_v<Type>>>::type, tuple<Ts...>>)
   [[nodiscard]] KUMI_ABI constexpr auto from_record(record<Ts...> const& r)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
@@ -91,14 +93,14 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/api/to_tuple.cpp
   //================================================================================================
-  template<product_type Type> [[nodiscard]] KUMI_ABI constexpr auto to_tuple(Type&& t)
+  template<concepts::product_type Type> [[nodiscard]] KUMI_ABI constexpr auto to_tuple(Type&& t)
   {
     return apply([](auto&&... elems) { return tuple{elems...}; }, KUMI_FWD(t));
   }
 
-  template<static_container S>
+  template<concepts::static_container S>
   [[nodiscard]] KUMI_ABI constexpr auto to_tuple(S&& s)
-  requires(!product_type<S>)
+  requires(!concepts::product_type<S>)
   {
     constexpr auto N = container_size_v<S>;
     if constexpr (N == 0) return tuple{};
@@ -120,9 +122,9 @@ namespace kumi
   //! ## Example
   //! @include doc/record/api/to_record.cpp
   //================================================================================================
-  template<record_type Type> [[nodiscard]] KUMI_ABI constexpr auto to_record(Type&& r)
+  template<concepts::record_type Type> [[nodiscard]] KUMI_ABI constexpr auto to_record(Type&& r)
   {
-    if constexpr (sized_product_type<Type, 0>) return kumi::record{};
+    if constexpr (concepts::sized_product_type<Type, 0>) return kumi::record{};
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return record{field<name_of(as<element_t<I, Type>>{})> =
@@ -134,7 +136,7 @@ namespace kumi
   //! @ingroup utility
   //! @brief Generate a kumi::tuple type from a type
   //!
-  //! If `T` is a @ref kumi::product_type, returns the kumi::tuple type containing the same element
+  //! If `T` is a @ref kumi::concepts::product_type, returns the kumi::tuple type containing the same element
   //! as `T`. Otherwise, it returns `kumi::tuple<T>`.
   //!
   //! A template meta-function can be optionally passed to be applied to each of those types when
@@ -159,13 +161,13 @@ namespace kumi
   template<typename T, template<typename...> class Meta = std::type_identity> struct as_tuple;
 
   template<typename T, template<typename...> class Meta>
-  requires(product_type<T>)
+  requires(concepts::product_type<T>)
   struct as_tuple<T, Meta> : _::as_tuple<T, std::make_index_sequence<size_v<T>>, Meta>
   {
   };
 
   template<typename T, template<typename...> class Meta>
-  requires(!product_type<T>)
+  requires(!concepts::product_type<T>)
   struct as_tuple<T, Meta>
   {
     using type = kumi::tuple<typename Meta<T>::type>;

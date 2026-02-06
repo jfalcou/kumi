@@ -37,7 +37,7 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/windows.cpp
   //================================================================================================
-  template<std::size_t N, product_type T>
+  template<std::size_t N, concepts::product_type T>
   requires(N > 0 && N <= size_v<T>)
   [[nodiscard]] KUMI_ABI constexpr auto windows(T&& t)
   {
@@ -76,7 +76,7 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/chunks.cpp
   //================================================================================================
-  template<std::size_t N, product_type T>
+  template<std::size_t N, concepts::product_type T>
   requires(N > 0 && N <= size_v<T>)
   [[nodiscard]] KUMI_ABI constexpr auto chunks(T&& t)
   {
@@ -94,18 +94,18 @@ namespace kumi
 
   namespace result
   {
-    template<std::size_t N, kumi::product_type T> struct windows
+    template<std::size_t N, kumi::concepts::product_type T> struct windows
     {
       using type = decltype(kumi::windows<N>(std::declval<T>()));
     };
 
-    template<std::size_t N, kumi::product_type T> struct chunks
+    template<std::size_t N, kumi::concepts::product_type T> struct chunks
     {
       using type = decltype(kumi::chunks<N>(std::declval<T>()));
     };
 
-    template<std::size_t N, kumi::product_type T> using windows_t = typename windows<N, T>::type;
+    template<std::size_t N, kumi::concepts::product_type T> using windows_t = typename windows<N, T>::type;
 
-    template<std::size_t N, kumi::product_type T> using chunks_t = typename chunks<N, T>::type;
+    template<std::size_t N, kumi::concepts::product_type T> using chunks_t = typename chunks<N, T>::type;
   }
 }
