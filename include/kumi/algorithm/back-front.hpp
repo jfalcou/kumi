@@ -30,7 +30,7 @@ namespace kumi
   //! Computes the return type of a call to kumi::front
   //!
   //! ## Example
-  //! @include doc/back-front.cpp
+  //! @include doc/tuple/algo/back-front.cpp
   //================================================================================================
   template<product_type Tuple>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) front(Tuple&& t)
@@ -61,7 +61,7 @@ namespace kumi
   //! Computes the return type of a call to kumi::back
   //!
   //! ## Example
-  //! @include doc/back-front.cpp
+  //! @include doc/tuple/algo/back-front.cpp
   //================================================================================================
   template<product_type Tuple>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) back(Tuple&& t)

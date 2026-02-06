@@ -44,7 +44,7 @@ namespace kumi
   //! @return An instance of `Type` constructed from each element of `t` in order.
   //!
   //! ## Example
-  //! @include doc/from_tuple.cpp
+  //! @include doc/tuple/api/from_tuple.cpp
   //================================================================================================
   template<typename Type, typename... Ts>
   requires(!product_type<Type> && _::implicit_constructible<Type, Ts...>)
@@ -66,7 +66,7 @@ namespace kumi
   //! @return An instance of `Type` constructed from each element of `t` in order.
   //!
   //! ## Example
-  //! @include doc/record/from_record.cpp
+  //! @include doc/record/api/from_record.cpp
   //================================================================================================
   template<record_type Type, typename... Ts>
   requires(equivalent<typename _::as_tuple<Type, std::make_index_sequence<size_v<Type>>>::type, tuple<Ts...>>)
@@ -89,7 +89,7 @@ namespace kumi
   //! @note An overload is provided for kumi::static_container.
   //!
   //! ## Example
-  //! @include doc/to_tuple.cpp
+  //! @include doc/tuple/api/to_tuple.cpp
   //================================================================================================
   template<product_type Type> [[nodiscard]] KUMI_ABI constexpr auto to_tuple(Type&& t)
   {
@@ -118,7 +118,7 @@ namespace kumi
   //! @return An instance of kumi::record constructed from each elements of `t` in order.
   //!
   //! ## Example
-  //! @include doc/record/to_record.cpp
+  //! @include doc/record/api/to_record.cpp
   //================================================================================================
   template<record_type Type> [[nodiscard]] KUMI_ABI constexpr auto to_record(Type&& r)
   {
@@ -154,7 +154,7 @@ namespace kumi
   //! @endcode
   //!
   //! ## Example:
-  //! @include doc/as_tuple.cpp
+  //! @include doc/tuple/api/as_tuple.cpp
   //================================================================================================
   template<typename T, template<typename...> class Meta = std::type_identity> struct as_tuple;
 

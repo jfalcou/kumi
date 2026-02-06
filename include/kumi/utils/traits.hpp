@@ -65,7 +65,7 @@ namespace kumi
   //!   template<typename T> inline constexpr auto is_product_type_v = is_product_type<T>::value;
   //! @endcode
   //! ## Example:
-  //! @include doc/adapt.cpp
+  //! @include doc/tuple/api/adapt.cpp
   //==============================================================================================
   template<typename T> struct is_product_type : std::false_type
   {
@@ -90,7 +90,7 @@ namespace kumi
   //!   template<typename T> inline constexpr auto is_record_type_v = is_record_type<T>::value;
   //! @endcode
   //! ## Example:
-  //! @include doc/record/adapt.cpp
+  //! @include doc/record/api/adapt.cpp
   //==============================================================================================
   template<typename T, typename Enable = void> struct is_record_type : std::false_type
   {

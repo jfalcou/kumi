@@ -32,8 +32,8 @@ namespace kumi
   //! Computes the return type of a call to kumi::apply
   //!
   //! ## Example
-  //! @include doc/apply.cpp
-  //! @include doc/record/apply.cpp
+  //! @include doc/tuple/algo/apply.cpp
+  //! @include doc/record/algo/apply.cpp
   //================================================================================================
   template<typename Function, product_type T>
   KUMI_ABI constexpr decltype(auto) apply(Function&& f, T&& t) noexcept(_::supports_nothrow_apply<Function&&, T&&>)

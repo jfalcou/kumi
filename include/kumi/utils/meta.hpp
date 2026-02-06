@@ -52,7 +52,7 @@ namespace kumi
   //! @related kumi::record
   //!
   //! ## Example:
-  //! @include doc/typed_get_udt.cpp
+  //! @include doc/infra/typed_get_udt.cpp
   //================================================================================================
   template<typename Target, product_type T>
   requires(_::typed_get_compliant<Target, T>())
@@ -74,7 +74,7 @@ namespace kumi
   //! @related kumi::record
   //!
   //! ## Example:
-  //! @include doc/named_get_udt.cpp
+  //! @include doc/infra/named_get_udt.cpp
   //================================================================================================
   template<str Name, product_type T>
   requires(_::named_get_compliant<Name, T>())

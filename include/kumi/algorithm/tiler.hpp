@@ -35,7 +35,7 @@ namespace kumi
   //! Computes the return type of a call to kumi::windows
   //!
   //! ## Example
-  //! @include doc/windows.cpp
+  //! @include doc/tuple/algo/windows.cpp
   //================================================================================================
   template<std::size_t N, product_type T>
   requires(N > 0 && N <= size_v<T>)
@@ -74,7 +74,7 @@ namespace kumi
   //! Computes the return type of a call to kumi::chunks
   //!
   //! ## Example
-  //! @include doc/chunks.cpp
+  //! @include doc/tuple/algo/chunks.cpp
   //================================================================================================
   template<std::size_t N, product_type T>
   requires(N > 0 && N <= size_v<T>)

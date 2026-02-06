@@ -1,4 +1,3 @@
-
 //==================================================================================================
 /*
   KUMI - Compact Tuple Tools
@@ -43,7 +42,21 @@ namespace ns
   };
 }
 
-TTS_CASE("Check make_streamable behavior")
+TTS_CASE("Check make_streamable behavior with tuple")
+{
+  ns::price cards{7, 90};
+  ns::person marty{"Marty", "Macfly"};
+  ns::unprintable a{1, 'x', 12};
+
+  kumi::tuple t = {'t', "rofl", cards, marty, a};
+
+  std::ostringstream s;
+  s << t;
+
+  TTS_EQUAL(s.str(), "( t rofl 7.90 Marty Macfly (unknown) )");
+};
+
+TTS_CASE("Check make_streamable behavior with record")
 {
   using namespace kumi::literals;
   ns::price cards{7, 90};

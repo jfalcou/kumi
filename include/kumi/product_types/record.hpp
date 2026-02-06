@@ -49,7 +49,7 @@ namespace kumi
     //! @return A reference to the selected field of current record.
     //!
     //! ## Example:
-    //! @include doc/record/subscript.cpp
+    //! @include doc/record/api/subscript.cpp
     //==============================================================================================
     template<std::size_t I>
     requires(I < sizeof...(Ts))
@@ -91,7 +91,7 @@ namespace kumi
     //! @return A reference to the element of the selected field of current record.
     //!
     //! ## Example:
-    //! @include doc/record/named_subscript.cpp
+    //! @include doc/record/api/named_subscript.cpp
     //==============================================================================================
     template<str Name>
     requires(contains_field<Name, Ts...>)
@@ -304,7 +304,7 @@ namespace kumi
   //! @param ts	Zero or more lvalue arguments to construct the record from.
   //! @return A kumi::record object containing lvalue references.
   //! ## Example:
-  //! @include doc/record/tie.cpp
+  //! @include doc/record/api/tie.cpp
   //================================================================================================
   template<str... Fields, typename... Ts>
   requires(sizeof...(Fields) == sizeof...(Ts))
@@ -329,7 +329,7 @@ namespace kumi
   //! @param ts	Zero or more lvalue arguments to construct the record from.
   //! @return A kumi::record constructed as `kumi::record<Ts&&...>(std::forward<Ts>(args)...)`
   //! ## Example:
-  //! @include doc/record/forward_as_record.cpp
+  //! @include doc/record/api/forward_as_record.cpp
   //================================================================================================
   template<str... Fields, typename... Ts>
   requires(sizeof...(Fields) == sizeof...(Ts))
@@ -347,7 +347,7 @@ namespace kumi
   //! @return A kumi::record constructed from the ts or their inner references when ts is an instance
   //!         of `std::reference_wrapper`.
   //! ## Example:
-  //! @include doc/record/make_record.cpp
+  //! @include doc/record/api/make_record.cpp
   //================================================================================================
   template<typename... Ts>
   requires(entirely_uniquely_named<Ts...>)
@@ -366,7 +366,7 @@ namespace kumi
   //!           { return kumi::forward_as_record<name_of(as<T>{})...>(std::forward<T>(e)...); }, t)`
   //!
   //! ## Example:
-  //! @include doc/record/to_ref.cpp
+  //! @include doc/record/api/to_ref.cpp
   //================================================================================================
   template<record_type R> [[nodiscard]] KUMI_ABI constexpr auto to_ref(R&& r)
   {
@@ -395,7 +395,7 @@ namespace kumi
   //! @related kumi::record
   //!
   //! ## Example:
-  //! @include doc/record/get.cpp
+  //! @include doc/record/api/get.cpp
   //================================================================================================
   template<std::size_t I, typename... Ts>
   requires(I < sizeof...(Ts))
@@ -456,7 +456,7 @@ namespace kumi
   //! @related kumi::record
   //!
   //! ## Example:
-  //! @include doc/record/named_get.cpp
+  //! @include doc/record/api/named_get.cpp
   //================================================================================================
   template<str Name, typename... Ts>
   requires(contains_field<Name, Ts...>)

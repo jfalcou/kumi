@@ -30,8 +30,8 @@ namespace kumi
   //! Computes the return type of a call to kumi::reverse
   //!
   //! ## Examples:
-  //! @include doc/reverse.cpp
-  //! @include doc/record/reverse.cpp
+  //! @include doc/tuple/algo/reverse.cpp
+  //! @include doc/tuple/algo/reverse.cpp
   //================================================================================================
   template<product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto reverse(Tuple&& t)
   {

@@ -56,8 +56,8 @@ namespace kumi
   //! Computes the type returned by a call to kumi::partition.
   //!
   //! ## Examples:
-  //! @include doc/partition.cpp
-  //! @include doc/record/partition.cpp
+  //! @include doc/tuple/algo/partition.cpp
+  //! @include doc/tuple/algo/partition.cpp
   //================================================================================================
   template<template<typename> typename Pred, product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto partition(T&& t) noexcept
@@ -94,8 +94,8 @@ namespace kumi
   //! Computes the type returned by a call to kumi::filter.
   //!
   //! ## Example:
-  //! @include doc/filter.cpp
-  //! @include doc/record/filter.cpp
+  //! @include doc/tuple/algo/filter.cpp
+  //! @include doc/tuple/algo/filter.cpp
   //================================================================================================
   template<template<typename> typename Pred, product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto filter(T&& t) noexcept
@@ -130,8 +130,8 @@ namespace kumi
   //! Computes the type returned by a call to kumi::filter_not.
   //!
   //! ## Example:
-  //! @include doc/filter_not.cpp
-  //! @include doc/record/filter_not.cpp
+  //! @include doc/tuple/algo/filter_not.cpp
+  //! @include doc/tuple/algo/filter_not.cpp
   //================================================================================================
   template<template<typename> typename Pred, product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto filter_not(T&& t) noexcept

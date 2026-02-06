@@ -62,8 +62,8 @@ namespace kumi
   //! Computes the return type of a call to kumi::reorder
   //!
   //! ## Examples:
-  //! @include doc/reorder.cpp
-  //! @include doc/record/reorder.cpp
+  //! @include doc/tuple/algo/reorder.cpp
+  //! @include doc/record/algo/reorder.cpp
   //================================================================================================
   template<std::size_t... Idx, product_type T>
   requires((Idx < size_v<T>) && ...)
@@ -99,7 +99,7 @@ namespace kumi
   //! Computes the return type of a call to kumi::reorder_fields
   //!
   //! ## Example
-  //! @include doc/record/reorder_fields.cpp
+  //! @include doc/record/algo/reorder_fields.cpp
   //================================================================================================
   template<field_name... Name, product_type Tuple>
   requires(requires { get<Name>(std::declval<Tuple>()); } && ...)
@@ -135,7 +135,7 @@ namespace kumi
   //! Computes the return type of a call to kumi::reindex
   //!
   //! ## Example
-  //! @include doc/reindex.cpp
+  //! @include doc/tuple/algo/reindex.cpp
   //================================================================================================
   template<index_map auto Indexes, product_type T>
   requires(_::in_bound_indexes<Indexes, T>())

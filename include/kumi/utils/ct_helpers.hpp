@@ -99,7 +99,7 @@ namespace kumi
     //! @brief Forms a integral constant literal of the desired value.
     //! @return An instance of kumi::index_t for the specified integral value
     //! ## Example:
-    //! @include doc/index.cpp
+    //! @include doc/infra/index.cpp
     //==============================================================================================
     template<char... c> constexpr auto operator""_c() noexcept
     {

@@ -29,7 +29,7 @@ namespace kumi
   //! Computes the type returned by a call to kumi::max.
   //!
   //! ## Example:
-  //! @include doc/max.cpp
+  //! @include doc/tuple/algo/max.cpp
   //================================================================================================
   template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto max(T&& t) noexcept
   {
@@ -63,7 +63,7 @@ namespace kumi
   //! Computes the type returned by a call to kumi::max.
   //!
   //! ## Example:
-  //! @include doc/max.cpp
+  //! @include doc/tuple/algo/max.cpp
   //================================================================================================
   template<product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto max(T&& t, F f) noexcept
   {
@@ -98,7 +98,7 @@ namespace kumi
   //! Computes the type returned by a call to kumi::max_flat.
   //!
   //! ## Example:
-  //! @include doc/max_flat.cpp
+  //! @include doc/tuple/algo/max_flat.cpp
   //================================================================================================
   template<product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto max_flat(T&& t, F f) noexcept
   {
@@ -147,7 +147,7 @@ namespace kumi
   //! Computes the type returned by a call to kumi::min.
   //!
   //! ## Example:
-  //! @include doc/min.cpp
+  //! @include doc/tuple/algo/min.cpp
   //================================================================================================
   template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto min(T&& t) noexcept
   {
@@ -181,7 +181,7 @@ namespace kumi
   //! Computes the type returned by a call to kumi::min.
   //!
   //! ## Example:
-  //! @include doc/min.cpp
+  //! @include doc/tuple/algo/min.cpp
   //================================================================================================
   template<product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto min(T&& t, F f) noexcept
   {
@@ -216,7 +216,7 @@ namespace kumi
   //! Computes the type returned by a call to kumi::min_flat.
   //!
   //! ## Example:
-  //! @include doc/min_flat.cpp
+  //! @include doc/tuple/algo/min_flat.cpp
   //================================================================================================
   template<product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto min_flat(T&& t, F f) noexcept
   {
