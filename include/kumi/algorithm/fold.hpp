@@ -32,8 +32,8 @@ namespace kumi
   //! Computes the return type of a call to kumi::fold_left
   //!
   //! ## Examples:
-  //! @include doc/fold_left.cpp
-  //! @include doc/record/fold_left.cpp
+  //! @include doc/tuple/algo/fold_left.cpp
+  //! @include doc/tuple/algo/fold_left.cpp
   //================================================================================================
   template<typename Function, product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto fold_left(Function f, T&& t, Value init)
@@ -70,8 +70,8 @@ namespace kumi
   //! Computes the return type of a call to kumi::fold_left
   //!
   //! ## Examples:
-  //! @include doc/fold_left.cpp
-  //! @include doc/record/fold_left.cpp
+  //! @include doc/tuple/algo/fold_left.cpp
+  //! @include doc/tuple/algo/fold_left.cpp
   //================================================================================================
   template<typename Function, sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto fold_left(Function f, T&& t)
@@ -108,8 +108,8 @@ namespace kumi
   //! Computes the return type of a call to kumi::fold_right
   //!
   //! ## Examples:
-  //! @include doc/fold_right.cpp
-  //! @include doc/record/fold_right.cpp
+  //! @include doc/tuple/algo/fold_right.cpp
+  //! @include doc/tuple/algo/fold_right.cpp
   //================================================================================================
   template<typename Function, product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto fold_right(Function f, T&& t, Value init)
@@ -146,8 +146,8 @@ namespace kumi
   //! Computes the return type of a call to kumi::fold_right
   //!
   //! ## Examples:
-  //! @include doc/fold_right.cpp
-  //! @include doc/record/fold_right.cpp
+  //! @include doc/tuple/algo/fold_right.cpp
+  //! @include doc/tuple/algo/fold_right.cpp
   //================================================================================================
   template<typename Function, sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto fold_right(Function f, T&& t)

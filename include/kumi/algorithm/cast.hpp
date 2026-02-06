@@ -51,7 +51,7 @@ namespace kumi
   //! Computes the return type of a call to kumi::member_cast
   //!
   //! ## Example
-  //! @include doc/member_cast.cpp
+  //! @include doc/tuple/algo/member_cast.cpp
   //================================================================================================
   template<typename Target, product_type T> [[nodiscard]] KUMI_ABI constexpr auto member_cast(T&& t)
   {

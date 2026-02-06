@@ -80,7 +80,7 @@ namespace kumi
   //! Computes the type returned by a call to kumi::unique.
   //!
   //! ## Example:
-  //! @include doc/unique.cpp
+  //! @include doc/tuple/algo/unique.cpp
   //================================================================================================
   template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto unique(T&& t)
   {
@@ -117,7 +117,7 @@ namespace kumi
   //! Computes the type returned by a call to kumi::all_unique.
   //!
   //! ## Example:
-  //! @include doc/all_unique.cpp
+  //! @include doc/tuple/algo/all_unique.cpp
   //================================================================================================
   template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto all_unique(T&& t)
   {

@@ -25,8 +25,8 @@ namespace kumi
   //! @see kumi::for_each_index
   //!
   //! ## Example
-  //! @include doc/for_each.cpp
-  //! @include doc/record/for_each.cpp
+  //! @include doc/tuple/algo/for_each.cpp
+  //! @include doc/record/algo/for_each.cpp
   //================================================================================================
   template<typename Function, product_type Tuple, product_type... Tuples>
   KUMI_ABI constexpr void for_each(Function f, Tuple&& t, Tuples&&... ts)
@@ -72,7 +72,7 @@ namespace kumi
   //! @see kumi::for_each
   //!
   //! ## Example
-  //! @include doc/for_each_index.cpp
+  //! @include doc/tuple/algo/for_each_index.cpp
   //================================================================================================
   template<typename Function, product_type Tuple, product_type... Tuples>
   requires(!record_type<Tuple> && (!record_type<Tuples> && ...))
@@ -103,7 +103,7 @@ namespace kumi
   //! @see kumi::for_each
   //!
   //! ## Example
-  //! @include doc/record/for_each_field.cpp
+  //! @include doc/record/algo/for_each_field.cpp
   //================================================================================================
   template<typename Function, record_type Tuple, record_type... Tuples>
   requires(compatible_product_types<std::remove_cvref_t<Tuple>, std::remove_cvref_t<Tuples>...>)

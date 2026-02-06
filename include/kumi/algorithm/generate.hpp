@@ -31,7 +31,7 @@ namespace kumi
   //! Computes the return type of a call to kumi::fill
   //!
   //! ## Example
-  //! @include doc/fill.cpp
+  //! @include doc/tuple/algo/fill.cpp
   //================================================================================================
   template<std::size_t N, typename T> [[nodiscard]] KUMI_ABI constexpr auto fill(T const& v) noexcept
   {
@@ -63,7 +63,7 @@ namespace kumi
   //! Computes the return type of a call to kumi::generate
   //!
   //! ## Example
-  //! @include doc/generate.cpp
+  //! @include doc/tuple/algo/generate.cpp
   //================================================================================================
   template<std::size_t N, typename Function> [[nodiscard]] KUMI_ABI constexpr auto generate(Function const& f) noexcept
   {
@@ -94,7 +94,7 @@ namespace kumi
   //! Computes the return type of a call to kumi::iota
   //!
   //! ## Example
-  //! @include doc/iota.cpp
+  //! @include doc/tuple/algo/iota.cpp
   //================================================================================================
   template<std::size_t N, typename T> [[nodiscard]] KUMI_ABI constexpr auto iota(T v) noexcept
   {

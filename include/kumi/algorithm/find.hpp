@@ -17,7 +17,7 @@ namespace kumi
   //! @return Integral index of the element inside the tuple if present, kumi::size<tuple<T...>>::value
   //!         otherwise.
   //! ## Example:
-  //! @include doc/locate.cpp
+  //! @include doc/tuple/algo/locate.cpp
   //================================================================================================
   template<typename Pred, product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto locate(Tuple&& t, Pred p) noexcept
   {

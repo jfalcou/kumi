@@ -49,7 +49,7 @@ namespace kumi
     //! @return A reference to the selected element of current tuple.
     //!
     //! ## Example:
-    //! @include doc/subscript.cpp
+    //! @include doc/tuple/api/subscript.cpp
     //==============================================================================================
     template<std::size_t I>
     requires(I < sizeof...(Ts))
@@ -91,7 +91,7 @@ namespace kumi
     //! @return A reference to the selected element of current tuple.
     //!
     //! ## Example:
-    //! @include doc/typed_subscript.cpp
+    //! @include doc/tuple/api/typed_subscript.cpp
     //==============================================================================================
     template<typename T>
     requires(uniquely_typed<Ts...> && contains_type<T, Ts...>)
@@ -133,7 +133,7 @@ namespace kumi
     //! @return A reference to the selected element of current tuple.
     //!
     //! ## Example:
-    //! @include doc/named_subscript.cpp
+    //! @include doc/tuple/api/named_subscript.cpp
     //==============================================================================================
     template<str Name>
     requires(uniquely_named<Ts...> && contains_field<Name, Ts...>)
@@ -215,8 +215,8 @@ namespace kumi
     //!       for some zip-like cases such as building a structure of arrays iterator.
     //!
     //! ## Example :
-    //! @include doc/cast.cpp
-    //! @include doc/soa.cpp
+    //! @include doc/tuple/api/cast.cpp
+    //! @include doc/tuple/api/soa.cpp
     //==============================================================================================
     template<typename... Us>
     requires((sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>) &&
@@ -431,7 +431,7 @@ namespace kumi
   //! @param ts	Zero or more lvalue arguments to construct the tuple from.
   //! @return A kumi::tuple object containing lvalue references.
   //! ## Example:
-  //! @include doc/tie.cpp
+  //! @include doc/tuple/api/tie.cpp
   //================================================================================================
   template<typename... Ts> [[nodiscard]] KUMI_ABI constexpr auto tie(Ts&... ts) -> tuple<Ts&...>
   {
@@ -453,7 +453,7 @@ namespace kumi
   //! @param ts	Zero or more lvalue arguments to construct the tuple from.
   //! @return A kumi::tuple constructed as `kumi::tuple<Ts&&...>(std::forward<Ts>(args)...)`
   //! ## Example:
-  //! @include doc/forward_as_tuple.cpp
+  //! @include doc/tuple/api/forward_as_tuple.cpp
   //================================================================================================
   template<typename... Ts> [[nodiscard]] KUMI_ABI constexpr auto forward_as_tuple(Ts&&... ts) -> tuple<Ts&&...>
   {
@@ -468,7 +468,7 @@ namespace kumi
   //! @return A kumi::tuple constructed from the ts or their inner references when ts is an instance
   //!         of `std::reference_wrapper`.
   //! ## Example:
-  //! @include doc/make_tuple.cpp
+  //! @include doc/tuple/api/make_tuple.cpp
   //================================================================================================
   template<typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto make_tuple(Ts&&... ts) -> tuple<std::unwrap_ref_decay_t<Ts>...>
@@ -486,7 +486,7 @@ namespace kumi
   //!           { return kumi::forward_as_tuple(std::forward<T>(e)...); }, t)`
   //!
   //! ## Example:
-  //! @include doc/to_ref.cpp
+  //! @include doc/tuple/api/to_ref.cpp
   //================================================================================================
   template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto to_ref(T&& t)
   {
@@ -515,7 +515,7 @@ namespace kumi
   //! @related kumi::tuple
   //!
   //! ## Example:
-  //! @include doc/get.cpp
+  //! @include doc/tuple/api/get.cpp
   //================================================================================================
   template<std::size_t I, typename... Ts>
   requires(I < sizeof...(Ts))
@@ -576,7 +576,7 @@ namespace kumi
   //! @related kumi::tuple
   //!
   //! ## Example:
-  //! @include doc/named_get.cpp
+  //! @include doc/tuple/api/named_get.cpp
   //================================================================================================
   template<str Name, typename... Ts>
   requires(uniquely_named<Ts...> && contains_field<Name, Ts...>)
@@ -625,7 +625,7 @@ namespace kumi
   //! @related kumi::tuple
   //!
   //! ## Example:
-  //! @include doc/typed_get.cpp
+  //! @include doc/tuple/api/typed_get.cpp
   //================================================================================================
   template<typename T, typename... Ts>
   requires(uniquely_typed<Ts...> && contains_type<T, Ts...>)

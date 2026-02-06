@@ -24,7 +24,7 @@ namespace kumi::_
   //! @return   A value that can be passed to an output stream.
   //!
   //! ## Example:
-  //! @include doc/as_streamable.cpp
+  //! @include doc/infra/as_streamable.cpp
   //================================================================================================
   template<typename T> auto make_streamable(T const& e)
   {

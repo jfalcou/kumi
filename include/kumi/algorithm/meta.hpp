@@ -19,7 +19,7 @@ namespace kumi
   //! @return   A tuple of the names of a kumi::product_type.
   //!
   //! ## Example:
-  //! @include doc/members_of.cpp
+  //! @include doc/infra/members_of.cpp
   //================================================================================================
   template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto members_of(as<T>) noexcept
   {
@@ -39,7 +39,7 @@ namespace kumi
   //! @return   A tuple of references to the values of a kumi::product_type.
   //!
   //! ## Example:
-  //! @include doc/values_of.cpp
+  //! @include doc/infra/values_of.cpp
   //================================================================================================
   template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto values_of(T&& t) noexcept
   {

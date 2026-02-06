@@ -62,7 +62,7 @@ namespace kumi
   //! Computes the return type of a call to kumi::inclusive_scan_left
   //!
   //! ## Example
-  //! @include doc/inclusive_scan_left.cpp
+  //! @include doc/tuple/algo/inclusive_scan_left.cpp
   //================================================================================================
   template<typename Function, product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_left(Function f, T&& t, Value init)
@@ -106,7 +106,7 @@ namespace kumi
   //! Computes the return type of a call to kumi::inclusive_scan_left
   //!
   //! ## Example
-  //! @include doc/inclusive_scan_left.cpp
+  //! @include doc/tuple/algo/inclusive_scan_left.cpp
   //================================================================================================
   template<monoid M, sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_left(M&& m, T&& t)
@@ -143,7 +143,7 @@ namespace kumi
   //! Computes the return type of a call to kumi::exclusive_scan_left
   //!
   //! ## Example
-  //! @include doc/exclusive_scan_left.cpp
+  //! @include doc/tuple/algo/exclusive_scan_left.cpp
   //================================================================================================
   template<typename Function, product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_left(Function f, T&& t, Value init)
@@ -184,7 +184,7 @@ namespace kumi
   //! Computes the return type of a call to kumi::exclusive_scan_left
   //!
   //! ## Example
-  //! @include doc/exclusive_scan_left.cpp
+  //! @include doc/tuple/algo/exclusive_scan_left.cpp
   //================================================================================================
   template<monoid M, sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_left(M&& m, T&& t)
@@ -222,7 +222,7 @@ namespace kumi
   //! Computes the return type of a call to kumi::inclusive_scan_right
   //!
   //! ## Example
-  //! @include doc/inclusive_scan_right.cpp
+  //! @include doc/tuple/algo/inclusive_scan_right.cpp
   //================================================================================================
   template<typename Function, product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_right(Function f, T&& t, Value init)
@@ -266,7 +266,7 @@ namespace kumi
   //! Computes the return type of a call to kumi::inclusive_scan_right
   //!
   //! ## Example
-  //! @include doc/inclusive_scan_right.cpp
+  //! @include doc/tuple/algo/inclusive_scan_right.cpp
   //================================================================================================
   template<monoid M, sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_right(M&& m, T&& t)
@@ -303,7 +303,7 @@ namespace kumi
   //! Computes the return type of a call to kumi::exclusive_scan_right
   //!
   //! ## Example
-  //! @include doc/exclusive_scan_right.cpp
+  //! @include doc/tuple/algo/exclusive_scan_right.cpp
   //================================================================================================
   template<typename Function, product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_right(Function f, T&& t, Value init)
@@ -344,7 +344,7 @@ namespace kumi
   //! Computes the return type of a call to kumi::exclusive_scan_right
   //!
   //! ## Example
-  //! @include doc/exclusive_scan_right.cpp
+  //! @include doc/tuple/algo/exclusive_scan_right.cpp
   //================================================================================================
   template<monoid M, sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_right(M&& m, T&& t)

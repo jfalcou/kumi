@@ -38,7 +38,7 @@ namespace kumi
   //! Computes the return type of a call to kumi::map
   //!
   //! ## Example
-  //! @include doc/map.cpp
+  //! @include doc/tuple/algo/map.cpp
   //================================================================================================
   template<product_type Tuple, typename Function, sized_product_type<size_v<Tuple>>... Tuples>
   [[nodiscard]] KUMI_ABI constexpr auto map(Function f, Tuple&& t0, Tuples&&... others)
@@ -102,7 +102,7 @@ namespace kumi
   //! Computes the return type of a call to kumi::map_index
   //!
   //! ## Example
-  //! @include doc/map_index.cpp
+  //! @include doc/tuple/algo/map_index.cpp
   //================================================================================================
   template<product_type Tuple, typename Function, sized_product_type<size_v<Tuple>>... Tuples>
   [[nodiscard]] KUMI_ABI constexpr auto map_index(Function f, Tuple&& t0, Tuples&&... others)
@@ -161,7 +161,7 @@ namespace kumi
   //! Computes the return type of a call to kumi::map_field
   //!
   //! ## Example
-  //! @include doc/record/map_field.cpp
+  //! @include doc/record/algo/map_field.cpp
   //================================================================================================
   template<record_type Tuple, typename Function, sized_product_type<size<Tuple>::value>... Tuples>
   requires(compatible_product_types<Tuple, Tuples...>)
