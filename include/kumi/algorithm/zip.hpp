@@ -13,16 +13,16 @@ namespace kumi
   {
     struct zipper_t
     {
-      template<std::size_t Size, product_type T>
+      template<std::size_t Size, concepts::product_type T>
       KUMI_ABI constexpr auto operator()(index_t<Size> const&, T&& t) const noexcept
       {
-        if constexpr (sized_product_type<T, 0>) return t;
+        if constexpr (concepts::sized_product_type<T, 0>) return t;
         else
         {
           constexpr auto uz = []<typename N>(N const&, auto&& u) {
             return apply(
               [](auto&&... m) {
-                auto zip_ = [&]<product_type V>(V&& v) {
+                auto zip_ = [&]<concepts::product_type V>(V&& v) {
                   if constexpr (size_v<V> <= N::value) return none;
                   else return get<N::value>(KUMI_FWD(v));
                 };
@@ -81,9 +81,9 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/zip.cpp
   //================================================================================================
-  template<product_type T0, sized_product_type<size_v<T0>>... Ts>
+  template<concepts::product_type T0, concepts::sized_product_type<size_v<T0>>... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto zip(T0&& t0, Ts&&... ts)
-  requires(follows_same_semantic<T0, Ts...>)
+  requires(concepts::follows_same_semantic<T0, Ts...>)
   {
     return _::zipper(index<size_v<T0>>, kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...));
   }
@@ -114,9 +114,9 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/zip_min.cpp
   //================================================================================================
-  template<product_type T0, product_type... Ts>
+  template<concepts::product_type T0, concepts::product_type... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto zip_min(T0&& t0, Ts&&... ts)
-  requires(follows_same_semantic<T0, Ts...>)
+  requires(concepts::follows_same_semantic<T0, Ts...>)
   {
     constexpr std::size_t min = _::min_size_v<T0, Ts...>();
     return _::zipper(index<min>, kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...));
@@ -148,9 +148,9 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/zip_max.cpp
   //================================================================================================
-  template<product_type T0, product_type... Ts>
+  template<concepts::product_type T0, concepts::product_type... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto zip_max(T0&& t0, Ts&&... ts)
-  requires(follows_same_semantic<T0, Ts...>)
+  requires(concepts::follows_same_semantic<T0, Ts...>)
   {
     constexpr std::size_t max = _::max_size_v<T0, Ts...>();
     return _::zipper(index<max>, kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...));
@@ -158,25 +158,27 @@ namespace kumi
 
   namespace result
   {
-    template<product_type T0, sized_product_type<size_v<T0>>... Ts> struct zip
+    template<concepts::product_type T0, concepts::sized_product_type<size_v<T0>>... Ts> struct zip
     {
       using type = decltype(kumi::zip(std::declval<T0>(), std::declval<Ts>()...));
     };
 
-    template<product_type T0, product_type... Ts> struct zip_min
+    template<concepts::product_type T0, concepts::product_type... Ts> struct zip_min
     {
       using type = decltype(kumi::zip_min(std::declval<T0>(), std::declval<Ts>()...));
     };
 
-    template<product_type T0, product_type... Ts> struct zip_max
+    template<concepts::product_type T0, concepts::product_type... Ts> struct zip_max
     {
       using type = decltype(kumi::zip_max(std::declval<T0>(), std::declval<Ts>()...));
     };
 
-    template<product_type T0, product_type... Ts> using zip_t = typename zip<T0, Ts...>::type;
+    template<concepts::product_type T0, concepts::product_type... Ts> using zip_t = typename zip<T0, Ts...>::type;
 
-    template<product_type T0, product_type... Ts> using zip_min_t = typename zip_min<T0, Ts...>::type;
+    template<concepts::product_type T0, concepts::product_type... Ts>
+    using zip_min_t = typename zip_min<T0, Ts...>::type;
 
-    template<product_type T0, product_type... Ts> using zip_max_t = typename zip_max<T0, Ts...>::type;
+    template<concepts::product_type T0, concepts::product_type... Ts>
+    using zip_max_t = typename zip_max<T0, Ts...>::type;
   }
 }

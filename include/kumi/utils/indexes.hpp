@@ -18,7 +18,7 @@ namespace kumi
   //!
   //! kumi::indexes_t provides a way to define compile time tuple of indexes_t.
   //================================================================================================
-  template<indexer... V> struct indexes_t
+  template<concepts::indexer... V> struct indexes_t
   {
     using binder_t = _::make_binder_t<std::make_integer_sequence<int, sizeof...(V)>, V...>;
 
@@ -100,7 +100,7 @@ namespace kumi
   //! @brief kumi::indexes_t deduction guide
   //! @tparam Ts  Type lists to build the indexes with.
   //================================================================================================
-  template<indexer... Ts> KUMI_CUDA indexes_t(Ts...) -> indexes_t<Ts...>;
+  template<concepts::indexer... Ts> KUMI_CUDA indexes_t(Ts...) -> indexes_t<Ts...>;
 
   //================================================================================================
   //! @ingroup utility
@@ -111,7 +111,7 @@ namespace kumi
   //! @param ts	Zero or more indexes to construct the indexes from.
   //! @return A kumi::indexes constructed from the ts
   //================================================================================================
-  template<indexer... Ts> [[nodiscard]] KUMI_ABI consteval auto indexes(Ts... ts) noexcept
+  template<concepts::indexer... Ts> [[nodiscard]] KUMI_ABI consteval auto indexes(Ts... ts) noexcept
   {
     return indexes_t{ts...};
   }

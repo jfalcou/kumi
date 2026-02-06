@@ -33,9 +33,9 @@ namespace kumi
   //! @include doc/tuple/algo/cat.cpp
   //! @include doc/tuple/algo/cat.cpp
   //================================================================================================
-  template<product_type... Ts>
+  template<concepts::product_type... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto cat(Ts&&... ts)
-  requires(follows_same_semantic<Ts...>)
+  requires(concepts::follows_same_semantic<Ts...>)
   {
     if constexpr (sizeof...(Ts) == 0) return tuple{};
     else
@@ -74,11 +74,11 @@ namespace kumi
 
   namespace result
   {
-    template<product_type... Ts> struct cat
+    template<concepts::product_type... Ts> struct cat
     {
       using type = decltype(kumi::cat(std::declval<Ts>()...));
     };
 
-    template<product_type... Ts> using cat_t = typename cat<Ts...>::type;
+    template<concepts::product_type... Ts> using cat_t = typename cat<Ts...>::type;
   }
 }

@@ -21,9 +21,9 @@ namespace kumi
   //! ## Example:
   //! @include doc/infra/members_of.cpp
   //================================================================================================
-  template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto members_of(as<T>) noexcept
+  template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto members_of(as<T>) noexcept
   {
-    if constexpr (sized_product_type<T, 0>) return tuple{};
+    if constexpr (concepts::sized_product_type<T, 0>) return tuple{};
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return tuple{name_of(as<element_t<I, T>>{})...};
@@ -41,9 +41,9 @@ namespace kumi
   //! ## Example:
   //! @include doc/infra/values_of.cpp
   //================================================================================================
-  template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto values_of(T&& t) noexcept
+  template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto values_of(T&& t) noexcept
   {
-    if constexpr (sized_product_type<T, 0>) return tuple{};
+    if constexpr (concepts::sized_product_type<T, 0>) return tuple{};
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return tuple<result::field_value_of_t<member_t<I, T>>...>{field_value_of(get<I>(KUMI_FWD(t)))...};
@@ -52,18 +52,18 @@ namespace kumi
 
   namespace result
   {
-    template<product_type T> struct members_of
+    template<concepts::product_type T> struct members_of
     {
       using type = decltype(kumi::members_of(as<T>{}));
     };
 
-    template<product_type T> struct values_of
+    template<concepts::product_type T> struct values_of
     {
       using type = decltype(kumi::values_of(std::declval<T>()));
     };
 
-    template<product_type T> using members_of_t = typename members_of<T>::type;
+    template<concepts::product_type T> using members_of_t = typename members_of<T>::type;
 
-    template<product_type T> using values_of_t = typename values_of<T>::type;
+    template<concepts::product_type T> using values_of_t = typename values_of<T>::type;
   }
 }

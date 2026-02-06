@@ -6,7 +6,7 @@
 #include <kumi/kumi.hpp>
 #include <iostream>
 
-template<kumi::product_type Tuple>
+template<kumi::concepts::product_type Tuple>
 void print(std::ostream& os, Tuple const& t)
 {
   kumi::apply

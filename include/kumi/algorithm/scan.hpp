@@ -64,11 +64,11 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/inclusive_scan_left.cpp
   //================================================================================================
-  template<typename Function, product_type T, typename Value>
+  template<typename Function, concepts::product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_left(Function f, T&& t, Value init)
   {
-    if constexpr (record_type<T>) return inclusive_scan_left(f, values_of(KUMI_FWD(t)), init);
-    else if constexpr (sized_product_type<T, 0>) return tuple{};
+    if constexpr (concepts::record_type<T>) return inclusive_scan_left(f, values_of(KUMI_FWD(t)), init);
+    else if constexpr (concepts::sized_product_type<T, 0>) return tuple{};
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
@@ -108,11 +108,11 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/inclusive_scan_left.cpp
   //================================================================================================
-  template<monoid M, sized_product_type_or_more<1> T>
+  template<concepts::monoid M, concepts::sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_left(M&& m, T&& t)
   {
-    if constexpr (record_type<T>) return inclusive_scan_left(KUMI_FWD(m), values_of(KUMI_FWD(t)));
-    else if constexpr (sized_product_type<T, 1>) return KUMI_FWD(t);
+    if constexpr (concepts::record_type<T>) return inclusive_scan_left(KUMI_FWD(m), values_of(KUMI_FWD(t)));
+    else if constexpr (concepts::sized_product_type<T, 1>) return KUMI_FWD(t);
     else return inclusive_scan_left(KUMI_FWD(m), KUMI_FWD(t), m.identity);
   }
 
@@ -145,11 +145,11 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/exclusive_scan_left.cpp
   //================================================================================================
-  template<typename Function, product_type T, typename Value>
+  template<typename Function, concepts::product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_left(Function f, T&& t, Value init)
   {
-    if constexpr (record_type<T>) return exclusive_scan_left(f, values_of(KUMI_FWD(t)), init);
-    else if constexpr (sized_product_type<T, 0>) return tuple{init};
+    if constexpr (concepts::record_type<T>) return exclusive_scan_left(f, values_of(KUMI_FWD(t)), init);
+    else if constexpr (concepts::sized_product_type<T, 0>) return tuple{init};
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
@@ -186,11 +186,11 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/exclusive_scan_left.cpp
   //================================================================================================
-  template<monoid M, sized_product_type_or_more<1> T>
+  template<concepts::monoid M, concepts::sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_left(M&& m, T&& t)
   {
-    if constexpr (record_type<T>) return exclusive_scan_left(KUMI_FWD(m), values_of(KUMI_FWD(t)));
-    else if constexpr (sized_product_type<T, 1>) return tuple(m.identity, get<0>(KUMI_FWD(t)));
+    if constexpr (concepts::record_type<T>) return exclusive_scan_left(KUMI_FWD(m), values_of(KUMI_FWD(t)));
+    else if constexpr (concepts::sized_product_type<T, 1>) return tuple(m.identity, get<0>(KUMI_FWD(t)));
     else return exclusive_scan_left(KUMI_FWD(m), KUMI_FWD(t), m.identity);
   }
 
@@ -224,11 +224,11 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/inclusive_scan_right.cpp
   //================================================================================================
-  template<typename Function, product_type T, typename Value>
+  template<typename Function, concepts::product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_right(Function f, T&& t, Value init)
   {
-    if constexpr (record_type<T>) return inclusive_scan_right(KUMI_FWD(f), values_of(KUMI_FWD(t)), init);
-    else if constexpr (sized_product_type<T, 0>) return tuple{};
+    if constexpr (concepts::record_type<T>) return inclusive_scan_right(KUMI_FWD(f), values_of(KUMI_FWD(t)), init);
+    else if constexpr (concepts::sized_product_type<T, 0>) return tuple{};
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
@@ -268,11 +268,11 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/inclusive_scan_right.cpp
   //================================================================================================
-  template<monoid M, sized_product_type_or_more<1> T>
+  template<concepts::monoid M, concepts::sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_right(M&& m, T&& t)
   {
-    if constexpr (record_type<T>) return inclusive_scan_right(KUMI_FWD(m), values_of(KUMI_FWD(t)));
-    else if constexpr (sized_product_type<T, 1>) return KUMI_FWD(t);
+    if constexpr (concepts::record_type<T>) return inclusive_scan_right(KUMI_FWD(m), values_of(KUMI_FWD(t)));
+    else if constexpr (concepts::sized_product_type<T, 1>) return KUMI_FWD(t);
     else return inclusive_scan_right(KUMI_FWD(m), KUMI_FWD(t), m.identity);
   }
 
@@ -305,11 +305,11 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/exclusive_scan_right.cpp
   //================================================================================================
-  template<typename Function, product_type T, typename Value>
+  template<typename Function, concepts::product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_right(Function f, T&& t, Value init)
   {
-    if constexpr (record_type<T>) return exclusive_scan_right(KUMI_FWD(f), values_of(KUMI_FWD(t)), init);
-    else if constexpr (sized_product_type<T, 0>) return tuple{init};
+    if constexpr (concepts::record_type<T>) return exclusive_scan_right(KUMI_FWD(f), values_of(KUMI_FWD(t)), init);
+    else if constexpr (concepts::sized_product_type<T, 0>) return tuple{init};
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
@@ -346,70 +346,70 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/exclusive_scan_right.cpp
   //================================================================================================
-  template<monoid M, sized_product_type_or_more<1> T>
+  template<concepts::monoid M, concepts::sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_right(M&& m, T&& t)
   {
-    if constexpr (record_type<T>) return exclusive_scan_right(KUMI_FWD(m), values_of(KUMI_FWD(t)));
-    else if constexpr (sized_product_type<T, 1>) return tuple{get<0>(KUMI_FWD(t)), m.identity};
+    if constexpr (concepts::record_type<T>) return exclusive_scan_right(KUMI_FWD(m), values_of(KUMI_FWD(t)));
+    else if constexpr (concepts::sized_product_type<T, 1>) return tuple{get<0>(KUMI_FWD(t)), m.identity};
     else return kumi::exclusive_scan_right(KUMI_FWD(m), KUMI_FWD(t), m.identity);
   }
 
   namespace result
   {
-    template<typename Function, product_type T, typename Value = void> struct inclusive_scan_right
+    template<typename Function, concepts::product_type T, typename Value = void> struct inclusive_scan_right
     {
       using type =
         decltype(kumi::inclusive_scan_right(std::declval<Function>(), std::declval<T>(), std::declval<Value>()));
     };
 
-    template<typename Function, product_type T> struct inclusive_scan_right<Function, T>
+    template<typename Function, concepts::product_type T> struct inclusive_scan_right<Function, T>
     {
       using type = decltype(kumi::inclusive_scan_right(std::declval<Function>(), std::declval<T>()));
     };
 
-    template<typename Function, product_type T, typename Value = void> struct exclusive_scan_right
+    template<typename Function, concepts::product_type T, typename Value = void> struct exclusive_scan_right
     {
       using type =
         decltype(kumi::exclusive_scan_right(std::declval<Function>(), std::declval<T>(), std::declval<Value>()));
     };
 
-    template<typename Function, product_type T> struct exclusive_scan_right<Function, T>
+    template<typename Function, concepts::product_type T> struct exclusive_scan_right<Function, T>
     {
       using type = decltype(kumi::exclusive_scan_right(std::declval<Function>(), std::declval<T>()));
     };
 
-    template<typename Function, product_type T, typename Value = void> struct inclusive_scan_left
+    template<typename Function, concepts::product_type T, typename Value = void> struct inclusive_scan_left
     {
       using type =
         decltype(kumi::inclusive_scan_left(std::declval<Function>(), std::declval<T>(), std::declval<Value>()));
     };
 
-    template<typename Function, product_type T> struct inclusive_scan_left<Function, T>
+    template<typename Function, concepts::product_type T> struct inclusive_scan_left<Function, T>
     {
       using type = decltype(kumi::inclusive_scan_left(std::declval<Function>(), std::declval<T>()));
     };
 
-    template<typename Function, product_type T, typename Value = void> struct exclusive_scan_left
+    template<typename Function, concepts::product_type T, typename Value = void> struct exclusive_scan_left
     {
       using type =
         decltype(kumi::exclusive_scan_left(std::declval<Function>(), std::declval<T>(), std::declval<Value>()));
     };
 
-    template<typename Function, product_type T> struct exclusive_scan_left<Function, T>
+    template<typename Function, concepts::product_type T> struct exclusive_scan_left<Function, T>
     {
       using type = decltype(kumi::exclusive_scan_left(std::declval<Function>(), std::declval<T>()));
     };
 
-    template<typename Function, product_type T, typename Value = void>
+    template<typename Function, concepts::product_type T, typename Value = void>
     using inclusive_scan_right_t = typename inclusive_scan_right<Function, T, Value>::type;
 
-    template<typename Function, product_type T, typename Value = void>
+    template<typename Function, concepts::product_type T, typename Value = void>
     using exclusive_scan_right_t = typename exclusive_scan_right<Function, T, Value>::type;
 
-    template<typename Function, product_type T, typename Value = void>
+    template<typename Function, concepts::product_type T, typename Value = void>
     using inclusive_scan_left_t = typename inclusive_scan_left<Function, T, Value>::type;
 
-    template<typename Function, product_type T, typename Value = void>
+    template<typename Function, concepts::product_type T, typename Value = void>
     using exclusive_scan_left_t = typename exclusive_scan_left<Function, T, Value>::type;
   }
 }

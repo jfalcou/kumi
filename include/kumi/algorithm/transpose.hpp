@@ -33,11 +33,11 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/transpose.cpp
   //================================================================================================
-  template<product_type T>
+  template<concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto transpose(T&& t)
   requires(_::supports_transpose<T>)
   {
-    if constexpr (sized_product_type<T, 0>) return tuple{};
+    if constexpr (concepts::sized_product_type<T, 0>) return tuple{};
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
@@ -52,11 +52,11 @@ namespace kumi
 
   namespace result
   {
-    template<product_type T> struct transpose
+    template<concepts::product_type T> struct transpose
     {
       using type = decltype(kumi::transpose(std::declval<T>()));
     };
 
-    template<product_type T> using transpose_t = typename transpose<T>::type;
+    template<concepts::product_type T> using transpose_t = typename transpose<T>::type;
   }
 }

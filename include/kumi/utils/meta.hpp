@@ -54,7 +54,7 @@ namespace kumi
   //! ## Example:
   //! @include doc/infra/typed_get_udt.cpp
   //================================================================================================
-  template<typename Target, product_type T>
+  template<typename Target, concepts::product_type T>
   requires(_::typed_get_compliant<Target, T>())
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(T&& t) noexcept
   {
@@ -76,7 +76,7 @@ namespace kumi
   //! ## Example:
   //! @include doc/infra/named_get_udt.cpp
   //================================================================================================
-  template<str Name, product_type T>
+  template<str Name, concepts::product_type T>
   requires(_::named_get_compliant<Name, T>())
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(T&& t) noexcept
   {

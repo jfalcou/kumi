@@ -11,7 +11,7 @@ namespace kumi
 {
   namespace _
   {
-    template<template<typename> typename Pred, product_type T> struct selector_t
+    template<template<typename> typename Pred, concepts::product_type T> struct selector_t
     {
       KUMI_ABI constexpr auto operator()() const noexcept
       {
@@ -31,7 +31,8 @@ namespace kumi
       }
     };
 
-    template<template<typename> typename Pred, product_type T> inline constexpr selector_t<Pred, T> selector{};
+    template<template<typename> typename Pred, concepts::product_type T>
+    inline constexpr selector_t<Pred, T> selector{};
   }
 
   //================================================================================================
@@ -59,7 +60,7 @@ namespace kumi
   //! @include doc/tuple/algo/partition.cpp
   //! @include doc/tuple/algo/partition.cpp
   //================================================================================================
-  template<template<typename> typename Pred, product_type T>
+  template<template<typename> typename Pred, concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto partition(T&& t) noexcept
   {
     constexpr auto pos = _::selector<Pred, T>();
@@ -97,11 +98,11 @@ namespace kumi
   //! @include doc/tuple/algo/filter.cpp
   //! @include doc/tuple/algo/filter.cpp
   //================================================================================================
-  template<template<typename> typename Pred, product_type T>
+  template<template<typename> typename Pred, concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto filter(T&& t) noexcept
   {
     constexpr auto pos = _::selector<Pred, T>();
-    if constexpr (sized_product_type<T, 0>) return builder<T>::make();
+    if constexpr (concepts::sized_product_type<T, 0>) return builder<T>::make();
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         using type = builder_make_t<T, element_t<pos.t[I], T>...>;
@@ -133,11 +134,11 @@ namespace kumi
   //! @include doc/tuple/algo/filter_not.cpp
   //! @include doc/tuple/algo/filter_not.cpp
   //================================================================================================
-  template<template<typename> typename Pred, product_type T>
+  template<template<typename> typename Pred, concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto filter_not(T&& t) noexcept
   {
     constexpr auto pos = _::selector<Pred, T>();
-    if constexpr (sized_product_type<T, 0>) return builder<T>::make();
+    if constexpr (concepts::sized_product_type<T, 0>) return builder<T>::make();
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         using type = builder_make_t<T, element_t<pos.t[pos.cut + I], T>...>;
@@ -147,27 +148,28 @@ namespace kumi
 
   namespace result
   {
-    template<template<typename> typename Pred, kumi::product_type T> struct partition
+    template<template<typename> typename Pred, kumi::concepts::product_type T> struct partition
     {
       using type = decltype(kumi::partition<Pred>(std::declval<T>()));
     };
 
-    template<template<typename> typename Pred, kumi::product_type T> struct filter
+    template<template<typename> typename Pred, kumi::concepts::product_type T> struct filter
     {
       using type = decltype(kumi::filter<Pred>(std::declval<T>()));
     };
 
-    template<template<typename> typename Pred, kumi::product_type T> struct filter_not
+    template<template<typename> typename Pred, kumi::concepts::product_type T> struct filter_not
     {
       using type = decltype(kumi::filter_not<Pred>(std::declval<T>()));
     };
 
-    template<template<typename> typename Pred, kumi::product_type T>
+    template<template<typename> typename Pred, kumi::concepts::product_type T>
     using partition_t = typename partition<Pred, T>::type;
 
-    template<template<typename> typename Pred, kumi::product_type T> using filter_t = typename filter<Pred, T>::type;
+    template<template<typename> typename Pred, kumi::concepts::product_type T>
+    using filter_t = typename filter<Pred, T>::type;
 
-    template<template<typename> typename Pred, kumi::product_type T>
+    template<template<typename> typename Pred, kumi::concepts::product_type T>
     using filter_not_t = typename filter_not<Pred, T>::type;
   }
 }

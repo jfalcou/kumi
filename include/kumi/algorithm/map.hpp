@@ -40,15 +40,15 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/map.cpp
   //================================================================================================
-  template<product_type Tuple, typename Function, sized_product_type<size_v<Tuple>>... Tuples>
+  template<concepts::product_type Tuple, typename Function, concepts::sized_product_type<size_v<Tuple>>... Tuples>
   [[nodiscard]] KUMI_ABI constexpr auto map(Function f, Tuple&& t0, Tuples&&... others)
-  requires(compatible_product_types<Tuple, Tuples...> && _::supports_call<Function, Tuple &&, Tuples && ...>)
+  requires(concepts::compatible_product_types<Tuple, Tuples...> && _::supports_call<Function, Tuple &&, Tuples && ...>)
   {
-    if constexpr (sized_product_type<Tuple, 0>) return builder<Tuple>::make();
+    if constexpr (concepts::sized_product_type<Tuple, 0>) return builder<Tuple>::make();
     else
     {
       auto const call = [&]<std::size_t N, typename... Ts>(index_t<N>, Ts&&... args) {
-        if constexpr (record_type<Tuple>)
+        if constexpr (concepts::record_type<Tuple>)
         {
           constexpr auto field = name_of(as<element_t<N, Tuple>>{});
           return field_name<field>{} = invoke(f, get<field>(args)...);
@@ -64,12 +64,12 @@ namespace kumi
 
   namespace result
   {
-    template<typename Function, product_type T, sized_product_type<size<T>::value>... Ts> struct map
+    template<typename Function, concepts::product_type T, concepts::sized_product_type<size<T>::value>... Ts> struct map
     {
       using type = decltype(kumi::map(std::declval<Function>(), std::declval<T>(), std::declval<Ts>()...));
     };
 
-    template<typename Function, product_type T, sized_product_type<size<T>::value>... Ts>
+    template<typename Function, concepts::product_type T, concepts::sized_product_type<size<T>::value>... Ts>
     using map_t = typename map<Function, T, Ts...>::type;
   }
 
@@ -104,11 +104,11 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/map_index.cpp
   //================================================================================================
-  template<product_type Tuple, typename Function, sized_product_type<size_v<Tuple>>... Tuples>
+  template<concepts::product_type Tuple, typename Function, concepts::sized_product_type<size_v<Tuple>>... Tuples>
   [[nodiscard]] KUMI_ABI constexpr auto map_index(Function f, Tuple&& t0, Tuples&&... others)
-  requires(!record_type<Tuple> && (!record_type<Tuples> && ...))
+  requires(!concepts::record_type<Tuple> && (!concepts::record_type<Tuples> && ...))
   {
-    if constexpr (sized_product_type<Tuple, 0>) return builder<Tuple>::make();
+    if constexpr (concepts::sized_product_type<Tuple, 0>) return builder<Tuple>::make();
     else
     {
       auto const call = [&]<std::size_t N, typename... Ts>(index_t<N> idx, Ts&&... args) {
@@ -123,12 +123,13 @@ namespace kumi
 
   namespace result
   {
-    template<typename Function, product_type T, sized_product_type<size<T>::value>... Ts> struct map_index
+    template<typename Function, concepts::product_type T, concepts::sized_product_type<size<T>::value>... Ts>
+    struct map_index
     {
       using type = decltype(kumi::map_index(std::declval<Function>(), std::declval<T>(), std::declval<Ts>()...));
     };
 
-    template<typename Function, product_type T, sized_product_type<size<T>::value>... Ts>
+    template<typename Function, concepts::product_type T, concepts::sized_product_type<size<T>::value>... Ts>
     using map_index_t = typename map_index<Function, T, Ts...>::type;
   }
 
@@ -163,11 +164,11 @@ namespace kumi
   //! ## Example
   //! @include doc/record/algo/map_field.cpp
   //================================================================================================
-  template<record_type Tuple, typename Function, sized_product_type<size<Tuple>::value>... Tuples>
-  requires(compatible_product_types<Tuple, Tuples...>)
+  template<concepts::record_type Tuple, typename Function, concepts::sized_product_type<size<Tuple>::value>... Tuples>
+  requires(concepts::compatible_product_types<Tuple, Tuples...>)
   constexpr auto map_field(Function f, Tuple&& t0, Tuples&&... others)
   {
-    if constexpr (sized_product_type<Tuple, 0>) return builder<Tuple>::make();
+    if constexpr (concepts::sized_product_type<Tuple, 0>) return builder<Tuple>::make();
     else
     {
       auto const call = [&]<std::size_t N, typename... Ts>(index_t<N>, Ts&&... args) {
@@ -183,12 +184,13 @@ namespace kumi
 
   namespace result
   {
-    template<typename Function, record_type T, sized_product_type<size<T>::value>... Ts> struct map_field
+    template<typename Function, concepts::record_type T, concepts::sized_product_type<size<T>::value>... Ts>
+    struct map_field
     {
       using type = decltype(kumi::map_field(std::declval<Function>(), std::declval<T>(), std::declval<Ts>()...));
     };
 
-    template<typename Function, record_type T, sized_product_type<size<T>::value>... Ts>
+    template<typename Function, concepts::record_type T, concepts::sized_product_type<size<T>::value>... Ts>
     using map_field_t = typename map_field<Function, T, Ts...>::type;
   }
 }

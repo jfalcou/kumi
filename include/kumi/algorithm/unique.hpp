@@ -34,7 +34,7 @@ namespace kumi
 
     struct uniquable
     {
-      template<product_type T> [[nodiscard]] KUMI_ABI consteval auto operator()(as<T>) const noexcept
+      template<concepts::product_type T> [[nodiscard]] KUMI_ABI consteval auto operator()(as<T>) const noexcept
       {
         struct
         {
@@ -82,9 +82,9 @@ namespace kumi
   //! ## Example:
   //! @include doc/tuple/algo/unique.cpp
   //================================================================================================
-  template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto unique(T&& t)
+  template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto unique(T&& t)
   {
-    if constexpr (sized_product_type<T, 0>) return KUMI_FWD(t);
+    if constexpr (concepts::sized_product_type<T, 0>) return KUMI_FWD(t);
     else
     {
       constexpr auto pos = _::uniqued(as<T>{});
@@ -119,9 +119,9 @@ namespace kumi
   //! ## Example:
   //! @include doc/tuple/algo/all_unique.cpp
   //================================================================================================
-  template<product_type T> [[nodiscard]] KUMI_ABI constexpr auto all_unique(T&& t)
+  template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto all_unique(T&& t)
   {
-    if constexpr (sized_product_type<T, 0>) return t;
+    if constexpr (concepts::sized_product_type<T, 0>) return t;
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
@@ -134,18 +134,18 @@ namespace kumi
 
   namespace result
   {
-    template<product_type T> struct unique
+    template<concepts::product_type T> struct unique
     {
       using type = decltype(kumi::unique(std::declval<T>()));
     };
 
-    template<product_type T> struct all_unique
+    template<concepts::product_type T> struct all_unique
     {
       using type = decltype(kumi::all_unique(std::declval<T>()));
     };
 
-    template<product_type T> using unique_t = typename unique<T>::type;
+    template<concepts::product_type T> using unique_t = typename unique<T>::type;
 
-    template<product_type T> using all_unique_t = typename all_unique<T>::type;
+    template<concepts::product_type T> using all_unique_t = typename all_unique<T>::type;
   }
 }
