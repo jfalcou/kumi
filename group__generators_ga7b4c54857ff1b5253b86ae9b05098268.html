@@ -193,14 +193,12 @@ Example</h2>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
-<div class="line">  <span class="keyword">auto</span> values = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;a&quot;</span>_f=1,<span class="stringliteral">&quot;b&quot;</span>_f=2,<span class="stringliteral">&quot;c&quot;</span>_f=3,<span class="stringliteral">&quot;d&quot;</span>_f=4,<span class="stringliteral">&quot;e&quot;</span>_f=5,<span class="stringliteral">&quot;f&quot;</span>_f=6};</div>
+<div class="line">  <span class="keyword">auto</span> values = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> {<span class="charliteral">&#39;A&#39;</span>,<span class="charliteral">&#39;B&#39;</span>,<span class="charliteral">&#39;C&#39;</span>,<span class="charliteral">&#39;D&#39;</span>,<span class="charliteral">&#39;E&#39;</span>,<span class="charliteral">&#39;F&#39;</span>};</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; values &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; kumi::rotate_right&lt;1&gt;(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; kumi::rotate_right&lt;3&gt;(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous fields necessarily named, names are unique.</div><div class="ttdef"><b>Definition</b> traits.hpp:529</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

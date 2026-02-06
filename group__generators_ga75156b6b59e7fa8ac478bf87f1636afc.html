@@ -192,18 +192,15 @@ Examples</h2>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
-<div class="line"> </div>
-<div class="line">  <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> a = { <span class="stringliteral">&quot;r&quot;</span>_f = 1,<span class="stringliteral">&quot;g&quot;</span>_f = 2.3, <span class="stringliteral">&quot;b&quot;</span>_f = 4.5f};</div>
-<div class="line">  <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> b = { <span class="stringliteral">&quot;x&quot;</span>_f = <span class="charliteral">&#39;6&#39;</span> };</div>
-<div class="line">  <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> c = { <span class="stringliteral">&quot;y&quot;</span>_f = <span class="stringliteral">&quot;7&quot;</span>, <span class="stringliteral">&quot;z&quot;</span>_f = <span class="keywordtype">short</span>{89} };</div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> a = { 1, 2.3, 4.5f};</div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> b = {  <span class="charliteral">&#39;6&#39;</span> };</div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> c = { <span class="stringliteral">&quot;7&quot;</span>, <span class="keywordtype">short</span>{89} };</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">auto</span> abc = <a class="code hl_function" href="group__generators_ga75156b6b59e7fa8ac478bf87f1636afc.html#ga75156b6b59e7fa8ac478bf87f1636afc">cat</a>(a,b,c);</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; b &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; c &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; abc &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous fields necessarily named, names are unique.</div><div class="ttdef"><b>Definition</b> traits.hpp:529</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
