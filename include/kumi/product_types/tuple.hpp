@@ -562,7 +562,7 @@ namespace kumi
   //! @include doc/tuple/api/named_get.cpp
   //================================================================================================
   template<str S, typename... Ts>
-  requires(concepts::uniquely_named<Ts...> && concepts::contains_field<decltype(name<S>{}), Ts...>)
+  requires(concepts::uniquely_named<Ts...> && _::contains_field<S, Ts...>())
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>& t) noexcept
   {
     return t[name<S>{}];
@@ -570,7 +570,7 @@ namespace kumi
 
   /// @overload
   template<str S, typename... Ts>
-  requires(concepts::uniquely_named<Ts...> && concepts::contains_field<decltype(name<S>{}), Ts...>)
+  requires(concepts::uniquely_named<Ts...> && _::contains_field<S, Ts...>())
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>&& t) noexcept
   {
     return static_cast<tuple<Ts...>&&>(t)[name<S>{}];
@@ -578,7 +578,7 @@ namespace kumi
 
   /// @overload
   template<str S, typename... Ts>
-  requires(concepts::uniquely_named<Ts...> && concepts::contains_field<decltype(name<S>{}), Ts...>)
+  requires(concepts::uniquely_named<Ts...> && _::contains_field<S, Ts...>())
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const& t) noexcept
   {
     return t[name<S>{}];
@@ -586,7 +586,7 @@ namespace kumi
 
   /// @overload
   template<str S, typename... Ts>
-  requires(concepts::uniquely_named<Ts...> && concepts::contains_field<decltype(name<S>{}), Ts...>)
+  requires(concepts::uniquely_named<Ts...> && _::contains_field<S, Ts...>())
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const&& t) noexcept
   {
     return static_cast<tuple<Ts...> const&&>(t)[name<S>{}];
@@ -678,7 +678,7 @@ namespace kumi
 
   /// Improves diagnostic for non present name
   template<str S, typename T>
-  requires(is_kumi_tuple_v<std::remove_cvref_t<T>> && !concepts::contains_field<decltype(name<S>{}), T>)
+  requires(is_kumi_tuple_v<std::remove_cvref_t<T>> && !_::contains_field<S, T>())
   constexpr auto get(T&& t) = delete;
 
   /// Improves diagnostic for non present identifier

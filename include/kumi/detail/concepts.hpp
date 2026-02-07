@@ -221,10 +221,17 @@ namespace kumi::_
   //==============================================================================================
   // Helper meta functions to access a field type by name
   //==============================================================================================
-  template<std::size_t I, typename Ref, typename Field> struct check_field
+  struct failed
   {
     static consteval std::false_type get(...);
     static consteval invalid get_index(...);
+  };
+
+  template<std::size_t I, typename Ref, typename Field> struct check_field
+  {
+    // Simply expose get to be able to inherit but can never be called with args
+    static consteval std::false_type get();
+    static consteval invalid get_index();
   };
 
   template<std::size_t I, typename Ref, field Field>
@@ -241,8 +248,10 @@ namespace kumi::_
   /// Helper using inheritance to get the corresponding name in an variadic pack if it exist
   /// The index is used in order to enable mixed named/unnamed packs to work
   template<typename Ref, std::size_t... I, typename... Fields>
-  struct get_field_by_value<Ref, std::index_sequence<I...>, Fields...> : check_field<I, Ref, Fields>...
+  struct get_field_by_value<Ref, std::index_sequence<I...>, Fields...> : failed, check_field<I, Ref, Fields>...
   {
+    using failed::get;
+    using failed::get_index;
     using check_field<I, Ref, Fields>::get...;
     using check_field<I, Ref, Fields>::get_index...;
 
@@ -259,14 +268,4 @@ namespace kumi::_
 
   template<typename Ref, typename... Fields>
   concept can_get_field_by_value = !std::is_same_v<get_field_by_value_t<Ref, Fields...>, std::false_type>;
-
-  // MSVC workaround for get<>
-  // MSVC doesnt SFINAE properly based on NTTP types before requires evaluation
-  // so we need this weird mechanism for it to pick the correct version.
-  template<typename Name, typename... Ts> KUMI_ABI constexpr auto contains_field()
-  {
-    if constexpr (!std::integral<std::remove_cvref_t<Name>>)
-      return can_get_field_by_value<std::remove_cvref_t<Name>, Ts...>;
-    else return false;
-  };
 }
