@@ -57,8 +57,9 @@ namespace kumi
     return field_value_of(get<Idx>(KUMI_FWD(t)));
   }
 
+  /// @overload
   template<str Name, concepts::product_type T>
-  requires(_::named_get_compliant<name<Name>, T>())
+  requires(_::named_get_compliant<decltype(name<Name>{}), T>())
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(T&& t) noexcept
   {
     constexpr std::size_t Idx = [&]<std::size_t... I>(std::index_sequence<I...>) {

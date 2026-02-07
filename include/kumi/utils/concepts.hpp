@@ -258,7 +258,7 @@ namespace kumi
     //! @brief Concept specifying if a kumi::field_capture with name Name is present in a parameter pack.
     //================================================================================================
     template<typename Name, typename... Ts>
-    concept contains_field = kumi::_::contains_field<Name, Ts...>();
+    concept contains_field = identifier<Name> && kumi::_::contains_field<Name, Ts...>();
 
     //================================================================================================
     //! @ingroup concepts
@@ -340,7 +340,7 @@ namespace kumi
         }(std::make_index_sequence<size_v<T>>{});
     }
 
-    template<typename Name, concepts::product_type T> consteval bool named_get_compliant()
+    template<concepts::identifier Name, concepts::product_type T> consteval bool named_get_compliant()
     {
       if constexpr (concepts::sized_product_type<T, 0>) return false;
       else
