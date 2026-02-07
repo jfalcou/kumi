@@ -15,13 +15,13 @@ using namespace kumi::literals;
 
 TTS_CASE("Check result::cartesian_product<Record...> behavior")
 {
-  using int_f = kumi::field_capture<"a", int>;
-  using int_ref_f = kumi::field_capture<"b", int&>;
-  using int_ptr_f = kumi::field_capture<"c", int*>;
-  using float_f = kumi::field_capture<"d", float>;
-  using float_ptr_f = kumi::field_capture<"e", float*>;
-  using double_f = kumi::field_capture<"f", double>;
-  using double_cref_f = kumi::field_capture<"g", double const&>;
+  using int_f = kumi::field<kumi::name<"a">, int>;
+  using int_ref_f = kumi::field<kumi::name<"b">, int&>;
+  using int_ptr_f = kumi::field<kumi::name<"c">, int*>;
+  using float_f = kumi::field<kumi::name<"d">, float>;
+  using float_ptr_f = kumi::field<kumi::name<"e">, float*>;
+  using double_f = kumi::field<kumi::name<"f">, double>;
+  using double_cref_f = kumi::field<kumi::name<"g">, double const&>;
 
   TTS_TYPE_IS(kumi::result::cartesian_product_t<>, kumi::tuple<>);
 
@@ -45,20 +45,20 @@ TTS_CASE("Check cartesian_product() behavior")
 
 TTS_CASE("Check cartesian_product() behavior with references")
 {
-  using int_f = kumi::field_capture<"a", int>;
-  using int_ref_f = kumi::field_capture<"b", int&>;
-  using int_cref_f = kumi::field_capture<"c", int const&>;
+  using int_f = kumi::field<kumi::name<"a">, int>;
+  using int_ref_f = kumi::field<kumi::name<"b">, int&>;
+  using int_cref_f = kumi::field<kumi::name<"c">, int const&>;
 
   int a = 0;
   auto t0 = kumi::record<int_f, int_ref_f, int_cref_f>{a, a, a};
   auto cp0 = kumi::cartesian_product(t0);
 
-  kumi::get<"a"_f>(kumi::get<0>(cp0))++;
-  kumi::get<"b"_f>(kumi::get<1>(cp0)) = 10;
+  kumi::get<"a"_n>(kumi::get<0>(cp0))++;
+  kumi::get<"b"_n>(kumi::get<1>(cp0)) = 10;
 
   TTS_EQUAL(a, 10);
-  TTS_EQUAL(kumi::get<"a"_f>(kumi::get<0>(cp0)), 1);
-  TTS_EQUAL(kumi::get<"c"_f>(kumi::get<2>(cp0)), 10);
+  TTS_EQUAL(kumi::get<"a"_n>(kumi::get<0>(cp0)), 1);
+  TTS_EQUAL(kumi::get<"c"_n>(kumi::get<2>(cp0)), 10);
 };
 
 TTS_CASE("Check cartesian_product(ts...) behavior")
@@ -66,9 +66,9 @@ TTS_CASE("Check cartesian_product(ts...) behavior")
   using namespace std::literals;
   using namespace kumi::literals;
 
-  auto t1 = kumi::make_record("a"_f = 1, "b"_f = 2ULL);
-  auto t2 = kumi::make_record("c"_f = 1.2, "d"_f = 3.4f, "e"_f = 5.6);
-  auto t3 = kumi::make_record("f"_f = "first"s, "g"_f = "second"s, "h"_f = "third"s, "i"_f = "fourth"s);
+  auto t1 = kumi::make_record("a"_n = 1, "b"_n = 2ULL);
+  auto t2 = kumi::make_record("c"_n = 1.2, "d"_n = 3.4f, "e"_n = 5.6);
+  auto t3 = kumi::make_record("f"_n = "first"s, "g"_n = "second"s, "h"_n = "third"s, "i"_n = "fourth"s);
   auto cp = kumi::cartesian_product(t1, t2, t3);
 
   TTS_EQUAL(kumi::field_value_of(kumi::get<0>(kumi::get<0>(cp))), kumi::field_value_of(kumi::get<0>(t1)));

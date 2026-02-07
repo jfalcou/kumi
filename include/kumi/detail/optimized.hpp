@@ -35,6 +35,28 @@ namespace kumi::_
   {
     static constexpr bool is_homogeneous = true;
     T0 members[N];
+
+    template<std::size_t I> KUMI_ABI constexpr auto& operator()(std::integral_constant<std::size_t, I>) & noexcept
+    {
+      return members[I];
+    }
+
+    template<std::size_t I>
+    KUMI_ABI constexpr auto const& operator()(std::integral_constant<std::size_t, I>) const& noexcept
+    {
+      return members[I];
+    }
+
+    template<std::size_t I> KUMI_ABI constexpr auto&& operator()(std::integral_constant<std::size_t, I>) && noexcept
+    {
+      return static_cast<T0&&>(members[I]);
+    }
+
+    template<std::size_t I>
+    KUMI_ABI constexpr auto const&& operator()(std::integral_constant<std::size_t, I>) const&& noexcept
+    {
+      return static_cast<T0 const&&>(members[I]);
+    }
   };
 
   template<int... Is, typename T0, typename T1, typename... Ts>
@@ -44,6 +66,7 @@ namespace kumi::_
     using type = binder_n<T0, 2 + sizeof...(Ts)>;
   };
 
+  /*
   template<std::size_t I, typename T0, int N> KUMI_ABI constexpr auto& get_leaf(binder_n<T0, N>& arg) noexcept
   {
     return arg.members[I];
@@ -65,6 +88,7 @@ namespace kumi::_
   {
     return static_cast<T0 const&&>(arg.members[I]);
   }
+  */
 
   //================================================================================================
   // Optimized binder for 1->10 elements, none being reference

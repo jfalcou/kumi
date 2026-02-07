@@ -19,10 +19,10 @@ TTS_CASE("Check result::fold_right/fold_left<...> behavior")
   auto lambda = [](auto a, auto m) { return a + sizeof(m); };
   using func_t = decltype(lambda);
 
-  using char_f = kumi::field_capture<"a", char>;
-  using short_f = kumi::field_capture<"b", short>;
-  using int_f = kumi::field_capture<"c", int>;
-  using double_f = kumi::field_capture<"d", double>;
+  using char_f = kumi::field<kumi::name<"a">, char>;
+  using short_f = kumi::field<kumi::name<"b">, short>;
+  using int_f = kumi::field<kumi::name<"c">, int>;
+  using double_f = kumi::field<kumi::name<"d">, double>;
 
   TTS_TYPE_IS((kumi::result::fold_right_t<func_t, kumi::record<char_f, short_f, int_f, double_f>, int>), std::size_t);
   TTS_TYPE_IS((kumi::result::fold_left_t<func_t, kumi::record<char_f, short_f, int_f, double_f>, int>), std::size_t);
@@ -35,7 +35,7 @@ TTS_CASE("Check tuple::fold_right behavior")
 {
   using namespace kumi::literals;
 
-  auto t = kumi::record{"a"_f = 2., "b"_f = 1, "c"_f = short{55}, "d"_f = 'z'};
+  auto t = kumi::record{"a"_n = 2., "b"_n = 1, "c"_n = short{55}, "d"_n = 'z'};
 
   std::vector<int> output;
 
@@ -56,7 +56,7 @@ TTS_CASE("Check tuple::fold_right constexpr behavior")
 {
   using namespace kumi::literals;
 
-  constexpr auto t = kumi::record{"a"_f = 2., "b"_f = 1, "c"_f = short{55}, "d"_f = 'z'};
+  constexpr auto t = kumi::record{"a"_n = 2., "b"_n = 1, "c"_n = short{55}, "d"_n = 'z'};
 
   constexpr auto empty = kumi::fold_right([](auto, auto acc) { return acc; }, kumi::record{}, 42);
   TTS_CONSTEXPR_EQUAL(empty, 42);
@@ -85,7 +85,7 @@ TTS_CASE("Check tuple::fold_left behavior")
 {
   using namespace kumi::literals;
 
-  auto t = kumi::record{"a"_f = 2., "b"_f = 1, "c"_f = short{55}, "d"_f = 'z'};
+  auto t = kumi::record{"a"_n = 2., "b"_n = 1, "c"_n = short{55}, "d"_n = 'z'};
 
   auto empty = kumi::fold_left([](auto acc, auto) { return acc; }, kumi::record{}, 42);
   TTS_EQUAL(empty, 42);
@@ -106,7 +106,7 @@ TTS_CASE("Check tuple::fold_left constexpr behavior")
 {
   using namespace kumi::literals;
 
-  constexpr auto t = kumi::record{"a"_f = 2., "b"_f = 1, "c"_f = short{55}, "d"_f = 'z'};
+  constexpr auto t = kumi::record{"a"_n = 2., "b"_n = 1, "c"_n = short{55}, "d"_n = 'z'};
 
   constexpr auto empty = kumi::fold_left([](auto acc, auto) { return acc; }, kumi::record{}, 42);
   TTS_CONSTEXPR_EQUAL(empty, 42);

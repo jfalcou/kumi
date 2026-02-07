@@ -11,15 +11,15 @@
 #include <tts/tts.hpp>
 #include <functional>
 
-TTS_CASE("Check field_capture type coherence")
+TTS_CASE("Check field type coherence")
 {
   int x = 1;
 
-  auto a = kumi::field_capture<"x", int>{x};
-  auto b = kumi::field_capture<"x", int const>{x};
-  auto c = kumi::field_capture<"x", int&>{x};
-  auto d = kumi::field_capture<"x", int const&>{x};
-  auto e = kumi::field_capture<"x", int&&>{std::move(x)};
+  auto a = kumi::field<kumi::name<"x">, int>{x};
+  auto b = kumi::field<kumi::name<"x">, int const>{x};
+  auto c = kumi::field<kumi::name<"x">, int&>{x};
+  auto d = kumi::field<kumi::name<"x">, int const&>{x};
+  auto e = kumi::field<kumi::name<"x">, int&&>{std::move(x)};
 
   TTS_TYPE_IS((decltype(a.value)), int);
   TTS_TYPE_IS((decltype(b.value)), int const);
@@ -36,18 +36,18 @@ TTS_CASE("Check field_capture type coherence")
   TTS_EQUAL(x, 2);
 };
 
-TTS_CASE("Check field_capture type coherence through field_name")
+TTS_CASE("Check field type coherence through field_name")
 {
   using namespace kumi::literals;
 
   int x = 1;
   int const y = 1;
 
-  auto a = "x"_f = x;
-  auto b = "x"_f = y;
-  auto c = "x"_f = std::ref(x);
-  auto d = "x"_f = std::cref(x);
-  auto e = "x"_f = std::move(x);
+  auto a = "x"_n = x;
+  auto b = "x"_n = y;
+  auto c = "x"_n = std::ref(x);
+  auto d = "x"_n = std::cref(x);
+  auto e = "x"_n = std::move(x);
 
   TTS_TYPE_IS((decltype(a.value)), int);
   TTS_TYPE_IS((decltype(b.value)), int);
@@ -64,7 +64,7 @@ TTS_CASE("Check field_capture type coherence through field_name")
   TTS_EQUAL(x, 2);
 };
 
-TTS_CASE("Check kumi::tuple behavior with field_captures")
+TTS_CASE("Check kumi::tuple behavior with fields")
 {
   using namespace kumi::literals;
 
@@ -72,22 +72,22 @@ TTS_CASE("Check kumi::tuple behavior with field_captures")
   int const y = 2;
   int&& z = std::move(x);
 
-  using f = kumi::field_capture<"a", int>;
-  using fc = kumi::field_capture<"b", int>;
-  using fref = kumi::field_capture<"c", int&>;
-  using fcref = kumi::field_capture<"d", int const&>;
-  using furef = kumi::field_capture<"e", int>;
+  using f = kumi::field<kumi::name<"a">, int>;
+  using fc = kumi::field<kumi::name<"b">, int>;
+  using fref = kumi::field<kumi::name<"c">, int&>;
+  using fcref = kumi::field<kumi::name<"d">, int const&>;
+  using furef = kumi::field<kumi::name<"e">, int>;
 
   using tpl = kumi::tuple<f, fc, fref, fcref, furef>;
 
-  auto t = kumi::tuple{"a"_f = x, "b"_f = y, "c"_f = std::ref(x), "d"_f = std::cref(y), "e"_f = z};
-  auto nl = kumi::tuple{kumi::str{"a"}, kumi::str{"b"}, kumi::str{"c"}, kumi::str{"d"}, kumi::str{"e"}};
+  auto t = kumi::tuple{"a"_n = x, "b"_n = y, "c"_n = std::ref(x), "d"_n = std::cref(y), "e"_n = z};
+  auto nl = kumi::tuple{"a"_n, "b"_n, "c"_n, "d"_n, "e"_n};
 
-  auto pt = kumi::tuple{"a"_f = x, y, std::ref(x), "d"_f = std::cref(y), z};
-  auto ptnl = kumi::tuple{kumi::str{"a"}, kumi::none, kumi::none, kumi::str{"d"}, kumi::none};
+  auto pt = kumi::tuple{"a"_n = x, y, std::ref(x), "d"_n = std::cref(y), z};
+  auto ptnl = kumi::tuple{"a"_n, kumi::none, kumi::none, "d"_n, kumi::none};
 
-  constexpr auto dup = kumi::tuple{"a"_f = 3, "a"_f = 8};
-  constexpr auto uni = kumi::tuple{"a"_f = 3, "b"_f = 8};
+  constexpr auto dup = kumi::tuple{"a"_n = 3, "a"_n = 8};
+  constexpr auto uni = kumi::tuple{"a"_n = 3, "b"_n = 8};
 
   TTS_TYPE_IS(tpl, decltype(t));
   TTS_TYPE_IS(decltype(t.names()), decltype(nl));
@@ -96,6 +96,6 @@ TTS_CASE("Check kumi::tuple behavior with field_captures")
   TTS_EQUAL(t.names(), nl);
   TTS_EQUAL(pt.names(), ptnl);
 
-  TTS_EXPECT_NOT_COMPILES(dup, { get<"a"_f>(dup); });
-  TTS_EXPECT_COMPILES(uni, { get<"a"_f>(uni); });
+  TTS_EXPECT_NOT_COMPILES(dup, { get<"a"_n>(dup); });
+  TTS_EXPECT_COMPILES(uni, { get<"a"_n>(uni); });
 };

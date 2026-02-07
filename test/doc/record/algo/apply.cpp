@@ -27,7 +27,7 @@ int main()
 {
   using namespace kumi::literals;
 
-  auto r = kumi::record{"x"_f = 1, "y"_f = 2., "z"_f = 3.f};
+  auto r = kumi::record{"x"_n = 1, "y"_n = 2., "z"_n = 3.f};
 
   // Simple operation: sum all values
   std::cout << kumi::apply( [](auto... m) { return (m + ...); }, r) << "\n";

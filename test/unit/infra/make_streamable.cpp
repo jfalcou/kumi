@@ -63,7 +63,7 @@ TTS_CASE("Check make_streamable behavior with record")
   ns::person marty{"Marty", "Macfly"};
   ns::unprintable a{1, 'x', 12};
 
-  kumi::record r = {"a"_f = 't', "b"_f = "rofl", "c"_f = cards, "d"_f = marty, "e"_f = a};
+  kumi::record r = {"a"_n = 't', "b"_n = "rofl", "c"_n = cards, "d"_n = marty, "e"_n = a};
 
   std::ostringstream s;
   s << r;

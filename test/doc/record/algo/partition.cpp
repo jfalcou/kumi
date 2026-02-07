@@ -15,7 +15,7 @@ int main()
   double  b = 3.1415;
   float   c = 0.01f;
 
-  auto original = kumi::record{"a"_f = a,"b"_f = &a,"c"_f = b,"d"_f = &b,"e"_f = c,"f"_f = &c,"g"_f = 'z',"h"_f = nullptr};
+  auto original = kumi::record{"a"_n = a,"b"_n = &a,"c"_n = b,"d"_n = &b,"e"_n = c,"f"_n = &c,"g"_n = 'z',"h"_n = nullptr};
   std::cout << original << "\n";
  
   std::cout << "Pointers first: " << kumi::partition<std::is_pointer>(original) << "\n";

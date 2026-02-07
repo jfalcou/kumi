@@ -42,7 +42,6 @@ namespace kumi
                                    return ((size_v<raw_member_t<0, T>> == size_v<raw_member_t<N + 1, T>>) && ...);
                                  }(std::make_index_sequence<size_v<T> - 1>{}));
 
-    // This is contains all from raberu but uses inheritance
     template<typename Ints, typename... Ts> struct matches;
 
     template<> struct matches<std::index_sequence<>>
@@ -61,7 +60,7 @@ namespace kumi
       static consteval auto is_present(Key...) -> decltype(_::true_fn(static_cast<Key>(match())...));
       static consteval std::false_type is_present(...);
 
-      using type = decltype(is_present(_::get_value_identity<Is, Ts>()...));
+      using type = decltype(is_present(_::get_key<Is, Ts>()...));
     };
 
     template<std::size_t S, typename T, typename U>
@@ -109,6 +108,26 @@ namespace kumi
     //================================================================================================
     template<typename T>
     concept unit_type = (product_type<T> && (size_v<T> == 0)) || std::is_same_v<std::remove_cvref_t<T>, std::nullptr_t>;
+
+    //====================================================================================================================
+    //! @brief field concept
+    //!
+    //! A field type can be aggregated in a [record](@ref kumi::record) and be
+    //! fetched later
+    //====================================================================================================================
+    template<typename T>
+    concept field = kumi::_::field<T>;
+
+    //====================================================================================================================
+    //! @brief Keyword concept
+    //!
+    //! A Keyword type is able to be bound to a value as a [field](@ref kumi::field)
+    //====================================================================================================================
+    template<typename K>
+    concept identifier = requires(K k) {
+      typename K::tag_type;
+      { k.to_str() };
+    };
 
     //================================================================================================
     //! @ingroup concepts
@@ -194,14 +213,14 @@ namespace kumi
     //! @brief Concept specifying if parameter pack containes a kumi::field_capture.
     //================================================================================================
     template<typename... Ts>
-    concept has_named_fields = (... || is_field_capture_v<std::remove_cvref_t<Ts>>);
+    concept has_named_fields = (... || field<std::remove_cvref_t<Ts>>);
 
     //================================================================================================
     //! @ingroup concepts
     //! @brief Concept specifying if parameter pack contains only kumi::field_captures.
     //================================================================================================
     template<typename... Ts>
-    concept is_fully_named = (... && is_field_capture_v<std::remove_cvref_t<Ts>>);
+    concept is_fully_named = (... && field<std::remove_cvref_t<Ts>>);
 
     //================================================================================================
     //! @ingroup concepts
@@ -238,8 +257,8 @@ namespace kumi
     //! @ingroup concepts
     //! @brief Concept specifying if a kumi::field_capture with name Name is present in a parameter pack.
     //================================================================================================
-    template<auto Name, typename... Ts>
-    concept contains_field = _::contains_field<Name, Ts...>();
+    template<typename Name, typename... Ts>
+    concept contains_field = kumi::_::contains_field<Name, Ts...>();
 
     //================================================================================================
     //! @ingroup concepts
@@ -321,7 +340,7 @@ namespace kumi
         }(std::make_index_sequence<size_v<T>>{});
     }
 
-    template<str Name, concepts::product_type T> consteval bool named_get_compliant()
+    template<typename Name, concepts::product_type T> consteval bool named_get_compliant()
     {
       if constexpr (concepts::sized_product_type<T, 0>) return false;
       else

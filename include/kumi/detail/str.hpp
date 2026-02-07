@@ -33,9 +33,25 @@ namespace kumi
     {
     }
 
+    template<std::size_t N, std::size_t O, std::size_t... Is>
+    requires(sizeof...(Is) <= max_size)
+    constexpr str(char const (&s)[N], std::integral_constant<std::size_t, O>, std::index_sequence<Is...>)
+      : data_{s[Is + O]...}, size_(sizeof...(Is) - 1)
+    {
+    }
+
     template<std::size_t N>
     requires(N <= max_size)
     constexpr str(char const (&s)[N]) : str{s, std::make_index_sequence<N>{}}
+    {
+    }
+
+    template<std::size_t N, std::size_t P, std::size_t S>
+    requires((N >= P + S) && ((N - P - S) <= max_size))
+    constexpr str(char const (&s)[N],
+                  std::integral_constant<std::size_t, P> prefix,
+                  std::integral_constant<std::size_t, S>)
+      : str{s, prefix, std::make_index_sequence<N - P - S>{}}
     {
     }
 

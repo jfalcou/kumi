@@ -1,0 +1,21 @@
+/**
+  KUMI - Compact Tuple Tools
+  Copyright : KUMI Project Contributors
+  SPDX-License-Identifier: BSL-1.0
+**/
+#include <kumi/kumi.hpp>
+#include <iostream>
+
+int main()
+{
+  using namespace kumi::literals;
+
+  kumi::tuple a = { 1, 2.3, 4.5f};
+  kumi::tuple b = {  "a"_n = '6' };
+  kumi::tuple c = { "b"_n = "7", "a"_n = short{89} };
+
+  auto abc = merge(a,b,c);
+
+  std::cout << a << " " << b << " " << c << "\n";
+  std::cout << abc << "\n";
+}
