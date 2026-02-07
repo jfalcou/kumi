@@ -8,7 +8,7 @@
 int main()
 {
   using namespace kumi::literals;
-  auto original = kumi::make_record("a"_f=0,"b"_f='0',"c"_f=0.f);
+  auto original = kumi::make_record("a"_n=0,"b"_n='0',"c"_n=0.f);
   auto ref      = kumi::to_ref( original );
 
   std::cout << original << "\n";

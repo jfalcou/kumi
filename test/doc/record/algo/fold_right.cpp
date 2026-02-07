@@ -11,7 +11,7 @@ int main()
 {
   using namespace kumi::literals;
 
-  auto t = kumi::record{"a"_f = 2.,"b"_f = 1,"c"_f = short{55},"d"_f = 'z'};
+  auto t = kumi::record{"a"_n = 2.,"b"_n = 1,"c"_n = short{55},"d"_n = 'z'};
 
   auto output  = kumi::fold_right( [](auto m, auto a) { a.push_back(sizeof(m)); return a; }
                                 , t
@@ -21,8 +21,8 @@ int main()
   for(auto s : output) std::cout << s << " ";
   std::cout << "\n";
 
-  auto u = kumi::record{"a"_f = 1,"b"_f = 3,"c"_f = 2,"d"_f = 4,"e"_f = 0,
-                        "f"_f = 5,"g"_f = 9,"h"_f = 6,"i"_f = 7};
+  auto u = kumi::record{"a"_n = 1,"b"_n = 3,"c"_n = 2,"d"_n = 4,"e"_n = 0,
+                        "f"_n = 5,"g"_n = 9,"h"_n = 6,"i"_n = 7};
 
   std::cout << kumi::fold_right(  [](auto e, auto acc)
                                   {

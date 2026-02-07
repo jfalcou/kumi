@@ -10,13 +10,13 @@ int main()
 {
   using namespace kumi::literals;
 
-  kumi::tuple t = { "x"_f = 1, "y"_f = 2.3, "z"_f = 4.5f, "t"_f = '@' };
+  kumi::tuple t = { "x"_n = 1, "y"_n = 2.3, "z"_n = 4.5f, "t"_n = '@' };
   std::cout << t << "\n";
-  std::cout << t["x"_f] << "\n";
-  std::cout << t["y"_f] << "\n";
-  std::cout << t["z"_f] << "\n";
+  std::cout << t["x"_n] << "\n";
+  std::cout << t["y"_n] << "\n";
+  std::cout << t["z"_n] << "\n";
 
-  t["t"_f]++;
+  t["t"_n]++;
 
-  std::cout << t["t"_f] << "\n";
+  std::cout << t["t"_n] << "\n";
 }
