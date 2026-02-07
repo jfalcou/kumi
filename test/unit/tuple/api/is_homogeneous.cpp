@@ -33,12 +33,12 @@ TTS_CASE("Check is_homogeneous for kumi::tuple")
   TTS_CONSTEXPR_EXPECT_NOT((kumi::concepts::homogeneous_product_type<kumi::tuple<int, float, int, int>>));
 
   TTS_CONSTEXPR_EXPECT_NOT(
-    (kumi::concepts::homogeneous_product_type<
-      kumi::record<kumi::field_capture<"a", int>, kumi::field_capture<"b", int>, kumi::field_capture<"c", int>>>));
+    (kumi::concepts::homogeneous_product_type<kumi::record<
+       kumi::field<kumi::name<"a">, int>, kumi::field<kumi::name<"b">, int>, kumi::field<kumi::name<"c">, int>>>));
 
   TTS_CONSTEXPR_EXPECT_NOT(
-    (kumi::concepts::homogeneous_product_type<
-      kumi::record<kumi::field_capture<"a", int>, kumi::field_capture<"b", float>, kumi::field_capture<"c", char>>>));
+    (kumi::concepts::homogeneous_product_type<kumi::record<
+       kumi::field<kumi::name<"a">, int>, kumi::field<kumi::name<"b">, float>, kumi::field<kumi::name<"c">, char>>>));
 };
 
 TTS_CASE("Check is_homogeneous for kumi::tuple derived types")

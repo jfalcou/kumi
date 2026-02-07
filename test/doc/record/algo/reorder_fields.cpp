@@ -10,8 +10,8 @@ int main()
 {
   using namespace kumi::literals;
 
-  auto values = kumi::record { "a"_f = 1, "b"_f = 'a', "c"_f = 0.1 };
+  auto values = kumi::record { "a"_n = 1, "b"_n = 'a', "c"_n = 0.1 };
 
   std::cout << values << "\n";
-  std::cout << kumi::reorder_fields<"b"_f,"a"_f,"c"_f>(values) << "\n";
+  std::cout << kumi::reorder_fields<"b"_n,"a"_n,"c"_n>(values) << "\n";
 }

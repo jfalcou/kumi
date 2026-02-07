@@ -10,8 +10,8 @@ using namespace kumi::literals;
 
 int main()
 {
-  auto lhs = kumi::record{"a"_f = 1  , "b"_f = 2  , "c"_f = 3  };
-  auto rhs = kumi::record{"a"_f = 2.4, "b"_f = 4.6, "c"_f = 6.8};
+  auto lhs = kumi::record{"a"_n = 1  , "b"_n = 2  , "c"_n = 3  };
+  auto rhs = kumi::record{"a"_n = 2.4, "b"_n = 4.6, "c"_n = 6.8};
 
   auto res = kumi::map_field( [](auto name, auto l, auto r) 
   { 
