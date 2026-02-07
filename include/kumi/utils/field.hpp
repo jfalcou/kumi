@@ -97,7 +97,7 @@ namespace kumi
   template<typename T> [[nodiscard]] KUMI_ABI constexpr auto name_of(as<T>) noexcept
   {
     if constexpr (concepts::field<T>) return _::key_of_t<T>{};
-    else return kumi::none;
+    else return kumi::unknown{};
   };
 
   //================================================================================================

@@ -193,8 +193,9 @@ namespace kumi
     // MSVC evaluates a requires clause before checking the type of an NTTP
     template<auto N, typename... Ts> KUMI_ABI constexpr auto contains_field()
     {
-      if constexpr (!std::integral<std::remove_cvref_t<decltype(N)>>) return can_get_field_by_value<name<N>, Ts...>;
-      else return false;
+      if constexpr (std::integral<std::remove_cvref_t<decltype(N)>>) return false;
+      else if constexpr (concepts::identifier<std::remove_cvref_t<decltype(N)>>) return false;
+      else return can_get_field_by_value<name<N>, Ts...>;
     };
   }
 }

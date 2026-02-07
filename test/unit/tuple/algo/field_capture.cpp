@@ -83,7 +83,7 @@ TTS_CASE("Check kumi::tuple behavior with fields")
   auto nl = kumi::tuple{"a"_n, "b"_n, "c"_n, "d"_n, "e"_n};
 
   auto pt = kumi::tuple{"a"_n = x, y, std::ref(x), "d"_n = std::cref(y), z};
-  auto ptnl = kumi::tuple{"a"_n, kumi::none, kumi::none, "d"_n, kumi::none};
+  auto ptnl = kumi::tuple{"a"_n, kumi::unknown{}, kumi::unknown{}, "d"_n, kumi::unknown{}};
 
   constexpr auto dup = kumi::tuple{"a"_n = 3, "a"_n = 8};
   constexpr auto uni = kumi::tuple{"a"_n = 3, "b"_n = 8};

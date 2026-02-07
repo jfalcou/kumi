@@ -77,6 +77,23 @@ namespace kumi
     }
   };
 
+  //====================================================================================================================
+  //! @ingroup utility
+  //! @brief Type indicating a identifier was not found in a given kumi::product_type
+  //====================================================================================================================
+  struct unknown
+  {
+    constexpr inline operator str() const noexcept { return str{"kumi::unknown"}; }
+
+    KUMI_ABI friend constexpr auto operator<=>(unknown const&, unknown const&) noexcept = default;
+
+    template<typename CharT, typename Traits>
+    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, unknown const&) noexcept
+    {
+      return os << "kumi::unknown";
+    }
+  };
+
   template<str... Strs>
   requires((Strs.size() + ... + sizeof...(Strs)) < str::max_size)
   [[nodiscard]] KUMI_ABI constexpr auto concatenate_str()
