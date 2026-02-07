@@ -30,6 +30,15 @@ TTS_CASE("Check EBO behavior of kumi::tuple construction")
   auto s5 = std::tuple{int{1}, empty{}, char{'c'}};
   auto s6 = std::tuple{std::tuple{empty{}}, int{1}};
 
+#if defined(_MSC_VER)
+  TTS_EQUAL(sizeof(k0), sizeof(s0));
+  TTS_EQUAL(sizeof(k1), sizeof(s1));
+  TTS_EQUAL(sizeof(k2), sizeof(s1)); // k2 should be optimized
+  TTS_EQUAL(sizeof(k3), sizeof(s1));
+  TTS_EQUAL(sizeof(k4), sizeof(std::tuple{int{1}}));
+  TTS_EQUAL(sizeof(k5), sizeof(s5));
+  TTS_EQUAL(sizeof(k6), sizeof(s6));
+#else
   TTS_EQUAL(sizeof(k0), sizeof(s0));
   TTS_EQUAL(sizeof(k1), sizeof(s1));
   TTS_EQUAL(sizeof(k2), sizeof(s2));
@@ -37,4 +46,5 @@ TTS_CASE("Check EBO behavior of kumi::tuple construction")
   TTS_EQUAL(sizeof(k4), sizeof(s4));
   TTS_EQUAL(sizeof(k5), sizeof(s5));
   TTS_EQUAL(sizeof(k6), sizeof(s6));
+#endif
 };
