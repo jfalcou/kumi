@@ -35,18 +35,6 @@
 #define KUMI_ABI [[using msvc: forceinline, flatten]] KUMI_CUDA inline
 #endif
 
-#if defined(_MSC_VER)
-#define KUMI_NO_UNIQUE_ADDRESS [[msvc::no_unique_address]]
-#elif defined(__has_cpp_attribute)
-#if __has_cpp_attribute(no_unique_address)
-#define KUMI_NO_UNIQUE_ADDRESS [[no_unique_address]]
-#else
-#define KUMI_NO_UNIQUE_ADDRESS
-#endif
-#else
-#define KUMI_NO_UNIQUE_ADDRESS
-#endif
-
 #if defined(__clang__)
 #pragma clang diagnostic ignored "-Wmissing-braces"
 #endif

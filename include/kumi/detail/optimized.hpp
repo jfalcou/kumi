@@ -20,6 +20,9 @@ namespace kumi::_
   // We usually don't want to optimize tuple of references
   template<typename... Ts> inline constexpr bool no_references = (true && ... && !std::is_reference_v<Ts>);
 
+  // [[no_unique_address]] is to unstable at the moment, will go through the standard path
+  template<typename... Ts> inline constexpr bool no_empty = (true && ... && !std::is_empty_v<Ts>);
+
   // We care about homogeneous tuple
   template<typename T0, typename... Ts> inline constexpr bool all_the_same = (true && ... && std::is_same_v<T0, Ts>);
 
@@ -35,7 +38,7 @@ namespace kumi::_
   };
 
   template<int... Is, typename T0, typename T1, typename... Ts>
-  requires(all_the_same<T0, T1, Ts...> && no_references<T0, T1, Ts...>)
+  requires(all_the_same<T0, T1, Ts...> && no_references<T0, T1, Ts...> && no_empty<T0, T1, Ts...>)
   struct make_binder<std::integer_sequence<int, Is...>, T0, T1, Ts...>
   {
     using type = binder_n<T0, 2 + sizeof...(Ts)>;
@@ -66,36 +69,30 @@ namespace kumi::_
   //================================================================================================
   // Optimized binder for 1->10 elements, none being reference
   //================================================================================================
-  // template<> struct binder<std::integer_sequence<int>>
-  //{
-  //  static constexpr bool is_homogeneous = false;
-  //  using kumi_specific_layout = void;
-  //};
-
   template<typename T>
-  requires(no_references<T>)
+  requires(no_references<T> && no_empty<T>)
   struct binder<std::integer_sequence<int, 0>, T>
   {
     static constexpr bool is_homogeneous = true;
     using kumi_specific_layout = void;
     using member0_type = T;
-    KUMI_NO_UNIQUE_ADDRESS member0_type member0;
+    member0_type member0;
   };
 
   template<typename T0, typename T1>
-  requires(no_references<T0, T1>)
+  requires(no_references<T0, T1> && no_empty<T0, T1>)
   struct binder<std::integer_sequence<int, 0, 1>, T0, T1>
   {
     static constexpr bool is_homogeneous = false;
     using kumi_specific_layout = void;
     using member0_type = T0;
     using member1_type = T1;
-    KUMI_NO_UNIQUE_ADDRESS member0_type member0;
-    KUMI_NO_UNIQUE_ADDRESS member1_type member1;
+    member0_type member0;
+    member1_type member1;
   };
 
   template<typename T0, typename T1, typename T2>
-  requires(no_references<T0, T1, T2>)
+  requires(no_references<T0, T1, T2> && no_empty<T0, T1, T2>)
   struct binder<std::integer_sequence<int, 0, 1, 2>, T0, T1, T2>
   {
     static constexpr bool is_homogeneous = false;
@@ -103,13 +100,13 @@ namespace kumi::_
     using member0_type = T0;
     using member1_type = T1;
     using member2_type = T2;
-    KUMI_NO_UNIQUE_ADDRESS member0_type member0;
-    KUMI_NO_UNIQUE_ADDRESS member1_type member1;
-    KUMI_NO_UNIQUE_ADDRESS member2_type member2;
+    member0_type member0;
+    member1_type member1;
+    member2_type member2;
   };
 
   template<typename T0, typename T1, typename T2, typename T3>
-  requires(no_references<T0, T1, T2, T3>)
+  requires(no_references<T0, T1, T2, T3> && no_empty<T0, T1, T2, T3>)
   struct binder<std::integer_sequence<int, 0, 1, 2, 3>, T0, T1, T2, T3>
   {
     static constexpr bool is_homogeneous = false;
@@ -118,14 +115,14 @@ namespace kumi::_
     using member1_type = T1;
     using member2_type = T2;
     using member3_type = T3;
-    KUMI_NO_UNIQUE_ADDRESS member0_type member0;
-    KUMI_NO_UNIQUE_ADDRESS member1_type member1;
-    KUMI_NO_UNIQUE_ADDRESS member2_type member2;
-    KUMI_NO_UNIQUE_ADDRESS member3_type member3;
+    member0_type member0;
+    member1_type member1;
+    member2_type member2;
+    member3_type member3;
   };
 
   template<typename T0, typename T1, typename T2, typename T3, typename T4>
-  requires(no_references<T0, T1, T2, T3, T4>)
+  requires(no_references<T0, T1, T2, T3, T4> && no_empty<T0, T1, T2, T3, T4>)
   struct binder<std::integer_sequence<int, 0, 1, 2, 3, 4>, T0, T1, T2, T3, T4>
   {
     static constexpr bool is_homogeneous = false;
@@ -135,15 +132,15 @@ namespace kumi::_
     using member2_type = T2;
     using member3_type = T3;
     using member4_type = T4;
-    KUMI_NO_UNIQUE_ADDRESS member0_type member0;
-    KUMI_NO_UNIQUE_ADDRESS member1_type member1;
-    KUMI_NO_UNIQUE_ADDRESS member2_type member2;
-    KUMI_NO_UNIQUE_ADDRESS member3_type member3;
-    KUMI_NO_UNIQUE_ADDRESS member4_type member4;
+    member0_type member0;
+    member1_type member1;
+    member2_type member2;
+    member3_type member3;
+    member4_type member4;
   };
 
   template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5>
-  requires(no_references<T0, T1, T2, T3, T4, T5>)
+  requires(no_references<T0, T1, T2, T3, T4, T5> && no_empty<T0, T1, T2, T3, T4, T5>)
   struct binder<std::integer_sequence<int, 0, 1, 2, 3, 4, 5>, T0, T1, T2, T3, T4, T5>
   {
     static constexpr bool is_homogeneous = false;
@@ -154,16 +151,16 @@ namespace kumi::_
     using member3_type = T3;
     using member4_type = T4;
     using member5_type = T5;
-    KUMI_NO_UNIQUE_ADDRESS member0_type member0;
-    KUMI_NO_UNIQUE_ADDRESS member1_type member1;
-    KUMI_NO_UNIQUE_ADDRESS member2_type member2;
-    KUMI_NO_UNIQUE_ADDRESS member3_type member3;
-    KUMI_NO_UNIQUE_ADDRESS member4_type member4;
-    KUMI_NO_UNIQUE_ADDRESS member5_type member5;
+    member0_type member0;
+    member1_type member1;
+    member2_type member2;
+    member3_type member3;
+    member4_type member4;
+    member5_type member5;
   };
 
   template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
-  requires(no_references<T0, T1, T2, T3, T4, T5, T6>)
+  requires(no_references<T0, T1, T2, T3, T4, T5, T6> && no_empty<T0, T1, T2, T3, T4, T5, T6>)
   struct binder<std::integer_sequence<int, 0, 1, 2, 3, 4, 5, 6>, T0, T1, T2, T3, T4, T5, T6>
   {
     static constexpr bool is_homogeneous = false;
@@ -175,17 +172,17 @@ namespace kumi::_
     using member4_type = T4;
     using member5_type = T5;
     using member6_type = T6;
-    KUMI_NO_UNIQUE_ADDRESS member0_type member0;
-    KUMI_NO_UNIQUE_ADDRESS member1_type member1;
-    KUMI_NO_UNIQUE_ADDRESS member2_type member2;
-    KUMI_NO_UNIQUE_ADDRESS member3_type member3;
-    KUMI_NO_UNIQUE_ADDRESS member4_type member4;
-    KUMI_NO_UNIQUE_ADDRESS member5_type member5;
-    KUMI_NO_UNIQUE_ADDRESS member6_type member6;
+    member0_type member0;
+    member1_type member1;
+    member2_type member2;
+    member3_type member3;
+    member4_type member4;
+    member5_type member5;
+    member6_type member6;
   };
 
   template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
-  requires(no_references<T0, T1, T2, T3, T4, T5, T6, T7>)
+  requires(no_references<T0, T1, T2, T3, T4, T5, T6, T7> && no_empty<T0, T1, T2, T3, T4, T5, T6, T7>)
   struct binder<std::integer_sequence<int, 0, 1, 2, 3, 4, 5, 6, 7>, T0, T1, T2, T3, T4, T5, T6, T7>
   {
     static constexpr bool is_homogeneous = false;
@@ -198,14 +195,14 @@ namespace kumi::_
     using member5_type = T5;
     using member6_type = T6;
     using member7_type = T7;
-    KUMI_NO_UNIQUE_ADDRESS member0_type member0;
-    KUMI_NO_UNIQUE_ADDRESS member1_type member1;
-    KUMI_NO_UNIQUE_ADDRESS member2_type member2;
-    KUMI_NO_UNIQUE_ADDRESS member3_type member3;
-    KUMI_NO_UNIQUE_ADDRESS member4_type member4;
-    KUMI_NO_UNIQUE_ADDRESS member5_type member5;
-    KUMI_NO_UNIQUE_ADDRESS member6_type member6;
-    KUMI_NO_UNIQUE_ADDRESS member7_type member7;
+    member0_type member0;
+    member1_type member1;
+    member2_type member2;
+    member3_type member3;
+    member4_type member4;
+    member5_type member5;
+    member6_type member6;
+    member7_type member7;
   };
 
   template<typename T0,
@@ -217,7 +214,7 @@ namespace kumi::_
            typename T6,
            typename T7,
            typename T8>
-  requires(no_references<T0, T1, T2, T3, T4, T5, T6, T7, T8>)
+  requires(no_references<T0, T1, T2, T3, T4, T5, T6, T7, T8> && no_empty<T0, T1, T2, T3, T4, T5, T6, T7, T8>)
   struct binder<std::integer_sequence<int, 0, 1, 2, 3, 4, 5, 6, 7, 8>, T0, T1, T2, T3, T4, T5, T6, T7, T8>
   {
     static constexpr bool is_homogeneous = false;
@@ -231,15 +228,15 @@ namespace kumi::_
     using member6_type = T6;
     using member7_type = T7;
     using member8_type = T8;
-    KUMI_NO_UNIQUE_ADDRESS member0_type member0;
-    KUMI_NO_UNIQUE_ADDRESS member1_type member1;
-    KUMI_NO_UNIQUE_ADDRESS member2_type member2;
-    KUMI_NO_UNIQUE_ADDRESS member3_type member3;
-    KUMI_NO_UNIQUE_ADDRESS member4_type member4;
-    KUMI_NO_UNIQUE_ADDRESS member5_type member5;
-    KUMI_NO_UNIQUE_ADDRESS member6_type member6;
-    KUMI_NO_UNIQUE_ADDRESS member7_type member7;
-    KUMI_NO_UNIQUE_ADDRESS member8_type member8;
+    member0_type member0;
+    member1_type member1;
+    member2_type member2;
+    member3_type member3;
+    member4_type member4;
+    member5_type member5;
+    member6_type member6;
+    member7_type member7;
+    member8_type member8;
   };
 
   template<typename T0,
@@ -252,7 +249,7 @@ namespace kumi::_
            typename T7,
            typename T8,
            typename T9>
-  requires(no_references<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>)
+  requires(no_references<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> && no_empty<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>)
   struct binder<std::integer_sequence<int, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9>, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>
   {
     static constexpr bool is_homogeneous = false;
@@ -267,16 +264,16 @@ namespace kumi::_
     using member7_type = T7;
     using member8_type = T8;
     using member9_type = T9;
-    KUMI_NO_UNIQUE_ADDRESS member0_type member0;
-    KUMI_NO_UNIQUE_ADDRESS member1_type member1;
-    KUMI_NO_UNIQUE_ADDRESS member2_type member2;
-    KUMI_NO_UNIQUE_ADDRESS member3_type member3;
-    KUMI_NO_UNIQUE_ADDRESS member4_type member4;
-    KUMI_NO_UNIQUE_ADDRESS member5_type member5;
-    KUMI_NO_UNIQUE_ADDRESS member6_type member6;
-    KUMI_NO_UNIQUE_ADDRESS member7_type member7;
-    KUMI_NO_UNIQUE_ADDRESS member8_type member8;
-    KUMI_NO_UNIQUE_ADDRESS member9_type member9;
+    member0_type member0;
+    member1_type member1;
+    member2_type member2;
+    member3_type member3;
+    member4_type member4;
+    member5_type member5;
+    member6_type member6;
+    member7_type member7;
+    member8_type member8;
+    member9_type member9;
   };
 
   //================================================================================================
