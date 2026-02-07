@@ -20,15 +20,15 @@ namespace ns
   template<std::size_t I>
   decltype(auto) get(people const& s) noexcept
   {
-    if constexpr(I==0) return kumi::capture_field<"name"_n>( s.name );
-    if constexpr(I==1) return kumi::capture_field<"age"_n >( s.age  );
+    if constexpr(I==0) return kumi::capture_field<"name"_id>( s.name );
+    if constexpr(I==1) return kumi::capture_field<"age"_id >( s.age  );
   }
 
   template<std::size_t I>
   decltype(auto) get(people& s) noexcept
   {
-    if constexpr(I==0) return kumi::capture_field<"name"_n>( s.name );
-    if constexpr(I==1) return kumi::capture_field<"age"_n>( s.age  );
+    if constexpr(I==0) return kumi::capture_field<"name"_id>( s.name );
+    if constexpr(I==1) return kumi::capture_field<"age"_id>( s.age  );
   }
 }
 

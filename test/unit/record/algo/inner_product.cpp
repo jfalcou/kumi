@@ -36,8 +36,8 @@ TTS_CASE("Check tuple::inner_product behavior")
 {
   using namespace kumi::literals;
 
-  auto t1 = kumi::record{"a"_n = 2, "b"_n = 4, "c"_n = 8};
-  auto t2 = kumi::record{"a"_n = 2.5, "b"_n = 4.5, "c"_n = 7.5};
+  auto t1 = kumi::record{"a"_id = 2, "b"_id = 4, "c"_id = 8};
+  auto t2 = kumi::record{"a"_id = 2.5, "b"_id = 4.5, "c"_id = 7.5};
 
   TTS_EQUAL(kumi::inner_product(t1, t2, 0.f), 83);
   TTS_EQUAL(kumi::inner_product(
@@ -49,12 +49,12 @@ TTS_CASE("Check tuple::inner_product constexpr behavior")
 {
   using namespace kumi::literals;
 
-  TTS_CONSTEXPR_EQUAL(kumi::inner_product(kumi::record{"a"_n = 2, "b"_n = 4, "c"_n = 8},
-                                          kumi::record{"a"_n = 2.5, "b"_n = 4.5, "c"_n = 7.5}, 0.f),
+  TTS_CONSTEXPR_EQUAL(kumi::inner_product(kumi::record{"a"_id = 2, "b"_id = 4, "c"_id = 8},
+                                          kumi::record{"a"_id = 2.5, "b"_id = 4.5, "c"_id = 7.5}, 0.f),
                       83);
   TTS_CONSTEXPR_EQUAL(kumi::inner_product(
-                        kumi::record{"a"_n = 2, "b"_n = 4, "c"_n = 8},
-                        kumi::record{"a"_n = 2.5, "b"_n = 4.5, "c"_n = 7.5}, 1ULL, [](auto a, auto b) { return a * b; },
-                        [](auto a, auto b) { return a + b; }),
+                        kumi::record{"a"_id = 2, "b"_id = 4, "c"_id = 8},
+                        kumi::record{"a"_id = 2.5, "b"_id = 4.5, "c"_id = 7.5}, 1ULL,
+                        [](auto a, auto b) { return a * b; }, [](auto a, auto b) { return a + b; }),
                       592.875);
 };

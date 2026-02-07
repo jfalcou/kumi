@@ -51,7 +51,6 @@ namespace kumi
         if constexpr (concepts::record_type<Tuple>)
         {
           constexpr auto field = name_of(as<element_t<N, Tuple>>{});
-          // using field_type = result::name_of_t<element_t<N, Tuple>>;
           return capture_field<field>(invoke(f, get<field>(args)...));
         }
         else return invoke(f, get<N>(KUMI_FWD(args))...);

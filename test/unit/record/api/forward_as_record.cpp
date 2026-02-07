@@ -17,7 +17,7 @@ TTS_CASE("Check tuple_element of kumi::forward_as_record")
 {
   int i{};
   float const f{};
-  auto forwarded = kumi::forward_as_record<"a"_n, "b"_n, "c"_n, "d"_n>('z', ctor_tracker(), i, f);
+  auto forwarded = kumi::forward_as_record<"a"_id, "b"_id, "c"_id, "d"_id>('z', ctor_tracker(), i, f);
 
   TTS_TYPE_IS((std::tuple_element_t<0, decltype(forwarded)>), (kumi::field<kumi::name<"a">, char&&>));
   TTS_TYPE_IS((std::tuple_element_t<1, decltype(forwarded)>), (kumi::field<kumi::name<"b">, ctor_tracker&&>));
@@ -27,8 +27,8 @@ TTS_CASE("Check tuple_element of kumi::forward_as_record")
 
 TTS_CASE("Check usage of kumi::record via forward_as_tuple")
 {
-  TTS_EQUAL(move_ctor_fwd(kumi::forward_as_record<"a"_n>(ctor_tracker())), operations::move_ctor);
-  TTS_EQUAL(copy_ctor_fwd(kumi::forward_as_record<"b"_n>(ctor_tracker())), operations::copy_ctor);
-  TTS_EQUAL(move_assign_fwd(kumi::forward_as_record<"c"_n>(ctor_tracker())), operations::move_assign);
-  TTS_EQUAL(copy_assign_fwd(kumi::forward_as_record<"d"_n>(ctor_tracker())), operations::copy_assign);
+  TTS_EQUAL(move_ctor_fwd(kumi::forward_as_record<"a"_id>(ctor_tracker())), operations::move_ctor);
+  TTS_EQUAL(copy_ctor_fwd(kumi::forward_as_record<"b"_id>(ctor_tracker())), operations::copy_ctor);
+  TTS_EQUAL(move_assign_fwd(kumi::forward_as_record<"c"_id>(ctor_tracker())), operations::move_assign);
+  TTS_EQUAL(copy_assign_fwd(kumi::forward_as_record<"d"_id>(ctor_tracker())), operations::copy_assign);
 };

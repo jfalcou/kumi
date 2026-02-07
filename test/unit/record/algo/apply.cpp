@@ -35,7 +35,7 @@ TTS_CASE("Check apply behavior")
                 ((s << m << " "), ...);
                 return s.str();
               },
-              kumi::record{"a"_n = 1, "b"_n = '5', "c"_n = "things"})),
+              kumi::record{"a"_id = 1, "b"_id = '5', "c"_id = "things"})),
             "1 5 things ");
 };
 
@@ -44,7 +44,7 @@ TTS_CASE("Check apply constexpr behavior")
   using namespace kumi::literals;
 
   constexpr auto t1 = []() {
-    auto it = kumi::record{"x"_n = 1, "y"_n = 2., "z"_n = 3.f};
+    auto it = kumi::record{"x"_id = 1, "y"_id = 2., "z"_id = 3.f};
     return kumi::apply([](auto... m) { return (m + ...); }, it);
   }();
 

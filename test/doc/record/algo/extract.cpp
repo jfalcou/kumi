@@ -10,8 +10,8 @@ int main()
 {
   using namespace kumi::literals;
 
-  kumi::record a =  { "a"_n = 1, "b"_n = 2.3, "c"_n = 4.5f, "d"_n = '6'
-                    , "e"_n = "7", "f"_n = short{89} };
+  kumi::record a =  { "a"_id = 1, "b"_id = 2.3, "c"_id = 4.5f, "d"_id = '6'
+                    , "e"_id = "7", "f"_id = short{89} };
 
   auto head = extract(a,0_c,1_c);
   auto mid  = extract(a,1_c,3_c);

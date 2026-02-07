@@ -10,7 +10,7 @@ int main()
 {
   using namespace kumi::literals;
 
-  kumi::record r = { "x"_n = 1, "y"_n = 2.3, "z"_n = 4.5f, "t"_n = '@' };
+  kumi::record r = { "x"_id = 1, "y"_id = 2.3, "z"_id = 4.5f, "t"_id = '@' };
 
   std::cout << r[0_c] << "\n";
   std::cout << r[1_c] << "\n";

@@ -39,37 +39,37 @@ TTS_CASE("Check result::zip<record...> behavior")
 
 TTS_CASE("Check record::zip behavior")
 {
-  auto numbers = kumi::record{"a"_n = 1, "b"_n = 2, "c"_n = 3, "d"_n = 4};
-  auto letters = kumi::record{"e"_n = 'a', "f"_n = 'b', "g"_n = 'c', "h"_n = 'd'};
-  auto ratio = kumi::record{"i"_n = 1.f, "j"_n = 0.5f, "k"_n = 0.25, "l"_n = 12.0};
+  auto numbers = kumi::record{"a"_id = 1, "b"_id = 2, "c"_id = 3, "d"_id = 4};
+  auto letters = kumi::record{"e"_id = 'a', "f"_id = 'b', "g"_id = 'c', "h"_id = 'd'};
+  auto ratio = kumi::record{"i"_id = 1.f, "j"_id = 0.5f, "k"_id = 0.25, "l"_id = 12.0};
 
   TTS_EQUAL((kumi::zip(kumi::record{}, kumi::record{})), kumi::tuple{});
 
   TTS_EQUAL((kumi::zip(numbers, letters)),
-            (kumi::tuple{kumi::record{"a"_n = 1, "e"_n = 'a'}, kumi::record{"b"_n = 2, "f"_n = 'b'},
-                         kumi::record{"c"_n = 3, "g"_n = 'c'}, kumi::record{"d"_n = 4, "h"_n = 'd'}}));
+            (kumi::tuple{kumi::record{"a"_id = 1, "e"_id = 'a'}, kumi::record{"b"_id = 2, "f"_id = 'b'},
+                         kumi::record{"c"_id = 3, "g"_id = 'c'}, kumi::record{"d"_id = 4, "h"_id = 'd'}}));
 
-  TTS_EQUAL((kumi::zip(numbers, letters, ratio)), (kumi::tuple{kumi::record{"a"_n = 1, "e"_n = 'a', "i"_n = 1.0f},
-                                                               kumi::record{"b"_n = 2, "f"_n = 'b', "j"_n = 0.5f},
-                                                               kumi::record{"c"_n = 3, "g"_n = 'c', "k"_n = 0.25},
-                                                               kumi::record{"d"_n = 4, "h"_n = 'd', "l"_n = 12.0}}));
+  TTS_EQUAL((kumi::zip(numbers, letters, ratio)), (kumi::tuple{kumi::record{"a"_id = 1, "e"_id = 'a', "i"_id = 1.0f},
+                                                               kumi::record{"b"_id = 2, "f"_id = 'b', "j"_id = 0.5f},
+                                                               kumi::record{"c"_id = 3, "g"_id = 'c', "k"_id = 0.25},
+                                                               kumi::record{"d"_id = 4, "h"_id = 'd', "l"_id = 12.0}}));
 };
 
 TTS_CASE("Check record::zip behavior")
 {
-  constexpr auto numbers = kumi::record{"a"_n = 1, "b"_n = 2, "c"_n = 3, "d"_n = 4};
-  constexpr auto letters = kumi::record{"e"_n = 'a', "f"_n = 'b', "g"_n = 'c', "h"_n = 'd'};
-  constexpr auto ratio = kumi::record{"i"_n = 1.f, "j"_n = 0.5f, "k"_n = 0.25, "l"_n = 12.0};
+  constexpr auto numbers = kumi::record{"a"_id = 1, "b"_id = 2, "c"_id = 3, "d"_id = 4};
+  constexpr auto letters = kumi::record{"e"_id = 'a', "f"_id = 'b', "g"_id = 'c', "h"_id = 'd'};
+  constexpr auto ratio = kumi::record{"i"_id = 1.f, "j"_id = 0.5f, "k"_id = 0.25, "l"_id = 12.0};
 
   TTS_CONSTEXPR_EQUAL((kumi::zip(kumi::record{}, kumi::record{})), kumi::tuple{});
 
   TTS_CONSTEXPR_EQUAL((kumi::zip(numbers, letters)),
-                      (kumi::tuple{kumi::record{"a"_n = 1, "e"_n = 'a'}, kumi::record{"b"_n = 2, "f"_n = 'b'},
-                                   kumi::record{"c"_n = 3, "g"_n = 'c'}, kumi::record{"d"_n = 4, "h"_n = 'd'}}));
+                      (kumi::tuple{kumi::record{"a"_id = 1, "e"_id = 'a'}, kumi::record{"b"_id = 2, "f"_id = 'b'},
+                                   kumi::record{"c"_id = 3, "g"_id = 'c'}, kumi::record{"d"_id = 4, "h"_id = 'd'}}));
 
-  TTS_CONSTEXPR_EQUAL(
-    (kumi::zip(numbers, letters, ratio)),
-    (kumi::tuple{kumi::record{"a"_n = 1, "e"_n = 'a', "i"_n = 1.0f}, kumi::record{"b"_n = 2, "f"_n = 'b', "j"_n = 0.5f},
-                 kumi::record{"c"_n = 3, "g"_n = 'c', "k"_n = 0.25},
-                 kumi::record{"d"_n = 4, "h"_n = 'd', "l"_n = 12.0}}));
+  TTS_CONSTEXPR_EQUAL((kumi::zip(numbers, letters, ratio)),
+                      (kumi::tuple{kumi::record{"a"_id = 1, "e"_id = 'a', "i"_id = 1.0f},
+                                   kumi::record{"b"_id = 2, "f"_id = 'b', "j"_id = 0.5f},
+                                   kumi::record{"c"_id = 3, "g"_id = 'c', "k"_id = 0.25},
+                                   kumi::record{"d"_id = 4, "h"_id = 'd', "l"_id = 12.0}}));
 };

@@ -43,11 +43,11 @@ TTS_CASE("Check field type coherence through field_name")
   int x = 1;
   int const y = 1;
 
-  auto a = "x"_n = x;
-  auto b = "x"_n = y;
-  auto c = "x"_n = std::ref(x);
-  auto d = "x"_n = std::cref(x);
-  auto e = "x"_n = std::move(x);
+  auto a = "x"_id = x;
+  auto b = "x"_id = y;
+  auto c = "x"_id = std::ref(x);
+  auto d = "x"_id = std::cref(x);
+  auto e = "x"_id = std::move(x);
 
   TTS_TYPE_IS((decltype(a.value)), int);
   TTS_TYPE_IS((decltype(b.value)), int);
@@ -80,14 +80,14 @@ TTS_CASE("Check kumi::tuple behavior with fields")
 
   using tpl = kumi::tuple<f, fc, fref, fcref, furef>;
 
-  auto t = kumi::tuple{"a"_n = x, "b"_n = y, "c"_n = std::ref(x), "d"_n = std::cref(y), "e"_n = z};
-  auto nl = kumi::tuple{"a"_n, "b"_n, "c"_n, "d"_n, "e"_n};
+  auto t = kumi::tuple{"a"_id = x, "b"_id = y, "c"_id = std::ref(x), "d"_id = std::cref(y), "e"_id = z};
+  auto nl = kumi::tuple{"a"_id, "b"_id, "c"_id, "d"_id, "e"_id};
 
-  auto pt = kumi::tuple{"a"_n = x, y, std::ref(x), "d"_n = std::cref(y), z};
-  auto ptnl = kumi::tuple{"a"_n, kumi::none, kumi::none, "d"_n, kumi::none};
+  auto pt = kumi::tuple{"a"_id = x, y, std::ref(x), "d"_id = std::cref(y), z};
+  auto ptnl = kumi::tuple{"a"_id, kumi::unknown{}, kumi::unknown{}, "d"_id, kumi::unknown{}};
 
-  constexpr auto dup = kumi::tuple{"a"_n = 3, "a"_n = 8};
-  constexpr auto uni = kumi::tuple{"a"_n = 3, "b"_n = 8};
+  constexpr auto dup = kumi::tuple{"a"_id = 3, "a"_id = 8};
+  constexpr auto uni = kumi::tuple{"a"_id = 3, "b"_id = 8};
 
   TTS_TYPE_IS(tpl, decltype(t));
   TTS_TYPE_IS(decltype(t.names()), decltype(nl));
@@ -96,6 +96,6 @@ TTS_CASE("Check kumi::tuple behavior with fields")
   TTS_EQUAL(t.names(), nl);
   TTS_EQUAL(pt.names(), ptnl);
 
-  TTS_EXPECT_NOT_COMPILES(dup, { get<"a"_n>(dup); });
-  TTS_EXPECT_COMPILES(uni, { get<"a"_n>(uni); });
+  TTS_EXPECT_NOT_COMPILES(dup, { get<"a"_id>(dup); });
+  TTS_EXPECT_COMPILES(uni, { get<"a"_id>(uni); });
 };

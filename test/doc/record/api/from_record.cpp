@@ -19,17 +19,17 @@ struct my_struct
 template<std::size_t I>
 decltype(auto) get(my_struct const & m) noexcept
 {
-  if constexpr (I==0) return kumi::capture_field<"i"_n>(m.i);
-  if constexpr (I==1) return kumi::capture_field<"f"_n>(m.f);
-  if constexpr (I==2) return kumi::capture_field<"name"_n>(m.name);
+  if constexpr (I==0) return kumi::capture_field<"i"_id>(m.i);
+  if constexpr (I==1) return kumi::capture_field<"f"_id>(m.f);
+  if constexpr (I==2) return kumi::capture_field<"name"_id>(m.name);
 }
 
 template<std::size_t I>
 decltype(auto) get(my_struct & m) noexcept
 {
-  if constexpr (I==0) return kumi::capture_field<"i"_n>(m.i);
-  if constexpr (I==1) return kumi::capture_field<"f"_n>(m.f);
-  if constexpr (I==2) return kumi::capture_field<"name"_n>(m.name);
+  if constexpr (I==0) return kumi::capture_field<"i"_id>(m.i);
+  if constexpr (I==1) return kumi::capture_field<"f"_id>(m.f);
+  if constexpr (I==2) return kumi::capture_field<"name"_id>(m.name);
 }
 
 // Opt-in for Record Type semantic
@@ -50,7 +50,7 @@ int main()
 {
   using namespace kumi::literals;
 
-  auto a = kumi::make_record("f"_n=2.3475f, "name"_n="John", "i"_n=1337);
+  auto a = kumi::make_record("f"_id=2.3475f, "name"_id="John", "i"_id=1337);
   auto b = from_record<my_struct>( a );
 
   std::cout << a << "\n";

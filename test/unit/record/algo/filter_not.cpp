@@ -43,19 +43,19 @@ TTS_CASE("Check filter_not() behavior with values")
   double b = 3.1415;
   float c = 0.01f;
 
-  auto original =
-    kumi::record{"a"_n = a, "b"_n = &a, "c"_n = b, "d"_n = &b, "e"_n = c, "f"_n = &c, "g"_n = 'z', "h"_n = nullptr};
+  auto original = kumi::record{"a"_id = a, "b"_id = &a, "c"_id = b,   "d"_id = &b,
+                               "e"_id = c, "f"_id = &c, "g"_id = 'z', "h"_id = nullptr};
 
   TTS_EQUAL(kumi::filter_not<std::is_pointer>(original),
-            (kumi::record{"a"_n = a, "c"_n = b, "e"_n = c, "g"_n = 'z', "h"_n = nullptr}));
+            (kumi::record{"a"_id = a, "c"_id = b, "e"_id = c, "g"_id = 'z', "h"_id = nullptr}));
 
   TTS_EQUAL(kumi::filter_not<std::is_floating_point>(original),
-            (kumi::record{"a"_n = a, "b"_n = &a, "d"_n = &b, "f"_n = &c, "g"_n = 'z', "h"_n = nullptr}));
+            (kumi::record{"a"_id = a, "b"_id = &a, "d"_id = &b, "f"_id = &c, "g"_id = 'z', "h"_id = nullptr}));
 
   TTS_EQUAL(kumi::filter_not<std::is_null_pointer>(original),
-            (kumi::record{"a"_n = a, "b"_n = &a, "c"_n = b, "d"_n = &b, "e"_n = c, "f"_n = &c, "g"_n = 'z'}));
+            (kumi::record{"a"_id = a, "b"_id = &a, "c"_id = b, "d"_id = &b, "e"_id = c, "f"_id = &c, "g"_id = 'z'}));
 
-  auto t = kumi::record{"a"_n = 1.f, "b"_n = 2, "c"_n = 'x', "d"_n = moveonly{}};
+  auto t = kumi::record{"a"_id = 1.f, "b"_id = 2, "c"_id = 'x', "d"_id = moveonly{}};
   TTS_EXPECT_COMPILES(t, { kumi::filter_not<is_not_moveonly_type>(std::move(t)); });
 };
 
@@ -67,5 +67,5 @@ TTS_CASE("Check filter_not() behavior with reference")
   auto original = kumi::record<kumi::field<kumi::name<"a">, int>, kumi::field<kumi::name<"b">, int&>,
                                kumi::field<kumi::name<"c">, double>, kumi::field<kumi::name<"d">, double&>>{a, a, b, b};
 
-  TTS_EQUAL(kumi::filter_not<std::is_lvalue_reference>(original), (kumi::record{"a"_n = a, "c"_n = b}));
+  TTS_EQUAL(kumi::filter_not<std::is_lvalue_reference>(original), (kumi::record{"a"_id = a, "c"_id = b}));
 };

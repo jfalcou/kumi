@@ -10,9 +10,9 @@ int main()
 {
   using namespace kumi::literals;
 
-  std::cout << kumi::push_front( kumi::record{}, "a"_n = 63.21)  << "\n";
+  std::cout << kumi::push_front( kumi::record{}, "a"_id = 63.21)  << "\n";
 
-  kumi::record t{"a"_n = 1,"b"_n = 2.,"c"_n = 3.4f};
+  kumi::record t{"a"_id = 1,"b"_id = 2.,"c"_id = 3.4f};
   std::cout << t                          << "\n";
-  std::cout << kumi::push_front(t, "d"_n = 'Z')   << "\n";
+  std::cout << kumi::push_front(t, "d"_id = 'Z')   << "\n";
 }

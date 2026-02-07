@@ -10,13 +10,13 @@ int main()
 {
   using namespace kumi::literals;
 
-  kumi::record r = { "x"_n = 1, "y"_n = 2.3, "z"_n = 4.5f, "t"_n = '@' };
+  kumi::record r = { "x"_id = 1, "y"_id = 2.3, "z"_id = 4.5f, "t"_id = '@' };
   std::cout << r << "\n";
-  std::cout << r["x"_n] << "\n";
-  std::cout << r["y"_n] << "\n";
-  std::cout << r["z"_n] << "\n";
+  std::cout << r["x"_id] << "\n";
+  std::cout << r["y"_id] << "\n";
+  std::cout << r["z"_id] << "\n";
 
-  r["t"_n]++;
+  r["t"_id]++;
 
-  std::cout << r["t"_n] << "\n";
+  std::cout << r["t"_id] << "\n";
 }

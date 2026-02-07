@@ -39,16 +39,17 @@ TTS_CASE("Check record::max/max_flat behavior")
 {
   using namespace kumi::literals;
 
-  auto t0 = kumi::record{"a"_n = 'e', "b"_n = 2, "c"_n = 7894.5, "d"_n = short{55}, "e"_n = 'z'};
+  auto t0 = kumi::record{"a"_id = 'e', "b"_id = 2, "c"_id = 7894.5, "d"_id = short{55}, "e"_id = 'z'};
   TTS_EQUAL(kumi::max(t0), 7894.5);
   TTS_EQUAL((kumi::max(t0, [](auto m) { return sizeof(m); })), sizeof(double));
 
-  auto f0 = kumi::record{"a"_n = 'e', "b"_n = 2., "c"_n = kumi::record{"d"_n = 1., "e"_n = short{55}, "f"_n = 'u'},
-                         "g"_n = 3.f, "h"_n = 'z'};
+  auto f0 =
+    kumi::record{"a"_id = 'e', "b"_id = 2., "c"_id = kumi::record{"d"_id = 1., "e"_id = short{55}, "f"_id = 'u'},
+                 "g"_id = 3.f, "h"_id = 'z'};
   TTS_EQUAL((kumi::max(f0, [](auto m) { return sizeof(m); })), 2 * sizeof(double));
   TTS_EQUAL((kumi::max_flat(f0, [](auto m) { return sizeof(m); })), sizeof(double));
 
-  auto t1 = kumi::record{"a"_n = 1.5, "b"_n = 3.6f, "c"_n = 8, "d"_n = -3.6, "e"_n = 2.4, "f"_n = 0};
+  auto t1 = kumi::record{"a"_id = 1.5, "b"_id = 3.6f, "c"_id = 8, "d"_id = -3.6, "e"_id = 2.4, "f"_id = 0};
   TTS_EQUAL((kumi::max(t1, [](auto m) { return (m - 5) < 0 ? (5 - m) : (m - 5); })), 8.6);
 };
 
@@ -56,16 +57,16 @@ TTS_CASE("Check record::max/max_flat constexpr behavior")
 {
   using namespace kumi::literals;
 
-  constexpr auto t0 = kumi::record{"a"_n = 'e', "b"_n = 2, "c"_n = 7894.5, "d"_n = short{55}, "e"_n = 'z'};
+  constexpr auto t0 = kumi::record{"a"_id = 'e', "b"_id = 2, "c"_id = 7894.5, "d"_id = short{55}, "e"_id = 'z'};
   TTS_CONSTEXPR_EQUAL(kumi::max(t0), 7894.5);
   TTS_CONSTEXPR_EQUAL((kumi::max(t0, [](auto m) { return sizeof(m); })), sizeof(double));
 
   constexpr auto f0 =
-    kumi::record{"a"_n = 'e', "b"_n = 2., "c"_n = kumi::record{"d"_n = 1., "e"_n = short{55}, "f"_n = 'u'}, "g"_n = 3.f,
-                 "h"_n = 'z'};
+    kumi::record{"a"_id = 'e', "b"_id = 2., "c"_id = kumi::record{"d"_id = 1., "e"_id = short{55}, "f"_id = 'u'},
+                 "g"_id = 3.f, "h"_id = 'z'};
   TTS_CONSTEXPR_EQUAL((kumi::max(f0, [](auto m) { return sizeof(m); })), 2 * sizeof(double));
   TTS_CONSTEXPR_EQUAL((kumi::max_flat(f0, [](auto m) { return sizeof(m); })), sizeof(double));
 
-  constexpr auto t1 = kumi::record{"a"_n = 1.5, "b"_n = 3.6f, "c"_n = 8, "d"_n = -3.6, "e"_n = 2.4, "f"_n = 0};
+  constexpr auto t1 = kumi::record{"a"_id = 1.5, "b"_id = 3.6f, "c"_id = 8, "d"_id = -3.6, "e"_id = 2.4, "f"_id = 0};
   TTS_CONSTEXPR_EQUAL((kumi::max(t1, [](auto m) { return (m - 5) < 0 ? (5 - m) : (m - 5); })), 8.6);
 };

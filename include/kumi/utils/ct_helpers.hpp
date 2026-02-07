@@ -60,21 +60,11 @@ namespace kumi
     //==============================================================================================
     //! @ingroup utility
     //! @brief Forms a constant string literal of the desired value.
-    //! @return An instance of kumi::field_name for the specified string
+    //! @return An instance of kumi::name for the specified string
     //==============================================================================================
-    template<kumi::str ID> constexpr auto operator""_n() noexcept
+    template<kumi::str ID> constexpr auto operator""_id() noexcept
     {
       return name<ID>{};
-    }
-
-    //==================================================================================================================
-    //! @ingroup utility
-    //! @brief Forms an instance of kumi::identifier from a literal string
-    //! @return An instance of kumi::any_identifier using the specified string as ID
-    //==================================================================================================================
-    template<str ID> constexpr auto operator""_id() noexcept
-    {
-      return identifier<name<ID>>{};
     }
   }
 

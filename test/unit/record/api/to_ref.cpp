@@ -20,7 +20,7 @@ TTS_CASE("Check tuple_element of kumi::to_ref result")
   std::reference_wrapper<float const> rf = f;
   std::reference_wrapper<double> rd = d;
 
-  auto made = kumi::make_record("a"_n = '1', "b"_n = 2., "c"_n = 3.f, "d"_n = rf, "e"_n = rd);
+  auto made = kumi::make_record("a"_id = '1', "b"_id = 2., "c"_id = 3.f, "d"_id = rf, "e"_id = rd);
   auto made_lref = kumi::to_ref(made);
   auto made_rref = kumi::to_ref(std::move(made));
   auto made_cref = kumi::to_ref(std::as_const(made));

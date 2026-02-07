@@ -30,6 +30,6 @@ namespace kumi::_
   {
     if constexpr (requires(std::ostream& os) { os << e; }) return e;
     else if constexpr (requires { as_streamable(e); }) return as_streamable(e);
-    else return "(unknown)";
+    else return kumi::unknown{};
   }
 }

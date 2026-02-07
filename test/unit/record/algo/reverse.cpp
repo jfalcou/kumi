@@ -24,8 +24,8 @@ TTS_CASE("Check reverse(record) behavior")
 {
   using namespace kumi::literals;
 
-  auto t = kumi::record{"a"_n = 1, "b"_n = 2., "c"_n = 3.4f, "d"_n = '5'};
-  TTS_EQUAL(kumi::reverse(t), (kumi::record{"d"_n = '5', "c"_n = 3.4f, "b"_n = 2., "a"_n = 1}));
+  auto t = kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.4f, "d"_id = '5'};
+  TTS_EQUAL(kumi::reverse(t), (kumi::record{"d"_id = '5', "c"_id = 3.4f, "b"_id = 2., "a"_id = 1}));
   TTS_EQUAL(kumi::reverse(kumi::record<>{}), (kumi::record{}));
 };
 
@@ -33,7 +33,7 @@ TTS_CASE("Check reverse(record) constexpr behavior")
 {
   using namespace kumi::literals;
 
-  constexpr auto t = kumi::record{"a"_n = 1, "b"_n = 2., "c"_n = 3.4f, "d"_n = '5'};
-  TTS_CONSTEXPR_EQUAL(kumi::reverse(t), (kumi::record{"d"_n = '5', "c"_n = 3.4f, "b"_n = 2., "a"_n = 1}));
+  constexpr auto t = kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.4f, "d"_id = '5'};
+  TTS_CONSTEXPR_EQUAL(kumi::reverse(t), (kumi::record{"d"_id = '5', "c"_id = 3.4f, "b"_id = 2., "a"_id = 1}));
   TTS_CONSTEXPR_EQUAL(kumi::reverse(kumi::record<>{}), (kumi::record{}));
 };

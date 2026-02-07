@@ -14,7 +14,7 @@ using namespace kumi::literals;
 
 TTS_CASE("Check record_element of kumi::record")
 {
-  auto aggregate = kumi::record{"x"_n = '1', "y"_n = 2., "z"_n = 3.f};
+  auto aggregate = kumi::record{"x"_id = '1', "y"_id = 2., "z"_id = 3.f};
   TTS_TYPE_IS((std::tuple_element_t<0, decltype(aggregate)>), (kumi::field<kumi::name<"x">, char>));
   TTS_TYPE_IS((std::tuple_element_t<1, decltype(aggregate)>), (kumi::field<kumi::name<"y">, double>));
   TTS_TYPE_IS((std::tuple_element_t<2, decltype(aggregate)>), (kumi::field<kumi::name<"z">, float>));
@@ -23,10 +23,10 @@ TTS_CASE("Check record_element of kumi::record")
 TTS_CASE("Check construction of kumi::record as an aggregate")
 {
   auto t0 = kumi::record{};
-  auto t1 = kumi::record{"x"_n = 1};
-  auto t2 = kumi::record{"x"_n = 1.f, "y"_n = 2};
-  auto t3 = kumi::record{"x"_n = 1., "y"_n = 2.f, "z"_n = 3};
-  auto t4 = kumi::record{"x"_n = '1', "y"_n = 2., "z"_n = 3.f, "t"_n = 4};
+  auto t1 = kumi::record{"x"_id = 1};
+  auto t2 = kumi::record{"x"_id = 1.f, "y"_id = 2};
+  auto t3 = kumi::record{"x"_id = 1., "y"_id = 2.f, "z"_id = 3};
+  auto t4 = kumi::record{"x"_id = '1', "y"_id = 2., "z"_id = 3.f, "t"_id = 4};
 
   TTS_CONSTEXPR_EXPECT((kumi::concepts::sized_product_type<decltype(t0), 0>));
   TTS_EQUAL(t0.size(), 0ULL);
@@ -57,10 +57,10 @@ TTS_CASE("Check construction of kumi::record as an aggregate")
 TTS_CASE("Check construction of kumi::record as a constexpr aggregate")
 {
   constexpr auto t0 = kumi::record{};
-  constexpr auto t1 = kumi::record{"x"_n = 1};
-  constexpr auto t2 = kumi::record{"x"_n = 1.f, "y"_n = 2};
-  constexpr auto t3 = kumi::record{"x"_n = 1., "y"_n = 2.f, "z"_n = 3};
-  constexpr auto t4 = kumi::record{"x"_n = '1', "y"_n = 2., "z"_n = 3.f, "t"_n = 4};
+  constexpr auto t1 = kumi::record{"x"_id = 1};
+  constexpr auto t2 = kumi::record{"x"_id = 1.f, "y"_id = 2};
+  constexpr auto t3 = kumi::record{"x"_id = 1., "y"_id = 2.f, "z"_id = 3};
+  constexpr auto t4 = kumi::record{"x"_id = '1', "y"_id = 2., "z"_id = 3.f, "t"_id = 4};
 
   TTS_CONSTEXPR_EXPECT((kumi::concepts::sized_product_type<decltype(t0), 0>));
   TTS_CONSTEXPR_EQUAL(t0.size(), 0ULL);

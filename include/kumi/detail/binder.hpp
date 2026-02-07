@@ -40,7 +40,7 @@ namespace kumi::_
 
   // Empty Base Optimization
   template<int N, typename T>
-  requires(std::is_empty_v<T> && (!_::field<T>))
+  requires(std::is_empty_v<T> && (!field<T>))
   struct leaf<N, T> : T
   {
     using index = std::integral_constant<std::size_t, N>;
@@ -63,7 +63,7 @@ namespace kumi::_
     KUMI_ABI constexpr T const& operator()(inner_type) const& noexcept { return *this; }
   };
 
-  template<int N, _::field T> struct leaf<N, T> : T
+  template<int N, field T> struct leaf<N, T> : T
   {
     using T::operator();
     using index = std::integral_constant<std::size_t, N>;

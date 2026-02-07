@@ -14,20 +14,20 @@ using namespace kumi::literals;
 
 TTS_CASE("Check runtime kumi::member_cast behavior on records")
 {
-  auto base = kumi::record{"a"_n = 1UL, "b"_n = short{44}, "c"_n = 12.5, "d"_n = 3.f};
-  TTS_EQUAL(kumi::member_cast<int>(base), (kumi::record{"a"_n = 1, "b"_n = 44, "c"_n = 12, "d"_n = 3}));
-  TTS_EQUAL(kumi::member_cast<float>(base), (kumi::record{"a"_n = 1.f, "b"_n = 44.f, "c"_n = 12.5f, "d"_n = 3.f}));
-  TTS_EQUAL(kumi::member_cast<float>(base), (kumi::record{"a"_n = 1.f, "b"_n = 44.f, "c"_n = 12.5f, "d"_n = 3.f}));
+  auto base = kumi::record{"a"_id = 1UL, "b"_id = short{44}, "c"_id = 12.5, "d"_id = 3.f};
+  TTS_EQUAL(kumi::member_cast<int>(base), (kumi::record{"a"_id = 1, "b"_id = 44, "c"_id = 12, "d"_id = 3}));
+  TTS_EQUAL(kumi::member_cast<float>(base), (kumi::record{"a"_id = 1.f, "b"_id = 44.f, "c"_id = 12.5f, "d"_id = 3.f}));
+  TTS_EQUAL(kumi::member_cast<float>(base), (kumi::record{"a"_id = 1.f, "b"_id = 44.f, "c"_id = 12.5f, "d"_id = 3.f}));
 };
 
 TTS_CASE("Check constexpr kumi::member_cast behavior on records")
 {
-  constexpr auto base = kumi::record{"a"_n = 1UL, "b"_n = short{44}, "c"_n = 12.5, "d"_n = 3.f};
-  TTS_CONSTEXPR_EQUAL(kumi::member_cast<int>(base), (kumi::record{"a"_n = 1, "b"_n = 44, "c"_n = 12, "d"_n = 3}));
+  constexpr auto base = kumi::record{"a"_id = 1UL, "b"_id = short{44}, "c"_id = 12.5, "d"_id = 3.f};
+  TTS_CONSTEXPR_EQUAL(kumi::member_cast<int>(base), (kumi::record{"a"_id = 1, "b"_id = 44, "c"_id = 12, "d"_id = 3}));
   TTS_CONSTEXPR_EQUAL(kumi::member_cast<float>(base),
-                      (kumi::record{"a"_n = 1.f, "b"_n = 44.f, "c"_n = 12.5f, "d"_n = 3.f}));
+                      (kumi::record{"a"_id = 1.f, "b"_id = 44.f, "c"_id = 12.5f, "d"_id = 3.f}));
   TTS_CONSTEXPR_EQUAL(kumi::member_cast<float>(base),
-                      (kumi::record{"a"_n = 1.f, "b"_n = 44.f, "c"_n = 12.5f, "d"_n = 3.f}));
+                      (kumi::record{"a"_id = 1.f, "b"_id = 44.f, "c"_id = 12.5f, "d"_id = 3.f}));
 };
 
 TTS_CASE("Check result::member_cast behavior on records")

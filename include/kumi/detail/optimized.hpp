@@ -66,33 +66,30 @@ namespace kumi::_
     using type = binder_n<T0, 2 + sizeof...(Ts)>;
   };
 
-  /*
-  template<std::size_t I, typename T0, int N> KUMI_ABI constexpr auto& get_leaf(binder_n<T0, N>& arg) noexcept
-  {
-    return arg.members[I];
+//================================================================================================
+// Optimized binder for 1->10 elements, none being reference
+//================================================================================================
+#define KUMI_OPERATORS(TEMPLATE_PARAM, ID, ...)                                                                        \
+  template<TEMPLATE_PARAM> constexpr auto& operator()(__VA_ARGS__)& noexcept                                           \
+  {                                                                                                                    \
+    return get_leaf<ID>(*this);                                                                                        \
+  }                                                                                                                    \
+                                                                                                                       \
+  template<TEMPLATE_PARAM> constexpr auto&& operator()(__VA_ARGS__)&& noexcept                                         \
+  {                                                                                                                    \
+    return get_leaf<ID>(static_cast<binder&&>(*this));                                                                 \
+  }                                                                                                                    \
+                                                                                                                       \
+  template<TEMPLATE_PARAM> constexpr auto const&& operator()(__VA_ARGS__) const&& noexcept                             \
+  {                                                                                                                    \
+    return get_leaf<ID>(static_cast<binder const&&>(*this));                                                           \
+  }                                                                                                                    \
+                                                                                                                       \
+  template<TEMPLATE_PARAM> constexpr auto const& operator()(__VA_ARGS__) const& noexcept                               \
+  {                                                                                                                    \
+    return get_leaf<ID>(*this);                                                                                        \
   }
 
-  template<std::size_t I, typename T0, int N>
-  KUMI_ABI constexpr auto const& get_leaf(binder_n<T0, N> const& arg) noexcept
-  {
-    return arg.members[I];
-  }
-
-  template<std::size_t I, typename T0, int N> KUMI_ABI constexpr auto&& get_leaf(binder_n<T0, N>&& arg) noexcept
-  {
-    return static_cast<T0&&>(arg.members[I]);
-  }
-
-  template<std::size_t I, typename T0, int N>
-  KUMI_ABI constexpr auto const&& get_leaf(binder_n<T0, N> const&& arg) noexcept
-  {
-    return static_cast<T0 const&&>(arg.members[I]);
-  }
-  */
-
-  //================================================================================================
-  // Optimized binder for 1->10 elements, none being reference
-  //================================================================================================
   template<typename T>
   requires(no_references<T> && no_empty<T>)
   struct binder<std::integer_sequence<int, 0>, T>
@@ -101,6 +98,10 @@ namespace kumi::_
     using kumi_specific_layout = void;
     using member0_type = T;
     member0_type member0;
+
+    KUMI_OPERATORS(std::size_t I, I, std::integral_constant<std::size_t, I>)
+    KUMI_OPERATORS(typename U, U, std::type_identity<U>)
+    KUMI_OPERATORS(identifier ID, ID, ID)
   };
 
   template<typename T0, typename T1>
@@ -113,6 +114,10 @@ namespace kumi::_
     using member1_type = T1;
     member0_type member0;
     member1_type member1;
+
+    KUMI_OPERATORS(std::size_t I, I, std::integral_constant<std::size_t, I>)
+    KUMI_OPERATORS(typename U, U, std::type_identity<U>)
+    KUMI_OPERATORS(identifier ID, ID, ID)
   };
 
   template<typename T0, typename T1, typename T2>
@@ -127,6 +132,10 @@ namespace kumi::_
     member0_type member0;
     member1_type member1;
     member2_type member2;
+
+    KUMI_OPERATORS(std::size_t I, I, std::integral_constant<std::size_t, I>)
+    KUMI_OPERATORS(typename U, U, std::type_identity<U>)
+    KUMI_OPERATORS(identifier ID, ID, ID)
   };
 
   template<typename T0, typename T1, typename T2, typename T3>
@@ -143,6 +152,10 @@ namespace kumi::_
     member1_type member1;
     member2_type member2;
     member3_type member3;
+
+    KUMI_OPERATORS(std::size_t I, I, std::integral_constant<std::size_t, I>)
+    KUMI_OPERATORS(typename U, U, std::type_identity<U>)
+    KUMI_OPERATORS(identifier ID, ID, ID)
   };
 
   template<typename T0, typename T1, typename T2, typename T3, typename T4>
@@ -161,6 +174,10 @@ namespace kumi::_
     member2_type member2;
     member3_type member3;
     member4_type member4;
+
+    KUMI_OPERATORS(std::size_t I, I, std::integral_constant<std::size_t, I>)
+    KUMI_OPERATORS(typename U, U, std::type_identity<U>)
+    KUMI_OPERATORS(identifier ID, ID, ID)
   };
 
   template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5>
@@ -181,6 +198,10 @@ namespace kumi::_
     member3_type member3;
     member4_type member4;
     member5_type member5;
+
+    KUMI_OPERATORS(std::size_t I, I, std::integral_constant<std::size_t, I>)
+    KUMI_OPERATORS(typename U, U, std::type_identity<U>)
+    KUMI_OPERATORS(identifier ID, ID, ID)
   };
 
   template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
@@ -203,6 +224,10 @@ namespace kumi::_
     member4_type member4;
     member5_type member5;
     member6_type member6;
+
+    KUMI_OPERATORS(std::size_t I, I, std::integral_constant<std::size_t, I>)
+    KUMI_OPERATORS(typename U, U, std::type_identity<U>)
+    KUMI_OPERATORS(identifier ID, ID, ID)
   };
 
   template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
@@ -227,6 +252,10 @@ namespace kumi::_
     member5_type member5;
     member6_type member6;
     member7_type member7;
+
+    KUMI_OPERATORS(std::size_t I, I, std::integral_constant<std::size_t, I>)
+    KUMI_OPERATORS(typename U, U, std::type_identity<U>)
+    KUMI_OPERATORS(identifier ID, ID, ID)
   };
 
   template<typename T0,
@@ -261,6 +290,10 @@ namespace kumi::_
     member6_type member6;
     member7_type member7;
     member8_type member8;
+
+    KUMI_OPERATORS(std::size_t I, I, std::integral_constant<std::size_t, I>)
+    KUMI_OPERATORS(typename U, U, std::type_identity<U>)
+    KUMI_OPERATORS(identifier ID, ID, ID)
   };
 
   template<typename T0,
@@ -298,6 +331,10 @@ namespace kumi::_
     member7_type member7;
     member8_type member8;
     member9_type member9;
+
+    KUMI_OPERATORS(std::size_t I, I, std::integral_constant<std::size_t, I>)
+    KUMI_OPERATORS(typename U, U, std::type_identity<U>)
+    KUMI_OPERATORS(identifier ID, ID, ID)
   };
 
   //================================================================================================
@@ -371,7 +408,7 @@ namespace kumi::_
   // Optimized get_leaf<type> for all binders of 1->10 elements
   //================================================================================================
   template<typename T, typename ISeq, typename... Ts>
-  requires(sizeof...(Ts) <= 10) && can_get_field_by_type<T, Ts...> &&
+  requires(sizeof...(Ts) <= 10) && (!identifier<T>) && can_get_field_by_type<T, Ts...> &&
           requires(binder<ISeq, Ts...>) { typename binder<ISeq, Ts...>::kumi_specific_layout; }
   KUMI_ABI constexpr auto& get_leaf(binder<ISeq, Ts...>& arg) noexcept
   {
@@ -380,7 +417,7 @@ namespace kumi::_
   }
 
   template<typename T, typename ISeq, typename... Ts>
-  requires(sizeof...(Ts) <= 10) && can_get_field_by_type<T, Ts...> &&
+  requires(sizeof...(Ts) <= 10) && (!identifier<T>) && can_get_field_by_type<T, Ts...> &&
           requires(binder<ISeq, Ts...>) { typename binder<ISeq, Ts...>::kumi_specific_layout; }
   KUMI_ABI constexpr auto&& get_leaf(binder<ISeq, Ts...>&& arg) noexcept
   {
@@ -389,7 +426,7 @@ namespace kumi::_
   }
 
   template<typename T, typename ISeq, typename... Ts>
-  requires(sizeof...(Ts) <= 10) && can_get_field_by_type<T, Ts...> &&
+  requires(sizeof...(Ts) <= 10) && (!identifier<T>) && can_get_field_by_type<T, Ts...> &&
           requires(binder<ISeq, Ts...>) { typename binder<ISeq, Ts...>::kumi_specific_layout; }
   KUMI_ABI constexpr auto const&& get_leaf(binder<ISeq, Ts...> const&& arg) noexcept
   {
@@ -398,7 +435,7 @@ namespace kumi::_
   }
 
   template<typename T, typename ISeq, typename... Ts>
-  requires(sizeof...(Ts) <= 10) && can_get_field_by_type<T, Ts...> &&
+  requires(sizeof...(Ts) <= 10) && (!identifier<T>) && can_get_field_by_type<T, Ts...> &&
           requires(binder<ISeq, Ts...>) { typename binder<ISeq, Ts...>::kumi_specific_layout; }
   KUMI_ABI constexpr auto const& get_leaf(binder<ISeq, Ts...> const& arg) noexcept
   {
@@ -409,8 +446,8 @@ namespace kumi::_
   //================================================================================================
   // Optimized get_leaf<name> for all binders of 1->10 elements
   //================================================================================================
-  template<kumi::str Name, typename ISeq, typename... Ts>
-  requires(sizeof...(Ts) <= 10) && (contains_field<Name, Ts...>()) &&
+  template<identifier Name, typename ISeq, typename... Ts>
+  requires(sizeof...(Ts) <= 10) && (can_get_field_by_value<Name, Ts...>) &&
           requires(binder<ISeq, Ts...>) { typename binder<ISeq, Ts...>::kumi_specific_layout; }
   KUMI_ABI constexpr auto& get_leaf(binder<ISeq, Ts...>& arg) noexcept
   {
@@ -427,8 +464,8 @@ namespace kumi::_
     if constexpr (idx == 9) return arg.member9.value;
   }
 
-  template<kumi::str Name, typename ISeq, typename... Ts>
-  requires(sizeof...(Ts) <= 10) && (contains_field<Name, Ts...>()) &&
+  template<identifier Name, typename ISeq, typename... Ts>
+  requires(sizeof...(Ts) <= 10) && (can_get_field_by_value<Name, Ts...>) &&
           requires(binder<ISeq, Ts...>) { typename binder<ISeq, Ts...>::kumi_specific_layout; }
   KUMI_ABI constexpr auto&& get_leaf(binder<ISeq, Ts...>&& arg) noexcept
   {
@@ -445,8 +482,8 @@ namespace kumi::_
     if constexpr (idx == 9) return static_cast<typename binder<ISeq, Ts...>::member9_type::type&&>(arg.member9.value);
   }
 
-  template<kumi::str Name, typename ISeq, typename... Ts>
-  requires(sizeof...(Ts) <= 10) && (contains_field<Name, Ts...>()) &&
+  template<identifier Name, typename ISeq, typename... Ts>
+  requires(sizeof...(Ts) <= 10) && (can_get_field_by_value<Name, Ts...>) &&
           requires(binder<ISeq, Ts...>) { typename binder<ISeq, Ts...>::kumi_specific_layout; }
   KUMI_ABI constexpr auto const&& get_leaf(binder<ISeq, Ts...> const&& arg) noexcept
   {
@@ -473,8 +510,8 @@ namespace kumi::_
       return static_cast<typename binder<ISeq, Ts...>::member9_type::type const&&>(arg.member9.value);
   }
 
-  template<kumi::str Name, typename ISeq, typename... Ts>
-  requires(sizeof...(Ts) <= 10) && (contains_field<Name, Ts...>()) &&
+  template<identifier Name, typename ISeq, typename... Ts>
+  requires(sizeof...(Ts) <= 10) && (can_get_field_by_value<Name, Ts...>) &&
           requires(binder<ISeq, Ts...>) { typename binder<ISeq, Ts...>::kumi_specific_layout; }
   KUMI_ABI constexpr auto const& get_leaf(binder<ISeq, Ts...> const& arg) noexcept
   {

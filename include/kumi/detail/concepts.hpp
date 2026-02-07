@@ -19,20 +19,6 @@ namespace kumi::_
 
   using invalid = std::integral_constant<std::size_t, static_cast<std::size_t>(-1)>;
 
-  //====================================================================================================================
-  //! @ingroup utility
-  //! @brief Type indicating a identifier was not found in a given kumi::product_type
-  //====================================================================================================================
-  struct unknown_identifier
-  {
-    template<typename CharT, typename Traits>
-    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os,
-                                                         unknown_identifier const&) noexcept
-    {
-      return os << "kumi::unkown_name";
-    }
-  };
-
   template<typename From, typename To>
   concept ordered = requires(From const& a, To const& b) {
     { a < b };
@@ -46,6 +32,12 @@ namespace kumi::_
 
   template<typename T, typename... Args>
   concept implicit_constructible = requires(Args... args) { T{args...}; };
+
+  template<typename T>
+  concept identifier = requires(T const& t) {
+    typename std::remove_cvref_t<T>::tag_type;
+    { t.to_str() };
+  };
 
   template<typename O>
   concept field = requires(O const& o) {

@@ -36,30 +36,30 @@ TTS_CASE("Check result::transpose<record> behavior")
 
 TTS_CASE("Check record::transpose behavior")
 {
-  auto numbers = kumi::record{"a"_n = 1, "b"_n = 2, "c"_n = 3, "d"_n = 4};
-  auto letters = kumi::record{"e"_n = 'a', "f"_n = 'b', "g"_n = 'c', "h"_n = 'd'};
-  auto ratio = kumi::record{"i"_n = 1.f, "j"_n = 0.1f, "k"_n = 0.01f, "l"_n = 0.001f};
+  auto numbers = kumi::record{"a"_id = 1, "b"_id = 2, "c"_id = 3, "d"_id = 4};
+  auto letters = kumi::record{"e"_id = 'a', "f"_id = 'b', "g"_id = 'c', "h"_id = 'd'};
+  auto ratio = kumi::record{"i"_id = 1.f, "j"_id = 0.1f, "k"_id = 0.01f, "l"_id = 0.001f};
 
   TTS_EQUAL(kumi::transpose(kumi::record{}), kumi::tuple{});
 
-  TTS_EQUAL(
-    (kumi::transpose(kumi::record{"n"_n = numbers, "l"_n = letters, "r"_n = ratio})),
-    (kumi::tuple{kumi::record{"a"_n = 1, "e"_n = 'a', "i"_n = 1.f}, kumi::record{"b"_n = 2, "f"_n = 'b', "j"_n = 0.1f},
-                 kumi::record{"c"_n = 3, "g"_n = 'c', "k"_n = 0.01f},
-                 kumi::record{"d"_n = 4, "h"_n = 'd', "l"_n = 0.001f}}));
+  TTS_EQUAL((kumi::transpose(kumi::record{"n"_id = numbers, "l"_id = letters, "r"_id = ratio})),
+            (kumi::tuple{kumi::record{"a"_id = 1, "e"_id = 'a', "i"_id = 1.f},
+                         kumi::record{"b"_id = 2, "f"_id = 'b', "j"_id = 0.1f},
+                         kumi::record{"c"_id = 3, "g"_id = 'c', "k"_id = 0.01f},
+                         kumi::record{"d"_id = 4, "h"_id = 'd', "l"_id = 0.001f}}));
 };
 
 TTS_CASE("Check record::transpose behavior")
 {
-  constexpr auto numbers = kumi::record{"a"_n = 1, "b"_n = 2, "c"_n = 3, "d"_n = 4};
-  constexpr auto letters = kumi::record{"e"_n = 'a', "f"_n = 'b', "g"_n = 'c', "h"_n = 'd'};
-  constexpr auto ratio = kumi::record{"i"_n = 1.f, "j"_n = 0.1f, "k"_n = 0.01f, "l"_n = 0.001f};
+  constexpr auto numbers = kumi::record{"a"_id = 1, "b"_id = 2, "c"_id = 3, "d"_id = 4};
+  constexpr auto letters = kumi::record{"e"_id = 'a', "f"_id = 'b', "g"_id = 'c', "h"_id = 'd'};
+  constexpr auto ratio = kumi::record{"i"_id = 1.f, "j"_id = 0.1f, "k"_id = 0.01f, "l"_id = 0.001f};
 
   TTS_CONSTEXPR_EQUAL(kumi::transpose(kumi::record{}), kumi::tuple{});
 
-  TTS_CONSTEXPR_EQUAL(
-    (kumi::transpose(kumi::record{"n"_n = numbers, "l"_n = letters, "r"_n = ratio})),
-    (kumi::tuple{kumi::record{"a"_n = 1, "e"_n = 'a', "i"_n = 1.f}, kumi::record{"b"_n = 2, "f"_n = 'b', "j"_n = 0.1f},
-                 kumi::record{"c"_n = 3, "g"_n = 'c', "k"_n = 0.01f},
-                 kumi::record{"d"_n = 4, "h"_n = 'd', "l"_n = 0.001f}}));
+  TTS_CONSTEXPR_EQUAL((kumi::transpose(kumi::record{"n"_id = numbers, "l"_id = letters, "r"_id = ratio})),
+                      (kumi::tuple{kumi::record{"a"_id = 1, "e"_id = 'a', "i"_id = 1.f},
+                                   kumi::record{"b"_id = 2, "f"_id = 'b', "j"_id = 0.1f},
+                                   kumi::record{"c"_id = 3, "g"_id = 'c', "k"_id = 0.01f},
+                                   kumi::record{"d"_id = 4, "h"_id = 'd', "l"_id = 0.001f}}));
 };

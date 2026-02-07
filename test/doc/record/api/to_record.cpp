@@ -18,17 +18,17 @@ struct pixel
 template<std::size_t I>
 decltype(auto) get(pixel const& p) noexcept
 {
-  if constexpr(I==0) return kumi::capture_field<"r"_n>(p.r);
-  if constexpr(I==1) return kumi::capture_field<"g"_n>(p.g);
-  if constexpr(I==2) return kumi::capture_field<"b"_n>(p.b);
+  if constexpr(I==0) return kumi::capture_field<"r"_id>(p.r);
+  if constexpr(I==1) return kumi::capture_field<"g"_id>(p.g);
+  if constexpr(I==2) return kumi::capture_field<"b"_id>(p.b);
 }
 
 template<std::size_t I>
 decltype(auto) get(pixel& p) noexcept
 {
-  if constexpr(I==0) return kumi::capture_field<"r"_n>(p.r);
-  if constexpr(I==1) return kumi::capture_field<"g"_n>(p.g);
-  if constexpr(I==2) return kumi::capture_field<"b"_n>(p.b);
+  if constexpr(I==0) return kumi::capture_field<"r"_id>(p.r);
+  if constexpr(I==1) return kumi::capture_field<"g"_id>(p.g);
+  if constexpr(I==2) return kumi::capture_field<"b"_id>(p.b);
 }
 
 // Opt-in for Record Type semantic

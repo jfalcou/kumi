@@ -10,9 +10,9 @@ int main()
 {
   using namespace kumi::literals;
 
-  auto status = kumi::record{"a"_n = true, "b"_n = false};
-  auto id     = kumi::record{"aa"_n = 'a', "bb"_n = 'b', "cc"_n = 'c'};
-  auto value  = kumi::record{"aaa"_n = 1.0,"bbb"_n = 2.1, "ccc"_n = 4.2, "d"_n = 8.4};
+  auto status = kumi::record{"a"_id = true, "b"_id = false};
+  auto id     = kumi::record{"aa"_id = 'a', "bb"_id = 'b', "cc"_id = 'c'};
+  auto value  = kumi::record{"aaa"_id = 1.0,"bbb"_id = 2.1, "ccc"_id = 4.2, "d"_id = 8.4};
 
   auto r = kumi::cartesian_product( status, id, value );
 

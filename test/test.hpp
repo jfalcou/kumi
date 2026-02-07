@@ -21,13 +21,13 @@ template<typename T> struct small_type : std::bool_constant<(sizeof(T) < 4)>
 {
 };
 
-inline constexpr auto custom_ = ::kumi::identifier("custom"_n);
+inline constexpr auto custom_ = ::kumi::identifier("custom"_id);
 inline constexpr auto coord_ = "coord"_id;
 
-inline constexpr auto value_ = ::kumi::identifier("value_"_n, kumi::only<float>);
-inline constexpr auto name_ = ::kumi::identifier("name_"_n, kumi::only<std::string>);
+inline constexpr auto value_ = ::kumi::identifier("value_"_id, kumi::only<float>);
+inline constexpr auto name_ = ::kumi::identifier("name_"_id, kumi::only<std::string>);
 
-inline constexpr auto factor_ = ::kumi::identifier("factor"_n, kumi::if_<small_type>);
+inline constexpr auto factor_ = ::kumi::identifier("factor"_id, kumi::if_<small_type>);
 
 inline constexpr auto is_transparent_ = "is_transparent_"_id = std::bool_constant<true>{};
 inline constexpr auto is_modal_ = "is_modal_"_id = std::bool_constant<true>{};
@@ -181,18 +181,18 @@ struct record_box
   friend constexpr decltype(auto) get(record_box const& s) noexcept
   requires(I < 3)
   {
-    if constexpr (I == 0) return kumi::capture_field<"i"_n>(s.i);
-    if constexpr (I == 1) return kumi::capture_field<"f"_n>(s.f);
-    if constexpr (I == 2) return kumi::capture_field<"c"_n>(s.c);
+    if constexpr (I == 0) return kumi::capture_field<"i"_id>(s.i);
+    if constexpr (I == 1) return kumi::capture_field<"f"_id>(s.f);
+    if constexpr (I == 2) return kumi::capture_field<"c"_id>(s.c);
   }
 
   template<std::size_t I>
   friend constexpr decltype(auto) get(record_box& s) noexcept
   requires(I < 3)
   {
-    if constexpr (I == 0) return kumi::capture_field<"i"_n>(s.i);
-    if constexpr (I == 1) return kumi::capture_field<"f"_n>(s.f);
-    if constexpr (I == 2) return kumi::capture_field<"c"_n>(s.c);
+    if constexpr (I == 0) return kumi::capture_field<"i"_id>(s.i);
+    if constexpr (I == 1) return kumi::capture_field<"f"_id>(s.f);
+    if constexpr (I == 2) return kumi::capture_field<"c"_id>(s.c);
   }
 };
 
@@ -284,27 +284,27 @@ template<kumi::concepts::product_type T> operations copy_assign_fwd(T&& t)
 
 template<kumi::concepts::record_type R> operations move_ctor_fwd(R&& r)
 {
-  ctor_tracker local = std::forward<R>(r)["a"_n];
+  ctor_tracker local = std::forward<R>(r)["a"_id];
   return local.value;
 }
 
 template<kumi::concepts::record_type R> operations copy_ctor_fwd(R&& r)
 {
-  ctor_tracker local = r["b"_n];
+  ctor_tracker local = r["b"_id];
   return local.value;
 }
 
 template<kumi::concepts::record_type R> operations move_assign_fwd(R&& r)
 {
   ctor_tracker local;
-  local = std::forward<R>(r)["c"_n];
+  local = std::forward<R>(r)["c"_id];
   return local.value;
 }
 
 template<kumi::concepts::record_type R> operations copy_assign_fwd(R&& r)
 {
   ctor_tracker local;
-  local = r["d"_n];
+  local = r["d"_id];
   return local.value;
 }
 

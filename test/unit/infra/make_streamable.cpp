@@ -53,7 +53,7 @@ TTS_CASE("Check make_streamable behavior with tuple")
   std::ostringstream s;
   s << t;
 
-  TTS_EQUAL(s.str(), "( t rofl 7.90 Marty Macfly (unknown) )");
+  TTS_EQUAL(s.str(), "( t rofl 7.90 Marty Macfly kumi::unknown )");
 };
 
 TTS_CASE("Check make_streamable behavior with record")
@@ -63,10 +63,10 @@ TTS_CASE("Check make_streamable behavior with record")
   ns::person marty{"Marty", "Macfly"};
   ns::unprintable a{1, 'x', 12};
 
-  kumi::record r = {"a"_n = 't', "b"_n = "rofl", "c"_n = cards, "d"_n = marty, "e"_n = a};
+  kumi::record r = {"a"_id = 't', "b"_id = "rofl", "c"_id = cards, "d"_id = marty, "e"_id = a};
 
   std::ostringstream s;
   s << r;
 
-  TTS_EQUAL(s.str(), "( 'a' : t 'b' : rofl 'c' : 7.90 'd' : Marty Macfly 'e' : (unknown) )");
+  TTS_EQUAL(s.str(), "( 'a' : t 'b' : rofl 'c' : 7.90 'd' : Marty Macfly 'e' : kumi::unknown )");
 };

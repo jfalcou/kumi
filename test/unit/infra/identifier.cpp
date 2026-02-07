@@ -34,10 +34,10 @@ TTS_CASE("Check kumi::concepts::identifier concept")
   TTS_EXPECT(kumi::concepts::identifier<decltype(coord_)>);
 
   // Type from polymorphic constructor
-  TTS_EXPECT(kumi::concepts::identifier<decltype(kumi::identifier("any"_n))>);
-  TTS_EXPECT(kumi::concepts::identifier<decltype(kumi::identifier("small"_n, kumi::if_<small_type>))>);
-  TTS_EXPECT(kumi::concepts::identifier<decltype(kumi::identifier("real_value"_n, kumi::only<float>))>);
-  TTS_EXPECT(kumi::concepts::identifier<decltype(kumi::identifier("modal"_n))>);
+  TTS_EXPECT(kumi::concepts::identifier<decltype(kumi::identifier("any"_id))>);
+  TTS_EXPECT(kumi::concepts::identifier<decltype(kumi::identifier("small"_id, kumi::if_<small_type>))>);
+  TTS_EXPECT(kumi::concepts::identifier<decltype(kumi::identifier("real_value"_id, kumi::only<float>))>);
+  TTS_EXPECT(kumi::concepts::identifier<decltype(kumi::identifier("modal"_id))>);
 
   // Type from literals
   TTS_EXPECT(kumi::concepts::identifier<decltype("any"_id)>);

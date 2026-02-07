@@ -46,8 +46,8 @@ TTS_CASE("Check result::reduce_t with prod/sum/bit_* behavior")
 
 TTS_CASE("Check kumi::reduce with kumi::plus behavior")
 {
-  constexpr auto t = kumi::record{"a"_n = 2., "b"_n = 1, "c"_n = short{55}, "d"_n = 'z'};
-  auto t2 = kumi::record{"a"_n = 2., "b"_n = 1, "c"_n = short{55}, "d"_n = 'z'};
+  constexpr auto t = kumi::record{"a"_id = 2., "b"_id = 1, "c"_id = short{55}, "d"_id = 'z'};
+  auto t2 = kumi::record{"a"_id = 2., "b"_id = 1, "c"_id = short{55}, "d"_id = 'z'};
 
   TTS_EQUAL(kumi::reduce(kumi::function::plus, t2), 180);
   TTS_EQUAL(kumi::reduce(kumi::function::plus, std::move(t2)), 180);
@@ -56,8 +56,8 @@ TTS_CASE("Check kumi::reduce with kumi::plus behavior")
 
 TTS_CASE("Check kumi::reduce with kumi::multiplies behavior")
 {
-  constexpr auto t = kumi::record{"a"_n = 2., "b"_n = 3, "c"_n = short{5}, "d"_n = '\a'};
-  auto t2 = kumi::record{"a"_n = 2., "b"_n = 3, "c"_n = short{5}, "d"_n = '\a'};
+  constexpr auto t = kumi::record{"a"_id = 2., "b"_id = 3, "c"_id = short{5}, "d"_id = '\a'};
+  auto t2 = kumi::record{"a"_id = 2., "b"_id = 3, "c"_id = short{5}, "d"_id = '\a'};
 
   TTS_EQUAL(kumi::reduce(kumi::function::multiplies, t2), 210);
   TTS_EQUAL(kumi::reduce(kumi::function::multiplies, std::move(t)), 210);
@@ -66,8 +66,8 @@ TTS_CASE("Check kumi::reduce with kumi::multiplies behavior")
 
 TTS_CASE("Check kumi::reduce with kumi::bit_and behavior")
 {
-  constexpr auto t = kumi::record{"a"_n = 14UL, "b"_n = char{7}, "c"_n = short{6}};
-  auto t2 = kumi::record{"a"_n = 14UL, "b"_n = char{7}, "c"_n = short{6}};
+  constexpr auto t = kumi::record{"a"_id = 14UL, "b"_id = char{7}, "c"_id = short{6}};
+  auto t2 = kumi::record{"a"_id = 14UL, "b"_id = char{7}, "c"_id = short{6}};
 
   TTS_EQUAL(kumi::reduce(kumi::function::bit_and, t2), 6UL);
   TTS_EQUAL(kumi::reduce(kumi::function::bit_and, std::move(t2)), 6UL);
@@ -76,8 +76,8 @@ TTS_CASE("Check kumi::reduce with kumi::bit_and behavior")
 
 TTS_CASE("Check kumi::reduce with kumi::bit_or behavior")
 {
-  constexpr auto t = kumi::record{"a"_n = 2UL, "b"_n = 3, "c"_n = short{5}, "d"_n = char{64}};
-  auto t2 = kumi::record{"a"_n = 2UL, "b"_n = 3, "c"_n = short{5}, "d"_n = char{64}};
+  constexpr auto t = kumi::record{"a"_id = 2UL, "b"_id = 3, "c"_id = short{5}, "d"_id = char{64}};
+  auto t2 = kumi::record{"a"_id = 2UL, "b"_id = 3, "c"_id = short{5}, "d"_id = char{64}};
 
   TTS_EQUAL(kumi::reduce(kumi::function::bit_or, t2), 71UL);
   TTS_EQUAL(kumi::reduce(kumi::function::bit_or, std::move(t2)), 71UL);

@@ -9,7 +9,7 @@
 
 using namespace kumi::literals;
 
-inline constexpr auto name = kumi::identifier("name"_n);
+inline constexpr auto name = kumi::identifier("name"_id);
 
 int main()
 {

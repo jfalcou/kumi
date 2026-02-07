@@ -34,7 +34,7 @@ TTS_CASE("Check rotate_left<I...>(record) behavior")
 {
   using namespace kumi::literals;
 
-  auto t = kumi::record{"a"_n = 1, "b"_n = 2., "c"_n = 3.4f, "d"_n = '5'};
+  auto t = kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.4f, "d"_id = '5'};
 
   {
     auto s = kumi::rotate_left<0>(t);
@@ -42,17 +42,17 @@ TTS_CASE("Check rotate_left<I...>(record) behavior")
   }
   {
     auto s = kumi::rotate_left<1>(t);
-    TTS_EQUAL(s, (kumi::record{"b"_n = 2., "c"_n = 3.4f, "d"_n = '5', "a"_n = 1}));
+    TTS_EQUAL(s, (kumi::record{"b"_id = 2., "c"_id = 3.4f, "d"_id = '5', "a"_id = 1}));
   }
 
   {
     auto s = kumi::rotate_left<2>(t);
-    TTS_EQUAL(s, (kumi::record{"c"_n = 3.4f, "d"_n = '5', "a"_n = 1, "b"_n = 2.}));
+    TTS_EQUAL(s, (kumi::record{"c"_id = 3.4f, "d"_id = '5', "a"_id = 1, "b"_id = 2.}));
   }
 
   {
     auto s = kumi::rotate_left<3>(t);
-    TTS_EQUAL(s, (kumi::record{"d"_n = '5', "a"_n = 1, "b"_n = 2., "c"_n = 3.4f}));
+    TTS_EQUAL(s, (kumi::record{"d"_id = '5', "a"_id = 1, "b"_id = 2., "c"_id = 3.4f}));
   }
 
   {
@@ -65,7 +65,7 @@ TTS_CASE("Check rotate_left<I...>(record) behavior")
 {
   using namespace kumi::literals;
 
-  constexpr auto t = kumi::record{"a"_n = 1, "b"_n = 2., "c"_n = 3.4f, "d"_n = '5'};
+  constexpr auto t = kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.4f, "d"_id = '5'};
 
   {
     constexpr auto s = kumi::rotate_left<0>(t);
@@ -73,17 +73,17 @@ TTS_CASE("Check rotate_left<I...>(record) behavior")
   }
   {
     constexpr auto s = kumi::rotate_left<1>(t);
-    TTS_CONSTEXPR_EQUAL(s, (kumi::record{"b"_n = 2., "c"_n = 3.4f, "d"_n = '5', "a"_n = 1}));
+    TTS_CONSTEXPR_EQUAL(s, (kumi::record{"b"_id = 2., "c"_id = 3.4f, "d"_id = '5', "a"_id = 1}));
   }
 
   {
     constexpr auto s = kumi::rotate_left<2>(t);
-    TTS_CONSTEXPR_EQUAL(s, (kumi::record{"c"_n = 3.4f, "d"_n = '5', "a"_n = 1, "b"_n = 2.}));
+    TTS_CONSTEXPR_EQUAL(s, (kumi::record{"c"_id = 3.4f, "d"_id = '5', "a"_id = 1, "b"_id = 2.}));
   }
 
   {
     constexpr auto s = kumi::rotate_left<3>(t);
-    TTS_CONSTEXPR_EQUAL(s, (kumi::record{"d"_n = '5', "a"_n = 1, "b"_n = 2., "c"_n = 3.4f}));
+    TTS_CONSTEXPR_EQUAL(s, (kumi::record{"d"_id = '5', "a"_id = 1, "b"_id = 2., "c"_id = 3.4f}));
   }
 
   {

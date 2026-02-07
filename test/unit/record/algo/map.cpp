@@ -54,7 +54,7 @@ TTS_CASE("Check map(f, record) behavior")
   using namespace kumi::literals;
 
   {
-    auto t = kumi::record{"a"_n = 1, "b"_n = 2., "c"_n = 3.4f, "d"_n = '5'};
+    auto t = kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.4f, "d"_id = '5'};
 
     {
       auto s = map([](auto m) { return sizeof(m); }, t);
@@ -72,10 +72,10 @@ TTS_CASE("Check map(f, record) behavior")
 
     {
       auto u = kumi::record{
-        "c"_n = 4,
-        "b"_n = 3,
-        "d"_n = 5,
-        "a"_n = 2,
+        "c"_id = 4,
+        "b"_id = 3,
+        "d"_id = 5,
+        "a"_id = 2,
       };
       auto s = map([](auto m, auto n) { return n * sizeof(m); }, t, u);
 
@@ -97,25 +97,25 @@ TTS_CASE("Check map(f, record) constexpr behavior")
   using namespace kumi::literals;
 
   {
-    constexpr auto t = kumi::record{"a"_n = 1, "b"_n = 2., "c"_n = 3.4f, "d"_n = '5'};
+    constexpr auto t = kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.4f, "d"_id = '5'};
 
     {
       constexpr auto s = map([](auto m) { return sizeof(m); }, t);
 
-      TTS_CONSTEXPR_EQUAL(get<"a"_n>(s), sizeof(int));
-      TTS_CONSTEXPR_EQUAL(get<"b"_n>(s), sizeof(double));
-      TTS_CONSTEXPR_EQUAL(get<"c"_n>(s), sizeof(float));
-      TTS_CONSTEXPR_EQUAL(get<"d"_n>(s), sizeof(char));
+      TTS_CONSTEXPR_EQUAL(get<"a"_id>(s), sizeof(int));
+      TTS_CONSTEXPR_EQUAL(get<"b"_id>(s), sizeof(double));
+      TTS_CONSTEXPR_EQUAL(get<"c"_id>(s), sizeof(float));
+      TTS_CONSTEXPR_EQUAL(get<"d"_id>(s), sizeof(char));
     }
 
     {
-      constexpr auto u = kumi::record{"a"_n = 2, "b"_n = 3, "c"_n = 4, "d"_n = 5};
+      constexpr auto u = kumi::record{"a"_id = 2, "b"_id = 3, "c"_id = 4, "d"_id = 5};
       constexpr auto s = map([](auto m, auto n) { return n * sizeof(m); }, t, u);
 
-      TTS_CONSTEXPR_EQUAL(get<"a"_n>(s), 2 * sizeof(int));
-      TTS_CONSTEXPR_EQUAL(get<"b"_n>(s), 3 * sizeof(double));
-      TTS_CONSTEXPR_EQUAL(get<"c"_n>(s), 4 * sizeof(float));
-      TTS_CONSTEXPR_EQUAL(get<"d"_n>(s), 5 * sizeof(char));
+      TTS_CONSTEXPR_EQUAL(get<"a"_id>(s), 2 * sizeof(int));
+      TTS_CONSTEXPR_EQUAL(get<"b"_id>(s), 3 * sizeof(double));
+      TTS_CONSTEXPR_EQUAL(get<"c"_id>(s), 4 * sizeof(float));
+      TTS_CONSTEXPR_EQUAL(get<"d"_id>(s), 5 * sizeof(char));
     }
   }
 };

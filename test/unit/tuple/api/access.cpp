@@ -73,33 +73,33 @@ TTS_CASE("Check access to kumi::tuple with named fields via indexing")
 {
   using namespace kumi::literals;
 
-  kumi::tuple t1 = {"x"_n = 1};
-  kumi::tuple t2 = {"x"_n = 1.f, "y"_n = 2};
-  kumi::tuple t3 = {"x"_n = 1., "y"_n = 2.f, "z"_n = 3};
-  kumi::tuple t4 = {"x"_n = '1', "y"_n = 2., "z"_n = 3.f, "t"_n = 4};
+  kumi::tuple t1 = {"x"_id = 1};
+  kumi::tuple t2 = {"x"_id = 1.f, "y"_id = 2};
+  kumi::tuple t3 = {"x"_id = 1., "y"_id = 2.f, "z"_id = 3};
+  kumi::tuple t4 = {"x"_id = '1', "y"_id = 2., "z"_id = 3.f, "t"_id = 4};
   kumi::tuple t5 = {custom_ = 1.0f, coord_ = kumi::none, is_transparent_, is_modal_, unroll<8>};
 
-  t1[0_c] = ("x"_n = 42);
+  t1[0_c] = ("x"_id = 42);
   TTS_EQUAL(kumi::field_value_of(t1[0_c]), 42);
   TTS_EQUAL(kumi::field_value_of(t1[0_c]), 42);
 
-  t2[0_c] = ("x"_n = 4.2f);
-  t2[1_c] = ("y"_n = 69);
+  t2[0_c] = ("x"_id = 4.2f);
+  t2[1_c] = ("y"_id = 69);
   TTS_EQUAL(kumi::field_value_of(t2[0_c]), 4.2f);
   TTS_EQUAL(kumi::field_value_of(t2[1_c]), 69);
 
-  t3[0_c] = ("x"_n = 13.37);
-  t3[1_c] = ("y"_n = 4.2f);
-  t3[2_c] = ("z"_n = 40);
+  t3[0_c] = ("x"_id = 13.37);
+  t3[1_c] = ("y"_id = 4.2f);
+  t3[2_c] = ("z"_id = 40);
 
   TTS_EQUAL(kumi::field_value_of(t3[0_c]), 13.37);
   TTS_EQUAL(kumi::field_value_of(t3[1_c]), 4.2f);
   TTS_EQUAL(kumi::field_value_of(t3[2_c]), 40);
 
-  t4[0_c] = ("x"_n = 'z');
-  t4[1_c] = ("y"_n = 6.9);
-  t4[2_c] = ("z"_n = 4.2f);
-  t4[3_c] = ("t"_n = 1337);
+  t4[0_c] = ("x"_id = 'z');
+  t4[1_c] = ("y"_id = 6.9);
+  t4[2_c] = ("z"_id = 4.2f);
+  t4[3_c] = ("t"_id = 1337);
 
   TTS_EQUAL(kumi::field_value_of(t4[0_c]), 'z');
   TTS_EQUAL(kumi::field_value_of(t4[1_c]), 6.9);
@@ -123,48 +123,48 @@ TTS_CASE("Check access to kumi::tuple with names via names")
 {
   using namespace kumi::literals;
 
-  kumi::tuple t1 = {"x"_n = 1};
-  kumi::tuple t2 = {"x"_n = 1.f, "y"_n = 2};
-  kumi::tuple t3 = {"x"_n = 1., "y"_n = 2.f, "z"_n = 3};
-  kumi::tuple t4 = {"x"_n = '1', "y"_n = 2., "z"_n = 3.f, "t"_n = 4};
-  kumi::tuple t5 = {"x"_n = '1', 2., "z"_n = 3.f, 4};
+  kumi::tuple t1 = {"x"_id = 1};
+  kumi::tuple t2 = {"x"_id = 1.f, "y"_id = 2};
+  kumi::tuple t3 = {"x"_id = 1., "y"_id = 2.f, "z"_id = 3};
+  kumi::tuple t4 = {"x"_id = '1', "y"_id = 2., "z"_id = 3.f, "t"_id = 4};
+  kumi::tuple t5 = {"x"_id = '1', 2., "z"_id = 3.f, 4};
   kumi::tuple t6 = {custom_ = 1.0f, coord_ = kumi::none, is_transparent_, is_modal_, unroll<8>};
 
-  t1["x"_n] = 42;
-  TTS_EQUAL(t1["x"_n], 42);
+  t1["x"_id] = 42;
+  TTS_EQUAL(t1["x"_id], 42);
 
-  t2["x"_n] = 4.2f;
-  t2["y"_n] = 69;
-  TTS_EQUAL(t2["x"_n], 4.2f);
-  TTS_EQUAL(t2["y"_n], 69);
+  t2["x"_id] = 4.2f;
+  t2["y"_id] = 69;
+  TTS_EQUAL(t2["x"_id], 4.2f);
+  TTS_EQUAL(t2["y"_id], 69);
 
-  t3["x"_n] = 13.37;
-  t3["y"_n] = 4.2f;
-  t3["z"_n] = 40;
-  TTS_EQUAL(t3["x"_n], 13.37);
-  TTS_EQUAL(t3["y"_n], 4.2f);
-  TTS_EQUAL(t3["z"_n], 40);
+  t3["x"_id] = 13.37;
+  t3["y"_id] = 4.2f;
+  t3["z"_id] = 40;
+  TTS_EQUAL(t3["x"_id], 13.37);
+  TTS_EQUAL(t3["y"_id], 4.2f);
+  TTS_EQUAL(t3["z"_id], 40);
 
-  t4["x"_n] = 'z';
-  t4["y"_n] = 6.9;
-  t4["z"_n] = 4.2f;
-  t4["t"_n] = 1337;
-  TTS_EQUAL(t4["x"_n], 'z');
-  TTS_EQUAL(t4["y"_n], 6.9);
-  TTS_EQUAL(t4["z"_n], 4.2f);
-  TTS_EQUAL(t4["t"_n], 1337);
+  t4["x"_id] = 'z';
+  t4["y"_id] = 6.9;
+  t4["z"_id] = 4.2f;
+  t4["t"_id] = 1337;
+  TTS_EQUAL(t4["x"_id], 'z');
+  TTS_EQUAL(t4["y"_id], 6.9);
+  TTS_EQUAL(t4["z"_id], 4.2f);
+  TTS_EQUAL(t4["t"_id], 1337);
 
-  t5["x"_n] = 'z';
+  t5["x"_id] = 'z';
   t5[1_c] = 6.9;
-  t5["z"_n] = 4.2f;
+  t5["z"_id] = 4.2f;
   t5[3_c] = 1337;
-  TTS_EQUAL(t5["x"_n], 'z');
+  TTS_EQUAL(t5["x"_id], 'z');
   TTS_EQUAL(t5[1_c], 6.9);
-  TTS_EQUAL(t5["z"_n], 4.2f);
+  TTS_EQUAL(t5["z"_id], 4.2f);
   TTS_EQUAL(t5[3_c], 1337);
 
-  TTS_EQUAL(kumi::get<"x"_n>(std::move(t3)), 13.37);
-  TTS_EQUAL(std::move(t3)["y"_n], 4.2f);
+  TTS_EQUAL(kumi::get<"x"_id>(std::move(t3)), 13.37);
+  TTS_EQUAL(std::move(t3)["y"_id], 4.2f);
 
   TTS_EQUAL(t6[custom_], 1.0f);
   TTS_EQUAL(t6[coord_], kumi::none);
@@ -172,8 +172,8 @@ TTS_CASE("Check access to kumi::tuple with names via names")
   TTS_EQUAL(t6["is_modal_"_id], true);
   TTS_EQUAL(t6[unrolling{}], 8);
 
-  TTS_EXPECT_NOT_COMPILES(t1, { get<"y"_n>(t1); });
-  TTS_EXPECT_NOT_COMPILES(t1, { g<"y"_n>(t1); });
+  TTS_EXPECT_NOT_COMPILES(t1, { get<"y"_id>(t1); });
+  TTS_EXPECT_NOT_COMPILES(t1, { g<"y"_id>(t1); });
 };
 
 TTS_CASE("Check access to kumi::tuple via types")
@@ -255,10 +255,10 @@ TTS_CASE("Check constexpr access to kumi::tuple with named fields via indexing")
 {
   using namespace kumi::literals;
 
-  constexpr kumi::tuple t1 = {"x"_n = 1};
-  constexpr kumi::tuple t2 = {"x"_n = 1.f, "y"_n = 2};
-  constexpr kumi::tuple t3 = {"x"_n = 1., "y"_n = 2.f, "z"_n = 3};
-  constexpr kumi::tuple t4 = {"x"_n = '1', "y"_n = 2., "z"_n = 3.f, "t"_n = 4};
+  constexpr kumi::tuple t1 = {"x"_id = 1};
+  constexpr kumi::tuple t2 = {"x"_id = 1.f, "y"_id = 2};
+  constexpr kumi::tuple t3 = {"x"_id = 1., "y"_id = 2.f, "z"_id = 3};
+  constexpr kumi::tuple t4 = {"x"_id = '1', "y"_id = 2., "z"_id = 3.f, "t"_id = 4};
   constexpr kumi::tuple t5 = {custom_ = 1.0f, coord_ = kumi::none, is_transparent_, is_modal_, unroll<8>};
 
   TTS_CONSTEXPR_EQUAL(kumi::field_value_of(get<0>(t1)), kumi::field_value_of(t1[0_c]));
@@ -286,30 +286,30 @@ TTS_CASE("Check constexpr access to kumi::tuple with named fields via names")
 {
   using namespace kumi::literals;
 
-  constexpr kumi::tuple t1 = {"x"_n = 1};
-  constexpr kumi::tuple t2 = {"x"_n = 1.f, "y"_n = 2};
-  constexpr kumi::tuple t3 = {"x"_n = 1., "y"_n = 2.f, "z"_n = 3};
-  constexpr kumi::tuple t4 = {"x"_n = '1', "y"_n = 2., "z"_n = 3.f, "t"_n = 4};
-  constexpr kumi::tuple t5 = {"x"_n = '1', 2, "z"_n = 3.f, 4};
+  constexpr kumi::tuple t1 = {"x"_id = 1};
+  constexpr kumi::tuple t2 = {"x"_id = 1.f, "y"_id = 2};
+  constexpr kumi::tuple t3 = {"x"_id = 1., "y"_id = 2.f, "z"_id = 3};
+  constexpr kumi::tuple t4 = {"x"_id = '1', "y"_id = 2., "z"_id = 3.f, "t"_id = 4};
+  constexpr kumi::tuple t5 = {"x"_id = '1', 2, "z"_id = 3.f, 4};
   constexpr kumi::tuple t6 = {custom_ = 1.0f, coord_ = kumi::none, is_transparent_, is_modal_, unroll<8>};
 
-  TTS_CONSTEXPR_EQUAL(get<"x"_n>(t1), t1["x"_n]);
+  TTS_CONSTEXPR_EQUAL(get<"x"_id>(t1), t1["x"_id]);
 
-  TTS_CONSTEXPR_EQUAL(get<"x"_n>(t2), t2["x"_n]);
-  TTS_CONSTEXPR_EQUAL(get<"y"_n>(t2), t2["y"_n]);
+  TTS_CONSTEXPR_EQUAL(get<"x"_id>(t2), t2["x"_id]);
+  TTS_CONSTEXPR_EQUAL(get<"y"_id>(t2), t2["y"_id]);
 
-  TTS_CONSTEXPR_EQUAL(get<"x"_n>(t3), t3["x"_n]);
-  TTS_CONSTEXPR_EQUAL(get<"y"_n>(t3), t3["y"_n]);
-  TTS_CONSTEXPR_EQUAL(get<"z"_n>(t3), t3["z"_n]);
+  TTS_CONSTEXPR_EQUAL(get<"x"_id>(t3), t3["x"_id]);
+  TTS_CONSTEXPR_EQUAL(get<"y"_id>(t3), t3["y"_id]);
+  TTS_CONSTEXPR_EQUAL(get<"z"_id>(t3), t3["z"_id]);
 
-  TTS_CONSTEXPR_EQUAL(get<"x"_n>(t4), t4["x"_n]);
-  TTS_CONSTEXPR_EQUAL(get<"y"_n>(t4), t4["y"_n]);
-  TTS_CONSTEXPR_EQUAL(get<"z"_n>(t4), t4["z"_n]);
-  TTS_CONSTEXPR_EQUAL(get<"t"_n>(t4), t4["t"_n]);
+  TTS_CONSTEXPR_EQUAL(get<"x"_id>(t4), t4["x"_id]);
+  TTS_CONSTEXPR_EQUAL(get<"y"_id>(t4), t4["y"_id]);
+  TTS_CONSTEXPR_EQUAL(get<"z"_id>(t4), t4["z"_id]);
+  TTS_CONSTEXPR_EQUAL(get<"t"_id>(t4), t4["t"_id]);
 
-  TTS_CONSTEXPR_EQUAL(get<"x"_n>(t5), t5["x"_n]);
+  TTS_CONSTEXPR_EQUAL(get<"x"_id>(t5), t5["x"_id]);
   TTS_CONSTEXPR_EQUAL(get<1_c>(t5), t5[1_c]);
-  TTS_CONSTEXPR_EQUAL(get<"z"_n>(t5), t5["z"_n]);
+  TTS_CONSTEXPR_EQUAL(get<"z"_id>(t5), t5["z"_id]);
   TTS_CONSTEXPR_EQUAL(get<3_c>(t5), t5[3_c]);
 
   TTS_CONSTEXPR_EQUAL(get<custom_>(t6), t6[custom_]);

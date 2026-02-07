@@ -39,15 +39,15 @@ TTS_CASE("Check record::min/min_flat behavior")
 {
   using namespace kumi::literals;
 
-  auto t0 = kumi::record{"a"_n = 'e', "b"_n = 2, "c"_n = 1., "d"_n = short{55}, "e"_n = 'z'};
+  auto t0 = kumi::record{"a"_id = 'e', "b"_id = 2, "c"_id = 1., "d"_id = short{55}, "e"_id = 'z'};
   TTS_EQUAL(kumi::min(t0), 1.);
   TTS_EQUAL((kumi::min(t0, [](auto m) { return sizeof(m); })), sizeof(char));
 
-  auto f0 = kumi::record{"a"_n = 2., "b"_n = 1., "c"_n = kumi::record{"d"_n = 'u', "e"_n = 'z'}, "f"_n = 3.f};
+  auto f0 = kumi::record{"a"_id = 2., "b"_id = 1., "c"_id = kumi::record{"d"_id = 'u', "e"_id = 'z'}, "f"_id = 3.f};
   TTS_EQUAL((kumi::min(f0, [](auto m) { return sizeof(m); })), 2 * sizeof(char));
   TTS_EQUAL((kumi::min_flat(f0, [](auto m) { return sizeof(m); })), sizeof(char));
 
-  auto t1 = kumi::record{"a"_n = 1.5, "b"_n = 3.6f, "c"_n = 8, "d"_n = -3.6, "e"_n = 2.4, "f"_n = -0.5};
+  auto t1 = kumi::record{"a"_id = 1.5, "b"_id = 3.6f, "c"_id = 8, "d"_id = -3.6, "e"_id = 2.4, "f"_id = -0.5};
   TTS_EQUAL((kumi::min(t1, [](auto m) { return m < 0 ? -m : m; })), 0.5);
 };
 
@@ -55,14 +55,15 @@ TTS_CASE("Check record::min/min_flat constexpr behavior")
 {
   using namespace kumi::literals;
 
-  constexpr auto t0 = kumi::record{"a"_n = 'e', "b"_n = 2, "c"_n = 1., "d"_n = short{55}, "e"_n = 'z'};
+  constexpr auto t0 = kumi::record{"a"_id = 'e', "b"_id = 2, "c"_id = 1., "d"_id = short{55}, "e"_id = 'z'};
   TTS_CONSTEXPR_EQUAL(kumi::min(t0), 1.);
   TTS_CONSTEXPR_EQUAL((kumi::min(t0, [](auto m) { return sizeof(m); })), sizeof(char));
 
-  constexpr auto f0 = kumi::record{"a"_n = 2., "b"_n = 1., "c"_n = kumi::record{"d"_n = 'u', "e"_n = 'z'}, "f"_n = 3.f};
+  constexpr auto f0 =
+    kumi::record{"a"_id = 2., "b"_id = 1., "c"_id = kumi::record{"d"_id = 'u', "e"_id = 'z'}, "f"_id = 3.f};
   TTS_CONSTEXPR_EQUAL((kumi::min(f0, [](auto m) { return sizeof(m); })), 2 * sizeof(char));
   TTS_CONSTEXPR_EQUAL((kumi::min_flat(f0, [](auto m) { return sizeof(m); })), sizeof(char));
 
-  constexpr auto t1 = kumi::record{"a"_n = 1.5, "b"_n = 3.6f, "c"_n = 8, "d"_n = -3.6, "e"_n = 2.4, "f"_n = -0.5};
+  constexpr auto t1 = kumi::record{"a"_id = 1.5, "b"_id = 3.6f, "c"_id = 8, "d"_id = -3.6, "e"_id = 2.4, "f"_id = -0.5};
   TTS_CONSTEXPR_EQUAL((kumi::min(t1, [](auto m) { return m < 0 ? -m : m; })), 0.5);
 };

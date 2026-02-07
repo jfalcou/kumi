@@ -10,14 +10,14 @@ int main()
 {
   using namespace kumi::literals;
 
-  kumi::record r = { "x"_n = 1, "y"_n = 2.3, "z"_n = 4.5f, "t"_n = '@' };
+  kumi::record r = { "x"_id = 1, "y"_id = 2.3, "z"_id = 4.5f, "t"_id = '@' };
   
-  std::cout << r["x"_n] << "\n"; 
-  std::cout << kumi::get<"x"_n>(r) << "\n";
-  std::cout << kumi::get<"y"_n>(r) << "\n";
-  std::cout << kumi::get<"z"_n>(r) << "\n";
+  std::cout << r["x"_id] << "\n"; 
+  std::cout << kumi::get<"x"_id>(r) << "\n";
+  std::cout << kumi::get<"y"_id>(r) << "\n";
+  std::cout << kumi::get<"z"_id>(r) << "\n";
 
-  kumi::get<"t"_n>(r)++;
+  kumi::get<"t"_id>(r)++;
 
-  std::cout << kumi::get<"t"_n>(r) << "\n";
+  std::cout << kumi::get<"t"_id>(r) << "\n";
 }

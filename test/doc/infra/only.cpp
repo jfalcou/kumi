@@ -8,7 +8,7 @@
 
 using namespace kumi::literals;
 
-inline constexpr auto char_value  = kumi::identifier("character"_n, kumi::only<char>);
+inline constexpr auto char_value  = kumi::identifier("character"_id, kumi::only<char>);
 
 int main()
 {

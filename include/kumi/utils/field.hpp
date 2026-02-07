@@ -29,16 +29,13 @@ namespace kumi
     /// Name associated to the field
     static constexpr auto name() { return Id::to_str(); }
 
-    KUMI_ABI constexpr type& operator()(identifier_type) & noexcept { return value; }
+    KUMI_ABI constexpr T& operator()(identifier_type) & noexcept { return value; }
 
-    KUMI_ABI constexpr type&& operator()(identifier_type) && noexcept { return static_cast<type&&>(value); }
+    KUMI_ABI constexpr T&& operator()(identifier_type) && noexcept { return static_cast<T&&>(value); }
 
-    KUMI_ABI constexpr type const& operator()(identifier_type) const& noexcept { return value; }
+    KUMI_ABI constexpr T const& operator()(identifier_type) const& noexcept { return value; }
 
-    KUMI_ABI constexpr type const&& operator()(identifier_type) const&& noexcept
-    {
-      return static_cast<type const&&>(value);
-    }
+    KUMI_ABI constexpr T const&& operator()(identifier_type) const&& noexcept { return static_cast<T const&&>(value); }
 
     //==============================================================================================
     /// @ingroup product_types
@@ -63,16 +60,13 @@ namespace kumi
     /// Name associated to the field
     static constexpr auto name() { return Id::to_str(); }
 
-    KUMI_ABI constexpr type& operator()(identifier_type) & noexcept { return *this; }
+    KUMI_ABI constexpr T& operator()(identifier_type) & noexcept { return *this; }
 
-    KUMI_ABI constexpr type&& operator()(identifier_type) && noexcept { return static_cast<type&&>(*this); }
+    KUMI_ABI constexpr T&& operator()(identifier_type) && noexcept { return static_cast<T&&>(*this); }
 
-    KUMI_ABI constexpr type const& operator()(identifier_type) const& noexcept { return *this; }
+    KUMI_ABI constexpr T const& operator()(identifier_type) const& noexcept { return *this; }
 
-    KUMI_ABI constexpr type const&& operator()(identifier_type) const&& noexcept
-    {
-      return static_cast<type const&&>(*this);
-    }
+    KUMI_ABI constexpr T const&& operator()(identifier_type) const&& noexcept { return static_cast<T const&&>(*this); }
 
     //==============================================================================================
     /// @ingroup product_types
@@ -90,14 +84,14 @@ namespace kumi
   //! @ingroup utility
   //! @brief Extracts the name from a kumi::field or returns the parameter.
   //!
-  //! @note If the unqualified type of T is not a field returns kumi::none.
+  //! @note If the unqualified type of T is not a field returns kumi::unkown.
   //! @tparam   T The name to extract name from.
-  //! @return   The name of the field or kumi::none.
+  //! @return   The name of the field or kumi::unknown.
   //================================================================================================
   template<typename T> [[nodiscard]] KUMI_ABI constexpr auto name_of(as<T>) noexcept
   {
     if constexpr (concepts::field<T>) return _::key_of_t<T>{};
-    else return kumi::none;
+    else return kumi::unknown{};
   };
 
   //================================================================================================

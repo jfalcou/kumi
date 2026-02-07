@@ -159,11 +159,14 @@ namespace kumi
   //! @brief Compile-time text based ID
   //! @tparam ID Compile-time string for the ID
   //====================================================================================================================
-  template<str ID> struct name : identifier<name<ID>>
+  template<str ID> struct name
   {
     using tag_type = name<ID>;
 
     static constexpr auto to_str() { return ID; }
+
+    //! identifier comparison
+    KUMI_ABI friend constexpr auto operator<=>(name const&, name const&) noexcept = default;
 
     //==================================================================================================================
     //! @brief Assignment of a value to a identifier
@@ -193,8 +196,9 @@ namespace kumi
     // MSVC evaluates a requires clause before checking the type of an NTTP
     template<auto N, typename... Ts> KUMI_ABI constexpr auto contains_field()
     {
-      if constexpr (!std::integral<std::remove_cvref_t<decltype(N)>>) return can_get_field_by_value<name<N>, Ts...>;
-      else return false;
+      if constexpr (std::integral<std::remove_cvref_t<decltype(N)>>) return false;
+      else if constexpr (concepts::identifier<std::remove_cvref_t<decltype(N)>>) return false;
+      else return can_get_field_by_value<name<N>, Ts...>;
     };
   }
 }

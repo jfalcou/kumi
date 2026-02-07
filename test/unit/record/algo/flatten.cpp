@@ -60,37 +60,40 @@ TTS_CASE("Check result::flatten/flatten_all<record> behavior")
 TTS_CASE("Check record::flatten behavior")
 {
   TTS_EQUAL(kumi::flatten(kumi::record{}), kumi::record{});
-  TTS_EQUAL((kumi::flatten(kumi::record{"a"_n = 2., "b"_n = 1, "c"_n = short{55}})),
-            (kumi::record{"a"_n = 2., "b"_n = 1, "c"_n = short{55}}));
-  TTS_EQUAL((kumi::flatten(kumi::record{"a"_n = 3.25f, "b"_n = kumi::record{"c"_n = 2., "d"_n = 1, "e"_n = short{55}},
-                                        "f"_n = 'z'})),
-            (kumi::record{"a"_n = 3.25f, "b.c"_n = 2., "b.d"_n = 1, "b.e"_n = short{55}, "f"_n = 'z'}));
+  TTS_EQUAL((kumi::flatten(kumi::record{"a"_id = 2., "b"_id = 1, "c"_id = short{55}})),
+            (kumi::record{"a"_id = 2., "b"_id = 1, "c"_id = short{55}}));
   TTS_EQUAL((kumi::flatten(kumi::record{
-              "a"_n = 3.25f,
-              "b"_n = kumi::record{"c"_n = 2., "d"_n = kumi::record{"e"_n = 2., "f"_n = 1, "g"_n = short{55}},
-                                   "h"_n = short{55}},
-              "i"_n = 'z'})),
-            (kumi::record{"a"_n = 3.25f, "b.c"_n = 2., "b.d"_n = kumi::record{"e"_n = 2., "f"_n = 1, "g"_n = short{55}},
-                          "b.h"_n = short{55}, "i"_n = 'z'}));
+              "a"_id = 3.25f, "b"_id = kumi::record{"c"_id = 2., "d"_id = 1, "e"_id = short{55}}, "f"_id = 'z'})),
+            (kumi::record{"a"_id = 3.25f, "b.c"_id = 2., "b.d"_id = 1, "b.e"_id = short{55}, "f"_id = 'z'}));
+  TTS_EQUAL(
+    (kumi::flatten(kumi::record{
+      "a"_id = 3.25f,
+      "b"_id = kumi::record{"c"_id = 2., "d"_id = kumi::record{"e"_id = 2., "f"_id = 1, "g"_id = short{55}},
+                            "h"_id = short{55}},
+      "i"_id = 'z'})),
+    (kumi::record{"a"_id = 3.25f, "b.c"_id = 2., "b.d"_id = kumi::record{"e"_id = 2., "f"_id = 1, "g"_id = short{55}},
+                  "b.h"_id = short{55}, "i"_id = 'z'}));
 };
 
 TTS_CASE("Check record::flatten constexpr behavior")
 {
-  constexpr auto t0 = kumi::record{"a"_n = 2., "b"_n = 1, "c"_n = short{55}};
+  constexpr auto t0 = kumi::record{"a"_id = 2., "b"_id = 1, "c"_id = short{55}};
   constexpr auto t1 =
-    kumi::record{"a"_n = 3.25f, "b"_n = kumi::record{"c"_n = 2., "d"_n = 1, "e"_n = short{55}}, "f"_n = 'z'};
-  constexpr auto t2 = kumi::record{
-    "a"_n = 3.25f,
-    "b"_n = kumi::record{"c"_n = 2., "d"_n = kumi::record{"e"_n = 2., "f"_n = 1, "g"_n = short{55}}, "h"_n = short{55}},
-    "i"_n = 'z'};
+    kumi::record{"a"_id = 3.25f, "b"_id = kumi::record{"c"_id = 2., "d"_id = 1, "e"_id = short{55}}, "f"_id = 'z'};
+  constexpr auto t2 =
+    kumi::record{"a"_id = 3.25f,
+                 "b"_id = kumi::record{"c"_id = 2., "d"_id = kumi::record{"e"_id = 2., "f"_id = 1, "g"_id = short{55}},
+                                       "h"_id = short{55}},
+                 "i"_id = 'z'};
 
   TTS_CONSTEXPR_EQUAL(kumi::flatten(kumi::record{}), kumi::record{});
-  TTS_CONSTEXPR_EQUAL(kumi::flatten(t0), (kumi::record{"a"_n = 2., "b"_n = 1, "c"_n = short{55}}));
+  TTS_CONSTEXPR_EQUAL(kumi::flatten(t0), (kumi::record{"a"_id = 2., "b"_id = 1, "c"_id = short{55}}));
   TTS_CONSTEXPR_EQUAL(kumi::flatten(t1),
-                      (kumi::record{"a"_n = 3.25f, "b.c"_n = 2., "b.d"_n = 1, "b.e"_n = short{55}, "f"_n = 'z'}));
-  TTS_CONSTEXPR_EQUAL(kumi::flatten(t2), (kumi::record{"a"_n = 3.25f, "b.c"_n = 2.,
-                                                       "b.d"_n = kumi::record{"e"_n = 2., "f"_n = 1, "g"_n = short{55}},
-                                                       "b.h"_n = short{55}, "i"_n = 'z'}));
+                      (kumi::record{"a"_id = 3.25f, "b.c"_id = 2., "b.d"_id = 1, "b.e"_id = short{55}, "f"_id = 'z'}));
+  TTS_CONSTEXPR_EQUAL(
+    kumi::flatten(t2),
+    (kumi::record{"a"_id = 3.25f, "b.c"_id = 2., "b.d"_id = kumi::record{"e"_id = 2., "f"_id = 1, "g"_id = short{55}},
+                  "b.h"_id = short{55}, "i"_id = 'z'}));
 };
 
 TTS_CASE("Check record::flatten_all behavior")
@@ -98,44 +101,46 @@ TTS_CASE("Check record::flatten_all behavior")
   using namespace kumi::literals;
 
   TTS_EQUAL(kumi::flatten_all(kumi::record{}), kumi::record{});
-  TTS_EQUAL((kumi::flatten_all(kumi::record{"a"_n = kumi::record{}, "b"_n = kumi::record{}, "c"_n = kumi::record{}})),
-            kumi::record{});
-  TTS_EQUAL((kumi::flatten_all(kumi::record{"a"_n = 2., "b"_n = 1, "c"_n = short{55}})),
-            (kumi::record{"a"_n = 2., "b"_n = 1, "c"_n = short{55}}));
+  TTS_EQUAL(
+    (kumi::flatten_all(kumi::record{"a"_id = kumi::record{}, "b"_id = kumi::record{}, "c"_id = kumi::record{}})),
+    kumi::record{});
+  TTS_EQUAL((kumi::flatten_all(kumi::record{"a"_id = 2., "b"_id = 1, "c"_id = short{55}})),
+            (kumi::record{"a"_id = 2., "b"_id = 1, "c"_id = short{55}}));
   TTS_EQUAL((kumi::flatten_all(kumi::record{
-              "a"_n = 3.25f, "b"_n = kumi::record{"c"_n = 2., "d"_n = 1, "e"_n = short{55}}, "f"_n = 'z'})),
-            (kumi::record{"a"_n = 3.25f, "b.c"_n = 2., "b.d"_n = 1, "b.e"_n = short{55}, "f"_n = 'z'}));
+              "a"_id = 3.25f, "b"_id = kumi::record{"c"_id = 2., "d"_id = 1, "e"_id = short{55}}, "f"_id = 'z'})),
+            (kumi::record{"a"_id = 3.25f, "b.c"_id = 2., "b.d"_id = 1, "b.e"_id = short{55}, "f"_id = 'z'}));
   TTS_EQUAL((kumi::flatten_all(kumi::record{
-              "a"_n = 3.25f,
-              "b"_n = kumi::record{"c"_n = 2., "d"_n = kumi::record{"e"_n = 2., "f"_n = 1, "g"_n = short{55}},
-                                   "h"_n = short{55}},
-              "i"_n = 'z'})),
-            (kumi::record{"a"_n = 3.25f, "b.c"_n = 2., "b.d.e"_n = 2., "b.d.f"_n = 1, "b.d.g"_n = short{55},
-                          "b.h"_n = short{55}, "i"_n = 'z'}));
+              "a"_id = 3.25f,
+              "b"_id = kumi::record{"c"_id = 2., "d"_id = kumi::record{"e"_id = 2., "f"_id = 1, "g"_id = short{55}},
+                                    "h"_id = short{55}},
+              "i"_id = 'z'})),
+            (kumi::record{"a"_id = 3.25f, "b.c"_id = 2., "b.d.e"_id = 2., "b.d.f"_id = 1, "b.d.g"_id = short{55},
+                          "b.h"_id = short{55}, "i"_id = 'z'}));
   TTS_EQUAL(
     (kumi::flatten_all(kumi::record{
-      "a"_n = 3.25f, "b"_n = kumi::record{"c"_n = 2., "d"_n = kumi::record{}, "e"_n = short{55}}, "f"_n = 'z'})),
-    (kumi::record{"a"_n = 3.25f, "b.c"_n = 2., "b.e"_n = short{55}, "f"_n = 'z'}));
+      "a"_id = 3.25f, "b"_id = kumi::record{"c"_id = 2., "d"_id = kumi::record{}, "e"_id = short{55}}, "f"_id = 'z'})),
+    (kumi::record{"a"_id = 3.25f, "b.c"_id = 2., "b.e"_id = short{55}, "f"_id = 'z'}));
 };
 
 TTS_CASE("Check record::flatten_all constexpr behavior")
 {
   using namespace kumi::literals;
 
-  constexpr auto t0 = kumi::record{"a"_n = 2., "b"_n = 1, "c"_n = short{55}};
+  constexpr auto t0 = kumi::record{"a"_id = 2., "b"_id = 1, "c"_id = short{55}};
   constexpr auto t1 =
-    kumi::record{"d"_n = 3.25f, "e"_n = kumi::record{"f"_n = 2., "g"_n = 1, "h"_n = short{55}}, "i"_n = 'z'};
-  constexpr auto t2 = kumi::record{"j"_n = 3.25f, "k"_n = t0, "l"_n = t1, "m"_n = 'z'};
-  constexpr auto te = kumi::record{"a"_n = 3.25f, "b"_n = kumi::record{}, "c"_n = 'z'};
+    kumi::record{"d"_id = 3.25f, "e"_id = kumi::record{"f"_id = 2., "g"_id = 1, "h"_id = short{55}}, "i"_id = 'z'};
+  constexpr auto t2 = kumi::record{"j"_id = 3.25f, "k"_id = t0, "l"_id = t1, "m"_id = 'z'};
+  constexpr auto te = kumi::record{"a"_id = 3.25f, "b"_id = kumi::record{}, "c"_id = 'z'};
 
   TTS_CONSTEXPR_EQUAL(kumi::flatten_all(kumi::record{}), kumi::record{});
-  TTS_CONSTEXPR_EQUAL(kumi::flatten_all(t0), (kumi::record{"a"_n = 2., "b"_n = 1, "c"_n = short{55}}));
+  TTS_CONSTEXPR_EQUAL(kumi::flatten_all(t0), (kumi::record{"a"_id = 2., "b"_id = 1, "c"_id = short{55}}));
   TTS_CONSTEXPR_EQUAL(kumi::flatten_all(t1),
-                      (kumi::record{"d"_n = 3.25f, "e.f"_n = 2., "e.g"_n = 1, "e.h"_n = short{55}, "i"_n = 'z'}));
-  TTS_CONSTEXPR_EQUAL(kumi::flatten_all(te), (kumi::record{"a"_n = 3.25f, "c"_n = 'z'}));
-  TTS_CONSTEXPR_EQUAL(kumi::flatten_all(t2),
-                      (kumi::record{"j"_n = 3.25f, "k.a"_n = 2., "k.b"_n = 1, "k.c"_n = short{55}, "l.d"_n = 3.25f,
-                                    "l.e.f"_n = 2., "l.e.g"_n = 1, "l.e.h"_n = short{55}, "l.i"_n = 'z', "m"_n = 'z'}));
+                      (kumi::record{"d"_id = 3.25f, "e.f"_id = 2., "e.g"_id = 1, "e.h"_id = short{55}, "i"_id = 'z'}));
+  TTS_CONSTEXPR_EQUAL(kumi::flatten_all(te), (kumi::record{"a"_id = 3.25f, "c"_id = 'z'}));
+  TTS_CONSTEXPR_EQUAL(
+    kumi::flatten_all(t2),
+    (kumi::record{"j"_id = 3.25f, "k.a"_id = 2., "k.b"_id = 1, "k.c"_id = short{55}, "l.d"_id = 3.25f, "l.e.f"_id = 2.,
+                  "l.e.g"_id = 1, "l.e.h"_id = short{55}, "l.i"_id = 'z', "m"_id = 'z'}));
 };
 
 TTS_CASE("Check record::flatten_all + function behavior")
@@ -145,50 +150,53 @@ TTS_CASE("Check record::flatten_all + function behavior")
   TTS_EQUAL(kumi::flatten_all(kumi::record{}, inc), kumi::record{});
 
   TTS_EQUAL(
-    (kumi::flatten_all(kumi::record{"a"_n = kumi::record{}, "b"_n = kumi::record{}, "c"_n = kumi::record{}}, inc)),
+    (kumi::flatten_all(kumi::record{"a"_id = kumi::record{}, "b"_id = kumi::record{}, "c"_id = kumi::record{}}, inc)),
     kumi::record{});
 
-  TTS_EQUAL((kumi::flatten_all(kumi::record{"a"_n = 2., "b"_n = 1, "c"_n = short{55}}, inc)),
-            (kumi::record{"a"_n = 3., "b"_n = 2, "c"_n = short{56}}));
+  TTS_EQUAL((kumi::flatten_all(kumi::record{"a"_id = 2., "b"_id = 1, "c"_id = short{55}}, inc)),
+            (kumi::record{"a"_id = 3., "b"_id = 2, "c"_id = short{56}}));
 
   TTS_EQUAL(
     (kumi::flatten_all(
-      kumi::record{"a"_n = 3.25f, "b"_n = kumi::record{"c"_n = 2., "d"_n = 1, "e"_n = short{55}}, "f"_n = 'a'}, inc)),
-    (kumi::record{"a"_n = 4.25f, "b.c"_n = 3., "b.d"_n = 2, "b.e"_n = short{56}, "f"_n = 'b'}));
-
-  TTS_EQUAL(
-    (kumi::flatten_all(
-      kumi::record{"a"_n = 3.25f,
-                   "b"_n = kumi::record{"c"_n = 2., "d"_n = kumi::record{"e"_n = 2., "f"_n = 1, "g"_n = short{55}},
-                                        "h"_n = short{55}},
-                   "i"_n = 'a'},
+      kumi::record{"a"_id = 3.25f, "b"_id = kumi::record{"c"_id = 2., "d"_id = 1, "e"_id = short{55}}, "f"_id = 'a'},
       inc)),
-    (kumi::record{"a"_n = 4.25f, "b.c"_n = 3., "b.d.e"_n = 3., "b.d.f"_n = 2, "b.d.g"_n = short{56},
-                  "b.h"_n = short{56}, "i"_n = 'b'}));
+    (kumi::record{"a"_id = 4.25f, "b.c"_id = 3., "b.d"_id = 2, "b.e"_id = short{56}, "f"_id = 'b'}));
 
-  TTS_EQUAL((kumi::flatten_all(kumi::record{"a"_n = 3.25f,
-                                            "b"_n = kumi::record{"c"_n = 2., "d"_n = kumi::record{}, "e"_n = short{55}},
-                                            "f"_n = 'a'},
-                               inc)),
-            (kumi::record{"a"_n = 4.25f, "b.c"_n = 3., "b.e"_n = short{56}, "f"_n = 'b'}));
+  TTS_EQUAL((kumi::flatten_all(
+              kumi::record{"a"_id = 3.25f,
+                           "b"_id = kumi::record{"c"_id = 2.,
+                                                 "d"_id = kumi::record{"e"_id = 2., "f"_id = 1, "g"_id = short{55}},
+                                                 "h"_id = short{55}},
+                           "i"_id = 'a'},
+              inc)),
+            (kumi::record{"a"_id = 4.25f, "b.c"_id = 3., "b.d.e"_id = 3., "b.d.f"_id = 2, "b.d.g"_id = short{56},
+                          "b.h"_id = short{56}, "i"_id = 'b'}));
+
+  TTS_EQUAL(
+    (kumi::flatten_all(kumi::record{"a"_id = 3.25f,
+                                    "b"_id = kumi::record{"c"_id = 2., "d"_id = kumi::record{}, "e"_id = short{55}},
+                                    "f"_id = 'a'},
+                       inc)),
+    (kumi::record{"a"_id = 4.25f, "b.c"_id = 3., "b.e"_id = short{56}, "f"_id = 'b'}));
 };
 
 TTS_CASE("Check record::flatten_all + function constexpr behavior")
 {
-  constexpr auto t0 = kumi::record{"a"_n = 2., "b"_n = 1, "c"_n = short{55}};
+  constexpr auto t0 = kumi::record{"a"_id = 2., "b"_id = 1, "c"_id = short{55}};
   constexpr auto t1 =
-    kumi::record{"d"_n = 3.25f, "e"_n = kumi::record{"f"_n = 2., "g"_n = 1, "h"_n = short{55}}, "i"_n = 'a'};
-  constexpr auto t2 = kumi::record{"j"_n = 3.25f, "k"_n = t0, "l"_n = t1, "m"_n = 'a'};
-  constexpr auto te = kumi::record{"n"_n = 3.25f, "o"_n = kumi::record{}, "p"_n = 'a'};
+    kumi::record{"d"_id = 3.25f, "e"_id = kumi::record{"f"_id = 2., "g"_id = 1, "h"_id = short{55}}, "i"_id = 'a'};
+  constexpr auto t2 = kumi::record{"j"_id = 3.25f, "k"_id = t0, "l"_id = t1, "m"_id = 'a'};
+  constexpr auto te = kumi::record{"n"_id = 3.25f, "o"_id = kumi::record{}, "p"_id = 'a'};
 
   auto inc = [](auto m) { return m + 1; };
 
   TTS_CONSTEXPR_EQUAL(kumi::flatten_all(kumi::record{}, inc), kumi::record{});
-  TTS_CONSTEXPR_EQUAL(kumi::flatten_all(t0, inc), (kumi::record{"a"_n = 3., "b"_n = 2, "c"_n = short{56}}));
+  TTS_CONSTEXPR_EQUAL(kumi::flatten_all(t0, inc), (kumi::record{"a"_id = 3., "b"_id = 2, "c"_id = short{56}}));
   TTS_CONSTEXPR_EQUAL(kumi::flatten_all(t1, inc),
-                      (kumi::record{"d"_n = 4.25f, "e.f"_n = 3., "e.g"_n = 2, "e.h"_n = short{56}, "i"_n = 'b'}));
-  TTS_CONSTEXPR_EQUAL(kumi::flatten_all(te, inc), (kumi::record{"n"_n = 4.25f, "p"_n = 'b'}));
-  TTS_CONSTEXPR_EQUAL(kumi::flatten_all(t2, inc),
-                      (kumi::record{"j"_n = 4.25f, "k.a"_n = 3., "k.b"_n = 2, "k.c"_n = short{56}, "l.d"_n = 4.25f,
-                                    "l.e.f"_n = 3., "l.e.g"_n = 2, "l.e.h"_n = short{56}, "l.i"_n = 'b', "m"_n = 'b'}));
+                      (kumi::record{"d"_id = 4.25f, "e.f"_id = 3., "e.g"_id = 2, "e.h"_id = short{56}, "i"_id = 'b'}));
+  TTS_CONSTEXPR_EQUAL(kumi::flatten_all(te, inc), (kumi::record{"n"_id = 4.25f, "p"_id = 'b'}));
+  TTS_CONSTEXPR_EQUAL(
+    kumi::flatten_all(t2, inc),
+    (kumi::record{"j"_id = 4.25f, "k.a"_id = 3., "k.b"_id = 2, "k.c"_id = short{56}, "l.d"_id = 4.25f, "l.e.f"_id = 3.,
+                  "l.e.g"_id = 2, "l.e.h"_id = short{56}, "l.i"_id = 'b', "m"_id = 'b'}));
 };

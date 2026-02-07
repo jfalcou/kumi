@@ -33,32 +33,33 @@ TTS_CASE("Check kumi::push_front/pop_front function behavior")
 {
   using namespace kumi::literals;
 
-  TTS_EQUAL((kumi::push_front(kumi::record{}, "a"_n = 4)), kumi::record{"a"_n = 4});
-  TTS_EQUAL((kumi::push_front(kumi::record{"a"_n = 3.5}, "b"_n = 4)), (kumi::record{"b"_n = 4, "a"_n = 3.5}));
-  TTS_EQUAL((kumi::push_front(kumi::record{"a"_n = 3.5, "b"_n = 'e'}, "c"_n = 4)),
-            (kumi::record{"c"_n = 4, "a"_n = 3.5, "b"_n = 'e'}));
+  TTS_EQUAL((kumi::push_front(kumi::record{}, "a"_id = 4)), kumi::record{"a"_id = 4});
+  TTS_EQUAL((kumi::push_front(kumi::record{"a"_id = 3.5}, "b"_id = 4)), (kumi::record{"b"_id = 4, "a"_id = 3.5}));
+  TTS_EQUAL((kumi::push_front(kumi::record{"a"_id = 3.5, "b"_id = 'e'}, "c"_id = 4)),
+            (kumi::record{"c"_id = 4, "a"_id = 3.5, "b"_id = 'e'}));
 
   TTS_EQUAL(kumi::pop_front(kumi::record{}), kumi::record{});
-  TTS_EQUAL(kumi::pop_front(kumi::record{"a"_n = 3.5}), kumi::record{});
-  TTS_EQUAL(kumi::pop_front(kumi::record{"a"_n = 3.5, "b"_n = 'e'}), kumi::record{"b"_n = 'e'});
-  TTS_EQUAL(kumi::pop_front(kumi::record{"a"_n = 4, "b"_n = 3.5, "c"_n = 'e'}),
-            (kumi::record{"b"_n = 3.5, "c"_n = 'e'}));
+  TTS_EQUAL(kumi::pop_front(kumi::record{"a"_id = 3.5}), kumi::record{});
+  TTS_EQUAL(kumi::pop_front(kumi::record{"a"_id = 3.5, "b"_id = 'e'}), kumi::record{"b"_id = 'e'});
+  TTS_EQUAL(kumi::pop_front(kumi::record{"a"_id = 4, "b"_id = 3.5, "c"_id = 'e'}),
+            (kumi::record{"b"_id = 3.5, "c"_id = 'e'}));
 };
 
 TTS_CASE("Check kumi::push_front/pop_front constexpr behavior")
 {
   using namespace kumi::literals;
 
-  TTS_CONSTEXPR_EQUAL((kumi::push_front(kumi::record{}, "a"_n = 4)), kumi::record{"a"_n = 4});
-  TTS_CONSTEXPR_EQUAL((kumi::push_front(kumi::record{"a"_n = 3.5}, "b"_n = 4)), (kumi::record{"b"_n = 4, "a"_n = 3.5}));
-  TTS_CONSTEXPR_EQUAL((kumi::push_front(kumi::record{"a"_n = 3.5, "b"_n = 'e'}, "c"_n = 4)),
-                      (kumi::record{"c"_n = 4, "a"_n = 3.5, "b"_n = 'e'}));
+  TTS_CONSTEXPR_EQUAL((kumi::push_front(kumi::record{}, "a"_id = 4)), kumi::record{"a"_id = 4});
+  TTS_CONSTEXPR_EQUAL((kumi::push_front(kumi::record{"a"_id = 3.5}, "b"_id = 4)),
+                      (kumi::record{"b"_id = 4, "a"_id = 3.5}));
+  TTS_CONSTEXPR_EQUAL((kumi::push_front(kumi::record{"a"_id = 3.5, "b"_id = 'e'}, "c"_id = 4)),
+                      (kumi::record{"c"_id = 4, "a"_id = 3.5, "b"_id = 'e'}));
 
   // TTS_CONSTEXPR_EQUAL( kumi::pop_front(kumi::record{})         , kumi::record{}         );
-  TTS_CONSTEXPR_EQUAL(kumi::pop_front(kumi::record{"a"_n = 3.5}), kumi::record{});
-  TTS_CONSTEXPR_EQUAL(kumi::pop_front(kumi::record{"a"_n = 3.5, "b"_n = 'e'}), kumi::record{"b"_n = 'e'});
-  TTS_CONSTEXPR_EQUAL(kumi::pop_front(kumi::record{"a"_n = 4, "b"_n = 3.5, "c"_n = 'e'}),
-                      (kumi::record{"b"_n = 3.5, "c"_n = 'e'}));
+  TTS_CONSTEXPR_EQUAL(kumi::pop_front(kumi::record{"a"_id = 3.5}), kumi::record{});
+  TTS_CONSTEXPR_EQUAL(kumi::pop_front(kumi::record{"a"_id = 3.5, "b"_id = 'e'}), kumi::record{"b"_id = 'e'});
+  TTS_CONSTEXPR_EQUAL(kumi::pop_front(kumi::record{"a"_id = 4, "b"_id = 3.5, "c"_id = 'e'}),
+                      (kumi::record{"b"_id = 3.5, "c"_id = 'e'}));
 };
 
 TTS_CASE("Check kumi::push_back/pop_back type computation")
@@ -84,28 +85,30 @@ TTS_CASE("Check kumi::push_back/pop_back function behavior")
 {
   using namespace kumi::literals;
 
-  TTS_EQUAL((kumi::push_back(kumi::record{}, "a"_n = 4)), kumi::record{"a"_n = 4});
-  TTS_EQUAL((kumi::push_back(kumi::record{"a"_n = 3.5}, "b"_n = 4)), (kumi::record{"a"_n = 3.5, "b"_n = 4}));
-  TTS_EQUAL((kumi::push_back(kumi::record{"a"_n = 3.5, "b"_n = 'e'}, "c"_n = 4)),
-            (kumi::record{"a"_n = 3.5, "b"_n = 'e', "c"_n = 4}));
+  TTS_EQUAL((kumi::push_back(kumi::record{}, "a"_id = 4)), kumi::record{"a"_id = 4});
+  TTS_EQUAL((kumi::push_back(kumi::record{"a"_id = 3.5}, "b"_id = 4)), (kumi::record{"a"_id = 3.5, "b"_id = 4}));
+  TTS_EQUAL((kumi::push_back(kumi::record{"a"_id = 3.5, "b"_id = 'e'}, "c"_id = 4)),
+            (kumi::record{"a"_id = 3.5, "b"_id = 'e', "c"_id = 4}));
 
   TTS_EQUAL(kumi::pop_back(kumi::record{}), kumi::record{});
-  TTS_EQUAL(kumi::pop_back(kumi::record{"a"_n = 3.5}), kumi::record{});
-  TTS_EQUAL(kumi::pop_back(kumi::record{"a"_n = 3.5, "b"_n = 'e'}), kumi::record{"a"_n = 3.5});
-  TTS_EQUAL(kumi::pop_back(kumi::record{"a"_n = 4, "b"_n = 3.5, "c"_n = 'e'}), (kumi::record{"a"_n = 4, "b"_n = 3.5}));
+  TTS_EQUAL(kumi::pop_back(kumi::record{"a"_id = 3.5}), kumi::record{});
+  TTS_EQUAL(kumi::pop_back(kumi::record{"a"_id = 3.5, "b"_id = 'e'}), kumi::record{"a"_id = 3.5});
+  TTS_EQUAL(kumi::pop_back(kumi::record{"a"_id = 4, "b"_id = 3.5, "c"_id = 'e'}),
+            (kumi::record{"a"_id = 4, "b"_id = 3.5}));
 };
 
 TTS_CASE("Check kumi::push_back/pop_back constexpr behavior")
 {
   using namespace kumi::literals;
 
-  TTS_EQUAL((kumi::push_back(kumi::record{}, "a"_n = 4)), kumi::record{"a"_n = 4});
-  TTS_EQUAL((kumi::push_back(kumi::record{"a"_n = 3.5}, "b"_n = 4)), (kumi::record{"a"_n = 3.5, "b"_n = 4}));
-  TTS_EQUAL((kumi::push_back(kumi::record{"a"_n = 3.5, "b"_n = 'e'}, "c"_n = 4)),
-            (kumi::record{"a"_n = 3.5, "b"_n = 'e', "c"_n = 4}));
+  TTS_EQUAL((kumi::push_back(kumi::record{}, "a"_id = 4)), kumi::record{"a"_id = 4});
+  TTS_EQUAL((kumi::push_back(kumi::record{"a"_id = 3.5}, "b"_id = 4)), (kumi::record{"a"_id = 3.5, "b"_id = 4}));
+  TTS_EQUAL((kumi::push_back(kumi::record{"a"_id = 3.5, "b"_id = 'e'}, "c"_id = 4)),
+            (kumi::record{"a"_id = 3.5, "b"_id = 'e', "c"_id = 4}));
 
   TTS_EQUAL(kumi::pop_back(kumi::record{}), kumi::record{});
-  TTS_EQUAL(kumi::pop_back(kumi::record{"a"_n = 3.5}), kumi::record{});
-  TTS_EQUAL(kumi::pop_back(kumi::record{"a"_n = 3.5, "b"_n = 'e'}), kumi::record{"a"_n = 3.5});
-  TTS_EQUAL(kumi::pop_back(kumi::record{"a"_n = 4, "b"_n = 3.5, "c"_n = 'e'}), (kumi::record{"a"_n = 4, "b"_n = 3.5}));
+  TTS_EQUAL(kumi::pop_back(kumi::record{"a"_id = 3.5}), kumi::record{});
+  TTS_EQUAL(kumi::pop_back(kumi::record{"a"_id = 3.5, "b"_id = 'e'}), kumi::record{"a"_id = 3.5});
+  TTS_EQUAL(kumi::pop_back(kumi::record{"a"_id = 4, "b"_id = 3.5, "c"_id = 'e'}),
+            (kumi::record{"a"_id = 4, "b"_id = 3.5}));
 };

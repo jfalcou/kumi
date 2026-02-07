@@ -55,8 +55,9 @@ TTS_CASE("Check map_field(f, {}) behavior")
   TTS_EXPECT_NOT(was_run);
 };
 
-TTS_CASE("Check map_name(f, record) behavior"){{auto t = kumi::record{"boat"_n = 1, "biologic"_n = 2., "coat"_n = 3.4f,
-                                                                      "dystopic"_n = '5', "whatever"_n = short{55}};
+TTS_CASE("Check map_name(f, record) behavior"){
+  {auto t = kumi::record{"boat"_id = 1, "biologic"_id = 2., "coat"_id = 3.4f, "dystopic"_id = '5',
+                         "whatever"_id = short{55}};
 
 {
   auto s = map_field(
@@ -81,7 +82,8 @@ TTS_CASE("Check map_name(f, record) behavior"){{auto t = kumi::record{"boat"_n =
 }
 
 {
-  auto u = kumi::record{"whatever"_n = short{2}, "coat"_n = 2.3f, "boat"_n = 4, "biologic"_n = 5., "dystopic"_n = 'a'};
+  auto u =
+    kumi::record{"whatever"_id = short{2}, "coat"_id = 2.3f, "boat"_id = 4, "biologic"_id = 5., "dystopic"_id = 'a'};
   auto s = map_field(
     [](kumi::str name, auto m, auto n) {
       if (name.as<std::string_view>().find('o') < name.size()) return sizeof(m);
@@ -106,19 +108,19 @@ TTS_CASE("Check map_name(f, record) behavior"){{auto t = kumi::record{"boat"_n =
 ;
 
 TTS_CASE("Check map_field(f, record) constexpr behavior"){
-  {constexpr auto t = kumi::record{"a"_n = 1, "b"_n = 2., "c"_n = 3.4f, "d"_n = '5'};
+  {constexpr auto t = kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.4f, "d"_id = '5'};
 
 {
   constexpr auto s = map_field([](auto, auto m) { return sizeof(m); }, t);
 
-  TTS_CONSTEXPR_EQUAL(get<"a"_n>(s), sizeof(int));
-  TTS_CONSTEXPR_EQUAL(get<"b"_n>(s), sizeof(double));
-  TTS_CONSTEXPR_EQUAL(get<"c"_n>(s), sizeof(float));
-  TTS_CONSTEXPR_EQUAL(get<"d"_n>(s), sizeof(char));
+  TTS_CONSTEXPR_EQUAL(get<"a"_id>(s), sizeof(int));
+  TTS_CONSTEXPR_EQUAL(get<"b"_id>(s), sizeof(double));
+  TTS_CONSTEXPR_EQUAL(get<"c"_id>(s), sizeof(float));
+  TTS_CONSTEXPR_EQUAL(get<"d"_id>(s), sizeof(char));
 }
 
 {
-  constexpr auto u = kumi::record{"d"_n = 2, "b"_n = 3, "c"_n = 4, "a"_n = 5};
+  constexpr auto u = kumi::record{"d"_id = 2, "b"_id = 3, "c"_id = 4, "a"_id = 5};
   constexpr auto s = map_field(
     [](kumi::str name, auto m, auto n) {
       if (name.as<std::string_view>().compare("a"sv) == 0) return sizeof(m);
@@ -126,10 +128,10 @@ TTS_CASE("Check map_field(f, record) constexpr behavior"){
     },
     t, u);
 
-  TTS_CONSTEXPR_EQUAL(get<"a"_n>(s), sizeof(int));
-  TTS_CONSTEXPR_EQUAL(get<"b"_n>(s), 3 * sizeof(double));
-  TTS_CONSTEXPR_EQUAL(get<"c"_n>(s), 4 * sizeof(float));
-  TTS_CONSTEXPR_EQUAL(get<"d"_n>(s), 2 * sizeof(char));
+  TTS_CONSTEXPR_EQUAL(get<"a"_id>(s), sizeof(int));
+  TTS_CONSTEXPR_EQUAL(get<"b"_id>(s), 3 * sizeof(double));
+  TTS_CONSTEXPR_EQUAL(get<"c"_id>(s), 4 * sizeof(float));
+  TTS_CONSTEXPR_EQUAL(get<"d"_id>(s), 2 * sizeof(char));
 }
 }
 }

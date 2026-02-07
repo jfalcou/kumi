@@ -119,16 +119,12 @@ namespace kumi
     concept field = kumi::_::field<T>;
 
     //====================================================================================================================
-    //! @brief Keyword concept
+    //! @brief identifier concept
     //!
-    //! A Keyword type is able to be bound to a value as a [field](@ref kumi::field)
+    //! An identifier type is able to be bound to a value as a [field](@ref kumi::field)
     //====================================================================================================================
-    template<typename K>
-    concept identifier = requires(K k) {
-      typename K::tag_type;
-      { k.to_str() };
-    };
-
+    template<typename T>
+    concept identifier = kumi::_::identifier<T>;
     //================================================================================================
     //! @ingroup concepts
     //! @brief Concept specifying a type follows the Product Type semantic and has a known size
@@ -251,7 +247,7 @@ namespace kumi
     //! @brief Concept specifying if a Type is present in a parameter pack.
     //================================================================================================
     template<typename T, typename... Ts>
-    concept contains_type = _::can_get_field_by_type<T, Ts...>;
+    concept contains_type = kumi::_::can_get_field_by_type<T, Ts...>;
 
     //================================================================================================
     //! @ingroup concepts

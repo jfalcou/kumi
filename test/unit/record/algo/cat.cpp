@@ -57,19 +57,19 @@ TTS_CASE("Check cat(record) behavior")
 
   short s = 55;
   TTS_EQUAL((cat(kumi::record{}, kumi::record{})), (kumi::record{}));
-  TTS_EQUAL((cat(kumi::record{"x"_n = 1, "y"_n = 2.}, kumi::record{})), (kumi::record{"x"_n = 1, "y"_n = 2.}));
-  TTS_EQUAL((cat(kumi::record{}, kumi::record{"x"_n = 1, "y"_n = 2.})), (kumi::record{"x"_n = 1, "y"_n = 2.}));
-  TTS_EQUAL((cat(kumi::record{"x"_n = 1}, kumi::record{"y"_n = 2., "z"_n = 3.f, "t"_n = 4})),
-            (kumi::record{"x"_n = 1, "y"_n = 2., "z"_n = 3.f, "t"_n = 4}));
-  TTS_EQUAL((cat(kumi::record{"x"_n = 1, "y"_n = 2.}, kumi::record{"z"_n = 3.f, "t"_n = 4})),
-            (kumi::record{"x"_n = 1, "y"_n = 2., "z"_n = 3.f, "t"_n = 4}));
-  TTS_EQUAL((cat(kumi::record{"a"_n = 1, "b"_n = 2.}, kumi::record{"c"_n = 3.f, "d"_n = 4},
-                 kumi::record{"e"_n = s, "f"_n = 6.7})),
-            (kumi::record{"a"_n = 1, "b"_n = 2., "c"_n = 3.f, "d"_n = 4, "e"_n = s, "f"_n = 6.7}));
+  TTS_EQUAL((cat(kumi::record{"x"_id = 1, "y"_id = 2.}, kumi::record{})), (kumi::record{"x"_id = 1, "y"_id = 2.}));
+  TTS_EQUAL((cat(kumi::record{}, kumi::record{"x"_id = 1, "y"_id = 2.})), (kumi::record{"x"_id = 1, "y"_id = 2.}));
+  TTS_EQUAL((cat(kumi::record{"x"_id = 1}, kumi::record{"y"_id = 2., "z"_id = 3.f, "t"_id = 4})),
+            (kumi::record{"x"_id = 1, "y"_id = 2., "z"_id = 3.f, "t"_id = 4}));
+  TTS_EQUAL((cat(kumi::record{"x"_id = 1, "y"_id = 2.}, kumi::record{"z"_id = 3.f, "t"_id = 4})),
+            (kumi::record{"x"_id = 1, "y"_id = 2., "z"_id = 3.f, "t"_id = 4}));
+  TTS_EQUAL((cat(kumi::record{"a"_id = 1, "b"_id = 2.}, kumi::record{"c"_id = 3.f, "d"_id = 4},
+                 kumi::record{"e"_id = s, "f"_id = 6.7})),
+            (kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.f, "d"_id = 4, "e"_id = s, "f"_id = 6.7}));
 
   // Check behavior with record of references
   {
-    auto ref = kumi::tie<"a"_n>(s);
+    auto ref = kumi::tie<"a"_id>(s);
     auto val = kumi::record<kumi::field<kumi::name<"b">, float const>>{3.14f};
 
     TTS_EQUAL(
@@ -77,7 +77,7 @@ TTS_CASE("Check cat(record) behavior")
       (kumi::record<kumi::field<kumi::name<"a">, short&>, kumi::field<kumi::name<"b">, float const>>{s, 3.14f}));
   }
   {
-    auto ref = kumi::tie<"a"_n>(s);
+    auto ref = kumi::tie<"a"_id>(s);
     auto rref = kumi::record<kumi::field<kumi::name<"b">, short&&>>{std::move(s)};
     auto val = kumi::record<kumi::field<kumi::name<"c">, float const>>{3.14f};
 
@@ -92,15 +92,15 @@ TTS_CASE("Check cat(record) constexpr behavior")
   using namespace kumi::literals;
   constexpr short s = 55;
   TTS_CONSTEXPR_EQUAL((cat(kumi::record{}, kumi::record{})), (kumi::record{}));
-  TTS_CONSTEXPR_EQUAL((cat(kumi::record{"x"_n = 1, "y"_n = 2.}, kumi::record{})),
-                      (kumi::record{"x"_n = 1, "y"_n = 2.}));
-  TTS_CONSTEXPR_EQUAL((cat(kumi::record{}, kumi::record{"x"_n = 1, "y"_n = 2.})),
-                      (kumi::record{"x"_n = 1, "y"_n = 2.}));
-  TTS_CONSTEXPR_EQUAL((cat(kumi::record{"x"_n = 1}, kumi::record{"y"_n = 2., "z"_n = 3.f, "t"_n = 4})),
-                      (kumi::record{"x"_n = 1, "y"_n = 2., "z"_n = 3.f, "t"_n = 4}));
-  TTS_CONSTEXPR_EQUAL((cat(kumi::record{"x"_n = 1, "y"_n = 2.}, kumi::record{"z"_n = 3.f, "t"_n = 4})),
-                      (kumi::record{"x"_n = 1, "y"_n = 2., "z"_n = 3.f, "t"_n = 4}));
-  TTS_CONSTEXPR_EQUAL((cat(kumi::record{"a"_n = 1, "b"_n = 2.}, kumi::record{"c"_n = 3.f, "d"_n = 4},
-                           kumi::record{"e"_n = s, "f"_n = 6.7})),
-                      (kumi::record{"a"_n = 1, "b"_n = 2., "c"_n = 3.f, "d"_n = 4, "e"_n = s, "f"_n = 6.7}));
+  TTS_CONSTEXPR_EQUAL((cat(kumi::record{"x"_id = 1, "y"_id = 2.}, kumi::record{})),
+                      (kumi::record{"x"_id = 1, "y"_id = 2.}));
+  TTS_CONSTEXPR_EQUAL((cat(kumi::record{}, kumi::record{"x"_id = 1, "y"_id = 2.})),
+                      (kumi::record{"x"_id = 1, "y"_id = 2.}));
+  TTS_CONSTEXPR_EQUAL((cat(kumi::record{"x"_id = 1}, kumi::record{"y"_id = 2., "z"_id = 3.f, "t"_id = 4})),
+                      (kumi::record{"x"_id = 1, "y"_id = 2., "z"_id = 3.f, "t"_id = 4}));
+  TTS_CONSTEXPR_EQUAL((cat(kumi::record{"x"_id = 1, "y"_id = 2.}, kumi::record{"z"_id = 3.f, "t"_id = 4})),
+                      (kumi::record{"x"_id = 1, "y"_id = 2., "z"_id = 3.f, "t"_id = 4}));
+  TTS_CONSTEXPR_EQUAL((cat(kumi::record{"a"_id = 1, "b"_id = 2.}, kumi::record{"c"_id = 3.f, "d"_id = 4},
+                           kumi::record{"e"_id = s, "f"_id = 6.7})),
+                      (kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.f, "d"_id = 4, "e"_id = s, "f"_id = 6.7}));
 };

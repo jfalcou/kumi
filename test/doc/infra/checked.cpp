@@ -11,7 +11,7 @@ using namespace kumi::literals;
 template<typename T>
 struct is_big : std::bool_constant<(sizeof(T) > 2)> {};
 
-inline constexpr auto large_value = kumi::identifier("large"_n, kumi::if_<is_big>);
+inline constexpr auto large_value = kumi::identifier("large"_id, kumi::if_<is_big>);
 
 int main()
 {
