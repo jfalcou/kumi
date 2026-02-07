@@ -186,4 +186,15 @@ namespace kumi
       return os << f.to_str();
     }
   };
+
+  namespace _
+  {
+    // MSVC workaround for get<>
+    // MSVC evaluates a requires clause before checking the type of an NTTP
+    template<auto N, typename... Ts> KUMI_ABI constexpr auto contains_field()
+    {
+      if constexpr (!std::integral<std::remove_cvref_t<decltype(N)>>) return can_get_field_by_value<name<N>, Ts...>;
+      else return false;
+    };
+  }
 }

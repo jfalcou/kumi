@@ -258,7 +258,7 @@ namespace kumi
     //! @brief Concept specifying if a kumi::field_capture with name Name is present in a parameter pack.
     //================================================================================================
     template<typename Name, typename... Ts>
-    concept contains_field = identifier<Name> && kumi::_::contains_field<Name, Ts...>();
+    concept contains_field = identifier<Name> && kumi::_::can_get_field_by_value<Name, Ts...>;
 
     //================================================================================================
     //! @ingroup concepts
@@ -335,7 +335,7 @@ namespace kumi
       else
         return []<std::size_t... I>(std::index_sequence<I...>) {
           if constexpr (concepts::uniquely_typed<element_t<I, T>...>)
-            return _::can_get_field_by_type<Type, element_t<I, T>...>;
+            return concepts::contains_type<Type, element_t<I, T>...>;
           else return false;
         }(std::make_index_sequence<size_v<T>>{});
     }
@@ -346,7 +346,7 @@ namespace kumi
       else
         return []<std::size_t... I>(std::index_sequence<I...>) {
           if constexpr (concepts::uniquely_named<element_t<I, T>...>)
-            return _::contains_field<Name, element_t<I, T>...>();
+            return concepts::contains_field<Name, element_t<I, T>...>;
           else return false;
         }(std::make_index_sequence<size_v<T>>{});
     }
