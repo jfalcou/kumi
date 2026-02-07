@@ -290,3 +290,7 @@ struct moveonly
   moveonly& operator=(moveonly const&) = delete;
   moveonly& operator=(moveonly&&) = default;
 };
+
+struct empty
+{
+};
