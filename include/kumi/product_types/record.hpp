@@ -497,7 +497,7 @@ namespace kumi
   //! @include doc/record/api/named_get.cpp
   //================================================================================================
   template<str Name, typename... Ts>
-  requires(concepts::contains_field<name<Name>, Ts...>)
+  requires(concepts::contains_field<decltype(name<Name>{}), Ts...>)
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>& r) noexcept
   {
     return r[name<Name>{}];
@@ -505,7 +505,7 @@ namespace kumi
 
   /// @overload
   template<str Name, typename... Ts>
-  requires(concepts::contains_field<name<Name>, Ts...>)
+  requires(concepts::contains_field<decltype(name<Name>{}), Ts...>)
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>&& r) noexcept
   {
     return static_cast<record<Ts...>&&>(r)[name<Name>{}];
@@ -513,7 +513,7 @@ namespace kumi
 
   /// @overload
   template<str Name, typename... Ts>
-  requires(concepts::contains_field<name<Name>, Ts...>)
+  requires(concepts::contains_field<decltype(name<Name>{}), Ts...>)
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const& r) noexcept
   {
     return r[name<Name>{}];
@@ -521,7 +521,7 @@ namespace kumi
 
   /// @overload
   template<str Name, typename... Ts>
-  requires(concepts::contains_field<name<Name>, Ts...>)
+  requires(concepts::contains_field<decltype(name<Name>{}), Ts...>)
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const&& r) noexcept
   {
     return static_cast<record<Ts...> const&&>(r)[name<Name>{}];
@@ -569,8 +569,13 @@ namespace kumi
   constexpr auto get(R&& r) = delete;
 
   /// Improves diagnostic for non present name
-  template<str Name, typename R>
-  requires(is_kumi_record_v<std::remove_cvref_t<R>> && !(_::named_get_compliant<Name, R>()))
+  template<str S, typename R>
+  requires(is_kumi_record_v<std::remove_cvref_t<R>> && !concepts::contains_field<decltype(name<S>{}), R>)
+  constexpr auto get(R&& r) = delete;
+
+  /// Improves diagnostic for non present name
+  template<concepts::identifier auto S, typename R>
+  requires(is_kumi_record_v<std::remove_cvref_t<R>> && !concepts::contains_field<decltype(S), R>)
   constexpr auto get(R&& r) = delete;
 
   /// No get<type> on records

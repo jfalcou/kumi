@@ -53,7 +53,12 @@ namespace kumi
       return {KUMI_FWD(v)};
     }
 
-    static constexpr auto to_str() { return _::typer<ID>(); }
+    static constexpr auto to_str()
+    {
+      using S = std::remove_cvref_t<ID>;
+      if constexpr (requires { S::to_str(); }) return S::to_str();
+      else return _::typer<ID>();
+    }
 
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os,
@@ -129,7 +134,12 @@ namespace kumi
     requires(!Checker::template value<T>)
     constexpr field<tag_type, std::unwrap_ref_decay_t<T>> operator=(T&& v) const = delete;
 
-    static constexpr auto to_str() { return _::typer<ID>(); }
+    static constexpr auto to_str()
+    {
+      using S = std::remove_cvref_t<ID>;
+      if constexpr (requires { S::to_str(); }) return S::to_str();
+      else return _::typer<ID>();
+    }
 
     //! @related kumi::identifier
     //! @brief Output stream insertion

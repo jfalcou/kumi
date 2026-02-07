@@ -133,7 +133,7 @@ jobs:
         run:  cd build && make kumi-test -j 2
 
   msvc:
-    runs-on: [windows-2022]
+    runs-on: [windows-2025]
     needs: precommit
     strategy:
       fail-fast: false
