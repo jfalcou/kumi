@@ -36,7 +36,6 @@ namespace kumi
 #include <kumi/algorithm/cartesian_product.hpp>
 #include <kumi/algorithm/cast.hpp>
 #include <kumi/algorithm/cat.hpp>
-#include <kumi/algorithm/convert.hpp>
 #include <kumi/algorithm/extract.hpp>
 #include <kumi/algorithm/for_each.hpp>
 #include <kumi/algorithm/find.hpp>

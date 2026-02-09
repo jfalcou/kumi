@@ -317,11 +317,31 @@ namespace kumi
   //! }
   //! @endcode
   //================================================================================================
-  template<typename T> struct is_homogeneous;
+  template<typename T> struct is_homogeneous : std::false_type
+  {
+  };
+
+  // Specific is_homogeneous overload
+  template<typename T>
+  requires(is_product_type_v<T> && !is_static_container_v<T>)
+  struct is_homogeneous<T>
+  {
+    static consteval bool check()
+    {
+      if constexpr (size_v<T> == 0) return false;
+      else if constexpr (size_v<T> == 1) return true;
+      else
+        return []<std::size_t... I>(std::index_sequence<I...>) {
+          return _::all_the_same<element_t<I, T>...>;
+        }(std::make_index_sequence<size_v<T>>{});
+    }
+
+    static constexpr bool value = check();
+  };
 
   template<typename T>
-  requires(requires { T::is_homogeneous; })
-  struct is_homogeneous<T> : std::bool_constant<T::is_homogeneous>
+  requires(is_static_container_v<T> && is_product_type_v<T>)
+  struct is_homogeneous<T> : std::true_type
   {
   };
 

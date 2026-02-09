@@ -22,7 +22,6 @@ namespace kumi
   {
     using binder_t = _::make_binder_t<std::make_integer_sequence<int, sizeof...(V)>, V...>;
 
-    static constexpr bool is_homogeneous = binder_t::is_homogeneous;
     static constexpr bool is_index_map = true;
 
     binder_t impl;
