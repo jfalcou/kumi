@@ -20,6 +20,9 @@ namespace kumi::_
   // We usually don't want to optimize tuple of references
   template<typename... Ts> inline constexpr bool no_references = (true && ... && !std::is_reference_v<Ts>);
 
+  // [[no_unique_address]] is to unstable at the moment, will go through the standard path
+  template<typename... Ts> inline constexpr bool no_empty = (true && ... && !std::is_empty_v<Ts>);
+
   // We care about homogeneous tuple
   template<typename T0, typename... Ts> inline constexpr bool all_the_same = (true && ... && std::is_same_v<T0, Ts>);
 
@@ -35,7 +38,7 @@ namespace kumi::_
   };
 
   template<int... Is, typename T0, typename T1, typename... Ts>
-  requires(all_the_same<T0, T1, Ts...> && no_references<T0, T1, Ts...>)
+  requires(all_the_same<T0, T1, Ts...> && no_references<T0, T1, Ts...> && no_empty<T0, T1, Ts...>)
   struct make_binder<std::integer_sequence<int, Is...>, T0, T1, Ts...>
   {
     using type = binder_n<T0, 2 + sizeof...(Ts)>;
@@ -66,14 +69,8 @@ namespace kumi::_
   //================================================================================================
   // Optimized binder for 1->10 elements, none being reference
   //================================================================================================
-  template<> struct binder<std::integer_sequence<int>>
-  {
-    static constexpr bool is_homogeneous = false;
-    using kumi_specific_layout = void;
-  };
-
   template<typename T>
-  requires(no_references<T>)
+  requires(no_references<T> && no_empty<T>)
   struct binder<std::integer_sequence<int, 0>, T>
   {
     static constexpr bool is_homogeneous = true;
@@ -83,7 +80,7 @@ namespace kumi::_
   };
 
   template<typename T0, typename T1>
-  requires(no_references<T0, T1>)
+  requires(no_references<T0, T1> && no_empty<T0, T1>)
   struct binder<std::integer_sequence<int, 0, 1>, T0, T1>
   {
     static constexpr bool is_homogeneous = false;
@@ -95,7 +92,7 @@ namespace kumi::_
   };
 
   template<typename T0, typename T1, typename T2>
-  requires(no_references<T0, T1, T2>)
+  requires(no_references<T0, T1, T2> && no_empty<T0, T1, T2>)
   struct binder<std::integer_sequence<int, 0, 1, 2>, T0, T1, T2>
   {
     static constexpr bool is_homogeneous = false;
@@ -109,7 +106,7 @@ namespace kumi::_
   };
 
   template<typename T0, typename T1, typename T2, typename T3>
-  requires(no_references<T0, T1, T2, T3>)
+  requires(no_references<T0, T1, T2, T3> && no_empty<T0, T1, T2, T3>)
   struct binder<std::integer_sequence<int, 0, 1, 2, 3>, T0, T1, T2, T3>
   {
     static constexpr bool is_homogeneous = false;
@@ -125,7 +122,7 @@ namespace kumi::_
   };
 
   template<typename T0, typename T1, typename T2, typename T3, typename T4>
-  requires(no_references<T0, T1, T2, T3, T4>)
+  requires(no_references<T0, T1, T2, T3, T4> && no_empty<T0, T1, T2, T3, T4>)
   struct binder<std::integer_sequence<int, 0, 1, 2, 3, 4>, T0, T1, T2, T3, T4>
   {
     static constexpr bool is_homogeneous = false;
@@ -143,7 +140,7 @@ namespace kumi::_
   };
 
   template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5>
-  requires(no_references<T0, T1, T2, T3, T4, T5>)
+  requires(no_references<T0, T1, T2, T3, T4, T5> && no_empty<T0, T1, T2, T3, T4, T5>)
   struct binder<std::integer_sequence<int, 0, 1, 2, 3, 4, 5>, T0, T1, T2, T3, T4, T5>
   {
     static constexpr bool is_homogeneous = false;
@@ -163,7 +160,7 @@ namespace kumi::_
   };
 
   template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6>
-  requires(no_references<T0, T1, T2, T3, T4, T5, T6>)
+  requires(no_references<T0, T1, T2, T3, T4, T5, T6> && no_empty<T0, T1, T2, T3, T4, T5, T6>)
   struct binder<std::integer_sequence<int, 0, 1, 2, 3, 4, 5, 6>, T0, T1, T2, T3, T4, T5, T6>
   {
     static constexpr bool is_homogeneous = false;
@@ -185,7 +182,7 @@ namespace kumi::_
   };
 
   template<typename T0, typename T1, typename T2, typename T3, typename T4, typename T5, typename T6, typename T7>
-  requires(no_references<T0, T1, T2, T3, T4, T5, T6, T7>)
+  requires(no_references<T0, T1, T2, T3, T4, T5, T6, T7> && no_empty<T0, T1, T2, T3, T4, T5, T6, T7>)
   struct binder<std::integer_sequence<int, 0, 1, 2, 3, 4, 5, 6, 7>, T0, T1, T2, T3, T4, T5, T6, T7>
   {
     static constexpr bool is_homogeneous = false;
@@ -217,7 +214,7 @@ namespace kumi::_
            typename T6,
            typename T7,
            typename T8>
-  requires(no_references<T0, T1, T2, T3, T4, T5, T6, T7, T8>)
+  requires(no_references<T0, T1, T2, T3, T4, T5, T6, T7, T8> && no_empty<T0, T1, T2, T3, T4, T5, T6, T7, T8>)
   struct binder<std::integer_sequence<int, 0, 1, 2, 3, 4, 5, 6, 7, 8>, T0, T1, T2, T3, T4, T5, T6, T7, T8>
   {
     static constexpr bool is_homogeneous = false;
@@ -252,7 +249,7 @@ namespace kumi::_
            typename T7,
            typename T8,
            typename T9>
-  requires(no_references<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>)
+  requires(no_references<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9> && no_empty<T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>)
   struct binder<std::integer_sequence<int, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9>, T0, T1, T2, T3, T4, T5, T6, T7, T8, T9>
   {
     static constexpr bool is_homogeneous = false;
