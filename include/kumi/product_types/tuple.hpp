@@ -503,7 +503,8 @@ namespace kumi
   //================================================================================================
 
   //================================================================================================
-  //! @ingroup utility
+  //! @ingroup tuple
+  //! @related kumi::tuple
   //! @brief Converts a kumi::tuple to an instance of an arbitrary type
   //!
   //! Constructs an instance of `Type` by passing elements of `t` to the appropriate constructor.
@@ -525,7 +526,8 @@ namespace kumi
   }
 
   //================================================================================================
-  //! @ingroup utility
+  //! @ingroup tuple
+  //! @related kumi::tuple
   //! @brief Converts a kumi::product_type to an instance kumi::tuple
   //!
   //! Constructs an instance kumi::tuple from the elements of the kumi::product_type parameters
@@ -578,7 +580,8 @@ namespace kumi
   }
 
   //================================================================================================
-  //! @ingroup utility
+  //! @ingroup tuple
+  //! ^related kumi::tuple
   //! @brief Generate a kumi::tuple type from a type
   //!
   //! If `T` is a @ref kumi::concepts::product_type, returns the kumi::tuple type containing the same element

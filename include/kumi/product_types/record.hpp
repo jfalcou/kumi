@@ -383,7 +383,8 @@ namespace kumi
   //================================================================================================
 
   //================================================================================================
-  //! @ingroup utility
+  //! @ingroup record
+  //! @related kumi::record
   //! @brief Converts a kumi::record to an instance of a type that models kumi::record_type
   //!
   //! Constructs an instance of `Type` by passing elements of `t` to the appropriate constructor.
@@ -405,7 +406,8 @@ namespace kumi
   }
 
   //================================================================================================
-  //! @ingroup utility
+  //! @ingroup record
+  //! @related kumi::record
   //! @brief Converts a kumi::record_type to an instance kumi::record
   //!
   //! Constructs an instance kumi::record from the elements of the kumi::product_type parameters
