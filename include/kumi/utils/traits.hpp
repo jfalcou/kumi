@@ -321,9 +321,15 @@ namespace kumi
   {
   };
 
+  template<typename T>
+  requires(requires { T::is_homogeneous; })
+  struct is_homogeneous<T> : std::bool_constant<T::is_homogeneous>
+  {
+  };
+
   // Specific is_homogeneous overload
   template<typename T>
-  requires(is_product_type_v<T> && !is_static_container_v<T>)
+  requires(!requires { T::is_homogeneous; } && is_product_type_v<T> && !is_static_container_v<T>)
   struct is_homogeneous<T>
   {
     static consteval bool check()
