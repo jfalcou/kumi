@@ -125,19 +125,20 @@ $(document).ready(function(){initNavTree('conceptkumi_1_1concepts_1_1entirely__u
 </div><!--header-->
 <div class="contents">
 
-<p>Concept specifying if a parameter pack only holds kumi::field_captures each of their each of their names are unique!  
+<p>Concept specifying if a parameter pack only holds <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c" title="Converts a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target...&gt;">kumi::field_captures</a> each of their each of their names are unique!  
 <a href="conceptkumi_1_1concepts_1_1entirely__uniquely__named.html#details">More...</a></p>
 
 <p><code>#include &lt;kumi/utils/concepts.hpp&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Concept specifying if a parameter pack only holds kumi::field_captures each of their each of their names are unique! </p>
+<div class="textblock"><p>Concept specifying if a parameter pack only holds <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c" title="Converts a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target...&gt;">kumi::field_captures</a> each of their each of their names are unique! </p>
 <dl class="section note"><dt>Note</dt><dd>If there are no element in the parameter pack the concept returns true </dd></dl>
 </div><h2 class="groupheader">Concept definition</h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
-<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1concepts_1_1entirely__uniquely__named.html">kumi::concepts::entirely_uniquely_named</a> =  (<span class="keyword">sizeof</span>...(Ts) == 0) || (<a class="code hl_concept" href="conceptkumi_1_1concepts_1_1is__fully__named.html">is_fully_named</a>&lt;Ts...&gt; &amp;&amp; <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1uniquely__named.html">uniquely_named</a>&lt;Ts...&gt;)</div>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Ts</a>&gt;</div>
+<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1concepts_1_1entirely__uniquely__named.html">kumi::concepts::entirely_uniquely_named</a> =  (<span class="keyword">sizeof</span>...(Ts) == 0) || (<a class="code hl_concept" href="conceptkumi_1_1concepts_1_1is__fully__named.html">is_fully_named</a>&lt;<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Ts</a>...&gt; &amp;&amp; <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1uniquely__named.html">uniquely_named</a>&lt;<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Ts</a>...&gt;)</div>
 <div class="ttc" id="aconceptkumi_1_1concepts_1_1entirely__uniquely__named_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1entirely__uniquely__named.html">kumi::concepts::entirely_uniquely_named</a></div><div class="ttdoc">Concept specifying if a parameter pack only holds kumi::field_captures each of their each of their na...</div><div class="ttdef"><b>Definition</b> concepts.hpp:228</div></div>
 <div class="ttc" id="aconceptkumi_1_1concepts_1_1is__fully__named_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1is__fully__named.html">kumi::concepts::is_fully_named</a></div><div class="ttdoc">Concept specifying if parameter pack contains only kumi::field_captures.</div><div class="ttdef"><b>Definition</b> concepts.hpp:204</div></div>
 <div class="ttc" id="aconceptkumi_1_1concepts_1_1uniquely__named_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1uniquely__named.html">kumi::concepts::uniquely_named</a></div><div class="ttdoc">Concept specifying if a parameter pack only holds unique kumi::field_capture names.</div><div class="ttdef"><b>Definition</b> concepts.hpp:218</div></div>
+<div class="ttc" id="agroup__utility_ga79787185d26368946a74f31ce5f6597c_html_ga79787185d26368946a74f31ce5f6597c"><div class="ttname"><a href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::member_cast</a></div><div class="ttdeci">constexpr auto member_cast(T &amp;&amp;t)</div><div class="ttdoc">Converts a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target...&gt;</div><div class="ttdef"><b>Definition</b> cast.hpp:56</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->

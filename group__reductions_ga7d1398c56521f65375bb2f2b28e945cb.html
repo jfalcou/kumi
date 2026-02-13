@@ -127,15 +127,15 @@ $(document).ready(function(){initNavTree('group__reductions_ga7d1398c56521f65375
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;concepts::monoid M, concepts::product_type T, typename Value &gt; </div>
+template&lt;concepts::monoid M, concepts::product_type T, <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">typename</a> <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Value</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr auto kumi::reduce </td>
+          <td class="memname"><a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">constexpr</a> <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">auto</a> kumi::reduce </td>
           <td>(</td>
-          <td class="paramtype">M &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">M</a> &amp;&amp;&#160;</td>
           <td class="paramname"><em>m</em>, </td>
         </tr>
         <tr>
@@ -147,7 +147,7 @@ template&lt;concepts::monoid M, concepts::product_type T, typename Value &gt; </
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">Value&#160;</td>
+          <td class="paramtype"><a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Value</a>&#160;</td>
           <td class="paramname"><em>init</em>&#160;</td>
         </tr>
         <tr>
@@ -174,7 +174,7 @@ template&lt;concepts::monoid M, concepts::product_type T, typename Value &gt; </
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The result of reducing <code>t</code> by recursively combining elements in a tree structure.</dd></dl>
-<h2><a class="anchor" id="autotoc_md92"></a>
+<h2><a class="anchor" id="autotoc_md86"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
@@ -185,34 +185,35 @@ Helper type</h2>
 <div class="line">}</div>
 <div class="ttc" id="agroup__reductions_ga812fe60401e985cc2ebd067bc42f0354_html_ga812fe60401e985cc2ebd067bc42f0354"><div class="ttname"><a href="group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html#ga812fe60401e985cc2ebd067bc42f0354">kumi::reduce</a></div><div class="ttdeci">constexpr auto reduce(M &amp;&amp;m, T &amp;&amp;t)</div><div class="ttdoc">Performs a tree-like reduction of all elements of a product type.</div><div class="ttdef"><b>Definition</b> reduce.hpp:65</div></div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html#ga812fe60401e985cc2ebd067bc42f0354" title="Performs a tree-like reduction of all elements of a product type.">kumi::reduce</a></p>
-<h2><a class="anchor" id="autotoc_md93"></a>
+<h2><a class="anchor" id="autotoc_md87"></a>
 Example</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">main</a>()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> t1 = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{14,<span class="keywordtype">short</span>{7}, 255ULL};</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html#ga812fe60401e985cc2ebd067bc42f0354">kumi::reduce</a>(<a class="code hl_variable" href="group__utility.html#gaa04ecc72014400d45d9ebb72bd7447cc">kumi::function::bit_and</a>, t1)        &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html#ga812fe60401e985cc2ebd067bc42f0354">kumi::reduce</a>(<a class="code hl_variable" href="group__utility.html#gaa04ecc72014400d45d9ebb72bd7447cc">kumi::function::bit_and</a>, t1, 65535) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t1</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{14,<span class="keywordtype">short</span>{7}, 255ULL};</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html#ga812fe60401e985cc2ebd067bc42f0354">kumi::reduce</a>(<a class="code hl_variable" href="group__utility.html#gaa04ecc72014400d45d9ebb72bd7447cc">kumi::function::bit_and</a>, <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t1</a>)        &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html#ga812fe60401e985cc2ebd067bc42f0354">kumi::reduce</a>(<a class="code hl_variable" href="group__utility.html#gaa04ecc72014400d45d9ebb72bd7447cc">kumi::function::bit_and</a>, <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t1</a>, 65535) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> t2 = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1 ,<span class="keywordtype">short</span>{8},<span class="charliteral">&#39; &#39;</span>, 4ULL};</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html#ga812fe60401e985cc2ebd067bc42f0354">kumi::reduce</a>(<a class="code hl_variable" href="group__utility.html#gac095643bedb84ce2b3fdf1bd0c4a9cc3">kumi::function::bit_or</a>, t2)         &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html#ga812fe60401e985cc2ebd067bc42f0354">kumi::reduce</a>(<a class="code hl_variable" href="group__utility.html#gac095643bedb84ce2b3fdf1bd0c4a9cc3">kumi::function::bit_or</a>, t2, 0)      &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t2</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1 ,<span class="keywordtype">short</span>{8},<span class="charliteral">&#39; &#39;</span>, 4ULL};</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html#ga812fe60401e985cc2ebd067bc42f0354">kumi::reduce</a>(<a class="code hl_variable" href="group__utility.html#gac095643bedb84ce2b3fdf1bd0c4a9cc3">kumi::function::bit_or</a>, <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t2</a>)         &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html#ga812fe60401e985cc2ebd067bc42f0354">kumi::reduce</a>(<a class="code hl_variable" href="group__utility.html#gac095643bedb84ce2b3fdf1bd0c4a9cc3">kumi::function::bit_or</a>, <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t2</a>, 0)      &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> t3 = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{3, <span class="keywordtype">short</span>{23}, <span class="charliteral">&#39;\t&#39;</span>};</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html#ga812fe60401e985cc2ebd067bc42f0354">kumi::reduce</a>(<a class="code hl_variable" href="group__utility.html#gac2d793601af17db10563acf07dc1a29f">kumi::function::bit_xor</a>, t3)        &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html#ga812fe60401e985cc2ebd067bc42f0354">kumi::reduce</a>(<a class="code hl_variable" href="group__utility.html#gac2d793601af17db10563acf07dc1a29f">kumi::function::bit_xor</a>, t3, 1)     &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t3</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{3, <span class="keywordtype">short</span>{23}, <span class="charliteral">&#39;\t&#39;</span>};</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html#ga812fe60401e985cc2ebd067bc42f0354">kumi::reduce</a>(<a class="code hl_variable" href="group__utility.html#gac2d793601af17db10563acf07dc1a29f">kumi::function::bit_xor</a>, <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t3</a>)        &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html#ga812fe60401e985cc2ebd067bc42f0354">kumi::reduce</a>(<a class="code hl_variable" href="group__utility.html#gac2d793601af17db10563acf07dc1a29f">kumi::function::bit_xor</a>, <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t3</a>, 1)     &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> t4 = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{2.,5,<span class="keywordtype">short</span>{3},<span class="charliteral">&#39;\4&#39;</span>};</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html#ga812fe60401e985cc2ebd067bc42f0354">kumi::reduce</a>(<a class="code hl_variable" href="group__utility.html#gaaab79e5ddd9913e237c23b6ebbe0d274">kumi::function::multiplies</a>, t4)     &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html#ga812fe60401e985cc2ebd067bc42f0354">kumi::reduce</a>(<a class="code hl_variable" href="group__utility.html#gaaab79e5ddd9913e237c23b6ebbe0d274">kumi::function::multiplies</a>, t4, 1)  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t4</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{2.,5,<span class="keywordtype">short</span>{3},<span class="charliteral">&#39;\4&#39;</span>};</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html#ga812fe60401e985cc2ebd067bc42f0354">kumi::reduce</a>(<a class="code hl_variable" href="group__utility.html#gaaab79e5ddd9913e237c23b6ebbe0d274">kumi::function::multiplies</a>, <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t4</a>)     &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html#ga812fe60401e985cc2ebd067bc42f0354">kumi::reduce</a>(<a class="code hl_variable" href="group__utility.html#gaaab79e5ddd9913e237c23b6ebbe0d274">kumi::function::multiplies</a>, <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t4</a>, 1)  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> t5 = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{2.,1,<span class="keywordtype">short</span>{55},<span class="charliteral">&#39; &#39;</span>};</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html#ga812fe60401e985cc2ebd067bc42f0354">kumi::reduce</a>(<a class="code hl_variable" href="group__utility.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a>, t5)           &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html#ga812fe60401e985cc2ebd067bc42f0354">kumi::reduce</a>(<a class="code hl_variable" href="group__utility.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a>, t5, 42)        &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t5</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{2.,1,<span class="keywordtype">short</span>{55},<span class="charliteral">&#39; &#39;</span>};</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html#ga812fe60401e985cc2ebd067bc42f0354">kumi::reduce</a>(<a class="code hl_variable" href="group__utility.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a>, <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t5</a>)           &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html#ga812fe60401e985cc2ebd067bc42f0354">kumi::reduce</a>(<a class="code hl_variable" href="group__utility.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a>, <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t5</a>, 42)        &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
+<div class="ttc" id="agroup__utility_ga79787185d26368946a74f31ce5f6597c_html_ga79787185d26368946a74f31ce5f6597c"><div class="ttname"><a href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::member_cast</a></div><div class="ttdeci">constexpr auto member_cast(T &amp;&amp;t)</div><div class="ttdoc">Converts a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target...&gt;</div><div class="ttdef"><b>Definition</b> cast.hpp:56</div></div>
 <div class="ttc" id="agroup__utility_html_gaa04ecc72014400d45d9ebb72bd7447cc"><div class="ttname"><a href="group__utility.html#gaa04ecc72014400d45d9ebb72bd7447cc">kumi::function::bit_and</a></div><div class="ttdeci">constexpr boolean_and bit_and</div><div class="ttdoc">Forms a binary monoid callable that can be used in kumi::algoritm. It represents the logical and oper...</div><div class="ttdef"><b>Definition</b> monoid.hpp:140</div></div>
 <div class="ttc" id="agroup__utility_html_gaaab79e5ddd9913e237c23b6ebbe0d274"><div class="ttname"><a href="group__utility.html#gaaab79e5ddd9913e237c23b6ebbe0d274">kumi::function::multiplies</a></div><div class="ttdeci">constexpr numeric_prod multiplies</div><div class="ttdoc">Forms a binary monoid callable that can be used in kumi::algoritm. It represents the multiplication.</div><div class="ttdef"><b>Definition</b> monoid.hpp:133</div></div>
 <div class="ttc" id="agroup__utility_html_gab5c0eb8022e7b2df33286d9a15247559"><div class="ttname"><a href="group__utility.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a></div><div class="ttdeci">constexpr numeric_add plus</div><div class="ttdoc">Forms a binary monoid callable that can be used in kumi::algoritm. It represents the addition.</div><div class="ttdef"><b>Definition</b> monoid.hpp:126</div></div>

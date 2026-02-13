@@ -130,15 +130,15 @@ $(document).ready(function(){initNavTree('structkumi_1_1tuple_afe7c9576494a5de1d
 template&lt;typename... Ts&gt; </div>
 <div class="memtemplate">
 template&lt;typename... Us&gt; <br />
-requires ((sizeof...(Us) == sizeof...(Ts)) &amp;&amp; (!std::same_as&lt;<a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;Ts...&gt;, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;Us...&gt;&gt;) &amp;&amp; _::piecewise_constructible&lt;<a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;Ts const&amp;...&gt;, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;Us...&gt;&gt;)</div>
+requires ((sizeof...(<a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Us</a>) == sizeof...(<a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Ts</a>)) &amp;&amp; (!std::same_as&lt;<a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;Ts...&gt;, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;Us...&gt;&gt;) &amp;&amp; _::piecewise_constructible&lt;<a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;<a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Ts</a> <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">const</a>&amp;...&gt;, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;Us...&gt;&gt;)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structkumi_1_1tuple.html">kumi::tuple</a>&lt; Ts &gt;::explicit </td>
+          <td class="memname"><a class="el" href="structkumi_1_1tuple.html">kumi::tuple</a>&lt; <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Ts</a> &gt;::explicit </td>
           <td>(</td>
-          <td class="paramtype">!_::piecewise_convertible&lt; <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Ts const &amp;... &gt;, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Us... &gt; &gt;&#160;</td>
+          <td class="paramtype">!_::piecewise_convertible&lt; <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Ts</a> <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">const</a> &amp;... &gt;, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Us... &gt; &gt;&#160;</td>
           <td class="paramname"></td><td>)</td>
           <td> const</td>
         </tr>
@@ -164,14 +164,15 @@ Example :</h2>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">main</a>()</div>
 <div class="line">{</div>
-<div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> a = { 65, 2.3, 4.5f};</div>
-<div class="line">  <span class="keyword">auto</span> b = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple&lt;char,int,double&gt;</a><span class="keyword">&gt;</span>(a);</div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">a</a> = { 65, 2.3, 4.5f};</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">b</a> = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple&lt;char,int,double&gt;</a><span class="keyword">&gt;</span>(<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">a</a>);</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; b &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">a</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">b</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
+<div class="ttc" id="agroup__utility_ga79787185d26368946a74f31ce5f6597c_html_ga79787185d26368946a74f31ce5f6597c"><div class="ttname"><a href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::member_cast</a></div><div class="ttdeci">constexpr auto member_cast(T &amp;&amp;t)</div><div class="ttdoc">Converts a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target...&gt;</div><div class="ttdef"><b>Definition</b> cast.hpp:56</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:32</div></div>
 </div><!-- fragment --> <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -180,8 +181,8 @@ Example :</h2>
 <div class="line"><span class="preprocessor">#include &lt;ranges&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span>... Ts&gt;</div>
-<div class="line"><span class="keyword">struct </span>soa</div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span>... <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Ts</a>&gt;</div>
+<div class="line"><span class="keyword">struct </span><a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">soa</a></div>
 <div class="line">{</div>
 <div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple&lt;std::vector&lt;Ts&gt;</a>...&gt; fields;</div>
 <div class="line"> </div>
@@ -222,19 +223,19 @@ Example :</h2>
 <div class="line">  };</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">auto</span> begin()  -&gt; iterator { <span class="keywordflow">return</span> {.s = <span class="keyword">this</span>, .i = 0                           }; }</div>
-<div class="line">    <span class="keyword">auto</span> end()    -&gt; iterator { <span class="keywordflow">return</span> {.s = <span class="keyword">this</span>, .i = kumi::get&lt;0&gt;(fields).size() }; }</div>
+<div class="line">    <span class="keyword">auto</span> end()    -&gt; iterator { <span class="keywordflow">return</span> {.s = <span class="keyword">this</span>, .i = <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::get&lt;0&gt;</a>(fields).size() }; }</div>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">static_assert</span>(std::random_access_iterator&lt;soa&lt;int&gt;::iterator&gt;);</div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">main</a>()</div>
 <div class="line">{</div>
-<div class="line">  soa&lt;float,int&gt; s;</div>
-<div class="line">  get&lt;0&gt;(s.fields) = {1.2,2.3,3.4,4.5};</div>
-<div class="line">  get&lt;1&gt;(s.fields) = {10,20,30,40};</div>
+<div class="line">  <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">soa&lt;float,int&gt;</a> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">s</a>;</div>
+<div class="line">  <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">get&lt;0&gt;</a>(<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">s</a>.fields) = {1.2,2.3,3.4,4.5};</div>
+<div class="line">  <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">get&lt;1&gt;</a>(<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">s</a>.fields) = {10,20,30,40};</div>
 <div class="line"> </div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keyword">auto</span> e : s)</div>
-<div class="line">    std::cout &lt;&lt; e &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">e</a> : <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">s</a>)</div>
+<div class="line">    std::<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">cout</a> &lt;&lt; <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">e</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="ttc" id="agroup__record_ga684c8e20ee9874bcce628e1c9cec38cb_html_ga684c8e20ee9874bcce628e1c9cec38cb"><div class="ttname"><a href="group__record_ga684c8e20ee9874bcce628e1c9cec38cb.html#ga684c8e20ee9874bcce628e1c9cec38cb">kumi::tie</a></div><div class="ttdeci">constexpr auto tie(Ts &amp;... ts) -&gt; record&lt; field_capture&lt; Fields, Ts &amp; &gt;... &gt;</div><div class="ttdoc">Creates a kumi::record of lvalue references to its arguments.</div><div class="ttdef"><b>Definition</b> record.hpp:311</div></div>

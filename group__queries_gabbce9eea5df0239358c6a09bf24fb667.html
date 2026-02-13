@@ -133,7 +133,7 @@ template&lt;concepts::product_type T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr auto kumi::all_of </td>
+          <td class="memname"><a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">constexpr</a> <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">auto</a> kumi::all_of </td>
           <td>(</td>
           <td class="paramtype">T &amp;&amp;&#160;</td>
           <td class="paramname"><em>ts</em></td><td>)</td>
@@ -155,21 +155,22 @@ template&lt;concepts::product_type T&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The evaluation of <code>get&lt;0&gt;(ts) &amp;&amp; ... &amp;&amp; get&lt;N-1&gt;(ts)</code> where <code>N</code> is the size of <code>ts</code>. </dd></dl>
-<h2><a class="anchor" id="autotoc_md75"></a>
+<h2><a class="anchor" id="autotoc_md69"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">main</a>()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> t = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1,2.,3.f};</div>
-<div class="line">  std::cout &lt;&lt; std::boolalpha &lt;&lt; <a class="code hl_function" href="group__queries_ga91aebbbef8db8781c2c48bc814beed9b.html#ga91aebbbef8db8781c2c48bc814beed9b">kumi::all_of</a>( t, [](<span class="keyword">auto</span> e) { <span class="keywordflow">return</span> e &lt; 5; }) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1,2.,3.f};</div>
+<div class="line">  std::cout &lt;&lt; std::boolalpha &lt;&lt; <a class="code hl_function" href="group__queries_ga91aebbbef8db8781c2c48bc814beed9b.html#ga91aebbbef8db8781c2c48bc814beed9b">kumi::all_of</a>( <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t</a>, [](<span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">e</a>) { <span class="keywordflow">return</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">e</a> &lt; 5; }) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> u = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="keyword">true</span>,<span class="keyword">false</span>,<span class="keyword">true</span>,<span class="keyword">false</span>};</div>
-<div class="line">  std::cout &lt;&lt; std::boolalpha &lt;&lt; <a class="code hl_function" href="group__queries_ga91aebbbef8db8781c2c48bc814beed9b.html#ga91aebbbef8db8781c2c48bc814beed9b">kumi::all_of</a>(u) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">u</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="keyword">true</span>,<span class="keyword">false</span>,<span class="keyword">true</span>,<span class="keyword">false</span>};</div>
+<div class="line">  std::cout &lt;&lt; std::boolalpha &lt;&lt; <a class="code hl_function" href="group__queries_ga91aebbbef8db8781c2c48bc814beed9b.html#ga91aebbbef8db8781c2c48bc814beed9b">kumi::all_of</a>(<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">u</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__queries_ga91aebbbef8db8781c2c48bc814beed9b_html_ga91aebbbef8db8781c2c48bc814beed9b"><div class="ttname"><a href="group__queries_ga91aebbbef8db8781c2c48bc814beed9b.html#ga91aebbbef8db8781c2c48bc814beed9b">kumi::all_of</a></div><div class="ttdeci">constexpr auto all_of(T &amp;&amp;ts, Pred p) noexcept</div><div class="ttdoc">Checks if unary predicate p returns true for all elements in the value t.</div><div class="ttdef"><b>Definition</b> predicates.hpp:22</div></div>
+<div class="ttc" id="agroup__utility_ga79787185d26368946a74f31ce5f6597c_html_ga79787185d26368946a74f31ce5f6597c"><div class="ttname"><a href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::member_cast</a></div><div class="ttdeci">constexpr auto member_cast(T &amp;&amp;t)</div><div class="ttdoc">Converts a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target...&gt;</div><div class="ttdef"><b>Definition</b> cast.hpp:56</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:32</div></div>
 </div><!-- fragment --> 
 </div>

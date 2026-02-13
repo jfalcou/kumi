@@ -133,7 +133,7 @@ template&lt;concepts::product_type T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr auto kumi::all_unique </td>
+          <td class="memname"><a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">constexpr</a> <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">auto</a> kumi::all_unique </td>
           <td>(</td>
           <td class="paramtype">T &amp;&amp;&#160;</td>
           <td class="paramname"><em>t</em></td><td>)</td>
@@ -155,7 +155,7 @@ template&lt;concepts::product_type T&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A product type built by keeping the first occurrence of every distinct element type in the input product type.</dd></dl>
-<h2><a class="anchor" id="autotoc_md154"></a>
+<h2><a class="anchor" id="autotoc_md148"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
 <div class="line">{</div>
@@ -167,20 +167,21 @@ Helper type</h2>
 <div class="ttc" id="agroup__generators_gacf670e19ac40c8981f52ad0783a3e483_html_gacf670e19ac40c8981f52ad0783a3e483"><div class="ttname"><a href="group__generators_gacf670e19ac40c8981f52ad0783a3e483.html#gacf670e19ac40c8981f52ad0783a3e483">kumi::all_unique</a></div><div class="ttdeci">constexpr auto all_unique(T &amp;&amp;t)</div><div class="ttdoc">Return the product type containing the values of the first occurence of each type in the input produc...</div><div class="ttdef"><b>Definition</b> unique.hpp:122</div></div>
 <div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
 </div><!-- fragment --><p>Computes the type returned by a call to <a class="el" href="group__generators_gacf670e19ac40c8981f52ad0783a3e483.html#gacf670e19ac40c8981f52ad0783a3e483" title="Return the product type containing the values of the first occurence of each type in the input produc...">kumi::all_unique</a>.</p>
-<h2><a class="anchor" id="autotoc_md155"></a>
+<h2><a class="anchor" id="autotoc_md149"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">main</a>()</div>
 <div class="line">{</div>
 <div class="line">    <span class="keyword">using </span><a class="code hl_class" href="structkumi_1_1tuple.html">tuple</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple&lt;int, int, char, int, float, float&gt;</a>;</div>
 <div class="line"> </div>
-<div class="line">    <a class="code hl_class" href="structkumi_1_1tuple.html">tuple</a> a = {1, 2, <span class="charliteral">&#39;x&#39;</span>, 3, 1.f, 2.f};</div>
+<div class="line">    <a class="code hl_class" href="structkumi_1_1tuple.html">tuple</a> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">a</a> = {1, 2, <span class="charliteral">&#39;x&#39;</span>, 3, 1.f, 2.f};</div>
 <div class="line"> </div>
-<div class="line">    std::cout &lt;&lt; <a class="code hl_function" href="group__generators_gacf670e19ac40c8981f52ad0783a3e483.html#gacf670e19ac40c8981f52ad0783a3e483">kumi::all_unique</a>(a) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">    std::cout &lt;&lt; <a class="code hl_function" href="group__generators_gacf670e19ac40c8981f52ad0783a3e483.html#gacf670e19ac40c8981f52ad0783a3e483">kumi::all_unique</a>(<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">a</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
+<div class="ttc" id="agroup__utility_ga79787185d26368946a74f31ce5f6597c_html_ga79787185d26368946a74f31ce5f6597c"><div class="ttname"><a href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::member_cast</a></div><div class="ttdeci">constexpr auto member_cast(T &amp;&amp;t)</div><div class="ttdoc">Converts a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target...&gt;</div><div class="ttdef"><b>Definition</b> cast.hpp:56</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:32</div></div>
 </div><!-- fragment --> 
 </div>

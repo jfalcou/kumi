@@ -130,7 +130,7 @@ $(document).ready(function(){initNavTree('structkumi_1_1is__record__type.html','
 
 <p><code>#include &lt;kumi/utils/traits.hpp&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T, typename Enable = void&gt;<br />
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">typename</a> T, <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">typename</a> <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Enable</a> = void&gt;<br />
 struct kumi::is_record_type&lt; T, Enable &gt;</div><p>Opt-in traits for types behaving like a kumi::product_type. </p>
 <p>To be treated like a record, an user defined type must supports structured bindings opt-in to kumi::record_type Semantic as well as kumi::product_type Semantic.</p>
 <p>This can be done in two ways:</p><ul>
@@ -148,7 +148,7 @@ Example:</h2>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">namespace </span>ns</div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">ns</a></div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">struct </span>people</div>
 <div class="line">  {</div>
@@ -159,46 +159,47 @@ Example:</h2>
 <div class="line">  <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I&gt;</div>
 <div class="line">  <span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_function" href="namespacekumi.html#abd1d4a59b0cddc9d5a5aef185c9f1e46">get</a>(people <span class="keyword">const</span>&amp; s) <span class="keyword">noexcept</span></div>
 <div class="line">  {</div>
-<div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==0) <span class="keywordflow">return</span> kumi::capture_field&lt;&quot;name&quot;&gt;( s.name );</div>
-<div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==1) <span class="keywordflow">return</span> kumi::capture_field&lt;&quot;age&quot; &gt;( s.age  );</div>
+<div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==0) <span class="keywordflow">return</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::capture_field&lt;&quot;name&quot;&gt;</a>( s.name );</div>
+<div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==1) <span class="keywordflow">return</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::capture_field&lt;&quot;age&quot; &gt;</a>( s.age  );</div>
 <div class="line">  }</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I&gt;</div>
 <div class="line">  <span class="keyword">decltype</span>(<span class="keyword">auto</span>) get(people&amp; s) <span class="keyword">noexcept</span></div>
 <div class="line">  {</div>
-<div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==0) <span class="keywordflow">return</span> kumi::capture_field&lt;&quot;name&quot;&gt;( s.name );</div>
-<div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==1) <span class="keywordflow">return</span> kumi::capture_field&lt;&quot;age&quot; &gt;( s.age  );</div>
+<div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==0) <span class="keywordflow">return</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::capture_field&lt;&quot;name&quot;&gt;</a>( s.name );</div>
+<div class="line">    <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(I==1) <span class="keywordflow">return</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::capture_field&lt;&quot;age&quot; &gt;</a>( s.age  );</div>
 <div class="line">  }</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Opt-in for Record Type semantic</span></div>
 <div class="line"><span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1is__record__type.html">kumi::is_record_type</a>&lt;ns::people&gt; : std::true_type</div>
+<div class="line"><span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1is__record__type.html">kumi::is_record_type</a>&lt;<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">ns</a>::<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">people</a>&gt; : std::true_type</div>
 <div class="line">{};</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Adapt as structured bindable type</span></div>
 <div class="line"><span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><span class="keyword">struct  </span>std::tuple_size&lt;ns::people&gt;</div>
+<div class="line"><span class="keyword">struct  </span>std::tuple_size&lt;<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">ns</a>::<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">people</a>&gt;</div>
 <div class="line">      : std::integral_constant&lt;std::size_t,2&gt; {};</div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">template</span>&lt;&gt; <span class="keyword">struct </span>std::tuple_element&lt;0,ns::people&gt; { <span class="keyword">using </span>type = <a class="code hl_class" href="structkumi_1_1field__capture.html">kumi::field_capture</a>&lt;<span class="stringliteral">&quot;name&quot;</span>,std::string&gt;;  };</div>
-<div class="line"><span class="keyword">template</span>&lt;&gt; <span class="keyword">struct </span>std::tuple_element&lt;1,ns::people&gt; { <span class="keyword">using </span>type = <a class="code hl_class" href="structkumi_1_1field__capture.html">kumi::field_capture</a>&lt;<span class="stringliteral">&quot;age&quot;</span> ,<span class="keywordtype">int</span>        &gt;;  };</div>
+<div class="line"><span class="keyword">template</span>&lt;&gt; <span class="keyword">struct </span>std::tuple_element&lt;0,<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">ns</a>::<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">people</a>&gt; { <span class="keyword">using </span>type = <a class="code hl_class" href="structkumi_1_1field__capture.html">kumi::field_capture</a>&lt;<span class="stringliteral">&quot;name&quot;</span>,std::string&gt;;  };</div>
+<div class="line"><span class="keyword">template</span>&lt;&gt; <span class="keyword">struct </span>std::tuple_element&lt;1,<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">ns</a>::<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">people</a>&gt; { <span class="keyword">using </span>type = <a class="code hl_class" href="structkumi_1_1field__capture.html">kumi::field_capture</a>&lt;<span class="stringliteral">&quot;age&quot;</span> ,<span class="keywordtype">int</span>        &gt;;  };</div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">main</a>()</div>
 <div class="line">{</div>
-<div class="line">  ns::people peter{<span class="stringliteral">&quot;Peter Parker&quot;</span>, 24};</div>
+<div class="line">  ns::people <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">peter</a>{<span class="stringliteral">&quot;Peter Parker&quot;</span>, 24};</div>
 <div class="line">  </div>
-<div class="line">  <a class="code hl_function" href="group__transforms_gab51ac1793c12bbc1b1979bc0b51eb33a.html#gab51ac1793c12bbc1b1979bc0b51eb33a">kumi::for_each_field</a>( [](<span class="keyword">auto</span> n, <span class="keyword">auto</span> e)</div>
+<div class="line">  <a class="code hl_function" href="group__transforms_gab51ac1793c12bbc1b1979bc0b51eb33a.html#gab51ac1793c12bbc1b1979bc0b51eb33a">kumi::for_each_field</a>( [](<span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">n</a>, <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">e</a>)</div>
 <div class="line">                        {</div>
-<div class="line">                          std::cout &lt;&lt; <span class="stringliteral">&quot;# &quot;</span>  &lt;&lt; n</div>
-<div class="line">                                    &lt;&lt; <span class="stringliteral">&quot; : &quot;</span> &lt;&lt; e</div>
+<div class="line">                          std::cout &lt;&lt; <span class="stringliteral">&quot;# &quot;</span>  &lt;&lt; <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">n</a></div>
+<div class="line">                                    &lt;&lt; <span class="stringliteral">&quot; : &quot;</span> &lt;&lt; <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">e</a></div>
 <div class="line">                                    &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">                        }</div>
-<div class="line">                      , peter</div>
+<div class="line">                      , <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">peter</a></div>
 <div class="line">                      );    </div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__transforms_gab51ac1793c12bbc1b1979bc0b51eb33a_html_gab51ac1793c12bbc1b1979bc0b51eb33a"><div class="ttname"><a href="group__transforms_gab51ac1793c12bbc1b1979bc0b51eb33a.html#gab51ac1793c12bbc1b1979bc0b51eb33a">kumi::for_each_field</a></div><div class="ttdeci">constexpr void for_each_field(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a kumi::record_type and its field.</div><div class="ttdef"><b>Definition</b> for_each.hpp:110</div></div>
-<div class="ttc" id="anamespacekumi_html_abd1d4a59b0cddc9d5a5aef185c9f1e46"><div class="ttname"><a href="namespacekumi.html#abd1d4a59b0cddc9d5a5aef185c9f1e46">kumi::get</a></div><div class="ttdeci">constexpr decltype(auto) get(record&lt; Ts... &gt; &amp;&amp;r) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition</b> record.hpp:410</div></div>
+<div class="ttc" id="agroup__utility_ga79787185d26368946a74f31ce5f6597c_html_ga79787185d26368946a74f31ce5f6597c"><div class="ttname"><a href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::member_cast</a></div><div class="ttdeci">constexpr auto member_cast(T &amp;&amp;t)</div><div class="ttdoc">Converts a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target...&gt;</div><div class="ttdef"><b>Definition</b> cast.hpp:56</div></div>
+<div class="ttc" id="anamespacekumi_html_abd1d4a59b0cddc9d5a5aef185c9f1e46"><div class="ttname"><a href="namespacekumi.html#abd1d4a59b0cddc9d5a5aef185c9f1e46">kumi::get</a></div><div class="ttdeci">constexpr decltype(auto) get(record&lt; Ts... &gt; &amp;&amp;r) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition</b> record.hpp:465</div></div>
 <div class="ttc" id="astructkumi_1_1field__capture_html"><div class="ttname"><a href="structkumi_1_1field__capture.html">kumi::field_capture</a></div><div class="ttdoc">Named wrapper over a type.</div><div class="ttdef"><b>Definition</b> field_capture.hpp:23</div></div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->

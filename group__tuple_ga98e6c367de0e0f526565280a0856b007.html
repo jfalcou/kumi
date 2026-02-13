@@ -133,11 +133,11 @@ template&lt;typename... Ts&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr auto kumi::make_tuple </td>
+          <td class="memname"><a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">constexpr</a> <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">auto</a> kumi::make_tuple </td>
           <td>(</td>
-          <td class="paramtype">Ts &amp;&amp;...&#160;</td>
+          <td class="paramtype"><a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Ts</a> &amp;&amp;...&#160;</td>
           <td class="paramname"><em>ts</em></td><td>)</td>
-          <td> -&gt; <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;std::unwrap_ref_decay_t&lt;Ts&gt;...&gt;
+          <td> -&gt; <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;std::unwrap_ref_decay_t&lt;<a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Ts</a>&gt;...&gt;
   </td>
         </tr>
       </table>
@@ -156,25 +156,26 @@ template&lt;typename... Ts&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> constructed from the ts or their inner references when ts is an instance of <code>std::reference_wrapper</code>. </dd></dl>
-<h2><a class="anchor" id="autotoc_md173"></a>
+<h2><a class="anchor" id="autotoc_md169"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;functional&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">main</a>()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordtype">int</span> k = 99;</div>
-<div class="line">  <span class="keyword">auto</span> t = <a class="code hl_function" href="group__tuple_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007">kumi::make_tuple</a>( 1, 2.3, 4.5f, <span class="charliteral">&#39;@&#39;</span>, std::ref(k));</div>
+<div class="line">  <span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">k</a> = 99;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t</a> = <a class="code hl_function" href="group__tuple_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007">kumi::make_tuple</a>( 1, 2.3, 4.5f, <span class="charliteral">&#39;@&#39;</span>, std::ref(<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">k</a>));</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; t &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Reference access</span></div>
-<div class="line">  get&lt;4&gt;(t)++;</div>
-<div class="line">  std::cout &lt;&lt; k &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">get&lt;4&gt;</a>(<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t</a>)++;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">k</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__tuple_ga98e6c367de0e0f526565280a0856b007_html_ga98e6c367de0e0f526565280a0856b007"><div class="ttname"><a href="group__tuple_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007">kumi::make_tuple</a></div><div class="ttdeci">constexpr auto make_tuple(Ts &amp;&amp;... ts) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</div><div class="ttdoc">Creates a tuple object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> tuple.hpp:474</div></div>
+<div class="ttc" id="agroup__utility_ga79787185d26368946a74f31ce5f6597c_html_ga79787185d26368946a74f31ce5f6597c"><div class="ttname"><a href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::member_cast</a></div><div class="ttdeci">constexpr auto member_cast(T &amp;&amp;t)</div><div class="ttdoc">Converts a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target...&gt;</div><div class="ttdef"><b>Definition</b> cast.hpp:56</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

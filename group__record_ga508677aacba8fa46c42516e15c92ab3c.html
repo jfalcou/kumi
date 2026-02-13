@@ -133,11 +133,11 @@ template&lt;str... Fields, typename... Ts&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr auto forward_as_record </td>
+          <td class="memname"><a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">constexpr</a> <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">auto</a> forward_as_record </td>
           <td>(</td>
-          <td class="paramtype">Ts &amp;&amp;...&#160;</td>
+          <td class="paramtype"><a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Ts</a> &amp;&amp;...&#160;</td>
           <td class="paramname"><em>ts</em></td><td>)</td>
-          <td> -&gt; <a class="el" href="structkumi_1_1record.html">record</a>&lt;<a class="el" href="structkumi_1_1field__capture.html">field_capture</a>&lt;Fields, Ts&amp;&amp;&gt;...&gt;
+          <td> -&gt; <a class="el" href="structkumi_1_1record.html">record</a>&lt;<a class="el" href="structkumi_1_1field__capture.html">field_capture</a>&lt;<a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Fields</a>, <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Ts</a>&amp;&amp;&gt;...&gt;
   </td>
         </tr>
       </table>
@@ -164,7 +164,7 @@ template&lt;str... Fields, typename... Ts&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields necessarily named, names are unique.">kumi::record</a> constructed as <code><a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields necessarily named, names are unique.">kumi::record</a>&lt;Ts&amp;&amp;...&gt;(std::forward&lt;Ts&gt;(args)...)</code> </dd></dl>
-<h2><a class="anchor" id="autotoc_md164"></a>
+<h2><a class="anchor" id="autotoc_md158"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -175,20 +175,21 @@ Example:</h2>
 <div class="line"><span class="keyword">using namespace </span>kumi::literals;</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Data&gt;</div>
-<div class="line">std::vector&lt;std::string&gt; build(Data d)</div>
+<div class="line">std::vector&lt;std::string&gt; build(<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Data</a> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">d</a>)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">return</span> std::vector&lt;std::string&gt; ( kumi::get&lt;&quot;a&quot;_f&gt;(d)</div>
-<div class="line">                                  , std::move(kumi::get&lt;&quot;b&quot;_f&gt;(d))</div>
+<div class="line">  <span class="keywordflow">return</span> std::vector&lt;std::string&gt; ( <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::get&lt;&quot;a&quot;_f&gt;</a>(<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">d</a>)</div>
+<div class="line">                                  , std::move(<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::get&lt;&quot;b&quot;_f&gt;</a>(<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">d</a>))</div>
 <div class="line">                                  );</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">main</a>()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> v = build( kumi::forward_as_record&lt;&quot;a&quot;_f, &quot;b&quot;_f&gt;(4,std::string{<span class="stringliteral">&quot;the text !&quot;</span>}));</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">v</a> = build( <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::forward_as_record&lt;&quot;a&quot;_f, &quot;b&quot;_f&gt;</a>(4,std::string{<span class="stringliteral">&quot;the text !&quot;</span>}));</div>
 <div class="line"> </div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keyword">auto</span> <span class="keyword">const</span>&amp; s : v)</div>
-<div class="line">    std::cout &lt;&lt; s &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keyword">auto</span> <span class="keyword">const</span>&amp; <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">s</a> : <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">v</a>)</div>
+<div class="line">    std::<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">cout</a> &lt;&lt; <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">s</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
+<div class="ttc" id="agroup__utility_ga79787185d26368946a74f31ce5f6597c_html_ga79787185d26368946a74f31ce5f6597c"><div class="ttname"><a href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::member_cast</a></div><div class="ttdeci">constexpr auto member_cast(T &amp;&amp;t)</div><div class="ttdoc">Converts a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target...&gt;</div><div class="ttdef"><b>Definition</b> cast.hpp:56</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

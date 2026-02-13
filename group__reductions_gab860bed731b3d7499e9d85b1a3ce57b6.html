@@ -127,13 +127,13 @@ $(document).ready(function(){initNavTree('group__reductions_gab860bed731b3d7499e
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;concepts::product_type T, typename F &gt; </div>
+template&lt;concepts::product_type T, <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">typename</a> <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">F</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">constexpr auto kumi::min </td>
+          <td class="memname"><a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">constexpr</a> <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">auto</a> kumi::min </td>
           <td>(</td>
           <td class="paramtype">T &amp;&amp;&#160;</td>
           <td class="paramname"><em>t</em>, </td>
@@ -141,7 +141,7 @@ template&lt;concepts::product_type T, typename F &gt; </div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">F&#160;</td>
+          <td class="paramtype"><a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">F</a>&#160;</td>
           <td class="paramname"><em>f</em>&#160;</td>
         </tr>
         <tr>
@@ -166,7 +166,7 @@ template&lt;concepts::product_type T, typename F &gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The minimum value of f over all elements of t</dd></dl>
-<h2><a class="anchor" id="autotoc_md64"></a>
+<h2><a class="anchor" id="autotoc_md58"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
 <div class="line">{</div>
@@ -178,20 +178,21 @@ Helper type</h2>
 <div class="ttc" id="agroup__reductions_ga2e588148a9b7eda028da7963770a5010_html_ga2e588148a9b7eda028da7963770a5010"><div class="ttname"><a href="group__reductions_ga2e588148a9b7eda028da7963770a5010.html#ga2e588148a9b7eda028da7963770a5010">kumi::min</a></div><div class="ttdeci">constexpr auto min(T &amp;&amp;t) noexcept</div><div class="ttdoc">Computes the minimum value all elements of t.</div><div class="ttdef"><b>Definition</b> minmax.hpp:152</div></div>
 <div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
 </div><!-- fragment --><p>Computes the type returned by a call to <a class="el" href="group__reductions_ga2e588148a9b7eda028da7963770a5010.html#ga2e588148a9b7eda028da7963770a5010" title="Computes the minimum value all elements of t.">kumi::min</a>.</p>
-<h2><a class="anchor" id="autotoc_md65"></a>
+<h2><a class="anchor" id="autotoc_md59"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">main</a>()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> f0 = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> {1, <span class="charliteral">&#39;A&#39;</span>, -9.77f, 3. };</div>
-<div class="line">  <span class="keyword">auto</span> f1 = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> {2., f0, 3.f };</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">f0</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> {1, <span class="charliteral">&#39;A&#39;</span>, -9.77f, 3. };</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">f1</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> {2., <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">f0</a>, 3.f };</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga2e588148a9b7eda028da7963770a5010.html#ga2e588148a9b7eda028da7963770a5010">kumi::min</a>(f0, [](<span class="keyword">auto</span> m) { <span class="keywordflow">return</span> <span class="keyword">sizeof</span>(m); }) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga2e588148a9b7eda028da7963770a5010.html#ga2e588148a9b7eda028da7963770a5010">kumi::min</a>(f1, [](<span class="keyword">auto</span> m) { <span class="keywordflow">return</span> <span class="keyword">sizeof</span>(m); }) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga2e588148a9b7eda028da7963770a5010.html#ga2e588148a9b7eda028da7963770a5010">kumi::min</a>(<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">f0</a>, [](<span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">m</a>) { <span class="keywordflow">return</span> <span class="keyword">sizeof</span>(<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">m</a>); }) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga2e588148a9b7eda028da7963770a5010.html#ga2e588148a9b7eda028da7963770a5010">kumi::min</a>(<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">f1</a>, [](<span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">m</a>) { <span class="keywordflow">return</span> <span class="keyword">sizeof</span>(<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">m</a>); }) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
+<div class="ttc" id="agroup__utility_ga79787185d26368946a74f31ce5f6597c_html_ga79787185d26368946a74f31ce5f6597c"><div class="ttname"><a href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::member_cast</a></div><div class="ttdeci">constexpr auto member_cast(T &amp;&amp;t)</div><div class="ttdoc">Converts a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target...&gt;</div><div class="ttdef"><b>Definition</b> cast.hpp:56</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:32</div></div>
 </div><!-- fragment --> 
 </div>

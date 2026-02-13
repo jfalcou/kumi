@@ -134,8 +134,9 @@ $(document).ready(function(){initNavTree('conceptkumi_1_1concepts_1_1product__ty
 <p>A type <code>T</code> models <code>kumi::product_type</code> if it opts in for the Product Type semantic and provides supports for structured bindings. </p>
 </div><h2 class="groupheader">Concept definition</h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type</a> =  is_product_type&lt;std::remove_cvref_t&lt;T&gt;&gt;::value</div>
+<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type</a> =  <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">is_product_type&lt;std::remove_cvref_t&lt;T&gt;</a>&gt;::value</div>
 <div class="ttc" id="aconceptkumi_1_1concepts_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:83</div></div>
+<div class="ttc" id="agroup__utility_ga79787185d26368946a74f31ce5f6597c_html_ga79787185d26368946a74f31ce5f6597c"><div class="ttname"><a href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::member_cast</a></div><div class="ttdeci">constexpr auto member_cast(T &amp;&amp;t)</div><div class="ttdoc">Converts a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target...&gt;</div><div class="ttdef"><b>Definition</b> cast.hpp:56</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->

@@ -134,9 +134,6 @@ $(document).ready(function(){initNavTree('group__utility.html',''); initResizabl
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1as__tuple.html">kumi::as_tuple&lt; T, Meta &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Generate a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> type from a type.  <a href="structkumi_1_1as__tuple.html#details">More...</a><br /></td></tr>
-<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1boolean__and.html">kumi::boolean_and</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type representing the <code>logical and</code> monoid and it's associated identity. The identity of the <code><a class="el" href="structkumi_1_1boolean__and.html" title="A type representing the logical and monoid and it&#39;s associated identity. The identity of the boolean_...">boolean_and</a></code> is <code>true</code>.  <a href="structkumi_1_1boolean__and.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -182,16 +179,6 @@ requires (size_v&lt;Tuple&gt; != 0)</td></tr>
 <tr class="memitem:gabf2013046cf8ec8ac781128a815709cc"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_gabf2013046cf8ec8ac781128a815709cc.html#gabf2013046cf8ec8ac781128a815709cc">kumi::field_value_of</a> (T &amp;&amp;t) noexcept</td></tr>
 <tr class="memdesc:gabf2013046cf8ec8ac781128a815709cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the value from a <a class="el" href="structkumi_1_1field__capture.html" title="Named wrapper over a type.">kumi::field_capture</a> or returns the parameter.  <br /></td></tr>
 <tr class="separator:gabf2013046cf8ec8ac781128a815709cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gab4a4014d24f9bb5493f90af1b141be13" id="r_gab4a4014d24f9bb5493f90af1b141be13"><td class="memTemplParams" colspan="2">template&lt;concepts::record_type Type, typename... Ts&gt; <br />
-requires (concepts::equivalent&lt;typename _::as_tuple&lt;Type, std::make_index_sequence&lt;size_v&lt;Type&gt;&gt;&gt;::type, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;Ts...&gt;&gt;)</td></tr>
-<tr class="memitem:gab4a4014d24f9bb5493f90af1b141be13"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_gab4a4014d24f9bb5493f90af1b141be13.html#gab4a4014d24f9bb5493f90af1b141be13">kumi::from_record</a> (<a class="el" href="structkumi_1_1record.html">record</a>&lt; Ts... &gt; const &amp;r)</td></tr>
-<tr class="memdesc:gab4a4014d24f9bb5493f90af1b141be13"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields necessarily named, names are unique.">kumi::record</a> to an instance of a type that models kumi::record_type.  <br /></td></tr>
-<tr class="separator:gab4a4014d24f9bb5493f90af1b141be13"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga9f75e9e4798f0e2787b2580be9f7e04e" id="r_ga9f75e9e4798f0e2787b2580be9f7e04e"><td class="memTemplParams" colspan="2">template&lt;typename Type , typename... Ts&gt; <br />
-requires (!concepts::product_type&lt;Type&gt; &amp;&amp; _::implicit_constructible&lt;Type, Ts...&gt;)</td></tr>
-<tr class="memitem:ga9f75e9e4798f0e2787b2580be9f7e04e"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_ga9f75e9e4798f0e2787b2580be9f7e04e.html#ga9f75e9e4798f0e2787b2580be9f7e04e">kumi::from_tuple</a> (<a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Ts... &gt; const &amp;t)</td></tr>
-<tr class="memdesc:ga9f75e9e4798f0e2787b2580be9f7e04e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> to an instance of an arbitrary type.  <br /></td></tr>
-<tr class="separator:ga9f75e9e4798f0e2787b2580be9f7e04e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0a86710de48273efa390a88ba18b2017" id="r_ga0a86710de48273efa390a88ba18b2017"><td class="memTemplParams" colspan="2">template&lt;concepts::product_type Tuple&gt; <br />
 requires (size_v&lt;Tuple&gt; != 0)</td></tr>
 <tr class="memitem:ga0a86710de48273efa390a88ba18b2017"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_ga0a86710de48273efa390a88ba18b2017.html#ga0a86710de48273efa390a88ba18b2017">kumi::front</a> (Tuple &amp;&amp;t)</td></tr>
@@ -239,14 +226,6 @@ requires (std::is_invocable_r&lt;R, C, Ts...&gt;::value)</td></tr>
 <tr class="memitem:ga9c8c29e8a2f4f5e8a663200559fdc983"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_ga9c8c29e8a2f4f5e8a663200559fdc983.html#ga9c8c29e8a2f4f5e8a663200559fdc983">kumi::predicate</a> () noexcept</td></tr>
 <tr class="memdesc:ga9c8c29e8a2f4f5e8a663200559fdc983"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a unary template meta-program in a running predicate.  <br /></td></tr>
 <tr class="separator:ga9c8c29e8a2f4f5e8a663200559fdc983"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga324cc6775ad5b15767fc2eaae02abd73" id="r_ga324cc6775ad5b15767fc2eaae02abd73"><td class="memTemplParams" colspan="2">template&lt;concepts::record_type Type&gt; </td></tr>
-<tr class="memitem:ga324cc6775ad5b15767fc2eaae02abd73"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_ga324cc6775ad5b15767fc2eaae02abd73.html#ga324cc6775ad5b15767fc2eaae02abd73">kumi::to_record</a> (Type &amp;&amp;r)</td></tr>
-<tr class="memdesc:ga324cc6775ad5b15767fc2eaae02abd73"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a kumi::record_type to an instance <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields necessarily named, names are unique.">kumi::record</a>.  <br /></td></tr>
-<tr class="separator:ga324cc6775ad5b15767fc2eaae02abd73"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gae6de7cdd99f5e217028b93d4bcf3de52" id="r_gae6de7cdd99f5e217028b93d4bcf3de52"><td class="memTemplParams" colspan="2">template&lt;concepts::product_type Type&gt; </td></tr>
-<tr class="memitem:gae6de7cdd99f5e217028b93d4bcf3de52"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_gae6de7cdd99f5e217028b93d4bcf3de52.html#gae6de7cdd99f5e217028b93d4bcf3de52">kumi::to_tuple</a> (Type &amp;&amp;t)</td></tr>
-<tr class="memdesc:gae6de7cdd99f5e217028b93d4bcf3de52"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a kumi::product_type to an instance <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>.  <br /></td></tr>
-<tr class="separator:gae6de7cdd99f5e217028b93d4bcf3de52"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>

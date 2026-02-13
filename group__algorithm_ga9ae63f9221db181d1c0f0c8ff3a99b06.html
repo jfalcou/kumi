@@ -127,13 +127,13 @@ $(document).ready(function(){initNavTree('group__algorithm_ga9ae63f9221db181d1c0
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Target , concepts::product_type T&gt; </div>
+template&lt;<a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">typename</a> <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Target</a> , concepts::product_type T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">decltype(auto) constexpr get </td>
+          <td class="memname"><a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">decltype</a>(<a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">auto</a>) <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">constexpr</a> get </td>
           <td>(</td>
           <td class="paramtype">T &amp;&amp;&#160;</td>
           <td class="paramname"><em>t</em></td><td>)</td>
@@ -170,7 +170,7 @@ Example:</h2>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">namespace </span>ns</div>
+<div class="line"><span class="keyword">namespace </span><a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">ns</a></div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">struct </span>people</div>
 <div class="line">  {</div>
@@ -195,20 +195,21 @@ Example:</h2>
 <div class="line"> </div>
 <div class="line"><span class="comment">// Adapt as structured bindable type</span></div>
 <div class="line"><span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><span class="keyword">struct  </span>std::tuple_size&lt;ns::people&gt;</div>
+<div class="line"><span class="keyword">struct  </span>std::tuple_size&lt;<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">ns</a>::<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">people</a>&gt;</div>
 <div class="line">      : std::integral_constant&lt;std::size_t,2&gt; {};</div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">template</span>&lt;&gt; <span class="keyword">struct </span>std::tuple_element&lt;0,ns::people&gt; { <span class="keyword">using </span>type = std::string;  };</div>
-<div class="line"><span class="keyword">template</span>&lt;&gt; <span class="keyword">struct </span>std::tuple_element&lt;1,ns::people&gt; { <span class="keyword">using </span>type = int;          };</div>
+<div class="line"><span class="keyword">template</span>&lt;&gt; <span class="keyword">struct </span>std::tuple_element&lt;0,<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">ns</a>::<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">people</a>&gt; { <span class="keyword">using </span>type = std::string;  };</div>
+<div class="line"><span class="keyword">template</span>&lt;&gt; <span class="keyword">struct </span>std::tuple_element&lt;1,<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">ns</a>::<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">people</a>&gt; { <span class="keyword">using </span>type = int;          };</div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">main</a>()</div>
 <div class="line">{</div>
-<div class="line">  ns::people peter{<span class="stringliteral">&quot;Peter Parker&quot;</span>, 24};</div>
+<div class="line">  ns::people <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">peter</a>{<span class="stringliteral">&quot;Peter Parker&quot;</span>, 24};</div>
 <div class="line">    </div>
-<div class="line">  std::cout &lt;&lt; kumi::get&lt;std::string&gt; (peter) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; kumi::get&lt;int&gt;         (peter) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; kumi::get&lt;std::string&gt; (<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">peter</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; kumi::get&lt;int&gt;         (<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">peter</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="anamespacekumi_html_abd1d4a59b0cddc9d5a5aef185c9f1e46"><div class="ttname"><a href="namespacekumi.html#abd1d4a59b0cddc9d5a5aef185c9f1e46">kumi::get</a></div><div class="ttdeci">constexpr decltype(auto) get(record&lt; Ts... &gt; &amp;&amp;r) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition</b> record.hpp:410</div></div>
+<div class="ttc" id="agroup__utility_ga79787185d26368946a74f31ce5f6597c_html_ga79787185d26368946a74f31ce5f6597c"><div class="ttname"><a href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::member_cast</a></div><div class="ttdeci">constexpr auto member_cast(T &amp;&amp;t)</div><div class="ttdoc">Converts a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target...&gt;</div><div class="ttdef"><b>Definition</b> cast.hpp:56</div></div>
+<div class="ttc" id="anamespacekumi_html_abd1d4a59b0cddc9d5a5aef185c9f1e46"><div class="ttname"><a href="namespacekumi.html#abd1d4a59b0cddc9d5a5aef185c9f1e46">kumi::get</a></div><div class="ttdeci">constexpr decltype(auto) get(record&lt; Ts... &gt; &amp;&amp;r) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition</b> record.hpp:465</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

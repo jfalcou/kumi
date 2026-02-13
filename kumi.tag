@@ -350,6 +350,20 @@
       <arglist>(R &amp;&amp;r)</arglist>
     </member>
     <member kind="function">
+      <type>constexpr auto</type>
+      <name>from_record</name>
+      <anchorfile>group__record_ga631f638102862f5ac7f8407e04eacf13.html</anchorfile>
+      <anchor>ga631f638102862f5ac7f8407e04eacf13</anchor>
+      <arglist>(record&lt; Ts... &gt; const &amp;r)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>to_record</name>
+      <anchorfile>group__record_gaf3f1a7812e294e86296e09eceadbe0a3.html</anchorfile>
+      <anchor>gaf3f1a7812e294e86296e09eceadbe0a3</anchor>
+      <arglist>(Type &amp;&amp;r)</arglist>
+    </member>
+    <member kind="function">
       <type>decltype(auto) constexpr</type>
       <name>get</name>
       <anchorfile>group__record_gabc2cd329ad25d155458850c19cc3b137.html</anchorfile>
@@ -383,6 +397,20 @@
       <anchorfile>group__record_gabd73478b6d709990c2f81dc83b980c16.html</anchorfile>
       <anchor>gabd73478b6d709990c2f81dc83b980c16</anchor>
       <arglist>(R &amp;&amp;r)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>from_record</name>
+      <anchorfile>group__record_ga631f638102862f5ac7f8407e04eacf13.html</anchorfile>
+      <anchor>ga631f638102862f5ac7f8407e04eacf13</anchor>
+      <arglist>(record&lt; Ts... &gt; const &amp;r)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>to_record</name>
+      <anchorfile>group__record_gaf3f1a7812e294e86296e09eceadbe0a3.html</anchorfile>
+      <anchor>gaf3f1a7812e294e86296e09eceadbe0a3</anchor>
+      <arglist>(Type &amp;&amp;r)</arglist>
     </member>
     <member kind="function">
       <type>decltype(auto) constexpr</type>
@@ -571,6 +599,20 @@
       <name>to_ref</name>
       <anchorfile>group__tuple_ga27c29bc9a5e31d7ada4ac427a18d8985.html</anchorfile>
       <anchor>ga27c29bc9a5e31d7ada4ac427a18d8985</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>from_tuple</name>
+      <anchorfile>group__tuple_ga5e1b1ae039b6c55ae68e875505d36774.html</anchorfile>
+      <anchor>ga5e1b1ae039b6c55ae68e875505d36774</anchor>
+      <arglist>(tuple&lt; Ts... &gt; const &amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>to_tuple</name>
+      <anchorfile>group__tuple_gafdea058f9f804755e1b3ce010be52f40.html</anchorfile>
+      <anchor>gafdea058f9f804755e1b3ce010be52f40</anchor>
       <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
@@ -767,6 +809,20 @@
       <name>to_ref</name>
       <anchorfile>group__tuple_ga27c29bc9a5e31d7ada4ac427a18d8985.html</anchorfile>
       <anchor>ga27c29bc9a5e31d7ada4ac427a18d8985</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>from_tuple</name>
+      <anchorfile>group__tuple_ga5e1b1ae039b6c55ae68e875505d36774.html</anchorfile>
+      <anchor>ga5e1b1ae039b6c55ae68e875505d36774</anchor>
+      <arglist>(tuple&lt; Ts... &gt; const &amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>to_tuple</name>
+      <anchorfile>group__tuple_gafdea058f9f804755e1b3ce010be52f40.html</anchorfile>
+      <anchor>gafdea058f9f804755e1b3ce010be52f40</anchor>
       <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
@@ -1226,20 +1282,6 @@
       <arglist>(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</arglist>
     </member>
     <member kind="function">
-      <type>constexpr auto</type>
-      <name>from_record</name>
-      <anchorfile>group__utility_gab4a4014d24f9bb5493f90af1b141be13.html</anchorfile>
-      <anchor>gab4a4014d24f9bb5493f90af1b141be13</anchor>
-      <arglist>(record&lt; Ts... &gt; const &amp;r)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>from_tuple</name>
-      <anchorfile>group__utility_ga9f75e9e4798f0e2787b2580be9f7e04e.html</anchorfile>
-      <anchor>ga9f75e9e4798f0e2787b2580be9f7e04e</anchor>
-      <arglist>(tuple&lt; Ts... &gt; const &amp;t)</arglist>
-    </member>
-    <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>front</name>
       <anchorfile>group__utility_ga0a86710de48273efa390a88ba18b2017.html</anchorfile>
@@ -1598,20 +1640,6 @@
     </member>
     <member kind="function">
       <type>constexpr auto</type>
-      <name>to_record</name>
-      <anchorfile>group__utility_ga324cc6775ad5b15767fc2eaae02abd73.html</anchorfile>
-      <anchor>ga324cc6775ad5b15767fc2eaae02abd73</anchor>
-      <arglist>(Type &amp;&amp;r)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>to_tuple</name>
-      <anchorfile>group__utility_gae6de7cdd99f5e217028b93d4bcf3de52.html</anchorfile>
-      <anchor>gae6de7cdd99f5e217028b93d4bcf3de52</anchor>
-      <arglist>(Type &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
       <name>transpose</name>
       <anchorfile>group__generators_ga50bbffc3a4571932d98ffe63499971dd.html</anchorfile>
       <anchor>ga50bbffc3a4571932d98ffe63499971dd</anchor>
@@ -1919,6 +1947,13 @@
       <arglist></arglist>
     </member>
     <member kind="function">
+      <type>constexpr auto</type>
+      <name>to_tuple</name>
+      <anchorfile>namespacekumi.html</anchorfile>
+      <anchor>a74db3542e4e4c5fab79b01cda617d964</anchor>
+      <arglist>(S &amp;&amp;s)</arglist>
+    </member>
+    <member kind="function">
       <type>KUMI_CUDA</type>
       <name>record</name>
       <anchorfile>group__record_gaee922438c01912318246dcd9d6a1d158.html</anchorfile>
@@ -2156,7 +2191,6 @@
     <name>utility</name>
     <title>Helper Types and Functions</title>
     <filename>group__utility.html</filename>
-    <class kind="struct">kumi::as_tuple</class>
     <class kind="class">kumi::boolean_and</class>
     <class kind="class">kumi::boolean_or</class>
     <class kind="class">kumi::boolean_xor</class>
@@ -2181,20 +2215,6 @@
       <anchorfile>group__utility_gabf2013046cf8ec8ac781128a815709cc.html</anchorfile>
       <anchor>gabf2013046cf8ec8ac781128a815709cc</anchor>
       <arglist>(T &amp;&amp;t) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::from_record</name>
-      <anchorfile>group__utility_gab4a4014d24f9bb5493f90af1b141be13.html</anchorfile>
-      <anchor>gab4a4014d24f9bb5493f90af1b141be13</anchor>
-      <arglist>(record&lt; Ts... &gt; const &amp;r)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::from_tuple</name>
-      <anchorfile>group__utility_ga9f75e9e4798f0e2787b2580be9f7e04e.html</anchorfile>
-      <anchor>ga9f75e9e4798f0e2787b2580be9f7e04e</anchor>
-      <arglist>(tuple&lt; Ts... &gt; const &amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
@@ -2272,20 +2292,6 @@
       <anchorfile>group__utility_ga9c8c29e8a2f4f5e8a663200559fdc983.html</anchorfile>
       <anchor>ga9c8c29e8a2f4f5e8a663200559fdc983</anchor>
       <arglist>() noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::to_record</name>
-      <anchorfile>group__utility_ga324cc6775ad5b15767fc2eaae02abd73.html</anchorfile>
-      <anchor>ga324cc6775ad5b15767fc2eaae02abd73</anchor>
-      <arglist>(Type &amp;&amp;r)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::to_tuple</name>
-      <anchorfile>group__utility_gae6de7cdd99f5e217028b93d4bcf3de52.html</anchorfile>
-      <anchor>gae6de7cdd99f5e217028b93d4bcf3de52</anchor>
-      <arglist>(Type &amp;&amp;t)</arglist>
     </member>
     <member kind="variable">
       <type>constexpr boolean_and</type>
@@ -2426,6 +2432,20 @@
       <anchorfile>group__record_gabd73478b6d709990c2f81dc83b980c16.html</anchorfile>
       <anchor>gabd73478b6d709990c2f81dc83b980c16</anchor>
       <arglist>(R &amp;&amp;r)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::record::from_record</name>
+      <anchorfile>group__record_ga631f638102862f5ac7f8407e04eacf13.html</anchorfile>
+      <anchor>ga631f638102862f5ac7f8407e04eacf13</anchor>
+      <arglist>(record&lt; Ts... &gt; const &amp;r)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::record::to_record</name>
+      <anchorfile>group__record_gaf3f1a7812e294e86296e09eceadbe0a3.html</anchorfile>
+      <anchor>gaf3f1a7812e294e86296e09eceadbe0a3</anchor>
+      <arglist>(Type &amp;&amp;r)</arglist>
     </member>
     <member kind="function">
       <type>decltype(auto) constexpr</type>
@@ -3112,6 +3132,7 @@
     <name>tuple</name>
     <title>Tuple Types and Functions</title>
     <filename>group__tuple.html</filename>
+    <class kind="struct">kumi::as_tuple</class>
     <class kind="class">kumi::tuple</class>
     <member kind="friend">
       <type>friend std::basic_ostream&lt; CharT, Traits &gt; &amp;</type>
@@ -3195,6 +3216,20 @@
       <name>kumi::tuple::to_ref</name>
       <anchorfile>group__tuple_ga27c29bc9a5e31d7ada4ac427a18d8985.html</anchorfile>
       <anchor>ga27c29bc9a5e31d7ada4ac427a18d8985</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::tuple::from_tuple</name>
+      <anchorfile>group__tuple_ga5e1b1ae039b6c55ae68e875505d36774.html</anchorfile>
+      <anchor>ga5e1b1ae039b6c55ae68e875505d36774</anchor>
+      <arglist>(tuple&lt; Ts... &gt; const &amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::tuple::to_tuple</name>
+      <anchorfile>group__tuple_gafdea058f9f804755e1b3ce010be52f40.html</anchorfile>
+      <anchor>gafdea058f9f804755e1b3ce010be52f40</anchor>
       <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
