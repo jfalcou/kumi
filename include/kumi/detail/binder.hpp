@@ -30,7 +30,7 @@ namespace kumi::_
 
   // Empty Base Optimization
   template<int N, typename T>
-  requires(std::is_empty_v<T>)
+  requires(std::is_empty_v<T> && !std::is_final_v<T>)
   struct leaf<N, T> : T
   {
     KUMI_ABI constexpr T& get() & noexcept { return static_cast<T&>(*this); }

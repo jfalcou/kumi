@@ -53,7 +53,7 @@ namespace kumi
 
   // EBO
   template<str ID, typename T>
-  requires(std::is_empty_v<T>)
+  requires(std::is_empty_v<T> && !std::is_final_v<T>)
   struct field_capture<ID, T> : T
   {
     using type = T;
