@@ -6,7 +6,8 @@
 */
 //==================================================================================================
 #define TTS_MAIN
-#include <kumi/kumi.hpp>
+#include <kumi/product_types/tuple.hpp>
+#include <kumi/algorithm.hpp>
 #include <tts/tts.hpp>
 #include "test.hpp"
 #include <array>
@@ -93,28 +94,19 @@ void requires_cast(kumi::tuple<ExpInt, ExpInt>);
 void takes_nullptr_t(std::nullptr_t);
 void takes_unit(kumi::unit);
 void takes_empty_tuple(kumi::tuple<>);
-void takes_empty_record(kumi::record<>);
 
 TTS_CASE("Check empty tuple conversions")
 {
-  kumi::tuple empty_t{};
-  // kumi::record empty_r{};
   kumi::unit n{};
+  kumi::tuple empty_t{};
 
   TTS_EXPECT_COMPILES(empty_t, { takes_nullptr_t(empty_t); });
   TTS_EXPECT_COMPILES(empty_t, { takes_unit(empty_t); });
   TTS_EXPECT_COMPILES(empty_t, { takes_empty_tuple(empty_t); });
-  TTS_EXPECT_COMPILES(empty_t, { takes_empty_record(empty_t); });
-
-  // TTS_EXPECT_COMPILES( empty_r, { takes_nullptr_t(empty_r);     });
-  // TTS_EXPECT_COMPILES( empty_r, { takes_unit(empty_r);          });
-  // TTS_EXPECT_COMPILES( empty_r, { takes_empty_tuple(empty_r);   });
-  // TTS_EXPECT_COMPILES( empty_r, { takes_empty_record(empty_r);  });
 
   TTS_EXPECT_COMPILES(n, { takes_nullptr_t(n); });
   TTS_EXPECT_COMPILES(n, { takes_unit(n); });
   TTS_EXPECT_COMPILES(n, { takes_empty_tuple(n); });
-  TTS_EXPECT_COMPILES(n, { takes_empty_record(n); });
 };
 
 TTS_CASE("Check tuple to tuple conversion")

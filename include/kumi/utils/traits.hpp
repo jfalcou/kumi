@@ -113,27 +113,7 @@ namespace kumi
   //!   template<typename T> inline constexpr auto size_v = size<T>::value;
   //! @endcode
   //================================================================================================
-  template<typename T> struct size : std::tuple_size<T>
-  {
-  };
-
-  template<typename T> struct size<T&> : size<T>
-  {
-  };
-
-  template<typename T> struct size<T&&> : size<T>
-  {
-  };
-
-  template<typename T> struct size<T const> : size<T>
-  {
-  };
-
-  template<typename T> struct size<T const&> : size<T>
-  {
-  };
-
-  template<typename T> struct size<T const&&> : size<T>
+  template<typename T> struct size : std::tuple_size<std::remove_cvref_t<T>>
   {
   };
 
@@ -154,23 +134,7 @@ namespace kumi
   //! }
   //! @endcode
   //================================================================================================
-  template<std::size_t I, typename T> struct element : std::tuple_element<I, T>
-  {
-  };
-
-  template<std::size_t I, typename T> struct element<I, T&> : element<I, T>
-  {
-  };
-
-  template<std::size_t I, typename T> struct element<I, T&&> : element<I, T>
-  {
-  };
-
-  template<std::size_t I, typename T> struct element<I, T const&> : element<I, T>
-  {
-  };
-
-  template<std::size_t I, typename T> struct element<I, T const&&> : element<I, T>
+  template<std::size_t I, typename T> struct element : std::tuple_element<I, std::remove_cvref_t<T>>
   {
   };
 
@@ -241,23 +205,7 @@ namespace kumi
   //!   template<typename T> inline constexpr auto container_size_v = container_size<T>::value;
   //! @endcode
   //================================================================================================
-  template<typename T> struct container_size : is_static_container<T>::size
-  {
-  };
-
-  template<typename T> struct container_size<T&> : container_size<T>
-  {
-  };
-
-  template<typename T> struct container_size<T&&> : container_size<T>
-  {
-  };
-
-  template<typename T> struct container_size<T const&> : container_size<T>
-  {
-  };
-
-  template<typename T> struct container_size<T const&&> : container_size<T>
+  template<typename T> struct container_size : is_static_container<std::remove_cvref_t<T>>::size
   {
   };
 
@@ -277,23 +225,7 @@ namespace kumi
   //! }
   //! @endcode
   //================================================================================================
-  template<typename T> struct container_type : is_static_container<T>::value_type
-  {
-  };
-
-  template<typename T> struct container_type<T&> : container_type<T>
-  {
-  };
-
-  template<typename T> struct container_type<T&&> : container_type<T>
-  {
-  };
-
-  template<typename T> struct container_type<T const&> : container_type<T>
-  {
-  };
-
-  template<typename T> struct container_type<T const&&> : container_type<T>
+  template<typename T> struct container_type : is_static_container<std::remove_cvref_t<T>>::value_type
   {
   };
 
@@ -317,12 +249,29 @@ namespace kumi
   //! }
   //! @endcode
   //================================================================================================
-  template<typename T> struct is_homogeneous;
-
-  template<typename T>
-  requires(requires { T::is_homogeneous; })
-  struct is_homogeneous<T> : std::bool_constant<T::is_homogeneous>
+  template<typename T> struct is_homogeneous : std::false_type
   {
+  };
+
+  // Specific is_homogeneous overload
+  template<typename T>
+  requires(is_product_type_v<T>)
+  struct is_homogeneous<T>
+  {
+    static consteval bool check()
+    {
+      if constexpr (requires { T::is_homogeneous; }) return T::is_homogeneous;
+      else if constexpr (is_record_type_v<T>) return false;
+      else if constexpr (is_static_container_v<T>) return true;
+      else if constexpr (size_v<T> == 0) return false;
+      else if constexpr (size_v<T> == 1) return true;
+      else
+        return []<std::size_t... I>(std::index_sequence<I...>) {
+          return _::all_the_same<element_t<I, T>...>;
+        }(std::make_index_sequence<size_v<T>>{});
+    }
+
+    static constexpr bool value = check();
   };
 
   template<typename T> inline constexpr auto is_homogeneous_v = is_homogeneous<T>::value;
