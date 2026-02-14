@@ -62,7 +62,7 @@
 //================================================================================================
 #define KUMI_PP_CAT(P, S) P##S
 #define KUMI_PP_TAC(P, S) S##P
-#define KUMI_PP_IDENTITY(I, __VA_ARGS__) I
+#define KUMI_PP_IDENTITY(I, ...) I
 
 //================================================================================================
 // Macro to define one member of a tuple with specific operators
