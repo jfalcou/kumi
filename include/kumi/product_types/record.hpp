@@ -425,8 +425,8 @@ namespace kumi
     if constexpr (concepts::sized_product_type<Type, 0>) return kumi::record{};
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return record{field<name_of(as<element_t<I, Type>>{})> =
-                        get<name_of(as<element_t<I, Type>>{})>(KUMI_FWD(r))...};
+        return record{
+          capture_field<name_of(as<element_t<I, Type>>{})>(get<name_of(as<element_t<I, Type>>{})>(KUMI_FWD(r)))...};
       }(std::make_index_sequence<size_v<Type>>{});
   }
 

@@ -26,6 +26,7 @@ TTS_CASE("Check EBO behavior of kumi::tuple construction")
   auto k4 = kumi::record{"a"_id = int{1}, "b"_id = empty{}};
   auto k5 = kumi::record{"a"_id = int{1}, "b"_id = empty{}, "c"_id = char{'c'}};
   auto k6 = kumi::record{"a"_id = kumi::tuple{empty{}}, "c"_id = int{1}};
+  auto k7 = kumi::record{"a"_id = final_empty{}};
 
   auto s0 = std::tuple<>{};
   auto s1 = std::tuple{empty{}};
