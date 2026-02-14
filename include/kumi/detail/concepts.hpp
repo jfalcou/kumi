@@ -13,6 +13,12 @@
 
 namespace kumi::_
 {
+  template<typename... Ts> struct type_list
+  {
+  };
+
+  using invalid = std::integral_constant<std::size_t, static_cast<std::size_t>(-1)>;
+
   template<typename From, typename To>
   concept ordered = requires(From const& a, To const& b) {
     { a < b };
@@ -26,6 +32,33 @@ namespace kumi::_
 
   template<typename T, typename... Args>
   concept implicit_constructible = requires(Args... args) { T{args...}; };
+
+  template<typename T>
+  concept identifier = requires(T const& t) {
+    typename std::remove_cvref_t<T>::tag_type;
+    { t.to_str() };
+  };
+
+  template<typename O>
+  concept field = requires(O const& o) {
+    typename std::remove_cvref_t<O>::type;
+    typename std::remove_cvref_t<O>::identifier_type;
+    { o(typename std::remove_cvref_t<O>::identifier_type{}) };
+    { std::remove_cvref_t<O>::name() };
+  };
+
+  template<field T> struct key_of
+  {
+    using type = typename std::remove_cvref_t<T>::identifier_type;
+  };
+
+  template<field T> struct type_of
+  {
+    using type = typename std::remove_cvref_t<T>::type;
+  };
+
+  template<field T> using key_of_t = typename key_of<std::remove_cvref_t<T>>::type;
+  template<field T> using type_of_t = typename type_of<std::remove_cvref_t<T>>::type;
 
   //==============================================================================================
   // Helper concepts for construction checks
@@ -95,9 +128,11 @@ namespace kumi::_
     static consteval std::false_type get(...);
   };
 
-  template<auto Ref, typename Field> struct check_value<field_capture<Ref, Field>>
+  template<field F> struct check_value<F>
   {
-    template<typename T> static consteval Field get(field_capture<Ref, T>);
+    template<field T>
+    requires(std::is_same_v<key_of_t<F>, key_of_t<T>>)
+    static consteval type_of_t<F> get(T);
   };
 
   template<typename... Ts> struct sort : std::true_type
@@ -178,50 +213,51 @@ namespace kumi::_
   //==============================================================================================
   // Helper meta functions to access a field type by name
   //==============================================================================================
-  template<std::size_t I, auto Ref, typename Field> struct check_field
+  struct failed
   {
     static consteval std::false_type get(...);
     static consteval invalid get_index(...);
   };
 
-  template<std::size_t I, auto Ref, typename Field> struct check_field<I, Ref, field_capture<Ref, Field>>
+  template<std::size_t I, typename Ref, typename Field> struct check_field
   {
-    using constant = std::integral_constant<std::size_t, I>;
-    using field = field_capture<Ref, Field>;
-    static consteval field get(decltype(Ref));
-    static consteval constant get_index(decltype(Ref));
+    // Simply expose get to be able to inherit but can never be called with args
+    static consteval std::false_type get();
+    static consteval invalid get_index();
   };
 
-  template<auto Ref, typename Seq, typename... Fields> struct get_field_by_value;
+  template<std::size_t I, typename Ref, field Field>
+  requires(std::is_same_v<Ref, key_of_t<Field>>)
+  struct check_field<I, Ref, Field>
+  {
+    using constant = std::integral_constant<std::size_t, I>;
+    static consteval Field get(Ref);
+    static consteval constant get_index(Ref);
+  };
+
+  template<typename Ref, typename Seq, typename... Fields> struct get_field_by_value;
 
   /// Helper using inheritance to get the corresponding name in an variadic pack if it exist
   /// The index is used in order to enable mixed named/unnamed packs to work
-  template<auto Ref, std::size_t... I, typename... Fields>
-  struct get_field_by_value<Ref, std::index_sequence<I...>, Fields...> : check_field<I, Ref, Fields>...
+  template<typename Ref, std::size_t... I, typename... Fields>
+  struct get_field_by_value<Ref, std::index_sequence<I...>, Fields...> : failed, check_field<I, Ref, Fields>...
   {
+    using failed::get;
+    using failed::get_index;
     using check_field<I, Ref, Fields>::get...;
     using check_field<I, Ref, Fields>::get_index...;
 
-    using type = decltype(get(Ref));
-    static constexpr auto value = decltype(get_index(Ref))::value;
+    using type = decltype(get(std::declval<Ref>()));
+    static constexpr auto value = decltype(get_index(std::declval<Ref>()))::value;
   };
 
-  template<auto Ref, typename... Fields>
+  template<typename Ref, typename... Fields>
   using get_field_by_value_t = typename get_field_by_value<Ref, std::index_sequence_for<Fields...>, Fields...>::type;
 
-  template<auto Ref, typename... Fields>
+  template<typename Ref, typename... Fields>
   inline constexpr auto get_index_by_value_v =
     get_field_by_value<Ref, std::index_sequence_for<Fields...>, Fields...>::value;
 
-  template<auto Ref, typename... Fields>
+  template<typename Ref, typename... Fields>
   concept can_get_field_by_value = !std::is_same_v<get_field_by_value_t<Ref, Fields...>, std::false_type>;
-
-  // MSVC workaround for get<>
-  // MSVC doesnt SFINAE properly based on NTTP types before requires evaluation
-  // so we need this weird mechanism for it to pick the correct version.
-  template<auto Name, typename... Ts> KUMI_ABI constexpr auto contains_field()
-  {
-    if constexpr (!std::integral<std::remove_cvref_t<decltype(Name)>>) return can_get_field_by_value<Name, Ts...>;
-    else return false;
-  };
 }

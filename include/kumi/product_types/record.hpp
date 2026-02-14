@@ -55,7 +55,7 @@ namespace kumi
     requires(I < sizeof...(Ts))
     KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) & noexcept
     {
-      return _::get_leaf<I>(impl);
+      return impl(std::integral_constant<std::size_t, I>{});
     }
 
     /// @overload
@@ -63,7 +63,7 @@ namespace kumi
     requires(I < sizeof...(Ts))
     KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) && noexcept
     {
-      return _::get_leaf<I>(static_cast<decltype(impl)&&>(impl));
+      return static_cast<decltype(impl)&&>(impl)(std::integral_constant<std::size_t, I>{});
     }
 
     /// @overload
@@ -71,7 +71,7 @@ namespace kumi
     requires(I < sizeof...(Ts))
     KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) const&& noexcept
     {
-      return _::get_leaf<I>(static_cast<decltype(impl) const&&>(impl));
+      return static_cast<decltype(impl) const&&>(impl)(std::integral_constant<std::size_t, I>{});
     }
 
     /// @overload
@@ -79,7 +79,7 @@ namespace kumi
     requires(I < sizeof...(Ts))
     KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) const& noexcept
     {
-      return _::get_leaf<I>(impl);
+      return impl(std::integral_constant<std::size_t, I>{});
     }
 
     //==============================================================================================
@@ -93,35 +93,35 @@ namespace kumi
     //! ## Example:
     //! @include doc/record/api/named_subscript.cpp
     //==============================================================================================
-    template<str Name>
+    template<concepts::identifier Name>
     requires(concepts::contains_field<Name, Ts...>)
-    KUMI_ABI constexpr decltype(auto) operator[](field_name<Name>) & noexcept
+    KUMI_ABI constexpr decltype(auto) operator[](Name const& n) & noexcept
     {
-      return _::get_leaf<Name>(impl);
+      return impl(n);
     }
 
     /// @overload
-    template<str Name>
+    template<concepts::identifier Name>
     requires(concepts::contains_field<Name, Ts...>)
-    KUMI_ABI constexpr decltype(auto) operator[](field_name<Name>) && noexcept
+    KUMI_ABI constexpr decltype(auto) operator[](Name const& n) && noexcept
     {
-      return _::get_leaf<Name>(static_cast<decltype(impl)&&>(impl));
+      return static_cast<decltype(impl)&&>(impl)(n);
     }
 
     /// @overload
-    template<str Name>
+    template<concepts::identifier Name>
     requires(concepts::contains_field<Name, Ts...>)
-    KUMI_ABI constexpr decltype(auto) operator[](field_name<Name>) const&& noexcept
+    KUMI_ABI constexpr decltype(auto) operator[](Name const& n) const&& noexcept
     {
-      return _::get_leaf<Name>(static_cast<decltype(impl) const&&>(impl));
+      return static_cast<decltype(impl) const&&>(impl)(n);
     }
 
     /// @overload
-    template<str Name>
+    template<concepts::identifier Name>
     requires(concepts::contains_field<Name, Ts...>)
-    KUMI_ABI constexpr decltype(auto) operator[](field_name<Name>) const& noexcept
+    KUMI_ABI constexpr decltype(auto) operator[](Name const& n) const& noexcept
     {
-      return _::get_leaf<Name>(impl);
+      return impl(n);
     }
 
     //==============================================================================================
@@ -306,9 +306,9 @@ namespace kumi
   //! ## Example:
   //! @include doc/record/api/tie.cpp
   //================================================================================================
-  template<str... Fields, typename... Ts>
+  template<concepts::identifier auto... Fields, typename... Ts>
   requires(sizeof...(Fields) == sizeof...(Ts))
-  KUMI_ABI constexpr auto tie(Ts&... ts) -> record<field_capture<Fields, Ts&>...>
+  KUMI_ABI constexpr auto tie(Ts&... ts) -> record<field<decltype(Fields), Ts&>...>
   {
     return {ts...};
   }
@@ -331,9 +331,9 @@ namespace kumi
   //! ## Example:
   //! @include doc/record/api/forward_as_record.cpp
   //================================================================================================
-  template<str... Fields, typename... Ts>
+  template<concepts::identifier auto... Fields, typename... Ts>
   requires(sizeof...(Fields) == sizeof...(Ts))
-  [[nodiscard]] KUMI_ABI constexpr auto forward_as_record(Ts&&... ts) -> record<field_capture<Fields, Ts&&>...>
+  [[nodiscard]] KUMI_ABI constexpr auto forward_as_record(Ts&&... ts) -> record<field<decltype(Fields), Ts&&>...>
   {
     return {KUMI_FWD(ts)...};
   }
@@ -425,8 +425,8 @@ namespace kumi
     if constexpr (concepts::sized_product_type<Type, 0>) return kumi::record{};
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return record{field<name_of(as<element_t<I, Type>>{})> =
-                        get<name_of(as<element_t<I, Type>>{})>(KUMI_FWD(r))...};
+        return record{
+          capture_field<name_of(as<element_t<I, Type>>{})>(get<name_of(as<element_t<I, Type>>{})>(KUMI_FWD(r)))...};
       }(std::make_index_sequence<size_v<Type>>{});
   }
 
@@ -483,23 +483,6 @@ namespace kumi
     return static_cast<record<Ts...> const&&>(r)[index<I>];
   }
 
-  /// Improves diagnostic for out of bounds index
-  template<std::integral auto I, typename... Ts>
-  requires((I >= sizeof...(Ts)) || (I < 0))
-  constexpr auto get(record<Ts...>& t) = delete;
-
-  template<std::integral auto I, typename... Ts>
-  requires((I >= sizeof...(Ts)) || (I < 0))
-  constexpr auto get(record<Ts...> const& t) = delete;
-
-  template<std::integral auto I, typename... Ts>
-  requires((I >= sizeof...(Ts)) || (I < 0))
-  constexpr auto get(record<Ts...>&& t) = delete;
-
-  template<std::integral auto I, typename... Ts>
-  requires((I >= sizeof...(Ts)) || (I < 0))
-  constexpr auto get(record<Ts...> const&& t) = delete;
-
   //================================================================================================
   //! @ingroup record
   //! @brief Extracts the element of the field labeled Name from a kumi::record if it exists
@@ -514,47 +497,91 @@ namespace kumi
   //! @include doc/record/api/named_get.cpp
   //================================================================================================
   template<str Name, typename... Ts>
-  requires(concepts::contains_field<Name, Ts...>)
+  requires(_::contains_field<Name, Ts...>())
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>& r) noexcept
   {
-    return r[field<Name>];
+    return r[name<Name>{}];
   }
 
   /// @overload
   template<str Name, typename... Ts>
-  requires(concepts::contains_field<Name, Ts...>)
+  requires(_::contains_field<Name, Ts...>())
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>&& r) noexcept
   {
-    return static_cast<record<Ts...>&&>(r)[field<Name>];
+    return static_cast<record<Ts...>&&>(r)[name<Name>{}];
   }
 
   /// @overload
   template<str Name, typename... Ts>
-  requires(concepts::contains_field<Name, Ts...>)
+  requires(_::contains_field<Name, Ts...>())
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const& r) noexcept
   {
-    return r[field<Name>];
+    return r[name<Name>{}];
   }
 
   /// @overload
   template<str Name, typename... Ts>
-  requires(concepts::contains_field<Name, Ts...>)
+  requires(_::contains_field<Name, Ts...>())
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const&& r) noexcept
   {
-    return static_cast<record<Ts...> const&&>(r)[field<Name>];
+    return static_cast<record<Ts...> const&&>(r)[name<Name>{}];
   }
 
-  /// Improves diagnostic for non present name
-  template<str Name, concepts::record_type R>
-  requires(!(_::named_get_compliant<Name, R>()))
-  constexpr auto get(R&& r) = delete;
+  /// @overload
+  template<concepts::identifier auto Name, typename... Ts>
+  requires(concepts::contains_field<decltype(Name), Ts...>)
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>& r) noexcept
+  {
+    return r[Name];
+  }
 
-  /// No get<type> on records
-  template<typename U, concepts::record_type T> constexpr auto get(T&& t) = delete;
+  /// @overload
+  template<concepts::identifier auto Name, typename... Ts>
+  requires(concepts::contains_field<decltype(Name), Ts...>)
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>&& r) noexcept
+  {
+    return static_cast<record<Ts...>&&>(r)[Name];
+  }
+
+  /// @overload
+  template<concepts::identifier auto Name, typename... Ts>
+  requires(concepts::contains_field<decltype(Name), Ts...>)
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const& r) noexcept
+  {
+    return r[Name];
+  }
+
+  /// @overload
+  template<concepts::identifier auto Name, typename... Ts>
+  requires(concepts::contains_field<decltype(Name), Ts...>)
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const&& r) noexcept
+  {
+    return static_cast<record<Ts...> const&&>(r)[Name];
+  }
 
   //================================================================================================
   //! @}
   //================================================================================================
+
+  /// Improves diagnostic for out of bounds index
+  template<std::integral auto I, typename R>
+  requires(is_kumi_record_v<std::remove_cvref_t<R>> && ((I >= size_v<R>) || (I < 0)))
+  constexpr auto get(R&& r) = delete;
+
+  /// Improves diagnostic for non present name
+  template<str S, typename R>
+  requires(is_kumi_record_v<std::remove_cvref_t<R>> && !_::contains_field<S, R>())
+  constexpr auto get(R&& r) = delete;
+
+  /// Improves diagnostic for non present name
+  template<concepts::identifier auto S, typename R>
+  requires(is_kumi_record_v<std::remove_cvref_t<R>> && !concepts::contains_field<decltype(S), R>)
+  constexpr auto get(R&& r) = delete;
+
+  /// No get<type> on records
+  template<typename U, typename R>
+  requires(is_kumi_record_v<std::remove_cvref_t<R>>)
+  constexpr auto get(R&& r) = delete;
 
   // Builder protocole
   template<concepts::record_type R> struct builder<R>

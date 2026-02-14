@@ -55,7 +55,7 @@ static_assert(std::random_access_iterator<soa<int>::iterator>);
 int main()
 {
   soa<float,int> s;
-  get<0>(s.fields) = {1.2,2.3,3.4,4.5};
+  get<0>(s.fields) = {1.2f,2.3f,3.4f,4.5f};
   get<1>(s.fields) = {10,20,30,40};
 
   for(auto e : s)

@@ -9,7 +9,7 @@
 int main()
 {
   using namespace kumi::literals;
-  auto values = kumi::record{"a"_f=1,"b"_f=2,"c"_f=3,"d"_f=4,"e"_f=5,"f"_f=6};
+  auto values = kumi::record{"a"_id=1,"b"_id=2,"c"_id=3,"d"_id=4,"e"_id=5,"f"_id=6};
 
   std::cout << values << "\n";
   std::cout << kumi::rotate_right<1>(values) << "\n";

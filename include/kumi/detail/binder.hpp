@@ -18,96 +18,66 @@ namespace kumi::_
   template<int N, typename T> struct leaf
   {
     T value;
+    using index = std::integral_constant<std::size_t, N>;
+    using inner_type = std::type_identity<T>;
 
-    KUMI_ABI constexpr T& get() & noexcept { return value; }
+    KUMI_ABI constexpr T& operator()(index) & noexcept { return value; }
 
-    KUMI_ABI constexpr T&& get() && noexcept { return static_cast<T&&>(value); }
+    KUMI_ABI constexpr T&& operator()(index) && noexcept { return static_cast<T&&>(value); }
 
-    KUMI_ABI constexpr T const&& get() const&& noexcept { return static_cast<T const&&>(value); }
+    KUMI_ABI constexpr T const&& operator()(index) const&& noexcept { return static_cast<T const&&>(value); }
 
-    KUMI_ABI constexpr T const& get() const& noexcept { return value; }
+    KUMI_ABI constexpr T const& operator()(index) const& noexcept { return value; }
+
+    KUMI_ABI constexpr T& operator()(inner_type) & noexcept { return value; }
+
+    KUMI_ABI constexpr T&& operator()(inner_type) && noexcept { return static_cast<T&&>(value); }
+
+    KUMI_ABI constexpr T const&& operator()(inner_type) const&& noexcept { return static_cast<T const&&>(value); }
+
+    KUMI_ABI constexpr T const& operator()(inner_type) const& noexcept { return value; }
   };
 
   // Empty Base Optimization
   template<int N, typename T>
-  requires(std::is_empty_v<T> && !std::is_final_v<T>)
+  requires(std::is_empty_v<T> && (!field<T>))
   struct leaf<N, T> : T
   {
-    KUMI_ABI constexpr T& get() & noexcept { return static_cast<T&>(*this); }
+    using index = std::integral_constant<std::size_t, N>;
+    using inner_type = std::type_identity<T>;
 
-    KUMI_ABI constexpr T&& get() && noexcept { return static_cast<T&&>(*this); }
+    KUMI_ABI constexpr T& operator()(index) & noexcept { return *this; }
 
-    KUMI_ABI constexpr T const&& get() const&& noexcept { return static_cast<T const&&>(*this); }
+    KUMI_ABI constexpr T&& operator()(index) && noexcept { return static_cast<T&&>(*this); }
 
-    KUMI_ABI constexpr T const& get() const& noexcept { return static_cast<T const&>(*this); }
+    KUMI_ABI constexpr T const&& operator()(index) const&& noexcept { return static_cast<T const&&>(*this); }
+
+    KUMI_ABI constexpr T const& operator()(index) const& noexcept { return *this; }
+
+    KUMI_ABI constexpr T& operator()(inner_type) & noexcept { return *this; }
+
+    KUMI_ABI constexpr T&& operator()(inner_type) && noexcept { return static_cast<T&&>(*this); }
+
+    KUMI_ABI constexpr T const&& operator()(inner_type) const&& noexcept { return static_cast<T const&&>(*this); }
+
+    KUMI_ABI constexpr T const& operator()(inner_type) const& noexcept { return *this; }
   };
 
-  // Used for get_leaf<index>(binder) resolution
-  template<int I, typename T> KUMI_ABI constexpr decltype(auto) get_leaf(leaf<I, T>& a) noexcept
+  template<int N, field T> struct leaf<N, T> : T
   {
-    return a.get();
-  }
+    using T::operator();
+    using index = std::integral_constant<std::size_t, N>;
+    using key = key_of_t<T>;
+    using inner_type = type_of_t<T>;
 
-  template<int I, typename T> KUMI_ABI constexpr decltype(auto) get_leaf(leaf<I, T>&& a) noexcept
-  {
-    return static_cast<T&&>(a.get());
-  }
+    KUMI_ABI constexpr T& operator()(index) & noexcept { return *this; }
 
-  template<int I, typename T> KUMI_ABI constexpr decltype(auto) get_leaf(leaf<I, T> const&& a) noexcept
-  {
-    return static_cast<T const&&>(a.get());
-  }
+    KUMI_ABI constexpr T&& operator()(index) && noexcept { return static_cast<T&&>(*this); }
 
-  template<int I, typename T> KUMI_ABI constexpr decltype(auto) get_leaf(leaf<I, T> const& a) noexcept
-  {
-    return a.get();
-  }
+    KUMI_ABI constexpr T const&& operator()(index) const&& noexcept { return static_cast<T const&&>(*this); }
 
-  // Used for get_leaf<type>(binder) resolution
-  template<typename T, int I> KUMI_ABI constexpr T& get_leaf(leaf<I, T>& a) noexcept
-  {
-    return a.get();
-  }
-
-  template<typename T, int I> KUMI_ABI constexpr T&& get_leaf(leaf<I, T>&& a) noexcept
-  {
-    return static_cast<T&&>(a.get());
-  }
-
-  template<typename T, int I> KUMI_ABI constexpr T const&& get_leaf(leaf<I, T> const&& a) noexcept
-  {
-    return static_cast<T const&&>(a.get());
-  }
-
-  template<typename T, int I> KUMI_ABI constexpr T const& get_leaf(leaf<I, T> const& a) noexcept
-  {
-    return a.get();
-  }
-
-  // Used for get_leaf<name>(binder) resolution
-  template<kumi::str Name, int I, typename T>
-  KUMI_ABI constexpr T& get_leaf(leaf<I, field_capture<Name, T>>& a) noexcept
-  {
-    return _::get_field(a.get());
-  }
-
-  template<kumi::str Name, int I, typename T>
-  KUMI_ABI constexpr T&& get_leaf(leaf<I, field_capture<Name, T>>&& a) noexcept
-  {
-    return static_cast<T&&>(_::get_field(a.get()));
-  }
-
-  template<kumi::str Name, int I, typename T>
-  KUMI_ABI constexpr T const&& get_leaf(leaf<I, field_capture<Name, T>> const&& a) noexcept
-  {
-    return static_cast<T const&&>(_::get_field(a.get()));
-  }
-
-  template<kumi::str Name, int I, typename T>
-  KUMI_ABI constexpr T const& get_leaf(leaf<I, field_capture<Name, T>> const& a) noexcept
-  {
-    return _::get_field(a.get());
-  }
+    KUMI_ABI constexpr T const& operator()(index) const& noexcept { return *this; }
+  };
 
   template<typename ISeq, typename... Ts> struct binder;
 
@@ -115,6 +85,7 @@ namespace kumi::_
   template<int... Is, typename... Ts> struct binder<std::integer_sequence<int, Is...>, Ts...> : leaf<Is, Ts>...
   {
     static constexpr bool is_homogeneous = false;
+    using leaf<Is, Ts>::operator()...;
   };
 
   // Specializable binder type constructor

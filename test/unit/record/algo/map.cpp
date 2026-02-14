@@ -14,26 +14,26 @@ TTS_CASE("Check result::map<F,Record...> behavior")
 {
   using namespace kumi::literals;
 
-  using char_f = kumi::field_capture<"a", char>;
-  using short_f = kumi::field_capture<"b", short>;
-  using int_f = kumi::field_capture<"c", int>;
-  using double_f = kumi::field_capture<"d", double>;
-  using float_f = kumi::field_capture<"d", float>;
+  using char_f = kumi::field<kumi::name<"a">, char>;
+  using short_f = kumi::field<kumi::name<"b">, short>;
+  using int_f = kumi::field<kumi::name<"c">, int>;
+  using double_f = kumi::field<kumi::name<"d">, double>;
+  using float_f = kumi::field<kumi::name<"d">, float>;
 
   auto lambda = [](auto const& m) { return &m; };
   using func_t = decltype(lambda);
 
   TTS_TYPE_IS((kumi::result::map_t<func_t, kumi::record<char_f, short_f, int_f, double_f>>),
-              (kumi::record<kumi::field_capture<"a", char const*>, kumi::field_capture<"b", short const*>,
-                            kumi::field_capture<"c", int const*>, kumi::field_capture<"d", double const*>>));
+              (kumi::record<kumi::field<kumi::name<"a">, char const*>, kumi::field<kumi::name<"b">, short const*>,
+                            kumi::field<kumi::name<"c">, int const*>, kumi::field<kumi::name<"d">, double const*>>));
 
   auto add = [](auto a, auto b) { return a + b; };
   using add_t = decltype(add);
 
   TTS_TYPE_IS((kumi::result::map_t<add_t, kumi::record<char_f, short_f, int_f, double_f>,
                                    kumi::record<char_f, short_f, int_f, float_f>>),
-              (kumi::record<kumi::field_capture<"a", int>, kumi::field_capture<"b", int>, kumi::field_capture<"c", int>,
-                            kumi::field_capture<"d", double>>));
+              (kumi::record<kumi::field<kumi::name<"a">, int>, kumi::field<kumi::name<"b">, int>,
+                            kumi::field<kumi::name<"c">, int>, kumi::field<kumi::name<"d">, double>>));
 };
 
 TTS_CASE("Check map(f, {}) behavior")
@@ -54,7 +54,7 @@ TTS_CASE("Check map(f, record) behavior")
   using namespace kumi::literals;
 
   {
-    auto t = kumi::record{"a"_f = 1, "b"_f = 2., "c"_f = 3.4f, "d"_f = '5'};
+    auto t = kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.4f, "d"_id = '5'};
 
     {
       auto s = map([](auto m) { return sizeof(m); }, t);
@@ -72,10 +72,10 @@ TTS_CASE("Check map(f, record) behavior")
 
     {
       auto u = kumi::record{
-        "c"_f = 4,
-        "b"_f = 3,
-        "d"_f = 5,
-        "a"_f = 2,
+        "c"_id = 4,
+        "b"_id = 3,
+        "d"_id = 5,
+        "a"_id = 2,
       };
       auto s = map([](auto m, auto n) { return n * sizeof(m); }, t, u);
 
@@ -97,25 +97,25 @@ TTS_CASE("Check map(f, record) constexpr behavior")
   using namespace kumi::literals;
 
   {
-    constexpr auto t = kumi::record{"a"_f = 1, "b"_f = 2., "c"_f = 3.4f, "d"_f = '5'};
+    constexpr auto t = kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.4f, "d"_id = '5'};
 
     {
       constexpr auto s = map([](auto m) { return sizeof(m); }, t);
 
-      TTS_CONSTEXPR_EQUAL(get<"a"_f>(s), sizeof(int));
-      TTS_CONSTEXPR_EQUAL(get<"b"_f>(s), sizeof(double));
-      TTS_CONSTEXPR_EQUAL(get<"c"_f>(s), sizeof(float));
-      TTS_CONSTEXPR_EQUAL(get<"d"_f>(s), sizeof(char));
+      TTS_CONSTEXPR_EQUAL(get<"a"_id>(s), sizeof(int));
+      TTS_CONSTEXPR_EQUAL(get<"b"_id>(s), sizeof(double));
+      TTS_CONSTEXPR_EQUAL(get<"c"_id>(s), sizeof(float));
+      TTS_CONSTEXPR_EQUAL(get<"d"_id>(s), sizeof(char));
     }
 
     {
-      constexpr auto u = kumi::record{"a"_f = 2, "b"_f = 3, "c"_f = 4, "d"_f = 5};
+      constexpr auto u = kumi::record{"a"_id = 2, "b"_id = 3, "c"_id = 4, "d"_id = 5};
       constexpr auto s = map([](auto m, auto n) { return n * sizeof(m); }, t, u);
 
-      TTS_CONSTEXPR_EQUAL(get<"a"_f>(s), 2 * sizeof(int));
-      TTS_CONSTEXPR_EQUAL(get<"b"_f>(s), 3 * sizeof(double));
-      TTS_CONSTEXPR_EQUAL(get<"c"_f>(s), 4 * sizeof(float));
-      TTS_CONSTEXPR_EQUAL(get<"d"_f>(s), 5 * sizeof(char));
+      TTS_CONSTEXPR_EQUAL(get<"a"_id>(s), 2 * sizeof(int));
+      TTS_CONSTEXPR_EQUAL(get<"b"_id>(s), 3 * sizeof(double));
+      TTS_CONSTEXPR_EQUAL(get<"c"_id>(s), 4 * sizeof(float));
+      TTS_CONSTEXPR_EQUAL(get<"d"_id>(s), 5 * sizeof(char));
     }
   }
 };

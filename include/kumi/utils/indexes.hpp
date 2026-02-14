@@ -50,7 +50,7 @@ namespace kumi
     requires(I < sizeof...(V))
     KUMI_ABI constexpr decltype(auto) get_index() const noexcept
     {
-      return _::get_leaf<I>(impl);
+      return impl(std::integral_constant<std::size_t, I>{});
     }
 
     //==============================================================================================

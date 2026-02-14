@@ -21,14 +21,14 @@ struct my_record_type
 
 template<std::size_t I> constexpr decltype(auto) get(my_record_type const& m) noexcept
 {
-  if constexpr (I == 0) return kumi::capture_field<"a">(m.n);
-  if constexpr (I == 1) return kumi::capture_field<"data">(m.data);
+  if constexpr (I == 0) return kumi::capture_field<"a"_id>(m.n);
+  if constexpr (I == 1) return kumi::capture_field<"data"_id>(m.data);
 }
 
 template<std::size_t I> constexpr decltype(auto) get(my_record_type& m) noexcept
 {
-  if constexpr (I == 0) return kumi::capture_field<"n">(m.n);
-  if constexpr (I == 1) return kumi::capture_field<"data">(m.data);
+  if constexpr (I == 0) return kumi::capture_field<"n"_id>(m.n);
+  if constexpr (I == 1) return kumi::capture_field<"data"_id>(m.data);
 }
 
 template<> struct kumi::is_record_type<my_record_type> : std::true_type
@@ -42,24 +42,24 @@ template<> struct std::tuple_size<my_record_type> : std::integral_constant<std::
 
 template<> struct std::tuple_element<0, my_record_type>
 {
-  using type = kumi::field_capture<"n", std::size_t>;
+  using type = kumi::field<kumi::name<"n">, std::size_t>;
 };
 
 template<> struct std::tuple_element<1, my_record_type>
 {
-  using type = kumi::field_capture<"data", std::size_t>;
+  using type = kumi::field<kumi::name<"data">, std::size_t>;
 };
 
 TTS_CASE("Check record to constructible type conversion")
 {
-  kumi::record in{"data"_f = std::size_t{13}, "n"_f = std::size_t{9}};
+  kumi::record in{"data"_id = std::size_t{13}, "n"_id = std::size_t{9}};
 
   TTS_EQUAL(kumi::from_record<my_record_type>(in), (my_record_type{9, 13}));
 };
 
 TTS_CASE("Check tuple to constructible type constexpr conversion")
 {
-  constexpr kumi::record in{"data"_f = std::size_t{13}, "n"_f = std::size_t{9}};
+  constexpr kumi::record in{"data"_id = std::size_t{13}, "n"_id = std::size_t{9}};
 
   TTS_CONSTEXPR_EQUAL(kumi::from_record<my_record_type>(in), (my_record_type{9, 13}));
 };
@@ -68,7 +68,7 @@ TTS_CASE("Check type to record conversion")
 {
   my_record_type in{9, 13};
 
-  TTS_EQUAL(kumi::to_record(in), (kumi::record{"n"_f = std::size_t{9}, "data"_f = std::size_t{13}}));
+  TTS_EQUAL(kumi::to_record(in), (kumi::record{"n"_id = std::size_t{9}, "data"_id = std::size_t{13}}));
 };
 
 TTS_CASE("Check type to tuple constexpr conversion")
@@ -76,5 +76,5 @@ TTS_CASE("Check type to tuple constexpr conversion")
   using namespace kumi::literals;
   constexpr my_record_type in{9, 13};
 
-  TTS_CONSTEXPR_EQUAL(kumi::to_record(in), (kumi::record{"n"_f = std::size_t{9}, "data"_f = std::size_t{13}}));
+  TTS_CONSTEXPR_EQUAL(kumi::to_record(in), (kumi::record{"n"_id = std::size_t{9}, "data"_id = std::size_t{13}}));
 };

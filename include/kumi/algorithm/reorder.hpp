@@ -101,7 +101,7 @@ namespace kumi
   //! ## Example
   //! @include doc/record/algo/reorder_fields.cpp
   //================================================================================================
-  template<field_name... Name, concepts::product_type Tuple>
+  template<concepts::identifier auto... Name, concepts::product_type Tuple>
   requires(requires { get<Name>(std::declval<Tuple>()); } && ...)
   KUMI_ABI constexpr auto reorder_fields(Tuple&& t)
   {
@@ -162,7 +162,7 @@ namespace kumi
       using type = decltype(kumi::reorder<Idx...>(std::declval<T>()));
     };
 
-    template<concepts::product_type Tuple, field_name... Name> struct reorder_fields
+    template<concepts::product_type Tuple, concepts::identifier auto... Name> struct reorder_fields
     {
       using type = decltype(kumi::reorder_fields<Name...>(std::declval<Tuple>()));
     };
@@ -174,7 +174,7 @@ namespace kumi
 
     template<concepts::product_type T, std::size_t... Idx> using reorder_t = typename reorder<T, Idx...>::type;
 
-    template<concepts::product_type Tuple, field_name... Name>
+    template<concepts::product_type Tuple, concepts::identifier auto... Name>
     using reorder_fields_t = typename reorder_fields<Tuple, Name...>::type;
 
     template<concepts::product_type T, concepts::index_map auto Indexes>
