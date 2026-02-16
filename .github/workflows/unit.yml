@@ -149,7 +149,7 @@ jobs:
           mkdir build && cd build
           cmake -G "Visual Studio 17 2022" -A x64 .. ${{matrix.cfg.setup}}
       - name: Compiling Unit Tests
-        run:  |
+        run: |
           cd build
           cmake --build . --target kumi-test --config ${{ matrix.cfg.mode }} --parallel 2
       - name: Running Tests

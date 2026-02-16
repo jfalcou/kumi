@@ -29,9 +29,9 @@ TTS_CASE("Check EBO behavior of kumi::tuple construction")
 
   auto s0 = std::tuple<>{};
   auto s1 = std::tuple{empty{}};
-  auto s2 = std::tuple{empty{}, empty{}};
-  auto s3 = std::tuple{empty{}, kumi::none};
-  auto s4 = std::tuple{int{1}, empty{}};
+  [[maybe_unused]] auto s2 = std::tuple{empty{}, empty{}};
+  [[maybe_unused]] auto s3 = std::tuple{empty{}, kumi::none};
+  [[maybe_unused]] auto s4 = std::tuple{int{1}, empty{}};
   auto s5 = std::tuple{int{1}, empty{}, char{'c'}};
   auto s6 = std::tuple{std::tuple{empty{}}, int{1}};
   auto s7 = kumi::tuple{final_empty{}};
