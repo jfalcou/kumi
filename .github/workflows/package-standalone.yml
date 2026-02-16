@@ -27,11 +27,18 @@ jobs:
         run: |
           git config --global --add safe.directory /__w/kumi/kumi
           mkdir build && cd build
-          cmake .. -G Ninja -DKUMI_BUILD_TEST=OFF -DKUMI_BUILD_DOCUMENTATION=OFF
+          cmake .. -G Ninja -DKUMI_BUILD_TEST=OFF -DKUMI_BUILD_DOCUMENTATION=OFF \
+                            -DKUMI_BUILD_STANDALONE-TEST=ON
 
       - name: Generate standalone KUMI header
         run: |
           cd build && ninja kumi-standalone
+
+      - name: Test standalone KUMI header
+        run: |
+          cd build
+          echo -e "#include \"kumi.hpp\" \\nint main(){}"
+          g++ -std=c++20 -S main.cpp
 
       - name: Update standalone branch
         run: |
