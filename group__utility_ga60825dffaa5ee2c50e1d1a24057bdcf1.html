@@ -133,7 +133,7 @@ template&lt;char... c&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">constexpr</a> <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">auto</a> kumi::literals::operator&quot;&quot;_c </td>
+          <td class="memname"><a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">constexpr</a> <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">auto</a> kumi::literals::operator&quot;&quot;_c </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
           <td></td>
@@ -148,23 +148,23 @@ template&lt;char... c&gt; </div>
 
 <p>Forms a integral constant literal of the desired value. </p>
 <dl class="section return"><dt>Returns</dt><dd>An instance of <a class="el" href="structkumi_1_1index__t.html" title="Integral constant type.">kumi::index_t</a> for the specified integral value </dd></dl>
-<h2><a class="anchor" id="autotoc_md183"></a>
+<h2><a class="anchor" id="autotoc_md187"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">main</a>()</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">main</a>()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">v</a> = 42<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">_c</a>;</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">w</a> = <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::index&lt;63&gt;</a>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">v</a> = 42<a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">_c</a>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">w</a> = <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">kumi::index&lt;63&gt;</a>;</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">v</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">w</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">v</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">w</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__utility_ga79787185d26368946a74f31ce5f6597c_html_ga79787185d26368946a74f31ce5f6597c"><div class="ttname"><a href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::member_cast</a></div><div class="ttdeci">constexpr auto member_cast(T &amp;&amp;t)</div><div class="ttdoc">Converts a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target...&gt;</div><div class="ttdef"><b>Definition</b> cast.hpp:56</div></div>
+<div class="ttc" id="agroup__utility_gacadc026868e6654e80c57432643c804a_html_gacadc026868e6654e80c57432643c804a"><div class="ttname"><a href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">kumi::if_</a></div><div class="ttdeci">constexpr traits_check&lt; Traits &gt; if_</div><div class="ttdoc">Option specifying a traits that type should verify for being used as a identifier value.</div><div class="ttdef"><b>Definition</b> identifier.hpp:38</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

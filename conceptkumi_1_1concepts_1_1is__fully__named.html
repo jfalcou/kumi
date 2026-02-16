@@ -125,17 +125,18 @@ $(document).ready(function(){initNavTree('conceptkumi_1_1concepts_1_1is__fully__
 </div><!--header-->
 <div class="contents">
 
-<p>Concept specifying if parameter pack contains only <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c" title="Converts a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target...&gt;">kumi::field_captures</a>.  
+<p>Concept specifying if parameter pack contains only <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a" title="Option specifying a traits that type should verify for being used as a identifier value.">kumi::field_captures</a>.  
 <a href="conceptkumi_1_1concepts_1_1is__fully__named.html#details">More...</a></p>
 
 <p><code>#include &lt;kumi/utils/concepts.hpp&gt;</code></p>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Concept specifying if parameter pack contains only <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c" title="Converts a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target...&gt;">kumi::field_captures</a>. </p>
+<div class="textblock"><p>Concept specifying if parameter pack contains only <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a" title="Option specifying a traits that type should verify for being used as a identifier value.">kumi::field_captures</a>. </p>
 </div><h2 class="groupheader">Concept definition</h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Ts</a>&gt;</div>
-<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1concepts_1_1is__fully__named.html">kumi::concepts::is_fully_named</a> =  (... &amp;&amp; <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">is_field_capture_v&lt;std::remove_cvref_t&lt;Ts&gt;</a>&gt;)</div>
-<div class="ttc" id="aconceptkumi_1_1concepts_1_1is__fully__named_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1is__fully__named.html">kumi::concepts::is_fully_named</a></div><div class="ttdoc">Concept specifying if parameter pack contains only kumi::field_captures.</div><div class="ttdef"><b>Definition</b> concepts.hpp:204</div></div>
-<div class="ttc" id="agroup__utility_ga79787185d26368946a74f31ce5f6597c_html_ga79787185d26368946a74f31ce5f6597c"><div class="ttname"><a href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::member_cast</a></div><div class="ttdeci">constexpr auto member_cast(T &amp;&amp;t)</div><div class="ttdoc">Converts a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target...&gt;</div><div class="ttdef"><b>Definition</b> cast.hpp:56</div></div>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Ts</a>&gt;</div>
+<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1concepts_1_1is__fully__named.html">kumi::concepts::is_fully_named</a> =  (... &amp;&amp; <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1field.html">field&lt;std::remove_cvref_t&lt;Ts&gt;</a>&gt;)</div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1field_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1field.html">kumi::concepts::field</a></div><div class="ttdoc">field concept</div><div class="ttdef"><b>Definition</b> concepts.hpp:119</div></div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1is__fully__named_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1is__fully__named.html">kumi::concepts::is_fully_named</a></div><div class="ttdoc">Concept specifying if parameter pack contains only kumi::field_captures.</div><div class="ttdef"><b>Definition</b> concepts.hpp:219</div></div>
+<div class="ttc" id="agroup__utility_gacadc026868e6654e80c57432643c804a_html_gacadc026868e6654e80c57432643c804a"><div class="ttname"><a href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">kumi::if_</a></div><div class="ttdeci">constexpr traits_check&lt; Traits &gt; if_</div><div class="ttdoc">Option specifying a traits that type should verify for being used as a identifier value.</div><div class="ttdef"><b>Definition</b> identifier.hpp:38</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->

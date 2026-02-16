@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::record::forward_as_record</title>
+<title>kumi: kumi::identifier::operator=</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('group__record_ga508677aacba8fa46c42516e15c92ab3c.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('structkumi_1_1identifier_ae23ea0748bbfd7baadc6e42ed92095fa.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,75 +121,53 @@ $(document).ready(function(){initNavTree('group__record_ga508677aacba8fa46c42516
 </div>
 
 <div class="contents">
-<a id="ga508677aacba8fa46c42516e15c92ab3c" name="ga508677aacba8fa46c42516e15c92ab3c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga508677aacba8fa46c42516e15c92ab3c">&#9670;&#160;</a></span>forward_as_record()</h2>
+<a id="ae23ea0748bbfd7baadc6e42ed92095fa" name="ae23ea0748bbfd7baadc6e42ed92095fa"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae23ea0748bbfd7baadc6e42ed92095fa">&#9670;&#160;</a></span>operator=()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;str... Fields, typename... Ts&gt; </div>
+template&lt;<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">typename</a> <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">ID</a> , <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">typename</a> <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Checker</a> &gt; </div>
+<div class="memtemplate">
+template&lt;<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">typename</a> T &gt; <br />
+requires (Checker::template value&lt;T&gt;)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">constexpr</a> <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">auto</a> forward_as_record </td>
+          <td class="memname"><a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">constexpr</a> <a class="el" href="structkumi_1_1field.html">field</a>&lt; <a class="el" href="structkumi_1_1identifier.html#ac47d69746c95cdade5ce1b4ed27f420d">tag_type</a>, std::unwrap_ref_decay_t&lt; T &gt; &gt; <a class="el" href="structkumi_1_1identifier.html">kumi::identifier</a>&lt; <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">ID</a>, <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Checker</a> &gt;<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">::operator</a>= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Ts</a> &amp;&amp;...&#160;</td>
-          <td class="paramname"><em>ts</em></td><td>)</td>
-          <td> -&gt; <a class="el" href="structkumi_1_1record.html">record</a>&lt;<a class="el" href="structkumi_1_1field__capture.html">field_capture</a>&lt;<a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Fields</a>, <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Ts</a>&amp;&amp;&gt;...&gt;
-  </td>
+          <td class="paramtype">T &amp;&amp;&#160;</td>
+          <td class="paramname"><em>v</em></td><td>)</td>
+          <td> const</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span><span class="mlabel">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Creates a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields necessarily named, names are unique.">kumi::record</a> of forwarding references to its arguments. </p>
-<p>Constructs a record of references to the arguments in args suitable for forwarding as an argument to a function. The record has rvalue reference data members when rvalues are used as arguments, and otherwise has lvalue reference data members.</p>
-<dl class="section note"><dt>Note</dt><dd>If the arguments are temporaries, <code>forward_as_record</code> does not extend their lifetime; they have to be used before the end of the full expression.</dd></dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Fields</td><td>Non type template parameters names to associate to the each element. </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Assignment of a value to a identifier. </p>
+<p>Bind a value to current <a class="el" href="structkumi_1_1identifier.html" title="identifier definition class">kumi::identifier</a> and returns an instance of a field.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">ts</td><td>Zero or more lvalue arguments to construct the record from. </td></tr>
+    <tr><td class="paramname">v</td><td>Bound value </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields necessarily named, names are unique.">kumi::record</a> constructed as <code><a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields necessarily named, names are unique.">kumi::record</a>&lt;Ts&amp;&amp;...&gt;(std::forward&lt;Ts&gt;(args)...)</code> </dd></dl>
-<h2><a class="anchor" id="autotoc_md158"></a>
-Example:</h2>
-<div class="fragment"><div class="line"> </div>
-<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<dl class="section return"><dt>Returns</dt><dd>An <a class="el" href="structkumi_1_1field.html" title="Named wrapper over a type.">kumi::field</a> binding the identifier to <code>v</code>.</dd></dl>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">using namespace </span>kumi::literals;</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Data&gt;</div>
-<div class="line">std::vector&lt;std::string&gt; build(<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Data</a> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">d</a>)</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">main</a>()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">return</span> std::vector&lt;std::string&gt; ( <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::get&lt;&quot;a&quot;_f&gt;</a>(<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">d</a>)</div>
-<div class="line">                                  , std::move(<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::get&lt;&quot;b&quot;_f&gt;</a>(<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">d</a>))</div>
-<div class="line">                                  );</div>
+<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line">  std::cout &lt;&lt; (<span class="stringliteral">&quot;value&quot;</span><a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">_id</a> = 42.1337) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">main</a>()</div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">v</a> = build( <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::forward_as_record&lt;&quot;a&quot;_f, &quot;b&quot;_f&gt;</a>(4,std::string{<span class="stringliteral">&quot;the text !&quot;</span>}));</div>
-<div class="line"> </div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keyword">auto</span> <span class="keyword">const</span>&amp; <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">s</a> : <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">v</a>)</div>
-<div class="line">    std::<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">cout</a> &lt;&lt; <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">s</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__utility_ga79787185d26368946a74f31ce5f6597c_html_ga79787185d26368946a74f31ce5f6597c"><div class="ttname"><a href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::member_cast</a></div><div class="ttdeci">constexpr auto member_cast(T &amp;&amp;t)</div><div class="ttdoc">Converts a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target...&gt;</div><div class="ttdef"><b>Definition</b> cast.hpp:56</div></div>
+<div class="ttc" id="agroup__utility_gacadc026868e6654e80c57432643c804a_html_gacadc026868e6654e80c57432643c804a"><div class="ttname"><a href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">kumi::if_</a></div><div class="ttdeci">constexpr traits_check&lt; Traits &gt; if_</div><div class="ttdoc">Option specifying a traits that type should verify for being used as a identifier value.</div><div class="ttdef"><b>Definition</b> identifier.hpp:38</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -199,7 +177,7 @@ Example:</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li><li class="navelem"><a class="el" href="structkumi_1_1record.html">record</a></li>
+    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li><li class="navelem"><a class="el" href="structkumi_1_1identifier.html">identifier</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

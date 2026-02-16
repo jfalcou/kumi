@@ -127,13 +127,13 @@ $(document).ready(function(){initNavTree('group__generators_ga7416f4db26c4e41360
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;concepts::product_type T, <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">typename</a> <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Func</a> &gt; </div>
+template&lt;concepts::product_type T, <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">typename</a> <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Func</a> &gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">constexpr</a> <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">auto</a> kumi::flatten_all </td>
+          <td class="memname"><a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">constexpr</a> <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">auto</a> kumi::flatten_all </td>
           <td>(</td>
           <td class="paramtype">T &amp;&amp;&#160;</td>
           <td class="paramname"><em>t</em>, </td>
@@ -141,7 +141,7 @@ template&lt;concepts::product_type T, <a class="el" href="group__utility_ga79787
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Func</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Func</a>&#160;</td>
           <td class="paramname"><em>f</em>&#160;</td>
         </tr>
         <tr>
@@ -169,7 +169,7 @@ template&lt;concepts::product_type T, <a class="el" href="group__utility_ga79787
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A tuple composed of all elements of t flattened recursively</dd></dl>
-<h2><a class="anchor" id="autotoc_md19"></a>
+<h2><a class="anchor" id="autotoc_md23"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
@@ -178,29 +178,29 @@ Helper type</h2>
 <div class="line">  <span class="keyword">template</span>&lt;product_type T, <span class="keyword">typename</span> Func = <span class="keywordtype">void</span>&gt;</div>
 <div class="line">  <span class="keyword">using </span>flatten_all_t = <span class="keyword">typename</span> flatten_all&lt;T, Func&gt;::type;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__generators_ga7416f4db26c4e41360e71dd449de20a6_html_ga7416f4db26c4e41360e71dd449de20a6"><div class="ttname"><a href="group__generators_ga7416f4db26c4e41360e71dd449de20a6.html#ga7416f4db26c4e41360e71dd449de20a6">kumi::flatten_all</a></div><div class="ttdeci">constexpr auto flatten_all(T &amp;&amp;t, Func f)</div><div class="ttdoc">Recursively converts a product type of product types into a product type of all elements.</div><div class="ttdef"><b>Definition</b> flatten.hpp:157</div></div>
+<div class="ttc" id="agroup__generators_ga7416f4db26c4e41360e71dd449de20a6_html_ga7416f4db26c4e41360e71dd449de20a6"><div class="ttname"><a href="group__generators_ga7416f4db26c4e41360e71dd449de20a6.html#ga7416f4db26c4e41360e71dd449de20a6">kumi::flatten_all</a></div><div class="ttdeci">constexpr auto flatten_all(T &amp;&amp;t, Func f)</div><div class="ttdoc">Recursively converts a product type of product types into a product type of all elements.</div><div class="ttdef"><b>Definition</b> flatten.hpp:158</div></div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__generators_ga7416f4db26c4e41360e71dd449de20a6.html#ga7416f4db26c4e41360e71dd449de20a6" title="Recursively converts a product type of product types into a product type of all elements.">kumi::flatten_all</a></p>
-<h2><a class="anchor" id="autotoc_md20"></a>
+<h2><a class="anchor" id="autotoc_md24"></a>
 Example</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">main</a>()</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">main</a>()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">nbrs</a>      = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1,2ULL,3};</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">more_nbrs</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="keywordtype">short</span>{0},<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">nbrs</a>,4.};</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">ltrs</a>      = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="charliteral">&#39;a&#39;</span>,<span class="charliteral">&#39;b&#39;</span>,<span class="charliteral">&#39;c&#39;</span>};</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">nbrs</a>      = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1,2ULL,3};</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">more_nbrs</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="keywordtype">short</span>{0},<a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">nbrs</a>,4.};</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">ltrs</a>      = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="charliteral">&#39;a&#39;</span>,<span class="charliteral">&#39;b&#39;</span>,<span class="charliteral">&#39;c&#39;</span>};</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">r</a> = <a class="code hl_function" href="group__generators_ga7416f4db26c4e41360e71dd449de20a6.html#ga7416f4db26c4e41360e71dd449de20a6">kumi::flatten_all</a>( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{3.5,<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">nbrs</a>,<span class="charliteral">&#39;z&#39;</span>,<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">more_nbrs</a>,5.35f,<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">ltrs</a>} );</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">r</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">r</a> = <a class="code hl_function" href="group__generators_ga7416f4db26c4e41360e71dd449de20a6.html#ga7416f4db26c4e41360e71dd449de20a6">kumi::flatten_all</a>( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{3.5,<a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">nbrs</a>,<span class="charliteral">&#39;z&#39;</span>,<a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">more_nbrs</a>,5.35f,<a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">ltrs</a>} );</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">r</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">sz</a> = <a class="code hl_function" href="group__generators_ga7416f4db26c4e41360e71dd449de20a6.html#ga7416f4db26c4e41360e71dd449de20a6">kumi::flatten_all</a> ( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{3.5,<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">nbrs</a>,<span class="charliteral">&#39;z&#39;</span>,<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">more_nbrs</a>,5.35f,<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">ltrs</a>}</div>
-<div class="line">                              , [](<span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">e</a>) { <span class="keywordflow">return</span> <span class="keyword">sizeof</span>(<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">e</a>); }</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">sz</a> = <a class="code hl_function" href="group__generators_ga7416f4db26c4e41360e71dd449de20a6.html#ga7416f4db26c4e41360e71dd449de20a6">kumi::flatten_all</a> ( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{3.5,<a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">nbrs</a>,<span class="charliteral">&#39;z&#39;</span>,<a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">more_nbrs</a>,5.35f,<a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">ltrs</a>}</div>
+<div class="line">                              , [](<span class="keyword">auto</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">e</a>) { <span class="keywordflow">return</span> <span class="keyword">sizeof</span>(<a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">e</a>); }</div>
 <div class="line">                              );</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">sz</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">sz</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__utility_ga79787185d26368946a74f31ce5f6597c_html_ga79787185d26368946a74f31ce5f6597c"><div class="ttname"><a href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::member_cast</a></div><div class="ttdeci">constexpr auto member_cast(T &amp;&amp;t)</div><div class="ttdoc">Converts a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target...&gt;</div><div class="ttdef"><b>Definition</b> cast.hpp:56</div></div>
+<div class="ttc" id="agroup__utility_gacadc026868e6654e80c57432643c804a_html_gacadc026868e6654e80c57432643c804a"><div class="ttname"><a href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">kumi::if_</a></div><div class="ttdeci">constexpr traits_check&lt; Traits &gt; if_</div><div class="ttdoc">Option specifying a traits that type should verify for being used as a identifier value.</div><div class="ttdef"><b>Definition</b> identifier.hpp:38</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:32</div></div>
 </div><!-- fragment --> 
 </div>

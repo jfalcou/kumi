@@ -146,14 +146,17 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1builder.html">kumi::builder&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Helper structure to build the correct output <code>product_type</code>. If the provided Product type is a not a record_type the builder will output a tuple otherwise a record.  <a href="structkumi_1_1builder.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1field__name.html">kumi::field_name&lt; ID &gt;</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Named wrapper used to instantiate a <a class="el" href="structkumi_1_1field__capture.html" title="Named wrapper over a type.">kumi::field_capture</a>.  <a href="structkumi_1_1field__name.html#details">More...</a><br /></td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1identifier.html">kumi::identifier&lt; ID, Checker &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">identifier definition class  <a href="structkumi_1_1identifier.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1index__t.html">kumi::index_t&lt; N &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integral constant type.  <a href="structkumi_1_1index__t.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1indexes__t.html">kumi::indexes_t&lt; V &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile time tuple of index used to pass several <a class="el" href="structkumi_1_1indexes__t.html" title="Compile time tuple of index used to pass several indexes_t as NTTP.">indexes_t</a> as NTTP.  <a href="structkumi_1_1indexes__t.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1name.html">kumi::name&lt; ID &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile-time text based ID.  <a href="structkumi_1_1name.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1numeric__add.html">kumi::numeric_add</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type representing the addition monoid with it's associated identity. The identity of the addition is <code>0</code>.  <a href="structkumi_1_1numeric__add.html#details">More...</a><br /></td></tr>
@@ -167,6 +170,9 @@ Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">class &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1unit.html">kumi::unit</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type representing the product of no type also called the unit type.  <a href="structkumi_1_1unit.html#details">More...</a><br /></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structkumi_1_1unknown.html">kumi::unknown</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type indicating a identifier was not found in a given kumi::product_type.  <a href="structkumi_1_1unknown.html#details">More...</a><br /></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -177,7 +183,7 @@ requires (size_v&lt;Tuple&gt; != 0)</td></tr>
 <tr class="separator:ga7847a3783c337053f6d5f53b24a2583f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gabf2013046cf8ec8ac781128a815709cc" id="r_gabf2013046cf8ec8ac781128a815709cc"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:gabf2013046cf8ec8ac781128a815709cc"><td class="memTemplItemLeft" align="right" valign="top">constexpr decltype(auto)&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_gabf2013046cf8ec8ac781128a815709cc.html#gabf2013046cf8ec8ac781128a815709cc">kumi::field_value_of</a> (T &amp;&amp;t) noexcept</td></tr>
-<tr class="memdesc:gabf2013046cf8ec8ac781128a815709cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the value from a <a class="el" href="structkumi_1_1field__capture.html" title="Named wrapper over a type.">kumi::field_capture</a> or returns the parameter.  <br /></td></tr>
+<tr class="memdesc:gabf2013046cf8ec8ac781128a815709cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the value from a <a class="el" href="structkumi_1_1field.html" title="Named wrapper over a type.">kumi::field</a> or returns the parameter.  <br /></td></tr>
 <tr class="separator:gabf2013046cf8ec8ac781128a815709cc"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga0a86710de48273efa390a88ba18b2017" id="r_ga0a86710de48273efa390a88ba18b2017"><td class="memTemplParams" colspan="2">template&lt;concepts::product_type Tuple&gt; <br />
 requires (size_v&lt;Tuple&gt; != 0)</td></tr>
@@ -212,16 +218,16 @@ requires (std::is_invocable_r&lt;R, C, Ts...&gt;::value)</td></tr>
 <tr class="separator:ga79787185d26368946a74f31ce5f6597c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga8242e5044e75e129a3e87f23325eba01" id="r_ga8242e5044e75e129a3e87f23325eba01"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
 <tr class="memitem:ga8242e5044e75e129a3e87f23325eba01"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_ga8242e5044e75e129a3e87f23325eba01.html#ga8242e5044e75e129a3e87f23325eba01">kumi::name_of</a> (<a class="el" href="structkumi_1_1as.html">as</a>&lt; T &gt;) noexcept</td></tr>
-<tr class="memdesc:ga8242e5044e75e129a3e87f23325eba01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the name from a <a class="el" href="structkumi_1_1field__capture.html" title="Named wrapper over a type.">kumi::field_capture</a> or returns the parameter.  <br /></td></tr>
+<tr class="memdesc:ga8242e5044e75e129a3e87f23325eba01"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the name from a <a class="el" href="structkumi_1_1field.html" title="Named wrapper over a type.">kumi::field</a> or returns the parameter.  <br /></td></tr>
 <tr class="separator:ga8242e5044e75e129a3e87f23325eba01"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga60825dffaa5ee2c50e1d1a24057bdcf1" id="r_ga60825dffaa5ee2c50e1d1a24057bdcf1"><td class="memTemplParams" colspan="2">template&lt;char... c&gt; </td></tr>
 <tr class="memitem:ga60825dffaa5ee2c50e1d1a24057bdcf1"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_ga60825dffaa5ee2c50e1d1a24057bdcf1.html#ga60825dffaa5ee2c50e1d1a24057bdcf1">kumi::operator&quot;&quot;_c</a> () noexcept</td></tr>
 <tr class="memdesc:ga60825dffaa5ee2c50e1d1a24057bdcf1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a integral constant literal of the desired value.  <br /></td></tr>
 <tr class="separator:ga60825dffaa5ee2c50e1d1a24057bdcf1"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:gac6640fd24bd6244cbed251ed2e689d83" id="r_gac6640fd24bd6244cbed251ed2e689d83"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="structkumi_1_1str.html">kumi::str</a> ID&gt; </td></tr>
-<tr class="memitem:gac6640fd24bd6244cbed251ed2e689d83"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_gac6640fd24bd6244cbed251ed2e689d83.html#gac6640fd24bd6244cbed251ed2e689d83">kumi::operator&quot;&quot;_f</a> () noexcept</td></tr>
-<tr class="memdesc:gac6640fd24bd6244cbed251ed2e689d83"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a constant string literal of the desired value.  <br /></td></tr>
-<tr class="separator:gac6640fd24bd6244cbed251ed2e689d83"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga10f2338fc8867a50a4295325873f3de4" id="r_ga10f2338fc8867a50a4295325873f3de4"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="structkumi_1_1str.html">kumi::str</a> ID&gt; </td></tr>
+<tr class="memitem:ga10f2338fc8867a50a4295325873f3de4"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_ga10f2338fc8867a50a4295325873f3de4.html#ga10f2338fc8867a50a4295325873f3de4">kumi::operator&quot;&quot;_id</a> () noexcept</td></tr>
+<tr class="memdesc:ga10f2338fc8867a50a4295325873f3de4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a constant string literal of the desired value.  <br /></td></tr>
+<tr class="separator:ga10f2338fc8867a50a4295325873f3de4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga9c8c29e8a2f4f5e8a663200559fdc983" id="r_ga9c8c29e8a2f4f5e8a663200559fdc983"><td class="memTemplParams" colspan="2">template&lt;template&lt; class &gt; class Pred&gt; </td></tr>
 <tr class="memitem:ga9c8c29e8a2f4f5e8a663200559fdc983"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_ga9c8c29e8a2f4f5e8a663200559fdc983.html#ga9c8c29e8a2f4f5e8a663200559fdc983">kumi::predicate</a> () noexcept</td></tr>
 <tr class="memdesc:ga9c8c29e8a2f4f5e8a663200559fdc983"><td class="mdescLeft">&#160;</td><td class="mdescRight">Convert a unary template meta-program in a running predicate.  <br /></td></tr>
@@ -241,10 +247,10 @@ constexpr <a class="el" href="structkumi_1_1boolean__or.html">boolean_or</a>&#16
 constexpr <a class="el" href="structkumi_1_1boolean__xor.html">boolean_xor</a>&#160;</td><td class="memItemRight" valign="bottom"><b>kumi::function::bit_xor</b> {}</td></tr>
 <tr class="memdesc:gac2d793601af17db10563acf07dc1a29f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a binary monoid callable that can be used in kumi::algoritm. It represents the logical xor operation. <br /></td></tr>
 <tr class="separator:gac2d793601af17db10563acf07dc1a29f"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ga6a8ab73e5c1f8c0f11501e253a37f686" id="r_ga6a8ab73e5c1f8c0f11501e253a37f686"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="structkumi_1_1str.html">str</a> ID&gt; </td></tr>
-<tr class="memitem:ga6a8ab73e5c1f8c0f11501e253a37f686"><td class="memTemplItemLeft" align="right" valign="top">constexpr auto&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_ga6a8ab73e5c1f8c0f11501e253a37f686.html#ga6a8ab73e5c1f8c0f11501e253a37f686">kumi::field</a> = <a class="el" href="structkumi_1_1field__name.html">field_name</a>&lt;ID&gt;{}</td></tr>
-<tr class="memdesc:ga6a8ab73e5c1f8c0f11501e253a37f686"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a constant <a class="el" href="structkumi_1_1field__name.html" title="Named wrapper used to instantiate a kumi::field_capture.">kumi::field_name</a> of the desired ID.  <br /></td></tr>
-<tr class="separator:ga6a8ab73e5c1f8c0f11501e253a37f686"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:gacadc026868e6654e80c57432643c804a" id="r_gacadc026868e6654e80c57432643c804a"><td class="memTemplParams" colspan="2">template&lt;template&lt; class &gt; typename Traits&gt; </td></tr>
+<tr class="memitem:gacadc026868e6654e80c57432643c804a"><td class="memTemplItemLeft" align="right" valign="top">constexpr traits_check&lt; Traits &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">kumi::if_</a> = {}</td></tr>
+<tr class="memdesc:gacadc026868e6654e80c57432643c804a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Option specifying a traits that type should verify for being used as a identifier value.  <br /></td></tr>
+<tr class="separator:gacadc026868e6654e80c57432643c804a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ga32a67892e5dbfb93a2292959a5a029d0" id="r_ga32a67892e5dbfb93a2292959a5a029d0"><td class="memTemplParams" colspan="2"><a id="ga32a67892e5dbfb93a2292959a5a029d0" name="ga32a67892e5dbfb93a2292959a5a029d0"></a>
 template&lt;std::size_t N&gt; </td></tr>
 <tr class="memitem:ga32a67892e5dbfb93a2292959a5a029d0"><td class="memTemplItemLeft" align="right" valign="top">constexpr <a class="el" href="structkumi_1_1index__t.html">index_t</a>&lt; N &gt; const&#160;</td><td class="memTemplItemRight" valign="bottom"><b>kumi::index</b> = {}</td></tr>
@@ -258,6 +264,10 @@ constexpr <a class="el" href="structkumi_1_1numeric__prod.html">numeric_prod</a>
 constexpr <a class="el" href="structkumi_1_1unit.html">unit</a>&#160;</td><td class="memItemRight" valign="bottom"><b>kumi::none</b> = {}</td></tr>
 <tr class="memdesc:gabe662caa7eff683f6b085c7abb76391b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inline constant representing a <a class="el" href="structkumi_1_1unit.html" title="A type representing the product of no type also called the unit type.">kumi::unit</a>. <br /></td></tr>
 <tr class="separator:gabe662caa7eff683f6b085c7abb76391b"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ga6a8e75139bc622fbedae986420916d98" id="r_ga6a8e75139bc622fbedae986420916d98"><td class="memTemplParams" colspan="2">template&lt;typename T &gt; </td></tr>
+<tr class="memitem:ga6a8e75139bc622fbedae986420916d98"><td class="memTemplItemLeft" align="right" valign="top">constexpr only_t&lt; T &gt;&#160;</td><td class="memTemplItemRight" valign="bottom"><a class="el" href="group__utility_ga6a8e75139bc622fbedae986420916d98.html#ga6a8e75139bc622fbedae986420916d98">kumi::only</a> = {}</td></tr>
+<tr class="memdesc:ga6a8e75139bc622fbedae986420916d98"><td class="mdescLeft">&#160;</td><td class="mdescRight">Option specifying the single type a identifier will accept.  <br /></td></tr>
+<tr class="separator:ga6a8e75139bc622fbedae986420916d98"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:gab5c0eb8022e7b2df33286d9a15247559" id="r_gab5c0eb8022e7b2df33286d9a15247559"><td class="memItemLeft" align="right" valign="top"><a id="gab5c0eb8022e7b2df33286d9a15247559" name="gab5c0eb8022e7b2df33286d9a15247559"></a>
 constexpr <a class="el" href="structkumi_1_1numeric__add.html">numeric_add</a>&#160;</td><td class="memItemRight" valign="bottom"><b>kumi::function::plus</b> {}</td></tr>
 <tr class="memdesc:gab5c0eb8022e7b2df33286d9a15247559"><td class="mdescLeft">&#160;</td><td class="mdescRight">Forms a binary monoid callable that can be used in kumi::algoritm. It represents the addition. <br /></td></tr>

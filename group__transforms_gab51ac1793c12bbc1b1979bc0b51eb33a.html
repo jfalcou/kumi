@@ -127,28 +127,28 @@ $(document).ready(function(){initNavTree('group__transforms_gab51ac1793c12bbc1b1
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">typename</a> <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Function</a> , concepts::record_type Tuple, concepts::record_type... Tuples&gt; <br />
-requires (concepts::compatible_product_types&lt;std::remove_cvref_t&lt;<a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Tuple</a>&gt;, std::remove_cvref_t&lt;<a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Tuples</a>&gt;...&gt;)</div>
+template&lt;<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">typename</a> <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Function</a> , concepts::record_type Tuple, concepts::record_type... Tuples&gt; <br />
+requires (concepts::compatible_product_types&lt;std::remove_cvref_t&lt;<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Tuple</a>&gt;, std::remove_cvref_t&lt;<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Tuples</a>&gt;...&gt;)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">constexpr</a> <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">void</a> kumi::for_each_field </td>
+          <td class="memname"><a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">constexpr</a> <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">void</a> kumi::for_each_field </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Function</a>&#160;</td>
+          <td class="paramtype"><a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Function</a>&#160;</td>
           <td class="paramname"><em>f</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Tuple</a> &amp;&amp;&#160;</td>
+          <td class="paramtype"><a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Tuple</a> &amp;&amp;&#160;</td>
           <td class="paramname"><em>t</em>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">Tuples</a> &amp;&amp;...&#160;</td>
+          <td class="paramtype"><a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Tuples</a> &amp;&amp;...&#160;</td>
           <td class="paramname"><em>ts</em>&#160;</td>
         </tr>
         <tr>
@@ -165,7 +165,7 @@ requires (concepts::compatible_product_types&lt;std::remove_cvref_t&lt;<a class=
 </div><div class="memdoc">
 
 <p>Applies the Callable object f on each element of a kumi::record_type and its field. </p>
-<dl class="section note"><dt>Note</dt><dd>This function does not take part in overload resolution if <code>f</code> can't be applied to the elements of <code>t</code> and/or <code>ts</code> and a <code><a class="el" href="structkumi_1_1field__capture.html" title="Named wrapper over a type.">kumi::field_capture</a></code>.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function does not take part in overload resolution if <code>f</code> can't be applied to the elements of <code>t</code> and/or <code>ts</code> and a <code><a class="el" href="structkumi_1_1field.html" title="Named wrapper over a type.">kumi::field</a></code>.</dd></dl>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Callable object to be invoked </td></tr>
@@ -175,36 +175,37 @@ requires (concepts::compatible_product_types&lt;std::remove_cvref_t&lt;<a class=
   </dd>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group__transforms_gacfc6eb17686b7570f768de71198d8812.html#gacfc6eb17686b7570f768de71198d8812" title="Applies the Callable object f on each element of a kumi::product_type. f is applied on the values if ...">kumi::for_each</a></dd></dl>
-<h2><a class="anchor" id="autotoc_md33"></a>
+<h2><a class="anchor" id="autotoc_md37"></a>
 Example</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;string_view&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">main</a>()</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">main</a>()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
 <div class="line">    </div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t</a> = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;a&quot;</span><a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">_f</a> = 1, <span class="stringliteral">&quot;b&quot;</span><a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">_f</a> = 2.3, <span class="stringliteral">&quot;c&quot;</span><a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">_f</a> = 0.43f };</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">t</a> = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;a&quot;</span><a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">_id</a> = 1, <span class="stringliteral">&quot;b&quot;</span><a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">_id</a> = 2.3, <span class="stringliteral">&quot;c&quot;</span><a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">_id</a> = 0.43f };</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_function" href="group__transforms_gab51ac1793c12bbc1b1979bc0b51eb33a.html#gab51ac1793c12bbc1b1979bc0b51eb33a">kumi::for_each_field</a>( [](<a class="code hl_class" href="structkumi_1_1str.html">kumi::str</a> name, <span class="keyword">auto</span>&amp; <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">m</a>) </div>
+<div class="line">  <a class="code hl_function" href="group__transforms_gab51ac1793c12bbc1b1979bc0b51eb33a.html#gab51ac1793c12bbc1b1979bc0b51eb33a">kumi::for_each_field</a>( [](<a class="code hl_class" href="structkumi_1_1str.html">kumi::str</a> <a class="code hl_struct" href="structkumi_1_1name.html">name</a>, <span class="keyword">auto</span>&amp; <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">m</a>) </div>
 <div class="line">  {</div>
-<div class="line">    <span class="keywordflow">if</span>(name.as&lt;std::string_view&gt;().ends_with(<span class="stringliteral">&quot;a&quot;</span>))</div>
-<div class="line">      <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">m</a> += 10;</div>
-<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (name == <span class="stringliteral">&quot;c&quot;</span>)</div>
-<div class="line">      <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">m</a> = (<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">m</a> * 100) -1; </div>
+<div class="line">    <span class="keywordflow">if</span>(<a class="code hl_struct" href="structkumi_1_1name.html">name</a>.as&lt;std::string_view&gt;().ends_with(<span class="stringliteral">&quot;a&quot;</span>))</div>
+<div class="line">      <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">m</a> += 10;</div>
+<div class="line">    <span class="keywordflow">else</span> <span class="keywordflow">if</span> (<a class="code hl_struct" href="structkumi_1_1name.html">name</a> == <span class="stringliteral">&quot;c&quot;</span>)</div>
+<div class="line">      <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">m</a> = (<a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">m</a> * 100) -1; </div>
 <div class="line">    <span class="keywordflow">else</span></div>
-<div class="line">      <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">m</a> *= 10;</div>
+<div class="line">      <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">m</a> *= 10;</div>
 <div class="line">    }</div>
-<div class="line">    , <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t</a></div>
+<div class="line">    , <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">t</a></div>
 <div class="line">  );</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">t</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__transforms_gab51ac1793c12bbc1b1979bc0b51eb33a_html_gab51ac1793c12bbc1b1979bc0b51eb33a"><div class="ttname"><a href="group__transforms_gab51ac1793c12bbc1b1979bc0b51eb33a.html#gab51ac1793c12bbc1b1979bc0b51eb33a">kumi::for_each_field</a></div><div class="ttdeci">constexpr void for_each_field(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a kumi::record_type and its field.</div><div class="ttdef"><b>Definition</b> for_each.hpp:110</div></div>
-<div class="ttc" id="agroup__utility_ga79787185d26368946a74f31ce5f6597c_html_ga79787185d26368946a74f31ce5f6597c"><div class="ttname"><a href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::member_cast</a></div><div class="ttdeci">constexpr auto member_cast(T &amp;&amp;t)</div><div class="ttdoc">Converts a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target...&gt;</div><div class="ttdef"><b>Definition</b> cast.hpp:56</div></div>
-<div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous fields necessarily named, names are unique.</div><div class="ttdef"><b>Definition</b> traits.hpp:478</div></div>
+<div class="ttc" id="agroup__utility_gacadc026868e6654e80c57432643c804a_html_gacadc026868e6654e80c57432643c804a"><div class="ttname"><a href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">kumi::if_</a></div><div class="ttdeci">constexpr traits_check&lt; Traits &gt; if_</div><div class="ttdoc">Option specifying a traits that type should verify for being used as a identifier value.</div><div class="ttdef"><b>Definition</b> identifier.hpp:38</div></div>
+<div class="ttc" id="astructkumi_1_1name_html"><div class="ttname"><a href="structkumi_1_1name.html">kumi::name</a></div><div class="ttdoc">Compile-time text based ID.</div><div class="ttdef"><b>Definition</b> identifier.hpp:163</div></div>
+<div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous fields necessarily named, names are unique.</div><div class="ttdef"><b>Definition</b> traits.hpp:459</div></div>
 <div class="ttc" id="astructkumi_1_1str_html"><div class="ttname"><a href="structkumi_1_1str.html">kumi::str</a></div><div class="ttdoc">Static string used to create named fields.</div><div class="ttdef"><b>Definition</b> str.hpp:23</div></div>
 </div><!-- fragment --> 
 </div>

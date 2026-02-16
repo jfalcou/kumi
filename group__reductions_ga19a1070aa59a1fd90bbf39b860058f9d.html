@@ -133,7 +133,7 @@ template&lt;concepts::product_type T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">constexpr</a> <a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">auto</a> kumi::bit_xor </td>
+          <td class="memname"><a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">constexpr</a> <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">auto</a> kumi::bit_xor </td>
           <td>(</td>
           <td class="paramtype">T &amp;&amp;&#160;</td>
           <td class="paramname"><em>t</em></td><td>)</td>
@@ -155,7 +155,7 @@ template&lt;concepts::product_type T&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The value of <code>get&lt;0&gt;(t) ^ ... ^ get&lt;N-1&gt;(t)</code></dd></dl>
-<h2><a class="anchor" id="autotoc_md110"></a>
+<h2><a class="anchor" id="autotoc_md114"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
@@ -165,21 +165,21 @@ Helper type</h2>
 <div class="line">  <span class="keyword">using </span>bit_xor_t = <span class="keyword">typename</span> bit_xor&lt;T&gt;::type;</div>
 <div class="line">}</div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__reductions_ga521dcc4de231768115582401a1a0419b.html#ga521dcc4de231768115582401a1a0419b" title="Computes the bitwise XOR of all elements.">kumi::bit_xor</a></p>
-<h2><a class="anchor" id="autotoc_md111"></a>
+<h2><a class="anchor" id="autotoc_md115"></a>
 Example</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">main</a>()</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">main</a>()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1,<span class="keywordtype">short</span>{8},<span class="charliteral">&#39; &#39;</span>, 4ULL};</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">t</a> = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1,<span class="keywordtype">short</span>{8},<span class="charliteral">&#39; &#39;</span>, 4ULL};</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga521dcc4de231768115582401a1a0419b.html#ga521dcc4de231768115582401a1a0419b">kumi::bit_xor</a>(<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t</a>, 0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga521dcc4de231768115582401a1a0419b.html#ga521dcc4de231768115582401a1a0419b">kumi::bit_xor</a>(<a class="code hl_function" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">t</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga521dcc4de231768115582401a1a0419b.html#ga521dcc4de231768115582401a1a0419b">kumi::bit_xor</a>(<a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">t</a>, 0) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__reductions_ga521dcc4de231768115582401a1a0419b.html#ga521dcc4de231768115582401a1a0419b">kumi::bit_xor</a>(<a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">t</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__reductions_ga521dcc4de231768115582401a1a0419b_html_ga521dcc4de231768115582401a1a0419b"><div class="ttname"><a href="group__reductions_ga521dcc4de231768115582401a1a0419b.html#ga521dcc4de231768115582401a1a0419b">kumi::bit_xor</a></div><div class="ttdeci">constexpr auto bit_xor(T &amp;&amp;t, Value init)</div><div class="ttdoc">Computes the bitwise XOR of all elements.</div><div class="ttdef"><b>Definition</b> reduce.hpp:459</div></div>
-<div class="ttc" id="agroup__utility_ga79787185d26368946a74f31ce5f6597c_html_ga79787185d26368946a74f31ce5f6597c"><div class="ttname"><a href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">kumi::member_cast</a></div><div class="ttdeci">constexpr auto member_cast(T &amp;&amp;t)</div><div class="ttdoc">Converts a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target...&gt;</div><div class="ttdef"><b>Definition</b> cast.hpp:56</div></div>
+<div class="ttc" id="agroup__utility_gacadc026868e6654e80c57432643c804a_html_gacadc026868e6654e80c57432643c804a"><div class="ttname"><a href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">kumi::if_</a></div><div class="ttdeci">constexpr traits_check&lt; Traits &gt; if_</div><div class="ttdoc">Option specifying a traits that type should verify for being used as a identifier value.</div><div class="ttdef"><b>Definition</b> identifier.hpp:38</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:32</div></div>
 </div><!-- fragment --> 
 </div>

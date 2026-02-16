@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::_::value_identity&lt; V &gt; Struct Template Reference</title>
+<title>kumi: kumi::if_</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('structkumi_1_1___1_1value__identity.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__utility_gacadc026868e6654e80c57432643c804a.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -120,27 +120,64 @@ $(document).ready(function(){initNavTree('structkumi_1_1___1_1value__identity.ht
 </div>
 </div>
 
-<div class="header">
-  <div class="summary">
-<a href="structkumi_1_1___1_1value__identity-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">kumi::_::value_identity&lt; V &gt; Struct Template Reference</div></div>
-</div><!--header-->
 <div class="contents">
+<a id="gacadc026868e6654e80c57432643c804a" name="gacadc026868e6654e80c57432643c804a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacadc026868e6654e80c57432643c804a">&#9670;&#160;</a></span>if_</h2>
 
-<p>Wraps an NTTP to allow the unique detection trick to work correctly with naming.  
- <a href="structkumi_1_1___1_1value__identity.html#details">More...</a></p>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;template&lt; class &gt; typename Traits&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">constexpr traits_check&lt;Traits&gt; kumi::if_ = {}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">inline</span><span class="mlabel">constexpr</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
-<p><code>#include &lt;kumi/detail/meta_helpers.hpp&gt;</code></p>
-<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="group__utility_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c">auto</a> V&gt;<br />
-struct kumi::_::value_identity&lt; V &gt;</div><p>Wraps an NTTP to allow the unique detection trick to work correctly with naming. </p>
-</div></div><!-- contents -->
+<p>Option specifying a traits that type should verify for being used as a identifier value. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Traits</td><td>Traits that the parametrized identifier will use to validate its value.</td></tr>
+  </table>
+  </dd>
+</dl>
+<div class="fragment"><div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><span class="keyword">struct </span><a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">is_big</a> : std::bool_constant&lt;(sizeof(T) &gt; 2)&gt; {};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">large_value</a> = <a class="code hl_struct" href="structkumi_1_1identifier.html">kumi::identifier</a>(<span class="stringliteral">&quot;large&quot;</span><a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">_id</a>, <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">kumi::if_&lt;is_big&gt;</a>);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">main</a>()</div>
+<div class="line">{</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{ <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">large_value</a> = 9.6 } &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__utility_gacadc026868e6654e80c57432643c804a_html_gacadc026868e6654e80c57432643c804a"><div class="ttname"><a href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">kumi::if_</a></div><div class="ttdeci">constexpr traits_check&lt; Traits &gt; if_</div><div class="ttdoc">Option specifying a traits that type should verify for being used as a identifier value.</div><div class="ttdef"><b>Definition</b> identifier.hpp:38</div></div>
+<div class="ttc" id="astructkumi_1_1identifier_html"><div class="ttname"><a href="structkumi_1_1identifier.html">kumi::identifier</a></div><div class="ttdoc">identifier definition class</div><div class="ttdef"><b>Definition</b> identifier.hpp:87</div></div>
+<div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous fields necessarily named, names are unique.</div><div class="ttdef"><b>Definition</b> traits.hpp:459</div></div>
+</div><!-- fragment --> 
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li><li class="navelem"><b>_</b></li><li class="navelem"><a class="el" href="structkumi_1_1___1_1value__identity.html">value_identity</a></li>
+    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->
