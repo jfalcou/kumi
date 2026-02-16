@@ -11,7 +11,7 @@ int main()
 {
   using namespace kumi::literals;
     
-  auto t = kumi::record{"a"_f = 1, "b"_f = 2.3, "c"_f = 0.43f };
+  auto t = kumi::record{"a"_id = 1, "b"_id = 2.3, "c"_id = 0.43f };
 
   kumi::for_each_field( [](kumi::str name, auto& m) 
   {

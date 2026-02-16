@@ -94,7 +94,7 @@ namespace kumi
   //! @brief Applies the Callable object f on each element of a kumi::record_type and its field.
   //!
   //! @note This function does not take part in overload resolution if `f` can't be applied to the
-  //!       elements of `t` and/or `ts` and a `kumi::field_capture`.
+  //!       elements of `t` and/or `ts` and a `kumi::field`.
   //!
   //! @param f	  Callable object to be invoked
   //! @param t    kumi::record_type whose elements to be used as arguments to f
@@ -115,7 +115,7 @@ namespace kumi
       constexpr auto fields = members_of(as<Tuple>{});
       auto const invoker = [&]<std::size_t I>(std::integral_constant<std::size_t, I>) {
         constexpr auto field = get<I>(fields);
-        f(field, get<field>(KUMI_FWD(t)), get<field>(KUMI_FWD(ts))...);
+        f(field.to_str(), get<field>(KUMI_FWD(t)), get<field>(KUMI_FWD(ts))...);
       };
 
       [=]<std::size_t... I>(std::index_sequence<I...>) {

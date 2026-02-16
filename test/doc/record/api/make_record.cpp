@@ -12,11 +12,11 @@ int main()
   using namespace kumi::literals;
 
   int k = 99;
-  auto t = kumi::make_record( "x"_f = 1, "y"_f = 2.3, "z"_f = 4.5f, "t"_f = '@', "m"_f = std::ref(k));
+  auto t = kumi::make_record( "x"_id = 1, "y"_id = 2.3, "z"_id = 4.5f, "t"_id = '@', "m"_id = std::ref(k));
 
   std::cout << t << "\n";
 
   // Reference access
-  kumi::get<"m"_f>(t)++;
+  kumi::get<"m"_id>(t)++;
   std::cout << k << "\n";
 }

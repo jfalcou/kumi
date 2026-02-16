@@ -19,10 +19,10 @@ TTS_CASE("Check result::inner_product_t behavior")
   using sfunc_t = decltype(sum);
   using pfunc_t = decltype(prod);
 
-  using int_f = kumi::field_capture<"a", int>;
-  using double_f = kumi::field_capture<"b", double>;
-  using char_f = kumi::field_capture<"a", char>;
-  using short_f = kumi::field_capture<"b", short>;
+  using int_f = kumi::field<kumi::name<"a">, int>;
+  using double_f = kumi::field<kumi::name<"b">, double>;
+  using char_f = kumi::field<kumi::name<"a">, char>;
+  using short_f = kumi::field<kumi::name<"b">, short>;
 
   TTS_TYPE_IS((kumi::result::inner_product_t<kumi::record<int_f, double_f>, kumi::record<char_f, short_f>, int>),
               double);
@@ -36,8 +36,8 @@ TTS_CASE("Check tuple::inner_product behavior")
 {
   using namespace kumi::literals;
 
-  auto t1 = kumi::record{"a"_f = 2, "b"_f = 4, "c"_f = 8};
-  auto t2 = kumi::record{"a"_f = 2.5, "b"_f = 4.5, "c"_f = 7.5};
+  auto t1 = kumi::record{"a"_id = 2, "b"_id = 4, "c"_id = 8};
+  auto t2 = kumi::record{"a"_id = 2.5, "b"_id = 4.5, "c"_id = 7.5};
 
   TTS_EQUAL(kumi::inner_product(t1, t2, 0.f), 83);
   TTS_EQUAL(kumi::inner_product(
@@ -49,12 +49,12 @@ TTS_CASE("Check tuple::inner_product constexpr behavior")
 {
   using namespace kumi::literals;
 
-  TTS_CONSTEXPR_EQUAL(kumi::inner_product(kumi::record{"a"_f = 2, "b"_f = 4, "c"_f = 8},
-                                          kumi::record{"a"_f = 2.5, "b"_f = 4.5, "c"_f = 7.5}, 0.f),
+  TTS_CONSTEXPR_EQUAL(kumi::inner_product(kumi::record{"a"_id = 2, "b"_id = 4, "c"_id = 8},
+                                          kumi::record{"a"_id = 2.5, "b"_id = 4.5, "c"_id = 7.5}, 0.f),
                       83);
   TTS_CONSTEXPR_EQUAL(kumi::inner_product(
-                        kumi::record{"a"_f = 2, "b"_f = 4, "c"_f = 8},
-                        kumi::record{"a"_f = 2.5, "b"_f = 4.5, "c"_f = 7.5}, 1ULL, [](auto a, auto b) { return a * b; },
-                        [](auto a, auto b) { return a + b; }),
+                        kumi::record{"a"_id = 2, "b"_id = 4, "c"_id = 8},
+                        kumi::record{"a"_id = 2.5, "b"_id = 4.5, "c"_id = 7.5}, 1ULL,
+                        [](auto a, auto b) { return a * b; }, [](auto a, auto b) { return a + b; }),
                       592.875);
 };

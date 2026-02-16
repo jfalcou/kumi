@@ -10,9 +10,9 @@ int main()
 {
   using namespace kumi::literals;
 
-  kumi::record a = { "r"_f = 1,"g"_f = 2.3, "b"_f = 4.5f};
-  kumi::record b = { "x"_f = '6' };
-  kumi::record c = { "y"_f = "7", "z"_f = short{89} };
+  kumi::record a = { "r"_id = 1,"g"_id = 2.3, "b"_id = 4.5f};
+  kumi::record b = { "x"_id = '6' };
+  kumi::record c = { "y"_id = "7", "z"_id = short{89} };
 
   auto abc = cat(a,b,c);
 

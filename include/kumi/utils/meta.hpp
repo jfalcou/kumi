@@ -10,35 +10,6 @@
 namespace kumi
 {
   //================================================================================================
-  //! @ingroup utility
-  //! @brief Extracts the name from a kumi::field_capture or returns the parameter.
-  //!
-  //! @note If the unqualified type of T is not a field_capture returns kumi::none.
-  //! @tparam   T The name to extract name from.
-  //! @return   The name of the field_capture or kumi::none.
-  //================================================================================================
-  template<typename T> [[nodiscard]] KUMI_ABI constexpr auto name_of(as<T>) noexcept
-  {
-    if constexpr (is_field_capture_v<std::remove_cvref_t<T>>) return std::remove_cvref_t<T>::name;
-    else return kumi::none;
-  };
-
-  //================================================================================================
-  //! @ingroup utility
-  //! @brief Extracts the value from a kumi::field_capture or returns the parameter
-  //!
-  //! @note If the unqualified type of T is not a field_capture, simply forwards the parameter
-  //! @tparam   T The type to unwrap
-  //! @param    t A forwarding reference to the input object.
-  //! @return   A forwarded value of the unwrapped object.
-  //================================================================================================
-  template<typename T> [[nodiscard]] KUMI_ABI constexpr decltype(auto) field_value_of(T&& t) noexcept
-  {
-    if constexpr (is_field_capture_v<std::remove_cvref_t<T>>) return _::get_field(KUMI_FWD(t));
-    else return KUMI_FWD(t);
-  };
-
-  //================================================================================================
   //! @ingroup algorithm
   //! @brief Extracts the value with type Target of a kumi::product_type.
   //!
@@ -76,30 +47,19 @@ namespace kumi
   //! ## Example:
   //! @include doc/infra/named_get_udt.cpp
   //================================================================================================
-  template<str Name, concepts::product_type T>
-  requires(_::named_get_compliant<Name, T>())
+  template<concepts::identifier auto Name, concepts::product_type T>
+  requires(_::named_get_compliant<decltype(Name), T>())
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(T&& t) noexcept
   {
     constexpr std::size_t Idx = [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return _::get_index_by_value_v<Name, element_t<I, T>...>;
+      return _::get_index_by_value_v<decltype(Name), element_t<I, T>...>;
     }(std::make_index_sequence<size_v<T>>{});
     return field_value_of(get<Idx>(KUMI_FWD(t)));
   }
 
-  namespace result
+  /// @overload
+  template<str Name, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(T&& t) noexcept
   {
-    template<typename T> struct name_of
-    {
-      using type = decltype(kumi::name_of(as<T>{}));
-    };
-
-    template<typename T> struct field_value_of
-    {
-      using type = decltype(kumi::field_value_of(std::declval<T>()));
-    };
-
-    template<typename T> using name_of_t = typename name_of<T>::type;
-
-    template<typename T> using field_value_of_t = typename field_value_of<T>::type;
+    return get<name<Name>{}>(KUMI_FWD(t));
   }
 }

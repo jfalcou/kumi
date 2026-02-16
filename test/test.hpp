@@ -7,9 +7,46 @@
 //==================================================================================================
 #pragma once
 
+#include <iosfwd>
+#include <string>
+#include <kumi/kumi.hpp>
+
 using namespace kumi::literals;
 
-/// Derived types from tuple/record
+//==============================================================================================
+//! Custom Keywords for record/tuple construction
+//==============================================================================================
+
+template<typename T> struct small_type : std::bool_constant<(sizeof(T) < 4)>
+{
+};
+
+inline constexpr auto custom_ = ::kumi::identifier("custom"_id);
+inline constexpr auto coord_ = "coord"_id;
+
+inline constexpr auto value_ = ::kumi::identifier("value_"_id, kumi::only<float>);
+inline constexpr auto name_ = ::kumi::identifier("name_"_id, kumi::only<std::string>);
+
+inline constexpr auto factor_ = ::kumi::identifier("factor"_id, kumi::if_<small_type>);
+
+inline constexpr auto is_transparent_ = "is_transparent_"_id = std::bool_constant<true>{};
+inline constexpr auto is_modal_ = "is_modal_"_id = std::bool_constant<true>{};
+
+struct unrolling : kumi::identifier<unrolling>
+{
+  template<int N> constexpr auto operator=(std::integral_constant<int, N> const&) const noexcept
+  {
+    return kumi::field<unrolling, std::integral_constant<int, N>>{};
+  }
+
+  // std::ostream& display(std::ostream& os, auto v) const { return os << "Unroll Factor: " << v; }
+};
+
+template<int N> inline constexpr auto unroll = (unrolling{} = std::integral_constant<int, N>{});
+
+//==============================================================================================
+//! Derived types from tuple/record
+//==============================================================================================
 template<typename T, bool isHomogeneous> struct trivial_product_type : kumi::tuple<T, T, T, T, T>
 {
 };
@@ -34,20 +71,20 @@ template<typename T> struct std::tuple_element<4, trivial_product_type<T, false>
 
 /// Records are never homogeneous in the sens of kumi but we need to test
 template<typename T, bool isHomogeneous>
-struct trivial_record_type : kumi::record<kumi::field_capture<"a", T>,
-                                          kumi::field_capture<"b", T>,
-                                          kumi::field_capture<"c", T>,
-                                          kumi::field_capture<"d", T>,
-                                          kumi::field_capture<"e", T>>
+struct trivial_record_type : kumi::record<kumi::field<kumi::name<"a">, T>,
+                                          kumi::field<kumi::name<"b">, T>,
+                                          kumi::field<kumi::name<"c">, T>,
+                                          kumi::field<kumi::name<"d">, T>,
+                                          kumi::field<kumi::name<"e">, T>>
 {
 };
 
 template<typename T>
-struct trivial_record_type<T, false> : kumi::record<kumi::field_capture<"a", T>,
-                                                    kumi::field_capture<"b", T>,
-                                                    kumi::field_capture<"c", T>,
-                                                    kumi::field_capture<"d", T>,
-                                                    kumi::field_capture<"e", void*>>
+struct trivial_record_type<T, false> : kumi::record<kumi::field<kumi::name<"a">, T>,
+                                                    kumi::field<kumi::name<"b">, T>,
+                                                    kumi::field<kumi::name<"c">, T>,
+                                                    kumi::field<kumi::name<"d">, T>,
+                                                    kumi::field<kumi::name<"e">, void*>>
 {
 };
 
@@ -57,35 +94,37 @@ template<typename T, bool B> struct std::tuple_size<trivial_record_type<T, B>> :
 
 template<typename T, bool B> struct std::tuple_element<0, trivial_record_type<T, B>>
 {
-  using type = kumi::field_capture<"a", T>;
+  using type = kumi::field<kumi::name<"a">, T>;
 };
 
 template<typename T, bool B> struct std::tuple_element<1, trivial_record_type<T, B>>
 {
-  using type = kumi::field_capture<"b", T>;
+  using type = kumi::field<kumi::name<"b">, T>;
 };
 
 template<typename T, bool B> struct std::tuple_element<2, trivial_record_type<T, B>>
 {
-  using type = kumi::field_capture<"c", T>;
+  using type = kumi::field<kumi::name<"c">, T>;
 };
 
 template<typename T, bool B> struct std::tuple_element<3, trivial_record_type<T, B>>
 {
-  using type = kumi::field_capture<"d", T>;
+  using type = kumi::field<kumi::name<"d">, T>;
 };
 
 template<typename T> struct std::tuple_element<4, trivial_record_type<T, true>>
 {
-  using type = kumi::field_capture<"e", T>;
+  using type = kumi::field<kumi::name<"e">, T>;
 };
 
 template<typename T> struct std::tuple_element<4, trivial_record_type<T, false>>
 {
-  using type = kumi::field_capture<"e", void*>;
+  using type = kumi::field<kumi::name<"e">, void*>;
 };
 
-/// Adapted types for tuple/record type semantic
+//==============================================================================================
+//! Adapted types for tuple/record type semantic
+//==============================================================================================
 struct tuple_box
 {
   int i;
@@ -142,18 +181,18 @@ struct record_box
   friend constexpr decltype(auto) get(record_box const& s) noexcept
   requires(I < 3)
   {
-    if constexpr (I == 0) return kumi::capture_field<"i">(s.i);
-    if constexpr (I == 1) return kumi::capture_field<"f">(s.f);
-    if constexpr (I == 2) return kumi::capture_field<"c">(s.c);
+    if constexpr (I == 0) return kumi::capture_field<"i"_id>(s.i);
+    if constexpr (I == 1) return kumi::capture_field<"f"_id>(s.f);
+    if constexpr (I == 2) return kumi::capture_field<"c"_id>(s.c);
   }
 
   template<std::size_t I>
   friend constexpr decltype(auto) get(record_box& s) noexcept
   requires(I < 3)
   {
-    if constexpr (I == 0) return kumi::capture_field<"i">(s.i);
-    if constexpr (I == 1) return kumi::capture_field<"f">(s.f);
-    if constexpr (I == 2) return kumi::capture_field<"c">(s.c);
+    if constexpr (I == 0) return kumi::capture_field<"i"_id>(s.i);
+    if constexpr (I == 1) return kumi::capture_field<"f"_id>(s.f);
+    if constexpr (I == 2) return kumi::capture_field<"c"_id>(s.c);
   }
 };
 
@@ -163,17 +202,17 @@ template<> struct std::tuple_size<record_box> : std::integral_constant<std::size
 
 template<> struct std::tuple_element<0, record_box>
 {
-  using type = kumi::field_capture<"i", int>;
+  using type = kumi::field<kumi::name<"i">, int>;
 };
 
 template<> struct std::tuple_element<1, record_box>
 {
-  using type = kumi::field_capture<"f", float>;
+  using type = kumi::field<kumi::name<"f">, float>;
 };
 
 template<> struct std::tuple_element<2, record_box>
 {
-  using type = kumi::field_capture<"c", char>;
+  using type = kumi::field<kumi::name<"c">, char>;
 };
 
 struct arbitrary_struct
@@ -183,6 +222,9 @@ struct arbitrary_struct
   constexpr auto operator<=>(arbitrary_struct const&) const = default;
 };
 
+//==============================================================================================
+//! Trackers for construction behavior
+//==============================================================================================
 enum class operations
 {
   def_ctor,
@@ -242,30 +284,33 @@ template<kumi::concepts::product_type T> operations copy_assign_fwd(T&& t)
 
 template<kumi::concepts::record_type R> operations move_ctor_fwd(R&& r)
 {
-  ctor_tracker local = std::forward<R>(r)["a"_f];
+  ctor_tracker local = std::forward<R>(r)["a"_id];
   return local.value;
 }
 
 template<kumi::concepts::record_type R> operations copy_ctor_fwd(R&& r)
 {
-  ctor_tracker local = r["b"_f];
+  ctor_tracker local = r["b"_id];
   return local.value;
 }
 
 template<kumi::concepts::record_type R> operations move_assign_fwd(R&& r)
 {
   ctor_tracker local;
-  local = std::forward<R>(r)["c"_f];
+  local = std::forward<R>(r)["c"_id];
   return local.value;
 }
 
 template<kumi::concepts::record_type R> operations copy_assign_fwd(R&& r)
 {
   ctor_tracker local;
-  local = r["d"_f];
+  local = r["d"_id];
   return local.value;
 }
 
+//==============================================================================================
+//! Type to ensure the correctness of move semantic
+//==============================================================================================
 template<typename T, typename Enable = void> struct is_moveonly_i : std::false_type
 {
 };

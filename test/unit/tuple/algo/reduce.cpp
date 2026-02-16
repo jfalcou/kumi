@@ -135,12 +135,12 @@ TTS_CASE("Check kumi::map_reduce with kumi::bit_or behavior")
 
 TTS_CASE("Check kumi::map_reduce with kumi::bit_xor behavior")
 {
-  constexpr auto t = kumi::tuple{2UL, 3, short{5}, char{64}};
-  auto t2 = kumi::tuple{2UL, 3, short{5}, char{64}};
+  constexpr auto t = kumi::tuple{2L, 3, short{5}, char{64}};
+  auto t2 = kumi::tuple{2L, 3, short{5}, char{64}};
 
   auto positive_not = [](auto e) { return -(~e); };
 
-  TTS_EQUAL(kumi::map_reduce(positive_not, kumi::function::bit_xor, t2), 64UL);
-  TTS_EQUAL(kumi::map_reduce(positive_not, kumi::function::bit_xor, std::move(t2)), 64UL);
-  TTS_CONSTEXPR_EQUAL(kumi::map_reduce(positive_not, kumi::function::bit_xor, t), 64UL);
+  TTS_EQUAL(kumi::map_reduce(positive_not, kumi::function::bit_xor, t2), 64L);
+  TTS_EQUAL(kumi::map_reduce(positive_not, kumi::function::bit_xor, std::move(t2)), 64L);
+  TTS_CONSTEXPR_EQUAL(kumi::map_reduce(positive_not, kumi::function::bit_xor, t), 64L);
 };

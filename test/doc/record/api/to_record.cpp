@@ -9,6 +9,7 @@
 #include <type_traits>
 #include <utility>
 
+using namespace kumi::literals;
 struct pixel
 {
   int r, g, b;
@@ -17,17 +18,17 @@ struct pixel
 template<std::size_t I>
 decltype(auto) get(pixel const& p) noexcept
 {
-  if constexpr(I==0) return kumi::capture_field<"r">(p.r);
-  if constexpr(I==1) return kumi::capture_field<"g">(p.g);
-  if constexpr(I==2) return kumi::capture_field<"b">(p.b);
+  if constexpr(I==0) return kumi::capture_field<"r"_id>(p.r);
+  if constexpr(I==1) return kumi::capture_field<"g"_id>(p.g);
+  if constexpr(I==2) return kumi::capture_field<"b"_id>(p.b);
 }
 
 template<std::size_t I>
 decltype(auto) get(pixel& p) noexcept
 {
-  if constexpr(I==0) return kumi::capture_field<"r">(p.r);
-  if constexpr(I==1) return kumi::capture_field<"g">(p.g);
-  if constexpr(I==2) return kumi::capture_field<"b">(p.b);
+  if constexpr(I==0) return kumi::capture_field<"r"_id>(p.r);
+  if constexpr(I==1) return kumi::capture_field<"g"_id>(p.g);
+  if constexpr(I==2) return kumi::capture_field<"b"_id>(p.b);
 }
 
 // Opt-in for Record Type semantic
@@ -40,9 +41,9 @@ template<>
 struct  std::tuple_size<pixel> : std::integral_constant<std::size_t,3> 
 {};
 
-template<> struct std::tuple_element<0,pixel> { using type = kumi::field_capture<"r", int>; };
-template<> struct std::tuple_element<1,pixel> { using type = kumi::field_capture<"g", int>; };
-template<> struct std::tuple_element<2,pixel> { using type = kumi::field_capture<"b", int>; };
+template<> struct std::tuple_element<0,pixel> { using type = kumi::field<kumi::name<"r">, int>; };
+template<> struct std::tuple_element<1,pixel> { using type = kumi::field<kumi::name<"g">, int>; };
+template<> struct std::tuple_element<2,pixel> { using type = kumi::field<kumi::name<"b">, int>; };
 
 int main()
 {

@@ -21,13 +21,14 @@ namespace kumi
         return [&]<std::size_t... I>(std::index_sequence<I...>) {
           auto v_or_r = [&]<typename V>(V&& v) {
             using FV = kumi::result::field_value_of_t<V>;
-            constexpr auto name = name_of(as<V>{});
+            constexpr auto curr_name = name_of(as<V>{}).to_str();
 
             if constexpr (concepts::record_type<FV>)
             {
               return [&]<std::size_t... J>(std::index_sequence<J...>) {
-                return record{field<concatenate_str<name, name_of(as<element_t<J, FV>>{})>()> =
-                                (field_value_of(get<J>(field_value_of(KUMI_FWD(v)))))...};
+                return record{
+                  (capture_field<name<concatenate_str<curr_name, name_of(as<element_t<J, FV>>{}).to_str()>()>{}>(
+                    field_value_of(get<J>(field_value_of(KUMI_FWD(v))))))...};
               }(std::make_index_sequence<size_v<FV>>{});
             }
             else return record{KUMI_FWD(v)};
@@ -44,14 +45,14 @@ namespace kumi
       else
         return [&]<std::size_t... I>(std::index_sequence<I...>) {
           auto v_or_r = [&]<typename V>(V&& v) {
-            constexpr auto name = [&] {
-              if constexpr (std::is_same_v<Prefix_type, unit>) return name_of(as<V>{});
-              else return concatenate_str<Prefix, name_of(as<V>{})>();
+            constexpr auto curr_name = [&] {
+              if constexpr (std::is_same_v<Prefix_type, unit>) return name<name_of(as<V>{}).to_str()>{};
+              else return name<concatenate_str<Prefix.to_str(), name_of(as<V>{}).to_str()>()>{};
             }();
 
             if constexpr (concepts::record_type<kumi::result::field_value_of_t<V>>)
-              return flat<name>(field_value_of(KUMI_FWD(v)));
-            else return record{field<name> = (field_value_of(KUMI_FWD(v)))};
+              return flat<curr_name>(field_value_of(KUMI_FWD(v)));
+            else return record{capture_field<curr_name>(field_value_of(KUMI_FWD(v)))};
           };
 
           return cat(v_or_r(get<I>(KUMI_FWD(t)))...);
@@ -65,14 +66,14 @@ namespace kumi
         return [&]<std::size_t... I>(std::index_sequence<I...>) {
           using Prefix_type = std::remove_cvref_t<decltype(Prefix)>;
           auto v_or_r = [&]<typename V>(V&& v) {
-            constexpr auto name = [&] {
-              if constexpr (std::is_same_v<Prefix_type, unit>) return name_of(as<V>{});
-              else return concatenate_str<Prefix, name_of(as<V>{})>();
+            constexpr auto curr_name = [&] {
+              if constexpr (std::is_same_v<Prefix_type, unit>) return name<name_of(as<V>{}).to_str()>{};
+              else return name<concatenate_str<Prefix.to_str(), name_of(as<V>{}).to_str()>()>{};
             }();
 
             if constexpr (concepts::record_type<kumi::result::field_value_of_t<V>>)
-              return flat_map<name>(field_value_of(KUMI_FWD(v)), f);
-            else return record{field<name> = invoke(f, field_value_of(v))};
+              return flat_map<curr_name>(field_value_of(KUMI_FWD(v)), f);
+            else return record{capture_field<curr_name>(invoke(f, field_value_of(v)))};
           };
 
           return cat(v_or_r(get<I>(KUMI_FWD(t)))...);

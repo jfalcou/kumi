@@ -298,28 +298,8 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup traits
-  //! @brief Checks if a type is a kumi::field_capture
-  //!
-  //! @tparam T The type to inspect
-  //!
-  //! ## Helper value
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<typename T> inline constexpr bool is_field_capture_v = requires { T::is_field_capture; };
-  //! }
-  //! @endcode
-  //================================================================================================
-  template<typename T> inline constexpr bool is_field_capture_v = requires { T::is_field_capture; };
-
-  template<typename T> struct is_field_capture : std::bool_constant<is_field_capture_v<T>>
-  {
-  };
-
-  //================================================================================================
-  //! @ingroup traits
   //! @brief Computes the return type of a call to kumi::get on a kumi::tuple and unwrap the
-  //!        field_capture returned by kumi::get on a kumi::record
+  //!        field returned by kumi::get on a kumi::record
   //!
   //! @tparam I Index of the type to retrieve
   //! @tparam T kumi::product_type to access
@@ -341,7 +321,8 @@ namespace kumi
   requires(is_record_type<std::remove_cvref_t<T>>::value)
   struct raw_member<I, T>
   {
-    using type = decltype(_::get_field(get<I>(std::declval<T&&>())));
+    using field_type = decltype(get<I>(std::declval<T&&>()));
+    using type = decltype(std::declval<field_type&&>()(typename std::remove_cvref_t<field_type>::identifier_type{}));
   };
 
   template<std::size_t I, typename T> using raw_member_t = typename raw_member<I, T>::type;
@@ -349,7 +330,7 @@ namespace kumi
   //================================================================================================
   //! @ingroup traits
   //! @brief Provides indexed access to the types of the elements of a kumi::product_type and
-  //!                 unwraps the returned field_capture for kumi::record_type.
+  //!                 unwraps the returned field for kumi::record_type.
   //!
   //! @tparam I Index of the type to retrieve
   //! @tparam T kumi::product_type to access
@@ -465,7 +446,7 @@ namespace kumi
     template<typename... Us> static auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
     static std::false_type is_set(...);
 
-    using type = decltype(is_set(_::get_value_identity<Ints, Ts>()...));
+    using type = decltype(is_set(_::get_key<Ints, Ts>()...));
   };
 
   template<typename... Ts>
@@ -490,4 +471,25 @@ namespace kumi
   struct is_product_type<T> : std::true_type
   {
   };
+
+  // Internal helpers
+  template<typename T> struct is_kumi_tuple : std::false_type
+  {
+  };
+
+  template<typename... Ts> struct is_kumi_tuple<kumi::tuple<Ts...>> : std::true_type
+  {
+  };
+
+  template<typename T> inline constexpr bool is_kumi_tuple_v = is_kumi_tuple<T>::value;
+
+  template<typename T> struct is_kumi_record : std::false_type
+  {
+  };
+
+  template<typename... Ts> struct is_kumi_record<kumi::record<Ts...>> : std::true_type
+  {
+  };
+
+  template<typename T> inline constexpr bool is_kumi_record_v = is_kumi_record<T>::value;
 }

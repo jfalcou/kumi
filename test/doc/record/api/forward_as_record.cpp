@@ -13,14 +13,14 @@ using namespace kumi::literals;
 template<typename Data>
 std::vector<std::string> build(Data d)
 {
-  return std::vector<std::string> ( kumi::get<"a"_f>(d)
-                                  , std::move(kumi::get<"b"_f>(d))
+  return std::vector<std::string> ( kumi::get<"a"_id>(d)
+                                  , std::move(kumi::get<"b"_id>(d))
                                   );
 }
 
 int main()
 {
-  auto v = build( kumi::forward_as_record<"a"_f, "b"_f>(4,std::string{"the text !"}));
+  auto v = build( kumi::forward_as_record<"a"_id, "b"_id>(4,std::string{"the text !"}));
 
   for(auto const& s : v)
     std::cout << s << "\n";

@@ -60,9 +60,9 @@ TTS_CASE("Check get return type on adapted types")
   TTS_TYPE_IS((decltype(get<1>(tb))), (float&));
   TTS_TYPE_IS((decltype(get<2>(tb))), (char&));
 
-  TTS_TYPE_IS((decltype(get<0>(rb))), (kumi::field_capture<"i", int&>));
-  TTS_TYPE_IS((decltype(get<1>(rb))), (kumi::field_capture<"f", float&>));
-  TTS_TYPE_IS((decltype(get<2>(rb))), (kumi::field_capture<"c", char&>));
+  TTS_TYPE_IS((decltype(get<0>(rb))), (kumi::field<kumi::name<"i">, int&>));
+  TTS_TYPE_IS((decltype(get<1>(rb))), (kumi::field<kumi::name<"f">, float&>));
+  TTS_TYPE_IS((decltype(get<2>(rb))), (kumi::field<kumi::name<"c">, char&>));
 
   TTS_TYPE_IS((decltype(kumi::get<int>(tb))), (int&));
   TTS_TYPE_IS((decltype(kumi::get<float>(tb))), (float&));
@@ -76,9 +76,9 @@ TTS_CASE("Check get return type on adapted types")
   TTS_TYPE_IS((decltype(get<1>(ctb))), (float const&));
   TTS_TYPE_IS((decltype(get<2>(ctb))), (char const&));
 
-  TTS_TYPE_IS((decltype(get<0>(crb))), (kumi::field_capture<"i", int const&>));
-  TTS_TYPE_IS((decltype(get<1>(crb))), (kumi::field_capture<"f", float const&>));
-  TTS_TYPE_IS((decltype(get<2>(crb))), (kumi::field_capture<"c", char const&>));
+  TTS_TYPE_IS((decltype(get<0>(crb))), (kumi::field<kumi::name<"i">, int const&>));
+  TTS_TYPE_IS((decltype(get<1>(crb))), (kumi::field<kumi::name<"f">, float const&>));
+  TTS_TYPE_IS((decltype(get<2>(crb))), (kumi::field<kumi::name<"c">, char const&>));
 
   TTS_TYPE_IS((decltype(kumi::get<int>(ctb))), (int const&));
   TTS_TYPE_IS((decltype(kumi::get<float>(ctb))), (float const&));

@@ -7,6 +7,8 @@
 #include <iostream>
 #include <string>
 
+using namespace kumi::literals;
+
 namespace ns
 {
   struct people
@@ -18,15 +20,15 @@ namespace ns
   template<std::size_t I>
   decltype(auto) get(people const& s) noexcept
   {
-    if constexpr(I==0) return kumi::capture_field<"name">( s.name );
-    if constexpr(I==1) return kumi::capture_field<"age" >( s.age  );
+    if constexpr(I==0) return kumi::capture_field<"name"_id>( s.name );
+    if constexpr(I==1) return kumi::capture_field<"age"_id >( s.age  );
   }
 
   template<std::size_t I>
   decltype(auto) get(people& s) noexcept
   {
-    if constexpr(I==0) return kumi::capture_field<"name">( s.name );
-    if constexpr(I==1) return kumi::capture_field<"age" >( s.age  );
+    if constexpr(I==0) return kumi::capture_field<"name"_id>( s.name );
+    if constexpr(I==1) return kumi::capture_field<"age"_id>( s.age  );
   }
 }
 
@@ -40,8 +42,8 @@ template<>
 struct  std::tuple_size<ns::people>
       : std::integral_constant<std::size_t,2> {};
 
-template<> struct std::tuple_element<0,ns::people> { using type = kumi::field_capture<"name",std::string>;  };
-template<> struct std::tuple_element<1,ns::people> { using type = kumi::field_capture<"age" ,int        >;  };
+template<> struct std::tuple_element<0,ns::people> { using type = kumi::field<kumi::name<"name">,std::string>;  };
+template<> struct std::tuple_element<1,ns::people> { using type = kumi::field<kumi::name<"age"> ,int        >;  };
 
 int main()
 {
