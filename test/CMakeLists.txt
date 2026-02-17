@@ -14,14 +14,7 @@ copa_glob_unit(QUIET PATTERN "doc/*.cpp"  INTERFACE kumi_docs RELATIVE ${CMAKE_C
 ##======================================================================================================================
 ## Unit tests
 ##======================================================================================================================
-if(KUMI_BUILD_STANDALONE_TEST)
-  copa_glob_unit( QUIET
-                  PATTERN "unit/*.cpp" INTERFACE kumi_test_standalone
-                  RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
-                )
-else()
-  copa_glob_unit( QUIET
-                  PATTERN "unit/*.cpp" INTERFACE kumi_test
-                  RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
-                )
-endif()
+copa_glob_unit( QUIET
+                PATTERN "unit/*.cpp" INTERFACE kumi_test
+                RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
+              )

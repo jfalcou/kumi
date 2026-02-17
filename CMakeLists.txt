@@ -8,7 +8,6 @@ project(kumi LANGUAGES CXX)
 
 ##======================================================================================================================
 option( KUMI_BUILD_TEST             "Build tests using Kumi headers"            ON  )
-option( KUMI_BUILD_STANDALONE_TEST  "Build tests using Kumi standalone header"  OFF )
 option( KUMI_BUILD_DOCUMENTATION    "Build Doxygen for Kumi"                    OFF )
 
 ##======================================================================================================================
@@ -38,7 +37,6 @@ if(NOT KUMI_QUIET)
   endif()
 
   message(STATUS "[${PROJECT_NAME}] - Unit tests              : ${KUMI_BUILD_TEST} (via KUMI_BUILD_TEST)")
-  message(STATUS "[${PROJECT_NAME}] - Unit tests (standalone) : ${KUMI_BUILD_STANDALONE_TEST} (via KUMI_BUILD_STANDALONE_TEST)")
   message(STATUS "[${PROJECT_NAME}] - Doxygen                 : ${KUMI_BUILD_DOCUMENTATION} (via KUMI_BUILD_DOCUMENTATION)")
   set(QUIET_OPTION "")
 else()
