@@ -49,7 +49,7 @@ namespace kumi
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::foldable{f, init} >> ... >> _::foldable{f, get<I>(KUMI_FWD(t))}).value;
+        return (_::foldable{init} >> ... >> _::bind_back(f, get<I>(KUMI_FWD(t)))).value;
       }(std::make_index_sequence<size_v<T>>());
     }
   }
@@ -92,8 +92,9 @@ namespace kumi
     else if constexpr (concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
     else
     {
-      auto&& [heads, tail] = split(KUMI_FWD(t), index<2>);
-      return fold_left(f, tail, kumi::apply(f, heads));
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return (_::foldable{get<0>(KUMI_FWD(t))} >> ... >> _::bind_back(f, get<I + 1>(KUMI_FWD(t)))).value;
+      }(std::make_index_sequence<size_v<T> - 1>{});
     }
   }
 
@@ -137,7 +138,7 @@ namespace kumi
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::foldable{f, get<I>(KUMI_FWD(t))} << ... << _::foldable{f, init}).value;
+        return (_::bind_front(f, get<I>(KUMI_FWD(t))) << ... << _::foldable{init}).value;
       }(std::make_index_sequence<size_v<T>>());
     }
   }
@@ -180,8 +181,9 @@ namespace kumi
     else if constexpr (concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
     else
     {
-      auto&& [head, tails] = split(KUMI_FWD(t), index<size_v<T> - 2>);
-      return fold_right(f, head, kumi::apply(f, tails));
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return (_::bind_front(f, get<I + 1>(KUMI_FWD(t))) << ... << _::foldable{get<0>(KUMI_FWD(t))}).value;
+      }(std::make_index_sequence<size_v<T> - 1>());
     }
   }
 

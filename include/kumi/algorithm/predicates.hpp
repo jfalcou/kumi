@@ -28,10 +28,13 @@ namespace kumi
   //====================================================================================================================
   template<typename Pred, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto all_of(T&& t, Pred p) noexcept
   {
-    if constexpr (concepts::record_type<T>) return all_of(values_of(KUMI_FWD(t)), p);
-    else if constexpr (concepts::empty_product_type<T>) return true;
+    if constexpr (concepts::empty_product_type<T>) return true;
+    else if constexpr (concepts::record_type<T>) return all_of(values_of(KUMI_FWD(t)), p);
     else if constexpr (concepts::sized_product_type<T, 1>) return invoke(p, get<0>(KUMI_FWD(t)));
-    else return kumi::apply([&](auto&&... m) { return (invoke(p, m) && ...); }, KUMI_FWD(t));
+    else
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return (invoke(p, get<I>(KUMI_FWD(t))) && ...);
+      }(std::make_index_sequence<size_v<T>>{});
   }
 
   //====================================================================================================================
@@ -52,10 +55,13 @@ namespace kumi
   //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto all_of(T&& t) noexcept
   {
-    if constexpr (concepts::record_type<T>) return all_of(values_of(KUMI_FWD(t)));
-    else if constexpr (concepts::empty_product_type<T>) return true;
+    if constexpr (concepts::empty_product_type<T>) return true;
+    else if constexpr (concepts::record_type<T>) return all_of(values_of(KUMI_FWD(t)));
     else if constexpr (concepts::sized_product_type<T, 1>) return !!get<0>(KUMI_FWD(t));
-    else return kumi::apply([&](auto&&... m) { return (m && ...); }, KUMI_FWD(t));
+    else
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return (get<I>(KUMI_FWD(t)) && ...);
+      }(std::make_index_sequence<size_v<T>>{});
   }
 
   //====================================================================================================================
@@ -70,17 +76,20 @@ namespace kumi
 
     ## Examples:
     ### Tuple:
-    @include doc/tuple/algo/all_of.cpp
+    @include doc/tuple/algo/any_of.cpp
     ### Record:
-    @include doc/record/algo/all_of.cpp
+    @include doc/record/algo/any_of.cpp
   **/
   //====================================================================================================================
   template<typename Pred, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto any_of(T&& t, Pred p) noexcept
   {
-    if constexpr (concepts::record_type<T>) return any_of(values_of(KUMI_FWD(t)), p);
-    else if constexpr (concepts::empty_product_type<T>) return true;
+    if constexpr (concepts::empty_product_type<T>) return true;
+    else if constexpr (concepts::record_type<T>) return any_of(values_of(KUMI_FWD(t)), p);
     else if constexpr (concepts::sized_product_type<T, 1>) return invoke(p, get<0>(KUMI_FWD(t)));
-    else return kumi::apply([&](auto&&... m) { return (invoke(p, m) || ...); }, KUMI_FWD(t));
+    else
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return (invoke(p, get<I>(KUMI_FWD(t))) || ...);
+      }(std::make_index_sequence<size_v<T>>{});
   }
 
   //====================================================================================================================
@@ -94,17 +103,20 @@ namespace kumi
 
     ## Examples:
     ### Tuple:
-    @include doc/tuple/algo/all_of.cpp
+    @include doc/tuple/algo/any_of.cpp
     ### Record:
-    @include doc/record/algo/all_of.cpp
+    @include doc/record/algo/any_of.cpp
   **/
   //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto any_of(T&& t) noexcept
   {
-    if constexpr (concepts::record_type<T>) return any_of(values_of(KUMI_FWD(t)));
-    else if constexpr (concepts::empty_product_type<T>) return false;
+    if constexpr (concepts::empty_product_type<T>) return false;
+    else if constexpr (concepts::record_type<T>) return any_of(values_of(KUMI_FWD(t)));
     else if constexpr (concepts::sized_product_type<T, 1>) return !!get<0>(KUMI_FWD(t));
-    else return kumi::apply([&](auto&&... m) { return (m || ...); }, KUMI_FWD(t));
+    else
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return (get<I>(KUMI_FWD(t)) || ...);
+      }(std::make_index_sequence<size_v<T>>{});
   }
 
   //====================================================================================================================
@@ -124,10 +136,10 @@ namespace kumi
     @include doc/record/algo/none_of.cpp
   **/
   //====================================================================================================================
-  template<typename Pred, concepts::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr bool none_of(T&& t, Pred p) noexcept
+  template<typename Pred, concepts::product_type Tuple>
+  [[nodiscard]] KUMI_ABI constexpr bool none_of(Tuple&& ts, Pred p) noexcept
   {
-    return !any_of(KUMI_FWD(t), p);
+    return !any_of(KUMI_FWD(ts), p);
   }
 
   //====================================================================================================================
@@ -174,7 +186,11 @@ namespace kumi
     constexpr std::size_t o = 1ULL;
     constexpr std::size_t z = 0ULL;
     if constexpr (concepts::empty_product_type<T>) return z;
-    else return kumi::apply([&](auto&&... m) { return ((invoke(p, m) ? o : z) + ... + z); }, KUMI_FWD(t));
+    else if constexpr (concepts::record_type<T>) return count_if(values_of(KUMI_FWD(t)), p);
+    else
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return ((invoke(p, get<I>(KUMI_FWD(t))) ? o : z) + ... + z);
+      }(std::make_index_sequence<size_v<T>>{});
   }
 
   //====================================================================================================================

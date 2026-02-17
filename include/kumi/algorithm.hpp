@@ -64,6 +64,5 @@ namespace kumi
 #include <kumi/algorithm/scan.hpp>
 #include <kumi/algorithm/tiler.hpp>
 #include <kumi/algorithm/transpose.hpp>
-#include <kumi/algorithm/traits.hpp>
 #include <kumi/algorithm/unique.hpp>
 #include <kumi/algorithm/zip.hpp>

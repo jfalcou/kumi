@@ -60,3 +60,5 @@ namespace kumi
 #include <kumi/utils/projections.hpp>
 
 #include <kumi/utils/std.hpp>
+
+#include <kumi/utils/functors.hpp>

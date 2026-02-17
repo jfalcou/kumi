@@ -538,6 +538,39 @@ namespace kumi
   template<typename... Ts> inline constexpr auto all_unique_names_v = all_unique_names_t<Ts...>::value;
 
 #ifndef KUMI_DOXYGEN_INVOKED
+  ///
+  template<template<typename...> typename Traits,
+           typename Tuple,
+           typename Seq = std::make_index_sequence<size<Tuple>::value>>
+  struct apply_traits;
+
+  template<template<typename...> typename Traits, typename Tuple, std::size_t... Is>
+  requires is_product_type_v<std::remove_cvref_t<Tuple>> &&
+           (requires { typename Traits<element_t<Is, Tuple>...>::type; })
+  struct apply_traits<Traits, Tuple, std::index_sequence<Is...>>
+  {
+    using type = typename Traits<element_t<Is, Tuple>...>::type;
+  };
+
+  template<template<typename...> typename Traits, typename Tuple>
+  using apply_traits_t = typename apply_traits<Traits, Tuple>::type;
+
+  template<template<typename...> typename Traits,
+           typename Tuple,
+           typename Seq = std::make_index_sequence<size<Tuple>::value>>
+  struct map_traits;
+
+  template<template<typename...> typename Traits, typename Tuple, std::size_t... Is>
+  requires is_product_type_v<std::remove_cvref_t<Tuple>> &&
+           (requires { typename Traits<element_t<Is, Tuple>>::type; } && ...)
+  struct map_traits<Traits, Tuple, std::index_sequence<Is...>>
+  {
+    using type = tuple<typename Traits<element_t<Is, Tuple>>::type...>;
+  };
+
+  template<template<typename...> typename Traits, typename Tuple>
+  using map_traits_t = typename map_traits<Traits, Tuple>::type;
+
   // A type with the tuple interface is automatically a product_type
   template<typename T>
   requires(_::std_tuple_compatible<T>)

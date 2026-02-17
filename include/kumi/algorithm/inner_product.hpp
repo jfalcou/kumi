@@ -9,30 +9,6 @@
 
 namespace kumi
 {
-  namespace _
-  {
-    //==================================================================================================================
-    // Fold helpers
-    //==================================================================================================================
-    template<typename F, typename T> struct foldable
-    {
-      F func;
-      T value;
-
-      template<typename W> KUMI_ABI friend constexpr decltype(auto) operator>>(foldable&& x, foldable<F, W>&& y)
-      {
-        return _::foldable{x.func, invoke(x.func, x.value, y.value)};
-      }
-
-      template<typename W> KUMI_ABI friend constexpr decltype(auto) operator<<(foldable&& x, foldable<F, W>&& y)
-      {
-        return _::foldable{x.func, invoke(x.func, x.value, y.value)};
-      }
-    };
-
-    template<class F, class T> foldable(F const&, T&&) -> foldable<F, T>;
-  }
-
   //====================================================================================================================
   /**
     @ingroup  reductions
@@ -97,17 +73,16 @@ namespace kumi
     else if constexpr (concepts::record_type<S1>)
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::foldable{sum, invoke(prod, get<identifier_of<element_t<I, S1>>()>(KUMI_FWD(s1)),
-                                        get<identifier_of<element_t<I, S1>>()>(KUMI_FWD(s2)))} >>
-                ... >> _::foldable{sum, init})
+        return (_::foldable{init} >> ... >>
+                _::bind_back(sum, invoke(prod, get<identifier_of<element_t<I, S1>>()>(KUMI_FWD(s1)),
+                                         get<identifier_of<element_t<I, S1>>()>(KUMI_FWD(s2)))))
           .value;
       }(std::make_index_sequence<size<S1>::value>());
     }
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::foldable{sum, invoke(prod, get<I>(KUMI_FWD(s1)), get<I>(KUMI_FWD(s2)))} >> ... >>
-                _::foldable{sum, init})
+        return (_::foldable{init} >> ... >> _::bind_back(sum, invoke(prod, get<I>(KUMI_FWD(s1)), get<I>(KUMI_FWD(s2)))))
           .value;
       }(std::make_index_sequence<size<S1>::value>());
     }
