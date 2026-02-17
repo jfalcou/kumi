@@ -36,7 +36,12 @@ jobs:
       - name: Test standalone KUMI header
         run: |
           cd build
-          echo -e "#include \"kumi.hpp\" \\nint main(){}" > main.cpp
+          cat <<EOF > main.cpp
+          #include "kumi.hpp"
+          int main() {
+            return 0;
+          }
+          EOF
           g++ -std=c++20 -S main.cpp
 
       - name: Update standalone branch
