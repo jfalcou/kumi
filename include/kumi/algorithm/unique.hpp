@@ -9,57 +9,6 @@
 
 namespace kumi
 {
-  namespace _
-  {
-    template<typename T> struct make_unique
-    {
-      T acc;
-
-      template<typename W> KUMI_ABI friend constexpr decltype(auto) operator|(make_unique&& x, make_unique<W>&& y)
-      {
-        constexpr auto value = []<std::size_t... I>(std::index_sequence<I...>) {
-          return (all_uniques_v<W, raw_element_t<I, T>...>);
-        }(std::make_index_sequence<size_v<T>>{});
-
-        if constexpr (value)
-          return [&]<std::size_t... I>(std::index_sequence<I...>) {
-            using res_t = builder_make_t<T, element_t<I, T>..., W>;
-            return _::make_unique{res_t{get<I>(KUMI_FWD(x.acc))..., KUMI_FWD(y.acc)}};
-          }(std::make_index_sequence<size_v<T>>{});
-        else return KUMI_FWD(x);
-      }
-    };
-
-    template<typename W> make_unique(W&& w) -> make_unique<W>;
-
-    struct uniquable
-    {
-      template<concepts::product_type T> [[nodiscard]] KUMI_ABI consteval auto operator()(as<T>) const noexcept
-      {
-        struct
-        {
-          std::size_t count{1}, t[size_v<T>];
-        } that{};
-
-        that.t[0] = 0;
-
-        [&]<std::size_t... I>(std::index_sequence<I...>) {
-          (
-            [&] {
-              constexpr auto L = I;
-              constexpr auto R = I + 1;
-              if constexpr (!std::is_same_v<raw_element_t<L, T>, raw_element_t<R, T>>) that.t[that.count++] = R;
-            }(),
-            ...);
-        }(std::make_index_sequence<size_v<T> - 1>{});
-
-        return that;
-      }
-    };
-
-    inline constexpr uniquable uniqued{};
-  }
-
   //================================================================================================
   //! @ingroup generators
   //! @brief  Returns a product type with consecutive duplicate types removed (pairwise uniqueness).

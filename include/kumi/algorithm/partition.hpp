@@ -9,32 +9,6 @@
 
 namespace kumi
 {
-  namespace _
-  {
-    template<template<typename> typename Pred, concepts::product_type T> struct selector_t
-    {
-      KUMI_ABI constexpr auto operator()() const noexcept
-      {
-        struct
-        {
-          std::size_t count = {}, cut = {}, t[1 + size_v<T>];
-        } that{};
-
-        auto locate = [&]<std::size_t... I>(std::index_sequence<I...>) {
-          ((Pred<raw_element_t<I, T>>::value ? (that.t[that.count++] = I) : I), ...);
-          that.cut = that.count;
-          ((!Pred<raw_element_t<I, T>>::value ? (that.t[that.count++] = I) : I), ...);
-        };
-
-        locate(std::make_index_sequence<size_v<T>>{});
-        return that;
-      }
-    };
-
-    template<template<typename> typename Pred, concepts::product_type T>
-    inline constexpr selector_t<Pred, T> selector{};
-  }
-
   //================================================================================================
   //! @ingroup generators
   //! @brief  Partition a product type over a predicate

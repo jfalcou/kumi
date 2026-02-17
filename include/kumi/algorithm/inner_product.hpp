@@ -9,30 +9,6 @@
 
 namespace kumi
 {
-  namespace _
-  {
-    //==============================================================================================
-    // Fold helpers
-    //==============================================================================================
-    template<typename F, typename T> struct foldable
-    {
-      F func;
-      T value;
-
-      template<typename W> KUMI_ABI friend constexpr decltype(auto) operator>>(foldable&& x, foldable<F, W>&& y)
-      {
-        return _::foldable{x.func, invoke(x.func, x.value, y.value)};
-      }
-
-      template<typename W> KUMI_ABI friend constexpr decltype(auto) operator<<(foldable&& x, foldable<F, W>&& y)
-      {
-        return _::foldable{x.func, invoke(x.func, x.value, y.value)};
-      }
-    };
-
-    template<class F, class T> foldable(F const&, T&&) -> foldable<F, T>;
-  }
-
   //================================================================================================
   //! @ingroup reductions
   //! @brief Computes inner product (i.e. sum of products)

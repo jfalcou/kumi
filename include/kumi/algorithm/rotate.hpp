@@ -9,27 +9,6 @@
 
 namespace kumi
 {
-  namespace _
-  {
-    template<std::size_t S, std::size_t R> struct rotate_t
-    {
-      KUMI_ABI constexpr auto operator()() const noexcept
-      {
-        struct
-        {
-          std::size_t t[1 + S];
-        } that{};
-
-        auto idxs = [&]<std::size_t... I>(std::index_sequence<I...>) { ((that.t[I] = (I + R) % S), ...); };
-
-        idxs(std::make_index_sequence<S>{});
-        return that;
-      }
-    };
-
-    template<std::size_t S, std::size_t R> inline constexpr rotate_t<S, R> rotator{};
-  }
-
   //================================================================================================
   //! @ingroup generators
   //! @brief  Rotates the element of a product type R positions to the left, wrapping around when

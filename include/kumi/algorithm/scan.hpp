@@ -9,31 +9,6 @@
 
 namespace kumi
 {
-  namespace _
-  {
-    //==============================================================================================
-    // Scan helpers
-    //==============================================================================================
-    template<typename F, typename T> struct scannable
-    {
-      F func;
-      T acc;
-
-      template<typename W> KUMI_ABI friend constexpr decltype(auto) operator>>(scannable&& x, scannable<F, W>&& y)
-      {
-        constexpr auto size = kumi::size_v<T> - 1;
-        return _::scannable{x.func, kumi::push_back(x.acc, invoke(x.func, kumi::get<size>(x.acc), y.acc))};
-      }
-
-      template<typename W> KUMI_ABI friend constexpr decltype(auto) operator<<(scannable&& x, scannable<F, W>&& y)
-      {
-        return _::scannable{x.func, kumi::push_front(x.acc, invoke(x.func, y.acc, kumi::get<0>(x.acc)))};
-      }
-    };
-
-    template<class F, class T> scannable(F const&, T&&) -> scannable<F, T>;
-  }
-
   //================================================================================================
   //! @ingroup reductions
   //! @brief Computes the inclusive prefix scan of all elements of a product type using a

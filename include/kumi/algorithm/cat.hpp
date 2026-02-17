@@ -42,23 +42,7 @@ namespace kumi
     {
       // count is at least 1 so MSVC don't cry when we use a 0-sized array
       constexpr auto count = (1ULL + ... + size_v<Ts>);
-      constexpr auto pos = [&]() {
-        struct
-        {
-          std::size_t t[count], e[count];
-        } that{};
-        std::size_t k = 0, offset = 0;
-
-        auto locate = [&]<std::size_t... I>(std::index_sequence<I...>) {
-          (((that.t[I + offset] = k), (that.e[I + offset] = I)), ...);
-          offset += sizeof...(I);
-          k++;
-        };
-
-        (locate(std::make_index_sequence<size_v<Ts>>{}), ...);
-
-        return that;
-      }();
+      constexpr auto pos = _::concatenater<count, size_v<Ts>...>();
 
       using res_type = common_product_type_t<std::remove_cvref_t<Ts>...>;
 

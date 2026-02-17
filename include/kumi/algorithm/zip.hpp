@@ -9,52 +9,6 @@
 
 namespace kumi
 {
-  namespace _
-  {
-    struct zipper_t
-    {
-      template<std::size_t Size, concepts::product_type T>
-      KUMI_ABI constexpr auto operator()(index_t<Size> const&, T&& t) const noexcept
-      {
-        if constexpr (concepts::sized_product_type<T, 0>) return t;
-        else
-        {
-          constexpr auto uz = []<typename N>(N const&, auto&& u) {
-            return apply(
-              [](auto&&... m) {
-                auto zip_ = [&]<concepts::product_type V>(V&& v) {
-                  if constexpr (size_v<V> <= N::value) return none;
-                  else return get<N::value>(KUMI_FWD(v));
-                };
-                return builder<element_t<0, T>>::make(zip_(KUMI_FWD(m))...);
-              },
-              KUMI_FWD(u));
-          };
-
-          return [&]<std::size_t... I>(std::index_sequence<I...>) {
-            return kumi::make_tuple(uz(index_t<I>{}, KUMI_FWD(t))...);
-          }(std::make_index_sequence<Size>());
-        }
-      }
-    };
-
-    inline constexpr zipper_t zipper{};
-
-    template<typename T0, typename... Ts> consteval std::size_t min_size_v()
-    {
-      std::size_t result = size_v<T0>;
-      if constexpr (sizeof...(Ts) == 0) return result;
-      else return ((result = result < size_v<Ts> ? result : size_v<Ts>), ...);
-    };
-
-    template<typename T0, typename... Ts> consteval std::size_t max_size_v()
-    {
-      std::size_t result = size_v<T0>;
-      if constexpr (sizeof...(Ts) == 0) return result;
-      else return ((result = result > size_v<Ts> ? result : size_v<Ts>), ...);
-    };
-  }
-
   //================================================================================================
   //! @ingroup generators
   //! @brief Constructs a tuple where the ith element is the prduct type of all ith elements of ts...

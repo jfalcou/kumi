@@ -9,32 +9,6 @@
 
 namespace kumi
 {
-  namespace _
-  {
-    template<std::size_t N> struct reducer_t
-    {
-      constexpr auto operator()() const noexcept
-      {
-        constexpr std::size_t half = N / 2;
-
-        struct
-        {
-          std::size_t count = {}, remainder = {}, idx1[half], idx2[half];
-        } that{};
-
-        that.remainder = N % 2;
-
-        [&]<std::size_t... I>(std::index_sequence<I...>) {
-          ((that.idx1[that.count] = 2 * I, that.idx2[that.count++] = 2 * I + 1), ...);
-        }(std::make_index_sequence<half>{});
-
-        return that;
-      }
-    };
-
-    template<std::size_t N> inline constexpr reducer_t<N> reducer{};
-  }
-
   //================================================================================================
   //! @ingroup reductions
   //! @brief Performs a tree-like reduction of all elements of a product type.
