@@ -9,6 +9,66 @@
 
 namespace kumi
 {
+
+  //====================================================================================================================
+  /**
+    @ingroup  generators
+    @brief    Creates a tuple of product types, each containing `N` consecutive elements from `t`. Tiles starts at
+              0 and advance by `O` element each time.
+
+    On record types, this function operates on elements as if they were ordered. The considered order is the order
+    of declaration.
+
+    @tparam N Size of the tile to generate
+    @tparam O Offset from the begening of the previous tile
+    @param  t the product type from which to extract the tiles 
+    @return A tuple of product types, each containing `N` consecutive elements of `t` offset by O
+
+    @note Tiles is the most general form of tiling each inner product_type is a tile over `t`
+          starting at index `tile_size * tile_number + 1`. The last tile will be smaller if the
+          size of the product type is not a multiple of the tile size.
+    
+    ## Helper type
+    @code
+    namespace kumi::result
+    {
+      template<std::size_t N, std::size_t O, product_type T> struct tiles;
+
+      template<std::size_t N, std::size_t O, product_type T>
+      using tiles_t = typename tiles<N, T>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::tiles
+
+    ## Examples:
+    ### Tuple:
+    @include doc/tuple/algo/tiles.cpp
+    ### Record:
+    @include doc/record/algo/tiles.cpp
+  **/
+  //====================================================================================================================
+  template<std::size_t N, std::size_t O, concepts::product_type T>
+  [[nodiscard]] KUMI_ABI constexpr auto tiles(T&& t)
+  {
+    static_assert(N > 0 && N <= size_v<T>, "[KUMI] - Invalid tile size");
+    
+    if constexpr (N == size_v<T>) return kumi::make_tuple(t);
+    else
+    {
+      constexpr auto idxs = _::tiler<size_v<T>, N, O>();
+
+      auto const build = [&]<std::size_t Off, std::size_t... J>(index_t<Off>, std::index_sequence<J...>) {
+        using type = tuple<element_t<Off + J, T>...>;
+        return type{get<Off + J>(KUMI_FWD(t))...};
+      };
+
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return tuple{build(index<idxs.s[I]>, std::make_index_sequence<idxs.t[I]>{})...};
+      }(std::make_index_sequence<idxs.count>{});
+    }
+  }
+
   //====================================================================================================================
   /**
     @ingroup  generators
@@ -50,8 +110,18 @@ namespace kumi
     static_assert(N > 0 && N <= size_v<T>, "[KUMI] - Invalid tile size");
     if constexpr (N == size_v<T>) return kumi::make_tuple(t);
     else
-      return kumi::generate<size_v<T> - N + 1>(
-        [&](auto idx) { return kumi::extract(KUMI_FWD(t), kumi::index<idx>, kumi::index<idx + N>); });
+    {
+      constexpr auto idxs = _::tiler<size_v<T>, N, 1>();
+
+      auto const build = [&]<std::size_t O, std::size_t... J>(index_t<O>, std::index_sequence<J...>) {
+        using type = tuple<element_t<O + J, T>...>;
+        return type{get<O + J>(KUMI_FWD(t))...};
+      };
+
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return tuple{build(index<idxs.s[I]>, std::make_index_sequence<idxs.t[I]>{})...};
+      }(std::make_index_sequence<idxs.count>{});
+    }
   }
 
   //====================================================================================================================
@@ -94,20 +164,30 @@ namespace kumi
   template<std::size_t N, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto chunks(T&& t)
   {
     static_assert(N > 0 && N <= size_v<T>, "[KUMI] - Invalid tile size");
-    constexpr auto nb = (size_v<T> + N - 1) / N;
-    constexpr auto sz = size_v<T>;
 
     if constexpr (N == size_v<T>) return kumi::make_tuple(t);
     else
-      return kumi::generate<nb>([&](auto idx) {
-        constexpr auto chk_sz = (idx + 1) * N > sz ? sz - idx * N : N;
-        constexpr auto chk_id = idx * N;
-        return kumi::extract(KUMI_FWD(t), kumi::index<chk_id>, kumi::index<chk_id + chk_sz>);
-      });
+    {
+      constexpr auto idxs = _::tiler<size_v<T>, N, N>();
+
+      auto const build = [&]<std::size_t O, std::size_t... J>(index_t<O>, std::index_sequence<J...>) {
+        using type = tuple<element_t<O + J, T>...>;
+        return type{get<O + J>(KUMI_FWD(t))...};
+      };
+
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return tuple{build(index<idxs.s[I]>, std::make_index_sequence<idxs.t[I]>{})...};
+      }(std::make_index_sequence<idxs.count>{});
+    }
   }
 
   namespace result
   {
+    template<std::size_t N, std::size_t O, kumi::concepts::product_type T> struct tiles
+    {
+      using type = decltype(kumi::tiles<N, O>(std::declval<T>()));
+    };
+
     template<std::size_t N, kumi::concepts::product_type T> struct windows
     {
       using type = decltype(kumi::windows<N>(std::declval<T>()));
@@ -117,6 +197,9 @@ namespace kumi
     {
       using type = decltype(kumi::chunks<N>(std::declval<T>()));
     };
+
+    template<std::size_t N, std::size_t O, kumi::concepts::product_type T>
+    using tiles_t = typename tiles<N, O, T>::type;
 
     template<std::size_t N, kumi::concepts::product_type T> using windows_t = typename windows<N, T>::type;
 
