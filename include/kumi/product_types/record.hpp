@@ -69,18 +69,18 @@ namespace kumi
 
     template<std::size_t I>
     requires(I < sizeof...(Ts))
-    KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) const& noexcept
+    KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) const&& noexcept
     {
       using T = element_t<I, tuple<Ts...>>;
-      return static_cast<T const&>(static_cast<decltype(impl) const&&>(impl));
+      return static_cast<T const&&>(static_cast<decltype(impl) const&&>(impl));
     }
 
     template<std::size_t I>
     requires(I < sizeof...(Ts))
-    KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) const&& noexcept
+    KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) const& noexcept
     {
       using T = element_t<I, tuple<Ts...>>;
-      return static_cast<T const&&>(impl);
+      return static_cast<T const&>(impl);
     }
 
     //==============================================================================================
