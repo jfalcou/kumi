@@ -30,11 +30,11 @@ namespace kumi
   struct record<Ts...>
   {
     using is_record_type = void;
-    using binder_t = _::make_binder_t<std::make_integer_sequence<int, sizeof...(Ts)>, Ts...>;
+    using set_t = _::make_set_t<Ts...>;
 
     static constexpr bool is_homogeneous = false;
 
-    binder_t impl;
+    set_t impl;
 
     //==============================================================================================
     //! @name Accessors
@@ -51,35 +51,28 @@ namespace kumi
     //! ## Example:
     //! @include doc/record/api/subscript.cpp
     //==============================================================================================
-    template<std::size_t I>
-    requires(I < sizeof...(Ts))
-    KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) & noexcept
+    template<std::size_t I> constexpr decltype(auto) operator[](index_t<I>) & noexcept
     {
-      return impl(std::integral_constant<std::size_t, I>{});
+      using T = element_t<I, tuple<Ts...>>;
+      return static_cast<T&>(impl);
     }
 
-    /// @overload
-    template<std::size_t I>
-    requires(I < sizeof...(Ts))
-    KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) && noexcept
+    template<std::size_t I> constexpr decltype(auto) operator[](index_t<I>) && noexcept
     {
-      return static_cast<decltype(impl)&&>(impl)(std::integral_constant<std::size_t, I>{});
+      using T = element_t<I, tuple<Ts...>>;
+      return static_cast<T&&>(static_cast<decltype(impl)&&>(impl));
     }
 
-    /// @overload
-    template<std::size_t I>
-    requires(I < sizeof...(Ts))
-    KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) const&& noexcept
+    template<std::size_t I> constexpr decltype(auto) operator[](index_t<I>) const& noexcept
     {
-      return static_cast<decltype(impl) const&&>(impl)(std::integral_constant<std::size_t, I>{});
+      using T = element_t<I, tuple<Ts...>>;
+      return static_cast<T const&>(static_cast<decltype(impl) const&&>(impl));
     }
 
-    /// @overload
-    template<std::size_t I>
-    requires(I < sizeof...(Ts))
-    KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) const& noexcept
+    template<std::size_t I> constexpr decltype(auto) operator[](index_t<I>) const&& noexcept
     {
-      return impl(std::integral_constant<std::size_t, I>{});
+      using T = element_t<I, tuple<Ts...>>;
+      return static_cast<T const&&>(impl);
     }
 
     //==============================================================================================

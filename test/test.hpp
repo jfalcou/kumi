@@ -38,8 +38,6 @@ struct unrolling : kumi::identifier<unrolling>
   {
     return kumi::field<unrolling, std::integral_constant<int, N>>{};
   }
-
-  // std::ostream& display(std::ostream& os, auto v) const { return os << "Unroll Factor: " << v; }
 };
 
 template<int N> inline constexpr auto unroll = (unrolling{} = std::integral_constant<int, N>{});
@@ -178,8 +176,8 @@ struct record_box
   char c;
 
   template<std::size_t I>
-  friend constexpr decltype(auto) get(record_box const& s) noexcept
   requires(I < 3)
+  friend constexpr decltype(auto) get(record_box const& s) noexcept
   {
     if constexpr (I == 0) return kumi::capture_field<"i"_id>(s.i);
     if constexpr (I == 1) return kumi::capture_field<"f"_id>(s.f);
@@ -187,12 +185,26 @@ struct record_box
   }
 
   template<std::size_t I>
-  friend constexpr decltype(auto) get(record_box& s) noexcept
   requires(I < 3)
+  friend constexpr decltype(auto) get(record_box& s) noexcept
   {
     if constexpr (I == 0) return kumi::capture_field<"i"_id>(s.i);
     if constexpr (I == 1) return kumi::capture_field<"f"_id>(s.f);
     if constexpr (I == 2) return kumi::capture_field<"c"_id>(s.c);
+  }
+
+  template<kumi::concepts::identifier auto ID> friend constexpr auto const& get(record_box const& s) noexcept
+  {
+    if constexpr (ID == "i"_id) return s.i;
+    if constexpr (ID == "f"_id) return s.f;
+    if constexpr (ID == "c"_id) return s.c;
+  }
+
+  template<kumi::concepts::identifier auto ID> friend constexpr auto& get(record_box& s) noexcept
+  {
+    if constexpr (ID == "i"_id) return s.i;
+    if constexpr (ID == "f"_id) return s.f;
+    if constexpr (ID == "c"_id) return s.c;
   }
 };
 

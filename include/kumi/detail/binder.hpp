@@ -95,4 +95,19 @@ namespace kumi::_
   };
 
   template<typename ISeq, typename... Ts> using make_binder_t = typename make_binder<ISeq, Ts...>::type;
+
+  // Record binder, a record is unordered which implies no need for leaf tagging with integers. All types are also
+  // necessarily unique.
+  template<typename... Ts> struct set : Ts...
+  {
+    using Ts::operator()...;
+  };
+
+  // Specializable set type constructor
+  template<typename... Ts> struct make_set
+  {
+    using type = set<Ts...>;
+  };
+
+  template<typename... Ts> using make_set_t = typename make_set<Ts...>::type;
 }

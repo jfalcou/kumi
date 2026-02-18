@@ -15,20 +15,20 @@ struct pixel
   int r, g, b;
 };
 
-template<std::size_t I>
+template<kumi::concepts::identifier auto ID>
 decltype(auto) get(pixel const& p) noexcept
 {
-  if constexpr(I==0) return kumi::capture_field<"r"_id>(p.r);
-  if constexpr(I==1) return kumi::capture_field<"g"_id>(p.g);
-  if constexpr(I==2) return kumi::capture_field<"b"_id>(p.b);
+  if constexpr(ID == "r"_id) return p.r;
+  if constexpr(ID == "g"_id) return p.g;
+  if constexpr(ID == "b"_id) return p.b;
 }
 
-template<std::size_t I>
+template<kumi::concepts::identifier auto ID>
 decltype(auto) get(pixel& p) noexcept
 {
-  if constexpr(I==0) return kumi::capture_field<"r"_id>(p.r);
-  if constexpr(I==1) return kumi::capture_field<"g"_id>(p.g);
-  if constexpr(I==2) return kumi::capture_field<"b"_id>(p.b);
+  if constexpr(ID == "r"_id) return p.r;
+  if constexpr(ID == "g"_id) return p.g;
+  if constexpr(ID == "b"_id) return p.b;
 }
 
 // Opt-in for Record Type semantic

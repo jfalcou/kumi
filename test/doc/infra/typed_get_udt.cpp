@@ -28,6 +28,21 @@ namespace ns
     if constexpr(I==0) return s.name;
     if constexpr(I==1) return s.age;
   }
+
+  template<typename T>
+  decltype(auto) get(people const& s) noexcept
+  {
+    if constexpr(std::same_as<T,std::string>) return s.name;
+    if constexpr(std::same_as<T,int>) return s.age;
+  }
+
+  template<typename T>
+  decltype(auto) get(people& s) noexcept
+  {
+    if constexpr(std::same_as<T,std::string>) return s.name;
+    if constexpr(std::same_as<T,int>) return s.age;
+  }
+
 }
 
 // Adapt as structured bindable type
@@ -42,6 +57,6 @@ int main()
 {
   ns::people peter{"Peter Parker", 24};
     
-  std::cout << kumi::get<std::string> (peter) << "\n";
-  std::cout << kumi::get<int>         (peter) << "\n";
+  std::cout << get<std::string> (peter) << "\n";
+  std::cout << get<int>         (peter) << "\n";
 }

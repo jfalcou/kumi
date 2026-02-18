@@ -36,7 +36,7 @@ namespace kumi::_
   template<typename T>
   concept identifier = requires(T const& t) {
     typename std::remove_cvref_t<T>::tag_type;
-    { t.to_str() };
+    { std::remove_cvref_t<T>::to_str() };
   };
 
   template<typename O>

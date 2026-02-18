@@ -17,18 +17,18 @@ namespace ns
     int         age;
   };
 
-  template<std::size_t I>
+  template<kumi::concepts::identifier auto ID>
   decltype(auto) get(people const& s) noexcept
   {
-    if constexpr(I==0) return kumi::capture_field<"name"_id>( s.name );
-    if constexpr(I==1) return kumi::capture_field<"age"_id >( s.age  );
+    if constexpr(ID == "name"_id) return s.name;
+    if constexpr(ID == "age"_id) return s.age;
   }
 
-  template<std::size_t I>
+  template<kumi::concepts::identifier auto ID>
   decltype(auto) get(people& s) noexcept
   {
-    if constexpr(I==0) return kumi::capture_field<"name"_id>( s.name );
-    if constexpr(I==1) return kumi::capture_field<"age"_id>( s.age  );
+    if constexpr(ID == "name"_id) return s.name;
+    if constexpr(ID == "age"_id) return s.age;
   }
 }
 
