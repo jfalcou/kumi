@@ -43,7 +43,7 @@ namespace kumi
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::foldable{f, init} >> ... >> _::foldable{f, get<I>(KUMI_FWD(t))}).value;
+        return (_::foldable{init} >> ... >> _::bind_back(f, get<I>(KUMI_FWD(t)))).value;
       }(std::make_index_sequence<size_v<T>>());
     }
   }
@@ -119,7 +119,7 @@ namespace kumi
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::foldable{f, get<I>(KUMI_FWD(t))} << ... << _::foldable{f, init}).value;
+        return (_::bind_front(f, get<I>(KUMI_FWD(t))) << ... << _::foldable{init}).value;
       }(std::make_index_sequence<size_v<T>>());
     }
   }

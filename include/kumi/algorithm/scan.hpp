@@ -47,9 +47,9 @@ namespace kumi
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::scannable{f, tuple{invoke(f, init, get<0>(KUMI_FWD(t)))}} >> ... >>
-                _::scannable{f, get<I + 1>(KUMI_FWD(t))})
-          .acc;
+        return ([&](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); }) >>=
+               (_::scannable{nullptr, invoke(f, init, get<0>(KUMI_FWD(t)))} >> ... >>
+                _::bind_back(f, get<I + 1>(KUMI_FWD(t))));
       }(std::make_index_sequence<size_v<T> - 1>());
     }
   }
@@ -128,7 +128,8 @@ namespace kumi
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::scannable{f, tuple{init}} >> ... >> _::scannable{f, get<I>(KUMI_FWD(t))}).acc;
+        return ([&](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); }) >>=
+               (_::scannable{nullptr, init} >> ... >> _::bind_back(f, get<I>(KUMI_FWD(t))));
       }(std::make_index_sequence<size_v<T> - 1>());
     }
   }
@@ -207,9 +208,9 @@ namespace kumi
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::scannable{f, tuple{invoke(f, get<size_v<T> - 1>(KUMI_FWD(t)), init)}}
-                << ... << _::scannable{f, get<size_v<T> - 2 - I>(KUMI_FWD(t))})
-          .acc;
+        return (_::bind_front(f, get<I>(KUMI_FWD(t)))
+                << ... << _::scannable{invoke(f, get<size_v<T> - 1>(KUMI_FWD(t)), init), nullptr}) <<=
+               ([&](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); });
       }(std::make_index_sequence<size_v<T> - 1>());
     }
   }
@@ -288,7 +289,8 @@ namespace kumi
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::scannable{f, tuple{init}} << ... << _::scannable{f, get<size_v<T> - 1 - I>(KUMI_FWD(t))}).acc;
+        return (_::bind_front(f, get<I + 1>(KUMI_FWD(t))) << ... << _::scannable{init, nullptr}) <<=
+               ([&](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); });
       }(std::make_index_sequence<size_v<T> - 1>());
     }
   }

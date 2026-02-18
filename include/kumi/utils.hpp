@@ -43,3 +43,5 @@ namespace kumi
 #include <kumi/utils/ct_helpers.hpp>
 
 #include <kumi/utils/std.hpp>
+
+#include <kumi/utils/functors.hpp>

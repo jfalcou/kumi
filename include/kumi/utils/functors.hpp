@@ -9,6 +9,76 @@
 
 namespace kumi::_
 {
+  template<typename F, typename... Ts> KUMI_ABI constexpr auto bind_front(F&& f, Ts&&... ts)
+  {
+    return [&]<typename... Args>(Args&&... call_args) {
+      return invoke(KUMI_FWD(f), KUMI_FWD(ts)..., KUMI_FWD(call_args)...);
+    };
+  }
+
+  template<typename F, typename... Ts> KUMI_ABI constexpr auto bind_back(F&& f, Ts&&... ts)
+  {
+    return [&]<typename... Args>(Args&&... call_args) {
+      return invoke(KUMI_FWD(f), KUMI_FWD(call_args)..., KUMI_FWD(ts)...);
+    };
+  }
+
+  //==============================================================================================
+  // Fold helpers
+  //==============================================================================================
+  template<typename T> struct foldable
+  {
+    T value;
+
+    template<typename C> KUMI_ABI friend constexpr decltype(auto) operator>>(foldable&& x, C&& c)
+    {
+      return _::foldable{invoke(c, x.value)};
+    }
+
+    template<typename C> KUMI_ABI friend constexpr decltype(auto) operator<<(C&& c, foldable&& x)
+    {
+      return _::foldable{invoke(c, x.value)};
+    }
+  };
+
+  template<class T> foldable(T&&) -> foldable<T>;
+
+  //==============================================================================================
+  // Scan helpers
+  //==============================================================================================
+  template<typename L, typename R> struct scannable
+  {
+    L left;
+    R right;
+
+    template<typename C> KUMI_ABI friend constexpr decltype(auto) operator>>(scannable&& x, C&& c)
+    {
+      return _::scannable{
+        x,
+        invoke(c, x.right),
+      };
+    }
+
+    template<typename C> KUMI_ABI friend constexpr decltype(auto) operator>>=(C&& c, scannable const& x)
+    {
+      if constexpr (std::is_null_pointer_v<std::remove_cvref_t<L>>) return invoke(KUMI_FWD(c), x.right);
+      else return bind_back(KUMI_FWD(c), x.right) >>= x.left;
+    }
+
+    template<typename C> KUMI_ABI friend constexpr decltype(auto) operator<<(C&& c, scannable&& x)
+    {
+      return _::scannable{invoke(c, x.left), x};
+    }
+
+    template<typename C> KUMI_ABI friend constexpr decltype(auto) operator<<=(scannable const& x, C&& c)
+    {
+      if constexpr (std::is_null_pointer_v<std::remove_cvref_t<R>>) return invoke(KUMI_FWD(c), x.left);
+      else return x.right <<= bind_front(KUMI_FWD(c), x.left);
+    }
+  };
+
+  template<class L, class R> scannable(L&&, R&&) -> scannable<L, R>;
+
   //====================================================================================================================
   template<std::size_t N, std::size_t... S> struct digits
   {
@@ -34,25 +104,57 @@ namespace kumi::_
 
   template<std::size_t W, std::size_t H, std::size_t... S> struct cartesian_prod
   {
-    KUMI_ABI consteval auto operator()() noexcept
+    KUMI_ABI consteval auto operator()() const noexcept
     {
-      _::digits<W, S...> dgt{};
-      using t_t = decltype(dgt(0));
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        _::digits<W, S...> dgt{};
+        using t_t = decltype(dgt(0));
+        struct
+        {
+          t_t data[sizeof...(I)];
+        } that = {dgt(I)...};
 
+        return that;
+      }(std::make_index_sequence<H>{});
+    }
+  };
+
+  template<std::size_t W, std::size_t H, std::size_t... S>
+  inline constexpr cartesian_prod<W, H, S...> cartesian_producer{};
+
+  //====================================================================================================================
+  template<std::size_t Sz, std::size_t Extent, std::size_t Stride> struct tiler_t
+  {
+    static constexpr std::size_t nb_blocks = (Sz <= Extent) ? 1 : (Sz - Extent + Stride - 1) / Stride + 1;
+
+    static constexpr std::size_t block_size(std::size_t I)
+    {
+      std::size_t s = I * Stride;
+      return (s < Sz) ? ((s + Extent > Sz) ? (Sz - s) : Extent) : 0;
+    }
+
+    KUMI_ABI consteval auto operator()() const noexcept
+    {
       struct
       {
-        t_t data[sizeof...(Idxs)];
-      } that{};
+        std::size_t t[nb_blocks], s[nb_blocks], count = nb_blocks;
+      } that = {};
 
-      []<std::size_t... I>(std::index_sequence<I...>) { ((that.data[I] = dgt(I))...); }(std::make_index_sequence<H>{});
+      auto idxs = [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return ((that.t[I] = block_size(I), that.s[I] = I * Stride), ...);
+      };
+      idxs(std::make_index_sequence<nb_blocks>{});
       return that;
     }
   };
 
+  template<std::size_t Size, std::size_t Extent, std::size_t Stride>
+  inline constexpr tiler_t<Size, Extent, Stride> tiler{};
+
   //====================================================================================================================
   template<std::size_t Count, std::size_t... Sizes> struct concatenater_t
   {
-    consteval auto operator()() const noexcept
+    KUMI_ABI consteval auto operator()() const noexcept
     {
       struct
       {
@@ -92,53 +194,10 @@ namespace kumi::_
 
   template<typename T, auto N> using as_homogeneous_t = typename as_homogeneous<T, N>::type;
 
-  //==============================================================================================
-  // Fold helpers
-  //==============================================================================================
-  template<typename F, typename T> struct foldable
-  {
-    F func;
-    T value;
-
-    template<typename W> KUMI_ABI friend constexpr decltype(auto) operator>>(foldable&& x, foldable<F, W>&& y)
-    {
-      return _::foldable{x.func, invoke(x.func, x.value, y.value)};
-    }
-
-    template<typename W> KUMI_ABI friend constexpr decltype(auto) operator<<(foldable&& x, foldable<F, W>&& y)
-    {
-      return _::foldable{x.func, invoke(x.func, x.value, y.value)};
-    }
-  };
-
-  template<class F, class T> foldable(F const&, T&&) -> foldable<F, T>;
-
-  //==============================================================================================
-  // Scan helpers
-  //==============================================================================================
-  template<typename F, typename T> struct scannable
-  {
-    F func;
-    T acc;
-
-    template<typename W> KUMI_ABI friend constexpr decltype(auto) operator>>(scannable&& x, scannable<F, W>&& y)
-    {
-      constexpr auto size = kumi::size_v<T> - 1;
-      return _::scannable{x.func, kumi::push_back(x.acc, invoke(x.func, kumi::get<size>(x.acc), y.acc))};
-    }
-
-    template<typename W> KUMI_ABI friend constexpr decltype(auto) operator<<(scannable&& x, scannable<F, W>&& y)
-    {
-      return _::scannable{x.func, kumi::push_front(x.acc, invoke(x.func, y.acc, kumi::get<0>(x.acc)))};
-    }
-  };
-
-  template<class F, class T> scannable(F const&, T&&) -> scannable<F, T>;
-
   //====================================================================================================================
   template<template<typename> typename Pred, concepts::product_type T> struct selector_t
   {
-    KUMI_ABI constexpr auto operator()() const noexcept
+    KUMI_ABI consteval auto operator()() const noexcept
     {
       struct
       {
@@ -161,7 +220,7 @@ namespace kumi::_
   //====================================================================================================================
   template<std::size_t N> struct reducer_t
   {
-    constexpr auto operator()() const noexcept
+    KUMI_ABI consteval auto operator()() const noexcept
     {
       constexpr std::size_t half = N / 2;
 
@@ -185,7 +244,7 @@ namespace kumi::_
   //====================================================================================================================
   template<std::size_t S, std::size_t R> struct rotate_t
   {
-    KUMI_ABI constexpr auto operator()() const noexcept
+    KUMI_ABI consteval auto operator()() const noexcept
     {
       struct
       {
@@ -200,6 +259,48 @@ namespace kumi::_
   };
 
   template<std::size_t S, std::size_t R> inline constexpr rotate_t<S, R> rotator{};
+
+  //====================================================================================================================
+  template<std::size_t Count, std::size_t Size> struct zipper_t
+  {
+    KUMI_ABI consteval auto operator()() const noexcept
+    {
+      struct
+      {
+        std::size_t t[Count * Size], e[Count * Size];
+      } that = {};
+
+      std::size_t offset = 0;
+
+      auto locate = [&]<std::size_t... I>(auto k, std::index_sequence<I...>) {
+        (((that.t[I + offset] = I), (that.e[I + offset] = k)), ...);
+        offset += Count;
+      };
+
+      [&]<std::size_t... I>(std::index_sequence<I...>) {
+        (locate(index<I>, std::make_index_sequence<Count>{}), ...);
+      }(std::make_index_sequence<Size>{});
+
+      return that;
+    }
+  };
+
+  template<std::size_t Count, std::size_t Size> inline constexpr zipper_t<Count, Size> zipper{};
+
+  //====================================================================================================================
+  template<typename T0, typename... Ts> consteval std::size_t min_size_v()
+  {
+    std::size_t result = size_v<T0>;
+    if constexpr (sizeof...(Ts) == 0) return result;
+    else return ((result = result < size_v<Ts> ? result : size_v<Ts>), ...);
+  };
+
+  template<typename T0, typename... Ts> consteval std::size_t max_size_v()
+  {
+    std::size_t result = size_v<T0>;
+    if constexpr (sizeof...(Ts) == 0) return result;
+    else return ((result = result > size_v<Ts> ? result : size_v<Ts>), ...);
+  };
 
   //====================================================================================================================
   template<typename T> struct make_unique
@@ -249,48 +350,4 @@ namespace kumi::_
   };
 
   inline constexpr uniquable uniqued{};
-
-  //====================================================================================================================
-  struct zipper_t
-  {
-    template<std::size_t Size, concepts::product_type T>
-    KUMI_ABI constexpr auto operator()(index_t<Size> const&, T&& t) const noexcept
-    {
-      if constexpr (concepts::sized_product_type<T, 0>) return t;
-      else
-      {
-        constexpr auto uz = []<typename N>(N const&, auto&& u) {
-          return apply(
-            [](auto&&... m) {
-              auto zip_ = [&]<concepts::product_type V>(V&& v) {
-                if constexpr (size_v<V> <= N::value) return none;
-                else return get<N::value>(KUMI_FWD(v));
-              };
-              return builder<element_t<0, T>>::make(zip_(KUMI_FWD(m))...);
-            },
-            KUMI_FWD(u));
-        };
-
-        return [&]<std::size_t... I>(std::index_sequence<I...>) {
-          return kumi::make_tuple(uz(index_t<I>{}, KUMI_FWD(t))...);
-        }(std::make_index_sequence<Size>());
-      }
-    }
-  };
-
-  inline constexpr zipper_t zipper{};
-
-  template<typename T0, typename... Ts> consteval std::size_t min_size_v()
-  {
-    std::size_t result = size_v<T0>;
-    if constexpr (sizeof...(Ts) == 0) return result;
-    else return ((result = result < size_v<Ts> ? result : size_v<Ts>), ...);
-  };
-
-  template<typename T0, typename... Ts> consteval std::size_t max_size_v()
-  {
-    std::size_t result = size_v<T0>;
-    if constexpr (sizeof...(Ts) == 0) return result;
-    else return ((result = result > size_v<Ts> ? result : size_v<Ts>), ...);
-  };
 }

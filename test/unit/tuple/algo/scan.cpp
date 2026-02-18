@@ -43,8 +43,8 @@ TTS_CASE("Check result::inclusive_scan_right/inclusive_scan_left<...> behavior")
 {
   using res_tuple = kumi::tuple<std::size_t, std::size_t, std::size_t, std::size_t>;
 
-  using left_func_t = acc_monoid<Direction::left>;
   using right_func_t = acc_monoid<Direction::right>;
+  using left_func_t = acc_monoid<Direction::left>;
 
   TTS_TYPE_IS((kumi::result::inclusive_scan_right_t<right_func_t, kumi::tuple<char, short, int, double>, int>),
               res_tuple);

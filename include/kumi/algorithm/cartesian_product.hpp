@@ -41,7 +41,7 @@ namespace kumi
     {
       using res_type = common_product_type_t<std::remove_cvref_t<Ts>...>;
 
-      constexpr auto idx = _::cartesian_prod<sizeof...(Ts), (size_v<Ts> * ...), size_v<Ts>...>();
+      constexpr auto idx = _::cartesian_producer<sizeof...(Ts), (size_v<Ts> * ...), size_v<Ts>...>();
       //= [&]<std::size_t... I>(std::index_sequence<I...>) {
       //  kumi::_::digits<sizeof...(Ts), kumi::size_v<Ts>...> dgt{};
       //  using t_t = decltype(dgt(0));
