@@ -22,7 +22,7 @@ namespace kumi
   //================================================================================================
   template<typename U, concepts::product_type T>
   requires(concepts::typed_get_compliant<U, T>)
-  consteval auto get_index_of_type()
+  KUMI_ABI consteval auto get_index_of_type()
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
       return _::get_index_by_type_v<U, element_t<I, T>...>;
@@ -40,7 +40,7 @@ namespace kumi
   //================================================================================================
   template<concepts::identifier Name, concepts::product_type T>
   requires(concepts::named_get_compliant<Name, T>)
-  consteval auto get_index_of_field()
+  KUMI_ABI consteval auto get_index_of_field()
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
       return _::get_index_by_value_v<Name, element_t<I, T>...>;
