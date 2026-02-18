@@ -48,7 +48,7 @@ namespace kumi
 
     template<concepts::identifier I> KUMI_ABI friend constexpr auto operator==(identifier const&, I const&)
     {
-      return I::to_str() == identifier::to_str();
+      return std::same_as<std::remove_cvref_t<identifier>, std::remove_cvref_t<I>>;
     }
 
     template<typename T> constexpr field<tag_type, std::unwrap_ref_decay_t<T>> operator=(T&& v) const noexcept
@@ -108,7 +108,7 @@ namespace kumi
     // KUMI_ABI friend constexpr auto operator<=>(identifier const&, identifier const&) noexcept = default;
     template<concepts::identifier I> KUMI_ABI friend constexpr auto operator==(identifier const&, I const&)
     {
-      return I::to_str() == identifier::to_str();
+      return std::same_as<std::remove_cvref_t<identifier>, std::remove_cvref_t<I>>;
     }
 
     //==================================================================================================================
@@ -175,7 +175,7 @@ namespace kumi
     //! identifier comparison
     template<kumi::concepts::identifier I> KUMI_ABI friend constexpr auto operator==(name const&, I const&)
     {
-      return ID == I::to_str();
+      return std::same_as<std::remove_cvref_t<tag_type>, std::remove_cvref_t<I>>;
     }
 
     //==================================================================================================================

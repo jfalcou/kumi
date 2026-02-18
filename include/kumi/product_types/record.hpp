@@ -26,7 +26,7 @@ namespace kumi
   //! @tparam Ts Sequence of fields stored inside kumi::record.
   //================================================================================================
   template<typename... Ts>
-  requires(concepts::entirely_uniquely_named<Ts...>)
+  requires(concepts::entirely_uniquely_named<Ts...> && concepts::unique_display_name<Ts...>)
   struct record<Ts...>
   {
     using is_record_type = void;
@@ -261,10 +261,11 @@ namespace kumi
   // Specialisation to clearly signal errors due to duplicate fields
   //================================================================================================
   template<typename... Ts>
-  requires(!concepts::entirely_uniquely_named<Ts...>)
+  requires(!concepts::entirely_uniquely_named<Ts...> || !concepts::unique_display_name<Ts...>)
   struct record<Ts...>
   {
     static_assert(concepts::entirely_uniquely_named<Ts...>, "Duplicate fields in record definition");
+    static_assert(concepts::unique_display_name<Ts...>, "Duplicate identifier representation in record definition");
     record(Ts&&...) = delete;
   };
 
