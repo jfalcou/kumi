@@ -321,30 +321,16 @@ namespace kumi
       { std::remove_cvref_t<M>::identity };
       { std::remove_cvref_t<M>{}(std::remove_cvref_t<M>::identity, std::remove_cvref_t<M>::identity) };
     };
-  }
 
-  namespace _
-  {
-    template<typename Type, concepts::product_type T> consteval bool typed_get_compliant()
-    {
-      if constexpr (concepts::sized_product_type<T, 0>) return false;
-      else
-        return []<std::size_t... I>(std::index_sequence<I...>) {
-          if constexpr (concepts::uniquely_typed<element_t<I, T>...>)
-            return concepts::contains_type<Type, element_t<I, T>...>;
-          else return false;
-        }(std::make_index_sequence<size_v<T>>{});
-    }
+    template<typename Type, typename T>
+    concept typed_get_compliant = product_type<T> && []<std::size_t... I>(std::index_sequence<I...>) {
+      return _::can_get_field_by_type<Type, element_t<I, T>...>;
+    }(std::make_index_sequence<size_v<T>>{});
 
-    template<concepts::identifier Name, concepts::product_type T> consteval bool named_get_compliant()
-    {
-      if constexpr (concepts::sized_product_type<T, 0>) return false;
-      else
-        return []<std::size_t... I>(std::index_sequence<I...>) {
-          if constexpr (concepts::uniquely_named<element_t<I, T>...>)
-            return concepts::contains_field<Name, element_t<I, T>...>;
-          else return false;
-        }(std::make_index_sequence<size_v<T>>{});
-    }
+    template<typename Name, typename T>
+    concept named_get_compliant =
+      identifier<Name> && product_type<T> && []<std::size_t... I>(std::index_sequence<I...>) {
+        return _::can_get_field_by_value<Name, element_t<I, T>...>;
+      }(std::make_index_sequence<size_v<T>>{});
   }
 }

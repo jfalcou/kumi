@@ -13,6 +13,42 @@ namespace kumi
 {
   //================================================================================================
   //! @ingroup utility
+  //! @brief Helper to retrive the index of a type in a product type by it s type
+  //!
+  //! @note This function does not participate in overload resolution if the product type has
+  //!       several instances of the same type.
+  //!
+  //! @return the index of the element of type U in the product type if it exist
+  //================================================================================================
+  template<typename U, concepts::product_type T>
+  requires(concepts::typed_get_compliant<U, T>)
+  consteval auto get_index_of_type()
+  {
+    return [&]<std::size_t... I>(std::index_sequence<I...>) {
+      return _::get_index_by_type_v<U, element_t<I, T>...>;
+    }(std::make_index_sequence<size_v<T>>{});
+  }
+
+  //================================================================================================
+  //! @ingroup utility
+  //! @brief Helper to retrive the index of a type in a product type by it s name
+  //!
+  //! @note This function does not participate in overload resolution if the product type has
+  //!       several instances of the same name or has no name at all.
+  //!
+  //! @return the index of the element tagged with Name in the product type if it exist
+  //================================================================================================
+  template<concepts::identifier Name, concepts::product_type T>
+  requires(concepts::named_get_compliant<Name, T>)
+  consteval auto get_index_of_field()
+  {
+    return [&]<std::size_t... I>(std::index_sequence<I...>) {
+      return _::get_index_by_value_v<Name, element_t<I, T>...>;
+    }(std::make_index_sequence<size_v<T>>{});
+  }
+
+  //================================================================================================
+  //! @ingroup utility
   //! @brief Integral constant type
   //!
   //! Defines a integral constant wrapper used to carry compile-time constant through API
