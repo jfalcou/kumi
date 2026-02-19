@@ -130,13 +130,13 @@ $(document).ready(function(){initNavTree('structkumi_1_1tuple_a0c4404dcef281e286
 template&lt;typename... Ts&gt; </div>
 <div class="memtemplate">
 template&lt;std::size_t I&gt; <br />
-requires (<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">I</a> &lt; sizeof...(<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Ts</a>))</div>
+requires (<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">I</a> &lt; sizeof...(Ts))</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">constexpr</a> <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">decltype</a>(<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">auto</a>) <a class="el" href="structkumi_1_1tuple.html">kumi::tuple</a>&lt; <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Ts</a> &gt;<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">::operator</a>[] </td>
+          <td class="memname"><a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">constexpr</a> <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">decltype</a>(<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">auto</a>) <a class="el" href="structkumi_1_1tuple.html">kumi::tuple</a>&lt; Ts &gt;<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">::operator</a>[] </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structkumi_1_1index__t.html">index_t</a>&lt; <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">I</a> &gt;&#160;</td>
           <td class="paramname"><em>i</em></td><td>)</td>
@@ -159,7 +159,7 @@ requires (<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to the selected element of current tuple.</dd></dl>
-<h2><a class="anchor" id="autotoc_md182"></a>
+<h2><a class="anchor" id="autotoc_md184"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>

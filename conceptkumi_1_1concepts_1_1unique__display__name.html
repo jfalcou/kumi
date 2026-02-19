@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::get</title>
+<title>kumi: kumi::concepts::unique_display_name Concept Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('namespacekumi_a5a398ee0362752194bc85fde7f9fd01d.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('conceptkumi_1_1concepts_1_1unique__display__name.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -120,46 +120,31 @@ $(document).ready(function(){initNavTree('namespacekumi_a5a398ee0362752194bc85fd
 </div>
 </div>
 
+<div class="header">
+  <div class="headertitle"><div class="title">kumi::concepts::unique_display_name Concept Reference<div class="ingroups"><a class="el" href="group__concepts.html">Tuple Related Concepts</a></div></div></div>
+</div><!--header-->
 <div class="contents">
-<a id="a5a398ee0362752194bc85fde7f9fd01d" name="a5a398ee0362752194bc85fde7f9fd01d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a5a398ee0362752194bc85fde7f9fd01d">&#9670;&#160;</a></span>get() <span class="overload">[1/5]</span></h2>
 
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;std::integral <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">auto</a> I, <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">typename</a> T &gt; <br />
-requires (is_kumi_tuple_v&lt;std::remove_cvref_t&lt;T&gt;&gt; &amp;&amp; ((<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">I</a> &gt;= size_v&lt;T&gt;) || (<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">I</a> &lt; 0)))</div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">constexpr</a> <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">auto</a> kumi::get </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&amp;&#160;</td>
-          <td class="paramname"><em>t</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">related</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
+<p>Concept specifying if a parameter pack only holds unique <a class="el" href="structkumi_1_1str.html" title="Static string used to create named fields.">kumi::str</a> representation of the field names.  
+<a href="conceptkumi_1_1concepts_1_1unique__display__name.html#details">More...</a></p>
 
-<p>Improves diagnostic for out of bounds index. </p>
-<p>Improves diagnostic for out of bounds index. </p>
-
-</div>
-</div>
-</div><!-- contents -->
+<p><code>#include &lt;kumi/utils/concepts.hpp&gt;</code></p>
+<a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Concept specifying if a parameter pack only holds unique <a class="el" href="structkumi_1_1str.html" title="Static string used to create named fields.">kumi::str</a> representation of the field names. </p>
+</div><h2 class="groupheader">Concept definition</h2>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
+<div class="line"><span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1concepts_1_1unique__display__name.html">kumi::concepts::unique_display_name</a> = </div>
+<div class="line">      (<span class="keyword">sizeof</span>...(Ts) == 0) || (<a class="code hl_concept" href="conceptkumi_1_1concepts_1_1is__fully__named.html">is_fully_named</a>&lt;Ts...&gt; &amp;&amp; (<a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">all_uniques_v&lt;_::value&lt;std::remove_cvref_t&lt;Ts&gt;::name</a>()&gt;...&gt;))</div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1is__fully__named_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1is__fully__named.html">kumi::concepts::is_fully_named</a></div><div class="ttdoc">Concept specifying if parameter pack contains only kumi::field_captures.</div><div class="ttdef"><b>Definition</b> concepts.hpp:220</div></div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1unique__display__name_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1unique__display__name.html">kumi::concepts::unique_display_name</a></div><div class="ttdoc">Concept specifying if a parameter pack only holds unique kumi::str representation of the field names.</div><div class="ttdef"><b>Definition</b> concepts.hpp:242</div></div>
+<div class="ttc" id="agroup__utility_gacadc026868e6654e80c57432643c804a_html_gacadc026868e6654e80c57432643c804a"><div class="ttname"><a href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">kumi::if_</a></div><div class="ttdeci">constexpr traits_check&lt; Traits &gt; if_</div><div class="ttdoc">Option specifying a traits that type should verify for being used as a identifier value.</div><div class="ttdef"><b>Definition</b> identifier.hpp:38</div></div>
+</div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 <!-- HTML footer for doxygen 1.8.20-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li>
+    <li class="navelem"><a class="el" href="namespacekumi.html">kumi</a></li><li class="navelem"><b>concepts</b></li><li class="navelem"><a class="el" href="conceptkumi_1_1concepts_1_1unique__display__name.html">unique_display_name</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

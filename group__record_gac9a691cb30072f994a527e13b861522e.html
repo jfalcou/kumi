@@ -128,7 +128,7 @@ $(document).ready(function(){initNavTree('group__record_gac9a691cb30072f994a527e
 <div class="memproto">
 <div class="memtemplate">
 template&lt;concepts::identifier auto... Fields, typename... Ts&gt; <br />
-requires (sizeof...(<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Fields</a>) == sizeof...(<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Ts</a>))</div>
+requires (sizeof...(<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Fields</a>) == sizeof...(Ts))</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -136,9 +136,9 @@ requires (sizeof...(<a class="el" href="group__utility_gacadc026868e6654e80c5743
         <tr>
           <td class="memname"><a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">constexpr</a> <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">auto</a> kumi::tie </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Ts</a> &amp;...&#160;</td>
+          <td class="paramtype">Ts &amp;...&#160;</td>
           <td class="paramname"><em>ts</em></td><td>)</td>
-          <td> -&gt; <a class="el" href="structkumi_1_1record.html">record</a>&lt;<a class="el" href="structkumi_1_1field.html">field</a>&lt;<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">decltype</a>(<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Fields</a>), <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Ts</a>&amp;&gt;...&gt;
+          <td> -&gt; <a class="el" href="structkumi_1_1record.html">record</a>&lt;<a class="el" href="structkumi_1_1field.html">field</a>&lt;<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">decltype</a>(<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Fields</a>), Ts&amp;&gt;...&gt;
   </td>
         </tr>
       </table>
@@ -187,7 +187,7 @@ Example:</h2>
 <div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">i</a> &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">d</a> &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">f</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__generators_gaf6a234ed8630b3928724cf8fefbc9c6d_html_gaf6a234ed8630b3928724cf8fefbc9c6d"><div class="ttname"><a href="group__generators_gaf6a234ed8630b3928724cf8fefbc9c6d.html#gaf6a234ed8630b3928724cf8fefbc9c6d">kumi::generate</a></div><div class="ttdeci">constexpr auto generate(Function const &amp;f) noexcept</div><div class="ttdoc">Creates a kumi::tuple containing N applications of the f Callable.</div><div class="ttdef"><b>Definition</b> generate.hpp:68</div></div>
-<div class="ttc" id="agroup__record_gac9a691cb30072f994a527e13b861522e_html_gac9a691cb30072f994a527e13b861522e"><div class="ttname"><a href="group__record_gac9a691cb30072f994a527e13b861522e.html#gac9a691cb30072f994a527e13b861522e">kumi::tie</a></div><div class="ttdeci">constexpr auto tie(Ts &amp;... ts) -&gt; record&lt; field&lt; decltype(Fields), Ts &amp; &gt;... &gt;</div><div class="ttdoc">Creates a kumi::record of lvalue references to its arguments.</div><div class="ttdef"><b>Definition</b> record.hpp:311</div></div>
+<div class="ttc" id="agroup__record_gac9a691cb30072f994a527e13b861522e_html_gac9a691cb30072f994a527e13b861522e"><div class="ttname"><a href="group__record_gac9a691cb30072f994a527e13b861522e.html#gac9a691cb30072f994a527e13b861522e">kumi::tie</a></div><div class="ttdeci">constexpr auto tie(Ts &amp;... ts) -&gt; record&lt; field&lt; decltype(Fields), Ts &amp; &gt;... &gt;</div><div class="ttdoc">Creates a kumi::record of lvalue references to its arguments.</div><div class="ttdef"><b>Definition</b> record.hpp:355</div></div>
 <div class="ttc" id="agroup__utility_gacadc026868e6654e80c57432643c804a_html_gacadc026868e6654e80c57432643c804a"><div class="ttname"><a href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">kumi::if_</a></div><div class="ttdeci">constexpr traits_check&lt; Traits &gt; if_</div><div class="ttdoc">Option specifying a traits that type should verify for being used as a identifier value.</div><div class="ttdef"><b>Definition</b> identifier.hpp:38</div></div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous fields necessarily named, names are unique.</div><div class="ttdef"><b>Definition</b> traits.hpp:459</div></div>
 </div><!-- fragment --> 

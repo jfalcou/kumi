@@ -180,9 +180,9 @@ requires (concepts::compatible_product_types&lt;<a class="el" href="group__utili
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Function</a>, product_type T, product_type... <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Ts</a>&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__transforms_ga2096ba88ea732e93bd9025952ae1f9f2.html#ga2096ba88ea732e93bd9025952ae1f9f2">map_field</a>;</div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Function</a>, product_type T, product_type... Ts&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__transforms_ga2096ba88ea732e93bd9025952ae1f9f2.html#ga2096ba88ea732e93bd9025952ae1f9f2">map_field</a>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Function</a>, product_type T, product_type... <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Ts</a>&gt;</div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Function</a>, product_type T, product_type... Ts&gt;</div>
 <div class="line">  <span class="keyword">using </span>map_field_t = <span class="keyword">typename</span> map_field&lt;Function,Tuple&gt;::type;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__transforms_ga2096ba88ea732e93bd9025952ae1f9f2_html_ga2096ba88ea732e93bd9025952ae1f9f2"><div class="ttname"><a href="group__transforms_ga2096ba88ea732e93bd9025952ae1f9f2.html#ga2096ba88ea732e93bd9025952ae1f9f2">kumi::map_field</a></div><div class="ttdeci">constexpr auto map_field(Function f, Tuple &amp;&amp;t0, Tuples &amp;&amp;... others)</div><div class="ttdoc">Apply the Callable object f on each records' elements and their field names.</div><div class="ttdef"><b>Definition</b> map.hpp:169</div></div>
@@ -211,7 +211,7 @@ Example</h2>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">res</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1name_html"><div class="ttname"><a href="structkumi_1_1name.html">kumi::name</a></div><div class="ttdoc">Compile-time text based ID.</div><div class="ttdef"><b>Definition</b> identifier.hpp:163</div></div>
+<div class="ttc" id="astructkumi_1_1name_html"><div class="ttname"><a href="structkumi_1_1name.html">kumi::name</a></div><div class="ttdoc">Compile-time text based ID.</div><div class="ttdef"><b>Definition</b> identifier.hpp:169</div></div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous fields necessarily named, names are unique.</div><div class="ttdef"><b>Definition</b> traits.hpp:459</div></div>
 </div><!-- fragment --> 
 </div>

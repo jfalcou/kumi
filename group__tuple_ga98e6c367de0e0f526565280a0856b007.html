@@ -135,9 +135,9 @@ template&lt;typename... Ts&gt; </div>
         <tr>
           <td class="memname"><a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">constexpr</a> <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">auto</a> kumi::make_tuple </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Ts</a> &amp;&amp;...&#160;</td>
+          <td class="paramtype">Ts &amp;&amp;...&#160;</td>
           <td class="paramname"><em>ts</em></td><td>)</td>
-          <td> -&gt; <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;std::unwrap_ref_decay_t&lt;<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Ts</a>&gt;...&gt;
+          <td> -&gt; <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt;std::unwrap_ref_decay_t&lt;Ts&gt;...&gt;
   </td>
         </tr>
       </table>
@@ -156,7 +156,7 @@ template&lt;typename... Ts&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> constructed from the ts or their inner references when ts is an instance of <code>std::reference_wrapper</code>. </dd></dl>
-<h2><a class="anchor" id="autotoc_md173"></a>
+<h2><a class="anchor" id="autotoc_md175"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>

@@ -136,7 +136,7 @@ requires (concepts::uniquely_typed&lt;Ts...&gt; &amp;&amp; concepts::contains_ty
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">constexpr</a> <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">decltype</a>(<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">auto</a>) <a class="el" href="structkumi_1_1tuple.html">kumi::tuple</a>&lt; <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Ts</a> &gt;<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">::operator</a>[] </td>
+          <td class="memname"><a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">constexpr</a> <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">decltype</a>(<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">auto</a>) <a class="el" href="structkumi_1_1tuple.html">kumi::tuple</a>&lt; Ts &gt;<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">::operator</a>[] </td>
           <td>(</td>
           <td class="paramtype"><a class="el" href="structkumi_1_1as.html">as</a>&lt; T &gt;&#160;</td>
           <td class="paramname"></td><td>)</td>
@@ -159,7 +159,7 @@ requires (concepts::uniquely_typed&lt;Ts...&gt; &amp;&amp; concepts::contains_ty
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to the selected element of current tuple.</dd></dl>
-<h2><a class="anchor" id="autotoc_md183"></a>
+<h2><a class="anchor" id="autotoc_md185"></a>
 Example:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -167,8 +167,6 @@ Example:</h2>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">main</a>()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
-<div class="line"> </div>
 <div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">t</a> = { 1, 2.3, 4.5f, <span class="charliteral">&#39;@&#39;</span> };</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// It is possible to have mixed nammed and unnamed fields</span></div>

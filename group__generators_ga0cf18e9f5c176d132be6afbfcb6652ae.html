@@ -136,7 +136,7 @@ requires (concepts::follows_same_semantic&lt;Ts...&gt;)</div>
         <tr>
           <td class="memname"><a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">constexpr</a> <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">auto</a> kumi::cartesian_product </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Ts</a> &amp;&amp;...&#160;</td>
+          <td class="paramtype">Ts &amp;&amp;...&#160;</td>
           <td class="paramname"><em>ts</em></td><td>)</td>
           <td></td>
         </tr>
@@ -160,13 +160,12 @@ requires (concepts::follows_same_semantic&lt;Ts...&gt;)</div>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;product_type... <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Ts</a>&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__generators_ga0cf18e9f5c176d132be6afbfcb6652ae.html#ga0cf18e9f5c176d132be6afbfcb6652ae">cartesian_product</a>;</div>
+<div class="line">  <span class="keyword">template</span>&lt;product_type... Ts&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__generators_ga0cf18e9f5c176d132be6afbfcb6652ae.html#ga0cf18e9f5c176d132be6afbfcb6652ae">cartesian_product</a>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">template</span>&lt;product_type... <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Ts</a>&gt;</div>
-<div class="line">  <span class="keyword">using </span>cartesian_product_t = <span class="keyword">typename</span> <a class="code hl_function" href="group__generators_ga0cf18e9f5c176d132be6afbfcb6652ae.html#ga0cf18e9f5c176d132be6afbfcb6652ae">cartesian_product</a>&lt;<a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Ts</a>...&gt;::type;</div>
+<div class="line">  <span class="keyword">template</span>&lt;product_type... Ts&gt;</div>
+<div class="line">  <span class="keyword">using </span>cartesian_product_t = <span class="keyword">typename</span> <a class="code hl_function" href="group__generators_ga0cf18e9f5c176d132be6afbfcb6652ae.html#ga0cf18e9f5c176d132be6afbfcb6652ae">cartesian_product</a>&lt;Ts...&gt;::type;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__generators_ga0cf18e9f5c176d132be6afbfcb6652ae_html_ga0cf18e9f5c176d132be6afbfcb6652ae"><div class="ttname"><a href="group__generators_ga0cf18e9f5c176d132be6afbfcb6652ae.html#ga0cf18e9f5c176d132be6afbfcb6652ae">kumi::cartesian_product</a></div><div class="ttdeci">constexpr auto cartesian_product(Ts &amp;&amp;... ts)</div><div class="ttdoc">Return the Cartesian Product of all elements of its arguments product types.</div><div class="ttdef"><b>Definition</b> cartesian_product.hpp:63</div></div>
-<div class="ttc" id="agroup__utility_gacadc026868e6654e80c57432643c804a_html_gacadc026868e6654e80c57432643c804a"><div class="ttname"><a href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">kumi::if_</a></div><div class="ttdeci">constexpr traits_check&lt; Traits &gt; if_</div><div class="ttdoc">Option specifying a traits that type should verify for being used as a identifier value.</div><div class="ttdef"><b>Definition</b> identifier.hpp:38</div></div>
 <div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
 </div><!-- fragment --><p>Computes the type returned by a call to <a class="el" href="group__generators_ga0cf18e9f5c176d132be6afbfcb6652ae.html#ga0cf18e9f5c176d132be6afbfcb6652ae" title="Return the Cartesian Product of all elements of its arguments product types.">kumi::cartesian_product</a>.</p>
 <h2><a class="anchor" id="autotoc_md7"></a>
@@ -193,6 +192,7 @@ Example:</h2>
 <div class="line">                      );</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__transforms_ga1e4f9df80b8d396b32e2f5d3316caea9_html_ga1e4f9df80b8d396b32e2f5d3316caea9"><div class="ttname"><a href="group__transforms_ga1e4f9df80b8d396b32e2f5d3316caea9.html#ga1e4f9df80b8d396b32e2f5d3316caea9">kumi::for_each_index</a></div><div class="ttdeci">constexpr void for_each_index(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a kumi::product_type and its index.</div><div class="ttdef"><b>Definition</b> for_each.hpp:79</div></div>
+<div class="ttc" id="agroup__utility_gacadc026868e6654e80c57432643c804a_html_gacadc026868e6654e80c57432643c804a"><div class="ttname"><a href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">kumi::if_</a></div><div class="ttdeci">constexpr traits_check&lt; Traits &gt; if_</div><div class="ttdoc">Option specifying a traits that type should verify for being used as a identifier value.</div><div class="ttdef"><b>Definition</b> identifier.hpp:38</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:32</div></div>
 </div><!-- fragment --> 
 </div>

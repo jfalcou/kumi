@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.9.8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::get</title>
+<title>kumi: kumi::get_index_of_field</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -95,7 +95,7 @@ var searchBox = new SearchBox("searchBox", "search/",'.html');
 </div>
 <script type="text/javascript">
 /* @license magnet:?xt=urn:btih:d3d9a9a6595521f9666a5e94cc830dab83b65699&amp;dn=expat.txt MIT */
-$(document).ready(function(){initNavTree('namespacekumi_a8642711b7ee9134eb4e2fc8d79acb0de.html',''); initResizable(); });
+$(document).ready(function(){initNavTree('group__utility_ga81e729d4960f2f8835af863296ff13b5.html',''); initResizable(); });
 /* @license-end */
 </script>
 <div id="doc-content">
@@ -121,36 +121,35 @@ $(document).ready(function(){initNavTree('namespacekumi_a8642711b7ee9134eb4e2fc8
 </div>
 
 <div class="contents">
-<a id="a8642711b7ee9134eb4e2fc8d79acb0de" name="a8642711b7ee9134eb4e2fc8d79acb0de"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a8642711b7ee9134eb4e2fc8d79acb0de">&#9670;&#160;</a></span>get() <span class="overload">[3/5]</span></h2>
+<a id="ga81e729d4960f2f8835af863296ff13b5" name="ga81e729d4960f2f8835af863296ff13b5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga81e729d4960f2f8835af863296ff13b5">&#9670;&#160;</a></span>get_index_of_field()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="structkumi_1_1str.html">str</a> S, <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">typename</a> T &gt; <br />
-requires (is_kumi_tuple_v&lt;std::remove_cvref_t&lt;T&gt;&gt; &amp;&amp; !_::contains_field&lt;<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">S</a>, T&gt;())</div>
+template&lt;concepts::identifier Name, concepts::product_type T&gt; <br />
+requires (concepts::named_get_compliant&lt;<a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">Name</a>, T&gt;)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">constexpr</a> <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">auto</a> kumi::get </td>
+          <td class="memname"><a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">consteval</a> <a class="el" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">auto</a> kumi::get_index_of_field </td>
           <td>(</td>
-          <td class="paramtype">T &amp;&amp;&#160;</td>
-          <td class="paramname"><em>t</em></td><td>)</td>
+          <td class="paramname"></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">related</span></span>  </td>
+<span class="mlabels"><span class="mlabel">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Improves diagnostic for non present name. </p>
-<p>Improves diagnostic for non present name.</p>
-<p>Improves diagnostic for out of bounds index. </p>
+<p>Helper to retrive the index of a type in a product type by it s name. </p>
+<dl class="section note"><dt>Note</dt><dd>This function does not participate in overload resolution if the product type has several instances of the same name or has no name at all.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>the index of the element tagged with Name in the product type if it exist </dd></dl>
 
 </div>
 </div>
