@@ -19,16 +19,16 @@ struct my_record_type
   constexpr auto operator<=>(my_record_type const&) const = default;
 };
 
-template<std::size_t I> constexpr decltype(auto) get(my_record_type const& m) noexcept
+template<kumi::concepts::identifier auto ID> constexpr decltype(auto) get(my_record_type const& m) noexcept
 {
-  if constexpr (I == 0) return kumi::capture_field<"a"_id>(m.n);
-  if constexpr (I == 1) return kumi::capture_field<"data"_id>(m.data);
+  if constexpr (ID == "n"_id) return m.n;
+  if constexpr (ID == "data"_id) return m.data;
 }
 
-template<std::size_t I> constexpr decltype(auto) get(my_record_type& m) noexcept
+template<kumi::concepts::identifier auto ID> constexpr decltype(auto) get(my_record_type& m) noexcept
 {
-  if constexpr (I == 0) return kumi::capture_field<"n"_id>(m.n);
-  if constexpr (I == 1) return kumi::capture_field<"data"_id>(m.data);
+  if constexpr (ID == "n"_id) return m.n;
+  if constexpr (ID == "data"_id) return m.data;
 }
 
 template<> struct kumi::is_record_type<my_record_type> : std::true_type

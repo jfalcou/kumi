@@ -125,6 +125,7 @@ namespace kumi
     //====================================================================================================================
     template<typename T>
     concept identifier = kumi::_::identifier<T>;
+
     //================================================================================================
     //! @ingroup concepts
     //! @brief Concept specifying a type follows the Product Type semantic and has a known size
@@ -209,14 +210,14 @@ namespace kumi
     //! @brief Concept specifying if parameter pack containes a kumi::field_capture.
     //================================================================================================
     template<typename... Ts>
-    concept has_named_fields = (... || field<std::remove_cvref_t<Ts>>);
+    concept has_named_fields = (... || field<Ts>);
 
     //================================================================================================
     //! @ingroup concepts
     //! @brief Concept specifying if parameter pack contains only kumi::field_captures.
     //================================================================================================
     template<typename... Ts>
-    concept is_fully_named = (... && field<std::remove_cvref_t<Ts>>);
+    concept is_fully_named = (... && field<Ts>);
 
     //================================================================================================
     //! @ingroup concepts
@@ -231,6 +232,15 @@ namespace kumi
     //================================================================================================
     template<typename... Ts>
     concept uniquely_named = (has_named_fields<Ts...>) && all_unique_names_v<std::remove_cvref_t<Ts>...>;
+
+    //================================================================================================
+    //! @ingroup concepts
+    //! @brief  Concept specifying if a parameter pack only holds unique kumi::str representation of the
+    //!         field names.
+    //================================================================================================
+    template<typename... Ts>
+    concept unique_display_name =
+      (sizeof...(Ts) == 0) || (is_fully_named<Ts...> && (all_uniques_v<_::value<std::remove_cvref_t<Ts>::name()>...>));
 
     //================================================================================================
     //! @ingroup concepts
@@ -321,30 +331,29 @@ namespace kumi
       { std::remove_cvref_t<M>::identity };
       { std::remove_cvref_t<M>{}(std::remove_cvref_t<M>::identity, std::remove_cvref_t<M>::identity) };
     };
-  }
 
-  namespace _
-  {
-    template<typename Type, concepts::product_type T> consteval bool typed_get_compliant()
-    {
-      if constexpr (concepts::sized_product_type<T, 0>) return false;
-      else
-        return []<std::size_t... I>(std::index_sequence<I...>) {
-          if constexpr (concepts::uniquely_typed<element_t<I, T>...>)
-            return concepts::contains_type<Type, element_t<I, T>...>;
-          else return false;
-        }(std::make_index_sequence<size_v<T>>{});
-    }
+    //================================================================================================
+    //! @ingroup concepts
+    //! @brief Concept specifying if a product type can be queried via a `get<type>`
+    //!
+    //! A product type `Ts` models `typed_get_compliant` if it's members are uniquely typed.
+    //! For a `record_type` it inspects the underlying type of the fields.
+    //================================================================================================
+    template<typename Type, typename T>
+    concept typed_get_compliant = product_type<T> && []<std::size_t... I>(std::index_sequence<I...>) {
+      return _::can_get_field_by_type<Type, element_t<I, T>...>;
+    }(std::make_index_sequence<size_v<T>>{});
 
-    template<concepts::identifier Name, concepts::product_type T> consteval bool named_get_compliant()
-    {
-      if constexpr (concepts::sized_product_type<T, 0>) return false;
-      else
-        return []<std::size_t... I>(std::index_sequence<I...>) {
-          if constexpr (concepts::uniquely_named<element_t<I, T>...>)
-            return concepts::contains_field<Name, element_t<I, T>...>;
-          else return false;
-        }(std::make_index_sequence<size_v<T>>{});
-    }
+    //================================================================================================
+    //! @ingroup concepts
+    //! @brief Concept specifying if a product type can be queried via a `get<identifier>`
+    //!
+    //! A product type `Ts` models `named_get_compliant` if it's members are uniquely named.
+    //================================================================================================
+    template<typename Name, typename T>
+    concept named_get_compliant =
+      identifier<Name> && product_type<T> && []<std::size_t... I>(std::index_sequence<I...>) {
+        return _::can_get_field_by_value<Name, element_t<I, T>...>;
+      }(std::make_index_sequence<size_v<T>>{});
   }
 }

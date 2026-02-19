@@ -17,6 +17,10 @@ namespace kumi::_
   {
   };
 
+  template<auto ID> struct value
+  {
+  };
+
   using invalid = std::integral_constant<std::size_t, static_cast<std::size_t>(-1)>;
 
   template<typename From, typename To>
@@ -36,7 +40,7 @@ namespace kumi::_
   template<typename T>
   concept identifier = requires(T const& t) {
     typename std::remove_cvref_t<T>::tag_type;
-    { t.to_str() };
+    { std::remove_cvref_t<T>::to_str() };
   };
 
   template<typename O>

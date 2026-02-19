@@ -8,8 +8,6 @@
 
 int main()
 {
-  using namespace kumi::literals;
-
   kumi::tuple t = { 1, 2.3, 4.5f, '@' };
 
   // It is possible to have mixed nammed and unnamed fields

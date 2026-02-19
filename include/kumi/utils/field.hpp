@@ -23,6 +23,7 @@ namespace kumi
   {
     using type = T;
     using identifier_type = Id;
+    using inner_type = std::type_identity<T>;
 
     T value;
 
@@ -36,6 +37,14 @@ namespace kumi
     KUMI_ABI constexpr T const& operator()(identifier_type) const& noexcept { return value; }
 
     KUMI_ABI constexpr T const&& operator()(identifier_type) const&& noexcept { return static_cast<T const&&>(value); }
+
+    KUMI_ABI constexpr T& operator()(inner_type) & noexcept { return value; }
+
+    KUMI_ABI constexpr T&& operator()(inner_type) && noexcept { return static_cast<T&&>(value); }
+
+    KUMI_ABI constexpr T const& operator()(inner_type) const& noexcept { return value; }
+
+    KUMI_ABI constexpr T const&& operator()(inner_type) const&& noexcept { return static_cast<T const&&>(value); }
 
     //==============================================================================================
     /// @ingroup product_types
@@ -56,6 +65,7 @@ namespace kumi
   {
     using type = T;
     using identifier_type = Id;
+    using inner_type = std::type_identity<T>;
 
     /// Name associated to the field
     static constexpr auto name() { return Id::to_str(); }
@@ -67,6 +77,14 @@ namespace kumi
     KUMI_ABI constexpr T const& operator()(identifier_type) const& noexcept { return *this; }
 
     KUMI_ABI constexpr T const&& operator()(identifier_type) const&& noexcept { return static_cast<T const&&>(*this); }
+
+    KUMI_ABI constexpr T& operator()(inner_type) & noexcept { return *this; }
+
+    KUMI_ABI constexpr T&& operator()(inner_type) && noexcept { return static_cast<T&&>(*this); }
+
+    KUMI_ABI constexpr T const& operator()(inner_type) const& noexcept { return *this; }
+
+    KUMI_ABI constexpr T const&& operator()(inner_type) const&& noexcept { return static_cast<T const&&>(*this); }
 
     //==============================================================================================
     /// @ingroup product_types

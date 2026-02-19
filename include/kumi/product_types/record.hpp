@@ -26,15 +26,15 @@ namespace kumi
   //! @tparam Ts Sequence of fields stored inside kumi::record.
   //================================================================================================
   template<typename... Ts>
-  requires(concepts::entirely_uniquely_named<Ts...>)
+  requires(concepts::entirely_uniquely_named<Ts...> && concepts::unique_display_name<Ts...>)
   struct record<Ts...>
   {
     using is_record_type = void;
-    using binder_t = _::make_binder_t<std::make_integer_sequence<int, sizeof...(Ts)>, Ts...>;
+    using set_t = _::make_set_t<Ts...>;
 
     static constexpr bool is_homogeneous = false;
 
-    binder_t impl;
+    set_t impl;
 
     //==============================================================================================
     //! @name Accessors
@@ -55,31 +55,74 @@ namespace kumi
     requires(I < sizeof...(Ts))
     KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) & noexcept
     {
-      return impl(std::integral_constant<std::size_t, I>{});
+      using T = element_t<I, tuple<Ts...>>;
+      return static_cast<T&>(impl);
     }
 
-    /// @overload
     template<std::size_t I>
     requires(I < sizeof...(Ts))
     KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) && noexcept
     {
-      return static_cast<decltype(impl)&&>(impl)(std::integral_constant<std::size_t, I>{});
+      using T = element_t<I, tuple<Ts...>>;
+      return static_cast<T&&>(static_cast<decltype(impl)&&>(impl));
     }
 
-    /// @overload
     template<std::size_t I>
     requires(I < sizeof...(Ts))
     KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) const&& noexcept
     {
-      return static_cast<decltype(impl) const&&>(impl)(std::integral_constant<std::size_t, I>{});
+      using T = element_t<I, tuple<Ts...>>;
+      return static_cast<T const&&>(static_cast<decltype(impl) const&&>(impl));
     }
 
-    /// @overload
     template<std::size_t I>
     requires(I < sizeof...(Ts))
     KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) const& noexcept
     {
-      return impl(std::integral_constant<std::size_t, I>{});
+      using T = element_t<I, tuple<Ts...>>;
+      return static_cast<T const&>(impl);
+    }
+
+    //==============================================================================================
+    //! @brief Extracts the Ith element from a kumi::tuple
+    //!
+    //! @note Does not participate in overload resolution if `T` is not present in the tuple or if
+    //!       the tuple contains duplicate types
+    //! @tparam T the type to access in the tuple
+    //! @return A reference to the selected element of current tuple.
+    //!
+    //! ## Example:
+    //! @include doc/record/api/typed_subscript.cpp
+    //==============================================================================================
+    template<typename T>
+    requires(concepts::uniquely_typed<_::type_of_t<Ts>...> && concepts::contains_type<T, _::type_of_t<Ts>...>)
+    KUMI_ABI constexpr decltype(auto) operator[](as<T>) & noexcept
+    {
+      return impl(std::type_identity<T>{});
+    }
+
+    /// @overload
+    template<typename T>
+    requires(concepts::uniquely_typed<_::type_of_t<Ts>...> && concepts::contains_type<T, _::type_of_t<Ts>...>)
+    KUMI_ABI constexpr decltype(auto) operator[](as<T>) && noexcept
+    {
+      return static_cast<decltype(impl)&&>(impl)(std::type_identity<T>{});
+    }
+
+    /// @overload
+    template<typename T>
+    requires(concepts::uniquely_typed<_::type_of_t<Ts>...> && concepts::contains_type<T, _::type_of_t<Ts>...>)
+    KUMI_ABI constexpr decltype(auto) operator[](as<T>) const&& noexcept
+    {
+      return static_cast<decltype(impl) const&&>(impl)(std::type_identity<T>{});
+    }
+
+    /// @overload
+    template<typename T>
+    requires(concepts::uniquely_typed<_::type_of_t<Ts>...> && concepts::contains_type<T, _::type_of_t<Ts>...>)
+    KUMI_ABI constexpr decltype(auto) operator[](as<T>) const& noexcept
+    {
+      return impl(std::type_identity<T>{});
     }
 
     //==============================================================================================
@@ -268,10 +311,11 @@ namespace kumi
   // Specialisation to clearly signal errors due to duplicate fields
   //================================================================================================
   template<typename... Ts>
-  requires(!concepts::entirely_uniquely_named<Ts...>)
+  requires(!concepts::entirely_uniquely_named<Ts...> || !concepts::unique_display_name<Ts...>)
   struct record<Ts...>
   {
     static_assert(concepts::entirely_uniquely_named<Ts...>, "Duplicate fields in record definition");
+    static_assert(concepts::unique_display_name<Ts...>, "Duplicate identifier representation in record definition");
     record(Ts&&...) = delete;
   };
 
@@ -560,6 +604,50 @@ namespace kumi
   }
 
   //================================================================================================
+  //! @ingroup record
+  //! @brief Extracts the field which underlying type is T from a kumi::record if it exist
+  //!
+  //! @note     Does not participate in overload resolution if the types are not unique
+  //! @tparam   T Type of the element to access
+  //! @param    r Record to index
+  //! @return   A reference to the selected element of t.
+  //! @related kumi::record
+  //!
+  //! ## Example:
+  //! @include doc/record/api/typed_get.cpp
+  //================================================================================================
+  template<typename T, typename... Ts>
+  requires(concepts::uniquely_typed<_::type_of_t<Ts>...> && concepts::contains_type<T, _::type_of_t<Ts>...>)
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>& r) noexcept
+  {
+    return r[as<T>{}];
+  }
+
+  /// @overload
+  template<typename T, typename... Ts>
+  requires(concepts::uniquely_typed<_::type_of_t<Ts>...> && concepts::contains_type<T, _::type_of_t<Ts>...>)
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>&& r) noexcept
+  {
+    return static_cast<record<Ts...>&&>(r)[as<T>{}];
+  }
+
+  /// @overload
+  template<typename T, typename... Ts>
+  requires(concepts::uniquely_typed<_::type_of_t<Ts>...> && concepts::contains_type<T, _::type_of_t<Ts>...>)
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const& r) noexcept
+  {
+    return r[as<T>{}];
+  }
+
+  /// @overload
+  template<typename T, typename... Ts>
+  requires(concepts::uniquely_typed<_::type_of_t<Ts>...> && concepts::contains_type<T, _::type_of_t<Ts>...>)
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const&& r) noexcept
+  {
+    return static_cast<record<Ts...> const&&>(r)[as<T>{}];
+  }
+
+  //================================================================================================
   //! @}
   //================================================================================================
 
@@ -580,7 +668,7 @@ namespace kumi
 
   /// No get<type> on records
   template<typename U, typename R>
-  requires(is_kumi_record_v<std::remove_cvref_t<R>>)
+  requires(is_kumi_record_v<std::remove_cvref_t<R>> && !concepts::contains_type<U, R>)
   constexpr auto get(R&& r) = delete;
 
   // Builder protocole

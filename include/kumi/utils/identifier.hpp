@@ -46,7 +46,10 @@ namespace kumi
     constexpr identifier() noexcept {};
     constexpr identifier(ID const&) noexcept {};
 
-    KUMI_ABI friend constexpr auto operator<=>(identifier const&, identifier const&) noexcept = default;
+    template<concepts::identifier I> KUMI_ABI friend constexpr auto operator==(identifier const&, I const&)
+    {
+      return std::same_as<std::remove_cvref_t<identifier>, std::remove_cvref_t<I>>;
+    }
 
     template<typename T> constexpr field<tag_type, std::unwrap_ref_decay_t<T>> operator=(T&& v) const noexcept
     {
@@ -62,9 +65,9 @@ namespace kumi
 
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os,
-                                                         identifier const& f) noexcept
+                                                         identifier const&) noexcept
     {
-      return os << f.to_str();
+      return os << identifier::to_str();
     }
   };
 
@@ -102,7 +105,10 @@ namespace kumi
     constexpr identifier([[maybe_unused]] ID const& id, [[maybe_unused]] Checker const& chk) noexcept {};
 
     //! identifier comparison
-    KUMI_ABI friend constexpr auto operator<=>(identifier const&, identifier const&) noexcept = default;
+    template<concepts::identifier I> KUMI_ABI friend constexpr auto operator==(identifier const&, I const&)
+    {
+      return std::same_as<std::remove_cvref_t<identifier>, std::remove_cvref_t<I>>;
+    }
 
     //==================================================================================================================
     //! @brief Assignment of a value to a identifier
@@ -145,9 +151,9 @@ namespace kumi
     //! @brief Output stream insertion
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os,
-                                                         identifier const& f) noexcept
+                                                         identifier const&) noexcept
     {
-      return os << f.to_str();
+      return os << identifier::to_str();
     }
   };
 
@@ -166,7 +172,10 @@ namespace kumi
     static constexpr auto to_str() { return ID; }
 
     //! identifier comparison
-    KUMI_ABI friend constexpr auto operator<=>(name const&, name const&) noexcept = default;
+    template<kumi::concepts::identifier I> KUMI_ABI friend constexpr auto operator==(name const&, I const&)
+    {
+      return std::same_as<std::remove_cvref_t<tag_type>, std::remove_cvref_t<I>>;
+    }
 
     //==================================================================================================================
     //! @brief Assignment of a value to a identifier
@@ -184,9 +193,9 @@ namespace kumi
     //! @related kumi::name
     //! @brief Output stream insertion
     template<typename CharT, typename Traits>
-    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, name const& f) noexcept
+    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, name const&) noexcept
     {
-      return os << f.to_str();
+      return os << ID;
     }
   };
 

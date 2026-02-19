@@ -17,18 +17,18 @@ namespace ns
     int         age;
   };
 
-  template<std::size_t I>
+  template<kumi::concepts::identifier auto ID>
   decltype(auto) get(people const& s) noexcept
   {
-    if constexpr(I==0) return kumi::capture_field<"name"_id>( s.name );
-    if constexpr(I==1) return kumi::capture_field<"age"_id>( s.age  );
+    if constexpr(ID == "name"_id) return s.name;
+    if constexpr(ID == "age"_id) return s.age;
   }
 
-  template<std::size_t I>
+  template<kumi::concepts::identifier auto ID>
   decltype(auto) get(people& s) noexcept
   {
-    if constexpr(I==0) return kumi::capture_field<"name"_id>( s.name );
-    if constexpr(I==1) return kumi::capture_field<"age"_id>( s.age  );
+    if constexpr(ID=="name"_id) return s.name;
+    if constexpr(ID=="age"_id) return s.age;
   }
 }
 
@@ -47,8 +47,9 @@ template<> struct std::tuple_element<1,ns::people> { using type = kumi::field<ku
 
 int main()
 {
+  using namespace kumi::literals;
   ns::people peter{"Peter Parker", 24};
     
-  std::cout << kumi::get<"name">(peter) << "\n";
-  std::cout << kumi::get<"age"> (peter) << "\n";
+  std::cout << get<"name"_id>(peter) << "\n";
+  std::cout << get<"age"_id> (peter) << "\n";
 }
