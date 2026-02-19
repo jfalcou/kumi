@@ -105,7 +105,6 @@ namespace kumi
     constexpr identifier([[maybe_unused]] ID const& id, [[maybe_unused]] Checker const& chk) noexcept {};
 
     //! identifier comparison
-    // KUMI_ABI friend constexpr auto operator<=>(identifier const&, identifier const&) noexcept = default;
     template<concepts::identifier I> KUMI_ABI friend constexpr auto operator==(identifier const&, I const&)
     {
       return std::same_as<std::remove_cvref_t<identifier>, std::remove_cvref_t<I>>;

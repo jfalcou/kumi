@@ -336,7 +336,7 @@ namespace kumi
     //! @ingroup concepts
     //! @brief Concept specifying if a product type can be queried via a `get<type>`
     //!
-    //! A product type `Ts` models `typped_get_compliant` if it's members are uniquely typped.
+    //! A product type `Ts` models `typed_get_compliant` if it's members are uniquely typed.
     //! For a `record_type` it inspects the underlying type of the fields.
     //================================================================================================
     template<typename Type, typename T>
