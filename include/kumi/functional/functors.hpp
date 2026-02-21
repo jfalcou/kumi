@@ -9,76 +9,6 @@
 
 namespace kumi::_
 {
-  template<typename F, typename... Ts> KUMI_ABI constexpr auto bind_front(F&& f, Ts&&... ts)
-  {
-    return [&]<typename... Args>(Args&&... call_args) {
-      return invoke(KUMI_FWD(f), KUMI_FWD(ts)..., KUMI_FWD(call_args)...);
-    };
-  }
-
-  template<typename F, typename... Ts> KUMI_ABI constexpr auto bind_back(F&& f, Ts&&... ts)
-  {
-    return [&]<typename... Args>(Args&&... call_args) {
-      return invoke(KUMI_FWD(f), KUMI_FWD(call_args)..., KUMI_FWD(ts)...);
-    };
-  }
-
-  //==============================================================================================
-  // Fold helpers
-  //==============================================================================================
-  template<typename T> struct foldable
-  {
-    T value;
-
-    template<typename C> KUMI_ABI friend constexpr decltype(auto) operator>>(foldable&& x, C&& c)
-    {
-      return _::foldable{invoke(c, x.value)};
-    }
-
-    template<typename C> KUMI_ABI friend constexpr decltype(auto) operator<<(C&& c, foldable&& x)
-    {
-      return _::foldable{invoke(c, x.value)};
-    }
-  };
-
-  template<class T> foldable(T&&) -> foldable<T>;
-
-  //==============================================================================================
-  // Scan helpers
-  //==============================================================================================
-  template<typename L, typename R> struct scannable
-  {
-    L left;
-    R right;
-
-    template<typename C> KUMI_ABI friend constexpr decltype(auto) operator>>(scannable&& x, C&& c)
-    {
-      return _::scannable{
-        x,
-        invoke(c, x.right),
-      };
-    }
-
-    template<typename C> KUMI_ABI friend constexpr decltype(auto) operator>>=(C&& c, scannable const& x)
-    {
-      if constexpr (std::is_null_pointer_v<std::remove_cvref_t<L>>) return invoke(KUMI_FWD(c), x.right);
-      else return bind_back(KUMI_FWD(c), x.right) >>= x.left;
-    }
-
-    template<typename C> KUMI_ABI friend constexpr decltype(auto) operator<<(C&& c, scannable&& x)
-    {
-      return _::scannable{invoke(c, x.left), x};
-    }
-
-    template<typename C> KUMI_ABI friend constexpr decltype(auto) operator<<=(scannable const& x, C&& c)
-    {
-      if constexpr (std::is_null_pointer_v<std::remove_cvref_t<R>>) return invoke(KUMI_FWD(c), x.left);
-      else return x.right <<= bind_front(KUMI_FWD(c), x.left);
-    }
-  };
-
-  template<class L, class R> scannable(L&&, R&&) -> scannable<L, R>;
-
   //====================================================================================================================
   template<std::size_t N, std::size_t... S> struct digits
   {
@@ -310,7 +240,8 @@ namespace kumi::_
     template<typename W> KUMI_ABI friend constexpr decltype(auto) operator|(make_unique&& x, make_unique<W>&& y)
     {
       constexpr auto value = []<std::size_t... I>(std::index_sequence<I...>) {
-        return (all_uniques_v<W, raw_element_t<I, T>...>);
+        if constexpr (concepts::record_type<T>) return (all_uniques_v<_::type_of_t<W>, raw_element_t<I, T>...>);
+        else return (all_uniques_v<W, raw_element_t<I, T>...>);
       }(std::make_index_sequence<size_v<T>>{});
 
       if constexpr (value)

@@ -11,6 +11,7 @@
 #include <kumi/fwd.hpp>
 #include <kumi/detail.hpp>
 #include <kumi/utils.hpp>
+#include <kumi/functional.hpp>
 #include <kumi/product_types.hpp>
 #include <kumi/algorithm.hpp>
 

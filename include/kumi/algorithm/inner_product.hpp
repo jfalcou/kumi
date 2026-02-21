@@ -75,15 +75,14 @@ namespace kumi
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return (_::foldable{init} >> ... >>
                 _::bind_back(sum, invoke(prod, get<identifier_of<element_t<I, S1>>()>(KUMI_FWD(s1)),
-                                         get<identifier_of<element_t<I, S1>>()>(KUMI_FWD(s2)))))
-          .value;
+                                         get<identifier_of<element_t<I, S1>>()>(KUMI_FWD(s2)))))();
       }(std::make_index_sequence<size<S1>::value>());
     }
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::foldable{init} >> ... >> _::bind_back(sum, invoke(prod, get<I>(KUMI_FWD(s1)), get<I>(KUMI_FWD(s2)))))
-          .value;
+        return (_::foldable{init} >> ... >>
+                _::bind_back(sum, invoke(prod, get<I>(KUMI_FWD(s1)), get<I>(KUMI_FWD(s2)))))();
       }(std::make_index_sequence<size<S1>::value>());
     }
   }

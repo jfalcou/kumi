@@ -45,7 +45,7 @@ namespace kumi
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
       return builder<T>::make(KUMI_FWD(v), get<I>(KUMI_FWD(t))...);
-    }(std::make_index_sequence<size_v<T>>());
+    }(std::make_index_sequence<size_v<T>>{});
   }
 
   //====================================================================================================================
@@ -82,7 +82,10 @@ namespace kumi
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto pop_front(T&& t)
   {
     if constexpr (concepts::empty_product_type<T>) return builder<T>::make();
-    else return extract(KUMI_FWD(t), index<1>);
+    else
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return builder<T>::make(get<I + 1>(KUMI_FWD(t))...);
+      }(std::make_index_sequence<size_v<T> - 1>{});
   }
 
   //====================================================================================================================
@@ -158,7 +161,10 @@ namespace kumi
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto pop_back(T&& t)
   {
     if constexpr (concepts::empty_product_type<T>) return builder<T>::make();
-    else return extract(KUMI_FWD(t), index<0>, index<size_v<T> - 1>);
+    else
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return builder<T>::make(get<I>(KUMI_FWD(t))...);
+      }(std::make_index_sequence<size_v<T> - 1>{});
   }
 
   namespace result

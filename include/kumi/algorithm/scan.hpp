@@ -52,10 +52,10 @@ namespace kumi
     else if constexpr (concepts::empty_product_type<T>) return tuple{};
     else
     {
+      auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return ([&](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); }) >>=
-               (_::scannable{nullptr, invoke(f, init, get<0>(KUMI_FWD(t)))} >> ... >>
-                _::bind_back(f, get<I + 1>(KUMI_FWD(t))));
+        return (_::scannable{op, invoke(f, init, get<0>(KUMI_FWD(t)))} >> ... >>
+                _::bind_back(f, get<I + 1>(KUMI_FWD(t))))();
       }(std::make_index_sequence<size_v<T> - 1>());
     }
   }
@@ -145,9 +145,9 @@ namespace kumi
     else if constexpr (concepts::empty_product_type<T>) return tuple{init};
     else
     {
+      auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return ([&](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); }) >>=
-               (_::scannable{nullptr, init} >> ... >> _::bind_back(f, get<I>(KUMI_FWD(t))));
+        return (_::scannable{op, init} >> ... >> _::bind_back(f, get<I>(KUMI_FWD(t))))();
       }(std::make_index_sequence<size_v<T> - 1>());
     }
   }
@@ -237,10 +237,10 @@ namespace kumi
     else if constexpr (concepts::empty_product_type<T>) return tuple{};
     else
     {
+      auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return (_::bind_front(f, get<I>(KUMI_FWD(t)))
-                << ... << _::scannable{invoke(f, get<size_v<T> - 1>(KUMI_FWD(t)), init), nullptr}) <<=
-               ([&](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); });
+                << ... << _::scannable{op, invoke(f, get<size_v<T> - 1>(KUMI_FWD(t)), init)})();
       }(std::make_index_sequence<size_v<T> - 1>());
     }
   }
@@ -330,9 +330,9 @@ namespace kumi
     else if constexpr (concepts::empty_product_type<T>) return tuple{init};
     else
     {
+      auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::bind_front(f, get<I + 1>(KUMI_FWD(t))) << ... << _::scannable{init, nullptr}) <<=
-               ([&](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); });
+        return (_::bind_front(f, get<I + 1>(KUMI_FWD(t))) << ... << _::scannable{op, init})();
       }(std::make_index_sequence<size_v<T> - 1>());
     }
   }
