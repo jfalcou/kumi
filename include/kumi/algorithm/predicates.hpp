@@ -119,6 +119,7 @@ namespace kumi
       }(std::make_index_sequence<size_v<T>>{});
   }
 
+<<<<<<< HEAD
   //====================================================================================================================
   /**
     @ingroup  queries
@@ -136,10 +137,10 @@ namespace kumi
     @include doc/record/algo/none_of.cpp
   **/
   //====================================================================================================================
-  template<typename Pred, concepts::product_type Tuple>
-  [[nodiscard]] KUMI_ABI constexpr bool none_of(Tuple&& ts, Pred p) noexcept
+  template<typename Pred, concepts::product_type T>
+  [[nodiscard]] KUMI_ABI constexpr bool none_of(T&& t, Pred p) noexcept
   {
-    return !any_of(KUMI_FWD(ts), p);
+    return !any_of(KUMI_FWD(t), p);
   }
 
   //====================================================================================================================

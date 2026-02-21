@@ -23,6 +23,11 @@ namespace kumi::_
     };
   }
 
+  template<typename F, typename... Ts> KUMI_ABI constexpr auto bind(F&& f, Ts&&... ts)
+  {
+    return [&] { return invoke(KUMI_FWD(f), KUMI_FWD(ts)...); };
+  }
+
   //==============================================================================================
   // Fold helpers
   //==============================================================================================
@@ -53,10 +58,7 @@ namespace kumi::_
 
     template<typename C> KUMI_ABI friend constexpr decltype(auto) operator>>(scannable&& x, C&& c)
     {
-      return _::scannable{
-        x,
-        invoke(c, x.right),
-      };
+      return _::scannable{x, invoke(c, x.right)};
     }
 
     template<typename C> KUMI_ABI friend constexpr decltype(auto) operator>>=(C&& c, scannable const& x)
@@ -78,6 +80,24 @@ namespace kumi::_
   };
 
   template<class L, class R> scannable(L&&, R&&) -> scannable<L, R>;
+
+  //==============================================================================================
+  // Flatten helpers
+  //==============================================================================================
+  // template<typename F> struct flattenable
+  //{
+  //  F func;
+
+  //  template<typename C> KUMI_ABI friend constexpr decltype(auto) operator>>(flattenable&& x, C&& c)
+  //  {
+  //    return _::flattenable{bind_back(func, c)};
+  //  }
+
+  //  template<typename C> KUMI_ABI friend constexpr decltype(auto) operator<<(flattenable&& x, C&& c)
+  //  {
+  //    return _::flattenable{bind_front(func, c)};
+  //  }
+  //};
 
   //====================================================================================================================
   template<std::size_t N, std::size_t... S> struct digits

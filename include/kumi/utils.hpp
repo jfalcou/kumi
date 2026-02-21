@@ -46,19 +46,12 @@ namespace kumi
 }
 
 #include <kumi/utils/as.hpp>
-#include <kumi/utils/invoke.hpp>
-
 #include <kumi/utils/traits.hpp>
 #include <kumi/utils/builder.hpp>
 #include <kumi/utils/concepts.hpp>
-
 #include <kumi/utils/unit_type.hpp>
 #include <kumi/utils/identifier.hpp>
-#include <kumi/utils/monoid.hpp>
-
+#include <kumi/utils/meta.hpp>
 #include <kumi/utils/ct_helpers.hpp>
 #include <kumi/utils/projections.hpp>
-
 #include <kumi/utils/std.hpp>
-
-#include <kumi/utils/functors.hpp>
