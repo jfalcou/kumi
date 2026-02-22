@@ -14,22 +14,23 @@ TTS_CASE("Check result::reindex<Record,Indexes> behavior")
 {
   using namespace kumi;
 
-  using char_t = field<name<"c">, char>;
-  using short_t = field<name<"s">, short>;
-  using int_t = field<name<"i">, int>;
-  using double_t = field<name<"d">, double>;
-  using float_t = field<name<"f">, float>;
+  using charf_t = field<name<"c">, char>;
+  using shortf_t = field<name<"s">, short>;
+  using intf_t = field<name<"i">, int>;
+  using doublef_t = field<name<"d">, double>;
+  using floatf_t = field<name<"f">, float>;
 
-  using record_t = record<char_t, short_t, int_t, double_t>;
+  using record_t = record<charf_t, shortf_t, intf_t, doublef_t>;
 
   constexpr auto id1 = indexes(0, 1, 2, 3);
   constexpr auto id2 = indexes(1, 2, 3, 0);
 
   TTS_TYPE_IS((result::reindex_t<record_t, id1>), record_t);
-  TTS_TYPE_IS((result::reindex_t<record_t, id2>), (record<short_t, int_t, double_t, char_t>));
+  TTS_TYPE_IS((result::reindex_t<record_t, id2>), (record<shortf_t, intf_t, doublef_t, charf_t>));
 
-  using nested_t = record<field<name<"inner">, record<int_t, float_t>>, int_t>;
-  TTS_TYPE_IS((kumi::result::reindex_t<nested_t, indexes(0)>), (record<field<name<"inner">, record<int_t, float_t>>>));
+  using nested_t = record<field<name<"inner">, record<intf_t, floatf_t>>, intf_t>;
+  TTS_TYPE_IS((kumi::result::reindex_t<nested_t, indexes(0)>),
+              (record<field<name<"inner">, record<intf_t, floatf_t>>>));
 };
 
 TTS_CASE("Check reindex<Indexes>(record) behavior")
