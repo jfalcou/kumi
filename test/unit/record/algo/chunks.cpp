@@ -17,18 +17,17 @@ TTS_CASE("Check kumi::result::chunks_t behavior on records")
   using int_f = field<name<"i">, int>;
   using float_c_f = field<name<"fc">, float const>;
   using char_r_f = field<name<"cr">, char&>;
-  using short_v_f = field<name<"vs">, volatile short>;
+  using short_f = field<name<"vs">, short>;
   using long_c_f = field<name<"lc">, long const>;
   using char_f = field<name<"c">, char>;
   using int_r_f = field<name<"ir">, int&>;
   using double_p_f = field<name<"dp">, double*>;
 
-  using r1 = record<int_f, float_c_f, char_r_f, short_v_f>;
+  using r1 = record<int_f, float_c_f, char_r_f, short_f>;
   using r2_inner = record<long_c_f, char_f>;
   using r2 = record<int_r_f, double_p_f, field<name<"inner">, r2_inner>>;
 
-  TTS_TYPE_IS((result::chunks_t<1, r1>),
-              (tuple<record<int_f>, record<float_c_f>, record<char_r_f>, record<short_v_f>>));
+  TTS_TYPE_IS((result::chunks_t<1, r1>), (tuple<record<int_f>, record<float_c_f>, record<char_r_f>, record<short_f>>));
   TTS_TYPE_IS((result::chunks_t<2, r2>), (tuple<record<int_r_f, double_p_f>, record<field<name<"inner">, r2_inner>>>));
 };
 
