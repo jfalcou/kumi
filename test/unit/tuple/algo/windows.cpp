@@ -11,7 +11,7 @@
 #include <tts/tts.hpp>
 #include "test.hpp"
 
-TTS_CASE("Check kumi::result::windows behavior")
+TTS_CASE("Check kumi::result::windows_t behavior on tuples")
 {
   using t1 = kumi::tuple<int, float const, char&, volatile short>;
   using t2_inner = kumi::tuple<long const, char>;
@@ -24,7 +24,7 @@ TTS_CASE("Check kumi::result::windows behavior")
               (kumi::tuple<kumi::tuple<int&, double*>, kumi::tuple<double*, t2_inner>>));
 };
 
-TTS_CASE("Check runtime kumi::windows behavior")
+TTS_CASE("Check runtime kumi::windows behavior on tuples")
 {
   auto t1 = kumi::tuple{1, 3.f, 5., 'x', short{77}};
   auto t2 = kumi::tuple{112, -18.f, kumi::tuple{'1', long{22}, kumi::str{"Yes"}}};

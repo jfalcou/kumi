@@ -39,7 +39,6 @@ TTS_CASE("Check kumi::contains constexpr behavior")
   using namespace kumi::literals;
 
   constexpr kumi::tuple values{"custom"_id = foo{}, value_ = 3.f, is_modal_};
-  ;
 
   TTS_CONSTEXPR_EXPECT(kumi::contains(values, "custom"_id));
   TTS_CONSTEXPR_EXPECT(kumi::contains(values, value_));
@@ -66,7 +65,6 @@ TTS_CASE("Check kumi::contains_any constexpr behavior")
   using namespace kumi::literals;
 
   constexpr kumi::tuple values{"custom"_id = foo{}, value_ = 3.f, is_modal_};
-  ;
 
   TTS_CONSTEXPR_EXPECT(kumi::contains_any(values, "value_"_id, "is_modal_"_id, "custom"_id));
   TTS_CONSTEXPR_EXPECT_NOT(kumi::contains_any(values, "is_transparent_"_id, "compact"_id));
@@ -78,7 +76,6 @@ TTS_CASE("Check kumi::contains_only behavior")
   using namespace kumi::literals;
 
   kumi::tuple values{"kw1"_id = 1, "kw2"_id = 1, "kw3"_id = 1};
-  ;
 
   TTS_EXPECT(kumi::contains_only(values, "kw1"_id, "kw2"_id, "kw3"_id));
   TTS_EXPECT(kumi::contains_only(values, "kw1"_id, "kw3"_id, "kw2"_id));
@@ -96,7 +93,6 @@ TTS_CASE("Check kumi::contains_only constexpr behavior")
   using namespace kumi::literals;
 
   constexpr kumi::tuple values{"kw1"_id = 1, "kw2"_id = 1, "kw3"_id = 1};
-  ;
 
   TTS_CONSTEXPR_EXPECT(kumi::contains_only(values, "kw1"_id, "kw2"_id, "kw3"_id));
   TTS_CONSTEXPR_EXPECT(kumi::contains_only(values, "kw1"_id, "kw3"_id, "kw2"_id));
@@ -125,7 +121,6 @@ TTS_CASE("Check kumi::contains_none constexpr behavior")
   using namespace kumi::literals;
 
   constexpr kumi::tuple values{"custom"_id = foo{}, value_ = 3.f, "is_modal_"_id};
-  ;
 
   TTS_CONSTEXPR_EXPECT(kumi::contains_none(values, "is_transparent_"_id, "compact"_id));
   TTS_CONSTEXPR_EXPECT_NOT(kumi::contains_none(values, "value_"_id));

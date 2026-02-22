@@ -31,7 +31,7 @@ namespace kumi
   {
     if constexpr (concepts::sized_product_type<T, 0>) return false;
     else if constexpr (concepts::record_type<T>)
-      return []<std::size_t... I> {
+      return []<std::size_t... I>(std::index_sequence<I...>) {
         return _::can_get_field_by_value<std::remove_cvref_t<K>, element_t<I, T>...>;
       }(std::make_index_sequence<size_v<T>>{});
     else

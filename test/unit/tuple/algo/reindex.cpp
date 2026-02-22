@@ -29,125 +29,125 @@ TTS_CASE("Check result::reindex<Tuple,Indexes> behavior")
   TTS_TYPE_IS((kumi::result::reindex_t<nested_t, kumi::indexes(0)>), (kumi::tuple<kumi::tuple<int, float>>));
 };
 
-TTS_CASE("Check reindex<Indexes>(tuple) behavior"){{auto t = kumi::tuple{1, 2., 3.4f, '5'};
+TTS_CASE("Check reindex<Indexes>(tuple) behavior")
 {
-  constexpr auto id = kumi::indexes(0, 1, 2, 3);
-  auto s = kumi::reindex<id>(t);
-  TTS_EQUAL(s, t);
-}
+  auto t = kumi::tuple{1, 2., 3.4f, '5'};
+  {
+    constexpr auto id = kumi::indexes(0, 1, 2, 3);
+    auto s = kumi::reindex<id>(t);
+    TTS_EQUAL(s, t);
+  }
 
-{
-  constexpr auto id = kumi::indexes(3, 2, 1, 0);
-  auto s = kumi::reindex<id>(t);
-  TTS_EQUAL(s, (kumi::tuple{'5', 3.4f, 2., 1}));
-}
+  {
+    constexpr auto id = kumi::indexes(3, 2, 1, 0);
+    auto s = kumi::reindex<id>(t);
+    TTS_EQUAL(s, (kumi::tuple{'5', 3.4f, 2., 1}));
+  }
 
-{
-  constexpr auto id = kumi::indexes(0, 1, 2);
-  auto s = kumi::reindex<id>(t);
-  TTS_EQUAL(s, (kumi::tuple{1, 2., 3.4f}));
-}
+  {
+    constexpr auto id = kumi::indexes(0, 1, 2);
+    auto s = kumi::reindex<id>(t);
+    TTS_EQUAL(s, (kumi::tuple{1, 2., 3.4f}));
+  }
 
-{
-  constexpr auto id = kumi::indexes(0, 1);
-  auto s = kumi::reindex<id>(t);
-  TTS_EQUAL(s, (kumi::tuple{1, 2.}));
-}
+  {
+    constexpr auto id = kumi::indexes(0, 1);
+    auto s = kumi::reindex<id>(t);
+    TTS_EQUAL(s, (kumi::tuple{1, 2.}));
+  }
 
-{
-  constexpr auto id = kumi::indexes(0);
-  auto s = kumi::reindex<id>(t);
-  TTS_EQUAL(s, (kumi::tuple{1}));
-}
+  {
+    constexpr auto id = kumi::indexes(0);
+    auto s = kumi::reindex<id>(t);
+    TTS_EQUAL(s, (kumi::tuple{1}));
+  }
 
-{
-  constexpr auto id = kumi::indexes(1);
-  auto s = kumi::reindex<id>(t);
-  TTS_EQUAL(s, (kumi::tuple{2.}));
-}
+  {
+    constexpr auto id = kumi::indexes(1);
+    auto s = kumi::reindex<id>(t);
+    TTS_EQUAL(s, (kumi::tuple{2.}));
+  }
 
-{
-  constexpr auto id = kumi::indexes(2);
-  auto s = kumi::reindex<id>(t);
-  TTS_EQUAL(s, (kumi::tuple{3.4f}));
-}
+  {
+    constexpr auto id = kumi::indexes(2);
+    auto s = kumi::reindex<id>(t);
+    TTS_EQUAL(s, (kumi::tuple{3.4f}));
+  }
 
-{
-  constexpr auto id = kumi::indexes(3);
-  auto s = kumi::reindex<id>(t);
-  TTS_EQUAL(s, (kumi::tuple{'5'}));
-}
+  {
+    constexpr auto id = kumi::indexes(3);
+    auto s = kumi::reindex<id>(t);
+    TTS_EQUAL(s, (kumi::tuple{'5'}));
+  }
 
-{
-  constexpr auto id = kumi::indexes(0, 1, 2, 3, 2, 1, 0);
-  auto s = kumi::reindex<id>(t);
-  TTS_EQUAL(s, (kumi::tuple{1, 2., 3.4f, '5', 3.4f, 2., 1}));
-}
-{
-  constexpr auto id = kumi::indexes(0, 1, 2, 3, 2, 1, 0);
-  auto s = kumi::reindex<id>(std::move(t));
-  TTS_EQUAL(s, (kumi::tuple{1, 2., 3.4f, '5', 3.4f, 2., 1}));
-}
-{
-  constexpr auto id = kumi::indexes(0, 1, 2, 3, kumi::indexes(3, 2, 1, 0));
-  auto s = kumi::reindex<id>(t);
-  TTS_EQUAL(s, (kumi::tuple{1, 2., 3.4f, '5', kumi::tuple{'5', 3.4f, 2., 1}}));
-}
-}
-}
-;
+  {
+    constexpr auto id = kumi::indexes(0, 1, 2, 3, 2, 1, 0);
+    auto s = kumi::reindex<id>(t);
+    TTS_EQUAL(s, (kumi::tuple{1, 2., 3.4f, '5', 3.4f, 2., 1}));
+  }
+  {
+    constexpr auto id = kumi::indexes(0, 1, 2, 3, 2, 1, 0);
+    auto s = kumi::reindex<id>(std::move(t));
+    TTS_EQUAL(s, (kumi::tuple{1, 2., 3.4f, '5', 3.4f, 2., 1}));
+  }
+  {
+    constexpr auto id = kumi::indexes(0, 1, 2, 3, kumi::indexes(3, 2, 1, 0));
+    auto s = kumi::reindex<id>(t);
+    TTS_EQUAL(s, (kumi::tuple{1, 2., 3.4f, '5', kumi::tuple{'5', 3.4f, 2., 1}}));
+  }
+};
 
-TTS_CASE("Check reindex<Indexes>(tuple) constexpr behavior"){{constexpr auto t = kumi::tuple{1, 2., 3.4f, '5'};
+TTS_CASE("Check reindex<Indexes>(tuple) constexpr behavior")
 {
-  constexpr auto id = kumi::indexes(0, 1, 2, 3);
-  constexpr auto s = kumi::reindex<id>(t);
-  TTS_CONSTEXPR_EQUAL(s, t);
-}
-{
-  constexpr auto id = kumi::indexes(3, 2, 1, 0);
-  constexpr auto s = kumi::reindex<id>(t);
-  TTS_CONSTEXPR_EQUAL(s, (kumi::tuple{'5', 3.4f, 2., 1}));
-}
-{
-  constexpr auto id = kumi::indexes(0, 1, 2);
-  constexpr auto s = kumi::reindex<id>(t);
-  TTS_CONSTEXPR_EQUAL(s, (kumi::tuple{1, 2., 3.4f}));
-}
-{
-  constexpr auto id = kumi::indexes(0, 1);
-  constexpr auto s = kumi::reindex<id>(t);
-  TTS_CONSTEXPR_EQUAL(s, (kumi::tuple{1, 2.}));
-}
-{
-  constexpr auto id = kumi::indexes(0);
-  constexpr auto s = kumi::reindex<id>(t);
-  TTS_CONSTEXPR_EQUAL(s, (kumi::tuple{1}));
-}
-{
-  constexpr auto id = kumi::indexes(1);
-  constexpr auto s = kumi::reindex<id>(t);
-  TTS_CONSTEXPR_EQUAL(s, (kumi::tuple{2.}));
-}
-{
-  constexpr auto id = kumi::indexes(2);
-  constexpr auto s = kumi::reindex<id>(t);
-  TTS_CONSTEXPR_EQUAL(s, (kumi::tuple{3.4f}));
-}
-{
-  constexpr auto id = kumi::indexes(3);
-  constexpr auto s = kumi::reindex<id>(t);
-  TTS_CONSTEXPR_EQUAL(s, (kumi::tuple{'5'}));
-}
-{
-  constexpr auto id = kumi::indexes(0, 1, 2, 3, 2, 1, 0);
-  constexpr auto s = kumi::reindex<id>(t);
-  TTS_CONSTEXPR_EQUAL(s, (kumi::tuple{1, 2., 3.4f, '5', 3.4f, 2., 1}));
-}
-{
-  constexpr auto id = kumi::indexes(0, 1, 2, 3, kumi::indexes(3, 2, 1, 0));
-  constexpr auto s = kumi::reindex<id>(t);
-  TTS_CONSTEXPR_EQUAL(s, (kumi::tuple{1, 2., 3.4f, '5', kumi::tuple{'5', 3.4f, 2., 1}}));
-}
-}
-}
-;
+  constexpr auto t = kumi::tuple{1, 2., 3.4f, '5'};
+  {
+    constexpr auto id = kumi::indexes(0, 1, 2, 3);
+    constexpr auto s = kumi::reindex<id>(t);
+    TTS_CONSTEXPR_EQUAL(s, t);
+  }
+  {
+    constexpr auto id = kumi::indexes(3, 2, 1, 0);
+    constexpr auto s = kumi::reindex<id>(t);
+    TTS_CONSTEXPR_EQUAL(s, (kumi::tuple{'5', 3.4f, 2., 1}));
+  }
+  {
+    constexpr auto id = kumi::indexes(0, 1, 2);
+    constexpr auto s = kumi::reindex<id>(t);
+    TTS_CONSTEXPR_EQUAL(s, (kumi::tuple{1, 2., 3.4f}));
+  }
+  {
+    constexpr auto id = kumi::indexes(0, 1);
+    constexpr auto s = kumi::reindex<id>(t);
+    TTS_CONSTEXPR_EQUAL(s, (kumi::tuple{1, 2.}));
+  }
+  {
+    constexpr auto id = kumi::indexes(0);
+    constexpr auto s = kumi::reindex<id>(t);
+    TTS_CONSTEXPR_EQUAL(s, (kumi::tuple{1}));
+  }
+  {
+    constexpr auto id = kumi::indexes(1);
+    constexpr auto s = kumi::reindex<id>(t);
+    TTS_CONSTEXPR_EQUAL(s, (kumi::tuple{2.}));
+  }
+  {
+    constexpr auto id = kumi::indexes(2);
+    constexpr auto s = kumi::reindex<id>(t);
+    TTS_CONSTEXPR_EQUAL(s, (kumi::tuple{3.4f}));
+  }
+  {
+    constexpr auto id = kumi::indexes(3);
+    constexpr auto s = kumi::reindex<id>(t);
+    TTS_CONSTEXPR_EQUAL(s, (kumi::tuple{'5'}));
+  }
+  {
+    constexpr auto id = kumi::indexes(0, 1, 2, 3, 2, 1, 0);
+    constexpr auto s = kumi::reindex<id>(t);
+    TTS_CONSTEXPR_EQUAL(s, (kumi::tuple{1, 2., 3.4f, '5', 3.4f, 2., 1}));
+  }
+  {
+    constexpr auto id = kumi::indexes(0, 1, 2, 3, kumi::indexes(3, 2, 1, 0));
+    constexpr auto s = kumi::reindex<id>(t);
+    TTS_CONSTEXPR_EQUAL(s, (kumi::tuple{1, 2., 3.4f, '5', kumi::tuple{'5', 3.4f, 2., 1}}));
+  }
+};
