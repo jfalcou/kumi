@@ -33,7 +33,7 @@ namespace kumi
   //!
   //! ## Examples:
   //! @include doc/tuple/algo/fold_left.cpp
-  //! @include doc/tuple/algo/fold_left.cpp
+  //! @include doc/record/algo/fold_left.cpp
   //================================================================================================
   template<typename Function, concepts::product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto fold_left(Function f, T&& t, Value init)
@@ -71,7 +71,7 @@ namespace kumi
   //!
   //! ## Examples:
   //! @include doc/tuple/algo/fold_left.cpp
-  //! @include doc/tuple/algo/fold_left.cpp
+  //! @include doc/record/algo/fold_left.cpp
   //================================================================================================
   template<typename Function, concepts::sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto fold_left(Function f, T&& t)
@@ -109,7 +109,7 @@ namespace kumi
   //!
   //! ## Examples:
   //! @include doc/tuple/algo/fold_right.cpp
-  //! @include doc/tuple/algo/fold_right.cpp
+  //! @include doc/record/algo/fold_right.cpp
   //================================================================================================
   template<typename Function, concepts::product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto fold_right(Function f, T&& t, Value init)
@@ -147,7 +147,7 @@ namespace kumi
   //!
   //! ## Examples:
   //! @include doc/tuple/algo/fold_right.cpp
-  //! @include doc/tuple/algo/fold_right.cpp
+  //! @include doc/record/algo/fold_right.cpp
   //================================================================================================
   template<typename Function, concepts::sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto fold_right(Function f, T&& t)

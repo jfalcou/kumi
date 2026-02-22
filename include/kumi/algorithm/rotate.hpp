@@ -54,7 +54,7 @@ namespace kumi
   //!
   //! ## Example
   //! @include doc/tuple/algo/rotate_left.cpp
-  //! @include doc/tuple/algo/rotate_left.cpp
+  //! @include doc/record/algo/rotate_left.cpp
   //================================================================================================
   template<std::size_t R, concepts::product_type T> constexpr auto rotate_left(T&& t)
   {
@@ -94,7 +94,7 @@ namespace kumi
   //!
   //! ## Example
   //! @include doc/tuple/algo/rotate_right.cpp
-  //! @include doc/tuple/algo/rotate_right.cpp
+  //! @include doc/record/algo/rotate_right.cpp
   //================================================================================================
   template<std::size_t R, concepts::product_type T> constexpr auto rotate_right(T&& t)
   {

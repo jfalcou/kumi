@@ -74,8 +74,9 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::map
   //!
-  //! ## Example
+  //! ## Examples:
   //! @include doc/tuple/algo/inner_product.cpp
+  //! @include doc/record/algo/inner_product.cpp
   //================================================================================================
   template<concepts::product_type S1,
            concepts::sized_product_type<size_v<S1>> S2,

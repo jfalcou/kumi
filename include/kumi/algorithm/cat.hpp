@@ -29,9 +29,9 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::cat
   //!
-  //! ## Examples
+  //! ## Examples:
   //! @include doc/tuple/algo/cat.cpp
-  //! @include doc/tuple/algo/cat.cpp
+  //! @include doc/record/algo/cat.cpp
   //================================================================================================
   template<concepts::product_type... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto cat(Ts&&... ts)

@@ -103,8 +103,9 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::flatten
   //!
-  //! ## Example
+  //! ## Examples:
   //! @include doc/tuple/algo/flatten.cpp
+  //! @include doc/record/algo/flatten.cpp
   //================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto flatten(T&& t)
   {
@@ -152,8 +153,9 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::flatten_all
   //!
-  //! ## Example
+  //! ## Examples:
   //! @include doc/tuple/algo/flatten_all.cpp
+  //! @include doc/record/algo/flatten_all.cpp
   //================================================================================================
   template<concepts::product_type T, typename Func> [[nodiscard]] KUMI_ABI constexpr auto flatten_all(T&& t, Func f)
   {
@@ -231,8 +233,9 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::as_flat_ptr
   //!
-  //! ## Example
+  //! ## Examples:
   //! @include doc/tuple/algo/as_flat_ptr.cpp
+  //! @include doc/record/algo/as_flat_ptr.cpp
   //================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI auto as_flat_ptr(T&& t) noexcept
   {

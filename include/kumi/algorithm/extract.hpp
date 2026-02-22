@@ -34,8 +34,9 @@ namespace kumi
   //!
   //! Computes the type returned by a call to extract.
   //!
-  //! ## Example:
+  //! ## Examples:
   //! @include doc/tuple/algo/extract.cpp
+  //! @include doc/record/algo/extract.cpp
   //================================================================================================
   template<std::size_t I0, std::size_t I1, concepts::product_type Tuple>
   requires((I0 <= size_v<Tuple>) && (I1 <= size_v<Tuple>))
@@ -85,7 +86,7 @@ namespace kumi
   //!
   //! ## Examples:
   //! @include doc/tuple/algo/split.cpp
-  //! @include doc/tuple/algo/split.cpp
+  //! @include doc/record/algo/split.cpp
   //================================================================================================
   template<std::size_t I0, concepts::product_type Tuple>
   requires(I0 <= size_v<Tuple>)

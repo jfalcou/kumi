@@ -58,7 +58,7 @@ namespace kumi
   //!
   //! ## Examples:
   //! @include doc/tuple/algo/partition.cpp
-  //! @include doc/tuple/algo/partition.cpp
+  //! @include doc/record/algo/partition.cpp
   //================================================================================================
   template<template<typename> typename Pred, concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto partition(T&& t) noexcept
@@ -96,7 +96,7 @@ namespace kumi
   //!
   //! ## Example:
   //! @include doc/tuple/algo/filter.cpp
-  //! @include doc/tuple/algo/filter.cpp
+  //! @include doc/record/algo/filter.cpp
   //================================================================================================
   template<template<typename> typename Pred, concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto filter(T&& t) noexcept
@@ -132,7 +132,7 @@ namespace kumi
   //!
   //! ## Example:
   //! @include doc/tuple/algo/filter_not.cpp
-  //! @include doc/tuple/algo/filter_not.cpp
+  //! @include doc/record/algo/filter_not.cpp
   //================================================================================================
   template<template<typename> typename Pred, concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto filter_not(T&& t) noexcept

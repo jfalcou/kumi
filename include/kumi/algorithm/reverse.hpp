@@ -31,7 +31,7 @@ namespace kumi
   //!
   //! ## Examples:
   //! @include doc/tuple/algo/reverse.cpp
-  //! @include doc/tuple/algo/reverse.cpp
+  //! @include doc/record/algo/reverse.cpp
   //================================================================================================
   template<concepts::product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto reverse(Tuple&& t)
   {

@@ -136,6 +136,7 @@ namespace kumi
   //!
   //! ## Example
   //! @include doc/tuple/algo/reindex.cpp
+  //! @include doc/record/algo/reindex.cpp
   //================================================================================================
   template<concepts::index_map auto Indexes, concepts::product_type T>
   requires(_::in_bound_indexes<Indexes, T>())

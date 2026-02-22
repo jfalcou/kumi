@@ -37,8 +37,9 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::map
   //!
-  //! ## Example
+  //! ## Examples:
   //! @include doc/tuple/algo/map.cpp
+  //! @include doc/record/algo/map.cpp
   //================================================================================================
   template<concepts::product_type Tuple, typename Function, concepts::sized_product_type<size_v<Tuple>>... Tuples>
   [[nodiscard]] KUMI_ABI constexpr auto map(Function f, Tuple&& t0, Tuples&&... others)

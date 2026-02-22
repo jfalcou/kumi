@@ -16,8 +16,10 @@ namespace kumi
   //! @param  p Unary predicate. p must return a value convertible to `bool` for every element of t.
   //! @return Integral index of the element inside the tuple if present, kumi::size<tuple<T...>>::value
   //!         otherwise.
-  //! ## Example:
+  //!
+  //! ## Examples:
   //! @include doc/tuple/algo/locate.cpp
+  //! @include doc/record/algo/locate.cpp
   //================================================================================================
   template<typename Pred, concepts::product_type Tuple>
   [[nodiscard]] KUMI_ABI constexpr auto locate(Tuple&& t, Pred p) noexcept

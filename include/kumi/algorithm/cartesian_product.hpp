@@ -56,8 +56,9 @@ namespace kumi
   //!
   //! Computes the type returned by a call to kumi::cartesian_product.
   //!
-  //! ## Example:
+  //! ## Examples:
   //! @include doc/tuple/algo/cartesian_product.cpp
+  //! @include doc/record/algo/cartesian_product.cpp
   //================================================================================================
   template<concepts::product_type... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto cartesian_product(Ts&&... ts)
