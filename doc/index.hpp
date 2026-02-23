@@ -66,10 +66,10 @@
 //! using namespace kumi::literals;
 //! auto get_student(int id)
 //! {
-//!         if (id == 0)  return kumi::make_record("GPA"_f = 3.8, "grade"_f = 'A');
-//!   else  if (id == 1)  return kumi::make_record("GPA"_f = 2.9, "grade"_f = 'C');
-//!   else  if (id == 2)  return kumi::make_record("GPA"_f = 1.7, "grade"_f = 'D');
-//!   else                return kumi::make_record("GPA"_f = 0. , "grade"_f = 'F');
+//!         if (id == 0)  return kumi::make_record("GPA"_id = 3.8, "grade"_id = 'A');
+//!   else  if (id == 1)  return kumi::make_record("GPA"_id = 2.9, "grade"_id = 'C');
+//!   else  if (id == 2)  return kumi::make_record("GPA"_id = 1.7, "grade"_id = 'D');
+//!   else                return kumi::make_record("GPA"_id = 0. , "grade"_id = 'F');
 //! }
 //!
 //! int main()
@@ -77,8 +77,8 @@
 //!   auto student0 = get_student(0);
 //!
 //!   std::cout << "ID: 0, "
-//!             << "GPA:   "  << kumi::get<"GPA"_f>(student0)   << ", "
-//!             << "grade: "  << kumi::get<"grade"_f>(student0) << '\n';
+//!             << "GPA:   "  << kumi::get<"GPA">(student0)   << ", "
+//!             << "grade: "  << kumi::get<"grade">(student0) << '\n';
 //!
 //!   auto [ gpa1, grade1 ] = get_student(1);
 //!   std::cout << "ID: 1, "
@@ -87,9 +87,9 @@
 //!   std::cout << "\n";
 //!
 //!   auto all_students = kumi::make_record(
-//!                       "Lisa Simpson"_f        = get_student(0),
-//!                       "Milhouse Van Houten"_f = get_student(1),
-//!                       "Ralph Wiggum"_f        = get_student(2)
+//!                       "Lisa Simpson"_id         = get_student(0),
+//!                       "Milhouse Van Houten"_id  = get_student(1),
+//!                       "Ralph Wiggum"_id         = get_student(2)
 //!                       );
 //!
 //!   kumi::for_each_field( [](auto name, auto const& m) { 

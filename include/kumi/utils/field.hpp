@@ -10,7 +10,7 @@
 namespace kumi
 {
   //================================================================================================
-  //! @ingroup product_types
+  //! @ingroup utility
   //! @class field
   //! @brief Named wrapper over a type.
   //!
@@ -47,7 +47,7 @@ namespace kumi
     KUMI_ABI constexpr T const&& operator()(inner_type) const&& noexcept { return static_cast<T const&&>(value); }
 
     //==============================================================================================
-    /// @ingroup product_types
+    /// @ingroup utility
     //! @related kumi::field
     //! @brief Inserts a kumi::field in an output stream
     //==============================================================================================
@@ -87,7 +87,7 @@ namespace kumi
     KUMI_ABI constexpr T const&& operator()(inner_type) const&& noexcept { return static_cast<T const&&>(*this); }
 
     //==============================================================================================
-    /// @ingroup product_types
+    /// @ingroup utility
     //! @related kumi::field
     //! @brief Inserts a kumi::field in an output stream
     //==============================================================================================
@@ -128,7 +128,7 @@ namespace kumi
   };
 
   //================================================================================================
-  //! @ingroup product_types
+  //! @ingroup utils
   //! @brief Creates a field from a given value keeping the qualifiers.
   //!
   //! @note If the unqualified type of T is not a field, simply forwards the parameter
@@ -144,7 +144,7 @@ namespace kumi
   }
 
   //================================================================================================
-  //! @ingroup product_types
+  //! @ingroup utils
   //! @brief Casts the provided value to the target type using `static_cast`.
   //!
   //! @note Even when passed in a field as the conversion type, this function does not

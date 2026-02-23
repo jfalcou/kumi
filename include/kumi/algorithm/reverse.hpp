@@ -1,17 +1,20 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
 {
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup generators
   //! @brief Reverse elements of a product type
+  //!
+  //! On record types, this function operates structurally and extract elements as if they were ordered. The considered
+  //! order is the order of declaration.
   //!
   //! @param  t The product type to reverse
   //! @return A product type equivalent to product_type(t[index<size_v<T> - 1 - Idx>]...);
@@ -32,7 +35,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/reverse.cpp
   //! @include doc/record/algo/reverse.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto reverse(T&& t)
   {
     if constexpr (concepts::sized_product_type<T, 0>) return builder<T>::make();

@@ -1,10 +1,10 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
@@ -33,7 +33,7 @@ namespace kumi
     };
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup generators
   //! @brief Reorder elements of a product type
   //!
@@ -64,7 +64,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/reorder.cpp
   //! @include doc/record/algo/reorder.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<std::size_t... Idx, concepts::product_type T>
   requires((Idx < size_v<T>) && ...)
   [[nodiscard]] KUMI_ABI constexpr auto reorder(T&& t)
@@ -72,7 +72,7 @@ namespace kumi
     return builder<T>::make(get<Idx>(KUMI_FWD(t))...);
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup generators
   //! @brief Reorder elements of a kumi::record
   //!
@@ -100,7 +100,7 @@ namespace kumi
   //!
   //! ## Example
   //! @include doc/record/algo/reorder_fields.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::identifier auto... Name, concepts::product_type Tuple>
   requires(requires { get<Name>(std::declval<Tuple>()); } && ...)
   KUMI_ABI constexpr auto reorder_fields(Tuple&& t)
@@ -108,7 +108,7 @@ namespace kumi
     return builder<Tuple>::make(Name = get<Name>(KUMI_FWD(t))...);
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup generators
   //! @brief Reindex elements of a kumi::product_type
   //!
@@ -137,7 +137,7 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/reindex.cpp
   //! @include doc/record/algo/reindex.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::index_map auto Indexes, concepts::product_type T>
   requires(_::in_bound_indexes<Indexes, T>())
   [[nodiscard]] KUMI_ABI constexpr auto reindex(T&& t)

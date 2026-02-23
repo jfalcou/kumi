@@ -9,11 +9,11 @@
 
 namespace kumi
 {
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup traits
   //! @brief   Extracts the common product_type of a parameter pack, if all the types are `record`
   //!          then it returns an empty record, otherwise returns an empty `kumi::tuple`. As we
-  //!          are unable to compute the Least Restrictive Subtypes of a pack, this trait should
+  //!          are unable to compute the Least Restrictive Subtype of a pack, this trait should
   //!          be specialized for each case one would want to write.
   //!
   //! @tparam Ts The `product_types` to access
@@ -26,14 +26,14 @@ namespace kumi
   //!       = typename common_product_type<Ts...>::type;
   //! }
   //! @endcode
-  //================================================================================================
+  //====================================================================================================================
   template<typename... Ts> struct common_product_type
   {
   };
 
   template<typename... Ts> using common_product_type_t = typename common_product_type<Ts...>::type;
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup utility
   //! @class builder
   //! @brief Helper structure to build the correct output `product_type`. If the provided Product
@@ -44,7 +44,7 @@ namespace kumi
   //! kumi::record
   //!
   //! @tparam T the template template type to be built.
-  //================================================================================================
+  //====================================================================================================================
   template<typename T> struct builder;
 
   template<typename T> struct builder<T&> : builder<T>

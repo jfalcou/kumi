@@ -1,4 +1,5 @@
 //==================================================================================================
+// @file
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
@@ -13,9 +14,9 @@
 namespace kumi
 {
   //================================================================================================
-  //! @ingroup record
+  //! @ingroup record_type
   //! @class record
-  //! @brief Fixed-size collection of heterogeneous fields necessarily named, names are unique.
+  //! @brief Fixed-size collection of heterogeneous tagged fields, tags are unique.
   //!
   //! kumi::record provides an aggregate based implementation of a record. It provides algorithms and
   //! functions designed to facilitate record's handling and transformations.
@@ -42,7 +43,7 @@ namespace kumi
     //==============================================================================================
 
     //==============================================================================================
-    //! @ingroup record
+    //! @ingroup record_type
     //! @brief Extracts the Ith field from a kumi::record
     //!
     //! @note   Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
@@ -506,9 +507,6 @@ namespace kumi
   template<std::size_t I, typename... Ts>
   requires(I < sizeof...(Ts))
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>& r) noexcept
-#if defined(KUMI_DOXYGEN_INVOKED)
-    -> kumi::element_t<I, record<Ts...>&>
-#endif
   {
     return r[index<I>];
   }
@@ -517,9 +515,6 @@ namespace kumi
   template<std::size_t I, typename... Ts>
   requires(I < sizeof...(Ts))
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>&& r) noexcept
-#if defined(KUMI_DOXYGEN_INVOKED)
-    -> kumi::element_t<I, record<Ts...>&&>
-#endif
   {
     return static_cast<record<Ts...>&&>(r)[index<I>];
   }
@@ -528,9 +523,6 @@ namespace kumi
   template<std::size_t I, typename... Ts>
   requires(I < sizeof...(Ts))
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const& r) noexcept
-#if defined(KUMI_DOXYGEN_INVOKED)
-    -> kumi::element_t<I, record<Ts...> const&>
-#endif
   {
     return r[index<I>];
   }
@@ -539,9 +531,6 @@ namespace kumi
   template<std::size_t I, typename... Ts>
   requires(I < sizeof...(Ts))
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const&& r) noexcept
-#if defined(KUMI_DOXYGEN_INVOKED)
-    -> kumi::element_t<I, record<Ts...> const&&>
-#endif
   {
     return static_cast<record<Ts...> const&&>(r)[index<I>];
   }

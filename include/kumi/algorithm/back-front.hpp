@@ -1,20 +1,20 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
 {
-  //================================================================================================
-  //! @ingroup queries 
+  //====================================================================================================================
+  //! @ingroup queries
   //! @brief Retrieves the front of a product type
   //!
-  //! @param t Base product type
-  //! @return A reference to the first element of the product type `t`
+  //! @param t  Base product type
+  //! @return   A reference to the first element of the product type `t`
   //!
   //! ## Helper type
   //! @code
@@ -32,7 +32,7 @@ namespace kumi
   //! ## Examples
   //! @include doc/tuple/algo/back-front.cpp
   //! @include doc/record/algo/back-front.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) front(T&& t)
   requires(size_v<T> != 0)
@@ -41,12 +41,12 @@ namespace kumi
     else return get<0>(KUMI_FWD(t));
   }
 
-  //================================================================================================
-  //! @ingroup queries 
+  //====================================================================================================================
+  //! @ingroup queries
   //! @brief Retrieves the back of a product type
   //!
-  //! @param t Base product type
-  //! @return A reference to the last element of the product type `t`
+  //! @param t  Base product type
+  //! @return   A reference to the last element of the product type `t`
   //!
   //! ## Helper type
   //! @code
@@ -64,7 +64,7 @@ namespace kumi
   //! ## Examples
   //! @include doc/tuple/algo/back-front.cpp
   //! @include doc/record/algo/back-front.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) back(T&& t)
   requires(size_v<T> != 0)

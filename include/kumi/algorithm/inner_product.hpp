@@ -1,19 +1,19 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
 {
   namespace _
   {
-    //==============================================================================================
+    //==================================================================================================================
     // Fold helpers
-    //==============================================================================================
+    //==================================================================================================================
     template<typename F, typename T> struct foldable
     {
       F func;
@@ -33,15 +33,18 @@ namespace kumi
     template<class F, class T> foldable(F const&, T&&) -> foldable<F, T>;
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup reductions
   //! @brief Computes inner product (i.e. sum of products)
   //!
   //! Computes the generalized sum of products of the elements of two product types. By default,
   //! `+` and `*` is used.
   //!
+  //! On record types, operates by pair of fields sharing the same name.
+  //!
   //! @note Does not participate in overload resolution if product types' size are not equal or if any of
-  //!       the binary operations can't be applied on the product types' elements.
+  //!       the binary operations can't be applied on the product types' elements. Similarily, doesn't participate
+  //!       in overload resolution if the two inputs do not model concepts::compatible_product_types.
   //!
   //! @param s1         First product type to operate on
   //! @param s2         Second product type to operate on
@@ -54,18 +57,18 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<product_type S1, sized_product_type<S1::size()> S2, typename T>
+  //!   template<product_type S1, sized_product_type<size_v<S1>> S2, typename T>
   //!   struct inner_product;
   //!
-  //!   template<product_type S1, sized_product_type<S1::size()> S2, typename T
+  //!   template<product_type S1, sized_product_type<size_v<S1>> S2, typename T
   //!           , typename Sum, typename Prod
   //!           >
   //!   struct inner_product;
   //!
-  //!   template<product_type S1, sized_product_type<S1::size()> S2, typename T>
+  //!   template<product_type S1, sized_product_type<size_v<T1>> S2, typename T>
   //!   using inner_product_t = typename inner_product<S1,S2,T>::type;
   //!
-  //!   template< product_type S1, sized_product_type<S1::size()> S2, typename T
+  //!   template< product_type S1, sized_product_type<size_v<T1>> S2, typename T
   //!           , typename Sum, typename Prod
   //!           >
   //!   using inner_product_t = typename inner_product<S1,S2,T,Sum,Prod>::type;
@@ -77,7 +80,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/inner_product.cpp
   //! @include doc/record/algo/inner_product.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::product_type S1,
            concepts::sized_product_type<size_v<S1>> S2,
            typename T,

@@ -1,22 +1,23 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
 {
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup transforms
-  //! @brief Invoke the Callable object f with a product_type of arguments. f is applied on the
-  //!        values if the given product_type is a kumi::record
+  //! @brief Invoke the Callable object f with the elements of product type unrolled as arguments.
+  //!
+  //! @note f is applied on the underlying values when the input `t` is a record type
   //!
   //! @param f	Callable object to be invoked
-  //! @param t  kumi::product_type whose elements to be used as arguments to f
-  //! @return The value returned by f.
+  //! @param t  Product Type whose elements are used as arguments to f
+  //! @return   The value returned by f.
   //!
   //! ## Helper type
   //! @code
@@ -34,7 +35,7 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/apply.cpp
   //! @include doc/record/algo/apply.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<typename Function, concepts::product_type T>
   KUMI_ABI constexpr decltype(auto) apply(Function&& f, T&& t) noexcept(_::supports_nothrow_apply<Function&&, T&&>)
   requires _::supports_apply<Function, T>

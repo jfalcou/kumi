@@ -1,15 +1,15 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
 {
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup generators
   //! @brief Constructs a product type by adding a value v at the beginning of t
   //!
@@ -33,7 +33,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/push_front.cpp
   //! @include doc/record/algo/push_front.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::product_type T, typename V> [[nodiscard]] KUMI_ABI constexpr auto push_front(T&& t, V&& v)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
@@ -41,7 +41,7 @@ namespace kumi
     }(std::make_index_sequence<size_v<T>>());
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup generators
   //! @brief Remove the first (if any) element of a product type.
   //!
@@ -65,14 +65,14 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/pop_front.cpp
   //! @include doc/record/algo/pop_front.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto pop_front(T&& t)
   {
     if constexpr (concepts::sized_product_type_or_more<T, 1>) return extract(KUMI_FWD(t), index<1>);
     else return builder<T>::make();
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup generators
   //! @brief Constructs a product type by adding a value v at the end of t
   //!
@@ -96,7 +96,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/push_back.cpp
   //! @include doc/record/algo/push_back.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::product_type T, typename V> [[nodiscard]] KUMI_ABI constexpr auto push_back(T&& t, V&& v)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
@@ -104,7 +104,7 @@ namespace kumi
     }(std::make_index_sequence<size_v<T>>());
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup generators
   //! @brief Remove the last (if any) element of a kumi::product_type.
   //!
@@ -127,7 +127,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/pop_back.cpp
   //! @include doc/record/algo/pop_back.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto pop_back(T&& t)
   {
     if constexpr (concepts::sized_product_type_or_more<T, 1>)

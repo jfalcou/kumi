@@ -19,8 +19,8 @@ namespace kumi
   //================================================================================================
 }
 
-// Building blocks
 #include <kumi/detail/abi.hpp>
+#include <kumi/detail/dependancies.hpp>
 #include <kumi/detail/preprocessor.hpp>
 #include <kumi/detail/str.hpp>
 #include <kumi/detail/typename.hpp>

@@ -1,17 +1,20 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
 {
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup generators
   //! @brief Extracts a sub product type from a product type
+  //!
+  //! On record types, this function operates structurally and extract elements as if they were ordered. The considered
+  //! order is the order of declaration.
   //!
   //! @note Does not participate in overload resolution if `I0` and `I1` do not verify that
   //!       `0 <= I0 <= I1 <= size_v<T>`.
@@ -19,7 +22,7 @@ namespace kumi
   //! @param  i0 Compile-time index of the first element to extract.
   //! @param  i1 Compile-time index past the last element to extract. By default, `i1` is equal to
   //!         `size_v<T>`.
-  //! @return A new product type containing to the selected elements of the input tuple.
+  //! @return A new product type containing to the selected elements of the input product type.
   //!
   //! ## Helper type
   //! @code
@@ -37,7 +40,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/extract.cpp
   //! @include doc/record/algo/extract.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<std::size_t I0, std::size_t I1, concepts::product_type T>
   requires((I0 <= size_v<T>) && (I1 <= size_v<T>))
   [[nodiscard]] KUMI_ABI constexpr auto extract(T&& t,
@@ -58,12 +61,13 @@ namespace kumi
     return extract(KUMI_FWD(t), i0, index<size_v<T>>);
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup generators
   //! @brief Split a product type into two
   //!
-  //! Split a product type in two product_type containing all the elements before
-  //! and after a given index.
+  //! Split a product type in two product_type containing all the elements before and after a given index.
+  //! On record types, this function operates structurally and extract elements as if they were ordered. The considered
+  //! order is the order of declaration.
   //!
   //! @note Does not participate in overload resolution if `I0` is not in `[0, sizeof...(Ts)[`.
   //!
@@ -87,7 +91,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/split.cpp
   //! @include doc/record/algo/split.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<std::size_t I0, concepts::product_type T>
   requires(I0 <= size_v<T>)
   [[nodiscard]] KUMI_ABI constexpr auto split(T&& t, [[maybe_unused]] index_t<I0> i0) noexcept
