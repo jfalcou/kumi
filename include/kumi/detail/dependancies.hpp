@@ -7,11 +7,7 @@
 //======================================================================================================================
 #pragma once
 
-namespace kumi
-{
-  // Forward declarations
-  struct str;
-  template<typename... Ts> struct tuple;
-  template<typename... Ts> struct record;
-  template<typename... Ts> struct projection_map;
-}
+#include <iosfwd>
+#include <cstddef>
+#include <utility>
+#include <concepts>

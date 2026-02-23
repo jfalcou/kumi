@@ -1,18 +1,18 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
 {
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup transforms
   //! @brief Applies the Callable object f on each element of a product type. f is applied on the
-  //!        values if the given product_type is a record type. 
+  //!        values if the given product_type is a record type.
   //!
   //! @note This function does not take part in overload resolution if `f` can't be applied to the
   //!       elements of `t` and/or `ts`.
@@ -27,7 +27,7 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/for_each.cpp
   //! @include doc/record/algo/for_each.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<typename Function, concepts::product_type T, concepts::product_type... Ts>
   KUMI_ABI constexpr void for_each(Function f, T&& t, Ts&&... ts)
   requires((concepts::compatible_product_types<T, Ts...>) && (_::supports_call<Function&, T, Ts...>))
@@ -96,7 +96,7 @@ namespace kumi
   //!
   //! @note This function does not take part in overload resolution if `f` can't be applied to the
   //!       elements of `t` and those of `ts`. This function can only be applied to record types.
-  //!       The function needs to be define to handle types modeling kumi::concepts::field. 
+  //!       The function needs to be define to handle types modeling kumi::concepts::field.
   //!
   //! @param f	  Callable object to be invoked
   //! @param r    Record type whose fields are used as arguments to f

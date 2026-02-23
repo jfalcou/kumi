@@ -1,10 +1,10 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
@@ -35,7 +35,7 @@ namespace kumi
     template<std::size_t N> inline constexpr reducer_t<N> reducer{};
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup reductions
   //! @brief Performs a tree-like reduction of all elements of a product type.
   //!
@@ -62,7 +62,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/reduce.cpp
   //! @include doc/record/algo/reduce.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::monoid M, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto reduce(M&& m, T&& t)
   {
     if constexpr (concepts::record_type<T>) return reduce(KUMI_FWD(m), values_of(KUMI_FWD(t)));
@@ -83,7 +83,7 @@ namespace kumi
     }
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup reductions
   //! @brief Performs a tree-like reduction of all elements of a product type.
   //!
@@ -111,7 +111,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/reduce.cpp
   //! @include doc/record/algo/reduce.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::monoid M, concepts::product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto reduce(M&& m, T&& t, Value init)
   {
@@ -119,7 +119,7 @@ namespace kumi
     else return KUMI_FWD(m)(init, reduce(KUMI_FWD(m), KUMI_FWD(t)));
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup reductions
   //! @brief Performs a tree-like reduction of all elements of a product type. The given map
   //!        function is applied before excution the reduction to each element of the input.
@@ -148,7 +148,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/map_reduce.cpp
   //! @include doc/record/algo/map_reduce.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::product_type T, concepts::monoid M, typename Function>
   [[nodiscard]] KUMI_ABI constexpr auto map_reduce(Function f, M&& m, T&& t)
   {
@@ -170,7 +170,7 @@ namespace kumi
     }
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup reductions
   //! @brief Performs a tree-like reduction of all elements of a product type. The given map
   //!        function is applied before excution the reduction to each element of the input.
@@ -200,7 +200,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/map_reduce.cpp
   //! @include doc/record/algo/map_reduce.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::monoid M, concepts::product_type T, typename Function, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto map_reduce(Function f, M&& m, T&& t, Value init)
   {
@@ -208,7 +208,7 @@ namespace kumi
     else return KUMI_FWD(m)(invoke(f, init), map_reduce(f, KUMI_FWD(m), KUMI_FWD(t)));
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup reductions
   //! @brief Computes the sum of all elements.
   //!
@@ -232,13 +232,13 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/sum.cpp
   //! @include doc/record/algo/sum.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::product_type T, typename Value> [[nodiscard]] KUMI_ABI constexpr auto sum(T&& t, Value init)
   {
     return reduce(function::plus, KUMI_FWD(t), init);
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup reductions
   //! @brief Computes the sum of all elements.
   //!
@@ -261,13 +261,13 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/sum.cpp
   //! @include doc/record/algo/sum.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto sum(T&& t)
   {
     return reduce(function::plus, KUMI_FWD(t));
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup reductions
   //! @brief Computes the product of all elements.
   //!
@@ -291,13 +291,13 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/prod.cpp
   //! @include doc/record/algo/prod.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::product_type T, typename Value> [[nodiscard]] KUMI_ABI constexpr auto prod(T&& t, Value init)
   {
     return reduce(function::multiplies, KUMI_FWD(t), init);
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup reductions
   //! @brief Computes the product of all elements.
   //!
@@ -320,13 +320,13 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/prod.cpp
   //! @include doc/record/algo/prod.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto prod(T&& t)
   {
     return reduce(function::multiplies, KUMI_FWD(t));
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup reductions
   //! @brief Computes the bitwise AND of all elements.
   //!
@@ -350,13 +350,13 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/bit_and.cpp
   //! @include doc/record/algo/bit_and.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::product_type T, typename Value> [[nodiscard]] KUMI_ABI constexpr auto bit_and(T&& t, Value init)
   {
     return reduce(function::bit_and, KUMI_FWD(t), init);
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup reductions
   //! @brief Computes the bitwise AND of all elements.
   //!
@@ -379,13 +379,13 @@ namespace kumi
   //! ## Examples;
   //! @include doc/tuple/algo/bit_and.cpp
   //! @include doc/record/algo/bit_and.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto bit_and(T&& t)
   {
     return reduce(function::bit_and, KUMI_FWD(t));
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup reductions
   //! @brief Computes the bitwise OR of all elements.
   //!
@@ -409,13 +409,13 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/bit_or.cpp
   //! @include doc/record/algo/bit_or.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::product_type T, typename Value> [[nodiscard]] KUMI_ABI constexpr auto bit_or(T&& t, Value init)
   {
     return reduce(function::bit_or, KUMI_FWD(t), init);
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup reductions
   //! @brief Computes the bitwise OR of all elements.
   //!
@@ -438,13 +438,13 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/bit_or.cpp
   //! @include doc/record/algo/bit_or.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto bit_or(T&& t)
   {
     return reduce(function::bit_or, KUMI_FWD(t));
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup reductions
   //! @brief Computes the bitwise XOR of all elements.
   //!
@@ -468,13 +468,13 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/bit_xor.cpp
   //! @include doc/record/algo/bit_xor.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::product_type T, typename Value> [[nodiscard]] KUMI_ABI constexpr auto bit_xor(T&& t, Value init)
   {
     return reduce(function::bit_xor, KUMI_FWD(t), init);
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup reductions
   //! @brief Computes the bitwise XOR of all elements.
   //!
@@ -497,7 +497,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/bit_xor.cpp
   //! @include doc/record/algo/bit_xor.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto bit_xor(T&& t)
   {
     return reduce(function::bit_xor, KUMI_FWD(t));

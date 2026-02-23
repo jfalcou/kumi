@@ -379,7 +379,7 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup record_traits
-  //! @brief Provides indexed access to the types of the elements of a product type and 
+  //! @brief Provides indexed access to the types of the elements of a product type and
   //!                 unwraps the returned field_capture for record type.
   //!
   //! @note is equivalent to element_t on product type that doesnt model record type.

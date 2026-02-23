@@ -1,10 +1,10 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
@@ -55,7 +55,7 @@ namespace kumi
     };
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup generators
   //! @brief Constructs a tuple where the ith element is the product type of all ith elements of ts...
   //!
@@ -81,7 +81,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/zip.cpp
   //! @include doc/record/algo/zip.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::product_type T0, concepts::sized_product_type<size_v<T0>>... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto zip(T0&& t0, Ts&&... ts)
   requires(concepts::follows_same_semantic<T0, Ts...>)
@@ -89,7 +89,7 @@ namespace kumi
     return _::zipper(index<size_v<T0>>, kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...));
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup generators
   //! @brief Constructs a tuple where the ith element is the product type of all ith elements of ts...
   //!
@@ -115,7 +115,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/zip_min.cpp
   //! @include doc/record/algo/zip_min.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::product_type T0, concepts::product_type... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto zip_min(T0&& t0, Ts&&... ts)
   requires(concepts::follows_same_semantic<T0, Ts...>)
@@ -124,7 +124,7 @@ namespace kumi
     return _::zipper(index<min>, kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...));
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup generators
   //! @brief Constructs a tuple where the ith element is the product type of all ith elements of ts...
   //!
@@ -149,7 +149,7 @@ namespace kumi
   //!
   //! ## Example
   //! @include doc/tuple/algo/zip_max.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::product_type T0, concepts::product_type... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto zip_max(T0&& t0, Ts&&... ts)
   requires(concepts::follows_same_semantic<T0, Ts...>)

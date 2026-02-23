@@ -1,17 +1,19 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
 {
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup reductions
   //! @brief Computes the generalized combination of all elements using a tail recursive call.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @param f      Binary callable function to apply
   //! @param t      Product type to operate on
@@ -34,7 +36,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/fold_left.cpp
   //! @include doc/record/algo/fold_left.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<typename Function, concepts::product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto fold_left(Function f, T&& t, Value init)
   {
@@ -48,9 +50,11 @@ namespace kumi
     }
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup reductions
   //! @brief Computes the generalized associative combination of all elements using a tail recursive call.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @param f  Associative binary callable function to apply
   //! @param t  Product type of size 1 or more to operate on
@@ -72,7 +76,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/fold_left.cpp
   //! @include doc/record/algo/fold_left.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<typename Function, concepts::sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto fold_left(Function f, T&& t)
   {
@@ -85,9 +89,11 @@ namespace kumi
     }
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup reductions
   //! @brief Computes the generalized combination of all elements using a non-tail recursive call.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @param f      Binary callable function to apply
   //! @param t      Product type to operate on
@@ -110,7 +116,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/fold_right.cpp
   //! @include doc/record/algo/fold_right.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<typename Function, concepts::product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto fold_right(Function f, T&& t, Value init)
   {
@@ -124,9 +130,11 @@ namespace kumi
     }
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup reductions
   //! @brief Computes the generalized associative combinationof all elements using a non-tail recursive call.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @param f  Associative binary callable function to apply
   //! @param t  Product type of size 1 or more to operate on
@@ -148,7 +156,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/fold_right.cpp
   //! @include doc/record/algo/fold_right.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<typename Function, concepts::sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto fold_right(Function f, T&& t)
   {

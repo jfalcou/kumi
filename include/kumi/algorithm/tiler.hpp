@@ -1,18 +1,21 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
 {
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup generators
-  //! @brief Creates a tuple of product types, each containing `N` consecutive elements from 
-  //!        `t`. Windows starts at 0 and advance by `1` element each time.  
+  //! @brief Creates a tuple of product types, each containing `N` consecutive elements from
+  //!        `t`. Windows starts at 0 and advance by `1` element each time.
+  //!
+  //! On record types, this function operates structurally and extract elements as if they were ordered. The considered
+  //! order is the order of declaration.
   //!
   //! @tparam N Size of the window to generate
   //! @param  t the product type from which to extract the windows
@@ -47,13 +50,16 @@ namespace kumi
         [&](auto idx) { return kumi::extract(KUMI_FWD(t), kumi::index<idx>, kumi::index<idx + N>); });
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup generators
-  //! @brief Creates a tuple of product types, each containing `N` consecutive elements from 
-  //!        `t`. Chunks starts at 0 and advance by `N` element each time.  
+  //! @brief Creates a tuple of product types, each containing `N` consecutive elements from
+  //!        `t`. Chunks starts at 0 and advance by `N` element each time.
+  //!
+  //! On record types, this function operates structurally and extract elements as if they were ordered. The considered
+  //! order is the order of declaration.
   //!
   //! @tparam N Size of the chunks to generate
-  //! @param  t the product type from which to extract the chunks 
+  //! @param  t the product type from which to extract the chunks
   //! @return A tuple of product types, each containing `N` consecutive elements of `t`
   //!
   //! @note Chunks behaves like paving tiles: each inner product_type is a tile over `t`
