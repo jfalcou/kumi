@@ -10,9 +10,9 @@ int main()
 {
   using namespace kumi::literals;
 
-  auto nbrs  = kumi::record{"a"_f=1  ,"b"_f=2   ,"c"_f=3    };
-  auto ltrs  = kumi::record{"d"_f='a',"e"_f='b' ,"f"_f='c'  };
-  auto ratio = kumi::record{"g"_f=0.1,"h"_f=0.01,"i"_f=0.001};
+  auto nbrs  = kumi::record{"a"_id=1  ,"b"_id=2   ,"c"_id=3    };
+  auto ltrs  = kumi::record{"d"_id='a',"e"_id='b' ,"f"_id='c'  };
+  auto ratio = kumi::record{"g"_id=0.1,"h"_id=0.01,"i"_id=0.001};
 
   auto r = kumi::zip( nbrs, ltrs, ratio );
   std::cout << r << "\n";

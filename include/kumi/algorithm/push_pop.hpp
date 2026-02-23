@@ -34,10 +34,10 @@ namespace kumi
   //! @include doc/tuple/algo/push_front.cpp
   //! @include doc/record/algo/push_front.cpp
   //================================================================================================
-  template<concepts::product_type T, typename V> [[nodiscard]] KUMI_ABI constexpr auto push_front(T && t, V && v)
+  template<concepts::product_type T, typename V> [[nodiscard]] KUMI_ABI constexpr auto push_front(T&& t, V&& v)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return builder<Tuple>::make(KUMI_FWD(v), get<I>(KUMI_FWD(t))...);
+      return builder<T>::make(KUMI_FWD(v), get<I>(KUMI_FWD(t))...);
     }(std::make_index_sequence<size_v<T>>());
   }
 
@@ -46,7 +46,7 @@ namespace kumi
   //! @brief Remove the first (if any) element of a product type.
   //!
   //! @param t Base product type
-  //! @return A product type composed of all elements of t except its first. Has no effect on empty 
+  //! @return A product type composed of all elements of t except its first. Has no effect on empty
   //!         product types.
   //!
   //! ## Helper type

@@ -8,6 +8,8 @@
 #ifndef KUMI_RECORD_HPP_INCLUDED
 #define KUMI_RECORD_HPP_INCLUDED
 
+#include <kumi/product_types/tuple.hpp>
+
 namespace kumi
 {
   //================================================================================================
@@ -175,21 +177,18 @@ namespace kumi
     //! @name Properties
     //! @{
     //==============================================================================================
-    
+
     /// @ingroup record
     /// @return Returns the number of elements in a kumi::record
-    [[nodiscard]] KUMI_ABI static constexpr  auto size() noexcept { return sizeof...(Ts); }
+    [[nodiscard]] KUMI_ABI static constexpr auto size() noexcept { return sizeof...(Ts); }
 
     /// @ingroup record
     /// @return Returns `true` if a kumi::record contains 0 elements
-    [[nodiscard]] KUMI_ABI static constexpr  bool empty() noexcept { return sizeof...(Ts) == 0; }
+    [[nodiscard]] KUMI_ABI static constexpr bool empty() noexcept { return sizeof...(Ts) == 0; }
 
     /// @ingroup record
     /// @return Returns the names of the elements in a kumi::record
-    [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept
-    {
-        return tuple{ name_of(as<Ts>{})... };
-    };
+    [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept { return tuple{name_of(as<Ts>{})...}; };
 
     //==============================================================================================
     //! @ingroup record
@@ -505,44 +504,44 @@ namespace kumi
   //! @include doc/record/api/get.cpp
   //================================================================================================
   template<std::size_t I, typename... Ts>
-  requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
-  get(record<Ts...> &r) noexcept
-  #if defined(KUMI_DOXYGEN_INVOKED)
-  -> kumi::element_t<I, record<Ts...>&>
-  #endif 
+  requires(I < sizeof...(Ts))
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>& r) noexcept
+#if defined(KUMI_DOXYGEN_INVOKED)
+    -> kumi::element_t<I, record<Ts...>&>
+#endif
   {
     return r[index<I>];
   }
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
-  get(record<Ts...> &&r) noexcept
-  #if defined(KUMI_DOXYGEN_INVOKED)
-  -> kumi::element_t<I, record<Ts...>&&>
-  #endif 
+  requires(I < sizeof...(Ts))
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>&& r) noexcept
+#if defined(KUMI_DOXYGEN_INVOKED)
+    -> kumi::element_t<I, record<Ts...>&&>
+#endif
   {
     return static_cast<record<Ts...>&&>(r)[index<I>];
   }
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
-  get(record<Ts...> const &r) noexcept
-  #if defined(KUMI_DOXYGEN_INVOKED)
-  -> kumi::element_t<I, record<Ts...> const&>
-  #endif 
+  requires(I < sizeof...(Ts))
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const& r) noexcept
+#if defined(KUMI_DOXYGEN_INVOKED)
+    -> kumi::element_t<I, record<Ts...> const&>
+#endif
   {
     return r[index<I>];
   }
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
-  get(record<Ts...> const &&r) noexcept
-  #if defined(KUMI_DOXYGEN_INVOKED)
-  -> kumi::element_t<I, record<Ts...>const &&>
-  #endif 
+  requires(I < sizeof...(Ts))
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const&& r) noexcept
+#if defined(KUMI_DOXYGEN_INVOKED)
+    -> kumi::element_t<I, record<Ts...> const&&>
+#endif
   {
     return static_cast<record<Ts...> const&&>(r)[index<I>];
   }

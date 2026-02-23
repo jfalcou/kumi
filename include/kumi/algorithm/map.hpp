@@ -13,11 +13,11 @@ namespace kumi
   //! @ingroup transforms
   //! @brief Apply the Callable object f on each product types' elements
   //!
-  //! Applies the given function to all the product types passed as arguments and stores the result 
+  //! Applies the given function to all the product types passed as arguments and stores the result
   //! in another product type, keeping the original elements order.
   //!
-  //! @note Does not participate in overload resolution if product types' size are not equal or if 
-  //!       `f` can't be called on each product type's elements. All product type must either be 
+  //! @note Does not participate in overload resolution if product types' size are not equal or if
+  //!       `f` can't be called on each product type's elements. All product type must either be
   //!       record types or product types but mixing is not supported.
   //!
   //! @param f      Callable function to apply
@@ -49,7 +49,7 @@ namespace kumi
     if constexpr (concepts::sized_product_type<T, 0>) return builder<T>::make();
     else
     {
-      auto const call = [&]<std::size_t N, typename... Ts>(index_t<N>, Ts&&... args) {
+      auto const call = [&]<std::size_t N>(index_t<N>, auto&&... args) {
         if constexpr (concepts::record_type<T>)
         {
           constexpr auto field = name_of(as<element_t<N, T>>{});
@@ -116,7 +116,7 @@ namespace kumi
     if constexpr (concepts::sized_product_type<T, 0>) return builder<T>::make();
     else
     {
-      auto const call = [&]<std::size_t N, typename... Ts>(index_t<N> idx, Ts&&... args) {
+      auto const call = [&]<std::size_t N>(index_t<N> idx, auto&&... args) {
         return invoke(f, idx, get<N>(KUMI_FWD(args))...);
       };
 
@@ -140,7 +140,7 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup record_transforms
-  //! @brief Apply the Callable object f on each records' fields and their associated names. 
+  //! @brief Apply the Callable object f on each records' fields and their associated names.
   //!
   //! Applies the given function to all the records passed as arguments along with their names and
   //! stores the result in another records, keeping the original elements order.
@@ -179,7 +179,7 @@ namespace kumi
     if constexpr (concepts::sized_product_type<T, 0>) return builder<T>::make();
     else
     {
-      auto const call = [&]<std::size_t N, typename... Ts>(index_t<N>, Ts&&... args) {
+      auto const call = [&]<std::size_t N>(index_t<N>, auto&&... args) {
         constexpr auto field = name_of(as<element_t<N, T>>{});
         return capture_field<field>(invoke(f, field.to_str(), (get<field>(args))...));
       };

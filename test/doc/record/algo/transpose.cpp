@@ -10,8 +10,8 @@ int main()
 {
   using namespace kumi::literals;
 
-  auto values = kumi::record{ "first"_f  = kumi::record{"a"_f=1, "b"_f='a', "c"_f=0.1   }
-                            , "second"_f = kumi::record{"d"_f=2, "e"_f='b', "f"_f=0.01  }
+  auto values = kumi::record{ "first"_id  = kumi::record{"a"_id=1, "b"_id='a', "c"_id=0.1   }
+                            , "second"_id = kumi::record{"d"_id=2, "e"_id='b', "f"_id=0.01  }
                             };
 
   auto r = kumi::transpose( values );

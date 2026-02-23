@@ -16,12 +16,6 @@ namespace kumi
   //================================================================================================
   //! @defgroup details Helper Types and Functions
   //! @brief    Tools for interacting with kumi::tuple
-  //!
-  //! @defgroup concepts     Tuple Related Concepts
-  //! @brief    Definition for product types related Concepts
-  //!
-  //! @defgroup traits     Tuple Related Traits
-  //! @brief    Definition for kumi::tuple traits and extension points
   //================================================================================================
 }
 

@@ -166,6 +166,7 @@ namespace kumi
     {
       return impl(n);
     }
+
     //==============================================================================================
     //! @}
     //==============================================================================================
@@ -177,16 +178,15 @@ namespace kumi
 
     /// @ingroup tuple
     /// @return Returns the number of elements in a kumi::tuple
-    [[nodiscard]] KUMI_ABI static constexpr  auto size() noexcept { return sizeof...(Ts); }
- 
+    [[nodiscard]] KUMI_ABI static constexpr auto size() noexcept { return sizeof...(Ts); }
+
     /// @ingroup tuple
     /// @return Returns `true` if a kumi::tuple contains 0 elements
-    [[nodiscard]] KUMI_ABI static constexpr  bool empty() noexcept { return sizeof...(Ts) == 0; }
+    [[nodiscard]] KUMI_ABI static constexpr bool empty() noexcept { return sizeof...(Ts) == 0; }
 
     /// @ingroup tuple
     /// @return Returns the names of the elements of a kumi::tuple
-    [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept
-    -> tuple<decltype(name_of(as<Ts>{}))...>
+    [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept -> tuple<decltype(name_of(as<Ts>{}))...>
     {
       return {name_of(as<Ts>{})...};
     };
@@ -656,44 +656,44 @@ namespace kumi
   //! @include doc/tuple/api/get.cpp
   //================================================================================================
   template<std::size_t I, typename... Ts>
-  requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
-  get(tuple<Ts...> &t) noexcept
-  #if defined(KUMI_DOXYGEN_INVOKED)
-  -> kumi::element_t<I, tuple<Ts...>&>
-  #endif 
+  requires(I < sizeof...(Ts))
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>& t) noexcept
+#if defined(KUMI_DOXYGEN_INVOKED)
+    -> kumi::element_t<I, tuple<Ts...>&>
+#endif
   {
     return t[index<I>];
   }
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
-  get(tuple<Ts...> &&arg) noexcept
-  #if defined(KUMI_DOXYGEN_INVOKED)
-  -> kumi::element_t<I, tuple<Ts...>&&>
-  #endif 
+  requires(I < sizeof...(Ts))
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>&& arg) noexcept
+#if defined(KUMI_DOXYGEN_INVOKED)
+    -> kumi::element_t<I, tuple<Ts...>&&>
+#endif
   {
     return static_cast<tuple<Ts...>&&>(arg)[index<I>];
   }
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
-  get(tuple<Ts...> const &arg) noexcept
-  #if defined(KUMI_DOXYGEN_INVOKED)
-  -> kumi::element_t<I, tuple<Ts...> const &>
-  #endif 
+  requires(I < sizeof...(Ts))
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const& arg) noexcept
+#if defined(KUMI_DOXYGEN_INVOKED)
+    -> kumi::element_t<I, tuple<Ts...> const&>
+#endif
   {
     return arg[index<I>];
   }
 
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires( I < sizeof...(Ts) ) [[nodiscard]] KUMI_ABI constexpr decltype(auto)
-  get(tuple<Ts...> const &&arg) noexcept
-  #if defined(KUMI_DOXYGEN_INVOKED)
-  -> kumi::element_t<I, tuple<Ts...> const &&>
-  #endif 
+  requires(I < sizeof...(Ts))
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const&& arg) noexcept
+#if defined(KUMI_DOXYGEN_INVOKED)
+    -> kumi::element_t<I, tuple<Ts...> const&&>
+#endif
   {
     return static_cast<tuple<Ts...> const&&>(arg)[index<I>];
   }
@@ -785,48 +785,44 @@ namespace kumi
   //! @include doc/tuple/api/typed_get.cpp
   //================================================================================================
   template<typename T, typename... Ts>
-  requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
-  [[nodiscard]] KUMI_ABI constexpr decltype(auto)
-  get(tuple<Ts...> &t) noexcept
-  #if defined(KUMI_DOXYGEN_INVOKED)
-  -> T& 
-  #endif 
+  requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>& t) noexcept
+#if defined(KUMI_DOXYGEN_INVOKED)
+    -> T&
+#endif
   {
     return t[as<T>{}];
   }
 
   /// @overload
   template<typename T, typename... Ts>
-  requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
-  [[nodiscard]] KUMI_ABI constexpr decltype(auto)
-  get(tuple<Ts...> &&t) noexcept
-  #if defined(KUMI_DOXYGEN_INVOKED)
-  -> T && 
-  #endif 
+  requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>&& t) noexcept
+#if defined(KUMI_DOXYGEN_INVOKED)
+    -> T&&
+#endif
   {
     return static_cast<tuple<Ts...>&&>(t)[as<T>{}];
   }
 
   /// @overload
   template<typename T, typename... Ts>
-  requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
-  [[nodiscard]] KUMI_ABI constexpr decltype(auto)
-  get(tuple<Ts...> const &t) noexcept
-  #if defined(KUMI_DOXYGEN_INVOKED)
-  -> T const& 
-  #endif 
+  requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const& t) noexcept
+#if defined(KUMI_DOXYGEN_INVOKED)
+    -> T const&
+#endif
   {
     return t[as<T>{}];
   }
 
   /// @overload
   template<typename T, typename... Ts>
-  requires ( uniquely_typed<Ts...> && contains_type<T, Ts...> )
-  [[nodiscard]] KUMI_ABI constexpr decltype(auto)
-  get(tuple<Ts...> const &&t) noexcept
-  #if defined(KUMI_DOXYGEN_INVOKED)
-  -> T const && 
-  #endif 
+  requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const&& t) noexcept
+#if defined(KUMI_DOXYGEN_INVOKED)
+    -> T const&&
+#endif
   {
     return static_cast<tuple<Ts...> const&&>(t)[as<T>{}];
   }
