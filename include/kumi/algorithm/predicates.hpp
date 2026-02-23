@@ -15,8 +15,9 @@ namespace kumi
   //! @param  ts Value to process.
   //! @param  p Unary predicate.
   //! @return The evaluation of `p(get<0>(ts)) && ... && p(get<N-1>(ts))` where `N` is the size of `ts`.
-  //! ## Example:
+  //! ## Examples:
   //! @include doc/tuple/algo/all_of.cpp
+  //! @include doc/record/algo/all_of.cpp
   //================================================================================================
   template<typename Pred, concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto all_of(T&& ts, Pred p) noexcept
@@ -32,8 +33,9 @@ namespace kumi
   //! @brief  Computes the reduction of a tuple over the `&&` operator.
   //! @param  ts Value to process.
   //! @return The evaluation of `get<0>(ts) && ... && get<N-1>(ts)` where `N` is the size of `ts`.
-  //! ## Example:
+  //! ## Examples:
   //! @include doc/tuple/algo/all_of.cpp
+  //! @include doc/record/algo/all_of.cpp
   //================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto all_of(T&& ts) noexcept
   {
@@ -49,8 +51,9 @@ namespace kumi
   //! @param  ts Value to process.
   //! @param  p Unary predicate.
   //! @return The evaluation of `p(get<0>(ts)) || ... || p(get<N-1>(ts))` where `N` is the size of `ts`.
-  //! ## Example:
+  //! ## Examples:
   //! @include doc/tuple/algo/all_of.cpp
+  //! @include doc/record/algo/all_of.cpp
   //================================================================================================
   template<typename Pred, concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto any_of(T&& ts, Pred p) noexcept
@@ -66,8 +69,9 @@ namespace kumi
   //! @brief  Computes the reduction of a tuple over the `||` operator.
   //! @param  ts Value to process.
   //! @return The evaluation of `get<0>(ts) || ... || get<N-1>(ts)` where `N` is the size of `ts`.
-  //! ## Example:
+  //! ## Examples:
   //! @include doc/tuple/algo/all_of.cpp
+  //! @include doc/record/algo/all_of.cpp
   //================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto any_of(T&& ts) noexcept
   {
@@ -83,8 +87,9 @@ namespace kumi
   //! @param  ts Value to process.
   //! @param  p Unary predicate.
   //! @return The evaluation of `!any_of(ts,p)`.
-  //! ## Example:
+  //! ## Examples:
   //! @include doc/tuple/algo/none_of.cpp
+  //! @include doc/record/algo/none_of.cpp
   //================================================================================================
   template<typename Pred, concepts::product_type Tuple>
   [[nodiscard]] KUMI_ABI constexpr bool none_of(Tuple&& ts, Pred p) noexcept
@@ -97,8 +102,9 @@ namespace kumi
   //! @brief  Checks no elements of a tuple are true.
   //! @param  ts Value to process.
   //! @return The evaluation of `!any_of(ts)`.
-  //! ## Example:
+  //! ## Examples:
   //! @include doc/tuple/algo/none_of.cpp
+  //! @include doc/record/algo/none_of.cpp
   //================================================================================================
   template<concepts::product_type Tuple> [[nodiscard]] KUMI_ABI constexpr bool none_of(Tuple&& ts) noexcept
   {
@@ -111,8 +117,9 @@ namespace kumi
   //! @param  ts Value to process
   //! @param  p Unary predicate. p must return a value convertible to `bool` for every element of t.
   //! @return Number of elements satisfying the condition.
-  //! ## Example:
+  //! ## Examples:
   //! @include doc/tuple/algo/count_if.cpp
+  //! @include doc/record/algo/count_if.cpp
   //================================================================================================
   template<typename Pred, concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr std::size_t count_if(T&& ts, Pred p) noexcept
@@ -130,6 +137,7 @@ namespace kumi
   //! @return Number of elements not equivalent to `false`.
   //! ## Example:
   //! @include doc/tuple/algo/count.cpp
+  //! @include doc/record/algo/count.cpp
   //================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr std::size_t count(T&& ts) noexcept
   {

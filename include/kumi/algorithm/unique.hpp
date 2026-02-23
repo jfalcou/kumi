@@ -18,7 +18,8 @@ namespace kumi
       template<typename W> KUMI_ABI friend constexpr decltype(auto) operator|(make_unique&& x, make_unique<W>&& y)
       {
         constexpr auto value = []<std::size_t... I>(std::index_sequence<I...>) {
-          return (all_uniques_v<W, raw_element_t<I, T>...>);
+          if constexpr (concepts::record_type<T>) return (all_uniques_v<_::type_of_t<W>, raw_element_t<I, T>...>);
+          else return (all_uniques_v<W, element_t<I, T>...>);
         }(std::make_index_sequence<size_v<T>>{});
 
         if constexpr (value)
@@ -79,8 +80,9 @@ namespace kumi
   //!
   //! Computes the type returned by a call to kumi::unique.
   //!
-  //! ## Example:
+  //! ## Examples:
   //! @include doc/tuple/algo/unique.cpp
+  //! @include doc/record/algo/unique.cpp
   //================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto unique(T&& t)
   {
@@ -89,7 +91,7 @@ namespace kumi
     {
       constexpr auto pos = _::uniqued(as<T>{});
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using ret_t = builder_make_t<T, raw_element_t<pos.t[I], T>...>;
+        using ret_t = builder_make_t<T, element_t<pos.t[I], T>...>;
         return ret_t{get<pos.t[I]>(KUMI_FWD(t))...};
       }(std::make_index_sequence<pos.count>{});
     }
@@ -116,8 +118,9 @@ namespace kumi
   //!
   //! Computes the type returned by a call to kumi::all_unique.
   //!
-  //! ## Example:
+  //! ## Examples:
   //! @include doc/tuple/algo/all_unique.cpp
+  //! @include doc/record/algo/all_unique.cpp
   //================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto all_unique(T&& t)
   {
@@ -125,8 +128,8 @@ namespace kumi
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::make_unique{builder_make_t<T, raw_element_t<0, T>>{get<0>(KUMI_FWD(t))}} | ... |
-                _::make_unique<raw_element_t<I + 1, T>>{get<I + 1>(KUMI_FWD(t))})
+        return (_::make_unique{builder_make_t<T, element_t<0, T>>{get<0>(KUMI_FWD(t))}} | ... |
+                _::make_unique<element_t<I + 1, T>>{get<I + 1>(KUMI_FWD(t))})
           .acc;
       }(std::make_index_sequence<size_v<T> - 1>{});
     }

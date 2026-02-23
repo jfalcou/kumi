@@ -28,8 +28,9 @@ namespace kumi
   //!
   //! Computes the type returned by a call to kumi::max.
   //!
-  //! ## Example:
+  //! ## Examples:
   //! @include doc/tuple/algo/max.cpp
+  //! @include doc/record/algo/max.cpp
   //================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto max(T&& t) noexcept
   {
@@ -62,8 +63,9 @@ namespace kumi
   //!
   //! Computes the type returned by a call to kumi::max.
   //!
-  //! ## Example:
+  //! ## Examples:
   //! @include doc/tuple/algo/max.cpp
+  //! @include doc/record/algo/max.cpp
   //================================================================================================
   template<concepts::product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto max(T&& t, F f) noexcept
   {
@@ -97,8 +99,9 @@ namespace kumi
   //!
   //! Computes the type returned by a call to kumi::max_flat.
   //!
-  //! ## Example:
+  //! ## Examples:
   //! @include doc/tuple/algo/max_flat.cpp
+  //! @include doc/record/algo/max_flat.cpp
   //================================================================================================
   template<concepts::product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto max_flat(T&& t, F f) noexcept
   {
@@ -146,8 +149,9 @@ namespace kumi
   //!
   //! Computes the type returned by a call to kumi::min.
   //!
-  //! ## Example:
+  //! ## Examples:
   //! @include doc/tuple/algo/min.cpp
+  //! @include doc/record/algo/min.cpp
   //================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto min(T&& t) noexcept
   {
@@ -180,8 +184,9 @@ namespace kumi
   //!
   //! Computes the type returned by a call to kumi::min.
   //!
-  //! ## Example:
+  //! ## Examples:
   //! @include doc/tuple/algo/min.cpp
+  //! @include doc/record/algo/min.cpp
   //================================================================================================
   template<concepts::product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto min(T&& t, F f) noexcept
   {
@@ -215,8 +220,9 @@ namespace kumi
   //!
   //! Computes the type returned by a call to kumi::min_flat.
   //!
-  //! ## Example:
+  //! ## Examples:
   //! @include doc/tuple/algo/min_flat.cpp
+  //! @include doc/record/algo/min_flat.cpp
   //================================================================================================
   template<concepts::product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto min_flat(T&& t, F f) noexcept
   {

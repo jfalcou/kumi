@@ -78,8 +78,9 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::zip
   //!
-  //! ## Example
+  //! ## Examples:
   //! @include doc/tuple/algo/zip.cpp
+  //! @include doc/record/algo/zip.cpp
   //================================================================================================
   template<concepts::product_type T0, concepts::sized_product_type<size_v<T0>>... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto zip(T0&& t0, Ts&&... ts)
@@ -111,8 +112,9 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::zip_min
   //!
-  //! ## Example
+  //! ## Examples:
   //! @include doc/tuple/algo/zip_min.cpp
+  //! @include doc/record/algo/zip_min.cpp
   //================================================================================================
   template<concepts::product_type T0, concepts::product_type... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto zip_min(T0&& t0, Ts&&... ts)

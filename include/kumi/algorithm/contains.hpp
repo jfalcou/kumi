@@ -23,15 +23,16 @@ namespace kumi
   //! @param k Keyword to check
   //! @return `true` if current product_type contains a field based on the `kw`, and `false` otherwise.
   //!
-  //! ## Example:
+  //! ## Examples:
   //! @include doc/tuple/algo/contains.cpp
+  //! @include doc/record/algo/contains.cpp
   //==================================================================================================================
   template<concepts::product_type T, concepts::identifier K>
   KUMI_ABI constexpr bool contains([[maybe_unused]] T&& t, [[maybe_unused]] K const& k) noexcept
   {
     if constexpr (concepts::sized_product_type<T, 0>) return false;
     else if constexpr (concepts::record_type<T>)
-      return []<std::size_t... I> {
+      return []<std::size_t... I>(std::index_sequence<I...>) {
         return _::can_get_field_by_value<std::remove_cvref_t<K>, element_t<I, T>...>;
       }(std::make_index_sequence<size_v<T>>{});
     else
@@ -51,8 +52,9 @@ namespace kumi
   //! @param ks Keywords to check
   //! @return `true` if current product_type contains a field based on the `kw`, and `false` otherwise.
   //!
-  //! ## Example:
+  //! ## Examples:
   //! @include doc/tuple/algo/contains_any.cpp
+  //! @include doc/record/algo/contains_any.cpp
   //==================================================================================================================
   template<concepts::product_type T, concepts::identifier... Ks>
   KUMI_ABI constexpr bool contains_any(T&& t, Ks const&... ks) noexcept
@@ -70,8 +72,9 @@ namespace kumi
   //! @param ks Keywords to check
   //! @return `true` if current product_type contains a field based on any of the `ks`, and `false` otherwise.
   //!
-  //! ## Example:
+  //! ## Examples:
   //! @include doc/tuple/algo/contains_only.cpp
+  //! @include doc/record/algo/contains_only.cpp
   //==================================================================================================================
   template<concepts::product_type T, concepts::identifier... Ks>
   KUMI_ABI constexpr bool contains_only([[maybe_unused]] T&& t, [[maybe_unused]] Ks const&... ks) noexcept
@@ -93,8 +96,9 @@ namespace kumi
   //! @param ks Keywords to check
   //! @return `true` if current product_type contains no field based on any of the `ks`, and `false` otherwise.
   //!
-  //! ## Example:
+  //! ## Examples:
   //! @include doc/tuple/algo/contains_none.cpp
+  //! @include doc/record/algo/contains_none.cpp
   //==================================================================================================================
   template<concepts::product_type T, concepts::identifier... Ks>
   KUMI_ABI constexpr bool contains_none(T&& t, Ks const&... ks) noexcept

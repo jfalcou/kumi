@@ -30,8 +30,9 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::transpose
   //!
-  //! ## Example
+  //! ## Examples:
   //! @include doc/tuple/algo/transpose.cpp
+  //! @include doc/record/algo/transpose.cpp
   //================================================================================================
   template<concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto transpose(T&& t)
