@@ -167,7 +167,7 @@ template&lt;concepts::product_type T, concepts::identifier K&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd><code>true</code> if current product_type contains a field based on the <code>kw</code>, and <code>false</code> otherwise.</dd></dl>
 <h2><a class="anchor" id="autotoc_md12"></a>
-Example:</h2>
+Examples:</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -189,10 +189,32 @@ Example:</h2>
 <div class="line">  <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">check_contains</a>( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="stringliteral">&quot;malus&quot;</span><a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">_id</a> = 3.5});</div>
 <div class="line">  <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">check_contains</a>( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="stringliteral">&quot;malus&quot;</span><a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">_id</a> = 6.5, <span class="stringliteral">&quot;value&quot;</span><a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">_id</a> = 17} );</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__algorithm_ga4248deebb4632afc8082fabc051bd3cf_html_ga4248deebb4632afc8082fabc051bd3cf"><div class="ttname"><a href="group__algorithm_ga4248deebb4632afc8082fabc051bd3cf.html#ga4248deebb4632afc8082fabc051bd3cf">kumi::contains</a></div><div class="ttdeci">constexpr bool contains(T &amp;&amp;t, K const &amp;k) noexcept</div><div class="ttdoc">Checks if product type contains a given identifier.</div><div class="ttdef"><b>Definition</b> contains.hpp:30</div></div>
+<div class="ttc" id="agroup__algorithm_ga4248deebb4632afc8082fabc051bd3cf_html_ga4248deebb4632afc8082fabc051bd3cf"><div class="ttname"><a href="group__algorithm_ga4248deebb4632afc8082fabc051bd3cf.html#ga4248deebb4632afc8082fabc051bd3cf">kumi::contains</a></div><div class="ttdeci">constexpr bool contains(T &amp;&amp;t, K const &amp;k) noexcept</div><div class="ttdoc">Checks if product type contains a given identifier.</div><div class="ttdef"><b>Definition</b> contains.hpp:31</div></div>
 <div class="ttc" id="agroup__utility_gacadc026868e6654e80c57432643c804a_html_gacadc026868e6654e80c57432643c804a"><div class="ttname"><a href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">kumi::if_</a></div><div class="ttdeci">constexpr traits_check&lt; Traits &gt; if_</div><div class="ttdoc">Option specifying a traits that type should verify for being used as a identifier value.</div><div class="ttdef"><b>Definition</b> identifier.hpp:38</div></div>
 <div class="ttc" id="anamespacekumi_html_abd1d4a59b0cddc9d5a5aef185c9f1e46"><div class="ttname"><a href="namespacekumi.html#abd1d4a59b0cddc9d5a5aef185c9f1e46">kumi::get</a></div><div class="ttdeci">constexpr decltype(auto) get(record&lt; Ts... &gt; &amp;&amp;r) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition</b> record.hpp:509</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:32</div></div>
+</div><!-- fragment --> <div class="fragment"><div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt;</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">check_contains</a>(T <span class="keyword">const</span>&amp; <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">t</a>)</div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(<a class="code hl_function" href="group__algorithm_ga4248deebb4632afc8082fabc051bd3cf.html#ga4248deebb4632afc8082fabc051bd3cf">contains</a>(T{}, <span class="stringliteral">&quot;value&quot;</span><a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">_id</a>))</div>
+<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Correct product_type: &quot;</span> &lt;&lt; <a class="code hl_function" href="namespacekumi.html#abd1d4a59b0cddc9d5a5aef185c9f1e46">get</a>&lt;<span class="stringliteral">&quot;value&quot;</span><a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">_id</a>&gt;(<a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">t</a>) &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">  <span class="keywordflow">else</span></div>
+<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Incorrect product type\n&quot;</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">main</a>()</div>
+<div class="line">{</div>
+<div class="line">  <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">check_contains</a>( <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;value&quot;</span><a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">_id</a> = 9  });</div>
+<div class="line">  <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">check_contains</a>( <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;malus&quot;</span><a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">_id</a> = 3.5});</div>
+<div class="line">  <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">check_contains</a>( <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;malus&quot;</span><a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">_id</a> = 6.5, <span class="stringliteral">&quot;value&quot;</span><a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">_id</a> = 17} );</div>
+<div class="line">}</div>
+<div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous fields necessarily named, names are unique.</div><div class="ttdef"><b>Definition</b> traits.hpp:459</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
