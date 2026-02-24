@@ -30,8 +30,8 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup algorithms
-  //! @brief Converts a product_type<Ts...> to an instance of a product_type<Target...>
+  //! @ingroup  generators
+  //! @brief    Converts a product_type<Ts...> to an instance of a product_type<Target...>
   //!
   //! @tparam Target destination type to associate to each member of the product type `t`
   //! @param  t Product type to convert

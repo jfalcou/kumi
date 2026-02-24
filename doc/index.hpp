@@ -105,7 +105,7 @@
 //!
 //! This library is licensed under the [Boost Software License](https://opensource.org/licenses/BSL):
 //!
-//! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~none
+//! ```text 
 //! Copyright : KUMI Project Contributors
 //! 
 //! Boost Software License - Version 1.0 - August 17th, 2003
@@ -131,6 +131,6 @@
 //! FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,
 //! ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
 //! DEALINGS IN THE SOFTWARE.
-//! ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+//! ``` 
 //!
 //==================================================================================================
