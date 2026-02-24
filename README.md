@@ -2,7 +2,7 @@
 
 # KUMI - C++20 Compact Tuple Tools
 
-[![Licence](https://img.shields.io/github/license/jfalcou/kumi?style=plastic)](https://img.shields.io/github/license/jfalcou/kumi?style=plastic)
+[![License](https://img.shields.io/badge/license-BSL-green?style=plastic)](./LICENSE.md)
 [![Discord](https://img.shields.io/discord/692734675726237696?style=plastic)](https://discord.com/channels/692734675726237696/692735300522344468)
 [![CI Status](https://github.com/jfalcou/kumi/actions/workflows/unit.yml/badge.svg)](https://github.com/jfalcou/kumi/actions/workflows/unit.yml)
 
