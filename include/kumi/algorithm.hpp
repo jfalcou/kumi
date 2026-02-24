@@ -13,19 +13,16 @@ namespace kumi
   //! @defgroup algorithm Product Type Algorithms
   //! @brief    Algorithms for manipulating Product types
   //!
-  //! @addtogroup algorithm
   //! @{
   //!   @defgroup transforms Product Type Transformations
   //!   @brief Algorithms applying transformation to product types
-  //! 
-  //!   @addtogroup transforms
-  //!   @{  
+  //!   @{
   //!     @defgroup tuple_transforms Tuple Type Specific Transformations
   //!     @brief Algorithms applying transformation to tuples
-  //!   
+  //!
   //!     @defgroup record_transforms Record Type Specific Transformations
-  //!     @brief Algorithms applying transformation to records  
-  //!   @}   
+  //!     @brief Algorithms applying transformation to records
+  //!   @}
   //!
   //!   @defgroup queries Product Type Queries
   //!   @brief    Algorithms querying properties from product types

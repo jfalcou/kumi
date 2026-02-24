@@ -16,7 +16,7 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup algorithm
+  //! @ingroup queries
   //! @brief Checks if a product type contains a given identifier
   //!
   //! @param t the product type to inspect.
@@ -27,17 +27,17 @@ namespace kumi
   //! @include doc/tuple/algo/contains.cpp
   //! @include doc/record/algo/contains.cpp
   //====================================================================================================================
-  template<concepts::product_type T, concepts::identifier I>
-  KUMI_ABI constexpr bool contains([[maybe_unused]] T&& t, [[maybe_unused]] I const& id) noexcept
+  template<concepts::product_type T, concepts::identifier ID>
+  KUMI_ABI constexpr bool contains([[maybe_unused]] T&& t, [[maybe_unused]] ID const& id) noexcept
   {
     if constexpr (concepts::sized_product_type<T, 0>) return false;
     else if constexpr (concepts::record_type<T>)
       return []<std::size_t... I>(std::index_sequence<I...>) {
-        return _::can_get_field_by_value<std::remove_cvref_t<K>, element_t<I, T>...>;
+        return _::can_get_field_by_value<std::remove_cvref_t<ID>, element_t<I, T>...>;
       }(std::make_index_sequence<size_v<T>>{});
     else
       return []<std::size_t... I>(std::index_sequence<I...>) {
-        if constexpr (((concepts::field<element_t<I, T>> && std::invocable<element_t<I, T>, std::remove_cvref_t<K>>) ||
+        if constexpr (((concepts::field<element_t<I, T>> && std::invocable<element_t<I, T>, std::remove_cvref_t<ID>>) ||
                        ...))
           return true;
         else return false;
@@ -45,7 +45,7 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup algorithm
+  //! @ingroup queries
   //! @brief Checks if a product type contains at least one of many identifiers
   //!
   //! @param t the product type to inspect.
@@ -60,12 +60,12 @@ namespace kumi
   KUMI_ABI constexpr bool contains_any(T&& t, Is const&... ids) noexcept
   {
     if constexpr (concepts::sized_product_type<T, 0>) return false;
-    else if constexpr (sizeof...(Ks) == 0) return false;
-    else return (contains(KUMI_FWD(t), ks) || ...);
+    else if constexpr (sizeof...(Is) == 0) return false;
+    else return (contains(KUMI_FWD(t), ids) || ...);
   }
 
   //==================================================================================================================
-  //! @ingroup algorithm
+  //! @ingroup queries
   //! @brief Checks if a product type contains fields based only on selected identifiers
   //!
   //! @param t the product type to inspect.
@@ -80,16 +80,16 @@ namespace kumi
   KUMI_ABI constexpr bool contains_only([[maybe_unused]] T&& t, [[maybe_unused]] Is const&... ids) noexcept
   {
     if constexpr (concepts::sized_product_type<T, 0>) return false;
-    else if constexpr (sizeof...(Ks) == 0) return false;
-    else if constexpr (sizeof...(Ks) < size_v<T>) return false;
+    else if constexpr (sizeof...(Is) == 0) return false;
+    else if constexpr (sizeof...(Is) < size_v<T>) return false;
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::contains<element_t<I, T>, Ks...> && ...);
+        return (_::contains<element_t<I, T>, Is...> && ...);
       }(std::make_index_sequence<size_v<T>>{});
   }
 
   //==================================================================================================================
-  //! @ingroup algorithm
+  //! @ingroup queries
   //! @brief Checks if a product type contains no fields based on any of the selected identifiers
   //!
   //! @param t the product type to inspect.
@@ -103,6 +103,6 @@ namespace kumi
   template<concepts::product_type T, concepts::identifier... Is>
   KUMI_ABI constexpr bool contains_none(T&& t, Is const&... ids) noexcept
   {
-    return !contains_any(KUMI_FWD(t), ks...);
+    return !contains_any(KUMI_FWD(t), ids...);
   }
 }

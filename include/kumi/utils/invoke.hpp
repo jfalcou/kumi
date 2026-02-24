@@ -1,10 +1,10 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
@@ -32,7 +32,7 @@ namespace kumi
     };
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup utility
   //! @brief Invoke the Callable object c with a pack of arguments.
   //!
@@ -41,7 +41,7 @@ namespace kumi
   //! @return The value returned by c.
   //!
   //! @note Replaces std::invoke to avoid depending on `functional`.
-  //================================================================================================
+  //====================================================================================================================
   template<typename C, typename... Ts>
   KUMI_ABI constexpr decltype(auto) invoke(C&& c, Ts&&... ts) noexcept(std::is_nothrow_invocable<C, Ts...>::value)
   requires(std::is_invocable<C, Ts...>::value)
@@ -50,7 +50,7 @@ namespace kumi
     else return KUMI_FWD(c)(KUMI_FWD(ts)...);
   };
 
-  //================================================================================================
+  //====================================================================================================================
   //! @ingroup utility
   //! @brief Invoke the Callable object c with a pack of arguments with return type R.
   //!
@@ -60,7 +60,7 @@ namespace kumi
   //! @return The value returned by c with type R.
   //!
   //! @note Replaces std::invoke_r to avoid depending on `functional`.
-  //================================================================================================
+  //====================================================================================================================
   template<typename R, typename C, typename... Ts>
   KUMI_ABI constexpr R invoke_r(C&& c, Ts&&... ts) noexcept(std::is_nothrow_invocable_r<R, C, Ts...>::value)
   requires(std::is_invocable_r<R, C, Ts...>::value)

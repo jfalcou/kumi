@@ -10,8 +10,8 @@
     </tab>
     <tab type="usergroup" visible="yes"   title="Reference Documentation">
       <tab type="usergroup" visible="yes"   title="Types">
-        <tab type="user" url="@ref product_types"   title="Product types"/>
-        <tab type="user" url="@ref record_types"  title="Record Types"/>
+        <tab type="user" url="@ref tuple"   title="Product types"/>
+        <tab type="user" url="@ref record"  title="Record Types"/>
       </tab>
       <tab type="usergroup" visible="yes" title="Algorithms">
         <tab type="user" url="@ref transforms"  title="Transformations"/>

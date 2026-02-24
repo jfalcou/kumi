@@ -4,7 +4,7 @@
 ##  SPDX-License-Identifier: BSL-1.0
 ##======================================================================================================================
 cmake_minimum_required(VERSION 3.22)
-project(kumi LANGUAGES CXX)
+project(KUMI LANGUAGES CXX)
 
 ##======================================================================================================================
 option( KUMI_BUILD_TEST             "Build tests using Kumi headers"            ON  )
