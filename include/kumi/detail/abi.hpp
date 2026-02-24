@@ -10,10 +10,12 @@
 #if defined(_MSC_VER)
 #if _MSVC_LANG < 202002L
 #error "KUMI requires C++20 or higher. Use /std:c++20 or higher to enable C++20 features."
+#include "KUMI C++ version error"
 #endif
 #else
 #if __cplusplus < 202002L
 #error "KUMI requires C++20 or higher. Use -std=c++20 or higher to enable C++20 features."
+#include "KUMI C++ version error"
 #endif
 #endif
 
