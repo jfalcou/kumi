@@ -38,7 +38,8 @@ namespace kumi::_
   //!
   //! @note This function is an implementation detail and only documented to show how to use
   //!       the `to_str` extension point. It is used in order to handle identifiers/fields
-  //!       display and manipulations.
+  //!       display and manipulations. to_str needs to be constexpr callable, if not some concepts
+  //!       might fail unexpectedly
   //!
   //! @tparam   T Type of the element to output.
   //! @param    t The value of the element to output.
@@ -47,16 +48,12 @@ namespace kumi::_
   //! ## Example:
   //! @include doc/infra/to_str.cpp
   //================================================================================================
-  template<typename T> constexpr str make_str(T const& t)
+  template<typename T> consteval str make_str(T const& t)
   {
     if constexpr (requires {
                     { to_str(t) } -> std::same_as<str>;
                   })
-    {
-      if constexpr (_::constant_evaluable<to_str(std::remove_cvref_t<T>{})>) return to_str(t);
-      else
-        static_assert(sizeof(T) == 0, "Provided to_str(...) function is not callable in a constant evaluated context");
-    }
+      return to_str(t);
     else return typer<std::remove_cvref_t<T>>();
   }
 }

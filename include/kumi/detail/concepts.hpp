@@ -63,13 +63,6 @@ namespace kumi::_
   template<field T> using key_of_t = typename key_of<std::remove_cvref_t<T>>::type;
   template<field T> using type_of_t = typename type_of<std::remove_cvref_t<T>>::type;
 
-  template<auto> struct requires_constant : std::true_type
-  {
-  };
-
-  template<auto C>
-  concept constant_evaluable = requires { requires_constant<C>::value; };
-
   //==============================================================================================
   // Helper concepts for construction checks
   //==============================================================================================
