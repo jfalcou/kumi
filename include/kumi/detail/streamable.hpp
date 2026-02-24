@@ -54,7 +54,8 @@ namespace kumi::_
                   })
     {
       if constexpr (_::constant_evaluable<to_str(std::remove_cvref_t<T>{})>) return to_str(t);
-      else static_assert(false, "Provided to_str(...) function is not callable in a constant evaluated context");
+      else
+        static_assert(sizeof(T) == 0, "Provided to_str(...) function is not callable in a constant evaluated context");
     }
     else return typer<std::remove_cvref_t<T>>();
   }
