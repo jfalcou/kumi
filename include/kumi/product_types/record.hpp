@@ -138,33 +138,33 @@ namespace kumi
     //==============================================================================================
     template<concepts::identifier Name>
     requires(concepts::contains_field<Name, Ts...>)
-    KUMI_ABI constexpr decltype(auto) operator[](Name const& n) & noexcept
+    KUMI_ABI constexpr decltype(auto) operator[](Name const&) & noexcept
     {
-      return impl(n);
+      return impl(_::tag_of_t<Name>{});
     }
 
     /// @overload
     template<concepts::identifier Name>
     requires(concepts::contains_field<Name, Ts...>)
-    KUMI_ABI constexpr decltype(auto) operator[](Name const& n) && noexcept
+    KUMI_ABI constexpr decltype(auto) operator[](Name const&) && noexcept
     {
-      return static_cast<decltype(impl)&&>(impl)(n);
+      return static_cast<decltype(impl)&&>(impl)(_::tag_of_t<Name>{});
     }
 
     /// @overload
     template<concepts::identifier Name>
     requires(concepts::contains_field<Name, Ts...>)
-    KUMI_ABI constexpr decltype(auto) operator[](Name const& n) const&& noexcept
+    KUMI_ABI constexpr decltype(auto) operator[](Name const&) const&& noexcept
     {
-      return static_cast<decltype(impl) const&&>(impl)(n);
+      return static_cast<decltype(impl) const&&>(impl)(_::tag_of_t<Name>{});
     }
 
     /// @overload
     template<concepts::identifier Name>
     requires(concepts::contains_field<Name, Ts...>)
-    KUMI_ABI constexpr decltype(auto) operator[](Name const& n) const& noexcept
+    KUMI_ABI constexpr decltype(auto) operator[](Name const&) const& noexcept
     {
-      return impl(n);
+      return impl(_::tag_of_t<Name>{});
     }
 
     //==============================================================================================
@@ -213,7 +213,7 @@ namespace kumi
     requires(concepts::equivalent<record, record<Us...>> && _::fieldwise_convertible<record, record<Us...>>)
     KUMI_ABI constexpr record& operator=(record<Us...> const& other)
     {
-      ((get<name_of(as<Ts>{})>(*this) = get<name_of(as<Ts>{})>(KUMI_FWD(other))), ...);
+      ((get<name_of<Ts>()>(*this) = get<name_of<Ts>()>(KUMI_FWD(other))), ...);
       return *this;
     }
 
@@ -222,7 +222,7 @@ namespace kumi
     requires(concepts::equivalent<record, record<Us...>> && _::fieldwise_convertible<record, record<Us...>>)
     KUMI_ABI constexpr record& operator=(record<Us...>&& other)
     {
-      ((get<name_of(as<Ts>{})>(*this) = get<name_of(as<Ts>{})>(KUMI_FWD(other))), ...);
+      ((get<name_of<Ts>()>(*this) = get<name_of<Ts>()>(KUMI_FWD(other))), ...);
       return *this;
     }
 
@@ -238,7 +238,7 @@ namespace kumi
     KUMI_ABI friend constexpr auto operator==(record const& self, record<Us...> const& other) noexcept
     requires(concepts::named_equality_comparable<record, record<Us...>>)
     {
-      return ((get<name_of(as<Ts>{})>(self) == get<name_of(as<Ts>{})>(other)) && ...);
+      return ((get<name_of<Ts>()>(self) == get<name_of<Ts>()>(other)) && ...);
     }
 
     template<typename... Us>
@@ -261,11 +261,11 @@ namespace kumi
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os,
                                                          record const& t) noexcept
     {
-      os << "( ";
+      os << "{ ";
       [&]<std::size_t... I>(std::index_sequence<I...>) {
-        ((os << t[index<I>] << " "), ...);
-      }(std::make_index_sequence<size_v<decltype(t)>>{});
-      os << ')';
+        ((os << t[index<I>] << ", "), ...);
+      }(std::make_index_sequence<size_v<record> - 1>{});
+      os << t[index<size_v<record> - 1>] << " }";
 
       return os;
     }
@@ -303,7 +303,7 @@ namespace kumi
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, record<>) noexcept
     {
-      return os << "()";
+      return os << "{}";
     }
   };
 
@@ -415,7 +415,7 @@ namespace kumi
   template<concepts::record_type R> [[nodiscard]] KUMI_ABI constexpr auto to_ref(R&& r)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return kumi::forward_as_record<name_of(as<element_t<I, R>>{})...>(field_value_of(get<I>(KUMI_FWD(r)))...);
+      return kumi::forward_as_record<name_of<element_t<I, R>>()...>(field_value_of(get<I>(KUMI_FWD(r)))...);
     }(std::make_index_sequence<size_v<R>>{});
   }
 
@@ -447,7 +447,7 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto from_record(record<Ts...> const& r)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return Type{get<name_of(as<element_t<I, Type>>{})>(r)...};
+      return Type{get<name_of<element_t<I, Type>>()>(r)...};
     }(std::make_index_sequence<size_v<Type>>());
   }
 
@@ -469,8 +469,7 @@ namespace kumi
     if constexpr (concepts::sized_product_type<Type, 0>) return kumi::record{};
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return record{
-          capture_field<name_of(as<element_t<I, Type>>{})>(get<name_of(as<element_t<I, Type>>{})>(KUMI_FWD(r)))...};
+        return record{capture_field<name_of<element_t<I, Type>>()>(get<name_of<element_t<I, Type>>()>(KUMI_FWD(r)))...};
       }(std::make_index_sequence<size_v<Type>>{});
   }
 

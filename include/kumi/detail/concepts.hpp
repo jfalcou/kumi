@@ -34,10 +34,7 @@ namespace kumi::_
   concept implicit_constructible = requires(Args... args) { T{args...}; };
 
   template<typename T>
-  concept identifier = requires(T const& t) {
-    typename std::remove_cvref_t<T>::tag_type;
-    { std::remove_cvref_t<T>::to_str() };
-  };
+  concept identifier = requires(T const& t) { typename std::remove_cvref_t<T>::tag_type; };
 
   template<typename O>
   concept field = requires(O const& o) {
@@ -45,6 +42,11 @@ namespace kumi::_
     typename std::remove_cvref_t<O>::identifier_type;
     { o(typename std::remove_cvref_t<O>::identifier_type{}) };
     { std::remove_cvref_t<O>::name() };
+  };
+
+  template<identifier T> struct tag_of
+  {
+    using type = typename std::remove_cvref_t<T>::tag_type;
   };
 
   template<field T> struct key_of
@@ -57,8 +59,16 @@ namespace kumi::_
     using type = typename std::remove_cvref_t<T>::type;
   };
 
+  template<identifier T> using tag_of_t = typename tag_of<std::remove_cvref_t<T>>::type;
   template<field T> using key_of_t = typename key_of<std::remove_cvref_t<T>>::type;
   template<field T> using type_of_t = typename type_of<std::remove_cvref_t<T>>::type;
+
+  template<auto> struct requires_constant : std::true_type
+  {
+  };
+
+  template<auto C>
+  concept constant_evaluable = requires { requires_constant<C>::value; };
 
   //==============================================================================================
   // Helper concepts for construction checks
@@ -226,8 +236,8 @@ namespace kumi::_
     static consteval invalid get_index();
   };
 
-  template<std::size_t I, typename Ref, field Field>
-  requires(std::is_same_v<Ref, key_of_t<Field>>)
+  template<std::size_t I, identifier Ref, field Field>
+  requires(std::is_same_v<tag_of_t<Ref>, key_of_t<Field>>)
   struct check_field<I, Ref, Field>
   {
     using constant = std::integral_constant<std::size_t, I>;

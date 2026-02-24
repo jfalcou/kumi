@@ -90,8 +90,8 @@ namespace kumi
     else if constexpr (concepts::record_type<S1>)
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::foldable{sum, invoke(prod, get<name_of(as<element_t<I, S1>>{})>(KUMI_FWD(s1)),
-                                        get<name_of(as<element_t<I, S1>>{})>(KUMI_FWD(s2)))} >>
+        return (_::foldable{sum, invoke(prod, get<name_of<element_t<I, S1>>()>(KUMI_FWD(s1)),
+                                        get<name_of<element_t<I, S1>>()>(KUMI_FWD(s2)))} >>
                 ... >> _::foldable{sum, init})
           .value;
       }(std::make_index_sequence<size<S1>::value>());
@@ -115,9 +115,8 @@ namespace kumi
     else if constexpr (concepts::record_type<S1>)
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (
-          init + ... +
-          (get<name_of(as<element_t<I, S1>>{})>(KUMI_FWD(s1)) * get<name_of(as<element_t<I, S1>>{})>(KUMI_FWD(s2))));
+        return (init + ... +
+                (get<name_of<element_t<I, S1>>()>(KUMI_FWD(s1)) * get<name_of<element_t<I, S1>>()>(KUMI_FWD(s2))));
       }(std::make_index_sequence<size<S1>::value>());
     }
     else
