@@ -11,9 +11,6 @@
 #include <kumi/detail.hpp>
 #include <kumi/utils.hpp>
 
-#include <iosfwd>
-#include <type_traits>
-
 namespace kumi
 {
   //================================================================================================

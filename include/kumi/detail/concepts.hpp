@@ -7,10 +7,6 @@
 //==================================================================================================
 #pragma once
 
-#include <concepts>
-#include <cstddef>
-#include <utility>
-
 namespace kumi::_
 {
   template<typename... Ts> struct type_list
