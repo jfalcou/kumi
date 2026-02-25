@@ -11,11 +11,13 @@ namespace kumi
 }
 #if defined(_MSC_VER)
 #if _MSVC_LANG < 202002L
-#error "KUMI requires C++20 or higher. Use /std:c++20 or higher to enable C++20 features."
+#error "KUMI C++ version error"
+#include "KUMI requires C++20 or higher. Use /std:c++20 or higher to enable C++20 features."
 #endif
 #else
 #if __cplusplus < 202002L
-#error "KUMI requires C++20 or higher. Use -std=c++20 or higher to enable C++20 features."
+#error "KUMI C++ version error"
+#include "KUMI requires C++20 or higher. Use -std=c++20 or higher to enable C++20 features."
 #endif
 #endif
 #define KUMI_FWD(...) static_cast<decltype(__VA_ARGS__)&&>(__VA_ARGS__)
@@ -35,6 +37,11 @@ namespace kumi
 #if defined(__clang__)
 #pragma clang diagnostic ignored "-Wmissing-braces"
 #endif
+#include <cstddef>
+#include <concepts>
+#include <iosfwd>
+#include <type_traits>
+#include <utility>
 #define FOR_LIST_OF_STRUCTS(DO)                                                                                        \
   DO(1)                                                                                                                \
   DO(2)                                                                                                                \
@@ -147,8 +154,6 @@ namespace kumi
       KUMI_PP_REPEAT(N, KUMI_GET_NAME_LVALUE, I)                                                                       \
     }                                                                                                                  \
   };
-#include <iosfwd>
-#include <utility>
 namespace kumi
 {
   struct str
@@ -251,7 +256,6 @@ namespace kumi::_
     return value;
   }
 }
-#include <iosfwd>
 namespace kumi::_
 {
   template<typename T> auto make_streamable(T const& e)
@@ -262,22 +266,17 @@ namespace kumi::_
   }
 }
 #if defined(__ANDROID__) || defined(__APPLE__)
-#include <type_traits>
 namespace kumi
 {
   template<typename From, typename To>
   concept convertible_to = std::is_convertible_v<From, To> && requires { static_cast<To>(std::declval<From>()); };
 }
 #else
-#include <concepts>
 namespace kumi
 {
   using std::convertible_to;
 }
 #endif
-#include <concepts>
-#include <cstddef>
-#include <utility>
 namespace kumi::_
 {
   template<typename... Ts> struct type_list
@@ -467,7 +466,6 @@ namespace kumi::_
   template<typename Ref, typename... Fields>
   concept can_get_field_by_value = !std::is_same_v<get_field_by_value_t<Ref, Fields...>, std::false_type>;
 }
-#include <cstddef>
 namespace kumi::_
 {
   template<std::size_t I, typename T> consteval auto get_key()
@@ -490,8 +488,6 @@ namespace kumi::_
   };
   inline consteval std::true_type true_fn(...);
 }
-#include <cstddef>
-#include <utility>
 namespace kumi::_
 {
   template<int N, typename T> struct leaf
@@ -555,8 +551,6 @@ namespace kumi::_
   };
   template<typename... Ts> using make_set_t = typename make_set<Ts...>::type;
 }
-#include <cstddef>
-#include <utility>
 namespace kumi::_
 {
   template<typename... Ts> inline constexpr bool no_references = (true && ... && !std::is_reference_v<Ts>);
@@ -647,9 +641,6 @@ namespace kumi
     else return invoke(KUMI_FWD(c), KUMI_FWD(ts)...);
   };
 }
-#include <cstddef>
-#include <type_traits>
-#include <utility>
 namespace kumi
 {
   namespace _
@@ -853,9 +844,6 @@ namespace kumi
   template<typename T> using builder_t = typename builder<T>::type;
   template<typename T, typename... Args> using builder_make_t = typename builder<T>::template to<Args...>;
 }
-#include <cstddef>
-#include <type_traits>
-#include <utility>
 namespace kumi
 {
   namespace _
@@ -972,7 +960,6 @@ namespace kumi
       }(std::make_index_sequence<size_v<T>>{});
   }
 }
-#include <iosfwd>
 namespace kumi
 {
   struct unit
@@ -1189,7 +1176,6 @@ namespace kumi
     };
   }
 }
-#include <cstddef>
 namespace kumi
 {
   struct numeric_add
@@ -1251,7 +1237,6 @@ namespace kumi
     inline constexpr boolean_xor bit_xor{};
   }
 }
-#include <iosfwd>
 namespace kumi
 {
   template<concepts::indexer... V> struct indexes_t
@@ -1299,7 +1284,6 @@ namespace kumi
     return indexes_t{ts...};
   }
 }
-#include <cstddef>
 namespace kumi
 {
   template<typename U, concepts::product_type T>
@@ -1346,8 +1330,6 @@ namespace kumi
     return []<typename T>(T const&) constexpr { return Pred<T>::value; };
   }
 }
-#include <type_traits>
-#include <utility>
 #if !defined(KUMI_DOXYGEN_INVOKED)
 template<std::size_t I, typename Head, typename... Tail>
 struct std::tuple_element<I, kumi::tuple<Head, Tail...>> : std::tuple_element<I - 1, kumi::tuple<Tail...>>
@@ -1406,8 +1388,6 @@ struct std::basic_common_reference<kumi::tuple<Ts...>, kumi::tuple<Us...>, TQual
 namespace kumi
 {
 }
-#include <iosfwd>
-#include <type_traits>
 namespace kumi
 {
   template<typename... Ts> struct tuple
