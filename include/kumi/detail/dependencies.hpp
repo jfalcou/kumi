@@ -7,18 +7,8 @@
 //==================================================================================================
 #pragma once
 
-#if defined(__ANDROID__) || defined(__APPLE__)
-
-namespace kumi
-{
-  template<typename From, typename To>
-  concept convertible_to = std::is_convertible_v<From, To> && requires { static_cast<To>(std::declval<From>()); };
-}
-#else
-
-namespace kumi
-{
-  using std::convertible_to;
-}
-
-#endif
+#include <cstddef>
+#include <concepts>
+#include <iosfwd>
+#include <type_traits>
+#include <utility>
