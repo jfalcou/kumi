@@ -1,20 +1,20 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
 {
-  //================================================================================================
-  //! @ingroup generators
-  //! @brief Concatenates product types in a single one
+  //====================================================================================================================
+  //! @ingroup  generators
+  //! @brief    Concatenates product types in a single one
   //!
   //! @param ts Product types to concatenate
-  //! @return   A product type made of all element of all input product types in order
+  //! @return   A product type made of all element of all input product types in order.
   //!
   //! ## Helper type
   //! @code
@@ -32,7 +32,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/cat.cpp
   //! @include doc/record/algo/cat.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::product_type... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto cat(Ts&&... ts)
   requires(concepts::follows_same_semantic<Ts...>)

@@ -1,22 +1,25 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
 {
-  //================================================================================================
-  //! @ingroup generators
-  //! @brief Creates a kumi::tuple of product_types, each containing `N` consecutive elements from
-  //!        `t`. Windows starts at 0 and advance by `1` element each time.
+  //====================================================================================================================
+  //! @ingroup  generators
+  //! @brief    Creates a tuple of product types, each containing `N` consecutive elements from `t`. Windows starts at
+  //!           0 and advance by `1` element each time.
+  //!
+  //! On record types, this function operates on elements as if they were ordered. The considered order is the order
+  //! of declaration.
   //!
   //! @tparam N Size of the window to generate
-  //! @param  t the tuple to from which to extract the windows
-  //! @return A tuple of product_types, each containing `N` consecutive elements of `t`
+  //! @param  t the product type from which to extract the windows
+  //! @return A tuple of product types, each containing `N` consecutive elements of `t`
   //!
   //! @note Windows behaves like overlapping tiles: each inner product_type is a tile over `t`
   //!       starting at index `tile_number`. All the windows are of the same size.
@@ -25,7 +28,7 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<std::size_t N, product_type> struct windows;
+  //!   template<std::size_t N, product_type T> struct windows;
   //!
   //!   template<std::size_t N, product_type T>
   //!   using windows_t = typename windows<N, T>::type;
@@ -37,7 +40,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/windows.cpp
   //! @include doc/record/algo/windows.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<std::size_t N, concepts::product_type T>
   requires(N > 0 && N <= size_v<T>)
   [[nodiscard]] KUMI_ABI constexpr auto windows(T&& t)
@@ -48,24 +51,27 @@ namespace kumi
         [&](auto idx) { return kumi::extract(KUMI_FWD(t), kumi::index<idx>, kumi::index<idx + N>); });
   }
 
-  //================================================================================================
-  //! @ingroup generators
-  //! @brief Creates a kumi::tuple of product_types, each containing `N` consecutive elements from
-  //!        `t`. Chunks starts at 0 and advance by `N` element each time.
+  //====================================================================================================================
+  //! @ingroup  generators
+  //! @brief    Creates a tuple of product types, each containing `N` consecutive elements from `t`. Chunks starts at
+  //!           0 and advance by `N` element each time.
+  //!
+  //! On record types, this function operates on elements as if they were ordered. The considered order is the order
+  //! of declaration.
   //!
   //! @tparam N Size of the chunks to generate
-  //! @param  t the tuple to from which to extract the chunks
-  //! @return A tuple of product_types, each containing `N` consecutive elements of `t`
+  //! @param  t the product type from which to extract the chunks
+  //! @return A tuple of product types, each containing `N` consecutive elements of `t`
   //!
   //! @note Chunks behaves like paving tiles: each inner product_type is a tile over `t`
   //!       starting at index `chunk_size * tile_number + 1`. The last chunk will be smaller if the
-  //!       size of the tuple is not a multiple of the chunk size.
+  //!       size of the product_type is not a multiple of the chunk size.
   //!
   //! ## Helper type
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<std::size_t N, product_type> struct chunks;
+  //!   template<std::size_t N, product_type T> struct chunks;
   //!
   //!   template<std::size_t N, product_type T>
   //!   using chunks_t = typename chunks<N, T>::type;
@@ -77,7 +83,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/chunks.cpp
   //! @include doc/record/algo/chunks.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<std::size_t N, concepts::product_type T>
   requires(N > 0 && N <= size_v<T>)
   [[nodiscard]] KUMI_ABI constexpr auto chunks(T&& t)

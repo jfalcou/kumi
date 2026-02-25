@@ -1,24 +1,25 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
 {
-  //================================================================================================
-  //! @ingroup product_types
-  //! @class field
-  //! @brief Named wrapper over a type.
+  //====================================================================================================================
+  //! @ingroup  types
+  //! @class    field
+  //! @brief    Named wrapper over a type.
   //!
-  //! kumi::field provides a way to define named fields in a kumi::tuple.
+  //! kumi::field provides a way to define named fields in a product type. Any type can be used as an identifier as long
+  //! as it models kumi::concepts::identifier.
   //!
-  //! @tparam Id a compile time string that is used to retrieve the field.
-  //! @tparam T the type of the value that is wrapped.
-  //================================================================================================
+  //! @tparam Id a type that serves as the label of the field.
+  //! @tparam T the type of the value associated to the label.
+  //====================================================================================================================
   template<concepts::identifier Id, typename T> struct field
   {
     using type = T;
@@ -46,11 +47,11 @@ namespace kumi
 
     KUMI_ABI constexpr T const&& operator()(inner_type) const&& noexcept { return static_cast<T const&&>(value); }
 
-    //==============================================================================================
-    /// @ingroup product_types
+    //==================================================================================================================
+    /// @ingroup utility
     //! @related kumi::field
     //! @brief Inserts a kumi::field in an output stream
-    //==============================================================================================
+    //==================================================================================================================
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, field const& w) noexcept
     {
@@ -86,11 +87,11 @@ namespace kumi
 
     KUMI_ABI constexpr T const&& operator()(inner_type) const&& noexcept { return static_cast<T const&&>(*this); }
 
-    //==============================================================================================
-    /// @ingroup product_types
+    //==================================================================================================================
+    /// @ingroup utility
     //! @related kumi::field
     //! @brief Inserts a kumi::field in an output stream
-    //==============================================================================================
+    //==================================================================================================================
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, field const& w) noexcept
     {
@@ -98,63 +99,121 @@ namespace kumi
     }
   };
 
-  //================================================================================================
-  //! @ingroup utility
-  //! @brief Extracts the name from a kumi::field or returns the parameter.
+  //====================================================================================================================
+  //! @ingroup  utility
+  //! @brief    Extracts the name from a kumi::concepts::field or returns the parameter.
   //!
-  //! @note If the unqualified type of T is not a field returns kumi::unkown.
+  //! @note     If the unqualified type of input does not model kumi::concepts::field, returns kumi::unkown.
   //! @tparam   T The name to extract name from.
   //! @return   The name of the field or kumi::unknown.
-  //================================================================================================
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<typename Ts> struct name_of;
+  //!
+  //!   template<typename T> using name_of_t = typename name_of<T>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::name_of
+  //!
+  //! ## Example:
+  //! @include doc/infra/name_of.cpp
+  //====================================================================================================================
   template<typename T> [[nodiscard]] KUMI_ABI constexpr auto name_of(as<T>) noexcept
   {
     if constexpr (concepts::field<T>) return _::key_of_t<T>{};
     else return kumi::unknown{};
   };
 
-  //================================================================================================
-  //! @ingroup utility
-  //! @brief Extracts the value from a kumi::field or returns the parameter
+  //====================================================================================================================
+  //! @ingroup  utility
+  //! @brief    Extracts the value from a kumi::concepts::field or returns the parameter
   //!
-  //! @note If the unqualified type of T is not a field, simply forwards the parameter
-  //! @tparam   T The type to unwrap
+  //! @note     If the unqualified type of input does not model kumi::concepts::field, simply forwards the parameter
+  //! @tparam   T The type to extract the value from<.
   //! @param    t A forwarding reference to the input object.
   //! @return   A forwarded value of the unwrapped object.
-  //================================================================================================
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<typename Ts> struct field_value_of;
+  //!
+  //!   template<typename T> using field_value_of_t = typename field_value_of<T>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::field_value_of
+  //!
+  //! ## Example:
+  //! @include doc/infra/field_value_of.cpp
+  //====================================================================================================================
   template<typename T> [[nodiscard]] KUMI_ABI constexpr decltype(auto) field_value_of(T&& t) noexcept
   {
     if constexpr (concepts::field<T>) return (KUMI_FWD(t)(_::key_of_t<T>{}));
     else return KUMI_FWD(t);
   };
 
-  //================================================================================================
-  //! @ingroup product_types
-  //! @brief Creates a field from a given value keeping the qualifiers.
+  //====================================================================================================================
+  //! @ingroup  utility
+  //! @brief    Creates a field from a given value keeping the qualifiers.
   //!
-  //! @note If the unqualified type of T is not a field, simply forwards the parameter
-  //! @tparam   Name The name to associate to the field.
+  //! @tparam   Name The label to associate to the field.
   //! @param    t A forwarding reference to the input object.
   //! @return   A `field` that correctly keeps the qualified input type.
-  //! @related kumi::field
-  //================================================================================================
+  //! @related  kumi::field
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<typename Ts> struct capture_field;
+  //!
+  //!   template<typename T> using capture_field_t = typename capture_field<T>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::capture_field
+  //!
+  //! ## Example:
+  //! @include doc/infra/capture_field.cpp
+  //====================================================================================================================
   template<concepts::identifier auto Name, typename T>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) capture_field(T&& t) noexcept
   {
     return field<decltype(Name), T>{KUMI_FWD(t)};
   }
 
-  //================================================================================================
-  //! @ingroup product_types
-  //! @brief Casts the provided value to the target type using `static_cast`.
+  //====================================================================================================================
+  //! @ingroup  utility
+  //! @brief    Casts the provided value to the target type using `static_cast`.
   //!
-  //! @note Even when passed in a field as the conversion type, this function does not
-  //!       rename the input parameter.
+  //! @note If the type to convert to models kumi::concepts::field, does not rename the input parameter.
   //!
   //! @tparam   U The type to convert the parameter to.
   //! @param    t A forwarding reference to the input object.
   //! @return   A value of type U.
-  //! @related kumi::field
-  //================================================================================================
+  //! @related  kumi::field
+  //!
+  //! ## Helper type
+  //! @code
+  //! namespace kumi::result
+  //! {
+  //!   template<typename Ts> struct field_cast;
+  //!
+  //!   template<typename T> using field_cast_t = typename field_cast<T>::type;
+  //! }
+  //! @endcode
+  //!
+  //! Computes the return type of a call to kumi::field_cast
+  //!
+  //! ## Example:
+  //! @include doc/infra/field_cast.cpp
+  //====================================================================================================================
   template<typename U, typename T> [[nodiscard]] KUMI_ABI constexpr decltype(auto) field_cast(T&& t) noexcept
   {
     if constexpr (concepts::field<U>)

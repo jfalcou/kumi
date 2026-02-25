@@ -1,4 +1,5 @@
 //==================================================================================================
+//! @file
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
@@ -13,9 +14,9 @@
 namespace kumi
 {
   //================================================================================================
-  //! @ingroup record
   //! @class record
-  //! @brief Fixed-size collection of heterogeneous fields necessarily named, names are unique.
+  //! @ingroup record
+  //! @brief Fixed-size collection of heterogeneous tagged fields, tags are unique.
   //!
   //! kumi::record provides an aggregate based implementation of a record. It provides algorithms and
   //! functions designed to facilitate record's handling and transformations.
@@ -25,9 +26,7 @@ namespace kumi
   //!
   //! @tparam Ts Sequence of fields stored inside kumi::record.
   //================================================================================================
-  template<typename... Ts>
-  requires(concepts::entirely_uniquely_named<Ts...> && concepts::unique_display_name<Ts...>)
-  struct record<Ts...>
+  template<typename... Ts> struct record
   {
     using is_record_type = void;
     using set_t = _::make_set_t<Ts...>;
@@ -84,12 +83,12 @@ namespace kumi
     }
 
     //==============================================================================================
-    //! @brief Extracts the Ith element from a kumi::tuple
+    //! @brief Extracts the Ith element from a kumi::record
     //!
-    //! @note Does not participate in overload resolution if `T` is not present in the tuple or if
-    //!       the tuple contains duplicate types
-    //! @tparam T the type to access in the tuple
-    //! @return A reference to the selected element of current tuple.
+    //! @note Does not participate in overload resolution if `T` is not present in the record or if
+    //!       the record contains duplicate types
+    //! @tparam T the type to access in the record
+    //! @return A reference to the selected element of current record.
     //!
     //! ## Example:
     //! @include doc/record/api/typed_subscript.cpp
@@ -175,16 +174,17 @@ namespace kumi
     //! @name Properties
     //! @{
     //==============================================================================================
-    /// Returns the number of elements in a kumi::record
+
+    /// @return Returns the number of elements in a kumi::record
     [[nodiscard]] KUMI_ABI static constexpr auto size() noexcept { return sizeof...(Ts); }
 
-    /// Returns `true` if a kumi::record contains 0 elements
+    /// @return Returns `true` if a kumi::record contains 0 elements
     [[nodiscard]] KUMI_ABI static constexpr bool empty() noexcept { return sizeof...(Ts) == 0; }
 
-    /// Returns the names of the elements in a kumi::record
+    /// @return Returns the names of the elements in a kumi::record
     [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept { return tuple{name_of(as<Ts>{})...}; };
 
-    /// Returns references to the values of the element in a kumi::record
+    /// @return Return references to the values of the elements of a kumi::record as a kumi::tuple
     [[nodiscard]] KUMI_ABI constexpr auto values() noexcept
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
@@ -205,7 +205,7 @@ namespace kumi
     //==============================================================================================
 
     //==============================================================================================
-    //! @brief Replaces the contents of the record with the contents of another record.
+    //! @brief Replaces the content of the record with the content of another record.
     //! @param other kumi::record to copy or move from
     //! @return `*this`
     //==============================================================================================
@@ -231,8 +231,6 @@ namespace kumi
     //! @{
     //==============================================================================================
 
-    /// @ingroup record
-    /// @related kumi::record
     /// @brief Compares a record with an other for equality
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator==(record const& self, record<Us...> const& other) noexcept
@@ -241,6 +239,7 @@ namespace kumi
       return ((get<name_of(as<Ts>{})>(self) == get<name_of(as<Ts>{})>(other)) && ...);
     }
 
+    /// @brief Compares a record with an other for inequality
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator!=(record const& self, record<Us...> const& other) noexcept
     requires(concepts::named_equality_comparable<record, record<Us...>>)
@@ -253,7 +252,6 @@ namespace kumi
     //==============================================================================================
 
     //==============================================================================================
-    /// @ingroup record
     //! @related kumi::record
     //! @brief Inserts a kumi::record in an output stream
     //==============================================================================================
@@ -325,7 +323,7 @@ namespace kumi
   //================================================================================================
 
   //================================================================================================
-  //! @ingroup record
+  //! @related kumi::record
   //! @brief kumi::record deduction guide
   //! @tparam Ts  Type lists to build the record with.
   //================================================================================================
@@ -359,7 +357,6 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup record
-  //! @related kumi::record
   //! @brief Creates a kumi::record of forwarding references to its arguments.
   //!
   //! Constructs a record of references to the arguments in args suitable for forwarding as an
@@ -384,7 +381,6 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup record
-  //! @related kumi::record
   //! @brief Creates a record object, deducing the target type from the types of arguments.
   //!
   //! @param ts	Zero or more lvalue arguments to construct the record from.
@@ -402,7 +398,6 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup record
-  //! @related kumi::record
   //! @brief Creates a kumi::record of references given a reference to a kumi::record_type.
   //!
   //! @param    r Record whose elements are to be referenced.
@@ -430,7 +425,6 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup record
-  //! @related kumi::record
   //! @brief Converts a kumi::record to an instance of a type that models kumi::record_type
   //!
   //! Constructs an instance of `Type` by passing elements of `t` to the appropriate constructor.
@@ -453,7 +447,6 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup record
-  //! @related kumi::record
   //! @brief Converts a kumi::record_type to an instance kumi::record
   //!
   //! Constructs an instance kumi::record from the elements of the kumi::product_type parameters
@@ -479,7 +472,7 @@ namespace kumi
   //================================================================================================
 
   //================================================================================================
-  //! @name Accessors
+  //! @name Record accessors
   //! @{
   //================================================================================================
 
@@ -490,8 +483,7 @@ namespace kumi
   //! @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
   //! @tparam   I Compile-time index of the field to access
   //! @param    r Record to index
-  //! @return   A reference to the selected field of r.
-  //! @related kumi::record
+  //! @return   A reference to the selected field of t.
   //!
   //! ## Example:
   //! @include doc/record/api/get.cpp
@@ -534,8 +526,7 @@ namespace kumi
   //! @note Does not participate in overload resolution if the names are not unique
   //! @tparam   Name Non type template parameter name of the field to access
   //! @param    r Record to index
-  //! @return   A reference to the element of the selected field of r.
-  //! @related kumi::record
+  //! @return   A reference to the element of the selected field of t.
   //!
   //! ## Example:
   //! @include doc/record/api/named_get.cpp
@@ -611,7 +602,6 @@ namespace kumi
   //! @tparam   T Type of the element to access
   //! @param    r Record to index
   //! @return   A reference to the selected element of t.
-  //! @related kumi::record
   //!
   //! ## Example:
   //! @include doc/record/api/typed_get.cpp

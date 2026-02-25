@@ -1,10 +1,10 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
@@ -29,13 +29,13 @@ namespace kumi
     template<typename T, auto N> using as_homogeneous_t = typename as_homogeneous<T, N>::type;
   }
 
-  //================================================================================================
-  //! @ingroup utility
-  //! @brief Converts a product_type<Ts...> to an instance of a product_type<Target...>
+  //====================================================================================================================
+  //! @ingroup  generators
+  //! @brief    Converts a product_type<Ts...> to an instance of a product_type<Target...>
   //!
-  //! @tparam Target destination type to associate to each member of the product type
+  //! @tparam Target destination type to associate to each member of the product type `t`
   //! @param  t Product type to convert
-  //! @return A Product type containing the values of b where each member is of type Target
+  //! @return A Product type containing the values of `t` where each member is of type Target
   //!
   //! ## Helper type
   //! @code
@@ -53,7 +53,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/member_cast.cpp
   //! @include doc/record/algo/member_cast.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<typename Target, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto member_cast(T&& t)
   {
     if constexpr (concepts::sized_product_type<T, 0>) return t;

@@ -17,10 +17,12 @@ and new features like:
   -  a fast to compile tuple implementation
   -  quality of life improvement over the standard tuple implementation
   -  algorithm on tuples
+  -  record type handling
 
-## A Short Example
+## Examples
 
-[See it live on Compiler Explorer](https://godbolt.org/z/cWKd47sT9)
+### Tuple
+[See it live on Compiler Explorer](https://godbolt.org/z/c5q1cnax9)
 
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
 #include <iostream>
@@ -31,7 +33,7 @@ auto get_student(int id)
         if (id == 0)  return kumi::make_tuple(3.8, 'A', "Lisa Simpson");
   else  if (id == 1)  return kumi::make_tuple(2.9, 'C', "Milhouse Van Houten");
   else  if (id == 2)  return kumi::make_tuple(1.7, 'D', "Ralph Wiggum");
-  else                return kumi::make_tuple(0., 'F', "Unknown");
+  else                return kumi::make_tuple(0. , 'F', "Unknown");
 }
 
 int main()
@@ -45,9 +47,9 @@ int main()
 
   auto [ gpa1, grade1, name1 ] = get_student(1);
   std::cout << "ID: 1, "
-            << "GPA: " << gpa1 << ", "
+            << "GPA: "   << gpa1   << ", "
             << "grade: " << grade1 << ", "
-            << "name: " << name1 << '\n';
+            << "name: "  << name1  << '\n';
   std::cout << "\n";
 
   auto all_students = kumi::make_tuple(get_student(0),get_student(1),get_student(2));
@@ -59,6 +61,49 @@ int main()
 
   auto grades = kumi::get<0>(kumi::transpose(all_students));
   std::cout << grades << "\n";
+}
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+### Record
+[See it live on Compiler Explorer](https://godbolt.org/z/sfb3djrPM)
+
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+#include <iostream>
+#include <kumi/kumi.hpp>
+
+using namespace kumi::literals;
+auto get_student(int id)
+{
+        if (id == 0)  return kumi::make_record("GPA"_id = 3.8, "grade"_id = 'A');
+  else  if (id == 1)  return kumi::make_record("GPA"_id = 2.9, "grade"_id = 'C');
+  else  if (id == 2)  return kumi::make_record("GPA"_id = 1.7, "grade"_id = 'D');
+  else                return kumi::make_record("GPA"_id = 0. , "grade"_id = 'F');
+}
+
+int main()
+{
+  auto student0 = get_student(0);
+
+  std::cout << "ID: 0, "
+            << "GPA: "    << kumi::get<"GPA">(student0)   << ", "
+            << "grade: "  << kumi::get<"grade">(student0) << '\n';
+
+  auto [ gpa1, grade1 ] = get_student(1);
+  std::cout << "ID: 1, "
+            << gpa1   << ", "
+            << grade1 << '\n';
+  std::cout << "\n";
+
+  auto all_students = kumi::make_record(
+                      "Lisa Simpson"_id         = get_student(0),
+                      "Milhouse Van Houten"_id  = get_student(1),
+                      "Ralph Wiggum"_id         = get_student(2)
+                      );
+
+  kumi::for_each_field( [](auto name, auto const& m) { std::cout << "Student: " << name << ", Data : " << m << "\n";}
+                      , all_students
+                      );
+  std::cout << "\n";
 }
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

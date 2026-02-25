@@ -1,10 +1,10 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
@@ -35,13 +35,15 @@ namespace kumi
     inline constexpr selector_t<Pred, T> selector{};
   }
 
-  //================================================================================================
-  //! @ingroup generators
-  //! @brief  Partition a product type over a predicate
-  //! @tparam Pred Compile-time predicate
+  //====================================================================================================================
+  //! @ingroup  generators
+  //! @brief    Partition a product type over a predicate
+  //! @tparam   Pred Compile-time predicate
   //! @param  t Product type to process
-  //! @return A tuple containing the product type of all values which types satisfies `Pred`
-  //!         and the product type of all values which types does not satisfy `Pred`.
+  //! @return   A tuple containing the product type of all values which types satisfies `Pred` in `t`
+  //!           and the product type of all values which types does not satisfy `Pred`.
+  //!
+  //! On a record type, `Pred` is applied directly to the underlying elements of the fields.
   //!
   //! ## Helper type
   //! @code
@@ -59,7 +61,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/partition.cpp
   //! @include doc/record/algo/partition.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<template<typename> typename Pred, concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto partition(T&& t) noexcept
   {
@@ -74,12 +76,14 @@ namespace kumi
                        select(kumi::index<pos.cut>, std::make_index_sequence<size_v<T> - pos.cut>{})};
   }
 
-  //================================================================================================
-  //! @ingroup generators
-  //! @brief  Filters a product type over a predicate
-  //! @tparam Pred Compile-time predicate
+  //====================================================================================================================
+  //! @ingroup  generators
+  //! @brief    Filters a product type over a predicate
+  //! @tparam   Pred Compile-time predicate
   //! @param  t Product type to process
-  //! @return A Product type containing all values which types satisfies `Pred`.
+  //! @return A Product type containing all values of `t` which types satisfies `Pred`.
+  //!
+  //! On a record type, `Pred` is applied directly to the underlying elements of the fields.
   //!
   //! ## Helper type
   //! @code
@@ -97,7 +101,7 @@ namespace kumi
   //! ## Example:
   //! @include doc/tuple/algo/filter.cpp
   //! @include doc/record/algo/filter.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<template<typename> typename Pred, concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto filter(T&& t) noexcept
   {
@@ -110,12 +114,14 @@ namespace kumi
       }(std::make_index_sequence<pos.cut>{});
   }
 
-  //================================================================================================
-  //! @ingroup generators
-  //! @brief  Filters a product type over a predicate
-  //! @tparam Pred Compile-time predicate
+  //====================================================================================================================
+  //! @ingroup  generators
+  //! @brief    Filters a product type over a predicate
+  //! @tparam   Pred Compile-time predicate
   //! @param  t Product type to process
-  //! @return A product type containing all values which types does not satisfy `Pred`.
+  //! @return A product type containing all values of `t` which types does not satisfy `Pred`.
+  //!
+  //! On a record type, `Pred` is applied directly to the underlying elements of the fields.
   //!
   //! ## Helper type
   //! @code
@@ -133,7 +139,7 @@ namespace kumi
   //! ## Example:
   //! @include doc/tuple/algo/filter_not.cpp
   //! @include doc/record/algo/filter_not.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<template<typename> typename Pred, concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto filter_not(T&& t) noexcept
   {

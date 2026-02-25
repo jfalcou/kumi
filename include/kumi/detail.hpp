@@ -16,17 +16,11 @@ namespace kumi
   //================================================================================================
   //! @defgroup details Helper Types and Functions
   //! @brief    Tools for interacting with kumi::tuple
-  //!
-  //! @defgroup concepts     Tuple Related Concepts
-  //! @brief    Definition for product types related Concepts
-  //!
-  //! @defgroup traits     Tuple Related Traits
-  //! @brief    Definition for kumi::tuple traits and extension points
   //================================================================================================
 }
 
-// Building blocks
 #include <kumi/detail/abi.hpp>
+#include <kumi/detail/dependancies.hpp>
 #include <kumi/detail/preprocessor.hpp>
 #include <kumi/detail/str.hpp>
 #include <kumi/detail/typename.hpp>

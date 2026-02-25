@@ -1,10 +1,10 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
@@ -33,29 +33,32 @@ namespace kumi
     };
   }
 
-  //================================================================================================
-  //! @ingroup generators
-  //! @brief Reorder elements of a kumi::product_type
+  //====================================================================================================================
+  //! @ingroup  generators
+  //! @brief    Reorder elements of a product type
   //!
   //! This function does not participate in overload resolution if any Idx is outside [0, size_v<T>[.
+  //!
+  //! On record types, this function operates on elements as if they were ordered. The considered order is the order
+  //! of declaration.
   //!
   //! @note Nothing prevent the number of reordered index to be lesser or greater than t size or
   //!       the fact they can appear multiple times.
   //!
   //! @note reorder(tuple) works and is equivalent to reorder<>(tuple)
   //!
-  //! @tparam Idx     Reordered index of elements
-  //! @param  t kumi::product_type to reorder
-  //! @return A tuple equivalent to kumi::make_tuple(t[index<Idx>]...);
+  //! @tparam Idx Reordered index of elements
+  //! @param  t   The product type to reorder
+  //! @return     A product type with the type of `t` with elements equal to get<Idx>(t).
   //!
   //! ## Helper type
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<product_type Tuple,std::size_t... Idx> struct reorder;
+  //!   template<product_type T,std::size_t... Idx> struct reorder;
   //!
-  //!   template<product_type Tuple,std::size_t... Idx>
-  //!   using reorder_t = typename reorder<Tuple,Idx...>::type;
+  //!   template<product_type T,std::size_t... Idx>
+  //!   using reorder_t = typename reorder<T,Idx...>::type;
   //! }
   //! @endcode
   //!
@@ -64,7 +67,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/reorder.cpp
   //! @include doc/record/algo/reorder.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<std::size_t... Idx, concepts::product_type T>
   requires((Idx < size_v<T>) && ...)
   [[nodiscard]] KUMI_ABI constexpr auto reorder(T&& t)
@@ -72,18 +75,21 @@ namespace kumi
     return builder<T>::make(get<Idx>(KUMI_FWD(t))...);
   }
 
-  //================================================================================================
-  //! @ingroup generators
-  //! @brief Reorder elements of a kumi::record
+  //====================================================================================================================
+  //! @ingroup  generators
+  //! @brief    Reorder elements of a kumi::record
   //!
-  //! This function does not participate in overload resolution if the names are not in T
+  //! This function does not participate in overload resolution if the names are not in `t`
+  //!
+  //! On record types, this function operates on elements as if they were ordered. The considered order is the order
+  //! of declaration.
   //!
   //! @note Nothing prevent the number of reordered names to be lesser or greater than t size or
   //!       the fact they can appear multiple times if it is applied on a named tuple.
   //!
-  //! @tparam Name     Reordered names of elements
-  //! @param  t kumi::product_type to reorder
-  //! @return A product type equivalent to product_type(t[index<Idx>]...);
+  //! @tparam Name  Reordered names of elements
+  //! @param  t     Product type to reorder
+  //! @return       A product type with the type of `t` with elements equal to get<Name>(t).
   //!
   //! ## Helper type
   //! @code
@@ -100,7 +106,7 @@ namespace kumi
   //!
   //! ## Example
   //! @include doc/record/algo/reorder_fields.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::identifier auto... Name, concepts::product_type Tuple>
   requires(requires { get<Name>(std::declval<Tuple>()); } && ...)
   KUMI_ABI constexpr auto reorder_fields(Tuple&& t)
@@ -108,18 +114,21 @@ namespace kumi
     return builder<Tuple>::make(Name = get<Name>(KUMI_FWD(t))...);
   }
 
-  //================================================================================================
-  //! @ingroup generators
-  //! @brief Reindex elements of a kumi::product_type
+  //====================================================================================================================
+  //! @ingroup  generators
+  //! @brief    Reindex elements of a kumi::product_type
   //!
   //! This function does not participate in overload resolution if any Idx is outside [0, size_v<T>[.
+  //!
+  //! On record types, this function operates on elements as if they were ordered. The considered order is the order
+  //! of declaration.
   //!
   //! @note Nothing prevent the number of reordered index to be lesser or greater than t size or
   //!       the fact they can appear multiple times.
   //!
-  //! @tparam Indexes   A kumi::indexes representing the reindexed slot of the elements
-  //! @param  t kumi::product_type to reindex
-  //! @return A potentially nested tuple following the Indexes order
+  //! @tparam Indexes A kumi::indexes representing the reindexed slot of the elements
+  //! @param  t       kumi::product_type to reindex
+  //! @return         A potentially nested tuple following the Indexes order
   //!
   //! ## Helper type
   //! @code
@@ -137,7 +146,7 @@ namespace kumi
   //! ## Example
   //! @include doc/tuple/algo/reindex.cpp
   //! @include doc/record/algo/reindex.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::index_map auto Indexes, concepts::product_type T>
   requires(_::in_bound_indexes<Indexes, T>())
   [[nodiscard]] KUMI_ABI constexpr auto reindex(T&& t)

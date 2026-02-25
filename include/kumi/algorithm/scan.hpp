@@ -1,19 +1,19 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
 {
   namespace _
   {
-    //==============================================================================================
+    //==================================================================================================================
     // Scan helpers
-    //==============================================================================================
+    //==================================================================================================================
     template<typename F, typename T> struct scannable
     {
       F func;
@@ -34,10 +34,11 @@ namespace kumi
     template<class F, class T> scannable(F const&, T&&) -> scannable<F, T>;
   }
 
-  //================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the inclusive prefix scan of all elements of a product type using a
-  //!        tail recursive call.
+  //====================================================================================================================
+  //! @ingroup  reductions
+  //! @brief    Computes the inclusive prefix scan of all elements of a product type using a tail recursive call.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @note The first stored value is the result of the application of the function to the provided
   //!       initial value and the first element of the product_type.
@@ -52,10 +53,10 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<typename Function, product_type Tuple, typename Value> struct inclusive_scan_left;
+  //!   template<typename Function, product_type T, typename Value> struct inclusive_scan_left;
   //!
-  //!   template<typename Function, product_type Tuple, typename Value>
-  //!   using inclusive_scan_left_t = typename inclusive_scan_left<Function,Tuple,Value>::type;
+  //!   template<typename Function, product_type T, typename Value>
+  //!   using inclusive_scan_left_t = typename inclusive_scan_left<Function,T,Value>::type;
   //! }
   //! @endcode
   //!
@@ -64,7 +65,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/inclusive_scan_left.cpp
   //! @include doc/record/algo/inclusive_scan_left.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<typename Function, concepts::product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_left(Function f, T&& t, Value init)
   {
@@ -80,10 +81,11 @@ namespace kumi
     }
   }
 
-  //================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the inclusive prefix scan of all elements of a product type using a
-  //!        tail recursive call.
+  //====================================================================================================================
+  //! @ingroup  reductions
+  //! @brief    Computes the inclusive prefix scan of all elements of a product type using a tail recursive call.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @note The first stored value is the result of the application of the monoid to it's identity
   //!       and the first element of the product_type.
@@ -97,10 +99,10 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<typename Function, product_type Tuple> struct inclusive_scan_left;
+  //!   template<typename Function, product_type T> struct inclusive_scan_left;
   //!
-  //!   template<typename Function, product_type Tuple>
-  //!   using inclusive_scan_left_t = typename inclusive_scan_left<Function,Tuple>::type;
+  //!   template<typename Function, product_type T>
+  //!   using inclusive_scan_left_t = typename inclusive_scan_left<Function,T>::type;
   //! }
   //! @endcode
   //!
@@ -109,7 +111,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/inclusive_scan_left.cpp
   //! @include doc/record/algo/inclusive_scan_left.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::monoid M, concepts::sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_left(M&& m, T&& t)
   {
@@ -118,10 +120,11 @@ namespace kumi
     else return inclusive_scan_left(KUMI_FWD(m), KUMI_FWD(t), m.identity);
   }
 
-  //================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the exclusive prefix scan of all elements of a product type using a
-  //!        tail recursive call.
+  //====================================================================================================================
+  //! @ingroup  reductions
+  //! @brief    Computes the exclusive prefix scan of all elements of a product type using a tail recursive call.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @note The first stored value is the provided initial value.
   //!
@@ -135,10 +138,10 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<typename Function, product_type Tuple, typename Value> struct exclusive_scan_left;
+  //!   template<typename Function, product_type T, typename Value> struct exclusive_scan_left;
   //!
-  //!   template<typename Function, product_type Tuple, typename Value>
-  //!   using exclusive_scan_left_t = typename exclusive_scan_left<Function,Tuple,Value>::type;
+  //!   template<typename Function, product_type T, typename Value>
+  //!   using exclusive_scan_left_t = typename exclusive_scan_left<Function,T,Value>::type;
   //! }
   //! @endcode
   //!
@@ -147,7 +150,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/exclusive_scan_left.cpp
   //! @include doc/record/algo/exclusive_scan_left.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<typename Function, concepts::product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_left(Function f, T&& t, Value init)
   {
@@ -161,10 +164,11 @@ namespace kumi
     }
   }
 
-  //================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the exclusive prefix scan of all elements of a product type using a
-  //!        tail recursive call.
+  //====================================================================================================================
+  //! @ingroup  reductions
+  //! @brief    Computes the exclusive prefix scan of all elements of a product type using a tail recursive call.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @note The first stored value is the identity of the provided monoid.
   //!
@@ -177,10 +181,10 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<typename Function, product_type Tuple> struct exclusive_scan_left;
+  //!   template<typename Function, product_type T> struct exclusive_scan_left;
   //!
-  //!   template<typename Function, product_type Tuple>
-  //!   using exclusive_scan_left_t = typename exclusive_scan_left<Function,Tuple>::type;
+  //!   template<typename Function, product_type T>
+  //!   using exclusive_scan_left_t = typename exclusive_scan_left<Function,T>::type;
   //! }
   //! @endcode
   //!
@@ -189,7 +193,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/exclusive_scan_left.cpp
   //! @include doc/record/algo/exclusive_scan_left.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::monoid M, concepts::sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_left(M&& m, T&& t)
   {
@@ -198,10 +202,11 @@ namespace kumi
     else return exclusive_scan_left(KUMI_FWD(m), KUMI_FWD(t), m.identity);
   }
 
-  //================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the inclusive suffix scan of all elements of a product type using a
-  //!        non-tail recursive call.
+  //====================================================================================================================
+  //! @ingroup  reductions
+  //! @brief    Computes the inclusive suffix scan of all elements of a product type using a non-tail recursive call.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @note The first stored value is the result of the application of the function to the provided
   //!       initial value and the last element of the product_type.
@@ -216,10 +221,10 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<typename Function, product_type Tuple, typename Value> struct inclusive_scan_right;
+  //!   template<typename Function, product_type T, typename Value> struct inclusive_scan_right;
   //!
-  //!   template<typename Function, product_type Tuple, typename Value>
-  //!   using inclusive_scan_right_t = typename inclusive_scan_right<Function,Tuple,Value>::type;
+  //!   template<typename Function, product_type T, typename Value>
+  //!   using inclusive_scan_right_t = typename inclusive_scan_right<Function,T,Value>::type;
   //! }
   //! @endcode
   //!
@@ -228,7 +233,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/inclusive_scan_right.cpp
   //! @include doc/record/algo/inclusive_scan_right.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<typename Function, concepts::product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_right(Function f, T&& t, Value init)
   {
@@ -244,10 +249,11 @@ namespace kumi
     }
   }
 
-  //================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the inclusive suffix scan of all elements of a product type using a
-  //!        non-tail recursive call.
+  //====================================================================================================================
+  //! @ingroup  reductions
+  //! @brief    Computes the inclusive suffix scan of all elements of a product type using a non-tail recursive call.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @note The first stored value is the result of the application of the monoid to it's identity
   //!       and the last element of the product_type.
@@ -261,10 +267,10 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<typename Function, product_type Tuple> struct inclusive_scan_right;
+  //!   template<typename Function, product_type T> struct inclusive_scan_right;
   //!
-  //!   template<typename Function, product_type Tuple>
-  //!   using inclusive_scan_right_t = typename inclusive_scan_right<Function,Tuple>::type;
+  //!   template<typename Function, product_type T>
+  //!   using inclusive_scan_right_t = typename inclusive_scan_right<Function,T>::type;
   //! }
   //! @endcode
   //!
@@ -273,7 +279,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/inclusive_scan_right.cpp
   //! @include doc/record/algo/inclusive_scan_right.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::monoid M, concepts::sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_right(M&& m, T&& t)
   {
@@ -282,10 +288,11 @@ namespace kumi
     else return inclusive_scan_right(KUMI_FWD(m), KUMI_FWD(t), m.identity);
   }
 
-  //================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the exclusive suffix scan of all elements of a product type using a
-  //!        tail recursive call.
+  //====================================================================================================================
+  //! @ingroup  reductions
+  //! @brief    Computes the exclusive suffix scan of all elements of a product type using a tail recursive call.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @note The first stored value is the provided initial value.
   //!
@@ -299,10 +306,10 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<typename Function, product_type Tuple, typename Value> struct exclusive_scan_right;
+  //!   template<typename Function, product_type T, typename Value> struct exclusive_scan_right;
   //!
-  //!   template<typename Function, product_type Tuple, typename Value>
-  //!   using exclusive_scan_right_t = typename exclusive_scan_right<Function,Tuple,Value>::type;
+  //!   template<typename Function, product_type T, typename Value>
+  //!   using exclusive_scan_right_t = typename exclusive_scan_right<Function,T,Value>::type;
   //! }
   //! @endcode
   //!
@@ -311,7 +318,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/exclusive_scan_right.cpp
   //! @include doc/record/algo/exclusive_scan_right.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<typename Function, concepts::product_type T, typename Value>
   [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_right(Function f, T&& t, Value init)
   {
@@ -325,10 +332,11 @@ namespace kumi
     }
   }
 
-  //================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the exclusive suffix scan of all elements of a product type using a
-  //!        non-tail recursive call.
+  //====================================================================================================================
+  //! @ingroup  reductions
+  //! @brief    Computes the exclusive suffix scan of all elements of a product type using a non-tail recursive call.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @note The first stored value is the identity of the provided monoid.
   //!
@@ -341,10 +349,10 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<typename Function, product_type Tuple> struct exclusive_scan_right;
+  //!   template<typename Function, product_type T> struct exclusive_scan_right;
   //!
-  //!   template<typename Function, product_type Tuple>
-  //!   using exclusive_scan_right_t = typename exclusive_scan_right<Function,Tuple>::type;
+  //!   template<typename Function, product_type T>
+  //!   using exclusive_scan_right_t = typename exclusive_scan_right<Function,T>::type;
   //! }
   //! @endcode
   //!
@@ -353,7 +361,7 @@ namespace kumi
   //! ## Examples:
   //! @include doc/tuple/algo/exclusive_scan_right.cpp
   //! @include doc/record/algo/exclusive_scan_right.cpp
-  //================================================================================================
+  //====================================================================================================================
   template<concepts::monoid M, concepts::sized_product_type_or_more<1> T>
   [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_right(M&& m, T&& t)
   {
