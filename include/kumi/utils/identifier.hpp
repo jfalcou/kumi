@@ -72,7 +72,7 @@ namespace kumi
   };
 
   //====================================================================================================================
-  //! @ingroup utility
+  //! @ingroup types
   //! @brief identifier definition class
   //!
   //! kumi::identifier defines a identifier, i.e an entity that can receive values and can be stored as part of a
@@ -161,7 +161,7 @@ namespace kumi
   template<typename ID, typename Checker> identifier(ID const&, Checker const&) -> identifier<ID, Checker>;
 
   //====================================================================================================================
-  //! @ingroup utility
+  //! @ingroup types
   //! @brief Compile-time text based ID
   //! @tparam ID Compile-time string for the ID
   //====================================================================================================================

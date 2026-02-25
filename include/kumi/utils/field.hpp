@@ -10,7 +10,7 @@
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup  utility
+  //! @ingroup  types
   //! @class    field
   //! @brief    Named wrapper over a type.
   //!

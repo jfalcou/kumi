@@ -26,9 +26,7 @@ namespace kumi
   //!
   //! @tparam Ts Sequence of fields stored inside kumi::record.
   //================================================================================================
-  template<typename... Ts>
-  requires(concepts::entirely_uniquely_named<Ts...> && concepts::unique_display_name<Ts...>)
-  struct record<Ts...>
+  template<typename... Ts> struct record
   {
     using is_record_type = void;
     using set_t = _::make_set_t<Ts...>;
@@ -325,7 +323,7 @@ namespace kumi
   //================================================================================================
 
   //================================================================================================
-  //! @ingroup record
+  //! @related kumi::record
   //! @brief kumi::record deduction guide
   //! @tparam Ts  Type lists to build the record with.
   //================================================================================================
@@ -359,7 +357,6 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup record
-  //! @related kumi::record
   //! @brief Creates a kumi::record of forwarding references to its arguments.
   //!
   //! Constructs a record of references to the arguments in args suitable for forwarding as an
@@ -428,7 +425,6 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup record
-  //! @related kumi::record
   //! @brief Converts a kumi::record to an instance of a type that models kumi::record_type
   //!
   //! Constructs an instance of `Type` by passing elements of `t` to the appropriate constructor.
@@ -451,7 +447,6 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup record
-  //! @related kumi::record
   //! @brief Converts a kumi::record_type to an instance kumi::record
   //!
   //! Constructs an instance kumi::record from the elements of the kumi::product_type parameters
@@ -607,7 +602,6 @@ namespace kumi
   //! @tparam   T Type of the element to access
   //! @param    r Record to index
   //! @return   A reference to the selected element of t.
-  //! @related kumi::record
   //!
   //! ## Example:
   //! @include doc/record/api/typed_get.cpp
