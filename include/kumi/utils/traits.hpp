@@ -25,11 +25,7 @@ namespace kumi
     template<typename T>
     concept empty_tuple = (std::tuple_size<std::remove_cvref_t<T>>::value == 0);
 
-    //====================================================================================================================
-    //! @ingroup concepts
-    //! @brief Concept specifying a type is a standard tuple-like type.
-    //! @note Exposition only
-    //====================================================================================================================
+    // Concept specifying a type is a standard tuple-like type.
     template<typename T>
     concept std_tuple_compatible = _::empty_tuple<T> || _::non_empty_tuple<T>;
 
@@ -179,9 +175,11 @@ namespace kumi
   //! @code
   //!   template<typename T> inline constexpr auto is_container = is_container<T>::value;
   //! @endcode
+  //!
   //! ## Example:
-  //==============================================================================================
-  template<typename T> struct is_container : std::false_type
+  //! @include doc/infra/containers.cpp
+  //==================================================================================================================
+  template<typename T> struct is_static_container : std::false_type
   {
     using value_type = T;
     using size = _::invalid;
@@ -219,7 +217,10 @@ namespace kumi
   //!
   //! ## Helper value
   //! @code
+  //! namespace kumi
+  //! {
   //!   template<typename T> inline constexpr auto container_size_v = container_size<T>::value;
+  //! }
   //! @endcode
   //================================================================================================
   template<typename T> struct container_size : is_container<std::remove_cvref_t<T>>::size

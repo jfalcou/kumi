@@ -10,7 +10,7 @@
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup utility
+  //! @ingroup types
   //! @class unit
   //! @brief A type representing the product of no type also called the unit type
   //!

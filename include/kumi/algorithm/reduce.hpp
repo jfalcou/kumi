@@ -62,7 +62,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::reduce
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/reduce.cpp
+  //! ### Record:
   //! @include doc/record/algo/reduce.cpp
   //====================================================================================================================
   template<concepts::monoid M, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto reduce(M&& m, T&& t)
@@ -113,7 +115,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::reduce
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/reduce.cpp
+  //! ### Record:
   //! @include doc/record/algo/reduce.cpp
   //====================================================================================================================
   template<concepts::monoid M, concepts::product_type T, typename Value>
@@ -153,7 +157,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::map_reduce
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/map_reduce.cpp
+  //! ### Record:
   //! @include doc/record/algo/map_reduce.cpp
   //====================================================================================================================
   template<concepts::product_type T, concepts::monoid M, typename Function>
@@ -208,7 +214,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::map_reduce
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/map_reduce.cpp
+  //! ### Record:
   //! @include doc/record/algo/map_reduce.cpp
   //====================================================================================================================
   template<concepts::monoid M, concepts::product_type T, typename Function, typename Value>
@@ -242,7 +250,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::sum
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/sum.cpp
+  //! ### Record:
   //! @include doc/record/algo/sum.cpp
   //====================================================================================================================
   template<concepts::product_type T, typename Value> [[nodiscard]] KUMI_ABI constexpr auto sum(T&& t, Value init)
@@ -273,7 +283,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::sum
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/sum.cpp
+  //! ### Record:
   //! @include doc/record/algo/sum.cpp
   //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto sum(T&& t)
@@ -305,7 +317,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::prod
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/prod.cpp
+  //! ### Record:
   //! @include doc/record/algo/prod.cpp
   //====================================================================================================================
   template<concepts::product_type T, typename Value> [[nodiscard]] KUMI_ABI constexpr auto prod(T&& t, Value init)
@@ -336,7 +350,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::prod
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/prod.cpp
+  //! ### Record:
   //! @include doc/record/algo/prod.cpp
   //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto prod(T&& t)
@@ -368,7 +384,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::bit_and
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/bit_and.cpp
+  //! ### Record:
   //! @include doc/record/algo/bit_and.cpp
   //====================================================================================================================
   template<concepts::product_type T, typename Value> [[nodiscard]] KUMI_ABI constexpr auto bit_and(T&& t, Value init)
@@ -398,8 +416,10 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::bit_and
   //!
-  //! ## Examples;
+  //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/bit_and.cpp
+  //! ### Record:
   //! @include doc/record/algo/bit_and.cpp
   //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto bit_and(T&& t)
@@ -431,7 +451,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::bit_or
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/bit_or.cpp
+  //! ### Record:
   //! @include doc/record/algo/bit_or.cpp
   //====================================================================================================================
   template<concepts::product_type T, typename Value> [[nodiscard]] KUMI_ABI constexpr auto bit_or(T&& t, Value init)
@@ -462,7 +484,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::bit_or
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/bit_or.cpp
+  //! ### Record:
   //! @include doc/record/algo/bit_or.cpp
   //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto bit_or(T&& t)
@@ -494,7 +518,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::bit_xor
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/bit_xor.cpp
+  //! ### Record:
   //! @include doc/record/algo/bit_xor.cpp
   //====================================================================================================================
   template<concepts::product_type T, typename Value> [[nodiscard]] KUMI_ABI constexpr auto bit_xor(T&& t, Value init)
@@ -525,7 +551,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::bit_xor
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/bit_xor.cpp
+  //! ### Record:
   //! @include doc/record/algo/bit_xor.cpp
   //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto bit_xor(T&& t)

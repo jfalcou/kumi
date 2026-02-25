@@ -109,7 +109,8 @@ namespace kumi
     //! @ingroup concepts
     //! @brief Concept specifying a type represent a Unit Type
     //!
-    //! A type `T` models `kumi::concepts::unit_type` if it models std::is_empty or std::is_null_pointer_v.
+    //! A type `T` models `kumi::concepts::unit_type` if it is a kumi::concepts::product_type with a size of 0 or
+    //! if std::is_null_pointer_v returns true.
     //==================================================================================================================
     template<typename T>
     concept unit_type = (product_type<T> && (size_v<T> == 0)) || std::is_null_pointer_v<std::remove_cvref_t<T>>;
@@ -129,7 +130,7 @@ namespace kumi
     //! @ingroup concepts
     //! @brief Concept specifying a type represent a field
     //!
-    //! A field type serves as a member of a kumi::record and can be retrieved by it's name later
+    //! A field type serves as a member of a kumi::record and can be retrieved by it's label later.
     //==================================================================================================================
     template<typename T>
     concept field = kumi::_::field<T>;
@@ -138,8 +139,8 @@ namespace kumi
     //! @ingroup concepts
     //! @brief Concept specifying a type represent an identifier
     //!
-    //! An identifier type is able to be bound to a value to create a kumi::field. It represent a type that can be used
-    //! to retrieve a kumi::concepts::field from a kumi::concepts::product_type
+    //! An identifier type is able to be bound to a value to create a kumi::concepts::field. It represent a type that
+    //! can be used to retrieve a kumi::concepts::field from a kumi::concepts::product_type
     //==================================================================================================================
     template<typename T>
     concept identifier = kumi::_::identifier<T>;
@@ -218,7 +219,7 @@ namespace kumi
     //! @ingroup concepts
     //! @brief Concept specifying if a type is comparable for each of its components
     //!
-    //! A type `T` models `kumi::concepts::equality_comparable<T,U>`if it's a kumi::concepts::product type where each
+    //! A type `T` models `kumi::concepts::equality_comparable<T,U>`if it's a kumi::concepts::product_type where each
     //! of its elements satisfies kumi::concepts::equality_comparable for all their respective elements.
     //==================================================================================================================
     template<typename T, typename U>
@@ -233,14 +234,14 @@ namespace kumi
 
     //==================================================================================================================
     //! @ingroup concepts
-    //! @brief Concept specifying if parameter pack contains only kumi::concepts::field.
+    //! @brief Concept specifying if parameter pack is only composed of kumi::concepts::field.
     //==================================================================================================================
     template<typename... Ts>
     concept is_fully_named = (... && field<Ts>);
 
     //==================================================================================================================
     //! @ingroup concepts
-    //! @brief Concept specifying if a parameter pack only holds unique types.
+    //! @brief Concept specifying if a parameter pack only holds distinct types.
     //==================================================================================================================
     template<typename... Ts>
     concept uniquely_typed = (!has_named_fields<Ts...>) && all_uniques_v<std::remove_cvref_t<Ts>...>;
@@ -254,7 +255,7 @@ namespace kumi
 
     //==================================================================================================================
     //! @ingroup concepts
-    //! @brief  Concept specifying if a parameter pack only holds kumi::concepts::fields with no duplicate kumi::str
+    //! @brief  Concept specifying if a parameter pack only holds kumi::concepts::field with no duplicate kumi::str
     //!         representation of their respective names.
     //==================================================================================================================
     template<typename... Ts>
@@ -263,8 +264,8 @@ namespace kumi
 
     //==================================================================================================================
     //! @ingroup concepts
-    //! @brief  Concept specifying if a parameter pack only holds kumi::concepts::field each with each of their names
-    //!         beeing unique!
+    //! @brief  Concept specifying if a parameter pack only holds kumi::concepts::field. Each of their names
+    //!         beeing unique.
     //!
     //! @note  If there are no element in the parameter pack the concept returns true
     //==================================================================================================================
@@ -280,7 +281,9 @@ namespace kumi
 
     //==================================================================================================================
     //! @ingroup concepts
-    //! @brief Concept specifying if a kumi::concepts::field labeled with Name is present in a parameter pack.
+    //! @brief Concept specifying if the label of a type modeling kumi::concepts::identifier is present in the parameter
+    //! pack. The label is considered present if a type in Ts modeling kumi::concepts::field is labeled with the same
+    //! tag as the given identifier.
     //==================================================================================================================
     template<typename Name, typename... Ts>
     concept contains_field = identifier<Name> && kumi::_::can_get_field_by_value<Name, Ts...>;
@@ -290,7 +293,8 @@ namespace kumi
     //! @brief Concept specifying if two types have matching named fields
     //!
     //! A type `T` models `kumi::concepts::equivalent<T,U>` if it is a kumi::concepts::product_type with the same number
-    //! of members as `U`, and each of its fields got a corresponding field in `U` with the same name
+    //! of fields as `U`, and each of them has a corresponding field in `U`. Corresponding field means that the labels
+    //! of the fields in T matches those of U.
     //==================================================================================================================
     template<typename T, typename U>
     concept equivalent = (size_v<T> == size_v<U>) && _::matches_v<std::remove_cvref_t<T>, std::remove_cvref_t<U>>;
@@ -321,8 +325,8 @@ namespace kumi
     //! @brief Concept specifying if two product types are compatibles.
     //!
     //! A pack of types `Ts` models `kumi::concepts::compatible_product_types` if it models
-    //! `kumi::concepts::follows_same_semantic` and if all types model `kumi::concepts::equivalent` if the types are
-    //! kumi::concepts::record_types
+    //! `kumi::concepts::follows_same_semantic`. If the types model `kumi::concepts::record_type` then all types must
+    //! model `kumi::concepts::equivalent`
     //==================================================================================================================
     template<typename T, typename... Us>
     concept compatible_product_types =
@@ -354,7 +358,7 @@ namespace kumi
     //! @ingroup concepts
     //! @brief Concept specifying if a product type can be queried via a `get<type>`
     //!
-    //! A product type `T` models `kumi::concepts::typed_get_compliant` if it's fields are uniquely typed.
+    //! A type `T` models `kumi::concepts::typed_get_compliant` if it's fields are uniquely typed.
     //! For a `record_type` it inspects the underlying type of the fields.
     //==================================================================================================================
     template<typename Type, typename T>
@@ -366,7 +370,9 @@ namespace kumi
     //! @ingroup concepts
     //! @brief Concept specifying if a product type can be queried via a `get<identifier>`
     //!
-    //! A product type `T` models `named_get_compliant` if it's fields are uniquely named.
+    //! A type `T` models `named_get_compliant` if it's a kumi::concepts::product_type with it's element modeling
+    //! kumi::concepts::uniquely_named and a field with the same label as the template parameter `Name` can be found
+    //! inside.
     //==================================================================================================================
     template<typename Name, typename T>
     concept named_get_compliant =

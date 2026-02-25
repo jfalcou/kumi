@@ -31,7 +31,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::transpose
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/transpose.cpp
+  //! ### Record:
   //! @include doc/record/algo/transpose.cpp
   //====================================================================================================================
   template<concepts::product_type T>

@@ -19,7 +19,9 @@ namespace kumi
   //! On a record type, the function operates on the underlying elements of the fields.
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/all_of.cpp
+  //! ### Record:
   //! @include doc/record/algo/all_of.cpp
   //====================================================================================================================
   template<typename Pred, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto all_of(T&& t, Pred p) noexcept
@@ -39,7 +41,9 @@ namespace kumi
   //! On a record type, the function operates on the underlying elements of the fields.
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/all_of.cpp
+  //! ### Record:
   //! @include doc/record/algo/all_of.cpp
   //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto all_of(T&& t) noexcept
@@ -60,7 +64,9 @@ namespace kumi
   //! On a record type, the function operates on the underlying elements of the fields.
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/all_of.cpp
+  //! ### Record:
   //! @include doc/record/algo/all_of.cpp
   //====================================================================================================================
   template<typename Pred, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto any_of(T&& t, Pred p) noexcept
@@ -80,7 +86,9 @@ namespace kumi
   //! On a record type, the function operates on the underlying elements of the fields.
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/all_of.cpp
+  //! ### Record:
   //! @include doc/record/algo/all_of.cpp
   //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto any_of(T&& t) noexcept
@@ -101,7 +109,9 @@ namespace kumi
   //! On a record type, the function operates on the underlying elements of the fields.
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/none_of.cpp
+  //! ### Record:
   //! @include doc/record/algo/none_of.cpp
   //====================================================================================================================
   template<typename Pred, concepts::product_type T>
@@ -119,7 +129,9 @@ namespace kumi
   //! On a record type, the function operates on the underlying elements of the fields.
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/none_of.cpp
+  //! ### Record:
   //! @include doc/record/algo/none_of.cpp
   //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr bool none_of(T&& t) noexcept
@@ -137,7 +149,9 @@ namespace kumi
   //! On a record type, the function operates on the underlying elements of the fields.
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/count_if.cpp
+  //! ### Record:
   //! @include doc/record/algo/count_if.cpp
   //====================================================================================================================
   template<typename Pred, concepts::product_type T>
@@ -157,8 +171,10 @@ namespace kumi
   //!
   //! On a record type, the function operates on the underlying elements of the fields.
   //!
-  //! ## Example:
+  //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/count.cpp
+  //! ### Record:
   //! @include doc/record/algo/count.cpp
   //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr std::size_t count(T&& t) noexcept

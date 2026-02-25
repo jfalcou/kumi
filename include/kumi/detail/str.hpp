@@ -10,9 +10,9 @@
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup utility
-  //! @class str
-  //! @brief Static string used to create named fields.
+  //! @ingroup  types
+  //! @class    str
+  //! @brief    Static string used to create named fields.
   //!
   //! @note the `.` character is reserved for internal manipulation.
   //!
@@ -77,8 +77,9 @@ namespace kumi
   };
 
   //====================================================================================================================
-  //! @ingroup utility
-  //! @brief Type indicating a identifier was not found in a given kumi::product_type
+  //! @ingroup  types
+  //! @class    unknown
+  //! @brief    Type indicating a identifier was not found in a given kumi::product_type
   //====================================================================================================================
   struct unknown
   {

@@ -38,7 +38,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::windows
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/windows.cpp
+  //! ### Record:
   //! @include doc/record/algo/windows.cpp
   //================================================================================================
   template<std::size_t N, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto windows(T&& t)
@@ -80,7 +82,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::chunks
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/chunks.cpp
+  //! ### Record:
   //! @include doc/record/algo/chunks.cpp
   //================================================================================================
   template<std::size_t N, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto chunks(T&& t)
