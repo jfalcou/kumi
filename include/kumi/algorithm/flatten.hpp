@@ -82,15 +82,15 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief Converts a product type of product types into a product type of all elements.
+  //! @ingroup  generators
+  //! @brief    Converts a product type of product types into a product type of all elements.
   //!
   //! On record types, the names of the outer record are concatenated to the inner ones ultimately constructing names
   //! such as "outer.inner". If the input is a product type containing record types or vice versa only the inner types
   //! matching the outer semantic will be flattened. Thus a record inside a tuple will not be flattened.
   //!
   //! @param t  Product type to flatten
-  //! @return   A product type composed of all elements of t flattened non-recursively
+  //! @return   A product type composed of all elements of `t` flattened non-recursively
   //!
   //! ## Helper type
   //! @code
@@ -127,8 +127,8 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief Recursively converts a product type of product types into a product type of all elements.
+  //! @ingroup  generators
+  //! @brief    Recursively converts a product type of product types into a product type of all elements.
   //!
   //! Recursively converts a product type of product types `t` into a product type of all elements of
   //! said product types.
@@ -142,7 +142,7 @@ namespace kumi
   //!
   //! @param t  Product type to flatten
   //! @param f  Optional Callable object to apply when a sub-tuple is flattened
-  //! @return   A product type composed of all elements of t flattened recursively
+  //! @return   A product type composed of all elements of `t` flattened recursively
   //!
   //! ## Helper type
   //! @code
@@ -196,15 +196,15 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief Convert a product type to a flat product type of pointers to each its components.
+  //! @ingroup  generators
+  //! @brief    Convert a product type to a flat product type of pointers to each its components.
   //!
   //! On record types, the names of the outer record are concatenated to the inner ones ultimately constructing names
   //! such as "outer.inner". If the input is a product type containing record types or vice versa only the inner types
   //! matching the outer semantic will be flattened. Thus a record inside a tuple will not be flattened.
   //!
   //! @param t  Product type to convert
-  //! @return   A flat product type composed of pointers to each elements of t.
+  //! @return   A flat product type composed of pointers to each elements of `t`.
   //!
   //! ## Helper type
   //! @code

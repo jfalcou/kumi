@@ -10,8 +10,8 @@
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the generalized combination of all elements using a tail recursive call.
+  //! @ingroup  reductions
+  //! @brief    Computes the generalized combination of all elements using a tail recursive call.
   //!
   //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
@@ -51,8 +51,8 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the generalized associative combination of all elements using a tail recursive call.
+  //! @ingroup  reductions
+  //! @brief    Computes the generalized associative combination of all elements using a tail recursive call.
   //!
   //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
@@ -90,8 +90,8 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the generalized combination of all elements using a non-tail recursive call.
+  //! @ingroup  reductions
+  //! @brief    Computes the generalized combination of all elements using a non-tail recursive call.
   //!
   //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
@@ -131,8 +131,8 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the generalized associative combinationof all elements using a non-tail recursive call.
+  //! @ingroup  reductions
+  //! @brief    Computes the generalized associative combinationof all elements using a non-tail recursive call.
   //!
   //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!

@@ -10,12 +10,12 @@
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief Transpose a product type of product types by shifting elements in their transposed
-  //!        position always returning a tuple as the external product type.
+  //! @ingroup  generators
+  //! @brief    Transpose a product type of product types by shifting elements in their transposed position always
+  //!           returning a tuple as the external product type.
   //!
   //! @param t Product type to transpose
-  //! @return  A product type containing the transposed elements of t.
+  //! @return  A product type containing the transposed elements of `t`.
   //!
   //! ## Helper type
   //! @code

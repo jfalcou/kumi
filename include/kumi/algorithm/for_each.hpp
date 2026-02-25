@@ -10,9 +10,9 @@
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup transforms
-  //! @brief Applies the Callable object f on each element of a product type. f is applied on the
-  //!        values if the given product_type is a record type.
+  //! @ingroup  transforms
+  //! @brief    Applies the Callable object f on each element of a product type. `f` is applied on the values if the
+  //!           given product_type is a record type.
   //!
   //! @note This function does not take part in overload resolution if `f` can't be applied to the
   //!       elements of `t` and/or `ts`.
@@ -58,8 +58,8 @@ namespace kumi
   }
 
   //================================================================================================
-  //! @ingroup tuple_transforms
-  //! @brief Applies the Callable object f on each element of a product type and its index.
+  //! @ingroup  tuple_transforms
+  //! @brief    Applies the Callable object `f` on each element of a product type and its index.
   //!
   //! @note This function does not take part in overload resolution if `f` can't be applied to the
   //!       elements of `t` and/or `ts` and an integral constant. This function cannot be applied
@@ -92,11 +92,11 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup record_transforms
-  //! @brief Applies the Callable object f on each element of a record type and its field.
+  //! @brief Applies the Callable object `f` on each element of a record type and its field.
   //!
   //! @note This function does not take part in overload resolution if `f` can't be applied to the
   //!       elements of `t` and those of `ts`. This function can only be applied to record types.
-  //!       The function needs to be define to handle types modeling kumi::concepts::field.
+  //!       The function needs to be defined to handle types modeling kumi::concepts::field.
   //!
   //! @param f	  Callable object to be invoked
   //! @param r    Record type whose fields are used as arguments to f

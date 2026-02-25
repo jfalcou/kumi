@@ -36,12 +36,14 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief  Partition a product type over a predicate
-  //! @tparam Pred Compile-time predicate
+  //! @ingroup  generators
+  //! @brief    Partition a product type over a predicate
+  //! @tparam   Pred Compile-time predicate
   //! @param  t Product type to process
-  //! @return A tuple containing the product type of all values which types satisfies `Pred`
-  //!         and the product type of all values which types does not satisfy `Pred`.
+  //! @return   A tuple containing the product type of all values which types satisfies `Pred` in `t`
+  //!           and the product type of all values which types does not satisfy `Pred`.
+  //!
+  //! On a record type, `Pred` is applied directly to the underlying elements of the fields.
   //!
   //! ## Helper type
   //! @code
@@ -75,11 +77,13 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief  Filters a product type over a predicate
-  //! @tparam Pred Compile-time predicate
+  //! @ingroup  generators
+  //! @brief    Filters a product type over a predicate
+  //! @tparam   Pred Compile-time predicate
   //! @param  t Product type to process
-  //! @return A Product type containing all values which types satisfies `Pred`.
+  //! @return A Product type containing all values of `t` which types satisfies `Pred`.
+  //!
+  //! On a record type, `Pred` is applied directly to the underlying elements of the fields.
   //!
   //! ## Helper type
   //! @code
@@ -111,11 +115,13 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief  Filters a product type over a predicate
-  //! @tparam Pred Compile-time predicate
+  //! @ingroup  generators
+  //! @brief    Filters a product type over a predicate
+  //! @tparam   Pred Compile-time predicate
   //! @param  t Product type to process
-  //! @return A product type containing all values which types does not satisfy `Pred`.
+  //! @return A product type containing all values of `t` which types does not satisfy `Pred`.
+  //!
+  //! On a record type, `Pred` is applied directly to the underlying elements of the fields.
   //!
   //! ## Helper type
   //! @code

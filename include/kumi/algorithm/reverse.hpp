@@ -10,14 +10,14 @@
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief Reverse elements of a product type
+  //! @ingroup  generators
+  //! @brief    Reverse elements of a product type
   //!
-  //! On record types, this function operates structurally and extract elements as if they were ordered. The considered
-  //! order is the order of declaration.
+  //! On record types, this function operates on elements as if they were ordered. The considered order is the order
+  //! of declaration.
   //!
   //! @param  t The product type to reverse
-  //! @return A product type equivalent to product_type(t[index<size_v<T> - 1 - Idx>]...);
+  //! @return A product type with the type of `t` and elements equal to (t[index<size_v<T> - 1 - Idx>]...);
   //!
   //! ## Helper type
   //! @code

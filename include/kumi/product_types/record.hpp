@@ -1,5 +1,5 @@
 //==================================================================================================
-// @file
+//! @file
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
@@ -14,8 +14,8 @@
 namespace kumi
 {
   //================================================================================================
-  //! @ingroup record
   //! @class record
+  //! @ingroup record
   //! @brief Fixed-size collection of heterogeneous tagged fields, tags are unique.
   //!
   //! kumi::record provides an aggregate based implementation of a record. It provides algorithms and
@@ -85,12 +85,12 @@ namespace kumi
     }
 
     //==============================================================================================
-    //! @brief Extracts the Ith element from a kumi::tuple
+    //! @brief Extracts the Ith element from a kumi::record
     //!
-    //! @note Does not participate in overload resolution if `T` is not present in the tuple or if
-    //!       the tuple contains duplicate types
-    //! @tparam T the type to access in the tuple
-    //! @return A reference to the selected element of current tuple.
+    //! @note Does not participate in overload resolution if `T` is not present in the record or if
+    //!       the record contains duplicate types
+    //! @tparam T the type to access in the record
+    //! @return A reference to the selected element of current record.
     //!
     //! ## Example:
     //! @include doc/record/api/typed_subscript.cpp

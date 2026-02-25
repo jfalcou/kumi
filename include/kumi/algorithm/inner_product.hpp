@@ -34,13 +34,13 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes inner product (i.e. sum of products)
+  //! @ingroup  reductions
+  //! @brief    Computes inner product (i.e. sum of products)
   //!
   //! Computes the generalized sum of products of the elements of two product types. By default,
   //! `+` and `*` is used.
   //!
-  //! On record types, operates by pair of fields sharing the same name.
+  //! On record types, operates by pair of fields sharing the same label.
   //!
   //! @note Does not participate in overload resolution if product types' size are not equal or if any of
   //!       the binary operations can't be applied on the product types' elements. Similarily, doesn't participate

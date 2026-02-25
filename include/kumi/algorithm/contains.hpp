@@ -16,12 +16,12 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup queries
-  //! @brief Checks if a product type contains a given identifier
+  //! @ingroup  queries
+  //! @brief    Checks if a product type contains a given identifier
   //!
-  //! @param t the product type to inspect.
+  //! @param t  the product type to inspect.
   //! @param id Identifier to check
-  //! @return `true` if the current product_type contains a field named with the `id` identifier, and `false` otherwise.
+  //! @return   `true` if the `t` contains a field labeled with the `id` identifier, `false` otherwise.
   //!
   //! ## Examples:
   //! @include doc/tuple/algo/contains.cpp
@@ -45,12 +45,12 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup queries
-  //! @brief Checks if a product type contains at least one of many identifiers
+  //! @ingroup  queries
+  //! @brief    Checks if a product type contains at least one of many identifiers
   //!
-  //! @param t the product type to inspect.
-  //! @param ids Identifiers to check
-  //! @return `true` if current product_type contains a field based on the `ids`, and `false` otherwise.
+  //! @param t    the product type to inspect.
+  //! @param ids  Identifiers to check
+  //! @return     `true` if `t` contains a field labeld by one of the `ids`, and `false` otherwise.
   //!
   //! ## Examples:
   //! @include doc/tuple/algo/contains_any.cpp
@@ -65,12 +65,12 @@ namespace kumi
   }
 
   //==================================================================================================================
-  //! @ingroup queries
-  //! @brief Checks if a product type contains fields based only on selected identifiers
+  //! @ingroup  queries
+  //! @brief    Checks if a product type contains fields based only on selected identifiers
   //!
-  //! @param t the product type to inspect.
-  //! @param ids Identifiers to check
-  //! @return `true` if current the product_type contains a field based on any of the `ids`, and `false` otherwise.
+  //! @param t    the product type to inspect.
+  //! @param ids  Identifiers to check
+  //! @return     `true` if `t` contains a field labeled by any of the `ids`, and `false` otherwise.
   //!
   //! ## Examples:
   //! @include doc/tuple/algo/contains_only.cpp
@@ -89,12 +89,12 @@ namespace kumi
   }
 
   //==================================================================================================================
-  //! @ingroup queries
-  //! @brief Checks if a product type contains no fields based on any of the selected identifiers
+  //! @ingroup  queries
+  //! @brief    Checks if a product type contains no fields based on any of the selected identifiers
   //!
-  //! @param t the product type to inspect.
-  //! @param ids Identifiers to check
-  //! @return `true` if the current product_type contains no field based on any of the `ids`, and `false` otherwise.
+  //! @param t    the product type to inspect.
+  //! @param ids  Identifiers to check
+  //! @return     `true` if `t` contains no field labeled by any of the `ids`, and `false` otherwise.
   //!
   //! ## Examples:
   //! @include doc/tuple/algo/contains_none.cpp

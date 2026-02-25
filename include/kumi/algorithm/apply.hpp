@@ -11,9 +11,9 @@ namespace kumi
 {
   //====================================================================================================================
   //! @ingroup transforms
-  //! @brief Invoke the Callable object f with the elements of product type unrolled as arguments.
+  //! @brief Invoke the Callable object f with the elements of the product type unrolled as arguments.
   //!
-  //! @note f is applied on the underlying values when the input `t` is a record type
+  //! `f` is applied on the underlying values when the input `t` is a record type
   //!
   //! @param f	Callable object to be invoked
   //! @param t  Product Type whose elements are used as arguments to f

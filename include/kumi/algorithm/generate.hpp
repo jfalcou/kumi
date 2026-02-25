@@ -10,8 +10,8 @@
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief Creates a kumi::tuple containing `N` copies of `v`.
+  //! @ingroup  generators
+  //! @brief    Creates a kumi::tuple containing `N` copies of `v`.
   //!
   //! @tparam N Number of replications
   //! @param  v Value to replicate
@@ -42,8 +42,8 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief Creates a kumi::tuple containing `N` applications of the `f` Callable.
+  //! @ingroup  generators
+  //! @brief    Creates a kumi::tuple containing `N` applications of the `f` Callable.
   //!
   //! @tparam N Number of replications
   //! @param  f Callable to apply
@@ -73,8 +73,8 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief Creates a kumi::tuple containing an increasing ramp of values.
+  //! @ingroup  generators
+  //! @brief    Creates a kumi::tuple containing an increasing ramp of values.
   //!
   //! @tparam N Number of replications
   //! @param  v Seed value

@@ -36,15 +36,17 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Performs a tree-like reduction of all elements of a product type.
+  //! @ingroup  reductions
+  //! @brief    Performs a tree-like reduction of all elements of a product type.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @note For associative operations, this produces the same result as a left or right fold,
   //!       but have different intermediate evaluation order.
   //!
   //! @param m   Monoid callable function to apply
   //! @param t   Product type to reduce
-  //! @return    The result of reducing `t` by recursively combining elements in a tree structure
+  //! @return    The result of reducing the elements of `t` by `m`, recursively combining elements in a tree structure.
   //!
   //! ## Helper type
   //! @code
@@ -84,8 +86,10 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Performs a tree-like reduction of all elements of a product type.
+  //! @ingroup  reductions
+  //! @brief    Performs a tree-like reduction of all elements of a product type.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @note For associative operations, this produces the same result as a left or right fold,
   //!       but have different intermediate evaluation order.
@@ -93,7 +97,7 @@ namespace kumi
   //! @param m    Monoid callable function to apply
   //! @param t    Product type to reduce
   //! @param init Optional initial value of the reduction.
-  //! @return     The result of reducing `t` by recursively combining elements in a tree structure.
+  //! @return     The result of reducing the elements of `t` by `m`, recursively combining elements in a tree structure.
   //!
   //! ## Helper type
   //! @code
@@ -120,17 +124,20 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Performs a tree-like reduction of all elements of a product type. The given map
-  //!        function is applied before excution the reduction to each element of the input.
+  //! @ingroup  reductions
+  //! @brief    Performs a tree-like reduction of all elements of a product type. The given map
+  //!           function is applied before excution the reduction to each element of the input.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @note For associative operations, this produces the same result as a left or right fold
   //!       preceeded by map, but have different intermediate evaluation order.
   //!
-  //! @param f   Mapping function to apply
-  //! @param m   Monoid callable function to apply
-  //! @param t   Product type to reduce
-  //! @return    The result of reducing `t` by recursively combining elements in a tree structure
+  //! @param f  Mapping function to apply
+  //! @param m  Monoid callable function to apply
+  //! @param t  Product type to reduce
+  //! @return   The result of reducing the elements of `t` by `m` after beeing processed by `f`,
+  //!           recursively combining elements in a tree structure.
   //!
   //! ## Helper type
   //! @code
@@ -171,18 +178,21 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Performs a tree-like reduction of all elements of a product type. The given map
-  //!        function is applied before excution the reduction to each element of the input.
+  //! @ingroup  reductions
+  //! @brief    Performs a tree-like reduction of all elements of a product type. The given map
+  //!           function is applied before excution the reduction to each element of the input.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @note For associative operations, this produces the same result as a left or right fold
   //!       preceeded by map, but have different intermediate evaluation order.
   //!
-  //! @param f   Mapping function to apply
-  //! @param m   Monoid callable function to apply
-  //! @param t   Product type to reduce
+  //! @param f    Mapping function to apply
+  //! @param m    Monoid callable function to apply
+  //! @param t    Product type to reduce
   //! @param init Optional initial value of the reduction.
-  //! @return    The result of reducing `t` by recursively combining elements in a tree structure
+  //! @return     The result of reducing `t` by `m` after beeing processed by `f`,
+  //!             recursively combining elements in a tree structure
   //!
   //! ## Helper type
   //! @code
@@ -209,8 +219,10 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the sum of all elements.
+  //! @ingroup  reductions
+  //! @brief    Computes the sum of all elements.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @param t      Product type to operate on
   //! @param init   Optional initial value of the sum
@@ -239,8 +251,10 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the sum of all elements.
+  //! @ingroup  reductions
+  //! @brief  Computes the sum of all elements.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @param t      Product type to operate on
   //! @return       The value of `get<0>(t) + ... + get<N-1>(t)`
@@ -268,8 +282,10 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the product of all elements.
+  //! @ingroup  reductions
+  //! @brief    Computes the product of all elements.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @param t      Product type to operate on
   //! @param init   Initial value of the product
@@ -298,8 +314,10 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the product of all elements.
+  //! @ingroup  reductions
+  //! @brief    Computes the product of all elements.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @param t      Product type to operate on
   //! @return The value of `get<0>(t) * ... * get<N-1>(t)`
@@ -327,8 +345,10 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the bitwise AND of all elements.
+  //! @ingroup  reductions
+  //! @brief    Computes the bitwise AND of all elements.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @param t      Product type to operate on
   //! @param init   Optional initial value of the reduction
@@ -357,8 +377,10 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the bitwise AND of all elements.
+  //! @ingroup  reductions
+  //! @brief    Computes the bitwise AND of all elements.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @param t  Product type to operate on.
   //! @return   The value of `get<0>(t) & ... & get<N-1>(t)`.
@@ -386,8 +408,10 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the bitwise OR of all elements.
+  //! @ingroup  reductions
+  //! @brief    Computes the bitwise OR of all elements.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @param t      Product type to operate on
   //! @param init   Optional initial value of the reduction
@@ -416,8 +440,10 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the bitwise OR of all elements.
+  //! @ingroup  reductions
+  //! @brief    Computes the bitwise OR of all elements.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @param t  Product type to operate on
   //! @return   The value of `get<0>(t) | ... | get<N-1>(t)`
@@ -445,8 +471,10 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the bitwise XOR of all elements.
+  //! @ingroup  reductions
+  //! @brief    Computes the bitwise XOR of all elements.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @param t      Product type to operate on
   //! @param init   Optional initial value of the reduction
@@ -475,8 +503,10 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the bitwise XOR of all elements.
+  //! @ingroup  reductions
+  //! @brief    Computes the bitwise XOR of all elements.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @param t  Product type to operate on
   //! @return   The value of `get<0>(t) ^ ... ^ get<N-1>(t)`

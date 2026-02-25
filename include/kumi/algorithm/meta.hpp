@@ -10,13 +10,16 @@
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup algorithm
-  //! @brief Extracts the names of the fields of a kumi::product_type.
+  //! @ingroup  utility
+  //! @brief    Extracts the names of the fields of a product type.
   //!
   //! @note If some fields are unnamed, the associated name is kumi::unit.
   //!
-  //! @tparam   T the type of the prodcut_type from which to extract names.
-  //! @return   A tuple of the names of a kumi::product_type.
+  //! @tparam   T the type of the product type from which to extract names.
+  //! @return   A tuple of the names of a product type if there are any.
+  //!
+  //! @see kumi::tuple
+  //! @see kumi::record
   //!
   //! ## Example:
   //! @include doc/infra/members_of.cpp
@@ -31,12 +34,15 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup algorithm
-  //! @brief Extracts the values of the fields of a kumi::product_type.
+  //! @ingroup  utility
+  //! @brief    Extracts the values of the fields of a product type.
   //!
-  //! @tparam   T the type of the product_type from which to extract names.
+  //! @tparam   T the type of the product type from which to extract names.
   //! @param    t the product_type from which to extract names.
   //! @return   A tuple of references to the values of a kumi::product_type.
+  //!
+  //! @see kumi::tuple
+  //! @see kumi::record
   //!
   //! ## Example:
   //! @include doc/infra/values_of.cpp

@@ -10,11 +10,13 @@
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup queries
-  //! @brief  Checks if a unary predicate p returns true for every element of t.
+  //! @ingroup  queries
+  //! @brief    Checks if a unary predicate p returns true for every element of t.
   //! @param  t Product Type to process.
   //! @param  p Unary predicate.
-  //! @return The evaluation of `p(get<0>(t)) && ... && p(get<N-1>(t))` where `N` is the size of `t`.
+  //! @return   The evaluation of `p(get<0>(t)) && ... && p(get<N-1>(t))` where `N` is the size of `t`.
+  //!
+  //! On a record type, the function operates on the underlying elements of the fields.
   //!
   //! ## Examples:
   //! @include doc/tuple/algo/all_of.cpp
@@ -29,10 +31,12 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup queries
-  //! @brief  Computes the reduction of a product type over the `&&` operator.
+  //! @ingroup  queries
+  //! @brief    Computes the reduction of a product type over the `&&` operator.
   //! @param  t Product type to process.
-  //! @return The evaluation of `get<0>(t) && ... && get<N-1>(t)` where `N` is the size of `t`.
+  //! @return   The evaluation of `get<0>(t) && ... && get<N-1>(t)` where `N` is the size of `t`.
+  //!
+  //! On a record type, the function operates on the underlying elements of the fields.
   //!
   //! ## Examples:
   //! @include doc/tuple/algo/all_of.cpp
@@ -47,11 +51,13 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup queries
-  //! @brief  Checks if a unary predicate p returns true for any element of t.
+  //! @ingroup  queries
+  //! @brief    Checks if a unary predicate p returns true for any element of t.
   //! @param  t Product Type to process.
   //! @param  p Unary predicate.
-  //! @return The evaluation of `p(get<0>(t)) || ... || p(get<N-1>(t))` where `N` is the size of `t`.
+  //! @return   The evaluation of `p(get<0>(t)) || ... || p(get<N-1>(t))` where `N` is the size of `t`.
+  //!
+  //! On a record type, the function operates on the underlying elements of the fields.
   //!
   //! ## Examples:
   //! @include doc/tuple/algo/all_of.cpp
@@ -66,10 +72,12 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup queries
-  //! @brief  Computes the reduction of a product type over the `||` operator.
+  //! @ingroup  queries
+  //! @brief    Computes the reduction of a product type over the `||` operator.
   //! @param  t Product type to process.
-  //! @return The evaluation of `get<0>(t) || ... || get<N-1>(t)` where `N` is the size of `t`.
+  //! @return   The evaluation of `get<0>(t) || ... || get<N-1>(t)` where `N` is the size of `t`.
+  //!
+  //! On a record type, the function operates on the underlying elements of the fields.
   //!
   //! ## Examples:
   //! @include doc/tuple/algo/all_of.cpp
@@ -84,11 +92,13 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup queries
-  //! @brief  Checks if a unary predicate p does not returns true for any element in t.
+  //! @ingroup  queries
+  //! @brief    Checks if a unary predicate p does not returns true for any element in t.
   //! @param  t Product Type to process.
   //! @param  p Unary predicate.
-  //! @return The evaluation of `!any_of(t,p)`.
+  //! @return   The evaluation of `!any_of(t,p)`.
+  //!
+  //! On a record type, the function operates on the underlying elements of the fields.
   //!
   //! ## Examples:
   //! @include doc/tuple/algo/none_of.cpp
@@ -102,9 +112,11 @@ namespace kumi
 
   //====================================================================================================================
   //! @ingroup queries
-  //! @brief  Checks if no elements of a product type are true.
+  //! @brief    Checks if no elements of a product type are true.
   //! @param  t Product type to process.
-  //! @return The evaluation of `!none_of(t)`.
+  //! @return   The evaluation of `!none_of(t)`.
+  //!
+  //! On a record type, the function operates on the underlying elements of the fields.
   //!
   //! ## Examples:
   //! @include doc/tuple/algo/none_of.cpp
@@ -116,11 +128,13 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup queries
-  //! @brief  Counts the number of elements of t satisfying predicates p.
+  //! @ingroup  queries
+  //! @brief    Counts the number of elements of t satisfying predicates p.
   //! @param  t Product Type to process
   //! @param  p Unary predicate. p must return a value convertible to `bool` for every element of t.
-  //! @return Number of elements satisfying the condition.
+  //! @return   Number of elements satisfying the condition.
+  //!
+  //! On a record type, the function operates on the underlying elements of the fields.
   //!
   //! ## Examples:
   //! @include doc/tuple/algo/count_if.cpp
@@ -136,10 +150,12 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup queries
-  //! @brief  Counts the number of elements of t not equivalent to false.
+  //! @ingroup  queries
+  //! @brief    Counts the number of elements of t not equivalent to false.
   //! @param  t Product Type to process
-  //! @return Number of elements not equivalent to `false`.
+  //! @return   Number of elements not equivalent to `false`.
+  //!
+  //! On a record type, the function operates on the underlying elements of the fields.
   //!
   //! ## Example:
   //! @include doc/tuple/algo/count.cpp
