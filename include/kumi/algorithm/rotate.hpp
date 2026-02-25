@@ -31,16 +31,16 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief  Rotates the element of a product type R positions to the left, wrapping around when
-  //!         getting to the beginning.
+  //! @ingroup  generators
+  //! @brief    Rotates the element of a product type R positions to the left, wrapping around when
+  //!           getting to the beginning.
   //!
-  //! On record types, this function operates structurally and extract elements as if they were ordered. The considered
-  //! order is the order of declaration.
+  //! On record types, this function operates on elements as if they were ordered. The considered order is the order
+  //! of declaration.
   //!
   //! @tparam R Rotation factor
   //! @param t  Product type to rotate.
-  //! @return   A product type equivalent to t with elements rotated R positions to the left.
+  //! @return   A product type equivalent to `t` with elements rotated R positions to the left.
   //!
   //! ## Helper type
   //! @code
@@ -74,16 +74,16 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief  Rotates the element of a product type R positions to the right, wrapping around when
-  //!         getting to the end.
+  //! @ingroup  generators
+  //! @brief    Rotates the element of a product type R positions to the right, wrapping around when
+  //!           getting to the end.
   //!
-  //! On record types, this function operates structurally and extract elements as if they were ordered. The considered
-  //! order is the order of declaration.
+  //! On record types, this function operates on elements as if they were ordered. The considered order is the order
+  //! of declaration.
   //!
   //! @tparam R Rotation factor
   //! @param t  Product type to rotate.
-  //! @return   A product type equivalent to t with elements rotated R positions to the right.
+  //! @return   A product type equivalent to `t` with elements rotated R positions to the right.
   //!
   //! ## Helper type
   //! @code

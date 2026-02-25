@@ -14,11 +14,9 @@ namespace kumi
   //! @brief    Class definition and functions on kumi types
   //!
   //! @defgroup tuple Product Types and associated Functions
-  //! @ingroup  types
   //! @brief    Definition for kumi defined product type classes and functions
   //!
   //! @defgroup record Record Types and associated Functions
-  //! @ingroup  types
   //! @brief    Definition for kumi defined record type classes and functions
   //================================================================================================
 }

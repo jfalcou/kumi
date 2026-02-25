@@ -15,14 +15,17 @@ namespace kumi
   //!
   //! This function does not participate in overload resolution if any Idx is outside [0, size_v<T>[.
   //!
+  //! On record types, this function operates on elements as if they were ordered. The considered order is the order
+  //! of declaration.
+  //!
   //! @note Nothing prevent the number of reordered index to be lesser or greater than t size or
   //!       the fact they can appear multiple times.
   //!
   //! @note reorder(tuple) works and is equivalent to reorder<>(tuple)
   //!
-  //! @tparam Idx     Reordered index of elements
-  //! @param  t The product type to reorder
-  //! @return A product type equivalent to product_type(t[index<Idx>]...);
+  //! @tparam Idx Reordered index of elements
+  //! @param  t   The product type to reorder
+  //! @return     A product type with the type of `t` with elements equal to get<Idx>(t).
   //!
   //! ## Helper type
   //! @code
@@ -48,17 +51,20 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief Reorder elements of a kumi::record
+  //! @ingroup  generators
+  //! @brief    Reorder elements of a kumi::record
   //!
-  //! This function does not participate in overload resolution if the names are not in T
+  //! This function does not participate in overload resolution if the names are not in `t`
+  //!
+  //! On record types, this function operates on elements as if they were ordered. The considered order is the order
+  //! of declaration.
   //!
   //! @note Nothing prevent the number of reordered names to be lesser or greater than t size or
   //!       the fact they can appear multiple times if it is applied on a named tuple.
   //!
-  //! @tparam Name     Reordered names of elements
-  //! @param  t kumi::product_type to reorder
-  //! @return A product type equivalent to product_type(t[index<Idx>]...);
+  //! @tparam Name  Reordered names of elements
+  //! @param  t     Product type to reorder
+  //! @return       A product type with the type of `t` with elements equal to get<Name>(t).
   //!
   //! ## Helper type
   //! @code
@@ -85,17 +91,20 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief Reindex elements of a kumi::product_type
+  //! @ingroup  generators
+  //! @brief    Reindex elements of a kumi::product_type
   //!
   //! This function does not participate in overload resolution if any Idx is outside [0, size_v<T>[.
+  //!
+  //! On record types, this function operates on elements as if they were ordered. The considered order is the order
+  //! of declaration.
   //!
   //! @note Nothing prevent the number of reordered index to be lesser or greater than t size or
   //!       the fact they can appear multiple times.
   //!
-  //! @tparam Projections A kumi::indexes representing the reindexed slot of the elements
-  //! @param  t kumi::product_type to reindex
-  //! @return A potentially nested tuple following the Indexes order
+  //! @tparam Indexes A kumi::projection_map representing the reindexed slot of the elements
+  //! @param  t       kumi::product_type to reindex
+  //! @return         A potentially nested tuple following the Indexes order
   //!
   //! ## Helper type
   //! @code

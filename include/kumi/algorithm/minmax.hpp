@@ -10,10 +10,10 @@
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the maximum value all elements of t.
-  //! @param t Product Type to inspect
-  //! @return The maximum value of all elements of t
+  //! @ingroup  reductions
+  //! @brief    Computes the maximum value all elements of `t`.
+  //! @param t  Product Type to inspect
+  //! @return   The maximum value of all elements of `t`
   //!
   //! ## Helper type
   //! @code
@@ -44,11 +44,11 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the maximum value of applications of f to all elements of t.
-  //! @param t Product Type to inspect
-  //! @param f Unary Callable object
-  //! @return The maximum value of f over all elements of t
+  //! @ingroup  reductions
+  //! @brief    Computes the maximum value of applications of `f` to all elements of `t`.
+  //! @param t  Product Type to inspect
+  //! @param f  Unary Callable object
+  //! @return   The maximum value of `f` over all elements of `t`
   //!
   //! ## Helper type
   //! @code
@@ -80,11 +80,11 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the maximum value of applications of f to all elements of kumi::flatten_all(t).
-  //! @param t Product Type to inspect
-  //! @param f Unary Callable object
-  //! @return The maximum value of f over all elements of a flattened version of t
+  //! @ingroup  reductions
+  //! @brief    Computes the maximum value of applications of `f` to all elements of kumi::flatten_all(t).
+  //! @param t  Product Type to inspect
+  //! @param f  Unary Callable object
+  //! @return   The maximum value of `f` over all elements of a flattened version of `t`
   //!
   //! ## Helper type
   //! @code
@@ -109,16 +109,11 @@ namespace kumi
     return max(flat_t, f);
   }
 
-  namespace result
-  {
-
-  }
-
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the minimum value all elements of t.
-  //! @param t Product Type to inspect
-  //! @return The minimum value of  all elements of t
+  //! @ingroup  reductions
+  //! @brief    Computes the minimum value all elements of `t`.
+  //! @param t  Product Type to inspect
+  //! @return   The minimum value of all elements of `t`
   //!
   //! ## Helper type
   //! @code
@@ -149,11 +144,11 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the minimum value of applications of f to all elements of t.
-  //! @param t Product Type to inspect
-  //! @param f Unary Callable object
-  //! @return The minimum value of f over all elements of t
+  //! @ingroup  reductions
+  //! @brief    Computes the minimum value of applications of `f` to all elements of `t`.
+  //! @param t  Product Type to inspect
+  //! @param f  Unary Callable object
+  //! @return   The minimum value of `f` over all elements of `t`
   //!
   //! ## Helper type
   //! @code
@@ -185,11 +180,11 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the minimum value of applications of f to all elements of kumi::flatten_all(t).
-  //! @param t Product Type to inspect
-  //! @param f Unary Callable object
-  //! @return The minimum value of f over all elements of a flattened version of t
+  //! @ingroup  reductions
+  //! @brief    Computes the minimum value of applications of `f` to all elements of kumi::flatten_all(t).
+  //! @param t  Product Type to inspect
+  //! @param f  Unary Callable object
+  //! @return   The minimum value of `f` over all elements of a flattened version of `t`
   //!
   //! ## Helper type
   //! @code

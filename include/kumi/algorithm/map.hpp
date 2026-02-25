@@ -10,12 +10,12 @@
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup transforms
-  //! @brief Apply the Callable object f on each product types' elements
+  //! @ingroup  transforms
+  //! @brief    Applies the Callable object `f` on each product types' elements
   //!
-  //! Applies the given function to all the product types passed as arguments and stores the result
-  //! in another product type, keeping the original elements order. On records, the order is determined
-  //! via the order of definition of the fields.
+  //! Applies the given function to all the product types passed as arguments and stores the result in another product
+  //! type, keeping the original elements order. On records, the order is determined via the order of definition of
+  //! the fields.
   //!
   //! @note Does not participate in overload resolution if product types' size are not equal or if
   //!       `f` can't be called on each product type's elements. All product type must either be
@@ -66,8 +66,8 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup tuple_transforms
-  //! @brief Apply the Callable object f on each tuples' elements and their indexes
+  //! @ingroup  tuple_transforms
+  //! @brief    Applies the Callable object `f` on each tuples' elements and their indexes
   //!
   //! Applies the given function to all the tuples passed as arguments along with their indexes  and
   //! stores the result in another tuple, keeping the original elements order.
@@ -117,8 +117,8 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup record_transforms
-  //! @brief Apply the Callable object f on each records' fields and their associated names.
+  //! @ingroup  record_transforms
+  //! @brief    Applies the Callable object `f` on each records' fields and their associated names.
   //!
   //! Applies the given function to all the records passed as arguments along with their names and
   //! stores the result in another records, keeping the original elements order.

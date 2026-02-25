@@ -35,7 +35,7 @@ namespace kumi
   //!
   //! @tparam Target destination type to associate to each member of the product type `t`
   //! @param  t Product type to convert
-  //! @return A Product type containing the values of t where each member is of type Target
+  //! @return A Product type containing the values of `t` where each member is of type Target
   //!
   //! ## Helper type
   //! @code

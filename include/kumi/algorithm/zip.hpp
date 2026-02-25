@@ -56,14 +56,15 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief Constructs a tuple where the ith element is the product type of all ith elements of ts...
+  //! @ingroup  generators
+  //! @brief    Constructs a tuple where the ith element is the product type of all ith elements of `t0`,`ts`...
+  //!
+  //! On record types, this function operates on elements as if they were ordered. The considered order is the order
+  //! of declaration.
   //!
   //! @param t0 Product type to convert
   //! @param ts Product types to convert
-  //! @return The tuple of all combination of elements from t0, ts...
-  //!
-  //! @note Every inner product type should be of the same sizes, otherwise see `zip_min` or `zip_max`
+  //! @return   The tuple of all combination of elements from `t0`, `ts`...
   //!
   //! ## Helper type
   //! @code
@@ -78,6 +79,9 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::zip
   //!
+  //! @see zip_min
+  //! @see zip_max
+  //!
   //! ## Examples:
   //! @include doc/tuple/algo/zip.cpp
   //! @include doc/record/algo/zip.cpp
@@ -90,14 +94,17 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief Constructs a tuple where the ith element is the product type of all ith elements of ts...
+  //! @ingroup  generators
+  //! @brief    Constructs a tuple where the ith element is the product type of all ith elements of `t0`,`ts`...
+  //!
+  //! On record types, this function operates on elements as if they were ordered. The considered order is the order
+  //! of declaration.
   //!
   //! @param t0 Product type to convert
   //! @param ts Product types to convert
-  //! @return The tuple of all combination of elements from t0, ts...
+  //! @return   The tuple of all combination of elements from `t0`, `ts`...
   //!
-  //! @ note `zip_min` truncates product types based on the smallest size.
+  //! @note `zip_min` truncates product types based on the smallest size.
   //!
   //! ## Helper type
   //! @code
@@ -112,6 +119,9 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::zip_min
   //!
+  //! @see zip
+  //! @see zip_max
+  //!
   //! ## Examples:
   //! @include doc/tuple/algo/zip_min.cpp
   //! @include doc/record/algo/zip_min.cpp
@@ -125,12 +135,15 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief Constructs a tuple where the ith element is the product type of all ith elements of ts...
+  //! @ingroup  generators
+  //! @brief    Constructs a tuple where the ith element is the product type of all ith elements of `t0`,`ts`...
+  //!
+  //! On record types, this function operates on elements as if they were ordered. The considered order is the order
+  //! of declaration.
   //!
   //! @param t0 Product type to convert
   //! @param ts Product types to convert
-  //! @return The tuple of all combination of elements from t0, ts...
+  //! @return   The tuple of all combination of elements from `t0`,`ts`...
   //!
   //! @note `zip_max` fills missing elements to reach the biggest product type size.
   //!
@@ -146,6 +159,9 @@ namespace kumi
   //! @endcode
   //!
   //! Computes the return type of a call to kumi::zip_max
+  //!
+  //! @see zip
+  //! @see zip_min
   //!
   //! ## Example
   //! @include doc/tuple/algo/zip_max.cpp

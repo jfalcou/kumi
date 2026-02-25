@@ -10,12 +10,15 @@
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief Constructs a product type by adding a value v at the beginning of t
+  //! @ingroup  generators
+  //! @brief    Constructs a product type by adding a value `v` at the beginning of `t`.
   //!
-  //! @param t Base product type
-  //! @param v Value to insert in front of t
-  //! @return A product type composed of v followed by all elements of t in order.
+  //! @param t  Base product type
+  //! @param v  Value to insert in front of `t`
+  //! @return   A product type composed of `v` followed by all elements of `t` in order.
+  //!
+  //! On record types, this function operates on elements as if they were ordered. The considered order is the order
+  //! of declaration.
   //!
   //! ## Helper type
   //! @code
@@ -42,12 +45,14 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief Remove the first (if any) element of a product type.
+  //! @ingroup  generators
+  //! @brief    Remove the first (if any) element of `t`.
   //!
-  //! @param t Base product type
-  //! @return A product type composed of all elements of t except its first. Has no effect on empty
-  //!         product types.
+  //! @param t  Base product type
+  //! @return   A product type composed of all elements of `t` except its first. Has no effect on empty product types.
+  //!
+  //! On record types, this function operates on elements as if they were ordered. The considered order is the order
+  //! of declaration.
   //!
   //! ## Helper type
   //! @code
@@ -73,12 +78,15 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief Constructs a product type by adding a value v at the end of t
+  //! @ingroup  generators
+  //! @brief    Constructs a product type by adding a value `v` at the end of `t`.
   //!
-  //! @param t Base product type
-  //! @param v Value to insert in front of t
-  //! @return A product type composed of all elements of t in order followed by v.
+  //! @param t  Base product type
+  //! @param v  Value to insert in front of `t`
+  //! @return   A product type composed of all elements of `t` in order followed by `v`.
+  //!
+  //! On record types, this function operates on elements as if they were ordered. The considered order is the order
+  //! of declaration.
   //!
   //! ## Helper type
   //! @code
@@ -105,11 +113,14 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief Remove the last (if any) element of a kumi::product_type.
+  //! @ingroup  generators
+  //! @brief    Remove the last (if any) element of a kumi::product_type.
   //!
-  //! @param t Base product type
-  //! @return A product type composed of all elements of t except its last. Has no effect on empty t.
+  //! @param t  Base product type
+  //! @return   A product type composed of all elements of `t` except its last. Has no effect on empty product types.
+  //!
+  //! On record types, this function operates on elements as if they were ordered. The considered order is the order
+  //! of declaration.
   //!
   //! ## Helper type
   //! @code

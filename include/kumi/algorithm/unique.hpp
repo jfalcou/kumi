@@ -62,10 +62,12 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief  Returns a product type with consecutive duplicate types removed (pairwise uniqueness).
+  //! @ingroup  generators
+  //! @brief    Returns a product type with consecutive duplicate types removed (pairwise uniqueness).
   //! @param  t Product type to process
-  //! @return A product type containing elements from t with consecutive duplicates removed.
+  //! @return A product type containing elements of `t` with consecutive duplicates removed.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! ## Helper type
   //! @code
@@ -98,12 +100,13 @@ namespace kumi
   };
 
   //====================================================================================================================
-  //! @ingroup generators
-  //! @brief  Return the product type containing the values of the first occurence of each type
-  //!         in the input product type.
+  //! @ingroup  generators
+  //! @brief    Return the product type containing the values of the first occurence of each type in `t`.
+  //!
   //! @param  t Product type to process
-  //! @return A product type built by keeping the first occurrence of every distinct element type
-  //!         in the input product type.
+  //! @return A product type built by keeping the first occurrence of every distinct element type in `t`.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! ## Helper type
   //! @code

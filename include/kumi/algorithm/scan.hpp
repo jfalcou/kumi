@@ -35,9 +35,10 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the inclusive prefix scan of all elements of a product type using a
-  //!        tail recursive call.
+  //! @ingroup  reductions
+  //! @brief    Computes the inclusive prefix scan of all elements of a product type using a tail recursive call.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @note The first stored value is the result of the application of the function to the provided
   //!       initial value and the first element of the product_type.
@@ -81,9 +82,10 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the inclusive prefix scan of all elements of a product type using a
-  //!        tail recursive call.
+  //! @ingroup  reductions
+  //! @brief    Computes the inclusive prefix scan of all elements of a product type using a tail recursive call.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @note The first stored value is the result of the application of the monoid to it's identity
   //!       and the first element of the product_type.
@@ -119,9 +121,10 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the exclusive prefix scan of all elements of a product type using a
-  //!        tail recursive call.
+  //! @ingroup  reductions
+  //! @brief    Computes the exclusive prefix scan of all elements of a product type using a tail recursive call.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @note The first stored value is the provided initial value.
   //!
@@ -162,9 +165,10 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the exclusive prefix scan of all elements of a product type using a
-  //!        tail recursive call.
+  //! @ingroup  reductions
+  //! @brief    Computes the exclusive prefix scan of all elements of a product type using a tail recursive call.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @note The first stored value is the identity of the provided monoid.
   //!
@@ -199,9 +203,10 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the inclusive suffix scan of all elements of a product type using a
-  //!        non-tail recursive call.
+  //! @ingroup  reductions
+  //! @brief    Computes the inclusive suffix scan of all elements of a product type using a non-tail recursive call.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @note The first stored value is the result of the application of the function to the provided
   //!       initial value and the last element of the product_type.
@@ -245,9 +250,10 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the inclusive suffix scan of all elements of a product type using a
-  //!        non-tail recursive call.
+  //! @ingroup  reductions
+  //! @brief    Computes the inclusive suffix scan of all elements of a product type using a non-tail recursive call.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @note The first stored value is the result of the application of the monoid to it's identity
   //!       and the last element of the product_type.
@@ -283,9 +289,10 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the exclusive suffix scan of all elements of a product type using a
-  //!        tail recursive call.
+  //! @ingroup  reductions
+  //! @brief    Computes the exclusive suffix scan of all elements of a product type using a tail recursive call.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @note The first stored value is the provided initial value.
   //!
@@ -326,9 +333,10 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup reductions
-  //! @brief Computes the exclusive suffix scan of all elements of a product type using a
-  //!        non-tail recursive call.
+  //! @ingroup  reductions
+  //! @brief    Computes the exclusive suffix scan of all elements of a product type using a non-tail recursive call.
+  //!
+  //! On record types, this function operates on the underlying values, not on the fields themselves.
   //!
   //! @note The first stored value is the identity of the provided monoid.
   //!
