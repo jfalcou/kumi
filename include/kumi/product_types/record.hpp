@@ -25,9 +25,7 @@ namespace kumi
   //!
   //! @tparam Ts Sequence of fields stored inside kumi::record.
   //================================================================================================
-  template<typename... Ts>
-  requires(concepts::entirely_uniquely_named<Ts...> && concepts::unique_display_name<Ts...>)
-  struct record<Ts...>
+  template<typename... Ts> struct record
   {
     using is_record_type = void;
     using set_t = _::make_set_t<Ts...>;

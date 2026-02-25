@@ -15,6 +15,7 @@ namespace kumi::_
 
   template<auto ID> struct value
   {
+    using type = decltype(ID);
   };
 
   using invalid = std::integral_constant<std::size_t, static_cast<std::size_t>(-1)>;
@@ -33,6 +34,16 @@ namespace kumi::_
   template<typename T, typename... Args>
   concept implicit_constructible = requires(Args... args) { T{args...}; };
 
+  // To be displayed an identifier need to be constructible via T{}, and either expose a constexpr to_str() or
+  // nothing, in which case the typer will be used (see typename.hpp)
+  template<typename T>
+  concept valid_display_name =
+    implicit_constructible<T> &&
+    (!requires { to_str(T{}); } || std::same_as<typename value<to_str(T{})>::type, kumi::str>);
+
+  //==============================================================================================
+  // Helper concepts for custom identifier/field use (these are fundamental types in kumi)
+  //==============================================================================================
   template<typename T>
   concept identifier = requires(T const& t) { typename std::remove_cvref_t<T>::tag_type; };
 

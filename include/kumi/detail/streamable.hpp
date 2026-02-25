@@ -48,12 +48,9 @@ namespace kumi::_
   //! ## Example:
   //! @include doc/infra/to_str.cpp
   //================================================================================================
-  template<typename T> consteval str make_str(T const& t)
+  template<valid_display_name T> consteval str make_str(T const& t)
   {
-    if constexpr (requires {
-                    { to_str(t) } -> std::same_as<str>;
-                  })
-      return to_str(t);
+    if constexpr (requires { to_str(t); }) return to_str(t);
     else return typer<std::remove_cvref_t<T>>();
   }
 }
