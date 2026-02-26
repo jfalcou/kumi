@@ -158,7 +158,7 @@ requires ((sizeof...(<a class="el" href="group__utility_gacadc026868e6654e80c574
   </dd>
 </dl>
 <dl class="section note"><dt>Note</dt><dd>This permits the conversion from a tuple&lt;T&gt;&amp; to a tuple&lt;T&amp;&gt; which makes it suitable for some zip-like cases such as building a structure of arrays iterator.</dd></dl>
-<h2><a class="anchor" id="autotoc_md187"></a>
+<h2><a class="anchor" id="autotoc_md188"></a>
 Example :</h2>
 <div class="fragment"><div class="line"> </div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -238,7 +238,7 @@ Example :</h2>
 <div class="line">    std::<a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">cout</a> &lt;&lt; <a class="code hl_variable" href="group__utility_gacadc026868e6654e80c57432643c804a.html#gacadc026868e6654e80c57432643c804a">e</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="line"> </div>
-<div class="ttc" id="agroup__record_gac9a691cb30072f994a527e13b861522e_html_gac9a691cb30072f994a527e13b861522e"><div class="ttname"><a href="group__record_gac9a691cb30072f994a527e13b861522e.html#gac9a691cb30072f994a527e13b861522e">kumi::tie</a></div><div class="ttdeci">constexpr auto tie(Ts &amp;... ts) -&gt; record&lt; field&lt; decltype(Fields), Ts &amp; &gt;... &gt;</div><div class="ttdoc">Creates a kumi::record of lvalue references to its arguments.</div><div class="ttdef"><b>Definition</b> record.hpp:355</div></div>
+<div class="ttc" id="agroup__record_gac9a691cb30072f994a527e13b861522e_html_gac9a691cb30072f994a527e13b861522e"><div class="ttname"><a href="group__record_gac9a691cb30072f994a527e13b861522e.html#gac9a691cb30072f994a527e13b861522e">kumi::tie</a></div><div class="ttdeci">constexpr auto tie(Ts &amp;... ts) -&gt; record&lt; field&lt; decltype(Fields), Ts &amp; &gt;... &gt;</div><div class="ttdoc">Creates a kumi::record of lvalue references to its arguments.</div><div class="ttdef"><b>Definition</b> record.hpp:353</div></div>
 <div class="ttc" id="agroup__transforms_ga570ad42b8992ce6096c05dd6b2bbcf6d_html_ga570ad42b8992ce6096c05dd6b2bbcf6d"><div class="ttname"><a href="group__transforms_ga570ad42b8992ce6096c05dd6b2bbcf6d.html#ga570ad42b8992ce6096c05dd6b2bbcf6d">kumi::apply</a></div><div class="ttdeci">constexpr decltype(auto) apply(Function &amp;&amp;f, T &amp;&amp;t) noexcept(_::supports_nothrow_apply&lt; Function &amp;&amp;, T &amp;&amp; &gt;)</div><div class="ttdoc">Invoke the Callable object f with a product_type of arguments. f is applied on the values if the give...</div><div class="ttdef"><b>Definition</b> apply.hpp:39</div></div>
 </div><!-- fragment --> 
 </div>
