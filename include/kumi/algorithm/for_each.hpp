@@ -115,7 +115,7 @@ namespace kumi
       constexpr auto fields = members_of(as<Tuple>{});
       auto const invoker = [&]<std::size_t I>(std::integral_constant<std::size_t, I>) {
         constexpr auto field = get<I>(fields);
-        f(field.to_str(), get<field>(KUMI_FWD(t)), get<field>(KUMI_FWD(ts))...);
+        f(_::make_str(field), get<field>(KUMI_FWD(t)), get<field>(KUMI_FWD(ts))...);
       };
 
       [=]<std::size_t... I>(std::index_sequence<I...>) {

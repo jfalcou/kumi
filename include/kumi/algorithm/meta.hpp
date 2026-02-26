@@ -26,7 +26,7 @@ namespace kumi
     if constexpr (concepts::sized_product_type<T, 0>) return tuple{};
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return tuple{name_of(as<element_t<I, T>>{})...};
+        return tuple{name_of<element_t<I, T>>()...};
       }(std::make_index_sequence<size_v<T>>{});
   }
 

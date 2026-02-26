@@ -12,7 +12,7 @@ namespace kumi
   namespace _
   {
     template<typename T, typename... Ts>
-    constexpr bool contains = ((concepts::field<T> && std::invocable<T, Ts>) || ...);
+    constexpr bool contains = ((concepts::field<T> && std::invocable<T, tag_of_t<Ts>>) || ...);
   }
 
   //==================================================================================================================
@@ -37,8 +37,7 @@ namespace kumi
       }(std::make_index_sequence<size_v<T>>{});
     else
       return []<std::size_t... I>(std::index_sequence<I...>) {
-        if constexpr (((concepts::field<element_t<I, T>> && std::invocable<element_t<I, T>, std::remove_cvref_t<K>>) ||
-                       ...))
+        if constexpr (((concepts::field<element_t<I, T>> && std::invocable<element_t<I, T>, _::tag_of_t<K>>) || ...))
           return true;
         else return false;
       }(std::make_index_sequence<size_v<T>>{});

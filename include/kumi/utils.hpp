@@ -33,7 +33,6 @@ namespace kumi
 #include <kumi/utils/concepts.hpp>
 
 #include <kumi/utils/unit_type.hpp>
-#include <kumi/utils/field.hpp>
 #include <kumi/utils/identifier.hpp>
 #include <kumi/utils/monoid.hpp>
 

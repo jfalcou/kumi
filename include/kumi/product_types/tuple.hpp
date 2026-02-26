@@ -134,33 +134,33 @@ namespace kumi
     //==============================================================================================
     template<concepts::identifier Name>
     requires(concepts::uniquely_named<Ts...> && concepts::contains_field<Name, Ts...>)
-    KUMI_ABI constexpr decltype(auto) operator[](Name const& n) & noexcept
+    KUMI_ABI constexpr decltype(auto) operator[](Name const&) & noexcept
     {
-      return impl(n);
+      return impl(_::tag_of_t<Name>{});
     }
 
     /// @overload
     template<concepts::identifier Name>
-    KUMI_ABI constexpr decltype(auto) operator[](Name const& n) && noexcept
+    KUMI_ABI constexpr decltype(auto) operator[](Name const&) && noexcept
     requires(concepts::uniquely_named<Ts...> && concepts::contains_field<Name, Ts...>)
     {
-      return static_cast<decltype(impl)&&>(impl)(n);
-    }
-
-    /// @overload
-    template<concepts::identifier Name>
-    requires(concepts::uniquely_named<Ts...> && concepts::contains_field<Name, Ts...>)
-    KUMI_ABI constexpr decltype(auto) operator[](Name const& n) const&& noexcept
-    {
-      return static_cast<decltype(impl) const&&>(impl)(n);
+      return static_cast<decltype(impl)&&>(impl)(_::tag_of_t<Name>{});
     }
 
     /// @overload
     template<concepts::identifier Name>
     requires(concepts::uniquely_named<Ts...> && concepts::contains_field<Name, Ts...>)
-    KUMI_ABI constexpr decltype(auto) operator[](Name const& n) const& noexcept
+    KUMI_ABI constexpr decltype(auto) operator[](Name const&) const&& noexcept
     {
-      return impl(n);
+      return static_cast<decltype(impl) const&&>(impl)(_::tag_of_t<Name>{});
+    }
+
+    /// @overload
+    template<concepts::identifier Name>
+    requires(concepts::uniquely_named<Ts...> && concepts::contains_field<Name, Ts...>)
+    KUMI_ABI constexpr decltype(auto) operator[](Name const&) const& noexcept
+    {
+      return impl(_::tag_of_t<Name>{});
     }
 
     //==============================================================================================
@@ -178,10 +178,7 @@ namespace kumi
     [[nodiscard]] KUMI_ABI static constexpr bool empty() noexcept { return sizeof...(Ts) == 0; }
 
     /// Returns the names of the elements of a kumi::tuple
-    [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept -> tuple<decltype(name_of(as<Ts>{}))...>
-    {
-      return {name_of(as<Ts>{})...};
-    };
+    [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept { return kumi::tuple{name_of<Ts>()...}; };
 
     //==============================================================================================
     //! @}
@@ -360,10 +357,9 @@ namespace kumi
     {
       os << "( ";
       [&]<std::size_t... I>(std::index_sequence<I...>) {
-        ((os << _::make_streamable(t[index<I>]) << " "), ...);
-      }(std::make_index_sequence<size_v<decltype(t)>>{});
-      os << ')';
-
+        ((os << _::make_streamable(t[index<I>]) << ", "), ...);
+      }(std::make_index_sequence<size_v<tuple> - 1>{});
+      os << _::make_streamable(t[index<size_v<tuple> - 1>]) << " )";
       return os;
     }
   };

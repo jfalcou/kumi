@@ -21,13 +21,13 @@ namespace kumi
         return [&]<std::size_t... I>(std::index_sequence<I...>) {
           auto v_or_r = [&]<typename V>(V&& v) {
             using FV = kumi::result::field_value_of_t<V>;
-            constexpr auto curr_name = name_of(as<V>{}).to_str();
+            constexpr auto curr_name = _::make_str(name_of<V>());
 
             if constexpr (concepts::record_type<FV>)
             {
               return [&]<std::size_t... J>(std::index_sequence<J...>) {
                 return record{
-                  (capture_field<name<concatenate_str<curr_name, name_of(as<element_t<J, FV>>{}).to_str()>()>{}>(
+                  (capture_field<name<concatenate_str<curr_name, _::make_str(name_of<element_t<J, FV>>())>()>{}>(
                     field_value_of(get<J>(field_value_of(KUMI_FWD(v))))))...};
               }(std::make_index_sequence<size_v<FV>>{});
             }
@@ -46,8 +46,8 @@ namespace kumi
         return [&]<std::size_t... I>(std::index_sequence<I...>) {
           auto v_or_r = [&]<typename V>(V&& v) {
             constexpr auto curr_name = [&] {
-              if constexpr (std::is_same_v<Prefix_type, unit>) return name<name_of(as<V>{}).to_str()>{};
-              else return name<concatenate_str<Prefix.to_str(), name_of(as<V>{}).to_str()>()>{};
+              if constexpr (std::is_same_v<Prefix_type, unit>) return name<_::make_str(name_of<V>())>{};
+              else return name<concatenate_str<_::make_str(Prefix), _::make_str(name_of<V>())>()>{};
             }();
 
             if constexpr (concepts::record_type<kumi::result::field_value_of_t<V>>)
@@ -67,8 +67,8 @@ namespace kumi
           using Prefix_type = std::remove_cvref_t<decltype(Prefix)>;
           auto v_or_r = [&]<typename V>(V&& v) {
             constexpr auto curr_name = [&] {
-              if constexpr (std::is_same_v<Prefix_type, unit>) return name<name_of(as<V>{}).to_str()>{};
-              else return name<concatenate_str<Prefix.to_str(), name_of(as<V>{}).to_str()>()>{};
+              if constexpr (std::is_same_v<Prefix_type, unit>) return name<_::make_str(name_of<V>())>{};
+              else return name<concatenate_str<_::make_str(Prefix), _::make_str(name_of<V>())>()>{};
             }();
 
             if constexpr (concepts::record_type<kumi::result::field_value_of_t<V>>)

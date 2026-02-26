@@ -41,7 +41,7 @@ namespace kumi
 
   template<typename ID> struct identifier<ID, void>
   {
-    using tag_type = identifier<ID>;
+    using tag_type = std::remove_cvref_t<ID>;
 
     constexpr identifier() noexcept {};
     constexpr identifier(ID const&) noexcept {};
@@ -56,18 +56,11 @@ namespace kumi
       return {KUMI_FWD(v)};
     }
 
-    static constexpr auto to_str()
-    {
-      using S = std::remove_cvref_t<ID>;
-      if constexpr (requires { S::to_str(); }) return S::to_str();
-      else return _::typer<ID>();
-    }
-
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os,
                                                          identifier const&) noexcept
     {
-      return os << identifier::to_str();
+      return os << _::make_str(tag_type{});
     }
   };
 
@@ -90,6 +83,9 @@ namespace kumi
   {
     /// Derived identifier type
     using tag_type = identifier<ID, Checker>;
+
+    //! A checked field str representation is the underlying type, checker is ignored
+    friend constexpr str to_str(identifier<ID, Checker> const&) { return _::make_str(ID{}); }
 
     //! Default constructor
     constexpr identifier() noexcept {};
@@ -140,20 +136,13 @@ namespace kumi
     requires(!Checker::template value<T>)
     constexpr field<tag_type, std::unwrap_ref_decay_t<T>> operator=(T&& v) const = delete;
 
-    static constexpr auto to_str()
-    {
-      using S = std::remove_cvref_t<ID>;
-      if constexpr (requires { S::to_str(); }) return S::to_str();
-      else return _::typer<ID>();
-    }
-
     //! @related kumi::identifier
     //! @brief Output stream insertion
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os,
-                                                         identifier const&) noexcept
+                                                         identifier const& id) noexcept
     {
-      return os << identifier::to_str();
+      return os << _::make_str(id);
     }
   };
 
@@ -169,7 +158,8 @@ namespace kumi
   {
     using tag_type = name<ID>;
 
-    static constexpr auto to_str() { return ID; }
+    //! A name field str representation is it s owned str
+    friend constexpr str to_str(name<ID> const&) { return ID; }
 
     //! identifier comparison
     template<kumi::concepts::identifier I> KUMI_ABI friend constexpr auto operator==(name const&, I const&)

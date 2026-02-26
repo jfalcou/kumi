@@ -15,6 +15,7 @@ namespace kumi::_
 
   template<auto ID> struct value
   {
+    using type = decltype(ID);
   };
 
   using invalid = std::integral_constant<std::size_t, static_cast<std::size_t>(-1)>;
@@ -33,11 +34,18 @@ namespace kumi::_
   template<typename T, typename... Args>
   concept implicit_constructible = requires(Args... args) { T{args...}; };
 
+  // To be displayed an identifier need to be constructible via T{}, and either expose a constexpr to_str() or
+  // nothing, in which case the typer will be used (see typename.hpp)
   template<typename T>
-  concept identifier = requires(T const& t) {
-    typename std::remove_cvref_t<T>::tag_type;
-    { std::remove_cvref_t<T>::to_str() };
-  };
+  concept valid_display_name =
+    implicit_constructible<T> &&
+    (!requires { to_str(T{}); } || std::same_as<typename value<to_str(T{})>::type, kumi::str>);
+
+  //==============================================================================================
+  // Helper concepts for custom identifier/field use (these are fundamental types in kumi)
+  //==============================================================================================
+  template<typename T>
+  concept identifier = requires(T const& t) { typename std::remove_cvref_t<T>::tag_type; };
 
   template<typename O>
   concept field = requires(O const& o) {
@@ -45,6 +53,11 @@ namespace kumi::_
     typename std::remove_cvref_t<O>::identifier_type;
     { o(typename std::remove_cvref_t<O>::identifier_type{}) };
     { std::remove_cvref_t<O>::name() };
+  };
+
+  template<identifier T> struct tag_of
+  {
+    using type = typename std::remove_cvref_t<T>::tag_type;
   };
 
   template<field T> struct key_of
@@ -57,6 +70,7 @@ namespace kumi::_
     using type = typename std::remove_cvref_t<T>::type;
   };
 
+  template<identifier T> using tag_of_t = typename tag_of<std::remove_cvref_t<T>>::type;
   template<field T> using key_of_t = typename key_of<std::remove_cvref_t<T>>::type;
   template<field T> using type_of_t = typename type_of<std::remove_cvref_t<T>>::type;
 
@@ -226,8 +240,8 @@ namespace kumi::_
     static consteval invalid get_index();
   };
 
-  template<std::size_t I, typename Ref, field Field>
-  requires(std::is_same_v<Ref, key_of_t<Field>>)
+  template<std::size_t I, identifier Ref, field Field>
+  requires(std::is_same_v<tag_of_t<Ref>, key_of_t<Field>>)
   struct check_field<I, Ref, Field>
   {
     using constant = std::integral_constant<std::size_t, I>;

@@ -60,3 +60,30 @@ TTS_CASE("Check kumi::concepts::field concept")
   TTS_EXPECT((kumi::concepts::field<decltype(flag<struct key>{} = std::bool_constant<true>{})>));
   TTS_EXPECT_NOT(kumi::concepts::field<float**>);
 };
+
+struct test : kumi::identifier<test>
+{
+  using kumi::identifier<test>::operator=;
+
+  friend auto to_str(test) { return kumi::str{"test"}; }
+};
+
+struct wrong_ret_type : kumi::identifier<wrong_ret_type>
+{
+  using kumi::identifier<wrong_ret_type>::operator=;
+
+  friend constexpr auto to_str(wrong_ret_type) { return 12.5; }
+};
+
+TTS_CASE("Check _::make_str() behavior")
+{
+  constexpr my_little_identifier mli{};
+  constexpr test t{};
+  constexpr wrong_ret_type wrt{};
+
+  TTS_EXPECT_COMPILES(mli, { kumi::_::make_str(mli); });
+  TTS_EXPECT_NOT_COMPILES(t, { kumi::_::make_str(t); });
+  TTS_EXPECT_NOT_COMPILES(wrt, { kumi::_::make_str(wrt); });
+
+  TTS_EXPECT_COMPILES(mli, { mli = short{12}; });
+};

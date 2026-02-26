@@ -28,11 +28,12 @@ namespace kumi
 #include <kumi/detail/abi.hpp>
 #include <kumi/detail/dependencies.hpp>
 #include <kumi/detail/preprocessor.hpp>
+#include <kumi/detail/stdfix.hpp>
 #include <kumi/detail/str.hpp>
+#include <kumi/detail/concepts.hpp>
 #include <kumi/detail/typename.hpp>
 #include <kumi/detail/streamable.hpp>
-#include <kumi/detail/stdfix.hpp>
-#include <kumi/detail/concepts.hpp>
 #include <kumi/detail/meta_helpers.hpp>
+#include <kumi/detail/field.hpp>
 #include <kumi/detail/binder.hpp>
 #include <kumi/detail/optimized.hpp>

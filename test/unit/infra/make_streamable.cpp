@@ -53,7 +53,7 @@ TTS_CASE("Check make_streamable behavior with tuple")
   std::ostringstream s;
   s << t;
 
-  TTS_EQUAL(s.str(), "( t rofl 7.90 Marty Macfly kumi::unknown )");
+  TTS_EQUAL(s.str(), "( t, rofl, 7.90, Marty Macfly, kumi::unknown )");
 };
 
 TTS_CASE("Check make_streamable behavior with record")
@@ -68,5 +68,5 @@ TTS_CASE("Check make_streamable behavior with record")
   std::ostringstream s;
   s << r;
 
-  TTS_EQUAL(s.str(), "( 'a' : t 'b' : rofl 'c' : 7.90 'd' : Marty Macfly 'e' : kumi::unknown )");
+  TTS_EQUAL(s.str(), "{ 'a' : t, 'b' : rofl, 'c' : 7.90, 'd' : Marty Macfly, 'e' : kumi::unknown }");
 };

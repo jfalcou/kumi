@@ -51,7 +51,7 @@ namespace kumi
       auto const call = [&]<std::size_t N, typename... Ts>(index_t<N>, Ts&&... args) {
         if constexpr (concepts::record_type<Tuple>)
         {
-          constexpr auto field = name_of(as<element_t<N, Tuple>>{});
+          constexpr auto field = name_of<element_t<N, Tuple>>();
           return capture_field<field>(invoke(f, get<field>(args)...));
         }
         else return invoke(f, get<N>(KUMI_FWD(args))...);
@@ -173,8 +173,8 @@ namespace kumi
     else
     {
       auto const call = [&]<std::size_t N, typename... Ts>(index_t<N>, Ts&&... args) {
-        constexpr auto field = name_of(as<element_t<N, Tuple>>{});
-        return capture_field<field>(invoke(f, field.to_str(), (get<field>(args))...));
+        constexpr auto field = name_of<element_t<N, Tuple>>();
+        return capture_field<field>(invoke(f, _::make_str(field), (get<field>(args))...));
       };
 
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
