@@ -84,4 +84,6 @@ TTS_CASE("Check _::make_str() behavior")
   TTS_EXPECT_COMPILES(mli, { kumi::_::make_str(mli); });
   TTS_EXPECT_NOT_COMPILES(t, { kumi::_::make_str(t); });
   TTS_EXPECT_NOT_COMPILES(wrt, { kumi::_::make_str(wrt); });
+
+  TTS_EXPECT_COMPILES(mli, { mli = short{12}; });
 };

@@ -53,8 +53,6 @@ namespace kumi
 
     template<typename T> constexpr field<tag_type, std::unwrap_ref_decay_t<T>> operator=(T&& v) const noexcept
     {
-      static_assert(_::valid_display_name<tag_type>,
-                    "Ensure user defined to_str(...) is marked constexpr or returns a kumi::str");
       return {KUMI_FWD(v)};
     }
 
@@ -131,8 +129,6 @@ namespace kumi
     requires(Checker::template value<T>)
     constexpr field<tag_type, std::unwrap_ref_decay_t<T>> operator=(T&& v) const noexcept
     {
-      static_assert(_::valid_display_name<tag_type>,
-                    "Ensure user defined to_str(...) is marked constexpr or returns a kumi::str");
       return {KUMI_FWD(v)};
     }
 

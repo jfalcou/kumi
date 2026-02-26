@@ -98,6 +98,15 @@ namespace kumi
     }
   };
 
+  /// Specialisation to clearly indicate an error
+  template<typename Id, typename T>
+  requires(!_::valid_display_name<Id>)
+  struct field<Id, T>
+  {
+    field(T&&) = delete;
+    static_assert(_::valid_display_name<Id>, "User defined to_str(...) function is not constexpr");
+  };
+
   //================================================================================================
   //! @ingroup utility
   //! @brief Extracts the name from a kumi::field or returns the parameter.
