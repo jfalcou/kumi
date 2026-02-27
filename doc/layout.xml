@@ -9,7 +9,12 @@
       <tab type="user" url="@ref licence"   title="Licence"/>
     </tab>
     <tab type="usergroup" visible="yes" title="Glossary">
-      <tab type="user" url="@ref type_theory" title="Type Theory"/>
+      <tab type="usergroup" visible="yes" title="Type Theory">
+        <tab type="user" url="@ref introduction" title="Introduction"/>
+        <tab type="user" url="@ref identity" title="Identity Types"/>
+        <tab type="user" url="@ref product" title="Product Types"/>
+        <tab type="user" url="@ref sum" title="Sum Types"/>
+      </tab>
       <tab type="user" url="@ref cpp_spec" title="C++ Vocabulary"/>
       <tab type="user" url="@ref nomenclature" title="Nomenclature"/>
     </tab>
