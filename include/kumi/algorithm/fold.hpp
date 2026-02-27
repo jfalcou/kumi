@@ -81,7 +81,7 @@ namespace kumi
   //! ### Record:
   //! @include doc/record/algo/fold_left.cpp
   //====================================================================================================================
-  template<typename Function, concepts::sized_product_type_or_more<1> T>
+  template<typename Function, concepts::non_empty_product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto fold_left(Function f, T&& t)
   {
     if constexpr (concepts::record_type<T>) return fold_left(f, values_of(KUMI_FWD(t)));
@@ -165,7 +165,7 @@ namespace kumi
   //! ### Record:
   //! @include doc/record/algo/fold_right.cpp
   //====================================================================================================================
-  template<typename Function, concepts::sized_product_type_or_more<1> T>
+  template<typename Function, concepts::non_empty_product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto fold_right(Function f, T&& t)
   {
     if constexpr (concepts::record_type<T>) return fold_right(f, values_of(KUMI_FWD(t)));

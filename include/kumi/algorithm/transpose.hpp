@@ -17,6 +17,9 @@ namespace kumi
   //! @param t Product type to transpose
   //! @return  A product type containing the transposed elements of `t`.
   //!
+  //! @note This function will issue a compile time error if the each element of the input product type are not
+  //!       themselves product types or if their size are not equal.
+  //!
   //! ## Helper type
   //! @code
   //! namespace kumi::result
@@ -36,10 +39,9 @@ namespace kumi
   //! ### Record:
   //! @include doc/record/algo/transpose.cpp
   //====================================================================================================================
-  template<concepts::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto transpose(T&& t)
-  requires(_::supports_transpose<T>)
+  template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto transpose(T&& t)
   {
+    static_assert(_::supports_transpose<T>, "[KUMI] - Cannot transpose given product type");
     if constexpr (concepts::sized_product_type<T, 0>) return tuple{};
     else
     {

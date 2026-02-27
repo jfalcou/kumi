@@ -16,8 +16,9 @@ namespace kumi
   //! On record types, this function operates on elements as if they were ordered. The considered order is the order
   //! of declaration.
   //!
-  //! @note Does not participate in overload resolution if `I0` and `I1` do not verify that
+  //! @note This function will issue a compile time error if `I0` and `I1` do not verify that
   //!       `0 <= I0 <= I1 <= size_v<T>`.
+  //!
   //! @param  t  Product Type to extract from
   //! @param  i0 Compile-time index of the first element to extract.
   //! @param  i1 Compile-time index past the last element to extract. By default, `i1` is equal to
@@ -57,10 +58,9 @@ namespace kumi
 
   //! @overload
   template<std::size_t I0, concepts::product_type T>
-  requires(I0 <= size_v<T>)
   [[nodiscard]] KUMI_ABI constexpr auto extract(T&& t, index_t<I0> i0) noexcept
   {
-    static_assert(I0 <= size_v<T>);
+    static_assert(I0 <= size_v<T>, "[KUMI] - Invalid index");
     return extract(KUMI_FWD(t), i0, index<size_v<T>>);
   }
 
@@ -72,7 +72,7 @@ namespace kumi
   //! On record types, this function operates on elements as if they were ordered. The considered order is the order
   //! of declaration.
   //!
-  //! @note Does not participate in overload resolution if `I0` is not in `[0, sizeof...(Ts)[`.
+  //! @note This function will issue a compile time error if `I0` is not in `[0, sizeof...(Ts)[`.
   //!
   //! @param  t Product Type to split.
   //! @param  i0 Compile-time index of the split pivot.

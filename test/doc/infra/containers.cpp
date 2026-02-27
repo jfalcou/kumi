@@ -9,14 +9,14 @@
 #include <span>
 #include <vector>
 
-static_assert(kumi::is_static_container_v<std::array<int,10>>);
-static_assert(kumi::is_product_type_v<std::array<int,10>>);
+static_assert(kumi::concepts::static_container<std::array<int,10>>);
+static_assert(kumi::concepts::product_type<std::array<int,10>>);
 
-static_assert(kumi::is_static_container_v<std::span<int,10>>);
-static_assert(!kumi::is_product_type_v<std::span<int,10>>);
+static_assert(kumi::concepts::static_container<std::span<int,10>>);
+static_assert(!kumi::concepts::product_type<std::span<int,10>>);
 
-static_assert(!kumi::is_static_container_v<std::span<int>>);
-static_assert(!kumi::is_static_container_v<std::vector<int>>);
+static_assert(!kumi::concepts::static_container<std::span<int>>);
+static_assert(!kumi::concepts::static_container<std::vector<int>>);
 
 int main()
 {

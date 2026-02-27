@@ -15,7 +15,7 @@ namespace kumi
   //!           given product_type is a record type.
   //!
   //! @note This function does not take part in overload resolution if `f` can't be applied to the
-  //!       elements of `t` and/or `ts`.
+  //!       elements of `t` and/or `ts`, or if the product type are not compatible. @see compatible_product_types.
   //!
   //! @param f	  Callable object to be invoked
   //! @param t    Product type whose elements are used as arguments to f
@@ -32,30 +32,26 @@ namespace kumi
   //====================================================================================================================
   template<typename Function, concepts::product_type T, concepts::product_type... Ts>
   KUMI_ABI constexpr void for_each(Function f, T&& t, Ts&&... ts)
-  requires((concepts::compatible_product_types<T, Ts...>) && (_::supports_call<Function&, T, Ts...>))
+  requires(concepts::compatible_product_types<T, Ts...>)
+#ifndef KUMI_DOXYGEN_INVOKED
+          && (_::supports_call<Function&, T, Ts...>)
+#endif
   {
     if constexpr (concepts::sized_product_type<T, 0>) return;
-    else if constexpr (concepts::record_type<T>)
-    {
-      [&]<std::size_t... I>(std::index_sequence<I...>) {
-        constexpr auto fields = members_of(as<T>{});
-        [[maybe_unused]] auto call = [&]<typename M>(M) {
-          constexpr auto field = get<M::value>(fields);
-          invoke(f, get<field>(KUMI_FWD(t)), get<field>(KUMI_FWD(ts))...);
-        };
-
-        (call(std::integral_constant<std::size_t, I>{}), ...);
-      }(std::make_index_sequence<size_v<T>>{});
-    }
     else
     {
-      [&]<std::size_t... I>(std::index_sequence<I...>) {
-        [[maybe_unused]] auto call = [&]<typename M>(M) {
-          invoke(f, get<M::value>(KUMI_FWD(t)), get<M::value>(KUMI_FWD(ts))...);
-        };
+      auto const invoker{[&](auto const I) {
+        if constexpr (concepts::record_type<T>)
+        {
+          constexpr auto field = name_of<element_t<I, T>>();
+          invoke(f, get<field>(KUMI_FWD(t)), get<field>(KUMI_FWD(ts))...);
+        }
+        else invoke(f, get<I>(KUMI_FWD(t)), get<I>(KUMI_FWD(ts))...);
+      }};
 
-        (call(std::integral_constant<std::size_t, I>{}), ...);
-      }(std::make_index_sequence<size<T>::value>());
+      [&]<std::size_t... I>(std::index_sequence<I...>) {
+        (invoker(index<I>), ...);
+      }(std::make_index_sequence<size_v<T>>{});
     }
   }
 
@@ -77,18 +73,18 @@ namespace kumi
   //! ## Example:
   //! @include doc/tuple/algo/for_each_index.cpp
   //================================================================================================
-  template<typename Function, concepts::product_type Tuple, concepts::product_type... Tuples>
-  requires(!concepts::record_type<Tuple> && (!concepts::record_type<Tuples> && ...))
-  KUMI_ABI constexpr void for_each_index(Function f, Tuple&& t, Tuples&&... ts)
+  template<typename Function, concepts::product_type T, concepts::product_type... Ts>
+  KUMI_ABI constexpr void for_each_index(Function f, T&& t, Ts&&... ts)
+  requires(!concepts::record_type<T> && (!concepts::record_type<Ts> && ...))
   {
-    if constexpr (concepts::sized_product_type<Tuple, 0>) return;
+    if constexpr (concepts::sized_product_type<T, 0>) return;
     else
     {
-      auto const invoker{[&, f](auto const i) { f(i, get<i.value>(KUMI_FWD(t)), get<i.value>(KUMI_FWD(ts))...); }};
+      auto const invoker{[&](auto const I) { invoke(f, I, get<I>(KUMI_FWD(t)), get<I>(KUMI_FWD(ts))...); }};
 
-      [=]<std::size_t... I>(std::index_sequence<I...>) {
-        (invoker(std::integral_constant<unsigned, I>{}), ...);
-      }(std::make_index_sequence<size<Tuple>::value>());
+      [&]<std::size_t... I>(std::index_sequence<I...>) {
+        (invoker(index<I>), ...);
+      }(std::make_index_sequence<size_v<T>>{});
     }
   }
 
@@ -97,8 +93,11 @@ namespace kumi
   //! @brief Applies the Callable object `f` on each element of a record type and its field.
   //!
   //! @note This function does not take part in overload resolution if `f` can't be applied to the
-  //!       elements of `t` and those of `ts`. This function can only be applied to record types.
-  //!       The function needs to be defined to handle types modeling kumi::concepts::field.
+  //!       elements of `t` and those of `ts`, or if the product types are not compatible.
+  //!       @see compatible_product_types
+  //!
+  //! This function can only be applied to record types.
+  //! The function needs to be defined to handle types modeling kumi::concepts::field.
   //!
   //! @param f	  Callable object to be invoked
   //! @param r    Record type whose fields are used as arguments to f
@@ -111,21 +110,21 @@ namespace kumi
   //! @include doc/record/algo/for_each_field.cpp
   //================================================================================================
   template<typename Function, concepts::record_type R, concepts::record_type... Rs>
-  requires(concepts::compatible_product_types<std::remove_cvref_t<R>, std::remove_cvref_t<Rs>...>)
   KUMI_ABI constexpr void for_each_field(Function f, R&& r, Rs&&... rs)
+  requires(concepts::compatible_product_types<R, Rs...>)
   {
     if constexpr (concepts::sized_product_type<R, 0>) return;
     else
     {
       constexpr auto fields = members_of(as<R>{});
-      auto const invoker = [&]<std::size_t I>(std::integral_constant<std::size_t, I>) {
+      auto const invoker = [&](auto const I) {
         constexpr auto field = get<I>(fields);
-        f(_::make_str(field), get<field>(KUMI_FWD(t)), get<field>(KUMI_FWD(ts))...);
+        invoke(f, _::make_str(field), get<field>(KUMI_FWD(r)), get<field>(KUMI_FWD(rs))...);
       };
 
-      [=]<std::size_t... I>(std::index_sequence<I...>) {
-        (invoker(std::integral_constant<std::size_t, I>{}), ...);
-      }(std::make_index_sequence<size<R>::value>());
+      [&]<std::size_t... I>(std::index_sequence<I...>) {
+        (invoker(index<I>), ...);
+      }(std::make_index_sequence<size_v<R>>{});
     }
   }
 }

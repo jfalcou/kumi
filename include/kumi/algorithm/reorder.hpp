@@ -13,7 +13,7 @@ namespace kumi
   //! @ingroup generators
   //! @brief Reorder elements of a product type
   //!
-  //! This function does not participate in overload resolution if any Idx is outside [0, size_v<T>[.
+  //! This function will issue a compile time error if any Idx is outside [0, size_v<T>[.
   //!
   //! On record types, this function operates on elements as if they were ordered. The considered order is the order
   //! of declaration.
@@ -48,7 +48,7 @@ namespace kumi
   //================================================================================================
   template<std::size_t... Idx, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto reorder(T&& t)
   {
-    static_assert(((Idx < size_v<T>) && ...), "[KUMI] - Index out of bounder of kumi::reorder input type");
+    static_assert(((Idx < size_v<T>) && ...), "[KUMI] - Index out of bounds");
     return builder<T>::make(get<Idx>(KUMI_FWD(t))...);
   }
 
@@ -56,7 +56,7 @@ namespace kumi
   //! @ingroup  generators
   //! @brief    Reorder elements of a kumi::record
   //!
-  //! This function does not participate in overload resolution if the names are not in `t`
+  //! This function will issue a compile time error if the identifiers are not in `t`
   //!
   //! On record types, this function operates on elements as if they were ordered. The considered order is the order
   //! of declaration.
@@ -96,7 +96,7 @@ namespace kumi
   //! @ingroup  generators
   //! @brief    Reindex elements of a kumi::product_type
   //!
-  //! This function does not participate in overload resolution if any Idx is outside [0, size_v<T>[.
+  //! This will issue a compile time error if any Idx is outside [0, size_v<T>[.
   //!
   //! On record types, this function operates on elements as if they were ordered. The considered order is the order
   //! of declaration.
@@ -104,9 +104,9 @@ namespace kumi
   //! @note Nothing prevent the number of reordered index to be lesser or greater than t size or
   //!       the fact they can appear multiple times.
   //!
-  //! @tparam Indexes A kumi::projection_map representing the reindexed slot of the elements
-  //! @param  t       kumi::product_type to reindex
-  //! @return         A potentially nested tuple following the Indexes order
+  //! @tparam Projections A kumi::projection_map representing the reindexed slot of the elements
+  //! @param  t           kumi::product_type to reindex
+  //! @return             A potentially nested tuple following the Indexes order
   //!
   //! ## Helper type
   //! @code

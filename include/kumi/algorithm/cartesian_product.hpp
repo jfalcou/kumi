@@ -43,6 +43,9 @@ namespace kumi
   //! @return     A tuple containing all the product types built from all combination of all ts'
   //!             elements
   //!
+  //! @note This function does not take part in overload resolution if the input product types do not follow the same
+  //!       semantic. @see concepts::follows_same_semantic
+  //!
   //! ## Helper type
   //! @code
   //! namespace kumi

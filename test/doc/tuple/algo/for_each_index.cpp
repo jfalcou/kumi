@@ -8,7 +8,7 @@
 
 int main()
 {
-  auto t = kumi::tuple{ 1, 2.3, 0.43f };
+  auto t = kumi::tuple{ 1ULL, 2.3, 0.43f };
 
   kumi::for_each_index( [](auto i, auto& m) { m += (i+1)*10; }
                       , t

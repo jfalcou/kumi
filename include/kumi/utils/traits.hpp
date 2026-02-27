@@ -179,7 +179,7 @@ namespace kumi
   //! ## Example:
   //! @include doc/infra/containers.cpp
   //==================================================================================================================
-  template<typename T> struct is_static_container : std::false_type
+  template<typename T> struct is_container : std::false_type
   {
     using value_type = T;
     using size = _::invalid;
@@ -507,6 +507,7 @@ namespace kumi
 
   template<typename... Ts> inline constexpr auto all_unique_names_v = all_unique_names_t<Ts...>::value;
 
+#ifndef KUMI_DOXYGEN_INVOKED
   // A type with the tuple interface is automatically a product_type
   template<typename T>
   requires(_::std_tuple_compatible<T>)
@@ -541,4 +542,5 @@ namespace kumi
   };
 
   template<typename T> inline constexpr bool is_kumi_record_v = is_kumi_record<T>::value;
+#endif
 }

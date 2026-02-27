@@ -39,7 +39,7 @@ namespace kumi
       }(std::make_index_sequence<size_v<T>>{});
     else
       return []<std::size_t... I>(std::index_sequence<I...>) {
-        if constexpr (((concepts::field<element_t<I, T>> && std::invocable<element_t<I, T>, _::tag_of_t<K>>) || ...))
+        if constexpr (((concepts::field<element_t<I, T>> && std::invocable<element_t<I, T>, _::tag_of_t<ID>>) || ...))
           return true;
         else return false;
       }(std::make_index_sequence<size_v<T>>{});

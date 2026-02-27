@@ -15,6 +15,8 @@ namespace kumi
   //!
   //! @param ts Product types to concatenate
   //! @return   A product type made of all element of all input product types in order.
+  //! @note This function does not take part in overload resolution if the input product types do not follow the same
+  //!       semantic. @see concepts::follows_same_semantic
   //!
   //! ## Helper type
   //! @code

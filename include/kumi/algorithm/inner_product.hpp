@@ -44,7 +44,7 @@ namespace kumi
   //!
   //! @note Does not participate in overload resolution if product types' size are not equal or if any of
   //!       the binary operations can't be applied on the product types' elements. Similarily, doesn't participate
-  //!       in overload resolution if the two inputs do not model concepts::compatible_product_types.
+  //!       in overload resolution if the two inputs are not compatible. @see concepts::compatible_product_types.
   //!
   //! @param s1         First product type to operate on
   //! @param s2         Second product type to operate on
@@ -88,8 +88,8 @@ namespace kumi
            typename T,
            typename Sum,
            typename Prod>
-  requires(concepts::compatible_product_types<S1, S2>)
   [[nodiscard]] KUMI_ABI constexpr auto inner_product(S1&& s1, S2&& s2, T init, Sum sum, Prod prod) noexcept
+  requires(concepts::compatible_product_types<S1, S2>)
   {
     if constexpr (concepts::sized_product_type<S1, 0>) return init;
     else if constexpr (concepts::record_type<S1>)
@@ -113,8 +113,8 @@ namespace kumi
 
   //! @overload
   template<concepts::product_type S1, concepts::sized_product_type<size_v<S1>> S2, typename T>
-  requires(concepts::compatible_product_types<S1, S2>)
   [[nodiscard]] KUMI_ABI constexpr auto inner_product(S1&& s1, S2&& s2, T init) noexcept
+  requires(concepts::compatible_product_types<S1, S2>)
   {
     if constexpr (concepts::sized_product_type<S1, 0>) return init;
     else if constexpr (concepts::record_type<S1>)

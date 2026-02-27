@@ -14,8 +14,8 @@ int main()
   int standard = { 12 };
 
   std::cout << field << "\n";
-  std::cout << kumi::name_of(kumi::as(field)) << "\n";
+  std::cout << kumi::name_of<decltype(field)>() << "\n";
   
   std::cout << standard << "\n";
-  std::cout << kumi::name_of(kumi::as(standard)) << "\n";
+  std::cout << kumi::name_of<decltype(standard)>() << "\n";
 }

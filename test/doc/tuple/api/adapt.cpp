@@ -41,7 +41,7 @@ template<> struct std::tuple_element<1,ns::people> { using type = int;          
 int main()
 {
   ns::people peter{"Peter Parker", 24};
-  kumi::for_each_index( [](int i, auto e)
+  kumi::for_each_index( [](auto i, auto e)
                         {
                           std::cout << "# " << i
                                     << " : " << e

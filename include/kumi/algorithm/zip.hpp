@@ -62,6 +62,9 @@ namespace kumi
   //! On record types, this function operates on elements as if they were ordered. The considered order is the order
   //! of declaration.
   //!
+  //! @note This function does not take part in overload resolution if the product types do not follow the same
+  //! semantic. @see follows_same_semantic
+  //!
   //! @param t0 Product type to convert
   //! @param ts Product types to convert
   //! @return   The tuple of all combination of elements from `t0`, `ts`...
@@ -101,6 +104,9 @@ namespace kumi
   //!
   //! On record types, this function operates on elements as if they were ordered. The considered order is the order
   //! of declaration.
+  //!
+  //! @note This function does not take part in overload resolution if the product types do not follow the same
+  //! semantic. @see follows_same_semantic
   //!
   //! @param t0 Product type to convert
   //! @param ts Product types to convert
@@ -144,6 +150,9 @@ namespace kumi
   //!
   //! On record types, this function operates on elements as if they were ordered. The considered order is the order
   //! of declaration.
+  //!
+  //! @note This function does not take part in overload resolution if the product types do not follow the same
+  //! semantic. @see follows_same_semantic
   //!
   //! @param t0 Product type to convert
   //! @param ts Product types to convert

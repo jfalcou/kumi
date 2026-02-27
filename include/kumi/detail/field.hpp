@@ -101,11 +101,11 @@ namespace kumi
 
   /// Specialisation to clearly indicate an error
   template<typename Id, typename T>
-  requires(!_::valid_display_name<Id>)
+  requires(!_::valid_label<Id>)
   struct field<Id, T>
   {
     field(T&&) = delete;
-    static_assert(_::valid_display_name<Id>, "User defined to_str(...) function is not constexpr");
+    static_assert(_::valid_label<Id>, "User defined to_str(...) function is not constexpr");
   };
 
   //================================================================================================

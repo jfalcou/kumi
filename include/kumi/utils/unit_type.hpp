@@ -15,21 +15,22 @@ namespace kumi
   //! @brief A type representing the product of no type also called the unit type
   //!
   //! kumi::unit provides a way to define the unit type in a constexpr friendly manner.
+  //! @see @ref unit
   //====================================================================================================================
   struct unit
   {
     KUMI_ABI friend constexpr auto operator<=>(unit, unit) noexcept = default;
 
     template<typename T>
-    requires(concepts::unit_type<T>)
     [[nodiscard]] KUMI_ABI constexpr operator T() const noexcept
+    requires(concepts::unit_type<T>)
     {
       return {};
     };
 
     template<typename T>
-    requires(concepts::unit_type<T>)
     [[nodiscard]] KUMI_ABI constexpr operator T() noexcept
+    requires(concepts::unit_type<T>)
     {
       return {};
     };

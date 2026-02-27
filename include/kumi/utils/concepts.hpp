@@ -72,6 +72,8 @@ namespace kumi
     //!
     //! A type `T` models `kumi::concepts::product_type` if it follows the standard tuple protocole and  provides
     //! support for structured bindings. std::tuple_element and std::tuple_size should be well formed.
+    //!
+    //! @see @ref product_type
     //==================================================================================================================
     template<typename T>
     concept product_type = is_product_type<std::remove_cvref_t<T>>::value;
@@ -82,6 +84,8 @@ namespace kumi
     //!
     //! A type `T` models `kumi::concepts::record_type` if it models kumi::concepts::product_type and contains fields
     //! that are named and unique.
+    //!
+    //! @see @ref record_type
     //==================================================================================================================
     template<typename T>
     concept record_type = product_type<T> && is_record_type<std::remove_cvref_t<T>>::value;
@@ -100,7 +104,7 @@ namespace kumi
     //! @ingroup concepts
     //! @brief Concept specifying a type follows the Container Type semantic
     //!
-    //! A type `T` models `kumi::container` if it is a /**/ container of fixed size.
+    //! A type `T` models `kumi::container` if it is a kumi::container of fixed size.
     //================================================================================================
     template<typename T>
     concept static_container = container<T> && has_static_size_v<std::remove_cvref_t<T>>;
@@ -111,6 +115,8 @@ namespace kumi
     //!
     //! A type `T` models `kumi::concepts::unit_type` if it is a kumi::concepts::product_type with a size of 0 or
     //! if std::is_null_pointer_v returns true.
+    //!
+    //! @see @ref unit
     //==================================================================================================================
     template<typename T>
     concept unit_type = (product_type<T> && (size_v<T> == 0)) || std::is_null_pointer_v<std::remove_cvref_t<T>>;
@@ -126,7 +132,6 @@ namespace kumi
     };
 
     //==================================================================================================================
-    //! @brief field concept
     //! @ingroup concepts
     //! @brief Concept specifying a type represent a field
     //!
@@ -259,7 +264,7 @@ namespace kumi
     //!         representation of their respective names.
     //==================================================================================================================
     template<typename... Ts>
-    concept unique_display_name =
+    concept unique_label =
       (sizeof...(Ts) == 0) || (is_fully_named<Ts...> && (all_uniques_v<_::value<std::remove_cvref_t<Ts>::name()>...>));
 
     //==================================================================================================================

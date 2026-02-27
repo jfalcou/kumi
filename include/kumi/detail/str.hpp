@@ -96,7 +96,7 @@ namespace kumi
 
   template<str... Strs>
   requires((Strs.size() + ... + sizeof...(Strs)) < str::max_size)
-  [[nodiscard]] KUMI_ABI constexpr auto concatenate_str()
+  [[nodiscard]] KUMI_ABI constexpr auto concatenate_str() noexcept
   {
     constexpr auto nb_strs = sizeof...(Strs);
 
