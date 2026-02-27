@@ -46,11 +46,6 @@ namespace kumi
     constexpr identifier() noexcept {};
     constexpr identifier(ID const&) noexcept {};
 
-    template<concepts::identifier I> KUMI_ABI friend constexpr auto operator==(identifier const&, I const&)
-    {
-      return std::same_as<std::remove_cvref_t<identifier>, std::remove_cvref_t<I>>;
-    }
-
     template<typename T> constexpr field<tag_type, std::unwrap_ref_decay_t<T>> operator=(T&& v) const noexcept
     {
       return {KUMI_FWD(v)};
@@ -99,12 +94,6 @@ namespace kumi
     //! @include doc/infra/only.cpp
     //==================================================================================================================
     constexpr identifier([[maybe_unused]] ID const& id, [[maybe_unused]] Checker const& chk) noexcept {};
-
-    //! identifier comparison
-    template<concepts::identifier I> KUMI_ABI friend constexpr auto operator==(identifier const&, I const&)
-    {
-      return std::same_as<std::remove_cvref_t<identifier>, std::remove_cvref_t<I>>;
-    }
 
     //==================================================================================================================
     //! @brief Assignment of a value to a identifier
@@ -161,12 +150,6 @@ namespace kumi
     //! A name field str representation is it s owned str
     friend constexpr str to_str(name<ID> const&) { return ID; }
 
-    //! identifier comparison
-    template<kumi::concepts::identifier I> KUMI_ABI friend constexpr auto operator==(name const&, I const&)
-    {
-      return std::same_as<std::remove_cvref_t<tag_type>, std::remove_cvref_t<I>>;
-    }
-
     //==================================================================================================================
     //! @brief Assignment of a value to a identifier
     //!
@@ -188,6 +171,12 @@ namespace kumi
       return os << ID;
     }
   };
+
+  //! identifier comparison
+  template<concepts::identifier L, kumi::concepts::identifier R> KUMI_ABI constexpr bool operator==(L const&, R const&)
+  {
+    return std::same_as<std::remove_cvref_t<L>, std::remove_cvref_t<R>>;
+  }
 
   namespace _
   {
