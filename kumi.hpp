@@ -1113,10 +1113,6 @@ namespace kumi
     using tag_type = std::remove_cvref_t<ID>;
     constexpr identifier() noexcept {};
     constexpr identifier(ID const&) noexcept {};
-    template<concepts::identifier I> KUMI_ABI friend constexpr auto operator==(identifier const&, I const&)
-    {
-      return std::same_as<std::remove_cvref_t<identifier>, std::remove_cvref_t<I>>;
-    }
     template<typename T> constexpr field<tag_type, std::unwrap_ref_decay_t<T>> operator=(T&& v) const noexcept
     {
       return {KUMI_FWD(v)};
@@ -1134,10 +1130,6 @@ namespace kumi
     friend constexpr str to_str(identifier<ID, Checker> const&) { return _::make_str(ID{}); }
     constexpr identifier() noexcept {};
     constexpr identifier([[maybe_unused]] ID const& id, [[maybe_unused]] Checker const& chk) noexcept {};
-    template<concepts::identifier I> KUMI_ABI friend constexpr auto operator==(identifier const&, I const&)
-    {
-      return std::same_as<std::remove_cvref_t<identifier>, std::remove_cvref_t<I>>;
-    }
     template<typename T>
     requires(Checker::template value<T>)
     constexpr field<tag_type, std::unwrap_ref_decay_t<T>> operator=(T&& v) const noexcept
@@ -1160,10 +1152,6 @@ namespace kumi
   {
     using tag_type = name<ID>;
     friend constexpr str to_str(name<ID> const&) { return ID; }
-    template<kumi::concepts::identifier I> KUMI_ABI friend constexpr auto operator==(name const&, I const&)
-    {
-      return std::same_as<std::remove_cvref_t<tag_type>, std::remove_cvref_t<I>>;
-    }
     template<typename T> constexpr field<tag_type, std::unwrap_ref_decay_t<T>> operator=(T&& v) const noexcept
     {
       return {KUMI_FWD(v)};
@@ -1174,6 +1162,10 @@ namespace kumi
       return os << ID;
     }
   };
+  template<concepts::identifier L, kumi::concepts::identifier R> KUMI_ABI constexpr bool operator==(L const&, R const&)
+  {
+    return std::same_as<std::remove_cvref_t<L>, std::remove_cvref_t<R>>;
+  }
   namespace _
   {
     template<auto N, typename... Ts> KUMI_ABI constexpr auto contains_field()
