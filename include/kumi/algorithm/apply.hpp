@@ -32,8 +32,10 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::apply
   //!
-  //! ## Example
+  //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/apply.cpp
+  //! ### Record:
   //! @include doc/record/algo/apply.cpp
   //====================================================================================================================
   template<typename Function, concepts::product_type T>

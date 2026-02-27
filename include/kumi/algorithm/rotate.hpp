@@ -55,8 +55,10 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::rotate_left
   //!
-  //! ## Example
+  //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/rotate_left.cpp
+  //! ### Record:
   //! @include doc/record/algo/rotate_left.cpp
   //====================================================================================================================
   template<std::size_t R, concepts::product_type T> constexpr auto rotate_left(T&& t)
@@ -98,8 +100,10 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::rotate_right
   //!
-  //! ## Example
+  //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/rotate_right.cpp
+  //! ### Record:
   //! @include doc/record/algo/rotate_right.cpp
   //====================================================================================================================
   template<std::size_t R, concepts::product_type T> constexpr auto rotate_right(T&& t)

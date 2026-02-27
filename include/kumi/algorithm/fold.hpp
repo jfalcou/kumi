@@ -34,7 +34,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::fold_left
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/fold_left.cpp
+  //! ### Record:
   //! @include doc/record/algo/fold_left.cpp
   //====================================================================================================================
   template<typename Function, concepts::product_type T, typename Value>
@@ -74,7 +76,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::fold_left
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/fold_left.cpp
+  //! ### Record:
   //! @include doc/record/algo/fold_left.cpp
   //====================================================================================================================
   template<typename Function, concepts::sized_product_type_or_more<1> T>
@@ -114,7 +118,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::fold_right
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/fold_right.cpp
+  //! ### Record:
   //! @include doc/record/algo/fold_right.cpp
   //====================================================================================================================
   template<typename Function, concepts::product_type T, typename Value>
@@ -154,7 +160,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::fold_right
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/fold_right.cpp
+  //! ### Record:
   //! @include doc/record/algo/fold_right.cpp
   //====================================================================================================================
   template<typename Function, concepts::sized_product_type_or_more<1> T>

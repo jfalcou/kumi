@@ -30,7 +30,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::cat
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/cat.cpp
+  //! ### Record:
   //! @include doc/record/algo/cat.cpp
   //====================================================================================================================
   template<concepts::product_type... Ts>

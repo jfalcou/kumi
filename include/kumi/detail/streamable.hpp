@@ -10,9 +10,9 @@
 namespace kumi::_
 {
   //====================================================================================================================
-  //! @ingroup utility
-  //! @brief Provides an extension point `as_streamable` in order to output types with no stream
-  //!        operator defined.
+  //! @ingroup  utility
+  //! @brief    Provides an extension point `as_streamable` in order to output types with no stream
+  //!           operator defined.
   //!
   //! @note This function is an implementation detail and only documented to show how to use
   //!       the `as_streamable` extension point.

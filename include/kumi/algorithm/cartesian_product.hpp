@@ -57,7 +57,9 @@ namespace kumi
   //! Computes the type returned by a call to kumi::cartesian_product.
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/cartesian_product.cpp
+  //! ### Record:
   //! @include doc/record/algo/cartesian_product.cpp
   //====================================================================================================================
   template<concepts::product_type... Ts>

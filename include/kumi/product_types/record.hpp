@@ -25,6 +25,9 @@ namespace kumi
   //! extent.
   //!
   //! @tparam Ts Sequence of fields stored inside kumi::record.
+  //!
+  //! ## Example:
+  //! @include doc/record/api/introduction.cpp
   //================================================================================================
   template<typename... Ts> struct record
   {
@@ -641,6 +644,7 @@ namespace kumi
   //! @}
   //================================================================================================
 
+#ifndef KUMI_DOXYGEN_INVOKED
   /// Improves diagnostic for out of bounds index
   template<std::integral auto I, typename R>
   requires(is_kumi_record_v<std::remove_cvref_t<R>> && ((I >= size_v<R>) || (I < 0)))
@@ -681,6 +685,8 @@ namespace kumi
   {
     using type = kumi::record<>;
   };
+#endif
+
 }
 
 #endif

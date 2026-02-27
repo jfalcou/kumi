@@ -25,11 +25,7 @@ namespace kumi
     template<typename T>
     concept empty_tuple = (std::tuple_size<std::remove_cvref_t<T>>::value == 0);
 
-    //====================================================================================================================
-    //! @ingroup concepts
-    //! @brief Concept specifying a type is a standard tuple-like type.
-    //! @note Exposition only
-    //====================================================================================================================
+    // Concept specifying a type is a standard tuple-like type.
     template<typename T>
     concept std_tuple_compatible = _::empty_tuple<T> || _::non_empty_tuple<T>;
 
@@ -166,15 +162,22 @@ namespace kumi
   //! @brief Traits detecting types behaving like a kumi::static_container.
   //!
   //! To be treated like a static_container, a user defined type must expose a type and a
-  //! statically know size encoded in the type. It shall also provide general container utilities.
+  //! statically know size encoded in the type. It shall also provide general container utilities. If a type models
+  //! is_static_container and provides the tuple protocol, it is automatically treated as a product type, otherwise
+  //! it is simply convertible to one.
   //!
   //! @note The type shall be templated on the type and the size to be picked up.
   //!
   //! ## Helper value
   //! @code
+  //! namespace kumi
+  //! {
   //!   template<typename T> inline constexpr auto is_static_container = is_static_container<T>::value;
+  //! }
   //! @endcode
+  //!
   //! ## Example:
+  //! @include doc/infra/containers.cpp
   //==================================================================================================================
   template<typename T> struct is_static_container : std::false_type
   {
@@ -198,7 +201,10 @@ namespace kumi
   //!
   //! ## Helper value
   //! @code
+  //! namespace kumi
+  //! {
   //!   template<typename T> inline constexpr auto container_size_v = container_size<T>::value;
+  //! }
   //! @endcode
   //====================================================================================================================
   template<typename T> struct container_size : is_static_container<std::remove_cvref_t<T>>::size

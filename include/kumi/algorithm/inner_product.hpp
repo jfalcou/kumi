@@ -78,7 +78,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::inner_product
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/inner_product.cpp
+  //! ### Record:
   //! @include doc/record/algo/inner_product.cpp
   //====================================================================================================================
   template<concepts::product_type S1,

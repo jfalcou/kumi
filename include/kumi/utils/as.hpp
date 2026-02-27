@@ -10,13 +10,13 @@
 namespace kumi
 {
   //====================================================================================================================
-  //!  @addtogroup traits
+  //!  @ingroup types
   //!
   //!  @class as
   //!  @brief Lightweight type-wrapper
   //!
   //!  kumi::as Wraps type into a constexpr, trivially constructible empty class to optimize passing type parameters
-  //!  via object instead of via template parameters.
+  //!  via object instead of via template parameters. A specialisation is provided if T is void.
   //!
   //!  @tparam T Type to wrap
   //====================================================================================================================

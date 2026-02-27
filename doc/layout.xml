@@ -8,6 +8,11 @@
       <tab type="user" url="@ref changelog" title="Changelog"/>
       <tab type="user" url="@ref licence"   title="Licence"/>
     </tab>
+    <tab type="usergroup" visible="yes" title="Glossary">
+      <tab type="user" url="@ref type_theory" title="Type Theory"/>
+      <tab type="user" url="@ref cpp_spec" title="C++ Vocabulary"/>
+      <tab type="user" url="@ref nomenclature" title="Nomenclature"/>
+    </tab>
     <tab type="usergroup" visible="yes"   title="Reference Documentation">
       <tab type="usergroup" visible="yes"   title="Types">
         <tab type="user" url="@ref tuple"   title="Product types"/>

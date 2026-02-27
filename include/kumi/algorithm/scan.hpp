@@ -63,7 +63,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::inclusive_scan_left
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/inclusive_scan_left.cpp
+  //! ### Record:
   //! @include doc/record/algo/inclusive_scan_left.cpp
   //====================================================================================================================
   template<typename Function, concepts::product_type T, typename Value>
@@ -109,7 +111,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::inclusive_scan_left
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/inclusive_scan_left.cpp
+  //! ### Record:
   //! @include doc/record/algo/inclusive_scan_left.cpp
   //====================================================================================================================
   template<concepts::monoid M, concepts::sized_product_type_or_more<1> T>
@@ -148,7 +152,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::exclusive_scan_left
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/exclusive_scan_left.cpp
+  //! ### Record:
   //! @include doc/record/algo/exclusive_scan_left.cpp
   //====================================================================================================================
   template<typename Function, concepts::product_type T, typename Value>
@@ -191,7 +197,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::exclusive_scan_left
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/exclusive_scan_left.cpp
+  //! ### Record:
   //! @include doc/record/algo/exclusive_scan_left.cpp
   //====================================================================================================================
   template<concepts::monoid M, concepts::sized_product_type_or_more<1> T>
@@ -231,7 +239,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::inclusive_scan_right
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/inclusive_scan_right.cpp
+  //! ### Record:
   //! @include doc/record/algo/inclusive_scan_right.cpp
   //====================================================================================================================
   template<typename Function, concepts::product_type T, typename Value>
@@ -277,7 +287,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::inclusive_scan_right
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/inclusive_scan_right.cpp
+  //! ### Record:
   //! @include doc/record/algo/inclusive_scan_right.cpp
   //====================================================================================================================
   template<concepts::monoid M, concepts::sized_product_type_or_more<1> T>
@@ -316,7 +328,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::exclusive_scan_right
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/exclusive_scan_right.cpp
+  //! ### Record:
   //! @include doc/record/algo/exclusive_scan_right.cpp
   //====================================================================================================================
   template<typename Function, concepts::product_type T, typename Value>
@@ -359,7 +373,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::exclusive_scan_right
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/exclusive_scan_right.cpp
+  //! ### Record:
   //! @include doc/record/algo/exclusive_scan_right.cpp
   //====================================================================================================================
   template<concepts::monoid M, concepts::sized_product_type_or_more<1> T>

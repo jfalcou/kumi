@@ -34,7 +34,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::push_front
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/push_front.cpp
+  //! ### Record:
   //! @include doc/record/algo/push_front.cpp
   //====================================================================================================================
   template<concepts::product_type T, typename V> [[nodiscard]] KUMI_ABI constexpr auto push_front(T&& t, V&& v)
@@ -68,7 +70,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::pop_front
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/pop_front.cpp
+  //! ### Record:
   //! @include doc/record/algo/pop_front.cpp
   //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto pop_front(T&& t)
@@ -102,7 +106,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::push_back
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/push_back.cpp
+  //! ### Record:
   //! @include doc/record/algo/push_back.cpp
   //====================================================================================================================
   template<concepts::product_type T, typename V> [[nodiscard]] KUMI_ABI constexpr auto push_back(T&& t, V&& v)
@@ -136,7 +142,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::pop_back
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/pop_back.cpp
+  //! ### Record:
   //! @include doc/record/algo/pop_back.cpp
   //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto pop_back(T&& t)

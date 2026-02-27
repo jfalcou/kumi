@@ -29,8 +29,10 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::front
   //!
-  //! ## Examples
+  //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/back-front.cpp
+  //! ### Record:
   //! @include doc/record/algo/back-front.cpp
   //====================================================================================================================
   template<concepts::product_type T>
@@ -61,8 +63,10 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::back
   //!
-  //! ## Examples
+  //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/back-front.cpp
+  //! ### Record:
   //! @include doc/record/algo/back-front.cpp
   //====================================================================================================================
   template<concepts::product_type T>

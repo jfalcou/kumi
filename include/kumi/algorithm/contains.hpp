@@ -24,7 +24,9 @@ namespace kumi
   //! @return   `true` if the `t` contains a field labeled with the `id` identifier, `false` otherwise.
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/contains.cpp
+  //! ### Record:
   //! @include doc/record/algo/contains.cpp
   //====================================================================================================================
   template<concepts::product_type T, concepts::identifier ID>
@@ -53,7 +55,9 @@ namespace kumi
   //! @return     `true` if `t` contains a field labeld by one of the `ids`, and `false` otherwise.
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/contains_any.cpp
+  //! ### Record:
   //! @include doc/record/algo/contains_any.cpp
   //==================================================================================================================
   template<concepts::product_type T, concepts::identifier... Is>
@@ -73,7 +77,9 @@ namespace kumi
   //! @return     `true` if `t` contains a field labeled by any of the `ids`, and `false` otherwise.
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/contains_only.cpp
+  //! ### Record:
   //! @include doc/record/algo/contains_only.cpp
   //==================================================================================================================
   template<concepts::product_type T, concepts::identifier... Is>
@@ -97,7 +103,9 @@ namespace kumi
   //! @return     `true` if `t` contains no field labeled by any of the `ids`, and `false` otherwise.
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/contains_none.cpp
+  //! ### Record:
   //! @include doc/record/algo/contains_none.cpp
   //==================================================================================================================
   template<concepts::product_type T, concepts::identifier... Is>

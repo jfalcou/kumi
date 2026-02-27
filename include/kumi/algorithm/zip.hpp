@@ -83,7 +83,9 @@ namespace kumi
   //! @see zip_max
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/zip.cpp
+  //! ### Record:
   //! @include doc/record/algo/zip.cpp
   //====================================================================================================================
   template<concepts::product_type T0, concepts::sized_product_type<size_v<T0>>... Ts>
@@ -123,7 +125,9 @@ namespace kumi
   //! @see zip_max
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/zip_min.cpp
+  //! ### Record:
   //! @include doc/record/algo/zip_min.cpp
   //====================================================================================================================
   template<concepts::product_type T0, concepts::product_type... Ts>
@@ -163,7 +167,7 @@ namespace kumi
   //! @see zip
   //! @see zip_min
   //!
-  //! ## Example
+  //! ## Example:
   //! @include doc/tuple/algo/zip_max.cpp
   //====================================================================================================================
   template<concepts::product_type T0, concepts::product_type... Ts>

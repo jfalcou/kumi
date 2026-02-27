@@ -46,7 +46,8 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup utility
+  //! @ingroup types
+  //! @class index_t
   //! @brief Integral constant type
   //!
   //! Defines a integral constant wrapper used to carry compile-time constant through API

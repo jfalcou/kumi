@@ -38,7 +38,9 @@ namespace kumi
   //! Computes the type returned by a call to extract.
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/extract.cpp
+  //! ### Record:
   //! @include doc/record/algo/extract.cpp
   //====================================================================================================================
   template<std::size_t I0, std::size_t I1, concepts::product_type T>
@@ -89,7 +91,9 @@ namespace kumi
   //! Computes the type returned by a call to split.
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/split.cpp
+  //! ### Record:
   //! @include doc/record/algo/split.cpp
   //====================================================================================================================
   template<std::size_t I0, concepts::product_type T>

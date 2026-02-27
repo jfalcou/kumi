@@ -59,7 +59,9 @@ namespace kumi
   //! Computes the type returned by a call to kumi::partition.
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/partition.cpp
+  //! ### Record:
   //! @include doc/record/algo/partition.cpp
   //====================================================================================================================
   template<template<typename> typename Pred, concepts::product_type T>
@@ -98,8 +100,10 @@ namespace kumi
   //!
   //! Computes the type returned by a call to kumi::filter.
   //!
-  //! ## Example:
+  //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/filter.cpp
+  //! ### Record:
   //! @include doc/record/algo/filter.cpp
   //====================================================================================================================
   template<template<typename> typename Pred, concepts::product_type T>
@@ -136,8 +140,10 @@ namespace kumi
   //!
   //! Computes the type returned by a call to kumi::filter_not.
   //!
-  //! ## Example:
+  //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/filter_not.cpp
+  //! ### Record:
   //! @include doc/record/algo/filter_not.cpp
   //====================================================================================================================
   template<template<typename> typename Pred, concepts::product_type T>

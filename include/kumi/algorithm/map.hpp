@@ -40,7 +40,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::map
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/map.cpp
+  //! ### Record:
   //! @include doc/record/algo/map.cpp
   //====================================================================================================================
   template<concepts::product_type T, typename Function, concepts::sized_product_type<size_v<T>>... Ts>
@@ -96,7 +98,7 @@ namespace kumi
   //! @see kumi::map
   //! @see kumi::map_field
   //!
-  //! ## Example
+  //! ## Example:
   //! @include doc/tuple/algo/map_index.cpp
   //====================================================================================================================
   template<concepts::product_type T, typename Function, concepts::sized_product_type<size_v<T>>... Ts>
@@ -147,7 +149,7 @@ namespace kumi
   //! @see kumi::map
   //! @see kumi::map_index
   //!
-  //! ## Example
+  //! ## Example:
   //! @include doc/record/algo/map_field.cpp
   //====================================================================================================================
   template<concepts::record_type T, typename Function, concepts::sized_product_type<size<T>::value>... Ts>

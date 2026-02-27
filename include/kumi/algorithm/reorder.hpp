@@ -65,7 +65,9 @@ namespace kumi
   //! Computes the return type of a call to kumi::reorder
   //!
   //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/reorder.cpp
+  //! ### Record:
   //! @include doc/record/algo/reorder.cpp
   //====================================================================================================================
   template<std::size_t... Idx, concepts::product_type T>
@@ -104,7 +106,7 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::reorder_fields
   //!
-  //! ## Example
+  //! ## Example:
   //! @include doc/record/algo/reorder_fields.cpp
   //====================================================================================================================
   template<concepts::identifier auto... Name, concepts::product_type Tuple>
@@ -143,8 +145,10 @@ namespace kumi
   //!
   //! Computes the return type of a call to kumi::reindex
   //!
-  //! ## Example
+  //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/reindex.cpp
+  //! ### Record:
   //! @include doc/record/algo/reindex.cpp
   //====================================================================================================================
   template<concepts::index_map auto Indexes, concepts::product_type T>

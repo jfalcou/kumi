@@ -24,8 +24,10 @@ namespace kumi
   //! @see kumi::for_each_index
   //! @see kumi::for_each_field
   //!
-  //! ## Example
+  //! ## Examples:
+  //! ### Tuple:
   //! @include doc/tuple/algo/for_each.cpp
+  //! ### Record:
   //! @include doc/record/algo/for_each.cpp
   //====================================================================================================================
   template<typename Function, concepts::product_type T, concepts::product_type... Ts>
@@ -72,7 +74,7 @@ namespace kumi
   //! @see kumi::for_each
   //! @see kumi::for_each_field
   //!
-  //! ## Example
+  //! ## Example:
   //! @include doc/tuple/algo/for_each_index.cpp
   //================================================================================================
   template<typename Function, concepts::product_type Tuple, concepts::product_type... Tuples>
@@ -105,7 +107,7 @@ namespace kumi
   //! @see kumi::for_each
   //! @see kumi::for_each_index
   //!
-  //! ## Example
+  //! ## Example:
   //! @include doc/record/algo/for_each_field.cpp
   //================================================================================================
   template<typename Function, concepts::record_type R, concepts::record_type... Rs>

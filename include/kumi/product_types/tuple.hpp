@@ -25,6 +25,9 @@ namespace kumi
   //! kumi::tuple is also compatible with standard tuple operations and structured bindings.
   //!
   //! @tparam Ts Sequence of types stored inside kumi::tuple.
+  //!
+  //! ## Example:
+  //! @include doc/tuple/api/introduction.cpp
   //====================================================================================================================
   template<typename... Ts> struct tuple
   {
@@ -604,12 +607,16 @@ namespace kumi
   //====================================================================================================================
 
   //====================================================================================================================
+  //! @addtogroup tuple
+  //! @{
+  //====================================================================================================================
+
+  //====================================================================================================================
   //! @name Tuple Accessors
   //! @{
   //====================================================================================================================
 
   //====================================================================================================================
-  //! @ingroup tuple
   //! @brief Extracts the Ith element from a kumi::tuple
   //!
   //! @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
@@ -639,6 +646,7 @@ namespace kumi
   template<std::size_t I, typename... Ts>
   requires(I < sizeof...(Ts))
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const& arg) noexcept
+
   {
     return arg[index<I>];
   }
@@ -647,12 +655,12 @@ namespace kumi
   template<std::size_t I, typename... Ts>
   requires(I < sizeof...(Ts))
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const&& arg) noexcept
+
   {
     return static_cast<tuple<Ts...> const&&>(arg)[index<I>];
   }
 
   //====================================================================================================================
-  //! @ingroup tuple
   //! @brief Extracts the field labeled S from a kumi::tuple if it exists
   //!
   //! @note     Does not participate in overload resolution if the names are not unique
@@ -674,6 +682,7 @@ namespace kumi
   template<str S, typename... Ts>
   requires(concepts::uniquely_named<Ts...> && _::contains_field<S, Ts...>())
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>&& t) noexcept
+
   {
     return static_cast<tuple<Ts...>&&>(t)[name<S>{}];
   }
@@ -694,6 +703,17 @@ namespace kumi
     return static_cast<tuple<Ts...> const&&>(t)[name<S>{}];
   }
 
+  //====================================================================================================================
+  //! @brief Extracts the field labeled Id from a kumi::tuple if it exists
+  //!
+  //! @note     Does not participate in overload resolution if the names are not unique
+  //! @tparam   Id Non type template parameter name of the element to access
+  //! @param    t Tuple to index
+  //! @return   A reference to the selected element of t.
+  //!
+  //! ## Example:
+  //! @include doc/tuple/api/named_get.cpp
+  //====================================================================================================================
   template<concepts::identifier auto Id, typename... Ts>
   requires(concepts::uniquely_named<Ts...> && concepts::contains_field<decltype(Id), Ts...>)
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>& t) noexcept
@@ -726,7 +746,6 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup tuple
   //! @brief Extracts the field which type is T from a kumi::tuple if it exist
   //!
   //! @note     Does not participate in overload resolution if the types are not unique
@@ -772,6 +791,10 @@ namespace kumi
   //! @}
   //====================================================================================================================
 
+  //====================================================================================================================
+  //! @}
+  //====================================================================================================================
+
 #ifndef KUMI_DOXYGEN_INVOKED
   /// Improves diagnostic for out of bounds index
   template<std::integral auto I, typename T>
@@ -792,7 +815,6 @@ namespace kumi
   template<typename U, typename T>
   requires(is_kumi_tuple_v<std::remove_cvref_t<T>> && !concepts::contains_type<U, T>)
   constexpr auto get(T&& t) = delete;
-#endif
 
   // Builder protocole
   template<concepts::product_type T>
@@ -818,6 +840,8 @@ namespace kumi
   {
     using type = kumi::tuple<>;
   };
+#endif
+
 }
 
 #endif
