@@ -8,7 +8,7 @@ var searchData=
   ['all_5funiques_5',['all_uniques',['../structkumi_1_1all__uniques.html',1,'kumi']]],
   ['amazing_20amethyst_6',['Version 1.0 - Amazing Amethyst',['../changelog.html#autotoc_md230',1,'']]],
   ['amethyst_7',['Version 1.0 - Amazing Amethyst',['../changelog.html#autotoc_md230',1,'']]],
-  ['and_20functions_8',['and functions',['../group__details.html',1,'Helper Types and Functions'],['../group__utility.html',1,'Helper Types and Functions'],['../group__record.html',1,'Record Types and Functions'],['../group__tuple.html',1,'Tuple Types and Functions']]],
+  ['and_20functions_8',['and Functions',['../group__details.html',1,'Helper Types and Functions'],['../group__utility.html',1,'Helper Types and Functions'],['../group__record.html',1,'Record Types and Functions'],['../group__tuple.html',1,'Tuple Types and Functions']]],
   ['and_20infrastructure_20changes_9',['API and Infrastructure Changes',['../changelog.html#autotoc_md217',1,'']]],
   ['any_5fof_10',['any_of',['../group__queries_ga4564d211f8b879d1ff2b3fb1a7fa525f.html#ga4564d211f8b879d1ff2b3fb1a7fa525f',1,'kumi::any_of(T &amp;&amp;ts, Pred p) noexcept'],['../group__queries_ga1c7e88598454517558e84d377ff681ce.html#ga1c7e88598454517558e84d377ff681ce',1,'kumi::any_of(T &amp;&amp;ts) noexcept']]],
   ['api_20and_20infrastructure_20changes_11',['API and Infrastructure Changes',['../changelog.html#autotoc_md217',1,'']]],

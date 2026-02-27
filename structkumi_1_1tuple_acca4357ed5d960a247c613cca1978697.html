@@ -1,0 +1,259 @@
+<!-- HTML header for doxygen 1.9.5-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>kumi: kumi::tuple::explicit</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="godbolt.js"></script>
+<script type="text/javascript" src="fragment.js"></script>
+<script type="text/javascript" src="paragraph.js"></script>
+<script type="text/javascript">
+  DoxygenAwesomeParagraphLink.init()
+  DoxygenAwesomeFragmentCopyButton.init()
+  SendToGodbolt.init("kumi","clang1600","-O3 -std=c++20 -DNEDBUG")
+</script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(function() { init_search(); });
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="color.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<a href="https://github.com/jfalcou/kumi" class="github-corner" title="View source on GitHub" target="_blank">
+    <svg viewBox="0 0 250 250" width="40" height="40" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<!-- BEGIN TITLEAREA-->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr  style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">kumi<span id="projectnumber">&#160;v3.1.0</span>
+   </div>
+   <div id="projectbrief">Exquisite Epidote</div>
+  </td>
+ </tr>
+   <tr><td colspan="2" style="padding: 20px 0px 0px 0px;">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('structkumi_1_1tuple_acca4357ed5d960a247c613cca1978697.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div class="contents">
+<a id="acca4357ed5d960a247c613cca1978697" name="acca4357ed5d960a247c613cca1978697"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#acca4357ed5d960a247c613cca1978697">&#9670;&#160;</a></span>explicit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... Ts&gt; </div>
+<div class="memtemplate">
+template&lt;typename... Us&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structkumi_1_1tuple.html">kumi::tuple</a>&lt; Ts &gt;::explicit </td>
+          <td>(</td>
+          <td class="paramtype">!_::piecewise_convertible&lt; <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Ts const &amp;... &gt;, <a class="el" href="structkumi_1_1tuple.html">tuple</a>&lt; Us... &gt; &gt;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enables static casting a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">tuple&lt;Ts...&gt;</a> to a <a class="el" href="structkumi_1_1tuple.html">tuple&lt;Us...&gt;</a>. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Us</td><td>Types composing the destination tuple</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This permits the conversion from a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">tuple&lt;T&gt;</a>&amp; to a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">tuple&lt;T&amp;&gt;</a> which makes it suitable for some zip-like cases such as building a structure of arrays iterator.</dd></dl>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md188"></a>
+Example :</h2>
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> a = { 65, 2.3, 4.5f};</div>
+<div class="line">  <span class="keyword">auto</span> b = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple&lt;char,int,double&gt;</a><span class="keyword">&gt;</span>(a);</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; b &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:29</div></div>
+</div><!-- fragment --> <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="preprocessor">#include &lt;algorithm&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;ranges&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span> &lt;<span class="keyword">class</span>... Ts&gt;</div>
+<div class="line"><span class="keyword">struct </span>soa</div>
+<div class="line">{</div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple&lt;std::vector&lt;Ts&gt;</a>...&gt; fields;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">struct </span>iterator </div>
+<div class="line">  {</div>
+<div class="line">    <span class="keyword">using </span>value_type = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>&lt;Ts...&gt;;</div>
+<div class="line"> </div>
+<div class="line">    soa* s;</div>
+<div class="line">    std::size_t i;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">auto</span> <a class="code hl_friend" href="group__tuple.html#gacebb3ddeaa684e400b25f48849147641">operator==</a>(iterator b)   <span class="keyword">const</span> -&gt; <span class="keywordtype">bool</span> { <span class="keywordflow">return</span> i ==  b.i; }</div>
+<div class="line">    <span class="keyword">auto</span> operator&lt;=&gt;(iterator b)<span class="keyword">  const         </span>{ <span class="keywordflow">return</span> i &lt;=&gt; b.i; }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">auto</span> operator++() -&gt;iterator&amp; { ++i; <span class="keywordflow">return</span> *<span class="keyword">this</span>; }</div>
+<div class="line">    <span class="keyword">auto</span> operator--() -&gt;iterator&amp; { --i; <span class="keywordflow">return</span> *<span class="keyword">this</span>; }</div>
+<div class="line">    <span class="keyword">auto</span> operator++(<span class="keywordtype">int</span>) -&gt;iterator { <span class="keyword">auto</span> copy = *<span class="keyword">this</span>; ++*<span class="keyword">this</span>; <span class="keywordflow">return</span> copy; }</div>
+<div class="line">    <span class="keyword">auto</span> operator--(<span class="keywordtype">int</span>) -&gt;iterator { <span class="keyword">auto</span> copy = *<span class="keyword">this</span>; --*<span class="keyword">this</span>; <span class="keywordflow">return</span> copy; }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">friend</span> <span class="keyword">auto</span> operator+(iterator a, std::size_t b) -&gt; iterator{ <span class="keywordflow">return</span> {.s = a.s, .i = a.i + b}; }</div>
+<div class="line">    <span class="keyword">friend</span> <span class="keyword">auto</span> operator+(std::size_t a, iterator b) -&gt; iterator{ <span class="keywordflow">return</span> {.s = b.s, .i = a + b.i}; }</div>
+<div class="line">    <span class="keyword">friend</span> <span class="keyword">auto</span> operator-(iterator a, std::size_t b) -&gt; iterator{ <span class="keywordflow">return</span> {.s = a.s, .i = a.i - b}; }</div>
+<div class="line">    <span class="keyword">friend</span> <span class="keyword">auto</span> operator-(std::size_t a, iterator b) -&gt; iterator{ <span class="keywordflow">return</span> {.s = b.s, .i = a - b.i}; }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">auto</span> operator+=(std::size_t b) -&gt; iterator&amp; { i += b; <span class="keywordflow">return</span> *<span class="keyword">this</span>; }</div>
+<div class="line">    <span class="keyword">auto</span> operator-=(std::size_t b) -&gt; iterator&amp; { i -= b; <span class="keywordflow">return</span> *<span class="keyword">this</span>; }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keyword">auto</span> operator-(iterator b) <span class="keyword">const</span> -&gt; std::ptrdiff_t { <span class="keywordflow">return</span> i - b.i; }</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">auto</span> operator*()<span class="keyword"> const </span></div>
+<div class="line"><span class="keyword">    </span>{</div>
+<div class="line">      <span class="keywordflow">return</span> <a class="code hl_function" href="group__transforms_ga570ad42b8992ce6096c05dd6b2bbcf6d.html#ga570ad42b8992ce6096c05dd6b2bbcf6d">kumi::apply</a>([&amp;](<span class="keyword">auto</span>&amp;... vs) { <span class="keywordflow">return</span> <a class="code hl_function" href="group__record_gac2749d2291a54a167bfd63c07a188acf.html#gac2749d2291a54a167bfd63c07a188acf">kumi::tie</a>(vs[i]...); }, s-&gt;fields);</div>
+<div class="line">    }</div>
+<div class="line">    </div>
+<div class="line">    <span class="keyword">auto</span> operator[](std::ptrdiff_t b)<span class="keyword"> const </span></div>
+<div class="line"><span class="keyword">    </span>{ </div>
+<div class="line">      <span class="keywordflow">return</span> <a class="code hl_function" href="group__transforms_ga570ad42b8992ce6096c05dd6b2bbcf6d.html#ga570ad42b8992ce6096c05dd6b2bbcf6d">kumi::apply</a>([&amp;](<span class="keyword">auto</span>&amp;... vs) { <span class="keywordflow">return</span> <a class="code hl_function" href="group__record_gac2749d2291a54a167bfd63c07a188acf.html#gac2749d2291a54a167bfd63c07a188acf">kumi::tie</a>(vs[i + b]...); }, s-&gt;fields);</div>
+<div class="line">    }</div>
+<div class="line">  };</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">auto</span> begin()  -&gt; iterator { <span class="keywordflow">return</span> {.s = <span class="keyword">this</span>, .i = 0                           }; }</div>
+<div class="line">    <span class="keyword">auto</span> end()    -&gt; iterator { <span class="keywordflow">return</span> {.s = <span class="keyword">this</span>, .i = <a class="code hl_function" href="namespacekumi.html#a3f6e920ee5cd3ae32c3e221a69deeb8b">kumi::get&lt;0&gt;</a>(fields).size() }; }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">static_assert</span>(std::random_access_iterator&lt;soa&lt;int&gt;::iterator&gt;);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  soa&lt;float,int&gt; s;</div>
+<div class="line">  get&lt;0&gt;(s.fields) = {1.2f,2.3f,3.4f,4.5f};</div>
+<div class="line">  get&lt;1&gt;(s.fields) = {10,20,30,40};</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keyword">auto</span> e : s)</div>
+<div class="line">    std::cout &lt;&lt; e &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="ttc" id="agroup__record_gac2749d2291a54a167bfd63c07a188acf_html_gac2749d2291a54a167bfd63c07a188acf"><div class="ttname"><a href="group__record_gac2749d2291a54a167bfd63c07a188acf.html#gac2749d2291a54a167bfd63c07a188acf">kumi::tie</a></div><div class="ttdeci">constexpr auto tie(Ts &amp;... ts) -&gt; record&lt; field&lt; decltype(Fields), Ts &amp; &gt;... &gt;</div><div class="ttdoc">Creates a kumi::record of lvalue references to its arguments.</div><div class="ttdef"><b>Definition</b> record.hpp:353</div></div>
+<div class="ttc" id="agroup__transforms_ga570ad42b8992ce6096c05dd6b2bbcf6d_html_ga570ad42b8992ce6096c05dd6b2bbcf6d"><div class="ttname"><a href="group__transforms_ga570ad42b8992ce6096c05dd6b2bbcf6d.html#ga570ad42b8992ce6096c05dd6b2bbcf6d">kumi::apply</a></div><div class="ttdeci">constexpr decltype(auto) apply(Function &amp;&amp;f, T &amp;&amp;t) noexcept(_::supports_nothrow_apply&lt; Function &amp;&amp;, T &amp;&amp; &gt;)</div><div class="ttdoc">Invoke the Callable object f with a product_type of arguments. f is applied on the values if the give...</div><div class="ttdef"><b>Definition</b> apply.hpp:39</div></div>
+<div class="ttc" id="agroup__tuple_html_gacebb3ddeaa684e400b25f48849147641"><div class="ttname"><a href="group__tuple.html#gacebb3ddeaa684e400b25f48849147641">kumi::tuple::operator==</a></div><div class="ttdeci">friend constexpr auto operator==(tuple const &amp;self, tuple&lt; Us... &gt; const &amp;other) noexcept</div><div class="ttdoc">Compares a tuple with an other for equality.</div><div class="ttdef"><b>Definition</b> tuple.hpp:279</div></div>
+<div class="ttc" id="anamespacekumi_html_a3f6e920ee5cd3ae32c3e221a69deeb8b"><div class="ttname"><a href="namespacekumi.html#a3f6e920ee5cd3ae32c3e221a69deeb8b">kumi::get</a></div><div class="ttdeci">constexpr decltype(auto) get(record&lt; Ts... &gt; &amp;&amp;r) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition</b> record.hpp:506</div></div>
+</div><!-- fragment --> 
+</div>
+</div>
+</div><!-- contents -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- HTML footer for doxygen 1.8.20-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+    <li class="navelem"><a href="namespacekumi.html">kumi</a></li><li class="navelem"><a href="structkumi_1_1tuple.html">tuple</a></li>
+  </ul>
+</div>
+</div> <!-- DOXYSTRAP RELATED -->
+</div> <!-- DOXYSTRAP RELATED -->
+</div> <!-- DOXYSTRAP RELATED -->
+</div> <!-- DOXYSTRAP RELATED -->
+</div> <!-- DOXYSTRAP RELATED -->
+</body>
+</html>

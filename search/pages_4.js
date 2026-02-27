@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['the_20c_2020_20compact_20tuple_20tools_0',['The C++20 Compact Tuple Tools',['../index.html',1,'']]],
-  ['tools_1',['The C++20 Compact Tuple Tools',['../index.html',1,'']]],
-  ['tuple_20tools_2',['The C++20 Compact Tuple Tools',['../index.html',1,'']]]
+  ['_3a_0',['Example :',['../structkumi_1_1tuple_acca4357ed5d960a247c613cca1978697.html#autotoc_md188',1,'']]]
 ];

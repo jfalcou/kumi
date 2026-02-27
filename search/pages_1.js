@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['c_2020_20compact_20tuple_20tools_0',['The C++20 Compact Tuple Tools',['../index.html',1,'']]],
-  ['change_20log_1',['Change Log',['../changelog.html',1,'']]],
-  ['compact_20tuple_20tools_2',['The C++20 Compact Tuple Tools',['../index.html',1,'']]]
+  ['1_200_20amazing_20amethyst_0',['Version 1.0 - Amazing Amethyst',['../changelog.html#autotoc_md230',1,'']]],
+  ['1_20charming_20chrysoprase_1',['Version 2.1 - Charming Chrysoprase',['../changelog.html#autotoc_md221',1,'']]],
+  ['1_20exquisite_20epidote_2',['Version 3.1 - Exquisite Epidote',['../changelog.html#autotoc_md210',1,'']]]
 ];

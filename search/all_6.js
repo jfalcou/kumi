@@ -9,6 +9,6 @@ var searchData=
   ['boolean_5fand_6',['boolean_and',['../structkumi_1_1boolean__and.html',1,'kumi']]],
   ['boolean_5for_7',['boolean_or',['../structkumi_1_1boolean__or.html',1,'kumi']]],
   ['boolean_5fxor_8',['boolean_xor',['../structkumi_1_1boolean__xor.html',1,'kumi']]],
-  ['bug_20fixes_9',['bug fixes',['../changelog.html#autotoc_md214',1,'Bug Fixes'],['../changelog.html#autotoc_md219',1,'Bug Fixes'],['../changelog.html#autotoc_md223',1,'Bug Fixes'],['../changelog.html#autotoc_md228',1,'Bug Fixes']]],
+  ['bug_20fixes_9',['Bug Fixes',['../changelog.html#autotoc_md214',1,'Bug Fixes'],['../changelog.html#autotoc_md219',1,'Bug Fixes'],['../changelog.html#autotoc_md223',1,'Bug Fixes'],['../changelog.html#autotoc_md228',1,'Bug Fixes']]],
   ['builder_10',['builder',['../structkumi_1_1builder.html',1,'kumi']]]
 ];

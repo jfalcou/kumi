@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
-<tagfile doxygen_version="1.9.8">
+<tagfile doxygen_version="1.16.1" doxygen_gitid="669aeeefca743c148e2d935b3d3c69535c7491e6">
   <compound kind="struct">
     <name>kumi::all_unique_names</name>
     <filename>structkumi_1_1all__unique__names.html</filename>
@@ -135,6 +135,20 @@
       <anchor>af1f56e6cdc96a662408a06cd6e2b315d</anchor>
       <arglist>()</arglist>
     </member>
+    <member kind="function">
+      <type>decltype(auto) constexpr</type>
+      <name>capture_field</name>
+      <anchorfile>group__product__types_gafc8e80ba53336a0142f3267959c1ba71.html</anchorfile>
+      <anchor>gafc8e80ba53336a0142f3267959c1ba71</anchor>
+      <arglist>(T &amp;&amp;t) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>decltype(auto) constexpr</type>
+      <name>field_cast</name>
+      <anchorfile>group__product__types_ga59477c1d8542af2601f493e3320434ee.html</anchorfile>
+      <anchor>ga59477c1d8542af2601f493e3320434ee</anchor>
+      <arglist>(T &amp;&amp;t) noexcept</arglist>
+    </member>
     <member kind="friend">
       <type>friend std::basic_ostream&lt; CharT, Traits &gt; &amp;</type>
       <name>operator&lt;&lt;</name>
@@ -185,8 +199,8 @@
     <member kind="function">
       <type>constexpr field&lt; tag_type, std::unwrap_ref_decay_t&lt; T &gt; &gt;</type>
       <name>operator=</name>
-      <anchorfile>structkumi_1_1identifier_ae23ea0748bbfd7baadc6e42ed92095fa.html</anchorfile>
-      <anchor>ae23ea0748bbfd7baadc6e42ed92095fa</anchor>
+      <anchorfile>structkumi_1_1identifier_a777e1b4bad698fa617bbf60faa23dc5e.html</anchorfile>
+      <anchor>a777e1b4bad698fa617bbf60faa23dc5e</anchor>
       <arglist>(T &amp;&amp;v) const noexcept</arglist>
     </member>
     <member kind="friend">
@@ -259,21 +273,21 @@
       <type>constexpr decltype(auto)</type>
       <name>get_index</name>
       <anchorfile>structkumi_1_1indexes__t.html</anchorfile>
-      <anchor>ab13af7957b1760751a2615e076454db7</anchor>
+      <anchor>a646f17f5822b8a6638b039d814403af0</anchor>
       <arglist>() const noexcept</arglist>
     </member>
     <member kind="friend">
       <type>friend constexpr decltype(auto)</type>
       <name>get</name>
-      <anchorfile>structkumi_1_1indexes__t_a9ca8e1559c70045f3ca0b79e16ee2c60.html</anchorfile>
-      <anchor>a9ca8e1559c70045f3ca0b79e16ee2c60</anchor>
+      <anchorfile>structkumi_1_1indexes__t_af7e9194b00d0255c68df6eeb401fafc3.html</anchorfile>
+      <anchor>af7e9194b00d0255c68df6eeb401fafc3</anchor>
       <arglist>(indexes_t &amp;i) noexcept</arglist>
     </member>
     <member kind="friend">
       <type>friend constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>structkumi_1_1indexes__t.html</anchorfile>
-      <anchor>a1f038cbf0c4bf1e11868eb6259a4371a</anchor>
+      <anchor>a6f1fb60dd1494676f71c8b75ad53a776</anchor>
       <arglist>(indexes_t const &amp;i) noexcept</arglist>
     </member>
   </compound>
@@ -372,77 +386,77 @@
       <type>constexpr record &amp;</type>
       <name>operator=</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>a8c8b199810ec95828b496bb033aa4386</anchor>
+      <anchor>a8bed6234eaeb9799611bf67c2068c81d</anchor>
       <arglist>(record&lt; Us... &gt; &amp;&amp;other)</arglist>
     </member>
     <member kind="function">
       <type>constexpr record &amp;</type>
       <name>operator=</name>
-      <anchorfile>structkumi_1_1record_a4f57b2bebcdae8a654d8302adb7200c2.html</anchorfile>
-      <anchor>a4f57b2bebcdae8a654d8302adb7200c2</anchor>
+      <anchorfile>structkumi_1_1record_ac9f002b5ee7e603ccac5cb57a617fc0a.html</anchorfile>
+      <anchor>ac9f002b5ee7e603ccac5cb57a617fc0a</anchor>
       <arglist>(record&lt; Us... &gt; const &amp;other)</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
-      <anchorfile>structkumi_1_1record_a5a012714bc455693e01bc348ce2b057b.html</anchorfile>
-      <anchor>a5a012714bc455693e01bc348ce2b057b</anchor>
+      <anchorfile>structkumi_1_1record_a0cd4f7eb460399409103e6eff1698ece.html</anchorfile>
+      <anchor>a0cd4f7eb460399409103e6eff1698ece</anchor>
       <arglist>(index_t&lt; I &gt;) &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
-      <anchorfile>structkumi_1_1record_a6013bd2207a07347e49b9e949250b46c.html</anchorfile>
-      <anchor>a6013bd2207a07347e49b9e949250b46c</anchor>
+      <anchorfile>structkumi_1_1record_ab55df258019b6a51386acfc1593c65eb.html</anchorfile>
+      <anchor>ab55df258019b6a51386acfc1593c65eb</anchor>
       <arglist>(as&lt; T &gt;) &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>a4fe619c37f8f6b570af71352900e85d8</anchor>
+      <anchor>a70e32c9963da25fa49bebb592048a04e</anchor>
       <arglist>(as&lt; T &gt;) &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>a485f6713a350704d72ee290b6b43c15b</anchor>
+      <anchor>accb0dc902cf81b1ec8a3385a54ba54f0</anchor>
       <arglist>(as&lt; T &gt;) const &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>a62b1c6eb86b9dc0e78450ab56377d4ba</anchor>
+      <anchor>a38db8f1833d4599344087a5b3cf6eb3f</anchor>
       <arglist>(as&lt; T &gt;) const &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
-      <anchorfile>structkumi_1_1record_a25f8fd7cb11f94e3815c0045ae39c338.html</anchorfile>
-      <anchor>a25f8fd7cb11f94e3815c0045ae39c338</anchor>
+      <anchorfile>structkumi_1_1record_ae909878ccc14939539c8de9a91b5d2e4.html</anchorfile>
+      <anchor>ae909878ccc14939539c8de9a91b5d2e4</anchor>
       <arglist>(Name const &amp;) &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>ae1243103f72d4a853360bba2a3547d6a</anchor>
+      <anchor>a3a37366ec260d4c65f0f4823303c0ec9</anchor>
       <arglist>(Name const &amp;) &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>a3ad671ad04ef78be5cbdfa0583011fef</anchor>
+      <anchor>a99ff28acf51c28300d5f5f2362f365a6</anchor>
       <arglist>(Name const &amp;) const &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>a75cf6645da0961365030b311f167b602</anchor>
+      <anchor>aa4aa6d2078bcf6a5908f7e6f75f0d5a0</anchor>
       <arglist>(Name const &amp;) const &amp;noexcept</arglist>
     </member>
     <member kind="friend">
@@ -511,64 +525,64 @@
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
-      <anchorfile>structkumi_1_1record_a5a012714bc455693e01bc348ce2b057b.html</anchorfile>
-      <anchor>a5a012714bc455693e01bc348ce2b057b</anchor>
+      <anchorfile>structkumi_1_1record_a0cd4f7eb460399409103e6eff1698ece.html</anchorfile>
+      <anchor>a0cd4f7eb460399409103e6eff1698ece</anchor>
       <arglist>(index_t&lt; I &gt;) &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
-      <anchorfile>structkumi_1_1record_a6013bd2207a07347e49b9e949250b46c.html</anchorfile>
-      <anchor>a6013bd2207a07347e49b9e949250b46c</anchor>
+      <anchorfile>structkumi_1_1record_ab55df258019b6a51386acfc1593c65eb.html</anchorfile>
+      <anchor>ab55df258019b6a51386acfc1593c65eb</anchor>
       <arglist>(as&lt; T &gt;) &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>a4fe619c37f8f6b570af71352900e85d8</anchor>
+      <anchor>a70e32c9963da25fa49bebb592048a04e</anchor>
       <arglist>(as&lt; T &gt;) &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>a485f6713a350704d72ee290b6b43c15b</anchor>
+      <anchor>accb0dc902cf81b1ec8a3385a54ba54f0</anchor>
       <arglist>(as&lt; T &gt;) const &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>a62b1c6eb86b9dc0e78450ab56377d4ba</anchor>
+      <anchor>a38db8f1833d4599344087a5b3cf6eb3f</anchor>
       <arglist>(as&lt; T &gt;) const &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
-      <anchorfile>structkumi_1_1record_a25f8fd7cb11f94e3815c0045ae39c338.html</anchorfile>
-      <anchor>a25f8fd7cb11f94e3815c0045ae39c338</anchor>
+      <anchorfile>structkumi_1_1record_ae909878ccc14939539c8de9a91b5d2e4.html</anchorfile>
+      <anchor>ae909878ccc14939539c8de9a91b5d2e4</anchor>
       <arglist>(Name const &amp;) &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>ae1243103f72d4a853360bba2a3547d6a</anchor>
+      <anchor>a3a37366ec260d4c65f0f4823303c0ec9</anchor>
       <arglist>(Name const &amp;) &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>a3ad671ad04ef78be5cbdfa0583011fef</anchor>
+      <anchor>a99ff28acf51c28300d5f5f2362f365a6</anchor>
       <arglist>(Name const &amp;) const &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>a75cf6645da0961365030b311f167b602</anchor>
+      <anchor>aa4aa6d2078bcf6a5908f7e6f75f0d5a0</anchor>
       <arglist>(Name const &amp;) const &amp;noexcept</arglist>
     </member>
     <member kind="function">
@@ -687,77 +701,77 @@
       <type>constexpr tuple &amp;</type>
       <name>operator=</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>ad876de41968b5ee06bccf70695592f54</anchor>
+      <anchor>a14faa9d3cc7ddc1ded423c7c315f770f</anchor>
       <arglist>(tuple&lt; Us... &gt; &amp;&amp;other)</arglist>
     </member>
     <member kind="function">
       <type>constexpr tuple &amp;</type>
       <name>operator=</name>
-      <anchorfile>structkumi_1_1tuple_a4fd625da2ba811927789a6c838330144.html</anchorfile>
-      <anchor>a4fd625da2ba811927789a6c838330144</anchor>
+      <anchorfile>structkumi_1_1tuple_a2ea9ed2c89c9f857f9ea9e78d3e55415.html</anchorfile>
+      <anchor>a2ea9ed2c89c9f857f9ea9e78d3e55415</anchor>
       <arglist>(tuple&lt; Us... &gt; const &amp;other)</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
-      <anchorfile>structkumi_1_1tuple_a0c4404dcef281e2861393df6bb517e39.html</anchorfile>
-      <anchor>a0c4404dcef281e2861393df6bb517e39</anchor>
+      <anchorfile>structkumi_1_1tuple_a26c2bd1dd6ea0e18ec1e4cd93ce446e8.html</anchorfile>
+      <anchor>a26c2bd1dd6ea0e18ec1e4cd93ce446e8</anchor>
       <arglist>(index_t&lt; I &gt; i) &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a5960e5d8bfaaaada3245a3f153c134bd</anchor>
+      <anchor>a769c11e74722cc2d526de76521fc0b9f</anchor>
       <arglist>(index_t&lt; I &gt;) &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a8dee9f776d5da360bbcfe58d03f28e3f</anchor>
+      <anchor>a3f511e26f157942e95affaecddef8ede</anchor>
       <arglist>(index_t&lt; I &gt;) const &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>ad9d54c3d6e6d1e22cf1972e2a1088a1a</anchor>
+      <anchor>aa03d8dd8c78e8998dc0cf6626eaaaa7c</anchor>
       <arglist>(index_t&lt; I &gt;) const &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
-      <anchorfile>structkumi_1_1tuple_af6bbf8ab193e8a4d8de340aa150e30dc.html</anchorfile>
-      <anchor>af6bbf8ab193e8a4d8de340aa150e30dc</anchor>
+      <anchorfile>structkumi_1_1tuple_a6734eb0820467388aad60324708a4449.html</anchorfile>
+      <anchor>a6734eb0820467388aad60324708a4449</anchor>
       <arglist>(as&lt; T &gt;) &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a0f88183ec73ad29ba6edb4a2049b3734</anchor>
+      <anchor>adeccca3ff30b692a0779b9af65ce8ffb</anchor>
       <arglist>(as&lt; T &gt;) &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a1729c193b404ac36671f4feb4938aeeb</anchor>
+      <anchor>a32dfbe0c0a3d6642c15ee46e13073c02</anchor>
       <arglist>(as&lt; T &gt;) const &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>ab9e82044727515d986bda7cdc56d81ad</anchor>
+      <anchor>ac3b9b7985c919744064598118cac39ee</anchor>
       <arglist>(as&lt; T &gt;) const &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
-      <anchorfile>structkumi_1_1tuple_ac84a73920267368533a3c8c9f5b760d8.html</anchorfile>
-      <anchor>ac84a73920267368533a3c8c9f5b760d8</anchor>
+      <anchorfile>structkumi_1_1tuple_a9c94930047c132ca48afcef5dcd7143f.html</anchorfile>
+      <anchor>a9c94930047c132ca48afcef5dcd7143f</anchor>
       <arglist>(Name const &amp;) &amp;noexcept</arglist>
     </member>
     <member kind="function">
@@ -771,35 +785,35 @@
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>ae2c97f7ff55e6be596702a09d20d04f6</anchor>
+      <anchor>afb8d7c9a48c239c9c96dcbe8fda8ad64</anchor>
       <arglist>(Name const &amp;) const &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a664320001d03a9ca98da755c47cf009d</anchor>
+      <anchor>a6cc11f09fc44dd8431e73526bb56eeaa</anchor>
       <arglist>(Name const &amp;) const &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>cast</name>
-      <anchorfile>structkumi_1_1tuple_a3967e3eb2c5a06d125fe6a68dc1c8c00.html</anchorfile>
-      <anchor>a3967e3eb2c5a06d125fe6a68dc1c8c00</anchor>
+      <anchorfile>structkumi_1_1tuple_a443878195e6d91218c75d427475f0c36.html</anchorfile>
+      <anchor>a443878195e6d91218c75d427475f0c36</anchor>
       <arglist>() const</arglist>
     </member>
     <member kind="function">
       <type></type>
       <name>explicit</name>
-      <anchorfile>structkumi_1_1tuple_afe7c9576494a5de1d5606fa7fcb928fc.html</anchorfile>
-      <anchor>afe7c9576494a5de1d5606fa7fcb928fc</anchor>
+      <anchorfile>structkumi_1_1tuple_acca4357ed5d960a247c613cca1978697.html</anchorfile>
+      <anchor>acca4357ed5d960a247c613cca1978697</anchor>
       <arglist>(!_::piecewise_convertible&lt; tuple&lt; Ts const &amp;... &gt;, tuple&lt; Us... &gt; &gt;) const expr operator tuple&lt; Us... &gt;() const</arglist>
     </member>
     <member kind="function">
       <type></type>
       <name>explicit</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>aa3c4771540f6a93841aa47241275ba57</anchor>
+      <anchor>a2aadc798beee6e8ff439c29ca58e8b65</anchor>
       <arglist>(!_::piecewise_convertible&lt; tuple&lt; Ts &amp;... &gt;, tuple&lt; Us... &gt; &gt;) const expr operator tuple&lt; Us... &gt;()</arglist>
     </member>
     <member kind="function" static="yes">
@@ -882,64 +896,64 @@
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
-      <anchorfile>structkumi_1_1tuple_a0c4404dcef281e2861393df6bb517e39.html</anchorfile>
-      <anchor>a0c4404dcef281e2861393df6bb517e39</anchor>
+      <anchorfile>structkumi_1_1tuple_a26c2bd1dd6ea0e18ec1e4cd93ce446e8.html</anchorfile>
+      <anchor>a26c2bd1dd6ea0e18ec1e4cd93ce446e8</anchor>
       <arglist>(index_t&lt; I &gt; i) &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a5960e5d8bfaaaada3245a3f153c134bd</anchor>
+      <anchor>a769c11e74722cc2d526de76521fc0b9f</anchor>
       <arglist>(index_t&lt; I &gt;) &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a8dee9f776d5da360bbcfe58d03f28e3f</anchor>
+      <anchor>a3f511e26f157942e95affaecddef8ede</anchor>
       <arglist>(index_t&lt; I &gt;) const &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>ad9d54c3d6e6d1e22cf1972e2a1088a1a</anchor>
+      <anchor>aa03d8dd8c78e8998dc0cf6626eaaaa7c</anchor>
       <arglist>(index_t&lt; I &gt;) const &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
-      <anchorfile>structkumi_1_1tuple_af6bbf8ab193e8a4d8de340aa150e30dc.html</anchorfile>
-      <anchor>af6bbf8ab193e8a4d8de340aa150e30dc</anchor>
+      <anchorfile>structkumi_1_1tuple_a6734eb0820467388aad60324708a4449.html</anchorfile>
+      <anchor>a6734eb0820467388aad60324708a4449</anchor>
       <arglist>(as&lt; T &gt;) &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a0f88183ec73ad29ba6edb4a2049b3734</anchor>
+      <anchor>adeccca3ff30b692a0779b9af65ce8ffb</anchor>
       <arglist>(as&lt; T &gt;) &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a1729c193b404ac36671f4feb4938aeeb</anchor>
+      <anchor>a32dfbe0c0a3d6642c15ee46e13073c02</anchor>
       <arglist>(as&lt; T &gt;) const &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>ab9e82044727515d986bda7cdc56d81ad</anchor>
+      <anchor>ac3b9b7985c919744064598118cac39ee</anchor>
       <arglist>(as&lt; T &gt;) const &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
-      <anchorfile>structkumi_1_1tuple_ac84a73920267368533a3c8c9f5b760d8.html</anchorfile>
-      <anchor>ac84a73920267368533a3c8c9f5b760d8</anchor>
+      <anchorfile>structkumi_1_1tuple_a9c94930047c132ca48afcef5dcd7143f.html</anchorfile>
+      <anchor>a9c94930047c132ca48afcef5dcd7143f</anchor>
       <arglist>(Name const &amp;) &amp;noexcept</arglist>
     </member>
     <member kind="function">
@@ -953,35 +967,35 @@
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>ae2c97f7ff55e6be596702a09d20d04f6</anchor>
+      <anchor>afb8d7c9a48c239c9c96dcbe8fda8ad64</anchor>
       <arglist>(Name const &amp;) const &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a664320001d03a9ca98da755c47cf009d</anchor>
+      <anchor>a6cc11f09fc44dd8431e73526bb56eeaa</anchor>
       <arglist>(Name const &amp;) const &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>cast</name>
-      <anchorfile>structkumi_1_1tuple_a3967e3eb2c5a06d125fe6a68dc1c8c00.html</anchorfile>
-      <anchor>a3967e3eb2c5a06d125fe6a68dc1c8c00</anchor>
+      <anchorfile>structkumi_1_1tuple_a443878195e6d91218c75d427475f0c36.html</anchorfile>
+      <anchor>a443878195e6d91218c75d427475f0c36</anchor>
       <arglist>() const</arglist>
     </member>
     <member kind="function">
       <type></type>
       <name>explicit</name>
-      <anchorfile>structkumi_1_1tuple_afe7c9576494a5de1d5606fa7fcb928fc.html</anchorfile>
-      <anchor>afe7c9576494a5de1d5606fa7fcb928fc</anchor>
+      <anchorfile>structkumi_1_1tuple_acca4357ed5d960a247c613cca1978697.html</anchorfile>
+      <anchor>acca4357ed5d960a247c613cca1978697</anchor>
       <arglist>(!_::piecewise_convertible&lt; tuple&lt; Ts const &amp;... &gt;, tuple&lt; Us... &gt; &gt;) const expr operator tuple&lt; Us... &gt;() const</arglist>
     </member>
     <member kind="function">
       <type></type>
       <name>explicit</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>aa3c4771540f6a93841aa47241275ba57</anchor>
+      <anchor>a2aadc798beee6e8ff439c29ca58e8b65</anchor>
       <arglist>(!_::piecewise_convertible&lt; tuple&lt; Ts &amp;... &gt;, tuple&lt; Us... &gt; &gt;) const expr operator tuple&lt; Us... &gt;()</arglist>
     </member>
     <member kind="function" static="yes">
@@ -1387,8 +1401,8 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>chunks</name>
-      <anchorfile>group__generators_ga43733ea12f98401cb32efd3e189c09b9.html</anchorfile>
-      <anchor>ga43733ea12f98401cb32efd3e189c09b9</anchor>
+      <anchorfile>group__generators_ga3cb72901ec2c82a9b4d4ff5bf513237c.html</anchorfile>
+      <anchor>ga3cb72901ec2c82a9b4d4ff5bf513237c</anchor>
       <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
@@ -1465,14 +1479,14 @@
       <type>constexpr auto</type>
       <name>extract</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a18196956d8b3402f081b5ec0ae41cbfd</anchor>
+      <anchor>a5e62384e36e8bebde755cd4422cf7244</anchor>
       <arglist>(Tuple &amp;&amp;t, index_t&lt; I0 &gt; i0) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>extract</name>
-      <anchorfile>group__generators_ga3b4519e0786eb3e74149c04e13a286c3.html</anchorfile>
-      <anchor>ga3b4519e0786eb3e74149c04e13a286c3</anchor>
+      <anchorfile>group__generators_gaf51ea67a0b091ec31cabe8a0755b963d.html</anchorfile>
+      <anchor>gaf51ea67a0b091ec31cabe8a0755b963d</anchor>
       <arglist>(Tuple &amp;&amp;t, index_t&lt; I0 &gt; i0, index_t&lt; I1 &gt; i1) noexcept</arglist>
     </member>
     <member kind="function">
@@ -1562,15 +1576,15 @@
     <member kind="function">
       <type>constexpr void</type>
       <name>for_each_field</name>
-      <anchorfile>group__transforms_gab51ac1793c12bbc1b1979bc0b51eb33a.html</anchorfile>
-      <anchor>gab51ac1793c12bbc1b1979bc0b51eb33a</anchor>
+      <anchorfile>group__transforms_gaab94cdfbd028acee3fa31bad91ab8a62.html</anchorfile>
+      <anchor>gaab94cdfbd028acee3fa31bad91ab8a62</anchor>
       <arglist>(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</arglist>
     </member>
     <member kind="function">
       <type>constexpr void</type>
       <name>for_each_index</name>
-      <anchorfile>group__transforms_ga1e4f9df80b8d396b32e2f5d3316caea9.html</anchorfile>
-      <anchor>ga1e4f9df80b8d396b32e2f5d3316caea9</anchor>
+      <anchorfile>group__transforms_gab74a95670c1baa3ec7e7905d42a5f216.html</anchorfile>
+      <anchor>gab74a95670c1baa3ec7e7905d42a5f216</anchor>
       <arglist>(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</arglist>
     </member>
     <member kind="function">
@@ -1591,70 +1605,70 @@
       <type>constexpr auto</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a3bed04b26cba84bd2546324ac23c8d5b</anchor>
+      <anchor>a55b2f406000d9104ecfcf067d63d4da0</anchor>
       <arglist>(R &amp;&amp;r)=delete</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a58627d6a1308a26a3f8bffba4ff53434</anchor>
+      <anchor>a55b2f406000d9104ecfcf067d63d4da0</anchor>
       <arglist>(R &amp;&amp;r)=delete</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a132150f11383e0fbe65569de5606e178</anchor>
+      <anchor>a55b2f406000d9104ecfcf067d63d4da0</anchor>
       <arglist>(R &amp;&amp;r)=delete</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>afc60f6ef1bc413780d9fea29dd1e2d98</anchor>
+      <anchor>a55b2f406000d9104ecfcf067d63d4da0</anchor>
       <arglist>(R &amp;&amp;r)=delete</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a5a398ee0362752194bc85fde7f9fd01d</anchor>
+      <anchor>ab9632a8c7049efccf962d85aed1fe9b7</anchor>
       <arglist>(T &amp;&amp;r)=delete</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a8642711b7ee9134eb4e2fc8d79acb0de</anchor>
+      <anchor>ab5527f2f9d28b4287d4f6c033deefbfd</anchor>
       <arglist>(T &amp;&amp;t)=delete</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>ac8926a67aa3f403e053a5c30b47e5d40</anchor>
+      <anchor>ab5527f2f9d28b4287d4f6c033deefbfd</anchor>
       <arglist>(T &amp;&amp;t)=delete</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a67573177dba883247839bacf6dcb7df9</anchor>
+      <anchor>ab5527f2f9d28b4287d4f6c033deefbfd</anchor>
       <arglist>(T &amp;&amp;t)=delete</arglist>
     </member>
     <member kind="function">
       <type>consteval auto</type>
       <name>get_index_of_field</name>
-      <anchorfile>group__utility_ga81e729d4960f2f8835af863296ff13b5.html</anchorfile>
-      <anchor>ga81e729d4960f2f8835af863296ff13b5</anchor>
+      <anchorfile>group__utility_ga7684fa136df06ed30bdce81ccb4475c1.html</anchorfile>
+      <anchor>ga7684fa136df06ed30bdce81ccb4475c1</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function">
       <type>consteval auto</type>
       <name>get_index_of_type</name>
-      <anchorfile>group__utility_gab0853403ed5b9e5b7670f83d774bd07b.html</anchorfile>
-      <anchor>gab0853403ed5b9e5b7670f83d774bd07b</anchor>
+      <anchorfile>group__utility_ga0b0bdfb8f39bc89d0f6cfbe1a01d341a.html</anchorfile>
+      <anchor>ga0b0bdfb8f39bc89d0f6cfbe1a01d341a</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function">
@@ -1703,14 +1717,14 @@
       <type>constexpr auto</type>
       <name>inner_product</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>aecc2a0ba7a4f6dce228e0c5181889668</anchor>
+      <anchor>a7439344b8d49dc212a4431ea13740060</anchor>
       <arglist>(S1 &amp;&amp;s1, S2 &amp;&amp;s2, T init) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>inner_product</name>
-      <anchorfile>group__reductions_gae9e0f77ffe8399c701ba32532db19d11.html</anchorfile>
-      <anchor>gae9e0f77ffe8399c701ba32532db19d11</anchor>
+      <anchorfile>group__reductions_ga21303fd927f9d314f49ee8c9845817a1.html</anchorfile>
+      <anchor>ga21303fd927f9d314f49ee8c9845817a1</anchor>
       <arglist>(S1 &amp;&amp;s1, S2 &amp;&amp;s2, T init, Sum sum, Prod prod) noexcept</arglist>
     </member>
     <member kind="function">
@@ -1751,8 +1765,8 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>map_field</name>
-      <anchorfile>group__transforms_ga2096ba88ea732e93bd9025952ae1f9f2.html</anchorfile>
-      <anchor>ga2096ba88ea732e93bd9025952ae1f9f2</anchor>
+      <anchorfile>group__transforms_gaaa7dd73330b1db1a2017bb9ec4e6abe0.html</anchorfile>
+      <anchor>gaaa7dd73330b1db1a2017bb9ec4e6abe0</anchor>
       <arglist>(Function f, Tuple &amp;&amp;t0, Tuples &amp;&amp;... others)</arglist>
     </member>
     <member kind="function">
@@ -1947,22 +1961,22 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>reindex</name>
-      <anchorfile>group__generators_ga18d76245ac67494ea0fe64d5a3c39bc3.html</anchorfile>
-      <anchor>ga18d76245ac67494ea0fe64d5a3c39bc3</anchor>
+      <anchorfile>group__generators_ga0e43e02e9a4a7fea31b620b2dcb4b48a.html</anchorfile>
+      <anchor>ga0e43e02e9a4a7fea31b620b2dcb4b48a</anchor>
       <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>reorder</name>
-      <anchorfile>group__generators_ga3e46e6c4fe83aeb9ce77f9002baada79.html</anchorfile>
-      <anchor>ga3e46e6c4fe83aeb9ce77f9002baada79</anchor>
+      <anchorfile>group__generators_ga11fbe45a20286800b1d6ef15d7930d37.html</anchorfile>
+      <anchor>ga11fbe45a20286800b1d6ef15d7930d37</anchor>
       <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>reorder_fields</name>
-      <anchorfile>group__generators_ga09d177328c5c5e6c43e994048236a1d6.html</anchorfile>
-      <anchor>ga09d177328c5c5e6c43e994048236a1d6</anchor>
+      <anchorfile>group__generators_ga86a5aaefb0718b80b2103bf9dc8e3b23.html</anchorfile>
+      <anchor>ga86a5aaefb0718b80b2103bf9dc8e3b23</anchor>
       <arglist>(Tuple &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
@@ -1989,8 +2003,8 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>split</name>
-      <anchorfile>group__generators_ga30d07f30bbfa319dfa78a9e1a5a83a38.html</anchorfile>
-      <anchor>ga30d07f30bbfa319dfa78a9e1a5a83a38</anchor>
+      <anchorfile>group__generators_gae3a193083043ec28b1aeab6498c87656.html</anchorfile>
+      <anchor>gae3a193083043ec28b1aeab6498c87656</anchor>
       <arglist>(Tuple &amp;&amp;t, index_t&lt; I0 &gt; i0) noexcept</arglist>
     </member>
     <member kind="function">
@@ -2031,8 +2045,8 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>windows</name>
-      <anchorfile>group__generators_ga733dfa174c0e531632cc1b0dd433a593.html</anchorfile>
-      <anchor>ga733dfa174c0e531632cc1b0dd433a593</anchor>
+      <anchorfile>group__generators_gadbca06109e5b36b0d59eab4a0fc9accf.html</anchorfile>
+      <anchor>gadbca06109e5b36b0d59eab4a0fc9accf</anchor>
       <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
@@ -2064,207 +2078,11 @@
       <arglist>(Ts &amp;&amp;...) -&gt; record&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
     </member>
     <member kind="function">
-      <type>constexpr auto</type>
-      <name>tie</name>
-      <anchorfile>group__record_gac9a691cb30072f994a527e13b861522e.html</anchorfile>
-      <anchor>gac9a691cb30072f994a527e13b861522e</anchor>
-      <arglist>(Ts &amp;... ts) -&gt; record&lt; field&lt; decltype(Fields), Ts &amp; &gt;... &gt;</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>abd1d4a59b0cddc9d5a5aef185c9f1e46</anchor>
-      <arglist>(record&lt; Ts... &gt; &amp;&amp;r) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a8fef7919e4c117f76d36a950bcf767be</anchor>
-      <arglist>(record&lt; Ts... &gt; const &amp;r) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>ac6fc9fce7bdde16b5271628195902871</anchor>
-      <arglist>(record&lt; Ts... &gt; const &amp;&amp;r) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a5d510d20af1d864ce25ad136fbb467e9</anchor>
-      <arglist>(record&lt; Ts... &gt; &amp;&amp;r) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a525b9bf94e60ea3d630e6de36a42f133</anchor>
-      <arglist>(record&lt; Ts... &gt; const &amp;r) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>aaf022167f51842c613401859d5f7578c</anchor>
-      <arglist>(record&lt; Ts... &gt; const &amp;&amp;r) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a307812e306a7b5c202ed1798fb62a381</anchor>
-      <arglist>(record&lt; Ts... &gt; &amp;r) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a8117ba9d0408fbf57fd945ecebcf88e0</anchor>
-      <arglist>(record&lt; Ts... &gt; &amp;&amp;r) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>af12d0b680d84fb4fa3e6b2cf561cf513</anchor>
-      <arglist>(record&lt; Ts... &gt; const &amp;r) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a9de264085d61cff2b0ddebd38510481f</anchor>
-      <arglist>(record&lt; Ts... &gt; const &amp;&amp;r) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a0d165e3fc5c9f785f87be5ef4b2596d0</anchor>
-      <arglist>(record&lt; Ts... &gt; &amp;&amp;r) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>aa3175c90cba86c6fa982eb8a266fa2f7</anchor>
-      <arglist>(record&lt; Ts... &gt; const &amp;r) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a1ec8e8fd72bb241a63aaaab8d240f567</anchor>
-      <arglist>(record&lt; Ts... &gt; const &amp;&amp;r) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>ac4fd10ae8604dc8f891d7f4717dfa57e</anchor>
-      <arglist>(tuple&lt; Ts... &gt; &amp;&amp;arg) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a954663e8f00c7c0cd39b2c70b78a8f21</anchor>
-      <arglist>(tuple&lt; Ts... &gt; const &amp;arg) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>af75adc373689cd5267452785087fe622</anchor>
-      <arglist>(tuple&lt; Ts... &gt; const &amp;&amp;arg) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>ab541531bd73557e4fac46218edfc39eb</anchor>
-      <arglist>(tuple&lt; Ts... &gt; &amp;&amp;t) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a89012f34fbafd67457ccee42b32009d4</anchor>
-      <arglist>(tuple&lt; Ts... &gt; const &amp;t) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>ac15f1974d785bdc3d11acaa12379c851</anchor>
-      <arglist>(tuple&lt; Ts... &gt; const &amp;&amp;t) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a42f6cb2982d4374c8bf3d46c4290fbda</anchor>
-      <arglist>(tuple&lt; Ts... &gt; &amp;&amp;t) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a59669e7698120aa9bf0b5abb7870628f</anchor>
-      <arglist>(tuple&lt; Ts... &gt; const &amp;t) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a2342cf3de3692f9b9d0660dd1dc81762</anchor>
-      <arglist>(tuple&lt; Ts... &gt; const &amp;&amp;t) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>ae3f1c4953ff0f9131424f6ac8e2cca53</anchor>
-      <arglist>(tuple&lt; Ts... &gt; &amp;&amp;t) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a5b2bcea0c243bc1bc599a4f3c80911fa</anchor>
-      <arglist>(tuple&lt; Ts... &gt; const &amp;t) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a39ecd46d106c6dbd4e62cebd364bdc9e</anchor>
-      <arglist>(tuple&lt; Ts... &gt; const &amp;&amp;t) noexcept</arglist>
-    </member>
-    <member kind="function">
       <type>KUMI_CUDA</type>
       <name>tuple</name>
       <anchorfile>group__tuple_ga7e659d5e732a3a999c93d842903cb74e.html</anchorfile>
       <anchor>ga7e659d5e732a3a999c93d842903cb74e</anchor>
       <arglist>(Ts &amp;&amp;...) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>tie</name>
-      <anchorfile>group__tuple_ga1a3be7d170cb81c6f87c93a0a04eabc8.html</anchorfile>
-      <anchor>ga1a3be7d170cb81c6f87c93a0a04eabc8</anchor>
-      <arglist>(Ts &amp;... ts) -&gt; tuple&lt; Ts &amp;... &gt;</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>make_tuple</name>
-      <anchorfile>group__tuple_ga98e6c367de0e0f526565280a0856b007.html</anchorfile>
-      <anchor>ga98e6c367de0e0f526565280a0856b007</anchor>
-      <arglist>(Ts &amp;&amp;... ts) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
     </member>
     <member kind="variable">
       <type>constexpr traits_check&lt; Traits &gt;</type>
@@ -2309,6 +2127,20 @@
       <arglist>(S &amp;&amp;s)</arglist>
     </member>
     <member kind="function">
+      <type>constexpr auto</type>
+      <name>from_tuple</name>
+      <anchorfile>group__tuple_ga5e1b1ae039b6c55ae68e875505d36774.html</anchorfile>
+      <anchor>ga5e1b1ae039b6c55ae68e875505d36774</anchor>
+      <arglist>(tuple&lt; Ts... &gt; const &amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>to_tuple</name>
+      <anchorfile>group__tuple_gafdea058f9f804755e1b3ce010be52f40.html</anchorfile>
+      <anchor>gafdea058f9f804755e1b3ce010be52f40</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
       <type>KUMI_CUDA</type>
       <name>record</name>
       <anchorfile>group__record_gaee922438c01912318246dcd9d6a1d158.html</anchorfile>
@@ -2318,184 +2150,247 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>tie</name>
-      <anchorfile>group__record_gac9a691cb30072f994a527e13b861522e.html</anchorfile>
-      <anchor>gac9a691cb30072f994a527e13b861522e</anchor>
+      <anchorfile>group__record_gac2749d2291a54a167bfd63c07a188acf.html</anchorfile>
+      <anchor>gac2749d2291a54a167bfd63c07a188acf</anchor>
       <arglist>(Ts &amp;... ts) -&gt; record&lt; field&lt; decltype(Fields), Ts &amp; &gt;... &gt;</arglist>
     </member>
     <member kind="function">
+      <type>constexpr auto</type>
+      <name>forward_as_record</name>
+      <anchorfile>group__record_gab9e21ff3a58e2bcee3849abc51821c88.html</anchorfile>
+      <anchor>gab9e21ff3a58e2bcee3849abc51821c88</anchor>
+      <arglist>(Ts &amp;&amp;... ts) -&gt; record&lt; field&lt; decltype(Fields), Ts &amp;&amp; &gt;... &gt;</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>make_record</name>
+      <anchorfile>group__record_gaaa38d1d378b716e24c974facce426d72.html</anchorfile>
+      <anchor>gaaa38d1d378b716e24c974facce426d72</anchor>
+      <arglist>(Ts &amp;&amp;... ts) -&gt; record&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>to_ref</name>
+      <anchorfile>group__record_gabd73478b6d709990c2f81dc83b980c16.html</anchorfile>
+      <anchor>gabd73478b6d709990c2f81dc83b980c16</anchor>
+      <arglist>(R &amp;&amp;r)</arglist>
+    </member>
+    <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>abd1d4a59b0cddc9d5a5aef185c9f1e46</anchor>
+      <anchor>a3f6e920ee5cd3ae32c3e221a69deeb8b</anchor>
       <arglist>(record&lt; Ts... &gt; &amp;&amp;r) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a8fef7919e4c117f76d36a950bcf767be</anchor>
+      <anchor>a8e537be3b4e1c56d2cfb1eaec3abbc34</anchor>
       <arglist>(record&lt; Ts... &gt; const &amp;r) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>ac6fc9fce7bdde16b5271628195902871</anchor>
+      <anchor>accaf2aa5342add1f5908e436ff06d4bc</anchor>
       <arglist>(record&lt; Ts... &gt; const &amp;&amp;r) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a5d510d20af1d864ce25ad136fbb467e9</anchor>
+      <anchor>a3f6e920ee5cd3ae32c3e221a69deeb8b</anchor>
       <arglist>(record&lt; Ts... &gt; &amp;&amp;r) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a525b9bf94e60ea3d630e6de36a42f133</anchor>
+      <anchor>a8e537be3b4e1c56d2cfb1eaec3abbc34</anchor>
       <arglist>(record&lt; Ts... &gt; const &amp;r) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>aaf022167f51842c613401859d5f7578c</anchor>
+      <anchor>accaf2aa5342add1f5908e436ff06d4bc</anchor>
       <arglist>(record&lt; Ts... &gt; const &amp;&amp;r) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a307812e306a7b5c202ed1798fb62a381</anchor>
+      <anchor>a637cac7cb0548eb17d6f3dec5f6b950a</anchor>
       <arglist>(record&lt; Ts... &gt; &amp;r) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a8117ba9d0408fbf57fd945ecebcf88e0</anchor>
+      <anchor>a3f6e920ee5cd3ae32c3e221a69deeb8b</anchor>
       <arglist>(record&lt; Ts... &gt; &amp;&amp;r) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>af12d0b680d84fb4fa3e6b2cf561cf513</anchor>
+      <anchor>a8e537be3b4e1c56d2cfb1eaec3abbc34</anchor>
       <arglist>(record&lt; Ts... &gt; const &amp;r) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a9de264085d61cff2b0ddebd38510481f</anchor>
+      <anchor>accaf2aa5342add1f5908e436ff06d4bc</anchor>
       <arglist>(record&lt; Ts... &gt; const &amp;&amp;r) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a0d165e3fc5c9f785f87be5ef4b2596d0</anchor>
+      <anchor>a3f6e920ee5cd3ae32c3e221a69deeb8b</anchor>
       <arglist>(record&lt; Ts... &gt; &amp;&amp;r) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>aa3175c90cba86c6fa982eb8a266fa2f7</anchor>
+      <anchor>a8e537be3b4e1c56d2cfb1eaec3abbc34</anchor>
       <arglist>(record&lt; Ts... &gt; const &amp;r) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a1ec8e8fd72bb241a63aaaab8d240f567</anchor>
+      <anchor>accaf2aa5342add1f5908e436ff06d4bc</anchor>
       <arglist>(record&lt; Ts... &gt; const &amp;&amp;r) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>ac4fd10ae8604dc8f891d7f4717dfa57e</anchor>
+      <anchor>afded5ecfdbbf071fab8a5b1fdee6252d</anchor>
       <arglist>(tuple&lt; Ts... &gt; &amp;&amp;arg) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a954663e8f00c7c0cd39b2c70b78a8f21</anchor>
+      <anchor>a09ec41742e377285e8c58a93461ea68e</anchor>
       <arglist>(tuple&lt; Ts... &gt; const &amp;arg) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>af75adc373689cd5267452785087fe622</anchor>
+      <anchor>a3c04971a165ad2e617c70c78bd7d0beb</anchor>
       <arglist>(tuple&lt; Ts... &gt; const &amp;&amp;arg) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>ab541531bd73557e4fac46218edfc39eb</anchor>
+      <anchor>a830817f011feefe6e48d69c6dd0a9931</anchor>
       <arglist>(tuple&lt; Ts... &gt; &amp;&amp;t) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a89012f34fbafd67457ccee42b32009d4</anchor>
+      <anchor>a98eb32cdac3330aaea2bcd7649bb5ba9</anchor>
       <arglist>(tuple&lt; Ts... &gt; const &amp;t) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>ac15f1974d785bdc3d11acaa12379c851</anchor>
+      <anchor>ab9b3e4f378a9f8b5f33e1fbf8b3a1352</anchor>
       <arglist>(tuple&lt; Ts... &gt; const &amp;&amp;t) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a42f6cb2982d4374c8bf3d46c4290fbda</anchor>
+      <anchor>a830817f011feefe6e48d69c6dd0a9931</anchor>
       <arglist>(tuple&lt; Ts... &gt; &amp;&amp;t) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a59669e7698120aa9bf0b5abb7870628f</anchor>
+      <anchor>a98eb32cdac3330aaea2bcd7649bb5ba9</anchor>
       <arglist>(tuple&lt; Ts... &gt; const &amp;t) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a2342cf3de3692f9b9d0660dd1dc81762</anchor>
+      <anchor>ab9b3e4f378a9f8b5f33e1fbf8b3a1352</anchor>
       <arglist>(tuple&lt; Ts... &gt; const &amp;&amp;t) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>ae3f1c4953ff0f9131424f6ac8e2cca53</anchor>
+      <anchor>a830817f011feefe6e48d69c6dd0a9931</anchor>
       <arglist>(tuple&lt; Ts... &gt; &amp;&amp;t) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a5b2bcea0c243bc1bc599a4f3c80911fa</anchor>
+      <anchor>a98eb32cdac3330aaea2bcd7649bb5ba9</anchor>
       <arglist>(tuple&lt; Ts... &gt; const &amp;t) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>get</name>
       <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a39ecd46d106c6dbd4e62cebd364bdc9e</anchor>
+      <anchor>ab9b3e4f378a9f8b5f33e1fbf8b3a1352</anchor>
       <arglist>(tuple&lt; Ts... &gt; const &amp;&amp;t) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>decltype(auto) constexpr</type>
+      <name>get</name>
+      <anchorfile>group__record_gabc2cd329ad25d155458850c19cc3b137.html</anchorfile>
+      <anchor>gabc2cd329ad25d155458850c19cc3b137</anchor>
+      <arglist>(record&lt; Ts... &gt; &amp;r) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>decltype(auto) constexpr</type>
+      <name>get</name>
+      <anchorfile>group__record_gabc2cd329ad25d155458850c19cc3b137.html</anchorfile>
+      <anchor>gabc2cd329ad25d155458850c19cc3b137</anchor>
+      <arglist>(record&lt; Ts... &gt; &amp;r) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>decltype(auto) constexpr</type>
+      <name>get</name>
+      <anchorfile>group__record_gabc2cd329ad25d155458850c19cc3b137.html</anchorfile>
+      <anchor>gabc2cd329ad25d155458850c19cc3b137</anchor>
+      <arglist>(record&lt; Ts... &gt; &amp;r) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>decltype(auto) constexpr</type>
+      <name>get</name>
+      <anchorfile>group__tuple_ga7b9b1b3fbe3d201542691bee350d8a08.html</anchorfile>
+      <anchor>ga7b9b1b3fbe3d201542691bee350d8a08</anchor>
+      <arglist>(tuple&lt; Ts... &gt; &amp;t) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>decltype(auto) constexpr</type>
+      <name>get</name>
+      <anchorfile>group__tuple_ga7b9b1b3fbe3d201542691bee350d8a08.html</anchorfile>
+      <anchor>ga7b9b1b3fbe3d201542691bee350d8a08</anchor>
+      <arglist>(tuple&lt; Ts... &gt; &amp;t) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>decltype(auto) constexpr</type>
+      <name>get</name>
+      <anchorfile>group__tuple_ga7b9b1b3fbe3d201542691bee350d8a08.html</anchorfile>
+      <anchor>ga7b9b1b3fbe3d201542691bee350d8a08</anchor>
+      <arglist>(tuple&lt; Ts... &gt; &amp;t) noexcept</arglist>
     </member>
     <member kind="function">
       <type>KUMI_CUDA</type>
@@ -2517,6 +2412,34 @@
       <anchorfile>group__tuple_ga98e6c367de0e0f526565280a0856b007.html</anchorfile>
       <anchor>ga98e6c367de0e0f526565280a0856b007</anchor>
       <arglist>(Ts &amp;&amp;... ts) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>forward_as_tuple</name>
+      <anchorfile>group__tuple_ga4cc5b452c723ee16fdd9a4de143ef0c1.html</anchorfile>
+      <anchor>ga4cc5b452c723ee16fdd9a4de143ef0c1</anchor>
+      <arglist>(Ts &amp;&amp;... ts) -&gt; tuple&lt; Ts &amp;&amp;... &gt;</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>to_ref</name>
+      <anchorfile>group__tuple_ga27c29bc9a5e31d7ada4ac427a18d8985.html</anchorfile>
+      <anchor>ga27c29bc9a5e31d7ada4ac427a18d8985</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>from_record</name>
+      <anchorfile>group__record_ga631f638102862f5ac7f8407e04eacf13.html</anchorfile>
+      <anchor>ga631f638102862f5ac7f8407e04eacf13</anchor>
+      <arglist>(record&lt; Ts... &gt; const &amp;r)</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>to_record</name>
+      <anchorfile>group__record_gaf3f1a7812e294e86296e09eceadbe0a3.html</anchorfile>
+      <anchor>gaf3f1a7812e294e86296e09eceadbe0a3</anchor>
+      <arglist>(Type &amp;&amp;r)</arglist>
     </member>
   </compound>
   <compound kind="namespace">
@@ -2569,15 +2492,15 @@
     <member kind="function">
       <type>consteval auto</type>
       <name>kumi::get_index_of_field</name>
-      <anchorfile>group__utility_ga81e729d4960f2f8835af863296ff13b5.html</anchorfile>
-      <anchor>ga81e729d4960f2f8835af863296ff13b5</anchor>
+      <anchorfile>group__utility_ga7684fa136df06ed30bdce81ccb4475c1.html</anchorfile>
+      <anchor>ga7684fa136df06ed30bdce81ccb4475c1</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function">
       <type>consteval auto</type>
       <name>kumi::get_index_of_type</name>
-      <anchorfile>group__utility_gab0853403ed5b9e5b7670f83d774bd07b.html</anchorfile>
-      <anchor>gab0853403ed5b9e5b7670f83d774bd07b</anchor>
+      <anchorfile>group__utility_ga0b0bdfb8f39bc89d0f6cfbe1a01d341a.html</anchorfile>
+      <anchor>ga0b0bdfb8f39bc89d0f6cfbe1a01d341a</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function">
@@ -2786,8 +2709,8 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::tie</name>
-      <anchorfile>group__record_gac9a691cb30072f994a527e13b861522e.html</anchorfile>
-      <anchor>gac9a691cb30072f994a527e13b861522e</anchor>
+      <anchorfile>group__record_gac2749d2291a54a167bfd63c07a188acf.html</anchorfile>
+      <anchor>gac2749d2291a54a167bfd63c07a188acf</anchor>
       <arglist>(Ts &amp;... ts) -&gt; record&lt; field&lt; decltype(Fields), Ts &amp; &gt;... &gt;</arglist>
     </member>
     <member kind="function">
@@ -3017,8 +2940,8 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::inner_product</name>
-      <anchorfile>group__reductions_gae9e0f77ffe8399c701ba32532db19d11.html</anchorfile>
-      <anchor>gae9e0f77ffe8399c701ba32532db19d11</anchor>
+      <anchorfile>group__reductions_ga21303fd927f9d314f49ee8c9845817a1.html</anchorfile>
+      <anchor>ga21303fd927f9d314f49ee8c9845817a1</anchor>
       <arglist>(S1 &amp;&amp;s1, S2 &amp;&amp;s2, T init, Sum sum, Prod prod) noexcept</arglist>
     </member>
     <member kind="function">
@@ -3155,15 +3078,15 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::chunks</name>
-      <anchorfile>group__generators_ga43733ea12f98401cb32efd3e189c09b9.html</anchorfile>
-      <anchor>ga43733ea12f98401cb32efd3e189c09b9</anchor>
+      <anchorfile>group__generators_ga3cb72901ec2c82a9b4d4ff5bf513237c.html</anchorfile>
+      <anchor>ga3cb72901ec2c82a9b4d4ff5bf513237c</anchor>
       <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::extract</name>
-      <anchorfile>group__generators_ga3b4519e0786eb3e74149c04e13a286c3.html</anchorfile>
-      <anchor>ga3b4519e0786eb3e74149c04e13a286c3</anchor>
+      <anchorfile>group__generators_gaf51ea67a0b091ec31cabe8a0755b963d.html</anchorfile>
+      <anchor>gaf51ea67a0b091ec31cabe8a0755b963d</anchor>
       <arglist>(Tuple &amp;&amp;t, index_t&lt; I0 &gt; i0, index_t&lt; I1 &gt; i1) noexcept</arglist>
     </member>
     <member kind="function">
@@ -3253,22 +3176,22 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::reindex</name>
-      <anchorfile>group__generators_ga18d76245ac67494ea0fe64d5a3c39bc3.html</anchorfile>
-      <anchor>ga18d76245ac67494ea0fe64d5a3c39bc3</anchor>
+      <anchorfile>group__generators_ga0e43e02e9a4a7fea31b620b2dcb4b48a.html</anchorfile>
+      <anchor>ga0e43e02e9a4a7fea31b620b2dcb4b48a</anchor>
       <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::reorder</name>
-      <anchorfile>group__generators_ga3e46e6c4fe83aeb9ce77f9002baada79.html</anchorfile>
-      <anchor>ga3e46e6c4fe83aeb9ce77f9002baada79</anchor>
+      <anchorfile>group__generators_ga11fbe45a20286800b1d6ef15d7930d37.html</anchorfile>
+      <anchor>ga11fbe45a20286800b1d6ef15d7930d37</anchor>
       <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::reorder_fields</name>
-      <anchorfile>group__generators_ga09d177328c5c5e6c43e994048236a1d6.html</anchorfile>
-      <anchor>ga09d177328c5c5e6c43e994048236a1d6</anchor>
+      <anchorfile>group__generators_ga86a5aaefb0718b80b2103bf9dc8e3b23.html</anchorfile>
+      <anchor>ga86a5aaefb0718b80b2103bf9dc8e3b23</anchor>
       <arglist>(Tuple &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
@@ -3295,8 +3218,8 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::split</name>
-      <anchorfile>group__generators_ga30d07f30bbfa319dfa78a9e1a5a83a38.html</anchorfile>
-      <anchor>ga30d07f30bbfa319dfa78a9e1a5a83a38</anchor>
+      <anchorfile>group__generators_gae3a193083043ec28b1aeab6498c87656.html</anchorfile>
+      <anchor>gae3a193083043ec28b1aeab6498c87656</anchor>
       <arglist>(Tuple &amp;&amp;t, index_t&lt; I0 &gt; i0) noexcept</arglist>
     </member>
     <member kind="function">
@@ -3316,8 +3239,8 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::windows</name>
-      <anchorfile>group__generators_ga733dfa174c0e531632cc1b0dd433a593.html</anchorfile>
-      <anchor>ga733dfa174c0e531632cc1b0dd433a593</anchor>
+      <anchorfile>group__generators_gadbca06109e5b36b0d59eab4a0fc9accf.html</anchorfile>
+      <anchor>gadbca06109e5b36b0d59eab4a0fc9accf</anchor>
       <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
@@ -3414,34 +3337,34 @@
     <name>concepts</name>
     <title>Tuple Related Concepts</title>
     <filename>group__concepts.html</filename>
-    <concept>kumi::concepts::product_type</concept>
-    <concept>kumi::concepts::record_type</concept>
-    <concept>kumi::concepts::static_container</concept>
-    <concept>kumi::concepts::unit_type</concept>
-    <concept>kumi::concepts::sized_product_type</concept>
-    <concept>kumi::concepts::sized_product_type_or_more</concept>
+    <concept>kumi::_::std_tuple_compatible</concept>
+    <concept>kumi::concepts::compatible_product_types</concept>
+    <concept>kumi::concepts::contains_field</concept>
+    <concept>kumi::concepts::contains_type</concept>
     <concept>kumi::concepts::empty_product_type</concept>
-    <concept>kumi::concepts::non_empty_product_type</concept>
+    <concept>kumi::concepts::entirely_uniquely_named</concept>
+    <concept>kumi::concepts::equality_comparable</concept>
+    <concept>kumi::concepts::equivalent</concept>
+    <concept>kumi::concepts::follows_same_semantic</concept>
+    <concept>kumi::concepts::has_named_fields</concept>
+    <concept>kumi::concepts::homogeneous_product_type</concept>
     <concept>kumi::concepts::index_map</concept>
     <concept>kumi::concepts::indexer</concept>
-    <concept>kumi::concepts::homogeneous_product_type</concept>
-    <concept>kumi::concepts::equality_comparable</concept>
-    <concept>kumi::concepts::has_named_fields</concept>
     <concept>kumi::concepts::is_fully_named</concept>
-    <concept>kumi::concepts::uniquely_typed</concept>
-    <concept>kumi::concepts::uniquely_named</concept>
-    <concept>kumi::concepts::unique_display_name</concept>
-    <concept>kumi::concepts::entirely_uniquely_named</concept>
-    <concept>kumi::concepts::contains_type</concept>
-    <concept>kumi::concepts::contains_field</concept>
-    <concept>kumi::concepts::equivalent</concept>
-    <concept>kumi::concepts::named_equality_comparable</concept>
-    <concept>kumi::concepts::follows_same_semantic</concept>
-    <concept>kumi::concepts::compatible_product_types</concept>
     <concept>kumi::concepts::monoid</concept>
-    <concept>kumi::concepts::typed_get_compliant</concept>
+    <concept>kumi::concepts::named_equality_comparable</concept>
     <concept>kumi::concepts::named_get_compliant</concept>
-    <concept>kumi::_::std_tuple_compatible</concept>
+    <concept>kumi::concepts::non_empty_product_type</concept>
+    <concept>kumi::concepts::product_type</concept>
+    <concept>kumi::concepts::record_type</concept>
+    <concept>kumi::concepts::sized_product_type</concept>
+    <concept>kumi::concepts::sized_product_type_or_more</concept>
+    <concept>kumi::concepts::static_container</concept>
+    <concept>kumi::concepts::typed_get_compliant</concept>
+    <concept>kumi::concepts::unique_display_name</concept>
+    <concept>kumi::concepts::uniquely_named</concept>
+    <concept>kumi::concepts::uniquely_typed</concept>
+    <concept>kumi::concepts::unit_type</concept>
   </compound>
   <compound kind="group">
     <name>traits</name>
@@ -3490,15 +3413,15 @@
     <member kind="function">
       <type>constexpr void</type>
       <name>kumi::for_each_field</name>
-      <anchorfile>group__transforms_gab51ac1793c12bbc1b1979bc0b51eb33a.html</anchorfile>
-      <anchor>gab51ac1793c12bbc1b1979bc0b51eb33a</anchor>
+      <anchorfile>group__transforms_gaab94cdfbd028acee3fa31bad91ab8a62.html</anchorfile>
+      <anchor>gaab94cdfbd028acee3fa31bad91ab8a62</anchor>
       <arglist>(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</arglist>
     </member>
     <member kind="function">
       <type>constexpr void</type>
       <name>kumi::for_each_index</name>
-      <anchorfile>group__transforms_ga1e4f9df80b8d396b32e2f5d3316caea9.html</anchorfile>
-      <anchor>ga1e4f9df80b8d396b32e2f5d3316caea9</anchor>
+      <anchorfile>group__transforms_gab74a95670c1baa3ec7e7905d42a5f216.html</anchorfile>
+      <anchor>gab74a95670c1baa3ec7e7905d42a5f216</anchor>
       <arglist>(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</arglist>
     </member>
     <member kind="function">
@@ -3511,8 +3434,8 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::map_field</name>
-      <anchorfile>group__transforms_ga2096ba88ea732e93bd9025952ae1f9f2.html</anchorfile>
-      <anchor>ga2096ba88ea732e93bd9025952ae1f9f2</anchor>
+      <anchorfile>group__transforms_gaaa7dd73330b1db1a2017bb9ec4e6abe0.html</anchorfile>
+      <anchor>gaaa7dd73330b1db1a2017bb9ec4e6abe0</anchor>
       <arglist>(Function f, Tuple &amp;&amp;t0, Tuples &amp;&amp;... others)</arglist>
     </member>
     <member kind="function">
@@ -3632,11 +3555,13 @@
     <name>changelog</name>
     <title>Change Log</title>
     <filename>changelog.html</filename>
+    <docanchor file="changelog.html" title="/__w/kumi/kumi/doc/changelog.md">md__2____w_2kumi_2kumi_2doc_2changelog</docanchor>
   </compound>
   <compound kind="page">
     <name>licence</name>
     <title>Licence</title>
     <filename>licence.html</filename>
+    <docanchor file="licence.html" title="/__w/kumi/kumi/doc/licence.md">md__2____w_2kumi_2kumi_2doc_2licence</docanchor>
   </compound>
   <compound kind="page">
     <name>setup</name>
