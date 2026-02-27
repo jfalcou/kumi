@@ -11,11 +11,12 @@ namespace kumi
 {
   //====================================================================================================================
   //! @ingroup  traits
-  //! @brief    Extracts the common product_type of a parameter pack, if all the types are record types then it returns
-  //! an
-  //!           empty record type, otherwise returns an empty product type. As we are unable to compute the
-  //!           Least Restrictive Subtype of a pack, this trait should be specialized for each case one would want to
-  //!           write. For the kumi library, it is specialized for kumi::tuple and kumi::record
+  //! @brief    Extracts the common product_type of a parameter pack.
+  //!
+  //! If all the types are record types then it returns
+  //! an empty record type, otherwise returns an empty product type. As we are unable to compute the
+  //! Least Restrictive Subtype of a pack, this trait should be specialized for each case one would want to
+  //! write. For the kumi library, it is specialized for kumi::tuple and kumi::record
   //!
   //! @tparam Ts The product types to access
   //!

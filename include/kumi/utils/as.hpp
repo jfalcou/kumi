@@ -19,6 +19,9 @@ namespace kumi
   //!  via object instead of via template parameters. A specialisation is provided if T is void.
   //!
   //!  @tparam T Type to wrap
+  //!
+  //! ## Example:
+  //! @include doc/infra/as.cpp
   //====================================================================================================================
   template<typename T> struct as
   {
