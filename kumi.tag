@@ -190,13 +190,6 @@
       <arglist>(T &amp;&amp;v) const noexcept</arglist>
     </member>
     <member kind="friend">
-      <type>friend constexpr auto</type>
-      <name>operator==</name>
-      <anchorfile>structkumi_1_1identifier.html</anchorfile>
-      <anchor>a7283b3928ed02e43b815d0e949a0a8d1</anchor>
-      <arglist>(identifier const &amp;, I const &amp;)</arglist>
-    </member>
-    <member kind="friend">
       <type>friend constexpr str</type>
       <name>to_str</name>
       <anchorfile>structkumi_1_1identifier.html</anchorfile>
@@ -321,13 +314,6 @@
       <anchorfile>structkumi_1_1name_a5710487fd348040031b72d88e500cd08.html</anchorfile>
       <anchor>a5710487fd348040031b72d88e500cd08</anchor>
       <arglist>(T &amp;&amp;v) const noexcept</arglist>
-    </member>
-    <member kind="friend">
-      <type>friend constexpr auto</type>
-      <name>operator==</name>
-      <anchorfile>structkumi_1_1name.html</anchorfile>
-      <anchor>a2960e631cf51eb8016dcb27011a9a003</anchor>
-      <arglist>(name const &amp;, I const &amp;)</arglist>
     </member>
     <member kind="friend">
       <type>friend constexpr str</type>
@@ -1880,6 +1866,13 @@
       <anchorfile>group__utility_ga10f2338fc8867a50a4295325873f3de4.html</anchorfile>
       <anchor>ga10f2338fc8867a50a4295325873f3de4</anchor>
       <arglist>() noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr bool</type>
+      <name>operator==</name>
+      <anchorfile>namespacekumi.html</anchorfile>
+      <anchor>a79ad96867cb40b26d3f8929df3177aad</anchor>
+      <arglist>(L const &amp;, R const &amp;)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
