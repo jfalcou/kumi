@@ -19,6 +19,30 @@ template<typename T> struct flag : kumi::identifier<T>
   using kumi::identifier<T>::operator=;
 };
 
+struct weird_equality : kumi::identifier<weird_equality>
+{
+  using kumi::identifier<weird_equality>::operator=;
+
+  friend constexpr auto operator==(weird_equality const&, int) { return true; }
+};
+
+TTS_CASE("Check equality of identifiers")
+{
+  using namespace kumi::literals;
+
+  TTS_EXPECT_NOT((flag<int>{} == "any"_id));
+  TTS_EXPECT_NOT(("any"_id == flag<float>{}));
+  TTS_EXPECT_NOT((flag<float>{} == flag<int>{}));
+  TTS_EXPECT_NOT((flag<int>{} == flag<float>{}));
+
+  TTS_EXPECT((flag<int>{} == flag<int>{}));
+  TTS_EXPECT(("any"_id == "any"_id));
+
+  TTS_EXPECT((weird_equality{} == weird_equality{}));
+  TTS_EXPECT((weird_equality{} == 12));
+  TTS_EXPECT_NOT((weird_equality{} == flag<float>{}));
+};
+
 TTS_CASE("Check kumi::concepts::identifier concept")
 {
   using namespace kumi::literals;
