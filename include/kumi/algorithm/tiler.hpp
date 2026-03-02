@@ -59,7 +59,7 @@ namespace kumi
       constexpr auto idxs = _::tiler<size_v<T>, N, O>();
 
       auto const build = [&]<std::size_t Off, std::size_t... J>(index_t<Off>, std::index_sequence<J...>) {
-        using type = tuple<element_t<Off + J, T>...>;
+        using type = builder_make_t<T, element_t<Off + J, T>...>;
         return type{get<Off + J>(KUMI_FWD(t))...};
       };
 
@@ -114,7 +114,7 @@ namespace kumi
       constexpr auto idxs = _::tiler<size_v<T>, N, 1>();
 
       auto const build = [&]<std::size_t O, std::size_t... J>(index_t<O>, std::index_sequence<J...>) {
-        using type = tuple<element_t<O + J, T>...>;
+        using type = builder_make_t<T, element_t<O + J, T>...>;
         return type{get<O + J>(KUMI_FWD(t))...};
       };
 
@@ -171,7 +171,7 @@ namespace kumi
       constexpr auto idxs = _::tiler<size_v<T>, N, N>();
 
       auto const build = [&]<std::size_t O, std::size_t... J>(index_t<O>, std::index_sequence<J...>) {
-        using type = tuple<element_t<O + J, T>...>;
+        using type = builder_make_t<T, element_t<O + J, T>...>;
         return type{get<O + J>(KUMI_FWD(t))...};
       };
 
