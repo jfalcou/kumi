@@ -93,7 +93,7 @@ namespace kumi
   //! @note Nothing prevent the number of reordered index to be lesser or greater than t size or
   //!       the fact they can appear multiple times.
   //!
-  //! @tparam Indexes   A kumi::indexes representing the reindexed slot of the elements
+  //! @tparam Projections A kumi::indexes representing the reindexed slot of the elements
   //! @param  t kumi::product_type to reindex
   //! @return A potentially nested tuple following the Indexes order
   //!

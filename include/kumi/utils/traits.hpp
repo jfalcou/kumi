@@ -42,7 +42,7 @@ namespace kumi
       typename T::value_type;
       typename T::size_type;
 
-      { t.size() } -> kumi::convertible_to<std::size_t>;
+      { t.size() } -> std::convertible_to<std::size_t>;
       { t.begin() };
       { t.end() };
     };

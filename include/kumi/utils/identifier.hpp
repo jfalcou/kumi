@@ -185,6 +185,7 @@ namespace kumi
     template<auto N, typename... Ts> KUMI_ABI constexpr auto contains_field()
     {
       if constexpr (std::integral<std::remove_cvref_t<decltype(N)>>) return false;
+      else if constexpr (concepts::index<decltype(N)>) return false;
       else if constexpr (concepts::identifier<std::remove_cvref_t<decltype(N)>>) return false;
       else return can_get_field_by_value<name<N>, Ts...>;
     };

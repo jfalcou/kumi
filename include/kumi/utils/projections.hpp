@@ -11,10 +11,19 @@ namespace kumi
 {
   //================================================================================================
   //! @ingroup utility
-  //! @class  projection_map
-  //! @brief
+  //! @class   projection_map
+  //! @brief   A stateless, compile-time schema for product type transformation.
   //!
-  //! @note Can only contains integral constant, identifiers or other projection maps
+  //! kumi::projection_map reifies the act of indexing or member access into a first-class
+  //! type-level entity. It defines a sequence of accessors (projections) that can be applied
+  //! to any kumi::product_type to extract, reorder, or reshape its components.
+  //!
+  //! Because it is a "Meta-Product Type" (a product of accessors), it allows for complex
+  //! data manipulations (like zipping or partitioning) to be expressed as a single
+  //! Non-Type Template Parameter (NTTP).
+  //!
+  //! @note This type is stateless and carries zero runtime data.
+  //! @tparam V A pack of elements modeling kumi::concepts::projection.
   //================================================================================================
   template<concepts::projection... V> struct projection_map
   {
@@ -46,7 +55,7 @@ namespace kumi
     //==============================================================================================
 
     //==============================================================================================
-    //! @brief Extracts the Ith element from a kumi::indexes_t
+    //! @brief Extracts the Ith element from a kumi::projection_map
     //!
     //! @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
     //! @tparam  I Compile-time index of the element to access
@@ -95,12 +104,12 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup utility
-  //! @brief Creates a kumi::indexes object, deducing the target type from the types of arguments.
+  //! @brief Creates a kumi::projection_map object, deducing the target type from the types of arguments.
   //!
-  //! @note The arguments should model kumi::indexer
+  //! @note The arguments should model kumi::index
   //!
   //! @param ts	Zero or more indexes to construct the indexes from.
-  //! @return A kumi::indexes constructed from the ts
+  //! @return A kumi::projection_map constructed from the ts
   //================================================================================================
   template<concepts::index... Ts> [[nodiscard]] KUMI_ABI consteval auto indexes(Ts... ts) noexcept
   {
@@ -114,7 +123,7 @@ namespace kumi
   //! @note The arguments should model kumi::identifier
   //!
   //! @param ts	Zero or more indexes to construct the indexes from.
-  //! @return A kumi::indexes constructed from the ts
+  //! @return A kumi::projection_map constructed from the ts
   //================================================================================================
   template<concepts::identifier... Ts>
   requires(all_uniques_v<Ts...>)
