@@ -8,11 +8,12 @@
 
 int main()
 {
+  using namespace kumi::literals;
   auto values = kumi::tuple { 1, 'a', 0.1 };
 
-  constexpr auto basic = kumi::indexes(2,1,0);
-  constexpr auto stack = kumi::indexes(2,1,0, kumi::indexes(0,1,2));
-  constexpr auto pairs = kumi::indexes(kumi::indexes(0,0), kumi::indexes(1,1));
+  constexpr auto basic = kumi::indexes(2_c,1_c,0_c);
+  constexpr auto stack = kumi::projection_map(2_c,1_c,0_c, kumi::indexes(0_c,1_c,2_c));
+  constexpr auto pairs = kumi::projection_map(kumi::indexes(0_c,0_c), kumi::indexes(1_c,1_c));
   
   std::cout << values << "\n";
   std::cout << kumi::reindex<basic>(values) << "\n";

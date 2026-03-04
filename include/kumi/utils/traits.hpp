@@ -45,6 +45,11 @@ namespace kumi
       { t.size() } -> kumi::convertible_to<std::size_t>;
       { t.begin() };
       { t.end() };
+    };
+
+    /// Concept for container types providing access to a contiguous block of data
+    template<typename T>
+    concept contiguous_container_like = container_like<T> && requires(T const& t) {
       { t.data() };
     };
   }
@@ -163,32 +168,48 @@ namespace kumi
 {
   //================================================================================================
   //! @ingroup traits
-  //! @brief Traits detecting types behaving like a kumi::static_container.
+  //! @brief Traits detecting types behaving like a kumi::container.
   //!
-  //! To be treated like a static_container, a user defined type must expose a type and a
+  //! To be treated like a container, a user defined type must expose a type and a
   //! statically know size encoded in the type. It shall also provide general container utilities.
   //!
   //! @note The type shall be templated on the type and the size to be picked up.
   //!
   //! ## Helper value
   //! @code
-  //!   template<typename T> inline constexpr auto is_static_container = is_static_container<T>::value;
+  //!   template<typename T> inline constexpr auto is_container = is_container<T>::value;
   //! @endcode
   //! ## Example:
   //==============================================================================================
-  template<typename T> struct is_static_container : std::false_type
+  template<typename T> struct is_container : std::false_type
   {
+    using value_type = T;
+    using size = _::invalid;
+  };
+
+  template<typename T>
+  requires _::container_like<T>
+  struct is_container<T> : std::true_type
+  {
+    using value_type = typename T::value_type;
+    using size = _::invalid;
   };
 
   template<template<class, std::size_t> typename Container, typename T, std::size_t N>
   requires _::container_like<Container<T, N>> && (N != static_cast<std::size_t>(-1))
-  struct is_static_container<Container<T, N>> : std::true_type
+  struct is_container<Container<T, N>> : std::true_type
   {
     using value_type = T;
     using size = std::integral_constant<std::size_t, N>;
   };
 
-  template<typename T> inline constexpr auto is_static_container_v = is_static_container<T>::value;
+  template<typename T, std::size_t N> struct is_container<T[N]> : std::true_type
+  {
+    using value_type = T;
+    using size = std::integral_constant<std::size_t, N>;
+  };
+
+  template<typename T> inline constexpr auto is_container_v = is_container<T>::value;
 
   //================================================================================================
   //! @ingroup traits
@@ -201,7 +222,7 @@ namespace kumi
   //!   template<typename T> inline constexpr auto container_size_v = container_size<T>::value;
   //! @endcode
   //================================================================================================
-  template<typename T> struct container_size : is_static_container<std::remove_cvref_t<T>>::size
+  template<typename T> struct container_size : is_container<std::remove_cvref_t<T>>::size
   {
   };
 
@@ -221,8 +242,9 @@ namespace kumi
   //! }
   //! @endcode
   //================================================================================================
-  template<typename T> struct container_type : is_static_container<std::remove_cvref_t<T>>::value_type
+  template<typename T> struct container_type : is_container<std::remove_cvref_t<T>>
   {
+    using type = is_container<std::remove_cvref_t<T>>::value_type;
   };
 
   template<typename T> using container_type_t = typename container_type<T>::type;
@@ -232,7 +254,7 @@ namespace kumi
 {
   //================================================================================================
   //! @ingroup traits
-  //! @brief Detects if a given kwk::product_type instance is homogeneous
+  //! @brief Detects if a given kumi::product_type instance is homogeneous
   //!
   //! @tparam T kumi::product_type to inspect
   //!
@@ -258,7 +280,7 @@ namespace kumi
     {
       if constexpr (requires { T::is_homogeneous; }) return T::is_homogeneous;
       else if constexpr (is_record_type_v<T>) return false;
-      else if constexpr (is_static_container_v<T>) return true;
+      else if constexpr (is_container_v<T>) return true;
       else if constexpr (size_v<T> == 0) return false;
       else if constexpr (size_v<T> == 1) return true;
       else
@@ -274,7 +296,39 @@ namespace kumi
 
   //================================================================================================
   //! @ingroup traits
-  //! @brief Checks if a type can be used as a kumi::index_map
+  //! @brief Detects if a given kumi::container instance size is static
+  //!
+  //! @tparam T kumi::container to inspect
+  //!
+  //! ## Helper variable
+  //! @code
+  //! namespace kumi
+  //! {
+  //!   template<typename T>
+  //!   inline constexpr has_static_size_v = has_static_size<I,T>::value;
+  //! }
+  //! @endcode
+  //================================================================================================
+  template<typename T> struct has_static_size : std::false_type
+  {
+  };
+
+  template<typename T>
+  requires(_::contiguous_container_like<T>)
+  struct has_static_size<T>
+  {
+    static constexpr bool value = !std::same_as<typename is_container<T>::size, _::invalid>;
+  };
+
+  template<typename T, std::size_t N> struct has_static_size<T[N]> : std::true_type
+  {
+  };
+
+  template<typename T> inline constexpr auto has_static_size_v = has_static_size<T>::value;
+
+  //================================================================================================
+  //! @ingroup traits
+  //! @brief Checks if a type can be used as a kumi::projection_map
   //!
   //! @tparam T The type to inspect
   //!
@@ -282,13 +336,13 @@ namespace kumi
   //! @code
   //! namespace kumi
   //! {
-  //!   template<typename T> inline constexpr bool is_index_map_v = is_index_map<T>::value;
+  //!   template<typename T> inline constexpr bool is_projection_map_v = is_projection_map<T>::value;
   //! }
   //! @endcode
   //================================================================================================
-  template<typename T> inline constexpr auto is_index_map_v = requires { T::is_index_map; };
+  template<typename T> inline constexpr auto is_projection_map_v = requires { T::is_projection_map; };
 
-  template<typename T> struct is_index_map : std::bool_constant<is_index_map_v<T>>
+  template<typename T> struct is_projection_map : std::bool_constant<is_projection_map_v<T>>
   {
   };
 
@@ -450,10 +504,6 @@ namespace kumi
 
   template<typename... Ts> inline constexpr auto all_unique_names_v = all_unique_names_t<Ts...>::value;
 
-  // Forward declaration
-  template<typename... Ts> struct tuple;
-  template<typename... Ts> struct record;
-
   // A type with the tuple interface is automatically a product_type
   template<typename T>
   requires(_::std_tuple_compatible<T>)
@@ -463,7 +513,7 @@ namespace kumi
 
   // A static container with tuple interface is indeed a product_type
   template<typename T>
-  requires(is_static_container_v<T> && _::std_tuple_compatible<T>)
+  requires(is_container_v<T> && has_static_size_v<T> && _::std_tuple_compatible<T>)
   struct is_product_type<T> : std::true_type
   {
   };

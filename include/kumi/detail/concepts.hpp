@@ -9,10 +9,6 @@
 
 namespace kumi::_
 {
-  template<typename... Ts> struct type_list
-  {
-  };
-
   template<auto ID> struct value
   {
     using type = decltype(ID);
@@ -158,8 +154,8 @@ namespace kumi::_
   struct sort<Box<Ts...>, Box<Us...>> : check_value<Ts>...
   {
     using check_value<Ts>::get...;
-    using t_list = type_list<decltype(get(std::declval<Us>()))...>;
-    using u_list = type_list<decltype(get(std::declval<Us>()))...>;
+    using t_list = tuple<decltype(get(std::declval<Us>()))...>;
+    using u_list = tuple<decltype(get(std::declval<Us>()))...>;
 
     using is_fieldwise_constructible = is_piecewise_constructible<t_list, u_list>;
     using is_fieldwise_convertible = is_piecewise_convertible<t_list, u_list>;

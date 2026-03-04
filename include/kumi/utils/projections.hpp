@@ -11,18 +11,19 @@ namespace kumi
 {
   //================================================================================================
   //! @ingroup utility
-  //! @class indexes_t
-  //! @brief Compile time tuple of index used to pass several indexes_t as NTTP.
+  //! @class  projection_map
+  //! @brief
   //!
-  //! kumi::indexes_t provides a way to define compile time tuple of indexes_t.
+  //! @note Can only contains integral constant, identifiers or other projection maps
   //================================================================================================
-  template<concepts::indexer... V> struct indexes_t
+  template<concepts::projection... V> struct projection_map
   {
-    using binder_t = _::make_binder_t<std::make_integer_sequence<int, sizeof...(V)>, V...>;
+    static constexpr bool is_projection_map = true;
+    using type = tuple<V...>;
 
-    static constexpr bool is_index_map = true;
+    consteval projection_map() noexcept = default;
 
-    binder_t impl;
+    consteval explicit projection_map(V...) noexcept {};
 
     //==============================================================================================
     //! @name Properties
@@ -43,34 +44,29 @@ namespace kumi
     //! @name Accessors
     //! @{
     //==============================================================================================
-    /// Workaround to avoid depending on kumi::tuple and kumi::index_t
-    template<std::size_t I>
-    requires(I < sizeof...(V))
-    KUMI_ABI constexpr decltype(auto) get_index() const noexcept
-    {
-      return impl(std::integral_constant<std::size_t, I>{});
-    }
 
     //==============================================================================================
     //! @brief Extracts the Ith element from a kumi::indexes_t
     //!
     //! @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
-    //! @param  i Compile-time index of the element to access
+    //! @tparam  I Compile-time index of the element to access
     //! @return A copy of the value of the selected element of current indexes_t.
     //==============================================================================================
     template<std::size_t I>
     requires(I < sizeof...(V))
-    [[nodiscard]] KUMI_ABI friend constexpr decltype(auto) get(indexes_t& i) noexcept
+    [[nodiscard]] KUMI_ABI friend constexpr decltype(auto) get(projection_map&) noexcept
     {
-      return i.get_index<I>();
+      using ret_t = element_t<I, type>;
+      return ret_t{};
     }
 
     /// @overload
     template<std::size_t I>
     requires(I < sizeof...(V))
-    [[nodiscard]] KUMI_ABI friend constexpr decltype(auto) get(indexes_t const& i) noexcept
+    [[nodiscard]] KUMI_ABI friend constexpr decltype(auto) get(projection_map const&) noexcept
     {
-      return i.get_index<I>();
+      using ret_t = element_t<I, type>;
+      return ret_t{};
     }
 
     //==============================================================================================
@@ -78,15 +74,13 @@ namespace kumi
     //==============================================================================================
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os,
-                                                         indexes_t const& i) noexcept
+                                                         projection_map const& i) noexcept
     {
-      os << "( ";
+      os << '[';
       [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using std::get;
-        [[maybe_unused]] auto call = [&]<typename M>(M) { os << get<M::value>(i); };
-        (call(std::integral_constant<std::size_t, I>{}), ...);
-      }(std::make_index_sequence<sizeof...(V)>());
-      os << ")";
+        ((os << get<I>(i) << ", "), ...);
+      }(std::make_index_sequence<sizeof...(V) - 1>());
+      os << get<sizeof...(V) - 1>(i) << ']';
 
       return os;
     }
@@ -97,7 +91,7 @@ namespace kumi
   //! @brief kumi::indexes_t deduction guide
   //! @tparam Ts  Type lists to build the indexes with.
   //================================================================================================
-  template<concepts::indexer... Ts> KUMI_CUDA indexes_t(Ts...) -> indexes_t<Ts...>;
+  template<concepts::projection... Ts> KUMI_CUDA projection_map(Ts...) -> projection_map<Ts...>;
 
   //================================================================================================
   //! @ingroup utility
@@ -108,8 +102,24 @@ namespace kumi
   //! @param ts	Zero or more indexes to construct the indexes from.
   //! @return A kumi::indexes constructed from the ts
   //================================================================================================
-  template<concepts::indexer... Ts> [[nodiscard]] KUMI_ABI consteval auto indexes(Ts... ts) noexcept
+  template<concepts::index... Ts> [[nodiscard]] KUMI_ABI consteval auto indexes(Ts... ts) noexcept
   {
-    return indexes_t{ts...};
+    return projection_map{ts...};
+  }
+
+  //================================================================================================
+  //! @ingroup utility
+  //! @brief Creates a kumi::projection_map object, deducing the target type from the types of arguments.
+  //!
+  //! @note The arguments should model kumi::identifier
+  //!
+  //! @param ts	Zero or more indexes to construct the indexes from.
+  //! @return A kumi::indexes constructed from the ts
+  //================================================================================================
+  template<concepts::identifier... Ts>
+  requires(all_uniques_v<Ts...>)
+  [[nodiscard]] KUMI_ABI consteval auto identifiers(Ts... ts) noexcept
+  {
+    return projection_map{ts...};
   }
 }

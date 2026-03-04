@@ -9,30 +9,6 @@
 
 namespace kumi
 {
-
-  namespace _
-  {
-    template<concepts::index_map auto idxs, concepts::product_type T> consteval auto in_bound_indexes()
-    {
-      using map_t = std::remove_cvref_t<decltype(idxs)>;
-      if constexpr (concepts::sized_product_type<T, 0>) return false;
-      else if constexpr (concepts::sized_product_type<map_t, 0>) return true;
-      else
-        return []<std::size_t... N>(std::index_sequence<N...>) {
-          bool checks[] = {([]() {
-            if constexpr (concepts::product_type<element_t<N, map_t>>) return in_bound_indexes<get<N>(idxs), T>();
-            else if constexpr (static_cast<std::size_t>(get<N>(idxs)) < size_v<T>) return true;
-            else return false;
-          }())...};
-
-          for (std::size_t i = 0; i < idxs.size(); ++i)
-            if (!checks[i]) return false;
-
-          return true;
-        }(std::make_index_sequence<idxs.size()>{});
-    };
-  }
-
   //================================================================================================
   //! @ingroup generators
   //! @brief Reorder elements of a kumi::product_type
@@ -138,22 +114,30 @@ namespace kumi
   //! @include doc/tuple/algo/reindex.cpp
   //! @include doc/record/algo/reindex.cpp
   //================================================================================================
-  template<concepts::index_map auto Indexes, concepts::product_type T>
-  requires(_::in_bound_indexes<Indexes, T>())
+  template<concepts::projection_map auto Projections, concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto reindex(T&& t)
   {
-    using idx_t = std::remove_cvref_t<decltype(Indexes)>;
-    auto mk = [&]<auto Idx>() -> decltype(auto) {
-      if constexpr (concepts::product_type<decltype(Idx)>) return reindex<Idx>(KUMI_FWD(t));
-      else return get<Idx>(KUMI_FWD(t));
+    using proj_t = std::remove_cvref_t<decltype(Projections)>;
+    auto mk = [&]<auto proj>() -> decltype(auto) {
+      if constexpr (concepts::projection_map<decltype(proj)>) return reindex<proj>(KUMI_FWD(t));
+      else if constexpr (concepts::identifier<decltype(proj)>)
+      {
+        static_assert(requires { get<proj>(std::declval<T>()); }, "Label not present in reindex input type");
+        return get<proj>(KUMI_FWD(t));
+      }
+      else
+      {
+        static_assert(proj < size_v<T>, "Index out of bounds of reindex input type");
+        return get<proj>(KUMI_FWD(t));
+      }
     };
 
     if constexpr (concepts::sized_product_type<T, 0>) return builder<T>::make();
-    else if constexpr (concepts::sized_product_type<idx_t, 0>) return builder<T>::make();
+    else if constexpr (concepts::sized_product_type<proj_t, 0>) return builder<T>::make();
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return builder<T>::make(mk.template operator()<get<I>(Indexes)>()...);
-      }(std::make_index_sequence<size_v<idx_t>>{});
+        return builder<T>::make(mk.template operator()<get<I>(Projections)>()...);
+      }(std::make_index_sequence<size_v<proj_t>>{});
   }
 
   namespace result
@@ -168,7 +152,7 @@ namespace kumi
       using type = decltype(kumi::reorder_fields<Name...>(std::declval<Tuple>()));
     };
 
-    template<concepts::product_type T, concepts::index_map auto Indexes> struct reindex
+    template<concepts::product_type T, concepts::projection_map auto Indexes> struct reindex
     {
       using type = decltype(kumi::reindex<Indexes>(std::declval<T>()));
     };
@@ -178,7 +162,7 @@ namespace kumi
     template<concepts::product_type Tuple, concepts::identifier auto... Name>
     using reorder_fields_t = typename reorder_fields<Tuple, Name...>::type;
 
-    template<concepts::product_type T, concepts::index_map auto Indexes>
+    template<concepts::product_type T, concepts::projection_map auto Indexes>
     using reindex_t = typename reindex<T, Indexes>::type;
   }
 }

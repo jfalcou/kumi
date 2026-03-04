@@ -11,7 +11,7 @@ int main()
   using namespace kumi::literals;
   auto values = kumi::record { "a"_id = 1, "b"_id = 'a', "c"_id = 0.1 };
 
-  constexpr auto basic = kumi::indexes(2,1,0);
+  constexpr auto basic = kumi::indexes(2_c,1_c,0_c);
   
   std::cout << values << "\n";
   std::cout << kumi::reindex<basic>(values) << "\n";

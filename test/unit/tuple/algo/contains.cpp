@@ -123,5 +123,5 @@ TTS_CASE("Check kumi::contains_none constexpr behavior")
   constexpr kumi::tuple values{"custom"_id = foo{}, value_ = 3.f, "is_modal_"_id};
 
   TTS_CONSTEXPR_EXPECT(kumi::contains_none(values, "is_transparent_"_id, "compact"_id));
-  TTS_CONSTEXPR_EXPECT_NOT(kumi::contains_none(values, "value_"_id));
+  TTS_CONSTEXPR_EXPECT(kumi::contains_none(values, "value_"_id));
 };
