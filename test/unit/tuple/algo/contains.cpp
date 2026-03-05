@@ -8,6 +8,7 @@
 #define TTS_MAIN
 #include "test.hpp"
 #include <kumi/tuple.hpp>
+#include <kumi/algorithm/contains.hpp>
 #include <tts/tts.hpp>
 #include <string>
 

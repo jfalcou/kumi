@@ -7,7 +7,7 @@
 //==================================================================================================
 #define TTS_MAIN
 #include <kumi/tuple.hpp>
-#include <kumi/algorithm.hpp>
+#include <kumi/algorithm/cartesian_product.hpp>
 #include <tts/tts.hpp>
 #include <string>
 

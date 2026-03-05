@@ -7,7 +7,7 @@
 //==================================================================================================
 #define TTS_MAIN
 #include <kumi/tuple.hpp>
-#include <kumi/algorithm.hpp>
+#include <kumi/algorithm/generate.hpp>
 #include <tts/tts.hpp>
 
 constexpr auto t1 = [](auto& p) { return static_cast<int>(p); };

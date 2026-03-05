@@ -43,7 +43,9 @@ namespace kumi
   template<template<typename> typename Pred, concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto partition(T&& t) noexcept
   {
-    constexpr auto pos = _::selector<Pred, T>();
+    constexpr auto pos = []<std::size_t... I>(std::index_sequence<I...>) {
+      return _::selector(std::bool_constant<Pred<raw_element_t<I, T>>::value>{}...);
+    }(std::make_index_sequence<size_v<T>>{});
 
     auto select = [&]<typename O, std::size_t... I>(O, std::index_sequence<I...>) {
       using type = builder_make_t<T, element_t<pos.t[O::value + I], T>...>;
@@ -87,7 +89,10 @@ namespace kumi
   template<template<typename> typename Pred, concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto filter(T&& t) noexcept
   {
-    constexpr auto pos = _::selector<Pred, T>();
+    constexpr auto pos = []<std::size_t... I>(std::index_sequence<I...>) {
+      return _::selector(std::bool_constant<Pred<raw_element_t<I, T>>::value>{}...);
+    }(std::make_index_sequence<size_v<T>>{});
+
     if constexpr (concepts::empty_product_type<T>) return builder<T>::make();
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
@@ -129,7 +134,10 @@ namespace kumi
   template<template<typename> typename Pred, concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto filter_not(T&& t) noexcept
   {
-    constexpr auto pos = _::selector<Pred, T>();
+    constexpr auto pos = []<std::size_t... I>(std::index_sequence<I...>) {
+      return _::selector(std::bool_constant<Pred<raw_element_t<I, T>>::value>{}...);
+    }(std::make_index_sequence<size_v<T>>{});
+
     if constexpr (concepts::empty_product_type<T>) return builder<T>::make();
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {

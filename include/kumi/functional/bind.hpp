@@ -25,6 +25,6 @@ namespace kumi::_
 
   template<typename F, typename... Ts> KUMI_ABI constexpr auto bind(F&& f, Ts&&... ts)
   {
-    return [&] { return invoke(KUMI_FWD(f), KUMI_FWD(ts)...); };
+    return [&]() -> decltype(auto) { return invoke(KUMI_FWD(f), KUMI_FWD(ts)...); };
   }
 }

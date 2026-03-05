@@ -7,11 +7,8 @@
 //==================================================================================================
 #define TTS_MAIN
 #include <kumi/tuple.hpp>
-#include <kumi/algorithm.hpp>
+#include <kumi/algorithm/flatten.hpp>
 #include <tts/tts.hpp>
-
-#include <array>
-#include <vector>
 #include "test.hpp"
 
 TTS_CASE("Check result::flatten/flatten_all<Tuple> behavior")

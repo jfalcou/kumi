@@ -8,7 +8,7 @@
 //==================================================================================================
 #define TTS_MAIN
 #include <kumi/tuple.hpp>
-#include <kumi/algorithm.hpp>
+#include <kumi/algorithm/rotate.hpp>
 #include <tts/tts.hpp>
 
 TTS_CASE("Check result::rotate_right<R,Tuple> behavior")

@@ -8,7 +8,7 @@
 #define TTS_MAIN
 #include <array>
 #include <kumi/tuple.hpp>
-#include <kumi/algorithm.hpp>
+#include <kumi/algorithm/scan.hpp>
 #include <tts/tts.hpp>
 
 enum Direction

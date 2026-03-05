@@ -7,9 +7,8 @@
 //==================================================================================================
 #define TTS_MAIN
 #include <kumi/tuple.hpp>
-#include <kumi/algorithm.hpp>
+#include <kumi/algorithm/find.hpp>
 #include <tts/tts.hpp>
-#include <type_traits>
 
 TTS_CASE("kumi locate runtime behavior")
 {

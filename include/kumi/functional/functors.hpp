@@ -32,9 +32,10 @@ namespace kumi::_
     }
   };
 
-  template<std::size_t W, std::size_t H, std::size_t... S> struct cartesian_prod
+  struct cartesian_product_
   {
-    KUMI_ABI consteval auto operator()() const noexcept
+    template<std::size_t W, std::size_t H, std::size_t... S>
+    KUMI_ABI consteval auto operator()(index_t<W>, index_t<H>, index_t<S>...) const noexcept
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         _::digits<W, S...> dgt{};
@@ -49,48 +50,18 @@ namespace kumi::_
     }
   };
 
-  template<std::size_t W, std::size_t H, std::size_t... S>
-  inline constexpr cartesian_prod<W, H, S...> cartesian_producer{};
-
   //====================================================================================================================
-  template<std::size_t Sz, std::size_t Extent, std::size_t Stride> struct tiler_t
+  struct cat_
   {
-    static constexpr std::size_t nb_blocks = (Sz <= Extent) ? 1 : (Sz - Extent + Stride - 1) / Stride + 1;
-
-    static constexpr std::size_t block_size(std::size_t I)
-    {
-      std::size_t s = I * Stride;
-      return (s < Sz) ? ((s + Extent > Sz) ? (Sz - s) : Extent) : 0;
-    }
-
-    KUMI_ABI consteval auto operator()() const noexcept
+    template<std::size_t Count, std::size_t... Sizes>
+    KUMI_ABI consteval auto operator()(index_t<Count>, std::index_sequence<Sizes...>) const noexcept
     {
       struct
       {
-        std::size_t t[nb_blocks], s[nb_blocks], count = nb_blocks;
-      } that = {};
-
-      auto idxs = [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return ((that.t[I] = block_size(I), that.s[I] = I * Stride), ...);
-      };
-      idxs(std::make_index_sequence<nb_blocks>{});
-      return that;
-    }
-  };
-
-  template<std::size_t Size, std::size_t Extent, std::size_t Stride>
-  inline constexpr tiler_t<Size, Extent, Stride> tiler{};
-
-  //====================================================================================================================
-  template<std::size_t Count, std::size_t... Sizes> struct concatenater_t
-  {
-    KUMI_ABI consteval auto operator()() const noexcept
-    {
-      struct
-      {
-        std::size_t t[Count], e[Count];
+        std::size_t t[Count], e[Count], count = {};
       } that{};
 
+      that.count = Count;
       std::size_t k = 0, offset = 0;
 
       auto locate = [&]<std::size_t... I>(std::index_sequence<I...>) {
@@ -100,12 +71,81 @@ namespace kumi::_
       };
 
       (locate(std::make_index_sequence<Sizes>{}), ...);
+      return that;
+    }
+  };
+
+  struct flatten_ : cat_
+  {
+    using parent = cat_;
+
+    template<std::size_t... Sizes> KUMI_ABI consteval auto operator()(std::index_sequence<Sizes...> sz) const noexcept
+    {
+      return parent::operator()(index<(Sizes + ... + 1ULL)>, sz);
+    }
+  };
+
+  //====================================================================================================================
+  struct select_
+  {
+    template<bool... Bs> KUMI_ABI consteval auto operator()(std::bool_constant<Bs>...) const noexcept
+    {
+      struct
+      {
+        std::size_t count = {}, cut = {}, t[sizeof...(Bs)];
+      } that{};
+
+      auto locate = [&]<std::size_t... I>(std::index_sequence<I...>) {
+        ((Bs ? (that.t[that.count++] = I) : 0), ...);
+        that.cut = that.count;
+        ((!Bs ? (that.t[that.count++] = I) : 0), ...);
+      };
+
+      locate(std::make_index_sequence<sizeof...(Bs)>{});
+      return that;
+    }
+  };
+
+  //====================================================================================================================
+  struct zip_
+  {
+    template<std::size_t Count, std::size_t Size>
+    KUMI_ABI consteval auto operator()(index_t<Count>, index_t<Size>) const noexcept
+    {
+      struct
+      {
+        std::size_t t[Count * Size], e[Count * Size];
+      } that{};
+
+      std::size_t offset = 0;
+
+      auto locate = [&]<std::size_t... I>(auto k, std::index_sequence<I...>) {
+        (((that.t[I + offset] = I), (that.e[I + offset] = k)), ...);
+        offset += Count;
+      };
+
+      [&]<std::size_t... I>(std::index_sequence<I...>) {
+        (locate(index<I>, std::make_index_sequence<Count>{}), ...);
+      }(std::make_index_sequence<Size>{});
 
       return that;
     }
   };
 
-  template<std::size_t Count, std::size_t... Sizes> inline constexpr concatenater_t<Count, Sizes...> concatenater{};
+  //====================================================================================================================
+  template<typename T0, typename... Ts> consteval std::size_t min_size_v()
+  {
+    std::size_t result = size_v<T0>;
+    if constexpr (sizeof...(Ts) == 0) return result;
+    else return ((result = result < size_v<Ts> ? result : size_v<Ts>), ...);
+  };
+
+  template<typename T0, typename... Ts> consteval std::size_t max_size_v()
+  {
+    std::size_t result = size_v<T0>;
+    if constexpr (sizeof...(Ts) == 0) return result;
+    else return ((result = result > size_v<Ts> ? result : size_v<Ts>), ...);
+  };
 
   //====================================================================================================================
   template<typename T, auto> struct repeat
@@ -123,114 +163,6 @@ namespace kumi::_
   };
 
   template<typename T, auto N> using as_homogeneous_t = typename as_homogeneous<T, N>::type;
-
-  //====================================================================================================================
-  template<template<typename> typename Pred, concepts::product_type T> struct selector_t
-  {
-    KUMI_ABI consteval auto operator()() const noexcept
-    {
-      struct
-      {
-        std::size_t count = {}, cut = {}, t[1 + size_v<T>];
-      } that{};
-
-      auto locate = [&]<std::size_t... I>(std::index_sequence<I...>) {
-        ((Pred<raw_element_t<I, T>>::value ? (that.t[that.count++] = I) : I), ...);
-        that.cut = that.count;
-        ((!Pred<raw_element_t<I, T>>::value ? (that.t[that.count++] = I) : I), ...);
-      };
-
-      locate(std::make_index_sequence<size_v<T>>{});
-      return that;
-    }
-  };
-
-  template<template<typename> typename Pred, concepts::product_type T> inline constexpr selector_t<Pred, T> selector{};
-
-  //====================================================================================================================
-  template<std::size_t N> struct reducer_t
-  {
-    KUMI_ABI consteval auto operator()() const noexcept
-    {
-      constexpr std::size_t half = N / 2;
-
-      struct
-      {
-        std::size_t count = {}, remainder = {}, idx1[half], idx2[half];
-      } that{};
-
-      that.remainder = N % 2;
-
-      [&]<std::size_t... I>(std::index_sequence<I...>) {
-        ((that.idx1[that.count] = 2 * I, that.idx2[that.count++] = 2 * I + 1), ...);
-      }(std::make_index_sequence<half>{});
-
-      return that;
-    }
-  };
-
-  template<std::size_t N> inline constexpr reducer_t<N> reducer{};
-
-  //====================================================================================================================
-  template<std::size_t S, std::size_t R> struct rotate_t
-  {
-    KUMI_ABI consteval auto operator()() const noexcept
-    {
-      struct
-      {
-        std::size_t t[1 + S];
-      } that{};
-
-      auto idxs = [&]<std::size_t... I>(std::index_sequence<I...>) { ((that.t[I] = (I + R) % S), ...); };
-
-      idxs(std::make_index_sequence<S>{});
-      return that;
-    }
-  };
-
-  template<std::size_t S, std::size_t R> inline constexpr rotate_t<S, R> rotator{};
-
-  //====================================================================================================================
-  template<std::size_t Count, std::size_t Size> struct zipper_t
-  {
-    KUMI_ABI consteval auto operator()() const noexcept
-    {
-      struct
-      {
-        std::size_t t[Count * Size], e[Count * Size];
-      } that = {};
-
-      std::size_t offset = 0;
-
-      auto locate = [&]<std::size_t... I>(auto k, std::index_sequence<I...>) {
-        (((that.t[I + offset] = I), (that.e[I + offset] = k)), ...);
-        offset += Count;
-      };
-
-      [&]<std::size_t... I>(std::index_sequence<I...>) {
-        (locate(index<I>, std::make_index_sequence<Count>{}), ...);
-      }(std::make_index_sequence<Size>{});
-
-      return that;
-    }
-  };
-
-  template<std::size_t Count, std::size_t Size> inline constexpr zipper_t<Count, Size> zipper{};
-
-  //====================================================================================================================
-  template<typename T0, typename... Ts> consteval std::size_t min_size_v()
-  {
-    std::size_t result = size_v<T0>;
-    if constexpr (sizeof...(Ts) == 0) return result;
-    else return ((result = result < size_v<Ts> ? result : size_v<Ts>), ...);
-  };
-
-  template<typename T0, typename... Ts> consteval std::size_t max_size_v()
-  {
-    std::size_t result = size_v<T0>;
-    if constexpr (sizeof...(Ts) == 0) return result;
-    else return ((result = result > size_v<Ts> ? result : size_v<Ts>), ...);
-  };
 
   //====================================================================================================================
   template<typename T> struct make_unique
@@ -280,5 +212,11 @@ namespace kumi::_
     }
   };
 
+  inline constexpr cartesian_product_ cartesian_producer{};
+  inline constexpr cat_ concatenater{};
+  inline constexpr flatten_ flattener{};
+
+  inline constexpr select_ selector{};
   inline constexpr uniquable uniqued{};
+  inline constexpr zip_ zipper{};
 }

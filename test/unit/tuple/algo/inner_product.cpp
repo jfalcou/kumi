@@ -7,7 +7,7 @@
 //==================================================================================================
 #define TTS_MAIN
 #include <kumi/tuple.hpp>
-#include <kumi/algorithm.hpp>
+#include <kumi/algorithm/inner_product.hpp>
 #include <tts/tts.hpp>
 
 TTS_CASE("Check result::inner_product_t behavior")

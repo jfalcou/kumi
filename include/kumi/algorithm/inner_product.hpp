@@ -76,14 +76,14 @@ namespace kumi
         return (_::foldable{init} >> ... >>
                 _::bind_back(sum, invoke(prod, get<name_of<element_t<I, S1>>()>(KUMI_FWD(s1)),
                                          get<name_of<element_t<I, S1>>()>(KUMI_FWD(s2)))))();
-      }(std::make_index_sequence<size<S1>::value>());
+      }(std::make_index_sequence<size_v<S1>>{});
     }
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return (_::foldable{init} >> ... >>
                 _::bind_back(sum, invoke(prod, get<I>(KUMI_FWD(s1)), get<I>(KUMI_FWD(s2)))))();
-      }(std::make_index_sequence<size<S1>::value>());
+      }(std::make_index_sequence<size_v<S1>>{});
     }
   }
 
@@ -98,20 +98,20 @@ namespace kumi
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return (init + ... +
                 (get<name_of<element_t<I, S1>>()>(KUMI_FWD(s1)) * get<name_of<element_t<I, S1>>()>(KUMI_FWD(s2))));
-      }(std::make_index_sequence<size<S1>::value>());
+      }(std::make_index_sequence<size_v<S1>>{});
     }
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return (init + ... + (get<I>(KUMI_FWD(s1)) * get<I>(KUMI_FWD(s2))));
-      }(std::make_index_sequence<size<S1>::value>());
+      }(std::make_index_sequence<size_v<S1>>{});
     }
   }
 
   namespace result
   {
     template<concepts::product_type S1,
-             concepts::sized_product_type<S1::size()> S2,
+             concepts::sized_product_type<size_v<S1>> S2,
              typename T,
              typename Sum,
              typename Prod>
@@ -121,14 +121,14 @@ namespace kumi
         std::declval<S1>(), std::declval<S2>(), std::declval<T>(), std::declval<Sum>(), std::declval<Prod>()));
     };
 
-    template<concepts::product_type S1, concepts::sized_product_type<S1::size()> S2, typename T>
+    template<concepts::product_type S1, concepts::sized_product_type<size_v<S1>> S2, typename T>
     struct inner_product<S1, S2, T, void, void>
     {
       using type = decltype(kumi::inner_product(std::declval<S1>(), std::declval<S2>(), std::declval<T>()));
     };
 
     template<concepts::product_type S1,
-             concepts::sized_product_type<S1::size()> S2,
+             concepts::sized_product_type<size_v<S1>> S2,
              typename T,
              typename Sum = void,
              typename Prod = void>

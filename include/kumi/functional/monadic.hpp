@@ -56,20 +56,4 @@ namespace kumi::_
 
   template<class F, class V> scannable(F&& f, V&& v) -> scannable<F, std::unwrap_ref_decay_t<V>>;
 
-  //==============================================================================================
-  // Flatten helpers
-  //==============================================================================================
-  // template<typename F> struct flattenable
-  //{
-  //  F func;
-
-  //  template<typename C> KUMI_ABI friend constexpr decltype(auto) operator | (flattenable && m, C&& c)
-  //  {
-  //    return _::flattenable{ bind_front( std::move(m.func), invoke(KUMI_FWD(c)) };
-  //  }
-
-  //  KUMI_ABI constexpr decltype(auto) operator()() const noexcept { return invoke(func); }
-  //};
-
-  // template<class F> flattenable(F&& f) -> flattenable<F>;
 }
