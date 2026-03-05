@@ -8,7 +8,7 @@
 #define TTS_MAIN
 
 #include <kumi/tuple.hpp>
-#include <kumi/algorithm.hpp>
+#include <kumi/algorithm/reduce.hpp>
 #include <tts/tts.hpp>
 
 TTS_CASE("Check result::reduce_t with prod/sum/bit_* behavior")

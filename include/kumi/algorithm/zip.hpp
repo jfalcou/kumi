@@ -55,7 +55,7 @@ namespace kumi
     else
     {
       constexpr auto count = 1 + sizeof...(Ts);
-      constexpr auto pos = _::zipper<count, size_v<T0>>();
+      constexpr auto pos = _::zipper(index<count>, index<size_v<T0>>);
       using res_type = common_product_type_t<std::remove_cvref_t<T0>, std::remove_cvref_t<Ts>...>;
 
       auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>) {
@@ -122,7 +122,7 @@ namespace kumi
     else
     {
       constexpr std::size_t count = 1 + sizeof...(Ts);
-      constexpr auto pos = _::zipper<count, min>();
+      constexpr auto pos = _::zipper(index<count>, index<min>);
 
       using res_type = common_product_type_t<std::remove_cvref_t<T0>, std::remove_cvref_t<Ts>...>;
 
@@ -207,7 +207,7 @@ namespace kumi
     else
     {
       constexpr std::size_t count = 1 + sizeof...(Ts);
-      constexpr auto pos = _::zipper<count, max>();
+      constexpr auto pos = _::zipper(index<count>, index<max>);
       using res_type = common_product_type_t<std::remove_cvref_t<T0>, std::remove_cvref_t<Ts>...>;
 
       auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>) {

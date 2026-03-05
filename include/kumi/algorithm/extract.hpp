@@ -105,9 +105,9 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto split(T&& t, [[maybe_unused]] index_t<I0> i0) noexcept
   {
     static_assert(I0 <= size_v<T>, "[KUMI] - Invalid index");
-    auto select = [&]<typename O, std::size_t... I>(O, std::index_sequence<I...>) {
-      using type = builder_make_t<T, element_t<O::value + I, T>...>;
-      return type{get<O::value + I>(KUMI_FWD(t))...};
+    auto select = [&]<std::size_t... I>(auto O, std::index_sequence<I...>) {
+      using type = builder_make_t<T, element_t<O + I, T>...>;
+      return type{get<O + I>(KUMI_FWD(t))...};
     };
 
     return kumi::tuple{select(index<0>, std::make_index_sequence<I0>{}),

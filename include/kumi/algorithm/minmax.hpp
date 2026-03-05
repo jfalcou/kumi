@@ -120,120 +120,15 @@ namespace kumi
   //====================================================================================================================
   template<concepts::product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto max_flat(T&& t, F f) noexcept
   {
-    auto flat_t = kumi::flatten_all(KUMI_FWD(t));
-    return max(flat_t, f);
-  }
-
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the minimum value all elements of `t`.
-    @param t  Product Type to inspect
-    @return   The minimum value of all elements of `t`
-
-    ## Helper type
-    @code
-    namespace kumi
-    {
-      template<typename T> struct min;
-
-      template<typename T>
-      using min_t = typename min<T>::type;
-    }
-    @endcode
-
-    Computes the type returned by a call to kumi::min.
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/min.cpp
-    ### Record:
-    @include doc/record/algo/min.cpp
-  **/
-  //====================================================================================================================
-  template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto min(T&& t) noexcept
-  {
-    if constexpr (concepts::record_type<T>) return min(values_of(KUMI_FWD(t)));
-    else if constexpr (concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
+    if constexpr (concepts::empty_product_type<T>) return 0;
+    else if constexpr (concepts::record_type<T>) return max_flat(values_of(KUMI_FWD(t)), f);
     else
-    {
-      auto base = get<0>(KUMI_FWD(t));
-      return kumi::fold_left([]<typename U>(auto cur, U u) { return cur < u ? cur : u; }, KUMI_FWD(t), base);
-    }
-  }
-
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the minimum value of applications of `f` to all elements of `t`.
-    @param t  Product Type to inspect
-    @param f  Unary Callable object
-    @return   The minimum value of `f` over all elements of `t`
-
-    ## Helper type
-    @code
-    namespace kumi
-    {
-      template<typename T, typename F> struct min;
-
-      template<typename T, typename F>
-      using min_t = typename min<T, F>::type;
-    }
-    @endcode
-
-    Computes the type returned by a call to kumi::min.
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/min.cpp
-    ### Record:
-    @include doc/record/algo/min.cpp
-  **/
-  //====================================================================================================================
-  template<concepts::product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto min(T&& t, F f) noexcept
-  {
-    if constexpr (concepts::record_type<T>) return min(values_of(KUMI_FWD(t)), f);
-    else if constexpr (concepts::sized_product_type<T, 1>) return invoke(f, get<0>(KUMI_FWD(t)));
-    else
-    {
-      auto base = f(get<0>(KUMI_FWD(t)));
-      return kumi::fold_left([f]<typename U>(auto cur, U const& u) { return cur < invoke(f, u) ? cur : invoke(f, u); },
-                             KUMI_FWD(t), base);
-    }
-  }
-
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the minimum value of applications of `f` to all elements of kumi::flatten_all(t).
-    @param t  Product Type to inspect
-    @param f  Unary Callable object
-    @return   The minimum value of `f` over all elements of a flattened version of `t`
-
-    ## Helper type
-    @code
-    namespace kumi
-    {
-      template<typename T, typename F> struct min_flat;
-
-      template<typename T, typename F>
-      using min_flat_t = typename min_flat<T, F>::type;
-    }
-    @endcode
-
-    Computes the type returned by a call to kumi::min_flat.
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/min_flat.cpp
-    ### Record:
-    @include doc/record/algo/min_flat.cpp
-  **/
-  //====================================================================================================================
-  template<concepts::product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto min_flat(T&& t, F f) noexcept
-  {
-    auto flat_t = kumi::flatten_all(KUMI_FWD(t));
-    return min(flat_t, f);
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return max(make_tuple([&]<typename V>(V&& v) {
+          if constexpr (concepts::product_type<V>) return max_flat(KUMI_FWD(v), f);
+          else return invoke(f, v);
+        }(get<I>(KUMI_FWD(t)))...));
+      }(std::make_index_sequence<size_v<T>>{});
   }
 
   //================================================================================================
@@ -335,8 +230,15 @@ namespace kumi
   //================================================================================================
   template<concepts::product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto min_flat(T&& t, F f) noexcept
   {
-    auto flat_t = kumi::flatten_all(KUMI_FWD(t));
-    return min(flat_t, f);
+    if constexpr (concepts::empty_product_type<T>) return 0;
+    else if constexpr (concepts::record_type<T>) return min_flat(values_of(KUMI_FWD(t)), f);
+    else
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return min(make_tuple([&]<typename V>(V&& v) {
+          if constexpr (concepts::product_type<V>) return min_flat(KUMI_FWD(v), f);
+          else return invoke(f, v);
+        }(get<I>(KUMI_FWD(t)))...));
+      }(std::make_index_sequence<size_v<T>>{});
   }
 
   namespace result

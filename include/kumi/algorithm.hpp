@@ -38,9 +38,10 @@ namespace kumi
   //====================================================================================================================
 }
 
-#include <kumi/algorithm/meta.hpp>
+#include <kumi/functional.hpp>
+
 #include <kumi/algorithm/apply.hpp>
-#include <kumi/algorithm/back-front.hpp>
+#include <kumi/algorithm/back_front.hpp>
 #include <kumi/algorithm/cartesian_product.hpp>
 #include <kumi/algorithm/cast.hpp>
 #include <kumi/algorithm/cat.hpp>

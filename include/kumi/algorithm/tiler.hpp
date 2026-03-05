@@ -9,7 +9,6 @@
 
 namespace kumi
 {
-
   //====================================================================================================================
   /**
     @ingroup  generators
@@ -48,24 +47,22 @@ namespace kumi
     @include doc/record/algo/tiles.cpp
   **/
   //====================================================================================================================
-  template<std::size_t N, std::size_t O, concepts::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto tiles(T&& t)
+  template<std::size_t N, std::size_t O, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto tiles(T&& t)
   {
     static_assert(N > 0 && N <= size_v<T>, "[KUMI] - Invalid tile size");
-    
+
     if constexpr (N == size_v<T>) return kumi::make_tuple(t);
     else
     {
-      constexpr auto idxs = _::tiler<size_v<T>, N, O>();
-
-      auto const build = [&]<std::size_t Off, std::size_t... J>(index_t<Off>, std::index_sequence<J...>) {
+      constexpr auto proj = _::tiler(index<size_v<T>>, index<N>, index<O>);
+      auto const build = [&]<std::size_t... J>(auto Off, std::index_sequence<J...>) {
         using type = builder_make_t<T, element_t<Off + J, T>...>;
         return type{get<Off + J>(KUMI_FWD(t))...};
       };
 
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return tuple{build(index<idxs.s[I]>, std::make_index_sequence<idxs.t[I]>{})...};
-      }(std::make_index_sequence<idxs.count>{});
+      return [&]<std::size_t... B, std::size_t... E>(std::index_sequence<B...>, std::index_sequence<E...>) {
+        return tuple{build(index<E>, std::make_index_sequence<B>{})...};
+      }(proj.blocks, proj.offset);
     }
   }
 
@@ -111,16 +108,15 @@ namespace kumi
     if constexpr (N == size_v<T>) return kumi::make_tuple(t);
     else
     {
-      constexpr auto idxs = _::tiler<size_v<T>, N, 1>();
-
-      auto const build = [&]<std::size_t O, std::size_t... J>(index_t<O>, std::index_sequence<J...>) {
+      constexpr auto proj = _::tiler(index<size_v<T>>, index<N>, index<1>);
+      auto const build = [&]<std::size_t... J>(auto O, std::index_sequence<J...>) {
         using type = builder_make_t<T, element_t<O + J, T>...>;
         return type{get<O + J>(KUMI_FWD(t))...};
       };
 
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return tuple{build(index<idxs.s[I]>, std::make_index_sequence<idxs.t[I]>{})...};
-      }(std::make_index_sequence<idxs.count>{});
+      return [&]<std::size_t... B, std::size_t... E>(std::index_sequence<B...>, std::index_sequence<E...>) {
+        return tuple{build(index<E>, std::make_index_sequence<B>{})...};
+      }(proj.blocks, proj.offset);
     }
   }
 
@@ -168,16 +164,15 @@ namespace kumi
     if constexpr (N == size_v<T>) return kumi::make_tuple(t);
     else
     {
-      constexpr auto idxs = _::tiler<size_v<T>, N, N>();
-
-      auto const build = [&]<std::size_t O, std::size_t... J>(index_t<O>, std::index_sequence<J...>) {
+      constexpr auto proj = _::tiler(index<size_v<T>>, index<N>, index<N>);
+      auto const build = [&]<std::size_t... J>(auto O, std::index_sequence<J...>) {
         using type = builder_make_t<T, element_t<O + J, T>...>;
         return type{get<O + J>(KUMI_FWD(t))...};
       };
 
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return tuple{build(index<idxs.s[I]>, std::make_index_sequence<idxs.t[I]>{})...};
-      }(std::make_index_sequence<idxs.count>{});
+      return [&]<std::size_t... B, std::size_t... E>(std::index_sequence<B...>, std::index_sequence<E...>) {
+        return tuple{build(index<E>, std::make_index_sequence<B>{})...};
+      }(proj.blocks, proj.offset);
     }
   }
 
