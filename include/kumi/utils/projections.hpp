@@ -25,10 +25,9 @@ namespace kumi
   //! @note This type is stateless and carries zero runtime data.
   //! @tparam V A pack of elements modeling kumi::concepts::projection.
   //================================================================================================
-  template<concepts::projection... V> struct projection_map
+  template<typename... V> struct projection_map
   {
     static constexpr bool is_projection_map = true;
-    using type = tuple<V...>;
 
     consteval projection_map() noexcept = default;
 
@@ -53,6 +52,12 @@ namespace kumi
     //! @name Accessors
     //! @{
     //==============================================================================================
+    template<std::size_t I>
+    requires(I < sizeof...(V))
+    KUMI_ABI constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) const noexcept
+    {
+      return element_t<I, projection_map>{};
+    }
 
     //==============================================================================================
     //! @brief Extracts the Ith element from a kumi::projection_map
@@ -63,19 +68,9 @@ namespace kumi
     //==============================================================================================
     template<std::size_t I>
     requires(I < sizeof...(V))
-    [[nodiscard]] KUMI_ABI friend constexpr decltype(auto) get(projection_map&) noexcept
+    [[nodiscard]] KUMI_ABI friend constexpr decltype(auto) get(projection_map const& pm) noexcept
     {
-      using ret_t = element_t<I, type>;
-      return ret_t{};
-    }
-
-    /// @overload
-    template<std::size_t I>
-    requires(I < sizeof...(V))
-    [[nodiscard]] KUMI_ABI friend constexpr decltype(auto) get(projection_map const&) noexcept
-    {
-      using ret_t = element_t<I, type>;
-      return ret_t{};
+      return pm[index<I>];
     }
 
     //==============================================================================================
@@ -131,4 +126,15 @@ namespace kumi
   {
     return projection_map{ts...};
   }
+
+  //================================================================================================
+  // Specialisation to clearly signal errors due invalid projections
+  //================================================================================================
+  template<typename... Ts>
+  requires(!concepts::projection<Ts> && ...)
+  struct projection_map<Ts...>
+  {
+    static_assert((concepts::projection<Ts> && ...), "Invalid projections in projection_map definition");
+    projection_map(Ts&&...) = delete;
+  };
 }
