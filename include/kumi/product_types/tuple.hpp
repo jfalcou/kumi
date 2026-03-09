@@ -5,12 +5,7 @@
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
-#ifndef KUMI_TUPLE_HPP_INCLUDED
-#define KUMI_TUPLE_HPP_INCLUDED
-
-#include <kumi/fwd.hpp>
-#include <kumi/detail.hpp>
-#include <kumi/utils.hpp>
+#pragma once
 
 namespace kumi
 {
@@ -841,5 +836,3 @@ namespace kumi
     using type = kumi::tuple<>;
   };
 }
-
-#endif
