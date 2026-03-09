@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['get_0',['get',['../structkumi_1_1indexes__t_af7e9194b00d0255c68df6eeb401fafc3.html#af7e9194b00d0255c68df6eeb401fafc3',1,'kumi::indexes_t::get(indexes_t &amp;i) noexcept'],['../structkumi_1_1indexes__t.html#a6f1fb60dd1494676f71c8b75ad53a776',1,'kumi::indexes_t::get(indexes_t const &amp;i) noexcept']]]
+  ['get_0',['get',['../structkumi_1_1projection__map_a197ce3f55a71294cb619b65ba8d8cc89.html#a197ce3f55a71294cb619b65ba8d8cc89',1,'kumi::projection_map']]]
 ];

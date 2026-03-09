@@ -171,7 +171,7 @@ Helper type</h2>
 <div class="line">  <span class="keyword">template</span>&lt;product_type Tuple,std::size_t... Idx&gt;</div>
 <div class="line">  <span class="keyword">using </span>reorder_t = <span class="keyword">typename</span> <a class="code hl_function" href="#ga11fbe45a20286800b1d6ef15d7930d37">reorder</a>&lt;Tuple,Idx...&gt;::type;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__generators_ga11fbe45a20286800b1d6ef15d7930d37_html_ga11fbe45a20286800b1d6ef15d7930d37"><div class="ttname"><a href="#ga11fbe45a20286800b1d6ef15d7930d37">kumi::reorder</a></div><div class="ttdeci">constexpr auto reorder(T &amp;&amp;t)</div><div class="ttdoc">Reorder elements of a kumi::product_type.</div><div class="ttdef"><b>Definition</b> reorder.hpp:70</div></div>
+<div class="ttc" id="agroup__generators_ga11fbe45a20286800b1d6ef15d7930d37_html_ga11fbe45a20286800b1d6ef15d7930d37"><div class="ttname"><a href="#ga11fbe45a20286800b1d6ef15d7930d37">kumi::reorder</a></div><div class="ttdeci">constexpr auto reorder(T &amp;&amp;t)</div><div class="ttdoc">Reorder elements of a kumi::product_type.</div><div class="ttdef"><b>Definition</b> reorder.hpp:46</div></div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga11fbe45a20286800b1d6ef15d7930d37" title="Reorder elements of a kumi::product_type.">kumi::reorder</a></p>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md117"></a>
 Examples:</h2>
@@ -188,7 +188,7 @@ Examples:</h2>
 <div class="line">  std::cout &lt;&lt; kumi::reorder&lt;2,1,0,1,2&gt;(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; kumi::reorder&lt;1,1&gt;(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:29</div></div>
+<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:30</div></div>
 </div><!-- fragment --> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>

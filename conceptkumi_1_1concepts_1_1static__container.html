@@ -129,11 +129,12 @@ $(function(){initNavTree('conceptkumi_1_1concepts_1_1static__container.html','',
 <p><code>#include &lt;kumi/utils/concepts.hpp&gt;</code></p>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Concept specifying a type follows the Container Type semantic. </p>
-<p>A type <span class="tt">T</span> models <span class="tt">kumi::static_container</span> if it is an homogeneous container of fixed size. </p>
+<p>A type <span class="tt">T</span> models <span class="tt">kumi::container</span> if it is a /&zwj; </p>
 </div><h2 id="header-conceptdef" class="groupheader">Concept definition</h2>
 <div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line">    <span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1concepts_1_1static__container.html">static_container</a> = is_static_container_v&lt;std::remove_cvref_t&lt;T&gt;&gt;</div>
-<div class="ttc" id="aconceptkumi_1_1concepts_1_1static__container_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1static__container.html">kumi::concepts::static_container</a></div><div class="ttdoc">Concept specifying a type follows the Container Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:97</div></div>
+<div class="line">    <span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1concepts_1_1static__container.html">static_container</a> = <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1container.html">container&lt;T&gt;</a> &amp;&amp; has_static_size_v&lt;std::remove_cvref_t&lt;T&gt;&gt;</div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1container_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1container.html">kumi::concepts::container</a></div><div class="ttdoc">Concept specifying a type follows the Container Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:97</div></div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1static__container_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1static__container.html">kumi::concepts::static_container</a></div><div class="ttdoc">Concept specifying a type follows the Container Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:106</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

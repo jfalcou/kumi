@@ -93,7 +93,7 @@ $(function() { codefold.init(); });
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('structkumi_1_1container__type.html','',''); });
+$(function(){initNavTree('structkumi_1_1container__type.html','','structkumi_1_1container__type-members'); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -119,6 +119,8 @@ $(function(){initNavTree('structkumi_1_1container__type.html','',''); });
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="structkumi_1_1container__type-members.html">List of all members</a>  </div>
   <div class="headertitle"><div class="title">kumi::container_type&lt; T &gt; Struct Template Reference<div class="ingroups"><a class="el" href="group__traits.html">Tuple Related Traits</a></div></div></div>
 </div><!--header-->
 <div class="contents">
@@ -140,10 +142,9 @@ struct kumi::container_type&lt; T &gt;</div><p>Provides access to the type of th
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">using </span>container_type_t = <span class="keyword">typename</span> <a class="code hl_struct" href="structkumi_1_1container__type.html">container_type&lt;T&gt;::type</a>;</div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">using </span>container_type_t = <span class="keyword">typename</span> container_type&lt;T&gt;::type;</div>
 <div class="line">}</div>
 <div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
-<div class="ttc" id="astructkumi_1_1container__type_html"><div class="ttname"><a href="structkumi_1_1container__type.html">kumi::container_type</a></div><div class="ttdoc">Provides access to the type of the elements of a kumi::static_container.</div><div class="ttdef"><b>Definition</b> traits.hpp:225</div></div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

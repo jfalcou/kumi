@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::indexes_t&lt; V &gt; Class Template Reference</title>
+<title>kumi: kumi::projection_map::get</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -93,7 +93,7 @@ $(function() { codefold.init(); });
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('structkumi_1_1indexes__t.html','','structkumi_1_1indexes__t-members'); });
+$(function(){initNavTree('structkumi_1_1projection__map_a197ce3f55a71294cb619b65ba8d8cc89.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -118,46 +118,46 @@ $(function(){initNavTree('structkumi_1_1indexes__t.html','','structkumi_1_1index
 </div>
 </div>
 
-<div class="header">
-  <div class="summary">
-<a href="structkumi_1_1indexes__t-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">kumi::indexes_t&lt; V &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__utility.html">Helper Types and Functions</a></div></div></div>
-</div><!--header-->
 <div class="contents">
+<a id="a197ce3f55a71294cb619b65ba8d8cc89" name="a197ce3f55a71294cb619b65ba8d8cc89"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a197ce3f55a71294cb619b65ba8d8cc89">&#9670;&#160;</a></span>get</h2>
 
-<p>Compile time tuple of index used to pass several <a class="el" href="structkumi_1_1indexes__t.html" title="Compile time tuple of index used to pass several indexes_t as NTTP.">indexes_t</a> as NTTP.  
- <a href="#details">More...</a></p>
-
-<p><code>#include &lt;kumi/utils/indexes.hpp&gt;</code></p>
-<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;concepts::indexer... V&gt;<br />
-class kumi::indexes_t&lt; V &gt;</div><p>Compile time tuple of index used to pass several <a class="el" href="structkumi_1_1indexes__t.html" title="Compile time tuple of index used to pass several indexes_t as NTTP.">indexes_t</a> as NTTP. </p>
-<p><a class="el" href="structkumi_1_1indexes__t.html" title="Compile time tuple of index used to pass several indexes_t as NTTP.">kumi::indexes_t</a> provides a way to define compile time tuple of <a class="el" href="structkumi_1_1indexes__t.html" title="Compile time tuple of index used to pass several indexes_t as NTTP.">indexes_t</a>. </p>
-</div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr id="pub-static-methods-0" class="groupHeader"><td colspan="2"><div class="groupHeader">Properties</div></td></tr>
-<tr class="memitem:a6562f464b767bcc8b38b05ba378928b5" id="r_a6562f464b767bcc8b38b05ba378928b5"><td class="memItemLeft"><a id="a6562f464b767bcc8b38b05ba378928b5" name="a6562f464b767bcc8b38b05ba378928b5"></a>
-static constexpr auto&#160;</td><td class="memItemRight"><b>size</b> () noexcept</td></tr>
-<tr class="memdesc:a6562f464b767bcc8b38b05ba378928b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of elements in a <a class="el" href="structkumi_1_1indexes__t.html" title="Compile time tuple of index used to pass several indexes_t as NTTP.">kumi::indexes_t</a>. <br /></td></tr>
-<tr class="memitem:ae57341a487116b86f5d2f9a3a31607a4" id="r_ae57341a487116b86f5d2f9a3a31607a4"><td class="memItemLeft"><a id="ae57341a487116b86f5d2f9a3a31607a4" name="ae57341a487116b86f5d2f9a3a31607a4"></a>
-static constexpr auto&#160;</td><td class="memItemRight"><b>empty</b> () noexcept</td></tr>
-<tr class="memdesc:ae57341a487116b86f5d2f9a3a31607a4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <span class="tt">true</span> if a <a class="el" href="structkumi_1_1indexes__t.html" title="Compile time tuple of index used to pass several indexes_t as NTTP.">kumi::indexes_t</a> contains 0 elements. <br /></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-member-group" class="groupheader"><a id="member-group" name="member-group"></a>
-Accessors</h2></td></tr>
-<tr class="memitem:a646f17f5822b8a6638b039d814403af0" id="r_a646f17f5822b8a6638b039d814403af0"><td class="memTemplParams" colspan="2"><a id="a646f17f5822b8a6638b039d814403af0" name="a646f17f5822b8a6638b039d814403af0"></a>
-template&lt;std::size_t I&gt; </td></tr>
-<tr class="memitem:a646f17f5822b8a6638b039d814403af0 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><b>get_index</b> () const noexcept</td></tr>
-<tr class="memdesc:a646f17f5822b8a6638b039d814403af0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Workaround to avoid depending on <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> and <a class="el" href="structkumi_1_1index__t.html" title="Integral constant type.">kumi::index_t</a>. <br /></td></tr>
-<tr class="memitem:af7e9194b00d0255c68df6eeb401fafc3" id="r_af7e9194b00d0255c68df6eeb401fafc3"><td class="memTemplParams" colspan="2">template&lt;std::size_t I&gt; </td></tr>
-<tr class="memitem:af7e9194b00d0255c68df6eeb401fafc3 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1indexes__t_af7e9194b00d0255c68df6eeb401fafc3.html#af7e9194b00d0255c68df6eeb401fafc3">get</a> (<a class="el" href="structkumi_1_1indexes__t.html">indexes_t</a> &amp;i) noexcept</td></tr>
-<tr class="memdesc:af7e9194b00d0255c68df6eeb401fafc3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the Ith element from a <a class="el" href="structkumi_1_1indexes__t.html" title="Compile time tuple of index used to pass several indexes_t as NTTP.">kumi::indexes_t</a>.  <br /></td></tr>
-<tr class="memitem:a6f1fb60dd1494676f71c8b75ad53a776" id="r_a6f1fb60dd1494676f71c8b75ad53a776"><td class="memTemplParams" colspan="2"><a id="a6f1fb60dd1494676f71c8b75ad53a776" name="a6f1fb60dd1494676f71c8b75ad53a776"></a>
-template&lt;std::size_t I&gt; </td></tr>
-<tr class="memitem:a6f1fb60dd1494676f71c8b75ad53a776 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><b>get</b> (<a class="el" href="structkumi_1_1indexes__t.html">indexes_t</a> const &amp;i) noexcept</td></tr>
-<tr class="memdesc:a6f1fb60dd1494676f71c8b75ad53a776"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename... V&gt; </div>
+<div class="memtemplate">
+template&lt;std::size_t I&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) get </td>
+          <td>(</td>
+          <td class="paramtype">projection_map&lt; V &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>pm</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel friend">friend</span></span>  </td>
+  </tr>
 </table>
+</div><div class="memdoc">
+
+<p>Extracts the Ith element from a <a class="el" href="structkumi_1_1projection__map.html" title="A stateless, compile-time schema for product type transformation.">kumi::projection_map</a>. </p>
+<dl class="section note"><dt>Note</dt><dd>Does not participate in overload resolution if <span class="tt">I</span> is not in [0, sizeof...(Ts)). </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">I</td><td>Compile-time index of the element to access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A copy of the value of the selected element of current indexes_t. </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
@@ -165,7 +165,7 @@ template&lt;std::size_t I&gt; </td></tr>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="namespacekumi.html">kumi</a></li><li class="navelem"><a href="structkumi_1_1indexes__t.html">indexes_t</a></li>
+    <li class="navelem"><a href="namespacekumi.html">kumi</a></li><li class="navelem"><a href="structkumi_1_1projection__map.html">projection_map</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

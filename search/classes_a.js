@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['size_0',['size',['../structkumi_1_1size.html',1,'kumi']]],
-  ['str_1',['str',['../structkumi_1_1str.html',1,'kumi']]]
+  ['projection_5fmap_0',['projection_map',['../structkumi_1_1projection__map.html',1,'kumi']]]
 ];

@@ -82,6 +82,7 @@
     <name>kumi::container_type</name>
     <filename>structkumi_1_1container__type.html</filename>
     <templarg>typename T</templarg>
+    <base>kumi::is_container&lt; std::remove_cvref_t&lt; T &gt; &gt;</base>
   </compound>
   <compound kind="struct">
     <name>kumi::element</name>
@@ -171,6 +172,11 @@
     <templarg>typename... Fields</templarg>
   </compound>
   <compound kind="struct">
+    <name>kumi::has_static_size</name>
+    <filename>structkumi_1_1has__static__size.html</filename>
+    <templarg>typename T</templarg>
+  </compound>
+  <compound kind="struct">
     <name>kumi::identifier</name>
     <filename>structkumi_1_1identifier.html</filename>
     <templarg>typename ID</templarg>
@@ -237,59 +243,10 @@
       <arglist></arglist>
     </member>
   </compound>
-  <compound kind="class">
-    <name>kumi::indexes_t</name>
-    <filename>structkumi_1_1indexes__t.html</filename>
-    <templarg>concepts::indexer... V</templarg>
-    <member kind="function" static="yes">
-      <type>static constexpr auto</type>
-      <name>size</name>
-      <anchorfile>structkumi_1_1indexes__t.html</anchorfile>
-      <anchor>a6562f464b767bcc8b38b05ba378928b5</anchor>
-      <arglist>() noexcept</arglist>
-    </member>
-    <member kind="function" static="yes">
-      <type>static constexpr auto</type>
-      <name>empty</name>
-      <anchorfile>structkumi_1_1indexes__t.html</anchorfile>
-      <anchor>ae57341a487116b86f5d2f9a3a31607a4</anchor>
-      <arglist>() noexcept</arglist>
-    </member>
-    <member kind="function" static="yes">
-      <type>static constexpr auto</type>
-      <name>size</name>
-      <anchorfile>structkumi_1_1indexes__t.html</anchorfile>
-      <anchor>a6562f464b767bcc8b38b05ba378928b5</anchor>
-      <arglist>() noexcept</arglist>
-    </member>
-    <member kind="function" static="yes">
-      <type>static constexpr auto</type>
-      <name>empty</name>
-      <anchorfile>structkumi_1_1indexes__t.html</anchorfile>
-      <anchor>ae57341a487116b86f5d2f9a3a31607a4</anchor>
-      <arglist>() noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>get_index</name>
-      <anchorfile>structkumi_1_1indexes__t.html</anchorfile>
-      <anchor>a646f17f5822b8a6638b039d814403af0</anchor>
-      <arglist>() const noexcept</arglist>
-    </member>
-    <member kind="friend">
-      <type>friend constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>structkumi_1_1indexes__t_af7e9194b00d0255c68df6eeb401fafc3.html</anchorfile>
-      <anchor>af7e9194b00d0255c68df6eeb401fafc3</anchor>
-      <arglist>(indexes_t &amp;i) noexcept</arglist>
-    </member>
-    <member kind="friend">
-      <type>friend constexpr decltype(auto)</type>
-      <name>get</name>
-      <anchorfile>structkumi_1_1indexes__t.html</anchorfile>
-      <anchor>a6f1fb60dd1494676f71c8b75ad53a776</anchor>
-      <arglist>(indexes_t const &amp;i) noexcept</arglist>
-    </member>
+  <compound kind="struct">
+    <name>kumi::is_container</name>
+    <filename>structkumi_1_1is__container.html</filename>
+    <templarg>typename T</templarg>
   </compound>
   <compound kind="struct">
     <name>kumi::is_homogeneous</name>
@@ -306,11 +263,6 @@
     <filename>structkumi_1_1is__record__type.html</filename>
     <templarg>typename T</templarg>
     <templarg>typename Enable</templarg>
-  </compound>
-  <compound kind="struct">
-    <name>kumi::is_static_container</name>
-    <filename>structkumi_1_1is__static__container.html</filename>
-    <templarg>typename T</templarg>
   </compound>
   <compound kind="struct">
     <name>kumi::member</name>
@@ -364,6 +316,46 @@
       <anchorfile>structkumi_1_1numeric__prod.html</anchorfile>
       <anchor>a88d04ea20fb36bc95950974133d88454</anchor>
       <arglist></arglist>
+    </member>
+  </compound>
+  <compound kind="class">
+    <name>kumi::projection_map</name>
+    <filename>structkumi_1_1projection__map.html</filename>
+    <templarg>typename... V</templarg>
+    <member kind="function" static="yes">
+      <type>static constexpr auto</type>
+      <name>size</name>
+      <anchorfile>structkumi_1_1projection__map.html</anchorfile>
+      <anchor>aa201fda6e2720aef8e4a7ce8baee802e</anchor>
+      <arglist>() noexcept</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static constexpr auto</type>
+      <name>empty</name>
+      <anchorfile>structkumi_1_1projection__map.html</anchorfile>
+      <anchor>a09b37b6512103836987e98b7c0d75984</anchor>
+      <arglist>() noexcept</arglist>
+    </member>
+    <member kind="friend">
+      <type>friend constexpr decltype(auto)</type>
+      <name>get</name>
+      <anchorfile>structkumi_1_1projection__map_a197ce3f55a71294cb619b65ba8d8cc89.html</anchorfile>
+      <anchor>a197ce3f55a71294cb619b65ba8d8cc89</anchor>
+      <arglist>(projection_map const &amp;pm) noexcept</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static constexpr auto</type>
+      <name>size</name>
+      <anchorfile>structkumi_1_1projection__map.html</anchorfile>
+      <anchor>aa201fda6e2720aef8e4a7ce8baee802e</anchor>
+      <arglist>() noexcept</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static constexpr auto</type>
+      <name>empty</name>
+      <anchorfile>structkumi_1_1projection__map.html</anchorfile>
+      <anchor>a09b37b6512103836987e98b7c0d75984</anchor>
+      <arglist>() noexcept</arglist>
     </member>
   </compound>
   <compound kind="struct">
@@ -1131,12 +1123,20 @@
     <filename>structkumi_1_1unknown.html</filename>
   </compound>
   <compound kind="concept">
+    <name>kumi::_::contiguous_container_like</name>
+    <filename>conceptkumi_1_1___1_1contiguous__container__like.html</filename>
+  </compound>
+  <compound kind="concept">
     <name>kumi::_::std_tuple_compatible</name>
     <filename>conceptkumi_1_1___1_1std__tuple__compatible.html</filename>
   </compound>
   <compound kind="concept">
     <name>kumi::concepts::compatible_product_types</name>
     <filename>conceptkumi_1_1concepts_1_1compatible__product__types.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>kumi::concepts::container</name>
+    <filename>conceptkumi_1_1concepts_1_1container.html</filename>
   </compound>
   <compound kind="concept">
     <name>kumi::concepts::contains_field</name>
@@ -1183,12 +1183,8 @@
     <filename>conceptkumi_1_1concepts_1_1identifier.html</filename>
   </compound>
   <compound kind="concept">
-    <name>kumi::concepts::index_map</name>
-    <filename>conceptkumi_1_1concepts_1_1index__map.html</filename>
-  </compound>
-  <compound kind="concept">
-    <name>kumi::concepts::indexer</name>
-    <filename>conceptkumi_1_1concepts_1_1indexer.html</filename>
+    <name>kumi::concepts::index</name>
+    <filename>conceptkumi_1_1concepts_1_1index.html</filename>
   </compound>
   <compound kind="concept">
     <name>kumi::concepts::is_fully_named</name>
@@ -1213,6 +1209,14 @@
   <compound kind="concept">
     <name>kumi::concepts::product_type</name>
     <filename>conceptkumi_1_1concepts_1_1product__type.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>kumi::concepts::projection</name>
+    <filename>conceptkumi_1_1concepts_1_1projection.html</filename>
+  </compound>
+  <compound kind="concept">
+    <name>kumi::concepts::projection_map</name>
+    <filename>conceptkumi_1_1concepts_1_1projection__map.html</filename>
   </compound>
   <compound kind="concept">
     <name>kumi::concepts::record_type</name>
@@ -1267,17 +1271,18 @@
     <class kind="struct">kumi::element</class>
     <class kind="class">kumi::field</class>
     <class kind="struct">kumi::field&lt; Id, T &gt;</class>
+    <class kind="struct">kumi::has_static_size</class>
     <class kind="struct">kumi::identifier</class>
     <class kind="struct">kumi::index_t</class>
-    <class kind="class">kumi::indexes_t</class>
+    <class kind="struct">kumi::is_container</class>
     <class kind="struct">kumi::is_homogeneous</class>
     <class kind="struct">kumi::is_product_type</class>
     <class kind="struct">kumi::is_record_type</class>
-    <class kind="struct">kumi::is_static_container</class>
     <class kind="struct">kumi::member</class>
     <class kind="struct">kumi::name</class>
     <class kind="class">kumi::numeric_add</class>
     <class kind="class">kumi::numeric_prod</class>
+    <class kind="class">kumi::projection_map</class>
     <class kind="struct">kumi::raw_element</class>
     <class kind="struct">kumi::raw_member</class>
     <class kind="class">kumi::record</class>
@@ -1672,6 +1677,13 @@
       <arglist>()</arglist>
     </member>
     <member kind="function">
+      <type>consteval auto</type>
+      <name>identifiers</name>
+      <anchorfile>group__utility_ga39745d8d55ea398d3e77d719b5bf14f9.html</anchorfile>
+      <anchor>ga39745d8d55ea398d3e77d719b5bf14f9</anchor>
+      <arglist>(Ts... ts) noexcept</arglist>
+    </member>
+    <member kind="function">
       <type>constexpr auto</type>
       <name>inclusive_scan_left</name>
       <anchorfile>group__reductions_gab62658d582fe17a5824465ba5e669b26.html</anchorfile>
@@ -1705,13 +1717,6 @@
       <anchorfile>group__utility_gad9d978893c5e64520e0b0d83d133c26c.html</anchorfile>
       <anchor>gad9d978893c5e64520e0b0d83d133c26c</anchor>
       <arglist>(Ts... ts) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>KUMI_CUDA</type>
-      <name>indexes_t</name>
-      <anchorfile>group__utility_gaccc36e7b78d9da78548eebf22ea28492.html</anchorfile>
-      <anchor>gaccc36e7b78d9da78548eebf22ea28492</anchor>
-      <arglist>(Ts...) -&gt; indexes_t&lt; Ts... &gt;</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1931,6 +1936,13 @@
       <arglist>(T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
+      <type>KUMI_CUDA</type>
+      <name>projection_map</name>
+      <anchorfile>group__utility_ga3ba127205027539b3090467e2a504a24.html</anchorfile>
+      <anchor>ga3ba127205027539b3090467e2a504a24</anchor>
+      <arglist>(Ts...) -&gt; projection_map&lt; Ts... &gt;</arglist>
+    </member>
+    <member kind="function">
       <type>constexpr auto</type>
       <name>push_back</name>
       <anchorfile>group__generators_ga3044bdc0eeb7425a0462c98f0e6301f1.html</anchorfile>
@@ -2100,9 +2112,9 @@
     </member>
     <member kind="variable">
       <type>constexpr auto</type>
-      <name>is_index_map_v</name>
-      <anchorfile>group__traits_gab5b49ae5dceb172900933f69d976b933.html</anchorfile>
-      <anchor>gab5b49ae5dceb172900933f69d976b933</anchor>
+      <name>is_projection_map_v</name>
+      <anchorfile>group__traits_ga3a312d9c4dd445cbd5d152c6a02ca015.html</anchorfile>
+      <anchor>ga3a312d9c4dd445cbd5d152c6a02ca015</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -2461,10 +2473,10 @@
     <class kind="class">kumi::builder</class>
     <class kind="struct">kumi::identifier</class>
     <class kind="struct">kumi::index_t</class>
-    <class kind="class">kumi::indexes_t</class>
     <class kind="struct">kumi::name</class>
     <class kind="class">kumi::numeric_add</class>
     <class kind="class">kumi::numeric_prod</class>
+    <class kind="class">kumi::projection_map</class>
     <class kind="class">kumi::str</class>
     <class kind="class">kumi::unit</class>
     <class kind="struct">kumi::unknown</class>
@@ -2505,17 +2517,17 @@
     </member>
     <member kind="function">
       <type>consteval auto</type>
+      <name>kumi::identifiers</name>
+      <anchorfile>group__utility_ga39745d8d55ea398d3e77d719b5bf14f9.html</anchorfile>
+      <anchor>ga39745d8d55ea398d3e77d719b5bf14f9</anchor>
+      <arglist>(Ts... ts) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>consteval auto</type>
       <name>kumi::indexes</name>
       <anchorfile>group__utility_gad9d978893c5e64520e0b0d83d133c26c.html</anchorfile>
       <anchor>gad9d978893c5e64520e0b0d83d133c26c</anchor>
       <arglist>(Ts... ts) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>KUMI_CUDA</type>
-      <name>kumi::indexes_t</name>
-      <anchorfile>group__utility_gaccc36e7b78d9da78548eebf22ea28492.html</anchorfile>
-      <anchor>gaccc36e7b78d9da78548eebf22ea28492</anchor>
-      <arglist>(Ts...) -&gt; indexes_t&lt; Ts... &gt;</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
@@ -2579,6 +2591,13 @@
       <anchorfile>group__utility_ga9c8c29e8a2f4f5e8a663200559fdc983.html</anchorfile>
       <anchor>ga9c8c29e8a2f4f5e8a663200559fdc983</anchor>
       <arglist>() noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>KUMI_CUDA</type>
+      <name>kumi::projection_map</name>
+      <anchorfile>group__utility_ga3ba127205027539b3090467e2a504a24.html</anchorfile>
+      <anchor>ga3ba127205027539b3090467e2a504a24</anchor>
+      <arglist>(Ts...) -&gt; projection_map&lt; Ts... &gt;</arglist>
     </member>
     <member kind="variable">
       <type>constexpr boolean_and</type>
@@ -3339,6 +3358,7 @@
     <filename>group__concepts.html</filename>
     <concept>kumi::_::std_tuple_compatible</concept>
     <concept>kumi::concepts::compatible_product_types</concept>
+    <concept>kumi::concepts::container</concept>
     <concept>kumi::concepts::contains_field</concept>
     <concept>kumi::concepts::contains_type</concept>
     <concept>kumi::concepts::empty_product_type</concept>
@@ -3348,14 +3368,14 @@
     <concept>kumi::concepts::follows_same_semantic</concept>
     <concept>kumi::concepts::has_named_fields</concept>
     <concept>kumi::concepts::homogeneous_product_type</concept>
-    <concept>kumi::concepts::index_map</concept>
-    <concept>kumi::concepts::indexer</concept>
     <concept>kumi::concepts::is_fully_named</concept>
     <concept>kumi::concepts::monoid</concept>
     <concept>kumi::concepts::named_equality_comparable</concept>
     <concept>kumi::concepts::named_get_compliant</concept>
     <concept>kumi::concepts::non_empty_product_type</concept>
     <concept>kumi::concepts::product_type</concept>
+    <concept>kumi::concepts::projection</concept>
+    <concept>kumi::concepts::projection_map</concept>
     <concept>kumi::concepts::record_type</concept>
     <concept>kumi::concepts::sized_product_type</concept>
     <concept>kumi::concepts::sized_product_type_or_more</concept>
@@ -3376,19 +3396,20 @@
     <class kind="struct">kumi::container_size</class>
     <class kind="struct">kumi::container_type</class>
     <class kind="struct">kumi::element</class>
+    <class kind="struct">kumi::has_static_size</class>
+    <class kind="struct">kumi::is_container</class>
     <class kind="struct">kumi::is_homogeneous</class>
     <class kind="struct">kumi::is_product_type</class>
     <class kind="struct">kumi::is_record_type</class>
-    <class kind="struct">kumi::is_static_container</class>
     <class kind="struct">kumi::member</class>
     <class kind="struct">kumi::raw_element</class>
     <class kind="struct">kumi::raw_member</class>
     <class kind="struct">kumi::size</class>
     <member kind="variable">
       <type>constexpr auto</type>
-      <name>kumi::is_index_map_v</name>
-      <anchorfile>group__traits_gab5b49ae5dceb172900933f69d976b933.html</anchorfile>
-      <anchor>gab5b49ae5dceb172900933f69d976b933</anchor>
+      <name>kumi::is_projection_map_v</name>
+      <anchorfile>group__traits_ga3a312d9c4dd445cbd5d152c6a02ca015.html</anchorfile>
+      <anchor>ga3a312d9c4dd445cbd5d152c6a02ca015</anchor>
       <arglist></arglist>
     </member>
   </compound>
