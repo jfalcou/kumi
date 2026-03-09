@@ -36,7 +36,7 @@ namespace kumi
 #include <kumi/utils/identifier.hpp>
 #include <kumi/utils/monoid.hpp>
 
-#include <kumi/utils/indexes.hpp>
 #include <kumi/utils/ct_helpers.hpp>
+#include <kumi/utils/projections.hpp>
 
 #include <kumi/utils/std.hpp>

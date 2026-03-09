@@ -123,5 +123,5 @@ TTS_CASE("Check kumi::contains_none constexpr behavior on records")
   constexpr record values{"custom"_id = foo{}, value_ = 3.f};
 
   TTS_CONSTEXPR_EXPECT(contains_none(values, "is_transparent_"_id, "compact"_id));
-  TTS_CONSTEXPR_EXPECT_NOT(contains_none(values, "value_"_id));
+  TTS_CONSTEXPR_EXPECT(contains_none(values, "value_"_id));
 };

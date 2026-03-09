@@ -57,12 +57,12 @@ struct std::tuple_size<kumi::record<Ts...>> : std::integral_constant<std::size_t
 // Structured binding adaptation for index_map_t
 //==================================================================================================
 template<typename... V>
-struct std::tuple_size<kumi::indexes_t<V...>> : std::integral_constant<std::size_t, sizeof...(V)>
+struct std::tuple_size<kumi::projection_map<V...>> : std::integral_constant<std::size_t, sizeof...(V)>
 {
 };
 
 template<std::size_t I, typename... V>
-struct std::tuple_element<I, kumi::indexes_t<V...>> : std::tuple_element<I, kumi::tuple<V...>>
+struct std::tuple_element<I, kumi::projection_map<V...>> : std::tuple_element<I, kumi::tuple<V...>>
 {
 };
 

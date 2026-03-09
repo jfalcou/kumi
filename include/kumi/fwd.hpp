@@ -7,18 +7,11 @@
 //==================================================================================================
 #pragma once
 
-#if defined(__ANDROID__) || defined(__APPLE__)
-
 namespace kumi
 {
-  template<typename From, typename To>
-  concept convertible_to = std::is_convertible_v<From, To> && requires { static_cast<To>(std::declval<From>()); };
+  // Forward declarations
+  struct str;
+  template<typename... Ts> struct tuple;
+  template<typename... Ts> struct record;
+  template<typename... Ts> struct projection_map;
 }
-#else
-
-namespace kumi
-{
-  using std::convertible_to;
-}
-
-#endif

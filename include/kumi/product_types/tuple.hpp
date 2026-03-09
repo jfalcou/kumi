@@ -8,6 +8,7 @@
 #ifndef KUMI_TUPLE_HPP_INCLUDED
 #define KUMI_TUPLE_HPP_INCLUDED
 
+#include <kumi/fwd.hpp>
 #include <kumi/detail.hpp>
 #include <kumi/utils.hpp>
 

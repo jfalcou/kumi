@@ -94,7 +94,16 @@ namespace kumi
     //! A type `T` models `kumi::static_container` if it is an homogeneous container of fixed size.
     //================================================================================================
     template<typename T>
-    concept static_container = is_static_container_v<std::remove_cvref_t<T>>;
+    concept container = is_container_v<std::remove_cvref_t<T>>;
+
+    //================================================================================================
+    //! @ingroup concepts
+    //! @brief Concept specifying a type follows the Container Type semantic
+    //!
+    //! A type `T` models `kumi::container` if it is a /**/ container of fixed size.
+    //================================================================================================
+    template<typename T>
+    concept static_container = container<T> && has_static_size_v<std::remove_cvref_t<T>>;
 
     //================================================================================================
     //! @ingroup concepts
@@ -105,20 +114,30 @@ namespace kumi
     template<typename T>
     concept unit_type = (product_type<T> && (size_v<T> == 0)) || std::is_same_v<std::remove_cvref_t<T>, std::nullptr_t>;
 
-    //====================================================================================================================
+    //==================================================================================================================
+    //! @brief index concept
+    //!
+    //! An type modeling `kumi::index` is a compile time integral type containing a value member convertible to size_t
+    //==================================================================================================================
+    template<typename T>
+    concept index = requires(T const& t) {
+      { T::value } -> std::convertible_to<std::size_t>;
+    };
+
+    //==================================================================================================================
     //! @brief field concept
     //!
     //! A field type can be aggregated in a [record](@ref kumi::record) and be
     //! fetched later
-    //====================================================================================================================
+    //==================================================================================================================
     template<typename T>
     concept field = kumi::_::field<T>;
 
-    //====================================================================================================================
+    //==================================================================================================================
     //! @brief identifier concept
     //!
     //! An identifier type is able to be bound to a value as a [field](@ref kumi::field)
-    //====================================================================================================================
+    //==================================================================================================================
     template<typename T>
     concept identifier = kumi::_::identifier<T>;
 
@@ -164,22 +183,23 @@ namespace kumi
 
     //================================================================================================
     //! @ingroup concepts
-    //! @brief Concept specifying if a type can be used as sequence of indexes in algorithms
+    //! @brief Concept specifying if a type can be used as sequence of projections in algorithms
     //!
-    //! A type `T` models `kumi::index_map` if it models `kumi::product_type` and
-    //! contains members which are themselves either integral types or others `index_map`
+    //! A type `T` models `kumi::projection_map` if it models `kumi::product_type` and
+    //! contains members which are themselves either integral types, identifiers or others `projection_map`
     //================================================================================================
     template<typename T>
-    concept index_map = product_type<T> && is_index_map_v<std::remove_cvref_t<T>>;
+    concept projection_map = product_type<T> && is_projection_map_v<std::remove_cvref_t<T>>;
 
     //================================================================================================
     //! @ingroup concepts
-    //! @brief Concept specifying if a type is suitable as an index
+    //! @brief Concept specifying if a type is suitable to be used as a projection
     //!
-    //! A type `T` models `kumi::indexer` if it models `kumi::index_map` or `std::is_integral`
+    //! A type `T` models `kumi::projection` if it models `kumi::projection_map` or `kumi::index`
+    //! or `kumi::identifier`
     //================================================================================================
     template<typename T>
-    concept indexer = index_map<T> || std::integral<std::remove_cvref_t<T>>;
+    concept projection = projection_map<T> || identifier<T> || index<T>;
 
     //================================================================================================
     //! @ingroup concepts
