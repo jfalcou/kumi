@@ -10,7 +10,7 @@ var searchData=
   ['product_5ftypes_20classes_7',['Product_types Classes',['../group__product__types.html',1,'']]],
   ['projection_8',['projection',['../conceptkumi_1_1concepts_1_1projection.html',1,'kumi::concepts']]],
   ['projection_5fmap_9',['projection_map',['../structkumi_1_1projection__map.html',1,'kumi::projection_map&lt; V &gt;'],['../conceptkumi_1_1concepts_1_1projection__map.html',1,'kumi::concepts'],['../group__utility_ga3ba127205027539b3090467e2a504a24.html#ga3ba127205027539b3090467e2a504a24',1,'kumi::projection_map()']]],
-  ['public_20release_10',['First autonomous public release.',['../changelog.html#autotoc_md232',1,'']]],
+  ['public_20release_10',['First autonomous public release.',['../changelog.html#autotoc_md236',1,'']]],
   ['push_5fback_11',['push_back',['../group__generators_ga3044bdc0eeb7425a0462c98f0e6301f1.html#ga3044bdc0eeb7425a0462c98f0e6301f1',1,'kumi']]],
   ['push_5ffront_12',['push_front',['../group__generators_ga8f969f49a94fb50a8cb6bf27bf78b6b7.html#ga8f969f49a94fb50a8cb6bf27bf78b6b7',1,'kumi']]]
 ];

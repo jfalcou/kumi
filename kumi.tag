@@ -1761,6 +1761,13 @@
       <arglist>(Tuple &amp;&amp;t, Pred p) noexcept</arglist>
     </member>
     <member kind="function">
+      <type>consteval auto</type>
+      <name>make_indexes</name>
+      <anchorfile>group__utility_gadba148c334bcf52088dc64992c270fdd.html</anchorfile>
+      <anchor>gadba148c334bcf52088dc64992c270fdd</anchor>
+      <arglist>() noexcept</arglist>
+    </member>
+    <member kind="function">
       <type>constexpr auto</type>
       <name>map</name>
       <anchorfile>group__transforms_ga5fb0d0c6af4d4c1a814e5bf746f8201a.html</anchorfile>
@@ -2542,6 +2549,13 @@
       <anchorfile>group__utility_ga81fb4720ada9b1bff437c3340fcc98b0.html</anchorfile>
       <anchor>ga81fb4720ada9b1bff437c3340fcc98b0</anchor>
       <arglist>(C &amp;&amp;c, Ts &amp;&amp;... ts) noexcept(std::is_nothrow_invocable_r&lt; R, C, Ts... &gt;::value)</arglist>
+    </member>
+    <member kind="function">
+      <type>consteval auto</type>
+      <name>kumi::make_indexes</name>
+      <anchorfile>group__utility_gadba148c334bcf52088dc64992c270fdd.html</anchorfile>
+      <anchor>gadba148c334bcf52088dc64992c270fdd</anchor>
+      <arglist>() noexcept</arglist>
     </member>
     <member kind="function">
       <type>consteval str</type>

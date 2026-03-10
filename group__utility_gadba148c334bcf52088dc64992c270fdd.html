@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::reorder_fields</title>
+<title>kumi: kumi::make_indexes</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -93,7 +93,7 @@ $(function() { codefold.init(); });
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('group__generators_ga86a5aaefb0718b80b2103bf9dc8e3b23.html','',''); });
+$(function(){initNavTree('group__utility_gadba148c334bcf52088dc64992c270fdd.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -119,74 +119,60 @@ $(function(){initNavTree('group__generators_ga86a5aaefb0718b80b2103bf9dc8e3b23.h
 </div>
 
 <div class="contents">
-<a id="ga86a5aaefb0718b80b2103bf9dc8e3b23" name="ga86a5aaefb0718b80b2103bf9dc8e3b23"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga86a5aaefb0718b80b2103bf9dc8e3b23">&#9670;&#160;</a></span>reorder_fields()</h2>
+<a id="gadba148c334bcf52088dc64992c270fdd" name="gadba148c334bcf52088dc64992c270fdd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gadba148c334bcf52088dc64992c270fdd">&#9670;&#160;</a></span>make_indexes()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;concepts::identifier auto... Name, concepts::product_type Tuple&gt; </div>
+template&lt;std::convertible_to&lt; std::size_t &gt; auto... vs&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto kumi::reorder_fields </td>
+          <td class="memname">auto kumi::make_indexes </td>
           <td>(</td>
-          <td class="paramtype">Tuple &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel consteval">consteval</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Reorder elements of a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields necessarily named, names are unique.">kumi::record</a>. </p>
-<p>This function does not participate in overload resolution if the names are not in T</p>
-<dl class="section note"><dt>Note</dt><dd>Nothing prevent the number of reordered names to be lesser or greater than t size or the fact they can appear multiple times if it is applied on a named tuple.</dd></dl>
+<p>Creates a <a class="el" href="structkumi_1_1projection__map.html" title="A stateless, compile-time schema for product type transformation.">kumi::projection_map</a> object, deducing the target type from the types of arguments. </p>
+<dl class="section note"><dt>Note</dt><dd>The arguments should model <a class="el" href="group__utility.html#ga32a67892e5dbfb93a2292959a5a029d0" title="Inline integral constant value for kumi::index_t.">kumi::index</a></dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Name</td><td>Reordered names of elements </td></tr>
+    <tr><td class="paramname">vs</td><td>Zero or more values convertible to size_t to construct the indexes from. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">t</td><td>kumi::product_type to reorder </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A product type equivalent to product_type(t[index&lt;Idx&gt;]...);</dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md118"></a>
-Helper type</h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;product_type Tuple,std::size_t... Idx&gt; <span class="keyword">struct </span><a class="code hl_function" href="#ga86a5aaefb0718b80b2103bf9dc8e3b23">reorder_fields</a>;</div>
-<div class="line"> </div>
-<div class="line">  <span class="keyword">template</span>&lt;product_type Tuple,std::size_t... Idx&gt;</div>
-<div class="line">  <span class="keyword">using </span>reorder_fields_t = <span class="keyword">typename</span> <a class="code hl_function" href="#ga86a5aaefb0718b80b2103bf9dc8e3b23">reorder_fields</a>&lt;Tuple,Idx...&gt;::type;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__generators_ga86a5aaefb0718b80b2103bf9dc8e3b23_html_ga86a5aaefb0718b80b2103bf9dc8e3b23"><div class="ttname"><a href="#ga86a5aaefb0718b80b2103bf9dc8e3b23">kumi::reorder_fields</a></div><div class="ttdeci">constexpr auto reorder_fields(Tuple &amp;&amp;t)</div><div class="ttdoc">Reorder elements of a kumi::record.</div><div class="ttdef"><b>Definition</b> reorder.hpp:82</div></div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga86a5aaefb0718b80b2103bf9dc8e3b23" title="Reorder elements of a kumi::record.">kumi::reorder_fields</a></p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md119"></a>
-Example</h2>
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structkumi_1_1projection__map.html" title="A stateless, compile-time schema for product type transformation.">kumi::projection_map</a> constructed from the vs</dd></dl>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md193"></a>
+Examples:</h2>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_class" href="structkumi_1_1projection__map.html">kumi::projection_map</a>{0_c, <span class="stringliteral">&quot;a&quot;</span>_id} &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_class" href="structkumi_1_1projection__map.html">kumi::projection_map</a>{0_c, 1_c, <a class="code hl_class" href="structkumi_1_1projection__map.html">kumi::projection_map</a>{2_c, 3_c}} &lt;&lt; <span class="stringliteral">&quot;\n\n&quot;</span>; </div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> values = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> { <span class="stringliteral">&quot;a&quot;</span>_id = 1, <span class="stringliteral">&quot;b&quot;</span>_id = <span class="charliteral">&#39;a&#39;</span>, <span class="stringliteral">&quot;c&quot;</span>_id = 0.1 };</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; values &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#ga86a5aaefb0718b80b2103bf9dc8e3b23">kumi::reorder_fields</a>&lt;<span class="stringliteral">&quot;b&quot;</span>_id,<span class="stringliteral">&quot;a&quot;</span>_id,<span class="stringliteral">&quot;c&quot;</span>_id&gt;(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="comment">// Projections maps can be built from functions in simpler cases </span></div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad9d978893c5e64520e0b0d83d133c26c.html#gad9d978893c5e64520e0b0d83d133c26c">kumi::indexes</a>(0_c, 1_c, 2_c) &lt;&lt; <span class="stringliteral">&quot;\n\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_ga39745d8d55ea398d3e77d719b5bf14f9.html#ga39745d8d55ea398d3e77d719b5bf14f9">kumi::identifiers</a>(<span class="stringliteral">&quot;a&quot;</span>_id, <span class="stringliteral">&quot;b&quot;</span>_id) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous fields necessarily named, names are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:26</div></div>
+<div class="ttc" id="agroup__utility_ga39745d8d55ea398d3e77d719b5bf14f9_html_ga39745d8d55ea398d3e77d719b5bf14f9"><div class="ttname"><a href="group__utility_ga39745d8d55ea398d3e77d719b5bf14f9.html#ga39745d8d55ea398d3e77d719b5bf14f9">kumi::identifiers</a></div><div class="ttdeci">consteval auto identifiers(Ts... ts) noexcept</div><div class="ttdoc">Creates a kumi::projection_map object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> projections.hpp:151</div></div>
+<div class="ttc" id="agroup__utility_gad9d978893c5e64520e0b0d83d133c26c_html_gad9d978893c5e64520e0b0d83d133c26c"><div class="ttname"><a href="group__utility_gad9d978893c5e64520e0b0d83d133c26c.html#gad9d978893c5e64520e0b0d83d133c26c">kumi::indexes</a></div><div class="ttdeci">consteval auto indexes(Ts... ts) noexcept</div><div class="ttdoc">Creates a kumi::projection_map object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> projections.hpp:115</div></div>
+<div class="ttc" id="astructkumi_1_1projection__map_html"><div class="ttname"><a href="structkumi_1_1projection__map.html">kumi::projection_map</a></div><div class="ttdoc">A stateless, compile-time schema for product type transformation.</div><div class="ttdef"><b>Definition</b> projections.hpp:32</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

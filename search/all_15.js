@@ -13,7 +13,7 @@ var searchData=
   ['reindex_10',['reindex',['../group__generators_ga0e43e02e9a4a7fea31b620b2dcb4b48a.html#ga0e43e02e9a4a7fea31b620b2dcb4b48a',1,'kumi']]],
   ['related_20concepts_11',['Tuple Related Concepts',['../group__concepts.html',1,'']]],
   ['related_20traits_12',['Tuple Related Traits',['../group__traits.html',1,'']]],
-  ['release_13',['First autonomous public release.',['../changelog.html#autotoc_md232',1,'']]],
+  ['release_13',['First autonomous public release.',['../changelog.html#autotoc_md236',1,'']]],
   ['reorder_14',['reorder',['../group__generators_ga11fbe45a20286800b1d6ef15d7930d37.html#ga11fbe45a20286800b1d6ef15d7930d37',1,'kumi']]],
   ['reorder_5ffields_15',['reorder_fields',['../group__generators_ga86a5aaefb0718b80b2103bf9dc8e3b23.html#ga86a5aaefb0718b80b2103bf9dc8e3b23',1,'kumi']]],
   ['reverse_16',['reverse',['../group__generators_ga49abf24bfdc3e6c8707cd321d9015212.html#ga49abf24bfdc3e6c8707cd321d9015212',1,'kumi']]],
