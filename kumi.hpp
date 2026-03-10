@@ -5,7 +5,8 @@
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
-#pragma once
+#ifndef KUMI_HPP_INCLUDED
+#define KUMI_HPP_INCLUDED
 namespace kumi
 {
   struct str;
@@ -1348,6 +1349,10 @@ namespace kumi
   template<concepts::index... Ts> [[nodiscard]] KUMI_ABI consteval auto indexes(Ts... ts) noexcept
   {
     return projection_map{ts...};
+  }
+  template<std::convertible_to<std::size_t> auto... vs> [[nodiscard]] KUMI_ABI consteval auto make_indexes() noexcept
+  {
+    return projection_map{index<vs>...};
   }
   template<concepts::identifier... Ts>
   requires(all_uniques_v<Ts...>)
@@ -4007,3 +4012,4 @@ namespace kumi
     using zip_max_t = typename zip_max<T0, Ts...>::type;
   }
 }
+#endif
