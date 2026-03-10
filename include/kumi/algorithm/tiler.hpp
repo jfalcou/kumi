@@ -38,10 +38,9 @@ namespace kumi
   //! @include doc/tuple/algo/windows.cpp
   //! @include doc/record/algo/windows.cpp
   //================================================================================================
-  template<std::size_t N, concepts::product_type T>
-  requires(N > 0 && N <= size_v<T>)
-  [[nodiscard]] KUMI_ABI constexpr auto windows(T&& t)
+  template<std::size_t N, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto windows(T&& t)
   {
+    static_assert(N > 0 && N <= size_v<T>, "[KUMI] - Invalid tile size");
     if constexpr (N == size_v<T>) return kumi::make_tuple(t);
     else
       return kumi::generate<size_v<T> - N + 1>(
@@ -78,10 +77,9 @@ namespace kumi
   //! @include doc/tuple/algo/chunks.cpp
   //! @include doc/record/algo/chunks.cpp
   //================================================================================================
-  template<std::size_t N, concepts::product_type T>
-  requires(N > 0 && N <= size_v<T>)
-  [[nodiscard]] KUMI_ABI constexpr auto chunks(T&& t)
+  template<std::size_t N, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto chunks(T&& t)
   {
+    static_assert(N > 0 && N <= size_v<T>, "[KUMI] - Invalid tile size");
     constexpr auto nb = (size_v<T> + N - 1) / N;
     constexpr auto sz = size_v<T>;
 

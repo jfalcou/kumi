@@ -21,10 +21,10 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<product_type Tuple, typename T> struct push_front;
+  //!   template<product_type T, typename V> struct push_front;
   //!
-  //!   template<product_type Tuple, typename T>
-  //!   using push_front_t = typename push_front<Tuples...>::type;
+  //!   template<product_type T, typename V>
+  //!   using push_front_t = typename push_front<T,V>::type;
   //! }
   //! @endcode
   //!
@@ -34,11 +34,11 @@ namespace kumi
   //! @include doc/tuple/algo/push_front.cpp
   //! @include doc/record/algo/push_front.cpp
   //================================================================================================
-  template<concepts::product_type Tuple, typename T> [[nodiscard]] KUMI_ABI constexpr auto push_front(Tuple&& t, T&& v)
+  template<concepts::product_type T, typename V> [[nodiscard]] KUMI_ABI constexpr auto push_front(T&& t, V&& v)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return builder<Tuple>::make(KUMI_FWD(v), get<I>(KUMI_FWD(t))...);
-    }(std::make_index_sequence<size_v<Tuple>>());
+      return builder<T>::make(KUMI_FWD(v), get<I>(KUMI_FWD(t))...);
+    }(std::make_index_sequence<size_v<T>>());
   }
 
   //================================================================================================
@@ -52,10 +52,10 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<product_type Tuple> struct pop_front;
+  //!   template<product_type T> struct pop_front;
   //!
-  //!   template<product_type Tuple>
-  //!   using pop_front_t = typename pop_front<Tuple>::type;
+  //!   template<product_type T>
+  //!   using pop_front_t = typename pop_front<T>::type;
   //! }
   //! @endcode
   //!
@@ -65,10 +65,10 @@ namespace kumi
   //! @include doc/tuple/algo/pop_front.cpp
   //! @include doc/record/algo/pop_front.cpp
   //================================================================================================
-  template<concepts::product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto pop_front(Tuple&& t)
+  template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto pop_front(T&& t)
   {
-    if constexpr (concepts::sized_product_type_or_more<Tuple, 1>) return extract(KUMI_FWD(t), index<1>);
-    else return builder<Tuple>::make();
+    if constexpr (concepts::sized_product_type<T, 0>) return builder<T>::make();
+    else return extract(KUMI_FWD(t), index<1>);
   }
 
   //================================================================================================
@@ -83,10 +83,10 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<product_type Tuple, typename T> struct push_back;
+  //!   template<product_type T, typename V> struct push_back;
   //!
-  //!   template<product_type Tuple, typename T>
-  //!   using push_back_t = typename push_back<Tuple,T>::type;
+  //!   template<product_type T, typename V>
+  //!   using push_back_t = typename push_back<T,V>::type;
   //! }
   //! @endcode
   //!
@@ -96,11 +96,11 @@ namespace kumi
   //! @include doc/tuple/algo/push_back.cpp
   //! @include doc/record/algo/push_back.cpp
   //================================================================================================
-  template<concepts::product_type Tuple, typename T> [[nodiscard]] KUMI_ABI constexpr auto push_back(Tuple&& t, T&& v)
+  template<concepts::product_type T, typename V> [[nodiscard]] KUMI_ABI constexpr auto push_back(T&& t, V&& v)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return builder<Tuple>::make(get<I>(KUMI_FWD(t))..., KUMI_FWD(v));
-    }(std::make_index_sequence<size_v<Tuple>>());
+      return builder<T>::make(get<I>(KUMI_FWD(t))..., KUMI_FWD(v));
+    }(std::make_index_sequence<size_v<T>>());
   }
 
   //================================================================================================
@@ -114,10 +114,10 @@ namespace kumi
   //! @code
   //! namespace kumi::result
   //! {
-  //!   template<product_type Tuple> struct pop_back;
+  //!   template<product_type T> struct pop_back;
   //!
-  //!   template<product_type Tuple>
-  //!   using pop_back_t = typename pop_back<Tuple>::type;
+  //!   template<product_type T>
+  //!   using pop_back_t = typename pop_back<T>::type;
   //! }
   //! @endcode
   //!
@@ -127,41 +127,40 @@ namespace kumi
   //! @include doc/tuple/algo/pop_back.cpp
   //! @include doc/record/algo/pop_back.cpp
   //================================================================================================
-  template<concepts::product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto pop_back(Tuple&& t)
+  template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto pop_back(T&& t)
   {
-    if constexpr (concepts::sized_product_type_or_more<Tuple, 1>)
-      return extract(KUMI_FWD(t), index<0>, index<size_v<Tuple> - 1>);
-    else return builder<Tuple>::make();
+    if constexpr (concepts::sized_product_type<T, 0>) return builder<T>::make();
+    else return extract(KUMI_FWD(t), index<0>, index<size_v<T> - 1>);
   }
 
   namespace result
   {
-    template<concepts::product_type Tuple, typename T> struct push_front
+    template<concepts::product_type T, typename V> struct push_front
     {
-      using type = decltype(kumi::push_front(std::declval<Tuple>(), std::declval<T>()));
+      using type = decltype(kumi::push_front(std::declval<T>(), std::declval<V>()));
     };
 
-    template<concepts::product_type Tuple> struct pop_front
+    template<concepts::product_type T> struct pop_front
     {
-      using type = decltype(kumi::pop_front(std::declval<Tuple>()));
+      using type = decltype(kumi::pop_front(std::declval<T>()));
     };
 
-    template<concepts::product_type Tuple, typename T> struct push_back
+    template<concepts::product_type T, typename V> struct push_back
     {
-      using type = decltype(kumi::push_back(std::declval<Tuple>(), std::declval<T>()));
+      using type = decltype(kumi::push_back(std::declval<T>(), std::declval<V>()));
     };
 
-    template<concepts::product_type Tuple> struct pop_back
+    template<concepts::product_type T> struct pop_back
     {
-      using type = decltype(kumi::pop_back(std::declval<Tuple>()));
+      using type = decltype(kumi::pop_back(std::declval<T>()));
     };
 
-    template<concepts::product_type Tuple, typename T> using push_front_t = typename push_front<Tuple, T>::type;
+    template<concepts::product_type T, typename V> using push_front_t = typename push_front<T, V>::type;
 
-    template<concepts::product_type Tuple> using pop_front_t = typename pop_front<Tuple>::type;
+    template<concepts::product_type T> using pop_front_t = typename pop_front<T>::type;
 
-    template<concepts::product_type Tuple, typename T> using push_back_t = typename push_back<Tuple, T>::type;
+    template<concepts::product_type T, typename V> using push_back_t = typename push_back<T, V>::type;
 
-    template<concepts::product_type Tuple> using pop_back_t = typename pop_back<Tuple>::type;
+    template<concepts::product_type T> using pop_back_t = typename pop_back<T>::type;
   }
 }

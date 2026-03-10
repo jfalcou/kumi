@@ -41,10 +41,9 @@ namespace kumi
   //! @include doc/tuple/algo/reorder.cpp
   //! @include doc/record/algo/reorder.cpp
   //================================================================================================
-  template<std::size_t... Idx, concepts::product_type T>
-  requires((Idx < size_v<T>) && ...)
-  [[nodiscard]] KUMI_ABI constexpr auto reorder(T&& t)
+  template<std::size_t... Idx, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto reorder(T&& t)
   {
+    static_assert(((Idx < size_v<T>) && ...), "[KUMI] - Index out of bounder of kumi::reorder input type");
     return builder<T>::make(get<Idx>(KUMI_FWD(t))...);
   }
 
@@ -78,9 +77,10 @@ namespace kumi
   //! @include doc/record/algo/reorder_fields.cpp
   //================================================================================================
   template<concepts::identifier auto... Name, concepts::product_type Tuple>
-  requires(requires { get<Name>(std::declval<Tuple>()); } && ...)
   KUMI_ABI constexpr auto reorder_fields(Tuple&& t)
   {
+    static_assert((requires { get<Name>(std::declval<Tuple>()); } && ...),
+                  "[KUMI] - Identifier not present in input type");
     return builder<Tuple>::make(Name = get<Name>(KUMI_FWD(t))...);
   }
 
@@ -122,12 +122,12 @@ namespace kumi
       if constexpr (concepts::projection_map<decltype(proj)>) return reindex<proj>(KUMI_FWD(t));
       else if constexpr (concepts::identifier<decltype(proj)>)
       {
-        static_assert(requires { get<proj>(std::declval<T>()); }, "Label not present in reindex input type");
+        static_assert(requires { get<proj>(std::declval<T>()); }, "[KUMI] - Label not present in input type");
         return get<proj>(KUMI_FWD(t));
       }
       else
       {
-        static_assert(proj < size_v<T>, "Index out of bounds of reindex input type");
+        static_assert(proj < size_v<T>, "[KUMI] - Index out of bounds of input type");
         return get<proj>(KUMI_FWD(t));
       }
     };
