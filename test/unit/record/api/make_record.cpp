@@ -7,7 +7,7 @@
 //==================================================================================================
 #define TTS_MAIN
 #include <functional>
-#include <kumi/product_types/record.hpp>
+#include <kumi/record.hpp>
 #include <kumi/algorithm.hpp>
 #include <tts/tts.hpp>
 

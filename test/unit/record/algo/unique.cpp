@@ -6,36 +6,47 @@
 */
 //==================================================================================================
 #define TTS_MAIN
-#include <kumi/product_types/record.hpp>
+#include <kumi/record.hpp>
 #include <kumi/algorithm.hpp>
 #include <tts/tts.hpp>
 #include <functional>
 #include "test.hpp"
 
-/*
 TTS_CASE("Check result::unique/all_unique<T> behavior on records")
 {
   using namespace kumi;
 
-  TTS_TYPE_IS((result::unique_t<record<char, int, int, char, double>>),
-              (record<char, int, char, double>));
+  TTS_TYPE_IS(
+    (result::unique_t<record<field<name<"a">, char>, field<name<"b">, int>, field<name<"c">, int>,
+                             field<name<"d">, char>, field<name<"e">, double>>>),
+    (record<field<name<"a">, char>, field<name<"b">, int>, field<name<"d">, char>, field<name<"e">, double>>));
 
-  TTS_TYPE_IS((result::unique_t<record<record<int, char>, record<int, char>, char, int>>),
-              (record<record<int, char>, char, int>));
+  TTS_TYPE_IS((result::unique_t<record<field<name<"a">, record<field<name<"a">, int>, field<name<"b">, char>>>,
+                                       field<name<"b">, record<field<name<"a">, int>, field<name<"b">, char>>>,
+                                       field<name<"c">, char>, field<name<"d">, int>>>),
+              (record<field<name<"a">, record<field<name<"a">, int>, field<name<"b">, char>>>, field<name<"c">, char>,
+                      field<name<"d">, int>>));
 
-  TTS_TYPE_IS((kumi::result::unique_t<record<int&, int, int const, int const*, int&&>>),
-              (record<int&, int, int const, int const*, int&&>));
+  TTS_TYPE_IS((kumi::result::unique_t<record<field<name<"a">, int&>, field<name<"b">, int>, field<name<"c">, int const>,
+                                             field<name<"d">, int const*>, field<name<"e">, int&&>>>),
+              (record<field<name<"a">, int&>, field<name<"b">, int>, field<name<"c">, int const>,
+                      field<name<"d">, int const*>, field<name<"e">, int&&>>));
 
-  TTS_TYPE_IS((result::all_unique_t<record<char, int, int, char, double>>),
-              (record<char, int, double>));
+  TTS_TYPE_IS((result::all_unique_t<record<field<name<"a">, char>, field<name<"b">, int>, field<name<"c">, int>,
+                                           field<name<"d">, char>, field<name<"e">, double>>>),
+              (record<field<name<"a">, char>, field<name<"b">, int>, field<name<"e">, double>>));
 
-  TTS_TYPE_IS((result::all_unique_t<record<record<int, char>, record<int, char>, char, int>>),
-              (record<record<int, char>, char, int>));
+  TTS_TYPE_IS((result::all_unique_t<record<field<name<"a">, record<field<name<"a">, int>, field<name<"b">, char>>>,
+                                           field<name<"b">, record<field<name<"a">, int>, field<name<"b">, char>>>,
+                                           field<name<"c">, char>, field<name<"d">, int>>>),
+              (record<field<name<"a">, record<field<name<"a">, int>, field<name<"b">, char>>>, field<name<"c">, char>,
+                      field<name<"d">, int>>));
 
-  TTS_TYPE_IS((result::all_unique_t<record<int&, int, int const, int const*, int&&>>),
-              (record<int&, int, int const, int const*, int&&>));
+  TTS_TYPE_IS((result::all_unique_t<record<field<name<"a">, int&>, field<name<"b">, int>, field<name<"c">, int const>,
+                                           field<name<"d">, int const*>, field<name<"e">, int&&>>>),
+              (record<field<name<"a">, int&>, field<name<"b">, int>, field<name<"c">, int const>,
+                      field<name<"d">, int const*>, field<name<"e">, int&&>>));
 };
-*/
 
 TTS_CASE("Check runtime kumi::unique behavior")
 {

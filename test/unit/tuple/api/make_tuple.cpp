@@ -7,7 +7,7 @@
 //==================================================================================================
 #define TTS_MAIN
 #include <functional>
-#include <kumi/product_types/tuple.hpp>
+#include <kumi/tuple.hpp>
 #include <kumi/algorithm.hpp>
 #include <tts/tts.hpp>
 #include "test.hpp"

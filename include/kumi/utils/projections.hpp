@@ -24,6 +24,9 @@ namespace kumi
   //!
   //! @note This type is stateless and carries zero runtime data.
   //! @tparam V A pack of elements modeling kumi::concepts::projection.
+  //!
+  //! ## Examples:
+  //! @include doc/infra/projections.cpp
   //================================================================================================
   template<typename... V> struct projection_map
   {
@@ -105,6 +108,9 @@ namespace kumi
   //!
   //! @param ts	Zero or more indexes to construct the indexes from.
   //! @return A kumi::projection_map constructed from the ts
+  //!
+  //! ## Examples:
+  //! @include doc/infra/projections.cpp
   //================================================================================================
   template<concepts::index... Ts> [[nodiscard]] KUMI_ABI consteval auto indexes(Ts... ts) noexcept
   {
@@ -115,10 +121,30 @@ namespace kumi
   //! @ingroup utility
   //! @brief Creates a kumi::projection_map object, deducing the target type from the types of arguments.
   //!
+  //! @note The arguments should model kumi::index
+  //!
+  //! @tparam vs	Zero or more values convertible to size_t to construct the indexes from.
+  //! @return A kumi::projection_map constructed from the vs
+  //!
+  //! ## Examples:
+  //! @include doc/infra/projections.cpp
+  //================================================================================================
+  template<std::convertible_to<std::size_t> auto... vs> [[nodiscard]] KUMI_ABI consteval auto make_indexes() noexcept
+  {
+    return projection_map{index<vs>...};
+  }
+
+  //================================================================================================
+  //! @ingroup utility
+  //! @brief Creates a kumi::projection_map object, deducing the target type from the types of arguments.
+  //!
   //! @note The arguments should model kumi::identifier
   //!
   //! @param ts	Zero or more indexes to construct the indexes from.
   //! @return A kumi::projection_map constructed from the ts
+  //!
+  //! ## Examples:
+  //! @include doc/infra/projections.cpp
   //================================================================================================
   template<concepts::identifier... Ts>
   requires(all_uniques_v<Ts...>)

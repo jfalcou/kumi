@@ -5,10 +5,7 @@
   SPDX-License-Identifier: BSL-1.0
 */
 //==================================================================================================
-#ifndef KUMI_RECORD_HPP_INCLUDED
-#define KUMI_RECORD_HPP_INCLUDED
-
-#include <kumi/product_types/tuple.hpp>
+#pragma once
 
 namespace kumi
 {
@@ -689,5 +686,3 @@ namespace kumi
     using type = kumi::record<>;
   };
 }
-
-#endif

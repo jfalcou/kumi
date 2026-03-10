@@ -6,10 +6,11 @@
 */
 //==================================================================================================
 #define TTS_MAIN
-#include <array>
-#include <kumi/product_types/tuple.hpp>
+#include <kumi/tuple.hpp>
 #include <kumi/algorithm.hpp>
 #include <tts/tts.hpp>
+
+#include <array>
 #include <vector>
 #include "test.hpp"
 
