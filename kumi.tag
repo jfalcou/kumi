@@ -1607,62 +1607,6 @@
       <arglist>(Function const &amp;f) noexcept</arglist>
     </member>
     <member kind="function">
-      <type>constexpr auto</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a55b2f406000d9104ecfcf067d63d4da0</anchor>
-      <arglist>(R &amp;&amp;r)=delete</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a55b2f406000d9104ecfcf067d63d4da0</anchor>
-      <arglist>(R &amp;&amp;r)=delete</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a55b2f406000d9104ecfcf067d63d4da0</anchor>
-      <arglist>(R &amp;&amp;r)=delete</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a55b2f406000d9104ecfcf067d63d4da0</anchor>
-      <arglist>(R &amp;&amp;r)=delete</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>ab9632a8c7049efccf962d85aed1fe9b7</anchor>
-      <arglist>(T &amp;&amp;r)=delete</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>ab5527f2f9d28b4287d4f6c033deefbfd</anchor>
-      <arglist>(T &amp;&amp;t)=delete</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>ab5527f2f9d28b4287d4f6c033deefbfd</anchor>
-      <arglist>(T &amp;&amp;t)=delete</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>get</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>ab5527f2f9d28b4287d4f6c033deefbfd</anchor>
-      <arglist>(T &amp;&amp;t)=delete</arglist>
-    </member>
-    <member kind="function">
       <type>consteval auto</type>
       <name>get_index_of_field</name>
       <anchorfile>group__utility_ga7684fa136df06ed30bdce81ccb4475c1.html</anchorfile>
@@ -1910,16 +1854,16 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>pop_back</name>
-      <anchorfile>group__generators_gaeb73a506f59ec92ddafbf7aa93fb5547.html</anchorfile>
-      <anchor>gaeb73a506f59ec92ddafbf7aa93fb5547</anchor>
-      <arglist>(Tuple &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_gaa78a8b1a97ed4da70a1e772cafb55aef.html</anchorfile>
+      <anchor>gaa78a8b1a97ed4da70a1e772cafb55aef</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>pop_front</name>
-      <anchorfile>group__generators_ga742995cb887d0116de190db250c3257d.html</anchorfile>
-      <anchor>ga742995cb887d0116de190db250c3257d</anchor>
-      <arglist>(Tuple &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_ga0067bdadcb60e0eeb405bd1021dd4f08.html</anchorfile>
+      <anchor>ga0067bdadcb60e0eeb405bd1021dd4f08</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1952,16 +1896,16 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>push_back</name>
-      <anchorfile>group__generators_ga3044bdc0eeb7425a0462c98f0e6301f1.html</anchorfile>
-      <anchor>ga3044bdc0eeb7425a0462c98f0e6301f1</anchor>
-      <arglist>(Tuple &amp;&amp;t, T &amp;&amp;v)</arglist>
+      <anchorfile>group__generators_ga1caeff43037aae979c9ff1ca476091cb.html</anchorfile>
+      <anchor>ga1caeff43037aae979c9ff1ca476091cb</anchor>
+      <arglist>(T &amp;&amp;t, V &amp;&amp;v)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>push_front</name>
-      <anchorfile>group__generators_ga8f969f49a94fb50a8cb6bf27bf78b6b7.html</anchorfile>
-      <anchor>ga8f969f49a94fb50a8cb6bf27bf78b6b7</anchor>
-      <arglist>(Tuple &amp;&amp;t, T &amp;&amp;v)</arglist>
+      <anchorfile>group__generators_ga45a00d0a03a72f6c0c67501e684ddbea.html</anchorfile>
+      <anchor>ga45a00d0a03a72f6c0c67501e684ddbea</anchor>
+      <arglist>(T &amp;&amp;t, V &amp;&amp;v)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -2001,9 +1945,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>reverse</name>
-      <anchorfile>group__generators_ga49abf24bfdc3e6c8707cd321d9015212.html</anchorfile>
-      <anchor>ga49abf24bfdc3e6c8707cd321d9015212</anchor>
-      <arglist>(Tuple &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_gab95d676ad41b4adc604681d14081026e.html</anchorfile>
+      <anchor>gab95d676ad41b4adc604681d14081026e</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -3181,30 +3125,30 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::pop_back</name>
-      <anchorfile>group__generators_gaeb73a506f59ec92ddafbf7aa93fb5547.html</anchorfile>
-      <anchor>gaeb73a506f59ec92ddafbf7aa93fb5547</anchor>
-      <arglist>(Tuple &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_gaa78a8b1a97ed4da70a1e772cafb55aef.html</anchorfile>
+      <anchor>gaa78a8b1a97ed4da70a1e772cafb55aef</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::pop_front</name>
-      <anchorfile>group__generators_ga742995cb887d0116de190db250c3257d.html</anchorfile>
-      <anchor>ga742995cb887d0116de190db250c3257d</anchor>
-      <arglist>(Tuple &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_ga0067bdadcb60e0eeb405bd1021dd4f08.html</anchorfile>
+      <anchor>ga0067bdadcb60e0eeb405bd1021dd4f08</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::push_back</name>
-      <anchorfile>group__generators_ga3044bdc0eeb7425a0462c98f0e6301f1.html</anchorfile>
-      <anchor>ga3044bdc0eeb7425a0462c98f0e6301f1</anchor>
-      <arglist>(Tuple &amp;&amp;t, T &amp;&amp;v)</arglist>
+      <anchorfile>group__generators_ga1caeff43037aae979c9ff1ca476091cb.html</anchorfile>
+      <anchor>ga1caeff43037aae979c9ff1ca476091cb</anchor>
+      <arglist>(T &amp;&amp;t, V &amp;&amp;v)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::push_front</name>
-      <anchorfile>group__generators_ga8f969f49a94fb50a8cb6bf27bf78b6b7.html</anchorfile>
-      <anchor>ga8f969f49a94fb50a8cb6bf27bf78b6b7</anchor>
-      <arglist>(Tuple &amp;&amp;t, T &amp;&amp;v)</arglist>
+      <anchorfile>group__generators_ga45a00d0a03a72f6c0c67501e684ddbea.html</anchorfile>
+      <anchor>ga45a00d0a03a72f6c0c67501e684ddbea</anchor>
+      <arglist>(T &amp;&amp;t, V &amp;&amp;v)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -3230,9 +3174,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::reverse</name>
-      <anchorfile>group__generators_ga49abf24bfdc3e6c8707cd321d9015212.html</anchorfile>
-      <anchor>ga49abf24bfdc3e6c8707cd321d9015212</anchor>
-      <arglist>(Tuple &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_gab95d676ad41b4adc604681d14081026e.html</anchorfile>
+      <anchor>gab95d676ad41b4adc604681d14081026e</anchor>
+      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>

@@ -93,7 +93,7 @@ $(function() { codefold.init(); });
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('group__generators_ga8f969f49a94fb50a8cb6bf27bf78b6b7.html','',''); });
+$(function(){initNavTree('group__generators_ga45a00d0a03a72f6c0c67501e684ddbea.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -119,13 +119,13 @@ $(function(){initNavTree('group__generators_ga8f969f49a94fb50a8cb6bf27bf78b6b7.h
 </div>
 
 <div class="contents">
-<a id="ga8f969f49a94fb50a8cb6bf27bf78b6b7" name="ga8f969f49a94fb50a8cb6bf27bf78b6b7"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga8f969f49a94fb50a8cb6bf27bf78b6b7">&#9670;&#160;</a></span>push_front()</h2>
+<a id="ga45a00d0a03a72f6c0c67501e684ddbea" name="ga45a00d0a03a72f6c0c67501e684ddbea"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga45a00d0a03a72f6c0c67501e684ddbea">&#9670;&#160;</a></span>push_front()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;concepts::product_type Tuple, typename T&gt; </div>
+template&lt;concepts::product_type T, typename V&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -133,12 +133,12 @@ template&lt;concepts::product_type Tuple, typename T&gt; </div>
         <tr>
           <td class="memname">auto kumi::push_front </td>
           <td>(</td>
-          <td class="paramtype">Tuple &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span>, </td>
+          <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>v</em></span>&#160;)</td>
+          <td class="paramtype">V &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>v</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -161,13 +161,13 @@ template&lt;concepts::product_type Tuple, typename T&gt; </div>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;product_type Tuple, <span class="keyword">typename</span> T&gt; <span class="keyword">struct </span><a class="code hl_function" href="#ga8f969f49a94fb50a8cb6bf27bf78b6b7">push_front</a>;</div>
+<div class="line">  <span class="keyword">template</span>&lt;product_type T, <span class="keyword">typename</span> V&gt; <span class="keyword">struct </span><a class="code hl_function" href="#ga45a00d0a03a72f6c0c67501e684ddbea">push_front</a>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">template</span>&lt;product_type Tuple, <span class="keyword">typename</span> T&gt;</div>
-<div class="line">  <span class="keyword">using </span>push_front_t = <span class="keyword">typename</span> <a class="code hl_function" href="#ga8f969f49a94fb50a8cb6bf27bf78b6b7">push_front</a>&lt;Tuples...&gt;::type;</div>
+<div class="line">  <span class="keyword">template</span>&lt;product_type T, <span class="keyword">typename</span> V&gt;</div>
+<div class="line">  <span class="keyword">using </span>push_front_t = <span class="keyword">typename</span> <a class="code hl_function" href="#ga45a00d0a03a72f6c0c67501e684ddbea">push_front&lt;T,V&gt;::type</a>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__generators_ga8f969f49a94fb50a8cb6bf27bf78b6b7_html_ga8f969f49a94fb50a8cb6bf27bf78b6b7"><div class="ttname"><a href="#ga8f969f49a94fb50a8cb6bf27bf78b6b7">kumi::push_front</a></div><div class="ttdeci">constexpr auto push_front(Tuple &amp;&amp;t, T &amp;&amp;v)</div><div class="ttdoc">Constructs a tuple by adding a value v at the beginning of t.</div><div class="ttdef"><b>Definition</b> push_pop.hpp:37</div></div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga8f969f49a94fb50a8cb6bf27bf78b6b7" title="Constructs a tuple by adding a value v at the beginning of t.">kumi::push_front</a></p>
+<div class="ttc" id="agroup__generators_ga45a00d0a03a72f6c0c67501e684ddbea_html_ga45a00d0a03a72f6c0c67501e684ddbea"><div class="ttname"><a href="#ga45a00d0a03a72f6c0c67501e684ddbea">kumi::push_front</a></div><div class="ttdeci">constexpr auto push_front(T &amp;&amp;t, V &amp;&amp;v)</div><div class="ttdoc">Constructs a tuple by adding a value v at the beginning of t.</div><div class="ttdef"><b>Definition</b> push_pop.hpp:37</div></div>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga45a00d0a03a72f6c0c67501e684ddbea" title="Constructs a tuple by adding a value v at the beginning of t.">kumi::push_front</a></p>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md81"></a>
 Examples:</h2>
 <div class="fragment"><div class="line"></div>
@@ -176,11 +176,11 @@ Examples:</h2>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#ga8f969f49a94fb50a8cb6bf27bf78b6b7">kumi::push_front</a>( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{}, 63.21)  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#ga45a00d0a03a72f6c0c67501e684ddbea">kumi::push_front</a>( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{}, 63.21)  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> t{1,2.,3.4f};</div>
 <div class="line">  std::cout &lt;&lt; t                          &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#ga8f969f49a94fb50a8cb6bf27bf78b6b7">kumi::push_front</a>(t, <span class="charliteral">&#39;Z&#39;</span>)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#ga45a00d0a03a72f6c0c67501e684ddbea">kumi::push_front</a>(t, <span class="charliteral">&#39;Z&#39;</span>)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:25</div></div>
 </div><!-- fragment --> <div class="fragment"><div class="line"></div>
@@ -191,11 +191,11 @@ Examples:</h2>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#ga8f969f49a94fb50a8cb6bf27bf78b6b7">kumi::push_front</a>( <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{}, <span class="stringliteral">&quot;a&quot;</span>_id = 63.21)  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#ga45a00d0a03a72f6c0c67501e684ddbea">kumi::push_front</a>( <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{}, <span class="stringliteral">&quot;a&quot;</span>_id = 63.21)  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> t{<span class="stringliteral">&quot;a&quot;</span>_id = 1,<span class="stringliteral">&quot;b&quot;</span>_id = 2.,<span class="stringliteral">&quot;c&quot;</span>_id = 3.4f};</div>
 <div class="line">  std::cout &lt;&lt; t                          &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#ga8f969f49a94fb50a8cb6bf27bf78b6b7">kumi::push_front</a>(t, <span class="stringliteral">&quot;d&quot;</span>_id = <span class="charliteral">&#39;Z&#39;</span>)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#ga45a00d0a03a72f6c0c67501e684ddbea">kumi::push_front</a>(t, <span class="stringliteral">&quot;d&quot;</span>_id = <span class="charliteral">&#39;Z&#39;</span>)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous fields necessarily named, names are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:26</div></div>
 </div><!-- fragment --> 

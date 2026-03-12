@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::reverse</title>
+<title>kumi: kumi::pop_back</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -93,7 +93,7 @@ $(function() { codefold.init(); });
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('group__generators_ga49abf24bfdc3e6c8707cd321d9015212.html','',''); });
+$(function(){initNavTree('group__generators_gaa78a8b1a97ed4da70a1e772cafb55aef.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -119,21 +119,21 @@ $(function(){initNavTree('group__generators_ga49abf24bfdc3e6c8707cd321d9015212.h
 </div>
 
 <div class="contents">
-<a id="ga49abf24bfdc3e6c8707cd321d9015212" name="ga49abf24bfdc3e6c8707cd321d9015212"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga49abf24bfdc3e6c8707cd321d9015212">&#9670;&#160;</a></span>reverse()</h2>
+<a id="gaa78a8b1a97ed4da70a1e772cafb55aef" name="gaa78a8b1a97ed4da70a1e772cafb55aef"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa78a8b1a97ed4da70a1e772cafb55aef">&#9670;&#160;</a></span>pop_back()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;concepts::product_type Tuple&gt; </div>
+template&lt;concepts::product_type T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto kumi::reverse </td>
+          <td class="memname">auto kumi::pop_back </td>
           <td>(</td>
-          <td class="paramtype">Tuple &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -144,26 +144,26 @@ template&lt;concepts::product_type Tuple&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Reverse elements of a kumi::product_type. </p>
+<p>Remove the last (if any) element of a kumi::product_type. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">t</td><td>kumi::product_type to reverse </td></tr>
+    <tr><td class="paramname">t</td><td>Base tuple </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A tuple equivalent to <a class="el" href="group__tuple_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007" title="Creates a tuple object, deducing the target type from the types of arguments.">kumi::make_tuple</a>(t[index&lt;size_v&lt;T&gt; - 1 - Idx&gt;]...);</dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md122"></a>
+<dl class="section return"><dt>Returns</dt><dd>A tuple composed of all elements of t except its last. Has no effect on empty t.</dd></dl>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md86"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;product_type Tuple&gt; <span class="keyword">struct </span><a class="code hl_function" href="#ga49abf24bfdc3e6c8707cd321d9015212">reverse</a>;</div>
+<div class="line">  <span class="keyword">template</span>&lt;product_type T&gt; <span class="keyword">struct </span><a class="code hl_function" href="#gaa78a8b1a97ed4da70a1e772cafb55aef">pop_back</a>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">template</span>&lt;product_type Tuple&gt;</div>
-<div class="line">  <span class="keyword">using </span>reverse_t = <span class="keyword">typename</span> <a class="code hl_function" href="#ga49abf24bfdc3e6c8707cd321d9015212">reverse&lt;Tuple&gt;::type</a>;</div>
+<div class="line">  <span class="keyword">template</span>&lt;product_type T&gt;</div>
+<div class="line">  <span class="keyword">using </span>pop_back_t = <span class="keyword">typename</span> <a class="code hl_function" href="#gaa78a8b1a97ed4da70a1e772cafb55aef">pop_back&lt;T&gt;::type</a>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__generators_ga49abf24bfdc3e6c8707cd321d9015212_html_ga49abf24bfdc3e6c8707cd321d9015212"><div class="ttname"><a href="#ga49abf24bfdc3e6c8707cd321d9015212">kumi::reverse</a></div><div class="ttdeci">constexpr auto reverse(Tuple &amp;&amp;t)</div><div class="ttdoc">Reverse elements of a kumi::product_type.</div><div class="ttdef"><b>Definition</b> reverse.hpp:36</div></div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga49abf24bfdc3e6c8707cd321d9015212" title="Reverse elements of a kumi::product_type.">kumi::reverse</a></p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md123"></a>
+<div class="ttc" id="agroup__generators_gaa78a8b1a97ed4da70a1e772cafb55aef_html_gaa78a8b1a97ed4da70a1e772cafb55aef"><div class="ttname"><a href="#gaa78a8b1a97ed4da70a1e772cafb55aef">kumi::pop_back</a></div><div class="ttdeci">constexpr auto pop_back(T &amp;&amp;t)</div><div class="ttdoc">Remove the last (if any) element of a kumi::product_type.</div><div class="ttdef"><b>Definition</b> push_pop.hpp:130</div></div>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gaa78a8b1a97ed4da70a1e772cafb55aef" title="Remove the last (if any) element of a kumi::product_type.">kumi::pop_back</a></p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md87"></a>
 Examples:</h2>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -171,10 +171,11 @@ Examples:</h2>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> values = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> { 1, <span class="charliteral">&#39;a&#39;</span>, 0.1 };</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#gaa78a8b1a97ed4da70a1e772cafb55aef">kumi::pop_back</a>( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{} )  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; values &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#ga49abf24bfdc3e6c8707cd321d9015212">kumi::reverse</a>(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> t{1,2.,3.4f};</div>
+<div class="line">  std::cout &lt;&lt; t                    &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#gaa78a8b1a97ed4da70a1e772cafb55aef">kumi::pop_back</a>(t)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:25</div></div>
 </div><!-- fragment --> <div class="fragment"><div class="line"></div>
@@ -184,11 +185,11 @@ Examples:</h2>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#gaa78a8b1a97ed4da70a1e772cafb55aef">kumi::pop_back</a>( <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{} )  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> values = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> { <span class="stringliteral">&quot;a&quot;</span>_id = 1, <span class="stringliteral">&quot;b&quot;</span>_id = <span class="charliteral">&#39;a&#39;</span>, <span class="stringliteral">&quot;c&quot;</span>_id = 0.1 };</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; values &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#ga49abf24bfdc3e6c8707cd321d9015212">kumi::reverse</a>(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> r{<span class="stringliteral">&quot;a&quot;</span>_id = 1,<span class="stringliteral">&quot;b&quot;</span>_id = 2.,<span class="stringliteral">&quot;c&quot;</span>_id = 3.4f};</div>
+<div class="line">  std::cout &lt;&lt; r                    &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#gaa78a8b1a97ed4da70a1e772cafb55aef">kumi::pop_back</a>(r)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous fields necessarily named, names are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:26</div></div>
 </div><!-- fragment --> 
