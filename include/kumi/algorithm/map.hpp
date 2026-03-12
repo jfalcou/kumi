@@ -167,7 +167,7 @@ namespace kumi
   //================================================================================================
   template<concepts::record_type Tuple, typename Function, concepts::sized_product_type<size<Tuple>::value>... Tuples>
   requires(concepts::compatible_product_types<Tuple, Tuples...>)
-  constexpr auto map_field(Function f, Tuple&& t0, Tuples&&... others)
+  [[nodiscard]] KUMI_ABI constexpr auto map_field(Function f, Tuple&& t0, Tuples&&... others)
   {
     if constexpr (concepts::sized_product_type<Tuple, 0>) return builder<Tuple>::make();
     else

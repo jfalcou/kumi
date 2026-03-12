@@ -39,11 +39,11 @@ namespace kumi
   //! @include doc/record/algo/extract.cpp
   //================================================================================================
   template<std::size_t I0, std::size_t I1, concepts::product_type Tuple>
-  requires((I0 <= size_v<Tuple>) && (I1 <= size_v<Tuple>))
   [[nodiscard]] KUMI_ABI constexpr auto extract(Tuple&& t,
                                                 [[maybe_unused]] index_t<I0> i0,
                                                 [[maybe_unused]] index_t<I1> i1) noexcept
   {
+    static_assert((I0 <= size_v<Tuple>) && (I1 <= size_v<Tuple>), "[KUMI] - Invalid index");
     return [&]<std::size_t... N>(std::index_sequence<N...>) {
       using final_t = builder_make_t<Tuple, element_t<N + I0, Tuple>...>;
       return final_t{get<N + I0>(KUMI_FWD(t))...};
@@ -52,9 +52,9 @@ namespace kumi
 
   //! @overload
   template<std::size_t I0, concepts::product_type Tuple>
-  requires(I0 <= size_v<Tuple>)
   [[nodiscard]] KUMI_ABI constexpr auto extract(Tuple&& t, index_t<I0> i0) noexcept
   {
+    static_assert(I0 <= size_v<Tuple>);
     return extract(KUMI_FWD(t), i0, index<size_v<Tuple>>);
   }
 
@@ -89,9 +89,9 @@ namespace kumi
   //! @include doc/record/algo/split.cpp
   //================================================================================================
   template<std::size_t I0, concepts::product_type Tuple>
-  requires(I0 <= size_v<Tuple>)
   [[nodiscard]] KUMI_ABI constexpr auto split(Tuple&& t, [[maybe_unused]] index_t<I0> i0) noexcept
   {
+    static_assert(I0 <= size_v<Tuple>, "[KUMI] - Invalid index");
     auto select = [&]<typename O, std::size_t... I>(O, std::index_sequence<I...>) {
       using type = builder_make_t<Tuple, element_t<O::value + I, Tuple>...>;
       return type{get<O::value + I>(KUMI_FWD(t))...};

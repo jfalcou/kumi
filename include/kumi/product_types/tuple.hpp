@@ -790,7 +790,7 @@ namespace kumi
   //================================================================================================
   //! @}
   //================================================================================================
-
+#ifndef KUMI_DOXYGEN_INVOKED
   /// Improves diagnostic for out of bounds index
   template<std::integral auto I, typename T>
   requires(is_kumi_tuple_v<std::remove_cvref_t<T>> && ((I >= size_v<T>) || (I < 0)))
@@ -806,10 +806,11 @@ namespace kumi
   requires(is_kumi_tuple_v<std::remove_cvref_t<T>> && !concepts::contains_field<decltype(S), T>)
   constexpr auto get(T&& t) = delete;
 
-  /// No get<type> on records
+  /// Improves diagnostic for non present type
   template<typename U, typename T>
   requires(is_kumi_tuple_v<std::remove_cvref_t<T>> && !concepts::contains_type<U, T>)
   constexpr auto get(T&& t) = delete;
+#endif
 
   // Builder protocole
   template<concepts::product_type T>
