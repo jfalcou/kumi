@@ -34,54 +34,56 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup  reductions
-  //! @brief    Computes inner product (i.e. sum of products)
-  //!
-  //! Computes the generalized sum of products of the elements of two product types. By default,
-  //! `+` and `*` is used.
-  //!
-  //! On record types, operates by pair of fields sharing the same label.
-  //!
-  //! @note Does not participate in overload resolution if product types' size are not equal or if any of
-  //!       the binary operations can't be applied on the product types' elements. Similarily, doesn't participate
-  //!       in overload resolution if the two inputs are not compatible. @see concepts::compatible_product_types.
-  //!
-  //! @param s1         First product type to operate on
-  //! @param s2         Second product type to operate on
-  //! @param init       Initial value
-  //! @param sum        Binary callable function to use as the sum operations
-  //! @param prod       Binary callable function to use as the product operations
-  //! @return The inner product of `s1` and `s2` using the provided binary operations.
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi::result
-  //! {
-  //!   template<product_type S1, sized_product_type<size_v<S1>> S2, typename T>
-  //!   struct inner_product;
-  //!
-  //!   template<product_type S1, sized_product_type<size_v<S1>> S2, typename T
-  //!           , typename Sum, typename Prod
-  //!           >
-  //!   struct inner_product;
-  //!
-  //!   template<product_type S1, sized_product_type<size_v<T1>> S2, typename T>
-  //!   using inner_product_t = typename inner_product<S1,S2,T>::type;
-  //!
-  //!   template< product_type S1, sized_product_type<size_v<T1>> S2, typename T
-  //!           , typename Sum, typename Prod
-  //!           >
-  //!   using inner_product_t = typename inner_product<S1,S2,T,Sum,Prod>::type;
-  //! }
-  //! @endcode
-  //!
-  //! Computes the return type of a call to kumi::inner_product
-  //!
-  //! ## Examples:
-  //! ### Tuple:
-  //! @include doc/tuple/algo/inner_product.cpp
-  //! ### Record:
-  //! @include doc/record/algo/inner_product.cpp
+  /**
+    @ingroup  reductions
+    @brief    Computes inner product (i.e. sum of products)
+
+    Computes the generalized sum of products of the elements of two product types. By default,
+    `+` and `*` is used.
+
+    On record types, operates by pair of fields sharing the same label.
+
+    @note Does not participate in overload resolution if product types' size are not equal or if any of
+          the binary operations can't be applied on the product types' elements. Similarily, doesn't participate
+          in overload resolution if the two inputs are not compatible. @see concepts::compatible_product_types.
+
+    @param s1         First product type to operate on
+    @param s2         Second product type to operate on
+    @param init       Initial value
+    @param sum        Binary callable function to use as the sum operations
+    @param prod       Binary callable function to use as the product operations
+    @return The inner product of `s1` and `s2` using the provided binary operations.
+
+    ## Helper type
+    @code
+    namespace kumi::result
+    {
+      template<product_type S1, sized_product_type<size_v<S1>> S2, typename T>
+      struct inner_product;
+
+      template<product_type S1, sized_product_type<size_v<S1>> S2, typename T
+              , typename Sum, typename Prod
+              >
+      struct inner_product;
+
+      template<product_type S1, sized_product_type<size_v<T1>> S2, typename T>
+      using inner_product_t = typename inner_product<S1,S2,T>::type;
+
+      template< product_type S1, sized_product_type<size_v<T1>> S2, typename T
+              , typename Sum, typename Prod
+              >
+      using inner_product_t = typename inner_product<S1,S2,T,Sum,Prod>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::inner_product
+
+    ## Examples:
+    ### Tuple:
+    @include doc/tuple/algo/inner_product.cpp
+    ### Record:
+    @include doc/record/algo/inner_product.cpp
+  **/
   //====================================================================================================================
   template<concepts::product_type S1,
            concepts::sized_product_type<size_v<S1>> S2,
@@ -91,7 +93,7 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto inner_product(S1&& s1, S2&& s2, T init, Sum sum, Prod prod) noexcept
   requires(concepts::compatible_product_types<S1, S2>)
   {
-    if constexpr (concepts::sized_product_type<S1, 0>) return init;
+    if constexpr (concepts::empty_product_type<S1>) return init;
     else if constexpr (concepts::record_type<S1>)
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
@@ -116,7 +118,7 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto inner_product(S1&& s1, S2&& s2, T init) noexcept
   requires(concepts::compatible_product_types<S1, S2>)
   {
-    if constexpr (concepts::sized_product_type<S1, 0>) return init;
+    if constexpr (concepts::empty_product_type<S1>) return init;
     else if constexpr (concepts::record_type<S1>)
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {

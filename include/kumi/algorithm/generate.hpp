@@ -10,28 +10,30 @@
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup  generators
-  //! @brief    Creates a kumi::tuple containing `N` copies of `v`.
-  //!
-  //! @tparam N Number of replications
-  //! @param  v Value to replicate
-  //! @return A tuple containing `N` copy of `v`
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi::result
-  //! {
-  //!   template<std::size_t N, typename T> struct fill;
-  //!
-  //!   template<std::size_t N, typename T>
-  //!   using fill_t = typename fill<N, T>::type;
-  //! }
-  //! @endcode
-  //!
-  //! Computes the return type of a call to kumi::fill
-  //!
-  //! ## Example:
-  //! @include doc/tuple/algo/fill.cpp
+  /**
+    @ingroup  generators
+    @brief    Creates a kumi::tuple containing `N` copies of `v`.
+
+    @tparam N Number of replications
+    @param  v Value to replicate
+    @return A tuple containing `N` copy of `v`
+
+    ## Helper type
+    @code
+    namespace kumi::result
+    {
+      template<std::size_t N, typename T> struct fill;
+
+      template<std::size_t N, typename T>
+      using fill_t = typename fill<N, T>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::fill
+
+    ## Example:
+    @include doc/tuple/algo/fill.cpp
+  **/
   //====================================================================================================================
   template<std::size_t N, typename T> [[nodiscard]] KUMI_ABI constexpr auto fill(T const& v) noexcept
   {
@@ -42,28 +44,30 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup  generators
-  //! @brief    Creates a kumi::tuple containing `N` applications of the `f` Callable.
-  //!
-  //! @tparam N Number of replications
-  //! @param  f Callable to apply
-  //! @return A tuple containing `N` applications of `f`
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi::result
-  //! {
-  //!   template<std::size_t N, typename Function> struct generate;
-  //!
-  //!   template<std::size_t N, typename Function>
-  //!   using generate_t = typename generate<N, Function>::type;
-  //! }
-  //! @endcode
-  //!
-  //! Computes the return type of a call to kumi::generate
-  //!
-  //! ## Example:
-  //! @include doc/tuple/algo/generate.cpp
+  /**
+    @ingroup  generators
+    @brief    Creates a kumi::tuple containing `N` applications of the `f` Callable.
+
+    @tparam N Number of replications
+    @param  f Callable to apply
+    @return A tuple containing `N` applications of `f`
+
+    ## Helper type
+    @code
+    namespace kumi::result
+    {
+      template<std::size_t N, typename Function> struct generate;
+
+      template<std::size_t N, typename Function>
+      using generate_t = typename generate<N, Function>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::generate
+
+    ## Example:
+    @include doc/tuple/algo/generate.cpp
+  **/
   //====================================================================================================================
   template<std::size_t N, typename Function> [[nodiscard]] KUMI_ABI constexpr auto generate(Function const& f) noexcept
   {
@@ -73,28 +77,30 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup  generators
-  //! @brief    Creates a kumi::tuple containing an increasing ramp of values.
-  //!
-  //! @tparam N Number of replications
-  //! @param  v Seed value
-  //! @return A tuple containing `{v, v + 1, ..., v + N-1}`
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi::result
-  //! {
-  //!   template<std::size_t N, typename T> struct iota;
-  //!
-  //!   template<std::size_t N, typename T>
-  //!   using iota_t = typename iota<N, T>::type;
-  //! }
-  //! @endcode
-  //!
-  //! Computes the return type of a call to kumi::iota
-  //!
-  //! ## Example:
-  //! @include doc/tuple/algo/iota.cpp
+  /**
+    @ingroup  generators
+    @brief    Creates a kumi::tuple containing an increasing ramp of values.
+
+    @tparam N Number of replications
+    @param  v Seed value
+    @return A tuple containing `{v, v + 1, ..., v + N-1}`
+
+    ## Helper type
+    @code
+    namespace kumi::result
+    {
+      template<std::size_t N, typename T> struct iota;
+
+      template<std::size_t N, typename T>
+      using iota_t = typename iota<N, T>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::iota
+
+    ## Example:
+    @include doc/tuple/algo/iota.cpp
+  **/
   //====================================================================================================================
   template<std::size_t N, typename T> [[nodiscard]] KUMI_ABI constexpr auto iota(T v) noexcept
   {

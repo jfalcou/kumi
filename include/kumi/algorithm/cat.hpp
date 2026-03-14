@@ -10,32 +10,34 @@
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup  generators
-  //! @brief    Concatenates product types in a single one
-  //!
-  //! @param ts Product types to concatenate
-  //! @return   A product type made of all element of all input product types in order.
-  //! @note This function does not take part in overload resolution if the input product types do not follow the same
-  //!       semantic. @see concepts::follows_same_semantic
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi::result
-  //! {
-  //!   template<product_type... Ts> struct cat;
-  //!
-  //!   template<product_type... Ts>
-  //!   using cat_t = typename cat<Ts...>::type;
-  //! }
-  //! @endcode
-  //!
-  //! Computes the return type of a call to kumi::cat
-  //!
-  //! ## Examples:
-  //! ### Tuple:
-  //! @include doc/tuple/algo/cat.cpp
-  //! ### Record:
-  //! @include doc/record/algo/cat.cpp
+  /**
+    @ingroup  generators
+    @brief    Concatenates product types in a single one
+
+    @param ts Product types to concatenate
+    @return   A product type made of all element of all input product types in order.
+    @note This function does not take part in overload resolution if the input product types do not follow the same
+          semantic. @see concepts::follows_same_semantic
+
+    ## Helper type
+    @code
+    namespace kumi::result
+    {
+      template<product_type... Ts> struct cat;
+
+      template<product_type... Ts>
+      using cat_t = typename cat<Ts...>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::cat
+
+    ## Examples:
+    ### Tuple:
+    @include doc/tuple/algo/cat.cpp
+    ### Record:
+    @include doc/record/algo/cat.cpp
+  **/
   //====================================================================================================================
   template<concepts::product_type... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto cat(Ts&&... ts)

@@ -20,20 +20,24 @@ namespace kumi
   };
 
   //====================================================================================================================
-  //! @ingroup utility
-  //! @brief  Option specifying the single type a identifier will accept.
-  //! @tparam T Type that the parametrized identifier will accept.
-  //!
-  //! @include doc/infra/only.cpp
+  /**
+    @ingroup utility
+    @brief  Option specifying the single type a identifier will accept.
+    @tparam T Type that the parametrized identifier will accept.
+
+    @include doc/infra/only.cpp
+  **/
   //====================================================================================================================
   template<typename T> inline constexpr only_t<T> only = {};
 
   //====================================================================================================================
-  //! @ingroup utility
-  //! @brief  Option specifying a traits that type should verify for being used as a identifier value.
-  //! @tparam Traits Traits that the parametrized identifier will use to validate its value.
-  //!
-  //! @include doc/infra/checked.cpp
+  /**
+    @ingroup utility
+    @brief  Option specifying a traits that type should verify for being used as a identifier value.
+    @tparam Traits Traits that the parametrized identifier will use to validate its value.
+
+    @include doc/infra/checked.cpp
+  **/
   //====================================================================================================================
   template<template<class> typename Traits> inline constexpr traits_check<Traits> if_ = {};
 
@@ -60,20 +64,22 @@ namespace kumi
   };
 
   //====================================================================================================================
-  //! @ingroup  types
-  //! @class    identifier
-  //! @brief    identifier definition class
-  //!
-  //! kumi::identifier defines a identifier, i.e an entity that can receive values and can be stored as part of a
-  //! product type. It is defined by a unique type ID which can be an actual type or generated from kumi::name and an
-  //! optional checking operations that will validate the value passed to the identifier is acceptable.
-  //!
-  //! kumi::identifier can also be used to define custom identifier type with specific behavior.
-  //!
-  //! @tparam ID    identifier type being defined
-  //! @tparam Checker Potential type checker meta-function. By default, this is `void` to notify no check is performed.
-  //!
-  //! @include doc/infra/regular.cpp
+  /**
+    @ingroup  types
+    @class    identifier
+    @brief    identifier definition class
+
+    kumi::identifier defines a identifier, i.e an entity that can receive values and can be stored as part of a
+    product type. It is defined by a unique type ID which can be an actual type or generated from kumi::name and an
+    optional checking operations that will validate the value passed to the identifier is acceptable.
+
+    kumi::identifier can also be used to define custom identifier type with specific behavior.
+
+    @tparam ID    identifier type being defined
+    @tparam Checker Potential type checker meta-function. By default, this is `void` to notify no check is performed.
+
+    @include doc/infra/regular.cpp
+  **/
   //====================================================================================================================
   template<typename ID, typename Checker> struct identifier
   {
@@ -87,33 +93,37 @@ namespace kumi
     constexpr identifier() noexcept {};
 
     //==================================================================================================================
-    //! @brief Constructs a identifier from an ID and a checker type.
-    //!
-    //! @param id     Identifier of the identifier.
-    //! @param check  Object performing the compile-time verification of the identifier's value.
-    //!
-    //! @include doc/infra/only.cpp
+    /**
+      @brief Constructs a identifier from an ID and a checker type.
+
+      @param id     Identifier of the identifier.
+      @param check  Object performing the compile-time verification of the identifier's value.
+
+      @include doc/infra/only.cpp
+    **/
     //==================================================================================================================
     constexpr identifier([[maybe_unused]] ID const& id, [[maybe_unused]] Checker const& check) noexcept {};
 
     //==================================================================================================================
-    //! @brief Assignment of a value to a identifier
-    //!
-    //! Bind a value to current kumi::identifier and returns an instance of a field.
-    //!
-    //! @param v Bound value
-    //! @return An kumi::field binding the identifier to `v`.
-    //!
-    //! @code
-    //! #include <kumi/kumi.hpp>
-    //! #include <iostream>
-    //!
-    //! int main()
-    //! {
-    //!   using namespace kumi::literals;
-    //!   std::cout << ("value"_id = 42.1337) << "\n";
-    //! }
-    //! @endcode
+    /**
+      @brief Assignment of a value to a identifier
+
+      Bind a value to current kumi::identifier and returns an instance of a field.
+
+      @param v Bound value
+      @return An kumi::field binding the identifier to `v`.
+
+      @code
+      #include <kumi/kumi.hpp>
+      #include <iostream>
+
+      int main()
+      {
+        using namespace kumi::literals;
+        std::cout << ("value"_id = 42.1337) << "\n";
+      }
+      @endcode
+    **/
     //==================================================================================================================
     template<typename T>
     requires(Checker::template value<T>)
@@ -140,10 +150,12 @@ namespace kumi
   template<typename ID, typename Checker> identifier(ID const&, Checker const&) -> identifier<ID, Checker>;
 
   //====================================================================================================================
-  //! @ingroup  types
-  //! @class    name
-  //! @brief Compile-time text based identifier
-  //! @tparam ID Compile-time string representing an indentifier
+  /**
+    @ingroup  types
+    @class    name
+    @brief Compile-time text based identifier
+    @tparam ID Compile-time string representing an indentifier
+  **/
   //====================================================================================================================
   template<str ID> struct name
   {
@@ -154,12 +166,14 @@ namespace kumi
     friend constexpr str to_str(name<ID> const&) { return ID; }
 
     //==================================================================================================================
-    //! @brief Assignment of a value to a identifier
-    //!
-    //! Bind a value to current name and returns an instance of a kumi::field.
-    //!
-    //! @param v Bound value
-    //! @return A kumi::field binding the identifier to `v`.
+    /**
+      @brief Assignment of a value to a identifier
+
+      Bind a value to current name and returns an instance of a kumi::field.
+
+      @param v Bound value
+      @return A kumi::field binding the identifier to `v`.
+    **/
     //==================================================================================================================
     template<typename T> constexpr auto operator=(T&& v) const noexcept -> field<tag_type, std::unwrap_ref_decay_t<T>>
     {

@@ -1,7 +1,6 @@
-#error DO NOT INCLUDE - DOCUMENTATION PURPOSE ONLY
-
-//==================================================================================================
+#error This file is for documentation only - DO NOT INCLUDE
 /**
+
   @page  setup  Setup
 
   @tableofcontents
@@ -108,5 +107,5 @@
   add_executable(test_kumi ../main.cpp)
   target_link_libraries(test_kumi PUBLIC kumi::kumi)
   @endcode
+
 **/
-//==================================================================================================

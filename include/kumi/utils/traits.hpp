@@ -51,19 +51,21 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup traits
-  //! @brief  Detects if a type follows the tuple protocol.
-  //!
-  //! To be treated like a product_type, a user defined type must follow the tuple protocol defined
-  //! in the standard.
-  //!
-  //! ## Helper value
-  //! @code
-  //!   template<typename T> inline constexpr auto is_product_type_v = is_product_type<T>::value;
-  //! @endcode
-  //! ## Example:
-  //! @include doc/tuple/api/adapt.cpp
-  //==================================================================================================================
+  /**
+    @ingroup traits
+    @brief  Detects if a type follows the tuple protocol.
+
+    To be treated like a product_type, a user defined type must follow the tuple protocol defined
+    in the standard.
+
+    ## Helper value
+    @code
+      template<typename T> inline constexpr auto is_product_type_v = is_product_type<T>::value;
+    @endcode
+    ## Example:
+    @include doc/tuple/api/adapt.cpp
+  **/
+  //====================================================================================================================
   template<typename T> struct is_product_type : std::false_type
   {
   };
@@ -71,24 +73,26 @@ namespace kumi
   template<typename T> inline constexpr auto is_product_type_v = is_product_type<T>::value;
 
   //====================================================================================================================
-  //! @ingroup traits
-  //! @brief Opt-in traits for types behaving like a kumi::product_type
-  //!
-  //! To be treated like a record, an user defined type must supports structured bindings opt-in to
-  //! kumi::record_type Semantic as well as kumi::product_type Semantic.
-  //!
-  //! This can be done in two ways:
-  //!   - exposing an internal `is_record_type` type that evaluates to `void`
-  //!   - specializing the `kumi::is_record_type` traits so it exposes a static constant member
-  //!     `value` that evaluates to `true`
-  //!
-  //! ## Helper value
-  //! @code
-  //!   template<typename T> inline constexpr auto is_record_type_v = is_record_type<T>::value;
-  //! @endcode
-  //! ## Example:
-  //! @include doc/record/api/adapt.cpp
-  //==================================================================================================================
+  /**
+    @ingroup traits
+    @brief Opt-in traits for types behaving like a kumi::product_type
+
+    To be treated like a record, an user defined type must supports structured bindings opt-in to
+    kumi::record_type Semantic as well as kumi::product_type Semantic.
+
+    This can be done in two ways:
+      - exposing an internal `is_record_type` type that evaluates to `void`
+      - specializing the `kumi::is_record_type` traits so it exposes a static constant member
+        `value` that evaluates to `true`
+
+    ## Helper value
+    @code
+      template<typename T> inline constexpr auto is_record_type_v = is_record_type<T>::value;
+    @endcode
+    ## Example:
+    @include doc/record/api/adapt.cpp
+  **/
+  //====================================================================================================================
   template<typename T, typename Enable = void> struct is_record_type : std::false_type
   {
   };
@@ -100,15 +104,17 @@ namespace kumi
   template<typename T> inline constexpr auto is_record_type_v = is_record_type<T>::value;
 
   //====================================================================================================================
-  //! @ingroup traits
-  //! @brief Computes the number of elements of a kumi::product_type
-  //!
-  //! @tparam T kumi::product_type to inspect
-  //!
-  //! ## Helper value
-  //! @code
-  //!   template<typename T> inline constexpr auto size_v = size<T>::value;
-  //! @endcode
+  /**
+    @ingroup traits
+    @brief Computes the number of elements of a kumi::product_type
+
+    @tparam T kumi::product_type to inspect
+
+    ## Helper value
+    @code
+      template<typename T> inline constexpr auto size_v = size<T>::value;
+    @endcode
+  **/
   //====================================================================================================================
   template<typename T> struct size : std::tuple_size<std::remove_cvref_t<T>>
   {
@@ -117,19 +123,21 @@ namespace kumi
   template<typename T> inline constexpr auto size_v = size<T>::value;
 
   //====================================================================================================================
-  //! @ingroup traits
-  //! @brief Provides indexed access to the types of the elements of a kumi::product_type.
-  //!
-  //! @tparam I Index of the type to retrieve
-  //! @tparam T kumi::product_type to access
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<std::size_t I, typename T> using element_t = typename element<I,T>::type;
-  //! }
-  //! @endcode
+  /**
+    @ingroup traits
+    @brief Provides indexed access to the types of the elements of a kumi::product_type.
+
+    @tparam I Index of the type to retrieve
+    @tparam T kumi::product_type to access
+
+    ## Helper type
+    @code
+    namespace kumi
+    {
+      template<std::size_t I, typename T> using element_t = typename element<I,T>::type;
+    }
+    @endcode
+  **/
   //====================================================================================================================
   template<std::size_t I, typename T> struct element : std::tuple_element<I, std::remove_cvref_t<T>>
   {
@@ -138,19 +146,21 @@ namespace kumi
   template<std::size_t I, typename T> using element_t = typename element<I, T>::type;
 
   //====================================================================================================================
-  //! @ingroup traits
-  //! @brief Computes the return type of a call to kumi::get
-  //!
-  //! @tparam I Index of the type to retrieve
-  //! @tparam T kumi::product_type to access
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<std::size_t I, typename T> using member_t = typename member<I,T>::type;
-  //! }
-  //! @endcode
+  /**
+    @ingroup traits
+    @brief Computes the return type of a call to kumi::get
+
+    @tparam I Index of the type to retrieve
+    @tparam T kumi::product_type to access
+
+    ## Helper type
+    @code
+    namespace kumi
+    {
+      template<std::size_t I, typename T> using member_t = typename member<I,T>::type;
+    }
+    @endcode
+  **/
   //====================================================================================================================
   template<std::size_t I, typename T> struct member
   {
@@ -163,22 +173,24 @@ namespace kumi
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup traits
-  //! @brief Traits detecting types behaving like a kumi::container.
-  //!
-  //! To be treated like a container, a user defined type must expose a type and a
-  //! statically know size encoded in the type. It shall also provide general container utilities.
-  //!
-  //! @note The type shall be templated on the type and the size to be picked up.
-  //!
-  //! ## Helper value
-  //! @code
-  //!   template<typename T> inline constexpr auto is_container = is_container<T>::value;
-  //! @endcode
-  //!
-  //! ## Example:
-  //! @include doc/infra/containers.cpp
-  //==================================================================================================================
+  /**
+    @ingroup traits
+    @brief Traits detecting types behaving like a kumi::container.
+
+    To be treated like a container, a user defined type must expose a type and a
+    statically know size encoded in the type. It shall also provide general container utilities.
+
+    @note The type shall be templated on the type and the size to be picked up.
+
+    ## Helper value
+    @code
+      template<typename T> inline constexpr auto is_container = is_container<T>::value;
+    @endcode
+
+    ## Example:
+    @include doc/infra/containers.cpp
+  **/
+  //====================================================================================================================
   template<typename T> struct is_container : std::false_type
   {
     using value_type = T;
@@ -210,19 +222,21 @@ namespace kumi
   template<typename T> inline constexpr auto is_container_v = is_container<T>::value;
 
   //====================================================================================================================
-  //! @ingroup traits
-  //! @brief Returns the number of elements of a kumi::static_container
-  //!
-  //! @tparam T kumi::static_container to inspect
-  //!
-  //! ## Helper value
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<typename T> inline constexpr auto container_size_v = container_size<T>::value;
-  //! }
-  //! @endcode
-  //================================================================================================
+  /**
+    @ingroup traits
+    @brief Returns the number of elements of a kumi::static_container
+
+    @tparam T kumi::static_container to inspect
+
+    ## Helper value
+    @code
+    namespace kumi
+    {
+      template<typename T> inline constexpr auto container_size_v = container_size<T>::value;
+    }
+    @endcode
+  **/
+  //====================================================================================================================
   template<typename T> struct container_size : is_container<std::remove_cvref_t<T>>::size
   {
   };
@@ -230,19 +244,21 @@ namespace kumi
   template<typename T> inline constexpr auto container_size_v = container_size<T>::value;
 
   //====================================================================================================================
-  //! @ingroup traits
-  //! @brief Provides access to the type of the elements of a kumi::static_container.
-  //!
-  //! @tparam T kumi::static_container to access
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<typename T> using container_type_t = typename container_type<T>::type;
-  //! }
-  //! @endcode
-  //================================================================================================
+  /**
+    @ingroup traits
+    @brief Provides access to the type of the elements of a kumi::static_container.
+
+    @tparam T kumi::static_container to access
+
+    ## Helper type
+    @code
+    namespace kumi
+    {
+      template<typename T> using container_type_t = typename container_type<T>::type;
+    }
+    @endcode
+  **/
+  //====================================================================================================================
   template<typename T> struct container_type : is_container<std::remove_cvref_t<T>>
   {
     using type = is_container<std::remove_cvref_t<T>>::value_type;
@@ -254,19 +270,21 @@ namespace kumi
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup tuple_traits
-  //! @brief Detects if a given kumi::product_type instance is homogeneous
-  //!
-  //! @tparam T kumi::product_type to inspect
-  //!
-  //! ## Helper variable
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<typename T>
-  //!   inline constexpr is_homogeneous_v = is_homogeneous<I,T>::value;
-  //! }
-  //! @endcode
+  /**
+    @ingroup tuple_traits
+    @brief Detects if a given kumi::product_type instance is homogeneous
+
+    @tparam T kumi::product_type to inspect
+
+    ## Helper variable
+    @code
+    namespace kumi
+    {
+      template<typename T>
+      inline constexpr is_homogeneous_v = is_homogeneous<I,T>::value;
+    }
+    @endcode
+  **/
   //====================================================================================================================
   template<typename T> struct is_homogeneous : std::false_type
   {
@@ -296,20 +314,22 @@ namespace kumi
   template<typename T> inline constexpr auto is_homogeneous_v = is_homogeneous<T>::value;
 
   //====================================================================================================================
-  //! @ingroup traits
-  //! @brief Detects if a given kumi::container instance size is static
-  //!
-  //! @tparam T kumi::container to inspect
-  //!
-  //! ## Helper variable
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<typename T>
-  //!   inline constexpr has_static_size_v = has_static_size<I,T>::value;
-  //! }
-  //! @endcode
-  //================================================================================================
+  /**
+    @ingroup traits
+    @brief Detects if a given kumi::container instance size is static
+
+    @tparam T kumi::container to inspect
+
+    ## Helper variable
+    @code
+    namespace kumi
+    {
+      template<typename T>
+      inline constexpr has_static_size_v = has_static_size<I,T>::value;
+    }
+    @endcode
+  **/
+  //====================================================================================================================
   template<typename T> struct has_static_size : std::false_type
   {
   };
@@ -327,20 +347,22 @@ namespace kumi
 
   template<typename T> inline constexpr auto has_static_size_v = has_static_size<T>::value;
 
-  //================================================================================================
-  //! @ingroup traits
-  //! @brief Checks if a type can be used as a kumi::projection_map
-  //!
-  //! @tparam T The type to inspect
-  //!
-  //! ## Helper value
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<typename T> inline constexpr bool is_projection_map_v = is_projection_map<T>::value;
-  //! }
-  //! @endcode
-  //================================================================================================
+  //====================================================================================================================
+  /**
+    @ingroup traits
+    @brief Checks if a type can be used as a kumi::projection_map
+
+    @tparam T The type to inspect
+
+    ## Helper value
+    @code
+    namespace kumi
+    {
+      template<typename T> inline constexpr bool is_projection_map_v = is_projection_map<T>::value;
+    }
+    @endcode
+  **/
+  //====================================================================================================================
   template<typename T> inline constexpr auto is_projection_map_v = requires { T::is_projection_map; };
 
   template<typename T> struct is_projection_map : std::bool_constant<is_projection_map_v<T>>
@@ -348,20 +370,22 @@ namespace kumi
   };
 
   //====================================================================================================================
-  //! @ingroup traits
-  //! @brief Computes the return type of a call to kumi::get on a kumi::tuple and unwrap the
-  //!        field returned by kumi::get on a kumi::record
-  //!
-  //! @tparam I Index of the type to retrieve
-  //! @tparam T kumi::product_type to access
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<std::size_t I, typename T> using raw_member_t = typename raw_member<I,T>::type;
-  //! }
-  //! @endcode
+  /**
+    @ingroup traits
+    @brief Computes the return type of a call to kumi::get on a kumi::tuple and unwrap the
+           field returned by kumi::get on a kumi::record
+
+    @tparam I Index of the type to retrieve
+    @tparam T kumi::product_type to access
+
+    ## Helper type
+    @code
+    namespace kumi
+    {
+      template<std::size_t I, typename T> using raw_member_t = typename raw_member<I,T>::type;
+    }
+    @endcode
+  **/
   //====================================================================================================================
   template<std::size_t I, typename T> struct raw_member
   {
@@ -379,23 +403,25 @@ namespace kumi
   template<std::size_t I, typename T> using raw_member_t = typename raw_member<I, T>::type;
 
   //====================================================================================================================
-  //! @ingroup record_traits
-  //! @brief Provides indexed access to the types of the elements of a product type and
-  //!                 unwraps the returned field_capture for record type.
-  //!
-  //! @note is equivalent to element_t on product type that doesnt model record type.
-  //!
-  //! @tparam I Index of the type to retrieve
-  //! @tparam T Product type to access
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<std::size_t I, typename T>
-  //!   using raw_element_t = typename raw_element_t<I,T>::type;
-  //! }
-  //! @endcode
+  /**
+    @ingroup record_traits
+    @brief Provides indexed access to the types of the elements of a product type and
+                    unwraps the returned field_capture for record type.
+
+    @note is equivalent to element_t on product type that doesnt model record type.
+
+    @tparam I Index of the type to retrieve
+    @tparam T Product type to access
+
+    ## Helper type
+    @code
+    namespace kumi
+    {
+      template<std::size_t I, typename T>
+      using raw_element_t = typename raw_element_t<I,T>::type;
+    }
+    @endcode
+  **/
   //====================================================================================================================
   template<std::size_t I, typename T> struct raw_element
   {
@@ -412,28 +438,30 @@ namespace kumi
   template<std::size_t I, typename T> using raw_element_t = typename raw_element<I, T>::type;
 
   //====================================================================================================================
-  //! @ingroup traits
-  //! @brief   Checks if a parameter pack only contains distinct types.
-  //!
-  //! @tparam Ints The Index of the types in the parameter pack
-  //! @tparam Ts   The types to access
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<typename T> all_uniques_t
-  //!       = typename all_uniques<std::index_sequence_for<Ts...>, Ts...>::type;
-  //! }
-  //! @endcode
-  //!
-  //! ## Helper value
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<typename T> using all_uniques_v = all_uniques_t<Ts...>::value;
-  //! }
-  //! @endcode
+  /**
+    @ingroup traits
+    @brief   Checks if a parameter pack only contains distinct types.
+
+    @tparam Ints The Index of the types in the parameter pack
+    @tparam Ts   The types to access
+
+    ## Helper type
+    @code
+    namespace kumi
+    {
+      template<typename T> all_uniques_t
+          = typename all_uniques<std::index_sequence_for<Ts...>, Ts...>::type;
+    }
+    @endcode
+
+    ## Helper value
+    @code
+    namespace kumi
+    {
+      template<typename T> using all_uniques_v = all_uniques_t<Ts...>::value;
+    }
+    @endcode
+  **/
   //====================================================================================================================
   template<typename Ints, typename... Ts> struct all_uniques;
 
@@ -459,29 +487,31 @@ namespace kumi
   template<typename... Ts> inline constexpr auto all_uniques_v = all_uniques_t<Ts...>::value;
 
   //====================================================================================================================
-  //! @ingroup traits
-  //! @brief   Checks if a parameter pack only contains distinct kumi::field_member names.
-  //!          Evaluates to false if no type is a kumi::field_member.
-  //!
-  //! @tparam Ints The Index of the types in the parameter pack
-  //! @tparam Ts The types to access
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<typename T> all_unique_names_t
-  //!       = typename all_unique_names<std::index_sequence_for<Ts...>, Ts...>::type;
-  //! }
-  //! @endcode
-  //!
-  //! ## Helper value
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<typename T> using all_unique_names_v = all_unique_names_t<Ts...>::value;
-  //! }
-  //! @endcode
+  /**
+    @ingroup traits
+    @brief   Checks if a parameter pack only contains distinct kumi::field_member names.
+             Evaluates to false if no type is a kumi::field_member.
+
+    @tparam Ints The Index of the types in the parameter pack
+    @tparam Ts The types to access
+
+    ## Helper type
+    @code
+    namespace kumi
+    {
+      template<typename T> all_unique_names_t
+          = typename all_unique_names<std::index_sequence_for<Ts...>, Ts...>::type;
+    }
+    @endcode
+
+    ## Helper value
+    @code
+    namespace kumi
+    {
+      template<typename T> using all_unique_names_v = all_unique_names_t<Ts...>::value;
+    }
+    @endcode
+  **/
   //====================================================================================================================
   template<typename Ints, typename... Ts> struct all_unique_names;
 

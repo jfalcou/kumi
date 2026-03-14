@@ -10,36 +10,38 @@
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup transforms
-  //! @brief Invoke the Callable object f with the elements of the product type unrolled as arguments.
-  //!
-  //! `f` is applied on the underlying values when the input `t` is a record type.
-  //!
-  //! @note This function does not take part in overload resolution if `f` can't be applied to the
-  //!       elements of `t`.
-  //!
-  //! @param f	Callable object to be invoked
-  //! @param t  Product Type whose elements are used as arguments to f
-  //! @return   The value returned by f.
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi::result
-  //! {
-  //!   template<typename Function, product_type T> struct apply;
-  //!
-  //!   template<typename Function, product_type T>
-  //!   using apply_t = typename apply<Function,T>::type;
-  //! }
-  //! @endcode
-  //!
-  //! Computes the return type of a call to kumi::apply
-  //!
-  //! ## Examples:
-  //! ### Tuple:
-  //! @include doc/tuple/algo/apply.cpp
-  //! ### Record:
-  //! @include doc/record/algo/apply.cpp
+  /**
+    @ingroup transforms
+    @brief Invoke the Callable object f with the elements of the product type unrolled as arguments.
+
+    `f` is applied on the underlying values when the input `t` is a record type.
+
+    @note This function does not take part in overload resolution if `f` can't be applied to the
+          elements of `t`.
+
+    @param f	Callable object to be invoked
+    @param t  Product Type whose elements are used as arguments to f
+    @return   The value returned by f.
+
+    ## Helper type
+    @code
+    namespace kumi::result
+    {
+      template<typename Function, product_type T> struct apply;
+
+      template<typename Function, product_type T>
+      using apply_t = typename apply<Function,T>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::apply
+
+    ## Examples:
+    ### Tuple:
+    @include doc/tuple/algo/apply.cpp
+    ### Record:
+    @include doc/record/algo/apply.cpp
+  **/
   //====================================================================================================================
   template<typename Function, concepts::product_type T>
   KUMI_ABI constexpr decltype(auto) apply(Function&& f, T&& t) noexcept(_::supports_nothrow_apply<Function&&, T&&>)
@@ -47,7 +49,7 @@ namespace kumi
   requires(_::supports_apply<Function, T>)
 #endif
   {
-    if constexpr (concepts::sized_product_type<T, 0>) return invoke(KUMI_FWD(f));
+    if constexpr (concepts::empty_product_type<T>) return invoke(KUMI_FWD(f));
     else if constexpr (concepts::record_type<T>) return apply(KUMI_FWD(f), values_of(KUMI_FWD(t)));
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) -> decltype(auto) {
@@ -70,7 +72,7 @@ namespace kumi
     template<typename Function, concepts::record_type R>
     KUMI_ABI constexpr decltype(auto) apply_field(Function&& f, R&& t)
     {
-      if constexpr (concepts::sized_product_type<R, 0>) return invoke(KUMI_FWD(f));
+      if constexpr (concepts::empty_product_type<R>) return invoke(KUMI_FWD(f));
       else
         return [&]<std::size_t... I>(std::index_sequence<I...>) -> decltype(auto) {
           return invoke(KUMI_FWD(f), get<I>(KUMI_FWD(t))...);

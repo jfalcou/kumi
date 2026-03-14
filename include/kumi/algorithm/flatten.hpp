@@ -16,7 +16,7 @@ namespace kumi
     //==================================================================================================================
     template<typename T> KUMI_ABI constexpr auto flat_one(T&& t)
     {
-      if constexpr (concepts::sized_product_type<T, 0>) return KUMI_FWD(t);
+      if constexpr (concepts::empty_product_type<T>) return KUMI_FWD(t);
       else
         return [&]<std::size_t... I>(std::index_sequence<I...>) {
           auto v_or_r = [&]<typename V>(V&& v) {
@@ -41,7 +41,7 @@ namespace kumi
     template<auto Prefix, typename T> KUMI_ABI constexpr auto flat(T&& t)
     {
       using Prefix_type = std::remove_cvref_t<decltype(Prefix)>;
-      if constexpr (concepts::sized_product_type<T, 0>) return KUMI_FWD(t);
+      if constexpr (concepts::empty_product_type<T>) return KUMI_FWD(t);
       else
         return [&]<std::size_t... I>(std::index_sequence<I...>) {
           auto v_or_r = [&]<typename V>(V&& v) {
@@ -61,7 +61,7 @@ namespace kumi
 
     template<auto Prefix, typename T, typename F> KUMI_ABI constexpr auto flat_map(T&& t, F f)
     {
-      if constexpr (concepts::sized_product_type<T, 0>) return KUMI_FWD(t);
+      if constexpr (concepts::empty_product_type<T>) return KUMI_FWD(t);
       else
         return [&]<std::size_t... I>(std::index_sequence<I...>) {
           using Prefix_type = std::remove_cvref_t<decltype(Prefix)>;
@@ -82,38 +82,40 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup  generators
-  //! @brief    Converts a product type of product types into a product type of all elements.
-  //!
-  //! On record types, the names of the outer record are concatenated to the inner ones ultimately constructing names
-  //! such as "outer.inner". If the input is a product type containing record types or vice versa only the inner types
-  //! matching the outer semantic will be flattened. Thus a record inside a tuple will not be flattened.
-  //!
-  //! @param t  Product type to flatten
-  //! @return   A product type composed of all elements of `t` flattened non-recursively
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi::result
-  //! {
-  //!   template<product_type T> struct flatten;
-  //!
-  //!   template<product_type T>
-  //!   using flatten_t = typename flatten<T>::type;
-  //! }
-  //! @endcode
-  //!
-  //! Computes the return type of a call to kumi::flatten
-  //!
-  //! ## Examples:
-  //! ### Tuple:
-  //! @include doc/tuple/algo/flatten.cpp
-  //! ### Record:
-  //! @include doc/record/algo/flatten.cpp
+  /**
+    @ingroup  generators
+    @brief    Converts a product type of product types into a product type of all elements.
+
+    On record types, the names of the outer record are concatenated to the inner ones ultimately constructing names
+    such as "outer.inner". If the input is a product type containing record types or vice versa only the inner types
+    matching the outer semantic will be flattened. Thus a record inside a tuple will not be flattened.
+
+    @param t  Product type to flatten
+    @return   A product type composed of all elements of `t` flattened non-recursively
+
+    ## Helper type
+    @code
+    namespace kumi::result
+    {
+      template<product_type T> struct flatten;
+
+      template<product_type T>
+      using flatten_t = typename flatten<T>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::flatten
+
+    ## Examples:
+    ### Tuple:
+    @include doc/tuple/algo/flatten.cpp
+    ### Record:
+    @include doc/record/algo/flatten.cpp
+  **/
   //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto flatten(T&& t)
   {
-    if constexpr (concepts::sized_product_type<T, 0>) return t;
+    if constexpr (concepts::empty_product_type<T>) return t;
     else if constexpr (concepts::record_type<T>) return _::flat_one(KUMI_FWD(t));
     else
     {
@@ -129,45 +131,47 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup  generators
-  //! @brief    Recursively converts a product type of product types into a product type of all elements.
-  //!
-  //! Recursively converts a product type of product types `t` into a product type of all elements of
-  //! said product types.
-  //!
-  //! If the Callable object f is provided, non-product type elements are processed by `f` before
-  //! being inserted.
-  //!
-  //! On record types, the names of the outer record are concatenated to the inner ones ultimately constructing names
-  //! such as "outer.inner". If the input is a product type containing record types or vice versa only the inner types
-  //! matching the outer semantic will be flattened. Thus a record inside a tuple will not be flattened.
-  //!
-  //! @param t  Product type to flatten
-  //! @param f  Optional Callable object to apply when a sub-tuple is flattened
-  //! @return   A product type composed of all elements of `t` flattened recursively
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi::result
-  //! {
-  //!   template<product_type T, typename Func = void> struct flatten_all;
-  //!
-  //!   template<product_type T, typename Func = void>
-  //!   using flatten_all_t = typename flatten_all<T, Func>::type;
-  //! }
-  //! @endcode
-  //!
-  //! Computes the return type of a call to kumi::flatten_all
-  //!
-  //! ## Examples:
-  //! ### Tuple:
-  //! @include doc/tuple/algo/flatten_all.cpp
-  //! ### Record:
-  //! @include doc/record/algo/flatten_all.cpp
+  /**
+    @ingroup  generators
+    @brief    Recursively converts a product type of product types into a product type of all elements.
+
+    Recursively converts a product type of product types `t` into a product type of all elements of
+    said product types.
+
+    If the Callable object f is provided, non-product type elements are processed by `f` before
+    being inserted.
+
+    On record types, the names of the outer record are concatenated to the inner ones ultimately constructing names
+    such as "outer.inner". If the input is a product type containing record types or vice versa only the inner types
+    matching the outer semantic will be flattened. Thus a record inside a tuple will not be flattened.
+
+    @param t  Product type to flatten
+    @param f  Optional Callable object to apply when a sub-tuple is flattened
+    @return   A product type composed of all elements of `t` flattened recursively
+
+    ## Helper type
+    @code
+    namespace kumi::result
+    {
+      template<product_type T, typename Func = void> struct flatten_all;
+
+      template<product_type T, typename Func = void>
+      using flatten_all_t = typename flatten_all<T, Func>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::flatten_all
+
+    ## Examples:
+    ### Tuple:
+    @include doc/tuple/algo/flatten_all.cpp
+    ### Record:
+    @include doc/record/algo/flatten_all.cpp
+  **/
   //====================================================================================================================
   template<concepts::product_type T, typename Func> [[nodiscard]] KUMI_ABI constexpr auto flatten_all(T&& t, Func f)
   {
-    if constexpr (concepts::sized_product_type<T, 0>) return t;
+    if constexpr (concepts::empty_product_type<T>) return t;
     else if constexpr (concepts::record_type<T>) return _::flat_map<none>(KUMI_FWD(t), KUMI_FWD(f));
     else
     {
@@ -184,7 +188,7 @@ namespace kumi
   /// @overload
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto flatten_all(T&& t)
   {
-    if constexpr (concepts::sized_product_type<T, 0>) return t;
+    if constexpr (concepts::empty_product_type<T>) return t;
     else if constexpr (concepts::record_type<T>) return _::flat<none>(KUMI_FWD(t));
     else
     {
@@ -200,34 +204,36 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup  generators
-  //! @brief    Convert a product type to a flat product type of pointers to each its components.
-  //!
-  //! On record types, the names of the outer record are concatenated to the inner ones ultimately constructing names
-  //! such as "outer.inner". If the input is a product type containing record types or vice versa only the inner types
-  //! matching the outer semantic will be flattened. Thus a record inside a tuple will not be flattened.
-  //!
-  //! @param t  Product type to convert
-  //! @return   A flat product type composed of pointers to each elements of `t`.
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi::result
-  //! {
-  //!   template<product_type T> struct as_flat_ptr;
-  //!
-  //!   template<product_type T>
-  //!   using as_flat_ptr_t = typename as_flat_ptr<T>::type;
-  //! }
-  //! @endcode
-  //!
-  //! Computes the return type of a call to kumi::as_flat_ptr
-  //!
-  //! ## Examples:
-  //! ### Tuple:
-  //! @include doc/tuple/algo/as_flat_ptr.cpp
-  //! ### Record:
-  //! @include doc/record/algo/as_flat_ptr.cpp
+  /**
+    @ingroup  generators
+    @brief    Convert a product type to a flat product type of pointers to each its components.
+
+    On record types, the names of the outer record are concatenated to the inner ones ultimately constructing names
+    such as "outer.inner". If the input is a product type containing record types or vice versa only the inner types
+    matching the outer semantic will be flattened. Thus a record inside a tuple will not be flattened.
+
+    @param t  Product type to convert
+    @return   A flat product type composed of pointers to each elements of `t`.
+
+    ## Helper type
+    @code
+    namespace kumi::result
+    {
+      template<product_type T> struct as_flat_ptr;
+
+      template<product_type T>
+      using as_flat_ptr_t = typename as_flat_ptr<T>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::as_flat_ptr
+
+    ## Examples:
+    ### Tuple:
+    @include doc/tuple/algo/as_flat_ptr.cpp
+    ### Record:
+    @include doc/record/algo/as_flat_ptr.cpp
+  **/
   //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI auto as_flat_ptr(T&& t) noexcept
   {

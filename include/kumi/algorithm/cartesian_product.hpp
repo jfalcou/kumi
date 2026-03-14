@@ -37,33 +37,35 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup    generators
-  //! @brief      Return the Cartesian Product of all elements of its arguments product types
-  //! @param ts   Product types to process
-  //! @return     A tuple containing all the product types built from all combination of all ts'
-  //!             elements
-  //!
-  //! @note This function does not take part in overload resolution if the input product types do not follow the same
-  //!       semantic. @see concepts::follows_same_semantic
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<product_type... Ts> struct cartesian_product;
-  //!
-  //!   template<product_type... Ts>
-  //!   using cartesian_product_t = typename cartesian_product<Ts...>::type;
-  //! }
-  //! @endcode
-  //!
-  //! Computes the type returned by a call to kumi::cartesian_product.
-  //!
-  //! ## Examples:
-  //! ### Tuple:
-  //! @include doc/tuple/algo/cartesian_product.cpp
-  //! ### Record:
-  //! @include doc/record/algo/cartesian_product.cpp
+  /**
+    @ingroup    generators
+    @brief      Return the Cartesian Product of all elements of its arguments product types
+    @param ts   Product types to process
+    @return     A tuple containing all the product types built from all combination of all ts'
+                elements
+
+    @note This function does not take part in overload resolution if the input product types do not follow the same
+          semantic. @see concepts::follows_same_semantic
+
+    ## Helper type
+    @code
+    namespace kumi
+    {
+      template<product_type... Ts> struct cartesian_product;
+
+      template<product_type... Ts>
+      using cartesian_product_t = typename cartesian_product<Ts...>::type;
+    }
+    @endcode
+
+    Computes the type returned by a call to kumi::cartesian_product.
+
+    ## Examples:
+    ### Tuple:
+    @include doc/tuple/algo/cartesian_product.cpp
+    ### Record:
+    @include doc/record/algo/cartesian_product.cpp
+  **/
   //====================================================================================================================
   template<concepts::product_type... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto cartesian_product(Ts&&... ts)

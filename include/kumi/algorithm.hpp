@@ -1,39 +1,41 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
 {
-  //================================================================================================
-  //! @defgroup algorithm Product Type Algorithms
-  //! @brief    Algorithms for manipulating Product types
-  //!
-  //! @{
-  //!   @defgroup transforms Product Type Transformations
-  //!   @brief Algorithms applying transformation to product types
-  //!   @{
-  //!     @defgroup tuple_transforms Tuple Type Specific Transformations
-  //!     @brief Algorithms applying transformation to tuples
-  //!
-  //!     @defgroup record_transforms Record Type Specific Transformations
-  //!     @brief Algorithms applying transformation to records
-  //!   @}
-  //!
-  //!   @defgroup queries Product Type Queries
-  //!   @brief    Algorithms querying properties from product types
-  //!
-  //!   @defgroup reductions Product Type Generalized Reductions
-  //!   @brief    Algorithms performing reductions over product types
-  //!
-  //!   @defgroup generators Product Type Generators
-  //!   @brief    Algorithms generating product types
-  //! @}
-  //================================================================================================
+  //====================================================================================================================
+  /**
+    @defgroup algorithm Product Type Algorithms
+    @brief    Algorithms for manipulating Product types
+
+    @{
+      @defgroup transforms Product Type Transformations
+      @brief Algorithms applying transformation to product types
+      @{
+        @defgroup tuple_transforms Tuple Type Specific Transformations
+        @brief Algorithms applying transformation to tuples
+
+        @defgroup record_transforms Record Type Specific Transformations
+        @brief Algorithms applying transformation to records
+      @}
+
+      @defgroup queries Product Type Queries
+      @brief    Algorithms querying properties from product types
+
+      @defgroup reductions Product Type Generalized Reductions
+      @brief    Algorithms performing reductions over product types
+
+      @defgroup generators Product Type Generators
+      @brief    Algorithms generating product types
+    @}
+  **/
+  //====================================================================================================================
 }
 
 #include <kumi/algorithm/meta.hpp>

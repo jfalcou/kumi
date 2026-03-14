@@ -10,13 +10,15 @@
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup utility
-  //! @brief Helper to retrive the index of a type in a product type by it s type
-  //!
-  //! @note This function does not participate in overload resolution if the product type has several instances of the
-  //!       same type or if it is empty.
-  //!
-  //! @return the index of the element of type U in the product type if it exist
+  /**
+    @ingroup utility
+    @brief Helper to retrive the index of a type in a product type by it s type
+
+    @note This function does not participate in overload resolution if the product type has several instances of the
+          same type or if it is empty.
+
+    @return the index of the element of type U in the product type if it exist
+  **/
   //====================================================================================================================
   template<typename U, concepts::product_type T>
   requires(concepts::typed_get_compliant<U, T>)
@@ -28,13 +30,15 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup utility
-  //! @brief Helper to retrive the index of a type in a product type by it s name
-  //!
-  //! @note This function does not participate in overload resolution if the product type has several instances of the
-  //!       same name or has no name at all.
-  //!
-  //! @return the index of the element labeled Name in the product type if it exist
+  /**
+    @ingroup utility
+    @brief Helper to retrive the index of a type in a product type by it s name
+
+    @note This function does not participate in overload resolution if the product type has several instances of the
+          same name or has no name at all.
+
+    @return the index of the element labeled Name in the product type if it exist
+  **/
   //====================================================================================================================
   template<concepts::identifier Name, concepts::product_type T>
   requires(concepts::named_get_compliant<Name, T>)
@@ -46,11 +50,13 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup types
-  //! @class index_t
-  //! @brief Integral constant type
-  //!
-  //! Defines a integral constant wrapper used to carry compile-time constant through API
+  /**
+    @ingroup types
+    @class index_t
+    @brief Integral constant type
+
+    Defines a integral constant wrapper used to carry compile-time constant through API
+  **/
   //====================================================================================================================
   template<std::size_t N> struct index_t
   {
@@ -62,14 +68,18 @@ namespace kumi
   };
 
   //====================================================================================================================
-  //! @ingroup utility
-  //! @brief Inline integral constant value for kumi::index_t
+  /**
+    @ingroup utility
+    @brief Inline integral constant value for kumi::index_t
+  **/
   //====================================================================================================================
   template<std::size_t N> inline constexpr index_t<N> const index = {};
 
   //====================================================================================================================
-  //! @namespace literals
-  //! @brief KUMI literals namespace
+  /**
+    @namespace literals
+    @brief KUMI literals namespace
+  **/
   //====================================================================================================================
   inline namespace literals
   {
@@ -81,11 +91,13 @@ namespace kumi
     }
 
     //==================================================================================================================
-    //! @ingroup utility
-    //! @brief Forms a integral constant literal of the desired value.
-    //! @return An instance of kumi::index_t for the specified integral value
-    //! ## Example:
-    //! @include doc/infra/index.cpp
+    /**
+      @ingroup utility
+      @brief Forms a integral constant literal of the desired value.
+      @return An instance of kumi::index_t for the specified integral value
+      ## Example:
+      @include doc/infra/index.cpp
+    **/
     //==================================================================================================================
     template<char... c> constexpr auto operator""_c() noexcept
     {
@@ -93,11 +105,13 @@ namespace kumi
     }
 
     //==================================================================================================================
-    //! @ingroup utility
-    //! @brief Forms a constant string literal of the desired value.
-    //! @return An instance of kumi::name for the specified string
-    //! ##Example:
-    //! @include doc/infra/name.cpp
+    /**
+      @ingroup utility
+      @brief Forms a constant string literal of the desired value.
+      @return An instance of kumi::name for the specified string
+      ##Example:
+      @include doc/infra/name.cpp
+    **/
     //==================================================================================================================
     template<kumi::str ID> constexpr auto operator""_id() noexcept
     {
@@ -106,10 +120,12 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup utility
-  //! @brief Convert a unary template meta-program in a running predicate
-  //! @tparam Pred Unary template meta-program to convert.
-  //! @return A Callable Object applying Pred to the type of its arguments
+  /**
+    @ingroup utility
+    @brief Convert a unary template meta-program in a running predicate
+    @tparam Pred Unary template meta-program to convert.
+    @return A Callable Object applying Pred to the type of its arguments
+  **/
   //====================================================================================================================
   template<template<class> class Pred> [[nodiscard]] constexpr auto predicate() noexcept
   {

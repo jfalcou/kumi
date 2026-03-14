@@ -10,23 +10,25 @@
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup  utility
-  //! @brief    Extracts the names of the fields of a product type.
-  //!
-  //! @note If some fields are unnamed, the associated name is kumi::unit.
-  //!
-  //! @tparam   T the type of the product type from which to extract names.
-  //! @return   A tuple of the names of a product type if there are any.
-  //!
-  //! @see kumi::tuple
-  //! @see kumi::record
-  //!
-  //! ## Example:
-  //! @include doc/infra/members_of.cpp
+  /**
+    @ingroup  utility
+    @brief    Extracts the names of the fields of a product type.
+
+    @note If some fields are unnamed, the associated name is kumi::unit.
+
+    @tparam   T the type of the product type from which to extract names.
+    @return   A tuple of the names of a product type if there are any.
+
+    @see kumi::tuple
+    @see kumi::record
+
+    ## Example:
+    @include doc/infra/members_of.cpp
+  **/
   //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto members_of(as<T>) noexcept
   {
-    if constexpr (concepts::sized_product_type<T, 0>) return tuple{};
+    if constexpr (concepts::empty_product_type<T>) return tuple{};
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return tuple{name_of<element_t<I, T>>()...};
@@ -34,22 +36,24 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup  utility
-  //! @brief    Extracts the values of the fields of a product type.
-  //!
-  //! @tparam   T the type of the product type from which to extract names.
-  //! @param    t the product_type from which to extract names.
-  //! @return   A tuple of references to the values of a kumi::product_type.
-  //!
-  //! @see kumi::tuple
-  //! @see kumi::record
-  //!
-  //! ## Example:
-  //! @include doc/infra/values_of.cpp
+  /**
+    @ingroup  utility
+    @brief    Extracts the values of the fields of a product type.
+
+    @tparam   T the type of the product type from which to extract names.
+    @param    t the product_type from which to extract names.
+    @return   A tuple of references to the values of a kumi::product_type.
+
+    @see kumi::tuple
+    @see kumi::record
+
+    ## Example:
+    @include doc/infra/values_of.cpp
+  **/
   //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto values_of(T&& t) noexcept
   {
-    if constexpr (concepts::sized_product_type<T, 0>) return tuple{};
+    if constexpr (concepts::empty_product_type<T>) return tuple{};
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return tuple<result::field_value_of_t<member_t<I, T>>...>{field_value_of(get<I>(KUMI_FWD(t)))...};

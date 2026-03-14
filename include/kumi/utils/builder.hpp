@@ -10,23 +10,25 @@
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup  traits
-  //! @brief    Extracts the common product_type of a parameter pack.
-  //!
-  //! If all the types are record types then it returns
-  //! an empty record type, otherwise returns an empty product type. As we are unable to compute the
-  //! Least Restrictive Subtype of a pack, this trait should be specialized for each case one would want to
-  //! write. For the kumi library, it is specialized for kumi::tuple and kumi::record
-  //!
-  //! @tparam Ts The product types to access
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<typename... Ts> using common_product_type_t = typename common_product_type<Ts...>::type;
-  //! }
-  //! @endcode
+  /**
+    @ingroup  traits
+    @brief    Extracts the common product_type of a parameter pack.
+
+    If all the types are record types then it returns
+    an empty record type, otherwise returns an empty product type. As we are unable to compute the
+    Least Restrictive Subtype of a pack, this trait should be specialized for each case one would want to
+    write. For the kumi library, it is specialized for kumi::tuple and kumi::record
+
+    @tparam Ts The product types to access
+
+    ## Helper type
+    @code
+    namespace kumi
+    {
+      template<typename... Ts> using common_product_type_t = typename common_product_type<Ts...>::type;
+    }
+    @endcode
+  **/
   //====================================================================================================================
   template<typename... Ts> struct common_product_type
   {
@@ -35,16 +37,18 @@ namespace kumi
   template<typename... Ts> using common_product_type_t = typename common_product_type<Ts...>::type;
 
   //====================================================================================================================
-  //! @ingroup  utility
-  //! @class    builder
-  //! @brief    Helper structure to build the correct output product type based on the given template parameter. If the
-  //!           provided product type is a not a record_type the builder will output a tuple otherwise a record. One can
-  //!           specialize the builder for it's own type matching the product type semantic.
-  //!
-  //! builder provides a generic way of defining a product type. Depending on the given semantic of the input parameter
-  //! (product type or record type), it will output respectively a kumi::tuple or a kumi::record.
-  //!
-  //! @tparam T the template type to be built.
+  /**
+    @ingroup  utility
+    @class    builder
+    @brief    Helper structure to build the correct output product type based on the given template parameter. If the
+              provided product type is a not a record_type the builder will output a tuple otherwise a record. One can
+              specialize the builder for it's own type matching the product type semantic.
+
+    builder provides a generic way of defining a product type. Depending on the given semantic of the input parameter
+    (product type or record type), it will output respectively a kumi::tuple or a kumi::record.
+
+    @tparam T the template type to be built.
+  **/
   //====================================================================================================================
   template<typename T> struct builder;
 

@@ -10,13 +10,15 @@
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup  types
-  //! @class    str
-  //! @brief    Static string used to create named fields.
-  //!
-  //! @note the `.` character is reserved for internal manipulation.
-  //!
-  //! kumi::str provides a way to define compile time names.
+  /**
+    @ingroup  types
+    @class    str
+    @brief    Static string used to create named fields.
+
+    @note the `.` character is reserved for internal manipulation.
+
+    kumi::str provides a way to define compile time names.
+  **/
   //====================================================================================================================
   struct str
   {
@@ -77,9 +79,11 @@ namespace kumi
   };
 
   //====================================================================================================================
-  //! @ingroup  types
-  //! @class    unknown
-  //! @brief    Type indicating a identifier was not found in a given kumi::product_type
+  /**
+    @ingroup  types
+    @class    unknown
+    @brief    Type indicating a identifier was not found in a given kumi::product_type
+  **/
   //====================================================================================================================
   struct unknown
   {

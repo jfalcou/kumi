@@ -10,39 +10,41 @@
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup  generators
-  //! @brief    Extracts a sub product type from a product type
-  //!
-  //! On record types, this function operates on elements as if they were ordered. The considered order is the order
-  //! of declaration.
-  //!
-  //! @note This function will issue a compile time error if `I0` and `I1` do not verify that
-  //!       `0 <= I0 <= I1 <= size_v<T>`.
-  //!
-  //! @param  t  Product Type to extract from
-  //! @param  i0 Compile-time index of the first element to extract.
-  //! @param  i1 Compile-time index past the last element to extract. By default, `i1` is equal to
-  //!         `size_v<T>`.
-  //! @return A new product type containing the selected elements of `t`.
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi::result
-  //! {
-  //!   template<product_type T, std::size_t I0, std::size_t I1=-1> struct extract;
-  //!
-  //!   template<product_type T, std::size_t I0, std::size_t I1=-1>
-  //!   using extract_t = typename extract<T,I0,I1>::type;
-  //! }
-  //! @endcode
-  //!
-  //! Computes the type returned by a call to extract.
-  //!
-  //! ## Examples:
-  //! ### Tuple:
-  //! @include doc/tuple/algo/extract.cpp
-  //! ### Record:
-  //! @include doc/record/algo/extract.cpp
+  /**
+    @ingroup  generators
+    @brief    Extracts a sub product type from a product type
+
+    On record types, this function operates on elements as if they were ordered. The considered order is the order
+    of declaration.
+
+    @note This function will issue a compile time error if `I0` and `I1` do not verify that
+          `0 <= I0 <= I1 <= size_v<T>`.
+
+    @param  t  Product Type to extract from
+    @param  i0 Compile-time index of the first element to extract.
+    @param  i1 Compile-time index past the last element to extract. By default, `i1` is equal to
+            `size_v<T>`.
+    @return A new product type containing the selected elements of `t`.
+
+    ## Helper type
+    @code
+    namespace kumi::result
+    {
+      template<product_type T, std::size_t I0, std::size_t I1=-1> struct extract;
+
+      template<product_type T, std::size_t I0, std::size_t I1=-1>
+      using extract_t = typename extract<T,I0,I1>::type;
+    }
+    @endcode
+
+    Computes the type returned by a call to extract.
+
+    ## Examples:
+    ### Tuple:
+    @include doc/tuple/algo/extract.cpp
+    ### Record:
+    @include doc/record/algo/extract.cpp
+  **/
   //====================================================================================================================
   template<std::size_t I0, std::size_t I1, concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto extract(T&& t,
@@ -65,37 +67,39 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup  generators
-  //! @brief    Split a product type into two
-  //!
-  //! Split a product type in two product_type containing all the elements before and after a given index.
-  //! On record types, this function operates on elements as if they were ordered. The considered order is the order
-  //! of declaration.
-  //!
-  //! @note This function will issue a compile time error if `I0` is not in `[0, sizeof...(Ts)[`.
-  //!
-  //! @param  t Product Type to split.
-  //! @param  i0 Compile-time index of the split pivot.
-  //! @return A new tuple containing the two sub parts of `t` cut at index I.
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi::result
-  //! {
-  //!   template<product_type T, std::size_t I0> struct split;
-  //!
-  //!   template<product_type T, std::size_t I0>
-  //!   using split_t = typename split<T,I0>::type;
-  //! }
-  //! @endcode
-  //!
-  //! Computes the type returned by a call to split.
-  //!
-  //! ## Examples:
-  //! ### Tuple:
-  //! @include doc/tuple/algo/split.cpp
-  //! ### Record:
-  //! @include doc/record/algo/split.cpp
+  /**
+    @ingroup  generators
+    @brief    Split a product type into two
+
+    Split a product type in two product_type containing all the elements before and after a given index.
+    On record types, this function operates on elements as if they were ordered. The considered order is the order
+    of declaration.
+
+    @note This function will issue a compile time error if `I0` is not in `[0, sizeof...(Ts)[`.
+
+    @param  t Product Type to split.
+    @param  i0 Compile-time index of the split pivot.
+    @return A new tuple containing the two sub parts of `t` cut at index I.
+
+    ## Helper type
+    @code
+    namespace kumi::result
+    {
+      template<product_type T, std::size_t I0> struct split;
+
+      template<product_type T, std::size_t I0>
+      using split_t = typename split<T,I0>::type;
+    }
+    @endcode
+
+    Computes the type returned by a call to split.
+
+    ## Examples:
+    ### Tuple:
+    @include doc/tuple/algo/split.cpp
+    ### Record:
+    @include doc/record/algo/split.cpp
+  **/
   //====================================================================================================================
   template<std::size_t I0, concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto split(T&& t, [[maybe_unused]] index_t<I0> i0) noexcept

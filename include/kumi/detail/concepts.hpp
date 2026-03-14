@@ -36,9 +36,9 @@ namespace kumi::_
   concept valid_label = implicit_constructible<T> &&
                         (!requires { to_str(T{}); } || std::same_as<typename value<to_str(T{})>::type, kumi::str>);
 
-  //==============================================================================================
+  //====================================================================================================================
   // Helper concepts for custom identifier/field use (these are fundamental types in kumi)
-  //==============================================================================================
+  //====================================================================================================================
   template<typename T>
   concept identifier = requires(T const& t) { typename std::remove_cvref_t<T>::tag_type; };
 

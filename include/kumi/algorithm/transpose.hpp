@@ -10,39 +10,41 @@
 namespace kumi
 {
   //====================================================================================================================
-  //! @ingroup  generators
-  //! @brief    Transpose a product type of product types by shifting elements in their transposed position always
-  //!           returning a tuple as the external product type.
-  //!
-  //! @param t Product type to transpose
-  //! @return  A product type containing the transposed elements of `t`.
-  //!
-  //! @note This function will issue a compile time error if the each element of the input product type are not
-  //!       themselves product types or if their size are not equal.
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi::result
-  //! {
-  //!   template<product_type T> struct transpose;
-  //!
-  //!   template<product_type T>
-  //!   using transpose_t = typename transpose<T>::type;
-  //! }
-  //! @endcode
-  //!
-  //! Computes the return type of a call to kumi::transpose
-  //!
-  //! ## Examples:
-  //! ### Tuple:
-  //! @include doc/tuple/algo/transpose.cpp
-  //! ### Record:
-  //! @include doc/record/algo/transpose.cpp
+  /**
+    @ingroup  generators
+    @brief    Transpose a product type of product types by shifting elements in their transposed position always
+              returning a tuple as the external product type.
+
+    @param t Product type to transpose
+    @return  A product type containing the transposed elements of `t`.
+
+    @note This function will issue a compile time error if the each element of the input product type are not
+          themselves product types or if their size are not equal.
+
+    ## Helper type
+    @code
+    namespace kumi::result
+    {
+      template<product_type T> struct transpose;
+
+      template<product_type T>
+      using transpose_t = typename transpose<T>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::transpose
+
+    ## Examples:
+    ### Tuple:
+    @include doc/tuple/algo/transpose.cpp
+    ### Record:
+    @include doc/record/algo/transpose.cpp
+  **/
   //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto transpose(T&& t)
   {
     static_assert(_::supports_transpose<T>, "[KUMI] - Cannot transpose given product type");
-    if constexpr (concepts::sized_product_type<T, 0>) return tuple{};
+    if constexpr (concepts::empty_product_type<T>) return tuple{};
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {

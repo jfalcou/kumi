@@ -16,23 +16,25 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup  queries
-  //! @brief    Checks if a product type contains a given identifier
-  //!
-  //! @param t  the product type to inspect.
-  //! @param id Identifier to check
-  //! @return   `true` if the `t` contains a field labeled with the `id` identifier, `false` otherwise.
-  //!
-  //! ## Examples:
-  //! ### Tuple:
-  //! @include doc/tuple/algo/contains.cpp
-  //! ### Record:
-  //! @include doc/record/algo/contains.cpp
+  /**
+    @ingroup  queries
+    @brief    Checks if a product type contains a given identifier
+
+    @param t  the product type to inspect.
+    @param id Identifier to check
+    @return   `true` if the `t` contains a field labeled with the `id` identifier, `false` otherwise.
+
+    ## Examples:
+    ### Tuple:
+    @include doc/tuple/algo/contains.cpp
+    ### Record:
+    @include doc/record/algo/contains.cpp
+  **/
   //====================================================================================================================
   template<concepts::product_type T, concepts::identifier ID>
   KUMI_ABI constexpr bool contains([[maybe_unused]] T&& t, [[maybe_unused]] ID const& id) noexcept
   {
-    if constexpr (concepts::sized_product_type<T, 0>) return false;
+    if constexpr (concepts::empty_product_type<T>) return false;
     else if constexpr (concepts::record_type<T>)
       return []<std::size_t... I>(std::index_sequence<I...>) {
         return _::can_get_field_by_value<std::remove_cvref_t<ID>, element_t<I, T>...>;
@@ -46,45 +48,49 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup  queries
-  //! @brief    Checks if a product type contains at least one of many identifiers
-  //!
-  //! @param t    the product type to inspect.
-  //! @param ids  Identifiers to check
-  //! @return     `true` if `t` contains a field labeld by one of the `ids`, and `false` otherwise.
-  //!
-  //! ## Examples:
-  //! ### Tuple:
-  //! @include doc/tuple/algo/contains_any.cpp
-  //! ### Record:
-  //! @include doc/record/algo/contains_any.cpp
-  //==================================================================================================================
+  /**
+    @ingroup  queries
+    @brief    Checks if a product type contains at least one of many identifiers
+
+    @param t    the product type to inspect.
+    @param ids  Identifiers to check
+    @return     `true` if `t` contains a field labeld by one of the `ids`, and `false` otherwise.
+
+    ## Examples:
+    ### Tuple:
+    @include doc/tuple/algo/contains_any.cpp
+    ### Record:
+    @include doc/record/algo/contains_any.cpp
+  **/
+  //====================================================================================================================
   template<concepts::product_type T, concepts::identifier... Is>
   KUMI_ABI constexpr bool contains_any(T&& t, Is const&... ids) noexcept
   {
-    if constexpr (concepts::sized_product_type<T, 0>) return false;
+    if constexpr (concepts::empty_product_type<T>) return false;
     else if constexpr (sizeof...(Is) == 0) return false;
     else return (contains(KUMI_FWD(t), ids) || ...);
   }
 
-  //==================================================================================================================
-  //! @ingroup  queries
-  //! @brief    Checks if a product type contains fields based only on selected identifiers
-  //!
-  //! @param t    the product type to inspect.
-  //! @param ids  Identifiers to check
-  //! @return     `true` if `t` contains a field labeled by any of the `ids`, and `false` otherwise.
-  //!
-  //! ## Examples:
-  //! ### Tuple:
-  //! @include doc/tuple/algo/contains_only.cpp
-  //! ### Record:
-  //! @include doc/record/algo/contains_only.cpp
-  //==================================================================================================================
+  //====================================================================================================================
+  /**
+    @ingroup  queries
+    @brief    Checks if a product type contains fields based only on selected identifiers
+
+    @param t    the product type to inspect.
+    @param ids  Identifiers to check
+    @return     `true` if `t` contains a field labeled by any of the `ids`, and `false` otherwise.
+
+    ## Examples:
+    ### Tuple:
+    @include doc/tuple/algo/contains_only.cpp
+    ### Record:
+    @include doc/record/algo/contains_only.cpp
+  **/
+  //====================================================================================================================
   template<concepts::product_type T, concepts::identifier... Is>
   KUMI_ABI constexpr bool contains_only([[maybe_unused]] T&& t, [[maybe_unused]] Is const&... ids) noexcept
   {
-    if constexpr (concepts::sized_product_type<T, 0>) return false;
+    if constexpr (concepts::empty_product_type<T>) return false;
     else if constexpr (sizeof...(Is) == 0) return false;
     else if constexpr (sizeof...(Is) < size_v<T>) return false;
     else
@@ -93,20 +99,22 @@ namespace kumi
       }(std::make_index_sequence<size_v<T>>{});
   }
 
-  //==================================================================================================================
-  //! @ingroup  queries
-  //! @brief    Checks if a product type contains no fields based on any of the selected identifiers
-  //!
-  //! @param t    the product type to inspect.
-  //! @param ids  Identifiers to check
-  //! @return     `true` if `t` contains no field labeled by any of the `ids`, and `false` otherwise.
-  //!
-  //! ## Examples:
-  //! ### Tuple:
-  //! @include doc/tuple/algo/contains_none.cpp
-  //! ### Record:
-  //! @include doc/record/algo/contains_none.cpp
-  //==================================================================================================================
+  //====================================================================================================================
+  /**
+    @ingroup  queries
+    @brief    Checks if a product type contains no fields based on any of the selected identifiers
+
+    @param t    the product type to inspect.
+    @param ids  Identifiers to check
+    @return     `true` if `t` contains no field labeled by any of the `ids`, and `false` otherwise.
+
+    ## Examples:
+    ### Tuple:
+    @include doc/tuple/algo/contains_none.cpp
+    ### Record:
+    @include doc/record/algo/contains_none.cpp
+  **/
+  //====================================================================================================================
   template<concepts::product_type T, concepts::identifier... Is>
   KUMI_ABI constexpr bool contains_none(T&& t, Is const&... ids) noexcept
   {

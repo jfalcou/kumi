@@ -13,7 +13,6 @@ namespace kumi::_
   // We optimize layout for tuple of size 1->10 and for homogeneous layout
   // This shaves a bit of compile time and it makes symbol length of tuple NTTP shorter
   //====================================================================================================================
-
   // We usually don't want to optimize tuple of references
   template<typename... Ts> inline constexpr bool no_references = (true && ... && !std::is_reference_v<Ts>);
 

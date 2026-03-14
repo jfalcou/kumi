@@ -33,14 +33,16 @@ namespace kumi
   }
 
   //====================================================================================================================
-  //! @ingroup utility
-  //! @brief Invoke the Callable object c with a pack of arguments.
-  //!
-  //! @param c	Callable object to be invoked
-  //! @param ts elements to be used as arguments to c
-  //! @return The value returned by c.
-  //!
-  //! @note Replaces std::invoke to avoid depending on `functional`.
+  /**
+    @ingroup utility
+    @brief Invoke the Callable object c with a pack of arguments.
+
+    @param c	Callable object to be invoked
+    @param ts elements to be used as arguments to c
+    @return The value returned by c.
+
+    @note Replaces std::invoke to avoid depending on `functional`.
+  **/
   //====================================================================================================================
   template<typename C, typename... Ts>
   KUMI_ABI constexpr decltype(auto) invoke(C&& c, Ts&&... ts) noexcept(std::is_nothrow_invocable<C, Ts...>::value)
@@ -51,15 +53,17 @@ namespace kumi
   };
 
   //====================================================================================================================
-  //! @ingroup utility
-  //! @brief Invoke the Callable object c with a pack of arguments with return type R.
-  //!
-  //! @tparam R the return type of the callable
-  //! @param  c	Callable object to be invoked
-  //! @param  ts elements to be used as arguments to c
-  //! @return The value returned by c with type R.
-  //!
-  //! @note Replaces std::invoke_r to avoid depending on `functional`.
+  /**
+    @ingroup utility
+    @brief Invoke the Callable object c with a pack of arguments with return type R.
+
+    @tparam R the return type of the callable
+    @param  c	Callable object to be invoked
+    @param  ts elements to be used as arguments to c
+    @return The value returned by c with type R.
+
+    @note Replaces std::invoke_r to avoid depending on `functional`.
+  **/
   //====================================================================================================================
   template<typename R, typename C, typename... Ts>
   KUMI_ABI constexpr R invoke_r(C&& c, Ts&&... ts) noexcept(std::is_nothrow_invocable_r<R, C, Ts...>::value)
