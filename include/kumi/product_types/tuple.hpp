@@ -666,13 +666,6 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @addtogroup tuple
-    @{
-  **/
-  //====================================================================================================================
-
-  //====================================================================================================================
-  /**
     @name Tuple Accessors
     @{
   **/
@@ -688,7 +681,10 @@ namespace kumi
     @param    t Tuple to index
     @return   A reference to the selected element of t.
 
-    @qualifier nodiscard inline constexpr noexcept
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier noexcept
 
     ## Example:
     @include doc/tuple/api/get.cpp
@@ -701,6 +697,7 @@ namespace kumi
     return t[index<I>];
   }
 
+  /// @related tuple
   /// @overload
   template<std::size_t I, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>&& arg) noexcept
@@ -709,6 +706,7 @@ namespace kumi
     return static_cast<tuple<Ts...>&&>(arg)[index<I>];
   }
 
+  /// @related tuple
   /// @overload
   template<std::size_t I, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const& arg) noexcept
@@ -717,6 +715,7 @@ namespace kumi
     return arg[index<I>];
   }
 
+  /// @related tuple
   /// @overload
   template<std::size_t I, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const&& arg) noexcept
@@ -735,7 +734,10 @@ namespace kumi
     @param    t Tuple to index
     @return   A reference to the selected element of t.
 
-    @qualifier nodiscard inline constexpr noexcept
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier noexcept
 
     ## Example:
     @include doc/tuple/api/named_get.cpp
@@ -748,6 +750,7 @@ namespace kumi
     return t[name<S>{}];
   }
 
+  /// @related tuple
   /// @overload
   template<str S, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>&& t) noexcept
@@ -756,6 +759,7 @@ namespace kumi
     return static_cast<tuple<Ts...>&&>(t)[name<S>{}];
   }
 
+  /// @related tuple
   /// @overload
   template<str S, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const& t) noexcept
@@ -764,6 +768,7 @@ namespace kumi
     return t[name<S>{}];
   }
 
+  /// @related tuple
   /// @overload
   template<str S, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const&& t) noexcept
@@ -775,14 +780,17 @@ namespace kumi
   //====================================================================================================================
   /**
     @related tuple
-    @brief Extracts the field labeled Id from a kumi::tuple if it exists
+    @brief Extracts the field identified by Id from a kumi::tuple if it exists
 
     @note     Does not participate in overload resolution if the names are not unique
     @tparam   Id Non type template parameter name of the element to access
     @param    t Tuple to index
     @return   A reference to the selected element of t.
 
-    @qualifier nodiscard inline constexpr noexcept
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier noexcept
 
     ## Example:
     @include doc/tuple/api/named_get.cpp
@@ -795,6 +803,7 @@ namespace kumi
     return t[Id];
   }
 
+  /// @related tuple
   /// @overload
   template<concepts::identifier auto Id, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>&& t) noexcept
@@ -803,6 +812,7 @@ namespace kumi
     return static_cast<tuple<Ts...>&&>(t)[Id];
   }
 
+  /// @related tuple
   /// @overload
   template<concepts::identifier auto Id, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const& t) noexcept
@@ -811,6 +821,7 @@ namespace kumi
     return t[Id];
   }
 
+  /// @related tuple
   /// @overload
   template<concepts::identifier auto Id, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const&& t) noexcept
@@ -842,6 +853,7 @@ namespace kumi
     return t[as<T>{}];
   }
 
+  /// @related tuple
   /// @overload
   template<typename T, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>&& t) noexcept
@@ -850,6 +862,7 @@ namespace kumi
     return static_cast<tuple<Ts...>&&>(t)[as<T>{}];
   }
 
+  /// @related tuple
   /// @overload
   template<typename T, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const& t) noexcept
@@ -858,6 +871,7 @@ namespace kumi
     return t[as<T>{}];
   }
 
+  /// @related tuple
   /// @overload
   template<typename T, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const&& t) noexcept
@@ -865,10 +879,6 @@ namespace kumi
   {
     return static_cast<tuple<Ts...> const&&>(t)[as<T>{}];
   }
-
-  //====================================================================================================================
-  //! @}
-  //====================================================================================================================
 
   //====================================================================================================================
   //! @}

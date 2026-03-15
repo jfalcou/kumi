@@ -68,6 +68,7 @@ namespace kumi
       return static_cast<T&>(impl);
     }
 
+    /// @overload
     template<std::size_t I>
     KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) && noexcept
     requires(I < sizeof...(Ts))
@@ -76,6 +77,7 @@ namespace kumi
       return static_cast<T&&>(static_cast<decltype(impl)&&>(impl));
     }
 
+    /// @overload
     template<std::size_t I>
     KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) const&& noexcept
     requires(I < sizeof...(Ts))
@@ -84,6 +86,7 @@ namespace kumi
       return static_cast<T const&&>(static_cast<decltype(impl) const&&>(impl));
     }
 
+    /// @overload
     template<std::size_t I>
     KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) const& noexcept
     requires(I < sizeof...(Ts))
@@ -538,7 +541,10 @@ namespace kumi
     @param    r Record to index
     @return   A reference to the selected field of t.
 
-    @qualifier nodiscard inline constexpr noexcept
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier noexcept
 
     ## Example:
     @include doc/record/api/get.cpp
@@ -551,6 +557,7 @@ namespace kumi
     return r[index<I>];
   }
 
+  /// @related record
   /// @overload
   template<std::size_t I, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>&& r) noexcept
@@ -559,6 +566,7 @@ namespace kumi
     return static_cast<record<Ts...>&&>(r)[index<I>];
   }
 
+  /// @related record
   /// @overload
   template<std::size_t I, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const& r) noexcept
@@ -567,6 +575,7 @@ namespace kumi
     return r[index<I>];
   }
 
+  /// @related record
   /// @overload
   template<std::size_t I, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const&& r) noexcept
@@ -585,7 +594,10 @@ namespace kumi
     @param    r Record to index
     @return   A reference to the element of the selected field of t.
 
-    @qualifier nodiscard inline constexpr noexcept
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier noexcept
 
     ## Example:
     @include doc/record/api/named_get.cpp
@@ -598,6 +610,7 @@ namespace kumi
     return r[name<Name>{}];
   }
 
+  /// @related record
   /// @overload
   template<str Name, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>&& r) noexcept
@@ -606,6 +619,7 @@ namespace kumi
     return static_cast<record<Ts...>&&>(r)[name<Name>{}];
   }
 
+  /// @related record
   /// @overload
   template<str Name, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const& r) noexcept
@@ -614,6 +628,7 @@ namespace kumi
     return r[name<Name>{}];
   }
 
+  /// @related record
   /// @overload
   template<str Name, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const&& r) noexcept
@@ -622,7 +637,26 @@ namespace kumi
     return static_cast<record<Ts...> const&&>(r)[name<Name>{}];
   }
 
-  /// @overload
+  //====================================================================================================================
+  /**
+    @related record
+    @brief Extracts the field identified by Id from a kumi::record if it exists
+
+    @note     Does not participate in overload resolution if the names are not unique
+    @tparam   Id Non type template parameter name of the element to access
+    @param    r Record to index
+    @return   A reference to the selected element of r.
+
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier noexcept
+
+    ## Example:
+    @include doc/record/api/named_get.cpp
+  **/
+  //====================================================================================================================
+
   template<concepts::identifier auto Name, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>& r) noexcept
   requires(concepts::contains_field<decltype(Name), Ts...>)
@@ -630,6 +664,7 @@ namespace kumi
     return r[Name];
   }
 
+  /// @related record
   /// @overload
   template<concepts::identifier auto Name, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>&& r) noexcept
@@ -638,6 +673,7 @@ namespace kumi
     return static_cast<record<Ts...>&&>(r)[Name];
   }
 
+  /// @related record
   /// @overload
   template<concepts::identifier auto Name, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const& r) noexcept
@@ -646,6 +682,7 @@ namespace kumi
     return r[Name];
   }
 
+  /// @related record
   /// @overload
   template<concepts::identifier auto Name, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const&& r) noexcept
@@ -664,7 +701,10 @@ namespace kumi
     @param    r Record to index
     @return   A reference to the selected element of t.
 
-    @qualifier nodiscard inline constexpr noexcept
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier noexcept
 
     ## Example:
     @include doc/record/api/typed_get.cpp
@@ -677,6 +717,7 @@ namespace kumi
     return r[as<T>{}];
   }
 
+  /// @related record
   /// @overload
   template<typename T, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>&& r) noexcept
@@ -685,6 +726,7 @@ namespace kumi
     return static_cast<record<Ts...>&&>(r)[as<T>{}];
   }
 
+  /// @related record
   /// @overload
   template<typename T, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const& r) noexcept
@@ -693,6 +735,7 @@ namespace kumi
     return r[as<T>{}];
   }
 
+  /// @related record
   /// @overload
   template<typename T, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const&& r) noexcept
