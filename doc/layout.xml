@@ -19,8 +19,8 @@
     </tab>
     <tab type="usergroup" visible="yes"   title="Reference Documentation">
       <tab type="usergroup" visible="yes"   title="Types">
-        <tab type="user" url="@ref tuple"   title="Tuple"/>
-        <tab type="user" url="@ref record"  title="Record"/>
+        <tab type="user" url="@ref tuple_related"   title="Product Types and Functions"/>
+        <tab type="user" url="@ref record_related"  title="Record Types and Functions"/>
         <tab type="user" url="@ref types"   title="Types"/>
       </tab>
       <tab type="usergroup" visible="yes" title="Algorithms">
