@@ -14,10 +14,10 @@ namespace kumi
     @defgroup types Kumi Types
     @brief    Class definition and functions on kumi types
 
-    @defgroup tuple Product Types and associated Functions
+    @defgroup tuple_related Product Types and associated Functions
     @brief    Definition for kumi defined product type classes and functions
 
-    @defgroup record Record Types and associated Functions
+    @defgroup record_related Record Types and associated Functions
     @brief    Definition for kumi defined record type classes and functions
   **/
   //====================================================================================================================

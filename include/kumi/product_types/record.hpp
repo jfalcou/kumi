@@ -15,7 +15,7 @@ namespace kumi
   //====================================================================================================================
   /**
     @class record
-    @ingroup record
+    @ingroup record_related
     @brief Fixed-size collection of heterogeneous tagged fields, tags are unique.
 
     kumi::record provides an aggregate based implementation of a record. It provides algorithms and
@@ -377,7 +377,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup record
+    @ingroup record_related
     @brief Creates a kumi::record of lvalue references to its arguments.
 
     @tparam Fields Non type template parameters names to associate to the each element.
@@ -396,7 +396,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup record
+    @ingroup record_related
     @brief Creates a kumi::record of forwarding references to its arguments.
 
     Constructs a record of references to the arguments in args suitable for forwarding as an
@@ -422,7 +422,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup record
+    @ingroup record_related
     @brief Creates a record object, deducing the target type from the types of arguments.
 
     @param ts	Zero or more lvalue arguments to construct the record from.
@@ -441,7 +441,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup record
+    @ingroup record_related
     @brief Creates a kumi::record of references given a reference to a kumi::record_type.
 
     @param    r Record whose elements are to be referenced.
@@ -472,7 +472,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup record
+    @ingroup record_related
     @brief Converts a kumi::record to an instance of a type that models kumi::record_type
 
     Constructs an instance of `Type` by passing elements of `t` to the appropriate constructor.
@@ -496,7 +496,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup record
+    @ingroup record_related
     @brief Converts a kumi::record_type to an instance kumi::record
 
     Constructs an instance kumi::record from the elements of the kumi::product_type parameters
@@ -530,7 +530,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup record
+    @ingroup record_related
     @brief Extracts the Ith field from a kumi::record
 
     @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
@@ -575,7 +575,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup record
+    @ingroup record_related
     @brief Extracts the element of the field labeled Name from a kumi::record if it exists
 
     @note Does not participate in overload resolution if the names are not unique
@@ -652,7 +652,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup record
+    @ingroup record_related
     @brief Extracts the field which underlying type is T from a kumi::record if it exist
 
     @note     Does not participate in overload resolution if the types are not unique
