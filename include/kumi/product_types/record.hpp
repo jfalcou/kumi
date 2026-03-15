@@ -656,39 +656,38 @@ namespace kumi
     @include doc/record/api/named_get.cpp
   **/
   //====================================================================================================================
-
-  template<concepts::identifier auto Name, typename... Ts>
+  template<concepts::identifier auto Id, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>& r) noexcept
-  requires(concepts::contains_field<decltype(Name), Ts...>)
+  requires(concepts::contains_field<decltype(Id), Ts...>)
   {
-    return r[Name];
+    return r[Id];
   }
 
   /// @related record
   /// @overload
-  template<concepts::identifier auto Name, typename... Ts>
+  template<concepts::identifier auto Id, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>&& r) noexcept
-  requires(concepts::contains_field<decltype(Name), Ts...>)
+  requires(concepts::contains_field<decltype(Id), Ts...>)
   {
-    return static_cast<record<Ts...>&&>(r)[Name];
+    return static_cast<record<Ts...>&&>(r)[Id];
   }
 
   /// @related record
   /// @overload
-  template<concepts::identifier auto Name, typename... Ts>
+  template<concepts::identifier auto Id, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const& r) noexcept
-  requires(concepts::contains_field<decltype(Name), Ts...>)
+  requires(concepts::contains_field<decltype(Id), Ts...>)
   {
-    return r[Name];
+    return r[Id];
   }
 
   /// @related record
   /// @overload
-  template<concepts::identifier auto Name, typename... Ts>
+  template<concepts::identifier auto Id, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const&& r) noexcept
-  requires(concepts::contains_field<decltype(Name), Ts...>)
+  requires(concepts::contains_field<decltype(Id), Ts...>)
   {
-    return static_cast<record<Ts...> const&&>(r)[Name];
+    return static_cast<record<Ts...> const&&>(r)[Id];
   }
 
   //====================================================================================================================
