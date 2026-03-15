@@ -530,13 +530,15 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup record_related
+    @related record
     @brief Extracts the Ith field from a kumi::record
 
     @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
     @tparam   I Compile-time index of the field to access
     @param    r Record to index
     @return   A reference to the selected field of t.
+
+    @qualifier nodiscard inline constexpr noexcept
 
     ## Example:
     @include doc/record/api/get.cpp
@@ -575,13 +577,15 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup record_related
+    @related record
     @brief Extracts the element of the field labeled Name from a kumi::record if it exists
 
     @note Does not participate in overload resolution if the names are not unique
     @tparam   Name Non type template parameter name of the field to access
     @param    r Record to index
     @return   A reference to the element of the selected field of t.
+
+    @qualifier nodiscard inline constexpr noexcept
 
     ## Example:
     @include doc/record/api/named_get.cpp
@@ -652,13 +656,15 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup record_related
+    @related record
     @brief Extracts the field which underlying type is T from a kumi::record if it exist
 
     @note     Does not participate in overload resolution if the types are not unique
     @tparam   T Type of the element to access
     @param    r Record to index
     @return   A reference to the selected element of t.
+
+    @qualifier nodiscard inline constexpr noexcept
 
     ## Example:
     @include doc/record/api/typed_get.cpp

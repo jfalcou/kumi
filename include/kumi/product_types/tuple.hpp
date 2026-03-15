@@ -680,12 +680,15 @@ namespace kumi
 
   //====================================================================================================================
   /**
+    @related tuple
     @brief Extracts the Ith element from a kumi::tuple
 
     @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
     @tparam   I Compile-time index of the element to access
     @param    t Tuple to index
     @return   A reference to the selected element of t.
+
+    @qualifier nodiscard inline constexpr noexcept
 
     ## Example:
     @include doc/tuple/api/get.cpp
@@ -724,12 +727,15 @@ namespace kumi
 
   //====================================================================================================================
   /**
+    @related tuple
     @brief Extracts the field labeled S from a kumi::tuple if it exists
 
     @note     Does not participate in overload resolution if the names are not unique
     @tparam   S Non type template parameter name of the element to access
     @param    t Tuple to index
     @return   A reference to the selected element of t.
+
+    @qualifier nodiscard inline constexpr noexcept
 
     ## Example:
     @include doc/tuple/api/named_get.cpp
@@ -768,12 +774,15 @@ namespace kumi
 
   //====================================================================================================================
   /**
+    @related tuple
     @brief Extracts the field labeled Id from a kumi::tuple if it exists
 
     @note     Does not participate in overload resolution if the names are not unique
     @tparam   Id Non type template parameter name of the element to access
     @param    t Tuple to index
     @return   A reference to the selected element of t.
+
+    @qualifier nodiscard inline constexpr noexcept
 
     ## Example:
     @include doc/tuple/api/named_get.cpp
@@ -812,12 +821,15 @@ namespace kumi
 
   //====================================================================================================================
   /**
+    @related tuple
     @brief Extracts the field which type is T from a kumi::tuple if it exist
 
     @note     Does not participate in overload resolution if the types are not unique
     @tparam   T Type of the element to access
     @param    t Tuple to index
     @return   A reference to the selected element of t.
+
+    @qualifier nodiscard inline constexpr noexcept
 
     ## Example:
     @include doc/tuple/api/typed_get.cpp
