@@ -24,14 +24,15 @@ namespace kumi
   //====================================================================================================================
   template<typename Id, typename T> struct field
   {
+    /// Name associated to the field
+    static constexpr auto name() { return _::make_str(Id{}); }
+
     using type = T;
     using identifier_type = Id;
     using inner_type = std::type_identity<T>;
+    using label_type = std::integral_constant<kumi::str, name()>;
 
     T value;
-
-    /// Name associated to the field
-    static constexpr auto name() { return _::make_str(Id{}); }
 
     KUMI_ABI constexpr T& operator()(identifier_type) & noexcept { return value; }
 
@@ -48,6 +49,14 @@ namespace kumi
     KUMI_ABI constexpr T const& operator()(inner_type) const& noexcept { return value; }
 
     KUMI_ABI constexpr T const&& operator()(inner_type) const&& noexcept { return static_cast<T const&&>(value); }
+
+    KUMI_ABI constexpr T& operator()(label_type) & noexcept { return value; }
+
+    KUMI_ABI constexpr T&& operator()(label_type) && noexcept { return static_cast<T&&>(value); }
+
+    KUMI_ABI constexpr T const& operator()(label_type) const& noexcept { return value; }
+
+    KUMI_ABI constexpr T const&& operator()(label_type) const&& noexcept { return static_cast<T const&&>(value); }
 
     //==================================================================================================================
     /// @ingroup utility
@@ -66,12 +75,13 @@ namespace kumi
   requires(std::is_empty_v<T>)
   struct field<Id, T> : T
   {
+    /// Name associated to the field
+    static constexpr auto name() { return _::make_str(Id{}); }
+
     using type = T;
     using identifier_type = Id;
     using inner_type = std::type_identity<T>;
-
-    /// Name associated to the field
-    static constexpr auto name() { return _::make_str(Id{}); }
+    using label_type = std::integral_constant<kumi::str, name()>;
 
     KUMI_ABI constexpr T& operator()(identifier_type) & noexcept { return *this; }
 
@@ -88,6 +98,14 @@ namespace kumi
     KUMI_ABI constexpr T const& operator()(inner_type) const& noexcept { return *this; }
 
     KUMI_ABI constexpr T const&& operator()(inner_type) const&& noexcept { return static_cast<T const&&>(*this); }
+
+    KUMI_ABI constexpr T& operator()(label_type) & noexcept { return *this; }
+
+    KUMI_ABI constexpr T&& operator()(label_type) && noexcept { return static_cast<T&&>(*this); }
+
+    KUMI_ABI constexpr T const& operator()(label_type) const& noexcept { return *this; }
+
+    KUMI_ABI constexpr T const&& operator()(label_type) const&& noexcept { return static_cast<T const&&>(*this); }
 
     //==================================================================================================================
     /// @ingroup utility

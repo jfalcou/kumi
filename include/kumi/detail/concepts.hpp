@@ -31,28 +31,29 @@ namespace kumi::_
   concept implicit_constructible = requires(Args... args) { T{args...}; };
 
   // To be displayed an identifier need to be constructible via T{}, and either expose a constexpr to_str() or
-  // nothing, in which case the typer will be used (see typename.hpp)
+  // nothing, in which case the typer will be used (see typename.hpp). The name that is displayed is called the label.
   template<typename T>
   concept valid_label = implicit_constructible<T> &&
                         (!requires { to_str(T{}); } || std::same_as<typename value<to_str(T{})>::type, kumi::str>);
 
   //====================================================================================================================
-  // Helper concepts for custom identifier/field use (these are fundamental types in kumi)
+  // Helper concepts for custom label
   //====================================================================================================================
   template<typename T>
-  concept identifier = requires(T const& t) { typename std::remove_cvref_t<T>::tag_type; };
+  concept label = requires(T&& t) {
+    typename std::remove_cvref_t<T>::type;
+    { T::value } -> std::convertible_to<kumi::str>;
+  };
 
+  //====================================================================================================================
+  // Helper concepts for custom field
+  //====================================================================================================================
   template<typename O>
   concept field = requires(O const& o) {
     typename std::remove_cvref_t<O>::type;
     typename std::remove_cvref_t<O>::identifier_type;
     { o(typename std::remove_cvref_t<O>::identifier_type{}) };
     { std::remove_cvref_t<O>::name() };
-  };
-
-  template<identifier T> struct tag_of
-  {
-    using type = typename std::remove_cvref_t<T>::tag_type;
   };
 
   template<field T> struct key_of
@@ -65,9 +66,21 @@ namespace kumi::_
     using type = typename std::remove_cvref_t<T>::type;
   };
 
-  template<identifier T> using tag_of_t = typename tag_of<std::remove_cvref_t<T>>::type;
   template<field T> using key_of_t = typename key_of<std::remove_cvref_t<T>>::type;
   template<field T> using type_of_t = typename type_of<std::remove_cvref_t<T>>::type;
+
+  //====================================================================================================================
+  // Helper concepts for custom identifier
+  //====================================================================================================================
+  template<typename T>
+  concept identifier = requires(T const& t) { typename std::remove_cvref_t<T>::type; };
+
+  template<identifier T> struct tag_of
+  {
+    using type = typename std::remove_cvref_t<T>::type;
+  };
+
+  template<identifier T> using tag_of_t = typename tag_of<std::remove_cvref_t<T>>::type;
 
   //====================================================================================================================
   // Helper concepts for construction checks
@@ -174,99 +187,105 @@ namespace kumi::_
     sort<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::is_fieldwise_comparable::value;
 
   //====================================================================================================================
-  // Helper meta functions to access a field type by type
+  // Helper meta functions to access a field type via a meta function
   //====================================================================================================================
-  template<typename Ref, typename Field> struct check_type
-  {
-    static consteval Field get(Ref)
-    requires std::is_same_v<Field, Ref>;
-    static consteval std::false_type get(...);
-  };
-
-  template<std::size_t I, typename Ref, typename Field> struct get_index
-  {
-    using constant = std::integral_constant<std::size_t, I>;
-
-    static consteval constant get(Ref)
-    requires std::is_same_v<Ref, Field>;
-    static consteval invalid get(...);
-  };
-
-  /// Helper using inheritance to get the corresponding type in an variadic pack if it exist
-  template<typename Ref, typename... Fields> struct get_field_by_type : check_type<Ref, Fields>...
-  {
-    using check_type<Ref, Fields>::get...;
-    using type = decltype(get(std::declval<Ref>()));
-  };
-
-  template<typename Ref, typename Seq, typename... Fields> struct get_index_by_type;
-
-  template<typename Ref, std::size_t... I, typename... Fields>
-  struct get_index_by_type<Ref, std::index_sequence<I...>, Fields...> : get_index<I, Ref, Fields>...
-  {
-    using get_index<I, Ref, Fields>::get...;
-    using type = decltype(get(std::declval<Ref>()));
-    static constexpr auto value = decltype(get(std::declval<Ref>()))::value;
-  };
-
-  template<typename Ref, typename... Fields>
-  using get_field_by_type_t = typename get_field_by_type<Ref, Fields...>::type;
-
-  template<typename Ref, typename... Fields>
-  inline constexpr auto get_index_by_type_v =
-    get_index_by_type<Ref, std::index_sequence_for<Fields...>, Fields...>::value;
-
-  template<typename Ref, typename... Fields>
-  concept can_get_field_by_type = !std::is_same_v<get_field_by_type_t<Ref, Fields...>, std::false_type>;
-
-  //====================================================================================================================
-  // Helper meta functions to access a field type by name
-  //====================================================================================================================
-  struct failed
+  struct find_failed
   {
     static consteval std::false_type get(...);
     static consteval invalid get_index(...);
   };
 
-  template<std::size_t I, typename Ref, typename Field> struct check_field
+  template<template<class, class> class Matcher, std::size_t I, typename Ref, typename Field> struct match_node
   {
-    // Simply expose get to be able to inherit but can never be called with args
     static consteval std::false_type get();
     static consteval invalid get_index();
   };
 
-  template<std::size_t I, identifier Ref, field Field>
-  requires(std::is_same_v<tag_of_t<Ref>, key_of_t<Field>>)
-  struct check_field<I, Ref, Field>
+  template<template<class, class> class Matcher, std::size_t I, typename Ref, typename Field>
+  requires(Matcher<Ref, Field>::value)
+  struct match_node<Matcher, I, Ref, Field>
   {
-    using constant = std::integral_constant<std::size_t, I>;
+    using index = std::integral_constant<std::size_t, I>;
     static consteval Field get(Ref);
-    static consteval constant get_index(Ref);
+    static consteval index get_index(Ref);
   };
 
-  template<typename Ref, typename Seq, typename... Fields> struct get_field_by_value;
+  template<template<class, class> class Matcher, typename Ref, typename Seq, typename... Fields> struct find_engine;
 
-  /// Helper using inheritance to get the corresponding name in an variadic pack if it exist
-  /// The index is used in order to enable mixed named/unnamed packs to work
-  template<typename Ref, std::size_t... I, typename... Fields>
-  struct get_field_by_value<Ref, std::index_sequence<I...>, Fields...> : failed, check_field<I, Ref, Fields>...
+  template<template<class, class> class Matcher, typename Ref, std::size_t... I, typename... Fields>
+  struct find_engine<Matcher, Ref, std::index_sequence<I...>, Fields...> : find_failed,
+                                                                           match_node<Matcher, I, Ref, Fields>...
   {
-    using failed::get;
-    using failed::get_index;
-    using check_field<I, Ref, Fields>::get...;
-    using check_field<I, Ref, Fields>::get_index...;
+    using find_failed::get;
+    using find_failed::get_index;
+    using match_node<Matcher, I, Ref, Fields>::get...;
+    using match_node<Matcher, I, Ref, Fields>::get_index...;
 
     using type = decltype(get(std::declval<Ref>()));
     static constexpr auto value = decltype(get_index(std::declval<Ref>()))::value;
   };
 
-  template<typename Ref, typename... Fields>
-  using get_field_by_value_t = typename get_field_by_value<Ref, std::index_sequence_for<Fields...>, Fields...>::type;
+  // ===================================================================================================================
+  // By Type
+  // ===================================================================================================================
+  template<typename Ref, typename Field> struct match_by_type : std::is_same<Ref, Field>
+  {
+  };
 
   template<typename Ref, typename... Fields>
-  inline constexpr auto get_index_by_value_v =
-    get_field_by_value<Ref, std::index_sequence_for<Fields...>, Fields...>::value;
+  using find_by_type_t = find_engine<match_by_type, Ref, std::index_sequence_for<Fields...>, Fields...>;
+
+  template<typename Ref, typename... Fields> using get_field_by_type_t = typename find_by_type_t<Ref, Fields...>::type;
+
+  template<typename Ref, typename... Fields>
+  inline constexpr auto get_index_by_type_v = find_by_type_t<Ref, Fields...>::index;
+
+  template<typename Ref, typename... Fields>
+  concept can_get_field_by_type = !std::is_same_v<get_field_by_type_t<Ref, Fields...>, std::false_type>;
+
+  // ===================================================================================================================
+  // By Value (Tag)
+  // ===================================================================================================================
+  template<typename Ref, typename Field> struct match_by_tag : std::false_type
+  {
+  };
+
+  template<identifier Ref, field Field> struct match_by_tag<Ref, Field> : std::is_same<tag_of_t<Ref>, key_of_t<Field>>
+  {
+  };
+
+  template<typename Ref, typename... Fields>
+  using find_by_tag_t = find_engine<match_by_tag, Ref, std::index_sequence_for<Fields...>, Fields...>;
+
+  template<typename Ref, typename... Fields> using get_field_by_value_t = typename find_by_tag_t<Ref, Fields...>::type;
+
+  template<typename Ref, typename... Fields>
+  inline constexpr auto get_index_by_value_v = find_by_tag_t<Ref, Fields...>::index;
 
   template<typename Ref, typename... Fields>
   concept can_get_field_by_value = !std::is_same_v<get_field_by_value_t<Ref, Fields...>, std::false_type>;
+
+  //====================================================================================================================
+  // By label (displayed name)
+  //====================================================================================================================
+  template<typename Ref, typename Field> struct match_by_label : std::false_type
+  {
+  };
+
+  template<label Ref, field Field> struct match_by_label<Ref, Field> : std::bool_constant<Ref::value == Field::name()>
+  {
+  };
+
+  template<typename Ref, typename... Fields>
+  using find_by_label_t = find_engine<match_by_label, Ref, std::index_sequence_for<Fields...>, Fields...>;
+
+  template<typename Ref, typename... Fields>
+  using get_field_by_label_t = typename find_by_label_t<Ref, Fields...>::type;
+
+  template<typename Ref, typename... Fields>
+  inline constexpr auto get_index_by_label_v = find_by_label_t<Ref, Fields...>::index;
+
+  template<typename Ref, typename... Fields>
+  concept can_get_field_by_label = !std::is_same_v<get_field_by_label_t<Ref, Fields...>, std::false_type>;
+
 }

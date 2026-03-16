@@ -93,7 +93,8 @@ namespace kumi
 
       @note Does not participate in overload resolution if `T` is not present in the tuple or if
             the tuple contains duplicate types
-      @tparam T the type to access in the tuple
+
+      @param  type The type to access in the tuple
       @return A reference to the selected element of the current tuple.
 
       ## Example:
@@ -101,7 +102,7 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename T>
-    KUMI_ABI constexpr decltype(auto) operator[](as<T>) & noexcept
+    KUMI_ABI constexpr decltype(auto) operator[]([[maybe_unused]] as<T> type) & noexcept
     requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
     {
       return impl(std::type_identity<T>{});
@@ -129,6 +130,50 @@ namespace kumi
     requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
     {
       return impl(std::type_identity<T>{});
+    }
+
+    //==================================================================================================================
+    /**
+      @brief Extracts the element of the field labeled Name from a kumi::tuple
+
+      @note Does not participate in overload resolution if the label is not present in the tuple
+
+      @param  s label of the field to access
+      @return A reference to the element of the selected field of current record.
+
+      ## Example:
+      @include doc/tuple/api/labeled_subscript.cpp
+    **/
+    //==================================================================================================================
+    template<str Name>
+    KUMI_ABI constexpr decltype(auto) operator[]([[maybe_unused]] label_t<Name> s) & noexcept
+    requires(concepts::contains_label<label_t<Name>, Ts...>)
+    {
+      return impl(std::integral_constant<str, Name>{});
+    }
+
+    /// @overload
+    template<str Name>
+    KUMI_ABI constexpr decltype(auto) operator[](label_t<Name>) && noexcept
+    requires(concepts::contains_label<label_t<Name>, Ts...>)
+    {
+      return static_cast<decltype(impl)&&>(impl)(std::integral_constant<str, Name>{});
+    }
+
+    /// @overload
+    template<str Name>
+    KUMI_ABI constexpr decltype(auto) operator[](label_t<Name>) const&& noexcept
+    requires(concepts::contains_label<label_t<Name>, Ts...>)
+    {
+      return static_cast<decltype(impl) const&&>(impl)(std::integral_constant<str, Name>{});
+    }
+
+    /// @overload
+    template<str Name>
+    KUMI_ABI constexpr decltype(auto) operator[](label_t<Name>) const& noexcept
+    requires(concepts::contains_label<label_t<Name>, Ts...>)
+    {
+      return impl(std::integral_constant<str, Name>{});
     }
 
     //==================================================================================================================
@@ -727,10 +772,10 @@ namespace kumi
   //====================================================================================================================
   /**
     @related tuple
-    @brief Extracts the field labeled S from a kumi::tuple if it exists
+    @brief Extracts the field labeled Name from a kumi::tuple if it exists
 
     @note     Does not participate in overload resolution if the names are not unique
-    @tparam   S Non type template parameter name of the element to access
+    @tparam   Name Non type template parameter name of the element to access
     @param    t Tuple to index
     @return   A reference to the selected element of t.
 
@@ -740,41 +785,41 @@ namespace kumi
     @qualifier noexcept
 
     ## Example:
-    @include doc/tuple/api/named_get.cpp
+    @include doc/tuple/api/labeled_get.cpp
   **/
   //====================================================================================================================
-  template<str S, typename... Ts>
+  template<str Name, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>& t) noexcept
-  requires(concepts::uniquely_named<Ts...> && _::contains_field<S, Ts...>())
+  requires(concepts::uniquely_named<Ts...> && _::contains_label<Name, Ts...>())
   {
-    return t[name<S>{}];
+    return t[label<Name>];
   }
 
   /// @related tuple
   /// @overload
-  template<str S, typename... Ts>
+  template<str Name, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>&& t) noexcept
-  requires(concepts::uniquely_named<Ts...> && _::contains_field<S, Ts...>())
+  requires(concepts::uniquely_named<Ts...> && _::contains_label<Name, Ts...>())
   {
-    return static_cast<tuple<Ts...>&&>(t)[name<S>{}];
+    return static_cast<tuple<Ts...>&&>(t)[label<Name>];
   }
 
   /// @related tuple
   /// @overload
-  template<str S, typename... Ts>
+  template<str Name, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const& t) noexcept
-  requires(concepts::uniquely_named<Ts...> && _::contains_field<S, Ts...>())
+  requires(concepts::uniquely_named<Ts...> && _::contains_label<Name, Ts...>())
   {
-    return t[name<S>{}];
+    return t[label<Name>];
   }
 
   /// @related tuple
   /// @overload
-  template<str S, typename... Ts>
+  template<str Name, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const&& t) noexcept
-  requires(concepts::uniquely_named<Ts...> && _::contains_field<S, Ts...>())
+  requires(concepts::uniquely_named<Ts...> && _::contains_label<Name, Ts...>())
   {
-    return static_cast<tuple<Ts...> const&&>(t)[name<S>{}];
+    return static_cast<tuple<Ts...> const&&>(t)[label<Name>];
   }
 
   //====================================================================================================================

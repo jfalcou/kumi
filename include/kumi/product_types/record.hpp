@@ -53,7 +53,7 @@ namespace kumi
       @brief Extracts the Ith field from a kumi::record
 
       @note   Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
-      @tparam I Compile-time index of the field to access
+      @param i Compile-time index of the field to access
       @return A reference to the selected field of current record.
 
       ## Example:
@@ -61,7 +61,7 @@ namespace kumi
     **/
     //==================================================================================================================
     template<std::size_t I>
-    KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) & noexcept
+    KUMI_ABI constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) & noexcept
     requires(I < sizeof...(Ts))
     {
       using T = element_t<I, tuple<Ts...>>;
@@ -97,11 +97,12 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @brief Extracts the Ith element from a kumi::record
+      @brief Extracts the element with type T from a kumi::record
 
       @note Does not participate in overload resolution if `T` is not present in the record or if
             the record contains duplicate types
-      @tparam T the type to access in the record
+
+      @param type The type to access in the record
       @return A reference to the selected element of current record.
 
       ## Example:
@@ -109,7 +110,7 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename T>
-    KUMI_ABI constexpr decltype(auto) operator[](as<T>) & noexcept
+    KUMI_ABI constexpr decltype(auto) operator[]([[maybe_unused]] as<T> type) & noexcept
     requires(concepts::uniquely_typed<_::type_of_t<Ts>...> && concepts::contains_type<T, _::type_of_t<Ts>...>)
     {
       return impl(std::type_identity<T>{});
@@ -143,44 +144,88 @@ namespace kumi
     /**
       @brief Extracts the element of the field labeled Name from a kumi::record
 
+      @note Does not participate in overload resolution if the label is not present in the record
+
+      @param s Non type template parameter name of the field to access
+      @return A reference to the element of the selected field of current record.
+
+      ## Example:
+      @include doc/record/api/labeled_subscript.cpp
+    **/
+    //==================================================================================================================
+    template<str Name>
+    KUMI_ABI constexpr decltype(auto) operator[]([[maybe_unused]] label_t<Name> s) & noexcept
+    requires(concepts::contains_label<label_t<Name>, Ts...>)
+    {
+      return impl(std::integral_constant<str, Name>{});
+    }
+
+    /// @overload
+    template<str Name>
+    KUMI_ABI constexpr decltype(auto) operator[](label_t<Name>) && noexcept
+    requires(concepts::contains_label<label_t<Name>, Ts...>)
+    {
+      return static_cast<decltype(impl)&&>(impl)(std::integral_constant<str, Name>{});
+    }
+
+    /// @overload
+    template<str Name>
+    KUMI_ABI constexpr decltype(auto) operator[](label_t<Name>) const&& noexcept
+    requires(concepts::contains_label<label_t<Name>, Ts...>)
+    {
+      return static_cast<decltype(impl) const&&>(impl)(std::integral_constant<str, Name>{});
+    }
+
+    /// @overload
+    template<str Name>
+    KUMI_ABI constexpr decltype(auto) operator[](label_t<Name>) const& noexcept
+    requires(concepts::contains_label<label_t<Name>, Ts...>)
+    {
+      return impl(std::integral_constant<str, Name>{});
+    }
+
+    //==================================================================================================================
+    /**
+      @brief Extracts the element of the field identified by Id from a kumi::record
+
       @note Does not participate in overload resolution if the name is not present in the record
 
-      @tparam Name Non type template parameter name of the field to access
+      @tparam Id Non type template parameter name of the field to access
       @return A reference to the element of the selected field of current record.
 
       ## Example:
       @include doc/record/api/named_subscript.cpp
     **/
     //==================================================================================================================
-    template<concepts::identifier Name>
-    KUMI_ABI constexpr decltype(auto) operator[](Name const&) & noexcept
-    requires(concepts::contains_field<Name, Ts...>)
+    template<concepts::identifier Id>
+    KUMI_ABI constexpr decltype(auto) operator[](Id const&) & noexcept
+    requires(concepts::contains_field<Id, Ts...>)
     {
-      return impl(_::tag_of_t<Name>{});
+      return impl(_::tag_of_t<Id>{});
     }
 
     /// @overload
-    template<concepts::identifier Name>
-    KUMI_ABI constexpr decltype(auto) operator[](Name const&) && noexcept
-    requires(concepts::contains_field<Name, Ts...>)
+    template<concepts::identifier Id>
+    KUMI_ABI constexpr decltype(auto) operator[](Id const&) && noexcept
+    requires(concepts::contains_field<Id, Ts...>)
     {
-      return static_cast<decltype(impl)&&>(impl)(_::tag_of_t<Name>{});
+      return static_cast<decltype(impl)&&>(impl)(_::tag_of_t<Id>{});
     }
 
     /// @overload
-    template<concepts::identifier Name>
-    KUMI_ABI constexpr decltype(auto) operator[](Name const&) const&& noexcept
-    requires(concepts::contains_field<Name, Ts...>)
+    template<concepts::identifier Id>
+    KUMI_ABI constexpr decltype(auto) operator[](Id const&) const&& noexcept
+    requires(concepts::contains_field<Id, Ts...>)
     {
-      return static_cast<decltype(impl) const&&>(impl)(_::tag_of_t<Name>{});
+      return static_cast<decltype(impl) const&&>(impl)(_::tag_of_t<Id>{});
     }
 
     /// @overload
-    template<concepts::identifier Name>
-    KUMI_ABI constexpr decltype(auto) operator[](Name const&) const& noexcept
-    requires(concepts::contains_field<Name, Ts...>)
+    template<concepts::identifier Id>
+    KUMI_ABI constexpr decltype(auto) operator[](Id const&) const& noexcept
+    requires(concepts::contains_field<Id, Ts...>)
     {
-      return impl(_::tag_of_t<Name>{});
+      return impl(_::tag_of_t<Id>{});
     }
 
     //==================================================================================================================
@@ -600,41 +645,41 @@ namespace kumi
     @qualifier noexcept
 
     ## Example:
-    @include doc/record/api/named_get.cpp
+    @include doc/record/api/labeled_get.cpp
   **/
   //====================================================================================================================
   template<str Name, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>& r) noexcept
-  requires(_::contains_field<Name, Ts...>())
+  requires(_::contains_label<Name, Ts...>())
   {
-    return r[name<Name>{}];
+    return r[label<Name>];
   }
 
   /// @related record
   /// @overload
   template<str Name, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>&& r) noexcept
-  requires(_::contains_field<Name, Ts...>())
+  requires(_::contains_label<Name, Ts...>())
   {
-    return static_cast<record<Ts...>&&>(r)[name<Name>{}];
+    return static_cast<record<Ts...>&&>(r)[label<Name>];
   }
 
   /// @related record
   /// @overload
   template<str Name, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const& r) noexcept
-  requires(_::contains_field<Name, Ts...>())
+  requires(_::contains_label<Name, Ts...>())
   {
-    return r[name<Name>{}];
+    return r[label<Name>];
   }
 
   /// @related record
   /// @overload
   template<str Name, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const&& r) noexcept
-  requires(_::contains_field<Name, Ts...>())
+  requires(_::contains_label<Name, Ts...>())
   {
-    return static_cast<record<Ts...> const&&>(r)[name<Name>{}];
+    return static_cast<record<Ts...> const&&>(r)[label<Name>];
   }
 
   //====================================================================================================================

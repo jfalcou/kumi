@@ -45,12 +45,12 @@ namespace kumi
 
   template<typename ID> struct identifier<ID, void>
   {
-    using tag_type = std::remove_cvref_t<ID>;
+    using type = std::remove_cvref_t<ID>;
 
     constexpr identifier() noexcept {};
     constexpr identifier(ID const&) noexcept {};
 
-    template<typename T> constexpr field<tag_type, std::unwrap_ref_decay_t<T>> operator=(T&& v) const noexcept
+    template<typename T> constexpr field<type, std::unwrap_ref_decay_t<T>> operator=(T&& v) const noexcept
     {
       return {KUMI_FWD(v)};
     }
@@ -59,7 +59,7 @@ namespace kumi
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os,
                                                          identifier const&) noexcept
     {
-      return os << _::make_str(tag_type{});
+      return os << _::make_str(type{});
     }
   };
 
@@ -84,7 +84,7 @@ namespace kumi
   template<typename ID, typename Checker> struct identifier
   {
     //! @brief Derived identifier type
-    using tag_type = identifier<ID, Checker>;
+    using type = identifier<ID, Checker>;
 
     //! A checked field str representation is the underlying type, checker is ignored
     friend constexpr str to_str(identifier<ID, Checker> const&) { return _::make_str(ID{}); }
@@ -127,14 +127,14 @@ namespace kumi
     //==================================================================================================================
     template<typename T>
     requires(Checker::template value<T>)
-    constexpr auto operator=(T&& v) const noexcept -> field<tag_type, std::unwrap_ref_decay_t<T>>
+    constexpr auto operator=(T&& v) const noexcept -> field<type, std::unwrap_ref_decay_t<T>>
     {
       return {KUMI_FWD(v)};
     }
 
     template<typename T>
     requires(!Checker::template value<T>)
-    constexpr field<tag_type, std::unwrap_ref_decay_t<T>> operator=(T&& v) const = delete;
+    constexpr field<type, std::unwrap_ref_decay_t<T>> operator=(T&& v) const = delete;
 
     //! @related kumi::identifier
     //! @brief Output stream insertion
@@ -160,7 +160,7 @@ namespace kumi
   template<str ID> struct name
   {
     //! @brief Derived identifier type
-    using tag_type = name<ID>;
+    using type = name<ID>;
 
     //! A name field str representation is it s owned str
     friend constexpr str to_str(name<ID> const&) { return ID; }
@@ -175,7 +175,7 @@ namespace kumi
       @return A kumi::field binding the identifier to `v`.
     **/
     //==================================================================================================================
-    template<typename T> constexpr auto operator=(T&& v) const noexcept -> field<tag_type, std::unwrap_ref_decay_t<T>>
+    template<typename T> constexpr auto operator=(T&& v) const noexcept -> field<type, std::unwrap_ref_decay_t<T>>
     {
       return {KUMI_FWD(v)};
     }
@@ -206,5 +206,13 @@ namespace kumi
       else if constexpr (concepts::identifier<std::remove_cvref_t<decltype(N)>>) return false;
       else return can_get_field_by_value<name<N>, Ts...>;
     };
+
+    template<auto N, typename... Ts> KUMI_ABI constexpr auto contains_label()
+    {
+      if constexpr (std::integral<std::remove_cvref_t<decltype(N)>>) return false;
+      else if constexpr (concepts::index<decltype(N)>) return false;
+      else if constexpr (!std::is_same_v<std::remove_cvref_t<decltype(N)>, str>) return false;
+      else return can_get_field_by_label<std::integral_constant<kumi::str, N>, Ts...>;
+    }
   }
 }

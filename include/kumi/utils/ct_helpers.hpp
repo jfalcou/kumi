@@ -77,6 +77,40 @@ namespace kumi
 
   //====================================================================================================================
   /**
+    @ingroup types
+    @class label_t
+    @brief Literal constant type
+
+    Defines a Literal constant wrapper used to carry compile-time strings through API
+  **/
+  //====================================================================================================================
+  template<str Label> struct label_t
+  {
+    using type = str;
+
+    /// Value stored by the constant
+    static constexpr auto value = Label;
+
+    /// Conversion operator to kumi::str
+    constexpr inline operator str() const noexcept { return Label; }
+
+    template<typename CharT, typename Traits>
+    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, label_t const&) noexcept
+    {
+      return os << value;
+    }
+  };
+
+  //====================================================================================================================
+  /**
+    @ingroup utility
+    @brief Inline literal constant value for kumi::label_t
+  **/
+  //====================================================================================================================
+  template<str Label> inline constexpr label_t<Label> const label = {};
+
+  //====================================================================================================================
+  /**
     @namespace literals
     @brief KUMI literals namespace
   **/
@@ -116,6 +150,24 @@ namespace kumi
     template<kumi::str ID> constexpr auto operator""_id() noexcept
     {
       return name<ID>{};
+    }
+
+    //==================================================================================================================
+    /**
+      @ingroup utility
+      @brief Forms a constant string literal of the desired value.
+      @return An instance of kumi::label for the specified string
+
+      @note It differs from the ""_id operator on the type and the overload that it will pick up. An identifier
+      and a label are two different parts of a field. Label represents the value that is displayed.
+
+      ##Example:
+      @include doc/infra/label.cpp
+    **/
+    //==================================================================================================================
+    template<kumi::str ID> constexpr auto operator""_l() noexcept
+    {
+      return label<ID>;
     }
   }
 
