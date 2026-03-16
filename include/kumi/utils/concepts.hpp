@@ -74,6 +74,12 @@ namespace kumi
       A type `T` models `kumi::concepts::product_type` if it follows the standard tuple protocole and  provides
       support for structured bindings. std::tuple_element and std::tuple_size should be well formed.
 
+      ## Example types:
+      + `kumi::tuple<...>;`
+      + `std::tuple<...>;`
+      + `std::array<...>;`
+      + `std::pair<...>;`
+
       @see @ref product_type
     **/
     //==================================================================================================================
@@ -88,6 +94,9 @@ namespace kumi
       A type `T` models `kumi::concepts::record_type` if it models kumi::concepts::product_type and contains fields
       that are named and unique.
 
+      ## Example types:
+      + kumi::record<...>;
+
       @see @ref record_type
     **/
     //==================================================================================================================
@@ -101,6 +110,10 @@ namespace kumi
 
       A type `T` models `kumi::concepts::static_container` if it is an homogeneous container of fixed size exposing
       size(), begin(), end() and data() member functions as well as value_type and size_type aliases.
+
+      ## Example types:
+      + `std::span<T,N>/std::span<T>`
+      + `std::vector<T>;`
     **/
     //==================================================================================================================
     template<typename T>
@@ -112,6 +125,9 @@ namespace kumi
       @brief Concept specifying a type follows the Container Type semantic
 
       A type `T` models `kumi::container` if it is a kumi::container of fixed size.
+
+      ## Example types:
+      + std::span<T,N>;
     **/
     //==================================================================================================================
     template<typename T>
@@ -135,7 +151,11 @@ namespace kumi
     /**
       @brief index concept
 
-      An type modeling `kumi::index` is a compile time integral type containing a value member convertible to size_t
+      An type modeling `kumi::index` is a compile time integral type containing a value member convertible to size_t.
+
+      ## Example types:
+      + `std::integral_constant<T,10>;`
+      + `kumi::index<10>;`
     **/
     //==================================================================================================================
     template<typename T>
@@ -149,6 +169,9 @@ namespace kumi
       @brief Concept specifying a type represent a field
 
       A field type serves as a member of a kumi::record and can be retrieved by it's label later.
+
+      ## Example types:
+      + `auto field = ("myfield"_id = 10);`
     **/
     //==================================================================================================================
     template<typename T>
@@ -161,6 +184,9 @@ namespace kumi
 
       An identifier type is able to be bound to a value to create a kumi::concepts::field. It represent a type that
       can be used to retrieve a kumi::concepts::field from a kumi::concepts::product_type
+
+      ## Example types:
+      + `"my_identifier"_id;`
     **/
     //==================================================================================================================
     template<typename T>
@@ -245,6 +271,11 @@ namespace kumi
 
       A type `T` models `kumi::cocnepts::homogenous_product_type` if it models `kumi::concepts::product_type` and
       contains member of a single, unique type.
+
+      ## Example types:
+      + `kumi::tuple<float,float,float>;`
+      + `std::array<int,10>;`
+      + `std::pair<char,char>;`
     **/
     //==================================================================================================================
     template<typename T>
