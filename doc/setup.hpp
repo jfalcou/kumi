@@ -1,10 +1,19 @@
-#error DO NOT INCLUDE - DOCUMENTATION PURPOSE ONLY
-
-//==================================================================================================
+#error This file is for documentation only - DO NOT INCLUDE
 /**
+
   @page  setup  Setup
 
   @tableofcontents
+
+  @section prerequisit Pre-requisites
+
+  The **KUMI** librarie requires a C++20 compliant compiler. Here are the current minimal compiler version supported:
+
+  | Compiler       | Version          |
+  | -------------- | ---------------- |
+  | g++            | 14  and  above   |
+  | clang++        | 19  and  above   |
+  | MSVC           | 19  and  above   |
 
   @section setup-source Install from the source
 
@@ -98,5 +107,5 @@
   add_executable(test_kumi ../main.cpp)
   target_link_libraries(test_kumi PUBLIC kumi::kumi)
   @endcode
+
 **/
-//==================================================================================================

@@ -1,25 +1,30 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
 {
-  //================================================================================================
-  //! @addtogroup traits
-  //!
-  //! @class as
-  //! @brief Lightweight type-wrapper
-  //!
-  //! kumi::as Wraps type into a constexpr, trivially constructible empty class to optimize
-  //! passing type parameters via object instead of via template parameters.
-  //!
-  //! @tparam T Type to wrap
-  //================================================================================================
+  //====================================================================================================================
+  /**
+     @ingroup types
+
+     @class as
+     @brief Lightweight type-wrapper
+
+     kumi::as Wraps type into a constexpr, trivially constructible empty class to optimize passing type parameters
+     via object instead of via template parameters. A specialisation is provided if T is void.
+
+     @tparam T Type to wrap
+
+    ## Example:
+    @include doc/infra/as.cpp
+  **/
+  //====================================================================================================================
   template<typename T> struct as
   {
     //! @brief Wrapped type

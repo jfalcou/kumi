@@ -1,26 +1,34 @@
-//==================================================================================================
+//======================================================================================================================
+//! @file
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
 {
-  //================================================================================================
-  //! @ingroup tuple
-  //! @class tuple
-  //! @brief Fixed-size collection of heterogeneous values.
-  //!
-  //! kumi::tuple provides an aggregate based implementation of a tuple. It provides algorithms and
-  //! functions designed to facilitate tuple's handling and transformations.
-  //!
-  //! kumi::tuple is also compatible with standard tuple operations and structured bindings.
-  //!
-  //! @tparam Ts Sequence of types stored inside kumi::tuple.
-  //================================================================================================
+  //====================================================================================================================
+  /**
+    @class tuple
+    @ingroup tuple_related
+    @brief Fixed-size collection of heterogeneous values.
+
+    kumi::tuple provides an aggregate based implementation of a tuple. It provides algorithms and
+    functions designed to facilitate tuple's handling and transformations.
+
+    kumi::tuple is also compatible with standard tuple operations and structured bindings.
+
+    @tparam Ts Sequence of types stored inside kumi::tuple.
+
+    @see @ref product_type
+
+    ## Example:
+    @include doc/tuple/api/introduction.cpp
+  **/
+  //====================================================================================================================
   template<typename... Ts> struct tuple
   {
     using binder_t = _::make_binder_t<std::make_integer_sequence<int, sizeof...(Ts)>, Ts...>;
@@ -29,108 +37,116 @@ namespace kumi
 
     binder_t impl;
 
-    //==============================================================================================
-    //! @name Accessors
-    //! @{
-    //==============================================================================================
+    //==================================================================================================================
+    /**
+      @name Accessors
+      @{
+    **/
+    //==================================================================================================================
 
-    //==============================================================================================
-    //! @brief Extracts the Ith element from a kumi::tuple
-    //!
-    //! @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
-    //! @param  i Compile-time index of the element to access
-    //! @return A reference to the selected element of current tuple.
-    //!
-    //! ## Example:
-    //! @include doc/tuple/api/subscript.cpp
-    //==============================================================================================
+    //==================================================================================================================
+    /**
+      @brief Extracts the Ith element from a kumi::tuple
+
+      @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
+      @param  i Compile-time index of the element to access
+      @return A reference to the selected element of current tuple.
+
+      ## Example:
+      @include doc/tuple/api/subscript.cpp
+    **/
+    //==================================================================================================================
     template<std::size_t I>
-    requires(I < sizeof...(Ts))
     KUMI_ABI constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) & noexcept
+    requires(I < sizeof...(Ts))
     {
       return impl(std::integral_constant<std::size_t, I>{});
     }
 
     /// @overload
     template<std::size_t I>
-    requires(I < sizeof...(Ts))
     KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) && noexcept
+    requires(I < sizeof...(Ts))
     {
       return static_cast<decltype(impl)&&>(impl)(std::integral_constant<std::size_t, I>{});
     }
 
     /// @overload
     template<std::size_t I>
-    requires(I < sizeof...(Ts))
     KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) const&& noexcept
+    requires(I < sizeof...(Ts))
     {
       return static_cast<decltype(impl) const&&>(impl)(std::integral_constant<std::size_t, I>{});
     }
 
     /// @overload
     template<std::size_t I>
-    requires(I < sizeof...(Ts))
     KUMI_ABI constexpr decltype(auto) operator[](index_t<I>) const& noexcept
+    requires(I < sizeof...(Ts))
     {
       return impl(std::integral_constant<std::size_t, I>{});
     }
 
-    //==============================================================================================
-    //! @brief Extracts the Ith element from a kumi::tuple
-    //!
-    //! @note Does not participate in overload resolution if `T` is not present in the tuple or if
-    //!       the tuple contains duplicate types
-    //! @tparam T the type to access in the tuple
-    //! @return A reference to the selected element of current tuple.
-    //!
-    //! ## Example:
-    //! @include doc/tuple/api/typed_subscript.cpp
-    //==============================================================================================
+    //==================================================================================================================
+    /**
+      @brief Extracts the element with type T from a kumi::tuple
+
+      @note Does not participate in overload resolution if `T` is not present in the tuple or if
+            the tuple contains duplicate types
+      @tparam T the type to access in the tuple
+      @return A reference to the selected element of the current tuple.
+
+      ## Example:
+      @include doc/tuple/api/typed_subscript.cpp
+    **/
+    //==================================================================================================================
     template<typename T>
-    requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) & noexcept
+    requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
     {
       return impl(std::type_identity<T>{});
     }
 
     /// @overload
     template<typename T>
-    requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) && noexcept
+    requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
     {
       return static_cast<decltype(impl)&&>(impl)(std::type_identity<T>{});
     }
 
     /// @overload
     template<typename T>
-    requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) const&& noexcept
+    requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
     {
       return static_cast<decltype(impl) const&&>(impl)(std::type_identity<T>{});
     }
 
     /// @overload
     template<typename T>
-    requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
     KUMI_ABI constexpr decltype(auto) operator[](as<T>) const& noexcept
+    requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
     {
       return impl(std::type_identity<T>{});
     }
 
-    //==============================================================================================
-    //! @brief Extracts the element labeled Name from a kumi::tuple
-    //!
-    //! @note Does not participate in overload resolution if Name is not present in the tuple or if
-    //!       the tuple contains duplicate names.
-    //! @tparam Name Non type template parameter name of the element to access
-    //! @return A reference to the selected element of current tuple.
-    //!
-    //! ## Example:
-    //! @include doc/tuple/api/named_subscript.cpp
-    //==============================================================================================
+    //==================================================================================================================
+    /**
+      @brief Extracts the element labeled Name from a kumi::tuple
+
+      @note Does not participate in overload resolution if there are no field tagged with Name in
+            the tuple or if the tuple contains duplicate names.
+      @tparam Name Identifier of the element to access
+      @return A reference to the selected element of current tuple.
+
+      ## Example:
+      @include doc/tuple/api/named_subscript.cpp
+    **/
+    //==================================================================================================================
     template<concepts::identifier Name>
-    requires(concepts::uniquely_named<Ts...> && concepts::contains_field<Name, Ts...>)
     KUMI_ABI constexpr decltype(auto) operator[](Name const&) & noexcept
+    requires(concepts::uniquely_named<Ts...> && concepts::contains_field<Name, Ts...>)
     {
       return impl(_::tag_of_t<Name>{});
     }
@@ -145,74 +161,76 @@ namespace kumi
 
     /// @overload
     template<concepts::identifier Name>
-    requires(concepts::uniquely_named<Ts...> && concepts::contains_field<Name, Ts...>)
     KUMI_ABI constexpr decltype(auto) operator[](Name const&) const&& noexcept
+    requires(concepts::uniquely_named<Ts...> && concepts::contains_field<Name, Ts...>)
     {
       return static_cast<decltype(impl) const&&>(impl)(_::tag_of_t<Name>{});
     }
 
     /// @overload
     template<concepts::identifier Name>
-    requires(concepts::uniquely_named<Ts...> && concepts::contains_field<Name, Ts...>)
     KUMI_ABI constexpr decltype(auto) operator[](Name const&) const& noexcept
+    requires(concepts::uniquely_named<Ts...> && concepts::contains_field<Name, Ts...>)
     {
       return impl(_::tag_of_t<Name>{});
     }
 
-    //==============================================================================================
+    //==================================================================================================================
     //! @}
-    //==============================================================================================
+    //==================================================================================================================
 
-    //==============================================================================================
-    //! @name Properties
-    //! @{
-    //==============================================================================================
-    /// Returns the number of elements in a kumi::tuple
+    //==================================================================================================================
+    /**
+      @name Properties
+      @{
+    **/
+    //==================================================================================================================
+
+    /// @return Returns the number of elements in a kumi::tuple
     [[nodiscard]] KUMI_ABI static constexpr auto size() noexcept { return sizeof...(Ts); }
 
-    /// Returns `true` if a kumi::tuple contains 0 elements
+    /// @return Returns `true` if a kumi::tuple contains 0 elements
     [[nodiscard]] KUMI_ABI static constexpr bool empty() noexcept { return sizeof...(Ts) == 0; }
 
     /// Returns the names of the elements of a kumi::tuple
     [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept { return kumi::tuple{name_of<Ts>()...}; };
 
-    //==============================================================================================
+    //==================================================================================================================
     //! @}
-    //==============================================================================================
+    //==================================================================================================================
 
-    //==============================================================================================
-    //! @name Conversions
-    //! @{
-    //==============================================================================================
+    //==================================================================================================================
+    /**
+      @name Conversions
+      @{
+    **/
+    //==================================================================================================================
 
-    //==============================================================================================
-    //! @brief  Converts a tuple<Ts...> to a tuple<Us...>.
-    //! @tparam Us Types composing the destination tuple
-    //==============================================================================================
+    //==================================================================================================================
+    /**
+      @brief  Enables static casting a tuple<Ts...> to a tuple<Us...>, the conversions is explicit
+              if the casting requires internal explicit conversions.
+      @tparam Us Types composing the destination tuple
+
+      @note This function does not participate in overload resolution if the target tuple cannot be constructed
+            from the values of the source, if their size does not match or if they are the same type.
+            The conversion is explicit if the conversion of some member to the target needs to be explicit.
+
+      This permits the conversion from a tuple<T>& to a tuple<T&> which makes it suitable
+            for some zip-like cases such as building a structure of arrays iterator.
+
+      ## Example :
+      @include doc/tuple/api/cast.cpp
+      @include doc/tuple/api/soa.cpp
+    **/
+    //==================================================================================================================
     template<typename... Us>
-    requires(_::piecewise_convertible<tuple, tuple<Us...>> && (sizeof...(Us) == sizeof...(Ts)) &&
-             (!std::same_as<Ts, Us> && ...))
-    [[deprecated("Will be replaced by free functions")]] [[nodiscard]] inline constexpr auto cast() const
-    {
-      return apply([](auto&&... elems) { return tuple<Us...>{static_cast<Us>(elems)...}; }, *this);
-    }
-
-    //==============================================================================================
-    //! @brief  Enables static casting a tuple<Ts...> to a tuple<Us...>.
-    //! @tparam Us Types composing the destination tuple
-    //!
-    //! @note This permits the conversion from a tuple<T>& to a tuple<T&> which makes it suitable
-    //!       for some zip-like cases such as building a structure of arrays iterator.
-    //!
-    //! ## Example :
-    //! @include doc/tuple/api/cast.cpp
-    //! @include doc/tuple/api/soa.cpp
-    //==============================================================================================
-    template<typename... Us>
-    requires((sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>) &&
-             _::piecewise_constructible<tuple<Ts const&...>, tuple<Us...>>)
     [[nodiscard]] KUMI_ABI explicit(!_::piecewise_convertible<tuple<Ts const&...>, tuple<Us...>>) constexpr
     operator tuple<Us...>() const
+    requires(sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>)
+#ifndef KUMI_DOXYGEN_INVOKED
+            && (_::piecewise_constructible<tuple<Ts const&...>, tuple<Us...>>)
+#endif
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return tuple<Us...>{static_cast<Us>(get<I>(*this))...};
@@ -221,28 +239,38 @@ namespace kumi
 
     /// @overload
     template<typename... Us>
-    requires((sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>) &&
-             _::piecewise_constructible<tuple<Ts&...>, tuple<Us...>>)
     [[nodiscard]] KUMI_ABI explicit(!_::piecewise_convertible<tuple<Ts&...>, tuple<Us...>>) constexpr operator tuple<
       Us...>()
+    requires(sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>)
+#ifndef KUMI_DOXYGEN_INVOKED
+            && (_::piecewise_constructible<tuple<Ts&...>, tuple<Us...>>)
+#endif
+
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return tuple<Us...>{static_cast<Us>(get<I>(*this))...};
       }(std::make_index_sequence<sizeof...(Ts)>{});
     }
 
-    //==============================================================================================
+    //==================================================================================================================
     //! @}
-    //==============================================================================================
+    //==================================================================================================================
 
-    //==============================================================================================
-    //! @brief Replaces the contents of the tuple with the contents of another tuple.
-    //! @param other kumi::tuple to copy or move from
-    //! @return `*this`
-    //==============================================================================================
+    //==================================================================================================================
+    /**
+      @brief Replaces the contents of the tuple with the contents of another tuple.
+      @param other kumi::tuple to copy or move from
+      @return `*this`
+
+      @note This function does not participate in overload resolution if the members from the source tuple cannot
+            be converted to the members of the current tuple.
+    **/
+    //==================================================================================================================
     template<typename... Us>
-    requires(_::piecewise_convertible<tuple, tuple<Us...>>)
     KUMI_ABI constexpr tuple& operator=(tuple<Us...> const& other)
+#ifndef KUMI_DOXYGEN_INVOKED
+    requires(_::piecewise_convertible<tuple, tuple<Us...>>)
+#endif
     {
       [&]<std::size_t... I>(std::index_sequence<I...>) {
         ((get<I>(*this) = get<I>(other)), ...);
@@ -253,8 +281,10 @@ namespace kumi
 
     /// @overload
     template<typename... Us>
-    requires(_::piecewise_convertible<tuple, tuple<Us...>>)
     KUMI_ABI constexpr tuple& operator=(tuple<Us...>&& other)
+#ifndef KUMI_DOXYGEN_INVOKED
+    requires(_::piecewise_convertible<tuple, tuple<Us...>>)
+#endif
     {
       [&]<std::size_t... I>(std::index_sequence<I...>) {
         ((get<I>(*this) = get<I>(KUMI_FWD(other))), ...);
@@ -263,13 +293,13 @@ namespace kumi
       return *this;
     }
 
-    //==============================================================================================
-    //! @name Comparison operators
-    //! @{
-    //==============================================================================================
+    //==================================================================================================================
+    /**
+      @name Comparison operators
+      @{
+    **/
+    //==================================================================================================================
 
-    /// @ingroup tuple
-    /// @related kumi::tuple
     /// @brief Compares a tuple with an other for equality
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator==(tuple const& self, tuple<Us...> const& other) noexcept
@@ -280,6 +310,7 @@ namespace kumi
       }(std::make_index_sequence<sizeof...(Ts)>());
     }
 
+    /// @brief Compares a tuple with an other for inequality
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator!=(tuple const& self, tuple<Us...> const& other) noexcept
     requires(concepts::equality_comparable<tuple, tuple<Us...>>)
@@ -287,12 +318,14 @@ namespace kumi
       return !(self == other);
     }
 
-    /// @ingroup tuple
-    /// @related kumi::tuple
     /// @brief Compares tuples for lexicographical is less relation
+    /// @note This function does not participate in overload resolution if the tuple are not lexicographically ordered
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator<(tuple const& lhs, tuple<Us...> const& rhs) noexcept
-    requires(sizeof...(Ts) == sizeof...(Us) && _::piecewise_ordered<tuple, tuple<Us...>>)
+    requires(sizeof...(Ts) == sizeof...(Us))
+#ifndef KUMI_DOXYGEN_INVOKED
+            && (_::piecewise_ordered<tuple, tuple<Us...>>)
+#endif
     {
       // lexicographical order is defined as
       // (v0 < w0) || ... andnot(wi < vi, vi+1 < wi+1) ... || andnot(wn-1 < vn-1, vn < wn);
@@ -309,8 +342,6 @@ namespace kumi
       }(std::make_index_sequence<sizeof...(Ts) - 1>());
     }
 
-    /// @ingroup tuple
-    /// @related kumi::tuple
     /// @brief Compares tuples for lexicographical is less or equal relation
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator<=(tuple const& lhs, tuple<Us...> const& rhs) noexcept
@@ -319,8 +350,6 @@ namespace kumi
       return !(rhs < lhs);
     }
 
-    /// @ingroup tuple
-    /// @related kumi::tuple
     /// @brief Compares tuples for lexicographical is greater relation
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator>(tuple const& lhs, tuple<Us...> const& rhs) noexcept
@@ -329,9 +358,7 @@ namespace kumi
       return rhs < lhs;
     }
 
-    /// @ingroup tuple
-    /// @related kumi::tuple
-    /// @brief Compares tuples for lexicographical is greater relation relation
+    /// @brief Compares tuples for lexicographical is greater or equal relation
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator>=(tuple const& lhs, tuple<Us...> const& rhs) noexcept
     requires requires { lhs < rhs; }
@@ -339,15 +366,16 @@ namespace kumi
       return !(lhs < rhs);
     }
 
-    //==============================================================================================
+    //==================================================================================================================
     //! @}
-    //==============================================================================================
+    //==================================================================================================================
 
-    //==============================================================================================
-    /// @ingroup tuple
-    //! @related kumi::tuple
-    //! @brief Inserts a kumi::tuple in an output stream
-    //==============================================================================================
+    //==================================================================================================================
+    /**
+      @related kumi::tuple
+      @brief Inserts a kumi::tuple in an output stream
+    **/
+    //==================================================================================================================
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, tuple const& t) noexcept
     {
@@ -373,15 +401,15 @@ namespace kumi
     KUMI_ABI friend constexpr auto operator<=>(tuple<>, tuple<>) noexcept = default;
 
     template<typename T>
-    requires(concepts::unit_type<T>)
     [[nodiscard]] KUMI_ABI constexpr operator T() const noexcept
+    requires(concepts::unit_type<T>)
     {
       return {};
     };
 
     template<typename T>
-    requires(concepts::unit_type<T>)
     [[nodiscard]] KUMI_ABI constexpr operator T() noexcept
+    requires(concepts::unit_type<T>)
     {
       return {};
     };
@@ -393,90 +421,102 @@ namespace kumi
     }
   };
 
-  //================================================================================================
-  //! @name Tuple Deduction Guides
-  //! @{
-  //================================================================================================
+  //====================================================================================================================
+  /**
+    @name Tuple deduction guides
+    @{
+  **/
+  //====================================================================================================================
 
-  //================================================================================================
-  //! @ingroup tuple
-  //! @brief kumi::tuple deduction guide
-  //! @tparam Ts  Type lists to build the tuple with.
-  //================================================================================================
+  //====================================================================================================================
+  /**
+    @related kumi::tuple
+    @brief kumi::tuple deduction guide
+    @tparam Ts  Type lists to build the tuple with.
+  **/
+  //====================================================================================================================
   template<typename... Ts> KUMI_CUDA tuple(Ts&&...) -> tuple<std::unwrap_ref_decay_t<Ts>...>;
 
-  //================================================================================================
+  //====================================================================================================================
   //! @}
-  //================================================================================================
+  //====================================================================================================================
 
-  //================================================================================================
-  //! @name Tuple construction
-  //! @{
-  //================================================================================================
+  //====================================================================================================================
+  /**
+    @name Tuple construction
+    @{
+  **/
+  //====================================================================================================================
 
-  //================================================================================================
-  //! @ingroup tuple
-  //! @brief Creates a kumi::tuple of lvalue references to its arguments.
-  //! @param ts	Zero or more lvalue arguments to construct the tuple from.
-  //! @return A kumi::tuple object containing lvalue references.
-  //! ## Example:
-  //! @include doc/tuple/api/tie.cpp
-  //================================================================================================
+  //====================================================================================================================
+  /**
+    @ingroup tuple_related
+    @brief Creates a kumi::tuple of lvalue references to its arguments.
+    @param ts	Zero or more lvalue arguments to construct the tuple from.
+    @return A kumi::tuple object containing lvalue references.
+    ## Example:
+    @include doc/tuple/api/tie.cpp
+  **/
+  //====================================================================================================================
   template<typename... Ts> [[nodiscard]] KUMI_ABI constexpr auto tie(Ts&... ts) -> tuple<Ts&...>
   {
     return {ts...};
   }
 
-  //================================================================================================
-  //! @ingroup tuple
-  //! @related kumi::tuple
-  //! @brief Creates a kumi::tuple of forwarding references to its arguments.
-  //!
-  //! Constructs a tuple of references to the arguments in args suitable for forwarding as an
-  //! argument to a function. The tuple has rvalue reference data members when rvalues are used as
-  //! arguments, and otherwise has lvalue reference data members.
-  //!
-  //! @note If the arguments are temporaries, `forward_as_tuple` does not extend their lifetime;
-  //!       they have to be used before the end of the full expression.
-  //!
-  //! @param ts	Zero or more lvalue arguments to construct the tuple from.
-  //! @return A kumi::tuple constructed as `kumi::tuple<Ts&&...>(std::forward<Ts>(args)...)`
-  //! ## Example:
-  //! @include doc/tuple/api/forward_as_tuple.cpp
-  //================================================================================================
+  //====================================================================================================================
+  /**
+    @ingroup tuple_related
+    @brief Creates a kumi::tuple of forwarding references to its arguments.
+
+    Constructs a tuple of references to the arguments in args suitable for forwarding as an
+    argument to a function. The tuple has rvalue reference data members when rvalues are used as
+    arguments, and otherwise has lvalue reference data members.
+
+    @note If the arguments are temporaries, `forward_as_tuple` does not extend their lifetime;
+          they have to be used before the end of the full expression.
+
+    @param ts	Zero or more lvalue arguments to construct the tuple from.
+    @return A kumi::tuple constructed as `kumi::tuple<Ts&&...>(std::forward<Ts>(args)...)`
+    ## Example:
+    @include doc/tuple/api/forward_as_tuple.cpp
+  **/
+  //====================================================================================================================
   template<typename... Ts> [[nodiscard]] KUMI_ABI constexpr auto forward_as_tuple(Ts&&... ts) -> tuple<Ts&&...>
   {
     return {KUMI_FWD(ts)...};
   }
 
-  //================================================================================================
-  //! @ingroup tuple
-  //! @brief Creates a tuple object, deducing the target type from the types of arguments.
-  //!
-  //! @param ts	Zero or more lvalue arguments to construct the tuple from.
-  //! @return A kumi::tuple constructed from the ts or their inner references when ts is an instance
-  //!         of `std::reference_wrapper`.
-  //! ## Example:
-  //! @include doc/tuple/api/make_tuple.cpp
-  //================================================================================================
+  //====================================================================================================================
+  /**
+    @ingroup tuple_related
+    @brief Creates a tuple object, deducing the target type from the types of arguments.
+
+    @param ts	Zero or more lvalue arguments to construct the tuple from.
+    @return A kumi::tuple constructed from the ts or their inner references when ts is an instance
+            of `std::reference_wrapper`.
+    ## Example:
+    @include doc/tuple/api/make_tuple.cpp
+  **/
+  //====================================================================================================================
   template<typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto make_tuple(Ts&&... ts) -> tuple<std::unwrap_ref_decay_t<Ts>...>
   {
     return {KUMI_FWD(ts)...};
   }
 
-  //================================================================================================
-  //! @ingroup tuple
-  //! @related kumi::tuple
-  //! @brief Creates a kumi::tuple of references given a reference to a kumi::product_type.
-  //!
-  //! @param    t Tuple whose elements are to be referenced.
-  //! @return   A tuple equivalent to the result of `kumi::apply([]<typename... T>(T&&... e)
-  //!           { return kumi::forward_as_tuple(std::forward<T>(e)...); }, t)`
-  //!
-  //! ## Example:
-  //! @include doc/tuple/api/to_ref.cpp
-  //================================================================================================
+  //====================================================================================================================
+  /**
+    @ingroup tuple_related
+    @brief Creates a kumi::tuple of references given a reference to a kumi::product_type.
+
+    @param    t Tuple whose elements are to be referenced.
+    @return   A tuple equivalent to the result of `kumi::apply([]<typename... T>(T&&... e)
+              { return kumi::forward_as_tuple(std::forward<T>(e)...); }, t)`
+
+    ## Example:
+    @include doc/tuple/api/to_ref.cpp
+  **/
+  //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto to_ref(T&& t)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
@@ -484,56 +524,60 @@ namespace kumi
     }(std::make_index_sequence<size_v<T>>{});
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @}
-  //================================================================================================
+  //====================================================================================================================
 
-  //================================================================================================
-  //! @name Tuple conversions
-  //! @{
-  //================================================================================================
+  //====================================================================================================================
+  /**
+    @name Tuple conversions
+    @{
+  **/
+  //====================================================================================================================
 
-  //================================================================================================
-  //! @ingroup tuple
-  //! @related kumi::tuple
-  //! @brief Converts a kumi::tuple to an instance of an arbitrary type
-  //!
-  //! Constructs an instance of `Type` by passing elements of `t` to the appropriate constructor.
-  //!
-  //! @tparam Type Type to generate
-  //! @param  t    kumi::tuple to convert
-  //! @return An instance of `Type` constructed from each element of `t` in order.
-  //!
-  //! ## Example
-  //! @include doc/tuple/api/from_tuple.cpp
-  //================================================================================================
+  //====================================================================================================================
+  /**
+    @ingroup tuple_related
+    @brief Converts a kumi::tuple to an instance of an arbitrary type
+
+    Constructs an instance of `Type` by passing elements of `t` to the appropriate constructor.
+
+    @tparam Type Type to generate
+    @param  t    kumi::tuple to convert
+    @return An instance of `Type` constructed from each element of `t` in order.
+
+    ## Example
+    @include doc/tuple/api/from_tuple.cpp
+  **/
+  //====================================================================================================================
   template<typename Type, typename... Ts>
-  requires(!concepts::product_type<Type> && _::implicit_constructible<Type, Ts...>)
   [[nodiscard]] KUMI_ABI constexpr auto from_tuple(tuple<Ts...> const& t)
+  requires(!concepts::product_type<Type> && _::implicit_constructible<Type, Ts...>)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
       return Type{get<I>(t)...};
     }(std::make_index_sequence<sizeof...(Ts)>());
   }
 
-  //================================================================================================
-  //! @ingroup tuple
-  //! @related kumi::tuple
-  //! @brief Converts a kumi::product_type to an instance kumi::tuple
-  //!
-  //! Constructs an instance kumi::tuple from the elements of the kumi::product_type parameters
-  //!
-  //! @param  t    kumi::product_type to convert
-  //! @return An instance of kumi::tuple constructed from each elements of `t` in order.
-  //!
-  //! @note An overload is provided for kumi::static_container.
-  //!
-  //! ## Example
-  //! @include doc/tuple/api/to_tuple.cpp
-  //================================================================================================
+  //====================================================================================================================
+  /**
+    @ingroup tuple_related
+    @brief Converts a kumi::product_type to an instance kumi::tuple
+
+    Constructs an instance kumi::tuple from the elements of the kumi::product_type parameters
+
+    @param  t    kumi::product_type to convert
+    @return An instance of kumi::tuple constructed from each elements of `t` in order.
+
+    @note An overload is provided for kumi::static_container.
+
+    ## Example
+    @include doc/tuple/api/to_tuple.cpp
+  **/
+  //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto to_tuple(T&& t)
   {
-    if constexpr (concepts::sized_product_type<T, 0>) return tuple{};
+    if constexpr (concepts::empty_product_type<T>) return tuple{};
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return tuple{get<I>(KUMI_FWD(t))...};
@@ -570,33 +614,34 @@ namespace kumi
     };
   }
 
-  //================================================================================================
-  //! @ingroup tuple
-  //! ^related kumi::tuple
-  //! @brief Generate a kumi::tuple type from a type
-  //!
-  //! If `T` is a @ref kumi::concepts::product_type, returns the kumi::tuple type containing the same element
-  //! as `T`. Otherwise, it returns `kumi::tuple<T>`.
-  //!
-  //! A template meta-function can be optionally passed to be applied to each of those types when
-  //! types are computed.
-  //!
-  //! @tparam T     Type to transform
-  //! @tparam Meta  Unary template meta-function to apply to each types.
-  //!               Defaults to `std::type_identity`
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi
-  //! {
-  //!   template<typename T, template<typename...> class Meta = std::type_identity>
-  //!   using as_tuple_t = typename as_tuple<T, Meta>::type;
-  //! }
-  //! @endcode
-  //!
-  //! ## Example:
-  //! @include doc/tuple/api/as_tuple.cpp
-  //================================================================================================
+  //====================================================================================================================
+  /**
+    @ingroup tuple_related
+    @brief Generate a kumi::tuple type from a type
+
+    If `T` is a @ref kumi::concepts::product_type, returns the kumi::tuple type containing the same element
+    as `T`. Otherwise, it returns `kumi::tuple<T>`.
+
+    A template meta-function can be optionally passed to be applied to each of those types when
+    types are computed.
+
+    @tparam T     Type to transform
+    @tparam Meta  Unary template meta-function to apply to each types.
+                  Defaults to `std::type_identity`
+
+    ## Helper type
+    @code
+    namespace kumi
+    {
+      template<typename T, template<typename...> class Meta = std::type_identity>
+      using as_tuple_t = typename as_tuple<T, Meta>::type;
+    }
+    @endcode
+
+    ## Example:
+    @include doc/tuple/api/as_tuple.cpp
+  **/
+  //====================================================================================================================
   template<typename T, template<typename...> class Meta = std::type_identity> struct as_tuple;
 
   template<typename T, template<typename...> class Meta>
@@ -615,185 +660,234 @@ namespace kumi
   template<typename T, template<typename...> class Meta = std::type_identity>
   using as_tuple_t = typename as_tuple<T, Meta>::type;
 
-  //================================================================================================
+  //====================================================================================================================
   //! @}
-  //================================================================================================
+  //====================================================================================================================
 
-  //================================================================================================
-  //! @name Accessors
-  //! @{
-  //================================================================================================
+  //====================================================================================================================
+  /**
+    @name Tuple Accessors
+    @{
+  **/
+  //====================================================================================================================
 
-  //================================================================================================
-  //! @ingroup tuple
-  //! @brief Extracts the Ith element from a kumi::tuple
-  //!
-  //! @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
-  //! @tparam   I Compile-time index of the element to access
-  //! @param    t Tuple to index
-  //! @return   A reference to the selected element of t.
-  //! @related kumi::tuple
-  //!
-  //! ## Example:
-  //! @include doc/tuple/api/get.cpp
-  //================================================================================================
+  //====================================================================================================================
+  /**
+    @related tuple
+    @brief Extracts the Ith element from a kumi::tuple
+
+    @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
+    @tparam   I Compile-time index of the element to access
+    @param    t Tuple to index
+    @return   A reference to the selected element of t.
+
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier noexcept
+
+    ## Example:
+    @include doc/tuple/api/get.cpp
+  **/
+  //====================================================================================================================
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts))
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>& t) noexcept
+  requires(I < sizeof...(Ts))
   {
     return t[index<I>];
   }
 
+  /// @related tuple
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts))
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>&& arg) noexcept
+  requires(I < sizeof...(Ts))
   {
     return static_cast<tuple<Ts...>&&>(arg)[index<I>];
   }
 
+  /// @related tuple
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts))
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const& arg) noexcept
+  requires(I < sizeof...(Ts))
   {
     return arg[index<I>];
   }
 
+  /// @related tuple
   /// @overload
   template<std::size_t I, typename... Ts>
-  requires(I < sizeof...(Ts))
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const&& arg) noexcept
+  requires(I < sizeof...(Ts))
   {
     return static_cast<tuple<Ts...> const&&>(arg)[index<I>];
   }
 
-  //================================================================================================
-  //! @ingroup tuple
-  //! @brief Extracts the field labeled S from a kumi::tuple if it exists
-  //!
-  //! @note     Does not participate in overload resolution if the names are not unique
-  //! @tparam   S Non type template parameter name of the element to access
-  //! @param    t Tuple to index
-  //! @return   A reference to the selected element of t.
-  //! @related kumi::tuple
-  //!
-  //! ## Example:
-  //! @include doc/tuple/api/named_get.cpp
-  //================================================================================================
+  //====================================================================================================================
+  /**
+    @related tuple
+    @brief Extracts the field labeled S from a kumi::tuple if it exists
+
+    @note     Does not participate in overload resolution if the names are not unique
+    @tparam   S Non type template parameter name of the element to access
+    @param    t Tuple to index
+    @return   A reference to the selected element of t.
+
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier noexcept
+
+    ## Example:
+    @include doc/tuple/api/named_get.cpp
+  **/
+  //====================================================================================================================
   template<str S, typename... Ts>
-  requires(concepts::uniquely_named<Ts...> && _::contains_field<S, Ts...>())
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>& t) noexcept
+  requires(concepts::uniquely_named<Ts...> && _::contains_field<S, Ts...>())
   {
     return t[name<S>{}];
   }
 
+  /// @related tuple
   /// @overload
   template<str S, typename... Ts>
-  requires(concepts::uniquely_named<Ts...> && _::contains_field<S, Ts...>())
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>&& t) noexcept
+  requires(concepts::uniquely_named<Ts...> && _::contains_field<S, Ts...>())
   {
     return static_cast<tuple<Ts...>&&>(t)[name<S>{}];
   }
 
+  /// @related tuple
   /// @overload
   template<str S, typename... Ts>
-  requires(concepts::uniquely_named<Ts...> && _::contains_field<S, Ts...>())
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const& t) noexcept
+  requires(concepts::uniquely_named<Ts...> && _::contains_field<S, Ts...>())
   {
     return t[name<S>{}];
   }
 
+  /// @related tuple
   /// @overload
   template<str S, typename... Ts>
-  requires(concepts::uniquely_named<Ts...> && _::contains_field<S, Ts...>())
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const&& t) noexcept
+  requires(concepts::uniquely_named<Ts...> && _::contains_field<S, Ts...>())
   {
     return static_cast<tuple<Ts...> const&&>(t)[name<S>{}];
   }
 
+  //====================================================================================================================
+  /**
+    @related tuple
+    @brief Extracts the field identified by Id from a kumi::tuple if it exists
+
+    @note     Does not participate in overload resolution if the names are not unique
+    @tparam   Id Non type template parameter name of the element to access
+    @param    t Tuple to index
+    @return   A reference to the selected element of t.
+
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier noexcept
+
+    ## Example:
+    @include doc/tuple/api/named_get.cpp
+  **/
+  //====================================================================================================================
   template<concepts::identifier auto Id, typename... Ts>
-  requires(concepts::uniquely_named<Ts...> && concepts::contains_field<decltype(Id), Ts...>)
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>& t) noexcept
+  requires(concepts::uniquely_named<Ts...> && concepts::contains_field<decltype(Id), Ts...>)
   {
     return t[Id];
   }
 
+  /// @related tuple
   /// @overload
   template<concepts::identifier auto Id, typename... Ts>
-  requires(concepts::uniquely_named<Ts...> && concepts::contains_field<decltype(Id), Ts...>)
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>&& t) noexcept
+  requires(concepts::uniquely_named<Ts...> && concepts::contains_field<decltype(Id), Ts...>)
   {
     return static_cast<tuple<Ts...>&&>(t)[Id];
   }
 
+  /// @related tuple
   /// @overload
   template<concepts::identifier auto Id, typename... Ts>
-  requires(concepts::uniquely_named<Ts...> && concepts::contains_field<decltype(Id), Ts...>)
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const& t) noexcept
+  requires(concepts::uniquely_named<Ts...> && concepts::contains_field<decltype(Id), Ts...>)
   {
     return t[Id];
   }
 
+  /// @related tuple
   /// @overload
   template<concepts::identifier auto Id, typename... Ts>
-  requires(concepts::uniquely_named<Ts...> && concepts::contains_field<decltype(Id), Ts...>)
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const&& t) noexcept
+  requires(concepts::uniquely_named<Ts...> && concepts::contains_field<decltype(Id), Ts...>)
   {
     return static_cast<tuple<Ts...> const&&>(t)[Id];
   }
 
-  //================================================================================================
-  //! @ingroup tuple
-  //! @brief Extracts the field which type is T from a kumi::tuple if it exist
-  //!
-  //! @note     Does not participate in overload resolution if the types are not unique
-  //! @tparam   T Type of the element to access
-  //! @param    t Tuple to index
-  //! @return   A reference to the selected element of t.
-  //! @related kumi::tuple
-  //!
-  //! ## Example:
-  //! @include doc/tuple/api/typed_get.cpp
-  //================================================================================================
+  //====================================================================================================================
+  /**
+    @related tuple
+    @brief Extracts the field which type is T from a kumi::tuple if it exist
+
+    @note     Does not participate in overload resolution if the types are not unique
+    @tparam   T Type of the element to access
+    @param    t Tuple to index
+    @return   A reference to the selected element of t.
+
+    @qualifier nodiscard inline constexpr noexcept
+
+    ## Example:
+    @include doc/tuple/api/typed_get.cpp
+  **/
+  //====================================================================================================================
   template<typename T, typename... Ts>
-  requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>& t) noexcept
+  requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
   {
     return t[as<T>{}];
   }
 
+  /// @related tuple
   /// @overload
   template<typename T, typename... Ts>
-  requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>&& t) noexcept
+  requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
   {
     return static_cast<tuple<Ts...>&&>(t)[as<T>{}];
   }
 
+  /// @related tuple
   /// @overload
   template<typename T, typename... Ts>
-  requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const& t) noexcept
+  requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
   {
     return t[as<T>{}];
   }
 
+  /// @related tuple
   /// @overload
   template<typename T, typename... Ts>
-  requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const&& t) noexcept
+  requires(concepts::uniquely_typed<Ts...> && concepts::contains_type<T, Ts...>)
   {
     return static_cast<tuple<Ts...> const&&>(t)[as<T>{}];
   }
 
-  //================================================================================================
+  //====================================================================================================================
   //! @}
-  //================================================================================================
+  //====================================================================================================================
+
 #ifndef KUMI_DOXYGEN_INVOKED
   /// Improves diagnostic for out of bounds index
-  template<std::integral auto I, typename T>
-  requires(is_kumi_tuple_v<std::remove_cvref_t<T>> && ((I >= size_v<T>) || (I < 0)))
+  template<std::size_t I, typename T>
+  requires(is_kumi_tuple_v<std::remove_cvref_t<T>> && (I >= size_v<T>))
   constexpr auto get(T&& r) = delete;
 
   /// Improves diagnostic for non present name

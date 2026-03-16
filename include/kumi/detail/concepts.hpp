@@ -1,10 +1,10 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi::_
@@ -33,13 +33,12 @@ namespace kumi::_
   // To be displayed an identifier need to be constructible via T{}, and either expose a constexpr to_str() or
   // nothing, in which case the typer will be used (see typename.hpp)
   template<typename T>
-  concept valid_display_name =
-    implicit_constructible<T> &&
-    (!requires { to_str(T{}); } || std::same_as<typename value<to_str(T{})>::type, kumi::str>);
+  concept valid_label = implicit_constructible<T> &&
+                        (!requires { to_str(T{}); } || std::same_as<typename value<to_str(T{})>::type, kumi::str>);
 
-  //==============================================================================================
+  //====================================================================================================================
   // Helper concepts for custom identifier/field use (these are fundamental types in kumi)
-  //==============================================================================================
+  //====================================================================================================================
   template<typename T>
   concept identifier = requires(T const& t) { typename std::remove_cvref_t<T>::tag_type; };
 
@@ -70,9 +69,9 @@ namespace kumi::_
   template<field T> using key_of_t = typename key_of<std::remove_cvref_t<T>>::type;
   template<field T> using type_of_t = typename type_of<std::remove_cvref_t<T>>::type;
 
-  //==============================================================================================
+  //====================================================================================================================
   // Helper concepts for construction checks
-  //==============================================================================================
+  //====================================================================================================================
   template<typename From, typename To> struct is_piecewise_constructible : std::false_type
   {
   };
@@ -130,9 +129,9 @@ namespace kumi::_
   template<typename From, typename To>
   concept piecewise_comparable = is_piecewise_comparable<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
 
-  //==============================================================================================
+  //====================================================================================================================
   // Helper concepts for construction checks on records
-  //==============================================================================================
+  //====================================================================================================================
   template<typename Field> struct check_value
   {
     static consteval std::false_type get(...);
@@ -174,9 +173,9 @@ namespace kumi::_
   concept fieldwise_comparable =
     sort<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::is_fieldwise_comparable::value;
 
-  //==============================================================================================
+  //====================================================================================================================
   // Helper meta functions to access a field type by type
-  //==============================================================================================
+  //====================================================================================================================
   template<typename Ref, typename Field> struct check_type
   {
     static consteval Field get(Ref)
@@ -220,9 +219,9 @@ namespace kumi::_
   template<typename Ref, typename... Fields>
   concept can_get_field_by_type = !std::is_same_v<get_field_by_type_t<Ref, Fields...>, std::false_type>;
 
-  //==============================================================================================
+  //====================================================================================================================
   // Helper meta functions to access a field type by name
-  //==============================================================================================
+  //====================================================================================================================
   struct failed
   {
     static consteval std::false_type get(...);

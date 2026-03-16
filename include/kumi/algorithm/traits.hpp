@@ -1,10 +1,10 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
@@ -38,5 +38,4 @@ namespace kumi
 
   template<template<typename...> typename Traits, concepts::product_type Tuple>
   using map_traits_t = typename map_traits<Traits, Tuple>::type;
-
 }

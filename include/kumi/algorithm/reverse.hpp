@@ -1,41 +1,48 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
 {
-  //================================================================================================
-  //! @ingroup generators
-  //! @brief Reverse elements of a kumi::product_type
-  //!
-  //! @param  t kumi::product_type to reverse
-  //! @return A tuple equivalent to kumi::make_tuple(t[index<size_v<T> - 1 - Idx>]...);
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi::result
-  //! {
-  //!   template<product_type T> struct reverse;
-  //!
-  //!   template<product_type T>
-  //!   using reverse_t = typename reverse<T>::type;
-  //! }
-  //! @endcode
-  //!
-  //! Computes the return type of a call to kumi::reverse
-  //!
-  //! ## Examples:
-  //! @include doc/tuple/algo/reverse.cpp
-  //! @include doc/record/algo/reverse.cpp
-  //================================================================================================
+  //====================================================================================================================
+  /**
+    @ingroup  generators
+    @brief    Reverse elements of a product type
+
+    On record types, this function operates on elements as if they were ordered. The considered order is the order
+    of declaration.
+
+    @param  t The product type to reverse
+    @return A product type with the type of `t` and elements equal to (t[index<size_v<T> - 1 - Idx>]...);
+
+    ## Helper type
+    @code
+    namespace kumi::result
+    {
+      template<product_type T> struct reverse;
+
+      template<product_type T>
+      using reverse_t = typename reverse<T>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::reverse
+
+    ## Examples:
+    ### Tuple:
+    @include doc/tuple/algo/reverse.cpp
+    ### Record:
+    @include doc/record/algo/reverse.cpp
+  **/
+  //====================================================================================================================
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto reverse(T&& t)
   {
-    if constexpr (concepts::sized_product_type<T, 0>) return builder<T>::make();
+    if constexpr (concepts::empty_product_type<T>) return builder<T>::make();
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {

@@ -5,7 +5,6 @@
 **/
 #include <kumi/kumi.hpp>
 #include <iostream>
-#include <vector>
 
 int main()
 {

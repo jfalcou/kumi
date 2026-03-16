@@ -1,21 +1,25 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
 {
-  //================================================================================================
-  //! @ingroup utility
-  //! @class str
-  //! @brief Static string used to create named fields.
-  //!
-  //! kumi::str provides a way to define compile time names.
-  //================================================================================================
+  //====================================================================================================================
+  /**
+    @ingroup  types
+    @class    str
+    @brief    Static string used to create named fields.
+
+    @note the `.` character is reserved for internal manipulation.
+
+    kumi::str provides a way to define compile time names.
+  **/
+  //====================================================================================================================
   struct str
   {
     static constexpr std::size_t max_size = 64;
@@ -75,8 +79,11 @@ namespace kumi
   };
 
   //====================================================================================================================
-  //! @ingroup utility
-  //! @brief Type indicating a identifier was not found in a given kumi::product_type
+  /**
+    @ingroup  types
+    @class    unknown
+    @brief    Type indicating a identifier was not found in a given kumi::product_type
+  **/
   //====================================================================================================================
   struct unknown
   {
@@ -93,7 +100,7 @@ namespace kumi
 
   template<str... Strs>
   requires((Strs.size() + ... + sizeof...(Strs)) < str::max_size)
-  [[nodiscard]] KUMI_ABI constexpr auto concatenate_str()
+  [[nodiscard]] KUMI_ABI constexpr auto concatenate_str() noexcept
   {
     constexpr auto nb_strs = sizeof...(Strs);
 

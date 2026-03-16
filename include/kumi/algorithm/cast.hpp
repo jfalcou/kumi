@@ -1,10 +1,10 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi
@@ -29,34 +29,38 @@ namespace kumi
     template<typename T, auto N> using as_homogeneous_t = typename as_homogeneous<T, N>::type;
   }
 
-  //================================================================================================
-  //! @ingroup utility
-  //! @brief Converts a product_type<Ts...> to an instance of a product_type<Target...>
-  //!
-  //! @tparam Target destination type to associate to each member of the product type
-  //! @param  t Product type to convert
-  //! @return A Product type containing the values of b where each member is of type Target
-  //!
-  //! ## Helper type
-  //! @code
-  //! namespace kumi::result
-  //! {
-  //!   template<typename Target, product_type T> struct member_cast;
-  //!
-  //!   template<typename Target, Product_type T>
-  //!   using member_cast_t = typename member_cast<Target, T>::type;
-  //! }
-  //! @endcode
-  //!
-  //! Computes the return type of a call to kumi::member_cast
-  //!
-  //! ## Examples:
-  //! @include doc/tuple/algo/member_cast.cpp
-  //! @include doc/record/algo/member_cast.cpp
-  //================================================================================================
+  //====================================================================================================================
+  /**
+    @ingroup  generators
+    @brief    Converts a product_type<Ts...> to an instance of a product_type<Target...>
+
+    @tparam Target destination type to associate to each member of the product type `t`
+    @param  t Product type to convert
+    @return A Product type containing the values of `t` where each member is of type Target
+
+    ## Helper type
+    @code
+    namespace kumi::result
+    {
+      template<typename Target, product_type T> struct member_cast;
+
+      template<typename Target, Product_type T>
+      using member_cast_t = typename member_cast<Target, T>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::member_cast
+
+    ## Examples:
+    ### Tuple:
+    @include doc/tuple/algo/member_cast.cpp
+    ### Record:
+    @include doc/record/algo/member_cast.cpp
+  **/
+  //====================================================================================================================
   template<typename Target, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto member_cast(T&& t)
   {
-    if constexpr (concepts::sized_product_type<T, 0>) return t;
+    if constexpr (concepts::empty_product_type<T>) return t;
     else if constexpr (concepts::record_type<T>)
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         using type = builder_make_t<T, result::field_cast_t<Target, element_t<I, T>>...>;
