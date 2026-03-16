@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: Change Log</title>
+<title>KUMI: Change Log</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -17,6 +17,38 @@
   DoxygenAwesomeParagraphLink.init()
   DoxygenAwesomeFragmentCopyButton.init()
   SendToGodbolt.init("kumi","clang1600","-O3 -std=c++20 -DNEDBUG")
+  document.addEventListener("DOMContentLoaded", function()
+  {
+    // Matches any word ending in _implementation_defined
+    const pattern = /\b\w+_implementation_defined\b/g;
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      null,
+      false
+    );
+    let node;
+    const targets = [];
+    while(node = walker.nextNode()) {
+      if (pattern.test(node.nodeValue)) {
+        targets.push(node);
+        // Reset regex index because of the 'g' flag
+        pattern.lastIndex = 0;
+      }
+    }
+    targets.forEach(textNode => {
+      const replacement = textNode.nodeValue.replace(
+        pattern,
+        '<span class="comment" title="This type is implementation defined and not part of the public API">/*implementation defined*/</span>'
+      );
+      const container = document.createElement('span');
+      container.innerHTML = replacement;
+      while (container.firstChild) {
+        textNode.parentNode.insertBefore(container.firstChild, textNode);
+      }
+      textNode.parentNode.removeChild(textNode);
+    });
+  });
 </script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
@@ -53,7 +85,7 @@ MathJax.Hub.Config({
  <tr  style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">kumi<span id="projectnumber">&#160;v3.1.0</span>
+   <div id="projectname">KUMI<span id="projectnumber">&#160;v3.1.0</span>
    </div>
    <div id="projectbrief">Exquisite Epidote</div>
   </td>
@@ -123,11 +155,11 @@ $(function(){initNavTree('changelog.html','',''); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md__2____w_2kumi_2kumi_2doc_2changelog"></a></p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md215"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md393"></a>
 Version 3.1 - Exquisite Epidote</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md216"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md394"></a>
 What's Changed</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md217"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md395"></a>
 Infrastructure Changes</h3>
 <ul>
 <li>Migrate CMake infrastructure to <a href="https://github.com/jfalcou/copacabana">copacabana</a></li>
@@ -145,7 +177,7 @@ Infrastructure Changes</h3>
 <li>Documentation is now automatically built on merge to stop polluting PRs.</li>
 <li>People can use <a href="https://jfalcou.github.io/kumi/kumi.tag">https://jfalcou.github.io/kumi/kumi.tag</a> as a Doxygen Tag File in their own documentation.</li>
 </ul>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md218"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md396"></a>
 New Features</h3>
 <ul>
 <li>Optimize certain data layout and type computation to reduce symbol length.</li>
@@ -157,7 +189,7 @@ New Features</h3>
 <li>Add <span class="tt">std::array</span> as a product type, contributed by <b>jehelset</b>.</li>
 <li>Allow for automatic std adaptation to be disengaged via macro.</li>
 </ul>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md219"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md397"></a>
 Bug Fixes</h3>
 <ul>
 <li>Fix #55 - Shortcut to pure fold expression whenever possible in reduction.</li>
@@ -175,74 +207,74 @@ Bug Fixes</h3>
 <li>Remove useless != and fix size related checks on comparisons operators.</li>
 </ul>
 <p><b>Full Changelog</b>: <a href="https://github.com/jfalcou/kumi/compare/v3.0...v3.1">https://github.com/jfalcou/kumi/compare/v3.0...v3.1</a></p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md220"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md398"></a>
 Version 3.0 - Delicious Datolite</h1>
 <p>This Release is an API break release.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md221"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md399"></a>
 What's Changed</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md222"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md400"></a>
 API and Infrastructure Changes</h3>
 <ul>
-<li><a class="el" href="group__generators_gaf51ea67a0b091ec31cabe8a0755b963d.html#gaf51ea67a0b091ec31cabe8a0755b963d" title="Extracts a sub-tuple from a product type.">kumi::extract</a> and <a class="el" href="group__generators_gae3a193083043ec28b1aeab6498c87656.html#gae3a193083043ec28b1aeab6498c87656" title="Split a tuple into two.">kumi::split</a> are now free functions (See #40)</li>
+<li><a class="el" href="group__generators_ga2238e054e2c2a2160bec88e3c47e7691.html#ga2238e054e2c2a2160bec88e3c47e7691" title="Extracts a sub product type from a product type.">kumi::extract</a> and <a class="el" href="group__generators_ga9a705331b78493a8882f9db889b57bc9.html#ga9a705331b78493a8882f9db889b57bc9" title="Split a product type into two.">kumi::split</a> are now free functions (See #40)</li>
 <li>KUMI implementation is now done in split file that get aggregated (See #34)</li>
 <li>Massive documentation revamping (See #27, #28)</li>
 <li>Added proper integration tests (See #35)</li>
 </ul>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md223"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md401"></a>
 New Features</h3>
 <ul>
 <li>Implemented <a class="el" href="group__generators_ga19ced0b66d1e3dae7bfa60f7def6914f.html#ga19ced0b66d1e3dae7bfa60f7def6914f" title="Creates a kumi::tuple containing an increasing ramp of values.">kumi::iota</a> and generate (See #23)</li>
 <li>Implemented <a class="el" href="group__generators_ga0cf18e9f5c176d132be6afbfcb6652ae.html#ga0cf18e9f5c176d132be6afbfcb6652ae" title="Return the Cartesian Product of all elements of its arguments product types.">kumi::cartesian_product</a> (See #26)</li>
 <li>Implemented predicate based operations on tuple (See #25)</li>
-<li>Implemented <a class="el" href="group__reductions_ga21303fd927f9d314f49ee8c9845817a1.html#ga21303fd927f9d314f49ee8c9845817a1" title="Computes inner product (i.e. sum of products).">kumi::inner_product</a> (See #36)</li>
-<li>Implemented <a class="el" href="group__utility_ga7847a3783c337053f6d5f53b24a2583f.html#ga7847a3783c337053f6d5f53b24a2583f" title="Retrieves the back of a tuple.">kumi::back</a> and <a class="el" href="group__utility_ga0a86710de48273efa390a88ba18b2017.html#ga0a86710de48273efa390a88ba18b2017" title="Retrieves the front of a tuple.">kumi::front</a> (See #37)</li>
-<li>Implemented <a class="el" href="group__generators_gab95d676ad41b4adc604681d14081026e.html#gab95d676ad41b4adc604681d14081026e" title="Reverse elements of a kumi::product_type.">kumi::reverse</a> (See #39)</li>
+<li>Implemented <a class="el" href="group__reductions_gae9e0f77ffe8399c701ba32532db19d11.html#gae9e0f77ffe8399c701ba32532db19d11" title="Computes inner product (i.e. sum of products).">kumi::inner_product</a> (See #36)</li>
+<li>Implemented <a class="el" href="group__generators_gacbfca9b5e95948e4180a54e920d19c6f.html#gacbfca9b5e95948e4180a54e920d19c6f" title="Retrieves the back of a product type.">kumi::back</a> and <a class="el" href="group__generators_ga04a99a08fa0578c39242f348dc19c8c7.html#ga04a99a08fa0578c39242f348dc19c8c7" title="Retrieves the front of a product type.">kumi::front</a> (See #37)</li>
+<li>Implemented <a class="el" href="group__generators_gab95d676ad41b4adc604681d14081026e.html#gab95d676ad41b4adc604681d14081026e" title="Reverse elements of a product type.">kumi::reverse</a> (See #39)</li>
 </ul>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md224"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md402"></a>
 Bug Fixes</h3>
 <ul>
 <li>Fix #18 - Bad interaction with tuple of references (See #19)</li>
 <li>Improve <a class="el" href="group__generators_ga6a021e42590689a905a2d8268c860838.html#ga6a021e42590689a905a2d8268c860838" title="Converts a product type of product types into a product type of all elements.">kumi::flatten</a> implementation (See #20)</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md225"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md403"></a>
 New Contributors</h2>
 <ul>
 <li><b>jehelset</b> made their first contribution in <a href="https://github.com/jfalcou/kumi/pull/28">https://github.com/jfalcou/kumi/pull/28</a></li>
 </ul>
 <p><b>Full Changelog</b>: <a href="https://github.com/jfalcou/kumi/compare/v2.1...v3.0">https://github.com/jfalcou/kumi/compare/v2.1...v3.0</a></p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md226"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md404"></a>
 Version 2.1 - Charming Chrysoprase</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md227"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md405"></a>
 What's Changed</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md228"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md406"></a>
 Bug Fixes</h3>
 <ul>
 <li>Improve <span class="tt"><a class="el" href="group__generators_ga3786266bedb7981ba0df79cc5b49b261.html#ga3786266bedb7981ba0df79cc5b49b261" title="Concatenates product types in a single one.">kumi::cat</a></span> implementation to perform <span class="tt">O(N)</span> copies.</li>
 <li>Use include guards to prevent issue when different project use KUMI concurrently.</li>
 </ul>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md229"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md407"></a>
 New Features</h3>
 <ul>
 <li>Added the <span class="tt">kumi::sized_product_type_or_more</span> concept</li>
-<li>Implements <span class="tt"><a class="el" href="group__record_gabd73478b6d709990c2f81dc83b980c16.html#gabd73478b6d709990c2f81dc83b980c16" title="Creates a kumi::record of references given a reference to a kumi::record_type.">kumi::to_ref</a></span> to construct a tuple of references form a reference to a tuple.</li>
+<li>Implements <span class="tt"><a class="el" href="group__record__related_ga83a97fc306d9ecfacde28584b219b44a.html#ga83a97fc306d9ecfacde28584b219b44a" title="Creates a kumi::record of references given a reference to a kumi::record_type.">kumi::to_ref</a></span> to construct a tuple of references form a reference to a tuple.</li>
 </ul>
 <p><b>Full Changelog</b>: <a href="https://github.com/jfalcou/kumi/compare/v2.0...v2.1">https://github.com/jfalcou/kumi/compare/v2.0...v2.1</a></p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md230"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md408"></a>
 Version 2.0 - Bedazzling Beryl</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md231"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md409"></a>
 What's Changed</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md232"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md410"></a>
 Infrastructure</h3>
 <ul>
 <li>#6 - Moved kumi.hpp to tuple/kumi.hpp</li>
 </ul>
 <p>This is a slightly API breaking change but as the library gains traction, I hanged the file to a less surprising name.</p>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md233"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md411"></a>
 Bug Fixes</h3>
 <ul>
 <li>#12 - Make == and != SFINAE friendly</li>
 </ul>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md234"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md412"></a>
 New Features</h3>
 <ul>
 <li>#4 - Add map_index</li>
@@ -251,9 +283,9 @@ New Features</h3>
 <li>#7 - <span class="tt"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a></span> supports min and max</li>
 </ul>
 <p><b>Full Changelog</b>: <a href="https://github.com/jfalcou/kumi/compare/v1.0...v2.0">https://github.com/jfalcou/kumi/compare/v1.0...v2.0</a></p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md235"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md413"></a>
 Version 1.0 - Amazing Amethyst</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md236"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md414"></a>
 First autonomous public release.</h2>
 <p><b>KUMI</b> (組) is now independent of the OFW repository. </p>
 </div></div><!-- contents -->

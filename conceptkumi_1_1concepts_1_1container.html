@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::concepts::container Concept Reference</title>
+<title>KUMI: kumi::concepts::container Concept Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -17,6 +17,38 @@
   DoxygenAwesomeParagraphLink.init()
   DoxygenAwesomeFragmentCopyButton.init()
   SendToGodbolt.init("kumi","clang1600","-O3 -std=c++20 -DNEDBUG")
+  document.addEventListener("DOMContentLoaded", function()
+  {
+    // Matches any word ending in _implementation_defined
+    const pattern = /\b\w+_implementation_defined\b/g;
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      null,
+      false
+    );
+    let node;
+    const targets = [];
+    while(node = walker.nextNode()) {
+      if (pattern.test(node.nodeValue)) {
+        targets.push(node);
+        // Reset regex index because of the 'g' flag
+        pattern.lastIndex = 0;
+      }
+    }
+    targets.forEach(textNode => {
+      const replacement = textNode.nodeValue.replace(
+        pattern,
+        '<span class="comment" title="This type is implementation defined and not part of the public API">/*implementation defined*/</span>'
+      );
+      const container = document.createElement('span');
+      container.innerHTML = replacement;
+      while (container.firstChild) {
+        textNode.parentNode.insertBefore(container.firstChild, textNode);
+      }
+      textNode.parentNode.removeChild(textNode);
+    });
+  });
 </script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
@@ -53,7 +85,7 @@ MathJax.Hub.Config({
  <tr  style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">kumi<span id="projectnumber">&#160;v3.1.0</span>
+   <div id="projectname">KUMI<span id="projectnumber">&#160;v3.1.0</span>
    </div>
    <div id="projectbrief">Exquisite Epidote</div>
   </td>
@@ -119,7 +151,7 @@ $(function(){initNavTree('conceptkumi_1_1concepts_1_1container.html','',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">kumi::concepts::container Concept Reference<div class="ingroups"><a class="el" href="group__concepts.html">Tuple Related Concepts</a></div></div></div>
+  <div class="headertitle"><div class="title">kumi::concepts::container Concept Reference<div class="ingroups"><a class="el" href="group__concepts.html">Product Type Related Concepts</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -129,11 +161,17 @@ $(function(){initNavTree('conceptkumi_1_1concepts_1_1container.html','',''); });
 <p><code>#include &lt;kumi/utils/concepts.hpp&gt;</code></p>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Concept specifying a type follows the Container Type semantic. </p>
-<p>A type <span class="tt">T</span> models <span class="tt">kumi::static_container</span> if it is an homogeneous container of fixed size. </p>
+<p>A type <span class="tt">T</span> models <span class="tt"><a class="el" href="conceptkumi_1_1concepts_1_1static__container.html" title="Concept specifying a type follows the Container Type semantic.">kumi::concepts::static_container</a></span> if it is an homogeneous container of fixed size exposing size(), begin(), end() and data() member functions as well as value_type and size_type aliases.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md361"></a>
+Example types:</h2>
+<ul>
+<li><span class="tt">std::span&lt;T,N&gt;/std::span&lt;T&gt;</span></li>
+<li><span class="tt">std::vector&lt;T&gt;;</span> </li>
+</ul>
 </div><h2 id="header-conceptdef" class="groupheader">Concept definition</h2>
 <div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line">    <span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1concepts_1_1container.html">container</a> = is_container_v&lt;std::remove_cvref_t&lt;T&gt;&gt;</div>
-<div class="ttc" id="aconceptkumi_1_1concepts_1_1container_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1container.html">kumi::concepts::container</a></div><div class="ttdoc">Concept specifying a type follows the Container Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:97</div></div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1container_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1container.html">kumi::concepts::container</a></div><div class="ttdoc">Concept specifying a type follows the Container Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:120</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

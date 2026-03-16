@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::concepts::compatible_product_types Concept Reference</title>
+<title>KUMI: kumi::concepts::compatible_product_types Concept Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -17,6 +17,38 @@
   DoxygenAwesomeParagraphLink.init()
   DoxygenAwesomeFragmentCopyButton.init()
   SendToGodbolt.init("kumi","clang1600","-O3 -std=c++20 -DNEDBUG")
+  document.addEventListener("DOMContentLoaded", function()
+  {
+    // Matches any word ending in _implementation_defined
+    const pattern = /\b\w+_implementation_defined\b/g;
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      null,
+      false
+    );
+    let node;
+    const targets = [];
+    while(node = walker.nextNode()) {
+      if (pattern.test(node.nodeValue)) {
+        targets.push(node);
+        // Reset regex index because of the 'g' flag
+        pattern.lastIndex = 0;
+      }
+    }
+    targets.forEach(textNode => {
+      const replacement = textNode.nodeValue.replace(
+        pattern,
+        '<span class="comment" title="This type is implementation defined and not part of the public API">/*implementation defined*/</span>'
+      );
+      const container = document.createElement('span');
+      container.innerHTML = replacement;
+      while (container.firstChild) {
+        textNode.parentNode.insertBefore(container.firstChild, textNode);
+      }
+      textNode.parentNode.removeChild(textNode);
+    });
+  });
 </script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
@@ -53,7 +85,7 @@ MathJax.Hub.Config({
  <tr  style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">kumi<span id="projectnumber">&#160;v3.1.0</span>
+   <div id="projectname">KUMI<span id="projectnumber">&#160;v3.1.0</span>
    </div>
    <div id="projectbrief">Exquisite Epidote</div>
   </td>
@@ -119,7 +151,7 @@ $(function(){initNavTree('conceptkumi_1_1concepts_1_1compatible__product__types.
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">kumi::concepts::compatible_product_types Concept Reference<div class="ingroups"><a class="el" href="group__concepts.html">Tuple Related Concepts</a></div></div></div>
+  <div class="headertitle"><div class="title">kumi::concepts::compatible_product_types Concept Reference<div class="ingroups"><a class="el" href="group__concepts.html">Product Type Related Concepts</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -129,16 +161,16 @@ $(function(){initNavTree('conceptkumi_1_1concepts_1_1compatible__product__types.
 <p><code>#include &lt;kumi/utils/concepts.hpp&gt;</code></p>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Concept specifying if two product types are compatibles. </p>
-<p>A pack of types <span class="tt">Ts</span> models <span class="tt">kumi::compatible_product_types</span> if it models <span class="tt">kumi::follows_same_semantic</span> and if all types model <span class="tt">kumi::equivalent</span> if the types are <span class="tt"><a class="el" href="group__record.html" title="Definition for kumi::record class and functions.">Record Types and Functions</a> types</span> </p>
+<p>A pack of types <span class="tt">Ts</span> models <span class="tt"><a class="el" href="conceptkumi_1_1concepts_1_1compatible__product__types.html" title="Concept specifying if two product types are compatibles.">kumi::concepts::compatible_product_types</a></span> if it models <span class="tt"><a class="el" href="conceptkumi_1_1concepts_1_1follows__same__semantic.html" title="Concept specifying if a pack of types follows the same semantic.">kumi::concepts::follows_same_semantic</a></span>. If the types model <span class="tt"><a class="el" href="conceptkumi_1_1concepts_1_1record__type.html" title="Concept specifying a type follows the Record Type semantic.">kumi::concepts::record_type</a></span> then all types must model <span class="tt"><a class="el" href="conceptkumi_1_1concepts_1_1equivalent.html" title="Concept specifying if two types have matching named fields.">kumi::concepts::equivalent</a></span> </p>
 </div><h2 id="header-conceptdef" class="groupheader">Concept definition</h2>
 <div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... Us&gt;</div>
 <div class="line">    <span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1concepts_1_1compatible__product__types.html">compatible_product_types</a> =</div>
 <div class="line">      (<a class="code hl_concept" href="conceptkumi_1_1concepts_1_1follows__same__semantic.html">follows_same_semantic</a>&lt;T, Us...&gt; &amp;&amp;</div>
 <div class="line">       ((!<a class="code hl_concept" href="conceptkumi_1_1concepts_1_1record__type.html">record_type&lt;T&gt;</a>) || (<a class="code hl_concept" href="conceptkumi_1_1concepts_1_1equivalent.html">equivalent&lt;std::remove_cvref_t&lt;T&gt;</a>, std::remove_cvref_t&lt;Us&gt;&gt; &amp;&amp; ...)))</div>
-<div class="ttc" id="aconceptkumi_1_1concepts_1_1compatible__product__types_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1compatible__product__types.html">kumi::concepts::compatible_product_types</a></div><div class="ttdoc">Concept specifying if two product types are compatibles.</div><div class="ttdef"><b>Definition</b> concepts.hpp:326</div></div>
-<div class="ttc" id="aconceptkumi_1_1concepts_1_1equivalent_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1equivalent.html">kumi::concepts::equivalent</a></div><div class="ttdoc">Concept specifying if two types have matching named fields.</div><div class="ttdef"><b>Definition</b> concepts.hpp:293</div></div>
-<div class="ttc" id="aconceptkumi_1_1concepts_1_1follows__same__semantic_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1follows__same__semantic.html">kumi::concepts::follows_same_semantic</a></div><div class="ttdoc">Concept specifying if a pack of types follows the same semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:315</div></div>
-<div class="ttc" id="aconceptkumi_1_1concepts_1_1record__type_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1record__type.html">kumi::concepts::record_type</a></div><div class="ttdoc">Concept specifying a type follows the Record Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:88</div></div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1compatible__product__types_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1compatible__product__types.html">kumi::concepts::compatible_product_types</a></div><div class="ttdoc">Concept specifying if two product types are compatibles.</div><div class="ttdef"><b>Definition</b> concepts.hpp:424</div></div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1equivalent_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1equivalent.html">kumi::concepts::equivalent</a></div><div class="ttdoc">Concept specifying if two types have matching named fields.</div><div class="ttdef"><b>Definition</b> concepts.hpp:386</div></div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1follows__same__semantic_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1follows__same__semantic.html">kumi::concepts::follows_same_semantic</a></div><div class="ttdoc">Concept specifying if a pack of types follows the same semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:411</div></div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1record__type_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1record__type.html">kumi::concepts::record_type</a></div><div class="ttdoc">Concept specifying a type follows the Record Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:104</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

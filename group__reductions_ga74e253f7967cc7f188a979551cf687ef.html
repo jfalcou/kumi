@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::fold_left</title>
+<title>KUMI: kumi::fold_left</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -17,6 +17,38 @@
   DoxygenAwesomeParagraphLink.init()
   DoxygenAwesomeFragmentCopyButton.init()
   SendToGodbolt.init("kumi","clang1600","-O3 -std=c++20 -DNEDBUG")
+  document.addEventListener("DOMContentLoaded", function()
+  {
+    // Matches any word ending in _implementation_defined
+    const pattern = /\b\w+_implementation_defined\b/g;
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      null,
+      false
+    );
+    let node;
+    const targets = [];
+    while(node = walker.nextNode()) {
+      if (pattern.test(node.nodeValue)) {
+        targets.push(node);
+        // Reset regex index because of the 'g' flag
+        pattern.lastIndex = 0;
+      }
+    }
+    targets.forEach(textNode => {
+      const replacement = textNode.nodeValue.replace(
+        pattern,
+        '<span class="comment" title="This type is implementation defined and not part of the public API">/*implementation defined*/</span>'
+      );
+      const container = document.createElement('span');
+      container.innerHTML = replacement;
+      while (container.firstChild) {
+        textNode.parentNode.insertBefore(container.firstChild, textNode);
+      }
+      textNode.parentNode.removeChild(textNode);
+    });
+  });
 </script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
@@ -53,7 +85,7 @@ MathJax.Hub.Config({
  <tr  style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">kumi<span id="projectnumber">&#160;v3.1.0</span>
+   <div id="projectname">KUMI<span id="projectnumber">&#160;v3.1.0</span>
    </div>
    <div id="projectbrief">Exquisite Epidote</div>
   </td>
@@ -125,7 +157,7 @@ $(function(){initNavTree('group__reductions_ga74e253f7967cc7f188a979551cf687ef.h
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Function, concepts::sized_product_type_or_more&lt; 1 &gt; T&gt; </div>
+template&lt;typename Function, concepts::non_empty_product_type T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -149,6 +181,7 @@ template&lt;typename Function, concepts::sized_product_type_or_more&lt; 1 &gt; T
 </div><div class="memdoc">
 
 <p>Computes the generalized associative combination of all elements using a tail recursive call. </p>
+<p>On record types, this function operates on the underlying values, not on the fields themselves.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">f</td><td>Associative binary callable function to apply </td></tr>
@@ -156,8 +189,8 @@ template&lt;typename Function, concepts::sized_product_type_or_more&lt; 1 &gt; T
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>The value of <span class="tt">f( f( f(<a class="el" href="namespacekumi.html#a3f6e920ee5cd3ae32c3e221a69deeb8b" title="This is an overloaded member function, provided for convenience. It differs from the above function o...">get</a>&lt;0&gt;(t), <a class="el" href="namespacekumi.html#a3f6e920ee5cd3ae32c3e221a69deeb8b" title="This is an overloaded member function, provided for convenience. It differs from the above function o...">get</a>&lt;1&gt;(t)), ...), <a class="el" href="namespacekumi.html#a3f6e920ee5cd3ae32c3e221a69deeb8b" title="This is an overloaded member function, provided for convenience. It differs from the above function o...">get</a>&lt;N-1&gt;(t))</span></dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md29"></a>
+<dl class="section return"><dt>Returns</dt><dd>The value of <span class="tt">f( f( f(<a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137" title="Extracts the Ith field from a kumi::record.">get</a>&lt;0&gt;(t), <a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137" title="Extracts the Ith field from a kumi::record.">get</a>&lt;1&gt;(t)), ...), <a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137" title="Extracts the Ith field from a kumi::record.">get</a>&lt;N-1&gt;(t))</span></dd></dl>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md63"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
@@ -166,10 +199,12 @@ Helper type</h2>
 <div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type T&gt;</div>
 <div class="line">  <span class="keyword">using </span>fold_left_t = <span class="keyword">typename</span> <a class="code hl_function" href="group__reductions_ga0f786372596b4dd7b924bf944871d7ad.html#ga0f786372596b4dd7b924bf944871d7ad">fold_left&lt;Function,T&gt;::type</a>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__reductions_ga0f786372596b4dd7b924bf944871d7ad_html_ga0f786372596b4dd7b924bf944871d7ad"><div class="ttname"><a href="group__reductions_ga0f786372596b4dd7b924bf944871d7ad.html#ga0f786372596b4dd7b924bf944871d7ad">kumi::fold_left</a></div><div class="ttdeci">constexpr auto fold_left(Function f, T &amp;&amp;t, Value init)</div><div class="ttdoc">Computes the generalized combination of all elements using a tail recursive call.</div><div class="ttdef"><b>Definition</b> fold.hpp:39</div></div>
+<div class="ttc" id="agroup__reductions_ga0f786372596b4dd7b924bf944871d7ad_html_ga0f786372596b4dd7b924bf944871d7ad"><div class="ttname"><a href="group__reductions_ga0f786372596b4dd7b924bf944871d7ad.html#ga0f786372596b4dd7b924bf944871d7ad">kumi::fold_left</a></div><div class="ttdeci">constexpr auto fold_left(Function f, T &amp;&amp;t, Value init)</div><div class="ttdoc">Computes the generalized combination of all elements using a tail recursive call.</div><div class="ttdef"><b>Definition</b> fold.hpp:45</div></div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__reductions_ga0f786372596b4dd7b924bf944871d7ad.html#ga0f786372596b4dd7b924bf944871d7ad" title="Computes the generalized combination of all elements using a tail recursive call.">kumi::fold_left</a></p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md30"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md64"></a>
 Examples:</h2>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md65"></a>
+Tuple:</h3>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -198,8 +233,10 @@ Examples:</h2>
 <div class="line">                              )</div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:25</div></div>
-</div><!-- fragment --> <div class="fragment"><div class="line"></div>
+<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
+</div><!-- fragment --> <h3 class="doxsection"><a class="anchor" id="autotoc_md66"></a>
+Record:</h3>
+<div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
@@ -230,7 +267,7 @@ Examples:</h2>
 <div class="line">                              )</div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous fields necessarily named, names are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:26</div></div>
+<div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

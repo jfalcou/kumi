@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: Member List</title>
+<title>KUMI: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -17,6 +17,38 @@
   DoxygenAwesomeParagraphLink.init()
   DoxygenAwesomeFragmentCopyButton.init()
   SendToGodbolt.init("kumi","clang1600","-O3 -std=c++20 -DNEDBUG")
+  document.addEventListener("DOMContentLoaded", function()
+  {
+    // Matches any word ending in _implementation_defined
+    const pattern = /\b\w+_implementation_defined\b/g;
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      null,
+      false
+    );
+    let node;
+    const targets = [];
+    while(node = walker.nextNode()) {
+      if (pattern.test(node.nodeValue)) {
+        targets.push(node);
+        // Reset regex index because of the 'g' flag
+        pattern.lastIndex = 0;
+      }
+    }
+    targets.forEach(textNode => {
+      const replacement = textNode.nodeValue.replace(
+        pattern,
+        '<span class="comment" title="This type is implementation defined and not part of the public API">/*implementation defined*/</span>'
+      );
+      const container = document.createElement('span');
+      container.innerHTML = replacement;
+      while (container.firstChild) {
+        textNode.parentNode.insertBefore(container.firstChild, textNode);
+      }
+      textNode.parentNode.removeChild(textNode);
+    });
+  });
 </script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
@@ -53,7 +85,7 @@ MathJax.Hub.Config({
  <tr  style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">kumi<span id="projectnumber">&#160;v3.1.0</span>
+   <div id="projectname">KUMI<span id="projectnumber">&#160;v3.1.0</span>
    </div>
    <div id="projectbrief">Exquisite Epidote</div>
   </td>
@@ -125,32 +157,45 @@ $(function(){initNavTree('structkumi_1_1record.html','',''); });
 
 <p>This is the complete list of members for <a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record.html#a7e54e12c537c8dcbafabc215957f0abc">empty</a>() noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">static</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="group__record_gab9e21ff3a58e2bcee3849abc51821c88.html#gab9e21ff3a58e2bcee3849abc51821c88">forward_as_record</a>(Ts &amp;&amp;... ts) -&gt; record&lt; field&lt; decltype(Fields), Ts &amp;&amp; &gt;... &gt;</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="group__record_ga631f638102862f5ac7f8407e04eacf13.html#ga631f638102862f5ac7f8407e04eacf13">from_record</a>(record&lt; Ts... &gt; const &amp;r)</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="group__record_gabc2cd329ad25d155458850c19cc3b137.html#gabc2cd329ad25d155458850c19cc3b137">get</a>(record&lt; Ts... &gt; &amp;r) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="group__record_gabc2cd329ad25d155458850c19cc3b137.html#gabc2cd329ad25d155458850c19cc3b137">get</a>(record&lt; Ts... &gt; &amp;r) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="group__record_gabc2cd329ad25d155458850c19cc3b137.html#gabc2cd329ad25d155458850c19cc3b137">get</a>(record&lt; Ts... &gt; &amp;r) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="group__record_gaaa38d1d378b716e24c974facce426d72.html#gaaa38d1d378b716e24c974facce426d72">make_record</a>(Ts &amp;&amp;... ts) -&gt; record&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record_a7e54e12c537c8dcbafabc215957f0abc.html#a7e54e12c537c8dcbafabc215957f0abc">empty</a>() noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">static</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">get</a>(record&lt; Ts... &gt; &amp;r) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record_add6a786a9f4cf8a88d85f0b3b88d4705.html#add6a786a9f4cf8a88d85f0b3b88d4705">get</a>(record&lt; Ts... &gt; &amp;&amp;r) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record_a275ab6e86c6128f8f5e2c30ef3f26c4f.html#a275ab6e86c6128f8f5e2c30ef3f26c4f">get</a>(record&lt; Ts... &gt; const &amp;r) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record_a3dc6eb9adc6e77531fe60520794558a5.html#a3dc6eb9adc6e77531fe60520794558a5">get</a>(record&lt; Ts... &gt; const &amp;&amp;r) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">get</a>(record&lt; Ts... &gt; &amp;r) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record_add6a786a9f4cf8a88d85f0b3b88d4705.html#add6a786a9f4cf8a88d85f0b3b88d4705">get</a>(record&lt; Ts... &gt; &amp;&amp;r) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record_a275ab6e86c6128f8f5e2c30ef3f26c4f.html#a275ab6e86c6128f8f5e2c30ef3f26c4f">get</a>(record&lt; Ts... &gt; const &amp;r) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record_a3dc6eb9adc6e77531fe60520794558a5.html#a3dc6eb9adc6e77531fe60520794558a5">get</a>(record&lt; Ts... &gt; const &amp;&amp;r) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">get</a>(record&lt; Ts... &gt; &amp;r) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record_add6a786a9f4cf8a88d85f0b3b88d4705.html#add6a786a9f4cf8a88d85f0b3b88d4705">get</a>(record&lt; Ts... &gt; &amp;&amp;r) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record_a275ab6e86c6128f8f5e2c30ef3f26c4f.html#a275ab6e86c6128f8f5e2c30ef3f26c4f">get</a>(record&lt; Ts... &gt; const &amp;r) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record_a3dc6eb9adc6e77531fe60520794558a5.html#a3dc6eb9adc6e77531fe60520794558a5">get</a>(record&lt; Ts... &gt; const &amp;&amp;r) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">get</a>(record&lt; Ts... &gt; &amp;r) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record_add6a786a9f4cf8a88d85f0b3b88d4705.html#add6a786a9f4cf8a88d85f0b3b88d4705">get</a>(record&lt; Ts... &gt; &amp;&amp;r) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record_a275ab6e86c6128f8f5e2c30ef3f26c4f.html#a275ab6e86c6128f8f5e2c30ef3f26c4f">get</a>(record&lt; Ts... &gt; const &amp;r) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record_a3dc6eb9adc6e77531fe60520794558a5.html#a3dc6eb9adc6e77531fe60520794558a5">get</a>(record&lt; Ts... &gt; const &amp;&amp;r) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
   <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record.html#a9270cbaf244c6b4ee80cc66a175c95c7">names</a>() noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">static</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="group__record.html#ga3e776cea74b6cbba98d32566764b3571">operator&lt;&lt;</a>(std::basic_ostream&lt; CharT, Traits &gt; &amp;os, record const &amp;t) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">friend</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record_ac9f002b5ee7e603ccac5cb57a617fc0a.html#ac9f002b5ee7e603ccac5cb57a617fc0a">operator=</a>(record&lt; Us... &gt; const &amp;other)</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record.html#a8bed6234eaeb9799611bf67c2068c81d">operator=</a>(record&lt; Us... &gt; &amp;&amp;other)</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="group__record.html#ga451ebda777651647641516bddd22e1b1">operator==</a>(record const &amp;self, record&lt; Us... &gt; const &amp;other) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">friend</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record_a0cd4f7eb460399409103e6eff1698ece.html#a0cd4f7eb460399409103e6eff1698ece">operator[]</a>(index_t&lt; I &gt;) &amp;noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record_ab55df258019b6a51386acfc1593c65eb.html#ab55df258019b6a51386acfc1593c65eb">operator[]</a>(as&lt; T &gt;) &amp;noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record.html#a70e32c9963da25fa49bebb592048a04e">operator[]</a>(as&lt; T &gt;) &amp;&amp;noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record.html#accb0dc902cf81b1ec8a3385a54ba54f0">operator[]</a>(as&lt; T &gt;) const &amp;&amp;noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record.html#a38db8f1833d4599344087a5b3cf6eb3f">operator[]</a>(as&lt; T &gt;) const &amp;noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record_ae909878ccc14939539c8de9a91b5d2e4.html#ae909878ccc14939539c8de9a91b5d2e4">operator[]</a>(Name const &amp;) &amp;noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record.html#a3a37366ec260d4c65f0f4823303c0ec9">operator[]</a>(Name const &amp;) &amp;&amp;noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record.html#a99ff28acf51c28300d5f5f2362f365a6">operator[]</a>(Name const &amp;) const &amp;&amp;noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record.html#aa4aa6d2078bcf6a5908f7e6f75f0d5a0">operator[]</a>(Name const &amp;) const &amp;noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record.html#ae58c2eac14a343992ac19d9ba01ec6ae">size</a>() noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">static</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="group__record_gaf3f1a7812e294e86296e09eceadbe0a3.html#gaf3f1a7812e294e86296e09eceadbe0a3">to_record</a>(Type &amp;&amp;r)</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="group__record_gabd73478b6d709990c2f81dc83b980c16.html#gabd73478b6d709990c2f81dc83b980c16">to_ref</a>(R &amp;&amp;r)</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record.html#a9b9b96d4aae04575e8c2ff5ab515b594">values</a>() noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
-  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record.html#aed4f570ae92586a34d7f03b4bc584ebc">values</a>() const noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record.html#ac16fc65057dc76548f4a7b6b766d70e3">operator!=</a>(record const &amp;self, record&lt; Us... &gt; const &amp;other) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">friend</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record.html#a3e776cea74b6cbba98d32566764b3571">operator&lt;&lt;</a>(std::basic_ostream&lt; CharT, Traits &gt; &amp;os, record const &amp;t) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">friend</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record_a257458f70bc3f0d40e580fe65b306c01.html#a257458f70bc3f0d40e580fe65b306c01">operator=</a>(record&lt; Us... &gt; const &amp;other)</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record.html#aa9c57533762ddcc6513cb88e6ed0911f">operator=</a>(record&lt; Us... &gt; &amp;&amp;other)</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record.html#a451ebda777651647641516bddd22e1b1">operator==</a>(record const &amp;self, record&lt; Us... &gt; const &amp;other) noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">friend</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record_a5a012714bc455693e01bc348ce2b057b.html#a5a012714bc455693e01bc348ce2b057b">operator[]</a>(index_t&lt; I &gt;) &amp;noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record.html#a7e8e6db6a6efaefe471c4ed54c168ee4">operator[]</a>(index_t&lt; I &gt;) &amp;&amp;noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record.html#a0cb214a3936467b51a1ad6d97b878db8">operator[]</a>(index_t&lt; I &gt;) const &amp;&amp;noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record.html#a11c78900872267b0016d387a41f7dc55">operator[]</a>(index_t&lt; I &gt;) const &amp;noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record_a361e3ac124ed31f363463832aa32522c.html#a361e3ac124ed31f363463832aa32522c">operator[]</a>(as&lt; T &gt;) &amp;noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record.html#ab9266bec6188660d7f70ed943c6cab16">operator[]</a>(as&lt; T &gt;) &amp;&amp;noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record.html#a5f7674d288caad840a0869282f2185d7">operator[]</a>(as&lt; T &gt;) const &amp;&amp;noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record.html#a686208ca215e84263e812680c9f546cf">operator[]</a>(as&lt; T &gt;) const &amp;noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record_a25f8fd7cb11f94e3815c0045ae39c338.html#a25f8fd7cb11f94e3815c0045ae39c338">operator[]</a>(Name const &amp;) &amp;noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record.html#ae1243103f72d4a853360bba2a3547d6a">operator[]</a>(Name const &amp;) &amp;&amp;noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record.html#a3ad671ad04ef78be5cbdfa0583011fef">operator[]</a>(Name const &amp;) const &amp;&amp;noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record.html#a75cf6645da0961365030b311f167b602">operator[]</a>(Name const &amp;) const &amp;noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record_a1000cb0996a9587f8735a35f76060e44.html#a1000cb0996a9587f8735a35f76060e44">record</a>(Ts &amp;&amp;...) -&gt; record&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">related</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record_ae58c2eac14a343992ac19d9ba01ec6ae.html#ae58c2eac14a343992ac19d9ba01ec6ae">size</a>() noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span><span class="mlabel">static</span></td></tr>
+  <tr class="odd"><td class="entry"><a class="el" href="structkumi_1_1record.html#a9b9b96d4aae04575e8c2ff5ab515b594">values</a>() noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="structkumi_1_1record.html#aed4f570ae92586a34d7f03b4bc584ebc">values</a>() const noexcept</td><td class="entry"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td><td class="entry"><span class="mlabel">inline</span></td></tr>
 </table></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

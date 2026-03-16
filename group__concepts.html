@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: Tuple Related Concepts</title>
+<title>KUMI: Product Type Related Concepts</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -17,6 +17,38 @@
   DoxygenAwesomeParagraphLink.init()
   DoxygenAwesomeFragmentCopyButton.init()
   SendToGodbolt.init("kumi","clang1600","-O3 -std=c++20 -DNEDBUG")
+  document.addEventListener("DOMContentLoaded", function()
+  {
+    // Matches any word ending in _implementation_defined
+    const pattern = /\b\w+_implementation_defined\b/g;
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      null,
+      false
+    );
+    let node;
+    const targets = [];
+    while(node = walker.nextNode()) {
+      if (pattern.test(node.nodeValue)) {
+        targets.push(node);
+        // Reset regex index because of the 'g' flag
+        pattern.lastIndex = 0;
+      }
+    }
+    targets.forEach(textNode => {
+      const replacement = textNode.nodeValue.replace(
+        pattern,
+        '<span class="comment" title="This type is implementation defined and not part of the public API">/*implementation defined*/</span>'
+      );
+      const container = document.createElement('span');
+      container.innerHTML = replacement;
+      while (container.firstChild) {
+        textNode.parentNode.insertBefore(container.firstChild, textNode);
+      }
+      textNode.parentNode.removeChild(textNode);
+    });
+  });
 </script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
@@ -53,7 +85,7 @@ MathJax.Hub.Config({
  <tr  style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">kumi<span id="projectnumber">&#160;v3.1.0</span>
+   <div id="projectname">KUMI<span id="projectnumber">&#160;v3.1.0</span>
    </div>
    <div id="projectbrief">Exquisite Epidote</div>
   </td>
@@ -120,46 +152,56 @@ $(function(){initNavTree('group__concepts.html','',''); });
 
 <div class="header">
   <div class="summary">
+<a href="#groups">Topics</a> &#124;
 <a href="#concepts">Concepts</a>  </div>
-  <div class="headertitle"><div class="title">Tuple Related Concepts </div></div>
+  <div class="headertitle"><div class="title">Product Type Related Concepts </div></div>
 </div><!--header-->
 <div class="contents">
 
 <p>Definition for product types related Concepts.  
-</p>
+<a href="#details">More...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-groups" class="groupheader"><a id="groups" name="groups"></a>
+Topics</h2></td></tr>
+<tr class="memitem:record_5Fconcepts" id="r_record_5Fconcepts"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__record__concepts.html">Record Related Concepts</a></td></tr>
+<tr class="memdesc:group__record__concepts"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definition for <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> related concepts. <br /></td></tr>
+<tr class="memitem:tuple_5Fconcepts" id="r_tuple_5Fconcepts"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__tuple__concepts.html">Tuple Related Concepts</a></td></tr>
+<tr class="memdesc:group__tuple__concepts"><td class="mdescLeft">&#160;</td><td class="mdescRight">Definition for <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> related concepts. <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-concepts" class="groupheader"><a id="concepts" name="concepts"></a>
 Concepts</h2></td></tr>
-<tr class="memitem:kumi_3A_3A_5F_3A_3Astd_5Ftuple_5Fcompatible" id="r_kumi_3A_3A_5F_3A_3Astd_5Ftuple_5Fcompatible"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1___1_1std__tuple__compatible.html">kumi::_::std_tuple_compatible</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying a type is a standard tuple-like type. <br /></td></tr>
 <tr class="memitem:kumi_3A_3Aconcepts_3A_3Acompatible_5Fproduct_5Ftypes" id="r_kumi_3A_3Aconcepts_3A_3Acompatible_5Fproduct_5Ftypes"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1compatible__product__types.html">kumi::concepts::compatible_product_types</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying if two product types are compatibles. <br /></td></tr>
 <tr class="memitem:kumi_3A_3Aconcepts_3A_3Acontainer" id="r_kumi_3A_3Aconcepts_3A_3Acontainer"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1container.html">kumi::concepts::container</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying a type follows the Container Type semantic. <br /></td></tr>
 <tr class="memitem:kumi_3A_3Aconcepts_3A_3Acontains_5Ffield" id="r_kumi_3A_3Aconcepts_3A_3Acontains_5Ffield"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1contains__field.html">kumi::concepts::contains_field</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying if a kumi::field_capture with name Name is present in a parameter pack. <br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying if the label of a type modeling <a class="el" href="conceptkumi_1_1concepts_1_1identifier.html" title="Concept specifying a type represent an identifier.">kumi::concepts::identifier</a> is present in the parameter pack. The label is considered present if a type in Ts modeling <a class="el" href="conceptkumi_1_1concepts_1_1field.html" title="Concept specifying a type represent a field.">kumi::concepts::field</a> is labeled with the same tag as the given identifier. <br /></td></tr>
 <tr class="memitem:kumi_3A_3Aconcepts_3A_3Acontains_5Ftype" id="r_kumi_3A_3Aconcepts_3A_3Acontains_5Ftype"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1contains__type.html">kumi::concepts::contains_type</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying if a Type is present in a parameter pack. <br /></td></tr>
 <tr class="memitem:kumi_3A_3Aconcepts_3A_3Aempty_5Fproduct_5Ftype" id="r_kumi_3A_3Aconcepts_3A_3Aempty_5Fproduct_5Ftype"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1empty__product__type.html">kumi::concepts::empty_product_type</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying a type follows the Product Type semantic and is empty. <br /></td></tr>
 <tr class="memitem:kumi_3A_3Aconcepts_3A_3Aentirely_5Funiquely_5Fnamed" id="r_kumi_3A_3Aconcepts_3A_3Aentirely_5Funiquely_5Fnamed"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1entirely__uniquely__named.html">kumi::concepts::entirely_uniquely_named</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying if a parameter pack only holds kumi::field_captures each of their each of their names are unique! <br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying if a parameter pack only holds <a class="el" href="conceptkumi_1_1concepts_1_1field.html" title="Concept specifying a type represent a field.">kumi::concepts::field</a>. Each of their names beeing unique. <br /></td></tr>
 <tr class="memitem:kumi_3A_3Aconcepts_3A_3Aequality_5Fcomparable" id="r_kumi_3A_3Aconcepts_3A_3Aequality_5Fcomparable"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1equality__comparable.html">kumi::concepts::equality_comparable</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying if a type is comparable for each of its components. <br /></td></tr>
 <tr class="memitem:kumi_3A_3Aconcepts_3A_3Aequivalent" id="r_kumi_3A_3Aconcepts_3A_3Aequivalent"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1equivalent.html">kumi::concepts::equivalent</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying if two types have matching named fields. <br /></td></tr>
+<tr class="memitem:kumi_3A_3Aconcepts_3A_3Afield" id="r_kumi_3A_3Aconcepts_3A_3Afield"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1field.html">kumi::concepts::field</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying a type represent a field. <br /></td></tr>
 <tr class="memitem:kumi_3A_3Aconcepts_3A_3Afollows_5Fsame_5Fsemantic" id="r_kumi_3A_3Aconcepts_3A_3Afollows_5Fsame_5Fsemantic"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1follows__same__semantic.html">kumi::concepts::follows_same_semantic</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying if a pack of types follows the same semantic. <br /></td></tr>
 <tr class="memitem:kumi_3A_3Aconcepts_3A_3Ahas_5Fnamed_5Ffields" id="r_kumi_3A_3Aconcepts_3A_3Ahas_5Fnamed_5Ffields"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1has__named__fields.html">kumi::concepts::has_named_fields</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying if parameter pack containes a kumi::field_capture. <br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying if parameter pack contains a <a class="el" href="conceptkumi_1_1concepts_1_1field.html" title="Concept specifying a type represent a field.">kumi::concepts::field</a>. <br /></td></tr>
 <tr class="memitem:kumi_3A_3Aconcepts_3A_3Ahomogeneous_5Fproduct_5Ftype" id="r_kumi_3A_3Aconcepts_3A_3Ahomogeneous_5Fproduct_5Ftype"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1homogeneous__product__type.html">kumi::concepts::homogeneous_product_type</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying is Product Type which types are all the same. <br /></td></tr>
+<tr class="memitem:kumi_3A_3Aconcepts_3A_3Aidentifier" id="r_kumi_3A_3Aconcepts_3A_3Aidentifier"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying a type represent an identifier. <br /></td></tr>
 <tr class="memitem:kumi_3A_3Aconcepts_3A_3Ais_5Ffully_5Fnamed" id="r_kumi_3A_3Aconcepts_3A_3Ais_5Ffully_5Fnamed"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1is__fully__named.html">kumi::concepts::is_fully_named</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying if parameter pack contains only kumi::field_captures. <br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying if parameter pack is only composed of <a class="el" href="conceptkumi_1_1concepts_1_1field.html" title="Concept specifying a type represent a field.">kumi::concepts::field</a>. <br /></td></tr>
 <tr class="memitem:kumi_3A_3Aconcepts_3A_3Amonoid" id="r_kumi_3A_3Aconcepts_3A_3Amonoid"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1monoid.html">kumi::concepts::monoid</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying a type is a Monoid. <br /></td></tr>
 <tr class="memitem:kumi_3A_3Aconcepts_3A_3Anamed_5Fequality_5Fcomparable" id="r_kumi_3A_3Aconcepts_3A_3Anamed_5Fequality_5Fcomparable"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1named__equality__comparable.html">kumi::concepts::named_equality_comparable</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying if two product types are comparable by matching name. <br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying if two product types are comparable by matching labels. <br /></td></tr>
 <tr class="memitem:kumi_3A_3Aconcepts_3A_3Anamed_5Fget_5Fcompliant" id="r_kumi_3A_3Aconcepts_3A_3Anamed_5Fget_5Fcompliant"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1named__get__compliant.html">kumi::concepts::named_get_compliant</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying if a product type can be queried via a <span class="tt">get&lt;identifier&gt;</span>. <br /></td></tr>
 <tr class="memitem:kumi_3A_3Aconcepts_3A_3Anon_5Fempty_5Fproduct_5Ftype" id="r_kumi_3A_3Aconcepts_3A_3Anon_5Fempty_5Fproduct_5Ftype"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1non__empty__product__type.html">kumi::concepts::non_empty_product_type</a></td></tr>
@@ -180,12 +222,12 @@ Concepts</h2></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying a type follows the Container Type semantic. <br /></td></tr>
 <tr class="memitem:kumi_3A_3Aconcepts_3A_3Atyped_5Fget_5Fcompliant" id="r_kumi_3A_3Aconcepts_3A_3Atyped_5Fget_5Fcompliant"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1typed__get__compliant.html">kumi::concepts::typed_get_compliant</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying if a product type can be queried via a <span class="tt">get&lt;type&gt;</span>. <br /></td></tr>
-<tr class="memitem:kumi_3A_3Aconcepts_3A_3Aunique_5Fdisplay_5Fname" id="r_kumi_3A_3Aconcepts_3A_3Aunique_5Fdisplay_5Fname"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1unique__display__name.html">kumi::concepts::unique_display_name</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying if a parameter pack only holds unique <a class="el" href="structkumi_1_1str.html" title="Static string used to create named fields.">kumi::str</a> representation of the field names. <br /></td></tr>
+<tr class="memitem:kumi_3A_3Aconcepts_3A_3Aunique_5Flabel" id="r_kumi_3A_3Aconcepts_3A_3Aunique_5Flabel"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1unique__label.html">kumi::concepts::unique_label</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying if a parameter pack only holds <a class="el" href="conceptkumi_1_1concepts_1_1field.html" title="Concept specifying a type represent a field.">kumi::concepts::field</a> with no duplicate <a class="el" href="structkumi_1_1str.html" title="Static string used to create named fields.">kumi::str</a> representation of their respective names. <br /></td></tr>
 <tr class="memitem:kumi_3A_3Aconcepts_3A_3Auniquely_5Fnamed" id="r_kumi_3A_3Aconcepts_3A_3Auniquely_5Fnamed"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1uniquely__named.html">kumi::concepts::uniquely_named</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying if a parameter pack only holds unique kumi::field_capture names. <br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying if a parameter pack only holds <a class="el" href="conceptkumi_1_1concepts_1_1field.html" title="Concept specifying a type represent a field.">kumi::concepts::field</a> with no duplicate names. <br /></td></tr>
 <tr class="memitem:kumi_3A_3Aconcepts_3A_3Auniquely_5Ftyped" id="r_kumi_3A_3Aconcepts_3A_3Auniquely_5Ftyped"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1uniquely__typed.html">kumi::concepts::uniquely_typed</a></td></tr>
-<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying if a parameter pack only holds unique types. <br /></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying if a parameter pack only holds distinct types. <br /></td></tr>
 <tr class="memitem:kumi_3A_3Aconcepts_3A_3Aunit_5Ftype" id="r_kumi_3A_3Aconcepts_3A_3Aunit_5Ftype"><td class="memItemLeft">concept &#160;</td><td class="memItemRight"><a class="el" href="conceptkumi_1_1concepts_1_1unit__type.html">kumi::concepts::unit_type</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Concept specifying a type represent a Unit Type. <br /></td></tr>
 </table>

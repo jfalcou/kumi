@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['classes_0',['Product_types Classes',['../group__product__types.html',1,'']]],
-  ['concepts_1',['Tuple Related Concepts',['../group__concepts.html',1,'']]]
+  ['concepts_0',['Concepts',['../group__concepts.html',1,'Product Type Related Concepts'],['../group__record__concepts.html',1,'Record Related Concepts'],['../group__tuple__concepts.html',1,'Tuple Related Concepts']]]
 ];

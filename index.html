@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: The C++20 Compact Tuple Tools</title>
+<title>KUMI: The C++20 Compact Tuple Tools</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -17,6 +17,38 @@
   DoxygenAwesomeParagraphLink.init()
   DoxygenAwesomeFragmentCopyButton.init()
   SendToGodbolt.init("kumi","clang1600","-O3 -std=c++20 -DNEDBUG")
+  document.addEventListener("DOMContentLoaded", function()
+  {
+    // Matches any word ending in _implementation_defined
+    const pattern = /\b\w+_implementation_defined\b/g;
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      null,
+      false
+    );
+    let node;
+    const targets = [];
+    while(node = walker.nextNode()) {
+      if (pattern.test(node.nodeValue)) {
+        targets.push(node);
+        // Reset regex index because of the 'g' flag
+        pattern.lastIndex = 0;
+      }
+    }
+    targets.forEach(textNode => {
+      const replacement = textNode.nodeValue.replace(
+        pattern,
+        '<span class="comment" title="This type is implementation defined and not part of the public API">/*implementation defined*/</span>'
+      );
+      const container = document.createElement('span');
+      container.innerHTML = replacement;
+      while (container.firstChild) {
+        textNode.parentNode.insertBefore(container.firstChild, textNode);
+      }
+      textNode.parentNode.removeChild(textNode);
+    });
+  });
 </script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
@@ -53,7 +85,7 @@ MathJax.Hub.Config({
  <tr  style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">kumi<span id="projectnumber">&#160;v3.1.0</span>
+   <div id="projectname">KUMI<span id="projectnumber">&#160;v3.1.0</span>
    </div>
    <div id="projectbrief">Exquisite Epidote</div>
   </td>
@@ -124,22 +156,25 @@ $(function(){initNavTree('index.html','',''); });
 <div class="contents">
 <div class="textblock"><p><b>KUMI</b> is a fancy C++20 implementation of a tuple-like class. It tries to be as close to <span class="tt">std::tuple</span> as possible but also wants to compile faster, uses a better C++20 oriented interface, and new features like:</p>
 <ul>
-<li>a fast to compile tuple implementation</li>
-<li>quality of life improvement over the standard tuple implementation</li>
-<li>a protocol to adapt user-defined type to act as tuples</li>
-<li>algorithm on tuples</li>
+<li>A fast to compile tuple implementation</li>
+<li>Quality of life improvement over the standard tuple implementation</li>
+<li>A protocol to adapt user-defined type to act as tuples</li>
+<li>Algorithm on tuples</li>
+<li>Record type handling</li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md237"></a>
-A Short Example</h1>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md439"></a>
+Examples</h1>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md440"></a>
+Tuple</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">auto</span> get_student(<span class="keywordtype">int</span> <span class="keywordtype">id</span>)</div>
 <div class="line">{</div>
-<div class="line">        <span class="keywordflow">if</span> (<span class="keywordtype">id</span> == 0)  <span class="keywordflow">return</span> <a class="code hl_function" href="group__tuple_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007">kumi::make_tuple</a>(3.8, <span class="charliteral">&#39;A&#39;</span>, <span class="stringliteral">&quot;Lisa Simpson&quot;</span>);</div>
-<div class="line">  <span class="keywordflow">else</span>  <span class="keywordflow">if</span> (<span class="keywordtype">id</span> == 1)  <span class="keywordflow">return</span> <a class="code hl_function" href="group__tuple_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007">kumi::make_tuple</a>(2.9, <span class="charliteral">&#39;C&#39;</span>, <span class="stringliteral">&quot;Milhouse Van Houten&quot;</span>);</div>
-<div class="line">  <span class="keywordflow">else</span>  <span class="keywordflow">if</span> (<span class="keywordtype">id</span> == 2)  <span class="keywordflow">return</span> <a class="code hl_function" href="group__tuple_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007">kumi::make_tuple</a>(1.7, <span class="charliteral">&#39;D&#39;</span>, <span class="stringliteral">&quot;Ralph Wiggum&quot;</span>);</div>
-<div class="line">  <span class="keywordflow">else</span>                <span class="keywordflow">return</span> <a class="code hl_function" href="group__tuple_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007">kumi::make_tuple</a>(0., <span class="charliteral">&#39;F&#39;</span>, <span class="stringliteral">&quot;Unknown&quot;</span>);</div>
+<div class="line">        <span class="keywordflow">if</span> (<span class="keywordtype">id</span> == 0)  <span class="keywordflow">return</span> <a class="code hl_function" href="group__tuple__related_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007">kumi::make_tuple</a>(3.8, <span class="charliteral">&#39;A&#39;</span>, <span class="stringliteral">&quot;Lisa Simpson&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">else</span>  <span class="keywordflow">if</span> (<span class="keywordtype">id</span> == 1)  <span class="keywordflow">return</span> <a class="code hl_function" href="group__tuple__related_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007">kumi::make_tuple</a>(2.9, <span class="charliteral">&#39;C&#39;</span>, <span class="stringliteral">&quot;Milhouse Van Houten&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">else</span>  <span class="keywordflow">if</span> (<span class="keywordtype">id</span> == 2)  <span class="keywordflow">return</span> <a class="code hl_function" href="group__tuple__related_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007">kumi::make_tuple</a>(1.7, <span class="charliteral">&#39;D&#39;</span>, <span class="stringliteral">&quot;Ralph Wiggum&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">else</span>                <span class="keywordflow">return</span> <a class="code hl_function" href="group__tuple__related_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007">kumi::make_tuple</a>(0. , <span class="charliteral">&#39;F&#39;</span>, <span class="stringliteral">&quot;Unknown&quot;</span>);</div>
 <div class="line">}</div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
@@ -147,53 +182,105 @@ A Short Example</h1>
 <div class="line">  <span class="keyword">auto</span> student0 = get_student(0);</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;ID: 0, &quot;</span></div>
-<div class="line">            &lt;&lt; <span class="stringliteral">&quot;GPA: &quot;</span>    &lt;&lt; <a class="code hl_function" href="namespacekumi.html#a3f6e920ee5cd3ae32c3e221a69deeb8b">kumi::get&lt;0&gt;</a>(student0) &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
-<div class="line">            &lt;&lt; <span class="stringliteral">&quot;grade: &quot;</span>  &lt;&lt; <a class="code hl_function" href="namespacekumi.html#a3f6e920ee5cd3ae32c3e221a69deeb8b">kumi::get&lt;1&gt;</a>(student0) &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
-<div class="line">            &lt;&lt; <span class="stringliteral">&quot;name: &quot;</span>   &lt;&lt; <a class="code hl_function" href="namespacekumi.html#a3f6e920ee5cd3ae32c3e221a69deeb8b">kumi::get&lt;2&gt;</a>(student0) &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;GPA:   &quot;</span> &lt;&lt; <a class="code hl_function" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::get&lt;0&gt;</a>(student0) &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;grade: &quot;</span> &lt;&lt; <a class="code hl_function" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::get&lt;1&gt;</a>(student0) &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;name:  &quot;</span> &lt;&lt; <a class="code hl_function" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::get&lt;2&gt;</a>(student0) &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">auto</span> [ gpa1, grade1, name1 ] = get_student(1);</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;ID: 1, &quot;</span></div>
-<div class="line">            &lt;&lt; <span class="stringliteral">&quot;GPA: &quot;</span> &lt;&lt; gpa1 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;GPA: &quot;</span>   &lt;&lt; gpa1   &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
 <div class="line">            &lt;&lt; <span class="stringliteral">&quot;grade: &quot;</span> &lt;&lt; grade1 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
-<div class="line">            &lt;&lt; <span class="stringliteral">&quot;name: &quot;</span> &lt;&lt; name1 &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;name: &quot;</span>  &lt;&lt; name1  &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> all_students = <a class="code hl_function" href="group__tuple_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007">kumi::make_tuple</a>(get_student(0),get_student(1),get_student(2));</div>
+<div class="line">  <span class="keyword">auto</span> all_students = <a class="code hl_function" href="group__tuple__related_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007">kumi::make_tuple</a>(get_student(0),get_student(1),get_student(2));</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_function" href="group__transforms_gab74a95670c1baa3ec7e7905d42a5f216.html#gab74a95670c1baa3ec7e7905d42a5f216">kumi::for_each_index</a>( [](<span class="keyword">auto</span> i, <span class="keyword">auto</span> <span class="keyword">const</span>&amp; m) { std::cout &lt;&lt; <span class="stringliteral">&quot;Data #&quot;</span> &lt;&lt; i &lt;&lt; <span class="stringliteral">&quot; : &quot;</span> &lt;&lt; m &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;}</div>
+<div class="line">  <a class="code hl_function" href="group__tuple__transforms_ga68e0e98957242f48da8dfeeaa29fec7d.html#ga68e0e98957242f48da8dfeeaa29fec7d">kumi::for_each_index</a>( [](<span class="keyword">auto</span> i, <span class="keyword">auto</span> <span class="keyword">const</span>&amp; m) {</div>
+<div class="line">                        std::cout &lt;&lt; <span class="stringliteral">&quot;Data #&quot;</span> &lt;&lt; i &lt;&lt; <span class="stringliteral">&quot; : &quot;</span> &lt;&lt; m &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">                      }</div>
 <div class="line">                      , all_students</div>
 <div class="line">                      );</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> grades = <a class="code hl_function" href="namespacekumi.html#a3f6e920ee5cd3ae32c3e221a69deeb8b">kumi::get&lt;0&gt;</a>(<a class="code hl_function" href="group__generators_ga50bbffc3a4571932d98ffe63499971dd.html#ga50bbffc3a4571932d98ffe63499971dd">kumi::transpose</a>(all_students));</div>
+<div class="line">  <span class="keyword">auto</span> grades = <a class="code hl_function" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::get&lt;0&gt;</a>(<a class="code hl_function" href="group__generators_gadd1fa406983775f22d7a64bdd49e92b3.html#gadd1fa406983775f22d7a64bdd49e92b3">kumi::transpose</a>(all_students));</div>
 <div class="line">  std::cout &lt;&lt; grades &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__generators_ga50bbffc3a4571932d98ffe63499971dd_html_ga50bbffc3a4571932d98ffe63499971dd"><div class="ttname"><a href="group__generators_ga50bbffc3a4571932d98ffe63499971dd.html#ga50bbffc3a4571932d98ffe63499971dd">kumi::transpose</a></div><div class="ttdeci">constexpr auto transpose(T &amp;&amp;t)</div><div class="ttdoc">Transpose a product type of product types by shifting elements in their transposed position always re...</div><div class="ttdef"><b>Definition</b> transpose.hpp:38</div></div>
-<div class="ttc" id="agroup__transforms_gab74a95670c1baa3ec7e7905d42a5f216_html_gab74a95670c1baa3ec7e7905d42a5f216"><div class="ttname"><a href="group__transforms_gab74a95670c1baa3ec7e7905d42a5f216.html#gab74a95670c1baa3ec7e7905d42a5f216">kumi::for_each_index</a></div><div class="ttdeci">constexpr void for_each_index(Function f, Tuple &amp;&amp;t, Tuples &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a kumi::product_type and its index.</div><div class="ttdef"><b>Definition</b> for_each.hpp:79</div></div>
-<div class="ttc" id="agroup__tuple_ga98e6c367de0e0f526565280a0856b007_html_ga98e6c367de0e0f526565280a0856b007"><div class="ttname"><a href="group__tuple_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007">kumi::make_tuple</a></div><div class="ttdeci">constexpr auto make_tuple(Ts &amp;&amp;... ts) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</div><div class="ttdoc">Creates a tuple object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> tuple.hpp:463</div></div>
-<div class="ttc" id="anamespacekumi_html_a3f6e920ee5cd3ae32c3e221a69deeb8b"><div class="ttname"><a href="namespacekumi.html#a3f6e920ee5cd3ae32c3e221a69deeb8b">kumi::get</a></div><div class="ttdeci">constexpr decltype(auto) get(record&lt; Ts... &gt; &amp;&amp;r) noexcept</div><div class="ttdoc">This is an overloaded member function, provided for convenience. It differs from the above function o...</div><div class="ttdef"><b>Definition</b> record.hpp:503</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md238"></a>
+<div class="ttc" id="agroup__generators_gadd1fa406983775f22d7a64bdd49e92b3_html_gadd1fa406983775f22d7a64bdd49e92b3"><div class="ttname"><a href="group__generators_gadd1fa406983775f22d7a64bdd49e92b3.html#gadd1fa406983775f22d7a64bdd49e92b3">kumi::transpose</a></div><div class="ttdeci">constexpr auto transpose(T &amp;&amp;t)</div><div class="ttdoc">Transpose a product type of product types by shifting elements in their transposed position always re...</div><div class="ttdef"><b>Definition</b> transpose.hpp:44</div></div>
+<div class="ttc" id="agroup__tuple__related_ga98e6c367de0e0f526565280a0856b007_html_ga98e6c367de0e0f526565280a0856b007"><div class="ttname"><a href="group__tuple__related_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007">kumi::make_tuple</a></div><div class="ttdeci">constexpr auto make_tuple(Ts &amp;&amp;... ts) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</div><div class="ttdoc">Creates a tuple object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> tuple.hpp:502</div></div>
+<div class="ttc" id="agroup__tuple__transforms_ga68e0e98957242f48da8dfeeaa29fec7d_html_ga68e0e98957242f48da8dfeeaa29fec7d"><div class="ttname"><a href="group__tuple__transforms_ga68e0e98957242f48da8dfeeaa29fec7d.html#ga68e0e98957242f48da8dfeeaa29fec7d">kumi::for_each_index</a></div><div class="ttdeci">constexpr void for_each_index(Function f, T &amp;&amp;t, Ts &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a product type and its index.</div><div class="ttdef"><b>Definition</b> for_each.hpp:81</div></div>
+<div class="ttc" id="astructkumi_1_1record_abc2cd329ad25d155458850c19cc3b137_html_abc2cd329ad25d155458850c19cc3b137"><div class="ttname"><a href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::record::get</a></div><div class="ttdeci">decltype(auto) constexpr get(record&lt; Ts... &gt; &amp;r) noexcept</div><div class="ttdoc">Extracts the Ith field from a kumi::record.</div><div class="ttdef"><b>Definition</b> record.hpp:554</div></div>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md441"></a>
+Record</h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line"><span class="keyword">auto</span> get_student(<span class="keywordtype">int</span> <span class="keywordtype">id</span>)</div>
+<div class="line">{</div>
+<div class="line">        <span class="keywordflow">if</span> (<span class="keywordtype">id</span> == 0)  <span class="keywordflow">return</span> <a class="code hl_function" href="group__record__related_ga76eb17a90f4e3752c96633b20a62969f.html#ga76eb17a90f4e3752c96633b20a62969f">kumi::make_record</a>(<span class="stringliteral">&quot;GPA&quot;</span>_id = 3.8, <span class="stringliteral">&quot;grade&quot;</span>_id = <span class="charliteral">&#39;A&#39;</span>);</div>
+<div class="line">  <span class="keywordflow">else</span>  <span class="keywordflow">if</span> (<span class="keywordtype">id</span> == 1)  <span class="keywordflow">return</span> <a class="code hl_function" href="group__record__related_ga76eb17a90f4e3752c96633b20a62969f.html#ga76eb17a90f4e3752c96633b20a62969f">kumi::make_record</a>(<span class="stringliteral">&quot;GPA&quot;</span>_id = 2.9, <span class="stringliteral">&quot;grade&quot;</span>_id = <span class="charliteral">&#39;C&#39;</span>);</div>
+<div class="line">  <span class="keywordflow">else</span>  <span class="keywordflow">if</span> (<span class="keywordtype">id</span> == 2)  <span class="keywordflow">return</span> <a class="code hl_function" href="group__record__related_ga76eb17a90f4e3752c96633b20a62969f.html#ga76eb17a90f4e3752c96633b20a62969f">kumi::make_record</a>(<span class="stringliteral">&quot;GPA&quot;</span>_id = 1.7, <span class="stringliteral">&quot;grade&quot;</span>_id = <span class="charliteral">&#39;D&#39;</span>);</div>
+<div class="line">  <span class="keywordflow">else</span>                <span class="keywordflow">return</span> <a class="code hl_function" href="group__record__related_ga76eb17a90f4e3752c96633b20a62969f.html#ga76eb17a90f4e3752c96633b20a62969f">kumi::make_record</a>(<span class="stringliteral">&quot;GPA&quot;</span>_id = 0. , <span class="stringliteral">&quot;grade&quot;</span>_id = <span class="charliteral">&#39;F&#39;</span>);</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">auto</span> student0 = get_student(0);</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;ID: 0, &quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;GPA:   &quot;</span>  &lt;&lt; <a class="code hl_function" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::get</a>&lt;<span class="stringliteral">&quot;GPA&quot;</span>&gt;(student0)   &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
+<div class="line">            &lt;&lt; <span class="stringliteral">&quot;grade: &quot;</span>  &lt;&lt; <a class="code hl_function" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::get&lt;&quot;grade&quot;&gt;</a>(student0) &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">auto</span> [ gpa1, grade1 ] = get_student(1);</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;ID: 1, &quot;</span></div>
+<div class="line">            &lt;&lt; gpa1   &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
+<div class="line">            &lt;&lt; grade1 &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">auto</span> all_students = <a class="code hl_function" href="group__record__related_ga76eb17a90f4e3752c96633b20a62969f.html#ga76eb17a90f4e3752c96633b20a62969f">kumi::make_record</a>(</div>
+<div class="line">                      <span class="stringliteral">&quot;Lisa Simpson&quot;</span>_id         = get_student(0),</div>
+<div class="line">                      <span class="stringliteral">&quot;Milhouse Van Houten&quot;</span>_id  = get_student(1),</div>
+<div class="line">                      <span class="stringliteral">&quot;Ralph Wiggum&quot;</span>_id         = get_student(2)</div>
+<div class="line">                      );</div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_function" href="group__record__transforms_ga15399097726371208bf338ce69088447.html#ga15399097726371208bf338ce69088447">kumi::for_each_field</a>( [](<span class="keyword">auto</span> <a class="code hl_class" href="structkumi_1_1name.html">name</a>, <span class="keyword">auto</span> <span class="keyword">const</span>&amp; m) {</div>
+<div class="line">                        std::cout &lt;&lt; <span class="stringliteral">&quot;Student: &quot;</span> &lt;&lt; <a class="code hl_class" href="structkumi_1_1name.html">name</a> &lt;&lt; <span class="stringliteral">&quot;, Data : &quot;</span> &lt;&lt; m &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">                      }</div>
+<div class="line">                      , all_students</div>
+<div class="line">                      );</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__record__related_ga76eb17a90f4e3752c96633b20a62969f_html_ga76eb17a90f4e3752c96633b20a62969f"><div class="ttname"><a href="group__record__related_ga76eb17a90f4e3752c96633b20a62969f.html#ga76eb17a90f4e3752c96633b20a62969f">kumi::make_record</a></div><div class="ttdeci">constexpr auto make_record(Ts &amp;&amp;... ts) -&gt; record&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt; requires(concepts::entirely_uniquely_named&lt; Ts... &gt;)</div><div class="ttdoc">Creates a record object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> record.hpp:439</div></div>
+<div class="ttc" id="agroup__record__transforms_ga15399097726371208bf338ce69088447_html_ga15399097726371208bf338ce69088447"><div class="ttname"><a href="group__record__transforms_ga15399097726371208bf338ce69088447.html#ga15399097726371208bf338ce69088447">kumi::for_each_field</a></div><div class="ttdeci">constexpr void for_each_field(Function f, R &amp;&amp;r, Rs &amp;&amp;... rs)</div><div class="ttdoc">Applies the Callable object f on each element of a record type and its field.</div><div class="ttdef"><b>Definition</b> for_each.hpp:119</div></div>
+<div class="ttc" id="astructkumi_1_1name_html"><div class="ttname"><a href="structkumi_1_1name.html">kumi::name</a></div><div class="ttdoc">Compile-time text based identifier.</div><div class="ttdef"><b>Definition</b> identifier.hpp:161</div></div>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md442"></a>
 Licence</h1>
-<p>This library is licensed under the <a href="https://opensource.org/licenses/BSL-1.0">Boost Software License</a>:</p>
-<div class="fragment"><div class="line">none</div>
-<div class="line">   Copyright : KUMI Project Contributors</div>
-<div class="line">  </div>
-<div class="line">   Permission is hereby granted, free of charge, to any person or organization obtaining a copy of the</div>
-<div class="line">   software and accompanying documentation covered by <span class="keyword">this</span> license (the <span class="stringliteral">&quot;Software&quot;</span>) to use, reproduce,</div>
-<div class="line">   display, distribute, execute, and transmit the Software, and to prepare derivative works of the</div>
-<div class="line">   Software, and to permit third-parties to whom the Software is furnished to <span class="keywordflow">do</span> so, all subject to the</div>
-<div class="line">   following:</div>
-<div class="line">  </div>
-<div class="line">   The copyright notices in the Software and <span class="keyword">this</span> entire statement, including the above license grant,</div>
-<div class="line">   <span class="keyword">this</span> restriction and the following disclaimer, must be included in all copies of the Software, in</div>
-<div class="line">   whole or in part, and all derivative works of the Software, unless such copies or derivative works</div>
-<div class="line">   are solely in the form of machine-executable <span class="keywordtype">object</span> code generated by a source language processor.</div>
-<div class="line">  </div>
-<div class="line">   THE SOFTWARE IS PROVIDED <span class="stringliteral">&quot;AS IS&quot;</span>, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT</div>
-<div class="line">   NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, TITLE AND</div>
-<div class="line">   NON-INFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE</div>
-<div class="line">   BE LIABLE FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE, ARISING</div>
-<div class="line">   FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</div>
+<p>This library is licensed under the <a href="https://opensource.org/licenses/BSL">Boost Software License</a>:</p>
+<div class="fragment"><div class="line">Copyright : KUMI Project Contributors</div>
+<div class="line"> </div>
+<div class="line">Boost Software License - Version 1.0 - August 17th, 2003</div>
+<div class="line"> </div>
+<div class="line">Permission is hereby granted, free of charge, to any person or organization</div>
+<div class="line">obtaining a copy of the software and accompanying documentation covered by</div>
+<div class="line">this license (the &quot;Software&quot;) to use, reproduce, display, distribute,</div>
+<div class="line">execute, and transmit the Software, and to prepare derivative works of the</div>
+<div class="line">Software, and to permit third-parties to whom the Software is furnished to</div>
+<div class="line">do so, all subject to the following:</div>
+<div class="line"> </div>
+<div class="line">The copyright notices in the Software and this entire statement, including</div>
+<div class="line">the above license grant, this restriction and the following disclaimer,</div>
+<div class="line">must be included in all copies of the Software, in whole or in part, and</div>
+<div class="line">all derivative works of the Software, unless such copies or derivative</div>
+<div class="line">works are solely in the form of machine-executable object code generated by</div>
+<div class="line">a source language processor.</div>
+<div class="line"> </div>
+<div class="line">THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR</div>
+<div class="line">IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,</div>
+<div class="line">FITNESS FOR A PARTICULAR PURPOSE, TITLE AND NON-INFRINGEMENT. IN NO EVENT</div>
+<div class="line">SHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE BE LIABLE</div>
+<div class="line">FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE,</div>
+<div class="line">ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER</div>
+<div class="line">DEALINGS IN THE SOFTWARE.</div>
 </div><!-- fragment --> </div></div><!-- PageDoc -->
 <a href="doxygen_crawl.html"></a>
 </div><!-- contents -->

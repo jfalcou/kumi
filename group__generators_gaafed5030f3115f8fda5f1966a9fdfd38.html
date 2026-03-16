@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::filter</title>
+<title>KUMI: kumi::filter</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -17,6 +17,38 @@
   DoxygenAwesomeParagraphLink.init()
   DoxygenAwesomeFragmentCopyButton.init()
   SendToGodbolt.init("kumi","clang1600","-O3 -std=c++20 -DNEDBUG")
+  document.addEventListener("DOMContentLoaded", function()
+  {
+    // Matches any word ending in _implementation_defined
+    const pattern = /\b\w+_implementation_defined\b/g;
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      null,
+      false
+    );
+    let node;
+    const targets = [];
+    while(node = walker.nextNode()) {
+      if (pattern.test(node.nodeValue)) {
+        targets.push(node);
+        // Reset regex index because of the 'g' flag
+        pattern.lastIndex = 0;
+      }
+    }
+    targets.forEach(textNode => {
+      const replacement = textNode.nodeValue.replace(
+        pattern,
+        '<span class="comment" title="This type is implementation defined and not part of the public API">/*implementation defined*/</span>'
+      );
+      const container = document.createElement('span');
+      container.innerHTML = replacement;
+      while (container.firstChild) {
+        textNode.parentNode.insertBefore(container.firstChild, textNode);
+      }
+      textNode.parentNode.removeChild(textNode);
+    });
+  });
 </script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
@@ -53,7 +85,7 @@ MathJax.Hub.Config({
  <tr  style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">kumi<span id="projectnumber">&#160;v3.1.0</span>
+   <div id="projectname">KUMI<span id="projectnumber">&#160;v3.1.0</span>
    </div>
    <div id="projectbrief">Exquisite Epidote</div>
   </td>
@@ -157,8 +189,9 @@ template&lt;template&lt; typename &gt; typename Pred, concepts::product_type T&g
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A Product type containing all values which types satisfies <span class="tt">Pred</span>.</dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md68"></a>
+<dl class="section return"><dt>Returns</dt><dd>A Product type containing all values of <span class="tt">t</span> which types satisfies <span class="tt">Pred</span>.</dd></dl>
+<p>On a record type, <span class="tt">Pred</span> is applied directly to the underlying elements of the fields.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md128"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
 <div class="line">{</div>
@@ -167,11 +200,13 @@ Helper type</h2>
 <div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Pred, kumi::product_type T&gt;</div>
 <div class="line">  <span class="keyword">using </span>filter_t = <span class="keyword">typename</span> <a class="code hl_function" href="#gaafed5030f3115f8fda5f1966a9fdfd38">filter&lt;Pred, T&gt;::type</a>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__generators_gaafed5030f3115f8fda5f1966a9fdfd38_html_gaafed5030f3115f8fda5f1966a9fdfd38"><div class="ttname"><a href="#gaafed5030f3115f8fda5f1966a9fdfd38">kumi::filter</a></div><div class="ttdeci">constexpr auto filter(T &amp;&amp;t) noexcept</div><div class="ttdoc">Filters a product type over a predicate.</div><div class="ttdef"><b>Definition</b> partition.hpp:102</div></div>
+<div class="ttc" id="agroup__generators_gaafed5030f3115f8fda5f1966a9fdfd38_html_gaafed5030f3115f8fda5f1966a9fdfd38"><div class="ttname"><a href="#gaafed5030f3115f8fda5f1966a9fdfd38">kumi::filter</a></div><div class="ttdeci">constexpr auto filter(T &amp;&amp;t) noexcept</div><div class="ttdoc">Filters a product type over a predicate.</div><div class="ttdef"><b>Definition</b> partition.hpp:114</div></div>
 <div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
 </div><!-- fragment --><p>Computes the type returned by a call to <a class="el" href="#gaafed5030f3115f8fda5f1966a9fdfd38" title="Filters a product type over a predicate.">kumi::filter</a>.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md69"></a>
-Example:</h2>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md129"></a>
+Examples:</h2>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md130"></a>
+Tuple:</h3>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
@@ -190,8 +225,10 @@ Example:</h2>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Real     : &quot;</span> &lt;&lt; <a class="code hl_function" href="#gaafed5030f3115f8fda5f1966a9fdfd38">kumi::filter&lt;std::is_floating_point&gt;</a>(original) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;nullptr  : &quot;</span> &lt;&lt; <a class="code hl_function" href="#gaafed5030f3115f8fda5f1966a9fdfd38">kumi::filter&lt;std::is_null_pointer&gt;</a>(original) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:25</div></div>
-</div><!-- fragment --> <div class="fragment"><div class="line"></div>
+<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
+</div><!-- fragment --> <h3 class="doxsection"><a class="anchor" id="autotoc_md131"></a>
+Record:</h3>
+<div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -211,7 +248,7 @@ Example:</h2>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Real     : &quot;</span> &lt;&lt; <a class="code hl_function" href="#gaafed5030f3115f8fda5f1966a9fdfd38">kumi::filter&lt;std::is_floating_point&gt;</a>(original) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;nullptr  : &quot;</span> &lt;&lt; <a class="code hl_function" href="#gaafed5030f3115f8fda5f1966a9fdfd38">kumi::filter&lt;std::is_null_pointer&gt;</a>(original) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous fields necessarily named, names are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:26</div></div>
+<div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::projection_map&lt; V &gt; Class Template Reference</title>
+<title>KUMI: kumi::projection_map&lt; V &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -17,6 +17,38 @@
   DoxygenAwesomeParagraphLink.init()
   DoxygenAwesomeFragmentCopyButton.init()
   SendToGodbolt.init("kumi","clang1600","-O3 -std=c++20 -DNEDBUG")
+  document.addEventListener("DOMContentLoaded", function()
+  {
+    // Matches any word ending in _implementation_defined
+    const pattern = /\b\w+_implementation_defined\b/g;
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      null,
+      false
+    );
+    let node;
+    const targets = [];
+    while(node = walker.nextNode()) {
+      if (pattern.test(node.nodeValue)) {
+        targets.push(node);
+        // Reset regex index because of the 'g' flag
+        pattern.lastIndex = 0;
+      }
+    }
+    targets.forEach(textNode => {
+      const replacement = textNode.nodeValue.replace(
+        pattern,
+        '<span class="comment" title="This type is implementation defined and not part of the public API">/*implementation defined*/</span>'
+      );
+      const container = document.createElement('span');
+      container.innerHTML = replacement;
+      while (container.firstChild) {
+        textNode.parentNode.insertBefore(container.firstChild, textNode);
+      }
+      textNode.parentNode.removeChild(textNode);
+    });
+  });
 </script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
@@ -53,7 +85,7 @@ MathJax.Hub.Config({
  <tr  style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">kumi<span id="projectnumber">&#160;v3.1.0</span>
+   <div id="projectname">KUMI<span id="projectnumber">&#160;v3.1.0</span>
    </div>
    <div id="projectbrief">Exquisite Epidote</div>
   </td>
@@ -141,7 +173,7 @@ class kumi::projection_map&lt; V &gt;</div><p>A stateless, compile-time schema f
   </table>
   </dd>
 </dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md191"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md369"></a>
 Examples:</h2>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -158,25 +190,24 @@ Examples:</h2>
 <div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_gad9d978893c5e64520e0b0d83d133c26c.html#gad9d978893c5e64520e0b0d83d133c26c">kumi::indexes</a>(0_c, 1_c, 2_c) &lt;&lt; <span class="stringliteral">&quot;\n\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__utility_ga39745d8d55ea398d3e77d719b5bf14f9.html#ga39745d8d55ea398d3e77d719b5bf14f9">kumi::identifiers</a>(<span class="stringliteral">&quot;a&quot;</span>_id, <span class="stringliteral">&quot;b&quot;</span>_id) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__utility_ga39745d8d55ea398d3e77d719b5bf14f9_html_ga39745d8d55ea398d3e77d719b5bf14f9"><div class="ttname"><a href="group__utility_ga39745d8d55ea398d3e77d719b5bf14f9.html#ga39745d8d55ea398d3e77d719b5bf14f9">kumi::identifiers</a></div><div class="ttdeci">consteval auto identifiers(Ts... ts) noexcept</div><div class="ttdoc">Creates a kumi::projection_map object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> projections.hpp:151</div></div>
-<div class="ttc" id="agroup__utility_gad9d978893c5e64520e0b0d83d133c26c_html_gad9d978893c5e64520e0b0d83d133c26c"><div class="ttname"><a href="group__utility_gad9d978893c5e64520e0b0d83d133c26c.html#gad9d978893c5e64520e0b0d83d133c26c">kumi::indexes</a></div><div class="ttdeci">consteval auto indexes(Ts... ts) noexcept</div><div class="ttdoc">Creates a kumi::projection_map object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> projections.hpp:115</div></div>
-<div class="ttc" id="astructkumi_1_1projection__map_html"><div class="ttname"><a href="structkumi_1_1projection__map.html">kumi::projection_map</a></div><div class="ttdoc">A stateless, compile-time schema for product type transformation.</div><div class="ttdef"><b>Definition</b> projections.hpp:32</div></div>
+<div class="ttc" id="agroup__utility_ga39745d8d55ea398d3e77d719b5bf14f9_html_ga39745d8d55ea398d3e77d719b5bf14f9"><div class="ttname"><a href="group__utility_ga39745d8d55ea398d3e77d719b5bf14f9.html#ga39745d8d55ea398d3e77d719b5bf14f9">kumi::identifiers</a></div><div class="ttdeci">consteval auto identifiers(Ts... ts) noexcept</div><div class="ttdoc">Creates a kumi::projection_map object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> projections.hpp:167</div></div>
+<div class="ttc" id="agroup__utility_gad9d978893c5e64520e0b0d83d133c26c_html_gad9d978893c5e64520e0b0d83d133c26c"><div class="ttname"><a href="group__utility_gad9d978893c5e64520e0b0d83d133c26c.html#gad9d978893c5e64520e0b0d83d133c26c">kumi::indexes</a></div><div class="ttdeci">consteval auto indexes(Ts... ts) noexcept</div><div class="ttdoc">Creates a kumi::projection_map object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> projections.hpp:127</div></div>
+<div class="ttc" id="astructkumi_1_1projection__map_html"><div class="ttname"><a href="structkumi_1_1projection__map.html">kumi::projection_map</a></div><div class="ttdoc">A stateless, compile-time schema for product type transformation.</div><div class="ttdef"><b>Definition</b> projections.hpp:34</div></div>
 </div><!-- fragment --> </div><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
-Static Public Member Functions</h2></td></tr>
-<tr id="pub-static-methods-0" class="groupHeader"><td colspan="2"><div class="groupHeader">Properties</div></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-member-group" class="groupheader"><a id="member-group" name="member-group"></a>
+Accessors</h2></td></tr>
+<tr class="memitem:a197ce3f55a71294cb619b65ba8d8cc89" id="r_a197ce3f55a71294cb619b65ba8d8cc89"><td class="memTemplParams" colspan="2">template&lt;std::size_t I&gt; </td></tr>
+<tr class="memitem:a197ce3f55a71294cb619b65ba8d8cc89 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1projection__map_a197ce3f55a71294cb619b65ba8d8cc89.html#a197ce3f55a71294cb619b65ba8d8cc89">get</a> (projection_map const &amp;pm) noexcept</td></tr>
+<tr class="memdesc:a197ce3f55a71294cb619b65ba8d8cc89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the Ith element from a <a class="el" href="structkumi_1_1projection__map.html" title="A stateless, compile-time schema for product type transformation.">kumi::projection_map</a>.  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-member-group" class="groupheader"><a id="member-group" name="member-group"></a>
+Properties</h2></td></tr>
 <tr class="memitem:aa201fda6e2720aef8e4a7ce8baee802e" id="r_aa201fda6e2720aef8e4a7ce8baee802e"><td class="memItemLeft"><a id="aa201fda6e2720aef8e4a7ce8baee802e" name="aa201fda6e2720aef8e4a7ce8baee802e"></a>
 static constexpr auto&#160;</td><td class="memItemRight"><b>size</b> () noexcept</td></tr>
 <tr class="memdesc:aa201fda6e2720aef8e4a7ce8baee802e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of elements in a kumi::indexes_t. <br /></td></tr>
 <tr class="memitem:a09b37b6512103836987e98b7c0d75984" id="r_a09b37b6512103836987e98b7c0d75984"><td class="memItemLeft"><a id="a09b37b6512103836987e98b7c0d75984" name="a09b37b6512103836987e98b7c0d75984"></a>
 static constexpr auto&#160;</td><td class="memItemRight"><b>empty</b> () noexcept</td></tr>
 <tr class="memdesc:a09b37b6512103836987e98b7c0d75984"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <span class="tt">true</span> if a kumi::indexes_t contains 0 elements. <br /></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-member-group" class="groupheader"><a id="member-group" name="member-group"></a>
-Accessors</h2></td></tr>
-<tr class="memitem:a197ce3f55a71294cb619b65ba8d8cc89" id="r_a197ce3f55a71294cb619b65ba8d8cc89"><td class="memTemplParams" colspan="2">template&lt;std::size_t I&gt; </td></tr>
-<tr class="memitem:a197ce3f55a71294cb619b65ba8d8cc89 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1projection__map_a197ce3f55a71294cb619b65ba8d8cc89.html#a197ce3f55a71294cb619b65ba8d8cc89">get</a> (projection_map const &amp;pm) noexcept</td></tr>
-<tr class="memdesc:a197ce3f55a71294cb619b65ba8d8cc89"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the Ith element from a <a class="el" href="structkumi_1_1projection__map.html" title="A stateless, compile-time schema for product type transformation.">kumi::projection_map</a>.  <br /></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

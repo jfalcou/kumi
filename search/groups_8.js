@@ -1,14 +1,10 @@
 var searchData=
 [
-  ['traits_0',['Tuple Related Traits',['../group__traits.html',1,'']]],
-  ['transformations_1',['Tuple Transformations',['../group__transforms.html',1,'']]],
-  ['tuple_20algorithms_2',['Tuple Algorithms',['../group__algorithm.html',1,'']]],
-  ['tuple_20generalized_20reductions_3',['Tuple Generalized Reductions',['../group__reductions.html',1,'']]],
-  ['tuple_20generators_4',['Tuple Generators',['../group__generators.html',1,'']]],
-  ['tuple_20queries_5',['Tuple Queries',['../group__queries.html',1,'']]],
-  ['tuple_20related_20concepts_6',['Tuple Related Concepts',['../group__concepts.html',1,'']]],
-  ['tuple_20related_20traits_7',['Tuple Related Traits',['../group__traits.html',1,'']]],
-  ['tuple_20transformations_8',['Tuple Transformations',['../group__transforms.html',1,'']]],
-  ['tuple_20types_20and_20functions_9',['Tuple Types and Functions',['../group__tuple.html',1,'']]],
-  ['types_20and_20functions_10',['Types and Functions',['../group__details.html',1,'Helper Types and Functions'],['../group__utility.html',1,'Helper Types and Functions'],['../group__record.html',1,'Record Types and Functions'],['../group__tuple.html',1,'Tuple Types and Functions']]]
+  ['record_20related_20concepts_0',['Record Related Concepts',['../group__record__concepts.html',1,'']]],
+  ['record_20related_20traits_1',['Record Related Traits',['../group__record__traits.html',1,'']]],
+  ['record_20type_20specific_20transformations_2',['Record Type Specific Transformations',['../group__record__transforms.html',1,'']]],
+  ['record_20types_20and_20associated_20functions_3',['Record Types and associated Functions',['../group__record__related.html',1,'']]],
+  ['reductions_4',['Product Type Generalized Reductions',['../group__reductions.html',1,'']]],
+  ['related_20concepts_5',['Related Concepts',['../group__concepts.html',1,'Product Type Related Concepts'],['../group__record__concepts.html',1,'Record Related Concepts'],['../group__tuple__concepts.html',1,'Tuple Related Concepts']]],
+  ['related_20traits_6',['Related Traits',['../group__traits.html',1,'Product Type Related Traits'],['../group__record__traits.html',1,'Record Related Traits'],['../group__tuple__traits.html',1,'Tuple Related Traits']]]
 ];

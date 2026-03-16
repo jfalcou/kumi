@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::is_container&lt; T &gt; Struct Template Reference</title>
+<title>KUMI: kumi::is_container&lt; T &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -17,6 +17,38 @@
   DoxygenAwesomeParagraphLink.init()
   DoxygenAwesomeFragmentCopyButton.init()
   SendToGodbolt.init("kumi","clang1600","-O3 -std=c++20 -DNEDBUG")
+  document.addEventListener("DOMContentLoaded", function()
+  {
+    // Matches any word ending in _implementation_defined
+    const pattern = /\b\w+_implementation_defined\b/g;
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      null,
+      false
+    );
+    let node;
+    const targets = [];
+    while(node = walker.nextNode()) {
+      if (pattern.test(node.nodeValue)) {
+        targets.push(node);
+        // Reset regex index because of the 'g' flag
+        pattern.lastIndex = 0;
+      }
+    }
+    targets.forEach(textNode => {
+      const replacement = textNode.nodeValue.replace(
+        pattern,
+        '<span class="comment" title="This type is implementation defined and not part of the public API">/*implementation defined*/</span>'
+      );
+      const container = document.createElement('span');
+      container.innerHTML = replacement;
+      while (container.firstChild) {
+        textNode.parentNode.insertBefore(container.firstChild, textNode);
+      }
+      textNode.parentNode.removeChild(textNode);
+    });
+  });
 </script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
@@ -53,7 +85,7 @@ MathJax.Hub.Config({
  <tr  style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">kumi<span id="projectnumber">&#160;v3.1.0</span>
+   <div id="projectname">KUMI<span id="projectnumber">&#160;v3.1.0</span>
    </div>
    <div id="projectbrief">Exquisite Epidote</div>
   </td>
@@ -121,7 +153,7 @@ $(function(){initNavTree('structkumi_1_1is__container.html','','structkumi_1_1is
 <div class="header">
   <div class="summary">
 <a href="structkumi_1_1is__container-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">kumi::is_container&lt; T &gt; Struct Template Reference<div class="ingroups"><a class="el" href="group__traits.html">Tuple Related Traits</a></div></div></div>
+  <div class="headertitle"><div class="title">kumi::is_container&lt; T &gt; Struct Template Reference<div class="ingroups"><a class="el" href="group__traits.html">Product Type Related Traits</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -134,13 +166,42 @@ $(function(){initNavTree('structkumi_1_1is__container.html','','structkumi_1_1is
 struct kumi::is_container&lt; T &gt;</div><p>Traits detecting types behaving like a kumi::container. </p>
 <p>To be treated like a container, a user defined type must expose a type and a statically know size encoded in the type. It shall also provide general container utilities.</p>
 <dl class="section note"><dt>Note</dt><dd>The type shall be templated on the type and the size to be picked up.</dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md202"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md380"></a>
 Helper value</h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_struct" href="structkumi_1_1is__container.html">is_container</a> = <a class="code hl_struct" href="structkumi_1_1is__container.html">is_container&lt;T&gt;::value</a>;</div>
-<div class="ttc" id="astructkumi_1_1is__container_html"><div class="ttname"><a href="structkumi_1_1is__container.html">kumi::is_container</a></div><div class="ttdoc">Traits detecting types behaving like a kumi::container.</div><div class="ttdef"><b>Definition</b> traits.hpp:185</div></div>
-</div><!-- fragment --> <h2 class="doxsection"><a class="anchor" id="autotoc_md203"></a>
+<div class="ttc" id="astructkumi_1_1is__container_html"><div class="ttname"><a href="structkumi_1_1is__container.html">kumi::is_container</a></div><div class="ttdoc">Traits detecting types behaving like a kumi::container.</div><div class="ttdef"><b>Definition</b> traits.hpp:195</div></div>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md381"></a>
 Example:</h2>
-</div></div><!-- contents -->
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;array&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;span&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">static_assert</span>(<a class="code hl_concept" href="conceptkumi_1_1concepts_1_1static__container.html">kumi::concepts::static_container&lt;std::array&lt;int,10&gt;</a>&gt;);</div>
+<div class="line"><span class="keyword">static_assert</span>(<a class="code hl_concept" href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type&lt;std::array&lt;int,10&gt;</a>&gt;);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">static_assert</span>(<a class="code hl_concept" href="conceptkumi_1_1concepts_1_1static__container.html">kumi::concepts::static_container&lt;std::span&lt;int,10&gt;</a>&gt;);</div>
+<div class="line"><span class="keyword">static_assert</span>(!<a class="code hl_concept" href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type&lt;std::span&lt;int,10&gt;</a>&gt;);</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">static_assert</span>(!<a class="code hl_concept" href="conceptkumi_1_1concepts_1_1static__container.html">kumi::concepts::static_container&lt;std::span&lt;int&gt;</a>&gt;);</div>
+<div class="line"><span class="keyword">static_assert</span>(!<a class="code hl_concept" href="conceptkumi_1_1concepts_1_1static__container.html">kumi::concepts::static_container&lt;std::vector&lt;int&gt;</a>&gt;);</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">auto</span> data = std::array{1,2,3,4,5,6,7,8,9,10};</div>
+<div class="line">  <a class="code hl_function" href="group__transforms_ga743a481a92dcc85b86159a44a562dd77.html#ga743a481a92dcc85b86159a44a562dd77">kumi::for_each</a>([](<span class="keyword">auto</span> elt){ std::cout &lt;&lt; elt &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>; }, data);</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">    </div>
+<div class="line">  <span class="keyword">auto</span> my_span = std::span(data);</div>
+<div class="line">  <a class="code hl_function" href="group__transforms_ga743a481a92dcc85b86159a44a562dd77.html#ga743a481a92dcc85b86159a44a562dd77">kumi::for_each</a>([](<span class="keyword">auto</span> elt){ std::cout &lt;&lt; elt &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>; }, <a class="code hl_function" href="group__tuple__related_ga0bacdab2d5c18c44431ba8f74b86a5f0.html#ga0bacdab2d5c18c44431ba8f74b86a5f0">kumi::to_tuple</a>(my_span));</div>
+<div class="line">}</div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:87</div></div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1static__container_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1static__container.html">kumi::concepts::static_container</a></div><div class="ttdoc">Concept specifying a type follows the Container Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:134</div></div>
+<div class="ttc" id="agroup__transforms_ga743a481a92dcc85b86159a44a562dd77_html_ga743a481a92dcc85b86159a44a562dd77"><div class="ttname"><a href="group__transforms_ga743a481a92dcc85b86159a44a562dd77.html#ga743a481a92dcc85b86159a44a562dd77">kumi::for_each</a></div><div class="ttdeci">constexpr void for_each(Function f, T &amp;&amp;t, Ts &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a product type. f is applied on the values if the gi...</div><div class="ttdef"><b>Definition</b> for_each.hpp:36</div></div>
+<div class="ttc" id="agroup__tuple__related_ga0bacdab2d5c18c44431ba8f74b86a5f0_html_ga0bacdab2d5c18c44431ba8f74b86a5f0"><div class="ttname"><a href="group__tuple__related_ga0bacdab2d5c18c44431ba8f74b86a5f0.html#ga0bacdab2d5c18c44431ba8f74b86a5f0">kumi::to_tuple</a></div><div class="ttdeci">constexpr auto to_tuple(T &amp;&amp;t)</div><div class="ttdoc">Converts a kumi::product_type to an instance kumi::tuple.</div><div class="ttdef"><b>Definition</b> tuple.hpp:578</div></div>
+</div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- HTML footer for doxygen 1.8.20-->

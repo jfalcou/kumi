@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>kumi: kumi::builder&lt; T &gt; Class Template Reference</title>
+<title>KUMI: kumi::builder&lt; T &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -17,6 +17,38 @@
   DoxygenAwesomeParagraphLink.init()
   DoxygenAwesomeFragmentCopyButton.init()
   SendToGodbolt.init("kumi","clang1600","-O3 -std=c++20 -DNEDBUG")
+  document.addEventListener("DOMContentLoaded", function()
+  {
+    // Matches any word ending in _implementation_defined
+    const pattern = /\b\w+_implementation_defined\b/g;
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      null,
+      false
+    );
+    let node;
+    const targets = [];
+    while(node = walker.nextNode()) {
+      if (pattern.test(node.nodeValue)) {
+        targets.push(node);
+        // Reset regex index because of the 'g' flag
+        pattern.lastIndex = 0;
+      }
+    }
+    targets.forEach(textNode => {
+      const replacement = textNode.nodeValue.replace(
+        pattern,
+        '<span class="comment" title="This type is implementation defined and not part of the public API">/*implementation defined*/</span>'
+      );
+      const container = document.createElement('span');
+      container.innerHTML = replacement;
+      while (container.firstChild) {
+        textNode.parentNode.insertBefore(container.firstChild, textNode);
+      }
+      textNode.parentNode.removeChild(textNode);
+    });
+  });
 </script>
 <link href="navtree.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="navtreedata.js"></script>
@@ -53,7 +85,7 @@ MathJax.Hub.Config({
  <tr  style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">kumi<span id="projectnumber">&#160;v3.1.0</span>
+   <div id="projectname">KUMI<span id="projectnumber">&#160;v3.1.0</span>
    </div>
    <div id="projectbrief">Exquisite Epidote</div>
   </td>
@@ -123,17 +155,17 @@ $(function(){initNavTree('structkumi_1_1builder.html','',''); });
 </div><!--header-->
 <div class="contents">
 
-<p>Helper structure to build the correct output <span class="tt">product_type</span>. If the provided Product type is a not a record_type the builder will output a tuple otherwise a record.  
+<p>Helper structure to build the correct output product type based on the given template parameter. If the provided product type is a not a record_type the builder will output a tuple otherwise a record. One can specialize the builder for it's own type matching the product type semantic.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;kumi/utils/builder.hpp&gt;</code></p>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
-class kumi::builder&lt; T &gt;</div><p>Helper structure to build the correct output <span class="tt">product_type</span>. If the provided Product type is a not a record_type the builder will output a tuple otherwise a record. </p>
-<p>builder provides a generic way of defining a kumi::product_type which depending on the given semantic (product_type or record_type) will output respectively a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> or a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields necessarily named, names are unique.">kumi::record</a></p>
+class kumi::builder&lt; T &gt;</div><p>Helper structure to build the correct output product type based on the given template parameter. If the provided product type is a not a record_type the builder will output a tuple otherwise a record. One can specialize the builder for it's own type matching the product type semantic. </p>
+<p>builder provides a generic way of defining a product type. Depending on the given semantic of the input parameter (product type or record type), it will output respectively a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> or a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>the template template type to be built. </td></tr>
+    <tr><td class="paramname">T</td><td>the template type to be built. </td></tr>
   </table>
   </dd>
 </dl>

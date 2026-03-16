@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['record_0',['record',['../group__record_gaee922438c01912318246dcd9d6a1d158.html#gaee922438c01912318246dcd9d6a1d158',1,'kumi']]],
+  ['record_0',['record',['../structkumi_1_1record_a1000cb0996a9587f8735a35f76060e44.html#a1000cb0996a9587f8735a35f76060e44',1,'kumi::record::record()'],['../structkumi_1_1record_a1000cb0996a9587f8735a35f76060e44.html#a1000cb0996a9587f8735a35f76060e44',1,'kumi::record(Ts &amp;&amp;...) -&gt; record&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;']]],
   ['reduce_1',['reduce',['../group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html#ga812fe60401e985cc2ebd067bc42f0354',1,'kumi::reduce(M &amp;&amp;m, T &amp;&amp;t)'],['../group__reductions_ga7d1398c56521f65375bb2f2b28e945cb.html#ga7d1398c56521f65375bb2f2b28e945cb',1,'kumi::reduce(M &amp;&amp;m, T &amp;&amp;t, Value init)']]],
   ['reindex_2',['reindex',['../group__generators_ga0e43e02e9a4a7fea31b620b2dcb4b48a.html#ga0e43e02e9a4a7fea31b620b2dcb4b48a',1,'kumi']]],
   ['reorder_3',['reorder',['../group__generators_ga11fbe45a20286800b1d6ef15d7930d37.html#ga11fbe45a20286800b1d6ef15d7930d37',1,'kumi']]],

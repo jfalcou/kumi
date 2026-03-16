@@ -24,25 +24,35 @@
 */
 var NAVTREE =
 [
-  [ "kumi", "index.html", [
+  [ "KUMI", "index.html", [
     [ "The C++20 Compact Tuple Tools", "index.html", "index" ],
     [ "About The Library", "usergroup0.html", [
       [ "Setup", "setup.html", null ],
       [ "Changelog", "changelog.html", null ],
       [ "Licence", "licence.html", null ]
     ] ],
-    [ "Reference Documentation", "usergroup1.html", [
-      [ "Types", "usergroup2.html", [
-        [ "Tuple", "group__tuple.html", null ],
-        [ "Record", "group__record.html", null ]
+    [ "Glossary", "usergroup1.html", [
+      [ "Type Theory", "usergroup2.html", [
+        [ "Introduction", "introduction.html", null ],
+        [ "Identity Types", "identity.html", null ],
+        [ "Product Types", "product.html", null ]
       ] ],
-      [ "Algorithms", "usergroup3.html", [
+      [ "C++ Vocabulary", "cpp_spec.html", null ],
+      [ "Nomenclature", "nomenclature.html", null ]
+    ] ],
+    [ "Reference Documentation", "usergroup3.html", [
+      [ "Types", "usergroup4.html", [
+        [ "Product Types and Functions", "group__tuple__related.html", null ],
+        [ "Record Types and Functions", "group__record__related.html", null ],
+        [ "Types", "group__types.html", null ]
+      ] ],
+      [ "Algorithms", "usergroup5.html", [
         [ "Transformations", "group__transforms.html", null ],
         [ "Queries", "group__queries.html", null ],
         [ "Generators", "group__generators.html", null ],
         [ "Reductions", "group__reductions.html", null ]
       ] ],
-      [ "Helpers", "usergroup4.html", [
+      [ "Helpers", "usergroup6.html", [
         [ "Traits", "group__traits.html", null ],
         [ "Concepts", "group__concepts.html", null ],
         [ "Utility", "group__utility.html", null ]

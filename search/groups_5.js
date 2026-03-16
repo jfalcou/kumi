@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['product_5ftypes_20classes_0',['Product_types Classes',['../group__product__types.html',1,'']]]
+  ['kumi_20types_0',['Kumi Types',['../group__types.html',1,'']]]
 ];
