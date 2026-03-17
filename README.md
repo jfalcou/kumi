@@ -24,7 +24,7 @@ and new features like:
 ### Tuple
 [See it live on Compiler Explorer](https://godbolt.org/z/c5q1cnax9)
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+```cpp
 #include <iostream>
 #include <kumi/kumi.hpp>
 
@@ -62,12 +62,12 @@ int main()
   auto grades = kumi::get<0>(kumi::transpose(all_students));
   std::cout << grades << "\n";
 }
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 ### Record
 [See it live on Compiler Explorer](https://godbolt.org/z/sfb3djrPM)
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ c++
+```cpp
 #include <iostream>
 #include <kumi/kumi.hpp>
 
@@ -105,13 +105,13 @@ int main()
                       );
   std::cout << "\n";
 }
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
 
 ## Licence
 
 This library is licensed under the [Boost Software License](https://opensource.org/licenses/BSL-1.0):
 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ none
+```
 Copyright : KUMI Project Contributors
 
 Permission is hereby granted, free of charge, to any person or organization obtaining a copy of the
@@ -130,4 +130,4 @@ NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPO
 NON-INFRINGEMENT. IN NO EVENT SHALL THE COPYRIGHT HOLDERS OR ANYONE DISTRIBUTING THE SOFTWARE
 BE LIABLE FOR ANY DAMAGES OR OTHER LIABILITY, WHETHER IN CONTRACT, TORT OR OTHERWISE, ARISING
 FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+```
