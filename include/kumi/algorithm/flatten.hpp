@@ -85,6 +85,7 @@ namespace kumi
     if constexpr (concepts::product_type<T>) return size_v<T>;
     else return I;
   }
+
   //====================================================================================================================
   /**
     @ingroup  generators
@@ -127,12 +128,12 @@ namespace kumi
         return _::flattener(std::index_sequence<size_or<element_t<I, T>, 1>()...>{});
       }(std::make_index_sequence<size_v<T>>{});
 
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+      return [&]<std::size_t... J, std::size_t... I>(std::index_sequence<J...>, std::index_sequence<I...>) {
         return make_tuple([&]<typename U>(U&& e) {
-          if constexpr (concepts::product_type<U>) return get<proj.e[I]>(KUMI_FWD(e));
+          if constexpr (concepts::product_type<U>) return get<J>(KUMI_FWD(e));
           else return KUMI_FWD(e);
-        }(get<proj.t[I]>(KUMI_FWD(t)))...);
-      }(std::make_index_sequence<proj.count - 1>{});
+        }(get<I>(KUMI_FWD(t)))...);
+      }(proj.elt, proj.tpl);
     }
   }
 
@@ -147,12 +148,12 @@ namespace kumi
         return _::flattener(std::index_sequence<size_or<element_t<I, T>, 1>()...>{});
       }(std::make_index_sequence<size_v<T>>{});
 
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+      return [&]<std::size_t... J, std::size_t... I>(std::index_sequence<J...>, std::index_sequence<I...>) {
         return make_tuple([&]<typename U>(U&& e) {
-          if constexpr (concepts::product_type<U>) return invoke(f, get<proj.e[I]>(KUMI_FWD(e)));
+          if constexpr (concepts::product_type<U>) return invoke(f, get<J>(KUMI_FWD(e)));
           else return invoke(f, KUMI_FWD(e));
-        }(get<proj.t[I]>(KUMI_FWD(t)))...);
-      }(std::make_index_sequence<proj.count - 1>{});
+        }(get<I>(KUMI_FWD(t)))...);
+      }(proj.elt, proj.tpl);
     }
   }
 

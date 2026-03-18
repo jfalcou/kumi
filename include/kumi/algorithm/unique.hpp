@@ -86,11 +86,14 @@ namespace kumi
     if constexpr (concepts::empty_product_type<T>) return t;
     else
     {
+      constexpr auto proj = [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return _::uniquer(std::type_identity<raw_element_t<I, T>>{}...);
+      }(std::make_index_sequence<size_v<T>>{});
+
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::make_unique{builder_make_t<T, element_t<0, T>>{get<0>(KUMI_FWD(t))}} | ... |
-                _::make_unique<element_t<I + 1, T>>{get<I + 1>(KUMI_FWD(t))})
-          .acc;
-      }(std::make_index_sequence<size_v<T> - 1>{});
+        using type = builder_make_t<T, element_t<proj.e[I], T>...>;
+        return type{get<proj.e[I]>(KUMI_FWD(t))...};
+      }(std::make_index_sequence<proj.count>{});
     }
   }
 

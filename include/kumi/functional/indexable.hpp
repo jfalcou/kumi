@@ -9,6 +9,13 @@
 
 namespace kumi::_
 {
+
+  KUMI_ABI consteval std::size_t block_size(std::size_t I, std::size_t Stride, std::size_t Extent, std::size_t Size)
+  {
+    std::size_t s = I * Stride;
+    return (s < Size) ? ((s + Extent > Size) ? (Size - s) : Extent) : 0;
+  }
+
   //====================================================================================================================
   struct tile_
   {
@@ -17,18 +24,13 @@ namespace kumi::_
     {
       constexpr std::size_t nb_blocks = (Sz <= Extent) ? 1 : (Sz - Extent + Stride - 1) / Stride + 1;
 
-      constexpr auto block_size = [](std::size_t I) {
-        std::size_t s = I * Stride;
-        return (s < Sz) ? ((s + Extent > Sz) ? (Sz - s) : Extent) : 0;
-      };
-
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         struct
         {
-          using b = std::index_sequence<block_size(I)...>;
-          using e = std::index_sequence<(I * Stride)...>;
+          using b = std::index_sequence<block_size(I, Stride, Extent, Sz)...>;
+          using o = std::index_sequence<(I * Stride)...>;
           b blocks{};
-          e offset{};
+          o offset{};
         } that{};
         return that;
       }(std::make_index_sequence<nb_blocks>{});
@@ -55,7 +57,15 @@ namespace kumi::_
       constexpr std::size_t remainder = N % 2;
 
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return projection_map{indexes(index<2 * I>, index<2 * I + 1>)..., index<remainder>};
+        struct
+        {
+          using f = std::index_sequence<(2 * I)...>;
+          using s = std::index_sequence<(2 * I + 1)...>;
+          f first{};
+          s second{};
+          index_t<remainder> rest;
+        } that{};
+        return that;
       }(std::make_index_sequence<half>{});
     }
   };

@@ -53,17 +53,13 @@ namespace kumi
       constexpr auto pos = _::zipper(index<count>, index<size>);
 
       auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>) {
-        constexpr auto offset = k * count;
-        using type =
-          builder_make_t<element_t<0, T>,
-                         element_t<pos.e[offset + I], std::remove_cvref_t<element_t<pos.t[offset + I], T>>>...>;
-        return type{get<pos.e[offset + I]>(get<pos.t[offset + I]>(KUMI_FWD(t)))...};
+        using type = builder_make_t<element_t<0, T>, element_t<k, std::remove_cvref_t<element_t<I, T>>>...>;
+        return type{get<k>(get<I>(KUMI_FWD(t)))...};
       };
 
       return [&]<std::size_t... N>(std::index_sequence<N...>) {
-        std::make_index_sequence<count> ids;
-        return kumi::make_tuple(maps(index<N>, ids)...);
-      }(std::make_index_sequence<size>{});
+        return kumi::make_tuple(maps(index<N>, pos.tpl)...);
+      }(pos.elt);
     }
   }
 

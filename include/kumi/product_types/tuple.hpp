@@ -721,12 +721,12 @@ namespace kumi
     @related tuple
     @related record
     @brief Extracts the names of the fields of a kumi::product_type.
-  
+
     @note If some fields are unnamed, the associated name is kumi::unit.
-  
+
     @tparam   T the type of the prodcut_type from which to extract names.
     @return   A tuple of the names of a kumi::product_type.
-  
+
     ## Example:
     @include doc/infra/members_of.cpp
   **/
@@ -736,7 +736,7 @@ namespace kumi
     if constexpr (concepts::sized_product_type<T, 0>) return tuple{};
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return tuple{name_of<element_t<I, T>>()...};
+        return tuple{identifier_of<element_t<I, T>>()...};
       }(std::make_index_sequence<size_v<T>>{});
   }
 
@@ -745,10 +745,10 @@ namespace kumi
     @related tuple
     @related record
     @brief Extracts the values of the fields of a kumi::product_type.
-    
+
     @param    t the product_type from which to extract names.
     @return   A tuple of references to the values of a kumi::product_type.
-    
+
     ## Example:
     @include doc/infra/values_of.cpp
   **/

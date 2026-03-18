@@ -97,14 +97,9 @@ namespace kumi
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return (init + ... +
-<<<<<<< HEAD
                 (get<identifier_of<element_t<I, S1>>()>(KUMI_FWD(s1)) *
                  get<identifier_of<element_t<I, S1>>()>(KUMI_FWD(s2))));
       }(std::make_index_sequence<size<S1>::value>());
-=======
-                (get<name_of<element_t<I, S1>>()>(KUMI_FWD(s1)) * get<name_of<element_t<I, S1>>()>(KUMI_FWD(s2))));
-      }(std::make_index_sequence<size_v<S1>>{});
->>>>>>> cce0ca7 (Enhancements :)
     }
     else
     {

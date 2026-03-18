@@ -59,17 +59,14 @@ namespace kumi
       using res_type = common_product_type_t<std::remove_cvref_t<T0>, std::remove_cvref_t<Ts>...>;
 
       auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>) {
-        constexpr auto offset = k * count;
         auto tps = kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...);
-        using type = builder_make_t<
-          res_type, element_t<pos.e[offset + I], std::remove_cvref_t<element_t<pos.t[offset + I], decltype(tps)>>>...>;
-        return type{get<pos.e[offset + I]>(get<pos.t[offset + I]>(KUMI_FWD(tps)))...};
+        using type = builder_make_t<res_type, element_t<k, std::remove_cvref_t<element_t<I, decltype(tps)>>>...>;
+        return type{get<k>(get<I>(KUMI_FWD(tps)))...};
       };
 
       return [&]<std::size_t... N>(std::index_sequence<N...>) {
-        std::make_index_sequence<count> ids;
-        return kumi::make_tuple(maps(index<N>, ids)...);
-      }(std::make_index_sequence<size_v<T0>>{});
+        return kumi::make_tuple(maps(index<N>, pos.tpl)...);
+      }(pos.elt);
     }
   }
 
@@ -117,7 +114,7 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto zip_min(T0&& t0, Ts&&... ts)
   requires(concepts::follows_same_semantic<T0, Ts...>)
   {
-    constexpr std::size_t min = _::min_size_v<T0, Ts...>();
+    constexpr std::size_t min = _::min(size_v<T0>, size_v<Ts>...);
     if constexpr (min == 0) return tuple{};
     else
     {
@@ -127,17 +124,14 @@ namespace kumi
       using res_type = common_product_type_t<std::remove_cvref_t<T0>, std::remove_cvref_t<Ts>...>;
 
       auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>) {
-        constexpr auto offset = k * count;
         auto tps = kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...);
-        using type = builder_make_t<
-          res_type, element_t<pos.e[offset + I], std::remove_cvref_t<element_t<pos.t[offset + I], decltype(tps)>>>...>;
-        return type{get<pos.e[offset + I]>(get<pos.t[offset + I]>(KUMI_FWD(tps)))...};
+        using type = builder_make_t<res_type, element_t<k, std::remove_cvref_t<element_t<I, decltype(tps)>>>...>;
+        return type{get<k>(get<I>(KUMI_FWD(tps)))...};
       };
 
       return [&]<std::size_t... N>(std::index_sequence<N...>) {
-        std::make_index_sequence<count> ids;
-        return kumi::make_tuple(maps(index<N>, ids)...);
-      }(std::make_index_sequence<min>{});
+        return kumi::make_tuple(maps(index<N>, pos.tpl)...);
+      }(pos.elt);
     }
   }
 
@@ -202,7 +196,7 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto zip_max(T0&& t0, Ts&&... ts)
   requires(concepts::follows_same_semantic<T0, Ts...>)
   {
-    constexpr std::size_t max = _::max_size_v<T0, Ts...>();
+    constexpr std::size_t max = _::max(size_v<T0>, size_v<Ts>...);
     if constexpr (max == 0) return tuple{};
     else
     {
@@ -211,21 +205,17 @@ namespace kumi
       using res_type = common_product_type_t<std::remove_cvref_t<T0>, std::remove_cvref_t<Ts>...>;
 
       auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>) {
-        constexpr auto offset = k * count;
         auto tps = kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...);
 
         using type =
-          builder_make_t<res_type,
-                         element_or_t<pos.e[offset + I],
-                                      std::remove_cvref_t<element_t<pos.t[offset + I], decltype(tps)>>, kumi::unit>...>;
+          builder_make_t<res_type, element_or_t<k, std::remove_cvref_t<element_t<I, decltype(tps)>>, kumi::unit>...>;
 
-        return type{get_or<pos.e[offset + I]>(get<pos.t[offset + I]>(KUMI_FWD(tps)), kumi::none)...};
+        return type{get_or<k>(get<I>(KUMI_FWD(tps)), kumi::none)...};
       };
 
       return [&]<std::size_t... N>(std::index_sequence<N...>) {
-        std::make_index_sequence<count> ids;
-        return kumi::make_tuple(maps(index<N>, ids)...);
-      }(std::make_index_sequence<max>{});
+        return kumi::make_tuple(maps(index<N>, pos.tpl)...);
+      }(pos.elt);
     }
   }
 

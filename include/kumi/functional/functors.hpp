@@ -10,6 +10,34 @@
 namespace kumi::_
 {
   //====================================================================================================================
+  KUMI_ABI consteval std::size_t min(auto... sizes)
+  {
+    std::size_t result{};
+    return ((result = result < sizes ? result : sizes), ...);
+  };
+
+  KUMI_ABI consteval std::size_t max(auto... sizes)
+  {
+    std::size_t result{};
+    return ((result = result > sizes ? result : sizes), ...);
+  };
+
+  //====================================================================================================================
+  KUMI_ABI consteval std::size_t get_t(std::size_t i, auto... sizes)
+  {
+    std::size_t t{}, sum{};
+    ((t += (i >= (sum += sizes))), ...);
+    return t;
+  };
+
+  KUMI_ABI consteval std::size_t get_e(std::size_t i, auto... sizes)
+  {
+    std::size_t sum{}, offset{};
+    ((offset = (i >= (sum += sizes) ? sum : offset)), ...);
+    return i - offset;
+  }
+
+  //====================================================================================================================
   template<std::size_t N, std::size_t... S> struct digits
   {
     KUMI_ABI consteval auto operator()(std::size_t v) noexcept
@@ -53,57 +81,27 @@ namespace kumi::_
   //====================================================================================================================
   struct cat_
   {
-    template<std::size_t Count, std::size_t... Sizes>
-    KUMI_ABI consteval auto operator()(index_t<Count>, std::index_sequence<Sizes...>) const noexcept
+    template<std::size_t... Sizes> KUMI_ABI consteval auto operator()(std::index_sequence<Sizes...>) const noexcept
     {
-      struct
-      {
-        std::size_t t[Count], e[Count], count = {};
-      } that{};
+      constexpr auto N = (Sizes + ... + 0ULL);
 
-      that.count = Count;
-      std::size_t k = 0, offset = 0;
-
-      auto locate = [&]<std::size_t... I>(std::index_sequence<I...>) {
-        (((that.t[I + offset] = k), (that.e[I + offset] = I)), ...);
-        offset += sizeof...(I);
-        k++;
-      };
-
-      (locate(std::make_index_sequence<Sizes>{}), ...);
-      return that;
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        struct
+        {
+          using t = std::index_sequence<(get_t(I, Sizes...))...>;
+          using e = std::index_sequence<(get_e(I, Sizes...))...>;
+          t tpl{};
+          e elt{};
+        } that{};
+        return that;
+      }(std::make_index_sequence<N>{});
     }
   };
 
   struct flatten_ : cat_
   {
     using parent = cat_;
-
-    template<std::size_t... Sizes> KUMI_ABI consteval auto operator()(std::index_sequence<Sizes...> sz) const noexcept
-    {
-      return parent::operator()(index<(Sizes + ... + 1ULL)>, sz);
-    }
-  };
-
-  //====================================================================================================================
-  struct select_
-  {
-    template<bool... Bs> KUMI_ABI consteval auto operator()(std::bool_constant<Bs>...) const noexcept
-    {
-      struct
-      {
-        std::size_t count = {}, cut = {}, t[sizeof...(Bs)];
-      } that{};
-
-      auto locate = [&]<std::size_t... I>(std::index_sequence<I...>) {
-        ((Bs ? (that.t[that.count++] = I) : 0), ...);
-        that.cut = that.count;
-        ((!Bs ? (that.t[that.count++] = I) : 0), ...);
-      };
-
-      locate(std::make_index_sequence<sizeof...(Bs)>{});
-      return that;
-    }
+    using parent::operator();
   };
 
   //====================================================================================================================
@@ -114,37 +112,14 @@ namespace kumi::_
     {
       struct
       {
-        std::size_t t[Count * Size], e[Count * Size];
+        using t = decltype(std::make_index_sequence<Count>{});
+        using e = decltype(std::make_index_sequence<Size>{});
+        t tpl{};
+        e elt{};
       } that{};
-
-      std::size_t offset = 0;
-
-      auto locate = [&]<std::size_t... I>(auto k, std::index_sequence<I...>) {
-        (((that.t[I + offset] = I), (that.e[I + offset] = k)), ...);
-        offset += Count;
-      };
-
-      [&]<std::size_t... I>(std::index_sequence<I...>) {
-        (locate(index<I>, std::make_index_sequence<Count>{}), ...);
-      }(std::make_index_sequence<Size>{});
 
       return that;
     }
-  };
-
-  //====================================================================================================================
-  template<typename T0, typename... Ts> consteval std::size_t min_size_v()
-  {
-    std::size_t result = size_v<T0>;
-    if constexpr (sizeof...(Ts) == 0) return result;
-    else return ((result = result < size_v<Ts> ? result : size_v<Ts>), ...);
-  };
-
-  template<typename T0, typename... Ts> consteval std::size_t max_size_v()
-  {
-    std::size_t result = size_v<T0>;
-    if constexpr (sizeof...(Ts) == 0) return result;
-    else return ((result = result > size_v<Ts> ? result : size_v<Ts>), ...);
   };
 
   //====================================================================================================================
@@ -165,28 +140,6 @@ namespace kumi::_
   template<typename T, auto N> using as_homogeneous_t = typename as_homogeneous<T, N>::type;
 
   //====================================================================================================================
-  template<typename T> struct make_unique
-  {
-    T acc;
-
-    template<typename W> KUMI_ABI friend constexpr decltype(auto) operator|(make_unique&& x, make_unique<W>&& y)
-    {
-      constexpr auto value = []<std::size_t... I>(std::index_sequence<I...>) {
-        if constexpr (concepts::record_type<T>) return (all_uniques_v<_::type_of_t<W>, raw_element_t<I, T>...>);
-        else return (all_uniques_v<W, raw_element_t<I, T>...>);
-      }(std::make_index_sequence<size_v<T>>{});
-
-      if constexpr (value)
-        return [&]<std::size_t... I>(std::index_sequence<I...>) {
-          using res_t = builder_make_t<T, element_t<I, T>..., W>;
-          return _::make_unique{res_t{get<I>(KUMI_FWD(x.acc))..., KUMI_FWD(y.acc)}};
-        }(std::make_index_sequence<size_v<T>>{});
-      else return KUMI_FWD(x);
-    }
-  };
-
-  template<typename W> make_unique(W&& w) -> make_unique<W>;
-
   struct uniquable
   {
     template<concepts::product_type T> [[nodiscard]] KUMI_ABI consteval auto operator()(as<T>) const noexcept
@@ -199,13 +152,7 @@ namespace kumi::_
       that.t[0] = 0;
 
       [&]<std::size_t... I>(std::index_sequence<I...>) {
-        (
-          [&] {
-            constexpr auto L = I;
-            constexpr auto R = I + 1;
-            if constexpr (!std::is_same_v<raw_element_t<L, T>, raw_element_t<R, T>>) that.t[that.count++] = R;
-          }(),
-          ...);
+        (((std::is_same_v<raw_element_t<I, T>, raw_element_t<I + 1, T>>) ? I : (that.t[that.count++] = I + 1)), ...);
       }(std::make_index_sequence<size_v<T> - 1>{});
 
       return that;
@@ -216,7 +163,6 @@ namespace kumi::_
   inline constexpr cat_ concatenater{};
   inline constexpr flatten_ flattener{};
 
-  inline constexpr select_ selector{};
   inline constexpr uniquable uniqued{};
   inline constexpr zip_ zipper{};
 }
