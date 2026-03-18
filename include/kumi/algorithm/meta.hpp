@@ -12,12 +12,12 @@ namespace kumi
   //====================================================================================================================
   /**
     @ingroup  utility
-    @brief    Extracts the names of the fields of a product type.
+    @brief    Extracts the identifiers of the fields of a product type.
 
-    @note If some fields are unnamed, the associated name is kumi::unit.
+    @note If some fields are unnamed, the associated identifier is kumi::unit.
 
-    @tparam   T the type of the product type from which to extract names.
-    @return   A tuple of the names of a product type if there are any.
+    @tparam   T the type of the product type from which to extract identifierss.
+    @return   A tuple of the identifierss of a product type if there are any.
 
     @see kumi::tuple
     @see kumi::record
@@ -31,7 +31,7 @@ namespace kumi
     if constexpr (concepts::empty_product_type<T>) return tuple{};
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return tuple{name_of<element_t<I, T>>()...};
+        return tuple{identifier_of<element_t<I, T>>()...};
       }(std::make_index_sequence<size_v<T>>{});
   }
 
@@ -40,8 +40,8 @@ namespace kumi
     @ingroup  utility
     @brief    Extracts the values of the fields of a product type.
 
-    @tparam   T the type of the product type from which to extract names.
-    @param    t the product_type from which to extract names.
+    @tparam   T the type of the product type from which to extract values.
+    @param    t the product_type from which to extract values.
     @return   A tuple of references to the values of a kumi::product_type.
 
     @see kumi::tuple

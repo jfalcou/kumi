@@ -64,7 +64,7 @@ namespace kumi::_
   {
     using T::operator();
     using index = std::integral_constant<std::size_t, N>;
-    using key = key_of_t<T>;
+    using key = identifier_of_t<T>;
     using inner_type = type_of_t<T>;
 
     KUMI_ABI constexpr T& operator()(index) & noexcept { return *this; }

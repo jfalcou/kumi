@@ -60,7 +60,7 @@ namespace kumi
       auto const call{[&](auto const N, auto&&... args) {
         if constexpr (concepts::record_type<T>)
         {
-          constexpr auto field = name_of<element_t<N, T>>();
+          constexpr auto field = identifier_of<element_t<N, T>>();
           return capture_field<field>(invoke(f, get<field>(args)...));
         }
         else return invoke(f, get<N>(KUMI_FWD(args))...);
@@ -167,7 +167,7 @@ namespace kumi
     else
     {
       auto const call{[&](auto const N, auto&&... args) {
-        constexpr auto field = name_of<element_t<N, T>>();
+        constexpr auto field = identifier_of<element_t<N, T>>();
         return capture_field<field>(invoke(f, _::make_str(field), (get<field>(args))...));
       }};
 

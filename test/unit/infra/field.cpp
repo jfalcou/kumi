@@ -82,19 +82,27 @@ TTS_CASE("Check kumi::tuple behavior with fields")
 
   auto t = kumi::tuple{"a"_id = x, "b"_id = y, "c"_id = std::ref(x), "d"_id = std::cref(y), "e"_id = z};
   auto nl = kumi::tuple{"a"_id, "b"_id, "c"_id, "d"_id, "e"_id};
+  auto ll = kumi::tuple{kumi::str{"a"}, kumi::str{"b"}, kumi::str{"c"}, kumi::str{"d"}, kumi::str{"e"}};
 
   auto pt = kumi::tuple{"a"_id = x, y, std::ref(x), "d"_id = std::cref(y), z};
   auto ptnl = kumi::tuple{"a"_id, kumi::unknown{}, kumi::unknown{}, "d"_id, kumi::unknown{}};
+  kumi::str unknown_str = kumi::unknown{};
+  auto ptll = kumi::tuple{kumi::str{"a"}, unknown_str, unknown_str, kumi::str{"d"}, unknown_str};
 
   constexpr auto dup = kumi::tuple{"a"_id = 3, "a"_id = 8};
   constexpr auto uni = kumi::tuple{"a"_id = 3, "b"_id = 8};
 
   TTS_TYPE_IS(tpl, decltype(t));
-  TTS_TYPE_IS(decltype(t.names()), decltype(nl));
-  TTS_TYPE_IS(decltype(pt.names()), decltype(ptnl));
+  TTS_TYPE_IS(decltype(t.identifiers()), decltype(nl));
+  TTS_TYPE_IS(decltype(pt.identifiers()), decltype(ptnl));
+  TTS_TYPE_IS(decltype(t.labels()), decltype(ll));
+  TTS_TYPE_IS(decltype(pt.labels()), decltype(ptll));
 
-  TTS_EQUAL(t.names(), nl);
-  TTS_EQUAL(pt.names(), ptnl);
+  TTS_EQUAL(t.identifiers(), nl);
+  TTS_EQUAL(pt.identifiers(), ptnl);
+
+  TTS_EQUAL(t.labels(), ll);
+  TTS_EQUAL(pt.labels(), ptll);
 
   TTS_EXPECT_NOT_COMPILES(dup, { get<"a"_id>(dup); });
   TTS_EXPECT_COMPILES(uni, { get<"a"_id>(uni); });

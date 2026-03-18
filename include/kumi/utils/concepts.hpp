@@ -338,7 +338,7 @@ namespace kumi
     //==================================================================================================================
     template<typename... Ts>
     concept unique_label =
-      (sizeof...(Ts) == 0) || (is_fully_named<Ts...> && (all_uniques_v<_::value<std::remove_cvref_t<Ts>::name()>...>));
+      (sizeof...(Ts) == 0) || (is_fully_named<Ts...> && (all_uniques_v<_::value<std::remove_cvref_t<Ts>::label()>...>));
 
     //==================================================================================================================
     /**

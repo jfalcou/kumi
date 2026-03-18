@@ -52,11 +52,12 @@ namespace kumi::_
   concept field = requires(O const& o) {
     typename std::remove_cvref_t<O>::type;
     typename std::remove_cvref_t<O>::identifier_type;
+    typename std::remove_cvref_t<O>::label_type;
     { o(typename std::remove_cvref_t<O>::identifier_type{}) };
-    { std::remove_cvref_t<O>::name() };
+    { std::remove_cvref_t<O>::label() };
   };
 
-  template<field T> struct key_of
+  template<field T> struct identifier_of
   {
     using type = typename std::remove_cvref_t<T>::identifier_type;
   };
@@ -66,8 +67,14 @@ namespace kumi::_
     using type = typename std::remove_cvref_t<T>::type;
   };
 
-  template<field T> using key_of_t = typename key_of<std::remove_cvref_t<T>>::type;
+  template<field T> struct label_of
+  {
+    using type = typename std::remove_cvref_t<T>::label_type;
+  };
+
+  template<field T> using identifier_of_t = typename identifier_of<std::remove_cvref_t<T>>::type;
   template<field T> using type_of_t = typename type_of<std::remove_cvref_t<T>>::type;
+  template<field T> using label_of_t = typename label_of<std::remove_cvref_t<T>>::type;
 
   //====================================================================================================================
   // Helper concepts for custom identifier
@@ -153,7 +160,7 @@ namespace kumi::_
   template<field F> struct check_value<F>
   {
     template<field T>
-    requires(std::is_same_v<key_of_t<F>, key_of_t<T>>)
+    requires(std::is_same_v<identifier_of_t<F>, identifier_of_t<T>>)
     static consteval type_of_t<F> get(T);
   };
 
@@ -250,7 +257,8 @@ namespace kumi::_
   {
   };
 
-  template<identifier Ref, field Field> struct match_by_tag<Ref, Field> : std::is_same<tag_of_t<Ref>, key_of_t<Field>>
+  template<identifier Ref, field Field>
+  struct match_by_tag<Ref, Field> : std::is_same<tag_of_t<Ref>, identifier_of_t<Field>>
   {
   };
 
@@ -272,7 +280,7 @@ namespace kumi::_
   {
   };
 
-  template<label Ref, field Field> struct match_by_label<Ref, Field> : std::bool_constant<Ref::value == Field::name()>
+  template<label Ref, field Field> struct match_by_label<Ref, Field> : std::bool_constant<Ref::value == Field::label()>
   {
   };
 

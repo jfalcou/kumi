@@ -32,20 +32,20 @@ namespace kumi
   //====================================================================================================================
   /**
     @ingroup utility
-    @brief Helper to retrive the index of a type in a product type by it s name
+    @brief Helper to retrive the index of a type in a product type by it s identifier
 
     @note This function does not participate in overload resolution if the product type has several instances of the
-          same name or has no name at all.
+          same identifier or has no identifier at all.
 
-    @return the index of the element labeled Name in the product type if it exist
+    @return the index of the element whose identifier matches Id in the product type if it exist
   **/
   //====================================================================================================================
-  template<concepts::identifier Name, concepts::product_type T>
-  requires(concepts::named_get_compliant<Name, T>)
+  template<concepts::identifier Id, concepts::product_type T>
+  requires(concepts::named_get_compliant<Id, T>)
   KUMI_ABI consteval auto get_index_of_field()
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return _::get_index_by_value_v<Name, element_t<I, T>...>;
+      return _::get_index_by_value_v<Id, element_t<I, T>...>;
     }(std::make_index_sequence<size_v<T>>{});
   }
 

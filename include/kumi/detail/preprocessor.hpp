@@ -100,14 +100,15 @@
   if constexpr (std::same_as<T, T##N>) return static_cast<T##N const&&>(member##N);
 
 #define KUMI_GET_NAME_LVALUE(N, I)                                                                                     \
-  if constexpr (field<T##N> && requires { member##N(I{}); }) return member##N(key_of_t<T##N>{});
+  if constexpr (field<T##N> && requires { member##N(I{}); }) return member##N(identifier_of_t<T##N>{});
 
 #define KUMI_GET_NAME_RVALUE(N, I)                                                                                     \
-  if constexpr (field<T##N> && requires { member##N(I{}); }) return static_cast<T##N&&>(member##N)(key_of_t<T##N>{});
+  if constexpr (field<T##N> && requires { member##N(I{}); })                                                           \
+    return static_cast<T##N&&>(member##N)(identifier_of_t<T##N>{});
 
 #define KUMI_GET_NAME_CONST_RVALUE(N, I)                                                                               \
   if constexpr (field<T##N> && requires { member##N(I{}); })                                                           \
-    return static_cast<T##N const&&>(member##N)(key_of_t<T##N>{});
+    return static_cast<T##N const&&>(member##N)(identifier_of_t<T##N>{});
 
 //======================================================================================================================
 // Macro used to define the optimized inner structure of a product type
