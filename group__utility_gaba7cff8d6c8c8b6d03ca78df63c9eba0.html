@@ -176,15 +176,15 @@ template&lt;concepts::product_type T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Extracts the names of the fields of a product type. </p>
-<dl class="section note"><dt>Note</dt><dd>If some fields are unnamed, the associated name is <a class="el" href="structkumi_1_1unit.html" title="A type representing the product of no type also called the unit type.">kumi::unit</a>.</dd></dl>
+<p>Extracts the identifiers of the fields of a product type. </p>
+<dl class="section note"><dt>Note</dt><dd>If some fields are unnamed, the associated identifier is <a class="el" href="structkumi_1_1unit.html" title="A type representing the product of no type also called the unit type.">kumi::unit</a>.</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>the type of the product type from which to extract names. </td></tr>
+    <tr><td class="paramname">T</td><td>the type of the product type from which to extract identifierss. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A tuple of the names of a product type if there are any.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>A tuple of the identifierss of a product type if there are any.</dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> </dd>
 <dd>
 <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a></dd></dl>
@@ -204,7 +204,7 @@ Example:</h2>
 <div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#gaba7cff8d6c8c8b6d03ca78df63c9eba0">kumi::members_of</a>(<a class="code hl_class" href="structkumi_1_1as.html">kumi::as</a>(t)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#gaba7cff8d6c8c8b6d03ca78df63c9eba0">kumi::members_of</a>(<a class="code hl_class" href="structkumi_1_1as.html">kumi::as</a>(r)) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__utility_gaba7cff8d6c8c8b6d03ca78df63c9eba0_html_gaba7cff8d6c8c8b6d03ca78df63c9eba0"><div class="ttname"><a href="#gaba7cff8d6c8c8b6d03ca78df63c9eba0">kumi::members_of</a></div><div class="ttdeci">constexpr auto members_of(as&lt; T &gt;) noexcept</div><div class="ttdoc">Extracts the names of the fields of a product type.</div><div class="ttdef"><b>Definition</b> meta.hpp:29</div></div>
+<div class="ttc" id="agroup__utility_gaba7cff8d6c8c8b6d03ca78df63c9eba0_html_gaba7cff8d6c8c8b6d03ca78df63c9eba0"><div class="ttname"><a href="#gaba7cff8d6c8c8b6d03ca78df63c9eba0">kumi::members_of</a></div><div class="ttdeci">constexpr auto members_of(as&lt; T &gt;) noexcept</div><div class="ttdoc">Extracts the identifiers of the fields of a product type.</div><div class="ttdef"><b>Definition</b> meta.hpp:29</div></div>
 <div class="ttc" id="astructkumi_1_1as_html"><div class="ttname"><a href="structkumi_1_1as.html">kumi::as</a></div><div class="ttdoc">Lightweight type-wrapper.</div><div class="ttdef"><b>Definition</b> as.hpp:29</div></div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>

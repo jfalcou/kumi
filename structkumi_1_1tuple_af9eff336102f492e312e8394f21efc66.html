@@ -125,7 +125,7 @@ $(function() { codefold.init(); });
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('structkumi_1_1tuple_ac84a73920267368533a3c8c9f5b760d8.html','',''); });
+$(function(){initNavTree('structkumi_1_1tuple_af9eff336102f492e312e8394f21efc66.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -151,16 +151,16 @@ $(function(){initNavTree('structkumi_1_1tuple_ac84a73920267368533a3c8c9f5b760d8.
 </div>
 
 <div class="contents">
-<a id="ac84a73920267368533a3c8c9f5b760d8" name="ac84a73920267368533a3c8c9f5b760d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ac84a73920267368533a3c8c9f5b760d8">&#9670;&#160;</a></span>operator[]() <span class="overload">[3/3]</span></h2>
+<a id="af9eff336102f492e312e8394f21efc66" name="af9eff336102f492e312e8394f21efc66"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#af9eff336102f492e312e8394f21efc66">&#9670;&#160;</a></span>operator[]() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
 template&lt;typename... Ts&gt; </div>
 <div class="memtemplate">
-template&lt;concepts::identifier Name&gt; <br />
-requires (concepts::uniquely_named&lt;Ts...&gt; &amp;&amp; concepts::contains_field&lt;Name, Ts...&gt;)</div>
+template&lt;concepts::identifier Id&gt; <br />
+requires (concepts::uniquely_named&lt;Ts...&gt; &amp;&amp; concepts::contains_field&lt;Id, Ts...&gt;)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -168,7 +168,7 @@ requires (concepts::uniquely_named&lt;Ts...&gt; &amp;&amp; concepts::contains_fi
         <tr>
           <td class="memname">decltype(auto) <a class="el" href="structkumi_1_1tuple.html">kumi::tuple</a>&lt; Ts &gt;::operator[] </td>
           <td>(</td>
-          <td class="paramtype">Name const &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td class="paramtype">Id const &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> &amp;</td>
         </tr>
       </table>
@@ -179,16 +179,16 @@ requires (concepts::uniquely_named&lt;Ts...&gt; &amp;&amp; concepts::contains_fi
 </table>
 </div><div class="memdoc">
 
-<p>Extracts the element labeled Name from a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>. </p>
-<dl class="section note"><dt>Note</dt><dd>Does not participate in overload resolution if there are no field tagged with Name in the tuple or if the tuple contains duplicate names. </dd></dl>
+<p>Extracts the element whose identifier matches Id from a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>. </p>
+<dl class="section note"><dt>Note</dt><dd>Does not participate in overload resolution if there are no field which identifier matches Id in the tuple or if the tuple contains duplicate identifiers. </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">Name</td><td>Identifier of the element to access </td></tr>
+    <tr><td class="paramname">Id</td><td>Identifier of the element to access </td></tr>
   </table>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to the selected element of current tuple.</dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md355"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md359"></a>
 Example:</h2>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>

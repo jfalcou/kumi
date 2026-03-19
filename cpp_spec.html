@@ -155,11 +155,11 @@ $(function(){initNavTree('cpp_spec.html','',''); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md__2____w_2kumi_2kumi_2doc_2glossary_2cpp__vocabulary"></a></p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md415"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md420"></a>
 Empty Base Optimization</h1>
 <p>EBO is a compiler optimization technique. In C++, even an empty struct (one with no data members) must have a size of at least 1 byte to ensure it has a unique address in memory.</p>
 <p>However, if that empty struct is used as a base class, the compiler is allowed to optimize that space away to 0 bytes. This is critical for high-performance libraries that use many "tag" types or "stateless" functors, as it prevents memory bloat.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md416"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md421"></a>
 Aggregate type</h1>
 <p>An Aggregate is a specific kind of class or struct in C++ that is "simple" enough to be initialized directly with braces {}.</p>
 <p>To be an aggregate, a type generally must have:</p>
@@ -169,11 +169,11 @@ Aggregate type</h1>
 <li>No virtual functions.</li>
 </ul>
 <p>Why it matters: Aggregates allow for Aggregate Initialization, which is often faster and allows for cleaner syntax than defining complex constructors.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md417"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md422"></a>
 Structural type</h1>
 <p>Introduced in C++20, a Structural Type is a class type that can be used as a Non-Type Template Parameter (NTTP).</p>
 <p>Previously, template parameters were limited to integers or pointers. Now, you can pass complex objects (like a fixed-size vector or a tuple) as a template argument, provided the type is "Structural" (roughly: public members, no complex copying logic).</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md418"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md423"></a>
 Tuple Protocol</h1>
 <p>The Tuple Protocol is a set of standardized "hooks" in the C++ Standard Library. By implementing these hooks for your custom class, you tell the compiler: "Treat my class like a tuple."</p>
 <p>To satisfy the protocol, a type T must specialize:</p>
@@ -184,7 +184,7 @@ Tuple Protocol</h1>
 <div class="line">type.get&lt;I&gt;() / get&lt;I&gt;(type); <span class="comment">//A function to access the element.</span></div>
 </div><!-- fragment --><p>Why is this useful? It enables Structured Bindings, allowing users to unpack your custom types easily</p>
 <p>This serves as a manual reflection mechanism, as C++ (prior to C++26) lacks a proper reflection mechanism to inspect structures, these functions specifications are giving the necessary informations to the compiler in order to natively adapt your structure to be a tuple.</p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md419"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md424"></a>
 Containers</h1>
 <p>In C++ containers are structures built in order to store data. There can be different kinds of containers such as dynamic containers (ex : <span class="tt">std::vector</span>), there are also static containers (ex: <span class="tt">std::array</span>) or associative ones (ex: <span class="tt">std::set</span>). These types are often focusing on storing homogeneous data, and some of them have properties ressembling product types, namely static contiguous containers. </p>
 </div></div><!-- contents -->

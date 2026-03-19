@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>KUMI: kumi::name::operator=</title>
+<title>KUMI: kumi::label_t&lt; Label &gt; Class Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -125,7 +125,7 @@ $(function() { codefold.init(); });
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('structkumi_1_1name_a511c2175f20315a1ba432266932e36b4.html','',''); });
+$(function(){initNavTree('structkumi_1_1label__t.html','','structkumi_1_1label__t-members'); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -150,46 +150,36 @@ $(function(){initNavTree('structkumi_1_1name_a511c2175f20315a1ba432266932e36b4.h
 </div>
 </div>
 
+<div class="header">
+  <div class="summary">
+<a href="#pub-methods">Public Member Functions</a> &#124;
+<a href="#pub-static-attribs">Static Public Attributes</a> &#124;
+<a href="structkumi_1_1label__t-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">kumi::label_t&lt; Label &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__types.html">Kumi Types</a></div></div></div>
+</div><!--header-->
 <div class="contents">
-<a id="a511c2175f20315a1ba432266932e36b4" name="a511c2175f20315a1ba432266932e36b4"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a511c2175f20315a1ba432266932e36b4">&#9670;&#160;</a></span>operator=()</h2>
 
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;<a class="el" href="structkumi_1_1str.html">str</a> ID&gt; </div>
-<div class="memtemplate">
-template&lt;typename T&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">auto <a class="el" href="structkumi_1_1name.html">kumi::name</a>&lt; ID &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
-          <td> const -&gt; <a class="el" href="structkumi_1_1field.html">field</a>&lt; <a class="el" href="structkumi_1_1name.html#a62214f6cc70adbcac24737f26cd0608c">tag_type</a>, std::unwrap_ref_decay_t&lt; T &gt; &gt;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
+<p>Literal constant type.  
+ <a href="#details">More...</a></p>
+
+<p><code>#include &lt;kumi/utils/ct_helpers.hpp&gt;</code></p>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><div class="compoundTemplParams">template&lt;<a class="el" href="structkumi_1_1str.html">str</a> Label&gt;<br />
+class kumi::label_t&lt; Label &gt;</div><p>Literal constant type. </p>
+<p>Defines a Literal constant wrapper used to carry compile-time strings through API </p>
+</div><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
+Public Member Functions</h2></td></tr>
+<tr class="memitem:a58ce455eeebdb8aa7acd5f3b57661279" id="r_a58ce455eeebdb8aa7acd5f3b57661279"><td class="memItemLeft"><a id="a58ce455eeebdb8aa7acd5f3b57661279" name="a58ce455eeebdb8aa7acd5f3b57661279"></a>
+constexpr&#160;</td><td class="memItemRight"><b>operator str</b> () const noexcept</td></tr>
+<tr class="memdesc:a58ce455eeebdb8aa7acd5f3b57661279"><td class="mdescLeft">&#160;</td><td class="mdescRight">Conversion operator to <a class="el" href="structkumi_1_1str.html" title="Static string used to create named fields.">kumi::str</a>. <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-pub-static-attribs" class="groupheader"><a id="pub-static-attribs" name="pub-static-attribs"></a>
+Static Public Attributes</h2></td></tr>
+<tr class="memitem:a34642061ea8a5537ca5bf9a551eb08ec" id="r_a34642061ea8a5537ca5bf9a551eb08ec"><td class="memItemLeft"><a id="a34642061ea8a5537ca5bf9a551eb08ec" name="a34642061ea8a5537ca5bf9a551eb08ec"></a>
+static constexpr auto&#160;</td><td class="memItemRight"><b>value</b> = Label</td></tr>
+<tr class="memdesc:a34642061ea8a5537ca5bf9a551eb08ec"><td class="mdescLeft">&#160;</td><td class="mdescRight">Value stored by the constant. <br /></td></tr>
 </table>
-</div><div class="memdoc">
-
-<p>Assignment of a value to a identifier. </p>
-<p>Bind a value to current name and returns an instance of a <a class="el" href="structkumi_1_1field.html" title="Named wrapper over a type.">kumi::field</a>.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">v</td><td>Bound value </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structkumi_1_1field.html" title="Named wrapper over a type.">kumi::field</a> binding the identifier to <span class="tt">v</span>. </dd></dl>
-
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
@@ -197,7 +187,7 @@ template&lt;typename T&gt; </div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="namespacekumi.html">kumi</a></li><li class="navelem"><a href="structkumi_1_1name.html">name</a></li>
+    <li class="navelem"><a href="namespacekumi.html">kumi</a></li><li class="navelem"><a href="structkumi_1_1label__t.html">label_t</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

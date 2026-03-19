@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>KUMI: kumi::tuple::operator[]</title>
+<title>KUMI: kumi::label_of</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -125,7 +125,7 @@ $(function() { codefold.init(); });
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('structkumi_1_1tuple_af6bbf8ab193e8a4d8de340aa150e30dc.html','',''); });
+$(function(){initNavTree('group__utility_gafe5ca3b16c26d385085be7a73a1fa374.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -151,64 +151,84 @@ $(function(){initNavTree('structkumi_1_1tuple_af6bbf8ab193e8a4d8de340aa150e30dc.
 </div>
 
 <div class="contents">
-<a id="af6bbf8ab193e8a4d8de340aa150e30dc" name="af6bbf8ab193e8a4d8de340aa150e30dc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af6bbf8ab193e8a4d8de340aa150e30dc">&#9670;&#160;</a></span>operator[]() <span class="overload">[1/3]</span></h2>
+<a id="gafe5ca3b16c26d385085be7a73a1fa374" name="gafe5ca3b16c26d385085be7a73a1fa374"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafe5ca3b16c26d385085be7a73a1fa374">&#9670;&#160;</a></span>label_of()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename... Ts&gt; </div>
-<div class="memtemplate">
-template&lt;typename T&gt; <br />
-requires (concepts::uniquely_typed&lt;Ts...&gt; &amp;&amp; concepts::contains_type&lt;T, Ts...&gt;)</div>
+template&lt;typename T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">decltype(auto) <a class="el" href="structkumi_1_1tuple.html">kumi::tuple</a>&lt; Ts &gt;::operator[] </td>
+          <td class="memname"><a class="el" href="structkumi_1_1str.html">str</a> kumi::label_of </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="structkumi_1_1as.html">as</a>&lt; T &gt;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td> &amp;</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel consteval">consteval</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Extracts the element with type T from a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>. </p>
-<dl class="section note"><dt>Note</dt><dd>Does not participate in overload resolution if <span class="tt">T</span> is not present in the tuple or if the tuple contains duplicate types </dd></dl>
+<p>Extracts the label from a <a class="el" href="conceptkumi_1_1concepts_1_1field.html" title="Concept specifying a type represent a field.">kumi::concepts::field</a> or returns the parameter. </p>
+<dl class="section note"><dt>Note</dt><dd>If the unqualified type of input does not model <a class="el" href="conceptkumi_1_1concepts_1_1field.html" title="Concept specifying a type represent a field.">kumi::concepts::field</a>, returns kumi::unkown. </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>the type to access in the tuple </td></tr>
+    <tr><td class="paramname">T</td><td>The type to extract label from. </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A reference to the selected element of the current tuple.</dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md354"></a>
+<dl class="section return"><dt>Returns</dt><dd>The label of the field as a <a class="el" href="structkumi_1_1str.html" title="Static string used to create named fields.">kumi::str</a>.</dd></dl>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md318"></a>
+Helper type</h2>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Ts&gt; <span class="keyword">struct </span><a class="code hl_function" href="#gafe5ca3b16c26d385085be7a73a1fa374">label_of</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">using </span>label_of_t = <span class="keyword">typename</span> name_of&lt;T&gt;::type;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__utility_gafe5ca3b16c26d385085be7a73a1fa374_html_gafe5ca3b16c26d385085be7a73a1fa374"><div class="ttname"><a href="#gafe5ca3b16c26d385085be7a73a1fa374">kumi::label_of</a></div><div class="ttdeci">consteval str label_of() noexcept</div><div class="ttdoc">Extracts the label from a kumi::concepts::field or returns the parameter.</div><div class="ttdef"><b>Definition</b> field.hpp:188</div></div>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gafe5ca3b16c26d385085be7a73a1fa374" title="Extracts the label from a kumi::concepts::field or returns the parameter.">kumi::label_of</a></p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md319"></a>
 Example:</h2>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
+<div class="line"><span class="keyword">struct </span>my_id : <a class="code hl_class" href="structkumi_1_1identifier.html">kumi::identifier</a>&lt;my_id&gt;</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_class" href="structkumi_1_1identifier.html">kumi::identifier</a>&lt;my_id&gt;::operator=; </div>
+<div class="line">  <span class="keyword">friend</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_function" href="group__utility_gaf4584fa9d1d39f32081265df16e00364.html#gaf4584fa9d1d39f32081265df16e00364">to_str</a>(my_id) { <span class="keywordflow">return</span> <a class="code hl_class" href="structkumi_1_1str.html">kumi::str</a>{<span class="stringliteral">&quot;Specific label&quot;</span>}; }</div>
+<div class="line">};</div>
+<div class="line"><span class="keyword">inline</span> <span class="keyword">constexpr</span> my_id my_kw{};</div>
+<div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> t = { 1, 2.3, 4.5f, <span class="charliteral">&#39;@&#39;</span> };</div>
+<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
 <div class="line"> </div>
-<div class="line">  <span class="comment">// It is possible to have mixed nammed and unnamed fields</span></div>
-<div class="line">  std::cout &lt;&lt; t[ kumi::as&lt;int&gt;{}    ] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; t[ kumi::as&lt;double&gt;{} ] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; t[ kumi::as&lt;float&gt;{}  ] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> <a class="code hl_class" href="structkumi_1_1field.html">field</a> = ( <span class="stringliteral">&quot;x&quot;</span>_id = 1 ); </div>
+<div class="line">  <span class="keywordtype">int</span> standard = { 12 };</div>
+<div class="line">  <span class="keyword">auto</span> custom = (my_kw = 255);</div>
 <div class="line"> </div>
-<div class="line">  t[<a class="code hl_class" href="structkumi_1_1as.html">kumi::as&lt;int&gt;</a>{}]++;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_class" href="structkumi_1_1field.html">field</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; kumi::label_of&lt;decltype(field)&gt;() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  </div>
+<div class="line">  std::cout &lt;&lt; standard &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; kumi::label_of&lt;decltype(standard)&gt;() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; t[kumi::as&lt;int&gt;{}] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; custom &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; kumi::label_of&lt;decltype(custom)&gt;() &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1as_html"><div class="ttname"><a href="structkumi_1_1as.html">kumi::as</a></div><div class="ttdoc">Lightweight type-wrapper.</div><div class="ttdef"><b>Definition</b> as.hpp:29</div></div>
-<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
+<div class="ttc" id="agroup__utility_gaf4584fa9d1d39f32081265df16e00364_html_gaf4584fa9d1d39f32081265df16e00364"><div class="ttname"><a href="group__utility_gaf4584fa9d1d39f32081265df16e00364.html#gaf4584fa9d1d39f32081265df16e00364">to_str</a></div><div class="ttdeci">kumi::str constexpr to_str(auto e)</div><div class="ttdoc">Provides an extension point to_str in order to output types with no textual representation defined.</div></div>
+<div class="ttc" id="astructkumi_1_1field_html"><div class="ttname"><a href="structkumi_1_1field.html">kumi::field</a></div><div class="ttdoc">Named wrapper over a type.</div><div class="ttdef"><b>Definition</b> field.hpp:26</div></div>
+<div class="ttc" id="astructkumi_1_1identifier_html"><div class="ttname"><a href="structkumi_1_1identifier.html">kumi::identifier</a></div><div class="ttdoc">identifier definition class</div><div class="ttdef"><b>Definition</b> identifier.hpp:85</div></div>
+<div class="ttc" id="astructkumi_1_1str_html"><div class="ttname"><a href="structkumi_1_1str.html">kumi::str</a></div><div class="ttdoc">Static string used to create named fields.</div><div class="ttdef"><b>Definition</b> str.hpp:24</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -219,7 +239,7 @@ Example:</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="namespacekumi.html">kumi</a></li><li class="navelem"><a href="structkumi_1_1tuple.html">tuple</a></li>
+    <li class="navelem"><a href="namespacekumi.html">kumi</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

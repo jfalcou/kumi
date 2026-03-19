@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['member_0',['member',['../structkumi_1_1member.html',1,'kumi']]]
+  ['label_5ft_0',['label_t',['../structkumi_1_1label__t.html',1,'kumi']]]
 ];

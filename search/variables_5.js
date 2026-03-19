@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['plus_0',['plus',['../group__utility.html#gab5c0eb8022e7b2df33286d9a15247559',1,'kumi::function']]]
+  ['only_0',['only',['../group__utility_ga6a8e75139bc622fbedae986420916d98.html#ga6a8e75139bc622fbedae986420916d98',1,'kumi']]]
 ];

@@ -186,7 +186,7 @@ template&lt;typename... Ts&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> constructed as <span class="tt"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>&lt;Ts&amp;&amp;...&gt;(std::forward&lt;Ts&gt;(args)...)</span> </dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md342"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md345"></a>
 Example:</h2>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -209,8 +209,8 @@ Example:</h2>
 <div class="line">  <span class="keywordflow">for</span>(<span class="keyword">auto</span> <span class="keyword">const</span>&amp; s : v)</div>
 <div class="line">    std::cout &lt;&lt; s &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__tuple__related_ga5288a0680596f3c52e7313b964a60746_html_ga5288a0680596f3c52e7313b964a60746"><div class="ttname"><a href="#ga5288a0680596f3c52e7313b964a60746">kumi::forward_as_tuple</a></div><div class="ttdeci">constexpr auto forward_as_tuple(Ts &amp;&amp;... ts) -&gt; tuple&lt; Ts &amp;&amp;... &gt;</div><div class="ttdoc">Creates a kumi::tuple of forwarding references to its arguments.</div><div class="ttdef"><b>Definition</b> tuple.hpp:484</div></div>
-<div class="ttc" id="astructkumi_1_1record_abc2cd329ad25d155458850c19cc3b137_html_abc2cd329ad25d155458850c19cc3b137"><div class="ttname"><a href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::record::get</a></div><div class="ttdeci">decltype(auto) constexpr get(record&lt; Ts... &gt; &amp;r) noexcept</div><div class="ttdoc">Extracts the Ith field from a kumi::record.</div><div class="ttdef"><b>Definition</b> record.hpp:554</div></div>
+<div class="ttc" id="agroup__tuple__related_ga5288a0680596f3c52e7313b964a60746_html_ga5288a0680596f3c52e7313b964a60746"><div class="ttname"><a href="#ga5288a0680596f3c52e7313b964a60746">kumi::forward_as_tuple</a></div><div class="ttdeci">constexpr auto forward_as_tuple(Ts &amp;&amp;... ts) -&gt; tuple&lt; Ts &amp;&amp;... &gt;</div><div class="ttdoc">Creates a kumi::tuple of forwarding references to its arguments.</div><div class="ttdef"><b>Definition</b> tuple.hpp:531</div></div>
+<div class="ttc" id="astructkumi_1_1record_abc2cd329ad25d155458850c19cc3b137_html_abc2cd329ad25d155458850c19cc3b137"><div class="ttname"><a href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::record::get</a></div><div class="ttdeci">decltype(auto) constexpr get(record&lt; Ts... &gt; &amp;r) noexcept</div><div class="ttdoc">Extracts the Ith field from a kumi::record.</div><div class="ttdef"><b>Definition</b> record.hpp:604</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

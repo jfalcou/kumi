@@ -97,9 +97,9 @@
     <templarg>typename T</templarg>
     <member kind="function" static="yes">
       <type>static constexpr auto</type>
-      <name>name</name>
+      <name>label</name>
       <anchorfile>structkumi_1_1field.html</anchorfile>
-      <anchor>af1f56e6cdc96a662408a06cd6e2b315d</anchor>
+      <anchor>acd309440c1fca78c1a64750e7a5482df</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function">
@@ -131,9 +131,9 @@
     <templarg>typename T</templarg>
     <member kind="function" static="yes">
       <type>static constexpr auto</type>
-      <name>name</name>
+      <name>label</name>
       <anchorfile>structkumi_1_1field_3_01Id_00_01T_01_4.html</anchorfile>
-      <anchor>af1f56e6cdc96a662408a06cd6e2b315d</anchor>
+      <anchor>acd309440c1fca78c1a64750e7a5482df</anchor>
       <arglist>()</arglist>
     </member>
     <member kind="function">
@@ -170,9 +170,9 @@
     <templarg>typename Checker</templarg>
     <member kind="typedef">
       <type>identifier&lt; ID, Checker &gt;</type>
-      <name>tag_type</name>
+      <name>type</name>
       <anchorfile>structkumi_1_1identifier.html</anchorfile>
-      <anchor>ac47d69746c95cdade5ce1b4ed27f420d</anchor>
+      <anchor>aae1d9bcd971d43f8831ba98f5d7e2678</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -192,9 +192,9 @@
     <member kind="function">
       <type>constexpr auto</type>
       <name>operator=</name>
-      <anchorfile>structkumi_1_1identifier_a798bf4a4c25e990142d2fdc70eba1a03.html</anchorfile>
-      <anchor>a798bf4a4c25e990142d2fdc70eba1a03</anchor>
-      <arglist>(T &amp;&amp;v) const noexcept -&gt; field&lt; tag_type, std::unwrap_ref_decay_t&lt; T &gt; &gt;</arglist>
+      <anchorfile>structkumi_1_1identifier_a1c3eec3787062fa1c863a85b41a2e7a1.html</anchorfile>
+      <anchor>a1c3eec3787062fa1c863a85b41a2e7a1</anchor>
+      <arglist>(T &amp;&amp;v) const noexcept -&gt; field&lt; type, std::unwrap_ref_decay_t&lt; T &gt; &gt;</arglist>
     </member>
     <member kind="friend">
       <type>friend constexpr str</type>
@@ -251,6 +251,25 @@
     <templarg>typename T</templarg>
     <templarg>typename Enable</templarg>
   </compound>
+  <compound kind="class">
+    <name>kumi::label_t</name>
+    <filename>structkumi_1_1label__t.html</filename>
+    <templarg>str Label</templarg>
+    <member kind="function">
+      <type>constexpr</type>
+      <name>operator str</name>
+      <anchorfile>structkumi_1_1label__t.html</anchorfile>
+      <anchor>a58ce455eeebdb8aa7acd5f3b57661279</anchor>
+      <arglist>() const noexcept</arglist>
+    </member>
+    <member kind="variable" static="yes">
+      <type>static constexpr auto</type>
+      <name>value</name>
+      <anchorfile>structkumi_1_1label__t.html</anchorfile>
+      <anchor>a34642061ea8a5537ca5bf9a551eb08ec</anchor>
+      <arglist></arglist>
+    </member>
+  </compound>
   <compound kind="struct">
     <name>kumi::member</name>
     <filename>structkumi_1_1member.html</filename>
@@ -263,17 +282,17 @@
     <templarg>str ID</templarg>
     <member kind="typedef">
       <type>name&lt; ID &gt;</type>
-      <name>tag_type</name>
+      <name>type</name>
       <anchorfile>structkumi_1_1name.html</anchorfile>
-      <anchor>a62214f6cc70adbcac24737f26cd0608c</anchor>
+      <anchor>a9bf8b825d5ec4deb4d1cb8b5c23f773f</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
       <name>operator=</name>
-      <anchorfile>structkumi_1_1name_a511c2175f20315a1ba432266932e36b4.html</anchorfile>
-      <anchor>a511c2175f20315a1ba432266932e36b4</anchor>
-      <arglist>(T &amp;&amp;v) const noexcept -&gt; field&lt; tag_type, std::unwrap_ref_decay_t&lt; T &gt; &gt;</arglist>
+      <anchorfile>structkumi_1_1name_ab790d203d4844751bdedb19c6bfbbd17.html</anchorfile>
+      <anchor>ab790d203d4844751bdedb19c6bfbbd17</anchor>
+      <arglist>(T &amp;&amp;v) const noexcept -&gt; field&lt; type, std::unwrap_ref_decay_t&lt; T &gt; &gt;</arglist>
     </member>
     <member kind="friend">
       <type>friend constexpr str</type>
@@ -378,9 +397,9 @@
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
-      <anchorfile>structkumi_1_1record_a5a012714bc455693e01bc348ce2b057b.html</anchorfile>
-      <anchor>a5a012714bc455693e01bc348ce2b057b</anchor>
-      <arglist>(index_t&lt; I &gt;) &amp;noexcept</arglist>
+      <anchorfile>structkumi_1_1record_ad0eeb720a68ac43d9e5913c75b068992.html</anchorfile>
+      <anchor>ad0eeb720a68ac43d9e5913c75b068992</anchor>
+      <arglist>(index_t&lt; I &gt; i) &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
@@ -406,9 +425,9 @@
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
-      <anchorfile>structkumi_1_1record_a361e3ac124ed31f363463832aa32522c.html</anchorfile>
-      <anchor>a361e3ac124ed31f363463832aa32522c</anchor>
-      <arglist>(as&lt; T &gt;) &amp;noexcept</arglist>
+      <anchorfile>structkumi_1_1record_a30d56483bff73e8ac6f112f5a17ead94.html</anchorfile>
+      <anchor>a30d56483bff73e8ac6f112f5a17ead94</anchor>
+      <arglist>(as&lt; T &gt; type) &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
@@ -434,30 +453,58 @@
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
-      <anchorfile>structkumi_1_1record_a25f8fd7cb11f94e3815c0045ae39c338.html</anchorfile>
-      <anchor>a25f8fd7cb11f94e3815c0045ae39c338</anchor>
-      <arglist>(Name const &amp;) &amp;noexcept</arglist>
+      <anchorfile>structkumi_1_1record_ad347f2f61642e15713a735da82aa3227.html</anchorfile>
+      <anchor>ad347f2f61642e15713a735da82aa3227</anchor>
+      <arglist>(label_t&lt; Name &gt; l) &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>ae1243103f72d4a853360bba2a3547d6a</anchor>
-      <arglist>(Name const &amp;) &amp;&amp;noexcept</arglist>
+      <anchor>a2bd46f22ff1e9cd7a43cbdac3cf02457</anchor>
+      <arglist>(label_t&lt; Name &gt;) &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>a3ad671ad04ef78be5cbdfa0583011fef</anchor>
-      <arglist>(Name const &amp;) const &amp;&amp;noexcept</arglist>
+      <anchor>adb6080eb80fbf13b05e59533ba6083a0</anchor>
+      <arglist>(label_t&lt; Name &gt;) const &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>a75cf6645da0961365030b311f167b602</anchor>
-      <arglist>(Name const &amp;) const &amp;noexcept</arglist>
+      <anchor>a4e487dd50e775bd8308edf064e1dbb3a</anchor>
+      <arglist>(label_t&lt; Name &gt;) const &amp;noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr decltype(auto)</type>
+      <name>operator[]</name>
+      <anchorfile>structkumi_1_1record_a7d9c27bccf896e8dea95d4820e0e35fc.html</anchorfile>
+      <anchor>a7d9c27bccf896e8dea95d4820e0e35fc</anchor>
+      <arglist>(Id const &amp;) &amp;noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr decltype(auto)</type>
+      <name>operator[]</name>
+      <anchorfile>structkumi_1_1record.html</anchorfile>
+      <anchor>a12ffffc69beb10ed487b9d2e070b70d7</anchor>
+      <arglist>(Id const &amp;) &amp;&amp;noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr decltype(auto)</type>
+      <name>operator[]</name>
+      <anchorfile>structkumi_1_1record.html</anchorfile>
+      <anchor>af891f7936e30a4aa0a96563f03e00a5b</anchor>
+      <arglist>(Id const &amp;) const &amp;&amp;noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr decltype(auto)</type>
+      <name>operator[]</name>
+      <anchorfile>structkumi_1_1record.html</anchorfile>
+      <anchor>a15e1fb26ade180f29e958269eb4c6079</anchor>
+      <arglist>(Id const &amp;) const &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -489,9 +536,16 @@
     </member>
     <member kind="function" static="yes">
       <type>static constexpr auto</type>
-      <name>names</name>
+      <name>identifiers</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>a9270cbaf244c6b4ee80cc66a175c95c7</anchor>
+      <anchor>ac730d46c3db986909e0c910b74648b4a</anchor>
+      <arglist>() noexcept</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static constexpr auto</type>
+      <name>labels</name>
+      <anchorfile>structkumi_1_1record.html</anchorfile>
+      <anchor>a57fe20038a1592ea37e9a8954c013d80</anchor>
       <arglist>() noexcept</arglist>
     </member>
     <member kind="friend">
@@ -693,9 +747,9 @@
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
-      <anchorfile>structkumi_1_1tuple_af6bbf8ab193e8a4d8de340aa150e30dc.html</anchorfile>
-      <anchor>af6bbf8ab193e8a4d8de340aa150e30dc</anchor>
-      <arglist>(as&lt; T &gt;) &amp;noexcept</arglist>
+      <anchorfile>structkumi_1_1tuple_a50763e7f0c357616c80c117e5ffebb96.html</anchorfile>
+      <anchor>a50763e7f0c357616c80c117e5ffebb96</anchor>
+      <arglist>(as&lt; T &gt; type) &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
@@ -721,30 +775,58 @@
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
-      <anchorfile>structkumi_1_1tuple_ac84a73920267368533a3c8c9f5b760d8.html</anchorfile>
-      <anchor>ac84a73920267368533a3c8c9f5b760d8</anchor>
-      <arglist>(Name const &amp;) &amp;noexcept</arglist>
+      <anchorfile>structkumi_1_1tuple_a27553b14c3ad269be9a594b8a69f0b27.html</anchorfile>
+      <anchor>a27553b14c3ad269be9a594b8a69f0b27</anchor>
+      <arglist>(label_t&lt; L &gt; s) &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a4e06223f547d9e3425c71ce7fd7562a6</anchor>
-      <arglist>(Name const &amp;) &amp;&amp;noexcept</arglist>
+      <anchor>ad1d0b273eff0d3f260443b83e6cc0b50</anchor>
+      <arglist>(label_t&lt; L &gt;) &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>ae2c97f7ff55e6be596702a09d20d04f6</anchor>
-      <arglist>(Name const &amp;) const &amp;&amp;noexcept</arglist>
+      <anchor>a97b7b58d7b6a1cf09c1817a0a5df141c</anchor>
+      <arglist>(label_t&lt; L &gt;) const &amp;&amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>operator[]</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a664320001d03a9ca98da755c47cf009d</anchor>
-      <arglist>(Name const &amp;) const &amp;noexcept</arglist>
+      <anchor>a9cb8ad18f9f5ff969541383debc6a0f9</anchor>
+      <arglist>(label_t&lt; L &gt;) const &amp;noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr decltype(auto)</type>
+      <name>operator[]</name>
+      <anchorfile>structkumi_1_1tuple_af9eff336102f492e312e8394f21efc66.html</anchorfile>
+      <anchor>af9eff336102f492e312e8394f21efc66</anchor>
+      <arglist>(Id const &amp;) &amp;noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr decltype(auto)</type>
+      <name>operator[]</name>
+      <anchorfile>structkumi_1_1tuple.html</anchorfile>
+      <anchor>aa466b37138d9ae9a83ab40ea375e718d</anchor>
+      <arglist>(Id const &amp;) &amp;&amp;noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr decltype(auto)</type>
+      <name>operator[]</name>
+      <anchorfile>structkumi_1_1tuple.html</anchorfile>
+      <anchor>a536d3ec9b6d2cabe509b4e16ba6c053b</anchor>
+      <arglist>(Id const &amp;) const &amp;&amp;noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr decltype(auto)</type>
+      <name>operator[]</name>
+      <anchorfile>structkumi_1_1tuple.html</anchorfile>
+      <anchor>ae3b5e2f57fff64172c560a48ca791c62</anchor>
+      <arglist>(Id const &amp;) const &amp;noexcept</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -776,9 +858,16 @@
     </member>
     <member kind="function" static="yes">
       <type>static constexpr auto</type>
-      <name>names</name>
+      <name>identifiers</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>afcd61db36e2c7c37134ef2bea60546eb</anchor>
+      <anchor>a20bf7b884e66f42a41076a4b1535054b</anchor>
+      <arglist>() noexcept</arglist>
+    </member>
+    <member kind="function" static="yes">
+      <type>static constexpr auto</type>
+      <name>labels</name>
+      <anchorfile>structkumi_1_1tuple.html</anchorfile>
+      <anchor>afcfee8fbd3a138d70cff1edb3485e61e</anchor>
       <arglist>() noexcept</arglist>
     </member>
     <member kind="friend">
@@ -964,6 +1053,10 @@
     <filename>conceptkumi_1_1concepts_1_1contains__field.html</filename>
   </compound>
   <compound kind="concept">
+    <name>kumi::concepts::contains_label</name>
+    <filename>conceptkumi_1_1concepts_1_1contains__label.html</filename>
+  </compound>
+  <compound kind="concept">
     <name>kumi::concepts::contains_type</name>
     <filename>conceptkumi_1_1concepts_1_1contains__type.html</filename>
   </compound>
@@ -1099,6 +1192,7 @@
     <class kind="struct">kumi::is_homogeneous</class>
     <class kind="struct">kumi::is_product_type</class>
     <class kind="struct">kumi::is_record_type</class>
+    <class kind="class">kumi::label_t</class>
     <class kind="struct">kumi::member</class>
     <class kind="class">kumi::name</class>
     <class kind="class">kumi::numeric_add</class>
@@ -1443,6 +1537,13 @@
     </member>
     <member kind="function">
       <type>consteval auto</type>
+      <name>identifier_of</name>
+      <anchorfile>group__utility_gab3919ec6f8098dd1fdafe9c3a79ef0dc.html</anchorfile>
+      <anchor>gab3919ec6f8098dd1fdafe9c3a79ef0dc</anchor>
+      <arglist>() noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>consteval auto</type>
       <name>identifiers</name>
       <anchorfile>group__utility_ga39745d8d55ea398d3e77d719b5bf14f9.html</anchorfile>
       <anchor>ga39745d8d55ea398d3e77d719b5bf14f9</anchor>
@@ -1517,6 +1618,13 @@
       <anchorfile>group__generators_ga19ced0b66d1e3dae7bfa60f7def6914f.html</anchorfile>
       <anchor>ga19ced0b66d1e3dae7bfa60f7def6914f</anchor>
       <arglist>(T v) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>consteval str</type>
+      <name>label_of</name>
+      <anchorfile>group__utility_gafe5ca3b16c26d385085be7a73a1fa374.html</anchorfile>
+      <anchor>gafe5ca3b16c26d385085be7a73a1fa374</anchor>
+      <arglist>() noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1624,13 +1732,6 @@
       <arglist>(T &amp;&amp;t, F f) noexcept</arglist>
     </member>
     <member kind="function">
-      <type>consteval auto</type>
-      <name>name_of</name>
-      <anchorfile>group__utility_ga3413ef51638ae8c63325bedd76a75b0a.html</anchorfile>
-      <anchor>ga3413ef51638ae8c63325bedd76a75b0a</anchor>
-      <arglist>() noexcept</arglist>
-    </member>
-    <member kind="function">
       <type>constexpr bool</type>
       <name>none_of</name>
       <anchorfile>group__queries_ga8094ec3fd9bb7b61c5a41319bd3f6766.html</anchorfile>
@@ -1656,6 +1757,13 @@
       <name>operator&quot;&quot;_id</name>
       <anchorfile>group__utility_ga10f2338fc8867a50a4295325873f3de4.html</anchorfile>
       <anchor>ga10f2338fc8867a50a4295325873f3de4</anchor>
+      <arglist>() noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>operator&quot;&quot;_l</name>
+      <anchorfile>group__utility_ga1eb529eb7ccadf0b5e632c132c2b9750.html</anchorfile>
+      <anchor>ga1eb529eb7ccadf0b5e632c132c2b9750</anchor>
       <arglist>() noexcept</arglist>
     </member>
     <member kind="function">
@@ -1873,6 +1981,13 @@
       <name>is_projection_map_v</name>
       <anchorfile>group__traits_ga3a312d9c4dd445cbd5d152c6a02ca015.html</anchorfile>
       <anchor>ga3a312d9c4dd445cbd5d152c6a02ca015</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr label_t&lt; Label &gt; const</type>
+      <name>label</name>
+      <anchorfile>group__utility.html</anchorfile>
+      <anchor>ga0d63dc26552fd8d5174222097404b569</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -2283,6 +2398,13 @@
     </member>
     <member kind="function">
       <type>consteval auto</type>
+      <name>kumi::identifier_of</name>
+      <anchorfile>group__utility_gab3919ec6f8098dd1fdafe9c3a79ef0dc.html</anchorfile>
+      <anchor>gab3919ec6f8098dd1fdafe9c3a79ef0dc</anchor>
+      <arglist>() noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>consteval auto</type>
       <name>kumi::identifiers</name>
       <anchorfile>group__utility_ga39745d8d55ea398d3e77d719b5bf14f9.html</anchorfile>
       <anchor>ga39745d8d55ea398d3e77d719b5bf14f9</anchor>
@@ -2310,6 +2432,13 @@
       <arglist>(C &amp;&amp;c, Ts &amp;&amp;... ts) noexcept(std::is_nothrow_invocable_r&lt; R, C, Ts... &gt;::value)</arglist>
     </member>
     <member kind="function">
+      <type>consteval str</type>
+      <name>kumi::label_of</name>
+      <anchorfile>group__utility_gafe5ca3b16c26d385085be7a73a1fa374.html</anchorfile>
+      <anchor>gafe5ca3b16c26d385085be7a73a1fa374</anchor>
+      <arglist>() noexcept</arglist>
+    </member>
+    <member kind="function">
       <type>consteval auto</type>
       <name>kumi::make_indexes</name>
       <anchorfile>group__utility_gadba148c334bcf52088dc64992c270fdd.html</anchorfile>
@@ -2324,13 +2453,6 @@
       <arglist>(as&lt; T &gt;) noexcept</arglist>
     </member>
     <member kind="function">
-      <type>consteval auto</type>
-      <name>kumi::name_of</name>
-      <anchorfile>group__utility_ga3413ef51638ae8c63325bedd76a75b0a.html</anchorfile>
-      <anchor>ga3413ef51638ae8c63325bedd76a75b0a</anchor>
-      <arglist>() noexcept</arglist>
-    </member>
-    <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::literals::operator&quot;&quot;_c</name>
       <anchorfile>group__utility_ga60825dffaa5ee2c50e1d1a24057bdcf1.html</anchorfile>
@@ -2342,6 +2464,13 @@
       <name>kumi::literals::operator&quot;&quot;_id</name>
       <anchorfile>group__utility_ga10f2338fc8867a50a4295325873f3de4.html</anchorfile>
       <anchor>ga10f2338fc8867a50a4295325873f3de4</anchor>
+      <arglist>() noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>kumi::literals::operator&quot;&quot;_l</name>
+      <anchorfile>group__utility_ga1eb529eb7ccadf0b5e632c132c2b9750.html</anchorfile>
+      <anchor>ga1eb529eb7ccadf0b5e632c132c2b9750</anchor>
       <arglist>() noexcept</arglist>
     </member>
     <member kind="function">
@@ -2422,6 +2551,13 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
+      <type>constexpr label_t&lt; Label &gt; const</type>
+      <name>kumi::label</name>
+      <anchorfile>group__utility.html</anchorfile>
+      <anchor>ga0d63dc26552fd8d5174222097404b569</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
       <type>constexpr numeric_prod</type>
       <name>kumi::function::multiplies</name>
       <anchorfile>group__utility.html</anchorfile>
@@ -2458,6 +2594,7 @@
     <class kind="class">kumi::field</class>
     <class kind="class">kumi::identifier</class>
     <class kind="class">kumi::index_t</class>
+    <class kind="class">kumi::label_t</class>
     <class kind="class">kumi::name</class>
     <class kind="class">kumi::str</class>
     <class kind="class">kumi::unit</class>
@@ -3056,6 +3193,7 @@
     <concept>kumi::concepts::compatible_product_types</concept>
     <concept>kumi::concepts::container</concept>
     <concept>kumi::concepts::contains_field</concept>
+    <concept>kumi::concepts::contains_label</concept>
     <concept>kumi::concepts::contains_type</concept>
     <concept>kumi::concepts::empty_product_type</concept>
     <concept>kumi::concepts::entirely_uniquely_named</concept>

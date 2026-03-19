@@ -9,7 +9,7 @@ var searchData=
   ['map_5freduce_6',['map_reduce',['../group__reductions_gace3f0fb4e67066f6f82052efd359b2b4.html#gace3f0fb4e67066f6f82052efd359b2b4',1,'kumi::map_reduce(Function f, M &amp;&amp;m, T &amp;&amp;t)'],['../group__reductions_gaa6b16ddb18150ef85f789e80593b68a2.html#gaa6b16ddb18150ef85f789e80593b68a2',1,'kumi::map_reduce(Function f, M &amp;&amp;m, T &amp;&amp;t, Value init)']]],
   ['max_7',['max',['../group__reductions_ga72159dc27be6b9aed9cc1d12ca019f28.html#ga72159dc27be6b9aed9cc1d12ca019f28',1,'kumi::max(T &amp;&amp;t) noexcept'],['../group__reductions_gae173eedc8b731830ea5df23aec9f14fa.html#gae173eedc8b731830ea5df23aec9f14fa',1,'kumi::max(T &amp;&amp;t, F f) noexcept']]],
   ['max_5fflat_8',['max_flat',['../group__reductions_gafa660a662111704882e6c9005f34f818.html#gafa660a662111704882e6c9005f34f818',1,'kumi']]],
-  ['member_9',['Member',['../nomenclature.html#autotoc_md430',1,'']]],
+  ['member_9',['Member',['../nomenclature.html#autotoc_md435',1,'']]],
   ['member_10',['member',['../structkumi_1_1member.html',1,'kumi']]],
   ['member_5fcast_11',['member_cast',['../group__generators_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c',1,'kumi']]],
   ['members_5fof_12',['members_of',['../group__utility_gaba7cff8d6c8c8b6d03ca78df63c9eba0.html#gaba7cff8d6c8c8b6d03ca78df63c9eba0',1,'kumi']]],

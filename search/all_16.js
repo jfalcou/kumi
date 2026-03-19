@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['s_20changed_0',['s Changed',['../changelog.html#autotoc_md394',1,'What&apos;s Changed'],['../changelog.html#autotoc_md399',1,'What&apos;s Changed'],['../changelog.html#autotoc_md405',1,'What&apos;s Changed'],['../changelog.html#autotoc_md409',1,'What&apos;s Changed']]],
+  ['s_20changed_0',['s Changed',['../changelog.html#autotoc_md399',1,'What&apos;s Changed'],['../changelog.html#autotoc_md404',1,'What&apos;s Changed'],['../changelog.html#autotoc_md410',1,'What&apos;s Changed'],['../changelog.html#autotoc_md414',1,'What&apos;s Changed']]],
   ['setup_1',['Setup',['../setup.html',1,'']]],
   ['setup_2',['Standalone setup',['../setup.html#setup-standalone',1,'']]],
   ['setup_20with_20cpm_3',['Setup with CPM',['../setup.html#setup-cpm',1,'']]],
@@ -14,7 +14,7 @@ var searchData=
   ['standalone_20setup_11',['Standalone setup',['../setup.html#setup-standalone',1,'']]],
   ['static_5fcontainer_12',['static_container',['../conceptkumi_1_1concepts_1_1static__container.html',1,'kumi::concepts']]],
   ['str_13',['str',['../structkumi_1_1str.html',1,'kumi']]],
-  ['structural_20type_14',['Structural type',['../cpp_spec.html#autotoc_md417',1,'']]],
+  ['structural_20type_14',['Structural type',['../cpp_spec.html#autotoc_md422',1,'']]],
   ['sum_15',['sum',['../group__reductions_ga183fa966de706e5e6c78a9cc50202fe8.html#ga183fa966de706e5e6c78a9cc50202fe8',1,'kumi::sum(T &amp;&amp;t, Value init)'],['../group__reductions_gaa96dfd76fe746fe28e1a833ad76c59fc.html#gaa96dfd76fe746fe28e1a833ad76c59fc',1,'kumi::sum(T &amp;&amp;t)']]],
-  ['summary_20table_16',['Summary Table',['../nomenclature.html#autotoc_md435',1,'']]]
+  ['summary_20table_16',['Summary Table',['../nomenclature.html#autotoc_md440',1,'']]]
 ];

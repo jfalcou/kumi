@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>KUMI: kumi::identifier::operator=</title>
+<title>KUMI: kumi::name::operator=</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -125,7 +125,7 @@ $(function() { codefold.init(); });
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('structkumi_1_1identifier_a798bf4a4c25e990142d2fdc70eba1a03.html','',''); });
+$(function(){initNavTree('structkumi_1_1name_ab790d203d4844751bdedb19c6bfbbd17.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -151,13 +151,13 @@ $(function(){initNavTree('structkumi_1_1identifier_a798bf4a4c25e990142d2fdc70eba
 </div>
 
 <div class="contents">
-<a id="a798bf4a4c25e990142d2fdc70eba1a03" name="a798bf4a4c25e990142d2fdc70eba1a03"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a798bf4a4c25e990142d2fdc70eba1a03">&#9670;&#160;</a></span>operator=()</h2>
+<a id="ab790d203d4844751bdedb19c6bfbbd17" name="ab790d203d4844751bdedb19c6bfbbd17"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ab790d203d4844751bdedb19c6bfbbd17">&#9670;&#160;</a></span>operator=()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename ID, typename Checker&gt; </div>
+template&lt;<a class="el" href="structkumi_1_1str.html">str</a> ID&gt; </div>
 <div class="memtemplate">
 template&lt;typename T&gt; </div>
 <table class="mlabels">
@@ -165,10 +165,10 @@ template&lt;typename T&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto <a class="el" href="structkumi_1_1identifier.html">kumi::identifier</a>&lt; ID, Checker &gt;::operator= </td>
+          <td class="memname">auto <a class="el" href="structkumi_1_1name.html">kumi::name</a>&lt; ID &gt;::operator= </td>
           <td>(</td>
           <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
-          <td> const -&gt; <a class="el" href="structkumi_1_1field.html">field</a>&lt; <a class="el" href="structkumi_1_1identifier.html#ac47d69746c95cdade5ce1b4ed27f420d">tag_type</a>, std::unwrap_ref_decay_t&lt; T &gt; &gt;</td>
+          <td> const -&gt; <a class="el" href="structkumi_1_1field.html">field</a>&lt; <a class="el" href="structkumi_1_1name.html#a9bf8b825d5ec4deb4d1cb8b5c23f773f">type</a>, std::unwrap_ref_decay_t&lt; T &gt; &gt;</td>
         </tr>
       </table>
   </td>
@@ -179,23 +179,15 @@ template&lt;typename T&gt; </div>
 </div><div class="memdoc">
 
 <p>Assignment of a value to a identifier. </p>
-<p>Bind a value to current <a class="el" href="structkumi_1_1identifier.html" title="identifier definition class">kumi::identifier</a> and returns an instance of a field.</p>
+<p>Bind a value to current name and returns an instance of a <a class="el" href="structkumi_1_1field.html" title="Named wrapper over a type.">kumi::field</a>.</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">v</td><td>Bound value </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>An <a class="el" href="structkumi_1_1field.html" title="Named wrapper over a type.">kumi::field</a> binding the identifier to <span class="tt">v</span>.</dd></dl>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
-<div class="line">  std::cout &lt;&lt; (<span class="stringliteral">&quot;value&quot;</span>_id = 42.1337) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">}</div>
-</div><!-- fragment --> 
+<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structkumi_1_1field.html" title="Named wrapper over a type.">kumi::field</a> binding the identifier to <span class="tt">v</span>. </dd></dl>
+
 </div>
 </div>
 </div><!-- contents -->
@@ -205,7 +197,7 @@ template&lt;typename T&gt; </div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="namespacekumi.html">kumi</a></li><li class="navelem"><a href="structkumi_1_1identifier.html">identifier</a></li>
+    <li class="navelem"><a href="namespacekumi.html">kumi</a></li><li class="navelem"><a href="structkumi_1_1name.html">name</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['value_5ftype_0',['value_type',['../structkumi_1_1is__container.html',1,'kumi']]]
+  ['unit_0',['unit',['../structkumi_1_1unit.html',1,'kumi']]],
+  ['unknown_1',['unknown',['../structkumi_1_1unknown.html',1,'kumi']]]
 ];
