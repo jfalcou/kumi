@@ -24,14 +24,15 @@ namespace kumi
   //====================================================================================================================
   template<typename Id, typename T> struct field
   {
+    /// Name associated to the field
+    static constexpr auto label() { return _::make_str(Id{}); }
+
     using type = T;
     using identifier_type = Id;
     using inner_type = std::type_identity<T>;
+    using label_type = std::integral_constant<kumi::str, label()>;
 
     T value;
-
-    /// Name associated to the field
-    static constexpr auto name() { return _::make_str(Id{}); }
 
     KUMI_ABI constexpr T& operator()(identifier_type) & noexcept { return value; }
 
@@ -48,6 +49,14 @@ namespace kumi
     KUMI_ABI constexpr T const& operator()(inner_type) const& noexcept { return value; }
 
     KUMI_ABI constexpr T const&& operator()(inner_type) const&& noexcept { return static_cast<T const&&>(value); }
+
+    KUMI_ABI constexpr T& operator()(label_type) & noexcept { return value; }
+
+    KUMI_ABI constexpr T&& operator()(label_type) && noexcept { return static_cast<T&&>(value); }
+
+    KUMI_ABI constexpr T const& operator()(label_type) const& noexcept { return value; }
+
+    KUMI_ABI constexpr T const&& operator()(label_type) const&& noexcept { return static_cast<T const&&>(value); }
 
     //==================================================================================================================
     /// @ingroup utility
@@ -66,12 +75,13 @@ namespace kumi
   requires(std::is_empty_v<T>)
   struct field<Id, T> : T
   {
+    /// Name associated to the field
+    static constexpr auto label() { return _::make_str(Id{}); }
+
     using type = T;
     using identifier_type = Id;
     using inner_type = std::type_identity<T>;
-
-    /// Name associated to the field
-    static constexpr auto name() { return _::make_str(Id{}); }
+    using label_type = std::integral_constant<kumi::str, label()>;
 
     KUMI_ABI constexpr T& operator()(identifier_type) & noexcept { return *this; }
 
@@ -89,6 +99,14 @@ namespace kumi
 
     KUMI_ABI constexpr T const&& operator()(inner_type) const&& noexcept { return static_cast<T const&&>(*this); }
 
+    KUMI_ABI constexpr T& operator()(label_type) & noexcept { return *this; }
+
+    KUMI_ABI constexpr T&& operator()(label_type) && noexcept { return static_cast<T&&>(*this); }
+
+    KUMI_ABI constexpr T const& operator()(label_type) const& noexcept { return *this; }
+
+    KUMI_ABI constexpr T const&& operator()(label_type) const&& noexcept { return static_cast<T const&&>(*this); }
+
     //==================================================================================================================
     /// @ingroup utility
     //! @related kumi::field
@@ -97,7 +115,8 @@ namespace kumi
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, field const& w) noexcept
     {
-      return os << _::make_str(std::remove_cvref_t<Id>{}) << " : " << _::make_streamable(w(_::key_of_t<decltype(w)>{}));
+      return os << _::make_str(std::remove_cvref_t<Id>{}) << " : "
+                << _::make_streamable(w(_::identifier_of_t<decltype(w)>{}));
     }
   };
 
@@ -113,31 +132,62 @@ namespace kumi
   //====================================================================================================================
   /**
     @ingroup  utility
-    @brief    Extracts the name from a kumi::concepts::field or returns the parameter.
+    @brief    Extracts the identifiers from a kumi::concepts::field or returns the parameter.
 
     @note     If the unqualified type of input does not model kumi::concepts::field, returns kumi::unkown.
-    @tparam   T The name to extract name from.
-    @return   The name of the field or kumi::unknown.
+    @tparam   T The type to extract the identifier from.
+    @return   The identifier of the field or kumi::unknown.
 
     ## Helper type
     @code
     namespace kumi::result
     {
-      template<typename Ts> struct name_of;
+      template<typename Ts> struct identifier_of;
 
-      template<typename T> using name_of_t = typename name_of<T>::type;
+      template<typename T> using identifier_of_t = typename identifier_of<T>::type;
     }
     @endcode
 
-    Computes the return type of a call to kumi::name_of
+    Computes the return type of a call to kumi::identifier_of
 
     ## Example:
-    @include doc/infra/name_of.cpp
+    @include doc/infra/identifier_of.cpp
   **/
   //====================================================================================================================
-  template<typename T> [[nodiscard]] KUMI_ABI consteval auto name_of() noexcept
+  template<typename T> [[nodiscard]] KUMI_ABI consteval auto identifier_of() noexcept
   {
-    if constexpr (_::field<T>) return _::key_of_t<T>{};
+    if constexpr (_::field<T>) return _::identifier_of_t<T>{};
+    else return kumi::unknown{};
+  };
+
+  //====================================================================================================================
+  /**
+    @ingroup  utility
+    @brief    Extracts the label from a kumi::concepts::field or returns the parameter.
+
+    @note     If the unqualified type of input does not model kumi::concepts::field, returns kumi::unkown.
+    @tparam   T The type to extract label from.
+    @return   The label of the field as a kumi::str.
+
+    ## Helper type
+    @code
+    namespace kumi::result
+    {
+      template<typename Ts> struct label_of;
+
+      template<typename T> using label_of_t = typename name_of<T>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::label_of
+
+    ## Example:
+    @include doc/infra/label_of.cpp
+  **/
+  //====================================================================================================================
+  template<typename T> [[nodiscard]] KUMI_ABI consteval str label_of() noexcept
+  {
+    if constexpr (_::field<T>) return _::label_of_t<T>{};
     else return kumi::unknown{};
   };
 
@@ -169,7 +219,7 @@ namespace kumi
   //====================================================================================================================
   template<typename T> [[nodiscard]] KUMI_ABI constexpr decltype(auto) field_value_of(T&& t) noexcept
   {
-    if constexpr (_::field<T>) return (KUMI_FWD(t)(_::key_of_t<T>{}));
+    if constexpr (_::field<T>) return (KUMI_FWD(t)(_::identifier_of_t<T>{}));
     else return KUMI_FWD(t);
   };
 
@@ -236,16 +286,22 @@ namespace kumi
   template<typename U, typename T> [[nodiscard]] KUMI_ABI constexpr decltype(auto) field_cast(T&& t) noexcept
   {
     if constexpr (_::field<U>)
-      return field<_::key_of_t<T>, _::type_of_t<U>>{static_cast<_::type_of_t<U>>(KUMI_FWD(t)(_::key_of_t<T>{}))};
+      return field<_::identifier_of_t<T>, _::type_of_t<U>>{
+        static_cast<_::type_of_t<U>>(KUMI_FWD(t)(_::identifier_of_t<T>{}))};
     else if constexpr (!_::field<T>) return static_cast<_::type_of_t<U>>(KUMI_FWD(t));
-    else return field<_::key_of_t<T>, U>{static_cast<U>(KUMI_FWD(t)(_::key_of_t<T>{}))};
+    else return field<_::identifier_of_t<T>, U>{static_cast<U>(KUMI_FWD(t)(_::identifier_of_t<T>{}))};
   }
 
   namespace result
   {
-    template<typename T> struct name_of
+    template<typename T> struct identifier_of
     {
-      using type = decltype(kumi::name_of<T>());
+      using type = decltype(kumi::identifier_of<T>());
+    };
+
+    template<typename T> struct label_of
+    {
+      using type = decltype(kumi::label_of<T>());
     };
 
     template<typename T> struct field_value_of
@@ -263,7 +319,9 @@ namespace kumi
       using type = decltype(kumi::field_cast<U, T>(std::declval<T>()));
     };
 
-    template<typename T> using name_of_t = typename name_of<T>::type;
+    template<typename T> using identifier_of_t = typename identifier_of<T>::type;
+
+    template<typename T> using label_of_t = typename label_of<T>::type;
 
     template<typename T> using field_value_of_t = typename field_value_of<T>::type;
 

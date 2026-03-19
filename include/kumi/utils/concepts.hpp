@@ -338,7 +338,7 @@ namespace kumi
     //==================================================================================================================
     template<typename... Ts>
     concept unique_label =
-      (sizeof...(Ts) == 0) || (is_fully_named<Ts...> && (all_uniques_v<_::value<std::remove_cvref_t<Ts>::name()>...>));
+      (sizeof...(Ts) == 0) || (is_fully_named<Ts...> && (all_uniques_v<_::value<std::remove_cvref_t<Ts>::label()>...>));
 
     //==================================================================================================================
     /**
@@ -371,6 +371,18 @@ namespace kumi
     //==================================================================================================================
     template<typename Name, typename... Ts>
     concept contains_field = identifier<Name> && kumi::_::can_get_field_by_value<Name, Ts...>;
+
+    //==================================================================================================================
+    /**
+      @ingroup concepts
+      @brief Concept specifying if the label of a type modeling kumi::concepts::identifier is present in the parameter
+      pack. The label is considered present if a type in Ts modeling kumi::concepts::field is labeled with the same
+      tag as the given identifier.
+    **/
+    //==================================================================================================================
+    template<typename Label, typename... Ts>
+    concept contains_label = std::is_same_v<std::remove_cvref_t<decltype(std::remove_cvref_t<Label>::value)>, str> &&
+                             kumi::_::can_get_field_by_label<std::remove_cvref_t<Label>, Ts...>;
 
     //==================================================================================================================
     /**

@@ -32,20 +32,20 @@ namespace kumi
   //====================================================================================================================
   /**
     @ingroup utility
-    @brief Helper to retrive the index of a type in a product type by it s name
+    @brief Helper to retrive the index of a type in a product type by it s identifier
 
     @note This function does not participate in overload resolution if the product type has several instances of the
-          same name or has no name at all.
+          same identifier or has no identifier at all.
 
-    @return the index of the element labeled Name in the product type if it exist
+    @return the index of the element whose identifier matches Id in the product type if it exist
   **/
   //====================================================================================================================
-  template<concepts::identifier Name, concepts::product_type T>
-  requires(concepts::named_get_compliant<Name, T>)
+  template<concepts::identifier Id, concepts::product_type T>
+  requires(concepts::named_get_compliant<Id, T>)
   KUMI_ABI consteval auto get_index_of_field()
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return _::get_index_by_value_v<Name, element_t<I, T>...>;
+      return _::get_index_by_value_v<Id, element_t<I, T>...>;
     }(std::make_index_sequence<size_v<T>>{});
   }
 
@@ -74,6 +74,40 @@ namespace kumi
   **/
   //====================================================================================================================
   template<std::size_t N> inline constexpr index_t<N> const index = {};
+
+  //====================================================================================================================
+  /**
+    @ingroup types
+    @class label_t
+    @brief Literal constant type
+
+    Defines a Literal constant wrapper used to carry compile-time strings through API
+  **/
+  //====================================================================================================================
+  template<str Label> struct label_t
+  {
+    using type = str;
+
+    /// Value stored by the constant
+    static constexpr auto value = Label;
+
+    /// Conversion operator to kumi::str
+    constexpr inline operator str() const noexcept { return Label; }
+
+    template<typename CharT, typename Traits>
+    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, label_t const&) noexcept
+    {
+      return os << value;
+    }
+  };
+
+  //====================================================================================================================
+  /**
+    @ingroup utility
+    @brief Inline literal constant value for kumi::label_t
+  **/
+  //====================================================================================================================
+  template<str Label> inline constexpr label_t<Label> const label = {};
 
   //====================================================================================================================
   /**
@@ -116,6 +150,24 @@ namespace kumi
     template<kumi::str ID> constexpr auto operator""_id() noexcept
     {
       return name<ID>{};
+    }
+
+    //==================================================================================================================
+    /**
+      @ingroup utility
+      @brief Forms a constant string literal of the desired value.
+      @return An instance of kumi::label for the specified string
+
+      @note It differs from the ""_id operator on the type and the overload that it will pick up. An identifier
+      and a label are two different parts of a field. Label represents the value that is displayed.
+
+      ##Example:
+      @include doc/infra/label.cpp
+    **/
+    //==================================================================================================================
+    template<kumi::str ID> constexpr auto operator""_l() noexcept
+    {
+      return label<ID>;
     }
   }
 
