@@ -47,8 +47,9 @@ namespace kumi
   {
     using type = std::remove_cvref_t<ID>;
 
-    constexpr identifier() noexcept {};
-    constexpr identifier(ID const&) noexcept {};
+    constexpr identifier() noexcept {}
+
+    constexpr identifier(ID const&) noexcept {}
 
     template<typename T> constexpr field<type, std::unwrap_ref_decay_t<T>> operator=(T&& v) const noexcept
     {
@@ -90,7 +91,7 @@ namespace kumi
     friend constexpr str to_str(identifier<ID, Checker> const&) { return _::make_str(ID{}); }
 
     //! @brief Default constructor
-    constexpr identifier() noexcept {};
+    constexpr identifier() noexcept {}
 
     //==================================================================================================================
     /**
@@ -102,7 +103,7 @@ namespace kumi
       @include doc/infra/only.cpp
     **/
     //==================================================================================================================
-    constexpr identifier([[maybe_unused]] ID const& id, [[maybe_unused]] Checker const& check) noexcept {};
+    constexpr identifier([[maybe_unused]] ID const& id, [[maybe_unused]] Checker const& check) noexcept {}
 
     //==================================================================================================================
     /**
@@ -205,7 +206,7 @@ namespace kumi
       else if constexpr (concepts::index<decltype(N)>) return false;
       else if constexpr (concepts::identifier<std::remove_cvref_t<decltype(N)>>) return false;
       else return can_get_field_by_value<name<N>, Ts...>;
-    };
+    }
 
     template<auto N, typename... Ts> KUMI_ABI constexpr auto contains_label()
     {

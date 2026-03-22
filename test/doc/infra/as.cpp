@@ -13,7 +13,7 @@ void display (kumi::as<T>)
     std::cout << "Type is void\n";
   else
     std::cout << "Other type\n";
-};
+}
 
 int main()
 {

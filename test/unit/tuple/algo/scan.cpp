@@ -23,7 +23,7 @@ template<Direction d> struct sizeof_monoid
   {
     if constexpr (d == Direction::left) return sizeof(b);
     else return sizeof(a);
-  };
+  }
 
   static constexpr std::size_t identity = 0;
 };
@@ -34,7 +34,7 @@ template<Direction d> struct acc_monoid
   {
     if constexpr (d == Direction::left) return a + sizeof(b);
     else return b + sizeof(a);
-  };
+  }
 
   static constexpr std::size_t identity = 0;
 };

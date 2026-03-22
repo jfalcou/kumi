@@ -238,10 +238,10 @@ namespace kumi
     [[nodiscard]] KUMI_ABI static constexpr bool empty() noexcept { return sizeof...(Ts) == 0; }
 
     /// Returns the identifier associated to the elements of a kumi::tuple
-    [[nodiscard]] KUMI_ABI static constexpr auto identifiers() noexcept { return kumi::tuple{identifier_of<Ts>()...}; };
+    [[nodiscard]] KUMI_ABI static constexpr auto identifiers() noexcept { return kumi::tuple{identifier_of<Ts>()...}; }
 
     /// Returns the labels associated to the elements of a kumi::tuple
-    [[nodiscard]] KUMI_ABI static constexpr auto labels() noexcept { return kumi::tuple{label_of<Ts>()...}; };
+    [[nodiscard]] KUMI_ABI static constexpr auto labels() noexcept { return kumi::tuple{label_of<Ts>()...}; }
     //==================================================================================================================
     //! @}
     //==================================================================================================================
@@ -452,14 +452,14 @@ namespace kumi
     requires(concepts::unit_type<T>)
     {
       return {};
-    };
+    }
 
     template<typename T>
     [[nodiscard]] KUMI_ABI constexpr operator T() noexcept
     requires(concepts::unit_type<T>)
     {
       return {};
-    };
+    }
 
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, tuple<>) noexcept

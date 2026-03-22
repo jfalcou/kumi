@@ -28,14 +28,14 @@ namespace kumi
     requires(concepts::unit_type<T>)
     {
       return {};
-    };
+    }
 
     template<typename T>
     [[nodiscard]] KUMI_ABI constexpr operator T() noexcept
     requires(concepts::unit_type<T>)
     {
       return {};
-    };
+    }
 
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, unit) noexcept

@@ -36,7 +36,7 @@ namespace kumi
 
     consteval projection_map() noexcept = default;
 
-    consteval explicit projection_map(V...) noexcept {};
+    consteval explicit projection_map(V...) noexcept {}
 
     //==================================================================================================================
     /**
@@ -46,10 +46,10 @@ namespace kumi
     //==================================================================================================================
 
     /// Returns the number of elements in a kumi::indexes_t
-    [[nodiscard]] KUMI_ABI static constexpr auto size() noexcept { return sizeof...(V); };
+    [[nodiscard]] KUMI_ABI static constexpr auto size() noexcept { return sizeof...(V); }
 
     /// Returns `true` if a kumi::indexes_t contains 0 elements
-    [[nodiscard]] KUMI_ABI static constexpr auto empty() noexcept { return sizeof...(V) == 0; };
+    [[nodiscard]] KUMI_ABI static constexpr auto empty() noexcept { return sizeof...(V) == 0; }
 
     //==================================================================================================================
     //! @}

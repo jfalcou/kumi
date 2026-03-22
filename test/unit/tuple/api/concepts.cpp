@@ -23,14 +23,14 @@ struct cmp
 
 struct strange
 {
-  constexpr float operator==(strange const&) const { return -1.f; };
+  constexpr float operator==(strange const&) const { return -1.f; }
 };
 
 struct other_cmp
 {
-  constexpr float operator==(other_cmp const&) const { return true; };
+  constexpr float operator==(other_cmp const&) const { return true; }
 
-  constexpr float operator==(cmp const&) const { return false; };
+  constexpr float operator==(cmp const&) const { return false; }
 };
 
 TTS_CASE("Check concepts::equality_comparable for tuple")

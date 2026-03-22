@@ -29,7 +29,7 @@ namespace kumi
 
       if constexpr (std::is_member_object_pointer_v<callable_t>) return KUMI_FWD(ptr).*member;
       else return (KUMI_FWD(ptr).*member)(KUMI_FWD(ts)...);
-    };
+    }
   }
 
   //====================================================================================================================
@@ -50,7 +50,7 @@ namespace kumi
   {
     if constexpr (std::is_member_pointer_v<std::decay_t<C>>) return _::invoke_memptr(c, KUMI_FWD(ts)...);
     else return KUMI_FWD(c)(KUMI_FWD(ts)...);
-  };
+  }
 
   //====================================================================================================================
   /**
@@ -71,5 +71,5 @@ namespace kumi
   {
     if constexpr (std::is_void_v<R>) invoke(KUMI_FWD(c), KUMI_FWD(ts)...);
     else return invoke(KUMI_FWD(c), KUMI_FWD(ts)...);
-  };
+  }
 }

@@ -121,5 +121,5 @@ namespace kumi
     }(std::make_index_sequence<nb_strs>{});
 
     return str{that.t};
-  };
+  }
 }
