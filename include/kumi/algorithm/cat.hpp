@@ -46,7 +46,7 @@ namespace kumi
     if constexpr (sizeof...(Ts) == 0) return tuple{};
     else
     {
-      constexpr auto pos = _::concatenater(std::index_sequence<size_v<Ts>...>{});
+      constexpr auto pos = function::concatenater(std::index_sequence<size_v<Ts>...>{});
       using res_type = common_product_type_t<std::remove_cvref_t<Ts>...>;
 
       return [&]<typename T, std::size_t... E, std::size_t... N>(T&& t, std::index_sequence<E...>,

@@ -43,7 +43,7 @@ namespace kumi
     if constexpr (concepts::empty_product_type<T>) return KUMI_FWD(t);
     else
     {
-      constexpr auto pos = _::uniqued(as<T>{});
+      constexpr auto pos = function::uniqued(as<T>{});
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         using ret_t = builder_make_t<T, element_t<pos.t[I], T>...>;
         return ret_t{get<pos.t[I]>(KUMI_FWD(t))...};
@@ -87,7 +87,7 @@ namespace kumi
     else
     {
       constexpr auto proj = [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return _::uniquer(std::type_identity<raw_element_t<I, T>>{}...);
+        return function::uniquer(std::type_identity<raw_element_t<I, T>>{}...);
       }(std::make_index_sequence<size_v<T>>{});
 
       return [&]<std::size_t... I>(std::index_sequence<I...>) {

@@ -50,7 +50,7 @@ namespace kumi
     {
       constexpr std::size_t count = size_v<T>;
       constexpr std::size_t size = size_v<element_t<0, T>>;
-      constexpr auto pos = _::zipper(index<count>, index<size>);
+      constexpr auto pos = function::zipper(index<count>, index<size>);
 
       auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>) {
         using type = builder_make_t<element_t<0, T>, element_t<k, std::remove_cvref_t<element_t<I, T>>>...>;

@@ -7,7 +7,7 @@
 //==================================================================================================
 #pragma once
 
-namespace kumi::_
+namespace kumi
 {
   template<typename F, typename... Ts> KUMI_ABI constexpr auto bind_front(F&& f, Ts&&... ts)
   {

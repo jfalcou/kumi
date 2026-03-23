@@ -50,7 +50,7 @@ namespace kumi
     else if constexpr (concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
     else
     {
-      constexpr auto pos = _::reducer(index<size_v<T>>);
+      constexpr auto pos = function::reducer(index<size_v<T>>);
 
       return [&]<std::size_t... F, std::size_t... S>(std::index_sequence<F...>, std::index_sequence<S...>) {
         if constexpr (pos.rest == 1)
@@ -148,7 +148,7 @@ namespace kumi
     else if constexpr (concepts::sized_product_type<T, 1>) return invoke(f, get<0>(KUMI_FWD(t)));
     else
     {
-      constexpr auto pos = _::reducer(index<size_v<T>>);
+      constexpr auto pos = function::reducer(index<size_v<T>>);
 
       return [&]<std::size_t... F, std::size_t... S>(std::index_sequence<F...>, std::index_sequence<S...>) {
         if constexpr (pos.rest == 1)

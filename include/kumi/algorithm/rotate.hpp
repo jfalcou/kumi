@@ -48,7 +48,7 @@ namespace kumi
     else if constexpr ((R % size_v<T>) == 0) return KUMI_FWD(t);
     else
     {
-      constexpr auto idxs = _::rotater(index<size_v<T>>, index<(R % size_v<T>)>);
+      constexpr auto idxs = function::rotater(index<size_v<T>>, index<(R % size_v<T>)>);
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         using type = builder_make_t<T, element_t<I, T>...>;
         return type{get<I>(KUMI_FWD(t))...};
@@ -96,7 +96,7 @@ namespace kumi
     else
     {
       constexpr auto F = R % size_v<T>;
-      constexpr auto idxs = _::rotater(index<size_v<T>>, index<(size_v<T> - F)>);
+      constexpr auto idxs = function::rotater(index<size_v<T>>, index<(size_v<T> - F)>);
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         using type = builder_make_t<T, element_t<I, T>...>;
         return type{get<I>(KUMI_FWD(t))...};

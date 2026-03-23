@@ -54,8 +54,8 @@ namespace kumi
     {
       auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::scannable{op, invoke(f, init, get<0>(KUMI_FWD(t)))} >> ... >>
-                _::bind_back(f, get<I + 1>(KUMI_FWD(t))))();
+        return (function::scannable{op, invoke(f, init, get<0>(KUMI_FWD(t)))} >> ... >>
+                bind_back(f, get<I + 1>(KUMI_FWD(t))))();
       }(std::make_index_sequence<size_v<T> - 1>{});
     }
   }
@@ -147,7 +147,7 @@ namespace kumi
     {
       auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::scannable{op, init} >> ... >> _::bind_back(f, get<I>(KUMI_FWD(t))))();
+        return (function::scannable{op, init} >> ... >> bind_back(f, get<I>(KUMI_FWD(t))))();
       }(std::make_index_sequence<size_v<T> - 1>{});
     }
   }
@@ -239,8 +239,8 @@ namespace kumi
     {
       auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::bind_front(f, get<I>(KUMI_FWD(t)))
-                << ... << _::scannable{op, invoke(f, get<size_v<T> - 1>(KUMI_FWD(t)), init)})();
+        return (bind_front(f, get<I>(KUMI_FWD(t)))
+                << ... << function::scannable{op, invoke(f, get<size_v<T> - 1>(KUMI_FWD(t)), init)})();
       }(std::make_index_sequence<size_v<T> - 1>{});
     }
   }
@@ -332,7 +332,7 @@ namespace kumi
     {
       auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::bind_front(f, get<I + 1>(KUMI_FWD(t))) << ... << _::scannable{op, init})();
+        return (bind_front(f, get<I + 1>(KUMI_FWD(t))) << ... << function::scannable{op, init})();
       }(std::make_index_sequence<size_v<T> - 1>{});
     }
   }

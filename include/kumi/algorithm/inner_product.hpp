@@ -73,16 +73,16 @@ namespace kumi
     else if constexpr (concepts::record_type<S1>)
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::foldable{init} >> ... >>
-                _::bind_back(sum, invoke(prod, get<identifier_of<element_t<I, S1>>()>(KUMI_FWD(s1)),
-                                         get<identifier_of<element_t<I, S1>>()>(KUMI_FWD(s2)))))();
+        return (function::foldable{init} >> ... >>
+                bind_back(sum, invoke(prod, get<identifier_of<element_t<I, S1>>()>(KUMI_FWD(s1)),
+                                      get<identifier_of<element_t<I, S1>>()>(KUMI_FWD(s2)))))();
       }(std::make_index_sequence<size_v<S1>>());
     }
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::foldable{init} >> ... >>
-                _::bind_back(sum, invoke(prod, get<I>(KUMI_FWD(s1)), get<I>(KUMI_FWD(s2)))))();
+        return (function::foldable{init} >> ... >>
+                bind_back(sum, invoke(prod, get<I>(KUMI_FWD(s1)), get<I>(KUMI_FWD(s2)))))();
       }(std::make_index_sequence<size_v<S1>>{});
     }
   }

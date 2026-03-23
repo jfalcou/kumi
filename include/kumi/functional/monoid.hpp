@@ -7,7 +7,7 @@
 //======================================================================================================================
 #pragma once
 
-namespace kumi
+namespace kumi::function
 {
   //====================================================================================================================
   /**
@@ -124,51 +124,48 @@ namespace kumi
     }
   };
 
-  namespace function
-  {
-    //==================================================================================================================
-    /**
-      @ingroup utility
-      @brief Forms a binary monoid callable that can be used in kumi::algoritm. It represents the
-             addition.
-    **/
-    //==================================================================================================================
-    inline constexpr numeric_add plus{};
+  //==================================================================================================================
+  /**
+    @ingroup utility
+    @brief Forms a binary monoid callable that can be used in kumi::algoritm. It represents the
+           addition.
+  **/
+  //==================================================================================================================
+  inline constexpr numeric_add plus{};
 
-    //==================================================================================================================
-    /**
-      @ingroup utility
-      @brief Forms a binary monoid callable that can be used in kumi::algoritm. It represents the
-             multiplication.
-    **/
-    //==================================================================================================================
-    inline constexpr numeric_prod multiplies{};
+  //==================================================================================================================
+  /**
+    @ingroup utility
+    @brief Forms a binary monoid callable that can be used in kumi::algoritm. It represents the
+           multiplication.
+  **/
+  //==================================================================================================================
+  inline constexpr numeric_prod multiplies{};
 
-    //==================================================================================================================
-    /**
-      @ingroup utility
-      @brief Forms a binary monoid callable that can be used in kumi::algoritm. It represents the
-             logical and operation.
-    **/
-    //==================================================================================================================
-    inline constexpr boolean_and bit_and{};
+  //==================================================================================================================
+  /**
+    @ingroup utility
+    @brief Forms a binary monoid callable that can be used in kumi::algoritm. It represents the
+           logical and operation.
+  **/
+  //==================================================================================================================
+  inline constexpr boolean_and bit_and{};
 
-    //==================================================================================================================
-    /**
-      @ingroup utility
-      @brief Forms a binary monoid callable that can be used in kumi::algoritm. It represents the
-             logical or operation.
-    **/
-    //==================================================================================================================
-    inline constexpr boolean_or bit_or{};
+  //==================================================================================================================
+  /**
+    @ingroup utility
+    @brief Forms a binary monoid callable that can be used in kumi::algoritm. It represents the
+           logical or operation.
+  **/
+  //==================================================================================================================
+  inline constexpr boolean_or bit_or{};
 
-    //==================================================================================================================
-    /**
-      @ingroup utility
-      @brief Forms a binary monoid callable that can be used in kumi::algoritm. It represents the
-             logical xor operation.
-    **/
-    //==================================================================================================================
-    inline constexpr boolean_xor bit_xor{};
-  }
+  //==================================================================================================================
+  /**
+    @ingroup utility
+    @brief Forms a binary monoid callable that can be used in kumi::algoritm. It represents the
+           logical xor operation.
+  **/
+  //==================================================================================================================
+  inline constexpr boolean_xor bit_xor{};
 }

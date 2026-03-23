@@ -54,7 +54,7 @@ namespace kumi
     if constexpr (N == size_v<T>) return kumi::make_tuple(t);
     else
     {
-      constexpr auto proj = _::tiler(index<size_v<T>>, index<N>, index<O>);
+      constexpr auto proj = function::tiler(index<size_v<T>>, index<N>, index<O>);
       auto const build = [&]<std::size_t... J>(auto Off, std::index_sequence<J...>) {
         using type = builder_make_t<T, element_t<Off + J, T>...>;
         return type{get<Off + J>(KUMI_FWD(t))...};
@@ -108,7 +108,7 @@ namespace kumi
     if constexpr (N == size_v<T>) return kumi::make_tuple(t);
     else
     {
-      constexpr auto proj = _::tiler(index<size_v<T>>, index<N>, index<1>);
+      constexpr auto proj = function::tiler(index<size_v<T>>, index<N>, index<1>);
       auto const build = [&]<std::size_t... J>(auto O, std::index_sequence<J...>) {
         using type = builder_make_t<T, element_t<O + J, T>...>;
         return type{get<O + J>(KUMI_FWD(t))...};
@@ -164,7 +164,7 @@ namespace kumi
     if constexpr (N == size_v<T>) return kumi::make_tuple(t);
     else
     {
-      constexpr auto proj = _::tiler(index<size_v<T>>, index<N>, index<N>);
+      constexpr auto proj = function::tiler(index<size_v<T>>, index<N>, index<N>);
       auto const build = [&]<std::size_t... J>(auto O, std::index_sequence<J...>) {
         using type = builder_make_t<T, element_t<O + J, T>...>;
         return type{get<O + J>(KUMI_FWD(t))...};
