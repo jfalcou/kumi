@@ -29,7 +29,7 @@ namespace kumi
     requires requires { KUMI_FWD(a) + KUMI_FWD(b); }
     {
       return KUMI_FWD(a) + KUMI_FWD(b);
-    };
+    }
   };
 
   //====================================================================================================================
@@ -52,7 +52,7 @@ namespace kumi
     requires requires { KUMI_FWD(a) * KUMI_FWD(b); }
     {
       return KUMI_FWD(a) * KUMI_FWD(b);
-    };
+    }
   };
 
   //====================================================================================================================
@@ -75,7 +75,7 @@ namespace kumi
     requires requires { KUMI_FWD(a) & KUMI_FWD(b); }
     {
       return KUMI_FWD(a) & KUMI_FWD(b);
-    };
+    }
   };
 
   //====================================================================================================================
@@ -98,7 +98,7 @@ namespace kumi
     requires requires { KUMI_FWD(a) | KUMI_FWD(b); }
     {
       return KUMI_FWD(a) | KUMI_FWD(b);
-    };
+    }
   };
 
   //====================================================================================================================
@@ -121,7 +121,7 @@ namespace kumi
     requires requires { KUMI_FWD(a) ^ KUMI_FWD(b); }
     {
       return KUMI_FWD(a) ^ KUMI_FWD(b);
-    };
+    }
   };
 
   namespace function

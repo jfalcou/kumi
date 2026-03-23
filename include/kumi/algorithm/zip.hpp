@@ -45,14 +45,14 @@ namespace kumi
       std::size_t result = size_v<T0>;
       if constexpr (sizeof...(Ts) == 0) return result;
       else return ((result = result < size_v<Ts> ? result : size_v<Ts>), ...);
-    };
+    }
 
     template<typename T0, typename... Ts> consteval std::size_t max_size_v()
     {
       std::size_t result = size_v<T0>;
       if constexpr (sizeof...(Ts) == 0) return result;
       else return ((result = result > size_v<Ts> ? result : size_v<Ts>), ...);
-    };
+    }
   }
 
   //====================================================================================================================

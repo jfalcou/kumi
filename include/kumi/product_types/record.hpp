@@ -247,10 +247,10 @@ namespace kumi
     [[nodiscard]] KUMI_ABI static constexpr bool empty() noexcept { return sizeof...(Ts) == 0; }
 
     /// Returns the identifiers associated to the elements of a kumi::record
-    [[nodiscard]] KUMI_ABI static constexpr auto identifiers() noexcept { return tuple{identifier_of<Ts>()...}; };
+    [[nodiscard]] KUMI_ABI static constexpr auto identifiers() noexcept { return tuple{identifier_of<Ts>()...}; }
 
     /// Returns the labels associated to the elements of a kumi::record
-    [[nodiscard]] KUMI_ABI static constexpr auto labels() noexcept { return tuple{label_of<Ts>()...}; };
+    [[nodiscard]] KUMI_ABI static constexpr auto labels() noexcept { return tuple{label_of<Ts>()...}; }
 
     /// Returns references to the values of the element in a kumi::record
     [[nodiscard]] KUMI_ABI constexpr auto values() noexcept
@@ -258,7 +258,7 @@ namespace kumi
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return tuple<raw_member_t<I, decltype(*this)>...>{field_value_of(get<I>(*this))...};
       }(std::make_index_sequence<sizeof...(Ts)>{});
-    };
+    }
 
     /// @overload
     [[nodiscard]] KUMI_ABI constexpr auto values() const noexcept
@@ -266,7 +266,7 @@ namespace kumi
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return tuple<raw_member_t<I, decltype(*this)>...>{field_value_of(get<I>(*this))...};
       }(std::make_index_sequence<sizeof...(Ts)>{});
-    };
+    }
 
     //==================================================================================================================
     //! @}
@@ -372,14 +372,14 @@ namespace kumi
     requires(concepts::unit_type<T>)
     {
       return {};
-    };
+    }
 
     template<typename T>
     [[nodiscard]] KUMI_ABI constexpr operator T() noexcept
     requires(concepts::unit_type<T>)
     {
       return {};
-    };
+    }
 
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, record<>) noexcept
