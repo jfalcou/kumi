@@ -464,7 +464,7 @@ namespace kumi
        ...);
     }(std::make_index_sequence<nb_strs>{});
     return str{that.t};
-  };
+  }
 }
 namespace kumi::_
 {
@@ -574,17 +574,17 @@ namespace kumi
   {
     if constexpr (_::field<T>) return _::identifier_of_t<T>{};
     else return kumi::unknown{};
-  };
+  }
   template<typename T> [[nodiscard]] KUMI_ABI consteval str label_of() noexcept
   {
     if constexpr (_::field<T>) return _::label_of_t<T>{};
     else return kumi::unknown{};
-  };
+  }
   template<typename T> [[nodiscard]] KUMI_ABI constexpr decltype(auto) field_value_of(T&& t) noexcept
   {
     if constexpr (_::field<T>) return (KUMI_FWD(t)(_::identifier_of_t<T>{}));
     else return KUMI_FWD(t);
-  };
+  }
   template<_::identifier auto Name, typename T>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) capture_field(T&& t) noexcept
   {
@@ -763,7 +763,7 @@ namespace kumi
       }(KUMI_FWD(o));
       if constexpr (std::is_member_object_pointer_v<callable_t>) return KUMI_FWD(ptr).*member;
       else return (KUMI_FWD(ptr).*member)(KUMI_FWD(ts)...);
-    };
+    }
   }
   template<typename C, typename... Ts>
   KUMI_ABI constexpr decltype(auto) invoke(C&& c, Ts&&... ts) noexcept(std::is_nothrow_invocable<C, Ts...>::value)
@@ -771,14 +771,14 @@ namespace kumi
   {
     if constexpr (std::is_member_pointer_v<std::decay_t<C>>) return _::invoke_memptr(c, KUMI_FWD(ts)...);
     else return KUMI_FWD(c)(KUMI_FWD(ts)...);
-  };
+  }
   template<typename R, typename C, typename... Ts>
   KUMI_ABI constexpr R invoke_r(C&& c, Ts&&... ts) noexcept(std::is_nothrow_invocable_r<R, C, Ts...>::value)
   requires(std::is_invocable_r<R, C, Ts...>::value)
   {
     if constexpr (std::is_void_v<R>) invoke(KUMI_FWD(c), KUMI_FWD(ts)...);
     else return invoke(KUMI_FWD(c), KUMI_FWD(ts)...);
-  };
+  }
 }
 namespace kumi
 {
@@ -1149,13 +1149,13 @@ namespace kumi
     requires(concepts::unit_type<T>)
     {
       return {};
-    };
+    }
     template<typename T>
     [[nodiscard]] KUMI_ABI constexpr operator T() noexcept
     requires(concepts::unit_type<T>)
     {
       return {};
-    };
+    }
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, unit) noexcept
     {
@@ -1180,8 +1180,8 @@ namespace kumi
   template<typename ID> struct identifier<ID, void>
   {
     using type = std::remove_cvref_t<ID>;
-    constexpr identifier() noexcept {};
-    constexpr identifier(ID const&) noexcept {};
+    constexpr identifier() noexcept {}
+    constexpr identifier(ID const&) noexcept {}
     template<typename T> constexpr field<type, std::unwrap_ref_decay_t<T>> operator=(T&& v) const noexcept
     {
       return {KUMI_FWD(v)};
@@ -1197,8 +1197,8 @@ namespace kumi
   {
     using type = identifier<ID, Checker>;
     friend constexpr str to_str(identifier<ID, Checker> const&) { return _::make_str(ID{}); }
-    constexpr identifier() noexcept {};
-    constexpr identifier([[maybe_unused]] ID const& id, [[maybe_unused]] Checker const& check) noexcept {};
+    constexpr identifier() noexcept {}
+    constexpr identifier([[maybe_unused]] ID const& id, [[maybe_unused]] Checker const& check) noexcept {}
     template<typename T>
     requires(Checker::template value<T>)
     constexpr auto operator=(T&& v) const noexcept -> field<type, std::unwrap_ref_decay_t<T>>
@@ -1243,7 +1243,7 @@ namespace kumi
       else if constexpr (concepts::index<decltype(N)>) return false;
       else if constexpr (concepts::identifier<std::remove_cvref_t<decltype(N)>>) return false;
       else return can_get_field_by_value<name<N>, Ts...>;
-    };
+    }
     template<auto N, typename... Ts> KUMI_ABI constexpr auto contains_label()
     {
       if constexpr (std::integral<std::remove_cvref_t<decltype(N)>>) return false;
@@ -1263,7 +1263,7 @@ namespace kumi
     requires requires { KUMI_FWD(a) + KUMI_FWD(b); }
     {
       return KUMI_FWD(a) + KUMI_FWD(b);
-    };
+    }
   };
   struct numeric_prod
   {
@@ -1273,7 +1273,7 @@ namespace kumi
     requires requires { KUMI_FWD(a) * KUMI_FWD(b); }
     {
       return KUMI_FWD(a) * KUMI_FWD(b);
-    };
+    }
   };
   struct boolean_and
   {
@@ -1283,7 +1283,7 @@ namespace kumi
     requires requires { KUMI_FWD(a) & KUMI_FWD(b); }
     {
       return KUMI_FWD(a) & KUMI_FWD(b);
-    };
+    }
   };
   struct boolean_or
   {
@@ -1293,7 +1293,7 @@ namespace kumi
     requires requires { KUMI_FWD(a) | KUMI_FWD(b); }
     {
       return KUMI_FWD(a) | KUMI_FWD(b);
-    };
+    }
   };
   struct boolean_xor
   {
@@ -1303,7 +1303,7 @@ namespace kumi
     requires requires { KUMI_FWD(a) ^ KUMI_FWD(b); }
     {
       return KUMI_FWD(a) ^ KUMI_FWD(b);
-    };
+    }
   };
   namespace function
   {
@@ -1382,9 +1382,9 @@ namespace kumi
   {
     static constexpr bool is_projection_map = true;
     consteval projection_map() noexcept = default;
-    consteval explicit projection_map(V...) noexcept {};
-    [[nodiscard]] KUMI_ABI static constexpr auto size() noexcept { return sizeof...(V); };
-    [[nodiscard]] KUMI_ABI static constexpr auto empty() noexcept { return sizeof...(V) == 0; };
+    consteval explicit projection_map(V...) noexcept {}
+    [[nodiscard]] KUMI_ABI static constexpr auto size() noexcept { return sizeof...(V); }
+    [[nodiscard]] KUMI_ABI static constexpr auto empty() noexcept { return sizeof...(V) == 0; }
     template<std::size_t I>
     requires(I < sizeof...(V))
     KUMI_ABI constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) const noexcept
@@ -1595,8 +1595,8 @@ namespace kumi
     }
     [[nodiscard]] KUMI_ABI static constexpr auto size() noexcept { return sizeof...(Ts); }
     [[nodiscard]] KUMI_ABI static constexpr bool empty() noexcept { return sizeof...(Ts) == 0; }
-    [[nodiscard]] KUMI_ABI static constexpr auto identifiers() noexcept { return kumi::tuple{identifier_of<Ts>()...}; };
-    [[nodiscard]] KUMI_ABI static constexpr auto labels() noexcept { return kumi::tuple{label_of<Ts>()...}; };
+    [[nodiscard]] KUMI_ABI static constexpr auto identifiers() noexcept { return kumi::tuple{identifier_of<Ts>()...}; }
+    [[nodiscard]] KUMI_ABI static constexpr auto labels() noexcept { return kumi::tuple{label_of<Ts>()...}; }
     template<typename... Us>
     [[nodiscard]] KUMI_ABI explicit(!_::piecewise_convertible<tuple<Ts const&...>, tuple<Us...>>) constexpr
     operator tuple<Us...>() const
@@ -1715,13 +1715,13 @@ namespace kumi
     requires(concepts::unit_type<T>)
     {
       return {};
-    };
+    }
     template<typename T>
     [[nodiscard]] KUMI_ABI constexpr operator T() noexcept
     requires(concepts::unit_type<T>)
     {
       return {};
-    };
+    }
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, tuple<>) noexcept
     {
@@ -2042,20 +2042,20 @@ namespace kumi
     }
     [[nodiscard]] KUMI_ABI static constexpr auto size() noexcept { return sizeof...(Ts); }
     [[nodiscard]] KUMI_ABI static constexpr bool empty() noexcept { return sizeof...(Ts) == 0; }
-    [[nodiscard]] KUMI_ABI static constexpr auto identifiers() noexcept { return tuple{identifier_of<Ts>()...}; };
-    [[nodiscard]] KUMI_ABI static constexpr auto labels() noexcept { return tuple{label_of<Ts>()...}; };
+    [[nodiscard]] KUMI_ABI static constexpr auto identifiers() noexcept { return tuple{identifier_of<Ts>()...}; }
+    [[nodiscard]] KUMI_ABI static constexpr auto labels() noexcept { return tuple{label_of<Ts>()...}; }
     [[nodiscard]] KUMI_ABI constexpr auto values() noexcept
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return tuple<raw_member_t<I, decltype(*this)>...>{field_value_of(get<I>(*this))...};
       }(std::make_index_sequence<sizeof...(Ts)>{});
-    };
+    }
     [[nodiscard]] KUMI_ABI constexpr auto values() const noexcept
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return tuple<raw_member_t<I, decltype(*this)>...>{field_value_of(get<I>(*this))...};
       }(std::make_index_sequence<sizeof...(Ts)>{});
-    };
+    }
     template<typename... Us>
     KUMI_ABI constexpr record& operator=(record<Us...> const& other)
     requires(concepts::equivalent<record, record<Us...>>)
@@ -2114,13 +2114,13 @@ namespace kumi
     requires(concepts::unit_type<T>)
     {
       return {};
-    };
+    }
     template<typename T>
     [[nodiscard]] KUMI_ABI constexpr operator T() noexcept
     requires(concepts::unit_type<T>)
     {
       return {};
-    };
+    }
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, record<>) noexcept
     {
@@ -4007,7 +4007,7 @@ namespace kumi
         return ret_t{get<pos.t[I]>(KUMI_FWD(t))...};
       }(std::make_index_sequence<pos.count>{});
     }
-  };
+  }
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto all_unique(T&& t)
   {
     if constexpr (concepts::empty_product_type<T>) return t;
@@ -4069,13 +4069,13 @@ namespace kumi
       std::size_t result = size_v<T0>;
       if constexpr (sizeof...(Ts) == 0) return result;
       else return ((result = result < size_v<Ts> ? result : size_v<Ts>), ...);
-    };
+    }
     template<typename T0, typename... Ts> consteval std::size_t max_size_v()
     {
       std::size_t result = size_v<T0>;
       if constexpr (sizeof...(Ts) == 0) return result;
       else return ((result = result > size_v<Ts> ? result : size_v<Ts>), ...);
-    };
+    }
   }
   template<concepts::product_type T0, concepts::sized_product_type<size_v<T0>>... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto zip(T0&& t0, Ts&&... ts)
