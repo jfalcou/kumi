@@ -105,13 +105,14 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto split(T&& t, [[maybe_unused]] index_t<I0> i0) noexcept
   {
     static_assert(I0 <= size_v<T>, "[KUMI] - Invalid index");
-    auto select = [&]<std::size_t... I>(auto O, std::index_sequence<I...>) {
-      using type = builder_make_t<T, element_t<O + I, T>...>;
-      return type{get<O + I>(KUMI_FWD(t))...};
+    constexpr auto proj = _::splitter(index<I0>, index<size_v<T>>);
+
+    auto select = [&]<std::size_t... I>(std::index_sequence<I...>) {
+      using type = builder_make_t<T, element_t<I, T>...>;
+      return type{get<I>(KUMI_FWD(t))...};
     };
 
-    return kumi::tuple{select(index<0>, std::make_index_sequence<I0>{}),
-                       select(index<I0>, std::make_index_sequence<size_v<T> - I0>{})};
+    return kumi::tuple{select(proj.first), select(proj.second)};
   }
 
   namespace result

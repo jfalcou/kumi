@@ -123,10 +123,10 @@ namespace kumi
 
       using res_type = common_product_type_t<std::remove_cvref_t<T0>, std::remove_cvref_t<Ts>...>;
 
-      auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>) {
+      auto maps = [&]<std::size_t... I>(auto E, std::index_sequence<I...>) {
         auto tps = kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...);
-        using type = builder_make_t<res_type, element_t<k, std::remove_cvref_t<element_t<I, decltype(tps)>>>...>;
-        return type{get<k>(get<I>(KUMI_FWD(tps)))...};
+        using type = builder_make_t<res_type, element_t<E, std::remove_cvref_t<element_t<I, decltype(tps)>>>...>;
+        return type{get<E>(get<I>(KUMI_FWD(tps)))...};
       };
 
       return [&]<std::size_t... N>(std::index_sequence<N...>) {

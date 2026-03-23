@@ -50,16 +50,15 @@ namespace kumi
       using res_type = common_product_type_t<std::remove_cvref_t<Ts>...>;
       constexpr auto idx = _::cartesian_producer(index<sizeof...(Ts)>, index<(size_v<Ts> * ...)>, index<size_v<Ts>>...);
 
-      auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>) {
-        auto tps = kumi::forward_as_tuple(ts...);
-        using res_t =
-          builder_make_t<res_type, element_t<idx.data[k].data[I], std::remove_cvref_t<element_t<I, decltype(tps)>>>...>;
-        return res_t{get<idx.data[k].data[I]>(get<I>(tps))...};
+      auto maps = [&]<std::size_t... E, std::size_t... I>(std::index_sequence<E...>, std::index_sequence<I...>) {
+        auto tps = kumi::forward_as_tuple(KUMI_FWD(ts)...);
+        using res_t = builder_make_t<res_type, element_t<E, std::remove_cvref_t<element_t<I, decltype(tps)>>>...>;
+        return res_t{get<E>(get<I>(tps))...};
       };
 
       return [&]<std::size_t... N>(std::index_sequence<N...>) {
         std::make_index_sequence<sizeof...(Ts)> ids;
-        return kumi::make_tuple(maps(index<N>, ids)...);
+        return kumi::make_tuple(maps(get<N>(idx.tpl), ids)...);
       }(std::make_index_sequence<(size_v<Ts> * ...)>{});
     }
   }

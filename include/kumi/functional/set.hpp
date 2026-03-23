@@ -3,36 +3,36 @@
 namespace kumi::_
 {
 
-  template<typename Seq, typename... Ts> struct set_;
+  template<typename Seq, typename... Ts> struct multiset;
 
-  template<std::size_t I, typename T> struct set_<std::index_sequence<I>, T>
+  template<std::size_t I, typename T> struct multiset<std::index_sequence<I>, T>
   {
     consteval std::integral_constant<std::size_t, I> operator()(std::type_identity<T>) const noexcept { return {}; }
   };
 
   template<std::size_t I, std::size_t... Is, typename T, typename... Ts>
-  struct set_<std::index_sequence<I, Is...>, T, Ts...> : set_<std::index_sequence<Is...>, Ts...>
+  struct multiset<std::index_sequence<I, Is...>, T, Ts...> : multiset<std::index_sequence<Is...>, Ts...>
   {
     consteval std::integral_constant<std::size_t, I> operator()(std::type_identity<T>) const noexcept { return {}; }
 
-    using set_<std::index_sequence<Is...>, Ts...>::operator();
+    using multiset<std::index_sequence<Is...>, Ts...>::operator();
   };
 
-  // Specializable set type constructor
-  template<typename... Ts> struct make_set_
+  // Specializable multiset type constructor
+  template<typename... Ts> struct make_multiset
   {
-    using type = set_<Ts...>;
+    using type = multiset<Ts...>;
   };
 
-  template<typename... Ts> using make_set__t = typename make_set_<Ts...>::type;
+  template<typename... Ts> using make_multiset_t = typename make_multiset<Ts...>::type;
 
   //====================================================================================================================
   struct unique_
   {
     template<typename... Ts> KUMI_ABI consteval auto operator()(std::type_identity<Ts>...) const noexcept
     {
-      using type = make_set__t<std::make_index_sequence<sizeof...(Ts)>, Ts...>;
-      type set_representation;
+      using type = make_multiset_t<std::make_index_sequence<sizeof...(Ts)>, Ts...>;
+      type impl;
 
       struct
       {
@@ -40,7 +40,7 @@ namespace kumi::_
       } that{};
 
       [&]<std::size_t... I>(std::index_sequence<I...>) {
-        ((set_representation(std::type_identity<Ts>{}) == I ? (that.e[that.count++] = I) : 0), ...);
+        ((impl(std::type_identity<Ts>{}) == I ? (that.e[that.count++] = I) : 0), ...);
       }(std::make_index_sequence<sizeof...(Ts)>{});
       return that;
     };
@@ -67,6 +67,27 @@ namespace kumi::_
     }
   };
 
+  //====================================================================================================================
+  struct uniquable
+  {
+    template<concepts::product_type T> [[nodiscard]] KUMI_ABI consteval auto operator()(as<T>) const noexcept
+    {
+      struct
+      {
+        std::size_t count{1}, t[size_v<T>];
+      } that{};
+
+      that.t[0] = 0;
+
+      [&]<std::size_t... I>(std::index_sequence<I...>) {
+        (((std::is_same_v<raw_element_t<I, T>, raw_element_t<I + 1, T>>) ? I : (that.t[that.count++] = I + 1)), ...);
+      }(std::make_index_sequence<size_v<T> - 1>{});
+
+      return that;
+    }
+  };
+
+  inline constexpr uniquable uniqued{};
   inline constexpr unique_ uniquer{};
   inline constexpr select_ selector{};
 }

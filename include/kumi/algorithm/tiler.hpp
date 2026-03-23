@@ -20,13 +20,13 @@ namespace kumi
 
     @tparam N Size of the tile to generate
     @tparam O Offset from the begening of the previous tile
-    @param  t the product type from which to extract the tiles 
+    @param  t the product type from which to extract the tiles
     @return A tuple of product types, each containing `N` consecutive elements of `t` offset by O
 
     @note Tiles is the most general form of tiling each inner product_type is a tile over `t`
           starting at index `tile_size * tile_number + 1`. The last tile will be smaller if the
           size of the product type is not a multiple of the tile size.
-    
+
     ## Helper type
     @code
     namespace kumi::result

@@ -10,115 +10,69 @@
 namespace kumi::_
 {
   //====================================================================================================================
-  KUMI_ABI consteval std::size_t min(auto... sizes)
+  KUMI_ABI consteval std::size_t min(std::same_as<std::size_t> auto... sizes)
   {
-    std::size_t result{};
-    return ((result = result < sizes ? result : sizes), ...);
+    std::size_t result = std::size_t(-1);
+    return ((result = (result < sizes ? result : sizes)), ...);
   };
 
-  KUMI_ABI consteval std::size_t max(auto... sizes)
+  KUMI_ABI consteval std::size_t max(std::same_as<std::size_t> auto... sizes)
   {
     std::size_t result{};
-    return ((result = result > sizes ? result : sizes), ...);
+    return ((result = (result > sizes ? result : sizes)), ...);
   };
 
   //====================================================================================================================
-  KUMI_ABI consteval std::size_t get_t(std::size_t i, auto... sizes)
+  struct container_of_index_t
   {
-    std::size_t t{}, sum{};
-    ((t += (i >= (sum += sizes))), ...);
-    return t;
+    KUMI_ABI consteval std::size_t operator()(std::size_t i, std::same_as<std::size_t> auto... sizes) const noexcept
+    {
+      std::size_t t{}, sum{};
+      ((t += (i >= (sum += sizes))), ...);
+      return t;
+    }
   };
 
-  KUMI_ABI consteval std::size_t get_e(std::size_t i, auto... sizes)
+  //====================================================================================================================
+  struct element_of_index_t
   {
-    std::size_t sum{}, offset{};
-    ((offset = (i >= (sum += sizes) ? sum : offset)), ...);
-    return i - offset;
+    KUMI_ABI consteval std::size_t operator()(std::size_t i, std::same_as<std::size_t> auto... sizes) const noexcept
+    {
+      std::size_t sum{}, offset{};
+      ((offset = (i >= (sum += sizes) ? sum : offset)), ...);
+      return i - offset;
+    }
+  };
+
+  //====================================================================================================================
+  struct unflatten_index_t
+  {
+    KUMI_ABI consteval std::size_t operator()(std::size_t dim,
+                                              std::size_t v,
+                                              std::same_as<std::size_t> auto... sizes) const noexcept
+    {
+      std::size_t div = 1, curr_dim = 0, result = 0;
+      (((curr_dim == dim ? (result = (v / div) % sizes) : 0), div *= sizes, curr_dim++), ...);
+      return result;
+    }
+  };
+
+  //====================================================================================================================
+  KUMI_ABI consteval std::size_t block_size(std::size_t I, std::size_t Stride, std::size_t Extent, std::size_t Size)
+  {
+    std::size_t s = I * Stride;
+    return (s < Size) ? ((s + Extent > Size) ? (Size - s) : Extent) : 0;
   }
 
   //====================================================================================================================
-  template<std::size_t N, std::size_t... S> struct digits
+  struct digits_
   {
-    KUMI_ABI consteval auto operator()(std::size_t v) noexcept
-    {
-      struct
-      {
-        std::size_t data[N];
-      } values = {};
-
-      std::size_t shp[N] = {S...};
-      std::size_t i = 0;
-
-      while (v != 0)
-      {
-        values.data[i] = v % shp[i];
-        v /= shp[i++];
-      }
-
-      return values;
-    }
-  };
-
-  struct cartesian_product_
-  {
-    template<std::size_t W, std::size_t H, std::size_t... S>
-    KUMI_ABI consteval auto operator()(index_t<W>, index_t<H>, index_t<S>...) const noexcept
+    template<typename F, std::size_t Base, std::size_t... Is>
+    KUMI_ABI consteval auto operator()(F func, index_t<Base>, std::index_sequence<Is...>) const noexcept
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        _::digits<W, S...> dgt{};
-        using t_t = decltype(dgt(0));
-        struct
-        {
-          t_t data[sizeof...(I)];
-        } that = {dgt(I)...};
-
-        return that;
-      }(std::make_index_sequence<H>{});
-    }
-  };
-
-  //====================================================================================================================
-  struct cat_
-  {
-    template<std::size_t... Sizes> KUMI_ABI consteval auto operator()(std::index_sequence<Sizes...>) const noexcept
-    {
-      constexpr auto N = (Sizes + ... + 0ULL);
-
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        struct
-        {
-          using t = std::index_sequence<(get_t(I, Sizes...))...>;
-          using e = std::index_sequence<(get_e(I, Sizes...))...>;
-          t tpl{};
-          e elt{};
-        } that{};
-        return that;
-      }(std::make_index_sequence<N>{});
-    }
-  };
-
-  struct flatten_ : cat_
-  {
-    using parent = cat_;
-    using parent::operator();
-  };
-
-  //====================================================================================================================
-  struct zip_
-  {
-    template<std::size_t Count, std::size_t Size>
-    KUMI_ABI consteval auto operator()(index_t<Count>, index_t<Size>) const noexcept
-    {
-      struct
-      {
-        using t = decltype(std::make_index_sequence<Count>{});
-        using e = decltype(std::make_index_sequence<Size>{});
-        t tpl{};
-        e elt{};
-      } that{};
-
-      return that;
+        return std::index_sequence<func(I, Is...)...>{};
+      }(std::make_index_sequence<Base>{});
     }
   };
 
@@ -139,30 +93,8 @@ namespace kumi::_
 
   template<typename T, auto N> using as_homogeneous_t = typename as_homogeneous<T, N>::type;
 
-  //====================================================================================================================
-  struct uniquable
-  {
-    template<concepts::product_type T> [[nodiscard]] KUMI_ABI consteval auto operator()(as<T>) const noexcept
-    {
-      struct
-      {
-        std::size_t count{1}, t[size_v<T>];
-      } that{};
-
-      that.t[0] = 0;
-
-      [&]<std::size_t... I>(std::index_sequence<I...>) {
-        (((std::is_same_v<raw_element_t<I, T>, raw_element_t<I + 1, T>>) ? I : (that.t[that.count++] = I + 1)), ...);
-      }(std::make_index_sequence<size_v<T> - 1>{});
-
-      return that;
-    }
-  };
-
-  inline constexpr cartesian_product_ cartesian_producer{};
-  inline constexpr cat_ concatenater{};
-  inline constexpr flatten_ flattener{};
-
-  inline constexpr uniquable uniqued{};
-  inline constexpr zip_ zipper{};
+  inline constexpr container_of_index_t container_of_index{};
+  inline constexpr element_of_index_t element_of_index{};
+  inline constexpr unflatten_index_t unflatten_index{};
+  inline constexpr digits_ digits{};
 }
