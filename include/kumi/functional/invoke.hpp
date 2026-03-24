@@ -45,8 +45,8 @@ namespace kumi
   **/
   //====================================================================================================================
   template<typename C, typename... Ts>
-  KUMI_ABI constexpr decltype(auto) invoke(C&& c, Ts&&... ts) noexcept(std::is_nothrow_invocable<C, Ts...>::value)
-  requires(std::is_invocable<C, Ts...>::value)
+  KUMI_ABI constexpr decltype(auto) invoke(C&& c, Ts&&... ts) noexcept(std::is_nothrow_invocable_v<C, Ts...>)
+  requires(std::is_invocable_v<C, Ts...>)
   {
     if constexpr (std::is_member_pointer_v<std::decay_t<C>>) return _::invoke_memptr(c, KUMI_FWD(ts)...);
     else return KUMI_FWD(c)(KUMI_FWD(ts)...);
@@ -66,8 +66,8 @@ namespace kumi
   **/
   //====================================================================================================================
   template<typename R, typename C, typename... Ts>
-  KUMI_ABI constexpr R invoke_r(C&& c, Ts&&... ts) noexcept(std::is_nothrow_invocable_r<R, C, Ts...>::value)
-  requires(std::is_invocable_r<R, C, Ts...>::value)
+  KUMI_ABI constexpr R invoke_r(C&& c, Ts&&... ts) noexcept(std::is_nothrow_invocable_r_v<R, C, Ts...>)
+  requires(std::is_invocable_r_v<R, C, Ts...>)
   {
     if constexpr (std::is_void_v<R>) invoke(KUMI_FWD(c), KUMI_FWD(ts)...);
     else return invoke(KUMI_FWD(c), KUMI_FWD(ts)...);

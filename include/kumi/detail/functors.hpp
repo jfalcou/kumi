@@ -68,7 +68,9 @@ namespace kumi::_
   struct digits_
   {
     template<typename F, std::size_t Base, std::size_t... Is>
-    KUMI_ABI consteval auto operator()(F func, index_t<Base>, std::index_sequence<Is...>) const noexcept
+    KUMI_ABI consteval auto operator()(F func,
+                                       std::integral_constant<std::size_t, Base>,
+                                       std::index_sequence<Is...>) const noexcept
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return std::index_sequence<func(I, Is...)...>{};

@@ -21,7 +21,7 @@ namespace kumi
 
     template<typename F, typename T>
     concept supports_nothrow_apply = []<std::size_t... N>(std::index_sequence<N...>) {
-      return std::is_nothrow_invocable<F, raw_member_t<N, T>...>::value;
+      return std::is_nothrow_invocable_v<F, raw_member_t<N, T>...>;
     }(std::make_index_sequence<size_v<T>>{});
 
     template<typename F, typename... Ts>

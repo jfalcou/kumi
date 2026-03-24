@@ -15,8 +15,8 @@ namespace kumi::function
     KUMI_ABI consteval auto operator()(index_t<H>, index_t<S>...) const noexcept
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using t =
-          kumi::tuple<decltype(_::digits(_::unflatten_index, index<sizeof...(S)>, std::index_sequence<I, S...>{}))...>;
+        using t = kumi::tuple<decltype(_::digits(
+          _::unflatten_index, std::integral_constant<std::size_t, sizeof...(S)>{}, std::index_sequence<I, S...>{}))...>;
         return t{};
       }(std::make_index_sequence<H>{});
     }
@@ -27,8 +27,10 @@ namespace kumi::function
     template<std::size_t... Sizes> KUMI_ABI consteval auto operator()(std::index_sequence<Sizes...>) const noexcept
     {
       constexpr auto N = (Sizes + ... + 0ULL);
-      using t = decltype(_::digits(_::container_of_index, index<N>, std::index_sequence<Sizes...>{}));
-      using e = decltype(_::digits(_::element_of_index, index<N>, std::index_sequence<Sizes...>{}));
+      using t = decltype(_::digits(_::container_of_index, std::integral_constant<std::size_t, N>{},
+                                   std::index_sequence<Sizes...>{}));
+      using e = decltype(_::digits(_::element_of_index, std::integral_constant<std::size_t, N>{},
+                                   std::index_sequence<Sizes...>{}));
 
       struct
       {

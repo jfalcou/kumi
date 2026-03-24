@@ -21,7 +21,6 @@ namespace kumi
 
 #include <kumi/functional/invoke.hpp>
 #include <kumi/functional/bind.hpp>
-#include <kumi/functional/functors.hpp>
 #include <kumi/functional/indexable.hpp>
 #include <kumi/functional/set.hpp>
 #include <kumi/functional/monoid.hpp>

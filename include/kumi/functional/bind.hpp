@@ -22,7 +22,11 @@ namespace kumi
     @note Replaces std::bind_front to avoid depending on `functional`.
   **/
   //====================================================================================================================
-  template<typename C, typename... Ts> KUMI_ABI constexpr auto bind_front(C&& c, Ts&&... ts)
+  template<typename C, typename... Ts>
+  KUMI_ABI constexpr auto bind_front(C&& c, Ts&&... ts)
+    noexcept(std::is_nothrow_move_constructible_v<std::decay_t<C>> &&
+             (std::is_nothrow_move_constructible_v<std::decay_t<Ts>> && ...))
+  requires(std::is_move_constructible_v<std::decay_t<C>> && (std::is_move_constructible_v<std::decay_t<Ts>> && ...))
   {
     return [&]<typename... Args>(Args&&... call_args) -> decltype(auto) {
       return invoke(KUMI_FWD(c), KUMI_FWD(ts)..., KUMI_FWD(call_args)...);
@@ -41,14 +45,22 @@ namespace kumi
     @note Replaces std::bind_front to avoid depending on `functional`.
   **/
   //====================================================================================================================
-  template<typename C, typename... Ts> KUMI_ABI constexpr auto bind_back(C&& c, Ts&&... ts)
+  template<typename C, typename... Ts>
+  KUMI_ABI constexpr auto bind_back(C&& c, Ts&&... ts)
+    noexcept(std::is_nothrow_move_constructible_v<std::decay_t<C>> &&
+             (std::is_nothrow_move_constructible_v<std::decay_t<Ts>> && ...))
+  requires(std::is_move_constructible_v<std::decay_t<C>> && (std::is_move_constructible_v<std::decay_t<Ts>> && ...))
   {
     return [&]<typename... Args>(Args&&... call_args) -> decltype(auto) {
       return invoke(KUMI_FWD(c), KUMI_FWD(call_args)..., KUMI_FWD(ts)...);
     };
   }
 
-  template<typename C, typename... Ts> KUMI_ABI constexpr auto bind(C&& c, Ts&&... ts)
+  template<typename C, typename... Ts>
+  KUMI_ABI constexpr auto bind(C&& c, Ts&&... ts)
+    noexcept(std::is_nothrow_move_constructible_v<std::decay_t<C>> &&
+             (std::is_nothrow_move_constructible_v<std::decay_t<Ts>> && ...))
+  requires(std::is_move_constructible_v<std::decay_t<C>> && (std::is_move_constructible_v<std::decay_t<Ts>> && ...))
   {
     return [&]() -> decltype(auto) { return invoke(KUMI_FWD(c), KUMI_FWD(ts)...); };
   }
