@@ -135,26 +135,6 @@ namespace kumi
     }
   }
 
-  template<std::size_t I, typename T, typename U> struct element_or
-  {
-    using type = element_t<I, T>;
-  };
-
-  template<std::size_t I, typename T, typename U>
-  requires(I >= size_v<T>)
-  struct element_or<I, T, U>
-  {
-    using type = U;
-  };
-
-  template<std::size_t I, typename T, typename U> using element_or_t = typename element_or<I, T, U>::type;
-
-  template<std::size_t I, typename T, typename V> constexpr auto get_or(T&& t, V&& v)
-  {
-    if constexpr (I < size_v<T>) return get<I>(KUMI_FWD(t));
-    else return KUMI_FWD(v);
-  }
-
   //====================================================================================================================
   /**
     @ingroup  generators
@@ -208,9 +188,10 @@ namespace kumi
         auto tps = kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...);
 
         using type =
-          builder_make_t<res_type, element_or_t<k, std::remove_cvref_t<element_t<I, decltype(tps)>>, kumi::unit>...>;
+          builder_make_t<res_type,
+                         function::element_or_t<k, std::remove_cvref_t<element_t<I, decltype(tps)>>, kumi::unit>...>;
 
-        return type{get_or<k>(get<I>(KUMI_FWD(tps)), kumi::none)...};
+        return type{function::get_or<k>(get<I>(KUMI_FWD(tps)), kumi::none)...};
       };
 
       return [&]<std::size_t... N>(std::index_sequence<N...>) {

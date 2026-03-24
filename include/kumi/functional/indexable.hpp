@@ -1,15 +1,14 @@
-//==================================================================================================
+//======================================================================================================================
 /*
   KUMI - Compact Tuple Tools
   Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
-//==================================================================================================
+//======================================================================================================================
 #pragma once
 
 namespace kumi::function
 {
-  //====================================================================================================================
   struct cartesian_product_t
   {
     template<std::size_t H, std::size_t... S>
@@ -23,7 +22,6 @@ namespace kumi::function
     }
   };
 
-  //====================================================================================================================
   struct cat_t
   {
     template<std::size_t... Sizes> KUMI_ABI consteval auto operator()(std::index_sequence<Sizes...>) const noexcept
@@ -48,7 +46,6 @@ namespace kumi::function
     using parent::operator();
   };
 
-  //====================================================================================================================
   struct rotate_t
   {
     template<std::size_t S, std::size_t R> KUMI_ABI consteval auto operator()(index_t<S>, index_t<R>) const noexcept
@@ -59,7 +56,6 @@ namespace kumi::function
     }
   };
 
-  //====================================================================================================================
   struct reduce_t
   {
     template<std::size_t N> KUMI_ABI consteval auto operator()(index_t<N>) const noexcept
@@ -81,7 +77,6 @@ namespace kumi::function
     }
   };
 
-  //====================================================================================================================
   struct split_t
   {
     template<std::size_t N, std::size_t Sz> KUMI_ABI consteval auto operator()(index_t<N>, index_t<Sz>) const noexcept
@@ -99,7 +94,6 @@ namespace kumi::function
     }
   };
 
-  //====================================================================================================================
   struct tile_t
   {
     template<std::size_t Sz, std::size_t Extent, std::size_t Stride>
@@ -120,7 +114,6 @@ namespace kumi::function
     }
   };
 
-  //====================================================================================================================
   struct zip_t
   {
     template<std::size_t Count, std::size_t Size>
@@ -139,12 +132,67 @@ namespace kumi::function
     }
   };
 
+  //====================================================================================================================
+  /**
+    @ingroup functional
+    @brief  Callable object computing the index map associated to the cartesian product operation.
+  **/
+  //====================================================================================================================
   inline constexpr cartesian_product_t cartesian_producer{};
+
+  //====================================================================================================================
+  /**
+    @ingroup functional
+    @brief  Callable object computing the index map associated to the concatenation operation.
+  **/
+  //====================================================================================================================
   inline constexpr cat_t concatenater{};
+
+  //====================================================================================================================
+  /**
+    @ingroup functional
+    @brief  Callable object computing the index map associated to the flattening operation.
+  **/
+  //====================================================================================================================
   inline constexpr flatten_t flattener{};
+
+  //====================================================================================================================
+  /**
+    @ingroup functional
+    @brief  Callable object computing the index map associated to the rotation operation.
+  **/
+  //====================================================================================================================
   inline constexpr rotate_t rotater{};
+
+  //====================================================================================================================
+  /**
+    @ingroup functional
+    @brief  Callable object computing the index map associated to the reduction operation.
+  **/
+  //====================================================================================================================
   inline constexpr reduce_t reducer{};
+
+  //====================================================================================================================
+  /**
+    @ingroup functional
+    @brief  Callable object computing the index map associated to the split operation.
+  **/
+  //====================================================================================================================
   inline constexpr split_t splitter{};
+
+  //====================================================================================================================
+  /**
+    @ingroup functional
+    @brief  Callable object computing the index map associated to the tiling operation.
+  **/
+  //====================================================================================================================
   inline constexpr tile_t tiler{};
+
+  //====================================================================================================================
+  /**
+    @ingroup functional
+    @brief  Callable object computing the index map associated to the zip operation.
+  **/
+  //====================================================================================================================
   inline constexpr zip_t zipper{};
 }

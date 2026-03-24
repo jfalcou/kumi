@@ -34,8 +34,8 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup utility
-    @brief Invoke the Callable object c with a pack of arguments.
+    @ingroup  functional
+    @brief    Invoke the Callable object c with a pack of arguments.
 
     @param c	Callable object to be invoked
     @param ts elements to be used as arguments to c
@@ -54,8 +54,8 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup utility
-    @brief Invoke the Callable object c with a pack of arguments with return type R.
+    @ingroup  functional
+    @brief    Invoke the Callable object c with a pack of arguments with return type R.
 
     @tparam R the return type of the callable
     @param  c	Callable object to be invoked

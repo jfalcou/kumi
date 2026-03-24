@@ -14,13 +14,13 @@ namespace kumi::_
   {
     std::size_t result = std::size_t(-1);
     return ((result = (result < sizes ? result : sizes)), ...);
-  };
+  }
 
   KUMI_ABI consteval std::size_t max(std::same_as<std::size_t> auto... sizes)
   {
     std::size_t result{};
     return ((result = (result > sizes ? result : sizes)), ...);
-  };
+  }
 
   //====================================================================================================================
   struct container_of_index_t

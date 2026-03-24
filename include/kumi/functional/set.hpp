@@ -33,7 +33,6 @@ namespace kumi
       using multiset<std::index_sequence<Is...>, Ts...>::operator();
     };
 
-    // Specializable multiset type constructor
     template<typename... Ts> struct make_multiset
     {
       using type = multiset<Ts...>;
@@ -44,8 +43,7 @@ namespace kumi
 
   namespace function
   {
-    //====================================================================================================================
-    struct unique_
+    struct unique_t
     {
       template<typename... Ts> KUMI_ABI consteval auto operator()(std::type_identity<Ts>...) const noexcept
       {
@@ -61,11 +59,10 @@ namespace kumi
           ((impl(std::type_identity<Ts>{}) == I ? (that.e[that.count++] = I) : 0), ...);
         }(std::make_index_sequence<sizeof...(Ts)>{});
         return that;
-      };
+      }
     };
 
-    //====================================================================================================================
-    struct select_
+    struct select_t
     {
       template<bool... Bs> KUMI_ABI consteval auto operator()(std::bool_constant<Bs>...) const noexcept
       {
@@ -85,8 +82,7 @@ namespace kumi
       }
     };
 
-    //====================================================================================================================
-    struct uniquable
+    struct adjacent_unicity_t
     {
       template<concepts::product_type T> [[nodiscard]] KUMI_ABI consteval auto operator()(as<T>) const noexcept
       {
@@ -105,8 +101,28 @@ namespace kumi
       }
     };
 
-    inline constexpr uniquable uniqued{};
-    inline constexpr unique_ uniquer{};
-    inline constexpr select_ selector{};
+    //==================================================================================================================
+    /**
+      @ingroup  functional
+      @brief    Callable object computing the index map associated to the adjactent unicity operation.
+    **/
+    //==================================================================================================================
+    inline constexpr adjacent_unicity_t uniqued{};
+
+    //==================================================================================================================
+    /**
+      @ingroup  functional
+      @brief    Callable object computing the index map associated to the deduplication operation.
+    **/
+    //==================================================================================================================
+    inline constexpr unique_t uniquer{};
+
+    //==================================================================================================================
+    /**
+      @ingroup  functional
+      @brief    Callable object computing the index map associated to the selection operation.
+    **/
+    //==================================================================================================================
+    inline constexpr select_t selector{};
   }
 }

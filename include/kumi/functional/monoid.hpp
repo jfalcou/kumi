@@ -11,7 +11,7 @@ namespace kumi::function
 {
   //====================================================================================================================
   /**
-    @ingroup utility
+    @ingroup functional
     @class numeric_add
     @brief A type representing the addition monoid with it's associated identity. The identity of
            the addition is `0`.
@@ -34,7 +34,7 @@ namespace kumi::function
 
   //====================================================================================================================
   /**
-    @ingroup utility
+    @ingroup functional
     @class numeric_prod
     @brief A type representing the multiplication monoid with it's associated identity.
            The identity of the multiplication is `1`.
@@ -57,7 +57,7 @@ namespace kumi::function
 
   //====================================================================================================================
   /**
-    @ingroup utility
+    @ingroup functional
     @class boolean_and
     @brief A type representing the `logical and` monoid and it's associated identity. The identity
            of the `boolean_and` is `true`.
@@ -80,7 +80,7 @@ namespace kumi::function
 
   //====================================================================================================================
   /**
-    @ingroup utility
+    @ingroup functional
     @class boolean_or
     @brief A type representing the `logical or` monoid and it's associated identity. The identity
            of `boolean_or` is `false`.
@@ -103,7 +103,7 @@ namespace kumi::function
 
   //====================================================================================================================
   /**
-    @ingroup utility
+    @ingroup functional
     @class boolean_xor
     @brief A type representing the `logical xor` monoid and it's associated identity. The identity
            of `boolean_xor` is `false`.
@@ -126,7 +126,7 @@ namespace kumi::function
 
   //==================================================================================================================
   /**
-    @ingroup utility
+    @ingroup functional
     @brief Forms a binary monoid callable that can be used in kumi::algoritm. It represents the
            addition.
   **/
@@ -135,7 +135,7 @@ namespace kumi::function
 
   //==================================================================================================================
   /**
-    @ingroup utility
+    @ingroup functional
     @brief Forms a binary monoid callable that can be used in kumi::algoritm. It represents the
            multiplication.
   **/
@@ -144,7 +144,7 @@ namespace kumi::function
 
   //==================================================================================================================
   /**
-    @ingroup utility
+    @ingroup functional
     @brief Forms a binary monoid callable that can be used in kumi::algoritm. It represents the
            logical and operation.
   **/
@@ -153,7 +153,7 @@ namespace kumi::function
 
   //==================================================================================================================
   /**
-    @ingroup utility
+    @ingroup functional
     @brief Forms a binary monoid callable that can be used in kumi::algoritm. It represents the
            logical or operation.
   **/
@@ -162,7 +162,7 @@ namespace kumi::function
 
   //==================================================================================================================
   /**
-    @ingroup utility
+    @ingroup functional
     @brief Forms a binary monoid callable that can be used in kumi::algoritm. It represents the
            logical xor operation.
   **/

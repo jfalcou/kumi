@@ -321,7 +321,7 @@ namespace kumi
     {
       [&]<std::size_t... I>(std::index_sequence<I...>) {
         ((get<I>(*this) = get<I>(other)), ...);
-      }(std::make_index_sequence<sizeof...(Ts)>());
+      }(std::make_index_sequence<sizeof...(Ts)>{});
 
       return *this;
     }
@@ -335,7 +335,7 @@ namespace kumi
     {
       [&]<std::size_t... I>(std::index_sequence<I...>) {
         ((get<I>(*this) = get<I>(KUMI_FWD(other))), ...);
-      }(std::make_index_sequence<sizeof...(Ts)>());
+      }(std::make_index_sequence<sizeof...(Ts)>{});
 
       return *this;
     }
@@ -354,7 +354,7 @@ namespace kumi
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return ((get<I>(self) == get<I>(other)) && ...);
-      }(std::make_index_sequence<sizeof...(Ts)>());
+      }(std::make_index_sequence<sizeof...(Ts)>{});
     }
 
     /// @brief Compares a tuple with an other for inequality
@@ -386,7 +386,7 @@ namespace kumi
 
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return (res || ... || order(index_t<I>{}));
-      }(std::make_index_sequence<sizeof...(Ts) - 1>());
+      }(std::make_index_sequence<sizeof...(Ts) - 1>{});
     }
 
     /// @brief Compares tuples for lexicographical is less or equal relation
@@ -603,7 +603,7 @@ namespace kumi
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
       return Type{get<I>(t)...};
-    }(std::make_index_sequence<sizeof...(Ts)>());
+    }(std::make_index_sequence<sizeof...(Ts)>{});
   }
 
   //====================================================================================================================
@@ -718,8 +718,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @related tuple
-    @related record
+    @related tuple record
     @brief Extracts the names of the fields of a kumi::product_type.
 
     @note If some fields are unnamed, the associated name is kumi::unit.
@@ -742,8 +741,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @related tuple
-    @related record
+    @related tuple record
     @brief Extracts the values of the fields of a kumi::product_type.
 
     @param    t the product_type from which to extract names.

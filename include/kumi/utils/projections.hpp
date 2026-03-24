@@ -94,7 +94,7 @@ namespace kumi
       os << '[';
       [&]<std::size_t... I>(std::index_sequence<I...>) {
         ((os << get<I>(i) << ", "), ...);
-      }(std::make_index_sequence<sizeof...(V) - 1>());
+      }(std::make_index_sequence<sizeof...(V) - 1>{});
       os << get<sizeof...(V) - 1>(i) << ']';
 
       return os;

@@ -44,7 +44,7 @@ namespace kumi
     {
       auto const f = [](auto cur, auto u) { return cur > u ? cur : u; };
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (function::foldable{get<0>(KUMI_FWD(t))} >> ... >> bind_back(f, get<I + 1>(KUMI_FWD(t)))).value;
+        return (function::foldable{get<0>(KUMI_FWD(t))} >> ... >> bind_back(f, get<I + 1>(KUMI_FWD(t))))();
       }(std::make_index_sequence<size_v<T> - 1>{});
     }
   }
@@ -85,8 +85,7 @@ namespace kumi
     {
       auto const c = [f](auto cur, auto const& u) { return cur > invoke(f, u) ? cur : invoke(f, u); };
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (function::foldable{invoke(f, get<0>(KUMI_FWD(t)))} >> ... >> bind_back(c, get<I + 1>(KUMI_FWD(t))))
-          .value;
+        return (function::foldable{invoke(f, get<0>(KUMI_FWD(t)))} >> ... >> bind_back(c, get<I + 1>(KUMI_FWD(t))))();
       }(std::make_index_sequence<size_v<T> - 1>{});
     }
   }
@@ -167,7 +166,7 @@ namespace kumi
     {
       auto const f = [](auto cur, auto u) { return cur < u ? cur : u; };
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (function::foldable{get<0>(KUMI_FWD(t))} >> ... >> bind_back(f, get<I + 1>(KUMI_FWD(t)))).value;
+        return (function::foldable{get<0>(KUMI_FWD(t))} >> ... >> bind_back(f, get<I + 1>(KUMI_FWD(t))))();
       }(std::make_index_sequence<size_v<T> - 1>{});
     }
   }
@@ -208,8 +207,7 @@ namespace kumi
     {
       auto const c = [f](auto cur, auto const& u) { return cur < invoke(f, u) ? cur : invoke(f, u); };
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (function::foldable{invoke(f, get<0>(KUMI_FWD(t)))} >> ... >> bind_back(c, get<I + 1>(KUMI_FWD(t))))
-          .value;
+        return (function::foldable{invoke(f, get<0>(KUMI_FWD(t)))} >> ... >> bind_back(c, get<I + 1>(KUMI_FWD(t))))();
       }(std::make_index_sequence<size_v<T> - 1>{});
     }
   }

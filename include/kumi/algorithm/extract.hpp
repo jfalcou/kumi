@@ -55,7 +55,7 @@ namespace kumi
     return [&]<std::size_t... N>(std::index_sequence<N...>) {
       using final_t = builder_make_t<T, element_t<N + I0, T>...>;
       return final_t{get<N + I0>(KUMI_FWD(t))...};
-    }(std::make_index_sequence<I1 - I0>());
+    }(std::make_index_sequence<I1 - I0>{});
   }
 
   //! @overload
