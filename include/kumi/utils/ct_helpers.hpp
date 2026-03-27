@@ -157,10 +157,10 @@ namespace kumi
   //====================================================================================================================
   template<typename U, concepts::product_type T>
   KUMI_ABI consteval auto get_index_of_type()
-  requires(concepts::typed_get_compliant<U, T>)
+  requires(concepts::queryable_by_type<U, T>)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return _::get_index_by_type_v<U, raw_element_t<I, T>...>;
+      return _::get_index_by_type_v<U, stored_element_t<I, T>...>;
     }(std::make_index_sequence<size_v<T>>{});
   }
 
@@ -177,7 +177,7 @@ namespace kumi
   //====================================================================================================================
   template<concepts::identifier Id, concepts::product_type T>
   KUMI_ABI consteval auto get_index_of_field()
-  requires(concepts::named_get_compliant<Id, T>)
+  requires(concepts::queryable_by_identifier<Id, T>)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
       return _::get_index_by_value_v<Id, element_t<I, T>...>;
@@ -197,7 +197,7 @@ namespace kumi
   //====================================================================================================================
   template<str L, concepts::product_type T>
   KUMI_ABI consteval auto get_index_of_label()
-  requires(concepts::labeled_get_compliant<label_t<L>, T>)
+  requires(concepts::queryable_by_label<label_t<L>, T>)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
       return _::get_index_by_label_v<label_t<L>, element_t<I, T>...>;

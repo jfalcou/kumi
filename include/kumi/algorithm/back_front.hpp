@@ -83,11 +83,11 @@ namespace kumi
 
   namespace result
   {
-    template<concepts::product_type T> struct front : raw_member<0, T>
+    template<concepts::product_type T> struct front : stored_member<0, T>
     {
     };
 
-    template<concepts::product_type T> struct back : raw_member<size_v<T> - 1, T>
+    template<concepts::product_type T> struct back : stored_member<size_v<T> - 1, T>
     {
     };
 

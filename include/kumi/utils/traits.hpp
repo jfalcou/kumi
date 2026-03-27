@@ -388,25 +388,25 @@ namespace kumi
     @code
     namespace kumi
     {
-      template<std::size_t I, typename T> using raw_member_t = typename raw_member<I,T>::type;
+      template<std::size_t I, typename T> using stored_member_t = typename stored_member<I,T>::type;
     }
     @endcode
   **/
   //====================================================================================================================
-  template<std::size_t I, typename T> struct raw_member
+  template<std::size_t I, typename T> struct stored_member
   {
     using type = member_t<I, T>;
   };
 
   template<std::size_t I, typename T>
   requires(is_record_type<std::remove_cvref_t<T>>::value)
-  struct raw_member<I, T>
+  struct stored_member<I, T>
   {
     using field_type = decltype(get<I>(std::declval<T&&>()));
     using type = decltype(std::declval<field_type&&>()(typename std::remove_cvref_t<field_type>::identifier_type{}));
   };
 
-  template<std::size_t I, typename T> using raw_member_t = typename raw_member<I, T>::type;
+  template<std::size_t I, typename T> using stored_member_t = typename stored_member<I, T>::type;
 
   //====================================================================================================================
   /**
@@ -424,24 +424,24 @@ namespace kumi
     namespace kumi
     {
       template<std::size_t I, typename T>
-      using raw_element_t = typename raw_element_t<I,T>::type;
+      using stored_element_t = typename stored_element_t<I,T>::type;
     }
     @endcode
   **/
   //====================================================================================================================
-  template<std::size_t I, typename T> struct raw_element
+  template<std::size_t I, typename T> struct stored_element
   {
     using type = element_t<I, T>;
   };
 
   template<std::size_t I, typename T>
   requires(is_record_type<std::remove_cvref_t<T>>::value)
-  struct raw_element<I, T>
+  struct stored_element<I, T>
   {
     using type = typename element_t<I, T>::type;
   };
 
-  template<std::size_t I, typename T> using raw_element_t = typename raw_element<I, T>::type;
+  template<std::size_t I, typename T> using stored_element_t = typename stored_element<I, T>::type;
 
   //====================================================================================================================
   /**
@@ -543,6 +543,103 @@ namespace kumi
 
   template<typename... Ts> inline constexpr auto all_unique_names_v = all_unique_names_t<Ts...>::value;
 
+  //====================================================================================================================
+  /**
+    @ingroup traits
+    @brief   Unpacks a product type and applies its element types as arguments to a meta-function.
+
+    ` apply_traits` takes a template meta-function (a template template parameter) and a product type. It expands the
+      types contained within the product type and passes them as a parameter pack to the provided `Traits`.
+
+    @tparam Traits Meta-function to be applied.
+    @tparam Tuple  The product type whose elements will be unpacked.
+
+    ## Helper type
+    @code
+    namespace kumi
+    {
+      template<template<typename...> typename Traits, typename Tuple>
+      using apply_traits_t = typename apply_traits<Traits, Tuple>::type;
+    }
+    @endcode
+
+    ## Example
+    @code
+    using my_tuple = kumi::tuple<int, float, char>;
+
+    // Equivalent to std::common_type<int, float, char>::type
+    using common = kumi::apply_traits_t<std::common_type, my_tuple>;
+    @endcode
+  **/
+  //====================================================================================================================
+  template<template<typename...> typename Traits,
+           typename Tuple,
+           typename Seq = std::make_index_sequence<size<Tuple>::value>>
+  requires is_product_type_v<std::remove_cvref_t<Tuple>>
+  struct apply_traits;
+
+  template<template<typename...> typename Traits, typename Tuple, std::size_t... Is>
+  requires is_product_type_v<std::remove_cvref_t<Tuple>> &&
+           (requires { typename Traits<element_t<Is, Tuple>...>::type; })
+  struct apply_traits<Traits, Tuple, std::index_sequence<Is...>>
+  {
+    using type = typename Traits<element_t<Is, Tuple>...>::type;
+  };
+
+  template<template<typename...> typename Traits, typename Tuple>
+  requires is_product_type_v<std::remove_cvref_t<Tuple>>
+  using apply_traits_t = typename apply_traits<Traits, Tuple>::type;
+
+  //====================================================================================================================
+  /**
+    @ingroup traits
+    @brief   Applies a unary meta-function to each element of a product type.
+
+    `map_traits` transforms a product type by applying a given meta-function `Traits` to every element type
+    individually. The result is a new product type containing the transformed types.
+
+    @tparam Traits Unary meta-function to apply to each element.
+    @tparam Tuple  The product type to transform.
+
+    ## Helper type
+    @code
+    namespace kumi
+    {
+      template<template<typename...> typename Traits, typename Tuple>
+      using map_traits_t = typename map_traits<Traits, Tuple>::type;
+    }
+    @endcode
+
+    ## Example
+    @code
+    using my_tuple = kumi::tuple<int, double, char>;
+
+    // Result: kumi::tuple<int*, double*, char*>
+    using ptr_tuple = kumi::map_traits_t<std::add_pointer, my_tuple>;
+    @endcode
+  **/
+  //====================================================================================================================
+  template<template<typename...> typename Traits,
+           typename Tuple,
+           typename Seq = std::make_index_sequence<size<Tuple>::value>>
+  requires is_product_type_v<std::remove_cvref_t<Tuple>>
+  struct map_traits;
+
+  template<template<typename...> typename Traits, typename Tuple, std::size_t... Is>
+  requires is_product_type_v<std::remove_cvref_t<Tuple>> &&
+           (requires { typename Traits<element_t<Is, Tuple>>::type; } && ...)
+  struct map_traits<Traits, Tuple, std::index_sequence<Is...>>
+  {
+    using type = tuple<typename Traits<element_t<Is, Tuple>>::type...>;
+  };
+
+  template<template<typename...> typename Traits, typename Tuple>
+  requires is_product_type_v<std::remove_cvref_t<Tuple>>
+  using map_traits_t = typename map_traits<Traits, Tuple>::type;
+}
+
+namespace kumi
+{
 #ifndef KUMI_DOXYGEN_INVOKED
   // A type with the tuple interface is automatically a product_type
   template<typename T>
@@ -558,6 +655,7 @@ namespace kumi
   {
   };
 
+  // An index sequence is a one dimensional projection map
   template<std::size_t... I> struct is_projection_map<std::index_sequence<I...>> : std::true_type
   {
   };
@@ -583,42 +681,4 @@ namespace kumi
 
   template<typename T> inline constexpr bool is_kumi_record_v = is_kumi_record<T>::value;
 #endif
-
-  ///
-  template<template<typename...> typename Traits,
-           typename Tuple,
-           typename Seq = std::make_index_sequence<size<Tuple>::value>>
-  requires is_product_type_v<std::remove_cvref_t<Tuple>>
-  struct apply_traits;
-
-  template<template<typename...> typename Traits, typename Tuple, std::size_t... Is>
-  requires is_product_type_v<std::remove_cvref_t<Tuple>> &&
-           (requires { typename Traits<element_t<Is, Tuple>...>::type; })
-  struct apply_traits<Traits, Tuple, std::index_sequence<Is...>>
-  {
-    using type = typename Traits<element_t<Is, Tuple>...>::type;
-  };
-
-  template<template<typename...> typename Traits, typename Tuple>
-  requires is_product_type_v<std::remove_cvref_t<Tuple>>
-  using apply_traits_t = typename apply_traits<Traits, Tuple>::type;
-
-  template<template<typename...> typename Traits,
-           typename Tuple,
-           typename Seq = std::make_index_sequence<size<Tuple>::value>>
-  requires is_product_type_v<std::remove_cvref_t<Tuple>>
-  struct map_traits;
-
-  template<template<typename...> typename Traits, typename Tuple, std::size_t... Is>
-  requires is_product_type_v<std::remove_cvref_t<Tuple>> &&
-           (requires { typename Traits<element_t<Is, Tuple>>::type; } && ...)
-  struct map_traits<Traits, Tuple, std::index_sequence<Is...>>
-  {
-    using type = tuple<typename Traits<element_t<Is, Tuple>>::type...>;
-  };
-
-  template<template<typename...> typename Traits, typename Tuple>
-  requires is_product_type_v<std::remove_cvref_t<Tuple>>
-  using map_traits_t = typename map_traits<Traits, Tuple>::type;
-
 }

@@ -191,7 +191,7 @@ namespace kumi
     //==================================================================================================================
     template<concepts::identifier Id>
     KUMI_ABI constexpr decltype(auto) operator[](Id const&) & noexcept
-    requires(concepts::uniquely_named<Ts...> && concepts::contains_field<Id, Ts...>)
+    requires(concepts::uniquely_named<Ts...> && concepts::contains_identifier<Id, Ts...>)
     {
       return impl(_::tag_of_t<Id>{});
     }
@@ -199,7 +199,7 @@ namespace kumi
     /// @overload
     template<concepts::identifier Id>
     KUMI_ABI constexpr decltype(auto) operator[](Id const&) && noexcept
-    requires(concepts::uniquely_named<Ts...> && concepts::contains_field<Id, Ts...>)
+    requires(concepts::uniquely_named<Ts...> && concepts::contains_identifier<Id, Ts...>)
     {
       return static_cast<decltype(impl)&&>(impl)(_::tag_of_t<Id>{});
     }
@@ -207,7 +207,7 @@ namespace kumi
     /// @overload
     template<concepts::identifier Id>
     KUMI_ABI constexpr decltype(auto) operator[](Id const&) const&& noexcept
-    requires(concepts::uniquely_named<Ts...> && concepts::contains_field<Id, Ts...>)
+    requires(concepts::uniquely_named<Ts...> && concepts::contains_identifier<Id, Ts...>)
     {
       return static_cast<decltype(impl) const&&>(impl)(_::tag_of_t<Id>{});
     }
@@ -215,7 +215,7 @@ namespace kumi
     /// @overload
     template<concepts::identifier Id>
     KUMI_ABI constexpr decltype(auto) operator[](Id const&) const& noexcept
-    requires(concepts::uniquely_named<Ts...> && concepts::contains_field<Id, Ts...>)
+    requires(concepts::uniquely_named<Ts...> && concepts::contains_identifier<Id, Ts...>)
     {
       return impl(_::tag_of_t<Id>{});
     }
@@ -915,7 +915,7 @@ namespace kumi
   //====================================================================================================================
   template<concepts::identifier auto Id, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>& t) noexcept
-  requires(concepts::uniquely_named<Ts...> && concepts::contains_field<decltype(Id), Ts...>)
+  requires(concepts::uniquely_named<Ts...> && concepts::contains_identifier<decltype(Id), Ts...>)
   {
     return t[Id];
   }
@@ -924,7 +924,7 @@ namespace kumi
   /// @overload
   template<concepts::identifier auto Id, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>&& t) noexcept
-  requires(concepts::uniquely_named<Ts...> && concepts::contains_field<decltype(Id), Ts...>)
+  requires(concepts::uniquely_named<Ts...> && concepts::contains_identifier<decltype(Id), Ts...>)
   {
     return static_cast<tuple<Ts...>&&>(t)[Id];
   }
@@ -933,7 +933,7 @@ namespace kumi
   /// @overload
   template<concepts::identifier auto Id, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const& t) noexcept
-  requires(concepts::uniquely_named<Ts...> && concepts::contains_field<decltype(Id), Ts...>)
+  requires(concepts::uniquely_named<Ts...> && concepts::contains_identifier<decltype(Id), Ts...>)
   {
     return t[Id];
   }
@@ -942,7 +942,7 @@ namespace kumi
   /// @overload
   template<concepts::identifier auto Id, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const&& t) noexcept
-  requires(concepts::uniquely_named<Ts...> && concepts::contains_field<decltype(Id), Ts...>)
+  requires(concepts::uniquely_named<Ts...> && concepts::contains_identifier<decltype(Id), Ts...>)
   {
     return static_cast<tuple<Ts...> const&&>(t)[Id];
   }
@@ -1009,12 +1009,12 @@ namespace kumi
 
   /// Improves diagnostic for non present label
   template<str S, typename T>
-  requires(is_kumi_tuple_v<std::remove_cvref_t<T>> && !_::contains_field<S, T>())
+  requires(is_kumi_tuple_v<std::remove_cvref_t<T>> && !_::contains_identifier<S, T>())
   constexpr auto get(T&& t) = delete;
 
   /// Improves diagnostic for non present identifier
   template<concepts::identifier auto S, typename T>
-  requires(is_kumi_tuple_v<std::remove_cvref_t<T>> && !concepts::contains_field<decltype(S), T>)
+  requires(is_kumi_tuple_v<std::remove_cvref_t<T>> && !concepts::contains_identifier<decltype(S), T>)
   constexpr auto get(T&& t) = delete;
 
   /// Improves diagnostic for non present type
