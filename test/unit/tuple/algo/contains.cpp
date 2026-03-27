@@ -1,9 +1,9 @@
 //==================================================================================================
-/**
-  RABERU - Fancy Parameters Library
-  Copyright : RABERU Project Contributors
+/*
+  KUMI - Compact Tuple Tools
+  Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
-**/
+*/
 //==================================================================================================
 #define TTS_MAIN
 #include "test.hpp"

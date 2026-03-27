@@ -112,7 +112,7 @@ namespace kumi
       return type{get<I>(KUMI_FWD(t))...};
     };
 
-    return kumi::tuple{select(proj.first), select(proj.second)};
+    return kumi::tuple{select(get<0>(proj)), select(get<1>(proj))};
   }
 
   namespace result

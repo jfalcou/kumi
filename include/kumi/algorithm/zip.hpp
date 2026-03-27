@@ -60,13 +60,13 @@ namespace kumi
 
       auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>) {
         auto tps = kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...);
-        using type = builder_make_t<res_type, element_t<k, std::remove_cvref_t<element_t<I, decltype(tps)>>>...>;
+        using type = builder_make_t<res_type, element_t<k, element_t<I, decltype(tps)>>...>;
         return type{get<k>(get<I>(KUMI_FWD(tps)))...};
       };
 
       return [&]<std::size_t... N>(std::index_sequence<N...>) {
-        return kumi::make_tuple(maps(index<N>, pos.tpl)...);
-      }(pos.elt);
+        return kumi::make_tuple(maps(index<N>, get<0>(pos))...);
+      }(get<1>(pos));
     }
   }
 
@@ -125,13 +125,13 @@ namespace kumi
 
       auto maps = [&]<std::size_t... I>(auto E, std::index_sequence<I...>) {
         auto tps = kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...);
-        using type = builder_make_t<res_type, element_t<E, std::remove_cvref_t<element_t<I, decltype(tps)>>>...>;
+        using type = builder_make_t<res_type, element_t<E, element_t<I, decltype(tps)>>...>;
         return type{get<E>(get<I>(KUMI_FWD(tps)))...};
       };
 
       return [&]<std::size_t... N>(std::index_sequence<N...>) {
-        return kumi::make_tuple(maps(index<N>, pos.tpl)...);
-      }(pos.elt);
+        return kumi::make_tuple(maps(index<N>, get<0>(pos))...);
+      }(get<1>(pos));
     }
   }
 
@@ -187,16 +187,14 @@ namespace kumi
       auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>) {
         auto tps = kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...);
 
-        using type =
-          builder_make_t<res_type,
-                         function::element_or_t<k, std::remove_cvref_t<element_t<I, decltype(tps)>>, kumi::unit>...>;
+        using type = builder_make_t<res_type, function::element_or_t<k, element_t<I, decltype(tps)>, kumi::unit>...>;
 
         return type{function::get_or<k>(get<I>(KUMI_FWD(tps)), kumi::none)...};
       };
 
       return [&]<std::size_t... N>(std::index_sequence<N...>) {
-        return kumi::make_tuple(maps(index<N>, pos.tpl)...);
-      }(pos.elt);
+        return kumi::make_tuple(maps(index<N>, get<0>(pos))...);
+      }(get<1>(pos));
     }
   }
 

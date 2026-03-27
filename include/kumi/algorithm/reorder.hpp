@@ -137,26 +137,21 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto reindex(T&& t)
   {
     using proj_t = std::remove_cvref_t<decltype(Projections)>;
-    auto mk = [&]<auto proj>() -> decltype(auto) {
+    auto mk = [&]<concepts::projection auto proj>() -> decltype(auto) {
       if constexpr (concepts::projection_map<decltype(proj)>) return reindex<proj>(KUMI_FWD(t));
-      else if constexpr (concepts::identifier<decltype(proj)>)
-      {
-        static_assert(requires { get<proj>(std::declval<T>()); }, "[KUMI] - Label not present in input type");
-        return get<proj>(KUMI_FWD(t));
-      }
       else
       {
-        static_assert(proj < size_v<T>, "[KUMI] - Index out of bounds of input type");
+        static_assert(requires { get<proj>(std::declval<T>()); }, "[KUMI] - Invalid projection for input type");
         return get<proj>(KUMI_FWD(t));
       }
     };
 
     if constexpr (concepts::empty_product_type<T>) return builder<T>::make();
-    else if constexpr (concepts::empty_product_type<proj_t>) return builder<T>::make();
+    else if constexpr (proj_t::size() == 0) return builder<T>::make();
     else
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return builder<T>::make(mk.template operator()<get<I>(Projections)>()...);
-      }(std::make_index_sequence<size_v<proj_t>>{});
+      return [&]<auto... E>(kumi::projection_map<E...>) {
+        return builder<T>::make(mk.template operator()<E>()...);
+      }(Projections);
   }
 
   namespace result

@@ -62,7 +62,7 @@ namespace kumi
 
       return [&]<std::size_t... B, std::size_t... E>(std::index_sequence<B...>, std::index_sequence<E...>) {
         return tuple{build(index<E>, std::make_index_sequence<B>{})...};
-      }(proj.blocks, proj.offset);
+      }(get<0>(proj), get<1>(proj));
     }
   }
 
@@ -116,7 +116,7 @@ namespace kumi
 
       return [&]<std::size_t... B, std::size_t... E>(std::index_sequence<B...>, std::index_sequence<E...>) {
         return tuple{build(index<E>, std::make_index_sequence<B>{})...};
-      }(proj.blocks, proj.offset);
+      }(get<0>(proj), get<1>(proj));
     }
   }
 
@@ -172,7 +172,7 @@ namespace kumi
 
       return [&]<std::size_t... B, std::size_t... E>(std::index_sequence<B...>, std::index_sequence<E...>) {
         return tuple{build(index<E>, std::make_index_sequence<B>{})...};
-      }(proj.blocks, proj.offset);
+      }(get<0>(proj), get<1>(proj));
     }
   }
 

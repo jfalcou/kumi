@@ -245,7 +245,7 @@ namespace kumi::_
   template<typename Ref, typename... Fields> using get_field_by_type_t = typename find_by_type_t<Ref, Fields...>::type;
 
   template<typename Ref, typename... Fields>
-  inline constexpr auto get_index_by_type_v = find_by_type_t<Ref, Fields...>::index;
+  inline constexpr auto get_index_by_type_v = find_by_type_t<Ref, Fields...>::value;
 
   template<typename Ref, typename... Fields>
   concept can_get_field_by_type = !std::is_same_v<get_field_by_type_t<Ref, Fields...>, std::false_type>;
@@ -268,7 +268,7 @@ namespace kumi::_
   template<typename Ref, typename... Fields> using get_field_by_value_t = typename find_by_tag_t<Ref, Fields...>::type;
 
   template<typename Ref, typename... Fields>
-  inline constexpr auto get_index_by_value_v = find_by_tag_t<Ref, Fields...>::index;
+  inline constexpr auto get_index_by_value_v = find_by_tag_t<Ref, Fields...>::value;
 
   template<typename Ref, typename... Fields>
   concept can_get_field_by_value = !std::is_same_v<get_field_by_value_t<Ref, Fields...>, std::false_type>;
@@ -291,9 +291,8 @@ namespace kumi::_
   using get_field_by_label_t = typename find_by_label_t<Ref, Fields...>::type;
 
   template<typename Ref, typename... Fields>
-  inline constexpr auto get_index_by_label_v = find_by_label_t<Ref, Fields...>::index;
+  inline constexpr auto get_index_by_label_v = find_by_label_t<Ref, Fields...>::value;
 
   template<typename Ref, typename... Fields>
   concept can_get_field_by_label = !std::is_same_v<get_field_by_label_t<Ref, Fields...>, std::false_type>;
-
 }

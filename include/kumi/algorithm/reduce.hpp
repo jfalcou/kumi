@@ -53,11 +53,11 @@ namespace kumi
       constexpr auto pos = function::reducer(index<size_v<T>>);
 
       return [&]<std::size_t... F, std::size_t... S>(std::index_sequence<F...>, std::index_sequence<S...>) {
-        if constexpr (pos.rest == 1)
+        if constexpr (get<2>(pos) == 1)
           return reduce(KUMI_FWD(m), tuple{invoke(KUMI_FWD(m), get<F>(KUMI_FWD(t)), get<S>(KUMI_FWD(t)))...,
                                            get<size_v<T> - 1>(KUMI_FWD(t))});
         else return reduce(KUMI_FWD(m), tuple{invoke(KUMI_FWD(m), get<F>(KUMI_FWD(t)), get<S>(KUMI_FWD(t)))...});
-      }(pos.first, pos.second);
+      }(get<0>(pos), get<1>(pos));
     }
   }
 
@@ -151,14 +151,14 @@ namespace kumi
       constexpr auto pos = function::reducer(index<size_v<T>>);
 
       return [&]<std::size_t... F, std::size_t... S>(std::index_sequence<F...>, std::index_sequence<S...>) {
-        if constexpr (pos.rest == 1)
+        if constexpr (get<2>(pos) == 1)
           return reduce(KUMI_FWD(m),
                         tuple{invoke(KUMI_FWD(m), invoke(f, get<F>(KUMI_FWD(t))), invoke(f, get<S>(KUMI_FWD(t))))...,
                               invoke(f, get<size_v<T> - 1>(KUMI_FWD(t)))});
         else
           return reduce(KUMI_FWD(m),
                         tuple{invoke(KUMI_FWD(m), invoke(f, get<F>(KUMI_FWD(t))), invoke(f, get<S>(KUMI_FWD(t))))...});
-      }(pos.first, pos.second);
+      }(get<0>(pos), get<1>(pos));
     }
   }
 

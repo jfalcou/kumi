@@ -52,7 +52,7 @@ namespace kumi
 
       auto maps = [&]<std::size_t... E, std::size_t... I>(std::index_sequence<E...>, std::index_sequence<I...>) {
         auto tps = kumi::forward_as_tuple(KUMI_FWD(ts)...);
-        using res_t = builder_make_t<res_type, element_t<E, std::remove_cvref_t<element_t<I, decltype(tps)>>>...>;
+        using res_t = builder_make_t<res_type, element_t<E, element_t<I, decltype(tps)>>...>;
         return res_t{get<E>(get<I>(tps))...};
       };
 

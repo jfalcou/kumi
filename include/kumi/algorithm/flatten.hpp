@@ -47,7 +47,7 @@ namespace kumi
     else
     {
       constexpr auto proj = [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return function::flattener(std::index_sequence<function::size_or_v<raw_element_t<I, T>, 1>...>{});
+        return function::concatenater(std::index_sequence<function::size_or_v<raw_element_t<I, T>, 1>...>{});
       }(std::make_index_sequence<size_v<T>>{});
 
       auto process = [&]<typename V>(auto J, V&& v) {
@@ -64,7 +64,7 @@ namespace kumi
 
       return [&]<std::size_t... J, std::size_t... I>(std::index_sequence<J...>, std::index_sequence<I...>) {
         return builder<T>::make(process(index<J>, get<I>(KUMI_FWD(t)))...);
-      }(proj.elt, proj.tpl);
+      }(get<1>(proj), get<0>(proj));
     }
   }
 

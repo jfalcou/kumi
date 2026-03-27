@@ -363,11 +363,17 @@ namespace kumi
     @endcode
   **/
   //====================================================================================================================
-  template<typename T> inline constexpr auto is_projection_map_v = requires { T::is_projection_map; };
-
-  template<typename T> struct is_projection_map : std::bool_constant<is_projection_map_v<T>>
+  template<typename T> struct is_projection_map : std::false_type
   {
   };
+
+  template<typename T>
+  requires(T::is_projection_map)
+  struct is_projection_map<T> : std::true_type
+  {
+  };
+
+  template<typename T> inline constexpr auto is_projection_map_v = is_projection_map<T>::value;
 
   //====================================================================================================================
   /**
@@ -549,6 +555,10 @@ namespace kumi
   template<typename T>
   requires(is_container_v<T> && has_static_size_v<T> && _::std_tuple_compatible<T>)
   struct is_product_type<T> : std::true_type
+  {
+  };
+
+  template<std::size_t... I> struct is_projection_map<std::index_sequence<I...>> : std::true_type
   {
   };
 

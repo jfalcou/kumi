@@ -15,9 +15,8 @@ namespace kumi::function
     KUMI_ABI consteval auto operator()(index_t<H>, index_t<S>...) const noexcept
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using t = kumi::tuple<decltype(_::digits(
-          _::unflatten_index, std::integral_constant<std::size_t, sizeof...(S)>{}, std::index_sequence<I, S...>{}))...>;
-        return t{};
+        return projection_map{_::digits(_::unflatten_index, std::integral_constant<std::size_t, sizeof...(S)>{},
+                                        std::index_sequence<I, S...>{})...};
       }(std::make_index_sequence<H>{});
     }
   };
@@ -26,26 +25,11 @@ namespace kumi::function
   {
     template<std::size_t... Sizes> KUMI_ABI consteval auto operator()(std::index_sequence<Sizes...>) const noexcept
     {
-      constexpr auto N = (Sizes + ... + 0ULL);
-      using t = decltype(_::digits(_::container_of_index, std::integral_constant<std::size_t, N>{},
-                                   std::index_sequence<Sizes...>{}));
-      using e = decltype(_::digits(_::element_of_index, std::integral_constant<std::size_t, N>{},
-                                   std::index_sequence<Sizes...>{}));
+      constexpr auto N = std::integral_constant<std::size_t, (Sizes + ... + 0ULL)>{};
+      constexpr auto Ids = std::index_sequence<Sizes...>{};
 
-      struct
-      {
-        t tpl{};
-        e elt{};
-      } that{};
-
-      return that;
+      return projection_map{_::digits(_::container_of_index, N, Ids), _::digits(_::element_of_index, N, Ids)};
     }
-  };
-
-  struct flatten_t : cat_t
-  {
-    using parent = cat_t;
-    using parent::operator();
   };
 
   struct rotate_t
@@ -66,15 +50,8 @@ namespace kumi::function
       constexpr std::size_t remainder = N % 2;
 
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using f = std::index_sequence<(2 * I)...>;
-        using s = std::index_sequence<(2 * I + 1)...>;
-        struct
-        {
-          f first{};
-          s second{};
-          index_t<remainder> rest;
-        } that{};
-        return that;
+        return projection_map{std::index_sequence<(2 * I)...>{}, std::index_sequence<(2 * I + 1)...>{},
+                              index<remainder>};
       }(std::make_index_sequence<half>{});
     }
   };
@@ -83,15 +60,8 @@ namespace kumi::function
   {
     template<std::size_t N, std::size_t Sz> KUMI_ABI consteval auto operator()(index_t<N>, index_t<Sz>) const noexcept
     {
-      using t1 = decltype(std::make_index_sequence<N>{});
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using t2 = std::index_sequence<(I + N)...>;
-        struct
-        {
-          t1 first{};
-          t2 second{};
-        } that{};
-        return that;
+        return projection_map{std::make_index_sequence<N>{}, std::index_sequence<(I + N)...>{}};
       }(std::make_index_sequence<Sz - N>{});
     }
   };
@@ -104,14 +74,9 @@ namespace kumi::function
       constexpr std::size_t nb_blocks = (Sz <= Extent) ? 1 : (Sz - Extent + Stride - 1) / Stride + 1;
 
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using b = std::index_sequence<_::block_size(I, Stride, Extent, Sz)...>;
-        using o = std::index_sequence<(I * Stride)...>;
-        struct
-        {
-          b blocks{};
-          o offset{};
-        } that{};
-        return that;
+        using blocks = std::index_sequence<_::block_size(I, Stride, Extent, Sz)...>;
+        using offsets = std::index_sequence<(I * Stride)...>;
+        return projection_map{blocks{}, offsets{}};
       }(std::make_index_sequence<nb_blocks>{});
     }
   };
@@ -121,16 +86,9 @@ namespace kumi::function
     template<std::size_t Count, std::size_t Size>
     KUMI_ABI consteval auto operator()(index_t<Count>, index_t<Size>) const noexcept
     {
-      using t = decltype(std::make_index_sequence<Count>{});
-      using e = decltype(std::make_index_sequence<Size>{});
-
-      struct
-      {
-        t tpl{};
-        e elt{};
-      } that{};
-
-      return that;
+      using tuples = std::make_index_sequence<Count>;
+      using elements = std::make_index_sequence<Size>;
+      return projection_map{tuples{}, elements{}};
     }
   };
 
@@ -149,14 +107,6 @@ namespace kumi::function
   **/
   //====================================================================================================================
   inline constexpr cat_t concatenater{};
-
-  //====================================================================================================================
-  /**
-    @ingroup functional
-    @brief  Callable object computing the index map associated to the flattening operation.
-  **/
-  //====================================================================================================================
-  inline constexpr flatten_t flattener{};
 
   //====================================================================================================================
   /**

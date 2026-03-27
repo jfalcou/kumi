@@ -58,8 +58,8 @@ namespace kumi
       };
 
       return [&]<std::size_t... N>(std::index_sequence<N...>) {
-        return kumi::make_tuple(maps(index<N>, pos.tpl)...);
-      }(pos.elt);
+        return kumi::make_tuple(maps(index<N>, get<0>(pos))...);
+      }(get<1>(pos));
     }
   }
 

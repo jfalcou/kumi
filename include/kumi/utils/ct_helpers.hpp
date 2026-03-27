@@ -11,46 +11,6 @@ namespace kumi
 {
   //====================================================================================================================
   /**
-    @ingroup utility
-    @brief Helper to retrive the index of a type in a product type by it s type
-
-    @note This function does not participate in overload resolution if the product type has several instances of the
-          same type or if it is empty.
-
-    @return the index of the element of type U in the product type if it exist
-  **/
-  //====================================================================================================================
-  template<typename U, concepts::product_type T>
-  requires(concepts::typed_get_compliant<U, T>)
-  KUMI_ABI consteval auto get_index_of_type()
-  {
-    return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return _::get_index_by_type_v<U, element_t<I, T>...>;
-    }(std::make_index_sequence<size_v<T>>{});
-  }
-
-  //====================================================================================================================
-  /**
-    @ingroup utility
-    @brief Helper to retrive the index of a type in a product type by it s identifier
-
-    @note This function does not participate in overload resolution if the product type has several instances of the
-          same identifier or has no identifier at all.
-
-    @return the index of the element whose identifier matches Id in the product type if it exist
-  **/
-  //====================================================================================================================
-  template<concepts::identifier Id, concepts::product_type T>
-  requires(concepts::named_get_compliant<Id, T>)
-  KUMI_ABI consteval auto get_index_of_field()
-  {
-    return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return _::get_index_by_value_v<Id, element_t<I, T>...>;
-    }(std::make_index_sequence<size_v<T>>{});
-  }
-
-  //====================================================================================================================
-  /**
     @ingroup types
     @class index_t
     @brief Integral constant type
@@ -89,7 +49,7 @@ namespace kumi
     using type = str;
 
     /// Value stored by the constant
-    static constexpr auto value = Label;
+    static constexpr str value = Label;
 
     /// Conversion operator to kumi::str
     constexpr inline operator str() const noexcept { return Label; }
@@ -107,7 +67,7 @@ namespace kumi
     @brief Inline literal constant value for kumi::label_t
   **/
   //====================================================================================================================
-  template<str Label> inline constexpr label_t<Label> const label = {};
+  template<str Label> inline constexpr label_t<Label> label = {};
 
   //====================================================================================================================
   /**
@@ -182,5 +142,65 @@ namespace kumi
   template<template<class> class Pred> [[nodiscard]] constexpr auto predicate() noexcept
   {
     return []<typename T>(T const&) constexpr { return Pred<T>::value; };
+  }
+
+  //====================================================================================================================
+  /**
+    @ingroup utility
+    @brief Helper to retrive the index of a type in a product type by it s type
+
+    @note This function does not participate in overload resolution if the product type has several instances of the
+          same type or if it is empty.
+
+    @return the index of the element of type U in the product type if it exist
+  **/
+  //====================================================================================================================
+  template<typename U, concepts::product_type T>
+  KUMI_ABI consteval auto get_index_of_type()
+  requires(concepts::typed_get_compliant<U, T>)
+  {
+    return [&]<std::size_t... I>(std::index_sequence<I...>) {
+      return _::get_index_by_type_v<U, raw_element_t<I, T>...>;
+    }(std::make_index_sequence<size_v<T>>{});
+  }
+
+  //====================================================================================================================
+  /**
+    @ingroup utility
+    @brief Helper to retrive the index of a type in a product type by it s identifier
+
+    @note This function does not participate in overload resolution if the product type has several instances of the
+          same identifier or has no identifier at all.
+
+    @return the index of the element whose identifier matches Id in the product type if it exist
+  **/
+  //====================================================================================================================
+  template<concepts::identifier Id, concepts::product_type T>
+  KUMI_ABI consteval auto get_index_of_field()
+  requires(concepts::named_get_compliant<Id, T>)
+  {
+    return [&]<std::size_t... I>(std::index_sequence<I...>) {
+      return _::get_index_by_value_v<Id, element_t<I, T>...>;
+    }(std::make_index_sequence<size_v<T>>{});
+  }
+
+  //====================================================================================================================
+  /**
+    @ingroup utility
+    @brief Helper to retrive the index of a type in a product type by it s identifier
+
+    @note This function does not participate in overload resolution if the product type has several instances of the
+          same identifier or has no identifier at all.
+
+    @return the index of the element whose identifier matches Id in the product type if it exist
+  **/
+  //====================================================================================================================
+  template<str L, concepts::product_type T>
+  KUMI_ABI consteval auto get_index_of_label()
+  requires(concepts::labeled_get_compliant<label_t<L>, T>)
+  {
+    return [&]<std::size_t... I>(std::index_sequence<I...>) {
+      return _::get_index_by_label_v<label_t<L>, element_t<I, T>...>;
+    }(std::make_index_sequence<size_v<T>>{});
   }
 }

@@ -9,6 +9,28 @@
 
 namespace kumi
 {
+  namespace _
+  {
+    template<std::size_t I, typename T> struct projection_at
+    {
+    };
+
+    template<std::size_t I, auto Head, auto... Tail>
+    struct projection_at<I, kumi::projection_map<Head, Tail...>> : projection_at<I - 1, kumi::projection_map<Tail...>>
+    {
+    };
+
+    template<std::size_t I, auto... Vs> struct projection_at<I, kumi::projection_map<Vs...> const>
+    {
+      static constexpr auto value = projection_at<I, kumi::projection_map<Vs...>>::value;
+    };
+
+    template<auto Head, auto... Tail> struct projection_at<0, kumi::projection_map<Head, Tail...>>
+    {
+      static constexpr auto value = Head;
+    };
+  }
+
   //====================================================================================================================
   /**
     @ingroup utility
@@ -30,13 +52,13 @@ namespace kumi
     @include doc/infra/projections.cpp
   **/
   //====================================================================================================================
-  template<typename... V> struct projection_map
+  template<auto... V> struct projection_map
   {
     static constexpr bool is_projection_map = true;
 
     consteval projection_map() noexcept = default;
 
-    consteval explicit projection_map(V...) noexcept {}
+    consteval explicit projection_map(decltype(V)...) noexcept {}
 
     //==================================================================================================================
     /**
@@ -65,7 +87,7 @@ namespace kumi
     requires(I < sizeof...(V))
     KUMI_ABI constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) const noexcept
     {
-      return element_t<I, projection_map>{};
+      return _::projection_at<I, projection_map>::value;
     }
 
     //==================================================================================================================
@@ -89,14 +111,12 @@ namespace kumi
     //==================================================================================================================
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os,
-                                                         projection_map const& i) noexcept
+                                                         projection_map const&) noexcept
     {
+      std::size_t p = 0;
       os << '[';
-      [&]<std::size_t... I>(std::index_sequence<I...>) {
-        ((os << get<I>(i) << ", "), ...);
-      }(std::make_index_sequence<sizeof...(V) - 1>{});
-      os << get<sizeof...(V) - 1>(i) << ']';
-
+      ((os << V << (++p < sizeof...(V) ? ", " : "")), ...);
+      os << ']';
       return os;
     }
   };
@@ -108,7 +128,7 @@ namespace kumi
     @tparam Ts  Type lists to build the indexes with.
   **/
   //====================================================================================================================
-  template<concepts::projection... Ts> KUMI_CUDA projection_map(Ts...) -> projection_map<Ts...>;
+  template<concepts::projection... Ts> KUMI_CUDA projection_map(Ts...) -> projection_map<Ts{}...>;
 
   //====================================================================================================================
   /**
@@ -117,16 +137,16 @@ namespace kumi
 
     @note The arguments should model kumi::index
 
-    @param ts	Zero or more indexes to construct the indexes from.
+    @tparam Ts	Zero or more indexes to construct the indexes from.
     @return A kumi::projection_map constructed from the ts
 
     ## Examples:
     @include doc/infra/projections.cpp
   **/
   //====================================================================================================================
-  template<concepts::index... Ts> [[nodiscard]] KUMI_ABI consteval auto indexes(Ts... ts) noexcept
+  template<concepts::index... Ts> [[nodiscard]] KUMI_ABI consteval auto indexes(Ts...) noexcept
   {
-    return projection_map{ts...};
+    return projection_map<Ts{}...>{};
   }
 
   //====================================================================================================================
@@ -145,7 +165,7 @@ namespace kumi
   //====================================================================================================================
   template<std::convertible_to<std::size_t> auto... vs> [[nodiscard]] KUMI_ABI consteval auto make_indexes() noexcept
   {
-    return projection_map{index<vs>...};
+    return projection_map<index<vs>...>{};
   }
 
   //====================================================================================================================
@@ -155,7 +175,7 @@ namespace kumi
 
     @note The arguments should model kumi::identifier
 
-    @param ts	Zero or more indexes to construct the indexes from.
+    @tparam Ts	Zero or more indexes to construct the indexes from.
     @return A kumi::projection_map constructed from the ts
 
     ## Examples:
@@ -164,19 +184,19 @@ namespace kumi
   //====================================================================================================================
   template<concepts::identifier... Ts>
   requires(all_uniques_v<Ts...>)
-  [[nodiscard]] KUMI_ABI consteval auto identifiers(Ts... ts) noexcept
+  [[nodiscard]] KUMI_ABI consteval auto identifiers(Ts...) noexcept
   {
-    return projection_map{ts...};
+    return projection_map<Ts{}...>{};
   }
 
   //====================================================================================================================
   // Specialisation to clearly signal errors due invalid projections
   //====================================================================================================================
-  template<typename... Ts>
-  requires(!concepts::projection<Ts> && ...)
-  struct projection_map<Ts...>
+  template<auto... Vs>
+  requires(!concepts::projection<decltype(Vs)> && ...)
+  struct projection_map<Vs...>
   {
-    static_assert((concepts::projection<Ts> && ...), "Invalid projections in projection_map definition");
-    projection_map(Ts&&...) = delete;
+    static_assert((concepts::projection<decltype(Vs)> && ...), "Invalid projections in projection_map definition");
+    projection_map(decltype(Vs)...) = delete;
   };
 }
