@@ -58,7 +58,7 @@ namespace kumi
 
     consteval projection_map() noexcept = default;
 
-    consteval explicit projection_map(decltype(V)...) noexcept {}
+    consteval explicit projection_map(auto...) noexcept {}
 
     //==================================================================================================================
     /**
