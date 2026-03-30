@@ -49,7 +49,7 @@ namespace kumi
   //====================================================================================================================
   template<concepts::product_type T0, concepts::sized_product_type<size_v<T0>>... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto zip(T0&& t0, Ts&&... ts)
-  requires(concepts::follows_same_semantic<Ts...>)
+  requires(concepts::follows_same_semantic<T0, Ts...>)
   {
     if constexpr (concepts::sized_product_type<T0, 0>) return tuple{};
     else
