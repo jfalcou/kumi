@@ -185,7 +185,7 @@ template&lt;concepts::product_type T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A product type composed of all elements of <span class="tt">t</span> except its last. Has no effect on empty product types.</dd></dl>
 <p>On record types, this function operates on elements as if they were ordered. The considered order is the order of declaration.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md172"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md170"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
@@ -194,11 +194,11 @@ Helper type</h2>
 <div class="line">  <span class="keyword">template</span>&lt;product_type T&gt;</div>
 <div class="line">  <span class="keyword">using </span>pop_back_t = <span class="keyword">typename</span> <a class="code hl_function" href="#gaa78a8b1a97ed4da70a1e772cafb55aef">pop_back&lt;T&gt;::type</a>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__generators_gaa78a8b1a97ed4da70a1e772cafb55aef_html_gaa78a8b1a97ed4da70a1e772cafb55aef"><div class="ttname"><a href="#gaa78a8b1a97ed4da70a1e772cafb55aef">kumi::pop_back</a></div><div class="ttdeci">constexpr auto pop_back(T &amp;&amp;t)</div><div class="ttdoc">Remove the last (if any) element of a kumi::product_type.</div><div class="ttdef"><b>Definition</b> push_pop.hpp:158</div></div>
+<div class="ttc" id="agroup__generators_gaa78a8b1a97ed4da70a1e772cafb55aef_html_gaa78a8b1a97ed4da70a1e772cafb55aef"><div class="ttname"><a href="#gaa78a8b1a97ed4da70a1e772cafb55aef">kumi::pop_back</a></div><div class="ttdeci">constexpr auto pop_back(T &amp;&amp;t)</div><div class="ttdoc">Remove the last (if any) element of a kumi::product_type.</div><div class="ttdef"><b>Definition</b> push_pop.hpp:161</div></div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gaa78a8b1a97ed4da70a1e772cafb55aef" title="Remove the last (if any) element of a kumi::product_type.">kumi::pop_back</a></p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md173"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md171"></a>
 Examples:</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md174"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md172"></a>
 Tuple:</h3>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -213,7 +213,7 @@ Tuple:</h3>
 <div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#gaa78a8b1a97ed4da70a1e772cafb55aef">kumi::pop_back</a>(t)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
-</div><!-- fragment --> <h3 class="doxsection"><a class="anchor" id="autotoc_md175"></a>
+</div><!-- fragment --> <h3 class="doxsection"><a class="anchor" id="autotoc_md173"></a>
 Record:</h3>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>

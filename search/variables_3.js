@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['multiplies_0',['multiplies',['../group__utility.html#gaaab79e5ddd9913e237c23b6ebbe0d274',1,'kumi::function']]]
+  ['label_0',['label',['../group__utility.html#gaa9c96dba4f6fc64f97e580add7d61e57',1,'kumi']]]
 ];

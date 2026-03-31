@@ -191,7 +191,7 @@ template&lt;std::size_t R, concepts::product_type T&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A product type equivalent to <span class="tt">t</span> with elements rotated R positions to the right.</dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md250"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md248"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
@@ -200,11 +200,11 @@ Helper type</h2>
 <div class="line">  <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> R, product_type T&gt;</div>
 <div class="line">  <span class="keyword">using </span>rotate_right_t = <span class="keyword">typename</span> <a class="code hl_function" href="#ga7b4c54857ff1b5253b86ae9b05098268">rotate_right&lt;R, T&gt;::type</a>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__generators_ga7b4c54857ff1b5253b86ae9b05098268_html_ga7b4c54857ff1b5253b86ae9b05098268"><div class="ttname"><a href="#ga7b4c54857ff1b5253b86ae9b05098268">kumi::rotate_right</a></div><div class="ttdeci">constexpr auto rotate_right(T &amp;&amp;t)</div><div class="ttdoc">Rotates the element of a product type R positions to the right, wrapping around when getting to the e...</div><div class="ttdef"><b>Definition</b> rotate.hpp:113</div></div>
+<div class="ttc" id="agroup__generators_ga7b4c54857ff1b5253b86ae9b05098268_html_ga7b4c54857ff1b5253b86ae9b05098268"><div class="ttname"><a href="#ga7b4c54857ff1b5253b86ae9b05098268">kumi::rotate_right</a></div><div class="ttdeci">constexpr auto rotate_right(T &amp;&amp;t)</div><div class="ttdoc">Rotates the element of a product type R positions to the right, wrapping around when getting to the e...</div><div class="ttdef"><b>Definition</b> rotate.hpp:92</div></div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga7b4c54857ff1b5253b86ae9b05098268" title="Rotates the element of a product type R positions to the right, wrapping around when getting to the e...">kumi::rotate_right</a></p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md251"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md249"></a>
 Examples:</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md252"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md250"></a>
 Tuple:</h3>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -219,7 +219,7 @@ Tuple:</h3>
 <div class="line">  std::cout &lt;&lt; kumi::rotate_right&lt;3&gt;(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
-</div><!-- fragment --> <h3 class="doxsection"><a class="anchor" id="autotoc_md253"></a>
+</div><!-- fragment --> <h3 class="doxsection"><a class="anchor" id="autotoc_md251"></a>
 Record:</h3>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>

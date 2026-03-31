@@ -185,9 +185,9 @@ template&lt;concepts::product_type T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The evaluation of <span class="tt">!none_of(t)</span>.</dd></dl>
 <p>On a record type, the function operates on the underlying elements of the fields.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md151"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md149"></a>
 Examples:</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md152"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md150"></a>
 Tuple:</h3>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -201,9 +201,9 @@ Tuple:</h3>
 <div class="line">  <span class="keyword">auto</span> u = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{0,0.,0.f};</div>
 <div class="line">  std::cout &lt;&lt; std::boolalpha &lt;&lt; <a class="code hl_function" href="group__queries_ga5450fe960cb3282fc7c2b2d072128802.html#ga5450fe960cb3282fc7c2b2d072128802">kumi::none_of</a>( u ) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__queries_ga5450fe960cb3282fc7c2b2d072128802_html_ga5450fe960cb3282fc7c2b2d072128802"><div class="ttname"><a href="group__queries_ga5450fe960cb3282fc7c2b2d072128802.html#ga5450fe960cb3282fc7c2b2d072128802">kumi::none_of</a></div><div class="ttdeci">constexpr bool none_of(T &amp;&amp;t, Pred p) noexcept</div><div class="ttdoc">Checks if a unary predicate p does not returns true for any element in t.</div><div class="ttdef"><b>Definition</b> predicates.hpp:128</div></div>
+<div class="ttc" id="agroup__queries_ga5450fe960cb3282fc7c2b2d072128802_html_ga5450fe960cb3282fc7c2b2d072128802"><div class="ttname"><a href="group__queries_ga5450fe960cb3282fc7c2b2d072128802.html#ga5450fe960cb3282fc7c2b2d072128802">kumi::none_of</a></div><div class="ttdeci">constexpr bool none_of(T &amp;&amp;t, Pred p) noexcept</div><div class="ttdoc">Checks if a unary predicate p does not returns true for any element in t.</div><div class="ttdef"><b>Definition</b> predicates.hpp:140</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
-</div><!-- fragment --> <h3 class="doxsection"><a class="anchor" id="autotoc_md153"></a>
+</div><!-- fragment --> <h3 class="doxsection"><a class="anchor" id="autotoc_md151"></a>
 Record:</h3>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>

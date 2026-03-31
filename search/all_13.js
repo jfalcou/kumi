@@ -1,7 +1,7 @@
 var searchData=
 [
   ['partition_0',['partition',['../group__generators_gaf7926aecf07b881c2005e39f34512851.html#gaf7926aecf07b881c2005e39f34512851',1,'kumi']]],
-  ['plus_1',['plus',['../group__utility.html#gab5c0eb8022e7b2df33286d9a15247559',1,'kumi::function']]],
+  ['plus_1',['plus',['../group__functional.html#gab5c0eb8022e7b2df33286d9a15247559',1,'kumi::function']]],
   ['pop_5fback_2',['pop_back',['../group__generators_gaa78a8b1a97ed4da70a1e772cafb55aef.html#gaa78a8b1a97ed4da70a1e772cafb55aef',1,'kumi']]],
   ['pop_5ffront_3',['pop_front',['../group__queries_ga0067bdadcb60e0eeb405bd1021dd4f08.html#ga0067bdadcb60e0eeb405bd1021dd4f08',1,'kumi']]],
   ['pre_20requisites_4',['Pre-requisites',['../setup.html#prerequisit',1,'']]],
@@ -21,9 +21,9 @@ var searchData=
   ['product_5ftype_18',['product_type',['../conceptkumi_1_1concepts_1_1product__type.html',1,'kumi::concepts']]],
   ['programming_20languages_20considerations_19',['Programming Languages Considerations',['../product.html#tuple_programming',1,'']]],
   ['projection_20',['projection',['../conceptkumi_1_1concepts_1_1projection.html',1,'kumi::concepts']]],
-  ['projection_5fmap_21',['projection_map',['../structkumi_1_1projection__map.html',1,'kumi::projection_map&lt; V &gt;'],['../conceptkumi_1_1concepts_1_1projection__map.html',1,'kumi::concepts'],['../group__utility_ga3ba127205027539b3090467e2a504a24.html#ga3ba127205027539b3090467e2a504a24',1,'kumi::projection_map()']]],
-  ['protocol_22',['Tuple Protocol',['../cpp_spec.html#autotoc_md423',1,'']]],
-  ['public_20release_23',['First autonomous public release.',['../changelog.html#autotoc_md419',1,'']]],
+  ['projection_5fmap_21',['projection_map',['../structkumi_1_1projection__map.html',1,'kumi::projection_map&lt; V &gt;'],['../conceptkumi_1_1concepts_1_1projection__map.html',1,'kumi::concepts'],['../group__utility_ga8b7f4e6ed1e7071d7c152c9870709fcb.html#ga8b7f4e6ed1e7071d7c152c9870709fcb',1,'kumi::projection_map()']]],
+  ['protocol_22',['Tuple Protocol',['../cpp_spec.html#autotoc_md429',1,'']]],
+  ['public_20release_23',['First autonomous public release.',['../changelog.html#autotoc_md425',1,'']]],
   ['push_5fback_24',['push_back',['../group__generators_ga1caeff43037aae979c9ff1ca476091cb.html#ga1caeff43037aae979c9ff1ca476091cb',1,'kumi']]],
   ['push_5ffront_25',['push_front',['../group__queries_ga45a00d0a03a72f6c0c67501e684ddbea.html#ga45a00d0a03a72f6c0c67501e684ddbea',1,'kumi']]]
 ];

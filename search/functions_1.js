@@ -1,7 +1,9 @@
 var searchData=
 [
   ['back_0',['back',['../group__generators_gacbfca9b5e95948e4180a54e920d19c6f.html#gacbfca9b5e95948e4180a54e920d19c6f',1,'kumi']]],
-  ['bit_5fand_1',['bit_and',['../group__reductions_ga14432e4394da47b90f34c962979da853.html#ga14432e4394da47b90f34c962979da853',1,'kumi::bit_and(T &amp;&amp;t, Value init)'],['../group__reductions_ga2249743d977a87399b3fd98b0cb2e55e.html#ga2249743d977a87399b3fd98b0cb2e55e',1,'kumi::bit_and(T &amp;&amp;t)']]],
-  ['bit_5for_2',['bit_or',['../group__reductions_ga4b48b6259301405bba1e0944ffa6e2c7.html#ga4b48b6259301405bba1e0944ffa6e2c7',1,'kumi::bit_or(T &amp;&amp;t, Value init)'],['../group__reductions_gaa7d3ae229843ffb2bbcabb1427ef4979.html#gaa7d3ae229843ffb2bbcabb1427ef4979',1,'kumi::bit_or(T &amp;&amp;t)']]],
-  ['bit_5fxor_3',['bit_xor',['../group__reductions_ga521dcc4de231768115582401a1a0419b.html#ga521dcc4de231768115582401a1a0419b',1,'kumi::bit_xor(T &amp;&amp;t, Value init)'],['../group__reductions_ga19a1070aa59a1fd90bbf39b860058f9d.html#ga19a1070aa59a1fd90bbf39b860058f9d',1,'kumi::bit_xor(T &amp;&amp;t)']]]
+  ['bind_5fback_1',['bind_back',['../group__functional_ga02fbf71873458cc8a364a7f6efcfadf2.html#ga02fbf71873458cc8a364a7f6efcfadf2',1,'kumi']]],
+  ['bind_5ffront_2',['bind_front',['../group__functional_ga08c383ce2fb100dda15baf96b4e60d2f.html#ga08c383ce2fb100dda15baf96b4e60d2f',1,'kumi']]],
+  ['bit_5fand_3',['bit_and',['../group__reductions_ga14432e4394da47b90f34c962979da853.html#ga14432e4394da47b90f34c962979da853',1,'kumi::bit_and(T &amp;&amp;t, Value init)'],['../group__reductions_ga2249743d977a87399b3fd98b0cb2e55e.html#ga2249743d977a87399b3fd98b0cb2e55e',1,'kumi::bit_and(T &amp;&amp;t)']]],
+  ['bit_5for_4',['bit_or',['../group__reductions_ga4b48b6259301405bba1e0944ffa6e2c7.html#ga4b48b6259301405bba1e0944ffa6e2c7',1,'kumi::bit_or(T &amp;&amp;t, Value init)'],['../group__reductions_gaa7d3ae229843ffb2bbcabb1427ef4979.html#gaa7d3ae229843ffb2bbcabb1427ef4979',1,'kumi::bit_or(T &amp;&amp;t)']]],
+  ['bit_5fxor_5',['bit_xor',['../group__reductions_ga521dcc4de231768115582401a1a0419b.html#ga521dcc4de231768115582401a1a0419b',1,'kumi::bit_xor(T &amp;&amp;t, Value init)'],['../group__reductions_ga19a1070aa59a1fd90bbf39b860058f9d.html#ga19a1070aa59a1fd90bbf39b860058f9d',1,'kumi::bit_xor(T &amp;&amp;t)']]]
 ];

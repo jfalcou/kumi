@@ -15,5 +15,6 @@ var searchData=
   ['type_20transformations_12',['Product Type Transformations',['../group__transforms.html',1,'']]],
   ['types_13',['Kumi Types',['../group__types.html',1,'']]],
   ['types_20and_20associated_20functions_14',['Types and associated Functions',['../group__tuple__related.html',1,'Product Types and associated Functions'],['../group__record__related.html',1,'Record Types and associated Functions']]],
-  ['types_20and_20functions_15',['Types and Functions',['../group__details.html',1,'Helper Types and Functions'],['../group__utility.html',1,'Helper Types and Functions']]]
+  ['types_20and_20function_15',['Helper Types and function',['../group__functional.html',1,'']]],
+  ['types_20and_20functions_16',['Types and Functions',['../group__details.html',1,'Helper Types and Functions'],['../group__utility.html',1,'Helper Types and Functions']]]
 ];

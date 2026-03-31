@@ -175,7 +175,7 @@ class kumi::tuple&lt; Ts &gt;</div><p>Fixed-size collection of heterogeneous val
   </dd>
 </dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="product.html#product_type" title="Product Type  \_form#27">Product Type \( (A \times B) \)</a></dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md343"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md347"></a>
 Example:</h2>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -388,6 +388,15 @@ Tuple deduction guides</h2></td></tr>
 <tr class="memitem:a889b9718ac16b1be40acc38689401cd1" id="r_a889b9718ac16b1be40acc38689401cd1"><td class="memTemplParams" colspan="2">template&lt;typename... Ts&gt; </td></tr>
 <tr class="memitem:a889b9718ac16b1be40acc38689401cd1 template"><td class="memItemLeft">KUMI_CUDA&#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1tuple_a889b9718ac16b1be40acc38689401cd1.html#a889b9718ac16b1be40acc38689401cd1">tuple</a> (Ts &amp;&amp;...) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</td></tr>
 <tr class="memdesc:a889b9718ac16b1be40acc38689401cd1"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> deduction guide  <br /></td></tr>
+</table><table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-member-group" class="groupheader"><a id="member-group" name="member-group"></a>
+Tuple properties</h2></td></tr>
+<tr class="memitem:ac67c6dbee8bf12133da3379826cde848" id="r_ac67c6dbee8bf12133da3379826cde848"><td class="memTemplParams" colspan="2">template&lt;concepts::product_type T&gt; </td></tr>
+<tr class="memitem:ac67c6dbee8bf12133da3379826cde848 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1tuple_ac67c6dbee8bf12133da3379826cde848.html#ac67c6dbee8bf12133da3379826cde848">members_of</a> (<a class="el" href="structkumi_1_1as.html">as</a>&lt; T &gt;) noexcept</td></tr>
+<tr class="memdesc:ac67c6dbee8bf12133da3379826cde848"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the names of the fields of a kumi::product_type.  <br /></td></tr>
+<tr class="memitem:ade5f616b3115a74bd4930f70f96ca199" id="r_ade5f616b3115a74bd4930f70f96ca199"><td class="memTemplParams" colspan="2">template&lt;concepts::product_type T&gt; </td></tr>
+<tr class="memitem:ade5f616b3115a74bd4930f70f96ca199 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1tuple_ade5f616b3115a74bd4930f70f96ca199.html#ade5f616b3115a74bd4930f70f96ca199">values_of</a> (T &amp;&amp;t) noexcept</td></tr>
+<tr class="memdesc:ade5f616b3115a74bd4930f70f96ca199"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the values of the fields of a kumi::product_type.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-member-group" class="groupheader"><a id="member-group" name="member-group"></a>
 Tuple Accessors</h2></td></tr>

@@ -177,9 +177,9 @@ template&lt;<a class="el" href="structkumi_1_1str.html">kumi::str</a> ID&gt; </d
 </div><div class="memdoc">
 
 <p>Forms a constant string literal of the desired value. </p>
-<dl class="section return"><dt>Returns</dt><dd>An instance of <a class="el" href="group__utility.html#ga0d63dc26552fd8d5174222097404b569" title="Inline literal constant value for kumi::label_t.">kumi::label</a> for the specified string</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>An instance of <a class="el" href="group__utility.html#gaa9c96dba4f6fc64f97e580add7d61e57" title="Inline literal constant value for kumi::label_t.">kumi::label</a> for the specified string</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>It differs from the ""_id operator on the type and the overload that it will pick up. An identifier and a label are two different parts of a field. Label represents the value that is displayed.</dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md373"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md379"></a>
 Example:</h2>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -190,12 +190,12 @@ Example:</h2>
 <div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">auto</span> n = <span class="stringliteral">&quot;Peter&quot;</span>_l;</div>
-<div class="line">  <span class="keyword">auto</span> s = <a class="code hl_variable" href="group__utility.html#ga0d63dc26552fd8d5174222097404b569">kumi::label</a>&lt;<span class="stringliteral">&quot;Jackson&quot;</span>&gt;;</div>
+<div class="line">  <span class="keyword">auto</span> s = <a class="code hl_variable" href="group__utility.html#gaa9c96dba4f6fc64f97e580add7d61e57">kumi::label</a>&lt;<span class="stringliteral">&quot;Jackson&quot;</span>&gt;;</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; n &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; s &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__utility_html_ga0d63dc26552fd8d5174222097404b569"><div class="ttname"><a href="group__utility.html#ga0d63dc26552fd8d5174222097404b569">kumi::label</a></div><div class="ttdeci">constexpr label_t&lt; Label &gt; const label</div><div class="ttdoc">Inline literal constant value for kumi::label_t.</div><div class="ttdef"><b>Definition</b> ct_helpers.hpp:110</div></div>
+<div class="ttc" id="agroup__utility_html_gaa9c96dba4f6fc64f97e580add7d61e57"><div class="ttname"><a href="group__utility.html#gaa9c96dba4f6fc64f97e580add7d61e57">kumi::label</a></div><div class="ttdeci">constexpr label_t&lt; Label &gt; label</div><div class="ttdoc">Inline literal constant value for kumi::label_t.</div><div class="ttdef"><b>Definition</b> ct_helpers.hpp:70</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

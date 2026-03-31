@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['size_0',['size',['../structkumi_1_1record_ae58c2eac14a343992ac19d9ba01ec6ae.html#ae58c2eac14a343992ac19d9ba01ec6ae',1,'kumi::record::size()'],['../structkumi_1_1tuple_a0d0957e5314d780693c3d67344a42b3e.html#a0d0957e5314d780693c3d67344a42b3e',1,'kumi::tuple::size()'],['../structkumi_1_1projection__map.html#aa201fda6e2720aef8e4a7ce8baee802e',1,'kumi::projection_map::size()']]],
-  ['split_1',['split',['../group__generators_ga9a705331b78493a8882f9db889b57bc9.html#ga9a705331b78493a8882f9db889b57bc9',1,'kumi']]],
-  ['sum_2',['sum',['../group__reductions_ga183fa966de706e5e6c78a9cc50202fe8.html#ga183fa966de706e5e6c78a9cc50202fe8',1,'kumi::sum(T &amp;&amp;t, Value init)'],['../group__reductions_gaa96dfd76fe746fe28e1a833ad76c59fc.html#gaa96dfd76fe746fe28e1a833ad76c59fc',1,'kumi::sum(T &amp;&amp;t)']]]
+  ['scannable_0',['scannable',['../structkumi_1_1function_1_1scannable_ac3570f9286b470ae88de5a142941751a.html#ac3570f9286b470ae88de5a142941751a',1,'kumi::function::scannable::scannable()'],['../structkumi_1_1function_1_1scannable_ac3570f9286b470ae88de5a142941751a.html#ac3570f9286b470ae88de5a142941751a',1,'kumi::function::scannable()']]],
+  ['size_1',['size',['../structkumi_1_1record_ae58c2eac14a343992ac19d9ba01ec6ae.html#ae58c2eac14a343992ac19d9ba01ec6ae',1,'kumi::record::size()'],['../structkumi_1_1tuple_a0d0957e5314d780693c3d67344a42b3e.html#a0d0957e5314d780693c3d67344a42b3e',1,'kumi::tuple::size()'],['../structkumi_1_1projection__map.html#aa201fda6e2720aef8e4a7ce8baee802e',1,'kumi::projection_map::size()']]],
+  ['split_2',['split',['../group__generators_ga9a705331b78493a8882f9db889b57bc9.html#ga9a705331b78493a8882f9db889b57bc9',1,'kumi']]],
+  ['sum_3',['sum',['../group__reductions_ga183fa966de706e5e6c78a9cc50202fe8.html#ga183fa966de706e5e6c78a9cc50202fe8',1,'kumi::sum(T &amp;&amp;t, Value init)'],['../group__reductions_gaa96dfd76fe746fe28e1a833ad76c59fc.html#gaa96dfd76fe746fe28e1a833ad76c59fc',1,'kumi::sum(T &amp;&amp;t)']]]
 ];

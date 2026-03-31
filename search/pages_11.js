@@ -5,6 +5,6 @@ var searchData=
   ['product_20type_2027_2',['Product Type \\( (A \\times B) \\)',['../product.html#product_type',1,'']]],
   ['product_20types_3',['Product Types',['../product.html',1,'']]],
   ['programming_20languages_20considerations_4',['Programming Languages Considerations',['../product.html#tuple_programming',1,'']]],
-  ['protocol_5',['Tuple Protocol',['../cpp_spec.html#autotoc_md423',1,'']]],
-  ['public_20release_6',['First autonomous public release.',['../changelog.html#autotoc_md419',1,'']]]
+  ['protocol_5',['Tuple Protocol',['../cpp_spec.html#autotoc_md429',1,'']]],
+  ['public_20release_6',['First autonomous public release.',['../changelog.html#autotoc_md425',1,'']]]
 ];

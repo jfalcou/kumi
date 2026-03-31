@@ -55,7 +55,8 @@ var NAVTREE =
       [ "Helpers", "usergroup6.html", [
         [ "Traits", "group__traits.html", null ],
         [ "Concepts", "group__concepts.html", null ],
-        [ "Utility", "group__utility.html", null ]
+        [ "Utility", "group__utility.html", null ],
+        [ "Functional", "group__functional.html", null ]
       ] ],
       [ "Kumi Namespace", "namespacekumi.html", null ]
     ] ],

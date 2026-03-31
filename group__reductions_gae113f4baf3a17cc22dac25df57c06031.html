@@ -197,7 +197,7 @@ template&lt;typename Function, concepts::product_type T, typename Value&gt; </di
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A tuple of prefix partial accumulations where each element 'I' equals <span class="tt">f( f( f(init, <a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137" title="Extracts the Ith field from a kumi::record.">get</a>&lt;0&gt;(t)), ...), <a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137" title="Extracts the Ith field from a kumi::record.">get</a>&lt;I-1&gt;(t))</span></dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md262"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md260"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
@@ -206,11 +206,11 @@ Helper type</h2>
 <div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type T, <span class="keyword">typename</span> Value&gt;</div>
 <div class="line">  <span class="keyword">using </span>exclusive_scan_left_t = <span class="keyword">typename</span> <a class="code hl_function" href="#gae113f4baf3a17cc22dac25df57c06031">exclusive_scan_left&lt;Function,T,Value&gt;::type</a>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__reductions_gae113f4baf3a17cc22dac25df57c06031_html_gae113f4baf3a17cc22dac25df57c06031"><div class="ttname"><a href="#gae113f4baf3a17cc22dac25df57c06031">kumi::exclusive_scan_left</a></div><div class="ttdeci">constexpr auto exclusive_scan_left(Function f, T &amp;&amp;t, Value init)</div><div class="ttdoc">Computes the exclusive prefix scan of all elements of a product type using a tail recursive call.</div><div class="ttdef"><b>Definition</b> scan.hpp:167</div></div>
+<div class="ttc" id="agroup__reductions_gae113f4baf3a17cc22dac25df57c06031_html_gae113f4baf3a17cc22dac25df57c06031"><div class="ttname"><a href="#gae113f4baf3a17cc22dac25df57c06031">kumi::exclusive_scan_left</a></div><div class="ttdeci">constexpr auto exclusive_scan_left(Function f, T &amp;&amp;t, Value init)</div><div class="ttdoc">Computes the exclusive prefix scan of all elements of a product type using a tail recursive call.</div><div class="ttdef"><b>Definition</b> scan.hpp:142</div></div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gae113f4baf3a17cc22dac25df57c06031" title="Computes the exclusive prefix scan of all elements of a product type using a tail recursive call.">kumi::exclusive_scan_left</a></p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md263"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md261"></a>
 Examples:</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md264"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md262"></a>
 Tuple:</h3>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -232,11 +232,11 @@ Tuple:</h3>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">auto</span> u = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1,3,2,4,0,5,9,6,7};</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#gae113f4baf3a17cc22dac25df57c06031">kumi::exclusive_scan_left</a>(<a class="code hl_variable" href="group__utility.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a>, u) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#gae113f4baf3a17cc22dac25df57c06031">kumi::exclusive_scan_left</a>(<a class="code hl_variable" href="group__functional.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a>, u) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__utility_html_gab5c0eb8022e7b2df33286d9a15247559"><div class="ttname"><a href="group__utility.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a></div><div class="ttdeci">constexpr numeric_add plus</div><div class="ttdoc">Forms a binary monoid callable that can be used in kumi::algoritm. It represents the addition.</div><div class="ttdef"><b>Definition</b> monoid.hpp:136</div></div>
+<div class="ttc" id="agroup__functional_html_gab5c0eb8022e7b2df33286d9a15247559"><div class="ttname"><a href="group__functional.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a></div><div class="ttdeci">constexpr numeric_add plus</div><div class="ttdoc">Forms a binary monoid callable that can be used in kumi::algoritm. It represents the addition.</div><div class="ttdef"><b>Definition</b> monoid.hpp:134</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
-</div><!-- fragment --> <h3 class="doxsection"><a class="anchor" id="autotoc_md265"></a>
+</div><!-- fragment --> <h3 class="doxsection"><a class="anchor" id="autotoc_md263"></a>
 Record:</h3>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -260,7 +260,7 @@ Record:</h3>
 <div class="line">  <span class="keyword">auto</span> u = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;a&quot;</span>_id = 1,<span class="stringliteral">&quot;b&quot;</span>_id = 3,<span class="stringliteral">&quot;c&quot;</span>_id = 2,<span class="stringliteral">&quot;d&quot;</span>_id = 4, <span class="stringliteral">&quot;e&quot;</span>_id = 0</div>
 <div class="line">                      , <span class="stringliteral">&quot;f&quot;</span>_id = 5,<span class="stringliteral">&quot;g&quot;</span>_id = 9,<span class="stringliteral">&quot;h&quot;</span>_id = 6,<span class="stringliteral">&quot;i&quot;</span>_id = 7};</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#gae113f4baf3a17cc22dac25df57c06031">kumi::exclusive_scan_left</a>(<a class="code hl_variable" href="group__utility.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a>, u) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#gae113f4baf3a17cc22dac25df57c06031">kumi::exclusive_scan_left</a>(<a class="code hl_variable" href="group__functional.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a>, u) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
 </div><!-- fragment --> 
