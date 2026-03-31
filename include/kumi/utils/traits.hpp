@@ -363,11 +363,17 @@ namespace kumi
     @endcode
   **/
   //====================================================================================================================
-  template<typename T> inline constexpr auto is_projection_map_v = requires { T::is_projection_map; };
-
-  template<typename T> struct is_projection_map : std::bool_constant<is_projection_map_v<T>>
+  template<typename T> struct is_projection_map : std::false_type
   {
   };
+
+  template<typename T>
+  requires(T::is_projection_map)
+  struct is_projection_map<T> : std::true_type
+  {
+  };
+
+  template<typename T> inline constexpr auto is_projection_map_v = is_projection_map<T>::value;
 
   //====================================================================================================================
   /**
@@ -552,6 +558,10 @@ namespace kumi
   {
   };
 
+  template<std::size_t... I> struct is_projection_map<std::index_sequence<I...>> : std::true_type
+  {
+  };
+
   // Internal helpers
   template<typename T> struct is_kumi_tuple : std::false_type
   {
@@ -573,4 +583,42 @@ namespace kumi
 
   template<typename T> inline constexpr bool is_kumi_record_v = is_kumi_record<T>::value;
 #endif
+
+  ///
+  template<template<typename...> typename Traits,
+           typename Tuple,
+           typename Seq = std::make_index_sequence<size<Tuple>::value>>
+  requires is_product_type_v<std::remove_cvref_t<Tuple>>
+  struct apply_traits;
+
+  template<template<typename...> typename Traits, typename Tuple, std::size_t... Is>
+  requires is_product_type_v<std::remove_cvref_t<Tuple>> &&
+           (requires { typename Traits<element_t<Is, Tuple>...>::type; })
+  struct apply_traits<Traits, Tuple, std::index_sequence<Is...>>
+  {
+    using type = typename Traits<element_t<Is, Tuple>...>::type;
+  };
+
+  template<template<typename...> typename Traits, typename Tuple>
+  requires is_product_type_v<std::remove_cvref_t<Tuple>>
+  using apply_traits_t = typename apply_traits<Traits, Tuple>::type;
+
+  template<template<typename...> typename Traits,
+           typename Tuple,
+           typename Seq = std::make_index_sequence<size<Tuple>::value>>
+  requires is_product_type_v<std::remove_cvref_t<Tuple>>
+  struct map_traits;
+
+  template<template<typename...> typename Traits, typename Tuple, std::size_t... Is>
+  requires is_product_type_v<std::remove_cvref_t<Tuple>> &&
+           (requires { typename Traits<element_t<Is, Tuple>>::type; } && ...)
+  struct map_traits<Traits, Tuple, std::index_sequence<Is...>>
+  {
+    using type = tuple<typename Traits<element_t<Is, Tuple>>::type...>;
+  };
+
+  template<template<typename...> typename Traits, typename Tuple>
+  requires is_product_type_v<std::remove_cvref_t<Tuple>>
+  using map_traits_t = typename map_traits<Traits, Tuple>::type;
+
 }

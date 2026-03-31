@@ -9,32 +9,6 @@
 
 namespace kumi
 {
-  namespace _
-  {
-    template<std::size_t N> struct reducer_t
-    {
-      constexpr auto operator()() const noexcept
-      {
-        constexpr std::size_t half = N / 2;
-
-        struct
-        {
-          std::size_t count = {}, remainder = {}, idx1[half], idx2[half];
-        } that{};
-
-        that.remainder = N % 2;
-
-        [&]<std::size_t... I>(std::index_sequence<I...>) {
-          ((that.idx1[that.count] = 2 * I, that.idx2[that.count++] = 2 * I + 1), ...);
-        }(std::make_index_sequence<half>{});
-
-        return that;
-      }
-    };
-
-    template<std::size_t N> inline constexpr reducer_t<N> reducer{};
-  }
-
   //====================================================================================================================
   /**
     @ingroup  reductions
@@ -71,21 +45,19 @@ namespace kumi
   //====================================================================================================================
   template<concepts::monoid M, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto reduce(M&& m, T&& t)
   {
-    if constexpr (concepts::record_type<T>) return reduce(KUMI_FWD(m), values_of(KUMI_FWD(t)));
-    else if constexpr (concepts::empty_product_type<T>) return m.identity;
+    if constexpr (concepts::empty_product_type<T>) return m.identity;
+    else if constexpr (concepts::record_type<T>) return reduce(KUMI_FWD(m), values_of(KUMI_FWD(t)));
     else if constexpr (concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
     else
     {
-      constexpr auto pos = _::reducer<size_v<T>>();
+      constexpr auto pos = function::reducer(index<size_v<T>>);
 
-      auto process = [&]<std::size_t I>(index_t<I>) {
-        if constexpr (I < pos.count) return KUMI_FWD(m)(get<pos.idx1[I]>(KUMI_FWD(t)), get<pos.idx2[I]>(KUMI_FWD(t)));
-        else return get<size_v<T> - 1>(KUMI_FWD(t));
-      };
-
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return reduce(KUMI_FWD(m), tuple{process(index<I>)...});
-      }(std::make_index_sequence<pos.count + pos.remainder>{});
+      return [&]<std::size_t... F, std::size_t... S>(std::index_sequence<F...>, std::index_sequence<S...>) {
+        if constexpr (get<2>(pos) == 1)
+          return reduce(KUMI_FWD(m), tuple{invoke(KUMI_FWD(m), get<F>(KUMI_FWD(t)), get<S>(KUMI_FWD(t)))...,
+                                           get<size_v<T> - 1>(KUMI_FWD(t))});
+        else return reduce(KUMI_FWD(m), tuple{invoke(KUMI_FWD(m), get<F>(KUMI_FWD(t)), get<S>(KUMI_FWD(t)))...});
+      }(get<0>(pos), get<1>(pos));
     }
   }
 
@@ -171,21 +143,22 @@ namespace kumi
   template<concepts::product_type T, concepts::monoid M, typename Function>
   [[nodiscard]] KUMI_ABI constexpr auto map_reduce(Function f, M&& m, T&& t)
   {
-    if constexpr (concepts::record_type<T>) return map_reduce(f, KUMI_FWD(m), values_of(KUMI_FWD(t)));
-    else if constexpr (concepts::empty_product_type<T>) return m.identity;
+    if constexpr (concepts::empty_product_type<T>) return m.identity;
+    else if constexpr (concepts::record_type<T>) return map_reduce(f, KUMI_FWD(m), values_of(KUMI_FWD(t)));
     else if constexpr (concepts::sized_product_type<T, 1>) return invoke(f, get<0>(KUMI_FWD(t)));
     else
     {
-      constexpr auto pos = _::reducer<size_v<T>>();
-      auto process = [&]<std::size_t I>(index_t<I>) {
-        if constexpr (I < pos.count)
-          return KUMI_FWD(m)(invoke(f, get<pos.idx1[I]>(KUMI_FWD(t))), invoke(f, get<pos.idx2[I]>(KUMI_FWD(t))));
-        else return invoke(f, get<size_v<T> - 1>(KUMI_FWD(t)));
-      };
+      constexpr auto pos = function::reducer(index<size_v<T>>);
 
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return reduce(KUMI_FWD(m), tuple{process(index<I>)...});
-      }(std::make_index_sequence<pos.count + pos.remainder>{});
+      return [&]<std::size_t... F, std::size_t... S>(std::index_sequence<F...>, std::index_sequence<S...>) {
+        if constexpr (get<2>(pos) == 1)
+          return reduce(KUMI_FWD(m),
+                        tuple{invoke(KUMI_FWD(m), invoke(f, get<F>(KUMI_FWD(t))), invoke(f, get<S>(KUMI_FWD(t))))...,
+                              invoke(f, get<size_v<T> - 1>(KUMI_FWD(t)))});
+        else
+          return reduce(KUMI_FWD(m),
+                        tuple{invoke(KUMI_FWD(m), invoke(f, get<F>(KUMI_FWD(t))), invoke(f, get<S>(KUMI_FWD(t))))...});
+      }(get<0>(pos), get<1>(pos));
     }
   }
 

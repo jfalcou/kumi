@@ -9,30 +9,6 @@
 
 namespace kumi
 {
-  namespace _
-  {
-    //==================================================================================================================
-    // Fold helpers
-    //==================================================================================================================
-    template<typename F, typename T> struct foldable
-    {
-      F func;
-      T value;
-
-      template<typename W> KUMI_ABI friend constexpr decltype(auto) operator>>(foldable&& x, foldable<F, W>&& y)
-      {
-        return _::foldable{x.func, invoke(x.func, x.value, y.value)};
-      }
-
-      template<typename W> KUMI_ABI friend constexpr decltype(auto) operator<<(foldable&& x, foldable<F, W>&& y)
-      {
-        return _::foldable{x.func, invoke(x.func, x.value, y.value)};
-      }
-    };
-
-    template<class F, class T> foldable(F const&, T&&) -> foldable<F, T>;
-  }
-
   //====================================================================================================================
   /**
     @ingroup  reductions
@@ -97,19 +73,17 @@ namespace kumi
     else if constexpr (concepts::record_type<S1>)
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::foldable{sum, invoke(prod, get<identifier_of<element_t<I, S1>>()>(KUMI_FWD(s1)),
-                                        get<identifier_of<element_t<I, S1>>()>(KUMI_FWD(s2)))} >>
-                ... >> _::foldable{sum, init})
-          .value;
-      }(std::make_index_sequence<size<S1>::value>());
+        return (function::foldable{init} >> ... >>
+                bind_back(sum, invoke(prod, get<identifier_of<element_t<I, S1>>()>(KUMI_FWD(s1)),
+                                      get<identifier_of<element_t<I, S1>>()>(KUMI_FWD(s2)))))();
+      }(std::make_index_sequence<size_v<S1>>());
     }
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::foldable{sum, invoke(prod, get<I>(KUMI_FWD(s1)), get<I>(KUMI_FWD(s2)))} >> ... >>
-                _::foldable{sum, init})
-          .value;
-      }(std::make_index_sequence<size<S1>::value>());
+        return (function::foldable{init} >> ... >>
+                bind_back(sum, invoke(prod, get<I>(KUMI_FWD(s1)), get<I>(KUMI_FWD(s2)))))();
+      }(std::make_index_sequence<size_v<S1>>{});
     }
   }
 
@@ -131,14 +105,14 @@ namespace kumi
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return (init + ... + (get<I>(KUMI_FWD(s1)) * get<I>(KUMI_FWD(s2))));
-      }(std::make_index_sequence<size<S1>::value>());
+      }(std::make_index_sequence<size_v<S1>>{});
     }
   }
 
   namespace result
   {
     template<concepts::product_type S1,
-             concepts::sized_product_type<S1::size()> S2,
+             concepts::sized_product_type<size_v<S1>> S2,
              typename T,
              typename Sum,
              typename Prod>
@@ -148,14 +122,14 @@ namespace kumi
         std::declval<S1>(), std::declval<S2>(), std::declval<T>(), std::declval<Sum>(), std::declval<Prod>()));
     };
 
-    template<concepts::product_type S1, concepts::sized_product_type<S1::size()> S2, typename T>
+    template<concepts::product_type S1, concepts::sized_product_type<size_v<S1>> S2, typename T>
     struct inner_product<S1, S2, T, void, void>
     {
       using type = decltype(kumi::inner_product(std::declval<S1>(), std::declval<S2>(), std::declval<T>()));
     };
 
     template<concepts::product_type S1,
-             concepts::sized_product_type<S1::size()> S2,
+             concepts::sized_product_type<size_v<S1>> S2,
              typename T,
              typename Sum = void,
              typename Prod = void>

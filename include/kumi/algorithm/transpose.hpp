@@ -45,14 +45,21 @@ namespace kumi
   {
     static_assert(_::supports_transpose<T>, "[KUMI] - Cannot transpose given product type");
     if constexpr (concepts::empty_product_type<T>) return tuple{};
+    else if constexpr (concepts::record_type<T>) return transpose(values_of(KUMI_FWD(t)));
     else
     {
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        constexpr auto uz = []<typename N>(N const&, auto&& u) {
-          return apply([](auto&&... m) { return builder<T>::make(get<N::value>(KUMI_FWD(m))...); }, KUMI_FWD(u));
-        };
-        return kumi::make_tuple(uz(index<I>, KUMI_FWD(t))...);
-      }(std::make_index_sequence<size_v<raw_element_t<0, T>>>());
+      constexpr std::size_t count = size_v<T>;
+      constexpr std::size_t size = size_v<element_t<0, T>>;
+      constexpr auto pos = function::zipper(index<count>, index<size>);
+
+      auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>) {
+        using type = builder_make_t<element_t<0, T>, element_t<k, std::remove_cvref_t<element_t<I, T>>>...>;
+        return type{get<k>(get<I>(KUMI_FWD(t)))...};
+      };
+
+      return [&]<std::size_t... N>(std::index_sequence<N...>) {
+        return kumi::make_tuple(maps(index<N>, get<0>(pos))...);
+      }(get<1>(pos));
     }
   }
 

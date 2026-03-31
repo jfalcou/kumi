@@ -9,27 +9,6 @@
 
 namespace kumi
 {
-  namespace _
-  {
-    template<std::size_t S, std::size_t R> struct rotate_t
-    {
-      KUMI_ABI constexpr auto operator()() const noexcept
-      {
-        struct
-        {
-          std::size_t t[1 + S];
-        } that{};
-
-        auto idxs = [&]<std::size_t... I>(std::index_sequence<I...>) { ((that.t[I] = (I + R) % S), ...); };
-
-        idxs(std::make_index_sequence<S>{});
-        return that;
-      }
-    };
-
-    template<std::size_t S, std::size_t R> inline constexpr rotate_t<S, R> rotator{};
-  }
-
   //====================================================================================================================
   /**
     @ingroup  generators
@@ -69,11 +48,11 @@ namespace kumi
     else if constexpr ((R % size_v<T>) == 0) return KUMI_FWD(t);
     else
     {
-      constexpr auto idxs = _::rotator<size_v<T>, R % size_v<T>>();
+      constexpr auto idxs = function::rotater(index<size_v<T>>, index<(R % size_v<T>)>);
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = builder_make_t<T, element_t<idxs.t[I], T>...>;
-        return type{get<idxs.t[I]>(KUMI_FWD(t))...};
-      }(std::make_index_sequence<size_v<T>>{});
+        using type = builder_make_t<T, element_t<I, T>...>;
+        return type{get<I>(KUMI_FWD(t))...};
+      }(idxs);
     }
   }
 
@@ -117,11 +96,11 @@ namespace kumi
     else
     {
       constexpr auto F = R % size_v<T>;
-      constexpr auto idxs = _::rotator<size_v<T>, size_v<T> - F>();
+      constexpr auto idxs = function::rotater(index<size_v<T>>, index<(size_v<T> - F)>);
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = builder_make_t<T, element_t<idxs.t[I], T>...>;
-        return type{get<idxs.t[I]>(KUMI_FWD(t))...};
-      }(std::make_index_sequence<size_v<T>>{});
+        using type = builder_make_t<T, element_t<I, T>...>;
+        return type{get<I>(KUMI_FWD(t))...};
+      }(idxs);
     }
   }
 

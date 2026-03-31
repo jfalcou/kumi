@@ -9,58 +9,6 @@
 
 namespace kumi
 {
-  namespace _
-  {
-    template<typename T> struct make_unique
-    {
-      T acc;
-
-      template<typename W> KUMI_ABI friend constexpr decltype(auto) operator|(make_unique&& x, make_unique<W>&& y)
-      {
-        constexpr auto value = []<std::size_t... I>(std::index_sequence<I...>) {
-          if constexpr (concepts::record_type<T>) return (all_uniques_v<_::type_of_t<W>, raw_element_t<I, T>...>);
-          else return (all_uniques_v<W, element_t<I, T>...>);
-        }(std::make_index_sequence<size_v<T>>{});
-
-        if constexpr (value)
-          return [&]<std::size_t... I>(std::index_sequence<I...>) {
-            using res_t = builder_make_t<T, element_t<I, T>..., W>;
-            return _::make_unique{res_t{get<I>(KUMI_FWD(x.acc))..., KUMI_FWD(y.acc)}};
-          }(std::make_index_sequence<size_v<T>>{});
-        else return KUMI_FWD(x);
-      }
-    };
-
-    template<typename W> make_unique(W&& w) -> make_unique<W>;
-
-    struct uniquable
-    {
-      template<concepts::product_type T> [[nodiscard]] KUMI_ABI consteval auto operator()(as<T>) const noexcept
-      {
-        struct
-        {
-          std::size_t count{1}, t[size_v<T>];
-        } that{};
-
-        that.t[0] = 0;
-
-        [&]<std::size_t... I>(std::index_sequence<I...>) {
-          (
-            [&] {
-              constexpr auto L = I;
-              constexpr auto R = I + 1;
-              if constexpr (!std::is_same_v<raw_element_t<L, T>, raw_element_t<R, T>>) that.t[that.count++] = R;
-            }(),
-            ...);
-        }(std::make_index_sequence<size_v<T> - 1>{});
-
-        return that;
-      }
-    };
-
-    inline constexpr uniquable uniqued{};
-  }
-
   //====================================================================================================================
   /**
     @ingroup  generators
@@ -95,7 +43,7 @@ namespace kumi
     if constexpr (concepts::empty_product_type<T>) return KUMI_FWD(t);
     else
     {
-      constexpr auto pos = _::uniqued(as<T>{});
+      constexpr auto pos = function::uniqued(as<T>{});
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         using ret_t = builder_make_t<T, element_t<pos.t[I], T>...>;
         return ret_t{get<pos.t[I]>(KUMI_FWD(t))...};
@@ -138,11 +86,14 @@ namespace kumi
     if constexpr (concepts::empty_product_type<T>) return t;
     else
     {
+      constexpr auto proj = [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return function::uniquer(std::type_identity<raw_element_t<I, T>>{}...);
+      }(std::make_index_sequence<size_v<T>>{});
+
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::make_unique{builder_make_t<T, element_t<0, T>>{get<0>(KUMI_FWD(t))}} | ... |
-                _::make_unique<element_t<I + 1, T>>{get<I + 1>(KUMI_FWD(t))})
-          .acc;
-      }(std::make_index_sequence<size_v<T> - 1>{});
+        using type = builder_make_t<T, element_t<proj.e[I], T>...>;
+        return type{get<proj.e[I]>(KUMI_FWD(t))...};
+      }(std::make_index_sequence<proj.count>{});
     }
   }
 

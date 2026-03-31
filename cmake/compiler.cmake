@@ -9,18 +9,18 @@
 ##======================================================================================================================
 add_library(kumi_opts INTERFACE)
 
-target_compile_features ( kumi_opts INTERFACE  cxx_std_20 )
+target_compile_features ( kumi_opts INTERFACE cxx_std_20 )
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   if(CMAKE_CXX_COMPILER_FRONTEND_VARIANT STREQUAL "MSVC")
-      target_compile_options( kumi_opts INTERFACE /W3 /WX /EHsc )
+    target_compile_options( kumi_opts INTERFACE /W3 /WX /EHsc )
   else()
-    target_compile_options( kumi_opts INTERFACE -Wshadow -Werror -Wall -Wextra -Wunused-variable -Wdocumentation)
+    target_compile_options( kumi_opts INTERFACE -Wshadow -Werror -Wall -Wextra -Wunused-variable -Wdocumentation -Wextra-semi )
   endif()
 elseif (CMAKE_CXX_COMPILER_ID STREQUAL "MSVC")
-    target_compile_options( kumi_opts INTERFACE /W3 /WX /EHsc /Zc:preprocessor)
+  target_compile_options( kumi_opts INTERFACE /W3 /WX /EHsc /Zc:preprocessor )
 else()
-  target_compile_options( kumi_opts INTERFACE -Wshadow -Werror -Wall -Wextra -Wunused-variable)
+  target_compile_options( kumi_opts INTERFACE -Wshadow -Werror -Wall -Wextra -Wunused-variable -Wextra-semi )
 endif()
 
 ##======================================================================================================================

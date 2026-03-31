@@ -33,6 +33,7 @@
         <tab type="user" url="@ref traits"    title="Traits"/>
         <tab type="user" url="@ref concepts"  title="Concepts"/>
         <tab type="user" url="@ref utility"   title="Utility"/>
+        <tab type="user" url="@ref functional" title="Functional"/>
       </tab>
       <tab type="user" url="@ref kumi"    title="Kumi Namespace"/>
     </tab>

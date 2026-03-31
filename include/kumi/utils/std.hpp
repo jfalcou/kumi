@@ -9,7 +9,7 @@
 
 #if !defined(KUMI_DOXYGEN_INVOKED)
 //======================================================================================================================
-// Structured binding adaptation
+// Structured binding adaptation for tuples
 //======================================================================================================================
 template<std::size_t I, typename Head, typename... Tail>
 struct std::tuple_element<I, kumi::tuple<Head, Tail...>> : std::tuple_element<I - 1, kumi::tuple<Tail...>>
@@ -54,26 +54,13 @@ struct std::tuple_size<kumi::record<Ts...>> : std::integral_constant<std::size_t
 };
 
 //======================================================================================================================
-// Structured binding adaptation for index_map_t
-//======================================================================================================================
-template<typename... V>
-struct std::tuple_size<kumi::projection_map<V...>> : std::integral_constant<std::size_t, sizeof...(V)>
-{
-};
-
-template<std::size_t I, typename... V>
-struct std::tuple_element<I, kumi::projection_map<V...>> : std::tuple_element<I, kumi::tuple<V...>>
-{
-};
-
-//======================================================================================================================
 // Adaptation of unit to the tuple protocol
 //======================================================================================================================
 template<> struct std::tuple_size<kumi::unit> : std::integral_constant<std::size_t, 0>
 {
 };
 
-template<std::size_t I> struct std::tuple_element<I, kumi::unit> : std::tuple_element<I, kumi::tuple<>>
+template<std::size_t I> struct std::tuple_element<I, kumi::unit>
 {
 };
 

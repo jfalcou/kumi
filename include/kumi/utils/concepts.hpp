@@ -21,7 +21,7 @@ namespace kumi
 
     template<typename F, typename T>
     concept supports_nothrow_apply = []<std::size_t... N>(std::index_sequence<N...>) {
-      return std::is_nothrow_invocable<F, raw_member_t<N, T>...>::value;
+      return std::is_nothrow_invocable_v<F, raw_member_t<N, T>...>;
     }(std::make_index_sequence<size_v<T>>{});
 
     template<typename F, typename... Ts>
@@ -245,12 +245,12 @@ namespace kumi
       @ingroup concepts
       @brief Concept specifying if a type can be used as sequence of projections in algorithms
 
-      A type `T` models `kumi::projection_map` if it models `kumi::product_type` and
-      contains members which are themselves either integral types, identifiers or others `projection_map`
+      A type `T` models `kumi::projection_map` if it contains constant evaluable members which are themselves either
+      integral types, identifiers or others `projection_map`
     **/
     //==================================================================================================================
     template<typename T>
-    concept projection_map = product_type<T> && is_projection_map_v<std::remove_cvref_t<T>>;
+    concept projection_map = is_projection_map_v<std::remove_cvref_t<T>>;
 
     //==================================================================================================================
     /**
@@ -471,7 +471,7 @@ namespace kumi
     //==================================================================================================================
     template<typename Type, typename T>
     concept typed_get_compliant = product_type<T> && []<std::size_t... I>(std::index_sequence<I...>) {
-      return _::can_get_field_by_type<Type, element_t<I, T>...>;
+      return _::can_get_field_by_type<Type, raw_element_t<I, T>...>;
     }(std::make_index_sequence<size_v<T>>{});
 
     //==================================================================================================================
@@ -480,14 +480,28 @@ namespace kumi
       @brief Concept specifying if a product type can be queried via a `get<identifier>`
 
       A type `T` models `named_get_compliant` if it's a kumi::concepts::product_type with it's element modeling
-      kumi::concepts::uniquely_named and a field with the same label as the template parameter `Name` can be found
+      kumi::concepts::uniquely_named and a field with the same identifier as the template parameter `Id` can be found
       inside.
     **/
     //==================================================================================================================
-    template<typename Name, typename T>
-    concept named_get_compliant =
-      identifier<Name> && product_type<T> && []<std::size_t... I>(std::index_sequence<I...>) {
-        return _::can_get_field_by_value<Name, element_t<I, T>...>;
-      }(std::make_index_sequence<size_v<T>>{});
+    template<typename Id, typename T>
+    concept named_get_compliant = identifier<Id> && product_type<T> && []<std::size_t... I>(std::index_sequence<I...>) {
+      return _::can_get_field_by_value<Id, element_t<I, T>...>;
+    }(std::make_index_sequence<size_v<T>>{});
+
+    //==================================================================================================================
+    /**
+      @ingroup concepts
+      @brief Concept specifying if a product type can be queried via a `get<label>`
+
+      A type `T` models `labeled_get_compliant` if it's a kumi::concepts::product_type with it's element modeling
+      kumi::concepts::uniquely_named and a field with the same label as the template parameter `L` can be found
+      inside.
+    **/
+    //==================================================================================================================
+    template<typename L, typename T>
+    concept labeled_get_compliant = _::label<L> && product_type<T> && []<std::size_t... I>(std::index_sequence<I...>) {
+      return _::can_get_field_by_label<L, element_t<I, T>...>;
+    }(std::make_index_sequence<size_v<T>>{});
   }
 }

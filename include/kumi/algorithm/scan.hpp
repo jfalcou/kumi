@@ -9,31 +9,6 @@
 
 namespace kumi
 {
-  namespace _
-  {
-    //==================================================================================================================
-    // Scan helpers
-    //==================================================================================================================
-    template<typename F, typename T> struct scannable
-    {
-      F func;
-      T acc;
-
-      template<typename W> KUMI_ABI friend constexpr decltype(auto) operator>>(scannable&& x, scannable<F, W>&& y)
-      {
-        constexpr auto size = kumi::size_v<T> - 1;
-        return _::scannable{x.func, kumi::push_back(x.acc, invoke(x.func, kumi::get<size>(x.acc), y.acc))};
-      }
-
-      template<typename W> KUMI_ABI friend constexpr decltype(auto) operator<<(scannable&& x, scannable<F, W>&& y)
-      {
-        return _::scannable{x.func, kumi::push_front(x.acc, invoke(x.func, y.acc, kumi::get<0>(x.acc)))};
-      }
-    };
-
-    template<class F, class T> scannable(F const&, T&&) -> scannable<F, T>;
-  }
-
   //====================================================================================================================
   /**
     @ingroup  reductions
@@ -77,11 +52,11 @@ namespace kumi
     else if constexpr (concepts::empty_product_type<T>) return tuple{};
     else
     {
+      auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::scannable{f, tuple{invoke(f, init, get<0>(KUMI_FWD(t)))}} >> ... >>
-                _::scannable{f, get<I + 1>(KUMI_FWD(t))})
-          .acc;
-      }(std::make_index_sequence<size_v<T> - 1>());
+        return (function::scannable{op, invoke(f, init, get<0>(KUMI_FWD(t)))} >> ... >>
+                bind_back(f, get<I + 1>(KUMI_FWD(t))))();
+      }(std::make_index_sequence<size_v<T> - 1>{});
     }
   }
 
@@ -170,9 +145,10 @@ namespace kumi
     else if constexpr (concepts::empty_product_type<T>) return tuple{init};
     else
     {
+      auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::scannable{f, tuple{init}} >> ... >> _::scannable{f, get<I>(KUMI_FWD(t))}).acc;
-      }(std::make_index_sequence<size_v<T> - 1>());
+        return (function::scannable{op, init} >> ... >> bind_back(f, get<I>(KUMI_FWD(t))))();
+      }(std::make_index_sequence<size_v<T> - 1>{});
     }
   }
 
@@ -261,11 +237,11 @@ namespace kumi
     else if constexpr (concepts::empty_product_type<T>) return tuple{};
     else
     {
+      auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::scannable{f, tuple{invoke(f, get<size_v<T> - 1>(KUMI_FWD(t)), init)}}
-                << ... << _::scannable{f, get<size_v<T> - 2 - I>(KUMI_FWD(t))})
-          .acc;
-      }(std::make_index_sequence<size_v<T> - 1>());
+        return (bind_front(f, get<I>(KUMI_FWD(t)))
+                << ... << function::scannable{op, invoke(f, get<size_v<T> - 1>(KUMI_FWD(t)), init)})();
+      }(std::make_index_sequence<size_v<T> - 1>{});
     }
   }
 
@@ -354,9 +330,10 @@ namespace kumi
     else if constexpr (concepts::empty_product_type<T>) return tuple{init};
     else
     {
+      auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (_::scannable{f, tuple{init}} << ... << _::scannable{f, get<size_v<T> - 1 - I>(KUMI_FWD(t))}).acc;
-      }(std::make_index_sequence<size_v<T> - 1>());
+        return (bind_front(f, get<I + 1>(KUMI_FWD(t))) << ... << function::scannable{op, init})();
+      }(std::make_index_sequence<size_v<T> - 1>{});
     }
   }
 

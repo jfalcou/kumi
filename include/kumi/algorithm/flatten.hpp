@@ -9,77 +9,6 @@
 
 namespace kumi
 {
-  namespace _
-  {
-    //==================================================================================================================
-    // Flatten helpers used to handle prefix name concatenation for records without altering API
-    //==================================================================================================================
-    template<typename T> KUMI_ABI constexpr auto flat_one(T&& t)
-    {
-      if constexpr (concepts::empty_product_type<T>) return KUMI_FWD(t);
-      else
-        return [&]<std::size_t... I>(std::index_sequence<I...>) {
-          auto v_or_r = [&]<typename V>(V&& v) {
-            using FV = kumi::result::field_value_of_t<V>;
-            constexpr auto curr_name = kumi::label_of<V>();
-
-            if constexpr (concepts::record_type<FV>)
-            {
-              return [&]<std::size_t... J>(std::index_sequence<J...>) {
-                return record{(capture_field<name<concatenate_str<curr_name, kumi::label_of<element_t<J, FV>>()>()>{}>(
-                  field_value_of(get<J>(field_value_of(KUMI_FWD(v))))))...};
-              }(std::make_index_sequence<size_v<FV>>{});
-            }
-            else return record{KUMI_FWD(v)};
-          };
-
-          return cat(v_or_r(get<I>(KUMI_FWD(t)))...);
-        }(std::make_index_sequence<size_v<T>>{});
-    }
-
-    template<auto Prefix, typename T> KUMI_ABI constexpr auto flat(T&& t)
-    {
-      using Prefix_type = std::remove_cvref_t<decltype(Prefix)>;
-      if constexpr (concepts::empty_product_type<T>) return KUMI_FWD(t);
-      else
-        return [&]<std::size_t... I>(std::index_sequence<I...>) {
-          auto v_or_r = [&]<typename V>(V&& v) {
-            constexpr auto curr_name = [&] {
-              if constexpr (std::is_same_v<Prefix_type, unit>) return name<kumi::label_of<V>()>{};
-              else return name<concatenate_str<_::make_str(Prefix), kumi::label_of<V>()>()>{};
-            }();
-
-            if constexpr (concepts::record_type<kumi::result::field_value_of_t<V>>)
-              return flat<curr_name>(field_value_of(KUMI_FWD(v)));
-            else return record{capture_field<curr_name>(field_value_of(KUMI_FWD(v)))};
-          };
-
-          return cat(v_or_r(get<I>(KUMI_FWD(t)))...);
-        }(std::make_index_sequence<size_v<T>>{});
-    }
-
-    template<auto Prefix, typename T, typename F> KUMI_ABI constexpr auto flat_map(T&& t, F f)
-    {
-      if constexpr (concepts::empty_product_type<T>) return KUMI_FWD(t);
-      else
-        return [&]<std::size_t... I>(std::index_sequence<I...>) {
-          using Prefix_type = std::remove_cvref_t<decltype(Prefix)>;
-          auto v_or_r = [&]<typename V>(V&& v) {
-            constexpr auto curr_name = [&] {
-              if constexpr (std::is_same_v<Prefix_type, unit>) return name<kumi::label_of<V>()>{};
-              else return name<concatenate_str<_::make_str(Prefix), kumi::label_of<V>()>()>{};
-            }();
-
-            if constexpr (concepts::record_type<kumi::result::field_value_of_t<V>>)
-              return flat_map<curr_name>(field_value_of(KUMI_FWD(v)), f);
-            else return record{capture_field<curr_name>(invoke(f, field_value_of(v)))};
-          };
-
-          return cat(v_or_r(get<I>(KUMI_FWD(t)))...);
-        }(std::make_index_sequence<size_v<T>>{});
-    }
-  }
-
   //====================================================================================================================
   /**
     @ingroup  generators
@@ -115,17 +44,27 @@ namespace kumi
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto flatten(T&& t)
   {
     if constexpr (concepts::empty_product_type<T>) return t;
-    else if constexpr (concepts::record_type<T>) return _::flat_one(KUMI_FWD(t));
     else
     {
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        auto v_or_t = []<typename V>(V&& v) {
-          if constexpr (concepts::product_type<V>) return KUMI_FWD(v);
-          else return kumi::tuple{KUMI_FWD(v)};
-        };
-
-        return cat(v_or_t(get<I>(KUMI_FWD(t)))...);
+      constexpr auto proj = [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return function::concatenater(std::index_sequence<function::size_or_v<raw_element_t<I, T>, 1>...>{});
       }(std::make_index_sequence<size_v<T>>{});
+
+      auto process = [&]<typename V>(auto J, V&& v) {
+        using FV = result::field_value_of_t<V>;
+        if constexpr (concepts::record_type<FV> && concepts::record_type<T>)
+        {
+          constexpr auto curr_name = label_of<V>();
+          constexpr auto new_name = concatenate_str<curr_name, label_of<element_t<J, FV>>()>();
+          return (capture_field<name<new_name>{}>(field_value_of(get<J>(field_value_of(KUMI_FWD(v))))));
+        }
+        else if constexpr (concepts::follows_same_semantic<T, V>) return get<J>(KUMI_FWD(v));
+        else return KUMI_FWD(v);
+      };
+
+      return [&]<std::size_t... J, std::size_t... I>(std::index_sequence<J...>, std::index_sequence<I...>) {
+        return builder<T>::make(process(index<J>, get<I>(KUMI_FWD(t)))...);
+      }(get<1>(proj), get<0>(proj));
     }
   }
 
@@ -171,15 +110,20 @@ namespace kumi
   template<concepts::product_type T, typename Func> [[nodiscard]] KUMI_ABI constexpr auto flatten_all(T&& t, Func f)
   {
     if constexpr (concepts::empty_product_type<T>) return t;
-    else if constexpr (concepts::record_type<T>) return _::flat_map<none>(KUMI_FWD(t), KUMI_FWD(f));
     else
     {
+      auto process = [&]<typename V>(V&& v) {
+        using FV = result::field_value_of_t<V>;
+        if constexpr (concepts::record_type<FV> && concepts::record_type<T>)
+          return capture_field<identifier_of<V>()>(flatten_all(field_value_of(KUMI_FWD(v)), f));
+        else if constexpr (concepts::follows_same_semantic<T, V>) return flatten_all(KUMI_FWD(v), f);
+        else if constexpr (concepts::record_type<T> && concepts::field<V>)
+          return capture_field<identifier_of<V>()>(invoke(f, field_value_of(v)));
+        else return invoke(f, v);
+      };
+
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        auto v_or_t = [&]<typename V>(V&& v) {
-          if constexpr (concepts::product_type<V>) return flatten_all(KUMI_FWD(v), f);
-          else return tuple{invoke(f, v)};
-        };
-        return cat(v_or_t(get<I>(KUMI_FWD(t)))...);
+        return flatten(builder<T>::make(process(get<I>(KUMI_FWD(t)))...));
       }(std::make_index_sequence<size_v<T>>{});
     }
   }
@@ -187,17 +131,19 @@ namespace kumi
   /// @overload
   template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto flatten_all(T&& t)
   {
-    if constexpr (concepts::empty_product_type<T>) return t;
-    else if constexpr (concepts::record_type<T>) return _::flat<none>(KUMI_FWD(t));
+    if constexpr (concepts::empty_product_type<T>) return KUMI_FWD(t);
     else
     {
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        auto v_or_t = []<typename V>(V&& v) {
-          if constexpr (concepts::product_type<V>) return flatten_all(KUMI_FWD(v));
-          else return kumi::tuple{KUMI_FWD(v)};
-        };
+      auto process = [&]<typename V>(V&& v) {
+        using FV = result::field_value_of_t<V>;
+        if constexpr (concepts::record_type<FV> && concepts::record_type<T>)
+          return capture_field<identifier_of<V>()>(flatten_all(field_value_of(KUMI_FWD(v))));
+        else if constexpr (concepts::follows_same_semantic<T, V>) return flatten_all(KUMI_FWD(v));
+        else return KUMI_FWD(v);
+      };
 
-        return cat(v_or_t(get<I>(KUMI_FWD(t)))...);
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return flatten(builder<T>::make(process(get<I>(KUMI_FWD(t)))...));
       }(std::make_index_sequence<size_v<T>>{});
     }
   }

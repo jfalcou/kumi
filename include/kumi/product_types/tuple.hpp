@@ -321,7 +321,7 @@ namespace kumi
     {
       [&]<std::size_t... I>(std::index_sequence<I...>) {
         ((get<I>(*this) = get<I>(other)), ...);
-      }(std::make_index_sequence<sizeof...(Ts)>());
+      }(std::make_index_sequence<sizeof...(Ts)>{});
 
       return *this;
     }
@@ -335,7 +335,7 @@ namespace kumi
     {
       [&]<std::size_t... I>(std::index_sequence<I...>) {
         ((get<I>(*this) = get<I>(KUMI_FWD(other))), ...);
-      }(std::make_index_sequence<sizeof...(Ts)>());
+      }(std::make_index_sequence<sizeof...(Ts)>{});
 
       return *this;
     }
@@ -354,7 +354,7 @@ namespace kumi
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return ((get<I>(self) == get<I>(other)) && ...);
-      }(std::make_index_sequence<sizeof...(Ts)>());
+      }(std::make_index_sequence<sizeof...(Ts)>{});
     }
 
     /// @brief Compares a tuple with an other for inequality
@@ -386,7 +386,7 @@ namespace kumi
 
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return (res || ... || order(index_t<I>{}));
-      }(std::make_index_sequence<sizeof...(Ts) - 1>());
+      }(std::make_index_sequence<sizeof...(Ts) - 1>{});
     }
 
     /// @brief Compares tuples for lexicographical is less or equal relation
@@ -603,7 +603,7 @@ namespace kumi
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
       return Type{get<I>(t)...};
-    }(std::make_index_sequence<sizeof...(Ts)>());
+    }(std::make_index_sequence<sizeof...(Ts)>{});
   }
 
   //====================================================================================================================
@@ -706,6 +706,76 @@ namespace kumi
 
   template<typename T, template<typename...> class Meta = std::type_identity>
   using as_tuple_t = typename as_tuple<T, Meta>::type;
+
+  //====================================================================================================================
+  //! @}
+  //====================================================================================================================
+
+  //====================================================================================================================
+  //! @name Tuple properties
+  //! @{
+  //====================================================================================================================
+
+  //====================================================================================================================
+  /**
+    @related tuple record
+    @brief Extracts the names of the fields of a kumi::product_type.
+
+    @note If some fields are unnamed, the associated name is kumi::unit.
+
+    @tparam   T the type of the prodcut_type from which to extract names.
+    @return   A tuple of the names of a kumi::product_type.
+
+    ## Example:
+    @include doc/infra/members_of.cpp
+  **/
+  //====================================================================================================================
+  template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto members_of(as<T>) noexcept
+  {
+    if constexpr (concepts::sized_product_type<T, 0>) return tuple{};
+    else
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return tuple{identifier_of<element_t<I, T>>()...};
+      }(std::make_index_sequence<size_v<T>>{});
+  }
+
+  //====================================================================================================================
+  /**
+    @related tuple record
+    @brief Extracts the values of the fields of a kumi::product_type.
+
+    @param    t the product_type from which to extract names.
+    @return   A tuple of references to the values of a kumi::product_type.
+
+    ## Example:
+    @include doc/infra/values_of.cpp
+  **/
+  //====================================================================================================================
+  template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto values_of(T&& t) noexcept
+  {
+    if constexpr (concepts::sized_product_type<T, 0>) return tuple{};
+    else
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return tuple<result::field_value_of_t<member_t<I, T>>...>{field_value_of(get<I>(KUMI_FWD(t)))...};
+      }(std::make_index_sequence<size_v<T>>{});
+  }
+
+  namespace result
+  {
+    template<concepts::product_type T> struct members_of
+    {
+      using type = decltype(kumi::members_of(as<T>{}));
+    };
+
+    template<concepts::product_type T> struct values_of
+    {
+      using type = decltype(kumi::values_of(std::declval<T>()));
+    };
+
+    template<concepts::product_type T> using members_of_t = typename members_of<T>::type;
+
+    template<concepts::product_type T> using values_of_t = typename values_of<T>::type;
+  }
 
   //====================================================================================================================
   //! @}

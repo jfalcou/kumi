@@ -42,8 +42,10 @@ namespace kumi
     else if constexpr (concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
     else
     {
-      auto base = get<0>(KUMI_FWD(t));
-      return kumi::fold_left([]<typename U>(auto cur, U u) { return cur > u ? cur : u; }, KUMI_FWD(t), base);
+      auto const f = [](auto cur, auto u) { return cur > u ? cur : u; };
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return (function::foldable{get<0>(KUMI_FWD(t))} >> ... >> bind_back(f, get<I + 1>(KUMI_FWD(t))))();
+      }(std::make_index_sequence<size_v<T> - 1>{});
     }
   }
 
@@ -81,9 +83,10 @@ namespace kumi
     else if constexpr (concepts::sized_product_type<T, 1>) return invoke(f, get<0>(KUMI_FWD(t)));
     else
     {
-      auto base = f(get<0>(KUMI_FWD(t)));
-      return kumi::fold_left([f]<typename U>(auto cur, U const& u) { return cur > invoke(f, u) ? cur : invoke(f, u); },
-                             KUMI_FWD(t), base);
+      auto const c = [f](auto cur, auto const& u) { return cur > invoke(f, u) ? cur : invoke(f, u); };
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return (function::foldable{invoke(f, get<0>(KUMI_FWD(t)))} >> ... >> bind_back(c, get<I + 1>(KUMI_FWD(t))))();
+      }(std::make_index_sequence<size_v<T> - 1>{});
     }
   }
 
@@ -117,8 +120,15 @@ namespace kumi
   //====================================================================================================================
   template<concepts::product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto max_flat(T&& t, F f) noexcept
   {
-    auto flat_t = kumi::flatten_all(KUMI_FWD(t));
-    return max(flat_t, f);
+    if constexpr (concepts::empty_product_type<T>) return 0;
+    else if constexpr (concepts::record_type<T>) return max_flat(values_of(KUMI_FWD(t)), f);
+    else
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return max(make_tuple([&]<typename V>(V&& v) {
+          if constexpr (concepts::product_type<V>) return max_flat(KUMI_FWD(v), f);
+          else return invoke(f, v);
+        }(get<I>(KUMI_FWD(t)))...));
+      }(std::make_index_sequence<size_v<T>>{});
   }
 
   //====================================================================================================================
@@ -154,8 +164,10 @@ namespace kumi
     else if constexpr (concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
     else
     {
-      auto base = get<0>(KUMI_FWD(t));
-      return kumi::fold_left([]<typename U>(auto cur, U u) { return cur < u ? cur : u; }, KUMI_FWD(t), base);
+      auto const f = [](auto cur, auto u) { return cur < u ? cur : u; };
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return (function::foldable{get<0>(KUMI_FWD(t))} >> ... >> bind_back(f, get<I + 1>(KUMI_FWD(t))))();
+      }(std::make_index_sequence<size_v<T> - 1>{});
     }
   }
 
@@ -193,9 +205,10 @@ namespace kumi
     else if constexpr (concepts::sized_product_type<T, 1>) return invoke(f, get<0>(KUMI_FWD(t)));
     else
     {
-      auto base = f(get<0>(KUMI_FWD(t)));
-      return kumi::fold_left([f]<typename U>(auto cur, U const& u) { return cur < invoke(f, u) ? cur : invoke(f, u); },
-                             KUMI_FWD(t), base);
+      auto const c = [f](auto cur, auto const& u) { return cur < invoke(f, u) ? cur : invoke(f, u); };
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return (function::foldable{invoke(f, get<0>(KUMI_FWD(t)))} >> ... >> bind_back(c, get<I + 1>(KUMI_FWD(t))))();
+      }(std::make_index_sequence<size_v<T> - 1>{});
     }
   }
 
@@ -229,8 +242,15 @@ namespace kumi
   //====================================================================================================================
   template<concepts::product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto min_flat(T&& t, F f) noexcept
   {
-    auto flat_t = kumi::flatten_all(KUMI_FWD(t));
-    return min(flat_t, f);
+    if constexpr (concepts::empty_product_type<T>) return 0;
+    else if constexpr (concepts::record_type<T>) return min_flat(values_of(KUMI_FWD(t)), f);
+    else
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return min(make_tuple([&]<typename V>(V&& v) {
+          if constexpr (concepts::product_type<V>) return min_flat(KUMI_FWD(v), f);
+          else return invoke(f, v);
+        }(get<I>(KUMI_FWD(t)))...));
+      }(std::make_index_sequence<size_v<T>>{});
   }
 
   namespace result

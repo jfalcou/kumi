@@ -8,31 +8,30 @@
 #define TTS_MAIN
 
 #include <kumi/tuple.hpp>
-#include <kumi/algorithm.hpp>
+#include <kumi/algorithm/reduce.hpp>
 #include <tts/tts.hpp>
 
 TTS_CASE("Check result::reduce_t with prod/sum/bit_* behavior")
 {
-  TTS_TYPE_IS((kumi::result::reduce_t<kumi::numeric_add, kumi::tuple<char, short, int, double>>), double);
+  using namespace kumi::function;
+  TTS_TYPE_IS((kumi::result::reduce_t<numeric_add, kumi::tuple<char, short, int, double>>), double);
 
-  TTS_TYPE_IS((kumi::result::reduce_t<kumi::numeric_prod, kumi::tuple<char, short, int, double>>), double);
+  TTS_TYPE_IS((kumi::result::reduce_t<numeric_prod, kumi::tuple<char, short, int, double>>), double);
 
-  TTS_TYPE_IS((kumi::result::reduce_t<kumi::boolean_or, kumi::tuple<short, std::size_t, int>>), std::size_t);
+  TTS_TYPE_IS((kumi::result::reduce_t<boolean_or, kumi::tuple<short, std::size_t, int>>), std::size_t);
 
-  TTS_TYPE_IS((kumi::result::reduce_t<kumi::boolean_and, kumi::tuple<short, std::size_t, int>>), std::size_t);
+  TTS_TYPE_IS((kumi::result::reduce_t<boolean_and, kumi::tuple<short, std::size_t, int>>), std::size_t);
 
   auto lambda = [](auto const& m) { return m; };
   using func_t = decltype(lambda);
 
-  TTS_TYPE_IS((kumi::result::map_reduce_t<func_t, kumi::numeric_add, kumi::tuple<char, short, int, double>>), double);
+  TTS_TYPE_IS((kumi::result::map_reduce_t<func_t, numeric_add, kumi::tuple<char, short, int, double>>), double);
 
-  TTS_TYPE_IS((kumi::result::map_reduce_t<func_t, kumi::numeric_prod, kumi::tuple<char, short, int, double>>), double);
+  TTS_TYPE_IS((kumi::result::map_reduce_t<func_t, numeric_prod, kumi::tuple<char, short, int, double>>), double);
 
-  TTS_TYPE_IS((kumi::result::map_reduce_t<func_t, kumi::boolean_or, kumi::tuple<short, std::size_t, int>>),
-              std::size_t);
+  TTS_TYPE_IS((kumi::result::map_reduce_t<func_t, boolean_or, kumi::tuple<short, std::size_t, int>>), std::size_t);
 
-  TTS_TYPE_IS((kumi::result::map_reduce_t<func_t, kumi::boolean_and, kumi::tuple<short, std::size_t, int>>),
-              std::size_t);
+  TTS_TYPE_IS((kumi::result::map_reduce_t<func_t, boolean_and, kumi::tuple<short, std::size_t, int>>), std::size_t);
 };
 
 TTS_CASE("Check kumi::reduce with kumi::plus behavior")

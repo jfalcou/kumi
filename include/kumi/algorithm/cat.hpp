@@ -46,35 +46,14 @@ namespace kumi
     if constexpr (sizeof...(Ts) == 0) return tuple{};
     else
     {
-      // count is at least 1 so MSVC don't cry when we use a 0-sized array
-      constexpr auto count = (1ULL + ... + size_v<Ts>);
-      constexpr auto pos = [&]() {
-        struct
-        {
-          std::size_t t[count], e[count];
-        } that{};
-        std::size_t k = 0, offset = 0;
-
-        auto locate = [&]<std::size_t... I>(std::index_sequence<I...>) {
-          (((that.t[I + offset] = k), (that.e[I + offset] = I)), ...);
-          offset += sizeof...(I);
-          k++;
-        };
-
-        (locate(std::make_index_sequence<size_v<Ts>>{}), ...);
-
-        return that;
-      }();
-
+      constexpr auto pos = function::concatenater(std::index_sequence<size_v<Ts>...>{});
       using res_type = common_product_type_t<std::remove_cvref_t<Ts>...>;
 
-      return [&]<std::size_t... N>(auto&& tuples, std::index_sequence<N...>) {
-        using rts = std::remove_cvref_t<decltype(tuples)>;
-
-        using type = builder_make_t<res_type, element_t<pos.e[N], std::remove_cvref_t<element_t<pos.t[N], rts>>>...>;
-
-        return type{get<pos.e[N]>(get<pos.t[N]>(KUMI_FWD(tuples)))...};
-      }(kumi::forward_as_tuple(KUMI_FWD(ts)...), std::make_index_sequence<count - 1>{});
+      return [&]<typename T, std::size_t... E, std::size_t... N>(T&& t, std::index_sequence<E...>,
+                                                                 std::index_sequence<N...>) {
+        using type = builder_make_t<res_type, element_t<E, element_t<N, T>>...>;
+        return type{get<E>(get<N>(KUMI_FWD(t)))...};
+      }(kumi::forward_as_tuple(KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
     }
   }
 

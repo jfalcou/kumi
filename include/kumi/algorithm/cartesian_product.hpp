@@ -9,33 +9,6 @@
 
 namespace kumi
 {
-
-  //====================================================================================================================
-  namespace _
-  {
-    template<std::size_t N, std::size_t... S> struct digits
-    {
-      KUMI_ABI constexpr auto operator()(std::size_t v) noexcept
-      {
-        struct
-        {
-          std::size_t data[N];
-        } values = {};
-
-        std::size_t shp[N] = {S...};
-        std::size_t i = 0;
-
-        while (v != 0)
-        {
-          values.data[i] = v % shp[i];
-          v /= shp[i++];
-        }
-
-        return values;
-      }
-    };
-  }
-
   //====================================================================================================================
   /**
     @ingroup    generators
@@ -75,27 +48,17 @@ namespace kumi
     else
     {
       using res_type = common_product_type_t<std::remove_cvref_t<Ts>...>;
+      constexpr auto idx = function::cartesian_producer(index<(size_v<Ts> * ...)>, index<size_v<Ts>>...);
 
-      constexpr auto idx = [&]<std::size_t... I>(std::index_sequence<I...>) {
-        kumi::_::digits<sizeof...(Ts), kumi::size_v<Ts>...> dgt{};
-        using t_t = decltype(dgt(0));
-        struct
-        {
-          t_t data[sizeof...(I)];
-        } that = {dgt(I)...};
-        return that;
-      }(std::make_index_sequence<(kumi::size_v<Ts> * ...)>{});
-
-      auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>) {
-        auto tps = kumi::forward_as_tuple(ts...);
-        using res_t =
-          builder_make_t<res_type, element_t<idx.data[k].data[I], std::remove_cvref_t<element_t<I, decltype(tps)>>>...>;
-        return res_t{get<idx.data[k].data[I]>(get<I>(tps))...};
+      auto maps = [&]<std::size_t... E, std::size_t... I>(std::index_sequence<E...>, std::index_sequence<I...>) {
+        auto tps = kumi::forward_as_tuple(KUMI_FWD(ts)...);
+        using res_t = builder_make_t<res_type, element_t<E, element_t<I, decltype(tps)>>...>;
+        return res_t{get<E>(get<I>(tps))...};
       };
 
       return [&]<std::size_t... N>(std::index_sequence<N...>) {
         std::make_index_sequence<sizeof...(Ts)> ids;
-        return kumi::make_tuple(maps(index<N>, ids)...);
+        return kumi::make_tuple(maps(get<N>(idx), ids)...);
       }(std::make_index_sequence<(size_v<Ts> * ...)>{});
     }
   }
