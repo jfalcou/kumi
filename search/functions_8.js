@@ -1,7 +1,7 @@
 var searchData=
 [
   ['make_5findexes_0',['make_indexes',['../group__utility_gadba148c334bcf52088dc64992c270fdd.html#gadba148c334bcf52088dc64992c270fdd',1,'kumi']]],
-  ['make_5frecord_1',['make_record',['../group__record__related_ga76eb17a90f4e3752c96633b20a62969f.html#ga76eb17a90f4e3752c96633b20a62969f',1,'kumi']]],
+  ['make_5frecord_1',['make_record',['../group__record__related_gabcc668b23119c18ca175ab618fd7949c.html#gabcc668b23119c18ca175ab618fd7949c',1,'kumi']]],
   ['make_5ftuple_2',['make_tuple',['../group__tuple__related_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007',1,'kumi']]],
   ['map_3',['map',['../group__transforms_ga446a1438a421885ef0a52c3933d0be5a.html#ga446a1438a421885ef0a52c3933d0be5a',1,'kumi']]],
   ['map_5ffield_4',['map_field',['../group__record__transforms_ga325ce53da1e1706c3bba9c40e8477f20.html#ga325ce53da1e1706c3bba9c40e8477f20',1,'kumi']]],

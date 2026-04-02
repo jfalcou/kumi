@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>KUMI: kumi::concepts::labeled_get_compliant Concept Reference</title>
+<title>KUMI: kumi::stored_element&lt; I, T &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -125,7 +125,7 @@ $(function() { codefold.init(); });
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('conceptkumi_1_1concepts_1_1labeled__get__compliant.html','',''); });
+$(function(){initNavTree('structkumi_1_1stored__element.html','','structkumi_1_1stored__element-members'); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -151,32 +151,43 @@ $(function(){initNavTree('conceptkumi_1_1concepts_1_1labeled__get__compliant.htm
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">kumi::concepts::labeled_get_compliant Concept Reference<div class="ingroups"><a class="el" href="group__concepts.html">Product Type Related Concepts</a></div></div></div>
+  <div class="summary">
+<a href="structkumi_1_1stored__element-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">kumi::stored_element&lt; I, T &gt; Struct Template Reference<div class="ingroups"><a class="el" href="group__traits.html">Product Type Related Traits</a> &raquo; <a class="el" href="group__record__traits.html">Record Related Traits</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Concept specifying if a product type can be queried via a <span class="tt">get&lt;label&gt;</span>.  
-<a href="#details">More...</a></p>
+<p>Provides indexed access to the types of the elements of a product type and unwraps the returned field_capture for record type.  
+ <a href="#details">More...</a></p>
 
-<p><code>#include &lt;kumi/utils/concepts.hpp&gt;</code></p>
+<p><code>#include &lt;kumi/utils/traits.hpp&gt;</code></p>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Concept specifying if a product type can be queried via a <span class="tt">get&lt;label&gt;</span>. </p>
-<p>A type <span class="tt">T</span> models <span class="tt">labeled_get_compliant</span> if it's a <a class="el" href="conceptkumi_1_1concepts_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::concepts::product_type</a> with it's element modeling <a class="el" href="conceptkumi_1_1concepts_1_1uniquely__named.html" title="Concept specifying if a parameter pack only holds kumi::concepts::field with no duplicate names.">kumi::concepts::uniquely_named</a> and a field with the same label as the template parameter <span class="tt">L</span> can be found inside. </p>
-</div><h2 id="header-conceptdef" class="groupheader">Concept definition</h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> L, <span class="keyword">typename</span> T&gt;</div>
-<div class="line">    <span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1concepts_1_1labeled__get__compliant.html">labeled_get_compliant</a> = kumi_implementation_defined &amp;&amp; <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1product__type.html">product_type&lt;T&gt;</a> &amp;&amp; []&lt;std::size_t... I&gt;(std::index_sequence&lt;I...&gt;) {</div>
-<div class="line">      <span class="keywordflow">return</span> kumi_implementation_defined;</div>
-<div class="line">    }(std::make_index_sequence&lt;size_v&lt;T&gt;&gt;{})</div>
-<div class="ttc" id="aconceptkumi_1_1concepts_1_1labeled__get__compliant_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1labeled__get__compliant.html">kumi::concepts::labeled_get_compliant</a></div><div class="ttdoc">Concept specifying if a product type can be queried via a get&lt;label&gt;.</div><div class="ttdef"><b>Definition</b> concepts.hpp:503</div></div>
-<div class="ttc" id="aconceptkumi_1_1concepts_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:87</div></div>
-</div><!-- fragment --></div><!-- contents -->
+<div class="textblock"><div class="compoundTemplParams">template&lt;std::size_t I, typename T&gt;<br />
+struct kumi::stored_element&lt; I, T &gt;</div><p>Provides indexed access to the types of the elements of a product type and unwraps the returned field_capture for record type. </p>
+<dl class="section note"><dt>Note</dt><dd>is equivalent to element_t on product type that doesnt model record type.</dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">I</td><td>Index of the type to retrieve </td></tr>
+    <tr><td class="paramname">T</td><td>Product type to access</td></tr>
+  </table>
+  </dd>
+</dl>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md400"></a>
+Helper type</h2>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I, <span class="keyword">typename</span> T&gt;</div>
+<div class="line">  <span class="keyword">using </span>stored_element_t = <span class="keyword">typename</span> stored_element_t&lt;I,T&gt;::type;</div>
+<div class="line">}</div>
+<div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
+</div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- HTML footer for doxygen 1.8.20-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="namespacekumi.html">kumi</a></li><li class="navelem"><b>concepts</b></li><li class="navelem"><a href="conceptkumi_1_1concepts_1_1labeled__get__compliant.html">labeled_get_compliant</a></li>
+    <li class="navelem"><a href="namespacekumi.html">kumi</a></li><li class="navelem"><a href="structkumi_1_1stored__element.html">stored_element</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

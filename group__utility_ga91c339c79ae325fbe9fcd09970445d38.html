@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>KUMI: kumi::get_index_of_label</title>
+<title>KUMI: kumi::get_index_of_type</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -125,7 +125,7 @@ $(function() { codefold.init(); });
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('group__utility_ga64fcb11495228d657bfa3999c5f190f2.html','',''); });
+$(function(){initNavTree('group__utility_ga91c339c79ae325fbe9fcd09970445d38.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -151,20 +151,20 @@ $(function(){initNavTree('group__utility_ga64fcb11495228d657bfa3999c5f190f2.html
 </div>
 
 <div class="contents">
-<a id="ga64fcb11495228d657bfa3999c5f190f2" name="ga64fcb11495228d657bfa3999c5f190f2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga64fcb11495228d657bfa3999c5f190f2">&#9670;&#160;</a></span>get_index_of_label()</h2>
+<a id="ga91c339c79ae325fbe9fcd09970445d38" name="ga91c339c79ae325fbe9fcd09970445d38"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga91c339c79ae325fbe9fcd09970445d38">&#9670;&#160;</a></span>get_index_of_type()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="structkumi_1_1str.html">str</a> L, concepts::product_type T&gt; <br />
-requires (concepts::labeled_get_compliant&lt;<a class="el" href="structkumi_1_1label__t.html">label_t</a>&lt;L&gt;, T&gt;)</div>
+template&lt;typename U, concepts::product_type T&gt; <br />
+requires (concepts::queryable_by_type&lt;U, T&gt;)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto kumi::get_index_of_label </td>
+          <td class="memname">auto kumi::get_index_of_type </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td></td>
@@ -177,9 +177,9 @@ requires (concepts::labeled_get_compliant&lt;<a class="el" href="structkumi_1_1l
 </table>
 </div><div class="memdoc">
 
-<p>Helper to retrive the index of a type in a product type by it s identifier. </p>
-<dl class="section note"><dt>Note</dt><dd>This function does not participate in overload resolution if the product type has several instances of the same identifier or has no identifier at all.</dd></dl>
-<dl class="section return"><dt>Returns</dt><dd>the index of the element whose identifier matches Id in the product type if it exist </dd></dl>
+<p>Helper to retrive the index of a type in a product type by it s type. </p>
+<dl class="section note"><dt>Note</dt><dd>This function does not participate in overload resolution if the product type has several instances of the same type or if it is empty.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>the index of the element of type U in the product type if it exist </dd></dl>
 
 </div>
 </div>

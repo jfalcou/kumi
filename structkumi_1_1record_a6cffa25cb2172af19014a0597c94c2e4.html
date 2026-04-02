@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>KUMI: kumi::get_index_of_field</title>
+<title>KUMI: kumi::record::operator[]</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -125,7 +125,7 @@ $(function() { codefold.init(); });
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('group__utility_gabf00cf3ba64588ec5b680f49e18a9d92.html','',''); });
+$(function(){initNavTree('structkumi_1_1record_a6cffa25cb2172af19014a0597c94c2e4.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -151,36 +151,65 @@ $(function(){initNavTree('group__utility_gabf00cf3ba64588ec5b680f49e18a9d92.html
 </div>
 
 <div class="contents">
-<a id="gabf00cf3ba64588ec5b680f49e18a9d92" name="gabf00cf3ba64588ec5b680f49e18a9d92"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gabf00cf3ba64588ec5b680f49e18a9d92">&#9670;&#160;</a></span>get_index_of_field()</h2>
+<a id="a6cffa25cb2172af19014a0597c94c2e4" name="a6cffa25cb2172af19014a0597c94c2e4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6cffa25cb2172af19014a0597c94c2e4">&#9670;&#160;</a></span>operator[]() <span class="overload">[2/4]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;concepts::identifier Id, concepts::product_type T&gt; <br />
-requires (concepts::named_get_compliant&lt;Id, T&gt;)</div>
+template&lt;typename... Ts&gt; </div>
+<div class="memtemplate">
+template&lt;concepts::identifier Id&gt; <br />
+requires (concepts::contains_identifier&lt;Id, Ts...&gt;)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto kumi::get_index_of_field </td>
+          <td class="memname">decltype(auto) <a class="el" href="structkumi_1_1record.html">kumi::record</a>&lt; Ts &gt;::operator[] </td>
           <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
+          <td class="paramtype">Id const &amp;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> &amp;</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel consteval">consteval</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Helper to retrive the index of a type in a product type by it s identifier. </p>
-<dl class="section note"><dt>Note</dt><dd>This function does not participate in overload resolution if the product type has several instances of the same identifier or has no identifier at all.</dd></dl>
-<dl class="section return"><dt>Returns</dt><dd>the index of the element whose identifier matches Id in the product type if it exist </dd></dl>
-
+<p>Extracts the element whose identifier matches Id from a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>. </p>
+<dl class="section note"><dt>Note</dt><dd>Does not participate in overload resolution if there are no field which identifier matches Id in the record. </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Id</td><td>Identifier of the element to access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the selected element of current record.</dd></dl>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md346"></a>
+Example:</h2>
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> r = { <span class="stringliteral">&quot;x&quot;</span>_id = 1, <span class="stringliteral">&quot;y&quot;</span>_id = 2.3, <span class="stringliteral">&quot;z&quot;</span>_id = 4.5f, <span class="stringliteral">&quot;t&quot;</span>_id = <span class="charliteral">&#39;@&#39;</span> };</div>
+<div class="line">  std::cout &lt;&lt; r &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; r[<span class="stringliteral">&quot;x&quot;</span>_id] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; r[<span class="stringliteral">&quot;y&quot;</span>_id] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; r[<span class="stringliteral">&quot;z&quot;</span>_id] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  r[<span class="stringliteral">&quot;t&quot;</span>_id]++;</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; r[<span class="stringliteral">&quot;t&quot;</span>_id] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
+</div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->
@@ -190,7 +219,7 @@ requires (concepts::named_get_compliant&lt;Id, T&gt;)</div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="namespacekumi.html">kumi</a></li>
+    <li class="navelem"><a href="namespacekumi.html">kumi</a></li><li class="navelem"><a href="structkumi_1_1record.html">record</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

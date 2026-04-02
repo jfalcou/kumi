@@ -1,8 +1,8 @@
 var searchData=
 [
-  ['features_0',['Features',['../changelog.html#autotoc_md407',1,'New Features'],['../changelog.html#autotoc_md412',1,'New Features'],['../changelog.html#autotoc_md418',1,'New Features'],['../changelog.html#autotoc_md423',1,'New Features']]],
+  ['features_0',['Features',['../changelog.html#autotoc_md412',1,'New Features'],['../changelog.html#autotoc_md417',1,'New Features'],['../changelog.html#autotoc_md423',1,'New Features'],['../changelog.html#autotoc_md428',1,'New Features']]],
   ['fetchcontent_1',['CMake FetchContent',['../setup.html#setup-fetchcontent',1,'']]],
-  ['field_2',['Field',['../nomenclature.html#autotoc_md443',1,'']]],
+  ['field_2',['Field',['../nomenclature.html#autotoc_md448',1,'']]],
   ['field_3',['field',['../structkumi_1_1field.html',1,'kumi::field&lt; Id, T &gt;'],['../conceptkumi_1_1concepts_1_1field.html',1,'kumi::concepts']]],
   ['field_3c_20id_2c_20t_20_3e_4',['field&lt; Id, T &gt;',['../structkumi_1_1field_3_01Id_00_01T_01_4.html',1,'kumi']]],
   ['field_5fcast_5',['field_cast',['../group__utility_ga59477c1d8542af2601f493e3320434ee.html#ga59477c1d8542af2601f493e3320434ee',1,'kumi::field&lt; Id, T &gt;::field_cast()'],['../group__utility_ga59477c1d8542af2601f493e3320434ee.html#ga59477c1d8542af2601f493e3320434ee',1,'kumi::field::field_cast()'],['../group__utility_ga59477c1d8542af2601f493e3320434ee.html#ga59477c1d8542af2601f493e3320434ee',1,'kumi::field_cast(T &amp;&amp;t) noexcept']]],
@@ -10,8 +10,8 @@ var searchData=
   ['fill_7',['fill',['../group__generators_gac1f2b67c16429675ca7b9106793f9001.html#gac1f2b67c16429675ca7b9106793f9001',1,'kumi']]],
   ['filter_8',['filter',['../group__generators_gaafed5030f3115f8fda5f1966a9fdfd38.html#gaafed5030f3115f8fda5f1966a9fdfd38',1,'kumi']]],
   ['filter_5fnot_9',['filter_not',['../group__generators_ga4252a5ff33d90265f42d4b6c70e48bed.html#ga4252a5ff33d90265f42d4b6c70e48bed',1,'kumi']]],
-  ['first_20autonomous_20public_20release_10',['First autonomous public release.',['../changelog.html#autotoc_md425',1,'']]],
-  ['fixes_11',['Fixes',['../changelog.html#autotoc_md408',1,'Bug Fixes'],['../changelog.html#autotoc_md413',1,'Bug Fixes'],['../changelog.html#autotoc_md417',1,'Bug Fixes'],['../changelog.html#autotoc_md422',1,'Bug Fixes']]],
+  ['first_20autonomous_20public_20release_10',['First autonomous public release.',['../changelog.html#autotoc_md430',1,'']]],
+  ['fixes_11',['Fixes',['../changelog.html#autotoc_md413',1,'Bug Fixes'],['../changelog.html#autotoc_md418',1,'Bug Fixes'],['../changelog.html#autotoc_md422',1,'Bug Fixes'],['../changelog.html#autotoc_md427',1,'Bug Fixes']]],
   ['flatten_12',['flatten',['../group__generators_ga6a021e42590689a905a2d8268c860838.html#ga6a021e42590689a905a2d8268c860838',1,'kumi']]],
   ['flatten_5fall_13',['flatten_all',['../group__generators_ga7416f4db26c4e41360e71dd449de20a6.html#ga7416f4db26c4e41360e71dd449de20a6',1,'kumi::flatten_all(T &amp;&amp;t, Func f)'],['../namespacekumi.html#a7fcee37f7e0ccc2adad9f91fa48fd34b',1,'kumi::flatten_all(T &amp;&amp;t)']]],
   ['fold_5fleft_14',['fold_left',['../group__reductions_ga0f786372596b4dd7b924bf944871d7ad.html#ga0f786372596b4dd7b924bf944871d7ad',1,'kumi::fold_left(Function f, T &amp;&amp;t, Value init)'],['../group__reductions_ga74e253f7967cc7f188a979551cf687ef.html#ga74e253f7967cc7f188a979551cf687ef',1,'kumi::fold_left(Function f, T &amp;&amp;t)']]],
@@ -28,7 +28,8 @@ var searchData=
   ['from_5frecord_25',['from_record',['../group__record__related_ga7c267951118dab695ae5bd0f4d64895e.html#ga7c267951118dab695ae5bd0f4d64895e',1,'kumi']]],
   ['from_5ftuple_26',['from_tuple',['../group__tuple__related_gaf717514dbb49e0bf526bf5c9e2c693c5.html#gaf717514dbb49e0bf526bf5c9e2c693c5',1,'kumi']]],
   ['front_27',['front',['../group__generators_ga04a99a08fa0578c39242f348dc19c8c7.html#ga04a99a08fa0578c39242f348dc19c8c7',1,'kumi']]],
-  ['function_28',['Helper Types and function',['../group__functional.html',1,'']]],
-  ['functions_29',['Functions',['../group__details.html',1,'Helper Types and Functions'],['../group__utility.html',1,'Helper Types and Functions'],['../group__tuple__related.html',1,'Product Types and associated Functions'],['../group__record__related.html',1,'Record Types and associated Functions']]],
-  ['fundamentals_30',['Fundamentals',['../introduction.html#fundamentals',1,'']]]
+  ['fully_5fnamed_28',['fully_named',['../conceptkumi_1_1concepts_1_1fully__named.html',1,'kumi::concepts']]],
+  ['function_29',['Helper Types and function',['../group__functional.html',1,'']]],
+  ['functions_30',['Functions',['../group__details.html',1,'Helper Types and Functions'],['../group__utility.html',1,'Helper Types and Functions'],['../group__tuple__related.html',1,'Product Types and associated Functions'],['../group__record__related.html',1,'Record Types and associated Functions']]],
+  ['fundamentals_31',['Fundamentals',['../introduction.html#fundamentals',1,'']]]
 ];

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>KUMI: kumi::raw_member&lt; I, T &gt; Struct Template Reference</title>
+<title>KUMI: kumi::get_index_of_field</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -125,7 +125,7 @@ $(function() { codefold.init(); });
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('structkumi_1_1raw__member.html','','structkumi_1_1raw__member-members'); });
+$(function(){initNavTree('group__utility_ga94e4514564c16fc5bcea453ef162c29a.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -150,42 +150,47 @@ $(function(){initNavTree('structkumi_1_1raw__member.html','','structkumi_1_1raw_
 </div>
 </div>
 
-<div class="header">
-  <div class="summary">
-<a href="structkumi_1_1raw__member-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">kumi::raw_member&lt; I, T &gt; Struct Template Reference<div class="ingroups"><a class="el" href="group__traits.html">Product Type Related Traits</a></div></div></div>
-</div><!--header-->
 <div class="contents">
+<a id="ga94e4514564c16fc5bcea453ef162c29a" name="ga94e4514564c16fc5bcea453ef162c29a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga94e4514564c16fc5bcea453ef162c29a">&#9670;&#160;</a></span>get_index_of_field()</h2>
 
-<p>Computes the return type of a call to <a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137" title="Extracts the Ith field from a kumi::record.">kumi::get</a> on a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> and unwrap the field returned by <a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137" title="Extracts the Ith field from a kumi::record.">kumi::get</a> on a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>.  
- <a href="#details">More...</a></p>
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;concepts::identifier Id, concepts::product_type T&gt; <br />
+requires (concepts::queryable_by_identifier&lt;Id, T&gt;)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto kumi::get_index_of_field </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel consteval">consteval</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
-<p><code>#include &lt;kumi/utils/traits.hpp&gt;</code></p>
-<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;std::size_t I, typename T&gt;<br />
-struct kumi::raw_member&lt; I, T &gt;</div><p>Computes the return type of a call to <a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137" title="Extracts the Ith field from a kumi::record.">kumi::get</a> on a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> and unwrap the field returned by <a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137" title="Extracts the Ith field from a kumi::record.">kumi::get</a> on a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">I</td><td>Index of the type to retrieve </td></tr>
-    <tr><td class="paramname">T</td><td>kumi::product_type to access</td></tr>
-  </table>
-  </dd>
-</dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md398"></a>
-Helper type</h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I, <span class="keyword">typename</span> T&gt; <span class="keyword">using </span>raw_member_t = <span class="keyword">typename</span> raw_member&lt;I,T&gt;::type;</div>
-<div class="line">}</div>
-<div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
-</div><!-- fragment --> </div></div><!-- contents -->
+<p>Helper to retrive the index of a type in a product type by it s identifier. </p>
+<dl class="section note"><dt>Note</dt><dd>This function does not participate in overload resolution if the product type has several instances of the same identifier or has no identifier at all.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>the index of the element whose identifier matches Id in the product type if it exist </dd></dl>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- HTML footer for doxygen 1.8.20-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="namespacekumi.html">kumi</a></li><li class="navelem"><a href="structkumi_1_1raw__member.html">raw_member</a></li>
+    <li class="navelem"><a href="namespacekumi.html">kumi</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

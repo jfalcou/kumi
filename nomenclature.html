@@ -157,13 +157,13 @@ $(function(){initNavTree('nomenclature.html','',''); });
 <div class="textblock"><p>This document establishes the formal vocabulary used throughout the KUMI library to ensure consistency across API documentation, error messages, and internal implementation details.</p>
 <p>In the context of <b>KUMI</b>, a distinction is made between types as stored, types as accessed, and the metadata used to describe them.</p>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md440"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md445"></a>
 Element</h2>
 <p>An <b>element</b> is the fundamental constituent type of a heterogenous container. In literature, this corresponds to the <em>Value Type</em> ( \( T \)) stored within a node.</p><ul>
 <li><b>Definition:</b> The raw, decayed type provided during template instantiation.</li>
 <li><b>Example:</b> In <span class="tt"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>&lt;int, double&gt;</span>, the elements are <span class="tt">int</span> and <span class="tt">double</span>.</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md441"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md446"></a>
 Member</h2>
 <p>A <b>member</b> is the functional result of a sub-object access operation, the result of a projection.</p>
 <p>Formally, a member is an <b>Element</b> qualified by the value category of the container and the cv-qualifiers of the access path.</p>
@@ -171,21 +171,21 @@ Member</h2>
 <li><b>Definition:</b> The result of <span class="tt">get&lt;I&gt;(container)</span>.</li>
 <li><b>Example:</b> Given <span class="tt"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>&lt;int&gt; t</span>, <span class="tt">get&lt;0&gt;(t)</span> yields the member <span class="tt">int&amp;</span>, while <span class="tt">get&lt;0&gt;(std::move(t))</span> yields <span class="tt">int&amp;&amp;</span>.</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md442"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md447"></a>
 Identifier</h2>
 <p>An <b>identifier</b> is a compile-time constant or type used as a key to resolve a specific sub-object within a structure.</p>
 <ul>
 <li><b>Definition:</b> A unique tag, integral constant, or symbolic name used for dispatching and name-binding.</li>
 <li><b>Role:</b> It decouples the logical "address" of a value from its physical offset in memory.</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md443"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md448"></a>
 Field</h2>
 <p>A <b>field</b> is the combination of an <b>Identifier</b> and its associated <b>Element</b>.</p>
 <ul>
 <li><b>Formal Logic:</b> Let \( I \) be an Identifier and \( E \) be an Element. Then \( Field = \{I, E\} \).</li>
 <li><b>Role:</b> Fields are used to define the schema of a tuple-like structure.</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md444"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md449"></a>
 Label</h2>
 <p>A <b>label</b> is the external, human-readable representation (string-equivalent) associated with an Identifier or Field.</p>
 <ul>
@@ -193,7 +193,7 @@ Label</h2>
 <li><b>Note:</b> While an <b>Identifier</b> is a programmatic entity (like a type or index), a <b>Label</b> is a literal value (typically a <span class="tt">const char*</span> or <span class="tt">string_view</span>), in kumi, there is a special type used to describe these : <a class="el" href="structkumi_1_1str.html" title="Static string used to create named fields.">kumi::str</a>.</li>
 </ul>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md446"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md451"></a>
 Summary Table</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">
