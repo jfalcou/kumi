@@ -1,0 +1,46 @@
+##======================================================================================================================
+##  KUMI - Compact C++20 Tuple Toolbox
+##  Copyright : KUMI Project Contributors
+##  SPDX-License-Identifier: BSL-1.0
+##======================================================================================================================
+name: KUMI CI
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  ##======================================================================================================================
+  ## Preserve pre-commit checks
+  ##======================================================================================================================
+  precommit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4.1.1
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.x'
+      - name: Install pre-commit
+        run: pip install pre-commit
+      - name: Run pre-commit checks
+        run: pre-commit run --all-files --show-diff-on-failure --color=always
+
+  ##======================================================================================================================
+  ## Build and run unit tests
+  ##======================================================================================================================
+  linux-unit-tests:
+    name: Linux Unit Tests
+    needs: precommit
+    uses: ./.github/workflows/unit-linux.yml
+
+  windows-unit-tests:
+    name: Windows Unit Tests
+    needs: precommit
+    uses: ./.github/workflows/unit-windows.yml
+
+  macos-unit-tests:
+    name: MacOS Unit Tests
+    needs: precommit
+    uses: ./.github/workflows/unit-macos.yml

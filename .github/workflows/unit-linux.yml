@@ -1,0 +1,71 @@
+##==================================================================================================
+##  KUMI - Compact C++20 Tuple Toolbox
+##  Copyright : KUMI Project Contributors
+##  SPDX-License-Identifier: BSL-1.0
+##==================================================================================================
+name: KUMI Linux Tests
+on:
+  workflow_call:
+
+jobs:
+  linux:
+    name: ${{ matrix.compiler.name }} (${{ matrix.options }})
+    runs-on: ubuntu-latest
+    container:
+      image: ${{ matrix.compiler.image }}
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler:
+          - &gcc {
+              name: "g++-14",
+              bin: "g++-14",
+              image: "ghcr.io/jfalcou/compilers:v10"
+            }
+          - &clang {
+              name: "clang++",
+              bin: "clang++",
+              image: "ghcr.io/jfalcou/compilers:v10"
+            }
+          - &icpx {
+              name: "icpx",
+              bin: "icpx",
+              image: "ghcr.io/jfalcou/compilers:sycl-v1",
+              setup: "source /opt/intel/oneapi/setvars.sh"
+            }
+          - &wasm {
+              name: "wasm",
+              bin: "em++",
+              image: "ghcr.io/jfalcou/compilers:v9",
+              wrapper: "emcmake",
+              cross_compile: "-DCMAKE_CROSSCOMPILING_CMD=$GITHUB_WORKSPACE/cmake/run_wasm.sh"
+            }
+        options: ["-O0", "-O3 -flto -DNDEBUG"]
+
+        # Special cases
+        include:
+          - compiler: *clang
+            options: "-O0 -stdlib=libc++"
+            extra_flags: "-DCMAKE_EXE_LINKER_FLAGS='-stdlib=libc++'"
+
+          - compiler: *clang
+            options: "-O3 -flto -DNDEBUG -stdlib=libc++"
+            extra_flags: "-DCMAKE_EXE_LINKER_FLAGS='-stdlib=libc++'"
+
+    steps:
+      - name:  Fetch current branch
+        uses: actions/checkout@v4.1.1
+
+      - name: Configure CMake
+        run: |
+          ${{ matrix.compiler.setup }}
+          ${{matrix.compiler.wrapper}} cmake -S . -B build -G Ninja \
+          -DCMAKE_CXX_COMPILER=${{ matrix.compiler.bin }}           \
+          -DCMAKE_CXX_FLAGS="${{ matrix.options }}"                 \
+          ${{ matrix.extra_flags}} ${{ matrix.compiler.cross_compile}}
+
+      - name: Compile Unit Tests
+        run: cd build && ninja kumi-test -j 2
+
+      - name: Run Tests
+        run: cd build && ctest --output-on-failure -j 2
