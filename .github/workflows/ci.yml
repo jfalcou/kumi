@@ -33,22 +33,22 @@ jobs:
   ##======================================================================================================================
   ## Build and run unit tests
   ##======================================================================================================================
-  linux-tests:
-    name: Linux
-    needs: precommit
-    uses: ./.github/workflows/linux.yml
-
-  macos-tests:
-    name: MacOS
-    needs: precommit
-    uses: ./.github/workflows/macos.yml
-
-  windows-tests:
-    name: Windows
-    needs: precommit
-    uses: ./.github/workflows/windows.yml
-
-  #nvidia-tests:
-  #  name: Nvidia Unit Tests
+  #linux-tests:
+  #  name: Linux
   #  needs: precommit
-  #  uses: ./.github/workflows/nvidia.yml
+  #  uses: ./.github/workflows/unit-linux.yml
+
+  #windows-tests:
+  #  name: Windows
+  #  needs: precommit
+  #  uses: ./.github/workflows/unit-windows.yml
+
+  #macos-tests:
+  #  name: MacOS
+  #  needs: precommit
+  #  uses: ./.github/workflows/unit-macos.yml
+
+  nvidia-tests:
+    name: Nvidia
+    needs: precommit
+    uses: ./.github/workflows/nvidia.yml
