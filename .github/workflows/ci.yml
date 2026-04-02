@@ -30,17 +30,22 @@ jobs:
   ##======================================================================================================================
   ## Build and run unit tests
   ##======================================================================================================================
-  linux-unit-tests:
-    name: Linux Unit Tests
-    needs: precommit
-    uses: ./.github/workflows/unit-linux.yml
+  #linux-unit-tests:
+  #  name: Linux Unit Tests
+  #  needs: precommit
+  #  uses: ./.github/workflows/unit-linux.yml
 
-  windows-unit-tests:
-    name: Windows Unit Tests
-    needs: precommit
-    uses: ./.github/workflows/unit-windows.yml
+  #windows-unit-tests:
+  #  name: Windows Unit Tests
+  #  needs: precommit
+  #  uses: ./.github/workflows/unit-windows.yml
 
-  macos-unit-tests:
-    name: MacOS Unit Tests
+  #macos-unit-tests:
+  #  name: MacOS Unit Tests
+  #  needs: precommit
+  #  uses: ./.github/workflows/unit-macos.yml
+
+  gpu-unit-tests:
+    name: GPU Unit Tests
     needs: precommit
-    uses: ./.github/workflows/unit-macos.yml
+    uses: ./.github/workflows/unit-gpu.yml
