@@ -16,25 +16,25 @@ namespace kumi
     //==================================================================================================================
     template<typename F, typename T>
     concept supports_apply = []<std::size_t... N>(std::index_sequence<N...>) {
-      return std::invocable<F, raw_member_t<N, T>...>;
+      return std::invocable<F, stored_member_t<N, T>...>;
     }(std::make_index_sequence<size_v<T>>{});
 
     template<typename F, typename T>
     concept supports_nothrow_apply = []<std::size_t... N>(std::index_sequence<N...>) {
-      return std::is_nothrow_invocable_v<F, raw_member_t<N, T>...>;
+      return std::is_nothrow_invocable_v<F, stored_member_t<N, T>...>;
     }(std::make_index_sequence<size_v<T>>{});
 
     template<typename F, typename... Ts>
     concept supports_call = []<std::size_t... I>(std::index_sequence<I...>) {
       return ([]<std::size_t J>(std::integral_constant<std::size_t, J>) {
-        return std::invocable<F, raw_member_t<J, Ts>...>;
+        return std::invocable<F, stored_member_t<J, Ts>...>;
       }(std::integral_constant<std::size_t, I>{}) &&
               ...);
     }(std::make_index_sequence<(size_v<Ts>, ...)>{});
 
     template<typename T>
     concept supports_transpose = (size_v<T> <= 1) || ([]<std::size_t... N>(std::index_sequence<N...>) {
-                                   return ((size_v<raw_member_t<0, T>> == size_v<raw_member_t<N + 1, T>>) && ...);
+                                   return ((size_v<stored_member_t<0, T>> == size_v<stored_member_t<N + 1, T>>) && ...);
                                  }(std::make_index_sequence<size_v<T> - 1>{}));
 
     template<typename Ints, typename... Ts> struct matches;
@@ -195,6 +195,34 @@ namespace kumi
     //==================================================================================================================
     /**
       @ingroup concepts
+      @brief Concept specifying if a type can be used as sequence of projections in algorithms
+
+      A type `T` models `kumi::projection_map` if it contains constant evaluable members which are themselves either
+      integral types, identifiers or others `projection_map`.
+
+      ## Example types :
+      + std::index_sequence<...>;
+      + kumi::projection_map<...>;
+    **/
+    //==================================================================================================================
+    template<typename T>
+    concept projection_map = is_projection_map_v<std::remove_cvref_t<T>>;
+
+    //==================================================================================================================
+    /**
+      @ingroup concepts
+      @brief Concept specifying if a type is suitable to be used as a projection
+
+      A type `T` models `kumi::projection` if it models `kumi::projection_map` or `kumi::index`
+      or `kumi::identifier`
+    **/
+    //==================================================================================================================
+    template<typename T>
+    concept projection = projection_map<T> || identifier<T> || index<T>;
+
+    //==================================================================================================================
+    /**
+      @ingroup concepts
       @brief Concept specifying a type follows the Product Type semantic and has a known size
 
       A type `T` models `kumi::concepts::sized_product_type<N>` if it models `kumi::concepts::product_type` and has
@@ -243,30 +271,6 @@ namespace kumi
     //==================================================================================================================
     /**
       @ingroup concepts
-      @brief Concept specifying if a type can be used as sequence of projections in algorithms
-
-      A type `T` models `kumi::projection_map` if it contains constant evaluable members which are themselves either
-      integral types, identifiers or others `projection_map`
-    **/
-    //==================================================================================================================
-    template<typename T>
-    concept projection_map = is_projection_map_v<std::remove_cvref_t<T>>;
-
-    //==================================================================================================================
-    /**
-      @ingroup concepts
-      @brief Concept specifying if a type is suitable to be used as a projection
-
-      A type `T` models `kumi::projection` if it models `kumi::projection_map` or `kumi::index`
-      or `kumi::identifier`
-    **/
-    //==================================================================================================================
-    template<typename T>
-    concept projection = projection_map<T> || identifier<T> || index<T>;
-
-    //==================================================================================================================
-    /**
-      @ingroup concepts
       @brief Concept specifying is Product Type which types are all the same
 
       A type `T` models `kumi::cocnepts::homogenous_product_type` if it models `kumi::concepts::product_type` and
@@ -284,18 +288,6 @@ namespace kumi
     //==================================================================================================================
     /**
       @ingroup concepts
-      @brief Concept specifying if a type is comparable for each of its components
-
-      A type `T` models `kumi::concepts::equality_comparable<T,U>`if it's a kumi::concepts::product_type where each
-      of its elements satisfies kumi::concepts::equality_comparable for all their respective elements.
-    **/
-    //==================================================================================================================
-    template<typename T, typename U>
-    concept equality_comparable = (size_v<T> == size_v<U>) && _::piecewise_comparable<T, U>;
-
-    //==================================================================================================================
-    /**
-      @ingroup concepts
       @brief Concept specifying if parameter pack contains a kumi::concepts::field.
     **/
     //==================================================================================================================
@@ -309,7 +301,7 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename... Ts>
-    concept is_fully_named = (... && field<Ts>);
+    concept fully_named = (... && field<Ts>);
 
     //==================================================================================================================
     /**
@@ -318,7 +310,8 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename... Ts>
-    concept uniquely_typed = (!has_named_fields<Ts...>) && all_uniques_v<std::remove_cvref_t<Ts>...>;
+    concept uniquely_typed =
+      (sizeof...(Ts) == 0) || (!has_named_fields<Ts...> && all_uniques_v<std::remove_cvref_t<Ts>...>);
 
     //==================================================================================================================
     /**
@@ -327,7 +320,8 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename... Ts>
-    concept uniquely_named = (has_named_fields<Ts...>) && all_unique_names_v<std::remove_cvref_t<Ts>...>;
+    concept uniquely_named =
+      (sizeof...(Ts) == 0) || (has_named_fields<Ts...> && all_unique_names_v<std::remove_cvref_t<Ts>...>);
 
     //==================================================================================================================
     /**
@@ -337,20 +331,8 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename... Ts>
-    concept unique_label =
-      (sizeof...(Ts) == 0) || (is_fully_named<Ts...> && (all_uniques_v<_::value<std::remove_cvref_t<Ts>::label()>...>));
-
-    //==================================================================================================================
-    /**
-      @ingroup concepts
-      @brief  Concept specifying if a parameter pack only holds kumi::concepts::field. Each of their names
-              beeing unique.
-
-      @note  If there are no element in the parameter pack the concept returns true
-    **/
-    //==================================================================================================================
-    template<typename... Ts>
-    concept entirely_uniquely_named = (sizeof...(Ts) == 0) || (is_fully_named<Ts...> && uniquely_named<Ts...>);
+    concept uniquely_labeled =
+      (sizeof...(Ts) == 0) || (fully_named<Ts...> && (all_uniques_v<_::value<std::remove_cvref_t<Ts>::label()>...>));
 
     //==================================================================================================================
     /**
@@ -370,7 +352,7 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename Name, typename... Ts>
-    concept contains_field = identifier<Name> && kumi::_::can_get_field_by_value<Name, Ts...>;
+    concept contains_identifier = identifier<Name> && kumi::_::can_get_field_by_value<Name, Ts...>;
 
     //==================================================================================================================
     /**
@@ -400,15 +382,16 @@ namespace kumi
     //==================================================================================================================
     /**
       @ingroup concepts
-      @brief Concept specifying if two product types are comparable by matching labels
+      @brief Concept specifying if a type is comparable for each of its components
 
-      A type `T` models kumi::concepts::named_equality_comparable<T,U> if it's a kumi::concepts::product_type that
-      satisfies kumi::concepts::equivalent<T,U> and if each of its fields satisfies
-      kumi::concepts::equality_comparable with the corresponding field in `U`
+      A type `T` models `kumi::concepts::equality_comparable<T,U>`if it's a kumi::concepts::product_type where each
+      of its elements satisfies kumi::concepts::equality_comparable for all their respective elements.
     **/
     //==================================================================================================================
     template<typename T, typename U>
-    concept named_equality_comparable = equivalent<T, U> && _::fieldwise_comparable<T, U>;
+    concept equality_comparable =
+      equivalent<T, U> && ((product_type<T> && product_type<U> && _::piecewise_comparable<T, U>) ||
+                           (record_type<T> && record_type<U> && _::fieldwise_comparable<T, U>));
 
     //==================================================================================================================
     /**
@@ -434,8 +417,7 @@ namespace kumi
     //==================================================================================================================
     template<typename T, typename... Us>
     concept compatible_product_types =
-      (follows_same_semantic<T, Us...> &&
-       ((!record_type<T>) || (equivalent<std::remove_cvref_t<T>, std::remove_cvref_t<Us>> && ...)));
+      (follows_same_semantic<T, Us...> && ((!record_type<T>) || (equivalent<T, Us> && ...)));
 
     //==================================================================================================================
     /**
@@ -465,13 +447,13 @@ namespace kumi
       @ingroup concepts
       @brief Concept specifying if a product type can be queried via a `get<type>`
 
-      A type `T` models `kumi::concepts::typed_get_compliant` if it's fields are uniquely typed.
+      A type `T` models `kumi::concepts::queryable_by_type` if it's fields are uniquely typed.
       For a `record_type` it inspects the underlying type of the fields.
     **/
     //==================================================================================================================
     template<typename Type, typename T>
-    concept typed_get_compliant = product_type<T> && []<std::size_t... I>(std::index_sequence<I...>) {
-      return _::can_get_field_by_type<Type, raw_element_t<I, T>...>;
+    concept queryable_by_type = product_type<T> && []<std::size_t... I>(std::index_sequence<I...>) {
+      return _::can_get_field_by_type<Type, stored_element_t<I, T>...>;
     }(std::make_index_sequence<size_v<T>>{});
 
     //==================================================================================================================
@@ -479,28 +461,29 @@ namespace kumi
       @ingroup concepts
       @brief Concept specifying if a product type can be queried via a `get<identifier>`
 
-      A type `T` models `named_get_compliant` if it's a kumi::concepts::product_type with it's element modeling
+      A type `T` models `queryable_by_identifier` if it's a kumi::concepts::product_type with it's element modeling
       kumi::concepts::uniquely_named and a field with the same identifier as the template parameter `Id` can be found
       inside.
     **/
     //==================================================================================================================
     template<typename Id, typename T>
-    concept named_get_compliant = identifier<Id> && product_type<T> && []<std::size_t... I>(std::index_sequence<I...>) {
-      return _::can_get_field_by_value<Id, element_t<I, T>...>;
-    }(std::make_index_sequence<size_v<T>>{});
+    concept queryable_by_identifier =
+      identifier<Id> && product_type<T> && []<std::size_t... I>(std::index_sequence<I...>) {
+        return _::can_get_field_by_value<Id, element_t<I, T>...>;
+      }(std::make_index_sequence<size_v<T>>{});
 
     //==================================================================================================================
     /**
       @ingroup concepts
       @brief Concept specifying if a product type can be queried via a `get<label>`
 
-      A type `T` models `labeled_get_compliant` if it's a kumi::concepts::product_type with it's element modeling
+      A type `T` models `queryable_by_label` if it's a kumi::concepts::product_type with it's element modeling
       kumi::concepts::uniquely_named and a field with the same label as the template parameter `L` can be found
       inside.
     **/
     //==================================================================================================================
     template<typename L, typename T>
-    concept labeled_get_compliant = _::label<L> && product_type<T> && []<std::size_t... I>(std::index_sequence<I...>) {
+    concept queryable_by_label = _::label<L> && product_type<T> && []<std::size_t... I>(std::index_sequence<I...>) {
       return _::can_get_field_by_label<L, element_t<I, T>...>;
     }(std::make_index_sequence<size_v<T>>{});
   }

@@ -87,7 +87,7 @@ namespace kumi
     else
     {
       constexpr auto proj = [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return function::uniquer(std::type_identity<raw_element_t<I, T>>{}...);
+        return function::uniquer(std::type_identity<stored_element_t<I, T>>{}...);
       }(std::make_index_sequence<size_v<T>>{});
 
       return [&]<std::size_t... I>(std::index_sequence<I...>) {

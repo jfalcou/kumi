@@ -94,7 +94,8 @@ namespace kumi
         that.t[0] = 0;
 
         [&]<std::size_t... I>(std::index_sequence<I...>) {
-          (((std::is_same_v<raw_element_t<I, T>, raw_element_t<I + 1, T>>) ? I : (that.t[that.count++] = I + 1)), ...);
+          (((std::is_same_v<stored_element_t<I, T>, stored_element_t<I + 1, T>>) ? I : (that.t[that.count++] = I + 1)),
+           ...);
         }(std::make_index_sequence<size_v<T> - 1>{});
 
         return that;

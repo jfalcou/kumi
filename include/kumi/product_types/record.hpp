@@ -200,7 +200,7 @@ namespace kumi
     //==================================================================================================================
     template<concepts::identifier Id>
     KUMI_ABI constexpr decltype(auto) operator[](Id const&) & noexcept
-    requires(concepts::contains_field<Id, Ts...>)
+    requires(concepts::contains_identifier<Id, Ts...>)
     {
       return impl(_::tag_of_t<Id>{});
     }
@@ -208,7 +208,7 @@ namespace kumi
     /// @overload
     template<concepts::identifier Id>
     KUMI_ABI constexpr decltype(auto) operator[](Id const&) && noexcept
-    requires(concepts::contains_field<Id, Ts...>)
+    requires(concepts::contains_identifier<Id, Ts...>)
     {
       return static_cast<decltype(impl)&&>(impl)(_::tag_of_t<Id>{});
     }
@@ -216,7 +216,7 @@ namespace kumi
     /// @overload
     template<concepts::identifier Id>
     KUMI_ABI constexpr decltype(auto) operator[](Id const&) const&& noexcept
-    requires(concepts::contains_field<Id, Ts...>)
+    requires(concepts::contains_identifier<Id, Ts...>)
     {
       return static_cast<decltype(impl) const&&>(impl)(_::tag_of_t<Id>{});
     }
@@ -224,7 +224,7 @@ namespace kumi
     /// @overload
     template<concepts::identifier Id>
     KUMI_ABI constexpr decltype(auto) operator[](Id const&) const& noexcept
-    requires(concepts::contains_field<Id, Ts...>)
+    requires(concepts::contains_identifier<Id, Ts...>)
     {
       return impl(_::tag_of_t<Id>{});
     }
@@ -256,7 +256,7 @@ namespace kumi
     [[nodiscard]] KUMI_ABI constexpr auto values() noexcept
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return tuple<raw_member_t<I, decltype(*this)>...>{field_value_of(get<I>(*this))...};
+        return tuple<stored_member_t<I, decltype(*this)>...>{field_value_of(get<I>(*this))...};
       }(std::make_index_sequence<sizeof...(Ts)>{});
     }
 
@@ -264,7 +264,7 @@ namespace kumi
     [[nodiscard]] KUMI_ABI constexpr auto values() const noexcept
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return tuple<raw_member_t<I, decltype(*this)>...>{field_value_of(get<I>(*this))...};
+        return tuple<stored_member_t<I, decltype(*this)>...>{field_value_of(get<I>(*this))...};
       }(std::make_index_sequence<sizeof...(Ts)>{});
     }
 
@@ -315,7 +315,7 @@ namespace kumi
     /// @brief Compares a record with an other for equality
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator==(record const& self, record<Us...> const& other) noexcept
-    requires(concepts::named_equality_comparable<record, record<Us...>>)
+    requires(concepts::equality_comparable<record, record<Us...>>)
     {
       return ((get<identifier_of<Ts>()>(self) == get<identifier_of<Ts>()>(other)) && ...);
     }
@@ -323,7 +323,7 @@ namespace kumi
     /// @brief Compares a record with an other for inequality
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator!=(record const& self, record<Us...> const& other) noexcept
-    requires(concepts::named_equality_comparable<record, record<Us...>>)
+    requires(concepts::equality_comparable<record, record<Us...>>)
     {
       return !(self == other);
     }
@@ -392,11 +392,12 @@ namespace kumi
   // Specialisation to clearly signal errors due to duplicate fields
   //====================================================================================================================
   template<typename... Ts>
-  requires(!concepts::entirely_uniquely_named<Ts...> || !concepts::unique_label<Ts...>)
+  requires(!concepts::uniquely_named<Ts...> || !concepts::fully_named<Ts...> || !concepts::uniquely_labeled<Ts...>)
   struct record<Ts...>
   {
-    static_assert(concepts::entirely_uniquely_named<Ts...>, "Duplicate fields in record definition");
-    static_assert(concepts::unique_label<Ts...>, "Duplicate identifier representation in record definition");
+    static_assert(concepts::uniquely_named<Ts...>, "Duplicate fields in record definition");
+    static_assert(concepts::uniquely_labeled<Ts...>, "Duplicate identifier representation in record definition");
+    static_assert(concepts::fully_named<Ts...>, "Anonymous field usage in record definition");
     record(Ts&&...) = delete;
   };
 
@@ -486,7 +487,7 @@ namespace kumi
   //====================================================================================================================
   template<typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto make_record(Ts&&... ts) -> record<std::unwrap_ref_decay_t<Ts>...>
-  requires(concepts::entirely_uniquely_named<Ts...>)
+  requires(concepts::uniquely_named<Ts...> && concepts::fully_named<Ts...>)
   {
     return {KUMI_FWD(ts)...};
   }
@@ -708,7 +709,7 @@ namespace kumi
   //====================================================================================================================
   template<concepts::identifier auto Id, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>& r) noexcept
-  requires(concepts::contains_field<decltype(Id), Ts...>)
+  requires(concepts::contains_identifier<decltype(Id), Ts...>)
   {
     return r[Id];
   }
@@ -717,7 +718,7 @@ namespace kumi
   /// @overload
   template<concepts::identifier auto Id, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>&& r) noexcept
-  requires(concepts::contains_field<decltype(Id), Ts...>)
+  requires(concepts::contains_identifier<decltype(Id), Ts...>)
   {
     return static_cast<record<Ts...>&&>(r)[Id];
   }
@@ -726,7 +727,7 @@ namespace kumi
   /// @overload
   template<concepts::identifier auto Id, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const& r) noexcept
-  requires(concepts::contains_field<decltype(Id), Ts...>)
+  requires(concepts::contains_identifier<decltype(Id), Ts...>)
   {
     return r[Id];
   }
@@ -735,7 +736,7 @@ namespace kumi
   /// @overload
   template<concepts::identifier auto Id, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const&& r) noexcept
-  requires(concepts::contains_field<decltype(Id), Ts...>)
+  requires(concepts::contains_identifier<decltype(Id), Ts...>)
   {
     return static_cast<record<Ts...> const&&>(r)[Id];
   }
@@ -804,12 +805,12 @@ namespace kumi
 
   /// Improves diagnostic for non present label
   template<str S, typename R>
-  requires(is_kumi_record_v<std::remove_cvref_t<R>> && !_::contains_field<S, R>())
+  requires(is_kumi_record_v<std::remove_cvref_t<R>> && !_::contains_identifier<S, R>())
   constexpr auto get(R&& r) = delete;
 
   /// Improves diagnostic for non present identifier
   template<concepts::identifier auto S, typename R>
-  requires(is_kumi_record_v<std::remove_cvref_t<R>> && !concepts::contains_field<decltype(S), R>)
+  requires(is_kumi_record_v<std::remove_cvref_t<R>> && !concepts::contains_identifier<decltype(S), R>)
   constexpr auto get(R&& r) = delete;
 
   /// Improves diagnostic for non present type

@@ -200,7 +200,7 @@ namespace kumi
   {
     // MSVC workaround for get<>
     // MSVC evaluates a requires clause before checking the type of an NTTP
-    template<auto N, typename... Ts> KUMI_ABI constexpr auto contains_field()
+    template<auto N, typename... Ts> KUMI_ABI constexpr auto contains_identifier()
     {
       if constexpr (std::integral<std::remove_cvref_t<decltype(N)>>) return false;
       else if constexpr (concepts::index<decltype(N)>) return false;

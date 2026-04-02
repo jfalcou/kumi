@@ -47,7 +47,7 @@ namespace kumi
     else
     {
       constexpr auto pos = []<std::size_t... I>(std::index_sequence<I...>) {
-        return function::selector(std::bool_constant<Pred<raw_element_t<I, T>>::value>{}...);
+        return function::selector(std::bool_constant<Pred<stored_element_t<I, T>>::value>{}...);
       }(std::make_index_sequence<size_v<T>>{});
 
       auto select = [&]<typename O, std::size_t... I>(O, std::index_sequence<I...>) {
@@ -97,7 +97,7 @@ namespace kumi
     else
     {
       constexpr auto pos = []<std::size_t... I>(std::index_sequence<I...>) {
-        return function::selector(std::bool_constant<Pred<raw_element_t<I, T>>::value>{}...);
+        return function::selector(std::bool_constant<Pred<stored_element_t<I, T>>::value>{}...);
       }(std::make_index_sequence<size_v<T>>{});
 
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
@@ -144,7 +144,7 @@ namespace kumi
     else
     {
       constexpr auto pos = []<std::size_t... I>(std::index_sequence<I...>) {
-        return function::selector(std::bool_constant<Pred<raw_element_t<I, T>>::value>{}...);
+        return function::selector(std::bool_constant<Pred<stored_element_t<I, T>>::value>{}...);
       }(std::make_index_sequence<size_v<T>>{});
 
       return [&]<std::size_t... I>(std::index_sequence<I...>) {

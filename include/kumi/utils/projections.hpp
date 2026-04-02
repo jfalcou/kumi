@@ -11,21 +11,21 @@ namespace kumi
 {
   namespace _
   {
-    template<std::size_t I, typename T> struct projection_at
+    template<std::size_t I, typename T> struct value_at
     {
     };
 
     template<std::size_t I, auto Head, auto... Tail>
-    struct projection_at<I, kumi::projection_map<Head, Tail...>> : projection_at<I - 1, kumi::projection_map<Tail...>>
+    struct value_at<I, kumi::projection_map<Head, Tail...>> : value_at<I - 1, kumi::projection_map<Tail...>>
     {
     };
 
-    template<std::size_t I, auto... Vs> struct projection_at<I, kumi::projection_map<Vs...> const>
+    template<std::size_t I, auto... Vs> struct value_at<I, kumi::projection_map<Vs...> const>
     {
-      static constexpr auto value = projection_at<I, kumi::projection_map<Vs...>>::value;
+      static constexpr auto value = value_at<I, kumi::projection_map<Vs...>>::value;
     };
 
-    template<auto Head, auto... Tail> struct projection_at<0, kumi::projection_map<Head, Tail...>>
+    template<auto Head, auto... Tail> struct value_at<0, kumi::projection_map<Head, Tail...>>
     {
       static constexpr auto value = Head;
     };
@@ -67,10 +67,10 @@ namespace kumi
     **/
     //==================================================================================================================
 
-    /// Returns the number of elements in a kumi::indexes_t
+    /// Returns the number of elements in a kumi::projection_map
     [[nodiscard]] KUMI_ABI static constexpr auto size() noexcept { return sizeof...(V); }
 
-    /// Returns `true` if a kumi::indexes_t contains 0 elements
+    /// Returns `true` if a kumi::projection_map contains 0 elements
     [[nodiscard]] KUMI_ABI static constexpr auto empty() noexcept { return sizeof...(V) == 0; }
 
     //==================================================================================================================
@@ -87,7 +87,7 @@ namespace kumi
     requires(I < sizeof...(V))
     KUMI_ABI constexpr decltype(auto) operator[]([[maybe_unused]] index_t<I> i) const noexcept
     {
-      return _::projection_at<I, projection_map>::value;
+      return _::value_at<I, projection_map>::value;
     }
 
     //==================================================================================================================
@@ -96,7 +96,7 @@ namespace kumi
 
       @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
       @tparam  I Compile-time index of the element to access
-      @return A copy of the value of the selected element of current indexes_t.
+      @return A copy of the value of the selected element of current projection_map.
     **/
     //==================================================================================================================
     template<std::size_t I>
@@ -124,8 +124,8 @@ namespace kumi
   //====================================================================================================================
   /**
     @ingroup utility
-    @brief kumi::indexes_t deduction guide
-    @tparam Ts  Type lists to build the indexes with.
+    @brief kumi::projection_map deduction guide
+    @tparam Ts  Type lists to build the projections with.
   **/
   //====================================================================================================================
   template<concepts::projection... Ts> KUMI_CUDA projection_map(Ts...) -> projection_map<Ts{}...>;
@@ -137,7 +137,7 @@ namespace kumi
 
     @note The arguments should model kumi::index
 
-    @tparam Ts	Zero or more indexes to construct the indexes from.
+    @tparam Ts	Zero or more indexes to construct the projection from.
     @return A kumi::projection_map constructed from the ts
 
     ## Examples:
@@ -156,7 +156,7 @@ namespace kumi
 
     @note The arguments should model kumi::index
 
-    @tparam vs	Zero or more values convertible to size_t to construct the indexes from.
+    @tparam vs	Zero or more values convertible to size_t to construct the projection from.
     @return A kumi::projection_map constructed from the vs
 
     ## Examples:
@@ -175,7 +175,7 @@ namespace kumi
 
     @note The arguments should model kumi::identifier
 
-    @tparam Ts	Zero or more indexes to construct the indexes from.
+    @tparam Ts	Zero or more indexes to construct the projection from.
     @return A kumi::projection_map constructed from the ts
 
     ## Examples:
