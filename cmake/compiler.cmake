@@ -12,11 +12,9 @@ add_library(kumi_opts INTERFACE)
 target_compile_features ( kumi_opts INTERFACE cxx_std_20 )
 
 if(CMAKE_CUDA_COMPILER_ID MATCHES "NVIDIA")
-    #target_compile_features( kumi_opts INTERFACE cuda_std_20) requires cmake 28
   target_compile_options( kumi_opts INTERFACE -std=c++20 -Werror all-warnings )
-endif()
-
-if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+  target_compile_options( kumi_opts INTERFACE -Xcompiler -Wshadow -Werror -Wall -Wextra -Wunused-variable -Wextra-semi )
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   if(CMAKE_CXX_COMPILER_FRONTEND_VARIANT STREQUAL "MSVC")
     target_compile_options( kumi_opts INTERFACE /W3 /WX /EHsc )
   else()

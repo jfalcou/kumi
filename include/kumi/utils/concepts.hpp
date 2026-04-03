@@ -14,28 +14,45 @@ namespace kumi
     //==================================================================================================================
     // Concept machinery to make our algorithms SFINAE friendly
     //==================================================================================================================
-    template<typename F, typename T>
-    concept supports_apply = []<std::size_t... N>(std::index_sequence<N...>) {
-      return std::invocable<F, stored_member_t<N, T>...>;
-    }(std::make_index_sequence<size_v<T>>{});
+    template<typename F, typename T, std::size_t... I> consteval bool __supports_apply(std::index_sequence<I...>)
+    {
+      return std::invocable<F, stored_member_t<I, T>...>;
+    }
+
+    template<typename F, typename T, std::size_t... I>
+    consteval bool __supports_nothrow_apply(std::index_sequence<I...>)
+    {
+      return std::is_nothrow_invocable_v<F, stored_member_t<I, T>...>;
+    }
+
+    template<typename F, typename... Ts> consteval bool __supports_call()
+    {
+      return []<std::size_t... I>(std::index_sequence<I...>) {
+        return ([]<std::size_t J>(std::integral_constant<std::size_t, J>) {
+          return std::invocable<F, stored_member_t<J, Ts>...>;
+        }(std::integral_constant<std::size_t, I>{}) &&
+                ...);
+      }(std::make_index_sequence<(size_v<Ts>, ...)>{});
+    }
+
+    template<typename T> consteval bool __supports_transpose()
+    {
+      return ([]<std::size_t... N>(std::index_sequence<N...>) {
+        return ((size_v<stored_member_t<0, T>> == size_v<stored_member_t<N + 1, T>>) && ...);
+      }(std::make_index_sequence<size_v<T> - 1>{}));
+    }
 
     template<typename F, typename T>
-    concept supports_nothrow_apply = []<std::size_t... N>(std::index_sequence<N...>) {
-      return std::is_nothrow_invocable_v<F, stored_member_t<N, T>...>;
-    }(std::make_index_sequence<size_v<T>>{});
+    concept supports_apply = __supports_apply<F, T>(std::make_index_sequence<size_v<T>>{});
+
+    template<typename F, typename T>
+    concept supports_nothrow_apply = __supports_nothrow_apply<F, T>(std::make_index_sequence<size_v<T>>{});
 
     template<typename F, typename... Ts>
-    concept supports_call = []<std::size_t... I>(std::index_sequence<I...>) {
-      return ([]<std::size_t J>(std::integral_constant<std::size_t, J>) {
-        return std::invocable<F, stored_member_t<J, Ts>...>;
-      }(std::integral_constant<std::size_t, I>{}) &&
-              ...);
-    }(std::make_index_sequence<(size_v<Ts>, ...)>{});
+    concept supports_call = __supports_call<F, Ts...>();
 
     template<typename T>
-    concept supports_transpose = (size_v<T> <= 1) || ([]<std::size_t... N>(std::index_sequence<N...>) {
-                                   return ((size_v<stored_member_t<0, T>> == size_v<stored_member_t<N + 1, T>>) && ...);
-                                 }(std::make_index_sequence<size_v<T> - 1>{}));
+    concept supports_transpose = (size_v<T> <= 1) || __supports_transpose<T>();
 
     template<typename Ints, typename... Ts> struct matches;
 
@@ -451,10 +468,13 @@ namespace kumi
       For a `record_type` it inspects the underlying type of the fields.
     **/
     //==================================================================================================================
+    template<typename T, typename U, std::size_t... I> consteval bool __fine_type(std::index_sequence<I...>)
+    {
+      return _::can_get_field_by_type<T, stored_element_t<I, U>...>;
+    }
+
     template<typename Type, typename T>
-    concept queryable_by_type = product_type<T> && []<std::size_t... I>(std::index_sequence<I...>) {
-      return _::can_get_field_by_type<Type, stored_element_t<I, T>...>;
-    }(std::make_index_sequence<size_v<T>>{});
+    concept queryable_by_type = product_type<T> && __fine_type<Type, T>(std::make_index_sequence<size_v<T>>{});
 
     //==================================================================================================================
     /**
@@ -466,11 +486,14 @@ namespace kumi
       inside.
     **/
     //==================================================================================================================
+    template<typename T, typename U, std::size_t... I> consteval bool __fine_value(std::index_sequence<I...>)
+    {
+      return _::can_get_field_by_value<T, element_t<I, U>...>;
+    }
+
     template<typename Id, typename T>
     concept queryable_by_identifier =
-      identifier<Id> && product_type<T> && []<std::size_t... I>(std::index_sequence<I...>) {
-        return _::can_get_field_by_value<Id, element_t<I, T>...>;
-      }(std::make_index_sequence<size_v<T>>{});
+      identifier<Id> && product_type<T> && __fine_value<Id, T>(std::make_index_sequence<size_v<T>>{});
 
     //==================================================================================================================
     /**
@@ -482,9 +505,13 @@ namespace kumi
       inside.
     **/
     //==================================================================================================================
+    template<typename T, typename U, std::size_t... I> consteval bool __fine_label(std::index_sequence<I...>)
+    {
+      return _::can_get_field_by_label<T, element_t<I, U>...>;
+    }
+
     template<typename L, typename T>
-    concept queryable_by_label = _::label<L> && product_type<T> && []<std::size_t... I>(std::index_sequence<I...>) {
-      return _::can_get_field_by_label<L, element_t<I, T>...>;
-    }(std::make_index_sequence<size_v<T>>{});
+    concept queryable_by_label =
+      _::label<L> && product_type<T> && __fine_label<L, T>(std::make_index_sequence<size_v<T>>{});
   }
 }

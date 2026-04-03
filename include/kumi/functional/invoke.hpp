@@ -16,43 +16,19 @@ namespace kumi
       !std::is_same_v<std::decay_t<typename std::unwrap_reference<T&&>::type>,
                       typename std::unwrap_ref_decay<T&&>::type>;
 
-    template<class C, class Pointed, class Object, class... Args>
-    constexpr decltype(auto) invoke_memptr(Pointed C::* member, Object&& object, Args&&... args)
+    template<typename C, typename P, typename O, typename... Ts>
+    KUMI_ABI constexpr decltype(auto) invoke_memptr(P C::* member, O&& o, Ts&&... ts)
     {
-      using object_t = std::remove_cvref_t<Object>;
-      constexpr bool is_member_function = std::is_function_v<Pointed>;
-      constexpr bool is_wrapped = is_reference_wrapper_v<object_t>;
-      constexpr bool is_derived_object = std::is_same_v<C, object_t> || std::is_base_of_v<C, object_t>;
+      using callable_t = P C::*;
+      auto&& ptr = []<typename T>(T&& obj) -> decltype(auto) {
+        if constexpr (_::is_reference_wrapper_v<T>) return obj.get();
+        else if constexpr (std::is_pointer_v<T>) return *KUMI_FWD(obj);
+        else return KUMI_FWD(obj);
+      }(KUMI_FWD(o));
 
-      if constexpr (is_member_function)
-      {
-        if constexpr (is_derived_object) return (std::forward<Object>(object).*member)(std::forward<Args>(args)...);
-        else if constexpr (is_wrapped) return (object.get().*member)(std::forward<Args>(args)...);
-        else return ((*std::forward<Object>(object)).*member)(std::forward<Args>(args)...);
-      }
-      else
-      {
-        static_assert(std::is_object_v<Pointed> && sizeof...(args) == 0);
-        if constexpr (is_derived_object) return std::forward<Object>(object).*member;
-        else if constexpr (is_wrapped) return object.get().*member;
-        else return (*std::forward<Object>(object)).*member;
-      }
+      if constexpr (std::is_member_object_pointer_v<callable_t>) return KUMI_FWD(ptr).*member;
+      else return (KUMI_FWD(ptr).*member)(KUMI_FWD(ts)...);
     }
-
-    // template<typename C, typename P, typename O, typename... Ts>
-    // KUMI_ABI constexpr decltype(auto) invoke_memptr(P C::* member, O&& o, Ts&&... ts)
-    //{
-    //   using callable_t = P C::*;
-    //   auto&& ptr = [](auto&& obj) -> decltype(auto) {
-    //     using T = std::remove_cvref_t<decltype(obj)>;
-    //     if constexpr (_::is_reference_wrapper_v<T>) return obj.get();
-    //     else if constexpr (std::is_pointer_v<T>) return *KUMI_FWD(obj);
-    //     else return KUMI_FWD(obj);
-    //   }(KUMI_FWD(o));
-
-    //  if constexpr (std::is_member_object_pointer_v<callable_t>) return KUMI_FWD(ptr).*member;
-    //  else return (KUMI_FWD(ptr).*member)(KUMI_FWD(ts)...);
-    //}
   }
 
   //====================================================================================================================
