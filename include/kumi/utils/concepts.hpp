@@ -27,12 +27,13 @@ namespace kumi
 
     template<typename F, typename... Ts> consteval bool __supports_call()
     {
+      constexpr auto sz = _::max(size_v<Ts>...);
       return []<std::size_t... I>(std::index_sequence<I...>) {
         return ([]<std::size_t J>(std::integral_constant<std::size_t, J>) {
           return std::invocable<F, stored_member_t<J, Ts>...>;
         }(std::integral_constant<std::size_t, I>{}) &&
                 ...);
-      }(std::make_index_sequence<(size_v<Ts>, ...)>{});
+      }(std::make_index_sequence<sz>{});
     }
 
     template<typename T> consteval bool __supports_transpose()
