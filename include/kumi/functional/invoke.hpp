@@ -21,8 +21,8 @@ namespace kumi
     {
       using callable_t = P C::*;
       auto&& ptr = []<typename T>(T&& obj) -> decltype(auto) {
-        if constexpr (_::is_reference_wrapper_v<T>) return obj.get();
-        else if constexpr (std::is_pointer_v<T>) return *KUMI_FWD(obj);
+        if constexpr (_::is_reference_wrapper_v<std::remove_cvref_t<T>>) return obj.get();
+        else if constexpr (std::is_pointer_v<std::remove_cvref_t<T>>) return *KUMI_FWD(obj);
         else return KUMI_FWD(obj);
       }(KUMI_FWD(o));
 
