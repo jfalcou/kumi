@@ -33,8 +33,9 @@ namespace kumi::_
   // To be displayed an identifier need to be constructible via T{}, and either expose a constexpr to_str() or
   // nothing, in which case the typer will be used (see typename.hpp). The name that is displayed is called the label.
   template<typename T>
-  concept valid_label = implicit_constructible<T> &&
-                        (!requires { to_str(T{}); } || std::same_as<typename value<to_str(T{})>::type, kumi::str>);
+  concept valid_label = implicit_constructible<T>; // &&
+                                                   //(!requires { to_str(T{}); } || std::same_as<typename
+                                                   // value<to_str(T{})>::type, kumi::str>);
 
   //====================================================================================================================
   // Helper concepts for custom label

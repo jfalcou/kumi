@@ -862,7 +862,7 @@ namespace kumi
   //====================================================================================================================
   template<str L, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>& t) noexcept
-  requires(concepts::uniquely_named<Ts...> && _::contains_label<L, Ts...>())
+  requires(concepts::uniquely_named<Ts...> && concepts::contains_label<std::integral_constant<kumi::str, L>, Ts...>)
   {
     return t[label<L>];
   }
@@ -871,7 +871,7 @@ namespace kumi
   /// @overload
   template<str L, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...>&& t) noexcept
-  requires(concepts::uniquely_named<Ts...> && _::contains_label<L, Ts...>())
+  requires(concepts::uniquely_named<Ts...> && concepts::contains_label<std::integral_constant<kumi::str, L>, Ts...>)
   {
     return static_cast<tuple<Ts...>&&>(t)[label<L>];
   }
@@ -880,7 +880,7 @@ namespace kumi
   /// @overload
   template<str L, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const& t) noexcept
-  requires(concepts::uniquely_named<Ts...> && _::contains_label<L, Ts...>())
+  requires(concepts::uniquely_named<Ts...> && concepts::contains_label<std::integral_constant<kumi::str, L>, Ts...>)
   {
     return t[label<L>];
   }
@@ -889,7 +889,7 @@ namespace kumi
   /// @overload
   template<str L, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(tuple<Ts...> const&& t) noexcept
-  requires(concepts::uniquely_named<Ts...> && _::contains_label<L, Ts...>())
+  requires(concepts::uniquely_named<Ts...> && concepts::contains_label<std::integral_constant<kumi::str, L>, Ts...>)
   {
     return static_cast<tuple<Ts...> const&&>(t)[label<L>];
   }
@@ -1009,7 +1009,8 @@ namespace kumi
 
   /// Improves diagnostic for non present label
   template<str S, typename T>
-  requires(is_kumi_tuple_v<std::remove_cvref_t<T>> && !_::contains_identifier<S, T>())
+  requires(is_kumi_tuple_v<std::remove_cvref_t<T>> &&
+           !concepts::contains_label<std::integral_constant<kumi::str, S>, T>)
   constexpr auto get(T&& t) = delete;
 
   /// Improves diagnostic for non present identifier
