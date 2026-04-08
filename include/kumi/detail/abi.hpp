@@ -19,8 +19,7 @@
 #endif
 #endif
 
-// Macro to replace std::forward. Better compile-time + less error-prone
-#if defined(__CUDACC__) || defined(__NVCC__)
+#if defined(__EDG__) || defined(__EDG_VERSION__) || defined(__CUDACC__) || defined(__NVCC__)
 #define KUMI_FWD(...) std::forward<decltype(__VA_ARGS__)>(__VA_ARGS__)
 #else
 #define KUMI_FWD(...) static_cast<decltype(__VA_ARGS__)&&>(__VA_ARGS__)
@@ -35,6 +34,8 @@
 // Clang-CL does not define __GNUC__ https://github.com/llvm/llvm-project/issues/53259
 #if defined(KUMI_DEBUG)
 #define KUMI_ABI
+#elif defined(__EDG__) || defined(__EDG_VERSION__) || defined(__CUDACC__) || defined(__NVCC__)
+#define KUMI_ABI KUMI_CUDA inline
 #elif defined(__GNUC__) || defined(__clang__)
 #define KUMI_ABI [[using gnu: always_inline, flatten, artificial]] KUMI_CUDA inline
 #elif defined(_MSC_VER)
