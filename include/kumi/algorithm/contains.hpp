@@ -91,11 +91,11 @@ namespace kumi
   **/
   //====================================================================================================================
   template<concepts::product_type T, concepts::identifier... Is>
-  KUMI_ABI constexpr auto contains_any(T&& t, Is const&... ids) noexcept
+  KUMI_ABI constexpr auto contains_any([[maybe_unused]] T&& t, Is const&... ids) noexcept
   {
     if constexpr (concepts::empty_product_type<T>) return std::false_type{};
     else if constexpr (sizeof...(Is) == 0) return std::false_type{};
-    else return std::bool_constant<(contains(KUMI_FWD(t), ids) || ...)>{};
+    else return std::bool_constant<(decltype(contains(std::declval<T>(), ids)){} || ...)>{};
   }
 
   //====================================================================================================================
@@ -169,9 +169,9 @@ namespace kumi
   **/
   //====================================================================================================================
   template<concepts::product_type T, concepts::identifier... Is>
-  KUMI_ABI constexpr auto contains_none(T&& t, Is const&... ids) noexcept
+  KUMI_ABI constexpr auto contains_none([[maybe_unused]] T&& t, Is const&... ids) noexcept
   {
-    return std::bool_constant<!contains_any(KUMI_FWD(t), ids...)>{};
+    return std::bool_constant<!decltype(contains_any(std::declval<T>(), ids...)){}>{};
   }
 
   namespace result
