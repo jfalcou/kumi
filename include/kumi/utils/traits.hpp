@@ -261,7 +261,7 @@ namespace kumi
   //====================================================================================================================
   template<typename T> struct container_type : is_container<std::remove_cvref_t<T>>
   {
-    using type = is_container<std::remove_cvref_t<T>>::value_type;
+    using type = typename is_container<std::remove_cvref_t<T>>::value_type;
   };
 
   template<typename T> using container_type_t = typename container_type<T>::type;
