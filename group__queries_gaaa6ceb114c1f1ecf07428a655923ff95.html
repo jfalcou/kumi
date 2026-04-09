@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<title>KUMI: kumi::contains_none</title>
+<title>KUMI: kumi::contains_only</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -125,7 +125,7 @@ $(function() { codefold.init(); });
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('group__queries_gaaa03ad56a0a8a76d8a6e88557cab92a1.html','',''); });
+$(function(){initNavTree('group__queries_gaaa6ceb114c1f1ecf07428a655923ff95.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -151,8 +151,8 @@ $(function(){initNavTree('group__queries_gaaa03ad56a0a8a76d8a6e88557cab92a1.html
 </div>
 
 <div class="contents">
-<a id="gaaa03ad56a0a8a76d8a6e88557cab92a1" name="gaaa03ad56a0a8a76d8a6e88557cab92a1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaaa03ad56a0a8a76d8a6e88557cab92a1">&#9670;&#160;</a></span>contains_none()</h2>
+<a id="gaaa6ceb114c1f1ecf07428a655923ff95" name="gaaa6ceb114c1f1ecf07428a655923ff95"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaaa6ceb114c1f1ecf07428a655923ff95">&#9670;&#160;</a></span>contains_only()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -163,7 +163,7 @@ template&lt;concepts::product_type T, concepts::identifier... Is&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">bool kumi::contains_none </td>
+          <td class="memname">auto kumi::contains_only </td>
           <td>(</td>
           <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span>, </td>
         </tr>
@@ -180,7 +180,7 @@ template&lt;concepts::product_type T, concepts::identifier... Is&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Checks if a product type contains no fields based on any of the selected identifiers. </p>
+<p>Checks if a product type contains fields based only on selected identifiers. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">t</td><td>the product type to inspect. </td></tr>
@@ -188,7 +188,19 @@ template&lt;concepts::product_type T, concepts::identifier... Is&gt; </div>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd><span class="tt">true</span> if <span class="tt">t</span> contains no field labeled by any of the <span class="tt">ids</span>, and <span class="tt">false</span> otherwise.</dd></dl>
+<dl class="section return"><dt>Returns</dt><dd><span class="tt">std::true_type</span> if <span class="tt">t</span> contains a field labeled by any of the <span class="tt">ids</span>, and <span class="tt">std::false_type</span> otherwise.</dd></dl>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md32"></a>
+Helper type</h2>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;product_type T, <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1identifier.html">concepts::identifier</a>... ID&gt; <span class="keyword">struct </span><a class="code hl_function" href="#gaaa6ceb114c1f1ecf07428a655923ff95">contains_only</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">template</span>&lt;product_type T, <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1identifier.html">concepts::identifier</a>... ID&gt;</div>
+<div class="line">  <span class="keyword">using </span>contains_only_t = <span class="keyword">typename</span> <a class="code hl_function" href="#gaaa6ceb114c1f1ecf07428a655923ff95">contains_only</a>&lt;T,ID...&gt;::type;</div>
+<div class="line">}</div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1identifier_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier</a></div><div class="ttdoc">Concept specifying a type represent an identifier.</div><div class="ttdef"><b>Definition</b> concepts.hpp:193</div></div>
+<div class="ttc" id="agroup__queries_gaaa6ceb114c1f1ecf07428a655923ff95_html_gaaa6ceb114c1f1ecf07428a655923ff95"><div class="ttname"><a href="#gaaa6ceb114c1f1ecf07428a655923ff95">kumi::contains_only</a></div><div class="ttdeci">constexpr auto contains_only(T &amp;&amp;t, Is const &amp;... ids) noexcept</div><div class="ttdoc">Checks if a product type contains fields based only on selected identifiers.</div><div class="ttdef"><b>Definition</b> contains.hpp:131</div></div>
+</div><!-- fragment --><p>Computes the type returned by a call to contains_only.</p>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md33"></a>
 Examples:</h2>
 <h3 class="doxsection"><a class="anchor" id="autotoc_md34"></a>
@@ -200,9 +212,9 @@ Tuple:</h3>
 <div class="line"><span class="keyword">using namespace </span>kumi::literals;</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt;</div>
-<div class="line"><span class="keywordtype">void</span> check_contains(T <span class="keyword">const</span>&amp; )</div>
+<div class="line"><span class="keywordtype">void</span> check_contains(T <span class="keyword">const</span>&amp;)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(<a class="code hl_function" href="#gaaa03ad56a0a8a76d8a6e88557cab92a1">contains_none</a>(T{}, <span class="stringliteral">&quot;malus&quot;</span>_id, <span class="stringliteral">&quot;other&quot;</span>_id))</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(<a class="code hl_function" href="#gaaa6ceb114c1f1ecf07428a655923ff95">contains_only</a>(T{}, <span class="stringliteral">&quot;value&quot;</span>_id, <span class="stringliteral">&quot;active&quot;</span>_id))</div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Correct product_type\n&quot;</span>;</div>
 <div class="line">  <span class="keywordflow">else</span></div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Incorrect product type\n&quot;</span>;</div>
@@ -211,12 +223,11 @@ Tuple:</h3>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  check_contains( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="stringliteral">&quot;value&quot;</span>_id = 9  });</div>
-<div class="line">  check_contains( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="stringliteral">&quot;active&quot;</span>_id = std::bool_constant&lt;true&gt;{}});</div>
 <div class="line">  check_contains( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="stringliteral">&quot;malus&quot;</span>_id = 6.5, <span class="stringliteral">&quot;value&quot;</span>_id = 17} );</div>
+<div class="line">  check_contains( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="stringliteral">&quot;active&quot;</span>_id = std::bool_constant&lt;true&gt;{}     });</div>
 <div class="line">  check_contains( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="stringliteral">&quot;active&quot;</span>_id = std::bool_constant&lt;true&gt;{}, <span class="stringliteral">&quot;value&quot;</span>_id = 17} );</div>
 <div class="line">  check_contains( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="stringliteral">&quot;active&quot;</span>_id = std::bool_constant&lt;true&gt;{}, <span class="stringliteral">&quot;value&quot;</span>_id = 17, <span class="stringliteral">&quot;other&quot;</span>_id = <span class="keyword">false</span>});</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__queries_gaaa03ad56a0a8a76d8a6e88557cab92a1_html_gaaa03ad56a0a8a76d8a6e88557cab92a1"><div class="ttname"><a href="#gaaa03ad56a0a8a76d8a6e88557cab92a1">kumi::contains_none</a></div><div class="ttdeci">constexpr bool contains_none(T &amp;&amp;t, Is const &amp;... ids) noexcept</div><div class="ttdoc">Checks if a product type contains no fields based on any of the selected identifiers.</div><div class="ttdef"><b>Definition</b> contains.hpp:119</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
 </div><!-- fragment --> <h3 class="doxsection"><a class="anchor" id="autotoc_md35"></a>
 Record:</h3>
@@ -227,9 +238,9 @@ Record:</h3>
 <div class="line"><span class="keyword">using namespace </span>kumi::literals;</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt;</div>
-<div class="line"><span class="keywordtype">void</span> check_contains(T <span class="keyword">const</span>&amp; )</div>
+<div class="line"><span class="keywordtype">void</span> check_contains(T <span class="keyword">const</span>&amp;)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(<a class="code hl_function" href="#gaaa03ad56a0a8a76d8a6e88557cab92a1">contains_none</a>(T{}, <span class="stringliteral">&quot;malus&quot;</span>_id, <span class="stringliteral">&quot;other&quot;</span>_id))</div>
+<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(<a class="code hl_function" href="#gaaa6ceb114c1f1ecf07428a655923ff95">contains_only</a>(T{}, <span class="stringliteral">&quot;value&quot;</span>_id, <span class="stringliteral">&quot;active&quot;</span>_id))</div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Correct product_type\n&quot;</span>;</div>
 <div class="line">  <span class="keywordflow">else</span></div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;Incorrect product type\n&quot;</span>;</div>
@@ -238,8 +249,8 @@ Record:</h3>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  check_contains( <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;value&quot;</span>_id = 9  });</div>
-<div class="line">  check_contains( <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;active&quot;</span>_id = std::bool_constant&lt;true&gt;{}});</div>
 <div class="line">  check_contains( <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;malus&quot;</span>_id = 6.5, <span class="stringliteral">&quot;value&quot;</span>_id = 17} );</div>
+<div class="line">  check_contains( <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;active&quot;</span>_id = std::bool_constant&lt;true&gt;{}     });</div>
 <div class="line">  check_contains( <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;active&quot;</span>_id = std::bool_constant&lt;true&gt;{}, <span class="stringliteral">&quot;value&quot;</span>_id = 17} );</div>
 <div class="line">  check_contains( <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;active&quot;</span>_id = std::bool_constant&lt;true&gt;{}, <span class="stringliteral">&quot;value&quot;</span>_id = 17, <span class="stringliteral">&quot;other&quot;</span>_id = <span class="keyword">false</span>});</div>
 <div class="line">}</div>

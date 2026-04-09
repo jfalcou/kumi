@@ -197,7 +197,7 @@ template&lt;typename Function, concepts::product_type T, typename Value&gt; </di
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A tuple of prefix partial accumulations where each element 'I' equals <span class="tt">f( f( f(init, <a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137" title="Extracts the Ith field from a kumi::record.">get</a>&lt;0&gt;(t)), ...), <a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137" title="Extracts the Ith field from a kumi::record.">get</a>&lt;I-1&gt;(t))</span></dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md252"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md256"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
@@ -208,9 +208,9 @@ Helper type</h2>
 <div class="line">}</div>
 <div class="ttc" id="agroup__reductions_gab62658d582fe17a5824465ba5e669b26_html_gab62658d582fe17a5824465ba5e669b26"><div class="ttname"><a href="#gab62658d582fe17a5824465ba5e669b26">kumi::inclusive_scan_left</a></div><div class="ttdeci">constexpr auto inclusive_scan_left(Function f, T &amp;&amp;t, Value init)</div><div class="ttdoc">Computes the inclusive prefix scan of all elements of a product type using a tail recursive call.</div><div class="ttdef"><b>Definition</b> scan.hpp:49</div></div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gab62658d582fe17a5824465ba5e669b26" title="Computes the inclusive prefix scan of all elements of a product type using a tail recursive call.">kumi::inclusive_scan_left</a></p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md253"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md257"></a>
 Examples:</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md254"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md258"></a>
 Tuple:</h3>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -236,7 +236,7 @@ Tuple:</h3>
 <div class="line">}</div>
 <div class="ttc" id="agroup__functional_html_gab5c0eb8022e7b2df33286d9a15247559"><div class="ttname"><a href="group__functional.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a></div><div class="ttdeci">constexpr numeric_add plus</div><div class="ttdoc">Forms a binary monoid callable that can be used in kumi::algoritm. It represents the addition.</div><div class="ttdef"><b>Definition</b> monoid.hpp:134</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
-</div><!-- fragment --> <h3 class="doxsection"><a class="anchor" id="autotoc_md255"></a>
+</div><!-- fragment --> <h3 class="doxsection"><a class="anchor" id="autotoc_md259"></a>
 Record:</h3>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>

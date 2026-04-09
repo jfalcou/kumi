@@ -190,7 +190,7 @@ template&lt;concepts::product_type T, typename V&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A product type composed of all elements of <span class="tt">t</span> in order followed by <span class="tt">v</span>.</dd></dl>
 <p>On record types, this function operates on elements as if they were ordered. The considered order is the order of declaration.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md166"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md170"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
@@ -201,9 +201,9 @@ Helper type</h2>
 <div class="line">}</div>
 <div class="ttc" id="agroup__generators_ga1caeff43037aae979c9ff1ca476091cb_html_ga1caeff43037aae979c9ff1ca476091cb"><div class="ttname"><a href="#ga1caeff43037aae979c9ff1ca476091cb">kumi::push_back</a></div><div class="ttdeci">constexpr auto push_back(T &amp;&amp;t, V &amp;&amp;v)</div><div class="ttdoc">Constructs a product type by adding a value v at the end of t.</div><div class="ttdef"><b>Definition</b> push_pop.hpp:123</div></div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga1caeff43037aae979c9ff1ca476091cb" title="Constructs a product type by adding a value v at the end of t.">kumi::push_back</a></p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md167"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md171"></a>
 Examples:</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md168"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md172"></a>
 Tuple:</h3>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -218,7 +218,7 @@ Tuple:</h3>
 <div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#ga1caeff43037aae979c9ff1ca476091cb">kumi::push_back</a>(t, <span class="charliteral">&#39;Z&#39;</span>)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
-</div><!-- fragment --> <h3 class="doxsection"><a class="anchor" id="autotoc_md169"></a>
+</div><!-- fragment --> <h3 class="doxsection"><a class="anchor" id="autotoc_md173"></a>
 Record:</h3>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>

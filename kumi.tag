@@ -1447,31 +1447,31 @@
       <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
-      <type>constexpr bool</type>
+      <type>constexpr auto</type>
       <name>contains</name>
-      <anchorfile>group__queries_gad40223aadd1f05d53a30e36f679d4d4a.html</anchorfile>
-      <anchor>gad40223aadd1f05d53a30e36f679d4d4a</anchor>
+      <anchorfile>group__queries_ga5b1e2b6241cc570b3688866e8f729d63.html</anchorfile>
+      <anchor>ga5b1e2b6241cc570b3688866e8f729d63</anchor>
       <arglist>(T &amp;&amp;t, ID const &amp;id) noexcept</arglist>
     </member>
     <member kind="function">
-      <type>constexpr bool</type>
+      <type>constexpr auto</type>
       <name>contains_any</name>
-      <anchorfile>group__queries_ga99602610074451fe87591793d992ba01.html</anchorfile>
-      <anchor>ga99602610074451fe87591793d992ba01</anchor>
+      <anchorfile>group__queries_gade57a6c7c09f285d24d85343e87247ee.html</anchorfile>
+      <anchor>gade57a6c7c09f285d24d85343e87247ee</anchor>
       <arglist>(T &amp;&amp;t, Is const &amp;... ids) noexcept</arglist>
     </member>
     <member kind="function">
-      <type>constexpr bool</type>
+      <type>constexpr auto</type>
       <name>contains_none</name>
-      <anchorfile>group__queries_gaaa03ad56a0a8a76d8a6e88557cab92a1.html</anchorfile>
-      <anchor>gaaa03ad56a0a8a76d8a6e88557cab92a1</anchor>
+      <anchorfile>group__queries_ga1fe92be51ecab233d192ad35dd56dd3d.html</anchorfile>
+      <anchor>ga1fe92be51ecab233d192ad35dd56dd3d</anchor>
       <arglist>(T &amp;&amp;t, Is const &amp;... ids) noexcept</arglist>
     </member>
     <member kind="function">
-      <type>constexpr bool</type>
+      <type>constexpr auto</type>
       <name>contains_only</name>
-      <anchorfile>group__queries_ga0c0a9c717f4825fcb0a75add9bf2a838.html</anchorfile>
-      <anchor>ga0c0a9c717f4825fcb0a75add9bf2a838</anchor>
+      <anchorfile>group__queries_gaaa6ceb114c1f1ecf07428a655923ff95.html</anchorfile>
+      <anchor>gaaa6ceb114c1f1ecf07428a655923ff95</anchor>
       <arglist>(T &amp;&amp;t, Is const &amp;... ids) noexcept</arglist>
     </member>
     <member kind="function">
@@ -3335,31 +3335,31 @@
       <arglist>(T &amp;&amp;t, Pred p) noexcept</arglist>
     </member>
     <member kind="function">
-      <type>constexpr bool</type>
+      <type>constexpr auto</type>
       <name>kumi::contains</name>
-      <anchorfile>group__queries_gad40223aadd1f05d53a30e36f679d4d4a.html</anchorfile>
-      <anchor>gad40223aadd1f05d53a30e36f679d4d4a</anchor>
+      <anchorfile>group__queries_ga5b1e2b6241cc570b3688866e8f729d63.html</anchorfile>
+      <anchor>ga5b1e2b6241cc570b3688866e8f729d63</anchor>
       <arglist>(T &amp;&amp;t, ID const &amp;id) noexcept</arglist>
     </member>
     <member kind="function">
-      <type>constexpr bool</type>
+      <type>constexpr auto</type>
       <name>kumi::contains_any</name>
-      <anchorfile>group__queries_ga99602610074451fe87591793d992ba01.html</anchorfile>
-      <anchor>ga99602610074451fe87591793d992ba01</anchor>
+      <anchorfile>group__queries_gade57a6c7c09f285d24d85343e87247ee.html</anchorfile>
+      <anchor>gade57a6c7c09f285d24d85343e87247ee</anchor>
       <arglist>(T &amp;&amp;t, Is const &amp;... ids) noexcept</arglist>
     </member>
     <member kind="function">
-      <type>constexpr bool</type>
+      <type>constexpr auto</type>
       <name>kumi::contains_none</name>
-      <anchorfile>group__queries_gaaa03ad56a0a8a76d8a6e88557cab92a1.html</anchorfile>
-      <anchor>gaaa03ad56a0a8a76d8a6e88557cab92a1</anchor>
+      <anchorfile>group__queries_ga1fe92be51ecab233d192ad35dd56dd3d.html</anchorfile>
+      <anchor>ga1fe92be51ecab233d192ad35dd56dd3d</anchor>
       <arglist>(T &amp;&amp;t, Is const &amp;... ids) noexcept</arglist>
     </member>
     <member kind="function">
-      <type>constexpr bool</type>
+      <type>constexpr auto</type>
       <name>kumi::contains_only</name>
-      <anchorfile>group__queries_ga0c0a9c717f4825fcb0a75add9bf2a838.html</anchorfile>
-      <anchor>ga0c0a9c717f4825fcb0a75add9bf2a838</anchor>
+      <anchorfile>group__queries_gaaa6ceb114c1f1ecf07428a655923ff95.html</anchorfile>
+      <anchor>gaaa6ceb114c1f1ecf07428a655923ff95</anchor>
       <arglist>(T &amp;&amp;t, Is const &amp;... ids) noexcept</arglist>
     </member>
     <member kind="function">

@@ -185,7 +185,7 @@ template&lt;concepts::product_type T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A product type composed of all elements of <span class="tt">t</span> except its first. Has no effect on empty product types.</dd></dl>
 <p>On record types, this function operates on elements as if they were ordered. The considered order is the order of declaration.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md162"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md166"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
@@ -196,9 +196,9 @@ Helper type</h2>
 <div class="line">}</div>
 <div class="ttc" id="agroup__queries_ga0067bdadcb60e0eeb405bd1021dd4f08_html_ga0067bdadcb60e0eeb405bd1021dd4f08"><div class="ttname"><a href="#ga0067bdadcb60e0eeb405bd1021dd4f08">kumi::pop_front</a></div><div class="ttdeci">constexpr auto pop_front(T &amp;&amp;t)</div><div class="ttdoc">Remove the first (if any) element of t.</div><div class="ttdef"><b>Definition</b> push_pop.hpp:82</div></div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga0067bdadcb60e0eeb405bd1021dd4f08" title="Remove the first (if any) element of t.">kumi::pop_front</a></p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md163"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md167"></a>
 Examples:</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md164"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md168"></a>
 Tuple:</h3>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -213,7 +213,7 @@ Tuple:</h3>
 <div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#ga0067bdadcb60e0eeb405bd1021dd4f08">kumi::pop_front</a>(t)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
-</div><!-- fragment --> <h3 class="doxsection"><a class="anchor" id="autotoc_md165"></a>
+</div><!-- fragment --> <h3 class="doxsection"><a class="anchor" id="autotoc_md169"></a>
 Record:</h3>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>

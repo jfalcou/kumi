@@ -193,7 +193,7 @@ template&lt;std::size_t N, std::size_t O, concepts::product_type T&gt; </div>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A tuple of product types, each containing <span class="tt">N</span> consecutive elements of <span class="tt">t</span> offset by O</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>Tiles is the most general form of tiling each inner product_type is a tile over <span class="tt">t</span> starting at index <span class="tt">tile_size * tile_number + 1</span>. The last tile will be smaller if the size of the product type is not a multiple of the tile size.</dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md284"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md288"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
@@ -204,9 +204,9 @@ Helper type</h2>
 <div class="line">}</div>
 <div class="ttc" id="agroup__generators_ga92fa9f88804ec032d1f2bf2717205743_html_ga92fa9f88804ec032d1f2bf2717205743"><div class="ttname"><a href="#ga92fa9f88804ec032d1f2bf2717205743">kumi::tiles</a></div><div class="ttdeci">constexpr auto tiles(T &amp;&amp;t)</div><div class="ttdoc">Creates a tuple of product types, each containing N consecutive elements from t. Tiles starts at 0 an...</div><div class="ttdef"><b>Definition</b> tiler.hpp:50</div></div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga92fa9f88804ec032d1f2bf2717205743" title="Creates a tuple of product types, each containing N consecutive elements from t. Tiles starts at 0 an...">kumi::tiles</a></p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md285"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md289"></a>
 Examples:</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md286"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md290"></a>
 Tuple:</h3>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -239,7 +239,7 @@ Tuple:</h3>
 <div class="ttc" id="agroup__record__related_ga83a97fc306d9ecfacde28584b219b44a_html_ga83a97fc306d9ecfacde28584b219b44a"><div class="ttname"><a href="group__record__related_ga83a97fc306d9ecfacde28584b219b44a.html#ga83a97fc306d9ecfacde28584b219b44a">kumi::to_ref</a></div><div class="ttdeci">constexpr auto to_ref(R &amp;&amp;r)</div><div class="ttdoc">Creates a kumi::record of references given a reference to a kumi::record_type.</div><div class="ttdef"><b>Definition</b> record.hpp:508</div></div>
 <div class="ttc" id="agroup__transforms_ga743a481a92dcc85b86159a44a562dd77_html_ga743a481a92dcc85b86159a44a562dd77"><div class="ttname"><a href="group__transforms_ga743a481a92dcc85b86159a44a562dd77.html#ga743a481a92dcc85b86159a44a562dd77">kumi::for_each</a></div><div class="ttdeci">constexpr void for_each(Function f, T &amp;&amp;t, Ts &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a product type. f is applied on the values if the gi...</div><div class="ttdef"><b>Definition</b> for_each.hpp:36</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
-</div><!-- fragment --> <h3 class="doxsection"><a class="anchor" id="autotoc_md287"></a>
+</div><!-- fragment --> <h3 class="doxsection"><a class="anchor" id="autotoc_md291"></a>
 Record:</h3>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>

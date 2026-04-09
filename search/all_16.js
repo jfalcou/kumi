@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['s_20changed_0',['s Changed',['../changelog.html#autotoc_md410',1,'What&apos;s Changed'],['../changelog.html#autotoc_md415',1,'What&apos;s Changed'],['../changelog.html#autotoc_md421',1,'What&apos;s Changed'],['../changelog.html#autotoc_md425',1,'What&apos;s Changed']]],
+  ['s_20changed_0',['s Changed',['../changelog.html#autotoc_md414',1,'What&apos;s Changed'],['../changelog.html#autotoc_md419',1,'What&apos;s Changed'],['../changelog.html#autotoc_md425',1,'What&apos;s Changed'],['../changelog.html#autotoc_md429',1,'What&apos;s Changed']]],
   ['scannable_1',['scannable',['../structkumi_1_1function_1_1scannable.html',1,'kumi::function::scannable&lt; F, V &gt;'],['../structkumi_1_1function_1_1scannable_ac3570f9286b470ae88de5a142941751a.html#ac3570f9286b470ae88de5a142941751a',1,'kumi::function::scannable::scannable()'],['../structkumi_1_1function_1_1scannable_ac3570f9286b470ae88de5a142941751a.html#ac3570f9286b470ae88de5a142941751a',1,'kumi::function::scannable(F &amp;&amp;f, T &amp;&amp;t) -&gt; scannable&lt; F, std::unwrap_ref_decay_t&lt; T &gt; &gt;']]],
   ['selector_2',['selector',['../group__functional.html#ga6e37add59bc3020c8ada965b8dfee5cd',1,'kumi::function']]],
   ['setup_3',['Setup',['../setup.html',1,'']]],
@@ -22,7 +22,7 @@ var searchData=
   ['stored_5fmember_3c_200_2c_20t_20_3e_19',['stored_member&lt; 0, T &gt;',['../structkumi_1_1stored__member.html',1,'kumi']]],
   ['stored_5fmember_3c_20size_5fv_3c_20t_20_3e_20_2d_201_2c_20t_20_3e_20',['stored_member&lt; size_v&lt; T &gt; - 1, T &gt;',['../structkumi_1_1stored__member.html',1,'kumi']]],
   ['str_21',['str',['../structkumi_1_1str.html',1,'kumi']]],
-  ['structural_20type_22',['Structural type',['../cpp_spec.html#autotoc_md433',1,'']]],
+  ['structural_20type_22',['Structural type',['../cpp_spec.html#autotoc_md437',1,'']]],
   ['sum_23',['sum',['../group__reductions_ga183fa966de706e5e6c78a9cc50202fe8.html#ga183fa966de706e5e6c78a9cc50202fe8',1,'kumi::sum(T &amp;&amp;t, Value init)'],['../group__reductions_gaa96dfd76fe746fe28e1a833ad76c59fc.html#gaa96dfd76fe746fe28e1a833ad76c59fc',1,'kumi::sum(T &amp;&amp;t)']]],
-  ['summary_20table_24',['Summary Table',['../nomenclature.html#autotoc_md451',1,'']]]
+  ['summary_20table_24',['Summary Table',['../nomenclature.html#autotoc_md455',1,'']]]
 ];
