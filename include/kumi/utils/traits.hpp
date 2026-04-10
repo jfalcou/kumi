@@ -574,7 +574,7 @@ namespace kumi
   //====================================================================================================================
   template<template<typename...> typename Traits,
            typename Tuple,
-           typename Seq = std::make_index_sequence<size<Tuple>::value>>
+           typename Seq = std::make_index_sequence<size_v<Tuple>>>
   requires is_product_type_v<std::remove_cvref_t<Tuple>>
   struct apply_traits;
 
@@ -621,7 +621,7 @@ namespace kumi
   //====================================================================================================================
   template<template<typename...> typename Traits,
            typename Tuple,
-           typename Seq = std::make_index_sequence<size<Tuple>::value>>
+           typename Seq = std::make_index_sequence<size_v<Tuple>>>
   requires is_product_type_v<std::remove_cvref_t<Tuple>>
   struct map_traits;
 

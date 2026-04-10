@@ -56,7 +56,7 @@ namespace kumi
         } that{};
 
         [&]<std::size_t... I>(std::index_sequence<I...>) {
-          ((impl(std::type_identity<Ts>{}) == I ? (that.e[that.count++] = I) : 0), ...);
+          ((void)(impl(std::type_identity<Ts>{}) == I ? (that.e[that.count++] = I) : 0), ...);
         }(std::make_index_sequence<sizeof...(Ts)>{});
         return that;
       }
@@ -72,9 +72,9 @@ namespace kumi
         } that{};
 
         auto locate = [&]<std::size_t... I>(std::index_sequence<I...>) {
-          ((Bs ? (that.t[that.count++] = I) : 0), ...);
+          ((void)(Bs ? (that.t[that.count++] = I) : 0), ...);
           that.cut = that.count;
-          ((!Bs ? (that.t[that.count++] = I) : 0), ...);
+          ((void)(!Bs ? (that.t[that.count++] = I) : 0), ...);
         };
 
         locate(std::make_index_sequence<sizeof...(Bs)>{});
@@ -94,7 +94,9 @@ namespace kumi
         that.t[0] = 0;
 
         [&]<std::size_t... I>(std::index_sequence<I...>) {
-          (((std::is_same_v<stored_element_t<I, T>, stored_element_t<I + 1, T>>) ? I : (that.t[that.count++] = I + 1)),
+          ((void)((std::is_same_v<stored_element_t<I, T>, stored_element_t<I + 1, T>>)
+                    ? I
+                    : (that.t[that.count++] = I + 1)),
            ...);
         }(std::make_index_sequence<size_v<T> - 1>{});
 
