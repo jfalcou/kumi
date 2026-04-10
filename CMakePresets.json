@@ -1,0 +1,169 @@
+{
+  "version": 4,
+  "cmakeMinimumRequired": { "major": 3, "minor": 28, "patch": 0 },
+  "vendor": {
+    "copyright": "KUMI - Compact C++20 Tuple Toolbox",
+    "license": "BSL-1.0",
+    "url": "https://github.com/jfalcou/kumi"
+  },
+  "configurePresets": [
+    {
+      "name": "base",
+      "hidden": true,
+      "binaryDir": "${sourceDir}/build/${presetName}",
+      "cacheVariables": {
+        "KUMI_BUILD_TEST": "ON",
+        "CMAKE_CXX_SCAN_FOR_MODULES": "OFF",
+        "CMAKE_EXPORT_COMPILE_COMMANDS": "ON",
+        "CMAKE_CONFIGURATION_TYPES": "Debug;Release"
+      }
+    },
+    {
+      "name": "unix-base",
+      "hidden": true,
+      "inherits": ["base"],
+      "generator": "Ninja Multi-Config",
+      "cacheVariables": {
+        "CMAKE_DEFAULT_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "windows-base",
+      "hidden": true,
+      "inherits": ["base"],
+      "generator": "Visual Studio 17 2022",
+      "architecture": "x64"
+    },
+    {
+        "name": "nvidia-base",
+        "hidden": true,
+        "inherits": ["base"],
+        "generator": "Ninja Multi-Config",
+        "cacheVariables": {
+            "CMAKE_CUDA_COMPILER": "nvcc",
+            "CMAKE_DEFAULT_BUILD_TYPE": "Debug"
+        }
+    },
+    {
+      "name": "libcxx",
+      "hidden": true,
+      "cacheVariables": {
+        "CMAKE_CXX_FLAGS": "-stdlib=libc++",
+        "CMAKE_EXE_LINKER_FLAGS": "-stdlib=libc++"
+      }
+    },
+    {
+      "name": "gcc",
+      "inherits": ["unix-base"],
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "g++"
+      }
+    },
+    {
+      "name": "clang",
+      "inherits": ["unix-base"],
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "clang++"
+      }
+    },
+    {
+      "name": "clang-libc++",
+      "inherits": ["libcxx","unix-base"],
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "clang++"
+      }
+    },
+    {
+      "name": "clang-cuda",
+      "inherits": ["unix-base"],
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_CUDA_COMPILER": "clang++",
+        "CMAKE_CUDA_ARCHITECTURES": "75"
+      }
+    },
+    {
+      "name": "icpx",
+      "inherits": ["unix-base"],
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "icpx",
+        "CMAKE_CXX_FLAGS": "-fp-model=precise"
+      }
+    },
+    {
+      "name": "wasm",
+      "inherits": ["unix-base"],
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "em++",
+        "CMAKE_CXX_FLAGS": "-sNO_DISABLE_EXCEPTION_CATCHING",
+        "CMAKE_CROSSCOMPILING_CMD": "${sourceDir}/.github/scripts/run_wasm.sh"
+      }
+    },
+    {
+      "name": "android-arm64",
+      "inherits": ["unix-base"],
+      "cacheVariables": {
+        "CMAKE_TOOLCHAIN_FILE": "$env{ANDROID_NDK_ROOT}/build/cmake/android.toolchain.cmake",
+        "ANDROID_ABI": "arm64-v8a"
+      }
+    },
+    {
+      "name": "nvc++",
+      "inherits": ["unix-base"],
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "nvc++"
+      }
+    },
+    { "name": "nvcc", "inherits": ["nvidia-base"] },
+    {
+      "name": "nvcc-g++",
+      "inherits": ["nvidia-base"],
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "g++",
+        "CMAKE_CUDA_HOST_COMPILER": "g++"
+      }
+    },
+    {
+      "name": "nvcc-clang++",
+      "inherits": ["nvidia-base"],
+      "cacheVariables": {
+        "CMAKE_CXX_COMPILER": "clang++",
+        "CMAKE_CUDA_HOST_COMPILER": "clang++"
+      }
+    },
+    { "name": "msvc"    , "inherits": ["windows-base" ]                         },
+    { "name": "clangcl" , "inherits": ["windows-base"], "toolset": "ClangCL"    }
+  ],
+  "buildPresets": [
+    { "name": "base-build", "hidden": true, "targets": ["kumi-test"] },
+    { "name": "gcc"             , "inherits": "base-build", "configurePreset": "gcc"            },
+    { "name": "clang"           , "inherits": "base-build", "configurePreset": "clang"          },
+    { "name": "clang-libc++"    , "inherits": "base-build", "configurePreset": "clang-libc++"   },
+    { "name": "icpx"            , "inherits": "base-build", "configurePreset": "icpx"           },
+    { "name": "wasm"            , "inherits": "base-build", "configurePreset": "wasm"           },
+    { "name": "android-arm64"   , "inherits": "base-build", "configurePreset": "android-arm64"  },
+    { "name": "clang-cuda"      , "inherits": "base-build", "configurePreset": "clang-cuda"     },
+    { "name": "nvcc"            , "inherits": "base-build", "configurePreset": "nvcc"           },
+    { "name": "nvc++"           , "inherits": "base-build", "configurePreset": "nvc++"          },
+    { "name": "nvcc-g++"        , "inherits": "base-build", "configurePreset": "nvcc-g++"       },
+    { "name": "nvcc-clang++"    , "inherits": "base-build", "configurePreset": "nvcc-clang++"   },
+    { "name": "msvc"            , "inherits": "base-build", "configurePreset": "msvc"           },
+    { "name": "clangcl"         , "inherits": "base-build", "configurePreset": "clangcl"        }
+  ],
+  "testPresets": [
+    { "name": "base-test", "hidden": true,  "output": { "outputOnFailure": true }, "configuration": "Debug" },
+    { "name": "gcc"             , "inherits": "base-test", "configurePreset": "gcc"             },
+    { "name": "clang"           , "inherits": "base-test", "configurePreset": "clang"           },
+    { "name": "clang-libc++"    , "inherits": "base-test", "configurePreset": "clang-libc++"    },
+    { "name": "icpx"            , "inherits": "base-test", "configurePreset": "icpx"            },
+    { "name": "wasm"            , "inherits": "base-test", "configurePreset": "wasm"            },
+    { "name": "android-arm64"   , "inherits": "base-test", "configurePreset": "android-arm64"   },
+    { "name": "clang-cuda"      , "inherits": "base-test", "configurePreset": "clang-cuda"      },
+    { "name": "nvcc"            , "inherits": "base-test", "configurePreset": "nvcc"            },
+    { "name": "nvc++"           , "inherits": "base-test", "configurePreset": "nvc++"           },
+    { "name": "nvcc-g++"        , "inherits": "base-test", "configurePreset": "nvcc-g++"        },
+    { "name": "nvcc-clang++"    , "inherits": "base-test", "configurePreset": "nvcc-clang++"    },
+    { "name": "msvc"            , "inherits": "base-test", "configurePreset": "msvc"            },
+    { "name": "clangcl"         , "inherits": "base-test", "configurePreset": "clangcl"         }
+  ]
+}

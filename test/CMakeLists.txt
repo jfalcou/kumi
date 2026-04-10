@@ -18,3 +18,10 @@ copa_glob_unit( QUIET
                 PATTERN "unit/*.cpp" INTERFACE kumi_test
                 RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
               )
+
+##======================================================================================================================
+## Device tests
+##======================================================================================================================
+if(DEFINED CMAKE_CUDA_COMPILER)
+    copa_glob_unit(QUIET PATTERN "device/*.cu" INTERFACE kumi_test RELATIVE ${CMAKE_CURRENT_SOURCE_DIR} )
+endif()

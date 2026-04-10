@@ -1,0 +1,41 @@
+##======================================================================================================================
+##  TTS - Tiny Test System
+##  Copyright : TTS Contributors & Maintainers
+##  SPDX-License-Identifier: BSL-1.0
+##======================================================================================================================
+name: TTS Nvidia Tests
+on:
+  workflow_call:
+
+jobs:
+  linux:
+    name: ${{ matrix.compiler.preset }} (${{ matrix.options }})
+    runs-on: self-hosted
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler:
+          - { preset: "clang-cuda"                                }
+          - { preset: "nvcc"                                      }
+          - { preset: "nvc++", setup: "./.github/scripts/cuda.sh" }
+          - { preset: "nvcc-g++"                                  }
+          - { preset: "nvcc-clang++"                              }
+
+        options: [Debug, Release]
+
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v6
+
+      - name: Configure CMake and Build
+        uses: ./.github/actions/config
+        with:
+          config: ${{ matrix.options }}
+          preset: ${{ matrix.compiler.preset }}
+          setup-script: ${{ matrix.compiler.setup }}
+
+      - name: Run Unit Tests
+        uses: ./.github/actions/test
+        with:
+          config: ${{ matrix.options }}
+          preset: ${{ matrix.compiler.preset }}
