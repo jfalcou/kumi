@@ -11,9 +11,13 @@
 
   | Compiler        | Version           |
   | ----------------| ------------------|
-  | g++             | 14  and  above    |
-  | clang++         | 19  and  above    |
-  | MSVC            | 19  and  above    |
+  | g++             | 14    and  above  |
+  | clang++         | 19    and  above  |
+  | em++            | 5     and above   |
+  | icpx            | 2025  and above   |
+  | MSVC            | 19    and  above  |
+  | ClangCL         | 19    and above   |
+  | AppleClang      | 15    and above   |
   | nvcc/nvc++      | ongoing work      |
 
   @section setup-source Install from the source
