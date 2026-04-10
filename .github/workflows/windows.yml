@@ -1,0 +1,36 @@
+##======================================================================================================================
+##  TTS - Tiny Test System
+##  Copyright : TTS Contributors & Maintainers
+##  SPDX-License-Identifier: BSL-1.0
+##======================================================================================================================
+name: TTS Windows Tests
+on:
+  workflow_call:
+
+jobs:
+  windows:
+    name: ${{ matrix.compiler.name }} (${{ matrix.options }})
+    runs-on: windows-2022
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler:
+          - { name: "MSVC"    , preset: "msvc"    }
+          - { name: "Clang-CL", preset: "clangcl" }
+
+        options: [Debug,Release]
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v6
+
+      - name: Configure CMake and Build
+        uses: ./.github/actions/config
+        with:
+          preset: ${{ matrix.compiler.preset }}
+          config: ${{ matrix.options }}
+
+      - name: Run Unit Tests
+        uses: ./.github/actions/test
+        with:
+          preset: ${{ matrix.compiler.preset }}
+          config: ${{ matrix.options }}

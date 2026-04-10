@@ -1,0 +1,39 @@
+##======================================================================================================================
+##  TTS - Tiny Test System
+##  Copyright : TTS Contributors & Maintainers
+##  SPDX-License-Identifier: BSL-1.0
+##======================================================================================================================
+name: TTS MacOS Tests
+on:
+  workflow_call:
+
+jobs:
+  macosx:
+    name: ${{ matrix.compiler.name }} (${{ matrix.options }})
+    runs-on: macos-14
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler:
+          - { name: "apple-clang"       , preset: "clang"         }
+          - { name: "apple-clang libc++", preset: "clang-libc++"  }
+          - { name: "Android"           , preset: "android-arm64" }
+
+        options: [Debug, Release]
+
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v6
+
+      - name: Configure CMake and Build
+        uses: ./.github/actions/config
+        with:
+          preset: ${{ matrix.compiler.preset }}
+          config: ${{ matrix.options }}
+
+      - name: Run Unit Tests
+        if: matrix.compiler.preset != 'android-arm64' # Skip executing cross-compiled binaries
+        uses: ./.github/actions/test
+        with:
+          preset: ${{ matrix.compiler.preset }}
+          config: ${{ matrix.options }}
