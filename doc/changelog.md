@@ -1,6 +1,74 @@
 Change Log {#changelog}
 ==========
 
+# Version 4.0 - Flawless Fluorite
+## What's Changed
+
+v4.0 Introduces a lot of new algorithm, a new type (`record`) and fixes a bunch of performance and clarity issues.
+A bunch of old functions has been deprecated, hence the major version bump.
+
+### New Features
+* **Named Fields & Records**:
+    * Introducing named fields and record support (#110, #112).
+    * Introducing record protocol and record support in algorithms (#132, #144).
+    * Support for types as identifiers and `get` via label (#168, #186).
+* **New Algorithms**:
+    * Implement `generate` and `fill` (#107).
+    * Introducing `windows` & `chunks` (#123).
+    * Introducing `filter` & `filter_not` (#124).
+    * Introducing `reindex` algorithm (#130).
+    * Add `unique` / `all_unique` algorithms (#139).
+    * Introducing `reduce` & `scans` (#137).
+    * Introducing `rotate` algorithm (#154).
+    * Add projection maps support (#182).
+    * Implement `map_traits` (#104).
+* **Core Logic & Performance**:
+    * Introducing `builder` for tuple construction (#111).
+    * Introducing `empty_product_type` concept (#143).
+    * Make `std::array` and static `std::span` behave as product types (#140).
+    * Introduce `as_streamable` extension point (#145).
+    * Implicit conversion operator on tuples (#152).
+    * Deprecate `.cast()` and callable behavior (#135).
+    * Introduce static container adaptation (#158).
+    * Move from opt-in to detection for product type semantic (#160).
+    * Empty Base Optimization (EBO) support (#163, #167).
+
+### FIXES
+* **Compiler & Compatibility**:
+    * Reimplement `cartesian_product` for latest MSVC compatibility (#97).
+    * Fix shadow warnings (#108).
+    * Fix qualification consideration in concepts (#136).
+    * Missing `typename` for C++20 (#128).
+    * Fix for TTS v3 (#129).
+    * Remove spurious semicolons triggering errors on older GCC versions (#188).
+* **Logic & Bug Fixes**:
+    * Make `std::is_empty` work as expected on tuples and records (#138).
+    * Fix IO of field capture of empty type (#165).
+    * Improve diagnostic of invalid `get` (#150).
+    * Use `static_assert` instead of `requires` for logic errors (#184).
+    * Clarify error messages for invalid records (#166).
+* **Refinement**:
+    * Make `operator<` better (#98).
+    * Add `KUMI_ABI` markers to enhance codegen and CUDA `__host__` `__device__` support (#119, #121).
+    * Make tuple algorithms accept forwarding references (#127).
+    * Move towards `invoke` instead of raw callable application (#161).
+    * Simplification of `field_capture` unwrapping (#141).
+    * Move concepts to their own namespace (#170).
+    * Test missing record algorithms + doc (#178).
+
+### DOC and CI infra
+* **Documentation**:
+    * Fixup `FetchContent` docs (#91).
+    * Rearrange tree links in documentation (#117).
+    * Refurbish documentation and fix rendering/links (#185, #197).
+    * Fix README code block and badge appearance (#187, #194).
+
+* **CI & Infrastructure**:
+    * Move KUMI standalone file to its own branch (#114, #120).
+    * Add explicit standalone tests and proper standalone file (#116, #176,#174).
+    * Move to CI v10 and update to latest CI infra (#105, #196).
+    * Migration to `precommit` (#157).
+
 # Version 3.1 - Exquisite Epidote
 
 ## What's Changed
