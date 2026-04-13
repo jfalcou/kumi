@@ -3,11 +3,14 @@
 ##  Copyright : KUMI Project Contributors
 ##  SPDX-License-Identifier: BSL-1.0
 ##======================================================================================================================
-name: KUMI CI
+name: Unit Tests
 on:
   pull_request:
     branches:
       - main
+concurrency:
+  group: kumi-unit-${{ github.ref }}
+  cancel-in-progress: true
 
 jobs:
   ##======================================================================================================================
@@ -17,9 +20,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4.1.1
+        uses: actions/checkout@v6
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v6
         with:
           python-version: '3.x'
       - name: Install pre-commit
@@ -30,17 +33,22 @@ jobs:
   ##======================================================================================================================
   ## Build and run unit tests
   ##======================================================================================================================
-  linux-unit-tests:
-    name: Linux Unit Tests
+  linux-tests:
+    name: Linux
     needs: precommit
-    uses: ./.github/workflows/unit-linux.yml
+    uses: ./.github/workflows/linux.yml
 
-  windows-unit-tests:
-    name: Windows Unit Tests
+  macos-tests:
+    name: MacOS
     needs: precommit
-    uses: ./.github/workflows/unit-windows.yml
+    uses: ./.github/workflows/macos.yml
 
-  macos-unit-tests:
-    name: MacOS Unit Tests
+  windows-tests:
+    name: Windows
     needs: precommit
-    uses: ./.github/workflows/unit-macos.yml
+    uses: ./.github/workflows/windows.yml
+
+  #nvidia-tests:
+  #  name: Nvidia Unit Tests
+  #  needs: precommit
+  #  uses: ./.github/workflows/nvidia.yml

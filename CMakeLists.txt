@@ -3,8 +3,12 @@
 ##  Copyright : KUMI Project Contributors
 ##  SPDX-License-Identifier: BSL-1.0
 ##======================================================================================================================
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.28)
 project(KUMI LANGUAGES CXX)
+
+if(DEFINED CMAKE_CUDA_COMPILER)
+  enable_language(CUDA)
+endif()
 
 ##======================================================================================================================
 option( KUMI_BUILD_TEST             "Build tests using Kumi headers"            ON  )
@@ -28,14 +32,9 @@ copa_project_version(MAJOR 3 MINOR 1 PATCH 0)
 ## Summary Display
 ##======================================================================================================================
 if(NOT KUMI_QUIET)
-  if(KUMI_BUILD_STANDALONE_TEST)
-    unset(KUMI_BUILD_TEST)
-  endif()
-
   if(CMAKE_BUILD_TYPE)
     message(STATUS "[${PROJECT_NAME}] - Building in ${CMAKE_BUILD_TYPE} mode")
   endif()
-
   message(STATUS "[${PROJECT_NAME}] - Unit tests              : ${KUMI_BUILD_TEST} (via KUMI_BUILD_TEST)")
   message(STATUS "[${PROJECT_NAME}] - Doxygen                 : ${KUMI_BUILD_DOCUMENTATION} (via KUMI_BUILD_DOCUMENTATION)")
   set(QUIET_OPTION "")

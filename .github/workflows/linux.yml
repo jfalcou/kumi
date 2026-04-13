@@ -1,0 +1,47 @@
+##======================================================================================================================
+##  KUMI - Compact C++20 Tuple Toolbox
+##  Copyright : KUMI Project Contributors
+##  SPDX-License-Identifier: BSL-1.0
+##======================================================================================================================
+name: TTS Linux Tests
+on:
+  workflow_call:
+
+jobs:
+  linux:
+    name: ${{ matrix.compiler.name}} (${{ matrix.options }})
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/jfalcou/compilers:${{ matrix.compiler.image }}
+    strategy:
+      fail-fast: false
+      matrix:
+        compiler:
+          - { name: "gcc"           , preset: "gcc"           , image: "v10" }
+          - { name: "clang"         , preset: "clang"         , image: "v10" }
+          - { name: "clang libc++"  , preset: "clang-libc++"  , image: "v10" }
+          - { name: "gcc14"         , preset: "gcc"           , image: "v10"    , setup: "./.github/scripts/g++-14.sh"  }
+          - { name: "clang20"       , preset: "clang"         , image: "v10"    , setup: "./.github/scripts/clang20.sh" }
+          - { name: "clang20 libc++", preset: "clang-libc++"  , image: "v10"    , setup: "./.github/scripts/clang20.sh" }
+          - { name: "icpx"          , preset: "icpx"          , image: "sycl-v1", setup: "/opt/intel/oneapi/setvars.sh" }
+          - { name: "wasm"          , preset: "wasm"          , image: "v10"    , wrapper: "emcmake" }
+
+        options: [Debug, Release]
+
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v6
+
+      - name: Configure CMake and Build
+        uses: ./.github/actions/config
+        with:
+          config: ${{ matrix.options }}
+          preset: ${{ matrix.compiler.preset }}
+          wrapper: ${{ matrix.compiler.wrapper }}
+          setup-script: ${{ matrix.compiler.setup }}
+
+      - name: Run Unit Tests
+        uses: ./.github/actions/test
+        with:
+          config: ${{ matrix.options }}
+          preset: ${{ matrix.compiler.preset }}
