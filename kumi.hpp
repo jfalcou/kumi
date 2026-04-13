@@ -28,16 +28,21 @@ namespace kumi
 #include "KUMI requires C++20 or higher. Use -std=c++20 or higher to enable C++20 features."
 #endif
 #endif
+#if defined(__EDG__) || defined(__EDG_VERSION__) || defined(__CUDACC__) || defined(__NVCC__)
+#define KUMI_FWD(...) std::forward<decltype(__VA_ARGS__)>(__VA_ARGS__)
+#else
 #define KUMI_FWD(...) static_cast<decltype(__VA_ARGS__)&&>(__VA_ARGS__)
-#if defined(__CUDACC__)
+#endif
+#if defined(__CUDACC__) || defined(__NVCC__)
 #define KUMI_CUDA __host__ __device__
 #else
 #define KUMI_CUDA
 #endif
 #if defined(KUMI_DEBUG)
 #define KUMI_ABI
-#elif defined(__GNUC__) ||                                                                                             \
-  defined(__clang__)
+#elif defined(__EDG__) || defined(__EDG_VERSION__) || defined(__CUDACC__) || defined(__NVCC__)
+#define KUMI_ABI KUMI_CUDA inline
+#elif defined(__GNUC__) || defined(__clang__)
 #define KUMI_ABI [[using gnu: always_inline, flatten, artificial]] KUMI_CUDA inline
 #elif defined(_MSC_VER)
 #define KUMI_ABI [[using msvc: forceinline, flatten]] KUMI_CUDA inline
@@ -165,19 +170,19 @@ namespace kumi::_
 #define KUMI_MEMBERS(N, _)                                                                                             \
   T##N member##N;                                                                                                      \
   using index##N = std::integral_constant<std::size_t, N>;                                                             \
-  constexpr auto& operator()(index##N)& noexcept                                                                       \
+  KUMI_ABI constexpr auto& operator()(index##N)& noexcept                                                              \
   {                                                                                                                    \
     return member##N;                                                                                                  \
   }                                                                                                                    \
-  constexpr auto&& operator()(index##N)&& noexcept                                                                     \
+  KUMI_ABI constexpr auto&& operator()(index##N)&& noexcept                                                            \
   {                                                                                                                    \
     return static_cast<T##N&&>(member##N);                                                                             \
   }                                                                                                                    \
-  constexpr auto const&& operator()(index##N) const&& noexcept                                                         \
+  KUMI_ABI constexpr auto const&& operator()(index##N) const&& noexcept                                                \
   {                                                                                                                    \
     return static_cast<T##N const&&>(member##N);                                                                       \
   }                                                                                                                    \
-  constexpr auto const& operator()(index##N) const& noexcept                                                           \
+  KUMI_ABI constexpr auto const& operator()(index##N) const& noexcept                                                  \
   {                                                                                                                    \
     return member##N;                                                                                                  \
   }
@@ -203,36 +208,36 @@ namespace kumi::_
     static constexpr bool is_homogeneous = (N == 1);                                                                   \
     KUMI_PP_REPEAT(N, KUMI_MEMBERS, _)                                                                                 \
                                                                                                                        \
-    template<typename T> constexpr auto& operator()(std::type_identity<T>) & noexcept                                  \
+    template<typename T> KUMI_ABI constexpr auto& operator()(std::type_identity<T>) & noexcept                         \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_TYPE_LVALUE, T)                                                                       \
     }                                                                                                                  \
-    template<typename T> constexpr auto&& operator()(std::type_identity<T>) && noexcept                                \
+    template<typename T> KUMI_ABI constexpr auto&& operator()(std::type_identity<T>) && noexcept                       \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_TYPE_RVALUE, T)                                                                       \
     }                                                                                                                  \
-    template<typename T> constexpr auto const&& operator()(std::type_identity<T>) const&& noexcept                     \
+    template<typename T> KUMI_ABI constexpr auto const&& operator()(std::type_identity<T>) const&& noexcept            \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_TYPE_CONST_RVALUE, T)                                                                 \
     }                                                                                                                  \
-    template<typename T> constexpr auto const& operator()(std::type_identity<T>) const& noexcept                       \
+    template<typename T> KUMI_ABI constexpr auto const& operator()(std::type_identity<T>) const& noexcept              \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_TYPE_LVALUE, T)                                                                       \
     }                                                                                                                  \
                                                                                                                        \
-    template<identifier I> constexpr auto& operator()(I) & noexcept                                                    \
+    template<identifier I> KUMI_ABI constexpr auto& operator()(I) & noexcept                                           \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_NAME_LVALUE, I)                                                                       \
     }                                                                                                                  \
-    template<identifier I> constexpr auto&& operator()(I) && noexcept                                                  \
+    template<identifier I> KUMI_ABI constexpr auto&& operator()(I) && noexcept                                         \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_NAME_RVALUE, I)                                                                       \
     }                                                                                                                  \
-    template<identifier I> constexpr auto const&& operator()(I) const&& noexcept                                       \
+    template<identifier I> KUMI_ABI constexpr auto const&& operator()(I) const&& noexcept                              \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_NAME_CONST_RVALUE, I)                                                                 \
     }                                                                                                                  \
-    template<identifier I> constexpr auto const& operator()(I) const& noexcept                                         \
+    template<identifier I> KUMI_ABI constexpr auto const& operator()(I) const& noexcept                                \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_NAME_LVALUE, I)                                                                       \
     }                                                                                                                  \
@@ -1009,7 +1014,7 @@ namespace kumi
   template<typename... Ts> inline constexpr auto all_unique_names_v = all_unique_names_t<Ts...>::value;
   template<template<typename...> typename Traits,
            typename Tuple,
-           typename Seq = std::make_index_sequence<size<Tuple>::value>>
+           typename Seq = std::make_index_sequence<size_v<Tuple>>>
   requires is_product_type_v<std::remove_cvref_t<Tuple>>
   struct apply_traits;
   template<template<typename...> typename Traits, typename Tuple, std::size_t... Is>
@@ -1024,7 +1029,7 @@ namespace kumi
   using apply_traits_t = typename apply_traits<Traits, Tuple>::type;
   template<template<typename...> typename Traits,
            typename Tuple,
-           typename Seq = std::make_index_sequence<size<Tuple>::value>>
+           typename Seq = std::make_index_sequence<size_v<Tuple>>>
   requires is_product_type_v<std::remove_cvref_t<Tuple>>
   struct map_traits;
   template<template<typename...> typename Traits, typename Tuple, std::size_t... Is>
@@ -2384,10 +2389,9 @@ namespace kumi
     KUMI_ABI constexpr decltype(auto) invoke_memptr(P C::* member, O&& o, Ts&&... ts)
     {
       using callable_t = P C::*;
-      auto&& ptr = [](auto&& obj) -> decltype(auto) {
-        using T = std::remove_cvref_t<decltype(obj)>;
-        if constexpr (_::is_reference_wrapper_v<T>) return obj.get();
-        else if constexpr (std::is_pointer_v<T>) return *KUMI_FWD(obj);
+      auto&& ptr = []<typename T>(T&& obj) -> decltype(auto) {
+        if constexpr (_::is_reference_wrapper_v<std::remove_cvref_t<T>>) return obj.get();
+        else if constexpr (std::is_pointer_v<std::remove_cvref_t<T>>) return *KUMI_FWD(obj);
         else return KUMI_FWD(obj);
       }(KUMI_FWD(o));
       if constexpr (std::is_member_object_pointer_v<callable_t>) return KUMI_FWD(ptr).*member;
@@ -2563,7 +2567,7 @@ namespace kumi
           std::size_t e[sizeof...(Ts)], count = {};
         } that{};
         [&]<std::size_t... I>(std::index_sequence<I...>) {
-          ((impl(std::type_identity<Ts>{}) == I ? (that.e[that.count++] = I) : 0), ...);
+          ((void)(impl(std::type_identity<Ts>{}) == I ? (that.e[that.count++] = I) : 0), ...);
         }(std::make_index_sequence<sizeof...(Ts)>{});
         return that;
       }
@@ -2577,9 +2581,9 @@ namespace kumi
           std::size_t count = {}, cut = {}, t[sizeof...(Bs)];
         } that{};
         auto locate = [&]<std::size_t... I>(std::index_sequence<I...>) {
-          ((Bs ? (that.t[that.count++] = I) : 0), ...);
+          ((void)(Bs ? (that.t[that.count++] = I) : 0), ...);
           that.cut = that.count;
-          ((!Bs ? (that.t[that.count++] = I) : 0), ...);
+          ((void)(!Bs ? (that.t[that.count++] = I) : 0), ...);
         };
         locate(std::make_index_sequence<sizeof...(Bs)>{});
         return that;
@@ -2595,7 +2599,9 @@ namespace kumi
         } that{};
         that.t[0] = 0;
         [&]<std::size_t... I>(std::index_sequence<I...>) {
-          (((std::is_same_v<stored_element_t<I, T>, stored_element_t<I + 1, T>>) ? I : (that.t[that.count++] = I + 1)),
+          ((void)((std::is_same_v<stored_element_t<I, T>, stored_element_t<I + 1, T>>)
+                    ? I
+                    : (that.t[that.count++] = I + 1)),
            ...);
         }(std::make_index_sequence<size_v<T> - 1>{});
         return that;
