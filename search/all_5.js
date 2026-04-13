@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['aggregate_20type_0',['Aggregate type',['../cpp_spec.html#autotoc_md436',1,'']]],
+  ['aggregate_20type_0',['Aggregate type',['../cpp_spec.html#autotoc_md437',1,'']]],
   ['algorithms_1',['Product Type Algorithms',['../group__algorithm.html',1,'']]],
   ['all_5fof_2',['all_of',['../group__queries_ga72fb1b09abe23dbd9c6f2783c98c0c5d.html#ga72fb1b09abe23dbd9c6f2783c98c0c5d',1,'kumi::all_of(T &amp;&amp;t, Pred p) noexcept'],['../group__queries_ga599b0ea5293a040316abedd19bb72f42.html#ga599b0ea5293a040316abedd19bb72f42',1,'kumi::all_of(T &amp;&amp;t) noexcept']]],
   ['all_5funique_3',['all_unique',['../group__generators_gacf670e19ac40c8981f52ad0783a3e483.html#gacf670e19ac40c8981f52ad0783a3e483',1,'kumi']]],

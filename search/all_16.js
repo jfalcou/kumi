@@ -22,7 +22,7 @@ var searchData=
   ['stored_5fmember_3c_200_2c_20t_20_3e_19',['stored_member&lt; 0, T &gt;',['../structkumi_1_1stored__member.html',1,'kumi']]],
   ['stored_5fmember_3c_20size_5fv_3c_20t_20_3e_20_2d_201_2c_20t_20_3e_20',['stored_member&lt; size_v&lt; T &gt; - 1, T &gt;',['../structkumi_1_1stored__member.html',1,'kumi']]],
   ['str_21',['str',['../structkumi_1_1str.html',1,'kumi']]],
-  ['structural_20type_22',['Structural type',['../cpp_spec.html#autotoc_md437',1,'']]],
+  ['structural_20type_22',['Structural type',['../cpp_spec.html#autotoc_md439',1,'']]],
   ['sum_23',['sum',['../group__reductions_ga183fa966de706e5e6c78a9cc50202fe8.html#ga183fa966de706e5e6c78a9cc50202fe8',1,'kumi::sum(T &amp;&amp;t, Value init)'],['../group__reductions_gaa96dfd76fe746fe28e1a833ad76c59fc.html#gaa96dfd76fe746fe28e1a833ad76c59fc',1,'kumi::sum(T &amp;&amp;t)']]],
-  ['summary_20table_24',['Summary Table',['../nomenclature.html#autotoc_md455',1,'']]]
+  ['summary_20table_24',['Summary Table',['../nomenclature.html#autotoc_md463',1,'']]]
 ];

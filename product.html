@@ -161,7 +161,7 @@ Product Constructions (The Logic of "AND")</h1>
 <h1 class="doxsection"><a class="anchor" id="product_type"></a>
 Product Type \( (A \times B) \)</h1>
 <p>A <b>Product Type</b> is a compound type formed by combining multiple types.</p>
-<p>An instance of a product type in it's simplest form is a called a tuple.</p>
+<p>An instance of a product type in it's simplest form is a called a <a href="https://en.wikipedia.org/wiki/Tuple">tuple</a>.</p>
 <p>Such a type only accepts one constructor that takes a variadic number of inputs and builds the product of them. A product type has a fixed length and the types of the elements is fixed. Formally it can be written as :</p>
 <p>\( (x_1, x_2, ..., x_n) : T_1 \times T_2 \times ... \times T_n \)</p>
 <p>This can be read as : the tuple is composed of elements of types \( T_1 \) to \( T_n\) with corresponding values \( x_1 \) to \( x_n \).</p>
@@ -195,7 +195,7 @@ Programming Languages Considerations</h2>
 <h1 class="doxsection"><a class="anchor" id="record_type"></a>
 Record Type \( (\{l_A: A\} \times \{l_B: B\}) \)</h1>
 <p>A <b>Record Type</b> identifies its components by a <b>unique label</b> rather than a position.</p>
-<p>An instance of a record type is called a struct in many programming languages. (Let aside considerations about object oriented progamming, inheritance, etc...)</p>
+<p>An instance of a record type in it's simplest form is a called a <a href="https://en.wikipedia.org/wiki/Record_(computer_science)">record</a>. In many programming languages, it is refered to as a struct. (Let aside considerations about object oriented progamming, inheritance, etc...)</p>
 <p>A <b>Record Type</b> is the labeled version of a Product, it can be seen as the product of mathematical sets. Similarily to tuples, it accepts one constructor that takes a variadic number of input that are in this case fields.</p>
 <p>Formally it can be written as :</p>
 <p>\( \{l_1 : x_1, l_2 : x_2, ..., l_n : x_n\} : T_1 \times T_2 \times ... \times T_n \)</p>
@@ -212,9 +212,7 @@ Record Type \( (\{l_A: A\} \times \{l_B: B\}) \)</h1>
 <li><b>Permutation</b>: Theoretically, a record is a set of field mappings. In many formal definitions, <span class="tt">{x: int, y: float}</span> is isomorphic to <span class="tt">{y: float, x: int}</span> because the set of labels and their associated types are identical.</li>
 <li><b>Semantic Access</b>: Access is performed via labels (<span class="tt">get&lt;'x'&gt;(r)</span>), adding semantic meaning to the structure.</li>
 </ul>
-<p>Operation on records are traditionally not structural in the sens that they operate per label, never per element. However, as they are internally represented by a tuple, such operation are permitted. As an example, one could "rotate" a record \( n \) positions to the left. Mathematically this might not make a lot of sens whereas for a programmer that has to consider memory representation, this is potentially critical to have.</p>
-<hr  />
-<p><b>Reference</b> <a href="https://en.wikipedia.org/wiki/Tuple">Wikipedia: Tuple</a> <b>Reference</b> <a href="https://en.wikipedia.org/wiki/Record_(computer_science)">Wikipedia: Record</a> </p>
+<p>Operation on records are traditionally not structural in the sens that they operate per label, never per element. However, as they are internally represented by a tuple, such operation are permitted. As an example, one could "rotate" a record \( n \) positions to the left. Mathematically this might not make a lot of sens whereas for a programmer that has to consider memory representation, this is potentially critical to have. </p>
 </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->

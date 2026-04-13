@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['aggregate_20type_0',['Aggregate type',['../cpp_spec.html#autotoc_md436',1,'']]],
+  ['aggregate_20type_0',['Aggregate type',['../cpp_spec.html#autotoc_md437',1,'']]],
   ['amazing_20amethyst_1',['Version 1.0 - Amazing Amethyst',['../changelog.html#autotoc_md433',1,'']]],
   ['amethyst_2',['Version 1.0 - Amazing Amethyst',['../changelog.html#autotoc_md433',1,'']]],
   ['and_3',['Product Constructions (The Logic of &quot;AND&quot;)',['../product.html#product_construction',1,'']]],

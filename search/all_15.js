@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['record_0',['Record',['../index.html#autotoc_md461',1,'']]],
+  ['record_0',['Record',['../index.html#autotoc_md468',1,'']]],
   ['record_1',['record',['../structkumi_1_1record.html',1,'kumi::record&lt; Ts &gt;'],['../structkumi_1_1record_a1000cb0996a9587f8735a35f76060e44.html#a1000cb0996a9587f8735a35f76060e44',1,'kumi::record::record()'],['../structkumi_1_1record_a1000cb0996a9587f8735a35f76060e44.html#a1000cb0996a9587f8735a35f76060e44',1,'kumi::record()']]],
   ['record_20related_20concepts_2',['Record Related Concepts',['../group__record__concepts.html',1,'']]],
   ['record_20related_20traits_3',['Record Related Traits',['../group__record__traits.html',1,'']]],

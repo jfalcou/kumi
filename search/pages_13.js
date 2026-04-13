@@ -7,6 +7,6 @@ var searchData=
   ['source_4',['Install from the source',['../setup.html#setup-source',1,'']]],
   ['specific_20terms_5',['C++ Specific Terms',['../cpp_spec.html',1,'']]],
   ['standalone_20setup_6',['Standalone setup',['../setup.html#setup-standalone',1,'']]],
-  ['structural_20type_7',['Structural type',['../cpp_spec.html#autotoc_md437',1,'']]],
-  ['summary_20table_8',['Summary Table',['../nomenclature.html#autotoc_md455',1,'']]]
+  ['structural_20type_7',['Structural type',['../cpp_spec.html#autotoc_md439',1,'']]],
+  ['summary_20table_8',['Summary Table',['../nomenclature.html#autotoc_md463',1,'']]]
 ];
