@@ -12,8 +12,8 @@ library focuses on handling [product types](@ref product_type).
 
 @section origin Origin 
 
-Type theory is the academic study of type systems used to formalize how types are constructed and composed. 
-While Set Theory categorizes elements into sets, Type Theory categorizes data (propositions) and the transformations 
+[Type theory](https://en.wikipedia.org/wiki/Type_theory) is the academic study of type systems used to formalize how types are constructed and composed. 
+While [Set Theory](https://en.wikipedia.org/wiki/Set_theory) categorizes elements into sets, Type Theory categorizes data (propositions) and the transformations 
 (proofs) applied to them.
 
 In this view:
@@ -25,7 +25,8 @@ In this view:
 
 @section curry_howard The Curry-Howard Correspondence
 
-The **Curry-Howard Correspondence** formalizes the direct link between logical reasoning and type-level reasoning.
+The [Curry-Howard Correspondence](https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence) formalizes the 
+direct link between logical reasoning and type-level reasoning.
 Every concept in logic has a direct counter part in type theory.
 The following table recapitulates the different operation that can be necessary to understand.
 
@@ -78,9 +79,5 @@ state space dictates how much information a variable can have.
 
 [In the next page](@ref identity), we will see some more specific types that are used as a base for more complex 
 operations.
-
----
-
-* **Reference** [Wikipedia: Type Theory](https://en.wikipedia.org/wiki/Type_theory)
 
 **/

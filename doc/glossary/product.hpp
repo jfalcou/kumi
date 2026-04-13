@@ -15,7 +15,7 @@ The structure of a product type is determined by the fixed order of the operands
 
 A **Product Type** is a compound type formed by combining multiple types. 
 
-An instance of a product type in it's simplest form is a called a tuple.
+An instance of a product type in it's simplest form is a called a [tuple](https://en.wikipedia.org/wiki/Tuple).
 
 Such a type only accepts one constructor that takes a variadic number of inputs
 and builds the product of them. A product type has a fixed length and the types of 
@@ -69,8 +69,8 @@ yet optimized representation of them. Each type provided in the standard can be 
 
 A **Record Type** identifies its components by a **unique label** rather than a position. 
 
-An instance of a record type is called a struct in many programming languages.
-(Let aside considerations about object oriented progamming, inheritance, etc...)
+An instance of a record type in it's simplest form is a called a [record](https://en.wikipedia.org/wiki/Record_(computer_science)). 
+In many programming languages, it is refered to as a struct. (Let aside considerations about object oriented progamming, inheritance, etc...)
 
 A **Record Type** is the labeled version of a Product, it can be seen as the product of mathematical sets. 
 Similarily to tuples, it accepts one constructor that takes a variadic number of input that are in this case fields.
@@ -113,10 +113,5 @@ Operation on records are traditionally not structural in the sens that they oper
 element. However, as they are internally represented by a tuple, such operation are permitted. As an example, one
 could "rotate" a record \f$ n \f$ positions to the left. Mathematically this might not make a lot of sens
 whereas for a programmer that has to consider memory representation, this is potentially critical to have.
-
----
-
-* **Reference** [Wikipedia: Tuple](https://en.wikipedia.org/wiki/Tuple)
-* **Reference** [Wikipedia: Record](https://en.wikipedia.org/wiki/Record_(computer_science))
 
 **/
