@@ -1,78 +1,86 @@
 #error This file is for ducomentation only - DO NOT INCLUDE
 /**
 
- @page nomenclature Nomenclature
+  @page nomenclature Nomenclature
 
- This document establishes the formal vocabulary used throughout the KUMI library
- to ensure consistency across API documentation, error messages, and internal
- implementation details.
+  This document establishes the formal vocabulary used throughout the KUMI library
+  to ensure consistency across API documentation, error messages, and internal
+  implementation details.
 
- In the context of **KUMI**, a distinction is made between types as stored,
- types as accessed, and the metadata used to describe them.
+  In the context of **KUMI**, a distinction is made between types as stored,
+  types as accessed, and the metadata used to describe them.
 
- ---
+  ---
 
- ## Element
+  ## Element
 
- An **element** is the fundamental constituent type of a heterogenous container.
- In literature, this corresponds to the *Value Type* (\f$ T \f$) stored within a node.
- - **Definition:** The raw, decayed type provided during template instantiation.
- - **Example:** In `kumi::tuple<int, double>`, the elements are `int` and `double`.
+  An **element** is the fundamental constituent type of a heterogenous container.
+  In literature, this corresponds to the *Value Type* (\f$ T \f$) stored within a node.
+  - **Definition:** The raw, decayed type provided during template instantiation.
+  - **Example:** In `kumi::tuple<int, double>`, the elements are `int` and `double`.
 
- ## Member
+  ---
 
- A **member** is the functional result of a sub-object access operation, the result of a projection.
+  ## Member
 
- Formally, a member is an **Element** qualified by the value category of the
- container and the cv-qualifiers of the access path.
+  A **member** is the functional result of a sub-object access operation, the result of a projection.
 
- - **Definition:** The result of `get<I>(container)`.
+  Formally, a member is an **Element** qualified by the value category of the
+  container and the cv-qualifiers of the access path.
 
- - **Example:** Given `kumi::tuple<int> t`, `get<0>(t)` yields the member `int&`,
- while `get<0>(std::move(t))` yields `int&&`.
+  - **Definition:** The result of `get<I>(container)`.
 
- ## Identifier
+  - **Example:** Given `kumi::tuple<int> t`, `get<0>(t)` yields the member `int&`,
+  while `get<0>(std::move(t))` yields `int&&`.
 
- An **identifier** is a compile-time constant or type used as a key to resolve
- a specific sub-object within a structure.
+  ---
 
- - **Definition:** A unique tag, integral constant, or symbolic name used for
- dispatching and name-binding.
+  ## Identifier
 
- - **Role:** It decouples the logical "address" of a value from its physical
- offset in memory.
+  An **identifier** is a compile-time constant or type used as a key to resolve
+  a specific sub-object within a structure.
 
- ## Field
+  - **Definition:** A unique tag, integral constant, or symbolic name used for
+  dispatching and name-binding.
 
- A **field** is the combination of an **Identifier** and its associated **Element**.
+  - **Role:** It decouples the logical "address" of a value from its physical
+  offset in memory.
 
- - **Formal Logic:** Let \f$ I \f$ be an Identifier and \f$ E \f$ be an Element.
- Then \f$ Field = \{I, E\} \f$.
+  ---
 
- - **Role:** Fields are used to define the schema of a tuple-like structure.
+  ## Field
 
- ## Label
+  A **field** is the combination of an **Identifier** and its associated **Element**.
 
- A **label** is the external, human-readable representation (string-equivalent)
- associated with an Identifier or Field.
+  - **Formal Logic:** Let \f$ I \f$ be an Identifier and \f$ E \f$ be an Element.
+  Then \f$ Field = \{I, E\} \f$.
 
- - **Definition:** The lexical name used for introspection, serialization,
- and diagnostic output.
+  - **Role:** Fields are used to define the schema of a tuple-like structure.
 
- - **Note:** While an **Identifier** is a programmatic entity (like a type or
- index), a **Label** is a literal value (typically a `const char*` or `string_view`), in
- kumi, there is a special type used to describe these : kumi::str.
+  ---
 
- ---
+  ## Label
 
- ## Summary Table
+  A **label** is the external, human-readable representation (string-equivalent)
+  associated with an Identifier or Field.
 
-| Concept       | Formal Analogy             | Domain        | Example                    |
-|:--------------|:---------------------------|:--------------|:---------------------------|
-| **Element**   | Value Type                 | Static Type   | `float`                    |
-| **Member**    | Reference/Access Type      | Invocation    | `float const&`             |
-| **Identifier**| Key / Index                | Metadata      | "my_data"_id               |
-| **Field**     | Schema Attribute           | Reflection    | `{id, type}` pair          |
-| **Label**     | Symbolic Name              | User Interface| `"velocity"`               |
+  - **Definition:** The lexical name used for introspection, serialization,
+  and diagnostic output.
+
+  - **Note:** While an **Identifier** is a programmatic entity (like a type or
+  index), a **Label** is a literal value (typically a `const char*` or `string_view`), in
+  kumi, there is a special type used to describe these : kumi::str.
+
+  ---
+
+  ## Summary Table
+  
+  | Concept       | Formal Analogy             | Domain        | Example                    |
+  |:--------------|:---------------------------|:--------------|:---------------------------|
+  | **Element**   | Value Type                 | Static Type   | `float`                    |
+  | **Member**    | Reference/Access Type      | Invocation    | `float const&`             |
+  | **Identifier**| Key / Index                | Metadata      | "my_data"_id               |
+  | **Field**     | Schema Attribute           | Reflection    | `{id, type}` pair          |
+  | **Label**     | Symbolic Name              | User Interface| `"velocity"`               |
 
 **/

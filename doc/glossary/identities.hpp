@@ -56,6 +56,8 @@ In C++ such a type can be written simply as an empty struct.
 struct unit {};
 ```
 
+---
+
 [In the next page](@ref product), we will see how to combine the simple types we saw until now in order to create more 
 complex types.
 
