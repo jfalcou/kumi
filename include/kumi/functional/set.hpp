@@ -43,6 +43,17 @@ namespace kumi
 
   namespace function
   {
+    //==================================================================================================================
+    /**
+      @ingroup  functional
+      @brief    Logic provider to compute the index map associated to the adjactent unicity operation.
+
+      ## Callable object
+      @code
+        inline constexpr unique_t uniquer{};
+      @endcode
+    **/
+    //==================================================================================================================
     struct unique_t
     {
       template<typename... Ts> KUMI_ABI consteval auto operator()(std::type_identity<Ts>...) const noexcept
@@ -62,6 +73,17 @@ namespace kumi
       }
     };
 
+    //==================================================================================================================
+    /**
+      @ingroup  functional
+      @brief    Logic provider to compute the index map associated to the adjactent unicity operation.
+
+      ## Callable object
+      @code
+        inline constexpr select_t selector{};
+      @endcode
+    **/
+    //==================================================================================================================
     struct select_t
     {
       template<bool... Bs> KUMI_ABI consteval auto operator()(std::bool_constant<Bs>...) const noexcept
@@ -82,6 +104,17 @@ namespace kumi
       }
     };
 
+    //==================================================================================================================
+    /**
+      @ingroup  functional
+      @brief    Logic provider to compute the index map associated to the adjactent unicity operation.
+
+      ## Callable object
+      @code
+        inline constexpr adjacent_unicity_t uniqued{};
+      @endcode
+    **/
+    //==================================================================================================================
     struct adjacent_unicity_t
     {
       template<concepts::product_type T> [[nodiscard]] KUMI_ABI consteval auto operator()(as<T>) const noexcept

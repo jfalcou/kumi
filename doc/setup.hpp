@@ -28,7 +28,7 @@
   $ git clone https://github.com/jfalcou/kumi.git
   @endcode
 
-  Once retrieved, you should have a `kumi` folder which contains the whole source code.
+  Once retrieved, you should have a %kumi folder which contains the whole source code.
 
   Create a `build` directory here and enter it. Once in the `build` directory,
   you can use  **CMake** to generate the build system for **KUMI**. We recommend using

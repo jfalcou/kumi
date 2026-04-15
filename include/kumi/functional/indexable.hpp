@@ -9,6 +9,17 @@
 
 namespace kumi::function
 {
+  //====================================================================================================================
+  /**
+    @ingroup functional
+    @brief  Logic provider to compute the index map associated to the cartesian product operation.
+
+    ## Callable object
+    @code
+      inline constexpr cartesian_product_t cartesian_producer{};
+    @endcode
+  **/
+  //====================================================================================================================
   struct cartesian_product_t
   {
     template<std::size_t H, std::size_t... S>
@@ -21,6 +32,17 @@ namespace kumi::function
     }
   };
 
+  //====================================================================================================================
+  /**
+    @ingroup functional
+    @brief  Logic provider to compute the index map associated to the concatenation operation.
+
+    ## Callable object
+    @code
+      inline constexpr cat_t concatenater{};
+    @endcode
+  **/
+  //====================================================================================================================
   struct cat_t
   {
     template<std::size_t... Sizes> KUMI_ABI consteval auto operator()(std::index_sequence<Sizes...>) const noexcept
@@ -32,6 +54,17 @@ namespace kumi::function
     }
   };
 
+  //====================================================================================================================
+  /**
+    @ingroup functional
+    @brief  Logic provider to compute the index map associated to the rotation operation.
+
+    ## Callable object
+    @code
+      inline constexpr rotate_t rotater{};
+    @endcode
+  **/
+  //====================================================================================================================
   struct rotate_t
   {
     template<std::size_t S, std::size_t R> KUMI_ABI consteval auto operator()(index_t<S>, index_t<R>) const noexcept
@@ -42,6 +75,17 @@ namespace kumi::function
     }
   };
 
+  //====================================================================================================================
+  /**
+    @ingroup functional
+    @brief  Logic provider to compute the index map associated to the reduction operation.
+
+    ## Callable object
+    @code
+      inline constexpr reduce_t reducer{};
+    @endcode
+  **/
+  //====================================================================================================================
   struct reduce_t
   {
     template<std::size_t N> KUMI_ABI consteval auto operator()(index_t<N>) const noexcept
@@ -56,6 +100,17 @@ namespace kumi::function
     }
   };
 
+  //====================================================================================================================
+  /**
+    @ingroup functional
+    @brief  Logic provider to compute the index map associated to the split operation.
+
+    ## Callable object
+    @code
+      inline constexpr split_t splitter{};
+    @endcode
+  **/
+  //====================================================================================================================
   struct split_t
   {
     template<std::size_t N, std::size_t Sz> KUMI_ABI consteval auto operator()(index_t<N>, index_t<Sz>) const noexcept
@@ -66,6 +121,17 @@ namespace kumi::function
     }
   };
 
+  //====================================================================================================================
+  /**
+    @ingroup functional
+    @brief  Logic provider to compute the index map associated to the tiling operation.
+
+    ## Callable object
+    @code
+      inline constexpr tile_t tiler{};
+    @endcode
+  **/
+  //====================================================================================================================
   struct tile_t
   {
     template<std::size_t Sz, std::size_t Extent, std::size_t Stride>
@@ -81,6 +147,17 @@ namespace kumi::function
     }
   };
 
+  //====================================================================================================================
+  /**
+    @ingroup functional
+    @brief  Logic provider to compute the index map associated to the zip operation.
+
+    ## Callable object
+    @code
+      inline constexpr zip_t zipper{};
+    @endcode
+  **/
+  //====================================================================================================================
   struct zip_t
   {
     template<std::size_t Count, std::size_t Size>
