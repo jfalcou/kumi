@@ -1,12 +1,21 @@
 var searchData=
 [
-  ['name_0',['name',['../structkumi_1_1name.html',1,'kumi']]],
-  ['new_20contributors_1',['New Contributors',['../changelog.html#autotoc_md433',1,'']]],
-  ['new_20features_2',['New Features',['../changelog.html#autotoc_md426',1,'New Features'],['../changelog.html#autotoc_md431',1,'New Features'],['../changelog.html#autotoc_md437',1,'New Features'],['../changelog.html#autotoc_md442',1,'New Features']]],
-  ['nomenclature_3',['Nomenclature',['../nomenclature.html',1,'']]],
-  ['non_5fempty_5fproduct_5ftype_4',['non_empty_product_type',['../conceptkumi_1_1concepts_1_1non__empty__product__type.html',1,'kumi::concepts']]],
-  ['none_5',['none',['../group__utility.html#gabe662caa7eff683f6b085c7abb76391b',1,'kumi']]],
-  ['none_5fof_6',['none_of',['../group__queries_ga5450fe960cb3282fc7c2b2d072128802.html#ga5450fe960cb3282fc7c2b2d072128802',1,'kumi::none_of(T &amp;&amp;t, Pred p) noexcept'],['../group__queries_ga8094ec3fd9bb7b61c5a41319bd3f6766.html#ga8094ec3fd9bb7b61c5a41319bd3f6766',1,'kumi::none_of(T &amp;&amp;t) noexcept']]],
-  ['numeric_5fadd_7',['numeric_add',['../structkumi_1_1function_1_1numeric__add.html',1,'kumi::function']]],
-  ['numeric_5fprod_8',['numeric_prod',['../structkumi_1_1function_1_1numeric__prod.html',1,'kumi::function']]]
+  ['make_5findexes_0',['make_indexes',['../group__utility_gadba148c334bcf52088dc64992c270fdd.html#gadba148c334bcf52088dc64992c270fdd',1,'kumi']]],
+  ['make_5frecord_1',['make_record',['../group__record__related_gabcc668b23119c18ca175ab618fd7949c.html#gabcc668b23119c18ca175ab618fd7949c',1,'kumi']]],
+  ['make_5ftuple_2',['make_tuple',['../group__tuple__related_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007',1,'kumi']]],
+  ['map_3',['map',['../group__transforms_ga446a1438a421885ef0a52c3933d0be5a.html#ga446a1438a421885ef0a52c3933d0be5a',1,'kumi']]],
+  ['map_5ffield_4',['map_field',['../group__record__transforms_ga325ce53da1e1706c3bba9c40e8477f20.html#ga325ce53da1e1706c3bba9c40e8477f20',1,'kumi']]],
+  ['map_5findex_5',['map_index',['../group__tuple__transforms_ga23eac0bc61cc84e8feabf8f67f438124.html#ga23eac0bc61cc84e8feabf8f67f438124',1,'kumi']]],
+  ['map_5freduce_6',['map_reduce',['../group__reductions_gace3f0fb4e67066f6f82052efd359b2b4.html#gace3f0fb4e67066f6f82052efd359b2b4',1,'kumi::map_reduce(Function f, M &amp;&amp;m, T &amp;&amp;t)'],['../group__reductions_gaa6b16ddb18150ef85f789e80593b68a2.html#gaa6b16ddb18150ef85f789e80593b68a2',1,'kumi::map_reduce(Function f, M &amp;&amp;m, T &amp;&amp;t, Value init)']]],
+  ['map_5ftraits_7',['map_traits',['../structkumi_1_1map__traits.html',1,'kumi']]],
+  ['max_8',['max',['../group__reductions_ga72159dc27be6b9aed9cc1d12ca019f28.html#ga72159dc27be6b9aed9cc1d12ca019f28',1,'kumi::max(T &amp;&amp;t) noexcept'],['../group__reductions_gae173eedc8b731830ea5df23aec9f14fa.html#gae173eedc8b731830ea5df23aec9f14fa',1,'kumi::max(T &amp;&amp;t, F f) noexcept']]],
+  ['max_5fflat_9',['max_flat',['../group__reductions_gafa660a662111704882e6c9005f34f818.html#gafa660a662111704882e6c9005f34f818',1,'kumi']]],
+  ['member_10',['Member',['../nomenclature.html#autotoc_md469',1,'']]],
+  ['member_11',['member',['../structkumi_1_1member.html',1,'kumi']]],
+  ['member_5fcast_12',['member_cast',['../group__generators_ga79787185d26368946a74f31ce5f6597c.html#ga79787185d26368946a74f31ce5f6597c',1,'kumi']]],
+  ['members_5fof_13',['members_of',['../structkumi_1_1tuple_ac67c6dbee8bf12133da3379826cde848.html#ac67c6dbee8bf12133da3379826cde848',1,'kumi::tuple::members_of()'],['../structkumi_1_1tuple_ac67c6dbee8bf12133da3379826cde848.html#ac67c6dbee8bf12133da3379826cde848',1,'kumi::members_of(as&lt; T &gt;) noexcept']]],
+  ['min_14',['min',['../group__reductions_ga2e588148a9b7eda028da7963770a5010.html#ga2e588148a9b7eda028da7963770a5010',1,'kumi::min(T &amp;&amp;t) noexcept'],['../group__reductions_gab860bed731b3d7499e9d85b1a3ce57b6.html#gab860bed731b3d7499e9d85b1a3ce57b6',1,'kumi::min(T &amp;&amp;t, F f) noexcept']]],
+  ['min_5fflat_15',['min_flat',['../group__reductions_ga931f495837b8f1c878fbb8a625ca9442.html#ga931f495837b8f1c878fbb8a625ca9442',1,'kumi']]],
+  ['monoid_16',['monoid',['../conceptkumi_1_1concepts_1_1monoid.html',1,'kumi::concepts']]],
+  ['multiplies_17',['multiplies',['../group__functional.html#gaaab79e5ddd9913e237c23b6ebbe0d274',1,'kumi::function']]]
 ];

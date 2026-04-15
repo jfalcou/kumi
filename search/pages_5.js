@@ -1,11 +1,6 @@
 var searchData=
 [
-  ['aggregate_20type_0',['Aggregate type',['../cpp_spec.html#autotoc_md447',1,'']]],
-  ['amazing_20amethyst_1',['Version 1.0 - Amazing Amethyst',['../changelog.html#autotoc_md443',1,'']]],
-  ['amethyst_2',['Version 1.0 - Amazing Amethyst',['../changelog.html#autotoc_md443',1,'']]],
-  ['and_3',['Product Constructions (The Logic of &quot;AND&quot;)',['../product.html#product_construction',1,'']]],
-  ['and_201_20of_20types_4',['The Identity Elements (The &quot;0&quot; and &quot;1&quot; of Types)',['../identity.html',1,'']]],
-  ['and_20infrastructure_20changes_5',['API and Infrastructure Changes',['../changelog.html#autotoc_md430',1,'']]],
-  ['api_20and_20infrastructure_20changes_6',['API and Infrastructure Changes',['../changelog.html#autotoc_md430',1,'']]],
-  ['autonomous_20public_20release_7',['First autonomous public release.',['../changelog.html#autotoc_md444',1,'']]]
+  ['_3a_0',[':',['../structkumi_1_1tuple_aaa14c34539f5fc51720d14b1786ee4ff.html#autotoc_md380',1,'Example :'],['../conceptkumi_1_1concepts_1_1projection__map.html#autotoc_md390',1,'Example types :']]],
+  ['_3a_200_1',['Empty Type : \\( (0 / \\bot) \\)',['../identity.html#empty',1,'']]],
+  ['_3a_203_2',['Unit Type : \\( (1 / \\top) \\)',['../identity.html#unit',1,'']]]
 ];

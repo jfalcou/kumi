@@ -6,6 +6,20 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="description" content="Efficeint C++20 implementation of tuple-like classes and algorithms with better compile-time" />
+<link rel="canonical" href="https://jfalcou.github.io/kumi/" />
+<link rel="icon" type="image/svg+xml" href="/logo.svg" />
+<meta property="og:title" content="KUMI - The C++20 Compact Tuple Tools" />
+<meta property="og:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://jfalcou.github.io/kumi/" />
+<meta property="og:image" content="https://jfalcou.github.io/kumi/card.png" />
+<meta property="og:site_name" content="KUMI Documentation" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="KUMI - The C++20 Compact Tuple Tools" />
+<meta name="twitter:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
+<meta name="twitter:image" content="https://jfalcou.github.io/kumi/card.png" /> ```
 <title>KUMI: The C++20 Compact Tuple Tools</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -85,9 +99,9 @@ MathJax.Hub.Config({
  <tr  style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">KUMI<span id="projectnumber">&#160;v3.1.0</span>
+   <div id="projectname">KUMI<span id="projectnumber">&#160;v4.0.0</span>
    </div>
-   <div id="projectbrief">Exquisite Epidote</div>
+   <div id="projectbrief">Flawless Fluorite</div>
   </td>
  </tr>
    <tr><td colspan="2" style="padding: 20px 0px 0px 0px;">        <div id="MSearchBox" class="MSearchBoxInactive">
@@ -162,9 +176,9 @@ $(function(){initNavTree('index.html','',''); });
 <li>Algorithm on tuples</li>
 <li>Record type handling</li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md476"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md480"></a>
 Examples</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md477"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md481"></a>
 Tuple</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -209,7 +223,7 @@ Tuple</h2>
 <div class="ttc" id="agroup__tuple__related_ga98e6c367de0e0f526565280a0856b007_html_ga98e6c367de0e0f526565280a0856b007"><div class="ttname"><a href="group__tuple__related_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007">kumi::make_tuple</a></div><div class="ttdeci">constexpr auto make_tuple(Ts &amp;&amp;... ts) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</div><div class="ttdoc">Creates a tuple object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> tuple.hpp:549</div></div>
 <div class="ttc" id="agroup__tuple__transforms_ga68e0e98957242f48da8dfeeaa29fec7d_html_ga68e0e98957242f48da8dfeeaa29fec7d"><div class="ttname"><a href="group__tuple__transforms_ga68e0e98957242f48da8dfeeaa29fec7d.html#ga68e0e98957242f48da8dfeeaa29fec7d">kumi::for_each_index</a></div><div class="ttdeci">constexpr void for_each_index(Function f, T &amp;&amp;t, Ts &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a product type and its index.</div><div class="ttdef"><b>Definition</b> for_each.hpp:81</div></div>
 <div class="ttc" id="astructkumi_1_1record_abc2cd329ad25d155458850c19cc3b137_html_abc2cd329ad25d155458850c19cc3b137"><div class="ttname"><a href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::record::get</a></div><div class="ttdeci">decltype(auto) constexpr get(record&lt; Ts... &gt; &amp;r) noexcept</div><div class="ttdoc">Extracts the Ith field from a kumi::record.</div><div class="ttdef"><b>Definition</b> record.hpp:605</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md478"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md482"></a>
 Record</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -253,7 +267,7 @@ Record</h2>
 <div class="ttc" id="agroup__record__related_gabcc668b23119c18ca175ab618fd7949c_html_gabcc668b23119c18ca175ab618fd7949c"><div class="ttname"><a href="group__record__related_gabcc668b23119c18ca175ab618fd7949c.html#gabcc668b23119c18ca175ab618fd7949c">kumi::make_record</a></div><div class="ttdeci">constexpr auto make_record(Ts &amp;&amp;... ts) -&gt; record&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt; requires(concepts::uniquely_named&lt; Ts... &gt; &amp;&amp;concepts::fully_named&lt; Ts... &gt;)</div><div class="ttdoc">Creates a record object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> record.hpp:489</div></div>
 <div class="ttc" id="agroup__record__transforms_ga15399097726371208bf338ce69088447_html_ga15399097726371208bf338ce69088447"><div class="ttname"><a href="group__record__transforms_ga15399097726371208bf338ce69088447.html#ga15399097726371208bf338ce69088447">kumi::for_each_field</a></div><div class="ttdeci">constexpr void for_each_field(Function f, R &amp;&amp;r, Rs &amp;&amp;... rs)</div><div class="ttdoc">Applies the Callable object f on each element of a record type and its field.</div><div class="ttdef"><b>Definition</b> for_each.hpp:119</div></div>
 <div class="ttc" id="astructkumi_1_1name_html"><div class="ttname"><a href="structkumi_1_1name.html">kumi::name</a></div><div class="ttdoc">Compile-time text based identifier.</div><div class="ttdef"><b>Definition</b> identifier.hpp:162</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md479"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md483"></a>
 Licence</h1>
 <p>This library is licensed under the <a href="https://opensource.org/licenses/BSL">Boost Software License</a>:</p>
 <div class="fragment"><div class="line">Copyright : KUMI Project Contributors</div>

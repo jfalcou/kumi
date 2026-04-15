@@ -1,8 +1,9 @@
 var searchData=
 [
-  ['label_0',['Label',['../nomenclature.html#autotoc_md471',1,'']]],
-  ['languages_20considerations_1',['Programming Languages Considerations',['../product.html#tuple_programming',1,'']]],
-  ['licence_2',['Licence',['../licence.html',1,'Licence'],['../index.html#autotoc_md479',1,'Licence']]],
-  ['log_3',['Change Log',['../changelog.html',1,'']]],
-  ['logic_20of_20and_4',['Product Constructions (The Logic of &quot;AND&quot;)',['../product.html#product_construction',1,'']]]
+  ['identifier_0',['Identifier',['../nomenclature.html#autotoc_md471',1,'']]],
+  ['identity_20elements_20the_200_20and_201_20of_20types_1',['The Identity Elements (The &quot;0&quot; and &quot;1&quot; of Types)',['../identity.html',1,'']]],
+  ['infra_2',['DOC and CI infra',['../changelog.html#autotoc_md426',1,'']]],
+  ['infrastructure_3',['Infrastructure',['../changelog.html#autotoc_md444',1,'']]],
+  ['infrastructure_20changes_4',['Infrastructure Changes',['../changelog.html#autotoc_md434',1,'API and Infrastructure Changes'],['../changelog.html#autotoc_md429',1,'Infrastructure Changes']]],
+  ['install_20from_20the_20source_5',['Install from the source',['../setup.html#setup-source',1,'']]]
 ];

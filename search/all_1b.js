@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['zip_0',['zip',['../group__generators_ga6fcdd03f2a3360cbb976cf05e0b0468c.html#ga6fcdd03f2a3360cbb976cf05e0b0468c',1,'kumi']]],
-  ['zip_5fmax_1',['zip_max',['../group__generators_gad2b81bc979a4089affddfdbef866e80b.html#gad2b81bc979a4089affddfdbef866e80b',1,'kumi']]],
-  ['zip_5fmin_2',['zip_min',['../group__generators_ga90d498013e5f387b2c906a4184644979.html#ga90d498013e5f387b2c906a4184644979',1,'kumi']]],
-  ['zip_5ft_3',['zip_t',['../structkumi_1_1function_1_1zip__t.html',1,'kumi::function']]],
-  ['zipper_4',['zipper',['../group__functional.html#gace9bd5d39a71c165db5d10c11197708c',1,'kumi::function']]]
+  ['what_20s_20changed_0',['What s Changed',['../changelog.html#autotoc_md428',1,'What&apos;s Changed'],['../changelog.html#autotoc_md433',1,'What&apos;s Changed'],['../changelog.html#autotoc_md439',1,'What&apos;s Changed'],['../changelog.html#autotoc_md443',1,'What&apos;s Changed']]],
+  ['windows_1',['windows',['../group__generators_gadbca06109e5b36b0d59eab4a0fc9accf.html#gadbca06109e5b36b0d59eab4a0fc9accf',1,'kumi']]],
+  ['with_20cpm_2',['Setup with CPM',['../setup.html#setup-cpm',1,'']]]
 ];

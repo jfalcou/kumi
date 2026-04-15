@@ -6,6 +6,20 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="description" content="Efficeint C++20 implementation of tuple-like classes and algorithms with better compile-time" />
+<link rel="canonical" href="https://jfalcou.github.io/kumi/" />
+<link rel="icon" type="image/svg+xml" href="/logo.svg" />
+<meta property="og:title" content="KUMI - The C++20 Compact Tuple Tools" />
+<meta property="og:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://jfalcou.github.io/kumi/" />
+<meta property="og:image" content="https://jfalcou.github.io/kumi/card.png" />
+<meta property="og:site_name" content="KUMI Documentation" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="KUMI - The C++20 Compact Tuple Tools" />
+<meta name="twitter:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
+<meta name="twitter:image" content="https://jfalcou.github.io/kumi/card.png" /> ```
 <title>KUMI: Nomenclature</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
@@ -85,9 +99,9 @@ MathJax.Hub.Config({
  <tr  style="height: 56px;">
   <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
   <td id="projectalign">
-   <div id="projectname">KUMI<span id="projectnumber">&#160;v3.1.0</span>
+   <div id="projectname">KUMI<span id="projectnumber">&#160;v4.0.0</span>
    </div>
-   <div id="projectbrief">Exquisite Epidote</div>
+   <div id="projectbrief">Flawless Fluorite</div>
   </td>
  </tr>
    <tr><td colspan="2" style="padding: 20px 0px 0px 0px;">        <div id="MSearchBox" class="MSearchBoxInactive">
@@ -157,14 +171,14 @@ $(function(){initNavTree('nomenclature.html','',''); });
 <div class="textblock"><p>This document establishes the formal vocabulary used throughout the KUMI library to ensure consistency across API documentation, error messages, and internal implementation details.</p>
 <p>In the context of <b>KUMI</b>, a distinction is made between types as stored, types as accessed, and the metadata used to describe them.</p>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md463"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md467"></a>
 Element</h2>
 <p>An <b>element</b> is the fundamental constituent type of a heterogenous container. In literature, this corresponds to the <em>Value Type</em> ( \( T \)) stored within a node.</p><ul>
 <li><b>Definition:</b> The raw, decayed type provided during template instantiation.</li>
 <li><b>Example:</b> In <span class="tt"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>&lt;int, double&gt;</span>, the elements are <span class="tt">int</span> and <span class="tt">double</span>.</li>
 </ul>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md465"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md469"></a>
 Member</h2>
 <p>A <b>member</b> is the functional result of a sub-object access operation, the result of a projection.</p>
 <p>Formally, a member is an <b>Element</b> qualified by the value category of the container and the cv-qualifiers of the access path.</p>
@@ -173,7 +187,7 @@ Member</h2>
 <li><b>Example:</b> Given <span class="tt"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>&lt;int&gt; t</span>, <span class="tt">get&lt;0&gt;(t)</span> yields the member <span class="tt">int&amp;</span>, while <span class="tt">get&lt;0&gt;(std::move(t))</span> yields <span class="tt">int&amp;&amp;</span>.</li>
 </ul>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md467"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md471"></a>
 Identifier</h2>
 <p>An <b>identifier</b> is a compile-time constant or type used as a key to resolve a specific sub-object within a structure.</p>
 <ul>
@@ -181,7 +195,7 @@ Identifier</h2>
 <li><b>Role:</b> It decouples the logical "address" of a value from its physical offset in memory.</li>
 </ul>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md469"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md473"></a>
 Field</h2>
 <p>A <b>field</b> is the combination of an <b>Identifier</b> and its associated <b>Element</b>.</p>
 <ul>
@@ -189,7 +203,7 @@ Field</h2>
 <li><b>Role:</b> Fields are used to define the schema of a tuple-like structure.</li>
 </ul>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md471"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md475"></a>
 Label</h2>
 <p>A <b>label</b> is the external, human-readable representation (string-equivalent) associated with an Identifier or Field.</p>
 <ul>
@@ -197,7 +211,7 @@ Label</h2>
 <li><b>Note:</b> While an <b>Identifier</b> is a programmatic entity (like a type or index), a <b>Label</b> is a literal value (typically a <span class="tt">const char*</span> or <span class="tt">string_view</span>), in kumi, there is a special type used to describe these : <a class="el" href="structkumi_1_1str.html" title="Static string used to create named fields.">kumi::str</a>.</li>
 </ul>
 <hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md473"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md477"></a>
 Summary Table</h2>
 <table class="markdownTable">
 <tr class="markdownTableHead">

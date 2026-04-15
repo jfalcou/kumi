@@ -1,10 +1,8 @@
 var searchData=
 [
-  ['pre_20requisites_0',['Pre-requisites',['../setup.html#prerequisit',1,'']]],
-  ['product_20constructions_20the_20logic_20of_20and_1',['Product Constructions (The Logic of &quot;AND&quot;)',['../product.html#product_construction',1,'']]],
-  ['product_20type_2027_2',['Product Type \\( (A \\times B) \\)',['../product.html#product_type',1,'']]],
-  ['product_20types_3',['Product Types',['../product.html',1,'']]],
-  ['programming_20languages_20considerations_4',['Programming Languages Considerations',['../product.html#tuple_programming',1,'']]],
-  ['protocol_5',['Tuple Protocol',['../cpp_spec.html#autotoc_md451',1,'']]],
-  ['public_20release_6',['First autonomous public release.',['../changelog.html#autotoc_md444',1,'']]]
+  ['object_0',['object',['../structkumi_1_1function_1_1cartesian__product__t.html#autotoc_md334',1,'Callable object'],['../structkumi_1_1function_1_1cat__t.html#autotoc_md335',1,'Callable object'],['../structkumi_1_1function_1_1rotate__t.html#autotoc_md336',1,'Callable object'],['../structkumi_1_1function_1_1reduce__t.html#autotoc_md337',1,'Callable object'],['../structkumi_1_1function_1_1split__t.html#autotoc_md338',1,'Callable object'],['../structkumi_1_1function_1_1tile__t.html#autotoc_md339',1,'Callable object'],['../structkumi_1_1function_1_1zip__t.html#autotoc_md340',1,'Callable object'],['../structkumi_1_1function_1_1unique__t.html#autotoc_md343',1,'Callable object'],['../structkumi_1_1function_1_1select__t.html#autotoc_md344',1,'Callable object'],['../structkumi_1_1function_1_1adjacent__unicity__t.html#autotoc_md345',1,'Callable object']]],
+  ['of_20and_1',['Product Constructions (The Logic of &quot;AND&quot;)',['../product.html#product_construction',1,'']]],
+  ['of_20types_2',['The Identity Elements (The &quot;0&quot; and &quot;1&quot; of Types)',['../identity.html',1,'']]],
+  ['optimization_3',['Empty Base Optimization',['../cpp_spec.html#autotoc_md449',1,'']]],
+  ['origin_4',['Origin',['../introduction.html#origin',1,'']]]
 ];

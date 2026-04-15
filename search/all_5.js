@@ -1,28 +1,6 @@
 var searchData=
 [
-  ['adjacent_5funicity_5ft_0',['adjacent_unicity_t',['../structkumi_1_1function_1_1adjacent__unicity__t.html',1,'kumi::function']]],
-  ['aggregate_20type_1',['Aggregate type',['../cpp_spec.html#autotoc_md447',1,'']]],
-  ['algorithms_2',['Product Type Algorithms',['../group__algorithm.html',1,'']]],
-  ['all_5fof_3',['all_of',['../group__queries_ga72fb1b09abe23dbd9c6f2783c98c0c5d.html#ga72fb1b09abe23dbd9c6f2783c98c0c5d',1,'kumi::all_of(T &amp;&amp;t, Pred p) noexcept'],['../group__queries_ga599b0ea5293a040316abedd19bb72f42.html#ga599b0ea5293a040316abedd19bb72f42',1,'kumi::all_of(T &amp;&amp;t) noexcept']]],
-  ['all_5funique_4',['all_unique',['../group__generators_gacf670e19ac40c8981f52ad0783a3e483.html#gacf670e19ac40c8981f52ad0783a3e483',1,'kumi']]],
-  ['all_5funique_5fnames_5',['all_unique_names',['../structkumi_1_1all__unique__names.html',1,'kumi']]],
-  ['all_5funiques_6',['all_uniques',['../structkumi_1_1all__uniques.html',1,'kumi']]],
-  ['amazing_20amethyst_7',['Version 1.0 - Amazing Amethyst',['../changelog.html#autotoc_md443',1,'']]],
-  ['amethyst_8',['Version 1.0 - Amazing Amethyst',['../changelog.html#autotoc_md443',1,'']]],
-  ['and_9',['Product Constructions (The Logic of &quot;AND&quot;)',['../product.html#product_construction',1,'']]],
-  ['and_201_20of_20types_10',['The Identity Elements (The &quot;0&quot; and &quot;1&quot; of Types)',['../identity.html',1,'']]],
-  ['and_20associated_20functions_11',['and associated Functions',['../group__tuple__related.html',1,'Product Types and associated Functions'],['../group__record__related.html',1,'Record Types and associated Functions']]],
-  ['and_20function_12',['Helper Types and function',['../group__functional.html',1,'']]],
-  ['and_20functions_13',['and Functions',['../group__details.html',1,'Helper Types and Functions'],['../group__utility.html',1,'Helper Types and Functions']]],
-  ['and_20infrastructure_20changes_14',['API and Infrastructure Changes',['../changelog.html#autotoc_md430',1,'']]],
-  ['any_5fof_15',['any_of',['../group__queries_ga77b8923d8b86a504f8b683d16a9f1c3b.html#ga77b8923d8b86a504f8b683d16a9f1c3b',1,'kumi::any_of(T &amp;&amp;t, Pred p) noexcept'],['../group__queries_ga372b7bd18ab6b59234a6c68d74d298cf.html#ga372b7bd18ab6b59234a6c68d74d298cf',1,'kumi::any_of(T &amp;&amp;t) noexcept']]],
-  ['api_20and_20infrastructure_20changes_16',['API and Infrastructure Changes',['../changelog.html#autotoc_md430',1,'']]],
-  ['apply_17',['apply',['../group__transforms_ga9982fadb19cb52094d6165bca7f57f25.html#ga9982fadb19cb52094d6165bca7f57f25',1,'kumi']]],
-  ['apply_5ftraits_18',['apply_traits',['../structkumi_1_1apply__traits.html',1,'kumi']]],
-  ['as_19',['as',['../structkumi_1_1as.html',1,'kumi']]],
-  ['as_5fflat_5fptr_20',['as_flat_ptr',['../group__generators_ga418f0a47f05b67dbb354d274dee63e4e.html#ga418f0a47f05b67dbb354d274dee63e4e',1,'kumi']]],
-  ['as_5fstreamable_21',['as_streamable',['../group__utility_gae8a72b55c5e0a89b70663342e2c36eaf.html#gae8a72b55c5e0a89b70663342e2c36eaf',1,'streamable.hpp']]],
-  ['as_5ftuple_22',['as_tuple',['../structkumi_1_1as__tuple.html',1,'kumi']]],
-  ['associated_20functions_23',['associated Functions',['../group__tuple__related.html',1,'Product Types and associated Functions'],['../group__record__related.html',1,'Record Types and associated Functions']]],
-  ['autonomous_20public_20release_24',['First autonomous public release.',['../changelog.html#autotoc_md444',1,'']]]
+  ['_3a_0',[':',['../structkumi_1_1tuple_aaa14c34539f5fc51720d14b1786ee4ff.html#autotoc_md380',1,'Example :'],['../conceptkumi_1_1concepts_1_1projection__map.html#autotoc_md390',1,'Example types :']]],
+  ['_3a_200_1',['Empty Type : \\( (0 / \\bot) \\)',['../identity.html#empty',1,'']]],
+  ['_3a_203_2',['Unit Type : \\( (1 / \\top) \\)',['../identity.html#unit',1,'']]]
 ];
