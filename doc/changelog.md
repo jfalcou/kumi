@@ -1,6 +1,71 @@
 Change Log {#changelog}
 ==========
 
+# Version 4.0 - Flawless Fluorite
+
+### New Features
+* **Named Fields & Records**:
+    * Introducing named fields and record support (#110, #112).
+    * Introducing record protocol and record support in algorithms (#132, #144).
+    * Support for types as identifiers and `get` via label (#168, #186).
+* **New Algorithms**:
+    * Introducing [`generate`](@ref kumi::generate) and [`fill`](@ref kumi::fill) (#107).
+    * Introducing [`windows`](@ref kumi::windows) and [`chunks`](@ref kumi::chunks) (#123).
+    * Introducing [`filter`](@ref kumi::filter)   and [`filter_not`](@ref kumi::filter_not) (#124).
+    * Introducing [`reindex`](@ref kumi::reindex) algorithm (#130).
+    * Introducing [`unique`](@ref kumi::unique) and [`all_unique`](@ref kumi::all_unique) algorithms (#139).
+    * Introducing [`reduce`](@ref kumi::reduce) and [inclusive and exclusive scans](@ref kumi::inclusive_scan_left) (#137).
+    * Introducing [rotate algorithms](@ref kumi::rotate_left)  (#154).
+    * Add projection maps support (#182).
+    * Implement `map_traits` (#104).
+* **Core Logic & Performance**:
+    * Introducing `builder` for tuple construction (#111).
+    * Introducing [`empty_product_type`](@ref kumi::concepts::empty_product_type) concept (#143).
+    * Make `std::array` and static `std::span` behave as product types (#140).
+    * Introduce `as_streamable` extension point (#145).
+    * Implicit conversion operator on tuples (#152).
+    * Removed `.cast()` and callable behavior (#135).
+    * Introduce static container adaptation (#158).
+    * Move from opt-in to detection for product type semantic (#160).
+    * Empty Base Optimization (EBO) support (#163, #167).
+
+### FIXES
+* **Compiler & Compatibility**:
+    * Reimplement `cartesian_product` for latest MSVC compatibility (#97).
+    * Fix shadow warnings (#108).
+    * Fix qualification consideration in concepts (#136).
+    * Missing `typename` for C++20 (#128).
+    * Fix for TTS v3 (#129).
+    * Remove spurious semicolons triggering errors on older GCC versions (#188).
+* **Logic & Bug Fixes**:
+    * Make `std::is_empty` work as expected on tuples and records (#138).
+    * Fix IO of field capture of empty type (#165).
+    * Improve diagnostic of invalid `get` (#150).
+    * Use `static_assert` instead of `requires` for logic errors (#184).
+    * Clarify error messages for invalid records (#166).
+* **Refinement**:
+    * Make `operator<` better (#98).
+    * Add `KUMI_ABI` markers to enhance codegen and CUDA `__host__` `__device__` support (#119, #121).
+    * Make tuple algorithms accept forwarding references (#127).
+    * Move towards `invoke` instead of raw callable application (#161).
+    * Simplification of `field_capture` unwrapping (#141).
+    * Move concepts to their own namespace (#170).
+    * Test missing record algorithms + doc (#178).
+
+### DOC and CI infra
+* **Documentation**:
+    * Fixup `FetchContent` docs (#91).
+    * Rearrange tree links in documentation (#117).
+    * Refurbish documentation and fix rendering/links (#185, #197).
+    * Fix README code block and badge appearance (#187, #194).
+
+* **CI & Infrastructure**:
+    * Move KUMI standalone file to its own branch (#114, #120).
+    * Add explicit standalone tests and proper standalone file (#116, #176,#174).
+    * Move to CI v10 and update to latest CI infra (#105, #196).
+    * Migration to `precommit` (#157).
+
+
 # Version 3.1 - Exquisite Epidote
 
 ## What's Changed
