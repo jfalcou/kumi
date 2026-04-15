@@ -162,9 +162,9 @@ $(function(){initNavTree('index.html','',''); });
 <li>Algorithm on tuples</li>
 <li>Record type handling</li>
 </ul>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md466"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md476"></a>
 Examples</h1>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md467"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md477"></a>
 Tuple</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -209,7 +209,7 @@ Tuple</h2>
 <div class="ttc" id="agroup__tuple__related_ga98e6c367de0e0f526565280a0856b007_html_ga98e6c367de0e0f526565280a0856b007"><div class="ttname"><a href="group__tuple__related_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007">kumi::make_tuple</a></div><div class="ttdeci">constexpr auto make_tuple(Ts &amp;&amp;... ts) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</div><div class="ttdoc">Creates a tuple object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> tuple.hpp:549</div></div>
 <div class="ttc" id="agroup__tuple__transforms_ga68e0e98957242f48da8dfeeaa29fec7d_html_ga68e0e98957242f48da8dfeeaa29fec7d"><div class="ttname"><a href="group__tuple__transforms_ga68e0e98957242f48da8dfeeaa29fec7d.html#ga68e0e98957242f48da8dfeeaa29fec7d">kumi::for_each_index</a></div><div class="ttdeci">constexpr void for_each_index(Function f, T &amp;&amp;t, Ts &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a product type and its index.</div><div class="ttdef"><b>Definition</b> for_each.hpp:81</div></div>
 <div class="ttc" id="astructkumi_1_1record_abc2cd329ad25d155458850c19cc3b137_html_abc2cd329ad25d155458850c19cc3b137"><div class="ttname"><a href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::record::get</a></div><div class="ttdeci">decltype(auto) constexpr get(record&lt; Ts... &gt; &amp;r) noexcept</div><div class="ttdoc">Extracts the Ith field from a kumi::record.</div><div class="ttdef"><b>Definition</b> record.hpp:605</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md468"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md478"></a>
 Record</h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -253,7 +253,7 @@ Record</h2>
 <div class="ttc" id="agroup__record__related_gabcc668b23119c18ca175ab618fd7949c_html_gabcc668b23119c18ca175ab618fd7949c"><div class="ttname"><a href="group__record__related_gabcc668b23119c18ca175ab618fd7949c.html#gabcc668b23119c18ca175ab618fd7949c">kumi::make_record</a></div><div class="ttdeci">constexpr auto make_record(Ts &amp;&amp;... ts) -&gt; record&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt; requires(concepts::uniquely_named&lt; Ts... &gt; &amp;&amp;concepts::fully_named&lt; Ts... &gt;)</div><div class="ttdoc">Creates a record object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> record.hpp:489</div></div>
 <div class="ttc" id="agroup__record__transforms_ga15399097726371208bf338ce69088447_html_ga15399097726371208bf338ce69088447"><div class="ttname"><a href="group__record__transforms_ga15399097726371208bf338ce69088447.html#ga15399097726371208bf338ce69088447">kumi::for_each_field</a></div><div class="ttdeci">constexpr void for_each_field(Function f, R &amp;&amp;r, Rs &amp;&amp;... rs)</div><div class="ttdoc">Applies the Callable object f on each element of a record type and its field.</div><div class="ttdef"><b>Definition</b> for_each.hpp:119</div></div>
 <div class="ttc" id="astructkumi_1_1name_html"><div class="ttname"><a href="structkumi_1_1name.html">kumi::name</a></div><div class="ttdoc">Compile-time text based identifier.</div><div class="ttdef"><b>Definition</b> identifier.hpp:162</div></div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md469"></a>
+</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="autotoc_md479"></a>
 Licence</h1>
 <p>This library is licensed under the <a href="https://opensource.org/licenses/BSL">Boost Software License</a>:</p>
 <div class="fragment"><div class="line">Copyright : KUMI Project Contributors</div>

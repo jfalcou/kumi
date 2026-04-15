@@ -1,6 +1,10 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <tagfile doxygen_version="1.16.1" doxygen_gitid="669aeeefca743c148e2d935b3d3c69535c7491e6">
   <compound kind="struct">
+    <name>kumi::function::adjacent_unicity_t</name>
+    <filename>structkumi_1_1function_1_1adjacent__unicity__t.html</filename>
+  </compound>
+  <compound kind="struct">
     <name>kumi::all_unique_names</name>
     <filename>structkumi_1_1all__unique__names.html</filename>
     <templarg>typename Ints</templarg>
@@ -74,6 +78,14 @@
     <name>kumi::builder</name>
     <filename>structkumi_1_1builder.html</filename>
     <templarg>typename T</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::function::cartesian_product_t</name>
+    <filename>structkumi_1_1function_1_1cartesian__product__t.html</filename>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::function::cat_t</name>
+    <filename>structkumi_1_1function_1_1cat__t.html</filename>
   </compound>
   <compound kind="struct">
     <name>kumi::common_product_type</name>
@@ -729,6 +741,14 @@
       <arglist>(record&lt; Ts... &gt; const &amp;&amp;r) noexcept</arglist>
     </member>
   </compound>
+  <compound kind="struct">
+    <name>kumi::function::reduce_t</name>
+    <filename>structkumi_1_1function_1_1reduce__t.html</filename>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::function::rotate_t</name>
+    <filename>structkumi_1_1function_1_1rotate__t.html</filename>
+  </compound>
   <compound kind="class">
     <name>kumi::function::scannable</name>
     <filename>structkumi_1_1function_1_1scannable.html</filename>
@@ -764,6 +784,10 @@
     </member>
   </compound>
   <compound kind="struct">
+    <name>kumi::function::select_t</name>
+    <filename>structkumi_1_1function_1_1select__t.html</filename>
+  </compound>
+  <compound kind="struct">
     <name>kumi::size</name>
     <filename>structkumi_1_1size.html</filename>
     <templarg>typename T</templarg>
@@ -773,6 +797,10 @@
     <filename>structkumi_1_1function_1_1size__or.html</filename>
     <templarg>typename T</templarg>
     <templarg>auto V</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::function::split_t</name>
+    <filename>structkumi_1_1function_1_1split__t.html</filename>
   </compound>
   <compound kind="struct">
     <name>kumi::stored_element</name>
@@ -789,6 +817,10 @@
   <compound kind="class">
     <name>kumi::str</name>
     <filename>structkumi_1_1str.html</filename>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::function::tile_t</name>
+    <filename>structkumi_1_1function_1_1tile__t.html</filename>
   </compound>
   <compound kind="class">
     <name>kumi::tuple</name>
@@ -1145,6 +1177,10 @@
       <arglist>(tuple&lt; Ts... &gt; const &amp;&amp;t) noexcept</arglist>
     </member>
   </compound>
+  <compound kind="struct">
+    <name>kumi::function::unique_t</name>
+    <filename>structkumi_1_1function_1_1unique__t.html</filename>
+  </compound>
   <compound kind="class">
     <name>kumi::unit</name>
     <filename>structkumi_1_1unit.html</filename>
@@ -1152,6 +1188,10 @@
   <compound kind="class">
     <name>kumi::unknown</name>
     <filename>structkumi_1_1unknown.html</filename>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::function::zip_t</name>
+    <filename>structkumi_1_1function_1_1zip__t.html</filename>
   </compound>
   <compound kind="concept">
     <name>kumi::concepts::compatible_product_types</name>
@@ -2657,15 +2697,25 @@
     <name>functional</name>
     <title>Helper Types and function</title>
     <filename>group__functional.html</filename>
+    <class kind="struct">kumi::function::adjacent_unicity_t</class>
     <class kind="class">kumi::function::boolean_and</class>
     <class kind="class">kumi::function::boolean_or</class>
     <class kind="class">kumi::function::boolean_xor</class>
+    <class kind="struct">kumi::function::cartesian_product_t</class>
+    <class kind="struct">kumi::function::cat_t</class>
     <class kind="struct">kumi::function::element_or</class>
     <class kind="class">kumi::function::foldable</class>
     <class kind="class">kumi::function::numeric_add</class>
     <class kind="class">kumi::function::numeric_prod</class>
+    <class kind="struct">kumi::function::reduce_t</class>
+    <class kind="struct">kumi::function::rotate_t</class>
     <class kind="class">kumi::function::scannable</class>
+    <class kind="struct">kumi::function::select_t</class>
     <class kind="struct">kumi::function::size_or</class>
+    <class kind="struct">kumi::function::split_t</class>
+    <class kind="struct">kumi::function::tile_t</class>
+    <class kind="struct">kumi::function::unique_t</class>
+    <class kind="struct">kumi::function::zip_t</class>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::bind_back</name>

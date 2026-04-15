@@ -188,7 +188,7 @@ requires (sizeof...(Us) == sizeof...(Ts)) &amp;&amp; (!std::same_as&lt;<a class=
 </dl>
 <dl class="section note"><dt>Note</dt><dd>This function does not participate in overload resolution if the target tuple cannot be constructed from the values of the source, if their size does not match or if they are the same type. The conversion is explicit if the conversion of some member to the target needs to be explicit.</dd></dl>
 <p>This permits the conversion from a tuple&lt;T&gt;&amp; to a tuple&lt;T&amp;&gt; which makes it suitable for some zip-like cases such as building a structure of arrays iterator.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md370"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md380"></a>
 Example :</h2>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
