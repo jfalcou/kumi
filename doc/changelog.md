@@ -2,10 +2,6 @@ Change Log {#changelog}
 ==========
 
 # Version 4.0 - Flawless Fluorite
-## What's Changed
-
-v4.0 Introduces a lot of new algorithm, a new type (`record`) and fixes a bunch of performance and clarity issues.
-A bunch of old functions has been deprecated, hence the major version bump.
 
 ### New Features
 * **Named Fields & Records**:
@@ -13,22 +9,22 @@ A bunch of old functions has been deprecated, hence the major version bump.
     * Introducing record protocol and record support in algorithms (#132, #144).
     * Support for types as identifiers and `get` via label (#168, #186).
 * **New Algorithms**:
-    * Implement `generate` and `fill` (#107).
-    * Introducing `windows` & `chunks` (#123).
-    * Introducing `filter` & `filter_not` (#124).
-    * Introducing `reindex` algorithm (#130).
-    * Add `unique` / `all_unique` algorithms (#139).
-    * Introducing `reduce` & `scans` (#137).
-    * Introducing `rotate` algorithm (#154).
+    * Introducing [`generate`](@ref kumi::generate) and [`fill`](@ref kumi::fill) (#107).
+    * Introducing [`windows`](@ref kumi::windows) and [`chunks`](@ref kumi::chunks) (#123).
+    * Introducing [`filter`](@ref kumi::filter)   and [`filter_not`](@ref kumi::filter_not) (#124).
+    * Introducing [`reindex`](@ref kumi::reindex) algorithm (#130).
+    * Introducing [`unique`](@ref kumi::unique) and [`all_unique`](@ref kumi::all_unique) algorithms (#139).
+    * Introducing [`reduce`](@ref kumi::reduce) and [inclusive and exclusive scans](@ref kumi::inclusive_scan_left) (#137).
+    * Introducing [rotate algorithms](@ref kumi::rotate_left)  (#154).
     * Add projection maps support (#182).
     * Implement `map_traits` (#104).
 * **Core Logic & Performance**:
     * Introducing `builder` for tuple construction (#111).
-    * Introducing `empty_product_type` concept (#143).
+    * Introducing [`empty_product_type`](@ref kumi::concepts::empty_product_type) concept (#143).
     * Make `std::array` and static `std::span` behave as product types (#140).
     * Introduce `as_streamable` extension point (#145).
     * Implicit conversion operator on tuples (#152).
-    * Deprecate `.cast()` and callable behavior (#135).
+    * Removed `.cast()` and callable behavior (#135).
     * Introduce static container adaptation (#158).
     * Move from opt-in to detection for product type semantic (#160).
     * Empty Base Optimization (EBO) support (#163, #167).
@@ -68,6 +64,7 @@ A bunch of old functions has been deprecated, hence the major version bump.
     * Add explicit standalone tests and proper standalone file (#116, #176,#174).
     * Move to CI v10 and update to latest CI infra (#105, #196).
     * Migration to `precommit` (#157).
+
 
 # Version 3.1 - Exquisite Epidote
 
