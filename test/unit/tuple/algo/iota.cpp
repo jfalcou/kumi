@@ -12,6 +12,7 @@
 
 TTS_CASE("Check runtime kumi::iota behavior")
 {
+  TTS_EQUAL(kumi::iota<0>(1), kumi::tuple{});
   TTS_EQUAL(kumi::iota<1>(1), (kumi::tuple{1}));
   TTS_EQUAL(kumi::iota<2>(2.f), (kumi::tuple{2.f, 3.f}));
   TTS_EQUAL(kumi::iota<3>(3.), (kumi::tuple{3., 4., 5.}));
@@ -20,6 +21,7 @@ TTS_CASE("Check runtime kumi::iota behavior")
 
 TTS_CASE("Check constexpr kumi::iota behavior")
 {
+  TTS_CONSTEXPR_EQUAL(kumi::iota<0>(1), kumi::tuple{});
   TTS_CONSTEXPR_EQUAL(kumi::iota<1>(1), (kumi::tuple{1}));
   TTS_CONSTEXPR_EQUAL(kumi::iota<2>(2.f), (kumi::tuple{2.f, 3.f}));
   TTS_CONSTEXPR_EQUAL(kumi::iota<3>(3.), (kumi::tuple{3., 4., 5.}));
