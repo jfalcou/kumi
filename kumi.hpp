@@ -3166,22 +3166,28 @@ namespace kumi
 {
   template<std::size_t N, typename T> [[nodiscard]] KUMI_ABI constexpr auto fill(T const& v) noexcept
   {
-    return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      auto eval = [](auto, auto const& vv) { return vv; };
-      return kumi::tuple{eval(index<I>, v)...};
-    }(std::make_index_sequence<N>{});
+    if constexpr (N == 0) return kumi::tuple{};
+    else
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        auto eval = [](auto, auto const& vv) { return vv; };
+        return kumi::tuple{eval(index<I>, v)...};
+      }(std::make_index_sequence<N>{});
   }
   template<std::size_t N, typename Function> [[nodiscard]] KUMI_ABI constexpr auto generate(Function const& f) noexcept
   {
-    return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return kumi::tuple{invoke(f, index<I>)...};
-    }(std::make_index_sequence<N>{});
+    if constexpr (N == 0) return kumi::tuple{};
+    else
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return kumi::tuple{invoke(f, index<I>)...};
+      }(std::make_index_sequence<N>{});
   }
   template<std::size_t N, typename T> [[nodiscard]] KUMI_ABI constexpr auto iota(T v) noexcept
   {
-    return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return kumi::tuple{static_cast<T>(v + I)...};
-    }(std::make_index_sequence<N>{});
+    if constexpr (N == 0) return kumi::tuple{};
+    else
+      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+        return kumi::tuple{static_cast<T>(v + I)...};
+      }(std::make_index_sequence<N>{});
   }
   namespace result
   {
