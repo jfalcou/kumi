@@ -54,7 +54,7 @@ x : bool      // A formal variable
 ```
 
 Then in order to be able to manipulate these types, there is the concept of functions terms. This is simply a function 
-in the programming sens. Given a parameter of a type \f$ \sigma \f$ and a return type \f$ \tau \f$ the associated function
+in the programming sense. Given a parameter of a type \f$ \sigma \f$ and a return type \f$ \tau \f$ the associated function
 is noted \f$ \sigma \rightarrow \tau \f$. The addition of two real numbers can then written as : 
 add : nat \f$ \rightarrow \f$ (nat \f$ \rightarrow \f$ nat)
 

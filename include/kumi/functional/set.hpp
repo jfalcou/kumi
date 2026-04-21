@@ -117,7 +117,7 @@ namespace kumi
     //==================================================================================================================
     struct adjacent_unicity_t
     {
-      template<concepts::product_type T> [[nodiscard]] KUMI_ABI consteval auto operator()(as<T>) const noexcept
+      template<concepts::product_type T> KUMI_ABI consteval auto operator()(as<T>) const noexcept
       {
         struct
         {

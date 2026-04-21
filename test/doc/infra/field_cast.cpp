@@ -10,11 +10,11 @@ int main()
 {
   using namespace kumi::literals;
 
-  auto field = ( "x"_id = 1 ); 
+  auto field = ( "x"_id = 'x' ); 
   
-  auto caster = ( "y"_id = 'x' );
+  auto caster = ( "y"_id = 1 );
 
   std::cout << field << "\n";
-  std::cout << kumi::field_cast<char>(field) << "\n";
+  std::cout << kumi::field_cast<int>(field) << "\n";
   std::cout << kumi::field_cast<decltype(caster)>(field) << "\n";
 }

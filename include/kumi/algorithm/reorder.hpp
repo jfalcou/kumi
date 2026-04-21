@@ -89,7 +89,7 @@ namespace kumi
   **/
   //====================================================================================================================
   template<concepts::identifier auto... Name, concepts::product_type Tuple>
-  KUMI_ABI constexpr auto reorder_fields(Tuple&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto reorder_fields(Tuple&& t)
   {
     static_assert((requires { get<Name>(std::declval<Tuple>()); } && ...),
                   "[KUMI] - Identifier not present in input type");

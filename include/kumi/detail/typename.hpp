@@ -10,7 +10,7 @@
 namespace kumi::_
 {
   // Type -> String converter
-  template<typename T> constexpr auto typer() noexcept
+  template<typename T> [[nodiscard]] KUMI_ABI constexpr auto typer() noexcept
   {
 #if defined(__clang__)
     constexpr auto pfx = kumi::str{"auto kumi::_::typer() [T = "}.size();

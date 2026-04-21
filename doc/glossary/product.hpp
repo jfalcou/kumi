@@ -109,9 +109,9 @@ It follows **Set Algebra** on top of **List Algebra**.
                     is isomorphic to `{y: float, x: int}` because the set of labels and their associated types are identical.
 + **Semantic Access**: Access is performed via labels (`get<'x'>(r)`), adding semantic meaning to the structure.
 
-Operation on records are traditionally not structural in the sens that they operate per label, never per 
+Operation on records are traditionally not structural in the sense that they operate per label, never per 
 element. However, as they are internally represented by a tuple, such operation are permitted. As an example, one
-could "rotate" a record \f$ n \f$ positions to the left. Mathematically this might not make a lot of sens
+could "rotate" a record \f$ n \f$ positions to the left. Mathematically this might not make a lot of sense
 whereas for a programmer that has to consider memory representation, this is potentially critical to have.
 
 **/
