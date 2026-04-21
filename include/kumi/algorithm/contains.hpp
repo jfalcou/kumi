@@ -128,7 +128,8 @@ namespace kumi
   **/
   //====================================================================================================================
   template<concepts::product_type T, concepts::identifier... Is>
-  [[nodiscard]] KUMI_ABI constexpr auto contains_only([[maybe_unused]] T&& t, [[maybe_unused]] Is const&... ids) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto contains_only([[maybe_unused]] T&& t,
+                                                      [[maybe_unused]] Is const&... ids) noexcept
   {
     if constexpr (concepts::empty_product_type<T>) return std::false_type{};
     else if constexpr (sizeof...(Is) == 0) return std::false_type{};

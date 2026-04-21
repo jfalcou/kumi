@@ -1037,7 +1037,10 @@ namespace kumi
       return kumi::make_tuple(KUMI_FWD(args)...);
     }
 
-    template<typename... Args> [[nodiscard]] KUMI_ABI static constexpr auto build(Args&&... args) { return kumi::tuple{KUMI_FWD(args)...}; }
+    template<typename... Args> [[nodiscard]] KUMI_ABI static constexpr auto build(Args&&... args)
+    {
+      return kumi::tuple{KUMI_FWD(args)...};
+    }
   };
 
   // As we are lacking a proper mechanism to find the least restrictive subtype, we fallback to a specializable trait
