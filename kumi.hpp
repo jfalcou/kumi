@@ -547,7 +547,7 @@ namespace kumi
 }
 namespace kumi::_
 {
-  template<typename T> constexpr auto typer() noexcept
+  template<typename T> [[nodiscard]] KUMI_ABI constexpr auto typer() noexcept
   {
 #if defined(__clang__)
     constexpr auto pfx = kumi::str{"auto kumi::_::typer() [T = "}.size();
@@ -1203,8 +1203,7 @@ namespace kumi
     template<typename... Ts>
     concept follows_same_semantic = ((product_type<Ts> && !record_type<Ts>) && ...) || ((record_type<Ts> && ...));
     template<typename T, typename... Us>
-    concept compatible_product_types =
-      (follows_same_semantic<T, Us...> && ((!record_type<T>) || (equivalent<T, Us> && ...)));
+    concept compatible_product_types = (follows_same_semantic<T, Us...> && (equivalent<T, Us> && ...));
     template<typename M>
     concept monoid = requires {
       { std::remove_cvref_t<M>::identity };
@@ -1748,9 +1747,9 @@ namespace kumi
   template<> struct tuple<>
   {
     static constexpr bool is_homogeneous = false;
-    static constexpr auto size() noexcept { return std::size_t{0}; }
-    static constexpr auto empty() noexcept { return true; }
-    static constexpr auto names() noexcept { return tuple{}; }
+    [[nodiscard]] KUMI_ABI static constexpr auto size() noexcept { return std::size_t{0}; }
+    [[nodiscard]] KUMI_ABI static constexpr auto empty() noexcept { return true; }
+    [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept { return tuple{}; }
     KUMI_ABI friend constexpr auto operator<=>(tuple<>, tuple<>) noexcept = default;
     template<typename T>
     [[nodiscard]] KUMI_ABI constexpr operator T() const noexcept
@@ -1990,11 +1989,14 @@ namespace kumi
   {
     using type = T;
     template<typename... Us> using to = kumi::tuple<Us...>;
-    template<typename... Args> static constexpr auto make(Args&&... args)
+    template<typename... Args> [[nodiscard]] KUMI_ABI static constexpr auto make(Args&&... args)
     {
       return kumi::make_tuple(KUMI_FWD(args)...);
     }
-    template<typename... Args> static constexpr auto build(Args&&... args) { return kumi::tuple{KUMI_FWD(args)...}; }
+    template<typename... Args> [[nodiscard]] KUMI_ABI static constexpr auto build(Args&&... args)
+    {
+      return kumi::tuple{KUMI_FWD(args)...};
+    }
   };
   template<concepts::product_type... Ts>
   requires(!concepts::record_type<Ts> && ...)
@@ -2175,10 +2177,10 @@ namespace kumi
   {
     using is_record_type = void;
     static constexpr bool is_homogeneous = false;
-    static constexpr auto size() noexcept { return std::size_t{0}; }
-    static constexpr auto empty() noexcept { return true; }
-    static constexpr auto names() noexcept { return tuple{}; }
-    static constexpr auto values() noexcept { return tuple{}; }
+    [[nodiscard]] KUMI_ABI static constexpr auto size() noexcept { return std::size_t{0}; }
+    [[nodiscard]] KUMI_ABI static constexpr auto empty() noexcept { return true; }
+    [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept { return tuple{}; }
+    [[nodiscard]] KUMI_ABI static constexpr auto values() noexcept { return tuple{}; }
     KUMI_ABI friend constexpr auto operator<=>(record<>, record<>) noexcept = default;
     template<typename T>
     [[nodiscard]] KUMI_ABI constexpr operator T() const noexcept
@@ -2209,7 +2211,7 @@ namespace kumi
   };
   template<typename... Ts> KUMI_CUDA record(Ts&&...) -> record<std::unwrap_ref_decay_t<Ts>...>;
   template<concepts::identifier auto... Fields, typename... Ts>
-  KUMI_ABI constexpr auto tie(Ts&... ts) -> record<field<decltype(Fields), Ts&>...>
+  [[nodiscard]] KUMI_ABI constexpr auto tie(Ts&... ts) -> record<field<decltype(Fields), Ts&>...>
   requires(sizeof...(Fields) == sizeof...(Ts))
   {
     return {ts...};
@@ -2363,11 +2365,14 @@ namespace kumi
   {
     using type = R;
     template<typename... Us> using to = kumi::record<Us...>;
-    template<typename... Args> static constexpr auto make(Args&&... args)
+    template<typename... Args> [[nodiscard]] KUMI_ABI static constexpr auto make(Args&&... args)
     {
       return kumi::make_record(KUMI_FWD(args)...);
     }
-    template<typename... Args> static constexpr auto build(Args&&... args) { return kumi::record{KUMI_FWD(args)...}; }
+    template<typename... Args> [[nodiscard]] KUMI_ABI static constexpr auto build(Args&&... args)
+    {
+      return kumi::record{KUMI_FWD(args)...};
+    }
   };
   template<concepts::record_type... Ts> struct common_product_type<Ts...>
   {
@@ -2591,7 +2596,7 @@ namespace kumi
     };
     struct adjacent_unicity_t
     {
-      template<concepts::product_type T> [[nodiscard]] KUMI_ABI consteval auto operator()(as<T>) const noexcept
+      template<concepts::product_type T> KUMI_ABI consteval auto operator()(as<T>) const noexcept
       {
         struct
         {
@@ -2704,7 +2709,7 @@ namespace kumi::function
     {
       return function::foldable{invoke(c, f.value)};
     }
-    constexpr auto operator()() const noexcept { return value; }
+    KUMI_ABI constexpr auto operator()() const noexcept { return value; }
   };
   template<typename F, typename V> struct scannable
   {
@@ -2886,10 +2891,10 @@ namespace kumi
   namespace _
   {
     template<typename T, typename... Ts>
-    constexpr bool contains = ((concepts::field<T> && std::invocable<T, tag_of_t<Ts>>) || ...);
+    inline constexpr bool contains = ((concepts::field<T> && std::invocable<T, tag_of_t<Ts>>) || ...);
   }
   template<concepts::product_type T, concepts::identifier ID>
-  KUMI_ABI constexpr auto contains([[maybe_unused]] T&& t, [[maybe_unused]] ID const& id) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto contains([[maybe_unused]] T&& t, [[maybe_unused]] ID const& id) noexcept
   {
     if constexpr (concepts::empty_product_type<T>) return std::false_type{};
     else if constexpr (concepts::record_type<T>)
@@ -2904,14 +2909,15 @@ namespace kumi
       }(std::make_index_sequence<size_v<T>>{});
   }
   template<concepts::product_type T, concepts::identifier... Is>
-  KUMI_ABI constexpr auto contains_any([[maybe_unused]] T&& t, Is const&... ids) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto contains_any([[maybe_unused]] T&& t, Is const&... ids) noexcept
   {
     if constexpr (concepts::empty_product_type<T>) return std::false_type{};
     else if constexpr (sizeof...(Is) == 0) return std::false_type{};
     else return std::bool_constant<(decltype(contains(std::declval<T>(), ids)){} || ...)>{};
   }
   template<concepts::product_type T, concepts::identifier... Is>
-  KUMI_ABI constexpr auto contains_only([[maybe_unused]] T&& t, [[maybe_unused]] Is const&... ids) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto contains_only([[maybe_unused]] T&& t,
+                                                      [[maybe_unused]] Is const&... ids) noexcept
   {
     if constexpr (concepts::empty_product_type<T>) return std::false_type{};
     else if constexpr (sizeof...(Is) == 0) return std::false_type{};
@@ -2922,7 +2928,7 @@ namespace kumi
       }(std::make_index_sequence<size_v<T>>{});
   }
   template<concepts::product_type T, concepts::identifier... Is>
-  KUMI_ABI constexpr auto contains_none([[maybe_unused]] T&& t, Is const&... ids) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto contains_none([[maybe_unused]] T&& t, Is const&... ids) noexcept
   {
     return std::bool_constant<!decltype(contains_any(std::declval<T>(), ids...)){}>{};
   }
@@ -3731,7 +3737,7 @@ namespace kumi
     return builder<T>::make(get<Idx>(KUMI_FWD(t))...);
   }
   template<concepts::identifier auto... Name, concepts::product_type Tuple>
-  KUMI_ABI constexpr auto reorder_fields(Tuple&& t)
+  [[nodiscard]] KUMI_ABI constexpr auto reorder_fields(Tuple&& t)
   {
     static_assert((requires { get<Name>(std::declval<Tuple>()); } && ...),
                   "[KUMI] - Identifier not present in input type");
@@ -3960,7 +3966,7 @@ namespace kumi
 }
 namespace kumi
 {
-  template<std::size_t R, concepts::product_type T> constexpr auto rotate_left(T&& t)
+  template<std::size_t R, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto rotate_left(T&& t)
   {
     if constexpr (concepts::empty_product_type<T>) return KUMI_FWD(t);
     else if constexpr ((R % size_v<T>) == 0) return KUMI_FWD(t);
@@ -3973,7 +3979,7 @@ namespace kumi
       }(idxs);
     }
   }
-  template<std::size_t R, concepts::product_type T> constexpr auto rotate_right(T&& t)
+  template<std::size_t R, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto rotate_right(T&& t)
   {
     if constexpr (concepts::empty_product_type<T>) return KUMI_FWD(t);
     else if constexpr ((R % size_v<T>) == 0) return KUMI_FWD(t);
