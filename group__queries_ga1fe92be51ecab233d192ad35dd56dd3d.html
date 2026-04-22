@@ -189,7 +189,7 @@ template&lt;concepts::product_type T, concepts::identifier... Is&gt; </div>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -213,7 +213,7 @@ Helper type</h2>
 <div class="line">  <span class="keyword">using </span>contains_none_t = <span class="keyword">typename</span> <a class="code hl_function" href="#ga1fe92be51ecab233d192ad35dd56dd3d">contains_none</a>&lt;T,ID...&gt;::type;</div>
 <div class="line">}</div>
 <div class="ttc" id="aconceptkumi_1_1concepts_1_1identifier_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier</a></div><div class="ttdoc">Concept specifying a type represent an identifier.</div><div class="ttdef"><b>Definition</b> concepts.hpp:193</div></div>
-<div class="ttc" id="agroup__queries_ga1fe92be51ecab233d192ad35dd56dd3d_html_ga1fe92be51ecab233d192ad35dd56dd3d"><div class="ttname"><a href="#ga1fe92be51ecab233d192ad35dd56dd3d">kumi::contains_none</a></div><div class="ttdeci">constexpr auto contains_none(T &amp;&amp;t, Is const &amp;... ids) noexcept</div><div class="ttdoc">Checks if a product type contains no fields based on any of the selected identifiers.</div><div class="ttdef"><b>Definition</b> contains.hpp:172</div></div>
+<div class="ttc" id="agroup__queries_ga1fe92be51ecab233d192ad35dd56dd3d_html_ga1fe92be51ecab233d192ad35dd56dd3d"><div class="ttname"><a href="#ga1fe92be51ecab233d192ad35dd56dd3d">kumi::contains_none</a></div><div class="ttdeci">constexpr auto contains_none(T &amp;&amp;t, Is const &amp;... ids) noexcept</div><div class="ttdoc">Checks if a product type contains no fields based on any of the selected identifiers.</div><div class="ttdef"><b>Definition</b> contains.hpp:173</div></div>
 </div><!-- fragment --><p>Computes the type returned by a call to contains_none.</p>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md37"></a>
 Examples:</h2>

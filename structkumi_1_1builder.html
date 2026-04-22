@@ -169,15 +169,39 @@ $(function(){initNavTree('structkumi_1_1builder.html','',''); });
 </div><!--header-->
 <div class="contents">
 
-<p>Helper structure to build the correct output product type based on the given template parameter. If the provided product type is a not a record_type the builder will output a tuple otherwise a record. One can specialize the builder for it's own type matching the product type semantic.  
+<p><a class="el" href="structkumi_1_1builder.html" title="kumi::builder provides a generic way of defining a product type.">kumi::builder</a> provides a generic way of defining a product type.  
  <a href="#details">More...</a></p>
 
 <p><code>#include &lt;kumi/utils/builder.hpp&gt;</code></p>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
-class kumi::builder&lt; T &gt;</div><p>Helper structure to build the correct output product type based on the given template parameter. If the provided product type is a not a record_type the builder will output a tuple otherwise a record. One can specialize the builder for it's own type matching the product type semantic. </p>
-<p>builder provides a generic way of defining a product type. Depending on the given semantic of the input parameter (product type or record type), it will output respectively a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> or a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>.</p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
+class kumi::builder&lt; T &gt;</div><p><a class="el" href="structkumi_1_1builder.html" title="kumi::builder provides a generic way of defining a product type.">kumi::builder</a> provides a generic way of defining a product type. </p>
+<p>Helper structure to build the correct output product type based on the given template parameter. If the provided product type is a not a record_type the builder will output a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> otherwise a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>. One can specialize the builder for it's own type matching the product type semantic.</p>
+<p>A type for which the builder has been specialized is then suitable to be used as the return type from any algorithm.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md384"></a>
+Example</h2>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>cplx { <span class="keywordtype">float</span> re, im; };</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line"><span class="keyword">concept </span>is_cplx = std::is_same_v&lt;std::remove_cvref_t&lt;T&gt;,cplx&gt;;</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Builder protocole</span></div>
+<div class="line"><span class="keyword">template</span>&lt;is_cplx T&gt;</div>
+<div class="line"><span class="keyword">struct </span><a class="code hl_class" href="structkumi_1_1builder.html">builder</a>&lt;T&gt;</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">using </span>type = T;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">template</span>&lt;std::floating_point... Us&gt; <span class="keyword">requires</span> (<span class="keyword">sizeof</span>...(Us) == 2) <span class="keyword">using</span> to = cplx;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> make(<span class="keywordtype">float</span> r, <span class="keywordtype">float</span> i)</div>
+<div class="line">  {</div>
+<div class="line">    returni cplx{r,i};</div>
+<div class="line">  }</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> build(<span class="keywordtype">float</span> r, <span class="keywordtype">float</span> i) { <span class="keywordflow">return</span> cplx{r,i}; }</div>
+<div class="line">};</div>
+<div class="ttc" id="astructkumi_1_1builder_html"><div class="ttname"><a href="structkumi_1_1builder.html">kumi::builder</a></div><div class="ttdoc">kumi::builder provides a generic way of defining a product type.</div><div class="ttdef"><b>Definition</b> builder.hpp:94</div></div>
+</div><!-- fragment --><dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">T</td><td>the template type to be built. </td></tr>
   </table>

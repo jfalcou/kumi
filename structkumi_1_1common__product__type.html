@@ -176,7 +176,7 @@ $(function(){initNavTree('structkumi_1_1common__product__type.html','',''); });
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename... Ts&gt;<br />
 struct kumi::common_product_type&lt; Ts &gt;</div><p>Extracts the common product_type of a parameter pack. </p>
-<p>If all the types are record types then it returns an empty record type, otherwise returns an empty product type. As we are unable to compute the Least Restrictive Subtype of a pack, this trait should be specialized for each case one would want to write. For the kumi library, it is specialized for <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> and <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a></p>
+<p>If all the types are record types then it returns an empty record type, otherwise returns an empty product type. As we are unable to compute the Least Restrictive Subtype of a pack, this trait should be specialized for each case one would want to write. In the library, it is specialized for <a class="el" href="conceptkumi_1_1concepts_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::concepts::product_type</a> and <a class="el" href="conceptkumi_1_1concepts_1_1record__type.html" title="Concept specifying a type follows the Record Type semantic.">kumi::concepts::record_type</a>. It is used in algorithm taking multiple product types as input in order to determine the correct output type.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Ts</td><td>The product types to access</td></tr>
@@ -190,7 +190,16 @@ Helper type</h2>
 <div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt; <span class="keyword">using </span>common_product_type_t = <span class="keyword">typename</span> <a class="code hl_struct" href="structkumi_1_1common__product__type.html">common_product_type</a>&lt;Ts...&gt;::type;</div>
 <div class="line">}</div>
 <div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
-<div class="ttc" id="astructkumi_1_1common__product__type_html"><div class="ttname"><a href="structkumi_1_1common__product__type.html">kumi::common_product_type</a></div><div class="ttdoc">Extracts the common product_type of a parameter pack.</div><div class="ttdef"><b>Definition</b> builder.hpp:34</div></div>
+<div class="ttc" id="astructkumi_1_1common__product__type_html"><div class="ttname"><a href="structkumi_1_1common__product__type.html">kumi::common_product_type</a></div><div class="ttdoc">Extracts the common product_type of a parameter pack.</div><div class="ttdef"><b>Definition</b> builder.hpp:48</div></div>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md383"></a>
+Example</h2>
+<div class="fragment"><div class="line"><span class="keyword">struct </span>cplx{ <span class="keywordtype">float</span> re, im; };</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt; <span class="keyword">requires</span> (std::is_same_v&lt;Ts, cplx&gt;)</div>
+<div class="line"><span class="keyword">struct</span> <a class="code hl_struct" href="structkumi_1_1common__product__type.html">kumi::common_product_type&lt;Ts...&gt;</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">using </span>type = cplx;</div>
+<div class="line">};</div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

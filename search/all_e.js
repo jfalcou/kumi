@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['identifier_0',['Identifier',['../nomenclature.html#autotoc_md471',1,'']]],
+  ['identifier_0',['Identifier',['../nomenclature.html#autotoc_md473',1,'']]],
   ['identifier_1',['identifier',['../structkumi_1_1identifier.html',1,'kumi::identifier&lt; ID, Checker &gt;'],['../conceptkumi_1_1concepts_1_1identifier.html',1,'kumi::concepts'],['../structkumi_1_1identifier.html#a63367163ac0f0e4920f6eb18b2b2129e',1,'kumi::identifier::identifier() noexcept'],['../structkumi_1_1identifier_a3b9a31cc021cee475c3dd820c966a104.html#a3b9a31cc021cee475c3dd820c966a104',1,'kumi::identifier::identifier(ID const &amp;id, Checker const &amp;check) noexcept']]],
   ['identifier_5fof_2',['identifier_of',['../group__utility_gab3919ec6f8098dd1fdafe9c3a79ef0dc.html#gab3919ec6f8098dd1fdafe9c3a79ef0dc',1,'kumi']]],
   ['identifiers_3',['identifiers',['../structkumi_1_1record.html#ac730d46c3db986909e0c910b74648b4a',1,'kumi::record::identifiers()'],['../structkumi_1_1tuple.html#a20bf7b884e66f42a41076a4b1535054b',1,'kumi::tuple::identifiers()'],['../group__utility_ga63a205c6c2502e733987043857abea05.html#ga63a205c6c2502e733987043857abea05',1,'kumi::identifiers()']]],
@@ -12,9 +12,9 @@ var searchData=
   ['index_9',['index',['../conceptkumi_1_1concepts_1_1index.html',1,'kumi::concepts'],['../group__utility.html#ga32a67892e5dbfb93a2292959a5a029d0',1,'kumi::index']]],
   ['index_5ft_10',['index_t',['../structkumi_1_1index__t.html',1,'kumi']]],
   ['indexes_11',['indexes',['../group__utility_ga6882a4ada4935fa0fd4ef32ce3716ffb.html#ga6882a4ada4935fa0fd4ef32ce3716ffb',1,'kumi']]],
-  ['infra_12',['DOC and CI infra',['../changelog.html#autotoc_md426',1,'']]],
-  ['infrastructure_13',['Infrastructure',['../changelog.html#autotoc_md444',1,'']]],
-  ['infrastructure_20changes_14',['Infrastructure Changes',['../changelog.html#autotoc_md434',1,'API and Infrastructure Changes'],['../changelog.html#autotoc_md429',1,'Infrastructure Changes']]],
+  ['infra_12',['DOC and CI infra',['../changelog.html#autotoc_md428',1,'']]],
+  ['infrastructure_13',['Infrastructure',['../changelog.html#autotoc_md446',1,'']]],
+  ['infrastructure_20changes_14',['Infrastructure Changes',['../changelog.html#autotoc_md436',1,'API and Infrastructure Changes'],['../changelog.html#autotoc_md431',1,'Infrastructure Changes']]],
   ['inner_5fproduct_15',['inner_product',['../group__reductions_gae9e0f77ffe8399c701ba32532db19d11.html#gae9e0f77ffe8399c701ba32532db19d11',1,'kumi::inner_product(S1 &amp;&amp;s1, S2 &amp;&amp;s2, T init, Sum sum, Prod prod) noexcept'],['../namespacekumi.html#aecc2a0ba7a4f6dce228e0c5181889668',1,'kumi::inner_product(S1 &amp;&amp;s1, S2 &amp;&amp;s2, T init) noexcept']]],
   ['install_20from_20the_20source_16',['Install from the source',['../setup.html#setup-source',1,'']]],
   ['invoke_17',['invoke',['../group__functional_gaf1c366392fa05d8bd5da7b91902924af.html#gaf1c366392fa05d8bd5da7b91902924af',1,'kumi']]],

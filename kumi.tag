@@ -3466,8 +3466,6 @@
     <name>concepts</name>
     <title>Product Type Related Concepts</title>
     <filename>group__concepts.html</filename>
-    <subgroup>record_concepts</subgroup>
-    <subgroup>tuple_concepts</subgroup>
     <concept>kumi::concepts::compatible_product_types</concept>
     <concept>kumi::concepts::container</concept>
     <concept>kumi::concepts::contains_identifier</concept>
@@ -3600,11 +3598,6 @@
     </member>
   </compound>
   <compound kind="group">
-    <name>record_concepts</name>
-    <title>Record Related Concepts</title>
-    <filename>group__record__concepts.html</filename>
-  </compound>
-  <compound kind="group">
     <name>record_traits</name>
     <title>Record Related Traits</title>
     <filename>group__record__traits.html</filename>
@@ -3676,11 +3669,6 @@
       <anchor>ga324cc6775ad5b15767fc2eaae02abd73</anchor>
       <arglist>(Type &amp;&amp;r)</arglist>
     </member>
-  </compound>
-  <compound kind="group">
-    <name>tuple_concepts</name>
-    <title>Tuple Related Concepts</title>
-    <filename>group__tuple__concepts.html</filename>
   </compound>
   <compound kind="group">
     <name>tuple_traits</name>

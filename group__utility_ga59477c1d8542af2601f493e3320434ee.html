@@ -189,7 +189,7 @@ $(function(){initNavTree('group__utility_ga59477c1d8542af2601f493e3320434ee.html
 </div><div class="memdoc">
 
 <p>Casts the provided value to the target type using <span class="tt">static_cast</span>. </p>
-<dl class="section note"><dt>Note</dt><dd>If the type to convert to models <a class="el" href="conceptkumi_1_1concepts_1_1field.html" title="Concept specifying a type represent a field.">kumi::concepts::field</a>, does not rename the input parameter.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>If the type to convert models <a class="el" href="conceptkumi_1_1concepts_1_1field.html" title="Concept specifying a type represent a field.">kumi::concepts::field</a>, the function does not rename the input parameter.</dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">U</td><td>The type to convert the parameter to. </td></tr>
@@ -223,12 +223,12 @@ Example:</h2>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> field = ( <span class="stringliteral">&quot;x&quot;</span>_id = 1 ); </div>
+<div class="line">  <span class="keyword">auto</span> field = ( <span class="stringliteral">&quot;x&quot;</span>_id = <span class="charliteral">&#39;x&#39;</span> ); </div>
 <div class="line">  </div>
-<div class="line">  <span class="keyword">auto</span> caster = ( <span class="stringliteral">&quot;y&quot;</span>_id = <span class="charliteral">&#39;x&#39;</span> );</div>
+<div class="line">  <span class="keyword">auto</span> caster = ( <span class="stringliteral">&quot;y&quot;</span>_id = 1 );</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; field &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; kumi::field_cast&lt;char&gt;(field) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; kumi::field_cast&lt;int&gt;(field) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; kumi::field_cast&lt;decltype(caster)&gt;(field) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --> 
