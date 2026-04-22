@@ -416,8 +416,7 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename T, typename... Us>
-    concept compatible_product_types =
-      (follows_same_semantic<T, Us...> && ((!record_type<T>) || (equivalent<T, Us> && ...)));
+    concept compatible_product_types = (follows_same_semantic<T, Us...> && (equivalent<T, Us> && ...));
 
     //==================================================================================================================
     /**

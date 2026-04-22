@@ -439,11 +439,11 @@ namespace kumi
   {
     static constexpr bool is_homogeneous = false;
 
-    static constexpr auto size() noexcept { return std::size_t{0}; }
+    [[nodiscard]] KUMI_ABI static constexpr auto size() noexcept { return std::size_t{0}; }
 
-    static constexpr auto empty() noexcept { return true; }
+    [[nodiscard]] KUMI_ABI static constexpr auto empty() noexcept { return true; }
 
-    static constexpr auto names() noexcept { return tuple{}; }
+    [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept { return tuple{}; }
 
     KUMI_ABI friend constexpr auto operator<=>(tuple<>, tuple<>) noexcept = default;
 
@@ -1032,12 +1032,15 @@ namespace kumi
 
     template<typename... Us> using to = kumi::tuple<Us...>;
 
-    template<typename... Args> static constexpr auto make(Args&&... args)
+    template<typename... Args> [[nodiscard]] KUMI_ABI static constexpr auto make(Args&&... args)
     {
       return kumi::make_tuple(KUMI_FWD(args)...);
     }
 
-    template<typename... Args> static constexpr auto build(Args&&... args) { return kumi::tuple{KUMI_FWD(args)...}; }
+    template<typename... Args> [[nodiscard]] KUMI_ABI static constexpr auto build(Args&&... args)
+    {
+      return kumi::tuple{KUMI_FWD(args)...};
+    }
   };
 
   // As we are lacking a proper mechanism to find the least restrictive subtype, we fallback to a specializable trait

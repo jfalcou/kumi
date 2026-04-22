@@ -23,14 +23,6 @@ namespace kumi
     @defgroup concepts     Product Type Related Concepts
     @brief    Definition for product types related Concepts
 
-    @defgroup tuple_concepts  Tuple Related Concepts
-    @ingroup  concepts
-    @brief    Definition for kumi::tuple related concepts
-
-    @defgroup record_concepts Record Related Concepts
-    @ingroup  concepts
-    @brief    Definition for kumi::record related concepts
-
     @defgroup traits     Product Type Related Traits
     @brief    Definition for product types traits and extension points
 

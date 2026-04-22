@@ -21,7 +21,6 @@ To be an aggregate, a type generally must have:
 + No user-declared constructors.
 + No virtual functions.
 
-Why it matters:
 Aggregates allow for Aggregate Initialization, which is often faster and allows for cleaner syntax
 than defining complex constructors.
 
@@ -32,16 +31,16 @@ than defining complex constructors.
 Introduced in C++20, a [Structural Type](https://eel.is/c++draft/temp#param-12) is a class type that can be used as a Non-Type Template Parameter
 (NTTP).
 
-Previously, template parameters were limited to integers or pointers. Now, you can pass complex objects
-(like a fixed-size vector or a tuple) as a template argument, provided the type is "Structural"
-(roughly: public members, no complex copying logic).
+Previously, template parameters were limited to integers or pointers. Now, one can pass complex objects
+(like a tuple) as a template argument, provided the type is "Structural" (roughly: public members, 
+no complex copying logic).
 
 ---
 
 ## Tuple Protocol
 
 The [Tuple Protocol](https://eel.is/c++draft/dcl.struct.bind) is a set of standardized "hooks" in the C++ Standard Library. By implementing these
-hooks for your custom class, you tell the compiler: "Treat my class like a tuple".
+hooks for a custom class, one tells the compiler to treat the class like a tuple.
 
 To satisfy the protocol, a type T must specialize:
 
@@ -53,8 +52,7 @@ std::tuple_element<I, T>;   //Reports the type of the element at index I.
 type.get<I>() / get<I>(type); //A function to access the element.
 ```
 
-Why is this useful?
-It enables Structured Bindings, allowing users to unpack your custom types easily
+It enables Structured Bindings, allowing one to unpack custom types easily
 
 This serves as a manual reflection mechanism, as C++ (prior to C++26) lacks a proper reflection
 mechanism to inspect structures, these functions specifications are giving the necessary informations

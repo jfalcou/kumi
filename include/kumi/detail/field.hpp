@@ -260,7 +260,7 @@ namespace kumi
     @ingroup  utility
     @brief    Casts the provided value to the target type using `static_cast`.
 
-    @note If the type to convert to models kumi::concepts::field, does not rename the input parameter.
+    @note If the type to convert models kumi::concepts::field, the function does not rename the input parameter.
 
     @tparam   U The type to convert the parameter to.
     @param    t A forwarding reference to the input object.

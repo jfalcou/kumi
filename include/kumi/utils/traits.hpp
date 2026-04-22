@@ -411,10 +411,10 @@ namespace kumi
   //====================================================================================================================
   /**
     @ingroup record_traits
-    @brief Provides indexed access to the types of the elements of a product type and
-                    unwraps the returned field_capture for record type.
+    @brief  Provides indexed access to the types of the elements of a product type and
+            unwraps the returned `field` for record type.
 
-    @note is equivalent to element_t on product type that doesnt model record type.
+    @note Is equivalent to element_t on product types that are not record types.
 
     @tparam I Index of the type to retrieve
     @tparam T Product type to access
@@ -495,8 +495,8 @@ namespace kumi
   //====================================================================================================================
   /**
     @ingroup traits
-    @brief   Checks if a parameter pack only contains distinct kumi::field_member names.
-             Evaluates to false if no type is a kumi::field_member.
+    @brief   Checks if a parameter pack only contains distinct kumi::field names.
+             Evaluates to false if no type is a kumi::field.
 
     @tparam Ints The Index of the types in the parameter pack
     @tparam Ts The types to access

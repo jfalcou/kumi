@@ -12,7 +12,7 @@ namespace kumi
   namespace _
   {
     template<typename T, typename... Ts>
-    constexpr bool contains = ((concepts::field<T> && std::invocable<T, tag_of_t<Ts>>) || ...);
+    inline constexpr bool contains = ((concepts::field<T> && std::invocable<T, tag_of_t<Ts>>) || ...);
   }
 
   //====================================================================================================================
@@ -46,7 +46,7 @@ namespace kumi
   **/
   //====================================================================================================================
   template<concepts::product_type T, concepts::identifier ID>
-  KUMI_ABI constexpr auto contains([[maybe_unused]] T&& t, [[maybe_unused]] ID const& id) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto contains([[maybe_unused]] T&& t, [[maybe_unused]] ID const& id) noexcept
   {
     if constexpr (concepts::empty_product_type<T>) return std::false_type{};
     else if constexpr (concepts::record_type<T>)
@@ -91,7 +91,7 @@ namespace kumi
   **/
   //====================================================================================================================
   template<concepts::product_type T, concepts::identifier... Is>
-  KUMI_ABI constexpr auto contains_any([[maybe_unused]] T&& t, Is const&... ids) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto contains_any([[maybe_unused]] T&& t, Is const&... ids) noexcept
   {
     if constexpr (concepts::empty_product_type<T>) return std::false_type{};
     else if constexpr (sizeof...(Is) == 0) return std::false_type{};
@@ -128,7 +128,8 @@ namespace kumi
   **/
   //====================================================================================================================
   template<concepts::product_type T, concepts::identifier... Is>
-  KUMI_ABI constexpr auto contains_only([[maybe_unused]] T&& t, [[maybe_unused]] Is const&... ids) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto contains_only([[maybe_unused]] T&& t,
+                                                      [[maybe_unused]] Is const&... ids) noexcept
   {
     if constexpr (concepts::empty_product_type<T>) return std::false_type{};
     else if constexpr (sizeof...(Is) == 0) return std::false_type{};
@@ -169,7 +170,7 @@ namespace kumi
   **/
   //====================================================================================================================
   template<concepts::product_type T, concepts::identifier... Is>
-  KUMI_ABI constexpr auto contains_none([[maybe_unused]] T&& t, Is const&... ids) noexcept
+  [[nodiscard]] KUMI_ABI constexpr auto contains_none([[maybe_unused]] T&& t, Is const&... ids) noexcept
   {
     return std::bool_constant<!decltype(contains_any(std::declval<T>(), ids...)){}>{};
   }

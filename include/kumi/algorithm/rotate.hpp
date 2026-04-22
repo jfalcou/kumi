@@ -42,7 +42,7 @@ namespace kumi
     @include doc/record/algo/rotate_left.cpp
   **/
   //====================================================================================================================
-  template<std::size_t R, concepts::product_type T> constexpr auto rotate_left(T&& t)
+  template<std::size_t R, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto rotate_left(T&& t)
   {
     if constexpr (concepts::empty_product_type<T>) return KUMI_FWD(t);
     else if constexpr ((R % size_v<T>) == 0) return KUMI_FWD(t);
@@ -89,7 +89,7 @@ namespace kumi
     @include doc/record/algo/rotate_right.cpp
   **/
   //====================================================================================================================
-  template<std::size_t R, concepts::product_type T> constexpr auto rotate_right(T&& t)
+  template<std::size_t R, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto rotate_right(T&& t)
   {
     if constexpr (concepts::empty_product_type<T>) return KUMI_FWD(t);
     else if constexpr ((R % size_v<T>) == 0) return KUMI_FWD(t);

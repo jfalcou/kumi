@@ -132,7 +132,7 @@ namespace kumi::function
       @return The value contained in a foldable, essentially marking the end of a computation.
     **/
     //==================================================================================================================
-    constexpr auto operator()() const noexcept { return value; }
+    KUMI_ABI constexpr auto operator()() const noexcept { return value; }
   };
 
   //====================================================================================================================

@@ -357,13 +357,13 @@ namespace kumi
     using is_record_type = void;
     static constexpr bool is_homogeneous = false;
 
-    static constexpr auto size() noexcept { return std::size_t{0}; }
+    [[nodiscard]] KUMI_ABI static constexpr auto size() noexcept { return std::size_t{0}; }
 
-    static constexpr auto empty() noexcept { return true; }
+    [[nodiscard]] KUMI_ABI static constexpr auto empty() noexcept { return true; }
 
-    static constexpr auto names() noexcept { return tuple{}; }
+    [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept { return tuple{}; }
 
-    static constexpr auto values() noexcept { return tuple{}; }
+    [[nodiscard]] KUMI_ABI static constexpr auto values() noexcept { return tuple{}; }
 
     KUMI_ABI friend constexpr auto operator<=>(record<>, record<>) noexcept = default;
 
@@ -441,7 +441,7 @@ namespace kumi
   **/
   //====================================================================================================================
   template<concepts::identifier auto... Fields, typename... Ts>
-  KUMI_ABI constexpr auto tie(Ts&... ts) -> record<field<decltype(Fields), Ts&>...>
+  [[nodiscard]] KUMI_ABI constexpr auto tie(Ts&... ts) -> record<field<decltype(Fields), Ts&>...>
   requires(sizeof...(Fields) == sizeof...(Ts))
   {
     return {ts...};
@@ -826,12 +826,15 @@ namespace kumi
 
     template<typename... Us> using to = kumi::record<Us...>;
 
-    template<typename... Args> static constexpr auto make(Args&&... args)
+    template<typename... Args> [[nodiscard]] KUMI_ABI static constexpr auto make(Args&&... args)
     {
       return kumi::make_record(KUMI_FWD(args)...);
     }
 
-    template<typename... Args> static constexpr auto build(Args&&... args) { return kumi::record{KUMI_FWD(args)...}; }
+    template<typename... Args> [[nodiscard]] KUMI_ABI static constexpr auto build(Args&&... args)
+    {
+      return kumi::record{KUMI_FWD(args)...};
+    }
   };
 
   // As we are lacking a proper mechanism to find the least restrictive subtype, we fallback to a specializable trait
