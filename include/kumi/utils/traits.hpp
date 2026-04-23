@@ -399,7 +399,7 @@ namespace kumi
   };
 
   template<std::size_t I, typename T>
-  requires(is_record_type<std::remove_cvref_t<T>>::value)
+  requires(is_record_type_v<std::remove_cvref_t<T>>)
   struct stored_member<I, T>
   {
     using field_type = decltype(get<I>(std::declval<T&&>()));
@@ -482,8 +482,9 @@ namespace kumi
     {
     };
 
-    template<typename... Us> static auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
-    static std::false_type is_set(...);
+    template<typename... Us>
+    static consteval auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
+    static consteval std::false_type is_set(...);
 
     using type = decltype(is_set(std::type_identity<Ts>{}...));
   };
@@ -532,8 +533,9 @@ namespace kumi
     {
     };
 
-    template<typename... Us> static auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
-    static std::false_type is_set(...);
+    template<typename... Us>
+    static consteval auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
+    static consteval std::false_type is_set(...);
 
     using type = decltype(is_set(_::get_key<Ints, Ts>()...));
   };
@@ -546,13 +548,130 @@ namespace kumi
   //====================================================================================================================
   /**
     @ingroup traits
+    @brief   Checks if a two product types are equivalent.
+
+    Two product types are considered equivalent in the following case : if the two product types are
+    concepts::record_type they need to both have the same fields, potentially in a different order. If one of the two or
+    both are simply product_types, they are considered equivalent if their size match.
+
+    @tparam Seq The Index sequence sized on the size of the input product types
+    @tparam T The reference product type to access
+    @tparam U the product type to check
+
+    ## Helper type
+    @code
+    namespace kumi
+    {
+      template<typename T, typename U> is_equivalent_t
+          = typename is_equivalent<std::make_index_sequence<size_v<T>>, T, U>::type;
+    }
+    @endcode
+
+    ## Helper value
+    @code
+    namespace kumi
+    {
+      template<typename T, typename U> using is_equivalent_v = is_equivalent_t<T,U>::value;
+    }
+    @endcode
+  **/
+  //====================================================================================================================
+  template<typename Seq, typename T, typename U> struct is_equivalent : std::false_type
+  {
+  };
+
+  template<std::size_t... Is, typename T, typename U>
+  requires(is_product_type_v<T> && is_product_type_v<U> && size_v<T> == size_v<U>)
+  struct is_equivalent<std::index_sequence<Is...>, T, U>
+  {
+    struct match : _::unique_name<Is, element_t<Is, U>>...
+    {
+    };
+
+    template<typename... Key>
+    requires(sizeof...(Is) != 0)
+    static consteval auto is_present(Key...) -> decltype(_::true_fn(static_cast<Key>(std::declval<match>())...));
+    static consteval std::false_type is_present(...);
+    static consteval std::true_type is_present(...)
+    requires(sizeof...(Is) == 0);
+
+    using type = decltype(is_present(_::get_key<Is, element_t<Is, T>>()...));
+  };
+
+  template<typename T, typename U>
+  using is_equivalent_t = typename is_equivalent<std::make_index_sequence<size_v<T>>, T, U>::type;
+
+  template<typename T, typename U> inline constexpr bool is_equivalent_v = is_equivalent_t<T, U>::value;
+
+  //====================================================================================================================
+  /**
+    @ingroup traits
+    @brief   Checks if a two product types are comparable for equality.
+
+    Two product types are comparable for equality uf eacg field in T have a corresponding field in U with each of their
+    underlying types being comparable (the == operator can be used betewen them).
+
+    @tparam Seq The Index sequence sized on the size of the input product types
+    @tparam T The reference product type to access
+    @tparam U the product type to check
+
+    ## Helper type
+    @code
+    namespace kumi
+    {
+      template<typename T, typename U> is_equality_comparable_t
+          = typename is_equality_comparable<std::make_index_sequence<size_v<T>>, T, U>::type;
+    }
+    @endcode
+
+    ## Helper value
+    @code
+    namespace kumi
+    {
+      template<typename T, typename U> using is_equality_comparable_v = is_equivalent_t<T,U>::value;
+    }
+    @endcode
+  **/
+  //====================================================================================================================
+  template<typename Seq, typename T, typename U> struct is_equality_comparable : std::false_type
+  {
+  };
+
+  template<std::size_t... Is, typename T, typename U>
+  requires(is_record_type_v<T> && is_record_type_v<U> && size_v<T> == size_v<U>)
+  struct is_equality_comparable<std::index_sequence<Is...>, T, U> : _::check_value<element_t<Is, T>>...
+  {
+    using _::check_value<element_t<Is, T>>::get...;
+
+    static constexpr bool value =
+      (_::comparable<decltype(get(std::declval<element_t<Is, U>>())), _::type_of_t<element_t<Is, U>>> && ...);
+    using type = std::bool_constant<(sizeof...(Is) == 0) || value>;
+  };
+
+  template<std::size_t... Is, typename T, typename U>
+  requires(is_product_type_v<T> && is_product_type_v<U> && (!is_record_type_v<U> || !is_record_type_v<T>) &&
+           size_v<T> == size_v<U>)
+  struct is_equality_comparable<std::index_sequence<Is...>, T, U>
+    : std::bool_constant<(sizeof...(Is) == 0) || (_::comparable<element_t<Is, T>, element_t<Is, U>> && ...)>
+  {
+  };
+
+  template<typename T, typename U>
+  using is_equality_comparable_t = typename is_equality_comparable<std::make_index_sequence<size_v<T>>, T, U>::type;
+
+  template<typename T, typename U>
+  inline constexpr bool is_equality_comparable_v = is_equality_comparable_t<T, U>::value;
+
+  //====================================================================================================================
+  /**
+    @ingroup traits
     @brief   Unpacks a product type and applies its element types as arguments to a meta-function.
 
     ` apply_traits` takes a template meta-function (a template template parameter) and a product type. It expands the
       types contained within the product type and passes them as a parameter pack to the provided `Traits`.
 
-    @tparam Traits Meta-function to be applied.
-    @tparam Tuple  The product type whose elements will be unpacked.
+    @tparam Traits  Meta-function to be applied.
+    @tparam T       The product type whose elements will be unpacked.
 
     ## Helper type
     @code
@@ -572,23 +691,20 @@ namespace kumi
     @endcode
   **/
   //====================================================================================================================
-  template<template<typename...> typename Traits,
-           typename Tuple,
-           typename Seq = std::make_index_sequence<size_v<Tuple>>>
-  requires is_product_type_v<std::remove_cvref_t<Tuple>>
+  template<template<typename...> typename Traits, typename T, typename Seq = std::make_index_sequence<size_v<T>>>
+  requires is_product_type_v<std::remove_cvref_t<T>>
   struct apply_traits;
 
-  template<template<typename...> typename Traits, typename Tuple, std::size_t... Is>
-  requires is_product_type_v<std::remove_cvref_t<Tuple>> &&
-           (requires { typename Traits<element_t<Is, Tuple>...>::type; })
-  struct apply_traits<Traits, Tuple, std::index_sequence<Is...>>
+  template<template<typename...> typename Traits, typename T, std::size_t... Is>
+  requires is_product_type_v<std::remove_cvref_t<T>> && (requires { typename Traits<element_t<Is, T>...>::type; })
+  struct apply_traits<Traits, T, std::index_sequence<Is...>>
   {
-    using type = typename Traits<element_t<Is, Tuple>...>::type;
+    using type = typename Traits<element_t<Is, T>...>::type;
   };
 
-  template<template<typename...> typename Traits, typename Tuple>
-  requires is_product_type_v<std::remove_cvref_t<Tuple>>
-  using apply_traits_t = typename apply_traits<Traits, Tuple>::type;
+  template<template<typename...> typename Traits, typename T>
+  requires is_product_type_v<std::remove_cvref_t<T>>
+  using apply_traits_t = typename apply_traits<Traits, T>::type;
 
   //====================================================================================================================
   /**
@@ -598,15 +714,15 @@ namespace kumi
     `map_traits` transforms a product type by applying a given meta-function `Traits` to every element type
     individually. The result is a new product type containing the transformed types.
 
-    @tparam Traits Unary meta-function to apply to each element.
-    @tparam Tuple  The product type to transform.
+    @tparam Traits  Unary meta-function to apply to each element.
+    @tparam T       The product type to transform.
 
     ## Helper type
     @code
     namespace kumi
     {
-      template<template<typename...> typename Traits, typename Tuple>
-      using map_traits_t = typename map_traits<Traits, Tuple>::type;
+      template<template<typename...> typename Traits, typename T>
+      using map_traits_t = typename map_traits<Traits, T>::type;
     }
     @endcode
 
@@ -619,23 +735,20 @@ namespace kumi
     @endcode
   **/
   //====================================================================================================================
-  template<template<typename...> typename Traits,
-           typename Tuple,
-           typename Seq = std::make_index_sequence<size_v<Tuple>>>
-  requires is_product_type_v<std::remove_cvref_t<Tuple>>
+  template<template<typename...> typename Traits, typename T, typename Seq = std::make_index_sequence<size_v<T>>>
+  requires is_product_type_v<std::remove_cvref_t<T>>
   struct map_traits;
 
-  template<template<typename...> typename Traits, typename Tuple, std::size_t... Is>
-  requires is_product_type_v<std::remove_cvref_t<Tuple>> &&
-           (requires { typename Traits<element_t<Is, Tuple>>::type; } && ...)
-  struct map_traits<Traits, Tuple, std::index_sequence<Is...>>
+  template<template<typename...> typename Traits, typename T, std::size_t... Is>
+  requires is_product_type_v<std::remove_cvref_t<T>> && (requires { typename Traits<element_t<Is, T>>::type; } && ...)
+  struct map_traits<Traits, T, std::index_sequence<Is...>>
   {
-    using type = tuple<typename Traits<element_t<Is, Tuple>>::type...>;
+    using type = builder_make_t<T, typename Traits<element_t<Is, T>>::type...>;
   };
 
-  template<template<typename...> typename Traits, typename Tuple>
-  requires is_product_type_v<std::remove_cvref_t<Tuple>>
-  using map_traits_t = typename map_traits<Traits, Tuple>::type;
+  template<template<typename...> typename Traits, typename T>
+  requires is_product_type_v<std::remove_cvref_t<T>>
+  using map_traits_t = typename map_traits<Traits, T>::type;
 }
 
 namespace kumi

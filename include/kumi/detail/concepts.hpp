@@ -154,7 +154,7 @@ namespace kumi::_
   //====================================================================================================================
   template<typename Field> struct check_value
   {
-    static consteval std::false_type get(...);
+    static consteval void get(...);
   };
 
   template<field F> struct check_value<F>
@@ -174,7 +174,7 @@ namespace kumi::_
   {
     using check_value<Ts>::get...;
     using t_list = Box<decltype(get(std::declval<Us>()))...>;
-    using u_list = Box<decltype(get(std::declval<Us>()))...>;
+    using u_list = Box<type_of_t<Us>...>;
 
     using is_fieldwise_constructible = is_piecewise_constructible<t_list, u_list>;
     using is_fieldwise_convertible = is_piecewise_convertible<t_list, u_list>;

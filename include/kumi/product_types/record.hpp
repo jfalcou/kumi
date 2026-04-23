@@ -315,7 +315,9 @@ namespace kumi
     /// @brief Compares a record with an other for equality
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator==(record const& self, record<Us...> const& other) noexcept
-    requires(concepts::equality_comparable<record, record<Us...>>)
+#ifndef KUMI_DOXYGEN_INVOKED
+    requires(_::fieldwise_comparable<record, record<Us...>>)
+#endif
     {
       return ((get<identifier_of<Ts>()>(self) == get<identifier_of<Ts>()>(other)) && ...);
     }
@@ -323,7 +325,9 @@ namespace kumi
     /// @brief Compares a record with an other for inequality
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator!=(record const& self, record<Us...> const& other) noexcept
-    requires(concepts::equality_comparable<record, record<Us...>>)
+#ifndef KUMI_DOXYGEN_INVOKED
+    requires(_::fieldwise_comparable<record, record<Us...>>)
+#endif
     {
       return !(self == other);
     }

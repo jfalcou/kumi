@@ -37,31 +37,6 @@ namespace kumi
                                    return ((size_v<stored_member_t<0, T>> == size_v<stored_member_t<N + 1, T>>) && ...);
                                  }(std::make_index_sequence<size_v<T> - 1>{}));
 
-    template<typename Ints, typename... Ts> struct matches;
-
-    template<> struct matches<std::index_sequence<>>
-    {
-      using type = std::true_type;
-    };
-
-    template<std::size_t... Is, template<class...> class Box, typename... Ts, typename... Us>
-    struct matches<std::index_sequence<Is...>, Box<Ts...>, Box<Us...>>
-    {
-      struct match : _::unique_name<Is, Us>...
-      {
-      };
-
-      template<typename... Key>
-      static consteval auto is_present(Key...) -> decltype(_::true_fn(static_cast<Key>(match())...));
-      static consteval std::false_type is_present(...);
-
-      using type = decltype(is_present(_::get_key<Is, Ts>()...));
-    };
-
-    template<std::size_t S, typename T, typename U>
-    using matches_t = typename matches<std::make_index_sequence<S>, T, U>::type;
-
-    template<typename T, typename U> inline constexpr auto matches_v = matches_t<size_v<T>, T, U>::value;
   }
 
   namespace concepts
@@ -377,7 +352,8 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename T, typename U>
-    concept equivalent = (size_v<T> == size_v<U>) && _::matches_v<std::remove_cvref_t<T>, std::remove_cvref_t<U>>;
+    concept equivalent =
+      product_type<T> && product_type<U> && is_equivalent_v<std::remove_cvref_t<T>, std::remove_cvref_t<U>>;
 
     //==================================================================================================================
     /**
@@ -390,8 +366,7 @@ namespace kumi
     //==================================================================================================================
     template<typename T, typename U>
     concept equality_comparable =
-      equivalent<T, U> && ((product_type<T> && product_type<U> && _::piecewise_comparable<T, U>) ||
-                           (record_type<T> && record_type<U> && _::fieldwise_comparable<T, U>));
+      equivalent<T, U> && is_equality_comparable_v<std::remove_cvref_t<T>, std::remove_cvref_t<U>>;
 
     //==================================================================================================================
     /**
@@ -412,7 +387,7 @@ namespace kumi
 
       A pack of types `Ts` models `kumi::concepts::compatible_product_types` if it models
       `kumi::concepts::follows_same_semantic`. If the types model `kumi::concepts::record_type` then all types must
-      model `kumi::concepts::equivalent`
+      model `kumi::concepts::equivalent`. To be considered compatible, all product types must have the same size.
     **/
     //==================================================================================================================
     template<typename T, typename... Us>
