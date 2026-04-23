@@ -656,7 +656,7 @@ namespace kumi
   //====================================================================================================================
   template<str L, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>& r) noexcept
-  requires(_::contains_label<L, Ts...>())
+  requires(concepts::contains_label<std::integral_constant<kumi::str, L>, Ts...>)
   {
     return r[label<L>];
   }
@@ -665,7 +665,7 @@ namespace kumi
   /// @overload
   template<str L, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>&& r) noexcept
-  requires(_::contains_label<L, Ts...>())
+  requires(concepts::contains_label<std::integral_constant<kumi::str, L>, Ts...>)
   {
     return static_cast<record<Ts...>&&>(r)[label<L>];
   }
@@ -674,7 +674,7 @@ namespace kumi
   /// @overload
   template<str L, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const& r) noexcept
-  requires(_::contains_label<L, Ts...>())
+  requires(concepts::contains_label<std::integral_constant<kumi::str, L>, Ts...>)
   {
     return r[label<L>];
   }
@@ -683,7 +683,7 @@ namespace kumi
   /// @overload
   template<str L, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...> const&& r) noexcept
-  requires(_::contains_label<L, Ts...>())
+  requires(concepts::contains_label<std::integral_constant<kumi::str, L>, Ts...>)
   {
     return static_cast<record<Ts...> const&&>(r)[label<L>];
   }
@@ -805,7 +805,8 @@ namespace kumi
 
   /// Improves diagnostic for non present label
   template<str S, typename R>
-  requires(is_kumi_record_v<std::remove_cvref_t<R>> && !_::contains_identifier<S, R>())
+  requires(is_kumi_record_v<std::remove_cvref_t<R>> &&
+           !concepts::contains_label<std::integral_constant<kumi::str, S>, R>)
   constexpr auto get(R&& r) = delete;
 
   /// Improves diagnostic for non present identifier

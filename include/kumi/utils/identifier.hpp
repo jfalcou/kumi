@@ -196,7 +196,7 @@ namespace kumi
     return std::same_as<std::remove_cvref_t<L>, std::remove_cvref_t<R>>;
   }
 
-  namespace _
+  /*namespace _
   {
     // MSVC workaround for get<>
     // MSVC evaluates a requires clause before checking the type of an NTTP
@@ -215,5 +215,5 @@ namespace kumi
       else if constexpr (!std::is_same_v<std::remove_cvref_t<decltype(N)>, str>) return false;
       else return can_get_field_by_label<std::integral_constant<kumi::str, N>, Ts...>;
     }
-  }
+  }*/
 }
