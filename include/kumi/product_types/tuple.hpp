@@ -350,7 +350,9 @@ namespace kumi
     /// @brief Compares a tuple with an other for equality
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator==(tuple const& self, tuple<Us...> const& other) noexcept
-    requires(concepts::equality_comparable<tuple, tuple<Us...>>)
+#ifndef KUMI_DOXYGEN_INVOKED
+    requires(_::piecewise_comparable<tuple, tuple<Us...>>)
+#endif
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return ((get<I>(self) == get<I>(other)) && ...);
@@ -360,7 +362,9 @@ namespace kumi
     /// @brief Compares a tuple with an other for inequality
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator!=(tuple const& self, tuple<Us...> const& other) noexcept
-    requires(concepts::equality_comparable<tuple, tuple<Us...>>)
+#ifndef KUMI_DOXYGEN_INVOKED
+    requires(_::piecewise_comparable<tuple, tuple<Us...>>)
+#endif
     {
       return !(self == other);
     }
