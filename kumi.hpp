@@ -344,7 +344,7 @@ namespace kumi::_
   concept piecewise_comparable = is_piecewise_comparable<std::remove_cvref_t<From>, std::remove_cvref_t<To>>::value;
   template<typename Field> struct check_value
   {
-    static consteval std::false_type get(...);
+    static consteval void get(...);
   };
   template<field F> struct check_value<F>
   {
@@ -361,7 +361,7 @@ namespace kumi::_
   {
     using check_value<Ts>::get...;
     using t_list = Box<decltype(get(std::declval<Us>()))...>;
-    using u_list = Box<decltype(get(std::declval<Us>()))...>;
+    using u_list = Box<type_of_t<Us>...>;
     using is_fieldwise_constructible = is_piecewise_constructible<t_list, u_list>;
     using is_fieldwise_convertible = is_piecewise_convertible<t_list, u_list>;
     using is_fieldwise_comparable = is_piecewise_comparable<t_list, u_list>;
@@ -824,6 +824,28 @@ namespace kumi
 }
 namespace kumi
 {
+  template<typename... Ts> struct common_product_type
+  {
+  };
+  template<typename... Ts> using common_product_type_t = typename common_product_type<Ts...>::type;
+  template<typename T> struct builder;
+  template<typename T> struct builder<T&> : builder<T>
+  {
+  };
+  template<typename T> struct builder<T&&> : builder<T>
+  {
+  };
+  template<typename T> struct builder<T const&> : builder<T>
+  {
+  };
+  template<typename T> struct builder<T const&&> : builder<T>
+  {
+  };
+  template<typename T> using builder_t = typename builder<T>::type;
+  template<typename T, typename... Args> using builder_make_t = typename builder<T>::template to<Args...>;
+}
+namespace kumi
+{
   namespace _
   {
     template<typename T>
@@ -961,7 +983,7 @@ namespace kumi
     using type = member_t<I, T>;
   };
   template<std::size_t I, typename T>
-  requires(is_record_type<std::remove_cvref_t<T>>::value)
+  requires(is_record_type_v<std::remove_cvref_t<T>>)
   struct stored_member<I, T>
   {
     using field_type = decltype(get<I>(std::declval<T&&>()));
@@ -989,8 +1011,9 @@ namespace kumi
     struct all_uniques_inner : _::unique<Ints, Ts>...
     {
     };
-    template<typename... Us> static auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
-    static std::false_type is_set(...);
+    template<typename... Us>
+    static consteval auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
+    static consteval std::false_type is_set(...);
     using type = decltype(is_set(std::type_identity<Ts>{}...));
   };
   template<typename... Ts> using all_uniques_t = typename all_uniques<std::index_sequence_for<Ts...>, Ts...>::type;
@@ -1005,43 +1028,82 @@ namespace kumi
     struct all_uniques_inner : _::unique_name<Ints, Ts>...
     {
     };
-    template<typename... Us> static auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
-    static std::false_type is_set(...);
+    template<typename... Us>
+    static consteval auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
+    static consteval std::false_type is_set(...);
     using type = decltype(is_set(_::get_key<Ints, Ts>()...));
   };
   template<typename... Ts>
   using all_unique_names_t = typename all_unique_names<std::index_sequence_for<Ts...>, Ts...>::type;
   template<typename... Ts> inline constexpr auto all_unique_names_v = all_unique_names_t<Ts...>::value;
-  template<template<typename...> typename Traits,
-           typename Tuple,
-           typename Seq = std::make_index_sequence<size_v<Tuple>>>
-  requires is_product_type_v<std::remove_cvref_t<Tuple>>
+  template<typename Seq, typename T, typename U> struct is_equivalent : std::false_type
+  {
+  };
+  template<std::size_t... Is, typename T, typename U>
+  requires(is_product_type_v<T> && is_product_type_v<U> && size_v<T> == size_v<U>)
+  struct is_equivalent<std::index_sequence<Is...>, T, U>
+  {
+    struct match : _::unique_name<Is, element_t<Is, U>>...
+    {
+    };
+    template<typename... Key>
+    requires(sizeof...(Is) != 0)
+    static consteval auto is_present(Key...) -> decltype(_::true_fn(static_cast<Key>(std::declval<match>())...));
+    static consteval std::false_type is_present(...);
+    static consteval std::true_type is_present(...)
+    requires(sizeof...(Is) == 0);
+    using type = decltype(is_present(_::get_key<Is, element_t<Is, T>>()...));
+  };
+  template<typename T, typename U>
+  using is_equivalent_t = typename is_equivalent<std::make_index_sequence<size_v<T>>, T, U>::type;
+  template<typename T, typename U> inline constexpr bool is_equivalent_v = is_equivalent_t<T, U>::value;
+  template<typename Seq, typename T, typename U> struct is_equality_comparable : std::false_type
+  {
+  };
+  template<std::size_t... Is, typename T, typename U>
+  requires(is_record_type_v<T> && is_record_type_v<U> && size_v<T> == size_v<U>)
+  struct is_equality_comparable<std::index_sequence<Is...>, T, U> : _::check_value<element_t<Is, T>>...
+  {
+    using _::check_value<element_t<Is, T>>::get...;
+    static constexpr bool value =
+      (_::comparable<decltype(get(std::declval<element_t<Is, U>>())), _::type_of_t<element_t<Is, U>>> && ...);
+    using type = std::bool_constant<(sizeof...(Is) == 0) || value>;
+  };
+  template<std::size_t... Is, typename T, typename U>
+  requires(is_product_type_v<T> && is_product_type_v<U> && (!is_record_type_v<U> || !is_record_type_v<T>) &&
+           size_v<T> == size_v<U>)
+  struct is_equality_comparable<std::index_sequence<Is...>, T, U>
+    : std::bool_constant<(sizeof...(Is) == 0) || (_::comparable<element_t<Is, T>, element_t<Is, U>> && ...)>
+  {
+  };
+  template<typename T, typename U>
+  using is_equality_comparable_t = typename is_equality_comparable<std::make_index_sequence<size_v<T>>, T, U>::type;
+  template<typename T, typename U>
+  inline constexpr bool is_equality_comparable_v = is_equality_comparable_t<T, U>::value;
+  template<template<typename...> typename Traits, typename T, typename Seq = std::make_index_sequence<size_v<T>>>
+  requires is_product_type_v<std::remove_cvref_t<T>>
   struct apply_traits;
-  template<template<typename...> typename Traits, typename Tuple, std::size_t... Is>
-  requires is_product_type_v<std::remove_cvref_t<Tuple>> &&
-           (requires { typename Traits<element_t<Is, Tuple>...>::type; })
-  struct apply_traits<Traits, Tuple, std::index_sequence<Is...>>
+  template<template<typename...> typename Traits, typename T, std::size_t... Is>
+  requires is_product_type_v<std::remove_cvref_t<T>> && (requires { typename Traits<element_t<Is, T>...>::type; })
+  struct apply_traits<Traits, T, std::index_sequence<Is...>>
   {
-    using type = typename Traits<element_t<Is, Tuple>...>::type;
+    using type = typename Traits<element_t<Is, T>...>::type;
   };
-  template<template<typename...> typename Traits, typename Tuple>
-  requires is_product_type_v<std::remove_cvref_t<Tuple>>
-  using apply_traits_t = typename apply_traits<Traits, Tuple>::type;
-  template<template<typename...> typename Traits,
-           typename Tuple,
-           typename Seq = std::make_index_sequence<size_v<Tuple>>>
-  requires is_product_type_v<std::remove_cvref_t<Tuple>>
+  template<template<typename...> typename Traits, typename T>
+  requires is_product_type_v<std::remove_cvref_t<T>>
+  using apply_traits_t = typename apply_traits<Traits, T>::type;
+  template<template<typename...> typename Traits, typename T, typename Seq = std::make_index_sequence<size_v<T>>>
+  requires is_product_type_v<std::remove_cvref_t<T>>
   struct map_traits;
-  template<template<typename...> typename Traits, typename Tuple, std::size_t... Is>
-  requires is_product_type_v<std::remove_cvref_t<Tuple>> &&
-           (requires { typename Traits<element_t<Is, Tuple>>::type; } && ...)
-  struct map_traits<Traits, Tuple, std::index_sequence<Is...>>
+  template<template<typename...> typename Traits, typename T, std::size_t... Is>
+  requires is_product_type_v<std::remove_cvref_t<T>> && (requires { typename Traits<element_t<Is, T>>::type; } && ...)
+  struct map_traits<Traits, T, std::index_sequence<Is...>>
   {
-    using type = tuple<typename Traits<element_t<Is, Tuple>>::type...>;
+    using type = builder_make_t<T, typename Traits<element_t<Is, T>>::type...>;
   };
-  template<template<typename...> typename Traits, typename Tuple>
-  requires is_product_type_v<std::remove_cvref_t<Tuple>>
-  using map_traits_t = typename map_traits<Traits, Tuple>::type;
+  template<template<typename...> typename Traits, typename T>
+  requires is_product_type_v<std::remove_cvref_t<T>>
+  using map_traits_t = typename map_traits<Traits, T>::type;
 }
 namespace kumi
 {
@@ -1077,28 +1139,6 @@ namespace kumi
 }
 namespace kumi
 {
-  template<typename... Ts> struct common_product_type
-  {
-  };
-  template<typename... Ts> using common_product_type_t = typename common_product_type<Ts...>::type;
-  template<typename T> struct builder;
-  template<typename T> struct builder<T&> : builder<T>
-  {
-  };
-  template<typename T> struct builder<T&&> : builder<T>
-  {
-  };
-  template<typename T> struct builder<T const&> : builder<T>
-  {
-  };
-  template<typename T> struct builder<T const&&> : builder<T>
-  {
-  };
-  template<typename T> using builder_t = typename builder<T>::type;
-  template<typename T, typename... Args> using builder_make_t = typename builder<T>::template to<Args...>;
-}
-namespace kumi
-{
   namespace _
   {
     template<typename F, typename T>
@@ -1120,25 +1160,6 @@ namespace kumi
     concept supports_transpose = (size_v<T> <= 1) || ([]<std::size_t... N>(std::index_sequence<N...>) {
                                    return ((size_v<stored_member_t<0, T>> == size_v<stored_member_t<N + 1, T>>) && ...);
                                  }(std::make_index_sequence<size_v<T> - 1>{}));
-    template<typename Ints, typename... Ts> struct matches;
-    template<> struct matches<std::index_sequence<>>
-    {
-      using type = std::true_type;
-    };
-    template<std::size_t... Is, template<class...> class Box, typename... Ts, typename... Us>
-    struct matches<std::index_sequence<Is...>, Box<Ts...>, Box<Us...>>
-    {
-      struct match : _::unique_name<Is, Us>...
-      {
-      };
-      template<typename... Key>
-      static consteval auto is_present(Key...) -> decltype(_::true_fn(static_cast<Key>(match())...));
-      static consteval std::false_type is_present(...);
-      using type = decltype(is_present(_::get_key<Is, Ts>()...));
-    };
-    template<std::size_t S, typename T, typename U>
-    using matches_t = typename matches<std::make_index_sequence<S>, T, U>::type;
-    template<typename T, typename U> inline constexpr auto matches_v = matches_t<size_v<T>, T, U>::value;
   }
   namespace concepts
   {
@@ -1195,11 +1216,11 @@ namespace kumi
     concept contains_label = std::is_same_v<std::remove_cvref_t<decltype(std::remove_cvref_t<Label>::value)>, str> &&
                              kumi::_::can_get_field_by_label<std::remove_cvref_t<Label>, Ts...>;
     template<typename T, typename U>
-    concept equivalent = (size_v<T> == size_v<U>) && _::matches_v<std::remove_cvref_t<T>, std::remove_cvref_t<U>>;
+    concept equivalent =
+      product_type<T> && product_type<U> && is_equivalent_v<std::remove_cvref_t<T>, std::remove_cvref_t<U>>;
     template<typename T, typename U>
     concept equality_comparable =
-      equivalent<T, U> && ((product_type<T> && product_type<U> && _::piecewise_comparable<T, U>) ||
-                           (record_type<T> && record_type<U> && _::fieldwise_comparable<T, U>));
+      equivalent<T, U> && is_equality_comparable_v<std::remove_cvref_t<T>, std::remove_cvref_t<U>>;
     template<typename... Ts>
     concept follows_same_semantic = ((product_type<Ts> && !record_type<Ts>) && ...) || ((record_type<Ts> && ...));
     template<typename T, typename... Us>
@@ -1686,7 +1707,9 @@ namespace kumi
     }
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator==(tuple const& self, tuple<Us...> const& other) noexcept
-    requires(concepts::equality_comparable<tuple, tuple<Us...>>)
+#ifndef KUMI_DOXYGEN_INVOKED
+    requires(_::piecewise_comparable<tuple, tuple<Us...>>)
+#endif
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return ((get<I>(self) == get<I>(other)) && ...);
@@ -1694,7 +1717,9 @@ namespace kumi
     }
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator!=(tuple const& self, tuple<Us...> const& other) noexcept
-    requires(concepts::equality_comparable<tuple, tuple<Us...>>)
+#ifndef KUMI_DOXYGEN_INVOKED
+    requires(_::piecewise_comparable<tuple, tuple<Us...>>)
+#endif
     {
       return !(self == other);
     }
@@ -2151,13 +2176,17 @@ namespace kumi
     }
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator==(record const& self, record<Us...> const& other) noexcept
-    requires(concepts::equality_comparable<record, record<Us...>>)
+#ifndef KUMI_DOXYGEN_INVOKED
+    requires(_::fieldwise_comparable<record, record<Us...>>)
+#endif
     {
       return ((get<identifier_of<Ts>()>(self) == get<identifier_of<Ts>()>(other)) && ...);
     }
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator!=(record const& self, record<Us...> const& other) noexcept
-    requires(concepts::equality_comparable<record, record<Us...>>)
+#ifndef KUMI_DOXYGEN_INVOKED
+    requires(_::fieldwise_comparable<record, record<Us...>>)
+#endif
     {
       return !(self == other);
     }
