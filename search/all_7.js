@@ -1,9 +1,9 @@
 var searchData=
 [
   ['back_0',['back',['../group__generators_gacbfca9b5e95948e4180a54e920d19c6f.html#gacbfca9b5e95948e4180a54e920d19c6f',1,'kumi']]],
-  ['base_20optimization_1',['Empty Base Optimization',['../cpp_spec.html#autotoc_md451',1,'']]],
-  ['bedazzling_20beryl_2',['Version 2.0 - Bedazzling Beryl',['../changelog.html#autotoc_md444',1,'']]],
-  ['beryl_3',['Version 2.0 - Bedazzling Beryl',['../changelog.html#autotoc_md444',1,'']]],
+  ['base_20optimization_1',['Empty Base Optimization',['../cpp_spec.html#autotoc_md455',1,'']]],
+  ['bedazzling_20beryl_2',['Version 2.0 - Bedazzling Beryl',['../changelog.html#autotoc_md448',1,'']]],
+  ['beryl_3',['Version 2.0 - Bedazzling Beryl',['../changelog.html#autotoc_md448',1,'']]],
   ['bind_5fback_4',['bind_back',['../group__functional_ga02fbf71873458cc8a364a7f6efcfadf2.html#ga02fbf71873458cc8a364a7f6efcfadf2',1,'kumi']]],
   ['bind_5ffront_5',['bind_front',['../group__functional_ga08c383ce2fb100dda15baf96b4e60d2f.html#ga08c383ce2fb100dda15baf96b4e60d2f',1,'kumi']]],
   ['bit_5fand_6',['bit_and',['../group__functional.html#gaa04ecc72014400d45d9ebb72bd7447cc',1,'kumi::function::bit_and'],['../group__reductions_ga14432e4394da47b90f34c962979da853.html#ga14432e4394da47b90f34c962979da853',1,'kumi::bit_and(T &amp;&amp;t, Value init)'],['../group__reductions_ga2249743d977a87399b3fd98b0cb2e55e.html#ga2249743d977a87399b3fd98b0cb2e55e',1,'kumi::bit_and(T &amp;&amp;t)']]],
@@ -12,6 +12,6 @@ var searchData=
   ['boolean_5fand_9',['boolean_and',['../structkumi_1_1function_1_1boolean__and.html',1,'kumi::function']]],
   ['boolean_5for_10',['boolean_or',['../structkumi_1_1function_1_1boolean__or.html',1,'kumi::function']]],
   ['boolean_5fxor_11',['boolean_xor',['../structkumi_1_1function_1_1boolean__xor.html',1,'kumi::function']]],
-  ['bug_20fixes_12',['Bug Fixes',['../changelog.html#autotoc_md433',1,'Bug Fixes'],['../changelog.html#autotoc_md438',1,'Bug Fixes'],['../changelog.html#autotoc_md442',1,'Bug Fixes'],['../changelog.html#autotoc_md447',1,'Bug Fixes']]],
+  ['bug_20fixes_12',['Bug Fixes',['../changelog.html#autotoc_md437',1,'Bug Fixes'],['../changelog.html#autotoc_md442',1,'Bug Fixes'],['../changelog.html#autotoc_md446',1,'Bug Fixes'],['../changelog.html#autotoc_md451',1,'Bug Fixes']]],
   ['builder_13',['builder',['../structkumi_1_1builder.html',1,'kumi']]]
 ];

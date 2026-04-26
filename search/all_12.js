@@ -1,8 +1,8 @@
 var searchData=
 [
   ['name_0',['name',['../structkumi_1_1name.html',1,'kumi']]],
-  ['new_20contributors_1',['New Contributors',['../changelog.html#autotoc_md439',1,'']]],
-  ['new_20features_2',['New Features',['../changelog.html#autotoc_md426',1,'New Features'],['../changelog.html#autotoc_md432',1,'New Features'],['../changelog.html#autotoc_md437',1,'New Features'],['../changelog.html#autotoc_md443',1,'New Features'],['../changelog.html#autotoc_md448',1,'New Features']]],
+  ['new_20contributors_1',['New Contributors',['../changelog.html#autotoc_md443',1,'']]],
+  ['new_20features_2',['New Features',['../changelog.html#autotoc_md430',1,'New Features'],['../changelog.html#autotoc_md436',1,'New Features'],['../changelog.html#autotoc_md441',1,'New Features'],['../changelog.html#autotoc_md447',1,'New Features'],['../changelog.html#autotoc_md452',1,'New Features']]],
   ['nomenclature_3',['Nomenclature',['../nomenclature.html',1,'']]],
   ['non_5fempty_5fproduct_5ftype_4',['non_empty_product_type',['../conceptkumi_1_1concepts_1_1non__empty__product__type.html',1,'kumi::concepts']]],
   ['none_5',['none',['../group__utility.html#gabe662caa7eff683f6b085c7abb76391b',1,'kumi']]],

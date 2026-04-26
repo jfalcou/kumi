@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['record_0',['Record',['../index.html#autotoc_md484',1,'']]],
+  ['record_0',['Record',['../index.html#autotoc_md488',1,'']]],
   ['record_1',['record',['../structkumi_1_1record.html',1,'kumi::record&lt; Ts &gt;'],['../structkumi_1_1record_a1000cb0996a9587f8735a35f76060e44.html#a1000cb0996a9587f8735a35f76060e44',1,'kumi::record::record()'],['../structkumi_1_1record_a1000cb0996a9587f8735a35f76060e44.html#a1000cb0996a9587f8735a35f76060e44',1,'kumi::record()']]],
   ['record_20related_20traits_2',['Record Related Traits',['../group__record__traits.html',1,'']]],
   ['record_20type_2038_3',['Record Type \\( (\\{l_A: A\\} \\times \\{l_B: B\\}) \\)',['../product.html#record_type',1,'']]],
@@ -16,7 +16,7 @@ var searchData=
   ['reindex_13',['reindex',['../group__generators_ga0e43e02e9a4a7fea31b620b2dcb4b48a.html#ga0e43e02e9a4a7fea31b620b2dcb4b48a',1,'kumi']]],
   ['related_20concepts_14',['Product Type Related Concepts',['../group__concepts.html',1,'']]],
   ['related_20traits_15',['Related Traits',['../group__traits.html',1,'Product Type Related Traits'],['../group__record__traits.html',1,'Record Related Traits'],['../group__tuple__traits.html',1,'Tuple Related Traits']]],
-  ['release_16',['First autonomous public release.',['../changelog.html#autotoc_md450',1,'']]],
+  ['release_16',['First autonomous public release.',['../changelog.html#autotoc_md454',1,'']]],
   ['reorder_17',['reorder',['../group__generators_ga11fbe45a20286800b1d6ef15d7930d37.html#ga11fbe45a20286800b1d6ef15d7930d37',1,'kumi']]],
   ['reorder_5ffields_18',['reorder_fields',['../group__generators_ga86a5aaefb0718b80b2103bf9dc8e3b23.html#ga86a5aaefb0718b80b2103bf9dc8e3b23',1,'kumi']]],
   ['requisites_19',['Pre-requisites',['../setup.html#prerequisit',1,'']]],

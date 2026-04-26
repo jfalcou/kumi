@@ -20,7 +20,7 @@
     <name>kumi::apply_traits</name>
     <filename>structkumi_1_1apply__traits.html</filename>
     <templarg>template&lt; typename... &gt; typename Traits</templarg>
-    <templarg>typename Tuple</templarg>
+    <templarg>typename T</templarg>
     <templarg>typename Seq</templarg>
   </compound>
   <compound kind="class">
@@ -295,6 +295,20 @@
     <templarg>typename T</templarg>
   </compound>
   <compound kind="struct">
+    <name>kumi::is_equality_comparable</name>
+    <filename>structkumi_1_1is__equality__comparable.html</filename>
+    <templarg>typename Seq</templarg>
+    <templarg>typename T</templarg>
+    <templarg>typename U</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::is_equivalent</name>
+    <filename>structkumi_1_1is__equivalent.html</filename>
+    <templarg>typename Seq</templarg>
+    <templarg>typename T</templarg>
+    <templarg>typename U</templarg>
+  </compound>
+  <compound kind="struct">
     <name>kumi::is_homogeneous</name>
     <filename>structkumi_1_1is__homogeneous.html</filename>
     <templarg>typename T</templarg>
@@ -338,7 +352,7 @@
     <name>kumi::map_traits</name>
     <filename>structkumi_1_1map__traits.html</filename>
     <templarg>template&lt; typename... &gt; typename Traits</templarg>
-    <templarg>typename Tuple</templarg>
+    <templarg>typename T</templarg>
     <templarg>typename Seq</templarg>
   </compound>
   <compound kind="struct">
@@ -611,14 +625,14 @@
       <type>friend constexpr auto</type>
       <name>operator==</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>a1098a41612ff2f1c5128410c7ff0a0b6</anchor>
+      <anchor>a6db5145d0e86cffe51b9941346834323</anchor>
       <arglist>(record const &amp;self, record&lt; Us... &gt; const &amp;other) noexcept</arglist>
     </member>
     <member kind="friend">
       <type>friend constexpr auto</type>
       <name>operator!=</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>ac35ea417538e4e763804a9f9d689957b</anchor>
+      <anchor>a22e02cc7d670843e1c5f9e41385a7237</anchor>
       <arglist>(record const &amp;self, record&lt; Us... &gt; const &amp;other) noexcept</arglist>
     </member>
     <member kind="function">
@@ -1005,14 +1019,14 @@
       <type>friend constexpr auto</type>
       <name>operator==</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>acebb3ddeaa684e400b25f48849147641</anchor>
+      <anchor>af0256993b0ad272335b4c6d77afe73d7</anchor>
       <arglist>(tuple const &amp;self, tuple&lt; Us... &gt; const &amp;other) noexcept</arglist>
     </member>
     <member kind="friend">
       <type>friend constexpr auto</type>
       <name>operator!=</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>af856ef0275e81074321d1df95774850e</anchor>
+      <anchor>a723ee5d6b1324e146a4cb8819c29f331</anchor>
       <arglist>(tuple const &amp;self, tuple&lt; Us... &gt; const &amp;other) noexcept</arglist>
     </member>
     <member kind="friend">
@@ -1336,6 +1350,8 @@
     <class kind="class">kumi::identifier</class>
     <class kind="class">kumi::index_t</class>
     <class kind="struct">kumi::is_container</class>
+    <class kind="struct">kumi::is_equality_comparable</class>
+    <class kind="struct">kumi::is_equivalent</class>
     <class kind="struct">kumi::is_homogeneous</class>
     <class kind="struct">kumi::is_product_type</class>
     <class kind="struct">kumi::is_projection_map</class>
@@ -3512,6 +3528,8 @@
     <class kind="struct">kumi::element</class>
     <class kind="struct">kumi::has_static_size</class>
     <class kind="struct">kumi::is_container</class>
+    <class kind="struct">kumi::is_equality_comparable</class>
+    <class kind="struct">kumi::is_equivalent</class>
     <class kind="struct">kumi::is_product_type</class>
     <class kind="struct">kumi::is_projection_map</class>
     <class kind="struct">kumi::is_record_type</class>

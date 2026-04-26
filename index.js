@@ -1,8 +1,8 @@
 var index =
 [
-    [ "Examples", "index.html#autotoc_md482", [
-      [ "Tuple", "index.html#autotoc_md483", null ],
-      [ "Record", "index.html#autotoc_md484", null ]
+    [ "Examples", "index.html#autotoc_md486", [
+      [ "Tuple", "index.html#autotoc_md487", null ],
+      [ "Record", "index.html#autotoc_md488", null ]
     ] ],
-    [ "Licence", "index.html#autotoc_md485", null ]
+    [ "Licence", "index.html#autotoc_md489", null ]
 ];

@@ -169,12 +169,12 @@ $(function(){initNavTree('cpp_spec.html','',''); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md__2____w_2kumi_2kumi_2doc_2glossary_2cpp__vocabulary"></a></p>
-<h1 class="doxsection"><a class="anchor" id="autotoc_md451"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md455"></a>
 Empty Base Optimization</h1>
 <p><a href="https://eel.is/c++draft/intro.object#7">EBO</a> is a compiler optimization technique. In C++, even an empty struct (one with no data members) must have a size of at least 1 byte to ensure it has a unique address in memory.</p>
 <p>However, if that empty struct is used as a base class, the compiler is allowed to optimize that space away to 0 bytes. This is critical for high-performance libraries that use many "tag" types or "stateless" functors, as it prevents memory bloat.</p>
 <hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md453"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md457"></a>
 Aggregate type</h1>
 <p>An <a href="https://eel.is/c++draft/dcl.init.aggr">Aggregate</a> is a specific kind of class or struct in C++ that is "simple" enough to be initialized directly with braces {}.</p>
 <p>To be an aggregate, a type generally must have:</p>
@@ -185,12 +185,12 @@ Aggregate type</h1>
 </ul>
 <p>Aggregates allow for Aggregate Initialization, which is often faster and allows for cleaner syntax than defining complex constructors.</p>
 <hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md455"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md459"></a>
 Structural type</h1>
 <p>Introduced in C++20, a <a href="https://eel.is/c++draft/temp#param-12">Structural Type</a> is a class type that can be used as a Non-Type Template Parameter (NTTP).</p>
 <p>Previously, template parameters were limited to integers or pointers. Now, one can pass complex objects (like a tuple) as a template argument, provided the type is "Structural" (roughly: public members, no complex copying logic).</p>
 <hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md457"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md461"></a>
 Tuple Protocol</h1>
 <p>The <a href="https://eel.is/c++draft/dcl.struct.bind">Tuple Protocol</a> is a set of standardized "hooks" in the C++ Standard Library. By implementing these hooks for a custom class, one tells the compiler to treat the class like a tuple.</p>
 <p>To satisfy the protocol, a type T must specialize:</p>
@@ -202,7 +202,7 @@ Tuple Protocol</h1>
 </div><!-- fragment --><p>It enables Structured Bindings, allowing one to unpack custom types easily</p>
 <p>This serves as a manual reflection mechanism, as C++ (prior to C++26) lacks a proper reflection mechanism to inspect structures, these functions specifications are giving the necessary informations to the compiler in order to natively adapt your structure to be a tuple.</p>
 <hr  />
-<h1 class="doxsection"><a class="anchor" id="autotoc_md459"></a>
+<h1 class="doxsection"><a class="anchor" id="autotoc_md463"></a>
 Containers</h1>
 <p>In C++ <a href="https://eel.is/c++draft/containers">containers</a> are structures built in order to store data. There can be different kinds of containers such as dynamic containers (ex : <span class="tt">std::vector</span>), there are also static containers (ex: <span class="tt">std::array</span>) or associative ones (ex: <span class="tt">std::set</span>). These types are often focusing on storing homogeneous data, and some of them have properties ressembling product types, namely static contiguous containers. </p>
 </div></div><!-- contents -->
