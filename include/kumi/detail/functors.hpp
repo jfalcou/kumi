@@ -84,19 +84,20 @@ namespace kumi::_
     using type = T;
   };
 
-  template<typename T, auto I> using repeat_t = typename repeat<T, I>::type;
+  template<typename T, auto I> using repeat_t = typename kumi::_::repeat<T, I>::type;
 
   template<typename T, auto N> struct as_homogeneous
   {
-    template<std::size_t... I> static consteval auto homogeneify(std::index_sequence<I...>) -> tuple<repeat_t<T, I>...>;
+    template<std::size_t... I>
+    static consteval auto homogeneify(std::index_sequence<I...>) -> tuple<kumi::_::repeat_t<T, I>...>;
 
     using type = std::remove_cvref_t<decltype(homogeneify(std::make_index_sequence<N>{}))>;
   };
 
-  template<typename T, auto N> using as_homogeneous_t = typename as_homogeneous<T, N>::type;
+  template<typename T, auto N> using as_homogeneous_t = typename kumi::_::as_homogeneous<T, N>::type;
 
-  inline constexpr container_of_index_t container_of_index{};
-  inline constexpr element_of_index_t element_of_index{};
-  inline constexpr unflatten_index_t unflatten_index{};
-  inline constexpr digits_ digits{};
+  inline constexpr kumi::_::container_of_index_t container_of_index{};
+  inline constexpr kumi::_::element_of_index_t element_of_index{};
+  inline constexpr kumi::_::unflatten_index_t unflatten_index{};
+  inline constexpr kumi::_::digits_ digits{};
 }

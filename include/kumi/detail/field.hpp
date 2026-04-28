@@ -25,7 +25,7 @@ namespace kumi
   template<typename Id, typename T> struct field
   {
     /// Name associated to the field
-    static constexpr auto label() { return _::make_str(Id{}); }
+    static constexpr auto label() { return kumi::_::make_str(Id{}); }
 
     using type = T;
     using identifier_type = Id;
@@ -66,7 +66,7 @@ namespace kumi
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, field const& w) noexcept
     {
-      return os << _::make_str(std::remove_cvref_t<Id>{}) << " : " << _::make_streamable(w.value);
+      return os << kumi::_::make_str(std::remove_cvref_t<Id>{}) << " : " << kumi::_::make_streamable(w.value);
     }
   };
 
@@ -76,7 +76,7 @@ namespace kumi
   struct field<Id, T> : T
   {
     /// Name associated to the field
-    static constexpr auto label() { return _::make_str(Id{}); }
+    static constexpr auto label() { return kumi::_::make_str(Id{}); }
 
     using type = T;
     using identifier_type = Id;
@@ -115,18 +115,18 @@ namespace kumi
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, field const& w) noexcept
     {
-      return os << _::make_str(std::remove_cvref_t<Id>{}) << " : "
-                << _::make_streamable(w(_::identifier_of_t<decltype(w)>{}));
+      return os << kumi::_::make_str(std::remove_cvref_t<Id>{}) << " : "
+                << kumi::_::make_streamable(w(_::identifier_of_t<decltype(w)>{}));
     }
   };
 
   /// Specialisation to clearly indicate an error
   template<typename Id, typename T>
-  requires(!_::valid_label<Id>)
+  requires(!kumi::_::valid_label<Id>)
   struct field<Id, T>
   {
     field(T&&) = delete;
-    static_assert(_::valid_label<Id>, "User defined to_str(...) function is not constexpr");
+    static_assert(kumi::_::valid_label<Id>, "User defined to_str(...) function is not constexpr");
   };
 
   //====================================================================================================================
@@ -156,7 +156,7 @@ namespace kumi
   //====================================================================================================================
   template<typename T> [[nodiscard]] KUMI_ABI consteval auto identifier_of() noexcept
   {
-    if constexpr (_::field<T>) return _::identifier_of_t<T>{};
+    if constexpr (kumi::_::field<T>) return kumi::_::identifier_of_t<T>{};
     else return kumi::unknown{};
   }
 
@@ -187,7 +187,7 @@ namespace kumi
   //====================================================================================================================
   template<typename T> [[nodiscard]] KUMI_ABI consteval str label_of() noexcept
   {
-    if constexpr (_::field<T>) return _::label_of_t<T>{};
+    if constexpr (kumi::_::field<T>) return kumi::_::label_of_t<T>{};
     else return kumi::unknown{};
   }
 
@@ -219,7 +219,7 @@ namespace kumi
   //====================================================================================================================
   template<typename T> [[nodiscard]] KUMI_ABI constexpr decltype(auto) field_value_of(T&& t) noexcept
   {
-    if constexpr (_::field<T>) return (KUMI_FWD(t)(_::identifier_of_t<T>{}));
+    if constexpr (kumi::_::field<T>) return (KUMI_FWD(t)(kumi::_::identifier_of_t<T>{}));
     else return KUMI_FWD(t);
   }
 
@@ -252,7 +252,7 @@ namespace kumi
   template<_::identifier auto Name, typename T>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) capture_field(T&& t) noexcept
   {
-    return field<decltype(Name), T>{KUMI_FWD(t)};
+    return kumi::field<decltype(Name), T>{KUMI_FWD(t)};
   }
 
   //====================================================================================================================
@@ -285,11 +285,11 @@ namespace kumi
   //====================================================================================================================
   template<typename U, typename T> [[nodiscard]] KUMI_ABI constexpr decltype(auto) field_cast(T&& t) noexcept
   {
-    if constexpr (_::field<U>)
-      return field<_::identifier_of_t<T>, _::type_of_t<U>>{
-        static_cast<_::type_of_t<U>>(KUMI_FWD(t)(_::identifier_of_t<T>{}))};
-    else if constexpr (!_::field<T>) return static_cast<_::type_of_t<U>>(KUMI_FWD(t));
-    else return field<_::identifier_of_t<T>, U>{static_cast<U>(KUMI_FWD(t)(_::identifier_of_t<T>{}))};
+    if constexpr (kumi::_::field<U>)
+      return kumi::field<kumi::_::identifier_of_t<T>, kumi::_::type_of_t<U>>{
+        static_cast<kumi::_::type_of_t<U>>(KUMI_FWD(t)(kumi::_::identifier_of_t<T>{}))};
+    else if constexpr (!kumi::_::field<T>) return static_cast<kumi::_::type_of_t<U>>(KUMI_FWD(t));
+    else return kumi::field<kumi::_::identifier_of_t<T>, U>{static_cast<U>(KUMI_FWD(t)(kumi::_::identifier_of_t<T>{}))};
   }
 
   namespace result
@@ -309,7 +309,7 @@ namespace kumi
       using type = decltype(kumi::field_value_of(std::declval<T>()));
     };
 
-    template<_::identifier auto Name, typename T> struct capture_field
+    template<kumi::_::identifier auto Name, typename T> struct capture_field
     {
       using type = decltype(kumi::capture_field<Name>(std::declval<T>()));
     };
@@ -319,14 +319,15 @@ namespace kumi
       using type = decltype(kumi::field_cast<U, T>(std::declval<T>()));
     };
 
-    template<typename T> using identifier_of_t = typename identifier_of<T>::type;
+    template<typename T> using identifier_of_t = typename kumi::result::identifier_of<T>::type;
 
-    template<typename T> using label_of_t = typename label_of<T>::type;
+    template<typename T> using label_of_t = typename kumi::result::label_of<T>::type;
 
-    template<typename T> using field_value_of_t = typename field_value_of<T>::type;
+    template<typename T> using field_value_of_t = typename kumi::result::field_value_of<T>::type;
 
-    template<_::identifier auto Name, typename T> using capture_field_t = typename capture_field<Name, T>::type;
+    template<_::identifier auto Name, typename T>
+    using capture_field_t = typename kumi::result::capture_field<Name, T>::type;
 
-    template<typename U, typename T> using field_cast_t = typename field_cast<U, T>::type;
+    template<typename U, typename T> using field_cast_t = typename kumi::result::field_cast<U, T>::type;
   }
 }

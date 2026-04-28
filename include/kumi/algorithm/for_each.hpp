@@ -32,28 +32,28 @@ namespace kumi
     @include doc/record/algo/for_each.cpp
   **/
   //====================================================================================================================
-  template<typename Function, concepts::product_type T, concepts::product_type... Ts>
+  template<typename Function, kumi::concepts::product_type T, kumi::concepts::product_type... Ts>
   KUMI_ABI constexpr void for_each(Function f, T&& t, Ts&&... ts)
-  requires(concepts::compatible_product_types<T, Ts...>)
+  requires(kumi::concepts::compatible_product_types<T, Ts...>)
 #ifndef KUMI_DOXYGEN_INVOKED
-          && (_::supports_call<Function&, T, Ts...>)
+          && (kumi::_::supports_call<Function&, T, Ts...>)
 #endif
   {
-    if constexpr (concepts::empty_product_type<T>) return;
+    if constexpr (kumi::concepts::empty_product_type<T>) return;
     else
     {
       auto const invoker{[&](auto const I) {
-        if constexpr (concepts::record_type<T>)
+        if constexpr (kumi::concepts::record_type<T>)
         {
-          constexpr auto field = identifier_of<element_t<I, T>>();
-          invoke(f, get<field>(KUMI_FWD(t)), get<field>(KUMI_FWD(ts))...);
+          constexpr auto field = kumi::identifier_of<kumi::element_t<I, T>>();
+          kumi::invoke(f, get<field>(KUMI_FWD(t)), get<field>(KUMI_FWD(ts))...);
         }
-        else invoke(f, get<I>(KUMI_FWD(t)), get<I>(KUMI_FWD(ts))...);
+        else kumi::invoke(f, get<I>(KUMI_FWD(t)), get<I>(KUMI_FWD(ts))...);
       }};
 
       [&]<std::size_t... I>(std::index_sequence<I...>) {
         (invoker(index<I>), ...);
-      }(std::make_index_sequence<size_v<T>>{});
+      }(std::make_index_sequence<kumi::size_v<T>>{});
     }
   }
 
@@ -77,18 +77,18 @@ namespace kumi
     @include doc/tuple/algo/for_each_index.cpp
   **/
   //====================================================================================================================
-  template<typename Function, concepts::product_type T, concepts::product_type... Ts>
+  template<typename Function, kumi::concepts::product_type T, kumi::concepts::product_type... Ts>
   KUMI_ABI constexpr void for_each_index(Function f, T&& t, Ts&&... ts)
-  requires(!concepts::record_type<T> && (!concepts::record_type<Ts> && ...))
+  requires(!kumi::concepts::record_type<T> && (!kumi::concepts::record_type<Ts> && ...))
   {
-    if constexpr (concepts::empty_product_type<T>) return;
+    if constexpr (kumi::concepts::empty_product_type<T>) return;
     else
     {
-      auto const invoker{[&](auto const I) { invoke(f, I, get<I>(KUMI_FWD(t)), get<I>(KUMI_FWD(ts))...); }};
+      auto const invoker{[&](auto const I) { kumi::invoke(f, I, get<I>(KUMI_FWD(t)), get<I>(KUMI_FWD(ts))...); }};
 
       [&]<std::size_t... I>(std::index_sequence<I...>) {
         (invoker(index<I>), ...);
-      }(std::make_index_sequence<size_v<T>>{});
+      }(std::make_index_sequence<kumi::size_v<T>>{});
     }
   }
 
@@ -115,22 +115,22 @@ namespace kumi
     @include doc/record/algo/for_each_field.cpp
   **/
   //====================================================================================================================
-  template<typename Function, concepts::record_type R, concepts::record_type... Rs>
+  template<typename Function, kumi::concepts::record_type R, kumi::concepts::record_type... Rs>
   KUMI_ABI constexpr void for_each_field(Function f, R&& r, Rs&&... rs)
-  requires(concepts::compatible_product_types<R, Rs...>)
+  requires(kumi::concepts::compatible_product_types<R, Rs...>)
   {
-    if constexpr (concepts::empty_product_type<R>) return;
+    if constexpr (kumi::concepts::empty_product_type<R>) return;
     else
     {
-      constexpr auto fields = members_of(as<R>{});
+      constexpr auto fields = kumi::members_of(as<R>{});
       auto const invoker = [&](auto const I) {
         constexpr auto field = get<I>(fields);
-        invoke(f, _::make_str(field), get<field>(KUMI_FWD(r)), get<field>(KUMI_FWD(rs))...);
+        kumi::invoke(f, kumi::_::make_str(field), get<field>(KUMI_FWD(r)), get<field>(KUMI_FWD(rs))...);
       };
 
       [&]<std::size_t... I>(std::index_sequence<I...>) {
         (invoker(index<I>), ...);
-      }(std::make_index_sequence<size_v<R>>{});
+      }(std::make_index_sequence<kumi::size_v<R>>{});
     }
   }
 }

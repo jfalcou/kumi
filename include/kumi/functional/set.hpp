@@ -23,22 +23,22 @@ namespace kumi
     };
 
     template<std::size_t I, std::size_t... Is, typename T, typename... Ts>
-    struct multiset<std::index_sequence<I, Is...>, T, Ts...> : multiset<std::index_sequence<Is...>, Ts...>
+    struct multiset<std::index_sequence<I, Is...>, T, Ts...> : kumi::_::multiset<std::index_sequence<Is...>, Ts...>
     {
       consteval auto operator()(std::type_identity<T>) const noexcept
       {
         return std::integral_constant<std::size_t, I>{};
       }
 
-      using multiset<std::index_sequence<Is...>, Ts...>::operator();
+      using kumi::_::multiset<std::index_sequence<Is...>, Ts...>::operator();
     };
 
     template<typename... Ts> struct make_multiset
     {
-      using type = multiset<Ts...>;
+      using type = kumi::_::multiset<Ts...>;
     };
 
-    template<typename... Ts> using make_multiset_t = typename make_multiset<Ts...>::type;
+    template<typename... Ts> using make_multiset_t = typename kumi::_::make_multiset<Ts...>::type;
   }
 
   namespace function
@@ -58,7 +58,7 @@ namespace kumi
     {
       template<typename... Ts> KUMI_ABI consteval auto operator()(std::type_identity<Ts>...) const noexcept
       {
-        using type = _::make_multiset_t<std::make_index_sequence<sizeof...(Ts)>, Ts...>;
+        using type = kumi::_::make_multiset_t<std::make_index_sequence<sizeof...(Ts)>, Ts...>;
         constexpr type impl{};
 
         struct
@@ -117,21 +117,21 @@ namespace kumi
     //==================================================================================================================
     struct adjacent_unicity_t
     {
-      template<concepts::product_type T> KUMI_ABI consteval auto operator()(as<T>) const noexcept
+      template<kumi::concepts::product_type T> KUMI_ABI consteval auto operator()(kumi::as<T>) const noexcept
       {
         struct
         {
-          std::size_t count{1}, t[size_v<T>];
+          std::size_t count{1}, t[kumi::size_v<T>];
         } that{};
 
         that.t[0] = 0;
 
         [&]<std::size_t... I>(std::index_sequence<I...>) {
-          ((void)((std::is_same_v<stored_element_t<I, T>, stored_element_t<I + 1, T>>)
+          ((void)((std::is_same_v<kumi::stored_element_t<I, T>, kumi::stored_element_t<I + 1, T>>)
                     ? I
                     : (that.t[that.count++] = I + 1)),
            ...);
-        }(std::make_index_sequence<size_v<T> - 1>{});
+        }(std::make_index_sequence<kumi::size_v<T> - 1>{});
 
         return that;
       }
@@ -143,7 +143,7 @@ namespace kumi
       @brief    Callable object computing the index map associated to the adjactent unicity operation.
     **/
     //==================================================================================================================
-    inline constexpr adjacent_unicity_t uniqued{};
+    inline constexpr kumi::function::adjacent_unicity_t uniqued{};
 
     //==================================================================================================================
     /**
@@ -151,7 +151,7 @@ namespace kumi
       @brief    Callable object computing the index map associated to the deduplication operation.
     **/
     //==================================================================================================================
-    inline constexpr unique_t uniquer{};
+    inline constexpr kumi::function::unique_t uniquer{};
 
     //==================================================================================================================
     /**
@@ -159,6 +159,6 @@ namespace kumi
       @brief    Callable object computing the index map associated to the selection operation.
     **/
     //==================================================================================================================
-    inline constexpr select_t selector{};
+    inline constexpr kumi::function::select_t selector{};
   }
 }

@@ -41,7 +41,7 @@ namespace kumi
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         auto eval = [](auto, auto const& vv) { return vv; };
-        return kumi::tuple{eval(index<I>, v)...};
+        return kumi::tuple{eval(kumi::index<I>, v)...};
       }(std::make_index_sequence<N>{});
   }
 
@@ -76,7 +76,7 @@ namespace kumi
     if constexpr (N == 0) return kumi::tuple{};
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return kumi::tuple{invoke(f, index<I>)...};
+        return kumi::tuple{kumi::invoke(f, kumi::index<I>)...};
       }(std::make_index_sequence<N>{});
   }
 
@@ -133,10 +133,10 @@ namespace kumi
       using type = decltype(kumi::iota<N>(std::declval<T>()));
     };
 
-    template<std::size_t N, typename T> using fill_t = typename fill<N, T>::type;
+    template<std::size_t N, typename T> using fill_t = typename kumi::result::fill<N, T>::type;
 
-    template<std::size_t N, typename Function> using generate_t = typename generate<N, Function>::type;
+    template<std::size_t N, typename Function> using generate_t = typename kumi::result::generate<N, Function>::type;
 
-    template<std::size_t N, typename T> using iota_t = typename iota<N, T>::type;
+    template<std::size_t N, typename T> using iota_t = typename kumi::result::iota<N, T>::type;
   }
 }

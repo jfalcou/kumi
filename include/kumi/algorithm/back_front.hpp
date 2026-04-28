@@ -39,9 +39,9 @@ namespace kumi
     @include doc/record/algo/back-front.cpp
   **/
   //====================================================================================================================
-  template<concepts::non_empty_product_type T> [[nodiscard]] KUMI_ABI constexpr decltype(auto) front(T&& t)
+  template<kumi::concepts::non_empty_product_type T> [[nodiscard]] KUMI_ABI constexpr decltype(auto) front(T&& t)
   {
-    if constexpr (concepts::record_type<T>) return front(values_of(KUMI_FWD(t)));
+    if constexpr (kumi::concepts::record_type<T>) return kumi::front(kumi::values_of(KUMI_FWD(t)));
     else return get<0>(KUMI_FWD(t));
   }
 
@@ -75,23 +75,23 @@ namespace kumi
     @include doc/record/algo/back-front.cpp
   **/
   //====================================================================================================================
-  template<concepts::non_empty_product_type T> [[nodiscard]] KUMI_ABI constexpr decltype(auto) back(T&& t)
+  template<kumi::concepts::non_empty_product_type T> [[nodiscard]] KUMI_ABI constexpr decltype(auto) back(T&& t)
   {
-    if constexpr (concepts::record_type<T>) return back(values_of(KUMI_FWD(t)));
-    else return get<size_v<T> - 1>(KUMI_FWD(t));
+    if constexpr (kumi::concepts::record_type<T>) return kumi::back(values_of(KUMI_FWD(t)));
+    else return get<kumi::size_v<T> - 1>(KUMI_FWD(t));
   }
 
   namespace result
   {
-    template<concepts::product_type T> struct front : stored_member<0, T>
+    template<kumi::concepts::product_type T> struct front : kumi::stored_member<0, T>
     {
     };
 
-    template<concepts::product_type T> struct back : stored_member<size_v<T> - 1, T>
+    template<kumi::concepts::product_type T> struct back : kumi::stored_member<kumi::size_v<T> - 1, T>
     {
     };
 
-    template<concepts::product_type T> using front_t = typename front<T>::type;
-    template<concepts::product_type T> using back_t = typename back<T>::type;
+    template<kumi::concepts::product_type T> using front_t = typename kumi::result::front<T>::type;
+    template<kumi::concepts::product_type T> using back_t = typename kumi::result::back<T>::type;
   }
 }

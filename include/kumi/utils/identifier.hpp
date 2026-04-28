@@ -28,7 +28,7 @@ namespace kumi
     @include doc/infra/only.cpp
   **/
   //====================================================================================================================
-  template<typename T> inline constexpr only_t<T> only = {};
+  template<typename T> inline constexpr kumi::only_t<T> only = {};
 
   //====================================================================================================================
   /**
@@ -51,7 +51,7 @@ namespace kumi
 
     constexpr identifier(ID const&) noexcept {}
 
-    template<typename T> constexpr field<type, std::unwrap_ref_decay_t<T>> operator=(T&& v) const noexcept
+    template<typename T> constexpr kumi::field<type, std::unwrap_ref_decay_t<T>> operator=(T&& v) const noexcept
     {
       return {KUMI_FWD(v)};
     }
@@ -60,7 +60,7 @@ namespace kumi
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os,
                                                          identifier const&) noexcept
     {
-      return os << _::make_str(type{});
+      return os << kumi::_::make_str(type{});
     }
   };
 
@@ -88,7 +88,7 @@ namespace kumi
     using type = identifier<ID, Checker>;
 
     //! A checked field str representation is the underlying type, checker is ignored
-    friend constexpr str to_str(identifier<ID, Checker> const&) { return _::make_str(ID{}); }
+    friend constexpr kumi::str to_str(identifier<ID, Checker> const&) { return kumi::_::make_str(ID{}); }
 
     //! @brief Default constructor
     constexpr identifier() noexcept {}
@@ -128,14 +128,14 @@ namespace kumi
     //==================================================================================================================
     template<typename T>
     requires(Checker::template value<T>)
-    constexpr auto operator=(T&& v) const noexcept -> field<type, std::unwrap_ref_decay_t<T>>
+    constexpr auto operator=(T&& v) const noexcept -> kumi::field<type, std::unwrap_ref_decay_t<T>>
     {
       return {KUMI_FWD(v)};
     }
 
     template<typename T>
     requires(!Checker::template value<T>)
-    constexpr field<type, std::unwrap_ref_decay_t<T>> operator=(T&& v) const = delete;
+    constexpr kumi::field<type, std::unwrap_ref_decay_t<T>> operator=(T&& v) const = delete;
 
     //! @related kumi::identifier
     //! @brief Output stream insertion
@@ -143,7 +143,7 @@ namespace kumi
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os,
                                                          identifier const& id) noexcept
     {
-      return os << _::make_str(id);
+      return os << kumi::_::make_str(id);
     }
   };
 
@@ -158,13 +158,13 @@ namespace kumi
     @tparam ID Compile-time string representing an indentifier
   **/
   //====================================================================================================================
-  template<str ID> struct name
+  template<kumi::str ID> struct name
   {
     //! @brief Derived identifier type
     using type = name<ID>;
 
     //! A name field str representation is it s owned str
-    friend constexpr str to_str(name<ID> const&) { return ID; }
+    friend constexpr kumi::str to_str(name<ID> const&) { return ID; }
 
     //==================================================================================================================
     /**
@@ -176,7 +176,7 @@ namespace kumi
       @return A kumi::field binding the identifier to `v`.
     **/
     //==================================================================================================================
-    template<typename T> constexpr auto operator=(T&& v) const noexcept -> field<type, std::unwrap_ref_decay_t<T>>
+    template<typename T> constexpr auto operator=(T&& v) const noexcept -> kumi::field<type, std::unwrap_ref_decay_t<T>>
     {
       return {KUMI_FWD(v)};
     }
@@ -191,7 +191,8 @@ namespace kumi
   };
 
   //! identifier comparison
-  template<concepts::identifier L, kumi::concepts::identifier R> KUMI_ABI constexpr bool operator==(L const&, R const&)
+  template<kumi::concepts::identifier L, kumi::concepts::identifier R>
+  KUMI_ABI constexpr bool operator==(L const&, R const&)
   {
     return std::same_as<std::remove_cvref_t<L>, std::remove_cvref_t<R>>;
   }
@@ -203,17 +204,17 @@ namespace kumi
     template<auto N, typename... Ts> KUMI_ABI constexpr auto contains_identifier()
     {
       if constexpr (std::integral<std::remove_cvref_t<decltype(N)>>) return false;
-      else if constexpr (concepts::index<decltype(N)>) return false;
-      else if constexpr (concepts::identifier<std::remove_cvref_t<decltype(N)>>) return false;
-      else return can_get_field_by_value<name<N>, Ts...>;
+      else if constexpr (kumi::concepts::index<decltype(N)>) return false;
+      else if constexpr (kumi::concepts::identifier<std::remove_cvref_t<decltype(N)>>) return false;
+      else return kumi::_::can_get_field_by_value<kumi::name<N>, Ts...>;
     }
 
     template<auto N, typename... Ts> KUMI_ABI constexpr auto contains_label()
     {
       if constexpr (std::integral<std::remove_cvref_t<decltype(N)>>) return false;
-      else if constexpr (concepts::index<decltype(N)>) return false;
-      else if constexpr (!std::is_same_v<std::remove_cvref_t<decltype(N)>, str>) return false;
-      else return can_get_field_by_label<std::integral_constant<kumi::str, N>, Ts...>;
+      else if constexpr (kumi::concepts::index<decltype(N)>) return false;
+      else if constexpr (!std::is_same_v<std::remove_cvref_t<decltype(N)>, kumi::str>) return false;
+      else return kumi::_::can_get_field_by_label<std::integral_constant<kumi::str, N>, Ts...>;
     }
   }
 }

@@ -9,6 +9,16 @@
 
 namespace kumi
 {
+  namespace _
+  {
+    template<char... c> constexpr auto b10()
+    {
+      auto value = 0ULL;
+      ((value = value * 10 + (c - '0')), ...);
+      return value;
+    }
+  }
+
   //====================================================================================================================
   /**
     @ingroup types
@@ -33,7 +43,7 @@ namespace kumi
     @brief Inline integral constant value for kumi::index_t
   **/
   //====================================================================================================================
-  template<std::size_t N> inline constexpr index_t<N> const index = {};
+  template<std::size_t N> inline constexpr kumi::index_t<N> const index = {};
 
   //====================================================================================================================
   /**
@@ -44,15 +54,15 @@ namespace kumi
     Defines a Literal constant wrapper used to carry compile-time strings through API
   **/
   //====================================================================================================================
-  template<str Label> struct label_t
+  template<kumi::str Label> struct label_t
   {
     using type = str;
 
     /// Value stored by the constant
-    static constexpr str value = Label;
+    static constexpr kumi::str value = Label;
 
     /// Conversion operator to kumi::str
-    constexpr inline operator str() const noexcept { return Label; }
+    constexpr inline operator kumi::str() const noexcept { return Label; }
 
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, label_t const&) noexcept
@@ -67,7 +77,7 @@ namespace kumi
     @brief Inline literal constant value for kumi::label_t
   **/
   //====================================================================================================================
-  template<str Label> inline constexpr label_t<Label> label = {};
+  template<str Label> inline constexpr kumi::label_t<Label> label = {};
 
   //====================================================================================================================
   /**
@@ -77,13 +87,6 @@ namespace kumi
   //====================================================================================================================
   inline namespace literals
   {
-    template<char... c> constexpr auto b10()
-    {
-      auto value = 0ULL;
-      ((value = value * 10 + (c - '0')), ...);
-      return value;
-    }
-
     //==================================================================================================================
     /**
       @ingroup utility
@@ -95,7 +98,7 @@ namespace kumi
     //==================================================================================================================
     template<char... c> constexpr auto operator""_c() noexcept
     {
-      return index<b10<c...>()>;
+      return kumi::index<kumi::_::b10<c...>()>;
     }
 
     //==================================================================================================================
@@ -109,7 +112,7 @@ namespace kumi
     //==================================================================================================================
     template<kumi::str ID> constexpr auto operator""_id() noexcept
     {
-      return name<ID>{};
+      return kumi::name<ID>{};
     }
 
     //==================================================================================================================
@@ -127,7 +130,7 @@ namespace kumi
     //==================================================================================================================
     template<kumi::str ID> constexpr auto operator""_l() noexcept
     {
-      return label<ID>;
+      return kumi::label<ID>;
     }
   }
 
@@ -155,13 +158,13 @@ namespace kumi
     @return the index of the element of type U in the product type if it exist
   **/
   //====================================================================================================================
-  template<typename U, concepts::product_type T>
+  template<typename U, kumi::concepts::product_type T>
   KUMI_ABI consteval auto get_index_of_type()
-  requires(concepts::queryable_by_type<U, T>)
+  requires(kumi::concepts::queryable_by_type<U, T>)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return _::get_index_by_type_v<U, stored_element_t<I, T>...>;
-    }(std::make_index_sequence<size_v<T>>{});
+      return kumi::_::get_index_by_type_v<U, kumi::stored_element_t<I, T>...>;
+    }(std::make_index_sequence<kumi::size_v<T>>{});
   }
 
   //====================================================================================================================
@@ -175,13 +178,13 @@ namespace kumi
     @return the index of the element whose identifier matches Id in the product type if it exist
   **/
   //====================================================================================================================
-  template<concepts::identifier Id, concepts::product_type T>
+  template<kumi::concepts::identifier Id, kumi::concepts::product_type T>
   KUMI_ABI consteval auto get_index_of_field()
-  requires(concepts::queryable_by_identifier<Id, T>)
+  requires(kumi::concepts::queryable_by_identifier<Id, T>)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return _::get_index_by_value_v<Id, element_t<I, T>...>;
-    }(std::make_index_sequence<size_v<T>>{});
+      return kumi::_::get_index_by_value_v<Id, kumi::element_t<I, T>...>;
+    }(std::make_index_sequence<kumi::size_v<T>>{});
   }
 
   //====================================================================================================================
@@ -195,12 +198,12 @@ namespace kumi
     @return the index of the element whose identifier matches Id in the product type if it exist
   **/
   //====================================================================================================================
-  template<str L, concepts::product_type T>
+  template<kumi::str L, kumi::concepts::product_type T>
   KUMI_ABI consteval auto get_index_of_label()
-  requires(concepts::queryable_by_label<label_t<L>, T>)
+  requires(kumi::concepts::queryable_by_label<kumi::label_t<L>, T>)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return _::get_index_by_label_v<label_t<L>, element_t<I, T>...>;
-    }(std::make_index_sequence<size_v<T>>{});
+      return kumi::_::get_index_by_label_v<kumi::label_t<L>, kumi::element_t<I, T>...>;
+    }(std::make_index_sequence<kumi::size_v<T>>{});
   }
 }

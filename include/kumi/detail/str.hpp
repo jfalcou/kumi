@@ -87,7 +87,7 @@ namespace kumi
   //====================================================================================================================
   struct unknown
   {
-    constexpr inline operator str() const noexcept { return str{"kumi::unknown"}; }
+    constexpr inline operator kumi::str() const noexcept { return str{"kumi::unknown"}; }
 
     KUMI_ABI friend constexpr auto operator<=>(unknown const&, unknown const&) noexcept = default;
 

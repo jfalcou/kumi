@@ -100,22 +100,24 @@
   if constexpr (std::same_as<T, T##N>) return static_cast<T##N const&&>(member##N);
 
 #define KUMI_GET_NAME_LVALUE(N, I)                                                                                     \
-  if constexpr (field<T##N> && requires { member##N(I{}); }) return member##N(identifier_of_t<T##N>{});
+  if constexpr (kumi::_::field<T##N> && requires { member##N(I{}); })                                                  \
+    return member##N(kumi::_::identifier_of_t<T##N>{});
 
 #define KUMI_GET_NAME_RVALUE(N, I)                                                                                     \
-  if constexpr (field<T##N> && requires { member##N(I{}); })                                                           \
-    return static_cast<T##N&&>(member##N)(identifier_of_t<T##N>{});
+  if constexpr (kumi::_::field<T##N> && requires { member##N(I{}); })                                                  \
+    return static_cast<T##N&&>(member##N)(kumi::_::identifier_of_t<T##N>{});
 
 #define KUMI_GET_NAME_CONST_RVALUE(N, I)                                                                               \
-  if constexpr (field<T##N> && requires { member##N(I{}); })                                                           \
-    return static_cast<T##N const&&>(member##N)(identifier_of_t<T##N>{});
+  if constexpr (kumi::_::field<T##N> && requires { member##N(I{}); })                                                  \
+    return static_cast<T##N const&&>(member##N)(kumi::_::identifier_of_t<T##N>{});
 
 //======================================================================================================================
 // Macro used to define the optimized inner structure of a product type
 //======================================================================================================================
 #define KUMI_BINDER(N)                                                                                                 \
   template<KUMI_PP_ENUM(N, KUMI_PP_TAC, typename T)>                                                                   \
-  requires(no_empty<KUMI_PP_ENUM(N, KUMI_PP_TAC, T)> && no_references<KUMI_PP_ENUM(N, KUMI_PP_TAC, T)>)                \
+  requires(kumi::_::no_empty<KUMI_PP_ENUM(N, KUMI_PP_TAC, T)> &&                                                       \
+           kumi::_::no_references<KUMI_PP_ENUM(N, KUMI_PP_TAC, T)>)                                                    \
   struct binder<std::integer_sequence<int, KUMI_PP_ENUM(N, KUMI_PP_IDENTITY, _)>, KUMI_PP_ENUM(N, KUMI_PP_TAC, T)>     \
   {                                                                                                                    \
     static constexpr bool is_homogeneous = (N == 1);                                                                   \
@@ -138,19 +140,19 @@
       KUMI_PP_REPEAT(N, KUMI_GET_TYPE_LVALUE, T)                                                                       \
     }                                                                                                                  \
                                                                                                                        \
-    template<identifier I> KUMI_ABI constexpr auto& operator()(I) & noexcept                                           \
+    template<kumi::_::identifier I> KUMI_ABI constexpr auto& operator()(I) & noexcept                                  \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_NAME_LVALUE, I)                                                                       \
     }                                                                                                                  \
-    template<identifier I> KUMI_ABI constexpr auto&& operator()(I) && noexcept                                         \
+    template<kumi::_::identifier I> KUMI_ABI constexpr auto&& operator()(I) && noexcept                                \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_NAME_RVALUE, I)                                                                       \
     }                                                                                                                  \
-    template<identifier I> KUMI_ABI constexpr auto const&& operator()(I) const&& noexcept                              \
+    template<kumi::_::identifier I> KUMI_ABI constexpr auto const&& operator()(I) const&& noexcept                     \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_NAME_CONST_RVALUE, I)                                                                 \
     }                                                                                                                  \
-    template<identifier I> KUMI_ABI constexpr auto const& operator()(I) const& noexcept                                \
+    template<kumi::_::identifier I> KUMI_ABI constexpr auto const& operator()(I) const& noexcept                       \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_NAME_LVALUE, I)                                                                       \
     }                                                                                                                  \

@@ -47,25 +47,25 @@ namespace kumi
     @include doc/record/algo/zip.cpp
   **/
   //====================================================================================================================
-  template<concepts::product_type T0, concepts::sized_product_type<size_v<T0>>... Ts>
+  template<kumi::concepts::product_type T0, kumi::concepts::sized_product_type<kumi::size_v<T0>>... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto zip(T0&& t0, Ts&&... ts)
-  requires(concepts::follows_same_semantic<T0, Ts...>)
+  requires(kumi::concepts::follows_same_semantic<T0, Ts...>)
   {
-    if constexpr (concepts::sized_product_type<T0, 0>) return tuple{};
+    if constexpr (kumi::concepts::sized_product_type<T0, 0>) return kumi::tuple{};
     else
     {
       constexpr auto count = 1 + sizeof...(Ts);
-      constexpr auto pos = function::zipper(index<count>, index<size_v<T0>>);
-      using res_type = common_product_type_t<std::remove_cvref_t<T0>, std::remove_cvref_t<Ts>...>;
+      constexpr auto pos = kumi::function::zipper(kumi::index<count>, kumi::index<kumi::size_v<T0>>);
+      using res_type = kumi::common_product_type_t<std::remove_cvref_t<T0>, std::remove_cvref_t<Ts>...>;
 
       auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>) {
         auto tps = kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...);
-        using type = builder_make_t<res_type, element_t<k, element_t<I, decltype(tps)>>...>;
+        using type = builder_make_t<res_type, kumi::element_t<k, kumi::element_t<I, decltype(tps)>>...>;
         return type{get<k>(get<I>(KUMI_FWD(tps)))...};
       };
 
       return [&]<std::size_t... N>(std::index_sequence<N...>) {
-        return kumi::make_tuple(maps(index<N>, get<0>(pos))...);
+        return kumi::make_tuple(maps(kumi::index<N>, get<0>(pos))...);
       }(get<1>(pos));
     }
   }
@@ -110,27 +110,27 @@ namespace kumi
     @include doc/record/algo/zip_min.cpp
   **/
   //====================================================================================================================
-  template<concepts::product_type T0, concepts::product_type... Ts>
+  template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto zip_min(T0&& t0, Ts&&... ts)
-  requires(concepts::follows_same_semantic<T0, Ts...>)
+  requires(kumi::concepts::follows_same_semantic<T0, Ts...>)
   {
-    constexpr std::size_t min = _::min(size_v<T0>, size_v<Ts>...);
-    if constexpr (min == 0) return tuple{};
+    constexpr std::size_t min = kumi::_::min(kumi::size_v<T0>, kumi::size_v<Ts>...);
+    if constexpr (min == 0) return kumi::tuple{};
     else
     {
       constexpr std::size_t count = 1 + sizeof...(Ts);
-      constexpr auto pos = function::zipper(index<count>, index<min>);
+      constexpr auto pos = kumi::function::zipper(kumi::index<count>, kumi::index<min>);
 
-      using res_type = common_product_type_t<std::remove_cvref_t<T0>, std::remove_cvref_t<Ts>...>;
+      using res_type = kumi::common_product_type_t<std::remove_cvref_t<T0>, std::remove_cvref_t<Ts>...>;
 
       auto maps = [&]<std::size_t... I>(auto E, std::index_sequence<I...>) {
         auto tps = kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...);
-        using type = builder_make_t<res_type, element_t<E, element_t<I, decltype(tps)>>...>;
+        using type = builder_make_t<res_type, kumi::element_t<E, kumi::element_t<I, decltype(tps)>>...>;
         return type{get<E>(get<I>(KUMI_FWD(tps)))...};
       };
 
       return [&]<std::size_t... N>(std::index_sequence<N...>) {
-        return kumi::make_tuple(maps(index<N>, get<0>(pos))...);
+        return kumi::make_tuple(maps(kumi::index<N>, get<0>(pos))...);
       }(get<1>(pos));
     }
   }
@@ -172,55 +172,57 @@ namespace kumi
     @include doc/tuple/algo/zip_max.cpp
   **/
   //====================================================================================================================
-  template<concepts::product_type T0, concepts::product_type... Ts>
+  template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto zip_max(T0&& t0, Ts&&... ts)
-  requires(concepts::follows_same_semantic<T0, Ts...>)
+  requires(kumi::concepts::follows_same_semantic<T0, Ts...>)
   {
-    constexpr std::size_t max = _::max(size_v<T0>, size_v<Ts>...);
-    if constexpr (max == 0) return tuple{};
+    constexpr std::size_t max = kumi::_::max(kumi::size_v<T0>, kumi::size_v<Ts>...);
+    if constexpr (max == 0) return kumi::tuple{};
     else
     {
       constexpr std::size_t count = 1 + sizeof...(Ts);
-      constexpr auto pos = function::zipper(index<count>, index<max>);
-      using res_type = common_product_type_t<std::remove_cvref_t<T0>, std::remove_cvref_t<Ts>...>;
+      constexpr auto pos = kumi::function::zipper(kumi::index<count>, kumi::index<max>);
+      using res_type = kumi::common_product_type_t<std::remove_cvref_t<T0>, std::remove_cvref_t<Ts>...>;
 
       auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>) {
         auto tps = kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...);
 
-        using type = builder_make_t<res_type, function::element_or_t<k, element_t<I, decltype(tps)>, kumi::unit>...>;
+        using type =
+          builder_make_t<res_type, kumi::function::element_or_t<k, kumi::element_t<I, decltype(tps)>, kumi::unit>...>;
 
-        return type{function::get_or<k>(get<I>(KUMI_FWD(tps)), kumi::none)...};
+        return type{kumi::function::get_or<k>(get<I>(KUMI_FWD(tps)), kumi::none)...};
       };
 
       return [&]<std::size_t... N>(std::index_sequence<N...>) {
-        return kumi::make_tuple(maps(index<N>, get<0>(pos))...);
+        return kumi::make_tuple(maps(kumi::index<N>, get<0>(pos))...);
       }(get<1>(pos));
     }
   }
 
   namespace result
   {
-    template<concepts::product_type T0, concepts::sized_product_type<size_v<T0>>... Ts> struct zip
+    template<kumi::concepts::product_type T0, kumi::concepts::sized_product_type<kumi::size_v<T0>>... Ts> struct zip
     {
       using type = decltype(kumi::zip(std::declval<T0>(), std::declval<Ts>()...));
     };
 
-    template<concepts::product_type T0, concepts::product_type... Ts> struct zip_min
+    template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts> struct zip_min
     {
       using type = decltype(kumi::zip_min(std::declval<T0>(), std::declval<Ts>()...));
     };
 
-    template<concepts::product_type T0, concepts::product_type... Ts> struct zip_max
+    template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts> struct zip_max
     {
       using type = decltype(kumi::zip_max(std::declval<T0>(), std::declval<Ts>()...));
     };
 
-    template<concepts::product_type T0, concepts::product_type... Ts> using zip_t = typename zip<T0, Ts...>::type;
+    template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
+    using zip_t = typename kumi::result::zip<T0, Ts...>::type;
 
-    template<concepts::product_type T0, concepts::product_type... Ts>
-    using zip_min_t = typename zip_min<T0, Ts...>::type;
+    template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
+    using zip_min_t = typename kumi::result::zip_min<T0, Ts...>::type;
 
-    template<concepts::product_type T0, concepts::product_type... Ts>
-    using zip_max_t = typename zip_max<T0, Ts...>::type;
+    template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
+    using zip_max_t = typename kumi::result::zip_max<T0, Ts...>::type;
   }
 }
