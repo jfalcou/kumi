@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['plus_0',['plus',['../group__functional.html#gab5c0eb8022e7b2df33286d9a15247559',1,'kumi::function']]]
+  ['plus_0',['plus',['../group__functional.html#gab83f5dbd77ab8618b7925c9de6adb54d',1,'kumi::function']]]
 ];

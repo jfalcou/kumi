@@ -171,7 +171,7 @@ $(function(){initNavTree('group__tuple__related_ga727f8ab64140ca60bcb1c8aded343c
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;concepts::product_type T&gt; </div>
+template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type</a> T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -198,7 +198,7 @@ template&lt;concepts::product_type T&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A tuple equivalent to the result of <span class="tt"><a class="el" href="group__transforms_ga9982fadb19cb52094d6165bca7f57f25.html#ga9982fadb19cb52094d6165bca7f57f25" title="Invoke the Callable object f with the elements of the product type unrolled as arguments.">kumi::apply</a>([]&lt;typename... T&gt;(T&amp;&amp;... e)
-          { return <a class="el" href="group__tuple__related_ga5288a0680596f3c52e7313b964a60746.html#ga5288a0680596f3c52e7313b964a60746" title="Creates a kumi::tuple of forwarding references to its arguments.">kumi::forward_as_tuple</a>(std::forward&lt;T&gt;(e)...); }, t)</span></dd></dl>
+          { return <a class="el" href="group__tuple__related_gac167a1000c9c61798b7d8c684f3c804b.html#gac167a1000c9c61798b7d8c684f3c804b" title="Creates a kumi::tuple of forwarding references to its arguments.">kumi::forward_as_tuple</a>(std::forward&lt;T&gt;(e)...); }, t)</span></dd></dl>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md365"></a>
 Example:</h2>
 <div class="fragment"><div class="line"></div>
@@ -206,7 +206,7 @@ Example:</h2>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> original = <a class="code hl_function" href="group__tuple__related_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007">kumi::make_tuple</a>(0,<span class="charliteral">&#39;0&#39;</span>,0.f);</div>
+<div class="line">  <span class="keyword">auto</span> original = <a class="code hl_function" href="group__tuple__related_ga8570ddb839f6b158633537fd7113e795.html#ga8570ddb839f6b158633537fd7113e795">kumi::make_tuple</a>(0,<span class="charliteral">&#39;0&#39;</span>,0.f);</div>
 <div class="line">  <span class="keyword">auto</span> ref      = <a class="code hl_function" href="group__record__related_ga83a97fc306d9ecfacde28584b219b44a.html#ga83a97fc306d9ecfacde28584b219b44a">kumi::to_ref</a>( original );</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; original &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
@@ -217,9 +217,9 @@ Example:</h2>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; original &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__record__related_ga83a97fc306d9ecfacde28584b219b44a_html_ga83a97fc306d9ecfacde28584b219b44a"><div class="ttname"><a href="group__record__related_ga83a97fc306d9ecfacde28584b219b44a.html#ga83a97fc306d9ecfacde28584b219b44a">kumi::to_ref</a></div><div class="ttdeci">constexpr auto to_ref(R &amp;&amp;r)</div><div class="ttdoc">Creates a kumi::record of references given a reference to a kumi::record_type.</div><div class="ttdef"><b>Definition</b> record.hpp:512</div></div>
-<div class="ttc" id="agroup__tuple__related_ga98e6c367de0e0f526565280a0856b007_html_ga98e6c367de0e0f526565280a0856b007"><div class="ttname"><a href="group__tuple__related_ga98e6c367de0e0f526565280a0856b007.html#ga98e6c367de0e0f526565280a0856b007">kumi::make_tuple</a></div><div class="ttdeci">constexpr auto make_tuple(Ts &amp;&amp;... ts) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</div><div class="ttdoc">Creates a tuple object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> tuple.hpp:553</div></div>
-<div class="ttc" id="astructkumi_1_1record_abc2cd329ad25d155458850c19cc3b137_html_abc2cd329ad25d155458850c19cc3b137"><div class="ttname"><a href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::record::get</a></div><div class="ttdeci">decltype(auto) constexpr get(record&lt; Ts... &gt; &amp;r) noexcept</div><div class="ttdoc">Extracts the Ith field from a kumi::record.</div><div class="ttdef"><b>Definition</b> record.hpp:609</div></div>
+<div class="ttc" id="agroup__record__related_ga83a97fc306d9ecfacde28584b219b44a_html_ga83a97fc306d9ecfacde28584b219b44a"><div class="ttname"><a href="group__record__related_ga83a97fc306d9ecfacde28584b219b44a.html#ga83a97fc306d9ecfacde28584b219b44a">kumi::to_ref</a></div><div class="ttdeci">constexpr auto to_ref(R &amp;&amp;r)</div><div class="ttdoc">Creates a kumi::record of references given a reference to a kumi::record_type.</div><div class="ttdef"><b>Definition</b> record.hpp:518</div></div>
+<div class="ttc" id="agroup__tuple__related_ga8570ddb839f6b158633537fd7113e795_html_ga8570ddb839f6b158633537fd7113e795"><div class="ttname"><a href="group__tuple__related_ga8570ddb839f6b158633537fd7113e795.html#ga8570ddb839f6b158633537fd7113e795">kumi::make_tuple</a></div><div class="ttdeci">constexpr auto make_tuple(Ts &amp;&amp;... ts) -&gt; kumi::tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</div><div class="ttdoc">Creates a tuple object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> tuple.hpp:556</div></div>
+<div class="ttc" id="astructkumi_1_1record_abc2cd329ad25d155458850c19cc3b137_html_abc2cd329ad25d155458850c19cc3b137"><div class="ttname"><a href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::record::get</a></div><div class="ttdeci">decltype(auto) constexpr get(record&lt; Ts... &gt; &amp;r) noexcept</div><div class="ttdoc">Extracts the Ith field from a kumi::record.</div><div class="ttdef"><b>Definition</b> record.hpp:618</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

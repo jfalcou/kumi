@@ -171,7 +171,7 @@ $(function(){initNavTree('group__generators_ga418f0a47f05b67dbb354d274dee63e4e.h
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;concepts::product_type T&gt; </div>
+template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type</a> T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -208,7 +208,7 @@ Helper type</h2>
 <div class="line">  <span class="keyword">template</span>&lt;product_type T&gt;</div>
 <div class="line">  <span class="keyword">using </span>as_flat_ptr_t = <span class="keyword">typename</span> <a class="code hl_function" href="#ga418f0a47f05b67dbb354d274dee63e4e">as_flat_ptr&lt;T&gt;::type</a>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__generators_ga418f0a47f05b67dbb354d274dee63e4e_html_ga418f0a47f05b67dbb354d274dee63e4e"><div class="ttname"><a href="#ga418f0a47f05b67dbb354d274dee63e4e">kumi::as_flat_ptr</a></div><div class="ttdeci">auto as_flat_ptr(T &amp;&amp;t) noexcept</div><div class="ttdoc">Convert a product type to a flat product type of pointers to each its components.</div><div class="ttdef"><b>Definition</b> flatten.hpp:183</div></div>
+<div class="ttc" id="agroup__generators_ga418f0a47f05b67dbb354d274dee63e4e_html_ga418f0a47f05b67dbb354d274dee63e4e"><div class="ttname"><a href="#ga418f0a47f05b67dbb354d274dee63e4e">kumi::as_flat_ptr</a></div><div class="ttdeci">auto as_flat_ptr(T &amp;&amp;t) noexcept</div><div class="ttdoc">Convert a product type to a flat product type of pointers to each its components.</div><div class="ttdef"><b>Definition</b> flatten.hpp:186</div></div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga418f0a47f05b67dbb354d274dee63e4e" title="Convert a product type to a flat product type of pointers to each its components.">kumi::as_flat_ptr</a></p>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md60"></a>
 Examples:</h2>
@@ -227,11 +227,11 @@ Tuple:</h3>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; ptr &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_function" href="group__transforms_ga743a481a92dcc85b86159a44a562dd77.html#ga743a481a92dcc85b86159a44a562dd77">kumi::for_each</a>([](<span class="keyword">auto</span> p) { *p += 5; }, ptr );</div>
+<div class="line">  <a class="code hl_function" href="group__transforms_gae9e3fdeaf5297101b0d0da55a883c56a.html#gae9e3fdeaf5297101b0d0da55a883c56a">kumi::for_each</a>([](<span class="keyword">auto</span> p) { *p += 5; }, ptr );</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__transforms_ga743a481a92dcc85b86159a44a562dd77_html_ga743a481a92dcc85b86159a44a562dd77"><div class="ttname"><a href="group__transforms_ga743a481a92dcc85b86159a44a562dd77.html#ga743a481a92dcc85b86159a44a562dd77">kumi::for_each</a></div><div class="ttdeci">constexpr void for_each(Function f, T &amp;&amp;t, Ts &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a product type. f is applied on the values if the gi...</div><div class="ttdef"><b>Definition</b> for_each.hpp:36</div></div>
+<div class="ttc" id="agroup__transforms_gae9e3fdeaf5297101b0d0da55a883c56a_html_gae9e3fdeaf5297101b0d0da55a883c56a"><div class="ttname"><a href="group__transforms_gae9e3fdeaf5297101b0d0da55a883c56a.html#gae9e3fdeaf5297101b0d0da55a883c56a">kumi::for_each</a></div><div class="ttdeci">constexpr void for_each(Function f, T &amp;&amp;t, Ts &amp;&amp;... ts)</div><div class="ttdoc">Applies the Callable object f on each element of a product type. f is applied on the values if the gi...</div><div class="ttdef"><b>Definition</b> for_each.hpp:36</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
 </div><!-- fragment --> <h3 class="doxsection"><a class="anchor" id="autotoc_md62"></a>
 Record:</h3>
@@ -251,7 +251,7 @@ Record:</h3>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; ptr &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_function" href="group__transforms_ga743a481a92dcc85b86159a44a562dd77.html#ga743a481a92dcc85b86159a44a562dd77">kumi::for_each</a>([](<span class="keyword">auto</span> p) { *p += 5; }, ptr );</div>
+<div class="line">  <a class="code hl_function" href="group__transforms_gae9e3fdeaf5297101b0d0da55a883c56a.html#gae9e3fdeaf5297101b0d0da55a883c56a">kumi::for_each</a>([](<span class="keyword">auto</span> p) { *p += 5; }, ptr );</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>

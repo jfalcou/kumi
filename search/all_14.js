@@ -1,7 +1,7 @@
 var searchData=
 [
   ['partition_0',['partition',['../group__generators_gaf7926aecf07b881c2005e39f34512851.html#gaf7926aecf07b881c2005e39f34512851',1,'kumi']]],
-  ['plus_1',['plus',['../group__functional.html#gab5c0eb8022e7b2df33286d9a15247559',1,'kumi::function']]],
+  ['plus_1',['plus',['../group__functional.html#gab83f5dbd77ab8618b7925c9de6adb54d',1,'kumi::function']]],
   ['pop_5fback_2',['pop_back',['../group__generators_gaa78a8b1a97ed4da70a1e772cafb55aef.html#gaa78a8b1a97ed4da70a1e772cafb55aef',1,'kumi']]],
   ['pop_5ffront_3',['pop_front',['../group__queries_ga0067bdadcb60e0eeb405bd1021dd4f08.html#ga0067bdadcb60e0eeb405bd1021dd4f08',1,'kumi']]],
   ['pre_20requisites_4',['Pre-requisites',['../setup.html#prerequisit',1,'']]],

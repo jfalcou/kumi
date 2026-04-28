@@ -171,7 +171,7 @@ $(function(){initNavTree('group__reductions_gaa626c4c72c6c4f6ac575851c0dbf06bb.h
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename Function, concepts::product_type T, typename Value&gt; </div>
+template&lt;typename Function, <a class="el" href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type</a> T, typename Value&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
@@ -220,7 +220,7 @@ Helper type</h2>
 <div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type T, <span class="keyword">typename</span> Value&gt;</div>
 <div class="line">  <span class="keyword">using </span>inclusive_scan_right_t = <span class="keyword">typename</span> <a class="code hl_function" href="#gaa626c4c72c6c4f6ac575851c0dbf06bb">inclusive_scan_right&lt;Function,T,Value&gt;::type</a>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__reductions_gaa626c4c72c6c4f6ac575851c0dbf06bb_html_gaa626c4c72c6c4f6ac575851c0dbf06bb"><div class="ttname"><a href="#gaa626c4c72c6c4f6ac575851c0dbf06bb">kumi::inclusive_scan_right</a></div><div class="ttdeci">constexpr auto inclusive_scan_right(Function f, T &amp;&amp;t, Value init)</div><div class="ttdoc">Computes the inclusive suffix scan of all elements of a product type using a non-tail recursive call.</div><div class="ttdef"><b>Definition</b> scan.hpp:234</div></div>
+<div class="ttc" id="agroup__reductions_gaa626c4c72c6c4f6ac575851c0dbf06bb_html_gaa626c4c72c6c4f6ac575851c0dbf06bb"><div class="ttname"><a href="#gaa626c4c72c6c4f6ac575851c0dbf06bb">kumi::inclusive_scan_right</a></div><div class="ttdeci">constexpr auto inclusive_scan_right(Function f, T &amp;&amp;t, Value init)</div><div class="ttdoc">Computes the inclusive suffix scan of all elements of a product type using a non-tail recursive call.</div><div class="ttdef"><b>Definition</b> scan.hpp:238</div></div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gaa626c4c72c6c4f6ac575851c0dbf06bb" title="Computes the inclusive suffix scan of all elements of a product type using a non-tail recursive call.">kumi::inclusive_scan_right</a></p>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md273"></a>
 Examples:</h2>
@@ -246,9 +246,9 @@ Tuple:</h3>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">auto</span> u = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1,3,2,4,0,5,9,6,7};</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#gaa626c4c72c6c4f6ac575851c0dbf06bb">kumi::inclusive_scan_right</a>(<a class="code hl_variable" href="group__functional.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a>, u) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#gaa626c4c72c6c4f6ac575851c0dbf06bb">kumi::inclusive_scan_right</a>(<a class="code hl_variable" href="group__functional.html#gab83f5dbd77ab8618b7925c9de6adb54d">kumi::function::plus</a>, u) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__functional_html_gab5c0eb8022e7b2df33286d9a15247559"><div class="ttname"><a href="group__functional.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a></div><div class="ttdeci">constexpr numeric_add plus</div><div class="ttdoc">Forms a binary monoid callable that can be used in kumi::algoritm. It represents the addition.</div><div class="ttdef"><b>Definition</b> monoid.hpp:134</div></div>
+<div class="ttc" id="agroup__functional_html_gab83f5dbd77ab8618b7925c9de6adb54d"><div class="ttname"><a href="group__functional.html#gab83f5dbd77ab8618b7925c9de6adb54d">kumi::function::plus</a></div><div class="ttdeci">constexpr kumi::function::numeric_add plus</div><div class="ttdoc">Forms a binary monoid callable that can be used in kumi::algoritm. It represents the addition.</div><div class="ttdef"><b>Definition</b> monoid.hpp:134</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
 </div><!-- fragment --> <h3 class="doxsection"><a class="anchor" id="autotoc_md275"></a>
 Record:</h3>
@@ -274,7 +274,7 @@ Record:</h3>
 <div class="line">  <span class="keyword">auto</span> u = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;a&quot;</span>_id = 1,<span class="stringliteral">&quot;b&quot;</span>_id = 3,<span class="stringliteral">&quot;c&quot;</span>_id = 2,<span class="stringliteral">&quot;d&quot;</span>_id = 4, <span class="stringliteral">&quot;e&quot;</span>_id = 0</div>
 <div class="line">                      , <span class="stringliteral">&quot;f&quot;</span>_id = 5,<span class="stringliteral">&quot;g&quot;</span>_id = 9,<span class="stringliteral">&quot;h&quot;</span>_id = 6,<span class="stringliteral">&quot;i&quot;</span>_id = 7};</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#gaa626c4c72c6c4f6ac575851c0dbf06bb">kumi::inclusive_scan_right</a>(<a class="code hl_variable" href="group__functional.html#gab5c0eb8022e7b2df33286d9a15247559">kumi::function::plus</a>, u) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#gaa626c4c72c6c4f6ac575851c0dbf06bb">kumi::inclusive_scan_right</a>(<a class="code hl_variable" href="group__functional.html#gab83f5dbd77ab8618b7925c9de6adb54d">kumi::function::plus</a>, u) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
 </div><!-- fragment --> 
