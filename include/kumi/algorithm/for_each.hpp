@@ -45,7 +45,7 @@ namespace kumi
       auto const invoker{[&](auto const I) {
         if constexpr (kumi::concepts::record_type<T>)
         {
-          constexpr auto field = kumi::identifier_of<element_t<I, T>>();
+          constexpr auto field = kumi::identifier_of<kumi::element_t<I, T>>();
           kumi::invoke(f, get<field>(KUMI_FWD(t)), get<field>(KUMI_FWD(ts))...);
         }
         else kumi::invoke(f, get<I>(KUMI_FWD(t)), get<I>(KUMI_FWD(ts))...);

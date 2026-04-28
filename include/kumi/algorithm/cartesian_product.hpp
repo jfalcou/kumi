@@ -53,7 +53,7 @@ namespace kumi
 
       auto maps = [&]<std::size_t... E, std::size_t... I>(std::index_sequence<E...>, std::index_sequence<I...>) {
         auto tps = kumi::forward_as_tuple(KUMI_FWD(ts)...);
-        using res_t = builder_make_t<res_type, element_t<E, element_t<I, decltype(tps)>>...>;
+        using res_t = builder_make_t<res_type, kumi::element_t<E, kumi::element_t<I, decltype(tps)>>...>;
         return res_t{get<E>(get<I>(tps))...};
       };
 
@@ -71,6 +71,6 @@ namespace kumi
       using type = decltype(kumi::cartesian_product(std::declval<Ts>()...));
     };
 
-    template<typename... Ts> using cartesian_product_t = typename cartesian_product<Ts...>::type;
+    template<typename... Ts> using cartesian_product_t = typename kumi::result::cartesian_product<Ts...>::type;
   }
 }

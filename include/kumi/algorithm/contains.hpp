@@ -55,7 +55,7 @@ namespace kumi
       }(std::make_index_sequence<kumi::size_v<T>>{});
     else
       return []<std::size_t... I>(std::index_sequence<I...>) {
-        if constexpr (((kumi::concepts::field<element_t<I, T>> &&
+        if constexpr (((kumi::concepts::field<kumi::element_t<I, T>> &&
                         std::invocable<kumi::element_t<I, T>, kumi::_::tag_of_t<ID>>) ||
                        ...))
           return std::true_type{};
@@ -138,7 +138,7 @@ namespace kumi
     else if constexpr (sizeof...(Is) < kumi::size_v<T>) return std::false_type{};
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return std::bool_constant<(kumi::_::contains<element_t<I, T>, Is...> && ...)>{};
+        return std::bool_constant<(kumi::_::contains<kumi::element_t<I, T>, Is...> && ...)>{};
       }(std::make_index_sequence<kumi::size_v<T>>{});
   }
 
@@ -200,16 +200,16 @@ namespace kumi
     };
 
     template<kumi::concepts::product_type T, kumi::concepts::identifier ID>
-    using contains_t = typename contains<T, ID>::type;
+    using contains_t = typename kumi::result::contains<T, ID>::type;
 
     template<kumi::concepts::product_type T, kumi::concepts::identifier... IDs>
-    using contains_any_t = typename contains_any<T, IDs...>::type;
+    using contains_any_t = typename kumi::result::contains_any<T, IDs...>::type;
 
     template<kumi::concepts::product_type T, kumi::concepts::identifier... IDs>
-    using contains_only_t = typename contains_only<T, IDs...>::type;
+    using contains_only_t = typename kumi::result::contains_only<T, IDs...>::type;
 
     template<kumi::concepts::product_type T, kumi::concepts::identifier... IDs>
-    using contains_none_t = typename contains_none<T, IDs...>::type;
+    using contains_none_t = typename kumi::result::contains_none<T, IDs...>::type;
 
   }
 }

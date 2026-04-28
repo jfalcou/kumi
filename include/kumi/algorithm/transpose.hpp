@@ -71,6 +71,6 @@ namespace kumi
       using type = decltype(kumi::transpose(std::declval<T>()));
     };
 
-    template<kumi::concepts::product_type T> using transpose_t = typename transpose<T>::type;
+    template<kumi::concepts::product_type T> using transpose_t = typename kumi::result::transpose<T>::type;
   }
 }

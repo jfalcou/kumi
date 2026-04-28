@@ -43,8 +43,8 @@ namespace kumi
     if constexpr (kumi::concepts::empty_product_type<T>) return t;
     else if constexpr (kumi::concepts::record_type<T>)
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = builder_make_t<T, kumi::result::field_cast_t<Target, element_t<I, T>>...>;
-        return type{field_cast<Target>(get<I>(KUMI_FWD(t)))...};
+        using type = builder_make_t<T, kumi::result::field_cast_t<Target, kumi::element_t<I, T>>...>;
+        return type{kumi::field_cast<Target>(get<I>(KUMI_FWD(t)))...};
       }(std::make_index_sequence<kumi::size_v<T>>{});
     else
     {
@@ -61,6 +61,6 @@ namespace kumi
     };
 
     template<typename Target, kumi::concepts::product_type T>
-    using member_cast_t = typename member_cast<Target, T>::type;
+    using member_cast_t = typename kumi::result::member_cast<Target, T>::type;
   }
 }

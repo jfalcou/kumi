@@ -645,19 +645,24 @@ namespace kumi
     };
 
     template<kumi::concepts::monoid M, kumi::concepts::product_type T, typename Value = void>
-    using reduce_t = typename reduce<M, T, Value>::type;
+    using reduce_t = typename kumi::result::reduce<M, T, Value>::type;
 
     template<typename F, kumi::concepts::monoid M, kumi::concepts::product_type T, typename Value = void>
-    using map_reduce_t = typename map_reduce<F, M, T, Value>::type;
+    using map_reduce_t = typename kumi::result::map_reduce<F, M, T, Value>::type;
 
-    template<kumi::concepts::product_type T, typename Value = void> using sum_t = typename sum<T, Value>::type;
+    template<kumi::concepts::product_type T, typename Value = void>
+    using sum_t = typename kumi::result::sum<T, Value>::type;
 
-    template<kumi::concepts::product_type T, typename Value = void> using prod_t = typename prod<T, Value>::type;
+    template<kumi::concepts::product_type T, typename Value = void>
+    using prod_t = typename kumi::result::prod<T, Value>::type;
 
-    template<kumi::concepts::product_type T, typename Value = void> using bit_and_t = typename bit_and<T, Value>::type;
+    template<kumi::concepts::product_type T, typename Value = void>
+    using bit_and_t = typename kumi::result::bit_and<T, Value>::type;
 
-    template<kumi::concepts::product_type T, typename Value = void> using bit_or_t = typename bit_or<T, Value>::type;
+    template<kumi::concepts::product_type T, typename Value = void>
+    using bit_or_t = typename kumi::result::bit_or<T, Value>::type;
 
-    template<kumi::concepts::product_type T, typename Value = void> using bit_xor_t = typename bit_xor<T, Value>::type;
+    template<kumi::concepts::product_type T, typename Value = void>
+    using bit_xor_t = typename kumi::result::bit_xor<T, Value>::type;
   }
 }

@@ -304,7 +304,7 @@ namespace kumi
       else if constexpr (kumi::size_v<T> == 1) return true;
       else
         return []<std::size_t... I>(std::index_sequence<I...>) {
-          return kumi::_::all_the_same<element_t<I, T>...>;
+          return kumi::_::all_the_same<kumi::element_t<I, T>...>;
         }(std::make_index_sequence<kumi::size_v<T>>{});
     }
 
@@ -600,7 +600,7 @@ namespace kumi
   };
 
   template<typename T, typename U>
-  using is_equivalent_t = typename kumi::is_equivalent<std::make_index_sequence<size_v<T>>, T, U>::type;
+  using is_equivalent_t = typename kumi::is_equivalent<std::make_index_sequence<kumi::size_v<T>>, T, U>::type;
 
   template<typename T, typename U> inline constexpr bool is_equivalent_v = kumi::is_equivalent_t<T, U>::value;
 
@@ -640,11 +640,11 @@ namespace kumi
 
   template<std::size_t... Is, typename T, typename U>
   requires(kumi::is_record_type_v<T> && kumi::is_record_type_v<U> && kumi::size_v<T> == kumi::size_v<U>)
-  struct is_equality_comparable<std::index_sequence<Is...>, T, U> : kumi::_::check_value<element_t<Is, T>>...
+  struct is_equality_comparable<std::index_sequence<Is...>, T, U> : kumi::_::check_value<kumi::element_t<Is, T>>...
   {
-    using kumi::_::check_value<element_t<Is, T>>::get...;
+    using kumi::_::check_value<kumi::element_t<Is, T>>::get...;
 
-    static constexpr bool value = (kumi::_::comparable<decltype(get(std::declval<element_t<Is, U>>())),
+    static constexpr bool value = (kumi::_::comparable<decltype(get(std::declval<kumi::element_t<Is, U>>())),
                                                        kumi::_::type_of_t<kumi::element_t<Is, U>>> &&
                                    ...);
     using type = std::bool_constant<(sizeof...(Is) == 0) || value>;
@@ -654,13 +654,14 @@ namespace kumi
   requires(kumi::is_product_type_v<T> && kumi::is_product_type_v<U> &&
            (!kumi::is_record_type_v<U> || !kumi::is_record_type_v<T>) && kumi::size_v<T> == kumi::size_v<U>)
   struct is_equality_comparable<std::index_sequence<Is...>, T, U>
-    : std::bool_constant<(sizeof...(Is) == 0) || (kumi::_::comparable<element_t<Is, T>, kumi::element_t<Is, U>> && ...)>
+    : std::bool_constant<(sizeof...(Is) == 0) ||
+                         (kumi::_::comparable<kumi::element_t<Is, T>, kumi::element_t<Is, U>> && ...)>
   {
   };
 
   template<typename T, typename U>
   using is_equality_comparable_t =
-    typename kumi::is_equality_comparable<std::make_index_sequence<size_v<T>>, T, U>::type;
+    typename kumi::is_equality_comparable<std::make_index_sequence<kumi::size_v<T>>, T, U>::type;
 
   template<typename T, typename U>
   inline constexpr bool is_equality_comparable_v = kumi::is_equality_comparable_t<T, U>::value;
@@ -694,7 +695,7 @@ namespace kumi
     @endcode
   **/
   //====================================================================================================================
-  template<template<typename...> typename Traits, typename T, typename Seq = std::make_index_sequence<size_v<T>>>
+  template<template<typename...> typename Traits, typename T, typename Seq = std::make_index_sequence<kumi::size_v<T>>>
   requires is_product_type_v<std::remove_cvref_t<T>>
   struct apply_traits;
 

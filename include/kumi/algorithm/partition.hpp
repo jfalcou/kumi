@@ -172,12 +172,12 @@ namespace kumi
     };
 
     template<template<typename> typename Pred, kumi::concepts::product_type T>
-    using partition_t = typename partition<Pred, T>::type;
+    using partition_t = typename kumi::result::partition<Pred, T>::type;
 
     template<template<typename> typename Pred, kumi::concepts::product_type T>
-    using filter_t = typename filter<Pred, T>::type;
+    using filter_t = typename kumi::result::filter<Pred, T>::type;
 
     template<template<typename> typename Pred, kumi::concepts::product_type T>
-    using filter_not_t = typename filter_not<Pred, T>::type;
+    using filter_not_t = typename kumi::result::filter_not<Pred, T>::type;
   }
 }

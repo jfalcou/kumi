@@ -51,7 +51,7 @@ namespace kumi
 
       return [&]<typename T, std::size_t... E, std::size_t... N>(T&& t, std::index_sequence<E...>,
                                                                  std::index_sequence<N...>) {
-        using type = builder_make_t<res_type, element_t<E, element_t<N, T>>...>;
+        using type = builder_make_t<res_type, kumi::element_t<E, kumi::element_t<N, T>>...>;
         return type{get<E>(get<N>(KUMI_FWD(t)))...};
       }(kumi::forward_as_tuple(KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
     }
@@ -59,11 +59,11 @@ namespace kumi
 
   namespace result
   {
-    template<concepts::product_type... Ts> struct cat
+    template<kumi::concepts::product_type... Ts> struct cat
     {
       using type = decltype(kumi::cat(std::declval<Ts>()...));
     };
 
-    template<concepts::product_type... Ts> using cat_t = typename cat<Ts...>::type;
+    template<concepts::product_type... Ts> using cat_t = typename kumi::result::cat<Ts...>::type;
   }
 }

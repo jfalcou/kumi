@@ -121,7 +121,7 @@ namespace kumi
       {
         struct
         {
-          std::size_t count{1}, t[size_v<T>];
+          std::size_t count{1}, t[kumi::size_v<T>];
         } that{};
 
         that.t[0] = 0;
@@ -131,7 +131,7 @@ namespace kumi
                     ? I
                     : (that.t[that.count++] = I + 1)),
            ...);
-        }(std::make_index_sequence<size_v<T> - 1>{});
+        }(std::make_index_sequence<kumi::size_v<T> - 1>{});
 
         return that;
       }

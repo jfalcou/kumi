@@ -171,12 +171,13 @@ namespace kumi
       using type = decltype(kumi::reindex<Indexes>(std::declval<T>()));
     };
 
-    template<kumi::concepts::product_type T, std::size_t... Idx> using reorder_t = typename reorder<T, Idx...>::type;
+    template<kumi::concepts::product_type T, std::size_t... Idx>
+    using reorder_t = typename kumi::result::reorder<T, Idx...>::type;
 
     template<kumi::concepts::product_type Tuple, kumi::concepts::identifier auto... Name>
-    using reorder_fields_t = typename reorder_fields<Tuple, Name...>::type;
+    using reorder_fields_t = typename kumi::result::reorder_fields<Tuple, Name...>::type;
 
     template<kumi::concepts::product_type T, kumi::concepts::projection_map auto Indexes>
-    using reindex_t = typename reindex<T, Indexes>::type;
+    using reindex_t = typename kumi::result::reindex<T, Indexes>::type;
   }
 }

@@ -189,12 +189,14 @@ namespace kumi
       using type = decltype(kumi::pop_back(std::declval<T>()));
     };
 
-    template<kumi::concepts::product_type T, typename V> using push_front_t = typename push_front<T, V>::type;
+    template<kumi::concepts::product_type T, typename V>
+    using push_front_t = typename kumi::result::push_front<T, V>::type;
 
-    template<kumi::concepts::product_type T> using pop_front_t = typename pop_front<T>::type;
+    template<kumi::concepts::product_type T> using pop_front_t = typename kumi::result::pop_front<T>::type;
 
-    template<kumi::concepts::product_type T, typename V> using push_back_t = typename push_back<T, V>::type;
+    template<kumi::concepts::product_type T, typename V>
+    using push_back_t = typename kumi::result::push_back<T, V>::type;
 
-    template<kumi::concepts::product_type T> using pop_back_t = typename pop_back<T>::type;
+    template<kumi::concepts::product_type T> using pop_back_t = typename kumi::result::pop_back<T>::type;
   }
 }

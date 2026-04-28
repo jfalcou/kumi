@@ -195,10 +195,11 @@ namespace kumi
     };
 
     template<std::size_t N, std::size_t O, kumi::concepts::product_type T>
-    using tiles_t = typename tiles<N, O, T>::type;
+    using tiles_t = typename kumi::result::tiles<N, O, T>::type;
 
-    template<std::size_t N, kumi::concepts::product_type T> using windows_t = typename windows<N, T>::type;
+    template<std::size_t N, kumi::concepts::product_type T>
+    using windows_t = typename kumi::result::windows<N, T>::type;
 
-    template<std::size_t N, kumi::concepts::product_type T> using chunks_t = typename chunks<N, T>::type;
+    template<std::size_t N, kumi::concepts::product_type T> using chunks_t = typename kumi::result::chunks<N, T>::type;
   }
 }

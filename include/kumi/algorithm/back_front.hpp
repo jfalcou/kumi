@@ -91,7 +91,7 @@ namespace kumi
     {
     };
 
-    template<kumi::concepts::product_type T> using front_t = typename front<T>::type;
-    template<kumi::concepts::product_type T> using back_t = typename back<T>::type;
+    template<kumi::concepts::product_type T> using front_t = typename kumi::result::front<T>::type;
+    template<kumi::concepts::product_type T> using back_t = typename kumi::result::back<T>::type;
   }
 }

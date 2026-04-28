@@ -108,7 +108,7 @@ namespace kumi
     constexpr auto proj = kumi::function::splitter(kumi::index<I0>, kumi::index<kumi::size_v<T>>);
 
     auto select = [&]<std::size_t... I>(std::index_sequence<I...>) {
-      using type = builder_make_t<T, element_t<I, T>...>;
+      using type = builder_make_t<T, kumi::element_t<I, T>...>;
       return type{get<I>(KUMI_FWD(t))...};
     };
 
@@ -133,8 +133,8 @@ namespace kumi
     };
 
     template<kumi::concepts::product_type T, std::size_t I0, std::size_t I1 = std::size_t(-1)>
-    using extract_t = typename extract<T, I0, I1>::type;
+    using extract_t = typename kumi::result::extract<T, I0, I1>::type;
 
-    template<kumi::concepts::product_type T, std::size_t I0> using split_t = typename split<T, I0>::type;
+    template<kumi::concepts::product_type T, std::size_t I0> using split_t = typename kumi::result::split<T, I0>::type;
   }
 }

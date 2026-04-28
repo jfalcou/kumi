@@ -206,16 +206,16 @@ namespace kumi
     template<typename Function,
              kumi::concepts::product_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
-    using map_t = typename map<Function, T, Ts...>::type;
+    using map_t = typename kumi::result::map<Function, T, Ts...>::type;
 
     template<typename Function,
              kumi::concepts::product_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
-    using map_index_t = typename map_index<Function, T, Ts...>::type;
+    using map_index_t = typename kumi::result::map_index<Function, T, Ts...>::type;
 
     template<typename Function,
              kumi::concepts::record_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
-    using map_field_t = typename map_field<Function, T, Ts...>::type;
+    using map_field_t = typename kumi::result::map_field<Function, T, Ts...>::type;
   }
 }

@@ -134,6 +134,6 @@ namespace kumi
              typename T,
              typename Sum = void,
              typename Prod = void>
-    using inner_product_t = typename inner_product<S1, S2, T, Sum, Prod>::type;
+    using inner_product_t = typename kumi::result::inner_product<S1, S2, T, Sum, Prod>::type;
   }
 }

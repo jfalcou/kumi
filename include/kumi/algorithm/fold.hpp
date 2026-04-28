@@ -202,9 +202,9 @@ namespace kumi
     };
 
     template<typename Function, kumi::concepts::product_type T, typename Value = void>
-    using fold_right_t = typename fold_right<Function, T, Value>::type;
+    using fold_right_t = typename kumi::result::fold_right<Function, T, Value>::type;
 
     template<typename Function, kumi::concepts::product_type T, typename Value = void>
-    using fold_left_t = typename fold_left<Function, T, Value>::type;
+    using fold_left_t = typename kumi::result::fold_left<Function, T, Value>::type;
   }
 }

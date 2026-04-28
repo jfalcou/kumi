@@ -289,10 +289,10 @@ namespace kumi
       using type = decltype(kumi::min_flat(std::declval<T>(), std::declval<F>()));
     };
 
-    template<typename T, typename F = void> using max_t = typename max<T, F>::type;
-    template<typename T, typename F> using max_flat_t = typename max_flat<T, F>::type;
+    template<typename T, typename F = void> using max_t = typename kumi::result::max<T, F>::type;
+    template<typename T, typename F> using max_flat_t = typename kumi::result::max_flat<T, F>::type;
 
-    template<typename T, typename F = void> using min_t = typename min<T, F>::type;
-    template<typename T, typename F> using min_flat_t = typename min_flat<T, F>::type;
+    template<typename T, typename F = void> using min_t = typename kumi::result::min<T, F>::type;
+    template<typename T, typename F> using min_flat_t = typename kumi::result::min_flat<T, F>::type;
   }
 }

@@ -56,7 +56,7 @@ namespace kumi
         if constexpr (kumi::concepts::record_type<FV> && kumi::concepts::record_type<T>)
         {
           constexpr auto curr_name = kumi::label_of<V>();
-          constexpr auto new_name = kumi::concatenate_str<curr_name, kumi::label_of<element_t<J, FV>>()>();
+          constexpr auto new_name = kumi::concatenate_str<curr_name, kumi::label_of<kumi::element_t<J, FV>>()>();
           return (
             kumi::capture_field<name<new_name>{}>(kumi::field_value_of(get<J>(kumi::field_value_of(KUMI_FWD(v))))));
         }
@@ -210,11 +210,11 @@ namespace kumi
       using type = decltype(kumi::as_flat_ptr(std::declval<T>()));
     };
 
-    template<kumi::concepts::product_type T> using flatten_t = typename flatten<T>::type;
+    template<kumi::concepts::product_type T> using flatten_t = typename kumi::result::flatten<T>::type;
 
     template<kumi::concepts::product_type T, typename Func = void>
-    using flatten_all_t = typename flatten_all<T, Func>::type;
+    using flatten_all_t = typename kumi::result::flatten_all<T, Func>::type;
 
-    template<kumi::concepts::product_type T> using as_flat_ptr_t = typename as_flat_ptr<T>::type;
+    template<kumi::concepts::product_type T> using as_flat_ptr_t = typename kumi::result::as_flat_ptr<T>::type;
   }
 }

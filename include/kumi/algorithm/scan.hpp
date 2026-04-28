@@ -435,15 +435,15 @@ namespace kumi
     };
 
     template<typename Function, kumi::concepts::product_type T, typename Value = void>
-    using inclusive_scan_right_t = typename inclusive_scan_right<Function, T, Value>::type;
+    using inclusive_scan_right_t = typename kumi::result::inclusive_scan_right<Function, T, Value>::type;
 
     template<typename Function, kumi::concepts::product_type T, typename Value = void>
-    using exclusive_scan_right_t = typename exclusive_scan_right<Function, T, Value>::type;
+    using exclusive_scan_right_t = typename kumi::result::exclusive_scan_right<Function, T, Value>::type;
 
     template<typename Function, kumi::concepts::product_type T, typename Value = void>
-    using inclusive_scan_left_t = typename inclusive_scan_left<Function, T, Value>::type;
+    using inclusive_scan_left_t = typename kumi::result::inclusive_scan_left<Function, T, Value>::type;
 
     template<typename Function, kumi::concepts::product_type T, typename Value = void>
-    using exclusive_scan_left_t = typename exclusive_scan_left<Function, T, Value>::type;
+    using exclusive_scan_left_t = typename kumi::result::exclusive_scan_left<Function, T, Value>::type;
   }
 }

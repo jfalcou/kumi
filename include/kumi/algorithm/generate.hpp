@@ -133,10 +133,10 @@ namespace kumi
       using type = decltype(kumi::iota<N>(std::declval<T>()));
     };
 
-    template<std::size_t N, typename T> using fill_t = typename fill<N, T>::type;
+    template<std::size_t N, typename T> using fill_t = typename kumi::result::fill<N, T>::type;
 
-    template<std::size_t N, typename Function> using generate_t = typename generate<N, Function>::type;
+    template<std::size_t N, typename Function> using generate_t = typename kumi::result::generate<N, Function>::type;
 
-    template<std::size_t N, typename T> using iota_t = typename iota<N, T>::type;
+    template<std::size_t N, typename T> using iota_t = typename kumi::result::iota<N, T>::type;
   }
 }

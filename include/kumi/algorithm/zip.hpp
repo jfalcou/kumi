@@ -217,12 +217,12 @@ namespace kumi
     };
 
     template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
-    using zip_t = typename zip<T0, Ts...>::type;
+    using zip_t = typename kumi::result::zip<T0, Ts...>::type;
 
     template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
-    using zip_min_t = typename zip_min<T0, Ts...>::type;
+    using zip_min_t = typename kumi::result::zip_min<T0, Ts...>::type;
 
     template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
-    using zip_max_t = typename zip_max<T0, Ts...>::type;
+    using zip_max_t = typename kumi::result::zip_max<T0, Ts...>::type;
   }
 }

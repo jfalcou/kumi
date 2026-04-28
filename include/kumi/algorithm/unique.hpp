@@ -45,7 +45,7 @@ namespace kumi
     {
       constexpr auto pos = function::uniqued(as<T>{});
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using ret_t = builder_make_t<T, element_t<pos.t[I], T>...>;
+        using ret_t = builder_make_t<T, kumi::element_t<pos.t[I], T>...>;
         return ret_t{get<pos.t[I]>(KUMI_FWD(t))...};
       }(std::make_index_sequence<pos.count>{});
     }
@@ -109,8 +109,8 @@ namespace kumi
       using type = decltype(kumi::all_unique(std::declval<T>()));
     };
 
-    template<kumi::concepts::product_type T> using unique_t = typename unique<T>::type;
+    template<kumi::concepts::product_type T> using unique_t = typename kumi::result::unique<T>::type;
 
-    template<kumi::concepts::product_type T> using all_unique_t = typename all_unique<T>::type;
+    template<kumi::concepts::product_type T> using all_unique_t = typename kumi::result::all_unique<T>::type;
   }
 }

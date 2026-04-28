@@ -58,6 +58,6 @@ namespace kumi
       using type = decltype(kumi::reverse(std::declval<T>()));
     };
 
-    template<kumi::concepts::product_type T> using reverse_t = typename reverse<T>::type;
+    template<kumi::concepts::product_type T> using reverse_t = typename kumi::result::reverse<T>::type;
   }
 }
