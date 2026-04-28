@@ -27,7 +27,7 @@ namespace kumi
 
     // Concept specifying a type is a standard tuple-like type.
     template<typename T>
-    concept std_tuple_compatible = _::empty_tuple<T> || _::non_empty_tuple<T>;
+    concept std_tuple_compatible = kumi::_::empty_tuple<T> || kumi::_::non_empty_tuple<T>;
 
     //==================================================================================================================
     // Helper concepts for container detection
@@ -45,7 +45,7 @@ namespace kumi
 
     /// Concept for container types providing access to a contiguous block of data
     template<typename T>
-    concept contiguous_container_like = container_like<T> && requires(T const& t) {
+    concept contiguous_container_like = kumi::_::container_like<T> && requires(T const& t) {
       { t.data() };
     };
   }
@@ -70,7 +70,7 @@ namespace kumi
   {
   };
 
-  template<typename T> inline constexpr auto is_product_type_v = is_product_type<T>::value;
+  template<typename T> inline constexpr auto is_product_type_v = kumi::is_product_type<T>::value;
 
   //====================================================================================================================
   /**
@@ -101,7 +101,7 @@ namespace kumi
   {
   };
 
-  template<typename T> inline constexpr auto is_record_type_v = is_record_type<T>::value;
+  template<typename T> inline constexpr auto is_record_type_v = kumi::is_record_type<T>::value;
 
   //====================================================================================================================
   /**
@@ -120,7 +120,7 @@ namespace kumi
   {
   };
 
-  template<typename T> inline constexpr auto size_v = size<T>::value;
+  template<typename T> inline constexpr auto size_v = kumi::size<T>::value;
 
   //====================================================================================================================
   /**
@@ -143,7 +143,7 @@ namespace kumi
   {
   };
 
-  template<std::size_t I, typename T> using element_t = typename element<I, T>::type;
+  template<std::size_t I, typename T> using element_t = typename kumi::element<I, T>::type;
 
   //====================================================================================================================
   /**
@@ -167,7 +167,7 @@ namespace kumi
     using type = decltype(get<I>(std::declval<T&&>()));
   };
 
-  template<std::size_t I, typename T> using member_t = typename member<I, T>::type;
+  template<std::size_t I, typename T> using member_t = typename kumi::member<I, T>::type;
 }
 
 namespace kumi
@@ -194,19 +194,19 @@ namespace kumi
   template<typename T> struct is_container : std::false_type
   {
     using value_type = T;
-    using size = _::invalid;
+    using size = kumi::_::invalid;
   };
 
   template<typename T>
-  requires _::container_like<T>
+  requires kumi::_::container_like<T>
   struct is_container<T> : std::true_type
   {
     using value_type = typename T::value_type;
-    using size = _::invalid;
+    using size = kumi::_::invalid;
   };
 
   template<template<class, std::size_t> typename Container, typename T, std::size_t N>
-  requires _::container_like<Container<T, N>> && (N != static_cast<std::size_t>(-1))
+  requires kumi::_::container_like<Container<T, N>> && (N != static_cast<std::size_t>(-1))
   struct is_container<Container<T, N>> : std::true_type
   {
     using value_type = T;
@@ -219,7 +219,7 @@ namespace kumi
     using size = std::integral_constant<std::size_t, N>;
   };
 
-  template<typename T> inline constexpr auto is_container_v = is_container<T>::value;
+  template<typename T> inline constexpr auto is_container_v = kumi::is_container<T>::value;
 
   //====================================================================================================================
   /**
@@ -237,11 +237,11 @@ namespace kumi
     @endcode
   **/
   //====================================================================================================================
-  template<typename T> struct container_size : is_container<std::remove_cvref_t<T>>::size
+  template<typename T> struct container_size : kumi::is_container<std::remove_cvref_t<T>>::size
   {
   };
 
-  template<typename T> inline constexpr auto container_size_v = container_size<T>::value;
+  template<typename T> inline constexpr auto container_size_v = kumi::container_size<T>::value;
 
   //====================================================================================================================
   /**
@@ -259,12 +259,12 @@ namespace kumi
     @endcode
   **/
   //====================================================================================================================
-  template<typename T> struct container_type : is_container<std::remove_cvref_t<T>>
+  template<typename T> struct container_type : kumi::is_container<std::remove_cvref_t<T>>
   {
-    using type = typename is_container<std::remove_cvref_t<T>>::value_type;
+    using type = typename kumi::is_container<std::remove_cvref_t<T>>::value_type;
   };
 
-  template<typename T> using container_type_t = typename container_type<T>::type;
+  template<typename T> using container_type_t = typename kumi::container_type<T>::type;
 }
 
 namespace kumi
@@ -292,26 +292,26 @@ namespace kumi
 
   // Specific is_homogeneous overload
   template<typename T>
-  requires(is_product_type_v<T>)
+  requires(kumi::is_product_type_v<T>)
   struct is_homogeneous<T>
   {
     static consteval bool check()
     {
       if constexpr (requires { T::is_homogeneous; }) return T::is_homogeneous;
-      else if constexpr (is_record_type_v<T>) return false;
-      else if constexpr (is_container_v<T>) return true;
-      else if constexpr (size_v<T> == 0) return false;
-      else if constexpr (size_v<T> == 1) return true;
+      else if constexpr (kumi::is_record_type_v<T>) return false;
+      else if constexpr (kumi::is_container_v<T>) return true;
+      else if constexpr (kumi::size_v<T> == 0) return false;
+      else if constexpr (kumi::size_v<T> == 1) return true;
       else
         return []<std::size_t... I>(std::index_sequence<I...>) {
-          return _::all_the_same<element_t<I, T>...>;
-        }(std::make_index_sequence<size_v<T>>{});
+          return kumi::_::all_the_same<element_t<I, T>...>;
+        }(std::make_index_sequence<kumi::size_v<T>>{});
     }
 
     static constexpr bool value = check();
   };
 
-  template<typename T> inline constexpr auto is_homogeneous_v = is_homogeneous<T>::value;
+  template<typename T> inline constexpr auto is_homogeneous_v = kumi::is_homogeneous<T>::value;
 
   //====================================================================================================================
   /**
@@ -335,17 +335,17 @@ namespace kumi
   };
 
   template<typename T>
-  requires(_::contiguous_container_like<T>)
+  requires(kumi::_::contiguous_container_like<T>)
   struct has_static_size<T>
   {
-    static constexpr bool value = !std::same_as<typename is_container<T>::size, _::invalid>;
+    static constexpr bool value = !std::same_as<typename kumi::is_container<T>::size, kumi::_::invalid>;
   };
 
   template<typename T, std::size_t N> struct has_static_size<T[N]> : std::true_type
   {
   };
 
-  template<typename T> inline constexpr auto has_static_size_v = has_static_size<T>::value;
+  template<typename T> inline constexpr auto has_static_size_v = kumi::has_static_size<T>::value;
 
   //====================================================================================================================
   /**
@@ -373,7 +373,7 @@ namespace kumi
   {
   };
 
-  template<typename T> inline constexpr auto is_projection_map_v = is_projection_map<T>::value;
+  template<typename T> inline constexpr auto is_projection_map_v = kumi::is_projection_map<T>::value;
 
   //====================================================================================================================
   /**
@@ -395,18 +395,18 @@ namespace kumi
   //====================================================================================================================
   template<std::size_t I, typename T> struct stored_member
   {
-    using type = member_t<I, T>;
+    using type = kumi::member_t<I, T>;
   };
 
   template<std::size_t I, typename T>
-  requires(is_record_type_v<std::remove_cvref_t<T>>)
+  requires(kumi::is_record_type_v<std::remove_cvref_t<T>>)
   struct stored_member<I, T>
   {
     using field_type = decltype(get<I>(std::declval<T&&>()));
     using type = decltype(std::declval<field_type&&>()(typename std::remove_cvref_t<field_type>::identifier_type{}));
   };
 
-  template<std::size_t I, typename T> using stored_member_t = typename stored_member<I, T>::type;
+  template<std::size_t I, typename T> using stored_member_t = typename kumi::stored_member<I, T>::type;
 
   //====================================================================================================================
   /**
@@ -431,17 +431,17 @@ namespace kumi
   //====================================================================================================================
   template<std::size_t I, typename T> struct stored_element
   {
-    using type = element_t<I, T>;
+    using type = kumi::element_t<I, T>;
   };
 
   template<std::size_t I, typename T>
-  requires(is_record_type<std::remove_cvref_t<T>>::value)
+  requires(kumi::is_record_type<std::remove_cvref_t<T>>::value)
   struct stored_element<I, T>
   {
-    using type = typename element_t<I, T>::type;
+    using type = typename kumi::element_t<I, T>::type;
   };
 
-  template<std::size_t I, typename T> using stored_element_t = typename stored_element<I, T>::type;
+  template<std::size_t I, typename T> using stored_element_t = typename kumi::stored_element<I, T>::type;
 
   //====================================================================================================================
   /**
@@ -478,20 +478,21 @@ namespace kumi
 
   template<std::size_t... Ints, typename... Ts> struct all_uniques<std::index_sequence<Ints...>, Ts...>
   {
-    struct all_uniques_inner : _::unique<Ints, Ts>...
+    struct all_uniques_inner : kumi::_::unique<Ints, Ts>...
     {
     };
 
     template<typename... Us>
-    static consteval auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
+    static consteval auto is_set(Us...) -> decltype(kumi::_::true_fn(static_cast<Us>(all_uniques_inner())...));
     static consteval std::false_type is_set(...);
 
     using type = decltype(is_set(std::type_identity<Ts>{}...));
   };
 
-  template<typename... Ts> using all_uniques_t = typename all_uniques<std::index_sequence_for<Ts...>, Ts...>::type;
+  template<typename... Ts>
+  using all_uniques_t = typename kumi::all_uniques<std::index_sequence_for<Ts...>, Ts...>::type;
 
-  template<typename... Ts> inline constexpr auto all_uniques_v = all_uniques_t<Ts...>::value;
+  template<typename... Ts> inline constexpr auto all_uniques_v = kumi::all_uniques_t<Ts...>::value;
 
   //====================================================================================================================
   /**
@@ -529,21 +530,21 @@ namespace kumi
 
   template<std::size_t... Ints, typename... Ts> struct all_unique_names<std::index_sequence<Ints...>, Ts...>
   {
-    struct all_uniques_inner : _::unique_name<Ints, Ts>...
+    struct all_uniques_inner : kumi::_::unique_name<Ints, Ts>...
     {
     };
 
     template<typename... Us>
-    static consteval auto is_set(Us...) -> decltype(_::true_fn(static_cast<Us>(all_uniques_inner())...));
+    static consteval auto is_set(Us...) -> decltype(kumi::_::true_fn(static_cast<Us>(all_uniques_inner())...));
     static consteval std::false_type is_set(...);
 
-    using type = decltype(is_set(_::get_key<Ints, Ts>()...));
+    using type = decltype(is_set(kumi::_::get_key<Ints, Ts>()...));
   };
 
   template<typename... Ts>
-  using all_unique_names_t = typename all_unique_names<std::index_sequence_for<Ts...>, Ts...>::type;
+  using all_unique_names_t = typename kumi::all_unique_names<std::index_sequence_for<Ts...>, Ts...>::type;
 
-  template<typename... Ts> inline constexpr auto all_unique_names_v = all_unique_names_t<Ts...>::value;
+  template<typename... Ts> inline constexpr auto all_unique_names_v = kumi::all_unique_names_t<Ts...>::value;
 
   //====================================================================================================================
   /**
@@ -581,27 +582,27 @@ namespace kumi
   };
 
   template<std::size_t... Is, typename T, typename U>
-  requires(is_product_type_v<T> && is_product_type_v<U> && size_v<T> == size_v<U>)
+  requires(kumi::is_product_type_v<T> && kumi::is_product_type_v<U> && kumi::size_v<T> == kumi::size_v<U>)
   struct is_equivalent<std::index_sequence<Is...>, T, U>
   {
-    struct match : _::unique_name<Is, element_t<Is, U>>...
+    struct match : kumi::_::unique_name<Is, kumi::element_t<Is, U>>...
     {
     };
 
     template<typename... Key>
     requires(sizeof...(Is) != 0)
-    static consteval auto is_present(Key...) -> decltype(_::true_fn(static_cast<Key>(std::declval<match>())...));
+    static consteval auto is_present(Key...) -> decltype(kumi::_::true_fn(static_cast<Key>(std::declval<match>())...));
     static consteval std::false_type is_present(...);
     static consteval std::true_type is_present(...)
     requires(sizeof...(Is) == 0);
 
-    using type = decltype(is_present(_::get_key<Is, element_t<Is, T>>()...));
+    using type = decltype(is_present(kumi::_::get_key<Is, kumi::element_t<Is, T>>()...));
   };
 
   template<typename T, typename U>
-  using is_equivalent_t = typename is_equivalent<std::make_index_sequence<size_v<T>>, T, U>::type;
+  using is_equivalent_t = typename kumi::is_equivalent<std::make_index_sequence<size_v<T>>, T, U>::type;
 
-  template<typename T, typename U> inline constexpr bool is_equivalent_v = is_equivalent_t<T, U>::value;
+  template<typename T, typename U> inline constexpr bool is_equivalent_v = kumi::is_equivalent_t<T, U>::value;
 
   //====================================================================================================================
   /**
@@ -638,29 +639,31 @@ namespace kumi
   };
 
   template<std::size_t... Is, typename T, typename U>
-  requires(is_record_type_v<T> && is_record_type_v<U> && size_v<T> == size_v<U>)
-  struct is_equality_comparable<std::index_sequence<Is...>, T, U> : _::check_value<element_t<Is, T>>...
+  requires(kumi::is_record_type_v<T> && kumi::is_record_type_v<U> && kumi::size_v<T> == kumi::size_v<U>)
+  struct is_equality_comparable<std::index_sequence<Is...>, T, U> : kumi::_::check_value<element_t<Is, T>>...
   {
-    using _::check_value<element_t<Is, T>>::get...;
+    using kumi::_::check_value<element_t<Is, T>>::get...;
 
-    static constexpr bool value =
-      (_::comparable<decltype(get(std::declval<element_t<Is, U>>())), _::type_of_t<element_t<Is, U>>> && ...);
+    static constexpr bool value = (kumi::_::comparable<decltype(get(std::declval<element_t<Is, U>>())),
+                                                       kumi::_::type_of_t<kumi::element_t<Is, U>>> &&
+                                   ...);
     using type = std::bool_constant<(sizeof...(Is) == 0) || value>;
   };
 
   template<std::size_t... Is, typename T, typename U>
-  requires(is_product_type_v<T> && is_product_type_v<U> && (!is_record_type_v<U> || !is_record_type_v<T>) &&
-           size_v<T> == size_v<U>)
+  requires(kumi::is_product_type_v<T> && kumi::is_product_type_v<U> &&
+           (!kumi::is_record_type_v<U> || !kumi::is_record_type_v<T>) && kumi::size_v<T> == kumi::size_v<U>)
   struct is_equality_comparable<std::index_sequence<Is...>, T, U>
-    : std::bool_constant<(sizeof...(Is) == 0) || (_::comparable<element_t<Is, T>, element_t<Is, U>> && ...)>
+    : std::bool_constant<(sizeof...(Is) == 0) || (kumi::_::comparable<element_t<Is, T>, kumi::element_t<Is, U>> && ...)>
   {
   };
 
   template<typename T, typename U>
-  using is_equality_comparable_t = typename is_equality_comparable<std::make_index_sequence<size_v<T>>, T, U>::type;
+  using is_equality_comparable_t =
+    typename kumi::is_equality_comparable<std::make_index_sequence<size_v<T>>, T, U>::type;
 
   template<typename T, typename U>
-  inline constexpr bool is_equality_comparable_v = is_equality_comparable_t<T, U>::value;
+  inline constexpr bool is_equality_comparable_v = kumi::is_equality_comparable_t<T, U>::value;
 
   //====================================================================================================================
   /**
@@ -696,15 +699,15 @@ namespace kumi
   struct apply_traits;
 
   template<template<typename...> typename Traits, typename T, std::size_t... Is>
-  requires is_product_type_v<std::remove_cvref_t<T>> && (requires { typename Traits<element_t<Is, T>...>::type; })
+  requires is_product_type_v<std::remove_cvref_t<T>> && (requires { typename Traits<kumi::element_t<Is, T>...>::type; })
   struct apply_traits<Traits, T, std::index_sequence<Is...>>
   {
-    using type = typename Traits<element_t<Is, T>...>::type;
+    using type = typename Traits<kumi::element_t<Is, T>...>::type;
   };
 
   template<template<typename...> typename Traits, typename T>
-  requires is_product_type_v<std::remove_cvref_t<T>>
-  using apply_traits_t = typename apply_traits<Traits, T>::type;
+  requires kumi::is_product_type_v<std::remove_cvref_t<T>>
+  using apply_traits_t = typename kumi::apply_traits<Traits, T>::type;
 
   //====================================================================================================================
   /**
@@ -735,20 +738,21 @@ namespace kumi
     @endcode
   **/
   //====================================================================================================================
-  template<template<typename...> typename Traits, typename T, typename Seq = std::make_index_sequence<size_v<T>>>
-  requires is_product_type_v<std::remove_cvref_t<T>>
+  template<template<typename...> typename Traits, typename T, typename Seq = std::make_index_sequence<kumi::size_v<T>>>
+  requires kumi::is_product_type_v<std::remove_cvref_t<T>>
   struct map_traits;
 
   template<template<typename...> typename Traits, typename T, std::size_t... Is>
-  requires is_product_type_v<std::remove_cvref_t<T>> && (requires { typename Traits<element_t<Is, T>>::type; } && ...)
+  requires kumi::is_product_type_v<std::remove_cvref_t<T>> &&
+           (requires { typename Traits<kumi::element_t<Is, T>>::type; } && ...)
   struct map_traits<Traits, T, std::index_sequence<Is...>>
   {
-    using type = builder_make_t<T, typename Traits<element_t<Is, T>>::type...>;
+    using type = builder_make_t<T, typename Traits<kumi::element_t<Is, T>>::type...>;
   };
 
   template<template<typename...> typename Traits, typename T>
-  requires is_product_type_v<std::remove_cvref_t<T>>
-  using map_traits_t = typename map_traits<Traits, T>::type;
+  requires kumi::is_product_type_v<std::remove_cvref_t<T>>
+  using map_traits_t = typename kumi::map_traits<Traits, T>::type;
 }
 
 namespace kumi
@@ -756,14 +760,14 @@ namespace kumi
 #ifndef KUMI_DOXYGEN_INVOKED
   // A type with the tuple interface is automatically a product_type
   template<typename T>
-  requires(_::std_tuple_compatible<T>)
+  requires(kumi::_::std_tuple_compatible<T>)
   struct is_product_type<T> : std::true_type
   {
   };
 
   // A static container with tuple interface is indeed a product_type
   template<typename T>
-  requires(is_container_v<T> && has_static_size_v<T> && _::std_tuple_compatible<T>)
+  requires(kumi::is_container_v<T> && kumi::has_static_size_v<T> && kumi::_::std_tuple_compatible<T>)
   struct is_product_type<T> : std::true_type
   {
   };
@@ -782,7 +786,7 @@ namespace kumi
   {
   };
 
-  template<typename T> inline constexpr bool is_kumi_tuple_v = is_kumi_tuple<T>::value;
+  template<typename T> inline constexpr bool is_kumi_tuple_v = kumi::is_kumi_tuple<T>::value;
 
   template<typename T> struct is_kumi_record : std::false_type
   {
@@ -792,6 +796,6 @@ namespace kumi
   {
   };
 
-  template<typename T> inline constexpr bool is_kumi_record_v = is_kumi_record<T>::value;
+  template<typename T> inline constexpr bool is_kumi_record_v = kumi::is_kumi_record<T>::value;
 #endif
 }

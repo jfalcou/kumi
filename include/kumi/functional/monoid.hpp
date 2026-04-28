@@ -131,7 +131,7 @@ namespace kumi::function
            addition.
   **/
   //==================================================================================================================
-  inline constexpr numeric_add plus{};
+  inline constexpr kumi::function::numeric_add plus{};
 
   //==================================================================================================================
   /**
@@ -140,7 +140,7 @@ namespace kumi::function
            multiplication.
   **/
   //==================================================================================================================
-  inline constexpr numeric_prod multiplies{};
+  inline constexpr kumi::function::numeric_prod multiplies{};
 
   //==================================================================================================================
   /**
@@ -149,7 +149,7 @@ namespace kumi::function
            logical and operation.
   **/
   //==================================================================================================================
-  inline constexpr boolean_and bit_and{};
+  inline constexpr kumi::function::boolean_and bit_and{};
 
   //==================================================================================================================
   /**
@@ -158,7 +158,7 @@ namespace kumi::function
            logical or operation.
   **/
   //==================================================================================================================
-  inline constexpr boolean_or bit_or{};
+  inline constexpr kumi::function::boolean_or bit_or{};
 
   //==================================================================================================================
   /**
@@ -167,5 +167,5 @@ namespace kumi::function
            logical xor operation.
   **/
   //==================================================================================================================
-  inline constexpr boolean_xor bit_xor{};
+  inline constexpr kumi::function::boolean_xor bit_xor{};
 }

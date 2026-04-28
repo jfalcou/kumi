@@ -55,9 +55,9 @@ namespace kumi::_
     else return kumi::unknown{};
   }
 
-  template<valid_label T> consteval str make_str(T const& t)
+  template<kumi::_::valid_label T> consteval str make_str(T const& t)
   {
     if constexpr (requires { to_str(t); }) return to_str(t);
-    else return typer<std::remove_cvref_t<T>>();
+    else return kumi::_::typer<std::remove_cvref_t<T>>();
   }
 }

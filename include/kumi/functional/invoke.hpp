@@ -21,7 +21,7 @@ namespace kumi
     {
       using callable_t = P C::*;
       auto&& ptr = []<typename T>(T&& obj) -> decltype(auto) {
-        if constexpr (_::is_reference_wrapper_v<std::remove_cvref_t<T>>) return obj.get();
+        if constexpr (kumi::_::is_reference_wrapper_v<std::remove_cvref_t<T>>) return obj.get();
         else if constexpr (std::is_pointer_v<std::remove_cvref_t<T>>) return *KUMI_FWD(obj);
         else return KUMI_FWD(obj);
       }(KUMI_FWD(o));
@@ -47,7 +47,7 @@ namespace kumi
   KUMI_ABI constexpr decltype(auto) invoke(C&& c, Ts&&... ts) noexcept(std::is_nothrow_invocable_v<C, Ts...>)
   requires(std::is_invocable_v<C, Ts...>)
   {
-    if constexpr (std::is_member_pointer_v<std::decay_t<C>>) return _::invoke_memptr(c, KUMI_FWD(ts)...);
+    if constexpr (std::is_member_pointer_v<std::decay_t<C>>) return kumi::_::invoke_memptr(c, KUMI_FWD(ts)...);
     else return KUMI_FWD(c)(KUMI_FWD(ts)...);
   }
 
@@ -68,7 +68,7 @@ namespace kumi
   KUMI_ABI constexpr R invoke_r(C&& c, Ts&&... ts) noexcept(std::is_nothrow_invocable_r_v<R, C, Ts...>)
   requires(std::is_invocable_r_v<R, C, Ts...>)
   {
-    if constexpr (std::is_void_v<R>) invoke(KUMI_FWD(c), KUMI_FWD(ts)...);
-    else return invoke(KUMI_FWD(c), KUMI_FWD(ts)...);
+    if constexpr (std::is_void_v<R>) kumi::invoke(KUMI_FWD(c), KUMI_FWD(ts)...);
+    else return kumi::invoke(KUMI_FWD(c), KUMI_FWD(ts)...);
   }
 }

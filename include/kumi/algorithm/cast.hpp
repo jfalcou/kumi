@@ -38,28 +38,29 @@ namespace kumi
     @include doc/record/algo/member_cast.cpp
   **/
   //====================================================================================================================
-  template<typename Target, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto member_cast(T&& t)
+  template<typename Target, kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto member_cast(T&& t)
   {
-    if constexpr (concepts::empty_product_type<T>) return t;
-    else if constexpr (concepts::record_type<T>)
+    if constexpr (kumi::concepts::empty_product_type<T>) return t;
+    else if constexpr (kumi::concepts::record_type<T>)
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = builder_make_t<T, result::field_cast_t<Target, element_t<I, T>>...>;
+        using type = builder_make_t<T, kumi::result::field_cast_t<Target, element_t<I, T>>...>;
         return type{field_cast<Target>(get<I>(KUMI_FWD(t)))...};
-      }(std::make_index_sequence<size_v<T>>{});
+      }(std::make_index_sequence<kumi::size_v<T>>{});
     else
     {
-      using type = _::as_homogeneous_t<Target, size_v<T>>;
+      using type = kumi::_::as_homogeneous_t<Target, kumi::size_v<T>>;
       return static_cast<type>(KUMI_FWD(t));
     }
   }
 
   namespace result
   {
-    template<typename Target, concepts::product_type T> struct member_cast
+    template<typename Target, kumi::concepts::product_type T> struct member_cast
     {
       using type = decltype(kumi::member_cast<Target, T>(std::declval<T>()));
     };
 
-    template<typename Target, concepts::product_type T> using member_cast_t = typename member_cast<Target, T>::type;
+    template<typename Target, kumi::concepts::product_type T>
+    using member_cast_t = typename member_cast<Target, T>::type;
   }
 }

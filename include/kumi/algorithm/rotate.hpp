@@ -42,15 +42,15 @@ namespace kumi
     @include doc/record/algo/rotate_left.cpp
   **/
   //====================================================================================================================
-  template<std::size_t R, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto rotate_left(T&& t)
+  template<std::size_t R, kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto rotate_left(T&& t)
   {
-    if constexpr (concepts::empty_product_type<T>) return KUMI_FWD(t);
-    else if constexpr ((R % size_v<T>) == 0) return KUMI_FWD(t);
+    if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
+    else if constexpr ((R % kumi::size_v<T>) == 0) return KUMI_FWD(t);
     else
     {
-      constexpr auto idxs = function::rotater(index<size_v<T>>, index<(R % size_v<T>)>);
+      constexpr auto idxs = kumi::function::rotater(kumi::index<kumi::size_v<T>>, kumi::index<(R % kumi::size_v<T>)>);
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = builder_make_t<T, element_t<I, T>...>;
+        using type = builder_make_t<T, kumi::element_t<I, T>...>;
         return type{get<I>(KUMI_FWD(t))...};
       }(idxs);
     }
@@ -89,16 +89,16 @@ namespace kumi
     @include doc/record/algo/rotate_right.cpp
   **/
   //====================================================================================================================
-  template<std::size_t R, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto rotate_right(T&& t)
+  template<std::size_t R, kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto rotate_right(T&& t)
   {
-    if constexpr (concepts::empty_product_type<T>) return KUMI_FWD(t);
-    else if constexpr ((R % size_v<T>) == 0) return KUMI_FWD(t);
+    if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
+    else if constexpr ((R % kumi::size_v<T>) == 0) return KUMI_FWD(t);
     else
     {
-      constexpr auto F = R % size_v<T>;
-      constexpr auto idxs = function::rotater(index<size_v<T>>, index<(size_v<T> - F)>);
+      constexpr auto F = R % kumi::size_v<T>;
+      constexpr auto idxs = kumi::function::rotater(kumi::index<kumi::size_v<T>>, kumi::index<(kumi::size_v<T> - F)>);
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = builder_make_t<T, element_t<I, T>...>;
+        using type = builder_make_t<T, kumi::element_t<I, T>...>;
         return type{get<I>(KUMI_FWD(t))...};
       }(idxs);
     }
@@ -106,18 +106,18 @@ namespace kumi
 
   namespace result
   {
-    template<std::size_t R, concepts::product_type T> struct rotate_left
+    template<std::size_t R, kumi::concepts::product_type T> struct rotate_left
     {
       using type = decltype(kumi::rotate_left<R>(std::declval<T>()));
     };
 
-    template<std::size_t R, concepts::product_type T> struct rotate_right
+    template<std::size_t R, kumi::concepts::product_type T> struct rotate_right
     {
       using type = decltype(kumi::rotate_right<R>(std::declval<T>()));
     };
 
-    template<std::size_t R, concepts::product_type T> using rotate_left_t = typename rotate_left<R, T>::type;
+    template<std::size_t R, kumi::concepts::product_type T> using rotate_left_t = typename rotate_left<R, T>::type;
 
-    template<std::size_t R, concepts::product_type T> using rotate_right_t = typename rotate_right<R, T>::type;
+    template<std::size_t R, kumi::concepts::product_type T> using rotate_right_t = typename rotate_right<R, T>::type;
   }
 }

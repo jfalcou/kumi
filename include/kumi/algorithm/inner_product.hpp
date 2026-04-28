@@ -61,58 +61,59 @@ namespace kumi
     @include doc/record/algo/inner_product.cpp
   **/
   //====================================================================================================================
-  template<concepts::product_type S1,
-           concepts::sized_product_type<size_v<S1>> S2,
+  template<kumi::concepts::product_type S1,
+           kumi::concepts::sized_product_type<kumi::size_v<S1>> S2,
            typename T,
            typename Sum,
            typename Prod>
   [[nodiscard]] KUMI_ABI constexpr auto inner_product(S1&& s1, S2&& s2, T init, Sum sum, Prod prod) noexcept
-  requires(concepts::compatible_product_types<S1, S2>)
+  requires(kumi::concepts::compatible_product_types<S1, S2>)
   {
-    if constexpr (concepts::empty_product_type<S1>) return init;
-    else if constexpr (concepts::record_type<S1>)
+    if constexpr (kumi::concepts::empty_product_type<S1>) return init;
+    else if constexpr (kumi::concepts::record_type<S1>)
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (function::foldable{init} >> ... >>
-                bind_back(sum, invoke(prod, get<identifier_of<element_t<I, S1>>()>(KUMI_FWD(s1)),
-                                      get<identifier_of<element_t<I, S1>>()>(KUMI_FWD(s2)))))();
-      }(std::make_index_sequence<size_v<S1>>());
+        return (
+          kumi::function::foldable{init} >> ... >>
+          kumi::bind_back(sum, kumi::invoke(prod, get<kumi::identifier_of<kumi::element_t<I, S1>>()>(KUMI_FWD(s1)),
+                                            get<kumi::identifier_of<kumi::element_t<I, S1>>()>(KUMI_FWD(s2)))))();
+      }(std::make_index_sequence<kumi::size_v<S1>>{});
     }
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (function::foldable{init} >> ... >>
-                bind_back(sum, invoke(prod, get<I>(KUMI_FWD(s1)), get<I>(KUMI_FWD(s2)))))();
-      }(std::make_index_sequence<size_v<S1>>{});
+        return (kumi::function::foldable{init} >> ... >>
+                kumi::bind_back(sum, kumi::invoke(prod, get<I>(KUMI_FWD(s1)), get<I>(KUMI_FWD(s2)))))();
+      }(std::make_index_sequence<kumi::size_v<S1>>{});
     }
   }
 
   //! @overload
-  template<concepts::product_type S1, concepts::sized_product_type<size_v<S1>> S2, typename T>
+  template<kumi::concepts::product_type S1, kumi::concepts::sized_product_type<kumi::size_v<S1>> S2, typename T>
   [[nodiscard]] KUMI_ABI constexpr auto inner_product(S1&& s1, S2&& s2, T init) noexcept
-  requires(concepts::compatible_product_types<S1, S2>)
+  requires(kumi::concepts::compatible_product_types<S1, S2>)
   {
-    if constexpr (concepts::empty_product_type<S1>) return init;
-    else if constexpr (concepts::record_type<S1>)
+    if constexpr (kumi::concepts::empty_product_type<S1>) return init;
+    else if constexpr (kumi::concepts::record_type<S1>)
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return (init + ... +
-                (get<identifier_of<element_t<I, S1>>()>(KUMI_FWD(s1)) *
-                 get<identifier_of<element_t<I, S1>>()>(KUMI_FWD(s2))));
-      }(std::make_index_sequence<size<S1>::value>());
+                (get<kumi::identifier_of<kumi::element_t<I, S1>>()>(KUMI_FWD(s1)) *
+                 get<kumi::identifier_of<kumi::element_t<I, S1>>()>(KUMI_FWD(s2))));
+      }(std::make_index_sequence<kumi::size_v<S1>>{});
     }
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return (init + ... + (get<I>(KUMI_FWD(s1)) * get<I>(KUMI_FWD(s2))));
-      }(std::make_index_sequence<size_v<S1>>{});
+      }(std::make_index_sequence<kumi::size_v<S1>>{});
     }
   }
 
   namespace result
   {
-    template<concepts::product_type S1,
-             concepts::sized_product_type<size_v<S1>> S2,
+    template<kumi::concepts::product_type S1,
+             kumi::concepts::sized_product_type<kumi::size_v<S1>> S2,
              typename T,
              typename Sum,
              typename Prod>
@@ -122,14 +123,14 @@ namespace kumi
         std::declval<S1>(), std::declval<S2>(), std::declval<T>(), std::declval<Sum>(), std::declval<Prod>()));
     };
 
-    template<concepts::product_type S1, concepts::sized_product_type<size_v<S1>> S2, typename T>
+    template<kumi::concepts::product_type S1, kumi::concepts::sized_product_type<kumi::size_v<S1>> S2, typename T>
     struct inner_product<S1, S2, T, void, void>
     {
       using type = decltype(kumi::inner_product(std::declval<S1>(), std::declval<S2>(), std::declval<T>()));
     };
 
-    template<concepts::product_type S1,
-             concepts::sized_product_type<size_v<S1>> S2,
+    template<kumi::concepts::product_type S1,
+             kumi::concepts::sized_product_type<kumi::size_v<S1>> S2,
              typename T,
              typename Sum = void,
              typename Prod = void>

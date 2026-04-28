@@ -15,7 +15,7 @@ namespace kumi::_
   template<std::size_t I, typename T> consteval auto get_key()
   {
     using type = std::remove_cvref_t<T>;
-    if constexpr (_::field<T>) return typename type::identifier_type{};
+    if constexpr (kumi::_::field<T>) return typename type::identifier_type{};
     else return std::integral_constant<std::size_t, I>{};
   }
 
@@ -32,7 +32,7 @@ namespace kumi::_
   };
 
   /// Named variant of unique
-  template<std::size_t I, _::field T> struct unique_name<I, T>
+  template<std::size_t I, kumi::_::field T> struct unique_name<I, T>
   {
     operator typename std::remove_cvref_t<T>::identifier_type();
   };

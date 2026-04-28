@@ -26,12 +26,12 @@ namespace kumi::function
   template<typename T, auto V> struct size_or
   {
     static constexpr auto value = [] {
-      if constexpr (concepts::product_type<T>) return size_v<T>;
+      if constexpr (kumi::concepts::product_type<T>) return kumi::size_v<T>;
       else return V;
     }();
   };
 
-  template<typename T, auto V> inline constexpr auto size_or_v = size_or<T, V>::value;
+  template<typename T, auto V> inline constexpr auto size_or_v = kumi::function::size_or<T, V>::value;
 
   //====================================================================================================================
   /**
@@ -54,12 +54,13 @@ namespace kumi::function
   template<std::size_t I, typename T, typename U> struct element_or
   {
     using type = typename decltype([] {
-      if constexpr (concepts::product_type<T> && I < size_v<T>) return element<I, T>{};
+      if constexpr (kumi::concepts::product_type<T> && I < kumi::size_v<T>) return kumi::element<I, T>{};
       else return std::type_identity<U>{};
     }())::type;
   };
 
-  template<std::size_t I, typename T, typename U> using element_or_t = typename element_or<I, T, U>::type;
+  template<std::size_t I, typename T, typename U>
+  using element_or_t = typename kumi::function::element_or<I, T, U>::type;
 
   //====================================================================================================================
   /**
@@ -75,7 +76,7 @@ namespace kumi::function
   //====================================================================================================================
   template<std::size_t I, typename T, typename V> [[nodiscard]] KUMI_ABI constexpr decltype(auto) get_or(T&& t, V&& v)
   {
-    if constexpr (concepts::product_type<T> && I < size_v<T>) return get<I>(KUMI_FWD(t));
+    if constexpr (kumi::concepts::product_type<T> && I < kumi::size_v<T>) return get<I>(KUMI_FWD(t));
     else return KUMI_FWD(v);
   }
 
@@ -108,7 +109,7 @@ namespace kumi::function
     //==================================================================================================================
     template<typename C> KUMI_ABI friend constexpr decltype(auto) operator>>(foldable&& f, C&& c)
     {
-      return function::foldable{invoke(c, f.value)};
+      return kumi::function::foldable{kumi::invoke(c, f.value)};
     }
 
     //==================================================================================================================
@@ -123,7 +124,7 @@ namespace kumi::function
     //==================================================================================================================
     template<typename C> KUMI_ABI friend constexpr decltype(auto) operator<<(C&& c, foldable&& f)
     {
-      return function::foldable{invoke(c, f.value)};
+      return kumi::function::foldable{kumi::invoke(c, f.value)};
     }
 
     //==================================================================================================================
@@ -166,8 +167,8 @@ namespace kumi::function
     //==================================================================================================================
     template<typename C> KUMI_ABI friend constexpr decltype(auto) operator>>(scannable&& s, C&& c)
     {
-      auto res = invoke(c, s.value);
-      return function::scannable{bind_front(std::move(s.func), std::move(s.value)), res};
+      auto res = kumi::invoke(c, s.value);
+      return kumi::function::scannable{kumi::bind_front(std::move(s.func), std::move(s.value)), res};
     }
 
     //==================================================================================================================
@@ -182,8 +183,8 @@ namespace kumi::function
     //==================================================================================================================
     template<typename C> KUMI_ABI friend constexpr decltype(auto) operator<<(C&& c, scannable&& s)
     {
-      auto res = invoke(c, s.value);
-      return function::scannable{bind_back(std::move(s.func), std::move(s.value)), res};
+      auto res = kumi::invoke(c, s.value);
+      return kumi::function::scannable{kumi::bind_back(std::move(s.func), std::move(s.value)), res};
     }
 
     //==================================================================================================================
@@ -193,7 +194,7 @@ namespace kumi::function
               Essentially marking the end of a computation.
     **/
     //==================================================================================================================
-    KUMI_ABI constexpr decltype(auto) operator()() const noexcept { return invoke(func, value); }
+    KUMI_ABI constexpr decltype(auto) operator()() const noexcept { return kumi::invoke(func, value); }
   };
 
   //====================================================================================================================

@@ -41,11 +41,11 @@ namespace kumi
     @include doc/record/algo/push_front.cpp
   **/
   //====================================================================================================================
-  template<concepts::product_type T, typename V> [[nodiscard]] KUMI_ABI constexpr auto push_front(T&& t, V&& v)
+  template<kumi::concepts::product_type T, typename V> [[nodiscard]] KUMI_ABI constexpr auto push_front(T&& t, V&& v)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
       return builder<T>::make(KUMI_FWD(v), get<I>(KUMI_FWD(t))...);
-    }(std::make_index_sequence<size_v<T>>{});
+    }(std::make_index_sequence<kumi::size_v<T>>{});
   }
 
   //====================================================================================================================
@@ -79,13 +79,13 @@ namespace kumi
     @include doc/record/algo/pop_front.cpp
   **/
   //====================================================================================================================
-  template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto pop_front(T&& t)
+  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto pop_front(T&& t)
   {
-    if constexpr (concepts::empty_product_type<T>) return builder<T>::make();
+    if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return builder<T>::make(get<I + 1>(KUMI_FWD(t))...);
-      }(std::make_index_sequence<size_v<T> - 1>{});
+      }(std::make_index_sequence<kumi::size_v<T> - 1>{});
   }
 
   //====================================================================================================================
@@ -120,11 +120,11 @@ namespace kumi
     @include doc/record/algo/push_back.cpp
   **/
   //====================================================================================================================
-  template<concepts::product_type T, typename V> [[nodiscard]] KUMI_ABI constexpr auto push_back(T&& t, V&& v)
+  template<kumi::concepts::product_type T, typename V> [[nodiscard]] KUMI_ABI constexpr auto push_back(T&& t, V&& v)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
       return builder<T>::make(get<I>(KUMI_FWD(t))..., KUMI_FWD(v));
-    }(std::make_index_sequence<size_v<T>>());
+    }(std::make_index_sequence<kumi::size_v<T>>());
   }
 
   //====================================================================================================================
@@ -158,43 +158,43 @@ namespace kumi
     @include doc/record/algo/pop_back.cpp
   **/
   //====================================================================================================================
-  template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto pop_back(T&& t)
+  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto pop_back(T&& t)
   {
-    if constexpr (concepts::empty_product_type<T>) return builder<T>::make();
+    if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return builder<T>::make(get<I>(KUMI_FWD(t))...);
-      }(std::make_index_sequence<size_v<T> - 1>{});
+      }(std::make_index_sequence<kumi::size_v<T> - 1>{});
   }
 
   namespace result
   {
-    template<concepts::product_type T, typename V> struct push_front
+    template<kumi::concepts::product_type T, typename V> struct push_front
     {
       using type = decltype(kumi::push_front(std::declval<T>(), std::declval<V>()));
     };
 
-    template<concepts::product_type T> struct pop_front
+    template<kumi::concepts::product_type T> struct pop_front
     {
       using type = decltype(kumi::pop_front(std::declval<T>()));
     };
 
-    template<concepts::product_type T, typename V> struct push_back
+    template<kumi::concepts::product_type T, typename V> struct push_back
     {
       using type = decltype(kumi::push_back(std::declval<T>(), std::declval<V>()));
     };
 
-    template<concepts::product_type T> struct pop_back
+    template<kumi::concepts::product_type T> struct pop_back
     {
       using type = decltype(kumi::pop_back(std::declval<T>()));
     };
 
-    template<concepts::product_type T, typename V> using push_front_t = typename push_front<T, V>::type;
+    template<kumi::concepts::product_type T, typename V> using push_front_t = typename push_front<T, V>::type;
 
-    template<concepts::product_type T> using pop_front_t = typename pop_front<T>::type;
+    template<kumi::concepts::product_type T> using pop_front_t = typename pop_front<T>::type;
 
-    template<concepts::product_type T, typename V> using push_back_t = typename push_back<T, V>::type;
+    template<kumi::concepts::product_type T, typename V> using push_back_t = typename push_back<T, V>::type;
 
-    template<concepts::product_type T> using pop_back_t = typename pop_back<T>::type;
+    template<kumi::concepts::product_type T> using pop_back_t = typename pop_back<T>::type;
   }
 }

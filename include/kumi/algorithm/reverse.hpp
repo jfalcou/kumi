@@ -40,24 +40,24 @@ namespace kumi
     @include doc/record/algo/reverse.cpp
   **/
   //====================================================================================================================
-  template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto reverse(T&& t)
+  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto reverse(T&& t)
   {
-    if constexpr (concepts::empty_product_type<T>) return builder<T>::make();
+    if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
     else
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return builder<T>::make(get<(size_v<T> - 1 - I)>(KUMI_FWD(t))...);
-      }(std::make_index_sequence<size<T>::value>());
+        return builder<T>::make(get<(kumi::size_v<T> - 1 - I)>(KUMI_FWD(t))...);
+      }(std::make_index_sequence<kumi::size_v<T>>{});
     }
   }
 
   namespace result
   {
-    template<concepts::product_type T> struct reverse
+    template<kumi::concepts::product_type T> struct reverse
     {
       using type = decltype(kumi::reverse(std::declval<T>()));
     };
 
-    template<concepts::product_type T> using reverse_t = typename reverse<T>::type;
+    template<kumi::concepts::product_type T> using reverse_t = typename reverse<T>::type;
   }
 }

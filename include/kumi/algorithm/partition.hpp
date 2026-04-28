@@ -40,23 +40,23 @@ namespace kumi
     @include doc/record/algo/partition.cpp
   **/
   //====================================================================================================================
-  template<template<typename> typename Pred, concepts::product_type T>
+  template<template<typename> typename Pred, kumi::concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto partition(T&& t) noexcept
   {
-    if constexpr (concepts::empty_product_type<T>) return tuple{builder<T>::make(), builder<T>::make()};
+    if constexpr (kumi::concepts::empty_product_type<T>) return kumi::tuple{builder<T>::make(), builder<T>::make()};
     else
     {
       constexpr auto pos = []<std::size_t... I>(std::index_sequence<I...>) {
-        return function::selector(std::bool_constant<Pred<stored_element_t<I, T>>::value>{}...);
-      }(std::make_index_sequence<size_v<T>>{});
+        return kumi::function::selector(std::bool_constant<Pred<kumi::stored_element_t<I, T>>::value>{}...);
+      }(std::make_index_sequence<kumi::size_v<T>>{});
 
       auto select = [&]<typename O, std::size_t... I>(O, std::index_sequence<I...>) {
-        using type = builder_make_t<T, element_t<pos.t[O::value + I], T>...>;
+        using type = builder_make_t<T, kumi::element_t<pos.t[O::value + I], T>...>;
         return type{get<pos.t[O::value + I]>(KUMI_FWD(t))...};
       };
 
       return kumi::tuple{select(kumi::index<0>, std::make_index_sequence<pos.cut>{}),
-                         select(kumi::index<pos.cut>, std::make_index_sequence<size_v<T> - pos.cut>{})};
+                         select(kumi::index<pos.cut>, std::make_index_sequence<kumi::size_v<T> - pos.cut>{})};
     }
   }
 
@@ -90,18 +90,18 @@ namespace kumi
     @include doc/record/algo/filter.cpp
   **/
   //====================================================================================================================
-  template<template<typename> typename Pred, concepts::product_type T>
+  template<template<typename> typename Pred, kumi::concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto filter(T&& t) noexcept
   {
-    if constexpr (concepts::empty_product_type<T>) return builder<T>::make();
+    if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
     else
     {
       constexpr auto pos = []<std::size_t... I>(std::index_sequence<I...>) {
-        return function::selector(std::bool_constant<Pred<stored_element_t<I, T>>::value>{}...);
-      }(std::make_index_sequence<size_v<T>>{});
+        return kumi::function::selector(std::bool_constant<Pred<kumi::stored_element_t<I, T>>::value>{}...);
+      }(std::make_index_sequence<kumi::size_v<T>>{});
 
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = builder_make_t<T, element_t<pos.t[I], T>...>;
+        using type = builder_make_t<T, kumi::element_t<pos.t[I], T>...>;
         return type{get<pos.t[I]>(KUMI_FWD(t))...};
       }(std::make_index_sequence<pos.cut>{});
     }
@@ -137,20 +137,20 @@ namespace kumi
     @include doc/record/algo/filter_not.cpp
   **/
   //====================================================================================================================
-  template<template<typename> typename Pred, concepts::product_type T>
+  template<template<typename> typename Pred, kumi::concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto filter_not(T&& t) noexcept
   {
-    if constexpr (concepts::empty_product_type<T>) return builder<T>::make();
+    if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
     else
     {
       constexpr auto pos = []<std::size_t... I>(std::index_sequence<I...>) {
-        return function::selector(std::bool_constant<Pred<stored_element_t<I, T>>::value>{}...);
-      }(std::make_index_sequence<size_v<T>>{});
+        return function::selector(std::bool_constant<Pred<kumi::stored_element_t<I, T>>::value>{}...);
+      }(std::make_index_sequence<kumi::size_v<T>>{});
 
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = builder_make_t<T, element_t<pos.t[pos.cut + I], T>...>;
+        using type = builder_make_t<T, kumi::element_t<pos.t[pos.cut + I], T>...>;
         return type{get<pos.t[pos.cut + I]>(KUMI_FWD(t))...};
-      }(std::make_index_sequence<size_v<T> - pos.cut>{});
+      }(std::make_index_sequence<kumi::size_v<T> - pos.cut>{});
     }
   }
 

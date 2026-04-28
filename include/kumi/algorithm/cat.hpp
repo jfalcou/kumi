@@ -39,15 +39,15 @@ namespace kumi
     @include doc/record/algo/cat.cpp
   **/
   //====================================================================================================================
-  template<concepts::product_type... Ts>
+  template<kumi::concepts::product_type... Ts>
   [[nodiscard]] KUMI_ABI constexpr auto cat(Ts&&... ts)
-  requires(concepts::follows_same_semantic<Ts...>)
+  requires(kumi::concepts::follows_same_semantic<Ts...>)
   {
-    if constexpr (sizeof...(Ts) == 0) return tuple{};
+    if constexpr (sizeof...(Ts) == 0) return kumi::tuple{};
     else
     {
-      constexpr auto pos = function::concatenater(std::index_sequence<size_v<Ts>...>{});
-      using res_type = common_product_type_t<std::remove_cvref_t<Ts>...>;
+      constexpr auto pos = kumi::function::concatenater(std::index_sequence<kumi::size_v<Ts>...>{});
+      using res_type = kumi::common_product_type_t<std::remove_cvref_t<Ts>...>;
 
       return [&]<typename T, std::size_t... E, std::size_t... N>(T&& t, std::index_sequence<E...>,
                                                                  std::index_sequence<N...>) {

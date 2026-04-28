@@ -37,7 +37,7 @@ namespace kumi::_
 
   // Empty Base Optimization
   template<int N, typename T>
-  requires(std::is_empty_v<T> && (!field<T>))
+  requires(std::is_empty_v<T> && (!kumi::_::field<T>))
   struct leaf<N, T> : T
   {
     using index = std::integral_constant<std::size_t, N>;
@@ -60,12 +60,12 @@ namespace kumi::_
     KUMI_ABI constexpr T const& operator()(inner_type) const& noexcept { return *this; }
   };
 
-  template<int N, field T> struct leaf<N, T> : T
+  template<int N, kumi::_::field T> struct leaf<N, T> : T
   {
     using T::operator();
     using index = std::integral_constant<std::size_t, N>;
-    using key = identifier_of_t<T>;
-    using inner_type = type_of_t<T>;
+    using key = kumi::_::identifier_of_t<T>;
+    using inner_type = kumi::_::type_of_t<T>;
 
     KUMI_ABI constexpr T& operator()(index) & noexcept { return *this; }
 
@@ -79,19 +79,19 @@ namespace kumi::_
   template<typename ISeq, typename... Ts> struct binder;
 
   // General N-case
-  template<int... Is, typename... Ts> struct binder<std::integer_sequence<int, Is...>, Ts...> : leaf<Is, Ts>...
+  template<int... Is, typename... Ts> struct binder<std::integer_sequence<int, Is...>, Ts...> : kumi::_::leaf<Is, Ts>...
   {
     static constexpr bool is_homogeneous = false;
-    using leaf<Is, Ts>::operator()...;
+    using kumi::_::leaf<Is, Ts>::operator()...;
   };
 
   // Specializable binder type constructor
   template<typename ISeq, typename... Ts> struct make_binder
   {
-    using type = binder<ISeq, Ts...>;
+    using type = kumi::_::binder<ISeq, Ts...>;
   };
 
-  template<typename ISeq, typename... Ts> using make_binder_t = typename make_binder<ISeq, Ts...>::type;
+  template<typename ISeq, typename... Ts> using make_binder_t = typename kumi::_::make_binder<ISeq, Ts...>::type;
 
   // Record binder, a record is unordered which implies no need for leaf tagging with integers. All types are also
   // necessarily unique.
@@ -103,8 +103,8 @@ namespace kumi::_
   // Specializable set type constructor
   template<typename... Ts> struct make_set
   {
-    using type = set<Ts...>;
+    using type = kumi::_::set<Ts...>;
   };
 
-  template<typename... Ts> using make_set_t = typename make_set<Ts...>::type;
+  template<typename... Ts> using make_set_t = typename kumi::_::make_set<Ts...>::type;
 }

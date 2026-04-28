@@ -16,26 +16,27 @@ namespace kumi
     //==================================================================================================================
     template<typename F, typename T>
     concept supports_apply = []<std::size_t... N>(std::index_sequence<N...>) {
-      return std::invocable<F, stored_member_t<N, T>...>;
-    }(std::make_index_sequence<size_v<T>>{});
+      return std::invocable<F, kumi::stored_member_t<N, T>...>;
+    }(std::make_index_sequence<kumi::size_v<T>>{});
 
     template<typename F, typename T>
     concept supports_nothrow_apply = []<std::size_t... N>(std::index_sequence<N...>) {
-      return std::is_nothrow_invocable_v<F, stored_member_t<N, T>...>;
-    }(std::make_index_sequence<size_v<T>>{});
+      return std::is_nothrow_invocable_v<F, kumi::stored_member_t<N, T>...>;
+    }(std::make_index_sequence<kumi::size_v<T>>{});
 
     template<typename F, typename... Ts>
     concept supports_call = []<std::size_t... I>(std::index_sequence<I...>) {
       return ([]<std::size_t J>(std::integral_constant<std::size_t, J>) {
-        return std::invocable<F, stored_member_t<J, Ts>...>;
+        return std::invocable<F, kumi::stored_member_t<J, Ts>...>;
       }(std::integral_constant<std::size_t, I>{}) &&
               ...);
-    }(std::make_index_sequence<(size_v<Ts>, ...)>{});
+    }(std::make_index_sequence<(kumi::size_v<Ts>, ...)>{});
 
     template<typename T>
-    concept supports_transpose = (size_v<T> <= 1) || ([]<std::size_t... N>(std::index_sequence<N...>) {
-                                   return ((size_v<stored_member_t<0, T>> == size_v<stored_member_t<N + 1, T>>) && ...);
-                                 }(std::make_index_sequence<size_v<T> - 1>{}));
+    concept supports_transpose =
+      (kumi::size_v<T> <= 1) || ([]<std::size_t... N>(std::index_sequence<N...>) {
+        return ((kumi::size_v<kumi::stored_member_t<0, T>> == kumi::size_v<kumi::stored_member_t<N + 1, T>>) && ...);
+      }(std::make_index_sequence<kumi::size_v<T> - 1>{}));
 
   }
 
@@ -59,7 +60,7 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename T>
-    concept product_type = is_product_type<std::remove_cvref_t<T>>::value;
+    concept product_type = kumi::is_product_type<std::remove_cvref_t<T>>::value;
 
     //==================================================================================================================
     /**
@@ -76,7 +77,7 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename T>
-    concept record_type = product_type<T> && is_record_type<std::remove_cvref_t<T>>::value;
+    concept record_type = kumi::concepts::product_type<T> && kumi::is_record_type<std::remove_cvref_t<T>>::value;
 
     //==================================================================================================================
     /**
@@ -92,7 +93,7 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename T>
-    concept container = is_container_v<std::remove_cvref_t<T>>;
+    concept container = kumi::is_container_v<std::remove_cvref_t<T>>;
 
     //==================================================================================================================
     /**
@@ -106,7 +107,7 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename T>
-    concept static_container = container<T> && has_static_size_v<std::remove_cvref_t<T>>;
+    concept static_container = kumi::concepts::container<T> && kumi::has_static_size_v<std::remove_cvref_t<T>>;
 
     //==================================================================================================================
     /**
@@ -120,7 +121,8 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename T>
-    concept unit_type = (product_type<T> && (size_v<T> == 0)) || std::is_null_pointer_v<std::remove_cvref_t<T>>;
+    concept unit_type =
+      (kumi::concepts::product_type<T> && (kumi::size_v<T> == 0)) || std::is_null_pointer_v<std::remove_cvref_t<T>>;
 
     //==================================================================================================================
     /**
@@ -181,7 +183,7 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename T>
-    concept projection_map = is_projection_map_v<std::remove_cvref_t<T>>;
+    concept projection_map = kumi::is_projection_map_v<std::remove_cvref_t<T>>;
 
     //==================================================================================================================
     /**
@@ -193,7 +195,7 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename T>
-    concept projection = projection_map<T> || identifier<T> || index<T>;
+    concept projection = kumi::concepts::projection_map<T> || kumi::concepts::identifier<T> || kumi::concepts::index<T>;
 
     //==================================================================================================================
     /**
@@ -205,7 +207,7 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename T, std::size_t N>
-    concept sized_product_type = product_type<T> && (size_v<T> == N);
+    concept sized_product_type = kumi::concepts::product_type<T> && (kumi::size_v<T> == N);
 
     //==================================================================================================================
     /**
@@ -217,7 +219,7 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename T, std::size_t N>
-    concept sized_product_type_or_more = product_type<T> && (size_v<T> >= N);
+    concept sized_product_type_or_more = kumi::concepts::product_type<T> && (kumi::size_v<T> >= N);
 
     //==================================================================================================================
     /**
@@ -229,7 +231,7 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename T>
-    concept empty_product_type = product_type<T> && (size_v<T> == 0);
+    concept empty_product_type = kumi::concepts::product_type<T> && (kumi::size_v<T> == 0);
 
     //==================================================================================================================
     /**
@@ -241,7 +243,7 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename T>
-    concept non_empty_product_type = product_type<T> && (size_v<T> != 0);
+    concept non_empty_product_type = kumi::concepts::product_type<T> && (kumi::size_v<T> != 0);
 
     //==================================================================================================================
     /**
@@ -258,7 +260,8 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename T>
-    concept homogeneous_product_type = product_type<T> && is_homogeneous_v<std::remove_cvref_t<T>>;
+    concept homogeneous_product_type =
+      kumi::concepts::product_type<T> && kumi::is_homogeneous_v<std::remove_cvref_t<T>>;
 
     //==================================================================================================================
     /**
@@ -267,7 +270,7 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename... Ts>
-    concept has_named_fields = (... || field<Ts>);
+    concept has_named_fields = (... || kumi::concepts::field<Ts>);
 
     //==================================================================================================================
     /**
@@ -276,7 +279,7 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename... Ts>
-    concept fully_named = (... && field<Ts>);
+    concept fully_named = (... && kumi::concepts::field<Ts>);
 
     //==================================================================================================================
     /**
@@ -285,8 +288,8 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename... Ts>
-    concept uniquely_typed =
-      (sizeof...(Ts) == 0) || (!has_named_fields<Ts...> && all_uniques_v<std::remove_cvref_t<Ts>...>);
+    concept uniquely_typed = (sizeof...(Ts) == 0) || (!kumi::concepts::has_named_fields<Ts...> &&
+                                                      kumi::all_uniques_v<std::remove_cvref_t<Ts>...>);
 
     //==================================================================================================================
     /**
@@ -295,8 +298,8 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename... Ts>
-    concept uniquely_named =
-      (sizeof...(Ts) == 0) || (has_named_fields<Ts...> && all_unique_names_v<std::remove_cvref_t<Ts>...>);
+    concept uniquely_named = (sizeof...(Ts) == 0) || (kumi::concepts::has_named_fields<Ts...> &&
+                                                      kumi::all_unique_names_v<std::remove_cvref_t<Ts>...>);
 
     //==================================================================================================================
     /**
@@ -307,7 +310,8 @@ namespace kumi
     //==================================================================================================================
     template<typename... Ts>
     concept uniquely_labeled =
-      (sizeof...(Ts) == 0) || (fully_named<Ts...> && (all_uniques_v<_::value<std::remove_cvref_t<Ts>::label()>...>));
+      (sizeof...(Ts) == 0) || (kumi::concepts::fully_named<Ts...> &&
+                               (kumi::all_uniques_v<kumi::_::value<std::remove_cvref_t<Ts>::label()>...>));
 
     //==================================================================================================================
     /**
@@ -327,7 +331,7 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename Name, typename... Ts>
-    concept contains_identifier = identifier<Name> && kumi::_::can_get_field_by_value<Name, Ts...>;
+    concept contains_identifier = kumi::concepts::identifier<Name> && kumi::_::can_get_field_by_value<Name, Ts...>;
 
     //==================================================================================================================
     /**
@@ -338,8 +342,9 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename Label, typename... Ts>
-    concept contains_label = std::is_same_v<std::remove_cvref_t<decltype(std::remove_cvref_t<Label>::value)>, str> &&
-                             kumi::_::can_get_field_by_label<std::remove_cvref_t<Label>, Ts...>;
+    concept contains_label =
+      std::is_same_v<std::remove_cvref_t<decltype(std::remove_cvref_t<Label>::value)>, kumi::str> &&
+      kumi::_::can_get_field_by_label<std::remove_cvref_t<Label>, Ts...>;
 
     //==================================================================================================================
     /**
@@ -352,8 +357,8 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename T, typename U>
-    concept equivalent =
-      product_type<T> && product_type<U> && is_equivalent_v<std::remove_cvref_t<T>, std::remove_cvref_t<U>>;
+    concept equivalent = kumi::concepts::product_type<T> && kumi::concepts::product_type<U> &&
+                         kumi::is_equivalent_v<std::remove_cvref_t<T>, std::remove_cvref_t<U>>;
 
     //==================================================================================================================
     /**
@@ -365,8 +370,8 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename T, typename U>
-    concept equality_comparable =
-      equivalent<T, U> && is_equality_comparable_v<std::remove_cvref_t<T>, std::remove_cvref_t<U>>;
+    concept equality_comparable = kumi::concepts::equivalent<T, U> &&
+                                  kumi::is_equality_comparable_v<std::remove_cvref_t<T>, std::remove_cvref_t<U>>;
 
     //==================================================================================================================
     /**
@@ -378,7 +383,8 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename... Ts>
-    concept follows_same_semantic = ((product_type<Ts> && !record_type<Ts>) && ...) || ((record_type<Ts> && ...));
+    concept follows_same_semantic = ((kumi::concepts::product_type<Ts> && !kumi::concepts::record_type<Ts>) && ...) ||
+                                    ((kumi::concepts::record_type<Ts> && ...));
 
     //==================================================================================================================
     /**
@@ -391,7 +397,8 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename T, typename... Us>
-    concept compatible_product_types = (follows_same_semantic<T, Us...> && (equivalent<T, Us> && ...));
+    concept compatible_product_types =
+      (kumi::concepts::follows_same_semantic<T, Us...> && (kumi::concepts::equivalent<T, Us> && ...));
 
     //==================================================================================================================
     /**
@@ -426,9 +433,9 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename Type, typename T>
-    concept queryable_by_type = product_type<T> && []<std::size_t... I>(std::index_sequence<I...>) {
-      return _::can_get_field_by_type<Type, stored_element_t<I, T>...>;
-    }(std::make_index_sequence<size_v<T>>{});
+    concept queryable_by_type = kumi::concepts::product_type<T> && []<std::size_t... I>(std::index_sequence<I...>) {
+      return kumi::_::can_get_field_by_type<Type, kumi::stored_element_t<I, T>...>;
+    }(std::make_index_sequence<kumi::size_v<T>>{});
 
     //==================================================================================================================
     /**
@@ -441,10 +448,10 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename Id, typename T>
-    concept queryable_by_identifier =
-      identifier<Id> && product_type<T> && []<std::size_t... I>(std::index_sequence<I...>) {
-        return _::can_get_field_by_value<Id, element_t<I, T>...>;
-      }(std::make_index_sequence<size_v<T>>{});
+    concept queryable_by_identifier = kumi::concepts::identifier<Id> && kumi::concepts::product_type<T> &&
+                                      []<std::size_t... I>(std::index_sequence<I...>) {
+                                        return kumi::_::can_get_field_by_value<Id, kumi::element_t<I, T>...>;
+                                      }(std::make_index_sequence<kumi::size_v<T>>{});
 
     //==================================================================================================================
     /**
@@ -457,8 +464,9 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename L, typename T>
-    concept queryable_by_label = _::label<L> && product_type<T> && []<std::size_t... I>(std::index_sequence<I...>) {
-      return _::can_get_field_by_label<L, element_t<I, T>...>;
-    }(std::make_index_sequence<size_v<T>>{});
+    concept queryable_by_label =
+      kumi::_::label<L> && kumi::concepts::product_type<T> && []<std::size_t... I>(std::index_sequence<I...>) {
+        return kumi::_::can_get_field_by_label<L, kumi::element_t<I, T>...>;
+      }(std::make_index_sequence<kumi::size_v<T>>{});
   }
 }

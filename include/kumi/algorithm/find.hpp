@@ -28,16 +28,17 @@ namespace kumi
     @include doc/record/algo/locate.cpp
   **/
   //====================================================================================================================
-  template<typename Pred, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto locate(T&& t, Pred p) noexcept
+  template<typename Pred, kumi::concepts::product_type T>
+  [[nodiscard]] KUMI_ABI constexpr auto locate(T&& t, Pred p) noexcept
   {
-    if constexpr (concepts::empty_product_type<T>) return 0;
-    else if constexpr (concepts::record_type<T>) return locate(values_of(KUMI_FWD(t)), p);
+    if constexpr (kumi::concepts::empty_product_type<T>) return 0;
+    else if constexpr (kumi::concepts::record_type<T>) return kumi::locate(kumi::values_of(KUMI_FWD(t)), p);
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        bool checks[] = {invoke(p, get<I>(KUMI_FWD(t)))...};
-        for (std::size_t i = 0; i < size_v<T>; ++i)
+        bool checks[] = {kumi::invoke(p, get<I>(KUMI_FWD(t)))...};
+        for (std::size_t i = 0; i < kumi::size_v<T>; ++i)
           if (checks[i]) return i;
-        return size_v<T>;
-      }(std::make_index_sequence<size_v<T>>{});
+        return kumi::size_v<T>;
+      }(std::make_index_sequence<kumi::size_v<T>>{});
   }
 }

@@ -38,9 +38,9 @@ namespace kumi
     @include doc/record/algo/unique.cpp
   **/
   //====================================================================================================================
-  template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto unique(T&& t)
+  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto unique(T&& t)
   {
-    if constexpr (concepts::empty_product_type<T>) return KUMI_FWD(t);
+    if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
     else
     {
       constexpr auto pos = function::uniqued(as<T>{});
@@ -81,17 +81,17 @@ namespace kumi
     @include doc/record/algo/all_unique.cpp
   **/
   //====================================================================================================================
-  template<concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto all_unique(T&& t)
+  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto all_unique(T&& t)
   {
-    if constexpr (concepts::empty_product_type<T>) return t;
+    if constexpr (kumi::concepts::empty_product_type<T>) return t;
     else
     {
       constexpr auto proj = [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return function::uniquer(std::type_identity<stored_element_t<I, T>>{}...);
-      }(std::make_index_sequence<size_v<T>>{});
+        return kumi::function::uniquer(std::type_identity<kumi::stored_element_t<I, T>>{}...);
+      }(std::make_index_sequence<kumi::size_v<T>>{});
 
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = builder_make_t<T, element_t<proj.e[I], T>...>;
+        using type = builder_make_t<T, kumi::element_t<proj.e[I], T>...>;
         return type{get<proj.e[I]>(KUMI_FWD(t))...};
       }(std::make_index_sequence<proj.count>{});
     }
@@ -99,18 +99,18 @@ namespace kumi
 
   namespace result
   {
-    template<concepts::product_type T> struct unique
+    template<kumi::concepts::product_type T> struct unique
     {
       using type = decltype(kumi::unique(std::declval<T>()));
     };
 
-    template<concepts::product_type T> struct all_unique
+    template<kumi::concepts::product_type T> struct all_unique
     {
       using type = decltype(kumi::all_unique(std::declval<T>()));
     };
 
-    template<concepts::product_type T> using unique_t = typename unique<T>::type;
+    template<kumi::concepts::product_type T> using unique_t = typename unique<T>::type;
 
-    template<concepts::product_type T> using all_unique_t = typename all_unique<T>::type;
+    template<kumi::concepts::product_type T> using all_unique_t = typename all_unique<T>::type;
   }
 }

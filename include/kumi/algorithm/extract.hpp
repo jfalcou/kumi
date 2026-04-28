@@ -46,24 +46,24 @@ namespace kumi
     @include doc/record/algo/extract.cpp
   **/
   //====================================================================================================================
-  template<std::size_t I0, std::size_t I1, concepts::product_type T>
+  template<std::size_t I0, std::size_t I1, kumi::concepts::product_type T>
   [[nodiscard]] KUMI_ABI constexpr auto extract(T&& t,
-                                                [[maybe_unused]] index_t<I0> i0,
-                                                [[maybe_unused]] index_t<I1> i1) noexcept
+                                                [[maybe_unused]] kumi::index_t<I0> i0,
+                                                [[maybe_unused]] kumi::index_t<I1> i1) noexcept
   {
-    static_assert((I0 <= size_v<T>) && (I1 <= size_v<T>), "[KUMI] - Invalid index");
+    static_assert((I0 <= kumi::size_v<T>) && (I1 <= kumi::size_v<T>), "[KUMI] - Invalid index");
     return [&]<std::size_t... N>(std::index_sequence<N...>) {
-      using final_t = builder_make_t<T, element_t<N + I0, T>...>;
+      using final_t = builder_make_t<T, kumi::element_t<N + I0, T>...>;
       return final_t{get<N + I0>(KUMI_FWD(t))...};
     }(std::make_index_sequence<I1 - I0>{});
   }
 
   //! @overload
-  template<std::size_t I0, concepts::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto extract(T&& t, index_t<I0> i0) noexcept
+  template<std::size_t I0, kumi::concepts::product_type T>
+  [[nodiscard]] KUMI_ABI constexpr auto extract(T&& t, kumi::index_t<I0> i0) noexcept
   {
-    static_assert(I0 <= size_v<T>, "[KUMI] - Invalid index");
-    return extract(KUMI_FWD(t), i0, index<size_v<T>>);
+    static_assert(I0 <= kumi::size_v<T>, "[KUMI] - Invalid index");
+    return kumi::extract(KUMI_FWD(t), i0, kumi::index<size_v<T>>);
   }
 
   //====================================================================================================================
@@ -101,11 +101,11 @@ namespace kumi
     @include doc/record/algo/split.cpp
   **/
   //====================================================================================================================
-  template<std::size_t I0, concepts::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto split(T&& t, [[maybe_unused]] index_t<I0> i0) noexcept
+  template<std::size_t I0, kumi::concepts::product_type T>
+  [[nodiscard]] KUMI_ABI constexpr auto split(T&& t, [[maybe_unused]] kumi::index_t<I0> i0) noexcept
   {
-    static_assert(I0 <= size_v<T>, "[KUMI] - Invalid index");
-    constexpr auto proj = function::splitter(index<I0>, index<size_v<T>>);
+    static_assert(I0 <= kumi::size_v<T>, "[KUMI] - Invalid index");
+    constexpr auto proj = kumi::function::splitter(kumi::index<I0>, kumi::index<kumi::size_v<T>>);
 
     auto select = [&]<std::size_t... I>(std::index_sequence<I...>) {
       using type = builder_make_t<T, element_t<I, T>...>;
@@ -117,24 +117,24 @@ namespace kumi
 
   namespace result
   {
-    template<concepts::product_type T, std::size_t I0, std::size_t I1 = std::size_t(-1)> struct extract
+    template<kumi::concepts::product_type T, std::size_t I0, std::size_t I1 = std::size_t(-1)> struct extract
     {
       using type = decltype(kumi::extract(std::declval<T>(), kumi::index_t<I0>{}, kumi::index_t<I1>{}));
     };
 
-    template<concepts::product_type T, std::size_t I0> struct extract<T, I0>
+    template<kumi::concepts::product_type T, std::size_t I0> struct extract<T, I0>
     {
       using type = decltype(kumi::extract(std::declval<T>(), kumi::index_t<I0>{}));
     };
 
-    template<concepts::product_type T, std::size_t I0> struct split
+    template<kumi::concepts::product_type T, std::size_t I0> struct split
     {
       using type = decltype(kumi::split(std::declval<T>(), kumi::index_t<I0>{}));
     };
 
-    template<concepts::product_type T, std::size_t I0, std::size_t I1 = std::size_t(-1)>
+    template<kumi::concepts::product_type T, std::size_t I0, std::size_t I1 = std::size_t(-1)>
     using extract_t = typename extract<T, I0, I1>::type;
 
-    template<concepts::product_type T, std::size_t I0> using split_t = typename split<T, I0>::type;
+    template<kumi::concepts::product_type T, std::size_t I0> using split_t = typename split<T, I0>::type;
   }
 }

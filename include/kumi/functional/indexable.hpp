@@ -23,11 +23,12 @@ namespace kumi::function
   struct cartesian_product_t
   {
     template<std::size_t H, std::size_t... S>
-    KUMI_ABI consteval auto operator()(index_t<H>, index_t<S>...) const noexcept
+    KUMI_ABI consteval auto operator()(kumi::index_t<H>, kumi::index_t<S>...) const noexcept
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return projection_map{_::digits(_::unflatten_index, std::integral_constant<std::size_t, sizeof...(S)>{},
-                                        std::index_sequence<I, S...>{})...};
+        return kumi::projection_map{kumi::_::digits(kumi::_::unflatten_index,
+                                                    std::integral_constant<std::size_t, sizeof...(S)>{},
+                                                    std::index_sequence<I, S...>{})...};
       }(std::make_index_sequence<H>{});
     }
   };
@@ -50,7 +51,8 @@ namespace kumi::function
       constexpr auto N = std::integral_constant<std::size_t, (Sizes + ... + 0ULL)>{};
       constexpr auto Ids = std::index_sequence<Sizes...>{};
 
-      return projection_map{_::digits(_::container_of_index, N, Ids), _::digits(_::element_of_index, N, Ids)};
+      return kumi::projection_map{kumi::_::digits(kumi::_::container_of_index, N, Ids),
+                                  kumi::_::digits(kumi::_::element_of_index, N, Ids)};
     }
   };
 
@@ -67,7 +69,8 @@ namespace kumi::function
   //====================================================================================================================
   struct rotate_t
   {
-    template<std::size_t S, std::size_t R> KUMI_ABI consteval auto operator()(index_t<S>, index_t<R>) const noexcept
+    template<std::size_t S, std::size_t R>
+    KUMI_ABI consteval auto operator()(kumi::index_t<S>, kumi::index_t<R>) const noexcept
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return std::index_sequence<(I + R) % S...>{};
@@ -88,14 +91,14 @@ namespace kumi::function
   //====================================================================================================================
   struct reduce_t
   {
-    template<std::size_t N> KUMI_ABI consteval auto operator()(index_t<N>) const noexcept
+    template<std::size_t N> KUMI_ABI consteval auto operator()(kumi::index_t<N>) const noexcept
     {
       constexpr std::size_t half = N / 2;
       constexpr std::size_t remainder = N % 2;
 
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return projection_map{std::index_sequence<(2 * I)...>{}, std::index_sequence<(2 * I + 1)...>{},
-                              index<remainder>};
+        return kumi::projection_map{std::index_sequence<(2 * I)...>{}, std::index_sequence<(2 * I + 1)...>{},
+                                    kumi::index<remainder>};
       }(std::make_index_sequence<half>{});
     }
   };
@@ -113,10 +116,11 @@ namespace kumi::function
   //====================================================================================================================
   struct split_t
   {
-    template<std::size_t N, std::size_t Sz> KUMI_ABI consteval auto operator()(index_t<N>, index_t<Sz>) const noexcept
+    template<std::size_t N, std::size_t Sz>
+    KUMI_ABI consteval auto operator()(kumi::index_t<N>, kumi::index_t<Sz>) const noexcept
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return projection_map{std::make_index_sequence<N>{}, std::index_sequence<(I + N)...>{}};
+        return kumi::projection_map{std::make_index_sequence<N>{}, std::index_sequence<(I + N)...>{}};
       }(std::make_index_sequence<Sz - N>{});
     }
   };
@@ -135,14 +139,14 @@ namespace kumi::function
   struct tile_t
   {
     template<std::size_t Sz, std::size_t Extent, std::size_t Stride>
-    KUMI_ABI consteval auto operator()(index_t<Sz>, index_t<Extent>, index_t<Stride>) const noexcept
+    KUMI_ABI consteval auto operator()(kumi::index_t<Sz>, kumi::index_t<Extent>, kumi::index_t<Stride>) const noexcept
     {
       constexpr std::size_t nb_blocks = (Sz <= Extent) ? 1 : (Sz - Extent + Stride - 1) / Stride + 1;
 
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using blocks = std::index_sequence<_::block_size(I, Stride, Extent, Sz)...>;
+        using blocks = std::index_sequence<kumi::_::block_size(I, Stride, Extent, Sz)...>;
         using offsets = std::index_sequence<(I * Stride)...>;
-        return projection_map{blocks{}, offsets{}};
+        return kumi::projection_map{blocks{}, offsets{}};
       }(std::make_index_sequence<nb_blocks>{});
     }
   };
@@ -161,11 +165,11 @@ namespace kumi::function
   struct zip_t
   {
     template<std::size_t Count, std::size_t Size>
-    KUMI_ABI consteval auto operator()(index_t<Count>, index_t<Size>) const noexcept
+    KUMI_ABI consteval auto operator()(kumi::index_t<Count>, kumi::index_t<Size>) const noexcept
     {
       using tuples = std::make_index_sequence<Count>;
       using elements = std::make_index_sequence<Size>;
-      return projection_map{tuples{}, elements{}};
+      return kumi::projection_map{tuples{}, elements{}};
     }
   };
 
@@ -175,7 +179,7 @@ namespace kumi::function
     @brief  Callable object computing the index map associated to the cartesian product operation.
   **/
   //====================================================================================================================
-  inline constexpr cartesian_product_t cartesian_producer{};
+  inline constexpr kumi::function::cartesian_product_t cartesian_producer{};
 
   //====================================================================================================================
   /**
@@ -183,7 +187,7 @@ namespace kumi::function
     @brief  Callable object computing the index map associated to the concatenation operation.
   **/
   //====================================================================================================================
-  inline constexpr cat_t concatenater{};
+  inline constexpr kumi::function::cat_t concatenater{};
 
   //====================================================================================================================
   /**
@@ -191,7 +195,7 @@ namespace kumi::function
     @brief  Callable object computing the index map associated to the rotation operation.
   **/
   //====================================================================================================================
-  inline constexpr rotate_t rotater{};
+  inline constexpr kumi::function::rotate_t rotater{};
 
   //====================================================================================================================
   /**
@@ -199,7 +203,7 @@ namespace kumi::function
     @brief  Callable object computing the index map associated to the reduction operation.
   **/
   //====================================================================================================================
-  inline constexpr reduce_t reducer{};
+  inline constexpr kumi::function::reduce_t reducer{};
 
   //====================================================================================================================
   /**
@@ -207,7 +211,7 @@ namespace kumi::function
     @brief  Callable object computing the index map associated to the split operation.
   **/
   //====================================================================================================================
-  inline constexpr split_t splitter{};
+  inline constexpr kumi::function::split_t splitter{};
 
   //====================================================================================================================
   /**
@@ -215,7 +219,7 @@ namespace kumi::function
     @brief  Callable object computing the index map associated to the tiling operation.
   **/
   //====================================================================================================================
-  inline constexpr tile_t tiler{};
+  inline constexpr kumi::function::tile_t tiler{};
 
   //====================================================================================================================
   /**
@@ -223,5 +227,5 @@ namespace kumi::function
     @brief  Callable object computing the index map associated to the zip operation.
   **/
   //====================================================================================================================
-  inline constexpr zip_t zipper{};
+  inline constexpr kumi::function::zip_t zipper{};
 }

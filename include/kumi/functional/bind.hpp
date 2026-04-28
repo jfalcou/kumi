@@ -29,7 +29,7 @@ namespace kumi
   requires(std::is_move_constructible_v<std::decay_t<C>> && (std::is_move_constructible_v<std::decay_t<Ts>> && ...))
   {
     return [&]<typename... Args>(Args&&... call_args) -> decltype(auto) {
-      return invoke(KUMI_FWD(c), KUMI_FWD(ts)..., KUMI_FWD(call_args)...);
+      return kumi::invoke(KUMI_FWD(c), KUMI_FWD(ts)..., KUMI_FWD(call_args)...);
     };
   }
 
@@ -52,7 +52,7 @@ namespace kumi
   requires(std::is_move_constructible_v<std::decay_t<C>> && (std::is_move_constructible_v<std::decay_t<Ts>> && ...))
   {
     return [&]<typename... Args>(Args&&... call_args) -> decltype(auto) {
-      return invoke(KUMI_FWD(c), KUMI_FWD(call_args)..., KUMI_FWD(ts)...);
+      return kumi::invoke(KUMI_FWD(c), KUMI_FWD(call_args)..., KUMI_FWD(ts)...);
     };
   }
 
@@ -62,6 +62,6 @@ namespace kumi
              (std::is_nothrow_move_constructible_v<std::decay_t<Ts>> && ...))
   requires(std::is_move_constructible_v<std::decay_t<C>> && (std::is_move_constructible_v<std::decay_t<Ts>> && ...))
   {
-    return [&]() -> decltype(auto) { return invoke(KUMI_FWD(c), KUMI_FWD(ts)...); };
+    return [&]() -> decltype(auto) { return kumi::invoke(KUMI_FWD(c), KUMI_FWD(ts)...); };
   }
 }

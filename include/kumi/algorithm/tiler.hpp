@@ -47,21 +47,22 @@ namespace kumi
     @include doc/record/algo/tiles.cpp
   **/
   //====================================================================================================================
-  template<std::size_t N, std::size_t O, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto tiles(T&& t)
+  template<std::size_t N, std::size_t O, kumi::concepts::product_type T>
+  [[nodiscard]] KUMI_ABI constexpr auto tiles(T&& t)
   {
-    static_assert(N > 0 && N <= size_v<T>, "[KUMI] - Invalid tile size");
+    static_assert(N > 0 && N <= kumi::size_v<T>, "[KUMI] - Invalid tile size");
 
-    if constexpr (N == size_v<T>) return kumi::make_tuple(t);
+    if constexpr (N == kumi::size_v<T>) return kumi::make_tuple(t);
     else
     {
-      constexpr auto proj = function::tiler(index<size_v<T>>, index<N>, index<O>);
+      constexpr auto proj = kumi::function::tiler(kumi::index<kumi::size_v<T>>, kumi::index<N>, kumi::index<O>);
       auto const build = [&]<std::size_t... J>(auto Off, std::index_sequence<J...>) {
-        using type = builder_make_t<T, element_t<Off + J, T>...>;
+        using type = builder_make_t<T, kumi::element_t<Off + J, T>...>;
         return type{get<Off + J>(KUMI_FWD(t))...};
       };
 
       return [&]<std::size_t... B, std::size_t... E>(std::index_sequence<B...>, std::index_sequence<E...>) {
-        return tuple{build(index<E>, std::make_index_sequence<B>{})...};
+        return kumi::tuple{build(kumi::index<E>, std::make_index_sequence<B>{})...};
       }(get<0>(proj), get<1>(proj));
     }
   }
@@ -102,20 +103,20 @@ namespace kumi
     @include doc/record/algo/windows.cpp
   **/
   //====================================================================================================================
-  template<std::size_t N, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto windows(T&& t)
+  template<std::size_t N, kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto windows(T&& t)
   {
-    static_assert(N > 0 && N <= size_v<T>, "[KUMI] - Invalid tile size");
-    if constexpr (N == size_v<T>) return kumi::make_tuple(t);
+    static_assert(N > 0 && N <= kumi::size_v<T>, "[KUMI] - Invalid tile size");
+    if constexpr (N == kumi::size_v<T>) return kumi::make_tuple(t);
     else
     {
-      constexpr auto proj = function::tiler(index<size_v<T>>, index<N>, index<1>);
+      constexpr auto proj = kumi::function::tiler(kumi::index<kumi::size_v<T>>, kumi::index<N>, kumi::index<1>);
       auto const build = [&]<std::size_t... J>(auto O, std::index_sequence<J...>) {
-        using type = builder_make_t<T, element_t<O + J, T>...>;
+        using type = builder_make_t<T, kumi::element_t<O + J, T>...>;
         return type{get<O + J>(KUMI_FWD(t))...};
       };
 
       return [&]<std::size_t... B, std::size_t... E>(std::index_sequence<B...>, std::index_sequence<E...>) {
-        return tuple{build(index<E>, std::make_index_sequence<B>{})...};
+        return kumi::tuple{build(kumi::index<E>, std::make_index_sequence<B>{})...};
       }(get<0>(proj), get<1>(proj));
     }
   }
@@ -157,21 +158,21 @@ namespace kumi
     @include doc/record/algo/chunks.cpp
   **/
   //====================================================================================================================
-  template<std::size_t N, concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto chunks(T&& t)
+  template<std::size_t N, kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto chunks(T&& t)
   {
-    static_assert(N > 0 && N <= size_v<T>, "[KUMI] - Invalid tile size");
+    static_assert(N > 0 && N <= kumi::size_v<T>, "[KUMI] - Invalid tile size");
 
-    if constexpr (N == size_v<T>) return kumi::make_tuple(t);
+    if constexpr (N == kumi::size_v<T>) return kumi::make_tuple(t);
     else
     {
-      constexpr auto proj = function::tiler(index<size_v<T>>, index<N>, index<N>);
+      constexpr auto proj = function::tiler(kumi::index<kumi::size_v<T>>, kumi::index<N>, kumi::index<N>);
       auto const build = [&]<std::size_t... J>(auto O, std::index_sequence<J...>) {
-        using type = builder_make_t<T, element_t<O + J, T>...>;
+        using type = builder_make_t<T, kumi::element_t<O + J, T>...>;
         return type{get<O + J>(KUMI_FWD(t))...};
       };
 
       return [&]<std::size_t... B, std::size_t... E>(std::index_sequence<B...>, std::index_sequence<E...>) {
-        return tuple{build(index<E>, std::make_index_sequence<B>{})...};
+        return kumi::tuple{build(kumi::index<E>, std::make_index_sequence<B>{})...};
       }(get<0>(proj), get<1>(proj));
     }
   }

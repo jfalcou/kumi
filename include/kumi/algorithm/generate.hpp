@@ -41,7 +41,7 @@ namespace kumi
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         auto eval = [](auto, auto const& vv) { return vv; };
-        return kumi::tuple{eval(index<I>, v)...};
+        return kumi::tuple{eval(kumi::index<I>, v)...};
       }(std::make_index_sequence<N>{});
   }
 
@@ -76,7 +76,7 @@ namespace kumi
     if constexpr (N == 0) return kumi::tuple{};
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return kumi::tuple{invoke(f, index<I>)...};
+        return kumi::tuple{kumi::invoke(f, kumi::index<I>)...};
       }(std::make_index_sequence<N>{});
   }
 

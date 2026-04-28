@@ -25,14 +25,14 @@ namespace kumi
 
     template<typename T>
     [[nodiscard]] KUMI_ABI constexpr operator T() const noexcept
-    requires(concepts::unit_type<T>)
+    requires(kumi::concepts::unit_type<T>)
     {
       return {};
     }
 
     template<typename T>
     [[nodiscard]] KUMI_ABI constexpr operator T() noexcept
-    requires(concepts::unit_type<T>)
+    requires(kumi::concepts::unit_type<T>)
     {
       return {};
     }
@@ -50,5 +50,5 @@ namespace kumi
     @brief Inline constant representing a kumi::unit.
   **/
   //====================================================================================================================
-  inline constexpr unit none = {};
+  inline constexpr kumi::unit none{};
 }
