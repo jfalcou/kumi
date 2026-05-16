@@ -1,6 +1,6 @@
 {
-  "version": 4,
-  "cmakeMinimumRequired": { "major": 3, "minor": 28, "patch": 0 },
+  "version": 3,
+  "cmakeMinimumRequired": { "major": 3, "minor": 22, "patch": 0 },
   "vendor": {
     "copyright": "KUMI - Compact C++20 Tuple Toolbox",
     "license": "BSL-1.0",

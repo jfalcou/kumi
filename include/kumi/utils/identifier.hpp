@@ -47,7 +47,7 @@ namespace kumi
   {
     using type = std::remove_cvref_t<ID>;
 
-    constexpr identifier() noexcept {}
+    constexpr identifier() noexcept = default;
 
     constexpr identifier(ID const&) noexcept {}
 
@@ -88,10 +88,10 @@ namespace kumi
     using type = identifier<ID, Checker>;
 
     //! A checked field str representation is the underlying type, checker is ignored
-    friend constexpr kumi::str to_str(identifier<ID, Checker> const&) { return kumi::_::make_str(ID{}); }
+    friend constexpr kumi::str to_str(identifier const&) { return kumi::_::make_str(ID{}); }
 
     //! @brief Default constructor
-    constexpr identifier() noexcept {}
+    constexpr identifier() noexcept = default;
 
     //==================================================================================================================
     /**
@@ -143,11 +143,11 @@ namespace kumi
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os,
                                                          identifier const& id) noexcept
     {
-      return os << kumi::_::make_str(id);
+      return os << kumi::_::make_str(identifier{});
     }
   };
 
-  template<typename ID> identifier(ID const&) -> identifier<ID, void>;
+  template<typename ID> identifier(ID const&) -> identifier<ID>;
   template<typename ID, typename Checker> identifier(ID const&, Checker const&) -> identifier<ID, Checker>;
 
   //====================================================================================================================
@@ -164,7 +164,7 @@ namespace kumi
     using type = name<ID>;
 
     //! A name field str representation is it s owned str
-    friend constexpr kumi::str to_str(name<ID> const&) { return ID; }
+    friend constexpr kumi::str to_str(name const&) { return ID; }
 
     //==================================================================================================================
     /**
@@ -200,8 +200,8 @@ namespace kumi
   namespace _
   {
     // MSVC workaround for get<>
-    // MSVC evaluates a requires clause before checking the type of an NTTP
-    template<auto N, typename... Ts> KUMI_ABI constexpr auto contains_identifier()
+    // MSVC evaluates require clauses before checking the type of NTTPs
+    template<auto N, typename... Ts> KUMI_ABI consteval auto contains_identifier()
     {
       if constexpr (std::integral<std::remove_cvref_t<decltype(N)>>) return false;
       else if constexpr (kumi::concepts::index<decltype(N)>) return false;
@@ -209,7 +209,7 @@ namespace kumi
       else return kumi::_::can_get_field_by_value<kumi::name<N>, Ts...>;
     }
 
-    template<auto N, typename... Ts> KUMI_ABI constexpr auto contains_label()
+    template<auto N, typename... Ts> KUMI_ABI consteval auto contains_label()
     {
       if constexpr (std::integral<std::remove_cvref_t<decltype(N)>>) return false;
       else if constexpr (kumi::concepts::index<decltype(N)>) return false;

@@ -20,14 +20,14 @@ namespace kumi
     KUMI_ABI constexpr decltype(auto) invoke_memptr(P C::* member, O&& o, Ts&&... ts)
     {
       using callable_t = P C::*;
-      auto&& ptr = []<typename T>(T&& obj) -> decltype(auto) {
-        if constexpr (kumi::_::is_reference_wrapper_v<std::remove_cvref_t<T>>) return obj.get();
+      auto unwrap = []<typename T>(T&& obj) -> decltype(auto) {
+        if constexpr (kumi::_::is_reference_wrapper_v<std::remove_cvref_t<T>>) return KUMI_FWD(obj).get();
         else if constexpr (std::is_pointer_v<std::remove_cvref_t<T>>) return *KUMI_FWD(obj);
         else return KUMI_FWD(obj);
-      }(KUMI_FWD(o));
+      };
 
-      if constexpr (std::is_member_object_pointer_v<callable_t>) return KUMI_FWD(ptr).*member;
-      else return (KUMI_FWD(ptr).*member)(KUMI_FWD(ts)...);
+      if constexpr (std::is_member_object_pointer_v<callable_t>) return unwrap(KUMI_FWD(o)).*member;
+      else return (unwrap(KUMI_FWD(o)).*member)(KUMI_FWD(ts)...);
     }
   }
 

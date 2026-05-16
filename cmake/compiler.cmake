@@ -12,8 +12,8 @@ add_library(kumi_opts INTERFACE)
 target_compile_features ( kumi_opts INTERFACE cxx_std_20 )
 
 if(CMAKE_CUDA_COMPILER_ID MATCHES "NVIDIA")
-  target_compile_features( kumi_opts INTERFACE cuda_std_20 )
-  target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CUDA>:--Werror all-warnings -Xcompiler -Wno-deprecated-literal-operator> )
+    #target_compile_features( kumi_opts INTERFACE cuda_std_20 )
+  target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CUDA>:--Werror all-warnings -Xcompiler -Wno-deprecated-literal-operator --c++20> )
   # The literal warning is set at the moment when using nvcc13.2.5 with clang20
 endif()
 

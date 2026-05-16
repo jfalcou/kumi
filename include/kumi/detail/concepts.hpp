@@ -9,9 +9,9 @@
 
 namespace kumi::_
 {
-  template<auto ID> struct value
+  template<auto V> struct value
   {
-    using type = decltype(ID);
+    using type = decltype(V);
   };
 
   using invalid = std::integral_constant<std::size_t, static_cast<std::size_t>(-1)>;
@@ -35,7 +35,12 @@ namespace kumi::_
   template<typename T>
   concept valid_label =
     kumi::_::implicit_constructible<T> &&
-    (!requires { to_str(T{}); } || std::same_as<typename kumi::_::value<to_str(T{})>::type, kumi::str>);
+    (!requires { to_str(T{}); } ||
+    requires
+    {
+      { std::bool_constant<(to_str(T{}), true)>{} } -> std::same_as<std::true_type>;
+      { to_str(T{}) } -> std::same_as<kumi::str>;
+    });
 
   //====================================================================================================================
   // Helper concepts for custom label
