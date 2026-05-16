@@ -275,8 +275,7 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename... Us>
-    [[nodiscard]] KUMI_ABI explicit(kumi::_::piecewise_convertible<tuple<Ts const&...>, tuple<Us...>> ? false
-                                                                                                      : true) constexpr
+    [[nodiscard]] KUMI_ABI explicit(!kumi::_::piecewise_convertible<tuple<Ts const&...>, tuple<Us...>>) constexpr
     operator tuple<Us...>() const
     requires(sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>)
 #ifndef KUMI_DOXYGEN_INVOKED
