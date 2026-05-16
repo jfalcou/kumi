@@ -1,9 +1,9 @@
 ##======================================================================================================================
-##  TTS - Tiny Test System
-##  Copyright : TTS Contributors & Maintainers
+##  KUMI - Compact C++20 Tuple Toolbox
+##  Copyright : KUMI Project Contributors
 ##  SPDX-License-Identifier: BSL-1.0
 ##======================================================================================================================
-name: TTS MacOS Tests
+name: MacOS Tests
 on:
   workflow_call:
 
@@ -30,6 +30,7 @@ jobs:
         with:
           preset: ${{ matrix.compiler.preset }}
           config: ${{ matrix.options }}
+          targets: ${{ matrix.options == 'Debug' && 'unit.exe doc.exe' || 'unit.exe'}}
 
       - name: Run Unit Tests
         if: matrix.compiler.preset != 'android-arm64' # Skip executing cross-compiled binaries
@@ -37,3 +38,4 @@ jobs:
         with:
           preset: ${{ matrix.compiler.preset }}
           config: ${{ matrix.options }}
+          targets: ${{ matrix.options == 'Debug' && 'unit|doc' || 'unit'}}

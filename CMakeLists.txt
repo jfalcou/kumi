@@ -3,7 +3,7 @@
 ##  Copyright : KUMI Project Contributors
 ##  SPDX-License-Identifier: BSL-1.0
 ##======================================================================================================================
-cmake_minimum_required(VERSION 3.22)
+cmake_minimum_required(VERSION 3.28)
 project(KUMI LANGUAGES CXX)
 
 if(DEFINED CMAKE_CUDA_COMPILER)

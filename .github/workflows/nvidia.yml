@@ -1,9 +1,9 @@
 ##======================================================================================================================
-##  TTS - Tiny Test System
-##  Copyright : TTS Contributors & Maintainers
+##  KUMI - Compact C++20 Tuple Toolbox
+##  Copyright : KUMI Project Contributors
 ##  SPDX-License-Identifier: BSL-1.0
 ##======================================================================================================================
-name: TTS Nvidia Tests
+name: Nvidia Tests
 on:
   workflow_call:
 
@@ -33,9 +33,11 @@ jobs:
           config: ${{ matrix.options }}
           preset: ${{ matrix.compiler.preset }}
           setup-script: ${{ matrix.compiler.setup }}
+          targets: ${{ matrix.options == 'Debug' && 'unit.exe doc.exe' || 'unit.exe'}}
 
       - name: Run Unit Tests
         uses: ./.github/actions/test
         with:
           config: ${{ matrix.options }}
           preset: ${{ matrix.compiler.preset }}
+          targets: ${{ matrix.options == 'Debug' && 'unit|doc' || 'unit'}}

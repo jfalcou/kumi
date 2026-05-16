@@ -3,7 +3,7 @@
 ##  Copyright : KUMI Project Contributors
 ##  SPDX-License-Identifier: BSL-1.0
 ##======================================================================================================================
-name: 'TTS Build & Test'
+name: 'Build & Test'
 description: 'Configure and build using CMake presets'
 
 inputs:
@@ -24,6 +24,10 @@ inputs:
     description: 'Path to environment setup script (e.g., oneAPI setvars.sh)'
     default: ''
 
+  targets:
+    description: 'Space-separated list of build targets'
+    required: true
+
 runs:
   using: "composite"
   steps:
@@ -35,6 +39,7 @@ runs:
         WRAP: ${{ inputs.wrapper }}
         CONFIG: ${{ inputs.config }}
         SETUP_SCRIPT: ${{ inputs.setup-script }}
+        TARGETS: ${{ inputs.targets }}
       run: |
         if [ -n "$SETUP_SCRIPT" ]; then
           if [ ! -f "$SETUP_SCRIPT" ]; then
@@ -50,4 +55,4 @@ runs:
           cmake --preset "$PRESET"
         fi
 
-        cmake --build --preset "$PRESET" --config "$CONFIG" -j 2
+        cmake --build --preset "$PRESET" --config "$CONFIG" --target $TARGETS --parallel 2

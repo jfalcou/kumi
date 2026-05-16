@@ -141,7 +141,7 @@ namespace kumi
     //! @brief Output stream insertion
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os,
-                                                         identifier const& id) noexcept
+                                                         identifier const&) noexcept
     {
       return os << kumi::_::make_str(identifier{});
     }
