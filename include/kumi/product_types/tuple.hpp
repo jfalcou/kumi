@@ -68,7 +68,7 @@ namespace kumi
     KUMI_ABI constexpr decltype(auto) operator[](kumi::index_t<I>) && noexcept
     requires(I < sizeof...(Ts))
     {
-      return static_cast<decltype(impl)&&>(impl)(std::integral_constant<std::size_t, I>{});
+      return static_cast<binder_t&&>(impl)(std::integral_constant<std::size_t, I>{});
     }
 
     /// @overload
@@ -76,7 +76,7 @@ namespace kumi
     KUMI_ABI constexpr decltype(auto) operator[](kumi::index_t<I>) const&& noexcept
     requires(I < sizeof...(Ts))
     {
-      return static_cast<decltype(impl) const&&>(impl)(std::integral_constant<std::size_t, I>{});
+      return static_cast<binder_t const&&>(impl)(std::integral_constant<std::size_t, I>{});
     }
 
     /// @overload
@@ -113,7 +113,7 @@ namespace kumi
     KUMI_ABI constexpr decltype(auto) operator[](kumi::as<T>) && noexcept
     requires(kumi::concepts::uniquely_typed<Ts...> && kumi::concepts::contains_type<T, Ts...>)
     {
-      return static_cast<decltype(impl)&&>(impl)(std::type_identity<T>{});
+      return static_cast<binder_t&&>(impl)(std::type_identity<T>{});
     }
 
     /// @overload
@@ -121,7 +121,7 @@ namespace kumi
     KUMI_ABI constexpr decltype(auto) operator[](kumi::as<T>) const&& noexcept
     requires(kumi::concepts::uniquely_typed<Ts...> && kumi::concepts::contains_type<T, Ts...>)
     {
-      return static_cast<decltype(impl) const&&>(impl)(std::type_identity<T>{});
+      return static_cast<binder_t const&&>(impl)(std::type_identity<T>{});
     }
 
     /// @overload
@@ -157,7 +157,7 @@ namespace kumi
     KUMI_ABI constexpr decltype(auto) operator[](kumi::label_t<L>) && noexcept
     requires(kumi::concepts::contains_label<kumi::label_t<L>, Ts...>)
     {
-      return static_cast<decltype(impl)&&>(impl)(std::integral_constant<kumi::str, L>{});
+      return static_cast<binder_t&&>(impl)(std::integral_constant<kumi::str, L>{});
     }
 
     /// @overload
@@ -165,7 +165,7 @@ namespace kumi
     KUMI_ABI constexpr decltype(auto) operator[](kumi::label_t<L>) const&& noexcept
     requires(kumi::concepts::contains_label<kumi::label_t<L>, Ts...>)
     {
-      return static_cast<decltype(impl) const&&>(impl)(std::integral_constant<kumi::str, L>{});
+      return static_cast<binder_t const&&>(impl)(std::integral_constant<kumi::str, L>{});
     }
 
     /// @overload
@@ -201,7 +201,7 @@ namespace kumi
     KUMI_ABI constexpr decltype(auto) operator[](Id const&) && noexcept
     requires(kumi::concepts::uniquely_named<Ts...> && kumi::concepts::contains_identifier<Id, Ts...>)
     {
-      return static_cast<decltype(impl)&&>(impl)(kumi::_::tag_of_t<Id>{});
+      return static_cast<binder_t&&>(impl)(kumi::_::tag_of_t<Id>{});
     }
 
     /// @overload
@@ -209,7 +209,7 @@ namespace kumi
     KUMI_ABI constexpr decltype(auto) operator[](Id const&) const&& noexcept
     requires(kumi::concepts::uniquely_named<Ts...> && kumi::concepts::contains_identifier<Id, Ts...>)
     {
-      return static_cast<decltype(impl) const&&>(impl)(kumi::_::tag_of_t<Id>{});
+      return static_cast<binder_t const&&>(impl)(kumi::_::tag_of_t<Id>{});
     }
 
     /// @overload
@@ -295,7 +295,6 @@ namespace kumi
 #ifndef KUMI_DOXYGEN_INVOKED
             && (kumi::_::piecewise_constructible<tuple<Ts&...>, tuple<Us...>>)
 #endif
-
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
         return tuple<Us...>{static_cast<Us>(get<I>(*this))...};
@@ -387,7 +386,7 @@ namespace kumi
 
       auto const order = [&]<typename Index>(Index i) {
         auto y_less_x_prev = rhs[i] < lhs[i];
-        auto x_less_y = lhs[kumi::index_t<Index::value + 1>{}] < rhs[kumi::index_t<Index::value + 1>{}];
+        auto x_less_y = lhs[kumi::index<Index::value + 1>] < rhs[kumi::index<Index::value + 1>];
         return x_less_y && !y_less_x_prev;
       };
 

@@ -3,7 +3,7 @@
 ##  Copyright : KUMI Project Contributors
 ##  SPDX-License-Identifier: BSL-1.0
 ##======================================================================================================================
-name: TTS Linux Tests
+name: Linux Tests
 on:
   workflow_call:
 
@@ -39,9 +39,11 @@ jobs:
           preset: ${{ matrix.compiler.preset }}
           wrapper: ${{ matrix.compiler.wrapper }}
           setup-script: ${{ matrix.compiler.setup }}
+          targets: ${{ matrix.options == 'Debug' && 'unit.exe doc.exe' || 'unit.exe'}}
 
       - name: Run Unit Tests
         uses: ./.github/actions/test
         with:
           config: ${{ matrix.options }}
           preset: ${{ matrix.compiler.preset }}
+          targets: ${{ matrix.options == 'Debug' && 'unit|doc' || 'unit'}}

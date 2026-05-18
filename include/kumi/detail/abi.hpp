@@ -19,11 +19,7 @@
 #endif
 #endif
 
-#if defined(__EDG__) || defined(__EDG_VERSION__) || defined(__CUDACC__) || defined(__NVCC__)
-#define KUMI_FWD(...) std::forward<decltype(__VA_ARGS__)>(__VA_ARGS__)
-#else
 #define KUMI_FWD(...) static_cast<decltype(__VA_ARGS__)&&>(__VA_ARGS__)
-#endif
 
 #if defined(__CUDACC__) || defined(__NVCC__)
 #define KUMI_CUDA __host__ __device__

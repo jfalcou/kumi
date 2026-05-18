@@ -9,6 +9,7 @@
 #include <kumi/tuple.hpp>
 #include <kumi/algorithm/apply.hpp>
 
+#include <functional>
 #include <sstream>
 #include <tts/tts.hpp>
 

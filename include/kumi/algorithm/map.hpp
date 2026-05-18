@@ -61,7 +61,7 @@ namespace kumi
         if constexpr (kumi::concepts::record_type<T>)
         {
           constexpr auto field = kumi::identifier_of<kumi::element_t<N, T>>();
-          return kumi::capture_field<field>(kumi::invoke(f, get<field>(args)...));
+          return kumi::capture_field<field>(kumi::invoke(f, get<field>(KUMI_FWD(args))...));
         }
         else return kumi::invoke(f, get<N>(KUMI_FWD(args))...);
       }};

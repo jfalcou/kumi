@@ -119,7 +119,9 @@ TTS_CASE("Check tuple to tuple conversion")
   TTS_EQUAL(static_cast<kumi::tuple<std::string>>(kumi::tuple{"some text"}), kumi::tuple{std::string("some text")});
 
   TTS_EXPECT_COMPILES(in, { takes_tuple_int(in); });
+#if !defined(__EDG__) || !defined(__EDG_VERSION__) // https://github.com/microsoft/STL/issues/1621
   TTS_EXPECT_COMPILES(in, { requires_cast(static_cast<kumi::tuple<ExpInt, ExpInt>>(in)); });
+#endif
   TTS_EXPECT_NOT_COMPILES(in, { requires_cast(in); });
 };
 

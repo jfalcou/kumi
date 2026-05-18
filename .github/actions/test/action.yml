@@ -3,7 +3,7 @@
 ##  Copyright : KUMI Project Contributors
 ##  SPDX-License-Identifier: BSL-1.0
 ##======================================================================================================================
-name: 'TTS Test'
+name: 'Unit Test'
 description: 'Runs CTest for a specific preset'
 
 inputs:
@@ -20,6 +20,10 @@ inputs:
     description: 'Run MemCheck (valgrind)'
     default: 'false'
 
+  targets:
+    description: 'Target subset filtering rule for ctest (-R)'
+    required: true
+
 runs:
   using: "composite"
   steps:
@@ -28,7 +32,8 @@ runs:
       env:
         PRESET: ${{ inputs.preset }}
         CONFIG: ${{ inputs.config }}
-      run: ctest --preset "$PRESET" --build-config "$CONFIG" -j 2
+        TARGET: ${{ inputs.targets }}
+      run: ctest --preset "$PRESET" --build-config "$CONFIG" -R "$TARGET" -j 2
 
     # MemCheck puts ctest in a mode that is not compatible with how presets are
     # currently made. This is a workaround
@@ -38,4 +43,4 @@ runs:
       env:
         PRESET: ${{ inputs.preset }}
         CONFIG: ${{ inputs.config }}
-      run: ctest --test-dir "build/$PRESET" --preset "$PRESET" --build-config "$CONFIG" -T MemCheck -j 2
+      run: ctest --test-dir "build/$PRESET" --preset "$PRESET" --build-config "$CONFIG" -R "$TARGET" -T MemCheck -j 2

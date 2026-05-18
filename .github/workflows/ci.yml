@@ -48,7 +48,7 @@ jobs:
     needs: precommit
     uses: ./.github/workflows/windows.yml
 
-  #nvidia-tests:
-  #  name: Nvidia Unit Tests
-  #  needs: precommit
-  #  uses: ./.github/workflows/nvidia.yml
+  nvidia-tests:
+    name: Nvidia Unit Tests
+    needs: precommit
+    uses: ./.github/workflows/nvidia.yml
