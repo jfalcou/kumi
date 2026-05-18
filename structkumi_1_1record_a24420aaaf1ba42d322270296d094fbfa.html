@@ -213,7 +213,7 @@ Example:</h2>
 <div class="line">  <span class="keyword">using </span>parent = <a class="code hl_class" href="structkumi_1_1identifier.html">kumi::identifier&lt;my_id&gt;</a>;</div>
 <div class="line">  <span class="keyword">using </span>parent::operator=;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">friend</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_friend" href="structkumi_1_1identifier.html#a5c52e3942bf6c89c3300d8cdb9b60b43">to_str</a>(my_id) { <span class="keywordflow">return</span> <a class="code hl_class" href="structkumi_1_1str.html">kumi::str</a>{<span class="stringliteral">&quot;mystery&quot;</span>}; }</div>
+<div class="line">  <span class="keyword">friend</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_friend" href="structkumi_1_1identifier.html#aed98a76222e0731147ce97426434c041">to_str</a>(my_id) { <span class="keywordflow">return</span> <a class="code hl_class" href="structkumi_1_1str.html">kumi::str</a>{<span class="stringliteral">&quot;mystery&quot;</span>}; }</div>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">inline</span> <span class="keyword">constexpr</span> my_id my_field{};</div>
@@ -233,7 +233,7 @@ Example:</h2>
 <div class="line">  std::cout &lt;&lt; r[<span class="stringliteral">&quot;mystery&quot;</span>_l] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1identifier_html"><div class="ttname"><a href="structkumi_1_1identifier.html">kumi::identifier</a></div><div class="ttdoc">identifier definition class</div><div class="ttdef"><b>Definition</b> identifier.hpp:86</div></div>
-<div class="ttc" id="astructkumi_1_1identifier_html_a5c52e3942bf6c89c3300d8cdb9b60b43"><div class="ttname"><a href="structkumi_1_1identifier.html#a5c52e3942bf6c89c3300d8cdb9b60b43">kumi::identifier::to_str</a></div><div class="ttdeci">friend constexpr kumi::str to_str(identifier&lt; ID, Checker &gt; const &amp;)</div><div class="ttdoc">A checked field str representation is the underlying type, checker is ignored.</div><div class="ttdef"><b>Definition</b> identifier.hpp:91</div></div>
+<div class="ttc" id="astructkumi_1_1identifier_html_aed98a76222e0731147ce97426434c041"><div class="ttname"><a href="structkumi_1_1identifier.html#aed98a76222e0731147ce97426434c041">kumi::identifier::to_str</a></div><div class="ttdeci">friend constexpr kumi::str to_str(identifier const &amp;)</div><div class="ttdoc">A checked field str representation is the underlying type, checker is ignored.</div><div class="ttdef"><b>Definition</b> identifier.hpp:91</div></div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
 <div class="ttc" id="astructkumi_1_1str_html"><div class="ttname"><a href="structkumi_1_1str.html">kumi::str</a></div><div class="ttdoc">Static string used to create named fields.</div><div class="ttdef"><b>Definition</b> str.hpp:24</div></div>
 </div><!-- fragment --> 

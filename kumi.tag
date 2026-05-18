@@ -238,8 +238,8 @@
       <type>constexpr</type>
       <name>identifier</name>
       <anchorfile>structkumi_1_1identifier.html</anchorfile>
-      <anchor>a63367163ac0f0e4920f6eb18b2b2129e</anchor>
-      <arglist>() noexcept</arglist>
+      <anchor>a1cbb7d1e8b6adafe05c6b3f43c94db5d</anchor>
+      <arglist>() noexcept=default</arglist>
     </member>
     <member kind="function">
       <type>constexpr</type>
@@ -259,15 +259,15 @@
       <type>friend constexpr kumi::str</type>
       <name>to_str</name>
       <anchorfile>structkumi_1_1identifier.html</anchorfile>
-      <anchor>a5c52e3942bf6c89c3300d8cdb9b60b43</anchor>
-      <arglist>(identifier&lt; ID, Checker &gt; const &amp;)</arglist>
+      <anchor>aed98a76222e0731147ce97426434c041</anchor>
+      <arglist>(identifier const &amp;)</arglist>
     </member>
     <member kind="friend">
       <type>friend std::basic_ostream&lt; CharT, Traits &gt; &amp;</type>
       <name>operator&lt;&lt;</name>
       <anchorfile>structkumi_1_1identifier.html</anchorfile>
-      <anchor>a40e31b641532e8be5a14ed126dc9b1d9</anchor>
-      <arglist>(std::basic_ostream&lt; CharT, Traits &gt; &amp;os, identifier const &amp;id) noexcept</arglist>
+      <anchor>a4042551a86fea06c6d4be2daec274a35</anchor>
+      <arglist>(std::basic_ostream&lt; CharT, Traits &gt; &amp;os, identifier const &amp;) noexcept</arglist>
     </member>
   </compound>
   <compound kind="class">
@@ -383,8 +383,8 @@
       <type>friend constexpr kumi::str</type>
       <name>to_str</name>
       <anchorfile>structkumi_1_1name.html</anchorfile>
-      <anchor>a2394e49b42ad16dd1e3001e36c31a7e5</anchor>
-      <arglist>(name&lt; ID &gt; const &amp;)</arglist>
+      <anchor>a35dd8f2c52e6c42d8d1ba3529e7e4668</anchor>
+      <arglist>(name const &amp;)</arglist>
     </member>
     <member kind="friend">
       <type>friend std::basic_ostream&lt; CharT, Traits &gt; &amp;</type>
@@ -1294,10 +1294,6 @@
   <compound kind="concept">
     <name>kumi::concepts::queryable_by_label</name>
     <filename>conceptkumi_1_1concepts_1_1queryable__by__label.html</filename>
-  </compound>
-  <compound kind="concept">
-    <name>kumi::concepts::queryable_by_type</name>
-    <filename>conceptkumi_1_1concepts_1_1queryable__by__type.html</filename>
   </compound>
   <compound kind="concept">
     <name>kumi::concepts::record_type</name>
@@ -3503,7 +3499,6 @@
     <concept>kumi::concepts::projection_map</concept>
     <concept>kumi::concepts::queryable_by_identifier</concept>
     <concept>kumi::concepts::queryable_by_label</concept>
-    <concept>kumi::concepts::queryable_by_type</concept>
     <concept>kumi::concepts::record_type</concept>
     <concept>kumi::concepts::sized_product_type</concept>
     <concept>kumi::concepts::sized_product_type_or_more</concept>
@@ -3512,6 +3507,13 @@
     <concept>kumi::concepts::uniquely_named</concept>
     <concept>kumi::concepts::uniquely_typed</concept>
     <concept>kumi::concepts::unit_type</concept>
+    <member kind="function">
+      <type>consteval auto</type>
+      <name>kumi::concepts::can_query</name>
+      <anchorfile>group__concepts_gab33a99db2d26f6e84fec5384c4e36491.html</anchorfile>
+      <anchor>gab33a99db2d26f6e84fec5384c4e36491</anchor>
+      <arglist>()</arglist>
+    </member>
   </compound>
   <compound kind="group">
     <name>traits</name>

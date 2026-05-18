@@ -211,14 +211,14 @@ class kumi::identifier&lt; ID, Checker &gt;</div><p>identifier definition class 
 <tr class="heading"><td colspan="2"><h2 id="header-pub-types" class="groupheader"><a id="pub-types" name="pub-types"></a>
 Public Types</h2></td></tr>
 <tr class="memitem:aae1d9bcd971d43f8831ba98f5d7e2678" id="r_aae1d9bcd971d43f8831ba98f5d7e2678"><td class="memItemLeft"><a id="aae1d9bcd971d43f8831ba98f5d7e2678" name="aae1d9bcd971d43f8831ba98f5d7e2678"></a>
-using&#160;</td><td class="memItemRight"><b>type</b> = <a class="el" href="#a63367163ac0f0e4920f6eb18b2b2129e">identifier</a>&lt;ID, Checker&gt;</td></tr>
+using&#160;</td><td class="memItemRight"><b>type</b> = <a class="el" href="#a1cbb7d1e8b6adafe05c6b3f43c94db5d">identifier</a>&lt;ID, Checker&gt;</td></tr>
 <tr class="memdesc:aae1d9bcd971d43f8831ba98f5d7e2678"><td class="mdescLeft">&#160;</td><td class="mdescRight">Derived identifier type. <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a63367163ac0f0e4920f6eb18b2b2129e" id="r_a63367163ac0f0e4920f6eb18b2b2129e"><td class="memItemLeft"><a id="a63367163ac0f0e4920f6eb18b2b2129e" name="a63367163ac0f0e4920f6eb18b2b2129e"></a>
-constexpr&#160;</td><td class="memItemRight"><b>identifier</b> () noexcept</td></tr>
-<tr class="memdesc:a63367163ac0f0e4920f6eb18b2b2129e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
+<tr class="memitem:a1cbb7d1e8b6adafe05c6b3f43c94db5d" id="r_a1cbb7d1e8b6adafe05c6b3f43c94db5d"><td class="memItemLeft"><a id="a1cbb7d1e8b6adafe05c6b3f43c94db5d" name="a1cbb7d1e8b6adafe05c6b3f43c94db5d"></a>
+constexpr&#160;</td><td class="memItemRight"><b>identifier</b> () noexcept=default</td></tr>
+<tr class="memdesc:a1cbb7d1e8b6adafe05c6b3f43c94db5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
 <tr class="memitem:a3b9a31cc021cee475c3dd820c966a104" id="r_a3b9a31cc021cee475c3dd820c966a104"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1identifier_a3b9a31cc021cee475c3dd820c966a104.html#a3b9a31cc021cee475c3dd820c966a104">identifier</a> (ID const &amp;id, Checker const &amp;check) noexcept</td></tr>
 <tr class="memdesc:a3b9a31cc021cee475c3dd820c966a104"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a identifier from an ID and a checker type.  <br /></td></tr>
 <tr class="memitem:afd233fd13ed5f9c794f0c2bb02db1429" id="r_afd233fd13ed5f9c794f0c2bb02db1429"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
@@ -227,18 +227,18 @@ constexpr&#160;</td><td class="memItemRight"><b>identifier</b> () noexcept</td><
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-friends" class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a5c52e3942bf6c89c3300d8cdb9b60b43" id="r_a5c52e3942bf6c89c3300d8cdb9b60b43"><td class="memItemLeft"><a id="a5c52e3942bf6c89c3300d8cdb9b60b43" name="a5c52e3942bf6c89c3300d8cdb9b60b43"></a>
-constexpr <a class="el" href="structkumi_1_1str.html">kumi::str</a>&#160;</td><td class="memItemRight"><b>to_str</b> (<a class="el" href="#a63367163ac0f0e4920f6eb18b2b2129e">identifier</a>&lt; ID, Checker &gt; const &amp;)</td></tr>
-<tr class="memdesc:a5c52e3942bf6c89c3300d8cdb9b60b43"><td class="mdescLeft">&#160;</td><td class="mdescRight">A checked field str representation is the underlying type, checker is ignored. <br /></td></tr>
+<tr class="memitem:aed98a76222e0731147ce97426434c041" id="r_aed98a76222e0731147ce97426434c041"><td class="memItemLeft"><a id="aed98a76222e0731147ce97426434c041" name="aed98a76222e0731147ce97426434c041"></a>
+constexpr <a class="el" href="structkumi_1_1str.html">kumi::str</a>&#160;</td><td class="memItemRight"><b>to_str</b> (<a class="el" href="#a1cbb7d1e8b6adafe05c6b3f43c94db5d">identifier</a> const &amp;)</td></tr>
+<tr class="memdesc:aed98a76222e0731147ce97426434c041"><td class="mdescLeft">&#160;</td><td class="mdescRight">A checked field str representation is the underlying type, checker is ignored. <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-related" class="groupheader"><a id="related" name="related"></a>
 Related Symbols</h2></td></tr>
 <tr><td class="ititle" colspan="2"><p>(Note that these are not member symbols.) </p>
 </td></tr>
-<tr class="memitem:a40e31b641532e8be5a14ed126dc9b1d9" id="r_a40e31b641532e8be5a14ed126dc9b1d9"><td class="memTemplParams" colspan="2"><a id="a40e31b641532e8be5a14ed126dc9b1d9" name="a40e31b641532e8be5a14ed126dc9b1d9"></a>
+<tr class="memitem:a4042551a86fea06c6d4be2daec274a35" id="r_a4042551a86fea06c6d4be2daec274a35"><td class="memTemplParams" colspan="2"><a id="a4042551a86fea06c6d4be2daec274a35" name="a4042551a86fea06c6d4be2daec274a35"></a>
 template&lt;typename CharT, typename Traits&gt; </td></tr>
-<tr class="memitem:a40e31b641532e8be5a14ed126dc9b1d9 template"><td class="memItemLeft">std::basic_ostream&lt; CharT, Traits &gt; &amp;&#160;</td><td class="memItemRight"><b>operator&lt;&lt;</b> (std::basic_ostream&lt; CharT, Traits &gt; &amp;os, <a class="el" href="#a63367163ac0f0e4920f6eb18b2b2129e">identifier</a> const &amp;id) noexcept</td></tr>
-<tr class="memdesc:a40e31b641532e8be5a14ed126dc9b1d9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output stream insertion. <br /></td></tr>
+<tr class="memitem:a4042551a86fea06c6d4be2daec274a35 template"><td class="memItemLeft">std::basic_ostream&lt; CharT, Traits &gt; &amp;&#160;</td><td class="memItemRight"><b>operator&lt;&lt;</b> (std::basic_ostream&lt; CharT, Traits &gt; &amp;os, <a class="el" href="#a1cbb7d1e8b6adafe05c6b3f43c94db5d">identifier</a> const &amp;) noexcept</td></tr>
+<tr class="memdesc:a4042551a86fea06c6d4be2daec274a35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output stream insertion. <br /></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
