@@ -105,7 +105,7 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto split(T&& t, [[maybe_unused]] kumi::index_t<I0> i0) noexcept
   {
     static_assert(I0 <= kumi::size_v<T>, "[KUMI] - Invalid index");
-    constexpr auto proj = kumi::function::splitter(kumi::index<I0>, kumi::index<kumi::size_v<T>>);
+    constexpr auto proj = kumi::function::splitter(kumi::index<I0>, std::make_index_sequence<kumi::size_v<T> - I0>{});
 
     auto select = [&]<std::size_t... I>(std::index_sequence<I...>) {
       using type = builder_make_t<T, kumi::element_t<I, T>...>;

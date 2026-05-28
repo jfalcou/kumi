@@ -9,7 +9,6 @@
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
 
-#include <string>
 #include <sstream>
 #include <cstdint>
 
@@ -23,13 +22,13 @@ namespace ns
 
   auto as_streamable(price const& p)
   {
-    return std::to_string(p.integer) + "." + std::to_string(p.decimal);
+    return tts::text("%ld", p.integer) + "." + tts::text("%ld", p.decimal);
   }
 
   struct person
   {
-    std::string name;
-    std::string surname;
+    tts::text name;
+    tts::text surname;
 
     friend auto as_streamable(person const& p) { return p.name + " " + p.surname; }
   };
@@ -45,7 +44,7 @@ namespace ns
 TTS_CASE("Check make_streamable behavior with tuple")
 {
   ns::price cards{7, 90};
-  ns::person marty{"Marty", "Macfly"};
+  ns::person marty{tts::text("Marty"), tts::text("Macfly")};
   ns::unprintable a{1, 'x', 12};
 
   kumi::tuple t = {'t', "rofl", cards, marty, a};
@@ -60,7 +59,7 @@ TTS_CASE("Check make_streamable behavior with record")
 {
   using namespace kumi::literals;
   ns::price cards{7, 90};
-  ns::person marty{"Marty", "Macfly"};
+  ns::person marty{tts::text("Marty"), tts::text("Macfly")};
   ns::unprintable a{1, 'x', 12};
 
   kumi::record r = {"a"_id = 't', "b"_id = "rofl", "c"_id = cards, "d"_id = marty, "e"_id = a};

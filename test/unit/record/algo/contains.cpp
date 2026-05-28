@@ -6,10 +6,10 @@
 */
 //==================================================================================================
 #define TTS_MAIN
-#include "test.hpp"
 #include <kumi/record.hpp>
+#include <kumi/algorithm/contains.hpp>
 #include <tts/tts.hpp>
-#include <string>
+#include "test.hpp"
 
 struct foo
 {
@@ -18,11 +18,10 @@ struct foo
 
 TTS_CASE("Check kumi::contains behavior on records")
 {
-  using namespace std::literals;
   using namespace kumi;
 
-  record values{custom_ = foo{}, "surname"_id = "john"s, value_ = 3.f, "aligned"_id = std::bool_constant<true>{},
-                is_transparent_};
+  record values{custom_ = foo{}, "surname"_id = tts::text("john"), value_ = 3.f,
+                "aligned"_id = std::bool_constant<true>{}, is_transparent_};
 
   TTS_EXPECT((result::contains_t<decltype(values), decltype(custom_)>{}));
   TTS_EXPECT((result::contains_t<decltype(values), decltype("surname"_id)>{}));
@@ -36,11 +35,10 @@ TTS_CASE("Check kumi::contains behavior on records")
 
 TTS_CASE("Check kumi::contains behavior on records")
 {
-  using namespace std::literals;
   using namespace kumi;
 
-  record values{custom_ = foo{}, "surname"_id = "john"s, value_ = 3.f, "aligned"_id = std::bool_constant<true>{},
-                is_transparent_};
+  record values{custom_ = foo{}, "surname"_id = tts::text("john"), value_ = 3.f,
+                "aligned"_id = std::bool_constant<true>{}, is_transparent_};
   TTS_EXPECT(contains(values, custom_));
   TTS_EXPECT(contains(values, "surname"_id));
   TTS_EXPECT(contains(values, value_));
@@ -53,7 +51,6 @@ TTS_CASE("Check kumi::contains behavior on records")
 
 TTS_CASE("Check kumi::contains constexpr behavior on records")
 {
-  using namespace std::literals;
   using namespace kumi;
 
   constexpr record values{"custom"_id = foo{}, value_ = 3.f, is_modal_};
@@ -68,10 +65,9 @@ TTS_CASE("Check kumi::contains constexpr behavior on records")
 
 TTS_CASE("Check kumi::result::contains_any behavior on records")
 {
-  using namespace std::literals;
   using namespace kumi;
 
-  record values{custom_ = foo{}, "surname"_id = "john"s, value_ = 3.f, is_transparent_};
+  record values{custom_ = foo{}, "surname"_id = tts::text("john"), value_ = 3.f, is_transparent_};
 
   TTS_EXPECT((result::contains_any_t<decltype(values), decltype("custom_"_id), decltype("is_transparent_"_id),
                                      decltype("compact"_id)>{}));
@@ -80,10 +76,9 @@ TTS_CASE("Check kumi::result::contains_any behavior on records")
 
 TTS_CASE("Check kumi::contains_any behavior on records")
 {
-  using namespace std::literals;
   using namespace kumi;
 
-  record values{custom_ = foo{}, "surname"_id = "john"s, value_ = 3.f, is_transparent_};
+  record values{custom_ = foo{}, "surname"_id = tts::text("john"), value_ = 3.f, is_transparent_};
 
   TTS_EXPECT(contains_any(values, "custom_"_id, "is_transparent_"_id, "compact"_id));
   TTS_EXPECT_NOT(contains_any(values, "is_modal_"_id, "compact"_id));
@@ -91,7 +86,6 @@ TTS_CASE("Check kumi::contains_any behavior on records")
 
 TTS_CASE("Check kumi::contains_any constexpr behavior on records")
 {
-  using namespace std::literals;
   using namespace kumi;
 
   constexpr record values{"custom"_id = foo{}, value_ = 3.f, is_modal_};
@@ -102,7 +96,6 @@ TTS_CASE("Check kumi::contains_any constexpr behavior on records")
 
 TTS_CASE("Check kumi::result::contains_only behavior on records")
 {
-  using namespace std::literals;
   using namespace kumi;
 
   record values{"kw1"_id = 1, "kw2"_id = 1, "kw3"_id = 1};
@@ -120,7 +113,6 @@ TTS_CASE("Check kumi::result::contains_only behavior on records")
 
 TTS_CASE("Check kumi::contains_only behavior on records")
 {
-  using namespace std::literals;
   using namespace kumi;
 
   record values{"kw1"_id = 1, "kw2"_id = 1, "kw3"_id = 1};
@@ -137,7 +129,6 @@ TTS_CASE("Check kumi::contains_only behavior on records")
 
 TTS_CASE("Check kumi::contains_only constexpr behavior on records")
 {
-  using namespace std::literals;
   using namespace kumi;
 
   constexpr record values{"kw1"_id = 1, "kw2"_id = 1, "kw3"_id = 1};
@@ -154,10 +145,9 @@ TTS_CASE("Check kumi::contains_only constexpr behavior on records")
 
 TTS_CASE("Check kumi::result::contains_none behavior on records")
 {
-  using namespace std::literals;
   using namespace kumi;
 
-  record values{custom_ = foo{}, "surname"_id = "john"s, value_ = 3.f};
+  record values{custom_ = foo{}, "surname"_id = tts::text("john"), value_ = 3.f};
 
   TTS_EXPECT((result::contains_none_t<decltype(values), decltype("is_modal_"_id), decltype("compact"_id)>{}));
   TTS_EXPECT_NOT((result::contains_none_t<decltype(values), decltype(value_), decltype("is_transparent_"_id)>{}));
@@ -165,10 +155,9 @@ TTS_CASE("Check kumi::result::contains_none behavior on records")
 
 TTS_CASE("Check kumi::contains_none behavior on records")
 {
-  using namespace std::literals;
   using namespace kumi;
 
-  record values{custom_ = foo{}, "surname"_id = "john"s, value_ = 3.f};
+  record values{custom_ = foo{}, "surname"_id = tts::text("john"), value_ = 3.f};
 
   TTS_EXPECT(contains_none(values, "is_modal_"_id, "compact"_id));
   TTS_EXPECT_NOT(contains_none(values, value_, "is_transparent_"_id));
@@ -176,7 +165,6 @@ TTS_CASE("Check kumi::contains_none behavior on records")
 
 TTS_CASE("Check kumi::contains_none constexpr behavior on records")
 {
-  using namespace std::literals;
   using namespace kumi;
 
   constexpr record values{"custom"_id = foo{}, value_ = 3.f};

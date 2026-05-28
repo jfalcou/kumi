@@ -22,14 +22,11 @@ namespace kumi::function
   //====================================================================================================================
   struct cartesian_product_t
   {
-    template<std::size_t H, std::size_t... S>
-    KUMI_ABI consteval auto operator()(kumi::index_t<H>, kumi::index_t<S>...) const noexcept
+    template<std::size_t... H, std::size_t... S>
+    KUMI_ABI consteval auto operator()(std::index_sequence<H...>, kumi::index_t<S>...) const noexcept
     {
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return kumi::projection_map{kumi::_::digits(kumi::_::unflatten_index,
-                                                    std::integral_constant<std::size_t, sizeof...(S)>{},
-                                                    std::index_sequence<I, S...>{})...};
-      }(std::make_index_sequence<H>{});
+      return kumi::projection_map{kumi::_::digits(kumi::_::unflatten_index, std::make_index_sequence<sizeof...(S)>{},
+                                                  std::index_sequence<H, S...>{})...};
     }
   };
 
@@ -48,11 +45,11 @@ namespace kumi::function
   {
     template<std::size_t... Sizes> KUMI_ABI consteval auto operator()(std::index_sequence<Sizes...>) const noexcept
     {
-      constexpr auto N = std::integral_constant<std::size_t, (Sizes + ... + 0ULL)>{};
+      constexpr auto N = (Sizes + ... + 0ULL);
       constexpr auto Ids = std::index_sequence<Sizes...>{};
 
-      return kumi::projection_map{kumi::_::digits(kumi::_::container_of_index, N, Ids),
-                                  kumi::_::digits(kumi::_::element_of_index, N, Ids)};
+      return kumi::projection_map{kumi::_::digits(kumi::_::container_of_index, std::make_index_sequence<N>{}, Ids),
+                                  kumi::_::digits(kumi::_::element_of_index, std::make_index_sequence<N>{}, Ids)};
     }
   };
 
@@ -69,12 +66,10 @@ namespace kumi::function
   //====================================================================================================================
   struct rotate_t
   {
-    template<std::size_t S, std::size_t R>
-    KUMI_ABI consteval auto operator()(kumi::index_t<S>, kumi::index_t<R>) const noexcept
+    template<std::size_t... S, std::size_t R>
+    KUMI_ABI consteval auto operator()(std::index_sequence<S...>, kumi::index_t<R>) const noexcept
     {
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return std::index_sequence<(I + R) % S...>{};
-      }(std::make_index_sequence<S>{});
+      return std::index_sequence<((S + R) % sizeof...(S))...>{};
     }
   };
 
@@ -91,15 +86,11 @@ namespace kumi::function
   //====================================================================================================================
   struct reduce_t
   {
-    template<std::size_t N> KUMI_ABI consteval auto operator()(kumi::index_t<N>) const noexcept
+    template<std::size_t... I, std::size_t N>
+    KUMI_ABI consteval auto operator()(std::index_sequence<I...>, kumi::index_t<N>) const noexcept
     {
-      constexpr std::size_t half = N / 2;
-      constexpr std::size_t remainder = N % 2;
-
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return kumi::projection_map{std::index_sequence<(2 * I)...>{}, std::index_sequence<(2 * I + 1)...>{},
-                                    kumi::index<remainder>};
-      }(std::make_index_sequence<half>{});
+      return kumi::projection_map{std::index_sequence<(2 * I)...>{}, std::index_sequence<(2 * I + 1)...>{},
+                                  kumi::index<N>};
     }
   };
 
@@ -116,12 +107,10 @@ namespace kumi::function
   //====================================================================================================================
   struct split_t
   {
-    template<std::size_t N, std::size_t Sz>
-    KUMI_ABI consteval auto operator()(kumi::index_t<N>, kumi::index_t<Sz>) const noexcept
+    template<std::size_t N, std::size_t... S>
+    KUMI_ABI consteval auto operator()(kumi::index_t<N>, std::index_sequence<S...>) const noexcept
     {
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return kumi::projection_map{std::make_index_sequence<N>{}, std::index_sequence<(I + N)...>{}};
-      }(std::make_index_sequence<Sz - N>{});
+      return kumi::projection_map{std::make_index_sequence<N>{}, std::index_sequence<(S + N)...>{}};
     }
   };
 
@@ -138,16 +127,15 @@ namespace kumi::function
   //====================================================================================================================
   struct tile_t
   {
-    template<std::size_t Sz, std::size_t Extent, std::size_t Stride>
-    KUMI_ABI consteval auto operator()(kumi::index_t<Sz>, kumi::index_t<Extent>, kumi::index_t<Stride>) const noexcept
+    template<std::size_t Sz, std::size_t Extent, std::size_t Stride, std::size_t... Blocks>
+    KUMI_ABI consteval auto operator()(kumi::index_t<Sz>,
+                                       kumi::index_t<Extent>,
+                                       kumi::index_t<Stride>,
+                                       std::index_sequence<Blocks...>) const noexcept
     {
-      constexpr std::size_t nb_blocks = (Sz <= Extent) ? 1 : (Sz - Extent + Stride - 1) / Stride + 1;
-
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using blocks = std::index_sequence<kumi::_::block_size(I, Stride, Extent, Sz)...>;
-        using offsets = std::index_sequence<(I * Stride)...>;
-        return kumi::projection_map{blocks{}, offsets{}};
-      }(std::make_index_sequence<nb_blocks>{});
+      using blocks = std::index_sequence<kumi::_::block_size(Blocks, Stride, Extent, Sz)...>;
+      using offsets = std::index_sequence<(Blocks * Stride)...>;
+      return kumi::projection_map{blocks{}, offsets{}};
     }
   };
 

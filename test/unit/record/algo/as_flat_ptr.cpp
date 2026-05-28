@@ -7,7 +7,7 @@
 //==================================================================================================
 #define TTS_MAIN
 #include <kumi/record.hpp>
-#include <kumi/algorithm.hpp>
+#include <kumi/algorithm/flatten.hpp>
 #include <tts/tts.hpp>
 
 TTS_CASE("Check tuple::as_flat_ptr function behavior")

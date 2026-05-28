@@ -51,7 +51,8 @@ namespace kumi
     else if constexpr (kumi::concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
     else
     {
-      constexpr auto pos = kumi::function::reducer(index<kumi::size_v<T>>);
+      constexpr auto sz = kumi::size_v<T>;
+      constexpr auto pos = kumi::function::reducer(std::make_index_sequence<sz / 2>{}, index<sz % 2>);
 
       return [&]<std::size_t... F, std::size_t... S>(std::index_sequence<F...>, std::index_sequence<S...>) {
         if constexpr (get<2>(pos) == 1)
@@ -153,7 +154,8 @@ namespace kumi
     else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::invoke(f, get<0>(KUMI_FWD(t)));
     else
     {
-      constexpr auto pos = kumi::function::reducer(index<kumi::size_v<T>>);
+      constexpr auto sz = kumi::size_v<T>;
+      constexpr auto pos = kumi::function::reducer(std::make_index_sequence<sz / 2>{}, index<sz % 2>);
 
       return [&]<std::size_t... F, std::size_t... S>(std::index_sequence<F...>, std::index_sequence<S...>) {
         if constexpr (get<2>(pos) == 1)

@@ -8,8 +8,6 @@
 #pragma once
 
 #include <iosfwd>
-#include <string>
-#include <kumi/kumi.hpp>
 
 using namespace kumi::literals;
 
@@ -25,7 +23,7 @@ inline constexpr auto custom_ = ::kumi::identifier("custom"_id);
 inline constexpr auto coord_ = "coord"_id;
 
 inline constexpr auto value_ = ::kumi::identifier("value_"_id, kumi::only<float>);
-inline constexpr auto name_ = ::kumi::identifier("name_"_id, kumi::only<std::string>);
+inline constexpr auto name_ = ::kumi::identifier("name_"_id, kumi::only<tts::text>);
 
 inline constexpr auto factor_ = ::kumi::identifier("factor"_id, kumi::if_<small_type>);
 

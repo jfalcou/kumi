@@ -6,7 +6,6 @@
 */
 //==================================================================================================
 #define TTS_MAIN
-#include <array>
 #include <kumi/tuple.hpp>
 #include <kumi/algorithm/minmax.hpp>
 #include <tts/tts.hpp>

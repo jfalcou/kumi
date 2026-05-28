@@ -6,11 +6,10 @@
 */
 //==================================================================================================
 #define TTS_MAIN
-#include <kumi/tuple.hpp>
-#include <kumi/algorithm.hpp>
 #include <tuple>
-#include "test.hpp"
+#include <kumi/tuple.hpp>
 #include <tts/tts.hpp>
+#include "test.hpp"
 
 struct final_empty
 {

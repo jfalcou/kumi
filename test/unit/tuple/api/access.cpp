@@ -7,9 +7,8 @@
 //==================================================================================================
 #define TTS_MAIN
 #include <kumi/tuple.hpp>
-#include <kumi/algorithm.hpp>
-#include "test.hpp"
 #include <tts/tts.hpp>
+#include "test.hpp"
 
 template<int I> auto f(auto& t) -> decltype(get<I>(t))
 {

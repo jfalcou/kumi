@@ -7,9 +7,8 @@
 //==================================================================================================
 #define TTS_MAIN
 #include <kumi/record.hpp>
-#include <kumi/algorithm.hpp>
+#include <kumi/algorithm/predicates.hpp>
 #include <tts/tts.hpp>
-#include <type_traits>
 
 TTS_CASE("kumi predicates runtime behavior on records")
 {

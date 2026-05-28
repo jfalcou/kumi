@@ -48,8 +48,8 @@ namespace kumi
     else
     {
       using res_type = kumi::common_product_type_t<std::remove_cvref_t<Ts>...>;
-      constexpr auto idx =
-        kumi::function::cartesian_producer(kumi::index<(kumi::size_v<Ts> * ...)>, kumi::index<kumi::size_v<Ts>>...);
+      constexpr auto idx = kumi::function::cartesian_producer(std::make_index_sequence<(kumi::size_v<Ts> * ...)>{},
+                                                              kumi::index<kumi::size_v<Ts>>...);
 
       auto maps = [&]<std::size_t... E, std::size_t... I>(std::index_sequence<E...>, std::index_sequence<I...>) {
         auto tps = kumi::forward_as_tuple(KUMI_FWD(ts)...);
