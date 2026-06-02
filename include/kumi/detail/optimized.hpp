@@ -27,7 +27,7 @@ namespace kumi::_
   //  - Size is greater than 1
   //  - All types are the same and non-reference
   //====================================================================================================================
-  template<typename T0, int N> struct binder_n
+  template<typename T0, std::size_t N> struct binder_n
   {
     static constexpr bool is_homogeneous = true;
     T0 members[N];
@@ -55,10 +55,10 @@ namespace kumi::_
     }
   };
 
-  template<int... Is, typename T0, typename T1, typename... Ts>
+  template<std::size_t... Is, typename T0, typename T1, typename... Ts>
   requires(kumi::_::all_the_same<T0, T1, Ts...> && kumi::_::no_references<T0, T1, Ts...> &&
            kumi::_::no_empty<T0, T1, Ts...>)
-  struct make_binder<std::integer_sequence<int, Is...>, T0, T1, Ts...>
+  struct make_binder<std::index_sequence<Is...>, T0, T1, Ts...>
   {
     using type = kumi::_::binder_n<T0, 2 + sizeof...(Ts)>;
   };

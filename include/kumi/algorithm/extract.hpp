@@ -66,6 +66,17 @@ namespace kumi
     return kumi::extract(KUMI_FWD(t), i0, kumi::index<size_v<T>>);
   }
 
+  struct select_inner
+  {
+    template<typename T, std::size_t... I> constexpr auto operator()(T&& t, std::index_sequence<I...>) const noexcept
+    {
+      using type = builder_make_t<T, kumi::element_t<I, T>...>;
+      return type{get<I>(KUMI_FWD(t))...};
+    }
+  };
+
+  inline constexpr select_inner select_i{};
+
   //====================================================================================================================
   /**
     @ingroup  generators
@@ -107,12 +118,7 @@ namespace kumi
     static_assert(I0 <= kumi::size_v<T>, "[KUMI] - Invalid index");
     constexpr auto proj = kumi::function::splitter(kumi::index<I0>, std::make_index_sequence<kumi::size_v<T> - I0>{});
 
-    auto select = [&]<std::size_t... I>(std::index_sequence<I...>) {
-      using type = builder_make_t<T, kumi::element_t<I, T>...>;
-      return type{get<I>(KUMI_FWD(t))...};
-    };
-
-    return kumi::tuple{select(get<0>(proj)), select(get<1>(proj))};
+    return kumi::tuple{select_i(KUMI_FWD(t), get<0>(proj)), select_i(KUMI_FWD(t), get<1>(proj))};
   }
 
   namespace result

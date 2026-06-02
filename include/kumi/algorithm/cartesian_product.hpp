@@ -9,6 +9,18 @@
 
 namespace kumi
 {
+  template<typename R> struct cp_t
+  {
+    template<typename T, std::size_t... E, std::size_t... I>
+    constexpr auto operator()(T&& t, std::index_sequence<E...>, std::index_sequence<I...>) const noexcept
+    {
+      using res_t = builder_make_t<R, kumi::element_t<E, kumi::element_t<I, T>>...>;
+      return res_t{get<E>(get<I>(t))...};
+    }
+  };
+
+  template<typename R> inline constexpr cp_t<R> cp{};
+
   //====================================================================================================================
   /**
     @ingroup    generators
@@ -51,15 +63,9 @@ namespace kumi
       constexpr auto idx = kumi::function::cartesian_producer(std::make_index_sequence<(kumi::size_v<Ts> * ...)>{},
                                                               kumi::index<kumi::size_v<Ts>>...);
 
-      auto maps = [&]<std::size_t... E, std::size_t... I>(std::index_sequence<E...>, std::index_sequence<I...>) {
-        auto tps = kumi::forward_as_tuple(KUMI_FWD(ts)...);
-        using res_t = builder_make_t<res_type, kumi::element_t<E, kumi::element_t<I, decltype(tps)>>...>;
-        return res_t{get<E>(get<I>(tps))...};
-      };
-
       return [&]<std::size_t... N>(std::index_sequence<N...>) {
         std::make_index_sequence<sizeof...(Ts)> ids;
-        return kumi::make_tuple(maps(get<N>(idx), ids)...);
+        return kumi::make_tuple(cp<res_type>(kumi::forward_as_tuple(KUMI_FWD(ts)...), get<N>(idx), ids)...);
       }(std::make_index_sequence<(kumi::size_v<Ts> * ...)>{});
     }
   }
