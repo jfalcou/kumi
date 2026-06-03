@@ -22,6 +22,13 @@ namespace kumi::_
     return ((result = (result > sizes ? result : sizes)), ...);
   }
 
+  KUMI_ABI consteval std::size_t nth_pos(std::size_t I, std::same_as<bool> auto... b) noexcept
+  {
+    std::size_t seen{}, i{}, idx{};
+    ((b ? (seen++ == I ? (i = idx, idx++) : idx++) : idx++), ...);
+    return i;
+  }
+
   //====================================================================================================================
   struct container_of_index_t
   {

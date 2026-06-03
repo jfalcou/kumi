@@ -9,18 +9,6 @@
 
 namespace kumi
 {
-  template<typename R> struct cp_t
-  {
-    template<typename T, std::size_t... E, std::size_t... I>
-    constexpr auto operator()(T&& t, std::index_sequence<E...>, std::index_sequence<I...>) const noexcept
-    {
-      using res_t = builder_make_t<R, kumi::element_t<E, kumi::element_t<I, T>>...>;
-      return res_t{get<E>(get<I>(t))...};
-    }
-  };
-
-  template<typename R> inline constexpr cp_t<R> cp{};
-
   //====================================================================================================================
   /**
     @ingroup    generators
@@ -52,23 +40,39 @@ namespace kumi
     @include doc/record/algo/cartesian_product.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type... Ts>
-  [[nodiscard]] KUMI_ABI constexpr auto cartesian_product(Ts&&... ts)
-  requires(kumi::concepts::follows_same_semantic<Ts...>)
+  struct cartesian_product_t
   {
-    if constexpr (sizeof...(Ts) == 0) return kumi::tuple{};
-    else
+    template<kumi::concepts::product_type... Ts>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(Ts&&... ts) const
+    requires(kumi::concepts::follows_same_semantic<Ts...>)
     {
-      using res_type = kumi::common_product_type_t<std::remove_cvref_t<Ts>...>;
-      constexpr auto idx = kumi::function::cartesian_producer(std::make_index_sequence<(kumi::size_v<Ts> * ...)>{},
-                                                              kumi::index<kumi::size_v<Ts>>...);
-
-      return [&]<std::size_t... N>(std::index_sequence<N...>) {
-        std::make_index_sequence<sizeof...(Ts)> ids;
-        return kumi::make_tuple(cp<res_type>(kumi::forward_as_tuple(KUMI_FWD(ts)...), get<N>(idx), ids)...);
-      }(std::make_index_sequence<(kumi::size_v<Ts> * ...)>{});
+      if constexpr (sizeof...(Ts) == 0) return kumi::tuple{};
+      else
+      {
+        constexpr auto sq = std::make_index_sequence<(kumi::size_v<Ts> * ...)>{};
+        constexpr auto idx = kumi::function::cartesian_producer(sq, kumi::index<kumi::size_v<Ts>>...);
+        return (*this)(kumi::forward_as_tuple(KUMI_FWD(ts)...), idx, sq);
+      }
     }
-  }
+
+  private:
+    template<typename T, typename Seq, std::size_t... I>
+    KUMI_ABI constexpr auto operator()(T&& t, Seq&& s, std::index_sequence<I...>) const
+    {
+      std::make_index_sequence<kumi::size_v<T>> ids{};
+      return kumi::make_tuple(((*this)(KUMI_FWD(t), get<I>(s), ids))...);
+    }
+
+    template<typename T, std::size_t... E, std::size_t... I>
+    KUMI_ABI constexpr auto operator()(T&& t, std::index_sequence<E...>, std::index_sequence<I...>) const
+    {
+      using U = kumi::common_product_type_t<std::remove_cvref_t<kumi::element_t<I, T>>...>;
+      using res_t = kumi::builder_make_t<U, kumi::element_t<E, kumi::element_t<I, T>>...>;
+      return res_t{get<E>(get<I>(KUMI_FWD(t)))...};
+    }
+  };
+
+  inline constexpr cartesian_product_t cartesian_product{};
 
   namespace result
   {

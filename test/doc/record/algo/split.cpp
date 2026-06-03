@@ -13,7 +13,7 @@ int main()
   kumi::record a = { "a"_id = 1, "b"_id = 2.3, "c"_id = 4.5f,"d"_id = '6',
                      "e"_id = "7", "f"_id = short{89} };
 
-  auto[first, second] = split(a, 3_c);
+  auto[first, second] = kumi::split(a, 3_c);
 
   std::cout << a      << "\n";
   std::cout << first  << "\n";

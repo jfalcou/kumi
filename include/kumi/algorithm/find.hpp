@@ -28,17 +28,25 @@ namespace kumi
     @include doc/record/algo/locate.cpp
   **/
   //====================================================================================================================
-  template<typename Pred, kumi::concepts::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto locate(T&& t, Pred p) noexcept
+  struct locate_t
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return 0;
-    else if constexpr (kumi::concepts::record_type<T>) return kumi::locate(kumi::values_of(KUMI_FWD(t)), p);
-    else
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        bool checks[] = {kumi::invoke(p, get<I>(KUMI_FWD(t)))...};
-        for (std::size_t i = 0; i < kumi::size_v<T>; ++i)
-          if (checks[i]) return i;
-        return kumi::size_v<T>;
-      }(std::make_index_sequence<kumi::size_v<T>>{});
-  }
+    template<typename Pred, kumi::concepts::product_type T>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, Pred p) const noexcept
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return 0;
+      else if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)), p);
+      else return (*this)(p, KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T>>{});
+    }
+
+    template<typename Pred, typename T, std::size_t... I>
+    constexpr auto operator()(Pred p, T&& t, std::index_sequence<I...>) const
+    {
+      bool checks[] = {kumi::invoke(p, get<I>(KUMI_FWD(t)))...};
+      for (std::size_t i = 0; i < kumi::size_v<T>; ++i)
+        if (checks[i]) return i;
+      return kumi::size_v<T>;
+    }
+  };
+
+  inline constexpr locate_t locate{};
 }

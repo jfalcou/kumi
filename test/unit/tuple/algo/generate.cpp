@@ -10,7 +10,7 @@
 #include <kumi/algorithm/generate.hpp>
 #include <tts/tts.hpp>
 
-constexpr auto t1 = [](auto& p) { return static_cast<int>(p); };
+constexpr auto t1 = [](auto const& p) { return static_cast<int>(p); };
 constexpr auto t2 = [](auto) { return 2.f; };
 constexpr auto t3 = [](auto p) { return static_cast<double>(p); };
 constexpr auto t4 = [](auto) { return '7'; };

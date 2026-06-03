@@ -9,6 +9,11 @@
 
 namespace kumi
 {
+  namespace _
+  {
+
+  }
+
   //====================================================================================================================
   /**
     @ingroup  reductions
@@ -43,28 +48,40 @@ namespace kumi
     @include doc/record/algo/reduce.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::monoid M, kumi::concepts::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto reduce(M&& m, T&& t)
+  struct reduce_t
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return m.identity;
-    else if constexpr (kumi::concepts::record_type<T>) return kumi::reduce(KUMI_FWD(m), kumi::values_of(KUMI_FWD(t)));
-    else if constexpr (kumi::concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
-    else
+    template<kumi::concepts::monoid M, kumi::concepts::product_type T>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(M&& m, T&& t) const
     {
-      constexpr auto sz = kumi::size_v<T>;
-      constexpr auto pos = kumi::function::reducer(std::make_index_sequence<sz / 2>{}, index<sz % 2>);
-
-      return [&]<std::size_t... F, std::size_t... S>(std::index_sequence<F...>, std::index_sequence<S...>) {
-        if constexpr (get<2>(pos) == 1)
-          return kumi::reduce(KUMI_FWD(m),
-                              kumi::tuple{kumi::invoke(KUMI_FWD(m), get<F>(KUMI_FWD(t)), get<S>(KUMI_FWD(t)))...,
-                                          get<kumi::size_v<T> - 1>(KUMI_FWD(t))});
-        else
-          return kumi::reduce(KUMI_FWD(m),
-                              kumi::tuple{invoke(KUMI_FWD(m), get<F>(KUMI_FWD(t)), get<S>(KUMI_FWD(t)))...});
-      }(get<0>(pos), get<1>(pos));
+      if constexpr (kumi::concepts::empty_product_type<T>) return m.identity;
+      else if constexpr (kumi::concepts::record_type<T>) return (*this)(KUMI_FWD(m), kumi::values_of(KUMI_FWD(t)));
+      else if constexpr (kumi::concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
+      else
+      {
+        constexpr auto sz = kumi::size_v<T>;
+        constexpr auto pos = kumi::function::reducer(std::make_index_sequence<sz / 2>{}, index<sz % 2>);
+        return reduce_(KUMI_FWD(m), KUMI_FWD(t), get<2>(pos), get<0>(pos), get<1>(pos));
+      }
     }
-  }
+
+    template<kumi::concepts::monoid M, kumi::concepts::product_type T, typename Value>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(M&& m, T&& t, Value init) const
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return init;
+      else return KUMI_FWD(m)(init, (*this)(KUMI_FWD(m), KUMI_FWD(t)));
+    }
+
+    template<typename M, typename T, std::size_t N, std::size_t... F, std::size_t... S>
+    constexpr auto reduce_(M&& m, T&& t, kumi::index_t<N>, std::index_sequence<F...>, std::index_sequence<S...>) const
+    {
+      if constexpr (N == 1)
+        return (*this)(KUMI_FWD(m), kumi::tuple{kumi::invoke(KUMI_FWD(m), get<F>(KUMI_FWD(t)), get<S>(KUMI_FWD(t)))...,
+                                                get<kumi::size_v<T> - 1>(KUMI_FWD(t))});
+      else
+        return (*this)(KUMI_FWD(m),
+                       kumi::tuple{kumi::invoke(KUMI_FWD(m), get<F>(KUMI_FWD(t)), get<S>(KUMI_FWD(t)))...});
+    }
+  };
 
   //====================================================================================================================
   /**
@@ -101,12 +118,6 @@ namespace kumi
     @include doc/record/algo/reduce.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::monoid M, kumi::concepts::product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto reduce(M&& m, T&& t, Value init)
-  {
-    if constexpr (kumi::concepts::empty_product_type<T>) return init;
-    else return KUMI_FWD(m)(init, kumi::reduce(KUMI_FWD(m), KUMI_FWD(t)));
-  }
 
   //====================================================================================================================
   /**
@@ -145,29 +156,44 @@ namespace kumi
     @include doc/record/algo/map_reduce.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T, kumi::concepts::monoid M, typename Function>
-  [[nodiscard]] KUMI_ABI constexpr auto map_reduce(Function f, M&& m, T&& t)
+  struct map_reduce_t : private kumi::reduce_t
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return m.identity;
-    else if constexpr (kumi::concepts::record_type<T>)
-      return kumi::map_reduce(f, KUMI_FWD(m), kumi::values_of(KUMI_FWD(t)));
-    else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::invoke(f, get<0>(KUMI_FWD(t)));
-    else
+    template<kumi::concepts::product_type T, kumi::concepts::monoid M, typename Function>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, M&& m, T&& t) const
     {
-      constexpr auto sz = kumi::size_v<T>;
-      constexpr auto pos = kumi::function::reducer(std::make_index_sequence<sz / 2>{}, index<sz % 2>);
-
-      return [&]<std::size_t... F, std::size_t... S>(std::index_sequence<F...>, std::index_sequence<S...>) {
-        if constexpr (get<2>(pos) == 1)
-          return kumi::reduce(KUMI_FWD(m), kumi::tuple{kumi::invoke(KUMI_FWD(m), kumi::invoke(f, get<F>(KUMI_FWD(t))),
-                                                                    kumi::invoke(f, get<S>(KUMI_FWD(t))))...,
-                                                       kumi::invoke(f, get<kumi::size_v<T> - 1>(KUMI_FWD(t)))});
-        else
-          return kumi::reduce(KUMI_FWD(m), kumi::tuple{kumi::invoke(KUMI_FWD(m), kumi::invoke(f, get<F>(KUMI_FWD(t))),
-                                                                    kumi::invoke(f, get<S>(KUMI_FWD(t))))...});
-      }(get<0>(pos), get<1>(pos));
+      if constexpr (kumi::concepts::empty_product_type<T>) return m.identity;
+      else if constexpr (kumi::concepts::record_type<T>) return (*this)(f, KUMI_FWD(m), kumi::values_of(KUMI_FWD(t)));
+      else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::invoke(f, get<0>(KUMI_FWD(t)));
+      else
+      {
+        constexpr auto sz = kumi::size_v<T>;
+        constexpr auto pos = kumi::function::reducer(std::make_index_sequence<sz / 2>{}, index<sz % 2>);
+        return map_reduce_(KUMI_FWD(m), KUMI_FWD(t), f, get<2>(pos), get<0>(pos), get<1>(pos));
+      }
     }
-  }
+
+    template<kumi::concepts::monoid M, kumi::concepts::product_type T, typename Function, typename Value>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, M&& m, T&& t, Value init) const
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return kumi::invoke(f, init);
+      else return KUMI_FWD(m)(kumi::invoke(f, init), (*this)(f, KUMI_FWD(m), KUMI_FWD(t)));
+    }
+
+    template<typename M, typename T, typename F, std::size_t N, std::size_t... I, std::size_t... J>
+    constexpr auto map_reduce_(
+      M&& m, T&& t, F f, kumi::index_t<N>, std::index_sequence<I...>, std::index_sequence<J...>) const
+    {
+      if constexpr (N == 1)
+        return this->reduce_t::operator()(KUMI_FWD(m),
+                                          kumi::tuple{kumi::invoke(KUMI_FWD(m), kumi::invoke(f, get<I>(KUMI_FWD(t))),
+                                                                   kumi::invoke(f, get<J>(KUMI_FWD(t))))...,
+                                                      kumi::invoke(f, get<kumi::size_v<T> - 1>(KUMI_FWD(t)))});
+      else
+        return this->reduce_t::operator()(KUMI_FWD(m),
+                                          kumi::tuple{kumi::invoke(KUMI_FWD(m), kumi::invoke(f, get<I>(KUMI_FWD(t))),
+                                                                   kumi::invoke(f, get<J>(KUMI_FWD(t))))...});
+    }
+  };
 
   //====================================================================================================================
   /**
@@ -207,12 +233,6 @@ namespace kumi
     @include doc/record/algo/map_reduce.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::monoid M, kumi::concepts::product_type T, typename Function, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto map_reduce(Function f, M&& m, T&& t, Value init)
-  {
-    if constexpr (kumi::concepts::empty_product_type<T>) return kumi::invoke(f, init);
-    else return KUMI_FWD(m)(kumi::invoke(f, init), kumi::map_reduce(f, KUMI_FWD(m), KUMI_FWD(t)));
-  }
 
   //====================================================================================================================
   /**
@@ -245,10 +265,19 @@ namespace kumi
     @include doc/record/algo/sum.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T, typename Value> [[nodiscard]] KUMI_ABI constexpr auto sum(T&& t, Value init)
+  struct sum_t : private kumi::reduce_t
   {
-    return kumi::reduce(kumi::function::plus, KUMI_FWD(t), init);
-  }
+    template<kumi::concepts::product_type T, typename Value>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, Value init) const
+    {
+      return this->reduce_t::operator()(kumi::function::plus, KUMI_FWD(t), init);
+    }
+
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
+    {
+      return this->reduce_t::operator()(kumi::function::plus, KUMI_FWD(t));
+    }
+  };
 
   //====================================================================================================================
   /**
@@ -280,10 +309,6 @@ namespace kumi
     @include doc/record/algo/sum.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto sum(T&& t)
-  {
-    return kumi::reduce(kumi::function::plus, KUMI_FWD(t));
-  }
 
   //====================================================================================================================
   /**
@@ -316,10 +341,19 @@ namespace kumi
     @include doc/record/algo/prod.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T, typename Value> [[nodiscard]] KUMI_ABI constexpr auto prod(T&& t, Value init)
+  struct prod_t : private kumi::reduce_t
   {
-    return kumi::reduce(kumi::function::multiplies, KUMI_FWD(t), init);
-  }
+    template<kumi::concepts::product_type T, typename Value>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, Value init) const
+    {
+      return this->reduce_t::operator()(kumi::function::multiplies, KUMI_FWD(t), init);
+    }
+
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
+    {
+      return this->reduce_t::operator()(kumi::function::multiplies, KUMI_FWD(t));
+    }
+  };
 
   //====================================================================================================================
   /**
@@ -351,10 +385,6 @@ namespace kumi
     @include doc/record/algo/prod.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto prod(T&& t)
-  {
-    return kumi::reduce(kumi::function::multiplies, KUMI_FWD(t));
-  }
 
   //====================================================================================================================
   /**
@@ -387,11 +417,19 @@ namespace kumi
     @include doc/record/algo/bit_and.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto bit_and(T&& t, Value init)
+  struct bit_and_t : private kumi::reduce_t
   {
-    return kumi::reduce(kumi::function::bit_and, KUMI_FWD(t), init);
-  }
+    template<kumi::concepts::product_type T, typename Value>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, Value init) const
+    {
+      return this->reduce_t::operator()(kumi::function::bit_and, KUMI_FWD(t), init);
+    }
+
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
+    {
+      return this->reduce_t::operator()(kumi::function::bit_and, KUMI_FWD(t));
+    }
+  };
 
   //====================================================================================================================
   /**
@@ -423,10 +461,6 @@ namespace kumi
     @include doc/record/algo/bit_and.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto bit_and(T&& t)
-  {
-    return kumi::reduce(kumi::function::bit_and, KUMI_FWD(t));
-  }
 
   //====================================================================================================================
   /**
@@ -459,11 +493,19 @@ namespace kumi
     @include doc/record/algo/bit_or.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto bit_or(T&& t, Value init)
+  struct bit_or_t : private kumi::reduce_t
   {
-    return kumi::reduce(kumi::function::bit_or, KUMI_FWD(t), init);
-  }
+    template<kumi::concepts::product_type T, typename Value>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, Value init) const
+    {
+      return this->reduce_t::operator()(kumi::function::bit_or, KUMI_FWD(t), init);
+    }
+
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
+    {
+      return this->reduce_t::operator()(kumi::function::bit_or, KUMI_FWD(t));
+    }
+  };
 
   //====================================================================================================================
   /**
@@ -495,10 +537,6 @@ namespace kumi
     @include doc/record/algo/bit_or.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto bit_or(T&& t)
-  {
-    return kumi::reduce(kumi::function::bit_or, KUMI_FWD(t));
-  }
 
   //====================================================================================================================
   /**
@@ -531,11 +569,19 @@ namespace kumi
     @include doc/record/algo/bit_xor.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto bit_xor(T&& t, Value init)
+  struct bit_xor_t : private kumi::reduce_t
   {
-    return kumi::reduce(kumi::function::bit_xor, KUMI_FWD(t), init);
-  }
+    template<kumi::concepts::product_type T, typename Value>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, Value init) const
+    {
+      return this->reduce_t::operator()(kumi::function::bit_xor, KUMI_FWD(t), init);
+    }
+
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
+    {
+      return this->reduce_t::operator()(kumi::function::bit_xor, KUMI_FWD(t));
+    }
+  };
 
   //====================================================================================================================
   /**
@@ -567,10 +613,13 @@ namespace kumi
     @include doc/record/algo/bit_xor.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto bit_xor(T&& t)
-  {
-    return kumi::reduce(kumi::function::bit_xor, KUMI_FWD(t));
-  }
+  inline constexpr reduce_t reduce{};
+  inline constexpr map_reduce_t map_reduce{};
+  inline constexpr sum_t sum{};
+  inline constexpr prod_t prod{};
+  inline constexpr bit_and_t bit_and{};
+  inline constexpr bit_or_t bit_or{};
+  inline constexpr bit_xor_t bit_xor{};
 
   namespace result
   {

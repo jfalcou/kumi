@@ -43,7 +43,7 @@ TTS_CASE("Check result::map_field<F,record...> behavior")
 TTS_CASE("Check map_field(f, {}) behavior")
 {
   bool was_run = false;
-  auto s = map_field(
+  auto s = kumi::map_field(
     [&](auto, auto m) {
       was_run = true;
       return sizeof(m);
@@ -58,7 +58,7 @@ TTS_CASE("Check map_name(f, record) behavior"){
                          "whatever"_id = short{55}};
 
 {
-  auto s = map_field(
+  auto s = kumi::map_field(
     [](kumi::str name, auto m) {
       if (name.ends_with("t"_str)) return sizeof(m);
       else if (name.ends_with("c"_str)) return 1 + sizeof(m);
@@ -82,7 +82,7 @@ TTS_CASE("Check map_name(f, record) behavior"){
 {
   auto u =
     kumi::record{"whatever"_id = short{2}, "coat"_id = 2.3f, "boat"_id = 4, "biologic"_id = 5., "dystopic"_id = 'a'};
-  auto s = map_field(
+  auto s = kumi::map_field(
     [](kumi::str name, auto m, auto n) {
       if (name.find("o"_str) < name.size()) return sizeof(m);
       else return static_cast<int>(n) * sizeof(m);
@@ -109,7 +109,7 @@ TTS_CASE("Check map_field(f, record) constexpr behavior"){
   {constexpr auto t = kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.4f, "d"_id = '5'};
 
 {
-  constexpr auto s = map_field([](auto, auto m) { return sizeof(m); }, t);
+  constexpr auto s = kumi::map_field([](auto, auto m) { return sizeof(m); }, t);
 
   TTS_CONSTEXPR_EQUAL(get<"a"_id>(s), sizeof(int));
   TTS_CONSTEXPR_EQUAL(get<"b"_id>(s), sizeof(double));
@@ -119,7 +119,7 @@ TTS_CASE("Check map_field(f, record) constexpr behavior"){
 
 {
   constexpr auto u = kumi::record{"d"_id = 2, "b"_id = 3, "c"_id = 4, "a"_id = 5};
-  constexpr auto s = map_field(
+  constexpr auto s = kumi::map_field(
     [](kumi::str name, auto m, auto n) {
       if (name.compare("a"_str) == 0) return sizeof(m);
       else return n * sizeof(m);

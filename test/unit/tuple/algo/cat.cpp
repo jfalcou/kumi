@@ -46,12 +46,13 @@ TTS_CASE("Check result::cat<Tuple...> behavior")
 TTS_CASE("Check cat(tuple) behavior")
 {
   short s = 55;
-  TTS_EQUAL((cat(kumi::tuple{}, kumi::tuple{})), (kumi::tuple{}));
-  TTS_EQUAL((cat(kumi::tuple{1, 2.}, kumi::tuple{})), (kumi::tuple{1, 2.}));
-  TTS_EQUAL((cat(kumi::tuple{}, kumi::tuple{1, 2.})), (kumi::tuple{1, 2.}));
-  TTS_EQUAL((cat(kumi::tuple{1}, kumi::tuple{2., 3.f, 4})), (kumi::tuple{1, 2., 3.f, 4}));
-  TTS_EQUAL((cat(kumi::tuple{1, 2.}, kumi::tuple{3.f, 4})), (kumi::tuple{1, 2., 3.f, 4}));
-  TTS_EQUAL((cat(kumi::tuple{1, 2.}, kumi::tuple{3.f, 4}, kumi::tuple{s, 6.7})), (kumi::tuple{1, 2., 3.f, 4, s, 6.7}));
+  TTS_EQUAL((kumi::cat(kumi::tuple{}, kumi::tuple{})), (kumi::tuple{}));
+  TTS_EQUAL((kumi::cat(kumi::tuple{1, 2.}, kumi::tuple{})), (kumi::tuple{1, 2.}));
+  TTS_EQUAL((kumi::cat(kumi::tuple{}, kumi::tuple{1, 2.})), (kumi::tuple{1, 2.}));
+  TTS_EQUAL((kumi::cat(kumi::tuple{1}, kumi::tuple{2., 3.f, 4})), (kumi::tuple{1, 2., 3.f, 4}));
+  TTS_EQUAL((kumi::cat(kumi::tuple{1, 2.}, kumi::tuple{3.f, 4})), (kumi::tuple{1, 2., 3.f, 4}));
+  TTS_EQUAL((kumi::cat(kumi::tuple{1, 2.}, kumi::tuple{3.f, 4}, kumi::tuple{s, 6.7})),
+            (kumi::tuple{1, 2., 3.f, 4, s, 6.7}));
 
   // Check behavior with tuple of references
   {
@@ -83,11 +84,11 @@ TTS_CASE("Check cat(tuple) behavior")
 TTS_CASE("Check cat(tuple) constexpr behavior")
 {
   constexpr short s = 55;
-  TTS_CONSTEXPR_EQUAL((cat(kumi::tuple{}, kumi::tuple{})), (kumi::tuple{}));
-  TTS_CONSTEXPR_EQUAL((cat(kumi::tuple{1, 2.}, kumi::tuple{})), (kumi::tuple{1, 2.}));
-  TTS_CONSTEXPR_EQUAL((cat(kumi::tuple{}, kumi::tuple{1, 2.})), (kumi::tuple{1, 2.}));
-  TTS_CONSTEXPR_EQUAL((cat(kumi::tuple{1}, kumi::tuple{2., 3.f, 4})), (kumi::tuple{1, 2., 3.f, 4}));
-  TTS_CONSTEXPR_EQUAL((cat(kumi::tuple{1, 2.}, kumi::tuple{3.f, 4})), (kumi::tuple{1, 2., 3.f, 4}));
-  TTS_CONSTEXPR_EQUAL((cat(kumi::tuple{1, 2.}, kumi::tuple{3.f, 4}, kumi::tuple{s, 6.7})),
+  TTS_CONSTEXPR_EQUAL((kumi::cat(kumi::tuple{}, kumi::tuple{})), (kumi::tuple{}));
+  TTS_CONSTEXPR_EQUAL((kumi::cat(kumi::tuple{1, 2.}, kumi::tuple{})), (kumi::tuple{1, 2.}));
+  TTS_CONSTEXPR_EQUAL((kumi::cat(kumi::tuple{}, kumi::tuple{1, 2.})), (kumi::tuple{1, 2.}));
+  TTS_CONSTEXPR_EQUAL((kumi::cat(kumi::tuple{1}, kumi::tuple{2., 3.f, 4})), (kumi::tuple{1, 2., 3.f, 4}));
+  TTS_CONSTEXPR_EQUAL((kumi::cat(kumi::tuple{1, 2.}, kumi::tuple{3.f, 4})), (kumi::tuple{1, 2., 3.f, 4}));
+  TTS_CONSTEXPR_EQUAL((kumi::cat(kumi::tuple{1, 2.}, kumi::tuple{3.f, 4}, kumi::tuple{s, 6.7})),
                       (kumi::tuple{1, 2., 3.f, 4, s, 6.7}));
 };

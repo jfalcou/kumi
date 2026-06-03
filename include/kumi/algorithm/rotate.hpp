@@ -42,20 +42,27 @@ namespace kumi
     @include doc/record/algo/rotate_left.cpp
   **/
   //====================================================================================================================
-  template<std::size_t R, kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto rotate_left(T&& t)
+  template<std::size_t R> struct rotate_left_t
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
-    else if constexpr ((R % kumi::size_v<T>) == 0) return KUMI_FWD(t);
-    else
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
     {
-      constexpr auto idxs =
-        kumi::function::rotater(std::make_index_sequence<kumi::size_v<T>>{}, kumi::index<(R % kumi::size_v<T>)>);
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = builder_make_t<T, kumi::element_t<I, T>...>;
-        return type{get<I>(KUMI_FWD(t))...};
-      }(idxs);
+      if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
+      else if constexpr ((R % kumi::size_v<T>) == 0) return KUMI_FWD(t);
+      else
+      {
+        constexpr auto idxs =
+          kumi::function::rotater(std::make_index_sequence<kumi::size_v<T>>{}, kumi::index<(R % kumi::size_v<T>)>);
+        return (*this)(KUMI_FWD(t), idxs);
+      }
     }
-  }
+
+  private:
+    template<typename T, std::size_t... N>
+    KUMI_ABI constexpr auto operator()(T&& t, std::index_sequence<N...>) const noexcept
+    {
+      return kumi::builder<T>::make(get<N>(KUMI_FWD(t))...);
+    }
+  };
 
   //====================================================================================================================
   /**
@@ -90,21 +97,32 @@ namespace kumi
     @include doc/record/algo/rotate_right.cpp
   **/
   //====================================================================================================================
-  template<std::size_t R, kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto rotate_right(T&& t)
+  template<std::size_t R> struct rotate_right_t
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
-    else if constexpr ((R % kumi::size_v<T>) == 0) return KUMI_FWD(t);
-    else
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
-      constexpr auto F = R % kumi::size_v<T>;
-      constexpr auto idxs =
-        kumi::function::rotater(std::make_index_sequence<kumi::size_v<T>>{}, kumi::index<(kumi::size_v<T> - F)>);
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = builder_make_t<T, kumi::element_t<I, T>...>;
-        return type{get<I>(KUMI_FWD(t))...};
-      }(idxs);
+      if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
+      else if constexpr ((R % kumi::size_v<T>) == 0) return KUMI_FWD(t);
+      else
+      {
+        constexpr auto F = R % kumi::size_v<T>;
+        constexpr auto idxs =
+          kumi::function::rotater(std::make_index_sequence<kumi::size_v<T>>{}, kumi::index<(kumi::size_v<T> - F)>);
+        return (*this)(KUMI_FWD(t), idxs);
+      }
     }
-  }
+
+  private:
+    template<typename T, std::size_t... N>
+    KUMI_ABI constexpr auto operator()(T&& t, std::index_sequence<N...>) const noexcept
+    {
+      return kumi::builder<T>::make(get<N>(KUMI_FWD(t))...);
+    }
+  };
+
+  template<std::size_t R> inline constexpr rotate_left_t<R> rotate_left{};
+
+  template<std::size_t R> inline constexpr rotate_right_t<R> rotate_right{};
 
   namespace result
   {

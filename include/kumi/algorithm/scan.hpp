@@ -45,21 +45,36 @@ namespace kumi
     @include doc/record/algo/inclusive_scan_left.cpp
   **/
   //====================================================================================================================
-  template<typename Function, kumi::concepts::product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_left(Function f, T&& t, Value init)
+  struct inclusive_scan_left_t
   {
-    if constexpr (kumi::concepts::record_type<T>)
-      return kumi::inclusive_scan_left(f, kumi::values_of(KUMI_FWD(t)), init);
-    else if constexpr (kumi::concepts::empty_product_type<T>) return kumi::tuple{};
-    else
+    template<typename Function, kumi::concepts::product_type T, typename Value>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, T&& t, Value init) const
     {
-      auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (kumi::function::scannable{op, kumi::invoke(f, init, get<0>(KUMI_FWD(t)))} >> ... >>
-                kumi::bind_back(f, get<I + 1>(KUMI_FWD(t))))();
-      }(std::make_index_sequence<kumi::size_v<T> - 1>{});
+      if constexpr (kumi::concepts::record_type<T>) return (*this)(f, kumi::values_of(KUMI_FWD(t)), init);
+      else if constexpr (kumi::concepts::empty_product_type<T>) return kumi::tuple{};
+      else
+      {
+        auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
+        return (*this)(KUMI_FWD(t), init, f, op, std::make_index_sequence<kumi::size_v<T> - 1>{});
+      }
     }
-  }
+
+    template<kumi::concepts::monoid M, kumi::concepts::sized_product_type_or_more<1> T>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(M&& m, T&& t) const
+    {
+      if constexpr (kumi::concepts::record_type<T>) return (*this)(KUMI_FWD(m), kumi::values_of(KUMI_FWD(t)));
+      else if constexpr (kumi::concepts::sized_product_type<T, 1>) return KUMI_FWD(t);
+      else return (*this)(KUMI_FWD(m), KUMI_FWD(t), m.identity);
+    }
+
+  private:
+    template<typename T, typename V, typename F, typename O, std::size_t... I>
+    constexpr auto operator()(T&& t, V v, F f, O o, std::index_sequence<I...>) const
+    {
+      return (kumi::function::scannable{o, kumi::invoke(f, v, get<0>(KUMI_FWD(t)))} >> ... >>
+              kumi::bind_back(f, get<I + 1>(KUMI_FWD(t))))();
+    }
+  };
 
   //====================================================================================================================
   /**
@@ -96,14 +111,6 @@ namespace kumi
     @include doc/record/algo/inclusive_scan_left.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::monoid M, kumi::concepts::sized_product_type_or_more<1> T>
-  [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_left(M&& m, T&& t)
-  {
-    if constexpr (kumi::concepts::record_type<T>)
-      return kumi::inclusive_scan_left(KUMI_FWD(m), kumi::values_of(KUMI_FWD(t)));
-    else if constexpr (kumi::concepts::sized_product_type<T, 1>) return KUMI_FWD(t);
-    else return kumi::inclusive_scan_left(KUMI_FWD(m), KUMI_FWD(t), m.identity);
-  }
 
   //====================================================================================================================
   /**
@@ -140,20 +147,35 @@ namespace kumi
     @include doc/record/algo/exclusive_scan_left.cpp
   **/
   //====================================================================================================================
-  template<typename Function, kumi::concepts::product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_left(Function f, T&& t, Value init)
+  struct exclusive_scan_left_t
   {
-    if constexpr (kumi::concepts::record_type<T>)
-      return kumi::exclusive_scan_left(f, kumi::values_of(KUMI_FWD(t)), init);
-    else if constexpr (kumi::concepts::empty_product_type<T>) return kumi::tuple{init};
-    else
+    template<typename Function, kumi::concepts::product_type T, typename Value>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, T&& t, Value init) const
     {
-      auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (kumi::function::scannable{op, init} >> ... >> kumi::bind_back(f, get<I>(KUMI_FWD(t))))();
-      }(std::make_index_sequence<kumi::size_v<T> - 1>{});
+      if constexpr (kumi::concepts::record_type<T>) return (*this)(f, kumi::values_of(KUMI_FWD(t)), init);
+      else if constexpr (kumi::concepts::empty_product_type<T>) return kumi::tuple{init};
+      else
+      {
+        auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
+        return (*this)(KUMI_FWD(t), init, f, op, std::make_index_sequence<kumi::size_v<T> - 1>{});
+      }
     }
-  }
+
+    template<kumi::concepts::monoid M, kumi::concepts::sized_product_type_or_more<1> T>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(M&& m, T&& t) const
+    {
+      if constexpr (kumi::concepts::record_type<T>) return (*this)(KUMI_FWD(m), kumi::values_of(KUMI_FWD(t)));
+      else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::tuple(m.identity, get<0>(KUMI_FWD(t)));
+      else return (*this)(KUMI_FWD(m), KUMI_FWD(t), m.identity);
+    }
+
+  private:
+    template<typename T, typename V, typename F, typename O, std::size_t... I>
+    constexpr auto operator()(T&& t, V v, F f, O o, std::index_sequence<I...>) const
+    {
+      return (kumi::function::scannable{o, v} >> ... >> kumi::bind_back(f, get<I>(KUMI_FWD(t))))();
+    }
+  };
 
   //====================================================================================================================
   /**
@@ -189,14 +211,6 @@ namespace kumi
     @include doc/record/algo/exclusive_scan_left.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::monoid M, kumi::concepts::sized_product_type_or_more<1> T>
-  [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_left(M&& m, T&& t)
-  {
-    if constexpr (kumi::concepts::record_type<T>)
-      return kumi::exclusive_scan_left(KUMI_FWD(m), kumi::values_of(KUMI_FWD(t)));
-    else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::tuple(m.identity, get<0>(KUMI_FWD(t)));
-    else return kumi::exclusive_scan_left(KUMI_FWD(m), KUMI_FWD(t), m.identity);
-  }
 
   //====================================================================================================================
   /**
@@ -234,22 +248,36 @@ namespace kumi
     @include doc/record/algo/inclusive_scan_right.cpp
   **/
   //====================================================================================================================
-  template<typename Function, kumi::concepts::product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_right(Function f, T&& t, Value init)
+  struct inclusive_scan_right_t
   {
-    if constexpr (kumi::concepts::record_type<T>)
-      return kumi::inclusive_scan_right(KUMI_FWD(f), kumi::values_of(KUMI_FWD(t)), init);
-    else if constexpr (kumi::concepts::empty_product_type<T>) return kumi::tuple{};
-    else
+    template<typename Function, kumi::concepts::product_type T, typename Value>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, T&& t, Value init) const
     {
-      auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (kumi::bind_front(f, get<I>(KUMI_FWD(t)))
-                << ...
-                << kumi::function::scannable{op, kumi::invoke(f, get<kumi::size_v<T> - 1>(KUMI_FWD(t)), init)})();
-      }(std::make_index_sequence<kumi::size_v<T> - 1>{});
+      if constexpr (kumi::concepts::record_type<T>) return (*this)(KUMI_FWD(f), kumi::values_of(KUMI_FWD(t)), init);
+      else if constexpr (kumi::concepts::empty_product_type<T>) return kumi::tuple{};
+      else
+      {
+        auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
+        return (*this)(KUMI_FWD(t), init, f, op, std::make_index_sequence<kumi::size_v<T> - 1>{});
+      }
     }
-  }
+
+    template<kumi::concepts::monoid M, kumi::concepts::sized_product_type_or_more<1> T>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(M&& m, T&& t) const
+    {
+      if constexpr (kumi::concepts::record_type<T>) return (*this)(KUMI_FWD(m), kumi::values_of(KUMI_FWD(t)));
+      else if constexpr (kumi::concepts::sized_product_type<T, 1>) return KUMI_FWD(t);
+      else return (*this)(KUMI_FWD(m), KUMI_FWD(t), m.identity);
+    }
+
+  private:
+    template<typename T, typename V, typename F, typename O, std::size_t... I>
+    KUMI_ABI constexpr auto operator()(T&& t, V v, F f, O o, std::index_sequence<I...>) const
+    {
+      return (kumi::bind_front(f, get<I>(KUMI_FWD(t)))
+              << ... << kumi::function::scannable{o, kumi::invoke(f, get<kumi::size_v<T> - 1>(KUMI_FWD(t)), v)})();
+    }
+  };
 
   //====================================================================================================================
   /**
@@ -286,14 +314,6 @@ namespace kumi
     @include doc/record/algo/inclusive_scan_right.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::monoid M, kumi::concepts::sized_product_type_or_more<1> T>
-  [[nodiscard]] KUMI_ABI constexpr auto inclusive_scan_right(M&& m, T&& t)
-  {
-    if constexpr (kumi::concepts::record_type<T>)
-      return kumi::inclusive_scan_right(KUMI_FWD(m), kumi::values_of(KUMI_FWD(t)));
-    else if constexpr (kumi::concepts::sized_product_type<T, 1>) return KUMI_FWD(t);
-    else return kumi::inclusive_scan_right(KUMI_FWD(m), KUMI_FWD(t), m.identity);
-  }
 
   //====================================================================================================================
   /**
@@ -330,20 +350,35 @@ namespace kumi
     @include doc/record/algo/exclusive_scan_right.cpp
   **/
   //====================================================================================================================
-  template<typename Function, kumi::concepts::product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_right(Function f, T&& t, Value init)
+  struct exclusive_scan_right_t
   {
-    if constexpr (kumi::concepts::record_type<T>)
-      return kumi::exclusive_scan_right(KUMI_FWD(f), kumi::values_of(KUMI_FWD(t)), init);
-    else if constexpr (kumi::concepts::empty_product_type<T>) return kumi::tuple{init};
-    else
+    template<typename Function, kumi::concepts::product_type T, typename Value>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, T&& t, Value init) const
     {
-      auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (kumi::bind_front(f, get<I + 1>(KUMI_FWD(t))) << ... << kumi::function::scannable{op, init})();
-      }(std::make_index_sequence<kumi::size_v<T> - 1>{});
+      if constexpr (kumi::concepts::record_type<T>) return (*this)(KUMI_FWD(f), kumi::values_of(KUMI_FWD(t)), init);
+      else if constexpr (kumi::concepts::empty_product_type<T>) return kumi::tuple{init};
+      else
+      {
+        auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
+        return (*this)(KUMI_FWD(t), init, f, op, std::make_index_sequence<kumi::size_v<T> - 1>{});
+      }
     }
-  }
+
+    template<kumi::concepts::monoid M, kumi::concepts::sized_product_type_or_more<1> T>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(M&& m, T&& t) const
+    {
+      if constexpr (kumi::concepts::record_type<T>) return (*this)(KUMI_FWD(m), kumi::values_of(KUMI_FWD(t)));
+      else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::tuple{get<0>(KUMI_FWD(t)), m.identity};
+      else return (*this)(KUMI_FWD(m), KUMI_FWD(t), m.identity);
+    }
+
+  private:
+    template<typename T, typename V, typename F, typename O, std::size_t... I>
+    KUMI_ABI constexpr auto operator()(T&& t, V v, F f, O o, std::index_sequence<I...>) const
+    {
+      return (kumi::bind_front(f, get<I + 1>(KUMI_FWD(t))) << ... << kumi::function::scannable{o, v})();
+    }
+  };
 
   //====================================================================================================================
   /**
@@ -379,14 +414,11 @@ namespace kumi
     @include doc/record/algo/exclusive_scan_right.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::monoid M, kumi::concepts::sized_product_type_or_more<1> T>
-  [[nodiscard]] KUMI_ABI constexpr auto exclusive_scan_right(M&& m, T&& t)
-  {
-    if constexpr (kumi::concepts::record_type<T>)
-      return kumi::exclusive_scan_right(KUMI_FWD(m), kumi::values_of(KUMI_FWD(t)));
-    else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::tuple{get<0>(KUMI_FWD(t)), m.identity};
-    else return kumi::exclusive_scan_right(KUMI_FWD(m), KUMI_FWD(t), m.identity);
-  }
+
+  inline constexpr inclusive_scan_left_t inclusive_scan_left{};
+  inline constexpr exclusive_scan_left_t exclusive_scan_left{};
+  inline constexpr inclusive_scan_right_t inclusive_scan_right{};
+  inline constexpr exclusive_scan_right_t exclusive_scan_right{};
 
   namespace result
   {

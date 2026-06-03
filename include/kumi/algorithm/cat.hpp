@@ -39,23 +39,35 @@ namespace kumi
     @include doc/record/algo/cat.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type... Ts>
-  [[nodiscard]] KUMI_ABI constexpr auto cat(Ts&&... ts)
-  requires(kumi::concepts::follows_same_semantic<Ts...>)
+  struct cat_t
   {
-    if constexpr (sizeof...(Ts) == 0) return kumi::tuple{};
-    else
+    template<kumi::concepts::product_type... Ts>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(Ts&&... ts) const
+    requires(kumi::concepts::follows_same_semantic<Ts...>)
     {
-      constexpr auto pos = kumi::function::concatenater(std::index_sequence<kumi::size_v<Ts>...>{});
-      using res_type = kumi::common_product_type_t<std::remove_cvref_t<Ts>...>;
-
-      return [&]<typename T, std::size_t... E, std::size_t... N>(T&& t, std::index_sequence<E...>,
-                                                                 std::index_sequence<N...>) {
-        using type = builder_make_t<res_type, kumi::element_t<E, kumi::element_t<N, T>>...>;
-        return type{get<E>(get<N>(KUMI_FWD(t)))...};
-      }(kumi::forward_as_tuple(KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
+      if constexpr (sizeof...(Ts) == 0) return kumi::tuple{};
+      else
+      {
+        constexpr auto pos = kumi::function::concatenater(std::index_sequence<kumi::size_v<Ts>...>{});
+        return (*this)(kumi::forward_as_tuple(KUMI_FWD(ts)...), std::make_index_sequence<sizeof...(Ts)>{}, get<1>(pos),
+                       get<0>(pos));
+      }
     }
-  }
+
+  private:
+    template<typename T, std::size_t... Elt, std::size_t... E, std::size_t... I>
+    KUMI_ABI constexpr auto operator()(T&& t,
+                                       std::index_sequence<Elt...>,
+                                       std::index_sequence<E...>,
+                                       std::index_sequence<I...>) const
+    {
+      using U = kumi::common_product_type_t<std::remove_cvref_t<kumi::element_t<Elt, T>>...>;
+      using res_t = kumi::builder_make_t<U, kumi::element_t<E, kumi::element_t<I, T>>...>;
+      return res_t{get<E>(get<I>(KUMI_FWD(t)))...};
+    }
+  };
+
+  inline constexpr cat_t cat{};
 
   namespace result
   {

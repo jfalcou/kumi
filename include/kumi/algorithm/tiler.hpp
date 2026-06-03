@@ -47,27 +47,37 @@ namespace kumi
     @include doc/record/algo/tiles.cpp
   **/
   //====================================================================================================================
-  template<std::size_t N, std::size_t O, kumi::concepts::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto tiles(T&& t)
+  template<std::size_t N, std::size_t O> struct tiles_t
   {
-    static_assert(N > 0 && N <= kumi::size_v<T>, "[KUMI] - Invalid tile size");
-
-    if constexpr (N == kumi::size_v<T>) return kumi::make_tuple(t);
-    else
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
-      constexpr auto bs = std::integral_constant<std::size_t, kumi::_::nb_blocks(kumi::size_v<T>, N, O)>{};
-      constexpr auto proj = kumi::function::tiler(kumi::index<kumi::size_v<T>>, kumi::index<N>, kumi::index<O>,
-                                                  std::make_index_sequence<bs>{});
-      auto const build = [&]<std::size_t... J>(auto Off, std::index_sequence<J...>) {
-        using type = builder_make_t<T, kumi::element_t<Off + J, T>...>;
-        return type{get<Off + J>(KUMI_FWD(t))...};
-      };
+      static_assert(N > 0 && N <= kumi::size_v<T>, "[KUMI] - Invalid tile size");
 
-      return [&]<std::size_t... B, std::size_t... E>(std::index_sequence<B...>, std::index_sequence<E...>) {
-        return kumi::tuple{build(kumi::index<E>, std::make_index_sequence<B>{})...};
-      }(get<0>(proj), get<1>(proj));
+      if constexpr (N == kumi::size_v<T>) return kumi::make_tuple(t);
+      else
+      {
+        constexpr auto bs = std::integral_constant<std::size_t, kumi::_::nb_blocks(kumi::size_v<T>, N, O)>{};
+        constexpr auto proj = kumi::function::tiler(kumi::index<kumi::size_v<T>>, kumi::index<N>, kumi::index<O>,
+                                                    std::make_index_sequence<bs>{});
+
+        return (*this)(KUMI_FWD(t), get<0>(proj), get<1>(proj));
+      }
     }
-  }
+
+    template<typename T, std::size_t... B, std::size_t... E>
+    constexpr auto operator()(T&& t, std::index_sequence<B...>, std::index_sequence<E...>) const
+    {
+      return kumi::tuple{
+        (*this)(KUMI_FWD(t), std::integral_constant<std::size_t, E>{}, std::make_index_sequence<B>{})...};
+    }
+
+    template<typename T, std::size_t I, std::size_t... J>
+    KUMI_ABI constexpr auto operator()(T&& t, std::integral_constant<std::size_t, I>, std::index_sequence<J...>) const
+    {
+      using res_t = kumi::builder_make_t<T, kumi::element_t<J + I, T>...>;
+      return res_t{get<J + I>(KUMI_FWD(t))...};
+    }
+  };
 
   //====================================================================================================================
   /**
@@ -105,25 +115,18 @@ namespace kumi
     @include doc/record/algo/windows.cpp
   **/
   //====================================================================================================================
-  template<std::size_t N, kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto windows(T&& t)
-  {
-    static_assert(N > 0 && N <= kumi::size_v<T>, "[KUMI] - Invalid tile size");
-    if constexpr (N == kumi::size_v<T>) return kumi::make_tuple(t);
-    else
-    {
-      constexpr auto bs = std::integral_constant<std::size_t, kumi::_::nb_blocks(kumi::size_v<T>, N, 1)>{};
-      constexpr auto proj = kumi::function::tiler(kumi::index<kumi::size_v<T>>, kumi::index<N>, kumi::index<1>,
-                                                  std::make_index_sequence<bs>{});
-      auto const build = [&]<std::size_t... J>(auto O, std::index_sequence<J...>) {
-        using type = builder_make_t<T, kumi::element_t<O + J, T>...>;
-        return type{get<O + J>(KUMI_FWD(t))...};
-      };
-
-      return [&]<std::size_t... B, std::size_t... E>(std::index_sequence<B...>, std::index_sequence<E...>) {
-        return kumi::tuple{build(kumi::index<E>, std::make_index_sequence<B>{})...};
-      }(get<0>(proj), get<1>(proj));
-    }
-  }
+  // template<std::size_t N, kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto windows(T&& t)
+  //{
+  //  static_assert(N > 0 && N <= kumi::size_v<T>, "[KUMI] - Invalid tile size");
+  //  if constexpr (N == kumi::size_v<T>) return kumi::make_tuple(t);
+  //  else
+  //  {
+  //    constexpr auto bs = std::integral_constant<std::size_t, kumi::_::nb_blocks(kumi::size_v<T>, N, 1)>{};
+  //    constexpr auto proj = kumi::function::tiler(kumi::index<kumi::size_v<T>>, kumi::index<N>, kumi::index<1>,
+  //                                                std::make_index_sequence<bs>{});
+  //    return _::tile_(KUMI_FWD(t), get<0>(proj), get<1>(proj));
+  //  }
+  //}
 
   //====================================================================================================================
   /**
@@ -162,26 +165,25 @@ namespace kumi
     @include doc/record/algo/chunks.cpp
   **/
   //====================================================================================================================
-  template<std::size_t N, kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto chunks(T&& t)
-  {
-    static_assert(N > 0 && N <= kumi::size_v<T>, "[KUMI] - Invalid tile size");
+  // template<std::size_t N, kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto chunks(T&& t)
+  //{
+  //  static_assert(N > 0 && N <= kumi::size_v<T>, "[KUMI] - Invalid tile size");
 
-    if constexpr (N == kumi::size_v<T>) return kumi::make_tuple(t);
-    else
-    {
-      constexpr auto bs = std::integral_constant<std::size_t, kumi::_::nb_blocks(kumi::size_v<T>, N, N)>{};
-      constexpr auto proj =
-        function::tiler(kumi::index<kumi::size_v<T>>, kumi::index<N>, kumi::index<N>, std::make_index_sequence<bs>{});
-      auto const build = [&]<std::size_t... J>(auto O, std::index_sequence<J...>) {
-        using type = builder_make_t<T, kumi::element_t<O + J, T>...>;
-        return type{get<O + J>(KUMI_FWD(t))...};
-      };
+  //  if constexpr (N == kumi::size_v<T>) return kumi::make_tuple(t);
+  //  else
+  //  {
+  //    constexpr auto bs = std::integral_constant<std::size_t, kumi::_::nb_blocks(kumi::size_v<T>, N, N)>{};
+  //    constexpr auto proj =
+  //      function::tiler(kumi::index<kumi::size_v<T>>, kumi::index<N>, kumi::index<N>, std::make_index_sequence<bs>{});
+  //    return _::tile_(KUMI_FWD(t), get<0>(proj), get<1>(proj));
+  //  }
+  //}
 
-      return [&]<std::size_t... B, std::size_t... E>(std::index_sequence<B...>, std::index_sequence<E...>) {
-        return kumi::tuple{build(kumi::index<E>, std::make_index_sequence<B>{})...};
-      }(get<0>(proj), get<1>(proj));
-    }
-  }
+  template<std::size_t N, std::size_t O> inline constexpr tiles_t<N, O> tiles{};
+
+  template<std::size_t N> inline constexpr tiles_t<N, 1> windows{};
+
+  template<std::size_t N> inline constexpr tiles_t<N, N> chunks{};
 
   namespace result
   {

@@ -43,53 +43,55 @@ namespace kumi
     @include doc/record/algo/apply.cpp
   **/
   //====================================================================================================================
-  template<typename Function, kumi::concepts::product_type T>
-  KUMI_ABI constexpr decltype(auto) apply(Function&& f, T&& t)
-    noexcept(kumi::_::supports_nothrow_apply<Function&&, T&&>)
-#ifndef KUMI_DOXYGEN_INVOKED
-  requires(kumi::_::supports_apply<Function, T>)
-#endif
+  struct apply_t
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return kumi::invoke(KUMI_FWD(f));
-    else if constexpr (kumi::concepts::record_type<T>) return kumi::apply(KUMI_FWD(f), kumi::values_of(KUMI_FWD(t)));
-    else
-      return [&]<std::size_t... I>(std::index_sequence<I...>) -> decltype(auto) {
-        return kumi::invoke(KUMI_FWD(f), get<I>(KUMI_FWD(t))...);
-      }(std::make_index_sequence<kumi::size_v<T>>{});
-  }
+    template<typename Function, kumi::concepts::product_type T>
+    KUMI_ABI constexpr decltype(auto) operator()(Function&& f, T&& t) const
+      noexcept(kumi::_::supports_nothrow_apply<Function&&, T&&>)
+#ifndef KUMI_DOXYGEN_INVOKED
+    requires(kumi::_::supports_apply<Function, T>)
+#endif
+    {
+      if constexpr (kumi::concepts::record_type<T>) return (*this)(KUMI_FWD(f), kumi::values_of(KUMI_FWD(t)));
+      else return (*this)(KUMI_FWD(f), KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T>>{});
+    }
+
+  protected:
+    template<typename F, typename T, std::size_t... I>
+    KUMI_ABI constexpr decltype(auto) operator()(F&& f, T&& t, std::index_sequence<I...>) const
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return kumi::invoke(KUMI_FWD(f));
+      else return kumi::invoke(KUMI_FWD(f), get<I>(KUMI_FWD(t))...);
+    }
+  };
+
+  struct apply_field_t : private apply_t
+  {
+    template<typename Function, kumi::concepts::record_type R>
+    KUMI_ABI constexpr decltype(auto) operator()(Function&& f, R&& t) const
+    {
+      return (*this)(KUMI_FWD(f), KUMI_FWD(t), std::make_index_sequence<kumi::size_v<R>>{});
+    }
+  };
+
+  inline constexpr apply_t apply{};
+  inline constexpr apply_field_t apply_field{};
 
   namespace result
   {
+
     template<typename Function, kumi::concepts::product_type T> struct apply
     {
       using type = decltype(kumi::apply(std::declval<Function>(), std::declval<T>()));
     };
 
+    template<typename Function, kumi::concepts::record_type R> struct apply_field
+    {
+      using type = decltype(kumi::apply_field(std::declval<Function>(), std::declval<R>()));
+    };
+
     template<typename Function, kumi::concepts::product_type T> using apply_t = typename apply<Function, T>::type;
-  }
 
-  namespace _
-  {
-    template<typename Function, kumi::concepts::record_type R>
-    KUMI_ABI constexpr decltype(auto) apply_field(Function&& f, R&& t)
-    {
-      if constexpr (kumi::concepts::empty_product_type<R>) return kumi::invoke(KUMI_FWD(f));
-      else
-        return [&]<std::size_t... I>(std::index_sequence<I...>) -> decltype(auto) {
-          return kumi::invoke(KUMI_FWD(f), get<I>(KUMI_FWD(t))...);
-        }(std::make_index_sequence<kumi::size_v<R>>{});
-      ;
-    }
-
-    namespace result
-    {
-      template<typename Function, kumi::concepts::record_type R> struct apply_field
-      {
-        using type = decltype(kumi::_::apply_field(std::declval<Function>(), std::declval<R>()));
-      };
-
-      template<typename Function, concepts::record_type R>
-      using apply_field_t = typename apply_field<Function, R>::type;
-    }
+    template<typename Function, concepts::record_type R> using apply_field_t = typename apply_field<Function, R>::type;
   }
 }

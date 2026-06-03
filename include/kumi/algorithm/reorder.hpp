@@ -48,11 +48,14 @@ namespace kumi
     @include doc/record/algo/reorder.cpp
   **/
   //====================================================================================================================
-  template<std::size_t... Idx, kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto reorder(T&& t)
+  template<std::size_t... Idx> struct reorder_t
   {
-    static_assert(((Idx < kumi::size_v<T>) && ...), "[KUMI] - Index out of bounds");
-    return builder<T>::make(get<Idx>(KUMI_FWD(t))...);
-  }
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
+    {
+      static_assert(((Idx < kumi::size_v<T>) && ...), "[KUMI] - Index out of bounds");
+      return builder<T>::make(get<Idx>(KUMI_FWD(t))...);
+    }
+  };
 
   //====================================================================================================================
   /**
@@ -88,13 +91,15 @@ namespace kumi
     @include doc/record/algo/reorder_fields.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::identifier auto... Name, kumi::concepts::product_type Tuple>
-  [[nodiscard]] KUMI_ABI constexpr auto reorder_fields(Tuple&& t)
+  template<kumi::concepts::identifier auto... Name> struct reorder_fields_t
   {
-    static_assert((requires { get<Name>(std::declval<Tuple>()); } && ...),
-                  "[KUMI] - Identifier not present in input type");
-    return builder<Tuple>::make(Name = get<Name>(KUMI_FWD(t))...);
-  }
+    template<kumi::concepts::product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto operator()(Tuple&& t) const
+    {
+      static_assert((requires { get<Name>(std::declval<Tuple>()); } && ...),
+                    "[KUMI] - Identifier not present in input type");
+      return builder<Tuple>::make(Name = get<Name>(KUMI_FWD(t))...);
+    }
+  };
 
   //====================================================================================================================
   /**
@@ -133,26 +138,35 @@ namespace kumi
     @include doc/record/algo/reindex.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::projection_map auto Projections, kumi::concepts::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto reindex(T&& t)
+  template<kumi::concepts::projection_map auto Projections> struct reindex_t
   {
-    using proj_t = std::remove_cvref_t<decltype(Projections)>;
-    auto mk = [&]<kumi::concepts::projection auto proj>() -> decltype(auto) {
-      if constexpr (kumi::concepts::projection_map<decltype(proj)>) return kumi::reindex<proj>(KUMI_FWD(t));
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
+    {
+      using proj_t = std::remove_cvref_t<decltype(Projections)>;
+      if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
+      else if constexpr (proj_t::size() == 0) return builder<T>::make();
+      else return (*this)(KUMI_FWD(t), Projections);
+    }
+
+    template<typename T, auto... E> constexpr auto operator()(T&& t, kumi::projection_map<E...>) const
+    {
+      return kumi::builder<T>::make(visit<E>(KUMI_FWD(t))...);
+    }
+
+    template<kumi::concepts::projection auto P, typename T> static constexpr auto visit(T&& t)
+    {
+      if constexpr (kumi::concepts::projection_map<decltype(P)>) return kumi::reindex_t<P>{}(KUMI_FWD(t));
       else
       {
-        static_assert(requires { get<proj>(std::declval<T>()); }, "[KUMI] - Invalid projection for input type");
-        return get<proj>(KUMI_FWD(t));
+        static_assert(requires { get<P>(std::declval<T>()); }, "[KUMI] - Invalid projection for input type");
+        return get<P>(KUMI_FWD(t));
       }
-    };
+    }
+  };
 
-    if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
-    else if constexpr (proj_t::size() == 0) return builder<T>::make();
-    else
-      return [&]<auto... E>(kumi::projection_map<E...>) {
-        return builder<T>::make(mk.template operator()<E>()...);
-      }(Projections);
-  }
+  template<std::size_t... I> inline constexpr reorder_t<I...> reorder{};
+  template<kumi::concepts::identifier auto... Name> inline constexpr reorder_fields_t<Name...> reorder_fields{};
+  template<kumi::concepts::projection_map auto Projections> inline constexpr reindex_t<Projections> reindex{};
 
   namespace result
   {

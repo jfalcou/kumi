@@ -46,7 +46,7 @@ namespace kumi
     //==================================================================================================================
     /**
       @ingroup  functional
-      @brief    Logic provider to compute the index map associated to the adjactent unicity operation.
+      @brief    Logic provider to compute the index map associated to the all_unique operation.
 
       ## Callable object
       @code
@@ -59,24 +59,31 @@ namespace kumi
       template<typename... Ts> KUMI_ABI consteval auto operator()(std::type_identity<Ts>...) const noexcept
       {
         using type = kumi::_::make_multiset_t<std::make_index_sequence<sizeof...(Ts)>, Ts...>;
-        constexpr type impl{};
+        return (*this)(type{}, std::make_index_sequence<sizeof...(Ts)>{}, std::type_identity<Ts>{}...);
+      }
 
-        struct
-        {
-          std::size_t e[sizeof...(Ts)], count = {};
-        } that{};
+      template<typename T, std::size_t... I, typename... Ts>
+      consteval auto operator()(T&&, std::index_sequence<I...>, std::type_identity<Ts>...) const noexcept
+      {
+        return (*this)(std::integer_sequence<bool, (T{}(std::type_identity<Ts>{}) == I)...>{});
+      }
 
-        [&]<std::size_t... I>(std::index_sequence<I...>) {
-          ((void)(impl(std::type_identity<Ts>{}) == I ? (that.e[that.count++] = I) : 0), ...);
-        }(std::make_index_sequence<sizeof...(Ts)>{});
-        return that;
+      template<bool... b> consteval auto operator()(std::integer_sequence<bool, b...> bs) const noexcept
+      {
+        return (*this)(bs, std::make_index_sequence<(b + ... + 0)>{});
+      }
+
+      template<bool... b, std::size_t... I>
+      consteval auto operator()(std::integer_sequence<bool, b...>, std::index_sequence<I...>) const noexcept
+      {
+        return std::index_sequence<(kumi::_::nth_pos(I, b...))...>{};
       }
     };
 
     //==================================================================================================================
     /**
       @ingroup  functional
-      @brief    Logic provider to compute the index map associated to the adjactent unicity operation.
+      @brief    Logic provider to compute the index map associated to the partition operation.
 
       ## Callable object
       @code
@@ -88,26 +95,24 @@ namespace kumi
     {
       template<bool... Bs> KUMI_ABI consteval auto operator()(std::bool_constant<Bs>...) const noexcept
       {
-        struct
-        {
-          std::size_t count = {}, cut = {}, t[sizeof...(Bs)];
-        } that{};
+        return (*this)(std::integer_sequence<bool, Bs...>{}, std::make_index_sequence<(Bs + ... + 0)>{},
+                       std::make_index_sequence<(sizeof...(Bs) - (Bs + ... + 0))>{});
+      }
 
-        auto locate = [&]<std::size_t... I>(std::index_sequence<I...>) {
-          ((void)(Bs ? (that.t[that.count++] = I) : 0), ...);
-          that.cut = that.count;
-          ((void)(!Bs ? (that.t[that.count++] = I) : 0), ...);
-        };
-
-        locate(std::make_index_sequence<sizeof...(Bs)>{});
-        return that;
+      template<bool... b, std::size_t... I, std::size_t... J>
+      consteval auto operator()(std::integer_sequence<bool, b...>,
+                                std::index_sequence<I...>,
+                                std::index_sequence<J...>) const noexcept
+      {
+        return kumi::projection_map{std::index_sequence<(kumi::_::nth_pos(I, b...))...>{},
+                                    std::index_sequence<(kumi::_::nth_pos(J, !b...))...>{}};
       }
     };
 
     //==================================================================================================================
     /**
       @ingroup  functional
-      @brief    Logic provider to compute the index map associated to the adjactent unicity operation.
+      @brief    Logic provider to compute the index map associated to the adjacent unicity operation.
 
       ## Callable object
       @code
@@ -119,21 +124,27 @@ namespace kumi
     {
       template<kumi::concepts::product_type T> KUMI_ABI consteval auto operator()(kumi::as<T>) const noexcept
       {
-        struct
-        {
-          std::size_t count{1}, t[kumi::size_v<T>];
-        } that{};
+        return (*this)(kumi::as<T>{}, std::make_index_sequence<kumi::size_v<T> - 1>{});
+      }
 
-        that.t[0] = 0;
+      template<typename T, std::size_t... I>
+      consteval auto operator()(kumi::as<T>, std::index_sequence<I...>) const noexcept
+      {
+        constexpr auto proj =
+          std::integer_sequence<bool,
+                                !std::is_same_v<kumi::stored_element_t<I, T>, kumi::stored_element_t<I + 1, T>>...>{};
+        return (*this)(proj);
+      }
 
-        [&]<std::size_t... I>(std::index_sequence<I...>) {
-          ((void)((std::is_same_v<kumi::stored_element_t<I, T>, kumi::stored_element_t<I + 1, T>>)
-                    ? I
-                    : (that.t[that.count++] = I + 1)),
-           ...);
-        }(std::make_index_sequence<kumi::size_v<T> - 1>{});
+      template<bool... b> consteval auto operator()(std::integer_sequence<bool, b...> bs) const noexcept
+      {
+        return (*this)(bs, std::make_index_sequence<(b + ... + 0)>{});
+      }
 
-        return that;
+      template<bool... b, std::size_t... I>
+      consteval auto operator()(std::integer_sequence<bool, b...>, std::index_sequence<I...>) const noexcept
+      {
+        return std::index_sequence<0, (kumi::_::nth_pos(I, b...) + 1)...>{};
       }
     };
 

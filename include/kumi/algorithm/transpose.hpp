@@ -41,28 +41,38 @@ namespace kumi
     @include doc/record/algo/transpose.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto transpose(T&& t)
+  struct transpose_t
   {
-    static_assert(_::supports_transpose<T>, "[KUMI] - Cannot transpose given product type");
-    if constexpr (kumi::concepts::empty_product_type<T>) return kumi::tuple{};
-    else if constexpr (kumi::concepts::record_type<T>) return kumi::transpose(kumi::values_of(KUMI_FWD(t)));
-    else
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
-      constexpr std::size_t count = kumi::size_v<T>;
-      constexpr std::size_t size = kumi::size_v<kumi::element_t<0, T>>;
-      constexpr auto pos = kumi::function::zipper(kumi::index<count>, kumi::index<size>);
+      static_assert(kumi::_::supports_transpose<T>, "[KUMI] - Cannot transpose given product type");
+      if constexpr (kumi::concepts::empty_product_type<T>) return kumi::tuple{};
+      else if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)));
+      else
+      {
+        constexpr std::size_t c = kumi::size_v<T>;
+        constexpr std::size_t s = kumi::size_v<kumi::element_t<0, T>>;
+        constexpr auto pos = kumi::function::zipper(kumi::index<c>, kumi::index<s>);
 
-      auto maps = [&]<std::size_t... I>(auto k, std::index_sequence<I...>) {
-        using type =
-          builder_make_t<kumi::element_t<0, T>, kumi::element_t<k, std::remove_cvref_t<kumi::element_t<I, T>>>...>;
-        return type{get<k>(get<I>(KUMI_FWD(t)))...};
-      };
-
-      return [&]<std::size_t... N>(std::index_sequence<N...>) {
-        return kumi::make_tuple(maps(kumi::index<N>, get<0>(pos))...);
-      }(get<1>(pos));
+        // auto&& test = kumi::bind_back(cp2<kumi::element_t<0, T>>, KUMI_FWD(t), get<0>(pos));
+        return (*this)(KUMI_FWD(t), get<1>(pos), get<0>(pos));
+      }
     }
-  }
+
+    template<typename T, std::size_t... I, std::size_t... J>
+    KUMI_ABI constexpr decltype(auto) operator()(T&& t, std::index_sequence<I...>, std::index_sequence<J...> is) const
+    {
+      return kumi::make_tuple((*this)(KUMI_FWD(t), kumi::index<I>, is)...);
+    }
+
+    template<std::size_t E, typename T, std::size_t... I>
+    KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<E>, std::index_sequence<I...>) const noexcept
+    {
+      return kumi::builder<kumi::element_t<0, T>>::make(get<E>(get<I>(KUMI_FWD(t)))...);
+    }
+  };
+
+  inline constexpr transpose_t transpose{};
 
   namespace result
   {

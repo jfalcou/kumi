@@ -9,6 +9,15 @@
 
 namespace kumi
 {
+  struct splitter_t
+  {
+    template<typename T, std::size_t... I> KUMI_ABI constexpr auto operator()(T&& t, std::index_sequence<I...>) const
+    {
+      using res_t = kumi::builder_make_t<T, kumi::element_t<I, T>...>;
+      return res_t{get<I>(KUMI_FWD(t))...};
+    }
+  };
+
   //====================================================================================================================
   /**
     @ingroup  generators
@@ -40,25 +49,22 @@ namespace kumi
     @include doc/record/algo/partition.cpp
   **/
   //====================================================================================================================
-  template<template<typename> typename Pred, kumi::concepts::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto partition(T&& t) noexcept
+  template<template<typename> typename Pred> struct partition_t : private splitter_t
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return kumi::tuple{builder<T>::make(), builder<T>::make()};
-    else
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
     {
-      constexpr auto pos = []<std::size_t... I>(std::index_sequence<I...>) {
-        return kumi::function::selector(std::bool_constant<Pred<kumi::stored_element_t<I, T>>::value>{}...);
-      }(std::make_index_sequence<kumi::size_v<T>>{});
+      if constexpr (kumi::concepts::empty_product_type<T>) return kumi::tuple{builder<T>::make(), builder<T>::make()};
+      else
+      {
+        constexpr auto pos = []<std::size_t... I>(std::index_sequence<I...>) {
+          return kumi::function::selector(std::bool_constant<Pred<kumi::stored_element_t<I, T>>::value>{}...);
+        }(std::make_index_sequence<kumi::size_v<T>>{});
 
-      auto select = [&]<typename O, std::size_t... I>(O, std::index_sequence<I...>) {
-        using type = builder_make_t<T, kumi::element_t<pos.t[O::value + I], T>...>;
-        return type{get<pos.t[O::value + I]>(KUMI_FWD(t))...};
-      };
-
-      return kumi::tuple{select(kumi::index<0>, std::make_index_sequence<pos.cut>{}),
-                         select(kumi::index<pos.cut>, std::make_index_sequence<kumi::size_v<T> - pos.cut>{})};
+        return kumi::tuple{this->splitter_t::operator()(KUMI_FWD(t), get<0>(pos)),
+                           this->splitter_t::operator()(KUMI_FWD(t), get<1>(pos))};
+      }
     }
-  }
+  };
 
   //====================================================================================================================
   /**
@@ -90,22 +96,21 @@ namespace kumi
     @include doc/record/algo/filter.cpp
   **/
   //====================================================================================================================
-  template<template<typename> typename Pred, kumi::concepts::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto filter(T&& t) noexcept
+  template<template<typename> typename Pred> struct filter_t : private splitter_t
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
-    else
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
     {
-      constexpr auto pos = []<std::size_t... I>(std::index_sequence<I...>) {
-        return kumi::function::selector(std::bool_constant<Pred<kumi::stored_element_t<I, T>>::value>{}...);
-      }(std::make_index_sequence<kumi::size_v<T>>{});
+      if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
+      else
+      {
+        constexpr auto pos = []<std::size_t... I>(std::index_sequence<I...>) {
+          return kumi::function::selector(std::bool_constant<Pred<kumi::stored_element_t<I, T>>::value>{}...);
+        }(std::make_index_sequence<kumi::size_v<T>>{});
 
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = builder_make_t<T, kumi::element_t<pos.t[I], T>...>;
-        return type{get<pos.t[I]>(KUMI_FWD(t))...};
-      }(std::make_index_sequence<pos.cut>{});
+        return this->splitter_t::operator()(KUMI_FWD(t), get<0>(pos));
+      }
     }
-  }
+  };
 
   //====================================================================================================================
   /**
@@ -137,22 +142,27 @@ namespace kumi
     @include doc/record/algo/filter_not.cpp
   **/
   //====================================================================================================================
-  template<template<typename> typename Pred, kumi::concepts::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto filter_not(T&& t) noexcept
+  template<template<typename> typename Pred> struct filter_not_t : private splitter_t
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
-    else
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
     {
-      constexpr auto pos = []<std::size_t... I>(std::index_sequence<I...>) {
-        return function::selector(std::bool_constant<Pred<kumi::stored_element_t<I, T>>::value>{}...);
-      }(std::make_index_sequence<kumi::size_v<T>>{});
+      if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
+      else
+      {
+        constexpr auto pos = []<std::size_t... I>(std::index_sequence<I...>) {
+          return function::selector(std::bool_constant<Pred<kumi::stored_element_t<I, T>>::value>{}...);
+        }(std::make_index_sequence<kumi::size_v<T>>{});
 
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = builder_make_t<T, kumi::element_t<pos.t[pos.cut + I], T>...>;
-        return type{get<pos.t[pos.cut + I]>(KUMI_FWD(t))...};
-      }(std::make_index_sequence<kumi::size_v<T> - pos.cut>{});
+        return this->splitter_t::operator()(KUMI_FWD(t), get<1>(pos));
+      }
     }
-  }
+  };
+
+  template<template<typename> typename Pred> inline constexpr partition_t<Pred> partition{};
+
+  template<template<typename> typename Pred> inline constexpr filter_t<Pred> filter{};
+
+  template<template<typename> typename Pred> inline constexpr filter_not_t<Pred> filter_not{};
 
   namespace result
   {

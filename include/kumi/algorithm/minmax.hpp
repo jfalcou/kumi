@@ -9,6 +9,15 @@
 
 namespace kumi
 {
+  struct minmax_t
+  {
+    template<typename F, typename T, typename V, std::size_t N, std::size_t... I>
+    constexpr auto operator()(F f, T&& t, V v, kumi::index_t<N>, std::index_sequence<I...>) const
+    {
+      return (kumi::function::foldable{v} >> ... >> kumi::bind_back(f, get<I + N>(KUMI_FWD(t))))();
+    }
+  };
+
   //====================================================================================================================
   /**
     @ingroup  reductions
@@ -36,18 +45,33 @@ namespace kumi
     @include doc/record/algo/max.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto max(T&& t) noexcept
+  struct max_t : private minmax_t
   {
-    if constexpr (kumi::concepts::record_type<T>) return kumi::max(kumi::values_of(KUMI_FWD(t)));
-    else if constexpr (kumi::concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
-    else
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
     {
-      auto const f = [](auto cur, auto u) { return cur > u ? cur : u; };
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (kumi::function::foldable{get<0>(KUMI_FWD(t))} >> ... >> kumi::bind_back(f, get<I + 1>(KUMI_FWD(t))))();
-      }(std::make_index_sequence<kumi::size_v<T> - 1>{});
+      if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)));
+      else if constexpr (kumi::concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
+      else
+      {
+        auto const f = [](auto cur, auto u) { return cur > u ? cur : u; };
+        return this->minmax_t::operator()(f, KUMI_FWD(t), get<0>(KUMI_FWD(t)), kumi::index<1>,
+                                          std::make_index_sequence<kumi::size_v<T> - 1>{});
+      }
     }
-  }
+
+    template<kumi::concepts::product_type T, typename F>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, F f) const noexcept
+    {
+      if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)), f);
+      else if constexpr (kumi::concepts::sized_product_type<T, 1>) return invoke(f, get<0>(KUMI_FWD(t)));
+      else
+      {
+        auto const c = [f](auto cur, auto const& u) { return cur > invoke(f, u) ? cur : invoke(f, u); };
+        return this->minmax_t::operator()(c, KUMI_FWD(t), kumi::invoke(f, get<0>(KUMI_FWD(t))), kumi::index<1>,
+                                          std::make_index_sequence<kumi::size_v<T> - 1>{});
+      }
+    }
+  };
 
   //====================================================================================================================
   /**
@@ -77,18 +101,6 @@ namespace kumi
     @include doc/record/algo/max.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto max(T&& t, F f) noexcept
-  {
-    if constexpr (kumi::concepts::record_type<T>) return kumi::max(kumi::values_of(KUMI_FWD(t)), f);
-    else if constexpr (kumi::concepts::sized_product_type<T, 1>) return invoke(f, get<0>(KUMI_FWD(t)));
-    else
-    {
-      auto const c = [f](auto cur, auto const& u) { return cur > invoke(f, u) ? cur : invoke(f, u); };
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (function::foldable{invoke(f, get<0>(KUMI_FWD(t)))} >> ... >> bind_back(c, get<I + 1>(KUMI_FWD(t))))();
-      }(std::make_index_sequence<kumi::size_v<T> - 1>{});
-    }
-  }
 
   //====================================================================================================================
   /**
@@ -118,19 +130,27 @@ namespace kumi
     @include doc/record/algo/max_flat.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T, typename F>
-  [[nodiscard]] KUMI_ABI constexpr auto max_flat(T&& t, F f) noexcept
+  struct max_flat_t : private kumi::max_t
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return 0;
-    else if constexpr (kumi::concepts::record_type<T>) return kumi::max_flat(kumi::values_of(KUMI_FWD(t)), f);
-    else
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return kumi::max(kumi::make_tuple([&]<typename V>(V&& v) {
-          if constexpr (kumi::concepts::product_type<V>) return kumi::max_flat(KUMI_FWD(v), f);
+    template<kumi::concepts::product_type T, typename F>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, F f) const noexcept
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return 0;
+      else if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)), f);
+      else return (*this)(KUMI_FWD(t), f, std::make_index_sequence<kumi::size_v<T>>{});
+    }
+
+    template<typename T, typename F, std::size_t... I>
+    constexpr auto operator()(T&& t, F f, std::index_sequence<I...>) const
+    {
+      return this->max_t::operator()(kumi::make_tuple(
+
+        [&]<typename V, typename C>(V && v, C c) {
+          if constexpr (kumi::concepts::product_type<V>) return c(KUMI_FWD(v), f);
           else return kumi::invoke(f, v);
-        }(get<I>(KUMI_FWD(t)))...));
-      }(std::make_index_sequence<kumi::size_v<T>>{});
-  }
+        }(get<I>(KUMI_FWD(t)), (*this))...));
+    }
+  };
 
   //====================================================================================================================
   /**
@@ -159,18 +179,33 @@ namespace kumi
     @include doc/record/algo/min.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto min(T&& t) noexcept
+  struct min_t : private minmax_t
   {
-    if constexpr (kumi::concepts::record_type<T>) return kumi::min(kumi::values_of(KUMI_FWD(t)));
-    else if constexpr (kumi::concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
-    else
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
     {
-      auto const f = [](auto cur, auto u) { return cur < u ? cur : u; };
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (kumi::function::foldable{get<0>(KUMI_FWD(t))} >> ... >> kumi::bind_back(f, get<I + 1>(KUMI_FWD(t))))();
-      }(std::make_index_sequence<kumi::size_v<T> - 1>{});
+      if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)));
+      else if constexpr (kumi::concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
+      else
+      {
+        auto const f = [](auto cur, auto u) { return cur < u ? cur : u; };
+        return this->minmax_t::operator()(f, KUMI_FWD(t), get<0>(KUMI_FWD(t)), kumi::index<1>,
+                                          std::make_index_sequence<kumi::size_v<T> - 1>{});
+      }
     }
-  }
+
+    template<kumi::concepts::product_type T, typename F>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, F f) const noexcept
+    {
+      if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)), f);
+      else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::invoke(f, get<0>(KUMI_FWD(t)));
+      else
+      {
+        auto const c = [f](auto cur, auto const& u) { return cur < invoke(f, u) ? cur : invoke(f, u); };
+        return this->minmax_t::operator()(c, KUMI_FWD(t), kumi::invoke(f, get<0>(KUMI_FWD(t))), kumi::index<1>,
+                                          std::make_index_sequence<kumi::size_v<T> - 1>{});
+      }
+    }
+  };
 
   //====================================================================================================================
   /**
@@ -200,19 +235,6 @@ namespace kumi
     @include doc/record/algo/min.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T, typename F> [[nodiscard]] KUMI_ABI constexpr auto min(T&& t, F f) noexcept
-  {
-    if constexpr (kumi::concepts::record_type<T>) return kumi::min(kumi::values_of(KUMI_FWD(t)), f);
-    else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::invoke(f, get<0>(KUMI_FWD(t)));
-    else
-    {
-      auto const c = [f](auto cur, auto const& u) { return cur < invoke(f, u) ? cur : invoke(f, u); };
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (function::foldable{kumi::invoke(f, get<0>(KUMI_FWD(t)))} >> ... >>
-                kumi::bind_back(c, get<I + 1>(KUMI_FWD(t))))();
-      }(std::make_index_sequence<kumi::size_v<T> - 1>{});
-    }
-  }
 
   //====================================================================================================================
   /**
@@ -242,19 +264,32 @@ namespace kumi
     @include doc/record/algo/min_flat.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T, typename F>
-  [[nodiscard]] KUMI_ABI constexpr auto min_flat(T&& t, F f) noexcept
+  struct min_flat_t : private kumi::min_t
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return 0;
-    else if constexpr (kumi::concepts::record_type<T>) return kumi::min_flat(kumi::values_of(KUMI_FWD(t)), f);
-    else
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return kumi::min(kumi::make_tuple([&]<typename V>(V&& v) {
-          if constexpr (kumi::concepts::product_type<V>) return kumi::min_flat(KUMI_FWD(v), f);
+    template<kumi::concepts::product_type T, typename F>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, F f) const noexcept
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return 0;
+      else if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)), f);
+      else return (*this)(KUMI_FWD(t), f, std::make_index_sequence<kumi::size_v<T>>{});
+    }
+
+    template<typename T, typename F, std::size_t... I>
+    constexpr auto operator()(T&& t, F f, std::index_sequence<I...>) const
+    {
+      return this->min_t::operator()(kumi::make_tuple(
+
+        [&]<typename V, typename C>(V && v, C c) {
+          if constexpr (kumi::concepts::product_type<V>) return c(KUMI_FWD(v), f);
           else return kumi::invoke(f, v);
-        }(get<I>(KUMI_FWD(t)))...));
-      }(std::make_index_sequence<kumi::size_v<T>>{});
-  }
+        }(get<I>(KUMI_FWD(t)), (*this))...));
+    }
+  };
+
+  inline constexpr max_t max{};
+  inline constexpr max_flat_t max_flat{};
+  inline constexpr min_t min{};
+  inline constexpr min_flat_t min_flat{};
 
   namespace result
   {

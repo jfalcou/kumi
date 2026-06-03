@@ -25,49 +25,52 @@ namespace kumi
       using base = make_binder_t<std::make_index_sequence<sizeof...(Bound)>, Bound...>;
       using callable = leaf<static_cast<std::size_t>(-1), F>;
 
-      template<typename... Args> constexpr decltype(auto) operator()(Args&&... args) &
+      template<typename... Args> KUMI_ABI constexpr decltype(auto) operator()(Args&&... args) &
       {
-        return impl(seq, KUMI_FWD(args)...);
+        return impl(seq, *this, KUMI_FWD(args)...);
       }
 
-      template<typename... Args> constexpr decltype(auto) operator()(Args&&... args) const&
+      template<typename... Args> KUMI_ABI constexpr decltype(auto) operator()(Args&&... args) const&
       {
-        return impl(seq, KUMI_FWD(args)...);
+        return impl(seq, *this, KUMI_FWD(args)...);
       }
 
-      template<std::size_t... Is, typename... Args>
-      constexpr decltype(auto) impl(std::index_sequence<Is...>, Args&&... args) const&
+      template<typename... Args> KUMI_ABI constexpr decltype(auto) operator()(Args&&... args) &&
       {
+        return impl(seq, std::move(*this), KUMI_FWD(args)...);
+      }
+
+      template<typename... Args> KUMI_ABI constexpr decltype(auto) operator()(Args&&... args) const&&
+      {
+        return impl(seq, std::move(*this), KUMI_FWD(args)...);
+      }
+
+      template<std::size_t... Is, typename Self, typename... Args>
+      KUMI_ABI static constexpr decltype(auto) impl(std::index_sequence<Is...>, Self&& s, Args&&... args)
+      {
+        using c_qual = match_qualifiers_t<Self, callable>;
+        using b_qual = match_qualifiers_t<Self, base>;
+
+        auto&& c = static_cast<c_qual>(s);
+        auto&& b = static_cast<b_qual>(s);
+
         if constexpr (D == Binding::front)
         {
-          return kumi::invoke(
-            static_cast<callable const&>(*this)(std::integral_constant<size_t, static_cast<std::size_t>(-1)>{}),
-            static_cast<base const&>(*this)(std::integral_constant<std::size_t, Is>{})..., KUMI_FWD(args)...);
+          return kumi::invoke(KUMI_FWD(c)(std::integral_constant<size_t, static_cast<std::size_t>(-1)>{}),
+                              KUMI_FWD(b)(std::integral_constant<std::size_t, Is>{})..., KUMI_FWD(args)...);
         }
         else
         {
-          return kumi::invoke(
-            static_cast<callable const&>(*this)(std::integral_constant<size_t, static_cast<std::size_t>(-1)>{}),
-            KUMI_FWD(args)..., static_cast<base const&>(*this)(std::integral_constant<std::size_t, Is>{})...);
+          return kumi::invoke(KUMI_FWD(c)(std::integral_constant<size_t, static_cast<std::size_t>(-1)>{}),
+                              KUMI_FWD(args)..., KUMI_FWD(b)(std::integral_constant<std::size_t, Is>{})...);
         }
       }
 
-      template<std::size_t... Is, typename... Args>
-      constexpr decltype(auto) impl(std::index_sequence<Is...>, Args&&... args) &
-      {
-        if constexpr (D == Binding::front)
-        {
-          return kumi::invoke(
-            static_cast<callable&>(*this)(std::integral_constant<size_t, static_cast<std::size_t>(-1)>{}),
-            static_cast<base&>(*this)(std::integral_constant<std::size_t, Is>{})..., KUMI_FWD(args)...);
-        }
-        else
-        {
-          return kumi::invoke(
-            static_cast<callable&>(*this)(std::integral_constant<size_t, static_cast<std::size_t>(-1)>{}),
-            KUMI_FWD(args)..., static_cast<base&>(*this)(std::integral_constant<std::size_t, Is>{})...);
-        }
-      }
+      template<typename Source, typename Target>
+      using match_qualifiers_t = std::conditional_t<
+        std::is_lvalue_reference_v<Source>,
+        std::conditional_t<std::is_const_v<std::remove_reference_t<Source>>, Target const&, Target&>,
+        std::conditional_t<std::is_const_v<std::remove_reference_t<Source>>, Target const&&, Target&&>>;
     };
   }
 

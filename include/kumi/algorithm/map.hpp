@@ -9,6 +9,44 @@
 
 namespace kumi
 {
+  namespace _
+  {
+    struct map_t
+    {
+      template<typename F, typename T, typename... Ts> constexpr auto operator()(auto N, F f, T&& t, Ts&&... ts) const
+      {
+        if constexpr (kumi::concepts::record_type<T>)
+        {
+          constexpr auto field = kumi::identifier_of<kumi::element_t<N, T>>();
+          return kumi::capture_field<field>(kumi::invoke(f, get<field>(KUMI_FWD(t)), get<field>(KUMI_FWD(ts))...));
+        }
+        else return kumi::invoke(f, get<N>(KUMI_FWD(t)), get<N>(KUMI_FWD(ts))...);
+      }
+    };
+
+    struct map_index_t
+    {
+      constexpr auto operator()(auto N, auto f, auto&&... args) const
+      {
+        return kumi::invoke(f, N, get<N>(KUMI_FWD(args))...);
+      }
+    };
+
+    struct map_field_t
+    {
+      template<typename F, typename T, typename... Ts> constexpr auto operator()(auto N, F f, T&& t, Ts&&... ts) const
+      {
+        constexpr auto field = kumi::identifier_of<kumi::element_t<N, T>>();
+        return kumi::capture_field<field>(
+          kumi::invoke(f, kumi::_::make_str(field), get<field>(KUMI_FWD(t)), get<field>(KUMI_FWD(ts))...));
+      }
+    };
+
+    inline constexpr map_t map_{};
+    inline constexpr map_index_t map_index_{};
+    inline constexpr map_field_t map_field_{};
+  }
+
   //====================================================================================================================
   /**
     @ingroup  transforms
@@ -47,30 +85,29 @@ namespace kumi
     @include doc/record/algo/map.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T, typename Function, kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
-  [[nodiscard]] KUMI_ABI constexpr auto map(Function f, T&& t0, Ts&&... others)
-  requires(kumi::concepts::compatible_product_types<T, Ts...>)
-#ifndef KUMI_DOXYGEN_INVOKED
-          && (kumi::_::supports_call<Function, T &&, Ts && ...>)
-#endif
+  struct map_t
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
-    else
+    template<typename Function,
+             kumi::concepts::product_type T,
+             kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, T&& t0, Ts&&... others) const
+    requires(kumi::concepts::compatible_product_types<T, Ts...>)
+#ifndef KUMI_DOXYGEN_INVOKED
+            && (kumi::_::supports_call<Function, T &&, Ts && ...>)
+#endif
     {
-      auto const call{[&](auto const N, auto&&... args) {
-        if constexpr (kumi::concepts::record_type<T>)
-        {
-          constexpr auto field = kumi::identifier_of<kumi::element_t<N, T>>();
-          return kumi::capture_field<field>(kumi::invoke(f, get<field>(KUMI_FWD(args))...));
-        }
-        else return kumi::invoke(f, get<N>(KUMI_FWD(args))...);
-      }};
-
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return builder<T>::make(call(kumi::index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
-      }(std::make_index_sequence<kumi::size_v<T>>{});
+      auto&& test = kumi::bind_back(_::map_, f, KUMI_FWD(t0), KUMI_FWD(others)...);
+      return map_(KUMI_FWD(t0), KUMI_FWD(test), std::make_index_sequence<kumi::size_v<T>>{});
     }
-  }
+
+  protected:
+    template<typename T, typename F, std::size_t... I>
+    KUMI_ABI constexpr decltype(auto) map_(T&&, F&& f, std::index_sequence<I...>) const
+    {
+      if constexpr (sizeof...(I) == 0) return builder<T>::make();
+      else return kumi::builder<T>::make(kumi::invoke(KUMI_FWD(f), kumi::index<I>)...);
+    }
+  };
 
   //====================================================================================================================
   /**
@@ -108,20 +145,18 @@ namespace kumi
     @include doc/tuple/algo/map_index.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T, typename Function, kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
-  [[nodiscard]] KUMI_ABI constexpr auto map_index(Function f, T&& t0, Ts&&... others)
-  requires(!kumi::concepts::record_type<T> && (!kumi::concepts::record_type<Ts> && ...))
+  struct map_index_t : private kumi::map_t
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
-    else
+    template<kumi::concepts::product_type T,
+             typename Function,
+             kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, T&& t0, Ts&&... others) const
+    requires(!kumi::concepts::record_type<T> && (!kumi::concepts::record_type<Ts> && ...))
     {
-      auto const call{[&](auto const N, auto&&... args) { return kumi::invoke(f, N, get<N>(KUMI_FWD(args))...); }};
-
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return builder<T>::make(call(kumi::index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
-      }(std::make_index_sequence<kumi::size_v<T>>{});
+      auto&& tmp = kumi::bind_back(_::map_index_, f, KUMI_FWD(t0), KUMI_FWD(others)...);
+      return this->map_t::map_(KUMI_FWD(t0), KUMI_FWD(tmp), std::make_index_sequence<kumi::size_v<T>>{});
     }
-  }
+  };
 
   //====================================================================================================================
   /**
@@ -159,23 +194,22 @@ namespace kumi
     @include doc/record/algo/map_field.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::record_type T, typename Function, kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
-  [[nodiscard]] KUMI_ABI constexpr auto map_field(Function f, T&& t0, Ts&&... others)
-  requires(kumi::concepts::compatible_product_types<T, Ts...>)
+  struct map_field_t : private kumi::map_t
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
-    else
+    template<kumi::concepts::record_type T,
+             typename Function,
+             kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, T&& t0, Ts&&... others) const
+    requires(kumi::concepts::compatible_product_types<T, Ts...>)
     {
-      auto const call{[&](auto const N, auto&&... args) {
-        constexpr auto field = kumi::identifier_of<kumi::element_t<N, T>>();
-        return kumi::capture_field<field>(kumi::invoke(f, kumi::_::make_str(field), (get<field>(args))...));
-      }};
-
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return builder<T>::make(call(kumi::index<I>, KUMI_FWD(t0), KUMI_FWD(others)...)...);
-      }(std::make_index_sequence<kumi::size_v<T>>{});
+      auto&& tmp = kumi::bind_back(_::map_field_, f, KUMI_FWD(t0), KUMI_FWD(others)...);
+      return this->map_t::map_(KUMI_FWD(t0), KUMI_FWD(tmp), std::make_index_sequence<kumi::size_v<T>>{});
     }
-  }
+  };
+
+  inline constexpr map_t map{};
+  inline constexpr map_index_t map_index{};
+  inline constexpr map_field_t map_field{};
 
   namespace result
   {

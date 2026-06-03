@@ -38,26 +38,34 @@ namespace kumi
     @include doc/record/algo/member_cast.cpp
   **/
   //====================================================================================================================
-  template<typename Target, kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto member_cast(T&& t)
+  template<typename Target> struct member_cast_t
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return t;
-    else if constexpr (kumi::concepts::record_type<T>)
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = builder_make_t<T, kumi::result::field_cast_t<Target, kumi::element_t<I, T>>...>;
-        return type{kumi::field_cast<Target>(get<I>(KUMI_FWD(t)))...};
-      }(std::make_index_sequence<kumi::size_v<T>>{});
-    else
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
-      using type = kumi::_::as_homogeneous_t<Target, kumi::size_v<T>>;
-      return static_cast<type>(KUMI_FWD(t));
+      if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
+      else if constexpr (kumi::concepts::record_type<T>)
+        return member_cast_(KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T>>{});
+      else
+      {
+        using type = kumi::_::as_homogeneous_t<Target, kumi::size_v<T>>;
+        return static_cast<type>(KUMI_FWD(t));
+      }
     }
-  }
+
+    template<typename T, std::size_t... I>
+    KUMI_ABI constexpr decltype(auto) member_cast_(T&& t, std::index_sequence<I...>) const
+    {
+      return kumi::builder<T>::make(kumi::field_cast<Target>(get<I>(KUMI_FWD(t)))...);
+    }
+  };
+
+  template<typename T> inline constexpr member_cast_t<T> member_cast{};
 
   namespace result
   {
     template<typename Target, kumi::concepts::product_type T> struct member_cast
     {
-      using type = decltype(kumi::member_cast<Target, T>(std::declval<T>()));
+      using type = decltype(kumi::member_cast<Target>(std::declval<T>()));
     };
 
     template<typename Target, kumi::concepts::product_type T>

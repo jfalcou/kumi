@@ -39,11 +39,15 @@ namespace kumi
     @include doc/record/algo/back-front.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::non_empty_product_type T> [[nodiscard]] KUMI_ABI constexpr decltype(auto) front(T&& t)
+  struct front_t
   {
-    if constexpr (kumi::concepts::record_type<T>) return kumi::front(kumi::values_of(KUMI_FWD(t)));
-    else return get<0>(KUMI_FWD(t));
-  }
+    template<kumi::concepts::non_empty_product_type T>
+    [[nodiscard]] KUMI_ABI constexpr decltype(auto) operator()(T&& t) const
+    {
+      if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)));
+      else return get<0>(KUMI_FWD(t));
+    }
+  };
 
   //====================================================================================================================
   /**
@@ -75,11 +79,18 @@ namespace kumi
     @include doc/record/algo/back-front.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::non_empty_product_type T> [[nodiscard]] KUMI_ABI constexpr decltype(auto) back(T&& t)
+  struct back_t
   {
-    if constexpr (kumi::concepts::record_type<T>) return kumi::back(values_of(KUMI_FWD(t)));
-    else return get<kumi::size_v<T> - 1>(KUMI_FWD(t));
-  }
+    template<kumi::concepts::non_empty_product_type T>
+    [[nodiscard]] KUMI_ABI constexpr decltype(auto) operator()(T&& t) const
+    {
+      if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)));
+      else return get<kumi::size_v<T> - 1>(KUMI_FWD(t));
+    }
+  };
+
+  inline constexpr front_t front{};
+  inline constexpr back_t back{};
 
   namespace result
   {

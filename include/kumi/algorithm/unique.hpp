@@ -38,18 +38,26 @@ namespace kumi
     @include doc/record/algo/unique.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto unique(T&& t)
+  struct unique_t
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
-    else
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
-      constexpr auto pos = function::uniqued(as<T>{});
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using ret_t = builder_make_t<T, kumi::element_t<pos.t[I], T>...>;
-        return ret_t{get<pos.t[I]>(KUMI_FWD(t))...};
-      }(std::make_index_sequence<pos.count>{});
+      if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
+      else if constexpr (kumi::concepts::sized_product_type<T, 1>) return KUMI_FWD(t);
+      else
+      {
+        constexpr auto proj = kumi::function::uniqued(as<T>{});
+        return (*this)(KUMI_FWD(t), proj);
+      }
     }
-  }
+
+    template<typename T, std::size_t... I>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, std::index_sequence<I...>) const
+    {
+      using res_t = kumi::builder_make_t<T, kumi::element_t<I, T>...>;
+      return res_t{get<I>(KUMI_FWD(t))...};
+    }
+  };
 
   //====================================================================================================================
   /**
@@ -81,21 +89,31 @@ namespace kumi
     @include doc/record/algo/all_unique.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto all_unique(T&& t)
+  struct all_unique_t
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return t;
-    else
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
-      constexpr auto proj = [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return kumi::function::uniquer(std::type_identity<kumi::stored_element_t<I, T>>{}...);
-      }(std::make_index_sequence<kumi::size_v<T>>{});
+      if constexpr (kumi::concepts::empty_product_type<T>) return t;
+      else
+      {
+        constexpr auto proj = [&]<std::size_t... I>(std::index_sequence<I...>) {
+          return kumi::function::uniquer(std::type_identity<kumi::stored_element_t<I, T>>{}...);
+        }(std::make_index_sequence<kumi::size_v<T>>{});
 
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = builder_make_t<T, kumi::element_t<proj.e[I], T>...>;
-        return type{get<proj.e[I]>(KUMI_FWD(t))...};
-      }(std::make_index_sequence<proj.count>{});
+        return (*this)(KUMI_FWD(t), proj);
+      }
     }
-  }
+
+    template<typename T, std::size_t... I>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, std::index_sequence<I...>) const
+    {
+      using res_t = kumi::builder_make_t<T, kumi::element_t<I, T>...>;
+      return res_t{get<I>(KUMI_FWD(t))...};
+    }
+  };
+
+  inline constexpr unique_t unique{};
+  inline constexpr all_unique_t all_unique{};
 
   namespace result
   {

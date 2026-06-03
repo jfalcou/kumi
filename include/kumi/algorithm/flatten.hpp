@@ -41,33 +41,41 @@ namespace kumi
     @include doc/record/algo/flatten.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto flatten(T&& t)
+  struct flatten_t
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return t;
-    else
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
-      constexpr auto proj = [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return kumi::function::concatenater(
-          std::index_sequence<kumi::function::size_or_v<kumi::stored_element_t<I, T>, 1>...>{});
-      }(std::make_index_sequence<kumi::size_v<T>>{});
+      if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
+      else
+      {
+        constexpr auto proj = [&]<std::size_t... I>(std::index_sequence<I...>) {
+          return kumi::function::concatenater(
+            std::index_sequence<kumi::function::size_or_v<kumi::stored_element_t<I, T>, 1>...>{});
+        }(std::make_index_sequence<kumi::size_v<T>>{});
 
-      auto process = [&]<typename V>(auto J, V&& v) {
-        using FV = kumi::result::field_value_of_t<V>;
-        if constexpr (kumi::concepts::record_type<FV> && kumi::concepts::record_type<T>)
-        {
-          constexpr auto new_name = kumi::label_of<V>() + kumi::label_of<kumi::element_t<J, FV>>();
-          return (
-            kumi::capture_field<name<new_name>{}>(kumi::field_value_of(get<J>(kumi::field_value_of(KUMI_FWD(v))))));
-        }
-        else if constexpr (kumi::concepts::follows_same_semantic<T, V>) return get<J>(KUMI_FWD(v));
-        else return KUMI_FWD(v);
-      };
-
-      return [&]<std::size_t... J, std::size_t... I>(std::index_sequence<J...>, std::index_sequence<I...>) {
-        return builder<T>::make(process(kumi::index<J>, get<I>(KUMI_FWD(t)))...);
-      }(get<1>(proj), get<0>(proj));
+        return (*this)(KUMI_FWD(t), get<1>(proj), get<0>(proj));
+      }
     }
-  }
+
+    template<typename T, std::size_t... J, std::size_t... I>
+    constexpr auto operator()(T&& t, std::index_sequence<J...>, std::index_sequence<I...>) const
+    {
+      return kumi::builder<T>::make(visit<T>(KUMI_FWD(t), kumi::index<J>, get<I>(KUMI_FWD(t)))...);
+    }
+
+  private:
+    template<typename T, typename V> KUMI_ABI static constexpr auto visit(T&&, auto J, V&& v)
+    {
+      using FV = kumi::result::field_value_of_t<V>;
+      if constexpr (kumi::concepts::record_type<FV> && kumi::concepts::record_type<T>)
+      {
+        constexpr auto new_name = kumi::label_of<V>() +  kumi::label_of<kumi::element_t<J, FV>>();
+        return (kumi::capture_field<name<new_name>{}>(kumi::field_value_of(get<J>(kumi::field_value_of(KUMI_FWD(v))))));
+      }
+      else if constexpr (kumi::concepts::follows_same_semantic<T, V>) return get<J>(KUMI_FWD(v));
+      else return KUMI_FWD(v);
+    }
+  };
 
   //====================================================================================================================
   /**
@@ -108,47 +116,44 @@ namespace kumi
     @include doc/record/algo/flatten_all.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T, typename Func>
-  [[nodiscard]] KUMI_ABI constexpr auto flatten_all(T&& t, Func f)
+  struct flatten_all_t : private kumi::flatten_t
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return t;
-    else
+    template<kumi::concepts::product_type T, typename Func>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, Func f) const
     {
-      auto process = [&]<typename V>(V&& v) {
-        using FV = kumi::result::field_value_of_t<V>;
-        if constexpr (kumi::concepts::record_type<FV> && kumi::concepts::record_type<T>)
-          return kumi::capture_field<kumi::identifier_of<V>()>(kumi::flatten_all(kumi::field_value_of(KUMI_FWD(v)), f));
-        else if constexpr (kumi::concepts::follows_same_semantic<T, V>) return kumi::flatten_all(KUMI_FWD(v), f);
-        else if constexpr (kumi::concepts::record_type<T> && kumi::concepts::field<V>)
-          return kumi::capture_field<kumi::identifier_of<V>()>(kumi::invoke(f, kumi::field_value_of(v)));
-        else return kumi::invoke(f, v);
-      };
-
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return kumi::flatten(builder<T>::make(process(get<I>(KUMI_FWD(t)))...));
-      }(std::make_index_sequence<kumi::size_v<T>>{});
+      if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
+      else return this->flatten_t::operator()((*this)(KUMI_FWD(t), f, std::make_index_sequence<kumi::size_v<T>>{}));
     }
-  }
 
-  /// @overload
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto flatten_all(T&& t)
-  {
-    if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
-    else
+    /// @overload
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
-      auto process = [&]<typename V>(V&& v) {
-        using FV = kumi::result::field_value_of_t<V>;
-        if constexpr (kumi::concepts::record_type<FV> && concepts::record_type<T>)
-          return kumi::capture_field<kumi::identifier_of<V>()>(kumi::flatten_all(kumi::field_value_of(KUMI_FWD(v))));
-        else if constexpr (kumi::concepts::follows_same_semantic<T, V>) return kumi::flatten_all(KUMI_FWD(v));
-        else return KUMI_FWD(v);
-      };
-
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return kumi::flatten(builder<T>::make(process(get<I>(KUMI_FWD(t)))...));
-      }(std::make_index_sequence<kumi::size_v<T>>{});
+      if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
+      else
+      {
+        auto f = [](auto&& e) -> decltype(auto) { return KUMI_FWD(e); };
+        return this->flatten_t::operator()((*this)(KUMI_FWD(t), f, std::make_index_sequence<kumi::size_v<T>>{}));
+      }
     }
-  }
+
+    template<typename T, typename F, std::size_t... I>
+    constexpr auto operator()(T&& t, F f, std::index_sequence<I...>) const
+    {
+      return kumi::builder<T>::make(visit(KUMI_FWD(t), get<I>(KUMI_FWD(t)), f, *this)...);
+    }
+
+  private:
+    template<typename T, typename V, typename F, typename Self> static constexpr auto visit(T&&, V&& v, F f, Self s)
+    {
+      using FV = kumi::result::field_value_of_t<V>;
+      if constexpr (kumi::concepts::record_type<FV> && kumi::concepts::record_type<T>)
+        return kumi::capture_field<kumi::identifier_of<V>()>(s(kumi::field_value_of(KUMI_FWD(v)), f));
+      else if constexpr (kumi::concepts::follows_same_semantic<T, V>) return s(KUMI_FWD(v), f);
+      else if constexpr (kumi::concepts::record_type<T> && kumi::concepts::field<V>)
+        return kumi::capture_field<kumi::identifier_of<V>()>(kumi::invoke(f, kumi::field_value_of(KUMI_FWD(v))));
+      else return kumi::invoke(f, KUMI_FWD(v));
+    }
+  };
 
   //====================================================================================================================
   /**
@@ -182,10 +187,17 @@ namespace kumi
     @include doc/record/algo/as_flat_ptr.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI auto as_flat_ptr(T&& t) noexcept
+  struct as_flat_ptr_t : private kumi::flatten_all_t
   {
-    return kumi::flatten_all(KUMI_FWD(t), [](auto& m) { return &m; });
-  }
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI auto operator()(T&& t) const noexcept
+    {
+      return this->flatten_all_t::operator()(KUMI_FWD(t), [](auto& m) { return &m; });
+    }
+  };
+
+  inline constexpr flatten_t flatten{};
+  inline constexpr flatten_all_t flatten_all{};
+  inline constexpr as_flat_ptr_t as_flat_ptr{};
 
   namespace result
   {

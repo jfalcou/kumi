@@ -46,36 +46,32 @@ namespace kumi
     @include doc/record/algo/extract.cpp
   **/
   //====================================================================================================================
-  template<std::size_t I0, std::size_t I1, kumi::concepts::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto extract(T&& t,
-                                                [[maybe_unused]] kumi::index_t<I0> i0,
-                                                [[maybe_unused]] kumi::index_t<I1> i1) noexcept
+  struct extract_t
   {
-    static_assert((I0 <= kumi::size_v<T>) && (I1 <= kumi::size_v<T>), "[KUMI] - Invalid index");
-    return [&]<std::size_t... N>(std::index_sequence<N...>) {
-      using final_t = builder_make_t<T, kumi::element_t<N + I0, T>...>;
-      return final_t{get<N + I0>(KUMI_FWD(t))...};
-    }(std::make_index_sequence<I1 - I0>{});
-  }
-
-  //! @overload
-  template<std::size_t I0, kumi::concepts::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto extract(T&& t, kumi::index_t<I0> i0) noexcept
-  {
-    static_assert(I0 <= kumi::size_v<T>, "[KUMI] - Invalid index");
-    return kumi::extract(KUMI_FWD(t), i0, kumi::index<size_v<T>>);
-  }
-
-  struct select_inner
-  {
-    template<typename T, std::size_t... I> constexpr auto operator()(T&& t, std::index_sequence<I...>) const noexcept
+    template<std::size_t I0, std::size_t I1, kumi::concepts::product_type T>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t,
+                                                     [[maybe_unused]] kumi::index_t<I0> i0,
+                                                     [[maybe_unused]] kumi::index_t<I1> i1) const noexcept
     {
-      using type = builder_make_t<T, kumi::element_t<I, T>...>;
-      return type{get<I>(KUMI_FWD(t))...};
+      static_assert((I0 <= kumi::size_v<T>) && (I1 <= kumi::size_v<T>), "[KUMI] - Invalid index");
+      return (*this)(KUMI_FWD(t), i0, std::make_index_sequence<I1 - I0>{});
+    }
+
+    //! @overload
+    template<std::size_t I0, kumi::concepts::product_type T>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<I0> i0) const noexcept
+    {
+      static_assert(I0 <= kumi::size_v<T>, "[KUMI] - Invalid index");
+      return (*this)(KUMI_FWD(t), i0, kumi::index<size_v<T>>);
+    }
+
+  protected:
+    template<typename T, std::size_t N, std::size_t... I>
+    KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<N>, std::index_sequence<I...>) const
+    {
+      return kumi::builder<T>::make(get<N + I>(KUMI_FWD(t))...);
     }
   };
-
-  inline constexpr select_inner select_i{};
 
   //====================================================================================================================
   /**
@@ -112,14 +108,21 @@ namespace kumi
     @include doc/record/algo/split.cpp
   **/
   //====================================================================================================================
-  template<std::size_t I0, kumi::concepts::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto split(T&& t, [[maybe_unused]] kumi::index_t<I0> i0) noexcept
+  struct split_t : private extract_t
   {
-    static_assert(I0 <= kumi::size_v<T>, "[KUMI] - Invalid index");
-    constexpr auto proj = kumi::function::splitter(kumi::index<I0>, std::make_index_sequence<kumi::size_v<T> - I0>{});
+    template<std::size_t I0, kumi::concepts::product_type T>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, [[maybe_unused]] kumi::index_t<I0> i0) const noexcept
+    {
+      static_assert(I0 <= kumi::size_v<T>, "[KUMI] - Invalid index");
+      constexpr auto proj = kumi::function::splitter(kumi::index<I0>, std::make_index_sequence<kumi::size_v<T> - I0>{});
 
-    return kumi::tuple{select_i(KUMI_FWD(t), get<0>(proj)), select_i(KUMI_FWD(t), get<1>(proj))};
-  }
+      return kumi::tuple{this->extract_t::operator()(KUMI_FWD(t), kumi::index<0>, get<0>(proj)),
+                         this->extract_t::operator()(KUMI_FWD(t), kumi::index<0>, get<1>(proj))};
+    }
+  };
+
+  inline constexpr extract_t extract{};
+  inline constexpr split_t split{};
 
   namespace result
   {
