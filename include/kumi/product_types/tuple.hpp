@@ -266,6 +266,8 @@ namespace kumi
             from the values of the source, if their size does not match or if they are the same type.
             The conversion is explicit if the conversion of some member to the target needs to be explicit.
 
+      @qualifier explicit
+
       This permits the conversion from a tuple<T>& to a tuple<T&> which makes it suitable
             for some zip-like cases such as building a structure of arrays iterator.
 
@@ -275,8 +277,12 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename... Us>
-    [[nodiscard]] KUMI_ABI explicit(!kumi::_::piecewise_convertible<tuple<Ts const&...>, tuple<Us...>>) constexpr
-    operator tuple<Us...>() const
+    [[nodiscard]] KUMI_ABI
+#ifndef KUMI_DOXYGEN_INVOKED
+      explicit(!kumi::_::piecewise_convertible<tuple<Ts const&...>, tuple<Us...>>)
+#endif
+        constexpr
+        operator tuple<Us...>() const
     requires(sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>)
 #ifndef KUMI_DOXYGEN_INVOKED
             && (kumi::_::piecewise_constructible<tuple<Ts const&...>, tuple<Us...>>)
@@ -289,8 +295,12 @@ namespace kumi
 
     /// @overload
     template<typename... Us>
-    [[nodiscard]] KUMI_ABI explicit(!kumi::_::piecewise_convertible<tuple<Ts&...>, tuple<Us...>>) constexpr
-    operator tuple<Us...>()
+    [[nodiscard]] KUMI_ABI
+#ifndef KUMI_DOXYGEN_INVOKED
+      explicit(!kumi::_::piecewise_convertible<tuple<Ts&...>, tuple<Us...>>)
+#endif
+        constexpr
+        operator tuple<Us...>()
     requires(sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>)
 #ifndef KUMI_DOXYGEN_INVOKED
             && (kumi::_::piecewise_constructible<tuple<Ts&...>, tuple<Us...>>)
@@ -674,7 +684,7 @@ namespace kumi
     @ingroup tuple_related
     @brief Generate a kumi::tuple type from a type
 
-    If `T` is a @ref kumi::kumi::concepts::product_type, returns the kumi::tuple type containing the same element
+    If `T` is a @ref kumi::concepts::product_type, returns the kumi::tuple type containing the same element
     as `T`. Otherwise, it returns `kumi::tuple<T>`.
 
     A template meta-function can be optionally passed to be applied to each of those types when
