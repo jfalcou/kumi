@@ -1711,8 +1711,12 @@ namespace kumi
     }
     [[nodiscard]] KUMI_ABI static constexpr auto labels() noexcept { return kumi::tuple{kumi::label_of<Ts>()...}; }
     template<typename... Us>
-    [[nodiscard]] KUMI_ABI explicit(!kumi::_::piecewise_convertible<tuple<Ts const&...>, tuple<Us...>>) constexpr
-    operator tuple<Us...>() const
+    [[nodiscard]] KUMI_ABI
+#ifndef KUMI_DOXYGEN_INVOKED
+      explicit(!kumi::_::piecewise_convertible<tuple<Ts const&...>, tuple<Us...>>)
+#endif
+        constexpr
+        operator tuple<Us...>() const
     requires(sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>)
 #ifndef KUMI_DOXYGEN_INVOKED
             && (kumi::_::piecewise_constructible<tuple<Ts const&...>, tuple<Us...>>)
@@ -1723,8 +1727,12 @@ namespace kumi
       }(std::make_index_sequence<sizeof...(Ts)>{});
     }
     template<typename... Us>
-    [[nodiscard]] KUMI_ABI explicit(!kumi::_::piecewise_convertible<tuple<Ts&...>, tuple<Us...>>) constexpr
-    operator tuple<Us...>()
+    [[nodiscard]] KUMI_ABI
+#ifndef KUMI_DOXYGEN_INVOKED
+      explicit(!kumi::_::piecewise_convertible<tuple<Ts&...>, tuple<Us...>>)
+#endif
+        constexpr
+        operator tuple<Us...>()
     requires(sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>)
 #ifndef KUMI_DOXYGEN_INVOKED
             && (kumi::_::piecewise_constructible<tuple<Ts&...>, tuple<Us...>>)
