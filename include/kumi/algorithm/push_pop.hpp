@@ -11,7 +11,7 @@ namespace kumi
 {
   //====================================================================================================================
   /**
-    @ingroup  queries
+    @ingroup  generators
     @brief    Constructs a product type by adding a value `v` at the beginning of `t`.
 
     @param t  Base product type
@@ -50,7 +50,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup  queries
+    @ingroup  generators
     @brief    Remove the first (if any) element of `t`.
 
     @param t  Base product type
