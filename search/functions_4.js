@@ -17,5 +17,5 @@ var searchData=
   ['forward_5fas_5ftuple_14',['forward_as_tuple',['../group__tuple__related_gac167a1000c9c61798b7d8c684f3c804b.html#gac167a1000c9c61798b7d8c684f3c804b',1,'kumi']]],
   ['from_5frecord_15',['from_record',['../group__record__related_ga772ac1518ac3bbe1627db9c00f56abdd.html#ga772ac1518ac3bbe1627db9c00f56abdd',1,'kumi']]],
   ['from_5ftuple_16',['from_tuple',['../group__tuple__related_ga81cca523672d8799bbe35fa4f07dd61f.html#ga81cca523672d8799bbe35fa4f07dd61f',1,'kumi']]],
-  ['front_17',['front',['../group__generators_ga04a99a08fa0578c39242f348dc19c8c7.html#ga04a99a08fa0578c39242f348dc19c8c7',1,'kumi']]]
+  ['front_17',['front',['../group__queries_ga04a99a08fa0578c39242f348dc19c8c7.html#ga04a99a08fa0578c39242f348dc19c8c7',1,'kumi']]]
 ];

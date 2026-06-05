@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="KUMI - The C++20 Compact Tuple Tools" />
 <meta name="twitter:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
 <meta name="twitter:image" content="https://jfalcou.github.io/kumi/card.png" />
-<title>KUMI: kumi::pop_front</title>
+<title>KUMI: kumi::back</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -139,7 +139,7 @@ $(function() { codefold.init(); });
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('group__queries_ga0067bdadcb60e0eeb405bd1021dd4f08.html','',''); });
+$(function(){initNavTree('group__queries_gacbfca9b5e95948e4180a54e920d19c6f.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -165,19 +165,19 @@ $(function(){initNavTree('group__queries_ga0067bdadcb60e0eeb405bd1021dd4f08.html
 </div>
 
 <div class="contents">
-<a id="ga0067bdadcb60e0eeb405bd1021dd4f08" name="ga0067bdadcb60e0eeb405bd1021dd4f08"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga0067bdadcb60e0eeb405bd1021dd4f08">&#9670;&#160;</a></span>pop_front()</h2>
+<a id="gacbfca9b5e95948e4180a54e920d19c6f" name="gacbfca9b5e95948e4180a54e920d19c6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacbfca9b5e95948e4180a54e920d19c6f">&#9670;&#160;</a></span>back()</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type</a> T&gt; </div>
+template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1non__empty__product__type.html">kumi::concepts::non_empty_product_type</a> T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto kumi::pop_front </td>
+          <td class="memname">decltype(auto) kumi::back </td>
           <td>(</td>
           <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
           <td></td>
@@ -190,29 +190,29 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1product__type.html">k
 </table>
 </div><div class="memdoc">
 
-<p>Remove the first (if any) element of <span class="tt">t</span>. </p>
+<p>Retrieves the back of a product type. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">t</td><td>Base product type </td></tr>
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>A product type composed of all elements of <span class="tt">t</span> except its first. Has no effect on empty product types.</dd></dl>
-<p>On record types, this function operates on elements as if they were ordered. The considered order is the order of declaration.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md166"></a>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the last element of the product type <span class="tt">t</span></dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function does not take part in overload resolution if t is an empty product type.</dd></dl>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;product_type T&gt; <span class="keyword">struct </span><a class="code hl_function" href="#ga0067bdadcb60e0eeb405bd1021dd4f08">pop_front</a>;</div>
+<div class="line">  <span class="keyword">template</span>&lt;product_type T&gt; <span class="keyword">struct </span><a class="code hl_function" href="#gacbfca9b5e95948e4180a54e920d19c6f">back</a>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">template</span>&lt;product_type T&gt;</div>
-<div class="line">  <span class="keyword">using </span>pop_front_t = <span class="keyword">typename</span> <a class="code hl_function" href="#ga0067bdadcb60e0eeb405bd1021dd4f08">pop_front&lt;T&gt;::type</a>;</div>
+<div class="line">  <span class="keyword">using </span>back_t = <span class="keyword">typename</span> <a class="code hl_function" href="#gacbfca9b5e95948e4180a54e920d19c6f">back&lt;T&gt;::type</a>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__queries_ga0067bdadcb60e0eeb405bd1021dd4f08_html_ga0067bdadcb60e0eeb405bd1021dd4f08"><div class="ttname"><a href="#ga0067bdadcb60e0eeb405bd1021dd4f08">kumi::pop_front</a></div><div class="ttdeci">constexpr auto pop_front(T &amp;&amp;t)</div><div class="ttdoc">Remove the first (if any) element of t.</div><div class="ttdef"><b>Definition</b> push_pop.hpp:82</div></div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga0067bdadcb60e0eeb405bd1021dd4f08" title="Remove the first (if any) element of t.">kumi::pop_front</a></p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md167"></a>
+<div class="ttc" id="agroup__queries_gacbfca9b5e95948e4180a54e920d19c6f_html_gacbfca9b5e95948e4180a54e920d19c6f"><div class="ttname"><a href="#gacbfca9b5e95948e4180a54e920d19c6f">kumi::back</a></div><div class="ttdeci">constexpr decltype(auto) back(T &amp;&amp;t)</div><div class="ttdoc">Retrieves the back of a product type.</div><div class="ttdef"><b>Definition</b> back_front.hpp:78</div></div>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gacbfca9b5e95948e4180a54e920d19c6f" title="Retrieves the back of a product type.">kumi::back</a></p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
 Examples:</h2>
-<h3 class="doxsection"><a class="anchor" id="autotoc_md168"></a>
+<h3 class="doxsection"><a class="anchor" id="autotoc_md10"></a>
 Tuple:</h3>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -220,14 +220,19 @@ Tuple:</h3>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#ga0067bdadcb60e0eeb405bd1021dd4f08">kumi::pop_front</a>( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{} )  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> x{2.3,18, 5.f};</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> t{1,2.,3.4f};</div>
-<div class="line">  std::cout &lt;&lt; t                    &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#ga0067bdadcb60e0eeb405bd1021dd4f08">kumi::pop_front</a>(t)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__queries_ga04a99a08fa0578c39242f348dc19c8c7.html#ga04a99a08fa0578c39242f348dc19c8c7">kumi::front</a>(x) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#gacbfca9b5e95948e4180a54e920d19c6f">kumi::back</a>(x)  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_function" href="group__queries_ga04a99a08fa0578c39242f348dc19c8c7.html#ga04a99a08fa0578c39242f348dc19c8c7">kumi::front</a>(x) = 98.5;</div>
+<div class="line">  <a class="code hl_function" href="#gacbfca9b5e95948e4180a54e920d19c6f">kumi::back</a>(x)  = 66.f;</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; x &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
+<div class="ttc" id="agroup__queries_ga04a99a08fa0578c39242f348dc19c8c7_html_ga04a99a08fa0578c39242f348dc19c8c7"><div class="ttname"><a href="group__queries_ga04a99a08fa0578c39242f348dc19c8c7.html#ga04a99a08fa0578c39242f348dc19c8c7">kumi::front</a></div><div class="ttdeci">constexpr decltype(auto) front(T &amp;&amp;t)</div><div class="ttdoc">Retrieves the front of a product type.</div><div class="ttdef"><b>Definition</b> back_front.hpp:42</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
-</div><!-- fragment --> <h3 class="doxsection"><a class="anchor" id="autotoc_md169"></a>
+</div><!-- fragment --> <h3 class="doxsection"><a class="anchor" id="autotoc_md11"></a>
 Record:</h3>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -236,11 +241,16 @@ Record:</h3>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#ga0067bdadcb60e0eeb405bd1021dd4f08">kumi::pop_front</a>( <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{} )  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> r{<span class="stringliteral">&quot;a&quot;</span>_id = 1,<span class="stringliteral">&quot;b&quot;</span>_id = 2.,<span class="stringliteral">&quot;c&quot;</span>_id = 3.4f};</div>
-<div class="line">  std::cout &lt;&lt; r                    &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#ga0067bdadcb60e0eeb405bd1021dd4f08">kumi::pop_front</a>(r)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> x{<span class="stringliteral">&quot;a&quot;</span>_id = 2.3,<span class="stringliteral">&quot;b&quot;</span>_id = 18, <span class="stringliteral">&quot;c&quot;</span>_id = 5.f};</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__queries_ga04a99a08fa0578c39242f348dc19c8c7.html#ga04a99a08fa0578c39242f348dc19c8c7">kumi::front</a>(x) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#gacbfca9b5e95948e4180a54e920d19c6f">kumi::back</a>(x)  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_function" href="group__queries_ga04a99a08fa0578c39242f348dc19c8c7.html#ga04a99a08fa0578c39242f348dc19c8c7">kumi::front</a>(x) = 98.5;</div>
+<div class="line">  <a class="code hl_function" href="#gacbfca9b5e95948e4180a54e920d19c6f">kumi::back</a>(x)  = 66.f;</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; x &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
 </div><!-- fragment --> 

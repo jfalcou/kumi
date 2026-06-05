@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['back_0',['back',['../group__generators_gacbfca9b5e95948e4180a54e920d19c6f.html#gacbfca9b5e95948e4180a54e920d19c6f',1,'kumi']]],
+  ['back_0',['back',['../group__queries_gacbfca9b5e95948e4180a54e920d19c6f.html#gacbfca9b5e95948e4180a54e920d19c6f',1,'kumi']]],
   ['bind_5fback_1',['bind_back',['../group__functional_ga02fbf71873458cc8a364a7f6efcfadf2.html#ga02fbf71873458cc8a364a7f6efcfadf2',1,'kumi']]],
   ['bind_5ffront_2',['bind_front',['../group__functional_ga08c383ce2fb100dda15baf96b4e60d2f.html#ga08c383ce2fb100dda15baf96b4e60d2f',1,'kumi']]],
   ['bit_5fand_3',['bit_and',['../group__reductions_ga14432e4394da47b90f34c962979da853.html#ga14432e4394da47b90f34c962979da853',1,'kumi::bit_and(T &amp;&amp;t, Value init)'],['../group__reductions_ga2249743d977a87399b3fd98b0cb2e55e.html#ga2249743d977a87399b3fd98b0cb2e55e',1,'kumi::bit_and(T &amp;&amp;t)']]],

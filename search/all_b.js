@@ -30,7 +30,7 @@ var searchData=
   ['from_20the_20source_27',['Install from the source',['../setup.html#setup-source',1,'']]],
   ['from_5frecord_28',['from_record',['../group__record__related_ga772ac1518ac3bbe1627db9c00f56abdd.html#ga772ac1518ac3bbe1627db9c00f56abdd',1,'kumi']]],
   ['from_5ftuple_29',['from_tuple',['../group__tuple__related_ga81cca523672d8799bbe35fa4f07dd61f.html#ga81cca523672d8799bbe35fa4f07dd61f',1,'kumi']]],
-  ['front_30',['front',['../group__generators_ga04a99a08fa0578c39242f348dc19c8c7.html#ga04a99a08fa0578c39242f348dc19c8c7',1,'kumi']]],
+  ['front_30',['front',['../group__queries_ga04a99a08fa0578c39242f348dc19c8c7.html#ga04a99a08fa0578c39242f348dc19c8c7',1,'kumi']]],
   ['fully_5fnamed_31',['fully_named',['../conceptkumi_1_1concepts_1_1fully__named.html',1,'kumi::concepts']]],
   ['function_32',['Helper Types and function',['../group__functional.html',1,'']]],
   ['functions_33',['Functions',['../group__details.html',1,'Helper Types and Functions'],['../group__utility.html',1,'Helper Types and Functions'],['../group__tuple__related.html',1,'Product Types and associated Functions'],['../group__record__related.html',1,'Record Types and associated Functions']]],

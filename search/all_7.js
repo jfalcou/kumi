@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['back_0',['back',['../group__generators_gacbfca9b5e95948e4180a54e920d19c6f.html#gacbfca9b5e95948e4180a54e920d19c6f',1,'kumi']]],
+  ['back_0',['back',['../group__queries_gacbfca9b5e95948e4180a54e920d19c6f.html#gacbfca9b5e95948e4180a54e920d19c6f',1,'kumi']]],
   ['base_20optimization_1',['Empty Base Optimization',['../cpp_spec.html#autotoc_md455',1,'']]],
   ['bedazzling_20beryl_2',['Version 2.0 - Bedazzling Beryl',['../changelog.html#autotoc_md448',1,'']]],
   ['beryl_3',['Version 2.0 - Bedazzling Beryl',['../changelog.html#autotoc_md448',1,'']]],
