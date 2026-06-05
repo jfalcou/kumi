@@ -17,7 +17,7 @@ var searchData=
   ['infrastructure_20changes_14',['Infrastructure Changes',['../changelog.html#autotoc_md440',1,'API and Infrastructure Changes'],['../changelog.html#autotoc_md435',1,'Infrastructure Changes']]],
   ['inner_5fproduct_15',['inner_product',['../group__reductions_ga152ee8c92e7bc5edc1600673dbd3d50c.html#ga152ee8c92e7bc5edc1600673dbd3d50c',1,'kumi::inner_product(S1 &amp;&amp;s1, S2 &amp;&amp;s2, T init, Sum sum, Prod prod) noexcept'],['../namespacekumi.html#ab2e255186fdc3ad952d0b28418ca06a3',1,'kumi::inner_product(S1 &amp;&amp;s1, S2 &amp;&amp;s2, T init) noexcept']]],
   ['install_20from_20the_20source_16',['Install from the source',['../setup.html#setup-source',1,'']]],
-  ['invoke_17',['invoke',['../group__functional_gaf1c366392fa05d8bd5da7b91902924af.html#gaf1c366392fa05d8bd5da7b91902924af',1,'kumi']]],
+  ['invoke_17',['invoke',['../group__functional_gace270cfbaa7b0d519fdf03f8225f2908.html#gace270cfbaa7b0d519fdf03f8225f2908',1,'kumi']]],
   ['invoke_5fr_18',['invoke_r',['../group__functional_ga2ad666793ad04ea9b66c84b83f41f375.html#ga2ad666793ad04ea9b66c84b83f41f375',1,'kumi']]],
   ['iota_19',['iota',['../group__generators_ga19ced0b66d1e3dae7bfa60f7def6914f.html#ga19ced0b66d1e3dae7bfa60f7def6914f',1,'kumi']]],
   ['is_5fcontainer_20',['is_container',['../structkumi_1_1is__container.html',1,'kumi']]],

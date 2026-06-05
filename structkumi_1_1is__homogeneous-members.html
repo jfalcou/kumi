@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="KUMI - The C++20 Compact Tuple Tools" />
 <meta name="twitter:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
 <meta name="twitter:image" content="https://jfalcou.github.io/kumi/card.png" />
-<title>KUMI: kumi::concepts::equivalent Concept Reference</title>
+<title>KUMI: Member List</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -139,7 +139,7 @@ $(function() { codefold.init(); });
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('conceptkumi_1_1concepts_1_1equivalent.html','',''); });
+$(function(){initNavTree('structkumi_1_1is__homogeneous.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -165,31 +165,18 @@ $(function(){initNavTree('conceptkumi_1_1concepts_1_1equivalent.html','',''); })
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">kumi::concepts::equivalent Concept Reference<div class="ingroups"><a class="el" href="group__concepts.html">Product Type Related Concepts</a></div></div></div>
+  <div class="headertitle"><div class="title">kumi::is_homogeneous&lt; T &gt; Member List</div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Concept specifying if two types have matching named fields.  
-<a href="#details">More...</a></p>
-
-<p><code>#include &lt;kumi/utils/concepts.hpp&gt;</code></p>
-<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Concept specifying if two types have matching named fields. </p>
-<p>A type <span class="tt">T</span> models <span class="tt"><a class="el" href="conceptkumi_1_1concepts_1_1equivalent.html" title="Concept specifying if two types have matching named fields.">kumi::concepts::equivalent</a>&lt;T,U&gt;</span> if it is a <a class="el" href="conceptkumi_1_1concepts_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::concepts::product_type</a> with the same number of fields as <span class="tt">U</span>, and each of them has a corresponding field in <span class="tt">U</span>. Corresponding field means that the labels of the fields in T matches those of U. </p>
-</div><h2 id="header-conceptdef" class="groupheader">Concept definition</h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt;</div>
-<div class="line">    <span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1concepts_1_1equivalent.html">equivalent</a> = <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type&lt;T&gt;</a> &amp;&amp; <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type&lt;U&gt;</a> &amp;&amp;</div>
-<div class="line">                         kumi::is_equivalent_v&lt;std::remove_cvref_t&lt;T&gt;, std::remove_cvref_t&lt;U&gt;&gt;</div>
-<div class="ttc" id="aconceptkumi_1_1concepts_1_1equivalent_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1equivalent.html">kumi::concepts::equivalent</a></div><div class="ttdoc">Concept specifying if two types have matching named fields.</div><div class="ttdef"><b>Definition</b> concepts.hpp:373</div></div>
-<div class="ttc" id="aconceptkumi_1_1concepts_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:76</div></div>
-</div><!-- fragment --></div><!-- contents -->
+<p>This is the complete list of members for <a class="el" href="structkumi_1_1is__homogeneous.html">kumi::is_homogeneous&lt; T &gt;</a>, including all inherited members.</p>
+</div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- HTML footer for doxygen 1.8.20-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="namespacekumi.html">kumi</a></li><li class="navelem"><b>concepts</b></li><li class="navelem"><a href="conceptkumi_1_1concepts_1_1equivalent.html">equivalent</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

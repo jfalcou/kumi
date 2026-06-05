@@ -1781,9 +1781,9 @@
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>invoke</name>
-      <anchorfile>group__functional_gaf1c366392fa05d8bd5da7b91902924af.html</anchorfile>
-      <anchor>gaf1c366392fa05d8bd5da7b91902924af</anchor>
-      <arglist>(C &amp;&amp;c, Ts &amp;&amp;... ts) noexcept(std::is_nothrow_invocable_v&lt; C, Ts... &gt;)</arglist>
+      <anchorfile>group__functional_gace270cfbaa7b0d519fdf03f8225f2908.html</anchorfile>
+      <anchor>gace270cfbaa7b0d519fdf03f8225f2908</anchor>
+      <arglist>(C &amp;&amp;c, Ts &amp;&amp;... ts)</arglist>
     </member>
     <member kind="function">
       <type>constexpr R</type>
@@ -2752,9 +2752,9 @@
     <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>kumi::invoke</name>
-      <anchorfile>group__functional_gaf1c366392fa05d8bd5da7b91902924af.html</anchorfile>
-      <anchor>gaf1c366392fa05d8bd5da7b91902924af</anchor>
-      <arglist>(C &amp;&amp;c, Ts &amp;&amp;... ts) noexcept(std::is_nothrow_invocable_v&lt; C, Ts... &gt;)</arglist>
+      <anchorfile>group__functional_gace270cfbaa7b0d519fdf03f8225f2908.html</anchorfile>
+      <anchor>gace270cfbaa7b0d519fdf03f8225f2908</anchor>
+      <arglist>(C &amp;&amp;c, Ts &amp;&amp;... ts)</arglist>
     </member>
     <member kind="function">
       <type>constexpr R</type>

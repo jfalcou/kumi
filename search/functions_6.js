@@ -7,7 +7,7 @@ var searchData=
   ['inclusive_5fscan_5fright_4',['inclusive_scan_right',['../group__reductions_gaa626c4c72c6c4f6ac575851c0dbf06bb.html#gaa626c4c72c6c4f6ac575851c0dbf06bb',1,'kumi::inclusive_scan_right(Function f, T &amp;&amp;t, Value init)'],['../group__reductions_ga12e5013494b9498224e311c8cf51a76c.html#ga12e5013494b9498224e311c8cf51a76c',1,'kumi::inclusive_scan_right(M &amp;&amp;m, T &amp;&amp;t)']]],
   ['indexes_5',['indexes',['../group__utility_ga6882a4ada4935fa0fd4ef32ce3716ffb.html#ga6882a4ada4935fa0fd4ef32ce3716ffb',1,'kumi']]],
   ['inner_5fproduct_6',['inner_product',['../group__reductions_ga152ee8c92e7bc5edc1600673dbd3d50c.html#ga152ee8c92e7bc5edc1600673dbd3d50c',1,'kumi::inner_product(S1 &amp;&amp;s1, S2 &amp;&amp;s2, T init, Sum sum, Prod prod) noexcept'],['../namespacekumi.html#ab2e255186fdc3ad952d0b28418ca06a3',1,'kumi::inner_product(S1 &amp;&amp;s1, S2 &amp;&amp;s2, T init) noexcept']]],
-  ['invoke_7',['invoke',['../group__functional_gaf1c366392fa05d8bd5da7b91902924af.html#gaf1c366392fa05d8bd5da7b91902924af',1,'kumi']]],
+  ['invoke_7',['invoke',['../group__functional_gace270cfbaa7b0d519fdf03f8225f2908.html#gace270cfbaa7b0d519fdf03f8225f2908',1,'kumi']]],
   ['invoke_5fr_8',['invoke_r',['../group__functional_ga2ad666793ad04ea9b66c84b83f41f375.html#ga2ad666793ad04ea9b66c84b83f41f375',1,'kumi']]],
   ['iota_9',['iota',['../group__generators_ga19ced0b66d1e3dae7bfa60f7def6914f.html#ga19ced0b66d1e3dae7bfa60f7def6914f',1,'kumi']]]
 ];
