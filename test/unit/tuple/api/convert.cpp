@@ -7,12 +7,10 @@
 //==================================================================================================
 #define TTS_MAIN
 #include <kumi/tuple.hpp>
-#include <kumi/algorithm.hpp>
 #include <tts/tts.hpp>
 #include "test.hpp"
 #include <array>
 #include <span>
-#include <string>
 
 struct my_product_type
 {
@@ -116,10 +114,10 @@ TTS_CASE("Check tuple to tuple conversion")
   TTS_EQUAL((static_cast<kumi::tuple<int, double>>(in)), (kumi::tuple{49, 62.5}));
   TTS_EQUAL((static_cast<kumi::tuple<char, int>>(in)), (kumi::tuple{'1', 62}));
 
-  TTS_EQUAL(static_cast<kumi::tuple<std::string>>(kumi::tuple{"some text"}), kumi::tuple{std::string("some text")});
-
   TTS_EXPECT_COMPILES(in, { takes_tuple_int(in); });
+
 #if !defined(__EDG__) || !defined(__EDG_VERSION__) // https://github.com/microsoft/STL/issues/1621
+  TTS_EQUAL(static_cast<kumi::tuple<tts::text>>(kumi::tuple{"some text"}), kumi::tuple{tts::text("some text")});
   TTS_EXPECT_COMPILES(in, { requires_cast(static_cast<kumi::tuple<ExpInt, ExpInt>>(in)); });
 #endif
   TTS_EXPECT_NOT_COMPILES(in, { requires_cast(in); });

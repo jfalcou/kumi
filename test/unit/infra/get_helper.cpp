@@ -6,9 +6,9 @@
 */
 //==================================================================================================
 #define TTS_MAIN
-#include "test.hpp"
 #include <kumi/kumi.hpp>
 #include <tts/tts.hpp>
+#include "test.hpp"
 
 namespace udt
 {

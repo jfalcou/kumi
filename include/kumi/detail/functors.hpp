@@ -10,13 +10,13 @@
 namespace kumi::_
 {
   //====================================================================================================================
-  KUMI_ABI consteval std::size_t min(std::same_as<std::size_t> auto... sizes)
+  KUMI_ABI consteval std::size_t min(std::same_as<std::size_t> auto... sizes) noexcept
   {
     std::size_t result = std::size_t(-1);
     return ((result = (result < sizes ? result : sizes)), ...);
   }
 
-  KUMI_ABI consteval std::size_t max(std::same_as<std::size_t> auto... sizes)
+  KUMI_ABI consteval std::size_t max(std::same_as<std::size_t> auto... sizes) noexcept
   {
     std::size_t result{};
     return ((result = (result > sizes ? result : sizes)), ...);
@@ -58,7 +58,16 @@ namespace kumi::_
   };
 
   //====================================================================================================================
-  KUMI_ABI consteval std::size_t block_size(std::size_t I, std::size_t Stride, std::size_t Extent, std::size_t Size)
+  KUMI_ABI consteval std::size_t nb_blocks(std::size_t Sz, std::size_t Stride, std::size_t Extent) noexcept
+  {
+    return (Sz <= Extent) ? 1 : (Sz - Extent + Stride - 1) / Stride + 1;
+  }
+
+  //====================================================================================================================
+  KUMI_ABI consteval std::size_t block_size(std::size_t I,
+                                            std::size_t Stride,
+                                            std::size_t Extent,
+                                            std::size_t Size) noexcept
   {
     std::size_t s = I * Stride;
     return (s < Size) ? ((s + Extent > Size) ? (Size - s) : Extent) : 0;
@@ -67,14 +76,11 @@ namespace kumi::_
   //====================================================================================================================
   struct digits_
   {
-    template<typename F, std::size_t Base, std::size_t... Is>
-    KUMI_ABI consteval auto operator()(F func,
-                                       std::integral_constant<std::size_t, Base>,
-                                       std::index_sequence<Is...>) const noexcept
+    template<typename F, std::size_t... Base, std::size_t... Is>
+    KUMI_ABI consteval auto operator()(F func, std::index_sequence<Base...>, std::index_sequence<Is...>) const noexcept
     {
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return std::index_sequence<func(I, Is...)...>{};
-      }(std::make_index_sequence<Base>{});
+      if constexpr (sizeof...(Base) == 0) return std::make_index_sequence<0>{};
+      else return std::index_sequence<func(Base, Is...)...>{};
     }
   };
 

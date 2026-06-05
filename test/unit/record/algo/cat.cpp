@@ -7,7 +7,7 @@
 //==================================================================================================
 #define TTS_MAIN
 #include <kumi/record.hpp>
-#include <kumi/algorithm.hpp>
+#include <kumi/algorithm/cat.hpp>
 #include <tts/tts.hpp>
 
 TTS_CASE("Check result::cat<record...> behavior")

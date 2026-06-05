@@ -9,7 +9,6 @@
 #include <kumi/tuple.hpp>
 #include <kumi/algorithm/unique.hpp>
 #include <tts/tts.hpp>
-#include <functional>
 #include "test.hpp"
 
 TTS_CASE("Check result::unique/all_unique<T> behavior")
@@ -44,7 +43,7 @@ TTS_CASE("Check runtime kumi::unique behavior")
             (kumi::tuple{1, 2.f, 3., 4, 'x', 12., short{55}}));
   TTS_EQUAL(kumi::unique(std::move(r)), (kumi::tuple{1, 3., 3, 'x', 12., short{55}}));
 
-  auto t = kumi::tuple{moveonly{}, 1, std::ref(a)};
+  auto t = kumi::tuple{moveonly{}, 1, &a};
   TTS_EXPECT_COMPILES(t, { kumi::unique(std::move(t)); });
 };
 
@@ -70,7 +69,7 @@ TTS_CASE("Check runtime kumi::all_unique behavior")
             (kumi::tuple{1, 2.f, 3., 'x', short{55}}));
   TTS_EQUAL(kumi::all_unique(std::move(r)), (kumi::tuple{1, 3., 'x', short{55}}));
 
-  auto t = kumi::tuple{moveonly{}, 1, std::ref(a)};
+  auto t = kumi::tuple{moveonly{}, 1, &a};
   TTS_EXPECT_COMPILES(t, { kumi::all_unique(std::move(t)); });
 };
 

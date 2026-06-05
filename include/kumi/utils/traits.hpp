@@ -286,18 +286,12 @@ namespace kumi
     @endcode
   **/
   //====================================================================================================================
-  template<typename T> struct is_homogeneous : std::false_type
-  {
-  };
-
-  // Specific is_homogeneous overload
-  template<typename T>
-  requires(kumi::is_product_type_v<T>)
-  struct is_homogeneous<T>
+  template<typename T> struct is_homogeneous
   {
     static consteval bool check()
     {
-      if constexpr (requires { T::is_homogeneous; }) return T::is_homogeneous;
+      if constexpr (!kumi::is_product_type_v<T>) return false;
+      else if constexpr (requires { T::is_homogeneous; }) return T::is_homogeneous;
       else if constexpr (kumi::is_record_type_v<T>) return false;
       else if constexpr (kumi::is_container_v<T>) return true;
       else if constexpr (kumi::size_v<T> == 0) return false;

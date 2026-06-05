@@ -10,7 +10,6 @@
 #include <kumi/kumi.hpp>
 #include <tuple>
 #include <array>
-#include <string>
 
 TTS_CASE("Check generic concepts on product_types"){
   TTS_WHEN("Initialize different product types"){using namespace kumi::literals;
@@ -25,11 +24,11 @@ using std_a_2 = std::array<int, 2>;
 using std_p_2 = std::pair<int, float>;
 
 using tuple_3 = kumi::tuple<int, char, float>;
-using tuple_3_nc = kumi::tuple<int, char, std::string>;
+using tuple_3_nc = kumi::tuple<int, char, tts::text>;
 
 using rec_ab = decltype(kumi::record{"a"_id = 1, "b"_id = 2.f});
 using rec_ab_alt = decltype(kumi::record{"a"_id = 10, "b"_id = 5.5f});
-using rec_ab_diff = decltype(kumi::record{"a"_id = 1, "b"_id = std::string{"hi"}});
+using rec_ab_diff = decltype(kumi::record{"a"_id = 1, "b"_id = tts::text{"hi"}});
 using rec_ba = decltype(kumi::record{"b"_id = 2.f, "a"_id = 1});
 using rec_xyz = decltype(kumi::record{"x"_id = 1, "y"_id = 2, "z"_id = 3});
 

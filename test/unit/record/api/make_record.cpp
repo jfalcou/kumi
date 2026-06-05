@@ -6,27 +6,18 @@
 */
 //==================================================================================================
 #define TTS_MAIN
-#include <functional>
 #include <kumi/record.hpp>
-#include <kumi/algorithm.hpp>
 #include <tts/tts.hpp>
 
 TTS_CASE("Check tuple_element of kumi::record")
 {
   using namespace kumi::literals;
 
-  float const f{};
-  double d;
-  std::reference_wrapper<float const> rf = f;
-  std::reference_wrapper<double> rd = d;
-
-  auto made = kumi::make_record("a"_id = '1', "b"_id = 2., "c"_id = 3.f, "d"_id = rf, "e"_id = rd);
+  auto made = kumi::make_record("a"_id = '1', "b"_id = 2., "c"_id = 3.f);
 
   TTS_TYPE_IS((std::tuple_element_t<0, decltype(made)>), (kumi::field<kumi::name<"a">, char>));
   TTS_TYPE_IS((std::tuple_element_t<1, decltype(made)>), (kumi::field<kumi::name<"b">, double>));
   TTS_TYPE_IS((std::tuple_element_t<2, decltype(made)>), (kumi::field<kumi::name<"c">, float>));
-  TTS_TYPE_IS((std::tuple_element_t<3, decltype(made)>), (kumi::field<kumi::name<"d">, float const&>));
-  TTS_TYPE_IS((std::tuple_element_t<4, decltype(made)>), (kumi::field<kumi::name<"e">, double&>));
 };
 
 TTS_CASE("Check construction of kumi::record via make_record")

@@ -6,11 +6,9 @@
 */
 //==================================================================================================
 #define TTS_MAIN
-#include <array>
 #include <kumi/record.hpp>
-#include <kumi/algorithm.hpp>
+#include <kumi/algorithm/minmax.hpp>
 #include <tts/tts.hpp>
-#include <vector>
 
 TTS_CASE("Check result::max/max_flat<...> behavior")
 {

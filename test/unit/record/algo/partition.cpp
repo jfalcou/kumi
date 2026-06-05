@@ -7,9 +7,8 @@
 //==================================================================================================
 #define TTS_MAIN
 #include <kumi/record.hpp>
-#include <kumi/algorithm.hpp>
+#include <kumi/algorithm/partition.hpp>
 #include <tts/tts.hpp>
-#include <type_traits>
 
 TTS_CASE("Check result::partition<Func,record> behavior")
 {

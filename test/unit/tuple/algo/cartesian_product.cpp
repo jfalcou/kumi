@@ -9,7 +9,6 @@
 #include <kumi/tuple.hpp>
 #include <kumi/algorithm/cartesian_product.hpp>
 #include <tts/tts.hpp>
-#include <string>
 
 TTS_CASE("Check result::cartesian_product<Tuple...> behavior")
 {
@@ -50,11 +49,9 @@ TTS_CASE("Check cartesian_product() behavior with references")
 
 TTS_CASE("Check cartesian_product(ts...) behavior")
 {
-  using namespace std::literals;
-
   auto t1 = kumi::make_tuple(1, 2ULL);
   auto t2 = kumi::make_tuple(1.2, 3.4f, 5.6);
-  auto t3 = kumi::make_tuple("first"s, "second"s, "third"s, "fourth"s);
+  auto t3 = kumi::make_tuple(tts::text("first"), tts::text("second"), tts::text("third"), tts::text("fourth"));
   auto cp = kumi::cartesian_product(t1, t2, t3);
 
   TTS_EQUAL(kumi::get<0>(kumi::get<0>(cp)), kumi::get<0>(t1));

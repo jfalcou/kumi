@@ -7,7 +7,7 @@
 //==================================================================================================
 #define TTS_MAIN
 #include <kumi/record.hpp>
-#include <kumi/algorithm.hpp>
+#include <kumi/algorithm/reduce.hpp>
 #include <tts/tts.hpp>
 
 using namespace kumi::literals;

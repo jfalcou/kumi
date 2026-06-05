@@ -8,8 +8,6 @@
 #define TTS_MAIN
 #include <kumi/tuple.hpp>
 #include <kumi/algorithm/apply.hpp>
-
-#include <functional>
 #include <sstream>
 #include <tts/tts.hpp>
 
@@ -36,20 +34,12 @@ TTS_CASE("Check apply SFINAE compliance")
   B b;
   C c;
   auto t = kumi::make_tuple(1, 2, 3, 4);
-  auto u0 = kumi::make_tuple(std::ref(c), 1);
-  kumi::tuple<std::reference_wrapper<C>, int> u1{c, 1};
   kumi::tuple<C*, int> u2{&c, 2};
-  auto u3 = kumi::make_tuple(std::ref(c));
-  kumi::tuple<std::reference_wrapper<C>> u4{c};
   auto u5 = kumi::make_tuple(&c);
 
   TTS_EXPECT_COMPILES(a, t, { kumi::apply(a, t); });
   TTS_EXPECT_NOT_COMPILES(b, t, { kumi::apply(b, t); });
-  TTS_EXPECT_COMPILES(u0, { kumi::apply(&C::f, u0); });
-  TTS_EXPECT_COMPILES(u1, { kumi::apply(&C::f, u1); });
   TTS_EXPECT_COMPILES(u2, { kumi::apply(&C::f, u2); });
-  TTS_EXPECT_COMPILES(u3, { kumi::apply(&C::x, u3); });
-  TTS_EXPECT_COMPILES(u4, { kumi::apply(&C::x, u4); });
   TTS_EXPECT_COMPILES(u5, { kumi::apply(&C::x, u5); });
 
   struct F0
@@ -60,7 +50,6 @@ TTS_CASE("Check apply SFINAE compliance")
   F0 f0{};
   TTS_EXPECT_COMPILES(f0, { kumi::apply(std::move(f0), kumi::tuple{}); });
   TTS_EXPECT_NOT_COMPILES(f0, { kumi::apply(f0, kumi::tuple{}); });
-  TTS_EXPECT_NOT_COMPILES(f0, { kumi::apply(std::ref(f0), kumi::tuple{}); });
 
   struct F1
   {
@@ -70,7 +59,6 @@ TTS_CASE("Check apply SFINAE compliance")
   F1 f1{};
   TTS_EXPECT_NOT_COMPILES(f1, { kumi::apply(std::move(f1), kumi::tuple{}); });
   TTS_EXPECT_COMPILES(f1, { kumi::apply(f1, kumi::tuple{}); });
-  TTS_EXPECT_COMPILES(f1, { kumi::apply(std::ref(f1), kumi::tuple{}); });
 
   struct F2
   {

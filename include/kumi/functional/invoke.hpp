@@ -16,18 +16,19 @@ namespace kumi
       !std::is_same_v<std::decay_t<typename std::unwrap_reference<T&&>::type>,
                       typename std::unwrap_ref_decay<T&&>::type>;
 
+    template<typename T> KUMI_ABI constexpr decltype(auto) unwrap_memptr(T&& obj)
+    {
+      if constexpr (kumi::_::is_reference_wrapper_v<std::remove_cvref_t<T>>) return KUMI_FWD(obj).get();
+      else if constexpr (std::is_pointer_v<std::remove_cvref_t<T>>) return *KUMI_FWD(obj);
+      else return KUMI_FWD(obj);
+    }
+
     template<typename C, typename P, typename O, typename... Ts>
     KUMI_ABI constexpr decltype(auto) invoke_memptr(P C::* member, O&& o, Ts&&... ts)
     {
       using callable_t = P C::*;
-      auto unwrap = []<typename T>(T&& obj) -> decltype(auto) {
-        if constexpr (kumi::_::is_reference_wrapper_v<std::remove_cvref_t<T>>) return KUMI_FWD(obj).get();
-        else if constexpr (std::is_pointer_v<std::remove_cvref_t<T>>) return *KUMI_FWD(obj);
-        else return KUMI_FWD(obj);
-      };
-
-      if constexpr (std::is_member_object_pointer_v<callable_t>) return unwrap(KUMI_FWD(o)).*member;
-      else return (unwrap(KUMI_FWD(o)).*member)(KUMI_FWD(ts)...);
+      if constexpr (std::is_member_object_pointer_v<callable_t>) return unwrap_memptr(KUMI_FWD(o)).*member;
+      else return (unwrap_memptr(KUMI_FWD(o)).*member)(KUMI_FWD(ts)...);
     }
   }
 
@@ -43,9 +44,7 @@ namespace kumi
     @note Replaces std::invoke to avoid depending on `functional`.
   **/
   //====================================================================================================================
-  template<typename C, typename... Ts>
-  KUMI_ABI constexpr decltype(auto) invoke(C&& c, Ts&&... ts) noexcept(std::is_nothrow_invocable_v<C, Ts...>)
-  requires(std::is_invocable_v<C, Ts...>)
+  template<typename C, typename... Ts> KUMI_ABI constexpr decltype(auto) invoke(C&& c, Ts&&... ts)
   {
     if constexpr (std::is_member_pointer_v<std::decay_t<C>>) return kumi::_::invoke_memptr(c, KUMI_FWD(ts)...);
     else return KUMI_FWD(c)(KUMI_FWD(ts)...);

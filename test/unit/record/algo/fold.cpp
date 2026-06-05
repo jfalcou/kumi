@@ -8,7 +8,7 @@
 #define TTS_MAIN
 #include <array>
 #include <kumi/record.hpp>
-#include <kumi/algorithm.hpp>
+#include <kumi/algorithm/fold.hpp>
 #include <tts/tts.hpp>
 #include <vector>
 

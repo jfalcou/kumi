@@ -7,9 +7,8 @@
 //==================================================================================================
 #define TTS_MAIN
 #include <kumi/record.hpp>
-#include <kumi/algorithm.hpp>
+#include <kumi/algorithm/cartesian_product.hpp>
 #include <tts/tts.hpp>
-#include <string>
 
 using namespace kumi::literals;
 
@@ -63,12 +62,12 @@ TTS_CASE("Check cartesian_product() behavior with references")
 
 TTS_CASE("Check cartesian_product(ts...) behavior")
 {
-  using namespace std::literals;
   using namespace kumi::literals;
 
   auto t1 = kumi::make_record("a"_id = 1, "b"_id = 2ULL);
   auto t2 = kumi::make_record("c"_id = 1.2, "d"_id = 3.4f, "e"_id = 5.6);
-  auto t3 = kumi::make_record("f"_id = "first"s, "g"_id = "second"s, "h"_id = "third"s, "i"_id = "fourth"s);
+  auto t3 = kumi::make_record("f"_id = tts::text("first"), "g"_id = tts::text("second"), "h"_id = tts::text("third"),
+                              "i"_id = tts::text("fourth"));
   auto cp = kumi::cartesian_product(t1, t2, t3);
 
   TTS_EQUAL(kumi::field_value_of(kumi::get<0>(kumi::get<0>(cp))), kumi::field_value_of(kumi::get<0>(t1)));

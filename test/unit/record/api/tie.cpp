@@ -7,7 +7,6 @@
 //==================================================================================================
 #define TTS_MAIN
 #include <kumi/record.hpp>
-#include <kumi/algorithm.hpp>
 #include <tts/tts.hpp>
 
 TTS_CASE("Check tuple_element of kumi::record")

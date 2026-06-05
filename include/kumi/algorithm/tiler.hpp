@@ -55,7 +55,9 @@ namespace kumi
     if constexpr (N == kumi::size_v<T>) return kumi::make_tuple(t);
     else
     {
-      constexpr auto proj = kumi::function::tiler(kumi::index<kumi::size_v<T>>, kumi::index<N>, kumi::index<O>);
+      constexpr auto bs = std::integral_constant<std::size_t, kumi::_::nb_blocks(kumi::size_v<T>, N, O)>{};
+      constexpr auto proj = kumi::function::tiler(kumi::index<kumi::size_v<T>>, kumi::index<N>, kumi::index<O>,
+                                                  std::make_index_sequence<bs>{});
       auto const build = [&]<std::size_t... J>(auto Off, std::index_sequence<J...>) {
         using type = builder_make_t<T, kumi::element_t<Off + J, T>...>;
         return type{get<Off + J>(KUMI_FWD(t))...};
@@ -109,7 +111,9 @@ namespace kumi
     if constexpr (N == kumi::size_v<T>) return kumi::make_tuple(t);
     else
     {
-      constexpr auto proj = kumi::function::tiler(kumi::index<kumi::size_v<T>>, kumi::index<N>, kumi::index<1>);
+      constexpr auto bs = std::integral_constant<std::size_t, kumi::_::nb_blocks(kumi::size_v<T>, N, 1)>{};
+      constexpr auto proj = kumi::function::tiler(kumi::index<kumi::size_v<T>>, kumi::index<N>, kumi::index<1>,
+                                                  std::make_index_sequence<bs>{});
       auto const build = [&]<std::size_t... J>(auto O, std::index_sequence<J...>) {
         using type = builder_make_t<T, kumi::element_t<O + J, T>...>;
         return type{get<O + J>(KUMI_FWD(t))...};
@@ -165,7 +169,9 @@ namespace kumi
     if constexpr (N == kumi::size_v<T>) return kumi::make_tuple(t);
     else
     {
-      constexpr auto proj = function::tiler(kumi::index<kumi::size_v<T>>, kumi::index<N>, kumi::index<N>);
+      constexpr auto bs = std::integral_constant<std::size_t, kumi::_::nb_blocks(kumi::size_v<T>, N, N)>{};
+      constexpr auto proj =
+        function::tiler(kumi::index<kumi::size_v<T>>, kumi::index<N>, kumi::index<N>, std::make_index_sequence<bs>{});
       auto const build = [&]<std::size_t... J>(auto O, std::index_sequence<J...>) {
         using type = builder_make_t<T, kumi::element_t<O + J, T>...>;
         return type{get<O + J>(KUMI_FWD(t))...};

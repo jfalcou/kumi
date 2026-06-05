@@ -7,9 +7,8 @@
 //==================================================================================================
 #define TTS_MAIN
 #include <kumi/record.hpp>
-#include <kumi/algorithm.hpp>
+#include <kumi/algorithm/unique.hpp>
 #include <tts/tts.hpp>
-#include <functional>
 #include "test.hpp"
 
 TTS_CASE("Check result::unique/all_unique<T> behavior on records")
@@ -64,7 +63,7 @@ TTS_CASE("Check runtime kumi::unique behavior")
   TTS_EQUAL(unique(std::move(r)),
             (record{"a"_id = 1, "c"_id = 3., "d"_id = 3, "e"_id = 'x', "g"_id = 12., "h"_id = short{55}}));
 
-  auto t = record{"a"_id = moveonly{}, "b"_id = 1, "c"_id = std::ref(a)};
+  auto t = record{"a"_id = moveonly{}, "b"_id = 1, "c"_id = &a};
   TTS_EXPECT_COMPILES(t, { unique(std::move(t)); });
 };
 
@@ -98,7 +97,7 @@ TTS_CASE("Check runtime kumi::all_unique behavior")
             (record{"a"_id = 1, "b"_id = 2.f, "d"_id = 3., "f"_id = 'x', "i"_id = short{55}}));
   TTS_EQUAL(all_unique(std::move(r)), (record{"a"_id = 1, "c"_id = 3., "e"_id = 'x', "h"_id = short{55}}));
 
-  auto t = record{"a"_id = moveonly{}, "b"_id = 1, "c"_id = std::ref(a)};
+  auto t = record{"a"_id = moveonly{}, "b"_id = 1, "c"_id = &a};
   TTS_EXPECT_COMPILES(t, { all_unique(std::move(t)); });
 };
 
