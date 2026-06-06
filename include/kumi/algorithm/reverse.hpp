@@ -9,37 +9,6 @@
 
 namespace kumi
 {
-  //====================================================================================================================
-  /**
-    @ingroup  generators
-    @brief    Reverse elements of a product type
-
-    On record types, this function operates on elements as if they were ordered. The considered order is the order
-    of declaration.
-
-    @param  t The product type to reverse
-    @return A product type with the type of `t` and elements equal to (t[index<size_v<T> - 1 - Idx>]...);
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<product_type T> struct reverse;
-
-      template<product_type T>
-      using reverse_t = typename reverse<T>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::reverse
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/reverse.cpp
-    ### Record:
-    @include doc/record/algo/reverse.cpp
-  **/
-  //====================================================================================================================
   struct reverse_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
@@ -60,6 +29,61 @@ namespace kumi
     }
   };
 
+  //====================================================================================================================
+  /**
+    @ingroup generators
+
+    @var apply
+    @brief Callable object reversing elements of a product type
+
+    On record types, this function operates on elements as if they were ordered. The considered order is the order
+    of declaration.
+
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/reverse.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T>
+      constexpr auto reverse(T && t) noexcept;
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to reverse
+
+    @subgroupheader{Return value}
+
+      * A product type with the type of `t` and elements equal to (get<index<size_v<T> - 1 - Idx>>(t)...);
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi::result
+    {
+      template<product_type T> struct reverse;
+
+      template<product_type T>
+      using reverse_t = typename reverse<T>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::reverse
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/reverse.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/reverse.cpp}
+  **/
+  //====================================================================================================================
   inline constexpr reverse_t reverse{};
 
   namespace result

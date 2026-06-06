@@ -9,44 +9,6 @@
 
 namespace kumi
 {
-  //====================================================================================================================
-  /**
-    @ingroup  generators
-    @brief    Creates a tuple of product types, each containing `N` consecutive elements from `t`. Tiles starts at
-              0 and advance by `O` element each time.
-
-    On record types, this function operates on elements as if they were ordered. The considered order is the order
-    of declaration.
-
-    @tparam N Size of the tile to generate
-    @tparam O Offset from the begening of the previous tile
-    @param  t the product type from which to extract the tiles
-    @return A tuple of product types, each containing `N` consecutive elements of `t` offset by O
-
-    @note Tiles is the most general form of tiling each inner product_type is a tile over `t`
-          starting at index `tile_size * tile_number + 1`. The last tile will be smaller if the
-          size of the product type is not a multiple of the tile size.
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<std::size_t N, std::size_t O, product_type T> struct tiles;
-
-      template<std::size_t N, std::size_t O, product_type T>
-      using tiles_t = typename tiles<N, T>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::tiles
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/tiles.cpp
-    ### Record:
-    @include doc/record/algo/tiles.cpp
-  **/
-  //====================================================================================================================
   template<std::size_t N, std::size_t O> struct tiles_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
@@ -81,21 +43,113 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup  generators
-    @brief    Creates a tuple of product types, each containing `N` consecutive elements from `t`. Windows starts at
-              0 and advance by `1` element each time.
+    @ingroup generators
+
+    @var tiles
+    @brief Callable object creating a tuple of product types, each containing `N` consecutive elements from `t`.
+            Tiles starts at 0 and advance by `O` element each time.
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
 
-    @tparam N Size of the window to generate
-    @param  t the product type from which to extract the windows
-    @return A tuple of product types, each containing `N` consecutive elements of `t`
+    @note Tiles is the most general form of tiling each inner product_type is a tile over `t`
+          starting at index `tile_size * tile_number + 1`. The last tile will be smaller if the
+          size of the product type is not a multiple of the tile size.
+
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/apply.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<std::size_t N, std::size_t O, product_type T>
+      constexpr auto tiles<N,O>(T && t);
+    @endcode
+
+    @subgroupheader{Template Parameters}
+
+      - `N`: Size of the tile to generate
+      - `O`: Offset from the begening of the previous tile
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type from which to extract the tiles
+
+    @subgroupheader{Return value}
+
+      * A tuple of product types, each containing `N` consecutive elements of `t` offset by O
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi::result
+    {
+      template<std::size_t N, std::size_t O, product_type T> struct tiles;
+
+      template<std::size_t N, std::size_t O, product_type T>
+      using tiles_t = typename tiles<N, T>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::tiles
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/tiles.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/tiles.cpp}
+  **/
+  //====================================================================================================================
+  template<std::size_t N, std::size_t O> inline constexpr tiles_t<N, O> tiles{};
+
+  //====================================================================================================================
+  /**
+    @ingroup generators
+
+    @var windows
+    @brief Callable object creating a tuple of product types, each containing `N` consecutive elements from `t`.
+           Windows starts at 0 and advance by `1` element each time.
+
+    On record types, this function operates on elements as if they were ordered. The considered order is the order
+    of declaration.
 
     @note Windows behaves like overlapping tiles: each inner product_type is a tile over `t`
           starting at index `tile_number`. All the windows are of the same size.
 
-    ## Helper type
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/apply.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<std::size_t N, product_type T>
+      constexpr auto windows<N>(T && t);
+    @endcode
+
+    @subgroupheader{Template Parameters}
+
+      - `N`: Size of the window to generate
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type from which to extract the windows
+
+    @subgroupheader{Return value}
+
+      * A tuple of product types, each containing `N` consecutive elements of `t`
+
+    @groupheader{Helper type}
+
     @code
     namespace kumi::result
     {
@@ -108,44 +162,60 @@ namespace kumi
 
     Computes the return type of a call to kumi::windows
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/windows.cpp
-    ### Record:
-    @include doc/record/algo/windows.cpp
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/windows.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/windows.cpp}
   **/
   //====================================================================================================================
-  // template<std::size_t N, kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto windows(T&& t)
-  //{
-  //  static_assert(N > 0 && N <= kumi::size_v<T>, "[KUMI] - Invalid tile size");
-  //  if constexpr (N == kumi::size_v<T>) return kumi::make_tuple(t);
-  //  else
-  //  {
-  //    constexpr auto bs = std::integral_constant<std::size_t, kumi::_::nb_blocks(kumi::size_v<T>, N, 1)>{};
-  //    constexpr auto proj = kumi::function::tiler(kumi::index<kumi::size_v<T>>, kumi::index<N>, kumi::index<1>,
-  //                                                std::make_index_sequence<bs>{});
-  //    return _::tile_(KUMI_FWD(t), get<0>(proj), get<1>(proj));
-  //  }
-  //}
+  template<std::size_t N> inline constexpr tiles_t<N, 1> windows{};
 
   //====================================================================================================================
   /**
-    @ingroup  generators
-    @brief    Creates a tuple of product types, each containing `N` consecutive elements from `t`. Chunks starts at
-              0 and advance by `N` element each time.
+    @ingroup generators
+
+    @var chunks
+    @brief Callable object creating a tuple of product types, each containing `N` consecutive elements from `t`.
+            Chunks starts at 0 and advance by `N` element each time.
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
-
-    @tparam N Size of the chunks to generate
-    @param  t the product type from which to extract the chunks
-    @return A tuple of product types, each containing `N` consecutive elements of `t`
 
     @note Chunks behaves like paving tiles: each inner product_type is a tile over `t`
           starting at index `chunk_size * tile_number + 1`. The last chunk will be smaller if the
           size of the product_type is not a multiple of the chunk size.
 
-    ## Helper type
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/apply.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<std::size_t N, product_type T>
+      constexpr auto windows<N>(T && t);
+    @endcode
+
+    @subgroupheader{Template Parameters}
+
+      - `N`: Size of the chunks to generate
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type from which to extract the chunks
+
+    @subgroupheader{Return value}
+
+      * A tuple of product types, each containing `N` consecutive elements of `t`
+
+    @groupheader{Helper type}
+
     @code
     namespace kumi::result
     {
@@ -158,31 +228,15 @@ namespace kumi
 
     Computes the return type of a call to kumi::chunks
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/chunks.cpp
-    ### Record:
-    @include doc/record/algo/chunks.cpp
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/chunks.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/chunks.cpp}
   **/
   //====================================================================================================================
-  // template<std::size_t N, kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto chunks(T&& t)
-  //{
-  //  static_assert(N > 0 && N <= kumi::size_v<T>, "[KUMI] - Invalid tile size");
-
-  //  if constexpr (N == kumi::size_v<T>) return kumi::make_tuple(t);
-  //  else
-  //  {
-  //    constexpr auto bs = std::integral_constant<std::size_t, kumi::_::nb_blocks(kumi::size_v<T>, N, N)>{};
-  //    constexpr auto proj =
-  //      function::tiler(kumi::index<kumi::size_v<T>>, kumi::index<N>, kumi::index<N>, std::make_index_sequence<bs>{});
-  //    return _::tile_(KUMI_FWD(t), get<0>(proj), get<1>(proj));
-  //  }
-  //}
-
-  template<std::size_t N, std::size_t O> inline constexpr tiles_t<N, O> tiles{};
-
-  template<std::size_t N> inline constexpr tiles_t<N, 1> windows{};
-
   template<std::size_t N> inline constexpr tiles_t<N, N> chunks{};
 
   namespace result

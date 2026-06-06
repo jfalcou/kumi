@@ -18,33 +18,6 @@ namespace kumi
     }
   };
 
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the maximum value all elements of `t`.
-    @param t  Product Type to inspect
-    @return   The maximum value of all elements of `t`
-
-    ## Helper type
-    @code
-    namespace kumi
-    {
-      template<typename T> struct max;
-
-      template<typename T>
-      using max_t = typename max<T>::type;
-    }
-    @endcode
-
-    Computes the type returned by a call to kumi::max.
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/max.cpp
-    ### Record:
-    @include doc/record/algo/max.cpp
-  **/
-  //====================================================================================================================
   struct max_t : private minmax_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
@@ -73,63 +46,6 @@ namespace kumi
     }
   };
 
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the maximum value of applications of `f` to all elements of `t`.
-    @param t  Product Type to inspect
-    @param f  Unary Callable object
-    @return   The maximum value of `f` over all elements of `t`
-
-    ## Helper type
-    @code
-    namespace kumi
-    {
-      template<typename T, typename F> struct max;
-
-      template<typename T, typename F>
-      using max_t = typename max<T, F>::type;
-    }
-    @endcode
-
-    Computes the type returned by a call to kumi::max.
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/max.cpp
-    ### Record:
-    @include doc/record/algo/max.cpp
-  **/
-  //====================================================================================================================
-
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the maximum value of applications of `f` to all elements of kumi::flatten_all(t).
-    @param t  Product Type to inspect
-    @param f  Unary Callable object
-    @return   The maximum value of `f` over all elements of a flattened version of `t`
-
-    ## Helper type
-    @code
-    namespace kumi
-    {
-      template<typename T, typename F> struct max_flat;
-
-      template<typename T, typename F>
-      using max_flat_t = typename max_flat<T, F>::type;
-    }
-    @endcode
-
-    Computes the type returned by a call to kumi::max_flat.
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/max_flat.cpp
-    ### Record:
-    @include doc/record/algo/max_flat.cpp
-  **/
-  //====================================================================================================================
   struct max_flat_t : private kumi::max_t
   {
     template<kumi::concepts::product_type T, typename F>
@@ -152,33 +68,6 @@ namespace kumi
     }
   };
 
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the minimum value all elements of `t`.
-    @param t  Product Type to inspect
-    @return   The minimum value of all elements of `t`
-
-    ## Helper type
-    @code
-    namespace kumi
-    {
-      template<typename T> struct min;
-
-      template<typename T>
-      using min_t = typename min<T>::type;
-    }
-    @endcode
-
-    Computes the type returned by a call to kumi::min.
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/min.cpp
-    ### Record:
-    @include doc/record/algo/min.cpp
-  **/
-  //====================================================================================================================
   struct min_t : private minmax_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
@@ -207,63 +96,6 @@ namespace kumi
     }
   };
 
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the minimum value of applications of `f` to all elements of `t`.
-    @param t  Product Type to inspect
-    @param f  Unary Callable object
-    @return   The minimum value of `f` over all elements of `t`
-
-    ## Helper type
-    @code
-    namespace kumi
-    {
-      template<typename T, typename F> struct min;
-
-      template<typename T, typename F>
-      using min_t = typename min<T, F>::type;
-    }
-    @endcode
-
-    Computes the type returned by a call to kumi::min.
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/min.cpp
-    ### Record:
-    @include doc/record/algo/min.cpp
-  **/
-  //====================================================================================================================
-
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the minimum value of applications of `f` to all elements of kumi::flatten_all(t).
-    @param t  Product Type to inspect
-    @param f  Unary Callable object
-    @return   The minimum value of `f` over all elements of a flattened version of `t`
-
-    ## Helper type
-    @code
-    namespace kumi
-    {
-      template<typename T, typename F> struct min_flat;
-
-      template<typename T, typename F>
-      using min_flat_t = typename min_flat<T, F>::type;
-    }
-    @endcode
-
-    Computes the type returned by a call to kumi::min_flat.
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/min_flat.cpp
-    ### Record:
-    @include doc/record/algo/min_flat.cpp
-  **/
-  //====================================================================================================================
   struct min_flat_t : private kumi::min_t
   {
     template<kumi::concepts::product_type T, typename F>
@@ -286,9 +118,244 @@ namespace kumi
     }
   };
 
+  //====================================================================================================================
+  /**
+    @ingroup reductions
+
+    @var max
+    @brief Callable object computing the maximum value of all elements of `t`.
+
+    @qualifier nodiscard inline constexpr noexcept
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/minmax.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T>
+      constexpr auto max(T && t) noexcept;
+    @endcode
+
+    @code
+      template<product_type T, typename Function>
+      constexpr auto max(T && t, Function f) noexcept;
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to inspect
+      - `f`: Unary callable object to be invoked
+
+    @subgroupheader{Return value}
+
+      * The maximum value of all elements of `t`
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi
+    {
+      template<typename T> struct max;
+
+      template<typename T>
+      using max_t = typename max<T>::type;
+
+      template<typename T, typename F> struct max;
+
+      template<typename T, typename F>
+      using max_t = typename max<T, F>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::max
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/max.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/max.cpp}
+  **/
+  //====================================================================================================================
   inline constexpr max_t max{};
+
+  //====================================================================================================================
+  /**
+    @ingroup reductions
+
+    @var min
+    @brief Callable object computing the maximum value of applications of `f` to all elements of kumi::flatten_all(t).
+
+    @qualifier nodiscard inline constexpr noexcept
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/minmax.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T, typename Function>
+      constexpr auto max_flat(T && t, Function f) noexcept;
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to inspect
+      - `f`: Unary callable object to be invoked
+
+    @subgroupheader{Return value}
+
+      * The minimum value of `f` over all elements of a flattened version of `t`
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi
+    {
+      template<typename T, typename F> struct max_flat;
+
+      template<typename T, typename F>
+      using max_flat_t = typename max_flat<T, F>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::max_flat
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/max_flat.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/max_flat.cpp}
+  **/
+  //====================================================================================================================
   inline constexpr max_flat_t max_flat{};
+
+  //====================================================================================================================
+  /**
+    @ingroup reductions
+
+    @var min
+    @brief Callable object computing the minimum value of all elements of `t`.
+
+    @qualifier nodiscard inline constexpr noexcept
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/minmax.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T>
+      constexpr auto min(T && t) noexcept;
+    @endcode
+
+    @code
+      template<product_type T, typename Function>
+      constexpr auto min(T && t, Function f) noexcept;
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to inspect
+      - `f`: Unary callable object to be invoked
+
+    @subgroupheader{Return value}
+
+      * The minimum value of all elements of `t`
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi
+    {
+      template<typename T> struct min;
+
+      template<typename T>
+      using min_t = typename min<T>::type;
+
+      template<typename T, typename F> struct min;
+
+      template<typename T, typename F>
+      using min_t = typename min<T, F>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::min
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/min.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/min.cpp}
+  **/
+  //====================================================================================================================
   inline constexpr min_t min{};
+
+  //====================================================================================================================
+  /**
+    @ingroup reductions
+
+    @var min
+    @brief Callable object computing the minimum value of applications of `f` to all elements of kumi::flatten_all(t).
+
+    @qualifier nodiscard inline constexpr noexcept
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/minmax.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T, typename Function>
+      constexpr auto min_flat(T && t, Function f) noexcept;
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to inspect
+      - `f`: Unary callable object to be invoked
+
+    @subgroupheader{Return value}
+
+      * The minimum value of `f` over all elements of a flattened version of `t`
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi
+    {
+      template<typename T, typename F> struct min_flat;
+
+      template<typename T, typename F>
+      using min_flat_t = typename min_flat<T, F>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::min_flat
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/min_flat.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/min_flat.cpp}
+  **/
+  //====================================================================================================================
   inline constexpr min_flat_t min_flat{};
 
   namespace result

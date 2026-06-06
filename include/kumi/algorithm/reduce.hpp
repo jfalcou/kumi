@@ -14,40 +14,6 @@ namespace kumi
 
   }
 
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Performs a tree-like reduction of all elements of a product type.
-
-    On record types, this function operates on the underlying values, not on the fields themselves.
-
-    @note For associative operations, this produces the same result as a left or right fold,
-          but have different intermediate evaluation order.
-
-    @param m   Monoid callable function to apply
-    @param t   Product type to reduce
-    @return    The result of reducing the elements of `t` by `m`, recursively combining elements in a tree structure.
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<monoid M, product_type T> struct reduce;
-
-      template<monoid M, product_type T>
-      using reduce_t = typename reduce<M,T>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::reduce
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/reduce.cpp
-    ### Record:
-    @include doc/record/algo/reduce.cpp
-  **/
-  //====================================================================================================================
   struct reduce_t
   {
     template<kumi::concepts::monoid M, kumi::concepts::product_type T>
@@ -83,79 +49,6 @@ namespace kumi
     }
   };
 
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Performs a tree-like reduction of all elements of a product type.
-
-    On record types, this function operates on the underlying values, not on the fields themselves.
-
-    @note For associative operations, this produces the same result as a left or right fold,
-          but have different intermediate evaluation order.
-
-    @param m    Monoid callable function to apply
-    @param t    Product type to reduce
-    @param init Optional initial value of the reduction.
-    @return     The result of reducing the elements of `t` by `m`, recursively combining elements in a tree structure.
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<monoid M, product_type T, typename Value> struct reduce;
-
-      template<monoid M, product_type T, typename Value>
-      using reduce_t = typename reduce<M,T,Value>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::reduce
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/reduce.cpp
-    ### Record:
-    @include doc/record/algo/reduce.cpp
-  **/
-  //====================================================================================================================
-
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Performs a tree-like reduction of all elements of a product type. The given map
-              function is applied before excution the reduction to each element of the input.
-
-    On record types, this function operates on the underlying values, not on the fields themselves.
-
-    @note For associative operations, this produces the same result as a left or right fold
-          preceeded by map, but have different intermediate evaluation order.
-
-    @param f  Mapping function to apply
-    @param m  Monoid callable function to apply
-    @param t  Product type to reduce
-    @return   The result of reducing the elements of `t` by `m` after beeing processed by `f`,
-              recursively combining elements in a tree structure.
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<monoid M, product_type T> struct map_reduce;
-
-      template<monoid M, product_type T>
-      using map_reduce_t = typename map_reduce<M,T>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::map_reduce
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/map_reduce.cpp
-    ### Record:
-    @include doc/record/algo/map_reduce.cpp
-  **/
-  //====================================================================================================================
   struct map_reduce_t : private kumi::reduce_t
   {
     template<kumi::concepts::product_type T, kumi::concepts::monoid M, typename Function>
@@ -195,76 +88,6 @@ namespace kumi
     }
   };
 
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Performs a tree-like reduction of all elements of a product type. The given map
-              function is applied before excution the reduction to each element of the input.
-
-    On record types, this function operates on the underlying values, not on the fields themselves.
-
-    @note For associative operations, this produces the same result as a left or right fold
-          preceeded by map, but have different intermediate evaluation order.
-
-    @param f    Mapping function to apply
-    @param m    Monoid callable function to apply
-    @param t    Product type to reduce
-    @param init Optional initial value of the reduction.
-    @return     The result of reducing `t` by `m` after beeing processed by `f`,
-                recursively combining elements in a tree structure
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<monoid M, product_type T, typename Value> struct map_reduce;
-
-      template<monoid M, product_type T, typename Value>
-      using map_reduce_t = typename map_reduce<M,T,Value>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::map_reduce
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/map_reduce.cpp
-    ### Record:
-    @include doc/record/algo/map_reduce.cpp
-  **/
-  //====================================================================================================================
-
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the sum of all elements.
-
-    On record types, this function operates on the underlying values, not on the fields themselves.
-
-    @param t      Product type to operate on
-    @param init   Optional initial value of the sum
-    @return       The value of `get<0>(t) + ... + get<N-1>(t) + init`
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<product_type T, typename Value> struct sum;
-
-      template<product_type T, typename Value>
-      using sum_t = typename sum<T,Value>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::sum
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/sum.cpp
-    ### Record:
-    @include doc/record/algo/sum.cpp
-  **/
-  //====================================================================================================================
   struct sum_t : private kumi::reduce_t
   {
     template<kumi::concepts::product_type T, typename Value>
@@ -279,68 +102,6 @@ namespace kumi
     }
   };
 
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief  Computes the sum of all elements.
-
-    On record types, this function operates on the underlying values, not on the fields themselves.
-
-    @param t      Product type to operate on
-    @return       The value of `get<0>(t) + ... + get<N-1>(t)`
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<product_type T> struct sum;
-
-      template<product_type Te>
-      using sum_t = typename sum<T>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::sum
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/sum.cpp
-    ### Record:
-    @include doc/record/algo/sum.cpp
-  **/
-  //====================================================================================================================
-
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the product of all elements.
-
-    On record types, this function operates on the underlying values, not on the fields themselves.
-
-    @param t      Product type to operate on
-    @param init   Initial value of the product
-    @return The value of `get<0>(t) * ... * get<N-1>(t) * init`
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<product_type T, typename Value> struct prod;
-
-      template<product_type T, typename Value>
-      using prod_t = typename prod<T,Value>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::prod
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/prod.cpp
-    ### Record:
-    @include doc/record/algo/prod.cpp
-  **/
-  //====================================================================================================================
   struct prod_t : private kumi::reduce_t
   {
     template<kumi::concepts::product_type T, typename Value>
@@ -355,68 +116,6 @@ namespace kumi
     }
   };
 
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the product of all elements.
-
-    On record types, this function operates on the underlying values, not on the fields themselves.
-
-    @param t      Product type to operate on
-    @return The value of `get<0>(t) * ... * get<N-1>(t)`
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<product_type T> struct prod;
-
-      template<product_type T>
-      using prod_t = typename prod<T>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::prod
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/prod.cpp
-    ### Record:
-    @include doc/record/algo/prod.cpp
-  **/
-  //====================================================================================================================
-
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the bitwise AND of all elements.
-
-    On record types, this function operates on the underlying values, not on the fields themselves.
-
-    @param t      Product type to operate on
-    @param init   Optional initial value of the reduction
-    @return       The value of `get<0>(t) & ... & get<N-1>(t) & init`
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<product_type T, typename Value> struct bit_and;
-
-      template<product_type T, typename Value>
-      using bit_and_t = typename bit_and<T,Value>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::bit_and
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/bit_and.cpp
-    ### Record:
-    @include doc/record/algo/bit_and.cpp
-  **/
-  //====================================================================================================================
   struct bit_and_t : private kumi::reduce_t
   {
     template<kumi::concepts::product_type T, typename Value>
@@ -431,68 +130,6 @@ namespace kumi
     }
   };
 
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the bitwise AND of all elements.
-
-    On record types, this function operates on the underlying values, not on the fields themselves.
-
-    @param t  Product type to operate on.
-    @return   The value of `get<0>(t) & ... & get<N-1>(t)`.
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<product_type T> struct bit_and;
-
-      template<product_type T>
-      using bit_and_t = typename bit_and<T>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::bit_and
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/bit_and.cpp
-    ### Record:
-    @include doc/record/algo/bit_and.cpp
-  **/
-  //====================================================================================================================
-
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the bitwise OR of all elements.
-
-    On record types, this function operates on the underlying values, not on the fields themselves.
-
-    @param t      Product type to operate on
-    @param init   Optional initial value of the reduction
-    @return       The value of `get<0>(t) | ... | get<N-1>(t) | init`
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<product_type T, typename Value> struct bit_or;
-
-      template<product_type T, typename Value>
-      using bit_or_t = typename bit_or<T,Value>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::bit_or
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/bit_or.cpp
-    ### Record:
-    @include doc/record/algo/bit_or.cpp
-  **/
-  //====================================================================================================================
   struct bit_or_t : private kumi::reduce_t
   {
     template<kumi::concepts::product_type T, typename Value>
@@ -507,68 +144,6 @@ namespace kumi
     }
   };
 
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the bitwise OR of all elements.
-
-    On record types, this function operates on the underlying values, not on the fields themselves.
-
-    @param t  Product type to operate on
-    @return   The value of `get<0>(t) | ... | get<N-1>(t)`
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<product_type T> struct bit_or;
-
-      template<product_type T>
-      using bit_or_t = typename bit_or<T>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::bit_or
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/bit_or.cpp
-    ### Record:
-    @include doc/record/algo/bit_or.cpp
-  **/
-  //====================================================================================================================
-
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the bitwise XOR of all elements.
-
-    On record types, this function operates on the underlying values, not on the fields themselves.
-
-    @param t      Product type to operate on
-    @param init   Optional initial value of the reduction
-    @return       The value of `get<0>(t) ^ ... ^ get<N-1>(t) ^ init`
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<product_type T, typename Value> struct bit_xor;
-
-      template<product_type T, typename Value>
-      using bit_xor_t = typename bit_xor<T,Value>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::bit_xor
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/bit_xor.cpp
-    ### Record:
-    @include doc/record/algo/bit_xor.cpp
-  **/
-  //====================================================================================================================
   struct bit_xor_t : private kumi::reduce_t
   {
     template<kumi::concepts::product_type T, typename Value>
@@ -585,40 +160,473 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup  reductions
-    @brief    Computes the bitwise XOR of all elements.
+    @ingroup reductions
+
+    @var reduce
+    @brief Callable object performing a tree-like reduction of all elements of a product type.
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 
-    @param t  Product type to operate on
-    @return   The value of `get<0>(t) ^ ... ^ get<N-1>(t)`
+    @note For associative operations, this produces the same result as a left or right fold,
+          but have different intermediate evaluation order.
 
-    ## Helper type
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/reduce.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<monoid M, product_type T>
+      constexpr auto reduce(M && m, T && t);
+    @endcode
+
+    @code
+      template<monoid M, product_type T, typename V>
+      constexpr auto reduce(M && m, T && t, V init);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `m`: Monoid callable function to apply
+      - `t`: Product Type to reduce
+      - `init`: Optional initial value of the reduction.
+
+    @subgroupheader{Return value}
+
+      * The result of reducing the elements of `t` by `m`, recursively combining elements in a tree structure.
+
+    @groupheader{Helper type}
+
     @code
     namespace kumi::result
     {
-      template<product_type T> struct bit_xor;
+      template<monoid M, product_type T> struct reduce;
 
+      template<monoid M, product_type T>
+      using reduce_t = typename reduce<M,T>::type;
+
+      template<monoid M, product_type T, typename Value> struct reduce;
+
+      template<monoid M, product_type T, typename Value>
+      using reduce_t = typename reduce<M,T,Value>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::reduce
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/reduce.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/reduce.cpp}
+  **/
+  //====================================================================================================================
+  inline constexpr reduce_t reduce{};
+
+  //====================================================================================================================
+  /**
+    @ingroup reductions
+
+    @var map_reduce
+    @brief Callable object performing a tree-like reduction of all elements of a product type. The given map
+              function is applied before excution the reduction to each element of the input.
+
+
+    On record types, this function operates on the underlying values, not on the fields themselves.
+
+    @note For associative operations, this produces the same result as a left or right fold preceeded by map,
+          but have different intermediate evaluation order.
+
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/reduce.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<typename Function, monoid M, product_type T>
+      constexpr auto map_reduce(Function f, M && m, T && t);
+    @endcode
+
+    @code
+      template<typename Function, monoid M, product_type T, typename V>
+      constexpr auto reduce(Function f, M && m, T && t, V init);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `f`: Mapping function to apply
+      - `m`: Monoid callable function to apply
+      - `t`: Product Type to reduce
+      - `init`: Optional initial value of the reduction.
+
+    @subgroupheader{Return value}
+
+      * The result of reducing the elements of `t` by `m` after beeing processed by `f`,
+        recursively combining elements in a tree structure.
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi::result
+    {
+      template<monoid M, product_type T> struct map_reduce;
+
+      template<monoid M, product_type T>
+      using map_reduce_t = typename map_reduce<M,T>::type;
+
+      template<monoid M, product_type T, typename Value> struct map_reduce;
+
+      template<monoid M, product_type T, typename Value>
+      using map_reduce_t = typename map_reduce<M,T,Value>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::map_reduce
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/map_reduce.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/map_reduce.cpp}
+  **/
+  //====================================================================================================================
+  inline constexpr map_reduce_t map_reduce{};
+
+  //====================================================================================================================
+  /**
+    @ingroup reductions
+
+    @var sum
+    @brief Callable object computing the sum of all elements.
+
+    On record types, this function operates on the underlying values, not on the fields themselves.
+
+    @note For associative operations, this produces the same result as a left or right fold,
+          but have different intermediate evaluation order.
+
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/reduce.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
       template<product_type T>
-      using bit_xor_t = typename bit_xor<T>::type;
+      constexpr auto sum(T && t);
+    @endcode
+
+    @code
+      template<product_type T, typename V>
+      constexpr auto sum(T && t, V init);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to operate on
+      - `init`: Optional initial value of the reduction.
+
+    @subgroupheader{Return value}
+
+      * The result of the computation of `get<0>(t) + ... + get<N-1>(t) + init`
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi::result
+    {
+      template<product_type T, typename Value> struct sum;
+
+      template<product_type T, typename Value>
+      using sum_t = typename sum<T,Value>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::sum
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/sum.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/sum.cpp}
+  **/
+  //====================================================================================================================
+  inline constexpr sum_t sum{};
+
+  //====================================================================================================================
+  /**
+    @ingroup reductions
+
+    @var prod
+    @brief Callable object computing the product of all elements.
+
+    On record types, this function operates on the underlying values, not on the fields themselves.
+
+    @note For associative operations, this produces the same result as a left or right fold,
+          but have different intermediate evaluation order.
+
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/reduce.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T>
+      constexpr auto prod(T && t);
+    @endcode
+
+    @code
+      template<product_type T, typename V>
+      constexpr auto prod(T && t, V init);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to operate on
+      - `init`: Optional initial value of the reduction.
+
+    @subgroupheader{Return value}
+
+      * The result of the computation of `get<0>(t) * ... * get<N-1>(t) * init`
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi::result
+    {
+      template<product_type T, typename Value> struct prod;
+
+      template<product_type T, typename Value>
+      using prod_t = typename prod<T,Value>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::prod
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/prod.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/prod.cpp}
+  **/
+  //====================================================================================================================
+  inline constexpr prod_t prod{};
+
+  //====================================================================================================================
+  /**
+    @ingroup reductions
+
+    @var bit_and
+    @brief Callable object computing the bitwise AND of all elements.
+
+    On record types, this function operates on the underlying values, not on the fields themselves.
+
+    @note For associative operations, this produces the same result as a left or right fold,
+          but have different intermediate evaluation order.
+
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/reduce.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T>
+      constexpr auto bit_and(T && t);
+    @endcode
+
+    @code
+      template<product_type T, typename V>
+      constexpr auto bit_and(T && t, V init);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to operate on
+      - `init`: Optional initial value of the reduction.
+
+    @subgroupheader{Return value}
+
+      * The result of the computation of `get<0>(t) & ... & get<N-1>(t) & init`
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi::result
+    {
+      template<product_type T, typename Value> struct bit_and;
+
+      template<product_type T, typename Value>
+      using bit_and_t = typename bit_and<T,Value>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::bit_and
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/bit_and.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/bit_and.cpp}
+  **/
+  //====================================================================================================================
+  inline constexpr bit_and_t bit_and{};
+
+  //====================================================================================================================
+  /**
+    @ingroup reductions
+
+    @var bit_or
+    @brief Callable object computing the bitwise OR of all elements.
+
+    On record types, this function operates on the underlying values, not on the fields themselves.
+
+    @note For associative operations, this produces the same result as a left or right fold,
+          but have different intermediate evaluation order.
+
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/reduce.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T>
+      constexpr auto bit_or(T && t);
+    @endcode
+
+    @code
+      template<product_type T, typename V>
+      constexpr auto bit_or(T && t, V init);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to operate on
+      - `init`: Optional initial value of the reduction.
+
+    @subgroupheader{Return value}
+
+      * The result of the computation of `get<0>(t) | ... | get<N-1>(t) | init`
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi::result
+    {
+      template<product_type T, typename Value> struct bit_or;
+
+      template<product_type T, typename Value>
+      using bit_or_t = typename bit_or<T,Value>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::bit_or
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/bit_or.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/bit_or.cpp}
+  **/
+  //====================================================================================================================
+  inline constexpr bit_or_t bit_or{};
+
+  //====================================================================================================================
+  /**
+    @ingroup reductions
+
+    @var bit_xor
+    @brief Callable object computing the bitwise XOR of all elements.
+
+    On record types, this function operates on the underlying values, not on the fields themselves.
+
+    @note For associative operations, this produces the same result as a left or right fold,
+          but have different intermediate evaluation order.
+
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/reduce.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T>
+      constexpr auto bit_xor(T && t);
+    @endcode
+
+    @code
+      template<product_type T, typename V>
+      constexpr auto bit_xor(T && t, V init);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to operate on
+      - `init`: Optional initial value of the reduction.
+
+    @subgroupheader{Return value}
+
+      * The result of the computation of `get<0>(t) ^ ... ^ get<N-1>(t) ^ init`
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi::result
+    {
+      template<product_type T, typename Value> struct bit_xor;
+
+      template<product_type T, typename Value>
+      using bit_xor_t = typename bit_xor<T,Value>::type;
     }
     @endcode
 
     Computes the return type of a call to kumi::bit_xor
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/bit_xor.cpp
-    ### Record:
-    @include doc/record/algo/bit_xor.cpp
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/bit_xor.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/bit_xor.cpp}
   **/
   //====================================================================================================================
-  inline constexpr reduce_t reduce{};
-  inline constexpr map_reduce_t map_reduce{};
-  inline constexpr sum_t sum{};
-  inline constexpr prod_t prod{};
-  inline constexpr bit_and_t bit_and{};
-  inline constexpr bit_or_t bit_or{};
   inline constexpr bit_xor_t bit_xor{};
 
   namespace result

@@ -47,44 +47,6 @@ namespace kumi
     inline constexpr map_field_t map_field_{};
   }
 
-  //====================================================================================================================
-  /**
-    @ingroup  transforms
-    @brief    Applies the Callable object `f` on each product types' elements
-
-    Applies the given function to all the product types passed as arguments and stores the result in another product
-    type, keeping the original elements order. On records, the order is determined via the order of definition of
-    the fields.
-
-    @note Does not participate in overload resolution if product types' size are not equal or if
-          `f` can't be called on each product type's elements. All product type must either be
-          record types or product types, mixing is not supported.
-
-    @param f      Callable function to apply
-    @param t0     Product Type  to operate on
-    @param others Product Types to operate on
-    @return       The product type of `f` calls results.
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<typename Function, product_type T, product_type... Ts> struct map;
-
-      template<typename Function, product_type T, product_type... Ts>
-      using map_t = typename map<Function,T>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::map
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/map.cpp
-    ### Record:
-    @include doc/record/algo/map.cpp
-  **/
-  //====================================================================================================================
   struct map_t
   {
     template<typename Function,
@@ -109,23 +71,138 @@ namespace kumi
     }
   };
 
+  struct map_index_t : private kumi::map_t
+  {
+    template<kumi::concepts::product_type T,
+             typename Function,
+             kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, T&& t0, Ts&&... others) const
+    requires(!kumi::concepts::record_type<T> && (!kumi::concepts::record_type<Ts> && ...))
+    {
+      auto&& tmp = kumi::bind_back(_::map_index_, f, KUMI_FWD(t0), KUMI_FWD(others)...);
+      return this->map_t::map_(KUMI_FWD(t0), KUMI_FWD(tmp), std::make_index_sequence<kumi::size_v<T>>{});
+    }
+  };
+
+  struct map_field_t : private kumi::map_t
+  {
+    template<kumi::concepts::record_type T,
+             typename Function,
+             kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, T&& t0, Ts&&... others) const
+    requires(kumi::concepts::compatible_product_types<T, Ts...>)
+    {
+      auto&& tmp = kumi::bind_back(_::map_field_, f, KUMI_FWD(t0), KUMI_FWD(others)...);
+      return this->map_t::map_(KUMI_FWD(t0), KUMI_FWD(tmp), std::make_index_sequence<kumi::size_v<T>>{});
+    }
+  };
+
   //====================================================================================================================
   /**
-    @ingroup  tuple_transforms
-    @brief    Applies the Callable object `f` on each tuples' elements and their indexes
+    @ingroup transforms
 
-    Applies the given function to all the tuples passed as arguments along with their indexes  and
-    stores the result in another tuple, keeping the original elements order.
+    @var map
+    @brief Callable object applying the Callable object `f` on each product types' elements
+
+    Applies the given function to all the product types passed as arguments and stores the result in another product
+    type, keeping the original elements order. On records, the order is determined via the order of definition of
+    the fields.
+
+    @note Does not participate in overload resolution if product types' size are not equal or if
+          `f` can't be called on each product type's elements. All product type must either be
+          record types or product types, mixing is not supported.
+
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/map.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<typename Function, product_type T, product_type... Ts>
+      constexpr auto map(Function && f, T && t, Ts &&... ts);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `f`: Callable object to apply
+      - `t`: Product Type to operate on
+      - `ts`: Other Product Types to operate on
+
+    @subgroupheader{Return value}
+
+      * The product type matching the common_product_type of the input containing `f` calls results.
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi::result
+    {
+      template<typename Function, product_type T, product_type... Ts> struct map;
+
+      template<typename Function, product_type T, product_type... Ts>
+      using map_t = typename map<Function,T>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::map
+
+    @see kumi::map_index
+    @see kumi::map_field
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/map.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/map.cpp}
+  **/
+  //====================================================================================================================
+  inline constexpr map_t map{};
+
+  //====================================================================================================================
+  /**
+    @ingroup tuple_transforms
+
+    @var map_index
+    @brief Callable object applying the Callable object `f` on each product types elements and their indexes
+
+    Applies the given function to all the product types passed as arguments along with their indexes and stores the
+  result in another product type, keeping the original elements order.
 
     @note Does not participate in overload resolution if tuples' size are not equal or if `f`
           can't be called on each tuple's elements and their indexes.
 
-    @param f      Callable function to apply
-    @param t0     Product type  to operate on
-    @param others Product types to operate on
-    @return The tuple of `f` calls results.
+    @qualifier nodiscard inline constexpr
 
-    ## Helper type
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/map.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<typename Function, product_type T, product_type... Ts>
+      constexpr auto map_index(Function && f, T && t, Ts &&... ts);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `f`: Callable object to apply
+      - `t`: Product Type to operate on
+      - `ts`: Other Product Types to operate on
+
+    @subgroupheader{Return value}
+
+      * The product type matching the common_product_type of the input containing `f` calls results.
+
+    @groupheader{Helper type}
+
     @code
     namespace kumi::result
     {
@@ -141,27 +218,19 @@ namespace kumi
     @see kumi::map
     @see kumi::map_field
 
-    ## Example:
-    @include doc/tuple/algo/map_index.cpp
+    @groupheader{Example}
+
+    @godbolt{doc/tuple/algo/map_index.cpp}
   **/
   //====================================================================================================================
-  struct map_index_t : private kumi::map_t
-  {
-    template<kumi::concepts::product_type T,
-             typename Function,
-             kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
-    [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, T&& t0, Ts&&... others) const
-    requires(!kumi::concepts::record_type<T> && (!kumi::concepts::record_type<Ts> && ...))
-    {
-      auto&& tmp = kumi::bind_back(_::map_index_, f, KUMI_FWD(t0), KUMI_FWD(others)...);
-      return this->map_t::map_(KUMI_FWD(t0), KUMI_FWD(tmp), std::make_index_sequence<kumi::size_v<T>>{});
-    }
-  };
+  inline constexpr map_index_t map_index{};
 
   //====================================================================================================================
   /**
-    @ingroup  record_transforms
-    @brief    Applies the Callable object `f` on each records' fields and their associated names.
+    @ingroup record_transforms
+
+    @var map_field
+    @brief Callable object applying the Callable object `f` on each product types elements and their associated labels.
 
     Applies the given function to all the records passed as arguments along with their names and
     stores the result in another records, keeping the original elements order.
@@ -169,12 +238,32 @@ namespace kumi
     @note Does not participate in overload resolution if records' size are not equal or if `f`
           can't be called on each record's fields and their names.
 
-    @param f      Callable function to apply
-    @param t0     Record  to operate on
-    @param others Records to operate on
-    @return The record of `f` calls results.
+    @qualifier nodiscard inline constexpr
 
-    ## Helper type
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/map.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<typename Function, product_type T, product_type... Ts>
+      constexpr auto map_index(Function && f, T && t, Ts &&... ts);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `f`: Callable object to apply
+      - `t`: Product Type to operate on
+      - `ts`: Other Product Types to operate on
+
+    @subgroupheader{Return value}
+
+      * The product type matching the common_product_type of the input containing `f` calls results.
+
+    @groupheader{Helper type}
+
     @code
     namespace kumi::result
     {
@@ -185,30 +274,16 @@ namespace kumi
     }
     @endcode
 
-    Computes the return type of a call to kumi::map_field
+    Computes the return type of a call to kumi::map_index
 
     @see kumi::map
     @see kumi::map_index
 
-    ## Example:
-    @include doc/record/algo/map_field.cpp
+    @groupheader{Example}
+
+    @godbolt{doc/tuple/algo/map_index.cpp}
   **/
   //====================================================================================================================
-  struct map_field_t : private kumi::map_t
-  {
-    template<kumi::concepts::record_type T,
-             typename Function,
-             kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
-    [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, T&& t0, Ts&&... others) const
-    requires(kumi::concepts::compatible_product_types<T, Ts...>)
-    {
-      auto&& tmp = kumi::bind_back(_::map_field_, f, KUMI_FWD(t0), KUMI_FWD(others)...);
-      return this->map_t::map_(KUMI_FWD(t0), KUMI_FWD(tmp), std::make_index_sequence<kumi::size_v<T>>{});
-    }
-  };
-
-  inline constexpr map_t map{};
-  inline constexpr map_index_t map_index{};
   inline constexpr map_field_t map_field{};
 
   namespace result

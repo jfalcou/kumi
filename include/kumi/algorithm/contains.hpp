@@ -15,41 +15,10 @@ namespace kumi
     inline constexpr bool contains = ((kumi::concepts::field<T> && std::invocable<T, kumi::_::tag_of_t<Ts>>) || ...);
   }
 
-  //====================================================================================================================
-  /**
-    @ingroup  queries
-    @brief    Checks if a product type contains a given identifier
-
-    @param t  the product type to inspect.
-    @param id Identifier to check
-    @return   `std::true_type` if the `t` contains a field labeled with the `id` identifier, `std::false_type`
-  otherwise.
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<product_type T, concepts::identifier ID> struct contains;
-
-      template<product_type T, concepts::identifier ID>
-      using contains_t = typename contains<T,ID>::type;
-    }
-    @endcode
-
-    Computes the type returned by a call to contains.
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/contains.cpp
-    ### Record:
-    @include doc/record/algo/contains.cpp
-  **/
-  //====================================================================================================================
   struct contains_t
   {
     template<kumi::concepts::product_type T, kumi::concepts::identifier ID>
-    [[nodiscard]] KUMI_ABI constexpr auto operator()([[maybe_unused]] T&& t,
-                                                     [[maybe_unused]] ID const& id) const noexcept
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, ID const& id) const noexcept
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return std::false_type{};
       else return (*this)(KUMI_FWD(t), id, std::make_index_sequence<kumi::size_v<T>>{});
@@ -63,35 +32,6 @@ namespace kumi
     }
   };
 
-  //====================================================================================================================
-  /**
-    @ingroup  queries
-    @brief    Checks if a product type contains at least one of many identifiers
-
-    @param t    the product type to inspect.
-    @param ids  Identifiers to check
-    @return     `std::true_type` if `t` contains a field labeld by one of the `ids`, and `std::false_type` otherwise.
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<product_type T, concepts::identifier... ID> struct contains_any;
-
-      template<product_type T, concepts::identifier... ID>
-      using contains_any_t = typename contains_any<T,ID...>::type;
-    }
-    @endcode
-
-    Computes the type returned by a call to contains_any.
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/contains_any.cpp
-    ### Record:
-    @include doc/record/algo/contains_any.cpp
-  **/
-  //====================================================================================================================
   struct contains_any_t : private contains_t
   {
     template<kumi::concepts::product_type T, kumi::concepts::identifier... Is>
@@ -106,35 +46,6 @@ namespace kumi
     }
   };
 
-  //====================================================================================================================
-  /**
-    @ingroup  queries
-    @brief    Checks if a product type contains fields based only on selected identifiers
-
-    @param t    the product type to inspect.
-    @param ids  Identifiers to check
-    @return     `std::true_type` if `t` contains a field labeled by any of the `ids`, and `std::false_type` otherwise.
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<product_type T, concepts::identifier... ID> struct contains_only;
-
-      template<product_type T, concepts::identifier... ID>
-      using contains_only_t = typename contains_only<T,ID...>::type;
-    }
-    @endcode
-
-    Computes the type returned by a call to contains_only.
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/contains_only.cpp
-    ### Record:
-    @include doc/record/algo/contains_only.cpp
-  **/
-  //====================================================================================================================
   struct contains_only_t
   {
     template<kumi::concepts::product_type T, kumi::concepts::identifier... Is>
@@ -155,35 +66,6 @@ namespace kumi
     }
   };
 
-  //====================================================================================================================
-  /**
-    @ingroup  queries
-    @brief    Checks if a product type contains no fields based on any of the selected identifiers
-
-    @param t    the product type to inspect.
-    @param ids  Identifiers to check
-    @return     `std::true_type` if `t` contains no field labeled by any of the `ids`, and `std::false_type` otherwise.
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<product_type T, concepts::identifier... ID> struct contains_none;
-
-      template<product_type T, concepts::identifier... ID>
-      using contains_none_t = typename contains_none<T,ID...>::type;
-    }
-    @endcode
-
-    Computes the type returned by a call to contains_none.
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/contains_none.cpp
-    ### Record:
-    @include doc/record/algo/contains_none.cpp
-  **/
-  //====================================================================================================================
   struct contains_none_t : private contains_any_t
   {
     template<kumi::concepts::product_type T, kumi::concepts::identifier... Is>
@@ -194,9 +76,225 @@ namespace kumi
     }
   };
 
+  //====================================================================================================================
+  /**
+    @ingroup queries
+
+    @var contains
+    @brief Callable object checking if a product type contains a given identifier
+
+    @qualifier nodiscard inline constexpr noexcept
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/contains.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T, identifier ID>
+      constexpr auto contains(T && t, ID const& id) noexcept;
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: The product type to inspect
+      - `id`: The identifier to check for
+
+    @subgroupheader{Return value}
+
+      * `std::true_type` if `t` contains a field labeled with the `id` identifier, `std::false_type` otherwise.
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi::result
+    {
+      template<product_type T, concepts::identifier ID> struct contains;
+
+      template<product_type T, concepts::identifier ID>
+      using contains_t = typename contains<T,ID>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi:contains:
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/contains.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/contains.cpp}
+  **/
+  //====================================================================================================================
   inline constexpr contains_t contains{};
+
+  //====================================================================================================================
+  /**
+    @ingroup queries
+
+    @var contains_any
+    @brief Callable object checking if a product type contains at least one of many identifier
+
+    @qualifier nodiscard inline constexpr noexcept
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/contains.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T, identifier... IDs>
+      constexpr auto contains_any(T && t, IDs const&... ids) noexcept;
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: The product type to inspect
+      - `ids`: The identifiers to check for
+
+    @subgroupheader{Return value}
+
+      * `std::true_type` if `t` contains a field labeled with one of the `ids`, `std::false_type` otherwise.
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi::result
+    {
+      template<product_type T, concepts::identifier... ID> struct contains_any;
+
+      template<product_type T, concepts::identifier... ID>
+      using contains_any_t = typename contains_any<T,ID...>::type;
+    }
+    @endcode
+
+
+    Computes the return type of a call to kumi:contains_any
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/contains_any.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/contains_any.cpp}
+  **/
+  //====================================================================================================================
   inline constexpr contains_any_t contains_any{};
+
+  //====================================================================================================================
+  /**
+    @ingroup queries
+
+    @var contains_only
+    @brief Callable object checking if a product type contains fields based on on selected identifier
+
+    @qualifier nodiscard inline constexpr noexcept
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/contains.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T, identifier... IDs>
+      constexpr auto contains_only(T && t, IDs const&... ids) noexcept;
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: The product type to inspect
+      - `ids`: The identifiers to check for
+
+    @subgroupheader{Return value}
+
+      * `std::true_type` if `t` contains a field labeled with any of the `ids`, `std::false_type` otherwise.
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi::result
+    {
+      template<product_type T, concepts::identifier... ID> struct contains_only;
+
+      template<product_type T, concepts::identifier... ID>
+      using contains_only_t = typename contains_only<T,ID...>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi:contains_only
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/contains_only.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/contains_only.cpp}
+  **/
+  //====================================================================================================================
   inline constexpr contains_only_t contains_only{};
+
+  //====================================================================================================================
+  /**
+    @ingroup queries
+
+    @var contains_none
+    @brief Callable object checking if a product type contains no fields based on any of the selected identifier
+
+    @qualifier nodiscard inline constexpr noexcept
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/contains.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T, identifier... IDs>
+      constexpr auto contains_none(T && t, IDs const&... ids) noexcept;
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: The product type to inspect
+      - `ids`: The identifiers to check for
+
+    @subgroupheader{Return value}
+
+      * `std::true_type` if `t` contains no field labeled with any of the `ids`, `std::false_type` otherwise.
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi::result
+    {
+      template<product_type T, concepts::identifier... ID> struct contains_none;
+
+      template<product_type T, concepts::identifier... ID>
+      using contains_none_t = typename contains_none<T,ID...>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi:contains_none
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/contains_none.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/contains_none.cpp}
+  **/
+  //====================================================================================================================
   inline constexpr contains_none_t contains_none{};
 
   namespace result

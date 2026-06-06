@@ -9,25 +9,6 @@
 
 namespace kumi
 {
-  //====================================================================================================================
-  /**
-    @ingroup  queries
-    @brief    Return the index of a value which type satisfies a given predicate
-
-    On record types, this function operates as if the elements are ordered. The considered order is the order of
-    declaration.
-
-    @param  t Product Type to process
-    @param  p Unary predicate. p must return a value convertible to `bool` for every element of t.
-    @return Integral index of the element inside `t` if present, kumi::size<T>::value otherwise.
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/locate.cpp
-    ### Record:
-    @include doc/record/algo/locate.cpp
-  **/
-  //====================================================================================================================
   struct locate_t
   {
     template<typename Pred, kumi::concepts::product_type T>
@@ -48,5 +29,47 @@ namespace kumi
     }
   };
 
+  //====================================================================================================================
+  /**
+    @ingroup queries
+
+    @var locate
+    @brief Callable object Returning the index of a value which type satisfies a given predicate
+
+    On record types, this function operates as if the elements are ordered. The considered order is the order of
+    declaration.
+
+    @qualifier nodiscatd inline constexpr noexcept
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/find.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T, typename Predicate>
+      constexpr auto find(T && t, Predicate p) noexcept;
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to process
+      - `p`: Unary predicate. p must return a value convertible to `bool` for every element of t.
+
+    @subgroupheader{Return value}
+
+      * The integral index of the element inside `t` that matches the predicate, size_v<T> otherwise.
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/locate.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/locate.cpp}
+  **/
+  //====================================================================================================================
   inline constexpr locate_t locate{};
 }

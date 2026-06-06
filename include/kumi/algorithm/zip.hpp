@@ -9,44 +9,6 @@
 
 namespace kumi
 {
-  //====================================================================================================================
-  /**
-    @ingroup  generators
-    @brief    Constructs a tuple where the ith element is the product type of all ith elements of `t0`,`ts`...
-
-    On record types, this function operates on elements as if they were ordered. The considered order is the order
-    of declaration.
-
-    @note This function does not take part in overload resolution if the product types do not follow the same
-    semantic. @see follows_same_semantic
-
-    @param t0 Product type to convert
-    @param ts Product types to convert
-    @return   The tuple of all combination of elements from `t0`, `ts`...
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<product_type T> struct zip;
-
-      template<product_type T>
-      using zip_t = typename zip<T>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::zip
-
-    @see zip_min
-    @see zip_max
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/zip.cpp
-    ### Record:
-    @include doc/record/algo/zip.cpp
-  **/
-  //====================================================================================================================
   struct zip_t
   {
     template<kumi::concepts::product_type T0, kumi::concepts::sized_product_type<kumi::size_v<T0>>... Ts>
@@ -77,46 +39,6 @@ namespace kumi
     }
   };
 
-  //====================================================================================================================
-  /**
-    @ingroup  generators
-    @brief    Constructs a tuple where the ith element is the product type of all ith elements of `t0`,`ts`...
-
-    On record types, this function operates on elements as if they were ordered. The considered order is the order
-    of declaration.
-
-    @note This function does not take part in overload resolution if the product types do not follow the same
-    semantic. @see follows_same_semantic
-
-    @param t0 Product type to convert
-    @param ts Product types to convert
-    @return   The tuple of all combination of elements from `t0`, `ts`...
-
-    @note `zip_min` truncates product types based on the smallest size.
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<product_type T> struct zip_min;
-
-      template<product_type T>
-      using zip_min_t = typename zip<T>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::zip_min
-
-    @see zip
-    @see zip_max
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/zip_min.cpp
-    ### Record:
-    @include doc/record/algo/zip_min.cpp
-  **/
-  //====================================================================================================================
   struct zip_min_t : private kumi::zip_t
   {
     template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
@@ -134,43 +56,6 @@ namespace kumi
     }
   };
 
-  //====================================================================================================================
-  /**
-    @ingroup  generators
-    @brief    Constructs a tuple where the ith element is the product type of all ith elements of `t0`,`ts`...
-
-    On record types, this function operates on elements as if they were ordered. The considered order is the order
-    of declaration.
-
-    @note This function does not take part in overload resolution if the product types do not follow the same
-    semantic. @see follows_same_semantic
-
-    @param t0 Product type to convert
-    @param ts Product types to convert
-    @return   The tuple of all combination of elements from `t0`,`ts`...
-
-    @note `zip_max` fills missing elements to reach the biggest product type size.
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<product_type T> struct zip_max;
-
-      template<product_type T>
-      using zip_max_t = typename zip<T>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::zip_max
-
-    @see zip
-    @see zip_min
-
-    ## Example:
-    @include doc/tuple/algo/zip_max.cpp
-  **/
-  //====================================================================================================================
   struct zip_max_t
   {
     template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
@@ -202,8 +87,200 @@ namespace kumi
     }
   };
 
+  //====================================================================================================================
+  /**
+    @ingroup generators
+
+    @var zip
+    @brief Callable object constructing a tuple where the ith element is the product type of all ith elements of
+  `t0`,`ts`...
+
+    On record types, this function operates on elements as if they were ordered. The considered order is the order
+    of declaration.
+
+    @note This function does not take part in overload resolution if the product types do not follow the same
+    semantic. @see follows_same_semantic
+
+    @see zip_min
+    @see zip_max
+
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/zip.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T, product_type... Ts>
+      constexpr auto zip(T && t, Ts &&... ts);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product type to convert
+      - `ts`: Product types to convert
+
+    @subgroupheader{Return value}
+
+      * The tuple of all combination of elements from `t0`, `ts`...
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi::result
+    {
+      template<product_type T> struct zip;
+
+      template<product_type T>
+      using zip_t = typename zip<T>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::zip
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/zip.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/zip.cpp}
+  **/
+  //====================================================================================================================
   inline constexpr zip_t zip{};
+
+  //====================================================================================================================
+  /**
+    @ingroup generators
+
+    @var zip_min
+    @brief Callable object constructing a tuple where the ith element is the product type of all ith elements of
+  `t0`,`ts`...
+
+    On record types, this function operates on elements as if they were ordered. The considered order is the order
+    of declaration.
+
+    @note This function does not take part in overload resolution if the product types do not follow the same
+    semantic. @see follows_same_semantic
+
+    @note `zip_min` truncates product types based on the smallest size.
+
+    @see zip
+    @see zip_max
+
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/zip.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T, product_type... Ts>
+      constexpr auto zip_min(T && t, Ts &&... ts);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product type to convert
+      - `ts`: Product types to convert
+
+    @subgroupheader{Return value}
+
+      * The tuple of all combination of elements from `t0`, `ts`...
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi::result
+    {
+      template<product_type T> struct zip_min;
+
+      template<product_type T>
+      using zip_min_t = typename zip<T>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::zip_min
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/zip_min.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/zip_min.cpp}
+  **/
+  //====================================================================================================================
   inline constexpr zip_min_t zip_min{};
+
+  //====================================================================================================================
+  /**
+    @ingroup generators
+
+    @var zip_min
+    @brief Callable object constructing a tuple where the ith element is the product type of all ith elements of
+  `t0`,`ts`...
+
+    On record types, this function operates on elements as if they were ordered. The considered order is the order
+    of declaration.
+
+    @note This function does not take part in overload resolution if the product types do not follow the same
+    semantic. @see follows_same_semantic
+
+    @note `zip_max` fills missing elements to reach the biggest product type size.
+
+    @see zip
+    @see zip_min
+
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/zip.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T, product_type... Ts>
+      constexpr auto zip_max(T && t, Ts &&... ts);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product type to convert
+      - `ts`: Product types to convert
+
+    @subgroupheader{Return value}
+
+      * The tuple of all combination of elements from `t0`, `ts`...
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi::result
+    {
+      template<product_type T> struct zip_max;
+
+      template<product_type T>
+      using zip_max_t = typename zip<T>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::zip_max
+
+    @groupheader{Example}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/zip_max.cpp}
+  **/
+  //====================================================================================================================
   inline constexpr zip_max_t zip_max{};
 
   namespace result

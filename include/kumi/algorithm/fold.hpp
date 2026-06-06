@@ -9,38 +9,6 @@
 
 namespace kumi
 {
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the generalized combination of all elements using a tail recursive call.
-
-    On record types, this function operates on the underlying values, not on the fields themselves.
-
-    @param f      Binary callable function to apply
-    @param t      Product type to operate on
-    @param init   Optional initial value of the fold
-    @return       The value of `f( f( f(init, get<0>(t)), ...), get<N-1>(t))`
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<typename Function, product_type T, typename Value> struct fold_left;
-
-      template<typename Function, product_type T, typename Value>
-      using fold_left_t = typename fold_left<Function,T,Value>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::fold_left
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/fold_left.cpp
-    ### Record:
-    @include doc/record/algo/fold_left.cpp
-  **/
-  //====================================================================================================================
   struct fold_left_t
   {
     template<typename Function, kumi::concepts::product_type T, typename Value>
@@ -68,70 +36,6 @@ namespace kumi
     }
   };
 
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the generalized associative combination of all elements using a tail recursive call.
-
-    On record types, this function operates on the underlying values, not on the fields themselves.
-
-    @param f  Associative binary callable function to apply
-    @param t  Product type of size 1 or more to operate on
-    @return   The value of `f( f( f(get<0>(t), get<1>(t)), ...), get<N-1>(t))`
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<typename Function, product_type T> struct fold_left;
-
-      template<typename Function, product_type T>
-      using fold_left_t = typename fold_left<Function,T>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::fold_left
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/fold_left.cpp
-    ### Record:
-    @include doc/record/algo/fold_left.cpp
-  **/
-  //====================================================================================================================
-
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the generalized combination of all elements using a non-tail recursive call.
-
-    On record types, this function operates on the underlying values, not on the fields themselves.
-
-    @param f      Binary callable function to apply
-    @param t      Product type to operate on
-    @param init   Optional initial value of the fold
-    @return       The value of `f(get<0>(t), f(... , f(get<N-1>(t), init))`
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<typename Function, product_type T, typename Value> struct fold_right;
-
-      template<typename Function, product_type T, typename Value>
-      using fold_right_t = typename fold_right<Function,T,Value>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::fold_right
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/fold_right.cpp
-    ### Record:
-    @include doc/record/algo/fold_right.cpp
-  **/
-  //====================================================================================================================
   struct fold_right_t
   {
     template<typename Function, kumi::concepts::product_type T, typename Value>
@@ -161,37 +65,129 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup  reductions
-    @brief    Computes the generalized associative combinationof all elements using a non-tail recursive call.
+    @ingroup reductions
+
+    @var fold_left
+    @brief Callable object computing the generalized combination of all elements using a tail recursive call.
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 
-    @param f  Associative binary callable function to apply
-    @param t  Product type of size 1 or more to operate on
-    @return   The value of `f(get<0>(t), f(... , f(get<N-2>(t), get<N-1>(t)))`
+    @qualifier nodiscard inline constexpr
 
-    ## Helper type
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/fold.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<typename Function, product_type T, typename Value>
+      constexpr auto fold_left(Function && f, T && t, Value init);
+    @endcode
+
+    @code
+      template<typename Function, product_type T>
+      constexpr auto fold_left(Function && f, T && t);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `f`: Binary callable function to apply
+      - `t`: Product type to operate on
+      - `v`: Optional initial value of the fold, first element is used otherwise
+
+    @subgroupheader{Return value}
+
+      * The resulting value of the application of the function `f( f( f(init, get<0>(t)), ...), get<N-1>(t))`
+
+    @groupheader{Helper type}
+
     @code
     namespace kumi::result
     {
-      template<typename Function, product_type T> struct fold_right;
+      template<typename Function, product_type T, typename Value> struct fold_left;
 
-      template<typename Function, product_type T>
-      using fold_right_t = typename fold_right<Function,T>::type;
+      template<typename Function, product_type T, typename Value>
+      using fold_left_t = typename fold_left<Function,T,Value>::type;
     }
     @endcode
 
-    Computes the return type of a call to kumi::fold_right
+    Computes the return type of a call to kumi::fold_left
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/fold_right.cpp
-    ### Record:
-    @include doc/record/algo/fold_right.cpp
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/fold_left.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/fold_left.cpp}
+  **/
+  //====================================================================================================================
+  inline constexpr fold_left_t fold_left{};
+
+  //====================================================================================================================
+  /**
+    @ingroup reductions
+
+    @var fold_right
+    @brief Callable object computing the generalized combination of all elements using a non-tail recursive call.
+
+    On record types, this function operates on the underlying values, not on the fields themselves.
+
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/fold.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<typename Function, product_type T, typename Value>
+      constexpr auto fold_right(Function && f, T && t, Value init);
+    @endcode
+
+    @code
+      template<typename Function, product_type T>
+      constexpr auto fold_right(Function && f, T && t);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `f`: Binary callable function to apply
+      - `t`: Product type to operate on
+      - `v`: Optional initial value of the fold, last element is used otherwise
+
+    @subgroupheader{Return value}
+
+      * The resulting value of the application of the function `f(get<0>(t), f(... , f(get<N-1>(t), init))`
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi::result
+    {
+      template<typename Function, product_type T, typename Value> struct fold_right;
+
+      template<typename Function, product_type T, typename Value>
+      using fold_right_t = typename fold_right<Function,T,Value>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::fold_left
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/fold_right.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/fold_right.cpp}
   **/
   //====================================================================================================================
   inline constexpr fold_right_t fold_right{};
-  inline constexpr fold_left_t fold_left{};
 
   namespace result
   {

@@ -9,37 +9,6 @@
 
 namespace kumi
 {
-  //====================================================================================================================
-  /**
-    @ingroup    generators
-    @brief      Return the Cartesian Product of all elements of its arguments product types
-    @param ts   Product types to process
-    @return     A tuple containing all the product types built from all combination of all ts'
-                elements
-
-    @note This function does not take part in overload resolution if the input product types do not follow the same
-          semantic. @see concepts::follows_same_semantic
-
-    ## Helper type
-    @code
-    namespace kumi
-    {
-      template<product_type... Ts> struct cartesian_product;
-
-      template<product_type... Ts>
-      using cartesian_product_t = typename cartesian_product<Ts...>::type;
-    }
-    @endcode
-
-    Computes the type returned by a call to kumi::cartesian_product.
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/cartesian_product.cpp
-    ### Record:
-    @include doc/record/algo/cartesian_product.cpp
-  **/
-  //====================================================================================================================
   struct cartesian_product_t
   {
     template<kumi::concepts::product_type... Ts>
@@ -72,6 +41,62 @@ namespace kumi
     }
   };
 
+  //====================================================================================================================
+  /**
+    @ingroup generators
+    @brief  Callable object returning the Cartesian Product of all elements of its arguments product types
+
+    @var cartesian_product
+
+    @note This function does not take part in overload resolution if the input product types do not follow the same
+          semantic. @see concepts::follows_same_semantic
+
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/cartesian_product.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type... Ts>
+      [[nodiscard]] constexpr auto cartesian_product(Ts &&... ts);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `ts`: Product Types to process
+
+    @subgroupheader{Return value}
+
+    * A tuple containing all the product types built from all combination of all ts' elements
+
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi
+    {
+      template<product_type... Ts> struct cartesian_product;
+
+      template<product_type... Ts>
+      using cartesian_product_t = typename cartesian_product<Ts...>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::cartesian_product
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/cartesian_product.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/cartesian_product.cpp}
+  **/
+  //====================================================================================================================
   inline constexpr cartesian_product_t cartesian_product{};
 
   namespace result

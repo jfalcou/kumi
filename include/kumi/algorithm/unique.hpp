@@ -9,35 +9,6 @@
 
 namespace kumi
 {
-  //====================================================================================================================
-  /**
-    @ingroup  generators
-    @brief    Returns a product type with consecutive duplicate types removed (pairwise uniqueness).
-    @param  t Product type to process
-    @return A product type containing elements of `t` with consecutive duplicates removed.
-
-    On record types, this function operates on the underlying values, not on the fields themselves.
-
-    ## Helper type
-    @code
-    namespace kumi
-    {
-      template<product_type T> struct unique;
-
-      template<product_type T>
-      using unique_t = typename unique<T>::type;
-    }
-    @endcode
-
-    Computes the type returned by a call to kumi::unique.
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/unique.cpp
-    ### Record:
-    @include doc/record/algo/unique.cpp
-  **/
-  //====================================================================================================================
   struct unique_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
@@ -59,36 +30,6 @@ namespace kumi
     }
   };
 
-  //====================================================================================================================
-  /**
-    @ingroup  generators
-    @brief    Return the product type containing the values of the first occurence of each type in `t`.
-
-    @param  t Product type to process
-    @return A product type built by keeping the first occurrence of every distinct element type in `t`.
-
-    On record types, this function operates on the underlying values, not on the fields themselves.
-
-    ## Helper type
-    @code
-    namespace kumi
-    {
-      template<product_type T> struct all_unique;
-
-      template<product_type T>
-      using all_unique_t = typename all_unique<T>::type;
-    }
-    @endcode
-
-    Computes the type returned by a call to kumi::all_unique.
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/all_unique.cpp
-    ### Record:
-    @include doc/record/algo/all_unique.cpp
-  **/
-  //====================================================================================================================
   struct all_unique_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
@@ -112,7 +53,116 @@ namespace kumi
     }
   };
 
+  //====================================================================================================================
+  /**
+    @ingroup generators
+
+    @var unique
+    @brief Callable object returning a product type with consecutive duplicate types removed (pairwise uniqueness).
+
+    On record types, this function operates on the underlying values, not on the fields themselves.
+
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/unique.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T>
+      constexpr auto unique(T && t);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to process
+
+    @subgroupheader{Return value}
+
+      * A product type containing elements of `t` with consecutive duplicates removed.
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi
+    {
+      template<product_type T> struct unique;
+
+      template<product_type T>
+      using unique_t = typename unique<T>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::unique
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/unique.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/unique.cpp}
+  **/
+  //====================================================================================================================
   inline constexpr unique_t unique{};
+
+  //====================================================================================================================
+  /**
+    @ingroup generators
+
+    @var all_unique
+    @brief Callable object returning a product type containing the values of the first occurence of each type in `t`.
+
+    On record types, this function operates on the underlying values, not on the fields themselves.
+
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/unique.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T>
+      constexpr auto all_unique(T && t);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to process
+
+    @subgroupheader{Return value}
+
+      * A product type built by keeping the first occurrence of every distinct element type in `t`.
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi
+    {
+      template<product_type T> struct all_unique;
+
+      template<product_type T>
+      using all_unique_t = typename all_unique<T>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::all_unique
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/all_unique.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/all_unique.cpp}
+  **/
+  //====================================================================================================================
   inline constexpr all_unique_t all_unique{};
 
   namespace result

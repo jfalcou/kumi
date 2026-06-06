@@ -9,35 +9,6 @@
 
 namespace kumi
 {
-  //====================================================================================================================
-  /**
-    @ingroup  generators
-    @brief    Converts a product_type<Ts...> to an instance of a product_type<Target...>
-
-    @tparam Target destination type to associate to each member of the product type `t`
-    @param  t Product type to convert
-    @return A Product type containing the values of `t` where each member is of type Target
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<typename Target, product_type T> struct member_cast;
-
-      template<typename Target, Product_type T>
-      using member_cast_t = typename member_cast<Target, T>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::member_cast
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/member_cast.cpp
-    ### Record:
-    @include doc/record/algo/member_cast.cpp
-  **/
-  //====================================================================================================================
   template<typename Target> struct member_cast_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
@@ -59,6 +30,60 @@ namespace kumi
     }
   };
 
+  //====================================================================================================================
+  /**
+    @ingroup generators
+
+    @var member_cast
+    @brief Callable object converting a product_type<Ts...> to an instance of a product_type<Target...>
+
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/member_cast.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T>
+      constexpr auto member_cast<Target>(T && t) noexcept;
+    @endcode
+
+    @subgroupheader{Template Parameters}
+      - `Target`: destination type to associate to each member of the product type `t`
+
+    @subgroupheader{Parameters}
+      - `t`: Product Type to convert
+
+    @subgroupheader{Return value}
+      * A Product type containing the values of `t` where each member is of type Target
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi::result
+    {
+      template<typename Target, product_type T> struct member_cast;
+
+      template<typename Target, Product_type T>
+      using member_cast_t = typename member_cast<Target, T>::type;
+    }
+    @endcode
+
+
+    Computes the return type of a call to kumi::member_cast
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/member_cast.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/member_cast.cpp}
+  **/
+  //====================================================================================================================
   template<typename T> inline constexpr member_cast_t<T> member_cast{};
 
   namespace result

@@ -9,17 +9,59 @@
 
 namespace kumi
 {
+  struct front_t
+  {
+    template<kumi::concepts::non_empty_product_type T>
+    [[nodiscard]] KUMI_ABI constexpr decltype(auto) operator()(T&& t) const
+    {
+      if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)));
+      else return get<0>(KUMI_FWD(t));
+    }
+  };
+
+  struct back_t
+  {
+    template<kumi::concepts::non_empty_product_type T>
+    [[nodiscard]] KUMI_ABI constexpr decltype(auto) operator()(T&& t) const
+    {
+      if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)));
+      else return get<kumi::size_v<T> - 1>(KUMI_FWD(t));
+    }
+  };
+
   //====================================================================================================================
   /**
-    @ingroup  queries
-    @brief    Retrieves the front of a product type
+    @ingroup queries
 
-    @param t  Base product type
-    @return   A reference to the first element of the product type `t`.
+    @var front
+    @brief Callable object used to retrieve the front of a product type
 
     @note This function does not take part in overload resolution if t is an empty product type.
 
-    ## Helper type
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/back_front.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T>
+      [[nodiscard]] constexpr decltype(auto) front(T && t);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to access
+
+    @subgroupheader{Return value}
+
+      *A reference to the first element of the product type `t`.
+
+    @groupheader{Helper type}
+
     @code
     namespace kumi::result
     {
@@ -32,34 +74,50 @@ namespace kumi
 
     Computes the return type of a call to kumi::front
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/back-front.cpp
-    ### Record:
-    @include doc/record/algo/back-front.cpp
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/back-front.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/back-front.cpp}
   **/
   //====================================================================================================================
-  struct front_t
-  {
-    template<kumi::concepts::non_empty_product_type T>
-    [[nodiscard]] KUMI_ABI constexpr decltype(auto) operator()(T&& t) const
-    {
-      if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)));
-      else return get<0>(KUMI_FWD(t));
-    }
-  };
+  inline constexpr front_t front{};
 
   //====================================================================================================================
   /**
-    @ingroup  queries
-    @brief    Retrieves the back of a product type
+    @ingroup queries
 
-    @param t  Base product type
-    @return   A reference to the last element of the product type `t`
+    @var back
+    @brief Callable object used to retrieve the back of a product type
 
     @note This function does not take part in overload resolution if t is an empty product type.
 
-    ## Helper type
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/back_front.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T>
+      [[nodiscard]] constexpr decltype(auto) back(T && t);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to access
+
+    @subgroupheader{Return value}
+
+      *A reference to the last element of the product type `t`.
+
+    @groupheader{Helper type}
+
     @code
     namespace kumi::result
     {
@@ -72,24 +130,15 @@ namespace kumi
 
     Computes the return type of a call to kumi::back
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/back-front.cpp
-    ### Record:
-    @include doc/record/algo/back-front.cpp
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/back-front.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/back-front.cpp}
   **/
   //====================================================================================================================
-  struct back_t
-  {
-    template<kumi::concepts::non_empty_product_type T>
-    [[nodiscard]] KUMI_ABI constexpr decltype(auto) operator()(T&& t) const
-    {
-      if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)));
-      else return get<kumi::size_v<T> - 1>(KUMI_FWD(t));
-    }
-  };
-
-  inline constexpr front_t front{};
   inline constexpr back_t back{};
 
   namespace result

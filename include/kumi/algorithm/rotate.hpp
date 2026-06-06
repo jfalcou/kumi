@@ -9,39 +9,6 @@
 
 namespace kumi
 {
-  //====================================================================================================================
-  /**
-    @ingroup  generators
-    @brief    Rotates the element of a product type R positions to the left, wrapping around when
-              getting to the beginning.
-
-    On record types, this function operates on elements as if they were ordered. The considered order is the order
-    of declaration.
-
-    @tparam R Rotation factor
-    @param t  Product type to rotate.
-    @return   A product type equivalent to `t` with elements rotated R positions to the left.
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<std::size_t R, product_type T> struct rotate_left;
-
-      template<std::size_t R, product_type T>
-      using rotate_left_t = typename rotate_left<R, T>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::rotate_left
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/rotate_left.cpp
-    ### Record:
-    @include doc/record/algo/rotate_left.cpp
-  **/
-  //====================================================================================================================
   template<std::size_t R> struct rotate_left_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
@@ -64,39 +31,6 @@ namespace kumi
     }
   };
 
-  //====================================================================================================================
-  /**
-    @ingroup  generators
-    @brief    Rotates the element of a product type R positions to the right, wrapping around when
-              getting to the end.
-
-    On record types, this function operates on elements as if they were ordered. The considered order is the order
-    of declaration.
-
-    @tparam R Rotation factor
-    @param t  Product type to rotate.
-    @return   A product type equivalent to `t` with elements rotated R positions to the right.
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<std::size_t R, product_type T> struct rotate_right;
-
-      template<std::size_t R, product_type T>
-      using rotate_right_t = typename rotate_right<R, T>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::rotate_right
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/rotate_right.cpp
-    ### Record:
-    @include doc/record/algo/rotate_right.cpp
-  **/
-  //====================================================================================================================
   template<std::size_t R> struct rotate_right_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
@@ -120,8 +54,124 @@ namespace kumi
     }
   };
 
+  //====================================================================================================================
+  /**
+    @ingroup generators
+
+    @var rotate_left
+    @brief Callable object
+
+    On record types, this function operates on elements as if they were ordered. The considered order is the order
+    of declaration.
+
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/rotate.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<std::size_t R, product_type T>
+      constexpr auto rotate_left<R>(T && t) ;
+    @endcode
+
+    @subgroupheader{Template Parameters}
+      - `R`:  Rotation factor
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to rotate
+
+    @subgroupheader{Return value}
+
+      * A product type equivalent to `t` with elements rotated R positions to the left.
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi::result
+    {
+      template<std::size_t R, product_type T> struct rotate_left;
+
+      template<std::size_t R, product_type T>
+      using rotate_left_t = typename rotate_left<R, T>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::rotate_left
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/rotate_left.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/rotate_left.cpp}
+  **/
+  //====================================================================================================================
   template<std::size_t R> inline constexpr rotate_left_t<R> rotate_left{};
 
+  //====================================================================================================================
+  /**
+    @ingroup generators
+
+    @var rotate_right
+    @brief Callable object
+
+    On record types, this function operates on elements as if they were ordered. The considered order is the order
+    of declaration.
+
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/rotate.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<std::size_t R, product_type T>
+      constexpr auto rotate_right<R>(T && t) ;
+    @endcode
+
+    @subgroupheader{Template Parameters}
+      - `R`:  Rotation factor
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to rotate
+
+    @subgroupheader{Return value}
+
+      * A product type equivalent to `t` with elements rotated R positions to the right.
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi::result
+    {
+      template<std::size_t R, product_type T> struct rotate_right;
+
+      template<std::size_t R, product_type T>
+      using rotate_right_t = typename rotate_right<R, T>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::rotate_right
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/rotate_right.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/rotate_right.cpp}
+  **/
+  //====================================================================================================================
   template<std::size_t R> inline constexpr rotate_right_t<R> rotate_right{};
 
   namespace result

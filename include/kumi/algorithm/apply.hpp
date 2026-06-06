@@ -9,40 +9,6 @@
 
 namespace kumi
 {
-  //====================================================================================================================
-  /**
-    @ingroup transforms
-    @brief Invoke the Callable object f with the elements of the product type unrolled as arguments.
-
-    `f` is applied on the underlying values when the input `t` is a record type.
-
-    @note This function does not take part in overload resolution if `f` can't be applied to the
-          elements of `t`.
-
-    @param f	Callable object to be invoked
-    @param t  Product Type whose elements are used as arguments to f
-    @return   The value returned by f.
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<typename Function, product_type T> struct apply;
-
-      template<typename Function, product_type T>
-      using apply_t = typename apply<Function,T>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::apply
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/apply.cpp
-    ### Record:
-    @include doc/record/algo/apply.cpp
-  **/
-  //====================================================================================================================
   struct apply_t
   {
     template<typename Function, kumi::concepts::product_type T>
@@ -74,6 +40,64 @@ namespace kumi
     }
   };
 
+  //====================================================================================================================
+  /**
+    @ingroup transforms
+
+    @var apply
+    @brief Callable object invoking the callable object f with the elements of the product type unrolled as arguments.
+
+    `f` is applied on the underlying values when the input `t` is a record type.
+
+    @note This function does not take part in overload resolution if `f` can't be applied to the
+          elements of `t`.
+
+    @qualifier inline constexpr noexcept
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/apply.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<typename Function, product_type T>
+      constexpr decltype(auto) apply(Function && f, T && t) noexcept;
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `f`: Callable object to be invoked
+      - `t`: Product Type whose elements are used as arguments to f
+
+    @subgroupheader{Return value}
+
+      *The value returned by f.
+
+    @groupheader{Helper type}
+
+    @code
+    namespace kumi::result
+    {
+      template<typename Function, product_type T> struct apply;
+
+      template<typename Function, product_type T>
+      using apply_t = typename apply<Function,T>::type;
+    }
+    @endcode
+
+    Computes the return type of a call to kumi::apply
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/apply.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/apply.cpp}
+  **/
+  //====================================================================================================================
   inline constexpr apply_t apply{};
   inline constexpr apply_field_t apply_field{};
 
