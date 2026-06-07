@@ -9,10 +9,8 @@
 #include <kumi/record.hpp>
 #include <kumi/algorithm/map.hpp>
 #include <tts/tts.hpp>
-#include <string_view>
 
 using namespace kumi::literals;
-using namespace std::literals;
 
 TTS_CASE("Check result::map_field<F,record...> behavior")
 {
@@ -31,7 +29,7 @@ TTS_CASE("Check result::map_field<F,record...> behavior")
                             kumi::field<kumi::name<"c">, int const*>, kumi::field<kumi::name<"d">, double const*>>));
 
   auto add = [](kumi::str name, auto a, auto b) {
-    if (name.as<std::string_view>().compare("a") == 0) return (a * b) / (a + 1.);
+    if (name.compare("a") == 0) return (a * b) / (a + 1.);
     else return (a * b) / (b + 1.);
   };
   using add_t = decltype(add);
@@ -62,8 +60,8 @@ TTS_CASE("Check map_name(f, record) behavior"){
 {
   auto s = map_field(
     [](kumi::str name, auto m) {
-      if (name.as<std::string_view>().ends_with('t')) return sizeof(m);
-      else if (name.as<std::string_view>().ends_with('c')) return 1 + sizeof(m);
+      if (name.ends_with("t"_str)) return sizeof(m);
+      else if (name.ends_with("c"_str)) return 1 + sizeof(m);
       else return 2 + sizeof(m);
     },
     t);
@@ -86,7 +84,7 @@ TTS_CASE("Check map_name(f, record) behavior"){
     kumi::record{"whatever"_id = short{2}, "coat"_id = 2.3f, "boat"_id = 4, "biologic"_id = 5., "dystopic"_id = 'a'};
   auto s = map_field(
     [](kumi::str name, auto m, auto n) {
-      if (name.as<std::string_view>().find('o') < name.size()) return sizeof(m);
+      if (name.find("o"_str) < name.size()) return sizeof(m);
       else return static_cast<int>(n) * sizeof(m);
     },
     t, u);
@@ -123,7 +121,7 @@ TTS_CASE("Check map_field(f, record) constexpr behavior"){
   constexpr auto u = kumi::record{"d"_id = 2, "b"_id = 3, "c"_id = 4, "a"_id = 5};
   constexpr auto s = map_field(
     [](kumi::str name, auto m, auto n) {
-      if (name.as<std::string_view>().compare("a"sv) == 0) return sizeof(m);
+      if (name.compare("a"_str) == 0) return sizeof(m);
       else return n * sizeof(m);
     },
     t, u);
