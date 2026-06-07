@@ -9,7 +9,7 @@
 
 namespace kumi
 {
-  template<std::size_t N, std::size_t O> struct tiles_t
+  template<std::size_t N, std::size_t O> struct tiles_t : private kumi::function::builder_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
@@ -22,22 +22,16 @@ namespace kumi
         constexpr auto proj = kumi::function::tiler(kumi::index<kumi::size_v<T>>, kumi::index<N>, kumi::index<O>,
                                                     std::make_index_sequence<bs>{});
 
-        return (*this)(KUMI_FWD(t), get<0>(proj), get<1>(proj));
+        return this->tiles_(KUMI_FWD(t), get<0>(proj), get<1>(proj));
       }
     }
 
     template<typename T, std::size_t... B, std::size_t... E>
-    constexpr auto operator()(T&& t, std::index_sequence<B...>, std::index_sequence<E...>) const
+    KUMI_ABI constexpr auto tiles_(T&& t, std::index_sequence<B...>, std::index_sequence<E...>) const
     {
       return kumi::tuple{
-        (*this)(KUMI_FWD(t), std::integral_constant<std::size_t, E>{}, std::make_index_sequence<B>{})...};
-    }
-
-    template<typename T, std::size_t I, std::size_t... J>
-    KUMI_ABI constexpr auto operator()(T&& t, std::integral_constant<std::size_t, I>, std::index_sequence<J...>) const
-    {
-      using res_t = kumi::builder_make_t<T, kumi::element_t<J + I, T>...>;
-      return res_t{get<J + I>(KUMI_FWD(t))...};
+        this->builder_t::operator()(KUMI_FWD(t), kumi::function::shifter(std::integral_constant<std::size_t, E>{},
+                                                                         std::make_index_sequence<B>{}))...};
     }
   };
 

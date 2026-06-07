@@ -9,7 +9,7 @@
 
 namespace kumi
 {
-  struct transpose_t
+  struct transpose_t : private kumi::function::builder_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
@@ -21,20 +21,17 @@ namespace kumi
         constexpr std::size_t c = kumi::size_v<T>;
         constexpr std::size_t s = kumi::size_v<kumi::element_t<0, T>>;
         constexpr auto pos = kumi::function::zipper(kumi::index<c>, kumi::index<s>);
-        return (*this)(KUMI_FWD(t), get<1>(pos), get<0>(pos));
+        return this->transpose_extern_(KUMI_FWD(t), get<1>(pos), get<0>(pos));
       }
     }
 
     template<typename T, std::size_t... I, std::size_t... J>
-    KUMI_ABI constexpr decltype(auto) operator()(T&& t, std::index_sequence<I...>, std::index_sequence<J...> is) const
+    KUMI_ABI constexpr decltype(auto) transpose_extern_(T&& t,
+                                                        std::index_sequence<I...>,
+                                                        std::index_sequence<J...> is) const
     {
-      return kumi::make_tuple((*this)(KUMI_FWD(t), kumi::index<I>, is)...);
-    }
-
-    template<std::size_t E, typename T, std::size_t... I>
-    KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<E>, std::index_sequence<I...>) const noexcept
-    {
-      return kumi::builder<kumi::element_t<0, T>>::make(get<E>(get<I>(KUMI_FWD(t)))...);
+      return kumi::make_tuple(
+        this->builder_t::operator()(KUMI_FWD(t), std::integral_constant<std::size_t, I>{}, is)...);
     }
   };
 

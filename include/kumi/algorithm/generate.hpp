@@ -13,12 +13,12 @@ namespace kumi
   {
     template<typename Function> [[nodiscard]] KUMI_ABI constexpr auto operator()(Function const& f) const noexcept
     {
-      return (*this)(f, std::make_index_sequence<N>{});
+      if constexpr (N == 0) return kumi::tuple{};
+      else return this->generate_(f, std::make_index_sequence<N>{});
     }
 
-  protected:
     template<typename F, std::size_t... I>
-    KUMI_ABI constexpr decltype(auto) operator()(F&& f, std::index_sequence<I...>) const noexcept
+    KUMI_ABI constexpr decltype(auto) generate_(F&& f, std::index_sequence<I...>) const noexcept
     {
       if constexpr (N == 0) return kumi::tuple{};
       else return kumi::tuple{kumi::invoke(KUMI_FWD(f), kumi::index<I>)...};
@@ -29,7 +29,7 @@ namespace kumi
   {
     template<typename T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T const& v) const noexcept
     {
-      return this->generate_t<N>::operator()([&](auto) { return v; }, std::make_index_sequence<N>{});
+      return this->generate_([&](auto) { return v; }, std::make_index_sequence<N>{});
     }
   };
 
@@ -37,8 +37,7 @@ namespace kumi
   {
     template<typename T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T v) const noexcept
     {
-      return this->generate_t<N>::operator()([&](auto I) { return static_cast<T>(v + I); },
-                                             std::make_index_sequence<N>{});
+      return this->generate_([&](auto I) { return static_cast<T>(v + I); }, std::make_index_sequence<N>{});
     }
   };
 

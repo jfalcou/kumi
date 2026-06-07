@@ -16,11 +16,11 @@ namespace kumi
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return 0;
       else if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)), p);
-      else return (*this)(p, KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T>>{});
+      else return this->locate_(p, KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T>>{});
     }
 
     template<typename Pred, typename T, std::size_t... I>
-    constexpr auto operator()(Pred p, T&& t, std::index_sequence<I...>) const
+    constexpr auto locate_(Pred p, T&& t, std::index_sequence<I...>) const
     {
       bool checks[] = {kumi::invoke(p, get<I>(KUMI_FWD(t)))...};
       for (std::size_t i = 0; i < kumi::size_v<T>; ++i)

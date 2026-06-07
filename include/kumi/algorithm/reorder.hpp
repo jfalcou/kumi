@@ -35,17 +35,18 @@ namespace kumi
       using proj_t = std::remove_cvref_t<decltype(Projections)>;
       if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
       else if constexpr (proj_t::size() == 0) return builder<T>::make();
-      else return (*this)(KUMI_FWD(t), Projections);
+      else return this->reindex_(KUMI_FWD(t), Projections);
     }
 
-    template<typename T, auto... E> constexpr auto operator()(T&& t, kumi::projection_map<E...>) const
+    template<typename T, auto... E> KUMI_ABI constexpr auto reindex_(T&& t, kumi::projection_map<E...>) const
     {
-      return kumi::builder<T>::make(visit<E>(KUMI_FWD(t))...);
+      return kumi::builder<T>::make(visit<E, reindex_t>(KUMI_FWD(t))...);
     }
 
-    template<kumi::concepts::projection auto P, typename T> static constexpr auto visit(T&& t)
+    template<kumi::concepts::projection auto P, template<auto> class C, typename T>
+    KUMI_ABI static constexpr auto visit(T&& t)
     {
-      if constexpr (kumi::concepts::projection_map<decltype(P)>) return kumi::reindex_t<P>{}(KUMI_FWD(t));
+      if constexpr (kumi::concepts::projection_map<decltype(P)>) return C<P>{}(KUMI_FWD(t));
       else
       {
         static_assert(requires { get<P>(std::declval<T>()); }, "[KUMI] - Invalid projection for input type");

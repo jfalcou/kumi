@@ -15,7 +15,7 @@ namespace kumi
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
       else if constexpr (kumi::concepts::record_type<T>)
-        return member_cast_(KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T>>{});
+        return this->member_cast_(KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T>>{});
       else
       {
         using type = kumi::_::as_homogeneous_t<Target, kumi::size_v<T>>;

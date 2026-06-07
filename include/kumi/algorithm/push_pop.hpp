@@ -14,29 +14,25 @@ namespace kumi
     template<kumi::concepts::product_type T, typename V>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, V&& v) const
     {
-      return (*this)(KUMI_FWD(t), KUMI_FWD(v), std::make_index_sequence<kumi::size_v<T>>{});
+      return this->push_front_(KUMI_FWD(t), KUMI_FWD(v), std::make_index_sequence<kumi::size_v<T>>{});
     }
 
-  private:
     template<typename T, typename V, std::size_t... I>
-    KUMI_ABI constexpr auto operator()(T&& t, V&& v, std::index_sequence<I...>) const
+    KUMI_ABI constexpr auto push_front_(T&& t, V&& v, std::index_sequence<I...>) const
     {
       return kumi::builder<T>::make(KUMI_FWD(v), get<I>(KUMI_FWD(t))...);
     }
   };
 
-  struct pop_front_t
+  struct pop_front_t : private kumi::function::builder_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
-      else return (*this)(KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T> - 1>{});
-    }
-
-  private:
-    template<typename T, std::size_t... I> KUMI_ABI constexpr auto operator()(T&& t, std::index_sequence<I...>) const
-    {
-      return kumi::builder<T>::make(get<I + 1>(KUMI_FWD(t))...);
+      else
+        return this->builder_t::operator()(KUMI_FWD(t),
+                                           kumi::function::shifter(std::integral_constant<std::size_t, 1>{},
+                                                                   std::make_index_sequence<kumi::size_v<T> - 1>{}));
     }
   };
 
@@ -45,29 +41,22 @@ namespace kumi
     template<kumi::concepts::product_type T, typename V>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, V&& v) const
     {
-      return (*this)(KUMI_FWD(t), KUMI_FWD(v), std::make_index_sequence<kumi::size_v<T>>{});
+      return this->push_back_(KUMI_FWD(t), KUMI_FWD(v), std::make_index_sequence<kumi::size_v<T>>{});
     }
 
-  private:
     template<typename T, typename V, std::size_t... I>
-    KUMI_ABI constexpr auto operator()(T&& t, V&& v, std::index_sequence<I...>) const
+    KUMI_ABI constexpr auto push_back_(T&& t, V&& v, std::index_sequence<I...>) const
     {
       return kumi::builder<T>::make(get<I>(KUMI_FWD(t))..., KUMI_FWD(v));
     }
   };
 
-  struct pop_back_t
+  struct pop_back_t : private kumi::function::builder_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
-      else return (*this)(KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T> - 1>{});
-    }
-
-  private:
-    template<typename T, std::size_t... I> KUMI_ABI constexpr auto operator()(T&& t, std::index_sequence<I...>) const
-    {
-      return kumi::builder<T>::make(get<I>(KUMI_FWD(t))...);
+      else return this->builder_t::operator()(KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T> - 1>{});
     }
   };
 

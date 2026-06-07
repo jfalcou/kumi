@@ -16,7 +16,7 @@ namespace kumi
     {
       if constexpr (kumi::concepts::record_type<T>) return (*this)(f, kumi::values_of(KUMI_FWD(t)), init);
       else if constexpr (kumi::concepts::empty_product_type<T>) return init;
-      else return (*this)(f, KUMI_FWD(t), init, kumi::index<0>, std::make_index_sequence<kumi::size_v<T>>{});
+      else return this->fold_left_(f, KUMI_FWD(t), init, std::make_index_sequence<kumi::size_v<T>>{});
     }
 
     template<typename Function, kumi::concepts::non_empty_product_type T>
@@ -25,14 +25,15 @@ namespace kumi
       if constexpr (kumi::concepts::record_type<T>) return (*this)(f, kumi::values_of(KUMI_FWD(t)));
       else if constexpr (kumi::concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
       else
-        return (*this)(f, KUMI_FWD(t), get<0>(KUMI_FWD(t)), kumi::index<1>,
-                       std::make_index_sequence<kumi::size_v<T> - 1>{});
+        return this->fold_left_(f, KUMI_FWD(t), get<0>(KUMI_FWD(t)),
+                                kumi::function::shifter(std::integral_constant<std::size_t, 1>{},
+                                                        std::make_index_sequence<kumi::size_v<T> - 1>{}));
     }
 
-    template<typename F, typename T, typename V, std::size_t N, std::size_t... I>
-    constexpr auto operator()(F f, T&& t, V v, kumi::index_t<N>, std::index_sequence<I...>) const
+    template<typename F, typename T, typename V, std::size_t... I>
+    KUMI_ABI constexpr auto fold_left_(F f, T&& t, V v, std::index_sequence<I...>) const
     {
-      return (kumi::function::foldable{v} >> ... >> kumi::bind_back(f, get<I + N>(KUMI_FWD(t))))();
+      return (kumi::function::foldable{v} >> ... >> kumi::bind_back(f, get<I>(KUMI_FWD(t))))();
     }
   };
 
@@ -43,7 +44,7 @@ namespace kumi
     {
       if constexpr (kumi::concepts::record_type<T>) return (*this)(f, kumi::values_of(KUMI_FWD(t)), init);
       else if constexpr (kumi::concepts::empty_product_type<T>) return init;
-      else return (*this)(f, KUMI_FWD(t), init, kumi::index<0>, std::make_index_sequence<kumi::size_v<T>>{});
+      else return this->fold_right_(f, KUMI_FWD(t), init, std::make_index_sequence<kumi::size_v<T>>{});
     }
 
     template<typename Function, kumi::concepts::non_empty_product_type T>
@@ -52,14 +53,15 @@ namespace kumi
       if constexpr (kumi::concepts::record_type<T>) return (*this)(f, kumi::values_of(KUMI_FWD(t)));
       else if constexpr (kumi::concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
       else
-        return (*this)(f, KUMI_FWD(t), get<0>(KUMI_FWD(t)), kumi::index<1>,
-                       std::make_index_sequence<kumi::size_v<T> - 1>{});
+        return this->fold_right_(f, KUMI_FWD(t), get<0>(KUMI_FWD(t)),
+                                 kumi::function::shifter(std::integral_constant<std::size_t, 1>{},
+                                                         std::make_index_sequence<kumi::size_v<T> - 1>{}));
     }
 
-    template<typename F, typename T, typename V, std::size_t N, std::size_t... I>
-    constexpr auto operator()(F f, T&& t, V v, kumi::index_t<N>, std::index_sequence<I...>) const
+    template<typename F, typename T, typename V, std::size_t... I>
+    KUMI_ABI constexpr auto fold_right_(F f, T&& t, V v, std::index_sequence<I...>) const
     {
-      return (kumi::bind_front(f, get<I + N>(KUMI_FWD(t))) << ... << kumi::function::foldable{v})();
+      return (kumi::bind_front(f, get<I>(KUMI_FWD(t))) << ... << kumi::function::foldable{v})();
     }
   };
 

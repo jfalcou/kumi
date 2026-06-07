@@ -9,7 +9,7 @@
 
 namespace kumi
 {
-  struct cat_t
+  struct cat_t : private kumi::function::builder_t
   {
     template<kumi::concepts::product_type... Ts>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(Ts&&... ts) const
@@ -19,20 +19,8 @@ namespace kumi
       else
       {
         constexpr auto pos = kumi::function::concatenater(std::index_sequence<kumi::size_v<Ts>...>{});
-        return this->map_(kumi::forward_as_tuple(KUMI_FWD(ts)...), std::make_index_sequence<sizeof...(Ts)>{},
-                          get<1>(pos), get<0>(pos));
+        return this->builder_t::operator()(kumi::forward_as_tuple(KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
       }
-    }
-
-    template<typename T, std::size_t... O, std::size_t... E, std::size_t... I>
-    KUMI_ABI constexpr auto map_(T&& t,
-                                 std::index_sequence<O...>,
-                                 std::index_sequence<E...>,
-                                 std::index_sequence<I...>) const
-    {
-      using U = kumi::common_product_type_t<std::remove_cvref_t<kumi::element_t<O, T>>...>;
-      using res_t = kumi::builder_make_t<U, kumi::element_t<E, kumi::element_t<I, T>>...>;
-      return res_t{get<E>(get<I>(KUMI_FWD(t)))...};
     }
   };
 

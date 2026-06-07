@@ -9,13 +9,14 @@
 
 namespace kumi
 {
-  struct extract_t
+  struct extract_t : private kumi::function::builder_t
   {
     template<std::size_t I0, std::size_t I1, kumi::concepts::product_type T>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<I0> i0, kumi::index_t<I1>) const noexcept
     {
       static_assert((I0 <= kumi::size_v<T>) && (I1 <= kumi::size_v<T>), "[KUMI] - Invalid index");
-      return (*this)(KUMI_FWD(t), i0, std::make_index_sequence<I1 - I0>{});
+      return this->builder_t::operator()(KUMI_FWD(t), kumi::function::shifter(std::integral_constant<std::size_t, i0>{},
+                                                                              std::make_index_sequence<I1 - I0>{}));
     }
 
     template<std::size_t I0, kumi::concepts::product_type T>
@@ -24,16 +25,9 @@ namespace kumi
       static_assert(I0 <= kumi::size_v<T>, "[KUMI] - Invalid index");
       return (*this)(KUMI_FWD(t), i0, kumi::index<size_v<T>>);
     }
-
-  protected:
-    template<typename T, std::size_t N, std::size_t... I>
-    KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<N>, std::index_sequence<I...>) const
-    {
-      return kumi::builder<T>::make(get<N + I>(KUMI_FWD(t))...);
-    }
   };
 
-  struct split_t : private extract_t
+  struct split_t : private kumi::function::builder_t
   {
     template<std::size_t I0, kumi::concepts::product_type T>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, [[maybe_unused]] kumi::index_t<I0> i0) const noexcept
@@ -41,8 +35,8 @@ namespace kumi
       static_assert(I0 <= kumi::size_v<T>, "[KUMI] - Invalid index");
       constexpr auto proj = kumi::function::splitter(kumi::index<I0>, std::make_index_sequence<kumi::size_v<T> - I0>{});
 
-      return kumi::tuple{this->extract_t::operator()(KUMI_FWD(t), kumi::index<0>, get<0>(proj)),
-                         this->extract_t::operator()(KUMI_FWD(t), kumi::index<0>, get<1>(proj))};
+      return kumi::tuple{this->builder_t::operator()(KUMI_FWD(t), get<0>(proj)),
+                         this->builder_t::operator()(KUMI_FWD(t), get<1>(proj))};
     }
   };
 

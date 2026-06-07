@@ -9,7 +9,7 @@
 
 namespace kumi
 {
-  struct reverse_t
+  struct reverse_t : private kumi::function::builder_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
@@ -17,15 +17,8 @@ namespace kumi
       else
       {
         constexpr auto idx = kumi::function::reverser(std::make_index_sequence<kumi::size_v<T>>{});
-        return (*this)(KUMI_FWD(t), idx);
+        return this->builder_t::operator()(KUMI_FWD(t), idx);
       }
-    }
-
-  private:
-    template<typename T, std::size_t... I>
-    KUMI_ABI constexpr decltype(auto) operator()(T&& t, std::index_sequence<I...>) const
-    {
-      return kumi::builder<T>::make(get<I>(KUMI_FWD(t))...);
     }
   };
 

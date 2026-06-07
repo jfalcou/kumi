@@ -9,16 +9,7 @@
 
 namespace kumi
 {
-  struct splitter_t
-  {
-    template<typename T, std::size_t... I> KUMI_ABI constexpr auto operator()(T&& t, std::index_sequence<I...>) const
-    {
-      using res_t = kumi::builder_make_t<T, kumi::element_t<I, T>...>;
-      return res_t{get<I>(KUMI_FWD(t))...};
-    }
-  };
-
-  template<template<typename> typename Pred> struct partition_t : private splitter_t
+  template<template<typename> typename Pred> struct partition_t : private kumi::function::builder_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
     {
@@ -29,13 +20,13 @@ namespace kumi
           return kumi::function::selector(std::bool_constant<Pred<kumi::stored_element_t<I, T>>::value>{}...);
         }(std::make_index_sequence<kumi::size_v<T>>{});
 
-        return kumi::tuple{this->splitter_t::operator()(KUMI_FWD(t), get<0>(pos)),
-                           this->splitter_t::operator()(KUMI_FWD(t), get<1>(pos))};
+        return kumi::tuple{this->builder_t::operator()(KUMI_FWD(t), get<0>(pos)),
+                           this->builder_t::operator()(KUMI_FWD(t), get<1>(pos))};
       }
     }
   };
 
-  template<template<typename> typename Pred> struct filter_t : private splitter_t
+  template<template<typename> typename Pred> struct filter_t : private kumi::function::builder_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
     {
@@ -46,12 +37,12 @@ namespace kumi
           return kumi::function::selector(std::bool_constant<Pred<kumi::stored_element_t<I, T>>::value>{}...);
         }(std::make_index_sequence<kumi::size_v<T>>{});
 
-        return this->splitter_t::operator()(KUMI_FWD(t), get<0>(pos));
+        return this->builder_t::operator()(KUMI_FWD(t), get<0>(pos));
       }
     }
   };
 
-  template<template<typename> typename Pred> struct filter_not_t : private splitter_t
+  template<template<typename> typename Pred> struct filter_not_t : private kumi::function::builder_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
     {
@@ -62,7 +53,7 @@ namespace kumi
           return function::selector(std::bool_constant<Pred<kumi::stored_element_t<I, T>>::value>{}...);
         }(std::make_index_sequence<kumi::size_v<T>>{});
 
-        return this->splitter_t::operator()(KUMI_FWD(t), get<1>(pos));
+        return this->builder_t::operator()(KUMI_FWD(t), get<1>(pos));
       }
     }
   };

@@ -9,11 +9,6 @@
 
 namespace kumi
 {
-  namespace _
-  {
-
-  }
-
   struct reduce_t
   {
     template<kumi::concepts::monoid M, kumi::concepts::product_type T>
@@ -38,7 +33,8 @@ namespace kumi
     }
 
     template<typename M, typename T, std::size_t N, std::size_t... F, std::size_t... S>
-    constexpr auto reduce_(M&& m, T&& t, kumi::index_t<N>, std::index_sequence<F...>, std::index_sequence<S...>) const
+    KUMI_ABI constexpr auto reduce_(
+      M&& m, T&& t, kumi::index_t<N>, std::index_sequence<F...>, std::index_sequence<S...>) const
     {
       if constexpr (N == 1)
         return (*this)(KUMI_FWD(m), kumi::tuple{kumi::invoke(KUMI_FWD(m), get<F>(KUMI_FWD(t)), get<S>(KUMI_FWD(t)))...,
@@ -73,7 +69,7 @@ namespace kumi
     }
 
     template<typename M, typename T, typename F, std::size_t N, std::size_t... I, std::size_t... J>
-    constexpr auto map_reduce_(
+    KUMI_ABI constexpr auto map_reduce_(
       M&& m, T&& t, F f, kumi::index_t<N>, std::index_sequence<I...>, std::index_sequence<J...>) const
     {
       if constexpr (N == 1)

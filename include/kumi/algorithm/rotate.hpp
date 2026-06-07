@@ -9,7 +9,7 @@
 
 namespace kumi
 {
-  template<std::size_t R> struct rotate_left_t
+  template<std::size_t R> struct rotate_left_t : private kumi::function::builder_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
     {
@@ -19,19 +19,12 @@ namespace kumi
       {
         constexpr auto idxs =
           kumi::function::rotater(std::make_index_sequence<kumi::size_v<T>>{}, kumi::index<(R % kumi::size_v<T>)>);
-        return (*this)(KUMI_FWD(t), idxs);
+        return this->builder_t::operator()(KUMI_FWD(t), idxs);
       }
-    }
-
-  private:
-    template<typename T, std::size_t... N>
-    KUMI_ABI constexpr auto operator()(T&& t, std::index_sequence<N...>) const noexcept
-    {
-      return kumi::builder<T>::make(get<N>(KUMI_FWD(t))...);
     }
   };
 
-  template<std::size_t R> struct rotate_right_t
+  template<std::size_t R> struct rotate_right_t : private kumi::function::builder_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
@@ -42,15 +35,8 @@ namespace kumi
         constexpr auto F = R % kumi::size_v<T>;
         constexpr auto idxs =
           kumi::function::rotater(std::make_index_sequence<kumi::size_v<T>>{}, kumi::index<(kumi::size_v<T> - F)>);
-        return (*this)(KUMI_FWD(t), idxs);
+        return this->builder_t::operator()(KUMI_FWD(t), idxs);
       }
-    }
-
-  private:
-    template<typename T, std::size_t... N>
-    KUMI_ABI constexpr auto operator()(T&& t, std::index_sequence<N...>) const noexcept
-    {
-      return kumi::builder<T>::make(get<N>(KUMI_FWD(t))...);
     }
   };
 

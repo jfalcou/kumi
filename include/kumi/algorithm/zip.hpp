@@ -9,7 +9,7 @@
 
 namespace kumi
 {
-  struct zip_t
+  struct zip_t : private kumi::function::builder_t
   {
     template<kumi::concepts::product_type T0, kumi::concepts::sized_product_type<kumi::size_v<T0>>... Ts>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T0&& t0, Ts&&... ts) const
@@ -20,22 +20,15 @@ namespace kumi
       {
         constexpr auto c = 1 + sizeof...(Ts);
         constexpr auto pos = kumi::function::zipper(kumi::index<c>, kumi::index<kumi::size_v<T0>>);
-        return (*this)(kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
+        return this->zip_(kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
       }
     }
 
-  protected:
     template<typename T, std::size_t... I, std::size_t... J>
-    constexpr auto operator()(T&& t, std::index_sequence<I...>, std::index_sequence<J...> is) const
+    KUMI_ABI constexpr auto zip_(T&& t, std::index_sequence<I...>, std::index_sequence<J...> is) const
     {
-      return kumi::make_tuple((*this)(KUMI_FWD(t), kumi::index<I>, is)...);
-    }
-
-    template<typename T, std::size_t N, std::size_t... I>
-    constexpr auto operator()(T&& t, kumi::index_t<N>, std::index_sequence<I...>) const
-    {
-      using U = kumi::common_product_type_t<std::remove_cvref_t<kumi::element_t<I, T>>...>;
-      return kumi::builder<U>::make(get<N>(get<I>(KUMI_FWD(t)))...);
+      return kumi::make_tuple(
+        this->builder_t::operator()(KUMI_FWD(t), std::integral_constant<std::size_t, I>{}, is)...);
     }
   };
 
@@ -51,7 +44,7 @@ namespace kumi
       {
         constexpr std::size_t c = 1 + sizeof...(Ts);
         constexpr auto pos = kumi::function::zipper(kumi::index<c>, kumi::index<m>);
-        return this->zip_t::operator()(kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
+        return this->zip_(kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
       }
     }
   };
@@ -68,19 +61,18 @@ namespace kumi
       {
         constexpr std::size_t c = 1 + sizeof...(Ts);
         constexpr auto pos = kumi::function::zipper(kumi::index<c>, kumi::index<m>);
-        return (*this)(kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
+        return this->zip_(kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
       }
     }
 
-  private:
     template<typename T, std::size_t... I, std::size_t... J>
-    constexpr auto operator()(T&& t, std::index_sequence<I...>, std::index_sequence<J...> is) const
+    constexpr auto zip_(T&& t, std::index_sequence<I...>, std::index_sequence<J...> is) const
     {
-      return kumi::make_tuple((*this)(KUMI_FWD(t), kumi::index<I>, is)...);
+      return kumi::make_tuple(this->zip_intern_(KUMI_FWD(t), kumi::index<I>, is)...);
     }
 
     template<typename T, std::size_t N, std::size_t... I>
-    constexpr auto operator()(T&& t, kumi::index_t<N>, std::index_sequence<I...>) const
+    constexpr auto zip_intern_(T&& t, kumi::index_t<N>, std::index_sequence<I...>) const
     {
       using U = kumi::common_product_type_t<std::remove_cvref_t<kumi::element_t<I, T>>...>;
       return kumi::builder<U>::make(kumi::function::get_or<N>(get<I>(KUMI_FWD(t)), kumi::none)...);

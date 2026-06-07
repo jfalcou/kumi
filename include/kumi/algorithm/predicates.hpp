@@ -17,10 +17,7 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return true;
       else if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)), p);
       else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::invoke(p, get<0>(KUMI_FWD(t)));
-      else
-        return [&]<std::size_t... I>(std::index_sequence<I...>) {
-          return (kumi::invoke(p, get<I>(KUMI_FWD(t))) && ...);
-        }(std::make_index_sequence<kumi::size_v<T>>{});
+      else return this->all_of_(KUMI_FWD(t), p, std::make_index_sequence<kumi::size_v<T>>{});
     }
 
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
@@ -28,10 +25,13 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return true;
       else if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)));
       else if constexpr (kumi::concepts::sized_product_type<T, 1>) return !!get<0>(KUMI_FWD(t));
-      else
-        return [&]<std::size_t... I>(std::index_sequence<I...>) {
-          return (get<I>(KUMI_FWD(t)) && ...);
-        }(std::make_index_sequence<kumi::size_v<T>>{});
+      else return (*this)(KUMI_FWD(t), kumi::function::identity);
+    }
+
+    template<typename T, typename Pred, std::size_t... I>
+    KUMI_ABI constexpr auto all_of_(T&& t, Pred p, std::index_sequence<I...>) const
+    {
+      return (kumi::invoke(p, get<I>(KUMI_FWD(t))) && ...);
     }
   };
 
@@ -43,10 +43,7 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return true;
       else if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)), p);
       else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::invoke(p, get<0>(KUMI_FWD(t)));
-      else
-        return [&]<std::size_t... I>(std::index_sequence<I...>) {
-          return (kumi::invoke(p, get<I>(KUMI_FWD(t))) || ...);
-        }(std::make_index_sequence<kumi::size_v<T>>{});
+      else return this->any_of_(KUMI_FWD(t), p, std::make_index_sequence<kumi::size_v<T>>{});
     }
 
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
@@ -54,10 +51,13 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return false;
       else if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)));
       else if constexpr (kumi::concepts::sized_product_type<T, 1>) return !!get<0>(KUMI_FWD(t));
-      else
-        return [&]<std::size_t... I>(std::index_sequence<I...>) {
-          return (get<I>(KUMI_FWD(t)) || ...);
-        }(std::make_index_sequence<kumi::size_v<T>>{});
+      else return (*this)(KUMI_FWD(t), kumi::function::identity);
+    }
+
+    template<typename T, typename Pred, std::size_t... I>
+    KUMI_ABI constexpr auto any_of_(T&& t, Pred p, std::index_sequence<I...>) const
+    {
+      return (kumi::invoke(p, get<I>(KUMI_FWD(t))) || ...);
     }
   };
 
@@ -80,14 +80,17 @@ namespace kumi
     template<typename Pred, kumi::concepts::product_type T>
     [[nodiscard]] KUMI_ABI constexpr std::size_t operator()(T&& t, Pred p) const noexcept
     {
-      constexpr std::size_t o = 1ULL;
-      constexpr std::size_t z = 0ULL;
-      if constexpr (kumi::concepts::empty_product_type<T>) return z;
+      if constexpr (kumi::concepts::empty_product_type<T>) return 0ULL;
       else if constexpr (kumi::concepts::record_type<T>) return (*this)(values_of(KUMI_FWD(t)), p);
-      else
-        return [&]<std::size_t... I>(std::index_sequence<I...>) {
-          return ((kumi::invoke(p, get<I>(KUMI_FWD(t))) ? o : z) + ... + z);
-        }(std::make_index_sequence<kumi::size_v<T>>{});
+      else return this->count_if_(KUMI_FWD(t), p, std::make_index_sequence<kumi::size_v<T>>{});
+    }
+
+    template<typename Pred, typename T, std::size_t... I>
+    KUMI_ABI constexpr std::size_t count_if_(T&& t, Pred p, std::index_sequence<I...>) const
+    {
+      [[maybe_unused]] constexpr std::size_t o = 1ULL;
+      [[maybe_unused]] constexpr std::size_t z = 0ULL;
+      return ((kumi::invoke(p, get<I>(KUMI_FWD(t))) ? o : z) + ... + z);
     }
   };
 

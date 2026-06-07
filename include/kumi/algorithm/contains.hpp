@@ -21,12 +21,11 @@ namespace kumi
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, ID const& id) const noexcept
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return std::false_type{};
-      else return (*this)(KUMI_FWD(t), id, std::make_index_sequence<kumi::size_v<T>>{});
+      else return this->contains_(KUMI_FWD(t), id, std::make_index_sequence<kumi::size_v<T>>{});
     }
 
-  protected:
     template<typename T, typename ID, std::size_t... I>
-    constexpr auto operator()(T&&, ID const&, std::index_sequence<I...>) const
+    KUMI_ABI constexpr auto contains_(T&&, ID const&, std::index_sequence<I...>) const
     {
       return std::bool_constant<kumi::_::can_get_field_by_value<std::remove_cvref_t<ID>, kumi::element_t<I, T>...>>{};
     }
@@ -41,8 +40,7 @@ namespace kumi
       else if constexpr (sizeof...(Is) == 0) return std::false_type{};
       else
         return std::bool_constant<(
-          decltype(contains_t::operator()(std::declval<T>(), ids, std::make_index_sequence<kumi::size_v<T>>{})){} ||
-          ...)>{};
+          decltype(this->contains_(std::declval<T>(), ids, std::make_index_sequence<kumi::size_v<T>>{})){} || ...)>{};
     }
   };
 
@@ -55,12 +53,11 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return std::false_type{};
       else if constexpr (sizeof...(Is) == 0) return std::false_type{};
       else if constexpr (sizeof...(Is) < kumi::size_v<T>) return std::false_type{};
-      else return (*this)(KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T>>{}, ids...);
+      else return this->contains_only_(KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T>>{}, ids...);
     }
 
-  protected:
     template<typename T, std::size_t... I, typename... Is>
-    constexpr auto operator()(T&&, std::index_sequence<I...>, Is const&...) const
+    KUMI_ABI constexpr auto contains_only_(T&&, std::index_sequence<I...>, Is const&...) const
     {
       return std::bool_constant<(kumi::_::contains<kumi::element_t<I, T>, Is...> && ...)>{};
     }

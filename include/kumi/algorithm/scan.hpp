@@ -20,7 +20,7 @@ namespace kumi
       else
       {
         auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
-        return (*this)(KUMI_FWD(t), init, f, op, std::make_index_sequence<kumi::size_v<T> - 1>{});
+        return this->inclusive_scan_left_(KUMI_FWD(t), init, f, op, std::make_index_sequence<kumi::size_v<T> - 1>{});
       }
     }
 
@@ -32,9 +32,8 @@ namespace kumi
       else return (*this)(KUMI_FWD(m), KUMI_FWD(t), m.identity);
     }
 
-  private:
     template<typename T, typename V, typename F, typename O, std::size_t... I>
-    constexpr auto operator()(T&& t, V v, F f, O o, std::index_sequence<I...>) const
+    KUMI_ABI constexpr auto inclusive_scan_left_(T&& t, V v, F f, O o, std::index_sequence<I...>) const
     {
       return (kumi::function::scannable{o, kumi::invoke(f, v, get<0>(KUMI_FWD(t)))} >> ... >>
               kumi::bind_back(f, get<I + 1>(KUMI_FWD(t))))();
@@ -51,7 +50,7 @@ namespace kumi
       else
       {
         auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
-        return (*this)(KUMI_FWD(t), init, f, op, std::make_index_sequence<kumi::size_v<T> - 1>{});
+        return this->exclusive_scan_left_(KUMI_FWD(t), init, f, op, std::make_index_sequence<kumi::size_v<T> - 1>{});
       }
     }
 
@@ -63,9 +62,8 @@ namespace kumi
       else return (*this)(KUMI_FWD(m), KUMI_FWD(t), m.identity);
     }
 
-  private:
     template<typename T, typename V, typename F, typename O, std::size_t... I>
-    constexpr auto operator()(T&& t, V v, F f, O o, std::index_sequence<I...>) const
+    KUMI_ABI constexpr auto exclusive_scan_left_(T&& t, V v, F f, O o, std::index_sequence<I...>) const
     {
       return (kumi::function::scannable{o, v} >> ... >> kumi::bind_back(f, get<I>(KUMI_FWD(t))))();
     }
@@ -81,7 +79,7 @@ namespace kumi
       else
       {
         auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
-        return (*this)(KUMI_FWD(t), init, f, op, std::make_index_sequence<kumi::size_v<T> - 1>{});
+        return this->inclusive_scan_right_(KUMI_FWD(t), init, f, op, std::make_index_sequence<kumi::size_v<T> - 1>{});
       }
     }
 
@@ -93,9 +91,8 @@ namespace kumi
       else return (*this)(KUMI_FWD(m), KUMI_FWD(t), m.identity);
     }
 
-  private:
     template<typename T, typename V, typename F, typename O, std::size_t... I>
-    KUMI_ABI constexpr auto operator()(T&& t, V v, F f, O o, std::index_sequence<I...>) const
+    KUMI_ABI constexpr auto inclusive_scan_right_(T&& t, V v, F f, O o, std::index_sequence<I...>) const
     {
       return (kumi::bind_front(f, get<I>(KUMI_FWD(t)))
               << ... << kumi::function::scannable{o, kumi::invoke(f, get<kumi::size_v<T> - 1>(KUMI_FWD(t)), v)})();
@@ -112,7 +109,7 @@ namespace kumi
       else
       {
         auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
-        return (*this)(KUMI_FWD(t), init, f, op, std::make_index_sequence<kumi::size_v<T> - 1>{});
+        return this->exclusive_scan_right_(KUMI_FWD(t), init, f, op, std::make_index_sequence<kumi::size_v<T> - 1>{});
       }
     }
 
@@ -124,9 +121,8 @@ namespace kumi
       else return (*this)(KUMI_FWD(m), KUMI_FWD(t), m.identity);
     }
 
-  private:
     template<typename T, typename V, typename F, typename O, std::size_t... I>
-    KUMI_ABI constexpr auto operator()(T&& t, V v, F f, O o, std::index_sequence<I...>) const
+    KUMI_ABI constexpr auto exclusive_scan_right_(T&& t, V v, F f, O o, std::index_sequence<I...>) const
     {
       return (kumi::bind_front(f, get<I + 1>(KUMI_FWD(t))) << ... << kumi::function::scannable{o, v})();
     }

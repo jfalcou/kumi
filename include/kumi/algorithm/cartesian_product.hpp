@@ -9,7 +9,7 @@
 
 namespace kumi
 {
-  struct cartesian_product_t
+  struct cartesian_product_t : private kumi::function::builder_t
   {
     template<kumi::concepts::product_type... Ts>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(Ts&&... ts) const
@@ -20,24 +20,15 @@ namespace kumi
       {
         constexpr auto sq = std::make_index_sequence<(kumi::size_v<Ts> * ...)>{};
         constexpr auto idx = kumi::function::cartesian_producer(sq, kumi::index<kumi::size_v<Ts>>...);
-        return (*this)(kumi::forward_as_tuple(KUMI_FWD(ts)...), idx, sq);
+        return this->cartesian_product_(kumi::forward_as_tuple(KUMI_FWD(ts)...), idx, sq);
       }
     }
 
-  private:
     template<typename T, typename Seq, std::size_t... I>
-    KUMI_ABI constexpr auto operator()(T&& t, Seq&& s, std::index_sequence<I...>) const
+    KUMI_ABI constexpr auto cartesian_product_(T&& t, Seq&& s, std::index_sequence<I...>) const
     {
       std::make_index_sequence<kumi::size_v<T>> ids{};
-      return kumi::make_tuple(((*this)(KUMI_FWD(t), get<I>(s), ids))...);
-    }
-
-    template<typename T, std::size_t... E, std::size_t... I>
-    KUMI_ABI constexpr auto operator()(T&& t, std::index_sequence<E...>, std::index_sequence<I...>) const
-    {
-      using U = kumi::common_product_type_t<std::remove_cvref_t<kumi::element_t<I, T>>...>;
-      using res_t = kumi::builder_make_t<U, kumi::element_t<E, kumi::element_t<I, T>>...>;
-      return res_t{get<E>(get<I>(KUMI_FWD(t)))...};
+      return kumi::make_tuple((this->builder_t::operator()(KUMI_FWD(t), get<I>(s), ids))...);
     }
   };
 
