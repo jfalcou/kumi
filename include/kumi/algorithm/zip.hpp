@@ -9,7 +9,26 @@
 
 namespace kumi
 {
-  struct zip_t : private kumi::function::builder_t
+  template<typename T, std::size_t... I, std::size_t... J>
+  KUMI_ABI constexpr auto zip_(kumi::adl_tag_t, T&& t, std::index_sequence<I...>, std::index_sequence<J...> is)
+  {
+    return kumi::make_tuple(kumi::function::builder(KUMI_FWD(t), std::integral_constant<std::size_t, I>{}, is)...);
+  }
+
+  template<typename T, std::size_t N, std::size_t... I>
+  constexpr auto zip_intern_(T&& t, kumi::index_t<N>, std::index_sequence<I...>)
+  {
+    using U = kumi::common_product_type_t<std::remove_cvref_t<kumi::function::element_or_t<I, T, kumi::unit>>...>;
+    return kumi::builder<U>::make(kumi::function::get_or<N>(get<I>(KUMI_FWD(t)), kumi::none)...);
+  }
+
+  template<typename T, std::size_t... I, std::size_t... J>
+  constexpr auto zip_max_(kumi::adl_tag_t, T&& t, std::index_sequence<I...>, std::index_sequence<J...> is)
+  {
+    return kumi::make_tuple(kumi::zip_intern_(KUMI_FWD(t), kumi::index<I>, is)...);
+  }
+
+  struct zip_t
   {
     template<kumi::concepts::product_type T0, kumi::concepts::sized_product_type<kumi::size_v<T0>>... Ts>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T0&& t0, Ts&&... ts) const
@@ -20,19 +39,12 @@ namespace kumi
       {
         constexpr auto c = 1 + sizeof...(Ts);
         constexpr auto pos = kumi::function::zipper(kumi::index<c>, kumi::index<kumi::size_v<T0>>);
-        return this->zip_(kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
+        return zip_(kumi::adl_tag, kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
       }
-    }
-
-    template<typename T, std::size_t... I, std::size_t... J>
-    KUMI_ABI constexpr auto zip_(T&& t, std::index_sequence<I...>, std::index_sequence<J...> is) const
-    {
-      return kumi::make_tuple(
-        this->builder_t::operator()(KUMI_FWD(t), std::integral_constant<std::size_t, I>{}, is)...);
     }
   };
 
-  struct zip_min_t : private kumi::zip_t
+  struct zip_min_t
   {
     template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T0&& t0, Ts&&... ts) const
@@ -44,7 +56,7 @@ namespace kumi
       {
         constexpr std::size_t c = 1 + sizeof...(Ts);
         constexpr auto pos = kumi::function::zipper(kumi::index<c>, kumi::index<m>);
-        return this->zip_(kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
+        return zip_(kumi::adl_tag, kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
       }
     }
   };
@@ -61,21 +73,8 @@ namespace kumi
       {
         constexpr std::size_t c = 1 + sizeof...(Ts);
         constexpr auto pos = kumi::function::zipper(kumi::index<c>, kumi::index<m>);
-        return this->zip_(kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
+        return zip_max_(kumi::adl_tag, kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
       }
-    }
-
-    template<typename T, std::size_t... I, std::size_t... J>
-    constexpr auto zip_(T&& t, std::index_sequence<I...>, std::index_sequence<J...> is) const
-    {
-      return kumi::make_tuple(this->zip_intern_(KUMI_FWD(t), kumi::index<I>, is)...);
-    }
-
-    template<typename T, std::size_t N, std::size_t... I>
-    constexpr auto zip_intern_(T&& t, kumi::index_t<N>, std::index_sequence<I...>) const
-    {
-      using U = kumi::common_product_type_t<std::remove_cvref_t<kumi::element_t<I, T>>...>;
-      return kumi::builder<U>::make(kumi::function::get_or<N>(get<I>(KUMI_FWD(t)), kumi::none)...);
     }
   };
 
@@ -96,7 +95,9 @@ namespace kumi
     @see zip_min
     @see zip_max
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -117,19 +118,11 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * The tuple of all combination of elements from `t0`, `ts`...
+      - The tuple of all combination of elements from `t0`, `ts`...
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi::result
-    {
-      template<product_type T> struct zip;
-
-      template<product_type T>
-      using zip_t = typename zip<T>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/zip.hpp zip_t
 
     Computes the return type of a call to kumi::zip
 
@@ -163,7 +156,9 @@ namespace kumi
     @see zip
     @see zip_max
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -184,19 +179,11 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * The tuple of all combination of elements from `t0`, `ts`...
+      - The tuple of all combination of elements from `t0`, `ts`...
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi::result
-    {
-      template<product_type T> struct zip_min;
-
-      template<product_type T>
-      using zip_min_t = typename zip<T>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/zip.hpp zip_min_t
 
     Computes the return type of a call to kumi::zip_min
 
@@ -215,7 +202,7 @@ namespace kumi
   /**
     @ingroup generators
 
-    @var zip_min
+    @var zip_max
     @brief Callable object constructing a tuple where the ith element is the product type of all ith elements of
   `t0`,`ts`...
 
@@ -223,14 +210,16 @@ namespace kumi
     of declaration.
 
     @note This function does not take part in overload resolution if the product types do not follow the same
-    semantic. @see follows_same_semantic
+    semantic. @see kumi::concepts::follows_same_semantic
 
     @note `zip_max` fills missing elements to reach the biggest product type size.
 
     @see zip
     @see zip_min
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -251,19 +240,11 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * The tuple of all combination of elements from `t0`, `ts`...
+      - The tuple of all combination of elements from `t0`, `ts`...
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi::result
-    {
-      template<product_type T> struct zip_max;
-
-      template<product_type T>
-      using zip_max_t = typename zip<T>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/zip.hpp zip_max_t
 
     Computes the return type of a call to kumi::zip_max
 
@@ -277,28 +258,36 @@ namespace kumi
 
   namespace result
   {
+    //! [zip_t]
     template<kumi::concepts::product_type T0, kumi::concepts::sized_product_type<kumi::size_v<T0>>... Ts> struct zip
     {
       using type = decltype(kumi::zip(std::declval<T0>(), std::declval<Ts>()...));
     };
 
+    template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
+    using zip_t = typename kumi::result::zip<T0, Ts...>::type;
+
+    //! [zip_t]
+
+    //! [zip_min_t]
     template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts> struct zip_min
     {
       using type = decltype(kumi::zip_min(std::declval<T0>(), std::declval<Ts>()...));
     };
 
+    template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
+    using zip_min_t = typename kumi::result::zip_min<T0, Ts...>::type;
+
+    //! [zip_min_t]
+
+    //! [zip_max_t]
     template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts> struct zip_max
     {
       using type = decltype(kumi::zip_max(std::declval<T0>(), std::declval<Ts>()...));
     };
 
     template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
-    using zip_t = typename kumi::result::zip<T0, Ts...>::type;
-
-    template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
-    using zip_min_t = typename kumi::result::zip_min<T0, Ts...>::type;
-
-    template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
     using zip_max_t = typename kumi::result::zip_max<T0, Ts...>::type;
+    //! [zip_max_t]
   }
 }

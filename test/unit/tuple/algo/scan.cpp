@@ -105,7 +105,7 @@ TTS_CASE("Check kumi::exclusive_scan_right behavior")
   auto t = kumi::tuple{2., 1, short{55}, 'z'};
 
   auto empty = kumi::exclusive_scan_right([](auto acc, auto) { return acc; }, kumi::tuple{}, 42);
-  TTS_EQUAL(empty, kumi::tuple{42});
+  TTS_EQUAL(empty, kumi::tuple{});
 
   auto sizeof_init = kumi::exclusive_scan_right([](auto m, auto) { return sizeof(m); }, t, std::size_t{0});
 
@@ -130,7 +130,7 @@ TTS_CASE("Check tuple::exclusive_scan_right constexpr behavior")
   constexpr auto t = kumi::tuple{2., 1, short{55}, 'z'};
 
   constexpr auto empty = kumi::exclusive_scan_right([](auto acc, auto) { return acc; }, kumi::tuple{}, 42);
-  TTS_CONSTEXPR_EQUAL(empty, kumi::tuple{42});
+  TTS_CONSTEXPR_EQUAL(empty, kumi::tuple{});
 
   constexpr auto accumulated = kumi::exclusive_scan_right([](auto m, auto) { return sizeof(m); }, t, std::size_t{0});
 
@@ -180,7 +180,7 @@ TTS_CASE("Check kumi::exclusive_scan_left behavior")
   auto t = kumi::tuple{2., 1, short{55}, 'z'};
 
   auto empty = kumi::exclusive_scan_left([](auto acc, auto) { return acc; }, kumi::tuple{}, 42);
-  TTS_EQUAL(empty, kumi::tuple{42});
+  TTS_EQUAL(empty, kumi::tuple{});
 
   auto sizeof_init = kumi::exclusive_scan_left([](auto, auto m) { return sizeof(m); }, t, std::size_t{0});
 
@@ -205,7 +205,7 @@ TTS_CASE("Check tuple::exclusive_scan_left constexpr behavior")
   constexpr auto t = kumi::tuple{2., 1, short{55}, 'z'};
 
   constexpr auto empty = kumi::exclusive_scan_left([](auto acc, auto) { return acc; }, kumi::tuple{}, 42);
-  TTS_CONSTEXPR_EQUAL(empty, kumi::tuple{42});
+  TTS_CONSTEXPR_EQUAL(empty, kumi::tuple{});
 
   constexpr auto accumulated = kumi::exclusive_scan_left([](auto, auto m) { return sizeof(m); }, t, std::size_t{0});
 

@@ -38,7 +38,9 @@ namespace kumi
 
     @note This function does not take part in overload resolution if t is an empty product type.
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -58,19 +60,11 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      *A reference to the first element of the product type `t`.
+      - A reference to the first element of the product type `t`.
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi::result
-    {
-      template<product_type T> struct front;
-
-      template<product_type T>
-      using front_t = typename front<T>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/back_front.hpp front_t
 
     Computes the return type of a call to kumi::front
 
@@ -94,7 +88,9 @@ namespace kumi
 
     @note This function does not take part in overload resolution if t is an empty product type.
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -114,19 +110,11 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      *A reference to the last element of the product type `t`.
+      - A reference to the last element of the product type `t`.
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi::result
-    {
-      template<product_type T> struct back;
-
-      template<product_type T>
-      using back_t = typename back<T>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/back_front.hpp back_t
 
     Computes the return type of a call to kumi::back
 
@@ -143,15 +131,21 @@ namespace kumi
 
   namespace result
   {
+    //! [front_t]
     template<kumi::concepts::product_type T> struct front : kumi::stored_member<0, T>
     {
     };
 
+    template<kumi::concepts::product_type T> using front_t = typename kumi::result::front<T>::type;
+
+    //! [front_t]
+
+    //! [back_t]
     template<kumi::concepts::product_type T> struct back : kumi::stored_member<kumi::size_v<T> - 1, T>
     {
     };
 
-    template<kumi::concepts::product_type T> using front_t = typename kumi::result::front<T>::type;
     template<kumi::concepts::product_type T> using back_t = typename kumi::result::back<T>::type;
+    //! [back_t]
   }
 }

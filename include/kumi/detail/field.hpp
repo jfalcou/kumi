@@ -72,7 +72,7 @@ namespace kumi
 
   // EBO
   template<typename Id, typename T>
-  requires(std::is_empty_v<T>)
+  requires(std::is_empty_v<T> && !std::is_final_v<T>)
   struct field<Id, T> : T
   {
     /// Name associated to the field

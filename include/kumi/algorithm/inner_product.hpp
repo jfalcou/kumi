@@ -76,7 +76,10 @@ namespace kumi
           the binary operations can't be applied on the product types' elements. Similarily, doesn't participate
           in overload resolution if the two inputs are not compatible. @see concepts::compatible_product_types.
 
-    @qualifier nodiscard inline constexpr noexcept
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier noexcept
 
     @groupheader{Header file}
     @code
@@ -105,30 +108,11 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * The inner product of `s1` and `s2` using the provided binary operations.
+      - The inner product of `s1` and `s2` using the provided binary operations.
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi::result
-    {
-      template<product_type S1, sized_product_type<size_v<S1>> S2, typename T>
-      struct inner_product;
-
-      template<product_type S1, sized_product_type<size_v<S1>> S2, typename T
-              , typename Sum, typename Prod
-              >
-      struct inner_product;
-
-      template<product_type S1, sized_product_type<size_v<T1>> S2, typename T>
-      using inner_product_t = typename inner_product<S1,S2,T>::type;
-
-      template< product_type S1, sized_product_type<size_v<T1>> S2, typename T
-              , typename Sum, typename Prod
-              >
-      using inner_product_t = typename inner_product<S1,S2,T,Sum,Prod>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/inner_product.hpp  inner_product_t
 
     Computes the return type of a call to kumi::inner_product
 
@@ -145,6 +129,7 @@ namespace kumi
 
   namespace result
   {
+    //! [inner_product_t]
     template<kumi::concepts::product_type S1,
              kumi::concepts::sized_product_type<kumi::size_v<S1>> S2,
              typename T,
@@ -168,5 +153,6 @@ namespace kumi
              typename Sum = void,
              typename Prod = void>
     using inner_product_t = typename kumi::result::inner_product<S1, S2, T, Sum, Prod>::type;
+    //! [inner_product_t]
   }
 }

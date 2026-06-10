@@ -9,24 +9,24 @@
 
 namespace kumi
 {
+  template<typename Target, typename T, std::size_t... I>
+  KUMI_ABI constexpr decltype(auto) member_cast_(kumi::adl_tag_t, T&& t, std::index_sequence<I...>)
+  {
+    return kumi::builder<T>::make(kumi::field_cast<Target>(get<I>(KUMI_FWD(t)))...);
+  }
+
   template<typename Target> struct member_cast_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
       else if constexpr (kumi::concepts::record_type<T>)
-        return this->member_cast_(KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T>>{});
+        return member_cast_<Target>(adl_tag, KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T>>{});
       else
       {
         using type = kumi::_::as_homogeneous_t<Target, kumi::size_v<T>>;
         return static_cast<type>(KUMI_FWD(t));
       }
-    }
-
-    template<typename T, std::size_t... I>
-    KUMI_ABI constexpr decltype(auto) member_cast_(T&& t, std::index_sequence<I...>) const
-    {
-      return kumi::builder<T>::make(kumi::field_cast<Target>(get<I>(KUMI_FWD(t)))...);
     }
   };
 
@@ -37,7 +37,9 @@ namespace kumi
     @var member_cast
     @brief Callable object converting a product_type<Ts...> to an instance of a product_type<Target...>
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -47,7 +49,7 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
+      template<typename Target, product_type T>
       constexpr auto member_cast<Target>(T && t) noexcept;
     @endcode
 
@@ -58,20 +60,11 @@ namespace kumi
       - `t`: Product Type to convert
 
     @subgroupheader{Return value}
-      * A Product type containing the values of `t` where each member is of type Target
+      - A Product type containing the values of `t` where each member is of type Target
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi::result
-    {
-      template<typename Target, product_type T> struct member_cast;
-
-      template<typename Target, Product_type T>
-      using member_cast_t = typename member_cast<Target, T>::type;
-    }
-    @endcode
-
+    @snippet include/kumi/algorithm/cast.hpp member_cast_t
 
     Computes the return type of a call to kumi::member_cast
 
@@ -88,6 +81,7 @@ namespace kumi
 
   namespace result
   {
+    //! [member_cast_t]
     template<typename Target, kumi::concepts::product_type T> struct member_cast
     {
       using type = decltype(kumi::member_cast<Target>(std::declval<T>()));
@@ -95,5 +89,6 @@ namespace kumi
 
     template<typename Target, kumi::concepts::product_type T>
     using member_cast_t = typename kumi::result::member_cast<Target, T>::type;
+    //! [member_cast_t]
   }
 }

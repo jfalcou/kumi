@@ -24,6 +24,7 @@ namespace kumi
 }
 
 #include <kumi/detail/abi.hpp>
+#include <kumi/detail/adl.hpp>
 #include <kumi/detail/dependencies.hpp>
 #include <kumi/detail/functors.hpp>
 #include <kumi/detail/preprocessor.hpp>

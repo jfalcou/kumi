@@ -9,7 +9,7 @@
 
 namespace kumi
 {
-  struct unique_t : private kumi::function::builder_t
+  struct unique_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
@@ -18,12 +18,12 @@ namespace kumi
       else
       {
         constexpr auto proj = kumi::function::uniqued(as<T>{});
-        return this->builder_t::operator()(KUMI_FWD(t), proj);
+        return kumi::function::builder(KUMI_FWD(t), proj);
       }
     }
   };
 
-  struct all_unique_t : private kumi::function::builder_t
+  struct all_unique_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
@@ -34,7 +34,7 @@ namespace kumi
           return kumi::function::uniquer(std::type_identity<kumi::stored_element_t<I, T>>{}...);
         }(std::make_index_sequence<kumi::size_v<T>>{});
 
-        return this->builder_t::operator()(KUMI_FWD(t), proj);
+        return kumi::function::builder(KUMI_FWD(t), proj);
       }
     }
   };
@@ -48,7 +48,9 @@ namespace kumi
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -68,19 +70,11 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * A product type containing elements of `t` with consecutive duplicates removed.
+      - A product type containing elements of `t` with consecutive duplicates removed.
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi
-    {
-      template<product_type T> struct unique;
-
-      template<product_type T>
-      using unique_t = typename unique<T>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/unique.hpp unique_t
 
     Computes the return type of a call to kumi::unique
 
@@ -104,7 +98,9 @@ namespace kumi
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -124,19 +120,11 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * A product type built by keeping the first occurrence of every distinct element type in `t`.
+      - A product type built by keeping the first occurrence of every distinct element type in `t`.
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi
-    {
-      template<product_type T> struct all_unique;
-
-      template<product_type T>
-      using all_unique_t = typename all_unique<T>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/unique.hpp all_unique_t
 
     Computes the return type of a call to kumi::all_unique
 
@@ -153,18 +141,23 @@ namespace kumi
 
   namespace result
   {
+    //! [unique_t]
     template<kumi::concepts::product_type T> struct unique
     {
       using type = decltype(kumi::unique(std::declval<T>()));
     };
 
+    template<kumi::concepts::product_type T> using unique_t = typename kumi::result::unique<T>::type;
+
+    //! [unique_t]
+
+    //! [all_unique_t]
     template<kumi::concepts::product_type T> struct all_unique
     {
       using type = decltype(kumi::all_unique(std::declval<T>()));
     };
 
-    template<kumi::concepts::product_type T> using unique_t = typename kumi::result::unique<T>::type;
-
     template<kumi::concepts::product_type T> using all_unique_t = typename kumi::result::all_unique<T>::type;
+    //! [all_unique_t]
   }
 }

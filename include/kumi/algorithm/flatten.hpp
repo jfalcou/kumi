@@ -9,6 +9,54 @@
 
 namespace kumi
 {
+  struct flatten_all_case_t
+  {
+    template<typename T, typename V, typename F, typename Self>
+    KUMI_ABI constexpr auto operator()(T&&, V&& v, F f, Self s) const
+    {
+      using FV = kumi::result::field_value_of_t<V>;
+      if constexpr (kumi::concepts::record_type<FV> && kumi::concepts::record_type<T>)
+        return kumi::capture_field<kumi::identifier_of<V>()>(s(kumi::field_value_of(KUMI_FWD(v)), f));
+      else if constexpr (kumi::concepts::follows_same_semantic<T, V>) return s(KUMI_FWD(v), f);
+      else if constexpr (kumi::concepts::record_type<T> && kumi::concepts::field<V>)
+        return kumi::capture_field<kumi::identifier_of<V>()>(kumi::invoke(f, kumi::field_value_of(KUMI_FWD(v))));
+      else return kumi::invoke(f, KUMI_FWD(v));
+    }
+  };
+
+  inline constexpr flatten_all_case_t flatten_all_case{};
+
+  struct flatten_case_t
+  {
+    template<typename T, typename V> KUMI_ABI constexpr auto operator()(T&&, V&& v, auto J) const
+    {
+      using FV = kumi::result::field_value_of_t<V>;
+      if constexpr (kumi::concepts::record_type<FV> && kumi::concepts::record_type<T>)
+      {
+        constexpr auto new_name = kumi::label_of<V>() + kumi::label_of<kumi::element_t<J, FV>>();
+        return (kumi::capture_field<name<new_name>{}>(kumi::field_value_of(get<J>(kumi::field_value_of(KUMI_FWD(v))))));
+      }
+      else if constexpr (kumi::concepts::follows_same_semantic<T, V>) return get<J>(KUMI_FWD(v));
+      else return KUMI_FWD(v);
+    }
+  };
+
+  inline constexpr flatten_case_t flatten_case{};
+
+  template<typename T, typename V, std::size_t... J, std::size_t... I>
+  KUMI_ABI constexpr auto flatten_(
+    kumi::adl_tag_t, T&& t, V visitor, std::index_sequence<J...>, std::index_sequence<I...>)
+  {
+    if constexpr (sizeof...(I) == 0) return kumi::builder<T>::make();
+    else return kumi::builder<T>::make(visitor(KUMI_FWD(t), get<I>(KUMI_FWD(t)), kumi::index<J>)...);
+  }
+
+  template<typename T, typename V, typename F, typename S, std::size_t... I>
+  KUMI_ABI constexpr auto flatten_all_(kumi::adl_tag_t, T&& t, V visitor, F f, S self, std::index_sequence<I...>)
+  {
+    return kumi::builder<T>::make(visitor(KUMI_FWD(t), get<I>(KUMI_FWD(t)), f, self)...);
+  }
+
   struct flatten_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
@@ -21,26 +69,8 @@ namespace kumi
             std::index_sequence<kumi::function::size_or_v<kumi::stored_element_t<I, T>, 1>...>{});
         }(std::make_index_sequence<kumi::size_v<T>>{});
 
-        return this->flatten_(KUMI_FWD(t), get<1>(proj), get<0>(proj));
+        return flatten_(kumi::adl_tag, KUMI_FWD(t), kumi::flatten_case, get<1>(proj), get<0>(proj));
       }
-    }
-
-    template<typename T, std::size_t... J, std::size_t... I>
-    KUMI_ABI constexpr auto flatten_(T&& t, std::index_sequence<J...>, std::index_sequence<I...>) const
-    {
-      return kumi::builder<T>::make(visit<T>(KUMI_FWD(t), kumi::index<J>, get<I>(KUMI_FWD(t)))...);
-    }
-
-    template<typename T, typename V> KUMI_ABI static constexpr auto visit(T&&, auto J, V&& v)
-    {
-      using FV = kumi::result::field_value_of_t<V>;
-      if constexpr (kumi::concepts::record_type<FV> && kumi::concepts::record_type<T>)
-      {
-        constexpr auto new_name = kumi::label_of<V>() +  kumi::label_of<kumi::element_t<J, FV>>();
-        return (kumi::capture_field<name<new_name>{}>(kumi::field_value_of(get<J>(kumi::field_value_of(KUMI_FWD(v))))));
-      }
-      else if constexpr (kumi::concepts::follows_same_semantic<T, V>) return get<J>(KUMI_FWD(v));
-      else return KUMI_FWD(v);
     }
   };
 
@@ -51,32 +81,16 @@ namespace kumi
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
       else
-        return this->flatten_t::operator()(
-          this->flatten_all_(KUMI_FWD(t), f, std::make_index_sequence<kumi::size_v<T>>{}));
+      {
+        return this->flatten_t::operator()(flatten_all_(kumi::adl_tag, KUMI_FWD(t), kumi::flatten_all_case, f, (*this),
+                                                        std::make_index_sequence<kumi::size_v<T>>{}));
+      }
     }
 
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
       else return (*this)(KUMI_FWD(t), kumi::function::identity);
-    }
-
-    template<typename T, typename F, std::size_t... I>
-    KUMI_ABI constexpr auto flatten_all_(T&& t, F f, std::index_sequence<I...>) const
-    {
-      return kumi::builder<T>::make(visit(KUMI_FWD(t), get<I>(KUMI_FWD(t)), f, *this)...);
-    }
-
-    template<typename T, typename V, typename F, typename Self>
-    KUMI_ABI static constexpr auto visit(T&&, V&& v, F f, Self s)
-    {
-      using FV = kumi::result::field_value_of_t<V>;
-      if constexpr (kumi::concepts::record_type<FV> && kumi::concepts::record_type<T>)
-        return kumi::capture_field<kumi::identifier_of<V>()>(s(kumi::field_value_of(KUMI_FWD(v)), f));
-      else if constexpr (kumi::concepts::follows_same_semantic<T, V>) return s(KUMI_FWD(v), f);
-      else if constexpr (kumi::concepts::record_type<T> && kumi::concepts::field<V>)
-        return kumi::capture_field<kumi::identifier_of<V>()>(kumi::invoke(f, kumi::field_value_of(KUMI_FWD(v))));
-      else return kumi::invoke(f, KUMI_FWD(v));
     }
   };
 
@@ -99,7 +113,9 @@ namespace kumi
     such as "outer.inner". If the input is a product type containing record types or vice versa only the inner types
     matching the outer semantic will be flattened. Thus a record inside a tuple will not be flattened.
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -119,19 +135,11 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * A product type composed of all elements of `t` flattened non-recursively
+      - A product type composed of all elements of `t` flattened non-recursively
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi::result
-    {
-      template<product_type T> struct flatten;
-
-      template<product_type T>
-      using flatten_t = typename flatten<T>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/flatten.hpp flatten_t
 
     Computes the return type of a call to kumi::flatten
 
@@ -163,7 +171,9 @@ namespace kumi
     such as "outer.inner". If the input is a product type containing record types or vice versa only the inner types
     matching the outer semantic will be flattened. Thus a record inside a tuple will not be flattened.
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -189,19 +199,11 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * A product type composed of all elements of `t` flattened recursively
+      - A product type composed of all elements of `t` flattened recursively
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi::result
-    {
-      template<product_type T, typename Func = void> struct flatten_all;
-
-      template<product_type T, typename Func = void>
-      using flatten_all_t = typename flatten_all<T, Func>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/flatten.hpp flatten_all_t
 
     Computes the return type of a call to kumi::flatten_all
 
@@ -220,7 +222,7 @@ namespace kumi
   /**
     @ingroup generators
 
-    @var flatten_all
+    @var as_flat_ptr
     @brief Callable object converting recursively a product type of product types into a flat product type of pointers
   to each of its components.
 
@@ -248,19 +250,11 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * A flat product type composed of pointers to each elements of `t`.
+      - A flat product type composed of pointers to each elements of `t`.
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi::result
-    {
-      template<product_type T> struct as_flat_ptr;
-
-      template<product_type T>
-      using as_flat_ptr_t = typename as_flat_ptr<T>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/flatten.hpp as_flat_ptr_t
 
     Computes the return type of a call to kumi::as_flat_ptr
 
@@ -277,11 +271,17 @@ namespace kumi
 
   namespace result
   {
+    //! [flatten_t]
     template<kumi::concepts::product_type T> struct flatten
     {
       using type = decltype(kumi::flatten(std::declval<T>()));
     };
 
+    template<kumi::concepts::product_type T> using flatten_t = typename kumi::result::flatten<T>::type;
+
+    //! [flatten_t]
+
+    //! [flatten_all_t]
     template<kumi::concepts::product_type T, typename Func = void> struct flatten_all
     {
       using type = decltype(kumi::flatten_all(std::declval<T>(), std::declval<Func>()));
@@ -292,16 +292,18 @@ namespace kumi
       using type = decltype(kumi::flatten_all(std::declval<T>()));
     };
 
+    template<kumi::concepts::product_type T, typename Func = void>
+    using flatten_all_t = typename kumi::result::flatten_all<T, Func>::type;
+
+    //! [flatten_all_t]
+
+    //! [as_flat_ptr_t]
     template<kumi::concepts::product_type T> struct as_flat_ptr
     {
       using type = decltype(kumi::as_flat_ptr(std::declval<T>()));
     };
 
-    template<kumi::concepts::product_type T> using flatten_t = typename kumi::result::flatten<T>::type;
-
-    template<kumi::concepts::product_type T, typename Func = void>
-    using flatten_all_t = typename kumi::result::flatten_all<T, Func>::type;
-
     template<kumi::concepts::product_type T> using as_flat_ptr_t = typename kumi::result::as_flat_ptr<T>::type;
+    //! [as_flat_ptr_t]
   }
 }

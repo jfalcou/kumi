@@ -9,7 +9,7 @@
 
 namespace kumi
 {
-  template<std::size_t R> struct rotate_left_t : private kumi::function::builder_t
+  template<std::size_t R> struct rotate_left_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
     {
@@ -19,12 +19,12 @@ namespace kumi
       {
         constexpr auto idxs =
           kumi::function::rotater(std::make_index_sequence<kumi::size_v<T>>{}, kumi::index<(R % kumi::size_v<T>)>);
-        return this->builder_t::operator()(KUMI_FWD(t), idxs);
+        return kumi::function::builder(KUMI_FWD(t), idxs);
       }
     }
   };
 
-  template<std::size_t R> struct rotate_right_t : private kumi::function::builder_t
+  template<std::size_t R> struct rotate_right_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
@@ -35,7 +35,7 @@ namespace kumi
         constexpr auto F = R % kumi::size_v<T>;
         constexpr auto idxs =
           kumi::function::rotater(std::make_index_sequence<kumi::size_v<T>>{}, kumi::index<(kumi::size_v<T> - F)>);
-        return this->builder_t::operator()(KUMI_FWD(t), idxs);
+        return kumi::function::builder(KUMI_FWD(t), idxs);
       }
     }
   };
@@ -50,7 +50,9 @@ namespace kumi
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -73,19 +75,11 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * A product type equivalent to `t` with elements rotated R positions to the left.
+      - A product type equivalent to `t` with elements rotated R positions to the left.
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi::result
-    {
-      template<std::size_t R, product_type T> struct rotate_left;
-
-      template<std::size_t R, product_type T>
-      using rotate_left_t = typename rotate_left<R, T>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/rotate.hpp rotate_left_t
 
     Computes the return type of a call to kumi::rotate_left
 
@@ -110,7 +104,9 @@ namespace kumi
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -133,19 +129,11 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * A product type equivalent to `t` with elements rotated R positions to the right.
+      - A product type equivalent to `t` with elements rotated R positions to the right.
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi::result
-    {
-      template<std::size_t R, product_type T> struct rotate_right;
-
-      template<std::size_t R, product_type T>
-      using rotate_right_t = typename rotate_right<R, T>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/rotate.hpp rotate_right_t
 
     Computes the return type of a call to kumi::rotate_right
 
@@ -162,20 +150,25 @@ namespace kumi
 
   namespace result
   {
+    //! [rotate_left_t]
     template<std::size_t R, kumi::concepts::product_type T> struct rotate_left
     {
       using type = decltype(kumi::rotate_left<R>(std::declval<T>()));
     };
 
+    template<std::size_t R, kumi::concepts::product_type T>
+    using rotate_left_t = typename kumi::result::rotate_left<R, T>::type;
+
+    //! [rotate_left_t]
+
+    //! [rotate_right_t]
     template<std::size_t R, kumi::concepts::product_type T> struct rotate_right
     {
       using type = decltype(kumi::rotate_right<R>(std::declval<T>()));
     };
 
     template<std::size_t R, kumi::concepts::product_type T>
-    using rotate_left_t = typename kumi::result::rotate_left<R, T>::type;
-
-    template<std::size_t R, kumi::concepts::product_type T>
     using rotate_right_t = typename kumi::result::rotate_right<R, T>::type;
+    //! [rotate_right_t]
   }
 }

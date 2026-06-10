@@ -9,6 +9,28 @@
 
 namespace kumi
 {
+  struct reindex_case_t
+  {
+    template<typename T, template<auto> class C, auto Old, auto P>
+    KUMI_ABI constexpr auto operator()(T&& t, C<Old>, kumi::projection_map<P>) const
+    {
+      if constexpr (kumi::concepts::projection_map<decltype(P)>) return C<P>{}(KUMI_FWD(t));
+      else
+      {
+        static_assert(requires { get<P>(std::declval<T>()); }, "[KUMI] - Invalid projection for input type");
+        return get<P>(KUMI_FWD(t));
+      }
+    }
+  };
+
+  inline constexpr reindex_case_t reindex_case{};
+
+  template<typename T, typename S, auto... E>
+  KUMI_ABI constexpr auto reindex_(kumi::adl_tag_t, T&& t, S self, kumi::projection_map<E...>)
+  {
+    return kumi::builder<T>::make(kumi::reindex_case(KUMI_FWD(t), self, kumi::projection_map<E>{})...);
+  }
+
   template<std::size_t... Idx> struct reorder_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
@@ -35,23 +57,7 @@ namespace kumi
       using proj_t = std::remove_cvref_t<decltype(Projections)>;
       if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
       else if constexpr (proj_t::size() == 0) return builder<T>::make();
-      else return this->reindex_(KUMI_FWD(t), Projections);
-    }
-
-    template<typename T, auto... E> KUMI_ABI constexpr auto reindex_(T&& t, kumi::projection_map<E...>) const
-    {
-      return kumi::builder<T>::make(visit<E, reindex_t>(KUMI_FWD(t))...);
-    }
-
-    template<kumi::concepts::projection auto P, template<auto> class C, typename T>
-    KUMI_ABI static constexpr auto visit(T&& t)
-    {
-      if constexpr (kumi::concepts::projection_map<decltype(P)>) return C<P>{}(KUMI_FWD(t));
-      else
-      {
-        static_assert(requires { get<P>(std::declval<T>()); }, "[KUMI] - Invalid projection for input type");
-        return get<P>(KUMI_FWD(t));
-      }
+      else return reindex_(kumi::adl_tag, KUMI_FWD(t), (*this), Projections);
     }
   };
 
@@ -72,7 +78,9 @@ namespace kumi
 
     @note reorder(tuple) works and is equivalent to reorder<>(tuple)
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -96,19 +104,11 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * A product type with the type of `t` with elements equal to get<Idx>(t) for each given index.
+      - A product type with the type of `t` with elements equal to get<Idx>(t) for each given index.
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi::result
-    {
-      template<product_type T,std::size_t... Idx> struct reorder;
-
-      template<product_type T,std::size_t... Idx>
-      using reorder_t = typename reorder<T,Idx...>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/reorder.hpp reorder_t
 
     Computes the return type of a call to kumi::reorder
 
@@ -140,7 +140,9 @@ namespace kumi
 
     @note reorder(tuple) works and is equivalent to reorder<>(tuple)
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -164,19 +166,11 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * A product type with the type of `t` with elements equal to get<Ids>(t) for each given identifer.
+      - A product type with the type of `t` with elements equal to get<Ids>(t) for each given identifer.
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi::result
-    {
-      template<product_type Tuple, identifier auto... Ids> struct reorder_fields;
-
-      template<product_type Tuple, identifier auto... Idx>
-      using reorder_fields_t = typename reorder_fields<Tuple,Idx...>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/reorder.hpp reorder_fields_t
 
     Computes the return type of a call to kumi::reorder_fields
 
@@ -203,9 +197,9 @@ namespace kumi
     @note Nothing prevent the number of reordered names to be lesser or greater than t size or
           the fact they can appear multiple times if it is applied on a named tuple.
 
-    @note reorder(tuple) works and is equivalent to reorder<>(tuple)
-
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -229,19 +223,11 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * A potentially nested tuple corresponding to recursive applications of reorder
+      - A potentially nested tuple corresponding to recursive applications of reorder
 
     @groupheader{Helper type}
 
-   @code
-    namespace kumi::result
-    {
-      template<product_type T, index_map auto Idxs> struct reindex;
-
-      template<product_type T, index_map auto Idxs>
-      using reindex_t= typename reindex<T,Idxs>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/reorder.hpp reindex_t
 
     Computes the return type of a call to kumi::reindex
 
@@ -258,28 +244,36 @@ namespace kumi
 
   namespace result
   {
+    //! [reorder_t]
     template<kumi::concepts::product_type T, std::size_t... Idx> struct reorder
     {
       using type = decltype(kumi::reorder<Idx...>(std::declval<T>()));
     };
 
+    template<kumi::concepts::product_type T, std::size_t... Idx>
+    using reorder_t = typename kumi::result::reorder<T, Idx...>::type;
+
+    //! [reorder_t]
+
+    //! [reorder_fields_t]
     template<kumi::concepts::product_type Tuple, kumi::concepts::identifier auto... Name> struct reorder_fields
     {
       using type = decltype(kumi::reorder_fields<Name...>(std::declval<Tuple>()));
     };
 
+    template<kumi::concepts::product_type Tuple, kumi::concepts::identifier auto... Name>
+    using reorder_fields_t = typename kumi::result::reorder_fields<Tuple, Name...>::type;
+
+    //! [reorder_fields_t]
+
+    //! [reindex_t]
     template<kumi::concepts::product_type T, kumi::concepts::projection_map auto Indexes> struct reindex
     {
       using type = decltype(kumi::reindex<Indexes>(std::declval<T>()));
     };
 
-    template<kumi::concepts::product_type T, std::size_t... Idx>
-    using reorder_t = typename kumi::result::reorder<T, Idx...>::type;
-
-    template<kumi::concepts::product_type Tuple, kumi::concepts::identifier auto... Name>
-    using reorder_fields_t = typename kumi::result::reorder_fields<Tuple, Name...>::type;
-
     template<kumi::concepts::product_type T, kumi::concepts::projection_map auto Indexes>
     using reindex_t = typename kumi::result::reindex<T, Indexes>::type;
+    //! [reindex_t]
   }
 }

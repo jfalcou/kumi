@@ -39,7 +39,10 @@ namespace kumi
     On record types, this function operates as if the elements are ordered. The considered order is the order of
     declaration.
 
-    @qualifier nodiscatd inline constexpr noexcept
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier noexcept
 
     @groupheader{Header file}
     @code
@@ -60,7 +63,7 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * The integral index of the element inside `t` that matches the predicate, size_v<T> otherwise.
+      - The integral index of the element inside `t` that matches the predicate, size_v<T> otherwise.
 
     @groupheader{Examples}
 

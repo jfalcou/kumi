@@ -35,6 +35,9 @@ namespace kumi
 
     /// Conversion operator to integer
     constexpr inline operator std::size_t() const noexcept { return N; }
+
+    /// Conversion operator to integral_constant
+    constexpr inline operator std::integral_constant<std::size_t, N>() const noexcept { return {}; }
   };
 
   //====================================================================================================================

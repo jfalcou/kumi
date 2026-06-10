@@ -9,7 +9,17 @@
 
 namespace kumi
 {
-  struct transpose_t : private kumi::function::builder_t
+
+  template<typename T, std::size_t... I, std::size_t... J>
+  KUMI_ABI constexpr decltype(auto) transpose_extern_(kumi::adl_tag_t,
+                                                      T&& t,
+                                                      std::index_sequence<I...>,
+                                                      std::index_sequence<J...> is)
+  {
+    return kumi::make_tuple(kumi::function::builder(KUMI_FWD(t), std::integral_constant<std::size_t, I>{}, is)...);
+  }
+
+  struct transpose_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
@@ -21,17 +31,8 @@ namespace kumi
         constexpr std::size_t c = kumi::size_v<T>;
         constexpr std::size_t s = kumi::size_v<kumi::element_t<0, T>>;
         constexpr auto pos = kumi::function::zipper(kumi::index<c>, kumi::index<s>);
-        return this->transpose_extern_(KUMI_FWD(t), get<1>(pos), get<0>(pos));
+        return transpose_extern_(kumi::adl_tag, KUMI_FWD(t), get<1>(pos), get<0>(pos));
       }
-    }
-
-    template<typename T, std::size_t... I, std::size_t... J>
-    KUMI_ABI constexpr decltype(auto) transpose_extern_(T&& t,
-                                                        std::index_sequence<I...>,
-                                                        std::index_sequence<J...> is) const
-    {
-      return kumi::make_tuple(
-        this->builder_t::operator()(KUMI_FWD(t), std::integral_constant<std::size_t, I>{}, is)...);
     }
   };
 
@@ -46,7 +47,9 @@ namespace kumi
     @note This function will issue a compile time error if the each element of the input product type are not
           themselves product types or if their size are not equal.
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -66,19 +69,11 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * A product type containing the transposed elements of `t`.
+      - A product type containing the transposed elements of `t`.
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi::result
-    {
-      template<product_type T> struct transpose;
-
-      template<product_type T>
-      using transpose_t = typename transpose<T>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/transpose.hpp transpose_t
 
     Computes the return type of a call to kumi::transpose
 
@@ -95,11 +90,13 @@ namespace kumi
 
   namespace result
   {
+    //! [transpose_t]
     template<kumi::concepts::product_type T> struct transpose
     {
       using type = decltype(kumi::transpose(std::declval<T>()));
     };
 
     template<kumi::concepts::product_type T> using transpose_t = typename kumi::result::transpose<T>::type;
+    //! [transpose_t]
   }
 }

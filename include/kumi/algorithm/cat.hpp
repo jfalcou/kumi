@@ -9,7 +9,7 @@
 
 namespace kumi
 {
-  struct cat_t : private kumi::function::builder_t
+  struct cat_t
   {
     template<kumi::concepts::product_type... Ts>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(Ts&&... ts) const
@@ -19,7 +19,7 @@ namespace kumi
       else
       {
         constexpr auto pos = kumi::function::concatenater(std::index_sequence<kumi::size_v<Ts>...>{});
-        return this->builder_t::operator()(kumi::forward_as_tuple(KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
+        return kumi::function::builder(kumi::forward_as_tuple(KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
       }
     }
   };
@@ -34,7 +34,9 @@ namespace kumi
     @note This function does not take part in overload resolution if the input product types do not follow the same
           semantic. @see concepts::follows_same_semantic
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -52,18 +54,11 @@ namespace kumi
       - `ts`: Product types to concatenate
 
     @subgroupheader{Return value}
-      * A product type made of all element of all input product types in order.
+      - A product type made of all element of all input product types in order.
 
     @groupheader{Helper type}
-    @code
-    namespace kumi::result
-    {
-      template<product_type... Ts> struct cat;
 
-      template<product_type... Ts>
-      using cat_t = typename cat<Ts...>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/cat.hpp cat_t
 
     Computes the return type of a call to kumi::cat
 
@@ -80,11 +75,13 @@ namespace kumi
 
   namespace result
   {
+    //! [cat_t]
     template<kumi::concepts::product_type... Ts> struct cat
     {
       using type = decltype(kumi::cat(std::declval<Ts>()...));
     };
 
     template<concepts::product_type... Ts> using cat_t = typename kumi::result::cat<Ts...>::type;
+    //! [cat_t]
   }
 }

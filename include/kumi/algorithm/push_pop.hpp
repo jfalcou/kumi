@@ -9,30 +9,36 @@
 
 namespace kumi
 {
+  template<typename T, typename V, std::size_t... I>
+  KUMI_ABI constexpr auto push_front_(T&& t, V&& v, std::index_sequence<I...>)
+  {
+    return kumi::builder<T>::make(KUMI_FWD(v), get<I>(KUMI_FWD(t))...);
+  }
+
+  template<typename T, typename V, std::size_t... I>
+  KUMI_ABI constexpr auto push_back_(T&& t, V&& v, std::index_sequence<I...>)
+  {
+    return kumi::builder<T>::make(get<I>(KUMI_FWD(t))..., KUMI_FWD(v));
+  }
+
   struct push_front_t
   {
     template<kumi::concepts::product_type T, typename V>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, V&& v) const
     {
-      return this->push_front_(KUMI_FWD(t), KUMI_FWD(v), std::make_index_sequence<kumi::size_v<T>>{});
-    }
-
-    template<typename T, typename V, std::size_t... I>
-    KUMI_ABI constexpr auto push_front_(T&& t, V&& v, std::index_sequence<I...>) const
-    {
-      return kumi::builder<T>::make(KUMI_FWD(v), get<I>(KUMI_FWD(t))...);
+      return push_front_(KUMI_FWD(t), KUMI_FWD(v), std::make_index_sequence<kumi::size_v<T>>{});
     }
   };
 
-  struct pop_front_t : private kumi::function::builder_t
+  struct pop_front_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
-      if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
+      if constexpr (kumi::concepts::empty_product_type<T>) return kumi::builder<T>::make();
       else
-        return this->builder_t::operator()(KUMI_FWD(t),
-                                           kumi::function::shifter(std::integral_constant<std::size_t, 1>{},
-                                                                   std::make_index_sequence<kumi::size_v<T> - 1>{}));
+        return kumi::function::builder(KUMI_FWD(t),
+                                       kumi::function::shifter(std::integral_constant<std::size_t, 1>{},
+                                                               std::make_index_sequence<kumi::size_v<T> - 1>{}));
     }
   };
 
@@ -41,22 +47,16 @@ namespace kumi
     template<kumi::concepts::product_type T, typename V>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, V&& v) const
     {
-      return this->push_back_(KUMI_FWD(t), KUMI_FWD(v), std::make_index_sequence<kumi::size_v<T>>{});
-    }
-
-    template<typename T, typename V, std::size_t... I>
-    KUMI_ABI constexpr auto push_back_(T&& t, V&& v, std::index_sequence<I...>) const
-    {
-      return kumi::builder<T>::make(get<I>(KUMI_FWD(t))..., KUMI_FWD(v));
+      return push_back_(KUMI_FWD(t), KUMI_FWD(v), std::make_index_sequence<kumi::size_v<T>>{});
     }
   };
 
-  struct pop_back_t : private kumi::function::builder_t
+  struct pop_back_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
-      if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
-      else return this->builder_t::operator()(KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T> - 1>{});
+      if constexpr (kumi::concepts::empty_product_type<T>) return kumi::builder<T>::make();
+      else return kumi::function::builder(KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T> - 1>{});
     }
   };
 
@@ -70,7 +70,9 @@ namespace kumi
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -91,19 +93,11 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * A product type composed of `v` followed by all elements of `t` in order.
+      - A product type composed of `v` followed by all elements of `t` in order.
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi::result
-    {
-      template<product_type T, typename V> struct push_front;
-
-      template<product_type T, typename V>
-      using push_front_t = typename push_front<T,V>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/push_pop.hpp push_front_t
 
     Computes the return type of a call to kumi:push_front
 
@@ -128,7 +122,9 @@ namespace kumi
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -148,19 +144,11 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * A product type composed of all elements of `t` except its first. Has no effect on empty product types.
+      - A product type composed of all elements of `t` except its first. Has no effect on empty product types.
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi::result
-    {
-      template<product_type T> struct pop_front;
-
-      template<product_type T>
-      using pop_front_t = typename pop_front<T>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/push_pop.hpp pop_front_t
 
     Computes the return type of a call to kumi:pop_front
 
@@ -185,7 +173,9 @@ namespace kumi
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -210,15 +200,7 @@ namespace kumi
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi::result
-    {
-      template<product_type T, typename V> struct push_back;
-
-      template<product_type T, typename V>
-      using push_back_t = typename push_back<T,V>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/push_pop.hpp push_back_t
 
     Computes the return type of a call to kumi:push_back
 
@@ -243,7 +225,9 @@ namespace kumi
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -267,15 +251,7 @@ namespace kumi
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi::result
-    {
-      template<product_type T> struct pop_back;
-
-      template<product_type T>
-      using pop_back_t = typename pop_back<T>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/push_pop.hpp pop_back_t
 
     Computes the return type of a call to kumi:pop_back
 
@@ -292,34 +268,45 @@ namespace kumi
 
   namespace result
   {
+    //! [push_front_t]
     template<kumi::concepts::product_type T, typename V> struct push_front
     {
       using type = decltype(kumi::push_front(std::declval<T>(), std::declval<V>()));
     };
 
+    template<kumi::concepts::product_type T, typename V>
+    using push_front_t = typename kumi::result::push_front<T, V>::type;
+
+    //! [push_front_t]
+
+    //! [pop_front_t]
     template<kumi::concepts::product_type T> struct pop_front
     {
       using type = decltype(kumi::pop_front(std::declval<T>()));
     };
 
+    template<kumi::concepts::product_type T> using pop_front_t = typename kumi::result::pop_front<T>::type;
+
+    //! [pop_front_t]
+
+    //! [push_back_t]
     template<kumi::concepts::product_type T, typename V> struct push_back
     {
       using type = decltype(kumi::push_back(std::declval<T>(), std::declval<V>()));
     };
 
+    template<kumi::concepts::product_type T, typename V>
+    using push_back_t = typename kumi::result::push_back<T, V>::type;
+
+    //! [push_back_t]
+
+    //! [pop_back_t]
     template<kumi::concepts::product_type T> struct pop_back
     {
       using type = decltype(kumi::pop_back(std::declval<T>()));
     };
 
-    template<kumi::concepts::product_type T, typename V>
-    using push_front_t = typename kumi::result::push_front<T, V>::type;
-
-    template<kumi::concepts::product_type T> using pop_front_t = typename kumi::result::pop_front<T>::type;
-
-    template<kumi::concepts::product_type T, typename V>
-    using push_back_t = typename kumi::result::push_back<T, V>::type;
-
     template<kumi::concepts::product_type T> using pop_back_t = typename kumi::result::pop_back<T>::type;
+    //! [pop_back_t]
   }
 }

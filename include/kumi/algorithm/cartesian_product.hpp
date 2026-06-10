@@ -9,7 +9,15 @@
 
 namespace kumi
 {
-  struct cartesian_product_t : private kumi::function::builder_t
+
+  template<typename T, typename Seq, std::size_t... I>
+  KUMI_ABI constexpr auto cartesian_product_(kumi::adl_tag_t, T&& t, Seq&& s, std::index_sequence<I...>)
+  {
+    std::make_index_sequence<kumi::size_v<T>> ids{};
+    return kumi::make_tuple((kumi::function::builder(KUMI_FWD(t), get<I>(s), ids))...);
+  }
+
+  struct cartesian_product_t
   {
     template<kumi::concepts::product_type... Ts>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(Ts&&... ts) const
@@ -20,15 +28,8 @@ namespace kumi
       {
         constexpr auto sq = std::make_index_sequence<(kumi::size_v<Ts> * ...)>{};
         constexpr auto idx = kumi::function::cartesian_producer(sq, kumi::index<kumi::size_v<Ts>>...);
-        return this->cartesian_product_(kumi::forward_as_tuple(KUMI_FWD(ts)...), idx, sq);
+        return cartesian_product_(kumi::adl_tag, kumi::forward_as_tuple(KUMI_FWD(ts)...), idx, sq);
       }
-    }
-
-    template<typename T, typename Seq, std::size_t... I>
-    KUMI_ABI constexpr auto cartesian_product_(T&& t, Seq&& s, std::index_sequence<I...>) const
-    {
-      std::make_index_sequence<kumi::size_v<T>> ids{};
-      return kumi::make_tuple((this->builder_t::operator()(KUMI_FWD(t), get<I>(s), ids))...);
     }
   };
 
@@ -42,7 +43,9 @@ namespace kumi
     @note This function does not take part in overload resolution if the input product types do not follow the same
           semantic. @see concepts::follows_same_semantic
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -62,20 +65,12 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-    * A tuple containing all the product types built from all combination of all ts' elements
+      - A tuple containing all the product types built from all combination of all ts' elements
 
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi
-    {
-      template<product_type... Ts> struct cartesian_product;
-
-      template<product_type... Ts>
-      using cartesian_product_t = typename cartesian_product<Ts...>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/cartesian_product.hpp cartesian_product_t
 
     Computes the return type of a call to kumi::cartesian_product
 
@@ -92,11 +87,13 @@ namespace kumi
 
   namespace result
   {
+    //! [cartesian_product_t]
     template<typename... Ts> struct cartesian_product
     {
       using type = decltype(kumi::cartesian_product(std::declval<Ts>()...));
     };
 
     template<typename... Ts> using cartesian_product_t = typename kumi::result::cartesian_product<Ts...>::type;
+    //! [cartesian_product_t]
   }
 }

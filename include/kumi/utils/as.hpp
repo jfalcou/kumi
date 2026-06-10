@@ -33,6 +33,8 @@ namespace kumi
     constexpr as() noexcept {}
 
     explicit constexpr as(T const&) noexcept {}
+
+    constexpr inline operator std::type_identity<T>() const noexcept { return {}; }
   };
 
   template<> struct as<void>

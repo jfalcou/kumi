@@ -9,14 +9,19 @@
 
 namespace kumi
 {
+  template<typename F, std::size_t... I>
+  KUMI_ABI constexpr auto for_each_(kumi::adl_tag_t, F&& f, std::index_sequence<I...>)
+  {
+    using result_t = std::invoke_result_t<F, kumi::index_t<0>>;
+    if constexpr (std::is_void_v<result_t>) return ((kumi::invoke(KUMI_FWD(f), kumi::index<I>)), ...);
+    else return ((kumi::invoke(KUMI_FWD(f), kumi::index<I>)) && ...);
+  }
+
   struct for_each_t
   {
     template<typename Function, kumi::concepts::product_type T, kumi::concepts::product_type... Ts>
     KUMI_ABI constexpr void operator()(Function f, T&& t, Ts&&... ts) const
-    requires(kumi::concepts::compatible_product_types<T, Ts...>)
-#ifndef KUMI_DOXYGEN_INVOKED
-            && (kumi::_::supports_call<Function&, T, Ts...>)
-#endif
+    requires(kumi::concepts::compatible_product_types<T, Ts...>) && (kumi::_::supports_call<Function&, T, Ts...>)
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return;
       else
@@ -30,19 +35,12 @@ namespace kumi
           else kumi::invoke(f, get<I>(KUMI_FWD(t)), get<I>(KUMI_FWD(ts))...);
         }};
 
-        this->for_each_(invoker, std::make_index_sequence<kumi::size_v<T>>{});
+        for_each_(kumi::adl_tag, invoker, std::make_index_sequence<kumi::size_v<T>>{});
       }
-    }
-
-    template<typename F, std::size_t... I> KUMI_ABI constexpr auto for_each_(F&& f, std::index_sequence<I...>) const
-    {
-      using result_t = std::invoke_result_t<F, kumi::index_t<0>>;
-      if constexpr (std::is_void_v<result_t>) return ((kumi::invoke(KUMI_FWD(f), kumi::index<I>)), ...);
-      else return ((kumi::invoke(KUMI_FWD(f), kumi::index<I>)) && ...);
     }
   };
 
-  struct for_each_index_t : private for_each_t
+  struct for_each_index_t
   {
     template<typename Function, kumi::concepts::product_type T, kumi::concepts::product_type... Ts>
     KUMI_ABI constexpr void operator()(Function f, T&& t, Ts&&... ts) const
@@ -52,12 +50,12 @@ namespace kumi
       else
       {
         auto const invoker{[&](auto const I) { kumi::invoke(f, I, get<I>(KUMI_FWD(t)), get<I>(KUMI_FWD(ts))...); }};
-        this->for_each_(invoker, std::make_index_sequence<kumi::size_v<T>>{});
+        for_each_(kumi::adl_tag, invoker, std::make_index_sequence<kumi::size_v<T>>{});
       }
     }
   };
 
-  struct for_each_field_t : private kumi::for_each_t
+  struct for_each_field_t
   {
     template<typename Function, kumi::concepts::record_type R, kumi::concepts::record_type... Rs>
     KUMI_ABI constexpr void operator()(Function f, R&& r, Rs&&... rs) const
@@ -71,7 +69,7 @@ namespace kumi
           constexpr auto field = get<I>(fields);
           kumi::invoke(f, kumi::_::make_str(field), get<field>(KUMI_FWD(r)), get<field>(KUMI_FWD(rs))...);
         };
-        this->for_each_(invoker, std::make_index_sequence<kumi::size_v<R>>{});
+        for_each_(kumi::adl_tag, invoker, std::make_index_sequence<kumi::size_v<R>>{});
       }
     }
   };
@@ -88,7 +86,9 @@ namespace kumi
     @note This function does not take part in overload resolution if `f` can't be applied to the
           elements of `t` and/or `ts`, or if the product type are not compatible. @see compatible_product_types.
 
-    @qualifier inline constexpr
+    @qualifier
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -133,7 +133,9 @@ namespace kumi
           elements of `t` and/or `ts` and an integral constant. This function cannot be applied
           on record types.
 
-    @qualifier inline constexpr
+    @qualifier
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -178,7 +180,9 @@ namespace kumi
     This function can only be applied to record types.
     The function needs to be defined to handle types modeling kumi::concepts::field.
 
-    @qualifier inline constexpr
+    @qualifier
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code

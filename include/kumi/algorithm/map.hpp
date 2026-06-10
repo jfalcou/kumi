@@ -13,7 +13,8 @@ namespace kumi
   {
     struct map_t
     {
-      template<typename F, typename T, typename... Ts> constexpr auto operator()(auto N, F f, T&& t, Ts&&... ts) const
+      template<typename F, typename T, typename... Ts>
+      KUMI_ABI constexpr auto operator()(auto N, F f, T&& t, Ts&&... ts) const
       {
         if constexpr (kumi::concepts::record_type<T>)
         {
@@ -26,7 +27,7 @@ namespace kumi
 
     struct map_index_t
     {
-      constexpr auto operator()(auto N, auto f, auto&&... args) const
+      KUMI_ABI constexpr auto operator()(auto N, auto f, auto&&... args) const
       {
         return kumi::invoke(f, N, get<N>(KUMI_FWD(args))...);
       }
@@ -34,7 +35,8 @@ namespace kumi
 
     struct map_field_t
     {
-      template<typename F, typename T, typename... Ts> constexpr auto operator()(auto N, F f, T&& t, Ts&&... ts) const
+      template<typename F, typename T, typename... Ts>
+      KUMI_ABI constexpr auto operator()(auto N, F f, T&& t, Ts&&... ts) const
       {
         constexpr auto field = kumi::identifier_of<kumi::element_t<N, T>>();
         return kumi::capture_field<field>(
@@ -47,31 +49,27 @@ namespace kumi
     inline constexpr map_field_t map_field_{};
   }
 
+  template<typename T, typename F, std::size_t... I>
+  KUMI_ABI constexpr decltype(auto) map_(kumi::adl_tag_t, T&&, F&& f, std::index_sequence<I...>)
+  {
+    if constexpr (sizeof...(I) == 0) return kumi::builder<T>::make();
+    else return kumi::builder<T>::make(kumi::invoke(KUMI_FWD(f), kumi::index<I>)...);
+  }
+
   struct map_t
   {
     template<typename Function,
              kumi::concepts::product_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, T&& t0, Ts&&... others) const
-    requires(kumi::concepts::compatible_product_types<T, Ts...>)
-#ifndef KUMI_DOXYGEN_INVOKED
-            && (kumi::_::supports_call<Function, T &&, Ts && ...>)
-#endif
+    requires(kumi::concepts::compatible_product_types<T, Ts...>) && (kumi::_::supports_call<Function, T &&, Ts && ...>)
     {
       auto&& test = kumi::bind_back(_::map_, f, KUMI_FWD(t0), KUMI_FWD(others)...);
-      return map_(KUMI_FWD(t0), KUMI_FWD(test), std::make_index_sequence<kumi::size_v<T>>{});
-    }
-
-  protected:
-    template<typename T, typename F, std::size_t... I>
-    KUMI_ABI constexpr decltype(auto) map_(T&&, F&& f, std::index_sequence<I...>) const
-    {
-      if constexpr (sizeof...(I) == 0) return builder<T>::make();
-      else return kumi::builder<T>::make(kumi::invoke(KUMI_FWD(f), kumi::index<I>)...);
+      return map_(kumi::adl_tag, KUMI_FWD(t0), KUMI_FWD(test), std::make_index_sequence<kumi::size_v<T>>{});
     }
   };
 
-  struct map_index_t : private kumi::map_t
+  struct map_index_t
   {
     template<kumi::concepts::product_type T,
              typename Function,
@@ -80,11 +78,11 @@ namespace kumi
     requires(!kumi::concepts::record_type<T> && (!kumi::concepts::record_type<Ts> && ...))
     {
       auto&& tmp = kumi::bind_back(_::map_index_, f, KUMI_FWD(t0), KUMI_FWD(others)...);
-      return this->map_t::map_(KUMI_FWD(t0), KUMI_FWD(tmp), std::make_index_sequence<kumi::size_v<T>>{});
+      return map_(kumi::adl_tag, KUMI_FWD(t0), KUMI_FWD(tmp), std::make_index_sequence<kumi::size_v<T>>{});
     }
   };
 
-  struct map_field_t : private kumi::map_t
+  struct map_field_t
   {
     template<kumi::concepts::record_type T,
              typename Function,
@@ -93,7 +91,7 @@ namespace kumi
     requires(kumi::concepts::compatible_product_types<T, Ts...>)
     {
       auto&& tmp = kumi::bind_back(_::map_field_, f, KUMI_FWD(t0), KUMI_FWD(others)...);
-      return this->map_t::map_(KUMI_FWD(t0), KUMI_FWD(tmp), std::make_index_sequence<kumi::size_v<T>>{});
+      return map_(kumi::adl_tag, KUMI_FWD(t0), KUMI_FWD(tmp), std::make_index_sequence<kumi::size_v<T>>{});
     }
   };
 
@@ -112,7 +110,9 @@ namespace kumi
           `f` can't be called on each product type's elements. All product type must either be
           record types or product types, mixing is not supported.
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -134,19 +134,11 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * The product type matching the common_product_type of the input containing `f` calls results.
+      - The product type matching the common_product_type of the input containing `f` calls results.
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi::result
-    {
-      template<typename Function, product_type T, product_type... Ts> struct map;
-
-      template<typename Function, product_type T, product_type... Ts>
-      using map_t = typename map<Function,T>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/map.hpp map_t
 
     Computes the return type of a call to kumi::map
 
@@ -177,7 +169,9 @@ namespace kumi
     @note Does not participate in overload resolution if tuples' size are not equal or if `f`
           can't be called on each tuple's elements and their indexes.
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -199,19 +193,11 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * The product type matching the common_product_type of the input containing `f` calls results.
+      - The product type matching the common_product_type of the input containing `f` calls results.
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi::result
-    {
-      template<typename Function, product_type T, product_type... Ts> struct map_index;
-
-      template<typename Function, product_type T, product_type... Ts>
-      using map_index_t = typename map_index<Function,T>::type;
-    }
-    @endcode
+    @snippet include/kumi/algorithm/map.hpp map_index_t
 
     Computes the return type of a call to kumi::map_index
 
@@ -238,7 +224,9 @@ namespace kumi
     @note Does not participate in overload resolution if records' size are not equal or if `f`
           can't be called on each record's fields and their names.
 
-    @qualifier nodiscard inline constexpr
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
     @groupheader{Header file}
     @code
@@ -260,34 +248,27 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * The product type matching the common_product_type of the input containing `f` calls results.
+      - The product type matching the common_product_type of the input containing `f` calls results.
 
     @groupheader{Helper type}
 
-    @code
-    namespace kumi::result
-    {
-      template<typename Function, product_type T, product_type... Ts> struct map_field;
+    @snippet include/kumi/algorithm/map.hpp map_field_t
 
-      template<typename Function, product_type T, product_type... Ts>
-      using map_field_t = typename map_field<Function,T>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::map_index
+    Computes the return type of a call to kumi::map_field
 
     @see kumi::map
     @see kumi::map_index
 
     @groupheader{Example}
 
-    @godbolt{doc/tuple/algo/map_index.cpp}
+    @godbolt{doc/record/algo/map_field.cpp}
   **/
   //====================================================================================================================
   inline constexpr map_field_t map_field{};
 
   namespace result
   {
+    //! [map_t]
     template<typename Function,
              kumi::concepts::product_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
@@ -299,11 +280,27 @@ namespace kumi
     template<typename Function,
              kumi::concepts::product_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
+    using map_t = typename kumi::result::map<Function, T, Ts...>::type;
+
+    //! [map_t]
+
+    //! [map_index_t]
+    template<typename Function,
+             kumi::concepts::product_type T,
+             kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
     struct map_index
     {
       using type = decltype(kumi::map_index(std::declval<Function>(), std::declval<T>(), std::declval<Ts>()...));
     };
 
+    template<typename Function,
+             kumi::concepts::product_type T,
+             kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
+    using map_index_t = typename kumi::result::map_index<Function, T, Ts...>::type;
+
+    //! [map_index_t]
+
+    //! [map_field_t]
     template<typename Function,
              kumi::concepts::record_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
@@ -313,18 +310,9 @@ namespace kumi
     };
 
     template<typename Function,
-             kumi::concepts::product_type T,
-             kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
-    using map_t = typename kumi::result::map<Function, T, Ts...>::type;
-
-    template<typename Function,
-             kumi::concepts::product_type T,
-             kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
-    using map_index_t = typename kumi::result::map_index<Function, T, Ts...>::type;
-
-    template<typename Function,
              kumi::concepts::record_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
     using map_field_t = typename kumi::result::map_field<Function, T, Ts...>::type;
+    //! [map_field_t]
   }
 }
