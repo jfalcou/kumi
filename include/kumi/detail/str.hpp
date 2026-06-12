@@ -26,7 +26,7 @@ namespace kumi
     static constexpr std::size_t npos = static_cast<std::size_t>(-1);
     static constexpr char separator = '.';
 
-    char data_[max_size + 1];
+    char data_[max_size + 1] = {0};
     unsigned int size_;
 
     constexpr str() = default;
@@ -97,7 +97,7 @@ namespace kumi
     {
       std::size_t len = (count == npos || pos + count > size_) ? (size_ - pos) : count;
       str res{};
-      res.size_ = len;
+      res.size_ = static_cast<unsigned int>(len);
       for (std::size_t i = 0; i < len; ++i) res.data_[i] = data_[pos + i];
       return res;
     }
@@ -231,7 +231,7 @@ namespace kumi
       if (new_size > max_size) throw "Overflow";
 
       str res{};
-      res.size_ = new_size;
+      res.size_ = static_cast<unsigned int>(new_size);
 
       for (std::size_t i = 0; i < size_; ++i) res.data_[i] = data_[i];
 
@@ -248,7 +248,7 @@ namespace kumi
       str res{};
       if (n > str::max_size) throw "Overflow";
       for (std::size_t i = 0; i < n; ++i) res.data_[i] = s[i];
-      res.size_ = n;
+      res.size_ = static_cast<unsigned int>(n);
       return res;
     }
   };
