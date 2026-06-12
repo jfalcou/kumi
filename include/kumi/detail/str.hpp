@@ -71,8 +71,6 @@ namespace kumi
       return T{data_, size_};
     }
 
-    KUMI_ABI friend constexpr auto operator<=>(str const&, str const&) noexcept = default;
-
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, str const& s) noexcept
     {
@@ -151,6 +149,18 @@ namespace kumi
       if (size_ > other.size_) return 1;
       return 0;
     }
+
+    friend constexpr bool operator==(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) == 0; }
+
+    friend constexpr bool operator!=(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) != 0; }
+
+    friend constexpr bool operator<(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) < 0; }
+
+    friend constexpr bool operator<=(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) <= 0; }
+
+    friend constexpr bool operator>(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) > 0; }
+
+    friend constexpr bool operator>=(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) >= 0; }
 
     constexpr std::size_t rfind(str const& s, std::size_t pos = npos) const
     {
