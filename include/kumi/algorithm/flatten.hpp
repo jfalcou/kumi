@@ -55,8 +55,7 @@ namespace kumi
         using FV = kumi::result::field_value_of_t<V>;
         if constexpr (kumi::concepts::record_type<FV> && kumi::concepts::record_type<T>)
         {
-          constexpr auto curr_name = kumi::label_of<V>();
-          constexpr auto new_name = kumi::concatenate_str<curr_name, kumi::label_of<kumi::element_t<J, FV>>()>();
+          constexpr auto new_name = kumi::label_of<V>() + kumi::label_of<kumi::element_t<J, FV>>();
           return (
             kumi::capture_field<name<new_name>{}>(kumi::field_value_of(get<J>(kumi::field_value_of(KUMI_FWD(v))))));
         }

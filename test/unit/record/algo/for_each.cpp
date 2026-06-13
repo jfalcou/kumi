@@ -8,7 +8,6 @@
 #define TTS_MAIN
 #include <kumi/record.hpp>
 #include <kumi/algorithm/for_each.hpp>
-#include <string_view>
 #include <tts/tts.hpp>
 
 struct A
@@ -22,7 +21,6 @@ struct B
 };
 
 using namespace kumi::literals;
-using namespace std::literals;
 
 TTS_CASE("Check for_each SFINAE compliance")
 {
@@ -100,7 +98,7 @@ TTS_CASE("Check for_each_field behavior")
 
   kumi::for_each_field(
     [](kumi::str name, auto& m, auto n) {
-      if (name.as<std::string_view>().starts_with('a')) m *= n;
+      if (name.starts_with("a"_str)) m *= n;
       else m += n;
     },
     t, t);
@@ -117,7 +115,7 @@ TTS_CASE("Check for_each_field constexpr behavior")
     auto it = kumi::record{"arg"_id = 1, "beg"_id = 2., "crf"_id = 3.4f, "deg"_id = '5'};
     kumi::for_each_field(
       [](kumi::str name, auto& m) {
-        if (name.as<std::string_view>().ends_with("g")) m++;
+        if (name.ends_with("g"_str)) m++;
         else m--;
       },
       it);
@@ -133,8 +131,7 @@ TTS_CASE("Check for_each_field constexpr behavior")
     auto it = kumi::record{"actually"_id = 1, "bike"_id = 2., "what"_id = 3.4f, "delicious"_id = '5'};
     kumi::for_each_field(
       [](kumi::str name, auto& m, auto n) {
-        auto s = name.as<std::string_view>();
-        if (s.starts_with('a') || s.ends_with('t')) m *= n;
+        if (name.starts_with("a"_str) || name.ends_with("t"_str)) m *= n;
         else m += n;
       },
       it, it);
