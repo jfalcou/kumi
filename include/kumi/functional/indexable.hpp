@@ -56,6 +56,28 @@ namespace kumi::function
   //====================================================================================================================
   /**
     @ingroup functional
+    @brief  Logic provider to compute the index map associated to the extraction operation.
+
+    ## Callable object
+    @code
+      inline constexpr extract_t extractor{};
+    @endcode
+  **/
+  //====================================================================================================================
+  struct extract_t
+  {
+    template<std::size_t B, std::size_t E, std::size_t... I>
+    KUMI_ABI consteval auto operator()(std::integral_constant<std::size_t, B>,
+                                       std::integral_constant<std::size_t, E>,
+                                       std::index_sequence<I...>) const noexcept
+    {
+      return std::index_sequence<(I < B ? I : (I + (E - B)))...>{};
+    }
+  };
+
+  //====================================================================================================================
+  /**
+    @ingroup functional
     @brief  Logic provider to compute the index map associated to the rotation operation.
 
     ## Callable object
@@ -213,6 +235,14 @@ namespace kumi::function
   **/
   //====================================================================================================================
   inline constexpr kumi::function::cat_t concatenater{};
+
+  //====================================================================================================================
+  /**
+    @ingroup functional
+    @brief  Callable object computing the index map associated to the extraction operation.
+  **/
+  //====================================================================================================================
+  inline constexpr kumi::function::extract_t extractor{};
 
   //====================================================================================================================
   /**
