@@ -9,26 +9,29 @@
 
 namespace kumi
 {
-  struct reindex_case_t
+  namespace _
   {
-    template<typename T, template<auto> class C, auto Old, auto P>
-    KUMI_ABI constexpr auto operator()(T&& t, C<Old>, kumi::projection_map<P>) const
+    struct reindex_case_t
     {
-      if constexpr (kumi::concepts::projection_map<decltype(P)>) return C<P>{}(KUMI_FWD(t));
-      else
+      template<typename T, template<auto> class C, auto Old, auto P>
+      KUMI_ABI constexpr auto operator()(T&& t, C<Old>, kumi::projection_map<P>) const
       {
-        static_assert(requires { get<P>(std::declval<T>()); }, "[KUMI] - Invalid projection for input type");
-        return get<P>(KUMI_FWD(t));
+        if constexpr (kumi::concepts::projection_map<decltype(P)>) return C<P>{}(KUMI_FWD(t));
+        else
+        {
+          static_assert(requires { get<P>(std::declval<T>()); }, "[KUMI] - Invalid projection for input type");
+          return get<P>(KUMI_FWD(t));
+        }
       }
+    };
+
+    inline constexpr reindex_case_t reindex_case{};
+
+    template<typename T, typename S, auto... E>
+    KUMI_ABI constexpr auto reindex_(kumi::_::adl_tag_t, T&& t, S self, kumi::projection_map<E...>)
+    {
+      return kumi::builder<T>::make(kumi::_::reindex_case(KUMI_FWD(t), self, kumi::projection_map<E>{})...);
     }
-  };
-
-  inline constexpr reindex_case_t reindex_case{};
-
-  template<typename T, typename S, auto... E>
-  KUMI_ABI constexpr auto reindex_(kumi::adl_tag_t, T&& t, S self, kumi::projection_map<E...>)
-  {
-    return kumi::builder<T>::make(kumi::reindex_case(KUMI_FWD(t), self, kumi::projection_map<E>{})...);
   }
 
   template<std::size_t... Idx> struct reorder_t
@@ -57,7 +60,7 @@ namespace kumi
       using proj_t = std::remove_cvref_t<decltype(Projections)>;
       if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
       else if constexpr (proj_t::size() == 0) return builder<T>::make();
-      else return reindex_(kumi::adl_tag, KUMI_FWD(t), (*this), Projections);
+      else return reindex_(kumi::_::adl_tag, KUMI_FWD(t), (*this), Projections);
     }
   };
 

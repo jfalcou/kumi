@@ -10,13 +10,16 @@
 namespace kumi
 {
 
-  template<typename T, std::size_t... I, std::size_t... J>
-  KUMI_ABI constexpr decltype(auto) transpose_extern_(kumi::adl_tag_t,
-                                                      T&& t,
-                                                      std::index_sequence<I...>,
-                                                      std::index_sequence<J...> is)
+  namespace _
   {
-    return kumi::make_tuple(kumi::function::builder(KUMI_FWD(t), std::integral_constant<std::size_t, I>{}, is)...);
+    template<typename T, std::size_t... I, std::size_t... J>
+    KUMI_ABI constexpr decltype(auto) transpose_extern_(kumi::_::adl_tag_t,
+                                                        T&& t,
+                                                        std::index_sequence<I...>,
+                                                        std::index_sequence<J...> is)
+    {
+      return kumi::make_tuple(kumi::function::builder(KUMI_FWD(t), std::integral_constant<std::size_t, I>{}, is)...);
+    }
   }
 
   struct transpose_t
@@ -31,7 +34,7 @@ namespace kumi
         constexpr std::size_t c = kumi::size_v<T>;
         constexpr std::size_t s = kumi::size_v<kumi::element_t<0, T>>;
         constexpr auto pos = kumi::function::zipper(kumi::index<c>, kumi::index<s>);
-        return transpose_extern_(kumi::adl_tag, KUMI_FWD(t), get<1>(pos), get<0>(pos));
+        return transpose_extern_(kumi::_::adl_tag, KUMI_FWD(t), get<1>(pos), get<0>(pos));
       }
     }
   };

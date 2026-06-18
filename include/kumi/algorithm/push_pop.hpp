@@ -9,16 +9,19 @@
 
 namespace kumi
 {
-  template<typename T, typename V, std::size_t... I>
-  KUMI_ABI constexpr auto push_front_(T&& t, V&& v, std::index_sequence<I...>)
+  namespace _
   {
-    return kumi::builder<T>::make(KUMI_FWD(v), get<I>(KUMI_FWD(t))...);
-  }
+    template<typename T, typename V, std::size_t... I>
+    KUMI_ABI constexpr auto push_front_(kumi::_::adl_tag_t, T&& t, V&& v, std::index_sequence<I...>)
+    {
+      return kumi::builder<T>::make(KUMI_FWD(v), get<I>(KUMI_FWD(t))...);
+    }
 
-  template<typename T, typename V, std::size_t... I>
-  KUMI_ABI constexpr auto push_back_(T&& t, V&& v, std::index_sequence<I...>)
-  {
-    return kumi::builder<T>::make(get<I>(KUMI_FWD(t))..., KUMI_FWD(v));
+    template<typename T, typename V, std::size_t... I>
+    KUMI_ABI constexpr auto push_back_(kumi::_::adl_tag_t, T&& t, V&& v, std::index_sequence<I...>)
+    {
+      return kumi::builder<T>::make(get<I>(KUMI_FWD(t))..., KUMI_FWD(v));
+    }
   }
 
   struct push_front_t
@@ -26,7 +29,7 @@ namespace kumi
     template<kumi::concepts::product_type T, typename V>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, V&& v) const
     {
-      return push_front_(KUMI_FWD(t), KUMI_FWD(v), std::make_index_sequence<kumi::size_v<T>>{});
+      return push_front_(kumi::_::adl_tag, KUMI_FWD(t), KUMI_FWD(v), std::make_index_sequence<kumi::size_v<T>>{});
     }
   };
 
@@ -47,7 +50,7 @@ namespace kumi
     template<kumi::concepts::product_type T, typename V>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, V&& v) const
     {
-      return push_back_(KUMI_FWD(t), KUMI_FWD(v), std::make_index_sequence<kumi::size_v<T>>{});
+      return push_back_(kumi::_::adl_tag, KUMI_FWD(t), KUMI_FWD(v), std::make_index_sequence<kumi::size_v<T>>{});
     }
   };
 

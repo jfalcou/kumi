@@ -9,52 +9,56 @@
 
 namespace kumi
 {
-  struct flatten_all_case_t
+  namespace _
   {
-    template<typename T, typename V, typename F, typename Self>
-    KUMI_ABI constexpr auto operator()(T&&, V&& v, F f, Self s) const
+    struct flatten_all_case_t
     {
-      using FV = kumi::result::field_value_of_t<V>;
-      if constexpr (kumi::concepts::record_type<FV> && kumi::concepts::record_type<T>)
-        return kumi::capture_field<kumi::identifier_of<V>()>(s(kumi::field_value_of(KUMI_FWD(v)), f));
-      else if constexpr (kumi::concepts::follows_same_semantic<T, V>) return s(KUMI_FWD(v), f);
-      else if constexpr (kumi::concepts::record_type<T> && kumi::concepts::field<V>)
-        return kumi::capture_field<kumi::identifier_of<V>()>(kumi::invoke(f, kumi::field_value_of(KUMI_FWD(v))));
-      else return kumi::invoke(f, KUMI_FWD(v));
-    }
-  };
-
-  inline constexpr flatten_all_case_t flatten_all_case{};
-
-  struct flatten_case_t
-  {
-    template<typename T, typename V> KUMI_ABI constexpr auto operator()(T&&, V&& v, auto J) const
-    {
-      using FV = kumi::result::field_value_of_t<V>;
-      if constexpr (kumi::concepts::record_type<FV> && kumi::concepts::record_type<T>)
+      template<typename T, typename V, typename F, typename Self>
+      KUMI_ABI constexpr auto operator()(T&&, V&& v, F f, Self s) const
       {
-        constexpr auto new_name = kumi::label_of<V>() + kumi::label_of<kumi::element_t<J, FV>>();
-        return (kumi::capture_field<name<new_name>{}>(kumi::field_value_of(get<J>(kumi::field_value_of(KUMI_FWD(v))))));
+        using FV = kumi::result::field_value_of_t<V>;
+        if constexpr (kumi::concepts::record_type<FV> && kumi::concepts::record_type<T>)
+          return kumi::capture_field<kumi::identifier_of<V>()>(s(kumi::field_value_of(KUMI_FWD(v)), f));
+        else if constexpr (kumi::concepts::follows_same_semantic<T, V>) return s(KUMI_FWD(v), f);
+        else if constexpr (kumi::concepts::record_type<T> && kumi::concepts::field<V>)
+          return kumi::capture_field<kumi::identifier_of<V>()>(kumi::invoke(f, kumi::field_value_of(KUMI_FWD(v))));
+        else return kumi::invoke(f, KUMI_FWD(v));
       }
-      else if constexpr (kumi::concepts::follows_same_semantic<T, V>) return get<J>(KUMI_FWD(v));
-      else return KUMI_FWD(v);
+    };
+
+    inline constexpr flatten_all_case_t flatten_all_case{};
+
+    struct flatten_case_t
+    {
+      template<typename T, typename V> KUMI_ABI constexpr auto operator()(T&&, V&& v, auto J) const
+      {
+        using FV = kumi::result::field_value_of_t<V>;
+        if constexpr (kumi::concepts::record_type<FV> && kumi::concepts::record_type<T>)
+        {
+          constexpr auto new_name = kumi::label_of<V>() + kumi::label_of<kumi::element_t<J, FV>>();
+          return (
+            kumi::capture_field<name<new_name>{}>(kumi::field_value_of(get<J>(kumi::field_value_of(KUMI_FWD(v))))));
+        }
+        else if constexpr (kumi::concepts::follows_same_semantic<T, V>) return get<J>(KUMI_FWD(v));
+        else return KUMI_FWD(v);
+      }
+    };
+
+    inline constexpr flatten_case_t flatten_case{};
+
+    template<typename T, typename V, std::size_t... J, std::size_t... I>
+    KUMI_ABI constexpr auto flatten_(
+      kumi::_::adl_tag_t, T&& t, V visitor, std::index_sequence<J...>, std::index_sequence<I...>)
+    {
+      if constexpr (sizeof...(I) == 0) return kumi::builder<T>::make();
+      else return kumi::builder<T>::make(visitor(KUMI_FWD(t), get<I>(KUMI_FWD(t)), kumi::index<J>)...);
     }
-  };
 
-  inline constexpr flatten_case_t flatten_case{};
-
-  template<typename T, typename V, std::size_t... J, std::size_t... I>
-  KUMI_ABI constexpr auto flatten_(
-    kumi::adl_tag_t, T&& t, V visitor, std::index_sequence<J...>, std::index_sequence<I...>)
-  {
-    if constexpr (sizeof...(I) == 0) return kumi::builder<T>::make();
-    else return kumi::builder<T>::make(visitor(KUMI_FWD(t), get<I>(KUMI_FWD(t)), kumi::index<J>)...);
-  }
-
-  template<typename T, typename V, typename F, typename S, std::size_t... I>
-  KUMI_ABI constexpr auto flatten_all_(kumi::adl_tag_t, T&& t, V visitor, F f, S self, std::index_sequence<I...>)
-  {
-    return kumi::builder<T>::make(visitor(KUMI_FWD(t), get<I>(KUMI_FWD(t)), f, self)...);
+    template<typename T, typename V, typename F, typename S, std::size_t... I>
+    KUMI_ABI constexpr auto flatten_all_(kumi::_::adl_tag_t, T&& t, V visitor, F f, S self, std::index_sequence<I...>)
+    {
+      return kumi::builder<T>::make(visitor(KUMI_FWD(t), get<I>(KUMI_FWD(t)), f, self)...);
+    }
   }
 
   struct flatten_t
@@ -69,7 +73,7 @@ namespace kumi
             std::index_sequence<kumi::function::size_or_v<kumi::stored_element_t<I, T>, 1>...>{});
         }(std::make_index_sequence<kumi::size_v<T>>{});
 
-        return flatten_(kumi::adl_tag, KUMI_FWD(t), kumi::flatten_case, get<1>(proj), get<0>(proj));
+        return flatten_(kumi::_::adl_tag, KUMI_FWD(t), kumi::_::flatten_case, get<1>(proj), get<0>(proj));
       }
     }
   };
@@ -82,8 +86,8 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
       else
       {
-        return this->flatten_t::operator()(flatten_all_(kumi::adl_tag, KUMI_FWD(t), kumi::flatten_all_case, f, (*this),
-                                                        std::make_index_sequence<kumi::size_v<T>>{}));
+        return this->flatten_t::operator()(flatten_all_(kumi::_::adl_tag, KUMI_FWD(t), kumi::_::flatten_all_case, f,
+                                                        (*this), std::make_index_sequence<kumi::size_v<T>>{}));
       }
     }
 

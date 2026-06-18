@@ -10,11 +10,14 @@
 namespace kumi
 {
 
-  template<typename T, typename Seq, std::size_t... I>
-  KUMI_ABI constexpr auto cartesian_product_(kumi::adl_tag_t, T&& t, Seq&& s, std::index_sequence<I...>)
+  namespace _
   {
-    std::make_index_sequence<kumi::size_v<T>> ids{};
-    return kumi::make_tuple((kumi::function::builder(KUMI_FWD(t), get<I>(s), ids))...);
+    template<typename T, typename Seq, std::size_t... I>
+    KUMI_ABI constexpr auto cartesian_product_(kumi::_::adl_tag_t, T&& t, Seq&& s, std::index_sequence<I...>)
+    {
+      std::make_index_sequence<kumi::size_v<T>> ids{};
+      return kumi::make_tuple((kumi::function::builder(KUMI_FWD(t), get<I>(s), ids))...);
+    }
   }
 
   struct cartesian_product_t
@@ -28,7 +31,7 @@ namespace kumi
       {
         constexpr auto sq = std::make_index_sequence<(kumi::size_v<Ts> * ...)>{};
         constexpr auto idx = kumi::function::cartesian_producer(sq, kumi::index<kumi::size_v<Ts>>...);
-        return cartesian_product_(kumi::adl_tag, kumi::forward_as_tuple(KUMI_FWD(ts)...), idx, sq);
+        return cartesian_product_(kumi::_::adl_tag, kumi::forward_as_tuple(KUMI_FWD(ts)...), idx, sq);
       }
     }
   };

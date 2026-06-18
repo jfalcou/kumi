@@ -9,6 +9,38 @@
 
 namespace kumi
 {
+  namespace _
+  {
+    template<typename M, typename S, typename T, std::size_t N, std::size_t... F, std::size_t... L>
+    KUMI_ABI constexpr auto reduce_(
+      kumi::_::adl_tag_t, M&& m, S s, T&& t, kumi::index_t<N>, std::index_sequence<F...>, std::index_sequence<L...>)
+    {
+      if constexpr (N == 1)
+        return s(KUMI_FWD(m), kumi::tuple{kumi::invoke(KUMI_FWD(m), get<F>(KUMI_FWD(t)), get<L>(KUMI_FWD(t)))...,
+                                          get<kumi::size_v<T> - 1>(KUMI_FWD(t))});
+      else return s(KUMI_FWD(m), kumi::tuple{kumi::invoke(KUMI_FWD(m), get<F>(KUMI_FWD(t)), get<L>(KUMI_FWD(t)))...});
+    }
+
+    template<typename M, typename T, typename F, typename S, std::size_t N, std::size_t... I, std::size_t... J>
+    KUMI_ABI constexpr auto map_reduce_(kumi::_::adl_tag_t,
+                                        M&& m,
+                                        T&& t,
+                                        F f,
+                                        S s,
+                                        kumi::index_t<N>,
+                                        std::index_sequence<I...>,
+                                        std::index_sequence<J...>)
+    {
+      if constexpr (N == 1)
+        return s(KUMI_FWD(m), kumi::tuple{kumi::invoke(KUMI_FWD(m), kumi::invoke(f, get<I>(KUMI_FWD(t))),
+                                                       kumi::invoke(f, get<J>(KUMI_FWD(t))))...,
+                                          kumi::invoke(f, get<kumi::size_v<T> - 1>(KUMI_FWD(t)))});
+      else
+        return s(KUMI_FWD(m), kumi::tuple{kumi::invoke(KUMI_FWD(m), kumi::invoke(f, get<I>(KUMI_FWD(t))),
+                                                       kumi::invoke(f, get<J>(KUMI_FWD(t))))...});
+    }
+  }
+
   struct reduce_t
   {
     template<kumi::concepts::monoid M, kumi::concepts::product_type T>
@@ -21,7 +53,7 @@ namespace kumi
       {
         constexpr auto sz = kumi::size_v<T>;
         constexpr auto pos = kumi::function::reducer(std::make_index_sequence<sz / 2>{}, index<sz % 2>);
-        return reduce_(KUMI_FWD(m), KUMI_FWD(t), get<2>(pos), get<0>(pos), get<1>(pos));
+        return reduce_(kumi::_::adl_tag, KUMI_FWD(m), (*this), KUMI_FWD(t), get<2>(pos), get<0>(pos), get<1>(pos));
       }
     }
 
@@ -31,21 +63,9 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return init;
       else return KUMI_FWD(m)(init, (*this)(KUMI_FWD(m), KUMI_FWD(t)));
     }
-
-    template<typename M, typename T, std::size_t N, std::size_t... F, std::size_t... S>
-    KUMI_ABI constexpr auto reduce_(
-      M&& m, T&& t, kumi::index_t<N>, std::index_sequence<F...>, std::index_sequence<S...>) const
-    {
-      if constexpr (N == 1)
-        return (*this)(KUMI_FWD(m), kumi::tuple{kumi::invoke(KUMI_FWD(m), get<F>(KUMI_FWD(t)), get<S>(KUMI_FWD(t)))...,
-                                                get<kumi::size_v<T> - 1>(KUMI_FWD(t))});
-      else
-        return (*this)(KUMI_FWD(m),
-                       kumi::tuple{kumi::invoke(KUMI_FWD(m), get<F>(KUMI_FWD(t)), get<S>(KUMI_FWD(t)))...});
-    }
   };
 
-  struct map_reduce_t : private kumi::reduce_t
+  struct map_reduce_t
   {
     template<kumi::concepts::product_type T, kumi::concepts::monoid M, typename Function>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, M&& m, T&& t) const
@@ -57,7 +77,8 @@ namespace kumi
       {
         constexpr auto sz = kumi::size_v<T>;
         constexpr auto pos = kumi::function::reducer(std::make_index_sequence<sz / 2>{}, index<sz % 2>);
-        return map_reduce_(KUMI_FWD(m), KUMI_FWD(t), f, get<2>(pos), get<0>(pos), get<1>(pos));
+        return map_reduce_(kumi::_::adl_tag, KUMI_FWD(m), KUMI_FWD(t), f, kumi::reduce_t{}, get<2>(pos), get<0>(pos),
+                           get<1>(pos));
       }
     }
 
@@ -66,21 +87,6 @@ namespace kumi
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return kumi::invoke(f, init);
       else return KUMI_FWD(m)(kumi::invoke(f, init), (*this)(f, KUMI_FWD(m), KUMI_FWD(t)));
-    }
-
-    template<typename M, typename T, typename F, std::size_t N, std::size_t... I, std::size_t... J>
-    KUMI_ABI constexpr auto map_reduce_(
-      M&& m, T&& t, F f, kumi::index_t<N>, std::index_sequence<I...>, std::index_sequence<J...>) const
-    {
-      if constexpr (N == 1)
-        return this->reduce_t::operator()(KUMI_FWD(m),
-                                          kumi::tuple{kumi::invoke(KUMI_FWD(m), kumi::invoke(f, get<I>(KUMI_FWD(t))),
-                                                                   kumi::invoke(f, get<J>(KUMI_FWD(t))))...,
-                                                      kumi::invoke(f, get<kumi::size_v<T> - 1>(KUMI_FWD(t)))});
-      else
-        return this->reduce_t::operator()(KUMI_FWD(m),
-                                          kumi::tuple{kumi::invoke(KUMI_FWD(m), kumi::invoke(f, get<I>(KUMI_FWD(t))),
-                                                                   kumi::invoke(f, get<J>(KUMI_FWD(t))))...});
     }
   };
 

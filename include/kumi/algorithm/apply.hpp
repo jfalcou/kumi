@@ -9,11 +9,14 @@
 
 namespace kumi
 {
-  template<typename F, typename T, std::size_t... I>
-  KUMI_ABI constexpr decltype(auto) apply_(kumi::adl_tag_t, F&& f, T&& t, std::index_sequence<I...>)
+  namespace _
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return kumi::invoke(KUMI_FWD(f));
-    else return kumi::invoke(KUMI_FWD(f), get<I>(KUMI_FWD(t))...);
+    template<typename F, typename T, std::size_t... I>
+    KUMI_ABI constexpr decltype(auto) apply_(kumi::_::adl_tag_t, F&& f, T&& t, std::index_sequence<I...>)
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return kumi::invoke(KUMI_FWD(f));
+      else return kumi::invoke(KUMI_FWD(f), get<I>(KUMI_FWD(t))...);
+    }
   }
 
   struct apply_t
@@ -24,7 +27,7 @@ namespace kumi
     requires(kumi::_::supports_apply<Function, T>)
     {
       if constexpr (kumi::concepts::record_type<T>) return (*this)(KUMI_FWD(f), kumi::values_of(KUMI_FWD(t)));
-      else return apply_(kumi::adl_tag, KUMI_FWD(f), KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T>>{});
+      else return apply_(kumi::_::adl_tag, KUMI_FWD(f), KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T>>{});
     }
   };
 
@@ -33,7 +36,7 @@ namespace kumi
     template<typename Function, kumi::concepts::record_type R>
     KUMI_ABI constexpr decltype(auto) operator()(Function&& f, R&& t) const
     {
-      return apply_(kumi::adl_tag, KUMI_FWD(f), KUMI_FWD(t), std::make_index_sequence<kumi::size_v<R>>{});
+      return apply_(kumi::_::adl_tag, KUMI_FWD(f), KUMI_FWD(t), std::make_index_sequence<kumi::size_v<R>>{});
     }
   };
 

@@ -9,12 +9,15 @@
 
 namespace kumi
 {
-  template<typename F, std::size_t... I>
-  KUMI_ABI constexpr auto for_each_(kumi::adl_tag_t, F&& f, std::index_sequence<I...>)
+  namespace _
   {
-    using result_t = std::invoke_result_t<F, kumi::index_t<0>>;
-    if constexpr (std::is_void_v<result_t>) return ((kumi::invoke(KUMI_FWD(f), kumi::index<I>)), ...);
-    else return ((kumi::invoke(KUMI_FWD(f), kumi::index<I>)) && ...);
+    template<typename F, std::size_t... I>
+    KUMI_ABI constexpr auto for_each_(kumi::_::adl_tag_t, F&& f, std::index_sequence<I...>)
+    {
+      using result_t = std::invoke_result_t<F, kumi::index_t<0>>;
+      if constexpr (std::is_void_v<result_t>) return ((kumi::invoke(KUMI_FWD(f), kumi::index<I>)), ...);
+      else return ((kumi::invoke(KUMI_FWD(f), kumi::index<I>)) && ...);
+    }
   }
 
   struct for_each_t
@@ -35,7 +38,7 @@ namespace kumi
           else kumi::invoke(f, get<I>(KUMI_FWD(t)), get<I>(KUMI_FWD(ts))...);
         }};
 
-        for_each_(kumi::adl_tag, invoker, std::make_index_sequence<kumi::size_v<T>>{});
+        for_each_(kumi::_::adl_tag, invoker, std::make_index_sequence<kumi::size_v<T>>{});
       }
     }
   };
@@ -50,7 +53,7 @@ namespace kumi
       else
       {
         auto const invoker{[&](auto const I) { kumi::invoke(f, I, get<I>(KUMI_FWD(t)), get<I>(KUMI_FWD(ts))...); }};
-        for_each_(kumi::adl_tag, invoker, std::make_index_sequence<kumi::size_v<T>>{});
+        for_each_(kumi::_::adl_tag, invoker, std::make_index_sequence<kumi::size_v<T>>{});
       }
     }
   };
@@ -69,7 +72,7 @@ namespace kumi
           constexpr auto field = get<I>(fields);
           kumi::invoke(f, kumi::_::make_str(field), get<field>(KUMI_FWD(r)), get<field>(KUMI_FWD(rs))...);
         };
-        for_each_(kumi::adl_tag, invoker, std::make_index_sequence<kumi::size_v<R>>{});
+        for_each_(kumi::_::adl_tag, invoker, std::make_index_sequence<kumi::size_v<R>>{});
       }
     }
   };

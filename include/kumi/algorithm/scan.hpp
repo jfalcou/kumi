@@ -10,30 +10,33 @@
 namespace kumi
 {
 
-  template<typename T, typename V, typename F, typename O, std::size_t... I>
-  KUMI_ABI constexpr auto inclusive_scan_left_(kumi::adl_tag_t, T&& t, V v, F f, O o, std::index_sequence<I...>)
+  namespace _
   {
-    return (kumi::function::scannable{o, kumi::invoke(f, v, get<0>(KUMI_FWD(t)))} >> ... >>
-            kumi::bind_back(f, get<I + 1>(KUMI_FWD(t))))();
-  }
+    template<typename T, typename V, typename F, typename O, std::size_t... I>
+    KUMI_ABI constexpr auto inclusive_scan_left_(kumi::_::adl_tag_t, T&& t, V v, F f, O o, std::index_sequence<I...>)
+    {
+      return (kumi::function::scannable{o, kumi::invoke(f, v, get<0>(KUMI_FWD(t)))} >> ... >>
+              kumi::bind_back(f, get<I + 1>(KUMI_FWD(t))))();
+    }
 
-  template<typename T, typename V, typename F, typename O, std::size_t... I>
-  KUMI_ABI constexpr auto exclusive_scan_left_(kumi::adl_tag_t, T&& t, V v, F f, O o, std::index_sequence<I...>)
-  {
-    return (kumi::function::scannable{o, v} >> ... >> kumi::bind_back(f, get<I>(KUMI_FWD(t))))();
-  }
+    template<typename T, typename V, typename F, typename O, std::size_t... I>
+    KUMI_ABI constexpr auto exclusive_scan_left_(kumi::_::adl_tag_t, T&& t, V v, F f, O o, std::index_sequence<I...>)
+    {
+      return (kumi::function::scannable{o, v} >> ... >> kumi::bind_back(f, get<I>(KUMI_FWD(t))))();
+    }
 
-  template<typename T, typename V, typename F, typename O, std::size_t... I>
-  KUMI_ABI constexpr auto inclusive_scan_right_(kumi::adl_tag_t, T&& t, V v, F f, O o, std::index_sequence<I...>)
-  {
-    return (kumi::bind_front(f, get<I>(KUMI_FWD(t)))
-            << ... << kumi::function::scannable{o, kumi::invoke(f, get<kumi::size_v<T> - 1>(KUMI_FWD(t)), v)})();
-  }
+    template<typename T, typename V, typename F, typename O, std::size_t... I>
+    KUMI_ABI constexpr auto inclusive_scan_right_(kumi::_::adl_tag_t, T&& t, V v, F f, O o, std::index_sequence<I...>)
+    {
+      return (kumi::bind_front(f, get<I>(KUMI_FWD(t)))
+              << ... << kumi::function::scannable{o, kumi::invoke(f, get<kumi::size_v<T> - 1>(KUMI_FWD(t)), v)})();
+    }
 
-  template<typename T, typename V, typename F, typename O, std::size_t... I>
-  KUMI_ABI constexpr auto exclusive_scan_right_(kumi::adl_tag_t, T&& t, V v, F f, O o, std::index_sequence<I...>)
-  {
-    return (kumi::bind_front(f, get<I + 1>(KUMI_FWD(t))) << ... << kumi::function::scannable{o, v})();
+    template<typename T, typename V, typename F, typename O, std::size_t... I>
+    KUMI_ABI constexpr auto exclusive_scan_right_(kumi::_::adl_tag_t, T&& t, V v, F f, O o, std::index_sequence<I...>)
+    {
+      return (kumi::bind_front(f, get<I + 1>(KUMI_FWD(t))) << ... << kumi::function::scannable{o, v})();
+    }
   }
 
   struct inclusive_scan_left_t
@@ -48,7 +51,7 @@ namespace kumi
       else
       {
         auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
-        return inclusive_scan_left_(kumi::adl_tag, KUMI_FWD(t), init, f, op,
+        return inclusive_scan_left_(kumi::_::adl_tag, KUMI_FWD(t), init, f, op,
                                     std::make_index_sequence<kumi::size_v<T> - 1>{});
       }
     }
@@ -72,7 +75,7 @@ namespace kumi
       else
       {
         auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
-        return exclusive_scan_left_(kumi::adl_tag, KUMI_FWD(t), init, f, op,
+        return exclusive_scan_left_(kumi::_::adl_tag, KUMI_FWD(t), init, f, op,
                                     std::make_index_sequence<kumi::size_v<T> - 1>{});
       }
     }
@@ -97,7 +100,7 @@ namespace kumi
       else
       {
         auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
-        return inclusive_scan_right_(kumi::adl_tag, KUMI_FWD(t), init, f, op,
+        return inclusive_scan_right_(kumi::_::adl_tag, KUMI_FWD(t), init, f, op,
                                      std::make_index_sequence<kumi::size_v<T> - 1>{});
       }
     }
@@ -121,7 +124,7 @@ namespace kumi
       else
       {
         auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
-        return exclusive_scan_right_(kumi::adl_tag, KUMI_FWD(t), init, f, op,
+        return exclusive_scan_right_(kumi::_::adl_tag, KUMI_FWD(t), init, f, op,
                                      std::make_index_sequence<kumi::size_v<T> - 1>{});
       }
     }

@@ -13,18 +13,18 @@ namespace kumi
   {
     template<typename T, typename... Ts>
     inline constexpr bool contains = ((kumi::concepts::field<T> && std::invocable<T, kumi::_::tag_of_t<Ts>>) || ...);
-  }
 
-  template<typename T, typename ID, std::size_t... I>
-  KUMI_ABI constexpr auto contains_(kumi::adl_tag_t, T&&, ID const&, std::index_sequence<I...>)
-  {
-    return std::bool_constant<kumi::_::can_get_field_by_value<std::remove_cvref_t<ID>, kumi::element_t<I, T>...>>{};
-  }
+    template<typename T, typename ID, std::size_t... I>
+    KUMI_ABI constexpr auto contains_(kumi::_::adl_tag_t, T&&, ID const&, std::index_sequence<I...>)
+    {
+      return std::bool_constant<kumi::_::can_get_field_by_value<std::remove_cvref_t<ID>, kumi::element_t<I, T>...>>{};
+    }
 
-  template<typename T, std::size_t... I, typename... Is>
-  KUMI_ABI constexpr auto contains_only_(kumi::adl_tag_t, T&&, std::index_sequence<I...>, Is const&...)
-  {
-    return std::bool_constant<(kumi::_::contains<kumi::element_t<I, T>, Is...> && ...)>{};
+    template<typename T, std::size_t... I, typename... Is>
+    KUMI_ABI constexpr auto contains_only_(kumi::_::adl_tag_t, T&&, std::index_sequence<I...>, Is const&...)
+    {
+      return std::bool_constant<(kumi::_::contains<kumi::element_t<I, T>, Is...> && ...)>{};
+    }
   }
 
   struct contains_t
@@ -33,7 +33,7 @@ namespace kumi
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, ID const& id) const noexcept
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return std::false_type{};
-      else return contains_(kumi::adl_tag, KUMI_FWD(t), id, std::make_index_sequence<kumi::size_v<T>>{});
+      else return contains_(kumi::_::adl_tag, KUMI_FWD(t), id, std::make_index_sequence<kumi::size_v<T>>{});
     }
   };
 
@@ -45,9 +45,9 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return std::false_type{};
       else if constexpr (sizeof...(Is) == 0) return std::false_type{};
       else
-        return std::bool_constant<(
-          decltype(contains_(kumi::adl_tag, std::declval<T>(), ids, std::make_index_sequence<kumi::size_v<T>>{})){} ||
-          ...)>{};
+        return std::bool_constant<(decltype(contains_(kumi::_::adl_tag, std::declval<T>(), ids,
+                                                      std::make_index_sequence<kumi::size_v<T>>{})){} ||
+                                   ...)>{};
     }
   };
 
@@ -60,7 +60,7 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return std::false_type{};
       else if constexpr (sizeof...(Is) == 0) return std::false_type{};
       else if constexpr (sizeof...(Is) < kumi::size_v<T>) return std::false_type{};
-      else return contains_only_(kumi::adl_tag, KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T>>{}, ids...);
+      else return contains_only_(kumi::_::adl_tag, KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T>>{}, ids...);
     }
   };
 

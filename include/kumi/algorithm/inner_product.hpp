@@ -9,6 +9,34 @@
 
 namespace kumi
 {
+  namespace _
+  {
+    template<typename T, typename U, typename V, typename Sum, typename Prod, std::size_t... I>
+    KUMI_ABI constexpr auto inner_product_(
+      kumi::_::adl_tag_t, T&& t, U&& u, V init, Sum sum, Prod prod, std::index_sequence<I...>) noexcept
+    {
+      if constexpr (kumi::concepts::record_type<T>)
+        return (kumi::function::foldable{init} >> ... >>
+                kumi::bind_back(sum, kumi::invoke(prod, get<kumi::identifier_of<kumi::element_t<I, T>>()>(KUMI_FWD(t)),
+                                                  get<kumi::identifier_of<kumi::element_t<I, U>>()>(KUMI_FWD(u)))))();
+      else
+        return (kumi::function::foldable{init} >> ... >>
+                kumi::bind_back(sum, kumi::invoke(prod, get<I>(KUMI_FWD(t)), get<I>(KUMI_FWD(u)))))();
+    }
+
+    template<typename T, typename U, typename V, std::size_t... I>
+    KUMI_ABI constexpr auto inner_product_fast_(
+      kumi::_::adl_tag_t, T&& t, U&& u, V init, std::index_sequence<I...>) noexcept
+    {
+      if constexpr (kumi::concepts::record_type<T>)
+        return (init + ... +
+                (get<kumi::identifier_of<kumi::element_t<I, T>>()>(KUMI_FWD(t)) *
+                 get<kumi::identifier_of<kumi::element_t<I, U>>()>(KUMI_FWD(u))));
+
+      else return (init + ... + (get<I>(KUMI_FWD(t)) * get<I>(KUMI_FWD(u))));
+    }
+  }
+
   struct inner_product_t
   {
     template<kumi::concepts::product_type S1,
@@ -21,8 +49,8 @@ namespace kumi
     {
       if constexpr (kumi::concepts::empty_product_type<S1>) return init;
       else
-        return this->inner_product_(KUMI_FWD(s1), KUMI_FWD(s2), init, sum, prod,
-                                    std::make_index_sequence<kumi::size_v<S1>>{});
+        return inner_product_(kumi::_::adl_tag, KUMI_FWD(s1), KUMI_FWD(s2), init, sum, prod,
+                              std::make_index_sequence<kumi::size_v<S1>>{});
     }
 
     template<kumi::concepts::product_type S1, kumi::concepts::sized_product_type<kumi::size_v<S1>> S2, typename T>
@@ -31,32 +59,8 @@ namespace kumi
     {
       if constexpr (kumi::concepts::empty_product_type<S1>) return init;
       else
-        return this->inner_product_fast_(KUMI_FWD(s1), KUMI_FWD(s2), init,
-                                         std::make_index_sequence<kumi::size_v<S1>>{});
-    }
-
-    template<typename T, typename U, typename V, typename Sum, typename Prod, std::size_t... I>
-    KUMI_ABI constexpr auto inner_product_(
-      T&& t, U&& u, V init, Sum sum, Prod prod, std::index_sequence<I...>) const noexcept
-    {
-      if constexpr (kumi::concepts::record_type<T>)
-        return (kumi::function::foldable{init} >> ... >>
-                kumi::bind_back(sum, kumi::invoke(prod, get<kumi::identifier_of<kumi::element_t<I, T>>()>(KUMI_FWD(t)),
-                                                  get<kumi::identifier_of<kumi::element_t<I, U>>()>(KUMI_FWD(u)))))();
-      else
-        return (kumi::function::foldable{init} >> ... >>
-                kumi::bind_back(sum, kumi::invoke(prod, get<I>(KUMI_FWD(t)), get<I>(KUMI_FWD(u)))))();
-    }
-
-    template<typename T, typename U, typename V, std::size_t... I>
-    KUMI_ABI constexpr auto inner_product_fast_(T&& t, U&& u, V init, std::index_sequence<I...>) const noexcept
-    {
-      if constexpr (kumi::concepts::record_type<T>)
-        return (init + ... +
-                (get<kumi::identifier_of<kumi::element_t<I, T>>()>(KUMI_FWD(t)) *
-                 get<kumi::identifier_of<kumi::element_t<I, U>>()>(KUMI_FWD(u))));
-
-      else return (init + ... + (get<I>(KUMI_FWD(t)) * get<I>(KUMI_FWD(u))));
+        return inner_product_fast_(kumi::_::adl_tag, KUMI_FWD(s1), KUMI_FWD(s2), init,
+                                   std::make_index_sequence<kumi::size_v<S1>>{});
     }
   };
 
