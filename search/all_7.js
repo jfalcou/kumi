@@ -1,17 +1,17 @@
 var searchData=
 [
-  ['back_0',['back',['../group__queries_gacbfca9b5e95948e4180a54e920d19c6f.html#gacbfca9b5e95948e4180a54e920d19c6f',1,'kumi']]],
-  ['base_20optimization_1',['Empty Base Optimization',['../cpp_spec.html#autotoc_md455',1,'']]],
-  ['bedazzling_20beryl_2',['Version 2.0 - Bedazzling Beryl',['../changelog.html#autotoc_md448',1,'']]],
-  ['beryl_3',['Version 2.0 - Bedazzling Beryl',['../changelog.html#autotoc_md448',1,'']]],
+  ['back_0',['back',['../structkumi_1_1result_1_1back.html',1,'kumi::result::back&lt; T &gt;'],['../group__queries_gae635e0c094282372ff5393840b6f52c2.html#gae635e0c094282372ff5393840b6f52c2',1,'kumi::back']]],
+  ['base_20optimization_1',['Empty Base Optimization',['../cpp_spec.html#autotoc_md134',1,'']]],
+  ['bedazzling_20beryl_2',['Version 2.0 - Bedazzling Beryl',['../changelog.html#autotoc_md127',1,'']]],
+  ['beryl_3',['Version 2.0 - Bedazzling Beryl',['../changelog.html#autotoc_md127',1,'']]],
   ['bind_5fback_4',['bind_back',['../group__functional_ga02fbf71873458cc8a364a7f6efcfadf2.html#ga02fbf71873458cc8a364a7f6efcfadf2',1,'kumi']]],
   ['bind_5ffront_5',['bind_front',['../group__functional_ga08c383ce2fb100dda15baf96b4e60d2f.html#ga08c383ce2fb100dda15baf96b4e60d2f',1,'kumi']]],
-  ['bit_5fand_6',['bit_and',['../group__functional.html#ga1fe39b055acf816f388cbee8074e4f2c',1,'kumi::function::bit_and'],['../group__reductions_ga14432e4394da47b90f34c962979da853.html#ga14432e4394da47b90f34c962979da853',1,'kumi::bit_and(T &amp;&amp;t, Value init)'],['../group__reductions_ga2249743d977a87399b3fd98b0cb2e55e.html#ga2249743d977a87399b3fd98b0cb2e55e',1,'kumi::bit_and(T &amp;&amp;t)']]],
-  ['bit_5for_7',['bit_or',['../group__functional.html#gaa1b1067fcaada1da848ffdd80df9eb8c',1,'kumi::function::bit_or'],['../group__reductions_ga4b48b6259301405bba1e0944ffa6e2c7.html#ga4b48b6259301405bba1e0944ffa6e2c7',1,'kumi::bit_or(T &amp;&amp;t, Value init)'],['../group__reductions_gaa7d3ae229843ffb2bbcabb1427ef4979.html#gaa7d3ae229843ffb2bbcabb1427ef4979',1,'kumi::bit_or(T &amp;&amp;t)']]],
-  ['bit_5fxor_8',['bit_xor',['../group__functional.html#gaf681e250bfdc1c005c864767d0c1639d',1,'kumi::function::bit_xor'],['../group__reductions_ga521dcc4de231768115582401a1a0419b.html#ga521dcc4de231768115582401a1a0419b',1,'kumi::bit_xor(T &amp;&amp;t, Value init)'],['../group__reductions_ga19a1070aa59a1fd90bbf39b860058f9d.html#ga19a1070aa59a1fd90bbf39b860058f9d',1,'kumi::bit_xor(T &amp;&amp;t)']]],
+  ['bit_5fand_6',['bit_and',['../group__reductions_ga17c3d8bab8099c4756a8b6fb4e9d4380.html#ga17c3d8bab8099c4756a8b6fb4e9d4380',1,'kumi::bit_and'],['../group__functional.html#ga1fe39b055acf816f388cbee8074e4f2c',1,'kumi::function::bit_and']]],
+  ['bit_5for_7',['bit_or',['../group__reductions_ga74fa99e87e80d8bb15ea6694e381bd49.html#ga74fa99e87e80d8bb15ea6694e381bd49',1,'kumi::bit_or'],['../group__functional.html#gaa1b1067fcaada1da848ffdd80df9eb8c',1,'kumi::function::bit_or']]],
+  ['bit_5fxor_8',['bit_xor',['../group__reductions_ga2797c81f32afec2f2ce4856a5155807c.html#ga2797c81f32afec2f2ce4856a5155807c',1,'kumi::bit_xor'],['../group__functional.html#gaf681e250bfdc1c005c864767d0c1639d',1,'kumi::function::bit_xor']]],
   ['boolean_5fand_9',['boolean_and',['../structkumi_1_1function_1_1boolean__and.html',1,'kumi::function']]],
   ['boolean_5for_10',['boolean_or',['../structkumi_1_1function_1_1boolean__or.html',1,'kumi::function']]],
   ['boolean_5fxor_11',['boolean_xor',['../structkumi_1_1function_1_1boolean__xor.html',1,'kumi::function']]],
-  ['bug_20fixes_12',['Bug Fixes',['../changelog.html#autotoc_md437',1,'Bug Fixes'],['../changelog.html#autotoc_md442',1,'Bug Fixes'],['../changelog.html#autotoc_md446',1,'Bug Fixes'],['../changelog.html#autotoc_md451',1,'Bug Fixes']]],
+  ['bug_20fixes_12',['Bug Fixes',['../changelog.html#autotoc_md116',1,'Bug Fixes'],['../changelog.html#autotoc_md121',1,'Bug Fixes'],['../changelog.html#autotoc_md125',1,'Bug Fixes'],['../changelog.html#autotoc_md130',1,'Bug Fixes']]],
   ['builder_13',['builder',['../structkumi_1_1builder.html',1,'kumi']]]
 ];

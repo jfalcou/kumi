@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['unique_0',['unique',['../group__generators_ga26131fc7a91a6860d0013d4be6151333.html#ga26131fc7a91a6860d0013d4be6151333',1,'kumi']]],
+  ['unique_0',['unique',['../structkumi_1_1result_1_1unique.html',1,'kumi::result::unique&lt; T &gt;'],['../group__generators_ga6479cba59ee95d4a0779e94993ab55a9.html#ga6479cba59ee95d4a0779e94993ab55a9',1,'kumi::unique']]],
   ['unique_5ft_1',['unique_t',['../structkumi_1_1function_1_1unique__t.html',1,'kumi::function']]],
   ['uniqued_2',['uniqued',['../group__functional.html#ga011bc82908c9e504b2cbffc2767251be',1,'kumi::function']]],
   ['uniquely_5flabeled_3',['uniquely_labeled',['../conceptkumi_1_1concepts_1_1uniquely__labeled.html',1,'kumi::concepts']]],

@@ -166,7 +166,7 @@ $(function(){initNavTree('group__record__transforms.html','',''); });
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">Record Type Specific Transformations <div class="ingroups"><a class="el" href="group__algorithm.html">Product Type Algorithms</a> &raquo; <a class="el" href="group__transforms.html">Product Type Transformations</a></div></div></div>
 </div><!--header-->
 <div class="contents">
@@ -174,16 +174,10 @@ $(function(){initNavTree('group__record__transforms.html','',''); });
 <p>Algorithms applying transformation to records.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ga3ece4da34324ad360ade0bd4d174cee6" id="r_ga3ece4da34324ad360ade0bd4d174cee6"><td class="memTemplParams" colspan="2">template&lt;typename Function, <a class="el" href="conceptkumi_1_1concepts_1_1record__type.html">kumi::concepts::record_type</a> R, kumi::concepts::record_type... Rs&gt; <br />
-requires (<a class="el" href="conceptkumi_1_1concepts_1_1compatible__product__types.html">kumi::concepts::compatible_product_types</a>&lt;R, Rs...&gt;)</td></tr>
-<tr class="memitem:ga3ece4da34324ad360ade0bd4d174cee6 template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="group__record__transforms_ga3ece4da34324ad360ade0bd4d174cee6.html#ga3ece4da34324ad360ade0bd4d174cee6">kumi::for_each_field</a> (Function f, R &amp;&amp;r, Rs &amp;&amp;... rs)</td></tr>
-<tr class="memdesc:ga3ece4da34324ad360ade0bd4d174cee6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the Callable object <span class="tt">f</span> on each element of a record type and its field.  <br /></td></tr>
-<tr class="memitem:ga9693988b3886c889e583a99d4594e2af" id="r_ga9693988b3886c889e583a99d4594e2af"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1record__type.html">kumi::concepts::record_type</a> T, typename Function, <a class="el" href="conceptkumi_1_1concepts_1_1sized__product__type.html">kumi::concepts::sized_product_type</a>&lt; kumi::size_v&lt; T &gt; &gt;... Ts&gt; <br />
-requires (<a class="el" href="conceptkumi_1_1concepts_1_1compatible__product__types.html">kumi::concepts::compatible_product_types</a>&lt;T, Ts...&gt;)</td></tr>
-<tr class="memitem:ga9693988b3886c889e583a99d4594e2af template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__record__transforms_ga9693988b3886c889e583a99d4594e2af.html#ga9693988b3886c889e583a99d4594e2af">kumi::map_field</a> (Function f, T &amp;&amp;t0, Ts &amp;&amp;... others)</td></tr>
-<tr class="memdesc:ga9693988b3886c889e583a99d4594e2af"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the Callable object <span class="tt">f</span> on each records' fields and their associated names.  <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:gafe68ca583e3e822b20f60ff35e5aa9d3" id="r_gafe68ca583e3e822b20f60ff35e5aa9d3"><td class="memItemLeft">constexpr map_field_t&#160;</td><td class="memItemRight"><a class="el" href="group__record__transforms_gafe68ca583e3e822b20f60ff35e5aa9d3.html#gafe68ca583e3e822b20f60ff35e5aa9d3">kumi::map_field</a> {}</td></tr>
+<tr class="memdesc:gafe68ca583e3e822b20f60ff35e5aa9d3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object applying the Callable object <span class="tt">f</span> on each product types elements and their associated labels.  <br /></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->

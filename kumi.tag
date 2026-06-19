@@ -5,6 +5,11 @@
     <filename>structkumi_1_1function_1_1adjacent__unicity__t.html</filename>
   </compound>
   <compound kind="struct">
+    <name>kumi::result::all_unique</name>
+    <filename>structkumi_1_1result_1_1all__unique.html</filename>
+    <templarg>kumi::concepts::product_type T</templarg>
+  </compound>
+  <compound kind="struct">
     <name>kumi::all_unique_names</name>
     <filename>structkumi_1_1all__unique__names.html</filename>
     <templarg>typename Ints</templarg>
@@ -15,6 +20,18 @@
     <filename>structkumi_1_1all__uniques.html</filename>
     <templarg>typename Ints</templarg>
     <templarg>typename... Ts</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::apply</name>
+    <filename>structkumi_1_1result_1_1apply.html</filename>
+    <templarg>typename Function</templarg>
+    <templarg>kumi::concepts::product_type T</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::apply_field</name>
+    <filename>structkumi_1_1result_1_1apply__field.html</filename>
+    <templarg>typename Function</templarg>
+    <templarg>kumi::concepts::record_type R</templarg>
   </compound>
   <compound kind="struct">
     <name>kumi::apply_traits</name>
@@ -36,10 +53,21 @@
     </member>
   </compound>
   <compound kind="struct">
+    <name>kumi::result::as_flat_ptr</name>
+    <filename>structkumi_1_1result_1_1as__flat__ptr.html</filename>
+    <templarg>kumi::concepts::product_type T</templarg>
+  </compound>
+  <compound kind="struct">
     <name>kumi::as_tuple</name>
     <filename>structkumi_1_1as__tuple.html</filename>
     <templarg>typename T</templarg>
     <templarg>template&lt; typename... &gt; class Meta</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::back</name>
+    <filename>structkumi_1_1result_1_1back.html</filename>
+    <templarg>kumi::concepts::product_type T</templarg>
+    <base>kumi::stored_member&lt; kumi::size_v&lt; T &gt; - 1, T &gt;</base>
   </compound>
   <compound kind="class">
     <name>kumi::function::boolean_and</name>
@@ -80,12 +108,28 @@
     <templarg>typename T</templarg>
   </compound>
   <compound kind="struct">
+    <name>kumi::result::cartesian_product</name>
+    <filename>structkumi_1_1result_1_1cartesian__product.html</filename>
+    <templarg>typename... Ts</templarg>
+  </compound>
+  <compound kind="struct">
     <name>kumi::function::cartesian_product_t</name>
     <filename>structkumi_1_1function_1_1cartesian__product__t.html</filename>
   </compound>
   <compound kind="struct">
+    <name>kumi::result::cat</name>
+    <filename>structkumi_1_1result_1_1cat.html</filename>
+    <templarg>kumi::concepts::product_type... Ts</templarg>
+  </compound>
+  <compound kind="struct">
     <name>kumi::function::cat_t</name>
     <filename>structkumi_1_1function_1_1cat__t.html</filename>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::chunks</name>
+    <filename>structkumi_1_1result_1_1chunks.html</filename>
+    <templarg>std::size_t N</templarg>
+    <templarg>kumi::concepts::product_type T</templarg>
   </compound>
   <compound kind="struct">
     <name>kumi::common_product_type</name>
@@ -104,6 +148,30 @@
     <base>kumi::is_container&lt; std::remove_cvref_t&lt; T &gt; &gt;</base>
   </compound>
   <compound kind="struct">
+    <name>kumi::result::contains</name>
+    <filename>structkumi_1_1result_1_1contains.html</filename>
+    <templarg>kumi::concepts::product_type T</templarg>
+    <templarg>kumi::concepts::identifier ID</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::contains_any</name>
+    <filename>structkumi_1_1result_1_1contains__any.html</filename>
+    <templarg>kumi::concepts::product_type T</templarg>
+    <templarg>kumi::concepts::identifier... IDs</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::contains_none</name>
+    <filename>structkumi_1_1result_1_1contains__none.html</filename>
+    <templarg>kumi::concepts::product_type T</templarg>
+    <templarg>kumi::concepts::identifier... IDs</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::contains_only</name>
+    <filename>structkumi_1_1result_1_1contains__only.html</filename>
+    <templarg>kumi::concepts::product_type T</templarg>
+    <templarg>kumi::concepts::identifier... IDs</templarg>
+  </compound>
+  <compound kind="struct">
     <name>kumi::element</name>
     <filename>structkumi_1_1element.html</filename>
     <templarg>std::size_t I</templarg>
@@ -115,6 +183,27 @@
     <templarg>std::size_t I</templarg>
     <templarg>typename T</templarg>
     <templarg>typename U</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::exclusive_scan_left</name>
+    <filename>structkumi_1_1result_1_1exclusive__scan__left.html</filename>
+    <templarg>typename Function</templarg>
+    <templarg>kumi::concepts::product_type T</templarg>
+    <templarg>typename Value</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::exclusive_scan_right</name>
+    <filename>structkumi_1_1result_1_1exclusive__scan__right.html</filename>
+    <templarg>typename Function</templarg>
+    <templarg>kumi::concepts::product_type T</templarg>
+    <templarg>typename Value</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::extract</name>
+    <filename>structkumi_1_1result_1_1extract.html</filename>
+    <templarg>kumi::concepts::product_type T</templarg>
+    <templarg>std::size_t I0</templarg>
+    <templarg>std::size_t I1</templarg>
   </compound>
   <compound kind="class">
     <name>kumi::field</name>
@@ -184,6 +273,49 @@
       <arglist>(std::basic_ostream&lt; CharT, Traits &gt; &amp;os, field const &amp;w) noexcept</arglist>
     </member>
   </compound>
+  <compound kind="struct">
+    <name>kumi::result::fill</name>
+    <filename>structkumi_1_1result_1_1fill.html</filename>
+    <templarg>std::size_t N</templarg>
+    <templarg>typename T</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::filter</name>
+    <filename>structkumi_1_1result_1_1filter.html</filename>
+    <templarg>template&lt; typename &gt; typename Pred</templarg>
+    <templarg>kumi::concepts::product_type T</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::filter_not</name>
+    <filename>structkumi_1_1result_1_1filter__not.html</filename>
+    <templarg>template&lt; typename &gt; typename Pred</templarg>
+    <templarg>kumi::concepts::product_type T</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::flatten</name>
+    <filename>structkumi_1_1result_1_1flatten.html</filename>
+    <templarg>kumi::concepts::product_type T</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::flatten_all</name>
+    <filename>structkumi_1_1result_1_1flatten__all.html</filename>
+    <templarg>kumi::concepts::product_type T</templarg>
+    <templarg>typename Func</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::fold_left</name>
+    <filename>structkumi_1_1result_1_1fold__left.html</filename>
+    <templarg>typename Function</templarg>
+    <templarg>kumi::concepts::product_type T</templarg>
+    <templarg>typename Value</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::fold_right</name>
+    <filename>structkumi_1_1result_1_1fold__right.html</filename>
+    <templarg>typename Function</templarg>
+    <templarg>kumi::concepts::product_type T</templarg>
+    <templarg>typename Value</templarg>
+  </compound>
   <compound kind="class">
     <name>kumi::function::foldable</name>
     <filename>structkumi_1_1function_1_1foldable.html</filename>
@@ -216,6 +348,18 @@
       <anchor>afcef35f6193e023d1434f2b7d45bfd1c</anchor>
       <arglist>(T &amp;&amp;t) -&gt; foldable&lt; std::unwrap_ref_decay_t&lt; T &gt; &gt;</arglist>
     </member>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::front</name>
+    <filename>structkumi_1_1result_1_1front.html</filename>
+    <templarg>kumi::concepts::product_type T</templarg>
+    <base>kumi::stored_member&lt; 0, T &gt;</base>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::generate</name>
+    <filename>structkumi_1_1result_1_1generate.html</filename>
+    <templarg>std::size_t N</templarg>
+    <templarg>typename Function</templarg>
   </compound>
   <compound kind="struct">
     <name>kumi::has_static_size</name>
@@ -270,10 +414,31 @@
       <arglist>(std::basic_ostream&lt; CharT, Traits &gt; &amp;os, identifier const &amp;) noexcept</arglist>
     </member>
   </compound>
+  <compound kind="struct">
+    <name>kumi::result::inclusive_scan_left</name>
+    <filename>structkumi_1_1result_1_1inclusive__scan__left.html</filename>
+    <templarg>typename Function</templarg>
+    <templarg>kumi::concepts::product_type T</templarg>
+    <templarg>typename Value</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::inclusive_scan_right</name>
+    <filename>structkumi_1_1result_1_1inclusive__scan__right.html</filename>
+    <templarg>typename Function</templarg>
+    <templarg>kumi::concepts::product_type T</templarg>
+    <templarg>typename Value</templarg>
+  </compound>
   <compound kind="class">
     <name>kumi::index_t</name>
     <filename>structkumi_1_1index__t.html</filename>
     <templarg>std::size_t N</templarg>
+    <member kind="function">
+      <type>constexpr</type>
+      <name>operator std::integral_constant&lt; std::size_t, N &gt;</name>
+      <anchorfile>structkumi_1_1index__t.html</anchorfile>
+      <anchor>ad9eadb46e256efabde1b1b55a90533d7</anchor>
+      <arglist>() const noexcept</arglist>
+    </member>
     <member kind="function">
       <type>constexpr</type>
       <name>operator std::size_t</name>
@@ -288,6 +453,21 @@
       <anchor>ab659f5d62c79ae49fe525448df86765b</anchor>
       <arglist></arglist>
     </member>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::inner_product</name>
+    <filename>structkumi_1_1result_1_1inner__product.html</filename>
+    <templarg>kumi::concepts::product_type S1</templarg>
+    <templarg>kumi::concepts::sized_product_type&lt; kumi::size_v&lt; S1 &gt; &gt; S2</templarg>
+    <templarg>typename T</templarg>
+    <templarg>typename Sum</templarg>
+    <templarg>typename Prod</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::iota</name>
+    <filename>structkumi_1_1result_1_1iota.html</filename>
+    <templarg>std::size_t N</templarg>
+    <templarg>typename T</templarg>
   </compound>
   <compound kind="struct">
     <name>kumi::is_container</name>
@@ -349,6 +529,27 @@
     </member>
   </compound>
   <compound kind="struct">
+    <name>kumi::result::map</name>
+    <filename>structkumi_1_1result_1_1map.html</filename>
+    <templarg>typename Function</templarg>
+    <templarg>kumi::concepts::product_type T</templarg>
+    <templarg>kumi::concepts::sized_product_type&lt; kumi::size_v&lt; T &gt; &gt;... Ts</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::map_field</name>
+    <filename>structkumi_1_1result_1_1map__field.html</filename>
+    <templarg>typename Function</templarg>
+    <templarg>kumi::concepts::record_type T</templarg>
+    <templarg>kumi::concepts::sized_product_type&lt; kumi::size_v&lt; T &gt; &gt;... Ts</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::map_index</name>
+    <filename>structkumi_1_1result_1_1map__index.html</filename>
+    <templarg>typename Function</templarg>
+    <templarg>kumi::concepts::product_type T</templarg>
+    <templarg>kumi::concepts::sized_product_type&lt; kumi::size_v&lt; T &gt; &gt;... Ts</templarg>
+  </compound>
+  <compound kind="struct">
     <name>kumi::map_traits</name>
     <filename>structkumi_1_1map__traits.html</filename>
     <templarg>template&lt; typename... &gt; typename Traits</templarg>
@@ -356,10 +557,40 @@
     <templarg>typename Seq</templarg>
   </compound>
   <compound kind="struct">
+    <name>kumi::result::max</name>
+    <filename>structkumi_1_1result_1_1max.html</filename>
+    <templarg>typename T</templarg>
+    <templarg>typename F</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::max_flat</name>
+    <filename>structkumi_1_1result_1_1max__flat.html</filename>
+    <templarg>typename T</templarg>
+    <templarg>typename F</templarg>
+  </compound>
+  <compound kind="struct">
     <name>kumi::member</name>
     <filename>structkumi_1_1member.html</filename>
     <templarg>std::size_t I</templarg>
     <templarg>typename T</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::member_cast</name>
+    <filename>structkumi_1_1result_1_1member__cast.html</filename>
+    <templarg>typename Target</templarg>
+    <templarg>kumi::concepts::product_type T</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::min</name>
+    <filename>structkumi_1_1result_1_1min.html</filename>
+    <templarg>typename T</templarg>
+    <templarg>typename F</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::min_flat</name>
+    <filename>structkumi_1_1result_1_1min__flat.html</filename>
+    <templarg>typename T</templarg>
+    <templarg>typename F</templarg>
   </compound>
   <compound kind="class">
     <name>kumi::name</name>
@@ -416,6 +647,22 @@
       <arglist></arglist>
     </member>
   </compound>
+  <compound kind="struct">
+    <name>kumi::result::partition</name>
+    <filename>structkumi_1_1result_1_1partition.html</filename>
+    <templarg>template&lt; typename &gt; typename Pred</templarg>
+    <templarg>kumi::concepts::product_type T</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::pop_back</name>
+    <filename>structkumi_1_1result_1_1pop__back.html</filename>
+    <templarg>kumi::concepts::product_type T</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::pop_front</name>
+    <filename>structkumi_1_1result_1_1pop__front.html</filename>
+    <templarg>kumi::concepts::product_type T</templarg>
+  </compound>
   <compound kind="class">
     <name>kumi::projection_map</name>
     <filename>structkumi_1_1projection__map.html</filename>
@@ -441,6 +688,18 @@
       <anchor>a09b37b6512103836987e98b7c0d75984</anchor>
       <arglist>() noexcept</arglist>
     </member>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::push_back</name>
+    <filename>structkumi_1_1result_1_1push__back.html</filename>
+    <templarg>kumi::concepts::product_type T</templarg>
+    <templarg>typename V</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::push_front</name>
+    <filename>structkumi_1_1result_1_1push__front.html</filename>
+    <templarg>kumi::concepts::product_type T</templarg>
+    <templarg>typename V</templarg>
   </compound>
   <compound kind="class">
     <name>kumi::record</name>
@@ -760,6 +1019,45 @@
     <filename>structkumi_1_1function_1_1reduce__t.html</filename>
   </compound>
   <compound kind="struct">
+    <name>kumi::result::reindex</name>
+    <filename>structkumi_1_1result_1_1reindex.html</filename>
+    <templarg>kumi::concepts::product_type T</templarg>
+    <templarg>kumi::concepts::projection_map auto Indexes</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::reorder</name>
+    <filename>structkumi_1_1result_1_1reorder.html</filename>
+    <templarg>kumi::concepts::product_type T</templarg>
+    <templarg>std::size_t... Idx</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::reorder_fields</name>
+    <filename>structkumi_1_1result_1_1reorder__fields.html</filename>
+    <templarg>kumi::concepts::product_type Tuple</templarg>
+    <templarg>kumi::concepts::identifier auto... Name</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::reverse</name>
+    <filename>structkumi_1_1result_1_1reverse.html</filename>
+    <templarg>kumi::concepts::product_type T</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::function::reverse_t</name>
+    <filename>structkumi_1_1function_1_1reverse__t.html</filename>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::rotate_left</name>
+    <filename>structkumi_1_1result_1_1rotate__left.html</filename>
+    <templarg>std::size_t R</templarg>
+    <templarg>kumi::concepts::product_type T</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::rotate_right</name>
+    <filename>structkumi_1_1result_1_1rotate__right.html</filename>
+    <templarg>std::size_t R</templarg>
+    <templarg>kumi::concepts::product_type T</templarg>
+  </compound>
+  <compound kind="struct">
     <name>kumi::function::rotate_t</name>
     <filename>structkumi_1_1function_1_1rotate__t.html</filename>
   </compound>
@@ -813,6 +1111,12 @@
     <templarg>auto V</templarg>
   </compound>
   <compound kind="struct">
+    <name>kumi::result::split</name>
+    <filename>structkumi_1_1result_1_1split.html</filename>
+    <templarg>kumi::concepts::product_type T</templarg>
+    <templarg>std::size_t I0</templarg>
+  </compound>
+  <compound kind="struct">
     <name>kumi::function::split_t</name>
     <filename>structkumi_1_1function_1_1split__t.html</filename>
   </compound>
@@ -835,6 +1139,18 @@
   <compound kind="struct">
     <name>kumi::function::tile_t</name>
     <filename>structkumi_1_1function_1_1tile__t.html</filename>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::tiles</name>
+    <filename>structkumi_1_1result_1_1tiles.html</filename>
+    <templarg>std::size_t N</templarg>
+    <templarg>std::size_t O</templarg>
+    <templarg>kumi::concepts::product_type T</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::transpose</name>
+    <filename>structkumi_1_1result_1_1transpose.html</filename>
+    <templarg>kumi::concepts::product_type T</templarg>
   </compound>
   <compound kind="class">
     <name>kumi::tuple</name>
@@ -1192,6 +1508,11 @@
     </member>
   </compound>
   <compound kind="struct">
+    <name>kumi::result::unique</name>
+    <filename>structkumi_1_1result_1_1unique.html</filename>
+    <templarg>kumi::concepts::product_type T</templarg>
+  </compound>
+  <compound kind="struct">
     <name>kumi::function::unique_t</name>
     <filename>structkumi_1_1function_1_1unique__t.html</filename>
   </compound>
@@ -1202,6 +1523,30 @@
   <compound kind="class">
     <name>kumi::unknown</name>
     <filename>structkumi_1_1unknown.html</filename>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::windows</name>
+    <filename>structkumi_1_1result_1_1windows.html</filename>
+    <templarg>std::size_t N</templarg>
+    <templarg>kumi::concepts::product_type T</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::zip</name>
+    <filename>structkumi_1_1result_1_1zip.html</filename>
+    <templarg>kumi::concepts::product_type T0</templarg>
+    <templarg>kumi::concepts::sized_product_type&lt; kumi::size_v&lt; T0 &gt; &gt;... Ts</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::zip_max</name>
+    <filename>structkumi_1_1result_1_1zip__max.html</filename>
+    <templarg>kumi::concepts::product_type T0</templarg>
+    <templarg>kumi::concepts::product_type... Ts</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::zip_min</name>
+    <filename>structkumi_1_1result_1_1zip__min.html</filename>
+    <templarg>kumi::concepts::product_type T0</templarg>
+    <templarg>kumi::concepts::product_type... Ts</templarg>
   </compound>
   <compound kind="struct">
     <name>kumi::function::zip_t</name>
@@ -1367,62 +1712,6 @@
     <class kind="class">kumi::unknown</class>
     <member kind="function">
       <type>constexpr auto</type>
-      <name>all_of</name>
-      <anchorfile>group__queries_ga599b0ea5293a040316abedd19bb72f42.html</anchorfile>
-      <anchor>ga599b0ea5293a040316abedd19bb72f42</anchor>
-      <arglist>(T &amp;&amp;t) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>all_of</name>
-      <anchorfile>group__queries_ga72fb1b09abe23dbd9c6f2783c98c0c5d.html</anchorfile>
-      <anchor>ga72fb1b09abe23dbd9c6f2783c98c0c5d</anchor>
-      <arglist>(T &amp;&amp;t, Pred p) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>all_unique</name>
-      <anchorfile>group__generators_gacf670e19ac40c8981f52ad0783a3e483.html</anchorfile>
-      <anchor>gacf670e19ac40c8981f52ad0783a3e483</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>any_of</name>
-      <anchorfile>group__queries_ga372b7bd18ab6b59234a6c68d74d298cf.html</anchorfile>
-      <anchor>ga372b7bd18ab6b59234a6c68d74d298cf</anchor>
-      <arglist>(T &amp;&amp;t) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>any_of</name>
-      <anchorfile>group__queries_ga77b8923d8b86a504f8b683d16a9f1c3b.html</anchorfile>
-      <anchor>ga77b8923d8b86a504f8b683d16a9f1c3b</anchor>
-      <arglist>(T &amp;&amp;t, Pred p) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>apply</name>
-      <anchorfile>group__transforms_ga9982fadb19cb52094d6165bca7f57f25.html</anchorfile>
-      <anchor>ga9982fadb19cb52094d6165bca7f57f25</anchor>
-      <arglist>(Function &amp;&amp;f, T &amp;&amp;t) noexcept(kumi_implementation_defined)</arglist>
-    </member>
-    <member kind="function">
-      <type>auto</type>
-      <name>as_flat_ptr</name>
-      <anchorfile>group__generators_ga418f0a47f05b67dbb354d274dee63e4e.html</anchorfile>
-      <anchor>ga418f0a47f05b67dbb354d274dee63e4e</anchor>
-      <arglist>(T &amp;&amp;t) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>back</name>
-      <anchorfile>group__queries_gacbfca9b5e95948e4180a54e920d19c6f.html</anchorfile>
-      <anchor>gacbfca9b5e95948e4180a54e920d19c6f</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
       <name>bind_back</name>
       <anchorfile>group__functional_ga02fbf71873458cc8a364a7f6efcfadf2.html</anchorfile>
       <anchor>ga02fbf71873458cc8a364a7f6efcfadf2</anchor>
@@ -1436,263 +1725,11 @@
       <arglist>(C &amp;&amp;c, Ts &amp;&amp;... ts) noexcept(std::is_nothrow_move_constructible_v&lt; std::decay_t&lt; C &gt; &gt; &amp;&amp;(std::is_nothrow_move_constructible_v&lt; std::decay_t&lt; Ts &gt; &gt; &amp;&amp;...))</arglist>
     </member>
     <member kind="function">
-      <type>constexpr auto</type>
-      <name>bit_and</name>
-      <anchorfile>group__reductions_ga2249743d977a87399b3fd98b0cb2e55e.html</anchorfile>
-      <anchor>ga2249743d977a87399b3fd98b0cb2e55e</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>bit_and</name>
-      <anchorfile>group__reductions_ga14432e4394da47b90f34c962979da853.html</anchorfile>
-      <anchor>ga14432e4394da47b90f34c962979da853</anchor>
-      <arglist>(T &amp;&amp;t, Value init)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>bit_or</name>
-      <anchorfile>group__reductions_gaa7d3ae229843ffb2bbcabb1427ef4979.html</anchorfile>
-      <anchor>gaa7d3ae229843ffb2bbcabb1427ef4979</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>bit_or</name>
-      <anchorfile>group__reductions_ga4b48b6259301405bba1e0944ffa6e2c7.html</anchorfile>
-      <anchor>ga4b48b6259301405bba1e0944ffa6e2c7</anchor>
-      <arglist>(T &amp;&amp;t, Value init)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>bit_xor</name>
-      <anchorfile>group__reductions_ga19a1070aa59a1fd90bbf39b860058f9d.html</anchorfile>
-      <anchor>ga19a1070aa59a1fd90bbf39b860058f9d</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>bit_xor</name>
-      <anchorfile>group__reductions_ga521dcc4de231768115582401a1a0419b.html</anchorfile>
-      <anchor>ga521dcc4de231768115582401a1a0419b</anchor>
-      <arglist>(T &amp;&amp;t, Value init)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>cartesian_product</name>
-      <anchorfile>group__generators_ga461b0473347a35c07e54f9b3d324ad94.html</anchorfile>
-      <anchor>ga461b0473347a35c07e54f9b3d324ad94</anchor>
-      <arglist>(Ts &amp;&amp;... ts)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>cat</name>
-      <anchorfile>group__generators_ga54c98adccbd7a86240d50e915d789650.html</anchorfile>
-      <anchor>ga54c98adccbd7a86240d50e915d789650</anchor>
-      <arglist>(Ts &amp;&amp;... ts)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>chunks</name>
-      <anchorfile>group__generators_ga3cb72901ec2c82a9b4d4ff5bf513237c.html</anchorfile>
-      <anchor>ga3cb72901ec2c82a9b4d4ff5bf513237c</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>contains</name>
-      <anchorfile>group__queries_ga5b1e2b6241cc570b3688866e8f729d63.html</anchorfile>
-      <anchor>ga5b1e2b6241cc570b3688866e8f729d63</anchor>
-      <arglist>(T &amp;&amp;t, ID const &amp;id) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>contains_any</name>
-      <anchorfile>group__queries_gade57a6c7c09f285d24d85343e87247ee.html</anchorfile>
-      <anchor>gade57a6c7c09f285d24d85343e87247ee</anchor>
-      <arglist>(T &amp;&amp;t, Is const &amp;... ids) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>contains_none</name>
-      <anchorfile>group__queries_ga1fe92be51ecab233d192ad35dd56dd3d.html</anchorfile>
-      <anchor>ga1fe92be51ecab233d192ad35dd56dd3d</anchor>
-      <arglist>(T &amp;&amp;t, Is const &amp;... ids) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>contains_only</name>
-      <anchorfile>group__queries_gaaa6ceb114c1f1ecf07428a655923ff95.html</anchorfile>
-      <anchor>gaaa6ceb114c1f1ecf07428a655923ff95</anchor>
-      <arglist>(T &amp;&amp;t, Is const &amp;... ids) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr std::size_t</type>
-      <name>count</name>
-      <anchorfile>group__queries_ga89924270e75ae69034cab01a0136b062.html</anchorfile>
-      <anchor>ga89924270e75ae69034cab01a0136b062</anchor>
-      <arglist>(T &amp;&amp;t) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr std::size_t</type>
-      <name>count_if</name>
-      <anchorfile>group__queries_ga149410b213526c378704e3dea56559ad.html</anchorfile>
-      <anchor>ga149410b213526c378704e3dea56559ad</anchor>
-      <arglist>(T &amp;&amp;t, Pred p) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>exclusive_scan_left</name>
-      <anchorfile>group__reductions_gae113f4baf3a17cc22dac25df57c06031.html</anchorfile>
-      <anchor>gae113f4baf3a17cc22dac25df57c06031</anchor>
-      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>exclusive_scan_left</name>
-      <anchorfile>group__reductions_ga3cba3a0d02a465184302a59f4d05bc89.html</anchorfile>
-      <anchor>ga3cba3a0d02a465184302a59f4d05bc89</anchor>
-      <arglist>(M &amp;&amp;m, T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>exclusive_scan_right</name>
-      <anchorfile>group__reductions_gae9b0c7f1e3d7ecc8463c7275dfad5078.html</anchorfile>
-      <anchor>gae9b0c7f1e3d7ecc8463c7275dfad5078</anchor>
-      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>exclusive_scan_right</name>
-      <anchorfile>group__reductions_ga33f26f28d0909a45b8e2e62b39a8bf4e.html</anchorfile>
-      <anchor>ga33f26f28d0909a45b8e2e62b39a8bf4e</anchor>
-      <arglist>(M &amp;&amp;m, T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>extract</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>ae9743f017d1badce5a89351fd15e5b80</anchor>
-      <arglist>(T &amp;&amp;t, kumi::index_t&lt; I0 &gt; i0) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>extract</name>
-      <anchorfile>group__generators_ga40f37d0cfe5e51d7930c021eb67205bc.html</anchorfile>
-      <anchor>ga40f37d0cfe5e51d7930c021eb67205bc</anchor>
-      <arglist>(T &amp;&amp;t, kumi::index_t&lt; I0 &gt; i0, kumi::index_t&lt; I1 &gt; i1) noexcept</arglist>
-    </member>
-    <member kind="function">
       <type>constexpr decltype(auto)</type>
       <name>field_value_of</name>
       <anchorfile>group__utility_gabf2013046cf8ec8ac781128a815709cc.html</anchorfile>
       <anchor>gabf2013046cf8ec8ac781128a815709cc</anchor>
       <arglist>(T &amp;&amp;t) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>fill</name>
-      <anchorfile>group__generators_gac1f2b67c16429675ca7b9106793f9001.html</anchorfile>
-      <anchor>gac1f2b67c16429675ca7b9106793f9001</anchor>
-      <arglist>(T const &amp;v) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>filter</name>
-      <anchorfile>group__generators_gaafed5030f3115f8fda5f1966a9fdfd38.html</anchorfile>
-      <anchor>gaafed5030f3115f8fda5f1966a9fdfd38</anchor>
-      <arglist>(T &amp;&amp;t) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>filter_not</name>
-      <anchorfile>group__generators_ga4252a5ff33d90265f42d4b6c70e48bed.html</anchorfile>
-      <anchor>ga4252a5ff33d90265f42d4b6c70e48bed</anchor>
-      <arglist>(T &amp;&amp;t) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>flatten</name>
-      <anchorfile>group__generators_ga6a021e42590689a905a2d8268c860838.html</anchorfile>
-      <anchor>ga6a021e42590689a905a2d8268c860838</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>flatten_all</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a7fcee37f7e0ccc2adad9f91fa48fd34b</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>flatten_all</name>
-      <anchorfile>group__generators_ga7416f4db26c4e41360e71dd449de20a6.html</anchorfile>
-      <anchor>ga7416f4db26c4e41360e71dd449de20a6</anchor>
-      <arglist>(T &amp;&amp;t, Func f)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>fold_left</name>
-      <anchorfile>group__reductions_ga74e253f7967cc7f188a979551cf687ef.html</anchorfile>
-      <anchor>ga74e253f7967cc7f188a979551cf687ef</anchor>
-      <arglist>(Function f, T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>fold_left</name>
-      <anchorfile>group__reductions_ga0f786372596b4dd7b924bf944871d7ad.html</anchorfile>
-      <anchor>ga0f786372596b4dd7b924bf944871d7ad</anchor>
-      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>fold_right</name>
-      <anchorfile>group__reductions_ga0f30eadf94cf474e9e54f4b6d495f4c6.html</anchorfile>
-      <anchor>ga0f30eadf94cf474e9e54f4b6d495f4c6</anchor>
-      <arglist>(Function f, T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>fold_right</name>
-      <anchorfile>group__reductions_ga5842a04c6880086a9fb8f3a06bc81469.html</anchorfile>
-      <anchor>ga5842a04c6880086a9fb8f3a06bc81469</anchor>
-      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr void</type>
-      <name>for_each</name>
-      <anchorfile>group__transforms_gae9e3fdeaf5297101b0d0da55a883c56a.html</anchorfile>
-      <anchor>gae9e3fdeaf5297101b0d0da55a883c56a</anchor>
-      <arglist>(Function f, T &amp;&amp;t, Ts &amp;&amp;... ts)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr void</type>
-      <name>for_each_field</name>
-      <anchorfile>group__record__transforms_ga3ece4da34324ad360ade0bd4d174cee6.html</anchorfile>
-      <anchor>ga3ece4da34324ad360ade0bd4d174cee6</anchor>
-      <arglist>(Function f, R &amp;&amp;r, Rs &amp;&amp;... rs)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr void</type>
-      <name>for_each_index</name>
-      <anchorfile>group__tuple__transforms_ga3e02ab065b60cea56e0b6ac96e2ae388.html</anchorfile>
-      <anchor>ga3e02ab065b60cea56e0b6ac96e2ae388</anchor>
-      <arglist>(Function f, T &amp;&amp;t, Ts &amp;&amp;... ts)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>front</name>
-      <anchorfile>group__queries_ga04a99a08fa0578c39242f348dc19c8c7.html</anchorfile>
-      <anchor>ga04a99a08fa0578c39242f348dc19c8c7</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>generate</name>
-      <anchorfile>group__generators_gaf6a234ed8630b3928724cf8fefbc9c6d.html</anchorfile>
-      <anchor>gaf6a234ed8630b3928724cf8fefbc9c6d</anchor>
-      <arglist>(Function const &amp;f) noexcept</arglist>
     </member>
     <member kind="function">
       <type>consteval auto</type>
@@ -1730,53 +1767,11 @@
       <arglist>(Ts...) noexcept</arglist>
     </member>
     <member kind="function">
-      <type>constexpr auto</type>
-      <name>inclusive_scan_left</name>
-      <anchorfile>group__reductions_gab62658d582fe17a5824465ba5e669b26.html</anchorfile>
-      <anchor>gab62658d582fe17a5824465ba5e669b26</anchor>
-      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>inclusive_scan_left</name>
-      <anchorfile>group__reductions_ga18e1921f3f9aeb30ed0edf8ec9371577.html</anchorfile>
-      <anchor>ga18e1921f3f9aeb30ed0edf8ec9371577</anchor>
-      <arglist>(M &amp;&amp;m, T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>inclusive_scan_right</name>
-      <anchorfile>group__reductions_gaa626c4c72c6c4f6ac575851c0dbf06bb.html</anchorfile>
-      <anchor>gaa626c4c72c6c4f6ac575851c0dbf06bb</anchor>
-      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>inclusive_scan_right</name>
-      <anchorfile>group__reductions_ga12e5013494b9498224e311c8cf51a76c.html</anchorfile>
-      <anchor>ga12e5013494b9498224e311c8cf51a76c</anchor>
-      <arglist>(M &amp;&amp;m, T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
       <type>consteval auto</type>
       <name>indexes</name>
       <anchorfile>group__utility_ga6882a4ada4935fa0fd4ef32ce3716ffb.html</anchorfile>
       <anchor>ga6882a4ada4935fa0fd4ef32ce3716ffb</anchor>
       <arglist>(Ts...) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>inner_product</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>ab2e255186fdc3ad952d0b28418ca06a3</anchor>
-      <arglist>(S1 &amp;&amp;s1, S2 &amp;&amp;s2, T init) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>inner_product</name>
-      <anchorfile>group__reductions_ga152ee8c92e7bc5edc1600673dbd3d50c.html</anchorfile>
-      <anchor>ga152ee8c92e7bc5edc1600673dbd3d50c</anchor>
-      <arglist>(S1 &amp;&amp;s1, S2 &amp;&amp;s2, T init, Sum sum, Prod prod) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr decltype(auto)</type>
@@ -1793,13 +1788,6 @@
       <arglist>(C &amp;&amp;c, Ts &amp;&amp;... ts) noexcept(std::is_nothrow_invocable_r_v&lt; R, C, Ts... &gt;)</arglist>
     </member>
     <member kind="function">
-      <type>constexpr auto</type>
-      <name>iota</name>
-      <anchorfile>group__generators_ga19ced0b66d1e3dae7bfa60f7def6914f.html</anchorfile>
-      <anchor>ga19ced0b66d1e3dae7bfa60f7def6914f</anchor>
-      <arglist>(T v) noexcept</arglist>
-    </member>
-    <member kind="function">
       <type>consteval str</type>
       <name>label_of</name>
       <anchorfile>group__utility_gafe5ca3b16c26d385085be7a73a1fa374.html</anchorfile>
@@ -1807,116 +1795,11 @@
       <arglist>() noexcept</arglist>
     </member>
     <member kind="function">
-      <type>constexpr auto</type>
-      <name>locate</name>
-      <anchorfile>group__queries_gabae586f9cb43b3fc2b2ca919518eb837.html</anchorfile>
-      <anchor>gabae586f9cb43b3fc2b2ca919518eb837</anchor>
-      <arglist>(T &amp;&amp;t, Pred p) noexcept</arglist>
-    </member>
-    <member kind="function">
       <type>consteval auto</type>
       <name>make_indexes</name>
       <anchorfile>group__utility_gadba148c334bcf52088dc64992c270fdd.html</anchorfile>
       <anchor>gadba148c334bcf52088dc64992c270fdd</anchor>
       <arglist>() noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>map</name>
-      <anchorfile>group__transforms_gaf11826c10bd2cd2c483cb09f07665dc4.html</anchorfile>
-      <anchor>gaf11826c10bd2cd2c483cb09f07665dc4</anchor>
-      <arglist>(Function f, T &amp;&amp;t0, Ts &amp;&amp;... others)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>map_field</name>
-      <anchorfile>group__record__transforms_ga9693988b3886c889e583a99d4594e2af.html</anchorfile>
-      <anchor>ga9693988b3886c889e583a99d4594e2af</anchor>
-      <arglist>(Function f, T &amp;&amp;t0, Ts &amp;&amp;... others)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>map_index</name>
-      <anchorfile>group__tuple__transforms_gac00fe55b0cba7a129caa2ea3d01cd1f0.html</anchorfile>
-      <anchor>gac00fe55b0cba7a129caa2ea3d01cd1f0</anchor>
-      <arglist>(Function f, T &amp;&amp;t0, Ts &amp;&amp;... others)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>map_reduce</name>
-      <anchorfile>group__reductions_gace3f0fb4e67066f6f82052efd359b2b4.html</anchorfile>
-      <anchor>gace3f0fb4e67066f6f82052efd359b2b4</anchor>
-      <arglist>(Function f, M &amp;&amp;m, T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>map_reduce</name>
-      <anchorfile>group__reductions_gaa6b16ddb18150ef85f789e80593b68a2.html</anchorfile>
-      <anchor>gaa6b16ddb18150ef85f789e80593b68a2</anchor>
-      <arglist>(Function f, M &amp;&amp;m, T &amp;&amp;t, Value init)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>max</name>
-      <anchorfile>group__reductions_ga72159dc27be6b9aed9cc1d12ca019f28.html</anchorfile>
-      <anchor>ga72159dc27be6b9aed9cc1d12ca019f28</anchor>
-      <arglist>(T &amp;&amp;t) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>max</name>
-      <anchorfile>group__reductions_gae173eedc8b731830ea5df23aec9f14fa.html</anchorfile>
-      <anchor>gae173eedc8b731830ea5df23aec9f14fa</anchor>
-      <arglist>(T &amp;&amp;t, F f) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>max_flat</name>
-      <anchorfile>group__reductions_gafa660a662111704882e6c9005f34f818.html</anchorfile>
-      <anchor>gafa660a662111704882e6c9005f34f818</anchor>
-      <arglist>(T &amp;&amp;t, F f) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>member_cast</name>
-      <anchorfile>group__generators_ga79787185d26368946a74f31ce5f6597c.html</anchorfile>
-      <anchor>ga79787185d26368946a74f31ce5f6597c</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>min</name>
-      <anchorfile>group__reductions_ga2e588148a9b7eda028da7963770a5010.html</anchorfile>
-      <anchor>ga2e588148a9b7eda028da7963770a5010</anchor>
-      <arglist>(T &amp;&amp;t) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>min</name>
-      <anchorfile>group__reductions_gab860bed731b3d7499e9d85b1a3ce57b6.html</anchorfile>
-      <anchor>gab860bed731b3d7499e9d85b1a3ce57b6</anchor>
-      <arglist>(T &amp;&amp;t, F f) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>min_flat</name>
-      <anchorfile>group__reductions_ga931f495837b8f1c878fbb8a625ca9442.html</anchorfile>
-      <anchor>ga931f495837b8f1c878fbb8a625ca9442</anchor>
-      <arglist>(T &amp;&amp;t, F f) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr bool</type>
-      <name>none_of</name>
-      <anchorfile>group__queries_ga8094ec3fd9bb7b61c5a41319bd3f6766.html</anchorfile>
-      <anchor>ga8094ec3fd9bb7b61c5a41319bd3f6766</anchor>
-      <arglist>(T &amp;&amp;t) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr bool</type>
-      <name>none_of</name>
-      <anchorfile>group__queries_ga5450fe960cb3282fc7c2b2d072128802.html</anchorfile>
-      <anchor>ga5450fe960cb3282fc7c2b2d072128802</anchor>
-      <arglist>(T &amp;&amp;t, Pred p) noexcept</arglist>
     </member>
     <member kind="function">
       <type>constexpr auto</type>
@@ -1948,45 +1831,10 @@
     </member>
     <member kind="function">
       <type>constexpr auto</type>
-      <name>partition</name>
-      <anchorfile>group__generators_gaf7926aecf07b881c2005e39f34512851.html</anchorfile>
-      <anchor>gaf7926aecf07b881c2005e39f34512851</anchor>
-      <arglist>(T &amp;&amp;t) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>pop_back</name>
-      <anchorfile>group__generators_gaa78a8b1a97ed4da70a1e772cafb55aef.html</anchorfile>
-      <anchor>gaa78a8b1a97ed4da70a1e772cafb55aef</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>pop_front</name>
-      <anchorfile>group__generators_ga0067bdadcb60e0eeb405bd1021dd4f08.html</anchorfile>
-      <anchor>ga0067bdadcb60e0eeb405bd1021dd4f08</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
       <name>predicate</name>
       <anchorfile>group__utility_ga9c8c29e8a2f4f5e8a663200559fdc983.html</anchorfile>
       <anchor>ga9c8c29e8a2f4f5e8a663200559fdc983</anchor>
       <arglist>() noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>prod</name>
-      <anchorfile>group__reductions_ga9c9775c7c76aebd9db20d0e44eec6034.html</anchorfile>
-      <anchor>ga9c9775c7c76aebd9db20d0e44eec6034</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>prod</name>
-      <anchorfile>group__reductions_gad87f59b6ce034ee52f7bf15e67cf7450.html</anchorfile>
-      <anchor>gad87f59b6ce034ee52f7bf15e67cf7450</anchor>
-      <arglist>(T &amp;&amp;t, Value init)</arglist>
     </member>
     <member kind="function">
       <type>KUMI_CUDA</type>
@@ -1995,151 +1843,249 @@
       <anchor>ga8b7f4e6ed1e7071d7c152c9870709fcb</anchor>
       <arglist>(Ts...) -&gt; projection_map&lt; Ts</arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>push_back</name>
-      <anchorfile>group__generators_ga1caeff43037aae979c9ff1ca476091cb.html</anchorfile>
-      <anchor>ga1caeff43037aae979c9ff1ca476091cb</anchor>
-      <arglist>(T &amp;&amp;t, V &amp;&amp;v)</arglist>
+    <member kind="variable">
+      <type>constexpr all_of_t</type>
+      <name>all_of</name>
+      <anchorfile>group__queries_gaffdb8063b72f079107cd8a7e293ba298.html</anchorfile>
+      <anchor>gaffdb8063b72f079107cd8a7e293ba298</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>push_front</name>
-      <anchorfile>group__generators_ga45a00d0a03a72f6c0c67501e684ddbea.html</anchorfile>
-      <anchor>ga45a00d0a03a72f6c0c67501e684ddbea</anchor>
-      <arglist>(T &amp;&amp;t, V &amp;&amp;v)</arglist>
+    <member kind="variable">
+      <type>constexpr all_unique_t</type>
+      <name>all_unique</name>
+      <anchorfile>group__generators_ga71bbbe8da94919e242bd3ded80ab6776.html</anchorfile>
+      <anchor>ga71bbbe8da94919e242bd3ded80ab6776</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>reduce</name>
-      <anchorfile>group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html</anchorfile>
-      <anchor>ga812fe60401e985cc2ebd067bc42f0354</anchor>
-      <arglist>(M &amp;&amp;m, T &amp;&amp;t)</arglist>
+    <member kind="variable">
+      <type>constexpr any_of_t</type>
+      <name>any_of</name>
+      <anchorfile>group__queries_ga79566892f932a2308e23b5f21b95086f.html</anchorfile>
+      <anchor>ga79566892f932a2308e23b5f21b95086f</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>reduce</name>
-      <anchorfile>group__reductions_ga7d1398c56521f65375bb2f2b28e945cb.html</anchorfile>
-      <anchor>ga7d1398c56521f65375bb2f2b28e945cb</anchor>
-      <arglist>(M &amp;&amp;m, T &amp;&amp;t, Value init)</arglist>
+    <member kind="variable">
+      <type>constexpr apply_t</type>
+      <name>apply</name>
+      <anchorfile>group__transforms_ga4c69a49971100b7bc9c7effd7c43f191.html</anchorfile>
+      <anchor>ga4c69a49971100b7bc9c7effd7c43f191</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>reindex</name>
-      <anchorfile>group__generators_ga0e43e02e9a4a7fea31b620b2dcb4b48a.html</anchorfile>
-      <anchor>ga0e43e02e9a4a7fea31b620b2dcb4b48a</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+    <member kind="variable">
+      <type>constexpr apply_field_t</type>
+      <name>apply_field</name>
+      <anchorfile>group__transforms_ga992364930a4a5a5b64b26730773536ab.html</anchorfile>
+      <anchor>ga992364930a4a5a5b64b26730773536ab</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>reorder</name>
-      <anchorfile>group__generators_ga11fbe45a20286800b1d6ef15d7930d37.html</anchorfile>
-      <anchor>ga11fbe45a20286800b1d6ef15d7930d37</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+    <member kind="variable">
+      <type>constexpr as_flat_ptr_t</type>
+      <name>as_flat_ptr</name>
+      <anchorfile>group__generators_ga6368952a2f6a506de75aa0e01569eab6.html</anchorfile>
+      <anchor>ga6368952a2f6a506de75aa0e01569eab6</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>reorder_fields</name>
-      <anchorfile>group__generators_ga86a5aaefb0718b80b2103bf9dc8e3b23.html</anchorfile>
-      <anchor>ga86a5aaefb0718b80b2103bf9dc8e3b23</anchor>
-      <arglist>(Tuple &amp;&amp;t)</arglist>
+    <member kind="variable">
+      <type>constexpr back_t</type>
+      <name>back</name>
+      <anchorfile>group__queries_gae635e0c094282372ff5393840b6f52c2.html</anchorfile>
+      <anchor>gae635e0c094282372ff5393840b6f52c2</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>reverse</name>
-      <anchorfile>group__generators_gab95d676ad41b4adc604681d14081026e.html</anchorfile>
-      <anchor>gab95d676ad41b4adc604681d14081026e</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+    <member kind="variable">
+      <type>constexpr bit_and_t</type>
+      <name>bit_and</name>
+      <anchorfile>group__reductions_ga17c3d8bab8099c4756a8b6fb4e9d4380.html</anchorfile>
+      <anchor>ga17c3d8bab8099c4756a8b6fb4e9d4380</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>rotate_left</name>
-      <anchorfile>group__generators_ga969f4ebe05e88580436080ab956e7e37.html</anchorfile>
-      <anchor>ga969f4ebe05e88580436080ab956e7e37</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+    <member kind="variable">
+      <type>constexpr bit_or_t</type>
+      <name>bit_or</name>
+      <anchorfile>group__reductions_ga74fa99e87e80d8bb15ea6694e381bd49.html</anchorfile>
+      <anchor>ga74fa99e87e80d8bb15ea6694e381bd49</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>rotate_right</name>
-      <anchorfile>group__generators_ga7b4c54857ff1b5253b86ae9b05098268.html</anchorfile>
-      <anchor>ga7b4c54857ff1b5253b86ae9b05098268</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+    <member kind="variable">
+      <type>constexpr bit_xor_t</type>
+      <name>bit_xor</name>
+      <anchorfile>group__reductions_ga2797c81f32afec2f2ce4856a5155807c.html</anchorfile>
+      <anchor>ga2797c81f32afec2f2ce4856a5155807c</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>split</name>
-      <anchorfile>group__generators_ga6704d0084f5e83ac5860a75090e0e05d.html</anchorfile>
-      <anchor>ga6704d0084f5e83ac5860a75090e0e05d</anchor>
-      <arglist>(T &amp;&amp;t, kumi::index_t&lt; I0 &gt; i0) noexcept</arglist>
+    <member kind="variable">
+      <type>constexpr cartesian_product_t</type>
+      <name>cartesian_product</name>
+      <anchorfile>group__generators_ga39128fad2c11b9fea55558222a87721c.html</anchorfile>
+      <anchor>ga39128fad2c11b9fea55558222a87721c</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>sum</name>
-      <anchorfile>group__reductions_gaa96dfd76fe746fe28e1a833ad76c59fc.html</anchorfile>
-      <anchor>gaa96dfd76fe746fe28e1a833ad76c59fc</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+    <member kind="variable">
+      <type>constexpr cat_t</type>
+      <name>cat</name>
+      <anchorfile>group__generators_ga4550222df58187f71b1b1347500e324a.html</anchorfile>
+      <anchor>ga4550222df58187f71b1b1347500e324a</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>sum</name>
-      <anchorfile>group__reductions_ga183fa966de706e5e6c78a9cc50202fe8.html</anchorfile>
-      <anchor>ga183fa966de706e5e6c78a9cc50202fe8</anchor>
-      <arglist>(T &amp;&amp;t, Value init)</arglist>
+    <member kind="variable">
+      <type>constexpr tiles_t&lt; N, N &gt;</type>
+      <name>chunks</name>
+      <anchorfile>group__generators_gaf4b0bcda72790c2ac55519adaf89456e.html</anchorfile>
+      <anchor>gaf4b0bcda72790c2ac55519adaf89456e</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>tiles</name>
-      <anchorfile>group__generators_ga92fa9f88804ec032d1f2bf2717205743.html</anchorfile>
-      <anchor>ga92fa9f88804ec032d1f2bf2717205743</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+    <member kind="variable">
+      <type>constexpr contains_t</type>
+      <name>contains</name>
+      <anchorfile>group__queries_ga3a9b6e2d0fbdace9e57b3846d24a3b57.html</anchorfile>
+      <anchor>ga3a9b6e2d0fbdace9e57b3846d24a3b57</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>transpose</name>
-      <anchorfile>group__generators_gadd1fa406983775f22d7a64bdd49e92b3.html</anchorfile>
-      <anchor>gadd1fa406983775f22d7a64bdd49e92b3</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+    <member kind="variable">
+      <type>constexpr contains_any_t</type>
+      <name>contains_any</name>
+      <anchorfile>group__queries_ga639f59cb294f670d2f2c468c4ef204d3.html</anchorfile>
+      <anchor>ga639f59cb294f670d2f2c468c4ef204d3</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>unique</name>
-      <anchorfile>group__generators_ga26131fc7a91a6860d0013d4be6151333.html</anchorfile>
-      <anchor>ga26131fc7a91a6860d0013d4be6151333</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+    <member kind="variable">
+      <type>constexpr contains_none_t</type>
+      <name>contains_none</name>
+      <anchorfile>group__queries_ga7b1bbe80c513abfdedd1196f027601d2.html</anchorfile>
+      <anchor>ga7b1bbe80c513abfdedd1196f027601d2</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>windows</name>
-      <anchorfile>group__generators_gadbca06109e5b36b0d59eab4a0fc9accf.html</anchorfile>
-      <anchor>gadbca06109e5b36b0d59eab4a0fc9accf</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+    <member kind="variable">
+      <type>constexpr contains_only_t</type>
+      <name>contains_only</name>
+      <anchorfile>group__queries_ga36431211bf121466392b290459a45498.html</anchorfile>
+      <anchor>ga36431211bf121466392b290459a45498</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>zip</name>
-      <anchorfile>group__generators_ga35d675c755f2cb5e3ad41789d5c9ca9f.html</anchorfile>
-      <anchor>ga35d675c755f2cb5e3ad41789d5c9ca9f</anchor>
-      <arglist>(T0 &amp;&amp;t0, Ts &amp;&amp;... ts)</arglist>
+    <member kind="variable">
+      <type>constexpr count_t</type>
+      <name>count</name>
+      <anchorfile>group__queries_ga8240f113b5feb1dcc826949f28f17a47.html</anchorfile>
+      <anchor>ga8240f113b5feb1dcc826949f28f17a47</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>zip_max</name>
-      <anchorfile>group__generators_ga778a2a1100119d65f2b64aef57bc42e7.html</anchorfile>
-      <anchor>ga778a2a1100119d65f2b64aef57bc42e7</anchor>
-      <arglist>(T0 &amp;&amp;t0, Ts &amp;&amp;... ts)</arglist>
+    <member kind="variable">
+      <type>constexpr count_if_t</type>
+      <name>count_if</name>
+      <anchorfile>group__queries_gaec0fb27dc2250b97648bc52b8e83b561.html</anchorfile>
+      <anchor>gaec0fb27dc2250b97648bc52b8e83b561</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>zip_min</name>
-      <anchorfile>group__generators_ga8b5c922e0cab8ad0a3aadd9f2af3464d.html</anchorfile>
-      <anchor>ga8b5c922e0cab8ad0a3aadd9f2af3464d</anchor>
-      <arglist>(T0 &amp;&amp;t0, Ts &amp;&amp;... ts)</arglist>
+    <member kind="variable">
+      <type>constexpr exclusive_scan_left_t</type>
+      <name>exclusive_scan_left</name>
+      <anchorfile>group__reductions_ga529950ddf6573473b2f9b7ec886c61f9.html</anchorfile>
+      <anchor>ga529950ddf6573473b2f9b7ec886c61f9</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr exclusive_scan_right_t</type>
+      <name>exclusive_scan_right</name>
+      <anchorfile>group__reductions_gaa66bb36d76db2d7854196bc156fb35c2.html</anchorfile>
+      <anchor>gaa66bb36d76db2d7854196bc156fb35c2</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr extract_t</type>
+      <name>extract</name>
+      <anchorfile>group__generators_ga1a7617bafd6f8598cca8e7e6a5c6f383.html</anchorfile>
+      <anchor>ga1a7617bafd6f8598cca8e7e6a5c6f383</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr fill_t&lt; N &gt;</type>
+      <name>fill</name>
+      <anchorfile>group__generators_gafd5d1c6d3d2fcb3c424826b8bddb8b0a.html</anchorfile>
+      <anchor>gafd5d1c6d3d2fcb3c424826b8bddb8b0a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr filter_t&lt; Pred &gt;</type>
+      <name>filter</name>
+      <anchorfile>group__generators_ga2c9b5ff6b698c7dcb0feb2da1679fa9b.html</anchorfile>
+      <anchor>ga2c9b5ff6b698c7dcb0feb2da1679fa9b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr filter_not_t&lt; Pred &gt;</type>
+      <name>filter_not</name>
+      <anchorfile>group__generators_ga750bc3d3425c955e1be6ef1b3879c314.html</anchorfile>
+      <anchor>ga750bc3d3425c955e1be6ef1b3879c314</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr flatten_t</type>
+      <name>flatten</name>
+      <anchorfile>group__generators_ga49acccc42ec8af7b96b63e8f38796df2.html</anchorfile>
+      <anchor>ga49acccc42ec8af7b96b63e8f38796df2</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr flatten_all_t</type>
+      <name>flatten_all</name>
+      <anchorfile>group__generators_gaa780fd338fb61c86f226ae05adfaf426.html</anchorfile>
+      <anchor>gaa780fd338fb61c86f226ae05adfaf426</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr fold_left_t</type>
+      <name>fold_left</name>
+      <anchorfile>group__reductions_gac7fc6bc4e0aff96cca71f0a64b0f2aa1.html</anchorfile>
+      <anchor>gac7fc6bc4e0aff96cca71f0a64b0f2aa1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr fold_right_t</type>
+      <name>fold_right</name>
+      <anchorfile>group__reductions_gaee418c18e09e3b1789c23ec00681db42.html</anchorfile>
+      <anchor>gaee418c18e09e3b1789c23ec00681db42</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr for_each_t</type>
+      <name>for_each</name>
+      <anchorfile>group__transforms_ga58c4bb5e62083b4b37396d39c6446164.html</anchorfile>
+      <anchor>ga58c4bb5e62083b4b37396d39c6446164</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr front_t</type>
+      <name>front</name>
+      <anchorfile>group__queries_gaa1618c96c4c7003afeccfb19e25b35bb.html</anchorfile>
+      <anchor>gaa1618c96c4c7003afeccfb19e25b35bb</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr generate_t&lt; N &gt;</type>
+      <name>generate</name>
+      <anchorfile>group__generators_gaba2efbda8df6baaccd4e35343d70163f.html</anchorfile>
+      <anchor>gaba2efbda8df6baaccd4e35343d70163f</anchor>
+      <arglist></arglist>
     </member>
     <member kind="variable">
       <type>constexpr traits_check&lt; Traits &gt;</type>
       <name>if_</name>
       <anchorfile>group__utility_gacadc026868e6654e80c57432643c804a.html</anchorfile>
       <anchor>gacadc026868e6654e80c57432643c804a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr inclusive_scan_left_t</type>
+      <name>inclusive_scan_left</name>
+      <anchorfile>group__reductions_ga1389eee6fb884b34ed4957884ecd39a1.html</anchorfile>
+      <anchor>ga1389eee6fb884b34ed4957884ecd39a1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr inclusive_scan_right_t</type>
+      <name>inclusive_scan_right</name>
+      <anchorfile>group__reductions_gab55848ee4bd1b0cc0f22015a2bac5047.html</anchorfile>
+      <anchor>gab55848ee4bd1b0cc0f22015a2bac5047</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -2150,10 +2096,73 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
+      <type>constexpr iota_t&lt; N &gt;</type>
+      <name>iota</name>
+      <anchorfile>group__generators_gace6e022bb94a706731299b9d395ac10d.html</anchorfile>
+      <anchor>gace6e022bb94a706731299b9d395ac10d</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
       <type>constexpr kumi::label_t&lt; Label &gt;</type>
       <name>label</name>
       <anchorfile>group__utility.html</anchorfile>
       <anchor>ga1375bb29a75ab718bdb62b65ce5582b1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr locate_t</type>
+      <name>locate</name>
+      <anchorfile>group__queries_ga39f807d6c2b8909a712d431acde4153e.html</anchorfile>
+      <anchor>ga39f807d6c2b8909a712d431acde4153e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr map_t</type>
+      <name>map</name>
+      <anchorfile>group__transforms_gaeaba737291ba1085d77272eae38a016e.html</anchorfile>
+      <anchor>gaeaba737291ba1085d77272eae38a016e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr map_field_t</type>
+      <name>map_field</name>
+      <anchorfile>group__record__transforms_gafe68ca583e3e822b20f60ff35e5aa9d3.html</anchorfile>
+      <anchor>gafe68ca583e3e822b20f60ff35e5aa9d3</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr map_index_t</type>
+      <name>map_index</name>
+      <anchorfile>group__tuple__transforms_ga64a8c36072828fb7b724ba0ab8fc59bc.html</anchorfile>
+      <anchor>ga64a8c36072828fb7b724ba0ab8fc59bc</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr map_reduce_t</type>
+      <name>map_reduce</name>
+      <anchorfile>group__reductions_ga396afbfbcefa48f06ad76a34b6f0b523.html</anchorfile>
+      <anchor>ga396afbfbcefa48f06ad76a34b6f0b523</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr max_t</type>
+      <name>max</name>
+      <anchorfile>group__reductions_gab76e53ad197280669806cae2c0cc130c.html</anchorfile>
+      <anchor>gab76e53ad197280669806cae2c0cc130c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr member_cast_t&lt; T &gt;</type>
+      <name>member_cast</name>
+      <anchorfile>group__generators_gad2e4009d5d28df5090885b030f08f1f8.html</anchorfile>
+      <anchor>gad2e4009d5d28df5090885b030f08f1f8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr min_t</type>
+      <name>min</name>
+      <anchorfile>group__reductions_gaafd0c178628f6f756bf0d73a34e75b2f.html</anchorfile>
+      <anchor>gaafd0c178628f6f756bf0d73a34e75b2f</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -2164,10 +2173,150 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
+      <type>constexpr none_of_t</type>
+      <name>none_of</name>
+      <anchorfile>group__queries_ga26e030c97733248f67dd2c8fbf527602.html</anchorfile>
+      <anchor>ga26e030c97733248f67dd2c8fbf527602</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
       <type>constexpr kumi::only_t&lt; T &gt;</type>
       <name>only</name>
       <anchorfile>group__utility_ga26690952147eaa66ecf74378070ee53b.html</anchorfile>
       <anchor>ga26690952147eaa66ecf74378070ee53b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr partition_t&lt; Pred &gt;</type>
+      <name>partition</name>
+      <anchorfile>group__generators_ga4643116b2dc0dfbd0d15fee408a9c18c.html</anchorfile>
+      <anchor>ga4643116b2dc0dfbd0d15fee408a9c18c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr pop_front_t</type>
+      <name>pop_front</name>
+      <anchorfile>group__generators_ga38d1ddeb5090405e79e9b7d898a85133.html</anchorfile>
+      <anchor>ga38d1ddeb5090405e79e9b7d898a85133</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr prod_t</type>
+      <name>prod</name>
+      <anchorfile>group__reductions_ga6c139ebafaebc0f7dbca2fd57aee943c.html</anchorfile>
+      <anchor>ga6c139ebafaebc0f7dbca2fd57aee943c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr push_front_t</type>
+      <name>push_front</name>
+      <anchorfile>group__generators_gad4bd53f162f63af0cbfbd68d8adb5d5c.html</anchorfile>
+      <anchor>gad4bd53f162f63af0cbfbd68d8adb5d5c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr reduce_t</type>
+      <name>reduce</name>
+      <anchorfile>group__reductions_gaf7efbfa530d2396e2ed230cc03e4046e.html</anchorfile>
+      <anchor>gaf7efbfa530d2396e2ed230cc03e4046e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr reindex_t&lt; Projections &gt;</type>
+      <name>reindex</name>
+      <anchorfile>group__generators_ga3594f15dbfba2f6fda0afc8d1542c449.html</anchorfile>
+      <anchor>ga3594f15dbfba2f6fda0afc8d1542c449</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr reorder_t&lt; I... &gt;</type>
+      <name>reorder</name>
+      <anchorfile>group__generators_ga32af967d7f453426ccd564d3a0b6c689.html</anchorfile>
+      <anchor>ga32af967d7f453426ccd564d3a0b6c689</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr reorder_fields_t&lt; Name... &gt;</type>
+      <name>reorder_fields</name>
+      <anchorfile>group__generators_ga8c42552c8f93dad0b83a3903468d02c6.html</anchorfile>
+      <anchor>ga8c42552c8f93dad0b83a3903468d02c6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr rotate_left_t&lt; R &gt;</type>
+      <name>rotate_left</name>
+      <anchorfile>group__generators_gadbc56977f82e2eaefe486c0a9457f01c.html</anchorfile>
+      <anchor>gadbc56977f82e2eaefe486c0a9457f01c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr rotate_right_t&lt; R &gt;</type>
+      <name>rotate_right</name>
+      <anchorfile>group__generators_gaffd5dbb36e1c70d2fc058ffe03afef3e.html</anchorfile>
+      <anchor>gaffd5dbb36e1c70d2fc058ffe03afef3e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr split_t</type>
+      <name>split</name>
+      <anchorfile>group__generators_gadb81f4533e81830674c3fc9577d3de93.html</anchorfile>
+      <anchor>gadb81f4533e81830674c3fc9577d3de93</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr sum_t</type>
+      <name>sum</name>
+      <anchorfile>group__reductions_ga3e8b585399de360c3ab55efc2fa0ed8c.html</anchorfile>
+      <anchor>ga3e8b585399de360c3ab55efc2fa0ed8c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr tiles_t&lt; N, O &gt;</type>
+      <name>tiles</name>
+      <anchorfile>group__generators_ga3d1b4a8309328d854d7b6234fde3aeb0.html</anchorfile>
+      <anchor>ga3d1b4a8309328d854d7b6234fde3aeb0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr transpose_t</type>
+      <name>transpose</name>
+      <anchorfile>group__generators_gaef527bdd76c70e7fded23a9759428f5c.html</anchorfile>
+      <anchor>gaef527bdd76c70e7fded23a9759428f5c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr unique_t</type>
+      <name>unique</name>
+      <anchorfile>group__generators_ga6479cba59ee95d4a0779e94993ab55a9.html</anchorfile>
+      <anchor>ga6479cba59ee95d4a0779e94993ab55a9</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr tiles_t&lt; N, 1 &gt;</type>
+      <name>windows</name>
+      <anchorfile>group__generators_gade96292292ae11da69415a778ef45ad0.html</anchorfile>
+      <anchor>gade96292292ae11da69415a778ef45ad0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr zip_t</type>
+      <name>zip</name>
+      <anchorfile>group__generators_ga71c21174289ba175a8d3d4b170cec05f.html</anchorfile>
+      <anchor>ga71c21174289ba175a8d3d4b170cec05f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr zip_max_t</type>
+      <name>zip_max</name>
+      <anchorfile>group__generators_ga0ce4823febfb00cfb197f73332ba7309.html</anchorfile>
+      <anchor>ga0ce4823febfb00cfb197f73332ba7309</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr zip_min_t</type>
+      <name>zip_min</name>
+      <anchorfile>group__generators_gaf4b9aea3cee7c30fc6a516c632805423.html</anchorfile>
+      <anchor>gaf4b9aea3cee7c30fc6a516c632805423</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -2720,6 +2869,7 @@
     <class kind="class">kumi::function::numeric_add</class>
     <class kind="class">kumi::function::numeric_prod</class>
     <class kind="struct">kumi::function::reduce_t</class>
+    <class kind="struct">kumi::function::reverse_t</class>
     <class kind="struct">kumi::function::rotate_t</class>
     <class kind="class">kumi::function::scannable</class>
     <class kind="struct">kumi::function::select_t</class>
@@ -2820,6 +2970,13 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
+      <type>constexpr kumi::function::reverse_t</type>
+      <name>kumi::function::reverser</name>
+      <anchorfile>group__functional.html</anchorfile>
+      <anchor>ga264829b1d9caed059c419f02d0ce7c02</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
       <type>constexpr kumi::function::rotate_t</type>
       <name>kumi::function::rotater</name>
       <anchorfile>group__functional.html</anchorfile>
@@ -2896,582 +3053,414 @@
     <name>reductions</name>
     <title>Product Type Generalized Reductions</title>
     <filename>group__reductions.html</filename>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr bit_and_t</type>
       <name>kumi::bit_and</name>
-      <anchorfile>group__reductions_ga2249743d977a87399b3fd98b0cb2e55e.html</anchorfile>
-      <anchor>ga2249743d977a87399b3fd98b0cb2e55e</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+      <anchorfile>group__reductions_ga17c3d8bab8099c4756a8b6fb4e9d4380.html</anchorfile>
+      <anchor>ga17c3d8bab8099c4756a8b6fb4e9d4380</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::bit_and</name>
-      <anchorfile>group__reductions_ga14432e4394da47b90f34c962979da853.html</anchorfile>
-      <anchor>ga14432e4394da47b90f34c962979da853</anchor>
-      <arglist>(T &amp;&amp;t, Value init)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr bit_or_t</type>
       <name>kumi::bit_or</name>
-      <anchorfile>group__reductions_gaa7d3ae229843ffb2bbcabb1427ef4979.html</anchorfile>
-      <anchor>gaa7d3ae229843ffb2bbcabb1427ef4979</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+      <anchorfile>group__reductions_ga74fa99e87e80d8bb15ea6694e381bd49.html</anchorfile>
+      <anchor>ga74fa99e87e80d8bb15ea6694e381bd49</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::bit_or</name>
-      <anchorfile>group__reductions_ga4b48b6259301405bba1e0944ffa6e2c7.html</anchorfile>
-      <anchor>ga4b48b6259301405bba1e0944ffa6e2c7</anchor>
-      <arglist>(T &amp;&amp;t, Value init)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr bit_xor_t</type>
       <name>kumi::bit_xor</name>
-      <anchorfile>group__reductions_ga19a1070aa59a1fd90bbf39b860058f9d.html</anchorfile>
-      <anchor>ga19a1070aa59a1fd90bbf39b860058f9d</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+      <anchorfile>group__reductions_ga2797c81f32afec2f2ce4856a5155807c.html</anchorfile>
+      <anchor>ga2797c81f32afec2f2ce4856a5155807c</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::bit_xor</name>
-      <anchorfile>group__reductions_ga521dcc4de231768115582401a1a0419b.html</anchorfile>
-      <anchor>ga521dcc4de231768115582401a1a0419b</anchor>
-      <arglist>(T &amp;&amp;t, Value init)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr exclusive_scan_left_t</type>
       <name>kumi::exclusive_scan_left</name>
-      <anchorfile>group__reductions_gae113f4baf3a17cc22dac25df57c06031.html</anchorfile>
-      <anchor>gae113f4baf3a17cc22dac25df57c06031</anchor>
-      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_ga529950ddf6573473b2f9b7ec886c61f9.html</anchorfile>
+      <anchor>ga529950ddf6573473b2f9b7ec886c61f9</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::exclusive_scan_left</name>
-      <anchorfile>group__reductions_ga3cba3a0d02a465184302a59f4d05bc89.html</anchorfile>
-      <anchor>ga3cba3a0d02a465184302a59f4d05bc89</anchor>
-      <arglist>(M &amp;&amp;m, T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr exclusive_scan_right_t</type>
       <name>kumi::exclusive_scan_right</name>
-      <anchorfile>group__reductions_gae9b0c7f1e3d7ecc8463c7275dfad5078.html</anchorfile>
-      <anchor>gae9b0c7f1e3d7ecc8463c7275dfad5078</anchor>
-      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_gaa66bb36d76db2d7854196bc156fb35c2.html</anchorfile>
+      <anchor>gaa66bb36d76db2d7854196bc156fb35c2</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::exclusive_scan_right</name>
-      <anchorfile>group__reductions_ga33f26f28d0909a45b8e2e62b39a8bf4e.html</anchorfile>
-      <anchor>ga33f26f28d0909a45b8e2e62b39a8bf4e</anchor>
-      <arglist>(M &amp;&amp;m, T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr fold_left_t</type>
       <name>kumi::fold_left</name>
-      <anchorfile>group__reductions_ga74e253f7967cc7f188a979551cf687ef.html</anchorfile>
-      <anchor>ga74e253f7967cc7f188a979551cf687ef</anchor>
-      <arglist>(Function f, T &amp;&amp;t)</arglist>
+      <anchorfile>group__reductions_gac7fc6bc4e0aff96cca71f0a64b0f2aa1.html</anchorfile>
+      <anchor>gac7fc6bc4e0aff96cca71f0a64b0f2aa1</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::fold_left</name>
-      <anchorfile>group__reductions_ga0f786372596b4dd7b924bf944871d7ad.html</anchorfile>
-      <anchor>ga0f786372596b4dd7b924bf944871d7ad</anchor>
-      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr fold_right_t</type>
       <name>kumi::fold_right</name>
-      <anchorfile>group__reductions_ga0f30eadf94cf474e9e54f4b6d495f4c6.html</anchorfile>
-      <anchor>ga0f30eadf94cf474e9e54f4b6d495f4c6</anchor>
-      <arglist>(Function f, T &amp;&amp;t)</arglist>
+      <anchorfile>group__reductions_gaee418c18e09e3b1789c23ec00681db42.html</anchorfile>
+      <anchor>gaee418c18e09e3b1789c23ec00681db42</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::fold_right</name>
-      <anchorfile>group__reductions_ga5842a04c6880086a9fb8f3a06bc81469.html</anchorfile>
-      <anchor>ga5842a04c6880086a9fb8f3a06bc81469</anchor>
-      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr inclusive_scan_left_t</type>
       <name>kumi::inclusive_scan_left</name>
-      <anchorfile>group__reductions_gab62658d582fe17a5824465ba5e669b26.html</anchorfile>
-      <anchor>gab62658d582fe17a5824465ba5e669b26</anchor>
-      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_ga1389eee6fb884b34ed4957884ecd39a1.html</anchorfile>
+      <anchor>ga1389eee6fb884b34ed4957884ecd39a1</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::inclusive_scan_left</name>
-      <anchorfile>group__reductions_ga18e1921f3f9aeb30ed0edf8ec9371577.html</anchorfile>
-      <anchor>ga18e1921f3f9aeb30ed0edf8ec9371577</anchor>
-      <arglist>(M &amp;&amp;m, T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr inclusive_scan_right_t</type>
       <name>kumi::inclusive_scan_right</name>
-      <anchorfile>group__reductions_gaa626c4c72c6c4f6ac575851c0dbf06bb.html</anchorfile>
-      <anchor>gaa626c4c72c6c4f6ac575851c0dbf06bb</anchor>
-      <arglist>(Function f, T &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_gab55848ee4bd1b0cc0f22015a2bac5047.html</anchorfile>
+      <anchor>gab55848ee4bd1b0cc0f22015a2bac5047</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::inclusive_scan_right</name>
-      <anchorfile>group__reductions_ga12e5013494b9498224e311c8cf51a76c.html</anchorfile>
-      <anchor>ga12e5013494b9498224e311c8cf51a76c</anchor>
-      <arglist>(M &amp;&amp;m, T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::inner_product</name>
-      <anchorfile>group__reductions_ga152ee8c92e7bc5edc1600673dbd3d50c.html</anchorfile>
-      <anchor>ga152ee8c92e7bc5edc1600673dbd3d50c</anchor>
-      <arglist>(S1 &amp;&amp;s1, S2 &amp;&amp;s2, T init, Sum sum, Prod prod) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr map_reduce_t</type>
       <name>kumi::map_reduce</name>
-      <anchorfile>group__reductions_gace3f0fb4e67066f6f82052efd359b2b4.html</anchorfile>
-      <anchor>gace3f0fb4e67066f6f82052efd359b2b4</anchor>
-      <arglist>(Function f, M &amp;&amp;m, T &amp;&amp;t)</arglist>
+      <anchorfile>group__reductions_ga396afbfbcefa48f06ad76a34b6f0b523.html</anchorfile>
+      <anchor>ga396afbfbcefa48f06ad76a34b6f0b523</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::map_reduce</name>
-      <anchorfile>group__reductions_gaa6b16ddb18150ef85f789e80593b68a2.html</anchorfile>
-      <anchor>gaa6b16ddb18150ef85f789e80593b68a2</anchor>
-      <arglist>(Function f, M &amp;&amp;m, T &amp;&amp;t, Value init)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr max_t</type>
       <name>kumi::max</name>
-      <anchorfile>group__reductions_ga72159dc27be6b9aed9cc1d12ca019f28.html</anchorfile>
-      <anchor>ga72159dc27be6b9aed9cc1d12ca019f28</anchor>
-      <arglist>(T &amp;&amp;t) noexcept</arglist>
+      <anchorfile>group__reductions_gab76e53ad197280669806cae2c0cc130c.html</anchorfile>
+      <anchor>gab76e53ad197280669806cae2c0cc130c</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::max</name>
-      <anchorfile>group__reductions_gae173eedc8b731830ea5df23aec9f14fa.html</anchorfile>
-      <anchor>gae173eedc8b731830ea5df23aec9f14fa</anchor>
-      <arglist>(T &amp;&amp;t, F f) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::max_flat</name>
-      <anchorfile>group__reductions_gafa660a662111704882e6c9005f34f818.html</anchorfile>
-      <anchor>gafa660a662111704882e6c9005f34f818</anchor>
-      <arglist>(T &amp;&amp;t, F f) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr min_t</type>
       <name>kumi::min</name>
-      <anchorfile>group__reductions_ga2e588148a9b7eda028da7963770a5010.html</anchorfile>
-      <anchor>ga2e588148a9b7eda028da7963770a5010</anchor>
-      <arglist>(T &amp;&amp;t) noexcept</arglist>
+      <anchorfile>group__reductions_gaafd0c178628f6f756bf0d73a34e75b2f.html</anchorfile>
+      <anchor>gaafd0c178628f6f756bf0d73a34e75b2f</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::min</name>
-      <anchorfile>group__reductions_gab860bed731b3d7499e9d85b1a3ce57b6.html</anchorfile>
-      <anchor>gab860bed731b3d7499e9d85b1a3ce57b6</anchor>
-      <arglist>(T &amp;&amp;t, F f) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::min_flat</name>
-      <anchorfile>group__reductions_ga931f495837b8f1c878fbb8a625ca9442.html</anchorfile>
-      <anchor>ga931f495837b8f1c878fbb8a625ca9442</anchor>
-      <arglist>(T &amp;&amp;t, F f) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr prod_t</type>
       <name>kumi::prod</name>
-      <anchorfile>group__reductions_ga9c9775c7c76aebd9db20d0e44eec6034.html</anchorfile>
-      <anchor>ga9c9775c7c76aebd9db20d0e44eec6034</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+      <anchorfile>group__reductions_ga6c139ebafaebc0f7dbca2fd57aee943c.html</anchorfile>
+      <anchor>ga6c139ebafaebc0f7dbca2fd57aee943c</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::prod</name>
-      <anchorfile>group__reductions_gad87f59b6ce034ee52f7bf15e67cf7450.html</anchorfile>
-      <anchor>gad87f59b6ce034ee52f7bf15e67cf7450</anchor>
-      <arglist>(T &amp;&amp;t, Value init)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr reduce_t</type>
       <name>kumi::reduce</name>
-      <anchorfile>group__reductions_ga812fe60401e985cc2ebd067bc42f0354.html</anchorfile>
-      <anchor>ga812fe60401e985cc2ebd067bc42f0354</anchor>
-      <arglist>(M &amp;&amp;m, T &amp;&amp;t)</arglist>
+      <anchorfile>group__reductions_gaf7efbfa530d2396e2ed230cc03e4046e.html</anchorfile>
+      <anchor>gaf7efbfa530d2396e2ed230cc03e4046e</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::reduce</name>
-      <anchorfile>group__reductions_ga7d1398c56521f65375bb2f2b28e945cb.html</anchorfile>
-      <anchor>ga7d1398c56521f65375bb2f2b28e945cb</anchor>
-      <arglist>(M &amp;&amp;m, T &amp;&amp;t, Value init)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr sum_t</type>
       <name>kumi::sum</name>
-      <anchorfile>group__reductions_gaa96dfd76fe746fe28e1a833ad76c59fc.html</anchorfile>
-      <anchor>gaa96dfd76fe746fe28e1a833ad76c59fc</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::sum</name>
-      <anchorfile>group__reductions_ga183fa966de706e5e6c78a9cc50202fe8.html</anchorfile>
-      <anchor>ga183fa966de706e5e6c78a9cc50202fe8</anchor>
-      <arglist>(T &amp;&amp;t, Value init)</arglist>
+      <anchorfile>group__reductions_ga3e8b585399de360c3ab55efc2fa0ed8c.html</anchorfile>
+      <anchor>ga3e8b585399de360c3ab55efc2fa0ed8c</anchor>
+      <arglist></arglist>
     </member>
   </compound>
   <compound kind="group">
     <name>generators</name>
     <title>Product Type Generators</title>
     <filename>group__generators.html</filename>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr all_unique_t</type>
       <name>kumi::all_unique</name>
-      <anchorfile>group__generators_gacf670e19ac40c8981f52ad0783a3e483.html</anchorfile>
-      <anchor>gacf670e19ac40c8981f52ad0783a3e483</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_ga71bbbe8da94919e242bd3ded80ab6776.html</anchorfile>
+      <anchor>ga71bbbe8da94919e242bd3ded80ab6776</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>auto</type>
+    <member kind="variable">
+      <type>constexpr as_flat_ptr_t</type>
       <name>kumi::as_flat_ptr</name>
-      <anchorfile>group__generators_ga418f0a47f05b67dbb354d274dee63e4e.html</anchorfile>
-      <anchor>ga418f0a47f05b67dbb354d274dee63e4e</anchor>
-      <arglist>(T &amp;&amp;t) noexcept</arglist>
+      <anchorfile>group__generators_ga6368952a2f6a506de75aa0e01569eab6.html</anchorfile>
+      <anchor>ga6368952a2f6a506de75aa0e01569eab6</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr cartesian_product_t</type>
       <name>kumi::cartesian_product</name>
-      <anchorfile>group__generators_ga461b0473347a35c07e54f9b3d324ad94.html</anchorfile>
-      <anchor>ga461b0473347a35c07e54f9b3d324ad94</anchor>
-      <arglist>(Ts &amp;&amp;... ts)</arglist>
+      <anchorfile>group__generators_ga39128fad2c11b9fea55558222a87721c.html</anchorfile>
+      <anchor>ga39128fad2c11b9fea55558222a87721c</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr cat_t</type>
       <name>kumi::cat</name>
-      <anchorfile>group__generators_ga54c98adccbd7a86240d50e915d789650.html</anchorfile>
-      <anchor>ga54c98adccbd7a86240d50e915d789650</anchor>
-      <arglist>(Ts &amp;&amp;... ts)</arglist>
+      <anchorfile>group__generators_ga4550222df58187f71b1b1347500e324a.html</anchorfile>
+      <anchor>ga4550222df58187f71b1b1347500e324a</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr tiles_t&lt; N, N &gt;</type>
       <name>kumi::chunks</name>
-      <anchorfile>group__generators_ga3cb72901ec2c82a9b4d4ff5bf513237c.html</anchorfile>
-      <anchor>ga3cb72901ec2c82a9b4d4ff5bf513237c</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_gaf4b0bcda72790c2ac55519adaf89456e.html</anchorfile>
+      <anchor>gaf4b0bcda72790c2ac55519adaf89456e</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr extract_t</type>
       <name>kumi::extract</name>
-      <anchorfile>group__generators_ga40f37d0cfe5e51d7930c021eb67205bc.html</anchorfile>
-      <anchor>ga40f37d0cfe5e51d7930c021eb67205bc</anchor>
-      <arglist>(T &amp;&amp;t, kumi::index_t&lt; I0 &gt; i0, kumi::index_t&lt; I1 &gt; i1) noexcept</arglist>
+      <anchorfile>group__generators_ga1a7617bafd6f8598cca8e7e6a5c6f383.html</anchorfile>
+      <anchor>ga1a7617bafd6f8598cca8e7e6a5c6f383</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr fill_t&lt; N &gt;</type>
       <name>kumi::fill</name>
-      <anchorfile>group__generators_gac1f2b67c16429675ca7b9106793f9001.html</anchorfile>
-      <anchor>gac1f2b67c16429675ca7b9106793f9001</anchor>
-      <arglist>(T const &amp;v) noexcept</arglist>
+      <anchorfile>group__generators_gafd5d1c6d3d2fcb3c424826b8bddb8b0a.html</anchorfile>
+      <anchor>gafd5d1c6d3d2fcb3c424826b8bddb8b0a</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr filter_t&lt; Pred &gt;</type>
       <name>kumi::filter</name>
-      <anchorfile>group__generators_gaafed5030f3115f8fda5f1966a9fdfd38.html</anchorfile>
-      <anchor>gaafed5030f3115f8fda5f1966a9fdfd38</anchor>
-      <arglist>(T &amp;&amp;t) noexcept</arglist>
+      <anchorfile>group__generators_ga2c9b5ff6b698c7dcb0feb2da1679fa9b.html</anchorfile>
+      <anchor>ga2c9b5ff6b698c7dcb0feb2da1679fa9b</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr filter_not_t&lt; Pred &gt;</type>
       <name>kumi::filter_not</name>
-      <anchorfile>group__generators_ga4252a5ff33d90265f42d4b6c70e48bed.html</anchorfile>
-      <anchor>ga4252a5ff33d90265f42d4b6c70e48bed</anchor>
-      <arglist>(T &amp;&amp;t) noexcept</arglist>
+      <anchorfile>group__generators_ga750bc3d3425c955e1be6ef1b3879c314.html</anchorfile>
+      <anchor>ga750bc3d3425c955e1be6ef1b3879c314</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr flatten_t</type>
       <name>kumi::flatten</name>
-      <anchorfile>group__generators_ga6a021e42590689a905a2d8268c860838.html</anchorfile>
-      <anchor>ga6a021e42590689a905a2d8268c860838</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_ga49acccc42ec8af7b96b63e8f38796df2.html</anchorfile>
+      <anchor>ga49acccc42ec8af7b96b63e8f38796df2</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr flatten_all_t</type>
       <name>kumi::flatten_all</name>
-      <anchorfile>group__generators_ga7416f4db26c4e41360e71dd449de20a6.html</anchorfile>
-      <anchor>ga7416f4db26c4e41360e71dd449de20a6</anchor>
-      <arglist>(T &amp;&amp;t, Func f)</arglist>
+      <anchorfile>group__generators_gaa780fd338fb61c86f226ae05adfaf426.html</anchorfile>
+      <anchor>gaa780fd338fb61c86f226ae05adfaf426</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr generate_t&lt; N &gt;</type>
       <name>kumi::generate</name>
-      <anchorfile>group__generators_gaf6a234ed8630b3928724cf8fefbc9c6d.html</anchorfile>
-      <anchor>gaf6a234ed8630b3928724cf8fefbc9c6d</anchor>
-      <arglist>(Function const &amp;f) noexcept</arglist>
+      <anchorfile>group__generators_gaba2efbda8df6baaccd4e35343d70163f.html</anchorfile>
+      <anchor>gaba2efbda8df6baaccd4e35343d70163f</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr iota_t&lt; N &gt;</type>
       <name>kumi::iota</name>
-      <anchorfile>group__generators_ga19ced0b66d1e3dae7bfa60f7def6914f.html</anchorfile>
-      <anchor>ga19ced0b66d1e3dae7bfa60f7def6914f</anchor>
-      <arglist>(T v) noexcept</arglist>
+      <anchorfile>group__generators_gace6e022bb94a706731299b9d395ac10d.html</anchorfile>
+      <anchor>gace6e022bb94a706731299b9d395ac10d</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr member_cast_t&lt; T &gt;</type>
       <name>kumi::member_cast</name>
-      <anchorfile>group__generators_ga79787185d26368946a74f31ce5f6597c.html</anchorfile>
-      <anchor>ga79787185d26368946a74f31ce5f6597c</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_gad2e4009d5d28df5090885b030f08f1f8.html</anchorfile>
+      <anchor>gad2e4009d5d28df5090885b030f08f1f8</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr partition_t&lt; Pred &gt;</type>
       <name>kumi::partition</name>
-      <anchorfile>group__generators_gaf7926aecf07b881c2005e39f34512851.html</anchorfile>
-      <anchor>gaf7926aecf07b881c2005e39f34512851</anchor>
-      <arglist>(T &amp;&amp;t) noexcept</arglist>
+      <anchorfile>group__generators_ga4643116b2dc0dfbd0d15fee408a9c18c.html</anchorfile>
+      <anchor>ga4643116b2dc0dfbd0d15fee408a9c18c</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::pop_back</name>
-      <anchorfile>group__generators_gaa78a8b1a97ed4da70a1e772cafb55aef.html</anchorfile>
-      <anchor>gaa78a8b1a97ed4da70a1e772cafb55aef</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr pop_front_t</type>
       <name>kumi::pop_front</name>
-      <anchorfile>group__generators_ga0067bdadcb60e0eeb405bd1021dd4f08.html</anchorfile>
-      <anchor>ga0067bdadcb60e0eeb405bd1021dd4f08</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_ga38d1ddeb5090405e79e9b7d898a85133.html</anchorfile>
+      <anchor>ga38d1ddeb5090405e79e9b7d898a85133</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::push_back</name>
-      <anchorfile>group__generators_ga1caeff43037aae979c9ff1ca476091cb.html</anchorfile>
-      <anchor>ga1caeff43037aae979c9ff1ca476091cb</anchor>
-      <arglist>(T &amp;&amp;t, V &amp;&amp;v)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr push_front_t</type>
       <name>kumi::push_front</name>
-      <anchorfile>group__generators_ga45a00d0a03a72f6c0c67501e684ddbea.html</anchorfile>
-      <anchor>ga45a00d0a03a72f6c0c67501e684ddbea</anchor>
-      <arglist>(T &amp;&amp;t, V &amp;&amp;v)</arglist>
+      <anchorfile>group__generators_gad4bd53f162f63af0cbfbd68d8adb5d5c.html</anchorfile>
+      <anchor>gad4bd53f162f63af0cbfbd68d8adb5d5c</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr reindex_t&lt; Projections &gt;</type>
       <name>kumi::reindex</name>
-      <anchorfile>group__generators_ga0e43e02e9a4a7fea31b620b2dcb4b48a.html</anchorfile>
-      <anchor>ga0e43e02e9a4a7fea31b620b2dcb4b48a</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_ga3594f15dbfba2f6fda0afc8d1542c449.html</anchorfile>
+      <anchor>ga3594f15dbfba2f6fda0afc8d1542c449</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr reorder_t&lt; I... &gt;</type>
       <name>kumi::reorder</name>
-      <anchorfile>group__generators_ga11fbe45a20286800b1d6ef15d7930d37.html</anchorfile>
-      <anchor>ga11fbe45a20286800b1d6ef15d7930d37</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_ga32af967d7f453426ccd564d3a0b6c689.html</anchorfile>
+      <anchor>ga32af967d7f453426ccd564d3a0b6c689</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr reorder_fields_t&lt; Name... &gt;</type>
       <name>kumi::reorder_fields</name>
-      <anchorfile>group__generators_ga86a5aaefb0718b80b2103bf9dc8e3b23.html</anchorfile>
-      <anchor>ga86a5aaefb0718b80b2103bf9dc8e3b23</anchor>
-      <arglist>(Tuple &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_ga8c42552c8f93dad0b83a3903468d02c6.html</anchorfile>
+      <anchor>ga8c42552c8f93dad0b83a3903468d02c6</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::reverse</name>
-      <anchorfile>group__generators_gab95d676ad41b4adc604681d14081026e.html</anchorfile>
-      <anchor>gab95d676ad41b4adc604681d14081026e</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr rotate_left_t&lt; R &gt;</type>
       <name>kumi::rotate_left</name>
-      <anchorfile>group__generators_ga969f4ebe05e88580436080ab956e7e37.html</anchorfile>
-      <anchor>ga969f4ebe05e88580436080ab956e7e37</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_gadbc56977f82e2eaefe486c0a9457f01c.html</anchorfile>
+      <anchor>gadbc56977f82e2eaefe486c0a9457f01c</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr rotate_right_t&lt; R &gt;</type>
       <name>kumi::rotate_right</name>
-      <anchorfile>group__generators_ga7b4c54857ff1b5253b86ae9b05098268.html</anchorfile>
-      <anchor>ga7b4c54857ff1b5253b86ae9b05098268</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_gaffd5dbb36e1c70d2fc058ffe03afef3e.html</anchorfile>
+      <anchor>gaffd5dbb36e1c70d2fc058ffe03afef3e</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr split_t</type>
       <name>kumi::split</name>
-      <anchorfile>group__generators_ga6704d0084f5e83ac5860a75090e0e05d.html</anchorfile>
-      <anchor>ga6704d0084f5e83ac5860a75090e0e05d</anchor>
-      <arglist>(T &amp;&amp;t, kumi::index_t&lt; I0 &gt; i0) noexcept</arglist>
+      <anchorfile>group__generators_gadb81f4533e81830674c3fc9577d3de93.html</anchorfile>
+      <anchor>gadb81f4533e81830674c3fc9577d3de93</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr tiles_t&lt; N, O &gt;</type>
       <name>kumi::tiles</name>
-      <anchorfile>group__generators_ga92fa9f88804ec032d1f2bf2717205743.html</anchorfile>
-      <anchor>ga92fa9f88804ec032d1f2bf2717205743</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_ga3d1b4a8309328d854d7b6234fde3aeb0.html</anchorfile>
+      <anchor>ga3d1b4a8309328d854d7b6234fde3aeb0</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr transpose_t</type>
       <name>kumi::transpose</name>
-      <anchorfile>group__generators_gadd1fa406983775f22d7a64bdd49e92b3.html</anchorfile>
-      <anchor>gadd1fa406983775f22d7a64bdd49e92b3</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_gaef527bdd76c70e7fded23a9759428f5c.html</anchorfile>
+      <anchor>gaef527bdd76c70e7fded23a9759428f5c</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr unique_t</type>
       <name>kumi::unique</name>
-      <anchorfile>group__generators_ga26131fc7a91a6860d0013d4be6151333.html</anchorfile>
-      <anchor>ga26131fc7a91a6860d0013d4be6151333</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_ga6479cba59ee95d4a0779e94993ab55a9.html</anchorfile>
+      <anchor>ga6479cba59ee95d4a0779e94993ab55a9</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr tiles_t&lt; N, 1 &gt;</type>
       <name>kumi::windows</name>
-      <anchorfile>group__generators_gadbca06109e5b36b0d59eab4a0fc9accf.html</anchorfile>
-      <anchor>gadbca06109e5b36b0d59eab4a0fc9accf</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+      <anchorfile>group__generators_gade96292292ae11da69415a778ef45ad0.html</anchorfile>
+      <anchor>gade96292292ae11da69415a778ef45ad0</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr zip_t</type>
       <name>kumi::zip</name>
-      <anchorfile>group__generators_ga35d675c755f2cb5e3ad41789d5c9ca9f.html</anchorfile>
-      <anchor>ga35d675c755f2cb5e3ad41789d5c9ca9f</anchor>
-      <arglist>(T0 &amp;&amp;t0, Ts &amp;&amp;... ts)</arglist>
+      <anchorfile>group__generators_ga71c21174289ba175a8d3d4b170cec05f.html</anchorfile>
+      <anchor>ga71c21174289ba175a8d3d4b170cec05f</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr zip_max_t</type>
       <name>kumi::zip_max</name>
-      <anchorfile>group__generators_ga778a2a1100119d65f2b64aef57bc42e7.html</anchorfile>
-      <anchor>ga778a2a1100119d65f2b64aef57bc42e7</anchor>
-      <arglist>(T0 &amp;&amp;t0, Ts &amp;&amp;... ts)</arglist>
+      <anchorfile>group__generators_ga0ce4823febfb00cfb197f73332ba7309.html</anchorfile>
+      <anchor>ga0ce4823febfb00cfb197f73332ba7309</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr zip_min_t</type>
       <name>kumi::zip_min</name>
-      <anchorfile>group__generators_ga8b5c922e0cab8ad0a3aadd9f2af3464d.html</anchorfile>
-      <anchor>ga8b5c922e0cab8ad0a3aadd9f2af3464d</anchor>
-      <arglist>(T0 &amp;&amp;t0, Ts &amp;&amp;... ts)</arglist>
+      <anchorfile>group__generators_gaf4b9aea3cee7c30fc6a516c632805423.html</anchorfile>
+      <anchor>gaf4b9aea3cee7c30fc6a516c632805423</anchor>
+      <arglist></arglist>
     </member>
   </compound>
   <compound kind="group">
     <name>queries</name>
     <title>Product Type Queries</title>
     <filename>group__queries.html</filename>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr all_of_t</type>
       <name>kumi::all_of</name>
-      <anchorfile>group__queries_ga599b0ea5293a040316abedd19bb72f42.html</anchorfile>
-      <anchor>ga599b0ea5293a040316abedd19bb72f42</anchor>
-      <arglist>(T &amp;&amp;t) noexcept</arglist>
+      <anchorfile>group__queries_gaffdb8063b72f079107cd8a7e293ba298.html</anchorfile>
+      <anchor>gaffdb8063b72f079107cd8a7e293ba298</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::all_of</name>
-      <anchorfile>group__queries_ga72fb1b09abe23dbd9c6f2783c98c0c5d.html</anchorfile>
-      <anchor>ga72fb1b09abe23dbd9c6f2783c98c0c5d</anchor>
-      <arglist>(T &amp;&amp;t, Pred p) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr any_of_t</type>
       <name>kumi::any_of</name>
-      <anchorfile>group__queries_ga372b7bd18ab6b59234a6c68d74d298cf.html</anchorfile>
-      <anchor>ga372b7bd18ab6b59234a6c68d74d298cf</anchor>
-      <arglist>(T &amp;&amp;t) noexcept</arglist>
+      <anchorfile>group__queries_ga79566892f932a2308e23b5f21b95086f.html</anchorfile>
+      <anchor>ga79566892f932a2308e23b5f21b95086f</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::any_of</name>
-      <anchorfile>group__queries_ga77b8923d8b86a504f8b683d16a9f1c3b.html</anchorfile>
-      <anchor>ga77b8923d8b86a504f8b683d16a9f1c3b</anchor>
-      <arglist>(T &amp;&amp;t, Pred p) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
+    <member kind="variable">
+      <type>constexpr back_t</type>
       <name>kumi::back</name>
-      <anchorfile>group__queries_gacbfca9b5e95948e4180a54e920d19c6f.html</anchorfile>
-      <anchor>gacbfca9b5e95948e4180a54e920d19c6f</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+      <anchorfile>group__queries_gae635e0c094282372ff5393840b6f52c2.html</anchorfile>
+      <anchor>gae635e0c094282372ff5393840b6f52c2</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr contains_t</type>
       <name>kumi::contains</name>
-      <anchorfile>group__queries_ga5b1e2b6241cc570b3688866e8f729d63.html</anchorfile>
-      <anchor>ga5b1e2b6241cc570b3688866e8f729d63</anchor>
-      <arglist>(T &amp;&amp;t, ID const &amp;id) noexcept</arglist>
+      <anchorfile>group__queries_ga3a9b6e2d0fbdace9e57b3846d24a3b57.html</anchorfile>
+      <anchor>ga3a9b6e2d0fbdace9e57b3846d24a3b57</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr contains_any_t</type>
       <name>kumi::contains_any</name>
-      <anchorfile>group__queries_gade57a6c7c09f285d24d85343e87247ee.html</anchorfile>
-      <anchor>gade57a6c7c09f285d24d85343e87247ee</anchor>
-      <arglist>(T &amp;&amp;t, Is const &amp;... ids) noexcept</arglist>
+      <anchorfile>group__queries_ga639f59cb294f670d2f2c468c4ef204d3.html</anchorfile>
+      <anchor>ga639f59cb294f670d2f2c468c4ef204d3</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr contains_none_t</type>
       <name>kumi::contains_none</name>
-      <anchorfile>group__queries_ga1fe92be51ecab233d192ad35dd56dd3d.html</anchorfile>
-      <anchor>ga1fe92be51ecab233d192ad35dd56dd3d</anchor>
-      <arglist>(T &amp;&amp;t, Is const &amp;... ids) noexcept</arglist>
+      <anchorfile>group__queries_ga7b1bbe80c513abfdedd1196f027601d2.html</anchorfile>
+      <anchor>ga7b1bbe80c513abfdedd1196f027601d2</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr contains_only_t</type>
       <name>kumi::contains_only</name>
-      <anchorfile>group__queries_gaaa6ceb114c1f1ecf07428a655923ff95.html</anchorfile>
-      <anchor>gaaa6ceb114c1f1ecf07428a655923ff95</anchor>
-      <arglist>(T &amp;&amp;t, Is const &amp;... ids) noexcept</arglist>
+      <anchorfile>group__queries_ga36431211bf121466392b290459a45498.html</anchorfile>
+      <anchor>ga36431211bf121466392b290459a45498</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr std::size_t</type>
+    <member kind="variable">
+      <type>constexpr count_t</type>
       <name>kumi::count</name>
-      <anchorfile>group__queries_ga89924270e75ae69034cab01a0136b062.html</anchorfile>
-      <anchor>ga89924270e75ae69034cab01a0136b062</anchor>
-      <arglist>(T &amp;&amp;t) noexcept</arglist>
+      <anchorfile>group__queries_ga8240f113b5feb1dcc826949f28f17a47.html</anchorfile>
+      <anchor>ga8240f113b5feb1dcc826949f28f17a47</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr std::size_t</type>
+    <member kind="variable">
+      <type>constexpr count_if_t</type>
       <name>kumi::count_if</name>
-      <anchorfile>group__queries_ga149410b213526c378704e3dea56559ad.html</anchorfile>
-      <anchor>ga149410b213526c378704e3dea56559ad</anchor>
-      <arglist>(T &amp;&amp;t, Pred p) noexcept</arglist>
+      <anchorfile>group__queries_gaec0fb27dc2250b97648bc52b8e83b561.html</anchorfile>
+      <anchor>gaec0fb27dc2250b97648bc52b8e83b561</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
+    <member kind="variable">
+      <type>constexpr front_t</type>
       <name>kumi::front</name>
-      <anchorfile>group__queries_ga04a99a08fa0578c39242f348dc19c8c7.html</anchorfile>
-      <anchor>ga04a99a08fa0578c39242f348dc19c8c7</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+      <anchorfile>group__queries_gaa1618c96c4c7003afeccfb19e25b35bb.html</anchorfile>
+      <anchor>gaa1618c96c4c7003afeccfb19e25b35bb</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr locate_t</type>
       <name>kumi::locate</name>
-      <anchorfile>group__queries_gabae586f9cb43b3fc2b2ca919518eb837.html</anchorfile>
-      <anchor>gabae586f9cb43b3fc2b2ca919518eb837</anchor>
-      <arglist>(T &amp;&amp;t, Pred p) noexcept</arglist>
+      <anchorfile>group__queries_ga39f807d6c2b8909a712d431acde4153e.html</anchorfile>
+      <anchor>ga39f807d6c2b8909a712d431acde4153e</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr bool</type>
+    <member kind="variable">
+      <type>constexpr none_of_t</type>
       <name>kumi::none_of</name>
-      <anchorfile>group__queries_ga8094ec3fd9bb7b61c5a41319bd3f6766.html</anchorfile>
-      <anchor>ga8094ec3fd9bb7b61c5a41319bd3f6766</anchor>
-      <arglist>(T &amp;&amp;t) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr bool</type>
-      <name>kumi::none_of</name>
-      <anchorfile>group__queries_ga5450fe960cb3282fc7c2b2d072128802.html</anchorfile>
-      <anchor>ga5450fe960cb3282fc7c2b2d072128802</anchor>
-      <arglist>(T &amp;&amp;t, Pred p) noexcept</arglist>
+      <anchorfile>group__queries_ga26e030c97733248f67dd2c8fbf527602.html</anchorfile>
+      <anchor>ga26e030c97733248f67dd2c8fbf527602</anchor>
+      <arglist></arglist>
     </member>
   </compound>
   <compound kind="group">
@@ -3546,26 +3535,33 @@
     <filename>group__transforms.html</filename>
     <subgroup>record_transforms</subgroup>
     <subgroup>tuple_transforms</subgroup>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
+    <member kind="variable">
+      <type>constexpr apply_t</type>
       <name>kumi::apply</name>
-      <anchorfile>group__transforms_ga9982fadb19cb52094d6165bca7f57f25.html</anchorfile>
-      <anchor>ga9982fadb19cb52094d6165bca7f57f25</anchor>
-      <arglist>(Function &amp;&amp;f, T &amp;&amp;t) noexcept(kumi_implementation_defined)</arglist>
+      <anchorfile>group__transforms_ga4c69a49971100b7bc9c7effd7c43f191.html</anchorfile>
+      <anchor>ga4c69a49971100b7bc9c7effd7c43f191</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr void</type>
+    <member kind="variable">
+      <type>constexpr apply_field_t</type>
+      <name>kumi::apply_field</name>
+      <anchorfile>group__transforms_ga992364930a4a5a5b64b26730773536ab.html</anchorfile>
+      <anchor>ga992364930a4a5a5b64b26730773536ab</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr for_each_t</type>
       <name>kumi::for_each</name>
-      <anchorfile>group__transforms_gae9e3fdeaf5297101b0d0da55a883c56a.html</anchorfile>
-      <anchor>gae9e3fdeaf5297101b0d0da55a883c56a</anchor>
-      <arglist>(Function f, T &amp;&amp;t, Ts &amp;&amp;... ts)</arglist>
+      <anchorfile>group__transforms_ga58c4bb5e62083b4b37396d39c6446164.html</anchorfile>
+      <anchor>ga58c4bb5e62083b4b37396d39c6446164</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr map_t</type>
       <name>kumi::map</name>
-      <anchorfile>group__transforms_gaf11826c10bd2cd2c483cb09f07665dc4.html</anchorfile>
-      <anchor>gaf11826c10bd2cd2c483cb09f07665dc4</anchor>
-      <arglist>(Function f, T &amp;&amp;t0, Ts &amp;&amp;... others)</arglist>
+      <anchorfile>group__transforms_gaeaba737291ba1085d77272eae38a016e.html</anchorfile>
+      <anchor>gaeaba737291ba1085d77272eae38a016e</anchor>
+      <arglist></arglist>
     </member>
   </compound>
   <compound kind="group">
@@ -3627,19 +3623,12 @@
     <name>record_transforms</name>
     <title>Record Type Specific Transformations</title>
     <filename>group__record__transforms.html</filename>
-    <member kind="function">
-      <type>constexpr void</type>
-      <name>kumi::for_each_field</name>
-      <anchorfile>group__record__transforms_ga3ece4da34324ad360ade0bd4d174cee6.html</anchorfile>
-      <anchor>ga3ece4da34324ad360ade0bd4d174cee6</anchor>
-      <arglist>(Function f, R &amp;&amp;r, Rs &amp;&amp;... rs)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr map_field_t</type>
       <name>kumi::map_field</name>
-      <anchorfile>group__record__transforms_ga9693988b3886c889e583a99d4594e2af.html</anchorfile>
-      <anchor>ga9693988b3886c889e583a99d4594e2af</anchor>
-      <arglist>(Function f, T &amp;&amp;t0, Ts &amp;&amp;... others)</arglist>
+      <anchorfile>group__record__transforms_gafe68ca583e3e822b20f60ff35e5aa9d3.html</anchorfile>
+      <anchor>gafe68ca583e3e822b20f60ff35e5aa9d3</anchor>
+      <arglist></arglist>
     </member>
   </compound>
   <compound kind="group">
@@ -3700,19 +3689,12 @@
     <name>tuple_transforms</name>
     <title>Tuple Type Specific Transformations</title>
     <filename>group__tuple__transforms.html</filename>
-    <member kind="function">
-      <type>constexpr void</type>
-      <name>kumi::for_each_index</name>
-      <anchorfile>group__tuple__transforms_ga3e02ab065b60cea56e0b6ac96e2ae388.html</anchorfile>
-      <anchor>ga3e02ab065b60cea56e0b6ac96e2ae388</anchor>
-      <arglist>(Function f, T &amp;&amp;t, Ts &amp;&amp;... ts)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr map_index_t</type>
       <name>kumi::map_index</name>
-      <anchorfile>group__tuple__transforms_gac00fe55b0cba7a129caa2ea3d01cd1f0.html</anchorfile>
-      <anchor>gac00fe55b0cba7a129caa2ea3d01cd1f0</anchor>
-      <arglist>(Function f, T &amp;&amp;t0, Ts &amp;&amp;... others)</arglist>
+      <anchorfile>group__tuple__transforms_ga64a8c36072828fb7b724ba0ab8fc59bc.html</anchorfile>
+      <anchor>ga64a8c36072828fb7b724ba0ab8fc59bc</anchor>
+      <arglist></arglist>
     </member>
   </compound>
   <compound kind="page">

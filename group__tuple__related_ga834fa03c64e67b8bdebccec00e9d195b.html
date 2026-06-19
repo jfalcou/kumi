@@ -198,13 +198,13 @@ template&lt;typename... Ts&gt; </div>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> object containing lvalue references. </dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md362"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md41"></a>
 Example:</h2>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
-<div class="line"><span class="keyword">auto</span> <a class="code hl_function" href="group__generators_gaf6a234ed8630b3928724cf8fefbc9c6d.html#gaf6a234ed8630b3928724cf8fefbc9c6d">generate</a>()</div>
+<div class="line"><span class="keyword">auto</span> <a class="code hl_variable" href="group__generators_gaba2efbda8df6baaccd4e35343d70163f.html#gaba2efbda8df6baaccd4e35343d70163f">generate</a>()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keywordflow">return</span> <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1,2.3,4.56f};</div>
 <div class="line">}</div>
@@ -215,11 +215,11 @@ Example:</h2>
 <div class="line">  <span class="keywordtype">double</span> d;</div>
 <div class="line">  <span class="keywordtype">float</span>  f;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_function" href="group__record__related_ga9d6e39a733f56863dfa21cb1f07fdc3a.html#ga9d6e39a733f56863dfa21cb1f07fdc3a">kumi::tie</a>( i,d,f ) = <a class="code hl_function" href="group__generators_gaf6a234ed8630b3928724cf8fefbc9c6d.html#gaf6a234ed8630b3928724cf8fefbc9c6d">generate</a>();</div>
+<div class="line">  <a class="code hl_function" href="group__record__related_ga9d6e39a733f56863dfa21cb1f07fdc3a.html#ga9d6e39a733f56863dfa21cb1f07fdc3a">kumi::tie</a>( i,d,f ) = <a class="code hl_variable" href="group__generators_gaba2efbda8df6baaccd4e35343d70163f.html#gaba2efbda8df6baaccd4e35343d70163f">generate</a>();</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; i &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; d &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; f &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__generators_gaf6a234ed8630b3928724cf8fefbc9c6d_html_gaf6a234ed8630b3928724cf8fefbc9c6d"><div class="ttname"><a href="group__generators_gaf6a234ed8630b3928724cf8fefbc9c6d.html#gaf6a234ed8630b3928724cf8fefbc9c6d">kumi::generate</a></div><div class="ttdeci">constexpr auto generate(Function const &amp;f) noexcept</div><div class="ttdoc">Creates a kumi::tuple containing N applications of the f Callable.</div><div class="ttdef"><b>Definition</b> generate.hpp:74</div></div>
+<div class="ttc" id="agroup__generators_gaba2efbda8df6baaccd4e35343d70163f_html_gaba2efbda8df6baaccd4e35343d70163f"><div class="ttname"><a href="group__generators_gaba2efbda8df6baaccd4e35343d70163f.html#gaba2efbda8df6baaccd4e35343d70163f">kumi::generate</a></div><div class="ttdeci">constexpr generate_t&lt; N &gt; generate</div><div class="ttdoc">Callable object creating a kumi::tuple containing N applications of the f Callable.</div><div class="ttdef"><b>Definition</b> generate.hpp:99</div></div>
 <div class="ttc" id="agroup__record__related_ga9d6e39a733f56863dfa21cb1f07fdc3a_html_ga9d6e39a733f56863dfa21cb1f07fdc3a"><div class="ttname"><a href="group__record__related_ga9d6e39a733f56863dfa21cb1f07fdc3a.html#ga9d6e39a733f56863dfa21cb1f07fdc3a">kumi::tie</a></div><div class="ttdeci">constexpr auto tie(Ts &amp;... ts) -&gt; kumi::record&lt; kumi::field&lt; decltype(Fields), Ts &amp; &gt;... &gt; requires(sizeof...(Fields)==sizeof...(Ts))</div><div class="ttdoc">Creates a kumi::record of lvalue references to its arguments.</div><div class="ttdef"><b>Definition</b> record.hpp:453</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
 </div><!-- fragment --> 

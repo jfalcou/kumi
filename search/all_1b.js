@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['what_20s_20changed_0',['What s Changed',['../changelog.html#autotoc_md434',1,'What&apos;s Changed'],['../changelog.html#autotoc_md439',1,'What&apos;s Changed'],['../changelog.html#autotoc_md445',1,'What&apos;s Changed'],['../changelog.html#autotoc_md449',1,'What&apos;s Changed']]],
-  ['windows_1',['windows',['../group__generators_gadbca06109e5b36b0d59eab4a0fc9accf.html#gadbca06109e5b36b0d59eab4a0fc9accf',1,'kumi']]],
+  ['what_20s_20changed_0',['What s Changed',['../changelog.html#autotoc_md113',1,'What&apos;s Changed'],['../changelog.html#autotoc_md118',1,'What&apos;s Changed'],['../changelog.html#autotoc_md124',1,'What&apos;s Changed'],['../changelog.html#autotoc_md128',1,'What&apos;s Changed']]],
+  ['windows_1',['windows',['../structkumi_1_1result_1_1windows.html',1,'kumi::result::windows&lt; N, T &gt;'],['../group__generators_gade96292292ae11da69415a778ef45ad0.html#gade96292292ae11da69415a778ef45ad0',1,'kumi::windows']]],
   ['with_20cpm_2',['Setup with CPM',['../setup.html#setup-cpm',1,'']]]
 ];

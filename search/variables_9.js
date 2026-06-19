@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['selector_0',['selector',['../group__functional.html#ga9063c98870899aef10f0cc080e4fea51',1,'kumi::function']]],
-  ['splitter_1',['splitter',['../group__functional.html#gae1c486aeb2fb40acc8f8bbef10106759',1,'kumi::function']]]
+  ['none_0',['none',['../group__utility.html#gae57a2a957d7c5dc2c0b3d21e0b1a98c0',1,'kumi']]],
+  ['none_5fof_1',['none_of',['../group__queries_ga26e030c97733248f67dd2c8fbf527602.html#ga26e030c97733248f67dd2c8fbf527602',1,'kumi']]]
 ];

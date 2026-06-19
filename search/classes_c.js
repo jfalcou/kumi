@@ -1,13 +1,14 @@
 var searchData=
 [
-  ['scannable_0',['scannable',['../structkumi_1_1function_1_1scannable.html',1,'kumi::function']]],
-  ['select_5ft_1',['select_t',['../structkumi_1_1function_1_1select__t.html',1,'kumi::function']]],
-  ['size_2',['size',['../structkumi_1_1size.html',1,'kumi']]],
-  ['size_5for_3',['size_or',['../structkumi_1_1function_1_1size__or.html',1,'kumi::function']]],
-  ['split_5ft_4',['split_t',['../structkumi_1_1function_1_1split__t.html',1,'kumi::function']]],
-  ['stored_5felement_5',['stored_element',['../structkumi_1_1stored__element.html',1,'kumi']]],
-  ['stored_5fmember_6',['stored_member',['../structkumi_1_1stored__member.html',1,'kumi']]],
-  ['stored_5fmember_3c_200_2c_20t_20_3e_7',['stored_member&lt; 0, T &gt;',['../structkumi_1_1stored__member.html',1,'kumi']]],
-  ['stored_5fmember_3c_20kumi_3a_3asize_5fv_3c_20t_20_3e_20_2d_201_2c_20t_20_3e_8',['stored_member&lt; kumi::size_v&lt; T &gt; - 1, T &gt;',['../structkumi_1_1stored__member.html',1,'kumi']]],
-  ['str_9',['str',['../structkumi_1_1str.html',1,'kumi']]]
+  ['record_0',['record',['../structkumi_1_1record.html',1,'kumi']]],
+  ['record_3c_20us_2e_2e_2e_20_3e_1',['record&lt; Us... &gt;',['../structkumi_1_1record.html',1,'kumi']]],
+  ['reduce_5ft_2',['reduce_t',['../structkumi_1_1function_1_1reduce__t.html',1,'kumi::function']]],
+  ['reindex_3',['reindex',['../structkumi_1_1result_1_1reindex.html',1,'kumi::result']]],
+  ['reorder_4',['reorder',['../structkumi_1_1result_1_1reorder.html',1,'kumi::result']]],
+  ['reorder_5ffields_5',['reorder_fields',['../structkumi_1_1result_1_1reorder__fields.html',1,'kumi::result']]],
+  ['reverse_6',['reverse',['../structkumi_1_1result_1_1reverse.html',1,'kumi::result']]],
+  ['reverse_5ft_7',['reverse_t',['../structkumi_1_1function_1_1reverse__t.html',1,'kumi::function']]],
+  ['rotate_5fleft_8',['rotate_left',['../structkumi_1_1result_1_1rotate__left.html',1,'kumi::result']]],
+  ['rotate_5fright_9',['rotate_right',['../structkumi_1_1result_1_1rotate__right.html',1,'kumi::result']]],
+  ['rotate_5ft_10',['rotate_t',['../structkumi_1_1function_1_1rotate__t.html',1,'kumi::function']]]
 ];

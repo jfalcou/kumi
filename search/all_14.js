@@ -1,12 +1,12 @@
 var searchData=
 [
-  ['partition_0',['partition',['../group__generators_gaf7926aecf07b881c2005e39f34512851.html#gaf7926aecf07b881c2005e39f34512851',1,'kumi']]],
+  ['partition_0',['partition',['../structkumi_1_1result_1_1partition.html',1,'kumi::result::partition&lt; Pred, T &gt;'],['../group__generators_ga4643116b2dc0dfbd0d15fee408a9c18c.html#ga4643116b2dc0dfbd0d15fee408a9c18c',1,'kumi::partition']]],
   ['plus_1',['plus',['../group__functional.html#gab83f5dbd77ab8618b7925c9de6adb54d',1,'kumi::function']]],
-  ['pop_5fback_2',['pop_back',['../group__generators_gaa78a8b1a97ed4da70a1e772cafb55aef.html#gaa78a8b1a97ed4da70a1e772cafb55aef',1,'kumi']]],
-  ['pop_5ffront_3',['pop_front',['../group__generators_ga0067bdadcb60e0eeb405bd1021dd4f08.html#ga0067bdadcb60e0eeb405bd1021dd4f08',1,'kumi']]],
+  ['pop_5fback_2',['pop_back',['../structkumi_1_1result_1_1pop__back.html',1,'kumi::result']]],
+  ['pop_5ffront_3',['pop_front',['../structkumi_1_1result_1_1pop__front.html',1,'kumi::result::pop_front&lt; T &gt;'],['../group__generators_ga38d1ddeb5090405e79e9b7d898a85133.html#ga38d1ddeb5090405e79e9b7d898a85133',1,'kumi::pop_front']]],
   ['pre_20requisites_4',['Pre-requisites',['../setup.html#prerequisit',1,'']]],
   ['predicate_5',['predicate',['../group__utility_ga9c8c29e8a2f4f5e8a663200559fdc983.html#ga9c8c29e8a2f4f5e8a663200559fdc983',1,'kumi']]],
-  ['prod_6',['prod',['../group__reductions_gad87f59b6ce034ee52f7bf15e67cf7450.html#gad87f59b6ce034ee52f7bf15e67cf7450',1,'kumi::prod(T &amp;&amp;t, Value init)'],['../group__reductions_ga9c9775c7c76aebd9db20d0e44eec6034.html#ga9c9775c7c76aebd9db20d0e44eec6034',1,'kumi::prod(T &amp;&amp;t)']]],
+  ['prod_6',['prod',['../group__reductions_ga6c139ebafaebc0f7dbca2fd57aee943c.html#ga6c139ebafaebc0f7dbca2fd57aee943c',1,'kumi']]],
   ['product_20constructions_20the_20logic_20of_20and_7',['Product Constructions (The Logic of &quot;AND&quot;)',['../product.html#product_construction',1,'']]],
   ['product_20type_2027_8',['Product Type \\( (A \\times B) \\)',['../product.html#product_type',1,'']]],
   ['product_20type_20algorithms_9',['Product Type Algorithms',['../group__algorithm.html',1,'']]],
@@ -22,8 +22,8 @@ var searchData=
   ['programming_20languages_20considerations_19',['Programming Languages Considerations',['../product.html#tuple_programming',1,'']]],
   ['projection_20',['projection',['../conceptkumi_1_1concepts_1_1projection.html',1,'kumi::concepts']]],
   ['projection_5fmap_21',['projection_map',['../structkumi_1_1projection__map.html',1,'kumi::projection_map&lt; V &gt;'],['../conceptkumi_1_1concepts_1_1projection__map.html',1,'kumi::concepts'],['../group__utility_ga8b7f4e6ed1e7071d7c152c9870709fcb.html#ga8b7f4e6ed1e7071d7c152c9870709fcb',1,'kumi::projection_map()']]],
-  ['protocol_22',['Tuple Protocol',['../cpp_spec.html#autotoc_md461',1,'']]],
-  ['public_20release_23',['First autonomous public release.',['../changelog.html#autotoc_md454',1,'']]],
-  ['push_5fback_24',['push_back',['../group__generators_ga1caeff43037aae979c9ff1ca476091cb.html#ga1caeff43037aae979c9ff1ca476091cb',1,'kumi']]],
-  ['push_5ffront_25',['push_front',['../group__generators_ga45a00d0a03a72f6c0c67501e684ddbea.html#ga45a00d0a03a72f6c0c67501e684ddbea',1,'kumi']]]
+  ['protocol_22',['Tuple Protocol',['../cpp_spec.html#autotoc_md140',1,'']]],
+  ['public_20release_23',['First autonomous public release.',['../changelog.html#autotoc_md133',1,'']]],
+  ['push_5fback_24',['push_back',['../structkumi_1_1result_1_1push__back.html',1,'kumi::result']]],
+  ['push_5ffront_25',['push_front',['../structkumi_1_1result_1_1push__front.html',1,'kumi::result::push_front&lt; T, V &gt;'],['../group__generators_gad4bd53f162f63af0cbfbd68d8adb5d5c.html#gad4bd53f162f63af0cbfbd68d8adb5d5c',1,'kumi::push_front']]]
 ];

@@ -1,9 +1,14 @@
 var searchData=
 [
-  ['tile_5ft_0',['tile_t',['../structkumi_1_1function_1_1tile__t.html',1,'kumi::function']]],
-  ['tuple_1',['tuple',['../structkumi_1_1tuple.html',1,'kumi']]],
-  ['tuple_3c_20kumi_3a_3aelement_5ft_3c_20i_2c_20t_20_3e_2e_2e_2e_20_3e_2',['tuple&lt; kumi::element_t&lt; I, T &gt;... &gt;',['../structkumi_1_1tuple.html',1,'kumi']]],
-  ['tuple_3c_20typename_20meta_3c_20kumi_3a_3aelement_5ft_3c_20i_2c_20t_20_3e_20_3e_3a_3atype_2e_2e_2e_20_3e_3',['tuple&lt; typename Meta&lt; kumi::element_t&lt; I, T &gt; &gt;::type... &gt;',['../structkumi_1_1tuple.html',1,'kumi']]],
-  ['tuple_3c_20typename_20meta_3c_20t_20_3e_3a_3atype_20_3e_4',['tuple&lt; typename Meta&lt; T &gt;::type &gt;',['../structkumi_1_1tuple.html',1,'kumi']]],
-  ['tuple_3c_20us_2e_2e_2e_20_3e_5',['tuple&lt; Us... &gt;',['../structkumi_1_1tuple.html',1,'kumi']]]
+  ['scannable_0',['scannable',['../structkumi_1_1function_1_1scannable.html',1,'kumi::function']]],
+  ['select_5ft_1',['select_t',['../structkumi_1_1function_1_1select__t.html',1,'kumi::function']]],
+  ['size_2',['size',['../structkumi_1_1size.html',1,'kumi']]],
+  ['size_5for_3',['size_or',['../structkumi_1_1function_1_1size__or.html',1,'kumi::function']]],
+  ['split_4',['split',['../structkumi_1_1result_1_1split.html',1,'kumi::result']]],
+  ['split_5ft_5',['split_t',['../structkumi_1_1function_1_1split__t.html',1,'kumi::function']]],
+  ['stored_5felement_6',['stored_element',['../structkumi_1_1stored__element.html',1,'kumi']]],
+  ['stored_5fmember_7',['stored_member',['../structkumi_1_1stored__member.html',1,'kumi']]],
+  ['stored_5fmember_3c_200_2c_20t_20_3e_8',['stored_member&lt; 0, T &gt;',['../structkumi_1_1stored__member.html',1,'kumi']]],
+  ['stored_5fmember_3c_20kumi_3a_3asize_5fv_3c_20t_20_3e_20_2d_201_2c_20t_20_3e_9',['stored_member&lt; kumi::size_v&lt; T &gt; - 1, T &gt;',['../structkumi_1_1stored__member.html',1,'kumi']]],
+  ['str_10',['str',['../structkumi_1_1str.html',1,'kumi']]]
 ];

@@ -167,7 +167,7 @@ $(function(){initNavTree('group__transforms.html','',''); });
 <div class="header">
   <div class="summary">
 <a href="#groups">Topics</a> &#124;
-<a href="#func-members">Functions</a>  </div>
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">Product Type Transformations <div class="ingroups"><a class="el" href="group__algorithm.html">Product Type Algorithms</a></div></div></div>
 </div><!--header-->
 <div class="contents">
@@ -182,19 +182,16 @@ Topics</h2></td></tr>
 <tr class="memitem:tuple_5Ftransforms" id="r_tuple_5Ftransforms"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__tuple__transforms.html">Tuple Type Specific Transformations</a></td></tr>
 <tr class="memdesc:group__tuple__transforms"><td class="mdescLeft">&#160;</td><td class="mdescRight">Algorithms applying transformation to tuples. <br /></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ga9982fadb19cb52094d6165bca7f57f25" id="r_ga9982fadb19cb52094d6165bca7f57f25"><td class="memTemplParams" colspan="2">template&lt;typename Function, <a class="el" href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type</a> T&gt; </td></tr>
-<tr class="memitem:ga9982fadb19cb52094d6165bca7f57f25 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="group__transforms_ga9982fadb19cb52094d6165bca7f57f25.html#ga9982fadb19cb52094d6165bca7f57f25">kumi::apply</a> (Function &amp;&amp;f, T &amp;&amp;t) noexcept(kumi_implementation_defined)</td></tr>
-<tr class="memdesc:ga9982fadb19cb52094d6165bca7f57f25"><td class="mdescLeft">&#160;</td><td class="mdescRight">Invoke the Callable object f with the elements of the product type unrolled as arguments.  <br /></td></tr>
-<tr class="memitem:gae9e3fdeaf5297101b0d0da55a883c56a" id="r_gae9e3fdeaf5297101b0d0da55a883c56a"><td class="memTemplParams" colspan="2">template&lt;typename Function, <a class="el" href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type</a> T, kumi::concepts::product_type... Ts&gt; <br />
-requires (<a class="el" href="conceptkumi_1_1concepts_1_1compatible__product__types.html">kumi::concepts::compatible_product_types</a>&lt;T, Ts...&gt;)</td></tr>
-<tr class="memitem:gae9e3fdeaf5297101b0d0da55a883c56a template"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="group__transforms_gae9e3fdeaf5297101b0d0da55a883c56a.html#gae9e3fdeaf5297101b0d0da55a883c56a">kumi::for_each</a> (Function f, T &amp;&amp;t, Ts &amp;&amp;... ts)</td></tr>
-<tr class="memdesc:gae9e3fdeaf5297101b0d0da55a883c56a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the Callable object f on each element of a product type. <span class="tt">f</span> is applied on the values if the given product_type is a record type.  <br /></td></tr>
-<tr class="memitem:gaf11826c10bd2cd2c483cb09f07665dc4" id="r_gaf11826c10bd2cd2c483cb09f07665dc4"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type</a> T, typename Function, <a class="el" href="conceptkumi_1_1concepts_1_1sized__product__type.html">kumi::concepts::sized_product_type</a>&lt; kumi::size_v&lt; T &gt; &gt;... Ts&gt; <br />
-requires (<a class="el" href="conceptkumi_1_1concepts_1_1compatible__product__types.html">kumi::concepts::compatible_product_types</a>&lt;T, Ts...&gt;)</td></tr>
-<tr class="memitem:gaf11826c10bd2cd2c483cb09f07665dc4 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="group__transforms_gaf11826c10bd2cd2c483cb09f07665dc4.html#gaf11826c10bd2cd2c483cb09f07665dc4">kumi::map</a> (Function f, T &amp;&amp;t0, Ts &amp;&amp;... others)</td></tr>
-<tr class="memdesc:gaf11826c10bd2cd2c483cb09f07665dc4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Applies the Callable object <span class="tt">f</span> on each product types' elements.  <br /></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ga4c69a49971100b7bc9c7effd7c43f191" id="r_ga4c69a49971100b7bc9c7effd7c43f191"><td class="memItemLeft">constexpr apply_t&#160;</td><td class="memItemRight"><a class="el" href="group__transforms_ga4c69a49971100b7bc9c7effd7c43f191.html#ga4c69a49971100b7bc9c7effd7c43f191">kumi::apply</a> {}</td></tr>
+<tr class="memdesc:ga4c69a49971100b7bc9c7effd7c43f191"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object invoking the callable object f with the elements of the product type unrolled as arguments.  <br /></td></tr>
+<tr class="memitem:ga992364930a4a5a5b64b26730773536ab" id="r_ga992364930a4a5a5b64b26730773536ab"><td class="memItemLeft">constexpr apply_field_t&#160;</td><td class="memItemRight"><a class="el" href="group__transforms_ga992364930a4a5a5b64b26730773536ab.html#ga992364930a4a5a5b64b26730773536ab">kumi::apply_field</a> {}</td></tr>
+<tr class="memdesc:ga992364930a4a5a5b64b26730773536ab"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object invoking the callable object f with the elements of the product type unrolled as arguments.  <br /></td></tr>
+<tr class="memitem:ga58c4bb5e62083b4b37396d39c6446164" id="r_ga58c4bb5e62083b4b37396d39c6446164"><td class="memItemLeft">constexpr for_each_t&#160;</td><td class="memItemRight"><a class="el" href="group__transforms_ga58c4bb5e62083b4b37396d39c6446164.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a> {}</td></tr>
+<tr class="memdesc:ga58c4bb5e62083b4b37396d39c6446164"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object applying the Callable object f on each element of a product type.  <br /></td></tr>
+<tr class="memitem:gaeaba737291ba1085d77272eae38a016e" id="r_gaeaba737291ba1085d77272eae38a016e"><td class="memItemLeft">constexpr map_t&#160;</td><td class="memItemRight"><a class="el" href="group__transforms_gaeaba737291ba1085d77272eae38a016e.html#gaeaba737291ba1085d77272eae38a016e">kumi::map</a> {}</td></tr>
+<tr class="memdesc:gaeaba737291ba1085d77272eae38a016e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object applying the Callable object <span class="tt">f</span> on each product types' elements.  <br /></td></tr>
 </table>
 </div><!-- contents -->
 </div><!-- doc-content -->
