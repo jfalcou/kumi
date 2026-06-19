@@ -137,6 +137,11 @@
     <templarg>typename... Ts</templarg>
   </compound>
   <compound kind="struct">
+    <name>kumi::result::compress</name>
+    <filename>structkumi_1_1result_1_1compress.html</filename>
+    <templarg>kumi::concepts::product_type T</templarg>
+  </compound>
+  <compound kind="struct">
     <name>kumi::container_size</name>
     <filename>structkumi_1_1container__size.html</filename>
     <templarg>typename T</templarg>
@@ -1935,6 +1940,13 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
+      <type>constexpr compress_t</type>
+      <name>compress</name>
+      <anchorfile>group__generators_gaa9d6196838118af0a837160d8bbf532c.html</anchorfile>
+      <anchor>gaa9d6196838118af0a837160d8bbf532c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
       <type>constexpr contains_t</type>
       <name>contains</name>
       <anchorfile>group__queries_ga3a9b6e2d0fbdace9e57b3846d24a3b57.html</anchorfile>
@@ -3196,6 +3208,13 @@
       <name>kumi::chunks</name>
       <anchorfile>group__generators_gaf4b0bcda72790c2ac55519adaf89456e.html</anchorfile>
       <anchor>gaf4b0bcda72790c2ac55519adaf89456e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr compress_t</type>
+      <name>kumi::compress</name>
+      <anchorfile>group__generators_gaa9d6196838118af0a837160d8bbf532c.html</anchorfile>
+      <anchor>gaa9d6196838118af0a837160d8bbf532c</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">

@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="KUMI - The C++20 Compact Tuple Tools" />
 <meta name="twitter:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
 <meta name="twitter:image" content="https://jfalcou.github.io/kumi/card.png" />
-<title>KUMI: kumi::flatten_all</title>
+<title>KUMI: kumi::compress</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -139,7 +139,7 @@ $(function() { codefold.init(); });
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('group__generators_gaa780fd338fb61c86f226ae05adfaf426.html','',''); });
+$(function(){initNavTree('group__generators_gaa9d6196838118af0a837160d8bbf532c.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -165,8 +165,8 @@ $(function(){initNavTree('group__generators_gaa780fd338fb61c86f226ae05adfaf426.h
 </div>
 
 <div class="contents">
-<a id="gaa780fd338fb61c86f226ae05adfaf426" name="gaa780fd338fb61c86f226ae05adfaf426"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaa780fd338fb61c86f226ae05adfaf426">&#9670;&#160;</a></span>flatten_all</h2>
+<a id="gaa9d6196838118af0a837160d8bbf532c" name="gaa9d6196838118af0a837160d8bbf532c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaa9d6196838118af0a837160d8bbf532c">&#9670;&#160;</a></span>compress</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -175,7 +175,7 @@ $(function(){initNavTree('group__generators_gaa780fd338fb61c86f226ae05adfaf426.h
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">flatten_all_t kumi::flatten_all {}</td>
+          <td class="memname">compress_t kumi::compress {}</td>
         </tr>
       </table>
   </td>
@@ -185,42 +185,32 @@ $(function(){initNavTree('group__generators_gaa780fd338fb61c86f226ae05adfaf426.h
 </table>
 </div><div class="memdoc">
 
-<p>Callable object converting recursively a product type of product types into a product type of all elements. </p>
-<p>Recursively converts a product type of product types <span class="tt">t</span> into a product type of all elements of said product types.</p>
-<p>If the Callable object f is provided, non-product type elements are processed by <span class="tt">f</span> before being inserted.</p>
-<p>On record types, the names of the outer record are concatenated to the inner ones ultimately constructing names such as "outer.inner". If the input is a product type containing record types or vice versa only the inner types matching the outer semantic will be flattened. Thus a record inside a tuple will not be flattened.</p>
+<p>Callable object converting a product type of product type into a single product type recursively, or returns the input. </p>
+<p>This construction naturally arises from the definition of product types, a product type of the form T(T(x...)) is strictly equivalent to T(x...) as long as the T is the same type.</p>
+<p>On record types, the names of the outer record are concatenated to the inner ones ultimately constructing names such as "outer.inner". If the input is a product type containing record types or vice versa only the inner types matching the outer semantic will be compressed. Thus a record inside a tuple will not be compressed.</p>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/flatten.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, <span class="keyword">typename</span> Function&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__generators_ga49acccc42ec8af7b96b63e8f38796df2.html#ga49acccc42ec8af7b96b63e8f38796df2">flatten</a>(T &amp;&amp; t, Function &amp;&amp; f) <span class="keyword">noexcept</span>;   <span class="comment">// 1</span></div>
-<div class="ttc" id="agroup__generators_ga49acccc42ec8af7b96b63e8f38796df2_html_ga49acccc42ec8af7b96b63e8f38796df2"><div class="ttname"><a href="group__generators_ga49acccc42ec8af7b96b63e8f38796df2.html#ga49acccc42ec8af7b96b63e8f38796df2">kumi::flatten</a></div><div class="ttdeci">constexpr flatten_t flatten</div><div class="ttdoc">Callable object converting a product type of product types into a product type of all elements.</div><div class="ttdef"><b>Definition</b> flatten.hpp:249</div></div>
-</div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__generators_ga49acccc42ec8af7b96b63e8f38796df2.html#ga49acccc42ec8af7b96b63e8f38796df2">flatten</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;                  <span class="comment">// 2</span></div>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaa9d6196838118af0a837160d8bbf532c">compress</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>
+<div class="ttc" id="agroup__generators_gaa9d6196838118af0a837160d8bbf532c_html_gaa9d6196838118af0a837160d8bbf532c"><div class="ttname"><a href="#gaa9d6196838118af0a837160d8bbf532c">kumi::compress</a></div><div class="ttdeci">constexpr compress_t compress</div><div class="ttdoc">Callable object converting a product type of product type into a single product type recursively,...</div><div class="ttdef"><b>Definition</b> flatten.hpp:197</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: Product type to process</li>
-<li><span class="tt">f</span>: Optional Callable object to apply when a sub-tuple is flattened</li>
 </ul>
 <h3 class="groupheader">Return value </h3>
 <ul>
-<li>A product type composed of all elements of <span class="tt">t</span> flattened recursively</li>
+<li>The resulting value of the application of <span class="tt">T0(...(Tn(values))) =&gt; T(values)</span></li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, <span class="keyword">typename</span> Func = <span class="keywordtype">void</span>&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1flatten__all.html">flatten_all</a></div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1compress.html">compress</a></div>
 <div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaa780fd338fb61c86f226ae05adfaf426">kumi::flatten_all</a>(std::declval&lt;T&gt;(), std::declval&lt;Func&gt;()));</div>
+<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaa9d6196838118af0a837160d8bbf532c">kumi::compress</a>(std::declval&lt;T&gt;()));</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1flatten__all.html">flatten_all</a>&lt;T&gt;</div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaa780fd338fb61c86f226ae05adfaf426">kumi::flatten_all</a>(std::declval&lt;T&gt;()));</div>
-<div class="line">    };</div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>compress_t = <span class="keyword">typename</span> kumi::result::compress&lt;T&gt;::type;</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, <span class="keyword">typename</span> Func = <span class="keywordtype">void</span>&gt;</div>
-<div class="line">    <span class="keyword">using </span>flatten_all_t = <span class="keyword">typename</span> kumi::result::flatten_all&lt;T, Func&gt;::type;</div>
-<div class="line"> </div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gaa780fd338fb61c86f226ae05adfaf426" title="Callable object converting recursively a product type of product types into a product type of all ele...">kumi::flatten_all</a></p>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gaa9d6196838118af0a837160d8bbf532c" title="Callable object converting a product type of product type into a single product type recursively,...">kumi::compress</a></p>
 <h2 class="groupheader">Examples </h2>
 <h3 class="groupheader">Tuple </h3>
 <div class="fragment"><div class="line"></div>
@@ -229,19 +219,15 @@ $(function(){initNavTree('group__generators_gaa780fd338fb61c86f226ae05adfaf426.h
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> nbrs      = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1,2ULL,3};</div>
-<div class="line">  <span class="keyword">auto</span> more_nbrs = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="keywordtype">short</span>{0},nbrs,4.};</div>
-<div class="line">  <span class="keyword">auto</span> ltrs      = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="charliteral">&#39;a&#39;</span>,<span class="charliteral">&#39;b&#39;</span>,<span class="charliteral">&#39;c&#39;</span>};</div>
+<div class="line">  <span class="keyword">auto</span> t      = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1,2,3};</div>
+<div class="line">  <span class="keyword">auto</span> nest_1 = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{t};</div>
+<div class="line">  <span class="keyword">auto</span> nest_2 = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{nest_1};</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#gaa780fd338fb61c86f226ae05adfaf426">kumi::flatten_all</a>( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{3.5,nbrs,<span class="charliteral">&#39;z&#39;</span>,more_nbrs,5.35f,ltrs} );</div>
-<div class="line">  std::cout &lt;&lt; r &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> t2 = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{nest_1, nest_2};</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> sz = <a class="code hl_variable" href="#gaa780fd338fb61c86f226ae05adfaf426">kumi::flatten_all</a> ( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{3.5,nbrs,<span class="charliteral">&#39;z&#39;</span>,more_nbrs,5.35f,ltrs}</div>
-<div class="line">                              , [](<span class="keyword">auto</span> e) { <span class="keywordflow">return</span> <span class="keyword">sizeof</span>(e); }</div>
-<div class="line">                              );</div>
-<div class="line">  std::cout &lt;&lt; sz &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#gaa9d6196838118af0a837160d8bbf532c">kumi::compress</a>( nest_2 ) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#gaa9d6196838118af0a837160d8bbf532c">kumi::compress</a>( t2 ) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__generators_gaa780fd338fb61c86f226ae05adfaf426_html_gaa780fd338fb61c86f226ae05adfaf426"><div class="ttname"><a href="#gaa780fd338fb61c86f226ae05adfaf426">kumi::flatten_all</a></div><div class="ttdeci">constexpr flatten_all_t flatten_all</div><div class="ttdoc">Callable object converting recursively a product type of product types into a product type of all ele...</div><div class="ttdef"><b>Definition</b> flatten.hpp:313</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
 </div><!-- fragment --><h3 class="groupheader">Record </h3>
 <div class="fragment"><div class="line"></div>
@@ -251,19 +237,15 @@ $(function(){initNavTree('group__generators_gaa780fd338fb61c86f226ae05adfaf426.h
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
-<div class="line">  <span class="keyword">auto</span> nbrs      = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;f&quot;</span>_id = 1,<span class="stringliteral">&quot;s&quot;</span>_id = 2ULL,<span class="stringliteral">&quot;t&quot;</span>_id = 3};</div>
-<div class="line">  <span class="keyword">auto</span> more_nbrs = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;z&quot;</span>_id = <span class="keywordtype">short</span>{0},<span class="stringliteral">&quot;n&quot;</span>_id = nbrs,<span class="stringliteral">&quot;l&quot;</span>_id = 4.};</div>
-<div class="line">  <span class="keyword">auto</span> ltrs      = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;alpha&quot;</span>_id = <span class="charliteral">&#39;a&#39;</span>,<span class="stringliteral">&quot;beta&quot;</span>_id = <span class="charliteral">&#39;b&#39;</span>, <span class="stringliteral">&quot;gamma&quot;</span>_id = <span class="charliteral">&#39;c&#39;</span>};</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#gaa780fd338fb61c86f226ae05adfaf426">kumi::flatten_all</a>( <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;a&quot;</span>_id = 3.5,<span class="stringliteral">&quot;b&quot;</span>_id = nbrs,<span class="stringliteral">&quot;c&quot;</span>_id = <span class="charliteral">&#39;z&#39;</span></div>
-<div class="line">                                          ,<span class="stringliteral">&quot;d&quot;</span>_id = more_nbrs,<span class="stringliteral">&quot;e&quot;</span>_id = 5.35f,<span class="stringliteral">&quot;f&quot;</span>_id = ltrs} );</div>
-<div class="line">  std::cout &lt;&lt; r &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> r      = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;a&quot;</span>_id = 1,<span class="stringliteral">&quot;b&quot;</span>_id = 2, <span class="stringliteral">&quot;c&quot;</span>_id = 3};</div>
+<div class="line">  <span class="keyword">auto</span> nest_1 = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;e&quot;</span>_id = r};</div>
+<div class="line">  <span class="keyword">auto</span> nest_2 = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;f&quot;</span>_id = nest_1};</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> sz = <a class="code hl_variable" href="#gaa780fd338fb61c86f226ae05adfaf426">kumi::flatten_all</a> (<a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;a&quot;</span>_id = 3.5,<span class="stringliteral">&quot;b&quot;</span>_id = nbrs,<span class="stringliteral">&quot;c&quot;</span>_id = <span class="charliteral">&#39;z&#39;</span></div>
-<div class="line">                                          ,<span class="stringliteral">&quot;d&quot;</span>_id = more_nbrs,<span class="stringliteral">&quot;e&quot;</span>_id = 5.35f,<span class="stringliteral">&quot;f&quot;</span>_id = ltrs}</div>
-<div class="line">                              , [](<span class="keyword">auto</span> e) { <span class="keywordflow">return</span> <span class="keyword">sizeof</span>(e); }</div>
-<div class="line">                              );</div>
-<div class="line">  std::cout &lt;&lt; sz &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> r2 = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;g&quot;</span>_id = nest_1, <span class="stringliteral">&quot;h&quot;</span>_id = nest_2};</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#gaa9d6196838118af0a837160d8bbf532c">kumi::compress</a>( nest_2 ) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#gaa9d6196838118af0a837160d8bbf532c">kumi::compress</a>( r2 ) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
 </div><!-- fragment --> 
