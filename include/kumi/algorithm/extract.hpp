@@ -11,25 +11,45 @@ namespace kumi
 {
   struct extract_t
   {
-    template<std::size_t I0, std::size_t I1, kumi::concepts::product_type T>
-    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<I0> i0, kumi::index_t<I1>) const noexcept
+    template<kumi::concepts::product_type T, std::size_t I0, std::size_t I1>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<I0>, kumi::index_t<I1>) const noexcept
     {
       static_assert((I0 <= kumi::size_v<T>) && (I1 <= kumi::size_v<T>), "[KUMI] - Invalid index");
-      return kumi::function::builder(KUMI_FWD(t), kumi::function::shifter(std::integral_constant<std::size_t, i0>{},
+      return kumi::function::builder(KUMI_FWD(t), kumi::function::shifter(std::integral_constant<std::size_t, I0>{},
                                                                           std::make_index_sequence<I1 - I0>{}));
     }
 
-    template<std::size_t I0, kumi::concepts::product_type T>
-    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<I0> i0) const noexcept
+    template<kumi::concepts::product_type T, std::size_t I>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<I> i) const noexcept
     {
-      static_assert(I0 <= kumi::size_v<T>, "[KUMI] - Invalid index");
-      return (*this)(KUMI_FWD(t), i0, kumi::index<size_v<T>>);
+      static_assert(I <= kumi::size_v<T>, "[KUMI] - Invalid index");
+      return (*this)(KUMI_FWD(t), i, kumi::index<size_v<T>>);
+    }
+  };
+
+  struct remove_t
+  {
+    template<kumi::concepts::product_type T, std::size_t I0, std::size_t I1>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<I0>, kumi::index_t<I1>) const noexcept
+    {
+      static_assert((I0 <= kumi::size_v<T>) && (I1 <= kumi::size_v<T>), "[KUMI] - Invalid index");
+      return kumi::function::builder(
+        KUMI_FWD(t),
+        kumi::function::extractor(std::integral_constant<std::size_t, I0>{}, std::integral_constant<std::size_t, I1>{},
+                                  std::make_index_sequence<kumi::size_v<T> - (I1 - I0)>{}));
+    }
+
+    template<kumi::concepts::product_type T, std::size_t I>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<I> i) const noexcept
+    {
+      static_assert(I <= kumi::size_v<T>, "[KUMI] - Invalid index");
+      return (*this)(KUMI_FWD(t), i, kumi::index<kumi::size_v<T>>);
     }
   };
 
   struct split_t
   {
-    template<std::size_t I0, kumi::concepts::product_type T>
+    template<kumi::concepts::product_type T, std::size_t I0>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, [[maybe_unused]] kumi::index_t<I0> i0) const noexcept
     {
       static_assert(I0 <= kumi::size_v<T>, "[KUMI] - Invalid index");
@@ -107,6 +127,69 @@ namespace kumi
   /**
     @ingroup generators
 
+    @var remove
+    @brief Callable object removing a sub product type from a product type
+
+    On record types, this function operates on elements as if they were ordered. The considered order is the order
+    of declaration.
+
+    @note This function will issue a compile time error if `I0` and `I1` do not verify that
+          `0 <= I0 <= I1 <= size_v<T>`.
+
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier noexcept
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/extract.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T, std::size_t I0, std::size_t I1>
+      constexpr auto remove(T && t, kumi::index_t<I0>, kumi::index_t<I1>) noexcept;  // 1
+    @endcode
+
+    @code
+      template<product_type T, std::size_t I0>
+      constexpr auto remove(T && t, kumi::index_t<I0>) noexcept;                      // 2
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to remove elements from
+      - `i0`: Compile-time index of the first element to extract
+      - `i1`: Compile-time index past the last element to extract
+
+    @subgroupheader{Return value}
+
+      - 1. A new product type containing the elements of t without the range of elements from I0 to I1.
+      - 2. A new product type containing the elements of t without the range of elements from I0 to `size_v<T>`.
+
+    @groupheader{Helper type}
+
+    @snippet include/kumi/algorithm/extract.hpp remove_t
+
+    Computes the return type of a call to kumi::remove
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/remove.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/remove.cpp}
+  **/
+  //====================================================================================================================
+  inline constexpr remove_t remove{};
+
+  //====================================================================================================================
+  /**
+    @ingroup generators
+
     @var split
     @brief Callable object splitting a product type into two
 
@@ -176,6 +259,22 @@ namespace kumi
     using extract_t = typename kumi::result::extract<T, I0, I1>::type;
 
     //! [extract_t]
+
+    //! [remove_t]
+    template<kumi::concepts::product_type T, std::size_t I0, std::size_t I1 = std::size_t(-1)> struct remove
+    {
+      using type = decltype(kumi::remove(std::declval<T>(), kumi::index_t<I0>{}, kumi::index_t<I1>{}));
+    };
+
+    template<kumi::concepts::product_type T, std::size_t I0> struct remove<T, I0>
+    {
+      using type = decltype(kumi::remove(std::declval<T>(), kumi::index_t<I0>{}));
+    };
+
+    template<kumi::concepts::product_type T, std::size_t I0, std::size_t I1 = std::size_t(-1)>
+    using remove_t = typename kumi::result::remove<T, I0, I1>::type;
+
+    //! [remove_t]
 
     //! [split_t]
     template<kumi::concepts::product_type T, std::size_t I0> struct split

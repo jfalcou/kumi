@@ -10,7 +10,7 @@
 #include <kumi/algorithm/extract.hpp>
 #include <tts/tts.hpp>
 
-TTS_CASE("Check record::extract behavior")
+TTS_CASE("Check kumi::extract behavior on records")
 {
   using namespace kumi::literals;
 
@@ -38,7 +38,7 @@ TTS_CASE("Check record::extract behavior")
   TTS_EQUAL((kumi::extract(t, 4_c, 4_c)), kumi::record{});
 };
 
-TTS_CASE("Check record::extract constexpr behavior")
+TTS_CASE("Check kumi::extract constexpr behavior on records")
 {
   using namespace kumi::literals;
 
