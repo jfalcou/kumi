@@ -210,6 +210,10 @@
     <templarg>std::size_t I0</templarg>
     <templarg>std::size_t I1</templarg>
   </compound>
+  <compound kind="struct">
+    <name>kumi::function::extract_t</name>
+    <filename>structkumi_1_1function_1_1extract__t.html</filename>
+  </compound>
   <compound kind="class">
     <name>kumi::field</name>
     <filename>structkumi_1_1field.html</filename>
@@ -1028,6 +1032,13 @@
     <filename>structkumi_1_1result_1_1reindex.html</filename>
     <templarg>kumi::concepts::product_type T</templarg>
     <templarg>kumi::concepts::projection_map auto Indexes</templarg>
+  </compound>
+  <compound kind="struct">
+    <name>kumi::result::remove</name>
+    <filename>structkumi_1_1result_1_1remove.html</filename>
+    <templarg>kumi::concepts::product_type T</templarg>
+    <templarg>std::size_t I0</templarg>
+    <templarg>std::size_t I1</templarg>
   </compound>
   <compound kind="struct">
     <name>kumi::result::reorder</name>
@@ -2241,6 +2252,13 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
+      <type>constexpr remove_t</type>
+      <name>remove</name>
+      <anchorfile>group__generators_ga0f52ba0b24ce54052784df91c54ac233.html</anchorfile>
+      <anchor>ga0f52ba0b24ce54052784df91c54ac233</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
       <type>constexpr reorder_t&lt; I... &gt;</type>
       <name>reorder</name>
       <anchorfile>group__generators_ga32af967d7f453426ccd564d3a0b6c689.html</anchorfile>
@@ -2877,6 +2895,7 @@
     <class kind="struct">kumi::function::cartesian_product_t</class>
     <class kind="struct">kumi::function::cat_t</class>
     <class kind="struct">kumi::function::element_or</class>
+    <class kind="struct">kumi::function::extract_t</class>
     <class kind="class">kumi::function::foldable</class>
     <class kind="class">kumi::function::numeric_add</class>
     <class kind="class">kumi::function::numeric_prod</class>
@@ -2958,6 +2977,13 @@
       <name>kumi::function::concatenater</name>
       <anchorfile>group__functional.html</anchorfile>
       <anchor>gabb6c41b1514ec88f14d17fb519a7508f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr kumi::function::extract_t</type>
+      <name>kumi::function::extractor</name>
+      <anchorfile>group__functional.html</anchorfile>
+      <anchor>gadfd46f17b9d9a6744ca1284383464baf</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -3306,6 +3332,13 @@
       <name>kumi::reindex</name>
       <anchorfile>group__generators_ga3594f15dbfba2f6fda0afc8d1542c449.html</anchorfile>
       <anchor>ga3594f15dbfba2f6fda0afc8d1542c449</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr remove_t</type>
+      <name>kumi::remove</name>
+      <anchorfile>group__generators_ga0f52ba0b24ce54052784df91c54ac233.html</anchorfile>
+      <anchor>ga0f52ba0b24ce54052784df91c54ac233</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['s_20changed_0',['s Changed',['../changelog.html#autotoc_md113',1,'What&apos;s Changed'],['../changelog.html#autotoc_md118',1,'What&apos;s Changed'],['../changelog.html#autotoc_md124',1,'What&apos;s Changed'],['../changelog.html#autotoc_md128',1,'What&apos;s Changed']]],
+  ['s_20changed_0',['s Changed',['../changelog.html#autotoc_md114',1,'What&apos;s Changed'],['../changelog.html#autotoc_md119',1,'What&apos;s Changed'],['../changelog.html#autotoc_md125',1,'What&apos;s Changed'],['../changelog.html#autotoc_md129',1,'What&apos;s Changed']]],
   ['scannable_1',['scannable',['../structkumi_1_1function_1_1scannable.html',1,'kumi::function::scannable&lt; F, V &gt;'],['../structkumi_1_1function_1_1scannable_ac3570f9286b470ae88de5a142941751a.html#ac3570f9286b470ae88de5a142941751a',1,'kumi::function::scannable::scannable()'],['../structkumi_1_1function_1_1scannable_ac3570f9286b470ae88de5a142941751a.html#ac3570f9286b470ae88de5a142941751a',1,'kumi::function::scannable(F &amp;&amp;f, T &amp;&amp;t) -&gt; scannable&lt; F, std::unwrap_ref_decay_t&lt; T &gt; &gt;']]],
   ['select_5ft_2',['select_t',['../structkumi_1_1function_1_1select__t.html',1,'kumi::function']]],
   ['selector_3',['selector',['../group__functional.html#ga9063c98870899aef10f0cc080e4fea51',1,'kumi::function']]],
@@ -24,7 +24,7 @@ var searchData=
   ['stored_5fmember_3c_200_2c_20t_20_3e_21',['stored_member&lt; 0, T &gt;',['../structkumi_1_1stored__member.html',1,'kumi']]],
   ['stored_5fmember_3c_20kumi_3a_3asize_5fv_3c_20t_20_3e_20_2d_201_2c_20t_20_3e_22',['stored_member&lt; kumi::size_v&lt; T &gt; - 1, T &gt;',['../structkumi_1_1stored__member.html',1,'kumi']]],
   ['str_23',['str',['../structkumi_1_1str.html',1,'kumi']]],
-  ['structural_20type_24',['Structural type',['../cpp_spec.html#autotoc_md138',1,'']]],
+  ['structural_20type_24',['Structural type',['../cpp_spec.html#autotoc_md139',1,'']]],
   ['sum_25',['sum',['../group__reductions_ga3e8b585399de360c3ab55efc2fa0ed8c.html#ga3e8b585399de360c3ab55efc2fa0ed8c',1,'kumi']]],
-  ['summary_20table_26',['Summary Table',['../nomenclature.html#autotoc_md162',1,'']]]
+  ['summary_20table_26',['Summary Table',['../nomenclature.html#autotoc_md163',1,'']]]
 ];

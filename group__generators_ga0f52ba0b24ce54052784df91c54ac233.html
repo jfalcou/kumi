@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="KUMI - The C++20 Compact Tuple Tools" />
 <meta name="twitter:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
 <meta name="twitter:image" content="https://jfalcou.github.io/kumi/card.png" />
-<title>KUMI: kumi::tuple::values_of</title>
+<title>KUMI: kumi::remove</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -139,7 +139,7 @@ $(function() { codefold.init(); });
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('structkumi_1_1tuple_ade5f616b3115a74bd4930f70f96ca199.html','',''); });
+$(function(){initNavTree('group__generators_ga0f52ba0b24ce54052784df91c54ac233.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -165,42 +165,66 @@ $(function(){initNavTree('structkumi_1_1tuple_ade5f616b3115a74bd4930f70f96ca199.
 </div>
 
 <div class="contents">
-<a id="ade5f616b3115a74bd4930f70f96ca199" name="ade5f616b3115a74bd4930f70f96ca199"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ade5f616b3115a74bd4930f70f96ca199">&#9670;&#160;</a></span>values_of()</h2>
+<a id="ga0f52ba0b24ce54052784df91c54ac233" name="ga0f52ba0b24ce54052784df91c54ac233"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0f52ba0b24ce54052784df91c54ac233">&#9670;&#160;</a></span>remove</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type</a> T&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto values_of </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
-          <td></td>
+          <td class="memname">remove_t kumi::remove {}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel related">related</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Extracts the values of the fields of a kumi::product_type. </p>
-<p>record </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">t</td><td>the product_type from which to extract names. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A tuple of references to the values of a kumi::product_type.</dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md51"></a>
-Example:</h2>
+<p>Callable object removing a sub product type from a product type. </p>
+<p>On record types, this function operates on elements as if they were ordered. The considered order is the order of declaration.</p>
+<dl class="section note"><dt>Note</dt><dd>This function will issue a compile time error if <span class="tt">I0</span> and <span class="tt">I1</span> do not verify that <span class="tt">0 &lt;= I0 &lt;= I1 &lt;= size_v&lt;T&gt;</span>.</dd></dl>
+<h2 class="groupheader">Header file </h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/extract.hpp&gt;</span></div>
+</div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, std::<span class="keywordtype">size_t</span> I0, std::<span class="keywordtype">size_t</span> I1&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga0f52ba0b24ce54052784df91c54ac233">remove</a>(T &amp;&amp; t, <a class="code hl_class" href="structkumi_1_1index__t.html">kumi::index_t&lt;I0&gt;</a>, <a class="code hl_class" href="structkumi_1_1index__t.html">kumi::index_t&lt;I1&gt;</a>) <span class="keyword">noexcept</span>;  <span class="comment">// 1</span></div>
+<div class="ttc" id="agroup__generators_ga0f52ba0b24ce54052784df91c54ac233_html_ga0f52ba0b24ce54052784df91c54ac233"><div class="ttname"><a href="#ga0f52ba0b24ce54052784df91c54ac233">kumi::remove</a></div><div class="ttdeci">constexpr remove_t remove</div><div class="ttdoc">Callable object removing a sub product type from a product type.</div><div class="ttdef"><b>Definition</b> extract.hpp:187</div></div>
+<div class="ttc" id="astructkumi_1_1index__t_html"><div class="ttname"><a href="structkumi_1_1index__t.html">kumi::index_t</a></div><div class="ttdoc">Integral constant type.</div><div class="ttdef"><b>Definition</b> ct_helpers.hpp:32</div></div>
+</div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, std::<span class="keywordtype">size_t</span> I0&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga0f52ba0b24ce54052784df91c54ac233">remove</a>(T &amp;&amp; t, <a class="code hl_class" href="structkumi_1_1index__t.html">kumi::index_t&lt;I0&gt;</a>) <span class="keyword">noexcept</span>;                      <span class="comment">// 2</span></div>
+</div><!-- fragment --><h3 class="groupheader">Parameters </h3>
+<ul>
+<li><span class="tt">t</span>: Product Type to remove elements from</li>
+<li><span class="tt">i0</span>: Compile-time index of the first element to extract</li>
+<li><span class="tt">i1</span>: Compile-time index past the last element to extract</li>
+</ul>
+<h3 class="groupheader">Return value </h3>
+<ul>
+<li>1. A new product type containing the elements of t without the range of elements from I0 to I1.</li>
+<li>2. A new product type containing the elements of t without the range of elements from I0 to <span class="tt">size_v&lt;T&gt;</span>.</li>
+</ul>
+<h2 class="groupheader">Helper type </h2>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::size_t I0, std::size_t I1 = std::size_t(-1)&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1remove.html">remove</a></div>
+<div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga0f52ba0b24ce54052784df91c54ac233">kumi::remove</a>(std::declval&lt;T&gt;(), kumi::index_t&lt;I0&gt;{}, kumi::index_t&lt;I1&gt;{}));</div>
+<div class="line">    };</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::<span class="keywordtype">size_t</span> I0&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1remove.html">remove</a>&lt;T, I0&gt;</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga0f52ba0b24ce54052784df91c54ac233">kumi::remove</a>(std::declval&lt;T&gt;(), kumi::index_t&lt;I0&gt;{}));</div>
+<div class="line">    };</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::size_t I0, std::size_t I1 = std::size_t(-1)&gt;</div>
+<div class="line">    <span class="keyword">using </span>remove_t = <span class="keyword">typename</span> kumi::result::remove&lt;T, I0, I1&gt;::type;</div>
+<div class="line"> </div>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga0f52ba0b24ce54052784df91c54ac233" title="Callable object removing a sub product type from a product type.">kumi::remove</a></p>
+<h2 class="groupheader">Examples </h2>
+<h3 class="groupheader">Tuple </h3>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -209,15 +233,35 @@ Example:</h2>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> t = { <span class="stringliteral">&quot;x&quot;</span>_id = 1, 2.3, 4.5f, <span class="stringliteral">&quot;z&quot;</span>_id = <span class="charliteral">&#39;@&#39;</span> };</div>
-<div class="line">  <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> r = {<span class="stringliteral">&quot;x&quot;</span>_id = 1, <span class="stringliteral">&quot;y&quot;</span>_id = 2.f, <span class="stringliteral">&quot;z&quot;</span>_id = <span class="charliteral">&#39;#&#39;</span>, <span class="stringliteral">&quot;t&quot;</span>_id = 12};</div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> a = { 1, 2.3, 4.5f,<span class="charliteral">&#39;6&#39;</span>,<span class="stringliteral">&quot;7&quot;</span>, <span class="keywordtype">short</span>{89} };</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#ade5f616b3115a74bd4930f70f96ca199">kumi::values_of</a>(t) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="#ade5f616b3115a74bd4930f70f96ca199">kumi::values_of</a>(r) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> last = <a class="code hl_variable" href="#ga0f52ba0b24ce54052784df91c54ac233">kumi::remove</a>(a,0_c,1_c);</div>
+<div class="line">  <span class="keyword">auto</span> mid  = <a class="code hl_variable" href="#ga0f52ba0b24ce54052784df91c54ac233">kumi::remove</a>(a,1_c,3_c);</div>
+<div class="line">  <span class="keyword">auto</span> head = <a class="code hl_variable" href="#ga0f52ba0b24ce54052784df91c54ac233">kumi::remove</a>(a,<a class="code hl_variable" href="group__utility.html#gaa1c76fca002e966a0a40e311ad68d841">kumi::index&lt;3&gt;</a>);</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span> &lt;&lt; head &lt;&lt; <span class="charliteral">&#39; &#39;</span>  &lt;&lt; mid &lt;&lt; <span class="charliteral">&#39; &#39;</span> &lt;&lt; last &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__utility_html_gaa1c76fca002e966a0a40e311ad68d841"><div class="ttname"><a href="group__utility.html#gaa1c76fca002e966a0a40e311ad68d841">kumi::index</a></div><div class="ttdeci">constexpr kumi::index_t&lt; N &gt; const index</div><div class="ttdoc">Inline integral constant value for kumi::index_t.</div><div class="ttdef"><b>Definition</b> ct_helpers.hpp:49</div></div>
+<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
+</div><!-- fragment --><h3 class="groupheader">Record </h3>
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> a =  { <span class="stringliteral">&quot;a&quot;</span>_id = 1, <span class="stringliteral">&quot;b&quot;</span>_id = 2.3, <span class="stringliteral">&quot;c&quot;</span>_id = 4.5f, <span class="stringliteral">&quot;d&quot;</span>_id = <span class="charliteral">&#39;6&#39;</span></div>
+<div class="line">                    , <span class="stringliteral">&quot;e&quot;</span>_id = <span class="stringliteral">&quot;7&quot;</span>, <span class="stringliteral">&quot;f&quot;</span>_id = <span class="keywordtype">short</span>{89} };</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">auto</span> last = <a class="code hl_variable" href="#ga0f52ba0b24ce54052784df91c54ac233">kumi::remove</a>(a,0_c,1_c);</div>
+<div class="line">  <span class="keyword">auto</span> mid  = <a class="code hl_variable" href="#ga0f52ba0b24ce54052784df91c54ac233">kumi::remove</a>(a,1_c,3_c);</div>
+<div class="line">  <span class="keyword">auto</span> head = <a class="code hl_variable" href="#ga0f52ba0b24ce54052784df91c54ac233">kumi::remove</a>(a,<a class="code hl_variable" href="group__utility.html#gaa1c76fca002e966a0a40e311ad68d841">kumi::index&lt;3&gt;</a>);</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span> &lt;&lt; head &lt;&lt; <span class="charliteral">&#39; &#39;</span>  &lt;&lt; mid &lt;&lt; <span class="charliteral">&#39; &#39;</span> &lt;&lt; last &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
-<div class="ttc" id="astructkumi_1_1tuple_ade5f616b3115a74bd4930f70f96ca199_html_ade5f616b3115a74bd4930f70f96ca199"><div class="ttname"><a href="#ade5f616b3115a74bd4930f70f96ca199">kumi::tuple::values_of</a></div><div class="ttdeci">constexpr auto values_of(T &amp;&amp;t) noexcept</div><div class="ttdoc">Extracts the values of the fields of a kumi::product_type.</div><div class="ttdef"><b>Definition</b> tuple.hpp:772</div></div>
-<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
@@ -228,7 +272,7 @@ Example:</h2>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="namespacekumi.html">kumi</a></li><li class="navelem"><a href="structkumi_1_1tuple.html">tuple</a></li>
+    <li class="navelem"><a href="namespacekumi.html">kumi</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

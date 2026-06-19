@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="KUMI - The C++20 Compact Tuple Tools" />
 <meta name="twitter:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
 <meta name="twitter:image" content="https://jfalcou.github.io/kumi/card.png" />
-<title>KUMI: kumi::concepts::static_container Concept Reference</title>
+<title>KUMI: kumi::function::extract_t Struct Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -139,7 +139,7 @@ $(function() { codefold.init(); });
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('conceptkumi_1_1concepts_1_1static__container.html','',''); });
+$(function(){initNavTree('structkumi_1_1function_1_1extract__t.html','','structkumi_1_1function_1_1extract__t-members'); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -165,35 +165,31 @@ $(function(){initNavTree('conceptkumi_1_1concepts_1_1static__container.html','',
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">kumi::concepts::static_container Concept Reference<div class="ingroups"><a class="el" href="group__concepts.html">Product Type Related Concepts</a></div></div></div>
+  <div class="summary">
+<a href="structkumi_1_1function_1_1extract__t-members.html">List of all members</a>  </div>
+  <div class="headertitle"><div class="title">kumi::function::extract_t Struct Reference<div class="ingroups"><a class="el" href="group__functional.html">Helper Types and function</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Concept specifying a type follows the Container Type semantic.  
-<a href="#details">More...</a></p>
+<p>Logic provider to compute the index map associated to the extraction operation.  
+ <a href="#details">More...</a></p>
 
-<p><code>#include &lt;kumi/utils/concepts.hpp&gt;</code></p>
+<p><code>#include &lt;kumi/functional/indexable.hpp&gt;</code></p>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Concept specifying a type follows the Container Type semantic. </p>
-<p>A type <span class="tt">T</span> models <span class="tt">kumi::container</span> if it is a kumi::container of fixed size.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md68"></a>
-Example types:</h2>
-<ul>
-<li>std::span&lt;T,N&gt;; </li>
-</ul>
-</div><h2 id="header-conceptdef" class="groupheader">Concept definition</h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line">    <span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1concepts_1_1static__container.html">static_container</a> = <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1container.html">kumi::concepts::container&lt;T&gt;</a> &amp;&amp; kumi::has_static_size_v&lt;std::remove_cvref_t&lt;T&gt;&gt;</div>
-<div class="ttc" id="aconceptkumi_1_1concepts_1_1container_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1container.html">kumi::concepts::container</a></div><div class="ttdoc">Concept specifying a type follows the Container Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:109</div></div>
-<div class="ttc" id="aconceptkumi_1_1concepts_1_1static__container_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1static__container.html">kumi::concepts::static_container</a></div><div class="ttdoc">Concept specifying a type follows the Container Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:123</div></div>
-</div><!-- fragment --></div><!-- contents -->
+<div class="textblock"><p>Logic provider to compute the index map associated to the extraction operation. </p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md14"></a>
+Callable object</h2>
+<div class="fragment"><div class="line"><span class="keyword">inline</span> <span class="keyword">constexpr</span> <a class="code hl_struct" href="structkumi_1_1function_1_1extract__t.html">extract_t</a> <a class="code hl_variable" href="group__functional.html#gadfd46f17b9d9a6744ca1284383464baf">extractor</a>{};</div>
+<div class="ttc" id="agroup__functional_html_gadfd46f17b9d9a6744ca1284383464baf"><div class="ttname"><a href="group__functional.html#gadfd46f17b9d9a6744ca1284383464baf">kumi::function::extractor</a></div><div class="ttdeci">constexpr kumi::function::extract_t extractor</div><div class="ttdoc">Callable object computing the index map associated to the extraction operation.</div><div class="ttdef"><b>Definition</b> indexable.hpp:245</div></div>
+<div class="ttc" id="astructkumi_1_1function_1_1extract__t_html"><div class="ttname"><a href="structkumi_1_1function_1_1extract__t.html">kumi::function::extract_t</a></div><div class="ttdoc">Logic provider to compute the index map associated to the extraction operation.</div><div class="ttdef"><b>Definition</b> indexable.hpp:68</div></div>
+</div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- HTML footer for doxygen 1.8.20-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="namespacekumi.html">kumi</a></li><li class="navelem"><b>concepts</b></li><li class="navelem"><a href="conceptkumi_1_1concepts_1_1static__container.html">static_container</a></li>
+    <li class="navelem"><a href="namespacekumi.html">kumi</a></li><li class="navelem"><b>function</b></li><li class="navelem"><a href="structkumi_1_1function_1_1extract__t.html">extract_t</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

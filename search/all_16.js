@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['record_0',['Record',['../index.html#autotoc_md167',1,'']]],
+  ['record_0',['Record',['../index.html#autotoc_md168',1,'']]],
   ['record_1',['record',['../structkumi_1_1record.html',1,'kumi::record&lt; Ts &gt;'],['../structkumi_1_1record_a1000cb0996a9587f8735a35f76060e44.html#a1000cb0996a9587f8735a35f76060e44',1,'kumi::record::record()'],['../structkumi_1_1record_a1000cb0996a9587f8735a35f76060e44.html#a1000cb0996a9587f8735a35f76060e44',1,'kumi::record()']]],
   ['record_20related_20traits_2',['Record Related Traits',['../group__record__traits.html',1,'']]],
   ['record_20type_2038_3',['Record Type \\( (\\{l_A: A\\} \\times \\{l_B: B\\}) \\)',['../product.html#record_type',1,'']]],
@@ -15,15 +15,16 @@ var searchData=
   ['reindex_12',['reindex',['../structkumi_1_1result_1_1reindex.html',1,'kumi::result::reindex&lt; T, Indexes &gt;'],['../group__generators_ga3594f15dbfba2f6fda0afc8d1542c449.html#ga3594f15dbfba2f6fda0afc8d1542c449',1,'kumi::reindex']]],
   ['related_20concepts_13',['Product Type Related Concepts',['../group__concepts.html',1,'']]],
   ['related_20traits_14',['Related Traits',['../group__traits.html',1,'Product Type Related Traits'],['../group__record__traits.html',1,'Record Related Traits'],['../group__tuple__traits.html',1,'Tuple Related Traits']]],
-  ['release_15',['First autonomous public release.',['../changelog.html#autotoc_md133',1,'']]],
-  ['reorder_16',['reorder',['../structkumi_1_1result_1_1reorder.html',1,'kumi::result::reorder&lt; T, Idx &gt;'],['../group__generators_ga32af967d7f453426ccd564d3a0b6c689.html#ga32af967d7f453426ccd564d3a0b6c689',1,'kumi::reorder']]],
-  ['reorder_5ffields_17',['reorder_fields',['../structkumi_1_1result_1_1reorder__fields.html',1,'kumi::result::reorder_fields&lt; Tuple, Name &gt;'],['../group__generators_ga8c42552c8f93dad0b83a3903468d02c6.html#ga8c42552c8f93dad0b83a3903468d02c6',1,'kumi::reorder_fields']]],
-  ['requisites_18',['Pre-requisites',['../setup.html#prerequisit',1,'']]],
-  ['reverse_19',['reverse',['../structkumi_1_1result_1_1reverse.html',1,'kumi::result']]],
-  ['reverse_5ft_20',['reverse_t',['../structkumi_1_1function_1_1reverse__t.html',1,'kumi::function']]],
-  ['reverser_21',['reverser',['../group__functional.html#ga264829b1d9caed059c419f02d0ce7c02',1,'kumi::function']]],
-  ['rotate_5fleft_22',['rotate_left',['../structkumi_1_1result_1_1rotate__left.html',1,'kumi::result::rotate_left&lt; R, T &gt;'],['../group__generators_gadbc56977f82e2eaefe486c0a9457f01c.html#gadbc56977f82e2eaefe486c0a9457f01c',1,'kumi::rotate_left']]],
-  ['rotate_5fright_23',['rotate_right',['../structkumi_1_1result_1_1rotate__right.html',1,'kumi::result::rotate_right&lt; R, T &gt;'],['../group__generators_gaffd5dbb36e1c70d2fc058ffe03afef3e.html#gaffd5dbb36e1c70d2fc058ffe03afef3e',1,'kumi::rotate_right']]],
-  ['rotate_5ft_24',['rotate_t',['../structkumi_1_1function_1_1rotate__t.html',1,'kumi::function']]],
-  ['rotater_25',['rotater',['../group__functional.html#gab8db989a4931faeaf18cfc60eb531bc1',1,'kumi::function']]]
+  ['release_15',['First autonomous public release.',['../changelog.html#autotoc_md134',1,'']]],
+  ['remove_16',['remove',['../structkumi_1_1result_1_1remove.html',1,'kumi::result::remove&lt; T, I0, I1 &gt;'],['../group__generators_ga0f52ba0b24ce54052784df91c54ac233.html#ga0f52ba0b24ce54052784df91c54ac233',1,'kumi::remove']]],
+  ['reorder_17',['reorder',['../structkumi_1_1result_1_1reorder.html',1,'kumi::result::reorder&lt; T, Idx &gt;'],['../group__generators_ga32af967d7f453426ccd564d3a0b6c689.html#ga32af967d7f453426ccd564d3a0b6c689',1,'kumi::reorder']]],
+  ['reorder_5ffields_18',['reorder_fields',['../structkumi_1_1result_1_1reorder__fields.html',1,'kumi::result::reorder_fields&lt; Tuple, Name &gt;'],['../group__generators_ga8c42552c8f93dad0b83a3903468d02c6.html#ga8c42552c8f93dad0b83a3903468d02c6',1,'kumi::reorder_fields']]],
+  ['requisites_19',['Pre-requisites',['../setup.html#prerequisit',1,'']]],
+  ['reverse_20',['reverse',['../structkumi_1_1result_1_1reverse.html',1,'kumi::result']]],
+  ['reverse_5ft_21',['reverse_t',['../structkumi_1_1function_1_1reverse__t.html',1,'kumi::function']]],
+  ['reverser_22',['reverser',['../group__functional.html#ga264829b1d9caed059c419f02d0ce7c02',1,'kumi::function']]],
+  ['rotate_5fleft_23',['rotate_left',['../structkumi_1_1result_1_1rotate__left.html',1,'kumi::result::rotate_left&lt; R, T &gt;'],['../group__generators_gadbc56977f82e2eaefe486c0a9457f01c.html#gadbc56977f82e2eaefe486c0a9457f01c',1,'kumi::rotate_left']]],
+  ['rotate_5fright_24',['rotate_right',['../structkumi_1_1result_1_1rotate__right.html',1,'kumi::result::rotate_right&lt; R, T &gt;'],['../group__generators_gaffd5dbb36e1c70d2fc058ffe03afef3e.html#gaffd5dbb36e1c70d2fc058ffe03afef3e',1,'kumi::rotate_right']]],
+  ['rotate_5ft_25',['rotate_t',['../structkumi_1_1function_1_1rotate__t.html',1,'kumi::function']]],
+  ['rotater_26',['rotater',['../group__functional.html#gab8db989a4931faeaf18cfc60eb531bc1',1,'kumi::function']]]
 ];
