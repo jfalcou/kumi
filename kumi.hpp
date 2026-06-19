@@ -2813,6 +2813,16 @@ namespace kumi::function
                                   kumi::_::digits(kumi::_::element_of_index, std::make_index_sequence<N>{}, Ids)};
     }
   };
+  struct extract_t
+  {
+    template<std::size_t B, std::size_t E, std::size_t... I>
+    KUMI_ABI consteval auto operator()(std::integral_constant<std::size_t, B>,
+                                       std::integral_constant<std::size_t, E>,
+                                       std::index_sequence<I...>) const noexcept
+    {
+      return std::index_sequence<(I < B ? I : (I + (E - B)))...>{};
+    }
+  };
   struct rotate_t
   {
     template<std::size_t... S, std::size_t R>
@@ -2886,6 +2896,7 @@ namespace kumi::function
   };
   inline constexpr kumi::function::cartesian_product_t cartesian_producer{};
   inline constexpr kumi::function::cat_t concatenater{};
+  inline constexpr kumi::function::extract_t extractor{};
   inline constexpr kumi::function::rotate_t rotater{};
   inline constexpr kumi::function::reduce_t reducer{};
   inline constexpr kumi::function::repeat_t repeater{};
@@ -3381,23 +3392,41 @@ namespace kumi
 {
   struct extract_t
   {
-    template<std::size_t I0, std::size_t I1, kumi::concepts::product_type T>
-    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<I0> i0, kumi::index_t<I1>) const noexcept
+    template<kumi::concepts::product_type T, std::size_t I0, std::size_t I1>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<I0>, kumi::index_t<I1>) const noexcept
     {
       static_assert((I0 <= kumi::size_v<T>) && (I1 <= kumi::size_v<T>), "[KUMI] - Invalid index");
-      return kumi::function::builder(KUMI_FWD(t), kumi::function::shifter(std::integral_constant<std::size_t, i0>{},
+      return kumi::function::builder(KUMI_FWD(t), kumi::function::shifter(std::integral_constant<std::size_t, I0>{},
                                                                           std::make_index_sequence<I1 - I0>{}));
     }
-    template<std::size_t I0, kumi::concepts::product_type T>
-    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<I0> i0) const noexcept
+    template<kumi::concepts::product_type T, std::size_t I>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<I> i) const noexcept
     {
-      static_assert(I0 <= kumi::size_v<T>, "[KUMI] - Invalid index");
-      return (*this)(KUMI_FWD(t), i0, kumi::index<size_v<T>>);
+      static_assert(I <= kumi::size_v<T>, "[KUMI] - Invalid index");
+      return (*this)(KUMI_FWD(t), i, kumi::index<size_v<T>>);
+    }
+  };
+  struct remove_t
+  {
+    template<kumi::concepts::product_type T, std::size_t I0, std::size_t I1>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<I0>, kumi::index_t<I1>) const noexcept
+    {
+      static_assert((I0 <= kumi::size_v<T>) && (I1 <= kumi::size_v<T>), "[KUMI] - Invalid index");
+      return kumi::function::builder(
+        KUMI_FWD(t),
+        kumi::function::extractor(std::integral_constant<std::size_t, I0>{}, std::integral_constant<std::size_t, I1>{},
+                                  std::make_index_sequence<kumi::size_v<T> - (I1 - I0)>{}));
+    }
+    template<kumi::concepts::product_type T, std::size_t I>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<I> i) const noexcept
+    {
+      static_assert(I <= kumi::size_v<T>, "[KUMI] - Invalid index");
+      return (*this)(KUMI_FWD(t), i, kumi::index<kumi::size_v<T>>);
     }
   };
   struct split_t
   {
-    template<std::size_t I0, kumi::concepts::product_type T>
+    template<kumi::concepts::product_type T, std::size_t I0>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, [[maybe_unused]] kumi::index_t<I0> i0) const noexcept
     {
       static_assert(I0 <= kumi::size_v<T>, "[KUMI] - Invalid index");
@@ -3407,6 +3436,7 @@ namespace kumi
     }
   };
   inline constexpr extract_t extract{};
+  inline constexpr remove_t remove{};
   inline constexpr split_t split{};
   namespace result
   {
@@ -3420,6 +3450,16 @@ namespace kumi
     };
     template<kumi::concepts::product_type T, std::size_t I0, std::size_t I1 = std::size_t(-1)>
     using extract_t = typename kumi::result::extract<T, I0, I1>::type;
+    template<kumi::concepts::product_type T, std::size_t I0, std::size_t I1 = std::size_t(-1)> struct remove
+    {
+      using type = decltype(kumi::remove(std::declval<T>(), kumi::index_t<I0>{}, kumi::index_t<I1>{}));
+    };
+    template<kumi::concepts::product_type T, std::size_t I0> struct remove<T, I0>
+    {
+      using type = decltype(kumi::remove(std::declval<T>(), kumi::index_t<I0>{}));
+    };
+    template<kumi::concepts::product_type T, std::size_t I0, std::size_t I1 = std::size_t(-1)>
+    using remove_t = typename kumi::result::remove<T, I0, I1>::type;
     template<kumi::concepts::product_type T, std::size_t I0> struct split
     {
       using type = decltype(kumi::split(std::declval<T>(), kumi::index_t<I0>{}));
