@@ -59,7 +59,41 @@ namespace kumi
     {
       return kumi::builder<T>::make(visitor(KUMI_FWD(t), get<I>(KUMI_FWD(t)), f, self)...);
     }
+
+    template<typename E, std::size_t... I>
+    KUMI_ABI constexpr auto compress_(kumi::_::adl_tag_t, E&& e, std::index_sequence<I...>)
+    {
+      using V = kumi::result::field_value_of_t<E>;
+      if constexpr (sizeof...(I) == 0 || kumi::concepts::empty_product_type<V>) return kumi::builder<V>::make();
+      else
+      {
+        constexpr auto outer = kumi::label_of<E>();
+        return kumi::builder<V>::make(
+          kumi::capture_field<kumi::name<outer + kumi::label_of<kumi::element_t<I, V>>()>{}>(
+            kumi::field_value_of(get<I>(kumi::field_value_of(KUMI_FWD(e)))))...);
+      }
+    }
   }
+
+  struct compress_t
+  {
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
+      else
+      {
+        using V = kumi::result::field_value_of_t<kumi::element_t<0, T>>;
+        if constexpr (kumi::concepts::sized_product_type<T, 1> && kumi::concepts::follows_same_semantic<T, V>)
+        {
+          if constexpr (kumi::concepts::record_type<T>)
+            return (*this)(
+              compress_(kumi::_::adl_tag, get<0>(KUMI_FWD(t)), std::make_index_sequence<kumi::size_v<V>>{}));
+          else return (*this)(get<0>(KUMI_FWD(t)));
+        }
+        else return KUMI_FWD(t);
+      }
+    }
+  };
 
   struct flatten_t
   {
@@ -105,6 +139,62 @@ namespace kumi
       return this->flatten_all_t::operator()(KUMI_FWD(t), [](auto& m) { return &m; });
     }
   };
+
+  //====================================================================================================================
+  /**
+    @ingroup generators
+
+    @var compress
+    @brief Callable object converting a product type of product type into a single product type recursively, or returns
+    the input.
+
+    This construction naturally arises from the definition of product types, a product type of the form T(T(x...)) is
+    strictly equivalent to T(x...) as long as the T is the same type.
+
+    On record types, the names of the outer record are concatenated to the inner ones ultimately constructing names
+    such as "outer.inner". If the input is a product type containing record types or vice versa only the inner types
+    matching the outer semantic will be compressed. Thus a record inside a tuple will not be compressed.
+
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/flatten.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T>
+      constexpr auto compress(T && t) noexcept;
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product type to process
+
+    @subgroupheader{Return value}
+
+      - The resulting value of the application of `T0(...(Tn(values))) => T(values)`
+
+    @groupheader{Helper type}
+
+    @snippet include/kumi/algorithm/flatten.hpp compress_t
+
+    Computes the return type of a call to kumi::compress
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/compress.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/compress.cpp}
+  **/
+  //====================================================================================================================
+  inline constexpr compress_t compress{};
 
   //====================================================================================================================
   /**
@@ -275,6 +365,16 @@ namespace kumi
 
   namespace result
   {
+    //! [compress_t]
+    template<kumi::concepts::product_type T> struct compress
+    {
+      using type = decltype(kumi::compress(std::declval<T>()));
+    };
+
+    template<kumi::concepts::product_type T> using compress_t = typename kumi::result::compress<T>::type;
+
+    //! [compress_t]
+
     //! [flatten_t]
     template<kumi::concepts::product_type T> struct flatten
     {
