@@ -285,6 +285,9 @@ TAB_SIZE               = 2
 # @} or use a double escape (\\{ and \\})
 
 ALIASES                =
+ALIASES += "groupheader{1}=<h2 class=\"groupheader\"> \1 </h2>"
+ALIASES += "subgroupheader{1}=<h3 class=\"groupheader\"> \1 </h3>"
+ALIASES += "godbolt{1}=@include \1"
 
 # Set the OPTIMIZE_OUTPUT_FOR_C tag to YES if your project consists of C sources
 # only. Doxygen will then generate output that is more tailored for C. For
@@ -1077,7 +1080,8 @@ EXCLUDE_SYMBOLS        = _::* \
 # command).
 
 EXAMPLE_PATH           = ../test \
-                         .
+                         .      \
+                         ../include/kumi
 
 # If the value of the EXAMPLE_PATH tag contains directories, you can use the
 # EXAMPLE_PATTERNS tag to specify one or more wildcard pattern (like *.cpp and

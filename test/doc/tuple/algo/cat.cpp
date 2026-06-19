@@ -12,7 +12,7 @@ int main()
   kumi::tuple b = {  '6' };
   kumi::tuple c = { "7", short{89} };
 
-  auto abc = cat(a,b,c);
+  auto abc = kumi::cat(a,b,c);
 
   std::cout << a << " " << b << " " << c << "\n";
   std::cout << abc << "\n";

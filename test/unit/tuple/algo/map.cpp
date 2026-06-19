@@ -33,7 +33,7 @@ TTS_CASE("Check result::map<F,Tuple...> behavior")
 TTS_CASE("Check map(f, {}) behavior")
 {
   bool was_run = false;
-  auto s = map(
+  auto s = kumi::map(
     [&](auto m) {
       was_run = true;
       return sizeof(m);
@@ -46,7 +46,7 @@ TTS_CASE("Check map(f, {}) behavior")
 TTS_CASE("Check map(f, tuple) behavior"){{auto t = kumi::tuple{1, 2., 3.4f, '5'};
 
 {
-  auto s = map([](auto m) { return sizeof(m); }, t);
+  auto s = kumi::map([](auto m) { return sizeof(m); }, t);
 
   auto [s0, s1, s2, s3] = s;
   auto m0 = s0;
@@ -61,7 +61,7 @@ TTS_CASE("Check map(f, tuple) behavior"){{auto t = kumi::tuple{1, 2., 3.4f, '5'}
 
 {
   auto u = kumi::tuple{2, 3, 4, 5};
-  auto s = map([](auto m, auto n) { return n * sizeof(m); }, t, u);
+  auto s = kumi::map([](auto m, auto n) { return n * sizeof(m); }, t, u);
 
   auto [s0, s1, s2, s3] = s;
   auto m0 = s0;
@@ -76,7 +76,7 @@ TTS_CASE("Check map(f, tuple) behavior"){{auto t = kumi::tuple{1, 2., 3.4f, '5'}
 {
   auto t2 = kumi::tuple{1, 2., 3.4f, '5', moveonly{}};
   auto u = kumi::tuple{2, 3, 4, 5, 6};
-  auto s = map([](auto m, auto n) { return n * sizeof(m); }, std::move(t2), std::move(u));
+  auto s = kumi::map([](auto m, auto n) { return n * sizeof(m); }, std::move(t2), std::move(u));
 
   auto [s0, s1, s2, s3, s4] = s;
   auto m0 = s0;
@@ -104,7 +104,7 @@ TTS_CASE("Check map(f, tuple) behavior"){{auto t = kumi::tuple{1, 2., 3.4f, '5'}
 TTS_CASE("Check map(f, tuple) constexpr behavior"){{constexpr auto t = kumi::tuple{1, 2., 3.4f, '5'};
 
 {
-  constexpr auto s = map([](auto m) { return sizeof(m); }, t);
+  constexpr auto s = kumi::map([](auto m) { return sizeof(m); }, t);
 
   TTS_CONSTEXPR_EQUAL(get<0>(s), sizeof(int));
   TTS_CONSTEXPR_EQUAL(get<1>(s), sizeof(double));
@@ -114,7 +114,7 @@ TTS_CASE("Check map(f, tuple) constexpr behavior"){{constexpr auto t = kumi::tup
 
 {
   constexpr auto u = kumi::tuple{2, 3, 4, 5};
-  constexpr auto s = map([](auto m, auto n) { return n * sizeof(m); }, t, u);
+  constexpr auto s = kumi::map([](auto m, auto n) { return n * sizeof(m); }, t, u);
 
   TTS_CONSTEXPR_EQUAL(get<0>(s), 2 * sizeof(int));
   TTS_CONSTEXPR_EQUAL(get<1>(s), 3 * sizeof(double));

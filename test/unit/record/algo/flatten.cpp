@@ -42,7 +42,7 @@ TTS_CASE("Check result::flatten/flatten_all<record> behavior")
     (kumi::result::flatten_all_t<
       kumi::record<
         kumi::field<kumi::name<"e">, kumi::record<char_f, short_f>>,
-        kumi::field<kumi::name<"f">, kumi::record<int_f, kumi::field<kumi::name<"g">, kumi::record<double_f>>>>>,
+        kumi::field<kumi::name<"f">, kumi::record<int_f, kumi::field<kumi::name<"g">, kumi::record<double_f>>>>>&,
       func_t>),
     (kumi::record<kumi::field<kumi::name<"e.a">, char*>, kumi::field<kumi::name<"e.b">, short*>,
                   kumi::field<kumi::name<"f.c">, int*>, kumi::field<kumi::name<"f.g.d">, double*>>));

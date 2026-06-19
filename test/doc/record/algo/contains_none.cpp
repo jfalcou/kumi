@@ -11,7 +11,7 @@ using namespace kumi::literals;
 template<kumi::concepts::product_type T>
 void check_contains(T const& )
 {
-  if constexpr(contains_none(T{}, "malus"_id, "other"_id))
+  if constexpr(kumi::contains_none(T{}, "malus"_id, "other"_id))
     std::cout << "Correct product_type\n";
   else
     std::cout << "Incorrect product type\n";

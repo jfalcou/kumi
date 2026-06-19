@@ -118,7 +118,7 @@
   template<KUMI_PP_ENUM(N, KUMI_PP_TAC, typename T)>                                                                   \
   requires(kumi::_::no_empty<KUMI_PP_ENUM(N, KUMI_PP_TAC, T)> &&                                                       \
            kumi::_::no_references<KUMI_PP_ENUM(N, KUMI_PP_TAC, T)>)                                                    \
-  struct binder<std::integer_sequence<int, KUMI_PP_ENUM(N, KUMI_PP_IDENTITY, _)>, KUMI_PP_ENUM(N, KUMI_PP_TAC, T)>     \
+  struct binder<std::index_sequence<KUMI_PP_ENUM(N, KUMI_PP_IDENTITY, _)>, KUMI_PP_ENUM(N, KUMI_PP_TAC, T)>            \
   {                                                                                                                    \
     static constexpr bool is_homogeneous = (N == 1);                                                                   \
     KUMI_PP_REPEAT(N, KUMI_MEMBERS, _)                                                                                 \

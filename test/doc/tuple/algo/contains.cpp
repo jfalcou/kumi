@@ -11,7 +11,7 @@ using namespace kumi::literals;
 template<kumi::concepts::product_type T>
 void check_contains(T const& t)
 {
-  if constexpr(contains(T{}, "value"_id))
+  if constexpr(kumi::contains(T{}, "value"_id))
     std::cout << "Correct product_type: " << get<"value"_id>(t) << '\n';
   else
     std::cout << "Incorrect product type\n";

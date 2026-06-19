@@ -14,7 +14,7 @@ int main()
   kumi::record b = { "x"_id = '6' };
   kumi::record c = { "y"_id = "7", "z"_id = short{89} };
 
-  auto abc = cat(a,b,c);
+  auto abc = kumi::cat(a,b,c);
 
   std::cout << a << " " << b << " " << c << "\n";
   std::cout << abc << "\n";

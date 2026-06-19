@@ -9,61 +9,79 @@
 
 namespace kumi
 {
+  struct cat_t
+  {
+    template<kumi::concepts::product_type... Ts>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(Ts&&... ts) const
+    requires(kumi::concepts::follows_same_semantic<Ts...>)
+    {
+      if constexpr (sizeof...(Ts) == 0) return kumi::tuple{};
+      else
+      {
+        constexpr auto pos = kumi::function::concatenater(std::index_sequence<kumi::size_v<Ts>...>{});
+        return kumi::function::builder(kumi::forward_as_tuple(KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
+      }
+    }
+  };
+
   //====================================================================================================================
   /**
-    @ingroup  generators
-    @brief    Concatenates product types in a single one
+    @ingroup generators
 
-    @param ts Product types to concatenate
-    @return   A product type made of all element of all input product types in order.
+    @var cat
+    @brief Callable object concatenating multiple product types into a single one
+
     @note This function does not take part in overload resolution if the input product types do not follow the same
           semantic. @see concepts::follows_same_semantic
 
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<product_type... Ts> struct cat;
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
-      template<product_type... Ts>
-      using cat_t = typename cat<Ts...>::type;
-    }
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/cat.hpp>
     @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type... Ts>
+      constexpr decltype(auto) cat(Ts... && t);
+    @endcode
+
+    @subgroupheader{Parameters}
+      - `ts`: Product types to concatenate
+
+    @subgroupheader{Return value}
+      - A product type made of all element of all input product types in order.
+
+    @groupheader{Helper type}
+
+    @snippet include/kumi/algorithm/cat.hpp cat_t
 
     Computes the return type of a call to kumi::cat
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/cat.cpp
-    ### Record:
-    @include doc/record/algo/cat.cpp
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/cat.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/cat.cpp}
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type... Ts>
-  [[nodiscard]] KUMI_ABI constexpr auto cat(Ts&&... ts)
-  requires(kumi::concepts::follows_same_semantic<Ts...>)
-  {
-    if constexpr (sizeof...(Ts) == 0) return kumi::tuple{};
-    else
-    {
-      constexpr auto pos = kumi::function::concatenater(std::index_sequence<kumi::size_v<Ts>...>{});
-      using res_type = kumi::common_product_type_t<std::remove_cvref_t<Ts>...>;
-
-      return [&]<typename T, std::size_t... E, std::size_t... N>(T&& t, std::index_sequence<E...>,
-                                                                 std::index_sequence<N...>) {
-        using type = builder_make_t<res_type, kumi::element_t<E, kumi::element_t<N, T>>...>;
-        return type{get<E>(get<N>(KUMI_FWD(t)))...};
-      }(kumi::forward_as_tuple(KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
-    }
-  }
+  inline constexpr cat_t cat{};
 
   namespace result
   {
+    //! [cat_t]
     template<kumi::concepts::product_type... Ts> struct cat
     {
       using type = decltype(kumi::cat(std::declval<Ts>()...));
     };
 
     template<concepts::product_type... Ts> using cat_t = typename kumi::result::cat<Ts...>::type;
+    //! [cat_t]
   }
 }

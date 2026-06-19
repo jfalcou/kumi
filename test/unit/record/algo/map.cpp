@@ -39,7 +39,7 @@ TTS_CASE("Check result::map<F,Record...> behavior")
 TTS_CASE("Check map(f, {}) behavior")
 {
   bool was_run = false;
-  auto s = map(
+  auto s = kumi::map(
     [&](auto m) {
       was_run = true;
       return sizeof(m);
@@ -57,7 +57,7 @@ TTS_CASE("Check map(f, record) behavior")
     auto t = kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.4f, "d"_id = '5'};
 
     {
-      auto s = map([](auto m) { return sizeof(m); }, t);
+      auto s = kumi::map([](auto m) { return sizeof(m); }, t);
 
       auto [s0, s1, s2, s3] = s;
       auto m0 = s0.value;
@@ -77,7 +77,7 @@ TTS_CASE("Check map(f, record) behavior")
         "d"_id = 5,
         "a"_id = 2,
       };
-      auto s = map([](auto m, auto n) { return n * sizeof(m); }, t, u);
+      auto s = kumi::map([](auto m, auto n) { return n * sizeof(m); }, t, u);
 
       auto [s0, s1, s2, s3] = s;
       auto m0 = s0.value;
@@ -100,7 +100,7 @@ TTS_CASE("Check map(f, record) constexpr behavior")
     constexpr auto t = kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.4f, "d"_id = '5'};
 
     {
-      constexpr auto s = map([](auto m) { return sizeof(m); }, t);
+      constexpr auto s = kumi::map([](auto m) { return sizeof(m); }, t);
 
       TTS_CONSTEXPR_EQUAL(get<"a"_id>(s), sizeof(int));
       TTS_CONSTEXPR_EQUAL(get<"b"_id>(s), sizeof(double));
@@ -110,7 +110,7 @@ TTS_CASE("Check map(f, record) constexpr behavior")
 
     {
       constexpr auto u = kumi::record{"a"_id = 2, "b"_id = 3, "c"_id = 4, "d"_id = 5};
-      constexpr auto s = map([](auto m, auto n) { return n * sizeof(m); }, t, u);
+      constexpr auto s = kumi::map([](auto m, auto n) { return n * sizeof(m); }, t, u);
 
       TTS_CONSTEXPR_EQUAL(get<"a"_id>(s), 2 * sizeof(int));
       TTS_CONSTEXPR_EQUAL(get<"b"_id>(s), 3 * sizeof(double));

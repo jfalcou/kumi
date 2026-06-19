@@ -9,175 +9,253 @@
 
 namespace kumi
 {
+  template<template<typename> typename Pred> struct partition_t
+  {
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return kumi::tuple{builder<T>::make(), builder<T>::make()};
+      else
+      {
+        constexpr auto pos = []<std::size_t... I>(std::index_sequence<I...>) {
+          return kumi::function::selector(std::bool_constant<Pred<kumi::stored_element_t<I, T>>::value>{}...);
+        }(std::make_index_sequence<kumi::size_v<T>>{});
+
+        return kumi::tuple{kumi::function::builder(KUMI_FWD(t), get<0>(pos)),
+                           kumi::function::builder(KUMI_FWD(t), get<1>(pos))};
+      }
+    }
+  };
+
+  template<template<typename> typename Pred> struct filter_t
+  {
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
+      else
+      {
+        constexpr auto pos = []<std::size_t... I>(std::index_sequence<I...>) {
+          return kumi::function::selector(std::bool_constant<Pred<kumi::stored_element_t<I, T>>::value>{}...);
+        }(std::make_index_sequence<kumi::size_v<T>>{});
+
+        return kumi::function::builder(KUMI_FWD(t), get<0>(pos));
+      }
+    }
+  };
+
+  template<template<typename> typename Pred> struct filter_not_t
+  {
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
+      else
+      {
+        constexpr auto pos = []<std::size_t... I>(std::index_sequence<I...>) {
+          return function::selector(std::bool_constant<Pred<kumi::stored_element_t<I, T>>::value>{}...);
+        }(std::make_index_sequence<kumi::size_v<T>>{});
+
+        return kumi::function::builder(KUMI_FWD(t), get<1>(pos));
+      }
+    }
+  };
+
   //====================================================================================================================
   /**
-    @ingroup  generators
-    @brief    Partition a product type over a predicate
-    @tparam   Pred Compile-time predicate
-    @param  t Product type to process
-    @return   A tuple containing the product type of all values which types satisfies `Pred` in `t`
+    @ingroup generators
+
+    @var partition
+    @brief Callable object partitionning a product type over a predicate
+
+    On a record type, `Pred` is applied directly to the underlying elements of the fields.
+
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier noexcept
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/partition.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T>
+      constexpr auto partition<Pred>(T && t) noexcept;
+    @endcode
+
+    @subgroupheader{Template Parameters}
+
+      - `Pred`:  Compile-time predicate
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to process
+
+    @subgroupheader{Return value}
+
+      - A tuple containing the product type of all values which types satisfies `Pred` in `t`
               and the product type of all values which types does not satisfy `Pred`.
 
-    On a record type, `Pred` is applied directly to the underlying elements of the fields.
+    @groupheader{Helper type}
 
-    ## Helper type
-    @code
-    namespace kumi
-    {
-      template<template<typename> typename Pred, kumi::product_type T> struct partition;
+    @snippet include/kumi/algorithm/partition.hpp partition_t
 
-      template<template<typename> typename Pred, kumi::product_type T>
-      using partition_t = typename partition<Pred, T>::type;
-    }
-    @endcode
+    Computes the return type of a call to kumi::partition
 
-    Computes the type returned by a call to kumi::partition.
+    @groupheader{Examples}
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/partition.cpp
-    ### Record:
-    @include doc/record/algo/partition.cpp
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/partition.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/partition.cpp}
   **/
   //====================================================================================================================
-  template<template<typename> typename Pred, kumi::concepts::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto partition(T&& t) noexcept
-  {
-    if constexpr (kumi::concepts::empty_product_type<T>) return kumi::tuple{builder<T>::make(), builder<T>::make()};
-    else
-    {
-      constexpr auto pos = []<std::size_t... I>(std::index_sequence<I...>) {
-        return kumi::function::selector(std::bool_constant<Pred<kumi::stored_element_t<I, T>>::value>{}...);
-      }(std::make_index_sequence<kumi::size_v<T>>{});
-
-      auto select = [&]<typename O, std::size_t... I>(O, std::index_sequence<I...>) {
-        using type = builder_make_t<T, kumi::element_t<pos.t[O::value + I], T>...>;
-        return type{get<pos.t[O::value + I]>(KUMI_FWD(t))...};
-      };
-
-      return kumi::tuple{select(kumi::index<0>, std::make_index_sequence<pos.cut>{}),
-                         select(kumi::index<pos.cut>, std::make_index_sequence<kumi::size_v<T> - pos.cut>{})};
-    }
-  }
+  template<template<typename> typename Pred> inline constexpr partition_t<Pred> partition{};
 
   //====================================================================================================================
   /**
-    @ingroup  generators
-    @brief    Filters a product type over a predicate
-    @tparam   Pred Compile-time predicate
-    @param  t Product type to process
-    @return A Product type containing all values of `t` which types satisfies `Pred`.
+    @ingroup generators
+
+    @var filter
+    @brief Callable object filtering a product type over a predicate
 
     On a record type, `Pred` is applied directly to the underlying elements of the fields.
 
-    ## Helper type
-    @code
-    namespace kumi
-    {
-      template<template<typename> typename Pred, kumi::product_type T> struct filter;
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier noexcept
 
-      template<template<typename> typename Pred, kumi::product_type T>
-      using filter_t = typename filter<Pred, T>::type;
-    }
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/partition.hpp>
     @endcode
 
-    Computes the type returned by a call to kumi::filter.
+    @groupheader{Call Signature}
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/filter.cpp
-    ### Record:
-    @include doc/record/algo/filter.cpp
+    @code
+      template<product_type T>
+      constexpr auto filter<Pred>(T && t) noexcept;
+    @endcode
+
+    @subgroupheader{Template Parameters}
+
+      - `Pred`:  Compile-time predicate
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to process
+
+    @subgroupheader{Return value}
+
+      - A Product type containing all values of `t` which types satisfies `Pred`.
+
+    @groupheader{Helper type}
+
+    @snippet include/kumi/algorithm/partition.hpp filter_t
+
+    Computes the return type of a call to kumi::filter
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/filter.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/filter.cpp}
   **/
   //====================================================================================================================
-  template<template<typename> typename Pred, kumi::concepts::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto filter(T&& t) noexcept
-  {
-    if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
-    else
-    {
-      constexpr auto pos = []<std::size_t... I>(std::index_sequence<I...>) {
-        return kumi::function::selector(std::bool_constant<Pred<kumi::stored_element_t<I, T>>::value>{}...);
-      }(std::make_index_sequence<kumi::size_v<T>>{});
-
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = builder_make_t<T, kumi::element_t<pos.t[I], T>...>;
-        return type{get<pos.t[I]>(KUMI_FWD(t))...};
-      }(std::make_index_sequence<pos.cut>{});
-    }
-  }
+  template<template<typename> typename Pred> inline constexpr filter_t<Pred> filter{};
 
   //====================================================================================================================
   /**
-    @ingroup  generators
-    @brief    Filters a product type over a predicate
-    @tparam   Pred Compile-time predicate
-    @param  t Product type to process
-    @return A product type containing all values of `t` which types does not satisfy `Pred`.
+    @ingroup generators
+
+    @var filter_not
+    @brief Callable object filtering a product type over a predicate
 
     On a record type, `Pred` is applied directly to the underlying elements of the fields.
 
-    ## Helper type
-    @code
-    namespace kumi
-    {
-      template<template<typename> typename Pred, kumi::product_type T> struct filter_not;
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier noexcept
 
-      template<template<typename> typename Pred, kumi::product_type T>
-      using filter_not_t = typename filter_not<Pred, T>::type;
-    }
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/partition.hpp>
     @endcode
 
-    Computes the type returned by a call to kumi::filter_not.
+    @groupheader{Call Signature}
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/filter_not.cpp
-    ### Record:
-    @include doc/record/algo/filter_not.cpp
+    @code
+      template<product_type T>
+      constexpr auto filter_not<Pred>(T && t) noexcept;
+    @endcode
+
+    @subgroupheader{Template Parameters}
+
+      - `Pred`:  Compile-time predicate
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to process
+
+    @subgroupheader{Return value}
+
+      - A Product type containing all values of `t` which types does not satisfy `Pred`.
+
+    @groupheader{Helper type}
+
+    @snippet include/kumi/algorithm/partition.hpp filter_not_t
+
+    Computes the return type of a call to kumi::filter_not
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/filter_not.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/filter_not.cpp}
   **/
   //====================================================================================================================
-  template<template<typename> typename Pred, kumi::concepts::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto filter_not(T&& t) noexcept
-  {
-    if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
-    else
-    {
-      constexpr auto pos = []<std::size_t... I>(std::index_sequence<I...>) {
-        return function::selector(std::bool_constant<Pred<kumi::stored_element_t<I, T>>::value>{}...);
-      }(std::make_index_sequence<kumi::size_v<T>>{});
-
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = builder_make_t<T, kumi::element_t<pos.t[pos.cut + I], T>...>;
-        return type{get<pos.t[pos.cut + I]>(KUMI_FWD(t))...};
-      }(std::make_index_sequence<kumi::size_v<T> - pos.cut>{});
-    }
-  }
+  template<template<typename> typename Pred> inline constexpr filter_not_t<Pred> filter_not{};
 
   namespace result
   {
+    //! [partition_t]
     template<template<typename> typename Pred, kumi::concepts::product_type T> struct partition
     {
       using type = decltype(kumi::partition<Pred>(std::declval<T>()));
     };
 
+    template<template<typename> typename Pred, kumi::concepts::product_type T>
+    using partition_t = typename kumi::result::partition<Pred, T>::type;
+
+    //! [partition_t]
+
+    //! [filter_t]
     template<template<typename> typename Pred, kumi::concepts::product_type T> struct filter
     {
       using type = decltype(kumi::filter<Pred>(std::declval<T>()));
     };
 
+    template<template<typename> typename Pred, kumi::concepts::product_type T>
+    using filter_t = typename kumi::result::filter<Pred, T>::type;
+
+    //! [filter_t]
+
+    //! [filter_not_t]
     template<template<typename> typename Pred, kumi::concepts::product_type T> struct filter_not
     {
       using type = decltype(kumi::filter_not<Pred>(std::declval<T>()));
     };
 
     template<template<typename> typename Pred, kumi::concepts::product_type T>
-    using partition_t = typename kumi::result::partition<Pred, T>::type;
-
-    template<template<typename> typename Pred, kumi::concepts::product_type T>
-    using filter_t = typename kumi::result::filter<Pred, T>::type;
-
-    template<template<typename> typename Pred, kumi::concepts::product_type T>
     using filter_not_t = typename kumi::result::filter_not<Pred, T>::type;
+    //! [filter_not_t]
   }
 }

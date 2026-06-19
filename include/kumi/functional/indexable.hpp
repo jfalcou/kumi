@@ -94,6 +94,43 @@ namespace kumi::function
     }
   };
 
+  struct repeat_t
+  {
+    template<std::size_t E, std::size_t... I>
+    KUMI_ABI consteval auto operator()(kumi::index_t<E>, std::index_sequence<I...>) const noexcept
+    {
+      return std::index_sequence<(I - I + E)...>{};
+    }
+  };
+
+  //====================================================================================================================
+  /**
+    @ingroup functional
+    @brief  Logic provider to compute the index map associated to the reverse operation.
+
+    ## Callable object
+    @code
+      inline constexpr reverse_t reverser{};
+    @endcode
+  **/
+  //====================================================================================================================
+  struct reverse_t
+  {
+    template<std::size_t... I> KUMI_ABI consteval auto operator()(std::index_sequence<I...>) const noexcept
+    {
+      return std::index_sequence<(sizeof...(I) - 1 - I)...>{};
+    }
+  };
+
+  struct shift_t
+  {
+    template<std::size_t N, std::size_t... I>
+    KUMI_ABI consteval auto operator()(std::integral_constant<std::size_t, N>, std::index_sequence<I...>) const noexcept
+    {
+      return std::index_sequence<I + N...>{};
+    }
+  };
+
   //====================================================================================================================
   /**
     @ingroup functional
@@ -193,6 +230,9 @@ namespace kumi::function
   //====================================================================================================================
   inline constexpr kumi::function::reduce_t reducer{};
 
+  inline constexpr kumi::function::repeat_t repeater{};
+
+  inline constexpr kumi::function::shift_t shifter{};
   //====================================================================================================================
   /**
     @ingroup functional
@@ -200,6 +240,14 @@ namespace kumi::function
   **/
   //====================================================================================================================
   inline constexpr kumi::function::split_t splitter{};
+
+  //====================================================================================================================
+  /**
+    @ingroup functional
+    @brief  Callable object computing the index map associated to the reverse operation.
+  **/
+  //====================================================================================================================
+  inline constexpr kumi::function::reverse_t reverser{};
 
   //====================================================================================================================
   /**

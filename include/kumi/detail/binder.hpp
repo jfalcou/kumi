@@ -12,7 +12,7 @@ namespace kumi::_
   //====================================================================================================================
   // Tuple leaf binder tricks
   //====================================================================================================================
-  template<int N, typename T> struct leaf
+  template<std::size_t N, typename T> struct leaf
   {
     T value;
     using index = std::integral_constant<std::size_t, N>;
@@ -36,8 +36,8 @@ namespace kumi::_
   };
 
   // Empty Base Optimization
-  template<int N, typename T>
-  requires(std::is_empty_v<T> && (!kumi::_::field<T>))
+  template<std::size_t N, typename T>
+  requires(std::is_empty_v<T> && (!std::is_final_v<T>) && (!kumi::_::field<T>))
   struct leaf<N, T> : T
   {
     using index = std::integral_constant<std::size_t, N>;
@@ -60,7 +60,7 @@ namespace kumi::_
     KUMI_ABI constexpr T const& operator()(inner_type) const& noexcept { return *this; }
   };
 
-  template<int N, kumi::_::field T> struct leaf<N, T> : T
+  template<std::size_t N, kumi::_::field T> struct leaf<N, T> : T
   {
     using T::operator();
     using index = std::integral_constant<std::size_t, N>;
@@ -79,7 +79,8 @@ namespace kumi::_
   template<typename ISeq, typename... Ts> struct binder;
 
   // General N-case
-  template<int... Is, typename... Ts> struct binder<std::integer_sequence<int, Is...>, Ts...> : kumi::_::leaf<Is, Ts>...
+  template<std::size_t... Is, typename... Ts>
+  struct binder<std::index_sequence<Is...>, Ts...> : kumi::_::leaf<Is, Ts>...
   {
     static constexpr bool is_homogeneous = false;
     using kumi::_::leaf<Is, Ts>::operator()...;

@@ -29,7 +29,8 @@ TTS_CASE("Check result::flatten/flatten_all<Tuple> behavior")
   using cfunc_t = decltype(cfunc);
 
   TTS_TYPE_IS(
-    (kumi::result::flatten_all_t<kumi::tuple<kumi::tuple<char, short>, kumi::tuple<int, kumi::tuple<double>>>, func_t>),
+    (kumi::result::flatten_all_t<kumi::tuple<kumi::tuple<char, short>, kumi::tuple<int, kumi::tuple<double>>>&,
+                                 func_t>),
     (kumi::tuple<char*, short*, int*, double*>));
 
   TTS_TYPE_IS((kumi::result::flatten_all_t<kumi::tuple<kumi::tuple<char, short>, kumi::tuple<int, kumi::tuple<double>>>,

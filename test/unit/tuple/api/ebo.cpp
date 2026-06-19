@@ -11,9 +11,9 @@
 #include <tts/tts.hpp>
 #include "test.hpp"
 
-struct final_empty
+struct final_empty final
 {
-} final;
+};
 
 TTS_CASE("Check EBO behavior of kumi::tuple construction")
 {

@@ -9,21 +9,200 @@
 
 namespace kumi
 {
+  namespace _
+  {
+    template<typename M, typename S, typename T, std::size_t N, std::size_t... F, std::size_t... L>
+    KUMI_ABI constexpr auto reduce_(
+      kumi::_::adl_tag_t, M&& m, S s, T&& t, kumi::index_t<N>, std::index_sequence<F...>, std::index_sequence<L...>)
+    {
+      if constexpr (N == 1)
+        return s(KUMI_FWD(m), kumi::tuple{kumi::invoke(KUMI_FWD(m), get<F>(KUMI_FWD(t)), get<L>(KUMI_FWD(t)))...,
+                                          get<kumi::size_v<T> - 1>(KUMI_FWD(t))});
+      else return s(KUMI_FWD(m), kumi::tuple{kumi::invoke(KUMI_FWD(m), get<F>(KUMI_FWD(t)), get<L>(KUMI_FWD(t)))...});
+    }
+
+    template<typename M, typename T, typename F, typename S, std::size_t N, std::size_t... I, std::size_t... J>
+    KUMI_ABI constexpr auto map_reduce_(kumi::_::adl_tag_t,
+                                        M&& m,
+                                        T&& t,
+                                        F f,
+                                        S s,
+                                        kumi::index_t<N>,
+                                        std::index_sequence<I...>,
+                                        std::index_sequence<J...>)
+    {
+      if constexpr (N == 1)
+        return s(KUMI_FWD(m), kumi::tuple{kumi::invoke(KUMI_FWD(m), kumi::invoke(f, get<I>(KUMI_FWD(t))),
+                                                       kumi::invoke(f, get<J>(KUMI_FWD(t))))...,
+                                          kumi::invoke(f, get<kumi::size_v<T> - 1>(KUMI_FWD(t)))});
+      else
+        return s(KUMI_FWD(m), kumi::tuple{kumi::invoke(KUMI_FWD(m), kumi::invoke(f, get<I>(KUMI_FWD(t))),
+                                                       kumi::invoke(f, get<J>(KUMI_FWD(t))))...});
+    }
+  }
+
+  struct reduce_t
+  {
+    template<kumi::concepts::monoid M, kumi::concepts::product_type T>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(M&& m, T&& t) const
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return m.identity;
+      else if constexpr (kumi::concepts::record_type<T>) return (*this)(KUMI_FWD(m), kumi::values_of(KUMI_FWD(t)));
+      else if constexpr (kumi::concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
+      else
+      {
+        constexpr auto sz = kumi::size_v<T>;
+        constexpr auto pos = kumi::function::reducer(std::make_index_sequence<sz / 2>{}, index<sz % 2>);
+        return reduce_(kumi::_::adl_tag, KUMI_FWD(m), (*this), KUMI_FWD(t), get<2>(pos), get<0>(pos), get<1>(pos));
+      }
+    }
+
+    template<kumi::concepts::monoid M, kumi::concepts::product_type T, typename Value>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(M&& m, T&& t, Value init) const
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return init;
+      else return KUMI_FWD(m)(init, (*this)(KUMI_FWD(m), KUMI_FWD(t)));
+    }
+  };
+
+  struct map_reduce_t
+  {
+    template<kumi::concepts::product_type T, kumi::concepts::monoid M, typename Function>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, M&& m, T&& t) const
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return m.identity;
+      else if constexpr (kumi::concepts::record_type<T>) return (*this)(f, KUMI_FWD(m), kumi::values_of(KUMI_FWD(t)));
+      else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::invoke(f, get<0>(KUMI_FWD(t)));
+      else
+      {
+        constexpr auto sz = kumi::size_v<T>;
+        constexpr auto pos = kumi::function::reducer(std::make_index_sequence<sz / 2>{}, index<sz % 2>);
+        return map_reduce_(kumi::_::adl_tag, KUMI_FWD(m), KUMI_FWD(t), f, kumi::reduce_t{}, get<2>(pos), get<0>(pos),
+                           get<1>(pos));
+      }
+    }
+
+    template<kumi::concepts::monoid M, kumi::concepts::product_type T, typename Function, typename Value>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, M&& m, T&& t, Value init) const
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return kumi::invoke(f, init);
+      else return KUMI_FWD(m)(kumi::invoke(f, init), (*this)(f, KUMI_FWD(m), KUMI_FWD(t)));
+    }
+  };
+
+  struct sum_t : private kumi::reduce_t
+  {
+    template<kumi::concepts::product_type T, typename Value>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, Value init) const
+    {
+      return this->reduce_t::operator()(kumi::function::plus, KUMI_FWD(t), init);
+    }
+
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
+    {
+      return this->reduce_t::operator()(kumi::function::plus, KUMI_FWD(t));
+    }
+  };
+
+  struct prod_t : private kumi::reduce_t
+  {
+    template<kumi::concepts::product_type T, typename Value>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, Value init) const
+    {
+      return this->reduce_t::operator()(kumi::function::multiplies, KUMI_FWD(t), init);
+    }
+
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
+    {
+      return this->reduce_t::operator()(kumi::function::multiplies, KUMI_FWD(t));
+    }
+  };
+
+  struct bit_and_t : private kumi::reduce_t
+  {
+    template<kumi::concepts::product_type T, typename Value>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, Value init) const
+    {
+      return this->reduce_t::operator()(kumi::function::bit_and, KUMI_FWD(t), init);
+    }
+
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
+    {
+      return this->reduce_t::operator()(kumi::function::bit_and, KUMI_FWD(t));
+    }
+  };
+
+  struct bit_or_t : private kumi::reduce_t
+  {
+    template<kumi::concepts::product_type T, typename Value>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, Value init) const
+    {
+      return this->reduce_t::operator()(kumi::function::bit_or, KUMI_FWD(t), init);
+    }
+
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
+    {
+      return this->reduce_t::operator()(kumi::function::bit_or, KUMI_FWD(t));
+    }
+  };
+
+  struct bit_xor_t : private kumi::reduce_t
+  {
+    template<kumi::concepts::product_type T, typename Value>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, Value init) const
+    {
+      return this->reduce_t::operator()(kumi::function::bit_xor, KUMI_FWD(t), init);
+    }
+
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
+    {
+      return this->reduce_t::operator()(kumi::function::bit_xor, KUMI_FWD(t));
+    }
+  };
+
   //====================================================================================================================
   /**
-    @ingroup  reductions
-    @brief    Performs a tree-like reduction of all elements of a product type.
+    @ingroup reductions
+
+    @var reduce
+    @brief Callable object performing a tree-like reduction of all elements of a product type.
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 
     @note For associative operations, this produces the same result as a left or right fold,
           but have different intermediate evaluation order.
 
-    @param m   Monoid callable function to apply
-    @param t   Product type to reduce
-    @return    The result of reducing the elements of `t` by `m`, recursively combining elements in a tree structure.
+    @qualifier nodiscard inline constexpr
 
-    ## Helper type
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/reduce.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<monoid M, product_type T>
+      constexpr auto reduce(M && m, T && t);
+    @endcode
+
+    @code
+      template<monoid M, product_type T, typename V>
+      constexpr auto reduce(M && m, T && t, V init);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `m`: Monoid callable function to apply
+      - `t`: Product Type to reduce
+      - `init`: Optional initial value of the reduction.
+
+    @subgroupheader{Return value}
+
+      * The result of reducing the elements of `t` by `m`, recursively combining elements in a tree structure.
+
+    @groupheader{Helper type}
+
     @code
     namespace kumi::result
     {
@@ -31,60 +210,7 @@ namespace kumi
 
       template<monoid M, product_type T>
       using reduce_t = typename reduce<M,T>::type;
-    }
-    @endcode
 
-    Computes the return type of a call to kumi::reduce
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/reduce.cpp
-    ### Record:
-    @include doc/record/algo/reduce.cpp
-  **/
-  //====================================================================================================================
-  template<kumi::concepts::monoid M, kumi::concepts::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto reduce(M&& m, T&& t)
-  {
-    if constexpr (kumi::concepts::empty_product_type<T>) return m.identity;
-    else if constexpr (kumi::concepts::record_type<T>) return kumi::reduce(KUMI_FWD(m), kumi::values_of(KUMI_FWD(t)));
-    else if constexpr (kumi::concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
-    else
-    {
-      constexpr auto sz = kumi::size_v<T>;
-      constexpr auto pos = kumi::function::reducer(std::make_index_sequence<sz / 2>{}, index<sz % 2>);
-
-      return [&]<std::size_t... F, std::size_t... S>(std::index_sequence<F...>, std::index_sequence<S...>) {
-        if constexpr (get<2>(pos) == 1)
-          return kumi::reduce(KUMI_FWD(m),
-                              kumi::tuple{kumi::invoke(KUMI_FWD(m), get<F>(KUMI_FWD(t)), get<S>(KUMI_FWD(t)))...,
-                                          get<kumi::size_v<T> - 1>(KUMI_FWD(t))});
-        else
-          return kumi::reduce(KUMI_FWD(m),
-                              kumi::tuple{invoke(KUMI_FWD(m), get<F>(KUMI_FWD(t)), get<S>(KUMI_FWD(t)))...});
-      }(get<0>(pos), get<1>(pos));
-    }
-  }
-
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Performs a tree-like reduction of all elements of a product type.
-
-    On record types, this function operates on the underlying values, not on the fields themselves.
-
-    @note For associative operations, this produces the same result as a left or right fold,
-          but have different intermediate evaluation order.
-
-    @param m    Monoid callable function to apply
-    @param t    Product type to reduce
-    @param init Optional initial value of the reduction.
-    @return     The result of reducing the elements of `t` by `m`, recursively combining elements in a tree structure.
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
       template<monoid M, product_type T, typename Value> struct reduce;
 
       template<monoid M, product_type T, typename Value>
@@ -94,38 +220,64 @@ namespace kumi
 
     Computes the return type of a call to kumi::reduce
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/reduce.cpp
-    ### Record:
-    @include doc/record/algo/reduce.cpp
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/reduce.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/reduce.cpp}
   **/
   //====================================================================================================================
-  template<kumi::concepts::monoid M, kumi::concepts::product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto reduce(M&& m, T&& t, Value init)
-  {
-    if constexpr (kumi::concepts::empty_product_type<T>) return init;
-    else return KUMI_FWD(m)(init, kumi::reduce(KUMI_FWD(m), KUMI_FWD(t)));
-  }
+  inline constexpr reduce_t reduce{};
 
   //====================================================================================================================
   /**
-    @ingroup  reductions
-    @brief    Performs a tree-like reduction of all elements of a product type. The given map
+    @ingroup reductions
+
+    @var map_reduce
+    @brief Callable object performing a tree-like reduction of all elements of a product type. The given map
               function is applied before excution the reduction to each element of the input.
+
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 
-    @note For associative operations, this produces the same result as a left or right fold
-          preceeded by map, but have different intermediate evaluation order.
+    @note For associative operations, this produces the same result as a left or right fold preceeded by map,
+          but have different intermediate evaluation order.
 
-    @param f  Mapping function to apply
-    @param m  Monoid callable function to apply
-    @param t  Product type to reduce
-    @return   The result of reducing the elements of `t` by `m` after beeing processed by `f`,
-              recursively combining elements in a tree structure.
+    @qualifier nodiscard inline constexpr
 
-    ## Helper type
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/reduce.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<typename Function, monoid M, product_type T>
+      constexpr auto map_reduce(Function f, M && m, T && t);
+    @endcode
+
+    @code
+      template<typename Function, monoid M, product_type T, typename V>
+      constexpr auto reduce(Function f, M && m, T && t, V init);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `f`: Mapping function to apply
+      - `m`: Monoid callable function to apply
+      - `t`: Product Type to reduce
+      - `init`: Optional initial value of the reduction.
+
+    @subgroupheader{Return value}
+
+      * The result of reducing the elements of `t` by `m` after beeing processed by `f`,
+        recursively combining elements in a tree structure.
+
+    @groupheader{Helper type}
+
     @code
     namespace kumi::result
     {
@@ -133,64 +285,7 @@ namespace kumi
 
       template<monoid M, product_type T>
       using map_reduce_t = typename map_reduce<M,T>::type;
-    }
-    @endcode
 
-    Computes the return type of a call to kumi::map_reduce
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/map_reduce.cpp
-    ### Record:
-    @include doc/record/algo/map_reduce.cpp
-  **/
-  //====================================================================================================================
-  template<kumi::concepts::product_type T, kumi::concepts::monoid M, typename Function>
-  [[nodiscard]] KUMI_ABI constexpr auto map_reduce(Function f, M&& m, T&& t)
-  {
-    if constexpr (kumi::concepts::empty_product_type<T>) return m.identity;
-    else if constexpr (kumi::concepts::record_type<T>)
-      return kumi::map_reduce(f, KUMI_FWD(m), kumi::values_of(KUMI_FWD(t)));
-    else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::invoke(f, get<0>(KUMI_FWD(t)));
-    else
-    {
-      constexpr auto sz = kumi::size_v<T>;
-      constexpr auto pos = kumi::function::reducer(std::make_index_sequence<sz / 2>{}, index<sz % 2>);
-
-      return [&]<std::size_t... F, std::size_t... S>(std::index_sequence<F...>, std::index_sequence<S...>) {
-        if constexpr (get<2>(pos) == 1)
-          return kumi::reduce(KUMI_FWD(m), kumi::tuple{kumi::invoke(KUMI_FWD(m), kumi::invoke(f, get<F>(KUMI_FWD(t))),
-                                                                    kumi::invoke(f, get<S>(KUMI_FWD(t))))...,
-                                                       kumi::invoke(f, get<kumi::size_v<T> - 1>(KUMI_FWD(t)))});
-        else
-          return kumi::reduce(KUMI_FWD(m), kumi::tuple{kumi::invoke(KUMI_FWD(m), kumi::invoke(f, get<F>(KUMI_FWD(t))),
-                                                                    kumi::invoke(f, get<S>(KUMI_FWD(t))))...});
-      }(get<0>(pos), get<1>(pos));
-    }
-  }
-
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Performs a tree-like reduction of all elements of a product type. The given map
-              function is applied before excution the reduction to each element of the input.
-
-    On record types, this function operates on the underlying values, not on the fields themselves.
-
-    @note For associative operations, this produces the same result as a left or right fold
-          preceeded by map, but have different intermediate evaluation order.
-
-    @param f    Mapping function to apply
-    @param m    Monoid callable function to apply
-    @param t    Product type to reduce
-    @param init Optional initial value of the reduction.
-    @return     The result of reducing `t` by `m` after beeing processed by `f`,
-                recursively combining elements in a tree structure
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
       template<monoid M, product_type T, typename Value> struct map_reduce;
 
       template<monoid M, product_type T, typename Value>
@@ -200,32 +295,59 @@ namespace kumi
 
     Computes the return type of a call to kumi::map_reduce
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/map_reduce.cpp
-    ### Record:
-    @include doc/record/algo/map_reduce.cpp
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/map_reduce.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/map_reduce.cpp}
   **/
   //====================================================================================================================
-  template<kumi::concepts::monoid M, kumi::concepts::product_type T, typename Function, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto map_reduce(Function f, M&& m, T&& t, Value init)
-  {
-    if constexpr (kumi::concepts::empty_product_type<T>) return kumi::invoke(f, init);
-    else return KUMI_FWD(m)(kumi::invoke(f, init), kumi::map_reduce(f, KUMI_FWD(m), KUMI_FWD(t)));
-  }
+  inline constexpr map_reduce_t map_reduce{};
 
   //====================================================================================================================
   /**
-    @ingroup  reductions
-    @brief    Computes the sum of all elements.
+    @ingroup reductions
+
+    @var sum
+    @brief Callable object computing the sum of all elements.
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 
-    @param t      Product type to operate on
-    @param init   Optional initial value of the sum
-    @return       The value of `get<0>(t) + ... + get<N-1>(t) + init`
+    @note For associative operations, this produces the same result as a left or right fold,
+          but have different intermediate evaluation order.
 
-    ## Helper type
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/reduce.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T>
+      constexpr auto sum(T && t);
+    @endcode
+
+    @code
+      template<product_type T, typename V>
+      constexpr auto sum(T && t, V init);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to operate on
+      - `init`: Optional initial value of the reduction.
+
+    @subgroupheader{Return value}
+
+      * The result of the computation of `get<0>(t) + ... + get<N-1>(t) + init`
+
+    @groupheader{Helper type}
+
     @code
     namespace kumi::result
     {
@@ -238,65 +360,59 @@ namespace kumi
 
     Computes the return type of a call to kumi::sum
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/sum.cpp
-    ### Record:
-    @include doc/record/algo/sum.cpp
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/sum.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/sum.cpp}
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T, typename Value> [[nodiscard]] KUMI_ABI constexpr auto sum(T&& t, Value init)
-  {
-    return kumi::reduce(kumi::function::plus, KUMI_FWD(t), init);
-  }
+  inline constexpr sum_t sum{};
 
   //====================================================================================================================
   /**
-    @ingroup  reductions
-    @brief  Computes the sum of all elements.
+    @ingroup reductions
+
+    @var prod
+    @brief Callable object computing the product of all elements.
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 
-    @param t      Product type to operate on
-    @return       The value of `get<0>(t) + ... + get<N-1>(t)`
+    @note For associative operations, this produces the same result as a left or right fold,
+          but have different intermediate evaluation order.
 
-    ## Helper type
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
     @code
-    namespace kumi::result
-    {
-      template<product_type T> struct sum;
-
-      template<product_type Te>
-      using sum_t = typename sum<T>::type;
-    }
+    #include <kumi/algorithm/reduce.hpp>
     @endcode
 
-    Computes the return type of a call to kumi::sum
+    @groupheader{Call Signature}
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/sum.cpp
-    ### Record:
-    @include doc/record/algo/sum.cpp
-  **/
-  //====================================================================================================================
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto sum(T&& t)
-  {
-    return kumi::reduce(kumi::function::plus, KUMI_FWD(t));
-  }
+    @code
+      template<product_type T>
+      constexpr auto prod(T && t);
+    @endcode
 
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the product of all elements.
+    @code
+      template<product_type T, typename V>
+      constexpr auto prod(T && t, V init);
+    @endcode
 
-    On record types, this function operates on the underlying values, not on the fields themselves.
+    @subgroupheader{Parameters}
 
-    @param t      Product type to operate on
-    @param init   Initial value of the product
-    @return The value of `get<0>(t) * ... * get<N-1>(t) * init`
+      - `t`: Product Type to operate on
+      - `init`: Optional initial value of the reduction.
 
-    ## Helper type
+    @subgroupheader{Return value}
+
+      * The result of the computation of `get<0>(t) * ... * get<N-1>(t) * init`
+
+    @groupheader{Helper type}
+
     @code
     namespace kumi::result
     {
@@ -309,65 +425,59 @@ namespace kumi
 
     Computes the return type of a call to kumi::prod
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/prod.cpp
-    ### Record:
-    @include doc/record/algo/prod.cpp
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/prod.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/prod.cpp}
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T, typename Value> [[nodiscard]] KUMI_ABI constexpr auto prod(T&& t, Value init)
-  {
-    return kumi::reduce(kumi::function::multiplies, KUMI_FWD(t), init);
-  }
+  inline constexpr prod_t prod{};
 
   //====================================================================================================================
   /**
-    @ingroup  reductions
-    @brief    Computes the product of all elements.
+    @ingroup reductions
+
+    @var bit_and
+    @brief Callable object computing the bitwise AND of all elements.
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 
-    @param t      Product type to operate on
-    @return The value of `get<0>(t) * ... * get<N-1>(t)`
+    @note For associative operations, this produces the same result as a left or right fold,
+          but have different intermediate evaluation order.
 
-    ## Helper type
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
     @code
-    namespace kumi::result
-    {
-      template<product_type T> struct prod;
-
-      template<product_type T>
-      using prod_t = typename prod<T>::type;
-    }
+    #include <kumi/algorithm/reduce.hpp>
     @endcode
 
-    Computes the return type of a call to kumi::prod
+    @groupheader{Call Signature}
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/prod.cpp
-    ### Record:
-    @include doc/record/algo/prod.cpp
-  **/
-  //====================================================================================================================
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto prod(T&& t)
-  {
-    return kumi::reduce(kumi::function::multiplies, KUMI_FWD(t));
-  }
+    @code
+      template<product_type T>
+      constexpr auto bit_and(T && t);
+    @endcode
 
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the bitwise AND of all elements.
+    @code
+      template<product_type T, typename V>
+      constexpr auto bit_and(T && t, V init);
+    @endcode
 
-    On record types, this function operates on the underlying values, not on the fields themselves.
+    @subgroupheader{Parameters}
 
-    @param t      Product type to operate on
-    @param init   Optional initial value of the reduction
-    @return       The value of `get<0>(t) & ... & get<N-1>(t) & init`
+      - `t`: Product Type to operate on
+      - `init`: Optional initial value of the reduction.
 
-    ## Helper type
+    @subgroupheader{Return value}
+
+      * The result of the computation of `get<0>(t) & ... & get<N-1>(t) & init`
+
+    @groupheader{Helper type}
+
     @code
     namespace kumi::result
     {
@@ -380,66 +490,59 @@ namespace kumi
 
     Computes the return type of a call to kumi::bit_and
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/bit_and.cpp
-    ### Record:
-    @include doc/record/algo/bit_and.cpp
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/bit_and.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/bit_and.cpp}
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto bit_and(T&& t, Value init)
-  {
-    return kumi::reduce(kumi::function::bit_and, KUMI_FWD(t), init);
-  }
+  inline constexpr bit_and_t bit_and{};
 
   //====================================================================================================================
   /**
-    @ingroup  reductions
-    @brief    Computes the bitwise AND of all elements.
+    @ingroup reductions
+
+    @var bit_or
+    @brief Callable object computing the bitwise OR of all elements.
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 
-    @param t  Product type to operate on.
-    @return   The value of `get<0>(t) & ... & get<N-1>(t)`.
+    @note For associative operations, this produces the same result as a left or right fold,
+          but have different intermediate evaluation order.
 
-    ## Helper type
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
     @code
-    namespace kumi::result
-    {
-      template<product_type T> struct bit_and;
-
-      template<product_type T>
-      using bit_and_t = typename bit_and<T>::type;
-    }
+    #include <kumi/algorithm/reduce.hpp>
     @endcode
 
-    Computes the return type of a call to kumi::bit_and
+    @groupheader{Call Signature}
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/bit_and.cpp
-    ### Record:
-    @include doc/record/algo/bit_and.cpp
-  **/
-  //====================================================================================================================
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto bit_and(T&& t)
-  {
-    return kumi::reduce(kumi::function::bit_and, KUMI_FWD(t));
-  }
+    @code
+      template<product_type T>
+      constexpr auto bit_or(T && t);
+    @endcode
 
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the bitwise OR of all elements.
+    @code
+      template<product_type T, typename V>
+      constexpr auto bit_or(T && t, V init);
+    @endcode
 
-    On record types, this function operates on the underlying values, not on the fields themselves.
+    @subgroupheader{Parameters}
 
-    @param t      Product type to operate on
-    @param init   Optional initial value of the reduction
-    @return       The value of `get<0>(t) | ... | get<N-1>(t) | init`
+      - `t`: Product Type to operate on
+      - `init`: Optional initial value of the reduction.
 
-    ## Helper type
+    @subgroupheader{Return value}
+
+      * The result of the computation of `get<0>(t) | ... | get<N-1>(t) | init`
+
+    @groupheader{Helper type}
+
     @code
     namespace kumi::result
     {
@@ -452,66 +555,59 @@ namespace kumi
 
     Computes the return type of a call to kumi::bit_or
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/bit_or.cpp
-    ### Record:
-    @include doc/record/algo/bit_or.cpp
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/bit_or.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/bit_or.cpp}
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto bit_or(T&& t, Value init)
-  {
-    return kumi::reduce(kumi::function::bit_or, KUMI_FWD(t), init);
-  }
+  inline constexpr bit_or_t bit_or{};
 
   //====================================================================================================================
   /**
-    @ingroup  reductions
-    @brief    Computes the bitwise OR of all elements.
+    @ingroup reductions
+
+    @var bit_xor
+    @brief Callable object computing the bitwise XOR of all elements.
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 
-    @param t  Product type to operate on
-    @return   The value of `get<0>(t) | ... | get<N-1>(t)`
+    @note For associative operations, this produces the same result as a left or right fold,
+          but have different intermediate evaluation order.
 
-    ## Helper type
+    @qualifier nodiscard inline constexpr
+
+    @groupheader{Header file}
     @code
-    namespace kumi::result
-    {
-      template<product_type T> struct bit_or;
-
-      template<product_type T>
-      using bit_or_t = typename bit_or<T>::type;
-    }
+    #include <kumi/algorithm/reduce.hpp>
     @endcode
 
-    Computes the return type of a call to kumi::bit_or
+    @groupheader{Call Signature}
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/bit_or.cpp
-    ### Record:
-    @include doc/record/algo/bit_or.cpp
-  **/
-  //====================================================================================================================
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto bit_or(T&& t)
-  {
-    return kumi::reduce(kumi::function::bit_or, KUMI_FWD(t));
-  }
+    @code
+      template<product_type T>
+      constexpr auto bit_xor(T && t);
+    @endcode
 
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the bitwise XOR of all elements.
+    @code
+      template<product_type T, typename V>
+      constexpr auto bit_xor(T && t, V init);
+    @endcode
 
-    On record types, this function operates on the underlying values, not on the fields themselves.
+    @subgroupheader{Parameters}
 
-    @param t      Product type to operate on
-    @param init   Optional initial value of the reduction
-    @return       The value of `get<0>(t) ^ ... ^ get<N-1>(t) ^ init`
+      - `t`: Product Type to operate on
+      - `init`: Optional initial value of the reduction.
 
-    ## Helper type
+    @subgroupheader{Return value}
+
+      * The result of the computation of `get<0>(t) ^ ... ^ get<N-1>(t) ^ init`
+
+    @groupheader{Helper type}
+
     @code
     namespace kumi::result
     {
@@ -524,53 +620,16 @@ namespace kumi
 
     Computes the return type of a call to kumi::bit_xor
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/bit_xor.cpp
-    ### Record:
-    @include doc/record/algo/bit_xor.cpp
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/bit_xor.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/bit_xor.cpp}
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T, typename Value>
-  [[nodiscard]] KUMI_ABI constexpr auto bit_xor(T&& t, Value init)
-  {
-    return kumi::reduce(kumi::function::bit_xor, KUMI_FWD(t), init);
-  }
-
-  //====================================================================================================================
-  /**
-    @ingroup  reductions
-    @brief    Computes the bitwise XOR of all elements.
-
-    On record types, this function operates on the underlying values, not on the fields themselves.
-
-    @param t  Product type to operate on
-    @return   The value of `get<0>(t) ^ ... ^ get<N-1>(t)`
-
-    ## Helper type
-    @code
-    namespace kumi::result
-    {
-      template<product_type T> struct bit_xor;
-
-      template<product_type T>
-      using bit_xor_t = typename bit_xor<T>::type;
-    }
-    @endcode
-
-    Computes the return type of a call to kumi::bit_xor
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/bit_xor.cpp
-    ### Record:
-    @include doc/record/algo/bit_xor.cpp
-  **/
-  //====================================================================================================================
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto bit_xor(T&& t)
-  {
-    return kumi::reduce(kumi::function::bit_xor, KUMI_FWD(t));
-  }
+  inline constexpr bit_xor_t bit_xor{};
 
   namespace result
   {

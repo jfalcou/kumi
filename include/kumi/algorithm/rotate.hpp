@@ -9,119 +9,166 @@
 
 namespace kumi
 {
+  template<std::size_t R> struct rotate_left_t
+  {
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
+      else if constexpr ((R % kumi::size_v<T>) == 0) return KUMI_FWD(t);
+      else
+      {
+        constexpr auto idxs =
+          kumi::function::rotater(std::make_index_sequence<kumi::size_v<T>>{}, kumi::index<(R % kumi::size_v<T>)>);
+        return kumi::function::builder(KUMI_FWD(t), idxs);
+      }
+    }
+  };
+
+  template<std::size_t R> struct rotate_right_t
+  {
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
+      else if constexpr ((R % kumi::size_v<T>) == 0) return KUMI_FWD(t);
+      else
+      {
+        constexpr auto F = R % kumi::size_v<T>;
+        constexpr auto idxs =
+          kumi::function::rotater(std::make_index_sequence<kumi::size_v<T>>{}, kumi::index<(kumi::size_v<T> - F)>);
+        return kumi::function::builder(KUMI_FWD(t), idxs);
+      }
+    }
+  };
+
   //====================================================================================================================
   /**
-    @ingroup  generators
-    @brief    Rotates the element of a product type R positions to the left, wrapping around when
-              getting to the beginning.
+    @ingroup generators
+
+    @var rotate_left
+    @brief Callable object
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
 
-    @tparam R Rotation factor
-    @param t  Product type to rotate.
-    @return   A product type equivalent to `t` with elements rotated R positions to the left.
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
-    ## Helper type
+    @groupheader{Header file}
     @code
-    namespace kumi::result
-    {
-      template<std::size_t R, product_type T> struct rotate_left;
-
-      template<std::size_t R, product_type T>
-      using rotate_left_t = typename rotate_left<R, T>::type;
-    }
+    #include <kumi/algorithm/rotate.hpp>
     @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<std::size_t R, product_type T>
+      constexpr auto rotate_left<R>(T && t) ;
+    @endcode
+
+    @subgroupheader{Template Parameters}
+      - `R`:  Rotation factor
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to rotate
+
+    @subgroupheader{Return value}
+
+      - A product type equivalent to `t` with elements rotated R positions to the left.
+
+    @groupheader{Helper type}
+
+    @snippet include/kumi/algorithm/rotate.hpp rotate_left_t
 
     Computes the return type of a call to kumi::rotate_left
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/rotate_left.cpp
-    ### Record:
-    @include doc/record/algo/rotate_left.cpp
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/rotate_left.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/rotate_left.cpp}
   **/
   //====================================================================================================================
-  template<std::size_t R, kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto rotate_left(T&& t)
-  {
-    if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
-    else if constexpr ((R % kumi::size_v<T>) == 0) return KUMI_FWD(t);
-    else
-    {
-      constexpr auto idxs =
-        kumi::function::rotater(std::make_index_sequence<kumi::size_v<T>>{}, kumi::index<(R % kumi::size_v<T>)>);
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = builder_make_t<T, kumi::element_t<I, T>...>;
-        return type{get<I>(KUMI_FWD(t))...};
-      }(idxs);
-    }
-  }
+  template<std::size_t R> inline constexpr rotate_left_t<R> rotate_left{};
 
   //====================================================================================================================
   /**
-    @ingroup  generators
-    @brief    Rotates the element of a product type R positions to the right, wrapping around when
-              getting to the end.
+    @ingroup generators
+
+    @var rotate_right
+    @brief Callable object
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
 
-    @tparam R Rotation factor
-    @param t  Product type to rotate.
-    @return   A product type equivalent to `t` with elements rotated R positions to the right.
+    @qualifier nodiscard
+    @qualifier inline
+    @qualifier constexpr
 
-    ## Helper type
+    @groupheader{Header file}
     @code
-    namespace kumi::result
-    {
-      template<std::size_t R, product_type T> struct rotate_right;
-
-      template<std::size_t R, product_type T>
-      using rotate_right_t = typename rotate_right<R, T>::type;
-    }
+    #include <kumi/algorithm/rotate.hpp>
     @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<std::size_t R, product_type T>
+      constexpr auto rotate_right<R>(T && t) ;
+    @endcode
+
+    @subgroupheader{Template Parameters}
+      - `R`:  Rotation factor
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to rotate
+
+    @subgroupheader{Return value}
+
+      - A product type equivalent to `t` with elements rotated R positions to the right.
+
+    @groupheader{Helper type}
+
+    @snippet include/kumi/algorithm/rotate.hpp rotate_right_t
 
     Computes the return type of a call to kumi::rotate_right
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/rotate_right.cpp
-    ### Record:
-    @include doc/record/algo/rotate_right.cpp
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/rotate_right.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/rotate_right.cpp}
   **/
   //====================================================================================================================
-  template<std::size_t R, kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto rotate_right(T&& t)
-  {
-    if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
-    else if constexpr ((R % kumi::size_v<T>) == 0) return KUMI_FWD(t);
-    else
-    {
-      constexpr auto F = R % kumi::size_v<T>;
-      constexpr auto idxs =
-        kumi::function::rotater(std::make_index_sequence<kumi::size_v<T>>{}, kumi::index<(kumi::size_v<T> - F)>);
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        using type = builder_make_t<T, kumi::element_t<I, T>...>;
-        return type{get<I>(KUMI_FWD(t))...};
-      }(idxs);
-    }
-  }
+  template<std::size_t R> inline constexpr rotate_right_t<R> rotate_right{};
 
   namespace result
   {
+    //! [rotate_left_t]
     template<std::size_t R, kumi::concepts::product_type T> struct rotate_left
     {
       using type = decltype(kumi::rotate_left<R>(std::declval<T>()));
     };
 
+    template<std::size_t R, kumi::concepts::product_type T>
+    using rotate_left_t = typename kumi::result::rotate_left<R, T>::type;
+
+    //! [rotate_left_t]
+
+    //! [rotate_right_t]
     template<std::size_t R, kumi::concepts::product_type T> struct rotate_right
     {
       using type = decltype(kumi::rotate_right<R>(std::declval<T>()));
     };
 
     template<std::size_t R, kumi::concepts::product_type T>
-    using rotate_left_t = typename kumi::result::rotate_left<R, T>::type;
-
-    template<std::size_t R, kumi::concepts::product_type T>
     using rotate_right_t = typename kumi::result::rotate_right<R, T>::type;
+    //! [rotate_right_t]
   }
 }

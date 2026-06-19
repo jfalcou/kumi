@@ -9,210 +9,339 @@
 
 namespace kumi
 {
-  //====================================================================================================================
-  /**
-    @ingroup  queries
-    @brief    Checks if a unary predicate p returns true for every element of t.
-    @param  t Product Type to process.
-    @param  p Unary predicate.
-    @return   The evaluation of `p(get<0>(t)) && ... && p(get<N-1>(t))` where `N` is the size of `t`.
-
-    On a record type, the function operates on the underlying elements of the fields.
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/all_of.cpp
-    ### Record:
-    @include doc/record/algo/all_of.cpp
-  **/
-  //====================================================================================================================
-  template<typename Pred, kumi::concepts::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto all_of(T&& t, Pred p) noexcept
+  namespace _
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return true;
-    else if constexpr (kumi::concepts::record_type<T>) return kumi::all_of(kumi::values_of(KUMI_FWD(t)), p);
-    else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::invoke(p, get<0>(KUMI_FWD(t)));
-    else
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (kumi::invoke(p, get<I>(KUMI_FWD(t))) && ...);
-      }(std::make_index_sequence<kumi::size_v<T>>{});
+    template<typename T, typename Pred, std::size_t... I>
+    KUMI_ABI constexpr auto all_of_(kumi::_::adl_tag_t, T&& t, Pred p, std::index_sequence<I...>)
+    {
+      return (kumi::invoke(p, get<I>(KUMI_FWD(t))) && ...);
+    }
+
+    template<typename T, typename Pred, std::size_t... I>
+    KUMI_ABI constexpr auto any_of_(kumi::_::adl_tag_t, T&& t, Pred p, std::index_sequence<I...>)
+    {
+      return (kumi::invoke(p, get<I>(KUMI_FWD(t))) || ...);
+    }
+
+    template<typename Pred, typename T, std::size_t... I>
+    KUMI_ABI constexpr std::size_t count_if_(kumi::_::adl_tag_t, T&& t, Pred p, std::index_sequence<I...>)
+    {
+      [[maybe_unused]] constexpr std::size_t o = 1ULL;
+      [[maybe_unused]] constexpr std::size_t z = 0ULL;
+      return ((kumi::invoke(p, get<I>(KUMI_FWD(t))) ? o : z) + ... + z);
+    }
   }
 
-  //====================================================================================================================
-  /**
-    @ingroup  queries
-    @brief    Computes the reduction of a product type over the `&&` operator.
-    @param  t Product type to process.
-    @return   The evaluation of `get<0>(t) && ... && get<N-1>(t)` where `N` is the size of `t`.
-
-    On a record type, the function operates on the underlying elements of the fields.
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/all_of.cpp
-    ### Record:
-    @include doc/record/algo/all_of.cpp
-  **/
-  //====================================================================================================================
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto all_of(T&& t) noexcept
+  struct all_of_t
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return true;
-    else if constexpr (kumi::concepts::record_type<T>) return kumi::all_of(kumi::values_of(KUMI_FWD(t)));
-    else if constexpr (kumi::concepts::sized_product_type<T, 1>) return !!get<0>(KUMI_FWD(t));
-    else
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (get<I>(KUMI_FWD(t)) && ...);
-      }(std::make_index_sequence<kumi::size_v<T>>{});
-  }
+    template<typename Pred, kumi::concepts::product_type T>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, Pred p) const noexcept
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return true;
+      else if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)), p);
+      else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::invoke(p, get<0>(KUMI_FWD(t)));
+      else return all_of_(kumi::_::adl_tag, KUMI_FWD(t), p, std::make_index_sequence<kumi::size_v<T>>{});
+    }
 
-  //====================================================================================================================
-  /**
-    @ingroup  queries
-    @brief    Checks if a unary predicate p returns true for any element of t.
-    @param  t Product Type to process.
-    @param  p Unary predicate.
-    @return   The evaluation of `p(get<0>(t)) || ... || p(get<N-1>(t))` where `N` is the size of `t`.
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return true;
+      else if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)));
+      else if constexpr (kumi::concepts::sized_product_type<T, 1>) return !!get<0>(KUMI_FWD(t));
+      else return (*this)(KUMI_FWD(t), kumi::function::identity);
+    }
+  };
 
-    On a record type, the function operates on the underlying elements of the fields.
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/any_of.cpp
-    ### Record:
-    @include doc/record/algo/any_of.cpp
-  **/
-  //====================================================================================================================
-  template<typename Pred, kumi::concepts::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr auto any_of(T&& t, Pred p) noexcept
+  struct any_of_t
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return true;
-    else if constexpr (kumi::concepts::record_type<T>) return kumi::any_of(kumi::values_of(KUMI_FWD(t)), p);
-    else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::invoke(p, get<0>(KUMI_FWD(t)));
-    else
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (kumi::invoke(p, get<I>(KUMI_FWD(t))) || ...);
-      }(std::make_index_sequence<kumi::size_v<T>>{});
-  }
+    template<typename Pred, kumi::concepts::product_type T>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, Pred p) const noexcept
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return true;
+      else if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)), p);
+      else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::invoke(p, get<0>(KUMI_FWD(t)));
+      else return any_of_(kumi::_::adl_tag, KUMI_FWD(t), p, std::make_index_sequence<kumi::size_v<T>>{});
+    }
 
-  //====================================================================================================================
-  /**
-    @ingroup  queries
-    @brief    Computes the reduction of a product type over the `||` operator.
-    @param  t Product type to process.
-    @return   The evaluation of `get<0>(t) || ... || get<N-1>(t)` where `N` is the size of `t`.
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return false;
+      else if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)));
+      else if constexpr (kumi::concepts::sized_product_type<T, 1>) return !!get<0>(KUMI_FWD(t));
+      else return (*this)(KUMI_FWD(t), kumi::function::identity);
+    }
+  };
 
-    On a record type, the function operates on the underlying elements of the fields.
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/any_of.cpp
-    ### Record:
-    @include doc/record/algo/any_of.cpp
-  **/
-  //====================================================================================================================
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto any_of(T&& t) noexcept
+  struct none_of_t : private kumi::any_of_t
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return false;
-    else if constexpr (kumi::concepts::record_type<T>) return kumi::any_of(kumi::values_of(KUMI_FWD(t)));
-    else if constexpr (kumi::concepts::sized_product_type<T, 1>) return !!get<0>(KUMI_FWD(t));
-    else
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (get<I>(KUMI_FWD(t)) || ...);
-      }(std::make_index_sequence<kumi::size_v<T>>{});
-  }
+    template<typename Pred, kumi::concepts::product_type T>
+    [[nodiscard]] KUMI_ABI constexpr bool operator()(T&& t, Pred p) const noexcept
+    {
+      return !kumi::any_of_t::operator()(KUMI_FWD(t), p);
+    }
 
-  //====================================================================================================================
-  /**
-    @ingroup  queries
-    @brief    Checks if a unary predicate p does not returns true for any element in t.
-    @param  t Product Type to process.
-    @param  p Unary predicate.
-    @return   The evaluation of `!any_of(t,p)`.
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr bool operator()(T&& t) const noexcept
+    {
+      return !kumi::any_of_t::operator()(KUMI_FWD(t));
+    }
+  };
 
-    On a record type, the function operates on the underlying elements of the fields.
-
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/none_of.cpp
-    ### Record:
-    @include doc/record/algo/none_of.cpp
-  **/
-  //====================================================================================================================
-  template<typename Pred, kumi::concepts::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr bool none_of(T&& t, Pred p) noexcept
+  struct count_if_t
   {
-    return !kumi::any_of(KUMI_FWD(t), p);
-  }
+    template<typename Pred, kumi::concepts::product_type T>
+    [[nodiscard]] KUMI_ABI constexpr std::size_t operator()(T&& t, Pred p) const noexcept
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return 0ULL;
+      else if constexpr (kumi::concepts::record_type<T>) return (*this)(values_of(KUMI_FWD(t)), p);
+      else return count_if_(kumi::_::adl_tag, KUMI_FWD(t), p, std::make_index_sequence<kumi::size_v<T>>{});
+    }
+  };
+
+  struct count_t : private kumi::count_if_t
+  {
+    template<kumi::concepts::product_type T>
+    [[nodiscard]] KUMI_ABI constexpr std::size_t operator()(T&& t) const noexcept
+    {
+      return kumi::count_if_t::operator()(KUMI_FWD(t), [](auto const& m) { return static_cast<bool>(m); });
+    }
+  };
 
   //====================================================================================================================
   /**
     @ingroup queries
-    @brief    Checks if no elements of a product type are true.
-    @param  t Product type to process.
-    @return   The evaluation of `!none_of(t)`.
+
+    @var all_of
+    @brief Callable object checking if a unary predicate p returns true for every element of t.
 
     On a record type, the function operates on the underlying elements of the fields.
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/none_of.cpp
-    ### Record:
-    @include doc/record/algo/none_of.cpp
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier noexcept
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/predicates.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T, typename Pred>
+      constexpr auto all_of(T && t, Pred p) noexcept;
+    @endcode
+
+    @code
+      template<product_type T, typename Pred>
+      constexpr auto all_of(T && t) noexcept;
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to process
+      - `p`: Unary predicate
+
+    @subgroupheader{Return value}
+
+      - The evaluation of `p(get<0>(t)) && ... && p(get<N-1>(t))` where `N` is the size of `t`.
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/all_of.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/all_of.cpp}
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr bool none_of(T&& t) noexcept
-  {
-    return !kumi::any_of(KUMI_FWD(t));
-  }
+  inline constexpr all_of_t all_of{};
 
   //====================================================================================================================
   /**
-    @ingroup  queries
-    @brief    Counts the number of elements of t satisfying predicates p.
-    @param  t Product Type to process
-    @param  p Unary predicate. p must return a value convertible to `bool` for every element of t.
-    @return   Number of elements satisfying the condition.
+    @ingroup queries
+
+    @var any_of
+    @brief Callable object checking if a unary predicate p returns true for any element of t.
 
     On a record type, the function operates on the underlying elements of the fields.
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/count_if.cpp
-    ### Record:
-    @include doc/record/algo/count_if.cpp
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier noexcept
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/predicates.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T, typename Pred>
+      constexpr auto any_of(T && t, Pred p) noexcept;
+    @endcode
+
+    @code
+      template<product_type T, typename Pred>
+      constexpr auto any_of(T && t) noexcept;
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to process
+      - `p`: Unary predicate
+
+    @subgroupheader{Return value}
+
+      - The evaluation of `p(get<0>(t)) || ... || p(get<N-1>(t))` where `N` is the size of `t`.
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/any_of.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/any_of.cpp}
   **/
   //====================================================================================================================
-  template<typename Pred, kumi::concepts::product_type T>
-  [[nodiscard]] KUMI_ABI constexpr std::size_t count_if(T&& t, Pred p) noexcept
-  {
-    constexpr std::size_t o = 1ULL;
-    constexpr std::size_t z = 0ULL;
-    if constexpr (kumi::concepts::empty_product_type<T>) return z;
-    else if constexpr (kumi::concepts::record_type<T>) return kumi::count_if(values_of(KUMI_FWD(t)), p);
-    else
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return ((kumi::invoke(p, get<I>(KUMI_FWD(t))) ? o : z) + ... + z);
-      }(std::make_index_sequence<kumi::size_v<T>>{});
-  }
+  inline constexpr any_of_t any_of{};
 
   //====================================================================================================================
   /**
-    @ingroup  queries
-    @brief    Counts the number of elements of t not equivalent to false.
-    @param  t Product Type to process
-    @return   Number of elements not equivalent to `false`.
+    @ingroup queries
+
+    @var none_of
+    @brief Callable object checking if a unary predicate p does not returns true for any element in t.
 
     On a record type, the function operates on the underlying elements of the fields.
 
-    ## Examples:
-    ### Tuple:
-    @include doc/tuple/algo/count.cpp
-    ### Record:
-    @include doc/record/algo/count.cpp
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier noexcept
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/predicates.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T, typename Pred>
+      constexpr auto none_of(T && t, Pred p) noexcept;
+    @endcode
+
+    @code
+      template<product_type T, typename Pred>
+      constexpr auto none_of(T && t) noexcept;
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to process
+      - `p`: Unary predicate
+
+    @subgroupheader{Return value}
+
+      - The evaluation of `!any_of(t,p)`.
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/none_of.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/none_of.cpp}
   **/
   //====================================================================================================================
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr std::size_t count(T&& t) noexcept
-  {
-    return kumi::count_if(KUMI_FWD(t), [](auto const& m) { return static_cast<bool>(m); });
-  }
+  inline constexpr none_of_t none_of{};
+
+  //====================================================================================================================
+  /**
+    @ingroup queries
+
+    @var count_if
+    @brief Callable object counting the number of elements of t satisfying predicates p.
+
+    On a record type, the function operates on the underlying elements of the fields.
+
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier noexcept
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/predicates.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T, typename Pred>
+      constexpr auto count_if(T && t, Pred p) noexcept;
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to process
+      - `p`: Unary predicate
+
+    @subgroupheader{Return value}
+
+      - Number of elements satisfying the condition.
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/count_if.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/count_if.cpp}
+  **/
+  //====================================================================================================================
+  inline constexpr count_if_t count_if{};
+
+  //====================================================================================================================
+  /**
+    @ingroup queries
+
+    @var count
+    @brief Callable object counting the number of elements of t not equivalent to false.
+
+    On a record type, the function operates on the underlying elements of the fields.
+
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier noexcept
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/algorithm/predicates.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<product_type T>
+      constexpr auto count(T && t) noexcept;
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `t`: Product Type to process
+
+    @subgroupheader{Return value}
+
+      - Number of elements not equivalent to `false`.
+
+    @groupheader{Examples}
+
+    @subgroupheader{Tuple}
+    @godbolt{doc/tuple/algo/count.cpp}
+
+    @subgroupheader{Record}
+    @godbolt{doc/record/algo/count.cpp}
+  **/
+  //====================================================================================================================
+  inline constexpr count_t count{};
 }
