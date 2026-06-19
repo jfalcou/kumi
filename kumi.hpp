@@ -3568,7 +3568,39 @@ namespace kumi
     {
       return kumi::builder<T>::make(visitor(KUMI_FWD(t), get<I>(KUMI_FWD(t)), f, self)...);
     }
+    template<typename E, std::size_t... I>
+    KUMI_ABI constexpr auto compress_(kumi::_::adl_tag_t, E&& e, std::index_sequence<I...>)
+    {
+      using V = kumi::result::field_value_of_t<E>;
+      if constexpr (sizeof...(I) == 0 || kumi::concepts::empty_product_type<V>) return kumi::builder<V>::make();
+      else
+      {
+        constexpr auto outer = kumi::label_of<E>();
+        return kumi::builder<V>::make(
+          kumi::capture_field<kumi::name<outer + kumi::label_of<kumi::element_t<I, V>>()>{}>(
+            kumi::field_value_of(get<I>(kumi::field_value_of(KUMI_FWD(e)))))...);
+      }
+    }
   }
+  struct compress_t
+  {
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
+      else
+      {
+        using V = kumi::result::field_value_of_t<kumi::element_t<0, T>>;
+        if constexpr (kumi::concepts::sized_product_type<T, 1> && kumi::concepts::follows_same_semantic<T, V>)
+        {
+          if constexpr (kumi::concepts::record_type<T>)
+            return (*this)(
+              compress_(kumi::_::adl_tag, get<0>(KUMI_FWD(t)), std::make_index_sequence<kumi::size_v<V>>{}));
+          else return (*this)(get<0>(KUMI_FWD(t)));
+        }
+        else return KUMI_FWD(t);
+      }
+    }
+  };
   struct flatten_t
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
@@ -3609,11 +3641,17 @@ namespace kumi
       return this->flatten_all_t::operator()(KUMI_FWD(t), [](auto& m) { return &m; });
     }
   };
+  inline constexpr compress_t compress{};
   inline constexpr flatten_t flatten{};
   inline constexpr flatten_all_t flatten_all{};
   inline constexpr as_flat_ptr_t as_flat_ptr{};
   namespace result
   {
+    template<kumi::concepts::product_type T> struct compress
+    {
+      using type = decltype(kumi::compress(std::declval<T>()));
+    };
+    template<kumi::concepts::product_type T> using compress_t = typename kumi::result::compress<T>::type;
     template<kumi::concepts::product_type T> struct flatten
     {
       using type = decltype(kumi::flatten(std::declval<T>()));
