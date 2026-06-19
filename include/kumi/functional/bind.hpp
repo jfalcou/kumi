@@ -21,9 +21,11 @@ namespace kumi
     struct bind_t : leaf<static_cast<std::size_t>(-1), F>,
                     make_binder_t<std::make_index_sequence<sizeof...(Bound)>, Bound...>
     {
+      static constexpr auto function_index = static_cast<std::size_t>(-1);
       static constexpr auto seq = std::make_index_sequence<sizeof...(Bound)>{};
-      using make_binder_t<std::make_index_sequence<sizeof...(Bound)>, Bound...>::operator();
-      using leaf<static_cast<std::size_t>(-1), F>::operator();
+
+      using binder_t = make_binder_t<std::make_index_sequence<sizeof...(Bound)>, Bound...>;
+      using func_t = leaf<function_index, F>;
 
       template<typename... Args> KUMI_ABI constexpr decltype(auto) operator()(Args&&... args) &
       {
@@ -50,13 +52,15 @@ namespace kumi
       {
         if constexpr (D == Binding::front)
         {
-          return kumi::invoke(KUMI_FWD(s)(std::integral_constant<size_t, static_cast<std::size_t>(-1)>{}),
-                              KUMI_FWD(s)(std::integral_constant<std::size_t, Is>{})..., KUMI_FWD(args)...);
+          return kumi::invoke(KUMI_FWD(s).func_t::operator()(std::integral_constant<size_t, function_index>{}),
+                              KUMI_FWD(s).binder_t::operator()(std::integral_constant<std::size_t, Is>{})...,
+                              KUMI_FWD(args)...);
         }
         else
         {
-          return kumi::invoke(KUMI_FWD(s)(std::integral_constant<size_t, static_cast<std::size_t>(-1)>{}),
-                              KUMI_FWD(args)..., KUMI_FWD(s)(std::integral_constant<std::size_t, Is>{})...);
+          return kumi::invoke(KUMI_FWD(s).func_t::operator()(std::integral_constant<size_t, function_index>{}),
+                              KUMI_FWD(args)...,
+                              KUMI_FWD(s).binder_t::operator()(std::integral_constant<std::size_t, Is>{})...);
         }
       }
     };

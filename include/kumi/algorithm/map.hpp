@@ -64,7 +64,8 @@ namespace kumi
     [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, T&& t0, Ts&&... others) const
     requires(kumi::concepts::compatible_product_types<T, Ts...>) && (kumi::_::supports_call<Function, T &&, Ts && ...>)
     {
-      auto&& bound = kumi::bind_back(kumi::_::map_case, f, KUMI_FWD(t0), KUMI_FWD(others)...);
+      using binded_t = kumi::_::bind_t<kumi::_::Binding::back, kumi::_::map_t, Function, T, Ts...>;
+      auto&& bound = binded_t{kumi::_::map_case, f, KUMI_FWD(t0), KUMI_FWD(others)...};
       return map_(kumi::_::adl_tag, KUMI_FWD(t0), KUMI_FWD(bound), std::make_index_sequence<kumi::size_v<T>>{});
     }
   };
@@ -77,7 +78,8 @@ namespace kumi
     [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, T&& t0, Ts&&... others) const
     requires(!kumi::concepts::record_type<T> && (!kumi::concepts::record_type<Ts> && ...))
     {
-      auto&& bound = kumi::bind_back(kumi::_::map_index_case, f, KUMI_FWD(t0), KUMI_FWD(others)...);
+      using binded_t = kumi::_::bind_t<kumi::_::Binding::back, kumi::_::map_index_t, Function, T, Ts...>;
+      auto&& bound = binded_t{kumi::_::map_index_case, f, KUMI_FWD(t0), KUMI_FWD(others)...};
       return map_(kumi::_::adl_tag, KUMI_FWD(t0), KUMI_FWD(bound), std::make_index_sequence<kumi::size_v<T>>{});
     }
   };
@@ -90,7 +92,8 @@ namespace kumi
     [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, T&& t0, Ts&&... others) const
     requires(kumi::concepts::compatible_product_types<T, Ts...>)
     {
-      auto&& bound = kumi::bind_back(kumi::_::map_field_case, f, KUMI_FWD(t0), KUMI_FWD(others)...);
+      using binded_t = kumi::_::bind_t<kumi::_::Binding::back, kumi::_::map_field_t, Function, T, Ts...>;
+      auto&& bound = binded_t{kumi::_::map_field_case, f, KUMI_FWD(t0), KUMI_FWD(others)...};
       return map_(kumi::_::adl_tag, KUMI_FWD(t0), KUMI_FWD(bound), std::make_index_sequence<kumi::size_v<T>>{});
     }
   };
