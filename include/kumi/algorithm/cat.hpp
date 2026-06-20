@@ -18,7 +18,7 @@ namespace kumi
       if constexpr (sizeof...(Ts) == 0) return kumi::tuple{};
       else
       {
-        constexpr auto pos = kumi::function::concatenater(std::index_sequence<kumi::size_v<Ts>...>{});
+        constexpr auto pos = kumi::function::concatenater(kumi::index<kumi::size_v<Ts>>...);
         return kumi::function::builder(kumi::forward_as_tuple(KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
       }
     }

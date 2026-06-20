@@ -38,6 +38,12 @@ TTS_CASE("Check kumi::remove behavior on tuples")
   TTS_EQUAL((kumi::remove(t, 4_c)), (kumi::tuple{'1', 2., 3.f, 4}));
   TTS_EQUAL((kumi::remove(t, 4_c, 4_c)), (kumi::tuple{'1', 2., 3.f, 4}));
 
+  TTS_EQUAL((kumi::remove(t, 0_c, 4_c, 1_c)), (kumi::tuple{}));
+  TTS_EQUAL((kumi::remove(t, 0_c, 3_c, 2_c)), (kumi::tuple{2., 4}));
+  TTS_EQUAL((kumi::remove(t, 0_c, 2_c, 2_c)), (kumi::tuple{2., 3.f, 4}));
+  TTS_EQUAL((kumi::remove(t, 0_c, 1_c, 3_c)), (kumi::tuple{2., 3.f, 4}));
+  TTS_EQUAL((kumi::remove(t, 0_c, 0_c, 4_c)), (kumi::tuple{'1', 2., 3.f, 4}));
+
   TTS_EQUAL((kumi::remove(std::move(t), 0_c)), (kumi::tuple{}));
 
   kumi::tuple t2 = {moveonly{}, 3., 'f'};
@@ -70,4 +76,10 @@ TTS_CASE("Check kumi::remove constexpr behavior on tuples")
   TTS_CONSTEXPR_EQUAL((kumi::remove(t, 3_c, 3_c)), (kumi::tuple{'1', 2., 3.f, 4}));
   TTS_CONSTEXPR_EQUAL((kumi::remove(t, 4_c)), (kumi::tuple{'1', 2., 3.f, 4}));
   TTS_CONSTEXPR_EQUAL((kumi::remove(t, 4_c, 4_c)), (kumi::tuple{'1', 2., 3.f, 4}));
+
+  TTS_CONSTEXPR_EQUAL((kumi::remove(t, 0_c, 4_c, 1_c)), (kumi::tuple{}));
+  TTS_CONSTEXPR_EQUAL((kumi::remove(t, 0_c, 3_c, 2_c)), (kumi::tuple{2., 4}));
+  TTS_CONSTEXPR_EQUAL((kumi::remove(t, 0_c, 2_c, 2_c)), (kumi::tuple{2., 3.f, 4}));
+  TTS_CONSTEXPR_EQUAL((kumi::remove(t, 0_c, 1_c, 3_c)), (kumi::tuple{2., 3.f, 4}));
+  TTS_CONSTEXPR_EQUAL((kumi::remove(t, 0_c, 0_c, 4_c)), (kumi::tuple{'1', 2., 3.f, 4}));
 };

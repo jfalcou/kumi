@@ -104,7 +104,7 @@ namespace kumi
       {
         constexpr auto proj = []<std::size_t... I>(std::index_sequence<I...>) {
           return kumi::function::concatenater(
-            std::index_sequence<kumi::function::size_or_v<kumi::stored_element_t<I, T>, 1>...>{});
+            kumi::index<kumi::function::size_or_v<kumi::stored_element_t<I, T>, 1>>...);
         }(std::make_index_sequence<kumi::size_v<T>>{});
 
         return flatten_(kumi::_::adl_tag, KUMI_FWD(t), kumi::_::flatten_case, get<1>(proj), get<0>(proj));

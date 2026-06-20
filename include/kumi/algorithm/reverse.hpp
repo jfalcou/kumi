@@ -16,7 +16,7 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
       else
       {
-        constexpr auto idx = kumi::function::reverser(std::make_index_sequence<kumi::size_v<T>>{});
+        constexpr auto idx = kumi::function::reverser(kumi::index<kumi::size_v<T>>);
         return kumi::function::builder(KUMI_FWD(t), idx);
       }
     }

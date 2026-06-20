@@ -11,49 +11,65 @@ namespace kumi
 {
   struct extract_t
   {
-    template<kumi::concepts::product_type T, std::size_t I0, std::size_t I1>
-    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<I0>, kumi::index_t<I1>) const noexcept
+    template<kumi::concepts::product_type T, std::size_t B, std::size_t E, std::size_t S>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t,
+                                                     kumi::index_t<B> b,
+                                                     kumi::index_t<E>,
+                                                     kumi::index_t<S> s) const noexcept
     {
-      static_assert((I0 <= kumi::size_v<T>) && (I1 <= kumi::size_v<T>), "[KUMI] - Invalid index");
-      return kumi::function::builder(KUMI_FWD(t), kumi::function::shifter(std::integral_constant<std::size_t, I0>{},
-                                                                          std::make_index_sequence<I1 - I0>{}));
+      static_assert((B <= kumi::size_v<T>) && (E <= kumi::size_v<T>), "[KUMI] - Invalid index");
+      return kumi::function::builder(KUMI_FWD(t), kumi::function::slicer(b, kumi::index<E>, s));
     }
 
-    template<kumi::concepts::product_type T, std::size_t I>
-    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<I> i) const noexcept
+    template<kumi::concepts::product_type T, std::size_t B, std::size_t E>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<B> b, kumi::index_t<E>) const noexcept
     {
-      static_assert(I <= kumi::size_v<T>, "[KUMI] - Invalid index");
-      return (*this)(KUMI_FWD(t), i, kumi::index<size_v<T>>);
+      static_assert((B <= kumi::size_v<T>) && (E <= kumi::size_v<T>), "[KUMI] - Invalid index");
+      return kumi::function::builder(KUMI_FWD(t), kumi::function::slicer(b, kumi::index<E>));
+    }
+
+    template<kumi::concepts::product_type T, std::size_t B>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<B> b) const noexcept
+    {
+      static_assert(B <= kumi::size_v<T>, "[KUMI] - Invalid index");
+      return (*this)(KUMI_FWD(t), b, kumi::index<size_v<T>>);
     }
   };
 
   struct remove_t
   {
-    template<kumi::concepts::product_type T, std::size_t I0, std::size_t I1>
-    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<I0>, kumi::index_t<I1>) const noexcept
+    template<kumi::concepts::product_type T, std::size_t B, std::size_t E, std::size_t S>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t,
+                                                     kumi::index_t<B> b,
+                                                     kumi::index_t<E> e,
+                                                     kumi::index_t<S> s) const noexcept
     {
-      static_assert((I0 <= kumi::size_v<T>) && (I1 <= kumi::size_v<T>), "[KUMI] - Invalid index");
-      return kumi::function::builder(
-        KUMI_FWD(t),
-        kumi::function::extractor(std::integral_constant<std::size_t, I0>{}, std::integral_constant<std::size_t, I1>{},
-                                  std::make_index_sequence<kumi::size_v<T> - (I1 - I0)>{}));
+      static_assert((B <= kumi::size_v<T>) && (E <= kumi::size_v<T>), "[KUMI] - Invalid index");
+      return kumi::function::builder(KUMI_FWD(t), kumi::function::extractor(b, e, kumi::index<kumi::size_v<T>>, s));
     }
 
-    template<kumi::concepts::product_type T, std::size_t I>
-    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<I> i) const noexcept
+    template<kumi::concepts::product_type T, std::size_t B, std::size_t E>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<B> b, kumi::index_t<E> e) const noexcept
     {
-      static_assert(I <= kumi::size_v<T>, "[KUMI] - Invalid index");
-      return (*this)(KUMI_FWD(t), i, kumi::index<kumi::size_v<T>>);
+      static_assert((B <= kumi::size_v<T>) && (E <= kumi::size_v<T>), "[KUMI] - Invalid index");
+      return kumi::function::builder(KUMI_FWD(t), kumi::function::extractor(b, e, kumi::index<kumi::size_v<T>>));
+    }
+
+    template<kumi::concepts::product_type T, std::size_t B>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<B> b) const noexcept
+    {
+      static_assert(B <= kumi::size_v<T>, "[KUMI] - Invalid index");
+      return (*this)(KUMI_FWD(t), b, kumi::index<kumi::size_v<T>>);
     }
   };
 
   struct split_t
   {
     template<kumi::concepts::product_type T, std::size_t I0>
-    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, [[maybe_unused]] kumi::index_t<I0> i0) const noexcept
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<I0>) const noexcept
     {
       static_assert(I0 <= kumi::size_v<T>, "[KUMI] - Invalid index");
-      constexpr auto proj = kumi::function::splitter(kumi::index<I0>, std::make_index_sequence<kumi::size_v<T> - I0>{});
+      constexpr auto proj = kumi::function::splitter(kumi::index<I0>, kumi::index<kumi::size_v<T>>);
 
       return kumi::tuple{kumi::function::builder(KUMI_FWD(t), get<0>(proj)),
                          kumi::function::builder(KUMI_FWD(t), get<1>(proj))};

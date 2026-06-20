@@ -41,8 +41,7 @@ namespace kumi
       else if constexpr (kumi::concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
       else
         return fold_left_(kumi::_::adl_tag, f, KUMI_FWD(t), get<0>(KUMI_FWD(t)),
-                          kumi::function::shifter(std::integral_constant<std::size_t, 1>{},
-                                                  std::make_index_sequence<kumi::size_v<T> - 1>{}));
+                          kumi::function::shifter(kumi::index<1>, kumi::index<kumi::size_v<T> - 1>));
     }
   };
 
@@ -63,8 +62,7 @@ namespace kumi
       else if constexpr (kumi::concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
       else
         return fold_right_(kumi::_::adl_tag, f, KUMI_FWD(t), get<0>(KUMI_FWD(t)),
-                           kumi::function::shifter(std::integral_constant<std::size_t, 1>{},
-                                                   std::make_index_sequence<kumi::size_v<T> - 1>{}));
+                           kumi::function::shifter(kumi::index<1>, kumi::index<kumi::size_v<T> - 1>));
     }
   };
 
