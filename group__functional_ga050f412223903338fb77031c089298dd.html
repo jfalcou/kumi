@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="KUMI - The C++20 Compact Tuple Tools" />
 <meta name="twitter:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
 <meta name="twitter:image" content="https://jfalcou.github.io/kumi/card.png" />
-<title>KUMI: kumi::function::split_t Struct Reference</title>
+<title>KUMI: kumi::function::reverser</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -139,7 +139,7 @@ $(function() { codefold.init(); });
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('structkumi_1_1function_1_1split__t.html','','structkumi_1_1function_1_1split__t-members'); });
+$(function(){initNavTree('group__functional_ga050f412223903338fb77031c089298dd.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -164,32 +164,53 @@ $(function(){initNavTree('structkumi_1_1function_1_1split__t.html','','structkum
 </div>
 </div>
 
-<div class="header">
-  <div class="summary">
-<a href="structkumi_1_1function_1_1split__t-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">kumi::function::split_t Struct Reference<div class="ingroups"><a class="el" href="group__functional.html">Helper Types and function</a></div></div></div>
-</div><!--header-->
 <div class="contents">
+<a id="ga050f412223903338fb77031c089298dd" name="ga050f412223903338fb77031c089298dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga050f412223903338fb77031c089298dd">&#9670;&#160;</a></span>reverser</h2>
 
-<p>Logic provider to compute the index map associated to the split operation.  
- <a href="#details">More...</a></p>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct kumi::function::reverse_t kumi::function::reverser</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel consteval">consteval</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
 
 <p><code>#include &lt;kumi/functional/indexable.hpp&gt;</code></p>
-<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Logic provider to compute the index map associated to the split operation. </p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md18"></a>
-Callable object</h2>
-<div class="fragment"><div class="line"><span class="keyword">inline</span> <span class="keyword">constexpr</span> <a class="code hl_struct" href="structkumi_1_1function_1_1split__t.html">split_t</a> <a class="code hl_variable" href="group__functional.html#gae1c486aeb2fb40acc8f8bbef10106759">splitter</a>{};</div>
-<div class="ttc" id="agroup__functional_html_gae1c486aeb2fb40acc8f8bbef10106759"><div class="ttname"><a href="group__functional.html#gae1c486aeb2fb40acc8f8bbef10106759">kumi::function::splitter</a></div><div class="ttdeci">constexpr kumi::function::split_t splitter</div><div class="ttdoc">Callable object computing the index map associated to the split operation.</div><div class="ttdef"><b>Definition</b> indexable.hpp:272</div></div>
-<div class="ttc" id="astructkumi_1_1function_1_1split__t_html"><div class="ttname"><a href="structkumi_1_1function_1_1split__t.html">kumi::function::split_t</a></div><div class="ttdoc">Logic provider to compute the index map associated to the split operation.</div><div class="ttdef"><b>Definition</b> indexable.hpp:168</div></div>
-</div><!-- fragment --> </div></div><!-- contents -->
+
+<p>Callable object computing the reversed index sequence. </p>
+<h2 class="groupheader">Header file </h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/functional/indexable.hpp&gt;</span></div>
+</div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Size&gt;</div>
+<div class="line"><span class="keyword">consteval</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga050f412223903338fb77031c089298dd">reverser</a>(Size s) <span class="keyword">noexcept</span>;</div>
+<div class="ttc" id="agroup__functional_ga050f412223903338fb77031c089298dd_html_ga050f412223903338fb77031c089298dd"><div class="ttname"><a href="#ga050f412223903338fb77031c089298dd">kumi::function::reverser</a></div><div class="ttdeci">struct kumi::function::reverse_t reverser</div><div class="ttdoc">Callable object computing the reversed index sequence.</div></div>
+</div><!-- fragment --><h3 class="groupheader">Parameters </h3>
+<ul>
+<li><span class="tt">s</span>: Length of the index sequence to generate</li>
+</ul>
+<h3 class="groupheader">Return value </h3>
+<p>An index sequence equivalent to std::make_index_sequence&lt;N&gt; but filled from the end. </p>
+
+</div>
+</div>
+</div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- HTML footer for doxygen 1.8.20-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="namespacekumi.html">kumi</a></li><li class="navelem"><b>function</b></li><li class="navelem"><a href="structkumi_1_1function_1_1split__t.html">split_t</a></li>
+    <li class="navelem"><a href="group__functional.html">Helper Types and function</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

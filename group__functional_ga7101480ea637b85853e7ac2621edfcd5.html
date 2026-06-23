@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="KUMI - The C++20 Compact Tuple Tools" />
 <meta name="twitter:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
 <meta name="twitter:image" content="https://jfalcou.github.io/kumi/card.png" />
-<title>KUMI: Member List</title>
+<title>KUMI: kumi::function::repeater</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -139,7 +139,7 @@ $(function() { codefold.init(); });
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('structkumi_1_1function_1_1split__t.html','',''); });
+$(function(){initNavTree('group__functional_ga7101480ea637b85853e7ac2621edfcd5.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -164,12 +164,46 @@ $(function(){initNavTree('structkumi_1_1function_1_1split__t.html','',''); });
 </div>
 </div>
 
-<div class="header">
-  <div class="headertitle"><div class="title">kumi::function::split_t Member List</div></div>
-</div><!--header-->
 <div class="contents">
+<a id="ga7101480ea637b85853e7ac2621edfcd5" name="ga7101480ea637b85853e7ac2621edfcd5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga7101480ea637b85853e7ac2621edfcd5">&#9670;&#160;</a></span>repeater</h2>
 
-<p>This is the complete list of members for <a class="el" href="structkumi_1_1function_1_1split__t.html">kumi::function::split_t</a>, including all inherited members.</p>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">struct kumi::function::repeat_t kumi::function::repeater</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel consteval">consteval</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;kumi/functional/indexable.hpp&gt;</code></p>
+
+<p>Callable object generating an index sequence repeating a constant index. </p>
+<h2 class="groupheader">Header file </h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/functional/indexable.hpp&gt;</span></div>
+</div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Element, <span class="keyword">typename</span> Count&gt;</div>
+<div class="line"><span class="keyword">consteval</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga7101480ea637b85853e7ac2621edfcd5">repeater</a>(Element e, Count c) <span class="keyword">noexcept</span>;</div>
+<div class="ttc" id="agroup__functional_ga7101480ea637b85853e7ac2621edfcd5_html_ga7101480ea637b85853e7ac2621edfcd5"><div class="ttname"><a href="#ga7101480ea637b85853e7ac2621edfcd5">kumi::function::repeater</a></div><div class="ttdeci">struct kumi::function::repeat_t repeater</div><div class="ttdoc">Callable object generating an index sequence repeating a constant index.</div></div>
+</div><!-- fragment --><h3 class="groupheader">Parameters </h3>
+<ul>
+<li><span class="tt">e</span>: Compile-time value to replicate</li>
+<li><span class="tt">c</span>: Number of repetitions to generate</li>
+</ul>
+<h3 class="groupheader">Return value </h3>
+<p>A <span class="tt">std::index_sequence</span> filled completely with <span class="tt">e</span>. </p>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
@@ -177,6 +211,7 @@ $(function(){initNavTree('structkumi_1_1function_1_1split__t.html','',''); });
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
+    <li class="navelem"><a href="group__functional.html">Helper Types and function</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

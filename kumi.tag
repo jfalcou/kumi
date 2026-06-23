@@ -113,17 +113,9 @@
     <templarg>typename... Ts</templarg>
   </compound>
   <compound kind="struct">
-    <name>kumi::function::cartesian_product_t</name>
-    <filename>structkumi_1_1function_1_1cartesian__product__t.html</filename>
-  </compound>
-  <compound kind="struct">
     <name>kumi::result::cat</name>
     <filename>structkumi_1_1result_1_1cat.html</filename>
     <templarg>kumi::concepts::product_type... Ts</templarg>
-  </compound>
-  <compound kind="struct">
-    <name>kumi::function::cat_t</name>
-    <filename>structkumi_1_1function_1_1cat__t.html</filename>
   </compound>
   <compound kind="struct">
     <name>kumi::result::chunks</name>
@@ -209,10 +201,6 @@
     <templarg>kumi::concepts::product_type T</templarg>
     <templarg>std::size_t I0</templarg>
     <templarg>std::size_t I1</templarg>
-  </compound>
-  <compound kind="struct">
-    <name>kumi::function::extract_t</name>
-    <filename>structkumi_1_1function_1_1extract__t.html</filename>
   </compound>
   <compound kind="class">
     <name>kumi::field</name>
@@ -1024,10 +1012,6 @@
     </member>
   </compound>
   <compound kind="struct">
-    <name>kumi::function::reduce_t</name>
-    <filename>structkumi_1_1function_1_1reduce__t.html</filename>
-  </compound>
-  <compound kind="struct">
     <name>kumi::result::reindex</name>
     <filename>structkumi_1_1result_1_1reindex.html</filename>
     <templarg>kumi::concepts::product_type T</templarg>
@@ -1058,10 +1042,6 @@
     <templarg>kumi::concepts::product_type T</templarg>
   </compound>
   <compound kind="struct">
-    <name>kumi::function::reverse_t</name>
-    <filename>structkumi_1_1function_1_1reverse__t.html</filename>
-  </compound>
-  <compound kind="struct">
     <name>kumi::result::rotate_left</name>
     <filename>structkumi_1_1result_1_1rotate__left.html</filename>
     <templarg>std::size_t R</templarg>
@@ -1072,10 +1052,6 @@
     <filename>structkumi_1_1result_1_1rotate__right.html</filename>
     <templarg>std::size_t R</templarg>
     <templarg>kumi::concepts::product_type T</templarg>
-  </compound>
-  <compound kind="struct">
-    <name>kumi::function::rotate_t</name>
-    <filename>structkumi_1_1function_1_1rotate__t.html</filename>
   </compound>
   <compound kind="class">
     <name>kumi::function::scannable</name>
@@ -1133,10 +1109,6 @@
     <templarg>std::size_t I0</templarg>
   </compound>
   <compound kind="struct">
-    <name>kumi::function::split_t</name>
-    <filename>structkumi_1_1function_1_1split__t.html</filename>
-  </compound>
-  <compound kind="struct">
     <name>kumi::stored_element</name>
     <filename>structkumi_1_1stored__element.html</filename>
     <templarg>std::size_t I</templarg>
@@ -1151,10 +1123,6 @@
   <compound kind="class">
     <name>kumi::str</name>
     <filename>structkumi_1_1str.html</filename>
-  </compound>
-  <compound kind="struct">
-    <name>kumi::function::tile_t</name>
-    <filename>structkumi_1_1function_1_1tile__t.html</filename>
   </compound>
   <compound kind="struct">
     <name>kumi::result::tiles</name>
@@ -1563,10 +1531,6 @@
     <filename>structkumi_1_1result_1_1zip__min.html</filename>
     <templarg>kumi::concepts::product_type T0</templarg>
     <templarg>kumi::concepts::product_type... Ts</templarg>
-  </compound>
-  <compound kind="struct">
-    <name>kumi::function::zip_t</name>
-    <filename>structkumi_1_1function_1_1zip__t.html</filename>
   </compound>
   <compound kind="concept">
     <name>kumi::concepts::compatible_product_types</name>
@@ -2892,23 +2856,14 @@
     <class kind="class">kumi::function::boolean_and</class>
     <class kind="class">kumi::function::boolean_or</class>
     <class kind="class">kumi::function::boolean_xor</class>
-    <class kind="struct">kumi::function::cartesian_product_t</class>
-    <class kind="struct">kumi::function::cat_t</class>
     <class kind="struct">kumi::function::element_or</class>
-    <class kind="struct">kumi::function::extract_t</class>
     <class kind="class">kumi::function::foldable</class>
     <class kind="class">kumi::function::numeric_add</class>
     <class kind="class">kumi::function::numeric_prod</class>
-    <class kind="struct">kumi::function::reduce_t</class>
-    <class kind="struct">kumi::function::reverse_t</class>
-    <class kind="struct">kumi::function::rotate_t</class>
     <class kind="class">kumi::function::scannable</class>
     <class kind="struct">kumi::function::select_t</class>
     <class kind="struct">kumi::function::size_or</class>
-    <class kind="struct">kumi::function::split_t</class>
-    <class kind="struct">kumi::function::tile_t</class>
     <class kind="struct">kumi::function::unique_t</class>
-    <class kind="struct">kumi::function::zip_t</class>
     <member kind="function">
       <type>constexpr auto</type>
       <name>kumi::bind_back</name>
@@ -2966,24 +2921,24 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr kumi::function::cartesian_product_t</type>
+      <type>struct kumi::function::cartesian_product_t</type>
       <name>kumi::function::cartesian_producer</name>
-      <anchorfile>group__functional.html</anchorfile>
-      <anchor>ga11244b3628e24a7fa165dd2962582f5f</anchor>
+      <anchorfile>group__functional_ga45a45e049b5c4aa186dc3516f85098d5.html</anchorfile>
+      <anchor>ga45a45e049b5c4aa186dc3516f85098d5</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr kumi::function::cat_t</type>
+      <type>struct kumi::function::cat_t</type>
       <name>kumi::function::concatenater</name>
-      <anchorfile>group__functional.html</anchorfile>
-      <anchor>gabb6c41b1514ec88f14d17fb519a7508f</anchor>
+      <anchorfile>group__functional_ga939d953813ec961b41fc3f4f2dab22c7.html</anchorfile>
+      <anchor>ga939d953813ec961b41fc3f4f2dab22c7</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr kumi::function::extract_t</type>
+      <type>struct kumi::function::extract_t</type>
       <name>kumi::function::extractor</name>
-      <anchorfile>group__functional.html</anchorfile>
-      <anchor>gadfd46f17b9d9a6744ca1284383464baf</anchor>
+      <anchorfile>group__functional_ga512329bc74afee8bbdac22c3e267c4c4.html</anchorfile>
+      <anchor>ga512329bc74afee8bbdac22c3e267c4c4</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -3001,24 +2956,31 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr kumi::function::reduce_t</type>
+      <type>struct kumi::function::reduce_t</type>
       <name>kumi::function::reducer</name>
-      <anchorfile>group__functional.html</anchorfile>
-      <anchor>gaec57b17c983df4b4a5f25260a4052eb3</anchor>
+      <anchorfile>group__functional_gaaefcb5d45afa90ffd9674cc3af110c2d.html</anchorfile>
+      <anchor>gaaefcb5d45afa90ffd9674cc3af110c2d</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr kumi::function::reverse_t</type>
+      <type>struct kumi::function::repeat_t</type>
+      <name>kumi::function::repeater</name>
+      <anchorfile>group__functional_ga7101480ea637b85853e7ac2621edfcd5.html</anchorfile>
+      <anchor>ga7101480ea637b85853e7ac2621edfcd5</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>struct kumi::function::reverse_t</type>
       <name>kumi::function::reverser</name>
-      <anchorfile>group__functional.html</anchorfile>
-      <anchor>ga264829b1d9caed059c419f02d0ce7c02</anchor>
+      <anchorfile>group__functional_ga050f412223903338fb77031c089298dd.html</anchorfile>
+      <anchor>ga050f412223903338fb77031c089298dd</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr kumi::function::rotate_t</type>
+      <type>struct kumi::function::rotate_t</type>
       <name>kumi::function::rotater</name>
-      <anchorfile>group__functional.html</anchorfile>
-      <anchor>gab8db989a4931faeaf18cfc60eb531bc1</anchor>
+      <anchorfile>group__functional_gaea4dcbe3352e0322ca07796c54992473.html</anchorfile>
+      <anchor>gaea4dcbe3352e0322ca07796c54992473</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -3029,17 +2991,31 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr kumi::function::split_t</type>
-      <name>kumi::function::splitter</name>
-      <anchorfile>group__functional.html</anchorfile>
-      <anchor>gae1c486aeb2fb40acc8f8bbef10106759</anchor>
+      <type>struct kumi::function::shift_t</type>
+      <name>kumi::function::shifter</name>
+      <anchorfile>group__functional_ga030fc00e2f98f3648974d4a2c0d2ae31.html</anchorfile>
+      <anchor>ga030fc00e2f98f3648974d4a2c0d2ae31</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr kumi::function::tile_t</type>
+      <type>struct kumi::function::slice_t</type>
+      <name>kumi::function::slicer</name>
+      <anchorfile>group__functional_ga3201caae7402c136e332d664a439913e.html</anchorfile>
+      <anchor>ga3201caae7402c136e332d664a439913e</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>struct kumi::function::split_t</type>
+      <name>kumi::function::splitter</name>
+      <anchorfile>group__functional_gae7fa4a3e9b7b6fd79f177f6126bcef2b.html</anchorfile>
+      <anchor>gae7fa4a3e9b7b6fd79f177f6126bcef2b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>struct kumi::function::tile_t</type>
       <name>kumi::function::tiler</name>
-      <anchorfile>group__functional.html</anchorfile>
-      <anchor>gabf1238b7b5ccb9602dd4c6f0c04afd4e</anchor>
+      <anchorfile>group__functional_gaed8fd6fecbe985d0a7be0735ea44b79f.html</anchorfile>
+      <anchor>gaed8fd6fecbe985d0a7be0735ea44b79f</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -3057,10 +3033,10 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr kumi::function::zip_t</type>
+      <type>struct kumi::function::zip_t</type>
       <name>kumi::function::zipper</name>
-      <anchorfile>group__functional.html</anchorfile>
-      <anchor>ga8b79749d6a360d57161f38bfdc0c4e24</anchor>
+      <anchorfile>group__functional_gab92c8e53f4f94e60747f4bc0d5301de2.html</anchorfile>
+      <anchor>gab92c8e53f4f94e60747f4bc0d5301de2</anchor>
       <arglist></arglist>
     </member>
   </compound>
