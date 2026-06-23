@@ -30,7 +30,7 @@ namespace kumi
       else
       {
         constexpr auto sq = std::make_index_sequence<(kumi::size_v<Ts> * ...)>{};
-        constexpr auto idx = kumi::function::cartesian_producer(sq, kumi::index<kumi::size_v<Ts>>...);
+        constexpr auto idx = kumi::function::cartesian_producer(kumi::index<kumi::size_v<Ts>>...);
         return cartesian_product_(kumi::_::adl_tag, kumi::forward_as_tuple(KUMI_FWD(ts)...), idx, sq);
       }
     }

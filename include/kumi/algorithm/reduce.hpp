@@ -52,7 +52,7 @@ namespace kumi
       else
       {
         constexpr auto sz = kumi::size_v<T>;
-        constexpr auto pos = kumi::function::reducer(std::make_index_sequence<sz / 2>{}, index<sz % 2>);
+        constexpr auto pos = kumi::function::reducer(kumi::index<sz / 2>, kumi::index<sz % 2>);
         return reduce_(kumi::_::adl_tag, KUMI_FWD(m), (*this), KUMI_FWD(t), get<2>(pos), get<0>(pos), get<1>(pos));
       }
     }
@@ -76,7 +76,7 @@ namespace kumi
       else
       {
         constexpr auto sz = kumi::size_v<T>;
-        constexpr auto pos = kumi::function::reducer(std::make_index_sequence<sz / 2>{}, index<sz % 2>);
+        constexpr auto pos = kumi::function::reducer(kumi::index<sz / 2>, kumi::index<sz % 2>);
         return map_reduce_(kumi::_::adl_tag, KUMI_FWD(m), KUMI_FWD(t), f, kumi::reduce_t{}, get<2>(pos), get<0>(pos),
                            get<1>(pos));
       }

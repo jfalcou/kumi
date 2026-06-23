@@ -38,6 +38,12 @@ TTS_CASE("Check kumi::remove behavior on records")
   TTS_EQUAL((kumi::remove(r, 4_c)), (kumi::record{"a"_id = '1', "b"_id = 2., "c"_id = 3.f, "d"_id = 4}));
   TTS_EQUAL((kumi::remove(r, 4_c, 4_c)), (kumi::record{"a"_id = '1', "b"_id = 2., "c"_id = 3.f, "d"_id = 4}));
 
+  TTS_EQUAL((kumi::remove(r, 0_c, 4_c, 1_c)), (kumi::record{}));
+  TTS_EQUAL((kumi::remove(r, 0_c, 3_c, 2_c)), (kumi::record{"b"_id = 2., "d"_id = 4}));
+  TTS_EQUAL((kumi::remove(r, 0_c, 2_c, 2_c)), (kumi::record{"b"_id = 2., "c"_id = 3.f, "d"_id = 4}));
+  TTS_EQUAL((kumi::remove(r, 0_c, 1_c, 3_c)), (kumi::record{"b"_id = 2., "c"_id = 3.f, "d"_id = 4}));
+  TTS_EQUAL((kumi::remove(r, 0_c, 0_c, 4_c)), (kumi::record{"a"_id = '1', "b"_id = 2., "c"_id = 3.f, "d"_id = 4}));
+
   TTS_EQUAL((kumi::remove(std::move(r), 0_c)), (kumi::record{}));
 
   kumi::record r2 = {"a"_id = moveonly{}, "b"_id = 3., "c"_id = 'f'};
@@ -70,4 +76,11 @@ TTS_CASE("Check kumi::remove constexpr behavior on records")
   TTS_CONSTEXPR_EQUAL((kumi::remove(r, 3_c, 3_c)), (kumi::record{"a"_id = '1', "b"_id = 2., "c"_id = 3.f, "d"_id = 4}));
   TTS_CONSTEXPR_EQUAL((kumi::remove(r, 4_c)), (kumi::record{"a"_id = '1', "b"_id = 2., "c"_id = 3.f, "d"_id = 4}));
   TTS_CONSTEXPR_EQUAL((kumi::remove(r, 4_c, 4_c)), (kumi::record{"a"_id = '1', "b"_id = 2., "c"_id = 3.f, "d"_id = 4}));
+
+  TTS_CONSTEXPR_EQUAL((kumi::remove(r, 0_c, 4_c, 1_c)), (kumi::record{}));
+  TTS_CONSTEXPR_EQUAL((kumi::remove(r, 0_c, 3_c, 2_c)), (kumi::record{"b"_id = 2., "d"_id = 4}));
+  TTS_CONSTEXPR_EQUAL((kumi::remove(r, 0_c, 2_c, 2_c)), (kumi::record{"b"_id = 2., "c"_id = 3.f, "d"_id = 4}));
+  TTS_CONSTEXPR_EQUAL((kumi::remove(r, 0_c, 1_c, 3_c)), (kumi::record{"b"_id = 2., "c"_id = 3.f, "d"_id = 4}));
+  TTS_CONSTEXPR_EQUAL((kumi::remove(r, 0_c, 0_c, 4_c)),
+                      (kumi::record{"a"_id = '1', "b"_id = 2., "c"_id = 3.f, "d"_id = 4}));
 };

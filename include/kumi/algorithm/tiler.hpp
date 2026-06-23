@@ -15,8 +15,7 @@ namespace kumi
     KUMI_ABI constexpr auto tiles_(kumi::_::adl_tag_t, T&& t, std::index_sequence<B...>, std::index_sequence<E...>)
     {
       return kumi::tuple{
-        kumi::function::builder(KUMI_FWD(t), kumi::function::shifter(std::integral_constant<std::size_t, E>{},
-                                                                     std::make_index_sequence<B>{}))...};
+        kumi::function::builder(KUMI_FWD(t), kumi::function::shifter(kumi::index<E>, kumi::index<B>))...};
     }
   }
 
@@ -29,9 +28,8 @@ namespace kumi
       if constexpr (N == kumi::size_v<T>) return kumi::make_tuple(t);
       else
       {
-        constexpr auto bs = std::integral_constant<std::size_t, kumi::_::nb_blocks(kumi::size_v<T>, O, N)>{};
         constexpr auto proj = kumi::function::tiler(kumi::index<kumi::size_v<T>>, kumi::index<N>, kumi::index<O>,
-                                                    std::make_index_sequence<bs>{});
+                                                    kumi::index<kumi::_::nb_blocks(kumi::size_v<T>, O, N)>);
 
         return tiles_(kumi::_::adl_tag, KUMI_FWD(t), get<0>(proj), get<1>(proj));
       }
