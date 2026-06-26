@@ -38,42 +38,44 @@ namespace kumi::_
   // Empty Base Optimization
   template<std::size_t N, typename T>
   requires(std::is_empty_v<T> && (!std::is_final_v<T>) && (!kumi::_::field<T>))
-  struct leaf<N, T> : T
+  struct leaf<N, T> : std::remove_cvref_t<T>
   {
+    using base = std::remove_cvref_t<T>;
     using index = std::integral_constant<std::size_t, N>;
-    using inner_type = std::type_identity<T>;
+    using inner_type = std::type_identity<base>;
 
-    KUMI_ABI constexpr T& operator()(index) & noexcept { return *this; }
+    KUMI_ABI constexpr base& operator()(index) & noexcept { return *this; }
 
-    KUMI_ABI constexpr T&& operator()(index) && noexcept { return static_cast<T&&>(*this); }
+    KUMI_ABI constexpr base&& operator()(index) && noexcept { return static_cast<base&&>(*this); }
 
-    KUMI_ABI constexpr T const&& operator()(index) const&& noexcept { return static_cast<T const&&>(*this); }
+    KUMI_ABI constexpr base const&& operator()(index) const&& noexcept { return static_cast<base const&&>(*this); }
 
-    KUMI_ABI constexpr T const& operator()(index) const& noexcept { return *this; }
+    KUMI_ABI constexpr base const& operator()(index) const& noexcept { return *this; }
 
-    KUMI_ABI constexpr T& operator()(inner_type) & noexcept { return *this; }
+    KUMI_ABI constexpr base& operator()(inner_type) & noexcept { return *this; }
 
-    KUMI_ABI constexpr T&& operator()(inner_type) && noexcept { return static_cast<T&&>(*this); }
+    KUMI_ABI constexpr base&& operator()(inner_type) && noexcept { return static_cast<base&&>(*this); }
 
-    KUMI_ABI constexpr T const&& operator()(inner_type) const&& noexcept { return static_cast<T const&&>(*this); }
+    KUMI_ABI constexpr base const&& operator()(inner_type) const&& noexcept { return static_cast<base const&&>(*this); }
 
-    KUMI_ABI constexpr T const& operator()(inner_type) const& noexcept { return *this; }
+    KUMI_ABI constexpr base const& operator()(inner_type) const& noexcept { return *this; }
   };
 
-  template<std::size_t N, kumi::_::field T> struct leaf<N, T> : T
+  template<std::size_t N, kumi::_::field T> struct leaf<N, T> : std::remove_cvref_t<T>
   {
-    using T::operator();
+    using base = std::remove_cvref_t<T>;
+    using base::operator();
     using index = std::integral_constant<std::size_t, N>;
-    using key = kumi::_::identifier_of_t<T>;
-    using inner_type = kumi::_::type_of_t<T>;
+    using key = kumi::_::identifier_of_t<base>;
+    using inner_type = kumi::_::type_of_t<base>;
 
-    KUMI_ABI constexpr T& operator()(index) & noexcept { return *this; }
+    KUMI_ABI constexpr base& operator()(index) & noexcept { return *this; }
 
-    KUMI_ABI constexpr T&& operator()(index) && noexcept { return static_cast<T&&>(*this); }
+    KUMI_ABI constexpr base&& operator()(index) && noexcept { return static_cast<base&&>(*this); }
 
-    KUMI_ABI constexpr T const&& operator()(index) const&& noexcept { return static_cast<T const&&>(*this); }
+    KUMI_ABI constexpr base const&& operator()(index) const&& noexcept { return static_cast<base const&&>(*this); }
 
-    KUMI_ABI constexpr T const& operator()(index) const& noexcept { return *this; }
+    KUMI_ABI constexpr base const& operator()(index) const& noexcept { return *this; }
   };
 
   template<typename ISeq, typename... Ts> struct binder;
