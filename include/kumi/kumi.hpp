@@ -8,6 +8,7 @@
 #ifndef KUMI_HPP_INCLUDED
 #define KUMI_HPP_INCLUDED
 
+#include <kumi/configuration.hpp>
 #include <kumi/fwd.hpp>
 #include <kumi/detail.hpp>
 #include <kumi/utils.hpp>
