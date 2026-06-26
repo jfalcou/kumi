@@ -67,7 +67,7 @@ endif()
 ## Standalone generation
 ##======================================================================================================================
 copa_setup_standalone ( QUIET
-                        FILE kumi.hpp SOURCE include ROOT kumi TARGET kumi-standalone
+                        FILE kumi.hpp SOURCE include ROOT kumi/ TARGET kumi-standalone
                         OUTPUT "${PROJECT_BINARY_DIR}"
                       )
 
