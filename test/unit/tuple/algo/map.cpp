@@ -11,6 +11,11 @@
 #include <tts/tts.hpp>
 #include "test.hpp"
 
+template<typename T> constexpr auto fun(T const& tuple)
+{
+  return kumi::map([](auto&& e) { return sizeof(KUMI_FWD(e)); }, tuple);
+}
+
 TTS_CASE("Check result::map<F,Tuple...> behavior")
 {
   auto lambda = [](auto const& m) { return &m; };
@@ -57,6 +62,8 @@ TTS_CASE("Check map(f, tuple) behavior"){{auto t = kumi::tuple{1, 2., 3.4f, '5'}
   TTS_EQUAL(m1, sizeof(double));
   TTS_EQUAL(m2, sizeof(float));
   TTS_EQUAL(m3, sizeof(char));
+
+  TTS_EQUAL(fun(t), (kumi::tuple{4ull, 8ull, 4ull, 1ull}));
 }
 
 {
@@ -110,6 +117,8 @@ TTS_CASE("Check map(f, tuple) constexpr behavior"){{constexpr auto t = kumi::tup
   TTS_CONSTEXPR_EQUAL(get<1>(s), sizeof(double));
   TTS_CONSTEXPR_EQUAL(get<2>(s), sizeof(float));
   TTS_CONSTEXPR_EQUAL(get<3>(s), sizeof(char));
+
+  TTS_EQUAL(fun(t), (kumi::tuple{4ull, 8ull, 4ull, 1ull}));
 }
 
 {
