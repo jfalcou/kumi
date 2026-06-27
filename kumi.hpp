@@ -7,6 +7,15 @@
 //======================================================================================================================
 #ifndef KUMI_HPP_INCLUDED
 #define KUMI_HPP_INCLUDED
+#if __has_include(<kumi_config.hpp>)
+#include <kumi_config.hpp>
+#else
+namespace kumi::config
+{
+  using default_size_type = unsigned int;
+  inline constexpr default_size_type max_size = 64;
+}
+#endif
 namespace kumi
 {
   struct str;
@@ -501,11 +510,12 @@ namespace kumi
 {
   struct str
   {
-    static constexpr std::size_t max_size = 64;
-    static constexpr std::size_t npos = static_cast<std::size_t>(-1);
+    using size_type = kumi::config::default_size_type;
+    static constexpr size_type max_size = kumi::config::max_size;
+    static constexpr size_type npos = static_cast<size_type>(-1);
     static constexpr char separator = '.';
     char data_[max_size + 1] = {0};
-    unsigned int size_;
+    size_type size_;
     constexpr str() = default;
     template<std::size_t N, std::size_t... Is>
     requires(N <= max_size)
@@ -543,50 +553,50 @@ namespace kumi
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, str const& s) noexcept
     {
       os << '\'';
-      for (std::size_t i = 0; i < s.size(); ++i) os << s.data_[i];
+      for (size_type i = 0; i < s.size(); ++i) os << s.data_[i];
       return os << '\'';
     }
-    KUMI_ABI constexpr str remove_prefix(std::size_t n) const
+    KUMI_ABI constexpr str remove_prefix(size_type n) const
     {
       if (n > size_) throw "Out of range";
       return substr(n, size_ - n);
     }
-    KUMI_ABI constexpr str remove_suffix(std::size_t n) const
+    KUMI_ABI constexpr str remove_suffix(size_type n) const
     {
       if (n > size_) throw "Out of range";
       return substr(0, size_ - n);
     }
-    KUMI_ABI constexpr str substr(std::size_t pos = 0, std::size_t count = npos) const
+    KUMI_ABI constexpr str substr(size_type pos = 0, size_type count = npos) const
     {
-      std::size_t len = (count == npos || pos + count > size_) ? (size_ - pos) : count;
+      size_type len = (count == npos || pos + count > size_) ? (size_ - pos) : count;
       str res{};
-      res.size_ = static_cast<unsigned int>(len);
-      for (std::size_t i = 0; i < len; ++i) res.data_[i] = data_[pos + i];
+      res.size_ = len;
+      for (size_type i = 0; i < len; ++i) res.data_[i] = data_[pos + i];
       return res;
     }
     KUMI_ABI constexpr bool starts_with(str const& s) const
     {
       if (s.size_ > size_) return false;
-      for (std::size_t i = 0; i < s.size_; ++i)
+      for (size_type i = 0; i < s.size_; ++i)
         if (data_[i] != s.data_[i]) return false;
       return true;
     }
     KUMI_ABI constexpr bool ends_with(str const& s) const
     {
       if (s.size_ > size_) return false;
-      for (std::size_t i = 0; i < s.size_; ++i)
+      for (size_type i = 0; i < s.size_; ++i)
         if (data_[size_ - s.size_ + i] != s.data_[i]) return false;
       return true;
     }
     KUMI_ABI constexpr bool contains(str const& s) const { return find(s) != npos; }
-    constexpr std::size_t find(str const& s, std::size_t pos = 0) const
+    constexpr size_type find(str const& s, size_type pos = 0) const
     {
       if (s.size_ == 0) return pos <= size_ ? pos : npos;
       if (s.size_ > size_) return npos;
-      for (std::size_t i = pos; i <= size_ - s.size_; ++i)
+      for (size_type i = pos; i <= size_ - s.size_; ++i)
       {
         bool match = true;
-        for (std::size_t j = 0; j < s.size_; ++j)
+        for (size_type j = 0; j < s.size_; ++j)
           if (data_[i + j] != s.data_[j])
           {
             match = false;
@@ -598,8 +608,8 @@ namespace kumi
     }
     constexpr int compare(str const& other) const noexcept
     {
-      std::size_t min_size = (size_ < other.size_) ? size_ : other.size_;
-      for (std::size_t i = 0; i < min_size; ++i)
+      size_type min_size = (size_ < other.size_) ? size_ : other.size_;
+      for (size_type i = 0; i < min_size; ++i)
       {
         if (data_[i] < other.data_[i]) return -1;
         if (data_[i] > other.data_[i]) return 1;
@@ -614,48 +624,48 @@ namespace kumi
     friend constexpr bool operator<=(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) <= 0; }
     friend constexpr bool operator>(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) > 0; }
     friend constexpr bool operator>=(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) >= 0; }
-    constexpr std::size_t rfind(str const& s, std::size_t pos = npos) const
+    constexpr size_type rfind(str const& s, size_type pos = npos) const
     {
       if (s.size_ == 0) return (pos > size_ ? size_ : pos);
       if (s.size_ > size_) return npos;
-      std::size_t start = (pos > size_ - s.size_) ? (size_ - s.size_) : pos;
-      for (int i = static_cast<int>(start); i >= 0; --i)
+      size_type start = (pos > size_ - s.size_) ? (size_ - s.size_) : pos;
+      for (size_type i = start; i > 0; --i)
       {
         bool match = true;
-        for (std::size_t j = 0; j < s.size_; ++j)
+        for (size_type j = 0; j < s.size_; ++j)
           if (data_[i + j] != s.data_[j])
           {
             match = false;
             break;
           }
-        if (match) return static_cast<std::size_t>(i);
+        if (match) return i;
       }
       return npos;
     }
-    KUMI_ABI constexpr std::size_t find_first_of(str const& s, std::size_t pos = 0) const
+    KUMI_ABI constexpr size_type find_first_of(str const& s, size_type pos = 0) const
     {
-      for (std::size_t i = pos; i < size_; ++i)
-        for (std::size_t j = 0; j < s.size_; ++j)
+      for (size_type i = pos; i < size_; ++i)
+        for (size_type j = 0; j < s.size_; ++j)
           if (data_[i] == s.data_[j]) return i;
       return npos;
     }
-    KUMI_ABI constexpr std::size_t find_last_of(str const& s, std::size_t pos = npos) const
+    KUMI_ABI constexpr size_type find_last_of(str const& s, size_type pos = npos) const
     {
       if (size_ == 0) return npos;
-      for (std::size_t i = (pos >= size_ ? size_ - 1 : pos);; --i)
+      for (size_type i = (pos >= size_ ? size_ - 1 : pos);; --i)
       {
-        for (std::size_t j = 0; j < s.size_; ++j)
+        for (size_type j = 0; j < s.size_; ++j)
           if (data_[i] == s.data_[j]) return i;
         if (i == 0) break;
       }
       return npos;
     }
-    KUMI_ABI constexpr std::size_t find_first_not_of(str const& s, std::size_t pos = 0) const
+    KUMI_ABI constexpr size_type find_first_not_of(str const& s, size_type pos = 0) const
     {
-      for (std::size_t i = pos; i < size_; ++i)
+      for (size_type i = pos; i < size_; ++i)
       {
         bool found = false;
-        for (std::size_t j = 0; j < s.size_; ++j)
+        for (size_type j = 0; j < s.size_; ++j)
           if (data_[i] == s.data_[j])
           {
             found = true;
@@ -665,13 +675,13 @@ namespace kumi
       }
       return npos;
     }
-    KUMI_ABI constexpr std::size_t find_last_not_of(str const& s, std::size_t pos = npos) const
+    KUMI_ABI constexpr size_type find_last_not_of(str const& s, size_type pos = npos) const
     {
       if (size_ == 0) return npos;
-      for (std::size_t i = (pos >= size_ ? size_ - 1 : pos);; --i)
+      for (size_type i = (pos >= size_ ? size_ - 1 : pos);; --i)
       {
         bool found = false;
-        for (std::size_t j = 0; j < s.size_; ++j)
+        for (size_type j = 0; j < s.size_; ++j)
           if (data_[i] == s.data_[j])
           {
             found = true;
@@ -684,21 +694,21 @@ namespace kumi
     }
     constexpr str operator+(str const& other) const
     {
-      std::size_t new_size = size_ + 1 + other.size_;
+      size_type new_size = size_ + 1 + other.size_;
       if (new_size > max_size) throw "Overflow";
       str res{};
       res.size_ = static_cast<unsigned int>(new_size);
-      for (std::size_t i = 0; i < size_; ++i) res.data_[i] = data_[i];
+      for (size_type i = 0; i < size_; ++i) res.data_[i] = data_[i];
       res.data_[size_] = kumi::str::separator;
-      for (std::size_t i = 0; i < other.size_; ++i) res.data_[size_ + 1 + i] = other.data_[i];
+      for (size_type i = 0; i < other.size_; ++i) res.data_[size_ + 1 + i] = other.data_[i];
       res.data_[new_size] = '\0';
       return res;
     }
-    static constexpr str from(char const* s, std::size_t n)
+    static constexpr str from(char const* s, size_type n)
     {
       str res{};
       if (n > str::max_size) throw "Overflow";
-      for (std::size_t i = 0; i < n; ++i) res.data_[i] = s[i];
+      for (size_type i = 0; i < n; ++i) res.data_[i] = s[i];
       res.size_ = static_cast<unsigned int>(n);
       return res;
     }
@@ -707,7 +717,7 @@ namespace kumi
   {
     constexpr auto operator""_str(char const* s, std::size_t n)
     {
-      return kumi::str::from(s, n);
+      return kumi::str::from(s, kumi::str::size_type(n));
     }
   }
   struct unknown
@@ -901,29 +911,31 @@ namespace kumi::_
   };
   template<std::size_t N, typename T>
   requires(std::is_empty_v<T> && (!std::is_final_v<T>) && (!kumi::_::field<T>))
-  struct leaf<N, T> : T
+  struct leaf<N, T> : std::remove_cvref_t<T>
   {
+    using base = std::remove_cvref_t<T>;
     using index = std::integral_constant<std::size_t, N>;
-    using inner_type = std::type_identity<T>;
-    KUMI_ABI constexpr T& operator()(index) & noexcept { return *this; }
-    KUMI_ABI constexpr T&& operator()(index) && noexcept { return static_cast<T&&>(*this); }
-    KUMI_ABI constexpr T const&& operator()(index) const&& noexcept { return static_cast<T const&&>(*this); }
-    KUMI_ABI constexpr T const& operator()(index) const& noexcept { return *this; }
-    KUMI_ABI constexpr T& operator()(inner_type) & noexcept { return *this; }
-    KUMI_ABI constexpr T&& operator()(inner_type) && noexcept { return static_cast<T&&>(*this); }
-    KUMI_ABI constexpr T const&& operator()(inner_type) const&& noexcept { return static_cast<T const&&>(*this); }
-    KUMI_ABI constexpr T const& operator()(inner_type) const& noexcept { return *this; }
+    using inner_type = std::type_identity<base>;
+    KUMI_ABI constexpr base& operator()(index) & noexcept { return *this; }
+    KUMI_ABI constexpr base&& operator()(index) && noexcept { return static_cast<base&&>(*this); }
+    KUMI_ABI constexpr base const&& operator()(index) const&& noexcept { return static_cast<base const&&>(*this); }
+    KUMI_ABI constexpr base const& operator()(index) const& noexcept { return *this; }
+    KUMI_ABI constexpr base& operator()(inner_type) & noexcept { return *this; }
+    KUMI_ABI constexpr base&& operator()(inner_type) && noexcept { return static_cast<base&&>(*this); }
+    KUMI_ABI constexpr base const&& operator()(inner_type) const&& noexcept { return static_cast<base const&&>(*this); }
+    KUMI_ABI constexpr base const& operator()(inner_type) const& noexcept { return *this; }
   };
-  template<std::size_t N, kumi::_::field T> struct leaf<N, T> : T
+  template<std::size_t N, kumi::_::field T> struct leaf<N, T> : std::remove_cvref_t<T>
   {
-    using T::operator();
+    using base = std::remove_cvref_t<T>;
+    using base::operator();
     using index = std::integral_constant<std::size_t, N>;
-    using key = kumi::_::identifier_of_t<T>;
-    using inner_type = kumi::_::type_of_t<T>;
-    KUMI_ABI constexpr T& operator()(index) & noexcept { return *this; }
-    KUMI_ABI constexpr T&& operator()(index) && noexcept { return static_cast<T&&>(*this); }
-    KUMI_ABI constexpr T const&& operator()(index) const&& noexcept { return static_cast<T const&&>(*this); }
-    KUMI_ABI constexpr T const& operator()(index) const& noexcept { return *this; }
+    using key = kumi::_::identifier_of_t<base>;
+    using inner_type = kumi::_::type_of_t<base>;
+    KUMI_ABI constexpr base& operator()(index) & noexcept { return *this; }
+    KUMI_ABI constexpr base&& operator()(index) && noexcept { return static_cast<base&&>(*this); }
+    KUMI_ABI constexpr base const&& operator()(index) const&& noexcept { return static_cast<base const&&>(*this); }
+    KUMI_ABI constexpr base const& operator()(index) const& noexcept { return *this; }
   };
   template<typename ISeq, typename... Ts> struct binder;
   template<std::size_t... Is, typename... Ts>
