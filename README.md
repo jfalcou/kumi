@@ -16,7 +16,7 @@ and new features like:
 
   -  a fast to compile tuple implementation
   -  quality of life improvement over the standard tuple implementation
-  -  algorithm on tuples
+  -  algorithms on tuples
   -  record type handling
 
 ## Examples
@@ -106,6 +106,27 @@ int main()
   std::cout << "\n";
 }
 ```
+## Getting Started
+
+ - [Installing the library](https://jfalcou.github.io/kumi/setup.html)
+ - [Glossary](https://jfalcou.github.io/kumi/usergroup1.html)
+ - [References Documentation](https://jfalcou.github.io/kumi/usergroup3.html)
+
+## Currently supported compilers
+
+KUMI requires a C++20-compliant compiler.
+
+| Compiler        | Version            |
+|:----------------|:------------------ |
+| g++             | 14    and  above   |
+| clang++         | 19    and  above   |
+| em++            | 5     and above    |
+| icpx            | 2025  and above    |
+| MSVC            | 19    and  above   |
+| clang-CL        | 19    and above    |
+| AppleClang      | 15    and above    |
+| nvcc            | 13.2.5             |
+| nvc++           | 26.3.0             |
 
 ## Licence
 
