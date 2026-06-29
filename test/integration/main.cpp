@@ -1,5 +1,10 @@
 #include <iostream>
+
+#if defined KUMI_STANDALONE
+#include "kumi.hpp"
+#else
 #include <kumi/kumi.hpp>
+#endif
 
 auto get_student(int id)
 {
