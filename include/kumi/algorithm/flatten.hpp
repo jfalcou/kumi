@@ -46,6 +46,12 @@ namespace kumi
 
     inline constexpr flatten_case_t flatten_case{};
 
+    template<typename T, std::size_t... I>
+    KUMI_ABI consteval auto flatten_projection_(kumi::_::adl_tag_t, std::index_sequence<I...>) noexcept
+    {
+      return kumi::function::concatenater(kumi::index<kumi::function::size_or_v<kumi::stored_element_t<I, T>, 1>>...);
+    }
+
     template<typename T, typename V, std::size_t... J, std::size_t... I>
     KUMI_ABI constexpr auto flatten_(
       kumi::_::adl_tag_t, T&& t, V visitor, std::index_sequence<J...>, std::index_sequence<I...>)
@@ -102,11 +108,7 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
       else
       {
-        constexpr auto proj = []<std::size_t... I>(std::index_sequence<I...>) {
-          return kumi::function::concatenater(
-            kumi::index<kumi::function::size_or_v<kumi::stored_element_t<I, T>, 1>>...);
-        }(std::make_index_sequence<kumi::size_v<T>>{});
-
+        constexpr auto proj = flatten_projection_<T>(kumi::_::adl_tag, std::make_index_sequence<kumi::size_v<T>>{});
         return flatten_(kumi::_::adl_tag, KUMI_FWD(t), kumi::_::flatten_case, get<1>(proj), get<0>(proj));
       }
     }
@@ -136,7 +138,7 @@ namespace kumi
   {
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI auto operator()(T&& t) const noexcept
     {
-      return this->flatten_all_t::operator()(KUMI_FWD(t), [](auto& m) { return &m; });
+      return this->flatten_all_t::operator()(KUMI_FWD(t), kumi::function::adressof);
     }
   };
 

@@ -288,21 +288,18 @@ namespace kumi
   //====================================================================================================================
   template<typename T> struct is_homogeneous
   {
-    static consteval bool check()
+    template<std::size_t... I> static consteval bool check(std::index_sequence<I...>)
     {
       if constexpr (!kumi::is_product_type_v<T>) return false;
       else if constexpr (requires { T::is_homogeneous; }) return T::is_homogeneous;
       else if constexpr (kumi::is_record_type_v<T>) return false;
       else if constexpr (kumi::is_container_v<T>) return true;
-      else if constexpr (kumi::size_v<T> == 0) return false;
-      else if constexpr (kumi::size_v<T> == 1) return true;
-      else
-        return []<std::size_t... I>(std::index_sequence<I...>) {
-          return kumi::_::all_the_same<kumi::element_t<I, T>...>;
-        }(std::make_index_sequence<kumi::size_v<T>>{});
+      else if constexpr (sizeof...(I) == 0) return false;
+      else if constexpr (sizeof...(I) == 1) return true;
+      else return kumi::_::all_the_same<kumi::element_t<I, T>...>;
     }
 
-    static constexpr bool value = check();
+    static constexpr bool value = check(std::make_index_sequence<kumi::size_v<T>>{});
   };
 
   template<typename T> inline constexpr auto is_homogeneous_v = kumi::is_homogeneous<T>::value;
@@ -436,6 +433,89 @@ namespace kumi
   };
 
   template<std::size_t I, typename T> using stored_element_t = typename kumi::stored_element<I, T>::type;
+
+  //====================================================================================================================
+  /**
+    @ingroup traits
+
+    @brief Checks if a type is an instance of a specific template.
+
+    @tparam T The type to inspect
+    @tparam U the target template
+
+    ## Helper type
+    @code
+    namespace kumi
+    {
+      template<typename T, typename U> using is_instance_of_t = typename is_instance_of_t<T,U>::type;
+    }
+    @endcode
+
+    ## Helper value
+    @code
+    namespace kumi
+    {
+      template<typename T, typename U> inline constexpr bool is_instance_of_v<T,U>::value;
+    }
+    @endcode
+  **/
+  //====================================================================================================================
+  template<typename T, typename U> struct is_instance_of : std::false_type
+  {
+  };
+
+  template<template<typename...> class T, typename... Args1, typename... Args2>
+  struct is_instance_of<T<Args1...>, T<Args2...>> : std::true_type
+  {
+  };
+
+  template<template<auto...> class T, auto... Args1, auto... Args2>
+  struct is_instance_of<T<Args1...>, T<Args2...>> : std::true_type
+  {
+  };
+
+  template<typename T, typename U> using is_instance_of_t = typename kumi::is_instance_of<T, U>::type;
+
+  template<typename T, typename U> inline constexpr bool is_instance_of_v = kumi::is_instance_of<T, U>::value;
+
+  //====================================================================================================================
+  /**
+    @ingroup  traits
+    @brief    Extracts the common product_type of a parameter pack.
+
+    If all the types are record types then it returns an empty record type, otherwise returns an empty product type.
+    As we are unable to properly compute the Least Restrictive Subtype of a pack this trait is specialized
+    in the following way.
+
+    - If all input types are the same product_type, provide a type alias corresponding to it.
+    - If all input types are instance of the same template itself beeing a product_type, expose the template.
+    - If all types are kumi::concepts::product_type, use kumi::tuple as the alias.
+    - If all types are kumi::concepts::record_type, use kumi::record as the alias.
+
+    @note It is used in algorithm taking multiple product types as input in order to determine the correct output type.
+
+    @tparam Ts The product types to access
+
+    ## Helper type
+    @code
+    namespace kumi
+    {
+      template<typename... Ts> using common_product_type_t = typename common_product_type<Ts...>::type;
+    }
+    @endcode
+  **/
+  //====================================================================================================================
+  template<typename... Ts> struct common_product_type;
+
+  template<typename T, typename... Ts>
+  requires((kumi::is_product_type_v<Ts> && ...) &&
+           ((std::same_as<T, Ts> && ...) || (kumi::is_instance_of_v<T, Ts> && ...)))
+  struct common_product_type<T, Ts...>
+  {
+    using type = std::remove_cvref_t<T>;
+  };
+
+  template<typename... Ts> using common_product_type_t = typename common_product_type<Ts...>::type;
 
   //====================================================================================================================
   /**
@@ -742,7 +822,7 @@ namespace kumi
            (requires { typename Traits<kumi::element_t<Is, T>>::type; } && ...)
   struct map_traits<Traits, T, std::index_sequence<Is...>>
   {
-    using type = builder_make_t<T, typename Traits<kumi::element_t<Is, T>>::type...>;
+    using type = kumi::builder_make_t<T, typename Traits<kumi::element_t<Is, T>>::type...>;
   };
 
   template<template<typename...> typename Traits, typename T>

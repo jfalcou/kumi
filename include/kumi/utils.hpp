@@ -37,6 +37,7 @@ namespace kumi
   //====================================================================================================================
 }
 
+#include <kumi/detail/detail.hpp>
 #include <kumi/utils/as.hpp>
 #include <kumi/utils/builder.hpp>
 #include <kumi/utils/traits.hpp>

@@ -56,27 +56,17 @@ namespace kumi
     //==================================================================================================================
     struct unique_t
     {
-      template<typename... Ts> KUMI_ABI consteval auto operator()(std::type_identity<Ts>...) const noexcept
+    private:
+      template<std::size_t... I, bool... Bs>
+      consteval auto impl(std::index_sequence<I...>, std::bool_constant<Bs>...) const noexcept
       {
-        using type = kumi::_::make_multiset_t<std::make_index_sequence<sizeof...(Ts)>, Ts...>;
-        return this->unique_(type{}, std::make_index_sequence<sizeof...(Ts)>{}, std::type_identity<Ts>{}...);
+        return std::index_sequence<(kumi::_::nth_pos(I, Bs...))...>{};
       }
 
-      template<typename T, std::size_t... I, typename... Ts>
-      consteval auto unique_(T&&, std::index_sequence<I...>, std::type_identity<Ts>...) const noexcept
+    public:
+      template<bool... Bs> consteval auto operator()(std::bool_constant<Bs>... bs) const noexcept
       {
-        return this->expand_(std::integer_sequence<bool, (T{}(std::type_identity<Ts>{}) == I)...>{});
-      }
-
-      template<bool... b> consteval auto expand_(std::integer_sequence<bool, b...> bs) const noexcept
-      {
-        return this->build_(bs, std::make_index_sequence<(b + ... + 0)>{});
-      }
-
-      template<bool... b, std::size_t... I>
-      consteval auto build_(std::integer_sequence<bool, b...>, std::index_sequence<I...>) const noexcept
-      {
-        return std::index_sequence<(kumi::_::nth_pos(I, b...))...>{};
+        return impl(std::make_index_sequence<(Bs + ... + 0)>{}, bs...);
       }
     };
 
@@ -93,19 +83,21 @@ namespace kumi
     //==================================================================================================================
     struct select_t
     {
-      template<bool... Bs> KUMI_ABI consteval auto operator()(std::bool_constant<Bs>...) const noexcept
-      {
-        return this->select_(std::integer_sequence<bool, Bs...>{}, std::make_index_sequence<(Bs + ... + 0)>{},
-                             std::make_index_sequence<(sizeof...(Bs) - (Bs + ... + 0))>{});
-      }
-
+    private:
       template<bool... b, std::size_t... I, std::size_t... J>
-      consteval auto select_(std::integer_sequence<bool, b...>,
-                             std::index_sequence<I...>,
-                             std::index_sequence<J...>) const noexcept
+      KUMI_ABI consteval auto impl(std::integer_sequence<bool, b...>,
+                                   std::index_sequence<I...>,
+                                   std::index_sequence<J...>) const noexcept
       {
         return kumi::projection_map{std::index_sequence<(kumi::_::nth_pos(I, b...))...>{},
                                     std::index_sequence<(kumi::_::nth_pos(J, !b...))...>{}};
+      }
+
+    public:
+      template<bool... Bs> KUMI_ABI consteval auto operator()(std::bool_constant<Bs>...) const noexcept
+      {
+        return impl(std::integer_sequence<bool, Bs...>{}, std::make_index_sequence<(Bs + ... + 0)>{},
+                    std::make_index_sequence<(sizeof...(Bs) - (Bs + ... + 0))>{});
       }
     };
 
@@ -122,29 +114,17 @@ namespace kumi
     //==================================================================================================================
     struct adjacent_unicity_t
     {
-      template<kumi::concepts::product_type T> KUMI_ABI consteval auto operator()(kumi::as<T>) const noexcept
+    private:
+      template<std::size_t... I, bool... Bs>
+      consteval auto impl(std::index_sequence<I...>, std::bool_constant<Bs>...) const noexcept
       {
-        return this->adjacent_unicity_(kumi::as<T>{}, std::make_index_sequence<kumi::size_v<T> - 1>{});
+        return std::index_sequence<0, (kumi::_::nth_pos(I, Bs...) + 1)...>{};
       }
 
-      template<typename T, std::size_t... I>
-      consteval auto adjacent_unicity_(kumi::as<T>, std::index_sequence<I...>) const noexcept
+    public:
+      template<bool... Bs> consteval auto operator()(std::bool_constant<Bs>... bs) const noexcept
       {
-        constexpr auto proj =
-          std::integer_sequence<bool,
-                                !std::is_same_v<kumi::stored_element_t<I, T>, kumi::stored_element_t<I + 1, T>>...>{};
-        return this->expand_(proj);
-      }
-
-      template<bool... b> consteval auto expand_(std::integer_sequence<bool, b...> bs) const noexcept
-      {
-        return this->build_(bs, std::make_index_sequence<(b + ... + 0)>{});
-      }
-
-      template<bool... b, std::size_t... I>
-      consteval auto build_(std::integer_sequence<bool, b...>, std::index_sequence<I...>) const noexcept
-      {
-        return std::index_sequence<0, (kumi::_::nth_pos(I, b...) + 1)...>{};
+        return impl(std::make_index_sequence<(Bs + ... + 0)>{}, bs...);
       }
     };
 

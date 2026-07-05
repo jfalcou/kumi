@@ -16,7 +16,7 @@ namespace kumi
     KUMI_ABI constexpr auto cartesian_product_(kumi::_::adl_tag_t, T&& t, Seq&& s, std::index_sequence<I...>)
     {
       std::make_index_sequence<kumi::size_v<T>> ids{};
-      return kumi::make_tuple((kumi::function::builder(KUMI_FWD(t), get<I>(s), ids))...);
+      return kumi::make_tuple((kumi::_::builder(KUMI_FWD(t), get<I>(s), ids))...);
     }
   }
 
@@ -29,9 +29,8 @@ namespace kumi
       if constexpr (sizeof...(Ts) == 0) return kumi::tuple{};
       else
       {
-        constexpr auto sq = std::make_index_sequence<(kumi::size_v<Ts> * ...)>{};
         constexpr auto idx = kumi::function::cartesian_producer(kumi::index<kumi::size_v<Ts>>...);
-        return cartesian_product_(kumi::_::adl_tag, kumi::forward_as_tuple(KUMI_FWD(ts)...), idx, sq);
+        return cartesian_product_(kumi::_::adl_tag, kumi::forward_as_tuple(KUMI_FWD(ts)...), get<1>(idx), get<0>(idx));
       }
     }
   };

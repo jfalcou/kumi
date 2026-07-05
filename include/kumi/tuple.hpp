@@ -10,7 +10,6 @@
 // This header is provided as a shortcut to avoid lengthy include name
 #include <kumi/configuration.hpp>
 #include <kumi/fwd.hpp>
-#include <kumi/detail.hpp>
 #include <kumi/utils.hpp>
 #include <kumi/functional.hpp>
 #include <kumi/product_types/tuple.hpp>

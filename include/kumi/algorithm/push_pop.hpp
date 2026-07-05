@@ -39,8 +39,7 @@ namespace kumi
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return kumi::builder<T>::make();
       else
-        return kumi::function::builder(KUMI_FWD(t),
-                                       kumi::function::shifter(kumi::index<1>, kumi::index<kumi::size_v<T> - 1>));
+        return kumi::_::builder(KUMI_FWD(t), kumi::function::shifter(kumi::index<1>, kumi::index<kumi::size_v<T> - 1>));
     }
   };
 
@@ -58,7 +57,7 @@ namespace kumi
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return kumi::builder<T>::make();
-      else return kumi::function::builder(KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T> - 1>{});
+      else return kumi::_::builder(KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T> - 1>{});
     }
   };
 

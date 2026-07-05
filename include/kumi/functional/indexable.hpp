@@ -51,10 +51,10 @@ namespace kumi::function
     }
 
   public:
-    template<std::size_t... S> consteval auto operator()(kumi::index_t<S>...) const noexcept
+    template<std::size_t... S> consteval auto operator()(kumi::index_t<S>... idxs) const noexcept
     {
-      constexpr std::size_t N = (S * ... * 1ULL);
-      return impl(std::make_index_sequence<N>{}, kumi::index<S>...);
+      constexpr auto ids = std::make_index_sequence<(S * ... * 1ULL)>{};
+      return kumi::projection_map{ids, impl(ids, idxs...)};
     }
   } inline constexpr cartesian_producer;
 

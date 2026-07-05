@@ -23,7 +23,7 @@ namespace kumi
         }
         else return kumi::invoke(f, get<N>(KUMI_FWD(t)), get<N>(KUMI_FWD(ts))...);
       }
-    };
+    } inline constexpr map_case;
 
     struct map_index_t
     {
@@ -31,7 +31,7 @@ namespace kumi
       {
         return kumi::invoke(f, N, get<N>(KUMI_FWD(args))...);
       }
-    };
+    } inline constexpr map_index_case;
 
     struct map_field_t
     {
@@ -42,11 +42,7 @@ namespace kumi
         return kumi::capture_field<field>(
           kumi::invoke(f, kumi::_::make_str(field), get<field>(KUMI_FWD(t)), get<field>(KUMI_FWD(ts))...));
       }
-    };
-
-    inline constexpr map_t map_case{};
-    inline constexpr map_index_t map_index_case{};
-    inline constexpr map_field_t map_field_case{};
+    } inline constexpr map_field_case;
 
     template<typename T, typename F, std::size_t... I>
     KUMI_ABI constexpr decltype(auto) map_(kumi::_::adl_tag_t, T&&, F&& f, std::index_sequence<I...>)

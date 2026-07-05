@@ -14,7 +14,7 @@ namespace kumi
     template<typename T, std::size_t... I, std::size_t... J>
     KUMI_ABI constexpr auto zip_(kumi::_::adl_tag_t, T&& t, std::index_sequence<I...>, std::index_sequence<J...> is)
     {
-      return kumi::make_tuple(kumi::function::builder(KUMI_FWD(t), std::integral_constant<std::size_t, I>{}, is)...);
+      return kumi::make_tuple(kumi::_::builder(KUMI_FWD(t), std::integral_constant<std::size_t, I>{}, is)...);
     }
 
     template<typename T, std::size_t N, std::size_t... I>

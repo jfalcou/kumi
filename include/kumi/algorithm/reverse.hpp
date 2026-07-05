@@ -17,7 +17,7 @@ namespace kumi
       else
       {
         constexpr auto idx = kumi::function::reverser(kumi::index<kumi::size_v<T>>);
-        return kumi::function::builder(KUMI_FWD(t), idx);
+        return kumi::_::builder(KUMI_FWD(t), idx);
       }
     }
   };

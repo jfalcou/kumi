@@ -19,7 +19,7 @@ namespace kumi
       else
       {
         constexpr auto pos = kumi::function::concatenater(kumi::index<kumi::size_v<Ts>>...);
-        return kumi::function::builder(kumi::forward_as_tuple(KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
+        return kumi::_::builder(kumi::forward_as_tuple(KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
       }
     }
   };

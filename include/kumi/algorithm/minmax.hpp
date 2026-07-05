@@ -28,6 +28,13 @@ namespace kumi
       return (kumi::function::foldable{v} >> ... >> kumi::bind_back(f, get<I + 1>(KUMI_FWD(t))))();
     }
 
+    template<typename M, typename F, typename T, typename V, std::size_t... I>
+    KUMI_ABI constexpr auto map_minmax_(kumi::_::adl_tag_t, M m, F f, T&& t, V v, std::index_sequence<I...>)
+    {
+      return (kumi::function::foldable{kumi::invoke(m, v)} >> ... >>
+              kumi::bind_back(f, kumi::invoke(m, get<I + 1>(KUMI_FWD(t)))))();
+    }
+
     template<typename T, typename V, typename F, typename S, std::size_t... I>
     KUMI_ABI constexpr auto minmax_flat_(
       kumi::_::adl_tag_t, T&& t, V visitor, F f, S self, std::index_sequence<I...>) noexcept
@@ -44,8 +51,7 @@ namespace kumi
       else if constexpr (kumi::concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
       else
       {
-        auto const f = [](auto cur, auto u) { return cur > u ? cur : u; };
-        return minmax_(kumi::_::adl_tag, f, KUMI_FWD(t), get<0>(KUMI_FWD(t)),
+        return minmax_(kumi::_::adl_tag, kumi::function::max, KUMI_FWD(t), get<0>(KUMI_FWD(t)),
                        std::make_index_sequence<kumi::size_v<T> - 1>{});
       }
     }
@@ -57,9 +63,8 @@ namespace kumi
       else if constexpr (kumi::concepts::sized_product_type<T, 1>) return invoke(f, get<0>(KUMI_FWD(t)));
       else
       {
-        auto const c = [f](auto cur, auto const& u) { return cur > invoke(f, u) ? cur : invoke(f, u); };
-        return minmax_(kumi::_::adl_tag, c, KUMI_FWD(t), kumi::invoke(f, get<0>(KUMI_FWD(t))),
-                       std::make_index_sequence<kumi::size_v<T> - 1>{});
+        return map_minmax_(kumi::_::adl_tag, f, kumi::function::max, KUMI_FWD(t), get<0>(KUMI_FWD(t)),
+                           std::make_index_sequence<kumi::size_v<T> - 1>{});
       }
     }
   };
@@ -85,8 +90,7 @@ namespace kumi
       else if constexpr (kumi::concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
       else
       {
-        auto const f = [](auto cur, auto u) { return cur < u ? cur : u; };
-        return minmax_(kumi::_::adl_tag, f, KUMI_FWD(t), get<0>(KUMI_FWD(t)),
+        return minmax_(kumi::_::adl_tag, kumi::function::min, KUMI_FWD(t), get<0>(KUMI_FWD(t)),
                        std::make_index_sequence<kumi::size_v<T> - 1>{});
       }
     }
@@ -98,9 +102,8 @@ namespace kumi
       else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::invoke(f, get<0>(KUMI_FWD(t)));
       else
       {
-        auto const c = [f](auto cur, auto const& u) { return cur < invoke(f, u) ? cur : invoke(f, u); };
-        return minmax_(kumi::_::adl_tag, c, KUMI_FWD(t), kumi::invoke(f, get<0>(KUMI_FWD(t))),
-                       std::make_index_sequence<kumi::size_v<T> - 1>{});
+        return map_minmax_(kumi::_::adl_tag, f, kumi::function::min, KUMI_FWD(t), get<0>(KUMI_FWD(t)),
+                           std::make_index_sequence<kumi::size_v<T> - 1>{});
       }
     }
   };

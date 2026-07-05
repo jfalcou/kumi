@@ -18,14 +18,14 @@ namespace kumi
                                                      kumi::index_t<S> s) const noexcept
     {
       static_assert((B <= kumi::size_v<T>) && (E <= kumi::size_v<T>), "[KUMI] - Invalid index");
-      return kumi::function::builder(KUMI_FWD(t), kumi::function::slicer(b, kumi::index<E>, s));
+      return kumi::_::builder(KUMI_FWD(t), kumi::function::slicer(b, kumi::index<E>, s));
     }
 
     template<kumi::concepts::product_type T, std::size_t B, std::size_t E>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<B> b, kumi::index_t<E>) const noexcept
     {
       static_assert((B <= kumi::size_v<T>) && (E <= kumi::size_v<T>), "[KUMI] - Invalid index");
-      return kumi::function::builder(KUMI_FWD(t), kumi::function::slicer(b, kumi::index<E>));
+      return kumi::_::builder(KUMI_FWD(t), kumi::function::slicer(b, kumi::index<E>));
     }
 
     template<kumi::concepts::product_type T, std::size_t B>
@@ -45,14 +45,14 @@ namespace kumi
                                                      kumi::index_t<S> s) const noexcept
     {
       static_assert((B <= kumi::size_v<T>) && (E <= kumi::size_v<T>), "[KUMI] - Invalid index");
-      return kumi::function::builder(KUMI_FWD(t), kumi::function::extractor(b, e, kumi::index<kumi::size_v<T>>, s));
+      return kumi::_::builder(KUMI_FWD(t), kumi::function::extractor(b, e, kumi::index<kumi::size_v<T>>, s));
     }
 
     template<kumi::concepts::product_type T, std::size_t B, std::size_t E>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, kumi::index_t<B> b, kumi::index_t<E> e) const noexcept
     {
       static_assert((B <= kumi::size_v<T>) && (E <= kumi::size_v<T>), "[KUMI] - Invalid index");
-      return kumi::function::builder(KUMI_FWD(t), kumi::function::extractor(b, e, kumi::index<kumi::size_v<T>>));
+      return kumi::_::builder(KUMI_FWD(t), kumi::function::extractor(b, e, kumi::index<kumi::size_v<T>>));
     }
 
     template<kumi::concepts::product_type T, std::size_t B>
@@ -71,8 +71,7 @@ namespace kumi
       static_assert(I0 <= kumi::size_v<T>, "[KUMI] - Invalid index");
       constexpr auto proj = kumi::function::splitter(kumi::index<I0>, kumi::index<kumi::size_v<T>>);
 
-      return kumi::tuple{kumi::function::builder(KUMI_FWD(t), get<0>(proj)),
-                         kumi::function::builder(KUMI_FWD(t), get<1>(proj))};
+      return kumi::tuple{kumi::_::builder(KUMI_FWD(t), get<0>(proj)), kumi::_::builder(KUMI_FWD(t), get<1>(proj))};
     }
   };
 
