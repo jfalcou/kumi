@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="KUMI - The C++20 Compact Tuple Tools" />
 <meta name="twitter:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
 <meta name="twitter:image" content="https://jfalcou.github.io/kumi/card.png" />
-<title>KUMI: kumi::builder&lt; T &gt; Class Template Reference</title>
+<title>KUMI: kumi::is_instance_of&lt; T, U &gt; Struct Template Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -139,7 +139,7 @@ $(function() { codefold.init(); });
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('structkumi_1_1builder.html','',''); });
+$(function(){initNavTree('structkumi_1_1is__instance__of.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -165,56 +165,45 @@ $(function(){initNavTree('structkumi_1_1builder.html','',''); });
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">kumi::builder&lt; T &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__utility.html">Helper Types and Functions</a></div></div></div>
+  <div class="headertitle"><div class="title">kumi::is_instance_of&lt; T, U &gt; Struct Template Reference<div class="ingroups"><a class="el" href="group__traits.html">Product Type Related Traits</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p><a class="el" href="structkumi_1_1builder.html" title="kumi::builder provides a generic way of defining a product type.">kumi::builder</a> provides a generic way of defining a product type.  
+<p>Checks if a type is an instance of a specific template.  
  <a href="#details">More...</a></p>
 
-<p><code>#include &lt;kumi/utils/builder.hpp&gt;</code></p>
+<p><code>#include &lt;kumi/utils/traits.hpp&gt;</code></p>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><div class="compoundTemplParams">template&lt;typename T&gt;<br />
-class kumi::builder&lt; T &gt;</div><p><a class="el" href="structkumi_1_1builder.html" title="kumi::builder provides a generic way of defining a product type.">kumi::builder</a> provides a generic way of defining a product type. </p>
-<p>Helper structure to build the correct output product type based on the given template parameter. If the provided product type is a not a record_type the builder will output a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> otherwise a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>. One can specialize the builder for it's own type matching the product type semantic.</p>
-<p>A type for which the builder has been specialized is then suitable to be used as the return type from any algorithm.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md53"></a>
-Example</h2>
-<div class="fragment"><div class="line"><span class="keyword">struct </span>cplx { <span class="keywordtype">float</span> re, im; };</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><span class="keyword">concept </span>is_cplx = std::is_same_v&lt;std::remove_cvref_t&lt;T&gt;,cplx&gt;;</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Builder protocole</span></div>
-<div class="line"><span class="keyword">template</span>&lt;is_cplx T&gt;</div>
-<div class="line"><span class="keyword">struct </span><a class="code hl_class" href="structkumi_1_1builder.html">builder</a>&lt;T&gt;</div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">using </span>type = T;</div>
-<div class="line"> </div>
-<div class="line">  <span class="keyword">template</span>&lt;std::floating_point... Us&gt; <span class="keyword">requires</span> (<span class="keyword">sizeof</span>...(Us) == 2) <span class="keyword">using</span> to = cplx;</div>
-<div class="line"> </div>
-<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> make(<span class="keywordtype">float</span> r, <span class="keywordtype">float</span> i)</div>
-<div class="line">  {</div>
-<div class="line">    returni cplx{r,i};</div>
-<div class="line">  }</div>
-<div class="line"> </div>
-<div class="line">  <span class="keyword">static</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> build(<span class="keywordtype">float</span> r, <span class="keywordtype">float</span> i) { <span class="keywordflow">return</span> cplx{r,i}; }</div>
-<div class="line">};</div>
-<div class="ttc" id="astructkumi_1_1builder_html"><div class="ttname"><a href="structkumi_1_1builder.html">kumi::builder</a></div><div class="ttdoc">kumi::builder provides a generic way of defining a product type.</div><div class="ttdef"><b>Definition</b> builder.hpp:53</div></div>
-</div><!-- fragment --><dl class="tparams"><dt>Template Parameters</dt><dd>
+<div class="textblock"><div class="compoundTemplParams">template&lt;typename T, typename U&gt;<br />
+struct kumi::is_instance_of&lt; T, U &gt;</div><p>Checks if a type is an instance of a specific template. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td>the template type to be built. </td></tr>
+    <tr><td class="paramname">T</td><td>The type to inspect </td></tr>
+    <tr><td class="paramname">U</td><td>the target template</td></tr>
   </table>
   </dd>
 </dl>
-</div></div><!-- contents -->
+<h2 class="doxsection"><a class="anchor" id="autotoc_md86"></a>
+Helper type</h2>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt; <span class="keyword">using </span>is_instance_of_t = <span class="keyword">typename</span> is_instance_of_t&lt;T,U&gt;::type;</div>
+<div class="line">}</div>
+<div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md87"></a>
+Helper value</h2>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt; <span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> is_instance_of_v&lt;T,U&gt;::value;</div>
+<div class="line">}</div>
+</div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
 <!-- HTML footer for doxygen 1.8.20-->
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="namespacekumi.html">kumi</a></li><li class="navelem"><a href="structkumi_1_1builder.html">builder</a></li>
+    <li class="navelem"><a href="namespacekumi.html">kumi</a></li><li class="navelem"><a href="structkumi_1_1is__instance__of.html">is_instance_of</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->

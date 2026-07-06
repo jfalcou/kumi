@@ -491,6 +491,12 @@
     <templarg>typename T</templarg>
   </compound>
   <compound kind="struct">
+    <name>kumi::is_instance_of</name>
+    <filename>structkumi_1_1is__instance__of.html</filename>
+    <templarg>typename T</templarg>
+    <templarg>typename U</templarg>
+  </compound>
+  <compound kind="struct">
     <name>kumi::is_product_type</name>
     <filename>structkumi_1_1is__product__type.html</filename>
     <templarg>typename T</templarg>
@@ -1674,6 +1680,7 @@
     <class kind="struct">kumi::is_equality_comparable</class>
     <class kind="struct">kumi::is_equivalent</class>
     <class kind="struct">kumi::is_homogeneous</class>
+    <class kind="struct">kumi::is_instance_of</class>
     <class kind="struct">kumi::is_product_type</class>
     <class kind="struct">kumi::is_projection_map</class>
     <class kind="struct">kumi::is_record_type</class>
@@ -3549,6 +3556,7 @@
     <class kind="struct">kumi::is_container</class>
     <class kind="struct">kumi::is_equality_comparable</class>
     <class kind="struct">kumi::is_equivalent</class>
+    <class kind="struct">kumi::is_instance_of</class>
     <class kind="struct">kumi::is_product_type</class>
     <class kind="struct">kumi::is_projection_map</class>
     <class kind="struct">kumi::is_record_type</class>

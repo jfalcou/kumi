@@ -11,7 +11,8 @@ var searchData=
   ['is_5fequality_5fcomparable_8',['is_equality_comparable',['../structkumi_1_1is__equality__comparable.html',1,'kumi']]],
   ['is_5fequivalent_9',['is_equivalent',['../structkumi_1_1is__equivalent.html',1,'kumi']]],
   ['is_5fhomogeneous_10',['is_homogeneous',['../structkumi_1_1is__homogeneous.html',1,'kumi']]],
-  ['is_5fproduct_5ftype_11',['is_product_type',['../structkumi_1_1is__product__type.html',1,'kumi']]],
-  ['is_5fprojection_5fmap_12',['is_projection_map',['../structkumi_1_1is__projection__map.html',1,'kumi']]],
-  ['is_5frecord_5ftype_13',['is_record_type',['../structkumi_1_1is__record__type.html',1,'kumi']]]
+  ['is_5finstance_5fof_11',['is_instance_of',['../structkumi_1_1is__instance__of.html',1,'kumi']]],
+  ['is_5fproduct_5ftype_12',['is_product_type',['../structkumi_1_1is__product__type.html',1,'kumi']]],
+  ['is_5fprojection_5fmap_13',['is_projection_map',['../structkumi_1_1is__projection__map.html',1,'kumi']]],
+  ['is_5frecord_5ftype_14',['is_record_type',['../structkumi_1_1is__record__type.html',1,'kumi']]]
 ];
