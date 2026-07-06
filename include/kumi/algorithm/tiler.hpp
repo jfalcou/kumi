@@ -14,8 +14,7 @@ namespace kumi
     template<typename T, std::size_t... B, std::size_t... E>
     KUMI_ABI constexpr auto tiles_(kumi::_::adl_tag_t, T&& t, std::index_sequence<B...>, std::index_sequence<E...>)
     {
-      return kumi::tuple{
-        kumi::function::builder(KUMI_FWD(t), kumi::function::shifter(kumi::index<E>, kumi::index<B>))...};
+      return kumi::tuple{kumi::_::builder(KUMI_FWD(t), kumi::function::shifter(kumi::index<E>, kumi::index<B>))...};
     }
   }
 

@@ -18,6 +18,38 @@ namespace kumi
       if constexpr (std::is_void_v<result_t>) return ((kumi::invoke(KUMI_FWD(f), kumi::index<I>)), ...);
       else return ((kumi::invoke(KUMI_FWD(f), kumi::index<I>)) && ...);
     }
+
+    struct for_each_t
+    {
+      template<typename F, typename T, typename... Ts>
+      KUMI_ABI constexpr auto operator()(auto N, F f, T&& t, Ts&&... ts) const
+      {
+        if constexpr (kumi::concepts::record_type<T>)
+        {
+          constexpr auto field = kumi::identifier_of<kumi::element_t<N, T>>();
+          kumi::invoke(f, get<field>(KUMI_FWD(t)), get<field>(KUMI_FWD(ts))...);
+        }
+        else kumi::invoke(f, get<N>(KUMI_FWD(t)), get<N>(KUMI_FWD(ts))...);
+      }
+    } inline constexpr for_each_case;
+
+    struct for_each_index_t
+    {
+      KUMI_ABI constexpr auto operator()(auto N, auto f, auto&&... ts) const
+      {
+        kumi::invoke(f, N, get<N>(KUMI_FWD(ts))...);
+      }
+    } inline constexpr for_each_index_case;
+
+    struct for_each_field_t
+    {
+      template<typename F, typename T, typename... Ts>
+      KUMI_ABI constexpr auto operator()(auto N, F f, T&& t, Ts&&... ts) const
+      {
+        constexpr auto field = kumi::identifier_of<kumi::element_t<N, T>>();
+        kumi::invoke(f, kumi::_::make_str(field), get<field>(KUMI_FWD(t)), get<field>(KUMI_FWD(ts))...);
+      }
+    } inline constexpr for_each_field_case;
   }
 
   struct for_each_t
@@ -29,16 +61,9 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return;
       else
       {
-        auto const invoker{[&](auto const I) {
-          if constexpr (kumi::concepts::record_type<T>)
-          {
-            constexpr auto field = kumi::identifier_of<kumi::element_t<I, T>>();
-            kumi::invoke(f, get<field>(KUMI_FWD(t)), get<field>(KUMI_FWD(ts))...);
-          }
-          else kumi::invoke(f, get<I>(KUMI_FWD(t)), get<I>(KUMI_FWD(ts))...);
-        }};
-
-        for_each_(kumi::_::adl_tag, invoker, std::make_index_sequence<kumi::size_v<T>>{});
+        using binded_t = kumi::_::bind_t<kumi::_::Binding::back, kumi::_::for_each_t, Function, T, Ts...>;
+        auto&& bound = binded_t{kumi::_::for_each_case, f, KUMI_FWD(t), KUMI_FWD(ts)...};
+        for_each_(kumi::_::adl_tag, KUMI_FWD(bound), std::make_index_sequence<kumi::size_v<T>>{});
       }
     }
   };
@@ -52,8 +77,9 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return;
       else
       {
-        auto const invoker{[&](auto const I) { kumi::invoke(f, I, get<I>(KUMI_FWD(t)), get<I>(KUMI_FWD(ts))...); }};
-        for_each_(kumi::_::adl_tag, invoker, std::make_index_sequence<kumi::size_v<T>>{});
+        using binded_t = kumi::_::bind_t<kumi::_::Binding::back, kumi::_::for_each_index_t, Function, T, Ts...>;
+        auto&& bound = binded_t{kumi::_::for_each_index_case, f, KUMI_FWD(t), KUMI_FWD(ts)...};
+        for_each_(kumi::_::adl_tag, KUMI_FWD(bound), std::make_index_sequence<kumi::size_v<T>>{});
       }
     }
   };
@@ -67,12 +93,9 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<R>) return;
       else
       {
-        constexpr auto fields = kumi::members_of(as<R>{});
-        auto const invoker = [&](auto const I) {
-          constexpr auto field = get<I>(fields);
-          kumi::invoke(f, kumi::_::make_str(field), get<field>(KUMI_FWD(r)), get<field>(KUMI_FWD(rs))...);
-        };
-        for_each_(kumi::_::adl_tag, invoker, std::make_index_sequence<kumi::size_v<R>>{});
+        using binded_t = kumi::_::bind_t<kumi::_::Binding::back, kumi::_::for_each_field_t, Function, R, Rs...>;
+        auto&& bound = binded_t{kumi::_::for_each_field_case, f, KUMI_FWD(r), KUMI_FWD(rs)...};
+        for_each_(kumi::_::adl_tag, KUMI_FWD(bound), std::make_index_sequence<kumi::size_v<R>>{});
       }
     }
   };
