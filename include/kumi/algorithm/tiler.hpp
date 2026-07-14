@@ -87,11 +87,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/tiles.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/tiles.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   template<std::size_t N, std::size_t O> inline constexpr tiles_t<N, O> tiles{};
@@ -146,11 +150,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/windows.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/windows.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   template<std::size_t N> inline constexpr tiles_t<N, 1> windows{};
@@ -206,11 +214,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/chunks.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/chunks.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   template<std::size_t N> inline constexpr tiles_t<N, N> chunks{};

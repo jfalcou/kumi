@@ -85,11 +85,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/apply.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/apply.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr apply_t apply{};

@@ -70,11 +70,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/back-front.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/back-front.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr front_t front{};
@@ -120,11 +124,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/back-front.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/back-front.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr back_t back{};

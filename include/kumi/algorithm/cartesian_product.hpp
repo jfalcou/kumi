@@ -78,11 +78,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/cartesian_product.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/cartesian_product.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr cartesian_product_t cartesian_product{};

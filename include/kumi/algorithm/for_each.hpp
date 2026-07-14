@@ -112,7 +112,6 @@ namespace kumi
     @note This function does not take part in overload resolution if `f` can't be applied to the
           elements of `t` and/or `ts`, or if the product type are not compatible. @see compatible_product_types.
 
-    @qualifier
     @qualifier inline
     @qualifier constexpr
 
@@ -139,11 +138,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/for_each.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/for_each.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr for_each_t for_each{};
@@ -159,7 +162,6 @@ namespace kumi
           elements of `t` and/or `ts` and an integral constant. This function cannot be applied
           on record types.
 
-    @qualifier
     @qualifier inline
     @qualifier constexpr
 
@@ -206,7 +208,6 @@ namespace kumi
     This function can only be applied to record types.
     The function needs to be defined to handle types modeling kumi::concepts::field.
 
-    @qualifier
     @qualifier inline
     @qualifier constexpr
 

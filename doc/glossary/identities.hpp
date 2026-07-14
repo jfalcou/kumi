@@ -58,7 +58,15 @@ struct unit {};
 
 ---
 
-[In the next page](@ref product), we will see how to combine the simple types we saw until now in order to create more 
+In the next page, we will see how to combine the simple types we saw until now in order to create more 
 complex types.
+
+<div class="section_buttons">
+ 
+| Previous                          |                              Next |
+|:----------------------------------|----------------------------------:|
+| [Introduction](@ref introduction) | [Product Types](@ref product)     |
+ 
+</div>
 
 **/

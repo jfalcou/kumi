@@ -103,11 +103,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/unique.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/unique.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr unique_t unique{};
@@ -153,11 +157,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/all_unique.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/all_unique.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr all_unique_t all_unique{};

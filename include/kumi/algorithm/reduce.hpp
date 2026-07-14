@@ -222,11 +222,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/reduce.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/reduce.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr reduce_t reduce{};
@@ -297,11 +301,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/map_reduce.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/map_reduce.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr map_reduce_t map_reduce{};
@@ -362,11 +370,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/sum.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/sum.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr sum_t sum{};
@@ -427,11 +439,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/prod.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/prod.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr prod_t prod{};
@@ -492,11 +508,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/bit_and.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/bit_and.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr bit_and_t bit_and{};
@@ -557,11 +577,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/bit_or.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/bit_or.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr bit_or_t bit_or{};
@@ -622,11 +646,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/bit_xor.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/bit_xor.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr bit_xor_t bit_xor{};

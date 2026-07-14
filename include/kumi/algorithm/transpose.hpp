@@ -82,11 +82,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/transpose.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/transpose.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr transpose_t transpose{};

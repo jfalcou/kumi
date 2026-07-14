@@ -18,7 +18,8 @@
   | MSVC            | 19    and  above   |
   | clang-CL        | 19    and above    |
   | AppleClang      | 15    and above    |
-  | nvcc/nvc++      | *Work In Progress* |
+  | nvcc            | 13.2.5             |
+  | nvc++           | 26.3.0             |
 
   @section setup-source Install from the source
 
@@ -29,31 +30,40 @@
   @endcode
 
   Once retrieved, you should have a %kumi folder which contains the whole source code.
+  
+  Then simply use **CMake** to generate the build system and directory for **KUMI**.
+  We recommend using Ninja but any build system is fine.
+  
+  @tab_begin
 
-  Create a `build` directory here and enter it. Once in the `build` directory,
-  you can use  **CMake** to generate the build system for **KUMI**. We recommend using
-  Ninja but any build system is fine.
+  @tab{Ninja}
 
-  @code
-  $ mkdir build
-  $ cd build
-  $ cmake .. -G Ninja
-  @endcode
+    @code
+    $ cmake -S . -B build -G Ninja
+    @endcode
 
+  @tab{Visual Studio}
+
+    @code
+    $ cmake -S . -B build -G "Visual Studio 17 2022" -A x64 
+    @endcode
+
+  @tab_end
+  
   Once **CMake** completes, you can use the `install` target to build and install **KUMI**.
   By default, the library will be installed in the `/usr/local` directory, thus requiring
   root privileges.
 
   @code
-  $ sudo ninja install
+  $ sudo cmake --build build --target install
   @endcode
 
   You can select an alternative installation path by specifying the `CMAKE_INSTALL_PREFIX`
   option at configuration time.
 
   @code
-  $ cmake .. -G Ninja -DCMAKE_INSTALL_PREFIX=path/to/install
-  $ ninja install
+  $ cmake .. -G <build-system> -DCMAKE_INSTALL_PREFIX=path/to/install
+  $ cmake --build build --target install
   @endcode
 
   Once installed, **KUMI** is usable directly by providing the path to its installed files.
@@ -71,46 +81,52 @@
 
   Use **KUMI** by just compiling your code with the include path pointing to the location of this single file.
 
-  @section setup-fetchcontent CMake FetchContent
+  @section dependency As a CMake dependency
+  
+  @tab_begin
+  
+  @tab{FetchContent}
 
-  You can also use CMake FetchContent operation and use the `kumi::kumi` library target that our CMake exports.
+    You can also use CMake FetchContent operation and use the `kumi::kumi` library target that our CMake exports.
 
-  @code{cmake}
-  ##==================================================================================================
-  ## Your project setup
-  ##==================================================================================================
-  cmake_minimum_required(VERSION 3.22)
-  project(kumi-fetch LANGUAGES CXX)
+    @code{cmake}
+    ##==================================================================================================
+    ## Your project setup
+    ##==================================================================================================
+    cmake_minimum_required(VERSION 3.28)
+    project(kumi-fetch LANGUAGES CXX)
 
-  include(FetchContent)
-  FetchContent_Declare(kumi GIT_REPOSITORY "https://github.com/jfalcou/kumi.git" GIT_TAG main)
-  FetchContent_MakeAvailable(kumi)
+    include(FetchContent)
+    FetchContent_Declare(kumi GIT_REPOSITORY "https://github.com/jfalcou/kumi.git" GIT_TAG main)
+    FetchContent_MakeAvailable(kumi)
 
-  add_executable(test_kumi ../main.cpp)
-  target_link_libraries(test_kumi PUBLIC kumi::kumi)
-  @endcode
+    add_executable(test_kumi ../main.cpp)
+    target_link_libraries(test_kumi PUBLIC kumi::kumi)
+    @endcode
 
-  @section setup-cpm Setup with CPM
+  @tab{CPM}
 
-  The **KUMI** library can be setup using [CPM](https://github.com/cpm-cmake/CPM.cmake):
+    The **KUMI** library can be setup using [CPM](https://github.com/cpm-cmake/CPM.cmake):
 
-  @code{cmake}
-  ##==================================================================================================
-  ## Your project setup
-  ##==================================================================================================
-  cmake_minimum_required(VERSION 3.18)
-  project(kumi-cpm LANGUAGES CXX)
+    @code{cmake}
+    ##==================================================================================================
+    ## Your project setup
+    ##==================================================================================================
+    cmake_minimum_required(VERSION 3.28)
+    project(kumi-cpm LANGUAGES CXX)
 
-  # Setup CPM - See https://github.com/cpm-cmake/CPM.cmake#adding-cpm
-  include(cpm.cmake)
+    # Setup CPM - See https://github.com/cpm-cmake/CPM.cmake#adding-cpm
+    include(cpm.cmake)
 
-  CPMAddPackage ( NAME kumi
-                  GIT_REPOSITORY "https://github.com/jfalcou/kumi.git"
-                  OPTIONS "KUMI_BUILD_TEST OFF"
-                )
+    CPMAddPackage ( NAME kumi
+                    GIT_REPOSITORY "https://github.com/jfalcou/kumi.git"
+                    OPTIONS "KUMI_BUILD_TEST OFF"
+                  )
 
-  add_executable(test_kumi ../main.cpp)
-  target_link_libraries(test_kumi PUBLIC kumi::kumi)
-  @endcode
+    add_executable(test_kumi ../main.cpp)
+    target_link_libraries(test_kumi PUBLIC kumi::kumi)
+    @endcode
+  
+  @tab_end
 
 **/

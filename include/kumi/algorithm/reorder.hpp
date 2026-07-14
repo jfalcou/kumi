@@ -117,11 +117,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/reorder.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/reorder.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   template<std::size_t... I> inline constexpr reorder_t<I...> reorder{};
@@ -236,11 +240,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/reindex.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/reindex.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   template<kumi::concepts::projection_map auto Projections> inline constexpr reindex_t<Projections> reindex{};

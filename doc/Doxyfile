@@ -284,10 +284,13 @@ TAB_SIZE               = 2
 # with the commands \{ and \} for these it is advised to use the version @{ and
 # @} or use a double escape (\\{ and \\})
 
-ALIASES                =
+ALIASES  =
 ALIASES += "groupheader{1}=<h2 class=\"groupheader\"> \1 </h2>"
 ALIASES += "subgroupheader{1}=<h3 class=\"groupheader\"> \1 </h3>"
 ALIASES += "godbolt{1}=@include \1"
+ALIASES += tab_begin="<div class=\"tabbed\">"
+ALIASES += tab_end="</div>"
+ALIASES += tab{1}="- <b class=\"tab-title\">\1</b>"
 
 # Set the OPTIMIZE_OUTPUT_FOR_C tag to YES if your project consists of C sources
 # only. Doxygen will then generate output that is more tailored for C. For

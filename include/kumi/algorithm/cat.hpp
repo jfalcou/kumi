@@ -64,11 +64,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/cat.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/cat.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr cat_t cat{};

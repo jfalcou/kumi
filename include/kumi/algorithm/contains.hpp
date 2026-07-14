@@ -115,11 +115,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/contains.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/contains.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr contains_t contains{};
@@ -165,11 +169,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/contains_any.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/contains_any.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr contains_any_t contains_any{};
@@ -215,11 +223,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/contains_only.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/contains_only.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr contains_only_t contains_only{};
@@ -265,11 +277,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/contains_none.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/contains_none.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr contains_none_t contains_none{};

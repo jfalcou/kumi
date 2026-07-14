@@ -64,11 +64,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/reverse.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/reverse.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr reverse_t reverse{};

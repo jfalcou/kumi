@@ -73,11 +73,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/member_cast.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/member_cast.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   template<typename T> inline constexpr member_cast_t<T> member_cast{};

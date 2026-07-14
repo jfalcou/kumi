@@ -77,7 +77,15 @@ state space dictates how much information a variable can have.
 
 ---
 
-[In the next page](@ref identity), we will see some more specific types that are used as a base for more complex 
+In the next page, we will see some more specific types that are used as a base for more complex 
 operations.
+
+<div class="section_buttons">
+ 
+|                              Next |
+|----------------------------------:|
+| [Identity Types](@ref identity)   |
+ 
+</div>
 
 **/

@@ -122,11 +122,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/inner_product.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/inner_product.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr inner_product_t inner_product{};
