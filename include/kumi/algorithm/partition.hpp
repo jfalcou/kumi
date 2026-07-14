@@ -104,11 +104,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/partition.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/partition.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   template<template<typename> typename Pred> inline constexpr partition_t<Pred> partition{};
@@ -159,11 +163,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/filter.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/filter.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   template<template<typename> typename Pred> inline constexpr filter_t<Pred> filter{};
@@ -214,11 +222,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/filter_not.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/filter_not.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   template<template<typename> typename Pred> inline constexpr filter_not_t<Pred> filter_not{};

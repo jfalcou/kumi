@@ -146,11 +146,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/map.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/map.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr map_t map{};

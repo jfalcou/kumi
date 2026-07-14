@@ -104,11 +104,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/push_front.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/push_front.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr push_front_t push_front{};
@@ -155,11 +159,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/pop_front.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/pop_front.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr pop_front_t pop_front{};
@@ -207,11 +215,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/push_back.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/push_back.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr push_back_t push_back{};
@@ -258,11 +270,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/pop_back.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/pop_back.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr pop_back_t pop_back{};

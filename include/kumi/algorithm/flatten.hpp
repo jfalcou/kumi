@@ -189,11 +189,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/compress.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/compress.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr compress_t compress{};
@@ -241,11 +245,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/flatten.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/flatten.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr flatten_t flatten{};
@@ -305,11 +313,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/flatten_all.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/flatten_all.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr flatten_all_t flatten_all{};
@@ -356,11 +368,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/as_flat_ptr.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/as_flat_ptr.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr as_flat_ptr_t as_flat_ptr{};

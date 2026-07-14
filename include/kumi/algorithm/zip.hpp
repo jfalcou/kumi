@@ -132,11 +132,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/zip.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/zip.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr zip_t zip{};
@@ -193,11 +197,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/zip_min.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/zip_min.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr zip_min_t zip_min{};

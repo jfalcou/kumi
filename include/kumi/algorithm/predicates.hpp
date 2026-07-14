@@ -147,11 +147,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/all_of.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/all_of.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr all_of_t all_of{};
@@ -197,11 +201,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/any_of.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/any_of.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr any_of_t any_of{};
@@ -247,11 +255,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/none_of.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/none_of.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr none_of_t none_of{};
@@ -292,11 +304,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/count_if.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/count_if.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr count_if_t count_if{};
@@ -336,11 +352,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/count.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/count.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr count_t count{};

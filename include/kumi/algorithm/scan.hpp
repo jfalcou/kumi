@@ -191,11 +191,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/inclusive_scan_left.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/inclusive_scan_left.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr inclusive_scan_left_t inclusive_scan_left{};
@@ -254,11 +258,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/exclusive_scan_left.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/exclusive_scan_left.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr exclusive_scan_left_t exclusive_scan_left{};
@@ -317,11 +325,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/inclusive_scan_right.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/inclusive_scan_right.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr inclusive_scan_right_t inclusive_scan_right{};
@@ -380,11 +392,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/exclusive_scan_right.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/exclusive_scan_right.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr exclusive_scan_right_t exclusive_scan_right{};

@@ -129,11 +129,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/extract.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/extract.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr extract_t extract{};
@@ -192,11 +196,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/remove.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/remove.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr remove_t remove{};
@@ -248,11 +256,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/split.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/split.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr split_t split{};

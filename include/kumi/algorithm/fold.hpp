@@ -114,11 +114,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/fold_left.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/fold_left.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr fold_left_t fold_left{};
@@ -171,11 +175,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/fold_right.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/fold_right.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr fold_right_t fold_right{};

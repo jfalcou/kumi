@@ -83,11 +83,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/rotate_left.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/rotate_left.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   template<std::size_t R> inline constexpr rotate_left_t<R> rotate_left{};
@@ -137,11 +141,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/rotate_right.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/rotate_right.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   template<std::size_t R> inline constexpr rotate_right_t<R> rotate_right{};

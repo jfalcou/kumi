@@ -70,11 +70,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/locate.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/locate.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr locate_t locate{};

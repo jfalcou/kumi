@@ -114,4 +114,12 @@ element. However, as they are internally represented by a tuple, such operation 
 could "rotate" a record \f$ n \f$ positions to the left. Mathematically this might not make a lot of sense
 whereas for a programmer that has to consider memory representation, this is potentially critical to have.
 
+<div class="section_buttons">
+ 
+| Previous                        |
+|:--------------------------------|
+| [Identity Types](@ref identity) | 
+ 
+</div>
+
 **/

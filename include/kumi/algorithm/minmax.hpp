@@ -167,11 +167,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/max.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/max.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr max_t max{};
@@ -217,11 +221,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/max_flat.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/max_flat.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr max_flat_t max_flat{};
@@ -272,11 +280,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/min.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/min.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr min_t min{};
@@ -322,11 +334,15 @@ namespace kumi
 
     @groupheader{Examples}
 
-    @subgroupheader{Tuple}
+    @tab_begin
+
+    @tab{Tuple}
     @godbolt{doc/tuple/algo/min_flat.cpp}
 
-    @subgroupheader{Record}
+    @tab{Record}
     @godbolt{doc/record/algo/min_flat.cpp}
+
+    @tab_end
   **/
   //====================================================================================================================
   inline constexpr min_flat_t min_flat{};
