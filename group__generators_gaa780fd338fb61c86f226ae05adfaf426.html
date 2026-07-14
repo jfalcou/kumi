@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="Efficeint C++20 implementation of tuple-like classes and algorithms with better compile-time" />
+<meta name="description" content="Efficient C++20 implementation of tuple-like classes and algorithms with better compile-time" />
 <link rel="canonical" href="https://jfalcou.github.io/kumi/" />
 <link rel="icon" type="image/svg+xml" href="/logo.svg" />
 <meta property="og:title" content="KUMI - The C++20 Compact Tuple Tools" />
@@ -196,7 +196,7 @@ $(function(){initNavTree('group__generators_gaa780fd338fb61c86f226ae05adfaf426.h
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, <span class="keyword">typename</span> Function&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__generators_ga49acccc42ec8af7b96b63e8f38796df2.html#ga49acccc42ec8af7b96b63e8f38796df2">flatten</a>(T &amp;&amp; t, Function &amp;&amp; f) <span class="keyword">noexcept</span>;   <span class="comment">// 1</span></div>
-<div class="ttc" id="agroup__generators_ga49acccc42ec8af7b96b63e8f38796df2_html_ga49acccc42ec8af7b96b63e8f38796df2"><div class="ttname"><a href="group__generators_ga49acccc42ec8af7b96b63e8f38796df2.html#ga49acccc42ec8af7b96b63e8f38796df2">kumi::flatten</a></div><div class="ttdeci">constexpr flatten_t flatten</div><div class="ttdoc">Callable object converting a product type of product types into a product type of all elements.</div><div class="ttdef"><b>Definition</b> flatten.hpp:251</div></div>
+<div class="ttc" id="agroup__generators_ga49acccc42ec8af7b96b63e8f38796df2_html_ga49acccc42ec8af7b96b63e8f38796df2"><div class="ttname"><a href="group__generators_ga49acccc42ec8af7b96b63e8f38796df2.html#ga49acccc42ec8af7b96b63e8f38796df2">kumi::flatten</a></div><div class="ttdeci">constexpr flatten_t flatten</div><div class="ttdoc">Callable object converting a product type of product types into a product type of all elements.</div><div class="ttdef"><b>Definition</b> flatten.hpp:259</div></div>
 </div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__generators_ga49acccc42ec8af7b96b63e8f38796df2.html#ga49acccc42ec8af7b96b63e8f38796df2">flatten</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;                  <span class="comment">// 2</span></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
@@ -224,8 +224,8 @@ $(function(){initNavTree('group__generators_gaa780fd338fb61c86f226ae05adfaf426.h
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gaa780fd338fb61c86f226ae05adfaf426" title="Callable object converting recursively a product type of product types into a product type of all ele...">kumi::flatten_all</a></p>
 <h2 class="groupheader">Examples </h2>
-<h3 class="groupheader">Tuple </h3>
-<div class="fragment"><div class="line"></div>
+<div class="tabbed"></div><div class="tabbed"><ul>
+<li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
@@ -243,10 +243,10 @@ $(function(){initNavTree('group__generators_gaa780fd338fb61c86f226ae05adfaf426.h
 <div class="line">                              );</div>
 <div class="line">  std::cout &lt;&lt; sz &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__generators_gaa780fd338fb61c86f226ae05adfaf426_html_gaa780fd338fb61c86f226ae05adfaf426"><div class="ttname"><a href="#gaa780fd338fb61c86f226ae05adfaf426">kumi::flatten_all</a></div><div class="ttdeci">constexpr flatten_all_t flatten_all</div><div class="ttdoc">Callable object converting recursively a product type of product types into a product type of all ele...</div><div class="ttdef"><b>Definition</b> flatten.hpp:315</div></div>
+<div class="ttc" id="agroup__generators_gaa780fd338fb61c86f226ae05adfaf426_html_gaa780fd338fb61c86f226ae05adfaf426"><div class="ttname"><a href="#gaa780fd338fb61c86f226ae05adfaf426">kumi::flatten_all</a></div><div class="ttdeci">constexpr flatten_all_t flatten_all</div><div class="ttdoc">Callable object converting recursively a product type of product types into a product type of all ele...</div><div class="ttdef"><b>Definition</b> flatten.hpp:327</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
-</div><!-- fragment --><h3 class="groupheader">Record </h3>
-<div class="fragment"><div class="line"></div>
+</div><!-- fragment --></li>
+<li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
@@ -268,7 +268,9 @@ $(function(){initNavTree('group__generators_gaa780fd338fb61c86f226ae05adfaf426.h
 <div class="line">  std::cout &lt;&lt; sz &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
-</div><!-- fragment --> 
+</div><!-- fragment --></li>
+</ul>
+</div><div class="tabbed"></div> 
 </div>
 </div>
 </div><!-- contents -->

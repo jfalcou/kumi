@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="Efficeint C++20 implementation of tuple-like classes and algorithms with better compile-time" />
+<meta name="description" content="Efficient C++20 implementation of tuple-like classes and algorithms with better compile-time" />
 <link rel="canonical" href="https://jfalcou.github.io/kumi/" />
 <link rel="icon" type="image/svg+xml" href="/logo.svg" />
 <meta property="og:title" content="KUMI - The C++20 Compact Tuple Tools" />
@@ -193,7 +193,7 @@ $(function(){initNavTree('group__queries_ga3a9b6e2d0fbdace9e57b3846d24a3b57.html
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, <span class="keywordtype">id</span>entifier ID&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga3a9b6e2d0fbdace9e57b3846d24a3b57">contains</a>(T &amp;&amp; t, ID <span class="keyword">const</span>&amp; <span class="keywordtype">id</span>) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__queries_ga3a9b6e2d0fbdace9e57b3846d24a3b57_html_ga3a9b6e2d0fbdace9e57b3846d24a3b57"><div class="ttname"><a href="#ga3a9b6e2d0fbdace9e57b3846d24a3b57">kumi::contains</a></div><div class="ttdeci">constexpr contains_t contains</div><div class="ttdoc">Callable object checking if a product type contains a given identifier.</div><div class="ttdef"><b>Definition</b> contains.hpp:125</div></div>
+<div class="ttc" id="agroup__queries_ga3a9b6e2d0fbdace9e57b3846d24a3b57_html_ga3a9b6e2d0fbdace9e57b3846d24a3b57"><div class="ttname"><a href="#ga3a9b6e2d0fbdace9e57b3846d24a3b57">kumi::contains</a></div><div class="ttdeci">constexpr contains_t contains</div><div class="ttdoc">Callable object checking if a product type contains a given identifier.</div><div class="ttdef"><b>Definition</b> contains.hpp:129</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: The product type to inspect</li>
@@ -214,8 +214,8 @@ $(function(){initNavTree('group__queries_ga3a9b6e2d0fbdace9e57b3846d24a3b57.html
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to kumi:contains:</p>
 <h2 class="groupheader">Examples </h2>
-<h3 class="groupheader">Tuple </h3>
-<div class="fragment"><div class="line"></div>
+<div class="tabbed"></div><div class="tabbed"><ul>
+<li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
@@ -238,8 +238,8 @@ $(function(){initNavTree('group__queries_ga3a9b6e2d0fbdace9e57b3846d24a3b57.html
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1record_abc2cd329ad25d155458850c19cc3b137_html_abc2cd329ad25d155458850c19cc3b137"><div class="ttname"><a href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::record::get</a></div><div class="ttdeci">decltype(auto) constexpr get(record&lt; Ts... &gt; &amp;r) noexcept</div><div class="ttdoc">Extracts the Ith field from a kumi::record.</div><div class="ttdef"><b>Definition</b> record.hpp:618</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
-</div><!-- fragment --><h3 class="groupheader">Record </h3>
-<div class="fragment"><div class="line"></div>
+</div><!-- fragment --></li>
+<li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
@@ -261,7 +261,9 @@ $(function(){initNavTree('group__queries_ga3a9b6e2d0fbdace9e57b3846d24a3b57.html
 <div class="line">  check_contains( <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;malus&quot;</span>_id = 6.5, <span class="stringliteral">&quot;value&quot;</span>_id = 17} );</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
-</div><!-- fragment --> 
+</div><!-- fragment --></li>
+</ul>
+</div><div class="tabbed"></div> 
 </div>
 </div>
 </div><!-- contents -->

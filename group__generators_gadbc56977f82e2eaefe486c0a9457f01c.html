@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="Efficeint C++20 implementation of tuple-like classes and algorithms with better compile-time" />
+<meta name="description" content="Efficient C++20 implementation of tuple-like classes and algorithms with better compile-time" />
 <link rel="canonical" href="https://jfalcou.github.io/kumi/" />
 <link rel="icon" type="image/svg+xml" href="/logo.svg" />
 <meta property="og:title" content="KUMI - The C++20 Compact Tuple Tools" />
@@ -196,7 +196,7 @@ template&lt;std::size_t R&gt; </div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> R, product_type T&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gadbc56977f82e2eaefe486c0a9457f01c">rotate_left&lt;R&gt;</a>(T &amp;&amp; t) ;</div>
-<div class="ttc" id="agroup__generators_gadbc56977f82e2eaefe486c0a9457f01c_html_gadbc56977f82e2eaefe486c0a9457f01c"><div class="ttname"><a href="#gadbc56977f82e2eaefe486c0a9457f01c">kumi::rotate_left</a></div><div class="ttdeci">constexpr rotate_left_t&lt; R &gt; rotate_left</div><div class="ttdoc">Callable object.</div><div class="ttdef"><b>Definition</b> rotate.hpp:93</div></div>
+<div class="ttc" id="agroup__generators_gadbc56977f82e2eaefe486c0a9457f01c_html_gadbc56977f82e2eaefe486c0a9457f01c"><div class="ttname"><a href="#gadbc56977f82e2eaefe486c0a9457f01c">kumi::rotate_left</a></div><div class="ttdeci">constexpr rotate_left_t&lt; R &gt; rotate_left</div><div class="ttdoc">Callable object.</div><div class="ttdef"><b>Definition</b> rotate.hpp:97</div></div>
 </div><!-- fragment --><h3 class="groupheader">Template Parameters </h3>
 <ul>
 <li><span class="tt">R</span>: Rotation factor</li>
@@ -220,8 +220,8 @@ template&lt;std::size_t R&gt; </div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gadbc56977f82e2eaefe486c0a9457f01c" title="Callable object.">kumi::rotate_left</a></p>
 <h2 class="groupheader">Examples </h2>
-<h3 class="groupheader">Tuple </h3>
-<div class="fragment"><div class="line"></div>
+<div class="tabbed"></div><div class="tabbed"><ul>
+<li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
@@ -234,8 +234,8 @@ template&lt;std::size_t R&gt; </div>
 <div class="line">  std::cout &lt;&lt; kumi::rotate_left&lt;3&gt;(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
-</div><!-- fragment --><h3 class="groupheader">Record </h3>
-<div class="fragment"><div class="line"></div>
+</div><!-- fragment --></li>
+<li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
@@ -249,7 +249,9 @@ template&lt;std::size_t R&gt; </div>
 <div class="line">  std::cout &lt;&lt; kumi::rotate_left&lt;3&gt;(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
-</div><!-- fragment --> 
+</div><!-- fragment --></li>
+</ul>
+</div><div class="tabbed"></div> 
 </div>
 </div>
 </div><!-- contents -->

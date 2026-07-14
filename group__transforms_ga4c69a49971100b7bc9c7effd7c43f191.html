@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="Efficeint C++20 implementation of tuple-like classes and algorithms with better compile-time" />
+<meta name="description" content="Efficient C++20 implementation of tuple-like classes and algorithms with better compile-time" />
 <link rel="canonical" href="https://jfalcou.github.io/kumi/" />
 <link rel="icon" type="image/svg+xml" href="/logo.svg" />
 <meta property="og:title" content="KUMI - The C++20 Compact Tuple Tools" />
@@ -195,7 +195,7 @@ $(function(){initNavTree('group__transforms_ga4c69a49971100b7bc9c7effd7c43f191.h
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type T&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_variable" href="#ga4c69a49971100b7bc9c7effd7c43f191">apply</a>(Function &amp;&amp; f, T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__transforms_ga4c69a49971100b7bc9c7effd7c43f191_html_ga4c69a49971100b7bc9c7effd7c43f191"><div class="ttname"><a href="#ga4c69a49971100b7bc9c7effd7c43f191">kumi::apply</a></div><div class="ttdeci">constexpr apply_t apply</div><div class="ttdoc">Callable object invoking the callable object f with the elements of the product type unrolled as argu...</div><div class="ttdef"><b>Definition</b> apply.hpp:95</div></div>
+<div class="ttc" id="agroup__transforms_ga4c69a49971100b7bc9c7effd7c43f191_html_ga4c69a49971100b7bc9c7effd7c43f191"><div class="ttname"><a href="#ga4c69a49971100b7bc9c7effd7c43f191">kumi::apply</a></div><div class="ttdeci">constexpr apply_t apply</div><div class="ttdoc">Callable object invoking the callable object f with the elements of the product type unrolled as argu...</div><div class="ttdef"><b>Definition</b> apply.hpp:99</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">f</span>: Callable object to be invoked</li>
@@ -215,8 +215,8 @@ $(function(){initNavTree('group__transforms_ga4c69a49971100b7bc9c7effd7c43f191.h
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga4c69a49971100b7bc9c7effd7c43f191" title="Callable object invoking the callable object f with the elements of the product type unrolled as argu...">kumi::apply</a></p>
 <h2 class="groupheader">Examples </h2>
-<h3 class="groupheader">Tuple </h3>
-<div class="fragment"><div class="line"></div>
+<div class="tabbed"></div><div class="tabbed"><ul>
+<li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
@@ -249,8 +249,8 @@ $(function(){initNavTree('group__transforms_ga4c69a49971100b7bc9c7effd7c43f191.h
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1size_html"><div class="ttname"><a href="structkumi_1_1size.html">kumi::size</a></div><div class="ttdoc">Computes the number of elements of a kumi::product_type.</div><div class="ttdef"><b>Definition</b> traits.hpp:120</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
-</div><!-- fragment --><h3 class="groupheader">Record </h3>
-<div class="fragment"><div class="line"></div>
+</div><!-- fragment --></li>
+<li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
@@ -284,7 +284,9 @@ $(function(){initNavTree('group__transforms_ga4c69a49971100b7bc9c7effd7c43f191.h
 <div class="line">  print(std::cout, r);</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
-</div><!-- fragment --> 
+</div><!-- fragment --></li>
+</ul>
+</div><div class="tabbed"></div> 
 </div>
 </div>
 </div><!-- contents -->

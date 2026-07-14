@@ -16,7 +16,7 @@ var searchData=
   ['chrysoprase_13',['Version 2.1 - Charming Chrysoprase',['../changelog.html#autotoc_md116',1,'']]],
   ['chunks_14',['chunks',['../structkumi_1_1result_1_1chunks.html',1,'kumi::result::chunks&lt; N, T &gt;'],['../group__generators_gaf4b0bcda72790c2ac55519adaf89456e.html#gaf4b0bcda72790c2ac55519adaf89456e',1,'kumi::chunks']]],
   ['ci_20infra_15',['DOC and CI infra',['../changelog.html#autotoc_md104',1,'']]],
-  ['cmake_20fetchcontent_16',['CMake FetchContent',['../setup.html#setup-fetchcontent',1,'']]],
+  ['cmake_20dependency_16',['As a CMake dependency',['../setup.html#dependency',1,'']]],
   ['common_5fproduct_5ftype_17',['common_product_type',['../structkumi_1_1common__product__type.html',1,'kumi']]],
   ['compact_20tuple_20tools_18',['The C++20 Compact Tuple Tools',['../index.html',1,'']]],
   ['compatible_5fproduct_5ftypes_19',['compatible_product_types',['../conceptkumi_1_1concepts_1_1compatible__product__types.html',1,'kumi::concepts']]],
@@ -40,6 +40,5 @@ var searchData=
   ['correspondence_37',['The Curry-Howard Correspondence',['../introduction.html#curry_howard',1,'']]],
   ['count_38',['count',['../group__queries_ga8240f113b5feb1dcc826949f28f17a47.html#ga8240f113b5feb1dcc826949f28f17a47',1,'kumi']]],
   ['count_5fif_39',['count_if',['../group__queries_gaec0fb27dc2250b97648bc52b8e83b561.html#gaec0fb27dc2250b97648bc52b8e83b561',1,'kumi']]],
-  ['cpm_40',['Setup with CPM',['../setup.html#setup-cpm',1,'']]],
-  ['curry_20howard_20correspondence_41',['The Curry-Howard Correspondence',['../introduction.html#curry_howard',1,'']]]
+  ['curry_20howard_20correspondence_40',['The Curry-Howard Correspondence',['../introduction.html#curry_howard',1,'']]]
 ];

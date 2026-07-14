@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="Efficeint C++20 implementation of tuple-like classes and algorithms with better compile-time" />
+<meta name="description" content="Efficient C++20 implementation of tuple-like classes and algorithms with better compile-time" />
 <link rel="canonical" href="https://jfalcou.github.io/kumi/" />
 <link rel="icon" type="image/svg+xml" href="/logo.svg" />
 <meta property="og:title" content="KUMI - The C++20 Compact Tuple Tools" />
@@ -196,7 +196,7 @@ $(function(){initNavTree('group__reductions_gaf7efbfa530d2396e2ed230cc03e4046e.h
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;mono<span class="keywordtype">id</span> M, product_type T&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaf7efbfa530d2396e2ed230cc03e4046e">reduce</a>(M &amp;&amp; m, T &amp;&amp; t);</div>
-<div class="ttc" id="agroup__reductions_gaf7efbfa530d2396e2ed230cc03e4046e_html_gaf7efbfa530d2396e2ed230cc03e4046e"><div class="ttname"><a href="#gaf7efbfa530d2396e2ed230cc03e4046e">kumi::reduce</a></div><div class="ttdeci">constexpr reduce_t reduce</div><div class="ttdoc">Callable object performing a tree-like reduction of all elements of a product type.</div><div class="ttdef"><b>Definition</b> reduce.hpp:232</div></div>
+<div class="ttc" id="agroup__reductions_gaf7efbfa530d2396e2ed230cc03e4046e_html_gaf7efbfa530d2396e2ed230cc03e4046e"><div class="ttname"><a href="#gaf7efbfa530d2396e2ed230cc03e4046e">kumi::reduce</a></div><div class="ttdeci">constexpr reduce_t reduce</div><div class="ttdoc">Callable object performing a tree-like reduction of all elements of a product type.</div><div class="ttdef"><b>Definition</b> reduce.hpp:236</div></div>
 </div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;mono<span class="keywordtype">id</span> M, product_type T, <span class="keyword">typename</span> V&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaf7efbfa530d2396e2ed230cc03e4046e">reduce</a>(M &amp;&amp; m, T &amp;&amp; t, V init);</div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
@@ -222,8 +222,8 @@ $(function(){initNavTree('group__reductions_gaf7efbfa530d2396e2ed230cc03e4046e.h
 <div class="line">}</div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gaf7efbfa530d2396e2ed230cc03e4046e" title="Callable object performing a tree-like reduction of all elements of a product type.">kumi::reduce</a></p>
 <h2 class="groupheader">Examples </h2>
-<h3 class="groupheader">Tuple </h3>
-<div class="fragment"><div class="line"></div>
+<div class="tabbed"></div><div class="tabbed"><ul>
+<li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
@@ -255,8 +255,8 @@ $(function(){initNavTree('group__reductions_gaf7efbfa530d2396e2ed230cc03e4046e.h
 <div class="ttc" id="agroup__functional_html_gadcb7f72c2a20d42543aa3b38a867e6f6"><div class="ttname"><a href="group__functional.html#gadcb7f72c2a20d42543aa3b38a867e6f6">kumi::function::multiplies</a></div><div class="ttdeci">constexpr kumi::function::numeric_prod multiplies</div><div class="ttdoc">Forms a binary monoid callable that can be used in kumi::algoritm. It represents the multiplication.</div><div class="ttdef"><b>Definition</b> monoid.hpp:143</div></div>
 <div class="ttc" id="agroup__functional_html_gaf681e250bfdc1c005c864767d0c1639d"><div class="ttname"><a href="group__functional.html#gaf681e250bfdc1c005c864767d0c1639d">kumi::function::bit_xor</a></div><div class="ttdeci">constexpr kumi::function::boolean_xor bit_xor</div><div class="ttdoc">Forms a binary monoid callable that can be used in kumi::algoritm. It represents the logical xor oper...</div><div class="ttdef"><b>Definition</b> monoid.hpp:170</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
-</div><!-- fragment --><h3 class="groupheader">Record </h3>
-<div class="fragment"><div class="line"></div>
+</div><!-- fragment --></li>
+<li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
@@ -285,7 +285,9 @@ $(function(){initNavTree('group__reductions_gaf7efbfa530d2396e2ed230cc03e4046e.h
 <div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#gaf7efbfa530d2396e2ed230cc03e4046e">kumi::reduce</a>(<a class="code hl_variable" href="group__functional.html#gab83f5dbd77ab8618b7925c9de6adb54d">kumi::function::plus</a>, r5, 42)        &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
-</div><!-- fragment --> 
+</div><!-- fragment --></li>
+</ul>
+</div><div class="tabbed"></div> 
 </div>
 </div>
 </div><!-- contents -->

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="Efficeint C++20 implementation of tuple-like classes and algorithms with better compile-time" />
+<meta name="description" content="Efficient C++20 implementation of tuple-like classes and algorithms with better compile-time" />
 <link rel="canonical" href="https://jfalcou.github.io/kumi/" />
 <link rel="icon" type="image/svg+xml" href="/logo.svg" />
 <meta property="og:title" content="KUMI - The C++20 Compact Tuple Tools" />
@@ -197,7 +197,7 @@ template&lt;std::size_t N&gt; </div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, product_type T&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__generators_gade96292292ae11da69415a778ef45ad0.html#gade96292292ae11da69415a778ef45ad0">windows&lt;N&gt;</a>(T &amp;&amp; t);</div>
-<div class="ttc" id="agroup__generators_gade96292292ae11da69415a778ef45ad0_html_gade96292292ae11da69415a778ef45ad0"><div class="ttname"><a href="group__generators_gade96292292ae11da69415a778ef45ad0.html#gade96292292ae11da69415a778ef45ad0">kumi::windows</a></div><div class="ttdeci">constexpr tiles_t&lt; N, 1 &gt; windows</div><div class="ttdoc">Callable object creating a tuple of product types, each containing N consecutive elements from t....</div><div class="ttdef"><b>Definition</b> tiler.hpp:156</div></div>
+<div class="ttc" id="agroup__generators_gade96292292ae11da69415a778ef45ad0_html_gade96292292ae11da69415a778ef45ad0"><div class="ttname"><a href="group__generators_gade96292292ae11da69415a778ef45ad0.html#gade96292292ae11da69415a778ef45ad0">kumi::windows</a></div><div class="ttdeci">constexpr tiles_t&lt; N, 1 &gt; windows</div><div class="ttdoc">Callable object creating a tuple of product types, each containing N consecutive elements from t....</div><div class="ttdef"><b>Definition</b> tiler.hpp:164</div></div>
 </div><!-- fragment --><h3 class="groupheader">Template Parameters </h3>
 <ul>
 <li><span class="tt">N</span>: Size of the chunks to generate</li>
@@ -219,8 +219,8 @@ template&lt;std::size_t N&gt; </div>
 <div class="line">    <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, kumi::concepts::product_type T&gt; <span class="keyword">using </span>chunks_t = <span class="keyword">typename</span> kumi::result::chunks&lt;N, T&gt;::type;</div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gaf4b0bcda72790c2ac55519adaf89456e" title="Callable object creating a tuple of product types, each containing N consecutive elements from t....">kumi::chunks</a></p>
 <h2 class="groupheader">Examples </h2>
-<h3 class="groupheader">Tuple </h3>
-<div class="fragment"><div class="line"></div>
+<div class="tabbed"></div><div class="tabbed"><ul>
+<li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
@@ -248,12 +248,12 @@ template&lt;std::size_t N&gt; </div>
 <div class="line">  },c2);</div>
 <div class="line">  std::cout &lt;&lt; t &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__generators_gaf4b0bcda72790c2ac55519adaf89456e_html_gaf4b0bcda72790c2ac55519adaf89456e"><div class="ttname"><a href="#gaf4b0bcda72790c2ac55519adaf89456e">kumi::chunks</a></div><div class="ttdeci">constexpr tiles_t&lt; N, N &gt; chunks</div><div class="ttdoc">Callable object creating a tuple of product types, each containing N consecutive elements from t....</div><div class="ttdef"><b>Definition</b> tiler.hpp:216</div></div>
+<div class="ttc" id="agroup__generators_gaf4b0bcda72790c2ac55519adaf89456e_html_gaf4b0bcda72790c2ac55519adaf89456e"><div class="ttname"><a href="#gaf4b0bcda72790c2ac55519adaf89456e">kumi::chunks</a></div><div class="ttdeci">constexpr tiles_t&lt; N, N &gt; chunks</div><div class="ttdoc">Callable object creating a tuple of product types, each containing N consecutive elements from t....</div><div class="ttdef"><b>Definition</b> tiler.hpp:228</div></div>
 <div class="ttc" id="agroup__record__related_ga83a97fc306d9ecfacde28584b219b44a_html_ga83a97fc306d9ecfacde28584b219b44a"><div class="ttname"><a href="group__record__related_ga83a97fc306d9ecfacde28584b219b44a.html#ga83a97fc306d9ecfacde28584b219b44a">kumi::to_ref</a></div><div class="ttdeci">constexpr auto to_ref(R &amp;&amp;r)</div><div class="ttdoc">Creates a kumi::record of references given a reference to a kumi::record_type.</div><div class="ttdef"><b>Definition</b> record.hpp:518</div></div>
-<div class="ttc" id="agroup__transforms_ga58c4bb5e62083b4b37396d39c6446164_html_ga58c4bb5e62083b4b37396d39c6446164"><div class="ttname"><a href="group__transforms_ga58c4bb5e62083b4b37396d39c6446164.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a></div><div class="ttdeci">constexpr for_each_t for_each</div><div class="ttdoc">Callable object applying the Callable object f on each element of a product type.</div><div class="ttdef"><b>Definition</b> for_each.hpp:149</div></div>
+<div class="ttc" id="agroup__transforms_ga58c4bb5e62083b4b37396d39c6446164_html_ga58c4bb5e62083b4b37396d39c6446164"><div class="ttname"><a href="group__transforms_ga58c4bb5e62083b4b37396d39c6446164.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a></div><div class="ttdeci">constexpr for_each_t for_each</div><div class="ttdoc">Callable object applying the Callable object f on each element of a product type.</div><div class="ttdef"><b>Definition</b> for_each.hpp:152</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
-</div><!-- fragment --><h3 class="groupheader">Record </h3>
-<div class="fragment"><div class="line"></div>
+</div><!-- fragment --></li>
+<li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
@@ -286,7 +286,9 @@ template&lt;std::size_t N&gt; </div>
 <div class="ttc" id="astructkumi_1_1record_abc2cd329ad25d155458850c19cc3b137_html_abc2cd329ad25d155458850c19cc3b137"><div class="ttname"><a href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::record::get</a></div><div class="ttdeci">decltype(auto) constexpr get(record&lt; Ts... &gt; &amp;r) noexcept</div><div class="ttdoc">Extracts the Ith field from a kumi::record.</div><div class="ttdef"><b>Definition</b> record.hpp:618</div></div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_ade5f616b3115a74bd4930f70f96ca199_html_ade5f616b3115a74bd4930f70f96ca199"><div class="ttname"><a href="structkumi_1_1tuple_ade5f616b3115a74bd4930f70f96ca199.html#ade5f616b3115a74bd4930f70f96ca199">kumi::tuple::values_of</a></div><div class="ttdeci">constexpr auto values_of(T &amp;&amp;t) noexcept</div><div class="ttdoc">Extracts the values of the fields of a kumi::product_type.</div><div class="ttdef"><b>Definition</b> tuple.hpp:772</div></div>
-</div><!-- fragment --> 
+</div><!-- fragment --></li>
+</ul>
+</div><div class="tabbed"></div> 
 </div>
 </div>
 </div><!-- contents -->

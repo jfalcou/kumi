@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="Efficeint C++20 implementation of tuple-like classes and algorithms with better compile-time" />
+<meta name="description" content="Efficient C++20 implementation of tuple-like classes and algorithms with better compile-time" />
 <link rel="canonical" href="https://jfalcou.github.io/kumi/" />
 <link rel="icon" type="image/svg+xml" href="/logo.svg" />
 <meta property="og:title" content="KUMI - The C++20 Compact Tuple Tools" />
@@ -198,7 +198,7 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1projection__map.html"
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<a class="code hl_class" href="structkumi_1_1identifier.html">identifier</a> <span class="keyword">auto</span>...Ids, product_type T&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga3594f15dbfba2f6fda0afc8d1542c449">reindex</a>&lt;Ids...&gt;(T &amp;&amp; t);</div>
-<div class="ttc" id="agroup__generators_ga3594f15dbfba2f6fda0afc8d1542c449_html_ga3594f15dbfba2f6fda0afc8d1542c449"><div class="ttname"><a href="#ga3594f15dbfba2f6fda0afc8d1542c449">kumi::reindex</a></div><div class="ttdeci">constexpr reindex_t&lt; Projections &gt; reindex</div><div class="ttdoc">Callable object reindex elements of a Product Type.</div><div class="ttdef"><b>Definition</b> reorder.hpp:246</div></div>
+<div class="ttc" id="agroup__generators_ga3594f15dbfba2f6fda0afc8d1542c449_html_ga3594f15dbfba2f6fda0afc8d1542c449"><div class="ttname"><a href="#ga3594f15dbfba2f6fda0afc8d1542c449">kumi::reindex</a></div><div class="ttdeci">constexpr reindex_t&lt; Projections &gt; reindex</div><div class="ttdoc">Callable object reindex elements of a Product Type.</div><div class="ttdef"><b>Definition</b> reorder.hpp:254</div></div>
 <div class="ttc" id="astructkumi_1_1identifier_html"><div class="ttname"><a href="structkumi_1_1identifier.html">kumi::identifier</a></div><div class="ttdoc">identifier definition class</div><div class="ttdef"><b>Definition</b> identifier.hpp:86</div></div>
 </div><!-- fragment --><h3 class="groupheader">Template Parameters </h3>
 <ul>
@@ -222,8 +222,8 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1projection__map.html"
 <div class="line">    <span class="keyword">using </span>reindex_t = <span class="keyword">typename</span> kumi::result::reindex&lt;T, Indexes&gt;::type;</div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga3594f15dbfba2f6fda0afc8d1542c449" title="Callable object reindex elements of a Product Type.">kumi::reindex</a></p>
 <h2 class="groupheader">Examples </h2>
-<h3 class="groupheader">Tuple </h3>
-<div class="fragment"><div class="line"></div>
+<div class="tabbed"></div><div class="tabbed"><ul>
+<li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
@@ -244,8 +244,8 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1projection__map.html"
 <div class="ttc" id="agroup__utility_ga6882a4ada4935fa0fd4ef32ce3716ffb_html_ga6882a4ada4935fa0fd4ef32ce3716ffb"><div class="ttname"><a href="group__utility_ga6882a4ada4935fa0fd4ef32ce3716ffb.html#ga6882a4ada4935fa0fd4ef32ce3716ffb">kumi::indexes</a></div><div class="ttdeci">consteval auto indexes(Ts...) noexcept</div><div class="ttdoc">Creates a kumi::projection_map object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> projections.hpp:147</div></div>
 <div class="ttc" id="agroup__utility_ga8b7f4e6ed1e7071d7c152c9870709fcb_html_ga8b7f4e6ed1e7071d7c152c9870709fcb"><div class="ttname"><a href="group__utility_ga8b7f4e6ed1e7071d7c152c9870709fcb.html#ga8b7f4e6ed1e7071d7c152c9870709fcb">kumi::projection_map</a></div><div class="ttdeci">KUMI_CUDA projection_map(Ts...) -&gt; projection_map&lt; Ts</div><div class="ttdoc">kumi::projection_map deduction guide</div><div class="ttdef"><b>Definition</b> projections.hpp:131</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
-</div><!-- fragment --><h3 class="groupheader">Record </h3>
-<div class="fragment"><div class="line"></div>
+</div><!-- fragment --></li>
+<li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
@@ -260,7 +260,9 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1projection__map.html"
 <div class="line">  std::cout &lt;&lt; kumi::reindex&lt;basic&gt;(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
-</div><!-- fragment --> 
+</div><!-- fragment --></li>
+</ul>
+</div><div class="tabbed"></div> 
 </div>
 </div>
 </div><!-- contents -->

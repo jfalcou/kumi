@@ -10,13 +10,12 @@ var searchData=
   ['charming_20chrysoprase_7',['Version 2.1 - Charming Chrysoprase',['../changelog.html#autotoc_md116',1,'']]],
   ['chrysoprase_8',['Version 2.1 - Charming Chrysoprase',['../changelog.html#autotoc_md116',1,'']]],
   ['ci_20infra_9',['DOC and CI infra',['../changelog.html#autotoc_md104',1,'']]],
-  ['cmake_20fetchcontent_10',['CMake FetchContent',['../setup.html#setup-fetchcontent',1,'']]],
+  ['cmake_20dependency_10',['As a CMake dependency',['../setup.html#dependency',1,'']]],
   ['compact_20tuple_20tools_11',['The C++20 Compact Tuple Tools',['../index.html',1,'']]],
   ['considerations_12',['Programming Languages Considerations',['../product.html#tuple_programming',1,'']]],
   ['constructions_20the_20logic_20of_20and_13',['Product Constructions (The Logic of &quot;AND&quot;)',['../product.html#product_construction',1,'']]],
   ['containers_14',['Containers',['../cpp_spec.html#autotoc_md135',1,'']]],
   ['contributors_15',['New Contributors',['../changelog.html#autotoc_md115',1,'']]],
   ['correspondence_16',['The Curry-Howard Correspondence',['../introduction.html#curry_howard',1,'']]],
-  ['cpm_17',['Setup with CPM',['../setup.html#setup-cpm',1,'']]],
-  ['curry_20howard_20correspondence_18',['The Curry-Howard Correspondence',['../introduction.html#curry_howard',1,'']]]
+  ['curry_20howard_20correspondence_17',['The Curry-Howard Correspondence',['../introduction.html#curry_howard',1,'']]]
 ];

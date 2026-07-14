@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="Efficeint C++20 implementation of tuple-like classes and algorithms with better compile-time" />
+<meta name="description" content="Efficient C++20 implementation of tuple-like classes and algorithms with better compile-time" />
 <link rel="canonical" href="https://jfalcou.github.io/kumi/" />
 <link rel="icon" type="image/svg+xml" href="/logo.svg" />
 <meta property="og:title" content="KUMI - The C++20 Compact Tuple Tools" />
@@ -182,10 +182,7 @@ $(function(){initNavTree('setup.html','',''); });
     <a href="#setup-standalone">Standalone setup </a>
   </li>
   <li class="level1">
-    <a href="#setup-fetchcontent">CMake FetchContent </a>
-  </li>
-  <li class="level1">
-    <a href="#setup-cpm">Setup with CPM </a>
+    <a href="#dependency">As a CMake dependency </a>
   </li>
 </ul>
 </div>
@@ -210,22 +207,29 @@ Pre-requisites</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft">AppleClang  </td><td class="markdownTableBodyLeft">15 and above  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyLeft">nvcc/nvc++  </td><td class="markdownTableBodyLeft"><em>Work In Progress</em>  </td></tr>
+<td class="markdownTableBodyLeft">nvcc  </td><td class="markdownTableBodyLeft">13.2.5  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft">nvc++  </td><td class="markdownTableBodyLeft">26.3.0  </td></tr>
 </table>
 <h1 class="doxsection"><a class="anchor" id="setup-source"></a>
 Install from the source</h1>
 <p>Code source of <b>KUMI</b> is available on GitHub and can be retrieved via the following command:</p>
 <div class="fragment"><div class="line">$ git clone https:<span class="comment">//github.com/jfalcou/kumi.git</span></div>
 </div><!-- fragment --><p>Once retrieved, you should have a kumi folder which contains the whole source code.</p>
-<p>Create a <span class="tt">build</span> directory here and enter it. Once in the <span class="tt">build</span> directory, you can use <b>CMake</b> to generate the build system for <b>KUMI</b>. We recommend using Ninja but any build system is fine.</p>
-<div class="fragment"><div class="line">$ mkdir build</div>
-<div class="line">$ cd build</div>
-<div class="line">$ cmake .. -G Ninja</div>
-</div><!-- fragment --><p>Once <b>CMake</b> completes, you can use the <span class="tt">install</span> target to build and install <b>KUMI</b>. By default, the library will be installed in the <span class="tt">/usr/local</span> directory, thus requiring root privileges.</p>
-<div class="fragment"><div class="line">$ sudo ninja install</div>
+<p>Then simply use <b>CMake</b> to generate the build system and directory for <b>KUMI</b>. We recommend using Ninja but any build system is fine.</p>
+<div class="tabbed"></div><div class="tabbed"><ul>
+<li><p class="startli"><b class="tab-title">Ninja</b></p>
+<div class="fragment"><div class="line">$ cmake -S . -B build -G Ninja</div>
+</div><!-- fragment --></li>
+<li><p class="startli"><b class="tab-title">Visual Studio</b></p>
+<div class="fragment"><div class="line">$ cmake -S . -B build -G <span class="stringliteral">&quot;Visual Studio 17 2022&quot;</span> -A x64 </div>
+</div><!-- fragment --></li>
+</ul>
+</div><div class="tabbed"></div><p>Once <b>CMake</b> completes, you can use the <span class="tt">install</span> target to build and install <b>KUMI</b>. By default, the library will be installed in the <span class="tt">/usr/local</span> directory, thus requiring root privileges.</p>
+<div class="fragment"><div class="line">$ sudo cmake --build build --target install</div>
 </div><!-- fragment --><p>You can select an alternative installation path by specifying the <span class="tt">CMAKE_INSTALL_PREFIX</span> option at configuration time.</p>
-<div class="fragment"><div class="line">$ cmake .. -G Ninja -DCMAKE_INSTALL_PREFIX=path/to/install</div>
-<div class="line">$ ninja install</div>
+<div class="fragment"><div class="line">$ cmake .. -G &lt;build-system&gt; -DCMAKE_INSTALL_PREFIX=path/to/install</div>
+<div class="line">$ cmake --build build --target install</div>
 </div><!-- fragment --><p>Once installed, <b>KUMI</b> is usable directly by providing the path to its installed files.</p>
 <h1 class="doxsection"><a class="anchor" id="setup-standalone"></a>
 Standalone setup</h1>
@@ -233,13 +237,15 @@ Standalone setup</h1>
 <p>Simply use <span class="tt">wget</span> to fetch the latest version and place it where you want:</p>
 <div class="fragment"><div class="line">wget https:<span class="comment">//raw.githubusercontent.com/jfalcou/kumi/refs/heads/standalone/kumi.hpp</span></div>
 </div><!-- fragment --><p>Use <b>KUMI</b> by just compiling your code with the include path pointing to the location of this single file.</p>
-<h1 class="doxsection"><a class="anchor" id="setup-fetchcontent"></a>
-CMake FetchContent</h1>
-<p>You can also use CMake FetchContent operation and use the <span class="tt">kumi::kumi</span> library target that our CMake exports.</p>
+<h1 class="doxsection"><a class="anchor" id="dependency"></a>
+As a CMake dependency</h1>
+<div class="tabbed"></div><div class="tabbed"><ul>
+<li><p class="startli"><b class="tab-title">FetchContent</b></p>
+<p class="startli">You can also use CMake FetchContent operation and use the <span class="tt">kumi::kumi</span> library target that our CMake exports.</p>
 <div class="fragment"><div class="line">##==================================================================================================</div>
 <div class="line">## Your project setup</div>
 <div class="line">##==================================================================================================</div>
-<div class="line">cmake_minimum_required(VERSION 3.22)</div>
+<div class="line">cmake_minimum_required(VERSION 3.28)</div>
 <div class="line">project(kumi-fetch LANGUAGES CXX)</div>
 <div class="line"> </div>
 <div class="line">include(FetchContent)</div>
@@ -248,13 +254,13 @@ CMake FetchContent</h1>
 <div class="line"> </div>
 <div class="line">add_executable(test_kumi ../main.cpp)</div>
 <div class="line">target_link_libraries(test_kumi PUBLIC kumi::kumi)</div>
-</div><!-- fragment --><h1 class="doxsection"><a class="anchor" id="setup-cpm"></a>
-Setup with CPM</h1>
-<p>The <b>KUMI</b> library can be setup using <a href="https://github.com/cpm-cmake/CPM.cmake">CPM</a>:</p>
+</div><!-- fragment --></li>
+<li><p class="startli"><b class="tab-title">CPM</b></p>
+<p class="startli">The <b>KUMI</b> library can be setup using <a href="https://github.com/cpm-cmake/CPM.cmake">CPM</a>:</p>
 <div class="fragment"><div class="line">##==================================================================================================</div>
 <div class="line">## Your project setup</div>
 <div class="line">##==================================================================================================</div>
-<div class="line">cmake_minimum_required(VERSION 3.18)</div>
+<div class="line">cmake_minimum_required(VERSION 3.28)</div>
 <div class="line">project(kumi-cpm LANGUAGES CXX)</div>
 <div class="line"> </div>
 <div class="line"># Setup CPM - See https://github.com/cpm-cmake/CPM.cmake#adding-cpm</div>
@@ -267,7 +273,9 @@ Setup with CPM</h1>
 <div class="line"> </div>
 <div class="line">add_executable(test_kumi ../main.cpp)</div>
 <div class="line">target_link_libraries(test_kumi PUBLIC kumi::kumi)</div>
-</div><!-- fragment --> </div></div><!-- contents -->
+</div><!-- fragment --></li>
+</ul>
+</div><div class="tabbed"></div> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 </div><!-- container -->

@@ -3788,8 +3788,7 @@
     <docanchor file="setup.html" title="Pre-requisites">prerequisit</docanchor>
     <docanchor file="setup.html" title="Install from the source">setup-source</docanchor>
     <docanchor file="setup.html" title="Standalone setup">setup-standalone</docanchor>
-    <docanchor file="setup.html" title="CMake FetchContent">setup-fetchcontent</docanchor>
-    <docanchor file="setup.html" title="Setup with CPM">setup-cpm</docanchor>
+    <docanchor file="setup.html" title="As a CMake dependency">dependency</docanchor>
   </compound>
   <compound kind="page">
     <name>index</name>

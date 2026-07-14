@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="Efficeint C++20 implementation of tuple-like classes and algorithms with better compile-time" />
+<meta name="description" content="Efficient C++20 implementation of tuple-like classes and algorithms with better compile-time" />
 <link rel="canonical" href="https://jfalcou.github.io/kumi/" />
 <link rel="icon" type="image/svg+xml" href="/logo.svg" />
 <meta property="og:title" content="KUMI - The C++20 Compact Tuple Tools" />
@@ -194,7 +194,7 @@ $(function(){initNavTree('group__queries_gaffdb8063b72f079107cd8a7e293ba298.html
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, <span class="keyword">typename</span> Pred&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaffdb8063b72f079107cd8a7e293ba298">all_of</a>(T &amp;&amp; t, Pred p) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__queries_gaffdb8063b72f079107cd8a7e293ba298_html_gaffdb8063b72f079107cd8a7e293ba298"><div class="ttname"><a href="#gaffdb8063b72f079107cd8a7e293ba298">kumi::all_of</a></div><div class="ttdeci">constexpr all_of_t all_of</div><div class="ttdoc">Callable object checking if a unary predicate p returns true for every element of t.</div><div class="ttdef"><b>Definition</b> predicates.hpp:157</div></div>
+<div class="ttc" id="agroup__queries_gaffdb8063b72f079107cd8a7e293ba298_html_gaffdb8063b72f079107cd8a7e293ba298"><div class="ttname"><a href="#gaffdb8063b72f079107cd8a7e293ba298">kumi::all_of</a></div><div class="ttdeci">constexpr all_of_t all_of</div><div class="ttdoc">Callable object checking if a unary predicate p returns true for every element of t.</div><div class="ttdef"><b>Definition</b> predicates.hpp:161</div></div>
 </div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, <span class="keyword">typename</span> Pred&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaffdb8063b72f079107cd8a7e293ba298">all_of</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
@@ -207,8 +207,8 @@ $(function(){initNavTree('group__queries_gaffdb8063b72f079107cd8a7e293ba298.html
 <li>The evaluation of <span class="tt">p(<a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137" title="Extracts the Ith field from a kumi::record.">get</a>&lt;0&gt;(t)) &amp;&amp; ... &amp;&amp; p(<a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137" title="Extracts the Ith field from a kumi::record.">get</a>&lt;N-1&gt;(t))</span> where <span class="tt">N</span> is the size of <span class="tt">t</span>.</li>
 </ul>
 <h2 class="groupheader">Examples </h2>
-<h3 class="groupheader">Tuple </h3>
-<div class="fragment"><div class="line"></div>
+<div class="tabbed"></div><div class="tabbed"><ul>
+<li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
@@ -221,8 +221,8 @@ $(function(){initNavTree('group__queries_gaffdb8063b72f079107cd8a7e293ba298.html
 <div class="line">  std::cout &lt;&lt; std::boolalpha &lt;&lt; <a class="code hl_variable" href="#gaffdb8063b72f079107cd8a7e293ba298">kumi::all_of</a>(u) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
-</div><!-- fragment --><h3 class="groupheader">Record </h3>
-<div class="fragment"><div class="line"></div>
+</div><!-- fragment --></li>
+<li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
@@ -236,7 +236,9 @@ $(function(){initNavTree('group__queries_gaffdb8063b72f079107cd8a7e293ba298.html
 <div class="line">  std::cout &lt;&lt; std::boolalpha &lt;&lt; <a class="code hl_variable" href="#gaffdb8063b72f079107cd8a7e293ba298">kumi::all_of</a>(u) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
-</div><!-- fragment --> 
+</div><!-- fragment --></li>
+</ul>
+</div><div class="tabbed"></div> 
 </div>
 </div>
 </div><!-- contents -->

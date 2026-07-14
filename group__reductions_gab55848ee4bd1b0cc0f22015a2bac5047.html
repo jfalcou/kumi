@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="Efficeint C++20 implementation of tuple-like classes and algorithms with better compile-time" />
+<meta name="description" content="Efficient C++20 implementation of tuple-like classes and algorithms with better compile-time" />
 <link rel="canonical" href="https://jfalcou.github.io/kumi/" />
 <link rel="icon" type="image/svg+xml" href="/logo.svg" />
 <meta property="og:title" content="KUMI - The C++20 Compact Tuple Tools" />
@@ -195,7 +195,7 @@ $(function(){initNavTree('group__reductions_gab55848ee4bd1b0cc0f22015a2bac5047.h
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type T, <span class="keyword">typename</span> Value&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gab55848ee4bd1b0cc0f22015a2bac5047">inclusive_scan_right</a>(Function f, T &amp;&amp; t, Value init);</div>
-<div class="ttc" id="agroup__reductions_gab55848ee4bd1b0cc0f22015a2bac5047_html_gab55848ee4bd1b0cc0f22015a2bac5047"><div class="ttname"><a href="#gab55848ee4bd1b0cc0f22015a2bac5047">kumi::inclusive_scan_right</a></div><div class="ttdeci">constexpr inclusive_scan_right_t inclusive_scan_right</div><div class="ttdoc">Callable object computing the inclusive suffix scan of all elements of a product type using a non-tai...</div><div class="ttdef"><b>Definition</b> scan.hpp:327</div></div>
+<div class="ttc" id="agroup__reductions_gab55848ee4bd1b0cc0f22015a2bac5047_html_gab55848ee4bd1b0cc0f22015a2bac5047"><div class="ttname"><a href="#gab55848ee4bd1b0cc0f22015a2bac5047">kumi::inclusive_scan_right</a></div><div class="ttdeci">constexpr inclusive_scan_right_t inclusive_scan_right</div><div class="ttdoc">Callable object computing the inclusive suffix scan of all elements of a product type using a non-tai...</div><div class="ttdef"><b>Definition</b> scan.hpp:339</div></div>
 </div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;mono<span class="keywordtype">id</span> M, <span class="keyword">typename</span> Function, product_type T, <span class="keyword">typename</span> Value&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gab55848ee4bd1b0cc0f22015a2bac5047">inclusive_scan_right</a>(M &amp;&amp; m, T &amp;&amp; t);</div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
@@ -226,8 +226,8 @@ $(function(){initNavTree('group__reductions_gab55848ee4bd1b0cc0f22015a2bac5047.h
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gab55848ee4bd1b0cc0f22015a2bac5047" title="Callable object computing the inclusive suffix scan of all elements of a product type using a non-tai...">kumi::inclusive_scan_right</a></p>
 <h2 class="groupheader">Examples </h2>
-<h3 class="groupheader">Tuple </h3>
-<div class="fragment"><div class="line"></div>
+<div class="tabbed"></div><div class="tabbed"><ul>
+<li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
@@ -251,8 +251,8 @@ $(function(){initNavTree('group__reductions_gab55848ee4bd1b0cc0f22015a2bac5047.h
 <div class="line">}</div>
 <div class="ttc" id="agroup__functional_html_gab83f5dbd77ab8618b7925c9de6adb54d"><div class="ttname"><a href="group__functional.html#gab83f5dbd77ab8618b7925c9de6adb54d">kumi::function::plus</a></div><div class="ttdeci">constexpr kumi::function::numeric_add plus</div><div class="ttdoc">Forms a binary monoid callable that can be used in kumi::algoritm. It represents the addition.</div><div class="ttdef"><b>Definition</b> monoid.hpp:134</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
-</div><!-- fragment --><h3 class="groupheader">Record </h3>
-<div class="fragment"><div class="line"></div>
+</div><!-- fragment --></li>
+<li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
@@ -277,7 +277,9 @@ $(function(){initNavTree('group__reductions_gab55848ee4bd1b0cc0f22015a2bac5047.h
 <div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#gab55848ee4bd1b0cc0f22015a2bac5047">kumi::inclusive_scan_right</a>(<a class="code hl_variable" href="group__functional.html#gab83f5dbd77ab8618b7925c9de6adb54d">kumi::function::plus</a>, u) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
-</div><!-- fragment --> 
+</div><!-- fragment --></li>
+</ul>
+</div><div class="tabbed"> </div> 
 </div>
 </div>
 </div><!-- contents -->

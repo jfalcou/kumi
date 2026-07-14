@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="Efficeint C++20 implementation of tuple-like classes and algorithms with better compile-time" />
+<meta name="description" content="Efficient C++20 implementation of tuple-like classes and algorithms with better compile-time" />
 <link rel="canonical" href="https://jfalcou.github.io/kumi/" />
 <link rel="icon" type="image/svg+xml" href="/logo.svg" />
 <meta property="og:title" content="KUMI - The C++20 Compact Tuple Tools" />
@@ -196,7 +196,7 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga750bc3d3425c955e1be6ef1b3879c314">filter_not&lt;Pred&gt;</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__generators_ga750bc3d3425c955e1be6ef1b3879c314_html_ga750bc3d3425c955e1be6ef1b3879c314"><div class="ttname"><a href="#ga750bc3d3425c955e1be6ef1b3879c314">kumi::filter_not</a></div><div class="ttdeci">constexpr filter_not_t&lt; Pred &gt; filter_not</div><div class="ttdoc">Callable object filtering a product type over a predicate.</div><div class="ttdef"><b>Definition</b> partition.hpp:224</div></div>
+<div class="ttc" id="agroup__generators_ga750bc3d3425c955e1be6ef1b3879c314_html_ga750bc3d3425c955e1be6ef1b3879c314"><div class="ttname"><a href="#ga750bc3d3425c955e1be6ef1b3879c314">kumi::filter_not</a></div><div class="ttdeci">constexpr filter_not_t&lt; Pred &gt; filter_not</div><div class="ttdoc">Callable object filtering a product type over a predicate.</div><div class="ttdef"><b>Definition</b> partition.hpp:236</div></div>
 </div><!-- fragment --><h3 class="groupheader">Template Parameters </h3>
 <ul>
 <li><span class="tt">Pred</span>: Compile-time predicate</li>
@@ -219,8 +219,8 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 <div class="line">    <span class="keyword">using </span>filter_not_t = <span class="keyword">typename</span> kumi::result::filter_not&lt;Pred, T&gt;::type;</div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga750bc3d3425c955e1be6ef1b3879c314" title="Callable object filtering a product type over a predicate.">kumi::filter_not</a></p>
 <h2 class="groupheader">Examples </h2>
-<h3 class="groupheader">Tuple </h3>
-<div class="fragment"><div class="line"></div>
+<div class="tabbed"></div><div class="tabbed"><ul>
+<li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -239,8 +239,8 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Non nullptr  : &quot;</span>  &lt;&lt; <a class="code hl_variable" href="#ga750bc3d3425c955e1be6ef1b3879c314">kumi::filter_not&lt;std::is_null_pointer&gt;</a>(original) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
-</div><!-- fragment --><h3 class="groupheader">Record </h3>
-<div class="fragment"><div class="line"></div>
+</div><!-- fragment --></li>
+<li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -261,7 +261,9 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Non nullptr  : &quot;</span>  &lt;&lt; <a class="code hl_variable" href="#ga750bc3d3425c955e1be6ef1b3879c314">kumi::filter_not&lt;std::is_null_pointer&gt;</a>(original) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
-</div><!-- fragment --> 
+</div><!-- fragment --></li>
+</ul>
+</div><div class="tabbed"></div> 
 </div>
 </div>
 </div><!-- contents -->

@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=11"/>
 <meta name="generator" content="Doxygen 1.16.1"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
-<meta name="description" content="Efficeint C++20 implementation of tuple-like classes and algorithms with better compile-time" />
+<meta name="description" content="Efficient C++20 implementation of tuple-like classes and algorithms with better compile-time" />
 <link rel="canonical" href="https://jfalcou.github.io/kumi/" />
 <link rel="icon" type="image/svg+xml" href="/logo.svg" />
 <meta property="og:title" content="KUMI - The C++20 Compact Tuple Tools" />
@@ -195,7 +195,7 @@ template&lt;typename T&gt; </div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Target, product_type T&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gad2e4009d5d28df5090885b030f08f1f8">member_cast&lt;Target&gt;</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__generators_gad2e4009d5d28df5090885b030f08f1f8_html_gad2e4009d5d28df5090885b030f08f1f8"><div class="ttname"><a href="#gad2e4009d5d28df5090885b030f08f1f8">kumi::member_cast</a></div><div class="ttdeci">constexpr member_cast_t&lt; T &gt; member_cast</div><div class="ttdoc">Callable object converting a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target....</div><div class="ttdef"><b>Definition</b> cast.hpp:83</div></div>
+<div class="ttc" id="agroup__generators_gad2e4009d5d28df5090885b030f08f1f8_html_gad2e4009d5d28df5090885b030f08f1f8"><div class="ttname"><a href="#gad2e4009d5d28df5090885b030f08f1f8">kumi::member_cast</a></div><div class="ttdeci">constexpr member_cast_t&lt; T &gt; member_cast</div><div class="ttdoc">Callable object converting a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target....</div><div class="ttdef"><b>Definition</b> cast.hpp:87</div></div>
 </div><!-- fragment --><h3 class="groupheader">Template Parameters </h3>
 <ul>
 <li><span class="tt">Target</span>: destination type to associate to each member of the product type <span class="tt">t</span></li>
@@ -218,8 +218,8 @@ template&lt;typename T&gt; </div>
 <div class="line">    <span class="keyword">using </span>member_cast_t = <span class="keyword">typename</span> kumi::result::member_cast&lt;Target, T&gt;::type;</div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gad2e4009d5d28df5090885b030f08f1f8" title="Callable object converting a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target....">kumi::member_cast</a></p>
 <h2 class="groupheader">Examples </h2>
-<h3 class="groupheader">Tuple </h3>
-<div class="fragment"><div class="line"></div>
+<div class="tabbed"></div><div class="tabbed"><ul>
+<li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
@@ -232,8 +232,8 @@ template&lt;typename T&gt; </div>
 <div class="line">  std::cout &lt;&lt; b &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
-</div><!-- fragment --><h3 class="groupheader">Record </h3>
-<div class="fragment"><div class="line"></div>
+</div><!-- fragment --></li>
+<li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
 <div class="line"> </div>
@@ -247,7 +247,9 @@ template&lt;typename T&gt; </div>
 <div class="line">  std::cout &lt;&lt; b &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
-</div><!-- fragment --> 
+</div><!-- fragment --></li>
+</ul>
+</div><div class="tabbed"></div> 
 </div>
 </div>
 </div><!-- contents -->
