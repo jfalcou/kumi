@@ -13,7 +13,7 @@ namespace kumi
   namespace _
   {
     template<typename T, typename Seq, std::size_t... I>
-    KUMI_ABI constexpr auto cartesian_product_(kumi::_::adl_tag_t, T&& t, Seq&& s, std::index_sequence<I...>)
+    KUMI_HIDDEN_ABI constexpr auto cartesian_product_(kumi::_::adl_tag_t, T&& t, Seq&& s, std::index_sequence<I...>)
     {
       std::make_index_sequence<kumi::size_v<T>> ids{};
       return kumi::make_tuple((kumi::_::builder(KUMI_FWD(t), get<I>(s), ids))...);

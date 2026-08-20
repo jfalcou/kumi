@@ -15,13 +15,13 @@ namespace kumi
     inline constexpr bool contains = ((kumi::concepts::field<T> && std::invocable<T, kumi::_::tag_of_t<Ts>>) || ...);
 
     template<typename T, typename ID, std::size_t... I>
-    KUMI_ABI constexpr auto contains_(kumi::_::adl_tag_t, T&&, ID const&, std::index_sequence<I...>)
+    KUMI_HIDDEN_ABI constexpr auto contains_(kumi::_::adl_tag_t, T&&, ID const&, std::index_sequence<I...>)
     {
       return std::bool_constant<kumi::_::can_get_field_by_value<std::remove_cvref_t<ID>, kumi::element_t<I, T>...>>{};
     }
 
     template<typename T, std::size_t... I, typename... Is>
-    KUMI_ABI constexpr auto contains_only_(kumi::_::adl_tag_t, T&&, std::index_sequence<I...>, Is const&...)
+    KUMI_HIDDEN_ABI constexpr auto contains_only_(kumi::_::adl_tag_t, T&&, std::index_sequence<I...>, Is const&...)
     {
       return std::bool_constant<(kumi::_::contains<kumi::element_t<I, T>, Is...> && ...)>{};
     }

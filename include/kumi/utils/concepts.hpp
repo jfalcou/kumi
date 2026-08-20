@@ -14,27 +14,27 @@ namespace kumi
     //==================================================================================================================
     // Concept machinery to make our algorithms SFINAE friendly
     //==================================================================================================================
-    template<typename F, typename T, std::size_t... N> consteval auto can_apply(std::index_sequence<N...>)
+    template<typename F, typename T, std::size_t... N> consteval bool can_apply(std::index_sequence<N...>)
     {
       return std::invocable<F, kumi::stored_member_t<N, T>...>;
     }
 
-    template<typename F, typename T, std::size_t... N> consteval auto can_nothrow_apply(std::index_sequence<N...>)
+    template<typename F, typename T, std::size_t... N> consteval bool can_nothrow_apply(std::index_sequence<N...>)
     {
       return std::is_nothrow_invocable_v<F, kumi::stored_member_t<N, T>...>;
     }
 
-    template<std::size_t I, typename F, typename... Ts> consteval auto can_call_impl()
+    template<std::size_t I, typename F, typename... Ts> consteval bool can_call_impl()
     {
       return std::invocable<F, kumi::stored_member_t<I, Ts>...>;
     }
 
-    template<typename F, typename... Ts, std::size_t... N> consteval auto can_call(std::index_sequence<N...>)
+    template<typename F, typename... Ts, std::size_t... N> consteval bool can_call(std::index_sequence<N...>)
     {
       return (can_call_impl<N, F, Ts...>() && ...);
     }
 
-    template<typename T, std::size_t... N> consteval auto can_transpose(std::index_sequence<N...>)
+    template<typename T, std::size_t... N> consteval bool can_transpose(std::index_sequence<N...>)
     {
       return ((kumi::size_v<kumi::stored_member_t<0, T>> == kumi::size_v<kumi::stored_member_t<N + 1, T>>) && ...);
     }
@@ -45,8 +45,8 @@ namespace kumi
     template<typename F, typename T>
     concept supports_nothrow_apply = can_nothrow_apply<F, T>(std::make_index_sequence<kumi::size_v<T>>{});
 
-    template<typename F, typename... Ts>
-    concept supports_call = can_call<F, Ts...>(std::make_index_sequence<kumi::_::max(kumi::size_v<Ts>...)>{});
+    template<typename F, typename T, typename... Ts>
+    concept supports_call = can_call<F, T, Ts...>(std::make_index_sequence<kumi::size_v<T>>{});
 
     template<typename T>
     concept supports_transpose =

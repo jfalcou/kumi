@@ -14,7 +14,7 @@ namespace kumi
     struct reindex_case_t
     {
       template<typename T, template<auto> class C, auto Old, auto P>
-      KUMI_ABI constexpr auto operator()(T&& t, C<Old>, kumi::projection_map<P>) const
+      KUMI_HIDDEN_ABI constexpr auto operator()(T&& t, C<Old>, kumi::projection_map<P>) const
       {
         if constexpr (kumi::concepts::projection_map<decltype(P)>) return C<P>{}(KUMI_FWD(t));
         else
@@ -28,7 +28,7 @@ namespace kumi
     inline constexpr reindex_case_t reindex_case{};
 
     template<typename T, typename S, auto... E>
-    KUMI_ABI constexpr auto reindex_(kumi::_::adl_tag_t, T&& t, S self, kumi::projection_map<E...>)
+    KUMI_HIDDEN_ABI constexpr auto reindex_(kumi::_::adl_tag_t, T&& t, S self, kumi::projection_map<E...>)
     {
       return kumi::builder<T>::make(kumi::_::reindex_case(KUMI_FWD(t), self, kumi::projection_map<E>{})...);
     }

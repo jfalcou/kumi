@@ -12,7 +12,7 @@ namespace kumi
   namespace _
   {
     template<typename Pred, typename T, std::size_t... I>
-    constexpr auto locate_(kumi::_::adl_tag_t, Pred p, T&& t, std::index_sequence<I...>)
+    KUMI_HIDDEN_ABI constexpr auto locate_(kumi::_::adl_tag_t, Pred p, T&& t, std::index_sequence<I...>) noexcept
     {
       bool checks[] = {kumi::invoke(p, get<I>(KUMI_FWD(t)))...};
       for (std::size_t i = 0; i < kumi::size_v<T>; ++i)

@@ -12,7 +12,7 @@ namespace kumi
   namespace _
   {
     template<typename F, typename T, std::size_t... I>
-    KUMI_ABI constexpr decltype(auto) apply_(kumi::_::adl_tag_t, F&& f, T&& t, std::index_sequence<I...>)
+    KUMI_HIDDEN_ABI constexpr decltype(auto) apply_(kumi::_::adl_tag_t, F&& f, T&& t, std::index_sequence<I...>)
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return kumi::invoke(KUMI_FWD(f));
       else return kumi::invoke(KUMI_FWD(f), get<I>(KUMI_FWD(t))...);

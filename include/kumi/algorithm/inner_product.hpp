@@ -12,7 +12,7 @@ namespace kumi
   namespace _
   {
     template<typename T, typename U, typename V, typename Sum, typename Prod, std::size_t... I>
-    KUMI_ABI constexpr auto inner_product_(
+    KUMI_HIDDEN_ABI constexpr auto inner_product_(
       kumi::_::adl_tag_t, T&& t, U&& u, V init, Sum sum, Prod prod, std::index_sequence<I...>) noexcept
     {
       if constexpr (kumi::concepts::record_type<T>)
@@ -25,7 +25,7 @@ namespace kumi
     }
 
     template<typename T, typename U, typename V, std::size_t... I>
-    KUMI_ABI constexpr auto inner_product_fast_(
+    KUMI_HIDDEN_ABI constexpr auto inner_product_fast_(
       kumi::_::adl_tag_t, T&& t, U&& u, V init, std::index_sequence<I...>) noexcept
     {
       if constexpr (kumi::concepts::record_type<T>)

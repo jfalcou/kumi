@@ -29,13 +29,22 @@
 
 // Clang-CL does not define __GNUC__ https://github.com/llvm/llvm-project/issues/53259
 #if defined(KUMI_DEBUG)
-#define KUMI_ABI
+#define KUMI_ABI KUMI_CUDA
 #elif defined(__EDG__) || defined(__EDG_VERSION__) || defined(__CUDACC__) || defined(__NVCC__)
 #define KUMI_ABI KUMI_CUDA inline
 #elif defined(__GNUC__) || defined(__clang__)
 #define KUMI_ABI [[using gnu: always_inline, flatten, artificial]] KUMI_CUDA inline
 #elif defined(_MSC_VER)
 #define KUMI_ABI [[using msvc: forceinline, flatten]] KUMI_CUDA inline
+#endif
+
+// Functions in namespace detail should not be forceinline and have a different abi
+#if defined(__EDG__) || defined(__EDG_VERSION__) || defined(__CUDACC__) || defined(__NVCC__)
+#define KUMI_HIDDEN_ABI KUMI_CUDA inline
+#elif defined(__GNUC__) || defined(__clang__)
+#define KUMI_HIDDEN_ABI [[using gnu: pure, visibility("hidden")]] KUMI_CUDA inline
+#elif defined(_MSC_VER)
+#define KUMI_HIDDEN_ABI [[using msvc: noalias]] KUMI_CUDA inline
 #endif
 
 #if defined(__clang__)

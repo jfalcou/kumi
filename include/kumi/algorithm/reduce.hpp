@@ -12,7 +12,7 @@ namespace kumi
   namespace _
   {
     template<typename M, typename S, typename T, std::size_t N, std::size_t... F, std::size_t... L>
-    KUMI_ABI constexpr auto reduce_(
+    KUMI_HIDDEN_ABI constexpr auto reduce_(
       kumi::_::adl_tag_t, M&& m, S s, T&& t, kumi::index_t<N>, std::index_sequence<F...>, std::index_sequence<L...>)
     {
       if constexpr (N == 1)
@@ -22,14 +22,14 @@ namespace kumi
     }
 
     template<typename M, typename T, typename F, typename S, std::size_t N, std::size_t... I, std::size_t... J>
-    KUMI_ABI constexpr auto map_reduce_(kumi::_::adl_tag_t,
-                                        M&& m,
-                                        T&& t,
-                                        F f,
-                                        S s,
-                                        kumi::index_t<N>,
-                                        std::index_sequence<I...>,
-                                        std::index_sequence<J...>)
+    KUMI_HIDDEN_ABI constexpr auto map_reduce_(kumi::_::adl_tag_t,
+                                               M&& m,
+                                               T&& t,
+                                               F f,
+                                               S s,
+                                               kumi::index_t<N>,
+                                               std::index_sequence<I...>,
+                                               std::index_sequence<J...>)
     {
       if constexpr (N == 1)
         return s(KUMI_FWD(m), kumi::tuple{kumi::invoke(KUMI_FWD(m), kumi::invoke(f, get<I>(KUMI_FWD(t))),

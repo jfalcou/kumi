@@ -14,7 +14,7 @@ namespace kumi
     struct flatten_all_case_t
     {
       template<typename T, typename V, typename F, typename Self>
-      KUMI_ABI constexpr auto operator()(T&&, V&& v, F f, Self s) const
+      KUMI_HIDDEN_ABI constexpr auto operator()(T&&, V&& v, F f, Self s) const
       {
         using FV = kumi::result::field_value_of_t<V>;
         if constexpr (kumi::concepts::record_type<FV> && kumi::concepts::record_type<T>)
@@ -30,7 +30,7 @@ namespace kumi
 
     struct flatten_case_t
     {
-      template<typename T, typename V> KUMI_ABI constexpr auto operator()(T&&, V&& v, auto J) const
+      template<typename T, typename V> KUMI_HIDDEN_ABI constexpr auto operator()(T&&, V&& v, auto J) const
       {
         using FV = kumi::result::field_value_of_t<V>;
         if constexpr (kumi::concepts::record_type<FV> && kumi::concepts::record_type<T>)
@@ -47,13 +47,13 @@ namespace kumi
     inline constexpr flatten_case_t flatten_case{};
 
     template<typename T, std::size_t... I>
-    KUMI_ABI consteval auto flatten_projection_(kumi::_::adl_tag_t, std::index_sequence<I...>) noexcept
+    KUMI_HIDDEN_ABI consteval auto flatten_projection_(kumi::_::adl_tag_t, std::index_sequence<I...>) noexcept
     {
       return kumi::function::concatenater(kumi::index<kumi::function::size_or_v<kumi::stored_element_t<I, T>, 1>>...);
     }
 
     template<typename T, typename V, std::size_t... J, std::size_t... I>
-    KUMI_ABI constexpr auto flatten_(
+    KUMI_HIDDEN_ABI constexpr auto flatten_(
       kumi::_::adl_tag_t, T&& t, V visitor, std::index_sequence<J...>, std::index_sequence<I...>)
     {
       if constexpr (sizeof...(I) == 0) return kumi::builder<T>::make();
@@ -61,13 +61,14 @@ namespace kumi
     }
 
     template<typename T, typename V, typename F, typename S, std::size_t... I>
-    KUMI_ABI constexpr auto flatten_all_(kumi::_::adl_tag_t, T&& t, V visitor, F f, S self, std::index_sequence<I...>)
+    KUMI_HIDDEN_ABI constexpr auto flatten_all_(
+      kumi::_::adl_tag_t, T&& t, V visitor, F f, S self, std::index_sequence<I...>)
     {
       return kumi::builder<T>::make(visitor(KUMI_FWD(t), get<I>(KUMI_FWD(t)), f, self)...);
     }
 
     template<typename E, std::size_t... I>
-    KUMI_ABI constexpr auto compress_(kumi::_::adl_tag_t, E&& e, std::index_sequence<I...>)
+    KUMI_HIDDEN_ABI constexpr auto compress_(kumi::_::adl_tag_t, E&& e, std::index_sequence<I...>)
     {
       using V = kumi::result::field_value_of_t<E>;
       if constexpr (sizeof...(I) == 0 || kumi::concepts::empty_product_type<V>) return kumi::builder<V>::make();

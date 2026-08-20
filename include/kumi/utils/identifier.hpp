@@ -112,7 +112,7 @@ namespace kumi
       Bind a value to current kumi::identifier and returns an instance of a field.
 
       @param v Bound value
-      @return An kumi::field binding the identifier to `v`.
+      @return A kumi::field binding the identifier to `v`.
 
       @code
       #include <kumi/kumi.hpp>

@@ -10,19 +10,19 @@
 namespace kumi::_
 {
   //====================================================================================================================
-  KUMI_ABI consteval std::size_t min(std::same_as<std::size_t> auto... sizes) noexcept
+  consteval std::size_t min(std::same_as<std::size_t> auto... sizes) noexcept
   {
     std::size_t result = std::size_t(-1);
     return ((result = (result < sizes ? result : sizes)), ...);
   }
 
-  KUMI_ABI consteval std::size_t max(std::same_as<std::size_t> auto... sizes) noexcept
+  consteval std::size_t max(std::same_as<std::size_t> auto... sizes) noexcept
   {
     std::size_t result{};
     return ((result = (result > sizes ? result : sizes)), ...);
   }
 
-  KUMI_ABI consteval std::size_t nth_pos(std::size_t I, std::same_as<bool> auto... b) noexcept
+  consteval std::size_t nth_pos(std::size_t I, std::same_as<bool> auto... b) noexcept
   {
     std::size_t seen{}, i{}, idx{};
     ((b ? (seen++ == I ? (i = idx, idx++) : idx++) : idx++), ...);
@@ -65,16 +65,13 @@ namespace kumi::_
   };
 
   //====================================================================================================================
-  KUMI_ABI consteval std::size_t nb_blocks(std::size_t Sz, std::size_t Stride, std::size_t Extent) noexcept
+  consteval std::size_t nb_blocks(std::size_t Sz, std::size_t Stride, std::size_t Extent) noexcept
   {
     return (Sz <= Extent) ? 1 : (Sz - Extent + Stride - 1) / Stride + 1;
   }
 
   //====================================================================================================================
-  KUMI_ABI consteval std::size_t block_size(std::size_t I,
-                                            std::size_t Stride,
-                                            std::size_t Extent,
-                                            std::size_t Size) noexcept
+  consteval std::size_t block_size(std::size_t I, std::size_t Stride, std::size_t Extent, std::size_t Size) noexcept
   {
     std::size_t s = I * Stride;
     return (s < Size) ? ((s + Extent > Size) ? (Size - s) : Extent) : 0;

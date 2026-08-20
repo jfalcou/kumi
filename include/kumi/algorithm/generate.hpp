@@ -13,7 +13,7 @@ namespace kumi
   namespace _
   {
     template<typename F, std::size_t... I>
-    KUMI_ABI constexpr decltype(auto) generate_(kumi::_::adl_tag_t, F&& f, std::index_sequence<I...>) noexcept
+    KUMI_HIDDEN_ABI constexpr decltype(auto) generate_(kumi::_::adl_tag_t, F&& f, std::index_sequence<I...>) noexcept
     {
       return kumi::tuple{kumi::invoke(KUMI_FWD(f), kumi::index<I>)...};
     }

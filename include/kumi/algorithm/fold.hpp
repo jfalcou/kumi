@@ -12,13 +12,13 @@ namespace kumi
   namespace _
   {
     template<typename F, typename T, typename V, std::size_t... I>
-    KUMI_ABI constexpr auto fold_left_(kumi::_::adl_tag_t, F f, T&& t, V v, std::index_sequence<I...>)
+    KUMI_HIDDEN_ABI constexpr auto fold_left_(kumi::_::adl_tag_t, F f, T&& t, V v, std::index_sequence<I...>)
     {
       return (kumi::function::foldable{v} >> ... >> kumi::bind_back(f, get<I>(KUMI_FWD(t))))();
     }
 
     template<typename F, typename T, typename V, std::size_t... I>
-    KUMI_ABI constexpr auto fold_right_(kumi::_::adl_tag_t, F f, T&& t, V v, std::index_sequence<I...>)
+    KUMI_HIDDEN_ABI constexpr auto fold_right_(kumi::_::adl_tag_t, F f, T&& t, V v, std::index_sequence<I...>)
     {
       return (kumi::bind_front(f, get<I>(KUMI_FWD(t))) << ... << kumi::function::foldable{v})();
     }

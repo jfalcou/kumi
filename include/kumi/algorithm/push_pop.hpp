@@ -12,13 +12,13 @@ namespace kumi
   namespace _
   {
     template<typename T, typename V, std::size_t... I>
-    KUMI_ABI constexpr auto push_front_(kumi::_::adl_tag_t, T&& t, V&& v, std::index_sequence<I...>)
+    KUMI_HIDDEN_ABI constexpr auto push_front_(kumi::_::adl_tag_t, T&& t, V&& v, std::index_sequence<I...>)
     {
       return kumi::builder<T>::make(KUMI_FWD(v), get<I>(KUMI_FWD(t))...);
     }
 
     template<typename T, typename V, std::size_t... I>
-    KUMI_ABI constexpr auto push_back_(kumi::_::adl_tag_t, T&& t, V&& v, std::index_sequence<I...>)
+    KUMI_HIDDEN_ABI constexpr auto push_back_(kumi::_::adl_tag_t, T&& t, V&& v, std::index_sequence<I...>)
     {
       return kumi::builder<T>::make(get<I>(KUMI_FWD(t))..., KUMI_FWD(v));
     }

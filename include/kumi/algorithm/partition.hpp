@@ -12,7 +12,7 @@ namespace kumi
   namespace _
   {
     template<typename T, template<typename> typename Pred, std::size_t... I>
-    KUMI_ABI consteval auto select_(kumi::_::adl_tag_t, std::index_sequence<I...>) noexcept
+    KUMI_HIDDEN_ABI consteval auto select_(kumi::_::adl_tag_t, std::index_sequence<I...>) noexcept
     {
       return kumi::function::selector(std::bool_constant<Pred<kumi::stored_element_t<I, T>>::value>{}...);
     }

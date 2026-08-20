@@ -12,14 +12,14 @@ namespace kumi
   namespace _
   {
     template<typename T, typename Set, std::size_t... I>
-    KUMI_ABI consteval auto all_unique_inner_(Set&&, std::index_sequence<I...>) noexcept
+    KUMI_HIDDEN_ABI consteval auto all_unique_inner_(Set&&, std::index_sequence<I...>) noexcept
     {
       return kumi::function::uniquer(
         std::bool_constant<(Set{}(std::type_identity<kumi::stored_element_t<I, T>>{}) == I)>{}...);
     }
 
     template<typename T, std::size_t... I>
-    KUMI_ABI consteval auto all_unique_(kumi::_::adl_tag_t, std::index_sequence<I...>) noexcept
+    KUMI_HIDDEN_ABI consteval auto all_unique_(kumi::_::adl_tag_t, std::index_sequence<I...>) noexcept
     {
       using idx = std::index_sequence<I...>;
       using type = kumi::_::make_multiset_t<idx, kumi::stored_element_t<I, T>...>;
@@ -28,7 +28,7 @@ namespace kumi
     }
 
     template<typename T, std::size_t... I>
-    KUMI_ABI consteval auto unique_(kumi::_::adl_tag_t, std::index_sequence<I...>) noexcept
+    KUMI_HIDDEN_ABI consteval auto unique_(kumi::_::adl_tag_t, std::index_sequence<I...>) noexcept
     {
       return kumi::function::uniqued(
         std::bool_constant<!std::is_same_v<kumi::stored_element_t<I, T>, kumi::stored_element_t<I + 1, T>>>{}...);

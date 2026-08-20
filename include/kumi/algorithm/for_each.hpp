@@ -11,18 +11,10 @@ namespace kumi
 {
   namespace _
   {
-    template<typename F, std::size_t... I>
-    KUMI_ABI constexpr auto for_each_(kumi::_::adl_tag_t, F&& f, std::index_sequence<I...>)
+    template<kumi::_::case_ Case, typename F, typename T, typename... Ts>
+    KUMI_HIDDEN_ABI constexpr void for_each_switch(auto N, F f, T&& t, Ts&&... ts)
     {
-      using result_t = std::invoke_result_t<F, kumi::index_t<0>>;
-      if constexpr (std::is_void_v<result_t>) return ((kumi::invoke(KUMI_FWD(f), kumi::index<I>)), ...);
-      else return ((kumi::invoke(KUMI_FWD(f), kumi::index<I>)) && ...);
-    }
-
-    struct for_each_t
-    {
-      template<typename F, typename T, typename... Ts>
-      KUMI_ABI constexpr auto operator()(auto N, F f, T&& t, Ts&&... ts) const
+      if constexpr (Case == kumi::_::case_::normal)
       {
         if constexpr (kumi::concepts::record_type<T>)
         {
@@ -31,25 +23,23 @@ namespace kumi
         }
         else kumi::invoke(f, get<N>(KUMI_FWD(t)), get<N>(KUMI_FWD(ts))...);
       }
-    } inline constexpr for_each_case;
-
-    struct for_each_index_t
-    {
-      KUMI_ABI constexpr auto operator()(auto N, auto f, auto&&... ts) const
+      else if constexpr (Case == kumi::_::case_::indexed)
       {
-        kumi::invoke(f, N, get<N>(KUMI_FWD(ts))...);
+        kumi::invoke(f, N, get<N>(KUMI_FWD(t)), get<N>(KUMI_FWD(ts))...);
       }
-    } inline constexpr for_each_index_case;
-
-    struct for_each_field_t
-    {
-      template<typename F, typename T, typename... Ts>
-      KUMI_ABI constexpr auto operator()(auto N, F f, T&& t, Ts&&... ts) const
+      else if constexpr (Case == kumi::_::case_::field)
       {
         constexpr auto field = kumi::identifier_of<kumi::element_t<N, T>>();
         kumi::invoke(f, kumi::_::make_str(field), get<field>(KUMI_FWD(t)), get<field>(KUMI_FWD(ts))...);
       }
-    } inline constexpr for_each_field_case;
+    }
+
+    template<kumi::_::case_ Case, typename F, std::size_t... I, typename T, typename... Ts>
+    KUMI_HIDDEN_ABI constexpr void for_each_(kumi::_::adl_tag_t, F&& f, std::index_sequence<I...>, T&& t, Ts&&... ts)
+    {
+      if constexpr (sizeof...(I) == 0) return;
+      else ((for_each_switch<Case>(kumi::index<I>, KUMI_FWD(f), KUMI_FWD(t), KUMI_FWD(ts)...)), ...);
+    }
   }
 
   struct for_each_t
@@ -60,11 +50,8 @@ namespace kumi
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return;
       else
-      {
-        using binded_t = kumi::_::bind_t<kumi::_::Binding::back, kumi::_::for_each_t, Function, T, Ts...>;
-        auto&& bound = binded_t{kumi::_::for_each_case, f, KUMI_FWD(t), KUMI_FWD(ts)...};
-        for_each_(kumi::_::adl_tag, KUMI_FWD(bound), std::make_index_sequence<kumi::size_v<T>>{});
-      }
+        for_each_<kumi::_::case_::normal>(kumi::_::adl_tag, f, std::make_index_sequence<kumi::size_v<T>>{}, KUMI_FWD(t),
+                                          KUMI_FWD(ts)...);
     }
   };
 
@@ -76,11 +63,8 @@ namespace kumi
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return;
       else
-      {
-        using binded_t = kumi::_::bind_t<kumi::_::Binding::back, kumi::_::for_each_index_t, Function, T, Ts...>;
-        auto&& bound = binded_t{kumi::_::for_each_index_case, f, KUMI_FWD(t), KUMI_FWD(ts)...};
-        for_each_(kumi::_::adl_tag, KUMI_FWD(bound), std::make_index_sequence<kumi::size_v<T>>{});
-      }
+        for_each_<kumi::_::case_::indexed>(kumi::_::adl_tag, f, std::make_index_sequence<kumi::size_v<T>>{},
+                                           KUMI_FWD(t), KUMI_FWD(ts)...);
     }
   };
 
@@ -92,11 +76,8 @@ namespace kumi
     {
       if constexpr (kumi::concepts::empty_product_type<R>) return;
       else
-      {
-        using binded_t = kumi::_::bind_t<kumi::_::Binding::back, kumi::_::for_each_field_t, Function, R, Rs...>;
-        auto&& bound = binded_t{kumi::_::for_each_field_case, f, KUMI_FWD(r), KUMI_FWD(rs)...};
-        for_each_(kumi::_::adl_tag, KUMI_FWD(bound), std::make_index_sequence<kumi::size_v<R>>{});
-      }
+        for_each_<kumi::_::case_::field>(kumi::_::adl_tag, f, std::make_index_sequence<kumi::size_v<R>>{}, KUMI_FWD(r),
+                                         KUMI_FWD(rs)...);
     }
   };
 

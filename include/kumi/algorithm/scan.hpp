@@ -13,27 +13,31 @@ namespace kumi
   namespace _
   {
     template<typename T, typename V, typename F, typename O, std::size_t... I>
-    KUMI_ABI constexpr auto inclusive_scan_left_(kumi::_::adl_tag_t, T&& t, V v, F f, O o, std::index_sequence<I...>)
+    KUMI_HIDDEN_ABI constexpr auto inclusive_scan_left_(
+      kumi::_::adl_tag_t, T&& t, V v, F f, O o, std::index_sequence<I...>)
     {
       return (kumi::function::scannable{o, kumi::invoke(f, v, get<0>(KUMI_FWD(t)))} >> ... >>
               kumi::bind_back(f, get<I + 1>(KUMI_FWD(t))))();
     }
 
     template<typename T, typename V, typename F, typename O, std::size_t... I>
-    KUMI_ABI constexpr auto exclusive_scan_left_(kumi::_::adl_tag_t, T&& t, V v, F f, O o, std::index_sequence<I...>)
+    KUMI_HIDDEN_ABI constexpr auto exclusive_scan_left_(
+      kumi::_::adl_tag_t, T&& t, V v, F f, O o, std::index_sequence<I...>)
     {
       return (kumi::function::scannable{o, v} >> ... >> kumi::bind_back(f, get<I>(KUMI_FWD(t))))();
     }
 
     template<typename T, typename V, typename F, typename O, std::size_t... I>
-    KUMI_ABI constexpr auto inclusive_scan_right_(kumi::_::adl_tag_t, T&& t, V v, F f, O o, std::index_sequence<I...>)
+    KUMI_HIDDEN_ABI constexpr auto inclusive_scan_right_(
+      kumi::_::adl_tag_t, T&& t, V v, F f, O o, std::index_sequence<I...>)
     {
       return (kumi::bind_front(f, get<I>(KUMI_FWD(t)))
               << ... << kumi::function::scannable{o, kumi::invoke(f, get<kumi::size_v<T> - 1>(KUMI_FWD(t)), v)})();
     }
 
     template<typename T, typename V, typename F, typename O, std::size_t... I>
-    KUMI_ABI constexpr auto exclusive_scan_right_(kumi::_::adl_tag_t, T&& t, V v, F f, O o, std::index_sequence<I...>)
+    KUMI_HIDDEN_ABI constexpr auto exclusive_scan_right_(
+      kumi::_::adl_tag_t, T&& t, V v, F f, O o, std::index_sequence<I...>)
     {
       return (kumi::bind_front(f, get<I + 1>(KUMI_FWD(t))) << ... << kumi::function::scannable{o, v})();
     }
