@@ -256,35 +256,36 @@ namespace kumi
   namespace result
   {
     //! [reorder_t]
+    template<kumi::concepts::product_type T, std::size_t... Idx>
+    using reorder_t = decltype(kumi::reorder<Idx...>(std::declval<T>()));
+
     template<kumi::concepts::product_type T, std::size_t... Idx> struct reorder
     {
-      using type = decltype(kumi::reorder<Idx...>(std::declval<T>()));
+      using type = kumi::result::reorder_t<T, Idx...>;
     };
-
-    template<kumi::concepts::product_type T, std::size_t... Idx>
-    using reorder_t = typename kumi::result::reorder<T, Idx...>::type;
 
     //! [reorder_t]
 
     //! [reorder_fields_t]
+    template<kumi::concepts::product_type Tuple, kumi::concepts::identifier auto... Name>
+    using reorder_fields_t = decltype(kumi::reorder_fields<Name...>(std::declval<Tuple>()));
+
     template<kumi::concepts::product_type Tuple, kumi::concepts::identifier auto... Name> struct reorder_fields
     {
-      using type = decltype(kumi::reorder_fields<Name...>(std::declval<Tuple>()));
+      using type = kumi::result::reorder_fields_t<Tuple, Name...>;
     };
-
-    template<kumi::concepts::product_type Tuple, kumi::concepts::identifier auto... Name>
-    using reorder_fields_t = typename kumi::result::reorder_fields<Tuple, Name...>::type;
 
     //! [reorder_fields_t]
 
     //! [reindex_t]
+    template<kumi::concepts::product_type T, kumi::concepts::projection_map auto Indexes>
+    using reindex_t = decltype(kumi::reindex<Indexes>(std::declval<T>()));
+
     template<kumi::concepts::product_type T, kumi::concepts::projection_map auto Indexes> struct reindex
     {
-      using type = decltype(kumi::reindex<Indexes>(std::declval<T>()));
+      using type = kumi::result::reindex_t<T, Indexes>;
     };
 
-    template<kumi::concepts::product_type T, kumi::concepts::projection_map auto Indexes>
-    using reindex_t = typename kumi::result::reindex<T, Indexes>::type;
     //! [reindex_t]
   }
 }

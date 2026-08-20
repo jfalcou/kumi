@@ -140,20 +140,23 @@ namespace kumi
   namespace result
   {
     //! [front_t]
-    template<kumi::concepts::product_type T> struct front : kumi::stored_member<0, T>
-    {
-    };
+    template<kumi::concepts::product_type T> using front_t = kumi::stored_member_t<0, T>;
 
-    template<kumi::concepts::product_type T> using front_t = typename kumi::result::front<T>::type;
+    template<kumi::concepts::product_type T> struct front
+    {
+      using type = kumi::result::front_t<T>;
+    };
 
     //! [front_t]
 
     //! [back_t]
-    template<kumi::concepts::product_type T> struct back : kumi::stored_member<kumi::size_v<T> - 1, T>
+    template<kumi::concepts::product_type T> using back_t = kumi::stored_member_t<kumi::size_v<T> - 1, T>;
+
+    template<kumi::concepts::product_type T> struct back
     {
+      using type = kumi::result::back_t<T>;
     };
 
-    template<kumi::concepts::product_type T> using back_t = typename kumi::result::back<T>::type;
     //! [back_t]
   }
 }

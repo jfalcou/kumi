@@ -94,12 +94,13 @@ namespace kumi
   namespace result
   {
     //! [cartesian_product_t]
+    template<typename... Ts> using cartesian_product_t = decltype(kumi::cartesian_product(std::declval<Ts>()...));
+
     template<typename... Ts> struct cartesian_product
     {
-      using type = decltype(kumi::cartesian_product(std::declval<Ts>()...));
+      using type = kumi::result::cartesian_product_t<Ts...>;
     };
 
-    template<typename... Ts> using cartesian_product_t = typename kumi::result::cartesian_product<Ts...>::type;
     //! [cartesian_product_t]
   }
 }

@@ -272,44 +272,42 @@ namespace kumi
   namespace result
   {
     //! [extract_t]
-    template<kumi::concepts::product_type T, std::size_t I0, std::size_t I1 = std::size_t(-1)> struct extract
-    {
-      using type = decltype(kumi::extract(std::declval<T>(), kumi::index_t<I0>{}, kumi::index_t<I1>{}));
-    };
+    template<kumi::concepts::product_type T, std::size_t... I>
+    requires((sizeof...(I) == 1) || (sizeof...(I) == 2))
+    using extract_t = decltype(kumi::extract(std::declval<T>(), kumi::index_t<I>{}...));
 
-    template<kumi::concepts::product_type T, std::size_t I0> struct extract<T, I0>
+    template<kumi::concepts::product_type T, std::size_t... I>
+    requires((sizeof...(I) == 1) || (sizeof...(I) == 2))
+    struct extract
     {
-      using type = decltype(kumi::extract(std::declval<T>(), kumi::index_t<I0>{}));
+      using type = kumi::result::extract_t<T, I...>;
     };
-
-    template<kumi::concepts::product_type T, std::size_t I0, std::size_t I1 = std::size_t(-1)>
-    using extract_t = typename kumi::result::extract<T, I0, I1>::type;
 
     //! [extract_t]
 
     //! [remove_t]
-    template<kumi::concepts::product_type T, std::size_t I0, std::size_t I1 = std::size_t(-1)> struct remove
-    {
-      using type = decltype(kumi::remove(std::declval<T>(), kumi::index_t<I0>{}, kumi::index_t<I1>{}));
-    };
+    template<kumi::concepts::product_type T, std::size_t... I>
+    requires((sizeof...(I) == 1) || (sizeof...(I) == 2))
+    using remove_t = decltype(kumi::remove(std::declval<T>(), kumi::index_t<I>{}...));
 
-    template<kumi::concepts::product_type T, std::size_t I0> struct remove<T, I0>
+    template<kumi::concepts::product_type T, std::size_t... I>
+    requires((sizeof...(I) == 1) || (sizeof...(I) == 2))
+    struct remove
     {
-      using type = decltype(kumi::remove(std::declval<T>(), kumi::index_t<I0>{}));
+      using type = kumi::result::remove_t<T, I...>;
     };
-
-    template<kumi::concepts::product_type T, std::size_t I0, std::size_t I1 = std::size_t(-1)>
-    using remove_t = typename kumi::result::remove<T, I0, I1>::type;
 
     //! [remove_t]
 
     //! [split_t]
-    template<kumi::concepts::product_type T, std::size_t I0> struct split
+    template<kumi::concepts::product_type T, std::size_t I>
+    using split_t = decltype(kumi::split(std::declval<T>(), kumi::index_t<I>{}));
+
+    template<kumi::concepts::product_type T, std::size_t I> struct split
     {
-      using type = decltype(kumi::split(std::declval<T>(), kumi::index_t<I0>{}));
+      using type = kumi::result::split_t<T, I>
     };
 
-    template<kumi::concepts::product_type T, std::size_t I0> using split_t = typename kumi::result::split<T, I0>::type;
     //! [split_t]
   }
 }

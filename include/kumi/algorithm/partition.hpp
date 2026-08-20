@@ -238,35 +238,36 @@ namespace kumi
   namespace result
   {
     //! [partition_t]
+    template<template<typename> typename Pred, kumi::concepts::product_type T>
+    using partition_t = decltype(kumi::partition<Pred>(std::declval<T>()));
+
     template<template<typename> typename Pred, kumi::concepts::product_type T> struct partition
     {
-      using type = decltype(kumi::partition<Pred>(std::declval<T>()));
+      using type = kumi::result::partition_t<Pred, T>;
     };
-
-    template<template<typename> typename Pred, kumi::concepts::product_type T>
-    using partition_t = typename kumi::result::partition<Pred, T>::type;
 
     //! [partition_t]
 
     //! [filter_t]
+    template<template<typename> typename Pred, kumi::concepts::product_type T>
+    using filter_t = decltype(kumi::filter<Pred>(std::declval<T>()));
+
     template<template<typename> typename Pred, kumi::concepts::product_type T> struct filter
     {
-      using type = decltype(kumi::filter<Pred>(std::declval<T>()));
+      using type = kumi::result::filter_t<Pred, T>;
     };
-
-    template<template<typename> typename Pred, kumi::concepts::product_type T>
-    using filter_t = typename kumi::result::filter<Pred, T>::type;
 
     //! [filter_t]
 
     //! [filter_not_t]
+    template<template<typename> typename Pred, kumi::concepts::product_type T>
+    using filter_not_t = decltype(kumi::filter_not<Pred>(std::declval<T>()));
+
     template<template<typename> typename Pred, kumi::concepts::product_type T> struct filter_not
     {
-      using type = decltype(kumi::filter_not<Pred>(std::declval<T>()));
+      using type = kumi::result::filter_not_t<Pred, T>;
     };
 
-    template<template<typename> typename Pred, kumi::concepts::product_type T>
-    using filter_not_t = typename kumi::result::filter_not<Pred, T>::type;
     //! [filter_not_t]
   }
 }

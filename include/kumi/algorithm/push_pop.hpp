@@ -286,44 +286,45 @@ namespace kumi
   namespace result
   {
     //! [push_front_t]
+    template<kumi::concepts::product_type T, typename V>
+    using push_front_t = decltype(kumi::push_front(std::declval<T>(), std::declval<V>()));
+
     template<kumi::concepts::product_type T, typename V> struct push_front
     {
-      using type = decltype(kumi::push_front(std::declval<T>(), std::declval<V>()));
+      using type = kumi::result::push_front_t<T, V>;
     };
-
-    template<kumi::concepts::product_type T, typename V>
-    using push_front_t = typename kumi::result::push_front<T, V>::type;
 
     //! [push_front_t]
 
     //! [pop_front_t]
+    template<kumi::concepts::product_type T> using pop_front_t = decltype(kumi::pop_front(std::declval<T>()));
+
     template<kumi::concepts::product_type T> struct pop_front
     {
-      using type = decltype(kumi::pop_front(std::declval<T>()));
+      using type = kumi::result::pop_front_t<T>;
     };
-
-    template<kumi::concepts::product_type T> using pop_front_t = typename kumi::result::pop_front<T>::type;
 
     //! [pop_front_t]
 
     //! [push_back_t]
+    template<kumi::concepts::product_type T, typename V>
+    using push_back_t = decltype(kumi::push_back(std::declval<T>(), std::declval<V>()));
+
     template<kumi::concepts::product_type T, typename V> struct push_back
     {
-      using type = decltype(kumi::push_back(std::declval<T>(), std::declval<V>()));
+      using type = kumi::result::push_back_t<T, V>;
     };
-
-    template<kumi::concepts::product_type T, typename V>
-    using push_back_t = typename kumi::result::push_back<T, V>::type;
 
     //! [push_back_t]
 
     //! [pop_back_t]
+    template<kumi::concepts::product_type T> using pop_back_t = decltype(kumi::pop_back(std::declval<T>()));
+
     template<kumi::concepts::product_type T> struct pop_back
     {
-      using type = decltype(kumi::pop_back(std::declval<T>()));
+      using type = kumi::result::pop_back_t<T>;
     };
 
-    template<kumi::concepts::product_type T> using pop_back_t = typename kumi::result::pop_back<T>::type;
     //! [pop_back_t]
   }
 }

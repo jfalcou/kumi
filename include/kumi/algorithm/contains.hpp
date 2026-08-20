@@ -293,46 +293,47 @@ namespace kumi
   namespace result
   {
     //! [contains_t]
+    template<kumi::concepts::product_type T, kumi::concepts::identifier ID>
+    using contains_t = decltype(kumi::contains(std::declval<T>(), std::declval<ID>()));
+
     template<kumi::concepts::product_type T, kumi::concepts::identifier ID> struct contains
     {
-      using type = decltype(kumi::contains(std::declval<T>(), std::declval<ID>()));
+      using type = kumi::result::contains_t<T, ID>;
     };
-
-    template<kumi::concepts::product_type T, kumi::concepts::identifier ID>
-    using contains_t = typename kumi::result::contains<T, ID>::type;
 
     //! [contains_t]
 
     //! [contains_any_t]
+    template<kumi::concepts::product_type T, kumi::concepts::identifier... IDs>
+    using contains_any_t = decltype(kumi::contains_any(std::declval<T>(), std::declval<IDs>()...));
+
     template<kumi::concepts::product_type T, kumi::concepts::identifier... IDs> struct contains_any
     {
-      using type = decltype(kumi::contains_any(std::declval<T>(), std::declval<IDs>()...));
+      using type = kumi::result::contains_any_t<T, IDs...>;
     };
-
-    template<kumi::concepts::product_type T, kumi::concepts::identifier... IDs>
-    using contains_any_t = typename kumi::result::contains_any<T, IDs...>::type;
 
     //! [contains_any_t]
 
     //! [contains_only_t]
+    template<kumi::concepts::product_type T, kumi::concepts::identifier... IDs>
+    using contains_only_t = decltype(kumi::contains_only(std::declval<T>(), std::declval<IDs>()...));
+
     template<kumi::concepts::product_type T, kumi::concepts::identifier... IDs> struct contains_only
     {
-      using type = decltype(kumi::contains_only(std::declval<T>(), std::declval<IDs>()...));
+      using type = kumi::result::contains_only_t<T, IDs...>;
     };
-
-    template<kumi::concepts::product_type T, kumi::concepts::identifier... IDs>
-    using contains_only_t = typename kumi::result::contains_only<T, IDs...>::type;
 
     //! [contains_only_t]
 
     //! [contains_none_t]
+    template<kumi::concepts::product_type T, kumi::concepts::identifier... IDs>
+    using contains_none_t = decltype(kumi::contains_none(std::declval<T>(), std::declval<IDs>()...));
+
     template<kumi::concepts::product_type T, kumi::concepts::identifier... IDs> struct contains_none
     {
-      using type = decltype(kumi::contains_none(std::declval<T>(), std::declval<IDs>()...));
+      using type = kumi::result::contains_none_t<T, IDs...>;
     };
 
-    template<kumi::concepts::product_type T, kumi::concepts::identifier... IDs>
-    using contains_none_t = typename kumi::result::contains_none<T, IDs...>::type;
     //! [contains_none_t]
   }
 }

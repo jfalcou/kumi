@@ -89,13 +89,14 @@ namespace kumi
   namespace result
   {
     //! [member_cast_t]
+    template<typename Target, kumi::concepts::product_type T>
+    using member_cast_t = decltype(kumi::member_cast<Target>(std::declval<T>()));
+
     template<typename Target, kumi::concepts::product_type T> struct member_cast
     {
-      using type = decltype(kumi::member_cast<Target>(std::declval<T>()));
+      using type = kumi::result::member_cast_t<Target, T>;
     };
 
-    template<typename Target, kumi::concepts::product_type T>
-    using member_cast_t = typename kumi::result::member_cast<Target, T>::type;
     //! [member_cast_t]
   }
 }

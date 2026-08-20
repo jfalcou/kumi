@@ -191,34 +191,33 @@ namespace kumi
   namespace result
   {
     //! [fold_left_t]
-    template<typename Function, kumi::concepts::product_type T, typename Value = void> struct fold_left
-    {
-      using type = decltype(kumi::fold_left(std::declval<Function>(), std::declval<T>(), std::declval<Value>()));
-    };
+    template<typename Function, kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    using fold_left_t =
+      decltype(kumi::fold_left(std::declval<Function>(), std::declval<T>(), std::declval<Value>()...));
 
-    template<typename Function, kumi::concepts::product_type T> struct fold_left<Function, T>
+    template<typename Function, kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    struct fold_left
     {
-      using type = decltype(kumi::fold_left(std::declval<Function>(), std::declval<T>()));
+      using type = kumi::result::fold_left_t<Function, T, Value...>;
     };
-
-    template<typename Function, kumi::concepts::product_type T, typename Value = void>
-    using fold_left_t = typename kumi::result::fold_left<Function, T, Value>::type;
 
     //! [fold_left_t]
 
     //! [fold_right_t]
-    template<typename Function, kumi::concepts::product_type T, typename Value = void> struct fold_right
+    template<typename Function, kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    using fold_right_t =
+      decltype(kumi::fold_right(std::declval<Function>(), std::declval<T>(), std : declval<Value>()...));
+
+    template<typename Function, kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    struct fold_right
     {
-      using type = decltype(kumi::fold_right(std::declval<Function>(), std::declval<T>(), std::declval<Value>()));
+      using type = kumi::result::fold_right_t<Function, T, Value...>;
     };
 
-    template<typename Function, kumi::concepts::product_type T> struct fold_right<Function, T>
-    {
-      using type = decltype(kumi::fold_right(std::declval<Function>(), std::declval<T>()));
-    };
-
-    template<typename Function, kumi::concepts::product_type T, typename Value = void>
-    using fold_right_t = typename kumi::result::fold_right<Function, T, Value>::type;
     //! [fold_right_t]
   }
 }

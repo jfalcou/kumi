@@ -385,48 +385,47 @@ namespace kumi
   namespace result
   {
     //! [compress_t]
+    template<kumi::concepts::product_type T> using compress_t = decltype(kumi::compress(std::declval<T>()));
+
     template<kumi::concepts::product_type T> struct compress
     {
-      using type = decltype(kumi::compress(std::declval<T>()));
+      using type = kumi::result::compress_t<T>;
     };
-
-    template<kumi::concepts::product_type T> using compress_t = typename kumi::result::compress<T>::type;
 
     //! [compress_t]
 
     //! [flatten_t]
+    template<kumi::concepts::product_type T> using flatten_t = decltype(kumi::flatten(std::declval<T>()));
+
     template<kumi::concepts::product_type T> struct flatten
     {
-      using type = decltype(kumi::flatten(std::declval<T>()));
+      using type = kumi::result::flatten_t<T> :;
     };
-
-    template<kumi::concepts::product_type T> using flatten_t = typename kumi::result::flatten<T>::type;
 
     //! [flatten_t]
 
     //! [flatten_all_t]
-    template<kumi::concepts::product_type T, typename Func = void> struct flatten_all
-    {
-      using type = decltype(kumi::flatten_all(std::declval<T>(), std::declval<Func>()));
-    };
+    template<kumi::concepts::product_type T, typename... Func>
+    requires((sizeof...(Func) == 0) || (sizeof...(Func) == 1))
+    using flatten_all_t = decltype(kumi::flatten_all(std::declval<T>(), std::declval<Func>()...));
 
-    template<kumi::concepts::product_type T> struct flatten_all<T>
+    template<kumi::concepts::product_type T>
+    requires((sizeof...(Func) == 0) || (sizeof...(Func) == 1))
+    struct flatten_all
     {
-      using type = decltype(kumi::flatten_all(std::declval<T>()));
+      using type = kumi::result::flatten_all_t<T>;
     };
-
-    template<kumi::concepts::product_type T, typename Func = void>
-    using flatten_all_t = typename kumi::result::flatten_all<T, Func>::type;
 
     //! [flatten_all_t]
 
     //! [as_flat_ptr_t]
+    template<kumi::concepts::product_type T> using as_flat_ptr_t = decltype(kumi::as_flat_ptr(std::declval<T>()));
+
     template<kumi::concepts::product_type T> struct as_flat_ptr
     {
-      using type = decltype(kumi::as_flat_ptr(std::declval<T>()));
+      using type = kumi::result::as_flat_ptr_t<T>;
     };
 
-    template<kumi::concepts::product_type T> using as_flat_ptr_t = typename kumi::result::as_flat_ptr<T>::type;
     //! [as_flat_ptr_t]
   }
 }

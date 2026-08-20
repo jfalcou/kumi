@@ -412,70 +412,63 @@ namespace kumi
   namespace result
   {
     //! [inclusive_scan_right_t]
-    template<typename Function, kumi::concepts::product_type T, typename Value = void> struct inclusive_scan_right
-    {
-      using type =
-        decltype(kumi::inclusive_scan_right(std::declval<Function>(), std::declval<T>(), std::declval<Value>()));
-    };
+    template<typename Function, kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    using inclusive_scan_right_t =
+      decltype(kumi::inclusive_scan_right(std::declval<Function>(), std::declval<T>(), std::declval<Value>()...));
 
-    template<typename Function, kumi::concepts::product_type T> struct inclusive_scan_right<Function, T>
+    template<typename Function, kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    struct inclusive_scan_right
     {
-      using type = decltype(kumi::inclusive_scan_right(std::declval<Function>(), std::declval<T>()));
+      using type = kumi::result::inclusive_scan_right_t<Function, T, Value...>;
     };
-
-    template<typename Function, kumi::concepts::product_type T, typename Value = void>
-    using inclusive_scan_right_t = typename kumi::result::inclusive_scan_right<Function, T, Value>::type;
 
     //! [inclusive_scan_right_t]
 
     //! [exclusive_scan_right_t]
-    template<typename Function, kumi::concepts::product_type T, typename Value = void> struct exclusive_scan_right
-    {
-      using type =
-        decltype(kumi::exclusive_scan_right(std::declval<Function>(), std::declval<T>(), std::declval<Value>()));
-    };
+    template<typename Function, kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    using exclusive_scan_right_t =
+      decltype(kumi::exclusive_scan_right(std::declval<Function>(), std::declval<T>(), std::declval<Value>()...));
 
-    template<typename Function, kumi::concepts::product_type T> struct exclusive_scan_right<Function, T>
+    template<typename Function, kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    struct exclusive_scan_right
     {
-      using type = decltype(kumi::exclusive_scan_right(std::declval<Function>(), std::declval<T>()));
+      using type = kumi::result::exclusive_scan_right_t<Function, T, Value...>;
     };
-
-    template<typename Function, kumi::concepts::product_type T, typename Value = void>
-    using exclusive_scan_right_t = typename kumi::result::exclusive_scan_right<Function, T, Value>::type;
 
     //! [exclusive_scan_right_t]
 
     //! [inclusive_scan_left_t]
-    template<typename Function, kumi::concepts::product_type T, typename Value = void> struct inclusive_scan_left
-    {
-      using type =
-        decltype(kumi::inclusive_scan_left(std::declval<Function>(), std::declval<T>(), std::declval<Value>()));
-    };
+    template<typename Function, kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    using inclusive_scan_left_t =
+      decltype(kumi::inclusive_scan_left(std::declval<Function>(), std::declval<T>(), std::declval<Value>()...));
 
-    template<typename Function, kumi::concepts::product_type T> struct inclusive_scan_left<Function, T>
+    template<typename Function, kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    struct inclusive_scan_left
     {
-      using type = decltype(kumi::inclusive_scan_left(std::declval<Function>(), std::declval<T>()));
+      using type = kumi::result::inclusive_scan_left_t<Function, T, Value...>;
     };
-
-    template<typename Function, kumi::concepts::product_type T, typename Value = void>
-    using inclusive_scan_left_t = typename kumi::result::inclusive_scan_left<Function, T, Value>::type;
 
     //! [inclusive_scan_left_t]
 
     //! [exclusive_scan_left_t]
-    template<typename Function, kumi::concepts::product_type T, typename Value = void> struct exclusive_scan_left
+    template<typename Function, kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    using exclusive_scan_left_t =
+      decltype(kumi::exclusive_scan_left(std::declval<Function>(), std::declval<T>(), std::declval<Value>()...));
+
+    template<typename Function, kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    struct exclusive_scan_left
     {
-      using type =
-        decltype(kumi::exclusive_scan_left(std::declval<Function>(), std::declval<T>(), std::declval<Value>()));
+      using type = kumi::result::exclusive_scan_left_t<Function, T, Value...>;
     };
 
-    template<typename Function, kumi::concepts::product_type T> struct exclusive_scan_left<Function, T>
-    {
-      using type = decltype(kumi::exclusive_scan_left(std::declval<Function>(), std::declval<T>()));
-    };
-
-    template<typename Function, kumi::concepts::product_type T, typename Value = void>
-    using exclusive_scan_left_t = typename kumi::result::exclusive_scan_left<Function, T, Value>::type;
     //! [exclusive_scan_left_t]
   }
 }

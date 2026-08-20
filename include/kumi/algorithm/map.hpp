@@ -265,15 +265,15 @@ namespace kumi
     template<typename Function,
              kumi::concepts::product_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
-    struct map
-    {
-      using type = decltype(kumi::map(std::declval<Function>(), std::declval<T>(), std::declval<Ts>()...));
-    };
+    using map_t = decltype(kumi::map(std::declval<Function>(), std::declval<T>(), std::declval<Ts>()...));
 
     template<typename Function,
              kumi::concepts::product_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
-    using map_t = typename kumi::result::map<Function, T, Ts...>::type;
+    struct map
+    {
+      using type = kumi::result::map_t<Function, T, Ts...>;
+    };
 
     //! [map_t]
 
@@ -281,15 +281,15 @@ namespace kumi
     template<typename Function,
              kumi::concepts::product_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
-    struct map_index
-    {
-      using type = decltype(kumi::map_index(std::declval<Function>(), std::declval<T>(), std::declval<Ts>()...));
-    };
+    using map_index_t = decltype(kumi::map_index(std::declval<Function>(), std::declval<T>(), std::declval<Ts>()...));
 
     template<typename Function,
              kumi::concepts::product_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
-    using map_index_t = typename kumi::result::map_index<Function, T, Ts...>::type;
+    struct map_index
+    {
+      using type = kumi::result::map_index_t<Function, T, Ts...>;
+    };
 
     //! [map_index_t]
 
@@ -297,15 +297,16 @@ namespace kumi
     template<typename Function,
              kumi::concepts::record_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
-    struct map_field
-    {
-      using type = decltype(kumi::map_field(std::declval<Function>(), std::declval<T>(), std::declval<Ts>()...));
-    };
+    using map_field_t = decltype(kumi::map_field(std::declval<Function>(), std::declval<T>(), std::declval<Ts>()...));
 
     template<typename Function,
              kumi::concepts::record_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
-    using map_field_t = typename kumi::result::map_field<Function, T, Ts...>::type;
+    struct map_field
+    {
+      using type = kumi::result::map_field_t<Function, T, Ts...>;
+    };
+
     //! [map_field_t]
   }
 }
