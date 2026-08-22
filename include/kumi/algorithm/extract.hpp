@@ -305,7 +305,7 @@ namespace kumi
 
     template<kumi::concepts::product_type T, std::size_t I> struct split
     {
-      using type = kumi::result::split_t<T, I>
+      using type = kumi::result::split_t<T, I>;
     };
 
     //! [split_t]

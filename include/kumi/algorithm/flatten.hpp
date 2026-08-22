@@ -399,7 +399,7 @@ namespace kumi
 
     template<kumi::concepts::product_type T> struct flatten
     {
-      using type = kumi::result::flatten_t<T> :;
+      using type = kumi::result::flatten_t<T>;
     };
 
     //! [flatten_t]
@@ -409,7 +409,7 @@ namespace kumi
     requires((sizeof...(Func) == 0) || (sizeof...(Func) == 1))
     using flatten_all_t = decltype(kumi::flatten_all(std::declval<T>(), std::declval<Func>()...));
 
-    template<kumi::concepts::product_type T>
+    template<kumi::concepts::product_type T, typename... Func>
     requires((sizeof...(Func) == 0) || (sizeof...(Func) == 1))
     struct flatten_all
     {

@@ -142,10 +142,9 @@ namespace kumi
              kumi::concepts::sized_product_type<kumi::size_v<S1>> S2,
              typename T,
              typename... Operators>
-    ;
-    requires((sizeof...(Operators) == 0) || (sizeof...(Operators) == 2)) using inner_product_t =
-              decltype(kumi::inner_product(
-                std::declval<S1>(), std::declval<S2>(), std::declval<T>(), std::declval<Operators>()...));
+    requires((sizeof...(Operators) == 0) || (sizeof...(Operators) == 2))
+    using inner_product_t = decltype(kumi::inner_product(
+      std::declval<S1>(), std::declval<S2>(), std::declval<T>(), std::declval<Operators>()...));
 
     template<kumi::concepts::product_type S1,
              kumi::concepts::sized_product_type<kumi::size_v<S1>> S2,
