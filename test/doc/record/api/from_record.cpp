@@ -34,8 +34,7 @@ decltype(auto) get(my_struct & m) noexcept
 
 // Opt-in for Record Type semantic
 template<>
-struct kumi::is_record_type<my_struct> : std::true_type
-{};
+inline constexpr bool kumi::is_record_type_v<my_struct> = true;
 
 // Adapt as structured bindable type
 template<>

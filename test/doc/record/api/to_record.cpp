@@ -33,8 +33,7 @@ decltype(auto) get(pixel& p) noexcept
 
 // Opt-in for Record Type semantic
 template<>
-struct kumi::is_record_type<pixel> : std::true_type
-{};
+inline constexpr bool kumi::is_record_type_v<pixel> = true;
 
 // Adapt as structured bindable type
 template<>

@@ -34,8 +34,7 @@ namespace ns
 
 // Opt-in for Record Type semantic
 template<>
-struct kumi::is_record_type<ns::people> : std::true_type
-{};
+inline constexpr bool kumi::is_record_type_v<ns::people> = true;
 
 // Adapt as structured bindable type
 template<>

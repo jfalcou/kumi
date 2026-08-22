@@ -29,9 +29,7 @@ template<kumi::concepts::identifier auto ID> constexpr decltype(auto) get(my_rec
   if constexpr (ID == "data"_id) return m.data;
 }
 
-template<> struct kumi::is_record_type<my_record_type> : std::true_type
-{
-};
+template<> inline constexpr bool kumi::is_record_type_v<my_record_type> = true;
 
 // Adapt as structured bindable type
 template<> struct std::tuple_size<my_record_type> : std::integral_constant<std::size_t, 2>
