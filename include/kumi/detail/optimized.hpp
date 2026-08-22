@@ -26,12 +26,18 @@ namespace kumi::_
   //====================================================================================================================
   // Optimized binder for homogeneous layout if:
   //  - Size is greater than 1
-  //  - All types are the same and non-reference
+  //  - All types are the same, non-reference and not empty
   //====================================================================================================================
-  template<typename T0, std::size_t N> struct binder_n
+  template<std::size_t... Is, typename T0, typename T1, typename... Ts>
+  requires(kumi::_::all_the_same<T0, T1, Ts...> && kumi::_::no_references<T0, T1, Ts...> &&
+           kumi::_::no_empty<T0, T1, Ts...>)
+  struct binder<std::index_sequence<Is...>, T0, T1, Ts...>
   {
+    using type = T0;
+    static constexpr std::size_t N = 2 + sizeof...(Ts);
+
     static constexpr bool is_homogeneous = true;
-    T0 members[N];
+    type members[N];
 
     template<std::size_t I> KUMI_ABI constexpr auto& operator()(std::integral_constant<std::size_t, I>) & noexcept
     {
@@ -46,22 +52,14 @@ namespace kumi::_
 
     template<std::size_t I> KUMI_ABI constexpr auto&& operator()(std::integral_constant<std::size_t, I>) && noexcept
     {
-      return static_cast<T0&&>(members[I]);
+      return static_cast<type&&>(members[I]);
     }
 
     template<std::size_t I>
     KUMI_ABI constexpr auto const&& operator()(std::integral_constant<std::size_t, I>) const&& noexcept
     {
-      return static_cast<T0 const&&>(members[I]);
+      return static_cast<type const&&>(members[I]);
     }
-  };
-
-  template<std::size_t... Is, typename T0, typename T1, typename... Ts>
-  requires(kumi::_::all_the_same<T0, T1, Ts...> && kumi::_::no_references<T0, T1, Ts...> &&
-           kumi::_::no_empty<T0, T1, Ts...>)
-  struct make_binder<std::index_sequence<Is...>, T0, T1, Ts...>
-  {
-    using type = kumi::_::binder_n<T0, 2 + sizeof...(Ts)>;
   };
 
   //====================================================================================================================

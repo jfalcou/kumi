@@ -66,8 +66,6 @@ namespace kumi::_
     using base = std::remove_cvref_t<T>;
     using base::operator();
     using index = std::integral_constant<std::size_t, N>;
-    using key = kumi::_::identifier_of_t<base>;
-    using inner_type = kumi::_::type_of_t<base>;
 
     KUMI_ABI constexpr base& operator()(index) & noexcept { return *this; }
 
@@ -78,6 +76,7 @@ namespace kumi::_
     KUMI_ABI constexpr base const& operator()(index) const& noexcept { return *this; }
   };
 
+  // Specializable binder type constructor
   template<typename ISeq, typename... Ts> struct binder;
 
   // General N-case
@@ -88,13 +87,7 @@ namespace kumi::_
     using kumi::_::leaf<Is, Ts>::operator()...;
   };
 
-  // Specializable binder type constructor
-  template<typename ISeq, typename... Ts> struct make_binder
-  {
-    using type = kumi::_::binder<ISeq, Ts...>;
-  };
-
-  template<typename ISeq, typename... Ts> using make_binder_t = typename kumi::_::make_binder<ISeq, Ts...>::type;
+  template<typename ISeq, typename... Ts> using make_binder_t = kumi::_::binder<ISeq, Ts...>;
 
   // Record binder, a record is unordered which implies no need for leaf tagging with integers. All types are also
   // necessarily unique.
@@ -103,11 +96,5 @@ namespace kumi::_
     using Ts::operator()...;
   };
 
-  // Specializable set type constructor
-  template<typename... Ts> struct make_set
-  {
-    using type = kumi::_::set<Ts...>;
-  };
-
-  template<typename... Ts> using make_set_t = typename kumi::_::make_set<Ts...>::type;
+  template<typename... Ts> using make_set_t = kumi::_::set<Ts...>;
 }

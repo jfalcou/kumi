@@ -185,7 +185,7 @@ namespace kumi
     @include doc/infra/label_of.cpp
   **/
   //====================================================================================================================
-  template<typename T> [[nodiscard]] KUMI_ABI consteval str label_of() noexcept
+  template<typename T> [[nodiscard]] KUMI_ABI consteval kumi::str label_of() noexcept
   {
     if constexpr (kumi::_::field<T>) return kumi::_::label_of_t<T>{};
     else return kumi::unknown{};
@@ -294,40 +294,40 @@ namespace kumi
 
   namespace result
   {
+    template<typename T> using identifier_of_t = decltype(kumi::identifier_of<T>());
+
     template<typename T> struct identifier_of
     {
-      using type = decltype(kumi::identifier_of<T>());
+      using type = kumi::result::identifier_of_t<T>;
     };
+
+    template<typename T> using label_of_t = decltype(kumi::label_of<T>());
 
     template<typename T> struct label_of
     {
-      using type = decltype(kumi::label_of<T>());
+      using type = kumi::result::label_of_t<T>;
     };
+
+    template<typename T> using field_value_of_t = decltype(kumi::field_value_of(std::declval<T>()));
 
     template<typename T> struct field_value_of
     {
-      using type = decltype(kumi::field_value_of(std::declval<T>()));
+      using type = kumi::result::field_value_of_t<T>;
     };
+
+    template<_::identifier auto Name, typename T>
+    using capture_field_t = decltype(kumi::capture_field<Name>(std::declval<T>()));
 
     template<kumi::_::identifier auto Name, typename T> struct capture_field
     {
-      using type = decltype(kumi::capture_field<Name>(std::declval<T>()));
+      using type = kumi::result::capture_field_t<Name, T>;
     };
+
+    template<typename U, typename T> using field_cast_t = decltype(kumi::field_cast<U, T>(std::declval<T>()));
 
     template<typename U, typename T> struct field_cast
     {
-      using type = decltype(kumi::field_cast<U, T>(std::declval<T>()));
+      using type = kumi::result::field_cast_t<U, T>;
     };
-
-    template<typename T> using identifier_of_t = typename kumi::result::identifier_of<T>::type;
-
-    template<typename T> using label_of_t = typename kumi::result::label_of<T>::type;
-
-    template<typename T> using field_value_of_t = typename kumi::result::field_value_of<T>::type;
-
-    template<_::identifier auto Name, typename T>
-    using capture_field_t = typename kumi::result::capture_field<Name, T>::type;
-
-    template<typename U, typename T> using field_cast_t = typename kumi::result::field_cast<U, T>::type;
   }
 }

@@ -117,7 +117,8 @@
 #define KUMI_BINDER(N)                                                                                                 \
   template<KUMI_PP_ENUM(N, KUMI_PP_TAC, typename T)>                                                                   \
   requires(kumi::_::no_empty<KUMI_PP_ENUM(N, KUMI_PP_TAC, T)> &&                                                       \
-           kumi::_::no_references<KUMI_PP_ENUM(N, KUMI_PP_TAC, T)>)                                                    \
+           kumi::_::no_references<KUMI_PP_ENUM(N, KUMI_PP_TAC, T)> &&                                                  \
+           (N == 1 || !kumi::_::all_the_same<KUMI_PP_ENUM(N, KUMI_PP_TAC, T)>))                                        \
   struct binder<std::index_sequence<KUMI_PP_ENUM(N, KUMI_PP_IDENTITY, _)>, KUMI_PP_ENUM(N, KUMI_PP_TAC, T)>            \
   {                                                                                                                    \
     static constexpr bool is_homogeneous = (N == 1);                                                                   \

@@ -39,13 +39,7 @@
 #endif
 
 // Functions in namespace detail should not be forceinline and have a different abi
-#if defined(__EDG__) || defined(__EDG_VERSION__) || defined(__CUDACC__) || defined(__NVCC__)
 #define KUMI_HIDDEN_ABI KUMI_CUDA inline
-#elif defined(__GNUC__) || defined(__clang__)
-#define KUMI_HIDDEN_ABI [[using gnu: pure, visibility("hidden")]] KUMI_CUDA inline
-#elif defined(_MSC_VER)
-#define KUMI_HIDDEN_ABI [[using msvc: noalias]] KUMI_CUDA inline
-#endif
 
 #if defined(__clang__)
 #pragma clang diagnostic ignored "-Wmissing-braces"
