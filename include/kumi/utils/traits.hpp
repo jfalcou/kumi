@@ -86,7 +86,7 @@ namespace kumi
     @endcode
   **/
   //====================================================================================================================
-  template<typename T> inline constexpr std::size_t size_v = std::tuple_size_v<std::remove_cvref_t<T>>;
+  template<typename T> inline constexpr std::size_t size_v = std::tuple_size<std::remove_cvref_t<T>>::value;
 
   template<typename T> struct size
   {
