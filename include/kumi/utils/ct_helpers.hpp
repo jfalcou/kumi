@@ -166,7 +166,7 @@ namespace kumi
   requires(kumi::concepts::queryable_by_type<U, T>)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return kumi::_::get_index_by_type_v<U, kumi::stored_element_t<I, T>...>;
+      return kumi::_::index_of_type<U, kumi::stored_element_t<I, T>...>::value;
     }(std::make_index_sequence<kumi::size_v<T>>{});
   }
 
@@ -186,7 +186,7 @@ namespace kumi
   requires(kumi::concepts::queryable_by_identifier<Id, T>)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return kumi::_::get_index_by_value_v<Id, kumi::element_t<I, T>...>;
+      return kumi::_::index_of_tag<Id, kumi::element_t<I, T>...>::value;
     }(std::make_index_sequence<kumi::size_v<T>>{});
   }
 
@@ -206,7 +206,7 @@ namespace kumi
   requires(kumi::concepts::queryable_by_label<kumi::label_t<L>, T>)
   {
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return kumi::_::get_index_by_label_v<kumi::label_t<L>, kumi::element_t<I, T>...>;
+      return kumi::_::index_of_label<kumi::label_t<L>, kumi::element_t<I, T>...>::value;
     }(std::make_index_sequence<kumi::size_v<T>>{});
   }
 }

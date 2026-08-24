@@ -29,7 +29,7 @@ namespace kumi
 #include <kumi/detail/index_sequence.hpp>
 #include <kumi/detail/preprocessor.hpp>
 #include <kumi/detail/concepts.hpp>
-#include <kumi/detail/meta_helpers.hpp>
+#include <kumi/detail/traits.hpp>
 #include <kumi/detail/str.hpp>
 #include <kumi/detail/typename.hpp>
 #include <kumi/detail/streamable.hpp>

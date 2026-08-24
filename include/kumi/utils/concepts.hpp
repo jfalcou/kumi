@@ -335,7 +335,7 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename T, typename... Ts>
-    concept contains_type = kumi::_::can_get_field_by_type<T, Ts...>;
+    concept contains_type = kumi::_::index_of_type<T, Ts...>::value != kumi::_::invalid{};
 
     //==================================================================================================================
     /**
@@ -346,7 +346,8 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename Name, typename... Ts>
-    concept contains_identifier = kumi::concepts::identifier<Name> && kumi::_::can_get_field_by_value<Name, Ts...>;
+    concept contains_identifier =
+      kumi::concepts::identifier<Name> && kumi::_::index_of_tag<Name, Ts...>::value != kumi::_::invalid{};
 
     //==================================================================================================================
     /**
@@ -358,8 +359,7 @@ namespace kumi
     //==================================================================================================================
     template<typename Label, typename... Ts>
     concept contains_label =
-      std::is_same_v<std::remove_cvref_t<decltype(std::remove_cvref_t<Label>::value)>, kumi::str> &&
-      kumi::_::can_get_field_by_label<std::remove_cvref_t<Label>, Ts...>;
+      kumi::_::label<Label> && kumi::_::index_of_label<std::remove_cvref_t<Label>, Ts...>::value != kumi::_::invalid{};
 
     //==================================================================================================================
     /**
@@ -447,13 +447,10 @@ namespace kumi
       For a `record_type` it inspects the underlying type of the fields.
     **/
     //==================================================================================================================
-    template<template<typename...> typename Meta, typename Target, typename PT>
-    inline constexpr bool can_query{[]<std::size_t... I>(std::index_sequence<I...>) {
-      return !std::is_same_v<Meta<Target, kumi::element_t<I, PT>...>, std::false_type>;
-    }(std::make_index_sequence<kumi::size_v<PT>>{})};
-
     template<typename Type, typename T>
-    concept queryable_by_type = kumi::concepts::product_type<T> && can_query<kumi::_::find_by_type_t, Type, T>;
+    concept queryable_by_type =
+      kumi::concepts::product_type<T> &&
+      kumi::_::can_query<kumi::_::index_of_type, Type, T, std::make_index_sequence<kumi::size_v<T>>>;
 
     //==================================================================================================================
     /**
@@ -467,7 +464,8 @@ namespace kumi
     //==================================================================================================================
     template<typename Id, typename T>
     concept queryable_by_identifier =
-      kumi::concepts::identifier<Id> && kumi::concepts::product_type<T> && can_query<kumi::_::find_by_tag_t, Id, T>;
+      kumi::concepts::identifier<Id> && kumi::concepts::product_type<T> &&
+      kumi::_::can_query<kumi::_::index_of_tag, Id, T, std::make_index_sequence<kumi::size_v<T>>>;
 
     //==================================================================================================================
     /**
@@ -481,6 +479,7 @@ namespace kumi
     //==================================================================================================================
     template<typename L, typename T>
     concept queryable_by_label =
-      kumi::_::label<L> && kumi::concepts::product_type<T> && can_query<kumi::_::find_by_label_t, L, T>;
+      kumi::_::label<L> && kumi::concepts::product_type<T> &&
+      kumi::_::can_query<kumi::_::index_of_label, L, T, std::make_index_sequence<kumi::size_v<T>>>;
   }
 }

@@ -17,7 +17,8 @@ namespace kumi
     template<typename T, typename ID, std::size_t... I>
     KUMI_HIDDEN_ABI constexpr auto contains_(kumi::_::adl_tag_t, T&&, ID const&, std::index_sequence<I...>)
     {
-      return std::bool_constant<kumi::_::can_get_field_by_value<std::remove_cvref_t<ID>, kumi::element_t<I, T>...>>{};
+      return std::bool_constant<
+        kumi::concepts::contains_identifier<std::remove_cvref_t<ID>, kumi::element_t<I, T>...>>{};
     }
 
     template<typename T, std::size_t... I, typename... Is>

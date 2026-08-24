@@ -31,7 +31,7 @@ namespace kumi
   //====================================================================================================================
   template<typename... Ts> struct tuple
   {
-    using binder_t = kumi::_::make_binder_t<std::make_index_sequence<sizeof...(Ts)>, Ts...>;
+    using binder_t = kumi::_::make_binder_t<std::index_sequence_for<Ts...>, Ts...>;
 
     static constexpr bool is_homogeneous = binder_t::is_homogeneous;
 
@@ -643,7 +643,7 @@ namespace kumi
     if constexpr (kumi::concepts::empty_product_type<T>) return kumi::tuple{};
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return tuple{get<I>(KUMI_FWD(t))...};
+        return kumi::tuple{get<I>(KUMI_FWD(t))...};
       }(std::make_index_sequence<kumi::size_v<T>>{});
   }
 

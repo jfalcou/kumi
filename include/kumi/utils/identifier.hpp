@@ -206,7 +206,7 @@ namespace kumi
       if constexpr (std::integral<std::remove_cvref_t<decltype(N)>>) return false;
       else if constexpr (kumi::concepts::index<decltype(N)>) return false;
       else if constexpr (kumi::concepts::identifier<std::remove_cvref_t<decltype(N)>>) return false;
-      else return kumi::_::can_get_field_by_value<kumi::name<N>, Ts...>;
+      else return kumi::concepts::contains_identifier<kumi::name<N>, Ts...>;
     }
 
     template<auto N, typename... Ts> KUMI_ABI consteval auto contains_label()
@@ -214,7 +214,7 @@ namespace kumi
       if constexpr (std::integral<std::remove_cvref_t<decltype(N)>>) return false;
       else if constexpr (kumi::concepts::index<decltype(N)>) return false;
       else if constexpr (!std::is_same_v<std::remove_cvref_t<decltype(N)>, kumi::str>) return false;
-      else return kumi::_::can_get_field_by_label<std::integral_constant<kumi::str, N>, Ts...>;
+      else return kumi::concepts::contains_label<std::integral_constant<kumi::str, N>, Ts...>;
     }
   }
 }

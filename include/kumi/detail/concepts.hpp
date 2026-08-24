@@ -50,7 +50,7 @@ namespace kumi::_
   // Helper concepts for custom field
   //====================================================================================================================
   template<typename O>
-  concept field = requires(O const& o) {
+  concept field = requires(O&& o) {
     typename std::remove_cvref_t<O>::type;
     typename std::remove_cvref_t<O>::identifier_type;
     typename std::remove_cvref_t<O>::label_type;
@@ -84,13 +84,51 @@ namespace kumi::_
   // Helper concepts for custom identifier
   //====================================================================================================================
   template<typename T>
-  concept identifier = requires(T const& t) { typename std::remove_cvref_t<T>::type; };
+  concept identifier = requires(T&& t) { typename std::remove_cvref_t<T>::type; };
 
   template<kumi::_::identifier T> using tag_of_t = typename std::remove_cvref_t<T>::type;
 
   template<kumi::_::identifier T> struct tag_of
   {
     using type = kumi::_::tag_of_t<T>;
+  };
+
+  //==================================================================================================================
+  // Helper concepts for tuple detection
+  //==================================================================================================================
+  // Concept specifying a type is non-empty standard tuple-like type.
+  template<typename T>
+  concept non_empty_tuple = requires {
+    typename std::tuple_element<0, std::remove_cvref_t<T>>::type;
+    { std::tuple_size<T>::value };
+  };
+
+  // Concept specifying a type is an empty standard tuple-like type.
+  template<typename T>
+  concept empty_tuple = (std::tuple_size<std::remove_cvref_t<T>>::value == 0);
+
+  // Concept specifying a type is a standard tuple-like type.
+  template<typename T>
+  concept std_tuple_compatible = kumi::_::empty_tuple<T> || kumi::_::non_empty_tuple<T>;
+
+  //==================================================================================================================
+  // Helper concepts for container detection
+  //==================================================================================================================
+  // Concept specifying a type is standard container-like type.
+  template<typename T>
+  concept container_like = requires(T const& t) {
+    typename T::value_type;
+    typename T::size_type;
+
+    { t.size() } -> std::convertible_to<std::size_t>;
+    { t.begin() };
+    { t.end() };
+  };
+
+  /// Concept for container types providing access to a contiguous block of data
+  template<typename T>
+  concept contiguous_container_like = kumi::_::container_like<T> && requires(T const& t) {
+    { t.data() };
   };
 
   //====================================================================================================================
@@ -138,7 +176,7 @@ namespace kumi::_
   //====================================================================================================================
   // Helper concepts for construction checks on records
   //====================================================================================================================
-  template<typename... Ts> struct fieldmap : Ts...
+  template<typename... Ts> struct set : Ts...
   {
     using Ts::operator()...;
     consteval void operator()(...);
@@ -148,11 +186,10 @@ namespace kumi::_
 
   template<template<class...> class Box, typename... From, typename... To>
   requires(sizeof...(From) == sizeof...(To))
-  inline constexpr bool is_fieldwise_convertible_v<Box<From...>, Box<To...>>{
-    (std::is_convertible_v<decltype(std::declval<kumi::_::fieldmap<From...>>()(
-                             std::declval<kumi::_::identifier_of_t<To>>())),
-                           kumi::_::type_of_t<To>> &&
-     ...)};
+  inline constexpr bool is_fieldwise_convertible_v<Box<From...>, Box<To...>>{(
+    std::is_convertible_v<decltype(std::declval<kumi::_::set<From...>>()(std::declval<kumi::_::identifier_of_t<To>>())),
+                          kumi::_::type_of_t<To>> &&
+    ...)};
 
   template<typename From, typename To>
   concept fieldwise_convertible =
@@ -162,12 +199,11 @@ namespace kumi::_
 
   template<template<class...> class Box, typename... From, typename... To>
   requires(sizeof...(From) == sizeof...(To))
-  inline constexpr bool is_fieldwise_constructible_v<Box<From...>, Box<To...>>
-  {
-    (std::is_constructible_v<kumi::_::type_of_t<To>, decltype(std::declval<kumi::_::fieldmap<From...>>()(
-                                                       std::declval<kumi::_::identifier_of_t<To>>()))> &&
-     ...);
-  }
+  inline constexpr bool is_fieldwise_constructible_v<Box<From...>, Box<To...>>{
+    (std::is_constructible_v<kumi::_::type_of_t<To>,
+                             decltype(std::declval<kumi::_::set<From...>>()(
+                               std::declval<kumi::_::identifier_of_t<To>>()))> &&
+     ...)};
 
   template<typename From, typename To>
   concept fieldwise_constructible =
@@ -178,119 +214,10 @@ namespace kumi::_
   template<template<class...> class Box, typename... From, typename... To>
   requires(sizeof...(From) == sizeof...(To))
   inline constexpr bool is_fieldwise_comparable_v<Box<From...>, Box<To...>>{
-    (kumi::_::comparable<decltype(std::declval<kumi::_::fieldmap<From...>>()(
-                           std::declval<kumi::_::identifier_of_t<To>>())),
+    (kumi::_::comparable<decltype(std::declval<kumi::_::set<From...>>()(std::declval<kumi::_::identifier_of_t<To>>())),
                          kumi::_::type_of_t<To>> &&
      ...)};
 
   template<typename From, typename To>
   concept fieldwise_comparable = kumi::_::is_fieldwise_comparable_v<std::remove_cvref_t<From>, std::remove_cvref_t<To>>;
-
-  //====================================================================================================================
-  // Helper meta functions to access a field type via a meta function
-  //====================================================================================================================
-  struct find_failed
-  {
-    static consteval std::false_type get(...);
-    static consteval kumi::_::invalid get_index(...);
-  };
-
-  template<template<class, class> class Matcher, std::size_t I, typename Ref, typename Field> struct match_node
-  {
-    static consteval std::false_type get();
-    static consteval kumi::_::invalid get_index();
-  };
-
-  template<template<class, class> class Matcher, std::size_t I, typename Ref, typename Field>
-  requires(Matcher<Ref, Field>::value)
-  struct match_node<Matcher, I, Ref, Field>
-  {
-    using index = std::integral_constant<std::size_t, I>;
-    static consteval Field get(Ref);
-    static consteval index get_index(Ref);
-  };
-
-  template<template<class, class> class Matcher, typename Ref, typename Seq, typename... Fields> struct find_engine;
-
-  template<template<class, class> class Matcher, typename Ref, std::size_t... I, typename... Fields>
-  struct find_engine<Matcher, Ref, std::index_sequence<I...>, Fields...>
-    : find_failed, kumi::_::match_node<Matcher, I, Ref, Fields>...
-  {
-    using kumi::_::find_failed::get;
-    using kumi::_::find_failed::get_index;
-    using kumi::_::match_node<Matcher, I, Ref, Fields>::get...;
-    using kumi::_::match_node<Matcher, I, Ref, Fields>::get_index...;
-
-    using type = decltype(get(std::declval<Ref>()));
-    static constexpr auto value = decltype(get_index(std::declval<Ref>()))::value;
-  };
-
-  // ===================================================================================================================
-  // By Type
-  // ===================================================================================================================
-  template<typename Ref, typename Field> struct match_by_type : std::is_same<Ref, Field>
-  {
-  };
-
-  template<typename Ref, typename... Fields>
-  using find_by_type_t =
-    kumi::_::find_engine<kumi::_::match_by_type, Ref, std::index_sequence_for<Fields...>, Fields...>;
-
-  template<typename Ref, typename... Fields>
-  using get_field_by_type_t = typename kumi::_::find_by_type_t<Ref, Fields...>::type;
-
-  template<typename Ref, typename... Fields>
-  inline constexpr auto get_index_by_type_v = kumi::_::find_by_type_t<Ref, Fields...>::value;
-
-  template<typename Ref, typename... Fields>
-  concept can_get_field_by_type = !std::is_same_v<kumi::_::get_field_by_type_t<Ref, Fields...>, std::false_type>;
-
-  // ===================================================================================================================
-  // By Value (Tag)
-  // ===================================================================================================================
-  template<typename Ref, typename Field> struct match_by_tag : std::false_type
-  {
-  };
-
-  template<kumi::_::identifier Ref, kumi::_::field Field>
-  struct match_by_tag<Ref, Field> : std::is_same<kumi::_::tag_of_t<Ref>, kumi::_::identifier_of_t<Field>>
-  {
-  };
-
-  template<typename Ref, typename... Fields>
-  using find_by_tag_t = kumi::_::find_engine<kumi::_::match_by_tag, Ref, std::index_sequence_for<Fields...>, Fields...>;
-
-  template<typename Ref, typename... Fields>
-  using get_field_by_value_t = typename kumi::_::find_by_tag_t<Ref, Fields...>::type;
-
-  template<typename Ref, typename... Fields>
-  inline constexpr auto get_index_by_value_v = kumi::_::find_by_tag_t<Ref, Fields...>::value;
-
-  template<typename Ref, typename... Fields>
-  concept can_get_field_by_value = !std::is_same_v<kumi::_::get_field_by_value_t<Ref, Fields...>, std::false_type>;
-
-  //====================================================================================================================
-  // By label (displayed name)
-  //====================================================================================================================
-  template<typename Ref, typename Field> struct match_by_label : std::false_type
-  {
-  };
-
-  template<kumi::_::label Ref, kumi::_::field Field>
-  struct match_by_label<Ref, Field> : std::bool_constant<Ref::value == Field::label()>
-  {
-  };
-
-  template<typename Ref, typename... Fields>
-  using find_by_label_t =
-    kumi::_::find_engine<kumi::_::match_by_label, Ref, std::index_sequence_for<Fields...>, Fields...>;
-
-  template<typename Ref, typename... Fields>
-  using get_field_by_label_t = typename kumi::_::find_by_label_t<Ref, Fields...>::type;
-
-  template<typename Ref, typename... Fields>
-  inline constexpr auto get_index_by_label_v = kumi::_::find_by_label_t<Ref, Fields...>::value;
-
-  template<typename Ref, typename... Fields>
-  concept can_get_field_by_label = !std::is_same_v<kumi::_::get_field_by_label_t<Ref, Fields...>, std::false_type>;
 }

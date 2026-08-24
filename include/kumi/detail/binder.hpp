@@ -91,10 +91,5 @@ namespace kumi::_
 
   // Record binder, a record is unordered which implies no need for leaf tagging with integers. All types are also
   // necessarily unique.
-  template<typename... Ts> struct set : Ts...
-  {
-    using Ts::operator()...;
-  };
-
   template<typename... Ts> using make_set_t = kumi::_::set<Ts...>;
 }
