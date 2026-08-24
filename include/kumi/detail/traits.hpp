@@ -78,16 +78,16 @@ namespace kumi::_
     template<typename Ref> using type = decltype(std::declval<family>()(std::declval<Ref>()));
 
     static constexpr bool is_set = requires {
-      { kumi::_::is_set(family{}, std::type_identity<Ts>{}...) } -> std::same_as<std::true_type>;
+      { kumi::_::is_set(std::declval<family>(), std::type_identity<Ts>{}...) } -> std::same_as<std::true_type>;
     };
 
     static constexpr bool is_map = requires {
-      { kumi::_::is_set(family{}, kumi::_::get_key<I, Ts>()...) } -> std::same_as<std::true_type>;
+      { kumi::_::is_set(std::declval<family>(), kumi::_::get_key<I, Ts>()...) } -> std::same_as<std::true_type>;
     };
 
     template<typename... Us>
     static constexpr bool same_keys = requires {
-      { kumi::_::is_set(family{}, kumi::_::get_key<I, Us>()...) } -> std::same_as<std::true_type>;
+      { kumi::_::is_set(std::declval<family>(), kumi::_::get_key<I, Us>()...) } -> std::same_as<std::true_type>;
     };
   };
 
