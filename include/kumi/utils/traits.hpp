@@ -497,7 +497,7 @@ namespace kumi
     @endcode
   **/
   //====================================================================================================================
-  template<typename... Ts> inline constexpr bool all_uniques_v = kumi::_::make_family<Ts...>::is_set;
+  template<typename... Ts> inline constexpr bool all_uniques_v = kumi::_::is_set_v<kumi::_::make_family<Ts...>>;
 
   template<typename... Ts> struct all_uniques
   {
@@ -521,7 +521,7 @@ namespace kumi
     @endcode
   **/
   //====================================================================================================================
-  template<typename... Ts> inline constexpr bool all_unique_names_v = kumi::_::make_family<Ts...>::is_map;
+  template<typename... Ts> inline constexpr bool all_unique_names_v = kumi::_::is_map_v<kumi::_::make_family<Ts...>>;
 
   template<typename... Ts> struct all_unique_names
   {
@@ -536,8 +536,8 @@ namespace kumi
 
     template<typename T, typename U, std::size_t... Is>
     inline constexpr bool is_equivalent<T, U, std::index_sequence<Is...>>{
-      (kumi::_::family<std::index_sequence<Is...>,
-                       kumi::element_t<Is, T>...>::template same_keys<kumi::element_t<Is, U>...>)};
+      kumi::_::same_mapping_v<kumi::_::family<std::index_sequence<Is...>, kumi::element_t<Is, T>...>,
+                              kumi::element_t<Is, U>...>};
   }
 
   //====================================================================================================================

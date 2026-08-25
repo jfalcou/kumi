@@ -19,9 +19,9 @@ namespace kumi::_
     field
   };
 
-  //======================================================================================================================
+  //====================================================================================================================
   // Helpers for uniqueness checking
-  //======================================================================================================================
+  //====================================================================================================================
   template<std::size_t I, typename T> inline auto get_key()
   {
     if constexpr (kumi::_::field<T>) return kumi::_::identifier_of_t<T>{};
@@ -60,13 +60,13 @@ namespace kumi::_
   inline consteval std::true_type true_fn(...);
 
   template<typename T, typename... Key>
-  inline auto is_set(T t, Key...) -> decltype(kumi::_::true_fn(static_cast<Key>(t)...));
+  inline auto is_set(T, Key...) -> decltype(kumi::_::true_fn(static_cast<Key>(std::declval<T>())...));
 
   inline std::false_type is_set(...);
 
-  //======================================================================================================================
+  //====================================================================================================================
   // Helper type for types behavior detection, only one type to instantiate for all traits
-  //======================================================================================================================
+  //====================================================================================================================
   template<typename Seq, typename... Ts> struct family;
 
   template<std::size_t... I, typename... Ts> struct family<std::index_sequence<I...>, Ts...> : kumi::_::unique<I, Ts>...
@@ -75,19 +75,31 @@ namespace kumi::_
     kumi::_::invalid operator()(...);
 
     template<typename Ref> using type = decltype(std::declval<family>()(std::declval<Ref>()));
-
-    static constexpr bool is_set =
-      decltype(kumi::_::is_set(std::declval<family>(), std::type_identity<Ts>{}...))::value;
-
-    static constexpr bool is_map =
-      decltype(kumi::_::is_set(std::declval<family>(), kumi::_::get_key<I, Ts>()...))::value;
-
-    template<typename... Us>
-    static constexpr bool same_keys =
-      decltype(kumi::_::is_set(std::declval<family>(), kumi::_::get_key<I, Us>()...))::value;
   };
 
   template<typename... Ts> using make_family = family<std::index_sequence_for<Ts...>, Ts...>;
+
+  //====================================================================================================================
+  // Helper variables for properties detection on families
+  //====================================================================================================================
+  template<typename T> inline constexpr bool is_set_v = false;
+
+  template<std::size_t... I, typename... Ts>
+  inline constexpr bool is_set_v<kumi::_::family<std::index_sequence<I...>, Ts...>>{decltype(kumi::_::is_set(
+    std::declval<kumi::_::family<std::index_sequence<I...>, Ts...>>(), std::type_identity<Ts>{}...))::value};
+
+  template<typename T> inline constexpr bool is_map_v = false;
+
+  template<std::size_t... I, typename... Ts>
+  inline constexpr bool is_map_v<kumi::_::family<std::index_sequence<I...>, Ts...>>{decltype(kumi::_::is_set(
+    std::declval<kumi::_::family<std::index_sequence<I...>, Ts...>>(), kumi::_::get_key<I, Ts>()...))::value};
+
+  template<typename T, typename... Ts> inline constexpr bool same_mapping_v = false;
+
+  template<std::size_t... I, typename... Ts, typename... Us>
+  inline constexpr bool same_mapping_v<kumi::_::family<std::index_sequence<I...>, Ts...>, Us...>{
+    decltype(kumi::_::is_set(std::declval<kumi::_::family<std::index_sequence<I...>, Ts...>>(),
+                             kumi::_::get_key<I, Us>()...))::value};
 
   //====================================================================================================================
   // Helper meta functions to access a field index by Type
