@@ -530,12 +530,14 @@ namespace kumi
 
   namespace _
   {
-    template<typename T, typename U, typename Seq> inline constexpr bool is_equivalent_ = false;
+    template<typename T, typename U, typename Seq> inline constexpr bool is_equivalent = false;
+
+    template<typename T, typename U> inline constexpr bool is_equivalent<T, U, std::index_sequence<>> = true;
 
     template<typename T, typename U, std::size_t... Is>
-    inline constexpr bool is_equivalent_<T, U, std::index_sequence<Is...>>{(
-      sizeof...(Is) == 0 || kumi::_::family<std::index_sequence<Is...>,
-                                            kumi::element_t<Is, T>...>::template same_keys<kumi::element_t<Is, U>...>)};
+    inline constexpr bool is_equivalent<T, U, std::index_sequence<Is...>>{
+      (kumi::_::family<std::index_sequence<Is...>,
+                       kumi::element_t<Is, T>...>::template same_keys<kumi::element_t<Is, U>...>)};
   }
 
   //====================================================================================================================
@@ -559,18 +561,17 @@ namespace kumi
     @endcode
   **/
   //====================================================================================================================
-  template<typename T, typename U>
-  inline constexpr bool is_equivalent_v = kumi::_::empty_tuple<T> && kumi::_::empty_tuple<U>;
+  template<typename T, typename U> inline constexpr bool is_equivalent_v = false;
 
   template<typename T, typename U>
   requires((kumi::is_product_type_v<T> && kumi::is_product_type_v<U>) &&
-           (!kumi::is_record_type_v<T> && !kumi::is_record_type_v<U>) && (kumi::size_v<T> == kumi::size_v<U>))
-  inline constexpr bool is_equivalent_v<T, U> = true;
+           (!kumi::is_record_type_v<T> || !kumi::is_record_type_v<U>))
+  inline constexpr bool is_equivalent_v<T, U> = kumi::size_v<T> == kumi::size_v<U>;
 
   template<typename T, typename U>
-  requires(kumi::is_record_type_v<T> && kumi::is_record_type_v<U> && (kumi::size_v<T> == kumi::size_v<U>))
+  requires(kumi::is_record_type_v<T> && kumi::is_record_type_v<U>)
   inline constexpr bool is_equivalent_v<T, U> =
-    kumi::_::is_equivalent_<T, U, std::make_index_sequence<kumi::size_v<T>>>;
+    (kumi::size_v<T> == kumi::size_v<U>) && kumi::_::is_equivalent<T, U, std::make_index_sequence<kumi::size_v<T>>>;
 
   template<typename T, typename U> struct is_equivalent
   {
@@ -579,18 +580,20 @@ namespace kumi
 
   namespace _
   {
-    template<typename T, typename U, typename Seq> inline constexpr bool is_equality_comparable_ = false;
+    template<typename T, typename U, typename Seq> inline constexpr bool is_equality_comparable = false;
+
+    template<typename T, typename U> inline constexpr bool is_equality_comparable<T, U, std::index_sequence<>> = true;
 
     template<typename T, typename U, std::size_t... I>
     requires(kumi::is_record_type_v<T> && kumi::is_record_type_v<U>)
-    inline constexpr bool is_equality_comparable_<T, U, std::index_sequence<I...>>{
+    inline constexpr bool is_equality_comparable<T, U, std::index_sequence<I...>>{
       (kumi::_::comparable<decltype(std::declval<kumi::_::set<kumi::element_t<I, T>...>>()(
                              std::declval<kumi::_::identifier_of_t<kumi::element_t<I, U>>>())),
                            kumi::_::type_of_t<kumi::element_t<I, U>>> &&
        ...)};
 
     template<typename T, typename U, std::size_t... I>
-    inline constexpr bool is_equality_comparable_<T, U, std::index_sequence<I...>>{
+    inline constexpr bool is_equality_comparable<T, U, std::index_sequence<I...>>{
       (kumi::_::comparable<kumi::element_t<I, T>, kumi::element_t<I, U>> && ...)};
   }
 
@@ -599,13 +602,13 @@ namespace kumi
     @ingroup traits
     @brief   Checks if a two product types are comparable for equality.
 
-    Two product types are comparable for equality uf eacg field in T have a corresponding field in U with each of their
+    Two product types are comparable for equality uf each field in T have a corresponding field in U with each of their
     underlying types being comparable (the == operator can be used betewen them).
 
     @tparam T The reference product type to access
     @tparam U the product type to check
 
-    ## Helper type
+    ## Helper type-trait
     @code
     namespace kumi
     {
@@ -614,13 +617,13 @@ namespace kumi
     @endcode
   **/
   //====================================================================================================================
-  template<typename T, typename U>
-  inline constexpr bool is_equality_comparable_v = kumi::_::empty_tuple<T> && kumi::_::empty_tuple<U>;
+  template<typename T, typename U> inline constexpr bool is_equality_comparable_v = false;
 
   template<typename T, typename U>
-  requires(kumi::is_product_type_v<T> && kumi::is_product_type_v<U> && (kumi::size_v<T> == kumi::size_v<U>))
+  requires(kumi::is_product_type_v<T> && kumi::is_product_type_v<U>)
   inline constexpr bool is_equality_comparable_v<T, U>{
-    kumi::_::is_equality_comparable_<T, U, std::make_index_sequence<kumi::size_v<T>>>};
+    (kumi::size_v<T> == kumi::size_v<U>) &&
+    kumi::_::is_equality_comparable<T, U, std::make_index_sequence<kumi::size_v<T>>>};
 
   template<typename T, typename U> struct is_equality_comparable
   {

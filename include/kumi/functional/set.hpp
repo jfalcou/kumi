@@ -33,12 +33,7 @@ namespace kumi
       using kumi::_::multiset<std::index_sequence<Is...>, Ts...>::operator();
     };
 
-    template<typename... Ts> struct make_multiset
-    {
-      using type = kumi::_::multiset<Ts...>;
-    };
-
-    template<typename... Ts> using make_multiset_t = typename kumi::_::make_multiset<Ts...>::type;
+    template<typename... Ts> using make_multiset_t = typename kumi::_::multiset<Ts...>;
   }
 
   namespace function

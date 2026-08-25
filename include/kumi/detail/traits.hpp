@@ -24,12 +24,11 @@ namespace kumi::_
   //======================================================================================================================
   template<std::size_t I, typename T> inline auto get_key()
   {
-    using type = std::remove_cvref_t<T>;
-    if constexpr (kumi::_::field<T>) return typename type::identifier_type{};
+    if constexpr (kumi::_::field<T>) return kumi::_::identifier_of_t<T>{};
     else return std::integral_constant<std::size_t, I>{};
   }
 
-  /// Used to detect duplicate types in a pack by enabling unique overload resolution.
+  /// Used to detect duplicate types in a pack by enabling unique conversion overload resolution.
   template<std::size_t I, typename T> struct unique
   {
     operator std::type_identity<T>();
@@ -77,18 +76,15 @@ namespace kumi::_
 
     template<typename Ref> using type = decltype(std::declval<family>()(std::declval<Ref>()));
 
-    static constexpr bool is_set = requires {
-      { kumi::_::is_set(std::declval<family>(), std::type_identity<Ts>{}...) } -> std::same_as<std::true_type>;
-    };
+    static constexpr bool is_set =
+      decltype(kumi::_::is_set(std::declval<family>(), std::type_identity<Ts>{}...))::value;
 
-    static constexpr bool is_map = requires {
-      { kumi::_::is_set(std::declval<family>(), kumi::_::get_key<I, Ts>()...) } -> std::same_as<std::true_type>;
-    };
+    static constexpr bool is_map =
+      decltype(kumi::_::is_set(std::declval<family>(), kumi::_::get_key<I, Ts>()...))::value;
 
     template<typename... Us>
-    static constexpr bool same_keys = requires {
-      { kumi::_::is_set(std::declval<family>(), kumi::_::get_key<I, Us>()...) } -> std::same_as<std::true_type>;
-    };
+    static constexpr bool same_keys =
+      decltype(kumi::_::is_set(std::declval<family>(), kumi::_::get_key<I, Us>()...))::value;
   };
 
   template<typename... Ts> using make_family = family<std::index_sequence_for<Ts...>, Ts...>;
