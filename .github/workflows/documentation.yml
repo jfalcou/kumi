@@ -10,27 +10,10 @@ on:
       - main
 
 jobs:
-  generate-doc:
-    runs-on: ubuntu-latest
-    container:
-      image: ghcr.io/jfalcou/compilers:v10
-    strategy:
-      fail-fast: false
-    steps:
-      - name: Fetch current branch
-        uses: actions/checkout@v6
-      - name: Prepare KUMI
-        run: |
-          mkdir build && cd build
-          cmake .. -G Ninja -DKUMI_BUILD_TEST=OFF -DKUMI_BUILD_DOCUMENTATION=ON
-
-      - name: Generate Doxygen
-        run: |
-          cd build
-          ninja kumi-doxygen
-
-      - name: Deploy to gh-pages
-        uses: peaceiris/actions-gh-pages@v4
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          publish_dir: ./build/doc
+  documentation:
+    permissions:
+      contents: write
+    uses: jfalcou/copacabana/.github/workflows/documentation.yml@17df3f26736d3a0ecc231a3b951f548dcbc09c45 # v2
+    with:
+      project: kumi
+      coverage: true
