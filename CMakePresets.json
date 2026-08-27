@@ -53,6 +53,21 @@
       }
     },
     {
+      "name": "sanitize",
+      "hidden": true,
+      "cacheVariables": {
+        "KUMI_ENABLE_SANITIZERS": "ON"
+      }
+    },
+    {
+      "name": "coverage",
+      "hidden": true,
+      "cacheVariables": {
+        "KUMI_ENABLE_COVERAGE": "ON",
+        "CMAKE_DEFAULT_BUILD_TYPE": "Debug"
+      }
+    },
+    {
       "name": "gcc",
       "inherits": ["unix-base"],
       "cacheVariables": {
@@ -72,6 +87,22 @@
       "cacheVariables": {
         "CMAKE_CXX_COMPILER": "clang++"
       }
+    },
+    {
+      "name": "gcc-sanitize",
+      "inherits": ["gcc", "sanitize"]
+    },
+    {
+      "name": "gcc-coverage",
+      "inherits": ["gcc", "coverage"]
+    },
+    {
+      "name": "clang-sanitize",
+      "inherits": ["clang", "sanitize"]
+    },
+    {
+      "name": "clang-coverage",
+      "inherits": ["clang", "coverage"]
     },
     {
       "name": "clang-cuda",
@@ -139,6 +170,10 @@
     { "name": "gcc"             , "inherits": "base-build", "configurePreset": "gcc"            },
     { "name": "clang"           , "inherits": "base-build", "configurePreset": "clang"          },
     { "name": "clang-libc++"    , "inherits": "base-build", "configurePreset": "clang-libc++"   },
+    { "name": "gcc-sanitize"    , "inherits": "base-build", "configurePreset": "gcc-sanitize"   },
+    { "name": "gcc-coverage"    , "inherits": "base-build", "configurePreset": "gcc-coverage"   },
+    { "name": "clang-sanitize"  , "inherits": "base-build", "configurePreset": "clang-sanitize" },
+    { "name": "clang-coverage"  , "inherits": "base-build", "configurePreset": "clang-coverage" },
     { "name": "icpx"            , "inherits": "base-build", "configurePreset": "icpx"           },
     { "name": "wasm"            , "inherits": "base-build", "configurePreset": "wasm"           },
     { "name": "android-arm64"   , "inherits": "base-build", "configurePreset": "android-arm64"  },
@@ -155,6 +190,10 @@
     { "name": "gcc"             , "inherits": "base-test", "configurePreset": "gcc"             },
     { "name": "clang"           , "inherits": "base-test", "configurePreset": "clang"           },
     { "name": "clang-libc++"    , "inherits": "base-test", "configurePreset": "clang-libc++"    },
+    { "name": "gcc-sanitize"    , "inherits": "base-test", "configurePreset": "gcc-sanitize"    },
+    { "name": "gcc-coverage"    , "inherits": "base-test", "configurePreset": "gcc-coverage"    },
+    { "name": "clang-sanitize"  , "inherits": "base-test", "configurePreset": "clang-sanitize"  },
+    { "name": "clang-coverage"  , "inherits": "base-test", "configurePreset": "clang-coverage"  },
     { "name": "icpx"            , "inherits": "base-test", "configurePreset": "icpx"            },
     { "name": "wasm"            , "inherits": "base-test", "configurePreset": "wasm"            },
     { "name": "android-arm64"   , "inherits": "base-test", "configurePreset": "android-arm64"   },

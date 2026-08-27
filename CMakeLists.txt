@@ -11,8 +11,10 @@ if(DEFINED CMAKE_CUDA_COMPILER)
 endif()
 
 ##======================================================================================================================
-option( KUMI_BUILD_TEST             "Build tests using Kumi headers"            ON  )
-option( KUMI_BUILD_DOCUMENTATION    "Build Doxygen for Kumi"                    OFF )
+option( KUMI_BUILD_TEST             "Build tests using Kumi headers"                                ON  )
+option( KUMI_BUILD_DOCUMENTATION    "Build Doxygen for Kumi"                                        OFF )
+option( KUMI_ENABLE_SANITIZERS      "Build tests with AddressSanitizer + UndefinedBehaviorSanitizer" OFF )
+option( KUMI_ENABLE_COVERAGE        "Build tests with code coverage instrumentation"                 OFF )
 
 ##======================================================================================================================
 include(${PROJECT_SOURCE_DIR}/cmake/dependencies.cmake)
@@ -37,6 +39,8 @@ if(NOT KUMI_QUIET)
   endif()
   message(STATUS "[${PROJECT_NAME}] - Unit tests              : ${KUMI_BUILD_TEST} (via KUMI_BUILD_TEST)")
   message(STATUS "[${PROJECT_NAME}] - Doxygen                 : ${KUMI_BUILD_DOCUMENTATION} (via KUMI_BUILD_DOCUMENTATION)")
+  message(STATUS "[${PROJECT_NAME}] - Sanitizers              : ${KUMI_ENABLE_SANITIZERS} (via KUMI_ENABLE_SANITIZERS)")
+  message(STATUS "[${PROJECT_NAME}] - Coverage                : ${KUMI_ENABLE_COVERAGE} (via KUMI_ENABLE_COVERAGE)")
   set(QUIET_OPTION "")
 else()
   set(QUIET_OPTION "QUIET")
@@ -75,7 +79,16 @@ copa_setup_standalone ( QUIET
 ## Tests setup
 ##======================================================================================================================
 if(KUMI_BUILD_TEST)
+  if(KUMI_ENABLE_SANITIZERS)
+    copa_setup_sanitizers(kumi_opts ENABLE_ASAN ENABLE_UBSAN)
+  endif()
+
   enable_testing()
   add_custom_target(kumi-unit)
   add_subdirectory(test)
+
+  # After the test targets exist, so the coverage targets can depend on them
+  if(KUMI_ENABLE_COVERAGE)
+    copa_setup_coverage(kumi_opts)
+  endif()
 endif()
