@@ -5,6 +5,7 @@
 [![License](https://img.shields.io/badge/license-BSL-green?style=plastic)](./LICENSE.md)
 [![Discord](https://img.shields.io/discord/692734675726237696?style=plastic)](https://discord.com/channels/692734675726237696/916823794230886481)
 [![CI Status](https://github.com/jfalcou/kumi/actions/workflows/integration.yml/badge.svg)](https://github.com/jfalcou/kumi/actions/workflows/integration.yml)
+[![Coverage](https://img.shields.io/endpoint?url=https://jfalcou.github.io/kumi/coverage/badge.json&style=plastic&cacheSeconds=1800)](https://jfalcou.github.io/kumi/coverage/)
 
 <br clear="left"/>
 
