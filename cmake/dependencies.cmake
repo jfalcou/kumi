@@ -12,7 +12,7 @@ include(${CMAKE_CURRENT_LIST_DIR}/CPM.cmake)
 ##======================================================================================================================
 ## Retrieve dependencies
 ##======================================================================================================================
-CPMAddPackage(NAME COPACABANA GITHUB_REPOSITORY jfalcou/copacabana GIT_TAG v2)
+CPMAddPackage(NAME COPACABANA GITHUB_REPOSITORY jfalcou/copacabana GIT_TAG v4)
 
 if(KUMI_BUILD_TEST)
   CPMAddPackage ( NAME TTS   GITHUB_REPOSITORY jfalcou/tts
