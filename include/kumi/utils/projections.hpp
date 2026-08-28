@@ -54,6 +54,8 @@ namespace kumi
   //====================================================================================================================
   template<auto... V> struct projection_map
   {
+    static_assert((kumi::concepts::projection<decltype(V)> && ...), "Invalid projections in projection_map definition");
+
     static constexpr bool is_projection_map = true;
 
     consteval projection_map() noexcept = default;
@@ -188,16 +190,4 @@ namespace kumi
   {
     return kumi::projection_map<Ts{}...>{};
   }
-
-  //====================================================================================================================
-  // Specialisation to clearly signal errors due invalid projections
-  //====================================================================================================================
-  // template<auto... Vs>
-  // requires(!kumi::concepts::projection<decltype(Vs)> && ...)
-  // struct projection_map<Vs...>
-  //{
-  //  static_assert((kumi::concepts::projection<decltype(Vs)> && ...),
-  //                "Invalid projections in projection_map definition");
-  //  projection_map(decltype(Vs)...) = delete;
-  //};
 }
