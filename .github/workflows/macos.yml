@@ -26,7 +26,7 @@ jobs:
         uses: actions/checkout@v7
 
       - name: Configure CMake and Build
-        uses: ./.github/actions/config
+        uses: jfalcou/copacabana/.github/actions/config@3337f916bb581d0829909976773f7a2ee827a25c # v4
         with:
           preset: ${{ matrix.compiler.preset }}
           config: ${{ matrix.options }}
@@ -34,7 +34,7 @@ jobs:
 
       - name: Run Unit Tests
         if: matrix.compiler.preset != 'android-arm64' # Skip executing cross-compiled binaries
-        uses: ./.github/actions/test
+        uses: jfalcou/copacabana/.github/actions/test@3337f916bb581d0829909976773f7a2ee827a25c # v4
         with:
           preset: ${{ matrix.compiler.preset }}
           config: ${{ matrix.options }}
