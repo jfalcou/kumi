@@ -18,6 +18,9 @@ FetchContent_Declare(kumi
   GIT_TAG ${GIT_BRANCH}
 )
 
+## FetchContent has no per-package OPTIONS: what kumi reads is pinned here.
+set(KUMI_BUILD_TEST OFF CACHE BOOL "" FORCE)
+
 # make available
 FetchContent_MakeAvailable(kumi)
 
