@@ -53,9 +53,9 @@ TTS_CASE("Check map_field(f, {}) behavior")
   TTS_EXPECT_NOT(was_run);
 };
 
-TTS_CASE("Check map_name(f, record) behavior"){
-  {auto t = kumi::record{"boat"_id = 1, "biologic"_id = 2., "coat"_id = 3.4f, "dystopic"_id = '5',
-                         "whatever"_id = short{55}};
+TTS_CASE("Check map_name(f, record) behavior")
+{{auto t =
+    kumi::record{"boat"_id = 1, "biologic"_id = 2., "coat"_id = 3.4f, "dystopic"_id = '5', "whatever"_id = short{55}};
 
 {
   auto s = kumi::map_field(
@@ -105,8 +105,8 @@ TTS_CASE("Check map_name(f, record) behavior"){
 }
 ;
 
-TTS_CASE("Check map_field(f, record) constexpr behavior"){
-  {constexpr auto t = kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.4f, "d"_id = '5'};
+TTS_CASE("Check map_field(f, record) constexpr behavior")
+{{constexpr auto t = kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.4f, "d"_id = '5'};
 
 {
   constexpr auto s = kumi::map_field([](auto, auto m) { return sizeof(m); }, t);

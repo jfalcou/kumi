@@ -43,7 +43,8 @@ TTS_CASE("Check map_index(f, {}) behavior")
   TTS_EXPECT_NOT(was_run);
 };
 
-TTS_CASE("Check map_index(f, tuple) behavior"){{auto t = kumi::tuple{1, 2., 3.4f, '5'};
+TTS_CASE("Check map_index(f, tuple) behavior")
+{{auto t = kumi::tuple{1, 2., 3.4f, '5'};
 
 {
   auto s = kumi::map_index([](auto i, auto m) { return i + sizeof(m); }, t);
