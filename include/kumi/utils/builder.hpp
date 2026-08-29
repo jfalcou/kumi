@@ -52,23 +52,8 @@ namespace kumi
   //====================================================================================================================
   template<typename T> struct builder;
 
-  template<typename T> struct builder<T&> : builder<T>
-  {
-  };
+  template<typename T> using builder_t = typename builder<std::remove_cvref_t<T>>::type;
 
-  template<typename T> struct builder<T&&> : builder<T>
-  {
-  };
-
-  template<typename T> struct builder<T const&> : builder<T>
-  {
-  };
-
-  template<typename T> struct builder<T const&&> : builder<T>
-  {
-  };
-
-  template<typename T> using builder_t = typename builder<T>::type;
-
-  template<typename T, typename... Args> using builder_make_t = typename builder<T>::template to<Args...>;
+  template<typename T, typename... Args>
+  using builder_make_t = typename builder<std::remove_cvref_t<T>>::template to<Args...>;
 }

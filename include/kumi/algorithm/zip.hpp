@@ -12,20 +12,26 @@ namespace kumi
   namespace _
   {
     template<typename T, std::size_t... I, std::size_t... J>
-    KUMI_ABI constexpr auto zip_(kumi::_::adl_tag_t, T&& t, std::index_sequence<I...>, std::index_sequence<J...> is)
+    KUMI_HIDDEN_ABI constexpr auto zip_(kumi::_::adl_tag_t,
+                                        T&& t,
+                                        std::index_sequence<I...>,
+                                        std::index_sequence<J...> is)
     {
       return kumi::make_tuple(kumi::_::builder(KUMI_FWD(t), std::integral_constant<std::size_t, I>{}, is)...);
     }
 
     template<typename T, std::size_t N, std::size_t... I>
-    constexpr auto zip_intern_(T&& t, kumi::index_t<N>, std::index_sequence<I...>)
+    KUMI_HIDDEN_ABI constexpr auto zip_intern_(T&& t, kumi::index_t<N>, std::index_sequence<I...>)
     {
       using U = kumi::common_product_type_t<std::remove_cvref_t<kumi::function::element_or_t<I, T, kumi::unit>>...>;
       return kumi::builder<U>::make(kumi::function::get_or<N>(get<I>(KUMI_FWD(t)), kumi::none)...);
     }
 
     template<typename T, std::size_t... I, std::size_t... J>
-    constexpr auto zip_max_(kumi::_::adl_tag_t, T&& t, std::index_sequence<I...>, std::index_sequence<J...> is)
+    KUMI_HIDDEN_ABI constexpr auto zip_max_(kumi::_::adl_tag_t,
+                                            T&& t,
+                                            std::index_sequence<I...>,
+                                            std::index_sequence<J...> is)
     {
       return kumi::make_tuple(kumi::_::zip_intern_(KUMI_FWD(t), kumi::index<I>, is)...);
     }
@@ -271,35 +277,38 @@ namespace kumi
   namespace result
   {
     //! [zip_t]
+    //
+    template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
+    using zip_t = decltype(kumi::zip(std::declval<T0>(), std::declval<Ts>()...));
+
     template<kumi::concepts::product_type T0, kumi::concepts::sized_product_type<kumi::size_v<T0>>... Ts> struct zip
     {
-      using type = decltype(kumi::zip(std::declval<T0>(), std::declval<Ts>()...));
+      using type = kumi::result::zip_t<T0, Ts...>;
     };
-
-    template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
-    using zip_t = typename kumi::result::zip<T0, Ts...>::type;
 
     //! [zip_t]
 
     //! [zip_min_t]
+    //
+    template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
+    using zip_min_t = decltype(kumi::zip_min(std::declval<T0>(), std::declval<Ts>()...));
+
     template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts> struct zip_min
     {
-      using type = decltype(kumi::zip_min(std::declval<T0>(), std::declval<Ts>()...));
+      using type = kumi::result::zip_min_t<T0, Ts...>;
     };
-
-    template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
-    using zip_min_t = typename kumi::result::zip_min<T0, Ts...>::type;
 
     //! [zip_min_t]
 
     //! [zip_max_t]
+    template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
+    using zip_max_t = decltype(kumi::zip_max(std::declval<T0>(), std::declval<Ts>()...));
+
     template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts> struct zip_max
     {
-      using type = decltype(kumi::zip_max(std::declval<T0>(), std::declval<Ts>()...));
+      using type = kumi::result::zip_max_t<T0, Ts...>;
     };
 
-    template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
-    using zip_max_t = typename kumi::result::zip_max<T0, Ts...>::type;
     //! [zip_max_t]
   }
 }

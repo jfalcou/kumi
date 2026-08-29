@@ -23,15 +23,34 @@ namespace kumi::function
     @endcode
   **/
   //====================================================================================================================
+  template<typename T, auto V> inline constexpr auto size_or_v = V;
+
+  template<typename T, auto V>
+  requires(kumi::concepts::product_type<T>)
+  inline constexpr auto size_or_v<T, V> = kumi::size_v<T>;
+
   template<typename T, auto V> struct size_or
   {
-    static constexpr auto value = [] {
-      if constexpr (kumi::concepts::product_type<T>) return kumi::size_v<T>;
-      else return V;
-    }();
+    static constexpr auto value = kumi::function::size_or_v<T, V>;
   };
 
-  template<typename T, auto V> inline constexpr auto size_or_v = kumi::function::size_or<T, V>::value;
+  //====================================================================================================================
+  /**
+    @ingroup  functional
+    @brief    If T is a kumi::product_type, returns it's Ith element, returns an instance of V otherwise.
+
+    @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
+    @tparam   I Compile-time index of the element to access
+    @param    t type to inspect
+    @param    v fallback value
+    @return   A reference to the selected element of t if t is a kumi::product_type, the parameter v otherwise.
+  **/
+  //====================================================================================================================
+  template<std::size_t I, typename T, typename V> [[nodiscard]] KUMI_ABI constexpr decltype(auto) get_or(T&& t, V&& v)
+  {
+    if constexpr (kumi::concepts::product_type<T> && I < kumi::size_v<T>) return get<I>(KUMI_FWD(t));
+    else return KUMI_FWD(v);
+  }
 
   //====================================================================================================================
   /**
@@ -51,34 +70,13 @@ namespace kumi::function
     @endcode
   **/
   //====================================================================================================================
+  template<std::size_t I, typename T, typename U>
+  using element_or_t = std::remove_cvref_t<decltype(kumi::function::get_or<I>(std::declval<T>(), std::declval<U>()))>;
+
   template<std::size_t I, typename T, typename U> struct element_or
   {
-    using type = typename decltype([] {
-      if constexpr (kumi::concepts::product_type<T> && I < kumi::size_v<T>) return kumi::element<I, T>{};
-      else return std::type_identity<U>{};
-    }())::type;
+    using type = kumi::function::element_or_t<I, T, U>;
   };
-
-  template<std::size_t I, typename T, typename U>
-  using element_or_t = typename kumi::function::element_or<I, T, U>::type;
-
-  //====================================================================================================================
-  /**
-    @ingroup  functional
-    @brief    If T is a kumi::product_type, returns it's Ith element, returns an instance of V otherwise.
-
-    @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
-    @tparam   I Compile-time index of the element to access
-    @param    t type to inspect
-    @param    v fallback value
-    @return   A reference to the selected element of t if t is a kumi::product_type, the parameter v otherwise.
-  **/
-  //====================================================================================================================
-  template<std::size_t I, typename T, typename V> [[nodiscard]] KUMI_ABI constexpr decltype(auto) get_or(T&& t, V&& v)
-  {
-    if constexpr (kumi::concepts::product_type<T> && I < kumi::size_v<T>) return get<I>(KUMI_FWD(t));
-    else return KUMI_FWD(v);
-  }
 
   //====================================================================================================================
   /**

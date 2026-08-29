@@ -55,7 +55,7 @@ namespace kumi
     struct builder_t
     {
       template<typename T, std::size_t... I>
-      KUMI_ABI static consteval auto type(T&&, std::index_sequence<I...>)
+      static auto type(T&&, std::index_sequence<I...>)
         -> kumi::common_product_type_t<std::remove_cvref_t<kumi::element_t<I, T>>...>;
 
       template<typename T>

@@ -12,7 +12,7 @@ namespace kumi
   namespace _
   {
     template<typename T, typename U, typename V, typename Sum, typename Prod, std::size_t... I>
-    KUMI_ABI constexpr auto inner_product_(
+    KUMI_HIDDEN_ABI constexpr auto inner_product_(
       kumi::_::adl_tag_t, T&& t, U&& u, V init, Sum sum, Prod prod, std::index_sequence<I...>) noexcept
     {
       if constexpr (kumi::concepts::record_type<T>)
@@ -25,7 +25,7 @@ namespace kumi
     }
 
     template<typename T, typename U, typename V, std::size_t... I>
-    KUMI_ABI constexpr auto inner_product_fast_(
+    KUMI_HIDDEN_ABI constexpr auto inner_product_fast_(
       kumi::_::adl_tag_t, T&& t, U&& u, V init, std::index_sequence<I...>) noexcept
     {
       if constexpr (kumi::concepts::record_type<T>)
@@ -141,26 +141,21 @@ namespace kumi
     template<kumi::concepts::product_type S1,
              kumi::concepts::sized_product_type<kumi::size_v<S1>> S2,
              typename T,
-             typename Sum,
-             typename Prod>
-    struct inner_product
-    {
-      using type = decltype(kumi::inner_product(
-        std::declval<S1>(), std::declval<S2>(), std::declval<T>(), std::declval<Sum>(), std::declval<Prod>()));
-    };
-
-    template<kumi::concepts::product_type S1, kumi::concepts::sized_product_type<kumi::size_v<S1>> S2, typename T>
-    struct inner_product<S1, S2, T, void, void>
-    {
-      using type = decltype(kumi::inner_product(std::declval<S1>(), std::declval<S2>(), std::declval<T>()));
-    };
+             typename... Operators>
+    requires((sizeof...(Operators) == 0) || (sizeof...(Operators) == 2))
+    using inner_product_t = decltype(kumi::inner_product(
+      std::declval<S1>(), std::declval<S2>(), std::declval<T>(), std::declval<Operators>()...));
 
     template<kumi::concepts::product_type S1,
              kumi::concepts::sized_product_type<kumi::size_v<S1>> S2,
              typename T,
-             typename Sum = void,
-             typename Prod = void>
-    using inner_product_t = typename kumi::result::inner_product<S1, S2, T, Sum, Prod>::type;
+             typename... Operators>
+    requires((sizeof...(Operators) == 0) || (sizeof...(Operators) == 2))
+    struct inner_product
+    {
+      using type = kumi::result::inner_product_t<S1, S2, T, Operators...>;
+    };
+
     //! [inner_product_t]
   }
 }

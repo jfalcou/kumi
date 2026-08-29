@@ -12,19 +12,19 @@ namespace kumi
   namespace _
   {
     template<typename T, typename Pred, std::size_t... I>
-    KUMI_ABI constexpr auto all_of_(kumi::_::adl_tag_t, T&& t, Pred p, std::index_sequence<I...>)
+    KUMI_HIDDEN_ABI constexpr bool all_of_(kumi::_::adl_tag_t, T&& t, Pred p, std::index_sequence<I...>)
     {
       return (kumi::invoke(p, get<I>(KUMI_FWD(t))) && ...);
     }
 
     template<typename T, typename Pred, std::size_t... I>
-    KUMI_ABI constexpr auto any_of_(kumi::_::adl_tag_t, T&& t, Pred p, std::index_sequence<I...>)
+    KUMI_HIDDEN_ABI constexpr bool any_of_(kumi::_::adl_tag_t, T&& t, Pred p, std::index_sequence<I...>)
     {
       return (kumi::invoke(p, get<I>(KUMI_FWD(t))) || ...);
     }
 
     template<typename Pred, typename T, std::size_t... I>
-    KUMI_ABI constexpr std::size_t count_if_(kumi::_::adl_tag_t, T&& t, Pred p, std::index_sequence<I...>)
+    KUMI_HIDDEN_ABI constexpr std::size_t count_if_(kumi::_::adl_tag_t, T&& t, Pred p, std::index_sequence<I...>)
     {
       [[maybe_unused]] constexpr std::size_t o = 1ULL;
       [[maybe_unused]] constexpr std::size_t z = 0ULL;

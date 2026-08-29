@@ -12,7 +12,10 @@ namespace kumi
   namespace _
   {
     template<typename T, std::size_t... B, std::size_t... E>
-    KUMI_ABI constexpr auto tiles_(kumi::_::adl_tag_t, T&& t, std::index_sequence<B...>, std::index_sequence<E...>)
+    KUMI_HIDDEN_ABI constexpr auto tiles_(kumi::_::adl_tag_t,
+                                          T&& t,
+                                          std::index_sequence<B...>,
+                                          std::index_sequence<E...>)
     {
       return kumi::tuple{kumi::_::builder(KUMI_FWD(t), kumi::function::shifter(kumi::index<E>, kumi::index<B>))...};
     }
@@ -230,34 +233,36 @@ namespace kumi
   namespace result
   {
     //! [tiles_t]
+    template<std::size_t N, std::size_t O, kumi::concepts::product_type T>
+    using tiles_t = decltype(kumi::tiles<N, O>(std::declval<T>()));
+
     template<std::size_t N, std::size_t O, kumi::concepts::product_type T> struct tiles
     {
-      using type = decltype(kumi::tiles<N, O>(std::declval<T>()));
+      using type = kumi::result::tiles_t<N, O, T>;
     };
-
-    template<std::size_t N, std::size_t O, kumi::concepts::product_type T>
-    using tiles_t = typename kumi::result::tiles<N, O, T>::type;
 
     //! [tiles_t]
 
     //! [windows_t]
+    template<std::size_t N, kumi::concepts::product_type T>
+    using windows_t = decltype(kumi::windows<N>(std::declval<T>()));
+
     template<std::size_t N, kumi::concepts::product_type T> struct windows
     {
-      using type = decltype(kumi::windows<N>(std::declval<T>()));
+      using type = kumi::result::windows_t<N, T>;
     };
-
-    template<std::size_t N, kumi::concepts::product_type T>
-    using windows_t = typename kumi::result::windows<N, T>::type;
 
     //! [windows_t]
 
     //! [chunks_t]
+    template<std::size_t N, kumi::concepts::product_type T>
+    using chunks_t = decltype(kumi::chunks<N>(std::declval<T>()));
+
     template<std::size_t N, kumi::concepts::product_type T> struct chunks
     {
-      using type = decltype(kumi::chunks<N>(std::declval<T>()));
+      using type = kumi::result::chunks_t<N, T>;
     };
 
-    template<std::size_t N, kumi::concepts::product_type T> using chunks_t = typename kumi::result::chunks<N, T>::type;
     //! [chunks_t]
   }
 }

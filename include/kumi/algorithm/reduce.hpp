@@ -12,7 +12,7 @@ namespace kumi
   namespace _
   {
     template<typename M, typename S, typename T, std::size_t N, std::size_t... F, std::size_t... L>
-    KUMI_ABI constexpr auto reduce_(
+    KUMI_HIDDEN_ABI constexpr auto reduce_(
       kumi::_::adl_tag_t, M&& m, S s, T&& t, kumi::index_t<N>, std::index_sequence<F...>, std::index_sequence<L...>)
     {
       if constexpr (N == 1)
@@ -22,14 +22,14 @@ namespace kumi
     }
 
     template<typename M, typename T, typename F, typename S, std::size_t N, std::size_t... I, std::size_t... J>
-    KUMI_ABI constexpr auto map_reduce_(kumi::_::adl_tag_t,
-                                        M&& m,
-                                        T&& t,
-                                        F f,
-                                        S s,
-                                        kumi::index_t<N>,
-                                        std::index_sequence<I...>,
-                                        std::index_sequence<J...>)
+    KUMI_HIDDEN_ABI constexpr auto map_reduce_(kumi::_::adl_tag_t,
+                                               M&& m,
+                                               T&& t,
+                                               F f,
+                                               S s,
+                                               kumi::index_t<N>,
+                                               std::index_sequence<I...>,
+                                               std::index_sequence<J...>)
     {
       if constexpr (N == 1)
         return s(KUMI_FWD(m), kumi::tuple{kumi::invoke(KUMI_FWD(m), kumi::invoke(f, get<I>(KUMI_FWD(t))),
@@ -661,97 +661,103 @@ namespace kumi
 
   namespace result
   {
-    template<kumi::concepts::monoid M, kumi::concepts::product_type T, typename Value = void> struct reduce
+    //! [reduce_t]
+    template<kumi::concepts::monoid M, kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    using reduce_t = decltype(kumi::reduce(std::declval<M>(), std::declval<T>(), std::declval<Value>()...));
+
+    template<kumi::concepts::monoid M, kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    struct reduce
     {
-      using type = decltype(kumi::reduce(std::declval<M>(), std::declval<T>(), std::declval<Value>()));
+      using type = kumi::result::reduce_t<M, T, Value...>;
     };
 
-    template<kumi::concepts::monoid M, kumi::concepts::product_type T> struct reduce<M, T>
-    {
-      using type = decltype(kumi::reduce(std::declval<M>(), std::declval<T>()));
-    };
+    //! [reduce_t]
 
-    template<typename F, kumi::concepts::monoid M, kumi::concepts::product_type T, typename Value = void>
+    //! [map_reduce_t]
+    template<typename F, kumi::concepts::monoid M, kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    using map_reduce_t =
+      decltype(kumi::map_reduce(std::declval<F>(), std::declval<M>(), std::declval<T>(), std::declval<Value>()...));
+
+    template<typename F, kumi::concepts::monoid M, kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     struct map_reduce
     {
-      using type =
-        decltype(kumi::map_reduce(std::declval<F>(), std::declval<M>(), std::declval<T>(), std::declval<Value>()));
+      using type = kumi::result::map_reduce_t<F, M, T, Value...>;
     };
 
-    template<typename F, kumi::concepts::monoid M, kumi::concepts::product_type T> struct map_reduce<F, M, T>
+    //! [map_reduce_t]
+
+    //! [sum_t]
+    template<kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    using sum_t = decltype(kumi::sum(std::declval<T>(), std::declval<Value>()...));
+
+    template<kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    struct sum
     {
-      using type = decltype(kumi::map_reduce(std::declval<F>(), std::declval<M>(), std::declval<T>()));
+      using type = kumi::result::sum_t<T, Value...>;
     };
 
-    template<kumi::concepts::product_type T, typename Value = void> struct sum
+    //! [sum_t]
+
+    //! [prod_t]
+    template<kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    using prod_t = decltype(kumi::prod(std::declval<T>(), std::declval<Value>()...));
+
+    template<kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    struct prod
     {
-      using type = decltype(kumi::sum(std::declval<T>(), std::declval<Value>()));
+      using type = kumi::result::prod_t<T, Value...>;
     };
 
-    template<kumi::concepts::product_type T> struct sum<T>
+    //! [prod_t]
+
+    //! [bit_and_t]
+    template<kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    using bit_and_t = decltype(kumi::bit_and(std::declval<T>(), std::declval<Value>()...));
+
+    template<kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    struct bit_and
     {
-      using type = decltype(kumi::sum(std::declval<T>()));
+      using type = kumi::result::bit_and_t<T, Value...>;
     };
 
-    template<kumi::concepts::product_type T, typename Value = void> struct prod
+    //! [bit_and_t]
+
+    //! [bit_or_t]
+    template<kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    using bit_or_t = decltype(kumi::bit_or(std::declval<T>(), std::declval<Value>()...));
+
+    template<kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    struct bit_or
     {
-      using type = decltype(kumi::prod(std::declval<T>(), std::declval<Value>()));
+      using type = kumi::result::bit_or_t<T, Value...>;
     };
 
-    template<kumi::concepts::product_type T> struct prod<T>
+    //! [bit_or_t]
+
+    //! [bit_xor_t]
+    template<kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    using bit_xor_t = decltype(kumi::bit_xor(std::declval<T>(), std::declval<Value>()...));
+
+    template<kumi::concepts::product_type T, typename... Value>
+    requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
+    struct bit_xor
     {
-      using type = decltype(kumi::prod(std::declval<T>()));
+      using type = kumi::result::bit_xor_t<T, Value...>;
     };
 
-    template<kumi::concepts::product_type T, typename Value = void> struct bit_and
-    {
-      using type = decltype(kumi::bit_and(std::declval<T>(), std::declval<Value>()));
-    };
-
-    template<kumi::concepts::product_type T> struct bit_and<T>
-    {
-      using type = decltype(kumi::bit_and(std::declval<T>()));
-    };
-
-    template<kumi::concepts::product_type T, typename Value = void> struct bit_or
-    {
-      using type = decltype(kumi::bit_or(std::declval<T>(), std::declval<Value>()));
-    };
-
-    template<kumi::concepts::product_type T> struct bit_or<T>
-    {
-      using type = decltype(kumi::bit_or(std::declval<T>()));
-    };
-
-    template<kumi::concepts::product_type T, typename Value = void> struct bit_xor
-    {
-      using type = decltype(kumi::bit_xor(std::declval<T>(), std::declval<Value>()));
-    };
-
-    template<kumi::concepts::product_type T> struct bit_xor<T>
-    {
-      using type = decltype(kumi::bit_xor(std::declval<T>()));
-    };
-
-    template<kumi::concepts::monoid M, kumi::concepts::product_type T, typename Value = void>
-    using reduce_t = typename kumi::result::reduce<M, T, Value>::type;
-
-    template<typename F, kumi::concepts::monoid M, kumi::concepts::product_type T, typename Value = void>
-    using map_reduce_t = typename kumi::result::map_reduce<F, M, T, Value>::type;
-
-    template<kumi::concepts::product_type T, typename Value = void>
-    using sum_t = typename kumi::result::sum<T, Value>::type;
-
-    template<kumi::concepts::product_type T, typename Value = void>
-    using prod_t = typename kumi::result::prod<T, Value>::type;
-
-    template<kumi::concepts::product_type T, typename Value = void>
-    using bit_and_t = typename kumi::result::bit_and<T, Value>::type;
-
-    template<kumi::concepts::product_type T, typename Value = void>
-    using bit_or_t = typename kumi::result::bit_or<T, Value>::type;
-
-    template<kumi::concepts::product_type T, typename Value = void>
-    using bit_xor_t = typename kumi::result::bit_xor<T, Value>::type;
+    //! [bit_xor_t]
   }
 }

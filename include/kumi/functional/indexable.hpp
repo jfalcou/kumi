@@ -46,8 +46,8 @@ namespace kumi::function
     template<std::size_t... H, std::size_t... S>
     consteval auto impl(std::index_sequence<H...>, kumi::index_t<S>...) const noexcept
     {
-      return kumi::projection_map{kumi::_::digits(kumi::_::unflatten_index, std::make_index_sequence<sizeof...(S)>{},
-                                                  std::index_sequence<H, S...>{})...};
+      return kumi::projection_map{kumi::_::make_digits(
+        kumi::_::unflatten_index, std::make_index_sequence<sizeof...(S)>{}, std::index_sequence<H, S...>{})...};
     }
 
   public:
@@ -93,8 +93,8 @@ namespace kumi::function
     {
       constexpr auto N = (S + ... + 0ULL);
       return kumi::projection_map{
-        kumi::_::digits(kumi::_::container_of_index, std::make_index_sequence<N>{}, std::index_sequence<S...>{}),
-        kumi::_::digits(kumi::_::element_of_index, std::make_index_sequence<N>{}, std::index_sequence<S...>{})};
+        kumi::_::make_digits(kumi::_::container_of_index, std::make_index_sequence<N>{}, std::index_sequence<S...>{}),
+        kumi::_::make_digits(kumi::_::element_of_index, std::make_index_sequence<N>{}, std::index_sequence<S...>{})};
     }
 
   public:

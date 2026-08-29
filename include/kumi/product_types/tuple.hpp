@@ -31,7 +31,7 @@ namespace kumi
   //====================================================================================================================
   template<typename... Ts> struct tuple
   {
-    using binder_t = kumi::_::make_binder_t<std::make_index_sequence<sizeof...(Ts)>, Ts...>;
+    using binder_t = kumi::_::make_binder_t<std::index_sequence_for<Ts...>, Ts...>;
 
     static constexpr bool is_homogeneous = binder_t::is_homogeneous;
 
@@ -643,7 +643,7 @@ namespace kumi
     if constexpr (kumi::concepts::empty_product_type<T>) return kumi::tuple{};
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return tuple{get<I>(KUMI_FWD(t))...};
+        return kumi::tuple{get<I>(KUMI_FWD(t))...};
       }(std::make_index_sequence<kumi::size_v<T>>{});
   }
 
@@ -652,7 +652,7 @@ namespace kumi
   [[nodiscard]] KUMI_ABI constexpr auto to_tuple(S&& s)
   requires(!kumi::concepts::product_type<S>)
   {
-    constexpr auto N = kumi::container_size_v<S>;
+    constexpr std::size_t N = kumi::container_size_v<S>;
     if constexpr (N == 0) return kumi::tuple{};
     else
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
@@ -781,19 +781,19 @@ namespace kumi
 
   namespace result
   {
+    template<kumi::concepts::product_type T> using members_of_t = decltype(kumi::members_of(as<T>{}));
+
     template<kumi::concepts::product_type T> struct members_of
     {
-      using type = decltype(kumi::members_of(as<T>{}));
+      using type = kumi::result::members_of_t<T>;
     };
+
+    template<kumi::concepts::product_type T> using values_of_t = decltype(kumi::values_of(std::declval<T>()));
 
     template<kumi::concepts::product_type T> struct values_of
     {
-      using type = decltype(kumi::values_of(std::declval<T>()));
+      using type = kumi::result::values_of_t<T>;
     };
-
-    template<kumi::concepts::product_type T> using members_of_t = typename kumi::result::members_of<T>::type;
-
-    template<kumi::concepts::product_type T> using values_of_t = typename kumi::result::values_of<T>::type;
   }
 
   //====================================================================================================================

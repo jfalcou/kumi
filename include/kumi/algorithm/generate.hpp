@@ -13,7 +13,7 @@ namespace kumi
   namespace _
   {
     template<typename F, std::size_t... I>
-    KUMI_ABI constexpr decltype(auto) generate_(kumi::_::adl_tag_t, F&& f, std::index_sequence<I...>) noexcept
+    KUMI_HIDDEN_ABI constexpr decltype(auto) generate_(kumi::_::adl_tag_t, F&& f, std::index_sequence<I...>) noexcept
     {
       return kumi::tuple{kumi::invoke(KUMI_FWD(f), kumi::index<I>)...};
     }
@@ -201,32 +201,33 @@ namespace kumi
   namespace result
   {
     //! [generate_t]
+    template<std::size_t N, typename Function> using generate_t = decltype(kumi::generate<N>(std::declval<Function>()));
+
     template<std::size_t N, typename Function> struct generate
     {
-      using type = decltype(kumi::generate<N>(std::declval<Function>()));
+      using type = kumi::result::generate_t<N, Function>;
     };
-
-    template<std::size_t N, typename Function> using generate_t = typename kumi::result::generate<N, Function>::type;
 
     //! [generate_t]
 
     //! [fill_t]
+    template<std::size_t N, typename T> using fill_t = decltype(kumi::fill<N>(std::declval<T>()));
+
     template<std::size_t N, typename T> struct fill
     {
-      using type = decltype(kumi::fill<N>(std::declval<T>()));
+      using type = kumi::result::fill_t<N, T>;
     };
-
-    template<std::size_t N, typename T> using fill_t = typename kumi::result::fill<N, T>::type;
 
     //! [fill_t]
 
     //! [iota_t]
+    template<std::size_t N, typename T> using iota_t = decltype(kumi::iota<N>(std::declval<T>()));
+
     template<std::size_t N, typename T> struct iota
     {
-      using type = decltype(kumi::iota<N>(std::declval<T>()));
+      using type = kumi::result::iota_t<N, T>;
     };
 
-    template<std::size_t N, typename T> using iota_t = typename kumi::result::iota<N, T>::type;
     //! [iota_t]
   }
 }

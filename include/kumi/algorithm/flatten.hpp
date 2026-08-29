@@ -14,7 +14,7 @@ namespace kumi
     struct flatten_all_case_t
     {
       template<typename T, typename V, typename F, typename Self>
-      KUMI_ABI constexpr auto operator()(T&&, V&& v, F f, Self s) const
+      KUMI_HIDDEN_ABI constexpr auto operator()(T&&, V&& v, F f, Self s) const
       {
         using FV = kumi::result::field_value_of_t<V>;
         if constexpr (kumi::concepts::record_type<FV> && kumi::concepts::record_type<T>)
@@ -30,7 +30,7 @@ namespace kumi
 
     struct flatten_case_t
     {
-      template<typename T, typename V> KUMI_ABI constexpr auto operator()(T&&, V&& v, auto J) const
+      template<typename T, typename V> KUMI_HIDDEN_ABI constexpr auto operator()(T&&, V&& v, auto J) const
       {
         using FV = kumi::result::field_value_of_t<V>;
         if constexpr (kumi::concepts::record_type<FV> && kumi::concepts::record_type<T>)
@@ -47,13 +47,13 @@ namespace kumi
     inline constexpr flatten_case_t flatten_case{};
 
     template<typename T, std::size_t... I>
-    KUMI_ABI consteval auto flatten_projection_(kumi::_::adl_tag_t, std::index_sequence<I...>) noexcept
+    KUMI_HIDDEN_ABI consteval auto flatten_projection_(kumi::_::adl_tag_t, std::index_sequence<I...>) noexcept
     {
       return kumi::function::concatenater(kumi::index<kumi::function::size_or_v<kumi::stored_element_t<I, T>, 1>>...);
     }
 
     template<typename T, typename V, std::size_t... J, std::size_t... I>
-    KUMI_ABI constexpr auto flatten_(
+    KUMI_HIDDEN_ABI constexpr auto flatten_(
       kumi::_::adl_tag_t, T&& t, V visitor, std::index_sequence<J...>, std::index_sequence<I...>)
     {
       if constexpr (sizeof...(I) == 0) return kumi::builder<T>::make();
@@ -61,13 +61,14 @@ namespace kumi
     }
 
     template<typename T, typename V, typename F, typename S, std::size_t... I>
-    KUMI_ABI constexpr auto flatten_all_(kumi::_::adl_tag_t, T&& t, V visitor, F f, S self, std::index_sequence<I...>)
+    KUMI_HIDDEN_ABI constexpr auto flatten_all_(
+      kumi::_::adl_tag_t, T&& t, V visitor, F f, S self, std::index_sequence<I...>)
     {
       return kumi::builder<T>::make(visitor(KUMI_FWD(t), get<I>(KUMI_FWD(t)), f, self)...);
     }
 
     template<typename E, std::size_t... I>
-    KUMI_ABI constexpr auto compress_(kumi::_::adl_tag_t, E&& e, std::index_sequence<I...>)
+    KUMI_HIDDEN_ABI constexpr auto compress_(kumi::_::adl_tag_t, E&& e, std::index_sequence<I...>)
     {
       using V = kumi::result::field_value_of_t<E>;
       if constexpr (sizeof...(I) == 0 || kumi::concepts::empty_product_type<V>) return kumi::builder<V>::make();
@@ -384,48 +385,47 @@ namespace kumi
   namespace result
   {
     //! [compress_t]
+    template<kumi::concepts::product_type T> using compress_t = decltype(kumi::compress(std::declval<T>()));
+
     template<kumi::concepts::product_type T> struct compress
     {
-      using type = decltype(kumi::compress(std::declval<T>()));
+      using type = kumi::result::compress_t<T>;
     };
-
-    template<kumi::concepts::product_type T> using compress_t = typename kumi::result::compress<T>::type;
 
     //! [compress_t]
 
     //! [flatten_t]
+    template<kumi::concepts::product_type T> using flatten_t = decltype(kumi::flatten(std::declval<T>()));
+
     template<kumi::concepts::product_type T> struct flatten
     {
-      using type = decltype(kumi::flatten(std::declval<T>()));
+      using type = kumi::result::flatten_t<T>;
     };
-
-    template<kumi::concepts::product_type T> using flatten_t = typename kumi::result::flatten<T>::type;
 
     //! [flatten_t]
 
     //! [flatten_all_t]
-    template<kumi::concepts::product_type T, typename Func = void> struct flatten_all
-    {
-      using type = decltype(kumi::flatten_all(std::declval<T>(), std::declval<Func>()));
-    };
+    template<kumi::concepts::product_type T, typename... Func>
+    requires((sizeof...(Func) == 0) || (sizeof...(Func) == 1))
+    using flatten_all_t = decltype(kumi::flatten_all(std::declval<T>(), std::declval<Func>()...));
 
-    template<kumi::concepts::product_type T> struct flatten_all<T>
+    template<kumi::concepts::product_type T, typename... Func>
+    requires((sizeof...(Func) == 0) || (sizeof...(Func) == 1))
+    struct flatten_all
     {
-      using type = decltype(kumi::flatten_all(std::declval<T>()));
+      using type = kumi::result::flatten_all_t<T>;
     };
-
-    template<kumi::concepts::product_type T, typename Func = void>
-    using flatten_all_t = typename kumi::result::flatten_all<T, Func>::type;
 
     //! [flatten_all_t]
 
     //! [as_flat_ptr_t]
+    template<kumi::concepts::product_type T> using as_flat_ptr_t = decltype(kumi::as_flat_ptr(std::declval<T>()));
+
     template<kumi::concepts::product_type T> struct as_flat_ptr
     {
-      using type = decltype(kumi::as_flat_ptr(std::declval<T>()));
+      using type = kumi::result::as_flat_ptr_t<T>;
     };
 
-    template<kumi::concepts::product_type T> using as_flat_ptr_t = typename kumi::result::as_flat_ptr<T>::type;
     //! [as_flat_ptr_t]
   }
 }

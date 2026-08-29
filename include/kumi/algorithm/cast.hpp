@@ -12,7 +12,7 @@ namespace kumi
   namespace _
   {
     template<typename Target, typename T, std::size_t... I>
-    KUMI_ABI constexpr decltype(auto) member_cast_(kumi::_::adl_tag_t, T&& t, std::index_sequence<I...>)
+    KUMI_HIDDEN_ABI constexpr decltype(auto) member_cast_(kumi::_::adl_tag_t, T&& t, std::index_sequence<I...>)
     {
       return kumi::builder<T>::make(kumi::field_cast<Target>(get<I>(KUMI_FWD(t)))...);
     }
@@ -89,13 +89,14 @@ namespace kumi
   namespace result
   {
     //! [member_cast_t]
+    template<typename Target, kumi::concepts::product_type T>
+    using member_cast_t = decltype(kumi::member_cast<Target>(std::declval<T>()));
+
     template<typename Target, kumi::concepts::product_type T> struct member_cast
     {
-      using type = decltype(kumi::member_cast<Target>(std::declval<T>()));
+      using type = kumi::result::member_cast_t<Target, T>;
     };
 
-    template<typename Target, kumi::concepts::product_type T>
-    using member_cast_t = typename kumi::result::member_cast<Target, T>::type;
     //! [member_cast_t]
   }
 }

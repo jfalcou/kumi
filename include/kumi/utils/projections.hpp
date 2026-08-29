@@ -54,6 +54,8 @@ namespace kumi
   //====================================================================================================================
   template<auto... V> struct projection_map
   {
+    static_assert((kumi::concepts::projection<decltype(V)> && ...), "Invalid projections in projection_map definition");
+
     static constexpr bool is_projection_map = true;
 
     consteval projection_map() noexcept = default;
@@ -71,7 +73,7 @@ namespace kumi
     [[nodiscard]] KUMI_ABI static constexpr auto size() noexcept { return sizeof...(V); }
 
     /// Returns `true` if a kumi::projection_map contains 0 elements
-    [[nodiscard]] KUMI_ABI static constexpr auto empty() noexcept { return sizeof...(V) == 0; }
+    [[nodiscard]] KUMI_ABI static constexpr bool empty() noexcept { return sizeof...(V) == 0; }
 
     //==================================================================================================================
     //! @}
@@ -128,7 +130,7 @@ namespace kumi
     @tparam Ts  Type lists to build the projections with.
   **/
   //====================================================================================================================
-  template<concepts::projection... Ts> KUMI_CUDA projection_map(Ts...) -> projection_map<Ts{}...>;
+  template<kumi::concepts::projection... Ts> KUMI_CUDA projection_map(Ts...) -> projection_map<Ts{}...>;
 
   //====================================================================================================================
   /**
@@ -144,7 +146,7 @@ namespace kumi
     @include doc/infra/projections.cpp
   **/
   //====================================================================================================================
-  template<concepts::index... Ts> [[nodiscard]] KUMI_ABI consteval auto indexes(Ts...) noexcept
+  template<kumi::concepts::index... Ts> [[nodiscard]] KUMI_ABI consteval auto indexes(Ts...) noexcept
   {
     return kumi::projection_map<Ts{}...>{};
   }
@@ -182,22 +184,10 @@ namespace kumi
     @include doc/infra/projections.cpp
   **/
   //====================================================================================================================
-  template<concepts::identifier... Ts>
+  template<kumi::concepts::identifier... Ts>
   requires(kumi::all_uniques_v<Ts...>)
   [[nodiscard]] KUMI_ABI consteval auto identifiers(Ts...) noexcept
   {
     return kumi::projection_map<Ts{}...>{};
   }
-
-  //====================================================================================================================
-  // Specialisation to clearly signal errors due invalid projections
-  //====================================================================================================================
-  template<auto... Vs>
-  requires(!kumi::concepts::projection<decltype(Vs)> && ...)
-  struct projection_map<Vs...>
-  {
-    static_assert((kumi::concepts::projection<decltype(Vs)> && ...),
-                  "Invalid projections in projection_map definition");
-    projection_map(decltype(Vs)...) = delete;
-  };
 }

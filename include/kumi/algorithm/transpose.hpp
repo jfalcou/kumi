@@ -13,10 +13,10 @@ namespace kumi
   namespace _
   {
     template<typename T, std::size_t... I, std::size_t... J>
-    KUMI_ABI constexpr decltype(auto) transpose_extern_(kumi::_::adl_tag_t,
-                                                        T&& t,
-                                                        std::index_sequence<I...>,
-                                                        std::index_sequence<J...> is)
+    KUMI_HIDDEN_ABI constexpr decltype(auto) transpose_extern_(kumi::_::adl_tag_t,
+                                                               T&& t,
+                                                               std::index_sequence<I...>,
+                                                               std::index_sequence<J...> is)
     {
       return kumi::make_tuple(kumi::_::builder(KUMI_FWD(t), std::integral_constant<std::size_t, I>{}, is)...);
     }
@@ -98,12 +98,13 @@ namespace kumi
   namespace result
   {
     //! [transpose_t]
+    template<kumi::concepts::product_type T> using transpose_t = decltype(kumi::transpose(std::declval<T>()));
+
     template<kumi::concepts::product_type T> struct transpose
     {
-      using type = decltype(kumi::transpose(std::declval<T>()));
+      using type = kumi::result::transpose_t<T>;
     };
 
-    template<kumi::concepts::product_type T> using transpose_t = typename kumi::result::transpose<T>::type;
     //! [transpose_t]
   }
 }
