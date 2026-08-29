@@ -41,8 +41,8 @@ TTS_CASE("Check result::reorder_fields<record,Name...> behavior")
   TTS_TYPE_IS((kumi::result::reorder_t<record_t>), kumi::record<>);
 };
 
-TTS_CASE("Check reorder<I...>(record) behavior"){
-  {auto t = kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.4f, "d"_id = '5'};
+TTS_CASE("Check reorder<I...>(record) behavior")
+{{auto t = kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.4f, "d"_id = '5'};
 
 {
   auto s = kumi::reorder<0, 1, 2, 3>(t);
@@ -87,8 +87,8 @@ TTS_CASE("Check reorder<I...>(record) behavior"){
 }
 ;
 
-TTS_CASE("Check reorder_fields<Name...>(record) behavior"){
-  {auto t = kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.4f, "d"_id = '5'};
+TTS_CASE("Check reorder_fields<Name...>(record) behavior")
+{{auto t = kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.4f, "d"_id = '5'};
 
 {
   auto s = kumi::reorder_fields<"a"_id, "b"_id, "c"_id, "d"_id>(t);
@@ -133,8 +133,8 @@ TTS_CASE("Check reorder_fields<Name...>(record) behavior"){
 }
 ;
 
-TTS_CASE("Check reorder<I...>(record) constexpr behavior"){
-  {constexpr auto t = kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.4f, "d"_id = '5'};
+TTS_CASE("Check reorder<I...>(record) constexpr behavior")
+{{constexpr auto t = kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.4f, "d"_id = '5'};
 
 {
   constexpr auto s = kumi::reorder<0, 1, 2, 3>(t);
@@ -179,8 +179,8 @@ TTS_CASE("Check reorder<I...>(record) constexpr behavior"){
 }
 ;
 
-TTS_CASE("Check reorder_fields<Name...>(record) constexpr behavior"){
-  {constexpr auto t = kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.4f, "d"_id = '5'};
+TTS_CASE("Check reorder_fields<Name...>(record) constexpr behavior")
+{{constexpr auto t = kumi::record{"a"_id = 1, "b"_id = 2., "c"_id = 3.4f, "d"_id = '5'};
 
 {
   constexpr auto s = kumi::reorder_fields<"a"_id, "b"_id, "c"_id, "d"_id>(t);

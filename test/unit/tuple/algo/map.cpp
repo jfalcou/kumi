@@ -48,7 +48,8 @@ TTS_CASE("Check map(f, {}) behavior")
   TTS_EXPECT_NOT(was_run);
 };
 
-TTS_CASE("Check map(f, tuple) behavior"){{auto t = kumi::tuple{1, 2., 3.4f, '5'};
+TTS_CASE("Check map(f, tuple) behavior")
+{{auto t = kumi::tuple{1, 2., 3.4f, '5'};
 
 {
   auto s = kumi::map([](auto m) { return sizeof(m); }, t);
@@ -108,7 +109,8 @@ TTS_CASE("Check map(f, tuple) behavior"){{auto t = kumi::tuple{1, 2., 3.4f, '5'}
 }
 ;
 
-TTS_CASE("Check map(f, tuple) constexpr behavior"){{constexpr auto t = kumi::tuple{1, 2., 3.4f, '5'};
+TTS_CASE("Check map(f, tuple) constexpr behavior")
+{{constexpr auto t = kumi::tuple{1, 2., 3.4f, '5'};
 
 {
   constexpr auto s = kumi::map([](auto m) { return sizeof(m); }, t);
