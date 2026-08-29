@@ -4313,12 +4313,12 @@ namespace kumi
   namespace _
   {
     template<typename T, typename Pred, std::size_t... I>
-    KUMI_HIDDEN_ABI constexpr bool all_of_(kumi::_::adl_tag_t, T&& t, Pred p, std::index_sequence<I...>)
+    KUMI_HIDDEN_ABI constexpr auto all_of_(kumi::_::adl_tag_t, T&& t, Pred p, std::index_sequence<I...>)
     {
       return (kumi::invoke(p, get<I>(KUMI_FWD(t))) && ...);
     }
     template<typename T, typename Pred, std::size_t... I>
-    KUMI_HIDDEN_ABI constexpr bool any_of_(kumi::_::adl_tag_t, T&& t, Pred p, std::index_sequence<I...>)
+    KUMI_HIDDEN_ABI constexpr auto any_of_(kumi::_::adl_tag_t, T&& t, Pred p, std::index_sequence<I...>)
     {
       return (kumi::invoke(p, get<I>(KUMI_FWD(t))) || ...);
     }
@@ -4369,11 +4369,11 @@ namespace kumi
   struct none_of_t : private kumi::any_of_t
   {
     template<typename Pred, kumi::concepts::product_type T>
-    [[nodiscard]] KUMI_ABI constexpr bool operator()(T&& t, Pred p) const noexcept
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, Pred p) const noexcept
     {
       return !kumi::any_of_t::operator()(KUMI_FWD(t), p);
     }
-    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr bool operator()(T&& t) const noexcept
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
     {
       return !kumi::any_of_t::operator()(KUMI_FWD(t));
     }
