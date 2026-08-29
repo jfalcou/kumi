@@ -195,7 +195,7 @@ $(function(){initNavTree('group__generators_gaa9d6196838118af0a837160d8bbf532c.h
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaa9d6196838118af0a837160d8bbf532c">compress</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__generators_gaa9d6196838118af0a837160d8bbf532c_html_gaa9d6196838118af0a837160d8bbf532c"><div class="ttname"><a href="#gaa9d6196838118af0a837160d8bbf532c">kumi::compress</a></div><div class="ttdeci">constexpr compress_t compress</div><div class="ttdoc">Callable object converting a product type of product type into a single product type recursively,...</div><div class="ttdef"><b>Definition</b> flatten.hpp:203</div></div>
+<div class="ttc" id="agroup__generators_gaa9d6196838118af0a837160d8bbf532c_html_gaa9d6196838118af0a837160d8bbf532c"><div class="ttname"><a href="#gaa9d6196838118af0a837160d8bbf532c">kumi::compress</a></div><div class="ttdeci">constexpr compress_t compress</div><div class="ttdoc">Callable object converting a product type of product type into a single product type recursively,...</div><div class="ttdef"><b>Definition</b> flatten.hpp:204</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: Product type to process</li>
@@ -205,12 +205,12 @@ $(function(){initNavTree('group__generators_gaa9d6196838118af0a837160d8bbf532c.h
 <li>The resulting value of the application of <span class="tt">T0(...(Tn(values))) =&gt; T(values)</span></li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1compress.html">compress</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaa9d6196838118af0a837160d8bbf532c">kumi::compress</a>(std::declval&lt;T&gt;()));</div>
-<div class="line">    };</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>compress_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaa9d6196838118af0a837160d8bbf532c">kumi::compress</a>(std::declval&lt;T&gt;()));</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>compress_t = <span class="keyword">typename</span> kumi::result::compress&lt;T&gt;::type;</div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span>compress</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::compress_t&lt;T&gt;;</div>
+<div class="line">    };</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gaa9d6196838118af0a837160d8bbf532c" title="Callable object converting a product type of product type into a single product type recursively,...">kumi::compress</a></p>
 <h2 class="groupheader">Examples </h2>

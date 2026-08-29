@@ -210,13 +210,13 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 <li>A Product type containing all values of <span class="tt">t</span> which types satisfies <span class="tt">Pred</span>.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Pred, kumi::concepts::product_type T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1filter.html">filter</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga2c9b5ff6b698c7dcb0feb2da1679fa9b">kumi::filter&lt;Pred&gt;</a>(std::declval&lt;T&gt;()));</div>
-<div class="line">    };</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Pred, kumi::concepts::product_type T&gt;</div>
+<div class="line">    <span class="keyword">using </span>filter_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga2c9b5ff6b698c7dcb0feb2da1679fa9b">kumi::filter&lt;Pred&gt;</a>(std::declval&lt;T&gt;()));</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Pred, kumi::concepts::product_type T&gt;</div>
-<div class="line">    <span class="keyword">using </span>filter_t = <span class="keyword">typename</span> kumi::result::filter&lt;Pred, T&gt;::type;</div>
+<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Pred, kumi::concepts::product_type T&gt; <span class="keyword">struct </span>filter</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::filter_t&lt;Pred, T&gt;;</div>
+<div class="line">    };</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga2c9b5ff6b698c7dcb0feb2da1679fa9b" title="Callable object filtering a product type over a predicate.">kumi::filter</a></p>
 <h2 class="groupheader">Examples </h2>

@@ -206,12 +206,14 @@ $(function(){initNavTree('group__transforms_ga992364930a4a5a5b64b26730773536ab.h
 <li>The value returned by f.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, kumi::concepts::record_type R&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1apply__field.html">apply_field</a></div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, concepts::record_type R&gt;</div>
+<div class="line">    <span class="keyword">using </span>apply_field_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga992364930a4a5a5b64b26730773536ab">kumi::apply_field</a>(std::declval&lt;Function&gt;(), std::declval&lt;R&gt;()));</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, kumi::concepts::record_type R&gt; <span class="keyword">struct </span>apply_field</div>
 <div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga992364930a4a5a5b64b26730773536ab">kumi::apply_field</a>(std::declval&lt;Function&gt;(), std::declval&lt;R&gt;()));</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::apply_field_t&lt;Function, R&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, concepts::record_type R&gt; <span class="keyword">using </span>apply_field_t = <span class="keyword">typename</span> apply_field&lt;Function, R&gt;::type;</div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga992364930a4a5a5b64b26730773536ab" title="Callable object invoking the callable object f with the elements of the product type unrolled as argu...">kumi::apply_field</a></p>
 <h2 class="groupheader">Example </h2>
 <h3 class="groupheader">Record </h3>
@@ -228,7 +230,7 @@ $(function(){initNavTree('group__transforms_ga992364930a4a5a5b64b26730773536ab.h
 <div class="line">    {</div>
 <div class="line">      os &lt;&lt; <span class="charliteral">&#39;[&#39;</span>;</div>
 <div class="line">      std::size_t n{0};</div>
-<div class="line">      ((os &lt;&lt; args &lt;&lt; (++n != <a class="code hl_struct" href="structkumi_1_1size.html">kumi::size&lt;Record&gt;::value</a> ? <span class="stringliteral">&quot;, &quot;</span> : <span class="stringliteral">&quot;&quot;</span>)), ...);</div>
+<div class="line">      ((os &lt;&lt; args &lt;&lt; (++n != kumi::size&lt;Record&gt;::value ? <span class="stringliteral">&quot;, &quot;</span> : <span class="stringliteral">&quot;&quot;</span>)), ...);</div>
 <div class="line">      os &lt;&lt; <span class="charliteral">&#39;]&#39;</span>;</div>
 <div class="line">    }, t</div>
 <div class="line">  );</div>
@@ -245,7 +247,6 @@ $(function(){initNavTree('group__transforms_ga992364930a4a5a5b64b26730773536ab.h
 <div class="line">  print(std::cout, r);</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
-<div class="ttc" id="astructkumi_1_1size_html"><div class="ttname"><a href="structkumi_1_1size.html">kumi::size</a></div><div class="ttdoc">Computes the number of elements of a kumi::product_type.</div><div class="ttdef"><b>Definition</b> traits.hpp:120</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

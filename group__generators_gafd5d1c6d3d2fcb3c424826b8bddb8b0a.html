@@ -209,12 +209,12 @@ template&lt;std::size_t N&gt; </div>
 <li>A tuple containing <span class="tt">N</span> copies of <span class="tt">v</span></li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, <span class="keyword">typename</span> T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1fill.html">fill</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gafd5d1c6d3d2fcb3c424826b8bddb8b0a">kumi::fill&lt;N&gt;</a>(std::declval&lt;T&gt;()));</div>
-<div class="line">    };</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, <span class="keyword">typename</span> T&gt; <span class="keyword">using </span>fill_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gafd5d1c6d3d2fcb3c424826b8bddb8b0a">kumi::fill&lt;N&gt;</a>(std::declval&lt;T&gt;()));</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, <span class="keyword">typename</span> T&gt; <span class="keyword">using </span>fill_t = <span class="keyword">typename</span> kumi::result::fill&lt;N, T&gt;::type;</div>
+<div class="line">    <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, <span class="keyword">typename</span> T&gt; <span class="keyword">struct </span>fill</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::fill_t&lt;N, T&gt;;</div>
+<div class="line">    };</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gafd5d1c6d3d2fcb3c424826b8bddb8b0a" title="Callable object creating a kumi::tuple containing N copies of v.">kumi::fill</a></p>
 <h2 class="groupheader">Example </h2>

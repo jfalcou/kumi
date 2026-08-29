@@ -200,7 +200,7 @@ $(function(){initNavTree('group__generators_ga71c21174289ba175a8d3d4b170cec05f.h
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, product_type... Ts&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga71c21174289ba175a8d3d4b170cec05f">zip</a>(T &amp;&amp; t, Ts &amp;&amp;... ts);</div>
-<div class="ttc" id="agroup__generators_ga71c21174289ba175a8d3d4b170cec05f_html_ga71c21174289ba175a8d3d4b170cec05f"><div class="ttname"><a href="#ga71c21174289ba175a8d3d4b170cec05f">kumi::zip</a></div><div class="ttdeci">constexpr zip_t zip</div><div class="ttdoc">Callable object constructing a tuple where the ith element is the product type of all ith elements of...</div><div class="ttdef"><b>Definition</b> zip.hpp:146</div></div>
+<div class="ttc" id="agroup__generators_ga71c21174289ba175a8d3d4b170cec05f_html_ga71c21174289ba175a8d3d4b170cec05f"><div class="ttname"><a href="#ga71c21174289ba175a8d3d4b170cec05f">kumi::zip</a></div><div class="ttdeci">constexpr zip_t zip</div><div class="ttdoc">Callable object constructing a tuple where the ith element is the product type of all ith elements of...</div><div class="ttdef"><b>Definition</b> zip.hpp:152</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: Product type to convert</li>
@@ -211,13 +211,14 @@ $(function(){initNavTree('group__generators_ga71c21174289ba175a8d3d4b170cec05f.h
 <li>The tuple of all combination of elements from <span class="tt">t0</span>, <span class="tt">ts</span>...</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T0, kumi::concepts::sized_product_type&lt;kumi::size_v&lt;T0&gt;&gt;... Ts&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1zip.html">zip</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga71c21174289ba175a8d3d4b170cec05f">kumi::zip</a>(std::declval&lt;T0&gt;(), std::declval&lt;Ts&gt;()...));</div>
-<div class="line">    };</div>
-<div class="line"> </div>
+<div class="fragment"><div class="line">    <span class="comment">//</span></div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T0, kumi::concepts::product_type... Ts&gt;</div>
-<div class="line">    <span class="keyword">using </span>zip_t = <span class="keyword">typename</span> kumi::result::zip&lt;T0, Ts...&gt;::type;</div>
+<div class="line">    <span class="keyword">using </span>zip_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga71c21174289ba175a8d3d4b170cec05f">kumi::zip</a>(std::declval&lt;T0&gt;(), std::declval&lt;Ts&gt;()...));</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T0, kumi::concepts::sized_product_type&lt;kumi::size_v&lt;T0&gt;&gt;... Ts&gt; <span class="keyword">struct </span>zip</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::zip_t&lt;T0, Ts...&gt;;</div>
+<div class="line">    };</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga71c21174289ba175a8d3d4b170cec05f" title="Callable object constructing a tuple where the ith element is the product type of all ith elements of...">kumi::zip</a></p>
 <h2 class="groupheader">Examples </h2>

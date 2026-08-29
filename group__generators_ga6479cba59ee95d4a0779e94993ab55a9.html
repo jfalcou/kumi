@@ -204,12 +204,12 @@ $(function(){initNavTree('group__generators_ga6479cba59ee95d4a0779e94993ab55a9.h
 <li>A product type containing elements of <span class="tt">t</span> with consecutive duplicates removed.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1unique.html">unique</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga6479cba59ee95d4a0779e94993ab55a9">kumi::unique</a>(std::declval&lt;T&gt;()));</div>
-<div class="line">    };</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>unique_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga6479cba59ee95d4a0779e94993ab55a9">kumi::unique</a>(std::declval&lt;T&gt;()));</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>unique_t = <span class="keyword">typename</span> kumi::result::unique&lt;T&gt;::type;</div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span>unique</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::unique_t&lt;T&gt;;</div>
+<div class="line">    };</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga6479cba59ee95d4a0779e94993ab55a9" title="Callable object returning a product type with consecutive duplicate types removed (pairwise uniquenes...">kumi::unique</a></p>
 <h2 class="groupheader">Examples </h2>

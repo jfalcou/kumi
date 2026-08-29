@@ -214,13 +214,13 @@ template&lt;std::size_t... I&gt; </div>
 <li>A product type with the type of <span class="tt">t</span> with elements equal to get&lt;Idx&gt;(t) for each given index.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::size_t... Idx&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1reorder.html">reorder</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga32af967d7f453426ccd564d3a0b6c689">kumi::reorder</a>&lt;Idx...&gt;(std::declval&lt;T&gt;()));</div>
-<div class="line">    };</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::size_t... Idx&gt;</div>
+<div class="line">    <span class="keyword">using </span>reorder_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga32af967d7f453426ccd564d3a0b6c689">kumi::reorder</a>&lt;Idx...&gt;(std::declval&lt;T&gt;()));</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::size_t... Idx&gt;</div>
-<div class="line">    <span class="keyword">using </span>reorder_t = <span class="keyword">typename</span> kumi::result::reorder&lt;T, Idx...&gt;::type;</div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::size_t... Idx&gt; <span class="keyword">struct </span>reorder</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::reorder_t&lt;T, Idx...&gt;;</div>
+<div class="line">    };</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga32af967d7f453426ccd564d3a0b6c689" title="Callable object reordering elements of a product type.">kumi::reorder</a></p>
 <h2 class="groupheader">Examples </h2>

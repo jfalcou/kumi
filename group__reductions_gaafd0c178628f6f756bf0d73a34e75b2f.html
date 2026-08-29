@@ -205,12 +205,13 @@ $(function(){initNavTree('group__reductions_gaafd0c178628f6f756bf0d73a34e75b2f.h
 <li>The minimum value of <span class="tt">f</span> over all elements of a flattened version of <span class="tt">t</span></li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> F&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1max__flat.html">max_flat</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(kumi::max_flat(std::declval&lt;T&gt;(), std::declval&lt;F&gt;()));</div>
-<div class="line">    };</div>
+<div class="fragment"><div class="line">    <span class="comment">//</span></div>
+<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> F&gt; <span class="keyword">using </span>max_flat_t = <span class="keyword">decltype</span>(kumi::max_flat(std::declval&lt;T&gt;(), std::declval&lt;F&gt;()));</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> F&gt; <span class="keyword">using </span>max_flat_t = <span class="keyword">typename</span> kumi::result::max_flat&lt;T, F&gt;::type;</div>
+<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> F&gt; <span class="keyword">struct </span>max_flat</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::max_flat_t&lt;T, F&gt;;</div>
+<div class="line">    };</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to kumi::max_flat</p>
 <h2 class="groupheader">Examples </h2>
@@ -260,17 +261,16 @@ $(function(){initNavTree('group__reductions_gaafd0c178628f6f756bf0d73a34e75b2f.h
 <li>The minimum value of all elements of <span class="tt">t</span></li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> F = <span class="keywordtype">void</span>&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1min.html">min</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaafd0c178628f6f756bf0d73a34e75b2f">kumi::min</a>(std::declval&lt;T&gt;(), std::declval&lt;F&gt;()));</div>
-<div class="line">    };</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... F&gt;</div>
+<div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(F) == 0) || (<span class="keyword">sizeof</span>...(F) == 1))</div>
+<div class="line">    <span class="keyword">using</span> min_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaafd0c178628f6f756bf0d73a34e75b2f">kumi::min</a>(std::declval&lt;T&gt;(), std::declval&lt;F&gt;()...));</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1min.html">min</a>&lt;T, void&gt;</div>
+<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... F&gt;</div>
+<div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(F) == 0) || (<span class="keyword">sizeof</span>...(F) == 1))</div>
+<div class="line">    <span class="keyword">struct</span> min</div>
 <div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaafd0c178628f6f756bf0d73a34e75b2f">kumi::min</a>(std::declval&lt;T&gt;()));</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::min_t&lt;T, F...&gt;;</div>
 <div class="line">    };</div>
-<div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> F = <span class="keywordtype">void</span>&gt; <span class="keyword">using </span>min_t = <span class="keyword">typename</span> kumi::result::min&lt;T, F&gt;::type;</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gaafd0c178628f6f756bf0d73a34e75b2f" title="Callable object computing the maximum value of applications of f to all elements of kumi::flatten_all...">kumi::min</a></p>
 <h2 class="groupheader">Examples </h2>
@@ -318,12 +318,13 @@ $(function(){initNavTree('group__reductions_gaafd0c178628f6f756bf0d73a34e75b2f.h
 <li>The minimum value of <span class="tt">f</span> over all elements of a flattened version of <span class="tt">t</span></li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> F&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1min__flat.html">min_flat</a></div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> F&gt; <span class="keyword">using </span>min_flat_t = <span class="keyword">decltype</span>(kumi::min_flat(std::declval&lt;T&gt;(), std::declval&lt;F&gt;()));</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> F&gt; <span class="keyword">struct </span>min_flat</div>
 <div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(kumi::min_flat(std::declval&lt;T&gt;(), std::declval&lt;F&gt;()));</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::min_flat_t&lt;T, F&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> F&gt; <span class="keyword">using </span>min_flat_t = <span class="keyword">typename</span> kumi::result::min_flat&lt;T, F&gt;::type;</div>
 </div><!-- fragment --><p>Computes the return type of a call to kumi::min_flat</p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>

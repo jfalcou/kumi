@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['unique_0',['unique',['../group__generators_ga6479cba59ee95d4a0779e94993ab55a9.html#ga6479cba59ee95d4a0779e94993ab55a9',1,'kumi']]],
-  ['uniqued_1',['uniqued',['../group__functional.html#ga011bc82908c9e504b2cbffc2767251be',1,'kumi::function']]],
-  ['uniquer_2',['uniquer',['../group__functional.html#gab9c4d3ea483d68225e3a2783586c4847',1,'kumi::function']]]
+  ['tiler_0',['tiler',['../group__functional_gaed8fd6fecbe985d0a7be0735ea44b79f.html#gaed8fd6fecbe985d0a7be0735ea44b79f',1,'kumi::function']]],
+  ['tiles_1',['tiles',['../group__generators_ga3d1b4a8309328d854d7b6234fde3aeb0.html#ga3d1b4a8309328d854d7b6234fde3aeb0',1,'kumi']]],
+  ['transpose_2',['transpose',['../group__generators_gaef527bdd76c70e7fded23a9759428f5c.html#gaef527bdd76c70e7fded23a9759428f5c',1,'kumi']]]
 ];

@@ -208,18 +208,17 @@ $(function(){initNavTree('group__reductions_gac7fc6bc4e0aff96cca71f0a64b0f2aa1.h
 <li>The resulting value of the application of the function <span class="tt">f( f( f(init, <a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137" title="Extracts the Ith field from a kumi::record.">get</a>&lt;0&gt;(t)), ...), <a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137" title="Extracts the Ith field from a kumi::record.">get</a>&lt;N-1&gt;(t))</span></li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, kumi::concepts::product_type T, <span class="keyword">typename</span> Value = <span class="keywordtype">void</span>&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1fold__left.html">fold_left</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gac7fc6bc4e0aff96cca71f0a64b0f2aa1">kumi::fold_left</a>(std::declval&lt;Function&gt;(), std::declval&lt;T&gt;(), std::declval&lt;Value&gt;()));</div>
-<div class="line">    };</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, kumi::concepts::product_type T, <span class="keyword">typename</span>... Value&gt;</div>
+<div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(Value) == 0) || (<span class="keyword">sizeof</span>...(Value) == 1))</div>
+<div class="line">    <span class="keyword">using</span> fold_left_t =</div>
+<div class="line">      <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gac7fc6bc4e0aff96cca71f0a64b0f2aa1">kumi::fold_left</a>(std::declval&lt;Function&gt;(), std::declval&lt;T&gt;(), std::declval&lt;Value&gt;()...));</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, kumi::concepts::product_type T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1fold__left.html">fold_left</a>&lt;Function, T&gt;</div>
+<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, kumi::concepts::product_type T, <span class="keyword">typename</span>... Value&gt;</div>
+<div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(Value) == 0) || (<span class="keyword">sizeof</span>...(Value) == 1))</div>
+<div class="line">    <span class="keyword">struct</span> fold_left</div>
 <div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gac7fc6bc4e0aff96cca71f0a64b0f2aa1">kumi::fold_left</a>(std::declval&lt;Function&gt;(), std::declval&lt;T&gt;()));</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::fold_left_t&lt;Function, T, Value...&gt;;</div>
 <div class="line">    };</div>
-<div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, kumi::concepts::product_type T, <span class="keyword">typename</span> Value = <span class="keywordtype">void</span>&gt;</div>
-<div class="line">    <span class="keyword">using </span>fold_left_t = <span class="keyword">typename</span> kumi::result::fold_left&lt;Function, T, Value&gt;::type;</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gac7fc6bc4e0aff96cca71f0a64b0f2aa1" title="Callable object computing the generalized combination of all elements using a tail recursive call.">kumi::fold_left</a></p>
 <h2 class="groupheader">Examples </h2>

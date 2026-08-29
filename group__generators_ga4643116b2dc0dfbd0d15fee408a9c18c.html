@@ -210,13 +210,13 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 <li>A tuple containing the product type of all values which types satisfies <span class="tt">Pred</span> in <span class="tt">t</span> and the product type of all values which types does not satisfy <span class="tt">Pred</span>.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Pred, kumi::concepts::product_type T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1partition.html">partition</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga4643116b2dc0dfbd0d15fee408a9c18c">kumi::partition&lt;Pred&gt;</a>(std::declval&lt;T&gt;()));</div>
-<div class="line">    };</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Pred, kumi::concepts::product_type T&gt;</div>
+<div class="line">    <span class="keyword">using </span>partition_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga4643116b2dc0dfbd0d15fee408a9c18c">kumi::partition&lt;Pred&gt;</a>(std::declval&lt;T&gt;()));</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Pred, kumi::concepts::product_type T&gt;</div>
-<div class="line">    <span class="keyword">using </span>partition_t = <span class="keyword">typename</span> kumi::result::partition&lt;Pred, T&gt;::type;</div>
+<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Pred, kumi::concepts::product_type T&gt; <span class="keyword">struct </span>partition</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::partition_t&lt;Pred, T&gt;;</div>
+<div class="line">    };</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga4643116b2dc0dfbd0d15fee408a9c18c" title="Callable object partitionning a product type over a predicate.">kumi::partition</a></p>
 <h2 class="groupheader">Examples </h2>

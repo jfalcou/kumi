@@ -1,19 +1,19 @@
 {
-    "branch_covered": 659,
-    "branch_percent": 67.2,
-    "branch_total": 981,
+    "branch_covered": 654,
+    "branch_percent": 76.1,
+    "branch_total": 859,
     "files": [
         {
-            "branch_covered": 2,
+            "branch_covered": 4,
             "branch_percent": 100.0,
-            "branch_total": 2,
+            "branch_total": 4,
             "filename": "include/kumi/algorithm/apply.hpp",
-            "function_covered": 0,
-            "function_percent": null,
-            "function_total": 0,
-            "line_covered": 5,
+            "function_covered": 11,
+            "function_percent": 100.0,
+            "function_total": 11,
+            "line_covered": 6,
             "line_percent": 100.0,
-            "line_total": 5
+            "line_total": 6
         },
         {
             "branch_covered": 0,
@@ -28,28 +28,28 @@
             "line_total": 4
         },
         {
-            "branch_covered": 0,
-            "branch_percent": null,
-            "branch_total": 0,
+            "branch_covered": 3,
+            "branch_percent": 100.0,
+            "branch_total": 3,
             "filename": "include/kumi/algorithm/cartesian_product.hpp",
-            "function_covered": 0,
-            "function_percent": null,
-            "function_total": 0,
-            "line_covered": 3,
+            "function_covered": 7,
+            "function_percent": 100.0,
+            "function_total": 7,
+            "line_covered": 4,
             "line_percent": 100.0,
-            "line_total": 3
+            "line_total": 4
         },
         {
-            "branch_covered": 0,
-            "branch_percent": null,
-            "branch_total": 0,
+            "branch_covered": 3,
+            "branch_percent": 100.0,
+            "branch_total": 3,
             "filename": "include/kumi/algorithm/cast.hpp",
-            "function_covered": 0,
-            "function_percent": null,
-            "function_total": 0,
-            "line_covered": 3,
+            "function_covered": 3,
+            "function_percent": 100.0,
+            "function_total": 3,
+            "line_covered": 4,
             "line_percent": 100.0,
-            "line_total": 3
+            "line_total": 4
         },
         {
             "branch_covered": 0,
@@ -68,12 +68,12 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kumi/algorithm/contains.hpp",
-            "function_covered": 0,
-            "function_percent": null,
-            "function_total": 0,
-            "line_covered": 7,
+            "function_covered": 20,
+            "function_percent": 100.0,
+            "function_total": 20,
+            "line_covered": 9,
             "line_percent": 100.0,
-            "line_total": 7
+            "line_total": 9
         },
         {
             "branch_covered": 0,
@@ -100,88 +100,88 @@
             "line_total": 7
         },
         {
-            "branch_covered": 0,
-            "branch_percent": null,
-            "branch_total": 0,
+            "branch_covered": 80,
+            "branch_percent": 100.0,
+            "branch_total": 80,
             "filename": "include/kumi/algorithm/flatten.hpp",
-            "function_covered": 0,
-            "function_percent": null,
-            "function_total": 0,
-            "line_covered": 25,
+            "function_covered": 573,
+            "function_percent": 100.0,
+            "function_total": 573,
+            "line_covered": 30,
             "line_percent": 100.0,
-            "line_total": 25
+            "line_total": 30
         },
         {
-            "branch_covered": 4,
+            "branch_covered": 8,
             "branch_percent": 100.0,
-            "branch_total": 4,
+            "branch_total": 8,
             "filename": "include/kumi/algorithm/fold.hpp",
-            "function_covered": 0,
-            "function_percent": null,
-            "function_total": 0,
-            "line_covered": 14,
+            "function_covered": 12,
+            "function_percent": 100.0,
+            "function_total": 12,
+            "line_covered": 16,
             "line_percent": 100.0,
-            "line_total": 14
+            "line_total": 16
         },
         {
-            "branch_covered": 51,
+            "branch_covered": 9,
             "branch_percent": 100.0,
-            "branch_total": 51,
+            "branch_total": 9,
             "filename": "include/kumi/algorithm/for_each.hpp",
-            "function_covered": 0,
-            "function_percent": null,
-            "function_total": 0,
-            "line_covered": 20,
+            "function_covered": 221,
+            "function_percent": 100.0,
+            "function_total": 221,
+            "line_covered": 18,
             "line_percent": 100.0,
-            "line_total": 20
+            "line_total": 18
         },
         {
             "branch_covered": 0,
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kumi/algorithm/generate.hpp",
-            "function_covered": 43,
+            "function_covered": 58,
             "function_percent": 100.0,
-            "function_total": 43,
-            "line_covered": 8,
+            "function_total": 58,
+            "line_covered": 9,
             "line_percent": 100.0,
-            "line_total": 8
+            "line_total": 9
         },
         {
             "branch_covered": 0,
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kumi/algorithm/inner_product.hpp",
-            "function_covered": 0,
-            "function_percent": null,
-            "function_total": 0,
+            "function_covered": 6,
+            "function_percent": 100.0,
+            "function_total": 6,
+            "line_covered": 15,
+            "line_percent": 100.0,
+            "line_total": 15
+        },
+        {
+            "branch_covered": 13,
+            "branch_percent": 100.0,
+            "branch_total": 13,
+            "filename": "include/kumi/algorithm/map.hpp",
+            "function_covered": 69,
+            "function_percent": 100.0,
+            "function_total": 69,
             "line_covered": 13,
             "line_percent": 100.0,
             "line_total": 13
-        },
-        {
-            "branch_covered": 10,
-            "branch_percent": 100.0,
-            "branch_total": 10,
-            "filename": "include/kumi/algorithm/map.hpp",
-            "function_covered": 0,
-            "function_percent": null,
-            "function_total": 0,
-            "line_covered": 11,
-            "line_percent": 100.0,
-            "line_total": 11
         },
         {
             "branch_covered": 0,
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kumi/algorithm/minmax.hpp",
-            "function_covered": 0,
-            "function_percent": null,
-            "function_total": 0,
-            "line_covered": 24,
+            "function_covered": 81,
+            "function_percent": 100.0,
+            "function_total": 81,
+            "line_covered": 28,
             "line_percent": 100.0,
-            "line_total": 24
+            "line_total": 28
         },
         {
             "branch_covered": 0,
@@ -196,52 +196,52 @@
             "line_total": 6
         },
         {
-            "branch_covered": 83,
-            "branch_percent": 44.1,
-            "branch_total": 188,
+            "branch_covered": 28,
+            "branch_percent": 77.8,
+            "branch_total": 36,
             "filename": "include/kumi/algorithm/predicates.hpp",
-            "function_covered": 24,
+            "function_covered": 77,
             "function_percent": 100.0,
-            "function_total": 24,
-            "line_covered": 18,
+            "function_total": 77,
+            "line_covered": 21,
             "line_percent": 100.0,
-            "line_total": 18
+            "line_total": 21
         },
         {
-            "branch_covered": 0,
-            "branch_percent": null,
-            "branch_total": 0,
+            "branch_covered": 9,
+            "branch_percent": 100.0,
+            "branch_total": 9,
             "filename": "include/kumi/algorithm/push_pop.hpp",
-            "function_covered": 0,
-            "function_percent": null,
-            "function_total": 0,
-            "line_covered": 8,
+            "function_covered": 20,
+            "function_percent": 100.0,
+            "function_total": 20,
+            "line_covered": 10,
             "line_percent": 100.0,
-            "line_total": 8
+            "line_total": 10
         },
         {
             "branch_covered": 0,
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kumi/algorithm/reduce.hpp",
-            "function_covered": 0,
-            "function_percent": null,
-            "function_total": 0,
-            "line_covered": 27,
+            "function_covered": 52,
+            "function_percent": 100.0,
+            "function_total": 52,
+            "line_covered": 29,
             "line_percent": 100.0,
-            "line_total": 27
+            "line_total": 29
         },
         {
-            "branch_covered": 0,
-            "branch_percent": null,
-            "branch_total": 0,
+            "branch_covered": 14,
+            "branch_percent": 100.0,
+            "branch_total": 14,
             "filename": "include/kumi/algorithm/reorder.hpp",
-            "function_covered": 0,
-            "function_percent": null,
-            "function_total": 0,
-            "line_covered": 6,
+            "function_covered": 90,
+            "function_percent": 100.0,
+            "function_total": 90,
+            "line_covered": 8,
             "line_percent": 100.0,
-            "line_total": 6
+            "line_total": 8
         },
         {
             "branch_covered": 0,
@@ -272,36 +272,36 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kumi/algorithm/scan.hpp",
-            "function_covered": 32,
+            "function_covered": 64,
             "function_percent": 100.0,
-            "function_total": 32,
-            "line_covered": 30,
+            "function_total": 64,
+            "line_covered": 34,
             "line_percent": 100.0,
-            "line_total": 30
+            "line_total": 34
         },
         {
             "branch_covered": 0,
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kumi/algorithm/tiler.hpp",
-            "function_covered": 0,
-            "function_percent": null,
-            "function_total": 0,
-            "line_covered": 2,
+            "function_covered": 28,
+            "function_percent": 100.0,
+            "function_total": 28,
+            "line_covered": 3,
             "line_percent": 100.0,
-            "line_total": 2
+            "line_total": 3
         },
         {
-            "branch_covered": 0,
-            "branch_percent": null,
-            "branch_total": 0,
+            "branch_covered": 1,
+            "branch_percent": 100.0,
+            "branch_total": 1,
             "filename": "include/kumi/algorithm/transpose.hpp",
-            "function_covered": 0,
-            "function_percent": null,
-            "function_total": 0,
-            "line_covered": 6,
+            "function_covered": 4,
+            "function_percent": 100.0,
+            "function_total": 4,
+            "line_covered": 7,
             "line_percent": 100.0,
-            "line_total": 6
+            "line_total": 7
         },
         {
             "branch_covered": 0,
@@ -316,16 +316,16 @@
             "line_total": 5
         },
         {
-            "branch_covered": 7,
+            "branch_covered": 11,
             "branch_percent": 100.0,
-            "branch_total": 7,
+            "branch_total": 11,
             "filename": "include/kumi/algorithm/zip.hpp",
-            "function_covered": 14,
+            "function_covered": 24,
             "function_percent": 100.0,
-            "function_total": 14,
-            "line_covered": 15,
+            "function_total": 24,
+            "line_covered": 16,
             "line_percent": 100.0,
-            "line_total": 15
+            "line_total": 16
         },
         {
             "branch_covered": 0,
@@ -388,21 +388,21 @@
             "line_total": 4
         },
         {
-            "branch_covered": 64,
-            "branch_percent": 84.2,
-            "branch_total": 76,
+            "branch_covered": 58,
+            "branch_percent": 90.6,
+            "branch_total": 64,
             "filename": "include/kumi/functional/bind.hpp",
             "function_covered": 0,
             "function_percent": null,
             "function_total": 0,
-            "line_covered": 9,
+            "line_covered": 8,
             "line_percent": 100.0,
-            "line_total": 9
+            "line_total": 8
         },
         {
-            "branch_covered": 70,
-            "branch_percent": 60.3,
-            "branch_total": 116,
+            "branch_covered": 64,
+            "branch_percent": 66.7,
+            "branch_total": 96,
             "filename": "include/kumi/functional/functors.hpp",
             "function_covered": 0,
             "function_percent": null,
@@ -412,9 +412,9 @@
             "line_total": 8
         },
         {
-            "branch_covered": 42,
+            "branch_covered": 23,
             "branch_percent": 100.0,
-            "branch_total": 42,
+            "branch_total": 23,
             "filename": "include/kumi/functional/invoke.hpp",
             "function_covered": 0,
             "function_percent": null,
@@ -532,12 +532,12 @@
             "line_total": 3
         }
     ],
-    "function_covered": 1024,
+    "function_covered": 2331,
     "function_percent": 100.0,
-    "function_total": 1024,
+    "function_total": 2331,
     "gcovr/summary_format_version": "0.6",
-    "line_covered": 578,
-    "line_percent": 98.5,
-    "line_total": 587,
+    "line_covered": 612,
+    "line_percent": 98.6,
+    "line_total": 621,
     "root": "../../.."
 }

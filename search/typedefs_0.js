@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['type_0',['type',['../structkumi_1_1as.html#ae0ed33d79b1955359c95eb5e572f7305',1,'kumi::as::type'],['../structkumi_1_1identifier.html#aae1d9bcd971d43f8831ba98f5d7e2678',1,'kumi::identifier::type'],['../structkumi_1_1name.html#a9bf8b825d5ec4deb4d1cb8b5c23f773f',1,'kumi::name::type']]]
+  ['container_5ftype_5ft_0',['container_type_t',['../group__traits_gab1e24accb210d4757ba7701ed56ad6cc.html#gab1e24accb210d4757ba7701ed56ad6cc',1,'kumi']]]
 ];

@@ -204,11 +204,13 @@ $(function(){initNavTree('group__queries_gae635e0c094282372ff5393840b6f52c2.html
 <li>A reference to the last element of the product type <span class="tt">t</span>.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1back.html">back</a> : kumi::stored_member&lt;kumi::size_v&lt;T&gt; - 1, T&gt;</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>back_t = kumi::stored_member_t&lt;kumi::size_v&lt;T&gt; - 1, T&gt;;</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span>back</div>
 <div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::back_t&lt;T&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>back_t = <span class="keyword">typename</span> kumi::result::back&lt;T&gt;::type;</div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gae635e0c094282372ff5393840b6f52c2" title="Callable object used to retrieve the back of a product type.">kumi::back</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>

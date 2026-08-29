@@ -194,7 +194,7 @@ $(function(){initNavTree('group__generators_ga49acccc42ec8af7b96b63e8f38796df2.h
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga49acccc42ec8af7b96b63e8f38796df2">flatten</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__generators_ga49acccc42ec8af7b96b63e8f38796df2_html_ga49acccc42ec8af7b96b63e8f38796df2"><div class="ttname"><a href="#ga49acccc42ec8af7b96b63e8f38796df2">kumi::flatten</a></div><div class="ttdeci">constexpr flatten_t flatten</div><div class="ttdoc">Callable object converting a product type of product types into a product type of all elements.</div><div class="ttdef"><b>Definition</b> flatten.hpp:259</div></div>
+<div class="ttc" id="agroup__generators_ga49acccc42ec8af7b96b63e8f38796df2_html_ga49acccc42ec8af7b96b63e8f38796df2"><div class="ttname"><a href="#ga49acccc42ec8af7b96b63e8f38796df2">kumi::flatten</a></div><div class="ttdeci">constexpr flatten_t flatten</div><div class="ttdoc">Callable object converting a product type of product types into a product type of all elements.</div><div class="ttdef"><b>Definition</b> flatten.hpp:260</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: Product type to process</li>
@@ -204,12 +204,12 @@ $(function(){initNavTree('group__generators_ga49acccc42ec8af7b96b63e8f38796df2.h
 <li>A product type composed of all elements of <span class="tt">t</span> flattened non-recursively</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1flatten.html">flatten</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga49acccc42ec8af7b96b63e8f38796df2">kumi::flatten</a>(std::declval&lt;T&gt;()));</div>
-<div class="line">    };</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>flatten_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga49acccc42ec8af7b96b63e8f38796df2">kumi::flatten</a>(std::declval&lt;T&gt;()));</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>flatten_t = <span class="keyword">typename</span> kumi::result::flatten&lt;T&gt;::type;</div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span>flatten</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::flatten_t&lt;T&gt;;</div>
+<div class="line">    };</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga49acccc42ec8af7b96b63e8f38796df2" title="Callable object converting a product type of product types into a product type of all elements.">kumi::flatten</a></p>
 <h2 class="groupheader">Examples </h2>

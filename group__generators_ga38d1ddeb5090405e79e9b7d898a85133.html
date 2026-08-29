@@ -205,12 +205,12 @@ $(function(){initNavTree('group__generators_ga38d1ddeb5090405e79e9b7d898a85133.h
 <li>A product type composed of all elements of <span class="tt">t</span> except its first. Has no effect on empty product types.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1pop__front.html">pop_front</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga38d1ddeb5090405e79e9b7d898a85133">kumi::pop_front</a>(std::declval&lt;T&gt;()));</div>
-<div class="line">    };</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>pop_front_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga38d1ddeb5090405e79e9b7d898a85133">kumi::pop_front</a>(std::declval&lt;T&gt;()));</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>pop_front_t = <span class="keyword">typename</span> kumi::result::pop_front&lt;T&gt;::type;</div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span>pop_front</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::pop_front_t&lt;T&gt;;</div>
+<div class="line">    };</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to kumi:pop_front</p>
 <h2 class="groupheader">Examples </h2>
@@ -258,12 +258,13 @@ $(function(){initNavTree('group__generators_ga38d1ddeb5090405e79e9b7d898a85133.h
 <h3 class="groupheader">Return value </h3>
 <pre class="fragment">A product type composed of all elements of `t` except its last. Has no effect on empty product types.
 </pre><h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1pop__back.html">pop_back</a></div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>pop_back_t = <span class="keyword">decltype</span>(kumi::pop_back(std::declval&lt;T&gt;()));</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span>pop_back</div>
 <div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(kumi::pop_back(std::declval&lt;T&gt;()));</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::pop_back_t&lt;T&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>pop_back_t = <span class="keyword">typename</span> kumi::result::pop_back&lt;T&gt;::type;</div>
 </div><!-- fragment --><p>Computes the return type of a call to kumi:pop_back</p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>

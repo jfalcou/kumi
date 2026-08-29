@@ -193,7 +193,7 @@ $(function(){initNavTree('group__queries_ga3a9b6e2d0fbdace9e57b3846d24a3b57.html
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, <span class="keywordtype">id</span>entifier ID&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga3a9b6e2d0fbdace9e57b3846d24a3b57">contains</a>(T &amp;&amp; t, ID <span class="keyword">const</span>&amp; <span class="keywordtype">id</span>) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__queries_ga3a9b6e2d0fbdace9e57b3846d24a3b57_html_ga3a9b6e2d0fbdace9e57b3846d24a3b57"><div class="ttname"><a href="#ga3a9b6e2d0fbdace9e57b3846d24a3b57">kumi::contains</a></div><div class="ttdeci">constexpr contains_t contains</div><div class="ttdoc">Callable object checking if a product type contains a given identifier.</div><div class="ttdef"><b>Definition</b> contains.hpp:129</div></div>
+<div class="ttc" id="agroup__queries_ga3a9b6e2d0fbdace9e57b3846d24a3b57_html_ga3a9b6e2d0fbdace9e57b3846d24a3b57"><div class="ttname"><a href="#ga3a9b6e2d0fbdace9e57b3846d24a3b57">kumi::contains</a></div><div class="ttdeci">constexpr contains_t contains</div><div class="ttdoc">Callable object checking if a product type contains a given identifier.</div><div class="ttdef"><b>Definition</b> contains.hpp:130</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: The product type to inspect</li>
@@ -204,13 +204,13 @@ $(function(){initNavTree('group__queries_ga3a9b6e2d0fbdace9e57b3846d24a3b57.html
 <li><span class="tt">std::true_type</span> if <span class="tt">t</span> contains a field labeled with the <span class="tt">id</span> identifier, <span class="tt">std::false_type</span> otherwise.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, kumi::concepts::<span class="keywordtype">id</span>entifier ID&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1contains.html">contains</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga3a9b6e2d0fbdace9e57b3846d24a3b57">kumi::contains</a>(std::declval&lt;T&gt;(), std::declval&lt;ID&gt;()));</div>
-<div class="line">    };</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, kumi::concepts::<span class="keywordtype">id</span>entifier ID&gt;</div>
+<div class="line">    <span class="keyword">using </span>contains_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga3a9b6e2d0fbdace9e57b3846d24a3b57">kumi::contains</a>(std::declval&lt;T&gt;(), std::declval&lt;ID&gt;()));</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, kumi::concepts::<span class="keywordtype">id</span>entifier ID&gt;</div>
-<div class="line">    <span class="keyword">using </span>contains_t = <span class="keyword">typename</span> kumi::result::contains&lt;T, ID&gt;::type;</div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, kumi::concepts::<span class="keywordtype">id</span>entifier ID&gt; <span class="keyword">struct </span>contains</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::contains_t&lt;T, ID&gt;;</div>
+<div class="line">    };</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to kumi:contains:</p>
 <h2 class="groupheader">Examples </h2>

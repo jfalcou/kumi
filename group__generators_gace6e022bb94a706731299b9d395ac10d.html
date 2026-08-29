@@ -209,12 +209,13 @@ template&lt;std::size_t N&gt; </div>
 <li>A tuple containing <span class="tt">N</span> copies of <span class="tt">{v, v + 1, ..., v + N-1}</span></li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, <span class="keyword">typename</span> T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1iota.html">iota</a></div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, <span class="keyword">typename</span> T&gt; <span class="keyword">using </span>iota_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gace6e022bb94a706731299b9d395ac10d">kumi::iota&lt;N&gt;</a>(std::declval&lt;T&gt;()));</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, <span class="keyword">typename</span> T&gt; <span class="keyword">struct </span>iota</div>
 <div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gace6e022bb94a706731299b9d395ac10d">kumi::iota&lt;N&gt;</a>(std::declval&lt;T&gt;()));</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::iota_t&lt;N, T&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, <span class="keyword">typename</span> T&gt; <span class="keyword">using </span>iota_t = <span class="keyword">typename</span> kumi::result::iota&lt;N, T&gt;::type;</div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gace6e022bb94a706731299b9d395ac10d" title="Callable object creating a kumi::tuple containing an increasing ramp of values.">kumi::iota</a></p>
 <h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"></div>

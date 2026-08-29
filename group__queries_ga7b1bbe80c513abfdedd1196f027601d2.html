@@ -193,7 +193,7 @@ $(function(){initNavTree('group__queries_ga7b1bbe80c513abfdedd1196f027601d2.html
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, <a class="code hl_class" href="structkumi_1_1identifier.html">identifier</a>... IDs&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga7b1bbe80c513abfdedd1196f027601d2">contains_none</a>(T &amp;&amp; t, IDs <span class="keyword">const</span>&amp;... ids) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__queries_ga7b1bbe80c513abfdedd1196f027601d2_html_ga7b1bbe80c513abfdedd1196f027601d2"><div class="ttname"><a href="#ga7b1bbe80c513abfdedd1196f027601d2">kumi::contains_none</a></div><div class="ttdeci">constexpr contains_none_t contains_none</div><div class="ttdoc">Callable object checking if a product type contains no fields based on any of the selected identifier...</div><div class="ttdef"><b>Definition</b> contains.hpp:291</div></div>
+<div class="ttc" id="agroup__queries_ga7b1bbe80c513abfdedd1196f027601d2_html_ga7b1bbe80c513abfdedd1196f027601d2"><div class="ttname"><a href="#ga7b1bbe80c513abfdedd1196f027601d2">kumi::contains_none</a></div><div class="ttdeci">constexpr contains_none_t contains_none</div><div class="ttdoc">Callable object checking if a product type contains no fields based on any of the selected identifier...</div><div class="ttdef"><b>Definition</b> contains.hpp:292</div></div>
 <div class="ttc" id="astructkumi_1_1identifier_html"><div class="ttname"><a href="structkumi_1_1identifier.html">kumi::identifier</a></div><div class="ttdoc">identifier definition class</div><div class="ttdef"><b>Definition</b> identifier.hpp:86</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
@@ -205,13 +205,14 @@ $(function(){initNavTree('group__queries_ga7b1bbe80c513abfdedd1196f027601d2.html
 <li><span class="tt">std::true_type</span> if <span class="tt">t</span> contains no field labeled with any of the <span class="tt">ids</span>, <span class="tt">std::false_type</span> otherwise.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, kumi::concepts::identifier... IDs&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1contains__none.html">contains_none</a></div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, kumi::concepts::identifier... IDs&gt;</div>
+<div class="line">    <span class="keyword">using </span>contains_none_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga7b1bbe80c513abfdedd1196f027601d2">kumi::contains_none</a>(std::declval&lt;T&gt;(), std::declval&lt;IDs&gt;()...));</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, kumi::concepts::identifier... IDs&gt; <span class="keyword">struct </span>contains_none</div>
 <div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga7b1bbe80c513abfdedd1196f027601d2">kumi::contains_none</a>(std::declval&lt;T&gt;(), std::declval&lt;IDs&gt;()...));</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::contains_none_t&lt;T, IDs...&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, kumi::concepts::identifier... IDs&gt;</div>
-<div class="line">    <span class="keyword">using </span>contains_none_t = <span class="keyword">typename</span> kumi::result::contains_none&lt;T, IDs...&gt;::type;</div>
 </div><!-- fragment --><p>Computes the return type of a call to kumi:contains_none</p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>

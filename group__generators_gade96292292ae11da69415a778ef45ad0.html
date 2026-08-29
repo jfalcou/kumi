@@ -197,7 +197,7 @@ template&lt;std::size_t N&gt; </div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, product_type T&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gade96292292ae11da69415a778ef45ad0">windows&lt;N&gt;</a>(T &amp;&amp; t);</div>
-<div class="ttc" id="agroup__generators_gade96292292ae11da69415a778ef45ad0_html_gade96292292ae11da69415a778ef45ad0"><div class="ttname"><a href="#gade96292292ae11da69415a778ef45ad0">kumi::windows</a></div><div class="ttdeci">constexpr tiles_t&lt; N, 1 &gt; windows</div><div class="ttdoc">Callable object creating a tuple of product types, each containing N consecutive elements from t....</div><div class="ttdef"><b>Definition</b> tiler.hpp:164</div></div>
+<div class="ttc" id="agroup__generators_gade96292292ae11da69415a778ef45ad0_html_gade96292292ae11da69415a778ef45ad0"><div class="ttname"><a href="#gade96292292ae11da69415a778ef45ad0">kumi::windows</a></div><div class="ttdeci">constexpr tiles_t&lt; N, 1 &gt; windows</div><div class="ttdoc">Callable object creating a tuple of product types, each containing N consecutive elements from t....</div><div class="ttdef"><b>Definition</b> tiler.hpp:167</div></div>
 </div><!-- fragment --><h3 class="groupheader">Template Parameters </h3>
 <ul>
 <li><span class="tt">N</span>: Size of the window to generate</li>
@@ -211,13 +211,13 @@ template&lt;std::size_t N&gt; </div>
 <li>A tuple of product types, each containing <span class="tt">N</span> consecutive elements of <span class="tt">t</span></li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, kumi::concepts::product_type T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1windows.html">windows</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gade96292292ae11da69415a778ef45ad0">kumi::windows&lt;N&gt;</a>(std::declval&lt;T&gt;()));</div>
-<div class="line">    };</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, kumi::concepts::product_type T&gt;</div>
+<div class="line">    <span class="keyword">using </span>windows_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gade96292292ae11da69415a778ef45ad0">kumi::windows&lt;N&gt;</a>(std::declval&lt;T&gt;()));</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, kumi::concepts::product_type T&gt;</div>
-<div class="line">    <span class="keyword">using </span>windows_t = <span class="keyword">typename</span> kumi::result::windows&lt;N, T&gt;::type;</div>
+<div class="line">    <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, kumi::concepts::product_type T&gt; <span class="keyword">struct </span>windows</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::windows_t&lt;N, T&gt;;</div>
+<div class="line">    };</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gade96292292ae11da69415a778ef45ad0" title="Callable object creating a tuple of product types, each containing N consecutive elements from t....">kumi::windows</a></p>
 <h2 class="groupheader">Examples </h2>
@@ -251,7 +251,7 @@ template&lt;std::size_t N&gt; </div>
 <div class="line">  std::cout &lt;&lt; t &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;   </div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__record__related_ga83a97fc306d9ecfacde28584b219b44a_html_ga83a97fc306d9ecfacde28584b219b44a"><div class="ttname"><a href="group__record__related_ga83a97fc306d9ecfacde28584b219b44a.html#ga83a97fc306d9ecfacde28584b219b44a">kumi::to_ref</a></div><div class="ttdeci">constexpr auto to_ref(R &amp;&amp;r)</div><div class="ttdoc">Creates a kumi::record of references given a reference to a kumi::record_type.</div><div class="ttdef"><b>Definition</b> record.hpp:518</div></div>
-<div class="ttc" id="agroup__transforms_ga58c4bb5e62083b4b37396d39c6446164_html_ga58c4bb5e62083b4b37396d39c6446164"><div class="ttname"><a href="group__transforms_ga58c4bb5e62083b4b37396d39c6446164.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a></div><div class="ttdeci">constexpr for_each_t for_each</div><div class="ttdoc">Callable object applying the Callable object f on each element of a product type.</div><div class="ttdef"><b>Definition</b> for_each.hpp:152</div></div>
+<div class="ttc" id="agroup__transforms_ga58c4bb5e62083b4b37396d39c6446164_html_ga58c4bb5e62083b4b37396d39c6446164"><div class="ttname"><a href="group__transforms_ga58c4bb5e62083b4b37396d39c6446164.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a></div><div class="ttdeci">constexpr for_each_t for_each</div><div class="ttdoc">Callable object applying the Callable object f on each element of a product type.</div><div class="ttdef"><b>Definition</b> for_each.hpp:133</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
 </div><!-- fragment --></li>
 <li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>

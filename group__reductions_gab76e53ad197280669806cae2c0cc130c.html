@@ -206,17 +206,16 @@ $(function(){initNavTree('group__reductions_gab76e53ad197280669806cae2c0cc130c.h
 <li>The maximum value of all elements of <span class="tt">t</span></li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> F = <span class="keywordtype">void</span>&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1max.html">max</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gab76e53ad197280669806cae2c0cc130c">kumi::max</a>(std::declval&lt;T&gt;(), std::declval&lt;F&gt;()));</div>
-<div class="line">    };</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... F&gt;</div>
+<div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(F) == 0) || (<span class="keyword">sizeof</span>...(F) == 1))</div>
+<div class="line">    <span class="keyword">using</span> max_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gab76e53ad197280669806cae2c0cc130c">kumi::max</a>(std::declval&lt;T&gt;(), std::declval&lt;F&gt;()...));</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1max.html">max</a>&lt;T, void&gt;</div>
+<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span>... F&gt;</div>
+<div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(F) == 0) || (<span class="keyword">sizeof</span>...(F) == 1))</div>
+<div class="line">    <span class="keyword">struct</span> max</div>
 <div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gab76e53ad197280669806cae2c0cc130c">kumi::max</a>(std::declval&lt;T&gt;()));</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::max_t&lt;T, F...&gt;;</div>
 <div class="line">    };</div>
-<div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> F = <span class="keywordtype">void</span>&gt; <span class="keyword">using </span>max_t = <span class="keyword">typename</span> kumi::result::max&lt;T, F&gt;::type;</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gab76e53ad197280669806cae2c0cc130c" title="Callable object computing the maximum value of all elements of t.">kumi::max</a></p>
 <h2 class="groupheader">Examples </h2>

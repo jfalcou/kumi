@@ -209,12 +209,12 @@ template&lt;std::size_t N&gt; </div>
 <li>A tuple containing <span class="tt">N</span> applications of <span class="tt">f</span></li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, <span class="keyword">typename</span> Function&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1generate.html">generate</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaba2efbda8df6baaccd4e35343d70163f">kumi::generate&lt;N&gt;</a>(std::declval&lt;Function&gt;()));</div>
-<div class="line">    };</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, <span class="keyword">typename</span> Function&gt; <span class="keyword">using </span>generate_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaba2efbda8df6baaccd4e35343d70163f">kumi::generate&lt;N&gt;</a>(std::declval&lt;Function&gt;()));</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, <span class="keyword">typename</span> Function&gt; <span class="keyword">using </span>generate_t = <span class="keyword">typename</span> kumi::result::generate&lt;N, Function&gt;::type;</div>
+<div class="line">    <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, <span class="keyword">typename</span> Function&gt; <span class="keyword">struct </span>generate</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::generate_t&lt;N, Function&gt;;</div>
+<div class="line">    };</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gaba2efbda8df6baaccd4e35343d70163f" title="Callable object creating a kumi::tuple containing N applications of the f Callable.">kumi::generate</a></p>
 <h2 class="groupheader">Example </h2>

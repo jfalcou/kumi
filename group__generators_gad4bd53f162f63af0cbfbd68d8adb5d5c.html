@@ -206,13 +206,13 @@ $(function(){initNavTree('group__generators_gad4bd53f162f63af0cbfbd68d8adb5d5c.h
 <li>A product type composed of <span class="tt">v</span> followed by all elements of <span class="tt">t</span> in order.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, <span class="keyword">typename</span> V&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1push__front.html">push_front</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gad4bd53f162f63af0cbfbd68d8adb5d5c">kumi::push_front</a>(std::declval&lt;T&gt;(), std::declval&lt;V&gt;()));</div>
-<div class="line">    };</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, <span class="keyword">typename</span> V&gt;</div>
+<div class="line">    <span class="keyword">using </span>push_front_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gad4bd53f162f63af0cbfbd68d8adb5d5c">kumi::push_front</a>(std::declval&lt;T&gt;(), std::declval&lt;V&gt;()));</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, <span class="keyword">typename</span> V&gt;</div>
-<div class="line">    <span class="keyword">using </span>push_front_t = <span class="keyword">typename</span> kumi::result::push_front&lt;T, V&gt;::type;</div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, <span class="keyword">typename</span> V&gt; <span class="keyword">struct </span>push_front</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::push_front_t&lt;T, V&gt;;</div>
+<div class="line">    };</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to kumi:push_front</p>
 <h2 class="groupheader">Examples </h2>
@@ -262,13 +262,13 @@ $(function(){initNavTree('group__generators_gad4bd53f162f63af0cbfbd68d8adb5d5c.h
 <h3 class="groupheader">Return value </h3>
 <pre class="fragment">A product type composed of all elements of `t` in order followed by `v`.
 </pre><h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, <span class="keyword">typename</span> V&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1push__back.html">push_back</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(kumi::push_back(std::declval&lt;T&gt;(), std::declval&lt;V&gt;()));</div>
-<div class="line">    };</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, <span class="keyword">typename</span> V&gt;</div>
+<div class="line">    <span class="keyword">using </span>push_back_t = <span class="keyword">decltype</span>(kumi::push_back(std::declval&lt;T&gt;(), std::declval&lt;V&gt;()));</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, <span class="keyword">typename</span> V&gt;</div>
-<div class="line">    <span class="keyword">using </span>push_back_t = <span class="keyword">typename</span> kumi::result::push_back&lt;T, V&gt;::type;</div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, <span class="keyword">typename</span> V&gt; <span class="keyword">struct </span>push_back</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::push_back_t&lt;T, V&gt;;</div>
+<div class="line">    };</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to kumi:push_back</p>
 <h2 class="groupheader">Examples </h2>

@@ -207,12 +207,14 @@ $(function(){initNavTree('group__generators_gadb81f4533e81830674c3fc9577d3de93.h
 <li>A new tuple containing the two sub parts of <span class="tt">t</span> cut at <span class="tt">i0</span></li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::<span class="keywordtype">size_t</span> I0&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1split.html">split</a></div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::<span class="keywordtype">size_t</span> I&gt;</div>
+<div class="line">    <span class="keyword">using </span>split_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gadb81f4533e81830674c3fc9577d3de93">kumi::split</a>(std::declval&lt;T&gt;(), kumi::index_t&lt;I&gt;{}));</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::<span class="keywordtype">size_t</span> I&gt; <span class="keyword">struct </span>split</div>
 <div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gadb81f4533e81830674c3fc9577d3de93">kumi::split</a>(std::declval&lt;T&gt;(), kumi::index_t&lt;I0&gt;{}));</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::split_t&lt;T, I&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::<span class="keywordtype">size_t</span> I0&gt; <span class="keyword">using </span>split_t = <span class="keyword">typename</span> kumi::result::split&lt;T, I0&gt;::type;</div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gadb81f4533e81830674c3fc9577d3de93" title="Callable object splitting a product type into two.">kumi::split</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>

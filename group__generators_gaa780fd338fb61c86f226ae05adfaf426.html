@@ -196,7 +196,7 @@ $(function(){initNavTree('group__generators_gaa780fd338fb61c86f226ae05adfaf426.h
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, <span class="keyword">typename</span> Function&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__generators_ga49acccc42ec8af7b96b63e8f38796df2.html#ga49acccc42ec8af7b96b63e8f38796df2">flatten</a>(T &amp;&amp; t, Function &amp;&amp; f) <span class="keyword">noexcept</span>;   <span class="comment">// 1</span></div>
-<div class="ttc" id="agroup__generators_ga49acccc42ec8af7b96b63e8f38796df2_html_ga49acccc42ec8af7b96b63e8f38796df2"><div class="ttname"><a href="group__generators_ga49acccc42ec8af7b96b63e8f38796df2.html#ga49acccc42ec8af7b96b63e8f38796df2">kumi::flatten</a></div><div class="ttdeci">constexpr flatten_t flatten</div><div class="ttdoc">Callable object converting a product type of product types into a product type of all elements.</div><div class="ttdef"><b>Definition</b> flatten.hpp:259</div></div>
+<div class="ttc" id="agroup__generators_ga49acccc42ec8af7b96b63e8f38796df2_html_ga49acccc42ec8af7b96b63e8f38796df2"><div class="ttname"><a href="group__generators_ga49acccc42ec8af7b96b63e8f38796df2.html#ga49acccc42ec8af7b96b63e8f38796df2">kumi::flatten</a></div><div class="ttdeci">constexpr flatten_t flatten</div><div class="ttdoc">Callable object converting a product type of product types into a product type of all elements.</div><div class="ttdef"><b>Definition</b> flatten.hpp:260</div></div>
 </div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__generators_ga49acccc42ec8af7b96b63e8f38796df2.html#ga49acccc42ec8af7b96b63e8f38796df2">flatten</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;                  <span class="comment">// 2</span></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
@@ -209,18 +209,16 @@ $(function(){initNavTree('group__generators_gaa780fd338fb61c86f226ae05adfaf426.h
 <li>A product type composed of all elements of <span class="tt">t</span> flattened recursively</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, <span class="keyword">typename</span> Func = <span class="keywordtype">void</span>&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1flatten__all.html">flatten_all</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaa780fd338fb61c86f226ae05adfaf426">kumi::flatten_all</a>(std::declval&lt;T&gt;(), std::declval&lt;Func&gt;()));</div>
-<div class="line">    };</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, <span class="keyword">typename</span>... Func&gt;</div>
+<div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(Func) == 0) || (<span class="keyword">sizeof</span>...(Func) == 1))</div>
+<div class="line">    <span class="keyword">using</span> flatten_all_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaa780fd338fb61c86f226ae05adfaf426">kumi::flatten_all</a>(std::declval&lt;T&gt;(), std::declval&lt;Func&gt;()...));</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1flatten__all.html">flatten_all</a>&lt;T&gt;</div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, <span class="keyword">typename</span>... Func&gt;</div>
+<div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(Func) == 0) || (<span class="keyword">sizeof</span>...(Func) == 1))</div>
+<div class="line">    <span class="keyword">struct</span> flatten_all</div>
 <div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaa780fd338fb61c86f226ae05adfaf426">kumi::flatten_all</a>(std::declval&lt;T&gt;()));</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::flatten_all_t&lt;T&gt;;</div>
 <div class="line">    };</div>
-<div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, <span class="keyword">typename</span> Func = <span class="keywordtype">void</span>&gt;</div>
-<div class="line">    <span class="keyword">using </span>flatten_all_t = <span class="keyword">typename</span> kumi::result::flatten_all&lt;T, Func&gt;::type;</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gaa780fd338fb61c86f226ae05adfaf426" title="Callable object converting recursively a product type of product types into a product type of all ele...">kumi::flatten_all</a></p>
 <h2 class="groupheader">Examples </h2>
@@ -243,7 +241,7 @@ $(function(){initNavTree('group__generators_gaa780fd338fb61c86f226ae05adfaf426.h
 <div class="line">                              );</div>
 <div class="line">  std::cout &lt;&lt; sz &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__generators_gaa780fd338fb61c86f226ae05adfaf426_html_gaa780fd338fb61c86f226ae05adfaf426"><div class="ttname"><a href="#gaa780fd338fb61c86f226ae05adfaf426">kumi::flatten_all</a></div><div class="ttdeci">constexpr flatten_all_t flatten_all</div><div class="ttdoc">Callable object converting recursively a product type of product types into a product type of all ele...</div><div class="ttdef"><b>Definition</b> flatten.hpp:327</div></div>
+<div class="ttc" id="agroup__generators_gaa780fd338fb61c86f226ae05adfaf426_html_gaa780fd338fb61c86f226ae05adfaf426"><div class="ttname"><a href="#gaa780fd338fb61c86f226ae05adfaf426">kumi::flatten_all</a></div><div class="ttdeci">constexpr flatten_all_t flatten_all</div><div class="ttdoc">Callable object converting recursively a product type of product types into a product type of all ele...</div><div class="ttdef"><b>Definition</b> flatten.hpp:328</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
 </div><!-- fragment --></li>
 <li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>

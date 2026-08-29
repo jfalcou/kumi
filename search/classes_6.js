@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['has_5fstatic_5fsize_0',['has_static_size',['../structkumi_1_1has__static__size.html',1,'kumi']]]
+  ['map_5ftraits_0',['map_traits',['../structkumi_1_1map__traits.html',1,'kumi']]]
 ];

@@ -206,12 +206,13 @@ $(function(){initNavTree('group__transforms_ga4c69a49971100b7bc9c7effd7c43f191.h
 <li>The value returned by f.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, kumi::concepts::product_type T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1apply.html">apply</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga4c69a49971100b7bc9c7effd7c43f191">kumi::apply</a>(std::declval&lt;Function&gt;(), std::declval&lt;T&gt;()));</div>
-<div class="line">    };</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, kumi::concepts::product_type T&gt;</div>
+<div class="line">    <span class="keyword">using </span>apply_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga4c69a49971100b7bc9c7effd7c43f191">kumi::apply</a>(std::declval&lt;Function&gt;(), std::declval&lt;T&gt;()));</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, kumi::concepts::product_type T&gt; <span class="keyword">using </span>apply_t = <span class="keyword">typename</span> apply&lt;Function, T&gt;::type;</div>
+<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, kumi::concepts::product_type T&gt; <span class="keyword">struct </span>apply</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::apply_t&lt;Function, T&gt;;</div>
+<div class="line">    };</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga4c69a49971100b7bc9c7effd7c43f191" title="Callable object invoking the callable object f with the elements of the product type unrolled as argu...">kumi::apply</a></p>
 <h2 class="groupheader">Examples </h2>
@@ -229,7 +230,7 @@ $(function(){initNavTree('group__transforms_ga4c69a49971100b7bc9c7effd7c43f191.h
 <div class="line">    {</div>
 <div class="line">      os &lt;&lt; <span class="charliteral">&#39;[&#39;</span>;</div>
 <div class="line">      std::size_t n{0};</div>
-<div class="line">      ((os &lt;&lt; args &lt;&lt; (++n != <a class="code hl_struct" href="structkumi_1_1size.html">kumi::size&lt;Tuple&gt;::value</a> ? <span class="stringliteral">&quot;, &quot;</span> : <span class="stringliteral">&quot;&quot;</span>)), ...);</div>
+<div class="line">      ((os &lt;&lt; args &lt;&lt; (++n != kumi::size&lt;Tuple&gt;::value ? <span class="stringliteral">&quot;, &quot;</span> : <span class="stringliteral">&quot;&quot;</span>)), ...);</div>
 <div class="line">      os &lt;&lt; <span class="charliteral">&#39;]&#39;</span>;</div>
 <div class="line">    }, t</div>
 <div class="line">  );</div>
@@ -247,7 +248,6 @@ $(function(){initNavTree('group__transforms_ga4c69a49971100b7bc9c7effd7c43f191.h
 <div class="line">  <span class="comment">// Advanced usage</span></div>
 <div class="line">  print(std::cout, t);</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1size_html"><div class="ttname"><a href="structkumi_1_1size.html">kumi::size</a></div><div class="ttdoc">Computes the number of elements of a kumi::product_type.</div><div class="ttdef"><b>Definition</b> traits.hpp:120</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
 </div><!-- fragment --></li>
 <li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
@@ -263,7 +263,7 @@ $(function(){initNavTree('group__transforms_ga4c69a49971100b7bc9c7effd7c43f191.h
 <div class="line">    {</div>
 <div class="line">      os &lt;&lt; <span class="charliteral">&#39;[&#39;</span>;</div>
 <div class="line">      std::size_t n{0};</div>
-<div class="line">      ((os &lt;&lt; args &lt;&lt; (++n != <a class="code hl_struct" href="structkumi_1_1size.html">kumi::size&lt;Record&gt;::value</a> ? <span class="stringliteral">&quot;, &quot;</span> : <span class="stringliteral">&quot;&quot;</span>)), ...);</div>
+<div class="line">      ((os &lt;&lt; args &lt;&lt; (++n != kumi::size&lt;Record&gt;::value ? <span class="stringliteral">&quot;, &quot;</span> : <span class="stringliteral">&quot;&quot;</span>)), ...);</div>
 <div class="line">      os &lt;&lt; <span class="charliteral">&#39;]&#39;</span>;</div>
 <div class="line">    }, t</div>
 <div class="line">  );</div>

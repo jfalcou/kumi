@@ -210,13 +210,14 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 <li>A Product type containing all values of <span class="tt">t</span> which types does not satisfy <span class="tt">Pred</span>.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Pred, kumi::concepts::product_type T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1filter__not.html">filter_not</a></div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Pred, kumi::concepts::product_type T&gt;</div>
+<div class="line">    <span class="keyword">using </span>filter_not_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga750bc3d3425c955e1be6ef1b3879c314">kumi::filter_not&lt;Pred&gt;</a>(std::declval&lt;T&gt;()));</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Pred, kumi::concepts::product_type T&gt; <span class="keyword">struct </span>filter_not</div>
 <div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga750bc3d3425c955e1be6ef1b3879c314">kumi::filter_not&lt;Pred&gt;</a>(std::declval&lt;T&gt;()));</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::filter_not_t&lt;Pred, T&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Pred, kumi::concepts::product_type T&gt;</div>
-<div class="line">    <span class="keyword">using </span>filter_not_t = <span class="keyword">typename</span> kumi::result::filter_not&lt;Pred, T&gt;::type;</div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga750bc3d3425c955e1be6ef1b3879c314" title="Callable object filtering a product type over a predicate.">kumi::filter_not</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>

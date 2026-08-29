@@ -204,12 +204,13 @@ $(function(){initNavTree('group__generators_ga71bbbe8da94919e242bd3ded80ab6776.h
 <li>A product type built by keeping the first occurrence of every distinct element type in <span class="tt">t</span>.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1all__unique.html">all_unique</a></div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>all_unique_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga71bbbe8da94919e242bd3ded80ab6776">kumi::all_unique</a>(std::declval&lt;T&gt;()));</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span>all_unique</div>
 <div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga71bbbe8da94919e242bd3ded80ab6776">kumi::all_unique</a>(std::declval&lt;T&gt;()));</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::all_unique_t&lt;T&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>all_unique_t = <span class="keyword">typename</span> kumi::result::all_unique&lt;T&gt;::type;</div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga71bbbe8da94919e242bd3ded80ab6776" title="Callable object returning a product type containing the values of the first occurence of each type in...">kumi::all_unique</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>

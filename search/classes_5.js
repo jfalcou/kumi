@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['generate_0',['generate',['../structkumi_1_1result_1_1generate.html',1,'kumi::result']]]
+  ['label_5ft_0',['label_t',['../structkumi_1_1label__t.html',1,'kumi']]]
 ];

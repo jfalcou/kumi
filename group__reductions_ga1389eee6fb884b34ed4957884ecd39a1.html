@@ -195,7 +195,7 @@ $(function(){initNavTree('group__reductions_ga1389eee6fb884b34ed4957884ecd39a1.h
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type T, <span class="keyword">typename</span> Value&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga1389eee6fb884b34ed4957884ecd39a1">inclusive_scan_left</a>(Function f, T &amp;&amp; t, Value init);</div>
-<div class="ttc" id="agroup__reductions_ga1389eee6fb884b34ed4957884ecd39a1_html_ga1389eee6fb884b34ed4957884ecd39a1"><div class="ttname"><a href="#ga1389eee6fb884b34ed4957884ecd39a1">kumi::inclusive_scan_left</a></div><div class="ttdeci">constexpr inclusive_scan_left_t inclusive_scan_left</div><div class="ttdoc">Callable object computing the inclusive prefix scan of all elements of a product type using a tail re...</div><div class="ttdef"><b>Definition</b> scan.hpp:205</div></div>
+<div class="ttc" id="agroup__reductions_ga1389eee6fb884b34ed4957884ecd39a1_html_ga1389eee6fb884b34ed4957884ecd39a1"><div class="ttname"><a href="#ga1389eee6fb884b34ed4957884ecd39a1">kumi::inclusive_scan_left</a></div><div class="ttdeci">constexpr inclusive_scan_left_t inclusive_scan_left</div><div class="ttdoc">Callable object computing the inclusive prefix scan of all elements of a product type using a tail re...</div><div class="ttdef"><b>Definition</b> scan.hpp:209</div></div>
 </div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;mono<span class="keywordtype">id</span> M, <span class="keyword">typename</span> Function, product_type T, <span class="keyword">typename</span> Value&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga1389eee6fb884b34ed4957884ecd39a1">inclusive_scan_left</a>(M &amp;&amp; m, T &amp;&amp; t);</div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
@@ -210,19 +210,17 @@ $(function(){initNavTree('group__reductions_ga1389eee6fb884b34ed4957884ecd39a1.h
 <li>A tuple of prefix partial accumulations where each element 'I' equals <span class="tt">f( f( f(init, <a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137" title="Extracts the Ith field from a kumi::record.">get</a>&lt;0&gt;(t)), ...), <a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137" title="Extracts the Ith field from a kumi::record.">get</a>&lt;I-1&gt;(t))</span></li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, kumi::concepts::product_type T, <span class="keyword">typename</span> Value = <span class="keywordtype">void</span>&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1inclusive__scan__right.html">inclusive_scan_right</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type =</div>
-<div class="line">        <span class="keyword">decltype</span>(<a class="code hl_variable" href="group__reductions_gab55848ee4bd1b0cc0f22015a2bac5047.html#gab55848ee4bd1b0cc0f22015a2bac5047">kumi::inclusive_scan_right</a>(std::declval&lt;Function&gt;(), std::declval&lt;T&gt;(), std::declval&lt;Value&gt;()));</div>
-<div class="line">    };</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, kumi::concepts::product_type T, <span class="keyword">typename</span>... Value&gt;</div>
+<div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(Value) == 0) || (<span class="keyword">sizeof</span>...(Value) == 1))</div>
+<div class="line">    <span class="keyword">using</span> inclusive_scan_right_t =</div>
+<div class="line">      <span class="keyword">decltype</span>(<a class="code hl_variable" href="group__reductions_gab55848ee4bd1b0cc0f22015a2bac5047.html#gab55848ee4bd1b0cc0f22015a2bac5047">kumi::inclusive_scan_right</a>(std::declval&lt;Function&gt;(), std::declval&lt;T&gt;(), std::declval&lt;Value&gt;()...));</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, kumi::concepts::product_type T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1inclusive__scan__right.html">inclusive_scan_right</a>&lt;Function, T&gt;</div>
+<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, kumi::concepts::product_type T, <span class="keyword">typename</span>... Value&gt;</div>
+<div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(Value) == 0) || (<span class="keyword">sizeof</span>...(Value) == 1))</div>
+<div class="line">    <span class="keyword">struct</span> inclusive_scan_right</div>
 <div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="group__reductions_gab55848ee4bd1b0cc0f22015a2bac5047.html#gab55848ee4bd1b0cc0f22015a2bac5047">kumi::inclusive_scan_right</a>(std::declval&lt;Function&gt;(), std::declval&lt;T&gt;()));</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::inclusive_scan_right_t&lt;Function, T, Value...&gt;;</div>
 <div class="line">    };</div>
-<div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, kumi::concepts::product_type T, <span class="keyword">typename</span> Value = <span class="keywordtype">void</span>&gt;</div>
-<div class="line">    <span class="keyword">using </span>inclusive_scan_right_t = <span class="keyword">typename</span> kumi::result::inclusive_scan_right&lt;Function, T, Value&gt;::type;</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga1389eee6fb884b34ed4957884ecd39a1" title="Callable object computing the inclusive prefix scan of all elements of a product type using a tail re...">kumi::inclusive_scan_left</a></p>
 <h2 class="groupheader">Examples </h2>

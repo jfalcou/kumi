@@ -204,11 +204,12 @@ $(function(){initNavTree('group__queries_gaa1618c96c4c7003afeccfb19e25b35bb.html
 <li>A reference to the first element of the product type <span class="tt">t</span>.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1front.html">front</a> : kumi::stored_member&lt;0, T&gt;</div>
-<div class="line">    {</div>
-<div class="line">    };</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>front_t = kumi::stored_member_t&lt;0, T&gt;;</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>front_t = <span class="keyword">typename</span> kumi::result::front&lt;T&gt;::type;</div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span>front</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::front_t&lt;T&gt;;</div>
+<div class="line">    };</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gaa1618c96c4c7003afeccfb19e25b35bb" title="Callable object used to retrieve the front of a product type.">kumi::front</a></p>
 <h2 class="groupheader">Examples </h2>

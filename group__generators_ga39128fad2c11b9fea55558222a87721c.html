@@ -205,12 +205,13 @@ $(function(){initNavTree('group__generators_ga39128fad2c11b9fea55558222a87721c.h
 <li>A tuple containing all the product types built from all combination of all ts' elements</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1cartesian__product.html">cartesian_product</a></div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt; <span class="keyword">using </span>cartesian_product_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga39128fad2c11b9fea55558222a87721c">kumi::cartesian_product</a>(std::declval&lt;Ts&gt;()...));</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt; <span class="keyword">struct </span>cartesian_product</div>
 <div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga39128fad2c11b9fea55558222a87721c">kumi::cartesian_product</a>(std::declval&lt;Ts&gt;()...));</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::cartesian_product_t&lt;Ts...&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt; <span class="keyword">using </span>cartesian_product_t = <span class="keyword">typename</span> kumi::result::cartesian_product&lt;Ts...&gt;::type;</div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga39128fad2c11b9fea55558222a87721c" title="Callable object returning the Cartesian Product of all elements of its arguments product types.">kumi::cartesian_product</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>

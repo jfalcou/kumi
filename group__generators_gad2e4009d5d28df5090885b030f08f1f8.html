@@ -209,13 +209,14 @@ template&lt;typename T&gt; </div>
 <li>A Product type containing the values of <span class="tt">t</span> where each member is of type Target</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Target, kumi::concepts::product_type T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1member__cast.html">member_cast</a></div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Target, kumi::concepts::product_type T&gt;</div>
+<div class="line">    <span class="keyword">using </span>member_cast_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gad2e4009d5d28df5090885b030f08f1f8">kumi::member_cast&lt;Target&gt;</a>(std::declval&lt;T&gt;()));</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Target, kumi::concepts::product_type T&gt; <span class="keyword">struct </span>member_cast</div>
 <div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gad2e4009d5d28df5090885b030f08f1f8">kumi::member_cast&lt;Target&gt;</a>(std::declval&lt;T&gt;()));</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::member_cast_t&lt;Target, T&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Target, kumi::concepts::product_type T&gt;</div>
-<div class="line">    <span class="keyword">using </span>member_cast_t = <span class="keyword">typename</span> kumi::result::member_cast&lt;Target, T&gt;::type;</div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gad2e4009d5d28df5090885b030f08f1f8" title="Callable object converting a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target....">kumi::member_cast</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>

@@ -205,12 +205,13 @@ $(function(){initNavTree('group__generators_ga4550222df58187f71b1b1347500e324a.h
 <li>A product type made of all element of all input product types in order.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type... Ts&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1cat.html">cat</a></div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;concepts::product_type... Ts&gt; <span class="keyword">using </span>cat_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga4550222df58187f71b1b1347500e324a">kumi::cat</a>(std::declval&lt;Ts&gt;()...));</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type... Ts&gt; <span class="keyword">struct </span>cat</div>
 <div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga4550222df58187f71b1b1347500e324a">kumi::cat</a>(std::declval&lt;Ts&gt;()...));</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::cat_t&lt;Ts...&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;concepts::product_type... Ts&gt; <span class="keyword">using </span>cat_t = <span class="keyword">typename</span> kumi::result::cat&lt;Ts...&gt;::type;</div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga4550222df58187f71b1b1347500e324a" title="Callable object concatenating multiple product types into a single one.">kumi::cat</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>

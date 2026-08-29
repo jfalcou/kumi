@@ -215,13 +215,13 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi
 <li>A product type with the type of <span class="tt">t</span> with elements equal to get&lt;Ids&gt;(t) for each given identifer.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type Tuple, kumi::concepts::identifier <span class="keyword">auto</span>... Name&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1reorder__fields.html">reorder_fields</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga8c42552c8f93dad0b83a3903468d02c6">kumi::reorder_fields</a>&lt;Name...&gt;(std::declval&lt;Tuple&gt;()));</div>
-<div class="line">    };</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type Tuple, kumi::concepts::identifier <span class="keyword">auto</span>... Name&gt;</div>
+<div class="line">    <span class="keyword">using </span>reorder_fields_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga8c42552c8f93dad0b83a3903468d02c6">kumi::reorder_fields</a>&lt;Name...&gt;(std::declval&lt;Tuple&gt;()));</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type Tuple, kumi::concepts::identifier <span class="keyword">auto</span>... Name&gt;</div>
-<div class="line">    <span class="keyword">using </span>reorder_fields_t = <span class="keyword">typename</span> kumi::result::reorder_fields&lt;Tuple, Name...&gt;::type;</div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type Tuple, kumi::concepts::identifier <span class="keyword">auto</span>... Name&gt; <span class="keyword">struct </span>reorder_fields</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::reorder_fields_t&lt;Tuple, Name...&gt;;</div>
+<div class="line">    };</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga8c42552c8f93dad0b83a3903468d02c6" title="Callable object reordering elements of a Record Type.">kumi::reorder_fields</a></p>
 <h2 class="groupheader">Example </h2>

@@ -1,11 +1,10 @@
 var searchData=
 [
-  ['value_0',['value',['../structkumi_1_1function_1_1size__or.html#autotoc_md12',1,'Helper value'],['../structkumi_1_1is__product__type.html#autotoc_md70',1,'Helper value'],['../structkumi_1_1is__record__type.html#autotoc_md72',1,'Helper value'],['../structkumi_1_1size.html#autotoc_md74',1,'Helper value'],['../structkumi_1_1is__container.html#autotoc_md77',1,'Helper value'],['../structkumi_1_1container__size.html#autotoc_md79',1,'Helper value'],['../structkumi_1_1is__projection__map.html#autotoc_md83',1,'Helper value'],['../structkumi_1_1is__instance__of.html#autotoc_md87',1,'Helper value'],['../structkumi_1_1all__uniques.html#autotoc_md90',1,'Helper value'],['../structkumi_1_1all__unique__names.html#autotoc_md92',1,'Helper value'],['../structkumi_1_1is__equivalent.html#autotoc_md94',1,'Helper value'],['../structkumi_1_1is__equality__comparable.html#autotoc_md96',1,'Helper value']]],
-  ['variable_1',['variable',['../structkumi_1_1is__homogeneous.html#autotoc_md81',1,'Helper variable'],['../structkumi_1_1has__static__size.html#autotoc_md82',1,'Helper variable']]],
-  ['version_201_200_20amazing_20amethyst_2',['Version 1.0 - Amazing Amethyst',['../changelog.html#autotoc_md125',1,'']]],
-  ['version_202_200_20bedazzling_20beryl_3',['Version 2.0 - Bedazzling Beryl',['../changelog.html#autotoc_md120',1,'']]],
-  ['version_202_201_20charming_20chrysoprase_4',['Version 2.1 - Charming Chrysoprase',['../changelog.html#autotoc_md116',1,'']]],
-  ['version_203_200_20delicious_20datolite_5',['Version 3.0 - Delicious Datolite',['../changelog.html#autotoc_md110',1,'']]],
-  ['version_203_201_20exquisite_20epidote_6',['Version 3.1 - Exquisite Epidote',['../changelog.html#autotoc_md105',1,'']]],
-  ['version_204_200_20flawless_20fluorite_7',['Version 4.0 - Flawless Fluorite',['../changelog.html#autotoc_md101',1,'']]]
+  ['value_0',['Helper value',['../group__functional_ga1aeb494d781c6a1d8f48168f4f093afe.html#autotoc_md12',1,'']]],
+  ['version_201_200_20amazing_20amethyst_1',['Version 1.0 - Amazing Amethyst',['../changelog.html#autotoc_md120',1,'']]],
+  ['version_202_200_20bedazzling_20beryl_2',['Version 2.0 - Bedazzling Beryl',['../changelog.html#autotoc_md115',1,'']]],
+  ['version_202_201_20charming_20chrysoprase_3',['Version 2.1 - Charming Chrysoprase',['../changelog.html#autotoc_md111',1,'']]],
+  ['version_203_200_20delicious_20datolite_4',['Version 3.0 - Delicious Datolite',['../changelog.html#autotoc_md105',1,'']]],
+  ['version_203_201_20exquisite_20epidote_5',['Version 3.1 - Exquisite Epidote',['../changelog.html#autotoc_md100',1,'']]],
+  ['version_204_200_20flawless_20fluorite_6',['Version 4.0 - Flawless Fluorite',['../changelog.html#autotoc_md96',1,'']]]
 ];

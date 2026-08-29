@@ -210,13 +210,14 @@ template&lt;std::size_t R&gt; </div>
 <li>A product type equivalent to <span class="tt">t</span> with elements rotated R positions to the right.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> R, kumi::concepts::product_type T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1rotate__right.html">rotate_right</a></div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> R, kumi::concepts::product_type T&gt;</div>
+<div class="line">    <span class="keyword">using </span>rotate_right_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaffd5dbb36e1c70d2fc058ffe03afef3e">kumi::rotate_right&lt;R&gt;</a>(std::declval&lt;T&gt;()));</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> R, kumi::concepts::product_type T&gt; <span class="keyword">struct </span>rotate_right</div>
 <div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaffd5dbb36e1c70d2fc058ffe03afef3e">kumi::rotate_right&lt;R&gt;</a>(std::declval&lt;T&gt;()));</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::rotate_right_t&lt;R, T&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> R, kumi::concepts::product_type T&gt;</div>
-<div class="line">    <span class="keyword">using </span>rotate_right_t = <span class="keyword">typename</span> kumi::result::rotate_right&lt;R, T&gt;::type;</div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gaffd5dbb36e1c70d2fc058ffe03afef3e" title="Callable object.">kumi::rotate_right</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>

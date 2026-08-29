@@ -204,12 +204,13 @@ $(function(){initNavTree('group__generators_gaef527bdd76c70e7fded23a9759428f5c.h
 <li>A product type containing the transposed elements of <span class="tt">t</span>.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1transpose.html">transpose</a></div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>transpose_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaef527bdd76c70e7fded23a9759428f5c">kumi::transpose</a>(std::declval&lt;T&gt;()));</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span>transpose</div>
 <div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaef527bdd76c70e7fded23a9759428f5c">kumi::transpose</a>(std::declval&lt;T&gt;()));</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::transpose_t&lt;T&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>transpose_t = <span class="keyword">typename</span> kumi::result::transpose&lt;T&gt;::type;</div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gaef527bdd76c70e7fded23a9759428f5c" title="Callable object transposing a product type of product types by shifting elements in their transposed ...">kumi::transpose</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>

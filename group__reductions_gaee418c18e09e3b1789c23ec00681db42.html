@@ -208,18 +208,18 @@ $(function(){initNavTree('group__reductions_gaee418c18e09e3b1789c23ec00681db42.h
 <li>The resulting value of the application of the function <span class="tt">f(<a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137" title="Extracts the Ith field from a kumi::record.">get</a>&lt;0&gt;(t), f(... , f(<a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137" title="Extracts the Ith field from a kumi::record.">get</a>&lt;N-1&gt;(t), init))</span></li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, kumi::concepts::product_type T, <span class="keyword">typename</span> Value = <span class="keywordtype">void</span>&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1fold__right.html">fold_right</a></div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, kumi::concepts::product_type T, <span class="keyword">typename</span>... Value&gt;</div>
+<div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(Value) == 0) || (<span class="keyword">sizeof</span>...(Value) == 1))</div>
+<div class="line">    <span class="keyword">using</span> fold_right_t =</div>
+<div class="line">      <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaee418c18e09e3b1789c23ec00681db42">kumi::fold_right</a>(std::declval&lt;Function&gt;(), std::declval&lt;T&gt;(), std::declval&lt;Value&gt;()...));</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, kumi::concepts::product_type T, <span class="keyword">typename</span>... Value&gt;</div>
+<div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(Value) == 0) || (<span class="keyword">sizeof</span>...(Value) == 1))</div>
+<div class="line">    <span class="keyword">struct</span> fold_right</div>
 <div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaee418c18e09e3b1789c23ec00681db42">kumi::fold_right</a>(std::declval&lt;Function&gt;(), std::declval&lt;T&gt;(), std::declval&lt;Value&gt;()));</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::fold_right_t&lt;Function, T, Value...&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, kumi::concepts::product_type T&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1fold__right.html">fold_right</a>&lt;Function, T&gt;</div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaee418c18e09e3b1789c23ec00681db42">kumi::fold_right</a>(std::declval&lt;Function&gt;(), std::declval&lt;T&gt;()));</div>
-<div class="line">    };</div>
-<div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, kumi::concepts::product_type T, <span class="keyword">typename</span> Value = <span class="keywordtype">void</span>&gt;</div>
-<div class="line">    <span class="keyword">using </span>fold_right_t = <span class="keyword">typename</span> kumi::result::fold_right&lt;Function, T, Value&gt;::type;</div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gaee418c18e09e3b1789c23ec00681db42" title="Callable object computing the generalized combination of all elements using a non-tail recursive call...">kumi::fold_right</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>

@@ -189,7 +189,7 @@ $(function(){initNavTree('group__generators_ga0f52ba0b24ce54052784df91c54ac233.h
 
 <p>Callable object removing a sub product type from a product type. </p>
 <p>On record types, this function operates on elements as if they were ordered. The considered order is the order of declaration.</p>
-<dl class="section note"><dt>Note</dt><dd>This function will issue a compile time error if <span class="tt">I0</span> and <span class="tt">I1</span> do not verify that <span class="tt">0 &lt;= I0 &lt;= I1 &lt;= size_v&lt;T&gt;</span>.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function will issue a compile time error if <span class="tt">I0</span> and <span class="tt">I1</span> do not verify that <span class="tt">0 &lt;= I0 &lt;= I1 &lt;= <a class="el" href="group__traits_ga4dd894f30adf7e5f7ae95124f66d8adb.html#ga4dd894f30adf7e5f7ae95124f66d8adb" title="Computes the number of elements of a kumi::product_type.">size_v</a>&lt;T&gt;</span>.</dd></dl>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/extract.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
@@ -208,21 +208,19 @@ $(function(){initNavTree('group__generators_ga0f52ba0b24ce54052784df91c54ac233.h
 <h3 class="groupheader">Return value </h3>
 <ul>
 <li>1. A new product type containing the elements of t without the range of elements from I0 to I1.</li>
-<li>2. A new product type containing the elements of t without the range of elements from I0 to <span class="tt">size_v&lt;T&gt;</span>.</li>
+<li>2. A new product type containing the elements of t without the range of elements from I0 to <span class="tt"><a class="el" href="group__traits_ga4dd894f30adf7e5f7ae95124f66d8adb.html#ga4dd894f30adf7e5f7ae95124f66d8adb" title="Computes the number of elements of a kumi::product_type.">size_v</a>&lt;T&gt;</span>.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::size_t I0, std::size_t I1 = std::size_t(-1)&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1remove.html">remove</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga0f52ba0b24ce54052784df91c54ac233">kumi::remove</a>(std::declval&lt;T&gt;(), kumi::index_t&lt;I0&gt;{}, kumi::index_t&lt;I1&gt;{}));</div>
-<div class="line">    };</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::size_t... I&gt;</div>
+<div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(I) == 1) || (<span class="keyword">sizeof</span>...(I) == 2))</div>
+<div class="line">    <span class="keyword">using</span> remove_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga0f52ba0b24ce54052784df91c54ac233">kumi::remove</a>(std::declval&lt;T&gt;(), kumi::index_t&lt;I&gt;{}...));</div>
 <div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::<span class="keywordtype">size_t</span> I0&gt; <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1remove.html">remove</a>&lt;T, I0&gt;</div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::size_t... I&gt;</div>
+<div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(I) == 1) || (<span class="keyword">sizeof</span>...(I) == 2))</div>
+<div class="line">    <span class="keyword">struct</span> remove</div>
 <div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga0f52ba0b24ce54052784df91c54ac233">kumi::remove</a>(std::declval&lt;T&gt;(), kumi::index_t&lt;I0&gt;{}));</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::remove_t&lt;T, I...&gt;;</div>
 <div class="line">    };</div>
-<div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::size_t I0, std::size_t I1 = std::size_t(-1)&gt;</div>
-<div class="line">    <span class="keyword">using </span>remove_t = <span class="keyword">typename</span> kumi::result::remove&lt;T, I0, I1&gt;::type;</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga0f52ba0b24ce54052784df91c54ac233" title="Callable object removing a sub product type from a product type.">kumi::remove</a></p>
 <h2 class="groupheader">Examples </h2>

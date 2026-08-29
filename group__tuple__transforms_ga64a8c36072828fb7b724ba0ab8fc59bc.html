@@ -195,7 +195,7 @@ $(function(){initNavTree('group__tuple__transforms_ga64a8c36072828fb7b724ba0ab8f
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type T, product_type... Ts&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga64a8c36072828fb7b724ba0ab8fc59bc">map_index</a>(Function &amp;&amp; f, T &amp;&amp; t, Ts &amp;&amp;... ts);</div>
-<div class="ttc" id="agroup__tuple__transforms_ga64a8c36072828fb7b724ba0ab8fc59bc_html_ga64a8c36072828fb7b724ba0ab8fc59bc"><div class="ttname"><a href="#ga64a8c36072828fb7b724ba0ab8fc59bc">kumi::map_index</a></div><div class="ttdeci">constexpr map_index_t map_index</div><div class="ttdoc">Callable object applying the Callable object f on each product types elements and their indexes.</div><div class="ttdef"><b>Definition</b> map.hpp:215</div></div>
+<div class="ttc" id="agroup__tuple__transforms_ga64a8c36072828fb7b724ba0ab8fc59bc_html_ga64a8c36072828fb7b724ba0ab8fc59bc"><div class="ttname"><a href="#ga64a8c36072828fb7b724ba0ab8fc59bc">kumi::map_index</a></div><div class="ttdeci">constexpr map_index_t map_index</div><div class="ttdoc">Callable object applying the Callable object f on each product types elements and their indexes.</div><div class="ttdef"><b>Definition</b> map.hpp:205</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">f</span>: Callable object to apply</li>
@@ -210,15 +210,15 @@ $(function(){initNavTree('group__tuple__transforms_ga64a8c36072828fb7b724ba0ab8f
 <div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function,</div>
 <div class="line">             kumi::concepts::product_type T,</div>
 <div class="line">             kumi::concepts::sized_product_type&lt;kumi::size_v&lt;T&gt;&gt;... Ts&gt;</div>
-<div class="line">    <span class="keyword">struct </span><a class="code hl_struct" href="structkumi_1_1result_1_1map__index.html">map_index</a></div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga64a8c36072828fb7b724ba0ab8fc59bc">kumi::map_index</a>(std::declval&lt;Function&gt;(), std::declval&lt;T&gt;(), std::declval&lt;Ts&gt;()...));</div>
-<div class="line">    };</div>
+<div class="line">    <span class="keyword">using </span>map_index_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga64a8c36072828fb7b724ba0ab8fc59bc">kumi::map_index</a>(std::declval&lt;Function&gt;(), std::declval&lt;T&gt;(), std::declval&lt;Ts&gt;()...));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function,</div>
 <div class="line">             kumi::concepts::product_type T,</div>
 <div class="line">             kumi::concepts::sized_product_type&lt;kumi::size_v&lt;T&gt;&gt;... Ts&gt;</div>
-<div class="line">    <span class="keyword">using </span>map_index_t = <span class="keyword">typename</span> kumi::result::map_index&lt;Function, T, Ts...&gt;::type;</div>
+<div class="line">    <span class="keyword">struct </span>map_index</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::map_index_t&lt;Function, T, Ts...&gt;;</div>
+<div class="line">    };</div>
 <div class="line"> </div>
 </div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga64a8c36072828fb7b724ba0ab8fc59bc" title="Callable object applying the Callable object f on each product types elements and their indexes.">kumi::map_index</a></p>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="group__transforms_gaeaba737291ba1085d77272eae38a016e.html#gaeaba737291ba1085d77272eae38a016e" title="Callable object applying the Callable object f on each product types&#39; elements.">kumi::map</a> </dd>
