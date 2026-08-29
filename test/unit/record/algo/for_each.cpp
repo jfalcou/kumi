@@ -86,7 +86,10 @@ TTS_CASE("Check for_each_field behavior")
   auto t = kumi::record{"a"_id = 1, "ab"_id = 3., "cr"_id = 3.4f, "de"_id = '5'};
   kumi::for_each_field(
     [](auto name, auto& m) {
-      if (name == "a") { m++; }
+      if (name == "a")
+      {
+        m++;
+      }
       else m--;
     },
     t);
