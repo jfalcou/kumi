@@ -70,11 +70,11 @@
 #define KUMI_MEMBERS(N, _)                                                                                             \
   T##N member##N;                                                                                                      \
   using index##N = std::integral_constant<std::size_t, N>;                                                             \
-  KUMI_ABI constexpr auto& operator()(index##N)& noexcept                                                              \
+  KUMI_ABI constexpr auto& operator()(index##N) & noexcept                                                             \
   {                                                                                                                    \
     return member##N;                                                                                                  \
   }                                                                                                                    \
-  KUMI_ABI constexpr auto&& operator()(index##N)&& noexcept                                                            \
+  KUMI_ABI constexpr auto&& operator()(index##N) && noexcept                                                           \
   {                                                                                                                    \
     return static_cast<T##N&&>(member##N);                                                                             \
   }                                                                                                                    \
