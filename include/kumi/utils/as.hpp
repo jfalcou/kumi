@@ -11,7 +11,7 @@ namespace kumi
 {
   //====================================================================================================================
   /**
-     @ingroup types
+     @ingroup kumi_types
 
      @class as
      @brief Lightweight type-wrapper

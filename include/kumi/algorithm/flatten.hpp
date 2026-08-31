@@ -145,7 +145,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var compress
     @brief Callable object converting a product type of product type into a single product type recursively, or returns
@@ -205,7 +205,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var flatten
     @brief Callable object converting a product type of product types into a product type of all elements.
@@ -261,7 +261,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var flatten_all
     @brief Callable object converting recursively a product type of product types into a product type of all elements.
@@ -329,7 +329,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var as_flat_ptr
     @brief Callable object converting recursively a product type of product types into a flat product type of pointers

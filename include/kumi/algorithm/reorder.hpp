@@ -66,7 +66,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var reorder
     @brief Callable object reordering elements of a product type
@@ -132,7 +132,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var reorder_fields
     @brief Callable object reordering elements of a Record Type
@@ -190,7 +190,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var reindex
     @brief Callable object reindex elements of a Product Type

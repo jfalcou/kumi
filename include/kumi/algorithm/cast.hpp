@@ -35,7 +35,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var member_cast
     @brief Callable object converting a product_type<Ts...> to an instance of a product_type<Target...>

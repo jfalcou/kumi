@@ -10,7 +10,7 @@
 #ifdef KUMI_DOXYGEN_INVOKED
 //======================================================================================================================
 /**
-  @ingroup  utility
+  @ingroup kumi_utility
   @brief    Provides an extension point `as_streamable` in order to output types with no stream
             operator defined.
 
@@ -28,7 +28,7 @@ auto as_streamable(auto e);
 
 //======================================================================================================================
 /**
-  @ingroup utility
+  @ingroup kumi_utility
   @brief Provides an extension point `to_str` in order to output types with no textual
          representation defined.
 

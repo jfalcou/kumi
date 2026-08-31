@@ -143,7 +143,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup reductions
+    @ingroup kumi_reductions
 
     @var inclusive_scan_left
     @brief Callable object computing the inclusive prefix scan of all elements of a product type using a tail recursive
@@ -210,7 +210,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup reductions
+    @ingroup kumi_reductions
 
     @var exclusive_scan_left
     @brief Callable object computing the exclusive prefix scan of all elements of a product type using a tail recursive
@@ -277,7 +277,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup reductions
+    @ingroup kumi_reductions
 
     @var inclusive_scan_right
     @brief Callable object computing the inclusive suffix scan of all elements of a product type using a non-tail
@@ -344,7 +344,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup reductions
+    @ingroup kumi_reductions
 
     @var exclusive_scan_right
     @brief Callable object computing the exclusive suffix scan of all elements of a product type using a non-tail

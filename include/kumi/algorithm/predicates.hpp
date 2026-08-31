@@ -108,7 +108,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup queries
+    @ingroup kumi_queries
 
     @var all_of
     @brief Callable object checking if a unary predicate p returns true for every element of t.
@@ -162,7 +162,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup queries
+    @ingroup kumi_queries
 
     @var any_of
     @brief Callable object checking if a unary predicate p returns true for any element of t.
@@ -216,7 +216,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup queries
+    @ingroup kumi_queries
 
     @var none_of
     @brief Callable object checking if a unary predicate p does not returns true for any element in t.
@@ -270,7 +270,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup queries
+    @ingroup kumi_queries
 
     @var count_if
     @brief Callable object counting the number of elements of t satisfying predicates p.
@@ -319,7 +319,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup queries
+    @ingroup kumi_queries
 
     @var count
     @brief Callable object counting the number of elements of t not equivalent to false.

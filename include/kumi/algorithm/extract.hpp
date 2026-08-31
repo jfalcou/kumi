@@ -77,7 +77,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var extract
     @brief Callable object extracting a sub product type from a product type
@@ -144,7 +144,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var remove
     @brief Callable object removing a sub product type from a product type
@@ -211,7 +211,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var split
     @brief Callable object splitting a product type into two

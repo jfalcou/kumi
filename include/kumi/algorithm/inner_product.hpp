@@ -66,7 +66,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup reductions
+    @ingroup kumi_reductions
 
     @var apply
     @brief Callable object computing the inner product (i.e. sum of products)

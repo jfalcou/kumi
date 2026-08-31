@@ -1,7 +1,7 @@
 #error This file is for documentation only - DO NOT INCLUDE
 /**
 
-@page product Product Types 
+@page kumi_product Product Types 
 
 @section product_construction Product Constructions (The Logic of "AND")
 
@@ -11,7 +11,7 @@ The structure of a product type is determined by the fixed order of the operands
 
 ---
 
-@section product_type Product Type \f$ (A \times B) \f$
+@section kumi_product_type Product Type \f$ (A \times B) \f$
 
 A **Product Type** is a compound type formed by combining multiple types. 
 
@@ -65,7 +65,7 @@ yet optimized representation of them. Each type provided in the standard can be 
 
 ---
 
-@section record_type Record Type \f$ (\{l_A: A\} \times \{l_B: B\}) \f$
+@section kumi_record_type Record Type \f$ (\{l_A: A\} \times \{l_B: B\}) \f$
 
 A **Record Type** identifies its components by a **unique label** rather than a position. 
 
@@ -116,9 +116,9 @@ whereas for a programmer that has to consider memory representation, this is pot
 
 <div class="section_buttons">
  
-| Previous                        |
-|:--------------------------------|
-| [Identity Types](@ref identity) | 
+| Previous                              |
+|:--------------------------------------|
+| [Identity Types](@ref kumi_identity)  | 
  
 </div>
 

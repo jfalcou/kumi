@@ -64,7 +64,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var unique
     @brief Callable object returning a product type with consecutive duplicate types removed (pairwise uniqueness).
@@ -118,7 +118,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var all_unique
     @brief Callable object returning a product type containing the values of the first occurence of each type in `t`.

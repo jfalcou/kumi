@@ -1,4 +1,4 @@
-Change Log {#changelog}
+Change Log {#kumi_changelog}
 ==========
 
 # Version 4.0 - Flawless Fluorite

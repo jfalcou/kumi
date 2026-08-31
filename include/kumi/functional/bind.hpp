@@ -68,7 +68,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup  functional
+    @ingroup kumi_functional
     @brief    Binds a certain amount of values into a callable reducing it's arity.
 
     @param c	Callable object to be bound.
@@ -89,7 +89,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup  functional
+    @ingroup kumi_functional
     @brief    Binds a certain amount of values into a callable reducing it's arity.
 
     @param c	Callable object to be bound.

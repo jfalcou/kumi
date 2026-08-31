@@ -162,7 +162,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup reductions
+    @ingroup kumi_reductions
 
     @var reduce
     @brief Callable object performing a tree-like reduction of all elements of a product type.
@@ -237,7 +237,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup reductions
+    @ingroup kumi_reductions
 
     @var map_reduce
     @brief Callable object performing a tree-like reduction of all elements of a product type. The given map
@@ -316,7 +316,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup reductions
+    @ingroup kumi_reductions
 
     @var sum
     @brief Callable object computing the sum of all elements.
@@ -385,7 +385,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup reductions
+    @ingroup kumi_reductions
 
     @var prod
     @brief Callable object computing the product of all elements.
@@ -454,7 +454,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup reductions
+    @ingroup kumi_reductions
 
     @var bit_and
     @brief Callable object computing the bitwise AND of all elements.
@@ -523,7 +523,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup reductions
+    @ingroup kumi_reductions
 
     @var bit_or
     @brief Callable object computing the bitwise OR of all elements.
@@ -592,7 +592,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup reductions
+    @ingroup kumi_reductions
 
     @var bit_xor
     @brief Callable object computing the bitwise XOR of all elements.

@@ -11,7 +11,7 @@ namespace kumi
 {
   //====================================================================================================================
   /**
-    @ingroup  utility
+    @ingroup kumi_utility
     @class    builder
     @brief    kumi::builder provides a generic way of defining a product type.
 

@@ -37,7 +37,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
     @brief  Callable object returning the Cartesian Product of all elements of its arguments product types
 
     @var cartesian_product

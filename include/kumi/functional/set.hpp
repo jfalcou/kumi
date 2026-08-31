@@ -40,7 +40,7 @@ namespace kumi
   {
     //==================================================================================================================
     /**
-      @ingroup  functional
+      @ingroup kumi_functional
       @brief    Logic provider to compute the index map associated to the all_unique operation.
 
       ## Callable object
@@ -67,7 +67,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup  functional
+      @ingroup kumi_functional
       @brief    Logic provider to compute the index map associated to the partition operation.
 
       ## Callable object
@@ -98,7 +98,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup  functional
+      @ingroup kumi_functional
       @brief    Logic provider to compute the index map associated to the adjacent unicity operation.
 
       ## Callable object
@@ -125,7 +125,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup  functional
+      @ingroup kumi_functional
       @brief    Callable object computing the index map associated to the adjactent unicity operation.
     **/
     //==================================================================================================================
@@ -133,7 +133,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup  functional
+      @ingroup kumi_functional
       @brief    Callable object computing the index map associated to the deduplication operation.
     **/
     //==================================================================================================================
@@ -141,7 +141,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup  functional
+      @ingroup kumi_functional
       @brief    Callable object computing the index map associated to the selection operation.
     **/
     //==================================================================================================================

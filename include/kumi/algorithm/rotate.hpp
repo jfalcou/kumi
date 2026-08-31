@@ -40,7 +40,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var rotate_left
     @brief Callable object
@@ -98,7 +98,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var rotate_right
     @brief Callable object

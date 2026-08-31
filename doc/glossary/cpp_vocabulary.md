@@ -1,4 +1,4 @@
-C++ Specific Terms {#cpp_spec}
+C++ Specific Terms {#kumi_cpp_spec}
 ==========
 
 ## Empty Base Optimization

@@ -21,7 +21,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup types
+    @ingroup kumi_types
     @class index_t
     @brief Integral constant type
 
@@ -42,7 +42,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup utility
+    @ingroup kumi_utility
     @brief Inline integral constant value for kumi::index_t
   **/
   //====================================================================================================================
@@ -50,7 +50,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup types
+    @ingroup kumi_types
     @class label_t
     @brief Literal constant type
 
@@ -76,7 +76,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup utility
+    @ingroup kumi_utility
     @brief Inline literal constant value for kumi::label_t
   **/
   //====================================================================================================================
@@ -92,7 +92,7 @@ namespace kumi
   {
     //==================================================================================================================
     /**
-      @ingroup utility
+      @ingroup kumi_utility
       @brief Forms a integral constant literal of the desired value.
       @return An instance of kumi::index_t for the specified integral value
       ## Example:
@@ -106,7 +106,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup utility
+      @ingroup kumi_utility
       @brief Forms a constant string literal of the desired value.
       @return An instance of kumi::name for the specified string
       ##Example:
@@ -120,7 +120,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup utility
+      @ingroup kumi_utility
       @brief Forms a constant string literal of the desired value.
       @return An instance of kumi::label for the specified string
 
@@ -139,7 +139,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup utility
+    @ingroup kumi_utility
     @brief Convert a unary template meta-program in a running predicate
     @tparam Pred Unary template meta-program to convert.
     @return A Callable Object applying Pred to the type of its arguments
@@ -152,7 +152,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup utility
+    @ingroup kumi_utility
     @brief Helper to retrive the index of a type in a product type by it s type
 
     @note This function does not participate in overload resolution if the product type has several instances of the
@@ -172,7 +172,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup utility
+    @ingroup kumi_utility
     @brief Helper to retrive the index of a type in a product type by it s identifier
 
     @note This function does not participate in overload resolution if the product type has several instances of the
@@ -192,7 +192,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup utility
+    @ingroup kumi_utility
     @brief Helper to retrive the index of a type in a product type by it s identifier
 
     @note This function does not participate in overload resolution if the product type has several instances of the

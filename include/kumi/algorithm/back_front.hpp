@@ -31,7 +31,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup queries
+    @ingroup kumi_queries
 
     @var front
     @brief Callable object used to retrieve the front of a product type
@@ -85,7 +85,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup queries
+    @ingroup kumi_queries
 
     @var back
     @brief Callable object used to retrieve the back of a product type

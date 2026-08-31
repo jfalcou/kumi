@@ -68,7 +68,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup reductions
+    @ingroup kumi_reductions
 
     @var fold_left
     @brief Callable object computing the generalized combination of all elements using a tail recursive call.
@@ -129,7 +129,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup reductions
+    @ingroup kumi_reductions
 
     @var fold_right
     @brief Callable object computing the generalized combination of all elements using a non-tail recursive call.

@@ -34,7 +34,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup queries
+    @ingroup kumi_queries
 
     @var locate
     @brief Callable object Returning the index of a value which type satisfies a given predicate

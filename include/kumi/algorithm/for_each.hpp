@@ -83,7 +83,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup transforms
+    @ingroup kumi_transforms
 
     @var for_each
     @brief Callable object applying the Callable object f on each element of a product type.
@@ -134,7 +134,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup tuple_transforms
+    @ingroup kumi_tuple_transforms
 
     @var for_each
     @brief Callable object applying the Callable object f on each element of a product type and its index.
@@ -176,7 +176,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup record_transforms
+    @ingroup kumi_record_transforms
 
     @var for_each
     @brief Callable object applying the Callable object f on each element of a product type and its field.
