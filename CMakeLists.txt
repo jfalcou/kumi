@@ -64,7 +64,16 @@ copa_setup_install( LIBRARY kumi
 ## Setup doxygen
 ##======================================================================================================================
 if(KUMI_BUILD_DOCUMENTATION)
-  copa_setup_doxygen(${QUIET_OPTION} TARGET kumi-doxygen DESTINATION "${PROJECT_BINARY_DIR}/doc")
+  copa_setup_doxygen(${QUIET_OPTION}
+                     TARGET kumi-doxygen
+                     DESTINATION "${PROJECT_BINARY_DIR}/doc"
+                     URL "https://github.com/jfalcou/kumi"
+                     GODBOLT_LIBRARIES kumi
+                     GODBOLT_COMPILER clang1600
+                     GODBOLT_OPTIONS "-O3 -std=c++20 -DNDEBUG"
+                     COLOR_HUE 293
+                     COLOR_SATURATION 40
+                     COLOR_LIGHTNESS 50)
 endif()
 
 ##======================================================================================================================
