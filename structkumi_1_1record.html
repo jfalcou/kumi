@@ -171,7 +171,7 @@ $(function(){initNavTree('structkumi_1_1record.html','','structkumi_1_1record-me
 <a href="#pub-methods">Public Member Functions</a> &#124;
 <a href="#related">Related Symbols</a> &#124;
 <a href="structkumi_1_1record-members.html">List of all members</a>  </div>
-  <div class="headertitle"><div class="title">kumi::record&lt; Ts &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__record__related.html">Record Types and associated Functions</a></div></div></div>
+  <div class="headertitle"><div class="title">kumi::record&lt; Ts &gt; Class Template Reference<div class="ingroups"><a class="el" href="group__kumi__record__related.html">Record Types and associated Functions</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -190,7 +190,7 @@ class kumi::record&lt; Ts &gt;</div><p>Fixed-size collection of heterogeneous ta
   </table>
   </dd>
 </dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="product.html#record_type" title="Record Type  \_form#38">Record Type \( (\{l_A: A\} \times \{l_B: B\}) \)</a></dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="kumi_product.html#kumi_record_type" title="Record Type  \_form#38">Record Type \( (\{l_A: A\} \times \{l_B: B\}) \)</a></dd></dl>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md17"></a>
 Example:</h2>
 <div class="fragment"><div class="line"></div>
@@ -230,7 +230,7 @@ Example:</h2>
 <div class="line">    <span class="keywordtype">double</span> gpa2;</div>
 <div class="line">    <span class="keywordtype">char</span> grade2;</div>
 <div class="line">    std::string name2;</div>
-<div class="line">    <a class="code hl_function" href="group__record__related_ga9d6e39a733f56863dfa21cb1f07fdc3a.html#ga9d6e39a733f56863dfa21cb1f07fdc3a">kumi::tie</a>&lt;<span class="stringliteral">&quot;GPA&quot;</span>_id, <span class="stringliteral">&quot;grade&quot;</span>_id, <span class="stringliteral">&quot;name&quot;</span>_id&gt;(gpa2, grade2, name2) = get_student(2);</div>
+<div class="line">    <a class="code hl_function" href="group__kumi__record__related_ga9d6e39a733f56863dfa21cb1f07fdc3a.html#ga9d6e39a733f56863dfa21cb1f07fdc3a">kumi::tie</a>&lt;<span class="stringliteral">&quot;GPA&quot;</span>_id, <span class="stringliteral">&quot;grade&quot;</span>_id, <span class="stringliteral">&quot;name&quot;</span>_id&gt;(gpa2, grade2, name2) = get_student(2);</div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;ID: 2, &quot;</span></div>
 <div class="line">              &lt;&lt; <span class="stringliteral">&quot;GPA: &quot;</span>    &lt;&lt; gpa2   &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
 <div class="line">              &lt;&lt; <span class="stringliteral">&quot;grade: &quot;</span>  &lt;&lt; grade2 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
@@ -243,7 +243,7 @@ Example:</h2>
 <div class="line">              &lt;&lt; grade3   &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
 <div class="line">              &lt;&lt; name3    &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__record__related_ga9d6e39a733f56863dfa21cb1f07fdc3a_html_ga9d6e39a733f56863dfa21cb1f07fdc3a"><div class="ttname"><a href="group__record__related_ga9d6e39a733f56863dfa21cb1f07fdc3a.html#ga9d6e39a733f56863dfa21cb1f07fdc3a">kumi::tie</a></div><div class="ttdeci">constexpr auto tie(Ts &amp;... ts) -&gt; kumi::record&lt; kumi::field&lt; decltype(Fields), Ts &amp; &gt;... &gt; requires(sizeof...(Fields)==sizeof...(Ts))</div><div class="ttdoc">Creates a kumi::record of lvalue references to its arguments.</div><div class="ttdef"><b>Definition</b> record.hpp:453</div></div>
+<div class="ttc" id="agroup__kumi__record__related_ga9d6e39a733f56863dfa21cb1f07fdc3a_html_ga9d6e39a733f56863dfa21cb1f07fdc3a"><div class="ttname"><a href="group__kumi__record__related_ga9d6e39a733f56863dfa21cb1f07fdc3a.html#ga9d6e39a733f56863dfa21cb1f07fdc3a">kumi::tie</a></div><div class="ttdeci">constexpr auto tie(Ts &amp;... ts) -&gt; kumi::record&lt; kumi::field&lt; decltype(Fields), Ts &amp; &gt;... &gt; requires(sizeof...(Fields)==sizeof...(Ts))</div><div class="ttdoc">Creates a kumi::record of lvalue references to its arguments.</div><div class="ttdef"><b>Definition</b> record.hpp:453</div></div>
 <div class="ttc" id="astructkumi_1_1record_abc2cd329ad25d155458850c19cc3b137_html_abc2cd329ad25d155458850c19cc3b137"><div class="ttname"><a href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::record::get</a></div><div class="ttdeci">decltype(auto) constexpr get(record&lt; Ts... &gt; &amp;r) noexcept</div><div class="ttdoc">Extracts the Ith field from a kumi::record.</div><div class="ttdef"><b>Definition</b> record.hpp:618</div></div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
 </div><!-- fragment --> </div><table class="memberdecls">

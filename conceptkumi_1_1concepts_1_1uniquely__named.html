@@ -167,7 +167,7 @@ $(function(){initNavTree('conceptkumi_1_1concepts_1_1uniquely__named.html','',''
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">kumi::concepts::uniquely_named Concept Reference<div class="ingroups"><a class="el" href="group__concepts.html">Product Type Related Concepts</a></div></div></div>
+  <div class="headertitle"><div class="title">kumi::concepts::uniquely_named Concept Reference<div class="ingroups"><a class="el" href="group__kumi__concepts.html">Product Type Related Concepts</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -180,10 +180,10 @@ $(function(){initNavTree('conceptkumi_1_1concepts_1_1uniquely__named.html','',''
 </div><h2 id="header-conceptdef" class="groupheader">Concept definition</h2>
 <div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
 <div class="line">    <span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1concepts_1_1uniquely__named.html">uniquely_named</a> = (<span class="keyword">sizeof</span>...(Ts) == 0) || (<a class="code hl_concept" href="conceptkumi_1_1concepts_1_1has__named__fields.html">kumi::concepts::has_named_fields&lt;Ts...&gt;</a> &amp;&amp;</div>
-<div class="line">                                                      <a class="code hl_variable" href="group__traits_ga29ec70c788b9f655ef3b0f013ad63cec.html#ga29ec70c788b9f655ef3b0f013ad63cec">kumi::all_unique_names_v</a>&lt;std::remove_cvref_t&lt;Ts&gt;...&gt;)</div>
+<div class="line">                                                      <a class="code hl_variable" href="group__kumi__traits_ga29ec70c788b9f655ef3b0f013ad63cec.html#ga29ec70c788b9f655ef3b0f013ad63cec">kumi::all_unique_names_v</a>&lt;std::remove_cvref_t&lt;Ts&gt;...&gt;)</div>
 <div class="ttc" id="aconceptkumi_1_1concepts_1_1has__named__fields_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1has__named__fields.html">kumi::concepts::has_named_fields</a></div><div class="ttdoc">Concept specifying if parameter pack contains a kumi::concepts::field.</div><div class="ttdef"><b>Definition</b> concepts.hpp:287</div></div>
 <div class="ttc" id="aconceptkumi_1_1concepts_1_1uniquely__named_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1uniquely__named.html">kumi::concepts::uniquely_named</a></div><div class="ttdoc">Concept specifying if a parameter pack only holds kumi::concepts::field with no duplicate names.</div><div class="ttdef"><b>Definition</b> concepts.hpp:315</div></div>
-<div class="ttc" id="agroup__traits_ga29ec70c788b9f655ef3b0f013ad63cec_html_ga29ec70c788b9f655ef3b0f013ad63cec"><div class="ttname"><a href="group__traits_ga29ec70c788b9f655ef3b0f013ad63cec.html#ga29ec70c788b9f655ef3b0f013ad63cec">kumi::all_unique_names_v</a></div><div class="ttdeci">constexpr bool all_unique_names_v</div><div class="ttdoc">Checks if a parameter pack only contains distinct kumi::field names. Evaluates to false if no type is...</div><div class="ttdef"><b>Definition</b> traits.hpp:524</div></div>
+<div class="ttc" id="agroup__kumi__traits_ga29ec70c788b9f655ef3b0f013ad63cec_html_ga29ec70c788b9f655ef3b0f013ad63cec"><div class="ttname"><a href="group__kumi__traits_ga29ec70c788b9f655ef3b0f013ad63cec.html#ga29ec70c788b9f655ef3b0f013ad63cec">kumi::all_unique_names_v</a></div><div class="ttdeci">constexpr bool all_unique_names_v</div><div class="ttdoc">Checks if a parameter pack only contains distinct kumi::field names. Evaluates to false if no type is...</div><div class="ttdef"><b>Definition</b> traits.hpp:524</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

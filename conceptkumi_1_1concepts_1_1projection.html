@@ -167,7 +167,7 @@ $(function(){initNavTree('conceptkumi_1_1concepts_1_1projection.html','',''); })
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">kumi::concepts::projection Concept Reference<div class="ingroups"><a class="el" href="group__concepts.html">Product Type Related Concepts</a></div></div></div>
+  <div class="headertitle"><div class="title">kumi::concepts::projection Concept Reference<div class="ingroups"><a class="el" href="group__kumi__concepts.html">Product Type Related Concepts</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -177,7 +177,7 @@ $(function(){initNavTree('conceptkumi_1_1concepts_1_1projection.html','',''); })
 <p><code>#include &lt;kumi/utils/concepts.hpp&gt;</code></p>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Concept specifying if a type is suitable to be used as a projection. </p>
-<p>A type <span class="tt">T</span> models <span class="tt">kumi::projection</span> if it models <span class="tt"><a class="el" href="structkumi_1_1projection__map.html" title="A stateless, compile-time schema for product type transformation.">kumi::projection_map</a></span> or <span class="tt"><a class="el" href="group__utility.html#gaa1c76fca002e966a0a40e311ad68d841" title="Inline integral constant value for kumi::index_t.">kumi::index</a></span> or <span class="tt"><a class="el" href="structkumi_1_1identifier.html" title="identifier definition class">kumi::identifier</a></span> </p>
+<p>A type <span class="tt">T</span> models <span class="tt">kumi::projection</span> if it models <span class="tt"><a class="el" href="structkumi_1_1projection__map.html" title="A stateless, compile-time schema for product type transformation.">kumi::projection_map</a></span> or <span class="tt"><a class="el" href="group__kumi__utility.html#gaa1c76fca002e966a0a40e311ad68d841" title="Inline integral constant value for kumi::index_t.">kumi::index</a></span> or <span class="tt"><a class="el" href="structkumi_1_1identifier.html" title="identifier definition class">kumi::identifier</a></span> </p>
 </div><h2 id="header-conceptdef" class="groupheader">Concept definition</h2>
 <div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line">    <span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1concepts_1_1projection.html">projection</a> = <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1projection__map.html">kumi::concepts::projection_map&lt;T&gt;</a> || <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier&lt;T&gt;</a> || <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1index.html">kumi::concepts::index&lt;T&gt;</a></div>

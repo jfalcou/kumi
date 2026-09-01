@@ -1,0 +1,294 @@
+<!-- HTML header for doxygen 1.9.5-->
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "https://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=11"/>
+<meta name="generator" content="Doxygen 1.16.1"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<meta name="description" content="Efficient C++20 implementation of tuple-like classes and algorithms with better compile-time" />
+<link rel="canonical" href="https://jfalcou.github.io/kumi/" />
+<link rel="icon" type="image/svg+xml" href="/logo.svg" />
+<meta property="og:title" content="KUMI - The C++20 Compact Tuple Tools" />
+<meta property="og:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://jfalcou.github.io/kumi/" />
+<meta property="og:image" content="https://jfalcou.github.io/kumi/card.png" />
+<meta property="og:site_name" content="KUMI Documentation" />
+<meta property="og:locale" content="en_US" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="KUMI - The C++20 Compact Tuple Tools" />
+<meta name="twitter:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
+<meta name="twitter:image" content="https://jfalcou.github.io/kumi/card.png" />
+<title>KUMI: Setup</title>
+<link href="tabs.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="jquery.js"></script>
+<script type="text/javascript" src="dynsections.js"></script>
+<script type="text/javascript" src="godbolt.js"></script>
+<script type="text/javascript" src="doxygen-awesome-fragment-copy-button.js"></script>
+<script type="text/javascript" src="doxygen-awesome-paragraph-link.js"></script>
+<script type="text/javascript" src="doxygen-awesome-tabs.js"></script>
+<script type="text/javascript">
+  DoxygenAwesomeTabs.init()
+  DoxygenAwesomeParagraphLink.init()
+  DoxygenAwesomeFragmentCopyButton.init()
+  SendToGodbolt.init("kumi","clang1600","-O3 -std=c++20 -DNEDBUG")
+  document.addEventListener("DOMContentLoaded", function()
+  {
+    // Matches any word ending in _implementation_defined
+    const pattern = /\b\w+_implementation_defined\b/g;
+    const walker = document.createTreeWalker(
+      document.body,
+      NodeFilter.SHOW_TEXT,
+      null,
+      false
+    );
+    let node;
+    const targets = [];
+    while(node = walker.nextNode()) {
+      if (pattern.test(node.nodeValue)) {
+        targets.push(node);
+        // Reset regex index because of the 'g' flag
+        pattern.lastIndex = 0;
+      }
+    }
+    targets.forEach(textNode => {
+      const replacement = textNode.nodeValue.replace(
+        pattern,
+        '<span class="comment" title="This type is implementation defined and not part of the public API">/*implementation defined*/</span>'
+      );
+      const container = document.createElement('span');
+      container.innerHTML = replacement;
+      while (container.firstChild) {
+        textNode.parentNode.insertBefore(container.firstChild, textNode);
+      }
+      textNode.parentNode.removeChild(textNode);
+    });
+  });
+</script>
+<link href="navtree.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="navtreedata.js"></script>
+<script type="text/javascript" src="navtree.js"></script>
+<script type="text/javascript" src="cookie.js"></script>
+<link href="search/search.css" rel="stylesheet" type="text/css"/>
+<script type="text/javascript" src="search/searchdata.js"></script>
+<script type="text/javascript" src="search/search.js"></script>
+<script type="text/javascript">
+  $(function() { init_search(); });
+</script>
+<script type="text/x-mathjax-config">
+MathJax.Hub.Config({
+  extensions: ["tex2jax.js"],
+  jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js"></script>
+<link href="doxygen.css" rel="stylesheet" type="text/css" />
+<link href="doxygen-awesome.css" rel="stylesheet" type="text/css"/>
+<link href="doxygen-awesome-sidebar-only.css" rel="stylesheet" type="text/css"/>
+<link href="custom.css" rel="stylesheet" type="text/css"/>
+<link href="color.css" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+<a href="https://github.com/jfalcou/kumi" class="github-corner" title="View source on GitHub" target="_blank">
+    <svg viewBox="0 0 250 250" width="40" height="40" style="position: absolute; top: 0; border: 0; right: 0; z-index: 99;" aria-hidden="true">
+    <path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"></path><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"></path><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"></path></svg></a><style>.github-corner:hover .octo-arm{animation:octocat-wave 560ms ease-in-out}@keyframes octocat-wave{0%,100%{transform:rotate(0)}20%,60%{transform:rotate(-25deg)}40%,80%{transform:rotate(10deg)}}@media (max-width:500px){.github-corner:hover .octo-arm{animation:none}.github-corner .octo-arm{animation:octocat-wave 560ms ease-in-out}}</style>
+<div id="top"><!-- do not remove this div, it is closed by doxygen! -->
+<!-- BEGIN TITLEAREA-->
+<div id="titlearea">
+<table cellspacing="0" cellpadding="0">
+ <tbody>
+ <tr  style="height: 56px;">
+  <td id="projectlogo"><img alt="Logo" src="logo.svg"/></td>
+  <td id="projectalign">
+   <div id="projectname">KUMI<span id="projectnumber">&#160;v4.0.0</span>
+   </div>
+   <div id="projectbrief">Flawless Fluorite</div>
+  </td>
+ </tr>
+   <tr><td colspan="2" style="padding: 20px 0px 0px 0px;">        <div id="MSearchBox" class="MSearchBoxInactive">
+        <span class="left">
+          <span id="MSearchSelect" class="search-icon" onmouseover="return searchBox.OnSearchSelectShow()" onmouseout="return searchBox.OnSearchSelectHide()"><span class="search-icon-dropdown"></span></span>
+          <input type="text" id="MSearchField" value="" placeholder="Search" accesskey="S"
+               onfocus="searchBox.OnSearchFieldFocus(true)" 
+               onblur="searchBox.OnSearchFieldFocus(false)" 
+               onkeyup="searchBox.OnSearchFieldChange(event)"/>
+          </span><span class="right">
+            <a id="MSearchClose" href="javascript:searchBox.CloseResultsWindow()"><div id="MSearchCloseImg" class="close-icon"></div></a>
+          </span>
+        </div>
+</td></tr>
+ </tbody>
+</table>
+</div>
+<!-- end header part -->
+<!-- Generated by Doxygen 1.16.1 -->
+<script type="text/javascript">
+var searchBox = new SearchBox("searchBox", "search/",'.html');
+</script>
+<script type="text/javascript">
+$(function() { codefold.init(); });
+</script>
+</div><!-- top -->
+<div id="side-nav" class="ui-resizable side-nav-resizable">
+  <div id="nav-tree">
+    <div id="nav-tree-contents">
+      <div id="nav-sync" class="sync"></div>
+    </div>
+  </div>
+  <div id="splitbar" style="-moz-user-select:none;" 
+       class="ui-resizable-handle">
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){initNavTree('kumi_setup.html','',''); });
+</script>
+<div id="container">
+<div id="doc-content">
+<!-- window showing the filter options -->
+<div id="MSearchSelectWindow"
+     onmouseover="return searchBox.OnSearchSelectShow()"
+     onmouseout="return searchBox.OnSearchSelectHide()"
+     onkeydown="return searchBox.OnSearchSelectKey(event)">
+</div>
+
+<!-- iframe showing the search results (closed by default) -->
+<div id="MSearchResultsWindow">
+<div id="MSearchResults">
+<div class="SRPage">
+<div id="SRIndex">
+<div id="SRResults"></div>
+<div class="SRStatus" id="Loading">Loading...</div>
+<div class="SRStatus" id="Searching">Searching...</div>
+<div class="SRStatus" id="NoMatches">No Matches</div>
+</div>
+</div>
+</div>
+</div>
+
+<div><div class="header">
+  <div class="headertitle"><div class="title">Setup </div></div>
+</div><!--header-->
+<div class="contents">
+<div class="toc"><h3>Table of Contents</h3>
+<ul>
+  <li class="level1">
+    <a href="#prerequisit">Pre-requisites </a>
+  </li>
+  <li class="level1">
+    <a href="#setup-source">Install from the source </a>
+  </li>
+  <li class="level1">
+    <a href="#setup-standalone">Standalone setup </a>
+  </li>
+  <li class="level1">
+    <a href="#dependency">As a CMake dependency </a>
+  </li>
+</ul>
+</div>
+<div class="textblock"><h1 class="doxsection"><a class="anchor" id="prerequisit"></a>
+Pre-requisites</h1>
+<p>The <b>KUMI</b> librarie requires a C++20 compliant compiler. Here are the current minimal compiler version supported:</p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadLeft">Compiler  </th><th class="markdownTableHeadLeft">Version  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft">g++  </td><td class="markdownTableBodyLeft">14 and above  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft">clang++  </td><td class="markdownTableBodyLeft">19 and above  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft">em++  </td><td class="markdownTableBodyLeft">5 and above  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft">icpx  </td><td class="markdownTableBodyLeft">2025 and above  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft">MSVC  </td><td class="markdownTableBodyLeft">19 and above  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft">clang-CL  </td><td class="markdownTableBodyLeft">19 and above  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft">AppleClang  </td><td class="markdownTableBodyLeft">15 and above  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft">nvcc  </td><td class="markdownTableBodyLeft">13.2.5  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft">nvc++  </td><td class="markdownTableBodyLeft">26.3.0  </td></tr>
+</table>
+<h1 class="doxsection"><a class="anchor" id="setup-source"></a>
+Install from the source</h1>
+<p>Code source of <b>KUMI</b> is available on GitHub and can be retrieved via the following command:</p>
+<div class="fragment"><div class="line">$ git clone https:<span class="comment">//github.com/jfalcou/kumi.git</span></div>
+</div><!-- fragment --><p>Once retrieved, you should have a kumi folder which contains the whole source code.</p>
+<p>Then simply use <b>CMake</b> to generate the build system and directory for <b>KUMI</b>. We recommend using Ninja but any build system is fine.</p>
+<div class="tabbed"></div><div class="tabbed"><ul>
+<li><p class="startli"><b class="tab-title">Ninja</b></p>
+<div class="fragment"><div class="line">$ cmake -S . -B build -G Ninja</div>
+</div><!-- fragment --></li>
+<li><p class="startli"><b class="tab-title">Visual Studio</b></p>
+<div class="fragment"><div class="line">$ cmake -S . -B build -G <span class="stringliteral">&quot;Visual Studio 17 2022&quot;</span> -A x64 </div>
+</div><!-- fragment --></li>
+</ul>
+</div><div class="tabbed"></div><p>Once <b>CMake</b> completes, you can use the <span class="tt">install</span> target to build and install <b>KUMI</b>. By default, the library will be installed in the <span class="tt">/usr/local</span> directory, thus requiring root privileges.</p>
+<div class="fragment"><div class="line">$ sudo cmake --build build --target install</div>
+</div><!-- fragment --><p>You can select an alternative installation path by specifying the <span class="tt">CMAKE_INSTALL_PREFIX</span> option at configuration time.</p>
+<div class="fragment"><div class="line">$ cmake .. -G &lt;build-system&gt; -DCMAKE_INSTALL_PREFIX=path/to/install</div>
+<div class="line">$ cmake --build build --target install</div>
+</div><!-- fragment --><p>Once installed, <b>KUMI</b> is usable directly by providing the path to its installed files.</p>
+<h1 class="doxsection"><a class="anchor" id="setup-standalone"></a>
+Standalone setup</h1>
+<p>You can also use <b>KUMI</b> via a single standalone file that can be vendored in your own project without having to deal with <b>KUMI</b> as a dependency.</p>
+<p>Simply use <span class="tt">wget</span> to fetch the latest version and place it where you want:</p>
+<div class="fragment"><div class="line">wget https:<span class="comment">//raw.githubusercontent.com/jfalcou/kumi/refs/heads/standalone/kumi.hpp</span></div>
+</div><!-- fragment --><p>Use <b>KUMI</b> by just compiling your code with the include path pointing to the location of this single file.</p>
+<h1 class="doxsection"><a class="anchor" id="dependency"></a>
+As a CMake dependency</h1>
+<div class="tabbed"></div><div class="tabbed"><ul>
+<li><p class="startli"><b class="tab-title">FetchContent</b></p>
+<p class="startli">You can also use CMake FetchContent operation and use the <span class="tt">kumi::kumi</span> library target that our CMake exports.</p>
+<div class="fragment"><div class="line">##==================================================================================================</div>
+<div class="line">## Your project setup</div>
+<div class="line">##==================================================================================================</div>
+<div class="line">cmake_minimum_required(VERSION 3.28)</div>
+<div class="line">project(kumi-fetch LANGUAGES CXX)</div>
+<div class="line"> </div>
+<div class="line">include(FetchContent)</div>
+<div class="line">FetchContent_Declare(kumi GIT_REPOSITORY &quot;https://github.com/jfalcou/kumi.git&quot; GIT_TAG main)</div>
+<div class="line">FetchContent_MakeAvailable(kumi)</div>
+<div class="line"> </div>
+<div class="line">add_executable(test_kumi ../main.cpp)</div>
+<div class="line">target_link_libraries(test_kumi PUBLIC kumi::kumi)</div>
+</div><!-- fragment --></li>
+<li><p class="startli"><b class="tab-title">CPM</b></p>
+<p class="startli">The <b>KUMI</b> library can be setup using <a href="https://github.com/cpm-cmake/CPM.cmake">CPM</a>:</p>
+<div class="fragment"><div class="line">##==================================================================================================</div>
+<div class="line">## Your project setup</div>
+<div class="line">##==================================================================================================</div>
+<div class="line">cmake_minimum_required(VERSION 3.28)</div>
+<div class="line">project(kumi-cpm LANGUAGES CXX)</div>
+<div class="line"> </div>
+<div class="line"># Setup CPM - See https://github.com/cpm-cmake/CPM.cmake#adding-cpm</div>
+<div class="line">include(cpm.cmake)</div>
+<div class="line"> </div>
+<div class="line">CPMAddPackage ( NAME kumi</div>
+<div class="line">                GIT_REPOSITORY &quot;https://github.com/jfalcou/kumi.git&quot;</div>
+<div class="line">                OPTIONS &quot;KUMI_BUILD_TEST OFF&quot;</div>
+<div class="line">              )</div>
+<div class="line"> </div>
+<div class="line">add_executable(test_kumi ../main.cpp)</div>
+<div class="line">target_link_libraries(test_kumi PUBLIC kumi::kumi)</div>
+</div><!-- fragment --></li>
+</ul>
+</div><div class="tabbed"></div> </div></div><!-- contents -->
+</div><!-- PageDoc -->
+</div><!-- doc-content -->
+</div><!-- container -->
+<!-- HTML footer for doxygen 1.8.20-->
+<!-- start footer part -->
+<div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
+  <ul>
+  </ul>
+</div>
+</div> <!-- DOXYSTRAP RELATED -->
+</div> <!-- DOXYSTRAP RELATED -->
+</div> <!-- DOXYSTRAP RELATED -->
+</div> <!-- DOXYSTRAP RELATED -->
+</div> <!-- DOXYSTRAP RELATED -->
+</body>
+</html>

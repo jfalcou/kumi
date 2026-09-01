@@ -167,7 +167,7 @@ $(function(){initNavTree('conceptkumi_1_1concepts_1_1unit__type.html','',''); })
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">kumi::concepts::unit_type Concept Reference<div class="ingroups"><a class="el" href="group__concepts.html">Product Type Related Concepts</a></div></div></div>
+  <div class="headertitle"><div class="title">kumi::concepts::unit_type Concept Reference<div class="ingroups"><a class="el" href="group__kumi__concepts.html">Product Type Related Concepts</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -178,14 +178,14 @@ $(function(){initNavTree('conceptkumi_1_1concepts_1_1unit__type.html','',''); })
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Concept specifying a type represent a Unit Type. </p>
 <p>A type <span class="tt">T</span> models <span class="tt"><a class="el" href="conceptkumi_1_1concepts_1_1unit__type.html" title="Concept specifying a type represent a Unit Type.">kumi::concepts::unit_type</a></span> if it is a <a class="el" href="conceptkumi_1_1concepts_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::concepts::product_type</a> with a size of 0 or if std::is_null_pointer_v returns true.</p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="identity.html#unit" title="Unit Type :  \_form#3">Unit Type : \( (1 / \top) \)</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="kumi_identity.html#kumi_unit" title="Unit Type :  \_form#3">Unit Type : \( (1 / \top) \)</a> </dd></dl>
 </div><h2 id="header-conceptdef" class="groupheader">Concept definition</h2>
 <div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line">    <span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1concepts_1_1unit__type.html">unit_type</a> =</div>
-<div class="line">      (<a class="code hl_concept" href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type&lt;T&gt;</a> &amp;&amp; (<a class="code hl_variable" href="group__traits_ga4dd894f30adf7e5f7ae95124f66d8adb.html#ga4dd894f30adf7e5f7ae95124f66d8adb">kumi::size_v&lt;T&gt;</a> == 0)) || std::is_null_pointer_v&lt;std::remove_cvref_t&lt;T&gt;&gt;</div>
+<div class="line">      (<a class="code hl_concept" href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type&lt;T&gt;</a> &amp;&amp; (<a class="code hl_variable" href="group__kumi__traits_ga4dd894f30adf7e5f7ae95124f66d8adb.html#ga4dd894f30adf7e5f7ae95124f66d8adb">kumi::size_v&lt;T&gt;</a> == 0)) || std::is_null_pointer_v&lt;std::remove_cvref_t&lt;T&gt;&gt;</div>
 <div class="ttc" id="aconceptkumi_1_1concepts_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:77</div></div>
 <div class="ttc" id="aconceptkumi_1_1concepts_1_1unit__type_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1unit__type.html">kumi::concepts::unit_type</a></div><div class="ttdoc">Concept specifying a type represent a Unit Type.</div><div class="ttdef"><b>Definition</b> concepts.hpp:138</div></div>
-<div class="ttc" id="agroup__traits_ga4dd894f30adf7e5f7ae95124f66d8adb_html_ga4dd894f30adf7e5f7ae95124f66d8adb"><div class="ttname"><a href="group__traits_ga4dd894f30adf7e5f7ae95124f66d8adb.html#ga4dd894f30adf7e5f7ae95124f66d8adb">kumi::size_v</a></div><div class="ttdeci">constexpr std::size_t size_v</div><div class="ttdoc">Computes the number of elements of a kumi::product_type.</div><div class="ttdef"><b>Definition</b> traits.hpp:89</div></div>
+<div class="ttc" id="agroup__kumi__traits_ga4dd894f30adf7e5f7ae95124f66d8adb_html_ga4dd894f30adf7e5f7ae95124f66d8adb"><div class="ttname"><a href="group__kumi__traits_ga4dd894f30adf7e5f7ae95124f66d8adb.html#ga4dd894f30adf7e5f7ae95124f66d8adb">kumi::size_v</a></div><div class="ttdeci">constexpr std::size_t size_v</div><div class="ttdoc">Computes the number of elements of a kumi::product_type.</div><div class="ttdef"><b>Definition</b> traits.hpp:89</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

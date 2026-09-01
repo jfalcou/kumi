@@ -27,36 +27,36 @@ var NAVTREE =
   [ "KUMI", "index.html", [
     [ "The C++20 Compact Tuple Tools", "index.html", "index" ],
     [ "About The Library", "usergroup0.html", [
-      [ "Setup", "setup.html", null ],
-      [ "Changelog", "changelog.html", null ],
-      [ "Licence", "licence.html", null ]
+      [ "Setup", "kumi_setup.html", null ],
+      [ "Changelog", "kumi_changelog.html", null ],
+      [ "Licence", "kumi_licence.html", null ]
     ] ],
     [ "Glossary", "usergroup1.html", [
       [ "Type Theory", "usergroup2.html", [
-        [ "Introduction", "introduction.html", null ],
-        [ "Identity Types", "identity.html", null ],
-        [ "Product Types", "product.html", null ]
+        [ "Introduction", "kumi_introduction.html", null ],
+        [ "Identity Types", "kumi_identity.html", null ],
+        [ "Product Types", "kumi_product.html", null ]
       ] ],
-      [ "C++ Vocabulary", "cpp_spec.html", null ],
-      [ "Nomenclature", "nomenclature.html", null ]
+      [ "C++ Vocabulary", "kumi_cpp_spec.html", null ],
+      [ "Nomenclature", "kumi_nomenclature.html", null ]
     ] ],
     [ "Reference Documentation", "usergroup3.html", [
       [ "Types", "usergroup4.html", [
-        [ "Product Types and Functions", "group__tuple__related.html", null ],
-        [ "Record Types and Functions", "group__record__related.html", null ],
-        [ "Types", "group__types.html", null ]
+        [ "Product Types and Functions", "group__kumi__tuple__related.html", null ],
+        [ "Record Types and Functions", "group__kumi__record__related.html", null ],
+        [ "Types", "group__kumi__types.html", null ]
       ] ],
       [ "Algorithms", "usergroup5.html", [
-        [ "Transformations", "group__transforms.html", null ],
-        [ "Queries", "group__queries.html", null ],
-        [ "Generators", "group__generators.html", null ],
-        [ "Reductions", "group__reductions.html", null ]
+        [ "Transformations", "group__kumi__transforms.html", null ],
+        [ "Queries", "group__kumi__queries.html", null ],
+        [ "Generators", "group__kumi__generators.html", null ],
+        [ "Reductions", "group__kumi__reductions.html", null ]
       ] ],
       [ "Helpers", "usergroup6.html", [
-        [ "Traits", "group__traits.html", null ],
-        [ "Concepts", "group__concepts.html", null ],
-        [ "Utility", "group__utility.html", null ],
-        [ "Functional", "group__functional.html", null ]
+        [ "Traits", "group__kumi__traits.html", null ],
+        [ "Concepts", "group__kumi__concepts.html", null ],
+        [ "Utility", "group__kumi__utility.html", null ],
+        [ "Functional", "group__kumi__functional.html", null ]
       ] ],
       [ "Kumi Namespace", "namespacekumi.html", null ]
     ] ],
@@ -66,7 +66,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"changelog.html"
+"group__kumi__concepts.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

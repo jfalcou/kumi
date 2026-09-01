@@ -167,7 +167,7 @@ $(function(){initNavTree('conceptkumi_1_1concepts_1_1record__type.html','',''); 
 </div>
 
 <div class="header">
-  <div class="headertitle"><div class="title">kumi::concepts::record_type Concept Reference<div class="ingroups"><a class="el" href="group__concepts.html">Product Type Related Concepts</a></div></div></div>
+  <div class="headertitle"><div class="title">kumi::concepts::record_type Concept Reference<div class="ingroups"><a class="el" href="group__kumi__concepts.html">Product Type Related Concepts</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
@@ -183,13 +183,13 @@ Example types:</h2>
 <ul>
 <li><a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record&lt;...&gt;</a>;</li>
 </ul>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="product.html#record_type" title="Record Type  \_form#38">Record Type \( (\{l_A: A\} \times \{l_B: B\}) \)</a> </dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="kumi_product.html#kumi_record_type" title="Record Type  \_form#38">Record Type \( (\{l_A: A\} \times \{l_B: B\}) \)</a> </dd></dl>
 </div><h2 id="header-conceptdef" class="groupheader">Concept definition</h2>
 <div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line">    <span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1concepts_1_1record__type.html">record_type</a> = <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type&lt;T&gt;</a> &amp;&amp; <a class="code hl_variable" href="group__traits_ga75612200d87c3aa30f068205aa882e2a.html#ga75612200d87c3aa30f068205aa882e2a">kumi::is_record_type_v&lt;std::remove_cvref_t&lt;T&gt;</a>&gt;</div>
+<div class="line">    <span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1concepts_1_1record__type.html">record_type</a> = <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type&lt;T&gt;</a> &amp;&amp; <a class="code hl_variable" href="group__kumi__traits_ga75612200d87c3aa30f068205aa882e2a.html#ga75612200d87c3aa30f068205aa882e2a">kumi::is_record_type_v&lt;std::remove_cvref_t&lt;T&gt;</a>&gt;</div>
 <div class="ttc" id="aconceptkumi_1_1concepts_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:77</div></div>
 <div class="ttc" id="aconceptkumi_1_1concepts_1_1record__type_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1record__type.html">kumi::concepts::record_type</a></div><div class="ttdoc">Concept specifying a type follows the Record Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:94</div></div>
-<div class="ttc" id="agroup__traits_ga75612200d87c3aa30f068205aa882e2a_html_ga75612200d87c3aa30f068205aa882e2a"><div class="ttname"><a href="group__traits_ga75612200d87c3aa30f068205aa882e2a.html#ga75612200d87c3aa30f068205aa882e2a">kumi::is_record_type_v</a></div><div class="ttdeci">constexpr bool is_record_type_v</div><div class="ttdoc">Opt-in traits for types behaving like a kumi::record_type.</div><div class="ttdef"><b>Definition</b> traits.hpp:66</div></div>
+<div class="ttc" id="agroup__kumi__traits_ga75612200d87c3aa30f068205aa882e2a_html_ga75612200d87c3aa30f068205aa882e2a"><div class="ttname"><a href="group__kumi__traits_ga75612200d87c3aa30f068205aa882e2a.html#ga75612200d87c3aa30f068205aa882e2a">kumi::is_record_type_v</a></div><div class="ttdeci">constexpr bool is_record_type_v</div><div class="ttdoc">Opt-in traits for types behaving like a kumi::record_type.</div><div class="ttdef"><b>Definition</b> traits.hpp:66</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
