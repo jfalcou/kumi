@@ -41,7 +41,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var transpose
     @brief Callable object transposing a product type of product types by shifting elements in their

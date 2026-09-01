@@ -11,7 +11,7 @@ namespace kumi
 {
   //====================================================================================================================
   /**
-    @ingroup  types
+    @ingroup kumi_types
     @class    field
     @brief    Named wrapper over a type.
 
@@ -59,7 +59,7 @@ namespace kumi
     KUMI_ABI constexpr T const&& operator()(label_type) const&& noexcept { return static_cast<T const&&>(value); }
 
     //==================================================================================================================
-    /// @ingroup utility
+    /// @ingroup kumi_utility
     //! @related kumi::field
     //! @brief Inserts a kumi::field in an output stream
     //==================================================================================================================
@@ -108,7 +108,7 @@ namespace kumi
     KUMI_ABI constexpr T const&& operator()(label_type) const&& noexcept { return static_cast<T const&&>(*this); }
 
     //==================================================================================================================
-    /// @ingroup utility
+    /// @ingroup kumi_utility
     //! @related kumi::field
     //! @brief Inserts a kumi::field in an output stream
     //==================================================================================================================
@@ -131,7 +131,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup  utility
+    @ingroup kumi_utility
     @brief    Extracts the identifiers from a kumi::concepts::field or returns the parameter.
 
     @note     If the unqualified type of input does not model kumi::concepts::field, returns kumi::unkown.
@@ -162,7 +162,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup  utility
+    @ingroup kumi_utility
     @brief    Extracts the label from a kumi::concepts::field or returns the parameter.
 
     @note     If the unqualified type of input does not model kumi::concepts::field, returns kumi::unkown.
@@ -193,7 +193,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup  utility
+    @ingroup kumi_utility
     @brief    Extracts the value from a kumi::concepts::field or returns the parameter
 
     @note     If the unqualified type of input does not model kumi::concepts::field, simply forwards the parameter
@@ -225,7 +225,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup  utility
+    @ingroup kumi_utility
     @brief    Creates a field from a given value keeping the qualifiers.
 
     @tparam   Name The label to associate to the field.
@@ -257,7 +257,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup  utility
+    @ingroup kumi_utility
     @brief    Casts the provided value to the target type using `static_cast`.
 
     @note If the type to convert models kumi::concepts::field, the function does not rename the input parameter.

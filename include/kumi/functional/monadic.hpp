@@ -11,7 +11,7 @@ namespace kumi::function
 {
   //====================================================================================================================
   /**
-    @ingroup  functional
+    @ingroup kumi_functional
     @brief    If T is a kumi::product_type, returns its number of elements otherwise returns V;
 
     @tparam T type to inspect
@@ -36,7 +36,7 @@ namespace kumi::function
 
   //====================================================================================================================
   /**
-    @ingroup  functional
+    @ingroup kumi_functional
     @brief    If T is a kumi::product_type, returns it's Ith element, returns an instance of V otherwise.
 
     @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
@@ -54,7 +54,7 @@ namespace kumi::function
 
   //====================================================================================================================
   /**
-    @ingroup  functional
+    @ingroup kumi_functional
     @brief    If T is a kumi::product_type and I is within it's size, returns element_t<I,T>, returns U otherwise
 
     @tparam I Index of the type to retrieve
@@ -81,7 +81,7 @@ namespace kumi::function
   //====================================================================================================================
   /**
     @class    foldable
-    @ingroup  functional
+    @ingroup kumi_functional
     @brief    Functional wrapper for values to facilitate pipelined transformations.
 
     kumi::function::foldable provides a lightweight wrapper that enables functional-style chaining of operations
@@ -137,7 +137,7 @@ namespace kumi::function
   //====================================================================================================================
   /**
     @class    scannable
-    @ingroup  functional
+    @ingroup kumi_functional
     @brief    Functional wrapper that accumulates state during a transformation chain.
 
     kumi::scannable tracks both a current value and a transformation history. As the value is

@@ -90,7 +90,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var zip
     @brief Callable object constructing a tuple where the ith element is the product type of all ith elements of
@@ -153,7 +153,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var zip_min
     @brief Callable object constructing a tuple where the ith element is the product type of all ith elements of
@@ -218,7 +218,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var zip_max
     @brief Callable object constructing a tuple where the ith element is the product type of all ith elements of

@@ -14,7 +14,7 @@ namespace kumi::function
 {
   //====================================================================================================================
   /**
-    @ingroup functional
+    @ingroup kumi_functional
 
     @var cartesian_producer
     @brief Callable object computing the index map associated to the cartesian product operation.
@@ -60,7 +60,7 @@ namespace kumi::function
 
   //====================================================================================================================
   /**
-    @ingroup functional
+    @ingroup kumi_functional
 
     @var concatenater
     @brief Callable object computing the index map associated to the concatenation operation.
@@ -106,7 +106,7 @@ namespace kumi::function
 
   //====================================================================================================================
   /**
-    @ingroup functional
+    @ingroup kumi_functional
 
     @var extractor
     @brief Callable object computing the index map associated to the extraction operation.
@@ -163,7 +163,7 @@ namespace kumi::function
 
   //====================================================================================================================
   /**
-    @ingroup functional
+    @ingroup kumi_functional
 
     @var rotater
     @brief Callable object computing the index map associated to the rotation operation.
@@ -209,7 +209,7 @@ namespace kumi::function
 
   //====================================================================================================================
   /**
-    @ingroup functional
+    @ingroup kumi_functional
 
     @var reducer
     @brief Callable object computing the index map associated to the reduction operation.
@@ -256,7 +256,7 @@ namespace kumi::function
 
   //====================================================================================================================
   /**
-    @ingroup functional
+    @ingroup kumi_functional
 
     @var repeater
     @brief Callable object generating an index sequence repeating a constant index.
@@ -302,7 +302,7 @@ namespace kumi::function
 
   //====================================================================================================================
   /**
-    @ingroup functional
+    @ingroup kumi_functional
 
     @var reverser
     @brief Callable object computing the reversed index sequence.
@@ -345,7 +345,7 @@ namespace kumi::function
 
   //====================================================================================================================
   /**
-    @ingroup functional
+    @ingroup kumi_functional
 
     @var shifter
     @brief Callable object computing linear indexing translations.
@@ -391,7 +391,7 @@ namespace kumi::function
 
   //====================================================================================================================
   /**
-    @ingroup functional
+    @ingroup kumi_functional
 
     @var splitter
     @brief Callable object computing underlying index sequences of the input domain divided in two parts.
@@ -438,7 +438,7 @@ namespace kumi::function
 
   //====================================================================================================================
   /**
-    @ingroup functional
+    @ingroup kumi_functional
 
     @var tiler
     @brief Callable object computing multi-dimensional window block layout configurations.
@@ -494,7 +494,7 @@ namespace kumi::function
 
   //====================================================================================================================
   /**
-    @ingroup functional
+    @ingroup kumi_functional
 
     @var zipper
     @brief Callable object creating the index sequence corresponding to the zip operation.
@@ -532,7 +532,7 @@ namespace kumi::function
 
   //====================================================================================================================
   /**
-    @ingroup functional
+    @ingroup kumi_functional
 
     @var slicer
     @brief Callable object computing the index map associated to a slicing (begin, end, step) operation.

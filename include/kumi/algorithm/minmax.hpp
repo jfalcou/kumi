@@ -123,7 +123,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup reductions
+    @ingroup kumi_reductions
 
     @var max
     @brief Callable object computing the maximum value of all elements of `t`.
@@ -182,7 +182,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup reductions
+    @ingroup kumi_reductions
 
     @var min
     @brief Callable object computing the maximum value of applications of `f` to all elements of kumi::flatten_all(t).
@@ -236,7 +236,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup reductions
+    @ingroup kumi_reductions
 
     @var min
     @brief Callable object computing the minimum value of all elements of `t`.
@@ -295,7 +295,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup reductions
+    @ingroup kumi_reductions
 
     @var min
     @brief Callable object computing the minimum value of applications of `f` to all elements of kumi::flatten_all(t).

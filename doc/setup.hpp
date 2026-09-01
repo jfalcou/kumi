@@ -1,7 +1,7 @@
 #error This file is for documentation only - DO NOT INCLUDE
 /**
 
-  @page  setup  Setup
+  @page kumi_setup Setup
 
   @tableofcontents
 

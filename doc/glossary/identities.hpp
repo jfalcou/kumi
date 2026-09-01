@@ -1,7 +1,7 @@
 #error This file is for documentation only - DO NOT INCLUDE
 /**
 
-@page identity The Identity Elements (The "0" and "1" of Types)
+@page kumi_identity The Identity Elements (The "0" and "1" of Types)
 
 Just as there are neutral elements for mathematical operations, there are neutral elements for types. The neutral is a 
 mathematical element that has no effect on the computation such that using it results in the identity. The  simplest 
@@ -10,7 +10,7 @@ neutrals that govern type algebra. These types are the foundational "identity" e
 
 ---
 
-@section empty Empty Type : \f$ (0 / \bot) \f$
+@section kumi_empty Empty Type : \f$ (0 / \bot) \f$
 
 The **Empty Type** is the identity element for **Sums** \f$ (A + 0 \cong A ) \f$. It represents a type with no 
 inhabitants.
@@ -36,7 +36,7 @@ types and their associated algebra.
 
 ---
 
-@section unit Unit Type : \f$ (1 / \top) \f$
+@section kumi_unit Unit Type : \f$ (1 / \top) \f$
 
 The **Unit Type** is the identity element for **Products** \f$ (A \times 1 \cong A) \f$. It represents a type with
 exactly one inhabitant.
@@ -63,9 +63,9 @@ complex types.
 
 <div class="section_buttons">
  
-| Previous                          |                              Next |
-|:----------------------------------|----------------------------------:|
-| [Introduction](@ref introduction) | [Product Types](@ref product)     |
+| Previous                                |                              Next   |
+|:----------------------------------------|------------------------------------:|
+| [Introduction](@ref kumi_introduction)  | [Product Types](@ref kumi_product)  |
  
 </div>
 

@@ -42,7 +42,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup transforms
+    @ingroup kumi_transforms
 
     @var apply
     @brief Callable object invoking the callable object f with the elements of the product type unrolled as arguments.
@@ -100,7 +100,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup transforms
+    @ingroup kumi_transforms
 
     @var apply_field
     @brief Callable object invoking the callable object f with the elements of the product type unrolled as arguments.

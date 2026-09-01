@@ -59,7 +59,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var partition
     @brief Callable object partitionning a product type over a predicate
@@ -119,7 +119,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var filter
     @brief Callable object filtering a product type over a predicate
@@ -178,7 +178,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var filter_not
     @brief Callable object filtering a product type over a predicate

@@ -58,7 +58,7 @@ namespace kumi
   {
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying a type follows the Product Type semantic
 
       A type `T` models `kumi::concepts::product_type` if it follows the standard tuple protocole and  provides
@@ -70,7 +70,7 @@ namespace kumi
       + `std::array<...>;`
       + `std::pair<...>;`
 
-      @see @ref product_type
+      @see @ref kumi_product_type
     **/
     //==================================================================================================================
     template<typename T>
@@ -78,7 +78,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying a type follows the Record Type semantic
 
       A type `T` models `kumi::concepts::record_type` if it models kumi::concepts::product_type and contains fields
@@ -87,7 +87,7 @@ namespace kumi
       ## Example types:
       + kumi::record<...>;
 
-      @see @ref record_type
+      @see @ref kumi_record_type
     **/
     //==================================================================================================================
     template<typename T>
@@ -95,7 +95,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying a type follows the Container Type semantic
 
       A type `T` models `kumi::concepts::static_container` if it is an homogeneous container of fixed size exposing
@@ -111,7 +111,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying a type follows the Container Type semantic
 
       A type `T` models `kumi::container` if it is a kumi::container of fixed size.
@@ -125,13 +125,13 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying a type represent a Unit Type
 
       A type `T` models `kumi::concepts::unit_type` if it is a kumi::concepts::product_type with a size of 0 or
       if std::is_null_pointer_v returns true.
 
-      @see @ref unit
+      @see @ref kumi_unit
     **/
     //==================================================================================================================
     template<typename T>
@@ -156,7 +156,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying a type represent a field
 
       A field type serves as a member of a kumi::record and can be retrieved by it's label later.
@@ -170,7 +170,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying a type represent an identifier
 
       An identifier type is able to be bound to a value to create a kumi::concepts::field. It represent a type that
@@ -185,7 +185,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying if a type can be used as sequence of projections in algorithms
 
       A type `T` models `kumi::projection_map` if it contains constant evaluable members which are themselves either
@@ -201,7 +201,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying if a type is suitable to be used as a projection
 
       A type `T` models `kumi::projection` if it models `kumi::projection_map` or `kumi::index`
@@ -213,7 +213,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying a type follows the Product Type semantic and has a known size
 
       A type `T` models `kumi::concepts::sized_product_type<N>` if it models `kumi::concepts::product_type` and has
@@ -225,7 +225,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying a type follows the Product Type semantic and has a size lower bound
 
       A type `T` models `kumi::concepts::sized_product_type<N>` if it models `kumi::concepts::product_type` and has
@@ -237,7 +237,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying a type follows the Product Type semantic and is empty
 
       A type `T` models `kumi::concepts::empty_product_type ` if it models `kumi::concepts::product_type` and has
@@ -249,7 +249,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying a type follows the Product Type semantic and is non-empty
 
       A type `T` models `kumi::concepts::non_empty_product_type ` if it models `kumi::concepts::product_type` and has
@@ -261,7 +261,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying is Product Type which types are all the same
 
       A type `T` models `kumi::cocnepts::homogenous_product_type` if it models `kumi::concepts::product_type` and
@@ -279,7 +279,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying if parameter pack contains a kumi::concepts::field.
     **/
     //==================================================================================================================
@@ -288,7 +288,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying if parameter pack is only composed of kumi::concepts::field.
     **/
     //==================================================================================================================
@@ -297,7 +297,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying if a parameter pack only holds distinct types.
     **/
     //==================================================================================================================
@@ -307,7 +307,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying if a parameter pack only holds kumi::concepts::field with no duplicate names.
     **/
     //==================================================================================================================
@@ -317,7 +317,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief  Concept specifying if a parameter pack only holds kumi::concepts::field with no duplicate kumi::str
               representation of their respective names.
     **/
@@ -330,7 +330,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying if a Type is present in a parameter pack.
     **/
     //==================================================================================================================
@@ -339,7 +339,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying if the label of a type modeling kumi::concepts::identifier is present in the parameter
       pack. The label is considered present if a type in Ts modeling kumi::concepts::field is labeled with the same
       tag as the given identifier.
@@ -351,7 +351,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying if the label of a type modeling kumi::concepts::identifier is present in the parameter
       pack. The label is considered present if a type in Ts modeling kumi::concepts::field is labeled with the same
       tag as the given identifier.
@@ -363,7 +363,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying if two types have matching named fields
 
       A type `T` models `kumi::concepts::equivalent<T,U>` if it is a kumi::concepts::product_type with the same number
@@ -377,7 +377,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying if a type is comparable for each of its components
 
       A type `T` models `kumi::concepts::equality_comparable<T,U>`if it's a kumi::concepts::product_type where each
@@ -390,7 +390,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying if a pack of types follows the same semantic.
 
       A pack of type `Ts` models `kumi::concepts::follows_same_semantic` if all of the types are following the
@@ -403,7 +403,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying if two product types are compatibles.
 
       A pack of types `Ts` models `kumi::concepts::compatible_product_types` if it models
@@ -417,7 +417,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying a type is a Monoid
 
       A type `T` models `kumi::concepts::monoid` if it's a binary associative callable equipped with an identity
@@ -440,7 +440,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying if a product type can be queried via a `get<type>`
 
       A type `T` models `kumi::concepts::queryable_by_type` if it's fields are uniquely typed.
@@ -454,7 +454,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying if a product type can be queried via a `get<identifier>`
 
       A type `T` models `queryable_by_identifier` if it's a kumi::concepts::product_type with it's element modeling
@@ -469,7 +469,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @ingroup concepts
+      @ingroup kumi_concepts
       @brief Concept specifying if a product type can be queried via a `get<label>`
 
       A type `T` models `queryable_by_label` if it's a kumi::concepts::product_type with it's element modeling

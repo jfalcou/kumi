@@ -26,7 +26,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var cat
     @brief Callable object concatenating multiple product types into a single one

@@ -50,7 +50,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var generate
     @brief Callable object creating a kumi::tuple containing `N` applications of the `f` Callable.
@@ -100,7 +100,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var fill
     @brief Callable object creating a kumi::tuple containing `N` copies of `v`.
@@ -150,7 +150,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var iota
     @brief Callable object creating a kumi::tuple containing an increasing ramp of values.

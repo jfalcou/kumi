@@ -77,7 +77,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup queries
+    @ingroup kumi_queries
 
     @var contains
     @brief Callable object checking if a product type contains a given identifier
@@ -131,7 +131,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup queries
+    @ingroup kumi_queries
 
     @var contains_any
     @brief Callable object checking if a product type contains at least one of many identifier
@@ -185,7 +185,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup queries
+    @ingroup kumi_queries
 
     @var contains_only
     @brief Callable object checking if a product type contains fields based on on selected identifier
@@ -239,7 +239,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup queries
+    @ingroup kumi_queries
 
     @var contains_none
     @brief Callable object checking if a product type contains no fields based on any of the selected identifier

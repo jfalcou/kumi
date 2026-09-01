@@ -1,12 +1,12 @@
 #error This file is for documentation only - DO NOT INCLUDE
 /**
 
-@page introduction Type Theoretic Foundations
+@page kumi_introduction Type Theoretic Foundations
 
 This introduction does not aim at providing full understanding of type theory, but is more focused on giving a brief yet
 extensive overview of the basis that might be of interest to any new or even experienced programmer. **Kumi** makes 
 extensive use of some concepts that will be detailed in the following sections. In the current state, the **Kumi** 
-library focuses on handling [product types](@ref product_type).
+library focuses on handling [product types](@ref kumi_product_type).
 
 ---
 
@@ -82,9 +82,9 @@ operations.
 
 <div class="section_buttons">
  
-|                              Next |
-|----------------------------------:|
-| [Identity Types](@ref identity)   |
+|                              Next     |
+|--------------------------------------:|
+| [Identity Types](@ref kumi_identity)  |
  
 </div>
 

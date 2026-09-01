@@ -13,7 +13,7 @@ namespace kumi
   //====================================================================================================================
   /**
     @class tuple
-    @ingroup tuple_related
+    @ingroup kumi_tuple_related
     @brief Fixed-size collection of heterogeneous values.
 
     kumi::tuple provides an aggregate based implementation of a tuple. It provides algorithms and
@@ -23,7 +23,7 @@ namespace kumi
 
     @tparam Ts Sequence of types stored inside kumi::tuple.
 
-    @see @ref product_type
+    @see @ref kumi_product_type
 
     ## Example:
     @include doc/tuple/api/introduction.cpp
@@ -511,7 +511,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup tuple_related
+    @ingroup kumi_tuple_related
     @brief Creates a kumi::tuple of lvalue references to its arguments.
     @param ts	Zero or more lvalue arguments to construct the tuple from.
     @return A kumi::tuple object containing lvalue references.
@@ -526,7 +526,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup tuple_related
+    @ingroup kumi_tuple_related
     @brief Creates a kumi::tuple of forwarding references to its arguments.
 
     Constructs a tuple of references to the arguments in args suitable for forwarding as an
@@ -549,7 +549,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup tuple_related
+    @ingroup kumi_tuple_related
     @brief Creates a tuple object, deducing the target type from the types of arguments.
 
     @param ts	Zero or more lvalue arguments to construct the tuple from.
@@ -567,7 +567,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup tuple_related
+    @ingroup kumi_tuple_related
     @brief Creates a kumi::tuple of references given a reference to a kumi::product_type.
 
     @param    t Tuple whose elements are to be referenced.
@@ -598,7 +598,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup tuple_related
+    @ingroup kumi_tuple_related
     @brief Converts a kumi::tuple to an instance of an arbitrary type
 
     Constructs an instance of `Type` by passing elements of `t` to the appropriate constructor.
@@ -622,7 +622,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup tuple_related
+    @ingroup kumi_tuple_related
     @brief Converts a kumi::product_type to an instance kumi::tuple
 
     Constructs an instance kumi::tuple from the elements of the kumi::product_type parameters
@@ -679,7 +679,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup tuple_related
+    @ingroup kumi_tuple_related
     @brief Generate a kumi::tuple type from a type
 
     If `T` is a @ref kumi::concepts::product_type, returns the kumi::tuple type containing the same element

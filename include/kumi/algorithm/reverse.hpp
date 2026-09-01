@@ -24,7 +24,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var apply
     @brief Callable object reversing elements of a product type

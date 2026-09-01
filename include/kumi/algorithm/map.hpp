@@ -86,7 +86,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup transforms
+    @ingroup kumi_transforms
 
     @var map
     @brief Callable object applying the Callable object `f` on each product types' elements
@@ -151,7 +151,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup tuple_transforms
+    @ingroup kumi_tuple_transforms
 
     @var map_index
     @brief Callable object applying the Callable object `f` on each product types elements and their indexes
@@ -206,7 +206,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup record_transforms
+    @ingroup kumi_record_transforms
 
     @var map_field
     @brief Callable object applying the Callable object `f` on each product types elements and their associated labels.

@@ -1,7 +1,7 @@
 #error This file is for ducomentation only - DO NOT INCLUDE
 /**
 
-  @page nomenclature Nomenclature
+  @page kumi_nomenclature Nomenclature
 
   This document establishes the formal vocabulary used throughout the KUMI library
   to ensure consistency across API documentation, error messages, and internal

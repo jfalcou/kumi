@@ -21,7 +21,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup utility
+    @ingroup kumi_utility
     @brief  Option specifying the single type a identifier will accept.
     @tparam T Type that the parametrized identifier will accept.
 
@@ -32,7 +32,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup utility
+    @ingroup kumi_utility
     @brief  Option specifying a traits that type should verify for being used as a identifier value.
     @tparam Traits Traits that the parametrized identifier will use to validate its value.
 
@@ -66,7 +66,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup  types
+    @ingroup kumi_types
     @class    identifier
     @brief    identifier definition class
 
@@ -152,7 +152,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup  types
+    @ingroup kumi_types
     @class    name
     @brief Compile-time text based identifier
     @tparam ID Compile-time string representing an indentifier

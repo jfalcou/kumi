@@ -34,7 +34,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup  functional
+    @ingroup kumi_functional
     @brief    Invoke the Callable object c with a pack of arguments.
 
     @param c	Callable object to be invoked
@@ -52,7 +52,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup  functional
+    @ingroup kumi_functional
     @brief    Invoke the Callable object c with a pack of arguments with return type R.
 
     @tparam R the return type of the callable

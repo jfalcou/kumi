@@ -11,27 +11,27 @@ namespace kumi
 {
   //====================================================================================================================
   /**
-    @defgroup algorithm Product Type Algorithms
+    @defgroup kumi_algorithm Product Type Algorithms
     @brief    Algorithms for manipulating Product types
 
     @{
-      @defgroup transforms Product Type Transformations
+      @defgroup kumi_transforms Product Type Transformations
       @brief Algorithms applying transformation to product types
       @{
-        @defgroup tuple_transforms Tuple Type Specific Transformations
+        @defgroup kumi_tuple_transforms Tuple Type Specific Transformations
         @brief Algorithms applying transformation to tuples
 
-        @defgroup record_transforms Record Type Specific Transformations
+        @defgroup kumi_record_transforms Record Type Specific Transformations
         @brief Algorithms applying transformation to records
       @}
 
-      @defgroup queries Product Type Queries
+      @defgroup kumi_queries Product Type Queries
       @brief    Algorithms querying properties from product types
 
-      @defgroup reductions Product Type Generalized Reductions
+      @defgroup kumi_reductions Product Type Generalized Reductions
       @brief    Algorithms performing reductions over product types
 
-      @defgroup generators Product Type Generators
+      @defgroup kumi_generators Product Type Generators
       @brief    Algorithms generating product types
     @}
   **/

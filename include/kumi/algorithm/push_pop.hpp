@@ -63,7 +63,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var push_front
     @brief Callable object constructing a product type by adding a value `v` at the beginning of `t`.
@@ -119,7 +119,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var pop_front
     @brief Callable object removing the first (if any) element of `t`.
@@ -174,7 +174,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var push_front
     @brief Callable object constructing a product type by adding a value `v` at the end of `t`.
@@ -230,7 +230,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var pop_front
     @brief Callable object removing the last(if any) element of `t`.

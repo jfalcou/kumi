@@ -40,7 +40,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var tiles
     @brief Callable object creating a tuple of product types, each containing `N` consecutive elements from `t`.
@@ -105,7 +105,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var windows
     @brief Callable object creating a tuple of product types, each containing `N` consecutive elements from `t`.
@@ -168,7 +168,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup generators
+    @ingroup kumi_generators
 
     @var chunks
     @brief Callable object creating a tuple of product types, each containing `N` consecutive elements from `t`.

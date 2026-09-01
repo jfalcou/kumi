@@ -33,7 +33,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup utility
+    @ingroup kumi_utility
     @class   projection_map
     @brief   A stateless, compile-time schema for product type transformation.
 
@@ -125,7 +125,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup utility
+    @ingroup kumi_utility
     @brief kumi::projection_map deduction guide
     @tparam Ts  Type lists to build the projections with.
   **/
@@ -134,7 +134,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup utility
+    @ingroup kumi_utility
     @brief Creates a kumi::projection_map object, deducing the target type from the types of arguments.
 
     @note The arguments should model kumi::index
@@ -153,7 +153,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup utility
+    @ingroup kumi_utility
     @brief Creates a kumi::projection_map object, deducing the target type from the types of arguments.
 
     @note The arguments should model kumi::index
@@ -172,7 +172,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup utility
+    @ingroup kumi_utility
     @brief Creates a kumi::projection_map object, deducing the target type from the types of arguments.
 
     @note The arguments should model kumi::identifier
