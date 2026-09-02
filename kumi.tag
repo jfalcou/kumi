@@ -2335,6 +2335,13 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
+      <type>constexpr inner_product_t</type>
+      <name>inner_product</name>
+      <anchorfile>group__kumi__reductions.html</anchorfile>
+      <anchor>ga712c681a51bdbc86d41b160deddd2e1d</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
       <type>constexpr iota_t&lt; N &gt;</type>
       <name>iota</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
@@ -2542,6 +2549,13 @@
       <name>reorder_fields</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
       <anchor>ga8c42552c8f93dad0b83a3903468d02c6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr reverse_t</type>
+      <name>reverse</name>
+      <anchorfile>group__kumi__generators.html</anchorfile>
+      <anchor>ga48f6e5775e61dca804eda8b0bd354d6f</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -3458,6 +3472,13 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
+      <type>constexpr inner_product_t</type>
+      <name>kumi::inner_product</name>
+      <anchorfile>group__kumi__reductions.html</anchorfile>
+      <anchor>ga712c681a51bdbc86d41b160deddd2e1d</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
       <type>constexpr map_reduce_t</type>
       <name>kumi::map_reduce</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
@@ -3656,6 +3677,13 @@
       <name>kumi::reorder_fields</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
       <anchor>ga8c42552c8f93dad0b83a3903468d02c6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr reverse_t</type>
+      <name>kumi::reverse</name>
+      <anchorfile>group__kumi__generators.html</anchorfile>
+      <anchor>ga48f6e5775e61dca804eda8b0bd354d6f</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">

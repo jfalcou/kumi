@@ -200,6 +200,8 @@ Variables</h2></td></tr>
 <tr class="memitem:ga8c42552c8f93dad0b83a3903468d02c6" id="r_ga8c42552c8f93dad0b83a3903468d02c6"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier</a> auto... Name&gt; </td></tr>
 <tr class="memitem:ga8c42552c8f93dad0b83a3903468d02c6 template"><td class="memItemLeft">constexpr reorder_fields_t&lt; Name... &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga8c42552c8f93dad0b83a3903468d02c6">kumi::reorder_fields</a> {}</td></tr>
 <tr class="memdesc:ga8c42552c8f93dad0b83a3903468d02c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object reordering elements of a Record Type.  <br /></td></tr>
+<tr class="memitem:ga48f6e5775e61dca804eda8b0bd354d6f" id="r_ga48f6e5775e61dca804eda8b0bd354d6f"><td class="memItemLeft">constexpr reverse_t&#160;</td><td class="memItemRight"><a class="el" href="#ga48f6e5775e61dca804eda8b0bd354d6f">kumi::reverse</a> {}</td></tr>
+<tr class="memdesc:ga48f6e5775e61dca804eda8b0bd354d6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object reversing elements of a product type.  <br /></td></tr>
 <tr class="memitem:gadbc56977f82e2eaefe486c0a9457f01c" id="r_gadbc56977f82e2eaefe486c0a9457f01c"><td class="memTemplParams" colspan="2">template&lt;std::size_t R&gt; </td></tr>
 <tr class="memitem:gadbc56977f82e2eaefe486c0a9457f01c template"><td class="memItemLeft">constexpr rotate_left_t&lt; R &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gadbc56977f82e2eaefe486c0a9457f01c">kumi::rotate_left</a> {}</td></tr>
 <tr class="memdesc:gadbc56977f82e2eaefe486c0a9457f01c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object.  <br /></td></tr>
@@ -2299,6 +2301,85 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi
 <div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#ga8c42552c8f93dad0b83a3903468d02c6">kumi::reorder_fields</a>&lt;<span class="stringliteral">&quot;b&quot;</span>_id,<span class="stringliteral">&quot;a&quot;</span>_id,<span class="stringliteral">&quot;c&quot;</span>_id&gt;(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --> 
+</div>
+</div>
+<a id="ga48f6e5775e61dca804eda8b0bd354d6f" name="ga48f6e5775e61dca804eda8b0bd354d6f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga48f6e5775e61dca804eda8b0bd354d6f">&#9670;&#160;</a></span>reverse</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">reverse_t kumi::reverse {}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;kumi/algorithm/reverse.hpp&gt;</code></p>
+
+<p>Callable object reversing elements of a product type. </p>
+<p>On record types, this function operates on elements as if they were ordered. The considered order is the order of declaration.</p>
+<h2 class="groupheader">Header file </h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/reverse.hpp&gt;</span></div>
+</div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga48f6e5775e61dca804eda8b0bd354d6f">reverse</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>
+<div class="ttc" id="agroup__kumi__generators_html_ga48f6e5775e61dca804eda8b0bd354d6f"><div class="ttname"><a href="#ga48f6e5775e61dca804eda8b0bd354d6f">kumi::reverse</a></div><div class="ttdeci">constexpr reverse_t reverse</div><div class="ttdoc">Callable object reversing elements of a product type.</div><div class="ttdef"><b>Definition</b> reverse.hpp:78</div></div>
+</div><!-- fragment --><h3 class="groupheader">Parameters </h3>
+<ul>
+<li><span class="tt">t</span>: Product Type to reverse</li>
+</ul>
+<h3 class="groupheader">Return value </h3>
+<ul>
+<li>A product type with the type of <span class="tt">t</span> and elements equal to (get&lt;index&lt;size_v&lt;T&gt; - 1 - Idx&gt;&gt;(t)...);</li>
+</ul>
+<h2 class="groupheader">Helper type </h2>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>reverse_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga48f6e5775e61dca804eda8b0bd354d6f">kumi::reverse</a>(std::declval&lt;T&gt;()));</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span>reverse</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::reverse_t&lt;T&gt;;</div>
+<div class="line">    };</div>
+<div class="line"> </div>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga48f6e5775e61dca804eda8b0bd354d6f" title="Callable object reversing elements of a product type.">kumi::reverse</a></p>
+<h2 class="groupheader">Examples </h2>
+<div class="tabbed"></div><div class="tabbed"><ul>
+<li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">auto</span> values = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> { 1, <span class="charliteral">&#39;a&#39;</span>, 0.1 };</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; values &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#ga48f6e5775e61dca804eda8b0bd354d6f">kumi::reverse</a>(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">}</div>
+</div><!-- fragment --></li>
+<li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">auto</span> values = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> { <span class="stringliteral">&quot;a&quot;</span>_id = 1, <span class="stringliteral">&quot;b&quot;</span>_id = <span class="charliteral">&#39;a&#39;</span>, <span class="stringliteral">&quot;c&quot;</span>_id = 0.1 };</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; values &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#ga48f6e5775e61dca804eda8b0bd354d6f">kumi::reverse</a>(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">}</div>
+</div><!-- fragment --></li>
+</ul>
+</div><div class="tabbed"></div> 
 </div>
 </div>
 <a id="gadbc56977f82e2eaefe486c0a9457f01c" name="gadbc56977f82e2eaefe486c0a9457f01c"></a>
