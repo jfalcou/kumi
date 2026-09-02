@@ -68,7 +68,7 @@ namespace kumi
   /**
     @ingroup kumi_reductions
 
-    @var apply
+    @var inner_product
     @brief Callable object computing the inner product (i.e. sum of products)
 
     Computes the generalized sum of products of the elements of two product types. By default,

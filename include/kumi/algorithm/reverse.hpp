@@ -26,7 +26,7 @@ namespace kumi
   /**
     @ingroup kumi_generators
 
-    @var apply
+    @var reverse
     @brief Callable object reversing elements of a product type
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
