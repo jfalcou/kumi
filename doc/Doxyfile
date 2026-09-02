@@ -29,19 +29,8 @@ GENERATE_LATEX         = NO
 ##======================================================================================================================
 @INCLUDE               = $(DOXYGEN_ASSETS)/base.doxyfile
 
-## What this project adds on top of it. color.css is written into the output by copa_setup_doxygen, from the same
-## numbers that tint doxygen's own widgets.
-HTML_EXTRA_STYLESHEET += $(DOXYGEN_ASSETS)/custom.css
-HTML_EXTRA_STYLESHEET += $(DOXYGEN_OUPUT)/color.css
-
-## KUMI keeps its own header, for the social card metadata the shared one does not carry yet. See copacabana#75.
-HTML_HEADER            = base.html
+## The image the social card metadata in head.html points at, published beside the pages.
 HTML_EXTRA_FILES      += card.png
 
 ## The macro that gives every entity its inline ABI tag, expanded away so it does not show up in every signature.
 PREDEFINED            += "KUMI_ABI=inline"
-
-## The markup doxygen-awesome-tabs.js animates. The fragment ships that script but not these, see copacabana#78.
-ALIASES               += tab_begin="<div class=\"tabbed\">"
-ALIASES               += tab_end="</div>"
-ALIASES               += tab{1}="- <b class=\"tab-title\">\1</b>"

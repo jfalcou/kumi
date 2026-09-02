@@ -28,7 +28,7 @@ endif()
 ##======================================================================================================================
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${PROJECT_SOURCE_DIR}/cmake ${COPACABANA_SOURCE_DIR}/copacabana/cmake)
 include(${COPACABANA_SOURCE_DIR}/copacabana/cmake/copacabana.cmake)
-copa_project_version(MAJOR 4 MINOR 0 PATCH 0)
+copa_project_version(MAJOR 4 MINOR 0 PATCH 0 REPOSITORY https://github.com/jfalcou/kumi)
 
 ##======================================================================================================================
 ## Summary Display
@@ -67,7 +67,6 @@ if(KUMI_BUILD_DOCUMENTATION)
   copa_setup_doxygen(${QUIET_OPTION}
                      TARGET kumi-doxygen
                      DESTINATION "${PROJECT_BINARY_DIR}/doc"
-                     URL "https://github.com/jfalcou/kumi"
                      GODBOLT_LIBRARIES kumi
                      GODBOLT_COMPILER clang1600
                      GODBOLT_OPTIONS "-O3 -std=c++20 -DNDEBUG"
