@@ -1,0 +1,15 @@
+##======================================================================================================================
+##  KUMI - Compact C++20 Tuple Toolbox
+##  Copyright : KUMI Project Contributors
+##  SPDX-License-Identifier: BSL-1.0
+##======================================================================================================================
+## Read by copacabana's matrix.yml: the macos jobs in Debug. Two files for one platform because the documentation
+## examples are built and run in Debug only, and a file carries one target list.
+runs-on: macos-14
+configs: [Debug]
+build-targets: unit.exe doc.exe
+test-targets: unit|doc
+rows:
+  - { name: "apple-clang"       , preset: "clang"         }
+  - { name: "apple-clang libc++", preset: "clang-libc++"  }
+  - { name: "Android"           , preset: "android-arm64", test: false }
