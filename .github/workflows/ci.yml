@@ -20,7 +20,7 @@ jobs:
   ##################################################################################################
   precommit:
     name: Meta Checks
-    uses: jfalcou/copacabana/.github/workflows/precommit.yml@468da45ac73a026a4bca4510840ebe635aa66c2c # v6
+    uses: jfalcou/copacabana/.github/workflows/precommit.yml@05d0796125e284daa16d9a4f6424c58f98a2bb5a # v7
 
   ##======================================================================================================================
   ## Ensure Standalone is viable
@@ -49,7 +49,7 @@ jobs:
   ##################################################################################################
   sanitizer-tests:
     name: Sanitizers
-    uses: jfalcou/copacabana/.github/workflows/sanitizers.yml@468da45ac73a026a4bca4510840ebe635aa66c2c # v6
+    uses: jfalcou/copacabana/.github/workflows/sanitizers.yml@05d0796125e284daa16d9a4f6424c58f98a2bb5a # v7
     with:
       build-targets: unit.exe doc.exe
       test-targets: unit|doc
@@ -59,7 +59,7 @@ jobs:
   ##################################################################################################
   coverage-report:
     name: Coverage
-    uses: jfalcou/copacabana/.github/workflows/coverage.yml@468da45ac73a026a4bca4510840ebe635aa66c2c # v6
+    uses: jfalcou/copacabana/.github/workflows/coverage.yml@05d0796125e284daa16d9a4f6424c58f98a2bb5a # v7
     with:
       project: kumi
       build-targets: kumi-test
@@ -67,22 +67,58 @@ jobs:
   ##################################################################################################
   ## Unit Tests - the full compiler matrix, gated behind the fast checks above all passing
   ##################################################################################################
-  linux-tests:
+  linux-debug-tests:
     name: Linux
     needs: [precommit, standalone-generation, sanitizer-tests]
-    uses: ./.github/workflows/linux.yml
+    uses: jfalcou/copacabana/.github/workflows/matrix.yml@05d0796125e284daa16d9a4f6424c58f98a2bb5a # v7
+    with:
+      file: .github/matrices/linux-debug.yml
 
-  macos-tests:
+  linux-release-tests:
+    name: Linux
+    needs: [precommit, standalone-generation, sanitizer-tests]
+    uses: jfalcou/copacabana/.github/workflows/matrix.yml@05d0796125e284daa16d9a4f6424c58f98a2bb5a # v7
+    with:
+      file: .github/matrices/linux-release.yml
+
+  macos-debug-tests:
     name: MacOS
     needs: [precommit, standalone-generation, sanitizer-tests]
-    uses: ./.github/workflows/macos.yml
+    uses: jfalcou/copacabana/.github/workflows/matrix.yml@05d0796125e284daa16d9a4f6424c58f98a2bb5a # v7
+    with:
+      file: .github/matrices/macos-debug.yml
 
-  windows-tests:
+  macos-release-tests:
+    name: MacOS
+    needs: [precommit, standalone-generation, sanitizer-tests]
+    uses: jfalcou/copacabana/.github/workflows/matrix.yml@05d0796125e284daa16d9a4f6424c58f98a2bb5a # v7
+    with:
+      file: .github/matrices/macos-release.yml
+
+  windows-debug-tests:
     name: Windows
     needs: [precommit, standalone-generation, sanitizer-tests]
-    uses: ./.github/workflows/windows.yml
+    uses: jfalcou/copacabana/.github/workflows/matrix.yml@05d0796125e284daa16d9a4f6424c58f98a2bb5a # v7
+    with:
+      file: .github/matrices/windows-debug.yml
 
-  nvidia-tests:
+  windows-release-tests:
+    name: Windows
+    needs: [precommit, standalone-generation, sanitizer-tests]
+    uses: jfalcou/copacabana/.github/workflows/matrix.yml@05d0796125e284daa16d9a4f6424c58f98a2bb5a # v7
+    with:
+      file: .github/matrices/windows-release.yml
+
+  nvidia-debug-tests:
     name: Nvidia
     needs: [precommit, standalone-generation, sanitizer-tests]
-    uses: ./.github/workflows/nvidia.yml
+    uses: jfalcou/copacabana/.github/workflows/matrix.yml@05d0796125e284daa16d9a4f6424c58f98a2bb5a # v7
+    with:
+      file: .github/matrices/nvidia-debug.yml
+
+  nvidia-release-tests:
+    name: Nvidia
+    needs: [precommit, standalone-generation, sanitizer-tests]
+    uses: jfalcou/copacabana/.github/workflows/matrix.yml@05d0796125e284daa16d9a4f6424c58f98a2bb5a # v7
+    with:
+      file: .github/matrices/nvidia-release.yml

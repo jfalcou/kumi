@@ -1,0 +1,17 @@
+##======================================================================================================================
+##  KUMI - Compact C++20 Tuple Toolbox
+##  Copyright : KUMI Project Contributors
+##  SPDX-License-Identifier: BSL-1.0
+##======================================================================================================================
+## Read by copacabana's matrix.yml: the nvidia jobs in Debug. Two files for one platform because the documentation
+## examples are built and run in Debug only, and a file carries one target list.
+runs-on: self-hosted
+configs: [Debug]
+build-targets: unit.exe doc.exe
+test-targets: unit|doc
+rows:
+  - { preset: "clang-cuda"                                }
+  - { preset: "nvcc"                                      }
+  - { preset: "nvc++", setup: "./.github/scripts/cuda.sh" }
+  - { preset: "nvcc-g++"                                  }
+  - { preset: "nvcc-clang++"                              }
