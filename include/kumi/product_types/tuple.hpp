@@ -245,6 +245,7 @@ namespace kumi
 
     /// Returns the labels associated to the elements of a kumi::tuple
     [[nodiscard]] KUMI_ABI static constexpr auto labels() noexcept { return kumi::tuple{kumi::label_of<Ts>()...}; }
+
     //==================================================================================================================
     //! @}
     //==================================================================================================================
@@ -284,7 +285,7 @@ namespace kumi
         constexpr operator tuple<Us...>() const
     requires(sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>)
 #ifndef KUMI_DOXYGEN_INVOKED
-            && (kumi::_::piecewise_constructible<tuple<Ts const&...>, tuple<Us...>>)
+            && (kumi::_::piecewise_constructible<tuple<Ts const & ...>, tuple<Us...>>)
 #endif
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
@@ -301,7 +302,7 @@ namespace kumi
         constexpr operator tuple<Us...>()
     requires(sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>)
 #ifndef KUMI_DOXYGEN_INVOKED
-            && (kumi::_::piecewise_constructible<tuple<Ts&...>, tuple<Us...>>)
+            && (kumi::_::piecewise_constructible<tuple<Ts & ...>, tuple<Us...>>)
 #endif
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
