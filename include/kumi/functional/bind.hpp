@@ -27,28 +27,28 @@ namespace kumi
       using binder_t = make_binder_t<std::make_index_sequence<sizeof...(Bound)>, Bound...>;
       using func_t = leaf<function_index, F>;
 
-      template<typename... Args> KUMI_ABI constexpr decltype(auto) operator()(Args&&... args) &
+      template<typename... Args> KUMI_HIDDEN_ABI constexpr decltype(auto) operator()(Args&&... args) &
       {
         return impl(seq, *this, KUMI_FWD(args)...);
       }
 
-      template<typename... Args> KUMI_ABI constexpr decltype(auto) operator()(Args&&... args) const&
+      template<typename... Args> KUMI_HIDDEN_ABI constexpr decltype(auto) operator()(Args&&... args) const&
       {
         return impl(seq, *this, KUMI_FWD(args)...);
       }
 
-      template<typename... Args> KUMI_ABI constexpr decltype(auto) operator()(Args&&... args) &&
+      template<typename... Args> KUMI_HIDDEN_ABI constexpr decltype(auto) operator()(Args&&... args) &&
       {
         return impl(seq, std::move(*this), KUMI_FWD(args)...);
       }
 
-      template<typename... Args> KUMI_ABI constexpr decltype(auto) operator()(Args&&... args) const&&
+      template<typename... Args> KUMI_HIDDEN_ABI constexpr decltype(auto) operator()(Args&&... args) const&&
       {
         return impl(seq, std::move(*this), KUMI_FWD(args)...);
       }
 
       template<std::size_t... Is, typename Self, typename... Args>
-      KUMI_ABI static constexpr decltype(auto) impl(std::index_sequence<Is...>, Self&& s, Args&&... args)
+      KUMI_HIDDEN_ABI static constexpr decltype(auto) impl(std::index_sequence<Is...>, Self&& s, Args&&... args)
       {
         if constexpr (D == Binding::front)
         {

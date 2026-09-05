@@ -39,24 +39,26 @@ namespace kumi::_
     static constexpr bool is_homogeneous = true;
     type members[N];
 
-    template<std::size_t I> KUMI_ABI constexpr auto& operator()(std::integral_constant<std::size_t, I>) & noexcept
+    template<std::size_t I>
+    KUMI_HIDDEN_ABI constexpr auto& operator()(std::integral_constant<std::size_t, I>) & noexcept
     {
       return members[I];
     }
 
     template<std::size_t I>
-    KUMI_ABI constexpr auto const& operator()(std::integral_constant<std::size_t, I>) const& noexcept
+    KUMI_HIDDEN_ABI constexpr auto const& operator()(std::integral_constant<std::size_t, I>) const& noexcept
     {
       return members[I];
     }
 
-    template<std::size_t I> KUMI_ABI constexpr auto&& operator()(std::integral_constant<std::size_t, I>) && noexcept
+    template<std::size_t I>
+    KUMI_HIDDEN_ABI constexpr auto&& operator()(std::integral_constant<std::size_t, I>) && noexcept
     {
       return static_cast<type&&>(members[I]);
     }
 
     template<std::size_t I>
-    KUMI_ABI constexpr auto const&& operator()(std::integral_constant<std::size_t, I>) const&& noexcept
+    KUMI_HIDDEN_ABI constexpr auto const&& operator()(std::integral_constant<std::size_t, I>) const&& noexcept
     {
       return static_cast<type const&&>(members[I]);
     }
