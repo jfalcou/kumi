@@ -26,6 +26,7 @@ copa_add_option(KUMI_BUILD_TEST "Build tests using Kumi headers" ON LABEL "Unit 
 copa_add_option(KUMI_BUILD_DOCUMENTATION "Build Doxygen for Kumi" OFF LABEL "Doxygen")
 copa_add_option(KUMI_ENABLE_SANITIZERS "Build tests with AddressSanitizer + UndefinedBehaviorSanitizer" OFF LABEL "Sanitizers")
 copa_add_option(KUMI_ENABLE_COVERAGE "Build tests with code coverage instrumentation" OFF LABEL "Coverage")
+copa_add_option(KUMI_COMPILE_COST "Measure what every test unit costs to compile" OFF)
 
 if(KUMI_BUILD_TEST)
   include(${PROJECT_SOURCE_DIR}/cmake/compiler.cmake)
@@ -95,5 +96,10 @@ if(KUMI_BUILD_TEST)
   # After the test targets exist, so the coverage targets can depend on them
   if(KUMI_ENABLE_COVERAGE)
     copa_setup_coverage(kumi_opts)
+  endif()
+
+  # clang only: -fproc-stat-report is its flag. After the test targets, as the measurement rebuilds them.
+  if(KUMI_COMPILE_COST)
+    copa_setup_compile_cost(kumi_opts)
   endif()
 endif()
