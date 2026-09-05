@@ -70,19 +70,19 @@
 #define KUMI_MEMBERS(N, _)                                                                                             \
   T##N member##N;                                                                                                      \
   using index##N = std::integral_constant<std::size_t, N>;                                                             \
-  KUMI_ABI constexpr auto& operator()(index##N) & noexcept                                                             \
+  KUMI_HIDDEN_ABI constexpr auto& operator()(index##N) & noexcept                                                      \
   {                                                                                                                    \
     return member##N;                                                                                                  \
   }                                                                                                                    \
-  KUMI_ABI constexpr auto&& operator()(index##N) && noexcept                                                           \
+  KUMI_HIDDEN_ABI constexpr auto&& operator()(index##N) && noexcept                                                    \
   {                                                                                                                    \
     return static_cast<T##N&&>(member##N);                                                                             \
   }                                                                                                                    \
-  KUMI_ABI constexpr auto const&& operator()(index##N) const&& noexcept                                                \
+  KUMI_HIDDEN_ABI constexpr auto const&& operator()(index##N) const&& noexcept                                         \
   {                                                                                                                    \
     return static_cast<T##N const&&>(member##N);                                                                       \
   }                                                                                                                    \
-  KUMI_ABI constexpr auto const& operator()(index##N) const& noexcept                                                  \
+  KUMI_HIDDEN_ABI constexpr auto const& operator()(index##N) const& noexcept                                           \
   {                                                                                                                    \
     return member##N;                                                                                                  \
   }
@@ -124,36 +124,36 @@
     static constexpr bool is_homogeneous = (N == 1);                                                                   \
     KUMI_PP_REPEAT(N, KUMI_MEMBERS, _)                                                                                 \
                                                                                                                        \
-    template<typename T> KUMI_ABI constexpr auto& operator()(std::type_identity<T>) & noexcept                         \
+    template<typename T> KUMI_HIDDEN_ABI constexpr auto& operator()(std::type_identity<T>) & noexcept                  \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_TYPE_LVALUE, T)                                                                       \
     }                                                                                                                  \
-    template<typename T> KUMI_ABI constexpr auto&& operator()(std::type_identity<T>) && noexcept                       \
+    template<typename T> KUMI_HIDDEN_ABI constexpr auto&& operator()(std::type_identity<T>) && noexcept                \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_TYPE_RVALUE, T)                                                                       \
     }                                                                                                                  \
-    template<typename T> KUMI_ABI constexpr auto const&& operator()(std::type_identity<T>) const&& noexcept            \
+    template<typename T> KUMI_HIDDEN_ABI constexpr auto const&& operator()(std::type_identity<T>) const&& noexcept     \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_TYPE_CONST_RVALUE, T)                                                                 \
     }                                                                                                                  \
-    template<typename T> KUMI_ABI constexpr auto const& operator()(std::type_identity<T>) const& noexcept              \
+    template<typename T> KUMI_HIDDEN_ABI constexpr auto const& operator()(std::type_identity<T>) const& noexcept       \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_TYPE_LVALUE, T)                                                                       \
     }                                                                                                                  \
                                                                                                                        \
-    template<kumi::_::identifier I> KUMI_ABI constexpr auto& operator()(I) & noexcept                                  \
+    template<kumi::_::identifier I> KUMI_HIDDEN_ABI constexpr auto& operator()(I) & noexcept                           \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_NAME_LVALUE, I)                                                                       \
     }                                                                                                                  \
-    template<kumi::_::identifier I> KUMI_ABI constexpr auto&& operator()(I) && noexcept                                \
+    template<kumi::_::identifier I> KUMI_HIDDEN_ABI constexpr auto&& operator()(I) && noexcept                         \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_NAME_RVALUE, I)                                                                       \
     }                                                                                                                  \
-    template<kumi::_::identifier I> KUMI_ABI constexpr auto const&& operator()(I) const&& noexcept                     \
+    template<kumi::_::identifier I> KUMI_HIDDEN_ABI constexpr auto const&& operator()(I) const&& noexcept              \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_NAME_CONST_RVALUE, I)                                                                 \
     }                                                                                                                  \
-    template<kumi::_::identifier I> KUMI_ABI constexpr auto const& operator()(I) const& noexcept                       \
+    template<kumi::_::identifier I> KUMI_HIDDEN_ABI constexpr auto const& operator()(I) const& noexcept                \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_NAME_LVALUE, I)                                                                       \
     }                                                                                                                  \

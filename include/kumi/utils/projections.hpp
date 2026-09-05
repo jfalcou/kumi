@@ -70,10 +70,10 @@ namespace kumi
     //==================================================================================================================
 
     /// Returns the number of elements in a kumi::projection_map
-    [[nodiscard]] KUMI_ABI static constexpr auto size() noexcept { return sizeof...(V); }
+    [[nodiscard]] static consteval auto size() noexcept { return sizeof...(V); }
 
     /// Returns `true` if a kumi::projection_map contains 0 elements
-    [[nodiscard]] KUMI_ABI static constexpr bool empty() noexcept { return sizeof...(V) == 0; }
+    [[nodiscard]] static consteval bool empty() noexcept { return sizeof...(V) == 0; }
 
     //==================================================================================================================
     //! @}
@@ -87,7 +87,7 @@ namespace kumi
     //==================================================================================================================
     template<std::size_t I>
     requires(I < sizeof...(V))
-    KUMI_ABI constexpr decltype(auto) operator[]([[maybe_unused]] kumi::index_t<I> i) const noexcept
+    constexpr decltype(auto) operator[]([[maybe_unused]] kumi::index_t<I> i) const noexcept
     {
       return kumi::_::value_at<I, projection_map>::value;
     }
@@ -103,7 +103,7 @@ namespace kumi
     //==================================================================================================================
     template<std::size_t I>
     requires(I < sizeof...(V))
-    [[nodiscard]] KUMI_ABI friend constexpr decltype(auto) get(projection_map const& pm) noexcept
+    [[nodiscard]] friend constexpr decltype(auto) get(projection_map const& pm) noexcept
     {
       return pm[kumi::index<I>];
     }
@@ -146,7 +146,7 @@ namespace kumi
     @include doc/infra/projections.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::index... Ts> [[nodiscard]] KUMI_ABI consteval auto indexes(Ts...) noexcept
+  template<kumi::concepts::index... Ts> [[nodiscard]] consteval auto indexes(Ts...) noexcept
   {
     return kumi::projection_map<Ts{}...>{};
   }
@@ -165,7 +165,7 @@ namespace kumi
     @include doc/infra/projections.cpp
   **/
   //====================================================================================================================
-  template<std::convertible_to<std::size_t> auto... vs> [[nodiscard]] KUMI_ABI consteval auto make_indexes() noexcept
+  template<std::convertible_to<std::size_t> auto... vs> [[nodiscard]] consteval auto make_indexes() noexcept
   {
     return kumi::projection_map<kumi::index<vs>...>{};
   }
@@ -186,7 +186,7 @@ namespace kumi
   //====================================================================================================================
   template<kumi::concepts::identifier... Ts>
   requires(kumi::all_uniques_v<Ts...>)
-  [[nodiscard]] KUMI_ABI consteval auto identifiers(Ts...) noexcept
+  [[nodiscard]] consteval auto identifiers(Ts...) noexcept
   {
     return kumi::projection_map<Ts{}...>{};
   }
