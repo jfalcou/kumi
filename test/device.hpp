@@ -15,7 +15,7 @@
 //! Running a kernel and reading back what it checked
 //==================================================================================================
 
-// A run that never reached a device reports every flag false, so a machine without a card fails its tests.
+// A run that never reached a device reports every flag false, so a machine without a GPU fails its tests.
 struct device_result
 {
   bool ran = false;

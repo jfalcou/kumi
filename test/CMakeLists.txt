@@ -20,7 +20,8 @@ copa_glob_unit( QUIET
               )
 
 ##======================================================================================================================
-## Device tests - they need a card at run time. Clang only: under nvcc, a kernel cannot name a kumi entry point, #192
+## Device tests - they need a GPU at run time.
+## Clang only: under nvcc, a kernel cannot name a kumi entry point
 ##======================================================================================================================
 if(CMAKE_CUDA_COMPILER_ID MATCHES "Clang")
   copa_glob_unit( QUIET
