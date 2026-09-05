@@ -41,6 +41,7 @@
         "generator": "Ninja Multi-Config",
         "cacheVariables": {
             "CMAKE_CUDA_COMPILER": "nvcc",
+            "CMAKE_CUDA_ARCHITECTURES": "75",
             "CMAKE_DEFAULT_BUILD_TYPE": "Debug"
         }
     },
