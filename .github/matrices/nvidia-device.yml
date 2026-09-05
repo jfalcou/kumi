@@ -1,0 +1,12 @@
+##======================================================================================================================
+##  KUMI - Compact C++20 Tuple Toolbox
+##  Copyright : KUMI Project Contributors
+##  SPDX-License-Identifier: BSL-1.0
+##======================================================================================================================
+## Read by copacabana's matrix.yml: kumi inside real kernels, on the card the runner carries. Clang only, see #192.
+runs-on: cuda
+configs: [Debug, Release]
+build-targets: cuda.exe
+test-targets: cuda
+rows:
+  - { preset: "clang-cuda" }
