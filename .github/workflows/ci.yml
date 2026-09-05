@@ -19,6 +19,30 @@ concurrency:
 
 jobs:
   ##################################################################################################
+  ## A nightly run of main is expendable: a pull request needs the runners more, and the next night
+  ## measures main again. Fire and forget, so nothing here can hold the matrix back.
+  ##################################################################################################
+  yield-to-pull-requests:
+    name: Yield
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    continue-on-error: true
+    permissions:
+      actions: write
+    steps:
+      - name: Cancel what main has in flight
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # The jq filter stays on one line: a backslash inside single quotes is a backslash, not a continuation.
+          in_flight=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow ci.yml --branch main --limit 20 \
+                                  --json databaseId,status \
+                                  --jq '.[] | select(.status == "queued" or .status == "in_progress") | .databaseId')
+
+          for run in $in_flight; do gh run cancel --repo "$GITHUB_REPOSITORY" "$run"; done
+
+  ##################################################################################################
   ## Fast gate: pre-commit checks, standalone generation and sanitizers all start together with no
   ## interdependency - only once all three pass does the (much heavier) compiler matrix start below.
   ##################################################################################################
