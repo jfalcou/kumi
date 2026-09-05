@@ -24,23 +24,37 @@ jobs:
   ##################################################################################################
   yield-to-pull-requests:
     name: Yield
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
+    runs-on: self-hosted
     continue-on-error: true
     permissions:
       actions: write
     steps:
+      ## The condition sits on the step, not on the job: everything below waits for this job, and a job skipped by its
+      ## own condition skips whatever needs it, which would leave the nightly run of main with nothing to do.
       - name: Cancel what main has in flight
-        shell: bash
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          # The jq filter stays on one line: a backslash inside single quotes is a backslash, not a continuation.
-          in_flight=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow ci.yml --branch main --limit 20 \
-                                  --json databaseId,status \
-                                  --jq '.[] | select(.status == "queued" or .status == "in_progress") | .databaseId')
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v9
+        with:
+          script: |
+            const runs = await github.rest.actions.listWorkflowRuns({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'ci.yml',
+              branch: 'main',
+              per_page: 20
+            });
 
-          for run in $in_flight; do gh run cancel --repo "$GITHUB_REPOSITORY" "$run"; done
+            for (const run of runs.data.workflow_runs)
+            {
+              if (run.status === 'queued' || run.status === 'in_progress')
+              {
+                await github.rest.actions.cancelWorkflowRun({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  run_id: run.id
+                });
+              }
+            }
 
   ##################################################################################################
   ## Fast gate: pre-commit checks, standalone generation and sanitizers all start together with no
@@ -48,6 +62,7 @@ jobs:
   ##################################################################################################
   precommit:
     name: Meta Checks
+    needs: [yield-to-pull-requests]
     uses: jfalcou/copacabana/.github/workflows/precommit.yml@05d0796125e284daa16d9a4f6424c58f98a2bb5a # v7
 
   ##======================================================================================================================
@@ -55,6 +70,7 @@ jobs:
   ##======================================================================================================================
   standalone-generation:
     name: Standalone Generation
+    needs: [yield-to-pull-requests]
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/jfalcou/compilers:v10
@@ -77,6 +93,7 @@ jobs:
   ##################################################################################################
   sanitizer-tests:
     name: Sanitizers
+    needs: [yield-to-pull-requests]
     uses: jfalcou/copacabana/.github/workflows/sanitizers.yml@05d0796125e284daa16d9a4f6424c58f98a2bb5a # v7
     with:
       build-targets: unit.exe doc.exe
@@ -87,6 +104,7 @@ jobs:
   ##################################################################################################
   coverage-report:
     name: Coverage
+    needs: [yield-to-pull-requests]
     uses: jfalcou/copacabana/.github/workflows/coverage.yml@05d0796125e284daa16d9a4f6424c58f98a2bb5a # v7
     with:
       project: kumi
