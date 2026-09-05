@@ -5,10 +5,10 @@
 ##======================================================================================================================
 name: Unit Tests
 on:
-  ## Also on a merge: nothing else says main is broken, and the matrix takes minutes here.
-  push:
-    branches:
-      - main
+  ## Main gets the matrix once a night rather than on every merge: a run of its own queued behind each merge held
+  ## the pull requests back. 03:00 UTC.
+  schedule:
+    - cron: '0 3 * * *'
   pull_request:
     branches:
       - main
