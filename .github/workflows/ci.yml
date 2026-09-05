@@ -24,7 +24,7 @@ jobs:
   ##################################################################################################
   yield-to-pull-requests:
     name: Yield
-    runs-on: self-hosted
+    runs-on: [self-hosted, avx512]
     continue-on-error: true
     permissions:
       actions: write
