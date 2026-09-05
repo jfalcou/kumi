@@ -35,28 +35,28 @@ namespace kumi
     // -1 to be on par with std::string
     template<std::size_t N, std::size_t... Is>
     requires(N <= max_size)
-    constexpr str(char const (&s)[N], std::index_sequence<Is...>) : data_{s[Is]...}, size_(N - 1)
+    KUMI_ABI constexpr str(char const (&s)[N], std::index_sequence<Is...>) : data_{s[Is]...}, size_(N - 1)
     {
     }
 
     template<std::size_t N, std::size_t O, std::size_t... Is>
     requires(sizeof...(Is) <= max_size)
-    constexpr str(char const (&s)[N], std::integral_constant<std::size_t, O>, std::index_sequence<Is...>)
+    KUMI_ABI constexpr str(char const (&s)[N], std::integral_constant<std::size_t, O>, std::index_sequence<Is...>)
       : data_{s[Is + O]...}, size_(sizeof...(Is))
     {
     }
 
     template<std::size_t N>
     requires(N <= max_size)
-    constexpr str(char const (&s)[N]) : str{s, std::make_index_sequence<N>{}}
+    KUMI_ABI constexpr str(char const (&s)[N]) : str{s, std::make_index_sequence<N>{}}
     {
     }
 
     template<std::size_t N, std::size_t P, std::size_t S>
     requires((N >= P + S) && ((N - P - S) <= max_size))
-    constexpr str(char const (&s)[N],
-                  std::integral_constant<std::size_t, P> prefix,
-                  std::integral_constant<std::size_t, S>)
+    KUMI_ABI constexpr str(char const (&s)[N],
+                           std::integral_constant<std::size_t, P> prefix,
+                           std::integral_constant<std::size_t, S>)
       : str{s, prefix, std::make_index_sequence<(N - 1) - P - S>{}}
     {
     }
@@ -82,13 +82,13 @@ namespace kumi
 
     KUMI_ABI constexpr str remove_prefix(size_type n) const
     {
-      if (n > size_) throw "Out of range";
+      if (n > size_) KUMI_ERROR("Out of range");
       return substr(n, size_ - n);
     }
 
     KUMI_ABI constexpr str remove_suffix(size_type n) const
     {
-      if (n > size_) throw "Out of range";
+      if (n > size_) KUMI_ERROR("Out of range");
       return substr(0, size_ - n);
     }
 
@@ -119,7 +119,7 @@ namespace kumi
 
     KUMI_ABI constexpr bool contains(str const& s) const { return find(s) != npos; }
 
-    constexpr size_type find(str const& s, size_type pos = 0) const
+    KUMI_ABI constexpr size_type find(str const& s, size_type pos = 0) const
     {
       if (s.size_ == 0) return pos <= size_ ? pos : npos;
       if (s.size_ > size_) return npos;
@@ -137,7 +137,7 @@ namespace kumi
       return npos;
     }
 
-    constexpr int compare(str const& other) const noexcept
+    KUMI_ABI constexpr int compare(str const& other) const noexcept
     {
       size_type min_size = (size_ < other.size_) ? size_ : other.size_;
 
@@ -151,19 +151,19 @@ namespace kumi
       return 0;
     }
 
-    friend constexpr bool operator==(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) == 0; }
+    KUMI_ABI friend constexpr bool operator==(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) == 0; }
 
-    friend constexpr bool operator!=(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) != 0; }
+    KUMI_ABI friend constexpr bool operator!=(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) != 0; }
 
-    friend constexpr bool operator<(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) < 0; }
+    KUMI_ABI friend constexpr bool operator<(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) < 0; }
 
-    friend constexpr bool operator<=(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) <= 0; }
+    KUMI_ABI friend constexpr bool operator<=(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) <= 0; }
 
-    friend constexpr bool operator>(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) > 0; }
+    KUMI_ABI friend constexpr bool operator>(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) > 0; }
 
-    friend constexpr bool operator>=(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) >= 0; }
+    KUMI_ABI friend constexpr bool operator>=(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) >= 0; }
 
-    constexpr size_type rfind(str const& s, size_type pos = npos) const
+    KUMI_ABI constexpr size_type rfind(str const& s, size_type pos = npos) const
     {
       if (s.size_ == 0) return (pos > size_ ? size_ : pos);
       if (s.size_ > size_) return npos;
@@ -236,10 +236,10 @@ namespace kumi
       return npos;
     }
 
-    constexpr str operator+(str const& other) const
+    KUMI_ABI constexpr str operator+(str const& other) const
     {
       size_type new_size = size_ + 1 + other.size_;
-      if (new_size > max_size) throw "Overflow";
+      if (new_size > max_size) KUMI_ERROR("Overflow");
 
       str res{};
       res.size_ = static_cast<unsigned int>(new_size);
@@ -254,10 +254,10 @@ namespace kumi
       return res;
     }
 
-    static constexpr str from(char const* s, size_type n)
+    KUMI_ABI static constexpr str from(char const* s, size_type n)
     {
       str res{};
-      if (n > str::max_size) throw "Overflow";
+      if (n > str::max_size) KUMI_ERROR("Overflow");
       for (size_type i = 0; i < n; ++i) res.data_[i] = s[i];
       res.size_ = static_cast<unsigned int>(n);
       return res;
@@ -266,7 +266,7 @@ namespace kumi
 
   inline namespace literals
   {
-    constexpr auto operator""_str(char const* s, std::size_t n)
+    KUMI_ABI constexpr auto operator""_str(char const* s, std::size_t n)
     {
       return kumi::str::from(s, kumi::str::size_type(n));
     }
