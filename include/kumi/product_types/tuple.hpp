@@ -497,7 +497,7 @@ namespace kumi
     @tparam Ts  Type lists to build the tuple with.
   **/
   //====================================================================================================================
-  template<typename... Ts> KUMI_CUDA tuple(Ts&&...) -> tuple<std::unwrap_ref_decay_t<Ts>...>;
+  template<typename... Ts> tuple(Ts&&...) -> tuple<std::unwrap_ref_decay_t<Ts>...>;
 
   //====================================================================================================================
   //! @}
