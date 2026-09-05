@@ -15,6 +15,8 @@ if(CMAKE_CUDA_COMPILER_ID MATCHES "NVIDIA")
   target_compile_features( kumi_opts INTERFACE cuda_std_20 )
   target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CUDA>:--Werror all-warnings -Xcompiler -Wno-deprecated-literal-operator> )
   # The literal warning is set at the moment when using nvcc13.2.5 with clang20
+  # A kernel calling kumi with a lambda goes through kumi::invoke, host and device both, which nvcc refuses without it
+  target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CUDA>:--expt-relaxed-constexpr> )
 endif()
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "NVHPC")
