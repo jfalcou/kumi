@@ -27,6 +27,7 @@ copa_add_option(KUMI_BUILD_DOCUMENTATION "Build Doxygen for Kumi" OFF LABEL "Dox
 copa_add_option(KUMI_ENABLE_SANITIZERS "Build tests with AddressSanitizer + UndefinedBehaviorSanitizer" OFF LABEL "Sanitizers")
 copa_add_option(KUMI_ENABLE_COVERAGE "Build tests with code coverage instrumentation" OFF LABEL "Coverage")
 copa_add_option(KUMI_COMPILE_COST "Measure what every test unit costs to compile" OFF)
+copa_add_option(KUMI_BUILD_BENCHMARKS "Build the compilation benchmarks against the standard library" OFF)
 
 if(KUMI_BUILD_TEST)
   include(${PROJECT_SOURCE_DIR}/cmake/compiler.cmake)
@@ -101,5 +102,16 @@ if(KUMI_BUILD_TEST)
   # clang only: -fproc-stat-report is its flag. After the test targets, as the measurement rebuilds them.
   if(KUMI_COMPILE_COST)
     copa_setup_compile_cost(kumi_opts)
+  endif()
+endif()
+
+##======================================================================================================================
+## Compilation benchmarks against the standard library
+##======================================================================================================================
+if(KUMI_BUILD_BENCHMARKS)
+  add_subdirectory(benchmarks)
+
+  if(KUMI_COMPILE_COST)
+    copa_setup_compile_cost(kumi_bench PREFIX kumi-bench DEPENDS kumi-bench)
   endif()
 endif()
