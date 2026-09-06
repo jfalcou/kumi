@@ -182,19 +182,19 @@ namespace kumi::_
 #define KUMI_MEMBERS(N, _)                                                                                             \
   T##N member##N;                                                                                                      \
   using index##N = std::integral_constant<std::size_t, N>;                                                             \
-  KUMI_ABI constexpr auto& operator()(index##N) & noexcept                                                             \
+  KUMI_HIDDEN_ABI constexpr auto& operator()(index##N) & noexcept                                                      \
   {                                                                                                                    \
     return member##N;                                                                                                  \
   }                                                                                                                    \
-  KUMI_ABI constexpr auto&& operator()(index##N) && noexcept                                                           \
+  KUMI_HIDDEN_ABI constexpr auto&& operator()(index##N) && noexcept                                                    \
   {                                                                                                                    \
     return static_cast<T##N&&>(member##N);                                                                             \
   }                                                                                                                    \
-  KUMI_ABI constexpr auto const&& operator()(index##N) const&& noexcept                                                \
+  KUMI_HIDDEN_ABI constexpr auto const&& operator()(index##N) const&& noexcept                                         \
   {                                                                                                                    \
     return static_cast<T##N const&&>(member##N);                                                                       \
   }                                                                                                                    \
-  KUMI_ABI constexpr auto const& operator()(index##N) const& noexcept                                                  \
+  KUMI_HIDDEN_ABI constexpr auto const& operator()(index##N) const& noexcept                                           \
   {                                                                                                                    \
     return member##N;                                                                                                  \
   }
@@ -223,36 +223,36 @@ namespace kumi::_
     static constexpr bool is_homogeneous = (N == 1);                                                                   \
     KUMI_PP_REPEAT(N, KUMI_MEMBERS, _)                                                                                 \
                                                                                                                        \
-    template<typename T> KUMI_ABI constexpr auto& operator()(std::type_identity<T>) & noexcept                         \
+    template<typename T> KUMI_HIDDEN_ABI constexpr auto& operator()(std::type_identity<T>) & noexcept                  \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_TYPE_LVALUE, T)                                                                       \
     }                                                                                                                  \
-    template<typename T> KUMI_ABI constexpr auto&& operator()(std::type_identity<T>) && noexcept                       \
+    template<typename T> KUMI_HIDDEN_ABI constexpr auto&& operator()(std::type_identity<T>) && noexcept                \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_TYPE_RVALUE, T)                                                                       \
     }                                                                                                                  \
-    template<typename T> KUMI_ABI constexpr auto const&& operator()(std::type_identity<T>) const&& noexcept            \
+    template<typename T> KUMI_HIDDEN_ABI constexpr auto const&& operator()(std::type_identity<T>) const&& noexcept     \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_TYPE_CONST_RVALUE, T)                                                                 \
     }                                                                                                                  \
-    template<typename T> KUMI_ABI constexpr auto const& operator()(std::type_identity<T>) const& noexcept              \
+    template<typename T> KUMI_HIDDEN_ABI constexpr auto const& operator()(std::type_identity<T>) const& noexcept       \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_TYPE_LVALUE, T)                                                                       \
     }                                                                                                                  \
                                                                                                                        \
-    template<kumi::_::identifier I> KUMI_ABI constexpr auto& operator()(I) & noexcept                                  \
+    template<kumi::_::identifier I> KUMI_HIDDEN_ABI constexpr auto& operator()(I) & noexcept                           \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_NAME_LVALUE, I)                                                                       \
     }                                                                                                                  \
-    template<kumi::_::identifier I> KUMI_ABI constexpr auto&& operator()(I) && noexcept                                \
+    template<kumi::_::identifier I> KUMI_HIDDEN_ABI constexpr auto&& operator()(I) && noexcept                         \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_NAME_RVALUE, I)                                                                       \
     }                                                                                                                  \
-    template<kumi::_::identifier I> KUMI_ABI constexpr auto const&& operator()(I) const&& noexcept                     \
+    template<kumi::_::identifier I> KUMI_HIDDEN_ABI constexpr auto const&& operator()(I) const&& noexcept              \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_NAME_CONST_RVALUE, I)                                                                 \
     }                                                                                                                  \
-    template<kumi::_::identifier I> KUMI_ABI constexpr auto const& operator()(I) const& noexcept                       \
+    template<kumi::_::identifier I> KUMI_HIDDEN_ABI constexpr auto const& operator()(I) const& noexcept                \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_NAME_LVALUE, I)                                                                       \
     }                                                                                                                  \
@@ -695,7 +695,7 @@ namespace kumi
 }
 namespace kumi::_
 {
-  template<typename T> [[nodiscard]] KUMI_ABI consteval auto typer() noexcept
+  template<typename T> [[nodiscard]] KUMI_HIDDEN_ABI consteval auto typer() noexcept
   {
 #if defined(__clang__)
     constexpr auto pfx = kumi::str{"auto kumi::_::typer() [T = "}.size();
@@ -744,18 +744,27 @@ namespace kumi
     using inner_type = std::type_identity<T>;
     using label_type = std::integral_constant<kumi::str, label()>;
     T value;
-    KUMI_ABI constexpr T& operator()(identifier_type) & noexcept { return value; }
-    KUMI_ABI constexpr T&& operator()(identifier_type) && noexcept { return static_cast<T&&>(value); }
-    KUMI_ABI constexpr T const& operator()(identifier_type) const& noexcept { return value; }
-    KUMI_ABI constexpr T const&& operator()(identifier_type) const&& noexcept { return static_cast<T const&&>(value); }
-    KUMI_ABI constexpr T& operator()(inner_type) & noexcept { return value; }
-    KUMI_ABI constexpr T&& operator()(inner_type) && noexcept { return static_cast<T&&>(value); }
-    KUMI_ABI constexpr T const& operator()(inner_type) const& noexcept { return value; }
-    KUMI_ABI constexpr T const&& operator()(inner_type) const&& noexcept { return static_cast<T const&&>(value); }
-    KUMI_ABI constexpr T& operator()(label_type) & noexcept { return value; }
-    KUMI_ABI constexpr T&& operator()(label_type) && noexcept { return static_cast<T&&>(value); }
-    KUMI_ABI constexpr T const& operator()(label_type) const& noexcept { return value; }
-    KUMI_ABI constexpr T const&& operator()(label_type) const&& noexcept { return static_cast<T const&&>(value); }
+    KUMI_HIDDEN_ABI constexpr T& operator()(identifier_type) & noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T&& operator()(identifier_type) && noexcept { return static_cast<T&&>(value); }
+    KUMI_HIDDEN_ABI constexpr T const& operator()(identifier_type) const& noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T const&& operator()(identifier_type) const&& noexcept
+    {
+      return static_cast<T const&&>(value);
+    }
+    KUMI_HIDDEN_ABI constexpr T& operator()(inner_type) & noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T&& operator()(inner_type) && noexcept { return static_cast<T&&>(value); }
+    KUMI_HIDDEN_ABI constexpr T const& operator()(inner_type) const& noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T const&& operator()(inner_type) const&& noexcept
+    {
+      return static_cast<T const&&>(value);
+    }
+    KUMI_HIDDEN_ABI constexpr T& operator()(label_type) & noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T&& operator()(label_type) && noexcept { return static_cast<T&&>(value); }
+    KUMI_HIDDEN_ABI constexpr T const& operator()(label_type) const& noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T const&& operator()(label_type) const&& noexcept
+    {
+      return static_cast<T const&&>(value);
+    }
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, field const& w) noexcept
     {
@@ -771,18 +780,27 @@ namespace kumi
     using identifier_type = Id;
     using inner_type = std::type_identity<T>;
     using label_type = std::integral_constant<kumi::str, label()>;
-    KUMI_ABI constexpr T& operator()(identifier_type) & noexcept { return *this; }
-    KUMI_ABI constexpr T&& operator()(identifier_type) && noexcept { return static_cast<T&&>(*this); }
-    KUMI_ABI constexpr T const& operator()(identifier_type) const& noexcept { return *this; }
-    KUMI_ABI constexpr T const&& operator()(identifier_type) const&& noexcept { return static_cast<T const&&>(*this); }
-    KUMI_ABI constexpr T& operator()(inner_type) & noexcept { return *this; }
-    KUMI_ABI constexpr T&& operator()(inner_type) && noexcept { return static_cast<T&&>(*this); }
-    KUMI_ABI constexpr T const& operator()(inner_type) const& noexcept { return *this; }
-    KUMI_ABI constexpr T const&& operator()(inner_type) const&& noexcept { return static_cast<T const&&>(*this); }
-    KUMI_ABI constexpr T& operator()(label_type) & noexcept { return *this; }
-    KUMI_ABI constexpr T&& operator()(label_type) && noexcept { return static_cast<T&&>(*this); }
-    KUMI_ABI constexpr T const& operator()(label_type) const& noexcept { return *this; }
-    KUMI_ABI constexpr T const&& operator()(label_type) const&& noexcept { return static_cast<T const&&>(*this); }
+    KUMI_HIDDEN_ABI constexpr T& operator()(identifier_type) & noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr T&& operator()(identifier_type) && noexcept { return static_cast<T&&>(*this); }
+    KUMI_HIDDEN_ABI constexpr T const& operator()(identifier_type) const& noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr T const&& operator()(identifier_type) const&& noexcept
+    {
+      return static_cast<T const&&>(*this);
+    }
+    KUMI_HIDDEN_ABI constexpr T& operator()(inner_type) & noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr T&& operator()(inner_type) && noexcept { return static_cast<T&&>(*this); }
+    KUMI_HIDDEN_ABI constexpr T const& operator()(inner_type) const& noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr T const&& operator()(inner_type) const&& noexcept
+    {
+      return static_cast<T const&&>(*this);
+    }
+    KUMI_HIDDEN_ABI constexpr T& operator()(label_type) & noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr T&& operator()(label_type) && noexcept { return static_cast<T&&>(*this); }
+    KUMI_HIDDEN_ABI constexpr T const& operator()(label_type) const& noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr T const&& operator()(label_type) const&& noexcept
+    {
+      return static_cast<T const&&>(*this);
+    }
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, field const& w) noexcept
     {
@@ -862,14 +880,17 @@ namespace kumi::_
     T value;
     using index = std::integral_constant<std::size_t, N>;
     using inner_type = std::type_identity<T>;
-    KUMI_ABI constexpr T& operator()(index) & noexcept { return value; }
-    KUMI_ABI constexpr T&& operator()(index) && noexcept { return static_cast<T&&>(value); }
-    KUMI_ABI constexpr T const&& operator()(index) const&& noexcept { return static_cast<T const&&>(value); }
-    KUMI_ABI constexpr T const& operator()(index) const& noexcept { return value; }
-    KUMI_ABI constexpr T& operator()(inner_type) & noexcept { return value; }
-    KUMI_ABI constexpr T&& operator()(inner_type) && noexcept { return static_cast<T&&>(value); }
-    KUMI_ABI constexpr T const&& operator()(inner_type) const&& noexcept { return static_cast<T const&&>(value); }
-    KUMI_ABI constexpr T const& operator()(inner_type) const& noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T& operator()(index) & noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T&& operator()(index) && noexcept { return static_cast<T&&>(value); }
+    KUMI_HIDDEN_ABI constexpr T const&& operator()(index) const&& noexcept { return static_cast<T const&&>(value); }
+    KUMI_HIDDEN_ABI constexpr T const& operator()(index) const& noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T& operator()(inner_type) & noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T&& operator()(inner_type) && noexcept { return static_cast<T&&>(value); }
+    KUMI_HIDDEN_ABI constexpr T const&& operator()(inner_type) const&& noexcept
+    {
+      return static_cast<T const&&>(value);
+    }
+    KUMI_HIDDEN_ABI constexpr T const& operator()(inner_type) const& noexcept { return value; }
   };
   template<std::size_t N, typename T>
   requires(std::is_empty_v<T> && (!std::is_final_v<T>) && (!kumi::_::field<T>))
@@ -878,24 +899,33 @@ namespace kumi::_
     using base = std::remove_cvref_t<T>;
     using index = std::integral_constant<std::size_t, N>;
     using inner_type = std::type_identity<base>;
-    KUMI_ABI constexpr base& operator()(index) & noexcept { return *this; }
-    KUMI_ABI constexpr base&& operator()(index) && noexcept { return static_cast<base&&>(*this); }
-    KUMI_ABI constexpr base const&& operator()(index) const&& noexcept { return static_cast<base const&&>(*this); }
-    KUMI_ABI constexpr base const& operator()(index) const& noexcept { return *this; }
-    KUMI_ABI constexpr base& operator()(inner_type) & noexcept { return *this; }
-    KUMI_ABI constexpr base&& operator()(inner_type) && noexcept { return static_cast<base&&>(*this); }
-    KUMI_ABI constexpr base const&& operator()(inner_type) const&& noexcept { return static_cast<base const&&>(*this); }
-    KUMI_ABI constexpr base const& operator()(inner_type) const& noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr base& operator()(index) & noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr base&& operator()(index) && noexcept { return static_cast<base&&>(*this); }
+    KUMI_HIDDEN_ABI constexpr base const&& operator()(index) const&& noexcept
+    {
+      return static_cast<base const&&>(*this);
+    }
+    KUMI_HIDDEN_ABI constexpr base const& operator()(index) const& noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr base& operator()(inner_type) & noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr base&& operator()(inner_type) && noexcept { return static_cast<base&&>(*this); }
+    KUMI_HIDDEN_ABI constexpr base const&& operator()(inner_type) const&& noexcept
+    {
+      return static_cast<base const&&>(*this);
+    }
+    KUMI_HIDDEN_ABI constexpr base const& operator()(inner_type) const& noexcept { return *this; }
   };
   template<std::size_t N, kumi::_::field T> struct leaf<N, T> : std::remove_cvref_t<T>
   {
     using base = std::remove_cvref_t<T>;
     using base::operator();
     using index = std::integral_constant<std::size_t, N>;
-    KUMI_ABI constexpr base& operator()(index) & noexcept { return *this; }
-    KUMI_ABI constexpr base&& operator()(index) && noexcept { return static_cast<base&&>(*this); }
-    KUMI_ABI constexpr base const&& operator()(index) const&& noexcept { return static_cast<base const&&>(*this); }
-    KUMI_ABI constexpr base const& operator()(index) const& noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr base& operator()(index) & noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr base&& operator()(index) && noexcept { return static_cast<base&&>(*this); }
+    KUMI_HIDDEN_ABI constexpr base const&& operator()(index) const&& noexcept
+    {
+      return static_cast<base const&&>(*this);
+    }
+    KUMI_HIDDEN_ABI constexpr base const& operator()(index) const& noexcept { return *this; }
   };
   template<typename ISeq, typename... Ts> struct binder;
   template<std::size_t... Is, typename... Ts>
@@ -921,21 +951,23 @@ namespace kumi::_
     static constexpr std::size_t N = 2 + sizeof...(Ts);
     static constexpr bool is_homogeneous = true;
     type members[N];
-    template<std::size_t I> KUMI_ABI constexpr auto& operator()(std::integral_constant<std::size_t, I>) & noexcept
+    template<std::size_t I>
+    KUMI_HIDDEN_ABI constexpr auto& operator()(std::integral_constant<std::size_t, I>) & noexcept
     {
       return members[I];
     }
     template<std::size_t I>
-    KUMI_ABI constexpr auto const& operator()(std::integral_constant<std::size_t, I>) const& noexcept
+    KUMI_HIDDEN_ABI constexpr auto const& operator()(std::integral_constant<std::size_t, I>) const& noexcept
     {
       return members[I];
     }
-    template<std::size_t I> KUMI_ABI constexpr auto&& operator()(std::integral_constant<std::size_t, I>) && noexcept
+    template<std::size_t I>
+    KUMI_HIDDEN_ABI constexpr auto&& operator()(std::integral_constant<std::size_t, I>) && noexcept
     {
       return static_cast<type&&>(members[I]);
     }
     template<std::size_t I>
-    KUMI_ABI constexpr auto const&& operator()(std::integral_constant<std::size_t, I>) const&& noexcept
+    KUMI_HIDDEN_ABI constexpr auto const&& operator()(std::integral_constant<std::size_t, I>) const&& noexcept
     {
       return static_cast<type const&&>(members[I]);
     }
@@ -1423,14 +1455,14 @@ namespace kumi
   }
   namespace _
   {
-    template<auto N, typename... Ts> KUMI_ABI consteval auto contains_identifier()
+    template<auto N, typename... Ts> consteval auto contains_identifier()
     {
       if constexpr (std::integral<std::remove_cvref_t<decltype(N)>>) return false;
       else if constexpr (kumi::concepts::index<decltype(N)>) return false;
       else if constexpr (kumi::concepts::identifier<std::remove_cvref_t<decltype(N)>>) return false;
       else return kumi::concepts::contains_identifier<kumi::name<N>, Ts...>;
     }
-    template<auto N, typename... Ts> KUMI_ABI consteval auto contains_label()
+    template<auto N, typename... Ts> consteval auto contains_label()
     {
       if constexpr (std::integral<std::remove_cvref_t<decltype(N)>>) return false;
       else if constexpr (kumi::concepts::index<decltype(N)>) return false;
@@ -1539,17 +1571,17 @@ namespace kumi
     static constexpr bool is_projection_map = true;
     consteval projection_map() noexcept = default;
     consteval explicit projection_map(auto...) noexcept {}
-    [[nodiscard]] KUMI_ABI static constexpr auto size() noexcept { return sizeof...(V); }
-    [[nodiscard]] KUMI_ABI static constexpr bool empty() noexcept { return sizeof...(V) == 0; }
+    [[nodiscard]] static consteval auto size() noexcept { return sizeof...(V); }
+    [[nodiscard]] static consteval bool empty() noexcept { return sizeof...(V) == 0; }
     template<std::size_t I>
     requires(I < sizeof...(V))
-    KUMI_ABI constexpr decltype(auto) operator[]([[maybe_unused]] kumi::index_t<I> i) const noexcept
+    constexpr decltype(auto) operator[]([[maybe_unused]] kumi::index_t<I> i) const noexcept
     {
       return kumi::_::value_at<I, projection_map>::value;
     }
     template<std::size_t I>
     requires(I < sizeof...(V))
-    [[nodiscard]] KUMI_ABI friend constexpr decltype(auto) get(projection_map const& pm) noexcept
+    [[nodiscard]] friend constexpr decltype(auto) get(projection_map const& pm) noexcept
     {
       return pm[kumi::index<I>];
     }
@@ -1565,17 +1597,17 @@ namespace kumi
     }
   };
   template<kumi::concepts::projection... Ts> KUMI_CUDA projection_map(Ts...) -> projection_map<Ts{}...>;
-  template<kumi::concepts::index... Ts> [[nodiscard]] KUMI_ABI consteval auto indexes(Ts...) noexcept
+  template<kumi::concepts::index... Ts> [[nodiscard]] consteval auto indexes(Ts...) noexcept
   {
     return kumi::projection_map<Ts{}...>{};
   }
-  template<std::convertible_to<std::size_t> auto... vs> [[nodiscard]] KUMI_ABI consteval auto make_indexes() noexcept
+  template<std::convertible_to<std::size_t> auto... vs> [[nodiscard]] consteval auto make_indexes() noexcept
   {
     return kumi::projection_map<kumi::index<vs>...>{};
   }
   template<kumi::concepts::identifier... Ts>
   requires(kumi::all_uniques_v<Ts...>)
-  [[nodiscard]] KUMI_ABI consteval auto identifiers(Ts...) noexcept
+  [[nodiscard]] consteval auto identifiers(Ts...) noexcept
   {
     return kumi::projection_map<Ts{}...>{};
   }
@@ -2522,14 +2554,14 @@ namespace kumi
     inline constexpr bool is_reference_wrapper_v =
       !std::is_same_v<std::decay_t<typename std::unwrap_reference<T&&>::type>,
                       typename std::unwrap_ref_decay<T&&>::type>;
-    template<typename T> KUMI_ABI constexpr decltype(auto) unwrap_memptr(T&& obj)
+    template<typename T> KUMI_HIDDEN_ABI constexpr decltype(auto) unwrap_memptr(T&& obj)
     {
       if constexpr (kumi::_::is_reference_wrapper_v<std::remove_cvref_t<T>>) return KUMI_FWD(obj).get();
       else if constexpr (std::is_pointer_v<std::remove_cvref_t<T>>) return *KUMI_FWD(obj);
       else return KUMI_FWD(obj);
     }
     template<typename C, typename P, typename O, typename... Ts>
-    KUMI_ABI constexpr decltype(auto) invoke_memptr(P C::* member, O&& o, Ts&&... ts)
+    KUMI_HIDDEN_ABI constexpr decltype(auto) invoke_memptr(P C::* member, O&& o, Ts&&... ts)
     {
       using callable_t = P C::*;
       if constexpr (std::is_member_object_pointer_v<callable_t>) return unwrap_memptr(KUMI_FWD(o)).*member;
@@ -2566,24 +2598,24 @@ namespace kumi
       static constexpr auto seq = std::make_index_sequence<sizeof...(Bound)>{};
       using binder_t = make_binder_t<std::make_index_sequence<sizeof...(Bound)>, Bound...>;
       using func_t = leaf<function_index, F>;
-      template<typename... Args> KUMI_ABI constexpr decltype(auto) operator()(Args&&... args) &
+      template<typename... Args> KUMI_HIDDEN_ABI constexpr decltype(auto) operator()(Args&&... args) &
       {
         return impl(seq, *this, KUMI_FWD(args)...);
       }
-      template<typename... Args> KUMI_ABI constexpr decltype(auto) operator()(Args&&... args) const&
+      template<typename... Args> KUMI_HIDDEN_ABI constexpr decltype(auto) operator()(Args&&... args) const&
       {
         return impl(seq, *this, KUMI_FWD(args)...);
       }
-      template<typename... Args> KUMI_ABI constexpr decltype(auto) operator()(Args&&... args) &&
+      template<typename... Args> KUMI_HIDDEN_ABI constexpr decltype(auto) operator()(Args&&... args) &&
       {
         return impl(seq, std::move(*this), KUMI_FWD(args)...);
       }
-      template<typename... Args> KUMI_ABI constexpr decltype(auto) operator()(Args&&... args) const&&
+      template<typename... Args> KUMI_HIDDEN_ABI constexpr decltype(auto) operator()(Args&&... args) const&&
       {
         return impl(seq, std::move(*this), KUMI_FWD(args)...);
       }
       template<std::size_t... Is, typename Self, typename... Args>
-      KUMI_ABI static constexpr decltype(auto) impl(std::index_sequence<Is...>, Self&& s, Args&&... args)
+      KUMI_HIDDEN_ABI static constexpr decltype(auto) impl(std::index_sequence<Is...>, Self&& s, Args&&... args)
       {
         if constexpr (D == Binding::front)
         {
@@ -2672,20 +2704,22 @@ namespace kumi
       template<typename T>
       using type_t = decltype(type(std::declval<T>(), std::make_index_sequence<kumi::size_v<T>>{}));
       template<kumi::concepts::product_type T, std::size_t... I>
-      KUMI_ABI constexpr auto operator()(T&& t, std::index_sequence<I...>) const
+      KUMI_HIDDEN_ABI constexpr auto operator()(T&& t, std::index_sequence<I...>) const
       {
         using res_t = kumi::builder_make_t<T, kumi::element_t<I, T>...>;
         return res_t{get<I>(KUMI_FWD(t))...};
       }
       template<typename T, std::size_t N, std::size_t... I>
-      KUMI_ABI constexpr auto operator()(T&& t, std::integral_constant<std::size_t, N>, std::index_sequence<I...>) const
+      KUMI_HIDDEN_ABI constexpr auto operator()(T&& t,
+                                                std::integral_constant<std::size_t, N>,
+                                                std::index_sequence<I...>) const
       {
         using U = type_t<T>;
         using res_t = kumi::builder_make_t<U, kumi::element_t<N, kumi::element_t<I, T>>...>;
         return res_t{get<N>(get<I>(KUMI_FWD(t)))...};
       }
       template<typename T, std::size_t... E, std::size_t... I>
-      KUMI_ABI constexpr auto operator()(T&& t, std::index_sequence<E...>, std::index_sequence<I...>) const
+      KUMI_HIDDEN_ABI constexpr auto operator()(T&& t, std::index_sequence<E...>, std::index_sequence<I...>) const
       {
         using U = type_t<T>;
         using res_t = kumi::builder_make_t<U, kumi::element_t<E, kumi::element_t<I, T>>...>;
@@ -2934,15 +2968,15 @@ namespace kumi
     {
     private:
       template<bool... b, std::size_t... I, std::size_t... J>
-      KUMI_ABI consteval auto impl(std::integer_sequence<bool, b...>,
-                                   std::index_sequence<I...>,
-                                   std::index_sequence<J...>) const noexcept
+      consteval auto impl(std::integer_sequence<bool, b...>,
+                          std::index_sequence<I...>,
+                          std::index_sequence<J...>) const noexcept
       {
         return kumi::projection_map{std::index_sequence<(kumi::_::nth_pos(I, b...))...>{},
                                     std::index_sequence<(kumi::_::nth_pos(J, !b...))...>{}};
       }
     public:
-      template<bool... Bs> KUMI_ABI consteval auto operator()(std::bool_constant<Bs>...) const noexcept
+      template<bool... Bs> consteval auto operator()(std::bool_constant<Bs>...) const noexcept
       {
         return impl(std::integer_sequence<bool, Bs...>{}, std::make_index_sequence<(Bs + ... + 0)>{},
                     std::make_index_sequence<(sizeof...(Bs) - (Bs + ... + 0))>{});
