@@ -1,4 +1,4 @@
-#error This file is for ducomentation only - DO NOT INCLUDE
+#error This file is for documentation only - DO NOT INCLUDE
 /**
 
   @page kumi_nomenclature Nomenclature

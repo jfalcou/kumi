@@ -3,13 +3,13 @@
   <!-- Navigation index tabs for HTML output -->
   <navindex>
     <tab type="mainpage" visible="yes" title=""/>
-    <tab type="usergroup" visible="yes" title="About The Library">
+    <tab type="usergroup" visible="yes" title="About The Library" url="@ref kumi_setup">
       <tab type="user" url="@ref kumi_setup"     title="Setup"/>
       <tab type="user" url="@ref kumi_changelog" title="Changelog"/>
       <tab type="user" url="@ref kumi_licence"   title="Licence"/>
     </tab>
-    <tab type="usergroup" visible="yes" title="Glossary">
-      <tab type="usergroup" visible="yes" title="Type Theory">
+    <tab type="usergroup" visible="yes" title="Glossary" url="@ref kumi_glossary">
+      <tab type="usergroup" visible="yes" title="Type Theory" url="@ref kumi_introduction">
         <tab type="user" url="@ref kumi_introduction" title="Introduction"/>
         <tab type="user" url="@ref kumi_identity" title="Identity Types"/>
         <tab type="user" url="@ref kumi_product" title="Product Types"/>
@@ -17,19 +17,19 @@
       <tab type="user" url="@ref kumi_cpp_spec" title="C++ Vocabulary"/>
       <tab type="user" url="@ref kumi_nomenclature" title="Nomenclature"/>
     </tab>
-    <tab type="usergroup" visible="yes"   title="Reference Documentation">
-      <tab type="usergroup" visible="yes"   title="Types">
+    <tab type="usergroup" visible="yes"   title="Reference Documentation" url="@ref kumi_reference">
+      <tab type="usergroup" visible="yes"   title="Types" url="@ref kumi_tuple_related">
         <tab type="user" url="@ref kumi_tuple_related"   title="Product Types and Functions"/>
         <tab type="user" url="@ref kumi_record_related"  title="Record Types and Functions"/>
         <tab type="user" url="@ref kumi_types"   title="Types"/>
       </tab>
-      <tab type="usergroup" visible="yes" title="Algorithms">
+      <tab type="usergroup" visible="yes" title="Algorithms" url="@ref kumi_transforms">
         <tab type="user" url="@ref kumi_transforms"  title="Transformations"/>
         <tab type="user" url="@ref kumi_queries"     title="Queries"/>
         <tab type="user" url="@ref kumi_generators"  title="Generators"/>
         <tab type="user" url="@ref kumi_reductions"  title="Reductions"/>
       </tab>
-      <tab type="usergroup" visible="yes" title="Helpers">
+      <tab type="usergroup" visible="yes" title="Helpers" url="@ref kumi_traits">
         <tab type="user" url="@ref kumi_traits"    title="Traits"/>
         <tab type="user" url="@ref kumi_concepts"  title="Concepts"/>
         <tab type="user" url="@ref kumi_utility"   title="Utility"/>

@@ -6,9 +6,10 @@
 name: Unit Tests
 on:
   ## Main gets the matrix once a night rather than on every merge: a run of its own queued behind each merge held
-  ## the pull requests back. 03:00 UTC.
+  ## the pull requests back. 01:20 UTC, which is 02:20 in Paris in winter, and off the hour that every other
+  ## scheduled workflow on the platform asks for.
   schedule:
-    - cron: '0 3 * * *'
+    - cron: '20 1 * * *'
   pull_request:
     branches:
       - main
@@ -19,50 +20,11 @@ concurrency:
 
 jobs:
   ##################################################################################################
-  ## A nightly run of main is expendable: a pull request needs the runners more, and the next night
-  ## measures main again. Fire and forget, so nothing here can hold the matrix back.
-  ##################################################################################################
-  yield-to-pull-requests:
-    name: Yield
-    runs-on: [self-hosted, avx512]
-    continue-on-error: true
-    permissions:
-      actions: write
-    steps:
-      ## The condition sits on the step, not on the job: everything below waits for this job, and a job skipped by its
-      ## own condition skips whatever needs it, which would leave the nightly run of main with nothing to do.
-      - name: Cancel what main has in flight
-        if: github.event_name == 'pull_request'
-        uses: actions/github-script@v9
-        with:
-          script: |
-            const runs = await github.rest.actions.listWorkflowRuns({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              workflow_id: 'ci.yml',
-              branch: 'main',
-              per_page: 20
-            });
-
-            for (const run of runs.data.workflow_runs)
-            {
-              if (run.status === 'queued' || run.status === 'in_progress')
-              {
-                await github.rest.actions.cancelWorkflowRun({
-                  owner: context.repo.owner,
-                  repo: context.repo.repo,
-                  run_id: run.id
-                });
-              }
-            }
-
-  ##################################################################################################
   ## Fast gate: pre-commit checks, standalone generation and sanitizers all start together with no
   ## interdependency - only once all three pass does the (much heavier) compiler matrix start below.
   ##################################################################################################
   precommit:
     name: Meta Checks
-    needs: [yield-to-pull-requests]
     uses: jfalcou/copacabana/.github/workflows/precommit.yml@44053e713b1b57329ccbcbb8878c839024bf19ee # v8
 
   ##======================================================================================================================
@@ -70,7 +32,6 @@ jobs:
   ##======================================================================================================================
   standalone-generation:
     name: Standalone Generation
-    needs: [yield-to-pull-requests]
     runs-on: ubuntu-latest
     container:
       image: ghcr.io/jfalcou/compilers:v10
@@ -93,7 +54,6 @@ jobs:
   ##################################################################################################
   sanitizer-tests:
     name: Sanitizers
-    needs: [yield-to-pull-requests]
     uses: jfalcou/copacabana/.github/workflows/sanitizers.yml@44053e713b1b57329ccbcbb8878c839024bf19ee # v8
     with:
       build-targets: unit.exe doc.exe
@@ -104,7 +64,6 @@ jobs:
   ##################################################################################################
   coverage-report:
     name: Coverage
-    needs: [yield-to-pull-requests]
     uses: jfalcou/copacabana/.github/workflows/coverage.yml@44053e713b1b57329ccbcbb8878c839024bf19ee # v8
     with:
       project: kumi
