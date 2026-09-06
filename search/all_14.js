@@ -20,7 +20,7 @@ var searchData=
   ['product_5ftype_17',['product_type',['../conceptkumi_1_1concepts_1_1product__type.html',1,'kumi::concepts']]],
   ['programming_20languages_20considerations_18',['Programming Languages Considerations',['../kumi_product.html#tuple_programming',1,'']]],
   ['projection_19',['projection',['../conceptkumi_1_1concepts_1_1projection.html',1,'kumi::concepts']]],
-  ['projection_5fmap_20',['projection_map',['../structkumi_1_1projection__map.html',1,'kumi::projection_map&lt; V &gt;'],['../conceptkumi_1_1concepts_1_1projection__map.html',1,'kumi::concepts'],['../group__kumi__utility.html#ga8b7f4e6ed1e7071d7c152c9870709fcb',1,'kumi::projection_map()']]],
+  ['projection_5fmap_20',['projection_map',['../structkumi_1_1projection__map.html',1,'kumi::projection_map&lt; V &gt;'],['../conceptkumi_1_1concepts_1_1projection__map.html',1,'kumi::concepts'],['../group__kumi__utility.html#ga0ac9f243b64bbbabc2bad542ca03c035',1,'kumi::projection_map()']]],
   ['protocol_21',['Tuple Protocol',['../kumi_cpp_spec.html#autotoc_md128',1,'']]],
   ['public_20release_22',['First autonomous public release.',['../kumi_changelog.html#autotoc_md121',1,'']]],
   ['push_5ffront_23',['push_front',['../group__kumi__generators.html#gad4bd53f162f63af0cbfbd68d8adb5d5c',1,'kumi']]]

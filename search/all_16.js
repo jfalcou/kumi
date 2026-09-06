@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['record_0',['record',['../structkumi_1_1record.html',1,'kumi::record&lt; Ts &gt;'],['../structkumi_1_1record.html#a1000cb0996a9587f8735a35f76060e44',1,'kumi::record::record()'],['../structkumi_1_1record.html#a1000cb0996a9587f8735a35f76060e44',1,'kumi::record()']]],
+  ['record_0',['record',['../structkumi_1_1record.html',1,'kumi::record&lt; Ts &gt;'],['../structkumi_1_1record.html#ae9ac76c2474af708950b35e4b58027d6',1,'kumi::record::record()'],['../structkumi_1_1record.html#ae9ac76c2474af708950b35e4b58027d6',1,'kumi::record()']]],
   ['record_20related_20traits_1',['Record Related Traits',['../group__kumi__record__traits.html',1,'']]],
   ['record_20type_2038_2',['Record Type \\( (\\{l_A: A\\} \\times \\{l_B: B\\}) \\)',['../kumi_product.html#kumi_record_type',1,'']]],
   ['record_20type_20specific_20transformations_3',['Record Type Specific Transformations',['../group__kumi__record__transforms.html',1,'']]],

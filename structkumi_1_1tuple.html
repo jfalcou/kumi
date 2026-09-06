@@ -215,10 +215,10 @@ Example:</h2>
 Public Member Functions</h2></td></tr>
 <tr class="memitem:a14faa9d3cc7ddc1ded423c7c315f770f" id="r_a14faa9d3cc7ddc1ded423c7c315f770f"><td class="memTemplParams" colspan="2"><a id="a14faa9d3cc7ddc1ded423c7c315f770f" name="a14faa9d3cc7ddc1ded423c7c315f770f"></a>
 template&lt;typename... Us&gt; </td></tr>
-<tr class="memitem:a14faa9d3cc7ddc1ded423c7c315f770f template"><td class="memItemLeft">constexpr <a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a> &amp;&#160;</td><td class="memItemRight"><b>operator=</b> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Us... &gt; &amp;&amp;other)</td></tr>
+<tr class="memitem:a14faa9d3cc7ddc1ded423c7c315f770f template"><td class="memItemLeft">constexpr <a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a> &amp;&#160;</td><td class="memItemRight"><b>operator=</b> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Us... &gt; &amp;&amp;other)</td></tr>
 <tr class="memdesc:a14faa9d3cc7ddc1ded423c7c315f770f"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
 <tr class="memitem:a2ea9ed2c89c9f857f9ea9e78d3e55415" id="r_a2ea9ed2c89c9f857f9ea9e78d3e55415"><td class="memTemplParams" colspan="2">template&lt;typename... Us&gt; </td></tr>
-<tr class="memitem:a2ea9ed2c89c9f857f9ea9e78d3e55415 template"><td class="memItemLeft">constexpr <a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a2ea9ed2c89c9f857f9ea9e78d3e55415">operator=</a> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Us... &gt; const &amp;other)</td></tr>
+<tr class="memitem:a2ea9ed2c89c9f857f9ea9e78d3e55415 template"><td class="memItemLeft">constexpr <a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a2ea9ed2c89c9f857f9ea9e78d3e55415">operator=</a> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Us... &gt; const &amp;other)</td></tr>
 <tr class="memdesc:a2ea9ed2c89c9f857f9ea9e78d3e55415"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replaces the contents of the tuple with the contents of another tuple.  <br /></td></tr>
 <tr id="pub-methods-0" class="groupHeader"><td colspan="2"><div class="groupHeader">Accessors</div></td></tr>
 <tr class="memitem:a9642386ee7679de26bcc7be48128073d" id="r_a9642386ee7679de26bcc7be48128073d"><td class="memTemplParams" colspan="2">template&lt;std::size_t I&gt; <br />
@@ -299,12 +299,12 @@ requires (<a class="el" href="conceptkumi_1_1concepts_1_1uniquely__named.html">k
 <tr class="memdesc:a2535ed124742921f2d9f813adebca1b2"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
 <tr id="pub-methods-1" class="groupHeader"><td colspan="2"><div class="groupHeader">Conversions</div></td></tr>
 <tr class="memitem:ad1a538cf24f719ead736cc23e6559c81" id="r_ad1a538cf24f719ead736cc23e6559c81"><td class="memTemplParams" colspan="2">template&lt;typename... Us&gt; <br />
-requires (sizeof...(Us) == sizeof...(Ts)) &amp;&amp; (!std::same_as&lt;<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt;Ts...&gt;, <a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt;Us...&gt;&gt;)</td></tr>
+requires (sizeof...(Us) == sizeof...(Ts)) &amp;&amp; (!std::same_as&lt;<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt;Ts...&gt;, <a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt;Us...&gt;&gt;)</td></tr>
 <tr class="memitem:ad1a538cf24f719ead736cc23e6559c81 template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#ad1a538cf24f719ead736cc23e6559c81">operator tuple&lt; Us... &gt;</a> () const</td></tr>
 <tr class="memdesc:ad1a538cf24f719ead736cc23e6559c81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables static casting a tuple&lt;Ts...&gt; to a <a class="el" href="structkumi_1_1tuple.html">tuple&lt;Us...&gt;</a>, the conversions is explicit if the casting requires internal explicit conversions.  <br /></td></tr>
 <tr class="memitem:a692f7d015f9c101bb4c0e17cbf1deb77" id="r_a692f7d015f9c101bb4c0e17cbf1deb77"><td class="memTemplParams" colspan="2"><a id="a692f7d015f9c101bb4c0e17cbf1deb77" name="a692f7d015f9c101bb4c0e17cbf1deb77"></a>
 template&lt;typename... Us&gt; <br />
-requires (sizeof...(Us) == sizeof...(Ts)) &amp;&amp; (!std::same_as&lt;<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt;Ts...&gt;, <a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt;Us...&gt;&gt;)</td></tr>
+requires (sizeof...(Us) == sizeof...(Ts)) &amp;&amp; (!std::same_as&lt;<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt;Ts...&gt;, <a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt;Us...&gt;&gt;)</td></tr>
 <tr class="memitem:a692f7d015f9c101bb4c0e17cbf1deb77 template"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><b>operator tuple&lt; Us... &gt;</b> ()</td></tr>
 <tr class="memdesc:a692f7d015f9c101bb4c0e17cbf1deb77"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
 </table><table class="memberdecls">
@@ -325,30 +325,30 @@ Friends</h2></td></tr>
 <tr id="friends-0" class="groupHeader"><td colspan="2"><div class="groupHeader">Comparison operators</div></td></tr>
 <tr class="memitem:af0256993b0ad272335b4c6d77afe73d7" id="r_af0256993b0ad272335b4c6d77afe73d7"><td class="memTemplParams" colspan="2"><a id="af0256993b0ad272335b4c6d77afe73d7" name="af0256993b0ad272335b4c6d77afe73d7"></a>
 template&lt;typename... Us&gt; </td></tr>
-<tr class="memitem:af0256993b0ad272335b4c6d77afe73d7 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator==</b> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a> const &amp;self, <a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Us... &gt; const &amp;other) noexcept</td></tr>
+<tr class="memitem:af0256993b0ad272335b4c6d77afe73d7 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator==</b> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a> const &amp;self, <a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Us... &gt; const &amp;other) noexcept</td></tr>
 <tr class="memdesc:af0256993b0ad272335b4c6d77afe73d7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares a tuple with an other for equality. <br /></td></tr>
 <tr class="memitem:a723ee5d6b1324e146a4cb8819c29f331" id="r_a723ee5d6b1324e146a4cb8819c29f331"><td class="memTemplParams" colspan="2"><a id="a723ee5d6b1324e146a4cb8819c29f331" name="a723ee5d6b1324e146a4cb8819c29f331"></a>
 template&lt;typename... Us&gt; </td></tr>
-<tr class="memitem:a723ee5d6b1324e146a4cb8819c29f331 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator!=</b> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a> const &amp;self, <a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Us... &gt; const &amp;other) noexcept</td></tr>
+<tr class="memitem:a723ee5d6b1324e146a4cb8819c29f331 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator!=</b> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a> const &amp;self, <a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Us... &gt; const &amp;other) noexcept</td></tr>
 <tr class="memdesc:a723ee5d6b1324e146a4cb8819c29f331"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares a tuple with an other for inequality. <br /></td></tr>
 <tr class="memitem:abee5ae96fdfd2145347fa3b2b212bf12" id="r_abee5ae96fdfd2145347fa3b2b212bf12"><td class="memTemplParams" colspan="2">template&lt;typename... Us&gt; <br />
 requires (sizeof...(Ts) == sizeof...(Us))</td></tr>
-<tr class="memitem:abee5ae96fdfd2145347fa3b2b212bf12 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#abee5ae96fdfd2145347fa3b2b212bf12">operator&lt;</a> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a> const &amp;lhs, <a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Us... &gt; const &amp;rhs) noexcept</td></tr>
+<tr class="memitem:abee5ae96fdfd2145347fa3b2b212bf12 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#abee5ae96fdfd2145347fa3b2b212bf12">operator&lt;</a> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a> const &amp;lhs, <a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Us... &gt; const &amp;rhs) noexcept</td></tr>
 <tr class="memdesc:abee5ae96fdfd2145347fa3b2b212bf12"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares tuples for lexicographical is less relation.  <br /></td></tr>
 <tr class="memitem:a03b20df5887479d4b7277e30302266ea" id="r_a03b20df5887479d4b7277e30302266ea"><td class="memTemplParams" colspan="2"><a id="a03b20df5887479d4b7277e30302266ea" name="a03b20df5887479d4b7277e30302266ea"></a>
 template&lt;typename... Us&gt; <br />
 requires requires { rhs &lt; lhs; }</td></tr>
-<tr class="memitem:a03b20df5887479d4b7277e30302266ea template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator&lt;=</b> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a> const &amp;lhs, <a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Us... &gt; const &amp;rhs) noexcept</td></tr>
+<tr class="memitem:a03b20df5887479d4b7277e30302266ea template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator&lt;=</b> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a> const &amp;lhs, <a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Us... &gt; const &amp;rhs) noexcept</td></tr>
 <tr class="memdesc:a03b20df5887479d4b7277e30302266ea"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares tuples for lexicographical is less or equal relation. <br /></td></tr>
 <tr class="memitem:a741431fe551f58d39edd28b6f6d005ae" id="r_a741431fe551f58d39edd28b6f6d005ae"><td class="memTemplParams" colspan="2"><a id="a741431fe551f58d39edd28b6f6d005ae" name="a741431fe551f58d39edd28b6f6d005ae"></a>
 template&lt;typename... Us&gt; <br />
 requires requires { rhs &lt; lhs; }</td></tr>
-<tr class="memitem:a741431fe551f58d39edd28b6f6d005ae template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator&gt;</b> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a> const &amp;lhs, <a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Us... &gt; const &amp;rhs) noexcept</td></tr>
+<tr class="memitem:a741431fe551f58d39edd28b6f6d005ae template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator&gt;</b> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a> const &amp;lhs, <a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Us... &gt; const &amp;rhs) noexcept</td></tr>
 <tr class="memdesc:a741431fe551f58d39edd28b6f6d005ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares tuples for lexicographical is greater relation. <br /></td></tr>
 <tr class="memitem:a6b3f89a6d6b94821ab32117291342a64" id="r_a6b3f89a6d6b94821ab32117291342a64"><td class="memTemplParams" colspan="2"><a id="a6b3f89a6d6b94821ab32117291342a64" name="a6b3f89a6d6b94821ab32117291342a64"></a>
 template&lt;typename... Us&gt; <br />
 requires requires { lhs &lt; rhs; }</td></tr>
-<tr class="memitem:a6b3f89a6d6b94821ab32117291342a64 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator&gt;=</b> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a> const &amp;lhs, <a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Us... &gt; const &amp;rhs) noexcept</td></tr>
+<tr class="memitem:a6b3f89a6d6b94821ab32117291342a64 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator&gt;=</b> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a> const &amp;lhs, <a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Us... &gt; const &amp;rhs) noexcept</td></tr>
 <tr class="memdesc:a6b3f89a6d6b94821ab32117291342a64"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares tuples for lexicographical is greater or equal relation. <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-related" class="groupheader"><a id="related" name="related"></a>
@@ -357,12 +357,12 @@ Related Symbols</h2></td></tr>
 </td></tr>
 <tr class="memitem:af6739a069131e315597688e5b3cf5df9" id="r_af6739a069131e315597688e5b3cf5df9"><td class="memTemplParams" colspan="2"><a id="af6739a069131e315597688e5b3cf5df9" name="af6739a069131e315597688e5b3cf5df9"></a>
 template&lt;typename CharT, typename Traits&gt; </td></tr>
-<tr class="memitem:af6739a069131e315597688e5b3cf5df9 template"><td class="memItemLeft">std::basic_ostream&lt; CharT, Traits &gt; &amp;&#160;</td><td class="memItemRight"><b>operator&lt;&lt;</b> (std::basic_ostream&lt; CharT, Traits &gt; &amp;os, <a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a> const &amp;t) noexcept</td></tr>
+<tr class="memitem:af6739a069131e315597688e5b3cf5df9 template"><td class="memItemLeft">std::basic_ostream&lt; CharT, Traits &gt; &amp;&#160;</td><td class="memItemRight"><b>operator&lt;&lt;</b> (std::basic_ostream&lt; CharT, Traits &gt; &amp;os, <a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a> const &amp;t) noexcept</td></tr>
 <tr class="memdesc:af6739a069131e315597688e5b3cf5df9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> in an output stream. <br /></td></tr>
 <tr id="related-0" class="groupHeader"><td colspan="2"><div class="groupHeader">Tuple deduction guides</div></td></tr>
-<tr class="memitem:a889b9718ac16b1be40acc38689401cd1" id="r_a889b9718ac16b1be40acc38689401cd1"><td class="memTemplParams" colspan="2">template&lt;typename... Ts&gt; </td></tr>
-<tr class="memitem:a889b9718ac16b1be40acc38689401cd1 template"><td class="memItemLeft">KUMI_CUDA&#160;</td><td class="memItemRight"><a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a> (Ts &amp;&amp;...) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</td></tr>
-<tr class="memdesc:a889b9718ac16b1be40acc38689401cd1"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> deduction guide  <br /></td></tr>
+<tr class="memitem:a612d97f050a7b0eb9999f40c045779bf" id="r_a612d97f050a7b0eb9999f40c045779bf"><td class="memTemplParams" colspan="2">template&lt;typename... Ts&gt; </td></tr>
+<tr class="memitem:a612d97f050a7b0eb9999f40c045779bf template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a> (Ts &amp;&amp;...) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</td></tr>
+<tr class="memdesc:a612d97f050a7b0eb9999f40c045779bf"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> deduction guide  <br /></td></tr>
 <tr id="related-1" class="groupHeader"><td colspan="2"><div class="groupHeader">Tuple properties</div></td></tr>
 <tr class="memitem:ac67c6dbee8bf12133da3379826cde848" id="r_ac67c6dbee8bf12133da3379826cde848"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type</a> T&gt; </td></tr>
 <tr class="memitem:ac67c6dbee8bf12133da3379826cde848 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#ac67c6dbee8bf12133da3379826cde848">members_of</a> (<a class="el" href="structkumi_1_1as.html">as</a>&lt; T &gt;) noexcept</td></tr>
@@ -372,41 +372,41 @@ template&lt;typename CharT, typename Traits&gt; </td></tr>
 <tr class="memdesc:ade5f616b3115a74bd4930f70f96ca199"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the values of the fields of a kumi::product_type.  <br /></td></tr>
 <tr id="related-2" class="groupHeader"><td colspan="2"><div class="groupHeader">Tuple Accessors</div></td></tr>
 <tr class="memitem:a7b9b1b3fbe3d201542691bee350d8a08" id="r_a7b9b1b3fbe3d201542691bee350d8a08"><td class="memTemplParams" colspan="2">template&lt;std::size_t I, typename... Ts&gt; </td></tr>
-<tr class="memitem:a7b9b1b3fbe3d201542691bee350d8a08 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a7b9b1b3fbe3d201542691bee350d8a08">get</a> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; &amp;t) noexcept</td></tr>
+<tr class="memitem:a7b9b1b3fbe3d201542691bee350d8a08 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a7b9b1b3fbe3d201542691bee350d8a08">get</a> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; &amp;t) noexcept</td></tr>
 <tr class="memdesc:a7b9b1b3fbe3d201542691bee350d8a08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the Ith element from a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>.  <br /></td></tr>
 <tr class="memitem:a808bbc50bf9ed9681c41b55f5444e9ea" id="r_a808bbc50bf9ed9681c41b55f5444e9ea"><td class="memTemplParams" colspan="2">template&lt;std::size_t I, typename... Ts&gt; </td></tr>
-<tr class="memitem:a808bbc50bf9ed9681c41b55f5444e9ea template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a808bbc50bf9ed9681c41b55f5444e9ea">get</a> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; &amp;&amp;arg) noexcept</td></tr>
+<tr class="memitem:a808bbc50bf9ed9681c41b55f5444e9ea template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a808bbc50bf9ed9681c41b55f5444e9ea">get</a> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; &amp;&amp;arg) noexcept</td></tr>
 <tr class="memitem:adcfd380d3fc78581e99125f49e32ae0a" id="r_adcfd380d3fc78581e99125f49e32ae0a"><td class="memTemplParams" colspan="2">template&lt;std::size_t I, typename... Ts&gt; </td></tr>
-<tr class="memitem:adcfd380d3fc78581e99125f49e32ae0a template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#adcfd380d3fc78581e99125f49e32ae0a">get</a> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; const &amp;arg) noexcept</td></tr>
+<tr class="memitem:adcfd380d3fc78581e99125f49e32ae0a template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#adcfd380d3fc78581e99125f49e32ae0a">get</a> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; const &amp;arg) noexcept</td></tr>
 <tr class="memitem:aaea300b4c7c7cbe1103612b28ba470b5" id="r_aaea300b4c7c7cbe1103612b28ba470b5"><td class="memTemplParams" colspan="2">template&lt;std::size_t I, typename... Ts&gt; </td></tr>
-<tr class="memitem:aaea300b4c7c7cbe1103612b28ba470b5 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#aaea300b4c7c7cbe1103612b28ba470b5">get</a> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; const &amp;&amp;arg) noexcept</td></tr>
+<tr class="memitem:aaea300b4c7c7cbe1103612b28ba470b5 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#aaea300b4c7c7cbe1103612b28ba470b5">get</a> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; const &amp;&amp;arg) noexcept</td></tr>
 <tr class="memitem:a7b9b1b3fbe3d201542691bee350d8a08" id="r_a7b9b1b3fbe3d201542691bee350d8a08"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="structkumi_1_1str.html">kumi::str</a> L, typename... Ts&gt; </td></tr>
-<tr class="memitem:a7b9b1b3fbe3d201542691bee350d8a08 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a7b9b1b3fbe3d201542691bee350d8a08">get</a> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; &amp;t) noexcept</td></tr>
+<tr class="memitem:a7b9b1b3fbe3d201542691bee350d8a08 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a7b9b1b3fbe3d201542691bee350d8a08">get</a> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; &amp;t) noexcept</td></tr>
 <tr class="memdesc:a7b9b1b3fbe3d201542691bee350d8a08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the field labeled L from a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> if it exists.  <br /></td></tr>
 <tr class="memitem:a83e0ac15f8a19c27cfa885b662daed27" id="r_a83e0ac15f8a19c27cfa885b662daed27"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="structkumi_1_1str.html">kumi::str</a> L, typename... Ts&gt; </td></tr>
-<tr class="memitem:a83e0ac15f8a19c27cfa885b662daed27 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a83e0ac15f8a19c27cfa885b662daed27">get</a> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; &amp;&amp;t) noexcept</td></tr>
+<tr class="memitem:a83e0ac15f8a19c27cfa885b662daed27 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a83e0ac15f8a19c27cfa885b662daed27">get</a> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; &amp;&amp;t) noexcept</td></tr>
 <tr class="memitem:a7a96007c3fe14162df0e69e6dee3ed96" id="r_a7a96007c3fe14162df0e69e6dee3ed96"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="structkumi_1_1str.html">kumi::str</a> L, typename... Ts&gt; </td></tr>
-<tr class="memitem:a7a96007c3fe14162df0e69e6dee3ed96 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a7a96007c3fe14162df0e69e6dee3ed96">get</a> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; const &amp;t) noexcept</td></tr>
+<tr class="memitem:a7a96007c3fe14162df0e69e6dee3ed96 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a7a96007c3fe14162df0e69e6dee3ed96">get</a> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; const &amp;t) noexcept</td></tr>
 <tr class="memitem:a85bd7598dcbb6464a3a89990b0e64aa4" id="r_a85bd7598dcbb6464a3a89990b0e64aa4"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="structkumi_1_1str.html">kumi::str</a> L, typename... Ts&gt; </td></tr>
-<tr class="memitem:a85bd7598dcbb6464a3a89990b0e64aa4 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a85bd7598dcbb6464a3a89990b0e64aa4">get</a> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; const &amp;&amp;t) noexcept</td></tr>
+<tr class="memitem:a85bd7598dcbb6464a3a89990b0e64aa4 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a85bd7598dcbb6464a3a89990b0e64aa4">get</a> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; const &amp;&amp;t) noexcept</td></tr>
 <tr class="memitem:a7b9b1b3fbe3d201542691bee350d8a08" id="r_a7b9b1b3fbe3d201542691bee350d8a08"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier</a> auto Id, typename... Ts&gt; </td></tr>
-<tr class="memitem:a7b9b1b3fbe3d201542691bee350d8a08 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a7b9b1b3fbe3d201542691bee350d8a08">get</a> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; &amp;t) noexcept</td></tr>
+<tr class="memitem:a7b9b1b3fbe3d201542691bee350d8a08 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a7b9b1b3fbe3d201542691bee350d8a08">get</a> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; &amp;t) noexcept</td></tr>
 <tr class="memdesc:a7b9b1b3fbe3d201542691bee350d8a08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the field identified by Id from a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> if it exists.  <br /></td></tr>
 <tr class="memitem:a83e0ac15f8a19c27cfa885b662daed27" id="r_a83e0ac15f8a19c27cfa885b662daed27"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier</a> auto Id, typename... Ts&gt; </td></tr>
-<tr class="memitem:a83e0ac15f8a19c27cfa885b662daed27 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a83e0ac15f8a19c27cfa885b662daed27">get</a> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; &amp;&amp;t) noexcept</td></tr>
+<tr class="memitem:a83e0ac15f8a19c27cfa885b662daed27 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a83e0ac15f8a19c27cfa885b662daed27">get</a> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; &amp;&amp;t) noexcept</td></tr>
 <tr class="memitem:a7a96007c3fe14162df0e69e6dee3ed96" id="r_a7a96007c3fe14162df0e69e6dee3ed96"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier</a> auto Id, typename... Ts&gt; </td></tr>
-<tr class="memitem:a7a96007c3fe14162df0e69e6dee3ed96 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a7a96007c3fe14162df0e69e6dee3ed96">get</a> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; const &amp;t) noexcept</td></tr>
+<tr class="memitem:a7a96007c3fe14162df0e69e6dee3ed96 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a7a96007c3fe14162df0e69e6dee3ed96">get</a> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; const &amp;t) noexcept</td></tr>
 <tr class="memitem:a85bd7598dcbb6464a3a89990b0e64aa4" id="r_a85bd7598dcbb6464a3a89990b0e64aa4"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier</a> auto Id, typename... Ts&gt; </td></tr>
-<tr class="memitem:a85bd7598dcbb6464a3a89990b0e64aa4 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a85bd7598dcbb6464a3a89990b0e64aa4">get</a> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; const &amp;&amp;t) noexcept</td></tr>
+<tr class="memitem:a85bd7598dcbb6464a3a89990b0e64aa4 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a85bd7598dcbb6464a3a89990b0e64aa4">get</a> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; const &amp;&amp;t) noexcept</td></tr>
 <tr class="memitem:a7b9b1b3fbe3d201542691bee350d8a08" id="r_a7b9b1b3fbe3d201542691bee350d8a08"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Ts&gt; </td></tr>
-<tr class="memitem:a7b9b1b3fbe3d201542691bee350d8a08 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a7b9b1b3fbe3d201542691bee350d8a08">get</a> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; &amp;t) noexcept</td></tr>
+<tr class="memitem:a7b9b1b3fbe3d201542691bee350d8a08 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a7b9b1b3fbe3d201542691bee350d8a08">get</a> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; &amp;t) noexcept</td></tr>
 <tr class="memdesc:a7b9b1b3fbe3d201542691bee350d8a08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the field which type is T from a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> if it exist.  <br /></td></tr>
 <tr class="memitem:a83e0ac15f8a19c27cfa885b662daed27" id="r_a83e0ac15f8a19c27cfa885b662daed27"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Ts&gt; </td></tr>
-<tr class="memitem:a83e0ac15f8a19c27cfa885b662daed27 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a83e0ac15f8a19c27cfa885b662daed27">get</a> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; &amp;&amp;t) noexcept</td></tr>
+<tr class="memitem:a83e0ac15f8a19c27cfa885b662daed27 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a83e0ac15f8a19c27cfa885b662daed27">get</a> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; &amp;&amp;t) noexcept</td></tr>
 <tr class="memitem:a7a96007c3fe14162df0e69e6dee3ed96" id="r_a7a96007c3fe14162df0e69e6dee3ed96"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Ts&gt; </td></tr>
-<tr class="memitem:a7a96007c3fe14162df0e69e6dee3ed96 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a7a96007c3fe14162df0e69e6dee3ed96">get</a> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; const &amp;t) noexcept</td></tr>
+<tr class="memitem:a7a96007c3fe14162df0e69e6dee3ed96 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a7a96007c3fe14162df0e69e6dee3ed96">get</a> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; const &amp;t) noexcept</td></tr>
 <tr class="memitem:a85bd7598dcbb6464a3a89990b0e64aa4" id="r_a85bd7598dcbb6464a3a89990b0e64aa4"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Ts&gt; </td></tr>
-<tr class="memitem:a85bd7598dcbb6464a3a89990b0e64aa4 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a85bd7598dcbb6464a3a89990b0e64aa4">get</a> (<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; const &amp;&amp;t) noexcept</td></tr>
+<tr class="memitem:a85bd7598dcbb6464a3a89990b0e64aa4 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a85bd7598dcbb6464a3a89990b0e64aa4">get</a> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; const &amp;&amp;t) noexcept</td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
 <a id="af1a74e00134be29916bb7fb6e8cda5f6" name="af1a74e00134be29916bb7fb6e8cda5f6"></a>
@@ -446,13 +446,13 @@ template&lt;typename... Ts&gt; </div>
 template&lt;typename... Ts&gt; </div>
 <div class="memtemplate">
 template&lt;typename... Us&gt; <br />
-requires (sizeof...(Us) == sizeof...(Ts)) &amp;&amp; (!std::same_as&lt;<a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt;Ts...&gt;, <a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt;Us...&gt;&gt;)</div>
+requires (sizeof...(Us) == sizeof...(Ts)) &amp;&amp; (!std::same_as&lt;<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt;Ts...&gt;, <a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt;Us...&gt;&gt;)</div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structkumi_1_1tuple.html">kumi::tuple</a>&lt; Ts &gt;::operator <a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Us... &gt; </td>
+          <td class="memname"><a class="el" href="structkumi_1_1tuple.html">kumi::tuple</a>&lt; Ts &gt;::operator <a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Us... &gt; </td>
           <td>(</td>
           <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
           <td> const</td>
@@ -571,9 +571,9 @@ template&lt;typename... Us&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a> &amp; <a class="el" href="structkumi_1_1tuple.html">kumi::tuple</a>&lt; Ts &gt;::operator= </td>
+          <td class="memname"><a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a> &amp; <a class="el" href="structkumi_1_1tuple.html">kumi::tuple</a>&lt; Ts &gt;::operator= </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Us... &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Us... &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -891,7 +891,7 @@ template&lt;std::size_t I, typename... Ts&gt; </div>
         <tr>
           <td class="memname">decltype(auto) constexpr get </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -919,7 +919,7 @@ template&lt;typename T, typename... Ts&gt; </div>
         <tr>
           <td class="memname">decltype(auto) constexpr get </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -947,7 +947,7 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi
         <tr>
           <td class="memname">decltype(auto) constexpr get </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -975,7 +975,7 @@ template&lt;<a class="el" href="structkumi_1_1str.html">kumi::str</a> L, typenam
         <tr>
           <td class="memname">decltype(auto) constexpr get </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1003,7 +1003,7 @@ template&lt;typename T, typename... Ts&gt; </div>
         <tr>
           <td class="memname">decltype(auto) constexpr get </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1065,7 +1065,7 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi
         <tr>
           <td class="memname">decltype(auto) constexpr get </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1129,7 +1129,7 @@ template&lt;<a class="el" href="structkumi_1_1str.html">kumi::str</a> L, typenam
         <tr>
           <td class="memname">decltype(auto) constexpr get </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1202,7 +1202,7 @@ template&lt;std::size_t I, typename... Ts&gt; </div>
         <tr>
           <td class="memname">decltype(auto) constexpr get </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1265,7 +1265,7 @@ template&lt;std::size_t I, typename... Ts&gt; </div>
         <tr>
           <td class="memname">decltype(auto) constexpr get </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; const &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; const &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1293,7 +1293,7 @@ template&lt;typename T, typename... Ts&gt; </div>
         <tr>
           <td class="memname">decltype(auto) constexpr get </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; const &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; const &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1321,7 +1321,7 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi
         <tr>
           <td class="memname">decltype(auto) constexpr get </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; const &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; const &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1349,7 +1349,7 @@ template&lt;<a class="el" href="structkumi_1_1str.html">kumi::str</a> L, typenam
         <tr>
           <td class="memname">decltype(auto) constexpr get </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; const &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; const &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1377,7 +1377,7 @@ template&lt;std::size_t I, typename... Ts&gt; </div>
         <tr>
           <td class="memname">decltype(auto) constexpr get </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1405,7 +1405,7 @@ template&lt;typename T, typename... Ts&gt; </div>
         <tr>
           <td class="memname">decltype(auto) constexpr get </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1433,7 +1433,7 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi
         <tr>
           <td class="memname">decltype(auto) constexpr get </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1461,7 +1461,7 @@ template&lt;<a class="el" href="structkumi_1_1str.html">kumi::str</a> L, typenam
         <tr>
           <td class="memname">decltype(auto) constexpr get </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts... &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td class="paramtype"><a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
           <td></td>
         </tr>
       </table>
@@ -1548,12 +1548,12 @@ requires (sizeof...(Ts) == sizeof...(Us))</div>
         <tr>
           <td class="memname">auto operator&lt; </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Ts &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+          <td class="paramtype"><a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype"><a class="el" href="#a889b9718ac16b1be40acc38689401cd1">tuple</a>&lt; Us... &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+          <td class="paramtype"><a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Us... &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -1568,8 +1568,8 @@ requires (sizeof...(Ts) == sizeof...(Us))</div>
 
 </div>
 </div>
-<a id="a889b9718ac16b1be40acc38689401cd1" name="a889b9718ac16b1be40acc38689401cd1"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a889b9718ac16b1be40acc38689401cd1">&#9670;&#160;</a></span>tuple()</h2>
+<a id="a612d97f050a7b0eb9999f40c045779bf" name="a612d97f050a7b0eb9999f40c045779bf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a612d97f050a7b0eb9999f40c045779bf">&#9670;&#160;</a></span>tuple()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1580,7 +1580,7 @@ template&lt;typename... Ts&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">KUMI_CUDA tuple </td>
+          <td class="memname">tuple </td>
           <td>(</td>
           <td class="paramtype">Ts &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>...</em></span></td><td>)</td>
           <td> -&gt;  tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</td>

@@ -1,7 +1,7 @@
 {
-    "branch_covered": 731,
-    "branch_percent": 78.8,
-    "branch_total": 928,
+    "branch_covered": 842,
+    "branch_percent": 74.6,
+    "branch_total": 1128,
     "files": [
         {
             "branch_covered": 4,
@@ -364,16 +364,16 @@
             "line_total": 7
         },
         {
-            "branch_covered": 147,
-            "branch_percent": 66.8,
-            "branch_total": 220,
+            "branch_covered": 257,
+            "branch_percent": 61.5,
+            "branch_total": 418,
             "filename": "include/kumi/detail/str.hpp",
-            "function_covered": 29,
+            "function_covered": 3,
             "function_percent": 100.0,
-            "function_total": 29,
-            "line_covered": 104,
-            "line_percent": 98.1,
-            "line_total": 106
+            "function_total": 3,
+            "line_covered": 98,
+            "line_percent": 98.0,
+            "line_total": 100
         },
         {
             "branch_covered": 0,
@@ -448,8 +448,8 @@
             "line_total": 5
         },
         {
-            "branch_covered": 118,
-            "branch_percent": 73.3,
+            "branch_covered": 117,
+            "branch_percent": 72.7,
             "branch_total": 161,
             "filename": "include/kumi/product_types/record.hpp",
             "function_covered": 142,
@@ -460,9 +460,9 @@
             "line_total": 52
         },
         {
-            "branch_covered": 168,
-            "branch_percent": 73.4,
-            "branch_total": 229,
+            "branch_covered": 170,
+            "branch_percent": 73.6,
+            "branch_total": 231,
             "filename": "include/kumi/product_types/tuple.hpp",
             "function_covered": 343,
             "function_percent": 100.0,
@@ -532,12 +532,12 @@
             "line_total": 3
         }
     ],
-    "function_covered": 5706,
+    "function_covered": 5680,
     "function_percent": 99.9,
-    "function_total": 5710,
+    "function_total": 5684,
     "gcovr/summary_format_version": "0.6",
-    "line_covered": 652,
+    "line_covered": 646,
     "line_percent": 99.7,
-    "line_total": 654,
+    "line_total": 648,
     "root": "../../.."
 }

@@ -5,5 +5,5 @@ var searchData=
   ['to_5fref_2',['to_ref',['../group__kumi__record__related.html#ga83a97fc306d9ecfacde28584b219b44a',1,'kumi::to_ref(R &amp;&amp;r)'],['../group__kumi__tuple__related.html#ga727f8ab64140ca60bcb1c8aded343c0b',1,'kumi::to_ref(T &amp;&amp;t)']]],
   ['to_5fstr_3',['to_str',['../group__kumi__utility.html#gaf4584fa9d1d39f32081265df16e00364',1,'streamable.hpp']]],
   ['to_5ftuple_4',['to_tuple',['../group__kumi__tuple__related.html#ga0bacdab2d5c18c44431ba8f74b86a5f0',1,'kumi::to_tuple(T &amp;&amp;t)'],['../namespacekumi.html#a8d48ba398b636ca4b3f31662283701f0',1,'kumi::to_tuple(S &amp;&amp;s)']]],
-  ['tuple_5',['tuple',['../structkumi_1_1tuple.html#a889b9718ac16b1be40acc38689401cd1',1,'kumi::tuple::tuple()'],['../structkumi_1_1tuple.html#a889b9718ac16b1be40acc38689401cd1',1,'kumi::tuple()']]]
+  ['tuple_5',['tuple',['../structkumi_1_1tuple.html#a612d97f050a7b0eb9999f40c045779bf',1,'kumi::tuple::tuple()'],['../structkumi_1_1tuple.html#a612d97f050a7b0eb9999f40c045779bf',1,'kumi::tuple()']]]
 ];

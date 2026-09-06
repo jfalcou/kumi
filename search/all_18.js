@@ -21,7 +21,7 @@ var searchData=
   ['traits_18',['Traits',['../group__kumi__traits.html',1,'Product Type Related Traits'],['../group__kumi__record__traits.html',1,'Record Related Traits'],['../group__kumi__tuple__traits.html',1,'Tuple Related Traits']]],
   ['transformations_19',['Transformations',['../group__kumi__transforms.html',1,'Product Type Transformations'],['../group__kumi__record__transforms.html',1,'Record Type Specific Transformations'],['../group__kumi__tuple__transforms.html',1,'Tuple Type Specific Transformations']]],
   ['transpose_20',['transpose',['../group__kumi__generators.html#gaef527bdd76c70e7fded23a9759428f5c',1,'kumi']]],
-  ['tuple_21',['tuple',['../structkumi_1_1tuple.html',1,'kumi::tuple&lt; Ts &gt;'],['../structkumi_1_1tuple.html#a889b9718ac16b1be40acc38689401cd1',1,'kumi::tuple::tuple()'],['../structkumi_1_1tuple.html#a889b9718ac16b1be40acc38689401cd1',1,'kumi::tuple()']]],
+  ['tuple_21',['tuple',['../structkumi_1_1tuple.html',1,'kumi::tuple&lt; Ts &gt;'],['../structkumi_1_1tuple.html#a612d97f050a7b0eb9999f40c045779bf',1,'kumi::tuple::tuple()'],['../structkumi_1_1tuple.html#a612d97f050a7b0eb9999f40c045779bf',1,'kumi::tuple()']]],
   ['tuple_20protocol_22',['Tuple Protocol',['../kumi_cpp_spec.html#autotoc_md128',1,'']]],
   ['tuple_20related_20traits_23',['Tuple Related Traits',['../group__kumi__tuple__traits.html',1,'']]],
   ['tuple_20tools_24',['The C++20 Compact Tuple Tools',['../index.html',1,'']]],

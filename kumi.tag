@@ -520,10 +520,10 @@
       <arglist>(std::basic_ostream&lt; CharT, Traits &gt; &amp;os, record const &amp;t) noexcept</arglist>
     </member>
     <member kind="function">
-      <type>KUMI_CUDA</type>
+      <type></type>
       <name>record</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>a1000cb0996a9587f8735a35f76060e44</anchor>
+      <anchor>ae9ac76c2474af708950b35e4b58027d6</anchor>
       <arglist>(Ts &amp;&amp;...) -&gt; record&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
     </member>
     <member kind="function">
@@ -807,10 +807,10 @@
       <arglist>(record const &amp;self, record&lt; Us... &gt; const &amp;other) noexcept</arglist>
     </member>
     <member kind="function">
-      <type>KUMI_CUDA</type>
+      <type></type>
       <name>record</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>a1000cb0996a9587f8735a35f76060e44</anchor>
+      <anchor>ae9ac76c2474af708950b35e4b58027d6</anchor>
       <arglist>(Ts &amp;&amp;...) -&gt; record&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
     </member>
     <member kind="function">
@@ -1202,10 +1202,10 @@
       <arglist>(std::basic_ostream&lt; CharT, Traits &gt; &amp;os, tuple const &amp;t) noexcept</arglist>
     </member>
     <member kind="function">
-      <type>KUMI_CUDA</type>
+      <type></type>
       <name>tuple</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a889b9718ac16b1be40acc38689401cd1</anchor>
+      <anchor>a612d97f050a7b0eb9999f40c045779bf</anchor>
       <arglist>(Ts &amp;&amp;...) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
     </member>
     <member kind="function">
@@ -1531,10 +1531,10 @@
       <arglist>(tuple const &amp;lhs, tuple&lt; Us... &gt; const &amp;rhs) noexcept</arglist>
     </member>
     <member kind="function">
-      <type>KUMI_CUDA</type>
+      <type></type>
       <name>tuple</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a889b9718ac16b1be40acc38689401cd1</anchor>
+      <anchor>a612d97f050a7b0eb9999f40c045779bf</anchor>
       <arglist>(Ts &amp;&amp;...) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
     </member>
     <member kind="function">
@@ -1971,10 +1971,10 @@
       <arglist>() noexcept</arglist>
     </member>
     <member kind="function">
-      <type>KUMI_CUDA</type>
+      <type></type>
       <name>projection_map</name>
       <anchorfile>group__kumi__utility.html</anchorfile>
-      <anchor>ga8b7f4e6ed1e7071d7c152c9870709fcb</anchor>
+      <anchor>ga0ac9f243b64bbbabc2bad542ca03c035</anchor>
       <arglist>(Ts...) -&gt; projection_map&lt; Ts</arglist>
     </member>
     <member kind="function">
@@ -2734,10 +2734,10 @@
       <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="function">
-      <type>KUMI_CUDA</type>
+      <type></type>
       <name>record</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>a1000cb0996a9587f8735a35f76060e44</anchor>
+      <anchor>ae9ac76c2474af708950b35e4b58027d6</anchor>
       <arglist>(Ts &amp;&amp;...) -&gt; record&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
     </member>
     <member kind="function">
@@ -2853,10 +2853,10 @@
       <arglist>(record&lt; Ts... &gt; const &amp;&amp;r) noexcept</arglist>
     </member>
     <member kind="function">
-      <type>KUMI_CUDA</type>
+      <type></type>
       <name>tuple</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a889b9718ac16b1be40acc38689401cd1</anchor>
+      <anchor>a612d97f050a7b0eb9999f40c045779bf</anchor>
       <arglist>(Ts &amp;&amp;...) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
     </member>
     <member kind="function">
@@ -3114,10 +3114,10 @@
       <arglist>() noexcept</arglist>
     </member>
     <member kind="function">
-      <type>KUMI_CUDA</type>
+      <type></type>
       <name>kumi::projection_map</name>
       <anchorfile>group__kumi__utility.html</anchorfile>
-      <anchor>ga8b7f4e6ed1e7071d7c152c9870709fcb</anchor>
+      <anchor>ga0ac9f243b64bbbabc2bad542ca03c035</anchor>
       <arglist>(Ts...) -&gt; projection_map&lt; Ts</arglist>
     </member>
     <member kind="function">
