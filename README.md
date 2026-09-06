@@ -2,10 +2,12 @@
 
 # KUMI - C++20 Compact Tuple Tools
 
+[![Release](https://img.shields.io/github/v/release/jfalcou/kumi?style=plastic&label=release)](https://github.com/jfalcou/kumi/releases/latest)
 [![License](https://img.shields.io/badge/license-BSL-green?style=plastic)](./LICENSE.md)
 [![Discord](https://img.shields.io/discord/692734675726237696?style=plastic)](https://discord.com/channels/692734675726237696/916823794230886481)
-[![CI Status](https://github.com/jfalcou/kumi/actions/workflows/integration.yml/badge.svg)](https://github.com/jfalcou/kumi/actions/workflows/integration.yml)
+[![Integration](https://github.com/jfalcou/kumi/actions/workflows/integration.yml/badge.svg)](https://github.com/jfalcou/kumi/actions/workflows/integration.yml)
 [![Coverage](https://img.shields.io/endpoint?url=https://jfalcou.github.io/kumi/coverage/badge.json&style=plastic&cacheSeconds=1800)](https://jfalcou.github.io/kumi/coverage/)
+[![CI](https://github.com/jfalcou/kumi/actions/workflows/ci.yml/badge.svg?event=schedule)](https://github.com/jfalcou/kumi/actions/workflows/ci.yml?query=event%3Aschedule)
 
 <br clear="left"/>
 
@@ -109,9 +111,9 @@ int main()
 ```
 ## Getting Started
 
- - [Installing the library](https://jfalcou.github.io/kumi/setup.html)
- - [Glossary](https://jfalcou.github.io/kumi/usergroup1.html)
- - [References Documentation](https://jfalcou.github.io/kumi/usergroup3.html)
+ - [Installing the library](https://jfalcou.github.io/kumi/kumi_setup.html)
+ - [Glossary](https://jfalcou.github.io/kumi/kumi_glossary.html)
+ - [Reference Documentation](https://jfalcou.github.io/kumi/kumi_reference.html)
 
 ## Currently supported compilers
 
