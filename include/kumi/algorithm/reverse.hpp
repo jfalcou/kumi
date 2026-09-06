@@ -75,7 +75,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  KUMI_ENTRY_POINT reverse_t reverse{};
+  KUMI_VARIABLE_ABI constexpr reverse_t reverse{};
 
   namespace result
   {

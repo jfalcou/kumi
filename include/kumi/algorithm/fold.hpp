@@ -125,7 +125,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  KUMI_ENTRY_POINT fold_left_t fold_left{};
+  KUMI_VARIABLE_ABI constexpr fold_left_t fold_left{};
 
   //====================================================================================================================
   /**
@@ -186,7 +186,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  KUMI_ENTRY_POINT fold_right_t fold_right{};
+  KUMI_VARIABLE_ABI constexpr fold_right_t fold_right{};
 
   namespace result
   {

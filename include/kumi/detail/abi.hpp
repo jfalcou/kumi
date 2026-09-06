@@ -44,9 +44,9 @@
 // A namespace-scope object lives in host memory, so a kernel naming kumi::apply finds nothing under
 // nvcc. The device pass gets a copy of its own; every other pass keeps the inline variable.
 #if defined(__CUDA_ARCH__)
-#define KUMI_ENTRY_POINT __device__ constexpr
+#define KUMI_VARIABLE_ABI __device__
 #else
-#define KUMI_ENTRY_POINT inline constexpr
+#define KUMI_VARIABLE_ABI inline
 #endif
 
 // Device code has no exceptions: the same misuse aborts the kernel there.

@@ -26,7 +26,7 @@ namespace kumi
       }
     };
 
-    KUMI_ENTRY_POINT flatten_all_case_t flatten_all_case{};
+    KUMI_VARIABLE_ABI constexpr flatten_all_case_t flatten_all_case{};
 
     struct flatten_case_t
     {
@@ -44,7 +44,7 @@ namespace kumi
       }
     };
 
-    KUMI_ENTRY_POINT flatten_case_t flatten_case{};
+    KUMI_VARIABLE_ABI constexpr flatten_case_t flatten_case{};
 
     template<typename T, std::size_t... I>
     KUMI_HIDDEN_ABI consteval auto flatten_projection_(kumi::_::adl_tag_t, std::index_sequence<I...>) noexcept
@@ -201,7 +201,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  KUMI_ENTRY_POINT compress_t compress{};
+  KUMI_VARIABLE_ABI constexpr compress_t compress{};
 
   //====================================================================================================================
   /**
@@ -257,7 +257,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  KUMI_ENTRY_POINT flatten_t flatten{};
+  KUMI_VARIABLE_ABI constexpr flatten_t flatten{};
 
   //====================================================================================================================
   /**
@@ -325,7 +325,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  KUMI_ENTRY_POINT flatten_all_t flatten_all{};
+  KUMI_VARIABLE_ABI constexpr flatten_all_t flatten_all{};
 
   //====================================================================================================================
   /**
@@ -380,7 +380,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  KUMI_ENTRY_POINT as_flat_ptr_t as_flat_ptr{};
+  KUMI_VARIABLE_ABI constexpr as_flat_ptr_t as_flat_ptr{};
 
   namespace result
   {

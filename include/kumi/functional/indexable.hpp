@@ -56,7 +56,7 @@ namespace kumi::function
       constexpr auto ids = std::make_index_sequence<(S * ... * 1ULL)>{};
       return kumi::projection_map{ids, impl(ids, idxs...)};
     }
-  } KUMI_ENTRY_POINT cartesian_producer;
+  } KUMI_VARIABLE_ABI constexpr cartesian_producer;
 
   //====================================================================================================================
   /**
@@ -102,7 +102,7 @@ namespace kumi::function
     {
       return impl(std::index_sequence<S...>{});
     }
-  } KUMI_ENTRY_POINT concatenater;
+  } KUMI_VARIABLE_ABI constexpr concatenater;
 
   //====================================================================================================================
   /**
@@ -159,7 +159,7 @@ namespace kumi::function
       constexpr std::size_t N = S - T;
       return impl(b, e, s, kumi::index<T>, std::make_index_sequence<N>{});
     }
-  } KUMI_ENTRY_POINT extractor;
+  } KUMI_VARIABLE_ABI constexpr extractor;
 
   //====================================================================================================================
   /**
@@ -205,7 +205,7 @@ namespace kumi::function
     {
       return impl(r, std::make_index_sequence<S>{});
     }
-  } KUMI_ENTRY_POINT rotater;
+  } KUMI_VARIABLE_ABI constexpr rotater;
 
   //====================================================================================================================
   /**
@@ -252,7 +252,7 @@ namespace kumi::function
     {
       return impl(n, std::make_index_sequence<C>{});
     }
-  } KUMI_ENTRY_POINT reducer;
+  } KUMI_VARIABLE_ABI constexpr reducer;
 
   //====================================================================================================================
   /**
@@ -298,7 +298,7 @@ namespace kumi::function
     {
       return impl(e, std::make_index_sequence<C>{});
     }
-  } KUMI_ENTRY_POINT repeater;
+  } KUMI_VARIABLE_ABI constexpr repeater;
 
   //====================================================================================================================
   /**
@@ -341,7 +341,7 @@ namespace kumi::function
     {
       return impl(std::make_index_sequence<S>{});
     }
-  } KUMI_ENTRY_POINT reverser;
+  } KUMI_VARIABLE_ABI constexpr reverser;
 
   //====================================================================================================================
   /**
@@ -387,7 +387,7 @@ namespace kumi::function
     {
       return impl(o, std::make_index_sequence<S>{});
     }
-  } KUMI_ENTRY_POINT shifter;
+  } KUMI_VARIABLE_ABI constexpr shifter;
 
   //====================================================================================================================
   /**
@@ -434,7 +434,7 @@ namespace kumi::function
       constexpr std::size_t R = S - N;
       return impl(n, std::make_index_sequence<R>{});
     }
-  } KUMI_ENTRY_POINT splitter;
+  } KUMI_VARIABLE_ABI constexpr splitter;
 
   //====================================================================================================================
   /**
@@ -490,7 +490,7 @@ namespace kumi::function
     {
       return impl(sz, e, sd, std::make_index_sequence<Bs>{});
     }
-  } KUMI_ENTRY_POINT tiler;
+  } KUMI_VARIABLE_ABI constexpr tiler;
 
   //====================================================================================================================
   /**
@@ -528,7 +528,7 @@ namespace kumi::function
     {
       return kumi::projection_map{std::make_index_sequence<C>{}, std::make_index_sequence<S>{}};
     }
-  } KUMI_ENTRY_POINT zipper;
+  } KUMI_VARIABLE_ABI constexpr zipper;
 
   //====================================================================================================================
   /**
@@ -576,5 +576,5 @@ namespace kumi::function
       constexpr std::size_t N = (E > B) ? ((E - B + S - 1) / S) : 0;
       return impl(b, s, std::make_index_sequence<N>{});
     }
-  } KUMI_ENTRY_POINT slicer;
+  } KUMI_VARIABLE_ABI constexpr slicer;
 }

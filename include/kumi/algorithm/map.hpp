@@ -147,7 +147,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  KUMI_ENTRY_POINT map_t map{};
+  KUMI_VARIABLE_ABI constexpr map_t map{};
 
   //====================================================================================================================
   /**
@@ -202,7 +202,7 @@ namespace kumi
     @godbolt{doc/tuple/algo/map_index.cpp}
   **/
   //====================================================================================================================
-  KUMI_ENTRY_POINT map_index_t map_index{};
+  KUMI_VARIABLE_ABI constexpr map_index_t map_index{};
 
   //====================================================================================================================
   /**
@@ -257,7 +257,7 @@ namespace kumi
     @godbolt{doc/record/algo/map_field.cpp}
   **/
   //====================================================================================================================
-  KUMI_ENTRY_POINT map_field_t map_field{};
+  KUMI_VARIABLE_ABI constexpr map_field_t map_field{};
 
   namespace result
   {

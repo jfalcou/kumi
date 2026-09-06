@@ -45,7 +45,7 @@ namespace kumi
 
       ## Callable object
       @code
-        KUMI_ENTRY_POINT unique_t uniquer{};
+        KUMI_VARIABLE_ABI constexpr unique_t uniquer{};
       @endcode
     **/
     //==================================================================================================================
@@ -72,7 +72,7 @@ namespace kumi
 
       ## Callable object
       @code
-        KUMI_ENTRY_POINT select_t selector{};
+        KUMI_VARIABLE_ABI constexpr select_t selector{};
       @endcode
     **/
     //==================================================================================================================
@@ -103,7 +103,7 @@ namespace kumi
 
       ## Callable object
       @code
-        KUMI_ENTRY_POINT adjacent_unicity_t uniqued{};
+        KUMI_VARIABLE_ABI constexpr adjacent_unicity_t uniqued{};
       @endcode
     **/
     //==================================================================================================================

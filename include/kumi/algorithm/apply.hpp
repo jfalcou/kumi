@@ -96,7 +96,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  KUMI_ENTRY_POINT apply_t apply{};
+  KUMI_VARIABLE_ABI constexpr apply_t apply{};
 
   //====================================================================================================================
   /**
@@ -147,7 +147,7 @@ namespace kumi
     @godbolt{doc/record/algo/apply_field.cpp}
   **/
   //====================================================================================================================
-  KUMI_ENTRY_POINT apply_field_t apply_field{};
+  KUMI_VARIABLE_ABI constexpr apply_field_t apply_field{};
 
   namespace result
   {

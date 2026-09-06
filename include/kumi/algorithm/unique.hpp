@@ -114,7 +114,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  KUMI_ENTRY_POINT unique_t unique{};
+  KUMI_VARIABLE_ABI constexpr unique_t unique{};
 
   //====================================================================================================================
   /**
@@ -168,7 +168,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  KUMI_ENTRY_POINT all_unique_t all_unique{};
+  KUMI_VARIABLE_ABI constexpr all_unique_t all_unique{};
 
   namespace result
   {

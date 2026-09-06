@@ -13,6 +13,6 @@ namespace kumi::_
   {
     struct adl_tag_t
     {
-    } KUMI_ENTRY_POINT adl_tag;
+    } KUMI_VARIABLE_ABI constexpr adl_tag;
   }
 }

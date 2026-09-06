@@ -75,7 +75,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  KUMI_ENTRY_POINT cat_t cat{};
+  KUMI_VARIABLE_ABI constexpr cat_t cat{};
 
   namespace result
   {

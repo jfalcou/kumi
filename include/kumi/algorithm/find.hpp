@@ -81,5 +81,5 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  KUMI_ENTRY_POINT locate_t locate{};
+  KUMI_VARIABLE_ABI constexpr locate_t locate{};
 }
