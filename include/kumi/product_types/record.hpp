@@ -256,11 +256,13 @@ namespace kumi
     /// Returns the labels associated to the elements of a kumi::record
     [[nodiscard]] KUMI_ABI static constexpr auto labels() noexcept { return tuple{kumi::label_of<Ts>()...}; }
 
+    // The type is named rather than taken from decltype(*this): nvcc rejects that spelling inside a
+    // lambda in a member function, and it is the only thing that kept a record out of a kernel.
     /// Returns references to the values of the element in a kumi::record
     [[nodiscard]] KUMI_ABI constexpr auto values() noexcept
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return tuple<stored_member_t<I, decltype(*this)>...>{kumi::field_value_of(get<I>(*this))...};
+        return tuple<stored_member_t<I, record&>...>{kumi::field_value_of(get<I>(*this))...};
       }(std::make_index_sequence<sizeof...(Ts)>{});
     }
 
@@ -268,7 +270,7 @@ namespace kumi
     [[nodiscard]] KUMI_ABI constexpr auto values() const noexcept
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return tuple<stored_member_t<I, decltype(*this)>...>{kumi::field_value_of(get<I>(*this))...};
+        return tuple<stored_member_t<I, record const&>...>{kumi::field_value_of(get<I>(*this))...};
       }(std::make_index_sequence<sizeof...(Ts)>{});
     }
 
