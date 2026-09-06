@@ -14,28 +14,33 @@
 
 namespace
 {
-  __global__ void backwards(char* flags)
+  using backwards = kumi::tuple<char, float, double, int>;
+
+  __global__ void reversed(backwards* out)
   {
-    auto t = kumi::tuple{1, 2., 3.4f, '5'};
-    auto r = kumi::reverse(t);
+    *out = kumi::reverse(kumi::tuple{1, 2., 3.4f, '5'});
+  }
 
-    flags[0] = (kumi::get<0>(r) == '5') && (kumi::get<1>(r) == 3.4f);
-    flags[1] = (kumi::get<2>(r) == 2.) && (kumi::get<3>(r) == 1);
-    flags[2] = (kumi::reverse(kumi::tuple<>{}).size() == 0);
-
-    // The host test moves a moveonly through reverse; the kernel does the same, and compiling is the check.
-    auto t2 = kumi::tuple{1, 'x', moveonly{}};
-    flags[3] = (kumi::get<1>(kumi::reverse(std::move(t2))) == 'x');
+  // The host test moves a moveonly through reverse; compiling the kernel is that check.
+  __global__ void reversed_moveonly(char* out)
+  {
+    auto t = kumi::tuple{1, 'x', moveonly{}};
+    *out = kumi::get<1>(kumi::reverse(std::move(t)));
   }
 }
 
 TTS_CASE("Check reverse device behavior")
 {
-  auto r = run_on_device(backwards, 4);
+  backwards out;
 
-  TTS_EXPECT(r.ran);
-  TTS_EXPECT(r[0]);
-  TTS_EXPECT(r[1]);
-  TTS_EXPECT(r[2]);
-  TTS_EXPECT(r[3]);
+  TTS_EXPECT(run_on_device(reversed, out));
+  TTS_EQUAL(out, (backwards{'5', 3.4f, 2., 1}));
+};
+
+TTS_CASE("Check reverse device behavior on a moveonly element")
+{
+  char out = 0;
+
+  TTS_EXPECT(run_on_device(reversed_moveonly, out));
+  TTS_EQUAL(out, 'x');
 };

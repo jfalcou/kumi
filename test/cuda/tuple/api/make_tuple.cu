@@ -12,51 +12,51 @@
 
 namespace
 {
-  __global__ void make_and_read(char* flags)
+  using made = kumi::tuple<std::size_t, int, float, char>;
+
+  __global__ void make_and_read(made* out)
   {
     auto t = kumi::make_tuple(1, 2.f, '3');
+    *out = made{t.size(), kumi::get<0>(t), kumi::get<1>(t), kumi::get<2>(t)};
+  }
 
-    flags[0] = (t.size() == 3);
-    flags[1] = (kumi::get<0>(t) == 1);
-    flags[2] = (kumi::get<1>(t) == 2.f);
-    flags[3] = (kumi::get<2>(t) == '3');
-
+  __global__ void copy_is_independent(kumi::tuple<int, int>* out)
+  {
+    auto t = kumi::make_tuple(1, 2.f, '3');
     auto copy = t;
     kumi::get<0>(copy) = 42;
-    flags[4] = (kumi::get<0>(copy) == 42) && (kumi::get<0>(t) == 1);
+    *out = {kumi::get<0>(copy), kumi::get<0>(t)};
   }
 
   // Constant evaluation is where nvcc and clang diverge most, and a kernel is where it is never tested.
-  __global__ void constant_evaluation(char* flags)
+  __global__ void constant_evaluation(kumi::tuple<std::size_t, int>* out)
   {
     constexpr auto t = kumi::make_tuple(1, 2.f, '3');
-
-    flags[0] = (t.size() == 3);
-    flags[1] = (kumi::get<0>(t) == 1);
-
     static_assert(kumi::get<2>(kumi::make_tuple(1, 2.f, '3')) == '3');
-    flags[2] = true;
+    *out = {t.size(), kumi::get<0>(t)};
   }
 }
 
 TTS_CASE("Check construction of kumi::tuple via device make_tuple")
 {
-  auto r = run_on_device(make_and_read, 5);
+  made out;
 
-  TTS_EXPECT(r.ran);
-  TTS_EXPECT(r[0]);
-  TTS_EXPECT(r[1]);
-  TTS_EXPECT(r[2]);
-  TTS_EXPECT(r[3]);
-  TTS_EXPECT(r[4]);
+  TTS_EXPECT(run_on_device(make_and_read, out));
+  TTS_EQUAL(out, (made{3ULL, 1, 2.f, '3'}));
+};
+
+TTS_CASE("Check copy of kumi::tuple in device code")
+{
+  kumi::tuple<int, int> out;
+
+  TTS_EXPECT(run_on_device(copy_is_independent, out));
+  TTS_EQUAL(out, (kumi::tuple{42, 1}));
 };
 
 TTS_CASE("Check construction of kumi::tuple via constexpr device make_tuple")
 {
-  auto r = run_on_device(constant_evaluation, 3);
+  kumi::tuple<std::size_t, int> out;
 
-  TTS_EXPECT(r.ran);
-  TTS_EXPECT(r[0]);
-  TTS_EXPECT(r[1]);
-  TTS_EXPECT(r[2]);
+  TTS_EXPECT(run_on_device(constant_evaluation, out));
+  TTS_EQUAL(out, (kumi::tuple{3ULL, 1}));
 };

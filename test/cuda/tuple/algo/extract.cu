@@ -15,26 +15,23 @@ namespace
 {
   using namespace kumi::literals;
 
-  __global__ void slices(char* flags)
+  using whole = kumi::tuple<char, double, float, int>;
+  using head = kumi::tuple<char, double>;
+  using one = kumi::tuple<char>;
+  using slices = kumi::tuple<whole, head, one>;
+
+  __global__ void cut(slices* out)
   {
     kumi::tuple t = {'1', 2., 3.f, 4};
 
-    auto whole = kumi::extract(t, 0_c);
-    auto head = kumi::extract(t, 0_c, 2_c);
-    auto one = kumi::extract(t, 0_c, 1_c);
-
-    flags[0] = (whole.size() == 4) && (kumi::get<3>(whole) == 4);
-    flags[1] = (head.size() == 2) && (kumi::get<0>(head) == '1') && (kumi::get<1>(head) == 2.);
-    flags[2] = (one.size() == 1) && (kumi::get<0>(one) == '1');
+    *out = {kumi::extract(t, 0_c), kumi::extract(t, 0_c, 2_c), kumi::extract(t, 0_c, 1_c)};
   }
 }
 
 TTS_CASE("Check extract device behavior")
 {
-  auto r = run_on_device(slices, 3);
+  slices out;
 
-  TTS_EXPECT(r.ran);
-  TTS_EXPECT(r[0]);
-  TTS_EXPECT(r[1]);
-  TTS_EXPECT(r[2]);
+  TTS_EXPECT(run_on_device(cut, out));
+  TTS_EQUAL(out, (slices{whole{'1', 2., 3.f, 4}, head{'1', 2.}, one{'1'}}));
 };

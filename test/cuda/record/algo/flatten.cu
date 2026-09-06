@@ -14,24 +14,22 @@
 
 namespace
 {
+  using flattened = kumi::tuple<std::size_t, int, int, int>;
+
   // Issue #192: flatten on a record.
-  __global__ void flatten_nested(char* flags)
+  __global__ void flatten_nested(flattened* out)
   {
     auto inner = kumi::record{"a"_id = 1, "b"_id = 2};
     auto flat = kumi::flatten(kumi::record{"x"_id = 0, "y"_id = inner});
 
-    flags[0] = (flat.size() == 3);
-    flags[1] = (flat["x"_id] == 0);
-    flags[2] = (flat["y.a"_id] == 1) && (flat["y.b"_id] == 2);
+    *out = {flat.size(), flat["x"_id], flat["y.a"_id], flat["y.b"_id]};
   }
 }
 
 TTS_CASE("Check record::flatten device behavior")
 {
-  auto r = run_on_device(flatten_nested, 3);
+  flattened out;
 
-  TTS_EXPECT(r.ran);
-  TTS_EXPECT(r[0]);
-  TTS_EXPECT(r[1]);
-  TTS_EXPECT(r[2]);
+  TTS_EXPECT(run_on_device(flatten_nested, out));
+  TTS_EQUAL(out, (flattened{3ULL, 0, 1, 2}));
 };

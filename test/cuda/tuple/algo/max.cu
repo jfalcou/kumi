@@ -13,26 +13,22 @@
 
 namespace
 {
-  __global__ void largest(char* flags)
+  using largest = kumi::tuple<double, std::size_t, std::size_t, std::size_t>;
+
+  __global__ void biggest(largest* out)
   {
     auto t0 = kumi::tuple{'e', 2, 7894.5, short{55}, 'z'};
-
-    flags[0] = (kumi::max(t0) == 7894.5);
-    flags[1] = (kumi::max(t0, [](auto m) { return sizeof(m); }) == sizeof(double));
-
     auto f0 = kumi::tuple{'e', 2., kumi::tuple{1., short{55}, 'u'}, 3.f, 'z'};
-    flags[2] = (kumi::max(f0, [](auto m) { return sizeof(m); }) == 2 * sizeof(double));
-    flags[3] = (kumi::max_flat(f0, [](auto m) { return sizeof(m); }) == sizeof(double));
+    auto size = [](auto m) { return sizeof(m); };
+
+    *out = {kumi::max(t0), kumi::max(t0, size), kumi::max(f0, size), kumi::max_flat(f0, size)};
   }
 }
 
 TTS_CASE("Check tuple::max/max_flat device behavior")
 {
-  auto r = run_on_device(largest, 4);
+  largest out;
 
-  TTS_EXPECT(r.ran);
-  TTS_EXPECT(r[0]);
-  TTS_EXPECT(r[1]);
-  TTS_EXPECT(r[2]);
-  TTS_EXPECT(r[3]);
+  TTS_EXPECT(run_on_device(biggest, out));
+  TTS_EQUAL(out, (largest{7894.5, sizeof(double), 2 * sizeof(double), sizeof(double)}));
 };

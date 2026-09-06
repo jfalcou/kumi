@@ -13,30 +13,22 @@
 
 namespace
 {
-  __global__ void every_tuple(char* flags)
+  using row = kumi::tuple<bool, char, double>;
+  using ends = kumi::tuple<std::size_t, row, row>;
+
+  __global__ void every_tuple(ends* out)
   {
-    auto status = kumi::tuple{true, false};
-    auto id = kumi::tuple{'a', 'b', 'c'};
-    auto value = kumi::tuple{1.0, 2.1, 4.2, 8.4};
+    auto p =
+      kumi::cartesian_product(kumi::tuple{true, false}, kumi::tuple{'a', 'b', 'c'}, kumi::tuple{1.0, 2.1, 4.2, 8.4});
 
-    auto p = kumi::cartesian_product(status, id, value);
-
-    flags[0] = (p.size() == 24);
-
-    auto first = kumi::get<0>(p);
-    flags[1] = (kumi::get<0>(first) == true) && (kumi::get<1>(first) == 'a') && (kumi::get<2>(first) == 1.0);
-
-    auto last = kumi::get<23>(p);
-    flags[2] = (kumi::get<0>(last) == false) && (kumi::get<1>(last) == 'c') && (kumi::get<2>(last) == 8.4);
+    *out = {p.size(), kumi::get<0>(p), kumi::get<23>(p)};
   }
 }
 
 TTS_CASE("Check cartesian_product device behavior")
 {
-  auto r = run_on_device(every_tuple, 3);
+  ends out;
 
-  TTS_EXPECT(r.ran);
-  TTS_EXPECT(r[0]);
-  TTS_EXPECT(r[1]);
-  TTS_EXPECT(r[2]);
+  TTS_EXPECT(run_on_device(every_tuple, out));
+  TTS_EQUAL(out, (ends{24ULL, row{true, 'a', 1.0}, row{false, 'c', 8.4}}));
 };

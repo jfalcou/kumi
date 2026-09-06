@@ -13,27 +13,22 @@
 
 namespace
 {
-  __global__ void running(char* flags)
+  using sizes = kumi::tuple<std::size_t, std::size_t, std::size_t, std::size_t>;
+  using both = kumi::tuple<sizes, sizes>;
+
+  __global__ void running(both* out)
   {
     auto t = kumi::tuple{2., 1, short{55}, 'z'};
 
-    auto sizes = kumi::inclusive_scan_left([](auto, auto m) { return sizeof(m); }, t, 0);
-    flags[0] = (kumi::get<0>(sizes) == 8) && (kumi::get<1>(sizes) == 4);
-    flags[1] = (kumi::get<2>(sizes) == 2) && (kumi::get<3>(sizes) == 1);
-
-    auto accumulated = kumi::inclusive_scan_left([](auto acc, auto m) { return acc + sizeof(m); }, t, 0);
-    flags[2] = (kumi::get<0>(accumulated) == 8) && (kumi::get<1>(accumulated) == 12);
-    flags[3] = (kumi::get<2>(accumulated) == 14) && (kumi::get<3>(accumulated) == 15);
+    *out = {kumi::inclusive_scan_left([](auto, auto m) { return sizeof(m); }, t, 0),
+            kumi::inclusive_scan_left([](auto acc, auto m) { return acc + sizeof(m); }, t, 0)};
   }
 }
 
 TTS_CASE("Check inclusive_scan_left device behavior")
 {
-  auto r = run_on_device(running, 4);
+  both out;
 
-  TTS_EXPECT(r.ran);
-  TTS_EXPECT(r[0]);
-  TTS_EXPECT(r[1]);
-  TTS_EXPECT(r[2]);
-  TTS_EXPECT(r[3]);
+  TTS_EXPECT(run_on_device(running, out));
+  TTS_EQUAL(out, (both{sizes{8, 4, 2, 1}, sizes{8, 12, 14, 15}}));
 };

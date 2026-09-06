@@ -13,26 +13,22 @@
 
 namespace
 {
-  __global__ void smallest(char* flags)
+  using smallest = kumi::tuple<double, std::size_t, std::size_t, std::size_t>;
+
+  __global__ void tiniest(smallest* out)
   {
     auto t0 = kumi::tuple{'e', 2, 1., short{55}, 'z'};
-
-    flags[0] = (kumi::min(t0) == 1.);
-    flags[1] = (kumi::min(t0, [](auto m) { return sizeof(m); }) == sizeof(char));
-
     auto f0 = kumi::tuple{2., 1., kumi::tuple{'u', 'z'}, 3.f};
-    flags[2] = (kumi::min(f0, [](auto m) { return sizeof(m); }) == 2 * sizeof(char));
-    flags[3] = (kumi::min_flat(f0, [](auto m) { return sizeof(m); }) == sizeof(char));
+    auto size = [](auto m) { return sizeof(m); };
+
+    *out = {kumi::min(t0), kumi::min(t0, size), kumi::min(f0, size), kumi::min_flat(f0, size)};
   }
 }
 
 TTS_CASE("Check tuple::min/min_flat device behavior")
 {
-  auto r = run_on_device(smallest, 4);
+  smallest out;
 
-  TTS_EXPECT(r.ran);
-  TTS_EXPECT(r[0]);
-  TTS_EXPECT(r[1]);
-  TTS_EXPECT(r[2]);
-  TTS_EXPECT(r[3]);
+  TTS_EXPECT(run_on_device(tiniest, out));
+  TTS_EQUAL(out, (smallest{1., sizeof(char), 2 * sizeof(char), sizeof(char)}));
 };

@@ -13,20 +13,20 @@
 
 namespace
 {
-  __global__ void accumulate(char* flags)
+  __global__ void accumulate(int* out)
   {
     auto t = kumi::make_tuple(1, 2, 3);
     int count = 0;
 
     kumi::for_each([&](auto v) { count += v; }, t);
-    flags[0] = (count == 6);
+    *out = count;
   }
 }
 
 TTS_CASE("Check for_each device behavior")
 {
-  auto r = run_on_device(accumulate, 1);
+  int out = 0;
 
-  TTS_EXPECT(r.ran);
-  TTS_EXPECT(r[0]);
+  TTS_EXPECT(run_on_device(accumulate, out));
+  TTS_EQUAL(out, 6);
 };

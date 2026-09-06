@@ -12,24 +12,23 @@
 
 namespace
 {
-  __global__ void bindings(char* flags)
+  __global__ void bindings(kumi::tuple<int, double, char, int>* out)
   {
     auto t = kumi::make_tuple(1, 2.5, 'c');
 
     auto [a, b, c] = t;
-    flags[0] = (a == 1) && (b == 2.5) && (c == 'c');
 
     auto& [d, e, f] = t;
     d = 42;
-    flags[1] = (kumi::get<0>(t) == 42) && (e == 2.5) && (f == 'c');
+
+    *out = {a, b, c, kumi::get<0>(t)};
   }
 }
 
 TTS_CASE("Check structured bindings device behavior")
 {
-  auto r = run_on_device(bindings, 2);
+  kumi::tuple<int, double, char, int> out;
 
-  TTS_EXPECT(r.ran);
-  TTS_EXPECT(r[0]);
-  TTS_EXPECT(r[1]);
+  TTS_EXPECT(run_on_device(bindings, out));
+  TTS_EQUAL(out, (kumi::tuple{1, 2.5, 'c', 42}));
 };

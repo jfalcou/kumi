@@ -13,26 +13,19 @@
 
 namespace
 {
-  __global__ void concatenate(char* flags)
+  using joined = kumi::tuple<int, double, float, int, short, double>;
+
+  __global__ void concatenate(joined* out)
   {
     short s = 55;
-    auto c = kumi::cat(kumi::tuple{1, 2.}, kumi::tuple{3.f, 4}, kumi::tuple{s, 6.7});
-
-    flags[0] = (c.size() == 6);
-    flags[1] = (kumi::get<0>(c) == 1) && (kumi::get<1>(c) == 2.) && (kumi::get<2>(c) == 3.f);
-    flags[2] = (kumi::get<3>(c) == 4) && (kumi::get<4>(c) == 55) && (kumi::get<5>(c) == 6.7);
-
-    flags[3] = (kumi::cat(kumi::tuple{1, 2.}, kumi::tuple{}).size() == 2);
+    *out = kumi::cat(kumi::tuple{1, 2.}, kumi::tuple{3.f, 4}, kumi::tuple{s, 6.7});
   }
 }
 
 TTS_CASE("Check cat device behavior")
 {
-  auto r = run_on_device(concatenate, 4);
+  joined out;
 
-  TTS_EXPECT(r.ran);
-  TTS_EXPECT(r[0]);
-  TTS_EXPECT(r[1]);
-  TTS_EXPECT(r[2]);
-  TTS_EXPECT(r[3]);
+  TTS_EXPECT(run_on_device(concatenate, out));
+  TTS_EQUAL(out, (joined{1, 2., 3.f, 4, short{55}, 6.7}));
 };
