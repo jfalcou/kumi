@@ -3,10 +3,13 @@
 ##  Copyright : KUMI Project Contributors
 ##  SPDX-License-Identifier: BSL-1.0
 ##======================================================================================================================
-## Read by copacabana's matrix.yml: kumi inside real kernels, on the card the runner carries. Clang only, see #192.
+## Read by copacabana's matrix.yml: kumi inside real kernels, on the card the runner carries.
 runs-on: cuda
 configs: [Debug, Release]
 build-targets: cuda.exe
 test-targets: cuda
 rows:
-  - { preset: "clang-cuda" }
+  - { preset: "clang-cuda"   }
+  - { preset: "nvcc"         }
+  - { preset: "nvcc-g++"     }
+  - { preset: "nvcc-clang++" }
