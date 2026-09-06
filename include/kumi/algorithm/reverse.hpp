@@ -75,7 +75,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  inline constexpr reverse_t reverse{};
+  KUMI_ENTRY_POINT reverse_t reverse{};
 
   namespace result
   {

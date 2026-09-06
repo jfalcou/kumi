@@ -25,7 +25,7 @@ namespace kumi
       }
     };
 
-    inline constexpr reindex_case_t reindex_case{};
+    KUMI_ENTRY_POINT reindex_case_t reindex_case{};
 
     template<typename T, typename S, auto... E>
     KUMI_HIDDEN_ABI constexpr auto reindex_(kumi::_::adl_tag_t, T&& t, S self, kumi::projection_map<E...>)

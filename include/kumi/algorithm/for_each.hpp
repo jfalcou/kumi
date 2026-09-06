@@ -130,7 +130,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  inline constexpr for_each_t for_each{};
+  KUMI_ENTRY_POINT for_each_t for_each{};
 
   //====================================================================================================================
   /**
@@ -172,7 +172,7 @@ namespace kumi
     @godbolt{doc/tuple/algo/for_each_index.cpp}
   **/
   //====================================================================================================================
-  inline constexpr for_each_index_t for_each_index{};
+  KUMI_ENTRY_POINT for_each_index_t for_each_index{};
 
   //====================================================================================================================
   /**
@@ -218,5 +218,5 @@ namespace kumi
     @godbolt{doc/tuple/algo/for_each_field.cpp}
   **/
   //====================================================================================================================
-  inline constexpr for_each_field_t for_each_field{};
+  KUMI_ENTRY_POINT for_each_field_t for_each_field{};
 }

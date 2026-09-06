@@ -133,7 +133,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  inline constexpr inner_product_t inner_product{};
+  KUMI_ENTRY_POINT inner_product_t inner_product{};
 
   namespace result
   {

@@ -89,7 +89,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  inline constexpr cartesian_product_t cartesian_product{};
+  KUMI_ENTRY_POINT cartesian_product_t cartesian_product{};
 
   namespace result
   {
