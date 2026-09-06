@@ -10,7 +10,7 @@
 
 template<std::size_t... I> auto run(std::index_sequence<I...>)
 {
-  std::tuple<elem<I>...> t;
+  std::tuple<element<I>...> t;
   auto c = std::tuple_cat(t, t);
 
   return std::get<0>(c).value + int(std::tuple_size_v<decltype(c)>);

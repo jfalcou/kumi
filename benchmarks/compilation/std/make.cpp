@@ -10,7 +10,7 @@
 
 template<std::size_t... I> auto run(std::index_sequence<I...>)
 {
-  auto t = std::make_tuple(elem<I>{}...);
+  auto t = std::make_tuple(element<I>{}...);
   return std::get<0>(t).value;
 }
 

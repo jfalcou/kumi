@@ -11,7 +11,7 @@
 
 template<std::size_t... I> auto run(std::index_sequence<I...>)
 {
-  kumi::tuple<kumi::tuple<elem<I>, elem<I>>...> t;
+  kumi::tuple<kumi::tuple<element<I>, element<I>>...> t;
   auto r = kumi::transpose(t);
 
   return kumi::get<0>(kumi::get<0>(r)).value;

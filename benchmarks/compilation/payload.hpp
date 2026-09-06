@@ -24,4 +24,12 @@ template<std::size_t I> struct elem
   friend constexpr bool operator==(elem const&, elem const&) = default;
 };
 
+#if defined(BENCH_HOMOGENEOUS)
+// Every element of the same type. kumi keeps a representation of its own for that shape, the standard library has
+// none, so the same source measures something else entirely.
+template<std::size_t> using element = elem<0>;
+#else
+template<std::size_t I> using element = elem<I>;
+#endif
+
 using bench_indices = std::make_index_sequence<BENCH_N>;

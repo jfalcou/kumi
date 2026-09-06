@@ -11,7 +11,7 @@
 
 template<std::size_t... I> auto run(std::index_sequence<I...>)
 {
-  kumi::tuple<elem<I>...> t;
+  kumi::tuple<element<I>...> t;
   return kumi::fold_left([](auto acc, auto const& e) { return acc + e.value; }, t, 0);
 }
 

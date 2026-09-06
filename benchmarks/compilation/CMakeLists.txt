@@ -6,7 +6,15 @@
 ## What the same workload costs to compile, written once with kumi and once with the standard library. Each source is
 ## compiled at three sizes, so the report shows a slope rather than a point. Nothing here is run.
 ##======================================================================================================================
-set(BENCH_SIZES 4 16 64)
+## From 4 to 64 by 2: the slope is what the comparison is about, and a single point says nothing.
+set(BENCH_SIZES "")
+foreach(size RANGE 4 64 2)
+  list(APPEND BENCH_SIZES ${size})
+endforeach()
+
+## Two shapes of the same workload: every element of a type of its own, and every element of the same type, which is
+## the shape kumi has a representation for.
+set(BENCH_SHAPES hetero homo)
 
 add_library(kumi_bench INTERFACE)
 target_compile_features(kumi_bench INTERFACE cxx_std_20)
@@ -28,23 +36,31 @@ foreach(side IN ITEMS kumi std)
   foreach(source IN LISTS sources)
     cmake_path(GET source STEM name)
 
-    foreach(size IN LISTS BENCH_SIZES)
-      set(target bench.${side}.${name}.${size}.exe)
-      set(generated ${CMAKE_CURRENT_BINARY_DIR}/${side}/${name}.${size}.cpp)
+    foreach(shape IN LISTS BENCH_SHAPES)
+      foreach(size IN LISTS BENCH_SIZES)
+        set(target bench.${side}.${shape}.${name}.${size}.exe)
+        set(generated ${CMAKE_CURRENT_BINARY_DIR}/${side}/${shape}/${name}.${size}.cpp)
 
-      file(WRITE ${generated} "#define BENCH_N ${size}\n#include \"${CMAKE_CURRENT_SOURCE_DIR}/${side}/${source}\"\n")
+        set(shape_define "")
+        if(shape STREQUAL "homo")
+          set(shape_define "#define BENCH_HOMOGENEOUS\n")
+        endif()
 
-      add_executable(${target} ${generated})
-      set_target_properties(${target} PROPERTIES EXCLUDE_FROM_ALL TRUE EXCLUDE_FROM_DEFAULT_BUILD TRUE
-                                                 RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/benchmarks")
+        file(WRITE ${generated}
+             "#define BENCH_N ${size}\n${shape_define}#include \"${CMAKE_CURRENT_SOURCE_DIR}/${side}/${source}\"\n")
 
-      if(side STREQUAL "kumi")
-        target_link_libraries(${target} PRIVATE kumi_bench_kumi)
-      else()
-        target_link_libraries(${target} PRIVATE kumi_bench)
-      endif()
+        add_executable(${target} ${generated})
+        set_target_properties(${target} PROPERTIES EXCLUDE_FROM_ALL TRUE EXCLUDE_FROM_DEFAULT_BUILD TRUE
+                                                   RUNTIME_OUTPUT_DIRECTORY "${PROJECT_BINARY_DIR}/benchmarks")
 
-      add_dependencies(kumi-bench ${target})
+        if(side STREQUAL "kumi")
+          target_link_libraries(${target} PRIVATE kumi_bench_kumi)
+        else()
+          target_link_libraries(${target} PRIVATE kumi_bench)
+        endif()
+
+        add_dependencies(kumi-bench ${target})
+      endforeach()
     endforeach()
   endforeach()
 endforeach()

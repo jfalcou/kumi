@@ -16,7 +16,7 @@ template<typename T, std::size_t... I> auto zip(T const& a, T const& b, std::ind
 
 template<std::size_t... I> auto run(std::index_sequence<I...> seq)
 {
-  std::tuple<elem<I>...> t;
+  std::tuple<element<I>...> t;
   auto z = zip(t, t, seq);
 
   return std::get<0>(std::get<0>(z)).value;

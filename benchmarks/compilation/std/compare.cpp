@@ -10,8 +10,8 @@
 
 template<std::size_t... I> auto run(std::index_sequence<I...>)
 {
-  std::tuple<elem<I>...> t;
-  std::tuple<elem<I>...> u;
+  std::tuple<element<I>...> t;
+  std::tuple<element<I>...> u;
 
   return (t == u) ? 0 : 1;
 }

@@ -10,7 +10,7 @@
 
 int main()
 {
-  std::tuple<elem<0>, elem<1>, elem<2>, elem<3>> t;
+  std::tuple<element<0>, element<1>, element<2>, element<3>> t;
 
   auto [a, b, c, d] = t;
   return a.value + b.value + c.value + d.value;

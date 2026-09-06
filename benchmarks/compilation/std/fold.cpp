@@ -10,7 +10,7 @@
 
 template<std::size_t... I> auto run(std::index_sequence<I...>)
 {
-  std::tuple<elem<I>...> t;
+  std::tuple<element<I>...> t;
   return std::apply([](auto const&... e) { return (0 + ... + e.value); }, t);
 }
 

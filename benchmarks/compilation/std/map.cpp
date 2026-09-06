@@ -12,7 +12,7 @@
 // is the shortest form, and the one that instantiates the least.
 template<std::size_t... I> auto run(std::index_sequence<I...>)
 {
-  std::tuple<elem<I>...> t;
+  std::tuple<element<I>...> t;
   auto u = std::apply([](auto const&... e) { return std::make_tuple(e.value * 2 ...); }, t);
 
   return std::get<0>(u);

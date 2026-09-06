@@ -10,7 +10,7 @@
 
 template<std::size_t... I> auto run(std::index_sequence<I...>)
 {
-  std::tuple<elem<I>...> t;
+  std::tuple<element<I>...> t;
   int total = 0;
 
   // A fold expression over std::apply is the shortest path the standard library offers.

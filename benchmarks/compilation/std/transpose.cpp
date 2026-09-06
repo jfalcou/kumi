@@ -22,7 +22,7 @@ template<typename T, std::size_t... J> auto transpose(T const& t, std::index_seq
 
 template<std::size_t... I> auto run(std::index_sequence<I...>)
 {
-  std::tuple<std::tuple<elem<I>, elem<I>>...> t;
+  std::tuple<std::tuple<element<I>, element<I>>...> t;
   auto r = transpose(t, std::make_index_sequence<2>{});
 
   return std::get<0>(std::get<0>(r)).value;

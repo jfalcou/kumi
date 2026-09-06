@@ -11,7 +11,7 @@
 
 template<std::size_t... I> auto run(std::index_sequence<I...>)
 {
-  kumi::tuple<elem<I>...> t;
+  kumi::tuple<element<I>...> t;
   int total = 0;
 
   kumi::for_each([&](auto const& e) { total += e.value; }, t);

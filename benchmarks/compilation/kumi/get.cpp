@@ -10,7 +10,7 @@
 
 template<std::size_t... I> auto run(std::index_sequence<I...>)
 {
-  kumi::tuple<elem<I>...> t;
+  kumi::tuple<element<I>...> t;
   return (kumi::get<I>(t).value + ...);
 }
 

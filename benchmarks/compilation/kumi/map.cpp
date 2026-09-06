@@ -11,7 +11,7 @@
 
 template<std::size_t... I> auto run(std::index_sequence<I...>)
 {
-  kumi::tuple<elem<I>...> t;
+  kumi::tuple<element<I>...> t;
   auto u = kumi::map([](auto const& e) { return e.value * 2; }, t);
 
   return kumi::get<0>(u);
