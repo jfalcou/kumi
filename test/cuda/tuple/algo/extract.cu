@@ -20,8 +20,8 @@ namespace
     kumi::tuple t = {'1', 2., 3.f, 4};
 
     auto whole = kumi::extract(t, 0_c);
-    auto head  = kumi::extract(t, 0_c, 2_c);
-    auto one   = kumi::extract(t, 0_c, 1_c);
+    auto head = kumi::extract(t, 0_c, 2_c);
+    auto one = kumi::extract(t, 0_c, 1_c);
 
     flags[0] = (whole.size() == 4) && (kumi::get<3>(whole) == 4);
     flags[1] = (head.size() == 2) && (kumi::get<0>(head) == '1') && (kumi::get<1>(head) == 2.);

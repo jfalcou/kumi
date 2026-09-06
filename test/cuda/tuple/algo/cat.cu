@@ -16,7 +16,7 @@ namespace
   __global__ void concatenate(char* flags)
   {
     short s = 55;
-    auto  c = kumi::cat(kumi::tuple{1, 2.}, kumi::tuple{3.f, 4}, kumi::tuple{s, 6.7});
+    auto c = kumi::cat(kumi::tuple{1, 2.}, kumi::tuple{3.f, 4}, kumi::tuple{s, 6.7});
 
     flags[0] = (c.size() == 6);
     flags[1] = (kumi::get<0>(c) == 1) && (kumi::get<1>(c) == 2.) && (kumi::get<2>(c) == 3.f);

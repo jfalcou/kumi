@@ -17,7 +17,7 @@ namespace
   {
     auto numbers = kumi::tuple{1, 2, 3, 4};
     auto letters = kumi::tuple{'a', 'b', 'c', 'd'};
-    auto ratio   = kumi::tuple{1.f, 0.5f, 0.25, 0.01};
+    auto ratio = kumi::tuple{1.f, 0.5f, 0.25, 0.01};
 
     auto z = kumi::zip(numbers, letters);
     flags[0] = (z.size() == 4);
@@ -25,8 +25,8 @@ namespace
     flags[2] = (kumi::get<0>(kumi::get<3>(z)) == 4) && (kumi::get<1>(kumi::get<3>(z)) == 'd');
 
     auto three = kumi::zip(numbers, letters, ratio);
-    flags[3] = (kumi::get<0>(kumi::get<2>(three)) == 3) && (kumi::get<1>(kumi::get<2>(three)) == 'c')
-            && (kumi::get<2>(kumi::get<2>(three)) == 0.25);
+    flags[3] = (kumi::get<0>(kumi::get<2>(three)) == 3) && (kumi::get<1>(kumi::get<2>(three)) == 'c') &&
+               (kumi::get<2>(kumi::get<2>(three)) == 0.25);
   }
 }
 

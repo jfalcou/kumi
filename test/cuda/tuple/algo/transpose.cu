@@ -16,9 +16,9 @@ namespace
 {
   __global__ void rows_to_columns(char* flags)
   {
-    auto t  = kumi::tuple{1., 'x', moveonly{}, short{55}};
+    auto t = kumi::tuple{1., 'x', moveonly{}, short{55}};
     auto t2 = kumi::tuple{2., 'y', moveonly{}, short{66}};
-    auto r  = kumi::transpose(kumi::tuple{std::move(t), std::move(t2)});
+    auto r = kumi::transpose(kumi::tuple{std::move(t), std::move(t2)});
 
     flags[0] = (r.size() == 4);
     flags[1] = (kumi::get<0>(kumi::get<0>(r)) == 1.) && (kumi::get<1>(kumi::get<0>(r)) == 2.);

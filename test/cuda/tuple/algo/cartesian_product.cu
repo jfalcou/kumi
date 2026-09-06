@@ -16,8 +16,8 @@ namespace
   __global__ void every_tuple(char* flags)
   {
     auto status = kumi::tuple{true, false};
-    auto id     = kumi::tuple{'a', 'b', 'c'};
-    auto value  = kumi::tuple{1.0, 2.1, 4.2, 8.4};
+    auto id = kumi::tuple{'a', 'b', 'c'};
+    auto value = kumi::tuple{1.0, 2.1, 4.2, 8.4};
 
     auto p = kumi::cartesian_product(status, id, value);
 

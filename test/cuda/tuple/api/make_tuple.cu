@@ -21,9 +21,9 @@ namespace
     flags[2] = (kumi::get<1>(t) == 2.f);
     flags[3] = (kumi::get<2>(t) == '3');
 
-    auto copy          = t;
+    auto copy = t;
     kumi::get<0>(copy) = 42;
-    flags[4]           = (kumi::get<0>(copy) == 42) && (kumi::get<0>(t) == 1);
+    flags[4] = (kumi::get<0>(copy) == 42) && (kumi::get<0>(t) == 1);
   }
 
   // Constant evaluation is where nvcc and clang diverge most, and a kernel is where it is never tested.

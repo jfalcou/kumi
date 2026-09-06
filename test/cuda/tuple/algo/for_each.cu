@@ -15,8 +15,8 @@ namespace
 {
   __global__ void accumulate(char* flags)
   {
-    auto t     = kumi::make_tuple(1, 2, 3);
-    int  count = 0;
+    auto t = kumi::make_tuple(1, 2, 3);
+    int count = 0;
 
     kumi::for_each([&](auto v) { count += v; }, t);
     flags[0] = (count == 6);

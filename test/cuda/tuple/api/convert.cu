@@ -18,6 +18,7 @@ namespace
     int value = 0;
 
     ExpInt() = default;
+
     __host__ __device__ explicit ExpInt(int v) : value(v) {}
   };
 
@@ -25,7 +26,7 @@ namespace
 #if !defined(__NVCC__)
   __global__ void convert(char* flags)
   {
-    auto in  = kumi::tuple{1, 2};
+    auto in = kumi::tuple{1, 2};
     auto out = static_cast<kumi::tuple<ExpInt, ExpInt>>(in);
 
     flags[0] = (kumi::get<0>(out).value == 1);

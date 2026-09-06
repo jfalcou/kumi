@@ -18,7 +18,7 @@ namespace
   __global__ void flatten_nested(char* flags)
   {
     auto inner = kumi::record{"a"_id = 1, "b"_id = 2};
-    auto flat  = kumi::flatten(kumi::record{"x"_id = 0, "y"_id = inner});
+    auto flat = kumi::flatten(kumi::record{"x"_id = 0, "y"_id = inner});
 
     flags[0] = (flat.size() == 3);
     flags[1] = (flat["x"_id] == 0);

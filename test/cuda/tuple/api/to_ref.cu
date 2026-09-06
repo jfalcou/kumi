@@ -15,7 +15,7 @@ namespace
   // The host test checks the reference types; a kernel can check them too, and write through them.
   __global__ void references_bind(char* flags)
   {
-    auto made      = kumi::make_tuple('1', 2., 3.f);
+    auto made = kumi::make_tuple('1', 2., 3.f);
     auto made_lref = kumi::to_ref(made);
 
     static_assert(std::is_same_v<std::tuple_element_t<0, decltype(made_lref)>, char&>);
