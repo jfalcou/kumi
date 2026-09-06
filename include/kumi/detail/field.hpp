@@ -34,29 +34,38 @@ namespace kumi
 
     T value;
 
-    KUMI_ABI constexpr T& operator()(identifier_type) & noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T& operator()(identifier_type) & noexcept { return value; }
 
-    KUMI_ABI constexpr T&& operator()(identifier_type) && noexcept { return static_cast<T&&>(value); }
+    KUMI_HIDDEN_ABI constexpr T&& operator()(identifier_type) && noexcept { return static_cast<T&&>(value); }
 
-    KUMI_ABI constexpr T const& operator()(identifier_type) const& noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T const& operator()(identifier_type) const& noexcept { return value; }
 
-    KUMI_ABI constexpr T const&& operator()(identifier_type) const&& noexcept { return static_cast<T const&&>(value); }
+    KUMI_HIDDEN_ABI constexpr T const&& operator()(identifier_type) const&& noexcept
+    {
+      return static_cast<T const&&>(value);
+    }
 
-    KUMI_ABI constexpr T& operator()(inner_type) & noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T& operator()(inner_type) & noexcept { return value; }
 
-    KUMI_ABI constexpr T&& operator()(inner_type) && noexcept { return static_cast<T&&>(value); }
+    KUMI_HIDDEN_ABI constexpr T&& operator()(inner_type) && noexcept { return static_cast<T&&>(value); }
 
-    KUMI_ABI constexpr T const& operator()(inner_type) const& noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T const& operator()(inner_type) const& noexcept { return value; }
 
-    KUMI_ABI constexpr T const&& operator()(inner_type) const&& noexcept { return static_cast<T const&&>(value); }
+    KUMI_HIDDEN_ABI constexpr T const&& operator()(inner_type) const&& noexcept
+    {
+      return static_cast<T const&&>(value);
+    }
 
-    KUMI_ABI constexpr T& operator()(label_type) & noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T& operator()(label_type) & noexcept { return value; }
 
-    KUMI_ABI constexpr T&& operator()(label_type) && noexcept { return static_cast<T&&>(value); }
+    KUMI_HIDDEN_ABI constexpr T&& operator()(label_type) && noexcept { return static_cast<T&&>(value); }
 
-    KUMI_ABI constexpr T const& operator()(label_type) const& noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T const& operator()(label_type) const& noexcept { return value; }
 
-    KUMI_ABI constexpr T const&& operator()(label_type) const&& noexcept { return static_cast<T const&&>(value); }
+    KUMI_HIDDEN_ABI constexpr T const&& operator()(label_type) const&& noexcept
+    {
+      return static_cast<T const&&>(value);
+    }
 
     //==================================================================================================================
     /// @ingroup kumi_utility
@@ -83,29 +92,38 @@ namespace kumi
     using inner_type = std::type_identity<T>;
     using label_type = std::integral_constant<kumi::str, label()>;
 
-    KUMI_ABI constexpr T& operator()(identifier_type) & noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr T& operator()(identifier_type) & noexcept { return *this; }
 
-    KUMI_ABI constexpr T&& operator()(identifier_type) && noexcept { return static_cast<T&&>(*this); }
+    KUMI_HIDDEN_ABI constexpr T&& operator()(identifier_type) && noexcept { return static_cast<T&&>(*this); }
 
-    KUMI_ABI constexpr T const& operator()(identifier_type) const& noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr T const& operator()(identifier_type) const& noexcept { return *this; }
 
-    KUMI_ABI constexpr T const&& operator()(identifier_type) const&& noexcept { return static_cast<T const&&>(*this); }
+    KUMI_HIDDEN_ABI constexpr T const&& operator()(identifier_type) const&& noexcept
+    {
+      return static_cast<T const&&>(*this);
+    }
 
-    KUMI_ABI constexpr T& operator()(inner_type) & noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr T& operator()(inner_type) & noexcept { return *this; }
 
-    KUMI_ABI constexpr T&& operator()(inner_type) && noexcept { return static_cast<T&&>(*this); }
+    KUMI_HIDDEN_ABI constexpr T&& operator()(inner_type) && noexcept { return static_cast<T&&>(*this); }
 
-    KUMI_ABI constexpr T const& operator()(inner_type) const& noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr T const& operator()(inner_type) const& noexcept { return *this; }
 
-    KUMI_ABI constexpr T const&& operator()(inner_type) const&& noexcept { return static_cast<T const&&>(*this); }
+    KUMI_HIDDEN_ABI constexpr T const&& operator()(inner_type) const&& noexcept
+    {
+      return static_cast<T const&&>(*this);
+    }
 
-    KUMI_ABI constexpr T& operator()(label_type) & noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr T& operator()(label_type) & noexcept { return *this; }
 
-    KUMI_ABI constexpr T&& operator()(label_type) && noexcept { return static_cast<T&&>(*this); }
+    KUMI_HIDDEN_ABI constexpr T&& operator()(label_type) && noexcept { return static_cast<T&&>(*this); }
 
-    KUMI_ABI constexpr T const& operator()(label_type) const& noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr T const& operator()(label_type) const& noexcept { return *this; }
 
-    KUMI_ABI constexpr T const&& operator()(label_type) const&& noexcept { return static_cast<T const&&>(*this); }
+    KUMI_HIDDEN_ABI constexpr T const&& operator()(label_type) const&& noexcept
+    {
+      return static_cast<T const&&>(*this);
+    }
 
     //==================================================================================================================
     /// @ingroup kumi_utility

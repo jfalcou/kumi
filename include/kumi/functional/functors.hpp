@@ -62,14 +62,16 @@ namespace kumi
       using type_t = decltype(type(std::declval<T>(), std::make_index_sequence<kumi::size_v<T>>{}));
 
       template<kumi::concepts::product_type T, std::size_t... I>
-      KUMI_ABI constexpr auto operator()(T&& t, std::index_sequence<I...>) const
+      KUMI_HIDDEN_ABI constexpr auto operator()(T&& t, std::index_sequence<I...>) const
       {
         using res_t = kumi::builder_make_t<T, kumi::element_t<I, T>...>;
         return res_t{get<I>(KUMI_FWD(t))...};
       }
 
       template<typename T, std::size_t N, std::size_t... I>
-      KUMI_ABI constexpr auto operator()(T&& t, std::integral_constant<std::size_t, N>, std::index_sequence<I...>) const
+      KUMI_HIDDEN_ABI constexpr auto operator()(T&& t,
+                                                std::integral_constant<std::size_t, N>,
+                                                std::index_sequence<I...>) const
       {
         using U = type_t<T>;
         using res_t = kumi::builder_make_t<U, kumi::element_t<N, kumi::element_t<I, T>>...>;
@@ -77,7 +79,7 @@ namespace kumi
       }
 
       template<typename T, std::size_t... E, std::size_t... I>
-      KUMI_ABI constexpr auto operator()(T&& t, std::index_sequence<E...>, std::index_sequence<I...>) const
+      KUMI_HIDDEN_ABI constexpr auto operator()(T&& t, std::index_sequence<E...>, std::index_sequence<I...>) const
       {
         using U = type_t<T>;
         using res_t = kumi::builder_make_t<U, kumi::element_t<E, kumi::element_t<I, T>>...>;

@@ -42,6 +42,7 @@ TTS_CASE("Test search utilities")
   constexpr kumi::str s("banana");
   TTS_EQUAL(s.find("ana"), 1ULL);
   TTS_EQUAL(s.rfind("ana"), 3ULL);
+  TTS_EQUAL(s.rfind("grooot"), kumi::str::npos);
   TTS_EXPECT(s.contains("nan"));
   TTS_EXPECT(!s.contains("xyz"));
 };
@@ -69,8 +70,13 @@ TTS_CASE("Test character search")
 {
   constexpr kumi::str s("abracadabra");
   TTS_EQUAL(s.find_first_of("c"), 4ULL);
+  TTS_EQUAL(s.find_first_of("k"), kumi::str::npos);
   TTS_EQUAL(s.find_last_of("a"), 10ULL);
+  TTS_EQUAL(s.find_last_of("k"), kumi::str::npos);
   TTS_EQUAL(s.find_first_not_of("ab"), 2ULL);
+  TTS_EQUAL(s.find_first_not_of("abrcd"), kumi::str::npos);
+  TTS_EQUAL(s.find_last_not_of("ar"), 8ULL);
+  TTS_EQUAL(s.find_last_not_of("abrcd"), kumi::str::npos);
 };
 
 TTS_CASE("Test user-defined literal operator")
@@ -97,7 +103,7 @@ TTS_CASE("Test complex chain with literals")
   TTS_EXPECT(result == "bc"_str);
 };
 
-TTS_CASE("Test comparison operators")
+TTS_CASE("Test str operators")
 {
   using namespace kumi;
 
@@ -109,4 +115,5 @@ TTS_CASE("Test comparison operators")
   TTS_EXPECT(s2 > s1);
   TTS_EXPECT(s1 == s3);
   TTS_EXPECT(s1 != s2);
+  TTS_EQUAL((s1 + s2), "abc.abd"_str);
 };

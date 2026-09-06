@@ -18,21 +18,24 @@ namespace kumi::_
     using index = std::integral_constant<std::size_t, N>;
     using inner_type = std::type_identity<T>;
 
-    KUMI_ABI constexpr T& operator()(index) & noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T& operator()(index) & noexcept { return value; }
 
-    KUMI_ABI constexpr T&& operator()(index) && noexcept { return static_cast<T&&>(value); }
+    KUMI_HIDDEN_ABI constexpr T&& operator()(index) && noexcept { return static_cast<T&&>(value); }
 
-    KUMI_ABI constexpr T const&& operator()(index) const&& noexcept { return static_cast<T const&&>(value); }
+    KUMI_HIDDEN_ABI constexpr T const&& operator()(index) const&& noexcept { return static_cast<T const&&>(value); }
 
-    KUMI_ABI constexpr T const& operator()(index) const& noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T const& operator()(index) const& noexcept { return value; }
 
-    KUMI_ABI constexpr T& operator()(inner_type) & noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T& operator()(inner_type) & noexcept { return value; }
 
-    KUMI_ABI constexpr T&& operator()(inner_type) && noexcept { return static_cast<T&&>(value); }
+    KUMI_HIDDEN_ABI constexpr T&& operator()(inner_type) && noexcept { return static_cast<T&&>(value); }
 
-    KUMI_ABI constexpr T const&& operator()(inner_type) const&& noexcept { return static_cast<T const&&>(value); }
+    KUMI_HIDDEN_ABI constexpr T const&& operator()(inner_type) const&& noexcept
+    {
+      return static_cast<T const&&>(value);
+    }
 
-    KUMI_ABI constexpr T const& operator()(inner_type) const& noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T const& operator()(inner_type) const& noexcept { return value; }
   };
 
   // Empty Base Optimization
@@ -44,21 +47,27 @@ namespace kumi::_
     using index = std::integral_constant<std::size_t, N>;
     using inner_type = std::type_identity<base>;
 
-    KUMI_ABI constexpr base& operator()(index) & noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr base& operator()(index) & noexcept { return *this; }
 
-    KUMI_ABI constexpr base&& operator()(index) && noexcept { return static_cast<base&&>(*this); }
+    KUMI_HIDDEN_ABI constexpr base&& operator()(index) && noexcept { return static_cast<base&&>(*this); }
 
-    KUMI_ABI constexpr base const&& operator()(index) const&& noexcept { return static_cast<base const&&>(*this); }
+    KUMI_HIDDEN_ABI constexpr base const&& operator()(index) const&& noexcept
+    {
+      return static_cast<base const&&>(*this);
+    }
 
-    KUMI_ABI constexpr base const& operator()(index) const& noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr base const& operator()(index) const& noexcept { return *this; }
 
-    KUMI_ABI constexpr base& operator()(inner_type) & noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr base& operator()(inner_type) & noexcept { return *this; }
 
-    KUMI_ABI constexpr base&& operator()(inner_type) && noexcept { return static_cast<base&&>(*this); }
+    KUMI_HIDDEN_ABI constexpr base&& operator()(inner_type) && noexcept { return static_cast<base&&>(*this); }
 
-    KUMI_ABI constexpr base const&& operator()(inner_type) const&& noexcept { return static_cast<base const&&>(*this); }
+    KUMI_HIDDEN_ABI constexpr base const&& operator()(inner_type) const&& noexcept
+    {
+      return static_cast<base const&&>(*this);
+    }
 
-    KUMI_ABI constexpr base const& operator()(inner_type) const& noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr base const& operator()(inner_type) const& noexcept { return *this; }
   };
 
   template<std::size_t N, kumi::_::field T> struct leaf<N, T> : std::remove_cvref_t<T>
@@ -67,13 +76,16 @@ namespace kumi::_
     using base::operator();
     using index = std::integral_constant<std::size_t, N>;
 
-    KUMI_ABI constexpr base& operator()(index) & noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr base& operator()(index) & noexcept { return *this; }
 
-    KUMI_ABI constexpr base&& operator()(index) && noexcept { return static_cast<base&&>(*this); }
+    KUMI_HIDDEN_ABI constexpr base&& operator()(index) && noexcept { return static_cast<base&&>(*this); }
 
-    KUMI_ABI constexpr base const&& operator()(index) const&& noexcept { return static_cast<base const&&>(*this); }
+    KUMI_HIDDEN_ABI constexpr base const&& operator()(index) const&& noexcept
+    {
+      return static_cast<base const&&>(*this);
+    }
 
-    KUMI_ABI constexpr base const& operator()(index) const& noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr base const& operator()(index) const& noexcept { return *this; }
   };
 
   // Specializable binder type constructor

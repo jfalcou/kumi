@@ -80,16 +80,16 @@ namespace kumi
     {
     private:
       template<bool... b, std::size_t... I, std::size_t... J>
-      KUMI_ABI consteval auto impl(std::integer_sequence<bool, b...>,
-                                   std::index_sequence<I...>,
-                                   std::index_sequence<J...>) const noexcept
+      consteval auto impl(std::integer_sequence<bool, b...>,
+                          std::index_sequence<I...>,
+                          std::index_sequence<J...>) const noexcept
       {
         return kumi::projection_map{std::index_sequence<(kumi::_::nth_pos(I, b...))...>{},
                                     std::index_sequence<(kumi::_::nth_pos(J, !b...))...>{}};
       }
 
     public:
-      template<bool... Bs> KUMI_ABI consteval auto operator()(std::bool_constant<Bs>...) const noexcept
+      template<bool... Bs> consteval auto operator()(std::bool_constant<Bs>...) const noexcept
       {
         return impl(std::integer_sequence<bool, Bs...>{}, std::make_index_sequence<(Bs + ... + 0)>{},
                     std::make_index_sequence<(sizeof...(Bs) - (Bs + ... + 0))>{});
