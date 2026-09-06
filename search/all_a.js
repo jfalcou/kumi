@@ -4,7 +4,7 @@ var searchData=
   ['element_5for_5ft_1',['element_or_t',['../group__kumi__functional.html#ga11e943ab58829909243b4826d1f084d8',1,'kumi::function']]],
   ['element_5ft_2',['element_t',['../group__kumi__traits.html#ga8ba508c6d1dfb63ff6fec24deb84d66e',1,'kumi']]],
   ['elements_20the_200_20and_201_20of_20types_3',['The Identity Elements (The &quot;0&quot; and &quot;1&quot; of Types)',['../kumi_identity.html',1,'']]],
-  ['empty_4',['empty',['../structkumi_1_1record.html#a7e54e12c537c8dcbafabc215957f0abc',1,'kumi::record::empty()'],['../structkumi_1_1tuple.html#af1a74e00134be29916bb7fb6e8cda5f6',1,'kumi::tuple::empty()'],['../structkumi_1_1projection__map.html#a617095f311199ed121ad2b133aa488cf',1,'kumi::projection_map::empty()']]],
+  ['empty_4',['empty',['../structkumi_1_1record.html#a7e54e12c537c8dcbafabc215957f0abc',1,'kumi::record::empty()'],['../structkumi_1_1tuple.html#af1a74e00134be29916bb7fb6e8cda5f6',1,'kumi::tuple::empty()'],['../structkumi_1_1projection__map.html#a58deb29e4d5dd38ee994e8e65f667627',1,'kumi::projection_map::empty()']]],
   ['empty_20base_20optimization_5',['Empty Base Optimization',['../kumi_cpp_spec.html#autotoc_md122',1,'']]],
   ['empty_20type_20_3a_200_6',['Empty Type : \\( (0 / \\bot) \\)',['../kumi_identity.html#kumi_empty',1,'']]],
   ['empty_5fproduct_5ftype_7',['empty_product_type',['../conceptkumi_1_1concepts_1_1empty__product__type.html',1,'kumi::concepts']]],

@@ -333,17 +333,17 @@
     <filename>structkumi_1_1projection__map.html</filename>
     <templarg>auto... V</templarg>
     <member kind="function" static="yes">
-      <type>static constexpr auto</type>
+      <type>static consteval auto</type>
       <name>size</name>
       <anchorfile>structkumi_1_1projection__map.html</anchorfile>
-      <anchor>aa201fda6e2720aef8e4a7ce8baee802e</anchor>
+      <anchor>af8e6f5fc953903d3d5525220a26b791d</anchor>
       <arglist>() noexcept</arglist>
     </member>
     <member kind="function" static="yes">
-      <type>static constexpr bool</type>
+      <type>static consteval bool</type>
       <name>empty</name>
       <anchorfile>structkumi_1_1projection__map.html</anchorfile>
-      <anchor>a617095f311199ed121ad2b133aa488cf</anchor>
+      <anchor>a58deb29e4d5dd38ee994e8e65f667627</anchor>
       <arglist>() noexcept</arglist>
     </member>
     <member kind="friend">
@@ -354,17 +354,17 @@
       <arglist>(projection_map const &amp;pm) noexcept</arglist>
     </member>
     <member kind="function" static="yes">
-      <type>static constexpr auto</type>
+      <type>static consteval auto</type>
       <name>size</name>
       <anchorfile>structkumi_1_1projection__map.html</anchorfile>
-      <anchor>aa201fda6e2720aef8e4a7ce8baee802e</anchor>
+      <anchor>af8e6f5fc953903d3d5525220a26b791d</anchor>
       <arglist>() noexcept</arglist>
     </member>
     <member kind="function" static="yes">
-      <type>static constexpr bool</type>
+      <type>static consteval bool</type>
       <name>empty</name>
       <anchorfile>structkumi_1_1projection__map.html</anchorfile>
-      <anchor>a617095f311199ed121ad2b133aa488cf</anchor>
+      <anchor>a58deb29e4d5dd38ee994e8e65f667627</anchor>
       <arglist>() noexcept</arglist>
     </member>
   </compound>

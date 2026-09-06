@@ -7,7 +7,7 @@ var searchData=
   ['setup_4',['Setup',['../kumi_setup.html',1,'']]],
   ['setup_5',['Standalone setup',['../kumi_setup.html#setup-standalone',1,'']]],
   ['shifter_6',['shifter',['../group__kumi__functional.html#ga030fc00e2f98f3648974d4a2c0d2ae31',1,'kumi::function']]],
-  ['size_7',['size',['../structkumi_1_1record.html#ae58c2eac14a343992ac19d9ba01ec6ae',1,'kumi::record::size()'],['../structkumi_1_1tuple.html#a0d0957e5314d780693c3d67344a42b3e',1,'kumi::tuple::size()'],['../structkumi_1_1projection__map.html#aa201fda6e2720aef8e4a7ce8baee802e',1,'kumi::projection_map::size()']]],
+  ['size_7',['size',['../structkumi_1_1record.html#ae58c2eac14a343992ac19d9ba01ec6ae',1,'kumi::record::size()'],['../structkumi_1_1tuple.html#a0d0957e5314d780693c3d67344a42b3e',1,'kumi::tuple::size()'],['../structkumi_1_1projection__map.html#af8e6f5fc953903d3d5525220a26b791d',1,'kumi::projection_map::size()']]],
   ['size_5for_5fv_8',['size_or_v',['../group__kumi__functional.html#ga1aeb494d781c6a1d8f48168f4f093afe',1,'kumi::function']]],
   ['size_5fv_9',['size_v',['../group__kumi__traits.html#ga4dd894f30adf7e5f7ae95124f66d8adb',1,'kumi']]],
   ['sized_5fproduct_5ftype_10',['sized_product_type',['../conceptkumi_1_1concepts_1_1sized__product__type.html',1,'kumi::concepts']]],

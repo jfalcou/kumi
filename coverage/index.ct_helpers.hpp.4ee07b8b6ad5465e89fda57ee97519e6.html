@@ -27,7 +27,7 @@
     </tr>
     <tr>
       <th scope="row">Date:</th>
-      <td>2026-09-05 22:27:07</td>
+      <td>2026-09-06 07:52:36</td>
     </tr>
   </table>
 </div>
@@ -47,8 +47,8 @@
     </tr>
     <tr>
       <th scope="row">Functions:</th>
-      <td>84</td>
-      <td>84</td>
+      <td>80</td>
+      <td>80</td>
       <td class="coverage-high">100.0%</td>
     </tr>
     <tr>
@@ -123,12 +123,8 @@
     <tr><td><a href="#l150">auto kumi::predicate&lt;std::is_floating_point&gt;()::{lambda&lt;typename $T0&gt;($T0 const&amp;)#1}::operator()&lt;unsigned long long&gt;(unsigned long long const&amp;) const (line 150)</a></td><td>called 2 times, returned 2 times</td><td>100.0%</td></tr>
     <tr><td><a href="#l148">auto kumi::predicate&lt;std::is_integral&gt;() (line 148)</a></td><td>called 2 times, returned 2 times</td><td>100.0%</td></tr>
     <tr><td><a href="#l148">auto kumi::predicate&lt;std::is_lvalue_reference&gt;() (line 148)</a></td><td>called 2 times, returned 2 times</td><td>100.0%</td></tr>
-    <tr><td><a href="#l148">auto kumi::predicate&lt;std::is_pointer&gt;() (line 148)</a></td><td>called 2 times, returned 2 times</td><td>100.0%</td></tr>
-    <tr><td><a href="#l148">auto kumi::predicate&lt;std::is_unsigned&gt;() (line 148)</a></td><td>called 3 times, returned 3 times</td><td>100.0%</td></tr>
-    <tr><td><a href="#l150">auto kumi::predicate&lt;std::is_unsigned&gt;()::{lambda&lt;typename $T0&gt;($T0 const&amp;)#1}::operator()&lt;double&gt;(double const&amp;) const (line 150)</a></td><td>called 3 times, returned 3 times</td><td>100.0%</td></tr>
-    <tr><td><a href="#l150">auto kumi::predicate&lt;std::is_unsigned&gt;()::{lambda&lt;typename $T0&gt;($T0 const&amp;)#1}::operator()&lt;float&gt;(float const&amp;) const (line 150)</a></td><td>called 3 times, returned 3 times</td><td>100.0%</td></tr>
-    <tr><td><a href="#l150">auto kumi::predicate&lt;std::is_unsigned&gt;()::{lambda&lt;typename $T0&gt;($T0 const&amp;)#1}::operator()&lt;int&gt;(int const&amp;) const (line 150)</a></td><td>called 3 times, returned 3 times</td><td>100.0%</td></tr>
-    <tr><td><a href="#l150">auto kumi::predicate&lt;std::is_unsigned&gt;()::{lambda&lt;typename $T0&gt;($T0 const&amp;)#1}::operator()&lt;unsigned long long&gt;(unsigned long long const&amp;) const (line 150)</a></td><td>called 3 times, returned 3 times</td><td>100.0%</td></tr>
+    <tr><td><a href="#l148">auto kumi::predicate&lt;std::is_pointer&gt;() (line 148)</a></td><td>called 4 times, returned 4 times</td><td>100.0%</td></tr>
+    <tr><td><a href="#l148">auto kumi::predicate&lt;std::is_unsigned&gt;() (line 148)</a></td><td>called 4 times, returned 4 times</td><td>100.0%</td></tr>
     <tr><td><a href="#l37">kumi::index_t&lt;0ul&gt;::operator unsigned long() const (line 37)</a></td><td>called 18 times, returned 18 times</td><td>100.0%</td></tr>
     <tr><td><a href="#l37">kumi::index_t&lt;10ul&gt;::operator unsigned long() const (line 37)</a></td><td>called 2 times, returned 2 times</td><td>100.0%</td></tr>
     <tr><td><a href="#l37">kumi::index_t&lt;11ul&gt;::operator unsigned long() const (line 37)</a></td><td>called 2 times, returned 2 times</td><td>100.0%</td></tr>
@@ -1204,7 +1200,7 @@
       <td class="lineno"><a id="l148" href="#l148">148</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">35</td>
+      <td class="linecount coveredLine">44</td>
       <td class="src coveredLine"><span class="w">  </span><span class="k">template</span><span class="o">&lt;</span><span class="k">template</span><span class="o">&lt;</span><span class="k">class</span><span class="o">&gt;</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">Pred</span><span class="o">&gt;</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">predicate</span><span class="p">()</span><span class="w"> </span><span class="k">noexcept</span></td>
     </tr>
     <tr class="source-line">
@@ -1218,7 +1214,7 @@
       <td class="lineno"><a id="l150" href="#l150">150</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">135</td>
+      <td class="linecount coveredLine">144</td>
       <td class="src coveredLine"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">[]</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Pred</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="p">};</span></td>
     </tr>
     <tr class="source-line">
