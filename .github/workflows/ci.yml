@@ -168,3 +168,13 @@ jobs:
     uses: jfalcou/copacabana/.github/workflows/matrix.yml@44053e713b1b57329ccbcbb8878c839024bf19ee # v8
     with:
       file: .github/matrices/nvidia-release.yml
+
+  ##################################################################################################
+  ## Device tests - kumi inside real kernels, on the card the self-hosted runner carries
+  ##################################################################################################
+  nvidia-device-tests:
+    name: Device
+    needs: [precommit, standalone-generation, sanitizer-tests]
+    uses: jfalcou/copacabana/.github/workflows/matrix.yml@44053e713b1b57329ccbcbb8878c839024bf19ee # v8
+    with:
+      file: .github/matrices/nvidia-device.yml

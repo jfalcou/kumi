@@ -41,6 +41,13 @@
 // Functions in namespace detail should not be forceinline and have a different abi
 #define KUMI_HIDDEN_ABI KUMI_CUDA inline
 
+// Device code has no exceptions: the same misuse aborts the kernel there.
+#if defined(__CUDA_ARCH__)
+#define KUMI_ERROR(MESSAGE) __trap()
+#else
+#define KUMI_ERROR(MESSAGE) throw MESSAGE
+#endif
+
 #if defined(__clang__)
 #pragma clang diagnostic ignored "-Wmissing-braces"
 #endif

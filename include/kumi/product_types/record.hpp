@@ -424,7 +424,7 @@ namespace kumi
     @tparam Ts  Type lists to build the record with.
   **/
   //====================================================================================================================
-  template<typename... Ts> KUMI_CUDA record(Ts&&...) -> record<std::unwrap_ref_decay_t<Ts>...>;
+  template<typename... Ts> record(Ts&&...) -> record<std::unwrap_ref_decay_t<Ts>...>;
 
   //====================================================================================================================
   //! @}

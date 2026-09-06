@@ -130,7 +130,7 @@ namespace kumi
     @tparam Ts  Type lists to build the projections with.
   **/
   //====================================================================================================================
-  template<kumi::concepts::projection... Ts> KUMI_CUDA projection_map(Ts...) -> projection_map<Ts{}...>;
+  template<kumi::concepts::projection... Ts> projection_map(Ts...) -> projection_map<Ts{}...>;
 
   //====================================================================================================================
   /**
