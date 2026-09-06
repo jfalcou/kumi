@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['identifier_0',['Identifier',['../kumi_nomenclature.html#autotoc_md144',1,'']]],
-  ['identity_20elements_20the_200_20and_201_20of_20types_1',['The Identity Elements (The &quot;0&quot; and &quot;1&quot; of Types)',['../kumi_identity.html',1,'']]],
-  ['infra_2',['DOC and CI infra',['../kumi_changelog.html#autotoc_md99',1,'']]],
-  ['infrastructure_3',['Infrastructure',['../kumi_changelog.html#autotoc_md117',1,'']]],
-  ['infrastructure_20changes_4',['Infrastructure Changes',['../kumi_changelog.html#autotoc_md107',1,'API and Infrastructure Changes'],['../kumi_changelog.html#autotoc_md102',1,'Infrastructure Changes']]],
-  ['install_20from_20the_20source_5',['Install from the source',['../kumi_setup.html#setup-source',1,'']]]
+  ['helper_20type_0',['Helper type',['../group__kumi__utility.html#autotoc_md0',1,'Helper type'],['../group__kumi__utility.html#autotoc_md2',1,'Helper type'],['../group__kumi__utility.html#autotoc_md4',1,'Helper type'],['../group__kumi__utility.html#autotoc_md6',1,'Helper type'],['../group__kumi__utility.html#autotoc_md8',1,'Helper type'],['../group__kumi__functional.html#autotoc_md13',1,'Helper type'],['../structkumi_1_1as__tuple.html#autotoc_md39',1,'Helper type'],['../structkumi_1_1stored__member.html#autotoc_md84',1,'Helper type'],['../structkumi_1_1stored__element.html#autotoc_md85',1,'Helper type'],['../structkumi_1_1common__product__type.html#autotoc_md87',1,'Helper type'],['../structkumi_1_1apply__traits.html#autotoc_md92',1,'Helper type'],['../structkumi_1_1map__traits.html#autotoc_md94',1,'Helper type']]],
+  ['helper_20type_20trait_1',['Helper type trait',['../group__kumi__traits.html#autotoc_md70',1,'Helper type-trait'],['../group__kumi__traits.html#autotoc_md72',1,'Helper type-trait'],['../group__kumi__traits.html#autotoc_md75',1,'Helper type-trait'],['../group__kumi__traits.html#autotoc_md76',1,'Helper type-trait'],['../group__kumi__traits.html#autotoc_md77',1,'Helper type-trait'],['../group__kumi__traits.html#autotoc_md79',1,'Helper type-trait'],['../group__kumi__traits.html#autotoc_md80',1,'Helper type-trait'],['../group__kumi__traits.html#autotoc_md81',1,'Helper type-trait'],['../group__kumi__tuple__traits.html#autotoc_md82',1,'Helper type-trait'],['../group__kumi__traits.html#autotoc_md83',1,'Helper type-trait'],['../group__kumi__traits.html#autotoc_md86',1,'Helper type-trait'],['../group__kumi__traits.html#autotoc_md88',1,'Helper type-trait'],['../group__kumi__traits.html#autotoc_md89',1,'Helper type-trait'],['../group__kumi__traits.html#autotoc_md90',1,'Helper type-trait'],['../group__kumi__traits.html#autotoc_md91',1,'Helper type-trait']]],
+  ['helper_20type_5ftrait_2',['Helper type_trait',['../group__kumi__traits.html#autotoc_md74',1,'']]],
+  ['helper_20value_3',['Helper value',['../group__kumi__functional.html#autotoc_md12',1,'']]],
+  ['helpers_4',['Helpers',['../kumi_reference.html#autotoc_md156',1,'']]],
+  ['howard_20correspondence_5',['The Curry-Howard Correspondence',['../kumi_introduction.html#curry_howard',1,'']]]
 ];

@@ -26,33 +26,33 @@ var NAVTREE =
 [
   [ "KUMI", "index.html", [
     [ "The C++20 Compact Tuple Tools", "index.html", "index" ],
-    [ "About The Library", "usergroup0.html", [
+    [ "About The Library", "kumi_setup.html", [
       [ "Setup", "kumi_setup.html", null ],
       [ "Changelog", "kumi_changelog.html", null ],
       [ "Licence", "kumi_licence.html", null ]
     ] ],
-    [ "Glossary", "usergroup1.html", [
-      [ "Type Theory", "usergroup2.html", [
-        [ "Introduction", "kumi_introduction.html", null ],
-        [ "Identity Types", "kumi_identity.html", null ],
-        [ "Product Types", "kumi_product.html", null ]
+    [ "Glossary", "kumi_glossary.html", [
+      [ "Type Theory", "kumi_introduction.html#kumi_introduction", [
+        [ "Introduction", "kumi_introduction.html#kumi_introduction", null ],
+        [ "Identity Types", "kumi_identity.html#kumi_identity", null ],
+        [ "Product Types", "kumi_product.html#kumi_product", null ]
       ] ],
-      [ "C++ Vocabulary", "kumi_cpp_spec.html", null ],
-      [ "Nomenclature", "kumi_nomenclature.html", null ]
+      [ "C++ Vocabulary", "kumi_cpp_spec.html#kumi_cpp_spec", null ],
+      [ "Nomenclature", "kumi_nomenclature.html#kumi_nomenclature", null ]
     ] ],
-    [ "Reference Documentation", "usergroup3.html", [
-      [ "Types", "usergroup4.html", [
+    [ "Reference Documentation", "kumi_reference.html", [
+      [ "Types", "group__kumi__tuple__related.html", [
         [ "Product Types and Functions", "group__kumi__tuple__related.html", null ],
         [ "Record Types and Functions", "group__kumi__record__related.html", null ],
         [ "Types", "group__kumi__types.html", null ]
       ] ],
-      [ "Algorithms", "usergroup5.html", [
+      [ "Algorithms", "group__kumi__transforms.html", [
         [ "Transformations", "group__kumi__transforms.html", null ],
         [ "Queries", "group__kumi__queries.html", null ],
         [ "Generators", "group__kumi__generators.html", null ],
         [ "Reductions", "group__kumi__reductions.html", null ]
       ] ],
-      [ "Helpers", "usergroup6.html", [
+      [ "Helpers", "group__kumi__traits.html", [
         [ "Traits", "group__kumi__traits.html", null ],
         [ "Concepts", "group__kumi__concepts.html", null ],
         [ "Utility", "group__kumi__utility.html", null ],

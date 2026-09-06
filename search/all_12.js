@@ -3,7 +3,7 @@ var searchData=
   ['name_0',['name',['../structkumi_1_1name.html',1,'kumi']]],
   ['new_20contributors_1',['New Contributors',['../kumi_changelog.html#autotoc_md110',1,'']]],
   ['new_20features_2',['New Features',['../kumi_changelog.html#autotoc_md97',1,'New Features'],['../kumi_changelog.html#autotoc_md103',1,'New Features'],['../kumi_changelog.html#autotoc_md108',1,'New Features'],['../kumi_changelog.html#autotoc_md114',1,'New Features'],['../kumi_changelog.html#autotoc_md119',1,'New Features']]],
-  ['nomenclature_3',['Nomenclature',['../kumi_nomenclature.html',1,'']]],
+  ['nomenclature_3',['Nomenclature',['../kumi_nomenclature.html',1,'kumi_glossary']]],
   ['non_5fempty_5fproduct_5ftype_4',['non_empty_product_type',['../conceptkumi_1_1concepts_1_1non__empty__product__type.html',1,'kumi::concepts']]],
   ['none_5',['none',['../group__kumi__utility.html#gae57a2a957d7c5dc2c0b3d21e0b1a98c0',1,'kumi']]],
   ['none_5fof_6',['none_of',['../group__kumi__queries.html#ga26e030c97733248f67dd2c8fbf527602',1,'kumi']]],

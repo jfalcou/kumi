@@ -1,7 +1,7 @@
 var searchData=
 [
   ['c_2020_20compact_20tuple_20tools_0',['The C++20 Compact Tuple Tools',['../index.html',1,'']]],
-  ['c_20specific_20terms_1',['C++ Specific Terms',['../kumi_cpp_spec.html',1,'']]],
+  ['c_20specific_20terms_1',['C++ Specific Terms',['../kumi_cpp_spec.html',1,'kumi_glossary']]],
   ['callable_20object_2',['Callable object',['../structkumi_1_1function_1_1unique__t.html#autotoc_md14',1,'Callable object'],['../structkumi_1_1function_1_1select__t.html#autotoc_md15',1,'Callable object'],['../structkumi_1_1function_1_1adjacent__unicity__t.html#autotoc_md16',1,'Callable object']]],
   ['capture_5ffield_3',['capture_field',['../group__kumi__utility.html#gafc8e80ba53336a0142f3267959c1ba71',1,'kumi::field&lt; Id, T &gt;::capture_field()'],['../group__kumi__utility.html#gafc8e80ba53336a0142f3267959c1ba71',1,'kumi::field::capture_field()'],['../group__kumi__utility.html#gafc8e80ba53336a0142f3267959c1ba71',1,'kumi::capture_field()']]],
   ['cardinality_4',['Type Cardinality',['../kumi_introduction.html#cardinality',1,'']]],

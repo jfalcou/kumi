@@ -7,5 +7,6 @@ var searchData=
   ['get_5findex_5fof_5ffield_4',['get_index_of_field',['../group__kumi__utility.html#ga2fc46ed70d43d14ca52860896fd1e364',1,'kumi']]],
   ['get_5findex_5fof_5flabel_5',['get_index_of_label',['../group__kumi__utility.html#ga6c5b5c12c2baa75189a7d94e55fbfe17',1,'kumi']]],
   ['get_5findex_5fof_5ftype_6',['get_index_of_type',['../group__kumi__utility.html#ga15172fcc47fe0c88931be39b9c3633fd',1,'kumi']]],
-  ['get_5for_7',['get_or',['../group__kumi__functional.html#ga42064b97f063feae3d934bd111ef74ec',1,'kumi::function']]]
+  ['get_5for_7',['get_or',['../group__kumi__functional.html#ga42064b97f063feae3d934bd111ef74ec',1,'kumi::function']]],
+  ['glossary_8',['Glossary',['../kumi_glossary.html',1,'']]]
 ];

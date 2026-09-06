@@ -2,7 +2,7 @@ var searchData=
 [
   ['object_0',['object',['../structkumi_1_1function_1_1unique__t.html#autotoc_md14',1,'Callable object'],['../structkumi_1_1function_1_1select__t.html#autotoc_md15',1,'Callable object'],['../structkumi_1_1function_1_1adjacent__unicity__t.html#autotoc_md16',1,'Callable object']]],
   ['of_20and_1',['Product Constructions (The Logic of &quot;AND&quot;)',['../kumi_product.html#product_construction',1,'']]],
-  ['of_20types_2',['The Identity Elements (The &quot;0&quot; and &quot;1&quot; of Types)',['../kumi_identity.html',1,'']]],
+  ['of_20types_2',['The Identity Elements (The &quot;0&quot; and &quot;1&quot; of Types)',['../kumi_identity.html',1,'kumi_glossary']]],
   ['only_3',['only',['../group__kumi__utility.html#ga26690952147eaa66ecf74378070ee53b',1,'kumi']]],
   ['operator_20kumi_3a_3astr_4',['str',['../structkumi_1_1label__t.html#ae04311b56f486908576c12a8ef8e9923',1,'kumi::label_t']]],
   ['operator_20std_3a_3aintegral_5fconstant_3c_20std_3a_3asize_5ft_2c_20n_20_3e_5',['integral_constant&lt; std::size_t, N &gt;',['../structkumi_1_1index__t.html#ad9eadb46e256efabde1b1b55a90533d7',1,'kumi::index_t']]],

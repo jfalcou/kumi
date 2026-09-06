@@ -8,6 +8,7 @@ var searchData=
   ['helper_20types_20and_20function_5',['Helper Types and function',['../group__kumi__functional.html',1,'']]],
   ['helper_20types_20and_20functions_6',['Helper Types and Functions',['../group__kumi__details.html',1,'Helper Types and Functions'],['../group__kumi__utility.html',1,'Helper Types and Functions']]],
   ['helper_20value_7',['Helper value',['../group__kumi__functional.html#autotoc_md12',1,'']]],
-  ['homogeneous_5fproduct_5ftype_8',['homogeneous_product_type',['../conceptkumi_1_1concepts_1_1homogeneous__product__type.html',1,'kumi::concepts']]],
-  ['howard_20correspondence_9',['The Curry-Howard Correspondence',['../kumi_introduction.html#curry_howard',1,'']]]
+  ['helpers_8',['Helpers',['../kumi_reference.html#autotoc_md156',1,'']]],
+  ['homogeneous_5fproduct_5ftype_9',['homogeneous_product_type',['../conceptkumi_1_1concepts_1_1homogeneous__product__type.html',1,'kumi::concepts']]],
+  ['howard_20correspondence_10',['The Curry-Howard Correspondence',['../kumi_introduction.html#curry_howard',1,'']]]
 ];

@@ -23,7 +23,7 @@ var searchData=
   ['for_5feach_20',['for_each',['../group__kumi__transforms.html#ga58c4bb5e62083b4b37396d39c6446164',1,'kumi']]],
   ['forward_5fas_5frecord_21',['forward_as_record',['../group__kumi__record__related.html#gaa0d291bc5523e9e07e5c38559e0dcb3d',1,'kumi']]],
   ['forward_5fas_5ftuple_22',['forward_as_tuple',['../group__kumi__tuple__related.html#gac167a1000c9c61798b7d8c684f3c804b',1,'kumi']]],
-  ['foundations_23',['Type Theoretic Foundations',['../kumi_introduction.html',1,'']]],
+  ['foundations_23',['Type Theoretic Foundations',['../kumi_introduction.html',1,'kumi_glossary']]],
   ['from_20the_20source_24',['Install from the source',['../kumi_setup.html#setup-source',1,'']]],
   ['from_5frecord_25',['from_record',['../group__kumi__record__related.html#ga772ac1518ac3bbe1627db9c00f56abdd',1,'kumi']]],
   ['from_5ftuple_26',['from_tuple',['../group__kumi__tuple__related.html#ga81cca523672d8799bbe35fa4f07dd61f',1,'kumi']]],

@@ -24,28 +24,28 @@
 */
 var menudata={children:[
 {text:"Main Page",url:"index.html"},
-{text:"About The Library",url:"usergroup0.html",children:[
+{text:"About The Library",url:"kumi_setup.html",children:[
 {text:"Setup",url:"kumi_setup.html"},
 {text:"Changelog",url:"kumi_changelog.html"},
 {text:"Licence",url:"kumi_licence.html"}]},
-{text:"Glossary",url:"usergroup1.html",children:[
-{text:"Type Theory",url:"usergroup2.html",children:[
-{text:"Introduction",url:"kumi_introduction.html"},
-{text:"Identity Types",url:"kumi_identity.html"},
-{text:"Product Types",url:"kumi_product.html"}]},
-{text:"C++ Vocabulary",url:"kumi_cpp_spec.html"},
-{text:"Nomenclature",url:"kumi_nomenclature.html"}]},
-{text:"Reference Documentation",url:"usergroup3.html",children:[
-{text:"Types",url:"usergroup4.html",children:[
+{text:"Glossary",url:"kumi_glossary.html",children:[
+{text:"Type Theory",url:"kumi_introduction.html#kumi_introduction",children:[
+{text:"Introduction",url:"kumi_introduction.html#kumi_introduction"},
+{text:"Identity Types",url:"kumi_identity.html#kumi_identity"},
+{text:"Product Types",url:"kumi_product.html#kumi_product"}]},
+{text:"C++ Vocabulary",url:"kumi_cpp_spec.html#kumi_cpp_spec"},
+{text:"Nomenclature",url:"kumi_nomenclature.html#kumi_nomenclature"}]},
+{text:"Reference Documentation",url:"kumi_reference.html",children:[
+{text:"Types",url:"group__kumi__tuple__related.html",children:[
 {text:"Product Types and Functions",url:"group__kumi__tuple__related.html"},
 {text:"Record Types and Functions",url:"group__kumi__record__related.html"},
 {text:"Types",url:"group__kumi__types.html"}]},
-{text:"Algorithms",url:"usergroup5.html",children:[
+{text:"Algorithms",url:"group__kumi__transforms.html",children:[
 {text:"Transformations",url:"group__kumi__transforms.html"},
 {text:"Queries",url:"group__kumi__queries.html"},
 {text:"Generators",url:"group__kumi__generators.html"},
 {text:"Reductions",url:"group__kumi__reductions.html"}]},
-{text:"Helpers",url:"usergroup6.html",children:[
+{text:"Helpers",url:"group__kumi__traits.html",children:[
 {text:"Traits",url:"group__kumi__traits.html"},
 {text:"Concepts",url:"group__kumi__concepts.html"},
 {text:"Utility",url:"group__kumi__utility.html"},

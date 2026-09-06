@@ -4184,6 +4184,16 @@
     <docanchor file="kumi_cpp_spec.html" title="/__w/kumi/kumi/doc/glossary/cpp_vocabulary.md">md__2____w_2kumi_2kumi_2doc_2glossary_2cpp__vocabulary</docanchor>
   </compound>
   <compound kind="page">
+    <name>kumi_glossary</name>
+    <title>Glossary</title>
+    <filename>kumi_glossary.html</filename>
+    <subpage>kumi_introduction.html</subpage>
+    <subpage>kumi_identity.html</subpage>
+    <subpage>kumi_product.html</subpage>
+    <subpage>kumi_cpp_spec.html</subpage>
+    <subpage>kumi_nomenclature.html</subpage>
+  </compound>
+  <compound kind="page">
     <name>kumi_identity</name>
     <title>The Identity Elements (The &quot;0&quot; and &quot;1&quot; of Types)</title>
     <filename>kumi_identity.html</filename>
@@ -4218,6 +4228,11 @@
     <title>Licence</title>
     <filename>kumi_licence.html</filename>
     <docanchor file="kumi_licence.html" title="/__w/kumi/kumi/doc/licence.md">md__2____w_2kumi_2kumi_2doc_2licence</docanchor>
+  </compound>
+  <compound kind="page">
+    <name>kumi_reference</name>
+    <title>Reference Documentation</title>
+    <filename>kumi_reference.html</filename>
   </compound>
   <compound kind="page">
     <name>kumi_setup</name>

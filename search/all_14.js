@@ -15,7 +15,7 @@ var searchData=
   ['product_20type_20related_20concepts_12',['Product Type Related Concepts',['../group__kumi__concepts.html',1,'']]],
   ['product_20type_20related_20traits_13',['Product Type Related Traits',['../group__kumi__traits.html',1,'']]],
   ['product_20type_20transformations_14',['Product Type Transformations',['../group__kumi__transforms.html',1,'']]],
-  ['product_20types_15',['Product Types',['../kumi_product.html',1,'']]],
+  ['product_20types_15',['Product Types',['../kumi_product.html',1,'kumi_glossary']]],
   ['product_20types_20and_20associated_20functions_16',['Product Types and associated Functions',['../group__kumi__tuple__related.html',1,'']]],
   ['product_5ftype_17',['product_type',['../conceptkumi_1_1concepts_1_1product__type.html',1,'kumi::concepts']]],
   ['programming_20languages_20considerations_18',['Programming Languages Considerations',['../kumi_product.html#tuple_programming',1,'']]],

@@ -7,7 +7,7 @@ var searchData=
   ['fixes_4',['Fixes',['../kumi_changelog.html#autotoc_md104',1,'Bug Fixes'],['../kumi_changelog.html#autotoc_md109',1,'Bug Fixes'],['../kumi_changelog.html#autotoc_md113',1,'Bug Fixes'],['../kumi_changelog.html#autotoc_md118',1,'Bug Fixes']]],
   ['flawless_20fluorite_5',['Version 4.0 - Flawless Fluorite',['../kumi_changelog.html#autotoc_md96',1,'']]],
   ['fluorite_6',['Version 4.0 - Flawless Fluorite',['../kumi_changelog.html#autotoc_md96',1,'']]],
-  ['foundations_7',['Type Theoretic Foundations',['../kumi_introduction.html',1,'']]],
+  ['foundations_7',['Type Theoretic Foundations',['../kumi_introduction.html',1,'kumi_glossary']]],
   ['from_20the_20source_8',['Install from the source',['../kumi_setup.html#setup-source',1,'']]],
   ['fundamentals_9',['Fundamentals',['../kumi_introduction.html#fundamentals',1,'']]]
 ];

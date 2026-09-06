@@ -14,7 +14,7 @@ var searchData=
   ['sized_5fproduct_5ftype_5for_5fmore_11',['sized_product_type_or_more',['../conceptkumi_1_1concepts_1_1sized__product__type__or__more.html',1,'kumi::concepts']]],
   ['slicer_12',['slicer',['../group__kumi__functional.html#ga3201caae7402c136e332d664a439913e',1,'kumi::function']]],
   ['source_13',['Install from the source',['../kumi_setup.html#setup-source',1,'']]],
-  ['specific_20terms_14',['C++ Specific Terms',['../kumi_cpp_spec.html',1,'']]],
+  ['specific_20terms_14',['C++ Specific Terms',['../kumi_cpp_spec.html',1,'kumi_glossary']]],
   ['specific_20transformations_15',['Specific Transformations',['../group__kumi__record__transforms.html',1,'Record Type Specific Transformations'],['../group__kumi__tuple__transforms.html',1,'Tuple Type Specific Transformations']]],
   ['split_16',['split',['../group__kumi__generators.html#gadb81f4533e81830674c3fc9577d3de93',1,'kumi']]],
   ['splitter_17',['splitter',['../group__kumi__functional.html#gae7fa4a3e9b7b6fd79f177f6126bcef2b',1,'kumi::function']]],

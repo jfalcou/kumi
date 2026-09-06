@@ -1,7 +1,7 @@
 var searchData=
 [
   ['element_0',['Element',['../kumi_nomenclature.html#autotoc_md140',1,'']]],
-  ['elements_20the_200_20and_201_20of_20types_1',['The Identity Elements (The &quot;0&quot; and &quot;1&quot; of Types)',['../kumi_identity.html',1,'']]],
+  ['elements_20the_200_20and_201_20of_20types_1',['The Identity Elements (The &quot;0&quot; and &quot;1&quot; of Types)',['../kumi_identity.html',1,'kumi_glossary']]],
   ['empty_20base_20optimization_2',['Empty Base Optimization',['../kumi_cpp_spec.html#autotoc_md122',1,'']]],
   ['empty_20type_20_3a_200_3',['Empty Type : \\( (0 / \\bot) \\)',['../kumi_identity.html#kumi_empty',1,'']]],
   ['epidote_4',['Version 3.1 - Exquisite Epidote',['../kumi_changelog.html#autotoc_md100',1,'']]],
