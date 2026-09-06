@@ -7,9 +7,21 @@
 //==================================================================================================
 #pragma once
 
-#include <iosfwd>
+#include <sstream>
 
 using namespace kumi::literals;
+
+namespace kumi
+{
+  // TTS renders anything it does not know as a byte dump. kumi already prints a product type, so a
+  // report shows exactly what the library itself would.
+  template<kumi::concepts::product_type T> tts::text to_text(T const& t)
+  {
+    std::ostringstream os;
+    os << t;
+    return tts::text(os.str().c_str());
+  }
+}
 
 //==============================================================================================
 //! Custom Keywords for record/tuple construction
