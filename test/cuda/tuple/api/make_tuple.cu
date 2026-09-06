@@ -25,6 +25,18 @@ namespace
     kumi::get<0>(copy) = 42;
     flags[4]           = (kumi::get<0>(copy) == 42) && (kumi::get<0>(t) == 1);
   }
+
+  // Constant evaluation is where nvcc and clang diverge most, and a kernel is where it is never tested.
+  __global__ void constant_evaluation(char* flags)
+  {
+    constexpr auto t = kumi::make_tuple(1, 2.f, '3');
+
+    flags[0] = (t.size() == 3);
+    flags[1] = (kumi::get<0>(t) == 1);
+
+    static_assert(kumi::get<2>(kumi::make_tuple(1, 2.f, '3')) == '3');
+    flags[2] = true;
+  }
 }
 
 TTS_CASE("Check construction of kumi::tuple via device make_tuple")
@@ -37,4 +49,14 @@ TTS_CASE("Check construction of kumi::tuple via device make_tuple")
   TTS_EXPECT(r[2]);
   TTS_EXPECT(r[3]);
   TTS_EXPECT(r[4]);
+};
+
+TTS_CASE("Check construction of kumi::tuple via constexpr device make_tuple")
+{
+  auto r = run_on_device(constant_evaluation, 3);
+
+  TTS_EXPECT(r.ran);
+  TTS_EXPECT(r[0]);
+  TTS_EXPECT(r[1]);
+  TTS_EXPECT(r[2]);
 };
