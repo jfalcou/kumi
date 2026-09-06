@@ -93,7 +93,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  inline constexpr transpose_t transpose{};
+  KUMI_VARIABLE_ABI constexpr transpose_t transpose{};
 
   namespace result
   {

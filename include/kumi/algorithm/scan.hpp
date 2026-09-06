@@ -206,7 +206,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  inline constexpr inclusive_scan_left_t inclusive_scan_left{};
+  KUMI_VARIABLE_ABI constexpr inclusive_scan_left_t inclusive_scan_left{};
 
   //====================================================================================================================
   /**
@@ -273,7 +273,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  inline constexpr exclusive_scan_left_t exclusive_scan_left{};
+  KUMI_VARIABLE_ABI constexpr exclusive_scan_left_t exclusive_scan_left{};
 
   //====================================================================================================================
   /**
@@ -340,7 +340,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  inline constexpr inclusive_scan_right_t inclusive_scan_right{};
+  KUMI_VARIABLE_ABI constexpr inclusive_scan_right_t inclusive_scan_right{};
 
   //====================================================================================================================
   /**
@@ -407,7 +407,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  inline constexpr exclusive_scan_right_t exclusive_scan_right{};
+  KUMI_VARIABLE_ABI constexpr exclusive_scan_right_t exclusive_scan_right{};
 
   namespace result
   {

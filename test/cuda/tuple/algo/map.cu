@@ -13,23 +13,16 @@
 
 namespace
 {
-  __global__ void twice(char* flags)
+  __global__ void twice(kumi::tuple<int, int, int>* out)
   {
-    auto t = kumi::make_tuple(1, 2, 3);
-    auto u = kumi::map([](auto v) { return v * 2; }, t);
-
-    flags[0] = (kumi::get<0>(u) == 2);
-    flags[1] = (kumi::get<1>(u) == 4);
-    flags[2] = (kumi::get<2>(u) == 6);
+    *out = kumi::map([](auto v) { return v * 2; }, kumi::make_tuple(1, 2, 3));
   }
 }
 
 TTS_CASE("Check map(f, tuple) device behavior")
 {
-  auto r = run_on_device(twice, 3);
+  kumi::tuple<int, int, int> out;
 
-  TTS_EXPECT(r.ran);
-  TTS_EXPECT(r[0]);
-  TTS_EXPECT(r[1]);
-  TTS_EXPECT(r[2]);
+  TTS_EXPECT(run_on_device(twice, out));
+  TTS_EQUAL(out, (kumi::tuple{2, 4, 6}));
 };

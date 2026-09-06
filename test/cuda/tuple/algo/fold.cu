@@ -13,20 +13,19 @@
 
 namespace
 {
-  __global__ void sums(char* flags)
+  __global__ void sums(kumi::tuple<int, int>* out)
   {
     auto t = kumi::make_tuple(1, 2, 3);
+    auto add = [](auto a, auto b) { return a + b; };
 
-    flags[0] = (kumi::fold_left([](auto a, auto b) { return a + b; }, t, 0) == 6);
-    flags[1] = (kumi::fold_right([](auto a, auto b) { return a + b; }, t, 0) == 6);
+    *out = {kumi::fold_left(add, t, 0), kumi::fold_right(add, t, 0)};
   }
 }
 
 TTS_CASE("Check tuple::fold_left device behavior")
 {
-  auto r = run_on_device(sums, 2);
+  kumi::tuple<int, int> out;
 
-  TTS_EXPECT(r.ran);
-  TTS_EXPECT(r[0]);
-  TTS_EXPECT(r[1]);
+  TTS_EXPECT(run_on_device(sums, out));
+  TTS_EQUAL(out, (kumi::tuple{6, 6}));
 };

@@ -127,7 +127,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  inline constexpr contains_t contains{};
+  KUMI_VARIABLE_ABI constexpr contains_t contains{};
 
   //====================================================================================================================
   /**
@@ -181,7 +181,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  inline constexpr contains_any_t contains_any{};
+  KUMI_VARIABLE_ABI constexpr contains_any_t contains_any{};
 
   //====================================================================================================================
   /**
@@ -235,7 +235,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  inline constexpr contains_only_t contains_only{};
+  KUMI_VARIABLE_ABI constexpr contains_only_t contains_only{};
 
   //====================================================================================================================
   /**
@@ -289,7 +289,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  inline constexpr contains_none_t contains_none{};
+  KUMI_VARIABLE_ABI constexpr contains_none_t contains_none{};
 
   namespace result
   {

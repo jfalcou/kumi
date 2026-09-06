@@ -20,7 +20,7 @@ namespace kumi
       }
     };
 
-    inline constexpr minmax_case_t minmax_case{};
+    KUMI_VARIABLE_ABI constexpr minmax_case_t minmax_case{};
 
     template<typename F, typename T, typename V, std::size_t... I>
     KUMI_HIDDEN_ABI constexpr auto minmax_(kumi::_::adl_tag_t, F f, T&& t, V v, std::index_sequence<I...>)
@@ -178,7 +178,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  inline constexpr max_t max{};
+  KUMI_VARIABLE_ABI constexpr max_t max{};
 
   //====================================================================================================================
   /**
@@ -232,7 +232,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  inline constexpr max_flat_t max_flat{};
+  KUMI_VARIABLE_ABI constexpr max_flat_t max_flat{};
 
   //====================================================================================================================
   /**
@@ -291,7 +291,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  inline constexpr min_t min{};
+  KUMI_VARIABLE_ABI constexpr min_t min{};
 
   //====================================================================================================================
   /**
@@ -345,7 +345,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  inline constexpr min_flat_t min_flat{};
+  KUMI_VARIABLE_ABI constexpr min_flat_t min_flat{};
 
   namespace result
   {

@@ -14,20 +14,19 @@
 namespace
 {
   // Issue #192: a lambda through the requires clause of kumi::apply.
-  __global__ void sum(char* flags)
+  __global__ void sum(kumi::tuple<int, std::size_t>* out)
   {
     auto t = kumi::make_tuple(1, 2, 3);
 
-    flags[0] = (kumi::apply([](auto... v) { return (v + ...); }, t) == 6);
-    flags[1] = (kumi::apply([](auto... v) { return sizeof...(v); }, t) == 3);
+    *out = {kumi::apply([](auto... v) { return (v + ...); }, t),
+            kumi::apply([](auto... v) { return sizeof...(v); }, t)};
   }
 }
 
 TTS_CASE("Check apply device behavior")
 {
-  auto r = run_on_device(sum, 2);
+  kumi::tuple<int, std::size_t> out;
 
-  TTS_EXPECT(r.ran);
-  TTS_EXPECT(r[0]);
-  TTS_EXPECT(r[1]);
+  TTS_EXPECT(run_on_device(sum, out));
+  TTS_EQUAL(out, (kumi::tuple{6, 3ULL}));
 };
