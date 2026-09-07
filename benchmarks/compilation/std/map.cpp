@@ -5,15 +5,16 @@
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================
+#include <functional>
 #include <tuple>
 #include "payload.hpp"
 
-// The standard has no map: applying the function under std::apply and rebuilding a tuple from the pack
-// is the shortest form, and the one that instantiates the least.
+// On par with kumi::map: the same callable, one std::invoke per element, and a tuple rebuilt from the results.
 template<std::size_t... I> auto run(std::index_sequence<I...>)
 {
   std::tuple<element<I>...> t;
-  auto u = std::apply([](auto const&... e) { return std::make_tuple(e.value * 2 ...); }, t);
+  auto f = [](auto const& e) { return e.value * 2; };
+  auto u = std::apply([&](auto const&... e) { return std::make_tuple(std::invoke(f, e)...); }, t);
 
   return std::get<0>(u);
 }
