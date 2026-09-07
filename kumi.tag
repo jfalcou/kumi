@@ -2048,17 +2048,17 @@
       <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="variable">
-      <type>constexpr all_of_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr all_of_t</type>
       <name>all_of</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>gaffdb8063b72f079107cd8a7e293ba298</anchor>
+      <anchor>ga536d0c5ec89c70aad3e19e8406899c2e</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr all_unique_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr all_unique_t</type>
       <name>all_unique</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga71bbbe8da94919e242bd3ded80ab6776</anchor>
+      <anchor>ga44cd4dee63d1a1b879f1b04325894802</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -2076,73 +2076,73 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr any_of_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr any_of_t</type>
       <name>any_of</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>ga79566892f932a2308e23b5f21b95086f</anchor>
+      <anchor>ga25dabd27e6c9d65ec23495d03ff75c1e</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr apply_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr apply_t</type>
       <name>apply</name>
       <anchorfile>group__kumi__transforms.html</anchorfile>
-      <anchor>ga4c69a49971100b7bc9c7effd7c43f191</anchor>
+      <anchor>ga8d82105729a5fd173570090d44b66679</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr apply_field_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr apply_field_t</type>
       <name>apply_field</name>
       <anchorfile>group__kumi__transforms.html</anchorfile>
-      <anchor>ga992364930a4a5a5b64b26730773536ab</anchor>
+      <anchor>ga4d047b6d996c1c6efcef7854ed2255fc</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr as_flat_ptr_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr as_flat_ptr_t</type>
       <name>as_flat_ptr</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga6368952a2f6a506de75aa0e01569eab6</anchor>
+      <anchor>ga12aa619e4f9fb8393240d136fa060475</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr back_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr back_t</type>
       <name>back</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>gae635e0c094282372ff5393840b6f52c2</anchor>
+      <anchor>ga5b671937a03574ce9e2992913cba8172</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr bit_and_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr bit_and_t</type>
       <name>bit_and</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>ga17c3d8bab8099c4756a8b6fb4e9d4380</anchor>
+      <anchor>gafae273d3a52ad3ae7867b4f632fede06</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr bit_or_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr bit_or_t</type>
       <name>bit_or</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>ga74fa99e87e80d8bb15ea6694e381bd49</anchor>
+      <anchor>ga27cbe77c62c366ea7ccc45a2369f97dd</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr bit_xor_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr bit_xor_t</type>
       <name>bit_xor</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>ga2797c81f32afec2f2ce4856a5155807c</anchor>
+      <anchor>ga0fe05c9619edaa280efbf1cc7c9ec44b</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr cartesian_product_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr cartesian_product_t</type>
       <name>cartesian_product</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga39128fad2c11b9fea55558222a87721c</anchor>
+      <anchor>ga59c6f57141b8204d2852a06c6371b8df</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr cat_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr cat_t</type>
       <name>cat</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga4550222df58187f71b1b1347500e324a</anchor>
+      <anchor>ga4a2e8c63cbceb415681df0907350166d</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -2153,10 +2153,10 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr compress_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr compress_t</type>
       <name>compress</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>gaa9d6196838118af0a837160d8bbf532c</anchor>
+      <anchor>ga793da33005b67765b65331b20e5be952</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -2167,66 +2167,66 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr contains_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr contains_t</type>
       <name>contains</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>ga3a9b6e2d0fbdace9e57b3846d24a3b57</anchor>
+      <anchor>gaa47712d862c2b6925d3c06520a5cfb56</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr contains_any_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr contains_any_t</type>
       <name>contains_any</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>ga639f59cb294f670d2f2c468c4ef204d3</anchor>
+      <anchor>gae661d95a784f3149663a30116c5e4ac0</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr contains_none_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr contains_none_t</type>
       <name>contains_none</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>ga7b1bbe80c513abfdedd1196f027601d2</anchor>
+      <anchor>gabbb122e8a78d7877c5faa618ce50f08f</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr contains_only_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr contains_only_t</type>
       <name>contains_only</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>ga36431211bf121466392b290459a45498</anchor>
+      <anchor>gacd0a76c38445d6ee6640e5780036b91a</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr count_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr count_t</type>
       <name>count</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>ga8240f113b5feb1dcc826949f28f17a47</anchor>
+      <anchor>gaccee652b6c443bcba8200f958bb14e1f</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr count_if_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr count_if_t</type>
       <name>count_if</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>gaec0fb27dc2250b97648bc52b8e83b561</anchor>
+      <anchor>ga26bc2672ccef4edd9ee1a0fbe4fcdd71</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr exclusive_scan_left_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr exclusive_scan_left_t</type>
       <name>exclusive_scan_left</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>ga529950ddf6573473b2f9b7ec886c61f9</anchor>
+      <anchor>ga94ba21cf4ec55e6ee1048a16c66e19c1</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr exclusive_scan_right_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr exclusive_scan_right_t</type>
       <name>exclusive_scan_right</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>gaa66bb36d76db2d7854196bc156fb35c2</anchor>
+      <anchor>ga3d3a79c3b7ea1259cb948c7fb6f260d9</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr extract_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr extract_t</type>
       <name>extract</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga1a7617bafd6f8598cca8e7e6a5c6f383</anchor>
+      <anchor>ga436df48ea795457466c659ad8f05758e</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -2251,45 +2251,45 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr flatten_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr flatten_t</type>
       <name>flatten</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga49acccc42ec8af7b96b63e8f38796df2</anchor>
+      <anchor>ga05fc8b5c317c41d4aa54fc0e90ed0172</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr flatten_all_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr flatten_all_t</type>
       <name>flatten_all</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>gaa780fd338fb61c86f226ae05adfaf426</anchor>
+      <anchor>gac3f4cc02742e29757d33f6e904a55235</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr fold_left_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr fold_left_t</type>
       <name>fold_left</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>gac7fc6bc4e0aff96cca71f0a64b0f2aa1</anchor>
+      <anchor>gaa5e31431264f714657c104d84d7b0f3e</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr fold_right_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr fold_right_t</type>
       <name>fold_right</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>gaee418c18e09e3b1789c23ec00681db42</anchor>
+      <anchor>ga641c9bba411a710e134241d12f9f1fbb</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr for_each_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr for_each_t</type>
       <name>for_each</name>
       <anchorfile>group__kumi__transforms.html</anchorfile>
-      <anchor>ga58c4bb5e62083b4b37396d39c6446164</anchor>
+      <anchor>ga2d4ee5c43118e4abf41014e539a3a1ca</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr front_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr front_t</type>
       <name>front</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>gaa1618c96c4c7003afeccfb19e25b35bb</anchor>
+      <anchor>ga1c474406a3e29cd4c955dd735dfb0cad</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -2314,17 +2314,17 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr inclusive_scan_left_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr inclusive_scan_left_t</type>
       <name>inclusive_scan_left</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>ga1389eee6fb884b34ed4957884ecd39a1</anchor>
+      <anchor>ga12b0bfc8d8cb087e200f2dd2716fae7b</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr inclusive_scan_right_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr inclusive_scan_right_t</type>
       <name>inclusive_scan_right</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>gab55848ee4bd1b0cc0f22015a2bac5047</anchor>
+      <anchor>gab0ac9653edc241f8c8e1dee24936165e</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -2335,10 +2335,10 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr inner_product_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr inner_product_t</type>
       <name>inner_product</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>ga712c681a51bdbc86d41b160deddd2e1d</anchor>
+      <anchor>gacd22add376c263544e5432b573b7a4af</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -2412,45 +2412,45 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr locate_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr locate_t</type>
       <name>locate</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>ga39f807d6c2b8909a712d431acde4153e</anchor>
+      <anchor>ga8d7d014be1ca87e1ade78fbf7631bc80</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr map_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr map_t</type>
       <name>map</name>
       <anchorfile>group__kumi__transforms.html</anchorfile>
-      <anchor>gaeaba737291ba1085d77272eae38a016e</anchor>
+      <anchor>ga9582757ceb8daf344685ca4dd6605d15</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr map_field_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr map_field_t</type>
       <name>map_field</name>
       <anchorfile>group__kumi__record__transforms.html</anchorfile>
-      <anchor>gafe68ca583e3e822b20f60ff35e5aa9d3</anchor>
+      <anchor>ga21f771a07041a7a70be8f03ef59ddbe4</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr map_index_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr map_index_t</type>
       <name>map_index</name>
       <anchorfile>group__kumi__tuple__transforms.html</anchorfile>
-      <anchor>ga64a8c36072828fb7b724ba0ab8fc59bc</anchor>
+      <anchor>ga30bc4999bd377b4bac9914d23876a8be</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr map_reduce_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr map_reduce_t</type>
       <name>map_reduce</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>ga396afbfbcefa48f06ad76a34b6f0b523</anchor>
+      <anchor>ga945f24818111ac1fa6d49b30740c18dd</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr max_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr max_t</type>
       <name>max</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>gab76e53ad197280669806cae2c0cc130c</anchor>
+      <anchor>gacd3e69b77d12d2ee996796294d516c43</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -2461,10 +2461,10 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr min_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr min_t</type>
       <name>min</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>gaafd0c178628f6f756bf0d73a34e75b2f</anchor>
+      <anchor>gad316ea42b32804ab086825eefdb4601a</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -2475,10 +2475,10 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr none_of_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr none_of_t</type>
       <name>none_of</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>ga26e030c97733248f67dd2c8fbf527602</anchor>
+      <anchor>ga99734768fc9043f129f9f68213920116</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -2496,31 +2496,31 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr pop_front_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr pop_front_t</type>
       <name>pop_front</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga38d1ddeb5090405e79e9b7d898a85133</anchor>
+      <anchor>ga9e7a82fbd0e84ec50b4f93b31729aa0b</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr prod_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr prod_t</type>
       <name>prod</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>ga6c139ebafaebc0f7dbca2fd57aee943c</anchor>
+      <anchor>ga47864fd549d6efc837925aab74e8717b</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr push_front_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr push_front_t</type>
       <name>push_front</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>gad4bd53f162f63af0cbfbd68d8adb5d5c</anchor>
+      <anchor>gaaf546d47975e0499409f249074291581</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr reduce_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr reduce_t</type>
       <name>reduce</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>gaf7efbfa530d2396e2ed230cc03e4046e</anchor>
+      <anchor>ga0a6eb7cdd0f2a2cd71bf9e53747ef82b</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -2531,10 +2531,10 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr remove_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr remove_t</type>
       <name>remove</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga0f52ba0b24ce54052784df91c54ac233</anchor>
+      <anchor>ga57a23786d1c6cab5aef29aaf4fd5c478</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -2552,10 +2552,10 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr reverse_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr reverse_t</type>
       <name>reverse</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga48f6e5775e61dca804eda8b0bd354d6f</anchor>
+      <anchor>ga36995fccf531b895e85e8f643643f1f3</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -2580,17 +2580,17 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr split_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr split_t</type>
       <name>split</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>gadb81f4533e81830674c3fc9577d3de93</anchor>
+      <anchor>gae1acaabcf65546a19904bd57e226cff9</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr sum_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr sum_t</type>
       <name>sum</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>ga3e8b585399de360c3ab55efc2fa0ed8c</anchor>
+      <anchor>gaa72daa762cddca6f8001e466c3cb3e90</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -2601,17 +2601,17 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr transpose_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr transpose_t</type>
       <name>transpose</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>gaef527bdd76c70e7fded23a9759428f5c</anchor>
+      <anchor>ga549fe82222ad2de9bc68d716f489e17c</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr unique_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr unique_t</type>
       <name>unique</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga6479cba59ee95d4a0779e94993ab55a9</anchor>
+      <anchor>ga275366f451b89e600b861c041129310d</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -2622,24 +2622,24 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr zip_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr zip_t</type>
       <name>zip</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga71c21174289ba175a8d3d4b170cec05f</anchor>
+      <anchor>gafbd7624fc8afd3ddd0b96f27dc67dc44</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr zip_max_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr zip_max_t</type>
       <name>zip_max</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga0ce4823febfb00cfb197f73332ba7309</anchor>
+      <anchor>gafa6a13ae3571e58fd59dd1fc4860822e</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr zip_min_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr zip_min_t</type>
       <name>zip_min</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>gaf4b9aea3cee7c30fc6a516c632805423</anchor>
+      <anchor>ga965051fcb273747bb32eac78db78be9e</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -3409,115 +3409,115 @@
     <title>Product Type Generalized Reductions</title>
     <filename>group__kumi__reductions.html</filename>
     <member kind="variable">
-      <type>constexpr bit_and_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr bit_and_t</type>
       <name>kumi::bit_and</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>ga17c3d8bab8099c4756a8b6fb4e9d4380</anchor>
+      <anchor>gafae273d3a52ad3ae7867b4f632fede06</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr bit_or_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr bit_or_t</type>
       <name>kumi::bit_or</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>ga74fa99e87e80d8bb15ea6694e381bd49</anchor>
+      <anchor>ga27cbe77c62c366ea7ccc45a2369f97dd</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr bit_xor_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr bit_xor_t</type>
       <name>kumi::bit_xor</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>ga2797c81f32afec2f2ce4856a5155807c</anchor>
+      <anchor>ga0fe05c9619edaa280efbf1cc7c9ec44b</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr exclusive_scan_left_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr exclusive_scan_left_t</type>
       <name>kumi::exclusive_scan_left</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>ga529950ddf6573473b2f9b7ec886c61f9</anchor>
+      <anchor>ga94ba21cf4ec55e6ee1048a16c66e19c1</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr exclusive_scan_right_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr exclusive_scan_right_t</type>
       <name>kumi::exclusive_scan_right</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>gaa66bb36d76db2d7854196bc156fb35c2</anchor>
+      <anchor>ga3d3a79c3b7ea1259cb948c7fb6f260d9</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr fold_left_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr fold_left_t</type>
       <name>kumi::fold_left</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>gac7fc6bc4e0aff96cca71f0a64b0f2aa1</anchor>
+      <anchor>gaa5e31431264f714657c104d84d7b0f3e</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr fold_right_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr fold_right_t</type>
       <name>kumi::fold_right</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>gaee418c18e09e3b1789c23ec00681db42</anchor>
+      <anchor>ga641c9bba411a710e134241d12f9f1fbb</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr inclusive_scan_left_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr inclusive_scan_left_t</type>
       <name>kumi::inclusive_scan_left</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>ga1389eee6fb884b34ed4957884ecd39a1</anchor>
+      <anchor>ga12b0bfc8d8cb087e200f2dd2716fae7b</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr inclusive_scan_right_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr inclusive_scan_right_t</type>
       <name>kumi::inclusive_scan_right</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>gab55848ee4bd1b0cc0f22015a2bac5047</anchor>
+      <anchor>gab0ac9653edc241f8c8e1dee24936165e</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr inner_product_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr inner_product_t</type>
       <name>kumi::inner_product</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>ga712c681a51bdbc86d41b160deddd2e1d</anchor>
+      <anchor>gacd22add376c263544e5432b573b7a4af</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr map_reduce_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr map_reduce_t</type>
       <name>kumi::map_reduce</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>ga396afbfbcefa48f06ad76a34b6f0b523</anchor>
+      <anchor>ga945f24818111ac1fa6d49b30740c18dd</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr max_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr max_t</type>
       <name>kumi::max</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>gab76e53ad197280669806cae2c0cc130c</anchor>
+      <anchor>gacd3e69b77d12d2ee996796294d516c43</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr min_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr min_t</type>
       <name>kumi::min</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>gaafd0c178628f6f756bf0d73a34e75b2f</anchor>
+      <anchor>gad316ea42b32804ab086825eefdb4601a</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr prod_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr prod_t</type>
       <name>kumi::prod</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>ga6c139ebafaebc0f7dbca2fd57aee943c</anchor>
+      <anchor>ga47864fd549d6efc837925aab74e8717b</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr reduce_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr reduce_t</type>
       <name>kumi::reduce</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>gaf7efbfa530d2396e2ed230cc03e4046e</anchor>
+      <anchor>ga0a6eb7cdd0f2a2cd71bf9e53747ef82b</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr sum_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr sum_t</type>
       <name>kumi::sum</name>
       <anchorfile>group__kumi__reductions.html</anchorfile>
-      <anchor>ga3e8b585399de360c3ab55efc2fa0ed8c</anchor>
+      <anchor>gaa72daa762cddca6f8001e466c3cb3e90</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -3526,31 +3526,31 @@
     <title>Product Type Generators</title>
     <filename>group__kumi__generators.html</filename>
     <member kind="variable">
-      <type>constexpr all_unique_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr all_unique_t</type>
       <name>kumi::all_unique</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga71bbbe8da94919e242bd3ded80ab6776</anchor>
+      <anchor>ga44cd4dee63d1a1b879f1b04325894802</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr as_flat_ptr_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr as_flat_ptr_t</type>
       <name>kumi::as_flat_ptr</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga6368952a2f6a506de75aa0e01569eab6</anchor>
+      <anchor>ga12aa619e4f9fb8393240d136fa060475</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr cartesian_product_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr cartesian_product_t</type>
       <name>kumi::cartesian_product</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga39128fad2c11b9fea55558222a87721c</anchor>
+      <anchor>ga59c6f57141b8204d2852a06c6371b8df</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr cat_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr cat_t</type>
       <name>kumi::cat</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga4550222df58187f71b1b1347500e324a</anchor>
+      <anchor>ga4a2e8c63cbceb415681df0907350166d</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -3561,17 +3561,17 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr compress_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr compress_t</type>
       <name>kumi::compress</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>gaa9d6196838118af0a837160d8bbf532c</anchor>
+      <anchor>ga793da33005b67765b65331b20e5be952</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr extract_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr extract_t</type>
       <name>kumi::extract</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga1a7617bafd6f8598cca8e7e6a5c6f383</anchor>
+      <anchor>ga436df48ea795457466c659ad8f05758e</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -3596,17 +3596,17 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr flatten_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr flatten_t</type>
       <name>kumi::flatten</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga49acccc42ec8af7b96b63e8f38796df2</anchor>
+      <anchor>ga05fc8b5c317c41d4aa54fc0e90ed0172</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr flatten_all_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr flatten_all_t</type>
       <name>kumi::flatten_all</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>gaa780fd338fb61c86f226ae05adfaf426</anchor>
+      <anchor>gac3f4cc02742e29757d33f6e904a55235</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -3638,17 +3638,17 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr pop_front_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr pop_front_t</type>
       <name>kumi::pop_front</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga38d1ddeb5090405e79e9b7d898a85133</anchor>
+      <anchor>ga9e7a82fbd0e84ec50b4f93b31729aa0b</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr push_front_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr push_front_t</type>
       <name>kumi::push_front</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>gad4bd53f162f63af0cbfbd68d8adb5d5c</anchor>
+      <anchor>gaaf546d47975e0499409f249074291581</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -3659,10 +3659,10 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr remove_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr remove_t</type>
       <name>kumi::remove</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga0f52ba0b24ce54052784df91c54ac233</anchor>
+      <anchor>ga57a23786d1c6cab5aef29aaf4fd5c478</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -3680,10 +3680,10 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr reverse_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr reverse_t</type>
       <name>kumi::reverse</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga48f6e5775e61dca804eda8b0bd354d6f</anchor>
+      <anchor>ga36995fccf531b895e85e8f643643f1f3</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -3701,10 +3701,10 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr split_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr split_t</type>
       <name>kumi::split</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>gadb81f4533e81830674c3fc9577d3de93</anchor>
+      <anchor>gae1acaabcf65546a19904bd57e226cff9</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -3715,17 +3715,17 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr transpose_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr transpose_t</type>
       <name>kumi::transpose</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>gaef527bdd76c70e7fded23a9759428f5c</anchor>
+      <anchor>ga549fe82222ad2de9bc68d716f489e17c</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr unique_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr unique_t</type>
       <name>kumi::unique</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga6479cba59ee95d4a0779e94993ab55a9</anchor>
+      <anchor>ga275366f451b89e600b861c041129310d</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -3736,24 +3736,24 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr zip_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr zip_t</type>
       <name>kumi::zip</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga71c21174289ba175a8d3d4b170cec05f</anchor>
+      <anchor>gafbd7624fc8afd3ddd0b96f27dc67dc44</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr zip_max_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr zip_max_t</type>
       <name>kumi::zip_max</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>ga0ce4823febfb00cfb197f73332ba7309</anchor>
+      <anchor>gafa6a13ae3571e58fd59dd1fc4860822e</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr zip_min_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr zip_min_t</type>
       <name>kumi::zip_min</name>
       <anchorfile>group__kumi__generators.html</anchorfile>
-      <anchor>gaf4b9aea3cee7c30fc6a516c632805423</anchor>
+      <anchor>ga965051fcb273747bb32eac78db78be9e</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -3762,87 +3762,87 @@
     <title>Product Type Queries</title>
     <filename>group__kumi__queries.html</filename>
     <member kind="variable">
-      <type>constexpr all_of_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr all_of_t</type>
       <name>kumi::all_of</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>gaffdb8063b72f079107cd8a7e293ba298</anchor>
+      <anchor>ga536d0c5ec89c70aad3e19e8406899c2e</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr any_of_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr any_of_t</type>
       <name>kumi::any_of</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>ga79566892f932a2308e23b5f21b95086f</anchor>
+      <anchor>ga25dabd27e6c9d65ec23495d03ff75c1e</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr back_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr back_t</type>
       <name>kumi::back</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>gae635e0c094282372ff5393840b6f52c2</anchor>
+      <anchor>ga5b671937a03574ce9e2992913cba8172</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr contains_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr contains_t</type>
       <name>kumi::contains</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>ga3a9b6e2d0fbdace9e57b3846d24a3b57</anchor>
+      <anchor>gaa47712d862c2b6925d3c06520a5cfb56</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr contains_any_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr contains_any_t</type>
       <name>kumi::contains_any</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>ga639f59cb294f670d2f2c468c4ef204d3</anchor>
+      <anchor>gae661d95a784f3149663a30116c5e4ac0</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr contains_none_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr contains_none_t</type>
       <name>kumi::contains_none</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>ga7b1bbe80c513abfdedd1196f027601d2</anchor>
+      <anchor>gabbb122e8a78d7877c5faa618ce50f08f</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr contains_only_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr contains_only_t</type>
       <name>kumi::contains_only</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>ga36431211bf121466392b290459a45498</anchor>
+      <anchor>gacd0a76c38445d6ee6640e5780036b91a</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr count_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr count_t</type>
       <name>kumi::count</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>ga8240f113b5feb1dcc826949f28f17a47</anchor>
+      <anchor>gaccee652b6c443bcba8200f958bb14e1f</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr count_if_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr count_if_t</type>
       <name>kumi::count_if</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>gaec0fb27dc2250b97648bc52b8e83b561</anchor>
+      <anchor>ga26bc2672ccef4edd9ee1a0fbe4fcdd71</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr front_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr front_t</type>
       <name>kumi::front</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>gaa1618c96c4c7003afeccfb19e25b35bb</anchor>
+      <anchor>ga1c474406a3e29cd4c955dd735dfb0cad</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr locate_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr locate_t</type>
       <name>kumi::locate</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>ga39f807d6c2b8909a712d431acde4153e</anchor>
+      <anchor>ga8d7d014be1ca87e1ade78fbf7631bc80</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr none_of_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr none_of_t</type>
       <name>kumi::none_of</name>
       <anchorfile>group__kumi__queries.html</anchorfile>
-      <anchor>ga26e030c97733248f67dd2c8fbf527602</anchor>
+      <anchor>ga99734768fc9043f129f9f68213920116</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -4004,31 +4004,31 @@
     <subgroup>kumi_record_transforms</subgroup>
     <subgroup>kumi_tuple_transforms</subgroup>
     <member kind="variable">
-      <type>constexpr apply_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr apply_t</type>
       <name>kumi::apply</name>
       <anchorfile>group__kumi__transforms.html</anchorfile>
-      <anchor>ga4c69a49971100b7bc9c7effd7c43f191</anchor>
+      <anchor>ga8d82105729a5fd173570090d44b66679</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr apply_field_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr apply_field_t</type>
       <name>kumi::apply_field</name>
       <anchorfile>group__kumi__transforms.html</anchorfile>
-      <anchor>ga992364930a4a5a5b64b26730773536ab</anchor>
+      <anchor>ga4d047b6d996c1c6efcef7854ed2255fc</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr for_each_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr for_each_t</type>
       <name>kumi::for_each</name>
       <anchorfile>group__kumi__transforms.html</anchorfile>
-      <anchor>ga58c4bb5e62083b4b37396d39c6446164</anchor>
+      <anchor>ga2d4ee5c43118e4abf41014e539a3a1ca</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr map_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr map_t</type>
       <name>kumi::map</name>
       <anchorfile>group__kumi__transforms.html</anchorfile>
-      <anchor>gaeaba737291ba1085d77272eae38a016e</anchor>
+      <anchor>ga9582757ceb8daf344685ca4dd6605d15</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -4092,10 +4092,10 @@
     <title>Record Type Specific Transformations</title>
     <filename>group__kumi__record__transforms.html</filename>
     <member kind="variable">
-      <type>constexpr map_field_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr map_field_t</type>
       <name>kumi::map_field</name>
       <anchorfile>group__kumi__record__transforms.html</anchorfile>
-      <anchor>gafe68ca583e3e822b20f60ff35e5aa9d3</anchor>
+      <anchor>ga21f771a07041a7a70be8f03ef59ddbe4</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -4164,10 +4164,10 @@
     <title>Tuple Type Specific Transformations</title>
     <filename>group__kumi__tuple__transforms.html</filename>
     <member kind="variable">
-      <type>constexpr map_index_t</type>
+      <type>KUMI_VARIABLE_ABI constexpr map_index_t</type>
       <name>kumi::map_index</name>
       <anchorfile>group__kumi__tuple__transforms.html</anchorfile>
-      <anchor>ga64a8c36072828fb7b724ba0ab8fc59bc</anchor>
+      <anchor>ga30bc4999bd377b4bac9914d23876a8be</anchor>
       <arglist></arglist>
     </member>
   </compound>

@@ -16,7 +16,7 @@ var searchData=
   ['source_13',['Install from the source',['../kumi_setup.html#setup-source',1,'']]],
   ['specific_20terms_14',['C++ Specific Terms',['../kumi_cpp_spec.html',1,'kumi_glossary']]],
   ['specific_20transformations_15',['Specific Transformations',['../group__kumi__record__transforms.html',1,'Record Type Specific Transformations'],['../group__kumi__tuple__transforms.html',1,'Tuple Type Specific Transformations']]],
-  ['split_16',['split',['../group__kumi__generators.html#gadb81f4533e81830674c3fc9577d3de93',1,'kumi']]],
+  ['split_16',['split',['../group__kumi__generators.html#gae1acaabcf65546a19904bd57e226cff9',1,'kumi']]],
   ['splitter_17',['splitter',['../group__kumi__functional.html#gae7fa4a3e9b7b6fd79f177f6126bcef2b',1,'kumi::function']]],
   ['standalone_20setup_18',['Standalone setup',['../kumi_setup.html#setup-standalone',1,'']]],
   ['static_5fcontainer_19',['static_container',['../conceptkumi_1_1concepts_1_1static__container.html',1,'kumi::concepts']]],
@@ -24,6 +24,6 @@ var searchData=
   ['stored_5fmember_21',['stored_member',['../structkumi_1_1stored__member.html',1,'kumi']]],
   ['str_22',['str',['../structkumi_1_1str.html',1,'kumi']]],
   ['structural_20type_23',['Structural type',['../kumi_cpp_spec.html#autotoc_md126',1,'']]],
-  ['sum_24',['sum',['../group__kumi__reductions.html#ga3e8b585399de360c3ab55efc2fa0ed8c',1,'kumi']]],
+  ['sum_24',['sum',['../group__kumi__reductions.html#gaa72daa762cddca6f8001e466c3cb3e90',1,'kumi']]],
   ['summary_20table_25',['Summary Table',['../kumi_nomenclature.html#autotoc_md150',1,'']]]
 ];

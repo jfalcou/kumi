@@ -143,21 +143,21 @@ $(function(){initNavTree('group__kumi__generators.html','',''); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ga71bbbe8da94919e242bd3ded80ab6776" id="r_ga71bbbe8da94919e242bd3ded80ab6776"><td class="memItemLeft">constexpr all_unique_t&#160;</td><td class="memItemRight"><a class="el" href="#ga71bbbe8da94919e242bd3ded80ab6776">kumi::all_unique</a> {}</td></tr>
-<tr class="memdesc:ga71bbbe8da94919e242bd3ded80ab6776"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object returning a product type containing the values of the first occurence of each type in <span class="tt">t</span>.  <br /></td></tr>
-<tr class="memitem:ga6368952a2f6a506de75aa0e01569eab6" id="r_ga6368952a2f6a506de75aa0e01569eab6"><td class="memItemLeft">constexpr as_flat_ptr_t&#160;</td><td class="memItemRight"><a class="el" href="#ga6368952a2f6a506de75aa0e01569eab6">kumi::as_flat_ptr</a> {}</td></tr>
-<tr class="memdesc:ga6368952a2f6a506de75aa0e01569eab6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object converting recursively a product type of product types into a flat product type of pointers to each of its components.  <br /></td></tr>
-<tr class="memitem:ga39128fad2c11b9fea55558222a87721c" id="r_ga39128fad2c11b9fea55558222a87721c"><td class="memItemLeft">constexpr cartesian_product_t&#160;</td><td class="memItemRight"><a class="el" href="#ga39128fad2c11b9fea55558222a87721c">kumi::cartesian_product</a> {}</td></tr>
-<tr class="memdesc:ga39128fad2c11b9fea55558222a87721c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object returning the Cartesian Product of all elements of its arguments product types.  <br /></td></tr>
-<tr class="memitem:ga4550222df58187f71b1b1347500e324a" id="r_ga4550222df58187f71b1b1347500e324a"><td class="memItemLeft">constexpr cat_t&#160;</td><td class="memItemRight"><a class="el" href="#ga4550222df58187f71b1b1347500e324a">kumi::cat</a> {}</td></tr>
-<tr class="memdesc:ga4550222df58187f71b1b1347500e324a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object concatenating multiple product types into a single one.  <br /></td></tr>
+<tr class="memitem:ga44cd4dee63d1a1b879f1b04325894802" id="r_ga44cd4dee63d1a1b879f1b04325894802"><td class="memItemLeft">KUMI_VARIABLE_ABI constexpr all_unique_t&#160;</td><td class="memItemRight"><a class="el" href="#ga44cd4dee63d1a1b879f1b04325894802">kumi::all_unique</a> {}</td></tr>
+<tr class="memdesc:ga44cd4dee63d1a1b879f1b04325894802"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object returning a product type containing the values of the first occurence of each type in <span class="tt">t</span>.  <br /></td></tr>
+<tr class="memitem:ga12aa619e4f9fb8393240d136fa060475" id="r_ga12aa619e4f9fb8393240d136fa060475"><td class="memItemLeft">KUMI_VARIABLE_ABI constexpr as_flat_ptr_t&#160;</td><td class="memItemRight"><a class="el" href="#ga12aa619e4f9fb8393240d136fa060475">kumi::as_flat_ptr</a> {}</td></tr>
+<tr class="memdesc:ga12aa619e4f9fb8393240d136fa060475"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object converting recursively a product type of product types into a flat product type of pointers to each of its components.  <br /></td></tr>
+<tr class="memitem:ga59c6f57141b8204d2852a06c6371b8df" id="r_ga59c6f57141b8204d2852a06c6371b8df"><td class="memItemLeft">KUMI_VARIABLE_ABI constexpr cartesian_product_t&#160;</td><td class="memItemRight"><a class="el" href="#ga59c6f57141b8204d2852a06c6371b8df">kumi::cartesian_product</a> {}</td></tr>
+<tr class="memdesc:ga59c6f57141b8204d2852a06c6371b8df"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object returning the Cartesian Product of all elements of its arguments product types.  <br /></td></tr>
+<tr class="memitem:ga4a2e8c63cbceb415681df0907350166d" id="r_ga4a2e8c63cbceb415681df0907350166d"><td class="memItemLeft">KUMI_VARIABLE_ABI constexpr cat_t&#160;</td><td class="memItemRight"><a class="el" href="#ga4a2e8c63cbceb415681df0907350166d">kumi::cat</a> {}</td></tr>
+<tr class="memdesc:ga4a2e8c63cbceb415681df0907350166d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object concatenating multiple product types into a single one.  <br /></td></tr>
 <tr class="memitem:gaf4b0bcda72790c2ac55519adaf89456e" id="r_gaf4b0bcda72790c2ac55519adaf89456e"><td class="memTemplParams" colspan="2">template&lt;std::size_t N&gt; </td></tr>
 <tr class="memitem:gaf4b0bcda72790c2ac55519adaf89456e template"><td class="memItemLeft">constexpr tiles_t&lt; N, N &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gaf4b0bcda72790c2ac55519adaf89456e">kumi::chunks</a> {}</td></tr>
 <tr class="memdesc:gaf4b0bcda72790c2ac55519adaf89456e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object creating a tuple of product types, each containing <span class="tt">N</span> consecutive elements from <span class="tt">t</span>. Chunks starts at 0 and advance by <span class="tt">N</span> element each time.  <br /></td></tr>
-<tr class="memitem:gaa9d6196838118af0a837160d8bbf532c" id="r_gaa9d6196838118af0a837160d8bbf532c"><td class="memItemLeft">constexpr compress_t&#160;</td><td class="memItemRight"><a class="el" href="#gaa9d6196838118af0a837160d8bbf532c">kumi::compress</a> {}</td></tr>
-<tr class="memdesc:gaa9d6196838118af0a837160d8bbf532c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object converting a product type of product type into a single product type recursively, or returns the input.  <br /></td></tr>
-<tr class="memitem:ga1a7617bafd6f8598cca8e7e6a5c6f383" id="r_ga1a7617bafd6f8598cca8e7e6a5c6f383"><td class="memItemLeft">constexpr extract_t&#160;</td><td class="memItemRight"><a class="el" href="#ga1a7617bafd6f8598cca8e7e6a5c6f383">kumi::extract</a> {}</td></tr>
-<tr class="memdesc:ga1a7617bafd6f8598cca8e7e6a5c6f383"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object extracting a sub product type from a product type.  <br /></td></tr>
+<tr class="memitem:ga793da33005b67765b65331b20e5be952" id="r_ga793da33005b67765b65331b20e5be952"><td class="memItemLeft">KUMI_VARIABLE_ABI constexpr compress_t&#160;</td><td class="memItemRight"><a class="el" href="#ga793da33005b67765b65331b20e5be952">kumi::compress</a> {}</td></tr>
+<tr class="memdesc:ga793da33005b67765b65331b20e5be952"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object converting a product type of product type into a single product type recursively, or returns the input.  <br /></td></tr>
+<tr class="memitem:ga436df48ea795457466c659ad8f05758e" id="r_ga436df48ea795457466c659ad8f05758e"><td class="memItemLeft">KUMI_VARIABLE_ABI constexpr extract_t&#160;</td><td class="memItemRight"><a class="el" href="#ga436df48ea795457466c659ad8f05758e">kumi::extract</a> {}</td></tr>
+<tr class="memdesc:ga436df48ea795457466c659ad8f05758e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object extracting a sub product type from a product type.  <br /></td></tr>
 <tr class="memitem:gafd5d1c6d3d2fcb3c424826b8bddb8b0a" id="r_gafd5d1c6d3d2fcb3c424826b8bddb8b0a"><td class="memTemplParams" colspan="2">template&lt;std::size_t N&gt; </td></tr>
 <tr class="memitem:gafd5d1c6d3d2fcb3c424826b8bddb8b0a template"><td class="memItemLeft">constexpr fill_t&lt; N &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gafd5d1c6d3d2fcb3c424826b8bddb8b0a">kumi::fill</a> {}</td></tr>
 <tr class="memdesc:gafd5d1c6d3d2fcb3c424826b8bddb8b0a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object creating a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> containing <span class="tt">N</span> copies of <span class="tt">v</span>.  <br /></td></tr>
@@ -167,10 +167,10 @@ Variables</h2></td></tr>
 <tr class="memitem:ga750bc3d3425c955e1be6ef1b3879c314" id="r_ga750bc3d3425c955e1be6ef1b3879c314"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename &gt; typename Pred&gt; </td></tr>
 <tr class="memitem:ga750bc3d3425c955e1be6ef1b3879c314 template"><td class="memItemLeft">constexpr filter_not_t&lt; Pred &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga750bc3d3425c955e1be6ef1b3879c314">kumi::filter_not</a> {}</td></tr>
 <tr class="memdesc:ga750bc3d3425c955e1be6ef1b3879c314"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object filtering a product type over a predicate.  <br /></td></tr>
-<tr class="memitem:ga49acccc42ec8af7b96b63e8f38796df2" id="r_ga49acccc42ec8af7b96b63e8f38796df2"><td class="memItemLeft">constexpr flatten_t&#160;</td><td class="memItemRight"><a class="el" href="#ga49acccc42ec8af7b96b63e8f38796df2">kumi::flatten</a> {}</td></tr>
-<tr class="memdesc:ga49acccc42ec8af7b96b63e8f38796df2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object converting a product type of product types into a product type of all elements.  <br /></td></tr>
-<tr class="memitem:gaa780fd338fb61c86f226ae05adfaf426" id="r_gaa780fd338fb61c86f226ae05adfaf426"><td class="memItemLeft">constexpr flatten_all_t&#160;</td><td class="memItemRight"><a class="el" href="#gaa780fd338fb61c86f226ae05adfaf426">kumi::flatten_all</a> {}</td></tr>
-<tr class="memdesc:gaa780fd338fb61c86f226ae05adfaf426"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object converting recursively a product type of product types into a product type of all elements.  <br /></td></tr>
+<tr class="memitem:ga05fc8b5c317c41d4aa54fc0e90ed0172" id="r_ga05fc8b5c317c41d4aa54fc0e90ed0172"><td class="memItemLeft">KUMI_VARIABLE_ABI constexpr flatten_t&#160;</td><td class="memItemRight"><a class="el" href="#ga05fc8b5c317c41d4aa54fc0e90ed0172">kumi::flatten</a> {}</td></tr>
+<tr class="memdesc:ga05fc8b5c317c41d4aa54fc0e90ed0172"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object converting a product type of product types into a product type of all elements.  <br /></td></tr>
+<tr class="memitem:gac3f4cc02742e29757d33f6e904a55235" id="r_gac3f4cc02742e29757d33f6e904a55235"><td class="memItemLeft">KUMI_VARIABLE_ABI constexpr flatten_all_t&#160;</td><td class="memItemRight"><a class="el" href="#gac3f4cc02742e29757d33f6e904a55235">kumi::flatten_all</a> {}</td></tr>
+<tr class="memdesc:gac3f4cc02742e29757d33f6e904a55235"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object converting recursively a product type of product types into a product type of all elements.  <br /></td></tr>
 <tr class="memitem:gaba2efbda8df6baaccd4e35343d70163f" id="r_gaba2efbda8df6baaccd4e35343d70163f"><td class="memTemplParams" colspan="2">template&lt;std::size_t N&gt; </td></tr>
 <tr class="memitem:gaba2efbda8df6baaccd4e35343d70163f template"><td class="memItemLeft">constexpr generate_t&lt; N &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gaba2efbda8df6baaccd4e35343d70163f">kumi::generate</a> {}</td></tr>
 <tr class="memdesc:gaba2efbda8df6baaccd4e35343d70163f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object creating a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> containing <span class="tt">N</span> applications of the <span class="tt">f</span> Callable.  <br /></td></tr>
@@ -183,51 +183,51 @@ Variables</h2></td></tr>
 <tr class="memitem:ga4643116b2dc0dfbd0d15fee408a9c18c" id="r_ga4643116b2dc0dfbd0d15fee408a9c18c"><td class="memTemplParams" colspan="2">template&lt;template&lt; typename &gt; typename Pred&gt; </td></tr>
 <tr class="memitem:ga4643116b2dc0dfbd0d15fee408a9c18c template"><td class="memItemLeft">constexpr partition_t&lt; Pred &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga4643116b2dc0dfbd0d15fee408a9c18c">kumi::partition</a> {}</td></tr>
 <tr class="memdesc:ga4643116b2dc0dfbd0d15fee408a9c18c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object partitionning a product type over a predicate.  <br /></td></tr>
-<tr class="memitem:ga38d1ddeb5090405e79e9b7d898a85133" id="r_ga38d1ddeb5090405e79e9b7d898a85133"><td class="memItemLeft">constexpr pop_front_t&#160;</td><td class="memItemRight"><a class="el" href="#ga38d1ddeb5090405e79e9b7d898a85133">kumi::pop_front</a> {}</td></tr>
-<tr class="memdesc:ga38d1ddeb5090405e79e9b7d898a85133"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object removing the first (if any) element of <span class="tt">t</span>.  <br /></td></tr>
-<tr class="memitem:gad4bd53f162f63af0cbfbd68d8adb5d5c" id="r_gad4bd53f162f63af0cbfbd68d8adb5d5c"><td class="memItemLeft">constexpr push_front_t&#160;</td><td class="memItemRight"><a class="el" href="#gad4bd53f162f63af0cbfbd68d8adb5d5c">kumi::push_front</a> {}</td></tr>
-<tr class="memdesc:gad4bd53f162f63af0cbfbd68d8adb5d5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object constructing a product type by adding a value <span class="tt">v</span> at the beginning of <span class="tt">t</span>.  <br /></td></tr>
+<tr class="memitem:ga9e7a82fbd0e84ec50b4f93b31729aa0b" id="r_ga9e7a82fbd0e84ec50b4f93b31729aa0b"><td class="memItemLeft">KUMI_VARIABLE_ABI constexpr pop_front_t&#160;</td><td class="memItemRight"><a class="el" href="#ga9e7a82fbd0e84ec50b4f93b31729aa0b">kumi::pop_front</a> {}</td></tr>
+<tr class="memdesc:ga9e7a82fbd0e84ec50b4f93b31729aa0b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object removing the first (if any) element of <span class="tt">t</span>.  <br /></td></tr>
+<tr class="memitem:gaaf546d47975e0499409f249074291581" id="r_gaaf546d47975e0499409f249074291581"><td class="memItemLeft">KUMI_VARIABLE_ABI constexpr push_front_t&#160;</td><td class="memItemRight"><a class="el" href="#gaaf546d47975e0499409f249074291581">kumi::push_front</a> {}</td></tr>
+<tr class="memdesc:gaaf546d47975e0499409f249074291581"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object constructing a product type by adding a value <span class="tt">v</span> at the beginning of <span class="tt">t</span>.  <br /></td></tr>
 <tr class="memitem:ga3594f15dbfba2f6fda0afc8d1542c449" id="r_ga3594f15dbfba2f6fda0afc8d1542c449"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1projection__map.html">kumi::concepts::projection_map</a> auto Projections&gt; </td></tr>
 <tr class="memitem:ga3594f15dbfba2f6fda0afc8d1542c449 template"><td class="memItemLeft">constexpr reindex_t&lt; Projections &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga3594f15dbfba2f6fda0afc8d1542c449">kumi::reindex</a> {}</td></tr>
 <tr class="memdesc:ga3594f15dbfba2f6fda0afc8d1542c449"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object reindex elements of a Product Type.  <br /></td></tr>
-<tr class="memitem:ga0f52ba0b24ce54052784df91c54ac233" id="r_ga0f52ba0b24ce54052784df91c54ac233"><td class="memItemLeft">constexpr remove_t&#160;</td><td class="memItemRight"><a class="el" href="#ga0f52ba0b24ce54052784df91c54ac233">kumi::remove</a> {}</td></tr>
-<tr class="memdesc:ga0f52ba0b24ce54052784df91c54ac233"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object removing a sub product type from a product type.  <br /></td></tr>
+<tr class="memitem:ga57a23786d1c6cab5aef29aaf4fd5c478" id="r_ga57a23786d1c6cab5aef29aaf4fd5c478"><td class="memItemLeft">KUMI_VARIABLE_ABI constexpr remove_t&#160;</td><td class="memItemRight"><a class="el" href="#ga57a23786d1c6cab5aef29aaf4fd5c478">kumi::remove</a> {}</td></tr>
+<tr class="memdesc:ga57a23786d1c6cab5aef29aaf4fd5c478"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object removing a sub product type from a product type.  <br /></td></tr>
 <tr class="memitem:ga32af967d7f453426ccd564d3a0b6c689" id="r_ga32af967d7f453426ccd564d3a0b6c689"><td class="memTemplParams" colspan="2">template&lt;std::size_t... I&gt; </td></tr>
 <tr class="memitem:ga32af967d7f453426ccd564d3a0b6c689 template"><td class="memItemLeft">constexpr reorder_t&lt; I... &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga32af967d7f453426ccd564d3a0b6c689">kumi::reorder</a> {}</td></tr>
 <tr class="memdesc:ga32af967d7f453426ccd564d3a0b6c689"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object reordering elements of a product type.  <br /></td></tr>
 <tr class="memitem:ga8c42552c8f93dad0b83a3903468d02c6" id="r_ga8c42552c8f93dad0b83a3903468d02c6"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier</a> auto... Name&gt; </td></tr>
 <tr class="memitem:ga8c42552c8f93dad0b83a3903468d02c6 template"><td class="memItemLeft">constexpr reorder_fields_t&lt; Name... &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga8c42552c8f93dad0b83a3903468d02c6">kumi::reorder_fields</a> {}</td></tr>
 <tr class="memdesc:ga8c42552c8f93dad0b83a3903468d02c6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object reordering elements of a Record Type.  <br /></td></tr>
-<tr class="memitem:ga48f6e5775e61dca804eda8b0bd354d6f" id="r_ga48f6e5775e61dca804eda8b0bd354d6f"><td class="memItemLeft">constexpr reverse_t&#160;</td><td class="memItemRight"><a class="el" href="#ga48f6e5775e61dca804eda8b0bd354d6f">kumi::reverse</a> {}</td></tr>
-<tr class="memdesc:ga48f6e5775e61dca804eda8b0bd354d6f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object reversing elements of a product type.  <br /></td></tr>
+<tr class="memitem:ga36995fccf531b895e85e8f643643f1f3" id="r_ga36995fccf531b895e85e8f643643f1f3"><td class="memItemLeft">KUMI_VARIABLE_ABI constexpr reverse_t&#160;</td><td class="memItemRight"><a class="el" href="#ga36995fccf531b895e85e8f643643f1f3">kumi::reverse</a> {}</td></tr>
+<tr class="memdesc:ga36995fccf531b895e85e8f643643f1f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object reversing elements of a product type.  <br /></td></tr>
 <tr class="memitem:gadbc56977f82e2eaefe486c0a9457f01c" id="r_gadbc56977f82e2eaefe486c0a9457f01c"><td class="memTemplParams" colspan="2">template&lt;std::size_t R&gt; </td></tr>
 <tr class="memitem:gadbc56977f82e2eaefe486c0a9457f01c template"><td class="memItemLeft">constexpr rotate_left_t&lt; R &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gadbc56977f82e2eaefe486c0a9457f01c">kumi::rotate_left</a> {}</td></tr>
 <tr class="memdesc:gadbc56977f82e2eaefe486c0a9457f01c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object.  <br /></td></tr>
 <tr class="memitem:gaffd5dbb36e1c70d2fc058ffe03afef3e" id="r_gaffd5dbb36e1c70d2fc058ffe03afef3e"><td class="memTemplParams" colspan="2">template&lt;std::size_t R&gt; </td></tr>
 <tr class="memitem:gaffd5dbb36e1c70d2fc058ffe03afef3e template"><td class="memItemLeft">constexpr rotate_right_t&lt; R &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gaffd5dbb36e1c70d2fc058ffe03afef3e">kumi::rotate_right</a> {}</td></tr>
 <tr class="memdesc:gaffd5dbb36e1c70d2fc058ffe03afef3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object.  <br /></td></tr>
-<tr class="memitem:gadb81f4533e81830674c3fc9577d3de93" id="r_gadb81f4533e81830674c3fc9577d3de93"><td class="memItemLeft">constexpr split_t&#160;</td><td class="memItemRight"><a class="el" href="#gadb81f4533e81830674c3fc9577d3de93">kumi::split</a> {}</td></tr>
-<tr class="memdesc:gadb81f4533e81830674c3fc9577d3de93"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object splitting a product type into two.  <br /></td></tr>
+<tr class="memitem:gae1acaabcf65546a19904bd57e226cff9" id="r_gae1acaabcf65546a19904bd57e226cff9"><td class="memItemLeft">KUMI_VARIABLE_ABI constexpr split_t&#160;</td><td class="memItemRight"><a class="el" href="#gae1acaabcf65546a19904bd57e226cff9">kumi::split</a> {}</td></tr>
+<tr class="memdesc:gae1acaabcf65546a19904bd57e226cff9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object splitting a product type into two.  <br /></td></tr>
 <tr class="memitem:ga3d1b4a8309328d854d7b6234fde3aeb0" id="r_ga3d1b4a8309328d854d7b6234fde3aeb0"><td class="memTemplParams" colspan="2">template&lt;std::size_t N, std::size_t O&gt; </td></tr>
 <tr class="memitem:ga3d1b4a8309328d854d7b6234fde3aeb0 template"><td class="memItemLeft">constexpr tiles_t&lt; N, O &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga3d1b4a8309328d854d7b6234fde3aeb0">kumi::tiles</a> {}</td></tr>
 <tr class="memdesc:ga3d1b4a8309328d854d7b6234fde3aeb0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object creating a tuple of product types, each containing <span class="tt">N</span> consecutive elements from <span class="tt">t</span>. Tiles starts at 0 and advance by <span class="tt">O</span> element each time.  <br /></td></tr>
-<tr class="memitem:gaef527bdd76c70e7fded23a9759428f5c" id="r_gaef527bdd76c70e7fded23a9759428f5c"><td class="memItemLeft">constexpr transpose_t&#160;</td><td class="memItemRight"><a class="el" href="#gaef527bdd76c70e7fded23a9759428f5c">kumi::transpose</a> {}</td></tr>
-<tr class="memdesc:gaef527bdd76c70e7fded23a9759428f5c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object transposing a product type of product types by shifting elements in their transposed position always returning a tuple as the external product type.  <br /></td></tr>
-<tr class="memitem:ga6479cba59ee95d4a0779e94993ab55a9" id="r_ga6479cba59ee95d4a0779e94993ab55a9"><td class="memItemLeft">constexpr unique_t&#160;</td><td class="memItemRight"><a class="el" href="#ga6479cba59ee95d4a0779e94993ab55a9">kumi::unique</a> {}</td></tr>
-<tr class="memdesc:ga6479cba59ee95d4a0779e94993ab55a9"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object returning a product type with consecutive duplicate types removed (pairwise uniqueness).  <br /></td></tr>
+<tr class="memitem:ga549fe82222ad2de9bc68d716f489e17c" id="r_ga549fe82222ad2de9bc68d716f489e17c"><td class="memItemLeft">KUMI_VARIABLE_ABI constexpr transpose_t&#160;</td><td class="memItemRight"><a class="el" href="#ga549fe82222ad2de9bc68d716f489e17c">kumi::transpose</a> {}</td></tr>
+<tr class="memdesc:ga549fe82222ad2de9bc68d716f489e17c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object transposing a product type of product types by shifting elements in their transposed position always returning a tuple as the external product type.  <br /></td></tr>
+<tr class="memitem:ga275366f451b89e600b861c041129310d" id="r_ga275366f451b89e600b861c041129310d"><td class="memItemLeft">KUMI_VARIABLE_ABI constexpr unique_t&#160;</td><td class="memItemRight"><a class="el" href="#ga275366f451b89e600b861c041129310d">kumi::unique</a> {}</td></tr>
+<tr class="memdesc:ga275366f451b89e600b861c041129310d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object returning a product type with consecutive duplicate types removed (pairwise uniqueness).  <br /></td></tr>
 <tr class="memitem:gade96292292ae11da69415a778ef45ad0" id="r_gade96292292ae11da69415a778ef45ad0"><td class="memTemplParams" colspan="2">template&lt;std::size_t N&gt; </td></tr>
 <tr class="memitem:gade96292292ae11da69415a778ef45ad0 template"><td class="memItemLeft">constexpr tiles_t&lt; N, 1 &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gade96292292ae11da69415a778ef45ad0">kumi::windows</a> {}</td></tr>
 <tr class="memdesc:gade96292292ae11da69415a778ef45ad0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object creating a tuple of product types, each containing <span class="tt">N</span> consecutive elements from <span class="tt">t</span>. Windows starts at 0 and advance by <span class="tt">1</span> element each time.  <br /></td></tr>
-<tr class="memitem:ga71c21174289ba175a8d3d4b170cec05f" id="r_ga71c21174289ba175a8d3d4b170cec05f"><td class="memItemLeft">constexpr zip_t&#160;</td><td class="memItemRight"><a class="el" href="#ga71c21174289ba175a8d3d4b170cec05f">kumi::zip</a> {}</td></tr>
-<tr class="memdesc:ga71c21174289ba175a8d3d4b170cec05f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object constructing a tuple where the ith element is the product type of all ith elements of <span class="tt">t0</span>,<span class="tt">ts</span>...  <br /></td></tr>
-<tr class="memitem:ga0ce4823febfb00cfb197f73332ba7309" id="r_ga0ce4823febfb00cfb197f73332ba7309"><td class="memItemLeft">constexpr zip_max_t&#160;</td><td class="memItemRight"><a class="el" href="#ga0ce4823febfb00cfb197f73332ba7309">kumi::zip_max</a> {}</td></tr>
-<tr class="memdesc:ga0ce4823febfb00cfb197f73332ba7309"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object constructing a tuple where the ith element is the product type of all ith elements of <span class="tt">t0</span>,<span class="tt">ts</span>...  <br /></td></tr>
-<tr class="memitem:gaf4b9aea3cee7c30fc6a516c632805423" id="r_gaf4b9aea3cee7c30fc6a516c632805423"><td class="memItemLeft">constexpr zip_min_t&#160;</td><td class="memItemRight"><a class="el" href="#gaf4b9aea3cee7c30fc6a516c632805423">kumi::zip_min</a> {}</td></tr>
-<tr class="memdesc:gaf4b9aea3cee7c30fc6a516c632805423"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object constructing a tuple where the ith element is the product type of all ith elements of <span class="tt">t0</span>,<span class="tt">ts</span>...  <br /></td></tr>
+<tr class="memitem:gafbd7624fc8afd3ddd0b96f27dc67dc44" id="r_gafbd7624fc8afd3ddd0b96f27dc67dc44"><td class="memItemLeft">KUMI_VARIABLE_ABI constexpr zip_t&#160;</td><td class="memItemRight"><a class="el" href="#gafbd7624fc8afd3ddd0b96f27dc67dc44">kumi::zip</a> {}</td></tr>
+<tr class="memdesc:gafbd7624fc8afd3ddd0b96f27dc67dc44"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object constructing a tuple where the ith element is the product type of all ith elements of <span class="tt">t0</span>,<span class="tt">ts</span>...  <br /></td></tr>
+<tr class="memitem:gafa6a13ae3571e58fd59dd1fc4860822e" id="r_gafa6a13ae3571e58fd59dd1fc4860822e"><td class="memItemLeft">KUMI_VARIABLE_ABI constexpr zip_max_t&#160;</td><td class="memItemRight"><a class="el" href="#gafa6a13ae3571e58fd59dd1fc4860822e">kumi::zip_max</a> {}</td></tr>
+<tr class="memdesc:gafa6a13ae3571e58fd59dd1fc4860822e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object constructing a tuple where the ith element is the product type of all ith elements of <span class="tt">t0</span>,<span class="tt">ts</span>...  <br /></td></tr>
+<tr class="memitem:ga965051fcb273747bb32eac78db78be9e" id="r_ga965051fcb273747bb32eac78db78be9e"><td class="memItemLeft">KUMI_VARIABLE_ABI constexpr zip_min_t&#160;</td><td class="memItemRight"><a class="el" href="#ga965051fcb273747bb32eac78db78be9e">kumi::zip_min</a> {}</td></tr>
+<tr class="memdesc:ga965051fcb273747bb32eac78db78be9e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object constructing a tuple where the ith element is the product type of all ith elements of <span class="tt">t0</span>,<span class="tt">ts</span>...  <br /></td></tr>
 </table>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
-<a id="ga71bbbe8da94919e242bd3ded80ab6776" name="ga71bbbe8da94919e242bd3ded80ab6776"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga71bbbe8da94919e242bd3ded80ab6776">&#9670;&#160;</a></span>all_unique</h2>
+<a id="ga44cd4dee63d1a1b879f1b04325894802" name="ga44cd4dee63d1a1b879f1b04325894802"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga44cd4dee63d1a1b879f1b04325894802">&#9670;&#160;</a></span>all_unique</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -236,12 +236,12 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">all_unique_t kumi::all_unique {}</td>
+          <td class="memname">KUMI_VARIABLE_ABI constexpr all_unique_t kumi::all_unique {}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -254,8 +254,8 @@ Variables</h2></td></tr>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/unique.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga71bbbe8da94919e242bd3ded80ab6776">all_unique</a>(T &amp;&amp; t);</div>
-<div class="ttc" id="agroup__kumi__generators_html_ga71bbbe8da94919e242bd3ded80ab6776"><div class="ttname"><a href="#ga71bbbe8da94919e242bd3ded80ab6776">kumi::all_unique</a></div><div class="ttdeci">constexpr all_unique_t all_unique</div><div class="ttdoc">Callable object returning a product type containing the values of the first occurence of each type in...</div><div class="ttdef"><b>Definition</b> unique.hpp:171</div></div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga44cd4dee63d1a1b879f1b04325894802">all_unique</a>(T &amp;&amp; t);</div>
+<div class="ttc" id="agroup__kumi__generators_html_ga44cd4dee63d1a1b879f1b04325894802"><div class="ttname"><a href="#ga44cd4dee63d1a1b879f1b04325894802">kumi::all_unique</a></div><div class="ttdeci">KUMI_VARIABLE_ABI constexpr all_unique_t all_unique</div><div class="ttdoc">Callable object returning a product type containing the values of the first occurence of each type in...</div><div class="ttdef"><b>Definition</b> unique.hpp:171</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: Product Type to process</li>
@@ -265,14 +265,14 @@ Variables</h2></td></tr>
 <li>A product type built by keeping the first occurrence of every distinct element type in <span class="tt">t</span>.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>all_unique_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga71bbbe8da94919e242bd3ded80ab6776">kumi::all_unique</a>(std::declval&lt;T&gt;()));</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>all_unique_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga44cd4dee63d1a1b879f1b04325894802">kumi::all_unique</a>(std::declval&lt;T&gt;()));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span>all_unique</div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">using </span>type = kumi::result::all_unique_t&lt;T&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga71bbbe8da94919e242bd3ded80ab6776" title="Callable object returning a product type containing the values of the first occurence of each type in...">kumi::all_unique</a></p>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga44cd4dee63d1a1b879f1b04325894802" title="Callable object returning a product type containing the values of the first occurence of each type in...">kumi::all_unique</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>
 <li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
@@ -285,7 +285,7 @@ Variables</h2></td></tr>
 <div class="line"> </div>
 <div class="line">    <a class="code hl_class" href="structkumi_1_1tuple.html">tuple</a> a = {1, 2, <span class="charliteral">&#39;x&#39;</span>, 3, 1.f, 2.f};</div>
 <div class="line"> </div>
-<div class="line">    std::cout &lt;&lt; <a class="code hl_variable" href="#ga71bbbe8da94919e242bd3ded80ab6776">kumi::all_unique</a>(a) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">    std::cout &lt;&lt; <a class="code hl_variable" href="#ga44cd4dee63d1a1b879f1b04325894802">kumi::all_unique</a>(a) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
 </div><!-- fragment --></li>
@@ -299,7 +299,7 @@ Variables</h2></td></tr>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">auto</span> r = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;a&quot;</span>_id = 1, <span class="stringliteral">&quot;b&quot;</span>_id = 2, <span class="stringliteral">&quot;c&quot;</span>_id = <span class="charliteral">&#39;x&#39;</span>, <span class="stringliteral">&quot;d&quot;</span>_id = 3, <span class="stringliteral">&quot;e&quot;</span>_id = 1.f, <span class="stringliteral">&quot;f&quot;</span>_id = 2.f};</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#ga71bbbe8da94919e242bd3ded80ab6776">kumi::all_unique</a>(r) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#ga44cd4dee63d1a1b879f1b04325894802">kumi::all_unique</a>(r) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
 </div><!-- fragment --></li>
@@ -307,8 +307,8 @@ Variables</h2></td></tr>
 </div><div class="tabbed"></div> 
 </div>
 </div>
-<a id="ga6368952a2f6a506de75aa0e01569eab6" name="ga6368952a2f6a506de75aa0e01569eab6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6368952a2f6a506de75aa0e01569eab6">&#9670;&#160;</a></span>as_flat_ptr</h2>
+<a id="ga12aa619e4f9fb8393240d136fa060475" name="ga12aa619e4f9fb8393240d136fa060475"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga12aa619e4f9fb8393240d136fa060475">&#9670;&#160;</a></span>as_flat_ptr</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -317,12 +317,12 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">as_flat_ptr_t kumi::as_flat_ptr {}</td>
+          <td class="memname">KUMI_VARIABLE_ABI constexpr as_flat_ptr_t kumi::as_flat_ptr {}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -336,8 +336,8 @@ Variables</h2></td></tr>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/flatten.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga6368952a2f6a506de75aa0e01569eab6">as_flat_ptr</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__kumi__generators_html_ga6368952a2f6a506de75aa0e01569eab6"><div class="ttname"><a href="#ga6368952a2f6a506de75aa0e01569eab6">kumi::as_flat_ptr</a></div><div class="ttdeci">constexpr as_flat_ptr_t as_flat_ptr</div><div class="ttdoc">Callable object converting recursively a product type of product types into a flat product type of po...</div><div class="ttdef"><b>Definition</b> flatten.hpp:383</div></div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga12aa619e4f9fb8393240d136fa060475">as_flat_ptr</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>
+<div class="ttc" id="agroup__kumi__generators_html_ga12aa619e4f9fb8393240d136fa060475"><div class="ttname"><a href="#ga12aa619e4f9fb8393240d136fa060475">kumi::as_flat_ptr</a></div><div class="ttdeci">KUMI_VARIABLE_ABI constexpr as_flat_ptr_t as_flat_ptr</div><div class="ttdoc">Callable object converting recursively a product type of product types into a flat product type of po...</div><div class="ttdef"><b>Definition</b> flatten.hpp:383</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: Product type to process</li>
@@ -347,14 +347,14 @@ Variables</h2></td></tr>
 <li>A flat product type composed of pointers to each elements of <span class="tt">t</span>.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>as_flat_ptr_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga6368952a2f6a506de75aa0e01569eab6">kumi::as_flat_ptr</a>(std::declval&lt;T&gt;()));</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>as_flat_ptr_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga12aa619e4f9fb8393240d136fa060475">kumi::as_flat_ptr</a>(std::declval&lt;T&gt;()));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span>as_flat_ptr</div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">using </span>type = kumi::result::as_flat_ptr_t&lt;T&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga6368952a2f6a506de75aa0e01569eab6" title="Callable object converting recursively a product type of product types into a flat product type of po...">kumi::as_flat_ptr</a></p>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga12aa619e4f9fb8393240d136fa060475" title="Callable object converting recursively a product type of product types into a flat product type of po...">kumi::as_flat_ptr</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>
 <li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
@@ -365,16 +365,16 @@ Variables</h2></td></tr>
 <div class="line">{</div>
 <div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> a = { 1, <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{ 2.3, 4.5f }, <span class="keywordtype">short</span>{89} };</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> ptr = <a class="code hl_variable" href="#ga6368952a2f6a506de75aa0e01569eab6">kumi::as_flat_ptr</a>(a);</div>
+<div class="line">  <span class="keyword">auto</span> ptr = <a class="code hl_variable" href="#ga12aa619e4f9fb8393240d136fa060475">kumi::as_flat_ptr</a>(a);</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; ptr &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a>([](<span class="keyword">auto</span> p) { *p += 5; }, ptr );</div>
+<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga2d4ee5c43118e4abf41014e539a3a1ca">kumi::for_each</a>([](<span class="keyword">auto</span> p) { *p += 5; }, ptr );</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__kumi__transforms_html_ga58c4bb5e62083b4b37396d39c6446164"><div class="ttname"><a href="group__kumi__transforms.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a></div><div class="ttdeci">constexpr for_each_t for_each</div><div class="ttdoc">Callable object applying the Callable object f on each element of a product type.</div><div class="ttdef"><b>Definition</b> for_each.hpp:133</div></div>
+<div class="ttc" id="agroup__kumi__transforms_html_ga2d4ee5c43118e4abf41014e539a3a1ca"><div class="ttname"><a href="group__kumi__transforms.html#ga2d4ee5c43118e4abf41014e539a3a1ca">kumi::for_each</a></div><div class="ttdeci">KUMI_VARIABLE_ABI constexpr for_each_t for_each</div><div class="ttdoc">Callable object applying the Callable object f on each element of a product type.</div><div class="ttdef"><b>Definition</b> for_each.hpp:133</div></div>
 </div><!-- fragment --></li>
 <li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -387,12 +387,12 @@ Variables</h2></td></tr>
 <div class="line">  <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> a = { <span class="stringliteral">&quot;a&quot;</span>_id = 1, <span class="stringliteral">&quot;b&quot;</span>_id = </div>
 <div class="line">    <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{ <span class="stringliteral">&quot;c&quot;</span>_id = 2.3, <span class="stringliteral">&quot;d&quot;</span>_id = 4.5f }, <span class="stringliteral">&quot;e&quot;</span>_id = <span class="keywordtype">short</span>{89} };</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> ptr = <a class="code hl_variable" href="#ga6368952a2f6a506de75aa0e01569eab6">kumi::as_flat_ptr</a>(a);</div>
+<div class="line">  <span class="keyword">auto</span> ptr = <a class="code hl_variable" href="#ga12aa619e4f9fb8393240d136fa060475">kumi::as_flat_ptr</a>(a);</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; ptr &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a>([](<span class="keyword">auto</span> p) { *p += 5; }, ptr );</div>
+<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga2d4ee5c43118e4abf41014e539a3a1ca">kumi::for_each</a>([](<span class="keyword">auto</span> p) { *p += 5; }, ptr );</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
@@ -401,8 +401,8 @@ Variables</h2></td></tr>
 </div><div class="tabbed"> </div> 
 </div>
 </div>
-<a id="ga39128fad2c11b9fea55558222a87721c" name="ga39128fad2c11b9fea55558222a87721c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga39128fad2c11b9fea55558222a87721c">&#9670;&#160;</a></span>cartesian_product</h2>
+<a id="ga59c6f57141b8204d2852a06c6371b8df" name="ga59c6f57141b8204d2852a06c6371b8df"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga59c6f57141b8204d2852a06c6371b8df">&#9670;&#160;</a></span>cartesian_product</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -411,12 +411,12 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">cartesian_product_t kumi::cartesian_product {}</td>
+          <td class="memname">KUMI_VARIABLE_ABI constexpr cartesian_product_t kumi::cartesian_product {}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -430,8 +430,8 @@ Variables</h2></td></tr>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/cartesian_product.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type... Ts&gt;</div>
-<div class="line">[[nodiscard]] <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga39128fad2c11b9fea55558222a87721c">cartesian_product</a>(Ts &amp;&amp;... ts);</div>
-<div class="ttc" id="agroup__kumi__generators_html_ga39128fad2c11b9fea55558222a87721c"><div class="ttname"><a href="#ga39128fad2c11b9fea55558222a87721c">kumi::cartesian_product</a></div><div class="ttdeci">constexpr cartesian_product_t cartesian_product</div><div class="ttdoc">Callable object returning the Cartesian Product of all elements of its arguments product types.</div><div class="ttdef"><b>Definition</b> cartesian_product.hpp:92</div></div>
+<div class="line">[[nodiscard]] <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga59c6f57141b8204d2852a06c6371b8df">cartesian_product</a>(Ts &amp;&amp;... ts);</div>
+<div class="ttc" id="agroup__kumi__generators_html_ga59c6f57141b8204d2852a06c6371b8df"><div class="ttname"><a href="#ga59c6f57141b8204d2852a06c6371b8df">kumi::cartesian_product</a></div><div class="ttdeci">KUMI_VARIABLE_ABI constexpr cartesian_product_t cartesian_product</div><div class="ttdoc">Callable object returning the Cartesian Product of all elements of its arguments product types.</div><div class="ttdef"><b>Definition</b> cartesian_product.hpp:92</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">ts</span>: Product Types to process</li>
@@ -441,14 +441,14 @@ Variables</h2></td></tr>
 <li>A tuple containing all the product types built from all combination of all ts' elements</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt; <span class="keyword">using </span>cartesian_product_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga39128fad2c11b9fea55558222a87721c">kumi::cartesian_product</a>(std::declval&lt;Ts&gt;()...));</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt; <span class="keyword">using </span>cartesian_product_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga59c6f57141b8204d2852a06c6371b8df">kumi::cartesian_product</a>(std::declval&lt;Ts&gt;()...));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt; <span class="keyword">struct </span>cartesian_product</div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">using </span>type = kumi::result::cartesian_product_t&lt;Ts...&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga39128fad2c11b9fea55558222a87721c" title="Callable object returning the Cartesian Product of all elements of its arguments product types.">kumi::cartesian_product</a></p>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga59c6f57141b8204d2852a06c6371b8df" title="Callable object returning the Cartesian Product of all elements of its arguments product types.">kumi::cartesian_product</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>
 <li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
@@ -461,7 +461,7 @@ Variables</h2></td></tr>
 <div class="line">  <span class="keyword">auto</span> <span class="keywordtype">id</span>     = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="charliteral">&#39;a&#39;</span>,<span class="charliteral">&#39;b&#39;</span>,<span class="charliteral">&#39;c&#39;</span>};</div>
 <div class="line">  <span class="keyword">auto</span> value  = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1.0,2.1,4.2,8.4};</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#ga39128fad2c11b9fea55558222a87721c">kumi::cartesian_product</a>( status, <span class="keywordtype">id</span>, value );</div>
+<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#ga59c6f57141b8204d2852a06c6371b8df">kumi::cartesian_product</a>( status, <span class="keywordtype">id</span>, value );</div>
 <div class="line"> </div>
 <div class="line">  kumi::for_each_index( [](<span class="keyword">auto</span> i, <span class="keyword">auto</span> e)</div>
 <div class="line">                        {</div>
@@ -485,7 +485,7 @@ Variables</h2></td></tr>
 <div class="line">  <span class="keyword">auto</span> <span class="keywordtype">id</span>     = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;aa&quot;</span>_id = <span class="charliteral">&#39;a&#39;</span>, <span class="stringliteral">&quot;bb&quot;</span>_id = <span class="charliteral">&#39;b&#39;</span>, <span class="stringliteral">&quot;cc&quot;</span>_id = <span class="charliteral">&#39;c&#39;</span>};</div>
 <div class="line">  <span class="keyword">auto</span> value  = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;aaa&quot;</span>_id = 1.0,<span class="stringliteral">&quot;bbb&quot;</span>_id = 2.1, <span class="stringliteral">&quot;ccc&quot;</span>_id = 4.2, <span class="stringliteral">&quot;d&quot;</span>_id = 8.4};</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#ga39128fad2c11b9fea55558222a87721c">kumi::cartesian_product</a>( status, <span class="keywordtype">id</span>, value );</div>
+<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#ga59c6f57141b8204d2852a06c6371b8df">kumi::cartesian_product</a>( status, <span class="keywordtype">id</span>, value );</div>
 <div class="line"> </div>
 <div class="line">  kumi::for_each_index( [](<span class="keyword">auto</span> i, <span class="keyword">auto</span> e)</div>
 <div class="line">                        {</div>
@@ -501,8 +501,8 @@ Variables</h2></td></tr>
 </div><div class="tabbed"></div> 
 </div>
 </div>
-<a id="ga4550222df58187f71b1b1347500e324a" name="ga4550222df58187f71b1b1347500e324a"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga4550222df58187f71b1b1347500e324a">&#9670;&#160;</a></span>cat</h2>
+<a id="ga4a2e8c63cbceb415681df0907350166d" name="ga4a2e8c63cbceb415681df0907350166d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga4a2e8c63cbceb415681df0907350166d">&#9670;&#160;</a></span>cat</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -511,12 +511,12 @@ Variables</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">cat_t kumi::cat {}</td>
+          <td class="memname">KUMI_VARIABLE_ABI constexpr cat_t kumi::cat {}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -530,8 +530,8 @@ Variables</h2></td></tr>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/cat.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type... Ts&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_variable" href="#ga4550222df58187f71b1b1347500e324a">cat</a>(Ts... &amp;&amp; t);</div>
-<div class="ttc" id="agroup__kumi__generators_html_ga4550222df58187f71b1b1347500e324a"><div class="ttname"><a href="#ga4550222df58187f71b1b1347500e324a">kumi::cat</a></div><div class="ttdeci">constexpr cat_t cat</div><div class="ttdoc">Callable object concatenating multiple product types into a single one.</div><div class="ttdef"><b>Definition</b> cat.hpp:78</div></div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_variable" href="#ga4a2e8c63cbceb415681df0907350166d">cat</a>(Ts... &amp;&amp; t);</div>
+<div class="ttc" id="agroup__kumi__generators_html_ga4a2e8c63cbceb415681df0907350166d"><div class="ttname"><a href="#ga4a2e8c63cbceb415681df0907350166d">kumi::cat</a></div><div class="ttdeci">KUMI_VARIABLE_ABI constexpr cat_t cat</div><div class="ttdoc">Callable object concatenating multiple product types into a single one.</div><div class="ttdef"><b>Definition</b> cat.hpp:78</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">ts</span>: Product types to concatenate</li>
@@ -541,14 +541,14 @@ Variables</h2></td></tr>
 <li>A product type made of all element of all input product types in order.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;concepts::product_type... Ts&gt; <span class="keyword">using </span>cat_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga4550222df58187f71b1b1347500e324a">kumi::cat</a>(std::declval&lt;Ts&gt;()...));</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;concepts::product_type... Ts&gt; <span class="keyword">using </span>cat_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga4a2e8c63cbceb415681df0907350166d">kumi::cat</a>(std::declval&lt;Ts&gt;()...));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type... Ts&gt; <span class="keyword">struct </span>cat</div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">using </span>type = kumi::result::cat_t&lt;Ts...&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga4550222df58187f71b1b1347500e324a" title="Callable object concatenating multiple product types into a single one.">kumi::cat</a></p>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga4a2e8c63cbceb415681df0907350166d" title="Callable object concatenating multiple product types into a single one.">kumi::cat</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>
 <li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
@@ -561,7 +561,7 @@ Variables</h2></td></tr>
 <div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> b = {  <span class="charliteral">&#39;6&#39;</span> };</div>
 <div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> c = { <span class="stringliteral">&quot;7&quot;</span>, <span class="keywordtype">short</span>{89} };</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> abc = <a class="code hl_variable" href="#ga4550222df58187f71b1b1347500e324a">kumi::cat</a>(a,b,c);</div>
+<div class="line">  <span class="keyword">auto</span> abc = <a class="code hl_variable" href="#ga4a2e8c63cbceb415681df0907350166d">kumi::cat</a>(a,b,c);</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; b &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; c &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; abc &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
@@ -579,7 +579,7 @@ Variables</h2></td></tr>
 <div class="line">  <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> b = { <span class="stringliteral">&quot;x&quot;</span>_id = <span class="charliteral">&#39;6&#39;</span> };</div>
 <div class="line">  <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> c = { <span class="stringliteral">&quot;y&quot;</span>_id = <span class="stringliteral">&quot;7&quot;</span>, <span class="stringliteral">&quot;z&quot;</span>_id = <span class="keywordtype">short</span>{89} };</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> abc = <a class="code hl_variable" href="#ga4550222df58187f71b1b1347500e324a">kumi::cat</a>(a,b,c);</div>
+<div class="line">  <span class="keyword">auto</span> abc = <a class="code hl_variable" href="#ga4a2e8c63cbceb415681df0907350166d">kumi::cat</a>(a,b,c);</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; b &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; c &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; abc &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
@@ -658,7 +658,7 @@ template&lt;std::size_t N&gt; </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;  Standard Chunks &quot;</span> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; c &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
+<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga2d4ee5c43118e4abf41014e539a3a1ca">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
 <div class="line">  {</div>
 <div class="line">    get&lt;0&gt;(tile)++;</div>
 <div class="line">  },c);</div>
@@ -668,14 +668,14 @@ template&lt;std::size_t N&gt; </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;  Chunks with references &quot;</span> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; c2 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
+<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga2d4ee5c43118e4abf41014e539a3a1ca">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
 <div class="line">  {</div>
 <div class="line">    get&lt;0&gt;(tile)++;</div>
 <div class="line">  },c2);</div>
 <div class="line">  std::cout &lt;&lt; t &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__kumi__generators_html_gaf4b0bcda72790c2ac55519adaf89456e"><div class="ttname"><a href="#gaf4b0bcda72790c2ac55519adaf89456e">kumi::chunks</a></div><div class="ttdeci">constexpr tiles_t&lt; N, N &gt; chunks</div><div class="ttdoc">Callable object creating a tuple of product types, each containing N consecutive elements from t....</div><div class="ttdef"><b>Definition</b> tiler.hpp:231</div></div>
-<div class="ttc" id="agroup__kumi__record__related_html_ga83a97fc306d9ecfacde28584b219b44a"><div class="ttname"><a href="group__kumi__record__related.html#ga83a97fc306d9ecfacde28584b219b44a">kumi::to_ref</a></div><div class="ttdeci">constexpr auto to_ref(R &amp;&amp;r)</div><div class="ttdoc">Creates a kumi::record of references given a reference to a kumi::record_type.</div><div class="ttdef"><b>Definition</b> record.hpp:518</div></div>
+<div class="ttc" id="agroup__kumi__record__related_html_ga83a97fc306d9ecfacde28584b219b44a"><div class="ttname"><a href="group__kumi__record__related.html#ga83a97fc306d9ecfacde28584b219b44a">kumi::to_ref</a></div><div class="ttdeci">constexpr auto to_ref(R &amp;&amp;r)</div><div class="ttdoc">Creates a kumi::record of references given a reference to a kumi::record_type.</div><div class="ttdef"><b>Definition</b> record.hpp:520</div></div>
 </div><!-- fragment --></li>
 <li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -691,7 +691,7 @@ template&lt;std::size_t N&gt; </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;  Standard Chunks &quot;</span> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; c &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
+<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga2d4ee5c43118e4abf41014e539a3a1ca">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
 <div class="line">  {</div>
 <div class="line">    <a class="code hl_function" href="structkumi_1_1record.html#abc2cd329ad25d155458850c19cc3b137">get&lt;0&gt;</a>(<a class="code hl_function" href="structkumi_1_1tuple.html#ade5f616b3115a74bd4930f70f96ca199">kumi::values_of</a>(tile))++;</div>
 <div class="line">  },c);</div>
@@ -701,21 +701,21 @@ template&lt;std::size_t N&gt; </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;  Chunks with references &quot;</span> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; c2 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
+<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga2d4ee5c43118e4abf41014e539a3a1ca">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
 <div class="line">  {</div>
 <div class="line">    <a class="code hl_function" href="structkumi_1_1record.html#abc2cd329ad25d155458850c19cc3b137">get&lt;0&gt;</a>(<a class="code hl_function" href="structkumi_1_1tuple.html#ade5f616b3115a74bd4930f70f96ca199">kumi::values_of</a>(tile))++;</div>
 <div class="line">  },c2);</div>
 <div class="line">  std::cout &lt;&lt; t &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1record_html_abc2cd329ad25d155458850c19cc3b137"><div class="ttname"><a href="structkumi_1_1record.html#abc2cd329ad25d155458850c19cc3b137">kumi::record::get</a></div><div class="ttdeci">decltype(auto) constexpr get(record&lt; Ts... &gt; &amp;r) noexcept</div><div class="ttdoc">Extracts the Ith field from a kumi::record.</div><div class="ttdef"><b>Definition</b> record.hpp:618</div></div>
-<div class="ttc" id="astructkumi_1_1tuple_html_ade5f616b3115a74bd4930f70f96ca199"><div class="ttname"><a href="structkumi_1_1tuple.html#ade5f616b3115a74bd4930f70f96ca199">kumi::tuple::values_of</a></div><div class="ttdeci">constexpr auto values_of(T &amp;&amp;t) noexcept</div><div class="ttdoc">Extracts the values of the fields of a kumi::product_type.</div><div class="ttdef"><b>Definition</b> tuple.hpp:771</div></div>
+<div class="ttc" id="astructkumi_1_1record_html_abc2cd329ad25d155458850c19cc3b137"><div class="ttname"><a href="structkumi_1_1record.html#abc2cd329ad25d155458850c19cc3b137">kumi::record::get</a></div><div class="ttdeci">decltype(auto) constexpr get(record&lt; Ts... &gt; &amp;r) noexcept</div><div class="ttdoc">Extracts the Ith field from a kumi::record.</div><div class="ttdef"><b>Definition</b> record.hpp:620</div></div>
+<div class="ttc" id="astructkumi_1_1tuple_html_ade5f616b3115a74bd4930f70f96ca199"><div class="ttname"><a href="structkumi_1_1tuple.html#ade5f616b3115a74bd4930f70f96ca199">kumi::tuple::values_of</a></div><div class="ttdeci">constexpr auto values_of(T &amp;&amp;t) noexcept</div><div class="ttdoc">Extracts the values of the fields of a kumi::product_type.</div><div class="ttdef"><b>Definition</b> tuple.hpp:772</div></div>
 </div><!-- fragment --></li>
 </ul>
 </div><div class="tabbed"></div> 
 </div>
 </div>
-<a id="gaa9d6196838118af0a837160d8bbf532c" name="gaa9d6196838118af0a837160d8bbf532c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaa9d6196838118af0a837160d8bbf532c">&#9670;&#160;</a></span>compress</h2>
+<a id="ga793da33005b67765b65331b20e5be952" name="ga793da33005b67765b65331b20e5be952"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga793da33005b67765b65331b20e5be952">&#9670;&#160;</a></span>compress</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -724,12 +724,12 @@ template&lt;std::size_t N&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">compress_t kumi::compress {}</td>
+          <td class="memname">KUMI_VARIABLE_ABI constexpr compress_t kumi::compress {}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -743,8 +743,8 @@ template&lt;std::size_t N&gt; </div>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/flatten.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaa9d6196838118af0a837160d8bbf532c">compress</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__kumi__generators_html_gaa9d6196838118af0a837160d8bbf532c"><div class="ttname"><a href="#gaa9d6196838118af0a837160d8bbf532c">kumi::compress</a></div><div class="ttdeci">constexpr compress_t compress</div><div class="ttdoc">Callable object converting a product type of product type into a single product type recursively,...</div><div class="ttdef"><b>Definition</b> flatten.hpp:204</div></div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga793da33005b67765b65331b20e5be952">compress</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>
+<div class="ttc" id="agroup__kumi__generators_html_ga793da33005b67765b65331b20e5be952"><div class="ttname"><a href="#ga793da33005b67765b65331b20e5be952">kumi::compress</a></div><div class="ttdeci">KUMI_VARIABLE_ABI constexpr compress_t compress</div><div class="ttdoc">Callable object converting a product type of product type into a single product type recursively,...</div><div class="ttdef"><b>Definition</b> flatten.hpp:204</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: Product type to process</li>
@@ -754,14 +754,14 @@ template&lt;std::size_t N&gt; </div>
 <li>The resulting value of the application of <span class="tt">T0(...(Tn(values))) =&gt; T(values)</span></li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>compress_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaa9d6196838118af0a837160d8bbf532c">kumi::compress</a>(std::declval&lt;T&gt;()));</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>compress_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga793da33005b67765b65331b20e5be952">kumi::compress</a>(std::declval&lt;T&gt;()));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span>compress</div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">using </span>type = kumi::result::compress_t&lt;T&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gaa9d6196838118af0a837160d8bbf532c" title="Callable object converting a product type of product type into a single product type recursively,...">kumi::compress</a></p>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga793da33005b67765b65331b20e5be952" title="Callable object converting a product type of product type into a single product type recursively,...">kumi::compress</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>
 <li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
@@ -776,8 +776,8 @@ template&lt;std::size_t N&gt; </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">auto</span> t2 = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{nest_1, nest_2};</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#gaa9d6196838118af0a837160d8bbf532c">kumi::compress</a>( nest_2 ) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#gaa9d6196838118af0a837160d8bbf532c">kumi::compress</a>( t2 ) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#ga793da33005b67765b65331b20e5be952">kumi::compress</a>( nest_2 ) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#ga793da33005b67765b65331b20e5be952">kumi::compress</a>( t2 ) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --></li>
 <li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
@@ -794,16 +794,16 @@ template&lt;std::size_t N&gt; </div>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">auto</span> r2 = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;g&quot;</span>_id = nest_1, <span class="stringliteral">&quot;h&quot;</span>_id = nest_2};</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#gaa9d6196838118af0a837160d8bbf532c">kumi::compress</a>( nest_2 ) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#gaa9d6196838118af0a837160d8bbf532c">kumi::compress</a>( r2 ) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#ga793da33005b67765b65331b20e5be952">kumi::compress</a>( nest_2 ) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#ga793da33005b67765b65331b20e5be952">kumi::compress</a>( r2 ) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --></li>
 </ul>
 </div><div class="tabbed"></div> 
 </div>
 </div>
-<a id="ga1a7617bafd6f8598cca8e7e6a5c6f383" name="ga1a7617bafd6f8598cca8e7e6a5c6f383"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga1a7617bafd6f8598cca8e7e6a5c6f383">&#9670;&#160;</a></span>extract</h2>
+<a id="ga436df48ea795457466c659ad8f05758e" name="ga436df48ea795457466c659ad8f05758e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga436df48ea795457466c659ad8f05758e">&#9670;&#160;</a></span>extract</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -812,12 +812,12 @@ template&lt;std::size_t N&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">extract_t kumi::extract {}</td>
+          <td class="memname">KUMI_VARIABLE_ABI constexpr extract_t kumi::extract {}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -831,11 +831,11 @@ template&lt;std::size_t N&gt; </div>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/extract.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, std::<span class="keywordtype">size_t</span> I0, std::<span class="keywordtype">size_t</span> I1&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga1a7617bafd6f8598cca8e7e6a5c6f383">extract</a>(T &amp;&amp; t, <a class="code hl_class" href="structkumi_1_1index__t.html">kumi::index_t&lt;I0&gt;</a>, <a class="code hl_class" href="structkumi_1_1index__t.html">kumi::index_t&lt;I1&gt;</a>) <span class="keyword">noexcept</span>;  <span class="comment">// 1</span></div>
-<div class="ttc" id="agroup__kumi__generators_html_ga1a7617bafd6f8598cca8e7e6a5c6f383"><div class="ttname"><a href="#ga1a7617bafd6f8598cca8e7e6a5c6f383">kumi::extract</a></div><div class="ttdeci">constexpr extract_t extract</div><div class="ttdoc">Callable object extracting a sub product type from a product type.</div><div class="ttdef"><b>Definition</b> extract.hpp:143</div></div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga436df48ea795457466c659ad8f05758e">extract</a>(T &amp;&amp; t, <a class="code hl_class" href="structkumi_1_1index__t.html">kumi::index_t&lt;I0&gt;</a>, <a class="code hl_class" href="structkumi_1_1index__t.html">kumi::index_t&lt;I1&gt;</a>) <span class="keyword">noexcept</span>;  <span class="comment">// 1</span></div>
+<div class="ttc" id="agroup__kumi__generators_html_ga436df48ea795457466c659ad8f05758e"><div class="ttname"><a href="#ga436df48ea795457466c659ad8f05758e">kumi::extract</a></div><div class="ttdeci">KUMI_VARIABLE_ABI constexpr extract_t extract</div><div class="ttdoc">Callable object extracting a sub product type from a product type.</div><div class="ttdef"><b>Definition</b> extract.hpp:143</div></div>
 <div class="ttc" id="astructkumi_1_1index__t_html"><div class="ttname"><a href="structkumi_1_1index__t.html">kumi::index_t</a></div><div class="ttdoc">Integral constant type.</div><div class="ttdef"><b>Definition</b> ct_helpers.hpp:32</div></div>
 </div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, std::<span class="keywordtype">size_t</span> I0&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga1a7617bafd6f8598cca8e7e6a5c6f383">extract</a>(T &amp;&amp; t, <a class="code hl_class" href="structkumi_1_1index__t.html">kumi::index_t&lt;I0&gt;</a>) <span class="keyword">noexcept</span>;                      <span class="comment">// 2</span></div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga436df48ea795457466c659ad8f05758e">extract</a>(T &amp;&amp; t, <a class="code hl_class" href="structkumi_1_1index__t.html">kumi::index_t&lt;I0&gt;</a>) <span class="keyword">noexcept</span>;                      <span class="comment">// 2</span></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: Product Type to extract elements from</li>
@@ -850,7 +850,7 @@ template&lt;std::size_t N&gt; </div>
 <h2 class="groupheader">Helper type </h2>
 <div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::size_t... I&gt;</div>
 <div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(I) == 1) || (<span class="keyword">sizeof</span>...(I) == 2))</div>
-<div class="line">    <span class="keyword">using</span> extract_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga1a7617bafd6f8598cca8e7e6a5c6f383">kumi::extract</a>(std::declval&lt;T&gt;(), kumi::index_t&lt;I&gt;{}...));</div>
+<div class="line">    <span class="keyword">using</span> extract_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga436df48ea795457466c659ad8f05758e">kumi::extract</a>(std::declval&lt;T&gt;(), kumi::index_t&lt;I&gt;{}...));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::size_t... I&gt;</div>
 <div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(I) == 1) || (<span class="keyword">sizeof</span>...(I) == 2))</div>
@@ -859,7 +859,7 @@ template&lt;std::size_t N&gt; </div>
 <div class="line">      <span class="keyword">using </span>type = kumi::result::extract_t&lt;T, I...&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga1a7617bafd6f8598cca8e7e6a5c6f383" title="Callable object extracting a sub product type from a product type.">kumi::extract</a></p>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga436df48ea795457466c659ad8f05758e" title="Callable object extracting a sub product type from a product type.">kumi::extract</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>
 <li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
@@ -872,9 +872,9 @@ template&lt;std::size_t N&gt; </div>
 <div class="line"> </div>
 <div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> a = { 1, 2.3, 4.5f,<span class="charliteral">&#39;6&#39;</span>,<span class="stringliteral">&quot;7&quot;</span>, <span class="keywordtype">short</span>{89} };</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> head = <a class="code hl_variable" href="#ga1a7617bafd6f8598cca8e7e6a5c6f383">kumi::extract</a>(a,0_c,1_c);</div>
-<div class="line">  <span class="keyword">auto</span> mid  = <a class="code hl_variable" href="#ga1a7617bafd6f8598cca8e7e6a5c6f383">kumi::extract</a>(a,1_c,3_c);</div>
-<div class="line">  <span class="keyword">auto</span> last = <a class="code hl_variable" href="#ga1a7617bafd6f8598cca8e7e6a5c6f383">kumi::extract</a>(a,<a class="code hl_variable" href="group__kumi__utility.html#gaa1c76fca002e966a0a40e311ad68d841">kumi::index&lt;3&gt;</a>);</div>
+<div class="line">  <span class="keyword">auto</span> head = <a class="code hl_variable" href="#ga436df48ea795457466c659ad8f05758e">kumi::extract</a>(a,0_c,1_c);</div>
+<div class="line">  <span class="keyword">auto</span> mid  = <a class="code hl_variable" href="#ga436df48ea795457466c659ad8f05758e">kumi::extract</a>(a,1_c,3_c);</div>
+<div class="line">  <span class="keyword">auto</span> last = <a class="code hl_variable" href="#ga436df48ea795457466c659ad8f05758e">kumi::extract</a>(a,<a class="code hl_variable" href="group__kumi__utility.html#gaa1c76fca002e966a0a40e311ad68d841">kumi::index&lt;3&gt;</a>);</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span> &lt;&lt; head &lt;&lt; <span class="charliteral">&#39; &#39;</span>  &lt;&lt; mid &lt;&lt; <span class="charliteral">&#39; &#39;</span> &lt;&lt; last &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
 <div class="line">}</div>
@@ -891,9 +891,9 @@ template&lt;std::size_t N&gt; </div>
 <div class="line">  <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> a =  { <span class="stringliteral">&quot;a&quot;</span>_id = 1, <span class="stringliteral">&quot;b&quot;</span>_id = 2.3, <span class="stringliteral">&quot;c&quot;</span>_id = 4.5f, <span class="stringliteral">&quot;d&quot;</span>_id = <span class="charliteral">&#39;6&#39;</span></div>
 <div class="line">                    , <span class="stringliteral">&quot;e&quot;</span>_id = <span class="stringliteral">&quot;7&quot;</span>, <span class="stringliteral">&quot;f&quot;</span>_id = <span class="keywordtype">short</span>{89} };</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> head = <a class="code hl_variable" href="#ga1a7617bafd6f8598cca8e7e6a5c6f383">kumi::extract</a>(a,0_c,1_c);</div>
-<div class="line">  <span class="keyword">auto</span> mid  = <a class="code hl_variable" href="#ga1a7617bafd6f8598cca8e7e6a5c6f383">kumi::extract</a>(a,1_c,3_c);</div>
-<div class="line">  <span class="keyword">auto</span> last = <a class="code hl_variable" href="#ga1a7617bafd6f8598cca8e7e6a5c6f383">kumi::extract</a>(a,<a class="code hl_variable" href="group__kumi__utility.html#gaa1c76fca002e966a0a40e311ad68d841">kumi::index&lt;3&gt;</a>);</div>
+<div class="line">  <span class="keyword">auto</span> head = <a class="code hl_variable" href="#ga436df48ea795457466c659ad8f05758e">kumi::extract</a>(a,0_c,1_c);</div>
+<div class="line">  <span class="keyword">auto</span> mid  = <a class="code hl_variable" href="#ga436df48ea795457466c659ad8f05758e">kumi::extract</a>(a,1_c,3_c);</div>
+<div class="line">  <span class="keyword">auto</span> last = <a class="code hl_variable" href="#ga436df48ea795457466c659ad8f05758e">kumi::extract</a>(a,<a class="code hl_variable" href="group__kumi__utility.html#gaa1c76fca002e966a0a40e311ad68d841">kumi::index&lt;3&gt;</a>);</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span> &lt;&lt; head &lt;&lt; <span class="charliteral">&#39; &#39;</span>  &lt;&lt; mid &lt;&lt; <span class="charliteral">&#39; &#39;</span> &lt;&lt; last &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
 <div class="line">}</div>
@@ -1166,8 +1166,8 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 </div><div class="tabbed"></div> 
 </div>
 </div>
-<a id="ga49acccc42ec8af7b96b63e8f38796df2" name="ga49acccc42ec8af7b96b63e8f38796df2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga49acccc42ec8af7b96b63e8f38796df2">&#9670;&#160;</a></span>flatten</h2>
+<a id="ga05fc8b5c317c41d4aa54fc0e90ed0172" name="ga05fc8b5c317c41d4aa54fc0e90ed0172"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga05fc8b5c317c41d4aa54fc0e90ed0172">&#9670;&#160;</a></span>flatten</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1176,12 +1176,12 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">flatten_t kumi::flatten {}</td>
+          <td class="memname">KUMI_VARIABLE_ABI constexpr flatten_t kumi::flatten {}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1194,8 +1194,8 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/flatten.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga49acccc42ec8af7b96b63e8f38796df2">flatten</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__kumi__generators_html_ga49acccc42ec8af7b96b63e8f38796df2"><div class="ttname"><a href="#ga49acccc42ec8af7b96b63e8f38796df2">kumi::flatten</a></div><div class="ttdeci">constexpr flatten_t flatten</div><div class="ttdoc">Callable object converting a product type of product types into a product type of all elements.</div><div class="ttdef"><b>Definition</b> flatten.hpp:260</div></div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga05fc8b5c317c41d4aa54fc0e90ed0172">flatten</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>
+<div class="ttc" id="agroup__kumi__generators_html_ga05fc8b5c317c41d4aa54fc0e90ed0172"><div class="ttname"><a href="#ga05fc8b5c317c41d4aa54fc0e90ed0172">kumi::flatten</a></div><div class="ttdeci">KUMI_VARIABLE_ABI constexpr flatten_t flatten</div><div class="ttdoc">Callable object converting a product type of product types into a product type of all elements.</div><div class="ttdef"><b>Definition</b> flatten.hpp:260</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: Product type to process</li>
@@ -1205,14 +1205,14 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 <li>A product type composed of all elements of <span class="tt">t</span> flattened non-recursively</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>flatten_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga49acccc42ec8af7b96b63e8f38796df2">kumi::flatten</a>(std::declval&lt;T&gt;()));</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>flatten_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga05fc8b5c317c41d4aa54fc0e90ed0172">kumi::flatten</a>(std::declval&lt;T&gt;()));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span>flatten</div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">using </span>type = kumi::result::flatten_t&lt;T&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga49acccc42ec8af7b96b63e8f38796df2" title="Callable object converting a product type of product types into a product type of all elements.">kumi::flatten</a></p>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga05fc8b5c317c41d4aa54fc0e90ed0172" title="Callable object converting a product type of product types into a product type of all elements.">kumi::flatten</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>
 <li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
@@ -1225,7 +1225,7 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 <div class="line">  <span class="keyword">auto</span> more_nbrs  = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{0,nbrs,4};</div>
 <div class="line">  <span class="keyword">auto</span> ltrs       = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="charliteral">&#39;a&#39;</span>,<span class="charliteral">&#39;b&#39;</span>,<span class="charliteral">&#39;c&#39;</span>};</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#ga49acccc42ec8af7b96b63e8f38796df2">kumi::flatten</a>( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{3.5,nbrs,<span class="charliteral">&#39;z&#39;</span>,more_nbrs,5.35f,ltrs} );</div>
+<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#ga05fc8b5c317c41d4aa54fc0e90ed0172">kumi::flatten</a>( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{3.5,nbrs,<span class="charliteral">&#39;z&#39;</span>,more_nbrs,5.35f,ltrs} );</div>
 <div class="line">  std::cout &lt;&lt; r &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --></li>
@@ -1240,7 +1240,7 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 <div class="line">  <span class="keyword">auto</span> more_nbrs  = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;a&quot;</span>_id = 0,<span class="stringliteral">&quot;b&quot;</span>_id = nbrs,<span class="stringliteral">&quot;c&quot;</span>_id = 4};</div>
 <div class="line">  <span class="keyword">auto</span> ltrs       = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;a&quot;</span>_id = <span class="charliteral">&#39;a&#39;</span>,<span class="stringliteral">&quot;b&quot;</span>_id = <span class="charliteral">&#39;b&#39;</span>,<span class="stringliteral">&quot;c&quot;</span>_id = <span class="charliteral">&#39;c&#39;</span>};</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#ga49acccc42ec8af7b96b63e8f38796df2">kumi::flatten</a>( <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;a&quot;</span>_id = 3.5,<span class="stringliteral">&quot;b&quot;</span>_id = nbrs,<span class="stringliteral">&quot;c&quot;</span>_id = <span class="charliteral">&#39;z&#39;</span></div>
+<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#ga05fc8b5c317c41d4aa54fc0e90ed0172">kumi::flatten</a>( <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;a&quot;</span>_id = 3.5,<span class="stringliteral">&quot;b&quot;</span>_id = nbrs,<span class="stringliteral">&quot;c&quot;</span>_id = <span class="charliteral">&#39;z&#39;</span></div>
 <div class="line">                          ,<span class="stringliteral">&quot;d&quot;</span>_id = more_nbrs,<span class="stringliteral">&quot;e&quot;</span>_id = 5.35f,<span class="stringliteral">&quot;f&quot;</span>_id = ltrs} );</div>
 <div class="line">  std::cout &lt;&lt; r &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
@@ -1249,8 +1249,8 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 </div><div class="tabbed"></div> 
 </div>
 </div>
-<a id="gaa780fd338fb61c86f226ae05adfaf426" name="gaa780fd338fb61c86f226ae05adfaf426"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaa780fd338fb61c86f226ae05adfaf426">&#9670;&#160;</a></span>flatten_all</h2>
+<a id="gac3f4cc02742e29757d33f6e904a55235" name="gac3f4cc02742e29757d33f6e904a55235"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac3f4cc02742e29757d33f6e904a55235">&#9670;&#160;</a></span>flatten_all</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1259,12 +1259,12 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">flatten_all_t kumi::flatten_all {}</td>
+          <td class="memname">KUMI_VARIABLE_ABI constexpr flatten_all_t kumi::flatten_all {}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1279,9 +1279,9 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/flatten.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, <span class="keyword">typename</span> Function&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga49acccc42ec8af7b96b63e8f38796df2">flatten</a>(T &amp;&amp; t, Function &amp;&amp; f) <span class="keyword">noexcept</span>;   <span class="comment">// 1</span></div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga05fc8b5c317c41d4aa54fc0e90ed0172">flatten</a>(T &amp;&amp; t, Function &amp;&amp; f) <span class="keyword">noexcept</span>;   <span class="comment">// 1</span></div>
 </div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga49acccc42ec8af7b96b63e8f38796df2">flatten</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;                  <span class="comment">// 2</span></div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga05fc8b5c317c41d4aa54fc0e90ed0172">flatten</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;                  <span class="comment">// 2</span></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: Product type to process</li>
@@ -1294,7 +1294,7 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 <h2 class="groupheader">Helper type </h2>
 <div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, <span class="keyword">typename</span>... Func&gt;</div>
 <div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(Func) == 0) || (<span class="keyword">sizeof</span>...(Func) == 1))</div>
-<div class="line">    <span class="keyword">using</span> flatten_all_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaa780fd338fb61c86f226ae05adfaf426">kumi::flatten_all</a>(std::declval&lt;T&gt;(), std::declval&lt;Func&gt;()...));</div>
+<div class="line">    <span class="keyword">using</span> flatten_all_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gac3f4cc02742e29757d33f6e904a55235">kumi::flatten_all</a>(std::declval&lt;T&gt;(), std::declval&lt;Func&gt;()...));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, <span class="keyword">typename</span>... Func&gt;</div>
 <div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(Func) == 0) || (<span class="keyword">sizeof</span>...(Func) == 1))</div>
@@ -1303,7 +1303,7 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 <div class="line">      <span class="keyword">using </span>type = kumi::result::flatten_all_t&lt;T&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gaa780fd338fb61c86f226ae05adfaf426" title="Callable object converting recursively a product type of product types into a product type of all ele...">kumi::flatten_all</a></p>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gac3f4cc02742e29757d33f6e904a55235" title="Callable object converting recursively a product type of product types into a product type of all ele...">kumi::flatten_all</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>
 <li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
@@ -1316,15 +1316,15 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 <div class="line">  <span class="keyword">auto</span> more_nbrs = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="keywordtype">short</span>{0},nbrs,4.};</div>
 <div class="line">  <span class="keyword">auto</span> ltrs      = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="charliteral">&#39;a&#39;</span>,<span class="charliteral">&#39;b&#39;</span>,<span class="charliteral">&#39;c&#39;</span>};</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#gaa780fd338fb61c86f226ae05adfaf426">kumi::flatten_all</a>( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{3.5,nbrs,<span class="charliteral">&#39;z&#39;</span>,more_nbrs,5.35f,ltrs} );</div>
+<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#gac3f4cc02742e29757d33f6e904a55235">kumi::flatten_all</a>( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{3.5,nbrs,<span class="charliteral">&#39;z&#39;</span>,more_nbrs,5.35f,ltrs} );</div>
 <div class="line">  std::cout &lt;&lt; r &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> sz = <a class="code hl_variable" href="#gaa780fd338fb61c86f226ae05adfaf426">kumi::flatten_all</a> ( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{3.5,nbrs,<span class="charliteral">&#39;z&#39;</span>,more_nbrs,5.35f,ltrs}</div>
+<div class="line">  <span class="keyword">auto</span> sz = <a class="code hl_variable" href="#gac3f4cc02742e29757d33f6e904a55235">kumi::flatten_all</a> ( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{3.5,nbrs,<span class="charliteral">&#39;z&#39;</span>,more_nbrs,5.35f,ltrs}</div>
 <div class="line">                              , [](<span class="keyword">auto</span> e) { <span class="keywordflow">return</span> <span class="keyword">sizeof</span>(e); }</div>
 <div class="line">                              );</div>
 <div class="line">  std::cout &lt;&lt; sz &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__kumi__generators_html_gaa780fd338fb61c86f226ae05adfaf426"><div class="ttname"><a href="#gaa780fd338fb61c86f226ae05adfaf426">kumi::flatten_all</a></div><div class="ttdeci">constexpr flatten_all_t flatten_all</div><div class="ttdoc">Callable object converting recursively a product type of product types into a product type of all ele...</div><div class="ttdef"><b>Definition</b> flatten.hpp:328</div></div>
+<div class="ttc" id="agroup__kumi__generators_html_gac3f4cc02742e29757d33f6e904a55235"><div class="ttname"><a href="#gac3f4cc02742e29757d33f6e904a55235">kumi::flatten_all</a></div><div class="ttdeci">KUMI_VARIABLE_ABI constexpr flatten_all_t flatten_all</div><div class="ttdoc">Callable object converting recursively a product type of product types into a product type of all ele...</div><div class="ttdef"><b>Definition</b> flatten.hpp:328</div></div>
 </div><!-- fragment --></li>
 <li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -1337,11 +1337,11 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 <div class="line">  <span class="keyword">auto</span> more_nbrs = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;z&quot;</span>_id = <span class="keywordtype">short</span>{0},<span class="stringliteral">&quot;n&quot;</span>_id = nbrs,<span class="stringliteral">&quot;l&quot;</span>_id = 4.};</div>
 <div class="line">  <span class="keyword">auto</span> ltrs      = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;alpha&quot;</span>_id = <span class="charliteral">&#39;a&#39;</span>,<span class="stringliteral">&quot;beta&quot;</span>_id = <span class="charliteral">&#39;b&#39;</span>, <span class="stringliteral">&quot;gamma&quot;</span>_id = <span class="charliteral">&#39;c&#39;</span>};</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#gaa780fd338fb61c86f226ae05adfaf426">kumi::flatten_all</a>( <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;a&quot;</span>_id = 3.5,<span class="stringliteral">&quot;b&quot;</span>_id = nbrs,<span class="stringliteral">&quot;c&quot;</span>_id = <span class="charliteral">&#39;z&#39;</span></div>
+<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#gac3f4cc02742e29757d33f6e904a55235">kumi::flatten_all</a>( <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;a&quot;</span>_id = 3.5,<span class="stringliteral">&quot;b&quot;</span>_id = nbrs,<span class="stringliteral">&quot;c&quot;</span>_id = <span class="charliteral">&#39;z&#39;</span></div>
 <div class="line">                                          ,<span class="stringliteral">&quot;d&quot;</span>_id = more_nbrs,<span class="stringliteral">&quot;e&quot;</span>_id = 5.35f,<span class="stringliteral">&quot;f&quot;</span>_id = ltrs} );</div>
 <div class="line">  std::cout &lt;&lt; r &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> sz = <a class="code hl_variable" href="#gaa780fd338fb61c86f226ae05adfaf426">kumi::flatten_all</a> (<a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;a&quot;</span>_id = 3.5,<span class="stringliteral">&quot;b&quot;</span>_id = nbrs,<span class="stringliteral">&quot;c&quot;</span>_id = <span class="charliteral">&#39;z&#39;</span></div>
+<div class="line">  <span class="keyword">auto</span> sz = <a class="code hl_variable" href="#gac3f4cc02742e29757d33f6e904a55235">kumi::flatten_all</a> (<a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;a&quot;</span>_id = 3.5,<span class="stringliteral">&quot;b&quot;</span>_id = nbrs,<span class="stringliteral">&quot;c&quot;</span>_id = <span class="charliteral">&#39;z&#39;</span></div>
 <div class="line">                                          ,<span class="stringliteral">&quot;d&quot;</span>_id = more_nbrs,<span class="stringliteral">&quot;e&quot;</span>_id = 5.35f,<span class="stringliteral">&quot;f&quot;</span>_id = ltrs}</div>
 <div class="line">                              , [](<span class="keyword">auto</span> e) { <span class="keywordflow">return</span> <span class="keyword">sizeof</span>(e); }</div>
 <div class="line">                              );</div>
@@ -1667,8 +1667,8 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 </div><div class="tabbed"></div> 
 </div>
 </div>
-<a id="ga38d1ddeb5090405e79e9b7d898a85133" name="ga38d1ddeb5090405e79e9b7d898a85133"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga38d1ddeb5090405e79e9b7d898a85133">&#9670;&#160;</a></span>pop_front</h2>
+<a id="ga9e7a82fbd0e84ec50b4f93b31729aa0b" name="ga9e7a82fbd0e84ec50b4f93b31729aa0b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga9e7a82fbd0e84ec50b4f93b31729aa0b">&#9670;&#160;</a></span>pop_front</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1677,12 +1677,12 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">pop_front_t kumi::pop_front {}</td>
+          <td class="memname">KUMI_VARIABLE_ABI constexpr pop_front_t kumi::pop_front {}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1696,8 +1696,8 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/push_pop.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga38d1ddeb5090405e79e9b7d898a85133">pop_front</a>(T &amp;&amp; t);</div>
-<div class="ttc" id="agroup__kumi__generators_html_ga38d1ddeb5090405e79e9b7d898a85133"><div class="ttname"><a href="#ga38d1ddeb5090405e79e9b7d898a85133">kumi::pop_front</a></div><div class="ttdeci">constexpr pop_front_t pop_front</div><div class="ttdoc">Callable object removing the first (if any) element of t.</div><div class="ttdef"><b>Definition</b> push_pop.hpp:173</div></div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga9e7a82fbd0e84ec50b4f93b31729aa0b">pop_front</a>(T &amp;&amp; t);</div>
+<div class="ttc" id="agroup__kumi__generators_html_ga9e7a82fbd0e84ec50b4f93b31729aa0b"><div class="ttname"><a href="#ga9e7a82fbd0e84ec50b4f93b31729aa0b">kumi::pop_front</a></div><div class="ttdeci">KUMI_VARIABLE_ABI constexpr pop_front_t pop_front</div><div class="ttdoc">Callable object removing the first (if any) element of t.</div><div class="ttdef"><b>Definition</b> push_pop.hpp:173</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: Base product type</li>
@@ -1707,7 +1707,7 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 <li>A product type composed of all elements of <span class="tt">t</span> except its first. Has no effect on empty product types.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>pop_front_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga38d1ddeb5090405e79e9b7d898a85133">kumi::pop_front</a>(std::declval&lt;T&gt;()));</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>pop_front_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga9e7a82fbd0e84ec50b4f93b31729aa0b">kumi::pop_front</a>(std::declval&lt;T&gt;()));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span>pop_front</div>
 <div class="line">    {</div>
@@ -1723,11 +1723,11 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#ga38d1ddeb5090405e79e9b7d898a85133">kumi::pop_front</a>( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{} )  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#ga9e7a82fbd0e84ec50b4f93b31729aa0b">kumi::pop_front</a>( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{} )  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> t{1,2.,3.4f};</div>
 <div class="line">  std::cout &lt;&lt; t                    &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#ga38d1ddeb5090405e79e9b7d898a85133">kumi::pop_front</a>(t)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#ga9e7a82fbd0e84ec50b4f93b31729aa0b">kumi::pop_front</a>(t)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --></li>
 <li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
@@ -1737,11 +1737,11 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#ga38d1ddeb5090405e79e9b7d898a85133">kumi::pop_front</a>( <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{} )  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#ga9e7a82fbd0e84ec50b4f93b31729aa0b">kumi::pop_front</a>( <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{} )  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> r{<span class="stringliteral">&quot;a&quot;</span>_id = 1,<span class="stringliteral">&quot;b&quot;</span>_id = 2.,<span class="stringliteral">&quot;c&quot;</span>_id = 3.4f};</div>
 <div class="line">  std::cout &lt;&lt; r                    &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#ga38d1ddeb5090405e79e9b7d898a85133">kumi::pop_front</a>(r)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#ga9e7a82fbd0e84ec50b4f93b31729aa0b">kumi::pop_front</a>(r)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --></li>
 </ul>
@@ -1799,8 +1799,8 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 </div><div class="tabbed"></div> 
 </div>
 </div>
-<a id="gad4bd53f162f63af0cbfbd68d8adb5d5c" name="gad4bd53f162f63af0cbfbd68d8adb5d5c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gad4bd53f162f63af0cbfbd68d8adb5d5c">&#9670;&#160;</a></span>push_front</h2>
+<a id="gaaf546d47975e0499409f249074291581" name="gaaf546d47975e0499409f249074291581"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaaf546d47975e0499409f249074291581">&#9670;&#160;</a></span>push_front</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -1809,12 +1809,12 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">push_front_t kumi::push_front {}</td>
+          <td class="memname">KUMI_VARIABLE_ABI constexpr push_front_t kumi::push_front {}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -1828,8 +1828,8 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/push_pop.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, <span class="keyword">typename</span> V&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gad4bd53f162f63af0cbfbd68d8adb5d5c">push_front</a>(T &amp;&amp; t, V &amp;&amp; v);</div>
-<div class="ttc" id="agroup__kumi__generators_html_gad4bd53f162f63af0cbfbd68d8adb5d5c"><div class="ttname"><a href="#gad4bd53f162f63af0cbfbd68d8adb5d5c">kumi::push_front</a></div><div class="ttdeci">constexpr push_front_t push_front</div><div class="ttdoc">Callable object constructing a product type by adding a value v at the beginning of t.</div><div class="ttdef"><b>Definition</b> push_pop.hpp:118</div></div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaaf546d47975e0499409f249074291581">push_front</a>(T &amp;&amp; t, V &amp;&amp; v);</div>
+<div class="ttc" id="agroup__kumi__generators_html_gaaf546d47975e0499409f249074291581"><div class="ttname"><a href="#gaaf546d47975e0499409f249074291581">kumi::push_front</a></div><div class="ttdeci">KUMI_VARIABLE_ABI constexpr push_front_t push_front</div><div class="ttdoc">Callable object constructing a product type by adding a value v at the beginning of t.</div><div class="ttdef"><b>Definition</b> push_pop.hpp:118</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: Base product type</li>
@@ -1841,7 +1841,7 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 </ul>
 <h2 class="groupheader">Helper type </h2>
 <div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, <span class="keyword">typename</span> V&gt;</div>
-<div class="line">    <span class="keyword">using </span>push_front_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gad4bd53f162f63af0cbfbd68d8adb5d5c">kumi::push_front</a>(std::declval&lt;T&gt;(), std::declval&lt;V&gt;()));</div>
+<div class="line">    <span class="keyword">using </span>push_front_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaaf546d47975e0499409f249074291581">kumi::push_front</a>(std::declval&lt;T&gt;(), std::declval&lt;V&gt;()));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, <span class="keyword">typename</span> V&gt; <span class="keyword">struct </span>push_front</div>
 <div class="line">    {</div>
@@ -1857,11 +1857,11 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#gad4bd53f162f63af0cbfbd68d8adb5d5c">kumi::push_front</a>( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{}, 63.21)  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#gaaf546d47975e0499409f249074291581">kumi::push_front</a>( <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{}, 63.21)  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> t{1,2.,3.4f};</div>
 <div class="line">  std::cout &lt;&lt; t                          &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#gad4bd53f162f63af0cbfbd68d8adb5d5c">kumi::push_front</a>(t, <span class="charliteral">&#39;Z&#39;</span>)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#gaaf546d47975e0499409f249074291581">kumi::push_front</a>(t, <span class="charliteral">&#39;Z&#39;</span>)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --></li>
 <li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
@@ -1872,11 +1872,11 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#gad4bd53f162f63af0cbfbd68d8adb5d5c">kumi::push_front</a>( <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{}, <span class="stringliteral">&quot;a&quot;</span>_id = 63.21)  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#gaaf546d47975e0499409f249074291581">kumi::push_front</a>( <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{}, <span class="stringliteral">&quot;a&quot;</span>_id = 63.21)  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> t{<span class="stringliteral">&quot;a&quot;</span>_id = 1,<span class="stringliteral">&quot;b&quot;</span>_id = 2.,<span class="stringliteral">&quot;c&quot;</span>_id = 3.4f};</div>
 <div class="line">  std::cout &lt;&lt; t                          &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#gad4bd53f162f63af0cbfbd68d8adb5d5c">kumi::push_front</a>(t, <span class="stringliteral">&quot;d&quot;</span>_id = <span class="charliteral">&#39;Z&#39;</span>)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#gaaf546d47975e0499409f249074291581">kumi::push_front</a>(t, <span class="stringliteral">&quot;d&quot;</span>_id = <span class="charliteral">&#39;Z&#39;</span>)   &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --></li>
 </ul>
@@ -2036,8 +2036,8 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1projection__map.html"
 </div><div class="tabbed"></div> 
 </div>
 </div>
-<a id="ga0f52ba0b24ce54052784df91c54ac233" name="ga0f52ba0b24ce54052784df91c54ac233"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga0f52ba0b24ce54052784df91c54ac233">&#9670;&#160;</a></span>remove</h2>
+<a id="ga57a23786d1c6cab5aef29aaf4fd5c478" name="ga57a23786d1c6cab5aef29aaf4fd5c478"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga57a23786d1c6cab5aef29aaf4fd5c478">&#9670;&#160;</a></span>remove</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2046,12 +2046,12 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1projection__map.html"
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">remove_t kumi::remove {}</td>
+          <td class="memname">KUMI_VARIABLE_ABI constexpr remove_t kumi::remove {}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2065,10 +2065,10 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1projection__map.html"
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/extract.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, std::<span class="keywordtype">size_t</span> I0, std::<span class="keywordtype">size_t</span> I1&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga0f52ba0b24ce54052784df91c54ac233">remove</a>(T &amp;&amp; t, <a class="code hl_class" href="structkumi_1_1index__t.html">kumi::index_t&lt;I0&gt;</a>, <a class="code hl_class" href="structkumi_1_1index__t.html">kumi::index_t&lt;I1&gt;</a>) <span class="keyword">noexcept</span>;  <span class="comment">// 1</span></div>
-<div class="ttc" id="agroup__kumi__generators_html_ga0f52ba0b24ce54052784df91c54ac233"><div class="ttname"><a href="#ga0f52ba0b24ce54052784df91c54ac233">kumi::remove</a></div><div class="ttdeci">constexpr remove_t remove</div><div class="ttdoc">Callable object removing a sub product type from a product type.</div><div class="ttdef"><b>Definition</b> extract.hpp:210</div></div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga57a23786d1c6cab5aef29aaf4fd5c478">remove</a>(T &amp;&amp; t, <a class="code hl_class" href="structkumi_1_1index__t.html">kumi::index_t&lt;I0&gt;</a>, <a class="code hl_class" href="structkumi_1_1index__t.html">kumi::index_t&lt;I1&gt;</a>) <span class="keyword">noexcept</span>;  <span class="comment">// 1</span></div>
+<div class="ttc" id="agroup__kumi__generators_html_ga57a23786d1c6cab5aef29aaf4fd5c478"><div class="ttname"><a href="#ga57a23786d1c6cab5aef29aaf4fd5c478">kumi::remove</a></div><div class="ttdeci">KUMI_VARIABLE_ABI constexpr remove_t remove</div><div class="ttdoc">Callable object removing a sub product type from a product type.</div><div class="ttdef"><b>Definition</b> extract.hpp:210</div></div>
 </div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, std::<span class="keywordtype">size_t</span> I0&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga0f52ba0b24ce54052784df91c54ac233">remove</a>(T &amp;&amp; t, <a class="code hl_class" href="structkumi_1_1index__t.html">kumi::index_t&lt;I0&gt;</a>) <span class="keyword">noexcept</span>;                      <span class="comment">// 2</span></div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga57a23786d1c6cab5aef29aaf4fd5c478">remove</a>(T &amp;&amp; t, <a class="code hl_class" href="structkumi_1_1index__t.html">kumi::index_t&lt;I0&gt;</a>) <span class="keyword">noexcept</span>;                      <span class="comment">// 2</span></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: Product Type to remove elements from</li>
@@ -2083,7 +2083,7 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1projection__map.html"
 <h2 class="groupheader">Helper type </h2>
 <div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::size_t... I&gt;</div>
 <div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(I) == 1) || (<span class="keyword">sizeof</span>...(I) == 2))</div>
-<div class="line">    <span class="keyword">using</span> remove_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga0f52ba0b24ce54052784df91c54ac233">kumi::remove</a>(std::declval&lt;T&gt;(), kumi::index_t&lt;I&gt;{}...));</div>
+<div class="line">    <span class="keyword">using</span> remove_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga57a23786d1c6cab5aef29aaf4fd5c478">kumi::remove</a>(std::declval&lt;T&gt;(), kumi::index_t&lt;I&gt;{}...));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::size_t... I&gt;</div>
 <div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(I) == 1) || (<span class="keyword">sizeof</span>...(I) == 2))</div>
@@ -2092,7 +2092,7 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1projection__map.html"
 <div class="line">      <span class="keyword">using </span>type = kumi::result::remove_t&lt;T, I...&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga0f52ba0b24ce54052784df91c54ac233" title="Callable object removing a sub product type from a product type.">kumi::remove</a></p>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga57a23786d1c6cab5aef29aaf4fd5c478" title="Callable object removing a sub product type from a product type.">kumi::remove</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>
 <li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
@@ -2105,9 +2105,9 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1projection__map.html"
 <div class="line"> </div>
 <div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> a = { 1, 2.3, 4.5f,<span class="charliteral">&#39;6&#39;</span>,<span class="stringliteral">&quot;7&quot;</span>, <span class="keywordtype">short</span>{89} };</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> last = <a class="code hl_variable" href="#ga0f52ba0b24ce54052784df91c54ac233">kumi::remove</a>(a,0_c,1_c);</div>
-<div class="line">  <span class="keyword">auto</span> mid  = <a class="code hl_variable" href="#ga0f52ba0b24ce54052784df91c54ac233">kumi::remove</a>(a,1_c,3_c);</div>
-<div class="line">  <span class="keyword">auto</span> head = <a class="code hl_variable" href="#ga0f52ba0b24ce54052784df91c54ac233">kumi::remove</a>(a,<a class="code hl_variable" href="group__kumi__utility.html#gaa1c76fca002e966a0a40e311ad68d841">kumi::index&lt;3&gt;</a>);</div>
+<div class="line">  <span class="keyword">auto</span> last = <a class="code hl_variable" href="#ga57a23786d1c6cab5aef29aaf4fd5c478">kumi::remove</a>(a,0_c,1_c);</div>
+<div class="line">  <span class="keyword">auto</span> mid  = <a class="code hl_variable" href="#ga57a23786d1c6cab5aef29aaf4fd5c478">kumi::remove</a>(a,1_c,3_c);</div>
+<div class="line">  <span class="keyword">auto</span> head = <a class="code hl_variable" href="#ga57a23786d1c6cab5aef29aaf4fd5c478">kumi::remove</a>(a,<a class="code hl_variable" href="group__kumi__utility.html#gaa1c76fca002e966a0a40e311ad68d841">kumi::index&lt;3&gt;</a>);</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span> &lt;&lt; head &lt;&lt; <span class="charliteral">&#39; &#39;</span>  &lt;&lt; mid &lt;&lt; <span class="charliteral">&#39; &#39;</span> &lt;&lt; last &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
 <div class="line">}</div>
@@ -2123,9 +2123,9 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1projection__map.html"
 <div class="line">  <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> a =  { <span class="stringliteral">&quot;a&quot;</span>_id = 1, <span class="stringliteral">&quot;b&quot;</span>_id = 2.3, <span class="stringliteral">&quot;c&quot;</span>_id = 4.5f, <span class="stringliteral">&quot;d&quot;</span>_id = <span class="charliteral">&#39;6&#39;</span></div>
 <div class="line">                    , <span class="stringliteral">&quot;e&quot;</span>_id = <span class="stringliteral">&quot;7&quot;</span>, <span class="stringliteral">&quot;f&quot;</span>_id = <span class="keywordtype">short</span>{89} };</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> last = <a class="code hl_variable" href="#ga0f52ba0b24ce54052784df91c54ac233">kumi::remove</a>(a,0_c,1_c);</div>
-<div class="line">  <span class="keyword">auto</span> mid  = <a class="code hl_variable" href="#ga0f52ba0b24ce54052784df91c54ac233">kumi::remove</a>(a,1_c,3_c);</div>
-<div class="line">  <span class="keyword">auto</span> head = <a class="code hl_variable" href="#ga0f52ba0b24ce54052784df91c54ac233">kumi::remove</a>(a,<a class="code hl_variable" href="group__kumi__utility.html#gaa1c76fca002e966a0a40e311ad68d841">kumi::index&lt;3&gt;</a>);</div>
+<div class="line">  <span class="keyword">auto</span> last = <a class="code hl_variable" href="#ga57a23786d1c6cab5aef29aaf4fd5c478">kumi::remove</a>(a,0_c,1_c);</div>
+<div class="line">  <span class="keyword">auto</span> mid  = <a class="code hl_variable" href="#ga57a23786d1c6cab5aef29aaf4fd5c478">kumi::remove</a>(a,1_c,3_c);</div>
+<div class="line">  <span class="keyword">auto</span> head = <a class="code hl_variable" href="#ga57a23786d1c6cab5aef29aaf4fd5c478">kumi::remove</a>(a,<a class="code hl_variable" href="group__kumi__utility.html#gaa1c76fca002e966a0a40e311ad68d841">kumi::index&lt;3&gt;</a>);</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot; =&gt; &quot;</span> &lt;&lt; head &lt;&lt; <span class="charliteral">&#39; &#39;</span>  &lt;&lt; mid &lt;&lt; <span class="charliteral">&#39; &#39;</span> &lt;&lt; last &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
 <div class="line">}</div>
@@ -2301,8 +2301,8 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi
 </div><!-- fragment --> 
 </div>
 </div>
-<a id="ga48f6e5775e61dca804eda8b0bd354d6f" name="ga48f6e5775e61dca804eda8b0bd354d6f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga48f6e5775e61dca804eda8b0bd354d6f">&#9670;&#160;</a></span>reverse</h2>
+<a id="ga36995fccf531b895e85e8f643643f1f3" name="ga36995fccf531b895e85e8f643643f1f3"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga36995fccf531b895e85e8f643643f1f3">&#9670;&#160;</a></span>reverse</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2311,12 +2311,12 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">reverse_t kumi::reverse {}</td>
+          <td class="memname">KUMI_VARIABLE_ABI constexpr reverse_t kumi::reverse {}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2329,8 +2329,8 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/reverse.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga48f6e5775e61dca804eda8b0bd354d6f">reverse</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__kumi__generators_html_ga48f6e5775e61dca804eda8b0bd354d6f"><div class="ttname"><a href="#ga48f6e5775e61dca804eda8b0bd354d6f">kumi::reverse</a></div><div class="ttdeci">constexpr reverse_t reverse</div><div class="ttdoc">Callable object reversing elements of a product type.</div><div class="ttdef"><b>Definition</b> reverse.hpp:78</div></div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga36995fccf531b895e85e8f643643f1f3">reverse</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>
+<div class="ttc" id="agroup__kumi__generators_html_ga36995fccf531b895e85e8f643643f1f3"><div class="ttname"><a href="#ga36995fccf531b895e85e8f643643f1f3">kumi::reverse</a></div><div class="ttdeci">KUMI_VARIABLE_ABI constexpr reverse_t reverse</div><div class="ttdoc">Callable object reversing elements of a product type.</div><div class="ttdef"><b>Definition</b> reverse.hpp:78</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: Product Type to reverse</li>
@@ -2340,14 +2340,14 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi
 <li>A product type with the type of <span class="tt">t</span> and elements equal to (get&lt;index&lt;size_v&lt;T&gt; - 1 - Idx&gt;&gt;(t)...);</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>reverse_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga48f6e5775e61dca804eda8b0bd354d6f">kumi::reverse</a>(std::declval&lt;T&gt;()));</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>reverse_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga36995fccf531b895e85e8f643643f1f3">kumi::reverse</a>(std::declval&lt;T&gt;()));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span>reverse</div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">using </span>type = kumi::result::reverse_t&lt;T&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga48f6e5775e61dca804eda8b0bd354d6f" title="Callable object reversing elements of a product type.">kumi::reverse</a></p>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga36995fccf531b895e85e8f643643f1f3" title="Callable object reversing elements of a product type.">kumi::reverse</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>
 <li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
@@ -2359,7 +2359,7 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi
 <div class="line">  <span class="keyword">auto</span> values = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> { 1, <span class="charliteral">&#39;a&#39;</span>, 0.1 };</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; values &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#ga48f6e5775e61dca804eda8b0bd354d6f">kumi::reverse</a>(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#ga36995fccf531b895e85e8f643643f1f3">kumi::reverse</a>(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --></li>
 <li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
@@ -2373,7 +2373,7 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi
 <div class="line">  <span class="keyword">auto</span> values = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> { <span class="stringliteral">&quot;a&quot;</span>_id = 1, <span class="stringliteral">&quot;b&quot;</span>_id = <span class="charliteral">&#39;a&#39;</span>, <span class="stringliteral">&quot;c&quot;</span>_id = 0.1 };</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; values &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#ga48f6e5775e61dca804eda8b0bd354d6f">kumi::reverse</a>(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#ga36995fccf531b895e85e8f643643f1f3">kumi::reverse</a>(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --></li>
 </ul>
@@ -2554,8 +2554,8 @@ template&lt;std::size_t R&gt; </div>
 </div><div class="tabbed"></div> 
 </div>
 </div>
-<a id="gadb81f4533e81830674c3fc9577d3de93" name="gadb81f4533e81830674c3fc9577d3de93"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gadb81f4533e81830674c3fc9577d3de93">&#9670;&#160;</a></span>split</h2>
+<a id="gae1acaabcf65546a19904bd57e226cff9" name="gae1acaabcf65546a19904bd57e226cff9"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae1acaabcf65546a19904bd57e226cff9">&#9670;&#160;</a></span>split</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2564,12 +2564,12 @@ template&lt;std::size_t R&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">split_t kumi::split {}</td>
+          <td class="memname">KUMI_VARIABLE_ABI constexpr split_t kumi::split {}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel inline">inline</span><span class="mlabel noexcept">noexcept</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2583,8 +2583,8 @@ template&lt;std::size_t R&gt; </div>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/extract.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, std::<span class="keywordtype">size_t</span> I0&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gadb81f4533e81830674c3fc9577d3de93">split</a>(T &amp;&amp; t, <a class="code hl_class" href="structkumi_1_1index__t.html">kumi::index_t&lt;I0&gt;</a>) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__kumi__generators_html_gadb81f4533e81830674c3fc9577d3de93"><div class="ttname"><a href="#gadb81f4533e81830674c3fc9577d3de93">kumi::split</a></div><div class="ttdeci">constexpr split_t split</div><div class="ttdoc">Callable object splitting a product type into two.</div><div class="ttdef"><b>Definition</b> extract.hpp:270</div></div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gae1acaabcf65546a19904bd57e226cff9">split</a>(T &amp;&amp; t, <a class="code hl_class" href="structkumi_1_1index__t.html">kumi::index_t&lt;I0&gt;</a>) <span class="keyword">noexcept</span>;</div>
+<div class="ttc" id="agroup__kumi__generators_html_gae1acaabcf65546a19904bd57e226cff9"><div class="ttname"><a href="#gae1acaabcf65546a19904bd57e226cff9">kumi::split</a></div><div class="ttdeci">KUMI_VARIABLE_ABI constexpr split_t split</div><div class="ttdoc">Callable object splitting a product type into two.</div><div class="ttdef"><b>Definition</b> extract.hpp:270</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: Product Type to extract elements from</li>
@@ -2596,14 +2596,14 @@ template&lt;std::size_t R&gt; </div>
 </ul>
 <h2 class="groupheader">Helper type </h2>
 <div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::<span class="keywordtype">size_t</span> I&gt;</div>
-<div class="line">    <span class="keyword">using </span>split_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gadb81f4533e81830674c3fc9577d3de93">kumi::split</a>(std::declval&lt;T&gt;(), kumi::index_t&lt;I&gt;{}));</div>
+<div class="line">    <span class="keyword">using </span>split_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gae1acaabcf65546a19904bd57e226cff9">kumi::split</a>(std::declval&lt;T&gt;(), kumi::index_t&lt;I&gt;{}));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::<span class="keywordtype">size_t</span> I&gt; <span class="keyword">struct </span>split</div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">using </span>type = kumi::result::split_t&lt;T, I&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gadb81f4533e81830674c3fc9577d3de93" title="Callable object splitting a product type into two.">kumi::split</a></p>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gae1acaabcf65546a19904bd57e226cff9" title="Callable object splitting a product type into two.">kumi::split</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>
 <li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
@@ -2616,7 +2616,7 @@ template&lt;std::size_t R&gt; </div>
 <div class="line"> </div>
 <div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> a = { 1, 2.3, 4.5f,<span class="charliteral">&#39;6&#39;</span>,<span class="stringliteral">&quot;7&quot;</span>, <span class="keywordtype">short</span>{89} };</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span>[first, second] = <a class="code hl_variable" href="#gadb81f4533e81830674c3fc9577d3de93">kumi::split</a>(a, 3_c);</div>
+<div class="line">  <span class="keyword">auto</span>[first, second] = <a class="code hl_variable" href="#gae1acaabcf65546a19904bd57e226cff9">kumi::split</a>(a, 3_c);</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; a      &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; first  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
@@ -2634,7 +2634,7 @@ template&lt;std::size_t R&gt; </div>
 <div class="line">  <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> a = { <span class="stringliteral">&quot;a&quot;</span>_id = 1, <span class="stringliteral">&quot;b&quot;</span>_id = 2.3, <span class="stringliteral">&quot;c&quot;</span>_id = 4.5f,<span class="stringliteral">&quot;d&quot;</span>_id = <span class="charliteral">&#39;6&#39;</span>,</div>
 <div class="line">                     <span class="stringliteral">&quot;e&quot;</span>_id = <span class="stringliteral">&quot;7&quot;</span>, <span class="stringliteral">&quot;f&quot;</span>_id = <span class="keywordtype">short</span>{89} };</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span>[first, second] = <a class="code hl_variable" href="#gadb81f4533e81830674c3fc9577d3de93">kumi::split</a>(a, 3_c);</div>
+<div class="line">  <span class="keyword">auto</span>[first, second] = <a class="code hl_variable" href="#gae1acaabcf65546a19904bd57e226cff9">kumi::split</a>(a, 3_c);</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; a      &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; first  &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
@@ -2715,7 +2715,7 @@ template&lt;std::size_t N, std::size_t O&gt; </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;  Standard Tiles&quot;</span> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; w &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
+<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga2d4ee5c43118e4abf41014e539a3a1ca">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
 <div class="line">  {</div>
 <div class="line">    get&lt;0&gt;(tile)++;</div>
 <div class="line">  },w);</div>
@@ -2725,7 +2725,7 @@ template&lt;std::size_t N, std::size_t O&gt; </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;  Tiles with references &quot;</span> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; w2 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
+<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga2d4ee5c43118e4abf41014e539a3a1ca">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
 <div class="line">  {</div>
 <div class="line">    get&lt;0&gt;(tile)++;</div>
 <div class="line">  },w2);</div>
@@ -2747,7 +2747,7 @@ template&lt;std::size_t N, std::size_t O&gt; </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;  Standard Tiles&quot;</span> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; w &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
+<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga2d4ee5c43118e4abf41014e539a3a1ca">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
 <div class="line">  {</div>
 <div class="line">    <a class="code hl_function" href="structkumi_1_1record.html#abc2cd329ad25d155458850c19cc3b137">get&lt;0&gt;</a>(<a class="code hl_function" href="structkumi_1_1tuple.html#ade5f616b3115a74bd4930f70f96ca199">kumi::values_of</a>(tile))++;</div>
 <div class="line">  },w);</div>
@@ -2757,7 +2757,7 @@ template&lt;std::size_t N, std::size_t O&gt; </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;  Tiles with references &quot;</span> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; w2 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
+<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga2d4ee5c43118e4abf41014e539a3a1ca">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
 <div class="line">  {</div>
 <div class="line">    <a class="code hl_function" href="structkumi_1_1record.html#abc2cd329ad25d155458850c19cc3b137">get&lt;0&gt;</a>(<a class="code hl_function" href="structkumi_1_1tuple.html#ade5f616b3115a74bd4930f70f96ca199">kumi::values_of</a>(tile))++;</div>
 <div class="line">  },w2);</div>
@@ -2768,8 +2768,8 @@ template&lt;std::size_t N, std::size_t O&gt; </div>
 </div><div class="tabbed"></div> 
 </div>
 </div>
-<a id="gaef527bdd76c70e7fded23a9759428f5c" name="gaef527bdd76c70e7fded23a9759428f5c"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaef527bdd76c70e7fded23a9759428f5c">&#9670;&#160;</a></span>transpose</h2>
+<a id="ga549fe82222ad2de9bc68d716f489e17c" name="ga549fe82222ad2de9bc68d716f489e17c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga549fe82222ad2de9bc68d716f489e17c">&#9670;&#160;</a></span>transpose</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2778,12 +2778,12 @@ template&lt;std::size_t N, std::size_t O&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">transpose_t kumi::transpose {}</td>
+          <td class="memname">KUMI_VARIABLE_ABI constexpr transpose_t kumi::transpose {}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2796,8 +2796,8 @@ template&lt;std::size_t N, std::size_t O&gt; </div>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/transpose.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaef527bdd76c70e7fded23a9759428f5c">transpose</a>(T &amp;&amp; t);</div>
-<div class="ttc" id="agroup__kumi__generators_html_gaef527bdd76c70e7fded23a9759428f5c"><div class="ttname"><a href="#gaef527bdd76c70e7fded23a9759428f5c">kumi::transpose</a></div><div class="ttdeci">constexpr transpose_t transpose</div><div class="ttdoc">Callable object transposing a product type of product types by shifting elements in their transposed ...</div><div class="ttdef"><b>Definition</b> transpose.hpp:96</div></div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga549fe82222ad2de9bc68d716f489e17c">transpose</a>(T &amp;&amp; t);</div>
+<div class="ttc" id="agroup__kumi__generators_html_ga549fe82222ad2de9bc68d716f489e17c"><div class="ttname"><a href="#ga549fe82222ad2de9bc68d716f489e17c">kumi::transpose</a></div><div class="ttdeci">KUMI_VARIABLE_ABI constexpr transpose_t transpose</div><div class="ttdoc">Callable object transposing a product type of product types by shifting elements in their transposed ...</div><div class="ttdef"><b>Definition</b> transpose.hpp:96</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: Product Type to transpose</li>
@@ -2807,14 +2807,14 @@ template&lt;std::size_t N, std::size_t O&gt; </div>
 <li>A product type containing the transposed elements of <span class="tt">t</span>.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>transpose_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaef527bdd76c70e7fded23a9759428f5c">kumi::transpose</a>(std::declval&lt;T&gt;()));</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>transpose_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga549fe82222ad2de9bc68d716f489e17c">kumi::transpose</a>(std::declval&lt;T&gt;()));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span>transpose</div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">using </span>type = kumi::result::transpose_t&lt;T&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gaef527bdd76c70e7fded23a9759428f5c" title="Callable object transposing a product type of product types by shifting elements in their transposed ...">kumi::transpose</a></p>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga549fe82222ad2de9bc68d716f489e17c" title="Callable object transposing a product type of product types by shifting elements in their transposed ...">kumi::transpose</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>
 <li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
@@ -2827,7 +2827,7 @@ template&lt;std::size_t N, std::size_t O&gt; </div>
 <div class="line">                            , <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{ 2, <span class="charliteral">&#39;b&#39;</span>, 0.01  }</div>
 <div class="line">                            };</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#gaef527bdd76c70e7fded23a9759428f5c">kumi::transpose</a>( values );</div>
+<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#ga549fe82222ad2de9bc68d716f489e17c">kumi::transpose</a>( values );</div>
 <div class="line">  std::cout &lt;&lt; r &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --></li>
@@ -2843,7 +2843,7 @@ template&lt;std::size_t N, std::size_t O&gt; </div>
 <div class="line">                            , <span class="stringliteral">&quot;second&quot;</span>_id = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;d&quot;</span>_id=2, <span class="stringliteral">&quot;e&quot;</span>_id=<span class="charliteral">&#39;b&#39;</span>, <span class="stringliteral">&quot;f&quot;</span>_id=0.01  }</div>
 <div class="line">                            };</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#gaef527bdd76c70e7fded23a9759428f5c">kumi::transpose</a>( values );</div>
+<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#ga549fe82222ad2de9bc68d716f489e17c">kumi::transpose</a>( values );</div>
 <div class="line">  std::cout &lt;&lt; r &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --></li>
@@ -2851,8 +2851,8 @@ template&lt;std::size_t N, std::size_t O&gt; </div>
 </div><div class="tabbed"></div> 
 </div>
 </div>
-<a id="ga6479cba59ee95d4a0779e94993ab55a9" name="ga6479cba59ee95d4a0779e94993ab55a9"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga6479cba59ee95d4a0779e94993ab55a9">&#9670;&#160;</a></span>unique</h2>
+<a id="ga275366f451b89e600b861c041129310d" name="ga275366f451b89e600b861c041129310d"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga275366f451b89e600b861c041129310d">&#9670;&#160;</a></span>unique</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -2861,12 +2861,12 @@ template&lt;std::size_t N, std::size_t O&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">unique_t kumi::unique {}</td>
+          <td class="memname">KUMI_VARIABLE_ABI constexpr unique_t kumi::unique {}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -2879,8 +2879,8 @@ template&lt;std::size_t N, std::size_t O&gt; </div>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/unique.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga6479cba59ee95d4a0779e94993ab55a9">unique</a>(T &amp;&amp; t);</div>
-<div class="ttc" id="agroup__kumi__generators_html_ga6479cba59ee95d4a0779e94993ab55a9"><div class="ttname"><a href="#ga6479cba59ee95d4a0779e94993ab55a9">kumi::unique</a></div><div class="ttdeci">constexpr unique_t unique</div><div class="ttdoc">Callable object returning a product type with consecutive duplicate types removed (pairwise uniquenes...</div><div class="ttdef"><b>Definition</b> unique.hpp:117</div></div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga275366f451b89e600b861c041129310d">unique</a>(T &amp;&amp; t);</div>
+<div class="ttc" id="agroup__kumi__generators_html_ga275366f451b89e600b861c041129310d"><div class="ttname"><a href="#ga275366f451b89e600b861c041129310d">kumi::unique</a></div><div class="ttdeci">KUMI_VARIABLE_ABI constexpr unique_t unique</div><div class="ttdoc">Callable object returning a product type with consecutive duplicate types removed (pairwise uniquenes...</div><div class="ttdef"><b>Definition</b> unique.hpp:117</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: Product Type to process</li>
@@ -2890,14 +2890,14 @@ template&lt;std::size_t N, std::size_t O&gt; </div>
 <li>A product type containing elements of <span class="tt">t</span> with consecutive duplicates removed.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>unique_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga6479cba59ee95d4a0779e94993ab55a9">kumi::unique</a>(std::declval&lt;T&gt;()));</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>unique_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga275366f451b89e600b861c041129310d">kumi::unique</a>(std::declval&lt;T&gt;()));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span>unique</div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">using </span>type = kumi::result::unique_t&lt;T&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga6479cba59ee95d4a0779e94993ab55a9" title="Callable object returning a product type with consecutive duplicate types removed (pairwise uniquenes...">kumi::unique</a></p>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga275366f451b89e600b861c041129310d" title="Callable object returning a product type with consecutive duplicate types removed (pairwise uniquenes...">kumi::unique</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>
 <li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
@@ -2910,7 +2910,7 @@ template&lt;std::size_t N, std::size_t O&gt; </div>
 <div class="line"> </div>
 <div class="line">    <a class="code hl_class" href="structkumi_1_1tuple.html">tuple</a> a = {1, 2, <span class="charliteral">&#39;x&#39;</span>, 3, 1.f, 2.f};</div>
 <div class="line"> </div>
-<div class="line">    std::cout &lt;&lt; <a class="code hl_variable" href="#ga6479cba59ee95d4a0779e94993ab55a9">kumi::unique</a>(a) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">    std::cout &lt;&lt; <a class="code hl_variable" href="#ga275366f451b89e600b861c041129310d">kumi::unique</a>(a) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --></li>
 <li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
@@ -2922,7 +2922,7 @@ template&lt;std::size_t N, std::size_t O&gt; </div>
 <div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
 <div class="line">  <span class="keyword">auto</span> a = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;a&quot;</span>_id = 1, <span class="stringliteral">&quot;b&quot;</span>_id = 2, <span class="stringliteral">&quot;c&quot;</span>_id = <span class="charliteral">&#39;x&#39;</span>, <span class="stringliteral">&quot;d&quot;</span>_id = 3,<span class="stringliteral">&quot;e&quot;</span>_id =  1.f, <span class="stringliteral">&quot;f&quot;</span>_id = 2.f};</div>
 <div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#ga6479cba59ee95d4a0779e94993ab55a9">kumi::unique</a>(a) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="#ga275366f451b89e600b861c041129310d">kumi::unique</a>(a) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --></li>
 </ul>
@@ -2997,7 +2997,7 @@ template&lt;std::size_t N&gt; </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;  Standard Windows &quot;</span> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; w &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
+<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga2d4ee5c43118e4abf41014e539a3a1ca">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
 <div class="line">  {</div>
 <div class="line">    get&lt;0&gt;(tile)++;</div>
 <div class="line">  },w);</div>
@@ -3007,7 +3007,7 @@ template&lt;std::size_t N&gt; </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;  Windows with references &quot;</span> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; w2 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
+<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga2d4ee5c43118e4abf41014e539a3a1ca">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
 <div class="line">  {</div>
 <div class="line">    get&lt;0&gt;(tile)++;</div>
 <div class="line">  },w2);</div>
@@ -3029,7 +3029,7 @@ template&lt;std::size_t N&gt; </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;  Standard Windows &quot;</span> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; w &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
+<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga2d4ee5c43118e4abf41014e539a3a1ca">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
 <div class="line">  {</div>
 <div class="line">    <a class="code hl_function" href="structkumi_1_1record.html#abc2cd329ad25d155458850c19cc3b137">get&lt;0&gt;</a>(<a class="code hl_function" href="structkumi_1_1tuple.html#ade5f616b3115a74bd4930f70f96ca199">kumi::values_of</a>(tile))++;</div>
 <div class="line">  },w);</div>
@@ -3039,7 +3039,7 @@ template&lt;std::size_t N&gt; </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;  Windows with references &quot;</span> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; w2 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
+<div class="line">  <a class="code hl_variable" href="group__kumi__transforms.html#ga2d4ee5c43118e4abf41014e539a3a1ca">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
 <div class="line">  {</div>
 <div class="line">    <a class="code hl_function" href="structkumi_1_1record.html#abc2cd329ad25d155458850c19cc3b137">get&lt;0&gt;</a>(<a class="code hl_function" href="structkumi_1_1tuple.html#ade5f616b3115a74bd4930f70f96ca199">kumi::values_of</a>(tile))++;</div>
 <div class="line">  },w2);</div>
@@ -3050,8 +3050,8 @@ template&lt;std::size_t N&gt; </div>
 </div><div class="tabbed"></div> 
 </div>
 </div>
-<a id="ga71c21174289ba175a8d3d4b170cec05f" name="ga71c21174289ba175a8d3d4b170cec05f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga71c21174289ba175a8d3d4b170cec05f">&#9670;&#160;</a></span>zip</h2>
+<a id="gafbd7624fc8afd3ddd0b96f27dc67dc44" name="gafbd7624fc8afd3ddd0b96f27dc67dc44"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafbd7624fc8afd3ddd0b96f27dc67dc44">&#9670;&#160;</a></span>zip</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3060,12 +3060,12 @@ template&lt;std::size_t N&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">zip_t kumi::zip {}</td>
+          <td class="memname">KUMI_VARIABLE_ABI constexpr zip_t kumi::zip {}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -3077,15 +3077,15 @@ template&lt;std::size_t N&gt; </div>
 <dl class="section note"><dt>Note</dt><dd>This function does not take part in overload resolution if the product types do not follow the same semantic. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd>follows_same_semantic</dd>
 <dd>
-<a class="el" href="#gaf4b9aea3cee7c30fc6a516c632805423" title="Callable object constructing a tuple where the ith element is the product type of all ith elements of...">zip_min</a> </dd>
+<a class="el" href="#ga965051fcb273747bb32eac78db78be9e" title="Callable object constructing a tuple where the ith element is the product type of all ith elements of...">zip_min</a> </dd>
 <dd>
-<a class="el" href="#ga0ce4823febfb00cfb197f73332ba7309" title="Callable object constructing a tuple where the ith element is the product type of all ith elements of...">zip_max</a></dd></dl>
+<a class="el" href="#gafa6a13ae3571e58fd59dd1fc4860822e" title="Callable object constructing a tuple where the ith element is the product type of all ith elements of...">zip_max</a></dd></dl>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/zip.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, product_type... Ts&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga71c21174289ba175a8d3d4b170cec05f">zip</a>(T &amp;&amp; t, Ts &amp;&amp;... ts);</div>
-<div class="ttc" id="agroup__kumi__generators_html_ga71c21174289ba175a8d3d4b170cec05f"><div class="ttname"><a href="#ga71c21174289ba175a8d3d4b170cec05f">kumi::zip</a></div><div class="ttdeci">constexpr zip_t zip</div><div class="ttdoc">Callable object constructing a tuple where the ith element is the product type of all ith elements of...</div><div class="ttdef"><b>Definition</b> zip.hpp:152</div></div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gafbd7624fc8afd3ddd0b96f27dc67dc44">zip</a>(T &amp;&amp; t, Ts &amp;&amp;... ts);</div>
+<div class="ttc" id="agroup__kumi__generators_html_gafbd7624fc8afd3ddd0b96f27dc67dc44"><div class="ttname"><a href="#gafbd7624fc8afd3ddd0b96f27dc67dc44">kumi::zip</a></div><div class="ttdeci">KUMI_VARIABLE_ABI constexpr zip_t zip</div><div class="ttdoc">Callable object constructing a tuple where the ith element is the product type of all ith elements of...</div><div class="ttdef"><b>Definition</b> zip.hpp:152</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: Product type to convert</li>
@@ -3098,14 +3098,14 @@ template&lt;std::size_t N&gt; </div>
 <h2 class="groupheader">Helper type </h2>
 <div class="fragment"><div class="line">    <span class="comment">//</span></div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T0, kumi::concepts::product_type... Ts&gt;</div>
-<div class="line">    <span class="keyword">using </span>zip_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga71c21174289ba175a8d3d4b170cec05f">kumi::zip</a>(std::declval&lt;T0&gt;(), std::declval&lt;Ts&gt;()...));</div>
+<div class="line">    <span class="keyword">using </span>zip_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gafbd7624fc8afd3ddd0b96f27dc67dc44">kumi::zip</a>(std::declval&lt;T0&gt;(), std::declval&lt;Ts&gt;()...));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T0, kumi::concepts::sized_product_type&lt;kumi::size_v&lt;T0&gt;&gt;... Ts&gt; <span class="keyword">struct </span>zip</div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">using </span>type = kumi::result::zip_t&lt;T0, Ts...&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga71c21174289ba175a8d3d4b170cec05f" title="Callable object constructing a tuple where the ith element is the product type of all ith elements of...">kumi::zip</a></p>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gafbd7624fc8afd3ddd0b96f27dc67dc44" title="Callable object constructing a tuple where the ith element is the product type of all ith elements of...">kumi::zip</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>
 <li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
@@ -3118,7 +3118,7 @@ template&lt;std::size_t N&gt; </div>
 <div class="line">  <span class="keyword">auto</span> ltrs  = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="charliteral">&#39;a&#39;</span>,<span class="charliteral">&#39;b&#39;</span>,<span class="charliteral">&#39;c&#39;</span>};</div>
 <div class="line">  <span class="keyword">auto</span> ratio = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{0.1,0.01,0.001};</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#ga71c21174289ba175a8d3d4b170cec05f">kumi::zip</a>( nbrs, ltrs, ratio );</div>
+<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#gafbd7624fc8afd3ddd0b96f27dc67dc44">kumi::zip</a>( nbrs, ltrs, ratio );</div>
 <div class="line">  std::cout &lt;&lt; r &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --></li>
@@ -3134,7 +3134,7 @@ template&lt;std::size_t N&gt; </div>
 <div class="line">  <span class="keyword">auto</span> ltrs  = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;d&quot;</span>_id=<span class="charliteral">&#39;a&#39;</span>,<span class="stringliteral">&quot;e&quot;</span>_id=<span class="charliteral">&#39;b&#39;</span> ,<span class="stringliteral">&quot;f&quot;</span>_id=<span class="charliteral">&#39;c&#39;</span>  };</div>
 <div class="line">  <span class="keyword">auto</span> ratio = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;g&quot;</span>_id=0.1,<span class="stringliteral">&quot;h&quot;</span>_id=0.01,<span class="stringliteral">&quot;i&quot;</span>_id=0.001};</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#ga71c21174289ba175a8d3d4b170cec05f">kumi::zip</a>( nbrs, ltrs, ratio );</div>
+<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#gafbd7624fc8afd3ddd0b96f27dc67dc44">kumi::zip</a>( nbrs, ltrs, ratio );</div>
 <div class="line">  std::cout &lt;&lt; r &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --></li>
@@ -3142,8 +3142,8 @@ template&lt;std::size_t N&gt; </div>
 </div><div class="tabbed"> </div> 
 </div>
 </div>
-<a id="ga0ce4823febfb00cfb197f73332ba7309" name="ga0ce4823febfb00cfb197f73332ba7309"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga0ce4823febfb00cfb197f73332ba7309">&#9670;&#160;</a></span>zip_max</h2>
+<a id="gafa6a13ae3571e58fd59dd1fc4860822e" name="gafa6a13ae3571e58fd59dd1fc4860822e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gafa6a13ae3571e58fd59dd1fc4860822e">&#9670;&#160;</a></span>zip_max</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3152,12 +3152,12 @@ template&lt;std::size_t N&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">zip_max_t kumi::zip_max {}</td>
+          <td class="memname">KUMI_VARIABLE_ABI constexpr zip_max_t kumi::zip_max {}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -3168,16 +3168,16 @@ template&lt;std::size_t N&gt; </div>
 <p>On record types, this function operates on elements as if they were ordered. The considered order is the order of declaration.</p>
 <dl class="section note"><dt>Note</dt><dd>This function does not take part in overload resolution if the product types do not follow the same semantic. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="conceptkumi_1_1concepts_1_1follows__same__semantic.html" title="Concept specifying if a pack of types follows the same semantic.">kumi::concepts::follows_same_semantic</a></dd></dl>
-<dl class="section note"><dt>Note</dt><dd><span class="tt"><a class="el" href="#ga0ce4823febfb00cfb197f73332ba7309" title="Callable object constructing a tuple where the ith element is the product type of all ith elements of...">zip_max</a></span> fills missing elements to reach the biggest product type size.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="#ga71c21174289ba175a8d3d4b170cec05f" title="Callable object constructing a tuple where the ith element is the product type of all ith elements of...">zip</a> </dd>
+<dl class="section note"><dt>Note</dt><dd><span class="tt"><a class="el" href="#gafa6a13ae3571e58fd59dd1fc4860822e" title="Callable object constructing a tuple where the ith element is the product type of all ith elements of...">zip_max</a></span> fills missing elements to reach the biggest product type size.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#gafbd7624fc8afd3ddd0b96f27dc67dc44" title="Callable object constructing a tuple where the ith element is the product type of all ith elements of...">zip</a> </dd>
 <dd>
-<a class="el" href="#gaf4b9aea3cee7c30fc6a516c632805423" title="Callable object constructing a tuple where the ith element is the product type of all ith elements of...">zip_min</a></dd></dl>
+<a class="el" href="#ga965051fcb273747bb32eac78db78be9e" title="Callable object constructing a tuple where the ith element is the product type of all ith elements of...">zip_min</a></dd></dl>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/zip.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, product_type... Ts&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga0ce4823febfb00cfb197f73332ba7309">zip_max</a>(T &amp;&amp; t, Ts &amp;&amp;... ts);</div>
-<div class="ttc" id="agroup__kumi__generators_html_ga0ce4823febfb00cfb197f73332ba7309"><div class="ttname"><a href="#ga0ce4823febfb00cfb197f73332ba7309">kumi::zip_max</a></div><div class="ttdeci">constexpr zip_max_t zip_max</div><div class="ttdoc">Callable object constructing a tuple where the ith element is the product type of all ith elements of...</div><div class="ttdef"><b>Definition</b> zip.hpp:275</div></div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gafa6a13ae3571e58fd59dd1fc4860822e">zip_max</a>(T &amp;&amp; t, Ts &amp;&amp;... ts);</div>
+<div class="ttc" id="agroup__kumi__generators_html_gafa6a13ae3571e58fd59dd1fc4860822e"><div class="ttname"><a href="#gafa6a13ae3571e58fd59dd1fc4860822e">kumi::zip_max</a></div><div class="ttdeci">KUMI_VARIABLE_ABI constexpr zip_max_t zip_max</div><div class="ttdoc">Callable object constructing a tuple where the ith element is the product type of all ith elements of...</div><div class="ttdef"><b>Definition</b> zip.hpp:275</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: Product type to convert</li>
@@ -3189,14 +3189,14 @@ template&lt;std::size_t N&gt; </div>
 </ul>
 <h2 class="groupheader">Helper type </h2>
 <div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T0, kumi::concepts::product_type... Ts&gt;</div>
-<div class="line">    <span class="keyword">using </span>zip_max_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga0ce4823febfb00cfb197f73332ba7309">kumi::zip_max</a>(std::declval&lt;T0&gt;(), std::declval&lt;Ts&gt;()...));</div>
+<div class="line">    <span class="keyword">using </span>zip_max_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gafa6a13ae3571e58fd59dd1fc4860822e">kumi::zip_max</a>(std::declval&lt;T0&gt;(), std::declval&lt;Ts&gt;()...));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T0, kumi::concepts::product_type... Ts&gt; <span class="keyword">struct </span>zip_max</div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">using </span>type = kumi::result::zip_max_t&lt;T0, Ts...&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga0ce4823febfb00cfb197f73332ba7309" title="Callable object constructing a tuple where the ith element is the product type of all ith elements of...">kumi::zip_max</a></p>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gafa6a13ae3571e58fd59dd1fc4860822e" title="Callable object constructing a tuple where the ith element is the product type of all ith elements of...">kumi::zip_max</a></p>
 <h2 class="groupheader">Example </h2>
 <h3 class="groupheader">Tuple </h3>
 <div class="fragment"><div class="line"></div>
@@ -3209,14 +3209,14 @@ template&lt;std::size_t N&gt; </div>
 <div class="line">  <span class="keyword">auto</span> ltrs  = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="charliteral">&#39;a&#39;</span>,<span class="charliteral">&#39;b&#39;</span>,<span class="charliteral">&#39;c&#39;</span>};</div>
 <div class="line">  <span class="keyword">auto</span> ratio = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{0.1,0.01,0.001,0.0001};</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#ga0ce4823febfb00cfb197f73332ba7309">kumi::zip_max</a>( nbrs, ltrs, ratio );</div>
+<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#gafa6a13ae3571e58fd59dd1fc4860822e">kumi::zip_max</a>( nbrs, ltrs, ratio );</div>
 <div class="line">  std::cout &lt;&lt; r &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --> 
 </div>
 </div>
-<a id="gaf4b9aea3cee7c30fc6a516c632805423" name="gaf4b9aea3cee7c30fc6a516c632805423"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaf4b9aea3cee7c30fc6a516c632805423">&#9670;&#160;</a></span>zip_min</h2>
+<a id="ga965051fcb273747bb32eac78db78be9e" name="ga965051fcb273747bb32eac78db78be9e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga965051fcb273747bb32eac78db78be9e">&#9670;&#160;</a></span>zip_min</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -3225,12 +3225,12 @@ template&lt;std::size_t N&gt; </div>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">zip_min_t kumi::zip_min {}</td>
+          <td class="memname">KUMI_VARIABLE_ABI constexpr zip_min_t kumi::zip_min {}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel inline">inline</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
@@ -3241,16 +3241,16 @@ template&lt;std::size_t N&gt; </div>
 <p>On record types, this function operates on elements as if they were ordered. The considered order is the order of declaration.</p>
 <dl class="section note"><dt>Note</dt><dd>This function does not take part in overload resolution if the product types do not follow the same semantic. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd>follows_same_semantic</dd></dl>
-<dl class="section note"><dt>Note</dt><dd><span class="tt"><a class="el" href="#gaf4b9aea3cee7c30fc6a516c632805423" title="Callable object constructing a tuple where the ith element is the product type of all ith elements of...">zip_min</a></span> truncates product types based on the smallest size.</dd></dl>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="#ga71c21174289ba175a8d3d4b170cec05f" title="Callable object constructing a tuple where the ith element is the product type of all ith elements of...">zip</a> </dd>
+<dl class="section note"><dt>Note</dt><dd><span class="tt"><a class="el" href="#ga965051fcb273747bb32eac78db78be9e" title="Callable object constructing a tuple where the ith element is the product type of all ith elements of...">zip_min</a></span> truncates product types based on the smallest size.</dd></dl>
+<dl class="section see"><dt>See also</dt><dd><a class="el" href="#gafbd7624fc8afd3ddd0b96f27dc67dc44" title="Callable object constructing a tuple where the ith element is the product type of all ith elements of...">zip</a> </dd>
 <dd>
-<a class="el" href="#ga0ce4823febfb00cfb197f73332ba7309" title="Callable object constructing a tuple where the ith element is the product type of all ith elements of...">zip_max</a></dd></dl>
+<a class="el" href="#gafa6a13ae3571e58fd59dd1fc4860822e" title="Callable object constructing a tuple where the ith element is the product type of all ith elements of...">zip_max</a></dd></dl>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/zip.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, product_type... Ts&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaf4b9aea3cee7c30fc6a516c632805423">zip_min</a>(T &amp;&amp; t, Ts &amp;&amp;... ts);</div>
-<div class="ttc" id="agroup__kumi__generators_html_gaf4b9aea3cee7c30fc6a516c632805423"><div class="ttname"><a href="#gaf4b9aea3cee7c30fc6a516c632805423">kumi::zip_min</a></div><div class="ttdeci">constexpr zip_min_t zip_min</div><div class="ttdoc">Callable object constructing a tuple where the ith element is the product type of all ith elements of...</div><div class="ttdef"><b>Definition</b> zip.hpp:217</div></div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga965051fcb273747bb32eac78db78be9e">zip_min</a>(T &amp;&amp; t, Ts &amp;&amp;... ts);</div>
+<div class="ttc" id="agroup__kumi__generators_html_ga965051fcb273747bb32eac78db78be9e"><div class="ttname"><a href="#ga965051fcb273747bb32eac78db78be9e">kumi::zip_min</a></div><div class="ttdeci">KUMI_VARIABLE_ABI constexpr zip_min_t zip_min</div><div class="ttdoc">Callable object constructing a tuple where the ith element is the product type of all ith elements of...</div><div class="ttdef"><b>Definition</b> zip.hpp:217</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: Product type to convert</li>
@@ -3263,14 +3263,14 @@ template&lt;std::size_t N&gt; </div>
 <h2 class="groupheader">Helper type </h2>
 <div class="fragment"><div class="line">    <span class="comment">//</span></div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T0, kumi::concepts::product_type... Ts&gt;</div>
-<div class="line">    <span class="keyword">using </span>zip_min_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gaf4b9aea3cee7c30fc6a516c632805423">kumi::zip_min</a>(std::declval&lt;T0&gt;(), std::declval&lt;Ts&gt;()...));</div>
+<div class="line">    <span class="keyword">using </span>zip_min_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga965051fcb273747bb32eac78db78be9e">kumi::zip_min</a>(std::declval&lt;T0&gt;(), std::declval&lt;Ts&gt;()...));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T0, kumi::concepts::product_type... Ts&gt; <span class="keyword">struct </span>zip_min</div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">using </span>type = kumi::result::zip_min_t&lt;T0, Ts...&gt;;</div>
 <div class="line">    };</div>
 <div class="line"> </div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gaf4b9aea3cee7c30fc6a516c632805423" title="Callable object constructing a tuple where the ith element is the product type of all ith elements of...">kumi::zip_min</a></p>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga965051fcb273747bb32eac78db78be9e" title="Callable object constructing a tuple where the ith element is the product type of all ith elements of...">kumi::zip_min</a></p>
 <h2 class="groupheader">Examples </h2>
 <div class="tabbed"></div><div class="tabbed"><ul>
 <li><b class="tab-title">Tuple</b> <div class="fragment"><div class="line"></div>
@@ -3283,7 +3283,7 @@ template&lt;std::size_t N&gt; </div>
 <div class="line">  <span class="keyword">auto</span> ltrs  = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{<span class="charliteral">&#39;a&#39;</span>,<span class="charliteral">&#39;b&#39;</span>,<span class="charliteral">&#39;c&#39;</span>};</div>
 <div class="line">  <span class="keyword">auto</span> ratio = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{0.1,0.01,0.001,0.0001};</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#gaf4b9aea3cee7c30fc6a516c632805423">kumi::zip_min</a>( nbrs, ltrs, ratio );</div>
+<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#ga965051fcb273747bb32eac78db78be9e">kumi::zip_min</a>( nbrs, ltrs, ratio );</div>
 <div class="line">  std::cout &lt;&lt; r &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --></li>
@@ -3298,7 +3298,7 @@ template&lt;std::size_t N&gt; </div>
 <div class="line">  <span class="keyword">auto</span> ltrs  = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;aa&quot;</span>_id = <span class="charliteral">&#39;a&#39;</span>,<span class="stringliteral">&quot;bb&quot;</span>_id = <span class="charliteral">&#39;b&#39;</span>,<span class="stringliteral">&quot;cc&quot;</span>_id = <span class="charliteral">&#39;c&#39;</span>};</div>
 <div class="line">  <span class="keyword">auto</span> ratio = <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;aaa&quot;</span>_id = 0.1,<span class="stringliteral">&quot;bbb&quot;</span>_id = 0.01,<span class="stringliteral">&quot;ccc&quot;</span>_id = 0.001,<span class="stringliteral">&quot;ddd&quot;</span>_id = 0.0001};</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#gaf4b9aea3cee7c30fc6a516c632805423">kumi::zip_min</a>( nbrs, ltrs, ratio );</div>
+<div class="line">  <span class="keyword">auto</span> r = <a class="code hl_variable" href="#ga965051fcb273747bb32eac78db78be9e">kumi::zip_min</a>( nbrs, ltrs, ratio );</div>
 <div class="line">  std::cout &lt;&lt; r &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --></li>

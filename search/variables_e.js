@@ -5,7 +5,7 @@ var searchData=
   ['size_5for_5fv_2',['size_or_v',['../group__kumi__functional.html#ga1aeb494d781c6a1d8f48168f4f093afe',1,'kumi::function']]],
   ['size_5fv_3',['size_v',['../group__kumi__traits.html#ga4dd894f30adf7e5f7ae95124f66d8adb',1,'kumi']]],
   ['slicer_4',['slicer',['../group__kumi__functional.html#ga3201caae7402c136e332d664a439913e',1,'kumi::function']]],
-  ['split_5',['split',['../group__kumi__generators.html#gadb81f4533e81830674c3fc9577d3de93',1,'kumi']]],
+  ['split_5',['split',['../group__kumi__generators.html#gae1acaabcf65546a19904bd57e226cff9',1,'kumi']]],
   ['splitter_6',['splitter',['../group__kumi__functional.html#gae7fa4a3e9b7b6fd79f177f6126bcef2b',1,'kumi::function']]],
-  ['sum_7',['sum',['../group__kumi__reductions.html#ga3e8b585399de360c3ab55efc2fa0ed8c',1,'kumi']]]
+  ['sum_7',['sum',['../group__kumi__reductions.html#gaa72daa762cddca6f8001e466c3cb3e90',1,'kumi']]]
 ];

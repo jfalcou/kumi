@@ -8,7 +8,7 @@ var searchData=
   ['languages_20considerations_5',['Programming Languages Considerations',['../kumi_product.html#tuple_programming',1,'']]],
   ['licence_6',['Licence',['../kumi_licence.html',1,'Licence'],['../index.html#autotoc_md153',1,'Licence']]],
   ['literals_7',['literals',['../namespaceliterals.html',1,'']]],
-  ['locate_8',['locate',['../group__kumi__queries.html#ga39f807d6c2b8909a712d431acde4153e',1,'kumi']]],
+  ['locate_8',['locate',['../group__kumi__queries.html#ga8d7d014be1ca87e1ade78fbf7631bc80',1,'kumi']]],
   ['log_9',['Change Log',['../kumi_changelog.html',1,'']]],
   ['logic_20of_20and_10',['Product Constructions (The Logic of &quot;AND&quot;)',['../kumi_product.html#product_construction',1,'']]]
 ];

@@ -152,8 +152,8 @@ New Features</h3>
 <li>Introducing <a class="el" href="group__kumi__generators.html#gade96292292ae11da69415a778ef45ad0" title="kumi::windows"><span class="tt">windows</span></a> and <a class="el" href="group__kumi__generators.html#gaf4b0bcda72790c2ac55519adaf89456e" title="kumi::chunks"><span class="tt">chunks</span></a> (#123).</li>
 <li>Introducing <a class="el" href="group__kumi__generators.html#ga2c9b5ff6b698c7dcb0feb2da1679fa9b" title="kumi::filter"><span class="tt">filter</span></a> and <a class="el" href="group__kumi__generators.html#ga750bc3d3425c955e1be6ef1b3879c314" title="kumi::filter_not"><span class="tt">filter_not</span></a> (#124).</li>
 <li>Introducing <a class="el" href="group__kumi__generators.html#ga3594f15dbfba2f6fda0afc8d1542c449" title="kumi::reindex"><span class="tt">reindex</span></a> algorithm (#130).</li>
-<li>Introducing <a class="el" href="group__kumi__generators.html#ga6479cba59ee95d4a0779e94993ab55a9" title="kumi::unique"><span class="tt">unique</span></a> and <a class="el" href="group__kumi__generators.html#ga71bbbe8da94919e242bd3ded80ab6776" title="kumi::all_unique"><span class="tt">all_unique</span></a> algorithms (#139).</li>
-<li>Introducing <a class="el" href="group__kumi__reductions.html#gaf7efbfa530d2396e2ed230cc03e4046e" title="kumi::reduce"><span class="tt">reduce</span></a> and <a class="el" href="group__kumi__reductions.html#ga1389eee6fb884b34ed4957884ecd39a1" title="kumi::inclusive_scan_left">inclusive and exclusive scans</a> (#137).</li>
+<li>Introducing <a class="el" href="group__kumi__generators.html#ga275366f451b89e600b861c041129310d" title="kumi::unique"><span class="tt">unique</span></a> and <a class="el" href="group__kumi__generators.html#ga44cd4dee63d1a1b879f1b04325894802" title="kumi::all_unique"><span class="tt">all_unique</span></a> algorithms (#139).</li>
+<li>Introducing <a class="el" href="group__kumi__reductions.html#ga0a6eb7cdd0f2a2cd71bf9e53747ef82b" title="kumi::reduce"><span class="tt">reduce</span></a> and <a class="el" href="group__kumi__reductions.html#ga12b0bfc8d8cb087e200f2dd2716fae7b" title="kumi::inclusive_scan_left">inclusive and exclusive scans</a> (#137).</li>
 <li>Introducing <a class="el" href="group__kumi__generators.html#gadbc56977f82e2eaefe486c0a9457f01c" title="kumi::rotate_left">rotate algorithms</a> (#154).</li>
 <li>Add projection maps support (#182).</li>
 <li>Implement <span class="tt">map_traits</span> (#104).</li>
@@ -281,7 +281,7 @@ What's Changed</h2>
 <h3 class="doxsection"><a class="anchor" id="autotoc_md107"></a>
 API and Infrastructure Changes</h3>
 <ul>
-<li><a class="el" href="group__kumi__generators.html#ga1a7617bafd6f8598cca8e7e6a5c6f383" title="Callable object extracting a sub product type from a product type.">kumi::extract</a> and <a class="el" href="group__kumi__generators.html#gadb81f4533e81830674c3fc9577d3de93" title="Callable object splitting a product type into two.">kumi::split</a> are now free functions (See #40)</li>
+<li><a class="el" href="group__kumi__generators.html#ga436df48ea795457466c659ad8f05758e" title="Callable object extracting a sub product type from a product type.">kumi::extract</a> and <a class="el" href="group__kumi__generators.html#gae1acaabcf65546a19904bd57e226cff9" title="Callable object splitting a product type into two.">kumi::split</a> are now free functions (See #40)</li>
 <li>KUMI implementation is now done in split file that get aggregated (See #34)</li>
 <li>Massive documentation revamping (See #27, #28)</li>
 <li>Added proper integration tests (See #35)</li>
@@ -290,17 +290,17 @@ API and Infrastructure Changes</h3>
 New Features</h3>
 <ul>
 <li>Implemented <a class="el" href="group__kumi__generators.html#gace6e022bb94a706731299b9d395ac10d" title="Callable object creating a kumi::tuple containing an increasing ramp of values.">kumi::iota</a> and generate (See #23)</li>
-<li>Implemented <a class="el" href="group__kumi__generators.html#ga39128fad2c11b9fea55558222a87721c" title="Callable object returning the Cartesian Product of all elements of its arguments product types.">kumi::cartesian_product</a> (See #26)</li>
+<li>Implemented <a class="el" href="group__kumi__generators.html#ga59c6f57141b8204d2852a06c6371b8df" title="Callable object returning the Cartesian Product of all elements of its arguments product types.">kumi::cartesian_product</a> (See #26)</li>
 <li>Implemented predicate based operations on tuple (See #25)</li>
-<li>Implemented <a class="el" href="group__kumi__reductions.html#ga712c681a51bdbc86d41b160deddd2e1d" title="Callable object computing the inner product (i.e. sum of products).">kumi::inner_product</a> (See #36)</li>
-<li>Implemented <a class="el" href="group__kumi__queries.html#gae635e0c094282372ff5393840b6f52c2" title="Callable object used to retrieve the back of a product type.">kumi::back</a> and <a class="el" href="group__kumi__queries.html#gaa1618c96c4c7003afeccfb19e25b35bb" title="Callable object used to retrieve the front of a product type.">kumi::front</a> (See #37)</li>
-<li>Implemented <a class="el" href="group__kumi__generators.html#ga48f6e5775e61dca804eda8b0bd354d6f" title="Callable object reversing elements of a product type.">kumi::reverse</a> (See #39)</li>
+<li>Implemented <a class="el" href="group__kumi__reductions.html#gacd22add376c263544e5432b573b7a4af" title="Callable object computing the inner product (i.e. sum of products).">kumi::inner_product</a> (See #36)</li>
+<li>Implemented <a class="el" href="group__kumi__queries.html#ga5b671937a03574ce9e2992913cba8172" title="Callable object used to retrieve the back of a product type.">kumi::back</a> and <a class="el" href="group__kumi__queries.html#ga1c474406a3e29cd4c955dd735dfb0cad" title="Callable object used to retrieve the front of a product type.">kumi::front</a> (See #37)</li>
+<li>Implemented <a class="el" href="group__kumi__generators.html#ga36995fccf531b895e85e8f643643f1f3" title="Callable object reversing elements of a product type.">kumi::reverse</a> (See #39)</li>
 </ul>
 <h3 class="doxsection"><a class="anchor" id="autotoc_md109"></a>
 Bug Fixes</h3>
 <ul>
 <li>Fix #18 - Bad interaction with tuple of references (See #19)</li>
-<li>Improve <a class="el" href="group__kumi__generators.html#ga49acccc42ec8af7b96b63e8f38796df2" title="Callable object converting a product type of product types into a product type of all elements.">kumi::flatten</a> implementation (See #20)</li>
+<li>Improve <a class="el" href="group__kumi__generators.html#ga05fc8b5c317c41d4aa54fc0e90ed0172" title="Callable object converting a product type of product types into a product type of all elements.">kumi::flatten</a> implementation (See #20)</li>
 </ul>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md110"></a>
 New Contributors</h2>
@@ -315,7 +315,7 @@ What's Changed</h2>
 <h3 class="doxsection"><a class="anchor" id="autotoc_md113"></a>
 Bug Fixes</h3>
 <ul>
-<li>Improve <span class="tt"><a class="el" href="group__kumi__generators.html#ga4550222df58187f71b1b1347500e324a" title="Callable object concatenating multiple product types into a single one.">kumi::cat</a></span> implementation to perform <span class="tt">O(N)</span> copies.</li>
+<li>Improve <span class="tt"><a class="el" href="group__kumi__generators.html#ga4a2e8c63cbceb415681df0907350166d" title="Callable object concatenating multiple product types into a single one.">kumi::cat</a></span> implementation to perform <span class="tt">O(N)</span> copies.</li>
 <li>Use include guards to prevent issue when different project use KUMI concurrently.</li>
 </ul>
 <h3 class="doxsection"><a class="anchor" id="autotoc_md114"></a>

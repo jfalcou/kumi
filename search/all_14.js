@@ -2,10 +2,10 @@ var searchData=
 [
   ['partition_0',['partition',['../group__kumi__generators.html#ga4643116b2dc0dfbd0d15fee408a9c18c',1,'kumi']]],
   ['plus_1',['plus',['../group__kumi__functional.html#gab83f5dbd77ab8618b7925c9de6adb54d',1,'kumi::function']]],
-  ['pop_5ffront_2',['pop_front',['../group__kumi__generators.html#ga38d1ddeb5090405e79e9b7d898a85133',1,'kumi']]],
+  ['pop_5ffront_2',['pop_front',['../group__kumi__generators.html#ga9e7a82fbd0e84ec50b4f93b31729aa0b',1,'kumi']]],
   ['pre_20requisites_3',['Pre-requisites',['../kumi_setup.html#prerequisit',1,'']]],
   ['predicate_4',['predicate',['../group__kumi__utility.html#ga9c8c29e8a2f4f5e8a663200559fdc983',1,'kumi']]],
-  ['prod_5',['prod',['../group__kumi__reductions.html#ga6c139ebafaebc0f7dbca2fd57aee943c',1,'kumi']]],
+  ['prod_5',['prod',['../group__kumi__reductions.html#ga47864fd549d6efc837925aab74e8717b',1,'kumi']]],
   ['product_20constructions_20the_20logic_20of_20and_6',['Product Constructions (The Logic of &quot;AND&quot;)',['../kumi_product.html#product_construction',1,'']]],
   ['product_20type_2027_7',['Product Type \\( (A \\times B) \\)',['../kumi_product.html#kumi_product_type',1,'']]],
   ['product_20type_20algorithms_8',['Product Type Algorithms',['../group__kumi__algorithm.html',1,'']]],
@@ -23,5 +23,5 @@ var searchData=
   ['projection_5fmap_20',['projection_map',['../structkumi_1_1projection__map.html',1,'kumi::projection_map&lt; V &gt;'],['../conceptkumi_1_1concepts_1_1projection__map.html',1,'kumi::concepts'],['../group__kumi__utility.html#ga0ac9f243b64bbbabc2bad542ca03c035',1,'kumi::projection_map()']]],
   ['protocol_21',['Tuple Protocol',['../kumi_cpp_spec.html#autotoc_md128',1,'']]],
   ['public_20release_22',['First autonomous public release.',['../kumi_changelog.html#autotoc_md121',1,'']]],
-  ['push_5ffront_23',['push_front',['../group__kumi__generators.html#gad4bd53f162f63af0cbfbd68d8adb5d5c',1,'kumi']]]
+  ['push_5ffront_23',['push_front',['../group__kumi__generators.html#gaaf546d47975e0499409f249074291581',1,'kumi']]]
 ];

@@ -1,13 +1,13 @@
 var searchData=
 [
-  ['reduce_0',['reduce',['../group__kumi__reductions.html#gaf7efbfa530d2396e2ed230cc03e4046e',1,'kumi']]],
+  ['reduce_0',['reduce',['../group__kumi__reductions.html#ga0a6eb7cdd0f2a2cd71bf9e53747ef82b',1,'kumi']]],
   ['reducer_1',['reducer',['../group__kumi__functional.html#gaaefcb5d45afa90ffd9674cc3af110c2d',1,'kumi::function']]],
   ['reindex_2',['reindex',['../group__kumi__generators.html#ga3594f15dbfba2f6fda0afc8d1542c449',1,'kumi']]],
-  ['remove_3',['remove',['../group__kumi__generators.html#ga0f52ba0b24ce54052784df91c54ac233',1,'kumi']]],
+  ['remove_3',['remove',['../group__kumi__generators.html#ga57a23786d1c6cab5aef29aaf4fd5c478',1,'kumi']]],
   ['reorder_4',['reorder',['../group__kumi__generators.html#ga32af967d7f453426ccd564d3a0b6c689',1,'kumi']]],
   ['reorder_5ffields_5',['reorder_fields',['../group__kumi__generators.html#ga8c42552c8f93dad0b83a3903468d02c6',1,'kumi']]],
   ['repeater_6',['repeater',['../group__kumi__functional.html#ga7101480ea637b85853e7ac2621edfcd5',1,'kumi::function']]],
-  ['reverse_7',['reverse',['../group__kumi__generators.html#ga48f6e5775e61dca804eda8b0bd354d6f',1,'kumi']]],
+  ['reverse_7',['reverse',['../group__kumi__generators.html#ga36995fccf531b895e85e8f643643f1f3',1,'kumi']]],
   ['reverser_8',['reverser',['../group__kumi__functional.html#ga050f412223903338fb77031c089298dd',1,'kumi::function']]],
   ['rotate_5fleft_9',['rotate_left',['../group__kumi__generators.html#gadbc56977f82e2eaefe486c0a9457f01c',1,'kumi']]],
   ['rotate_5fright_10',['rotate_right',['../group__kumi__generators.html#gaffd5dbb36e1c70d2fc058ffe03afef3e',1,'kumi']]],
