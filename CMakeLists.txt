@@ -31,7 +31,7 @@ copa_add_option(KUMI_COMPILE_COST "Measure what every test unit costs to compile
 if(KUMI_BUILD_TEST)
   include(${PROJECT_SOURCE_DIR}/cmake/compiler.cmake)
 endif()
-copa_project_version(MAJOR 4 MINOR 0 PATCH 0 REPOSITORY https://github.com/jfalcou/kumi)
+copa_project_version(MAJOR 5 MINOR 0 PATCH 0 REPOSITORY https://github.com/jfalcou/kumi)
 
 ##======================================================================================================================
 ## Summary Display
