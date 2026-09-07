@@ -1,6 +1,48 @@
 Change Log {#kumi_changelog}
 ==========
 
+# Version 5.0 - Gorgeous Garnet
+
+kumi now runs inside CUDA kernels and compiles faster. Algorithms became callable objects, which breaks
+unqualified calls, hence the major version bump.
+
+### Breaking Changes
+* Every algorithm is a callable object and requires full namespace qualification (#210):
+    * an unqualified call that relied on ADL, `apply(f, t)` on a `kumi::tuple`, no longer compiles;
+    * an algorithm can no longer be passed as a function template nor have its address taken;
+    * calls with explicit template arguments keep their form, `kumi::reorder<1, 0>(t)`.
+
+### New Features
+* **Algorithms**:
+    * Introducing [`remove`](@ref kumi::remove) and [`compress`](@ref kumi::compress) (#213, #214).
+    * [`extract`](@ref kumi::extract) and [`remove`](@ref kumi::remove) accept a step (#215).
+    * Predicates may return non-bool types (#235).
+* **Strings**:
+    * `string_view` utilities on [`kumi::str`](@ref kumi::str), which compiles without conversion warnings (#211, #216).
+* **CUDA**:
+    * nvcc support (#193).
+    * kumi is tested inside CUDA kernels on every nvidia toolchain (#246, #252).
+* **Compile Time**:
+    * Internal lambdas removed, internal calls fully qualified, and the memory footprint of algorithm
+      instantiation reduced (#205, #208, #220, #223).
+
+### FIXES
+* Generating a 0-sized tuple no longer issues warnings (#200).
+* Better concept for equivalence (#204).
+* `bind` with const lvalues no longer inherits from qualified leaves (#217).
+* Spurious markers removed and tests fixed (#248).
+
+### DOC and CI infra
+* **Documentation**:
+    * Missing attributes and documentation (#199, #203, #209, #241).
+    * Doxygen-awesome integration and stable page URLs (#221, #222, #251).
+    * Doxygen groups renamed to avoid collisions with external projects (#238).
+* **CI & Infrastructure**:
+    * Standalone generation in CI (#218, #219).
+    * Coverage, sanitizers, and the copacabana shared workflows, up to v8 (#224, #226, #230, #231, #240, #242, #244, #250).
+    * Compile cost measurement, and a nightly run of the whole matrix (#245, #247, #251).
+    * pre-commit, Dependabot, vendored CPM and clang-format housekeeping (#225, #227, #228, #229, #232, #233, #234, #236, #243, #249).
+
 # Version 4.0 - Flawless Fluorite
 
 ### New Features
