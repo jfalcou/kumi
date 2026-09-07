@@ -57,6 +57,11 @@ namespace kumi
 #endif
 #define KUMI_HIDDEN_ABI KUMI_CUDA inline
 #if defined(__CUDA_ARCH__)
+#define KUMI_VARIABLE_ABI __device__
+#else
+#define KUMI_VARIABLE_ABI inline
+#endif
+#if defined(__CUDA_ARCH__)
 #define KUMI_ERROR(MESSAGE) __trap()
 #else
 #define KUMI_ERROR(MESSAGE) throw MESSAGE
@@ -70,7 +75,7 @@ namespace kumi::_
   {
     struct adl_tag_t
     {
-    } inline constexpr adl_tag;
+    } KUMI_VARIABLE_ABI constexpr adl_tag;
   }
 }
 #include <cstddef>
@@ -1778,7 +1783,7 @@ namespace kumi
     }
     [[nodiscard]] KUMI_ABI static constexpr auto labels() noexcept { return kumi::tuple{kumi::label_of<Ts>()...}; }
     template<typename... Us>
-    [[nodiscard]] KUMI_ABI
+    KUMI_ABI
 #ifndef KUMI_DOXYGEN_INVOKED
       explicit(!kumi::_::piecewise_convertible<tuple<Ts const&...>, tuple<Us...>>)
 #endif
@@ -1793,7 +1798,7 @@ namespace kumi
       }(std::make_index_sequence<sizeof...(Ts)>{});
     }
     template<typename... Us>
-    [[nodiscard]] KUMI_ABI
+    KUMI_ABI
 #ifndef KUMI_DOXYGEN_INVOKED
       explicit(!kumi::_::piecewise_convertible<tuple<Ts&...>, tuple<Us...>>)
 #endif
@@ -2276,13 +2281,13 @@ namespace kumi
     [[nodiscard]] KUMI_ABI constexpr auto values() noexcept
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return tuple<stored_member_t<I, decltype(*this)>...>{kumi::field_value_of(get<I>(*this))...};
+        return tuple<stored_member_t<I, record&>...>{kumi::field_value_of(get<I>(*this))...};
       }(std::make_index_sequence<sizeof...(Ts)>{});
     }
     [[nodiscard]] KUMI_ABI constexpr auto values() const noexcept
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return tuple<stored_member_t<I, decltype(*this)>...>{kumi::field_value_of(get<I>(*this))...};
+        return tuple<stored_member_t<I, record const&>...>{kumi::field_value_of(get<I>(*this))...};
       }(std::make_index_sequence<sizeof...(Ts)>{});
     }
     template<typename... Us>
@@ -2669,7 +2674,7 @@ namespace kumi
     struct identity_t
     {
       template<typename T> KUMI_ABI constexpr T&& operator()(T&& t) const noexcept { return KUMI_FWD(t); }
-    } inline constexpr identity;
+    } KUMI_VARIABLE_ABI constexpr identity;
     struct max_t
     {
       template<typename T, typename U>
@@ -2678,7 +2683,7 @@ namespace kumi
       {
         return KUMI_FWD(t) > KUMI_FWD(u) ? KUMI_FWD(t) : KUMI_FWD(u);
       }
-    } inline constexpr max;
+    } KUMI_VARIABLE_ABI constexpr max;
     struct min_t
     {
       template<typename T, typename U>
@@ -2687,7 +2692,7 @@ namespace kumi
       {
         return KUMI_FWD(t) < KUMI_FWD(u) ? KUMI_FWD(t) : KUMI_FWD(u);
       }
-    } inline constexpr min;
+    } KUMI_VARIABLE_ABI constexpr min;
     struct adressof_t
     {
       template<typename T>
@@ -2697,7 +2702,7 @@ namespace kumi
         return &t;
       }
       template<typename T> constexpr T const* operator()(T const&&) = delete;
-    } inline constexpr adressof;
+    } KUMI_VARIABLE_ABI constexpr adressof;
   }
   namespace _
   {
@@ -2731,7 +2736,7 @@ namespace kumi
         return res_t{get<E>(get<I>(KUMI_FWD(t)))...};
       }
     };
-    inline constexpr builder_t builder{};
+    KUMI_VARIABLE_ABI constexpr builder_t builder{};
   }
 }
 #include <utility>
@@ -2753,7 +2758,7 @@ namespace kumi::function
       constexpr auto ids = std::make_index_sequence<(S * ... * 1ULL)>{};
       return kumi::projection_map{ids, impl(ids, idxs...)};
     }
-  } inline constexpr cartesian_producer;
+  } KUMI_VARIABLE_ABI constexpr cartesian_producer;
   struct cat_t
   {
   private:
@@ -2769,7 +2774,7 @@ namespace kumi::function
     {
       return impl(std::index_sequence<S...>{});
     }
-  } inline constexpr concatenater;
+  } KUMI_VARIABLE_ABI constexpr concatenater;
   struct extract_t
   {
   private:
@@ -2792,7 +2797,7 @@ namespace kumi::function
       constexpr std::size_t N = S - T;
       return impl(b, e, s, kumi::index<T>, std::make_index_sequence<N>{});
     }
-  } inline constexpr extractor;
+  } KUMI_VARIABLE_ABI constexpr extractor;
   struct rotate_t
   {
   private:
@@ -2807,7 +2812,7 @@ namespace kumi::function
     {
       return impl(r, std::make_index_sequence<S>{});
     }
-  } inline constexpr rotater;
+  } KUMI_VARIABLE_ABI constexpr rotater;
   struct reduce_t
   {
   private:
@@ -2823,7 +2828,7 @@ namespace kumi::function
     {
       return impl(n, std::make_index_sequence<C>{});
     }
-  } inline constexpr reducer;
+  } KUMI_VARIABLE_ABI constexpr reducer;
   struct repeat_t
   {
   private:
@@ -2838,7 +2843,7 @@ namespace kumi::function
     {
       return impl(e, std::make_index_sequence<C>{});
     }
-  } inline constexpr repeater;
+  } KUMI_VARIABLE_ABI constexpr repeater;
   struct reverse_t
   {
   private:
@@ -2851,7 +2856,7 @@ namespace kumi::function
     {
       return impl(std::make_index_sequence<S>{});
     }
-  } inline constexpr reverser;
+  } KUMI_VARIABLE_ABI constexpr reverser;
   struct shift_t
   {
   private:
@@ -2866,7 +2871,7 @@ namespace kumi::function
     {
       return impl(o, std::make_index_sequence<S>{});
     }
-  } inline constexpr shifter;
+  } KUMI_VARIABLE_ABI constexpr shifter;
   struct split_t
   {
   private:
@@ -2882,7 +2887,7 @@ namespace kumi::function
       constexpr std::size_t R = S - N;
       return impl(n, std::make_index_sequence<R>{});
     }
-  } inline constexpr splitter;
+  } KUMI_VARIABLE_ABI constexpr splitter;
   struct tile_t
   {
   private:
@@ -2905,14 +2910,14 @@ namespace kumi::function
     {
       return impl(sz, e, sd, std::make_index_sequence<Bs>{});
     }
-  } inline constexpr tiler;
+  } KUMI_VARIABLE_ABI constexpr tiler;
   struct zip_t
   {
     template<std::size_t C, std::size_t S> consteval auto operator()(kumi::index_t<C>, kumi::index_t<S>) const noexcept
     {
       return kumi::projection_map{std::make_index_sequence<C>{}, std::make_index_sequence<S>{}};
     }
-  } inline constexpr zipper;
+  } KUMI_VARIABLE_ABI constexpr zipper;
   struct slice_t
   {
   private:
@@ -2928,7 +2933,7 @@ namespace kumi::function
       constexpr std::size_t N = (E > B) ? ((E - B + S - 1) / S) : 0;
       return impl(b, s, std::make_index_sequence<N>{});
     }
-  } inline constexpr slicer;
+  } KUMI_VARIABLE_ABI constexpr slicer;
 }
 namespace kumi
 {
@@ -3150,8 +3155,8 @@ namespace kumi
       return apply_(kumi::_::adl_tag, KUMI_FWD(f), KUMI_FWD(t), std::make_index_sequence<kumi::size_v<R>>{});
     }
   };
-  inline constexpr apply_t apply{};
-  inline constexpr apply_field_t apply_field{};
+  KUMI_VARIABLE_ABI constexpr apply_t apply{};
+  KUMI_VARIABLE_ABI constexpr apply_field_t apply_field{};
   namespace result
   {
     template<typename Function, kumi::concepts::product_type T>
@@ -3188,8 +3193,8 @@ namespace kumi
       else return get<kumi::size_v<T> - 1>(KUMI_FWD(t));
     }
   };
-  inline constexpr front_t front{};
-  inline constexpr back_t back{};
+  KUMI_VARIABLE_ABI constexpr front_t front{};
+  KUMI_VARIABLE_ABI constexpr back_t back{};
   namespace result
   {
     template<kumi::concepts::product_type T> using front_t = kumi::stored_member_t<0, T>;
@@ -3229,7 +3234,7 @@ namespace kumi
       }
     }
   };
-  inline constexpr cartesian_product_t cartesian_product{};
+  KUMI_VARIABLE_ABI constexpr cartesian_product_t cartesian_product{};
   namespace result
   {
     template<typename... Ts> using cartesian_product_t = decltype(kumi::cartesian_product(std::declval<Ts>()...));
@@ -3290,7 +3295,7 @@ namespace kumi
       }
     }
   };
-  inline constexpr cat_t cat{};
+  KUMI_VARIABLE_ABI constexpr cat_t cat{};
   namespace result
   {
     template<concepts::product_type... Ts> using cat_t = decltype(kumi::cat(std::declval<Ts>()...));
@@ -3361,10 +3366,10 @@ namespace kumi
       return std::bool_constant<!R{}>{};
     }
   };
-  inline constexpr contains_t contains{};
-  inline constexpr contains_any_t contains_any{};
-  inline constexpr contains_only_t contains_only{};
-  inline constexpr contains_none_t contains_none{};
+  KUMI_VARIABLE_ABI constexpr contains_t contains{};
+  KUMI_VARIABLE_ABI constexpr contains_any_t contains_any{};
+  KUMI_VARIABLE_ABI constexpr contains_only_t contains_only{};
+  KUMI_VARIABLE_ABI constexpr contains_none_t contains_none{};
   namespace result
   {
     template<kumi::concepts::product_type T, kumi::concepts::identifier ID>
@@ -3453,9 +3458,9 @@ namespace kumi
       return kumi::tuple{kumi::_::builder(KUMI_FWD(t), get<0>(proj)), kumi::_::builder(KUMI_FWD(t), get<1>(proj))};
     }
   };
-  inline constexpr extract_t extract{};
-  inline constexpr remove_t remove{};
-  inline constexpr split_t split{};
+  KUMI_VARIABLE_ABI constexpr extract_t extract{};
+  KUMI_VARIABLE_ABI constexpr remove_t remove{};
+  KUMI_VARIABLE_ABI constexpr split_t split{};
   namespace result
   {
     template<kumi::concepts::product_type T, std::size_t... I>
@@ -3553,9 +3558,9 @@ namespace kumi
                                          KUMI_FWD(rs)...);
     }
   };
-  inline constexpr for_each_t for_each{};
-  inline constexpr for_each_index_t for_each_index{};
-  inline constexpr for_each_field_t for_each_field{};
+  KUMI_VARIABLE_ABI constexpr for_each_t for_each{};
+  KUMI_VARIABLE_ABI constexpr for_each_index_t for_each_index{};
+  KUMI_VARIABLE_ABI constexpr for_each_field_t for_each_field{};
 }
 namespace kumi
 {
@@ -3580,7 +3585,7 @@ namespace kumi
       else return locate_(kumi::_::adl_tag, p, KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T>>{});
     }
   };
-  inline constexpr locate_t locate{};
+  KUMI_VARIABLE_ABI constexpr locate_t locate{};
 }
 namespace kumi
 {
@@ -3600,7 +3605,7 @@ namespace kumi
         else return kumi::invoke(f, KUMI_FWD(v));
       }
     };
-    inline constexpr flatten_all_case_t flatten_all_case{};
+    KUMI_VARIABLE_ABI constexpr flatten_all_case_t flatten_all_case{};
     struct flatten_case_t
     {
       template<typename T, typename V> KUMI_HIDDEN_ABI constexpr auto operator()(T&&, V&& v, auto J) const
@@ -3616,7 +3621,7 @@ namespace kumi
         else return KUMI_FWD(v);
       }
     };
-    inline constexpr flatten_case_t flatten_case{};
+    KUMI_VARIABLE_ABI constexpr flatten_case_t flatten_case{};
     template<typename T, std::size_t... I>
     KUMI_HIDDEN_ABI consteval auto flatten_projection_(kumi::_::adl_tag_t, std::index_sequence<I...>) noexcept
     {
@@ -3705,10 +3710,10 @@ namespace kumi
       return this->flatten_all_t::operator()(KUMI_FWD(t), kumi::function::adressof);
     }
   };
-  inline constexpr compress_t compress{};
-  inline constexpr flatten_t flatten{};
-  inline constexpr flatten_all_t flatten_all{};
-  inline constexpr as_flat_ptr_t as_flat_ptr{};
+  KUMI_VARIABLE_ABI constexpr compress_t compress{};
+  KUMI_VARIABLE_ABI constexpr flatten_t flatten{};
+  KUMI_VARIABLE_ABI constexpr flatten_all_t flatten_all{};
+  KUMI_VARIABLE_ABI constexpr as_flat_ptr_t as_flat_ptr{};
   namespace result
   {
     template<kumi::concepts::product_type T> using compress_t = decltype(kumi::compress(std::declval<T>()));
@@ -3847,7 +3852,7 @@ namespace kumi
                                    std::make_index_sequence<kumi::size_v<S1>>{});
     }
   };
-  inline constexpr inner_product_t inner_product{};
+  KUMI_VARIABLE_ABI constexpr inner_product_t inner_product{};
   namespace result
   {
     template<kumi::concepts::product_type S1,
@@ -3940,9 +3945,9 @@ namespace kumi
                                          KUMI_FWD(rs)...);
     }
   };
-  inline constexpr map_t map{};
-  inline constexpr map_index_t map_index{};
-  inline constexpr map_field_t map_field{};
+  KUMI_VARIABLE_ABI constexpr map_t map{};
+  KUMI_VARIABLE_ABI constexpr map_index_t map_index{};
+  KUMI_VARIABLE_ABI constexpr map_field_t map_field{};
   namespace result
   {
     template<typename Function,
@@ -4028,10 +4033,10 @@ namespace kumi
       else return kumi::_::builder(KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T> - 1>{});
     }
   };
-  inline constexpr push_front_t push_front{};
-  inline constexpr pop_front_t pop_front{};
-  inline constexpr push_back_t push_back{};
-  inline constexpr pop_back_t pop_back{};
+  KUMI_VARIABLE_ABI constexpr push_front_t push_front{};
+  KUMI_VARIABLE_ABI constexpr pop_front_t pop_front{};
+  KUMI_VARIABLE_ABI constexpr push_back_t push_back{};
+  KUMI_VARIABLE_ABI constexpr pop_back_t pop_back{};
   namespace result
   {
     template<kumi::concepts::product_type T, typename V>
@@ -4111,8 +4116,8 @@ namespace kumi
                            kumi::function::shifter(kumi::index<1>, kumi::index<kumi::size_v<T> - 1>));
     }
   };
-  inline constexpr fold_left_t fold_left{};
-  inline constexpr fold_right_t fold_right{};
+  KUMI_VARIABLE_ABI constexpr fold_left_t fold_left{};
+  KUMI_VARIABLE_ABI constexpr fold_right_t fold_right{};
   namespace result
   {
     template<typename Function, kumi::concepts::product_type T, typename... Value>
@@ -4149,7 +4154,7 @@ namespace kumi
         else return kumi::invoke(f, KUMI_FWD(v));
       }
     };
-    inline constexpr minmax_case_t minmax_case{};
+    KUMI_VARIABLE_ABI constexpr minmax_case_t minmax_case{};
     template<typename F, typename T, typename V, std::size_t... I>
     KUMI_HIDDEN_ABI constexpr auto minmax_(kumi::_::adl_tag_t, F f, T&& t, V v, std::index_sequence<I...>)
     {
@@ -4240,10 +4245,10 @@ namespace kumi
                                                     std::make_index_sequence<kumi::size_v<T>>{}));
     }
   };
-  inline constexpr max_t max{};
-  inline constexpr max_flat_t max_flat{};
-  inline constexpr min_t min{};
-  inline constexpr min_flat_t min_flat{};
+  KUMI_VARIABLE_ABI constexpr max_t max{};
+  KUMI_VARIABLE_ABI constexpr max_flat_t max_flat{};
+  KUMI_VARIABLE_ABI constexpr min_t min{};
+  KUMI_VARIABLE_ABI constexpr min_flat_t min_flat{};
   namespace result
   {
     template<typename T, typename... F>
@@ -4435,11 +4440,11 @@ namespace kumi
       return kumi::count_if_t::operator()(KUMI_FWD(t), [](auto const& m) { return static_cast<bool>(m); });
     }
   };
-  inline constexpr all_of_t all_of{};
-  inline constexpr any_of_t any_of{};
-  inline constexpr none_of_t none_of{};
-  inline constexpr count_if_t count_if{};
-  inline constexpr count_t count{};
+  KUMI_VARIABLE_ABI constexpr all_of_t all_of{};
+  KUMI_VARIABLE_ABI constexpr any_of_t any_of{};
+  KUMI_VARIABLE_ABI constexpr none_of_t none_of{};
+  KUMI_VARIABLE_ABI constexpr count_if_t count_if{};
+  KUMI_VARIABLE_ABI constexpr count_t count{};
 }
 namespace kumi
 {
@@ -4458,7 +4463,7 @@ namespace kumi
         }
       }
     };
-    inline constexpr reindex_case_t reindex_case{};
+    KUMI_VARIABLE_ABI constexpr reindex_case_t reindex_case{};
     template<typename T, typename S, auto... E>
     KUMI_HIDDEN_ABI constexpr auto reindex_(kumi::_::adl_tag_t, T&& t, S self, kumi::projection_map<E...>)
     {
@@ -4654,13 +4659,13 @@ namespace kumi
       return this->reduce_t::operator()(kumi::function::bit_xor, KUMI_FWD(t));
     }
   };
-  inline constexpr reduce_t reduce{};
-  inline constexpr map_reduce_t map_reduce{};
-  inline constexpr sum_t sum{};
-  inline constexpr prod_t prod{};
-  inline constexpr bit_and_t bit_and{};
-  inline constexpr bit_or_t bit_or{};
-  inline constexpr bit_xor_t bit_xor{};
+  KUMI_VARIABLE_ABI constexpr reduce_t reduce{};
+  KUMI_VARIABLE_ABI constexpr map_reduce_t map_reduce{};
+  KUMI_VARIABLE_ABI constexpr sum_t sum{};
+  KUMI_VARIABLE_ABI constexpr prod_t prod{};
+  KUMI_VARIABLE_ABI constexpr bit_and_t bit_and{};
+  KUMI_VARIABLE_ABI constexpr bit_or_t bit_or{};
+  KUMI_VARIABLE_ABI constexpr bit_xor_t bit_xor{};
   namespace result
   {
     template<kumi::concepts::monoid M, kumi::concepts::product_type T, typename... Value>
@@ -4743,7 +4748,7 @@ namespace kumi
       }
     }
   };
-  inline constexpr reverse_t reverse{};
+  KUMI_VARIABLE_ABI constexpr reverse_t reverse{};
   namespace result
   {
     template<kumi::concepts::product_type T> using reverse_t = decltype(kumi::reverse(std::declval<T>()));
@@ -4921,10 +4926,10 @@ namespace kumi
       else return (*this)(KUMI_FWD(m), KUMI_FWD(t), m.identity);
     }
   };
-  inline constexpr inclusive_scan_left_t inclusive_scan_left{};
-  inline constexpr exclusive_scan_left_t exclusive_scan_left{};
-  inline constexpr inclusive_scan_right_t inclusive_scan_right{};
-  inline constexpr exclusive_scan_right_t exclusive_scan_right{};
+  KUMI_VARIABLE_ABI constexpr inclusive_scan_left_t inclusive_scan_left{};
+  KUMI_VARIABLE_ABI constexpr exclusive_scan_left_t exclusive_scan_left{};
+  KUMI_VARIABLE_ABI constexpr inclusive_scan_right_t inclusive_scan_right{};
+  KUMI_VARIABLE_ABI constexpr exclusive_scan_right_t exclusive_scan_right{};
   namespace result
   {
     template<typename Function, kumi::concepts::product_type T, typename... Value>
@@ -5050,7 +5055,7 @@ namespace kumi
       }
     }
   };
-  inline constexpr transpose_t transpose{};
+  KUMI_VARIABLE_ABI constexpr transpose_t transpose{};
   namespace result
   {
     template<kumi::concepts::product_type T> using transpose_t = decltype(kumi::transpose(std::declval<T>()));
@@ -5109,8 +5114,8 @@ namespace kumi
       }
     }
   };
-  inline constexpr unique_t unique{};
-  inline constexpr all_unique_t all_unique{};
+  KUMI_VARIABLE_ABI constexpr unique_t unique{};
+  KUMI_VARIABLE_ABI constexpr all_unique_t all_unique{};
   namespace result
   {
     template<kumi::concepts::product_type T> using unique_t = decltype(kumi::unique(std::declval<T>()));
@@ -5200,9 +5205,9 @@ namespace kumi
       }
     }
   };
-  inline constexpr zip_t zip{};
-  inline constexpr zip_min_t zip_min{};
-  inline constexpr zip_max_t zip_max{};
+  KUMI_VARIABLE_ABI constexpr zip_t zip{};
+  KUMI_VARIABLE_ABI constexpr zip_min_t zip_min{};
+  KUMI_VARIABLE_ABI constexpr zip_max_t zip_max{};
   namespace result
   {
     template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
