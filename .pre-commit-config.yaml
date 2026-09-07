@@ -11,4 +11,4 @@ repos:
   rev: v23.1.0
   hooks:
   - id: clang-format
-    types_or: [c++]
+    types_or: [c++, cuda]

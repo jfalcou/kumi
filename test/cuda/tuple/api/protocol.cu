@@ -7,26 +7,28 @@
 //==================================================================================================
 #define TTS_MAIN
 #include <kumi/tuple.hpp>
-#include <kumi/algorithm/for_each.hpp>
 #include <tts/tts.hpp>
 #include "device.hpp"
 
 namespace
 {
-  __global__ void accumulate(int* out)
+  __global__ void bindings(kumi::tuple<int, double, char, int>* out)
   {
-    auto t = kumi::make_tuple(1, 2, 3);
-    int count = 0;
+    auto t = kumi::make_tuple(1, 2.5, 'c');
 
-    kumi::for_each([&](auto v) { count += v; }, t);
-    *out = count;
+    auto [a, b, c] = t;
+
+    auto& [d, e, f] = t;
+    d = 42;
+
+    *out = {a, b, c, kumi::get<0>(t)};
   }
 }
 
-TTS_CASE("Check for_each device behavior")
+TTS_CASE("Check structured bindings device behavior")
 {
-  int out = 0;
+  kumi::tuple<int, double, char, int> out;
 
-  TTS_EXPECT(run_on_device(accumulate, out));
-  TTS_EQUAL(out, 6);
+  TTS_EXPECT(run_on_device(bindings, out));
+  TTS_EQUAL(out, (kumi::tuple{1, 2.5, 'c', 42}));
 };

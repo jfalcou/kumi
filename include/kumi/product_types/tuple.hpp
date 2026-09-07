@@ -277,8 +277,9 @@ namespace kumi
       @include doc/tuple/api/soa.cpp
     **/
     //==================================================================================================================
+    // nvcc with a clang host rejects [[nodiscard]] on a conversion operator once optimizing.
     template<typename... Us>
-    [[nodiscard]] KUMI_ABI
+    KUMI_ABI
 #ifndef KUMI_DOXYGEN_INVOKED
       explicit(!kumi::_::piecewise_convertible<tuple<Ts const&...>, tuple<Us...>>)
 #endif
@@ -295,7 +296,7 @@ namespace kumi
 
     /// @overload
     template<typename... Us>
-    [[nodiscard]] KUMI_ABI
+    KUMI_ABI
 #ifndef KUMI_DOXYGEN_INVOKED
       explicit(!kumi::_::piecewise_convertible<tuple<Ts&...>, tuple<Us...>>)
 #endif

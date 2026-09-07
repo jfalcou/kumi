@@ -7,26 +7,25 @@
 //==================================================================================================
 #define TTS_MAIN
 #include <kumi/tuple.hpp>
-#include <kumi/algorithm/for_each.hpp>
+#include <kumi/algorithm/cat.hpp>
 #include <tts/tts.hpp>
 #include "device.hpp"
 
 namespace
 {
-  __global__ void accumulate(int* out)
-  {
-    auto t = kumi::make_tuple(1, 2, 3);
-    int count = 0;
+  using joined = kumi::tuple<int, double, float, int, short, double>;
 
-    kumi::for_each([&](auto v) { count += v; }, t);
-    *out = count;
+  __global__ void concatenate(joined* out)
+  {
+    short s = 55;
+    *out = kumi::cat(kumi::tuple{1, 2.}, kumi::tuple{3.f, 4}, kumi::tuple{s, 6.7});
   }
 }
 
-TTS_CASE("Check for_each device behavior")
+TTS_CASE("Check cat device behavior")
 {
-  int out = 0;
+  joined out;
 
-  TTS_EXPECT(run_on_device(accumulate, out));
-  TTS_EQUAL(out, 6);
+  TTS_EXPECT(run_on_device(concatenate, out));
+  TTS_EQUAL(out, (joined{1, 2., 3.f, 4, short{55}, 6.7}));
 };

@@ -75,7 +75,7 @@ namespace kumi
     @tab_end
   **/
   //====================================================================================================================
-  inline constexpr cat_t cat{};
+  KUMI_VARIABLE_ABI constexpr cat_t cat{};
 
   namespace result
   {

@@ -8,40 +8,29 @@
 #pragma once
 
 #include <cuda_runtime.h>
-#include <cstddef>
-#include <vector>
 
 //==================================================================================================
-//! Running a kernel and reading back what it checked
+//! Running a kernel and reading back what it computed
 //==================================================================================================
 
-// A run that never reached a device reports every flag false, so a machine without a GPU fails its tests.
-struct device_result
-{
-  bool ran = false;
-  std::vector<char> flags = {};
-
-  bool operator[](std::size_t i) const { return ran && (i < flags.size()) && (flags[i] != 0); }
-};
-
-// Every CUDA call is checked before the flags are trusted.
-template<typename Kernel> inline device_result run_on_device(Kernel kernel, std::size_t count)
+// The kernel writes what it computed into one trivially copyable object, so a failure shows the value
+// the device produced instead of a flag. A run that never reached a device returns false, and a
+// machine without one fails its tests rather than passing an empty check.
+template<typename Kernel, typename Result> inline bool run_on_device(Kernel kernel, Result& out)
 {
   int devices = 0;
-  if (cudaGetDeviceCount(&devices) != cudaSuccess || devices == 0) return {};
+  if (cudaGetDeviceCount(&devices) != cudaSuccess || devices == 0) return false;
 
-  char* on_device = nullptr;
-  if (cudaMalloc(&on_device, count) != cudaSuccess) return {};
-  cudaMemset(on_device, 0, count);
+  Result* on_device = nullptr;
+  if (cudaMalloc(&on_device, sizeof(Result)) != cudaSuccess) return false;
+  cudaMemset(on_device, 0, sizeof(Result));
 
   kernel<<<1, 1>>>(on_device);
 
-  std::vector<char> flags(count, 0);
   auto launched = cudaGetLastError();
   auto ran = cudaDeviceSynchronize();
-  auto copied = cudaMemcpy(flags.data(), on_device, count, cudaMemcpyDeviceToHost);
+  auto copied = cudaMemcpy(&out, on_device, sizeof(Result), cudaMemcpyDeviceToHost);
   cudaFree(on_device);
 
-  if (launched != cudaSuccess || ran != cudaSuccess || copied != cudaSuccess) return {};
-  return {true, flags};
+  return (launched == cudaSuccess) && (ran == cudaSuccess) && (copied == cudaSuccess);
 }
