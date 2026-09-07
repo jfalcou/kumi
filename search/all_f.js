@@ -1,5 +1,31 @@
 var searchData=
 [
-  ['kumi_0',['kumi',['../namespacekumi.html',1,'']]],
-  ['kumi_20types_1',['Kumi Types',['../group__kumi__types.html',1,'']]]
+  ['identifier_0',['Identifier',['../kumi_nomenclature.html#autotoc_md149',1,'']]],
+  ['identifier_1',['identifier',['../structkumi_1_1identifier.html',1,'kumi::identifier&lt; ID, Checker &gt;'],['../conceptkumi_1_1concepts_1_1identifier.html',1,'kumi::concepts'],['../structkumi_1_1identifier.html#a1cbb7d1e8b6adafe05c6b3f43c94db5d',1,'kumi::identifier::identifier() noexcept=default'],['../structkumi_1_1identifier.html#a3b9a31cc021cee475c3dd820c966a104',1,'kumi::identifier::identifier(ID const &amp;id, Checker const &amp;check) noexcept']]],
+  ['identifier_5fof_2',['identifier_of',['../group__kumi__utility.html#gab3919ec6f8098dd1fdafe9c3a79ef0dc',1,'kumi']]],
+  ['identifiers_3',['identifiers',['../structkumi_1_1record.html#ac730d46c3db986909e0c910b74648b4a',1,'kumi::record::identifiers()'],['../structkumi_1_1tuple.html#a20bf7b884e66f42a41076a4b1535054b',1,'kumi::tuple::identifiers()'],['../group__kumi__utility.html#ga63a205c6c2502e733987043857abea05',1,'kumi::identifiers()']]],
+  ['identity_4',['identity',['../structkumi_1_1function_1_1numeric__add.html#aa873c7638061899a652e97fdf45e1452',1,'kumi::function::numeric_add::identity'],['../structkumi_1_1function_1_1numeric__prod.html#a442630c534784c7794c0ced4bbaafcda',1,'kumi::function::numeric_prod::identity'],['../structkumi_1_1function_1_1boolean__and.html#ab76cd8c8f2059169433f16b45d02eecd',1,'kumi::function::boolean_and::identity'],['../structkumi_1_1function_1_1boolean__or.html#a2f7848820b2e45a83aa776a11a4617c7',1,'kumi::function::boolean_or::identity'],['../structkumi_1_1function_1_1boolean__xor.html#ae232a2d43a04338bb65254cbc736dbea',1,'kumi::function::boolean_xor::identity']]],
+  ['identity_20elements_20the_200_20and_201_20of_20types_5',['The Identity Elements (The &quot;0&quot; and &quot;1&quot; of Types)',['../kumi_identity.html',1,'kumi_glossary']]],
+  ['if_5f_6',['if_',['../group__kumi__utility.html#gacadc026868e6654e80c57432643c804a',1,'kumi']]],
+  ['inclusive_5fscan_5fleft_7',['inclusive_scan_left',['../group__kumi__reductions.html#ga12b0bfc8d8cb087e200f2dd2716fae7b',1,'kumi']]],
+  ['inclusive_5fscan_5fright_8',['inclusive_scan_right',['../group__kumi__reductions.html#gab0ac9653edc241f8c8e1dee24936165e',1,'kumi']]],
+  ['index_9',['index',['../conceptkumi_1_1concepts_1_1index.html',1,'kumi::concepts'],['../group__kumi__utility.html#gaa1c76fca002e966a0a40e311ad68d841',1,'kumi::index']]],
+  ['index_5ft_10',['index_t',['../structkumi_1_1index__t.html',1,'kumi']]],
+  ['indexes_11',['indexes',['../group__kumi__utility.html#ga6882a4ada4935fa0fd4ef32ce3716ffb',1,'kumi']]],
+  ['infra_12',['infra',['../kumi_changelog.html#autotoc_md100',1,'DOC and CI infra'],['../kumi_changelog.html#autotoc_md104',1,'DOC and CI infra']]],
+  ['infrastructure_13',['Infrastructure',['../kumi_changelog.html#autotoc_md122',1,'']]],
+  ['infrastructure_20changes_14',['Infrastructure Changes',['../kumi_changelog.html#autotoc_md112',1,'API and Infrastructure Changes'],['../kumi_changelog.html#autotoc_md107',1,'Infrastructure Changes']]],
+  ['inner_5fproduct_15',['inner_product',['../group__kumi__reductions.html#gacd22add376c263544e5432b573b7a4af',1,'kumi']]],
+  ['install_20from_20the_20source_16',['Install from the source',['../kumi_setup.html#setup-source',1,'']]],
+  ['invoke_17',['invoke',['../group__kumi__functional.html#gace270cfbaa7b0d519fdf03f8225f2908',1,'kumi']]],
+  ['invoke_5fr_18',['invoke_r',['../group__kumi__functional.html#ga2ad666793ad04ea9b66c84b83f41f375',1,'kumi']]],
+  ['iota_19',['iota',['../group__kumi__generators.html#gace6e022bb94a706731299b9d395ac10d',1,'kumi']]],
+  ['is_5fcontainer_5fv_20',['is_container_v',['../group__kumi__traits.html#ga02b588394b12893e71b1d6162db0b4b4',1,'kumi']]],
+  ['is_5fequality_5fcomparable_5fv_21',['is_equality_comparable_v',['../group__kumi__traits.html#ga156cb23641777bc9b29e3d3cff87aba4',1,'kumi']]],
+  ['is_5fequivalent_5fv_22',['is_equivalent_v',['../group__kumi__traits.html#ga65a2b6e28cd4ab58cfaffd90fea1b215',1,'kumi']]],
+  ['is_5fhomogeneous_5fv_23',['is_homogeneous_v',['../group__kumi__tuple__traits.html#ga444ecc58235c6cb4f805f5bb03409e4c',1,'kumi']]],
+  ['is_5finstance_5fof_5fv_24',['is_instance_of_v',['../group__kumi__traits.html#gaf70c64a5b0d21e1bcc3e51077c06d18d',1,'kumi']]],
+  ['is_5fproduct_5ftype_5fv_25',['is_product_type_v',['../group__kumi__traits.html#ga543f9adb09ce98ab19a15e3a90c52656',1,'kumi']]],
+  ['is_5fprojection_5fmap_5fv_26',['is_projection_map_v',['../group__kumi__traits.html#gac535fd8eadc87407e3132a7fceda4ab1',1,'kumi']]],
+  ['is_5frecord_5ftype_5fv_27',['is_record_type_v',['../group__kumi__traits.html#ga75612200d87c3aa30f068205aa882e2a',1,'kumi']]]
 ];

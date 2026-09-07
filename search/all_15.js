@@ -1,7 +1,27 @@
 var searchData=
 [
-  ['queries_0',['Product Type Queries',['../group__kumi__queries.html',1,'']]],
-  ['queryable_5fby_5fidentifier_1',['queryable_by_identifier',['../conceptkumi_1_1concepts_1_1queryable__by__identifier.html',1,'kumi::concepts']]],
-  ['queryable_5fby_5flabel_2',['queryable_by_label',['../conceptkumi_1_1concepts_1_1queryable__by__label.html',1,'kumi::concepts']]],
-  ['queryable_5fby_5ftype_3',['queryable_by_type',['../conceptkumi_1_1concepts_1_1queryable__by__type.html',1,'kumi::concepts']]]
+  ['partition_0',['partition',['../group__kumi__generators.html#ga4643116b2dc0dfbd0d15fee408a9c18c',1,'kumi']]],
+  ['plus_1',['plus',['../group__kumi__functional.html#gab83f5dbd77ab8618b7925c9de6adb54d',1,'kumi::function']]],
+  ['pop_5ffront_2',['pop_front',['../group__kumi__generators.html#ga9e7a82fbd0e84ec50b4f93b31729aa0b',1,'kumi']]],
+  ['pre_20requisites_3',['Pre-requisites',['../kumi_setup.html#prerequisit',1,'']]],
+  ['predicate_4',['predicate',['../group__kumi__utility.html#ga9c8c29e8a2f4f5e8a663200559fdc983',1,'kumi']]],
+  ['prod_5',['prod',['../group__kumi__reductions.html#ga47864fd549d6efc837925aab74e8717b',1,'kumi']]],
+  ['product_20constructions_20the_20logic_20of_20and_6',['Product Constructions (The Logic of &quot;AND&quot;)',['../kumi_product.html#product_construction',1,'']]],
+  ['product_20type_2027_7',['Product Type \\( (A \\times B) \\)',['../kumi_product.html#kumi_product_type',1,'']]],
+  ['product_20type_20algorithms_8',['Product Type Algorithms',['../group__kumi__algorithm.html',1,'']]],
+  ['product_20type_20generalized_20reductions_9',['Product Type Generalized Reductions',['../group__kumi__reductions.html',1,'']]],
+  ['product_20type_20generators_10',['Product Type Generators',['../group__kumi__generators.html',1,'']]],
+  ['product_20type_20queries_11',['Product Type Queries',['../group__kumi__queries.html',1,'']]],
+  ['product_20type_20related_20concepts_12',['Product Type Related Concepts',['../group__kumi__concepts.html',1,'']]],
+  ['product_20type_20related_20traits_13',['Product Type Related Traits',['../group__kumi__traits.html',1,'']]],
+  ['product_20type_20transformations_14',['Product Type Transformations',['../group__kumi__transforms.html',1,'']]],
+  ['product_20types_15',['Product Types',['../kumi_product.html',1,'kumi_glossary']]],
+  ['product_20types_20and_20associated_20functions_16',['Product Types and associated Functions',['../group__kumi__tuple__related.html',1,'']]],
+  ['product_5ftype_17',['product_type',['../conceptkumi_1_1concepts_1_1product__type.html',1,'kumi::concepts']]],
+  ['programming_20languages_20considerations_18',['Programming Languages Considerations',['../kumi_product.html#tuple_programming',1,'']]],
+  ['projection_19',['projection',['../conceptkumi_1_1concepts_1_1projection.html',1,'kumi::concepts']]],
+  ['projection_5fmap_20',['projection_map',['../structkumi_1_1projection__map.html',1,'kumi::projection_map&lt; V &gt;'],['../conceptkumi_1_1concepts_1_1projection__map.html',1,'kumi::concepts'],['../group__kumi__utility.html#ga0ac9f243b64bbbabc2bad542ca03c035',1,'kumi::projection_map()']]],
+  ['protocol_21',['Tuple Protocol',['../kumi_cpp_spec.html#autotoc_md133',1,'']]],
+  ['public_20release_22',['First autonomous public release.',['../kumi_changelog.html#autotoc_md126',1,'']]],
+  ['push_5ffront_23',['push_front',['../group__kumi__generators.html#gaaf546d47975e0499409f249074291581',1,'kumi']]]
 ];

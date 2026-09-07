@@ -17,7 +17,7 @@ var NAVTREEINDEX0 =
 "index.html":[],
 "index.html":[0],
 "index.html#Examples":[0,0],
-"index.html#autotoc_md153":[0,1],
+"index.html#autotoc_md158":[0,1],
 "kumi_changelog.html":[1,1],
 "kumi_cpp_spec.html#kumi_cpp_spec":[2,1],
 "kumi_glossary.html":[2],
