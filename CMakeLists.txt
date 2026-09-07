@@ -28,6 +28,7 @@ copa_add_option(KUMI_ENABLE_SANITIZERS "Build tests with AddressSanitizer + Unde
 copa_add_option(KUMI_ENABLE_COVERAGE "Build tests with code coverage instrumentation" OFF LABEL "Coverage")
 copa_add_option(KUMI_COMPILE_COST "Measure what every test unit costs to compile" OFF)
 copa_add_option(KUMI_BUILD_BENCHMARKS "Build the compilation benchmarks against the standard library" OFF)
+copa_add_option(KUMI_TIME_TRACE "Break the compile cost of the benchmarks down by phase" OFF)
 
 if(KUMI_BUILD_TEST)
   include(${PROJECT_SOURCE_DIR}/cmake/compiler.cmake)
@@ -113,5 +114,10 @@ if(KUMI_BUILD_BENCHMARKS)
 
   if(KUMI_COMPILE_COST)
     copa_setup_compile_cost(kumi_bench PREFIX kumi-bench DEPENDS kumi-bench)
+  endif()
+
+  # clang only, and a megabyte of JSON per unit: meant for a handful of sizes, see KUMI_BENCH_SIZES.
+  if(KUMI_TIME_TRACE)
+    copa_setup_time_trace(kumi_bench PREFIX kumi-bench DEPENDS kumi-bench SCAN "${PROJECT_BINARY_DIR}/benchmarks")
   endif()
 endif()
