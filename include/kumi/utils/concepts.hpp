@@ -159,7 +159,7 @@ namespace kumi
       @ingroup kumi_concepts
       @brief Concept specifying a type represent a field
 
-      A field type serves as a member of a kumi::record and can be retrieved by it's label later.
+      A field type serves as a member of a kumi::record and can be retrieved by its label later.
 
       ## Example types:
       + `auto field = ("myfield"_id = 10);`
@@ -443,7 +443,7 @@ namespace kumi
       @ingroup kumi_concepts
       @brief Concept specifying if a product type can be queried via a `get<type>`
 
-      A type `T` models `kumi::concepts::queryable_by_type` if it's fields are uniquely typed.
+      A type `T` models `kumi::concepts::queryable_by_type` if its fields are uniquely typed.
       For a `record_type` it inspects the underlying type of the fields.
     **/
     //==================================================================================================================
@@ -457,7 +457,7 @@ namespace kumi
       @ingroup kumi_concepts
       @brief Concept specifying if a product type can be queried via a `get<identifier>`
 
-      A type `T` models `queryable_by_identifier` if it's a kumi::concepts::product_type with it's element modeling
+      A type `T` models `queryable_by_identifier` if it's a kumi::concepts::product_type with its element modeling
       kumi::concepts::uniquely_named and a field with the same identifier as the template parameter `Id` can be found
       inside.
     **/
@@ -472,7 +472,7 @@ namespace kumi
       @ingroup kumi_concepts
       @brief Concept specifying if a product type can be queried via a `get<label>`
 
-      A type `T` models `queryable_by_label` if it's a kumi::concepts::product_type with it's element modeling
+      A type `T` models `queryable_by_label` if it's a kumi::concepts::product_type with its element modeling
       kumi::concepts::uniquely_named and a field with the same label as the template parameter `L` can be found
       inside.
     **/

@@ -121,7 +121,7 @@ namespace kumi
     @ingroup kumi_generators
 
     @var all_unique
-    @brief Callable object returning a product type containing the values of the first occurence of each type in `t`.
+    @brief Callable object returning a product type containing the values of the first occurrence of each type in `t`.
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 

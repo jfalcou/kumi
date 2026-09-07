@@ -5,9 +5,9 @@
 
   @tableofcontents
 
-  @section prerequisit Pre-requisites
+  @section prerequisites Pre-requisites
 
-  The **KUMI** librarie requires a C++20 compliant compiler. Here are the current minimal compiler version supported:
+  The **KUMI** library requires a C++20 compliant compiler. Here are the current minimal compiler version supported:
 
   | Compiler        | Version            |
   |:----------------|:------------------ |

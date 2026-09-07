@@ -18,21 +18,21 @@ namespace kumi
   //====================================================================================================================
   /**
     @defgroup kumi_utility   Helper Types and Functions
-    @brief    Tools for interacting with kumi::product_type
+    @brief    Helpers to adapt, build and introspect kumi::product_type
 
     @defgroup kumi_concepts     Product Type Related Concepts
-    @brief    Definition for product types related Concepts
+    @brief    Concepts refining product type properties
 
     @defgroup kumi_traits     Product Type Related Traits
-    @brief    Definition for product types traits and extension points
+    @brief    Traits and extension points for product types
 
     @defgroup kumi_tuple_traits  Tuple Related Traits
     @ingroup  kumi_traits
-    @brief    Definition for kumi::tuple traits and extension points
+    @brief    Traits and extension points for kumi::tuple
 
     @defgroup kumi_record_traits Record Related Traits
     @ingroup  kumi_traits
-    @brief    Definition for kumi::record traits and extension points
+    @brief    Traits and extension points for kumi::record
   **/
   //====================================================================================================================
 }

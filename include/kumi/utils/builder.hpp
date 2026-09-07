@@ -17,7 +17,7 @@ namespace kumi
 
     Helper structure to build the correct output product type based on the given template parameter. If the
     provided product type is a not a record_type the builder will output a kumi::tuple otherwise a kumi::record.
-    One can specialize the builder for it's own type matching the product type semantic.
+    One can specialize the builder for its own type matching the product type semantic.
 
     A type for which the builder has been specialized is then suitable to be used as the return type from any
     algorithm.

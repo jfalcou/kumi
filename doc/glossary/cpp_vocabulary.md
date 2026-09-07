@@ -54,6 +54,12 @@ type.get<I>() / get<I>(type); //A function to access the element.
 
 It enables Structured Bindings, allowing one to unpack custom types easily
 
+Structured bindings and kumi share the same decomposition hooks: the elements of a product type are
+extracted through `std::tuple_size`, `std::tuple_element` and `get<I>`, used both by structured bindings
+and by every kumi algorithm. This is why a user type implementing the tuple protocol (together with the
+kumi::concepts::product_type criterion) is accepted by kumi on equal footing with its own kumi::tuple and
+kumi::record.
+
 This serves as a manual reflection mechanism, as C++ (prior to C++26) lacks a proper reflection
 mechanism to inspect structures, these functions specifications are giving the necessary informations
 to the compiler in order to natively adapt your structure to be a tuple.

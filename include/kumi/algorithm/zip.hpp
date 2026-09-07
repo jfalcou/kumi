@@ -100,7 +100,7 @@ namespace kumi
     of declaration.
 
     @note This function does not take part in overload resolution if the product types do not follow the same
-    semantic. @see follows_same_semantic
+    semantic. @see kumi::concepts::follows_same_semantic
 
     @see zip_min
     @see zip_max
@@ -163,7 +163,7 @@ namespace kumi
     of declaration.
 
     @note This function does not take part in overload resolution if the product types do not follow the same
-    semantic. @see follows_same_semantic
+    semantic. @see kumi::concepts::follows_same_semantic
 
     @note `zip_min` truncates product types based on the smallest size.
 

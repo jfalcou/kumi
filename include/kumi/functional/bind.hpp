@@ -69,11 +69,11 @@ namespace kumi
   //====================================================================================================================
   /**
     @ingroup kumi_functional
-    @brief    Binds a certain amount of values into a callable reducing it's arity.
+    @brief    Returns a callable object with `ts` bound as its leading arguments, reducing `c` arity.
 
     @param c	Callable object to be bound.
-    @param ts elements to be used as prefilled arguments to c
-    @return   A new callable matching C with ts arguments prefilled by the front.
+    @param ts Elements to be bound as the leading arguments of `c`.
+    @return   A callable object of lower arity invoking `c` with `ts` prefilled at the front.
 
     @note Replaces std::bind_front to avoid depending on `functional`.
   **/
@@ -90,13 +90,13 @@ namespace kumi
   //====================================================================================================================
   /**
     @ingroup kumi_functional
-    @brief    Binds a certain amount of values into a callable reducing it's arity.
+    @brief    Returns a callable object with `ts` bound as its trailing arguments, reducing `c` arity.
 
     @param c	Callable object to be bound.
-    @param ts elements to be used as prefilled arguments to c
-    @return   A new callable matching C with ts arguments prefilled by the back.
+    @param ts Elements to be bound as the trailing arguments of `c`.
+    @return   A callable object of lower arity invoking `c` with `ts` prefilled at the back.
 
-    @note Replaces std::bind_front to avoid depending on `functional`.
+    @note Replaces std::bind_back to avoid depending on `functional`.
   **/
   //====================================================================================================================
   template<typename C, typename... Ts>

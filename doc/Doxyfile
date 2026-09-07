@@ -32,5 +32,11 @@ GENERATE_LATEX         = NO
 ## The image the social card metadata in head.html points at, published beside the pages.
 HTML_EXTRA_FILES      += card.png
 
-## The macro that gives every entity its inline ABI tag, expanded away so it does not show up in every signature.
-PREDEFINED            += "KUMI_ABI=inline"
+## The macros that give entities their public ABI tags, expanded away so they do not show up in every signature.
+PREDEFINED            += "KUMI_ABI=inline" \
+                         "KUMI_HIDDEN_ABI=inline" \
+                         "KUMI_VARIABLE_ABI=inline" \
+                         "KUMI_CUDA="
+
+## One page per callable member
+SEPARATE_MEMBER_PAGES  = YES

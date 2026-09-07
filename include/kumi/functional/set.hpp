@@ -45,7 +45,7 @@ namespace kumi
 
       ## Callable object
       @code
-        KUMI_VARIABLE_ABI constexpr unique_t uniquer{};
+        constexpr unique_t uniquer{};
       @endcode
     **/
     //==================================================================================================================
@@ -72,7 +72,7 @@ namespace kumi
 
       ## Callable object
       @code
-        KUMI_VARIABLE_ABI constexpr select_t selector{};
+        constexpr select_t selector{};
       @endcode
     **/
     //==================================================================================================================
@@ -103,7 +103,7 @@ namespace kumi
 
       ## Callable object
       @code
-        KUMI_VARIABLE_ABI constexpr adjacent_unicity_t uniqued{};
+        constexpr adjacent_unicity_t uniqued{};
       @endcode
     **/
     //==================================================================================================================
@@ -126,7 +126,7 @@ namespace kumi
     //==================================================================================================================
     /**
       @ingroup kumi_functional
-      @brief    Callable object computing the index map associated to the adjactent unicity operation.
+      @brief    Callable object computing the index map associated to the adjacent unicity operation.
     **/
     //==================================================================================================================
     inline constexpr kumi::function::adjacent_unicity_t uniqued{};

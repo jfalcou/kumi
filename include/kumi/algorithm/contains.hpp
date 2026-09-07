@@ -112,7 +112,7 @@ namespace kumi
 
     @snippet include/kumi/algorithm/contains.hpp contains_t
 
-    Computes the return type of a call to kumi:contains:
+    Computes the return type of a call to kumi::contains
 
     @groupheader{Examples}
 
@@ -166,7 +166,7 @@ namespace kumi
 
     @snippet include/kumi/algorithm/contains.hpp contains_any_t
 
-    Computes the return type of a call to kumi:contains_any
+    Computes the return type of a call to kumi::contains_any
 
     @groupheader{Examples}
 
@@ -220,7 +220,7 @@ namespace kumi
 
     @snippet include/kumi/algorithm/contains.hpp contains_only_t
 
-    Computes the return type of a call to kumi:contains_only
+    Computes the return type of a call to kumi::contains_only
 
     @groupheader{Examples}
 
@@ -274,7 +274,7 @@ namespace kumi
 
     @snippet include/kumi/algorithm/contains.hpp contains_none_t
 
-    Computes the return type of a call to kumi:contains_none
+    Computes the return type of a call to kumi::contains_none
 
     @groupheader{Examples}
 

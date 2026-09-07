@@ -184,7 +184,7 @@ namespace kumi
   /**
     @ingroup kumi_reductions
 
-    @var min
+    @var max_flat
     @brief Callable object computing the maximum value of applications of `f` to all elements of kumi::flatten_all(t).
 
     @qualifier nodiscard
@@ -297,7 +297,7 @@ namespace kumi
   /**
     @ingroup kumi_reductions
 
-    @var min
+    @var min_flat
     @brief Callable object computing the minimum value of applications of `f` to all elements of kumi::flatten_all(t).
 
     @qualifier nodiscard
