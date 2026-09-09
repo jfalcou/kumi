@@ -159,151 +159,15 @@ static constexpr auto&#160;</td><td class="memItemRight"><b>label</b> ()</td></t
 Related Symbols</h2></td></tr>
 <tr><td class="ititle" colspan="2"><p>(Note that these are not member symbols.) </p>
 </td></tr>
-<tr class="memitem:gafc8e80ba53336a0142f3267959c1ba71" id="r_gafc8e80ba53336a0142f3267959c1ba71"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__utility.html#gafc8e80ba53336a0142f3267959c1ba71">capture_field</a> (T &amp;&amp;t) noexcept</td></tr>
+<tr class="memitem:gafc8e80ba53336a0142f3267959c1ba71" id="r_gafc8e80ba53336a0142f3267959c1ba71"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__utility_gafc8e80ba53336a0142f3267959c1ba71.html#gafc8e80ba53336a0142f3267959c1ba71">capture_field</a> (T &amp;&amp;t) noexcept</td></tr>
 <tr class="memdesc:gafc8e80ba53336a0142f3267959c1ba71"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a field from a given value keeping the qualifiers.  <br /></td></tr>
-<tr class="memitem:ga59477c1d8542af2601f493e3320434ee" id="r_ga59477c1d8542af2601f493e3320434ee"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__utility.html#ga59477c1d8542af2601f493e3320434ee">field_cast</a> (T &amp;&amp;t) noexcept</td></tr>
+<tr class="memitem:ga59477c1d8542af2601f493e3320434ee" id="r_ga59477c1d8542af2601f493e3320434ee"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__utility_ga59477c1d8542af2601f493e3320434ee.html#ga59477c1d8542af2601f493e3320434ee">field_cast</a> (T &amp;&amp;t) noexcept</td></tr>
 <tr class="memdesc:ga59477c1d8542af2601f493e3320434ee"><td class="mdescLeft">&#160;</td><td class="mdescRight">Casts the provided value to the target type using <span class="tt">static_cast</span>.  <br /></td></tr>
 <tr class="memitem:ga34969da06ac58348bc220ebf522233f1" id="r_ga34969da06ac58348bc220ebf522233f1"><td class="memTemplParams" colspan="2">
 template&lt;typename CharT, typename Traits&gt; </td></tr>
 <tr class="memitem:ga34969da06ac58348bc220ebf522233f1 template"><td class="memItemLeft">std::basic_ostream&lt; CharT, Traits &gt; &amp;&#160;</td><td class="memItemRight"><b>operator&lt;&lt;</b> (std::basic_ostream&lt; CharT, Traits &gt; &amp;os, field const &amp;w) noexcept</td></tr>
 <tr class="memdesc:ga34969da06ac58348bc220ebf522233f1"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a <a class="el" href="structkumi_1_1field.html" title="Named wrapper over a type.">kumi::field</a> in an output stream. <br /></td></tr>
 </table>
-<a name="doc-related-members" id="doc-related-members"></a><h2 id="header-doc-related-members" class="groupheader">Friends And Related Symbol Documentation</h2>
-<a id="gafc8e80ba53336a0142f3267959c1ba71" name="gafc8e80ba53336a0142f3267959c1ba71"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gafc8e80ba53336a0142f3267959c1ba71">&#9670;&#160;</a></span>capture_field()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">decltype(auto) constexpr capture_field </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel related">related</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Creates a field from a given value keeping the qualifiers. </p>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Name</td><td>The label to associate to the field. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">t</td><td>A forwarding reference to the input object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A <span class="tt"><a class="el" href="structkumi_1_1field.html" title="Named wrapper over a type.">field</a></span> that correctly keeps the qualified input type.</dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
-Helper type</h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Ts&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__kumi__utility.html#gafc8e80ba53336a0142f3267959c1ba71">capture_field</a>;</div>
-<div class="line"> </div>
-<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">using </span>capture_field_t = <span class="keyword">typename</span> <a class="code hl_function" href="group__kumi__utility.html#gafc8e80ba53336a0142f3267959c1ba71">capture_field&lt;T&gt;::type</a>;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__kumi__utility_html_gafc8e80ba53336a0142f3267959c1ba71"><div class="ttname"><a href="group__kumi__utility.html#gafc8e80ba53336a0142f3267959c1ba71">kumi::field&lt; Id, T &gt;::capture_field</a></div><div class="ttdeci">decltype(auto) constexpr capture_field(T &amp;&amp;t) noexcept</div><div class="ttdef"><b>Definition</b> field.hpp:271</div></div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__kumi__utility.html#gafc8e80ba53336a0142f3267959c1ba71" title="Creates a field from a given value keeping the qualifiers.">kumi::capture_field</a></p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
-Example:</h2>
-<div class="fragment"><div class="line"></div>
-<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
-<div class="line"> </div>
-<div class="line">  <span class="keywordtype">int</span> field = { 1 }; </div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_class" href="structkumi_1_1field.html">field</a> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="group__kumi__utility.html#gafc8e80ba53336a0142f3267959c1ba71">kumi::capture_field</a>&lt;<span class="stringliteral">&quot;x&quot;</span>_id&gt;(<a class="code hl_class" href="structkumi_1_1field.html">field</a>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1field_html"><div class="ttname"><a href="structkumi_1_1field.html">kumi::field</a></div><div class="ttdoc">Named wrapper over a type.</div><div class="ttdef"><b>Definition</b> field.hpp:26</div></div>
-</div><!-- fragment --> 
-</div>
-</div>
-<a id="ga59477c1d8542af2601f493e3320434ee" name="ga59477c1d8542af2601f493e3320434ee"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga59477c1d8542af2601f493e3320434ee">&#9670;&#160;</a></span>field_cast()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">decltype(auto) constexpr field_cast </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel related">related</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Casts the provided value to the target type using <span class="tt">static_cast</span>. </p>
-<dl class="section note"><dt>Note</dt><dd>If the type to convert models <a class="el" href="conceptkumi_1_1concepts_1_1field.html" title="Concept specifying a type represent a field.">kumi::concepts::field</a>, the function does not rename the input parameter.</dd></dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">U</td><td>The type to convert the parameter to. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">t</td><td>A forwarding reference to the input object. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A value of type U.</dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md8"></a>
-Helper type</h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Ts&gt; <span class="keyword">struct </span><a class="code hl_function" href="group__kumi__utility.html#ga59477c1d8542af2601f493e3320434ee">field_cast</a>;</div>
-<div class="line"> </div>
-<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">using </span>field_cast_t = <span class="keyword">typename</span> <a class="code hl_function" href="group__kumi__utility.html#ga59477c1d8542af2601f493e3320434ee">field_cast&lt;T&gt;::type</a>;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__kumi__utility_html_ga59477c1d8542af2601f493e3320434ee"><div class="ttname"><a href="group__kumi__utility.html#ga59477c1d8542af2601f493e3320434ee">kumi::field&lt; Id, T &gt;::field_cast</a></div><div class="ttdeci">decltype(auto) constexpr field_cast(T &amp;&amp;t) noexcept</div><div class="ttdef"><b>Definition</b> field.hpp:304</div></div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="group__kumi__utility.html#ga59477c1d8542af2601f493e3320434ee" title="Casts the provided value to the target type using static_cast.">kumi::field_cast</a></p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md9"></a>
-Example:</h2>
-<div class="fragment"><div class="line"></div>
-<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
-<div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> field = ( <span class="stringliteral">&quot;x&quot;</span>_id = <span class="charliteral">&#39;x&#39;</span> ); </div>
-<div class="line">  </div>
-<div class="line">  <span class="keyword">auto</span> caster = ( <span class="stringliteral">&quot;y&quot;</span>_id = 1 );</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; field &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; kumi::field_cast&lt;int&gt;(field) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; kumi::field_cast&lt;decltype(caster)&gt;(field) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">}</div>
-</div><!-- fragment --> 
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

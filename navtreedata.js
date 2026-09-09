@@ -35,7 +35,8 @@ var NAVTREE =
       [ "Type Theory", "kumi_introduction.html#kumi_introduction", [
         [ "Introduction", "kumi_introduction.html#kumi_introduction", null ],
         [ "Identity Types", "kumi_identity.html#kumi_identity", null ],
-        [ "Product Types", "kumi_product.html#kumi_product", null ]
+        [ "Product Types", "kumi_product.html#kumi_product", null ],
+        [ "References", "kumi_references.html#kumi_references", null ]
       ] ],
       [ "C++ Vocabulary", "kumi_cpp_spec.html#kumi_cpp_spec", null ],
       [ "Nomenclature", "kumi_nomenclature.html#kumi_nomenclature", null ]

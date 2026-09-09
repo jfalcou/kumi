@@ -149,7 +149,7 @@ $(function(){initNavTree('structkumi_1_1identifier.html','','structkumi_1_1ident
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename ID, typename Checker&gt;<br />
 class kumi::identifier&lt; ID, Checker &gt;</div><p>identifier definition class </p>
-<p><a class="el" href="structkumi_1_1identifier.html" title="identifier definition class">kumi::identifier</a> defines a identifier, i.e an entity that can receive values and can be stored as part of a product type. It is defined by a unique type ID which can be an actual type or generated from <a class="el" href="structkumi_1_1name.html" title="Compile-time text based identifier.">kumi::name</a> and an optional checking operations that will validate the value passed to the identifier is acceptable.</p>
+<p><a class="el" href="structkumi_1_1identifier.html" title="identifier definition class">kumi::identifier</a> defines an identifier, i.e. an entity that can receive values and can be stored as part of a product type. It is defined by a unique type ID which can be an actual type or generated from <a class="el" href="structkumi_1_1name.html" title="Compile-time text based identifier.">kumi::name</a> and an optional checking operations that will validate the value passed to the identifier is acceptable.</p>
 <p><a class="el" href="structkumi_1_1identifier.html" title="identifier definition class">kumi::identifier</a> can also be used to define custom identifier type with specific behavior.</p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -186,11 +186,11 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a1cbb7d1e8b6adafe05c6b3f43c94db5d" id="r_a1cbb7d1e8b6adafe05c6b3f43c94db5d"><td class="memItemLeft"><a id="a1cbb7d1e8b6adafe05c6b3f43c94db5d" name="a1cbb7d1e8b6adafe05c6b3f43c94db5d"></a>
 constexpr&#160;</td><td class="memItemRight"><b>identifier</b> () noexcept=default</td></tr>
 <tr class="memdesc:a1cbb7d1e8b6adafe05c6b3f43c94db5d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default constructor. <br /></td></tr>
-<tr class="memitem:a3b9a31cc021cee475c3dd820c966a104" id="r_a3b9a31cc021cee475c3dd820c966a104"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a3b9a31cc021cee475c3dd820c966a104">identifier</a> (ID const &amp;id, Checker const &amp;check) noexcept</td></tr>
-<tr class="memdesc:a3b9a31cc021cee475c3dd820c966a104"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs a identifier from an ID and a checker type.  <br /></td></tr>
+<tr class="memitem:a3b9a31cc021cee475c3dd820c966a104" id="r_a3b9a31cc021cee475c3dd820c966a104"><td class="memItemLeft">constexpr&#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1identifier_a3b9a31cc021cee475c3dd820c966a104.html#a3b9a31cc021cee475c3dd820c966a104">identifier</a> (ID const &amp;id, Checker const &amp;check) noexcept</td></tr>
+<tr class="memdesc:a3b9a31cc021cee475c3dd820c966a104"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructs an identifier from an ID and a checker type.  <br /></td></tr>
 <tr class="memitem:afd233fd13ed5f9c794f0c2bb02db1429" id="r_afd233fd13ed5f9c794f0c2bb02db1429"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
-<tr class="memitem:afd233fd13ed5f9c794f0c2bb02db1429 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#afd233fd13ed5f9c794f0c2bb02db1429">operator=</a> (T &amp;&amp;v) const noexcept -&gt; <a class="el" href="structkumi_1_1field.html">kumi::field</a>&lt; <a class="el" href="#aae1d9bcd971d43f8831ba98f5d7e2678">type</a>, std::unwrap_ref_decay_t&lt; T &gt; &gt;</td></tr>
-<tr class="memdesc:afd233fd13ed5f9c794f0c2bb02db1429"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment of a value to a identifier.  <br /></td></tr>
+<tr class="memitem:afd233fd13ed5f9c794f0c2bb02db1429 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1identifier_afd233fd13ed5f9c794f0c2bb02db1429.html#afd233fd13ed5f9c794f0c2bb02db1429">operator=</a> (T &amp;&amp;v) const noexcept -&gt; <a class="el" href="structkumi_1_1field.html">kumi::field</a>&lt; <a class="el" href="#aae1d9bcd971d43f8831ba98f5d7e2678">type</a>, std::unwrap_ref_decay_t&lt; T &gt; &gt;</td></tr>
+<tr class="memdesc:afd233fd13ed5f9c794f0c2bb02db1429"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment of a value to an identifier.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-friends" class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
@@ -207,108 +207,6 @@ template&lt;typename CharT, typename Traits&gt; </td></tr>
 <tr class="memitem:a4042551a86fea06c6d4be2daec274a35 template"><td class="memItemLeft">std::basic_ostream&lt; CharT, Traits &gt; &amp;&#160;</td><td class="memItemRight"><b>operator&lt;&lt;</b> (std::basic_ostream&lt; CharT, Traits &gt; &amp;os, <a class="el" href="#a1cbb7d1e8b6adafe05c6b3f43c94db5d">identifier</a> const &amp;) noexcept</td></tr>
 <tr class="memdesc:a4042551a86fea06c6d4be2daec274a35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Output stream insertion. <br /></td></tr>
 </table>
-<a name="doc-constructors" id="doc-constructors"></a><h2 id="header-doc-constructors" class="groupheader">Constructor &amp; Destructor Documentation</h2>
-<a id="a3b9a31cc021cee475c3dd820c966a104" name="a3b9a31cc021cee475c3dd820c966a104"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3b9a31cc021cee475c3dd820c966a104">&#9670;&#160;</a></span>identifier()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ID, typename Checker&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname"><a class="el" href="structkumi_1_1identifier.html">kumi::identifier</a>&lt; ID, Checker &gt;::identifier </td>
-          <td>(</td>
-          <td class="paramtype">ID const &amp;</td>          <td class="paramname"><span class="paramname"><em>id</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Checker const &amp;</td>          <td class="paramname"><span class="paramname"><em>check</em></span>&#160;)</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Constructs a identifier from an ID and a checker type. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">id</td><td>Identifier of the identifier. </td></tr>
-    <tr><td class="paramname">check</td><td>Object performing the compile-time verification of the identifier's value.</td></tr>
-  </table>
-  </dd>
-</dl>
-<div class="fragment"><div class="line"></div>
-<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">using namespace </span>kumi::literals;</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keyword">auto</span> char_value  = <a class="code hl_class" href="structkumi_1_1identifier.html">kumi::identifier</a>(<span class="stringliteral">&quot;character&quot;</span>_id, <a class="code hl_variable" href="group__kumi__utility.html#ga26690952147eaa66ecf74378070ee53b">kumi::only&lt;char&gt;</a>);</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line">  std::cout &lt;&lt; <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{ char_value  = <span class="charliteral">&#39;Z&#39;</span> } &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__kumi__utility_html_ga26690952147eaa66ecf74378070ee53b"><div class="ttname"><a href="group__kumi__utility.html#ga26690952147eaa66ecf74378070ee53b">kumi::only</a></div><div class="ttdeci">constexpr kumi::only_t&lt; T &gt; only</div><div class="ttdoc">Option specifying the single type a identifier will accept.</div><div class="ttdef"><b>Definition</b> identifier.hpp:31</div></div>
-</div><!-- fragment --> 
-</div>
-</div>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="afd233fd13ed5f9c794f0c2bb02db1429" name="afd233fd13ed5f9c794f0c2bb02db1429"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#afd233fd13ed5f9c794f0c2bb02db1429">&#9670;&#160;</a></span>operator=()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename ID, typename Checker&gt; </div>
-<div class="memtemplate">
-template&lt;typename T&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">auto <a class="el" href="structkumi_1_1identifier.html">kumi::identifier</a>&lt; ID, Checker &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>v</em></span></td><td>)</td>
-          <td> const -&gt; <a class="el" href="structkumi_1_1field.html">kumi::field</a>&lt; <a class="el" href="#aae1d9bcd971d43f8831ba98f5d7e2678">type</a>, std::unwrap_ref_decay_t&lt; T &gt; &gt;</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Assignment of a value to a identifier. </p>
-<p>Bind a value to current <a class="el" href="structkumi_1_1identifier.html" title="identifier definition class">kumi::identifier</a> and returns an instance of a field.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">v</td><td>Bound value </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structkumi_1_1field.html" title="Named wrapper over a type.">kumi::field</a> binding the identifier to <span class="tt">v</span>.</dd></dl>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
-<div class="line">  std::cout &lt;&lt; (<span class="stringliteral">&quot;value&quot;</span>_id = 42.1337) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">}</div>
-</div><!-- fragment --> 
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

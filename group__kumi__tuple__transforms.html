@@ -143,89 +143,11 @@ $(function(){initNavTree('group__kumi__tuple__transforms.html','',''); });
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
-<tr class="memitem:ga30bc4999bd377b4bac9914d23876a8be" id="r_ga30bc4999bd377b4bac9914d23876a8be"><td class="memItemLeft">KUMI_VARIABLE_ABI constexpr map_index_t&#160;</td><td class="memItemRight"><a class="el" href="#ga30bc4999bd377b4bac9914d23876a8be">kumi::map_index</a> {}</td></tr>
-<tr class="memdesc:ga30bc4999bd377b4bac9914d23876a8be"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object applying the Callable object <span class="tt">f</span> on each product types elements and their indexes.  <br /></td></tr>
+<tr class="memitem:ga34623706699cbbd62d626e3cc49aa8dc" id="r_ga34623706699cbbd62d626e3cc49aa8dc"><td class="memItemLeft">constexpr for_each_index_t&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__tuple__transforms_ga34623706699cbbd62d626e3cc49aa8dc.html#ga34623706699cbbd62d626e3cc49aa8dc">kumi::for_each_index</a> {}</td></tr>
+<tr class="memdesc:ga34623706699cbbd62d626e3cc49aa8dc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object applying the Callable object f on each element of a product type and its index.  <br /></td></tr>
+<tr class="memitem:ga64a8c36072828fb7b724ba0ab8fc59bc" id="r_ga64a8c36072828fb7b724ba0ab8fc59bc"><td class="memItemLeft">constexpr map_index_t&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__tuple__transforms_ga64a8c36072828fb7b724ba0ab8fc59bc.html#ga64a8c36072828fb7b724ba0ab8fc59bc">kumi::map_index</a> {}</td></tr>
+<tr class="memdesc:ga64a8c36072828fb7b724ba0ab8fc59bc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object applying the Callable object <span class="tt">f</span> on each product types elements and their indexes.  <br /></td></tr>
 </table>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
-<a id="ga30bc4999bd377b4bac9914d23876a8be" name="ga30bc4999bd377b4bac9914d23876a8be"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga30bc4999bd377b4bac9914d23876a8be">&#9670;&#160;</a></span>map_index</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">KUMI_VARIABLE_ABI constexpr map_index_t kumi::map_index {}</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel inline">inline</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p><code>#include &lt;kumi/algorithm/map.hpp&gt;</code></p>
-
-<p>Callable object applying the Callable object <span class="tt">f</span> on each product types elements and their indexes. </p>
-<p>Applies the given function to all the product types passed as arguments along with their indexes and stores the result in another product type, keeping the original elements order.</p>
-<dl class="section note"><dt>Note</dt><dd>Does not participate in overload resolution if tuples' size are not equal or if <span class="tt">f</span> can't be called on each tuple's elements and their indexes.</dd></dl>
-<h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/map.hpp&gt;</span></div>
-</div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type T, product_type... Ts&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga30bc4999bd377b4bac9914d23876a8be">map_index</a>(Function &amp;&amp; f, T &amp;&amp; t, Ts &amp;&amp;... ts);</div>
-<div class="ttc" id="agroup__kumi__tuple__transforms_html_ga30bc4999bd377b4bac9914d23876a8be"><div class="ttname"><a href="#ga30bc4999bd377b4bac9914d23876a8be">kumi::map_index</a></div><div class="ttdeci">KUMI_VARIABLE_ABI constexpr map_index_t map_index</div><div class="ttdoc">Callable object applying the Callable object f on each product types elements and their indexes.</div><div class="ttdef"><b>Definition</b> map.hpp:205</div></div>
-</div><!-- fragment --><h3 class="groupheader">Parameters </h3>
-<ul>
-<li><span class="tt">f</span>: Callable object to apply</li>
-<li><span class="tt">t</span>: Product Type to operate on</li>
-<li><span class="tt">ts</span>: Other Product Types to operate on</li>
-</ul>
-<h3 class="groupheader">Return value </h3>
-<ul>
-<li>The product type matching the <a class="el" href="structkumi_1_1common__product__type.html" title="Extracts the common product_type of a parameter pack.">common_product_type</a> of the input containing <span class="tt">f</span> calls results.</li>
-</ul>
-<h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function,</div>
-<div class="line">             kumi::concepts::product_type T,</div>
-<div class="line">             kumi::concepts::sized_product_type&lt;kumi::size_v&lt;T&gt;&gt;... Ts&gt;</div>
-<div class="line">    <span class="keyword">using </span>map_index_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga30bc4999bd377b4bac9914d23876a8be">kumi::map_index</a>(std::declval&lt;Function&gt;(), std::declval&lt;T&gt;(), std::declval&lt;Ts&gt;()...));</div>
-<div class="line"> </div>
-<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function,</div>
-<div class="line">             kumi::concepts::product_type T,</div>
-<div class="line">             kumi::concepts::sized_product_type&lt;kumi::size_v&lt;T&gt;&gt;... Ts&gt;</div>
-<div class="line">    <span class="keyword">struct </span>map_index</div>
-<div class="line">    {</div>
-<div class="line">      <span class="keyword">using </span>type = kumi::result::map_index_t&lt;Function, T, Ts...&gt;;</div>
-<div class="line">    };</div>
-<div class="line"> </div>
-</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#ga30bc4999bd377b4bac9914d23876a8be" title="Callable object applying the Callable object f on each product types elements and their indexes.">kumi::map_index</a></p>
-<dl class="section see"><dt>See also</dt><dd><a class="el" href="group__kumi__transforms.html#ga9582757ceb8daf344685ca4dd6605d15" title="Callable object applying the Callable object f on each product types&#39; elements.">kumi::map</a> </dd>
-<dd>
-<a class="el" href="group__kumi__record__transforms.html#ga21f771a07041a7a70be8f03ef59ddbe4" title="Callable object applying the Callable object f on each product types elements and their associated la...">kumi::map_field</a></dd></dl>
-<h2 class="groupheader">Example </h2>
-<div class="fragment"><div class="line"></div>
-<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> lhs = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{1,2,3};</div>
-<div class="line">  <span class="keyword">auto</span> rhs = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{2.4,4.6,6.8};</div>
-<div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> res = <a class="code hl_variable" href="#ga30bc4999bd377b4bac9914d23876a8be">kumi::map_index</a>( [](<span class="keyword">auto</span> i, <span class="keyword">auto</span> l, <span class="keyword">auto</span> r) { <span class="keywordflow">return</span> 1000*(i+1)+(l*r); }</div>
-<div class="line">                            , lhs, rhs</div>
-<div class="line">                            );</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; res &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
-</div><!-- fragment --> 
-</div>
-</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

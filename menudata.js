@@ -32,7 +32,8 @@ var menudata={children:[
 {text:"Type Theory",url:"kumi_introduction.html#kumi_introduction",children:[
 {text:"Introduction",url:"kumi_introduction.html#kumi_introduction"},
 {text:"Identity Types",url:"kumi_identity.html#kumi_identity"},
-{text:"Product Types",url:"kumi_product.html#kumi_product"}]},
+{text:"Product Types",url:"kumi_product.html#kumi_product"},
+{text:"References",url:"kumi_references.html#kumi_references"}]},
 {text:"C++ Vocabulary",url:"kumi_cpp_spec.html#kumi_cpp_spec"},
 {text:"Nomenclature",url:"kumi_nomenclature.html#kumi_nomenclature"}]},
 {text:"Reference Documentation",url:"kumi_reference.html",children:[

@@ -27,7 +27,7 @@
     </tr>
     <tr>
       <th scope="row">Date:</th>
-      <td>2026-09-09 06:30:33</td>
+      <td>2026-09-09 09:44:24</td>
     </tr>
   </table>
 </div>
@@ -1039,7 +1039,7 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="cm">    @brief    Binds a certain amount of values into a callable reducing it&#39;s arity.</span></td>
+      <td class="src "><span class="cm">    @brief    Returns a callable object with `ts` bound as its leading arguments, reducing `c` arity.</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l73" href="#l73">73</a></td>
@@ -1060,14 +1060,14 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="cm">    @param ts elements to be used as prefilled arguments to c</span></td>
+      <td class="src "><span class="cm">    @param ts Elements to be bound as the leading arguments of `c`.</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l76" href="#l76">76</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="cm">    @return   A new callable matching C with ts arguments prefilled by the front.</span></td>
+      <td class="src "><span class="cm">    @return   A callable object of lower arity invoking `c` with `ts` prefilled at the front.</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l77" href="#l77">77</a></td>
@@ -1186,7 +1186,7 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="cm">    @brief    Binds a certain amount of values into a callable reducing it&#39;s arity.</span></td>
+      <td class="src "><span class="cm">    @brief    Returns a callable object with `ts` bound as its trailing arguments, reducing `c` arity.</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l94" href="#l94">94</a></td>
@@ -1207,14 +1207,14 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="cm">    @param ts elements to be used as prefilled arguments to c</span></td>
+      <td class="src "><span class="cm">    @param ts Elements to be bound as the trailing arguments of `c`.</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l97" href="#l97">97</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="cm">    @return   A new callable matching C with ts arguments prefilled by the back.</span></td>
+      <td class="src "><span class="cm">    @return   A callable object of lower arity invoking `c` with `ts` prefilled at the back.</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l98" href="#l98">98</a></td>
@@ -1228,7 +1228,7 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="cm">    @note Replaces std::bind_front to avoid depending on `functional`.</span></td>
+      <td class="src "><span class="cm">    @note Replaces std::bind_back to avoid depending on `functional`.</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l100" href="#l100">100</a></td>

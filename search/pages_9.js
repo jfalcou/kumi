@@ -16,6 +16,6 @@ var searchData=
   ['constructions_20the_20logic_20of_20and_13',['Product Constructions (The Logic of &quot;AND&quot;)',['../kumi_product.html#product_construction',1,'']]],
   ['containers_14',['Containers',['../kumi_cpp_spec.html#autotoc_md135',1,'']]],
   ['contributors_15',['New Contributors',['../kumi_changelog.html#autotoc_md115',1,'']]],
-  ['correspondence_16',['The Curry-Howard Correspondence',['../kumi_introduction.html#curry_howard',1,'']]],
-  ['curry_20howard_20correspondence_17',['The Curry-Howard Correspondence',['../kumi_introduction.html#curry_howard',1,'']]]
+  ['correspondence_16',['Correspondence',['../kumi_introduction.html#curry_howard',1,'The Curry-Howard Correspondence'],['../kumi_references.html#references_curry_howard',1,'The Curry-Howard Correspondence']]],
+  ['curry_20howard_20correspondence_17',['Curry Howard Correspondence',['../kumi_introduction.html#curry_howard',1,'The Curry-Howard Correspondence'],['../kumi_references.html#references_curry_howard',1,'The Curry-Howard Correspondence']]]
 ];

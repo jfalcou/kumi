@@ -167,6 +167,7 @@ Tuple Protocol</h1>
 <div class="line"> </div>
 <div class="line">type.get&lt;I&gt;() / get&lt;I&gt;(type); <span class="comment">//A function to access the element.</span></div>
 </div><!-- fragment --><p>It enables Structured Bindings, allowing one to unpack custom types easily</p>
+<p>Structured bindings and kumi share the same decomposition hooks: the elements of a product type are extracted through <span class="tt">std::tuple_size</span>, <span class="tt">std::tuple_element</span> and <span class="tt">get&lt;I&gt;</span>, used both by structured bindings and by every kumi algorithm. This is why a user type implementing the tuple protocol (together with the <a class="el" href="conceptkumi_1_1concepts_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::concepts::product_type</a> criterion) is accepted by kumi on equal footing with its own <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> and <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>.</p>
 <p>This serves as a manual reflection mechanism, as C++ (prior to C++26) lacks a proper reflection mechanism to inspect structures, these functions specifications are giving the necessary informations to the compiler in order to natively adapt your structure to be a tuple.</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="autotoc_md135"></a>

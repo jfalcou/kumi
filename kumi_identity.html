@@ -144,9 +144,11 @@ Empty Type : \( (0 / \bot) \)</h1>
 <p><b>Algebraic Role</b>: In logic, it represents a contradiction. In code, it represents a path that can never be reached. A function returning the Empty Type is a "diverging" function (it never returns).</p>
 <p><b>Identity Property</b>: Just as \( x + 0 = x \), having a choice between Type A or an impossible Type 0 is logically equivalent to simply having Type A.</p>
 <p>One cannot write such a type, but could specify a function that returns empty, in C++ this can be expressed the following way. </p><div class="fragment"><div class="line">[[noreturn]] <span class="keywordtype">void</span> foo() { </div>
-<div class="line">  <span class="keywordflow">throw</span> std:runtime_error(<span class="stringliteral">&quot;Never returns&quot;</span>);</div>
+<div class="line">  <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Never returns&quot;</span>);</div>
 <div class="line">}</div>
-</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>As of today, kumi does not provide sum types, so this kind of type is not used. The focus was made on product types and their associated algebra.</dd></dl>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>A function that never returns is the runtime counterpart of the empty type.</dd>
+<dd>
+As of today, kumi does not provide sum types, so this kind of type is not used. The focus was made on product types and their associated algebra.</dd></dl>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="kumi_unit"></a>
 Unit Type : \( (1 / \top) \)</h1>

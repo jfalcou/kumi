@@ -128,9 +128,9 @@
             "branch_percent": 100.0,
             "branch_total": 9,
             "filename": "include/kumi/algorithm/for_each.hpp",
-            "function_covered": 221,
+            "function_covered": 224,
             "function_percent": 100.0,
-            "function_total": 221,
+            "function_total": 224,
             "line_covered": 18,
             "line_percent": 100.0,
             "line_total": 18
@@ -344,9 +344,9 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kumi/detail/field.hpp",
-            "function_covered": 488,
+            "function_covered": 490,
             "function_percent": 94.6,
-            "function_total": 516,
+            "function_total": 518,
             "line_covered": 22,
             "line_percent": 100.0,
             "line_total": 22
@@ -532,9 +532,9 @@
             "line_total": 3
         }
     ],
-    "function_covered": 5680,
+    "function_covered": 5685,
     "function_percent": 97.0,
-    "function_total": 5853,
+    "function_total": 5858,
     "gcovr/summary_format_version": "0.6",
     "line_covered": 646,
     "line_percent": 99.7,
