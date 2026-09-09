@@ -31,6 +31,10 @@ The corresponding definition in kumi could look like the following:
 kumi::tuple<int,float,char> a = { 42, 13.37f, 'd' };
 ```
 
+@note This *positional* product type \f$ (A, B) \f$ is implemented in kumi by kumi::tuple. The *labeled* variant
+      \f$ \{l_1:T_1, l_2:T_2\} \f$ presented below is implemented by kumi::record. Both are documented in the
+      @ref kumi_tuple_related and @ref kumi_record_related reference groups.
+
 To extract values from a tuple, there are projections that are term constructors.
 A projection (often noted \f$ \pi \f$) is a function that given a product type 
 returns the elements at the desired index. Formally it is denoted as : 
@@ -107,7 +111,7 @@ It follows **Set Algebra** on top of **List Algebra**.
 + **Label Identity**: Components are identified by unique **Labels** (names) rather than position.
 + **Permutation**:  Theoretically, a record is a set of field mappings. In many formal definitions, `{x: int, y: float}` 
                     is isomorphic to `{y: float, x: int}` because the set of labels and their associated types are identical.
-+ **Semantic Access**: Access is performed via labels (`get<'x'>(r)`), adding semantic meaning to the structure.
++ **Semantic Access**: Access is performed via labels (`get<"x">(r)`), adding semantic meaning to the structure.
 
 Operation on records are traditionally not structural in the sense that they operate per label, never per 
 element. However, as they are internally represented by a tuple, such operation are permitted. As an example, one

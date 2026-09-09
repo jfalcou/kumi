@@ -22,7 +22,7 @@ namespace kumi
   //====================================================================================================================
   /**
     @ingroup kumi_utility
-    @brief  Option specifying the single type a identifier will accept.
+    @brief  Option restricting an identifier to accept a single type `T`.
     @tparam T Type that the parametrized identifier will accept.
 
     @include doc/infra/only.cpp
@@ -33,7 +33,7 @@ namespace kumi
   //====================================================================================================================
   /**
     @ingroup kumi_utility
-    @brief  Option specifying a traits that type should verify for being used as a identifier value.
+    @brief  Option restricting an identifier to accept values whose type satisfies the trait `Traits`.
     @tparam Traits Traits that the parametrized identifier will use to validate its value.
 
     @include doc/infra/checked.cpp
@@ -70,7 +70,7 @@ namespace kumi
     @class    identifier
     @brief    identifier definition class
 
-    kumi::identifier defines a identifier, i.e an entity that can receive values and can be stored as part of a
+    kumi::identifier defines an identifier, i.e. an entity that can receive values and can be stored as part of a
     product type. It is defined by a unique type ID which can be an actual type or generated from kumi::name and an
     optional checking operations that will validate the value passed to the identifier is acceptable.
 
@@ -95,7 +95,7 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @brief Constructs a identifier from an ID and a checker type.
+      @brief Constructs an identifier from an ID and a checker type.
 
       @param id     Identifier of the identifier.
       @param check  Object performing the compile-time verification of the identifier's value.
@@ -107,9 +107,9 @@ namespace kumi
 
     //==================================================================================================================
     /**
-      @brief Assignment of a value to a identifier
+      @brief Assignment of a value to an identifier
 
-      Bind a value to current kumi::identifier and returns an instance of a field.
+      Binds a value to the current kumi::identifier and returns a field instance.
 
       @param v Bound value
       @return A kumi::field binding the identifier to `v`.
@@ -155,7 +155,7 @@ namespace kumi
     @ingroup kumi_types
     @class    name
     @brief Compile-time text based identifier
-    @tparam ID Compile-time string representing an indentifier
+    @tparam ID Compile-time string representing an identifier
   **/
   //====================================================================================================================
   template<kumi::str ID> struct name
@@ -163,14 +163,14 @@ namespace kumi
     //! @brief Derived identifier type
     using type = name<ID>;
 
-    //! A name field str representation is it s owned str
+    //! Text representation of a name, as a kumi::str
     friend constexpr kumi::str to_str(name const&) { return ID; }
 
     //==================================================================================================================
     /**
-      @brief Assignment of a value to a identifier
+      @brief Assignment of a value to an identifier
 
-      Bind a value to current name and returns an instance of a kumi::field.
+      Binds a value to the current name and returns a kumi::field instance.
 
       @param v Bound value
       @return A kumi::field binding the identifier to `v`.

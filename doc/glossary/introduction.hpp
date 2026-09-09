@@ -45,7 +45,10 @@ The following table recapitulates the different operation that can be necessary 
 
 In order to be able to build more complex type, it is necessary to first define Atomic Terms. In common type theory,
 these can be of three different types. There are the natural numbers, often denotated *nat*, then there are boolean
-values notated *bool* and formal variables. Formal variables are simply variables reffered to by a symbol.
+values notated *bool* and formal variables.
+
+A **formal variable** is a symbol that stands for an arbitrary term of a given type. It carries no computation of its
+own and only serves as a placeholder, such as \f$ x \f$ in the lambda term \f$ \lambda x. x \f$.
 
 ```cpp
 true : bool   // A boolean
@@ -76,6 +79,19 @@ Understanding cardinality allows us to see types not just as labels, but as math
 state space dictates how much information a variable can have.
 
 ---
+
+To tie these notions back to the library, it is useful to keep the following correspondence in mind: a lambda term
+denotes a function, a well-typed term denotes a value of a given type, and a kumi::product_type is how such a term
+is concretely stored and decomposed.
+
+| Lambda term              | Well-typed term            | Kumi side                                        |
+|:-------------------------|:---------------------------|:-------------------------------------------------|
+| \f$ \lambda x. x \f$     | \f$ T \to T \f$            | a callable applied to the elements of a product type |
+| \f$ (x_1, ..., x_n) \f$  | \f$ T_1 \times ... \times T_n \f$ | kumi::tuple / kumi::record             |
+| projection \f$ \pi_i \f$ | \f$ T_i \f$                | kumi::get<...>                                   |
+
+@note Readers looking for a deeper treatment of these topics may consult the short selection of type-theory
+      references gathered in the [References](@ref kumi_references) page.
 
 In the next page, we will see some more specific types that are used as a base for more complex 
 operations.

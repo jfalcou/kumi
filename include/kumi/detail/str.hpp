@@ -276,7 +276,7 @@ namespace kumi
   /**
     @ingroup kumi_types
     @class    unknown
-    @brief    Type indicating a identifier was not found in a given kumi::product_type
+    @brief    Type indicating an identifier was not found in a given kumi::product_type
   **/
   //====================================================================================================================
   struct unknown

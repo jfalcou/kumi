@@ -37,13 +37,13 @@ namespace kumi::function
   //====================================================================================================================
   /**
     @ingroup kumi_functional
-    @brief    If T is a kumi::product_type, returns it's Ith element, returns an instance of V otherwise.
+    @brief    Returns the Ith element of `t` if `t` is a kumi::product_type, an instance of `v` otherwise.
 
-    @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
+    @note Does not participate in overload resolution if `I` is out of [0, kumi::size_v<T>).
     @tparam   I Compile-time index of the element to access
-    @param    t type to inspect
-    @param    v fallback value
-    @return   A reference to the selected element of t if t is a kumi::product_type, the parameter v otherwise.
+    @param    t Type to inspect
+    @param    v Fallback value
+    @return   A reference to the selected element of `t` if `t` is a kumi::product_type, the parameter `v` otherwise.
   **/
   //====================================================================================================================
   template<std::size_t I, typename T, typename V> [[nodiscard]] KUMI_ABI constexpr decltype(auto) get_or(T&& t, V&& v)
@@ -55,11 +55,14 @@ namespace kumi::function
   //====================================================================================================================
   /**
     @ingroup kumi_functional
-    @brief    If T is a kumi::product_type and I is within it's size, returns element_t<I,T>, returns U otherwise
+    @brief    Computes the Ith element type of a kumi::product_type, or a fallback type `U` otherwise.
 
-    @tparam I Index of the type to retrieve
-    @tparam T type to access
-    @tparam U fallback type
+    If `T` is a kumi::product_type and `I` is within its size, this alias resolves to `element_t<I,T>`, otherwise it
+    resolves to `U`.
+
+    @tparam I Index of the element type to retrieve
+    @tparam T Type to access
+    @tparam U Fallback type
 
     ## Helper type
     @code

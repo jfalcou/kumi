@@ -27,9 +27,11 @@ One cannot write such a type, but could specify a function that returns empty, i
 following way.
 ```cpp
 [[noreturn]] void foo() { 
-  throw std:runtime_error("Never returns");
+  throw std::runtime_error("Never returns");
 }
 ```
+
+@note A function that never returns is the runtime counterpart of the empty type.
 
 @note As of today, kumi does not provide sum types, so this kind of type is not used. The focus was made on product 
 types and their associated algebra.

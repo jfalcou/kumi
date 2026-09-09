@@ -17,8 +17,8 @@ namespace kumi
 {
   //====================================================================================================================
   /**
-    @defgroup kumi_details Helper Types and Functions
-    @brief    Tools for interacting with kumi::tuple
+    @defgroup kumi_details Internal Implementation Helpers
+    @brief    Helpers, traits and utilities used by the library implementation.
   **/
   //====================================================================================================================
 }

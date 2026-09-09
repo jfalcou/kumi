@@ -14,7 +14,7 @@
 namespace kumi
 {
   //================================================================================================
-  //! @defgroup kumi_functional Helper Types and function
+  //! @defgroup kumi_functional Helper Types and Functions
   //! @brief    Utilities to manipulate functions and types in a functional way
   //================================================================================================
 }

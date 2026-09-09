@@ -8,6 +8,7 @@
   - @subpage kumi_introduction
   - @subpage kumi_identity
   - @subpage kumi_product
+  - @subpage kumi_references
   - @subpage kumi_cpp_spec
   - @subpage kumi_nomenclature
 

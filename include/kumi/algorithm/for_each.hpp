@@ -91,7 +91,9 @@ namespace kumi
     `f` is applied on the values if the given product_type is a record type.
 
     @note This function does not take part in overload resolution if `f` can't be applied to the
-          elements of `t` and/or `ts`, or if the product type are not compatible. @see compatible_product_types.
+          elements of `t` and/or `ts`, or if the product types are not compatible.
+
+    @see kumi::concepts::compatible_product_types
 
     @qualifier inline
     @qualifier constexpr
@@ -136,7 +138,7 @@ namespace kumi
   /**
     @ingroup kumi_tuple_transforms
 
-    @var for_each
+    @var for_each_index
     @brief Callable object applying the Callable object f on each element of a product type and its index.
 
     @note This function does not take part in overload resolution if `f` can't be applied to the
@@ -178,12 +180,12 @@ namespace kumi
   /**
     @ingroup kumi_record_transforms
 
-    @var for_each
+    @var for_each_field
     @brief Callable object applying the Callable object f on each element of a product type and its field.
 
     @note This function does not take part in overload resolution if `f` can't be applied to the
           elements of `t` and/or `ts` and a field or if the product types are not compatible.
-          @see compatible_product_types
+          @see kumi::concepts::compatible_product_types
 
 
     This function can only be applied to record types.

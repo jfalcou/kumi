@@ -100,7 +100,7 @@ namespace kumi
 
     @snippet include/kumi/algorithm/push_pop.hpp push_front_t
 
-    Computes the return type of a call to kumi:push_front
+    Computes the return type of a call to kumi::push_front
 
     @groupheader{Examples}
 
@@ -155,7 +155,7 @@ namespace kumi
 
     @snippet include/kumi/algorithm/push_pop.hpp pop_front_t
 
-    Computes the return type of a call to kumi:pop_front
+    Computes the return type of a call to kumi::pop_front
 
     @groupheader{Examples}
 
@@ -176,7 +176,7 @@ namespace kumi
   /**
     @ingroup kumi_generators
 
-    @var push_front
+    @var push_back
     @brief Callable object constructing a product type by adding a value `v` at the end of `t`.
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
@@ -205,13 +205,13 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * A product type composed of all elements of `t` in order followed by `v`.
+      - A product type composed of all elements of `t` in order followed by `v`.
 
     @groupheader{Helper type}
 
     @snippet include/kumi/algorithm/push_pop.hpp push_back_t
 
-    Computes the return type of a call to kumi:push_back
+    Computes the return type of a call to kumi::push_back
 
     @groupheader{Examples}
 
@@ -232,8 +232,8 @@ namespace kumi
   /**
     @ingroup kumi_generators
 
-    @var pop_front
-    @brief Callable object removing the last(if any) element of `t`.
+    @var pop_back
+    @brief Callable object removing the last (if any) element of `t`.
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
@@ -250,8 +250,8 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T, typename V>
-      constexpr auto pop_back(T && t, V && v);
+      template<product_type T>
+      constexpr auto pop_back(T && t);
     @endcode
 
     @subgroupheader{Parameters}
@@ -260,13 +260,13 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * A product type composed of all elements of `t` except its last. Has no effect on empty product types.
+      - A product type composed of all elements of `t` except its last. Has no effect on empty product types.
 
     @groupheader{Helper type}
 
     @snippet include/kumi/algorithm/push_pop.hpp pop_back_t
 
-    Computes the return type of a call to kumi:pop_back
+    Computes the return type of a call to kumi::pop_back
 
     @groupheader{Examples}
 

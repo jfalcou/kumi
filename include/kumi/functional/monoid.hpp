@@ -13,10 +13,7 @@ namespace kumi::function
   /**
     @ingroup kumi_functional
     @class numeric_add
-    @brief A type representing the addition monoid with it's associated identity. The identity of
-           the addition is `0`.
-
-    kumi::numeric_add provides a monoid representing the addition.
+    @brief Addition monoid whose identity element is `0`.
   **/
   //====================================================================================================================
   struct numeric_add
@@ -36,10 +33,7 @@ namespace kumi::function
   /**
     @ingroup kumi_functional
     @class numeric_prod
-    @brief A type representing the multiplication monoid with it's associated identity.
-           The identity of the multiplication is `1`.
-
-    kumi::numeric_prod provides a monoid representing the multiplication.
+    @brief Multiplication monoid whose identity element is `1`.
   **/
   //====================================================================================================================
   struct numeric_prod
@@ -59,10 +53,7 @@ namespace kumi::function
   /**
     @ingroup kumi_functional
     @class boolean_and
-    @brief A type representing the `logical and` monoid and it's associated identity. The identity
-           of the `boolean_and` is `true`.
-
-    kumi::boolean_and provides a monoid representing the  `logical and` operation.
+    @brief `logical and` monoid whose identity element is `true`.
   **/
   //====================================================================================================================
   struct boolean_and
@@ -82,10 +73,7 @@ namespace kumi::function
   /**
     @ingroup kumi_functional
     @class boolean_or
-    @brief A type representing the `logical or` monoid and it's associated identity. The identity
-           of `boolean_or` is `false`.
-
-    kumi::boolean_or provides a monoid representing the `logical or` operation.
+    @brief `logical or` monoid whose identity element is `false`.
   **/
   //====================================================================================================================
   struct boolean_or
@@ -105,10 +93,7 @@ namespace kumi::function
   /**
     @ingroup kumi_functional
     @class boolean_xor
-    @brief A type representing the `logical xor` monoid and it's associated identity. The identity
-           of `boolean_xor` is `false`.
-
-    kumi::boolean_xor provides a monoid representing the `logical xor` operation.
+    @brief `logical xor` monoid whose identity element is `false`.
   **/
   //====================================================================================================================
   struct boolean_xor
@@ -127,8 +112,7 @@ namespace kumi::function
   //==================================================================================================================
   /**
     @ingroup kumi_functional
-    @brief Forms a binary monoid callable that can be used in kumi::algoritm. It represents the
-           addition.
+    @brief Callable object matching the `kumi::numeric_add` monoid, usable with kumi::algorithm.
   **/
   //==================================================================================================================
   inline constexpr kumi::function::numeric_add plus{};
@@ -136,8 +120,7 @@ namespace kumi::function
   //==================================================================================================================
   /**
     @ingroup kumi_functional
-    @brief Forms a binary monoid callable that can be used in kumi::algoritm. It represents the
-           multiplication.
+    @brief Callable object matching the `kumi::numeric_prod` monoid, usable with kumi::algorithm.
   **/
   //==================================================================================================================
   inline constexpr kumi::function::numeric_prod multiplies{};
@@ -145,8 +128,7 @@ namespace kumi::function
   //==================================================================================================================
   /**
     @ingroup kumi_functional
-    @brief Forms a binary monoid callable that can be used in kumi::algoritm. It represents the
-           logical and operation.
+    @brief Callable object matching the `kumi::boolean_and` monoid, usable with kumi::algorithm.
   **/
   //==================================================================================================================
   inline constexpr kumi::function::boolean_and bit_and{};
@@ -154,8 +136,7 @@ namespace kumi::function
   //==================================================================================================================
   /**
     @ingroup kumi_functional
-    @brief Forms a binary monoid callable that can be used in kumi::algoritm. It represents the
-           logical or operation.
+    @brief Callable object matching the `kumi::boolean_or` monoid, usable with kumi::algorithm.
   **/
   //==================================================================================================================
   inline constexpr kumi::function::boolean_or bit_or{};
@@ -163,8 +144,7 @@ namespace kumi::function
   //==================================================================================================================
   /**
     @ingroup kumi_functional
-    @brief Forms a binary monoid callable that can be used in kumi::algoritm. It represents the
-           logical xor operation.
+    @brief Callable object matching the `kumi::boolean_xor` monoid, usable with kumi::algorithm.
   **/
   //==================================================================================================================
   inline constexpr kumi::function::boolean_xor bit_xor{};
