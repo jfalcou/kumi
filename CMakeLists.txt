@@ -29,6 +29,7 @@ copa_add_option(KUMI_ENABLE_COVERAGE "Build tests with code coverage instrumenta
 copa_add_option(KUMI_COMPILE_COST "Measure what every test unit costs to compile" OFF)
 
 if(KUMI_BUILD_TEST)
+  CPMGetPackage(TTS)
   include(${PROJECT_SOURCE_DIR}/cmake/compiler.cmake)
 endif()
 copa_project_version(MAJOR 5 MINOR 0 PATCH 0 REPOSITORY https://github.com/jfalcou/kumi)
