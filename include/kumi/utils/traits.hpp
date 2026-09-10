@@ -73,6 +73,36 @@ namespace kumi
   //====================================================================================================================
   /**
     @ingroup kumi_traits
+    @brief Opt-in traits for types behaving like a kumi::power_type
+
+    @tparam T Type to inspect
+
+    To be treated like a power type, an user defined type must support structured bindings as well as exposing a
+    `value_type` alias.
+
+    ## Helper type-trait
+    @code
+    namespace kumi
+    {
+      template<typename T> struct is_power_type;
+    }
+    @endcode
+    ## Example:
+    @include doc/power/api/adapt.cpp
+  **/
+  //====================================================================================================================
+  template<typename T>
+  inline constexpr bool is_power_type_v =
+    kumi::is_product_type_v<T> && requires(T&& t) { typename std::remove_cvref_t<T>::value_type; };
+
+  template<typename T> struct is_power_type
+  {
+    static constexpr bool value = kumi::is_power_type_v<T>;
+  };
+
+  //====================================================================================================================
+  /**
+    @ingroup kumi_traits
     @brief Computes the number of elements of a kumi::product_type
 
     @tparam T kumi::product_type to inspect
@@ -300,7 +330,7 @@ namespace kumi
     @code
     namespace kumi
     {
-      template<typename T> struct is_homogeneous;
+      template<typename T> struct is_power_type;
     }
     @endcode
   **/
@@ -740,6 +770,14 @@ namespace kumi
   template<typename T> struct is_kumi_record
   {
     static constexpr bool value = kumi::is_kumi_record_v<T>;
+  };
+
+  template<typename T> inline constexpr bool is_kumi_array_v = false;
+  template<typename T, std::size_t N> inline constexpr bool is_kumi_array_v<kumi::array<T, N>> = true;
+
+  template<typename T> struct is_kumi_array
+  {
+    static constexpr bool value = kumi::is_kumi_array_v<T>;
   };
 #endif
 }
