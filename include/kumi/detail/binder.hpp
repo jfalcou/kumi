@@ -99,6 +99,12 @@ namespace kumi::_
     using kumi::_::leaf<Is, Ts>::operator()...;
   };
 
+  // Specific case for a single type
+  template<std::size_t... Is, typename T> struct binder<std::index_sequence<Is...>, T> : kumi::_::leaf<Is, T>...
+  {
+    using kumi::_::leaf<Is, T>::operator()...;
+  };
+
   template<typename ISeq, typename... Ts> using make_binder_t = kumi::_::binder<ISeq, Ts...>;
 
   // Record binder, a record is unordered which implies no need for leaf tagging with integers. All types are also

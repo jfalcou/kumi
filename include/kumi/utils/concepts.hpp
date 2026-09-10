@@ -96,6 +96,27 @@ namespace kumi
     //==================================================================================================================
     /**
       @ingroup kumi_concepts
+      @brief Concept specifying a type follows the Power Type semantic
+
+      A type `T` models `kumi::concepts::power_type` if it models `kumi::concepts::product_type` and contains
+      the following aliases.
+
+      - typename T::value_type;
+      - typename T::reference;
+      - typename T::const_reference;
+
+      ## Example types:
+      + kumi::array<...>;
+
+      @see @ref kumi_power_type
+    **/
+    //==================================================================================================================
+    template<typename T>
+    concept power_type = kumi::concepts::product_type<T> && kumi::is_power_type_v<std::remove_cvref_t<T>>;
+
+    //==================================================================================================================
+    /**
+      @ingroup kumi_concepts
       @brief Concept specifying a type follows the Container Type semantic
 
       A type `T` models `kumi::concepts::static_container` if it is an homogeneous container of fixed size exposing
@@ -270,13 +291,13 @@ namespace kumi
 
       ## Example types:
       + `kumi::tuple<float,float,float>;`
+      + `kumi::array<int&,10>`
       + `std::array<int,10>;`
       + `std::pair<char,char>;`
     **/
     //==================================================================================================================
     template<typename T>
-    concept homogeneous_product_type =
-      kumi::concepts::product_type<T> && kumi::is_homogeneous_v<std::remove_cvref_t<T>>;
+    concept power_type = kumi::concepts::product_type<T> && kumi::is_power_type_v<std::remove_cvref_t<T>>;
 
     //==================================================================================================================
     /**
