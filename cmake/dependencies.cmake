@@ -19,6 +19,7 @@ CPMAddPackage(NAME COPACABANA GITHUB_REPOSITORY jfalcou/copacabana GIT_TAG v8)
 
 CPMDeclarePackage ( TTS   NAME TTS   GITHUB_REPOSITORY jfalcou/tts
                     GIT_TAG main
+                    SYSTEM YES
                     OPTIONS "TTS_BUILD_TEST OFF"
                             "TTS_BUILD_DOCUMENTATION OFF"
                             "TTS_QUIET ON"
