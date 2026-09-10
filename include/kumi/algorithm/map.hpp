@@ -56,6 +56,12 @@ namespace kumi
       return map_<kumi::_::case_::normal>(kumi::_::adl_tag, f, std::make_index_sequence<kumi::size_v<T>>{}, KUMI_FWD(t),
                                           KUMI_FWD(ts)...);
     }
+
+    // kumi::map[f] binds the function and waits for the product types.
+    template<typename Function> [[nodiscard]] KUMI_ABI constexpr auto operator[](Function f) const
+    {
+      return kumi::bind_front(*this, f);
+    }
   };
 
   struct map_index_t
@@ -115,11 +121,18 @@ namespace kumi
       constexpr auto map(Function && f, T && t, Ts &&... ts);
     @endcode
 
+    @code
+      template<typename Function>
+      constexpr auto map[Function f];
+    @endcode
+
     @subgroupheader{Parameters}
 
       - `f`: Callable object to apply
       - `t`: Product Type to operate on
       - `ts`: Other Product Types to operate on
+
+      `map[f]` binds `f` and returns a stage waiting for the product types, see kumi::function::pipe.
 
     @subgroupheader{Return value}
 

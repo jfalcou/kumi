@@ -102,6 +102,12 @@ namespace kumi
     {
       return this->reduce_t::operator()(kumi::function::plus, KUMI_FWD(t));
     }
+
+    // kumi::sum[init] binds the initial value and waits for the product type.
+    template<typename Value> [[nodiscard]] KUMI_ABI constexpr auto operator[](Value init) const
+    {
+      return kumi::bind_back(*this, init);
+    }
   };
 
   struct prod_t : private kumi::reduce_t
@@ -345,10 +351,17 @@ namespace kumi
       constexpr auto sum(T && t, V init);
     @endcode
 
+    @code
+      template<typename V>
+      constexpr auto sum[V init];
+    @endcode
+
     @subgroupheader{Parameters}
 
       - `t`: Product Type to operate on
       - `init`: Optional initial value of the reduction.
+
+      `sum[init]` binds `init` and returns a stage waiting for the product type, see kumi::function::pipe.
 
     @subgroupheader{Return value}
 
