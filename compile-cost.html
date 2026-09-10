@@ -367,6 +367,7 @@ footer a { color: var(--primary-color); }
 
   <div class="empty" id="empty">
     <p>Drop the <code>compile-cost.csv</code> a run attaches, or choose it above.</p>
+    <p id="empty-series" hidden>Or read the series this project keeps, in <b>Over time</b> above.</p>
   </div>
 </main>
 <div id="tip" role="tooltip"></div>
@@ -827,6 +828,7 @@ function renderAll() {
   groups.forEach(function (g, i) { state.colors[g.module] = moduleColor(i, groups.length); });
   document.getElementById("empty").hidden = true;
   document.getElementById("report").hidden = false;
+  MEASURED_TABS.forEach(function (id) { document.getElementById(id).hidden = false; });
   renderFacts();
   histogram();
   scatter();
@@ -889,7 +891,20 @@ function loadSeries() {
     document.getElementById("tab-history").hidden = false;
     fillSeriesControls();
     drawSeries();
+    if (!state.rows.length) openOnSeries();
   }).catch(function () { /* no series published yet, and the tab stays hidden */ });
+}
+
+// Without a measurement loaded, every other tab has nothing to draw: the page opens on the curve, and the rest
+// comes back the moment a point is clicked or a file is dropped.
+var MEASURED_TABS = ["tab-hist", "tab-scatter", "tab-modules-cpu", "tab-modules-rss", "tab-links", "tab-units"];
+
+function openOnSeries() {
+  MEASURED_TABS.forEach(function (id) { document.getElementById(id).hidden = true; });
+  document.getElementById("empty").hidden = true;
+  document.getElementById("empty-series").hidden = false;
+  document.getElementById("report").hidden = false;
+  showTab("tab-history");
 }
 
 function seriesShown() {
@@ -1097,7 +1112,6 @@ document.getElementById("theme").addEventListener("click", function () {
   if (state.rows.length) renderAll();
 });
 
-loadSeries();
 
 var tabs = Array.prototype.slice.call(document.querySelectorAll('[role="tab"]'));
 function showTab(id) {
@@ -1179,6 +1193,8 @@ Array.prototype.slice.call(document.querySelectorAll("button.save")).forEach(fun
   window.addEventListener(e, function (ev) { ev.preventDefault(); }, false);
 });
 
+// the tabs are wired above, and the series may switch to one as soon as it lands
+loadSeries();
 })();
 </script>
 </body>
