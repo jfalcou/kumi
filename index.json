@@ -1,0 +1,626 @@
+[
+ {
+  "branch": "main",
+  "cpu_us": 169257990,
+  "date": "2026-09-05T09:23:51Z",
+  "link_cpu_us": 0,
+  "link_peak_kib": 0,
+  "links": 0,
+  "modules": {
+   "doc/infra": {
+    "cpu_us": 10748056,
+    "peak_kib": 135004,
+    "units": 21
+   },
+   "doc/record": {
+    "cpu_us": 47801531,
+    "peak_kib": 157496,
+    "units": 82
+   },
+   "doc/tuple": {
+    "cpu_us": 47465045,
+    "peak_kib": 154352,
+    "units": 87
+   },
+   "unit/infra": {
+    "cpu_us": 4591523,
+    "peak_kib": 143776,
+    "units": 10
+   },
+   "unit/record": {
+    "cpu_us": 28421514,
+    "peak_kib": 195492,
+    "units": 47
+   },
+   "unit/std": {
+    "cpu_us": 665020,
+    "peak_kib": 138132,
+    "units": 1
+   },
+   "unit/tuple": {
+    "cpu_us": 29565301,
+    "peak_kib": 155800,
+    "units": 55
+   }
+  },
+  "peak_kib": 195492,
+  "sha": "2dcbee50b61ce1c7416f385e3e2aabf2dc30d00f",
+  "units": 303
+ },
+ {
+  "branch": "main",
+  "cpu_us": 192411496,
+  "date": "2026-09-05T14:14:50Z",
+  "link_cpu_us": 0,
+  "link_peak_kib": 0,
+  "links": 0,
+  "modules": {
+   "doc/infra": {
+    "cpu_us": 12457541,
+    "peak_kib": 134904,
+    "units": 21
+   },
+   "doc/record": {
+    "cpu_us": 54862866,
+    "peak_kib": 158160,
+    "units": 82
+   },
+   "doc/tuple": {
+    "cpu_us": 54098368,
+    "peak_kib": 154696,
+    "units": 87
+   },
+   "unit/infra": {
+    "cpu_us": 5269323,
+    "peak_kib": 143320,
+    "units": 10
+   },
+   "unit/record": {
+    "cpu_us": 32329421,
+    "peak_kib": 195524,
+    "units": 47
+   },
+   "unit/std": {
+    "cpu_us": 775681,
+    "peak_kib": 139084,
+    "units": 1
+   },
+   "unit/tuple": {
+    "cpu_us": 32618296,
+    "peak_kib": 155212,
+    "units": 55
+   }
+  },
+  "peak_kib": 195524,
+  "sha": "becfa1b2f80fdb4bbadaaf7dd31fdc7cf628a629",
+  "units": 303
+ },
+ {
+  "branch": "main",
+  "cpu_us": 191875489,
+  "date": "2026-09-05T16:49:22Z",
+  "link_cpu_us": 0,
+  "link_peak_kib": 0,
+  "links": 0,
+  "modules": {
+   "doc/infra": {
+    "cpu_us": 12487867,
+    "peak_kib": 134404,
+    "units": 21
+   },
+   "doc/record": {
+    "cpu_us": 54737729,
+    "peak_kib": 157920,
+    "units": 82
+   },
+   "doc/tuple": {
+    "cpu_us": 54131126,
+    "peak_kib": 153852,
+    "units": 87
+   },
+   "unit/infra": {
+    "cpu_us": 5190717,
+    "peak_kib": 144200,
+    "units": 10
+   },
+   "unit/record": {
+    "cpu_us": 32078312,
+    "peak_kib": 195476,
+    "units": 47
+   },
+   "unit/std": {
+    "cpu_us": 760826,
+    "peak_kib": 138972,
+    "units": 1
+   },
+   "unit/tuple": {
+    "cpu_us": 32488912,
+    "peak_kib": 156632,
+    "units": 55
+   }
+  },
+  "peak_kib": 195476,
+  "sha": "a1f58c80250447a73fcb9bff4c039c9817908950",
+  "units": 303
+ },
+ {
+  "branch": "main",
+  "cpu_us": 188439767,
+  "date": "2026-09-05T22:48:56Z",
+  "link_cpu_us": 0,
+  "link_peak_kib": 0,
+  "links": 0,
+  "modules": {
+   "doc/infra": {
+    "cpu_us": 12254956,
+    "peak_kib": 135272,
+    "units": 21
+   },
+   "doc/record": {
+    "cpu_us": 53417412,
+    "peak_kib": 157292,
+    "units": 82
+   },
+   "doc/tuple": {
+    "cpu_us": 53114196,
+    "peak_kib": 154308,
+    "units": 87
+   },
+   "unit/infra": {
+    "cpu_us": 5143203,
+    "peak_kib": 144524,
+    "units": 10
+   },
+   "unit/record": {
+    "cpu_us": 31529067,
+    "peak_kib": 195544,
+    "units": 47
+   },
+   "unit/std": {
+    "cpu_us": 727652,
+    "peak_kib": 138832,
+    "units": 1
+   },
+   "unit/tuple": {
+    "cpu_us": 32253281,
+    "peak_kib": 155188,
+    "units": 55
+   }
+  },
+  "peak_kib": 195544,
+  "sha": "a6f7dbe98b6cfd3c9b6d8880b16a644e2bea243e",
+  "units": 303
+ },
+ {
+  "branch": "main",
+  "cpu_us": 88613291,
+  "date": "2026-09-06T07:52:16Z",
+  "link_cpu_us": 0,
+  "link_peak_kib": 0,
+  "links": 0,
+  "modules": {
+   "doc/infra": {
+    "cpu_us": 5594858,
+    "peak_kib": 135412,
+    "units": 21
+   },
+   "doc/record": {
+    "cpu_us": 25070178,
+    "peak_kib": 158468,
+    "units": 82
+   },
+   "doc/tuple": {
+    "cpu_us": 24605799,
+    "peak_kib": 154328,
+    "units": 87
+   },
+   "unit/infra": {
+    "cpu_us": 2413653,
+    "peak_kib": 144844,
+    "units": 10
+   },
+   "unit/record": {
+    "cpu_us": 14955430,
+    "peak_kib": 194980,
+    "units": 47
+   },
+   "unit/std": {
+    "cpu_us": 344640,
+    "peak_kib": 140184,
+    "units": 1
+   },
+   "unit/tuple": {
+    "cpu_us": 15628733,
+    "peak_kib": 155184,
+    "units": 55
+   }
+  },
+  "peak_kib": 194980,
+  "sha": "62c52bde9f95ad1dd0b968e9b385c309fe892237",
+  "units": 303
+ },
+ {
+  "branch": "main",
+  "cpu_us": 190569308,
+  "date": "2026-09-06T08:14:44Z",
+  "link_cpu_us": 0,
+  "link_peak_kib": 0,
+  "links": 0,
+  "modules": {
+   "doc/infra": {
+    "cpu_us": 12351671,
+    "peak_kib": 134896,
+    "units": 21
+   },
+   "doc/record": {
+    "cpu_us": 54029634,
+    "peak_kib": 158148,
+    "units": 82
+   },
+   "doc/tuple": {
+    "cpu_us": 53871074,
+    "peak_kib": 154428,
+    "units": 87
+   },
+   "unit/infra": {
+    "cpu_us": 5208307,
+    "peak_kib": 143032,
+    "units": 10
+   },
+   "unit/record": {
+    "cpu_us": 31976822,
+    "peak_kib": 194504,
+    "units": 47
+   },
+   "unit/std": {
+    "cpu_us": 736293,
+    "peak_kib": 138304,
+    "units": 1
+   },
+   "unit/tuple": {
+    "cpu_us": 32395507,
+    "peak_kib": 156264,
+    "units": 55
+   }
+  },
+  "peak_kib": 194504,
+  "sha": "71e0aed3ed50e15ba8071ac3c8234a9926ce65a4",
+  "units": 303
+ },
+ {
+  "branch": "main",
+  "cpu_us": 162129094,
+  "date": "2026-09-06T10:26:56Z",
+  "link_cpu_us": 0,
+  "link_peak_kib": 0,
+  "links": 0,
+  "modules": {
+   "doc/infra": {
+    "cpu_us": 10500004,
+    "peak_kib": 134252,
+    "units": 21
+   },
+   "doc/record": {
+    "cpu_us": 45854833,
+    "peak_kib": 158552,
+    "units": 82
+   },
+   "doc/tuple": {
+    "cpu_us": 44889250,
+    "peak_kib": 154244,
+    "units": 87
+   },
+   "unit/infra": {
+    "cpu_us": 4429054,
+    "peak_kib": 143444,
+    "units": 10
+   },
+   "unit/record": {
+    "cpu_us": 27708324,
+    "peak_kib": 195776,
+    "units": 47
+   },
+   "unit/std": {
+    "cpu_us": 641487,
+    "peak_kib": 139656,
+    "units": 1
+   },
+   "unit/tuple": {
+    "cpu_us": 28106142,
+    "peak_kib": 156248,
+    "units": 55
+   }
+  },
+  "peak_kib": 195776,
+  "sha": "33b49e8c0389d27f2d260cbecfad4cc56454466b",
+  "units": 303
+ },
+ {
+  "branch": "main",
+  "cpu_us": 139442563,
+  "date": "2026-09-07T18:57:50Z",
+  "link_cpu_us": 0,
+  "link_peak_kib": 0,
+  "links": 0,
+  "modules": {
+   "doc/infra": {
+    "cpu_us": 8114993,
+    "peak_kib": 134564,
+    "units": 21
+   },
+   "doc/record": {
+    "cpu_us": 36189953,
+    "peak_kib": 157396,
+    "units": 82
+   },
+   "doc/tuple": {
+    "cpu_us": 36054244,
+    "peak_kib": 155180,
+    "units": 87
+   },
+   "unit/infra": {
+    "cpu_us": 4195152,
+    "peak_kib": 145392,
+    "units": 10
+   },
+   "unit/record": {
+    "cpu_us": 25595550,
+    "peak_kib": 194924,
+    "units": 47
+   },
+   "unit/std": {
+    "cpu_us": 500848,
+    "peak_kib": 140140,
+    "units": 1
+   },
+   "unit/tuple": {
+    "cpu_us": 28791823,
+    "peak_kib": 173984,
+    "units": 55
+   }
+  },
+  "peak_kib": 194924,
+  "sha": "d68670a7db14f958e5d47026dd14d7626d5256d9",
+  "units": 303
+ },
+ {
+  "branch": "main",
+  "cpu_us": 172517093,
+  "date": "2026-09-07T22:46:39Z",
+  "link_cpu_us": 0,
+  "link_peak_kib": 0,
+  "links": 0,
+  "modules": {
+   "doc/infra": {
+    "cpu_us": 10143034,
+    "peak_kib": 135172,
+    "units": 21
+   },
+   "doc/record": {
+    "cpu_us": 44592153,
+    "peak_kib": 157832,
+    "units": 82
+   },
+   "doc/tuple": {
+    "cpu_us": 44369132,
+    "peak_kib": 154436,
+    "units": 87
+   },
+   "unit/infra": {
+    "cpu_us": 5173275,
+    "peak_kib": 144180,
+    "units": 10
+   },
+   "unit/record": {
+    "cpu_us": 31865575,
+    "peak_kib": 195052,
+    "units": 47
+   },
+   "unit/std": {
+    "cpu_us": 620694,
+    "peak_kib": 140080,
+    "units": 1
+   },
+   "unit/tuple": {
+    "cpu_us": 35753230,
+    "peak_kib": 175096,
+    "units": 55
+   }
+  },
+  "peak_kib": 195052,
+  "sha": "fef579cf2c93545266eea9ee906f86f240c62f10",
+  "units": 303
+ },
+ {
+  "branch": "main",
+  "cpu_us": 205367389,
+  "date": "2026-09-08T20:40:35Z",
+  "link_cpu_us": 0,
+  "link_peak_kib": 0,
+  "links": 0,
+  "modules": {
+   "doc/infra": {
+    "cpu_us": 12158923,
+    "peak_kib": 135116,
+    "units": 21
+   },
+   "doc/record": {
+    "cpu_us": 53541615,
+    "peak_kib": 157832,
+    "units": 82
+   },
+   "doc/tuple": {
+    "cpu_us": 53197889,
+    "peak_kib": 154880,
+    "units": 87
+   },
+   "unit/infra": {
+    "cpu_us": 6211305,
+    "peak_kib": 144320,
+    "units": 10
+   },
+   "unit/record": {
+    "cpu_us": 37434923,
+    "peak_kib": 194332,
+    "units": 47
+   },
+   "unit/std": {
+    "cpu_us": 733448,
+    "peak_kib": 139384,
+    "units": 1
+   },
+   "unit/tuple": {
+    "cpu_us": 42089286,
+    "peak_kib": 174396,
+    "units": 55
+   }
+  },
+  "peak_kib": 194332,
+  "sha": "20524823e6a1db052b1efd63e53e6b3994a75104",
+  "units": 303
+ },
+ {
+  "branch": "main",
+  "cpu_us": 137161040,
+  "date": "2026-09-09T06:31:20Z",
+  "link_cpu_us": 0,
+  "link_peak_kib": 0,
+  "links": 0,
+  "modules": {
+   "doc/infra": {
+    "cpu_us": 7604590,
+    "peak_kib": 134912,
+    "units": 21
+   },
+   "doc/record": {
+    "cpu_us": 34542574,
+    "peak_kib": 157400,
+    "units": 82
+   },
+   "doc/tuple": {
+    "cpu_us": 34911839,
+    "peak_kib": 154180,
+    "units": 87
+   },
+   "unit/infra": {
+    "cpu_us": 4201991,
+    "peak_kib": 145004,
+    "units": 10
+   },
+   "unit/record": {
+    "cpu_us": 26075071,
+    "peak_kib": 195368,
+    "units": 47
+   },
+   "unit/std": {
+    "cpu_us": 497881,
+    "peak_kib": 139504,
+    "units": 1
+   },
+   "unit/tuple": {
+    "cpu_us": 29327094,
+    "peak_kib": 175352,
+    "units": 55
+   }
+  },
+  "peak_kib": 195368,
+  "sha": "c2bdbcbe7987f17f76bd8d88050d6a77a4b19c6b",
+  "units": 303
+ },
+ {
+  "branch": "main",
+  "cpu_us": 167547773,
+  "date": "2026-09-09T09:38:51Z",
+  "link_cpu_us": 0,
+  "link_peak_kib": 0,
+  "links": 0,
+  "modules": {
+   "doc/infra": {
+    "cpu_us": 9934337,
+    "peak_kib": 135340,
+    "units": 21
+   },
+   "doc/record": {
+    "cpu_us": 43371442,
+    "peak_kib": 157304,
+    "units": 82
+   },
+   "doc/tuple": {
+    "cpu_us": 43256005,
+    "peak_kib": 154616,
+    "units": 88
+   },
+   "unit/infra": {
+    "cpu_us": 4975352,
+    "peak_kib": 145212,
+    "units": 10
+   },
+   "unit/record": {
+    "cpu_us": 30765138,
+    "peak_kib": 195344,
+    "units": 47
+   },
+   "unit/std": {
+    "cpu_us": 606204,
+    "peak_kib": 138880,
+    "units": 1
+   },
+   "unit/tuple": {
+    "cpu_us": 34639295,
+    "peak_kib": 174764,
+    "units": 55
+   }
+  },
+  "peak_kib": 195344,
+  "sha": "713246461cb3c3585efeff8f9bf14eb6f2b053e6",
+  "units": 304
+ },
+ {
+  "branch": "main",
+  "cpu_us": 211034347,
+  "date": "2026-09-09T21:14:23Z",
+  "link_cpu_us": 0,
+  "link_peak_kib": 0,
+  "links": 0,
+  "modules": {
+   "doc/infra": {
+    "cpu_us": 12494406,
+    "peak_kib": 134688,
+    "units": 21
+   },
+   "doc/record": {
+    "cpu_us": 54291531,
+    "peak_kib": 157292,
+    "units": 82
+   },
+   "doc/tuple": {
+    "cpu_us": 55383136,
+    "peak_kib": 153588,
+    "units": 88
+   },
+   "unit/infra": {
+    "cpu_us": 6446917,
+    "peak_kib": 144164,
+    "units": 10
+   },
+   "unit/record": {
+    "cpu_us": 38662513,
+    "peak_kib": 195296,
+    "units": 47
+   },
+   "unit/std": {
+    "cpu_us": 762397,
+    "peak_kib": 139288,
+    "units": 1
+   },
+   "unit/tuple": {
+    "cpu_us": 42993447,
+    "peak_kib": 174700,
+    "units": 55
+   }
+  },
+  "peak_kib": 195296,
+  "sha": "f0b2cfd48611836bd007b7785c5d685b4e7a7f53",
+  "units": 304
+ }
+]
