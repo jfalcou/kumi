@@ -53,7 +53,26 @@ struct std::tuple_size<kumi::record<Ts...>> : std::integral_constant<std::size_t
 };
 
 //======================================================================================================================
-// Adaptation of unit to the tuple protocol
+// Structured binding adaptation for arrays
+//======================================================================================================================
+template<std::size_t I, typename T, std::size_t N> struct std::tuple_element<I, kumi::array<T, N>>
+{
+  static_assert(I < N, "[KUMI] - Array index must be in range");
+  using type = T;
+};
+
+template<std::size_t I, typename T, std::size_t N> struct std::tuple_element<I, kumi::array<T, N> const>
+{
+  static_assert(I < N, "[KUMI] - Array index must be in range");
+  using type = T const;
+};
+
+template<typename T, std::size_t N> struct std::tuple_size<kumi::array<T, N>> : std::integral_constant<std::size_t, N>
+{
+};
+
+//======================================================================================================================
+// Structured binding adaptation for unit
 //======================================================================================================================
 template<> struct std::tuple_size<kumi::unit> : std::integral_constant<std::size_t, 0>
 {

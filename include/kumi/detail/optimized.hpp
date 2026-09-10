@@ -34,7 +34,7 @@ namespace kumi::_
   struct binder<std::index_sequence<Is...>, T0, T1, Ts...>
   {
     using type = T0;
-    static constexpr std::size_t N = 2 + sizeof...(Ts);
+    static constexpr std::size_t N = sizeof...(Is);
 
     static constexpr bool is_homogeneous = true;
     type members[N];
@@ -61,6 +61,45 @@ namespace kumi::_
     KUMI_HIDDEN_ABI constexpr auto const&& operator()(std::integral_constant<std::size_t, I>) const&& noexcept
     {
       return static_cast<type const&&>(members[I]);
+    }
+  };
+
+  //====================================================================================================================
+  // Optimized binder for homogeneous layout if:
+  //  - Size is greater than 1
+  //  - All types are the same, non-reference and not empty
+  //====================================================================================================================
+  template<std::size_t... Is, typename T>
+  requires(!std::is_reference_v<T> && !std::is_empty_v<T>)
+  struct binder<std::index_sequence<Is...>, T>
+  {
+    static constexpr std::size_t N = sizeof...(Is);
+
+    static constexpr bool is_homogeneous = true;
+    T data[N];
+
+    template<std::size_t I>
+    KUMI_HIDDEN_ABI constexpr auto& operator()(std::integral_constant<std::size_t, I>) & noexcept
+    {
+      return data[I];
+    }
+
+    template<std::size_t I>
+    KUMI_HIDDEN_ABI constexpr auto const& operator()(std::integral_constant<std::size_t, I>) const& noexcept
+    {
+      return data[I];
+    }
+
+    template<std::size_t I>
+    KUMI_HIDDEN_ABI constexpr auto&& operator()(std::integral_constant<std::size_t, I>) && noexcept
+    {
+      return static_cast<T&&>(data[I]);
+    }
+
+    template<std::size_t I>
+    KUMI_HIDDEN_ABI constexpr auto const&& operator()(std::integral_constant<std::size_t, I>) const&& noexcept
+    {
+      return static_cast<T const&&>(data[I]);
     }
   };
 
