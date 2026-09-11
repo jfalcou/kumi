@@ -947,6 +947,30 @@ function fillSeriesControls() {
   });
 }
 
+// A gridline lands on 1, 2 or 5 times a power of ten, so the labels read as numbers rather than as the quarters
+// of whatever the largest measurement happens to be.
+function niceStep(rough) {
+  var power = Math.pow(10, Math.floor(Math.log(rough) / Math.LN10));
+  var scaled = rough / power;
+  return power * (scaled > 5 ? 10 : (scaled > 2 ? 5 : (scaled > 1 ? 2 : 1)));
+}
+
+// In the unit the axis is written in, not the one it is stored in: a round number of kibibytes is a ragged number
+// of mebibytes, and time is read in seconds, minutes and hours rather than in powers of ten.
+var CLOCK = [1, 2, 5, 10, 15, 30, 60, 120, 300, 600, 900, 1800, 3600, 7200, 10800, 21600];
+
+function axisStep(metric, rough) {
+  if (metric === "cpu_us") {
+    var seconds = rough / 1e6;
+    for (var i = 0; i < CLOCK.length; i++) if (CLOCK[i] >= seconds) return CLOCK[i] * 1e6;
+    return niceStep(seconds) * 1e6;
+  }
+  if (metric === "peak_kib") return Math.max(1, niceStep(rough / 1024)) * 1024;
+  return Math.max(1, niceStep(rough));
+}
+
+function count_of(n) { return String(Math.round(n)); }
+
 function drawSeries() {
   var svg = document.getElementById("series");
   clear(svg);
@@ -954,21 +978,24 @@ function drawSeries() {
   var metric = document.getElementById("hist-metric").value;
   var shown = seriesShown().filter(function (e) { return seriesValue(e, scope, metric) !== undefined; });
 
+  var values = shown.map(function (e) { return seriesValue(e, scope, metric); });
+  var write = metric === "cpu_us" ? duration : (metric === "peak_kib" ? size : count_of);
+  var top = Math.max.apply(null, values), low = Math.min.apply(null, values);
+
+  // What a curve is read for is a regression, so the axis starts at zero: fitted to its own spread, a build that
+  // never moved fills the panel with the noise of a shared runner. The spread is written out instead.
   var count = document.getElementById("hist-count");
-  count.textContent = shown.length + " measurement" + (shown.length === 1 ? "" : "s");
+  count.textContent = shown.length + " measurement" + (shown.length === 1 ? "" : "s") +
+                      (shown.length > 1 ? " \u00b7 " + write(low) + " to " + write(top) : "");
   if (shown.length < 2) return;
 
   var W = 1080, H = 380, L = 74, R = 12, T = 16, B = 38;
-  var values = shown.map(function (e) { return seriesValue(e, scope, metric); });
-  var top = Math.max.apply(null, values), low = Math.min.apply(null, values);
-  var span = top - low || top || 1;
-  var lo = Math.max(0, low - span * 0.15), hi = top + span * 0.15;
-  var write = metric === "cpu_us" ? duration : (metric === "peak_kib" ? size : String);
+  var lo = 0, step = axisStep(metric, top / 4), hi = Math.ceil(top / step) * step;
 
-  for (var g = 0; g <= 4; g++) {
-    var y = T + (H - T - B) * g / 4;
+  for (var v = 0; v <= hi + step / 2; v += step) {
+    var y = T + (H - T - B) * (1 - v / hi);
     svg.appendChild(el("line", { class: "grid", x1: L, y1: y, x2: W - R, y2: y }));
-    svg.appendChild(el("text", { x: L - 6, y: y + 4, "text-anchor": "end" }, write(hi - (hi - lo) * g / 4)));
+    svg.appendChild(el("text", { x: L - 6, y: y + 4, "text-anchor": "end" }, write(v)));
   }
 
   var x = function (i) { return L + (W - L - R) * (shown.length === 1 ? 0.5 : i / (shown.length - 1)); };
