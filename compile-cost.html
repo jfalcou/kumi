@@ -332,7 +332,6 @@ footer a { color: var(--primary-color); }
         <select id="hist-metric" aria-label="What the curve measures">
           <option value="cpu_us">CPU time</option>
           <option value="peak_kib">Peak memory</option>
-          <option value="units">Units</option>
         </select>
         <span class="count" id="hist-count"></span>
       </div>
@@ -965,11 +964,8 @@ function axisStep(metric, rough) {
     for (var i = 0; i < CLOCK.length; i++) if (CLOCK[i] >= seconds) return CLOCK[i] * 1e6;
     return niceStep(seconds) * 1e6;
   }
-  if (metric === "peak_kib") return Math.max(1, niceStep(rough / 1024)) * 1024;
-  return Math.max(1, niceStep(rough));
+  return Math.max(1, niceStep(rough / 1024)) * 1024;
 }
-
-function count_of(n) { return String(Math.round(n)); }
 
 function drawSeries() {
   var svg = document.getElementById("series");
@@ -979,7 +975,7 @@ function drawSeries() {
   var shown = seriesShown().filter(function (e) { return seriesValue(e, scope, metric) !== undefined; });
 
   var values = shown.map(function (e) { return seriesValue(e, scope, metric); });
-  var write = metric === "cpu_us" ? duration : (metric === "peak_kib" ? size : count_of);
+  var write = metric === "cpu_us" ? duration : size;
   var top = Math.max.apply(null, values), low = Math.min.apply(null, values);
 
   // What a curve is read for is a regression, so the axis starts at zero: fitted to its own spread, a build that
