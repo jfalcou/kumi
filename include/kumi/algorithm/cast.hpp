@@ -46,7 +46,7 @@ namespace kumi
 
     @groupheader{Header file}
     @code
-    #include <kumi/algorithm/member_cast.hpp>
+    #include <kumi/algorithm/cast.hpp>
     @endcode
 
     @groupheader{Call Signature}

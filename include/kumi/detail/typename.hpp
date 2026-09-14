@@ -1,7 +1,7 @@
 //======================================================================================================================
 /*
-  KIWAKU - Containers Well Made
-  Copyright : KIWAKU Project Contributors
+  KUMI - Containers Well Made
+  Copyright : KUMI Project Contributors
   SPDX-License-Identifier: BSL-1.0
 */
 //======================================================================================================================

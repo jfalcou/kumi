@@ -13,7 +13,7 @@ namespace kumi
   /**
     @ingroup kumi_types
     @class unit
-    @brief A type representing the product of no type also called the unit type
+    @brief A type representing the product of no type, also called the unit type
 
     kumi::unit provides a way to define the unit type in a constexpr friendly manner.
     @see @ref kumi_unit

@@ -193,7 +193,7 @@ namespace kumi
     /**
       @brief Extracts the element whose identifier matches Id from a kumi::record
 
-      @note Does not participate in overload resolution if there are no field which identifier matches Id in
+      @note Does not participate in overload resolution if no field whose identifier matches Id is present in
             the record.
       @tparam Id Identifier of the element to access
       @return A reference to the selected element of current record.
@@ -258,7 +258,7 @@ namespace kumi
 
     // The type is named rather than taken from decltype(*this): nvcc rejects that spelling inside a
     // lambda in a member function, and it is the only thing that kept a record out of a kernel.
-    /// Returns references to the values of the element in a kumi::record
+    /// Returns references to the values of the elements in a kumi::record
     [[nodiscard]] KUMI_ABI constexpr auto values() noexcept
     {
       return [&]<std::size_t... I>(std::index_sequence<I...>) {
@@ -284,8 +284,8 @@ namespace kumi
       @param other kumi::record to copy or move from
       @return `*this`
 
-      @note This function does not participate in overload resolutions if the fields in each record
-            does not match or if the types between two matching fields do not match.
+      @note This function does not participate in overload resolution if the fields in each record
+            do not match or if the types between two matching fields do not match.
     **/
     //==================================================================================================================
     template<typename... Us>
@@ -318,7 +318,7 @@ namespace kumi
     **/
     //==================================================================================================================
 
-    /// @brief Compares a record with an other for equality
+    /// @brief Compares a record with another for equality
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator==(record const& self, record<Us...> const& other) noexcept
 #ifndef KUMI_DOXYGEN_INVOKED
@@ -328,7 +328,7 @@ namespace kumi
       return ((get<kumi::identifier_of<Ts>()>(self) == get<kumi::identifier_of<Ts>()>(other)) && ...);
     }
 
-    /// @brief Compares a record with an other for inequality
+    /// @brief Compares a record with another for inequality
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator!=(record const& self, record<Us...> const& other) noexcept
 #ifndef KUMI_DOXYGEN_INVOKED
@@ -352,13 +352,7 @@ namespace kumi
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os,
                                                          record const& t) noexcept
     {
-      os << "{ ";
-      [&]<std::size_t... I>(std::index_sequence<I...>) {
-        ((os << t[index<I>] << ", "), ...);
-      }(std::make_index_sequence<kumi::size_v<record> - 1>{});
-      os << t[kumi::index<kumi::size_v<record> - 1>] << " }";
-
-      return os;
+      return kumi::_::print(os, t, '{', ',', '}', std::make_index_sequence<sizeof...(Ts) - 1>{});
     }
   };
 
@@ -439,90 +433,172 @@ namespace kumi
   **/
   //====================================================================================================================
 
+  template<kumi::concepts::identifier auto... Fields> struct tie_as_record_t
+  {
+    template<typename... Ts>
+    [[nodiscard]] KUMI_ABI constexpr kumi::record<kumi::field<decltype(Fields), Ts&>...> operator()(Ts&... ts) const
+    {
+      return {ts...};
+    }
+  };
+
   //====================================================================================================================
   /**
     @ingroup kumi_record_related
+
+    @var tie_as_record
     @brief Creates a kumi::record of lvalue references to its arguments.
 
-    @tparam Fields Non type template parameters names to associate to the each element.
-    @param ts	Zero or more lvalue arguments to construct the record from.
-    @return A kumi::record object containing lvalue references.
-    ## Example:
-    @include doc/record/api/tie.cpp
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier nodiscard
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/product_types/record.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<kumi::concepts::identifier auto... Fields, typename... Ts>
+      constexpr auto tie_as_record(Ts&... ts);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `Fields` : Non type template parameters names to associate with each element.
+      - `ts`: Zero or more lvalue arguments to construct the record from.
+
+    @subgroupheader{Return value}
+
+      - A kumi::record object containing lvalue references.
+
+    @groupheader{Example}
+
+    @godbolt{doc/record/api/tie_as_record.cpp}
+
   **/
   //====================================================================================================================
-  template<kumi::concepts::identifier auto... Fields, typename... Ts>
-  [[nodiscard]] KUMI_ABI constexpr auto tie(Ts&... ts) -> kumi::record<kumi::field<decltype(Fields), Ts&>...>
-  requires(sizeof...(Fields) == sizeof...(Ts))
+  template<kumi::concepts::identifier auto... Fields>
+  KUMI_VARIABLE_ABI constexpr tie_as_record_t<Fields...> tie_as_record{};
+
+  template<kumi::concepts::identifier auto... Fields> struct forward_as_record_t
   {
-    return {ts...};
-  }
+    template<typename... Ts>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(Ts&&... ts) const
+      -> kumi::record<kumi::field<decltype(Fields), Ts&&>...>
+    requires(sizeof...(Fields) == sizeof...(Ts))
+    {
+      return {KUMI_FWD(ts)...};
+    }
+  };
 
   //====================================================================================================================
   /**
     @ingroup kumi_record_related
+
+    @var forward_as_record
     @brief Creates a kumi::record of forwarding references to its arguments.
 
-    Constructs a record of references to the arguments in args suitable for forwarding as an
+    Constructs a record of references to the arguments in ts suitable for forwarding as an
     argument to a function. The record has rvalue reference data members when rvalues are used as
     arguments, and otherwise has lvalue reference data members.
 
     @note If the arguments are temporaries, `forward_as_record` does not extend their lifetime;
           they have to be used before the end of the full expression.
 
-    @tparam Fields Non type template parameters names to associate to the each element.
-    @param ts	Zero or more lvalue arguments to construct the record from.
-    @return A kumi::record constructed as `kumi::record<Ts&&...>(std::forward<Ts>(args)...)`
-    ## Example:
-    @include doc/record/api/forward_as_record.cpp
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier nodiscard
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/product_types/record.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<typename... Ts>
+      constexpr auto forward_as_record(Ts&&... ts);
+    @endcode
+
+    @subgroupheader{Parameters}
+      - `Fields`: Non type template parameters names to associate with each element.
+      - `ts`: Zero or more lvalue arguments to construct the record from.
+
+    @subgroupheader{Return value}
+
+      - A kumi::record constructed as `kumi::record<kumi::field<decltype(Fields),Ts&&>...>(std::forward<Ts>(ts)...)`
+
+    @groupheader{Example}
+
+    @godbolt{doc/record/api/forward_as_record.cpp}
+
   **/
   //====================================================================================================================
-  template<kumi::concepts::identifier auto... Fields, typename... Ts>
-  [[nodiscard]] KUMI_ABI constexpr auto forward_as_record(Ts&&... ts)
-    -> kumi::record<kumi::field<decltype(Fields), Ts&&>...>
-  requires(sizeof...(Fields) == sizeof...(Ts))
+  template<kumi::concepts::identifier auto... Fields>
+  KUMI_VARIABLE_ABI constexpr forward_as_record_t<Fields...> forward_as_record{};
+
+  struct make_record_t
   {
-    return {KUMI_FWD(ts)...};
-  }
+    template<typename... Ts>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(Ts&&... ts) const -> kumi::record<std::unwrap_ref_decay_t<Ts>...>
+    requires(kumi::concepts::uniquely_named<Ts...> && kumi::concepts::fully_named<Ts...>)
+    {
+      return {KUMI_FWD(ts)...};
+    }
+  };
 
   //====================================================================================================================
   /**
     @ingroup kumi_record_related
+
+    @var make_record
     @brief Creates a record object, deducing the target type from the types of arguments.
 
-    @param ts	Zero or more lvalue arguments to construct the record from.
-    @return A kumi::record constructed from the ts or their inner references when ts is an instance
-            of `std::reference_wrapper`.
-    ## Example:
-    @include doc/record/api/make_record.cpp
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier nodiscard
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/product_types/record.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<typename... Ts>
+      constexpr auto make_record(Ts&&... ts);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `ts`: Zero or more arguments to construct the record from.
+
+    @subgroupheader{Return value}
+
+      - A kumi::record constructed from the arguments or their inner references when an argument
+            is an instance of `std::reference_wrapper`.
+
+    @groupheader{Example}
+
+    @godbolt{doc/record/api/make_record.cpp}
+
   **/
   //====================================================================================================================
-  template<typename... Ts>
-  [[nodiscard]] KUMI_ABI constexpr auto make_record(Ts&&... ts) -> kumi::record<std::unwrap_ref_decay_t<Ts>...>
-  requires(kumi::concepts::uniquely_named<Ts...> && kumi::concepts::fully_named<Ts...>)
+  KUMI_VARIABLE_ABI constexpr make_record_t make_record{};
+
+  namespace _
   {
-    return {KUMI_FWD(ts)...};
-  }
-
-  //====================================================================================================================
-  /**
-    @ingroup kumi_record_related
-    @brief Creates a kumi::record of references given a reference to a kumi::record_type.
-
-    @param    r Record whose elements are to be referenced.
-    @return   A record equivalent to the result of `kumi::apply([]<typename... T>(T&&... e)
-              { return kumi::forward_as_record<name_of(as<T>{})...>(std::forward<T>(e)...); }, t)`
-
-    ## Example:
-    @include doc/record/api/to_ref.cpp
-  **/
-  //====================================================================================================================
-  template<kumi::concepts::record_type R> [[nodiscard]] KUMI_ABI constexpr auto to_ref(R&& r)
-  {
-    return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return kumi::forward_as_record<kumi::identifier_of<kumi::element_t<I, R>>()...>(
-        kumi::field_value_of(get<I>(KUMI_FWD(r)))...);
-    }(std::make_index_sequence<kumi::size_v<R>>{});
+    template<kumi::concepts::record_type T, std::size_t... I>
+    KUMI_HIDDEN_ABI constexpr auto to_ref_(kumi::_::adl_tag_t, T&& t, std::index_sequence<I...>) -> kumi::record<
+      kumi::field<decltype(kumi::identifier_of<kumi::element_t<I, T>>()), kumi::stored_member_t<I, T>&&>...>
+    {
+      return {kumi::field_value_of(get<I>(KUMI_FWD(t)))...};
+    }
   }
 
   //====================================================================================================================
@@ -536,55 +612,127 @@ namespace kumi
   **/
   //====================================================================================================================
 
-  //====================================================================================================================
-  /**
-    @ingroup kumi_record_related
-    @brief Converts a kumi::record to an instance of a type that models kumi::record_type
-
-    Constructs an instance of `Type` by passing elements of `t` to the appropriate constructor.
-
-    @tparam Type Type to generate
-    @param  r    kumi::record to convert
-    @return An instance of `Type` constructed from each element of `t` in order.
-
-    ## Example
-    @include doc/record/api/from_record.cpp
-  **/
-  //====================================================================================================================
-  template<kumi::concepts::record_type Type, typename... Ts>
-  [[nodiscard]] KUMI_ABI constexpr auto from_record(record<Ts...> const& r)
-  requires(
-    kumi::concepts::equivalent<typename kumi::_::as_tuple<Type, std::make_index_sequence<kumi::size_v<Type>>>::type,
-                               kumi::tuple<Ts...>>)
+  template<kumi::concepts::record_type Type> struct from_record_t
   {
-    return [&]<std::size_t... I>(std::index_sequence<I...>) {
+  private:
+    template<typename... Ts, std::size_t... I>
+    KUMI_HIDDEN_ABI constexpr Type impl(record<Ts...> const& r, std::index_sequence<I...>) const
+    {
       return Type{get<kumi::identifier_of<kumi::element_t<I, Type>>()>(r)...};
-    }(std::make_index_sequence<kumi::size_v<Type>>());
-  }
+    }
+
+  public:
+    template<typename... Ts>
+    [[nodiscard]] KUMI_ABI constexpr Type operator()(record<Ts...> const& r) const
+    requires(
+      kumi::concepts::equivalent<typename kumi::_::as_tuple<Type, std::make_index_sequence<kumi::size_v<Type>>>::type,
+                                 kumi::tuple<Ts...>>)
+    {
+      return impl(r, std::make_index_sequence<sizeof...(Ts)>{});
+    }
+  };
 
   //====================================================================================================================
   /**
     @ingroup kumi_record_related
-    @brief Converts a kumi::record_type to an instance kumi::record
 
-    Constructs an instance kumi::record from the elements of the kumi::product_type parameters
+    @var from_record
+    @brief Converts a kumi::record to an instance of an arbitrary type that models kumi::record_type
 
-    @param  r    kumi::product_type to convert
-    @return An instance of kumi::record constructed from each elements of `t` in order.
 
-    ## Example
-    @include doc/record/api/to_record.cpp
+    Constructs an instance of `Type` by passing elements of `r` to the appropriate constructor.
+
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier nodiscard
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/product_types/record.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<typename Type, record_type R>
+      constexpr auto from_record(R&& r);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `Type` : Type to generate
+      - `r`: kumi::record to convert.
+
+    @subgroupheader{Return value}
+
+      -  An instance of `Type` constructed from each element of `r` in order.
+
+    @groupheader{Example}
+
+    @godbolt{doc/record/api/from_record.cpp}
+
   **/
   //====================================================================================================================
-  template<kumi::concepts::record_type Type> [[nodiscard]] KUMI_ABI constexpr auto to_record(Type&& r)
+  template<kumi::concepts::record_type Type> KUMI_VARIABLE_ABI constexpr from_record_t<Type> from_record{};
+
+  struct to_record_t
   {
-    if constexpr (kumi::concepts::empty_product_type<Type>) return kumi::record{};
-    else
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return kumi::record{kumi::capture_field<kumi::identifier_of<kumi::element_t<I, Type>>()>(
-          get<kumi::identifier_of<kumi::element_t<I, Type>>()>(KUMI_FWD(r)))...};
-      }(std::make_index_sequence<kumi::size_v<Type>>{});
-  }
+  private:
+    template<typename R, std::size_t... I> KUMI_HIDDEN_ABI constexpr auto impl(R&& r, std::index_sequence<I...>) const
+    {
+      if constexpr (sizeof...(I) == 0) return kumi::record{};
+      else
+        return kumi::record{kumi::capture_field<kumi::identifier_of<kumi::element_t<I, R>>()>(
+          get<kumi::identifier_of<kumi::element_t<I, R>>()>(KUMI_FWD(r)))...};
+    }
+
+  public:
+    template<kumi::concepts::record_type Type> [[nodiscard]] KUMI_ABI constexpr auto operator()(Type&& r) const
+    {
+      return impl(KUMI_FWD(r), std::make_index_sequence<kumi::size_v<Type>>{});
+    }
+  };
+
+  //====================================================================================================================
+  /**
+    @ingroup kumi_record_related
+
+    @var to_record
+    @brief Converts a kumi::concepts::record_type to an instance of kumi::record
+
+    Constructs an instance of kumi::record from the elements of the kumi::concepts::record_type parameters
+
+    @qualifier inline
+    @qualifier constexpr
+    @qualifier nodiscard
+
+    @groupheader{Header file}
+    @code
+    #include <kumi/product_types/record.hpp>
+    @endcode
+
+    @groupheader{Call Signature}
+
+    @code
+      template<record_type R>
+      constexpr auto to_record(R&& r);
+    @endcode
+
+    @subgroupheader{Parameters}
+
+      - `r`: kumi::concepts::record_type to convert
+
+    @subgroupheader{Return value}
+
+      -  An instance of kumi::record constructed from each element of `r` in order.
+
+    @groupheader{Example}
+
+    @godbolt{doc/record/api/to_record.cpp}
+
+  **/
+  //====================================================================================================================
+  KUMI_VARIABLE_ABI constexpr to_record_t to_record{};
 
   //====================================================================================================================
   //! @}
@@ -605,7 +753,7 @@ namespace kumi
     @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
     @tparam   I Compile-time index of the field to access
     @param    r Record to index
-    @return   A reference to the selected field of t.
+    @return   A reference to the selected field of r.
 
     @qualifier nodiscard
     @qualifier inline
@@ -658,7 +806,7 @@ namespace kumi
     @note Does not participate in overload resolution if the names are not unique
     @tparam   L Non type template parameter label of the field to access
     @param    r Record to index
-    @return   A reference to the element of the selected field of t.
+    @return   A reference to the element of the selected field of r.
 
     @qualifier nodiscard
     @qualifier inline
@@ -759,12 +907,12 @@ namespace kumi
   //====================================================================================================================
   /**
     @related record
-    @brief Extracts the field which underlying type is T from a kumi::record if it exist
+    @brief Extracts the field whose underlying type is T from a kumi::record if it exists
 
     @note     Does not participate in overload resolution if the types are not unique
     @tparam   T Type of the element to access
     @param    r Record to index
-    @return   A reference to the selected element of t.
+    @return   A reference to the selected element of r.
 
     @qualifier nodiscard
     @qualifier inline
@@ -838,7 +986,7 @@ namespace kumi
   constexpr auto get(R&& r) = delete;
 #endif
 
-  // Builder protocole
+  // Builder protocol
   template<kumi::concepts::record_type R> struct builder<R>
   {
     using type = R;

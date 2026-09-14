@@ -47,7 +47,7 @@ namespace kumi
 
     @code
       template<product_type... Ts>
-      constexpr decltype(auto) cat(Ts... && t);
+      constexpr decltype(auto) cat(Ts&&... ts);
     @endcode
 
     @subgroupheader{Parameters}

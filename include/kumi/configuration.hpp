@@ -21,7 +21,7 @@ namespace kumi::config
   /// @brief Default size type for KUMI str
   using default_size_type = unsigned int;
 
-  /// @brief Maximum number of dimensions for KUMI str
+  /// @brief Maximum number of characters for KUMI str
   inline constexpr default_size_type max_size = 64;
 }
 #endif

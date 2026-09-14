@@ -71,7 +71,7 @@ TTS_CASE("Check cat(record) behavior")
 
   // Check behavior with record of references
   {
-    auto ref = kumi::tie<"a"_id>(s);
+    auto ref = kumi::tie_as_record<"a"_id>(s);
     auto val = kumi::record<kumi::field<kumi::name<"b">, float const>>{3.14f};
 
     TTS_EQUAL(
@@ -79,7 +79,7 @@ TTS_CASE("Check cat(record) behavior")
       (kumi::record<kumi::field<kumi::name<"a">, short&>, kumi::field<kumi::name<"b">, float const>>{s, 3.14f}));
   }
   {
-    auto ref = kumi::tie<"a"_id>(s);
+    auto ref = kumi::tie_as_record<"a"_id>(s);
     auto rref = kumi::record<kumi::field<kumi::name<"b">, short&&>>{std::move(s)};
     auto val = kumi::record<kumi::field<kumi::name<"c">, float const>>{3.14f};
 

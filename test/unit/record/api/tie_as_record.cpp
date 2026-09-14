@@ -19,8 +19,8 @@ TTS_CASE("Check tuple_element of kumi::record")
   float f{};
   float const cf{};
 
-  auto tied = kumi::tie<"c"_id, "d"_id, "f"_id>(c, d, f);
-  auto const_tied = kumi::tie<"c"_id, "d"_id, "f"_id>(cc, cd, cf);
+  auto tied = kumi::tie_as_record<"c"_id, "d"_id, "f"_id>(c, d, f);
+  auto const_tied = kumi::tie_as_record<"c"_id, "d"_id, "f"_id>(cc, cd, cf);
 
   TTS_TYPE_IS((std::tuple_element_t<0, decltype(tied)>), (kumi::field<kumi::name<"c">, char&>));
   TTS_TYPE_IS((std::tuple_element_t<1, decltype(tied)>), (kumi::field<kumi::name<"d">, double&>));
@@ -31,7 +31,7 @@ TTS_CASE("Check tuple_element of kumi::record")
   TTS_TYPE_IS((std::tuple_element_t<2, decltype(const_tied)>), (kumi::field<kumi::name<"f">, float const&>));
 };
 
-TTS_CASE("Check construction of kumi::record via tie")
+TTS_CASE("Check construction of kumi::record via tie_as_record")
 {
   using namespace kumi::literals;
 
@@ -40,10 +40,10 @@ TTS_CASE("Check construction of kumi::record via tie")
   auto d = 3.;
   auto c = '4';
 
-  auto t1 = kumi::tie<"i"_id>(i);
-  auto t2 = kumi::tie<"i"_id, "f"_id>(i, f);
-  auto t3 = kumi::tie<"i"_id, "f"_id, "d"_id>(i, f, d);
-  auto t4 = kumi::tie<"i"_id, "f"_id, "d"_id, "c"_id>(i, f, d, c);
+  auto t1 = kumi::tie_as_record<"i"_id>(i);
+  auto t2 = kumi::tie_as_record<"i"_id, "f"_id>(i, f);
+  auto t3 = kumi::tie_as_record<"i"_id, "f"_id, "d"_id>(i, f, d);
+  auto t4 = kumi::tie_as_record<"i"_id, "f"_id, "d"_id, "c"_id>(i, f, d, c);
 
   auto& [s1_0] = t1;
   auto& t1_0 = kumi::field_value_of(s1_0);

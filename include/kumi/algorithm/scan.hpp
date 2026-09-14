@@ -54,8 +54,7 @@ namespace kumi
         return kumi::tuple{kumi::invoke(f, init, get<0>(KUMI_FWD(t)))};
       else
       {
-        auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
-        return inclusive_scan_left_(kumi::_::adl_tag, KUMI_FWD(t), init, f, op,
+        return inclusive_scan_left_(kumi::_::adl_tag, KUMI_FWD(t), init, f, kumi::make_tuple,
                                     std::make_index_sequence<kumi::size_v<T> - 1>{});
       }
     }
@@ -78,8 +77,7 @@ namespace kumi
       else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::tuple{init};
       else
       {
-        auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
-        return exclusive_scan_left_(kumi::_::adl_tag, KUMI_FWD(t), init, f, op,
+        return exclusive_scan_left_(kumi::_::adl_tag, KUMI_FWD(t), init, f, kumi::make_tuple,
                                     std::make_index_sequence<kumi::size_v<T> - 1>{});
       }
     }
@@ -103,8 +101,7 @@ namespace kumi
         return kumi::tuple{kumi::invoke(f, get<0>(KUMI_FWD(t)), init)};
       else
       {
-        auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
-        return inclusive_scan_right_(kumi::_::adl_tag, KUMI_FWD(t), init, f, op,
+        return inclusive_scan_right_(kumi::_::adl_tag, KUMI_FWD(t), init, f, kumi::make_tuple,
                                      std::make_index_sequence<kumi::size_v<T> - 1>{});
       }
     }
@@ -127,8 +124,7 @@ namespace kumi
       else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::tuple{init};
       else
       {
-        auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
-        return exclusive_scan_right_(kumi::_::adl_tag, KUMI_FWD(t), init, f, op,
+        return exclusive_scan_right_(kumi::_::adl_tag, KUMI_FWD(t), init, f, kumi::make_tuple,
                                      std::make_index_sequence<kumi::size_v<T> - 1>{});
       }
     }
@@ -189,7 +185,7 @@ namespace kumi
 
     @groupheader{Helper type}
 
-    @snippet include/kumi/algorithm/scan.hpp inclusive_scan_right_t
+    @snippet include/kumi/algorithm/scan.hpp inclusive_scan_left_t
 
     Computes the return type of a call to kumi::inclusive_scan_left
 
@@ -386,7 +382,7 @@ namespace kumi
     @subgroupheader{Return value}
 
       - A tuple of suffix partial accumulations where each element 'I' equals
-                  `f( f( f(init, get<0>(t)), ...), get<I-1>(t))`
+                  `f(get<0>(t), f(... , f(get<N-1>(t), init))`
 
     @groupheader{Helper type}
 

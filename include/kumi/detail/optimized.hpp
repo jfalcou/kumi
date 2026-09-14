@@ -17,7 +17,7 @@ namespace kumi::_
   // We usually don't want to optimize tuple of references
   template<typename... Ts> inline constexpr bool no_references = (true && ... && !std::is_reference_v<Ts>);
 
-  // [[no_unique_address]] is to unstable at the moment, will go through the standard path
+  // [[no_unique_address]] is too unstable at the moment, will go through the standard path
   template<typename... Ts> inline constexpr bool no_empty = (true && ... && !std::is_empty_v<Ts>);
 
   // We care about homogeneous tuple

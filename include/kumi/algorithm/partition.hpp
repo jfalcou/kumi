@@ -62,7 +62,7 @@ namespace kumi
     @ingroup kumi_generators
 
     @var partition
-    @brief Callable object partitionning a product type over a predicate
+    @brief Callable object partitioning a product type over a predicate
 
     On a record type, `Pred` is applied directly to the underlying elements of the fields.
 
@@ -93,8 +93,8 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      - A tuple containing the product type of all values which types satisfies `Pred` in `t`
-              and the product type of all values which types does not satisfy `Pred`.
+      - A tuple containing the product type of all values whose types satisfy `Pred` in `t`
+              and the product type of all values whose types do not satisfy `Pred`.
 
     @groupheader{Helper type}
 
@@ -153,7 +153,7 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      - A Product type containing all values of `t` which types satisfies `Pred`.
+      - A Product type containing all values of `t` whose types satisfy `Pred`.
 
     @groupheader{Helper type}
 
@@ -212,7 +212,7 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      - A Product type containing all values of `t` which types does not satisfy `Pred`.
+      - A Product type containing all values of `t` whose types do not satisfy `Pred`.
 
     @groupheader{Helper type}
 

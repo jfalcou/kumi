@@ -153,12 +153,12 @@ namespace kumi
   //====================================================================================================================
   /**
     @ingroup kumi_utility
-    @brief Helper to retrive the index of a type in a product type by it s type
+    @brief Helper to retrieve the index of a type in a product type by its type
 
     @note This function does not participate in overload resolution if the product type has several instances of the
           same type or if it is empty.
 
-    @return the index of the element of type U in the product type if it exist
+    @return the index of the element of type U in the product type if it exists
   **/
   //====================================================================================================================
   template<typename U, kumi::concepts::product_type T>
@@ -173,12 +173,12 @@ namespace kumi
   //====================================================================================================================
   /**
     @ingroup kumi_utility
-    @brief Helper to retrive the index of a type in a product type by it s identifier
+    @brief Helper to retrieve the index of a type in a product type by its identifier
 
     @note This function does not participate in overload resolution if the product type has several instances of the
           same identifier or has no identifier at all.
 
-    @return the index of the element whose identifier matches Id in the product type if it exist
+    @return the index of the element whose identifier matches Id in the product type if it exists
   **/
   //====================================================================================================================
   template<kumi::concepts::identifier Id, kumi::concepts::product_type T>
@@ -193,12 +193,12 @@ namespace kumi
   //====================================================================================================================
   /**
     @ingroup kumi_utility
-    @brief Helper to retrive the index of a type in a product type by it s identifier
+    @brief Helper to retrieve the index of a type in a product type by its identifier
 
     @note This function does not participate in overload resolution if the product type has several instances of the
           same identifier or has no identifier at all.
 
-    @return the index of the element whose identifier matches Id in the product type if it exist
+    @return the index of the element whose identifier matches Id in the product type if it exists
   **/
   //====================================================================================================================
   template<kumi::str L, kumi::concepts::product_type T>

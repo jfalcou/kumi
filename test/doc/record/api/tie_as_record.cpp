@@ -19,7 +19,7 @@ int main()
   double d;
   float  f;
 
-  kumi::tie<"i"_id, "d"_id, "f"_id>( i,d,f ) = generate();
+  kumi::tie_as_record<"i"_id, "d"_id, "f"_id>( i,d,f ) = generate();
 
   std::cout << i << " " << d << " " << f << "\n";
 }

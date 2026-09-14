@@ -233,7 +233,7 @@ namespace kumi::function
       - `n`: Remainder if the number of values is odd
 
     @subgroupheader{Return value}
-      A `kumi::projection_map` segmenting the input domain in chunks of two consecutive elements plus the reminder.
+      A `kumi::projection_map` segmenting the input domain in chunks of two consecutive elements plus the remainder.
   **/
   //====================================================================================================================
   struct reduce_t

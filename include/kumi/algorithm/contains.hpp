@@ -188,7 +188,7 @@ namespace kumi
     @ingroup kumi_queries
 
     @var contains_only
-    @brief Callable object checking if a product type contains fields based on on selected identifier
+    @brief Callable object checking if a product type contains fields based on a selected identifier
 
     @qualifier nodiscard
     @qualifier inline
@@ -242,7 +242,7 @@ namespace kumi
     @ingroup kumi_queries
 
     @var contains_none
-    @brief Callable object checking if a product type contains no fields based on any of the selected identifier
+    @brief Callable object checking if a product type contains no fields based on any of the selected identifiers
 
     @qualifier nodiscard
     @qualifier inline

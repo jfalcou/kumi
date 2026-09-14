@@ -79,7 +79,7 @@ namespace kumi
 
     @groupheader{Helper type}
 
-    @snippet algorithm/apply.hpp apply_t
+    @snippet include/kumi/algorithm/apply.hpp apply_t
 
     Computes the return type of a call to kumi::apply
 

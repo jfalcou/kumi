@@ -23,6 +23,12 @@ namespace kumi
       return (kumi::invoke(p, get<I>(KUMI_FWD(t))) || ...);
     }
 
+    template<typename T, std::size_t... I>
+    KUMI_HIDDEN_ABI constexpr std::size_t count_(kumi::_::adl_tag_t, T&& t, std::index_sequence<I...>)
+    {
+      return ((static_cast<bool>(get<I>(KUMI_FWD(t)))) + ... + 0ULL);
+    }
+
     template<typename Pred, typename T, std::size_t... I>
     KUMI_HIDDEN_ABI constexpr std::size_t count_if_(kumi::_::adl_tag_t, T&& t, Pred p, std::index_sequence<I...>)
     {
@@ -97,12 +103,14 @@ namespace kumi
     }
   };
 
-  struct count_t : private kumi::count_if_t
+  struct count_t
   {
     template<kumi::concepts::product_type T>
     [[nodiscard]] KUMI_ABI constexpr std::size_t operator()(T&& t) const noexcept
     {
-      return kumi::count_if_t::operator()(KUMI_FWD(t), [](auto const& m) { return static_cast<bool>(m); });
+      if constexpr (kumi::concepts::empty_product_type<T>) return 0ULL;
+      else if constexpr (kumi::concepts::record_type<T>) return (*this)(values_of(KUMI_FWD(t)));
+      else return count_(kumi::_::adl_tag, KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T>>{});
     }
   };
 
@@ -219,7 +227,7 @@ namespace kumi
     @ingroup kumi_queries
 
     @var none_of
-    @brief Callable object checking if a unary predicate p does not returns true for any element in t.
+    @brief Callable object checking if a unary predicate p does not return true for any element in t.
 
     On a record type, the function operates on the underlying elements of the fields.
 

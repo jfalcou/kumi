@@ -220,7 +220,7 @@ namespace kumi
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
 
-    @note This function will issue a compile time error if `I0` is not in `[0, sizeof...(Ts)[`.
+    @note This function will issue a compile time error if `I0` is not in `[0, size_v<T>[`.
 
     @qualifier nodiscard
     @qualifier inline

@@ -96,7 +96,7 @@ namespace kumi
     /**
       @brief Extracts the Ith element from a kumi::projection_map
 
-      @note Does not participate in overload resolution if `I` is not in [0, sizeof...(Ts)).
+      @note Does not participate in overload resolution if `I` is not in [0, sizeof...(V)).
       @tparam  I Compile-time index of the element to access
       @return A copy of the value of the selected element of current projection_map.
     **/
@@ -177,7 +177,7 @@ namespace kumi
 
     @note The arguments should model kumi::identifier
 
-    @tparam Ts	Zero or more indexes to construct the projection from.
+    @tparam Ts	Zero or more identifiers to construct the projection from.
     @return A kumi::projection_map constructed from the ts
 
     ## Examples:

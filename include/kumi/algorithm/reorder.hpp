@@ -76,8 +76,8 @@ namespace kumi
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
 
-    @note Nothing prevent the number of reordered index to be lesser or greater than t size or
-          the fact they can appear multiple times.
+    @note Nothing prevents the number of reordered indexes from being lesser or greater than the size of t or
+          from appearing multiple times.
 
     @note reorder(tuple) works and is equivalent to reorder<>(tuple)
 
@@ -142,8 +142,8 @@ namespace kumi
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
 
-    @note Nothing prevent the number of reordered names to be lesser or greater than t size or
-          the fact they can appear multiple times if it is applied on a named tuple.
+    @note Nothing prevents the number of reordered names from being lesser or greater than the size of t or
+          from appearing multiple times if it is applied on a named tuple.
 
     @note reorder(tuple) works and is equivalent to reorder<>(tuple)
 
@@ -173,7 +173,7 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      - A product type with the type of `t` with elements equal to get<Ids>(t) for each given identifer.
+      - A product type with the type of `t` with elements equal to get<Ids>(t) for each given identifier.
 
     @groupheader{Helper type}
 
@@ -201,8 +201,8 @@ namespace kumi
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
 
-    @note Nothing prevent the number of reordered names to be lesser or greater than t size or
-          the fact they can appear multiple times if it is applied on a named tuple.
+    @note Nothing prevents the number of reordered names from being lesser or greater than the size of t or
+          from appearing multiple times if it is applied on a named tuple.
 
     @qualifier nodiscard
     @qualifier inline

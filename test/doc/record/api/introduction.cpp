@@ -39,7 +39,7 @@ int main()
     double gpa2;
     char grade2;
     std::string name2;
-    kumi::tie<"GPA"_id, "grade"_id, "name"_id>(gpa2, grade2, name2) = get_student(2);
+    kumi::tie_as_record<"GPA"_id, "grade"_id, "name"_id>(gpa2, grade2, name2) = get_student(2);
     std::cout << "ID: 2, "
               << "GPA: "    << gpa2   << ", "
               << "grade: "  << grade2 << ", "
