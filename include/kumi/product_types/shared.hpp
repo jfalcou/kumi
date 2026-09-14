@@ -36,7 +36,8 @@ namespace kumi
     }
 
     template<typename Os, typename T, std::size_t... I>
-    constexpr Os& print(Os& os, T&& t, char start, char separator, char stop, std::index_sequence<I...>)
+    constexpr Os& print(
+      Os& os, T&& t, char start, [[maybe_unused]] char separator, char stop, std::index_sequence<I...>)
     {
       os << start << ' ';
       ((os << kumi::_::make_streamable(get<I>(KUMI_FWD(t))) << separator << ' '), ...);
