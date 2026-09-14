@@ -8,21 +8,29 @@
 #pragma once
 
 #include <sstream>
+#include <tts/tts.hpp>
 
 #include "types.hpp"
 
 using namespace kumi::literals;
 
-namespace kumi
+namespace tts
 {
   // TTS renders anything it does not know as a byte dump. kumi already prints a product type, so a
   // report shows exactly what the library itself would.
-  template<kumi::concepts::product_type T> tts::text to_text(T const& t)
+  // The stream insertion is part of the constraint: an adapted type kumi cannot print keeps the
+  // rendering TTS gives anything else.
+  template<typename T>
+  requires(kumi::concepts::product_type<T> && requires(std::ostringstream& os, T const& t) { os << t; })
+  struct display<T>
   {
-    std::ostringstream os;
-    os << t;
-    return tts::text(os.str().c_str());
-  }
+    static text render(T const& t)
+    {
+      std::ostringstream os;
+      os << t;
+      return text(os.str().c_str());
+    }
+  };
 }
 
 //==============================================================================================
