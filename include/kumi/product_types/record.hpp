@@ -435,10 +435,9 @@ namespace kumi
 
   template<kumi::concepts::identifier auto... Fields> struct tie_as_record_t
   {
-    template<typename... Ts>
-    [[nodiscard]] KUMI_ABI constexpr kumi::record<kumi::field<decltype(Fields), Ts&>...> operator()(Ts&... ts) const
+    template<typename... Ts> [[nodiscard]] KUMI_ABI constexpr auto operator()(Ts&... ts) const
     {
-      return {ts...};
+      return kumi::record<kumi::field<decltype(Fields), Ts&>...>{ts...};
     }
   };
 
@@ -487,10 +486,9 @@ namespace kumi
   {
     template<typename... Ts>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(Ts&&... ts) const
-      -> kumi::record<kumi::field<decltype(Fields), Ts&&>...>
     requires(sizeof...(Fields) == sizeof...(Ts))
     {
-      return {KUMI_FWD(ts)...};
+      return kumi::record<kumi::field<decltype(Fields), Ts&&>...>{KUMI_FWD(ts)...};
     }
   };
 
