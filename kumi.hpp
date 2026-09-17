@@ -1674,6 +1674,40 @@ namespace kumi
 }
 namespace kumi
 {
+  namespace _
+  {
+    template<typename T, typename U, std::size_t... I> constexpr T static_cast_(U&& u, std::index_sequence<I...>)
+    {
+      return {static_cast<kumi::element_t<I, T>>(get<I>(KUMI_FWD(u)))...};
+    }
+    template<typename T, typename U, std::size_t... I> constexpr void assign(T&& t, U&& u, std::index_sequence<I...>)
+    {
+      ((get<I>(KUMI_FWD(t)) = get<I>(KUMI_FWD(u))), ...);
+    }
+    template<typename T, typename U, std::size_t... I>
+    constexpr auto compare(T&& t, U&& u, std::index_sequence<I...>) noexcept
+    {
+      return ((get<I>(KUMI_FWD(t)) == get<I>(KUMI_FWD(u))) && ...);
+    }
+    template<typename T, typename U, std::size_t... I>
+    constexpr auto lexicographic_compare(T&& t, U&& u, std::index_sequence<I...>) noexcept
+    {
+      return ((get<0>(KUMI_FWD(t)) < get<0>(KUMI_FWD(u))) || ... ||
+              (get<I + 1>(KUMI_FWD(t)) < get<I + 1>(KUMI_FWD(u)) && get<I>(KUMI_FWD(u)) >= get<I>(KUMI_FWD(t))));
+    }
+    template<typename Os, typename T, std::size_t... I>
+    constexpr Os& print(
+      Os& os, T&& t, char start, [[maybe_unused]] char separator, char stop, std::index_sequence<I...>)
+    {
+      os << start << ' ';
+      ((os << kumi::_::make_streamable(get<I>(KUMI_FWD(t))) << separator << ' '), ...);
+      os << kumi::_::make_streamable(get<sizeof...(I)>(KUMI_FWD(t))) << ' ' << stop;
+      return os;
+    }
+  }
+}
+namespace kumi
+{
   template<typename... Ts> struct tuple
   {
     using binder_t = kumi::_::make_binder_t<std::index_sequence_for<Ts...>, Ts...>;
@@ -1793,9 +1827,7 @@ namespace kumi
             && (kumi::_::piecewise_constructible<tuple<Ts const & ...>, tuple<Us...>>)
 #endif
     {
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return tuple<Us...>{static_cast<Us>(get<I>(*this))...};
-      }(std::make_index_sequence<sizeof...(Ts)>{});
+      return kumi::_::static_cast_<tuple<Us...>>(*this, std::make_index_sequence<sizeof...(Ts)>{});
     }
     template<typename... Us>
     KUMI_ABI
@@ -1808,9 +1840,7 @@ namespace kumi
             && (kumi::_::piecewise_constructible<tuple<Ts & ...>, tuple<Us...>>)
 #endif
     {
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return tuple<Us...>{static_cast<Us>(get<I>(*this))...};
-      }(std::make_index_sequence<sizeof...(Ts)>{});
+      return kumi::_::static_cast_<tuple<Us...>>(*this, std::make_index_sequence<sizeof...(Ts)>{});
     }
     template<typename... Us>
     KUMI_ABI constexpr tuple& operator=(tuple<Us...> const& other)
@@ -1818,9 +1848,7 @@ namespace kumi
     requires(kumi::_::piecewise_convertible<tuple, tuple<Us...>>)
 #endif
     {
-      [&]<std::size_t... I>(std::index_sequence<I...>) {
-        ((get<I>(*this) = get<I>(other)), ...);
-      }(std::make_index_sequence<sizeof...(Ts)>{});
+      kumi::_::assign(*this, other, std::make_index_sequence<sizeof...(Ts)>{});
       return *this;
     }
     template<typename... Us>
@@ -1829,9 +1857,7 @@ namespace kumi
     requires(kumi::_::piecewise_convertible<tuple, tuple<Us...>>)
 #endif
     {
-      [&]<std::size_t... I>(std::index_sequence<I...>) {
-        ((get<I>(*this) = get<I>(KUMI_FWD(other))), ...);
-      }(std::make_index_sequence<sizeof...(Ts)>{});
+      kumi::_::assign(*this, other, std::make_index_sequence<sizeof...(Ts)>{});
       return *this;
     }
     template<typename... Us>
@@ -1840,9 +1866,7 @@ namespace kumi
     requires(kumi::_::piecewise_comparable<tuple, tuple<Us...>>)
 #endif
     {
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return ((get<I>(self) == get<I>(other)) && ...);
-      }(std::make_index_sequence<sizeof...(Ts)>{});
+      return kumi::_::compare(self, other, std::make_index_sequence<sizeof...(Ts)>{});
     }
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator!=(tuple const& self, tuple<Us...> const& other) noexcept
@@ -1859,15 +1883,7 @@ namespace kumi
             && (kumi::_::piecewise_ordered<tuple, tuple<Us...>>)
 #endif
     {
-      auto res = get<0>(lhs) < get<0>(rhs);
-      auto const order = [&]<typename Index>(Index i) {
-        auto y_less_x_prev = rhs[i] < lhs[i];
-        auto x_less_y = lhs[kumi::index<Index::value + 1>] < rhs[kumi::index<Index::value + 1>];
-        return x_less_y && !y_less_x_prev;
-      };
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return (res || ... || order(kumi::index_t<I>{}));
-      }(std::make_index_sequence<sizeof...(Ts) - 1>{});
+      return kumi::_::lexicographic_compare(lhs, rhs, std::make_index_sequence<sizeof...(Ts)>{});
     }
     template<typename... Us>
     KUMI_ABI friend constexpr auto operator<=(tuple const& lhs, tuple<Us...> const& rhs) noexcept
@@ -1890,12 +1906,7 @@ namespace kumi
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, tuple const& t) noexcept
     {
-      os << "( ";
-      [&]<std::size_t... I>(std::index_sequence<I...>) {
-        ((os << kumi::_::make_streamable(t[index<I>]) << ", "), ...);
-      }(std::make_index_sequence<kumi::size_v<tuple> - 1>{});
-      os << kumi::_::make_streamable(t[index<kumi::size_v<tuple> - 1>]) << " )";
-      return os;
+      return kumi::_::print(os, t, '(', ',', ')', std::make_index_sequence<sizeof...(Ts) - 1>{});
     }
   };
   template<> struct tuple<>
@@ -1924,63 +1935,95 @@ namespace kumi
     }
   };
   template<typename... Ts> tuple(Ts&&...) -> tuple<std::unwrap_ref_decay_t<Ts>...>;
-  template<typename... Ts> [[nodiscard]] KUMI_ABI constexpr auto tie(Ts&... ts) -> kumi::tuple<Ts&...>
+  struct tie_t
   {
-    return {ts...};
-  }
-  template<typename... Ts> [[nodiscard]] KUMI_ABI constexpr auto forward_as_tuple(Ts&&... ts) -> kumi::tuple<Ts&&...>
+    template<typename... Ts> [[nodiscard]] KUMI_ABI constexpr kumi::tuple<Ts&...> operator()(Ts&... ts) const
+    {
+      return {ts...};
+    }
+  };
+  KUMI_VARIABLE_ABI constexpr tie_t tie{};
+  struct forward_as_tuple_t
   {
-    return {KUMI_FWD(ts)...};
-  }
-  template<typename... Ts>
-  [[nodiscard]] KUMI_ABI constexpr auto make_tuple(Ts&&... ts) -> kumi::tuple<std::unwrap_ref_decay_t<Ts>...>
+    template<typename... Ts> [[nodiscard]] KUMI_ABI constexpr auto operator()(Ts&&... ts) const -> kumi::tuple<Ts&&...>
+    {
+      return {KUMI_FWD(ts)...};
+    }
+  };
+  KUMI_VARIABLE_ABI constexpr forward_as_tuple_t forward_as_tuple{};
+  struct make_tuple_t
   {
-    return {KUMI_FWD(ts)...};
-  }
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto to_ref(T&& t)
-  {
-    return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return kumi::forward_as_tuple(get<I>(KUMI_FWD(t))...);
-    }(std::make_index_sequence<kumi::size_v<T>>{});
-  }
-  template<typename Type, typename... Ts>
-  [[nodiscard]] KUMI_ABI constexpr auto from_tuple(tuple<Ts...> const& t)
-  requires(!kumi::concepts::product_type<Type> && kumi::_::implicit_constructible<Type, Ts...>)
-  {
-    return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return Type{get<I>(t)...};
-    }(std::make_index_sequence<sizeof...(Ts)>{});
-  }
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto to_tuple(T&& t)
-  {
-    if constexpr (kumi::concepts::empty_product_type<T>) return kumi::tuple{};
-    else
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return kumi::tuple{get<I>(KUMI_FWD(t))...};
-      }(std::make_index_sequence<kumi::size_v<T>>{});
-  }
-  template<kumi::concepts::static_container S>
-  [[nodiscard]] KUMI_ABI constexpr auto to_tuple(S&& s)
-  requires(!kumi::concepts::product_type<S>)
-  {
-    constexpr std::size_t N = kumi::container_size_v<S>;
-    if constexpr (N == 0) return kumi::tuple{};
-    else
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return kumi::tuple{KUMI_FWD(s)[I]...};
-      }(std::make_index_sequence<N>{});
-  }
+    template<typename... Ts>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(Ts&&... ts) const -> kumi::tuple<std::unwrap_ref_decay_t<Ts>...>
+    {
+      return {KUMI_FWD(ts)...};
+    }
+  };
+  KUMI_VARIABLE_ABI constexpr make_tuple_t make_tuple{};
   namespace _
   {
-    template<kumi::concepts::product_type T,
-             typename IndexSequence,
-             template<typename...> class Meta = std::type_identity>
-    struct as_tuple;
-    template<kumi::concepts::product_type T, std::size_t... I> struct as_tuple<T, std::index_sequence<I...>>
+    template<kumi::concepts::product_type T, std::size_t... I>
+    KUMI_HIDDEN_ABI constexpr auto to_ref_(kumi::_::adl_tag_t, T&& t, std::index_sequence<I...>)
+      -> kumi::tuple<kumi::member_t<I, T>&&...>
+    {
+      return {get<I>(KUMI_FWD(t))...};
+    }
+  }
+  struct to_ref_t
+  {
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
+    {
+      return to_ref_(kumi::_::adl_tag, KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T>>{});
+    }
+  };
+  KUMI_VARIABLE_ABI constexpr to_ref_t to_ref{};
+  template<typename Type> struct from_tuple_t
+  {
+  private:
+    template<typename T, std::size_t... I> KUMI_HIDDEN_ABI constexpr Type impl(T&& t, std::index_sequence<I...>) const
+    {
+      return {get<I>(KUMI_FWD(t))...};
+    }
+  public:
+    template<typename... Ts>
+    [[nodiscard]] KUMI_ABI constexpr Type operator()(tuple<Ts...> const& t) const
+    requires(!kumi::concepts::product_type<Type> && kumi::_::implicit_constructible<Type, Ts...>)
+    {
+      return impl(t, std::make_index_sequence<sizeof...(Ts)>{});
+    }
+  };
+  template<typename Type> KUMI_VARIABLE_ABI constexpr from_tuple_t<Type> from_tuple{};
+  struct to_tuple_t
+  {
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
+    {
+      if constexpr (kumi::concepts::empty_product_type<T>) return kumi::tuple{};
+      else
+        return [&]<std::size_t... I>(std::index_sequence<I...>) {
+          return kumi::tuple{get<I>(KUMI_FWD(t))...};
+        }(std::make_index_sequence<kumi::size_v<T>>{});
+    }
+    template<kumi::concepts::static_container S>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(S&& s) const
+    requires(!kumi::concepts::product_type<S>)
+    {
+      constexpr std::size_t N = kumi::container_size_v<S>;
+      if constexpr (N == 0) return kumi::tuple{};
+      else
+        return [&]<std::size_t... I>(std::index_sequence<I...>) {
+          return kumi::tuple{KUMI_FWD(s)[I]...};
+        }(std::make_index_sequence<N>{});
+    }
+  };
+  KUMI_VARIABLE_ABI constexpr to_tuple_t to_tuple{};
+  namespace _
+  {
+    template<typename T, typename IndexSequence, template<typename...> class Meta = std::type_identity> struct as_tuple;
+    template<typename T, std::size_t... I> struct as_tuple<T, std::index_sequence<I...>>
     {
       using type = kumi::tuple<kumi::element_t<I, T>...>;
     };
-    template<kumi::concepts::product_type T, std::size_t... I, template<typename...> class Meta>
+    template<typename T, std::size_t... I, template<typename...> class Meta>
     struct as_tuple<T, std::index_sequence<I...>, Meta>
     {
       using type = tuple<typename Meta<kumi::element_t<I, T>>::type...>;
@@ -2000,23 +2043,38 @@ namespace kumi
   };
   template<typename T, template<typename...> class Meta = std::type_identity>
   using as_tuple_t = typename kumi::as_tuple<T, Meta>::type;
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto members_of(as<T>) noexcept
+  struct members_of_t
   {
-    if constexpr (kumi::concepts::sized_product_type<T, 0>) return kumi::tuple{};
-    else
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return kumi::tuple{kumi::identifier_of<kumi::element_t<I, T>>()...};
-      }(std::make_index_sequence<kumi::size_v<T>>{});
-  }
-  template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto values_of(T&& t) noexcept
+  private:
+    template<typename T, std::size_t... I>
+    KUMI_HIDDEN_ABI constexpr auto impl(as<T>, std::index_sequence<I...>) const noexcept
+    {
+      if constexpr (sizeof...(I) == 0) return kumi::tuple{};
+      else return kumi::tuple{kumi::identifier_of<kumi::element_t<I, T>>()...};
+    }
+  public:
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(as<T> type) const noexcept
+    {
+      return impl(type, std::make_index_sequence<kumi::size_v<T>>{});
+    }
+  };
+  KUMI_VARIABLE_ABI constexpr members_of_t members_of{};
+  struct values_of_t
   {
-    if constexpr (kumi::concepts::sized_product_type<T, 0>) return kumi::tuple{};
-    else
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
+    template<typename T, std::size_t... I>
+    KUMI_HIDDEN_ABI constexpr auto impl(T&& t, std::index_sequence<I...>) const noexcept
+    {
+      if constexpr (sizeof...(I) == 0) return kumi::tuple{};
+      else
         return kumi::tuple<kumi::result::field_value_of_t<kumi::member_t<I, T>>...>{
           kumi::field_value_of(get<I>(KUMI_FWD(t)))...};
-      }(std::make_index_sequence<kumi::size_v<T>>{});
-  }
+    }
+    template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
+    {
+      return impl(KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T>>{});
+    }
+  };
+  KUMI_VARIABLE_ABI constexpr values_of_t values_of{};
   namespace result
   {
     template<kumi::concepts::product_type T> using members_of_t = decltype(kumi::members_of(as<T>{}));
@@ -2330,12 +2388,7 @@ namespace kumi
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os,
                                                          record const& t) noexcept
     {
-      os << "{ ";
-      [&]<std::size_t... I>(std::index_sequence<I...>) {
-        ((os << t[index<I>] << ", "), ...);
-      }(std::make_index_sequence<kumi::size_v<record> - 1>{});
-      os << t[kumi::index<kumi::size_v<record> - 1>] << " }";
-      return os;
+      return kumi::_::print(os, t, '{', ',', '}', std::make_index_sequence<sizeof...(Ts) - 1>{});
     }
   };
   template<> struct record<>
@@ -2376,51 +2429,81 @@ namespace kumi
     record(Ts&&...) = delete;
   };
   template<typename... Ts> record(Ts&&...) -> record<std::unwrap_ref_decay_t<Ts>...>;
-  template<kumi::concepts::identifier auto... Fields, typename... Ts>
-  [[nodiscard]] KUMI_ABI constexpr auto tie(Ts&... ts) -> kumi::record<kumi::field<decltype(Fields), Ts&>...>
-  requires(sizeof...(Fields) == sizeof...(Ts))
+  template<kumi::concepts::identifier auto... Fields> struct tie_as_record_t
   {
-    return {ts...};
+    template<typename... Ts> [[nodiscard]] KUMI_ABI constexpr auto operator()(Ts&... ts) const
+    {
+      return kumi::record<kumi::field<decltype(Fields), Ts&>...>{ts...};
+    }
+  };
+  template<kumi::concepts::identifier auto... Fields>
+  KUMI_VARIABLE_ABI constexpr tie_as_record_t<Fields...> tie_as_record{};
+  template<kumi::concepts::identifier auto... Fields> struct forward_as_record_t
+  {
+    template<typename... Ts>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(Ts&&... ts) const
+    requires(sizeof...(Fields) == sizeof...(Ts))
+    {
+      return kumi::record<kumi::field<decltype(Fields), Ts&&>...>{KUMI_FWD(ts)...};
+    }
+  };
+  template<kumi::concepts::identifier auto... Fields>
+  KUMI_VARIABLE_ABI constexpr forward_as_record_t<Fields...> forward_as_record{};
+  struct make_record_t
+  {
+    template<typename... Ts>
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(Ts&&... ts) const -> kumi::record<std::unwrap_ref_decay_t<Ts>...>
+    requires(kumi::concepts::uniquely_named<Ts...> && kumi::concepts::fully_named<Ts...>)
+    {
+      return {KUMI_FWD(ts)...};
+    }
+  };
+  KUMI_VARIABLE_ABI constexpr make_record_t make_record{};
+  namespace _
+  {
+    template<kumi::concepts::record_type T, std::size_t... I>
+    KUMI_HIDDEN_ABI constexpr auto to_ref_(kumi::_::adl_tag_t, T&& t, std::index_sequence<I...>) -> kumi::record<
+      kumi::field<decltype(kumi::identifier_of<kumi::element_t<I, T>>()), kumi::stored_member_t<I, T>&&>...>
+    {
+      return {kumi::field_value_of(get<I>(KUMI_FWD(t)))...};
+    }
   }
-  template<kumi::concepts::identifier auto... Fields, typename... Ts>
-  [[nodiscard]] KUMI_ABI constexpr auto forward_as_record(Ts&&... ts)
-    -> kumi::record<kumi::field<decltype(Fields), Ts&&>...>
-  requires(sizeof...(Fields) == sizeof...(Ts))
+  template<kumi::concepts::record_type Type> struct from_record_t
   {
-    return {KUMI_FWD(ts)...};
-  }
-  template<typename... Ts>
-  [[nodiscard]] KUMI_ABI constexpr auto make_record(Ts&&... ts) -> kumi::record<std::unwrap_ref_decay_t<Ts>...>
-  requires(kumi::concepts::uniquely_named<Ts...> && kumi::concepts::fully_named<Ts...>)
-  {
-    return {KUMI_FWD(ts)...};
-  }
-  template<kumi::concepts::record_type R> [[nodiscard]] KUMI_ABI constexpr auto to_ref(R&& r)
-  {
-    return [&]<std::size_t... I>(std::index_sequence<I...>) {
-      return kumi::forward_as_record<kumi::identifier_of<kumi::element_t<I, R>>()...>(
-        kumi::field_value_of(get<I>(KUMI_FWD(r)))...);
-    }(std::make_index_sequence<kumi::size_v<R>>{});
-  }
-  template<kumi::concepts::record_type Type, typename... Ts>
-  [[nodiscard]] KUMI_ABI constexpr auto from_record(record<Ts...> const& r)
-  requires(
-    kumi::concepts::equivalent<typename kumi::_::as_tuple<Type, std::make_index_sequence<kumi::size_v<Type>>>::type,
-                               kumi::tuple<Ts...>>)
-  {
-    return [&]<std::size_t... I>(std::index_sequence<I...>) {
+  private:
+    template<typename... Ts, std::size_t... I>
+    KUMI_HIDDEN_ABI constexpr Type impl(record<Ts...> const& r, std::index_sequence<I...>) const
+    {
       return Type{get<kumi::identifier_of<kumi::element_t<I, Type>>()>(r)...};
-    }(std::make_index_sequence<kumi::size_v<Type>>());
-  }
-  template<kumi::concepts::record_type Type> [[nodiscard]] KUMI_ABI constexpr auto to_record(Type&& r)
+    }
+  public:
+    template<typename... Ts>
+    [[nodiscard]] KUMI_ABI constexpr Type operator()(record<Ts...> const& r) const
+    requires(
+      kumi::concepts::equivalent<typename kumi::_::as_tuple<Type, std::make_index_sequence<kumi::size_v<Type>>>::type,
+                                 kumi::tuple<Ts...>>)
+    {
+      return impl(r, std::make_index_sequence<sizeof...(Ts)>{});
+    }
+  };
+  template<kumi::concepts::record_type Type> KUMI_VARIABLE_ABI constexpr from_record_t<Type> from_record{};
+  struct to_record_t
   {
-    if constexpr (kumi::concepts::empty_product_type<Type>) return kumi::record{};
-    else
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return kumi::record{kumi::capture_field<kumi::identifier_of<kumi::element_t<I, Type>>()>(
-          get<kumi::identifier_of<kumi::element_t<I, Type>>()>(KUMI_FWD(r)))...};
-      }(std::make_index_sequence<kumi::size_v<Type>>{});
-  }
+  private:
+    template<typename R, std::size_t... I> KUMI_HIDDEN_ABI constexpr auto impl(R&& r, std::index_sequence<I...>) const
+    {
+      if constexpr (sizeof...(I) == 0) return kumi::record{};
+      else
+        return kumi::record{kumi::capture_field<kumi::identifier_of<kumi::element_t<I, R>>()>(
+          get<kumi::identifier_of<kumi::element_t<I, R>>()>(KUMI_FWD(r)))...};
+    }
+  public:
+    template<kumi::concepts::record_type Type> [[nodiscard]] KUMI_ABI constexpr auto operator()(Type&& r) const
+    {
+      return impl(KUMI_FWD(r), std::make_index_sequence<kumi::size_v<Type>>{});
+    }
+  };
+  KUMI_VARIABLE_ABI constexpr to_record_t to_record{};
   template<std::size_t I, typename... Ts>
   [[nodiscard]] KUMI_ABI constexpr decltype(auto) get(record<Ts...>& r) noexcept
   requires(I < sizeof...(Ts))
@@ -3567,18 +3650,17 @@ namespace kumi
   namespace _
   {
     template<typename Pred, typename T, std::size_t... I>
-    KUMI_HIDDEN_ABI constexpr auto locate_(kumi::_::adl_tag_t, Pred p, T&& t, std::index_sequence<I...>) noexcept
+    KUMI_HIDDEN_ABI constexpr std::size_t locate_(kumi::_::adl_tag_t, Pred p, T&& t, std::index_sequence<I...>) noexcept
     {
-      bool checks[] = {kumi::invoke(p, get<I>(KUMI_FWD(t)))...};
-      for (std::size_t i = 0; i < kumi::size_v<T>; ++i)
-        if (checks[i]) return i;
-      return kumi::size_v<T>;
+      std::size_t index = kumi::size_v<T>;
+      ((kumi::invoke(p, get<I>(KUMI_FWD(t))) && ((index = I), true)) || ...);
+      return index;
     }
   }
   struct locate_t
   {
     template<typename Pred, kumi::concepts::product_type T>
-    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, Pred p) const noexcept
+    [[nodiscard]] KUMI_ABI constexpr std::size_t operator()(T&& t, Pred p) const noexcept
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return 0;
       else if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)), p);
@@ -4366,6 +4448,11 @@ namespace kumi
     {
       return (kumi::invoke(p, get<I>(KUMI_FWD(t))) || ...);
     }
+    template<typename T, std::size_t... I>
+    KUMI_HIDDEN_ABI constexpr std::size_t count_(kumi::_::adl_tag_t, T&& t, std::index_sequence<I...>)
+    {
+      return ((static_cast<bool>(get<I>(KUMI_FWD(t)))) + ... + 0ULL);
+    }
     template<typename Pred, typename T, std::size_t... I>
     KUMI_HIDDEN_ABI constexpr std::size_t count_if_(kumi::_::adl_tag_t, T&& t, Pred p, std::index_sequence<I...>)
     {
@@ -4432,12 +4519,14 @@ namespace kumi
       else return count_if_(kumi::_::adl_tag, KUMI_FWD(t), p, std::make_index_sequence<kumi::size_v<T>>{});
     }
   };
-  struct count_t : private kumi::count_if_t
+  struct count_t
   {
     template<kumi::concepts::product_type T>
     [[nodiscard]] KUMI_ABI constexpr std::size_t operator()(T&& t) const noexcept
     {
-      return kumi::count_if_t::operator()(KUMI_FWD(t), [](auto const& m) { return static_cast<bool>(m); });
+      if constexpr (kumi::concepts::empty_product_type<T>) return 0ULL;
+      else if constexpr (kumi::concepts::record_type<T>) return (*this)(values_of(KUMI_FWD(t)));
+      else return count_(kumi::_::adl_tag, KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T>>{});
     }
   };
   KUMI_VARIABLE_ABI constexpr all_of_t all_of{};
@@ -4847,8 +4936,7 @@ namespace kumi
         return kumi::tuple{kumi::invoke(f, init, get<0>(KUMI_FWD(t)))};
       else
       {
-        auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
-        return inclusive_scan_left_(kumi::_::adl_tag, KUMI_FWD(t), init, f, op,
+        return inclusive_scan_left_(kumi::_::adl_tag, KUMI_FWD(t), init, f, kumi::make_tuple,
                                     std::make_index_sequence<kumi::size_v<T> - 1>{});
       }
     }
@@ -4869,8 +4957,7 @@ namespace kumi
       else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::tuple{init};
       else
       {
-        auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
-        return exclusive_scan_left_(kumi::_::adl_tag, KUMI_FWD(t), init, f, op,
+        return exclusive_scan_left_(kumi::_::adl_tag, KUMI_FWD(t), init, f, kumi::make_tuple,
                                     std::make_index_sequence<kumi::size_v<T> - 1>{});
       }
     }
@@ -4892,8 +4979,7 @@ namespace kumi
         return kumi::tuple{kumi::invoke(f, get<0>(KUMI_FWD(t)), init)};
       else
       {
-        auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
-        return inclusive_scan_right_(kumi::_::adl_tag, KUMI_FWD(t), init, f, op,
+        return inclusive_scan_right_(kumi::_::adl_tag, KUMI_FWD(t), init, f, kumi::make_tuple,
                                      std::make_index_sequence<kumi::size_v<T> - 1>{});
       }
     }
@@ -4914,8 +5000,7 @@ namespace kumi
       else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::tuple{init};
       else
       {
-        auto op = [](auto&&... xs) { return kumi::make_tuple(KUMI_FWD(xs)...); };
-        return exclusive_scan_right_(kumi::_::adl_tag, KUMI_FWD(t), init, f, op,
+        return exclusive_scan_right_(kumi::_::adl_tag, KUMI_FWD(t), init, f, kumi::make_tuple,
                                      std::make_index_sequence<kumi::size_v<T> - 1>{});
       }
     }
