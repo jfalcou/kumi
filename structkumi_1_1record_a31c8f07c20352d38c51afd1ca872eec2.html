@@ -161,7 +161,7 @@ requires (<a class="el" href="conceptkumi_1_1concepts_1_1contains__identifier.ht
 </div><div class="memdoc">
 
 <p>Extracts the element whose identifier matches Id from a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>. </p>
-<dl class="section note"><dt>Note</dt><dd>Does not participate in overload resolution if there are no field which identifier matches Id in the record. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Does not participate in overload resolution if no field whose identifier matches Id is present in the record. </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Id</td><td>Identifier of the element to access </td></tr>
@@ -169,7 +169,7 @@ requires (<a class="el" href="conceptkumi_1_1concepts_1_1contains__identifier.ht
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to the selected element of current record.</dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md31"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md25"></a>
 Example:</h2>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>

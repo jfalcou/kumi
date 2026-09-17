@@ -144,7 +144,7 @@ struct kumi::common_product_type&lt; Ts &gt;</div><p>Extracts the common product
 <p>If all the types are record types then it returns an empty record type, otherwise returns an empty product type. As we are unable to properly compute the Least Restrictive Subtype of a pack this trait is specialized in the following way.</p>
 <ul>
 <li>If all input types are the same product_type, provide a type alias corresponding to it.</li>
-<li>If all input types are instance of the same template itself beeing a product_type, expose the template.</li>
+<li>If all input types are instances of the same template itself being a product_type, expose the template.</li>
 <li>If all types are <a class="el" href="conceptkumi_1_1concepts_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::concepts::product_type</a>, use <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> as the alias.</li>
 <li>If all types are <a class="el" href="conceptkumi_1_1concepts_1_1record__type.html" title="Concept specifying a type follows the Record Type semantic.">kumi::concepts::record_type</a>, use <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> as the alias.</li>
 </ul>
@@ -155,7 +155,7 @@ struct kumi::common_product_type&lt; Ts &gt;</div><p>Extracts the common product
   </table>
   </dd>
 </dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md87"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md73"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
 <div class="line">{</div>

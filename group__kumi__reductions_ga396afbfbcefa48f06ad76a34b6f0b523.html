@@ -152,9 +152,9 @@ $(function(){initNavTree('group__kumi__reductions_ga396afbfbcefa48f06ad76a34b6f0
 </table>
 </div><div class="memdoc">
 
-<p>Callable object performing a tree-like reduction of all elements of a product type. The given map function is applied before excution the reduction to each element of the input. </p>
+<p>Callable object performing a tree-like reduction of all elements of a product type. The given map function is applied before executing the reduction to each element of the input. </p>
 <p>On record types, this function operates on the underlying values, not on the fields themselves.</p>
-<dl class="section note"><dt>Note</dt><dd>For associative operations, this produces the same result as a left or right fold preceeded by map, but have different intermediate evaluation order.</dd></dl>
+<dl class="section note"><dt>Note</dt><dd>For associative operations, this produces the same result as a left or right fold preceded by map, but has a different intermediate evaluation order.</dd></dl>
 <p>inline constexpr</p>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/reduce.hpp&gt;</span></div>
@@ -163,8 +163,7 @@ $(function(){initNavTree('group__kumi__reductions_ga396afbfbcefa48f06ad76a34b6f0
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga396afbfbcefa48f06ad76a34b6f0b523">map_reduce</a>(Function f, M &amp;&amp; m, T &amp;&amp; t);</div>
 <div class="ttc" id="agroup__kumi__reductions_ga396afbfbcefa48f06ad76a34b6f0b523_html_ga396afbfbcefa48f06ad76a34b6f0b523"><div class="ttname"><a href="#ga396afbfbcefa48f06ad76a34b6f0b523">kumi::map_reduce</a></div><div class="ttdeci">constexpr map_reduce_t map_reduce</div><div class="ttdoc">Callable object performing a tree-like reduction of all elements of a product type....</div><div class="ttdef"><b>Definition</b> reduce.hpp:315</div></div>
 </div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, mono<span class="keywordtype">id</span> M, product_type T, <span class="keyword">typename</span> V&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__kumi__reductions_gaf7efbfa530d2396e2ed230cc03e4046e.html#gaf7efbfa530d2396e2ed230cc03e4046e">reduce</a>(Function f, M &amp;&amp; m, T &amp;&amp; t, V init);</div>
-<div class="ttc" id="agroup__kumi__reductions_gaf7efbfa530d2396e2ed230cc03e4046e_html_gaf7efbfa530d2396e2ed230cc03e4046e"><div class="ttname"><a href="group__kumi__reductions_gaf7efbfa530d2396e2ed230cc03e4046e.html#gaf7efbfa530d2396e2ed230cc03e4046e">kumi::reduce</a></div><div class="ttdeci">constexpr reduce_t reduce</div><div class="ttdoc">Callable object performing a tree-like reduction of all elements of a product type.</div><div class="ttdef"><b>Definition</b> reduce.hpp:236</div></div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga396afbfbcefa48f06ad76a34b6f0b523">map_reduce</a>(Function f, M &amp;&amp; m, T &amp;&amp; t, V init);</div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">f</span>: Mapping function to apply</li>
@@ -173,7 +172,7 @@ $(function(){initNavTree('group__kumi__reductions_ga396afbfbcefa48f06ad76a34b6f0
 <li><span class="tt">init</span>: Optional initial value of the reduction.</li>
 </ul>
 <h3 class="groupheader">Return value </h3>
-<pre class="fragment">The result of reducing the elements of `t` by `m` after beeing processed by `f`,
+<pre class="fragment">The result of reducing the elements of `t` by `m` after being processed by `f`,
 recursively combining elements in a tree structure.
 </pre><h2 class="groupheader">Helper type </h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::result</div>
@@ -208,7 +207,7 @@ recursively combining elements in a tree structure.
 <div class="line">}</div>
 <div class="ttc" id="agroup__kumi__functional_html_gab83f5dbd77ab8618b7925c9de6adb54d"><div class="ttname"><a href="group__kumi__functional.html#gab83f5dbd77ab8618b7925c9de6adb54d">kumi::function::plus</a></div><div class="ttdeci">constexpr kumi::function::numeric_add plus</div><div class="ttdoc">Callable object matching the kumi::numeric_add monoid, usable with kumi::algorithm.</div><div class="ttdef"><b>Definition</b> monoid.hpp:118</div></div>
 <div class="ttc" id="agroup__kumi__functional_html_gadcb7f72c2a20d42543aa3b38a867e6f6"><div class="ttname"><a href="group__kumi__functional.html#gadcb7f72c2a20d42543aa3b38a867e6f6">kumi::function::multiplies</a></div><div class="ttdeci">constexpr kumi::function::numeric_prod multiplies</div><div class="ttdoc">Callable object matching the kumi::numeric_prod monoid, usable with kumi::algorithm.</div><div class="ttdef"><b>Definition</b> monoid.hpp:126</div></div>
-<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
+<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:35</div></div>
 </div><!-- fragment --></li>
 <li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>

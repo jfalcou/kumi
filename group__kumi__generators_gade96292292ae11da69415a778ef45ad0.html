@@ -158,7 +158,7 @@ template&lt;std::size_t N&gt; </div>
 <p>On record types, this function operates on elements as if they were ordered. The considered order is the order of declaration.</p>
 <dl class="section note"><dt>Note</dt><dd>Windows behaves like overlapping tiles: each inner product_type is a tile over <span class="tt">t</span> starting at index <span class="tt">tile_number</span>. All the windows are of the same size.</dd></dl>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/apply.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/tiler.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, product_type T&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gade96292292ae11da69415a778ef45ad0">windows&lt;N&gt;</a>(T &amp;&amp; t);</div>
@@ -205,7 +205,7 @@ template&lt;std::size_t N&gt; </div>
 <div class="line">  },w);</div>
 <div class="line">  std::cout &lt;&lt; t &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> w2 = <a class="code hl_variable" href="#gade96292292ae11da69415a778ef45ad0">kumi::windows&lt;3&gt;</a>(<a class="code hl_function" href="group__kumi__record__related_ga83a97fc306d9ecfacde28584b219b44a.html#ga83a97fc306d9ecfacde28584b219b44a">kumi::to_ref</a>(t)); </div>
+<div class="line">  <span class="keyword">auto</span> w2 = <a class="code hl_variable" href="#gade96292292ae11da69415a778ef45ad0">kumi::windows&lt;3&gt;</a>(<a class="code hl_variable" href="group__kumi__tuple__related_ga271223ada5937ca2e7ea77825b89b144.html#ga271223ada5937ca2e7ea77825b89b144">kumi::to_ref</a>(t)); </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;  Windows with references &quot;</span> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; w2 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
@@ -215,9 +215,9 @@ template&lt;std::size_t N&gt; </div>
 <div class="line">  },w2);</div>
 <div class="line">  std::cout &lt;&lt; t &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;   </div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__kumi__record__related_ga83a97fc306d9ecfacde28584b219b44a_html_ga83a97fc306d9ecfacde28584b219b44a"><div class="ttname"><a href="group__kumi__record__related_ga83a97fc306d9ecfacde28584b219b44a.html#ga83a97fc306d9ecfacde28584b219b44a">kumi::to_ref</a></div><div class="ttdeci">constexpr auto to_ref(R &amp;&amp;r)</div><div class="ttdoc">Creates a kumi::record of references given a reference to a kumi::record_type.</div><div class="ttdef"><b>Definition</b> record.hpp:520</div></div>
 <div class="ttc" id="agroup__kumi__transforms_ga58c4bb5e62083b4b37396d39c6446164_html_ga58c4bb5e62083b4b37396d39c6446164"><div class="ttname"><a href="group__kumi__transforms_ga58c4bb5e62083b4b37396d39c6446164.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a></div><div class="ttdeci">constexpr for_each_t for_each</div><div class="ttdoc">Callable object applying the Callable object f on each element of a product type.</div><div class="ttdef"><b>Definition</b> for_each.hpp:135</div></div>
-<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
+<div class="ttc" id="agroup__kumi__tuple__related_ga271223ada5937ca2e7ea77825b89b144_html_ga271223ada5937ca2e7ea77825b89b144"><div class="ttname"><a href="group__kumi__tuple__related_ga271223ada5937ca2e7ea77825b89b144.html#ga271223ada5937ca2e7ea77825b89b144">kumi::to_ref</a></div><div class="ttdeci">constexpr to_ref_t to_ref</div><div class="ttdoc">Callable object creating a kumi::concepts::product_type of references given a reference to a kumi::co...</div><div class="ttdef"><b>Definition</b> tuple.hpp:698</div></div>
+<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:35</div></div>
 </div><!-- fragment --></li>
 <li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -236,23 +236,23 @@ template&lt;std::size_t N&gt; </div>
 <div class="line"> </div>
 <div class="line">  <a class="code hl_variable" href="group__kumi__transforms_ga58c4bb5e62083b4b37396d39c6446164.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
 <div class="line">  {</div>
-<div class="line">    <a class="code hl_function" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">get&lt;0&gt;</a>(<a class="code hl_function" href="structkumi_1_1tuple_ade5f616b3115a74bd4930f70f96ca199.html#ade5f616b3115a74bd4930f70f96ca199">kumi::values_of</a>(tile))++;</div>
+<div class="line">    <a class="code hl_function" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">get&lt;0&gt;</a>(<a class="code hl_variable" href="group__kumi__utility_gaa217e07b135cc3295e25689ac4ac2933.html#gaa217e07b135cc3295e25689ac4ac2933">kumi::values_of</a>(tile))++;</div>
 <div class="line">  },w);</div>
 <div class="line">  std::cout &lt;&lt; r &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> w2 = <a class="code hl_variable" href="#gade96292292ae11da69415a778ef45ad0">kumi::windows&lt;3&gt;</a>(<a class="code hl_function" href="group__kumi__record__related_ga83a97fc306d9ecfacde28584b219b44a.html#ga83a97fc306d9ecfacde28584b219b44a">kumi::to_ref</a>(r)); </div>
+<div class="line">  <span class="keyword">auto</span> w2 = <a class="code hl_variable" href="#gade96292292ae11da69415a778ef45ad0">kumi::windows&lt;3&gt;</a>(<a class="code hl_variable" href="group__kumi__tuple__related_ga271223ada5937ca2e7ea77825b89b144.html#ga271223ada5937ca2e7ea77825b89b144">kumi::to_ref</a>(r)); </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;  Windows with references &quot;</span> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; w2 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  <a class="code hl_variable" href="group__kumi__transforms_ga58c4bb5e62083b4b37396d39c6446164.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
 <div class="line">  {</div>
-<div class="line">    <a class="code hl_function" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">get&lt;0&gt;</a>(<a class="code hl_function" href="structkumi_1_1tuple_ade5f616b3115a74bd4930f70f96ca199.html#ade5f616b3115a74bd4930f70f96ca199">kumi::values_of</a>(tile))++;</div>
+<div class="line">    <a class="code hl_function" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">get&lt;0&gt;</a>(<a class="code hl_variable" href="group__kumi__utility_gaa217e07b135cc3295e25689ac4ac2933.html#gaa217e07b135cc3295e25689ac4ac2933">kumi::values_of</a>(tile))++;</div>
 <div class="line">  },w2);</div>
 <div class="line">  std::cout &lt;&lt; r &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;   </div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1record_abc2cd329ad25d155458850c19cc3b137_html_abc2cd329ad25d155458850c19cc3b137"><div class="ttname"><a href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::record::get</a></div><div class="ttdeci">decltype(auto) constexpr get(record&lt; Ts... &gt; &amp;r) noexcept</div><div class="ttdoc">Extracts the Ith field from a kumi::record.</div><div class="ttdef"><b>Definition</b> record.hpp:620</div></div>
+<div class="ttc" id="agroup__kumi__utility_gaa217e07b135cc3295e25689ac4ac2933_html_gaa217e07b135cc3295e25689ac4ac2933"><div class="ttname"><a href="group__kumi__utility_gaa217e07b135cc3295e25689ac4ac2933.html#gaa217e07b135cc3295e25689ac4ac2933">kumi::values_of</a></div><div class="ttdeci">constexpr values_of_t values_of</div><div class="ttdoc">Extracts the values of the fields of a kumi::product_type.</div><div class="ttdef"><b>Definition</b> tuple.hpp:1020</div></div>
+<div class="ttc" id="astructkumi_1_1record_abc2cd329ad25d155458850c19cc3b137_html_abc2cd329ad25d155458850c19cc3b137"><div class="ttname"><a href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::record::get</a></div><div class="ttdeci">decltype(auto) constexpr get(record&lt; Ts... &gt; &amp;r) noexcept</div><div class="ttdoc">Extracts the Ith field from a kumi::record.</div><div class="ttdef"><b>Definition</b> record.hpp:766</div></div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
-<div class="ttc" id="astructkumi_1_1tuple_ade5f616b3115a74bd4930f70f96ca199_html_ade5f616b3115a74bd4930f70f96ca199"><div class="ttname"><a href="structkumi_1_1tuple_ade5f616b3115a74bd4930f70f96ca199.html#ade5f616b3115a74bd4930f70f96ca199">kumi::tuple::values_of</a></div><div class="ttdeci">constexpr auto values_of(T &amp;&amp;t) noexcept</div><div class="ttdoc">Extracts the values of the fields of a kumi::product_type.</div><div class="ttdef"><b>Definition</b> tuple.hpp:772</div></div>
 </div><!-- fragment --></li>
 </ul>
 </div><div class="tabbed"></div> 

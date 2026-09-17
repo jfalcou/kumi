@@ -15,7 +15,7 @@ var searchData=
   ['reindex_12',['reindex',['../group__kumi__generators_ga3594f15dbfba2f6fda0afc8d1542c449.html#ga3594f15dbfba2f6fda0afc8d1542c449',1,'kumi']]],
   ['related_20concepts_13',['Product Type Related Concepts',['../group__kumi__concepts.html',1,'']]],
   ['related_20traits_14',['Related Traits',['../group__kumi__traits.html',1,'Product Type Related Traits'],['../group__kumi__record__traits.html',1,'Record Related Traits'],['../group__kumi__tuple__traits.html',1,'Tuple Related Traits']]],
-  ['release_15',['First autonomous public release.',['../kumi_changelog.html#autotoc_md126',1,'']]],
+  ['release_15',['First autonomous public release.',['../kumi_changelog.html#autotoc_md112',1,'']]],
   ['remove_16',['remove',['../group__kumi__generators_ga0f52ba0b24ce54052784df91c54ac233.html#ga0f52ba0b24ce54052784df91c54ac233',1,'kumi']]],
   ['reorder_17',['reorder',['../group__kumi__generators_ga32af967d7f453426ccd564d3a0b6c689.html#ga32af967d7f453426ccd564d3a0b6c689',1,'kumi']]],
   ['reorder_5ffields_18',['reorder_fields',['../group__kumi__generators_ga8c42552c8f93dad0b83a3903468d02c6.html#ga8c42552c8f93dad0b83a3903468d02c6',1,'kumi']]],

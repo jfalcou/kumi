@@ -106,7 +106,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('group__kumi__record__related_gaa0d291bc5523e9e07e5c38559e0dcb3d.html','',''); });
+$(function(){initNavTree('group__kumi__record__related_gacfd38acd9ecb27bff2bb2ad0f885e326.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -132,49 +132,47 @@ $(function(){initNavTree('group__kumi__record__related_gaa0d291bc5523e9e07e5c385
 </div>
 
 <div class="contents">
-<a id="gaa0d291bc5523e9e07e5c38559e0dcb3d" name="gaa0d291bc5523e9e07e5c38559e0dcb3d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaa0d291bc5523e9e07e5c38559e0dcb3d">&#9670;&#160;</a></span>forward_as_record()</h2>
+<a id="gacfd38acd9ecb27bff2bb2ad0f885e326" name="gacfd38acd9ecb27bff2bb2ad0f885e326"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacfd38acd9ecb27bff2bb2ad0f885e326">&#9670;&#160;</a></span>forward_as_record</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier</a> auto... Fields, typename... Ts&gt; </div>
+template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier</a> auto... Fields&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">auto kumi::forward_as_record </td>
-          <td>(</td>
-          <td class="paramtype">Ts &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>ts</em></span></td><td>)</td>
-          <td> -&gt; <a class="el" href="structkumi_1_1record.html">kumi::record</a>&lt; <a class="el" href="structkumi_1_1field.html">kumi::field</a>&lt; decltype(Fields), Ts &amp;&amp; &gt;... &gt; requires(sizeof...(Fields)==sizeof...(Ts))</td>
+          <td class="memname">forward_as_record_t&lt;Fields...&gt; kumi::forward_as_record {}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
 <p>Creates a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> of forwarding references to its arguments. </p>
-<p>Constructs a record of references to the arguments in args suitable for forwarding as an argument to a function. The record has rvalue reference data members when rvalues are used as arguments, and otherwise has lvalue reference data members.</p>
-<dl class="section note"><dt>Note</dt><dd>If the arguments are temporaries, <span class="tt"><a class="el" href="#gaa0d291bc5523e9e07e5c38559e0dcb3d" title="Creates a kumi::record of forwarding references to its arguments.">forward_as_record</a></span> does not extend their lifetime; they have to be used before the end of the full expression.</dd></dl>
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">Fields</td><td>Non type template parameters names to associate to the each element. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">ts</td><td>Zero or more lvalue arguments to construct the record from. </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>A <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> constructed as <span class="tt"><a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>&lt;Ts&amp;&amp;...&gt;(std::forward&lt;Ts&gt;(args)...)</span> </dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md19"></a>
-Example:</h2>
+<p>Constructs a record of references to the arguments in ts suitable for forwarding as an argument to a function. The record has rvalue reference data members when rvalues are used as arguments, and otherwise has lvalue reference data members.</p>
+<dl class="section note"><dt>Note</dt><dd>If the arguments are temporaries, <span class="tt"><a class="el" href="#gacfd38acd9ecb27bff2bb2ad0f885e326" title="Creates a kumi::record of forwarding references to its arguments.">forward_as_record</a></span> does not extend their lifetime; they have to be used before the end of the full expression.</dd></dl>
+<h2 class="groupheader">Header file </h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/product_types/record.hpp&gt;</span></div>
+</div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gacfd38acd9ecb27bff2bb2ad0f885e326">forward_as_record</a>(Ts&amp;&amp;... ts);</div>
+<div class="ttc" id="agroup__kumi__record__related_gacfd38acd9ecb27bff2bb2ad0f885e326_html_gacfd38acd9ecb27bff2bb2ad0f885e326"><div class="ttname"><a href="#gacfd38acd9ecb27bff2bb2ad0f885e326">kumi::forward_as_record</a></div><div class="ttdeci">constexpr forward_as_record_t&lt; Fields... &gt; forward_as_record</div><div class="ttdoc">Creates a kumi::record of forwarding references to its arguments.</div><div class="ttdef"><b>Definition</b> record.hpp:540</div></div>
+</div><!-- fragment --><h3 class="groupheader">Parameters </h3>
+<ul>
+<li><span class="tt">Fields</span>: Non type template parameters names to associate with each element.</li>
+<li><span class="tt">ts</span>: Zero or more lvalue arguments to construct the record from.</li>
+</ul>
+<h3 class="groupheader">Return value </h3>
+<ul>
+<li>A <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> constructed as <span class="tt"><a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>&lt;<a class="el" href="structkumi_1_1field.html" title="Named wrapper over a type.">kumi::field</a>&lt;decltype(Fields),Ts&amp;&amp;&gt;...&gt;(std::forward&lt;Ts&gt;(ts)...)</span></li>
+</ul>
+<h2 class="groupheader">Example </h2>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 <div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
@@ -193,13 +191,12 @@ Example:</h2>
 <div class="line"> </div>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> v = build( <a class="code hl_function" href="#gaa0d291bc5523e9e07e5c38559e0dcb3d">kumi::forward_as_record&lt;&quot;a&quot;_id, &quot;b&quot;_id&gt;</a>(4,std::string{<span class="stringliteral">&quot;the text !&quot;</span>}));</div>
+<div class="line">  <span class="keyword">auto</span> v = build( <a class="code hl_variable" href="#gacfd38acd9ecb27bff2bb2ad0f885e326">kumi::forward_as_record&lt;&quot;a&quot;_id, &quot;b&quot;_id&gt;</a>(4,std::string{<span class="stringliteral">&quot;the text !&quot;</span>}));</div>
 <div class="line"> </div>
 <div class="line">  <span class="keywordflow">for</span>(<span class="keyword">auto</span> <span class="keyword">const</span>&amp; s : v)</div>
 <div class="line">    std::cout &lt;&lt; s &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__kumi__record__related_gaa0d291bc5523e9e07e5c38559e0dcb3d_html_gaa0d291bc5523e9e07e5c38559e0dcb3d"><div class="ttname"><a href="#gaa0d291bc5523e9e07e5c38559e0dcb3d">kumi::forward_as_record</a></div><div class="ttdeci">constexpr auto forward_as_record(Ts &amp;&amp;... ts) -&gt; kumi::record&lt; kumi::field&lt; decltype(Fields), Ts &amp;&amp; &gt;... &gt; requires(sizeof...(Fields)==sizeof...(Ts))</div><div class="ttdoc">Creates a kumi::record of forwarding references to its arguments.</div><div class="ttdef"><b>Definition</b> record.hpp:481</div></div>
-<div class="ttc" id="astructkumi_1_1record_abc2cd329ad25d155458850c19cc3b137_html_abc2cd329ad25d155458850c19cc3b137"><div class="ttname"><a href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::record::get</a></div><div class="ttdeci">decltype(auto) constexpr get(record&lt; Ts... &gt; &amp;r) noexcept</div><div class="ttdoc">Extracts the Ith field from a kumi::record.</div><div class="ttdef"><b>Definition</b> record.hpp:620</div></div>
+<div class="ttc" id="astructkumi_1_1record_abc2cd329ad25d155458850c19cc3b137_html_abc2cd329ad25d155458850c19cc3b137"><div class="ttname"><a href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::record::get</a></div><div class="ttdeci">decltype(auto) constexpr get(record&lt; Ts... &gt; &amp;r) noexcept</div><div class="ttdoc">Extracts the Ith field from a kumi::record.</div><div class="ttdef"><b>Definition</b> record.hpp:766</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

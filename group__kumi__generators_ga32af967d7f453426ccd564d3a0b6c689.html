@@ -157,7 +157,7 @@ template&lt;std::size_t... I&gt; </div>
 <p>Callable object reordering elements of a product type. </p>
 <p>This function will issue a compile time error if any Idx is outside [0, size_v&lt;T&gt;[.</p>
 <p>On record types, this function operates on elements as if they were ordered. The considered order is the order of declaration.</p>
-<dl class="section note"><dt>Note</dt><dd>Nothing prevent the number of reordered index to be lesser or greater than t size or the fact they can appear multiple times.</dd>
+<dl class="section note"><dt>Note</dt><dd>Nothing prevents the number of reordered indexes from being lesser or greater than the size of t or from appearing multiple times.</dd>
 <dd>
 <a class="el" href="#ga32af967d7f453426ccd564d3a0b6c689" title="Callable object reordering elements of a product type.">reorder(tuple)</a> works and is equivalent to <a class="el" href="#ga32af967d7f453426ccd564d3a0b6c689" title="Callable object reordering elements of a product type.">reorder&lt;&gt;(tuple)</a></dd></dl>
 <h2 class="groupheader">Header file </h2>
@@ -203,7 +203,7 @@ template&lt;std::size_t... I&gt; </div>
 <div class="line">  std::cout &lt;&lt; kumi::reorder&lt;2,1,0,1,2&gt;(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; kumi::reorder&lt;1,1&gt;(values) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
+<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:35</div></div>
 </div><!-- fragment --></li>
 <li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>

@@ -161,7 +161,7 @@ requires (<a class="el" href="conceptkumi_1_1concepts_1_1uniquely__named.html">k
 </div><div class="memdoc">
 
 <p>Extracts the element whose identifier matches Id from a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>. </p>
-<dl class="section note"><dt>Note</dt><dd>Does not participate in overload resolution if there are no field which identifier matches Id in the tuple or if the tuple contains duplicate identifiers. </dd></dl>
+<dl class="section note"><dt>Note</dt><dd>Does not participate in overload resolution if no field whose identifier matches Id is present in the tuple or if the tuple contains duplicate identifiers. </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
     <tr><td class="paramname">Id</td><td>Identifier of the element to access </td></tr>
@@ -169,7 +169,7 @@ requires (<a class="el" href="conceptkumi_1_1concepts_1_1uniquely__named.html">k
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A reference to the selected element of current tuple.</dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md50"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md36"></a>
 Example:</h2>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -189,7 +189,7 @@ Example:</h2>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; t[<span class="stringliteral">&quot;t&quot;</span>_id] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
+<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:35</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

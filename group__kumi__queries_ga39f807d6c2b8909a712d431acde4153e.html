@@ -152,13 +152,14 @@ $(function(){initNavTree('group__kumi__queries_ga39f807d6c2b8909a712d431acde4153
 </table>
 </div><div class="memdoc">
 
-<p>Callable object Returning the index of a value which type satisfies a given predicate. </p>
+<p>Callable object returning the index of a value whose type satisfies a given predicate. </p>
 <p>On record types, this function operates as if the elements are ordered. The considered order is the order of declaration.</p>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/find.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, <span class="keyword">typename</span> Predicate&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> find(T &amp;&amp; t, Predicate p) <span class="keyword">noexcept</span>;</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga39f807d6c2b8909a712d431acde4153e">locate</a>(T &amp;&amp; t, Pred p) <span class="keyword">noexcept</span>;</div>
+<div class="ttc" id="agroup__kumi__queries_ga39f807d6c2b8909a712d431acde4153e_html_ga39f807d6c2b8909a712d431acde4153e"><div class="ttname"><a href="#ga39f807d6c2b8909a712d431acde4153e">kumi::locate</a></div><div class="ttdeci">constexpr locate_t locate</div><div class="ttdoc">Callable object returning the index of a value whose type satisfies a given predicate.</div><div class="ttdef"><b>Definition</b> find.hpp:83</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: Product Type to process</li>
@@ -184,9 +185,8 @@ $(function(){initNavTree('group__kumi__queries_ga39f807d6c2b8909a712d431acde4153
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; std::boolalpha &lt;&lt; <a class="code hl_variable" href="#ga39f807d6c2b8909a712d431acde4153e">kumi::locate</a>( t, [](<span class="keyword">auto</span> e) { <span class="keywordflow">return</span> e &gt; 3; } ) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__kumi__queries_ga39f807d6c2b8909a712d431acde4153e_html_ga39f807d6c2b8909a712d431acde4153e"><div class="ttname"><a href="#ga39f807d6c2b8909a712d431acde4153e">kumi::locate</a></div><div class="ttdeci">constexpr locate_t locate</div><div class="ttdoc">Callable object Returning the index of a value which type satisfies a given predicate.</div><div class="ttdef"><b>Definition</b> find.hpp:84</div></div>
 <div class="ttc" id="agroup__kumi__utility_ga9c8c29e8a2f4f5e8a663200559fdc983_html_ga9c8c29e8a2f4f5e8a663200559fdc983"><div class="ttname"><a href="group__kumi__utility_ga9c8c29e8a2f4f5e8a663200559fdc983.html#ga9c8c29e8a2f4f5e8a663200559fdc983">kumi::predicate</a></div><div class="ttdeci">constexpr auto predicate() noexcept</div><div class="ttdoc">Convert a unary template meta-program in a running predicate.</div><div class="ttdef"><b>Definition</b> ct_helpers.hpp:148</div></div>
-<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
+<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:35</div></div>
 </div><!-- fragment --></li>
 <li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>

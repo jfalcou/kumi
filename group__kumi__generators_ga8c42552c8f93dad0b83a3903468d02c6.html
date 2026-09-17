@@ -157,7 +157,7 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi
 <p>Callable object reordering elements of a Record Type. </p>
 <p>This function will issue a compile time error if the identifiers are not in <span class="tt">t</span></p>
 <p>On record types, this function operates on elements as if they were ordered. The considered order is the order of declaration.</p>
-<dl class="section note"><dt>Note</dt><dd>Nothing prevent the number of reordered names to be lesser or greater than t size or the fact they can appear multiple times if it is applied on a named tuple.</dd>
+<dl class="section note"><dt>Note</dt><dd>Nothing prevents the number of reordered names from being lesser or greater than the size of t or from appearing multiple times if it is applied on a named tuple.</dd>
 <dd>
 <a class="el" href="group__kumi__generators_ga32af967d7f453426ccd564d3a0b6c689.html#ga32af967d7f453426ccd564d3a0b6c689" title="Callable object reordering elements of a product type.">reorder(tuple)</a> works and is equivalent to <a class="el" href="group__kumi__generators_ga32af967d7f453426ccd564d3a0b6c689.html#ga32af967d7f453426ccd564d3a0b6c689" title="Callable object reordering elements of a product type.">reorder&lt;&gt;(tuple)</a></dd></dl>
 <h2 class="groupheader">Header file </h2>
@@ -177,7 +177,7 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi
 </ul>
 <h3 class="groupheader">Return value </h3>
 <ul>
-<li>A product type with the type of <span class="tt">t</span> with elements equal to get&lt;Ids&gt;(t) for each given identifer.</li>
+<li>A product type with the type of <span class="tt">t</span> with elements equal to get&lt;Ids&gt;(t) for each given identifier.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
 <div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type Tuple, kumi::concepts::identifier <span class="keyword">auto</span>... Name&gt;</div>

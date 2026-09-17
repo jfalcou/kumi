@@ -27,7 +27,7 @@
     </tr>
     <tr>
       <th scope="row">Date:</th>
-      <td>2026-09-11 08:32:45</td>
+      <td>2026-09-17 08:36:28</td>
     </tr>
   </table>
 </div>
@@ -47,9 +47,9 @@
     </tr>
     <tr>
       <th scope="row">Functions:</th>
+      <td>79</td>
       <td>80</td>
-      <td>80</td>
-      <td class="coverage-high">100.0%</td>
+      <td class="coverage-high">98.8%</td>
     </tr>
     <tr>
       <th scope="row">Branches:</th>
@@ -116,11 +116,11 @@
     <tr><td><a href="#l134">auto kumi::literals::operator&#34;&#34; _l&lt;kumi::str{char [65]{(char)121}, 1u}&gt;() (line 134)</a></td><td>called 1 time, returned 1 time</td><td>100.0%</td></tr>
     <tr><td><a href="#l148">auto kumi::predicate&lt;std::is_arithmetic&gt;() (line 148)</a></td><td>called 8 times, returned 8 times</td><td>100.0%</td></tr>
     <tr><td><a href="#l148">auto kumi::predicate&lt;std::is_floating_point&gt;() (line 148)</a></td><td>called 4 times, returned 4 times</td><td>100.0%</td></tr>
-    <tr><td><a href="#l150">auto kumi::predicate&lt;std::is_floating_point&gt;()::{lambda&lt;typename $T0&gt;($T0 const&amp;)#1}::operator()&lt;char&gt;(char const&amp;) const (line 150)</a></td><td>called 4 times, returned 4 times</td><td>100.0%</td></tr>
+    <tr><td><a href="#l150">auto kumi::predicate&lt;std::is_floating_point&gt;()::{lambda&lt;typename $T0&gt;($T0 const&amp;)#1}::operator()&lt;char&gt;(char const&amp;) const (line 150)</a></td><td>called 2 times, returned 2 times</td><td>100.0%</td></tr>
     <tr><td><a href="#l150">auto kumi::predicate&lt;std::is_floating_point&gt;()::{lambda&lt;typename $T0&gt;($T0 const&amp;)#1}::operator()&lt;double&gt;(double const&amp;) const (line 150)</a></td><td>called 4 times, returned 4 times</td><td>100.0%</td></tr>
-    <tr><td><a href="#l150">auto kumi::predicate&lt;std::is_floating_point&gt;()::{lambda&lt;typename $T0&gt;($T0 const&amp;)#1}::operator()&lt;float&gt;(float const&amp;) const (line 150)</a></td><td>called 4 times, returned 4 times</td><td>100.0%</td></tr>
+    <tr><td><a href="#l150">auto kumi::predicate&lt;std::is_floating_point&gt;()::{lambda&lt;typename $T0&gt;($T0 const&amp;)#1}::operator()&lt;float&gt;(float const&amp;) const (line 150)</a></td><td>called 2 times, returned 2 times</td><td>100.0%</td></tr>
     <tr><td><a href="#l150">auto kumi::predicate&lt;std::is_floating_point&gt;()::{lambda&lt;typename $T0&gt;($T0 const&amp;)#1}::operator()&lt;int&gt;(int const&amp;) const (line 150)</a></td><td>called 4 times, returned 4 times</td><td>100.0%</td></tr>
-    <tr><td><a href="#l150">auto kumi::predicate&lt;std::is_floating_point&gt;()::{lambda&lt;typename $T0&gt;($T0 const&amp;)#1}::operator()&lt;unsigned long long&gt;(unsigned long long const&amp;) const (line 150)</a></td><td>called 2 times, returned 2 times</td><td>100.0%</td></tr>
+    <tr><td><a href="#l150">auto kumi::predicate&lt;std::is_floating_point&gt;()::{lambda&lt;typename $T0&gt;($T0 const&amp;)#1}::operator()&lt;unsigned long long&gt;(unsigned long long const&amp;) const (line 150)</a></td><td>not called</td><td>0.0%</td></tr>
     <tr><td><a href="#l148">auto kumi::predicate&lt;std::is_integral&gt;() (line 148)</a></td><td>called 2 times, returned 2 times</td><td>100.0%</td></tr>
     <tr><td><a href="#l148">auto kumi::predicate&lt;std::is_lvalue_reference&gt;() (line 148)</a></td><td>called 2 times, returned 2 times</td><td>100.0%</td></tr>
     <tr><td><a href="#l148">auto kumi::predicate&lt;std::is_pointer&gt;() (line 148)</a></td><td>called 4 times, returned 4 times</td><td>100.0%</td></tr>
@@ -1214,7 +1214,7 @@
       <td class="lineno"><a id="l150" href="#l150">150</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">144</td>
+      <td class="linecount coveredLine">132</td>
       <td class="src coveredLine"><span class="w">    </span><span class="k">return</span><span class="w"> </span><span class="p">[]</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="o">&gt;</span><span class="p">(</span><span class="n">T</span><span class="w"> </span><span class="k">const</span><span class="o">&amp;</span><span class="p">)</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="k">return</span><span class="w"> </span><span class="n">Pred</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">value</span><span class="p">;</span><span class="w"> </span><span class="p">};</span></td>
     </tr>
     <tr class="source-line">
@@ -1257,7 +1257,7 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="cm">    @brief Helper to retrive the index of a type in a product type by it s type</span></td>
+      <td class="src "><span class="cm">    @brief Helper to retrieve the index of a type in a product type by its type</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l157" href="#l157">157</a></td>
@@ -1292,7 +1292,7 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="cm">    @return the index of the element of type U in the product type if it exist</span></td>
+      <td class="src "><span class="cm">    @return the index of the element of type U in the product type if it exists</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l162" href="#l162">162</a></td>
@@ -1397,7 +1397,7 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="cm">    @brief Helper to retrive the index of a type in a product type by it s identifier</span></td>
+      <td class="src "><span class="cm">    @brief Helper to retrieve the index of a type in a product type by its identifier</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l177" href="#l177">177</a></td>
@@ -1432,7 +1432,7 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="cm">    @return the index of the element whose identifier matches Id in the product type if it exist</span></td>
+      <td class="src "><span class="cm">    @return the index of the element whose identifier matches Id in the product type if it exists</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l182" href="#l182">182</a></td>
@@ -1537,7 +1537,7 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="cm">    @brief Helper to retrive the index of a type in a product type by it s identifier</span></td>
+      <td class="src "><span class="cm">    @brief Helper to retrieve the index of a type in a product type by its identifier</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l197" href="#l197">197</a></td>
@@ -1572,7 +1572,7 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="cm">    @return the index of the element whose identifier matches Id in the product type if it exist</span></td>
+      <td class="src "><span class="cm">    @return the index of the element whose identifier matches Id in the product type if it exists</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l202" href="#l202">202</a></td>

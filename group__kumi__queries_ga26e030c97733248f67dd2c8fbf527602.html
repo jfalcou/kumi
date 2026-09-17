@@ -152,14 +152,14 @@ $(function(){initNavTree('group__kumi__queries_ga26e030c97733248f67dd2c8fbf52760
 </table>
 </div><div class="memdoc">
 
-<p>Callable object checking if a unary predicate p does not returns true for any element in t. </p>
+<p>Callable object checking if a unary predicate p does not return true for any element in t. </p>
 <p>On a record type, the function operates on the underlying elements of the fields.</p>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/predicates.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, <span class="keyword">typename</span> Pred&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga26e030c97733248f67dd2c8fbf527602">none_of</a>(T &amp;&amp; t, Pred p) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__kumi__queries_ga26e030c97733248f67dd2c8fbf527602_html_ga26e030c97733248f67dd2c8fbf527602"><div class="ttname"><a href="#ga26e030c97733248f67dd2c8fbf527602">kumi::none_of</a></div><div class="ttdeci">constexpr none_of_t none_of</div><div class="ttdoc">Callable object checking if a unary predicate p does not returns true for any element in t.</div><div class="ttdef"><b>Definition</b> predicates.hpp:269</div></div>
+<div class="ttc" id="agroup__kumi__queries_ga26e030c97733248f67dd2c8fbf527602_html_ga26e030c97733248f67dd2c8fbf527602"><div class="ttname"><a href="#ga26e030c97733248f67dd2c8fbf527602">kumi::none_of</a></div><div class="ttdeci">constexpr none_of_t none_of</div><div class="ttdoc">Callable object checking if a unary predicate p does not return true for any element in t.</div><div class="ttdef"><b>Definition</b> predicates.hpp:277</div></div>
 </div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, <span class="keyword">typename</span> Pred&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga26e030c97733248f67dd2c8fbf527602">none_of</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
@@ -185,7 +185,7 @@ $(function(){initNavTree('group__kumi__queries_ga26e030c97733248f67dd2c8fbf52760
 <div class="line">  <span class="keyword">auto</span> u = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a>{0,0.,0.f};</div>
 <div class="line">  std::cout &lt;&lt; std::boolalpha &lt;&lt; <a class="code hl_variable" href="#ga26e030c97733248f67dd2c8fbf527602">kumi::none_of</a>( u ) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
+<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:35</div></div>
 </div><!-- fragment --></li>
 <li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>

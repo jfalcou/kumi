@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['garnet_0',['Version 5.0 - Gorgeous Garnet',['../kumi_changelog.html#autotoc_md96',1,'']]],
+  ['garnet_0',['Version 5.0 - Gorgeous Garnet',['../kumi_changelog.html#autotoc_md82',1,'']]],
   ['generalized_20reductions_1',['Product Type Generalized Reductions',['../group__kumi__reductions.html',1,'']]],
   ['generate_2',['generate',['../group__kumi__generators_gaba2efbda8df6baaccd4e35343d70163f.html#gaba2efbda8df6baaccd4e35343d70163f',1,'kumi']]],
   ['generators_3',['Product Type Generators',['../group__kumi__generators.html',1,'']]],
@@ -10,6 +10,6 @@ var searchData=
   ['get_5findex_5fof_5ftype_7',['get_index_of_type',['../group__kumi__utility_ga15172fcc47fe0c88931be39b9c3633fd.html#ga15172fcc47fe0c88931be39b9c3633fd',1,'kumi']]],
   ['get_5for_8',['get_or',['../group__kumi__functional_ga42064b97f063feae3d934bd111ef74ec.html#ga42064b97f063feae3d934bd111ef74ec',1,'kumi::function']]],
   ['glossary_9',['Glossary',['../kumi_glossary.html',1,'Glossary'],['../kumi_references.html#references_terms',1,'Grounding of the Glossary']]],
-  ['gorgeous_20garnet_10',['Version 5.0 - Gorgeous Garnet',['../kumi_changelog.html#autotoc_md96',1,'']]],
+  ['gorgeous_20garnet_10',['Version 5.0 - Gorgeous Garnet',['../kumi_changelog.html#autotoc_md82',1,'']]],
   ['grounding_20of_20the_20glossary_11',['Grounding of the Glossary',['../kumi_references.html#references_terms',1,'']]]
 ];

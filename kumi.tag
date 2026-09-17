@@ -1209,20 +1209,6 @@
       <arglist>(Ts &amp;&amp;...) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
     </member>
     <member kind="function">
-      <type>constexpr auto</type>
-      <name>members_of</name>
-      <anchorfile>structkumi_1_1tuple_ac67c6dbee8bf12133da3379826cde848.html</anchorfile>
-      <anchor>ac67c6dbee8bf12133da3379826cde848</anchor>
-      <arglist>(as&lt; T &gt;) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>values_of</name>
-      <anchorfile>structkumi_1_1tuple_ade5f616b3115a74bd4930f70f96ca199.html</anchorfile>
-      <anchor>ade5f616b3115a74bd4930f70f96ca199</anchor>
-      <arglist>(T &amp;&amp;t) noexcept</arglist>
-    </member>
-    <member kind="function">
       <type>decltype(auto) constexpr</type>
       <name>get</name>
       <anchorfile>structkumi_1_1tuple_a7b9b1b3fbe3d201542691bee350d8a08.html</anchorfile>
@@ -1536,20 +1522,6 @@
       <anchorfile>structkumi_1_1tuple_a612d97f050a7b0eb9999f40c045779bf.html</anchorfile>
       <anchor>a612d97f050a7b0eb9999f40c045779bf</anchor>
       <arglist>(Ts &amp;&amp;...) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>members_of</name>
-      <anchorfile>structkumi_1_1tuple_ac67c6dbee8bf12133da3379826cde848.html</anchorfile>
-      <anchor>ac67c6dbee8bf12133da3379826cde848</anchor>
-      <arglist>(as&lt; T &gt;) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>values_of</name>
-      <anchorfile>structkumi_1_1tuple_ade5f616b3115a74bd4930f70f96ca199.html</anchorfile>
-      <anchor>ade5f616b3115a74bd4930f70f96ca199</anchor>
-      <arglist>(T &amp;&amp;t) noexcept</arglist>
     </member>
     <member kind="function">
       <type>decltype(auto) constexpr</type>
@@ -1976,76 +1948,6 @@
       <anchorfile>group__kumi__utility_ga0ac9f243b64bbbabc2bad542ca03c035.html</anchorfile>
       <anchor>ga0ac9f243b64bbbabc2bad542ca03c035</anchor>
       <arglist>(Ts...) -&gt; projection_map&lt; Ts</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>tie</name>
-      <anchorfile>group__kumi__record__related_ga9d6e39a733f56863dfa21cb1f07fdc3a.html</anchorfile>
-      <anchor>ga9d6e39a733f56863dfa21cb1f07fdc3a</anchor>
-      <arglist>(Ts &amp;... ts) -&gt; kumi::record&lt; kumi::field&lt; decltype(Fields), Ts &amp; &gt;... &gt; requires(sizeof...(Fields)==sizeof...(Ts))</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>forward_as_record</name>
-      <anchorfile>group__kumi__record__related_gaa0d291bc5523e9e07e5c38559e0dcb3d.html</anchorfile>
-      <anchor>gaa0d291bc5523e9e07e5c38559e0dcb3d</anchor>
-      <arglist>(Ts &amp;&amp;... ts) -&gt; kumi::record&lt; kumi::field&lt; decltype(Fields), Ts &amp;&amp; &gt;... &gt; requires(sizeof...(Fields)==sizeof...(Ts))</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>make_record</name>
-      <anchorfile>group__kumi__record__related_ga96da0243ca4cf9e490f62c327f51fe4e.html</anchorfile>
-      <anchor>ga96da0243ca4cf9e490f62c327f51fe4e</anchor>
-      <arglist>(Ts &amp;&amp;... ts) -&gt; kumi::record&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt; requires(kumi::concepts::uniquely_named&lt; Ts... &gt; &amp;&amp;kumi::concepts::fully_named&lt; Ts... &gt;)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>to_ref</name>
-      <anchorfile>group__kumi__record__related_ga83a97fc306d9ecfacde28584b219b44a.html</anchorfile>
-      <anchor>ga83a97fc306d9ecfacde28584b219b44a</anchor>
-      <arglist>(R &amp;&amp;r)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>from_record</name>
-      <anchorfile>group__kumi__record__related_ga772ac1518ac3bbe1627db9c00f56abdd.html</anchorfile>
-      <anchor>ga772ac1518ac3bbe1627db9c00f56abdd</anchor>
-      <arglist>(record&lt; Ts... &gt; const &amp;r)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>to_record</name>
-      <anchorfile>group__kumi__record__related_ga324cc6775ad5b15767fc2eaae02abd73.html</anchorfile>
-      <anchor>ga324cc6775ad5b15767fc2eaae02abd73</anchor>
-      <arglist>(Type &amp;&amp;r)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>tie</name>
-      <anchorfile>group__kumi__tuple__related_ga834fa03c64e67b8bdebccec00e9d195b.html</anchorfile>
-      <anchor>ga834fa03c64e67b8bdebccec00e9d195b</anchor>
-      <arglist>(Ts &amp;... ts) -&gt; kumi::tuple&lt; Ts &amp;... &gt;</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>forward_as_tuple</name>
-      <anchorfile>group__kumi__tuple__related_gac167a1000c9c61798b7d8c684f3c804b.html</anchorfile>
-      <anchor>gac167a1000c9c61798b7d8c684f3c804b</anchor>
-      <arglist>(Ts &amp;&amp;... ts) -&gt; kumi::tuple&lt; Ts &amp;&amp;... &gt;</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>make_tuple</name>
-      <anchorfile>group__kumi__tuple__related_ga8570ddb839f6b158633537fd7113e795.html</anchorfile>
-      <anchor>ga8570ddb839f6b158633537fd7113e795</anchor>
-      <arglist>(Ts &amp;&amp;... ts) -&gt; kumi::tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>to_ref</name>
-      <anchorfile>group__kumi__tuple__related_ga727f8ab64140ca60bcb1c8aded343c0b.html</anchorfile>
-      <anchor>ga727f8ab64140ca60bcb1c8aded343c0b</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
     </member>
     <member kind="variable">
       <type>constexpr all_of_t</type>
@@ -2684,96 +2586,173 @@
       <anchor>gaf4b9aea3cee7c30fc6a516c632805423</anchor>
       <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>from_tuple</name>
-      <anchorfile>group__kumi__tuple__related_ga81cca523672d8799bbe35fa4f07dd61f.html</anchorfile>
-      <anchor>ga81cca523672d8799bbe35fa4f07dd61f</anchor>
-      <arglist>(tuple&lt; Ts... &gt; const &amp;t)</arglist>
+    <member kind="variable">
+      <type>constexpr tie_as_record_t&lt; Fields... &gt;</type>
+      <name>tie_as_record</name>
+      <anchorfile>group__kumi__record__related_ga45b4db8f009ab12f62d938338d29d536.html</anchorfile>
+      <anchor>ga45b4db8f009ab12f62d938338d29d536</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>to_tuple</name>
-      <anchorfile>group__kumi__tuple__related_ga0bacdab2d5c18c44431ba8f74b86a5f0.html</anchorfile>
-      <anchor>ga0bacdab2d5c18c44431ba8f74b86a5f0</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>to_tuple</name>
-      <anchorfile>namespacekumi.html</anchorfile>
-      <anchor>a8d48ba398b636ca4b3f31662283701f0</anchor>
-      <arglist>(S &amp;&amp;s)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>tie</name>
-      <anchorfile>group__kumi__record__related_ga9d6e39a733f56863dfa21cb1f07fdc3a.html</anchorfile>
-      <anchor>ga9d6e39a733f56863dfa21cb1f07fdc3a</anchor>
-      <arglist>(Ts &amp;... ts) -&gt; kumi::record&lt; kumi::field&lt; decltype(Fields), Ts &amp; &gt;... &gt; requires(sizeof...(Fields)==sizeof...(Ts))</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr forward_as_record_t&lt; Fields... &gt;</type>
       <name>forward_as_record</name>
-      <anchorfile>group__kumi__record__related_gaa0d291bc5523e9e07e5c38559e0dcb3d.html</anchorfile>
-      <anchor>gaa0d291bc5523e9e07e5c38559e0dcb3d</anchor>
-      <arglist>(Ts &amp;&amp;... ts) -&gt; kumi::record&lt; kumi::field&lt; decltype(Fields), Ts &amp;&amp; &gt;... &gt; requires(sizeof...(Fields)==sizeof...(Ts))</arglist>
+      <anchorfile>group__kumi__record__related_gacfd38acd9ecb27bff2bb2ad0f885e326.html</anchorfile>
+      <anchor>gacfd38acd9ecb27bff2bb2ad0f885e326</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr make_record_t</type>
       <name>make_record</name>
-      <anchorfile>group__kumi__record__related_ga96da0243ca4cf9e490f62c327f51fe4e.html</anchorfile>
-      <anchor>ga96da0243ca4cf9e490f62c327f51fe4e</anchor>
-      <arglist>(Ts &amp;&amp;... ts) -&gt; kumi::record&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt; requires(kumi::concepts::uniquely_named&lt; Ts... &gt; &amp;&amp;kumi::concepts::fully_named&lt; Ts... &gt;)</arglist>
+      <anchorfile>group__kumi__record__related_ga931b45076a3ac621c248efa48881b59a.html</anchorfile>
+      <anchor>ga931b45076a3ac621c248efa48881b59a</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>to_ref</name>
-      <anchorfile>group__kumi__record__related_ga83a97fc306d9ecfacde28584b219b44a.html</anchorfile>
-      <anchor>ga83a97fc306d9ecfacde28584b219b44a</anchor>
-      <arglist>(R &amp;&amp;r)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr from_record_t&lt; Type &gt;</type>
       <name>from_record</name>
-      <anchorfile>group__kumi__record__related_ga772ac1518ac3bbe1627db9c00f56abdd.html</anchorfile>
-      <anchor>ga772ac1518ac3bbe1627db9c00f56abdd</anchor>
-      <arglist>(record&lt; Ts... &gt; const &amp;r)</arglist>
+      <anchorfile>group__kumi__record__related_gae4456196aadb75484ad0b061c83b3f95.html</anchorfile>
+      <anchor>gae4456196aadb75484ad0b061c83b3f95</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr to_record_t</type>
       <name>to_record</name>
-      <anchorfile>group__kumi__record__related_ga324cc6775ad5b15767fc2eaae02abd73.html</anchorfile>
-      <anchor>ga324cc6775ad5b15767fc2eaae02abd73</anchor>
-      <arglist>(Type &amp;&amp;r)</arglist>
+      <anchorfile>group__kumi__record__related_ga163224b58e43457f4cbc65f6817d738f.html</anchorfile>
+      <anchor>ga163224b58e43457f4cbc65f6817d738f</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr tie_t</type>
       <name>tie</name>
-      <anchorfile>group__kumi__tuple__related_ga834fa03c64e67b8bdebccec00e9d195b.html</anchorfile>
-      <anchor>ga834fa03c64e67b8bdebccec00e9d195b</anchor>
-      <arglist>(Ts &amp;... ts) -&gt; kumi::tuple&lt; Ts &amp;... &gt;</arglist>
+      <anchorfile>group__kumi__tuple__related_ga79c564af50f6eb1c4aa6dac7f08337cf.html</anchorfile>
+      <anchor>ga79c564af50f6eb1c4aa6dac7f08337cf</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr forward_as_tuple_t</type>
       <name>forward_as_tuple</name>
-      <anchorfile>group__kumi__tuple__related_gac167a1000c9c61798b7d8c684f3c804b.html</anchorfile>
-      <anchor>gac167a1000c9c61798b7d8c684f3c804b</anchor>
-      <arglist>(Ts &amp;&amp;... ts) -&gt; kumi::tuple&lt; Ts &amp;&amp;... &gt;</arglist>
+      <anchorfile>group__kumi__tuple__related_ga934bd052835c7cc48a870fbc7c86e6ac.html</anchorfile>
+      <anchor>ga934bd052835c7cc48a870fbc7c86e6ac</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr make_tuple_t</type>
       <name>make_tuple</name>
-      <anchorfile>group__kumi__tuple__related_ga8570ddb839f6b158633537fd7113e795.html</anchorfile>
-      <anchor>ga8570ddb839f6b158633537fd7113e795</anchor>
-      <arglist>(Ts &amp;&amp;... ts) -&gt; kumi::tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
+      <anchorfile>group__kumi__tuple__related_ga2a3a7b464afb602d8a722178ac517da8.html</anchorfile>
+      <anchor>ga2a3a7b464afb602d8a722178ac517da8</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr to_ref_t</type>
       <name>to_ref</name>
-      <anchorfile>group__kumi__tuple__related_ga727f8ab64140ca60bcb1c8aded343c0b.html</anchorfile>
-      <anchor>ga727f8ab64140ca60bcb1c8aded343c0b</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+      <anchorfile>group__kumi__tuple__related_ga271223ada5937ca2e7ea77825b89b144.html</anchorfile>
+      <anchor>ga271223ada5937ca2e7ea77825b89b144</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr members_of_t</type>
+      <name>members_of</name>
+      <anchorfile>group__kumi__utility_ga50426580ce9abca59b6a14b398b312ed.html</anchorfile>
+      <anchor>ga50426580ce9abca59b6a14b398b312ed</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr values_of_t</type>
+      <name>values_of</name>
+      <anchorfile>group__kumi__utility_gaa217e07b135cc3295e25689ac4ac2933.html</anchorfile>
+      <anchor>gaa217e07b135cc3295e25689ac4ac2933</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr from_tuple_t&lt; Type &gt;</type>
+      <name>from_tuple</name>
+      <anchorfile>group__kumi__tuple__related_gaebb54917d0e966b2f64aaa91dedcd5dc.html</anchorfile>
+      <anchor>gaebb54917d0e966b2f64aaa91dedcd5dc</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr to_tuple_t</type>
+      <name>to_tuple</name>
+      <anchorfile>group__kumi__tuple__related_ga2642659e4d1dfee5339563fe65927385.html</anchorfile>
+      <anchor>ga2642659e4d1dfee5339563fe65927385</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr tie_as_record_t&lt; Fields... &gt;</type>
+      <name>tie_as_record</name>
+      <anchorfile>group__kumi__record__related_ga45b4db8f009ab12f62d938338d29d536.html</anchorfile>
+      <anchor>ga45b4db8f009ab12f62d938338d29d536</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr forward_as_record_t&lt; Fields... &gt;</type>
+      <name>forward_as_record</name>
+      <anchorfile>group__kumi__record__related_gacfd38acd9ecb27bff2bb2ad0f885e326.html</anchorfile>
+      <anchor>gacfd38acd9ecb27bff2bb2ad0f885e326</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr make_record_t</type>
+      <name>make_record</name>
+      <anchorfile>group__kumi__record__related_ga931b45076a3ac621c248efa48881b59a.html</anchorfile>
+      <anchor>ga931b45076a3ac621c248efa48881b59a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr from_record_t&lt; Type &gt;</type>
+      <name>from_record</name>
+      <anchorfile>group__kumi__record__related_gae4456196aadb75484ad0b061c83b3f95.html</anchorfile>
+      <anchor>gae4456196aadb75484ad0b061c83b3f95</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr to_record_t</type>
+      <name>to_record</name>
+      <anchorfile>group__kumi__record__related_ga163224b58e43457f4cbc65f6817d738f.html</anchorfile>
+      <anchor>ga163224b58e43457f4cbc65f6817d738f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr tie_t</type>
+      <name>tie</name>
+      <anchorfile>group__kumi__tuple__related_ga79c564af50f6eb1c4aa6dac7f08337cf.html</anchorfile>
+      <anchor>ga79c564af50f6eb1c4aa6dac7f08337cf</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr forward_as_tuple_t</type>
+      <name>forward_as_tuple</name>
+      <anchorfile>group__kumi__tuple__related_ga934bd052835c7cc48a870fbc7c86e6ac.html</anchorfile>
+      <anchor>ga934bd052835c7cc48a870fbc7c86e6ac</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr make_tuple_t</type>
+      <name>make_tuple</name>
+      <anchorfile>group__kumi__tuple__related_ga2a3a7b464afb602d8a722178ac517da8.html</anchorfile>
+      <anchor>ga2a3a7b464afb602d8a722178ac517da8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr to_ref_t</type>
+      <name>to_ref</name>
+      <anchorfile>group__kumi__tuple__related_ga271223ada5937ca2e7ea77825b89b144.html</anchorfile>
+      <anchor>ga271223ada5937ca2e7ea77825b89b144</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr members_of_t</type>
+      <name>members_of</name>
+      <anchorfile>group__kumi__utility_ga50426580ce9abca59b6a14b398b312ed.html</anchorfile>
+      <anchor>ga50426580ce9abca59b6a14b398b312ed</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr values_of_t</type>
+      <name>values_of</name>
+      <anchorfile>group__kumi__utility_gaa217e07b135cc3295e25689ac4ac2933.html</anchorfile>
+      <anchor>gaa217e07b135cc3295e25689ac4ac2933</anchor>
+      <arglist></arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -2900,20 +2879,6 @@
       <anchorfile>structkumi_1_1tuple_a612d97f050a7b0eb9999f40c045779bf.html</anchorfile>
       <anchor>a612d97f050a7b0eb9999f40c045779bf</anchor>
       <arglist>(Ts &amp;&amp;...) -&gt; tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>members_of</name>
-      <anchorfile>structkumi_1_1tuple_ac67c6dbee8bf12133da3379826cde848.html</anchorfile>
-      <anchor>ac67c6dbee8bf12133da3379826cde848</anchor>
-      <arglist>(as&lt; T &gt;) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>values_of</name>
-      <anchorfile>structkumi_1_1tuple_ade5f616b3115a74bd4930f70f96ca199.html</anchorfile>
-      <anchor>ade5f616b3115a74bd4930f70f96ca199</anchor>
-      <arglist>(T &amp;&amp;t) noexcept</arglist>
     </member>
     <member kind="function">
       <type>decltype(auto) constexpr</type>
@@ -3415,6 +3380,20 @@
       <name>kumi::only</name>
       <anchorfile>group__kumi__utility_ga26690952147eaa66ecf74378070ee53b.html</anchorfile>
       <anchor>ga26690952147eaa66ecf74378070ee53b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr members_of_t</type>
+      <name>kumi::members_of</name>
+      <anchorfile>group__kumi__utility_ga50426580ce9abca59b6a14b398b312ed.html</anchorfile>
+      <anchor>ga50426580ce9abca59b6a14b398b312ed</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr values_of_t</type>
+      <name>kumi::values_of</name>
+      <anchorfile>group__kumi__utility_gaa217e07b135cc3295e25689ac4ac2933.html</anchorfile>
+      <anchor>gaa217e07b135cc3295e25689ac4ac2933</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -4101,6 +4080,13 @@
       <anchor>gaeaba737291ba1085d77272eae38a016e</anchor>
       <arglist></arglist>
     </member>
+    <member kind="variable">
+      <type>constexpr to_ref_t</type>
+      <name>kumi::to_ref</name>
+      <anchorfile>group__kumi__tuple__related_ga271223ada5937ca2e7ea77825b89b144.html</anchorfile>
+      <anchor>ga271223ada5937ca2e7ea77825b89b144</anchor>
+      <arglist></arglist>
+    </member>
   </compound>
   <compound kind="group">
     <name>kumi_tuple_related</name>
@@ -4108,47 +4094,47 @@
     <filename>group__kumi__tuple__related.html</filename>
     <class kind="struct">kumi::as_tuple</class>
     <class kind="class">kumi::tuple</class>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr tie_t</type>
       <name>kumi::tie</name>
-      <anchorfile>group__kumi__tuple__related_ga834fa03c64e67b8bdebccec00e9d195b.html</anchorfile>
-      <anchor>ga834fa03c64e67b8bdebccec00e9d195b</anchor>
-      <arglist>(Ts &amp;... ts) -&gt; kumi::tuple&lt; Ts &amp;... &gt;</arglist>
+      <anchorfile>group__kumi__tuple__related_ga79c564af50f6eb1c4aa6dac7f08337cf.html</anchorfile>
+      <anchor>ga79c564af50f6eb1c4aa6dac7f08337cf</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr forward_as_tuple_t</type>
       <name>kumi::forward_as_tuple</name>
-      <anchorfile>group__kumi__tuple__related_gac167a1000c9c61798b7d8c684f3c804b.html</anchorfile>
-      <anchor>gac167a1000c9c61798b7d8c684f3c804b</anchor>
-      <arglist>(Ts &amp;&amp;... ts) -&gt; kumi::tuple&lt; Ts &amp;&amp;... &gt;</arglist>
+      <anchorfile>group__kumi__tuple__related_ga934bd052835c7cc48a870fbc7c86e6ac.html</anchorfile>
+      <anchor>ga934bd052835c7cc48a870fbc7c86e6ac</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr make_tuple_t</type>
       <name>kumi::make_tuple</name>
-      <anchorfile>group__kumi__tuple__related_ga8570ddb839f6b158633537fd7113e795.html</anchorfile>
-      <anchor>ga8570ddb839f6b158633537fd7113e795</anchor>
-      <arglist>(Ts &amp;&amp;... ts) -&gt; kumi::tuple&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</arglist>
+      <anchorfile>group__kumi__tuple__related_ga2a3a7b464afb602d8a722178ac517da8.html</anchorfile>
+      <anchor>ga2a3a7b464afb602d8a722178ac517da8</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr to_ref_t</type>
       <name>kumi::to_ref</name>
-      <anchorfile>group__kumi__tuple__related_ga727f8ab64140ca60bcb1c8aded343c0b.html</anchorfile>
-      <anchor>ga727f8ab64140ca60bcb1c8aded343c0b</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+      <anchorfile>group__kumi__tuple__related_ga271223ada5937ca2e7ea77825b89b144.html</anchorfile>
+      <anchor>ga271223ada5937ca2e7ea77825b89b144</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr from_tuple_t&lt; Type &gt;</type>
       <name>kumi::from_tuple</name>
-      <anchorfile>group__kumi__tuple__related_ga81cca523672d8799bbe35fa4f07dd61f.html</anchorfile>
-      <anchor>ga81cca523672d8799bbe35fa4f07dd61f</anchor>
-      <arglist>(tuple&lt; Ts... &gt; const &amp;t)</arglist>
+      <anchorfile>group__kumi__tuple__related_gaebb54917d0e966b2f64aaa91dedcd5dc.html</anchorfile>
+      <anchor>gaebb54917d0e966b2f64aaa91dedcd5dc</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr to_tuple_t</type>
       <name>kumi::to_tuple</name>
-      <anchorfile>group__kumi__tuple__related_ga0bacdab2d5c18c44431ba8f74b86a5f0.html</anchorfile>
-      <anchor>ga0bacdab2d5c18c44431ba8f74b86a5f0</anchor>
-      <arglist>(T &amp;&amp;t)</arglist>
+      <anchorfile>group__kumi__tuple__related_ga2642659e4d1dfee5339563fe65927385.html</anchorfile>
+      <anchor>ga2642659e4d1dfee5339563fe65927385</anchor>
+      <arglist></arglist>
     </member>
   </compound>
   <compound kind="group">
@@ -4181,47 +4167,40 @@
     <title>Record Types and associated Functions</title>
     <filename>group__kumi__record__related.html</filename>
     <class kind="class">kumi::record</class>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::tie</name>
-      <anchorfile>group__kumi__record__related_ga9d6e39a733f56863dfa21cb1f07fdc3a.html</anchorfile>
-      <anchor>ga9d6e39a733f56863dfa21cb1f07fdc3a</anchor>
-      <arglist>(Ts &amp;... ts) -&gt; kumi::record&lt; kumi::field&lt; decltype(Fields), Ts &amp; &gt;... &gt; requires(sizeof...(Fields)==sizeof...(Ts))</arglist>
+    <member kind="variable">
+      <type>constexpr tie_as_record_t&lt; Fields... &gt;</type>
+      <name>kumi::tie_as_record</name>
+      <anchorfile>group__kumi__record__related_ga45b4db8f009ab12f62d938338d29d536.html</anchorfile>
+      <anchor>ga45b4db8f009ab12f62d938338d29d536</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr forward_as_record_t&lt; Fields... &gt;</type>
       <name>kumi::forward_as_record</name>
-      <anchorfile>group__kumi__record__related_gaa0d291bc5523e9e07e5c38559e0dcb3d.html</anchorfile>
-      <anchor>gaa0d291bc5523e9e07e5c38559e0dcb3d</anchor>
-      <arglist>(Ts &amp;&amp;... ts) -&gt; kumi::record&lt; kumi::field&lt; decltype(Fields), Ts &amp;&amp; &gt;... &gt; requires(sizeof...(Fields)==sizeof...(Ts))</arglist>
+      <anchorfile>group__kumi__record__related_gacfd38acd9ecb27bff2bb2ad0f885e326.html</anchorfile>
+      <anchor>gacfd38acd9ecb27bff2bb2ad0f885e326</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr make_record_t</type>
       <name>kumi::make_record</name>
-      <anchorfile>group__kumi__record__related_ga96da0243ca4cf9e490f62c327f51fe4e.html</anchorfile>
-      <anchor>ga96da0243ca4cf9e490f62c327f51fe4e</anchor>
-      <arglist>(Ts &amp;&amp;... ts) -&gt; kumi::record&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt; requires(kumi::concepts::uniquely_named&lt; Ts... &gt; &amp;&amp;kumi::concepts::fully_named&lt; Ts... &gt;)</arglist>
+      <anchorfile>group__kumi__record__related_ga931b45076a3ac621c248efa48881b59a.html</anchorfile>
+      <anchor>ga931b45076a3ac621c248efa48881b59a</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
-      <name>kumi::to_ref</name>
-      <anchorfile>group__kumi__record__related_ga83a97fc306d9ecfacde28584b219b44a.html</anchorfile>
-      <anchor>ga83a97fc306d9ecfacde28584b219b44a</anchor>
-      <arglist>(R &amp;&amp;r)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr from_record_t&lt; Type &gt;</type>
       <name>kumi::from_record</name>
-      <anchorfile>group__kumi__record__related_ga772ac1518ac3bbe1627db9c00f56abdd.html</anchorfile>
-      <anchor>ga772ac1518ac3bbe1627db9c00f56abdd</anchor>
-      <arglist>(record&lt; Ts... &gt; const &amp;r)</arglist>
+      <anchorfile>group__kumi__record__related_gae4456196aadb75484ad0b061c83b3f95.html</anchorfile>
+      <anchor>gae4456196aadb75484ad0b061c83b3f95</anchor>
+      <arglist></arglist>
     </member>
-    <member kind="function">
-      <type>constexpr auto</type>
+    <member kind="variable">
+      <type>constexpr to_record_t</type>
       <name>kumi::to_record</name>
-      <anchorfile>group__kumi__record__related_ga324cc6775ad5b15767fc2eaae02abd73.html</anchorfile>
-      <anchor>ga324cc6775ad5b15767fc2eaae02abd73</anchor>
-      <arglist>(Type &amp;&amp;r)</arglist>
+      <anchorfile>group__kumi__record__related_ga163224b58e43457f4cbc65f6817d738f.html</anchorfile>
+      <anchor>ga163224b58e43457f4cbc65f6817d738f</anchor>
+      <arglist></arglist>
     </member>
   </compound>
   <compound kind="group">

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['identifier_0',['Identifier',['../kumi_nomenclature.html#autotoc_md149',1,'']]],
+  ['identifier_0',['Identifier',['../kumi_nomenclature.html#autotoc_md135',1,'']]],
   ['identifier_1',['identifier',['../structkumi_1_1identifier.html',1,'kumi::identifier&lt; ID, Checker &gt;'],['../conceptkumi_1_1concepts_1_1identifier.html',1,'kumi::concepts'],['../structkumi_1_1identifier.html#a1cbb7d1e8b6adafe05c6b3f43c94db5d',1,'kumi::identifier::identifier() noexcept=default'],['../structkumi_1_1identifier_a3b9a31cc021cee475c3dd820c966a104.html#a3b9a31cc021cee475c3dd820c966a104',1,'kumi::identifier::identifier(ID const &amp;id, Checker const &amp;check) noexcept']]],
   ['identifier_5fof_2',['identifier_of',['../group__kumi__utility_gab3919ec6f8098dd1fdafe9c3a79ef0dc.html#gab3919ec6f8098dd1fdafe9c3a79ef0dc',1,'kumi']]],
   ['identifiers_3',['identifiers',['../structkumi_1_1record.html#ac730d46c3db986909e0c910b74648b4a',1,'kumi::record::identifiers()'],['../structkumi_1_1tuple.html#a20bf7b884e66f42a41076a4b1535054b',1,'kumi::tuple::identifiers()'],['../group__kumi__utility_ga63a205c6c2502e733987043857abea05.html#ga63a205c6c2502e733987043857abea05',1,'kumi::identifiers()']]],
@@ -13,9 +13,9 @@ var searchData=
   ['index_10',['index',['../conceptkumi_1_1concepts_1_1index.html',1,'kumi::concepts'],['../group__kumi__utility.html#gaa1c76fca002e966a0a40e311ad68d841',1,'kumi::index']]],
   ['index_5ft_11',['index_t',['../structkumi_1_1index__t.html',1,'kumi']]],
   ['indexes_12',['indexes',['../group__kumi__utility_ga6882a4ada4935fa0fd4ef32ce3716ffb.html#ga6882a4ada4935fa0fd4ef32ce3716ffb',1,'kumi']]],
-  ['infra_13',['infra',['../kumi_changelog.html#autotoc_md100',1,'DOC and CI infra'],['../kumi_changelog.html#autotoc_md104',1,'DOC and CI infra']]],
-  ['infrastructure_14',['Infrastructure',['../kumi_changelog.html#autotoc_md122',1,'']]],
-  ['infrastructure_20changes_15',['Infrastructure Changes',['../kumi_changelog.html#autotoc_md112',1,'API and Infrastructure Changes'],['../kumi_changelog.html#autotoc_md107',1,'Infrastructure Changes']]],
+  ['infra_13',['infra',['../kumi_changelog.html#autotoc_md86',1,'DOC and CI infra'],['../kumi_changelog.html#autotoc_md90',1,'DOC and CI infra']]],
+  ['infrastructure_14',['Infrastructure',['../kumi_changelog.html#autotoc_md108',1,'']]],
+  ['infrastructure_20changes_15',['Infrastructure Changes',['../kumi_changelog.html#autotoc_md98',1,'API and Infrastructure Changes'],['../kumi_changelog.html#autotoc_md93',1,'Infrastructure Changes']]],
   ['inner_5fproduct_16',['inner_product',['../group__kumi__reductions_ga712c681a51bdbc86d41b160deddd2e1d.html#ga712c681a51bdbc86d41b160deddd2e1d',1,'kumi']]],
   ['install_20from_20the_20source_17',['Install from the source',['../kumi_setup.html#setup-source',1,'']]],
   ['internal_20implementation_20helpers_18',['Internal Implementation Helpers',['../group__kumi__details.html',1,'']]],

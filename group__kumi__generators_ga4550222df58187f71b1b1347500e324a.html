@@ -159,7 +159,7 @@ $(function(){initNavTree('group__kumi__generators_ga4550222df58187f71b1b1347500e
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/cat.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type... Ts&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_variable" href="#ga4550222df58187f71b1b1347500e324a">cat</a>(Ts... &amp;&amp; t);</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_variable" href="#ga4550222df58187f71b1b1347500e324a">cat</a>(Ts&amp;&amp;... ts);</div>
 <div class="ttc" id="agroup__kumi__generators_ga4550222df58187f71b1b1347500e324a_html_ga4550222df58187f71b1b1347500e324a"><div class="ttname"><a href="#ga4550222df58187f71b1b1347500e324a">kumi::cat</a></div><div class="ttdeci">constexpr cat_t cat</div><div class="ttdoc">Callable object concatenating multiple product types into a single one.</div><div class="ttdef"><b>Definition</b> cat.hpp:78</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
@@ -195,7 +195,7 @@ $(function(){initNavTree('group__kumi__generators_ga4550222df58187f71b1b1347500e
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; b &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; c &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; abc &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:33</div></div>
+<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:35</div></div>
 </div><!-- fragment --></li>
 <li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>

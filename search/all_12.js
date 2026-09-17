@@ -1,8 +1,8 @@
 var searchData=
 [
   ['make_5findexes_0',['make_indexes',['../group__kumi__utility_gadba148c334bcf52088dc64992c270fdd.html#gadba148c334bcf52088dc64992c270fdd',1,'kumi']]],
-  ['make_5frecord_1',['make_record',['../group__kumi__record__related_ga96da0243ca4cf9e490f62c327f51fe4e.html#ga96da0243ca4cf9e490f62c327f51fe4e',1,'kumi']]],
-  ['make_5ftuple_2',['make_tuple',['../group__kumi__tuple__related_ga8570ddb839f6b158633537fd7113e795.html#ga8570ddb839f6b158633537fd7113e795',1,'kumi']]],
+  ['make_5frecord_1',['make_record',['../group__kumi__record__related_ga931b45076a3ac621c248efa48881b59a.html#ga931b45076a3ac621c248efa48881b59a',1,'kumi']]],
+  ['make_5ftuple_2',['make_tuple',['../group__kumi__tuple__related_ga2a3a7b464afb602d8a722178ac517da8.html#ga2a3a7b464afb602d8a722178ac517da8',1,'kumi']]],
   ['map_3',['map',['../group__kumi__transforms_gaeaba737291ba1085d77272eae38a016e.html#gaeaba737291ba1085d77272eae38a016e',1,'kumi']]],
   ['map_5ffield_4',['map_field',['../group__kumi__record__transforms_gafe68ca583e3e822b20f60ff35e5aa9d3.html#gafe68ca583e3e822b20f60ff35e5aa9d3',1,'kumi']]],
   ['map_5findex_5',['map_index',['../group__kumi__tuple__transforms_ga64a8c36072828fb7b724ba0ab8fc59bc.html#ga64a8c36072828fb7b724ba0ab8fc59bc',1,'kumi']]],
@@ -10,10 +10,10 @@ var searchData=
   ['map_5ftraits_7',['map_traits',['../structkumi_1_1map__traits.html',1,'kumi']]],
   ['max_8',['max',['../group__kumi__reductions_gab76e53ad197280669806cae2c0cc130c.html#gab76e53ad197280669806cae2c0cc130c',1,'kumi']]],
   ['max_5fflat_9',['max_flat',['../group__kumi__reductions_ga718f20d4004a2d3a409bfcfda289ba34.html#ga718f20d4004a2d3a409bfcfda289ba34',1,'kumi']]],
-  ['member_10',['Member',['../kumi_nomenclature.html#autotoc_md147',1,'']]],
+  ['member_10',['Member',['../kumi_nomenclature.html#autotoc_md133',1,'']]],
   ['member_5fcast_11',['member_cast',['../group__kumi__generators_gad2e4009d5d28df5090885b030f08f1f8.html#gad2e4009d5d28df5090885b030f08f1f8',1,'kumi']]],
   ['member_5ft_12',['member_t',['../group__kumi__traits_gaca6d42cbec766fb8d43a4060077e2624.html#gaca6d42cbec766fb8d43a4060077e2624',1,'kumi']]],
-  ['members_5fof_13',['members_of',['../structkumi_1_1tuple_ac67c6dbee8bf12133da3379826cde848.html#ac67c6dbee8bf12133da3379826cde848',1,'kumi::tuple::members_of()'],['../structkumi_1_1tuple_ac67c6dbee8bf12133da3379826cde848.html#ac67c6dbee8bf12133da3379826cde848',1,'kumi::members_of(as&lt; T &gt;) noexcept']]],
+  ['members_5fof_13',['members_of',['../group__kumi__utility_ga50426580ce9abca59b6a14b398b312ed.html#ga50426580ce9abca59b6a14b398b312ed',1,'kumi']]],
   ['min_14',['min',['../group__kumi__reductions_gaafd0c178628f6f756bf0d73a34e75b2f.html#gaafd0c178628f6f756bf0d73a34e75b2f',1,'kumi']]],
   ['min_5fflat_15',['min_flat',['../group__kumi__reductions_ga31c5b32bd084cb6f18d19706d0f809bb.html#ga31c5b32bd084cb6f18d19706d0f809bb',1,'kumi']]],
   ['monoid_16',['monoid',['../conceptkumi_1_1concepts_1_1monoid.html',1,'kumi::concepts']]],

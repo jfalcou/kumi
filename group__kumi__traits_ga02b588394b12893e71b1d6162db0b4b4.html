@@ -161,20 +161,20 @@ template&lt;typename T&gt; </div>
   </table>
   </dd>
 </dl>
-<p>To be treated like a container, a user defined type must expose general container utilities. Those beeing :</p><ul>
+<p>To be treated like a container, a user defined type must expose general container utilities. Those being:</p><ul>
 <li>.size();</li>
 <li>.begin();</li>
 <li>.end();</li>
 </ul>
 <dl class="section note"><dt>Note</dt><dd>Standard C arrays are considered container types.</dd></dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md77"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md63"></a>
 Helper type-trait</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">struct </span>is_container;</div>
 <div class="line">}</div>
 <div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
-</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md78"></a>
+</div><!-- fragment --><h2 class="doxsection"><a class="anchor" id="autotoc_md64"></a>
 Example:</h2>
 <div class="fragment"><div class="line"></div>
 <div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
@@ -199,12 +199,12 @@ Example:</h2>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">    </div>
 <div class="line">  <span class="keyword">auto</span> my_span = std::span(data);</div>
-<div class="line">  <a class="code hl_variable" href="group__kumi__transforms_ga58c4bb5e62083b4b37396d39c6446164.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a>([](<span class="keyword">auto</span> elt){ std::cout &lt;&lt; elt &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>; }, <a class="code hl_function" href="group__kumi__tuple__related_ga0bacdab2d5c18c44431ba8f74b86a5f0.html#ga0bacdab2d5c18c44431ba8f74b86a5f0">kumi::to_tuple</a>(my_span));</div>
+<div class="line">  <a class="code hl_variable" href="group__kumi__transforms_ga58c4bb5e62083b4b37396d39c6446164.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a>([](<span class="keyword">auto</span> elt){ std::cout &lt;&lt; elt &lt;&lt; <span class="stringliteral">&quot;, &quot;</span>; }, <a class="code hl_variable" href="group__kumi__tuple__related_ga2642659e4d1dfee5339563fe65927385.html#ga2642659e4d1dfee5339563fe65927385">kumi::to_tuple</a>(my_span));</div>
 <div class="line">}</div>
 <div class="ttc" id="aconceptkumi_1_1concepts_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:77</div></div>
 <div class="ttc" id="aconceptkumi_1_1concepts_1_1static__container_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1static__container.html">kumi::concepts::static_container</a></div><div class="ttdoc">Concept specifying a type follows the Container Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:124</div></div>
 <div class="ttc" id="agroup__kumi__transforms_ga58c4bb5e62083b4b37396d39c6446164_html_ga58c4bb5e62083b4b37396d39c6446164"><div class="ttname"><a href="group__kumi__transforms_ga58c4bb5e62083b4b37396d39c6446164.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a></div><div class="ttdeci">constexpr for_each_t for_each</div><div class="ttdoc">Callable object applying the Callable object f on each element of a product type.</div><div class="ttdef"><b>Definition</b> for_each.hpp:135</div></div>
-<div class="ttc" id="agroup__kumi__tuple__related_ga0bacdab2d5c18c44431ba8f74b86a5f0_html_ga0bacdab2d5c18c44431ba8f74b86a5f0"><div class="ttname"><a href="group__kumi__tuple__related_ga0bacdab2d5c18c44431ba8f74b86a5f0.html#ga0bacdab2d5c18c44431ba8f74b86a5f0">kumi::to_tuple</a></div><div class="ttdeci">constexpr auto to_tuple(T &amp;&amp;t)</div><div class="ttdoc">Converts a kumi::product_type to an instance kumi::tuple.</div><div class="ttdef"><b>Definition</b> tuple.hpp:641</div></div>
+<div class="ttc" id="agroup__kumi__tuple__related_ga2642659e4d1dfee5339563fe65927385_html_ga2642659e4d1dfee5339563fe65927385"><div class="ttname"><a href="group__kumi__tuple__related_ga2642659e4d1dfee5339563fe65927385.html#ga2642659e4d1dfee5339563fe65927385">kumi::to_tuple</a></div><div class="ttdeci">constexpr to_tuple_t to_tuple</div><div class="ttdoc">Converts a kumi::concepts::product_type to an instance of kumi::tuple.</div><div class="ttdef"><b>Definition</b> tuple.hpp:836</div></div>
 </div><!-- fragment --> 
 </div>
 </div>
