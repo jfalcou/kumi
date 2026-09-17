@@ -18,7 +18,7 @@ include(${CMAKE_CURRENT_LIST_DIR}/CPM.cmake)
 CPMAddPackage(NAME COPACABANA GITHUB_REPOSITORY jfalcou/copacabana GIT_TAG main)
 
 CPMDeclarePackage ( TTS   NAME TTS   GITHUB_REPOSITORY jfalcou/tts
-                    GIT_TAG main
+                    GIT_TAG 3654a1347e622915201862174302484bfd3addb9 # feat/eve-requirements, TTS v4
                     SYSTEM YES
                     OPTIONS "TTS_BUILD_TEST OFF"
                             "TTS_BUILD_DOCUMENTATION OFF"
