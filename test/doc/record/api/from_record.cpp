@@ -50,7 +50,7 @@ int main()
   using namespace kumi::literals;
 
   auto a = kumi::make_record("f"_id=2.3475f, "name"_id="John", "i"_id=1337);
-  auto b = from_record<my_struct>( a );
+  auto b = kumi::from_record<my_struct>( a );
 
   std::cout << a << "\n";
   std::cout << b.i << ' ' << b.f << ' ' << b.name << "\n";

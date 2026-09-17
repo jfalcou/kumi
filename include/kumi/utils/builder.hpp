@@ -29,7 +29,7 @@ namespace kumi
     template<typename T>
     concept is_cplx = std::is_same_v<std::remove_cvref_t<T>,cplx>;
 
-    // Builder protocole
+    // Builder protocol
     template<is_cplx T>
     struct builder<T>
     {
@@ -39,7 +39,7 @@ namespace kumi
 
       static constexpr auto make(float r, float i)
       {
-        returni cplx{r,i};
+        return cplx{r,i};
       }
 
       static constexpr auto build(float r, float i) { return cplx{r,i}; }

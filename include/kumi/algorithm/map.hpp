@@ -230,7 +230,7 @@ namespace kumi
 
     @code
       template<typename Function, product_type T, product_type... Ts>
-      constexpr auto map_index(Function && f, T && t, Ts &&... ts);
+      constexpr auto map_field(Function && f, T && t, Ts &&... ts);
     @endcode
 
     @subgroupheader{Parameters}

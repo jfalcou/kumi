@@ -94,7 +94,7 @@ namespace kumi
 
     @var zip
     @brief Callable object constructing a tuple where the ith element is the product type of all ith elements of
-  `t0`,`ts`...
+  `t`,`ts`...
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
@@ -128,7 +128,7 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      - The tuple of all combination of elements from `t0`, `ts`...
+      - The tuple of all combinations of elements from `t`, `ts`...
 
     @groupheader{Helper type}
 
@@ -157,7 +157,7 @@ namespace kumi
 
     @var zip_min
     @brief Callable object constructing a tuple where the ith element is the product type of all ith elements of
-  `t0`,`ts`...
+  `t`,`ts`...
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
@@ -193,7 +193,7 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      - The tuple of all combination of elements from `t0`, `ts`...
+      - The tuple of all combinations of elements from `t`, `ts`...
 
     @groupheader{Helper type}
 
@@ -222,7 +222,7 @@ namespace kumi
 
     @var zip_max
     @brief Callable object constructing a tuple where the ith element is the product type of all ith elements of
-  `t0`,`ts`...
+  `t`,`ts`...
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
@@ -258,7 +258,7 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      - The tuple of all combination of elements from `t0`, `ts`...
+      - The tuple of all combinations of elements from `t`, `ts`...
 
     @groupheader{Helper type}
 

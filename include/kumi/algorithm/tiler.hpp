@@ -50,7 +50,7 @@ namespace kumi
     of declaration.
 
     @note Tiles is the most general form of tiling each inner product_type is a tile over `t`
-          starting at index `tile_size * tile_number + 1`. The last tile will be smaller if the
+          starting at index `tile_size * tile_number`. The last tile will be smaller if the
           size of the product type is not a multiple of the tile size.
 
     @qualifier nodiscard
@@ -59,7 +59,7 @@ namespace kumi
 
     @groupheader{Header file}
     @code
-    #include <kumi/algorithm/apply.hpp>
+    #include <kumi/algorithm/tiler.hpp>
     @endcode
 
     @groupheader{Call Signature}
@@ -72,7 +72,7 @@ namespace kumi
     @subgroupheader{Template Parameters}
 
       - `N`: Size of the tile to generate
-      - `O`: Offset from the begening of the previous tile
+      - `O`: Offset from the beginning of the previous tile
 
     @subgroupheader{Parameters}
 
@@ -123,7 +123,7 @@ namespace kumi
 
     @groupheader{Header file}
     @code
-    #include <kumi/algorithm/apply.hpp>
+    #include <kumi/algorithm/tiler.hpp>
     @endcode
 
     @groupheader{Call Signature}
@@ -178,7 +178,7 @@ namespace kumi
     of declaration.
 
     @note Chunks behaves like paving tiles: each inner product_type is a tile over `t`
-          starting at index `chunk_size * tile_number + 1`. The last chunk will be smaller if the
+          starting at index `chunk_size * chunk_number`. The last chunk will be smaller if the
           size of the product_type is not a multiple of the chunk size.
 
     @qualifier nodiscard
@@ -187,7 +187,7 @@ namespace kumi
 
     @groupheader{Header file}
     @code
-    #include <kumi/algorithm/apply.hpp>
+    #include <kumi/algorithm/tiler.hpp>
     @endcode
 
     @groupheader{Call Signature}

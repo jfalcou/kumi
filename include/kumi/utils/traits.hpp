@@ -44,7 +44,7 @@ namespace kumi
 
     @tparam T Type to inspect
 
-    To be treated like a record, an user defined type must support structured bindings as well as
+    To be treated like a record, a user defined type must support structured bindings as well as
     the kumi::record_type semantic.
 
     This can be done in two ways:
@@ -152,7 +152,7 @@ namespace kumi
 
     @tparam T Type to inspect
 
-    To be treated like a container, a user defined type must expose general container utilities. Those beeing :
+    To be treated like a container, a user defined type must expose general container utilities. Those being:
       - .size();
       - .begin();
       - .end();
@@ -392,7 +392,7 @@ namespace kumi
     namespace kumi
     {
       template<std::size_t I, typename T>
-      using stored_element_t = typename stored_element_t<I,T>::type;
+      using stored_element_t = typename stored_element<I,T>::type;
     }
     @endcode
   **/
@@ -452,7 +452,7 @@ namespace kumi
     in the following way.
 
     - If all input types are the same product_type, provide a type alias corresponding to it.
-    - If all input types are instance of the same template itself beeing a product_type, expose the template.
+    - If all input types are instances of the same template itself being a product_type, expose the template.
     - If all types are kumi::concepts::product_type, use kumi::tuple as the alias.
     - If all types are kumi::concepts::record_type, use kumi::record as the alias.
 
@@ -543,7 +543,7 @@ namespace kumi
   //====================================================================================================================
   /**
     @ingroup kumi_traits
-    @brief   Checks if a two product types are equivalent.
+    @brief   Checks if two product types are equivalent.
 
     Two product types are considered equivalent in the following case : if the two product types are
     concepts::record_type they need to both have the same fields, potentially in a different order. If one of the two or
@@ -600,10 +600,10 @@ namespace kumi
   //====================================================================================================================
   /**
     @ingroup kumi_traits
-    @brief   Checks if a two product types are comparable for equality.
+    @brief   Checks if two product types are comparable for equality.
 
-    Two product types are comparable for equality uf each field in T have a corresponding field in U with each of their
-    underlying types being comparable (the == operator can be used betewen them).
+    Two product types are comparable for equality if each field in T has a corresponding field in U with each of their
+    underlying types being comparable (the == operator can be used between them).
 
     @tparam T The reference product type to access
     @tparam U the product type to check

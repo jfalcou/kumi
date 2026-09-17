@@ -289,12 +289,12 @@ namespace kumi
 
     @code
       template<product_type T, typename Function>
-      constexpr auto flatten(T && t, Function && f) noexcept;   // 1
+      constexpr auto flatten_all(T && t, Function && f) noexcept;   // 1
     @endcode
 
     @code
       template<product_type T>
-      constexpr auto flatten(T && t) noexcept;                  // 2
+      constexpr auto flatten_all(T && t) noexcept;                  // 2
     @endcode
 
     @subgroupheader{Parameters}
@@ -359,7 +359,7 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      - A flat product type composed of pointers to each elements of `t`.
+      - A flat product type composed of pointers to each element of `t`.
 
     @groupheader{Helper type}
 

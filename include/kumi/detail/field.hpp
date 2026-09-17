@@ -152,7 +152,7 @@ namespace kumi
     @ingroup kumi_utility
     @brief    Extracts the identifiers from a kumi::concepts::field or returns the parameter.
 
-    @note     If the unqualified type of input does not model kumi::concepts::field, returns kumi::unkown.
+    @note     If the unqualified type of input does not model kumi::concepts::field, returns kumi::unknown.
     @tparam   T The type to extract the identifier from.
     @return   The identifier of the field or kumi::unknown.
 
@@ -183,7 +183,7 @@ namespace kumi
     @ingroup kumi_utility
     @brief    Extracts the label from a kumi::concepts::field or returns the parameter.
 
-    @note     If the unqualified type of input does not model kumi::concepts::field, returns kumi::unkown.
+    @note     If the unqualified type of input does not model kumi::concepts::field, returns kumi::unknown.
     @tparam   T The type to extract label from.
     @return   The label of the field as a kumi::str.
 
@@ -193,7 +193,7 @@ namespace kumi
     {
       template<typename Ts> struct label_of;
 
-      template<typename T> using label_of_t = typename name_of<T>::type;
+      template<typename T> using label_of_t = typename label_of<T>::type;
     }
     @endcode
 
@@ -215,7 +215,7 @@ namespace kumi
     @brief    Extracts the value from a kumi::concepts::field or returns the parameter
 
     @note     If the unqualified type of input does not model kumi::concepts::field, simply forwards the parameter
-    @tparam   T The type to extract the value from<.
+    @tparam   T The type to extract the value from.
     @param    t A forwarding reference to the input object.
     @return   A forwarded value of the unwrapped object.
 

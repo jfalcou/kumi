@@ -170,7 +170,7 @@ namespace kumi
     On record types, this function operates on the underlying values, not on the fields themselves.
 
     @note For associative operations, this produces the same result as a left or right fold,
-          but have different intermediate evaluation order.
+          but has a different intermediate evaluation order.
 
     @qualifier nodiscard inline constexpr
 
@@ -241,13 +241,13 @@ namespace kumi
 
     @var map_reduce
     @brief Callable object performing a tree-like reduction of all elements of a product type. The given map
-              function is applied before excution the reduction to each element of the input.
+              function is applied before executing the reduction to each element of the input.
 
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 
-    @note For associative operations, this produces the same result as a left or right fold preceeded by map,
-          but have different intermediate evaluation order.
+    @note For associative operations, this produces the same result as a left or right fold preceded by map,
+          but has a different intermediate evaluation order.
 
     @qualifier nodiscard inline constexpr
 
@@ -265,7 +265,7 @@ namespace kumi
 
     @code
       template<typename Function, monoid M, product_type T, typename V>
-      constexpr auto reduce(Function f, M && m, T && t, V init);
+      constexpr auto map_reduce(Function f, M && m, T && t, V init);
     @endcode
 
     @subgroupheader{Parameters}
@@ -277,7 +277,7 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      * The result of reducing the elements of `t` by `m` after beeing processed by `f`,
+      * The result of reducing the elements of `t` by `m` after being processed by `f`,
         recursively combining elements in a tree structure.
 
     @groupheader{Helper type}
@@ -324,7 +324,7 @@ namespace kumi
     On record types, this function operates on the underlying values, not on the fields themselves.
 
     @note For associative operations, this produces the same result as a left or right fold,
-          but have different intermediate evaluation order.
+          but has a different intermediate evaluation order.
 
     @qualifier nodiscard inline constexpr
 
@@ -393,7 +393,7 @@ namespace kumi
     On record types, this function operates on the underlying values, not on the fields themselves.
 
     @note For associative operations, this produces the same result as a left or right fold,
-          but have different intermediate evaluation order.
+          but has a different intermediate evaluation order.
 
     @qualifier nodiscard inline constexpr
 
@@ -462,7 +462,7 @@ namespace kumi
     On record types, this function operates on the underlying values, not on the fields themselves.
 
     @note For associative operations, this produces the same result as a left or right fold,
-          but have different intermediate evaluation order.
+          but has a different intermediate evaluation order.
 
     @qualifier nodiscard inline constexpr
 
@@ -531,7 +531,7 @@ namespace kumi
     On record types, this function operates on the underlying values, not on the fields themselves.
 
     @note For associative operations, this produces the same result as a left or right fold,
-          but have different intermediate evaluation order.
+          but has a different intermediate evaluation order.
 
     @qualifier nodiscard inline constexpr
 
@@ -600,7 +600,7 @@ namespace kumi
     On record types, this function operates on the underlying values, not on the fields themselves.
 
     @note For associative operations, this produces the same result as a left or right fold,
-          but have different intermediate evaluation order.
+          but has a different intermediate evaluation order.
 
     @qualifier nodiscard inline constexpr
 

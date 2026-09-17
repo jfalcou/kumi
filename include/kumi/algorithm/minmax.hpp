@@ -157,7 +157,7 @@ namespace kumi
 
     @subgroupheader{Return value}
 
-      - The maximum value of all elements of `t`
+      - The maximum value of `f` over all elements of a flattened version of `t`
 
     @groupheader{Helper type}
 

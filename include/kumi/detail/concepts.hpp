@@ -16,7 +16,7 @@ namespace kumi::_
     { a < b };
   };
 
-  // Helper for checking if two tuples can == each others
+  // Helper for checking if two tuples can == each other
   template<typename T, typename U>
   concept comparable = requires(T t, U u) {
     { t == u };

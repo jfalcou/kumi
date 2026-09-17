@@ -100,7 +100,7 @@ namespace kumi
 
       - `f`: Binary callable function to apply
       - `t`: Product type to operate on
-      - `v`: Optional initial value of the fold, first element is used otherwise
+      - `init`: Optional initial value of the fold, first element is used otherwise
 
     @subgroupheader{Return value}
 
@@ -161,7 +161,7 @@ namespace kumi
 
       - `f`: Binary callable function to apply
       - `t`: Product type to operate on
-      - `v`: Optional initial value of the fold, last element is used otherwise
+      - `init`: Optional initial value of the fold, last element is used otherwise
 
     @subgroupheader{Return value}
 
