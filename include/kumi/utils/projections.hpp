@@ -11,24 +11,16 @@ namespace kumi
 {
   namespace _
   {
-    template<std::size_t I, typename T> struct value_at
-    {
-    };
+    template<std::size_t I, typename T> inline constexpr value_at = 0;
 
     template<std::size_t I, auto Head, auto... Tail>
-    struct value_at<I, kumi::projection_map<Head, Tail...>> : kumi::_::value_at<I - 1, kumi::projection_map<Tail...>>
-    {
-    };
+    inline constexpr value_at<I, kumi::projection_map<Head, Tail...>> =
+      kumi::_::value_at<I - 1, kumi::projection_map<Tail...>>;
 
-    template<std::size_t I, auto... Vs> struct value_at<I, kumi::projection_map<Vs...> const>
-    {
-      static constexpr auto value = kumi::_::value_at<I, kumi::projection_map<Vs...>>::value;
-    };
+    template<std::size_t I, auto... Vs>
+    inline constexpr value_at<I, kumi::projection_map<Vs...> const> = kumi::_::value_at<I, kumi::projection_map<Vs...>>;
 
-    template<auto Head, auto... Tail> struct value_at<0, kumi::projection_map<Head, Tail...>>
-    {
-      static constexpr auto value = Head;
-    };
+    template<auto Head, auto... Tail> inline constexpr value_at<0, kumi::projection_map<Head, Tail...>> = Head;
   }
 
   //====================================================================================================================

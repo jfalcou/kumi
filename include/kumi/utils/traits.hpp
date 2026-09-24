@@ -304,13 +304,9 @@ namespace kumi
   template<typename T> inline constexpr bool is_homogeneous_v = false;
 
   template<typename T>
-  requires(requires { T::is_homogeneous; } && kumi::is_product_type_v<T> && !kumi::is_record_type_v<T>)
-  inline constexpr bool is_homogeneous_v<T> = T::is_homogeneous;
-
-  template<typename T>
-  requires(!requires { T::is_homogeneous; } && kumi::is_product_type_v<T> && !kumi::is_record_type_v<T>)
+  requires(kumi::is_product_type_v<T> && !kumi::is_record_type_v<T>)
   inline constexpr bool is_homogeneous_v<T> =
-    kumi::is_container_v<T> || kumi::_::homogeneous_<T, std::make_index_sequence<kumi::size_v<T>>>;
+    T::is_homogeneous || kumi::is_container_v<T> || kumi::_::homogeneous_<T, std::make_index_sequence<kumi::size_v<T>>>;
 
   template<typename T> struct is_homogeneous
   {
