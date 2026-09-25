@@ -9,21 +9,29 @@
 
 #if !defined(KUMI_DOXYGEN_INVOKED)
 //======================================================================================================================
+// Helpers avoiding the definition of recursive types
+//======================================================================================================================
+namespace kumi::_
+{
+  template<std::size_t I, typename T> extern kumi::_::undefined<T> tuple_element;
+
+  template<template<class...> class Box, typename Head, typename... Tail>
+  extern Head tuple_element<0, Box<Head, Tail...>>;
+
+  template<std::size_t I, template<class...> typename Box, typename Head, typename... Tail>
+  extern decltype(kumi::_::tuple_element<I - 1, Box<Tail...>>) tuple_element<I, Box<Head, Tail...>>;
+
+  template<std::size_t I, template<class...> typename Box, typename... Ts>
+  extern decltype(kumi::_::tuple_element<I, Box<Ts...>>) const tuple_element<I, Box<Ts...> const>;
+}
+
+//======================================================================================================================
 // Structured binding adaptation for tuples
 //======================================================================================================================
-template<std::size_t I, typename Head, typename... Tail>
-struct std::tuple_element<I, kumi::tuple<Head, Tail...>> : std::tuple_element<I - 1, kumi::tuple<Tail...>>
+template<std::size_t I, typename... Ts> struct std::tuple_element<I, kumi::tuple<Ts...>>
 {
-};
-
-template<std::size_t I, typename... Ts> struct std::tuple_element<I, kumi::tuple<Ts...> const>
-{
-  using type = typename tuple_element<I, kumi::tuple<Ts...>>::type const;
-};
-
-template<typename Head, typename... Tail> struct std::tuple_element<0, kumi::tuple<Head, Tail...>>
-{
-  using type = Head;
+  static_assert(I < sizeof...(Ts), "[KUMI] - Tuple index must be in range");
+  using type = decltype(kumi::_::tuple_element<I, kumi::tuple<Ts...>>);
 };
 
 template<typename... Ts> struct std::tuple_size<kumi::tuple<Ts...>> : std::integral_constant<std::size_t, sizeof...(Ts)>
@@ -33,19 +41,10 @@ template<typename... Ts> struct std::tuple_size<kumi::tuple<Ts...>> : std::integ
 //======================================================================================================================
 // Structured binding adaptation for records
 //======================================================================================================================
-template<std::size_t I, typename Head, typename... Tail>
-struct std::tuple_element<I, kumi::record<Head, Tail...>> : std::tuple_element<I - 1, kumi::record<Tail...>>
+template<std::size_t I, typename... Ts> struct std::tuple_element<I, kumi::record<Ts...>>
 {
-};
-
-template<std::size_t I, typename... Ts> struct std::tuple_element<I, kumi::record<Ts...> const>
-{
-  using type = typename tuple_element<I, kumi::record<Ts...>>::type const;
-};
-
-template<typename Head, typename... Tail> struct std::tuple_element<0, kumi::record<Head, Tail...>>
-{
-  using type = Head;
+  static_assert(I < sizeof...(Ts), "[KUMI] - Record index must be in range");
+  using type = decltype(kumi::_::tuple_element<I, kumi::record<Ts...>>);
 };
 
 template<typename... Ts>

@@ -38,7 +38,8 @@
 #define KUMI_REPEAT_9(m, d) KUMI_REPEAT_8(m, d) m(8, d)
 #define KUMI_REPEAT_10(m, d) KUMI_REPEAT_9(m, d) m(9, d)
 
-#define KUMI_PP_REPEAT(N, m, d) KUMI_REPEAT_##N(m, d)
+#define KUMI_PP_REPEAT_(N, m, d) KUMI_REPEAT_##N(m, d)
+#define KUMI_PP_REPEAT(N, m, d) KUMI_PP_REPEAT_(N, m, d)
 
 //======================================================================================================================
 // Macro to generate m copies of a token separated by commas
@@ -55,13 +56,15 @@
 #define KUMI_ENUM_9(m, d) KUMI_ENUM_8(m, d), m(8, d)
 #define KUMI_ENUM_10(m, d) KUMI_ENUM_9(m, d), m(9, d)
 
-#define KUMI_PP_ENUM(N, m, d) KUMI_ENUM_##N(m, d)
+#define KUMI_PP_ENUM_(N, m, d) KUMI_ENUM_##N(m, d)
+#define KUMI_PP_ENUM(N, m, d) KUMI_PP_ENUM_(N, m, d)
 
 //======================================================================================================================
 // Macros to generate tokens
 //======================================================================================================================
-#define KUMI_PP_CAT(P, S) P##S
-#define KUMI_PP_TAC(P, S) S##P
+#define KUMI_PP_CAT_(P, S) P##S
+#define KUMI_PP_CAT(P, S) KUMI_PP_CAT_(P, S)
+#define KUMI_PP_TAC(P, S) KUMI_PP_CAT_(S, P)
 #define KUMI_PP_IDENTITY(I, ...) I
 
 //======================================================================================================================

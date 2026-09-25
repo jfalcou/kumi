@@ -36,6 +36,8 @@
 #define KUMI_ABI [[using gnu: always_inline, flatten, artificial]] KUMI_CUDA inline
 #elif defined(_MSC_VER)
 #define KUMI_ABI [[using msvc: forceinline, flatten]] KUMI_CUDA inline
+#else
+#define KUMI_ABI KUMI_CUDA inline
 #endif
 
 // Functions in namespace detail should not be forceinline and have a different abi

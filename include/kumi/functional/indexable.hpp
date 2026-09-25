@@ -88,19 +88,12 @@ namespace kumi::function
   //====================================================================================================================
   struct cat_t
   {
-  private:
-    template<std::size_t... S> consteval auto impl(std::index_sequence<S...>) const noexcept
+    template<std::size_t... S> consteval auto operator()(kumi::index_t<S>...) const noexcept
     {
       constexpr auto N = (S + ... + 0ULL);
       return kumi::projection_map{
         kumi::_::make_digits(kumi::_::container_of_index, std::make_index_sequence<N>{}, std::index_sequence<S...>{}),
         kumi::_::make_digits(kumi::_::element_of_index, std::make_index_sequence<N>{}, std::index_sequence<S...>{})};
-    }
-
-  public:
-    template<std::size_t... S> consteval auto operator()(kumi::index_t<S>...) const noexcept
-    {
-      return impl(std::index_sequence<S...>{});
     }
   } KUMI_VARIABLE_ABI constexpr concatenater;
 
