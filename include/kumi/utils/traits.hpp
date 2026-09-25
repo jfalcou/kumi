@@ -216,7 +216,7 @@ namespace kumi
 
   namespace _
   {
-    template<typename T> extern kumi::_::undefined container_type;
+    template<typename T> extern kumi::_::undefined<T> container_type;
 
     template<typename T>
     requires(kumi::_::container_like<T>)

@@ -13,7 +13,7 @@
 //======================================================================================================================
 namespace kumi::_
 {
-  template<std::size_t I, typename T> extern kumi::_::undefined tuple_element;
+  template<std::size_t I, typename T> extern kumi::_::undefined<T> tuple_element;
 
   template<template<class...> class Box, typename Head, typename... Tail>
   extern Head tuple_element<0, Box<Head, Tail...>>;
