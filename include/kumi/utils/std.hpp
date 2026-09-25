@@ -13,18 +13,16 @@
 //======================================================================================================================
 namespace kumi::_
 {
-  struct out_of_range_index;
-
-  template<std::size_t I, typename T> extern out_of_range_index tuple_element;
+  template<std::size_t I, typename T> extern kumi::_::undefined tuple_element;
 
   template<template<class...> class Box, typename Head, typename... Tail>
-  extern Head tuple_element<0, Box<Head, Tail...>>;
+  extern Head kumi::_::tuple_element<0, Box<Head, Tail...>>;
 
   template<std::size_t I, template<class...> typename Box, typename Head, typename... Tail>
-  extern decltype(tuple_element<I - 1, Box<Tail...>>) tuple_element<I, Box<Head, Tail...>>;
+  extern decltype(kumi::_::tuple_element<I - 1, Box<Tail...>>) kumi::_::tuple_element<I, Box<Head, Tail...>>;
 
   template<std::size_t I, template<class...> typename Box, typename... Ts>
-  extern decltype(tuple_element<I, Box<Ts...>>) const tuple_element<I, Box<Ts...> const>;
+  extern decltype(kumi::_::tuple_element<I, Box<Ts...>>) const kumi::_::tuple_element<I, Box<Ts...> const>;
 }
 
 //======================================================================================================================

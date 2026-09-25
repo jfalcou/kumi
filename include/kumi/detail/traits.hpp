@@ -9,15 +9,20 @@
 
 namespace kumi::_
 {
-  //======================================================================================================================
+  //====================================================================================================================
   // Compile-time dispatch cases for some algorithm implementations.
-  //======================================================================================================================
+  //====================================================================================================================
   enum class case_
   {
     normal,
     indexed,
     field
   };
+
+  //====================================================================================================================
+  // Undefined type on purpose, used as a fallback for template specialization
+  //====================================================================================================================
+  struct undefined;
 
   //====================================================================================================================
   // Helpers for uniqueness checking
@@ -82,19 +87,19 @@ namespace kumi::_
 
   template<std::size_t... I, typename... Ts>
   inline constexpr bool is_set_v<kumi::_::family<std::index_sequence<I...>, Ts...>> =
-    is_set<kumi::_::family<std::index_sequence<I...>, Ts...>, std::type_identity<Ts>...>;
+    kumi::_::is_set<kumi::_::family<std::index_sequence<I...>, Ts...>, std::type_identity<Ts>...>;
 
   template<typename T> inline constexpr bool is_map_v = false;
 
   template<std::size_t... I, typename... Ts>
   inline constexpr bool is_map_v<kumi::_::family<std::index_sequence<I...>, Ts...>> =
-    is_set<kumi::_::family<std::index_sequence<I...>, Ts...>, kumi::_::index_or_key_t<I, Ts>...>;
+    kumi::_::is_set<kumi::_::family<std::index_sequence<I...>, Ts...>, kumi::_::index_or_key_t<I, Ts>...>;
 
   template<typename T, typename... Ts> inline constexpr bool same_mapping_v = false;
 
   template<std::size_t... I, typename... Ts, typename... Us>
   inline constexpr bool same_mapping_v<kumi::_::family<std::index_sequence<I...>, Ts...>, Us...> =
-    is_set<kumi::_::family<std::index_sequence<I...>, Ts...>, kumi::_::index_or_key_t<I, Ts>...>;
+    kumi::_::is_set<kumi::_::family<std::index_sequence<I...>, Ts...>, kumi::_::index_or_key_t<I, Ts>...>;
 
   //====================================================================================================================
   // Helper meta functions to access a field index by Type
