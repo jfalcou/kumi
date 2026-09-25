@@ -22,11 +22,11 @@ namespace kumi::_
   //====================================================================================================================
   // Helpers for uniqueness checking
   //====================================================================================================================
-  template<std::size_t I, typename T> inline auto get_key()
-  {
-    if constexpr (kumi::_::field<T>) return kumi::_::identifier_of_t<T>{};
-    else return std::integral_constant<std::size_t, I>{};
-  }
+  template<std::size_t I, typename T> extern std::integral_constant<std::size_t, I> index_or_key;
+
+  template<std::size_t I, kumi::_::field T> extern kumi::_::identifier_of_t<T> index_or_key<I, T>;
+
+  template<std::size_t I, typename T> using index_or_key_t = decltype(index_or_key<I, T>);
 
   /// Used to detect duplicate types in a pack by enabling unique conversion overload resolution.
   template<std::size_t I, typename T> struct unique
@@ -56,13 +56,9 @@ namespace kumi::_
     std::integral_constant<std::size_t, I> operator()(U const&);
   };
 
-  /// Helper used for SFINAE checks.
-  inline consteval std::true_type true_fn(...);
-
-  template<typename T, typename... Key>
-  inline auto is_set(T, Key...) -> decltype(kumi::_::true_fn(static_cast<Key>(std::declval<T>())...));
-
-  inline std::false_type is_set(...);
+  /// Concept checking if a type T can be considered a set with respect to the given keys
+  template<typename T, typename... Keys>
+  concept is_set = requires { (void(static_cast<Keys&&>(std::declval<T>())), ...); };
 
   //====================================================================================================================
   // Helper type for types behavior detection, only one type to instantiate for all traits
@@ -85,21 +81,20 @@ namespace kumi::_
   template<typename T> inline constexpr bool is_set_v = false;
 
   template<std::size_t... I, typename... Ts>
-  inline constexpr bool is_set_v<kumi::_::family<std::index_sequence<I...>, Ts...>>{decltype(kumi::_::is_set(
-    std::declval<kumi::_::family<std::index_sequence<I...>, Ts...>>(), std::type_identity<Ts>{}...))::value};
+  inline constexpr bool is_set_v<kumi::_::family<std::index_sequence<I...>, Ts...>> =
+    is_set<kumi::_::family<std::index_sequence<I...>, Ts...>, std::type_identity<Ts>...>;
 
   template<typename T> inline constexpr bool is_map_v = false;
 
   template<std::size_t... I, typename... Ts>
-  inline constexpr bool is_map_v<kumi::_::family<std::index_sequence<I...>, Ts...>>{decltype(kumi::_::is_set(
-    std::declval<kumi::_::family<std::index_sequence<I...>, Ts...>>(), kumi::_::get_key<I, Ts>()...))::value};
+  inline constexpr bool is_map_v<kumi::_::family<std::index_sequence<I...>, Ts...>> =
+    is_set<kumi::_::family<std::index_sequence<I...>, Ts...>, kumi::_::index_or_key_t<I, Ts>...>;
 
   template<typename T, typename... Ts> inline constexpr bool same_mapping_v = false;
 
   template<std::size_t... I, typename... Ts, typename... Us>
-  inline constexpr bool same_mapping_v<kumi::_::family<std::index_sequence<I...>, Ts...>, Us...>{
-    decltype(kumi::_::is_set(std::declval<kumi::_::family<std::index_sequence<I...>, Ts...>>(),
-                             kumi::_::get_key<I, Us>()...))::value};
+  inline constexpr bool same_mapping_v<kumi::_::family<std::index_sequence<I...>, Ts...>, Us...> =
+    is_set<kumi::_::family<std::index_sequence<I...>, Ts...>, kumi::_::index_or_key_t<I, Ts>...>;
 
   //====================================================================================================================
   // Helper meta functions to access a field index by Type

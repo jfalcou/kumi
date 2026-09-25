@@ -11,16 +11,17 @@ namespace kumi
 {
   namespace _
   {
-    template<std::size_t I, typename T> inline constexpr value_at = 0;
+    template<std::size_t I, typename T> extern std::size_t value_at;
 
     template<std::size_t I, auto Head, auto... Tail>
-    inline constexpr value_at<I, kumi::projection_map<Head, Tail...>> =
+    inline constexpr auto value_at<I, kumi::projection_map<Head, Tail...>> =
       kumi::_::value_at<I - 1, kumi::projection_map<Tail...>>;
 
     template<std::size_t I, auto... Vs>
-    inline constexpr value_at<I, kumi::projection_map<Vs...> const> = kumi::_::value_at<I, kumi::projection_map<Vs...>>;
+    inline constexpr auto value_at<I, kumi::projection_map<Vs...> const> =
+      kumi::_::value_at<I, kumi::projection_map<Vs...>>;
 
-    template<auto Head, auto... Tail> inline constexpr value_at<0, kumi::projection_map<Head, Tail...>> = Head;
+    template<auto Head, auto... Tail> inline constexpr auto value_at<0, kumi::projection_map<Head, Tail...>> = Head;
   }
 
   //====================================================================================================================
@@ -81,7 +82,7 @@ namespace kumi
     requires(I < sizeof...(V))
     constexpr decltype(auto) operator[]([[maybe_unused]] kumi::index_t<I> i) const noexcept
     {
-      return kumi::_::value_at<I, projection_map>::value;
+      return kumi::_::value_at<I, projection_map>;
     }
 
     //==================================================================================================================

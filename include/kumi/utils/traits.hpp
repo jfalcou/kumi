@@ -216,11 +216,13 @@ namespace kumi
 
   namespace _
   {
-    template<typename T>
-    requires kumi::_::container_like<T>
-    typename T::value_type container_type(T const&);
+    template<typename T> extern T container_type;
 
-    template<typename T, std::size_t N> T container_type(T const (&)[N]);
+    template<typename T>
+    requires(kumi::_::container_like<T>)
+    extern typename T::value_type container_type<T>;
+
+    template<typename T, std::size_t N> extern T container_type<T[N]>;
   }
 
   //====================================================================================================================
@@ -239,7 +241,7 @@ namespace kumi
     @endcode
   **/
   //====================================================================================================================
-  template<typename T> using container_type_t = decltype(kumi::_::container_type(std::declval<T>()));
+  template<typename T> using container_type_t = decltype(kumi::_::container_type<std::remove_cvref_t<T>>);
 
   template<typename T> struct container_type
   {
@@ -280,9 +282,11 @@ namespace kumi
   {
     template<typename T, typename Seq> inline constexpr bool homogeneous_ = false;
 
+    template<typename T> inline constexpr bool homogeneous_<T, std::index_sequence<>> = false;
+
     template<typename T, std::size_t... I>
-    inline constexpr bool homogeneous_<T, std::index_sequence<I...>>{
-      (sizeof...(I) != 0) && ((sizeof...(I) == 1) || kumi::_::all_the_same<kumi::element_t<I, T>...>)};
+    inline constexpr bool homogeneous_<T, std::index_sequence<I...>>{(sizeof...(I) == 1) ||
+                                                                     kumi::_::all_the_same<kumi::element_t<I, T>...>};
   }
 
   //====================================================================================================================
@@ -305,8 +309,8 @@ namespace kumi
 
   template<typename T>
   requires(kumi::is_product_type_v<T> && !kumi::is_record_type_v<T>)
-  inline constexpr bool is_homogeneous_v<T> =
-    T::is_homogeneous || kumi::is_container_v<T> || kumi::_::homogeneous_<T, std::make_index_sequence<kumi::size_v<T>>>;
+  inline constexpr bool is_homogeneous_v<T> = requires { requires T::is_homogeneous; } || kumi::is_container_v<T> ||
+                                              kumi::_::homogeneous_<T, std::make_index_sequence<kumi::size_v<T>>>;
 
   template<typename T> struct is_homogeneous
   {
@@ -339,6 +343,15 @@ namespace kumi
     static constexpr bool value = kumi::is_projection_map_v<T>;
   };
 
+  namespace _
+  {
+    template<std::size_t I, typename T> extern kumi::member_t<I, T> stored_member;
+
+    template<std::size_t I, typename T>
+    requires(kumi::is_record_type_v<std::remove_cvref_t<T>>)
+    extern decltype(get<kumi::_::identifier_of_t<kumi::element_t<I, T>>{}>(std::declval<T&&>())) stored_member<I, T>;
+  }
+
   //====================================================================================================================
   /**
     @ingroup kumi_traits
@@ -357,20 +370,21 @@ namespace kumi
     @endcode
   **/
   //====================================================================================================================
+  template<std::size_t I, typename T> using stored_member_t = decltype(kumi::_::stored_member<I, T>);
+
   template<std::size_t I, typename T> struct stored_member
   {
-    using type = kumi::member_t<I, T>;
+    using type = kumi::stored_member_t<I, T>;
   };
 
-  template<std::size_t I, typename T>
-  requires(kumi::is_record_type_v<std::remove_cvref_t<T>>)
-  struct stored_member<I, T>
+  namespace _
   {
-    using field_type = decltype(get<I>(std::declval<T&&>()));
-    using type = decltype(std::declval<field_type&&>()(typename std::remove_cvref_t<field_type>::identifier_type{}));
-  };
+    template<std::size_t I, typename T> extern kumi::element_t<I, T> stored_element;
 
-  template<std::size_t I, typename T> using stored_member_t = typename kumi::stored_member<I, T>::type;
+    template<std::size_t I, typename T>
+    requires(kumi::is_record_type_v<std::remove_cvref_t<T>>)
+    extern typename kumi::element_t<I, T>::type stored_element<I, T>;
+  }
 
   //====================================================================================================================
   /**
@@ -393,19 +407,12 @@ namespace kumi
     @endcode
   **/
   //====================================================================================================================
+  template<std::size_t I, typename T> using stored_element_t = decltype(kumi::_::stored_element<I, T>);
+
   template<std::size_t I, typename T> struct stored_element
   {
-    using type = kumi::element_t<I, T>;
+    using type = kumi::stored_element_t<I, T>;
   };
-
-  template<std::size_t I, typename T>
-  requires(kumi::is_record_type<std::remove_cvref_t<T>>::value)
-  struct stored_element<I, T>
-  {
-    using type = typename kumi::element_t<I, T>::type;
-  };
-
-  template<std::size_t I, typename T> using stored_element_t = typename kumi::stored_element<I, T>::type;
 
   //====================================================================================================================
   /**

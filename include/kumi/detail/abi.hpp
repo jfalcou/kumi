@@ -58,17 +58,6 @@
 #define KUMI_ERROR(MESSAGE) throw MESSAGE
 #endif
 
-// #if defined(__clang__)
-// #pragma clang diagnostic ignored "-Wmissing-braces"
-// #endif
-
 #if defined(__clang__)
-#define KUMI_PRAGMA(X) _Pragma(#X)
-#define KUMI_DIAG_PUSH KUMI_PRAGMA(clang diagnostic push)
-#define KUMI_DIAG_POP KUMI_PRAGMA(clang diagnostic pop)
-#define KUMI_DIAG_IGNORE_MISSING_BRACES KUMI_PRAGMA(clang diagnostic ignored "-Wmissing-braces")
-#else
-#define KUMI_DIAG_PUSH
-#define KUMI_DIAG_POP
-#define KUMI_DIAG_IGNORE_MISSING_BRACES
+#pragma clang diagnostic ignored "-Wmissing-braces"
 #endif
