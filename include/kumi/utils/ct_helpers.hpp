@@ -46,7 +46,7 @@ namespace kumi
     @brief Inline integral constant value for kumi::index_t
   **/
   //====================================================================================================================
-  template<std::size_t N> inline constexpr kumi::index_t<N> const index = {};
+  template<std::size_t N> inline constexpr kumi::index_t<N> index = {};
 
   //====================================================================================================================
   /**

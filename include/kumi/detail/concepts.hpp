@@ -132,7 +132,7 @@ namespace kumi::_
   };
 
   //====================================================================================================================
-  // Helper concepts for construction checks
+  // Helper concepts for conversion checks
   //====================================================================================================================
   template<typename, typename> inline constexpr bool is_piecewise_convertible_v = false;
 
@@ -144,6 +144,9 @@ namespace kumi::_
   concept piecewise_convertible =
     kumi::_::is_piecewise_convertible_v<std::remove_cvref_t<From>, std::remove_cvref_t<To>>;
 
+  //====================================================================================================================
+  // Helper concepts for construction checks
+  //====================================================================================================================
   template<typename, typename> inline constexpr bool is_piecewise_constructible_v = false;
 
   template<template<class...> class Box, typename... From, typename... To>
@@ -155,6 +158,9 @@ namespace kumi::_
   concept piecewise_constructible =
     kumi::_::is_piecewise_constructible_v<std::remove_cvref_t<From>, std::remove_cvref_t<To>>;
 
+  //====================================================================================================================
+  // Helper concepts for ordering checks
+  //====================================================================================================================
   template<typename, typename> inline constexpr bool is_piecewise_ordered_v = false;
 
   template<template<class...> class Box, typename... From, typename... To>
@@ -164,6 +170,9 @@ namespace kumi::_
   template<typename From, typename To>
   concept piecewise_ordered = kumi::_::is_piecewise_ordered_v<std::remove_cvref_t<From>, std::remove_cvref_t<To>>;
 
+  //====================================================================================================================
+  // Helper concepts for comparison checks
+  //====================================================================================================================
   template<typename, typename> inline constexpr bool is_piecewise_comparable_v = false;
 
   template<template<class...> class Box, typename... From, typename... To>
