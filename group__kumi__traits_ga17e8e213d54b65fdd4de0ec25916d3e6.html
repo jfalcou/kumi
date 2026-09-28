@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="KUMI - The C++20 Compact Tuple Tools" />
 <meta name="twitter:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
 <meta name="twitter:image" content="https://jfalcou.github.io/kumi/card.png" />
-<title>KUMI: kumi::container_type_t</title>
+<title>KUMI: kumi::stored_member_t</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -106,7 +106,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('group__kumi__traits_gab1e24accb210d4757ba7701ed56ad6cc.html','',''); });
+$(function(){initNavTree('group__kumi__traits_ga17e8e213d54b65fdd4de0ec25916d3e6.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -132,33 +132,35 @@ $(function(){initNavTree('group__kumi__traits_gab1e24accb210d4757ba7701ed56ad6cc
 </div>
 
 <div class="contents">
-<a id="gab1e24accb210d4757ba7701ed56ad6cc" name="gab1e24accb210d4757ba7701ed56ad6cc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab1e24accb210d4757ba7701ed56ad6cc">&#9670;&#160;</a></span>container_type_t</h2>
+<a id="ga17e8e213d54b65fdd4de0ec25916d3e6" name="ga17e8e213d54b65fdd4de0ec25916d3e6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga17e8e213d54b65fdd4de0ec25916d3e6">&#9670;&#160;</a></span>stored_member_t</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename T&gt; </div>
+template&lt;std::size_t I, typename T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#gab1e24accb210d4757ba7701ed56ad6cc">kumi::container_type_t</a> = decltype(kumi_implementation_defined(std::declval&lt;T&gt;()))</td>
+          <td class="memname">using <a class="el" href="#ga17e8e213d54b65fdd4de0ec25916d3e6">kumi::stored_member_t</a> = decltype(kumi_implementation_defined)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
-<p>Provides access to the type of the elements of a <a class="el" href="conceptkumi_1_1concepts_1_1container.html" title="Concept specifying a type follows the Container Type semantic.">kumi::concepts::container</a>. </p>
+<p>Computes the return type of a call to <a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137" title="Extracts the Ith field from a kumi::record.">kumi::get</a> on a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> and unwrap the field returned by <a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137" title="Extracts the Ith field from a kumi::record.">kumi::get</a> on a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
-    <tr><td class="paramname">T</td><td><a class="el" href="conceptkumi_1_1concepts_1_1container.html" title="Concept specifying a type follows the Container Type semantic.">kumi::concepts::container</a> to access</td></tr>
+    <tr><td class="paramname">I</td><td>Index of the type to retrieve </td></tr>
+    <tr><td class="paramname">T</td><td>kumi::product_type to access</td></tr>
   </table>
   </dd>
 </dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md66"></a>
-Helper type-trait</h2>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md70"></a>
+Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt; <span class="keyword">struct </span>container_type;</div>
+<div class="line">  <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I, <span class="keyword">typename</span> T&gt; <span class="keyword">using </span><a class="code hl_typedef" href="#ga17e8e213d54b65fdd4de0ec25916d3e6">stored_member_t</a> = <span class="keyword">typename</span> stored_member&lt;I,T&gt;::type;</div>
 <div class="line">}</div>
+<div class="ttc" id="agroup__kumi__traits_ga17e8e213d54b65fdd4de0ec25916d3e6_html_ga17e8e213d54b65fdd4de0ec25916d3e6"><div class="ttname"><a href="#ga17e8e213d54b65fdd4de0ec25916d3e6">kumi::stored_member_t</a></div><div class="ttdeci">decltype(kumi_implementation_defined) stored_member_t</div><div class="ttdoc">Computes the return type of a call to kumi::get on a kumi::tuple and unwrap the field returned by kum...</div><div class="ttdef"><b>Definition</b> traits.hpp:373</div></div>
 <div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
 </div><!-- fragment --> 
 </div>

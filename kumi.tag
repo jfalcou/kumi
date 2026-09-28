@@ -964,18 +964,6 @@
     <name>kumi::function::select_t</name>
     <filename>structkumi_1_1function_1_1select__t.html</filename>
   </compound>
-  <compound kind="struct">
-    <name>kumi::stored_element</name>
-    <filename>structkumi_1_1stored__element.html</filename>
-    <templarg>std::size_t I</templarg>
-    <templarg>typename T</templarg>
-  </compound>
-  <compound kind="struct">
-    <name>kumi::stored_member</name>
-    <filename>structkumi_1_1stored__member.html</filename>
-    <templarg>std::size_t I</templarg>
-    <templarg>typename T</templarg>
-  </compound>
   <compound kind="class">
     <name>kumi::str</name>
     <filename>structkumi_1_1str.html</filename>
@@ -1789,17 +1777,15 @@
     <class kind="class">kumi::name</class>
     <class kind="class">kumi::projection_map</class>
     <class kind="class">kumi::record</class>
-    <class kind="struct">kumi::stored_element</class>
-    <class kind="struct">kumi::stored_member</class>
     <class kind="class">kumi::str</class>
     <class kind="class">kumi::tuple</class>
     <class kind="class">kumi::unit</class>
     <class kind="class">kumi::unknown</class>
     <member kind="typedef">
-      <type>decltype(kumi_implementation_defined(std::declval&lt; T &gt;()))</type>
+      <type>decltype(kumi_implementation_defined)</type>
       <name>container_type_t</name>
-      <anchorfile>group__kumi__traits_gab1e24accb210d4757ba7701ed56ad6cc.html</anchorfile>
-      <anchor>gab1e24accb210d4757ba7701ed56ad6cc</anchor>
+      <anchorfile>group__kumi__traits_gacf63a95bf29987c5639c10ce15e6937b.html</anchorfile>
+      <anchor>gacf63a95bf29987c5639c10ce15e6937b</anchor>
       <arglist></arglist>
     </member>
     <member kind="typedef">
@@ -1814,6 +1800,20 @@
       <name>member_t</name>
       <anchorfile>group__kumi__traits_gaca6d42cbec766fb8d43a4060077e2624.html</anchorfile>
       <anchor>gaca6d42cbec766fb8d43a4060077e2624</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>decltype(kumi_implementation_defined)</type>
+      <name>stored_element_t</name>
+      <anchorfile>group__kumi__record__traits_gaa957535657d5741421f09c44c5faaa62.html</anchorfile>
+      <anchor>gaa957535657d5741421f09c44c5faaa62</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>decltype(kumi_implementation_defined)</type>
+      <name>stored_member_t</name>
+      <anchorfile>group__kumi__traits_ga17e8e213d54b65fdd4de0ec25916d3e6.html</anchorfile>
+      <anchor>ga17e8e213d54b65fdd4de0ec25916d3e6</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -2244,10 +2244,10 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr kumi::index_t&lt; N &gt; const</type>
+      <type>constexpr kumi::index_t&lt; N &gt;</type>
       <name>index</name>
       <anchorfile>group__kumi__utility.html</anchorfile>
-      <anchor>gaa1c76fca002e966a0a40e311ad68d841</anchor>
+      <anchor>gafa1ac4e53441436fe2c0a1aca7a91e5f</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -3355,10 +3355,10 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>constexpr kumi::index_t&lt; N &gt; const</type>
+      <type>constexpr kumi::index_t&lt; N &gt;</type>
       <name>kumi::index</name>
       <anchorfile>group__kumi__utility.html</anchorfile>
-      <anchor>gaa1c76fca002e966a0a40e311ad68d841</anchor>
+      <anchor>gafa1ac4e53441436fe2c0a1aca7a91e5f</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -3939,12 +3939,11 @@
     <class kind="struct">kumi::apply_traits</class>
     <class kind="struct">kumi::common_product_type</class>
     <class kind="struct">kumi::map_traits</class>
-    <class kind="struct">kumi::stored_member</class>
     <member kind="typedef">
-      <type>decltype(kumi_implementation_defined(std::declval&lt; T &gt;()))</type>
+      <type>decltype(kumi_implementation_defined)</type>
       <name>kumi::container_type_t</name>
-      <anchorfile>group__kumi__traits_gab1e24accb210d4757ba7701ed56ad6cc.html</anchorfile>
-      <anchor>gab1e24accb210d4757ba7701ed56ad6cc</anchor>
+      <anchorfile>group__kumi__traits_gacf63a95bf29987c5639c10ce15e6937b.html</anchorfile>
+      <anchor>gacf63a95bf29987c5639c10ce15e6937b</anchor>
       <arglist></arglist>
     </member>
     <member kind="typedef">
@@ -3959,6 +3958,13 @@
       <name>kumi::member_t</name>
       <anchorfile>group__kumi__traits_gaca6d42cbec766fb8d43a4060077e2624.html</anchorfile>
       <anchor>gaca6d42cbec766fb8d43a4060077e2624</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>decltype(kumi_implementation_defined)</type>
+      <name>kumi::stored_member_t</name>
+      <anchorfile>group__kumi__traits_ga17e8e213d54b65fdd4de0ec25916d3e6.html</anchorfile>
+      <anchor>ga17e8e213d54b65fdd4de0ec25916d3e6</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -4141,7 +4147,13 @@
     <name>kumi_record_traits</name>
     <title>Record Related Traits</title>
     <filename>group__kumi__record__traits.html</filename>
-    <class kind="struct">kumi::stored_element</class>
+    <member kind="typedef">
+      <type>decltype(kumi_implementation_defined)</type>
+      <name>kumi::stored_element_t</name>
+      <anchorfile>group__kumi__record__traits_gaa957535657d5741421f09c44c5faaa62.html</anchorfile>
+      <anchor>gaa957535657d5741421f09c44c5faaa62</anchor>
+      <arglist></arglist>
+    </member>
   </compound>
   <compound kind="group">
     <name>kumi_record_transforms</name>

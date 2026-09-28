@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['type_0',['type',['../structkumi_1_1as.html#ae0ed33d79b1955359c95eb5e572f7305',1,'kumi::as::type'],['../structkumi_1_1identifier.html#aae1d9bcd971d43f8831ba98f5d7e2678',1,'kumi::identifier::type'],['../structkumi_1_1name.html#a9bf8b825d5ec4deb4d1cb8b5c23f773f',1,'kumi::name::type']]]
+  ['stored_5felement_5ft_0',['stored_element_t',['../group__kumi__record__traits_gaa957535657d5741421f09c44c5faaa62.html#gaa957535657d5741421f09c44c5faaa62',1,'kumi']]],
+  ['stored_5fmember_5ft_1',['stored_member_t',['../group__kumi__traits_ga17e8e213d54b65fdd4de0ec25916d3e6.html#ga17e8e213d54b65fdd4de0ec25916d3e6',1,'kumi']]]
 ];

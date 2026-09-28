@@ -27,7 +27,7 @@
     </tr>
     <tr>
       <th scope="row">Date:</th>
-      <td>2026-09-17 08:36:28</td>
+      <td>2026-09-28 09:00:00</td>
     </tr>
   </table>
 </div>
@@ -9370,35 +9370,35 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="k">template</span><span class="o">&lt;</span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">product_type</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span></td>
+      <td class="src "><span class="w">  </span><span class="k">template</span><span class="o">&lt;</span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">product_type</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">builder</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l1287" href="#l1287">1287</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="k">requires</span><span class="p">(</span><span class="o">!</span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">record_type</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">)</span></td>
+      <td class="src "><span class="w">  </span><span class="p">{</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l1288" href="#l1288">1288</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">builder</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span></td>
+      <td class="src "><span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l1289" href="#l1289">1289</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="p">{</span></td>
+      <td class="src "></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l1290" href="#l1290">1290</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">T</span><span class="p">;</span></td>
+      <td class="src "><span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span><span class="w"> </span><span class="n">Us</span><span class="o">&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kumi</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">Us</span><span class="p">...</span><span class="o">&gt;</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l1291" href="#l1291">1291</a></td>
@@ -9412,150 +9412,122 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span><span class="w"> </span><span class="n">Us</span><span class="o">&gt;</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">to</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kumi</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;</span><span class="n">Us</span><span class="p">...</span><span class="o">&gt;</span><span class="p">;</span></td>
+      <td class="src "><span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="n">KUMI_ABI</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">make</span><span class="p">(</span><span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">)</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l1293" href="#l1293">1293</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l1294" href="#l1294">1294</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="n">KUMI_ABI</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">make</span><span class="p">(</span><span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">)</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l1295" href="#l1295">1295</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
       <td class="src "><span class="w">    </span><span class="p">{</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l1296" href="#l1296">1296</a></td>
+      <td class="lineno"><a id="l1294" href="#l1294">1294</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount coveredLine">143</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">kumi</span><span class="o">::</span><span class="n">make_tuple</span><span class="p">(</span><span class="n">KUMI_FWD</span><span class="p">(</span><span class="n">args</span><span class="p">)...);</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l1297" href="#l1297">1297</a></td>
+      <td class="lineno"><a id="l1295" href="#l1295">1295</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">    </span><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l1298" href="#l1298">1298</a></td>
+      <td class="lineno"><a id="l1296" href="#l1296">1296</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l1299" href="#l1299">1299</a></td>
+      <td class="lineno"><a id="l1297" href="#l1297">1297</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="p">...</span><span class="w"> </span><span class="n">Args</span><span class="o">&gt;</span><span class="w"> </span><span class="p">[[</span><span class="n">nodiscard</span><span class="p">]]</span><span class="w"> </span><span class="n">KUMI_ABI</span><span class="w"> </span><span class="k">static</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">build</span><span class="p">(</span><span class="n">Args</span><span class="o">&amp;&amp;</span><span class="p">...</span><span class="w"> </span><span class="n">args</span><span class="p">)</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l1300" href="#l1300">1300</a></td>
+      <td class="lineno"><a id="l1298" href="#l1298">1298</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">    </span><span class="p">{</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l1301" href="#l1301">1301</a></td>
+      <td class="lineno"><a id="l1299" href="#l1299">1299</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">kumi</span><span class="o">::</span><span class="n">tuple</span><span class="p">{</span><span class="n">KUMI_FWD</span><span class="p">(</span><span class="n">args</span><span class="p">)...};</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l1302" href="#l1302">1302</a></td>
+      <td class="lineno"><a id="l1300" href="#l1300">1300</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">    </span><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l1303" href="#l1303">1303</a></td>
+      <td class="lineno"><a id="l1301" href="#l1301">1301</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">  </span><span class="p">};</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l1304" href="#l1304">1304</a></td>
+      <td class="lineno"><a id="l1302" href="#l1302">1302</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l1305" href="#l1305">1305</a></td>
+      <td class="lineno"><a id="l1303" href="#l1303">1303</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">  </span><span class="c1">// As we are lacking a proper mechanism to find the least restrictive subtype, we fallback to a specializable trait</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l1306" href="#l1306">1306</a></td>
+      <td class="lineno"><a id="l1304" href="#l1304">1304</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="k">template</span><span class="o">&lt;</span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">product_type</span><span class="p">...</span><span class="w"> </span><span class="n">Ts</span><span class="o">&gt;</span></td>
+      <td class="src "><span class="w">  </span><span class="k">template</span><span class="o">&lt;</span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">product_type</span><span class="p">...</span><span class="w"> </span><span class="n">Ts</span><span class="o">&gt;</span><span class="w"> </span><span class="k">struct</span><span class="w"> </span><span class="nc">common_product_type</span><span class="o">&lt;</span><span class="n">Ts</span><span class="p">...</span><span class="o">&gt;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l1307" href="#l1307">1307</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="k">requires</span><span class="p">(</span><span class="o">!</span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">record_type</span><span class="o">&lt;</span><span class="n">Ts</span><span class="o">&gt;</span><span class="w"> </span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="p">...)</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l1308" href="#l1308">1308</a></td>
-      <td class="linebranch">
-      </td>
-      <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="k">struct</span><span class="w"> </span><span class="nc">common_product_type</span><span class="o">&lt;</span><span class="n">Ts</span><span class="p">...</span><span class="o">&gt;</span></td>
-    </tr>
-    <tr class="source-line">
-      <td class="lineno"><a id="l1309" href="#l1309">1309</a></td>
+      <td class="lineno"><a id="l1305" href="#l1305">1305</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">  </span><span class="p">{</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l1310" href="#l1310">1310</a></td>
+      <td class="lineno"><a id="l1306" href="#l1306">1306</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kumi</span><span class="o">::</span><span class="n">tuple</span><span class="o">&lt;&gt;</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l1311" href="#l1311">1311</a></td>
+      <td class="lineno"><a id="l1307" href="#l1307">1307</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="w">  </span><span class="p">};</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l1312" href="#l1312">1312</a></td>
+      <td class="lineno"><a id="l1308" href="#l1308">1308</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
       <td class="src "><span class="p">}</span></td>
     </tr>
     <tr class="source-line">
-      <td class="lineno"><a id="l1313" href="#l1313">1313</a></td>
+      <td class="lineno"><a id="l1309" href="#l1309">1309</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
