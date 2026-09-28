@@ -287,7 +287,8 @@ namespace kumi
       @brief Concept specifying is Product Type which types are all the same
 
       A type `T` models `kumi::concepts::homogeneous_product_type` if it models `kumi::concepts::product_type` and
-      contains member of a single, unique type.
+      contains member of a single, unique type. It differs from `kumi::concept::power_type` in that a power type must
+      expose a `value_type` alias so the trait is never computed.
 
       ## Example types:
       + `kumi::tuple<float,float,float>;`
@@ -297,7 +298,8 @@ namespace kumi
     **/
     //==================================================================================================================
     template<typename T>
-    concept power_type = kumi::concepts::product_type<T> && kumi::is_power_type_v<std::remove_cvref_t<T>>;
+    concept homogeneous_product_type =
+      kumi::concepts::product_type<T> && kumi::is_homogeneous_v<std::remove_cvref_t<T>>;
 
     //==================================================================================================================
     /**

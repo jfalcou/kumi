@@ -77,11 +77,8 @@ namespace kumi
 
     @tparam T Type to inspect
 
-    To be treated like a power type, an user defined type must support structured bindings as well as have a few
-  aliases.
-    - typename T::value_type;
-    - typename T::reference;
-    - typename T::const_reference;
+    To be treated like a power type, an user defined type must support structured bindings as well as exposing a
+    `value_type` alias.
 
     ## Helper type-trait
     @code
@@ -95,15 +92,12 @@ namespace kumi
   **/
   //====================================================================================================================
   template<typename T>
-  inline constexpr bool is_power_type_v = kumi::is_product_type_v<T> && requires(T&& t) {
-    typename std::remove_cvref_t<T>::value_type;
-    typename std::remove_cvref_t<T>::reference;
-    typename std::remove_cvref_t<T>::const_reference;
-  };
+  inline constexpr bool is_power_type_v =
+    kumi::is_product_type_v<T> && requires(T&& t) { typename std::remove_cvref_t<T>::value_type; };
 
   template<typename T> struct is_power_type
   {
-    static constexpr bool vlaue = kumi::is_power_type_v<T>;
+    static constexpr bool value = kumi::is_power_type_v<T>;
   };
 
   //====================================================================================================================

@@ -33,10 +33,7 @@ namespace kumi
   template<typename T, std::size_t N> struct array
   {
     using binder_t = kumi::_::make_binder_t<std::make_index_sequence<N>, T>;
-
     using value_type = std::remove_cvref_t<T>;
-    using reference = value_type&;
-    using const_reference = value_type const&;
 
     binder_t impl;
 
