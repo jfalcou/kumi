@@ -54,6 +54,8 @@ namespace kumi
 #define KUMI_ABI [[using gnu: always_inline, flatten, artificial]] KUMI_CUDA inline
 #elif defined(_MSC_VER)
 #define KUMI_ABI [[using msvc: forceinline, flatten]] KUMI_CUDA inline
+#else
+#define KUMI_ABI KUMI_CUDA inline
 #endif
 #define KUMI_HIDDEN_ABI KUMI_CUDA inline
 #if defined(__CUDA_ARCH__)
@@ -173,7 +175,8 @@ namespace kumi::_
 #define KUMI_REPEAT_8(m, d) KUMI_REPEAT_7(m, d) m(7, d)
 #define KUMI_REPEAT_9(m, d) KUMI_REPEAT_8(m, d) m(8, d)
 #define KUMI_REPEAT_10(m, d) KUMI_REPEAT_9(m, d) m(9, d)
-#define KUMI_PP_REPEAT(N, m, d) KUMI_REPEAT_##N(m, d)
+#define KUMI_PP_REPEAT_(N, m, d) KUMI_REPEAT_##N(m, d)
+#define KUMI_PP_REPEAT(N, m, d) KUMI_PP_REPEAT_(N, m, d)
 #define KUMI_ENUM_0(m, d)
 #define KUMI_ENUM_1(m, d) m(0, d)
 #define KUMI_ENUM_2(m, d) KUMI_ENUM_1(m, d), m(1, d)
@@ -185,9 +188,11 @@ namespace kumi::_
 #define KUMI_ENUM_8(m, d) KUMI_ENUM_7(m, d), m(7, d)
 #define KUMI_ENUM_9(m, d) KUMI_ENUM_8(m, d), m(8, d)
 #define KUMI_ENUM_10(m, d) KUMI_ENUM_9(m, d), m(9, d)
-#define KUMI_PP_ENUM(N, m, d) KUMI_ENUM_##N(m, d)
-#define KUMI_PP_CAT(P, S) P##S
-#define KUMI_PP_TAC(P, S) S##P
+#define KUMI_PP_ENUM_(N, m, d) KUMI_ENUM_##N(m, d)
+#define KUMI_PP_ENUM(N, m, d) KUMI_PP_ENUM_(N, m, d)
+#define KUMI_PP_CAT_(P, S) P##S
+#define KUMI_PP_CAT(P, S) KUMI_PP_CAT_(P, S)
+#define KUMI_PP_TAC(P, S) KUMI_PP_CAT_(S, P)
 #define KUMI_PP_IDENTITY(I, ...) I
 #define KUMI_MEMBERS(N, _)                                                                                             \
   T##N member##N;                                                                                                      \
@@ -416,11 +421,10 @@ namespace kumi::_
     indexed,
     field
   };
-  template<std::size_t I, typename T> inline auto get_key()
-  {
-    if constexpr (kumi::_::field<T>) return kumi::_::identifier_of_t<T>{};
-    else return std::integral_constant<std::size_t, I>{};
-  }
+  template<typename...> struct undefined;
+  template<std::size_t I, typename T> extern std::integral_constant<std::size_t, I> index_or_key;
+  template<std::size_t I, kumi::_::field T> extern kumi::_::identifier_of_t<T> index_or_key<I, T>;
+  template<std::size_t I, typename T> using index_or_key_t = decltype(index_or_key<I, T>);
   template<std::size_t I, typename T> struct unique
   {
     operator std::type_identity<T>();
@@ -441,10 +445,8 @@ namespace kumi::_
     requires(U::value == std::remove_cvref_t<T>::label())
     std::integral_constant<std::size_t, I> operator()(U const&);
   };
-  inline consteval std::true_type true_fn(...);
-  template<typename T, typename... Key>
-  inline auto is_set(T, Key...) -> decltype(kumi::_::true_fn(static_cast<Key>(std::declval<T>())...));
-  inline std::false_type is_set(...);
+  template<typename T, typename... Keys>
+  concept is_set = requires { (void(static_cast<Keys&&>(std::declval<T>())), ...); };
   template<typename Seq, typename... Ts> struct family;
   template<std::size_t... I, typename... Ts> struct family<std::index_sequence<I...>, Ts...> : kumi::_::unique<I, Ts>...
   {
@@ -455,17 +457,16 @@ namespace kumi::_
   template<typename... Ts> using make_family = family<std::index_sequence_for<Ts...>, Ts...>;
   template<typename T> inline constexpr bool is_set_v = false;
   template<std::size_t... I, typename... Ts>
-  inline constexpr bool is_set_v<kumi::_::family<std::index_sequence<I...>, Ts...>>{decltype(kumi::_::is_set(
-    std::declval<kumi::_::family<std::index_sequence<I...>, Ts...>>(), std::type_identity<Ts>{}...))::value};
+  inline constexpr bool is_set_v<kumi::_::family<std::index_sequence<I...>, Ts...>> =
+    kumi::_::is_set<kumi::_::family<std::index_sequence<I...>, Ts...>, std::type_identity<Ts>...>;
   template<typename T> inline constexpr bool is_map_v = false;
   template<std::size_t... I, typename... Ts>
-  inline constexpr bool is_map_v<kumi::_::family<std::index_sequence<I...>, Ts...>>{decltype(kumi::_::is_set(
-    std::declval<kumi::_::family<std::index_sequence<I...>, Ts...>>(), kumi::_::get_key<I, Ts>()...))::value};
+  inline constexpr bool is_map_v<kumi::_::family<std::index_sequence<I...>, Ts...>> =
+    kumi::_::is_set<kumi::_::family<std::index_sequence<I...>, Ts...>, kumi::_::index_or_key_t<I, Ts>...>;
   template<typename T, typename... Ts> inline constexpr bool same_mapping_v = false;
   template<std::size_t... I, typename... Ts, typename... Us>
-  inline constexpr bool same_mapping_v<kumi::_::family<std::index_sequence<I...>, Ts...>, Us...>{
-    decltype(kumi::_::is_set(std::declval<kumi::_::family<std::index_sequence<I...>, Ts...>>(),
-                             kumi::_::get_key<I, Us>()...))::value};
+  inline constexpr bool same_mapping_v<kumi::_::family<std::index_sequence<I...>, Ts...>, Us...> =
+    kumi::_::is_set<kumi::_::family<std::index_sequence<I...>, Ts...>, kumi::_::index_or_key_t<I, Ts>...>;
   template<typename Ref, typename... Fields>
   using index_of_type = typename kumi::_::make_family<Fields...>::template type<Ref>;
   template<typename Ref, typename... Fields>
@@ -1058,12 +1059,13 @@ namespace kumi
   };
   namespace _
   {
+    template<typename T> extern kumi::_::undefined<T> container_type;
     template<typename T>
-    requires kumi::_::container_like<T>
-    typename T::value_type container_type(T const&);
-    template<typename T, std::size_t N> T container_type(T const (&)[N]);
+    requires(kumi::_::container_like<T>)
+    extern typename T::value_type container_type<T>;
+    template<typename T, std::size_t N> extern T container_type<T[N]>;
   }
-  template<typename T> using container_type_t = decltype(kumi::_::container_type(std::declval<T>()));
+  template<typename T> using container_type_t = decltype(kumi::_::container_type<std::remove_cvref_t<T>>);
   template<typename T> struct container_type
   {
     using type = kumi::container_type_t<T>;
@@ -1082,18 +1084,16 @@ namespace kumi
   namespace _
   {
     template<typename T, typename Seq> inline constexpr bool homogeneous_ = false;
+    template<typename T> inline constexpr bool homogeneous_<T, std::index_sequence<>> = false;
     template<typename T, std::size_t... I>
-    inline constexpr bool homogeneous_<T, std::index_sequence<I...>>{
-      (sizeof...(I) != 0) && ((sizeof...(I) == 1) || kumi::_::all_the_same<kumi::element_t<I, T>...>)};
+    inline constexpr bool homogeneous_<T, std::index_sequence<I...>>{(sizeof...(I) == 1) ||
+                                                                     kumi::_::all_the_same<kumi::element_t<I, T>...>};
   }
   template<typename T> inline constexpr bool is_homogeneous_v = false;
   template<typename T>
-  requires(requires { T::is_homogeneous; } && kumi::is_product_type_v<T> && !kumi::is_record_type_v<T>)
-  inline constexpr bool is_homogeneous_v<T> = T::is_homogeneous;
-  template<typename T>
-  requires(!requires { T::is_homogeneous; } && kumi::is_product_type_v<T> && !kumi::is_record_type_v<T>)
-  inline constexpr bool is_homogeneous_v<T> =
-    kumi::is_container_v<T> || kumi::_::homogeneous_<T, std::make_index_sequence<kumi::size_v<T>>>;
+  requires(kumi::is_product_type_v<T> && !kumi::is_record_type_v<T>)
+  inline constexpr bool is_homogeneous_v<T> = requires { requires T::is_homogeneous; } || kumi::is_container_v<T> ||
+                                              kumi::_::homogeneous_<T, std::make_index_sequence<kumi::size_v<T>>>;
   template<typename T> struct is_homogeneous
   {
     static constexpr bool value = kumi::is_homogeneous_v<T>;
@@ -1104,29 +1104,30 @@ namespace kumi
   {
     static constexpr bool value = kumi::is_projection_map_v<T>;
   };
+  namespace _
+  {
+    template<std::size_t I, typename T> extern kumi::member_t<I, T> stored_member;
+    template<std::size_t I, typename T>
+    requires(kumi::is_record_type_v<std::remove_cvref_t<T>>)
+    extern decltype(get<kumi::_::identifier_of_t<kumi::element_t<I, T>>{}>(std::declval<T&&>())) stored_member<I, T>;
+  }
+  template<std::size_t I, typename T> using stored_member_t = decltype(kumi::_::stored_member<I, T>);
   template<std::size_t I, typename T> struct stored_member
   {
-    using type = kumi::member_t<I, T>;
+    using type = kumi::stored_member_t<I, T>;
   };
-  template<std::size_t I, typename T>
-  requires(kumi::is_record_type_v<std::remove_cvref_t<T>>)
-  struct stored_member<I, T>
+  namespace _
   {
-    using field_type = decltype(get<I>(std::declval<T&&>()));
-    using type = decltype(std::declval<field_type&&>()(typename std::remove_cvref_t<field_type>::identifier_type{}));
-  };
-  template<std::size_t I, typename T> using stored_member_t = typename kumi::stored_member<I, T>::type;
+    template<std::size_t I, typename T> extern kumi::element_t<I, T> stored_element;
+    template<std::size_t I, typename T>
+    requires(kumi::is_record_type_v<std::remove_cvref_t<T>>)
+    extern typename kumi::element_t<I, T>::type stored_element<I, T>;
+  }
+  template<std::size_t I, typename T> using stored_element_t = decltype(kumi::_::stored_element<I, T>);
   template<std::size_t I, typename T> struct stored_element
   {
-    using type = kumi::element_t<I, T>;
+    using type = kumi::stored_element_t<I, T>;
   };
-  template<std::size_t I, typename T>
-  requires(kumi::is_record_type<std::remove_cvref_t<T>>::value)
-  struct stored_element<I, T>
-  {
-    using type = typename kumi::element_t<I, T>::type;
-  };
-  template<std::size_t I, typename T> using stored_element_t = typename kumi::stored_element<I, T>::type;
   template<typename T, typename U> inline constexpr bool is_instance_of_v = false;
   template<template<typename...> class T, typename... Args1, typename... Args2>
   inline constexpr bool is_instance_of_v<T<Args1...>, T<Args2...>> = true;
@@ -1498,7 +1499,7 @@ namespace kumi
     constexpr inline operator std::size_t() const noexcept { return N; }
     constexpr inline operator std::integral_constant<std::size_t, N>() const noexcept { return {}; }
   };
-  template<std::size_t N> inline constexpr kumi::index_t<N> const index = {};
+  template<std::size_t N> inline constexpr kumi::index_t<N> index = {};
   template<kumi::str Label> struct label_t
   {
     using type = str;
@@ -1559,21 +1560,14 @@ namespace kumi
 {
   namespace _
   {
-    template<std::size_t I, typename T> struct value_at
-    {
-    };
+    template<std::size_t I, typename T> extern std::size_t value_at;
     template<std::size_t I, auto Head, auto... Tail>
-    struct value_at<I, kumi::projection_map<Head, Tail...>> : kumi::_::value_at<I - 1, kumi::projection_map<Tail...>>
-    {
-    };
-    template<std::size_t I, auto... Vs> struct value_at<I, kumi::projection_map<Vs...> const>
-    {
-      static constexpr auto value = kumi::_::value_at<I, kumi::projection_map<Vs...>>::value;
-    };
-    template<auto Head, auto... Tail> struct value_at<0, kumi::projection_map<Head, Tail...>>
-    {
-      static constexpr auto value = Head;
-    };
+    inline constexpr auto value_at<I, kumi::projection_map<Head, Tail...>> =
+      kumi::_::value_at<I - 1, kumi::projection_map<Tail...>>;
+    template<std::size_t I, auto... Vs>
+    inline constexpr auto value_at<I, kumi::projection_map<Vs...> const> =
+      kumi::_::value_at<I, kumi::projection_map<Vs...>>;
+    template<auto Head, auto... Tail> inline constexpr auto value_at<0, kumi::projection_map<Head, Tail...>> = Head;
   }
   template<auto... V> struct projection_map
   {
@@ -1587,7 +1581,7 @@ namespace kumi
     requires(I < sizeof...(V))
     constexpr decltype(auto) operator[]([[maybe_unused]] kumi::index_t<I> i) const noexcept
     {
-      return kumi::_::value_at<I, projection_map>::value;
+      return kumi::_::value_at<I, projection_map>;
     }
     template<std::size_t I>
     requires(I < sizeof...(V))
@@ -1623,32 +1617,28 @@ namespace kumi
   }
 }
 #if !defined(KUMI_DOXYGEN_INVOKED)
-template<std::size_t I, typename Head, typename... Tail>
-struct std::tuple_element<I, kumi::tuple<Head, Tail...>> : std::tuple_element<I - 1, kumi::tuple<Tail...>>
+namespace kumi::_
 {
-};
-template<std::size_t I, typename... Ts> struct std::tuple_element<I, kumi::tuple<Ts...> const>
+  template<std::size_t I, typename T> extern kumi::_::undefined<T> tuple_element;
+  template<template<class...> class Box, typename Head, typename... Tail>
+  extern Head tuple_element<0, Box<Head, Tail...>>;
+  template<std::size_t I, template<class...> typename Box, typename Head, typename... Tail>
+  extern decltype(kumi::_::tuple_element<I - 1, Box<Tail...>>) tuple_element<I, Box<Head, Tail...>>;
+  template<std::size_t I, template<class...> typename Box, typename... Ts>
+  extern decltype(kumi::_::tuple_element<I, Box<Ts...>>) const tuple_element<I, Box<Ts...> const>;
+}
+template<std::size_t I, typename... Ts> struct std::tuple_element<I, kumi::tuple<Ts...>>
 {
-  using type = typename tuple_element<I, kumi::tuple<Ts...>>::type const;
-};
-template<typename Head, typename... Tail> struct std::tuple_element<0, kumi::tuple<Head, Tail...>>
-{
-  using type = Head;
+  static_assert(I < sizeof...(Ts), "[KUMI] - Tuple index must be in range");
+  using type = decltype(kumi::_::tuple_element<I, kumi::tuple<Ts...>>);
 };
 template<typename... Ts> struct std::tuple_size<kumi::tuple<Ts...>> : std::integral_constant<std::size_t, sizeof...(Ts)>
 {
 };
-template<std::size_t I, typename Head, typename... Tail>
-struct std::tuple_element<I, kumi::record<Head, Tail...>> : std::tuple_element<I - 1, kumi::record<Tail...>>
+template<std::size_t I, typename... Ts> struct std::tuple_element<I, kumi::record<Ts...>>
 {
-};
-template<std::size_t I, typename... Ts> struct std::tuple_element<I, kumi::record<Ts...> const>
-{
-  using type = typename tuple_element<I, kumi::record<Ts...>>::type const;
-};
-template<typename Head, typename... Tail> struct std::tuple_element<0, kumi::record<Head, Tail...>>
-{
-  using type = Head;
+  static_assert(I < sizeof...(Ts), "[KUMI] - Record index must be in range");
+  using type = decltype(kumi::_::tuple_element<I, kumi::record<Ts...>>);
 };
 template<typename... Ts>
 struct std::tuple_size<kumi::record<Ts...>> : std::integral_constant<std::size_t, sizeof...(Ts)>
@@ -2198,9 +2188,7 @@ namespace kumi
   requires(kumi::is_kumi_tuple_v<std::remove_cvref_t<T>> && !kumi::concepts::contains_type<U, T>)
   constexpr auto get(T&& t) = delete;
 #endif
-  template<kumi::concepts::product_type T>
-  requires(!kumi::concepts::record_type<T>)
-  struct builder<T>
+  template<kumi::concepts::product_type T> struct builder<T>
   {
     using type = T;
     template<typename... Us> using to = kumi::tuple<Us...>;
@@ -2213,9 +2201,7 @@ namespace kumi
       return kumi::tuple{KUMI_FWD(args)...};
     }
   };
-  template<kumi::concepts::product_type... Ts>
-  requires(!kumi::concepts::record_type<Ts> && ...)
-  struct common_product_type<Ts...>
+  template<kumi::concepts::product_type... Ts> struct common_product_type<Ts...>
   {
     using type = kumi::tuple<>;
   };
@@ -2844,18 +2830,12 @@ namespace kumi::function
   } KUMI_VARIABLE_ABI constexpr cartesian_producer;
   struct cat_t
   {
-  private:
-    template<std::size_t... S> consteval auto impl(std::index_sequence<S...>) const noexcept
+    template<std::size_t... S> consteval auto operator()(kumi::index_t<S>...) const noexcept
     {
       constexpr auto N = (S + ... + 0ULL);
       return kumi::projection_map{
         kumi::_::make_digits(kumi::_::container_of_index, std::make_index_sequence<N>{}, std::index_sequence<S...>{}),
         kumi::_::make_digits(kumi::_::element_of_index, std::make_index_sequence<N>{}, std::index_sequence<S...>{})};
-    }
-  public:
-    template<std::size_t... S> consteval auto operator()(kumi::index_t<S>...) const noexcept
-    {
-      return impl(std::index_sequence<S...>{});
     }
   } KUMI_VARIABLE_ABI constexpr concatenater;
   struct extract_t
@@ -5116,10 +5096,10 @@ namespace kumi
   namespace _
   {
     template<typename T, std::size_t... I, std::size_t... J>
-    KUMI_HIDDEN_ABI constexpr decltype(auto) transpose_extern_(kumi::_::adl_tag_t,
-                                                               T&& t,
-                                                               std::index_sequence<I...>,
-                                                               std::index_sequence<J...> is)
+    KUMI_HIDDEN_ABI constexpr decltype(auto) transpose_(kumi::_::adl_tag_t,
+                                                        T&& t,
+                                                        std::index_sequence<I...>,
+                                                        std::index_sequence<J...> is)
     {
       return kumi::make_tuple(kumi::_::builder(KUMI_FWD(t), std::integral_constant<std::size_t, I>{}, is)...);
     }
@@ -5136,7 +5116,7 @@ namespace kumi
         constexpr std::size_t c = kumi::size_v<T>;
         constexpr std::size_t s = kumi::size_v<kumi::element_t<0, T>>;
         constexpr auto pos = kumi::function::zipper(kumi::index<c>, kumi::index<s>);
-        return transpose_extern_(kumi::_::adl_tag, KUMI_FWD(t), get<1>(pos), get<0>(pos));
+        return transpose_(kumi::_::adl_tag, KUMI_FWD(t), get<1>(pos), get<0>(pos));
       }
     }
   };
