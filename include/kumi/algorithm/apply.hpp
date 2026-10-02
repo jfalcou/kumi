@@ -27,7 +27,7 @@ namespace kumi
     requires(kumi::_::supports_apply<Function, T>)
     {
       if constexpr (kumi::concepts::record_type<T>) return (*this)(KUMI_FWD(f), kumi::values_of(KUMI_FWD(t)));
-      else return apply_(kumi::_::adl_tag, KUMI_FWD(f), KUMI_FWD(t), kumi::_::indexes_for<T>{});
+      else return apply_(kumi::_::adl_tag, KUMI_FWD(f), KUMI_FWD(t), kumi::function::indexes_for<T>{});
     }
   };
 
@@ -36,7 +36,7 @@ namespace kumi
     template<typename Function, kumi::concepts::record_type R>
     KUMI_ABI constexpr decltype(auto) operator()(Function&& f, R&& t) const
     {
-      return apply_(kumi::_::adl_tag, KUMI_FWD(f), KUMI_FWD(t), kumi::_::indexes_for<R>{});
+      return apply_(kumi::_::adl_tag, KUMI_FWD(f), KUMI_FWD(t), kumi::function::indexes_for<R>{});
     }
   };
 

@@ -47,8 +47,9 @@ namespace kumi
       else
       {
         constexpr auto c = 1 + sizeof...(Ts);
-        constexpr auto pos = kumi::function::zipper(kumi::index<c>, kumi::index<kumi::size_v<T0>>);
-        return zip_(kumi::_::adl_tag, kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
+        constexpr auto outer = std::make_index_sequence<c>{};
+        constexpr auto inner = kumi::function::indexes_for<T0>{};
+        return zip_(kumi::_::adl_tag, kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...), inner, outer);
       }
     }
   };
@@ -64,8 +65,9 @@ namespace kumi
       else
       {
         constexpr std::size_t c = 1 + sizeof...(Ts);
-        constexpr auto pos = kumi::function::zipper(kumi::index<c>, kumi::index<m>);
-        return zip_(kumi::_::adl_tag, kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
+        constexpr auto outer = std::make_index_sequence<c>{};
+        constexpr auto inner = std::make_index_sequence<m>{};
+        return zip_(kumi::_::adl_tag, kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...), inner, outer);
       }
     }
   };
@@ -81,9 +83,9 @@ namespace kumi
       else
       {
         constexpr std::size_t c = 1 + sizeof...(Ts);
-        constexpr auto pos = kumi::function::zipper(kumi::index<c>, kumi::index<m>);
-        return zip_max_(kumi::_::adl_tag, kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...), get<1>(pos),
-                        get<0>(pos));
+        constexpr auto outer = std::make_index_sequence<c>{};
+        constexpr auto inner = std::make_index_sequence<m>{};
+        return zip_max_(kumi::_::adl_tag, kumi::forward_as_tuple(KUMI_FWD(t0), KUMI_FWD(ts)...), inner, outer);
       }
     }
   };

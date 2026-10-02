@@ -11,27 +11,19 @@ namespace kumi
 {
   namespace _
   {
-    template<typename T, typename Set, std::size_t... I>
-    KUMI_HIDDEN_ABI consteval auto all_unique_inner_(Set&&, std::index_sequence<I...>) noexcept
-    {
-      return kumi::function::uniquer(
-        std::bool_constant<(Set{}(std::type_identity<kumi::stored_element_t<I, T>>{}) == I)>{}...);
-    }
-
     template<typename T, std::size_t... I>
     KUMI_HIDDEN_ABI consteval auto all_unique_(kumi::_::adl_tag_t, std::index_sequence<I...>) noexcept
     {
-      using idx = std::index_sequence<I...>;
-      using type = kumi::_::make_multiset_t<idx, kumi::stored_element_t<I, T>...>;
-
-      return all_unique_inner_<T>(type{}, idx{});
+      using set = kumi::_::make_multiset_t<std::index_sequence<I...>, kumi::stored_element_t<I, T>...>;
+      return kumi::function::unique_index_sequence<(set{}(std::type_identity<kumi::stored_element_t<I, T>>{}) ==
+                                                    I)...>{};
     }
 
     template<typename T, std::size_t... I>
     KUMI_HIDDEN_ABI consteval auto unique_(kumi::_::adl_tag_t, std::index_sequence<I...>) noexcept
     {
-      return kumi::function::uniqued(
-        std::bool_constant<!std::is_same_v<kumi::stored_element_t<I, T>, kumi::stored_element_t<I + 1, T>>>{}...);
+      return kumi::function::adjacent_index_sequence<
+        !std::is_same_v<kumi::stored_element_t<I, T>, kumi::stored_element_t<I + 1, T>>...>{};
     }
   }
 
@@ -56,7 +48,7 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return t;
       else
       {
-        constexpr auto proj = all_unique_<T>(kumi::_::adl_tag, kumi::_::indexes_for<T>{});
+        constexpr auto proj = all_unique_<T>(kumi::_::adl_tag, kumi::function::indexes_for<T>{});
         return kumi::_::builder(KUMI_FWD(t), proj);
       }
     }

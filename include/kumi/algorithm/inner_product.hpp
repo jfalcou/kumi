@@ -50,7 +50,7 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<S1>) return init;
       else
         return inner_product_(kumi::_::adl_tag, KUMI_FWD(s1), KUMI_FWD(s2), init, sum, prod,
-                              kumi::_::indexes_for<S1>{});
+                              kumi::function::indexes_for<S1>{});
     }
 
     template<kumi::concepts::product_type S1, kumi::concepts::sized_product_type<kumi::size_v<S1>> S2, typename T>
@@ -58,7 +58,9 @@ namespace kumi
     requires(kumi::concepts::compatible_product_types<S1, S2>)
     {
       if constexpr (kumi::concepts::empty_product_type<S1>) return init;
-      else return inner_product_fast_(kumi::_::adl_tag, KUMI_FWD(s1), KUMI_FWD(s2), init, kumi::_::indexes_for<S1>{});
+      else
+        return inner_product_fast_(kumi::_::adl_tag, KUMI_FWD(s1), KUMI_FWD(s2), init,
+                                   kumi::function::indexes_for<S1>{});
     }
   };
 

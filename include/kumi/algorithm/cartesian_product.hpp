@@ -9,14 +9,20 @@
 
 namespace kumi
 {
-
   namespace _
   {
-    template<typename T, typename Seq, std::size_t... I>
-    KUMI_HIDDEN_ABI constexpr auto cartesian_product_(kumi::_::adl_tag_t, T&& t, Seq&& s, std::index_sequence<I...>)
+    template<std::size_t K, typename T, std::size_t... I, std::size_t... J, std::size_t... S>
+    KUMI_HIDDEN_ABI constexpr auto cartesian_element_(
+      kumi::_::adl_tag_t, T&& t, std::index_sequence<I...>, std::index_sequence<J...> j, std::index_sequence<S...>)
     {
-      kumi::_::indexes_for<T> ids{};
-      return kumi::make_tuple((kumi::_::builder(KUMI_FWD(t), get<I>(s), ids))...);
+      return kumi::_::builder(KUMI_FWD(t), std::index_sequence<((K / S) % I)...>{}, j);
+    }
+
+    template<typename T, typename Sizes, typename Elts, typename Strides, std::size_t... I>
+    KUMI_HIDDEN_ABI constexpr auto cartesian_product_(
+      kumi::_::adl_tag_t, T&& t, Sizes s, Elts e, Strides st, std::index_sequence<I...>)
+    {
+      return kumi::make_tuple(cartesian_element_<I>(kumi::_::adl_tag, t, s, e, st)...);
     }
   }
 
@@ -29,8 +35,12 @@ namespace kumi
       if constexpr (sizeof...(Ts) == 0) return kumi::tuple{};
       else
       {
-        constexpr auto idx = kumi::function::cartesian_producer(kumi::index<kumi::size_v<Ts>>...);
-        return cartesian_product_(kumi::_::adl_tag, kumi::forward_as_tuple(KUMI_FWD(ts)...), get<1>(idx), get<0>(idx));
+        using out = std::make_index_sequence<(kumi::size_v<Ts> * ...)>;
+        using elts = std::index_sequence_for<Ts...>;
+        using sizes = std::index_sequence<kumi::size_v<Ts>...>;
+        using strides = kumi::function::cartesian_strides<sizes, elts>;
+        return cartesian_product_(kumi::_::adl_tag, kumi::forward_as_tuple(KUMI_FWD(ts)...), sizes{}, elts{}, strides{},
+                                  out{});
       }
     }
   };
@@ -68,7 +78,6 @@ namespace kumi
     @subgroupheader{Return value}
 
       - A tuple containing all the product types built from all combination of all ts' elements
-
 
     @groupheader{Helper type}
 

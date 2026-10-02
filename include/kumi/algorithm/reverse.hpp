@@ -14,11 +14,7 @@ namespace kumi
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
-      else
-      {
-        constexpr auto idx = kumi::function::reverser(kumi::index<kumi::size_v<T>>);
-        return kumi::_::builder(KUMI_FWD(t), idx);
-      }
+      else return kumi::_::builder(KUMI_FWD(t), kumi::function::reverse_index_sequence<kumi::size_v<T>>{});
     }
   };
 

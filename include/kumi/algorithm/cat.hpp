@@ -9,6 +9,17 @@
 
 namespace kumi
 {
+  namespace _
+  {
+    template<typename T, typename Seq, std::size_t... I>
+    constexpr auto cat_(kumi::_::adl_tag_t, T&& t, Seq inner, std::index_sequence<I...>)
+    {
+      using outer = kumi::function::cat_index_sequence<
+        kumi::function::fill_index_sequence<I, kumi::size_v<kumi::element_t<I, T>>>...>;
+      return kumi::_::builder(KUMI_FWD(t), inner, outer{});
+    }
+  }
+
   struct cat_t
   {
     template<kumi::concepts::product_type... Ts>
@@ -18,8 +29,9 @@ namespace kumi
       if constexpr (sizeof...(Ts) == 0) return kumi::tuple{};
       else
       {
-        constexpr auto pos = kumi::function::concatenater(kumi::index<kumi::size_v<Ts>>...);
-        return kumi::_::builder(kumi::forward_as_tuple(KUMI_FWD(ts)...), get<1>(pos), get<0>(pos));
+        using inner = kumi::function::cat_index_sequence<kumi::function::indexes_for<Ts>...>;
+        using outer = std::make_index_sequence<sizeof...(Ts)>;
+        return cat_(kumi::_::adl_tag, kumi::forward_as_tuple(KUMI_FWD(ts)...), inner{}, outer{});
       }
     }
   };

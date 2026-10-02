@@ -46,7 +46,7 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return true;
       else if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)), p);
       else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::invoke(p, get<0>(KUMI_FWD(t)));
-      else return all_of_(kumi::_::adl_tag, KUMI_FWD(t), p, kumi::_::indexes_for<T>{});
+      else return all_of_(kumi::_::adl_tag, KUMI_FWD(t), p, kumi::function::indexes_for<T>{});
     }
 
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
@@ -66,7 +66,7 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return true;
       else if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)), p);
       else if constexpr (kumi::concepts::sized_product_type<T, 1>) return kumi::invoke(p, get<0>(KUMI_FWD(t)));
-      else return any_of_(kumi::_::adl_tag, KUMI_FWD(t), p, kumi::_::indexes_for<T>{});
+      else return any_of_(kumi::_::adl_tag, KUMI_FWD(t), p, kumi::function::indexes_for<T>{});
     }
 
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const noexcept
@@ -99,7 +99,7 @@ namespace kumi
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return 0ULL;
       else if constexpr (kumi::concepts::record_type<T>) return (*this)(values_of(KUMI_FWD(t)), p);
-      else return count_if_(kumi::_::adl_tag, KUMI_FWD(t), p, kumi::_::indexes_for<T>{});
+      else return count_if_(kumi::_::adl_tag, KUMI_FWD(t), p, kumi::function::indexes_for<T>{});
     }
   };
 
@@ -110,7 +110,7 @@ namespace kumi
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return 0ULL;
       else if constexpr (kumi::concepts::record_type<T>) return (*this)(values_of(KUMI_FWD(t)));
-      else return count_(kumi::_::adl_tag, KUMI_FWD(t), kumi::_::indexes_for<T>{});
+      else return count_(kumi::_::adl_tag, KUMI_FWD(t), kumi::function::indexes_for<T>{});
     }
   };
 
