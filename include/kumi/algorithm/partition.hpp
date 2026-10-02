@@ -25,7 +25,7 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return kumi::tuple{builder<T>::make(), builder<T>::make()};
       else
       {
-        constexpr auto pos = select_<T, Pred>(kumi::_::adl_tag, std::make_index_sequence<kumi::size_v<T>>{});
+        constexpr auto pos = select_<T, Pred>(kumi::_::adl_tag, kumi::_::indexes_for<T>{});
         return kumi::tuple{kumi::_::builder(KUMI_FWD(t), get<0>(pos)), kumi::_::builder(KUMI_FWD(t), get<1>(pos))};
       }
     }
@@ -38,7 +38,7 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
       else
       {
-        constexpr auto pos = select_<T, Pred>(kumi::_::adl_tag, std::make_index_sequence<kumi::size_v<T>>{});
+        constexpr auto pos = select_<T, Pred>(kumi::_::adl_tag, kumi::_::indexes_for<T>{});
         return kumi::_::builder(KUMI_FWD(t), get<0>(pos));
       }
     }
@@ -51,7 +51,7 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
       else
       {
-        constexpr auto pos = select_<T, Pred>(kumi::_::adl_tag, std::make_index_sequence<kumi::size_v<T>>{});
+        constexpr auto pos = select_<T, Pred>(kumi::_::adl_tag, kumi::_::indexes_for<T>{});
         return kumi::_::builder(KUMI_FWD(t), get<1>(pos));
       }
     }

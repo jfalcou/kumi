@@ -27,7 +27,7 @@ namespace kumi
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return 0;
       else if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)), p);
-      else return locate_(kumi::_::adl_tag, p, KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T>>{});
+      else return locate_(kumi::_::adl_tag, p, KUMI_FWD(t), kumi::_::indexes_for<T>{});
     }
   };
 

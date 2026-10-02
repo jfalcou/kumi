@@ -29,7 +29,7 @@ namespace kumi
     template<kumi::concepts::product_type T, typename V>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, V&& v) const
     {
-      return push_front_(kumi::_::adl_tag, KUMI_FWD(t), KUMI_FWD(v), std::make_index_sequence<kumi::size_v<T>>{});
+      return push_front_(kumi::_::adl_tag, KUMI_FWD(t), KUMI_FWD(v), kumi::_::indexes_for<T>{});
     }
   };
 
@@ -48,7 +48,7 @@ namespace kumi
     template<kumi::concepts::product_type T, typename V>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, V&& v) const
     {
-      return push_back_(kumi::_::adl_tag, KUMI_FWD(t), KUMI_FWD(v), std::make_index_sequence<kumi::size_v<T>>{});
+      return push_back_(kumi::_::adl_tag, KUMI_FWD(t), KUMI_FWD(v), kumi::_::indexes_for<T>{});
     }
   };
 

@@ -7,6 +7,11 @@
 //==================================================================================================
 #pragma once
 
+namespace kumi
+{
+  template<typename T> extern std::size_t const size_v;
+}
+
 namespace kumi::_
 {
   //====================================================================================================================
@@ -93,4 +98,7 @@ namespace kumi::_
 
   template<typename T, std::size_t N>
   using as_homogeneous_t = decltype(make_homogeneous<T>(std::make_index_sequence<N>{}));
+
+  //====================================================================================================================
+  template<typename T> using indexes_for = std::make_index_sequence<kumi::size_v<T>>;
 }
