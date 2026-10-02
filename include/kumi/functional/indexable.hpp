@@ -132,8 +132,7 @@ namespace kumi::function
   {
   private:
     template<std::size_t B, std::size_t E, std::size_t S, std::size_t R, std::size_t... I>
-    consteval auto impl(
-      kumi::index_t<B>, kumi::index_t<E>, kumi::index_t<S>, kumi::index_t<R>, std::index_sequence<I...>) const noexcept
+    consteval auto impl(std::index_sequence<I...>) const noexcept
     {
       constexpr std::size_t K = (E > B) ? (E - B) - R : 0;
       constexpr std::size_t S_1 = (S > 1) ? (S - 1) : 1;
@@ -143,14 +142,14 @@ namespace kumi::function
 
   public:
     template<std::size_t B, std::size_t E, std::size_t S, std::size_t St = 1>
-    consteval auto operator()(kumi::index_t<B> b,
-                              kumi::index_t<E> e,
+    consteval auto operator()(kumi::index_t<B>,
+                              kumi::index_t<E>,
                               kumi::index_t<S>,
-                              kumi::index_t<St> s = {}) const noexcept
+                              kumi::index_t<St> = {}) const noexcept
     {
       constexpr std::size_t T = (E > B) ? (E - B + St - 1) / St : 0;
       constexpr std::size_t N = S - T;
-      return impl(b, e, s, kumi::index<T>, std::make_index_sequence<N>{});
+      return impl<B, E, S, T>(std::make_index_sequence<N>{});
     }
   } KUMI_VARIABLE_ABI constexpr extractor;
 
@@ -186,17 +185,15 @@ namespace kumi::function
   struct rotate_t
   {
   private:
-    template<std::size_t R, std::size_t... S>
-    consteval auto impl(kumi::index_t<R>, std::index_sequence<S...>) const noexcept
+    template<std::size_t R, std::size_t... S> consteval auto impl(std::index_sequence<S...>) const noexcept
     {
       return std::index_sequence<((S + R) % sizeof...(S))...>{};
     }
 
   public:
-    template<std::size_t S, std::size_t R>
-    consteval auto operator()(kumi::index_t<S>, kumi::index_t<R> r) const noexcept
+    template<std::size_t S, std::size_t R> consteval auto operator()(kumi::index_t<S>, kumi::index_t<R>) const noexcept
     {
-      return impl(r, std::make_index_sequence<S>{});
+      return impl<R>(std::make_index_sequence<S>{});
     }
   } KUMI_VARIABLE_ABI constexpr rotater;
 
@@ -232,17 +229,15 @@ namespace kumi::function
   struct repeat_t
   {
   private:
-    template<std::size_t E, std::size_t... I>
-    consteval auto impl(kumi::index_t<E>, std::index_sequence<I...>) const noexcept
+    template<std::size_t E, std::size_t... I> consteval auto impl(std::index_sequence<I...>) const noexcept
     {
       return std::index_sequence<((void)I, E)...>{};
     }
 
   public:
-    template<std::size_t E, std::size_t C>
-    consteval auto operator()(kumi::index_t<E> e, kumi::index_t<C>) const noexcept
+    template<std::size_t E, std::size_t C> consteval auto operator()(kumi::index_t<E>, kumi::index_t<C>) const noexcept
     {
-      return impl(e, std::make_index_sequence<C>{});
+      return impl<E>(std::make_index_sequence<C>{});
     }
   } KUMI_VARIABLE_ABI constexpr repeater;
 
@@ -321,17 +316,15 @@ namespace kumi::function
   struct shift_t
   {
   private:
-    template<std::size_t O, std::size_t... I>
-    consteval auto impl(kumi::index_t<O>, std::index_sequence<I...>) const noexcept
+    template<std::size_t O, std::size_t... I> consteval auto impl(std::index_sequence<I...>) const noexcept
     {
       return std::index_sequence<I + O...>{};
     }
 
   public:
-    template<std::size_t O, std::size_t S>
-    consteval auto operator()(kumi::index_t<O> o, kumi::index_t<S>) const noexcept
+    template<std::size_t O, std::size_t S> consteval auto operator()(kumi::index_t<O>, kumi::index_t<S>) const noexcept
     {
-      return impl(o, std::make_index_sequence<S>{});
+      return impl<O>(std::make_index_sequence<S>{});
     }
   } KUMI_VARIABLE_ABI constexpr shifter;
 
@@ -367,18 +360,16 @@ namespace kumi::function
   struct split_t
   {
   private:
-    template<std::size_t N, std::size_t... S>
-    consteval auto impl(kumi::index_t<N>, std::index_sequence<S...>) const noexcept
+    template<std::size_t N, std::size_t... S> consteval auto impl(std::index_sequence<S...>) const noexcept
     {
       return kumi::projection_map{std::make_index_sequence<N>{}, std::index_sequence<(S + N)...>{}};
     }
 
   public:
-    template<std::size_t N, std::size_t S>
-    consteval auto operator()(kumi::index_t<N> n, kumi::index_t<S>) const noexcept
+    template<std::size_t N, std::size_t S> consteval auto operator()(kumi::index_t<N>, kumi::index_t<S>) const noexcept
     {
       constexpr std::size_t R = S - N;
-      return impl(n, std::make_index_sequence<R>{});
+      return impl<N>(std::make_index_sequence<R>{});
     }
   } KUMI_VARIABLE_ABI constexpr splitter;
 
@@ -417,10 +408,7 @@ namespace kumi::function
   {
   private:
     template<std::size_t Sz, std::size_t E, std::size_t Sd, std::size_t... Bs>
-    consteval auto impl(kumi::index_t<Sz>,
-                        kumi::index_t<E>,
-                        kumi::index_t<Sd>,
-                        std::index_sequence<Bs...>) const noexcept
+    consteval auto impl(std::index_sequence<Bs...>) const noexcept
     {
       using blocks = std::index_sequence<kumi::_::block_size(Bs, Sd, E, Sz)...>;
       using offsets = std::index_sequence<(Bs * Sd)...>;
@@ -429,12 +417,9 @@ namespace kumi::function
 
   public:
     template<std::size_t Sz, std::size_t E, std::size_t Sd, std::size_t Bs>
-    consteval auto operator()(kumi::index_t<Sz> sz,
-                              kumi::index_t<E> e,
-                              kumi::index_t<Sd> sd,
-                              kumi::index_t<Bs>) const noexcept
+    consteval auto operator()(kumi::index_t<Sz>, kumi::index_t<E>, kumi::index_t<Sd>, kumi::index_t<Bs>) const noexcept
     {
-      return impl(sz, e, sd, std::make_index_sequence<Bs>{});
+      return impl<Sz, E, Sd>(std::make_index_sequence<Bs>{});
     }
   } KUMI_VARIABLE_ABI constexpr tiler;
 
@@ -510,17 +495,17 @@ namespace kumi::function
   {
   private:
     template<std::size_t B, std::size_t S, std::size_t... I>
-    consteval auto impl(kumi::index_t<B>, kumi::index_t<S>, std::index_sequence<I...>) const noexcept
+    consteval auto impl(std::index_sequence<I...>) const noexcept
     {
       return std::index_sequence<(B + I * S)...>{};
     }
 
   public:
     template<std::size_t B, std::size_t E, std::size_t S = 1>
-    consteval auto operator()(kumi::index_t<B> b, kumi::index_t<E>, kumi::index_t<S> s = {}) const noexcept
+    consteval auto operator()(kumi::index_t<B>, kumi::index_t<E>, kumi::index_t<S> = {}) const noexcept
     {
       constexpr std::size_t N = (E > B) ? ((E - B + S - 1) / S) : 0;
-      return impl(b, s, std::make_index_sequence<N>{});
+      return impl<B, S>(std::make_index_sequence<N>{});
     }
   } KUMI_VARIABLE_ABI constexpr slicer;
 }

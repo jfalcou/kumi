@@ -31,7 +31,7 @@ namespace kumi
     {
       if constexpr (kumi::concepts::record_type<T>) return (*this)(f, kumi::values_of(KUMI_FWD(t)), init);
       else if constexpr (kumi::concepts::empty_product_type<T>) return init;
-      else return fold_left_(kumi::_::adl_tag, f, KUMI_FWD(t), init, std::make_index_sequence<kumi::size_v<T>>{});
+      else return fold_left_(kumi::_::adl_tag, f, KUMI_FWD(t), init, kumi::_::indexes_for<T>{});
     }
 
     template<typename Function, kumi::concepts::non_empty_product_type T>
@@ -52,7 +52,7 @@ namespace kumi
     {
       if constexpr (kumi::concepts::record_type<T>) return (*this)(f, kumi::values_of(KUMI_FWD(t)), init);
       else if constexpr (kumi::concepts::empty_product_type<T>) return init;
-      else return fold_right_(kumi::_::adl_tag, f, KUMI_FWD(t), init, std::make_index_sequence<kumi::size_v<T>>{});
+      else return fold_right_(kumi::_::adl_tag, f, KUMI_FWD(t), init, kumi::_::indexes_for<T>{});
     }
 
     template<typename Function, kumi::concepts::non_empty_product_type T>

@@ -77,8 +77,8 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return 0;
       else if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)), f);
       else
-        return this->max_t::operator()(minmax_flat_(kumi::_::adl_tag, KUMI_FWD(t), kumi::_::minmax_case, f, (*this),
-                                                    std::make_index_sequence<kumi::size_v<T>>{}));
+        return this->max_t::operator()(
+          minmax_flat_(kumi::_::adl_tag, KUMI_FWD(t), kumi::_::minmax_case, f, (*this), kumi::_::indexes_for<T>{}));
     }
   };
 
@@ -116,8 +116,8 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return 0;
       else if constexpr (kumi::concepts::record_type<T>) return (*this)(kumi::values_of(KUMI_FWD(t)), f);
       else
-        return this->min_t::operator()(minmax_flat_(kumi::_::adl_tag, KUMI_FWD(t), kumi::_::minmax_case, f, (*this),
-                                                    std::make_index_sequence<kumi::size_v<T>>{}));
+        return this->min_t::operator()(
+          minmax_flat_(kumi::_::adl_tag, KUMI_FWD(t), kumi::_::minmax_case, f, (*this), kumi::_::indexes_for<T>{}));
     }
   };
 
