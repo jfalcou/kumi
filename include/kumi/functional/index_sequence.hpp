@@ -65,7 +65,7 @@ namespace kumi::function
   /**
     @ingroup kumi_functional
 
-    @alias cartesian_strides
+    @typedef cartesian_strides
     @brief A helper alias template computing the strides associated to the cartesian product operation.
 
     For a cartesian product of `M` tuples of sizes `N0, ..., N(M-1)`, the `K`-th element of the product
@@ -107,7 +107,7 @@ namespace kumi::function
   /**
     @ingroup kumi_functional
 
-    @alias cat_index_sequence
+    @typedef cat_index_sequence
     @brief A helper alias template computing the index map associated to the concatenation operation.
 
     @groupheader{Header file}
@@ -134,7 +134,7 @@ namespace kumi::function
   /**
     @ingroup kumi_functional
 
-    @alias fill_index_sequence
+    @typedef fill_index_sequence
     @brief A helper alias template generating an index sequence repeating a constant value.
 
     @groupheader{Header file}
@@ -163,7 +163,7 @@ namespace kumi::function
   /**
     @ingroup kumi_functional
 
-    @alias indexes_for
+    @typedef indexes_for
     @brief A helper alias template extracting the projection map associated to a given `kumi::concepts::product_type`.
 
     @groupheader{Header file}
@@ -190,7 +190,7 @@ namespace kumi::function
   /**
     @ingroup kumi_functional
 
-    @alias remove_index_sequence
+    @typedef remove_index_sequence
     @brief A helper alias template generating the index sequence associated to the remove operation.
 
     @groupheader{Header file}
@@ -226,7 +226,7 @@ namespace kumi::function
   /**
     @ingroup kumi_functional
 
-    @alias reverse_index_sequence
+    @typedef reverse_index_sequence
     @brief A helper alias template computing the reversed index sequence.
 
     @groupheader{Header file}
@@ -254,7 +254,7 @@ namespace kumi::function
   /**
     @ingroup kumi_functional
 
-    @alias rotate_index_sequence
+    @typedef rotate_index_sequence
     @brief A helper alias template computing the index_sequence associated to the rotation operation.
 
     @groupheader{Header file}
@@ -283,7 +283,7 @@ namespace kumi::function
   /**
     @ingroup kumi_functional
 
-    @alias shift_index_sequence
+    @typedef shift_index_sequence
     @brief A helper alias template computing linear indexing translations.
 
     @groupheader{Header file}
@@ -312,7 +312,7 @@ namespace kumi::function
   /**
     @ingroup kumi_functional
 
-    @alias slice_index_sequence
+    @typedef slice_index_sequence
     @brief A helper alias template computing the index map associated to the slicing (begin, end, step) operation.
 
     @groupheader{Header file}
