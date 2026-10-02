@@ -204,53 +204,6 @@ namespace kumi::function
   /**
     @ingroup kumi_functional
 
-    @var reducer
-    @brief Callable object computing the index map associated to the reduction operation.
-
-    @qualifier consteval
-    @qualifier noexcept
-
-    @groupheader{Header file}
-    @code
-    #include <kumi/functional/indexable.hpp>
-    @endcode
-
-    @groupheader{Call Signature}
-    @code
-      template<typename Count, typename N>
-      consteval auto reducer(Count c, N n) noexcept;
-    @endcode
-
-    @subgroupheader{Parameters}
-      - `c`: Total reduced pairs processing for the current step
-      - `n`: Remainder if the number of values is odd
-
-    @subgroupheader{Return value}
-      A `kumi::projection_map` segmenting the input domain in chunks of two consecutive elements plus the remainder.
-  **/
-  //====================================================================================================================
-  struct reduce_t
-  {
-  private:
-    template<std::size_t N, std::size_t... I>
-    consteval auto impl(kumi::index_t<N>, std::index_sequence<I...>) const noexcept
-    {
-      return kumi::projection_map{std::index_sequence<(2 * I)...>{}, std::index_sequence<(2 * I + 1)...>{},
-                                  kumi::index<N>};
-    }
-
-  public:
-    template<std::size_t C, std::size_t N>
-    consteval auto operator()(kumi::index_t<C>, kumi::index_t<N> n) const noexcept
-    {
-      return impl(n, std::make_index_sequence<C>{});
-    }
-  } KUMI_VARIABLE_ABI constexpr reducer;
-
-  //====================================================================================================================
-  /**
-    @ingroup kumi_functional
-
     @var repeater
     @brief Callable object generating an index sequence repeating a constant index.
 
