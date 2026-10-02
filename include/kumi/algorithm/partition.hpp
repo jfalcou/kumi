@@ -14,7 +14,9 @@ namespace kumi
     template<typename T, template<typename> typename Pred, std::size_t... I>
     KUMI_HIDDEN_ABI consteval auto select_(kumi::_::adl_tag_t, std::index_sequence<I...>) noexcept
     {
-      return kumi::function::selector(std::bool_constant<Pred<kumi::stored_element_t<I, T>>::value>{}...);
+      return kumi::projection_map{
+        kumi::function::select_index_sequence<Pred<kumi::stored_element_t<I, T>>::value...>{},
+        kumi::function::select_index_sequence<(!Pred<kumi::stored_element_t<I, T>>::value)...>{}};
     }
   }
 
@@ -25,7 +27,7 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return kumi::tuple{builder<T>::make(), builder<T>::make()};
       else
       {
-        constexpr auto pos = select_<T, Pred>(kumi::_::adl_tag, kumi::_::indexes_for<T>{});
+        constexpr auto pos = select_<T, Pred>(kumi::_::adl_tag, kumi::function::indexes_for<T>{});
         return kumi::tuple{kumi::_::builder(KUMI_FWD(t), get<0>(pos)), kumi::_::builder(KUMI_FWD(t), get<1>(pos))};
       }
     }
@@ -38,7 +40,7 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
       else
       {
-        constexpr auto pos = select_<T, Pred>(kumi::_::adl_tag, kumi::_::indexes_for<T>{});
+        constexpr auto pos = select_<T, Pred>(kumi::_::adl_tag, kumi::function::indexes_for<T>{});
         return kumi::_::builder(KUMI_FWD(t), get<0>(pos));
       }
     }
@@ -51,7 +53,7 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return builder<T>::make();
       else
       {
-        constexpr auto pos = select_<T, Pred>(kumi::_::adl_tag, kumi::_::indexes_for<T>{});
+        constexpr auto pos = select_<T, Pred>(kumi::_::adl_tag, kumi::function::indexes_for<T>{});
         return kumi::_::builder(KUMI_FWD(t), get<1>(pos));
       }
     }

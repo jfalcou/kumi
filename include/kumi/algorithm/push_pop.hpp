@@ -29,7 +29,7 @@ namespace kumi
     template<kumi::concepts::product_type T, typename V>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, V&& v) const
     {
-      return push_front_(kumi::_::adl_tag, KUMI_FWD(t), KUMI_FWD(v), kumi::_::indexes_for<T>{});
+      return push_front_(kumi::_::adl_tag, KUMI_FWD(t), KUMI_FWD(v), kumi::function::indexes_for<T>{});
     }
   };
 
@@ -38,8 +38,7 @@ namespace kumi
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return kumi::builder<T>::make();
-      else
-        return kumi::_::builder(KUMI_FWD(t), kumi::function::shifter(kumi::index<1>, kumi::index<kumi::size_v<T> - 1>));
+      else return kumi::_::builder(KUMI_FWD(t), kumi::function::shift_index_sequence<1, kumi::size_v<T> - 1>{});
     }
   };
 
@@ -48,7 +47,7 @@ namespace kumi
     template<kumi::concepts::product_type T, typename V>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, V&& v) const
     {
-      return push_back_(kumi::_::adl_tag, KUMI_FWD(t), KUMI_FWD(v), kumi::_::indexes_for<T>{});
+      return push_back_(kumi::_::adl_tag, KUMI_FWD(t), KUMI_FWD(v), kumi::function::indexes_for<T>{});
     }
   };
 
