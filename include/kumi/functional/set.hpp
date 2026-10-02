@@ -9,7 +9,6 @@
 
 namespace kumi
 {
-
   namespace _
   {
     template<typename Seq, typename... Ts> struct multiset;
@@ -34,6 +33,22 @@ namespace kumi
     };
 
     template<typename... Ts> using make_multiset_t = typename kumi::_::multiset<Ts...>;
+
+    template<typename T, bool... Bs> extern T unique_index_sequence;
+
+    template<std::size_t... I, bool... Bs>
+    extern std::index_sequence<kumi::_::nth_pos(I, Bs...)...> unique_index_sequence<std::index_sequence<I...>, Bs...>;
+
+    template<typename T, bool... Bs> extern T select_index_sequence;
+
+    template<std::size_t... I, bool... Bs>
+    extern std::index_sequence<kumi::_::nth_pos(I, Bs...)...> select_index_sequence<std::index_sequence<I...>, Bs...>;
+
+    template<typename T, bool... Bs> extern T adjacent_index_sequence;
+
+    template<std::size_t... I, bool... Bs>
+    extern std::index_sequence<0, (kumi::_::nth_pos(I, Bs...) + 1)...>
+      adjacent_index_sequence<std::index_sequence<I...>, Bs...>;
   }
 
   namespace function
@@ -41,110 +56,92 @@ namespace kumi
     //==================================================================================================================
     /**
       @ingroup kumi_functional
-      @brief    Logic provider to compute the index map associated to the all_unique operation.
 
-      ## Callable object
+      @alias unique_index_sequence
+      @brief A helper alias template generating the index map associated to the unique operations.
+
+      @groupheader{Header file}
       @code
-        constexpr unique_t uniquer{};
+      #include <kumi/functional/set.hpp>
       @endcode
-    **/
-    //==================================================================================================================
-    struct unique_t
-    {
-    private:
-      template<std::size_t... I, bool... Bs>
-      consteval auto impl(std::index_sequence<I...>, std::bool_constant<Bs>...) const noexcept
-      {
-        return std::index_sequence<(kumi::_::nth_pos(I, Bs...))...>{};
-      }
 
-    public:
-      template<bool... Bs> consteval auto operator()(std::bool_constant<Bs>... bs) const noexcept
-      {
-        return impl(std::make_index_sequence<(Bs + ... + 0)>{}, bs...);
-      }
-    };
-
-    //==================================================================================================================
-    /**
-      @ingroup kumi_functional
-      @brief    Logic provider to compute the index map associated to the partition operation.
-
-      ## Callable object
+      @groupheader{Call Signature}
       @code
-        constexpr select_t selector{};
+        template<bool... Bs>
+        using unique_index_sequence;
       @endcode
+
+      @subgroupheader{Template Parameters}
+        - `Bs`: Compile-time flags, one per input element, set to `true` when the element is kept
+
+      @subgroupheader{Return value}
+        A `std::index_sequence` containing, in increasing order, the positions of the `true` flags in `Bs`.
+        For `Bs = <true, false, true, true>`, the result is `std::index_sequence<0, 2, 3>`.
     **/
     //==================================================================================================================
-    struct select_t
-    {
-    private:
-      template<bool... b, std::size_t... I, std::size_t... J>
-      consteval auto impl(std::integer_sequence<bool, b...>,
-                          std::index_sequence<I...>,
-                          std::index_sequence<J...>) const noexcept
-      {
-        return kumi::projection_map{std::index_sequence<(kumi::_::nth_pos(I, b...))...>{},
-                                    std::index_sequence<(kumi::_::nth_pos(J, !b...))...>{}};
-      }
-
-    public:
-      template<bool... Bs> consteval auto operator()(std::bool_constant<Bs>...) const noexcept
-      {
-        return impl(std::integer_sequence<bool, Bs...>{}, std::make_index_sequence<(Bs + ... + 0)>{},
-                    std::make_index_sequence<(sizeof...(Bs) - (Bs + ... + 0))>{});
-      }
-    };
+    template<bool... Bs>
+    using unique_index_sequence =
+      decltype(kumi::_::unique_index_sequence<std::make_index_sequence<(Bs + ... + 0)>, Bs...>);
 
     //==================================================================================================================
     /**
       @ingroup kumi_functional
-      @brief    Logic provider to compute the index map associated to the adjacent unicity operation.
 
-      ## Callable object
+      @alias select_index_sequence
+      @brief A helper alias template generating the positions of the `true` flags in a pack of booleans.
+
+      @groupheader{Header file}
       @code
-        constexpr adjacent_unicity_t uniqued{};
+      #include <kumi/functional/set.hpp>
       @endcode
+
+      @groupheader{Call Signature}
+      @code
+        template<bool... Bs>
+        using select_index_sequence;
+      @endcode
+
+      @subgroupheader{Template Parameters}
+        - `Bs`: Compile-time flags, one per input element, set to `true` when the element is selected
+
+      @subgroupheader{Return value}
+        A `std::index_sequence` containing, in increasing order, the positions of the `true` flags.
+        For `Bs = <true, false, true, true>`, the result is `std::index_sequence<0, 2, 3>`.
     **/
     //==================================================================================================================
-    struct adjacent_unicity_t
-    {
-    private:
-      template<std::size_t... I, bool... Bs>
-      consteval auto impl(std::index_sequence<I...>, std::bool_constant<Bs>...) const noexcept
-      {
-        return std::index_sequence<0, (kumi::_::nth_pos(I, Bs...) + 1)...>{};
-      }
-
-    public:
-      template<bool... Bs> consteval auto operator()(std::bool_constant<Bs>... bs) const noexcept
-      {
-        return impl(std::make_index_sequence<(Bs + ... + 0)>{}, bs...);
-      }
-    };
-
-    //==================================================================================================================
-    /**
-      @ingroup kumi_functional
-      @brief    Callable object computing the index map associated to the adjacent unicity operation.
-    **/
-    //==================================================================================================================
-    inline constexpr kumi::function::adjacent_unicity_t uniqued{};
+    template<bool... Bs>
+    using select_index_sequence =
+      decltype(kumi::_::select_index_sequence<std::make_index_sequence<(Bs + ... + 0)>, Bs...>);
 
     //==================================================================================================================
     /**
       @ingroup kumi_functional
-      @brief    Callable object computing the index map associated to the deduplication operation.
-    **/
-    //==================================================================================================================
-    inline constexpr kumi::function::unique_t uniquer{};
 
-    //==================================================================================================================
-    /**
-      @ingroup kumi_functional
-      @brief    Callable object computing the index map associated to the selection operation.
+      @alias adjacent_index_sequence
+      @brief A helper alias template generating the index map associated to the adjacent unicity operation.
+
+      @groupheader{Header file}
+      @code
+      #include <kumi/functional/set.hpp>
+      @endcode
+
+      @groupheader{Call Signature}
+      @code
+        template<bool... Bs>
+        using adjacent_index_sequence;
+      @endcode
+
+      @subgroupheader{Template Parameters}
+        - `Bs`: Compile-time flags, one per adjacent pair, set to `true` when the pair differs
+
+      @subgroupheader{Return value}
+        A `std::index_sequence` made of `0` followed by the position of each `true` flag shifted by one,
+        i.e. the index of each element that differs from its predecessor.
+        For `Bs = <false, true, true>`, the result is `std::index_sequence<0, 2, 3>`.
     **/
     //==================================================================================================================
-    inline constexpr kumi::function::select_t selector{};
+    template<bool... Bs>
+    using adjacent_index_sequence =
+      decltype(kumi::_::adjacent_index_sequence<std::make_index_sequence<(Bs + ... + 0)>, Bs...>);
   }
 }
