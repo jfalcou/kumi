@@ -57,7 +57,7 @@ namespace kumi
     /**
       @ingroup kumi_functional
 
-      @alias unique_index_sequence
+      @typedef unique_index_sequence
       @brief A helper alias template generating the index map associated to the unique operations.
 
       @groupheader{Header file}
@@ -87,7 +87,7 @@ namespace kumi
     /**
       @ingroup kumi_functional
 
-      @alias select_index_sequence
+      @typedef select_index_sequence
       @brief A helper alias template generating the positions of the `true` flags in a pack of booleans.
 
       @groupheader{Header file}
@@ -117,7 +117,7 @@ namespace kumi
     /**
       @ingroup kumi_functional
 
-      @alias adjacent_index_sequence
+      @typedef adjacent_index_sequence
       @brief A helper alias template generating the index map associated to the adjacent unicity operation.
 
       @groupheader{Header file}
