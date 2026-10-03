@@ -34,7 +34,7 @@ namespace kumi
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, ID const& id) const noexcept
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return std::false_type{};
-      else return contains_(kumi::_::adl_tag, KUMI_FWD(t), id, std::make_index_sequence<kumi::size_v<T>>{});
+      else return contains_(kumi::_::adl_tag, KUMI_FWD(t), id, kumi::function::indexes_for<T>{});
     }
   };
 
@@ -46,9 +46,8 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return std::false_type{};
       else if constexpr (sizeof...(Is) == 0) return std::false_type{};
       else
-        return std::bool_constant<(decltype(contains_(kumi::_::adl_tag, std::declval<T>(), ids,
-                                                      std::make_index_sequence<kumi::size_v<T>>{})){} ||
-                                   ...)>{};
+        return std::bool_constant<(
+          decltype(contains_(kumi::_::adl_tag, std::declval<T>(), ids, kumi::function::indexes_for<T>{})){} || ...)>{};
     }
   };
 
@@ -61,7 +60,7 @@ namespace kumi
       if constexpr (kumi::concepts::empty_product_type<T>) return std::false_type{};
       else if constexpr (sizeof...(Is) == 0) return std::false_type{};
       else if constexpr (sizeof...(Is) < kumi::size_v<T>) return std::false_type{};
-      else return contains_only_(kumi::_::adl_tag, KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T>>{}, ids...);
+      else return contains_only_(kumi::_::adl_tag, KUMI_FWD(t), kumi::function::indexes_for<T>{}, ids...);
     }
   };
 

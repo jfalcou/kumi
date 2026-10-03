@@ -53,7 +53,7 @@ namespace kumi
     [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, T&& t, Ts&&... ts) const
     requires(kumi::concepts::compatible_product_types<T, Ts...>) && (kumi::_::supports_call<Function, T &&, Ts && ...>)
     {
-      return map_<kumi::_::case_::normal>(kumi::_::adl_tag, f, std::make_index_sequence<kumi::size_v<T>>{}, KUMI_FWD(t),
+      return map_<kumi::_::case_::normal>(kumi::_::adl_tag, f, kumi::function::indexes_for<T>{}, KUMI_FWD(t),
                                           KUMI_FWD(ts)...);
     }
   };
@@ -66,8 +66,8 @@ namespace kumi
     [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, T&& t, Ts&&... ts) const
     requires(!kumi::concepts::record_type<T> && (!kumi::concepts::record_type<Ts> && ...))
     {
-      return map_<kumi::_::case_::indexed>(kumi::_::adl_tag, f, std::make_index_sequence<kumi::size_v<T>>{},
-                                           KUMI_FWD(t), KUMI_FWD(ts)...);
+      return map_<kumi::_::case_::indexed>(kumi::_::adl_tag, f, kumi::function::indexes_for<T>{}, KUMI_FWD(t),
+                                           KUMI_FWD(ts)...);
     }
   };
 
@@ -79,7 +79,7 @@ namespace kumi
     [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, R&& r, Rs&&... rs) const
     requires(kumi::concepts::compatible_product_types<R, Rs...>)
     {
-      return map_<kumi::_::case_::field>(kumi::_::adl_tag, f, std::make_index_sequence<kumi::size_v<R>>{}, KUMI_FWD(r),
+      return map_<kumi::_::case_::field>(kumi::_::adl_tag, f, kumi::function::indexes_for<R>{}, KUMI_FWD(r),
                                          KUMI_FWD(rs)...);
     }
   };

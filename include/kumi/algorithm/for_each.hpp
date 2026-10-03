@@ -50,7 +50,7 @@ namespace kumi
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return;
       else
-        for_each_<kumi::_::case_::normal>(kumi::_::adl_tag, f, std::make_index_sequence<kumi::size_v<T>>{}, KUMI_FWD(t),
+        for_each_<kumi::_::case_::normal>(kumi::_::adl_tag, f, kumi::function::indexes_for<T>{}, KUMI_FWD(t),
                                           KUMI_FWD(ts)...);
     }
   };
@@ -63,8 +63,8 @@ namespace kumi
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return;
       else
-        for_each_<kumi::_::case_::indexed>(kumi::_::adl_tag, f, std::make_index_sequence<kumi::size_v<T>>{},
-                                           KUMI_FWD(t), KUMI_FWD(ts)...);
+        for_each_<kumi::_::case_::indexed>(kumi::_::adl_tag, f, kumi::function::indexes_for<T>{}, KUMI_FWD(t),
+                                           KUMI_FWD(ts)...);
     }
   };
 
@@ -76,7 +76,7 @@ namespace kumi
     {
       if constexpr (kumi::concepts::empty_product_type<R>) return;
       else
-        for_each_<kumi::_::case_::field>(kumi::_::adl_tag, f, std::make_index_sequence<kumi::size_v<R>>{}, KUMI_FWD(r),
+        for_each_<kumi::_::case_::field>(kumi::_::adl_tag, f, kumi::function::indexes_for<R>{}, KUMI_FWD(r),
                                          KUMI_FWD(rs)...);
     }
   };

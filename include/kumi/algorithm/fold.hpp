@@ -31,7 +31,7 @@ namespace kumi
     {
       if constexpr (kumi::concepts::record_type<T>) return (*this)(f, kumi::values_of(KUMI_FWD(t)), init);
       else if constexpr (kumi::concepts::empty_product_type<T>) return init;
-      else return fold_left_(kumi::_::adl_tag, f, KUMI_FWD(t), init, std::make_index_sequence<kumi::size_v<T>>{});
+      else return fold_left_(kumi::_::adl_tag, f, KUMI_FWD(t), init, kumi::function::indexes_for<T>{});
     }
 
     template<typename Function, kumi::concepts::non_empty_product_type T>
@@ -41,7 +41,7 @@ namespace kumi
       else if constexpr (kumi::concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
       else
         return fold_left_(kumi::_::adl_tag, f, KUMI_FWD(t), get<0>(KUMI_FWD(t)),
-                          kumi::function::shifter(kumi::index<1>, kumi::index<kumi::size_v<T> - 1>));
+                          kumi::function::shift_index_sequence<1, kumi::size_v<T> - 1>{});
     }
   };
 
@@ -52,7 +52,7 @@ namespace kumi
     {
       if constexpr (kumi::concepts::record_type<T>) return (*this)(f, kumi::values_of(KUMI_FWD(t)), init);
       else if constexpr (kumi::concepts::empty_product_type<T>) return init;
-      else return fold_right_(kumi::_::adl_tag, f, KUMI_FWD(t), init, std::make_index_sequence<kumi::size_v<T>>{});
+      else return fold_right_(kumi::_::adl_tag, f, KUMI_FWD(t), init, kumi::function::indexes_for<T>{});
     }
 
     template<typename Function, kumi::concepts::non_empty_product_type T>
@@ -62,7 +62,7 @@ namespace kumi
       else if constexpr (kumi::concepts::sized_product_type<T, 1>) return get<0>(KUMI_FWD(t));
       else
         return fold_right_(kumi::_::adl_tag, f, KUMI_FWD(t), get<0>(KUMI_FWD(t)),
-                           kumi::function::shifter(kumi::index<1>, kumi::index<kumi::size_v<T> - 1>));
+                           kumi::function::shift_index_sequence<1, kumi::size_v<T> - 1>{});
     }
   };
 
