@@ -31,6 +31,9 @@ namespace kumi::_
     return i;
   }
 
+  // MSVC workaround, it seems like msvc tries to pass arguments before performing proper substitution of the pack
+  template<std::size_t I, bool... Bs> inline constexpr std::size_t nth_pos_v = nth_pos(I, Bs...);
+
   //====================================================================================================================
   // Pure fold: for the type at position J, stride is the product of the
   // sizes of everything before it (first tuple = fastest-varying).
