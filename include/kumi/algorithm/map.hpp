@@ -51,7 +51,7 @@ namespace kumi
              kumi::concepts::product_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(Function f, T&& t, Ts&&... ts) const
-    requires(kumi::concepts::compatible_product_types<T, Ts...>) && (kumi::_::supports_call<Function, T &&, Ts && ...>)
+    requires(kumi::concepts::compatible_product_types<T, Ts...>) && (kumi::_::supports_call<Function, T&&, Ts&&...>)
     {
       return map_<kumi::_::case_::normal>(kumi::_::adl_tag, f, std::make_index_sequence<kumi::size_v<T>>{}, KUMI_FWD(t),
                                           KUMI_FWD(ts)...);
