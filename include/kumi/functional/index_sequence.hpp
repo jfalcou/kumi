@@ -14,8 +14,10 @@ namespace kumi::_
   template<std::size_t... I, std::size_t... J>
   extern std::index_sequence<I..., J...> cat_index_sequence<std::index_sequence<I...>, std::index_sequence<J...>>;
 
+  template<typename T, typename... Ts> using cat_index_sequence_t = decltype(kumi::_::cat_index_sequence<T, Ts...>);
+
   template<std::size_t... I, std::size_t... J, typename... Ts>
-  extern decltype(kumi::_::cat_index_sequence<std::index_sequence<I..., J...>, Ts...>)
+  extern cat_index_sequence_t<std::index_sequence<I..., J...>, Ts...>
     cat_index_sequence<std::index_sequence<I...>, std::index_sequence<J...>, Ts...>;
 
   template<std::size_t, typename T> extern T fill_index_sequence;
