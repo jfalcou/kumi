@@ -1,27 +1,12 @@
 [
  {
   "branch": "main",
-  "cpu_us": 169257990,
+  "cpu_us": 63243358,
   "date": "2026-09-05T09:23:51Z",
   "link_cpu_us": 0,
   "link_peak_kib": 0,
   "links": 0,
   "modules": {
-   "doc/infra": {
-    "cpu_us": 10748056,
-    "peak_kib": 135004,
-    "units": 21
-   },
-   "doc/record": {
-    "cpu_us": 47801531,
-    "peak_kib": 157496,
-    "units": 82
-   },
-   "doc/tuple": {
-    "cpu_us": 47465045,
-    "peak_kib": 154352,
-    "units": 87
-   },
    "unit/infra": {
     "cpu_us": 4591523,
     "peak_kib": 143776,
@@ -45,31 +30,16 @@
   },
   "peak_kib": 195492,
   "sha": "2dcbee50b61ce1c7416f385e3e2aabf2dc30d00f",
-  "units": 303
+  "units": 113
  },
  {
   "branch": "main",
-  "cpu_us": 192411496,
+  "cpu_us": 70992721,
   "date": "2026-09-05T14:14:50Z",
   "link_cpu_us": 0,
   "link_peak_kib": 0,
   "links": 0,
   "modules": {
-   "doc/infra": {
-    "cpu_us": 12457541,
-    "peak_kib": 134904,
-    "units": 21
-   },
-   "doc/record": {
-    "cpu_us": 54862866,
-    "peak_kib": 158160,
-    "units": 82
-   },
-   "doc/tuple": {
-    "cpu_us": 54098368,
-    "peak_kib": 154696,
-    "units": 87
-   },
    "unit/infra": {
     "cpu_us": 5269323,
     "peak_kib": 143320,
@@ -93,31 +63,16 @@
   },
   "peak_kib": 195524,
   "sha": "becfa1b2f80fdb4bbadaaf7dd31fdc7cf628a629",
-  "units": 303
+  "units": 113
  },
  {
   "branch": "main",
-  "cpu_us": 191875489,
+  "cpu_us": 70518767,
   "date": "2026-09-05T16:49:22Z",
   "link_cpu_us": 0,
   "link_peak_kib": 0,
   "links": 0,
   "modules": {
-   "doc/infra": {
-    "cpu_us": 12487867,
-    "peak_kib": 134404,
-    "units": 21
-   },
-   "doc/record": {
-    "cpu_us": 54737729,
-    "peak_kib": 157920,
-    "units": 82
-   },
-   "doc/tuple": {
-    "cpu_us": 54131126,
-    "peak_kib": 153852,
-    "units": 87
-   },
    "unit/infra": {
     "cpu_us": 5190717,
     "peak_kib": 144200,
@@ -141,31 +96,16 @@
   },
   "peak_kib": 195476,
   "sha": "a1f58c80250447a73fcb9bff4c039c9817908950",
-  "units": 303
+  "units": 113
  },
  {
   "branch": "main",
-  "cpu_us": 188439767,
+  "cpu_us": 69653203,
   "date": "2026-09-05T22:48:56Z",
   "link_cpu_us": 0,
   "link_peak_kib": 0,
   "links": 0,
   "modules": {
-   "doc/infra": {
-    "cpu_us": 12254956,
-    "peak_kib": 135272,
-    "units": 21
-   },
-   "doc/record": {
-    "cpu_us": 53417412,
-    "peak_kib": 157292,
-    "units": 82
-   },
-   "doc/tuple": {
-    "cpu_us": 53114196,
-    "peak_kib": 154308,
-    "units": 87
-   },
    "unit/infra": {
     "cpu_us": 5143203,
     "peak_kib": 144524,
@@ -189,31 +129,16 @@
   },
   "peak_kib": 195544,
   "sha": "a6f7dbe98b6cfd3c9b6d8880b16a644e2bea243e",
-  "units": 303
+  "units": 113
  },
  {
   "branch": "main",
-  "cpu_us": 88613291,
+  "cpu_us": 33342456,
   "date": "2026-09-06T07:52:16Z",
   "link_cpu_us": 0,
   "link_peak_kib": 0,
   "links": 0,
   "modules": {
-   "doc/infra": {
-    "cpu_us": 5594858,
-    "peak_kib": 135412,
-    "units": 21
-   },
-   "doc/record": {
-    "cpu_us": 25070178,
-    "peak_kib": 158468,
-    "units": 82
-   },
-   "doc/tuple": {
-    "cpu_us": 24605799,
-    "peak_kib": 154328,
-    "units": 87
-   },
    "unit/infra": {
     "cpu_us": 2413653,
     "peak_kib": 144844,
@@ -237,31 +162,16 @@
   },
   "peak_kib": 194980,
   "sha": "62c52bde9f95ad1dd0b968e9b385c309fe892237",
-  "units": 303
+  "units": 113
  },
  {
   "branch": "main",
-  "cpu_us": 190569308,
+  "cpu_us": 70316929,
   "date": "2026-09-06T08:14:44Z",
   "link_cpu_us": 0,
   "link_peak_kib": 0,
   "links": 0,
   "modules": {
-   "doc/infra": {
-    "cpu_us": 12351671,
-    "peak_kib": 134896,
-    "units": 21
-   },
-   "doc/record": {
-    "cpu_us": 54029634,
-    "peak_kib": 158148,
-    "units": 82
-   },
-   "doc/tuple": {
-    "cpu_us": 53871074,
-    "peak_kib": 154428,
-    "units": 87
-   },
    "unit/infra": {
     "cpu_us": 5208307,
     "peak_kib": 143032,
@@ -285,31 +195,16 @@
   },
   "peak_kib": 194504,
   "sha": "71e0aed3ed50e15ba8071ac3c8234a9926ce65a4",
-  "units": 303
+  "units": 113
  },
  {
   "branch": "main",
-  "cpu_us": 162129094,
+  "cpu_us": 60885007,
   "date": "2026-09-06T10:26:56Z",
   "link_cpu_us": 0,
   "link_peak_kib": 0,
   "links": 0,
   "modules": {
-   "doc/infra": {
-    "cpu_us": 10500004,
-    "peak_kib": 134252,
-    "units": 21
-   },
-   "doc/record": {
-    "cpu_us": 45854833,
-    "peak_kib": 158552,
-    "units": 82
-   },
-   "doc/tuple": {
-    "cpu_us": 44889250,
-    "peak_kib": 154244,
-    "units": 87
-   },
    "unit/infra": {
     "cpu_us": 4429054,
     "peak_kib": 143444,
@@ -333,31 +228,16 @@
   },
   "peak_kib": 195776,
   "sha": "33b49e8c0389d27f2d260cbecfad4cc56454466b",
-  "units": 303
+  "units": 113
  },
  {
   "branch": "main",
-  "cpu_us": 139442563,
+  "cpu_us": 59083373,
   "date": "2026-09-07T18:57:50Z",
   "link_cpu_us": 0,
   "link_peak_kib": 0,
   "links": 0,
   "modules": {
-   "doc/infra": {
-    "cpu_us": 8114993,
-    "peak_kib": 134564,
-    "units": 21
-   },
-   "doc/record": {
-    "cpu_us": 36189953,
-    "peak_kib": 157396,
-    "units": 82
-   },
-   "doc/tuple": {
-    "cpu_us": 36054244,
-    "peak_kib": 155180,
-    "units": 87
-   },
    "unit/infra": {
     "cpu_us": 4195152,
     "peak_kib": 145392,
@@ -381,31 +261,16 @@
   },
   "peak_kib": 194924,
   "sha": "d68670a7db14f958e5d47026dd14d7626d5256d9",
-  "units": 303
+  "units": 113
  },
  {
   "branch": "main",
-  "cpu_us": 172517093,
+  "cpu_us": 73412774,
   "date": "2026-09-07T22:46:39Z",
   "link_cpu_us": 0,
   "link_peak_kib": 0,
   "links": 0,
   "modules": {
-   "doc/infra": {
-    "cpu_us": 10143034,
-    "peak_kib": 135172,
-    "units": 21
-   },
-   "doc/record": {
-    "cpu_us": 44592153,
-    "peak_kib": 157832,
-    "units": 82
-   },
-   "doc/tuple": {
-    "cpu_us": 44369132,
-    "peak_kib": 154436,
-    "units": 87
-   },
    "unit/infra": {
     "cpu_us": 5173275,
     "peak_kib": 144180,
@@ -429,31 +294,16 @@
   },
   "peak_kib": 195052,
   "sha": "fef579cf2c93545266eea9ee906f86f240c62f10",
-  "units": 303
+  "units": 113
  },
  {
   "branch": "main",
-  "cpu_us": 205367389,
+  "cpu_us": 86468962,
   "date": "2026-09-08T20:40:35Z",
   "link_cpu_us": 0,
   "link_peak_kib": 0,
   "links": 0,
   "modules": {
-   "doc/infra": {
-    "cpu_us": 12158923,
-    "peak_kib": 135116,
-    "units": 21
-   },
-   "doc/record": {
-    "cpu_us": 53541615,
-    "peak_kib": 157832,
-    "units": 82
-   },
-   "doc/tuple": {
-    "cpu_us": 53197889,
-    "peak_kib": 154880,
-    "units": 87
-   },
    "unit/infra": {
     "cpu_us": 6211305,
     "peak_kib": 144320,
@@ -477,31 +327,16 @@
   },
   "peak_kib": 194332,
   "sha": "20524823e6a1db052b1efd63e53e6b3994a75104",
-  "units": 303
+  "units": 113
  },
  {
   "branch": "main",
-  "cpu_us": 137161040,
+  "cpu_us": 60102037,
   "date": "2026-09-09T06:31:20Z",
   "link_cpu_us": 0,
   "link_peak_kib": 0,
   "links": 0,
   "modules": {
-   "doc/infra": {
-    "cpu_us": 7604590,
-    "peak_kib": 134912,
-    "units": 21
-   },
-   "doc/record": {
-    "cpu_us": 34542574,
-    "peak_kib": 157400,
-    "units": 82
-   },
-   "doc/tuple": {
-    "cpu_us": 34911839,
-    "peak_kib": 154180,
-    "units": 87
-   },
    "unit/infra": {
     "cpu_us": 4201991,
     "peak_kib": 145004,
@@ -525,31 +360,16 @@
   },
   "peak_kib": 195368,
   "sha": "c2bdbcbe7987f17f76bd8d88050d6a77a4b19c6b",
-  "units": 303
+  "units": 113
  },
  {
   "branch": "main",
-  "cpu_us": 167547773,
+  "cpu_us": 70985989,
   "date": "2026-09-09T09:38:51Z",
   "link_cpu_us": 0,
   "link_peak_kib": 0,
   "links": 0,
   "modules": {
-   "doc/infra": {
-    "cpu_us": 9934337,
-    "peak_kib": 135340,
-    "units": 21
-   },
-   "doc/record": {
-    "cpu_us": 43371442,
-    "peak_kib": 157304,
-    "units": 82
-   },
-   "doc/tuple": {
-    "cpu_us": 43256005,
-    "peak_kib": 154616,
-    "units": 88
-   },
    "unit/infra": {
     "cpu_us": 4975352,
     "peak_kib": 145212,
@@ -573,31 +393,16 @@
   },
   "peak_kib": 195344,
   "sha": "713246461cb3c3585efeff8f9bf14eb6f2b053e6",
-  "units": 304
+  "units": 113
  },
  {
   "branch": "main",
-  "cpu_us": 211034347,
+  "cpu_us": 88865274,
   "date": "2026-09-09T21:14:23Z",
   "link_cpu_us": 0,
   "link_peak_kib": 0,
   "links": 0,
   "modules": {
-   "doc/infra": {
-    "cpu_us": 12494406,
-    "peak_kib": 134688,
-    "units": 21
-   },
-   "doc/record": {
-    "cpu_us": 54291531,
-    "peak_kib": 157292,
-    "units": 82
-   },
-   "doc/tuple": {
-    "cpu_us": 55383136,
-    "peak_kib": 153588,
-    "units": 88
-   },
    "unit/infra": {
     "cpu_us": 6446917,
     "peak_kib": 144164,
@@ -621,31 +426,16 @@
   },
   "peak_kib": 195296,
   "sha": "f0b2cfd48611836bd007b7785c5d685b4e7a7f53",
-  "units": 304
+  "units": 113
  },
  {
   "branch": "main",
-  "cpu_us": 207444477,
+  "cpu_us": 86698900,
   "date": "2026-09-10T21:14:11Z",
-  "link_cpu_us": 9703541,
+  "link_cpu_us": 3775543,
   "link_peak_kib": 73036,
-  "links": 304,
+  "links": 113,
   "modules": {
-   "doc/infra": {
-    "cpu_us": 12347432,
-    "peak_kib": 135160,
-    "units": 21
-   },
-   "doc/record": {
-    "cpu_us": 54032076,
-    "peak_kib": 158276,
-    "units": 82
-   },
-   "doc/tuple": {
-    "cpu_us": 54366069,
-    "peak_kib": 154232,
-    "units": 88
-   },
    "unit/infra": {
     "cpu_us": 6132889,
     "peak_kib": 144648,
@@ -669,31 +459,16 @@
   },
   "peak_kib": 195180,
   "sha": "e9a907b4a04de7e873614d555d06cb9c09ae79f6",
-  "units": 304
+  "units": 113
  },
  {
   "branch": "main",
-  "cpu_us": 208745788,
+  "cpu_us": 88407022,
   "date": "2026-09-17T08:37:03Z",
-  "link_cpu_us": 9563821,
+  "link_cpu_us": 3828906,
   "link_peak_kib": 73000,
-  "links": 304,
+  "links": 113,
   "modules": {
-   "doc/infra": {
-    "cpu_us": 12160692,
-    "peak_kib": 135228,
-    "units": 21
-   },
-   "doc/record": {
-    "cpu_us": 53877291,
-    "peak_kib": 162232,
-    "units": 82
-   },
-   "doc/tuple": {
-    "cpu_us": 54300783,
-    "peak_kib": 153852,
-    "units": 88
-   },
    "unit/infra": {
     "cpu_us": 6265198,
     "peak_kib": 150980,
@@ -717,31 +492,16 @@
   },
   "peak_kib": 195828,
   "sha": "fb4d906d125ae1ff3c829e9d5056d0dcd207f5ef",
-  "units": 304
+  "units": 113
  },
  {
   "branch": "main",
-  "cpu_us": 209586515,
+  "cpu_us": 88837303,
   "date": "2026-09-28T09:00:18Z",
-  "link_cpu_us": 9751344,
-  "link_peak_kib": 72976,
-  "links": 304,
+  "link_cpu_us": 3884241,
+  "link_peak_kib": 72972,
+  "links": 113,
   "modules": {
-   "doc/infra": {
-    "cpu_us": 12280923,
-    "peak_kib": 134360,
-    "units": 21
-   },
-   "doc/record": {
-    "cpu_us": 54237798,
-    "peak_kib": 162552,
-    "units": 82
-   },
-   "doc/tuple": {
-    "cpu_us": 54230491,
-    "peak_kib": 154864,
-    "units": 88
-   },
    "unit/infra": {
     "cpu_us": 6327031,
     "peak_kib": 151132,
@@ -765,31 +525,16 @@
   },
   "peak_kib": 196016,
   "sha": "593804c17c8d6833930d2ce5ee126d0ed7e2d029",
-  "units": 304
+  "units": 113
  },
  {
   "branch": "main",
-  "cpu_us": 209767534,
+  "cpu_us": 88814350,
   "date": "2026-10-03T11:08:55Z",
-  "link_cpu_us": 9799502,
-  "link_peak_kib": 72976,
-  "links": 304,
+  "link_cpu_us": 3980649,
+  "link_peak_kib": 72972,
+  "links": 113,
   "modules": {
-   "doc/infra": {
-    "cpu_us": 12264806,
-    "peak_kib": 135700,
-    "units": 21
-   },
-   "doc/record": {
-    "cpu_us": 54205670,
-    "peak_kib": 162452,
-    "units": 82
-   },
-   "doc/tuple": {
-    "cpu_us": 54482708,
-    "peak_kib": 154576,
-    "units": 88
-   },
    "unit/infra": {
     "cpu_us": 6357922,
     "peak_kib": 152348,
@@ -813,6 +558,6 @@
   },
   "peak_kib": 196012,
   "sha": "f36366533a6e373f0322a1e9d6295bc326e1f142",
-  "units": 304
+  "units": 113
  }
 ]
