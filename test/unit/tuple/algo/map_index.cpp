@@ -12,28 +12,26 @@
 
 TTS_CASE("Check result::map_index<F,Tuple...> behavior")
 {
-  auto lambda = [](auto, auto const& m) { return &m; };
-  using func_t = decltype(lambda);
+  using func_t = decltype([](auto, auto const& m) { return &m; });
 
   TTS_TYPE_IS((kumi::result::map_index_t<func_t, kumi::tuple<char, short, int, double>>),
               (kumi::tuple<char const*, short const*, int const*, double const*>));
 
-  auto add = [](auto i, auto a, auto b) { return (a * b) / (i + 1.); };
+  [[maybe_unused]] auto add = [](auto i, auto a, auto b) { return (a * b) / (i + 1.); };
   using add_t = decltype(add);
 
   TTS_TYPE_IS(
     (kumi::result::map_index_t<add_t, kumi::tuple<char, short, int, double>, kumi::tuple<char, short, int, float>>),
     (kumi::tuple<double, double, double, double>));
 
-  auto to_tuple = [](auto, auto) { return kumi::make_tuple(1); };
-  using to_t = decltype(to_tuple);
+  using to_t = decltype([](auto, auto) { return kumi::make_tuple(1); });
   TTS_TYPE_IS((kumi::result::map_index_t<to_t, kumi::tuple<int>>), (kumi::tuple<kumi::tuple<int>>));
 };
 
 TTS_CASE("Check map_index(f, {}) behavior")
 {
   bool was_run = false;
-  auto s = kumi::map_index(
+  [[maybe_unused]] auto s = kumi::map_index(
     [&](auto, auto m) {
       was_run = true;
       return sizeof(m);

@@ -138,28 +138,3 @@ jobs:
     uses: jfalcou/copacabana/.github/workflows/matrix.yml@main
     with:
       file: .github/matrices/nvidia-device.yml
-
-  ##################################################################################################
-  ## AMD tests - mirror the NVIDIA matrix on a self-hosted runner labeled 'amd' carrying ROCm.
-  ## They stay queued until such a runner is registered: the device row runs clang-hip on the card.
-  ##################################################################################################
-  amd-debug-tests:
-    name: AMD
-    needs: [precommit, standalone-generation, sanitizer-tests]
-    uses: jfalcou/copacabana/.github/workflows/matrix.yml@main
-    with:
-      file: .github/matrices/amd-debug.yml
-
-  amd-release-tests:
-    name: AMD
-    needs: [precommit, standalone-generation, sanitizer-tests]
-    uses: jfalcou/copacabana/.github/workflows/matrix.yml@main
-    with:
-      file: .github/matrices/amd-release.yml
-
-  amd-device-tests:
-    name: AMD Device
-    needs: [precommit, standalone-generation, sanitizer-tests]
-    uses: jfalcou/copacabana/.github/workflows/matrix.yml@main
-    with:
-      file: .github/matrices/amd-device.yml

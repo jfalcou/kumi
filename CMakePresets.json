@@ -35,15 +35,27 @@
       "architecture": "x64"
     },
     {
-        "name": "nvidia-base",
-        "hidden": true,
-        "inherits": ["base"],
-        "generator": "Ninja Multi-Config",
-        "cacheVariables": {
-            "CMAKE_CUDA_COMPILER": "nvcc",
-            "CMAKE_CUDA_ARCHITECTURES": "75",
-            "CMAKE_DEFAULT_BUILD_TYPE": "Debug"
-        }
+      "name": "nvidia-base",
+      "hidden": true,
+      "inherits": ["base"],
+      "generator": "Ninja Multi-Config",
+      "cacheVariables": {
+          "CMAKE_CUDA_COMPILER": "nvcc",
+          "CMAKE_CUDA_ARCHITECTURES": "75",
+          "CMAKE_DEFAULT_BUILD_TYPE": "Debug"
+      }
+    },
+    {
+      "name": "amd-base",
+      "hidden": true,
+      "inherits": ["base"],
+      "generator": "Ninja Multi-Config",
+      "cacheVariables": {
+          "CMAKE_HIP_COMPILER": "clang++",
+          "CMAKE_CXX_COMPILER": "hipcc",
+          "CMAKE_HIP_ARCHITECTURES": "gfx1200 ",
+          "CMAKE_DEFAULT_BUILD_TYPE": "Debug"
+      }
     },
     {
       "name": "libcxx",
@@ -174,13 +186,12 @@
         "CMAKE_CUDA_HOST_COMPILER": "clang++"
       }
     },
+    { "name": "hipcc", "inherits": ["amd-base"] },
     {
-      "name": "clang-hip",
-      "inherits": ["unix-base"],
+      "name": "hip-clang++",
+      "inherits": ["amd-base"],
       "cacheVariables": {
-        "CMAKE_CXX_COMPILER": "clang++",
-        "CMAKE_HIP_COMPILER": "clang++",
-        "CMAKE_HIP_ARCHITECTURES": "native"
+        "CMAKE_HIP_COMPILER": "clang++"
       }
     },
     { "name": "msvc"    , "inherits": ["windows-base" ]                         },
@@ -204,7 +215,7 @@
     { "name": "nvc++"           , "inherits": "base-build", "configurePreset": "nvc++"          },
     { "name": "nvcc-g++"        , "inherits": "base-build", "configurePreset": "nvcc-g++"       },
     { "name": "nvcc-clang++"    , "inherits": "base-build", "configurePreset": "nvcc-clang++"   },
-    { "name": "clang-hip"       , "inherits": "base-build", "configurePreset": "clang-hip"      },
+    { "name": "hip-clang++"       , "inherits": "base-build", "configurePreset": "hip-clang++"      },
     { "name": "msvc"            , "inherits": "base-build", "configurePreset": "msvc"           },
     { "name": "clangcl"         , "inherits": "base-build", "configurePreset": "clangcl"        }
   ],
@@ -226,7 +237,7 @@
     { "name": "nvc++"           , "inherits": "base-test", "configurePreset": "nvc++"           },
     { "name": "nvcc-g++"        , "inherits": "base-test", "configurePreset": "nvcc-g++"        },
     { "name": "nvcc-clang++"    , "inherits": "base-test", "configurePreset": "nvcc-clang++"    },
-    { "name": "clang-hip"       , "inherits": "base-test", "configurePreset": "clang-hip"      },
+    { "name": "hip-clang++"       , "inherits": "base-test", "configurePreset": "hip-clang++"      },
     { "name": "msvc"            , "inherits": "base-test", "configurePreset": "msvc"            },
     { "name": "clangcl"         , "inherits": "base-test", "configurePreset": "clangcl"         }
   ]

@@ -23,45 +23,7 @@
 //==================================================================================================
 namespace kumi_test
 {
-  namespace cuda
-  {
-    inline int count()
-    {
-      int n = 0;
-      return (cudaGetDeviceCount(&n) == cudaSuccess) ? n : 0;
-    }
-
-    inline bool allocate(void** ptr, std::size_t bytes)
-    {
-      return cudaMalloc(ptr, bytes) == cudaSuccess;
-    }
-
-    inline bool set(void* ptr, int value, std::size_t n)
-    {
-      return cudaMemset(ptr, value, n) == cudaSuccess;
-    }
-
-    inline bool launch_ok()
-    {
-      return cudaGetLastError() == cudaSuccess;
-    }
-
-    inline bool synchronize()
-    {
-      return cudaDeviceSynchronize() == cudaSuccess;
-    }
-
-    inline bool copy_out(void* dst, void const* src, std::size_t bytes)
-    {
-      return cudaMemcpy(dst, src, bytes, cudaMemcpyDeviceToHost) == cudaSuccess;
-    }
-
-    inline bool release(void* ptr)
-    {
-      return cudaFree(ptr) == cudaSuccess;
-    }
-  }
-
+#if defined(__HIPCC__)
   namespace hip
   {
     inline int count()
@@ -100,6 +62,46 @@ namespace kumi_test
       return hipFree(ptr) == hipSuccess;
     }
   }
+#else
+  namespace cuda
+  {
+    inline int count()
+    {
+      int n = 0;
+      return (cudaGetDeviceCount(&n) == cudaSuccess) ? n : 0;
+    }
+
+    inline bool allocate(void** ptr, std::size_t bytes)
+    {
+      return cudaMalloc(ptr, bytes) == cudaSuccess;
+    }
+
+    inline bool set(void* ptr, int value, std::size_t n)
+    {
+      return cudaMemset(ptr, value, n) == cudaSuccess;
+    }
+
+    inline bool launch_ok()
+    {
+      return cudaGetLastError() == cudaSuccess;
+    }
+
+    inline bool synchronize()
+    {
+      return cudaDeviceSynchronize() == cudaSuccess;
+    }
+
+    inline bool copy_out(void* dst, void const* src, std::size_t bytes)
+    {
+      return cudaMemcpy(dst, src, bytes, cudaMemcpyDeviceToHost) == cudaSuccess;
+    }
+
+    inline bool release(void* ptr)
+    {
+      return cudaFree(ptr) == cudaSuccess;
+    }
+  }
+#endif
 
 #if defined(__HIPCC__)
   namespace backend = hip;
@@ -120,7 +122,7 @@ template<typename Kernel, typename Result> inline bool run_on_device(Kernel kern
   if (kumi_test::backend::count() == 0) return false;
 
   Result* on_device = nullptr;
-  if (!kumi_test::backend::allocate(&on_device, sizeof(Result))) return false;
+  if (!kumi_test::backend::allocate(reinterpret_cast<void**>(&on_device), sizeof(Result))) return false;
   kumi_test::backend::set(on_device, 0, sizeof(Result));
 
   kernel<<<1, 1>>>(on_device);

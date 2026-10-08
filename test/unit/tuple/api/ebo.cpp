@@ -17,23 +17,23 @@ struct final_empty final
 
 TTS_CASE("Check EBO behavior of kumi::tuple construction")
 {
-  auto k0 = kumi::tuple<>{};
-  auto k1 = kumi::tuple{empty{}};
-  auto k2 = kumi::tuple{empty{}, empty{}};
-  auto k3 = kumi::tuple{empty{}, kumi::none};
-  auto k4 = kumi::tuple{int{1}, empty{}};
-  auto k5 = kumi::tuple{int{1}, empty{}, char{'c'}};
-  auto k6 = kumi::tuple{kumi::tuple{empty{}}, int{1}};
-  auto k7 = kumi::tuple{final_empty{}};
+  [[maybe_unused]] auto k0 = kumi::tuple<>{};
+  [[maybe_unused]] auto k1 = kumi::tuple{empty{}};
+  [[maybe_unused]] auto k2 = kumi::tuple{empty{}, empty{}};
+  [[maybe_unused]] auto k3 = kumi::tuple{empty{}, kumi::none};
+  [[maybe_unused]] auto k4 = kumi::tuple{int{1}, empty{}};
+  [[maybe_unused]] auto k5 = kumi::tuple{int{1}, empty{}, char{'c'}};
+  [[maybe_unused]] auto k6 = kumi::tuple{kumi::tuple{empty{}}, int{1}};
+  [[maybe_unused]] auto k7 = kumi::tuple{final_empty{}};
 
-  auto s0 = std::tuple<>{};
-  auto s1 = std::tuple{empty{}};
+  [[maybe_unused]] auto s0 = std::tuple<>{};
+  [[maybe_unused]] auto s1 = std::tuple{empty{}};
   [[maybe_unused]] auto s2 = std::tuple{empty{}, empty{}};
   [[maybe_unused]] auto s3 = std::tuple{empty{}, kumi::none};
   [[maybe_unused]] auto s4 = std::tuple{int{1}, empty{}};
-  auto s5 = std::tuple{int{1}, empty{}, char{'c'}};
-  auto s6 = std::tuple{std::tuple{empty{}}, int{1}};
-  auto s7 = kumi::tuple{final_empty{}};
+  [[maybe_unused]] auto s5 = std::tuple{int{1}, empty{}, char{'c'}};
+  [[maybe_unused]] auto s6 = std::tuple{std::tuple{empty{}}, int{1}};
+  [[maybe_unused]] auto s7 = kumi::tuple{final_empty{}};
 
 #if defined(_MSC_VER)
   TTS_EQUAL(sizeof(k0), sizeof(s0));

@@ -24,7 +24,9 @@ namespace kumi
           return kumi::capture_field<kumi::identifier_of<V>()>(kumi::invoke(f, kumi::field_value_of(KUMI_FWD(v))));
         else return kumi::invoke(f, KUMI_FWD(v));
       }
-    } KUMI_VARIABLE_ABI constexpr flatten_all_case{};
+    };
+
+    KUMI_VARIABLE_ABI constexpr flatten_all_case_t flatten_all_case{};
 
     struct flatten_case_t
     {
@@ -40,7 +42,9 @@ namespace kumi
         else if constexpr (kumi::concepts::follows_same_semantic<T, V>) return get<J>(KUMI_FWD(v));
         else return KUMI_FWD(v);
       }
-    } KUMI_VARIABLE_ABI constexpr flatten_case{};
+    };
+
+    KUMI_VARIABLE_ABI constexpr flatten_case_t flatten_case{};
 
     template<typename T, typename V, std::size_t... J, std::size_t... I>
     KUMI_HIDDEN_ABI constexpr auto flatten_intern_(

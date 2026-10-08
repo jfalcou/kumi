@@ -13,10 +13,10 @@ using namespace kumi::literals;
 
 TTS_CASE("Check record_element of kumi::record")
 {
-  auto aggregate = kumi::record{"x"_id = '1', "y"_id = 2., "z"_id = 3.f};
-  TTS_TYPE_IS((std::tuple_element_t<0, decltype(aggregate)>), (kumi::field<kumi::name<"x">, char>));
-  TTS_TYPE_IS((std::tuple_element_t<1, decltype(aggregate)>), (kumi::field<kumi::name<"y">, double>));
-  TTS_TYPE_IS((std::tuple_element_t<2, decltype(aggregate)>), (kumi::field<kumi::name<"z">, float>));
+  using aggregate = decltype(kumi::record{"x"_id = '1', "y"_id = 2., "z"_id = 3.f});
+  TTS_TYPE_IS((std::tuple_element_t<0, aggregate>), (kumi::field<kumi::name<"x">, char>));
+  TTS_TYPE_IS((std::tuple_element_t<1, aggregate>), (kumi::field<kumi::name<"y">, double>));
+  TTS_TYPE_IS((std::tuple_element_t<2, aggregate>), (kumi::field<kumi::name<"z">, float>));
 };
 
 TTS_CASE("Check construction of kumi::record as an aggregate")
@@ -29,6 +29,7 @@ TTS_CASE("Check construction of kumi::record as an aggregate")
 
   TTS_CONSTEXPR_EXPECT((kumi::concepts::sized_product_type<decltype(t0), 0>));
   TTS_EQUAL(t0.size(), 0ULL);
+  TTS_EXPECT_NOT_COMPILES(t0, { kumi::get<1>(t0); });
 
   TTS_CONSTEXPR_EXPECT((kumi::concepts::sized_product_type<decltype(t1), 1>));
   TTS_EQUAL(t1.size(), 1ULL);
