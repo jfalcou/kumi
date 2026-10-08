@@ -37,6 +37,3 @@ build/*
 compile_commands.json
 .cache
 .idea/*
-
-# Local progress tracker
-TODO.md

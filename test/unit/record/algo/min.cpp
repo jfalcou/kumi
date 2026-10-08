@@ -19,8 +19,7 @@ TTS_CASE("Check result::min/min_flat<...> behavior")
   using int_f = kumi::field<kumi::name<"c">, int>;
   using double_f = kumi::field<kumi::name<"d">, double>;
 
-  auto lambda = [](auto m) { return sizeof(m); };
-  using func_t = decltype(lambda);
+  using func_t = decltype([](auto m) { return sizeof(m); });
 
   TTS_TYPE_IS((kumi::result::min_t<kumi::record<char_f, short_f, int_f, double_f>>), double);
 

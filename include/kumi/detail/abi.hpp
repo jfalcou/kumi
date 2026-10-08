@@ -143,6 +143,22 @@
 #endif
 
 //======================================================================================================================
+/**
+  KUMI_UNREACHABLE : invokes UB.
+
+  Device code has no exceptions: the same misuse aborts the kernel there. __builtin_trap() is the
+  portable spelling that the NVIDIA (nvcc, clang) and AMD (clang) device back-ends lower to a trap.
+**/
+//======================================================================================================================
+#if defined(__cpp_lib_unreachable)
+#define KUMI_UNREACHABLE() std::unreachable()
+#elif defined(KUMI_FRONTEND_MSVC)
+#define KUMI_UNREACHABLE() __assume(false)
+#else
+#define KUMI_UNREACHABLE() __builtin_unreachable()
+#endif
+
+//======================================================================================================================
 // Diagnostics
 //======================================================================================================================
 #if defined(KUMI_FRONTEND_CLANG)

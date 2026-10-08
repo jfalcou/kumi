@@ -11,32 +11,34 @@ add_library(kumi_opts INTERFACE)
 
 target_compile_features ( kumi_opts INTERFACE cxx_std_20 )
 
+set(KUMI_WARNINGS -Werror -Wall -Wextra -Wunused-variable -Wshadow)
+
 if(CMAKE_CUDA_COMPILER_ID MATCHES "NVIDIA")
   target_compile_features( kumi_opts INTERFACE cuda_std_20 )
-  target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CUDA>:--Werror all-warnings -Xcompiler -Wno-deprecated-literal-operator> )
+  target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CUDA>:--Werror all-warnings -Xcompiler> )
   # The literal warning is set at the moment when using nvcc13.2.5 with clang20
   # A kernel calling kumi with a lambda goes through kumi::invoke, host and device both, which nvcc refuses without it
-  target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CUDA>:--expt-relaxed-constexpr> )
+  target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CUDA>:-Wno-deprecated-literal-operator --expt-relaxed-constexpr> )
 endif()
 
 # The HIP compiler is a clang frontend: same host options as the Clang branch above, applied to the
 # HIP compile language. The architecture comes from CMAKE_HIP_ARCHITECTURES, which CMake passes on its own.
 if(CMAKE_HIP_COMPILER_ID MATCHES "Clang")
-  target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:HIP>:-std=c++20 -Werror -Wall -Wextra -Wunused-variable -Wextra-semi> )
+  target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:HIP>:-std=c++20 ${KUMI_WARNINGS} -Wextra-semi> )
 endif()
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "NVHPC")
-  target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CXX>:-Werror -Wall -Wshadow -Wextra -Wunused-variable --diag_suppress implicit_return_from_non_void_function,set_but_not_used > )
+  target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CXX>:${KUMI_WARNINGS}> )
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   if(CMAKE_CXX_COMPILER_FRONTEND_VARIANT STREQUAL "MSVC")
     target_compile_options( kumi_opts INTERFACE  $<$<COMPILE_LANGUAGE:CXX>:/W3 /WX /EHsc> )
   else()
-    target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CXX>:-Wshadow -Werror -Wall -Wextra -Wunused-variable -Wdocumentation -Wextra-semi> )
+    target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CXX>:${KUMI_WARNINGS} -Wdocumentation -Wextra-semi> )
   endif()
 elseif (CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
   target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CXX>:/W3 /WX /EHsc /Zc:preprocessor> )
 else()
-  target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CXX>:-Wshadow -Werror -Wall -Wextra -Wunused-variable -Wextra-semi> )
+  target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CXX>:${KUMI_WARNINGS} -Wextra-semi> )
 endif()
 
 ##======================================================================================================================

@@ -30,8 +30,7 @@ TTS_CASE("Check result::reduce_t with prod/sum/bit_* behavior")
 
   TTS_TYPE_IS((kumi::result::reduce_t<boolean_and, kumi::record<short_f, size_t_f, int_f>>), std::size_t);
 
-  auto lambda = [](auto const& m) { return m; };
-  using func_t = decltype(lambda);
+  using func_t = decltype([](auto const& m) { return m; });
 
   TTS_TYPE_IS((kumi::result::map_reduce_t<func_t, numeric_add, kumi::record<char_f, short_f, int_f, double_f>>),
               double);

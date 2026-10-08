@@ -14,8 +14,7 @@ TTS_CASE("Check result::max/max_flat<...> behavior")
 {
   using namespace kumi::literals;
 
-  auto lambda = [](auto m) { return sizeof(m); };
-  using func_t = decltype(lambda);
+  using func_t = decltype([](auto m) { return sizeof(m); });
 
   using char_f = kumi::field<kumi::name<"a">, char>;
   using short_f = kumi::field<kumi::name<"b">, short>;

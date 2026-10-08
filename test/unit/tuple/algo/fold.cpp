@@ -15,8 +15,7 @@
 
 TTS_CASE("Check result::fold_right/fold_left<...> behavior")
 {
-  auto lambda = [](auto a, auto m) { return a + sizeof(m); };
-  using func_t = decltype(lambda);
+  using func_t = decltype([](auto a, auto m) { return a + sizeof(m); });
 
   TTS_TYPE_IS((kumi::result::fold_right_t<func_t, kumi::tuple<char, short, int, double>, int>), std::size_t);
   TTS_TYPE_IS((kumi::result::fold_left_t<func_t, kumi::tuple<char, short, int, double>, int>), std::size_t);

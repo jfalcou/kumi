@@ -14,7 +14,9 @@ namespace kumi
     struct identity_t
     {
       template<typename T> KUMI_ABI constexpr T&& operator()(T&& t) const noexcept { return KUMI_FWD(t); }
-    } KUMI_VARIABLE_ABI constexpr identity;
+    };
+
+    KUMI_VARIABLE_ABI constexpr identity_t identity;
 
     struct max_t
     {
@@ -24,7 +26,9 @@ namespace kumi
       {
         return KUMI_FWD(t) > KUMI_FWD(u) ? KUMI_FWD(t) : KUMI_FWD(u);
       }
-    } KUMI_VARIABLE_ABI constexpr max;
+    };
+
+    KUMI_VARIABLE_ABI constexpr max_t max;
 
     struct min_t
     {
@@ -34,7 +38,9 @@ namespace kumi
       {
         return KUMI_FWD(t) < KUMI_FWD(u) ? KUMI_FWD(t) : KUMI_FWD(u);
       }
-    } KUMI_VARIABLE_ABI constexpr min;
+    };
+
+    KUMI_VARIABLE_ABI constexpr min_t min;
 
     struct adressof_t
     {
@@ -47,7 +53,9 @@ namespace kumi
       }
 
       template<typename T> constexpr T const* operator()(T const&&) = delete;
-    } KUMI_VARIABLE_ABI constexpr adressof;
+    };
+
+    KUMI_VARIABLE_ABI constexpr adressof_t adressof;
   }
 
   namespace _

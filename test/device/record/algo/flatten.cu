@@ -16,7 +16,6 @@ namespace
 {
   using flattened = kumi::tuple<std::size_t, int, int, int>;
 
-  // Issue #192: flatten on a record.
   __global__ void flatten_nested(flattened* out)
   {
     auto inner = kumi::record{"a"_id = 1, "b"_id = 2};

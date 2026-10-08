@@ -12,8 +12,7 @@
 
 TTS_CASE("Check result::max/max_flat<...> behavior")
 {
-  auto lambda = [](auto m) { return sizeof(m); };
-  using func_t = decltype(lambda);
+  using func_t = decltype([](auto m) { return sizeof(m); });
 
   TTS_TYPE_IS((kumi::result::max_t<kumi::tuple<char, short, double, int>>), double);
 

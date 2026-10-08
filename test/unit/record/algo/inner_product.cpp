@@ -14,10 +14,8 @@ TTS_CASE("Check result::inner_product_t behavior")
 {
   using namespace kumi::literals;
 
-  auto sum = [](auto a, auto b) { return sizeof(a) + sizeof(b); };
-  auto prod = [](auto a, auto b) { return a * b; };
-  using sfunc_t = decltype(sum);
-  using pfunc_t = decltype(prod);
+  using sfunc_t = decltype([](auto a, auto b) { return sizeof(a) + sizeof(b); });
+  using pfunc_t = decltype([](auto a, auto b) { return a * b; });
 
   using int_f = kumi::field<kumi::name<"a">, int>;
   using double_f = kumi::field<kumi::name<"b">, double>;
