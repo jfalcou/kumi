@@ -26,7 +26,7 @@ namespace kumi
 #include <kumi/detail/abi.hpp>
 #include <kumi/detail/adl.hpp>
 #include <kumi/detail/dependencies.hpp>
-#include <kumi/detail/index_sequence.hpp>
+#include <kumi/detail/index_utils.hpp>
 #include <kumi/detail/preprocessor.hpp>
 #include <kumi/detail/concepts.hpp>
 #include <kumi/detail/traits.hpp>

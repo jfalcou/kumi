@@ -33,8 +33,9 @@ namespace kumi
       {
         constexpr std::size_t c = kumi::size_v<T>;
         constexpr std::size_t s = kumi::size_v<kumi::element_t<0, T>>;
-        constexpr auto pos = kumi::function::zipper(kumi::index<c>, kumi::index<s>);
-        return transpose_(kumi::_::adl_tag, KUMI_FWD(t), get<1>(pos), get<0>(pos));
+        using outer = std::make_index_sequence<c>;
+        using inner = std::make_index_sequence<s>;
+        return transpose_(kumi::_::adl_tag, KUMI_FWD(t), inner{}, outer{});
       }
     }
   };

@@ -11,10 +11,14 @@ namespace kumi
 {
   namespace _
   {
+    template<std::size_t, typename T> using always_t = T;
+
     template<typename Target, typename T, std::size_t... I>
     KUMI_HIDDEN_ABI constexpr decltype(auto) member_cast_(kumi::_::adl_tag_t, T&& t, std::index_sequence<I...>)
     {
-      return kumi::builder<T>::make(kumi::field_cast<Target>(get<I>(KUMI_FWD(t)))...);
+      if constexpr (kumi::concepts::record_type<T>)
+        return kumi::builder<T>::make(kumi::field_cast<Target>(get<I>(KUMI_FWD(t)))...);
+      else return kumi::builder_make_t<T, kumi::_::always_t<I, Target>...>{static_cast<Target>(get<I>(KUMI_FWD(t)))...};
     }
   }
 
@@ -23,13 +27,7 @@ namespace kumi
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return KUMI_FWD(t);
-      else if constexpr (kumi::concepts::record_type<T>)
-        return member_cast_<Target>(kumi::_::adl_tag, KUMI_FWD(t), std::make_index_sequence<kumi::size_v<T>>{});
-      else
-      {
-        using type = kumi::_::as_homogeneous_t<Target, kumi::size_v<T>>;
-        return static_cast<type>(KUMI_FWD(t));
-      }
+      else return member_cast_<Target>(kumi::_::adl_tag, KUMI_FWD(t), kumi::function::indexes_for<T>{});
     }
   };
 

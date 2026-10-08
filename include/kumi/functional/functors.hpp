@@ -52,15 +52,16 @@ namespace kumi
 
   namespace _
   {
+    template<typename T, typename> extern T common_product_type;
+
+    template<typename T, std::size_t... I>
+    extern kumi::common_product_type_t<std::remove_cvref_t<kumi::element_t<I, T>>...>
+      common_product_type<T, std::index_sequence<I...>>;
+
+    template<typename T> using common_product_type_t = decltype(common_product_type<T, kumi::function::indexes_for<T>>);
+
     struct builder_t
     {
-      template<typename T, std::size_t... I>
-      static auto type(T&&, std::index_sequence<I...>)
-        -> kumi::common_product_type_t<std::remove_cvref_t<kumi::element_t<I, T>>...>;
-
-      template<typename T>
-      using type_t = decltype(type(std::declval<T>(), std::make_index_sequence<kumi::size_v<T>>{}));
-
       template<kumi::concepts::product_type T, std::size_t... I>
       KUMI_HIDDEN_ABI constexpr auto operator()(T&& t, std::index_sequence<I...>) const
       {
@@ -73,7 +74,7 @@ namespace kumi
                                                 std::integral_constant<std::size_t, N>,
                                                 std::index_sequence<I...>) const
       {
-        using U = type_t<T>;
+        using U = kumi::_::common_product_type_t<T>;
         using res_t = kumi::builder_make_t<U, kumi::element_t<N, kumi::element_t<I, T>>...>;
         return res_t{get<N>(get<I>(KUMI_FWD(t)))...};
       }
@@ -81,7 +82,7 @@ namespace kumi
       template<typename T, std::size_t... E, std::size_t... I>
       KUMI_HIDDEN_ABI constexpr auto operator()(T&& t, std::index_sequence<E...>, std::index_sequence<I...>) const
       {
-        using U = type_t<T>;
+        using U = kumi::_::common_product_type_t<T>;
         using res_t = kumi::builder_make_t<U, kumi::element_t<E, kumi::element_t<I, T>>...>;
         return res_t{get<E>(get<I>(KUMI_FWD(t)))...};
       }
