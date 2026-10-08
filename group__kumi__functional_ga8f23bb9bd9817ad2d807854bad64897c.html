@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="KUMI - The C++20 Compact Tuple Tools" />
 <meta name="twitter:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
 <meta name="twitter:image" content="https://jfalcou.github.io/kumi/card.png" />
-<title>KUMI: kumi::function::tiler</title>
+<title>KUMI: kumi::function::fill_index_sequence</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -106,7 +106,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('group__kumi__functional_gaed8fd6fecbe985d0a7be0735ea44b79f.html','',''); });
+$(function(){initNavTree('group__kumi__functional_ga8f23bb9bd9817ad2d807854bad64897c.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -132,45 +132,36 @@ $(function(){initNavTree('group__kumi__functional_gaed8fd6fecbe985d0a7be0735ea44
 </div>
 
 <div class="contents">
-<a id="gaed8fd6fecbe985d0a7be0735ea44b79f" name="gaed8fd6fecbe985d0a7be0735ea44b79f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaed8fd6fecbe985d0a7be0735ea44b79f">&#9670;&#160;</a></span>tiler</h2>
+<a id="ga8f23bb9bd9817ad2d807854bad64897c" name="ga8f23bb9bd9817ad2d807854bad64897c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga8f23bb9bd9817ad2d807854bad64897c">&#9670;&#160;</a></span>fill_index_sequence</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
+<div class="memtemplate">
+template&lt;std::size_t E, std::size_t N&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">struct kumi::function::tile_t kumi::function::tiler</td>
+          <td class="memname">using <a class="el" href="#ga8f23bb9bd9817ad2d807854bad64897c">kumi::function::fill_index_sequence</a> = decltype(kumi_implementation_defined)</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel consteval">consteval</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p><code>#include &lt;kumi/functional/indexable.hpp&gt;</code></p>
+<p><code>#include &lt;kumi/functional/index_sequence.hpp&gt;</code></p>
 
-<p>Callable object computing multi-dimensional window block layout configurations. </p>
+<p>A helper alias template generating an index sequence repeating a constant value. </p>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/functional/indexable.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Sz, <span class="keyword">typename</span> Extent, <span class="keyword">typename</span> Str<span class="keywordtype">id</span>e, <span class="keyword">typename</span> NumBlocks&gt;</div>
-<div class="line"><span class="keyword">consteval</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaed8fd6fecbe985d0a7be0735ea44b79f">tiler</a>(Sz sz, Extent ext, Stride <a class="code hl_class" href="structkumi_1_1str.html">str</a>, NumBlocks nb) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__kumi__functional_gaed8fd6fecbe985d0a7be0735ea44b79f_html_gaed8fd6fecbe985d0a7be0735ea44b79f"><div class="ttname"><a href="#gaed8fd6fecbe985d0a7be0735ea44b79f">kumi::function::tiler</a></div><div class="ttdeci">struct kumi::function::tile_t tiler</div><div class="ttdoc">Callable object computing multi-dimensional window block layout configurations.</div></div>
-<div class="ttc" id="astructkumi_1_1str_html"><div class="ttname"><a href="structkumi_1_1str.html">kumi::str</a></div><div class="ttdoc">Static string used to create named fields.</div><div class="ttdef"><b>Definition</b> str.hpp:24</div></div>
-</div><!-- fragment --><h3 class="groupheader">Parameters </h3>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> Element, std::<span class="keywordtype">size_t</span> Count&gt;</div>
+<div class="line"><span class="keyword">using </span><a class="code hl_typedef" href="#ga8f23bb9bd9817ad2d807854bad64897c">fill_index_sequence</a>;</div>
+<div class="ttc" id="agroup__kumi__functional_ga8f23bb9bd9817ad2d807854bad64897c_html_ga8f23bb9bd9817ad2d807854bad64897c"><div class="ttname"><a href="#ga8f23bb9bd9817ad2d807854bad64897c">kumi::function::fill_index_sequence</a></div><div class="ttdeci">decltype(kumi_implementation_defined) fill_index_sequence</div><div class="ttdoc">A helper alias template generating an index sequence repeating a constant value.</div><div class="ttdef"><b>Definition</b> index_sequence.hpp:162</div></div>
+</div><!-- fragment --><h3 class="groupheader">Template Parameters </h3>
 <ul>
-<li><span class="tt">sz</span>: Size of the tiles to generate</li>
-<li><span class="tt">ext</span>: Size of the input domain</li>
-<li><span class="tt"><a class="el" href="structkumi_1_1str.html" title="Static string used to create named fields.">str</a></span>: Dimensional stride representing elements to skip</li>
-<li><span class="tt">nb</span>: Total number of tiles to generate</li>
+<li><span class="tt">Element</span>: Compile-time value to replicate</li>
+<li><span class="tt">Count</span>: Number of repetitions to generate</li>
 </ul>
 <h3 class="groupheader">Return value </h3>
-<p>A <span class="tt"><a class="el" href="structkumi_1_1projection__map.html" title="A stateless, compile-time schema for product type transformation.">kumi::projection_map</a></span> handling tile patterns and structural grid offset mappings. </p>
+<p>A <span class="tt">std::index_sequence</span> filled completely with <span class="tt">e</span>. </p>
 
 </div>
 </div>

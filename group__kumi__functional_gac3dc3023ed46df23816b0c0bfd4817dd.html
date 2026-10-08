@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="KUMI - The C++20 Compact Tuple Tools" />
 <meta name="twitter:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
 <meta name="twitter:image" content="https://jfalcou.github.io/kumi/card.png" />
-<title>KUMI: kumi::function::slicer</title>
+<title>KUMI: kumi::function::cartesian_strides</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -106,7 +106,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('group__kumi__functional_ga3201caae7402c136e332d664a439913e.html','',''); });
+$(function(){initNavTree('group__kumi__functional_gac3dc3023ed46df23816b0c0bfd4817dd.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -132,43 +132,39 @@ $(function(){initNavTree('group__kumi__functional_ga3201caae7402c136e332d664a439
 </div>
 
 <div class="contents">
-<a id="ga3201caae7402c136e332d664a439913e" name="ga3201caae7402c136e332d664a439913e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga3201caae7402c136e332d664a439913e">&#9670;&#160;</a></span>slicer</h2>
+<a id="gac3dc3023ed46df23816b0c0bfd4817dd" name="gac3dc3023ed46df23816b0c0bfd4817dd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac3dc3023ed46df23816b0c0bfd4817dd">&#9670;&#160;</a></span>cartesian_strides</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
+<div class="memtemplate">
+template&lt;typename Sizes, typename Elts&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">struct kumi::function::slice_t kumi::function::slicer</td>
+          <td class="memname">using <a class="el" href="#gac3dc3023ed46df23816b0c0bfd4817dd">kumi::function::cartesian_strides</a> = decltype(kumi_implementation_defined)</td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel consteval">consteval</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p><code>#include &lt;kumi/functional/indexable.hpp&gt;</code></p>
+<p><code>#include &lt;kumi/functional/index_sequence.hpp&gt;</code></p>
 
-<p>Callable object computing the index map associated to a slicing (begin, end, step) operation. </p>
+<p>A helper alias template computing the strides associated to the cartesian product operation. </p>
+<p>For a cartesian product of <span class="tt">M</span> tuples of sizes <span class="tt">N0, ..., N(M-1)</span>, the <span class="tt">K</span>-th element of the product selects, in the <span class="tt">i</span>-th input tuple, the element at index <span class="tt">(K / S_i) % N_i</span>. This alias computes the strides <span class="tt">S_i</span>, i.e. the number of consecutive product elements sharing the same index in tuple <span class="tt">i</span>. The last tuple varies fastest, so <span class="tt">S_i</span> is the product of the sizes of all tuples following tuple <span class="tt">i</span> and the last stride is always <span class="tt">1</span>.</p>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/functional/indexable.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Begin, <span class="keyword">typename</span> End, <span class="keyword">typename</span> Step&gt;</div>
-<div class="line"><span class="keyword">consteval</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga3201caae7402c136e332d664a439913e">slicer</a>(Begin b, End e, Step s) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__kumi__functional_ga3201caae7402c136e332d664a439913e_html_ga3201caae7402c136e332d664a439913e"><div class="ttname"><a href="#ga3201caae7402c136e332d664a439913e">kumi::function::slicer</a></div><div class="ttdeci">struct kumi::function::slice_t slicer</div><div class="ttdoc">Callable object computing the index map associated to a slicing (begin, end, step) operation.</div></div>
-</div><!-- fragment --><h3 class="groupheader">Parameters </h3>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Sizes, <span class="keyword">typename</span> Elts&gt;</div>
+<div class="line"><span class="keyword">using </span><a class="code hl_typedef" href="#gac3dc3023ed46df23816b0c0bfd4817dd">cartesian_strides</a>;</div>
+<div class="ttc" id="agroup__kumi__functional_gac3dc3023ed46df23816b0c0bfd4817dd_html_gac3dc3023ed46df23816b0c0bfd4817dd"><div class="ttname"><a href="#gac3dc3023ed46df23816b0c0bfd4817dd">kumi::function::cartesian_strides</a></div><div class="ttdeci">decltype(kumi_implementation_defined) cartesian_strides</div><div class="ttdoc">A helper alias template computing the strides associated to the cartesian product operation.</div><div class="ttdef"><b>Definition</b> index_sequence.hpp:106</div></div>
+</div><!-- fragment --><h3 class="groupheader">Template Parameters </h3>
 <ul>
-<li><span class="tt">b</span>: Compile-time index marking the beginning of the slice range</li>
-<li><span class="tt">e</span>: Compile-time index marking the end boundary of the slice range (exclusive)</li>
-<li><span class="tt">s</span>: Compile-time stride step hopping increment factor</li>
+<li><span class="tt">Sizes</span>: <span class="tt">std::index_sequence</span> containing the size of each input tuple</li>
+<li><span class="tt">Elts</span>: <span class="tt">std::index_sequence</span> containing the position <span class="tt">0, ..., M-1</span> of each input tuple (typically <span class="tt">std::index_sequence_for&lt;Ts...&gt;</span>)</li>
 </ul>
 <h3 class="groupheader">Return value </h3>
-<p>A <span class="tt">std::index_sequence</span> tracking linear jumps matching <span class="tt">Begin + I * Step</span>. </p>
+<p>A <span class="tt">std::index_sequence</span> of <span class="tt">M</span> strides, one per input tuple, where <span class="tt">S_i</span> is the product of <span class="tt">Sizes</span> over positions strictly greater than <span class="tt">i</span>.</p>
+<h3 class="groupheader">Example </h3>
+<p>For <span class="tt">Sizes = std::index_sequence&lt;2, 3&gt;</span> and <span class="tt">Elts = std::index_sequence&lt;0, 1&gt;</span>, the result is <span class="tt">std::index_sequence&lt;3, 1&gt;</span>. The element <span class="tt">K</span> of the product then selects <span class="tt">((K / 3) % 2, (K / 1) % 3)</span>, which enumerates <span class="tt">(0,0) (0,1) (0,2) (1,0) (1,1) (1,2)</span>. </p>
 
 </div>
 </div>

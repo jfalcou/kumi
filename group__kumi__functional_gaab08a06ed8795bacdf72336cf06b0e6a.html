@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="KUMI - The C++20 Compact Tuple Tools" />
 <meta name="twitter:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
 <meta name="twitter:image" content="https://jfalcou.github.io/kumi/card.png" />
-<title>KUMI: kumi::function::reverser</title>
+<title>KUMI: kumi::function::remove_index_sequence</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -106,7 +106,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('group__kumi__functional_ga050f412223903338fb77031c089298dd.html','',''); });
+$(function(){initNavTree('group__kumi__functional_gaab08a06ed8795bacdf72336cf06b0e6a.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -132,41 +132,41 @@ $(function(){initNavTree('group__kumi__functional_ga050f412223903338fb77031c0892
 </div>
 
 <div class="contents">
-<a id="ga050f412223903338fb77031c089298dd" name="ga050f412223903338fb77031c089298dd"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga050f412223903338fb77031c089298dd">&#9670;&#160;</a></span>reverser</h2>
+<a id="gaab08a06ed8795bacdf72336cf06b0e6a" name="gaab08a06ed8795bacdf72336cf06b0e6a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gaab08a06ed8795bacdf72336cf06b0e6a">&#9670;&#160;</a></span>remove_index_sequence</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
+<div class="memtemplate">
+template&lt;std::size_t N, std::size_t B, std::size_t E, std::size_t S = 1&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">struct kumi::function::reverse_t kumi::function::reverser</td>
+          <td class="memname">using <a class="el" href="#gaab08a06ed8795bacdf72336cf06b0e6a">kumi::function::remove_index_sequence</a></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel consteval">consteval</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p><code>#include &lt;kumi/functional/indexable.hpp&gt;</code></p>
-
-<p>Callable object computing the reversed index sequence. </p>
+<p><code>#include &lt;kumi/functional/index_sequence.hpp&gt;</code></p>
+<b>Initial value:</b><div class="fragment"><div class="line"> </div>
+<div class="line"><span class="keyword">decltype</span>(kumi_implementation_defined B) ? (E - B + S - 1) / S : 0),</div>
+<div class="line">                                        std::make_index_sequence&lt;N - ((E &gt; B) ? (E - B + S - 1) / S : 0)&gt;&gt;)</div>
+</div><!-- fragment -->
+<p>A helper alias template generating the index sequence associated to the remove operation. </p>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/functional/indexable.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Size&gt;</div>
-<div class="line"><span class="keyword">consteval</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga050f412223903338fb77031c089298dd">reverser</a>(Size s) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__kumi__functional_ga050f412223903338fb77031c089298dd_html_ga050f412223903338fb77031c089298dd"><div class="ttname"><a href="#ga050f412223903338fb77031c089298dd">kumi::function::reverser</a></div><div class="ttdeci">struct kumi::function::reverse_t reverser</div><div class="ttdoc">Callable object computing the reversed index sequence.</div></div>
-</div><!-- fragment --><h3 class="groupheader">Parameters </h3>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, std::<span class="keywordtype">size_t</span> B, std::<span class="keywordtype">size_t</span> E, std::<span class="keywordtype">size_t</span> S = 1&gt;</div>
+<div class="line"><span class="keyword">using </span><a class="code hl_typedef" href="#gaab08a06ed8795bacdf72336cf06b0e6a">remove_index_sequence</a>;</div>
+<div class="ttc" id="agroup__kumi__functional_gaab08a06ed8795bacdf72336cf06b0e6a_html_gaab08a06ed8795bacdf72336cf06b0e6a"><div class="ttname"><a href="#gaab08a06ed8795bacdf72336cf06b0e6a">kumi::function::remove_index_sequence</a></div><div class="ttdeci">decltype(kumi_implementation_defined B) ?(E - B+S - 1)/S :0), std::make_index_sequence&lt; N -((E &gt; B) ?(E - B+S - 1)/S :0)&gt; &gt;) remove_index_sequence</div><div class="ttdoc">A helper alias template generating the index sequence associated to the remove operation.</div><div class="ttdef"><b>Definition</b> index_sequence.hpp:221</div></div>
+</div><!-- fragment --><h3 class="groupheader">Template Parameters </h3>
 <ul>
-<li><span class="tt">s</span>: Length of the index sequence to generate</li>
+<li><span class="tt">N</span>: Compile-time size of the input domain</li>
+<li><span class="tt">B</span>: Compile-time index of the beginning of the range to remove</li>
+<li><span class="tt">E</span>: Compile-time index of the end of the range to remove (excluded)</li>
+<li><span class="tt">S</span>: Compile-time stride to consider on the range to remove</li>
 </ul>
 <h3 class="groupheader">Return value </h3>
-<p>An index sequence equivalent to std::make_index_sequence&lt;N&gt; but filled from the end. </p>
+<p>A <span class="tt">std::index_sequence</span> containing, in increasing order, the indexes of <span class="tt">[0, N)</span> that are not of the form <span class="tt">B + t * S &lt; E</span>. </p>
 
 </div>
 </div>

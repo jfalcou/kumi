@@ -1,5 +1,6 @@
 var searchData=
 [
-  ['element_5for_5ft_0',['element_or_t',['../group__kumi__functional_ga11e943ab58829909243b4826d1f084d8.html#ga11e943ab58829909243b4826d1f084d8',1,'kumi::function']]],
-  ['element_5ft_1',['element_t',['../group__kumi__traits_ga8ba508c6d1dfb63ff6fec24deb84d66e.html#ga8ba508c6d1dfb63ff6fec24deb84d66e',1,'kumi']]]
+  ['cartesian_5fstrides_0',['cartesian_strides',['../group__kumi__functional_gac3dc3023ed46df23816b0c0bfd4817dd.html#gac3dc3023ed46df23816b0c0bfd4817dd',1,'kumi::function']]],
+  ['cat_5findex_5fsequence_1',['cat_index_sequence',['../group__kumi__functional_ga87c3ce71d1306bbe56aa7dd6bb789b5d.html#ga87c3ce71d1306bbe56aa7dd6bb789b5d',1,'kumi::function']]],
+  ['container_5ftype_5ft_2',['container_type_t',['../group__kumi__traits_gacf63a95bf29987c5639c10ce15e6937b.html#gacf63a95bf29987c5639c10ce15e6937b',1,'kumi']]]
 ];

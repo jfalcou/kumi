@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="KUMI - The C++20 Compact Tuple Tools" />
 <meta name="twitter:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
 <meta name="twitter:image" content="https://jfalcou.github.io/kumi/card.png" />
-<title>KUMI: kumi::function::zipper</title>
+<title>KUMI: kumi::function::slice_index_sequence</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -106,7 +106,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('group__kumi__functional_gab92c8e53f4f94e60747f4bc0d5301de2.html','',''); });
+$(function(){initNavTree('group__kumi__functional_gab5f7e8b998190a1b17109811a279a6d6.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -132,42 +132,39 @@ $(function(){initNavTree('group__kumi__functional_gab92c8e53f4f94e60747f4bc0d530
 </div>
 
 <div class="contents">
-<a id="gab92c8e53f4f94e60747f4bc0d5301de2" name="gab92c8e53f4f94e60747f4bc0d5301de2"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gab92c8e53f4f94e60747f4bc0d5301de2">&#9670;&#160;</a></span>zipper</h2>
+<a id="gab5f7e8b998190a1b17109811a279a6d6" name="gab5f7e8b998190a1b17109811a279a6d6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gab5f7e8b998190a1b17109811a279a6d6">&#9670;&#160;</a></span>slice_index_sequence</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
+<div class="memtemplate">
+template&lt;std::size_t B, std::size_t E, std::size_t S = 1&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">struct kumi::function::zip_t kumi::function::zipper</td>
+          <td class="memname">using <a class="el" href="#gab5f7e8b998190a1b17109811a279a6d6">kumi::function::slice_index_sequence</a></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel consteval">consteval</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p><code>#include &lt;kumi/functional/indexable.hpp&gt;</code></p>
-
-<p>Callable object creating the index sequence corresponding to the zip operation. </p>
+<p><code>#include &lt;kumi/functional/index_sequence.hpp&gt;</code></p>
+<b>Initial value:</b><div class="fragment"><div class="line"> </div>
+<div class="line"><span class="keyword">decltype</span>(kumi_implementation_defined&gt;)</div>
+</div><!-- fragment -->
+<p>A helper alias template computing the index map associated to the slicing (begin, end, step) operation. </p>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/functional/indexable.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Count, <span class="keyword">typename</span> Size&gt;</div>
-<div class="line"><span class="keyword">consteval</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gab92c8e53f4f94e60747f4bc0d5301de2">zipper</a>(Count c, Size s) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__kumi__functional_gab92c8e53f4f94e60747f4bc0d5301de2_html_gab92c8e53f4f94e60747f4bc0d5301de2"><div class="ttname"><a href="#gab92c8e53f4f94e60747f4bc0d5301de2">kumi::function::zipper</a></div><div class="ttdeci">struct kumi::function::zip_t zipper</div><div class="ttdoc">Callable object creating the index sequence corresponding to the zip operation.</div></div>
-</div><!-- fragment --><h3 class="groupheader">Parameters </h3>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> B Begin, std::<span class="keywordtype">size_t</span> B End, std::<span class="keywordtype">size_t</span> B Step&gt;</div>
+<div class="line"><span class="keyword">using </span><a class="code hl_typedef" href="#gab5f7e8b998190a1b17109811a279a6d6">slice_index_sequence</a>;</div>
+<div class="ttc" id="agroup__kumi__functional_gab5f7e8b998190a1b17109811a279a6d6_html_gab5f7e8b998190a1b17109811a279a6d6"><div class="ttname"><a href="#gab5f7e8b998190a1b17109811a279a6d6">kumi::function::slice_index_sequence</a></div><div class="ttdeci">decltype(kumi_implementation_defined &gt;) slice_index_sequence</div><div class="ttdoc">A helper alias template computing the index map associated to the slicing (begin, end,...</div><div class="ttdef"><b>Definition</b> index_sequence.hpp:339</div></div>
+</div><!-- fragment --><h3 class="groupheader">Template Parameters </h3>
 <ul>
-<li><span class="tt">c</span>: Number of values per zip slice</li>
-<li><span class="tt">s</span>: Size of the input domain</li>
+<li><span class="tt">B</span>: Compile-time index marking the beginning of the slice range</li>
+<li><span class="tt">E</span>: Compile-time index marking the end boundary of the slice range (exclusive)</li>
+<li><span class="tt">S</span>: Compile-time stride step hopping increment factor</li>
 </ul>
 <h3 class="groupheader">Return value </h3>
-<p>A <a class="el" href="structkumi_1_1projection__map.html" title="A stateless, compile-time schema for product type transformation.">kumi::projection_map</a> storing offsets from the input paired with the number of elements to generate per zip element </p>
+<p>A <span class="tt">std::index_sequence</span> tracking linear jumps matching <span class="tt">Begin + I * Step</span>. </p>
 
 </div>
 </div>

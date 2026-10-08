@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="KUMI - The C++20 Compact Tuple Tools" />
 <meta name="twitter:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
 <meta name="twitter:image" content="https://jfalcou.github.io/kumi/card.png" />
-<title>KUMI: kumi::function::repeater</title>
+<title>KUMI: kumi::function::adjacent_index_sequence</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -106,7 +106,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('group__kumi__functional_ga7101480ea637b85853e7ac2621edfcd5.html','',''); });
+$(function(){initNavTree('group__kumi__functional_gae8a54a1753591f4aa7594a1f419072c6.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -132,42 +132,37 @@ $(function(){initNavTree('group__kumi__functional_ga7101480ea637b85853e7ac2621ed
 </div>
 
 <div class="contents">
-<a id="ga7101480ea637b85853e7ac2621edfcd5" name="ga7101480ea637b85853e7ac2621edfcd5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga7101480ea637b85853e7ac2621edfcd5">&#9670;&#160;</a></span>repeater</h2>
+<a id="gae8a54a1753591f4aa7594a1f419072c6" name="gae8a54a1753591f4aa7594a1f419072c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gae8a54a1753591f4aa7594a1f419072c6">&#9670;&#160;</a></span>adjacent_index_sequence</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
+<div class="memtemplate">
+template&lt;bool... Bs&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">struct kumi::function::repeat_t kumi::function::repeater</td>
+          <td class="memname">using <a class="el" href="#gae8a54a1753591f4aa7594a1f419072c6">kumi::function::adjacent_index_sequence</a></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel consteval">consteval</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p><code>#include &lt;kumi/functional/indexable.hpp&gt;</code></p>
-
-<p>Callable object generating an index sequence repeating a constant index. </p>
+<p><code>#include &lt;kumi/functional/set.hpp&gt;</code></p>
+<b>Initial value:</b><div class="fragment"><div class="line"> </div>
+<div class="line"><span class="keyword">decltype</span>(kumi_implementation_defined)</div>
+</div><!-- fragment -->
+<p>A helper alias template generating the index map associated to the adjacent unicity operation. </p>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/functional/indexable.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/functional/set.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Element, <span class="keyword">typename</span> Count&gt;</div>
-<div class="line"><span class="keyword">consteval</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga7101480ea637b85853e7ac2621edfcd5">repeater</a>(Element e, Count c) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__kumi__functional_ga7101480ea637b85853e7ac2621edfcd5_html_ga7101480ea637b85853e7ac2621edfcd5"><div class="ttname"><a href="#ga7101480ea637b85853e7ac2621edfcd5">kumi::function::repeater</a></div><div class="ttdeci">struct kumi::function::repeat_t repeater</div><div class="ttdoc">Callable object generating an index sequence repeating a constant index.</div></div>
-</div><!-- fragment --><h3 class="groupheader">Parameters </h3>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keywordtype">bool</span>... Bs&gt;</div>
+<div class="line"><span class="keyword">using </span><a class="code hl_typedef" href="#gae8a54a1753591f4aa7594a1f419072c6">adjacent_index_sequence</a>;</div>
+<div class="ttc" id="agroup__kumi__functional_gae8a54a1753591f4aa7594a1f419072c6_html_gae8a54a1753591f4aa7594a1f419072c6"><div class="ttname"><a href="#gae8a54a1753591f4aa7594a1f419072c6">kumi::function::adjacent_index_sequence</a></div><div class="ttdeci">decltype(kumi_implementation_defined) adjacent_index_sequence</div><div class="ttdoc">A helper alias template generating the index map associated to the adjacent unicity operation.</div><div class="ttdef"><b>Definition</b> set.hpp:144</div></div>
+</div><!-- fragment --><h3 class="groupheader">Template Parameters </h3>
 <ul>
-<li><span class="tt">e</span>: Compile-time value to replicate</li>
-<li><span class="tt">c</span>: Number of repetitions to generate</li>
+<li><span class="tt">Bs</span>: Compile-time flags, one per adjacent pair, set to <span class="tt">true</span> when the pair differs</li>
 </ul>
 <h3 class="groupheader">Return value </h3>
-<p>A <span class="tt">std::index_sequence</span> filled completely with <span class="tt">e</span>. </p>
+<p>A <span class="tt">std::index_sequence</span> made of <span class="tt">0</span> followed by the position of each <span class="tt">true</span> flag shifted by one, i.e. the index of each element that differs from its predecessor. For <span class="tt">Bs = &lt;false, true, true&gt;</span>, the result is <span class="tt">std::index_sequence&lt;0, 2, 3&gt;</span>. </p>
 
 </div>
 </div>

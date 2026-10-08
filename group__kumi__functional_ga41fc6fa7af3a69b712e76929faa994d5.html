@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="KUMI - The C++20 Compact Tuple Tools" />
 <meta name="twitter:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
 <meta name="twitter:image" content="https://jfalcou.github.io/kumi/card.png" />
-<title>KUMI: kumi::function::splitter</title>
+<title>KUMI: kumi::function::unique_index_sequence</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -106,7 +106,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('group__kumi__functional_gae7fa4a3e9b7b6fd79f177f6126bcef2b.html','',''); });
+$(function(){initNavTree('group__kumi__functional_ga41fc6fa7af3a69b712e76929faa994d5.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -132,42 +132,37 @@ $(function(){initNavTree('group__kumi__functional_gae7fa4a3e9b7b6fd79f177f6126bc
 </div>
 
 <div class="contents">
-<a id="gae7fa4a3e9b7b6fd79f177f6126bcef2b" name="gae7fa4a3e9b7b6fd79f177f6126bcef2b"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gae7fa4a3e9b7b6fd79f177f6126bcef2b">&#9670;&#160;</a></span>splitter</h2>
+<a id="ga41fc6fa7af3a69b712e76929faa994d5" name="ga41fc6fa7af3a69b712e76929faa994d5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga41fc6fa7af3a69b712e76929faa994d5">&#9670;&#160;</a></span>unique_index_sequence</h2>
 
 <div class="memitem">
 <div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
+<div class="memtemplate">
+template&lt;bool... Bs&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">struct kumi::function::split_t kumi::function::splitter</td>
+          <td class="memname">using <a class="el" href="#ga41fc6fa7af3a69b712e76929faa994d5">kumi::function::unique_index_sequence</a></td>
         </tr>
       </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel consteval">consteval</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
 </div><div class="memdoc">
 
-<p><code>#include &lt;kumi/functional/indexable.hpp&gt;</code></p>
-
-<p>Callable object computing underlying index sequences of the input domain divided in two parts. </p>
+<p><code>#include &lt;kumi/functional/set.hpp&gt;</code></p>
+<b>Initial value:</b><div class="fragment"><div class="line"> </div>
+<div class="line"><span class="keyword">decltype</span>(kumi_implementation_defined)</div>
+</div><!-- fragment -->
+<p>A helper alias template generating the index map associated to the unique operations. </p>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/functional/indexable.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/functional/set.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> N, <span class="keyword">typename</span> Size&gt;</div>
-<div class="line"><span class="keyword">consteval</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gae7fa4a3e9b7b6fd79f177f6126bcef2b">splitter</a>(N n, Size s) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__kumi__functional_gae7fa4a3e9b7b6fd79f177f6126bcef2b_html_gae7fa4a3e9b7b6fd79f177f6126bcef2b"><div class="ttname"><a href="#gae7fa4a3e9b7b6fd79f177f6126bcef2b">kumi::function::splitter</a></div><div class="ttdeci">struct kumi::function::split_t splitter</div><div class="ttdoc">Callable object computing underlying index sequences of the input domain divided in two parts.</div></div>
-</div><!-- fragment --><h3 class="groupheader">Parameters </h3>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keywordtype">bool</span>... Bs&gt;</div>
+<div class="line"><span class="keyword">using </span><a class="code hl_typedef" href="#ga41fc6fa7af3a69b712e76929faa994d5">unique_index_sequence</a>;</div>
+<div class="ttc" id="agroup__kumi__functional_ga41fc6fa7af3a69b712e76929faa994d5_html_ga41fc6fa7af3a69b712e76929faa994d5"><div class="ttname"><a href="#ga41fc6fa7af3a69b712e76929faa994d5">kumi::function::unique_index_sequence</a></div><div class="ttdeci">decltype(kumi_implementation_defined) unique_index_sequence</div><div class="ttdoc">A helper alias template generating the index map associated to the unique operations.</div><div class="ttdef"><b>Definition</b> set.hpp:83</div></div>
+</div><!-- fragment --><h3 class="groupheader">Template Parameters </h3>
 <ul>
-<li><span class="tt">n</span>: Midpoint split pivot</li>
-<li><span class="tt">s</span>: Size of the input domain to split</li>
+<li><span class="tt">Bs</span>: Compile-time flags, one per input element, set to <span class="tt">true</span> when the element is kept</li>
 </ul>
 <h3 class="groupheader">Return value </h3>
-<p>A <span class="tt"><a class="el" href="structkumi_1_1projection__map.html" title="A stateless, compile-time schema for product type transformation.">kumi::projection_map</a></span> tracking partitioned left and right index segments. </p>
+<p>A <span class="tt">std::index_sequence</span> containing, in increasing order, the positions of the <span class="tt">true</span> flags in <span class="tt">Bs</span>. For <span class="tt">Bs = &lt;true, false, true, true&gt;</span>, the result is <span class="tt">std::index_sequence&lt;0, 2, 3&gt;</span>. </p>
 
 </div>
 </div>

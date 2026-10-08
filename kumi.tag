@@ -1,10 +1,6 @@
 <?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
 <tagfile doxygen_version="1.16.1" doxygen_gitid="669aeeefca743c148e2d935b3d3c69535c7491e6">
   <compound kind="struct">
-    <name>kumi::function::adjacent_unicity_t</name>
-    <filename>structkumi_1_1function_1_1adjacent__unicity__t.html</filename>
-  </compound>
-  <compound kind="struct">
     <name>kumi::apply_traits</name>
     <filename>structkumi_1_1apply__traits.html</filename>
     <templarg>template&lt; typename... &gt; typename Traits</templarg>
@@ -960,10 +956,6 @@
       <arglist>(F &amp;&amp;f, T &amp;&amp;t) -&gt; scannable&lt; F, std::unwrap_ref_decay_t&lt; T &gt; &gt;</arglist>
     </member>
   </compound>
-  <compound kind="struct">
-    <name>kumi::function::select_t</name>
-    <filename>structkumi_1_1function_1_1select__t.html</filename>
-  </compound>
   <compound kind="class">
     <name>kumi::str</name>
     <filename>structkumi_1_1str.html</filename>
@@ -1623,10 +1615,6 @@
       <anchor>a85bd7598dcbb6464a3a89990b0e64aa4</anchor>
       <arglist>(tuple&lt; Ts... &gt; const &amp;&amp;t) noexcept</arglist>
     </member>
-  </compound>
-  <compound kind="struct">
-    <name>kumi::function::unique_t</name>
-    <filename>structkumi_1_1function_1_1unique__t.html</filename>
   </compound>
   <compound kind="class">
     <name>kumi::unit</name>
@@ -3001,7 +2989,6 @@
     <name>kumi_functional</name>
     <title>Helper Types and Functions</title>
     <filename>group__kumi__functional.html</filename>
-    <class kind="struct">kumi::function::adjacent_unicity_t</class>
     <class kind="class">kumi::function::boolean_and</class>
     <class kind="class">kumi::function::boolean_or</class>
     <class kind="class">kumi::function::boolean_xor</class>
@@ -3009,13 +2996,95 @@
     <class kind="class">kumi::function::numeric_add</class>
     <class kind="class">kumi::function::numeric_prod</class>
     <class kind="class">kumi::function::scannable</class>
-    <class kind="struct">kumi::function::select_t</class>
-    <class kind="struct">kumi::function::unique_t</class>
+    <member kind="typedef">
+      <type>decltype(kumi_implementation_defined)</type>
+      <name>kumi::function::adjacent_index_sequence</name>
+      <anchorfile>group__kumi__functional_gae8a54a1753591f4aa7594a1f419072c6.html</anchorfile>
+      <anchor>gae8a54a1753591f4aa7594a1f419072c6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>decltype(kumi_implementation_defined)</type>
+      <name>kumi::function::cartesian_strides</name>
+      <anchorfile>group__kumi__functional_gac3dc3023ed46df23816b0c0bfd4817dd.html</anchorfile>
+      <anchor>gac3dc3023ed46df23816b0c0bfd4817dd</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>decltype(kumi_implementation_defined)</type>
+      <name>kumi::function::cat_index_sequence</name>
+      <anchorfile>group__kumi__functional_ga87c3ce71d1306bbe56aa7dd6bb789b5d.html</anchorfile>
+      <anchor>ga87c3ce71d1306bbe56aa7dd6bb789b5d</anchor>
+      <arglist></arglist>
+    </member>
     <member kind="typedef">
       <type>std::remove_cvref_t&lt; decltype(kumi::function::get_or&lt; I &gt;(std::declval&lt; T &gt;(), std::declval&lt; U &gt;()))&gt;</type>
       <name>kumi::function::element_or_t</name>
       <anchorfile>group__kumi__functional_ga11e943ab58829909243b4826d1f084d8.html</anchorfile>
       <anchor>ga11e943ab58829909243b4826d1f084d8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>decltype(kumi_implementation_defined)</type>
+      <name>kumi::function::fill_index_sequence</name>
+      <anchorfile>group__kumi__functional_ga8f23bb9bd9817ad2d807854bad64897c.html</anchorfile>
+      <anchor>ga8f23bb9bd9817ad2d807854bad64897c</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>std::make_index_sequence&lt; kumi::size_v&lt; T &gt; &gt;</type>
+      <name>kumi::function::indexes_for</name>
+      <anchorfile>group__kumi__functional_ga31ec47f07956e9676243754c7ccd6227.html</anchorfile>
+      <anchor>ga31ec47f07956e9676243754c7ccd6227</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>decltype(kumi_implementation_defined B) ?(E - B+S - 1)/S :0), std::make_index_sequence&lt; N -((E &gt; B) ?(E - B+S - 1)/S :0)&gt; &gt;)</type>
+      <name>kumi::function::remove_index_sequence</name>
+      <anchorfile>group__kumi__functional_gaab08a06ed8795bacdf72336cf06b0e6a.html</anchorfile>
+      <anchor>gaab08a06ed8795bacdf72336cf06b0e6a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>decltype(kumi_implementation_defined)</type>
+      <name>kumi::function::reverse_index_sequence</name>
+      <anchorfile>group__kumi__functional_ga885127642ae710479faebf90f37ba6b8.html</anchorfile>
+      <anchor>ga885127642ae710479faebf90f37ba6b8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>decltype(kumi_implementation_defined)</type>
+      <name>kumi::function::rotate_index_sequence</name>
+      <anchorfile>group__kumi__functional_gaf80ca8e67a8eec3669b6e67c1a3c09ae.html</anchorfile>
+      <anchor>gaf80ca8e67a8eec3669b6e67c1a3c09ae</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>decltype(kumi_implementation_defined)</type>
+      <name>kumi::function::select_index_sequence</name>
+      <anchorfile>group__kumi__functional_gab3c7eda04b7101058c5bcf5bbda210b6.html</anchorfile>
+      <anchor>gab3c7eda04b7101058c5bcf5bbda210b6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>decltype(kumi_implementation_defined)</type>
+      <name>kumi::function::shift_index_sequence</name>
+      <anchorfile>group__kumi__functional_gaa7eb75e2ab9dc4f4018674527cff23e1.html</anchorfile>
+      <anchor>gaa7eb75e2ab9dc4f4018674527cff23e1</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>decltype(kumi_implementation_defined &gt;)</type>
+      <name>kumi::function::slice_index_sequence</name>
+      <anchorfile>group__kumi__functional_gab5f7e8b998190a1b17109811a279a6d6.html</anchorfile>
+      <anchor>gab5f7e8b998190a1b17109811a279a6d6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="typedef">
+      <type>decltype(kumi_implementation_defined)</type>
+      <name>kumi::function::unique_index_sequence</name>
+      <anchorfile>group__kumi__functional_ga41fc6fa7af3a69b712e76929faa994d5.html</anchorfile>
+      <anchor>ga41fc6fa7af3a69b712e76929faa994d5</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -3075,27 +3144,6 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>struct kumi::function::cartesian_product_t</type>
-      <name>kumi::function::cartesian_producer</name>
-      <anchorfile>group__kumi__functional_ga45a45e049b5c4aa186dc3516f85098d5.html</anchorfile>
-      <anchor>ga45a45e049b5c4aa186dc3516f85098d5</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>struct kumi::function::cat_t</type>
-      <name>kumi::function::concatenater</name>
-      <anchorfile>group__kumi__functional_ga939d953813ec961b41fc3f4f2dab22c7.html</anchorfile>
-      <anchor>ga939d953813ec961b41fc3f4f2dab22c7</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>struct kumi::function::extract_t</type>
-      <name>kumi::function::extractor</name>
-      <anchorfile>group__kumi__functional_ga512329bc74afee8bbdac22c3e267c4c4.html</anchorfile>
-      <anchor>ga512329bc74afee8bbdac22c3e267c4c4</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
       <type>constexpr kumi::function::numeric_prod</type>
       <name>kumi::function::multiplies</name>
       <anchorfile>group__kumi__functional.html</anchorfile>
@@ -3110,94 +3158,10 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>struct kumi::function::reduce_t</type>
-      <name>kumi::function::reducer</name>
-      <anchorfile>group__kumi__functional_gaaefcb5d45afa90ffd9674cc3af110c2d.html</anchorfile>
-      <anchor>gaaefcb5d45afa90ffd9674cc3af110c2d</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>struct kumi::function::repeat_t</type>
-      <name>kumi::function::repeater</name>
-      <anchorfile>group__kumi__functional_ga7101480ea637b85853e7ac2621edfcd5.html</anchorfile>
-      <anchor>ga7101480ea637b85853e7ac2621edfcd5</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>struct kumi::function::reverse_t</type>
-      <name>kumi::function::reverser</name>
-      <anchorfile>group__kumi__functional_ga050f412223903338fb77031c089298dd.html</anchorfile>
-      <anchor>ga050f412223903338fb77031c089298dd</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>struct kumi::function::rotate_t</type>
-      <name>kumi::function::rotater</name>
-      <anchorfile>group__kumi__functional_gaea4dcbe3352e0322ca07796c54992473.html</anchorfile>
-      <anchor>gaea4dcbe3352e0322ca07796c54992473</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr kumi::function::select_t</type>
-      <name>kumi::function::selector</name>
-      <anchorfile>group__kumi__functional.html</anchorfile>
-      <anchor>ga9063c98870899aef10f0cc080e4fea51</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>struct kumi::function::shift_t</type>
-      <name>kumi::function::shifter</name>
-      <anchorfile>group__kumi__functional_ga030fc00e2f98f3648974d4a2c0d2ae31.html</anchorfile>
-      <anchor>ga030fc00e2f98f3648974d4a2c0d2ae31</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
       <type>constexpr auto</type>
       <name>kumi::function::size_or_v</name>
       <anchorfile>group__kumi__functional_ga1aeb494d781c6a1d8f48168f4f093afe.html</anchorfile>
       <anchor>ga1aeb494d781c6a1d8f48168f4f093afe</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>struct kumi::function::slice_t</type>
-      <name>kumi::function::slicer</name>
-      <anchorfile>group__kumi__functional_ga3201caae7402c136e332d664a439913e.html</anchorfile>
-      <anchor>ga3201caae7402c136e332d664a439913e</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>struct kumi::function::split_t</type>
-      <name>kumi::function::splitter</name>
-      <anchorfile>group__kumi__functional_gae7fa4a3e9b7b6fd79f177f6126bcef2b.html</anchorfile>
-      <anchor>gae7fa4a3e9b7b6fd79f177f6126bcef2b</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>struct kumi::function::tile_t</type>
-      <name>kumi::function::tiler</name>
-      <anchorfile>group__kumi__functional_gaed8fd6fecbe985d0a7be0735ea44b79f.html</anchorfile>
-      <anchor>gaed8fd6fecbe985d0a7be0735ea44b79f</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr kumi::function::adjacent_unicity_t</type>
-      <name>kumi::function::uniqued</name>
-      <anchorfile>group__kumi__functional.html</anchorfile>
-      <anchor>ga011bc82908c9e504b2cbffc2767251be</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr kumi::function::unique_t</type>
-      <name>kumi::function::uniquer</name>
-      <anchorfile>group__kumi__functional.html</anchorfile>
-      <anchor>gab9c4d3ea483d68225e3a2783586c4847</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>struct kumi::function::zip_t</type>
-      <name>kumi::function::zipper</name>
-      <anchorfile>group__kumi__functional_gab92c8e53f4f94e60747f4bc0d5301de2.html</anchorfile>
-      <anchor>gab92c8e53f4f94e60747f4bc0d5301de2</anchor>
       <arglist></arglist>
     </member>
   </compound>
