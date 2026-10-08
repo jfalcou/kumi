@@ -130,6 +130,7 @@ KUMI requires a C++20-compliant compiler.
 | AppleClang      | 15    and above    |
 | nvcc            | 13.2.5             |
 | nvc++           | 26.3.0             |
+| clang++ (HIP)  | ROCm 6.0  and above |
 
 ## Licence
 

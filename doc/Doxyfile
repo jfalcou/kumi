@@ -34,9 +34,9 @@ HTML_EXTRA_FILES      += card.png
 
 ## The macros that give entities their public ABI tags, expanded away so they do not show up in every signature.
 PREDEFINED            += "KUMI_ABI=inline" \
-                         "KUMI_HIDDEN_ABI=inline" \
+                         "KUMI_HIDDEN_ABI=/*implementation defined*/" \
                          "KUMI_VARIABLE_ABI=inline" \
-                         "KUMI_CUDA="
+                         "KUMI_GPU="
 
 ## One page per callable member
 SEPARATE_MEMBER_PAGES  = YES
