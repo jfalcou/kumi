@@ -562,27 +562,12 @@
  },
  {
   "branch": "main",
-  "cpu_us": 181429933,
+  "cpu_us": 77697416,
   "date": "2026-10-08T12:56:02Z",
-  "link_cpu_us": 10916222,
+  "link_cpu_us": 4339181,
   "link_peak_kib": 72972,
-  "links": 304,
+  "links": 113,
   "modules": {
-   "doc/infra": {
-    "cpu_us": 10493351,
-    "peak_kib": 134132,
-    "units": 21
-   },
-   "doc/record": {
-    "cpu_us": 46665777,
-    "peak_kib": 162868,
-    "units": 82
-   },
-   "doc/tuple": {
-    "cpu_us": 46573389,
-    "peak_kib": 154388,
-    "units": 88
-   },
    "unit/infra": {
     "cpu_us": 5546871,
     "peak_kib": 150608,
@@ -606,7 +591,7 @@
   },
   "peak_kib": 196304,
   "sha": "481eec78c8e5eac9ad6964a85cfb6dc41886fd5d",
-  "units": 304
+  "units": 113
  },
  {
   "branch": "main",
