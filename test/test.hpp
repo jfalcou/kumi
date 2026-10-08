@@ -168,6 +168,26 @@ struct tuple_box
     if constexpr (I == 2) return s.c;
     KUMI_UNREACHABLE();
   }
+
+  template<std::size_t I>
+  friend constexpr auto&& get(tuple_box&& s) noexcept
+  requires(I < 3)
+  {
+    if constexpr (I == 0) return std::move(s.i);
+    if constexpr (I == 1) return std::move(s.f);
+    if constexpr (I == 2) return std::move(s.c);
+    KUMI_UNREACHABLE();
+  }
+
+  template<std::size_t I>
+  friend constexpr auto const&& get(tuple_box const&& s) noexcept
+  requires(I < 3)
+  {
+    if constexpr (I == 0) return std::move(s.i);
+    if constexpr (I == 1) return std::move(s.f);
+    if constexpr (I == 2) return std::move(s.c);
+    KUMI_UNREACHABLE();
+  }
 };
 
 template<> struct std::tuple_size<tuple_box> : std::integral_constant<std::size_t, 3>
@@ -217,6 +237,26 @@ struct record_box
     KUMI_UNREACHABLE();
   }
 
+  template<std::size_t I>
+  friend constexpr decltype(auto) get(record_box&& s) noexcept
+  requires(I < 3)
+  {
+    if constexpr (I == 0) return kumi::capture_field<"i"_id>(std::move(s.i));
+    if constexpr (I == 1) return kumi::capture_field<"f"_id>(std::move(s.f));
+    if constexpr (I == 2) return kumi::capture_field<"c"_id>(std::move(s.c));
+    KUMI_UNREACHABLE();
+  }
+
+  template<std::size_t I>
+  friend constexpr decltype(auto) get(record_box const&& s) noexcept
+  requires(I < 3)
+  {
+    if constexpr (I == 0) return kumi::capture_field<"i"_id>(std::move(s.i));
+    if constexpr (I == 1) return kumi::capture_field<"f"_id>(std::move(s.f));
+    if constexpr (I == 2) return kumi::capture_field<"c"_id>(std::move(s.c));
+    KUMI_UNREACHABLE();
+  }
+
   template<kumi::concepts::identifier auto ID> friend constexpr auto const& get(record_box const& s) noexcept
   {
     if constexpr (ID == "i"_id) return s.i;
@@ -230,6 +270,22 @@ struct record_box
     if constexpr (ID == "i"_id) return s.i;
     if constexpr (ID == "f"_id) return s.f;
     if constexpr (ID == "c"_id) return s.c;
+    KUMI_UNREACHABLE();
+  }
+
+  template<kumi::concepts::identifier auto ID> friend constexpr auto&& get(record_box&& s) noexcept
+  {
+    if constexpr (ID == "i"_id) return std::move(s.i);
+    if constexpr (ID == "f"_id) return std::move(s.f);
+    if constexpr (ID == "c"_id) return std::move(s.c);
+    KUMI_UNREACHABLE();
+  }
+
+  template<kumi::concepts::identifier auto ID> friend constexpr auto const&& get(record_box const&& s) noexcept
+  {
+    if constexpr (ID == "i"_id) return std::move(s.i);
+    if constexpr (ID == "f"_id) return std::move(s.f);
+    if constexpr (ID == "c"_id) return std::move(s.c);
     KUMI_UNREACHABLE();
   }
 };
