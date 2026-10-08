@@ -28,3 +28,4 @@ jobs:
     with:
       project: kumi
       series: true
+      exclude: '^doc\.'
