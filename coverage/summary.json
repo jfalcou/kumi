@@ -1,7 +1,7 @@
 {
-    "branch_covered": 745,
-    "branch_percent": 75.9,
-    "branch_total": 982,
+    "branch_covered": 757,
+    "branch_percent": 76.0,
+    "branch_total": 996,
     "files": [
         {
             "branch_covered": 4,
@@ -356,9 +356,9 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kumi/detail/optimized.hpp",
-            "function_covered": 1403,
+            "function_covered": 1405,
             "function_percent": 99.9,
-            "function_total": 1405,
+            "function_total": 1407,
             "line_covered": 7,
             "line_percent": 100.0,
             "line_total": 7
@@ -460,16 +460,16 @@
             "line_total": 46
         },
         {
-            "branch_covered": 74,
+            "branch_covered": 86,
             "branch_percent": 85.1,
-            "branch_total": 87,
+            "branch_total": 101,
             "filename": "include/kumi/product_types/shared.hpp",
-            "function_covered": 338,
-            "function_percent": 75.4,
-            "function_total": 448,
-            "line_covered": 12,
+            "function_covered": 342,
+            "function_percent": 75.7,
+            "function_total": 452,
+            "line_covered": 14,
             "line_percent": 100.0,
-            "line_total": 12
+            "line_total": 14
         },
         {
             "branch_covered": 2,
@@ -479,9 +479,9 @@
             "function_covered": 197,
             "function_percent": 72.7,
             "function_total": 271,
-            "line_covered": 57,
+            "line_covered": 61,
             "line_percent": 100.0,
-            "line_total": 57
+            "line_total": 61
         },
         {
             "branch_covered": 0,
@@ -544,12 +544,12 @@
             "line_total": 3
         }
     ],
-    "function_covered": 5691,
+    "function_covered": 5697,
     "function_percent": 94.8,
-    "function_total": 6001,
+    "function_total": 6007,
     "gcovr/summary_format_version": "0.6",
-    "line_covered": 640,
+    "line_covered": 646,
     "line_percent": 99.7,
-    "line_total": 642,
+    "line_total": 648,
     "root": "../../.."
 }
