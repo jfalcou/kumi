@@ -78,18 +78,7 @@ namespace kumi::_
     using type = kumi::_::type_of_t<T>;
   };
 
-  // template<kumi::_::field T>
-  // extern typename T::label_type label_of_;
-  //
-  // template<kumi::_::field T>
-  //  requires requires {
-  //    typename T::label_type;                         // nested type exists
-  //    { T::label_type::value } -> kumi::_::str_like;  // nested value exists and is string-like
-  //  }
-  // extern typename T::label_type::type label_of_<T>;
-
   template<kumi::_::field T> using label_of_t = typename std::remove_cvref_t<T>::label_type;
-  // decltype(kumi::_::label_of_<std::remove_cvref_t<T>>);
 
   template<kumi::_::field T> struct label_of
   {
