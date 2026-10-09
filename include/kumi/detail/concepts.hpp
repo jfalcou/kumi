@@ -25,16 +25,10 @@ namespace kumi::_
   template<typename T, typename... Args>
   concept implicit_constructible = requires(Args... args) { T{args...}; };
 
-  //====================================================================================================================
-  /**
-    @ingroup kumi_concepts
-    @brief    Satisfied by any kumi::str<N>. Use it to constrain `auto` parameters and return types.
-  **/
-  //====================================================================================================================
-  template<auto N> void str_probe(kumi::str<N> const&);
+  template<auto N> void str_based(kumi::str<N> const&);
 
   template<typename T>
-  concept str_like = requires(T const& t) { kumi::_::str_probe(t); };
+  concept str_like = requires(T const& t) { kumi::_::str_based(t); };
 
   // To be displayed an identifier need to be constructible via T{}, and either expose a constexpr to_str() or
   // nothing, in which case the typer will be used (see typename.hpp). The name that is displayed is called the label.
@@ -84,18 +78,7 @@ namespace kumi::_
     using type = kumi::_::type_of_t<T>;
   };
 
-  // template<kumi::_::field T>
-  // extern typename T::label_type label_of_;
-  //
-  // template<kumi::_::field T>
-  //  requires requires {
-  //    typename T::label_type;                         // nested type exists
-  //    { T::label_type::value } -> kumi::_::str_like;  // nested value exists and is string-like
-  //  }
-  // extern typename T::label_type::type label_of_<T>;
-
   template<kumi::_::field T> using label_of_t = typename std::remove_cvref_t<T>::label_type;
-  // decltype(kumi::_::label_of_<std::remove_cvref_t<T>>);
 
   template<kumi::_::field T> struct label_of
   {

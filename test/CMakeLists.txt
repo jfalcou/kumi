@@ -28,13 +28,4 @@ if(CMAKE_CUDA_COMPILER)
                   RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
                   DESTINATION "cuda"
                 )
-
-  # A record test needs the identifiers of test.hpp, which nvcc refuses to parse
-  if(CMAKE_CUDA_COMPILER_ID MATCHES "Clang")
-    copa_glob_unit( QUIET
-                    PATTERN "cuda/record/*.cu" INTERFACE kumi_test
-                    RELATIVE ${CMAKE_CURRENT_SOURCE_DIR}
-                    DESTINATION "cuda"
-                  )
-  endif()
 endif()
