@@ -73,7 +73,7 @@ namespace kumi::_
   requires(!std::is_reference_v<T> && !std::is_empty_v<T>)
   struct binder<std::index_sequence<Is...>, T>
   {
-    static constexpr std::size_t N = sizeof...(Ts);
+    static constexpr std::size_t N = sizeof...(Is);
 
     static constexpr bool is_homogeneous = true;
     T data[N];
@@ -93,13 +93,13 @@ namespace kumi::_
     template<std::size_t I>
     KUMI_HIDDEN_ABI constexpr auto&& operator()(std::integral_constant<std::size_t, I>) && noexcept
     {
-      return static_cast<type&&>(data[I]);
+      return static_cast<T&&>(data[I]);
     }
 
     template<std::size_t I>
     KUMI_HIDDEN_ABI constexpr auto const&& operator()(std::integral_constant<std::size_t, I>) const&& noexcept
     {
-      return static_cast<type const&&>(data[I]);
+      return static_cast<T const&&>(data[I]);
     }
   };
 

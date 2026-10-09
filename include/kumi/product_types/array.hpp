@@ -136,7 +136,7 @@ namespace kumi
         constexpr operator array<U, M>()
     requires(N == M) && (!std::same_as<array<T, N>, array<U, M>>) && (std::is_constructible_v<U, T&>)
     {
-      return kumi::_::static_cast_<array<U, M>>(*this, std::make_index_sequence<N>{})
+      return kumi::_::static_cast_<array<U, M>>(*this, std::make_index_sequence<N>{});
     }
 
     //==================================================================================================================
@@ -204,7 +204,7 @@ namespace kumi
     /// @brief Compares arrays for lexicographical is less relation
     /// @note This function does not participate in overload resolution if the array are not lexicographically ordered
     template<typename U, std::size_t M>
-    KUMI_ABI friend constexpr auto operator<(aray const& lhs, array<U, M> const& rhs) noexcept
+    KUMI_ABI friend constexpr auto operator<(array const& lhs, array<U, M> const& rhs) noexcept
 #ifndef KUMI_DOXYGEN_INVOKED
     requires(kumi::_::comparable<T, U> && N == M)
 #endif
@@ -253,7 +253,7 @@ namespace kumi
     }
   };
 
-  template<typename T, std::size_t 0> struct array<T, 0>
+  template<typename T> struct array<T, 0>
   {
     static constexpr bool is_homogeneous = true;
 
@@ -263,16 +263,16 @@ namespace kumi
 
     friend constexpr auto operator<=>(array<T, 0>, array<T, 0>) noexcept = default;
 
-    template<typename T>
-    [[nodiscard]] KUMI_ABI constexpr operator T() const noexcept
-    requires(kumi::concepts::unit_type<T>)
+    template<typename U>
+    [[nodiscard]] KUMI_ABI constexpr operator U() const noexcept
+    requires(kumi::concepts::unit_type<U>)
     {
       return {};
     }
 
-    template<typename T>
-    [[nodiscard]] KUMI_ABI constexpr operator T() noexcept
-    requires(kumi::concepts::unit_type<T>)
+    template<typename U>
+    [[nodiscard]] KUMI_ABI constexpr operator U() noexcept
+    requires(kumi::concepts::unit_type<U>)
     {
       return {};
     }
@@ -362,7 +362,7 @@ namespace kumi
   {
     template<kumi::concepts::power_type T, std::size_t... I>
     KUMI_HIDDEN_ABI constexpr auto to_ref_(kumi::_::adl_tag_t, T&& t, std::index_sequence<I...>)
-      -> kumi::array<value_t<T>, sizeof...(I)>
+      -> kumi::array<kumi::element_t<0, T>, sizeof...(I)>
     {
       return {get<I>(KUMI_FWD(t))...};
     }
@@ -384,11 +384,11 @@ namespace kumi
     @ingroup array_related
     @brief Converts a kumi::array to an instance of an arbitrary type
 
-    Constructs an instance of `Type` by passing elements of `t` to the appropriate constructor.
+    Constructs an instance of `Type` by passing elements of `a` to the appropriate constructor.
 
     @tparam Type Type to generate
-    @param  t    kumi::array to convert
-    @return An instance of `Type` constructed from each element of `t` in order.
+    @param  a    kumi::array to convert
+    @return An instance of `Type` constructed from each element of `a` in order.
 
     ## Example
     @include doc/array/api/from_array.cpp
@@ -396,7 +396,7 @@ namespace kumi
   //====================================================================================================================
   template<typename Type, typename T, std::size_t N>
   [[nodiscard]] KUMI_ABI constexpr auto from_array(kumi::array<T, N> const& a)
-  requires(!kumi::concepts::product_type<Type> && kumi::_::implicit_constructible<Type, Ts...>)
+  requires(!kumi::concepts::product_type<Type>) //&& kumi::_::implicit_constructible<Type, Ts...>)
   {
     return
       [&]<std::size_t... I>(std::index_sequence<I...>) { return Type{get<I>(a)...}; }(std::make_index_sequence<N>{});
@@ -418,13 +418,15 @@ namespace kumi
     @include doc/array/api/to_array.cpp
   **/
   //====================================================================================================================
-  template<kumi::concepts::homogeneous_product_type T> [[nodiscard]] KUMI_ABI constexpr auto to_array(T&& t)
+  template<kumi::concepts::homogeneous_product_type T>
+  requires(!kumi::concepts::empty_product_type<T>)
+  [[nodiscard]] KUMI_ABI constexpr auto to_array(T&& t)
   {
-    if constexpr (kumi::concepts::empty_product_type<T>) return kumi::array{};
-    else
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return kumi::array{get<I>(KUMI_FWD(t))...};
-      }(std::make_index_sequence<kumi::size_v<T>>{});
+    // if constexpr (kumi::concepts::empty_product_type<T>) return kumi::array{};
+    // else
+    return [&]<std::size_t... I>(std::index_sequence<I...>) {
+      return kumi::array{get<I>(KUMI_FWD(t))...};
+    }(std::make_index_sequence<kumi::size_v<T>>{});
   }
 
   /// @overload
@@ -433,27 +435,11 @@ namespace kumi
   requires(!kumi::concepts::product_type<S>)
   {
     constexpr std::size_t N = kumi::container_size_v<S>;
-    if constexpr (N == 0) return kumi::array{};
-    else
-      return [&]<std::size_t... I>(std::index_sequence<I...>) {
-        return kumi::array{KUMI_FWD(s)[I]...};
-      }(std::make_index_sequence<N>{});
-  }
-
-  namespace _
-  {
-    template<typename T, typename IndexSequence, template<typename...> class Meta = std::type_identity> struct as_array;
-
-    template<typename T, std::size_t... I> struct as_array<T, std::index_sequence<I...>>
-    {
-      using type = kumi::array<kumi::element_t<I, T>...>;
-    };
-
-    template<typename T, std::size_t... I, template<typename...> class Meta>
-    struct as_array<T, std::index_sequence<I...>, Meta>
-    {
-      using type = array<typename Meta<kumi::element_t<I, T>>::type...>;
-    };
+    // if constexpr (N == 0) return kumi::array{};
+    // else
+    return [&]<std::size_t... I>(std::index_sequence<I...>) {
+      return kumi::array{KUMI_FWD(s)[I]...};
+    }(std::make_index_sequence<N>{});
   }
 
   //====================================================================================================================
@@ -488,15 +474,16 @@ namespace kumi
 
   template<typename T, template<typename...> class Meta>
   requires(kumi::concepts::power_type<T>)
-  struct as_array<T, Meta> : kumi::_::as_array<T, std::make_index_sequence<kumi::size_v<T>>, Meta>
+  struct as_array<T, Meta>
   {
+    using type = kumi::array<typename Meta<kumi::element_t<0, T>>::type, kumi::size_v<T>>;
   };
 
   template<typename T, template<typename...> class Meta>
   requires(!kumi::concepts::power_type<T>)
   struct as_array<T, Meta>
   {
-    using type = kumi::array<typename Meta<T>::type>;
+    using type = kumi::array<typename Meta<T>::type, 0>;
   };
 
   template<typename T, template<typename...> class Meta = std::type_identity>
@@ -600,7 +587,6 @@ namespace kumi
   requires(!kumi::concepts::record_type<Ts> && ...)
   struct common_product_type<Ts...>
   {
-    using type = kumi::array<>;
+    using type = kumi::array<void>;
   };
-}
 }

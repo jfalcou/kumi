@@ -57,13 +57,13 @@ struct std::tuple_size<kumi::record<Ts...>> : std::integral_constant<std::size_t
 //======================================================================================================================
 template<std::size_t I, typename T, std::size_t N> struct std::tuple_element<I, kumi::array<T, N>>
 {
-  static_assert(I < sizeof...(Ts), "[KUMI] - Array index must be in range");
+  static_assert(I < N, "[KUMI] - Array index must be in range");
   using type = T;
 };
 
-template<std::size_t I, typename T, std::size_t N> struct std::tuple_element<I, kumi::array<T, N>> const >
+template<std::size_t I, typename T, std::size_t N> struct std::tuple_element<I, kumi::array<T, N> const>
 {
-  static_assert(I < sizeof...(Ts), "[KUMI] - Array index must be in range");
+  static_assert(I < N, "[KUMI] - Array index must be in range");
   using type = T const;
 };
 

@@ -23,5 +23,6 @@ namespace kumi
   //====================================================================================================================
 }
 
+#include <kumi/product_types/array.hpp>
 #include <kumi/product_types/tuple.hpp>
 #include <kumi/product_types/record.hpp>
