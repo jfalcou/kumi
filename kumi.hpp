@@ -1639,8 +1639,7 @@ namespace kumi
     template<typename T, typename U, std::size_t... I>
     constexpr auto lexicographic_compare(T&& t, U&& u, std::index_sequence<I...>) noexcept
     {
-      return ((get<0>(KUMI_FWD(t)) < get<0>(KUMI_FWD(u))) || ... ||
-              (get<I + 1>(KUMI_FWD(t)) < get<I + 1>(KUMI_FWD(u)) && get<I>(KUMI_FWD(u)) >= get<I>(KUMI_FWD(t))));
+      return (... || (get<I>(KUMI_FWD(t)) < get<I>(KUMI_FWD(u)) || (!(get<I>(KUMI_FWD(u)) <= get<I>(KUMI_FWD(t))))));
     }
     template<typename Os, typename T, std::size_t... I>
     constexpr Os& print(
