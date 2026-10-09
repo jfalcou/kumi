@@ -33,6 +33,9 @@ namespace kumi
     /// Value stored by the constant
     static constexpr auto value = N;
 
+    /// Type of the template parameter
+    // using type = std::size_t;
+
     /// Conversion operator to integer
     constexpr inline operator std::size_t() const noexcept { return N; }
 
