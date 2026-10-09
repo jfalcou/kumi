@@ -310,51 +310,51 @@ namespace kumi
       ((get<kumi::identifier_of<Ts>()>(*this) = get<kumi::identifier_of<Ts>()>(KUMI_FWD(other))), ...);
       return *this;
     }
-
-    //==================================================================================================================
-    /**
-      @name Comparison operators
-      @{
-    **/
-    //==================================================================================================================
-
-    /// @brief Compares a record with another for equality
-    template<typename... Us>
-    KUMI_ABI friend constexpr auto operator==(record const& self, record<Us...> const& other) noexcept
-#ifndef KUMI_DOXYGEN_INVOKED
-    requires(kumi::_::fieldwise_comparable<record, record<Us...>>)
-#endif
-    {
-      return ((get<kumi::identifier_of<Ts>()>(self) == get<kumi::identifier_of<Ts>()>(other)) && ...);
-    }
-
-    /// @brief Compares a record with another for inequality
-    template<typename... Us>
-    KUMI_ABI friend constexpr auto operator!=(record const& self, record<Us...> const& other) noexcept
-#ifndef KUMI_DOXYGEN_INVOKED
-    requires(kumi::_::fieldwise_comparable<record, record<Us...>>)
-#endif
-    {
-      return !(self == other);
-    }
-
-    //==================================================================================================================
-    //! @}
-    //==================================================================================================================
-
-    //==================================================================================================================
-    /**
-      @related kumi::record
-      @brief Inserts a kumi::record in an output stream
-    **/
-    //==================================================================================================================
-    template<typename CharT, typename Traits>
-    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os,
-                                                         record const& t) noexcept
-    {
-      return kumi::_::print(os, t, '{', ',', '}', std::make_index_sequence<sizeof...(Ts) - 1>{});
-    }
   };
+
+  //==================================================================================================================
+  /**
+    @name Comparison operators
+    @related kumi::record
+    @{
+  **/
+  //==================================================================================================================
+
+  /// @brief Compares a record with another for equality
+  template<typename... Ts, typename... Us>
+  KUMI_ABI constexpr auto operator==(record<Ts...> const& self, record<Us...> const& other) noexcept
+#ifndef KUMI_DOXYGEN_INVOKED
+  requires(kumi::_::fieldwise_comparable<record<Ts...>, record<Us...>>)
+#endif
+  {
+    return ((get<kumi::identifier_of<Ts>()>(self) == get<kumi::identifier_of<Ts>()>(other)) && ...);
+  }
+
+  /// @brief Compares a record with another for inequality
+  template<typename... Ts, typename... Us>
+  KUMI_ABI constexpr auto operator!=(record<Ts...> const& self, record<Us...> const& other) noexcept
+#ifndef KUMI_DOXYGEN_INVOKED
+  requires(kumi::_::fieldwise_comparable<record<Ts...>, record<Us...>>)
+#endif
+  {
+    return !(self == other);
+  }
+
+  //==================================================================================================================
+  //! @}
+  //==================================================================================================================
+
+  //==================================================================================================================
+  /**
+    @related kumi::record
+    @brief Inserts a kumi::record in an output stream
+  **/
+  //==================================================================================================================
+  template<typename CharT, typename Traits, typename... Ts>
+  std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, record<Ts...> const& t) noexcept
+  {
+    return kumi::_::print(os, t, '{', ',', '}', std::make_index_sequence<sizeof...(Ts) - 1>{});
+  }
 
   template<> struct record<>
   {
