@@ -42,8 +42,15 @@ namespace kumi
 #include <kumi/utils/builder.hpp>
 #include <kumi/utils/traits.hpp>
 #include <kumi/utils/concepts.hpp>
+
 #include <kumi/utils/unit_type.hpp>
+#include <kumi/utils/str.hpp>
+#include <kumi/utils/typename.hpp>
+#include <kumi/utils/streamable.hpp>
+
+#include <kumi/utils/field.hpp>
 #include <kumi/utils/identifier.hpp>
+
 #include <kumi/utils/ct_helpers.hpp>
 #include <kumi/utils/projections.hpp>
 #include <kumi/utils/std.hpp>

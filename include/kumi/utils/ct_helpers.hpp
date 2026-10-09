@@ -33,6 +33,9 @@ namespace kumi
     /// Value stored by the constant
     static constexpr auto value = N;
 
+    /// Type of the template parameter
+    // using type = std::size_t;
+
     /// Conversion operator to integer
     constexpr inline operator std::size_t() const noexcept { return N; }
 
@@ -59,13 +62,13 @@ namespace kumi
   //====================================================================================================================
   template<kumi::str Label> struct label_t
   {
-    using type = str;
+    using type = decltype(Label);
 
     /// Value stored by the constant
     static constexpr kumi::str value = Label;
 
     /// Conversion operator to kumi::str
-    constexpr inline operator kumi::str() const noexcept { return Label; }
+    constexpr inline operator type() const noexcept { return Label; }
 
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, label_t const&) noexcept

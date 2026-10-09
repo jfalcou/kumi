@@ -151,7 +151,7 @@ namespace kumi
     KUMI_ABI constexpr decltype(auto) operator[]([[maybe_unused]] kumi::label_t<L> s) & noexcept
     requires(kumi::concepts::contains_label<kumi::label_t<L>, Ts...>)
     {
-      return impl(std::integral_constant<kumi::str, L>{});
+      return impl(std::integral_constant<kumi::str<L.size()>, L>{});
     }
 
     /// @overload
@@ -159,7 +159,7 @@ namespace kumi
     KUMI_ABI constexpr decltype(auto) operator[](kumi::label_t<L>) && noexcept
     requires(kumi::concepts::contains_label<kumi::label_t<L>, Ts...>)
     {
-      return static_cast<binder_t&&>(impl)(std::integral_constant<kumi::str, L>{});
+      return static_cast<binder_t&&>(impl)(std::integral_constant<kumi::str<L.size()>, L>{});
     }
 
     /// @overload
@@ -167,7 +167,7 @@ namespace kumi
     KUMI_ABI constexpr decltype(auto) operator[](kumi::label_t<L>) const&& noexcept
     requires(kumi::concepts::contains_label<kumi::label_t<L>, Ts...>)
     {
-      return static_cast<binder_t const&&>(impl)(std::integral_constant<kumi::str, L>{});
+      return static_cast<binder_t const&&>(impl)(std::integral_constant<kumi::str<L.size()>, L>{});
     }
 
     /// @overload
@@ -175,7 +175,7 @@ namespace kumi
     KUMI_ABI constexpr decltype(auto) operator[](kumi::label_t<L>) const& noexcept
     requires(kumi::concepts::contains_label<kumi::label_t<L>, Ts...>)
     {
-      return impl(std::integral_constant<kumi::str, L>{});
+      return impl(std::integral_constant<kumi::str<L.size()>, L>{});
     }
 
     //==================================================================================================================

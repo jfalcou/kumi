@@ -100,8 +100,8 @@ TTS_CASE("Check for_each_field behavior")
   TTS_EQUAL(get<"de"_id>(t), '4');
 
   kumi::for_each_field(
-    [](kumi::str name, auto& m, auto n) {
-      if (name.starts_with("a"_str)) m *= n;
+    [](auto name, auto& m, auto n) {
+      if (name.starts_with("a")) m *= n;
       else m += n;
     },
     t, t);
@@ -117,8 +117,8 @@ TTS_CASE("Check for_each_field constexpr behavior")
   constexpr auto t = []() {
     auto it = kumi::record{"arg"_id = 1, "beg"_id = 2., "crf"_id = 3.4f, "deg"_id = '5'};
     kumi::for_each_field(
-      [](kumi::str name, auto& m) {
-        if (name.ends_with("g"_str)) m++;
+      [](auto name, auto& m) {
+        if (name.ends_with("g")) m++;
         else m--;
       },
       it);
@@ -133,8 +133,8 @@ TTS_CASE("Check for_each_field constexpr behavior")
   constexpr auto t2 = []() {
     auto it = kumi::record{"actually"_id = 1, "bike"_id = 2., "what"_id = 3.4f, "delicious"_id = '5'};
     kumi::for_each_field(
-      [](kumi::str name, auto& m, auto n) {
-        if (name.starts_with("a"_str) || name.ends_with("t"_str)) m *= n;
+      [](auto name, auto& m, auto n) {
+        if (name.starts_with("a") || name.ends_with("t")) m *= n;
         else m += n;
       },
       it, it);

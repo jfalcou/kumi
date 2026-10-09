@@ -30,7 +30,7 @@ namespace kumi
     using type = T;
     using identifier_type = Id;
     using inner_type = std::type_identity<T>;
-    using label_type = std::integral_constant<kumi::str, label()>;
+    using label_type = std::integral_constant<kumi::str<label().size()>, label()>;
 
     T value;
 
@@ -90,7 +90,7 @@ namespace kumi
     using type = T;
     using identifier_type = Id;
     using inner_type = std::type_identity<T>;
-    using label_type = std::integral_constant<kumi::str, label()>;
+    using label_type = std::integral_constant<kumi::str<label().size()>, label()>;
 
     KUMI_HIDDEN_ABI constexpr T& operator()(identifier_type) & noexcept { return *this; }
 
@@ -203,10 +203,10 @@ namespace kumi
     @include doc/infra/label_of.cpp
   **/
   //====================================================================================================================
-  template<typename T> [[nodiscard]] KUMI_ABI consteval kumi::str label_of() noexcept
+  template<typename T> [[nodiscard]] KUMI_ABI consteval kumi::_::str_like auto label_of() noexcept
   {
-    if constexpr (kumi::_::field<T>) return kumi::_::label_of_t<T>{};
-    else return kumi::unknown{};
+    if constexpr (kumi::_::field<T>) return kumi::_::label_of_t<T>::value;
+    else return kumi::unknown::value;
   }
 
   //====================================================================================================================
