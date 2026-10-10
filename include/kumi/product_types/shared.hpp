@@ -28,10 +28,20 @@ namespace kumi
       return ((get<I>(KUMI_FWD(t)) == get<I>(KUMI_FWD(u))) && ...);
     }
 
-    template<typename T, typename U, std::size_t... I>
-    constexpr auto lexicographic_compare(T&& t, U&& u, std::index_sequence<I...>) noexcept
+    template<typename T, typename U> constexpr bool lexicographic_compare(T&&, U&&, std::index_sequence<>) noexcept
     {
-      return (... || (get<I>(KUMI_FWD(t)) < get<I>(KUMI_FWD(u)) || (!(get<I>(KUMI_FWD(u)) <= get<I>(KUMI_FWD(t))))));
+      return false;
+    }
+
+    // The first position where t and u differ decides the order
+    template<typename T, typename U, std::size_t I0, std::size_t... I>
+    constexpr auto lexicographic_compare(T&& t, U&& u, std::index_sequence<I0, I...>) noexcept
+    {
+      if constexpr (sizeof...(I) == 0) return get<I0>(KUMI_FWD(t)) < get<I0>(KUMI_FWD(u));
+      else
+        return get<I0>(KUMI_FWD(t)) < get<I0>(KUMI_FWD(u)) ||
+               (!(get<I0>(KUMI_FWD(u)) < get<I0>(KUMI_FWD(t))) &&
+                lexicographic_compare(KUMI_FWD(t), KUMI_FWD(u), std::index_sequence<I...>{}));
     }
 
     template<typename Os, typename T, std::size_t... I>
