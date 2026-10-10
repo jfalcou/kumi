@@ -7,18 +7,9 @@
 //======================================================================================================================
 #ifndef KUMI_HPP_INCLUDED
 #define KUMI_HPP_INCLUDED
-#if __has_include(<kumi_config.hpp>)
-#include <kumi_config.hpp>
-#else
-namespace kumi::config
-{
-  using default_size_type = unsigned int;
-  inline constexpr default_size_type max_size = 64;
-}
-#endif
 namespace kumi
 {
-  struct str;
+  template<decltype(sizeof(0)) N> struct str;
   template<typename... Ts> struct tuple;
   template<typename... Ts> struct record;
   template<auto... Vs> struct projection_map;
@@ -242,6 +233,9 @@ namespace kumi::_
   };
   template<typename T, typename... Args>
   concept implicit_constructible = requires(Args... args) { T{args...}; };
+  template<auto N> void str_based(kumi::str<N> const&);
+  template<typename T>
+  concept str_like = requires(T const& t) { kumi::_::str_based(t); };
   template<typename T>
   concept valid_label =
     kumi::_::implicit_constructible<T> &&
@@ -249,12 +243,12 @@ namespace kumi::_
     requires
     {
       { std::bool_constant<(to_str(T{}), true)>{} } -> std::same_as<std::true_type>;
-      { to_str(T{}) } -> std::same_as<kumi::str>;
+      { to_str(T{}) } -> kumi::_::str_like;
     });
   template<typename T>
   concept label = requires(T&& t) {
     typename std::remove_cvref_t<T>::type;
-    { std::remove_cvref_t<T>::value } -> std::convertible_to<kumi::str>;
+    { std::remove_cvref_t<T>::value } -> kumi::_::str_like;
   };
   template<typename O>
   concept field = requires(O&& o) {
@@ -435,411 +429,6 @@ namespace kumi::_
   template<template<typename...> typename Meta, typename Target, typename PT, std::size_t... I>
   inline constexpr bool can_query<Meta, Target, PT, std::index_sequence<I...>> =
     Meta<Target, std::tuple_element_t<I, PT>...>::value != kumi::_::invalid{};
-}
-namespace kumi
-{
-  struct str
-  {
-    using size_type = kumi::config::default_size_type;
-    static constexpr size_type max_size = kumi::config::max_size;
-    static constexpr size_type npos = static_cast<size_type>(-1);
-    static constexpr char separator = '.';
-    char data_[max_size + 1] = {0};
-    size_type size_;
-    constexpr str() = default;
-    template<std::size_t N, std::size_t... Is>
-    requires(N <= max_size)
-    KUMI_ABI constexpr str(char const (&s)[N], std::index_sequence<Is...>) : data_{s[Is]...}, size_(N - 1)
-    {
-    }
-    template<std::size_t N, std::size_t O, std::size_t... Is>
-    requires(sizeof...(Is) <= max_size)
-    KUMI_ABI constexpr str(char const (&s)[N], std::integral_constant<std::size_t, O>, std::index_sequence<Is...>)
-      : data_{s[Is + O]...}, size_(sizeof...(Is))
-    {
-    }
-    template<std::size_t N>
-    requires(N <= max_size)
-    KUMI_ABI constexpr str(char const (&s)[N]) : str{s, std::make_index_sequence<N>{}}
-    {
-    }
-    template<std::size_t N, std::size_t P, std::size_t S>
-    requires((N >= P + S) && ((N - P - S) <= max_size))
-    KUMI_ABI constexpr str(char const (&s)[N],
-                           std::integral_constant<std::size_t, P> prefix,
-                           std::integral_constant<std::size_t, S>)
-      : str{s, prefix, std::make_index_sequence<(N - 1) - P - S>{}}
-    {
-    }
-    KUMI_ABI constexpr std::size_t size() const noexcept { return size_; }
-    KUMI_ABI constexpr auto data() const noexcept { return data_; }
-    template<typename T>
-    requires requires { T{data_, size_}; }
-    KUMI_ABI constexpr auto as() const
-    {
-      return T{data_, size_};
-    }
-    template<typename CharT, typename Traits>
-    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, str const& s) noexcept
-    {
-      os << '\'';
-      for (size_type i = 0; i < s.size(); ++i) os << s.data_[i];
-      return os << '\'';
-    }
-    KUMI_ABI constexpr str remove_prefix(size_type n) const
-    {
-      if (n > size_) KUMI_ERROR("Out of range");
-      return substr(n, size_ - n);
-    }
-    KUMI_ABI constexpr str remove_suffix(size_type n) const
-    {
-      if (n > size_) KUMI_ERROR("Out of range");
-      return substr(0, size_ - n);
-    }
-    KUMI_ABI constexpr str substr(size_type pos = 0, size_type count = npos) const
-    {
-      size_type len = (count == npos || pos + count > size_) ? (size_ - pos) : count;
-      str res{};
-      res.size_ = len;
-      for (size_type i = 0; i < len; ++i) res.data_[i] = data_[pos + i];
-      return res;
-    }
-    KUMI_ABI constexpr bool starts_with(str const& s) const
-    {
-      if (s.size_ > size_) return false;
-      for (size_type i = 0; i < s.size_; ++i)
-        if (data_[i] != s.data_[i]) return false;
-      return true;
-    }
-    KUMI_ABI constexpr bool ends_with(str const& s) const
-    {
-      if (s.size_ > size_) return false;
-      for (size_type i = 0; i < s.size_; ++i)
-        if (data_[size_ - s.size_ + i] != s.data_[i]) return false;
-      return true;
-    }
-    KUMI_ABI constexpr bool contains(str const& s) const { return find(s) != npos; }
-    KUMI_ABI constexpr size_type find(str const& s, size_type pos = 0) const
-    {
-      if (s.size_ == 0) return pos <= size_ ? pos : npos;
-      if (s.size_ > size_) return npos;
-      for (size_type i = pos; i <= size_ - s.size_; ++i)
-      {
-        bool match = true;
-        for (size_type j = 0; j < s.size_; ++j)
-          if (data_[i + j] != s.data_[j])
-          {
-            match = false;
-            break;
-          }
-        if (match) return i;
-      }
-      return npos;
-    }
-    KUMI_ABI constexpr int compare(str const& other) const noexcept
-    {
-      size_type min_size = (size_ < other.size_) ? size_ : other.size_;
-      for (size_type i = 0; i < min_size; ++i)
-      {
-        if (data_[i] < other.data_[i]) return -1;
-        if (data_[i] > other.data_[i]) return 1;
-      }
-      if (size_ < other.size_) return -1;
-      if (size_ > other.size_) return 1;
-      return 0;
-    }
-    KUMI_ABI friend constexpr bool operator==(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) == 0; }
-    KUMI_ABI friend constexpr bool operator!=(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) != 0; }
-    KUMI_ABI friend constexpr bool operator<(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) < 0; }
-    KUMI_ABI friend constexpr bool operator<=(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) <= 0; }
-    KUMI_ABI friend constexpr bool operator>(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) > 0; }
-    KUMI_ABI friend constexpr bool operator>=(str const& lhs, str const& rhs) noexcept { return lhs.compare(rhs) >= 0; }
-    KUMI_ABI constexpr size_type rfind(str const& s, size_type pos = npos) const
-    {
-      if (s.size_ == 0) return (pos > size_ ? size_ : pos);
-      if (s.size_ > size_) return npos;
-      size_type start = (pos > size_ - s.size_) ? (size_ - s.size_) : pos;
-      for (size_type i = start; i > 0; --i)
-      {
-        bool match = true;
-        for (size_type j = 0; j < s.size_; ++j)
-          if (data_[i + j] != s.data_[j])
-          {
-            match = false;
-            break;
-          }
-        if (match) return i;
-      }
-      return npos;
-    }
-    KUMI_ABI constexpr size_type find_first_of(str const& s, size_type pos = 0) const
-    {
-      for (size_type i = pos; i < size_; ++i)
-        for (size_type j = 0; j < s.size_; ++j)
-          if (data_[i] == s.data_[j]) return i;
-      return npos;
-    }
-    KUMI_ABI constexpr size_type find_last_of(str const& s, size_type pos = npos) const
-    {
-      if (size_ == 0) return npos;
-      for (size_type i = (pos >= size_ ? size_ - 1 : pos);; --i)
-      {
-        for (size_type j = 0; j < s.size_; ++j)
-          if (data_[i] == s.data_[j]) return i;
-        if (i == 0) break;
-      }
-      return npos;
-    }
-    KUMI_ABI constexpr size_type find_first_not_of(str const& s, size_type pos = 0) const
-    {
-      for (size_type i = pos; i < size_; ++i)
-      {
-        bool found = false;
-        for (size_type j = 0; j < s.size_; ++j)
-          if (data_[i] == s.data_[j])
-          {
-            found = true;
-            break;
-          }
-        if (!found) return i;
-      }
-      return npos;
-    }
-    KUMI_ABI constexpr size_type find_last_not_of(str const& s, size_type pos = npos) const
-    {
-      if (size_ == 0) return npos;
-      for (size_type i = (pos >= size_ ? size_ - 1 : pos);; --i)
-      {
-        bool found = false;
-        for (size_type j = 0; j < s.size_; ++j)
-          if (data_[i] == s.data_[j])
-          {
-            found = true;
-            break;
-          }
-        if (!found) return i;
-        if (i == 0) break;
-      }
-      return npos;
-    }
-    KUMI_ABI constexpr str operator+(str const& other) const
-    {
-      size_type new_size = size_ + 1 + other.size_;
-      if (new_size > max_size) KUMI_ERROR("Overflow");
-      str res{};
-      res.size_ = static_cast<unsigned int>(new_size);
-      for (size_type i = 0; i < size_; ++i) res.data_[i] = data_[i];
-      res.data_[size_] = kumi::str::separator;
-      for (size_type i = 0; i < other.size_; ++i) res.data_[size_ + 1 + i] = other.data_[i];
-      res.data_[new_size] = '\0';
-      return res;
-    }
-    KUMI_ABI static constexpr str from(char const* s, size_type n)
-    {
-      str res{};
-      if (n > str::max_size) KUMI_ERROR("Overflow");
-      for (size_type i = 0; i < n; ++i) res.data_[i] = s[i];
-      res.size_ = static_cast<unsigned int>(n);
-      return res;
-    }
-  };
-  inline namespace literals
-  {
-    KUMI_ABI constexpr auto operator""_str(char const* s, std::size_t n)
-    {
-      return kumi::str::from(s, kumi::str::size_type(n));
-    }
-  }
-  struct unknown
-  {
-    constexpr inline operator kumi::str() const noexcept { return str{"kumi::unknown"}; }
-    KUMI_ABI friend constexpr auto operator<=>(unknown const&, unknown const&) noexcept = default;
-    template<typename CharT, typename Traits>
-    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, unknown const&) noexcept
-    {
-      return os << "kumi::unknown";
-    }
-  };
-}
-namespace kumi::_
-{
-  template<typename T> [[nodiscard]] KUMI_HIDDEN_ABI consteval auto typer() noexcept
-  {
-#if defined(__clang__)
-    constexpr auto pfx = kumi::str{"auto kumi::_::typer() [T = "}.size();
-    constexpr auto sfx = kumi::str{"]"}.size();
-    constexpr auto value = kumi::str{__PRETTY_FUNCTION__, std::integral_constant<std::size_t, pfx>{},
-                                     std::integral_constant<std::size_t, sfx>{}};
-#elif defined(__GNUC__)
-    constexpr auto pfx = kumi::str{"constexpr auto kumi::_::typer() [with T = "}.size();
-    constexpr auto sfx = kumi::str{"]"}.size();
-    constexpr auto value = kumi::str{__PRETTY_FUNCTION__, std::integral_constant<std::size_t, pfx>{},
-                                     std::integral_constant<std::size_t, sfx>{}};
-#elif defined(_MSC_VER)
-    constexpr auto pfx = kumi::str{"auto __cdecl kumi::_::typer<"}.size();
-    constexpr auto sfx = kumi::str{">(void)"}.size();
-    constexpr auto value =
-      kumi::str{__FUNCSIG__, std::integral_constant<std::size_t, pfx>{}, std::integral_constant<std::size_t, sfx>{}};
-#endif
-    return value;
-  }
-}
-#ifdef KUMI_DOXYGEN_INVOKED
-auto as_streamable(auto e);
-kumi::str constexpr to_str(auto e);
-#endif
-namespace kumi::_
-{
-  template<typename T> auto make_streamable(T const& e)
-  {
-    if constexpr (requires(std::ostream& os) { os << e; }) return e;
-    else if constexpr (requires { as_streamable(e); }) return as_streamable(e);
-    else return kumi::unknown{};
-  }
-  template<kumi::_::valid_label T> consteval kumi::str make_str(T const& t)
-  {
-    if constexpr (requires { to_str(t); }) return to_str(t);
-    else return kumi::_::typer<std::remove_cvref_t<T>>();
-  }
-}
-namespace kumi
-{
-  template<typename Id, typename T> struct field
-  {
-    static constexpr auto label() { return kumi::_::make_str(Id{}); }
-    using type = T;
-    using identifier_type = Id;
-    using inner_type = std::type_identity<T>;
-    using label_type = std::integral_constant<kumi::str, label()>;
-    T value;
-    KUMI_HIDDEN_ABI constexpr T& operator()(identifier_type) & noexcept { return value; }
-    KUMI_HIDDEN_ABI constexpr T&& operator()(identifier_type) && noexcept { return static_cast<T&&>(value); }
-    KUMI_HIDDEN_ABI constexpr T const& operator()(identifier_type) const& noexcept { return value; }
-    KUMI_HIDDEN_ABI constexpr T const&& operator()(identifier_type) const&& noexcept
-    {
-      return static_cast<T const&&>(value);
-    }
-    KUMI_HIDDEN_ABI constexpr T& operator()(inner_type) & noexcept { return value; }
-    KUMI_HIDDEN_ABI constexpr T&& operator()(inner_type) && noexcept { return static_cast<T&&>(value); }
-    KUMI_HIDDEN_ABI constexpr T const& operator()(inner_type) const& noexcept { return value; }
-    KUMI_HIDDEN_ABI constexpr T const&& operator()(inner_type) const&& noexcept
-    {
-      return static_cast<T const&&>(value);
-    }
-    KUMI_HIDDEN_ABI constexpr T& operator()(label_type) & noexcept { return value; }
-    KUMI_HIDDEN_ABI constexpr T&& operator()(label_type) && noexcept { return static_cast<T&&>(value); }
-    KUMI_HIDDEN_ABI constexpr T const& operator()(label_type) const& noexcept { return value; }
-    KUMI_HIDDEN_ABI constexpr T const&& operator()(label_type) const&& noexcept
-    {
-      return static_cast<T const&&>(value);
-    }
-    template<typename CharT, typename Traits>
-    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, field const& w) noexcept
-    {
-      return os << kumi::_::make_str(std::remove_cvref_t<Id>{}) << " : " << kumi::_::make_streamable(w.value);
-    }
-  };
-  template<typename Id, typename T>
-  requires(std::is_empty_v<T> && !std::is_final_v<T>)
-  struct field<Id, T> : T
-  {
-    static constexpr auto label() { return kumi::_::make_str(Id{}); }
-    using type = T;
-    using identifier_type = Id;
-    using inner_type = std::type_identity<T>;
-    using label_type = std::integral_constant<kumi::str, label()>;
-    KUMI_HIDDEN_ABI constexpr T& operator()(identifier_type) & noexcept { return *this; }
-    KUMI_HIDDEN_ABI constexpr T&& operator()(identifier_type) && noexcept { return static_cast<T&&>(*this); }
-    KUMI_HIDDEN_ABI constexpr T const& operator()(identifier_type) const& noexcept { return *this; }
-    KUMI_HIDDEN_ABI constexpr T const&& operator()(identifier_type) const&& noexcept
-    {
-      return static_cast<T const&&>(*this);
-    }
-    KUMI_HIDDEN_ABI constexpr T& operator()(inner_type) & noexcept { return *this; }
-    KUMI_HIDDEN_ABI constexpr T&& operator()(inner_type) && noexcept { return static_cast<T&&>(*this); }
-    KUMI_HIDDEN_ABI constexpr T const& operator()(inner_type) const& noexcept { return *this; }
-    KUMI_HIDDEN_ABI constexpr T const&& operator()(inner_type) const&& noexcept
-    {
-      return static_cast<T const&&>(*this);
-    }
-    KUMI_HIDDEN_ABI constexpr T& operator()(label_type) & noexcept { return *this; }
-    KUMI_HIDDEN_ABI constexpr T&& operator()(label_type) && noexcept { return static_cast<T&&>(*this); }
-    KUMI_HIDDEN_ABI constexpr T const& operator()(label_type) const& noexcept { return *this; }
-    KUMI_HIDDEN_ABI constexpr T const&& operator()(label_type) const&& noexcept
-    {
-      return static_cast<T const&&>(*this);
-    }
-    template<typename CharT, typename Traits>
-    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, field const& w) noexcept
-    {
-      return os << kumi::_::make_str(std::remove_cvref_t<Id>{}) << " : "
-                << kumi::_::make_streamable(w(_::identifier_of_t<decltype(w)>{}));
-    }
-  };
-  template<typename Id, typename T>
-  requires(!kumi::_::valid_label<Id>)
-  struct field<Id, T>
-  {
-    field(T&&) = delete;
-    static_assert(kumi::_::valid_label<Id>, "User defined to_str(...) function is not constexpr");
-  };
-  template<typename T> [[nodiscard]] KUMI_ABI consteval auto identifier_of() noexcept
-  {
-    if constexpr (kumi::_::field<T>) return kumi::_::identifier_of_t<T>{};
-    else return kumi::unknown{};
-  }
-  template<typename T> [[nodiscard]] KUMI_ABI consteval kumi::str label_of() noexcept
-  {
-    if constexpr (kumi::_::field<T>) return kumi::_::label_of_t<T>{};
-    else return kumi::unknown{};
-  }
-  template<typename T> [[nodiscard]] KUMI_ABI constexpr decltype(auto) field_value_of(T&& t) noexcept
-  {
-    if constexpr (kumi::_::field<T>) return (KUMI_FWD(t)(kumi::_::identifier_of_t<T>{}));
-    else return KUMI_FWD(t);
-  }
-  template<_::identifier auto Name, typename T>
-  [[nodiscard]] KUMI_ABI constexpr decltype(auto) capture_field(T&& t) noexcept
-  {
-    return kumi::field<decltype(Name), T>{KUMI_FWD(t)};
-  }
-  template<typename U, typename T> [[nodiscard]] KUMI_ABI constexpr decltype(auto) field_cast(T&& t) noexcept
-  {
-    if constexpr (kumi::_::field<U>)
-      return kumi::field<kumi::_::identifier_of_t<T>, kumi::_::type_of_t<U>>{
-        static_cast<kumi::_::type_of_t<U>>(KUMI_FWD(t)(kumi::_::identifier_of_t<T>{}))};
-    else if constexpr (!kumi::_::field<T>) return static_cast<kumi::_::type_of_t<U>>(KUMI_FWD(t));
-    else return kumi::field<kumi::_::identifier_of_t<T>, U>{static_cast<U>(KUMI_FWD(t)(kumi::_::identifier_of_t<T>{}))};
-  }
-  namespace result
-  {
-    template<typename T> using identifier_of_t = decltype(kumi::identifier_of<T>());
-    template<typename T> struct identifier_of
-    {
-      using type = kumi::result::identifier_of_t<T>;
-    };
-    template<typename T> using label_of_t = decltype(kumi::label_of<T>());
-    template<typename T> struct label_of
-    {
-      using type = kumi::result::label_of_t<T>;
-    };
-    template<typename T> using field_value_of_t = decltype(kumi::field_value_of(std::declval<T>()));
-    template<typename T> struct field_value_of
-    {
-      using type = kumi::result::field_value_of_t<T>;
-    };
-    template<_::identifier auto Name, typename T>
-    using capture_field_t = decltype(kumi::capture_field<Name>(std::declval<T>()));
-    template<kumi::_::identifier auto Name, typename T> struct capture_field
-    {
-      using type = kumi::result::capture_field_t<Name, T>;
-    };
-    template<typename U, typename T> using field_cast_t = decltype(kumi::field_cast<U, T>(std::declval<T>()));
-    template<typename U, typename T> struct field_cast
-    {
-      using type = kumi::result::field_cast_t<U, T>;
-    };
-  }
 }
 namespace kumi::_
 {
@@ -1284,7 +873,8 @@ namespace kumi
     concept uniquely_labeled =
       (sizeof...(Ts) == 0) ||
       (kumi::concepts::fully_named<Ts...> &&
-       (kumi::all_uniques_v<std::integral_constant<kumi::str, std::remove_cvref_t<Ts>::label()>...>));
+       (kumi::all_uniques_v<std::integral_constant<kumi::str<std::remove_cvref_t<Ts>::label().size()>,
+                                                   std::remove_cvref_t<Ts>::label()>...>));
     template<typename T, typename... Ts>
     concept contains_type = kumi::_::index_of_type<T, Ts...>::value != kumi::_::invalid{};
     template<typename Name, typename... Ts>
@@ -1351,6 +941,422 @@ namespace kumi
 }
 namespace kumi
 {
+  inline constexpr auto npos = static_cast<std::size_t>(-1);
+  template<std::size_t N> struct str
+  {
+    static constexpr char separator = '.';
+    char data_[N + 1] = {0};
+    constexpr str() = default;
+    KUMI_ABI constexpr str(char const (&s)[N + 1])
+    {
+      for (std::size_t i = 0; i < N + 1; ++i) data_[i] = s[i];
+    }
+    KUMI_ABI constexpr std::size_t size() const noexcept { return N; }
+    KUMI_ABI constexpr auto data() const noexcept { return data_; }
+    template<typename T>
+    requires requires { T{data_, std::size_t{N}}; }
+    KUMI_ABI constexpr auto as() const
+    {
+      return T{data_, std::size_t{N}};
+    }
+    template<typename CharT, typename Traits>
+    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, str const& s) noexcept
+    {
+      os << '\'';
+      for (std::size_t i = 0; i < N; ++i) os << s.data_[i];
+      return os << '\'';
+    }
+    template<kumi::concepts::index Pos, kumi::concepts::index Count>
+    KUMI_ABI constexpr auto substr(Pos p, Count c) const
+    {
+      constexpr std::size_t pos = static_cast<std::size_t>(p);
+      constexpr std::size_t count = static_cast<std::size_t>(c);
+      static_assert(pos <= N, "Out of range");
+      constexpr std::size_t len = (count == kumi::npos || pos + count > N) ? (N - pos) : count;
+      str<len> res{};
+      for (std::size_t i = 0; i < len; ++i) res.data_[i] = data_[pos + i];
+      return res;
+    }
+    template<kumi::concepts::index Pos> KUMI_ABI constexpr auto substr(Pos p) const
+    {
+      return substr(p, std::integral_constant<std::size_t, kumi::npos>{});
+    }
+    KUMI_ABI constexpr auto substr() const { return substr(std::integral_constant<std::size_t, 0>{}); }
+    template<kumi::concepts::index Size> KUMI_ABI constexpr auto remove_prefix(Size s) const
+    {
+      static_assert(static_cast<std::size_t>(s) <= N, "Out of range");
+      return substr(std::integral_constant<std::size_t, static_cast<std::size_t>(s)>{},
+                    std::integral_constant<std::size_t, N - static_cast<std::size_t>(s)>{});
+    }
+    template<kumi::concepts::index Size> KUMI_ABI constexpr auto remove_suffix(Size s) const
+    {
+      static_assert(static_cast<std::size_t>(s) <= N, "Out of range");
+      return substr(std::integral_constant<std::size_t, 0>{},
+                    std::integral_constant<std::size_t, N - static_cast<std::size_t>(s)>{});
+    }
+    template<std::size_t M> KUMI_ABI constexpr bool starts_with(char const (&s)[M]) const
+    {
+      constexpr std::size_t n = M - 1;
+      if (n > N) return false;
+      for (std::size_t i = 0; i < n; ++i)
+        if (data_[i] != s[i]) return false;
+      return true;
+    }
+    template<std::size_t M> KUMI_ABI constexpr bool ends_with(char const (&s)[M]) const
+    {
+      constexpr std::size_t n = M - 1;
+      if (n > N) return false;
+      for (std::size_t i = 0; i < n; ++i)
+        if (data_[N - n + i] != s[i]) return false;
+      return true;
+    }
+    template<std::size_t M> KUMI_ABI constexpr bool contains(char const (&s)[M]) const { return find(s) != kumi::npos; }
+    template<std::size_t M> KUMI_ABI constexpr std::size_t find(char const (&s)[M], std::size_t pos = 0) const
+    {
+      constexpr std::size_t n = M - 1;
+      if (n == 0) return pos <= N ? pos : kumi::npos;
+      if (n > N) return kumi::npos;
+      for (std::size_t i = pos; i <= N - n; ++i)
+      {
+        bool match = true;
+        for (std::size_t j = 0; j < n; ++j)
+          if (data_[i + j] != s[j])
+          {
+            match = false;
+            break;
+          }
+        if (match) return i;
+      }
+      return kumi::npos;
+    }
+    template<std::size_t M> KUMI_ABI constexpr int compare(char const (&other)[M]) const noexcept
+    {
+      constexpr std::size_t n = M - 1;
+      constexpr std::size_t min_size = (N < n) ? N : n;
+      for (std::size_t i = 0; i < min_size; ++i)
+      {
+        if (data_[i] < other[i]) return -1;
+        if (data_[i] > other[i]) return 1;
+      }
+      if (N < n) return -1;
+      if (N > n) return 1;
+      return 0;
+    }
+    template<std::size_t M> KUMI_ABI constexpr std::size_t rfind(char const (&s)[M], std::size_t pos = kumi::npos) const
+    {
+      constexpr std::size_t n = M - 1;
+      if (n == 0) return (pos > N ? N : pos);
+      if (n > N) return kumi::npos;
+      std::size_t start = (pos > N - n) ? (N - n) : pos;
+      for (std::size_t i = start; i > 0; --i)
+      {
+        bool match = true;
+        for (std::size_t j = 0; j < n; ++j)
+          if (data_[i + j] != s[j])
+          {
+            match = false;
+            break;
+          }
+        if (match) return i;
+      }
+      return kumi::npos;
+    }
+    template<std::size_t M> KUMI_ABI constexpr std::size_t find_first_of(char const (&s)[M], std::size_t pos = 0) const
+    {
+      constexpr std::size_t n = M - 1;
+      for (std::size_t i = pos; i < N; ++i)
+        for (std::size_t j = 0; j < n; ++j)
+          if (data_[i] == s[j]) return i;
+      return kumi::npos;
+    }
+    template<std::size_t M>
+    KUMI_ABI constexpr std::size_t find_last_of(char const (&s)[M], std::size_t pos = kumi::npos) const
+    {
+      constexpr std::size_t n = M - 1;
+      if (N == 0) return kumi::npos;
+      for (std::size_t i = (pos >= N ? N - 1 : pos);; --i)
+      {
+        for (std::size_t j = 0; j < n; ++j)
+          if (data_[i] == s[j]) return i;
+        if (i == 0) break;
+      }
+      return kumi::npos;
+    }
+    template<std::size_t M>
+    KUMI_ABI constexpr std::size_t find_first_not_of(char const (&s)[M], std::size_t pos = 0) const
+    {
+      constexpr std::size_t n = M - 1;
+      for (std::size_t i = pos; i < N; ++i)
+      {
+        bool found = false;
+        for (std::size_t j = 0; j < n; ++j)
+          if (data_[i] == s[j])
+          {
+            found = true;
+            break;
+          }
+        if (!found) return i;
+      }
+      return kumi::npos;
+    }
+    template<std::size_t M>
+    KUMI_ABI constexpr std::size_t find_last_not_of(char const (&s)[M], std::size_t pos = kumi::npos) const
+    {
+      constexpr std::size_t n = M - 1;
+      if (N == 0) return kumi::npos;
+      for (std::size_t i = (pos >= N ? N - 1 : pos);; --i)
+      {
+        bool found = false;
+        for (std::size_t j = 0; j < n; ++j)
+          if (data_[i] == s[j])
+          {
+            found = true;
+            break;
+          }
+        if (!found) return i;
+        if (i == 0) break;
+      }
+      return kumi::npos;
+    }
+    template<std::size_t M> KUMI_ABI constexpr str<N + M> operator+(char const (&other)[M]) const
+    {
+      str<N + M> res{};
+      for (std::size_t i = 0; i < N; ++i) res.data_[i] = data_[i];
+      res.data_[N] = separator;
+      for (std::size_t i = 0; i < M - 1; ++i) res.data_[N + 1 + i] = other[i];
+      return res;
+    }
+    template<std::size_t M> KUMI_ABI constexpr str<N + 1 + M> operator+(str<M> const& other) const
+    {
+      return *this + other.data_;
+    }
+  };
+  template<std::size_t M> str(char const (&)[M]) -> str<M - 1>;
+  template<std::size_t N, std::size_t M>
+  KUMI_ABI constexpr bool operator==(str<N> const& lhs, str<M> const& rhs) noexcept
+  {
+    return lhs.compare(rhs.data_) == 0;
+  }
+  template<std::size_t N, std::size_t M>
+  KUMI_ABI constexpr auto operator<=>(str<N> const& lhs, str<M> const& rhs) noexcept
+  {
+    return lhs.compare(rhs.data_) <=> 0;
+  }
+  template<std::size_t N, std::size_t M>
+  KUMI_ABI constexpr bool operator==(str<N> const& lhs, char const (&rhs)[M]) noexcept
+  {
+    return lhs.compare(rhs) == 0;
+  }
+  template<std::size_t N, std::size_t M>
+  KUMI_ABI constexpr auto operator<=>(str<N> const& lhs, char const (&rhs)[M]) noexcept
+  {
+    return lhs.compare(rhs) <=> 0;
+  }
+  inline namespace literals
+  {
+    template<kumi::str S> KUMI_ABI constexpr auto operator""_str()
+    {
+      return S;
+    }
+  }
+  struct unknown
+  {
+    static constexpr auto value = kumi::str{"kumi::unknown"};
+    using type = decltype(value);
+    constexpr inline operator type() const noexcept { return value; }
+    KUMI_ABI friend constexpr auto operator<=>(unknown const&, unknown const&) noexcept = default;
+    template<typename CharT, typename Traits>
+    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, unknown const&) noexcept
+    {
+      return os << "kumi::unknown";
+    }
+  };
+}
+namespace kumi
+{
+  template<typename T> [[nodiscard]] consteval auto typer() noexcept
+  {
+#if defined(__clang__)
+    constexpr auto pfx = kumi::str{"auto kumi::typer() [T = "}.size();
+    constexpr auto sfx = kumi::str{"]"}.size();
+    constexpr auto value = kumi::str{__PRETTY_FUNCTION__}
+                             .remove_prefix(std::integral_constant<std::size_t, pfx>{})
+                             .remove_suffix(std::integral_constant<std::size_t, sfx>{});
+#elif defined(__GNUC__)
+    constexpr auto pfx = kumi::str{"constexpr auto kumi::typer() [with T = "}.size();
+    constexpr auto sfx = kumi::str{"]"}.size();
+    constexpr auto value = kumi::str{__PRETTY_FUNCTION__}
+                             .remove_prefix(std::integral_constant<std::size_t, pfx>{})
+                             .remove_suffix(std::integral_constant<std::size_t, sfx>{});
+#elif defined(_MSC_VER)
+    constexpr auto pfx = kumi::str{"auto __cdecl kumi::typer<"}.size();
+    constexpr auto sfx = kumi::str{">(void)"}.size();
+    constexpr auto value = kumi::str{__FUNCSIG__}
+                             .remove_prefix(std::integral_constant<std::size_t, pfx>{})
+                             .remove_suffix(std::integral_constant<std::size_t, sfx>{});
+#endif
+    return value;
+  }
+}
+#ifdef KUMI_DOXYGEN_INVOKED
+auto as_streamable(auto e);
+kumi::str constexpr to_str(auto e);
+#endif
+namespace kumi::_
+{
+  template<typename T> auto make_streamable(T const& e)
+  {
+    if constexpr (requires(std::ostream& os) { os << e; }) return e;
+    else if constexpr (requires { as_streamable(e); }) return as_streamable(e);
+    else return kumi::unknown{};
+  }
+  template<kumi::_::valid_label T> consteval kumi::_::str_like auto make_str(T const& t)
+  {
+    if constexpr (requires { to_str(t); }) return to_str(t);
+    else return kumi::typer<std::remove_cvref_t<T>>();
+  }
+}
+namespace kumi
+{
+  template<typename Id, typename T> struct field
+  {
+    static constexpr auto label() { return kumi::_::make_str(Id{}); }
+    using type = T;
+    using identifier_type = Id;
+    using inner_type = std::type_identity<T>;
+    using label_type = std::integral_constant<kumi::str<label().size()>, label()>;
+    T value;
+    KUMI_HIDDEN_ABI constexpr T& operator()(identifier_type) & noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T&& operator()(identifier_type) && noexcept { return static_cast<T&&>(value); }
+    KUMI_HIDDEN_ABI constexpr T const& operator()(identifier_type) const& noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T const&& operator()(identifier_type) const&& noexcept
+    {
+      return static_cast<T const&&>(value);
+    }
+    KUMI_HIDDEN_ABI constexpr T& operator()(inner_type) & noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T&& operator()(inner_type) && noexcept { return static_cast<T&&>(value); }
+    KUMI_HIDDEN_ABI constexpr T const& operator()(inner_type) const& noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T const&& operator()(inner_type) const&& noexcept
+    {
+      return static_cast<T const&&>(value);
+    }
+    KUMI_HIDDEN_ABI constexpr T& operator()(label_type) & noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T&& operator()(label_type) && noexcept { return static_cast<T&&>(value); }
+    KUMI_HIDDEN_ABI constexpr T const& operator()(label_type) const& noexcept { return value; }
+    KUMI_HIDDEN_ABI constexpr T const&& operator()(label_type) const&& noexcept
+    {
+      return static_cast<T const&&>(value);
+    }
+    template<typename CharT, typename Traits>
+    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, field const& w) noexcept
+    {
+      return os << kumi::_::make_str(std::remove_cvref_t<Id>{}) << " : " << kumi::_::make_streamable(w.value);
+    }
+  };
+  template<typename Id, typename T>
+  requires(std::is_empty_v<T> && !std::is_final_v<T>)
+  struct field<Id, T> : T
+  {
+    static constexpr auto label() { return kumi::_::make_str(Id{}); }
+    using type = T;
+    using identifier_type = Id;
+    using inner_type = std::type_identity<T>;
+    using label_type = std::integral_constant<kumi::str<label().size()>, label()>;
+    KUMI_HIDDEN_ABI constexpr T& operator()(identifier_type) & noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr T&& operator()(identifier_type) && noexcept { return static_cast<T&&>(*this); }
+    KUMI_HIDDEN_ABI constexpr T const& operator()(identifier_type) const& noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr T const&& operator()(identifier_type) const&& noexcept
+    {
+      return static_cast<T const&&>(*this);
+    }
+    KUMI_HIDDEN_ABI constexpr T& operator()(inner_type) & noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr T&& operator()(inner_type) && noexcept { return static_cast<T&&>(*this); }
+    KUMI_HIDDEN_ABI constexpr T const& operator()(inner_type) const& noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr T const&& operator()(inner_type) const&& noexcept
+    {
+      return static_cast<T const&&>(*this);
+    }
+    KUMI_HIDDEN_ABI constexpr T& operator()(label_type) & noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr T&& operator()(label_type) && noexcept { return static_cast<T&&>(*this); }
+    KUMI_HIDDEN_ABI constexpr T const& operator()(label_type) const& noexcept { return *this; }
+    KUMI_HIDDEN_ABI constexpr T const&& operator()(label_type) const&& noexcept
+    {
+      return static_cast<T const&&>(*this);
+    }
+    template<typename CharT, typename Traits>
+    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, field const& w) noexcept
+    {
+      return os << kumi::_::make_str(std::remove_cvref_t<Id>{}) << " : "
+                << kumi::_::make_streamable(w(_::identifier_of_t<decltype(w)>{}));
+    }
+  };
+  template<typename Id, typename T>
+  requires(!kumi::_::valid_label<Id>)
+  struct field<Id, T>
+  {
+    field(T&&) = delete;
+    static_assert(kumi::_::valid_label<Id>, "User defined to_str(...) function is not constexpr");
+  };
+  template<typename T> [[nodiscard]] KUMI_ABI consteval auto identifier_of() noexcept
+  {
+    if constexpr (kumi::_::field<T>) return kumi::_::identifier_of_t<T>{};
+    else return kumi::unknown{};
+  }
+  template<typename T> [[nodiscard]] KUMI_ABI consteval kumi::_::str_like auto label_of() noexcept
+  {
+    if constexpr (kumi::_::field<T>) return kumi::_::label_of_t<T>::value;
+    else return kumi::unknown::value;
+  }
+  template<typename T> [[nodiscard]] KUMI_ABI constexpr decltype(auto) field_value_of(T&& t) noexcept
+  {
+    if constexpr (kumi::_::field<T>) return (KUMI_FWD(t)(kumi::_::identifier_of_t<T>{}));
+    else return KUMI_FWD(t);
+  }
+  template<_::identifier auto Name, typename T>
+  [[nodiscard]] KUMI_ABI constexpr decltype(auto) capture_field(T&& t) noexcept
+  {
+    return kumi::field<decltype(Name), T>{KUMI_FWD(t)};
+  }
+  template<typename U, typename T> [[nodiscard]] KUMI_ABI constexpr decltype(auto) field_cast(T&& t) noexcept
+  {
+    if constexpr (kumi::_::field<U>)
+      return kumi::field<kumi::_::identifier_of_t<T>, kumi::_::type_of_t<U>>{
+        static_cast<kumi::_::type_of_t<U>>(KUMI_FWD(t)(kumi::_::identifier_of_t<T>{}))};
+    else if constexpr (!kumi::_::field<T>) return static_cast<kumi::_::type_of_t<U>>(KUMI_FWD(t));
+    else return kumi::field<kumi::_::identifier_of_t<T>, U>{static_cast<U>(KUMI_FWD(t)(kumi::_::identifier_of_t<T>{}))};
+  }
+  namespace result
+  {
+    template<typename T> using identifier_of_t = decltype(kumi::identifier_of<T>());
+    template<typename T> struct identifier_of
+    {
+      using type = kumi::result::identifier_of_t<T>;
+    };
+    template<typename T> using label_of_t = decltype(kumi::label_of<T>());
+    template<typename T> struct label_of
+    {
+      using type = kumi::result::label_of_t<T>;
+    };
+    template<typename T> using field_value_of_t = decltype(kumi::field_value_of(std::declval<T>()));
+    template<typename T> struct field_value_of
+    {
+      using type = kumi::result::field_value_of_t<T>;
+    };
+    template<_::identifier auto Name, typename T>
+    using capture_field_t = decltype(kumi::capture_field<Name>(std::declval<T>()));
+    template<kumi::_::identifier auto Name, typename T> struct capture_field
+    {
+      using type = kumi::result::capture_field_t<Name, T>;
+    };
+    template<typename U, typename T> using field_cast_t = decltype(kumi::field_cast<U, T>(std::declval<T>()));
+    template<typename U, typename T> struct field_cast
+    {
+      using type = kumi::result::field_cast_t<U, T>;
+    };
+  }
+}
+namespace kumi
+{
   template<typename T> struct only_t
   {
     template<typename U> static constexpr bool value = std::same_as<T, U>;
@@ -1381,7 +1387,7 @@ namespace kumi
   template<typename ID, typename Checker> struct identifier
   {
     using type = identifier<ID, Checker>;
-    friend constexpr kumi::str to_str(identifier const&) { return kumi::_::make_str(ID{}); }
+    friend constexpr kumi::_::str_like auto to_str(identifier const&) { return kumi::_::make_str(ID{}); }
     constexpr identifier() noexcept = default;
     constexpr identifier([[maybe_unused]] ID const& id, [[maybe_unused]] Checker const& check) noexcept {}
     template<typename T>
@@ -1405,7 +1411,7 @@ namespace kumi
   template<kumi::str ID> struct name
   {
     using type = name<ID>;
-    friend constexpr kumi::str to_str(name const&) { return ID; }
+    friend constexpr kumi::_::str_like auto to_str(name const&) { return ID; }
     template<typename T> constexpr auto operator=(T&& v) const noexcept -> kumi::field<type, std::unwrap_ref_decay_t<T>>
     {
       return {KUMI_FWD(v)};
@@ -1434,8 +1440,8 @@ namespace kumi
     {
       if constexpr (std::integral<std::remove_cvref_t<decltype(N)>>) return false;
       else if constexpr (kumi::concepts::index<decltype(N)>) return false;
-      else if constexpr (!std::is_same_v<std::remove_cvref_t<decltype(N)>, kumi::str>) return false;
-      else return kumi::concepts::contains_label<std::integral_constant<kumi::str, N>, Ts...>;
+      else if constexpr (!kumi::_::str_like<decltype(N)>) return false;
+      else return kumi::concepts::contains_label<std::integral_constant<kumi::str<N.size()>, N>, Ts...>;
     }
   }
 }
@@ -1459,9 +1465,9 @@ namespace kumi
   template<std::size_t N> inline constexpr kumi::index_t<N> index = {};
   template<kumi::str Label> struct label_t
   {
-    using type = str;
+    using type = decltype(Label);
     static constexpr kumi::str value = Label;
-    constexpr inline operator kumi::str() const noexcept { return Label; }
+    constexpr inline operator type() const noexcept { return Label; }
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, label_t const&) noexcept
     {
@@ -1711,25 +1717,25 @@ namespace kumi
     KUMI_ABI constexpr decltype(auto) operator[]([[maybe_unused]] kumi::label_t<L> s) & noexcept
     requires(kumi::concepts::contains_label<kumi::label_t<L>, Ts...>)
     {
-      return impl(std::integral_constant<kumi::str, L>{});
+      return impl(std::integral_constant<kumi::str<L.size()>, L>{});
     }
     template<kumi::str L>
     KUMI_ABI constexpr decltype(auto) operator[](kumi::label_t<L>) && noexcept
     requires(kumi::concepts::contains_label<kumi::label_t<L>, Ts...>)
     {
-      return static_cast<binder_t&&>(impl)(std::integral_constant<kumi::str, L>{});
+      return static_cast<binder_t&&>(impl)(std::integral_constant<kumi::str<L.size()>, L>{});
     }
     template<kumi::str L>
     KUMI_ABI constexpr decltype(auto) operator[](kumi::label_t<L>) const&& noexcept
     requires(kumi::concepts::contains_label<kumi::label_t<L>, Ts...>)
     {
-      return static_cast<binder_t const&&>(impl)(std::integral_constant<kumi::str, L>{});
+      return static_cast<binder_t const&&>(impl)(std::integral_constant<kumi::str<L.size()>, L>{});
     }
     template<kumi::str L>
     KUMI_ABI constexpr decltype(auto) operator[](kumi::label_t<L>) const& noexcept
     requires(kumi::concepts::contains_label<kumi::label_t<L>, Ts...>)
     {
-      return impl(std::integral_constant<kumi::str, L>{});
+      return impl(std::integral_constant<kumi::str<L.size()>, L>{});
     }
     template<kumi::concepts::identifier Id>
     KUMI_ABI constexpr decltype(auto) operator[](Id const&) & noexcept
@@ -2230,25 +2236,25 @@ namespace kumi
     KUMI_ABI constexpr decltype(auto) operator[]([[maybe_unused]] kumi::label_t<Name> l) & noexcept
     requires(kumi::concepts::contains_label<kumi::label_t<Name>, Ts...>)
     {
-      return impl(std::integral_constant<kumi::str, Name>{});
+      return impl(std::integral_constant<kumi::str<Name.size()>, Name>{});
     }
     template<kumi::str Name>
     KUMI_ABI constexpr decltype(auto) operator[](kumi::label_t<Name>) && noexcept
     requires(kumi::concepts::contains_label<kumi::label_t<Name>, Ts...>)
     {
-      return static_cast<set_t&&>(impl)(std::integral_constant<kumi::str, Name>{});
+      return static_cast<set_t&&>(impl)(std::integral_constant<kumi::str<Name.size()>, Name>{});
     }
     template<kumi::str Name>
     KUMI_ABI constexpr decltype(auto) operator[](kumi::label_t<Name>) const&& noexcept
     requires(kumi::concepts::contains_label<kumi::label_t<Name>, Ts...>)
     {
-      return static_cast<set_t const&&>(impl)(std::integral_constant<kumi::str, Name>{});
+      return static_cast<set_t const&&>(impl)(std::integral_constant<kumi::str<Name.size()>, Name>{});
     }
     template<kumi::str Name>
     KUMI_ABI constexpr decltype(auto) operator[](kumi::label_t<Name>) const& noexcept
     requires(kumi::concepts::contains_label<kumi::label_t<Name>, Ts...>)
     {
-      return impl(std::integral_constant<kumi::str, Name>{});
+      return impl(std::integral_constant<kumi::str<Name.size()>, Name>{});
     }
     template<kumi::concepts::identifier Id>
     KUMI_ABI constexpr decltype(auto) operator[](Id const&) & noexcept
