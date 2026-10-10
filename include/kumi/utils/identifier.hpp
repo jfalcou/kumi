@@ -88,7 +88,7 @@ namespace kumi
     using type = identifier<ID, Checker>;
 
     //! A checked field str representation is the underlying type, checker is ignored
-    friend constexpr kumi::str to_str(identifier const&) { return kumi::_::make_str(ID{}); }
+    friend constexpr kumi::_::str_like auto to_str(identifier const&) { return kumi::_::make_str(ID{}); }
 
     //! @brief Default constructor
     constexpr identifier() noexcept = default;
@@ -164,7 +164,7 @@ namespace kumi
     using type = name<ID>;
 
     //! Text representation of a name, as a kumi::str
-    friend constexpr kumi::str to_str(name const&) { return ID; }
+    friend constexpr kumi::_::str_like auto to_str(name const&) { return ID; }
 
     //==================================================================================================================
     /**
@@ -213,8 +213,8 @@ namespace kumi
     {
       if constexpr (std::integral<std::remove_cvref_t<decltype(N)>>) return false;
       else if constexpr (kumi::concepts::index<decltype(N)>) return false;
-      else if constexpr (!std::is_same_v<std::remove_cvref_t<decltype(N)>, kumi::str>) return false;
-      else return kumi::concepts::contains_label<std::integral_constant<kumi::str, N>, Ts...>;
+      else if constexpr (!kumi::_::str_like<decltype(N)>) return false;
+      else return kumi::concepts::contains_label<std::integral_constant<kumi::str<N.size()>, N>, Ts...>;
     }
   }
 }

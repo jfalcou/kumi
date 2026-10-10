@@ -327,7 +327,8 @@ namespace kumi
     concept uniquely_labeled =
       (sizeof...(Ts) == 0) ||
       (kumi::concepts::fully_named<Ts...> &&
-       (kumi::all_uniques_v<std::integral_constant<kumi::str, std::remove_cvref_t<Ts>::label()>...>));
+       (kumi::all_uniques_v<std::integral_constant<kumi::str<std::remove_cvref_t<Ts>::label().size()>,
+                                                   std::remove_cvref_t<Ts>::label()>...>));
 
     //==================================================================================================================
     /**

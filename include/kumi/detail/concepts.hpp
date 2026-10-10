@@ -25,6 +25,11 @@ namespace kumi::_
   template<typename T, typename... Args>
   concept implicit_constructible = requires(Args... args) { T{args...}; };
 
+  template<auto N> void str_based(kumi::str<N> const&);
+
+  template<typename T>
+  concept str_like = requires(T const& t) { kumi::_::str_based(t); };
+
   // To be displayed an identifier need to be constructible via T{}, and either expose a constexpr to_str() or
   // nothing, in which case the typer will be used (see typename.hpp). The name that is displayed is called the label.
   template<typename T>
@@ -34,7 +39,7 @@ namespace kumi::_
     requires
     {
       { std::bool_constant<(to_str(T{}), true)>{} } -> std::same_as<std::true_type>;
-      { to_str(T{}) } -> std::same_as<kumi::str>;
+      { to_str(T{}) } -> kumi::_::str_like;
     });
 
   //====================================================================================================================
@@ -43,7 +48,7 @@ namespace kumi::_
   template<typename T>
   concept label = requires(T&& t) {
     typename std::remove_cvref_t<T>::type;
-    { std::remove_cvref_t<T>::value } -> std::convertible_to<kumi::str>;
+    { std::remove_cvref_t<T>::value } -> kumi::_::str_like;
   };
 
   //====================================================================================================================
