@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['value_0',['value',['../group__kumi__functional_ga1aeb494d781c6a1d8f48168f4f093afe.html#autotoc_md12',1,'Helper value'],['../structkumi_1_1index__t.html#ab659f5d62c79ae49fe525448df86765b',1,'kumi::index_t::value'],['../structkumi_1_1label__t.html#a872221f3e54f331778f4971e6e7407ed',1,'kumi::label_t::value']]],
+  ['value_0',['value',['../group__kumi__functional_ga1aeb494d781c6a1d8f48168f4f093afe.html#autotoc_md0',1,'Helper value'],['../structkumi_1_1index__t.html#ab659f5d62c79ae49fe525448df86765b',1,'kumi::index_t::value'],['../structkumi_1_1label__t.html#a872221f3e54f331778f4971e6e7407ed',1,'kumi::label_t::value']]],
   ['values_1',['values',['../structkumi_1_1record.html#a9b9b96d4aae04575e8c2ff5ab515b594',1,'kumi::record::values() noexcept'],['../structkumi_1_1record.html#aed4f570ae92586a34d7f03b4bc584ebc',1,'kumi::record::values() const noexcept']]],
   ['values_5fof_2',['values_of',['../group__kumi__utility_gaa217e07b135cc3295e25689ac4ac2933.html#gaa217e07b135cc3295e25689ac4ac2933',1,'kumi']]],
   ['version_201_200_20amazing_20amethyst_3',['Version 1.0 - Amazing Amethyst',['../kumi_changelog.html#autotoc_md108',1,'']]],

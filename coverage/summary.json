@@ -1,7 +1,7 @@
 {
-    "branch_covered": 757,
-    "branch_percent": 76.0,
-    "branch_total": 996,
+    "branch_covered": 665,
+    "branch_percent": 82.8,
+    "branch_total": 803,
     "files": [
         {
             "branch_covered": 4,
@@ -160,9 +160,9 @@
             "line_total": 15
         },
         {
-            "branch_covered": 14,
+            "branch_covered": 10,
             "branch_percent": 100.0,
-            "branch_total": 14,
+            "branch_total": 10,
             "filename": "include/kumi/algorithm/map.hpp",
             "function_covered": 69,
             "function_percent": 100.0,
@@ -343,18 +343,6 @@
             "branch_covered": 0,
             "branch_percent": null,
             "branch_total": 0,
-            "filename": "include/kumi/detail/field.hpp",
-            "function_covered": 490,
-            "function_percent": 94.6,
-            "function_total": 518,
-            "line_covered": 22,
-            "line_percent": 100.0,
-            "line_total": 22
-        },
-        {
-            "branch_covered": 0,
-            "branch_percent": null,
-            "branch_total": 0,
             "filename": "include/kumi/detail/optimized.hpp",
             "function_covered": 1405,
             "function_percent": 99.9,
@@ -362,30 +350,6 @@
             "line_covered": 7,
             "line_percent": 100.0,
             "line_total": 7
-        },
-        {
-            "branch_covered": 257,
-            "branch_percent": 61.5,
-            "branch_total": 418,
-            "filename": "include/kumi/detail/str.hpp",
-            "function_covered": 3,
-            "function_percent": 100.0,
-            "function_total": 3,
-            "line_covered": 98,
-            "line_percent": 98.0,
-            "line_total": 100
-        },
-        {
-            "branch_covered": 0,
-            "branch_percent": null,
-            "branch_total": 0,
-            "filename": "include/kumi/detail/streamable.hpp",
-            "function_covered": 217,
-            "function_percent": 79.2,
-            "function_total": 274,
-            "line_covered": 4,
-            "line_percent": 100.0,
-            "line_total": 4
         },
         {
             "branch_covered": 0,
@@ -412,9 +376,9 @@
             "line_total": 11
         },
         {
-            "branch_covered": 39,
+            "branch_covered": 40,
             "branch_percent": 100.0,
-            "branch_total": 39,
+            "branch_total": 40,
             "filename": "include/kumi/functional/invoke.hpp",
             "function_covered": 0,
             "function_percent": null,
@@ -448,8 +412,8 @@
             "line_total": 5
         },
         {
-            "branch_covered": 113,
-            "branch_percent": 72.0,
+            "branch_covered": 114,
+            "branch_percent": 72.6,
             "branch_total": 157,
             "filename": "include/kumi/product_types/record.hpp",
             "function_covered": 125,
@@ -460,8 +424,8 @@
             "line_total": 46
         },
         {
-            "branch_covered": 86,
-            "branch_percent": 85.1,
+            "branch_covered": 85,
+            "branch_percent": 84.2,
             "branch_total": 101,
             "filename": "include/kumi/product_types/shared.hpp",
             "function_covered": 342,
@@ -511,6 +475,18 @@
             "branch_covered": 0,
             "branch_percent": null,
             "branch_total": 0,
+            "filename": "include/kumi/utils/field.hpp",
+            "function_covered": 490,
+            "function_percent": 94.6,
+            "function_total": 518,
+            "line_covered": 22,
+            "line_percent": 100.0,
+            "line_total": 22
+        },
+        {
+            "branch_covered": 0,
+            "branch_percent": null,
+            "branch_total": 0,
             "filename": "include/kumi/utils/identifier.hpp",
             "function_covered": 67,
             "function_percent": 100.0,
@@ -532,6 +508,30 @@
             "line_total": 6
         },
         {
+            "branch_covered": 168,
+            "branch_percent": 73.7,
+            "branch_total": 228,
+            "filename": "include/kumi/utils/str.hpp",
+            "function_covered": 14,
+            "function_percent": 100.0,
+            "function_total": 14,
+            "line_covered": 84,
+            "line_percent": 97.7,
+            "line_total": 86
+        },
+        {
+            "branch_covered": 0,
+            "branch_percent": null,
+            "branch_total": 0,
+            "filename": "include/kumi/utils/streamable.hpp",
+            "function_covered": 217,
+            "function_percent": 79.2,
+            "function_total": 274,
+            "line_covered": 4,
+            "line_percent": 100.0,
+            "line_total": 4
+        },
+        {
             "branch_covered": 0,
             "branch_percent": null,
             "branch_total": 0,
@@ -544,12 +544,12 @@
             "line_total": 3
         }
     ],
-    "function_covered": 5697,
+    "function_covered": 5708,
     "function_percent": 94.8,
-    "function_total": 6007,
+    "function_total": 6018,
     "gcovr/summary_format_version": "0.6",
-    "line_covered": 646,
+    "line_covered": 632,
     "line_percent": 99.7,
-    "line_total": 648,
+    "line_total": 634,
     "root": "../../.."
 }

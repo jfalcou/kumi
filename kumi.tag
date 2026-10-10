@@ -203,10 +203,10 @@
       <arglist>(T &amp;&amp;v) const noexcept -&gt; kumi::field&lt; type, std::unwrap_ref_decay_t&lt; T &gt; &gt;</arglist>
     </member>
     <member kind="friend">
-      <type>friend constexpr kumi::str</type>
+      <type>friend constexpr kumi_implementation_defined auto</type>
       <name>to_str</name>
       <anchorfile>structkumi_1_1identifier.html</anchorfile>
-      <anchor>aed98a76222e0731147ce97426434c041</anchor>
+      <anchor>a975f7d033f7f599bcdc6f2e049084a92</anchor>
       <arglist>(identifier const &amp;)</arglist>
     </member>
     <member kind="friend">
@@ -249,9 +249,9 @@
     <templarg>kumi::str Label</templarg>
     <member kind="function">
       <type>constexpr</type>
-      <name>operator kumi::str</name>
+      <name>operator type</name>
       <anchorfile>structkumi_1_1label__t.html</anchorfile>
-      <anchor>ae04311b56f486908576c12a8ef8e9923</anchor>
+      <anchor>a31674e0dba7b0039ef163b1c1ebce2fe</anchor>
       <arglist>() const noexcept</arglist>
     </member>
     <member kind="variable" static="yes">
@@ -288,10 +288,10 @@
       <arglist>(T &amp;&amp;v) const noexcept -&gt; kumi::field&lt; type, std::unwrap_ref_decay_t&lt; T &gt; &gt;</arglist>
     </member>
     <member kind="friend">
-      <type>friend constexpr kumi::str</type>
+      <type>friend constexpr kumi_implementation_defined auto</type>
       <name>to_str</name>
       <anchorfile>structkumi_1_1name.html</anchorfile>
-      <anchor>a35dd8f2c52e6c42d8d1ba3529e7e4668</anchor>
+      <anchor>aaabcb3ff5e55b5cb53ce40fbaf9aa245</anchor>
       <arglist>(name const &amp;)</arglist>
     </member>
     <member kind="friend">
@@ -959,6 +959,7 @@
   <compound kind="class">
     <name>kumi::str</name>
     <filename>structkumi_1_1str.html</filename>
+    <templarg>std::size_t N</templarg>
   </compound>
   <compound kind="class">
     <name>kumi::tuple</name>
@@ -1882,10 +1883,10 @@
       <arglist>(C &amp;&amp;c, Ts &amp;&amp;... ts) noexcept(std::is_nothrow_invocable_r_v&lt; R, C, Ts... &gt;)</arglist>
     </member>
     <member kind="function">
-      <type>consteval kumi::str</type>
+      <type>consteval kumi_implementation_defined auto</type>
       <name>label_of</name>
-      <anchorfile>group__kumi__utility_gac6d2c508bb91644b47bcbf3b8a1e7827.html</anchorfile>
-      <anchor>gac6d2c508bb91644b47bcbf3b8a1e7827</anchor>
+      <anchorfile>group__kumi__utility_ga83a3a02d003803934382a94c4f126264.html</anchorfile>
+      <anchor>ga83a3a02d003803934382a94c4f126264</anchor>
       <arglist>() noexcept</arglist>
     </member>
     <member kind="function">
@@ -2397,6 +2398,13 @@
       <name>none_of</name>
       <anchorfile>group__kumi__queries_ga26e030c97733248f67dd2c8fbf527602.html</anchorfile>
       <anchor>ga26e030c97733248f67dd2c8fbf527602</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr auto</type>
+      <name>npos</name>
+      <anchorfile>namespacekumi.html</anchorfile>
+      <anchor>a864eeb606afbe8cb4df27a765e0411c9</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -3242,10 +3250,10 @@
       <arglist>(Ts...) noexcept</arglist>
     </member>
     <member kind="function">
-      <type>consteval kumi::str</type>
+      <type>consteval kumi_implementation_defined auto</type>
       <name>kumi::label_of</name>
-      <anchorfile>group__kumi__utility_gac6d2c508bb91644b47bcbf3b8a1e7827.html</anchorfile>
-      <anchor>gac6d2c508bb91644b47bcbf3b8a1e7827</anchor>
+      <anchorfile>group__kumi__utility_ga83a3a02d003803934382a94c4f126264.html</anchorfile>
+      <anchor>ga83a3a02d003803934382a94c4f126264</anchor>
       <arglist>() noexcept</arglist>
     </member>
     <member kind="function">
