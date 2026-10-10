@@ -16,8 +16,11 @@ TTS_CASE("Check field type coherence")
 
   auto a = kumi::field<kumi::name<"x">, int>{x};
   auto b = kumi::field<kumi::name<"x">, int const>{x};
-  auto c = kumi::field<kumi::name<"x">, int&>{x};
-  auto d = kumi::field<kumi::name<"x">, int const&>{x};
+
+  // nvc++ consider these to be unused as we only go through the reference
+  [[maybe_unused]] auto c = kumi::field<kumi::name<"x">, int&>{x};
+  [[maybe_unused]] auto d = kumi::field<kumi::name<"x">, int const&>{x};
+
   auto e = kumi::field<kumi::name<"x">, int&&>{std::move(x)};
 
   TTS_TYPE_IS((decltype(a.value)), int);

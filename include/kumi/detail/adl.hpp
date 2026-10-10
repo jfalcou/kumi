@@ -13,6 +13,9 @@ namespace kumi::_
   {
     struct adl_tag_t
     {
-    } KUMI_VARIABLE_ABI constexpr adl_tag;
+    };
+
+    // @brief Tag for kumi algorithms to be routed to the right namespace via ADL
+    KUMI_VARIABLE_ABI constexpr adl_tag_t adl_tag;
   }
 }

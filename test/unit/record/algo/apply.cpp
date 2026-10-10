@@ -16,8 +16,7 @@ using namespace kumi::literals;
 
 TTS_CASE("Check result::apply<F,Record> behavior")
 {
-  auto lambda = [](auto... m) { return (m + ...); };
-  using func_t = decltype(lambda);
+  using func_t = decltype([](auto... m) { return (m + ...); });
 
   using char_f = kumi::field<kumi::name<"x">, char>;
   using short_f = kumi::field<kumi::name<"y">, short>;

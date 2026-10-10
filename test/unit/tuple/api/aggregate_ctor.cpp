@@ -11,10 +11,10 @@
 
 TTS_CASE("Check tuple_element of kumi::tuple")
 {
-  auto aggregate = kumi::tuple{'1', 2., 3.f};
-  TTS_TYPE_IS((std::tuple_element_t<0, decltype(aggregate)>), char);
-  TTS_TYPE_IS((std::tuple_element_t<1, decltype(aggregate)>), double);
-  TTS_TYPE_IS((std::tuple_element_t<2, decltype(aggregate)>), float);
+  using aggregate = decltype(kumi::tuple{'1', 2., 3.f});
+  TTS_TYPE_IS((std::tuple_element_t<0, aggregate>), char);
+  TTS_TYPE_IS((std::tuple_element_t<1, aggregate>), double);
+  TTS_TYPE_IS((std::tuple_element_t<2, aggregate>), float);
 };
 
 TTS_CASE("Check construction of kumi::tuple as an aggregate")
@@ -27,6 +27,7 @@ TTS_CASE("Check construction of kumi::tuple as an aggregate")
 
   TTS_CONSTEXPR_EXPECT((kumi::concepts::sized_product_type<decltype(t0), 0>));
   TTS_EQUAL(t0.size(), 0ULL);
+  TTS_EXPECT_NOT_COMPILES(t0, { kumi::get<1>(t0); });
 
   TTS_CONSTEXPR_EXPECT((kumi::concepts::sized_product_type<decltype(t1), 1>));
   TTS_EQUAL(t1.size(), 1ULL);

@@ -76,8 +76,7 @@ TTS_CASE("Check apply SFINAE compliance")
 
 TTS_CASE("Check result::apply<F,Tuple> behavior")
 {
-  auto lambda = [](auto... m) { return (m + ...); };
-  using func_t = decltype(lambda);
+  using func_t = decltype([](auto... m) { return (m + ...); });
 
   TTS_TYPE_IS((kumi::result::apply_t<func_t, kumi::tuple<char, short, int, double>>), double);
 };

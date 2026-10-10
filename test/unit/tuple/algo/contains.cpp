@@ -98,19 +98,17 @@ TTS_CASE("Check kumi::result::contains_only behavior")
 {
   using namespace kumi::literals;
 
-  kumi::tuple values{"kw1"_id = 1, "kw2"_id = 1, "kw3"_id = 1};
+  using values = decltype(kumi::tuple{"kw1"_id = 1, "kw2"_id = 1, "kw3"_id = 1});
 
-  TTS_EXPECT(
-    (kumi::result::contains_only_t<decltype(values), decltype("kw1"_id), decltype("kw2"_id), decltype("kw3"_id)>{}));
-  TTS_EXPECT(
-    (kumi::result::contains_only_t<decltype(values), decltype("kw1"_id), decltype("kw3"_id), decltype("kw2"_id)>{}));
-  TTS_EXPECT((kumi::result::contains_only_t<decltype(values), decltype("kw1"_id), decltype("kw3"_id),
-                                            decltype("kw2"_id), decltype("xyz"_id)>{}));
+  TTS_EXPECT((kumi::result::contains_only_t<values, decltype("kw1"_id), decltype("kw2"_id), decltype("kw3"_id)>{}));
+  TTS_EXPECT((kumi::result::contains_only_t<values, decltype("kw1"_id), decltype("kw3"_id), decltype("kw2"_id)>{}));
+  TTS_EXPECT((kumi::result::contains_only_t<values, decltype("kw1"_id), decltype("kw3"_id), decltype("kw2"_id),
+                                            decltype("xyz"_id)>{}));
 
-  TTS_EXPECT_NOT((kumi::result::contains_only_t<decltype(values), decltype("kw1"_id), decltype("kw2"_id)>{}));
-  TTS_EXPECT_NOT((kumi::result::contains_only_t<decltype(values), decltype("kw1"_id)>{}));
-  TTS_EXPECT_NOT((kumi::result::contains_only_t<decltype(values), decltype("a"_id)>{}));
-  TTS_EXPECT_NOT((kumi::result::contains_only_t<decltype(values), decltype("a"_id), decltype("b"_id)>{}));
+  TTS_EXPECT_NOT((kumi::result::contains_only_t<values, decltype("kw1"_id), decltype("kw2"_id)>{}));
+  TTS_EXPECT_NOT((kumi::result::contains_only_t<values, decltype("kw1"_id)>{}));
+  TTS_EXPECT_NOT((kumi::result::contains_only_t<values, decltype("a"_id)>{}));
+  TTS_EXPECT_NOT((kumi::result::contains_only_t<values, decltype("a"_id), decltype("b"_id)>{}));
 };
 
 TTS_CASE("Check kumi::contains_only behavior")

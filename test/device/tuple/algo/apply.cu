@@ -13,7 +13,6 @@
 
 namespace
 {
-  // Issue #192: a lambda through the requires clause of kumi::apply.
   __global__ void sum(kumi::tuple<int, std::size_t>* out)
   {
     auto t = kumi::make_tuple(1, 2, 3);
