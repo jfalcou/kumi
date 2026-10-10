@@ -58,6 +58,6 @@ namespace kumi::_
   template<kumi::_::valid_label T> consteval kumi::_::str_like auto make_str(T const& t)
   {
     if constexpr (requires { to_str(t); }) return to_str(t);
-    else return kumi::_::typer<std::remove_cvref_t<T>>();
+    else return kumi::typer<std::remove_cvref_t<T>>();
   }
 }

@@ -10,7 +10,9 @@
 namespace kumi
 {
   // Forward declarations
-  template<kumi::config::default_size_type N> struct str;
+
+  // This avoids including size_t at this level
+  template<decltype(sizeof(0)) N> struct str;
   template<typename... Ts> struct tuple;
   template<typename... Ts> struct record;
   template<auto... Vs> struct projection_map;

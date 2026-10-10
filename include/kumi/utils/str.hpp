@@ -9,7 +9,8 @@
 
 namespace kumi
 {
-  inline constexpr auto npos = static_cast<kumi::config::default_size_type>(-1);
+  /// @brief This is a special value equal to the largest value representable by the type std::size_t.
+  inline constexpr auto npos = static_cast<std::size_t>(-1);
 
   //====================================================================================================================
   /**
@@ -26,9 +27,8 @@ namespace kumi
     terminator), so they work with literals as well as with `other.data_`.
   **/
   //====================================================================================================================
-  template<kumi::config::default_size_type N> struct str
+  template<std::size_t N> struct str
   {
-    using size_type = kumi::config::default_size_type;
     static constexpr char separator = '.';
 
     char data_[N + 1] = {0};
@@ -37,25 +37,25 @@ namespace kumi
 
     KUMI_ABI constexpr str(char const (&s)[N + 1])
     {
-      for (size_type i = 0; i < N + 1; ++i) data_[i] = s[i];
+      for (std::size_t i = 0; i < N + 1; ++i) data_[i] = s[i];
     }
 
-    KUMI_ABI constexpr size_type size() const noexcept { return N; }
+    KUMI_ABI constexpr std::size_t size() const noexcept { return N; }
 
     KUMI_ABI constexpr auto data() const noexcept { return data_; }
 
     template<typename T>
-    requires requires { T{data_, size_type{N}}; }
+    requires requires { T{data_, std::size_t{N}}; }
     KUMI_ABI constexpr auto as() const
     {
-      return T{data_, size_type{N}};
+      return T{data_, std::size_t{N}};
     }
 
     template<typename CharT, typename Traits>
     friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, str const& s) noexcept
     {
       os << '\'';
-      for (size_type i = 0; i < N; ++i) os << s.data_[i];
+      for (std::size_t i = 0; i < N; ++i) os << s.data_[i];
       return os << '\'';
     }
 
@@ -63,65 +63,65 @@ namespace kumi
     template<kumi::concepts::index Pos, kumi::concepts::index Count>
     KUMI_ABI constexpr auto substr(Pos p, Count c) const
     {
-      constexpr size_type pos = static_cast<size_type>(p);
-      constexpr size_type count = static_cast<size_type>(c);
+      constexpr std::size_t pos = static_cast<std::size_t>(p);
+      constexpr std::size_t count = static_cast<std::size_t>(c);
       static_assert(pos <= N, "Out of range");
-      constexpr size_type len = (count == kumi::npos || pos + count > N) ? (N - pos) : count;
+      constexpr std::size_t len = (count == kumi::npos || pos + count > N) ? (N - pos) : count;
       str<len> res{};
-      for (size_type i = 0; i < len; ++i) res.data_[i] = data_[pos + i];
+      for (std::size_t i = 0; i < len; ++i) res.data_[i] = data_[pos + i];
       return res;
     }
 
     template<kumi::concepts::index Pos> KUMI_ABI constexpr auto substr(Pos p) const
     {
-      return substr(p, std::integral_constant<size_type, kumi::npos>{});
+      return substr(p, std::integral_constant<std::size_t, kumi::npos>{});
     }
 
-    KUMI_ABI constexpr auto substr() const { return substr(std::integral_constant<size_type, 0>{}); }
+    KUMI_ABI constexpr auto substr() const { return substr(std::integral_constant<std::size_t, 0>{}); }
 
     template<kumi::concepts::index Size> KUMI_ABI constexpr auto remove_prefix(Size s) const
     {
-      static_assert(static_cast<size_type>(s) <= N, "Out of range");
-      return substr(std::integral_constant<size_type, static_cast<size_type>(s)>{},
-                    std::integral_constant<size_type, N - static_cast<size_type>(s)>{});
+      static_assert(static_cast<std::size_t>(s) <= N, "Out of range");
+      return substr(std::integral_constant<std::size_t, static_cast<std::size_t>(s)>{},
+                    std::integral_constant<std::size_t, N - static_cast<std::size_t>(s)>{});
     }
 
     template<kumi::concepts::index Size> KUMI_ABI constexpr auto remove_suffix(Size s) const
     {
-      static_assert(static_cast<size_type>(s) <= N, "Out of range");
-      return substr(std::integral_constant<size_type, 0>{},
-                    std::integral_constant<size_type, N - static_cast<size_type>(s)>{});
+      static_assert(static_cast<std::size_t>(s) <= N, "Out of range");
+      return substr(std::integral_constant<std::size_t, 0>{},
+                    std::integral_constant<std::size_t, N - static_cast<std::size_t>(s)>{});
     }
 
-    template<size_type M> KUMI_ABI constexpr bool starts_with(char const (&s)[M]) const
+    template<std::size_t M> KUMI_ABI constexpr bool starts_with(char const (&s)[M]) const
     {
-      constexpr size_type n = M - 1;
+      constexpr std::size_t n = M - 1;
       if (n > N) return false;
-      for (size_type i = 0; i < n; ++i)
+      for (std::size_t i = 0; i < n; ++i)
         if (data_[i] != s[i]) return false;
       return true;
     }
 
-    template<size_type M> KUMI_ABI constexpr bool ends_with(char const (&s)[M]) const
+    template<std::size_t M> KUMI_ABI constexpr bool ends_with(char const (&s)[M]) const
     {
-      constexpr size_type n = M - 1;
+      constexpr std::size_t n = M - 1;
       if (n > N) return false;
-      for (size_type i = 0; i < n; ++i)
+      for (std::size_t i = 0; i < n; ++i)
         if (data_[N - n + i] != s[i]) return false;
       return true;
     }
 
-    template<size_type M> KUMI_ABI constexpr bool contains(char const (&s)[M]) const { return find(s) != kumi::npos; }
+    template<std::size_t M> KUMI_ABI constexpr bool contains(char const (&s)[M]) const { return find(s) != kumi::npos; }
 
-    template<size_type M> KUMI_ABI constexpr size_type find(char const (&s)[M], size_type pos = 0) const
+    template<std::size_t M> KUMI_ABI constexpr std::size_t find(char const (&s)[M], std::size_t pos = 0) const
     {
-      constexpr size_type n = M - 1;
+      constexpr std::size_t n = M - 1;
       if (n == 0) return pos <= N ? pos : kumi::npos;
       if (n > N) return kumi::npos;
-      for (size_type i = pos; i <= N - n; ++i)
+      for (std::size_t i = pos; i <= N - n; ++i)
       {
         bool match = true;
-        for (size_type j = 0; j < n; ++j)
+        for (std::size_t j = 0; j < n; ++j)
           if (data_[i + j] != s[j])
           {
             match = false;
@@ -132,12 +132,12 @@ namespace kumi
       return kumi::npos;
     }
 
-    template<size_type M> KUMI_ABI constexpr int compare(char const (&other)[M]) const noexcept
+    template<std::size_t M> KUMI_ABI constexpr int compare(char const (&other)[M]) const noexcept
     {
-      constexpr size_type n = M - 1;
-      constexpr size_type min_size = (N < n) ? N : n;
+      constexpr std::size_t n = M - 1;
+      constexpr std::size_t min_size = (N < n) ? N : n;
 
-      for (size_type i = 0; i < min_size; ++i)
+      for (std::size_t i = 0; i < min_size; ++i)
       {
         if (data_[i] < other[i]) return -1;
         if (data_[i] > other[i]) return 1;
@@ -147,16 +147,16 @@ namespace kumi
       return 0;
     }
 
-    template<size_type M> KUMI_ABI constexpr size_type rfind(char const (&s)[M], size_type pos = kumi::npos) const
+    template<std::size_t M> KUMI_ABI constexpr std::size_t rfind(char const (&s)[M], std::size_t pos = kumi::npos) const
     {
-      constexpr size_type n = M - 1;
+      constexpr std::size_t n = M - 1;
       if (n == 0) return (pos > N ? N : pos);
       if (n > N) return kumi::npos;
-      size_type start = (pos > N - n) ? (N - n) : pos;
-      for (size_type i = start; i > 0; --i)
+      std::size_t start = (pos > N - n) ? (N - n) : pos;
+      for (std::size_t i = start; i > 0; --i)
       {
         bool match = true;
-        for (size_type j = 0; j < n; ++j)
+        for (std::size_t j = 0; j < n; ++j)
           if (data_[i + j] != s[j])
           {
             match = false;
@@ -167,36 +167,37 @@ namespace kumi
       return kumi::npos;
     }
 
-    template<size_type M> KUMI_ABI constexpr size_type find_first_of(char const (&s)[M], size_type pos = 0) const
+    template<std::size_t M> KUMI_ABI constexpr std::size_t find_first_of(char const (&s)[M], std::size_t pos = 0) const
     {
-      constexpr size_type n = M - 1;
-      for (size_type i = pos; i < N; ++i)
-        for (size_type j = 0; j < n; ++j)
+      constexpr std::size_t n = M - 1;
+      for (std::size_t i = pos; i < N; ++i)
+        for (std::size_t j = 0; j < n; ++j)
           if (data_[i] == s[j]) return i;
       return kumi::npos;
     }
 
-    template<size_type M>
-    KUMI_ABI constexpr size_type find_last_of(char const (&s)[M], size_type pos = kumi::npos) const
+    template<std::size_t M>
+    KUMI_ABI constexpr std::size_t find_last_of(char const (&s)[M], std::size_t pos = kumi::npos) const
     {
-      constexpr size_type n = M - 1;
+      constexpr std::size_t n = M - 1;
       if (N == 0) return kumi::npos;
-      for (size_type i = (pos >= N ? N - 1 : pos);; --i)
+      for (std::size_t i = (pos >= N ? N - 1 : pos);; --i)
       {
-        for (size_type j = 0; j < n; ++j)
+        for (std::size_t j = 0; j < n; ++j)
           if (data_[i] == s[j]) return i;
         if (i == 0) break;
       }
       return kumi::npos;
     }
 
-    template<size_type M> KUMI_ABI constexpr size_type find_first_not_of(char const (&s)[M], size_type pos = 0) const
+    template<std::size_t M>
+    KUMI_ABI constexpr std::size_t find_first_not_of(char const (&s)[M], std::size_t pos = 0) const
     {
-      constexpr size_type n = M - 1;
-      for (size_type i = pos; i < N; ++i)
+      constexpr std::size_t n = M - 1;
+      for (std::size_t i = pos; i < N; ++i)
       {
         bool found = false;
-        for (size_type j = 0; j < n; ++j)
+        for (std::size_t j = 0; j < n; ++j)
           if (data_[i] == s[j])
           {
             found = true;
@@ -207,15 +208,15 @@ namespace kumi
       return kumi::npos;
     }
 
-    template<size_type M>
-    KUMI_ABI constexpr size_type find_last_not_of(char const (&s)[M], size_type pos = kumi::npos) const
+    template<std::size_t M>
+    KUMI_ABI constexpr std::size_t find_last_not_of(char const (&s)[M], std::size_t pos = kumi::npos) const
     {
-      constexpr size_type n = M - 1;
+      constexpr std::size_t n = M - 1;
       if (N == 0) return kumi::npos;
-      for (size_type i = (pos >= N ? N - 1 : pos);; --i)
+      for (std::size_t i = (pos >= N ? N - 1 : pos);; --i)
       {
         bool found = false;
-        for (size_type j = 0; j < n; ++j)
+        for (std::size_t j = 0; j < n; ++j)
           if (data_[i] == s[j])
           {
             found = true;
@@ -228,47 +229,47 @@ namespace kumi
     }
 
     // N chars + separator + (M - 1) chars
-    template<size_type M> KUMI_ABI constexpr str<N + M> operator+(char const (&other)[M]) const
+    template<std::size_t M> KUMI_ABI constexpr str<N + M> operator+(char const (&other)[M]) const
     {
       str<N + M> res{};
 
-      for (size_type i = 0; i < N; ++i) res.data_[i] = data_[i];
+      for (std::size_t i = 0; i < N; ++i) res.data_[i] = data_[i];
 
       res.data_[N] = separator;
 
-      for (size_type i = 0; i < M - 1; ++i) res.data_[N + 1 + i] = other[i];
+      for (std::size_t i = 0; i < M - 1; ++i) res.data_[N + 1 + i] = other[i];
 
       return res;
     }
 
     // str + str: a str is not deduced through its conversion to char array, so it needs its own overload
-    template<size_type M> KUMI_ABI constexpr str<N + 1 + M> operator+(str<M> const& other) const
+    template<std::size_t M> KUMI_ABI constexpr str<N + 1 + M> operator+(str<M> const& other) const
     {
       return *this + other.data_;
     }
   };
 
-  template<kumi::config::default_size_type M> str(char const (&)[M]) -> str<M - 1>;
+  template<std::size_t M> str(char const (&)[M]) -> str<M - 1>;
 
-  template<kumi::config::default_size_type N, kumi::config::default_size_type M>
+  template<std::size_t N, std::size_t M>
   KUMI_ABI constexpr bool operator==(str<N> const& lhs, str<M> const& rhs) noexcept
   {
     return lhs.compare(rhs.data_) == 0;
   }
 
-  template<kumi::config::default_size_type N, kumi::config::default_size_type M>
+  template<std::size_t N, std::size_t M>
   KUMI_ABI constexpr auto operator<=>(str<N> const& lhs, str<M> const& rhs) noexcept
   {
     return lhs.compare(rhs.data_) <=> 0;
   }
 
-  template<kumi::config::default_size_type N, kumi::config::default_size_type M>
+  template<std::size_t N, std::size_t M>
   KUMI_ABI constexpr bool operator==(str<N> const& lhs, char const (&rhs)[M]) noexcept
   {
     return lhs.compare(rhs) == 0;
   }
 
-  template<kumi::config::default_size_type N, kumi::config::default_size_type M>
+  template<std::size_t N, std::size_t M>
   KUMI_ABI constexpr auto operator<=>(str<N> const& lhs, char const (&rhs)[M]) noexcept
   {
     return lhs.compare(rhs) <=> 0;
