@@ -1,7 +1,7 @@
 {
-    "branch_covered": 665,
-    "branch_percent": 82.8,
-    "branch_total": 803,
+    "branch_covered": 699,
+    "branch_percent": 83.4,
+    "branch_total": 838,
     "files": [
         {
             "branch_covered": 4,
@@ -344,9 +344,9 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kumi/detail/optimized.hpp",
-            "function_covered": 1405,
+            "function_covered": 1448,
             "function_percent": 99.9,
-            "function_total": 1407,
+            "function_total": 1450,
             "line_covered": 7,
             "line_percent": 100.0,
             "line_total": 7
@@ -424,16 +424,16 @@
             "line_total": 46
         },
         {
-            "branch_covered": 85,
-            "branch_percent": 84.2,
-            "branch_total": 101,
+            "branch_covered": 119,
+            "branch_percent": 87.5,
+            "branch_total": 136,
             "filename": "include/kumi/product_types/shared.hpp",
-            "function_covered": 342,
-            "function_percent": 75.7,
-            "function_total": 452,
-            "line_covered": 14,
+            "function_covered": 359,
+            "function_percent": 74.2,
+            "function_total": 484,
+            "line_covered": 17,
             "line_percent": 100.0,
-            "line_total": 14
+            "line_total": 17
         },
         {
             "branch_covered": 2,
@@ -441,8 +441,8 @@
             "branch_total": 2,
             "filename": "include/kumi/product_types/tuple.hpp",
             "function_covered": 197,
-            "function_percent": 72.7,
-            "function_total": 271,
+            "function_percent": 68.9,
+            "function_total": 286,
             "line_covered": 61,
             "line_percent": 100.0,
             "line_total": 61
@@ -525,8 +525,8 @@
             "branch_total": 0,
             "filename": "include/kumi/utils/streamable.hpp",
             "function_covered": 217,
-            "function_percent": 79.2,
-            "function_total": 274,
+            "function_percent": 77.0,
+            "function_total": 282,
             "line_covered": 4,
             "line_percent": 100.0,
             "line_total": 4
@@ -544,12 +544,12 @@
             "line_total": 3
         }
     ],
-    "function_covered": 5708,
-    "function_percent": 94.8,
-    "function_total": 6018,
+    "function_covered": 5768,
+    "function_percent": 94.3,
+    "function_total": 6116,
     "gcovr/summary_format_version": "0.6",
-    "line_covered": 632,
+    "line_covered": 635,
     "line_percent": 99.7,
-    "line_total": 634,
+    "line_total": 637,
     "root": "../../.."
 }
