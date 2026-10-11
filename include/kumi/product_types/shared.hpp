@@ -32,12 +32,13 @@ namespace kumi
     template<typename T, typename U, std::size_t... I>
     constexpr auto lexicographic_compare(T const& t, U const& u, std::index_sequence<I...>) noexcept
     {
-      auto less = get<0>(t) < get<0>(u);             // decided "t < u" so far
-      auto diff = !less && !(get<0>(u) < get<0>(t)); // an earlier element was "greater"
+      // The accumulators take the type of the whole fold: masks of different element types do not convert
+      using result_t = decltype((... || (get<I>(t) < get<I>(u))));
 
-      ((less = less || (diff && (get<I>(t) < get<I>(u))), // less || (!diff && lt)
-        diff = diff && !less && !(get<I>(u) < get<I>(t))),
-       ...);
+      result_t less{false};
+      result_t equal{true};
+
+      ((less = less || (equal && (get<I>(t) < get<I>(u))), equal = equal && !less && !(get<I>(u) < get<I>(t))), ...);
 
       return less;
     }
