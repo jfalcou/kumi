@@ -494,26 +494,26 @@
       <anchor>a5c9d75f431a2453078baf16553dc9a28</anchor>
       <arglist>(Id const &amp;) const &amp;noexcept</arglist>
     </member>
-    <member kind="friend">
-      <type>friend constexpr auto</type>
-      <name>operator==</name>
-      <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>a6db5145d0e86cffe51b9941346834323</anchor>
-      <arglist>(record const &amp;self, record&lt; Us... &gt; const &amp;other) noexcept</arglist>
-    </member>
-    <member kind="friend">
-      <type>friend constexpr auto</type>
-      <name>operator!=</name>
-      <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>a22e02cc7d670843e1c5f9e41385a7237</anchor>
-      <arglist>(record const &amp;self, record&lt; Us... &gt; const &amp;other) noexcept</arglist>
-    </member>
-    <member kind="friend">
-      <type>friend std::basic_ostream&lt; CharT, Traits &gt; &amp;</type>
+    <member kind="function">
+      <type>std::basic_ostream&lt; CharT, Traits &gt; &amp;</type>
       <name>operator&lt;&lt;</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>a3e776cea74b6cbba98d32566764b3571</anchor>
-      <arglist>(std::basic_ostream&lt; CharT, Traits &gt; &amp;os, record const &amp;t) noexcept</arglist>
+      <anchor>a58d5d2276354e3780e7963965ddf5698</anchor>
+      <arglist>(std::basic_ostream&lt; CharT, Traits &gt; &amp;os, record&lt; Ts... &gt; const &amp;t) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>operator==</name>
+      <anchorfile>structkumi_1_1record.html</anchorfile>
+      <anchor>a0b13841d53a273eae4e61e8637f9d094</anchor>
+      <arglist>(record&lt; Ts... &gt; const &amp;self, record&lt; Us... &gt; const &amp;other) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>operator!=</name>
+      <anchorfile>structkumi_1_1record.html</anchorfile>
+      <anchor>ab0c7a7dc02f179f880931b51d7cc53eb</anchor>
+      <arglist>(record&lt; Ts... &gt; const &amp;self, record&lt; Us... &gt; const &amp;other) noexcept</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -788,19 +788,19 @@
       <anchor>a57fe20038a1592ea37e9a8954c013d80</anchor>
       <arglist>() noexcept</arglist>
     </member>
-    <member kind="friend">
-      <type>friend constexpr auto</type>
+    <member kind="function">
+      <type>constexpr auto</type>
       <name>operator==</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>a6db5145d0e86cffe51b9941346834323</anchor>
-      <arglist>(record const &amp;self, record&lt; Us... &gt; const &amp;other) noexcept</arglist>
+      <anchor>a0b13841d53a273eae4e61e8637f9d094</anchor>
+      <arglist>(record&lt; Ts... &gt; const &amp;self, record&lt; Us... &gt; const &amp;other) noexcept</arglist>
     </member>
-    <member kind="friend">
-      <type>friend constexpr auto</type>
+    <member kind="function">
+      <type>constexpr auto</type>
       <name>operator!=</name>
       <anchorfile>structkumi_1_1record.html</anchorfile>
-      <anchor>a22e02cc7d670843e1c5f9e41385a7237</anchor>
-      <arglist>(record const &amp;self, record&lt; Us... &gt; const &amp;other) noexcept</arglist>
+      <anchor>ab0c7a7dc02f179f880931b51d7cc53eb</anchor>
+      <arglist>(record&lt; Ts... &gt; const &amp;self, record&lt; Us... &gt; const &amp;other) noexcept</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -1133,54 +1133,54 @@
       <anchor>afcfee8fbd3a138d70cff1edb3485e61e</anchor>
       <arglist>() noexcept</arglist>
     </member>
-    <member kind="friend">
-      <type>friend constexpr auto</type>
-      <name>operator==</name>
-      <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>af0256993b0ad272335b4c6d77afe73d7</anchor>
-      <arglist>(tuple const &amp;self, tuple&lt; Us... &gt; const &amp;other) noexcept</arglist>
-    </member>
-    <member kind="friend">
-      <type>friend constexpr auto</type>
-      <name>operator!=</name>
-      <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a723ee5d6b1324e146a4cb8819c29f331</anchor>
-      <arglist>(tuple const &amp;self, tuple&lt; Us... &gt; const &amp;other) noexcept</arglist>
-    </member>
-    <member kind="friend">
-      <type>friend constexpr auto</type>
-      <name>operator&lt;</name>
-      <anchorfile>structkumi_1_1tuple_abee5ae96fdfd2145347fa3b2b212bf12.html</anchorfile>
-      <anchor>abee5ae96fdfd2145347fa3b2b212bf12</anchor>
-      <arglist>(tuple const &amp;lhs, tuple&lt; Us... &gt; const &amp;rhs) noexcept</arglist>
-    </member>
-    <member kind="friend">
-      <type>friend constexpr auto</type>
-      <name>operator&lt;=</name>
-      <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a03b20df5887479d4b7277e30302266ea</anchor>
-      <arglist>(tuple const &amp;lhs, tuple&lt; Us... &gt; const &amp;rhs) noexcept</arglist>
-    </member>
-    <member kind="friend">
-      <type>friend constexpr auto</type>
-      <name>operator&gt;</name>
-      <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a741431fe551f58d39edd28b6f6d005ae</anchor>
-      <arglist>(tuple const &amp;lhs, tuple&lt; Us... &gt; const &amp;rhs) noexcept</arglist>
-    </member>
-    <member kind="friend">
-      <type>friend constexpr auto</type>
-      <name>operator&gt;=</name>
-      <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a6b3f89a6d6b94821ab32117291342a64</anchor>
-      <arglist>(tuple const &amp;lhs, tuple&lt; Us... &gt; const &amp;rhs) noexcept</arglist>
-    </member>
-    <member kind="friend">
-      <type>friend std::basic_ostream&lt; CharT, Traits &gt; &amp;</type>
+    <member kind="function">
+      <type>std::basic_ostream&lt; CharT, Traits &gt; &amp;</type>
       <name>operator&lt;&lt;</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>af6739a069131e315597688e5b3cf5df9</anchor>
-      <arglist>(std::basic_ostream&lt; CharT, Traits &gt; &amp;os, tuple const &amp;t) noexcept</arglist>
+      <anchor>ae4a6f765f9c255d795ba8ab2fe213639</anchor>
+      <arglist>(std::basic_ostream&lt; CharT, Traits &gt; &amp;os, tuple&lt; Ts... &gt; const &amp;t) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>operator==</name>
+      <anchorfile>structkumi_1_1tuple.html</anchorfile>
+      <anchor>ad8fed866ec4f0a7bec029a5caccb4d06</anchor>
+      <arglist>(tuple&lt; Ts... &gt; const &amp;self, tuple&lt; Us... &gt; const &amp;other) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>operator!=</name>
+      <anchorfile>structkumi_1_1tuple.html</anchorfile>
+      <anchor>aa163bc956286a74832bc716e7bdf6c8e</anchor>
+      <arglist>(tuple&lt; Ts... &gt; const &amp;self, tuple&lt; Us... &gt; const &amp;other) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>operator&lt;</name>
+      <anchorfile>structkumi_1_1tuple_ad24a079fe765887d229a4a6e2773ae93.html</anchorfile>
+      <anchor>ad24a079fe765887d229a4a6e2773ae93</anchor>
+      <arglist>(tuple&lt; Ts... &gt; const &amp;lhs, tuple&lt; Us... &gt; const &amp;rhs) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>operator&lt;=</name>
+      <anchorfile>structkumi_1_1tuple.html</anchorfile>
+      <anchor>a6bf7895513944455a880219d7aac3fca</anchor>
+      <arglist>(tuple&lt; Ts... &gt; const &amp;lhs, tuple&lt; Us... &gt; const &amp;rhs) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>operator&gt;</name>
+      <anchorfile>structkumi_1_1tuple.html</anchorfile>
+      <anchor>a7ad00985e7c37ea5a984d3aa9e51a57e</anchor>
+      <arglist>(tuple&lt; Ts... &gt; const &amp;lhs, tuple&lt; Us... &gt; const &amp;rhs) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>operator&gt;=</name>
+      <anchorfile>structkumi_1_1tuple.html</anchorfile>
+      <anchor>acfbd7477060ef62349adf34c16496e4f</anchor>
+      <arglist>(tuple&lt; Ts... &gt; const &amp;lhs, tuple&lt; Us... &gt; const &amp;rhs) noexcept</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -1455,47 +1455,47 @@
       <anchor>afcfee8fbd3a138d70cff1edb3485e61e</anchor>
       <arglist>() noexcept</arglist>
     </member>
-    <member kind="friend">
-      <type>friend constexpr auto</type>
+    <member kind="function">
+      <type>constexpr auto</type>
       <name>operator==</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>af0256993b0ad272335b4c6d77afe73d7</anchor>
-      <arglist>(tuple const &amp;self, tuple&lt; Us... &gt; const &amp;other) noexcept</arglist>
+      <anchor>ad8fed866ec4f0a7bec029a5caccb4d06</anchor>
+      <arglist>(tuple&lt; Ts... &gt; const &amp;self, tuple&lt; Us... &gt; const &amp;other) noexcept</arglist>
     </member>
-    <member kind="friend">
-      <type>friend constexpr auto</type>
+    <member kind="function">
+      <type>constexpr auto</type>
       <name>operator!=</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a723ee5d6b1324e146a4cb8819c29f331</anchor>
-      <arglist>(tuple const &amp;self, tuple&lt; Us... &gt; const &amp;other) noexcept</arglist>
+      <anchor>aa163bc956286a74832bc716e7bdf6c8e</anchor>
+      <arglist>(tuple&lt; Ts... &gt; const &amp;self, tuple&lt; Us... &gt; const &amp;other) noexcept</arglist>
     </member>
-    <member kind="friend">
-      <type>friend constexpr auto</type>
+    <member kind="function">
+      <type>constexpr auto</type>
       <name>operator&lt;</name>
-      <anchorfile>structkumi_1_1tuple_abee5ae96fdfd2145347fa3b2b212bf12.html</anchorfile>
-      <anchor>abee5ae96fdfd2145347fa3b2b212bf12</anchor>
-      <arglist>(tuple const &amp;lhs, tuple&lt; Us... &gt; const &amp;rhs) noexcept</arglist>
+      <anchorfile>structkumi_1_1tuple_ad24a079fe765887d229a4a6e2773ae93.html</anchorfile>
+      <anchor>ad24a079fe765887d229a4a6e2773ae93</anchor>
+      <arglist>(tuple&lt; Ts... &gt; const &amp;lhs, tuple&lt; Us... &gt; const &amp;rhs) noexcept</arglist>
     </member>
-    <member kind="friend">
-      <type>friend constexpr auto</type>
+    <member kind="function">
+      <type>constexpr auto</type>
       <name>operator&lt;=</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a03b20df5887479d4b7277e30302266ea</anchor>
-      <arglist>(tuple const &amp;lhs, tuple&lt; Us... &gt; const &amp;rhs) noexcept</arglist>
+      <anchor>a6bf7895513944455a880219d7aac3fca</anchor>
+      <arglist>(tuple&lt; Ts... &gt; const &amp;lhs, tuple&lt; Us... &gt; const &amp;rhs) noexcept</arglist>
     </member>
-    <member kind="friend">
-      <type>friend constexpr auto</type>
+    <member kind="function">
+      <type>constexpr auto</type>
       <name>operator&gt;</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a741431fe551f58d39edd28b6f6d005ae</anchor>
-      <arglist>(tuple const &amp;lhs, tuple&lt; Us... &gt; const &amp;rhs) noexcept</arglist>
+      <anchor>a7ad00985e7c37ea5a984d3aa9e51a57e</anchor>
+      <arglist>(tuple&lt; Ts... &gt; const &amp;lhs, tuple&lt; Us... &gt; const &amp;rhs) noexcept</arglist>
     </member>
-    <member kind="friend">
-      <type>friend constexpr auto</type>
+    <member kind="function">
+      <type>constexpr auto</type>
       <name>operator&gt;=</name>
       <anchorfile>structkumi_1_1tuple.html</anchorfile>
-      <anchor>a6b3f89a6d6b94821ab32117291342a64</anchor>
-      <arglist>(tuple const &amp;lhs, tuple&lt; Us... &gt; const &amp;rhs) noexcept</arglist>
+      <anchor>acfbd7477060ef62349adf34c16496e4f</anchor>
+      <arglist>(tuple&lt; Ts... &gt; const &amp;lhs, tuple&lt; Us... &gt; const &amp;rhs) noexcept</arglist>
     </member>
     <member kind="function">
       <type></type>
@@ -2749,6 +2749,62 @@
       <anchorfile>group__kumi__utility_gaa217e07b135cc3295e25689ac4ac2933.html</anchorfile>
       <anchor>gaa217e07b135cc3295e25689ac4ac2933</anchor>
       <arglist></arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>operator==</name>
+      <anchorfile>structkumi_1_1record.html</anchorfile>
+      <anchor>a0b13841d53a273eae4e61e8637f9d094</anchor>
+      <arglist>(record&lt; Ts... &gt; const &amp;self, record&lt; Us... &gt; const &amp;other) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>operator!=</name>
+      <anchorfile>structkumi_1_1record.html</anchorfile>
+      <anchor>ab0c7a7dc02f179f880931b51d7cc53eb</anchor>
+      <arglist>(record&lt; Ts... &gt; const &amp;self, record&lt; Us... &gt; const &amp;other) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>operator==</name>
+      <anchorfile>structkumi_1_1tuple.html</anchorfile>
+      <anchor>ad8fed866ec4f0a7bec029a5caccb4d06</anchor>
+      <arglist>(tuple&lt; Ts... &gt; const &amp;self, tuple&lt; Us... &gt; const &amp;other) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>operator!=</name>
+      <anchorfile>structkumi_1_1tuple.html</anchorfile>
+      <anchor>aa163bc956286a74832bc716e7bdf6c8e</anchor>
+      <arglist>(tuple&lt; Ts... &gt; const &amp;self, tuple&lt; Us... &gt; const &amp;other) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>operator&lt;</name>
+      <anchorfile>structkumi_1_1tuple_ad24a079fe765887d229a4a6e2773ae93.html</anchorfile>
+      <anchor>ad24a079fe765887d229a4a6e2773ae93</anchor>
+      <arglist>(tuple&lt; Ts... &gt; const &amp;lhs, tuple&lt; Us... &gt; const &amp;rhs) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>operator&lt;=</name>
+      <anchorfile>structkumi_1_1tuple.html</anchorfile>
+      <anchor>a6bf7895513944455a880219d7aac3fca</anchor>
+      <arglist>(tuple&lt; Ts... &gt; const &amp;lhs, tuple&lt; Us... &gt; const &amp;rhs) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>operator&gt;</name>
+      <anchorfile>structkumi_1_1tuple.html</anchorfile>
+      <anchor>a7ad00985e7c37ea5a984d3aa9e51a57e</anchor>
+      <arglist>(tuple&lt; Ts... &gt; const &amp;lhs, tuple&lt; Us... &gt; const &amp;rhs) noexcept</arglist>
+    </member>
+    <member kind="function">
+      <type>constexpr auto</type>
+      <name>operator&gt;=</name>
+      <anchorfile>structkumi_1_1tuple.html</anchorfile>
+      <anchor>acfbd7477060ef62349adf34c16496e4f</anchor>
+      <arglist>(tuple&lt; Ts... &gt; const &amp;lhs, tuple&lt; Us... &gt; const &amp;rhs) noexcept</arglist>
     </member>
     <member kind="function">
       <type></type>

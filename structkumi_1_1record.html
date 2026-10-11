@@ -301,31 +301,28 @@ requires (<a class="el" href="conceptkumi_1_1concepts_1_1contains__identifier.ht
 <tr class="memitem:a5c9d75f431a2453078baf16553dc9a28 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><b>operator[]</b> (Id const &amp;) const &amp;noexcept</td></tr>
 <tr class="memdesc:a5c9d75f431a2453078baf16553dc9a28"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
 </table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-friends" class="groupheader"><a id="friends" name="friends"></a>
-Friends</h2></td></tr>
-<tr id="friends-0" class="groupHeader"><td colspan="2"><div class="groupHeader">Comparison operators</div></td></tr>
-<tr class="memitem:a6db5145d0e86cffe51b9941346834323" id="r_a6db5145d0e86cffe51b9941346834323"><td class="memTemplParams" colspan="2"><a id="a6db5145d0e86cffe51b9941346834323" name="a6db5145d0e86cffe51b9941346834323"></a>
-template&lt;typename... Us&gt; </td></tr>
-<tr class="memitem:a6db5145d0e86cffe51b9941346834323 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator==</b> (<a class="el" href="structkumi_1_1record_ae9ac76c2474af708950b35e4b58027d6.html#ae9ac76c2474af708950b35e4b58027d6">record</a> const &amp;self, <a class="el" href="structkumi_1_1record_ae9ac76c2474af708950b35e4b58027d6.html#ae9ac76c2474af708950b35e4b58027d6">record</a>&lt; Us... &gt; const &amp;other) noexcept</td></tr>
-<tr class="memdesc:a6db5145d0e86cffe51b9941346834323"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares a record with another for equality. <br /></td></tr>
-<tr class="memitem:a22e02cc7d670843e1c5f9e41385a7237" id="r_a22e02cc7d670843e1c5f9e41385a7237"><td class="memTemplParams" colspan="2"><a id="a22e02cc7d670843e1c5f9e41385a7237" name="a22e02cc7d670843e1c5f9e41385a7237"></a>
-template&lt;typename... Us&gt; </td></tr>
-<tr class="memitem:a22e02cc7d670843e1c5f9e41385a7237 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator!=</b> (<a class="el" href="structkumi_1_1record_ae9ac76c2474af708950b35e4b58027d6.html#ae9ac76c2474af708950b35e4b58027d6">record</a> const &amp;self, <a class="el" href="structkumi_1_1record_ae9ac76c2474af708950b35e4b58027d6.html#ae9ac76c2474af708950b35e4b58027d6">record</a>&lt; Us... &gt; const &amp;other) noexcept</td></tr>
-<tr class="memdesc:a22e02cc7d670843e1c5f9e41385a7237"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares a record with another for inequality. <br /></td></tr>
-</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-related" class="groupheader"><a id="related" name="related"></a>
 Related Symbols</h2></td></tr>
 <tr><td class="ititle" colspan="2"><p>(Note that these are not member symbols.) </p>
 </td></tr>
-<tr class="memitem:a3e776cea74b6cbba98d32566764b3571" id="r_a3e776cea74b6cbba98d32566764b3571"><td class="memTemplParams" colspan="2"><a id="a3e776cea74b6cbba98d32566764b3571" name="a3e776cea74b6cbba98d32566764b3571"></a>
-template&lt;typename CharT, typename Traits&gt; </td></tr>
-<tr class="memitem:a3e776cea74b6cbba98d32566764b3571 template"><td class="memItemLeft">std::basic_ostream&lt; CharT, Traits &gt; &amp;&#160;</td><td class="memItemRight"><b>operator&lt;&lt;</b> (std::basic_ostream&lt; CharT, Traits &gt; &amp;os, <a class="el" href="structkumi_1_1record_ae9ac76c2474af708950b35e4b58027d6.html#ae9ac76c2474af708950b35e4b58027d6">record</a> const &amp;t) noexcept</td></tr>
-<tr class="memdesc:a3e776cea74b6cbba98d32566764b3571"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> in an output stream. <br /></td></tr>
-<tr id="related-0" class="groupHeader"><td colspan="2"><div class="groupHeader">Record Deduction Guides</div></td></tr>
+<tr class="memitem:a58d5d2276354e3780e7963965ddf5698" id="r_a58d5d2276354e3780e7963965ddf5698"><td class="memTemplParams" colspan="2"><a id="a58d5d2276354e3780e7963965ddf5698" name="a58d5d2276354e3780e7963965ddf5698"></a>
+template&lt;typename CharT, typename Traits, typename... Ts&gt; </td></tr>
+<tr class="memitem:a58d5d2276354e3780e7963965ddf5698 template"><td class="memItemLeft">std::basic_ostream&lt; CharT, Traits &gt; &amp;&#160;</td><td class="memItemRight"><b>operator&lt;&lt;</b> (std::basic_ostream&lt; CharT, Traits &gt; &amp;os, <a class="el" href="structkumi_1_1record_ae9ac76c2474af708950b35e4b58027d6.html#ae9ac76c2474af708950b35e4b58027d6">record</a>&lt; Ts... &gt; const &amp;t) noexcept</td></tr>
+<tr class="memdesc:a58d5d2276354e3780e7963965ddf5698"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> in an output stream. <br /></td></tr>
+<tr id="related-0" class="groupHeader"><td colspan="2"><div class="groupHeader">Comparison operators</div></td></tr>
+<tr class="memitem:a0b13841d53a273eae4e61e8637f9d094" id="r_a0b13841d53a273eae4e61e8637f9d094"><td class="memTemplParams" colspan="2"><a id="a0b13841d53a273eae4e61e8637f9d094" name="a0b13841d53a273eae4e61e8637f9d094"></a>
+template&lt;typename... Ts, typename... Us&gt; </td></tr>
+<tr class="memitem:a0b13841d53a273eae4e61e8637f9d094 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator==</b> (<a class="el" href="structkumi_1_1record_ae9ac76c2474af708950b35e4b58027d6.html#ae9ac76c2474af708950b35e4b58027d6">record</a>&lt; Ts... &gt; const &amp;self, <a class="el" href="structkumi_1_1record_ae9ac76c2474af708950b35e4b58027d6.html#ae9ac76c2474af708950b35e4b58027d6">record</a>&lt; Us... &gt; const &amp;other) noexcept</td></tr>
+<tr class="memdesc:a0b13841d53a273eae4e61e8637f9d094"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares a record with another for equality. <br /></td></tr>
+<tr class="memitem:ab0c7a7dc02f179f880931b51d7cc53eb" id="r_ab0c7a7dc02f179f880931b51d7cc53eb"><td class="memTemplParams" colspan="2"><a id="ab0c7a7dc02f179f880931b51d7cc53eb" name="ab0c7a7dc02f179f880931b51d7cc53eb"></a>
+template&lt;typename... Ts, typename... Us&gt; </td></tr>
+<tr class="memitem:ab0c7a7dc02f179f880931b51d7cc53eb template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator!=</b> (<a class="el" href="structkumi_1_1record_ae9ac76c2474af708950b35e4b58027d6.html#ae9ac76c2474af708950b35e4b58027d6">record</a>&lt; Ts... &gt; const &amp;self, <a class="el" href="structkumi_1_1record_ae9ac76c2474af708950b35e4b58027d6.html#ae9ac76c2474af708950b35e4b58027d6">record</a>&lt; Us... &gt; const &amp;other) noexcept</td></tr>
+<tr class="memdesc:ab0c7a7dc02f179f880931b51d7cc53eb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares a record with another for inequality. <br /></td></tr>
+<tr id="related-1" class="groupHeader"><td colspan="2"><div class="groupHeader">Record Deduction Guides</div></td></tr>
 <tr class="memitem:ae9ac76c2474af708950b35e4b58027d6" id="r_ae9ac76c2474af708950b35e4b58027d6"><td class="memTemplParams" colspan="2">template&lt;typename... Ts&gt; </td></tr>
 <tr class="memitem:ae9ac76c2474af708950b35e4b58027d6 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1record_ae9ac76c2474af708950b35e4b58027d6.html#ae9ac76c2474af708950b35e4b58027d6">record</a> (Ts &amp;&amp;...) -&gt; record&lt; std::unwrap_ref_decay_t&lt; Ts &gt;... &gt;</td></tr>
 <tr class="memdesc:ae9ac76c2474af708950b35e4b58027d6"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> deduction guide  <br /></td></tr>
-<tr id="related-1" class="groupHeader"><td colspan="2"><div class="groupHeader">Record accessors</div></td></tr>
+<tr id="related-2" class="groupHeader"><td colspan="2"><div class="groupHeader">Record accessors</div></td></tr>
 <tr class="memitem:abc2cd329ad25d155458850c19cc3b137" id="r_abc2cd329ad25d155458850c19cc3b137"><td class="memTemplParams" colspan="2">template&lt;std::size_t I, typename... Ts&gt; </td></tr>
 <tr class="memitem:abc2cd329ad25d155458850c19cc3b137 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">get</a> (<a class="el" href="structkumi_1_1record_ae9ac76c2474af708950b35e4b58027d6.html#ae9ac76c2474af708950b35e4b58027d6">record</a>&lt; Ts... &gt; &amp;r) noexcept</td></tr>
 <tr class="memdesc:abc2cd329ad25d155458850c19cc3b137"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the Ith field from a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>.  <br /></td></tr>
