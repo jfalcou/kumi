@@ -1816,55 +1816,56 @@ namespace kumi
       kumi::_::assign(*this, other, std::make_index_sequence<sizeof...(Ts)>{});
       return *this;
     }
-    template<typename... Us>
-    KUMI_ABI friend constexpr auto operator==(tuple const& self, tuple<Us...> const& other) noexcept
-#ifndef KUMI_DOXYGEN_INVOKED
-    requires(kumi::_::piecewise_comparable<tuple, tuple<Us...>>)
-#endif
-    {
-      return kumi::_::compare(self, other, std::make_index_sequence<sizeof...(Ts)>{});
-    }
-    template<typename... Us>
-    KUMI_ABI friend constexpr auto operator!=(tuple const& self, tuple<Us...> const& other) noexcept
-#ifndef KUMI_DOXYGEN_INVOKED
-    requires(kumi::_::piecewise_comparable<tuple, tuple<Us...>>)
-#endif
-    {
-      return !(self == other);
-    }
-    template<typename... Us>
-    KUMI_ABI friend constexpr auto operator<(tuple const& lhs, tuple<Us...> const& rhs) noexcept
-    requires(sizeof...(Ts) == sizeof...(Us))
-#ifndef KUMI_DOXYGEN_INVOKED
-            && (kumi::_::piecewise_ordered<tuple, tuple<Us...>>)
-#endif
-    {
-      return kumi::_::lexicographic_compare(lhs, rhs, std::make_index_sequence<sizeof...(Ts)>{});
-    }
-    template<typename... Us>
-    KUMI_ABI friend constexpr auto operator<=(tuple const& lhs, tuple<Us...> const& rhs) noexcept
-    requires requires { rhs < lhs; }
-    {
-      return !(rhs < lhs);
-    }
-    template<typename... Us>
-    KUMI_ABI friend constexpr auto operator>(tuple const& lhs, tuple<Us...> const& rhs) noexcept
-    requires requires { rhs < lhs; }
-    {
-      return rhs < lhs;
-    }
-    template<typename... Us>
-    KUMI_ABI friend constexpr auto operator>=(tuple const& lhs, tuple<Us...> const& rhs) noexcept
-    requires requires { lhs < rhs; }
-    {
-      return !(lhs < rhs);
-    }
-    template<typename CharT, typename Traits>
-    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, tuple const& t) noexcept
-    {
-      return kumi::_::print(os, t, '(', ',', ')', std::make_index_sequence<sizeof...(Ts) - 1>{});
-    }
   };
+  template<typename... Ts, typename... Us>
+  KUMI_ABI constexpr auto operator==(tuple<Ts...> const& self, tuple<Us...> const& other) noexcept
+#ifndef KUMI_DOXYGEN_INVOKED
+  requires(sizeof...(Ts) > 0) && (kumi::_::piecewise_comparable<tuple<Ts...>, tuple<Us...>>)
+#endif
+  {
+    return kumi::_::compare(self, other, std::make_index_sequence<sizeof...(Ts)>{});
+  }
+  template<typename... Ts, typename... Us>
+  KUMI_ABI constexpr auto operator!=(tuple<Ts...> const& self, tuple<Us...> const& other) noexcept
+#ifndef KUMI_DOXYGEN_INVOKED
+  requires(sizeof...(Ts) > 0) && (kumi::_::piecewise_comparable<tuple<Ts...>, tuple<Us...>>)
+#endif
+  {
+    return !(self == other);
+  }
+  template<typename... Ts, typename... Us>
+  KUMI_ABI constexpr auto operator<(tuple<Ts...> const& lhs, tuple<Us...> const& rhs) noexcept
+  requires(sizeof...(Ts) > 0 && sizeof...(Ts) == sizeof...(Us))
+#ifndef KUMI_DOXYGEN_INVOKED
+          && (kumi::_::piecewise_ordered<tuple<Ts...>, tuple<Us...>>)
+#endif
+  {
+    return kumi::_::lexicographic_compare(lhs, rhs, std::make_index_sequence<sizeof...(Ts)>{});
+  }
+  template<typename... Ts, typename... Us>
+  KUMI_ABI constexpr auto operator<=(tuple<Ts...> const& lhs, tuple<Us...> const& rhs) noexcept
+  requires requires { rhs < lhs; }
+  {
+    return !(rhs < lhs);
+  }
+  template<typename... Ts, typename... Us>
+  KUMI_ABI constexpr auto operator>(tuple<Ts...> const& lhs, tuple<Us...> const& rhs) noexcept
+  requires requires { rhs < lhs; }
+  {
+    return rhs < lhs;
+  }
+  template<typename... Ts, typename... Us>
+  KUMI_ABI constexpr auto operator>=(tuple<Ts...> const& lhs, tuple<Us...> const& rhs) noexcept
+  requires requires { lhs < rhs; }
+  {
+    return !(lhs < rhs);
+  }
+  template<typename CharT, typename Traits, typename... Ts>
+  requires(sizeof...(Ts) > 0)
+  std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, tuple<Ts...> const& t) noexcept
+  {
+    return kumi::_::print(os, t, '(', ',', ')', std::make_index_sequence<sizeof...(Ts) - 1>{});
+  }
   template<> struct tuple<>
   {
     static constexpr bool is_homogeneous = false;
@@ -2320,29 +2321,28 @@ namespace kumi
       ((get<kumi::identifier_of<Ts>()>(*this) = get<kumi::identifier_of<Ts>()>(KUMI_FWD(other))), ...);
       return *this;
     }
-    template<typename... Us>
-    KUMI_ABI friend constexpr auto operator==(record const& self, record<Us...> const& other) noexcept
-#ifndef KUMI_DOXYGEN_INVOKED
-    requires(kumi::_::fieldwise_comparable<record, record<Us...>>)
-#endif
-    {
-      return ((get<kumi::identifier_of<Ts>()>(self) == get<kumi::identifier_of<Ts>()>(other)) && ...);
-    }
-    template<typename... Us>
-    KUMI_ABI friend constexpr auto operator!=(record const& self, record<Us...> const& other) noexcept
-#ifndef KUMI_DOXYGEN_INVOKED
-    requires(kumi::_::fieldwise_comparable<record, record<Us...>>)
-#endif
-    {
-      return !(self == other);
-    }
-    template<typename CharT, typename Traits>
-    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os,
-                                                         record const& t) noexcept
-    {
-      return kumi::_::print(os, t, '{', ',', '}', std::make_index_sequence<sizeof...(Ts) - 1>{});
-    }
   };
+  template<typename... Ts, typename... Us>
+  KUMI_ABI constexpr auto operator==(record<Ts...> const& self, record<Us...> const& other) noexcept
+#ifndef KUMI_DOXYGEN_INVOKED
+  requires(kumi::_::fieldwise_comparable<record<Ts...>, record<Us...>>)
+#endif
+  {
+    return ((get<kumi::identifier_of<Ts>()>(self) == get<kumi::identifier_of<Ts>()>(other)) && ...);
+  }
+  template<typename... Ts, typename... Us>
+  KUMI_ABI constexpr auto operator!=(record<Ts...> const& self, record<Us...> const& other) noexcept
+#ifndef KUMI_DOXYGEN_INVOKED
+  requires(kumi::_::fieldwise_comparable<record<Ts...>, record<Us...>>)
+#endif
+  {
+    return !(self == other);
+  }
+  template<typename CharT, typename Traits, typename... Ts>
+  std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, record<Ts...> const& t) noexcept
+  {
+    return kumi::_::print(os, t, '{', ',', '}', std::make_index_sequence<sizeof...(Ts) - 1>{});
+  }
   template<> struct record<>
   {
     using is_record_type = void;
