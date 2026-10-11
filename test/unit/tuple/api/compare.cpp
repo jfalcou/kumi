@@ -149,7 +149,7 @@ TTS_CASE("Lexicographical comparison - Every pair of tuples over {0, 1, 2}^N aga
 
 TTS_CASE("Lexicographical comparison - Element comparisons returning a type other than bool")
 {
-  kumi::tuple<number, number, number> t{0, 1, 2};
+  [[maybe_unused]] kumi::tuple<number, number, number> t{0, 1, 2};
 
   TTS_TYPE_IS(decltype(t < t), boolean);
   TTS_TYPE_IS(decltype(t <= t), boolean);
