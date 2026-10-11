@@ -28,7 +28,7 @@ TTS_CASE("Check kumi::concepts::projection bejavior")
   TTS_EXPECT((kumi::concepts::projection<decltype(map2)>));
   TTS_EXPECT((kumi::concepts::projection<decltype(map3)>));
   TTS_EXPECT((kumi::concepts::projection<decltype(map4)>));
-                                                       
+
   TTS_EXPECT((kumi::concepts::projection<decltype(map5)>));
   TTS_EXPECT((kumi::concepts::projection<decltype(map6)>));
 };
