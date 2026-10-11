@@ -35,7 +35,7 @@
    - msvc  : cl.exe
 **/
 //======================================================================================================================
-#if defined(__EDG__) || defined(__EDG_VERSION__)
+#if defined(__EDG__) || defined(__EDG_VERSION__) || defined(__NVCC__)
 #define KUMI_FRONTEND_EDG 1
 #elif defined(__clang__)
 #define KUMI_FRONTEND_CLANG 1
@@ -87,19 +87,17 @@
    gcc       [[gnu::always_inline]]     [[gnu::flatten]]    [[gnu::artificial]]
    msvc      [[msvc::forceinline]]      [[msvc::flatten]]   (not available)
 
- The device backend does not change the spelling: it is the frontend that parses it.
+  The device backend does not change the spelling: it is the frontend that parses it.
+  Flatten has been removed from clang as it already inlines too much
 **/
 //======================================================================================================================
 #if defined(KUMI_DEBUG)
 #define KUMI_ABI KUMI_GPU
-#elif defined(KUMI_FRONTEND_EDG)
-#if defined(KUMI_GPU_COMPILER)
+#elif defined(KUMI_DEVICE_PASS)
 #define KUMI_ABI KUMI_GPU __forceinline__
-#else
+#elif defined(KUMI_FRONTEND_EDG)
 #define KUMI_ABI inline
-#endif
 #elif defined(KUMI_FRONTEND_CLANG)
-// Flatten is not that great on clang, it already inlines too much
 #define KUMI_ABI [[clang::always_inline, gnu::artificial]] KUMI_GPU inline
 #elif defined(KUMI_FRONTEND_GCC)
 #define KUMI_ABI [[using gnu: always_inline, flatten, artificial]] KUMI_GPU inline
