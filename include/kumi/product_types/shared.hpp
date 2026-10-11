@@ -28,10 +28,19 @@ namespace kumi
       return ((get<I>(KUMI_FWD(t)) == get<I>(KUMI_FWD(u))) && ...);
     }
 
+    // The first position where t and u differ decides the order
     template<typename T, typename U, std::size_t... I>
-    constexpr auto lexicographic_compare(T&& t, U&& u, std::index_sequence<I...>) noexcept
+    constexpr auto lexicographic_compare(T const& t, U const& u, std::index_sequence<I...>) noexcept
     {
-      return (... || (get<I>(KUMI_FWD(t)) < get<I>(KUMI_FWD(u)) || (!(get<I>(KUMI_FWD(u)) <= get<I>(KUMI_FWD(t))))));
+      // The accumulators take the type of the whole fold: masks of different element types do not convert
+      using result_t = decltype((... || (get<I>(t) < get<I>(u))));
+
+      result_t less{false};
+      result_t equal{true};
+
+      ((less = less || (equal && (get<I>(t) < get<I>(u))), equal = equal && !less && !(get<I>(u) < get<I>(t))), ...);
+
+      return less;
     }
 
     template<typename Os, typename T, std::size_t... I>
