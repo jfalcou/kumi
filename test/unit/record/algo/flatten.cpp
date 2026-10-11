@@ -33,8 +33,10 @@ TTS_CASE("Check result::flatten/flatten_all<record> behavior")
     (kumi::record<char_f, kumi::field<kumi::name<"e.b">, short>, kumi::field<kumi::name<"e.c">, int>,
                   kumi::field<kumi::name<"e.f">, kumi::record<double_f>>>));
 
-  using func_t = decltype([](auto& m) { return &m; });
-  using cfunc_t = decltype([](auto const& m) { return &m; });
+  [[maybe_unused]] auto func = [](auto& m) { return &m; };
+  [[maybe_unused]]auto cfunc = [](auto const& m) { return &m; };
+  using func_t = decltype(func);
+  using cfunc_t = decltype(cfunc);
 
   TTS_TYPE_IS(
     (kumi::result::flatten_all_t<

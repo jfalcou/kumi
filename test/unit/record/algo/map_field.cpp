@@ -21,7 +21,8 @@ TTS_CASE("Check result::map_field<F,record...> behavior")
   using double_f = kumi::field<kumi::name<"d">, double>;
   using float_f = kumi::field<kumi::name<"d">, float>;
 
-  using func_t = decltype([](auto, auto const& m) { return &m; });
+  [[maybe_unused]] auto func = [](auto, auto const& m) { return &m; };
+  using func_t = decltype(func);
 
   TTS_TYPE_IS((kumi::result::map_field_t<func_t, kumi::record<char_f, short_f, int_f, double_f>>),
               (kumi::record<kumi::field<kumi::name<"a">, char const*>, kumi::field<kumi::name<"b">, short const*>,

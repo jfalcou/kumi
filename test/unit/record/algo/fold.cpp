@@ -16,7 +16,8 @@ TTS_CASE("Check result::fold_right/fold_left<...> behavior")
 {
   using namespace kumi::literals;
 
-  using func_t = decltype([](auto a, auto m) { return a + sizeof(m); });
+  [[maybe_unused]] auto func = [](auto a, auto m) { return a + sizeof(m); };
+  using func_t = decltype(func);
 
   using char_f = kumi::field<kumi::name<"a">, char>;
   using short_f = kumi::field<kumi::name<"b">, short>;

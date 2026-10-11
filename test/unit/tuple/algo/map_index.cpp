@@ -12,7 +12,8 @@
 
 TTS_CASE("Check result::map_index<F,Tuple...> behavior")
 {
-  using func_t = decltype([](auto, auto const& m) { return &m; });
+  [[maybe_unused]] auto func = [](auto, auto const& m) { return &m; };
+  using func_t = decltype(func);
 
   TTS_TYPE_IS((kumi::result::map_index_t<func_t, kumi::tuple<char, short, int, double>>),
               (kumi::tuple<char const*, short const*, int const*, double const*>));
@@ -24,7 +25,8 @@ TTS_CASE("Check result::map_index<F,Tuple...> behavior")
     (kumi::result::map_index_t<add_t, kumi::tuple<char, short, int, double>, kumi::tuple<char, short, int, float>>),
     (kumi::tuple<double, double, double, double>));
 
-  using to_t = decltype([](auto, auto) { return kumi::make_tuple(1); });
+  [[maybe_unused]] auto to = [](auto, auto) { return kumi::make_tuple(1); };
+  using to_t = decltype(to);
   TTS_TYPE_IS((kumi::result::map_index_t<to_t, kumi::tuple<int>>), (kumi::tuple<kumi::tuple<int>>));
 };
 

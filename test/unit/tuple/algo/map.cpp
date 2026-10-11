@@ -18,17 +18,20 @@ template<typename T> constexpr auto fun(T const& tuple)
 
 TTS_CASE("Check result::map<F,Tuple...> behavior")
 {
-  using func_t = decltype([](auto const& m) { return &m; });
+  [[maybe_unused]] auto func = [](auto const& m) { return &m; };
+  using func_t = decltype(func);
 
   TTS_TYPE_IS((kumi::result::map_t<func_t, kumi::tuple<char, short, int, double>>),
               (kumi::tuple<char const*, short const*, int const*, double const*>));
 
-  using add_t = decltype([](auto a, auto b) { return a + b; });
+  [[maybe_unused]] auto add = [](auto a, auto b) { return a + b; };
+  using add_t = decltype(add);
 
   TTS_TYPE_IS((kumi::result::map_t<add_t, kumi::tuple<char, short, int, double>, kumi::tuple<char, short, int, float>>),
               (kumi::tuple<int, int, int, double>));
 
-  using to_t = decltype([](auto) { return kumi::make_tuple(1); });
+  [[maybe_unused]] auto to = [](auto) { return kumi::make_tuple(1); };
+  using to_t = decltype(to);
   TTS_TYPE_IS((kumi::result::map_t<to_t, kumi::tuple<int>>), (kumi::tuple<kumi::tuple<int>>));
 };
 
