@@ -93,7 +93,7 @@ namespace kumi
   //====================================================================================================================
   template<typename T>
   inline constexpr bool is_power_type_v =
-    kumi::is_product_type_v<T> && requires(T&& t) { typename std::remove_cvref_t<T>::value_type; };
+    requires(T&& t) { typename std::remove_cvref_t<T>::value_type; } && kumi::_::std_tuple_compatible<T>;
 
   template<typename T> struct is_power_type
   {
@@ -330,7 +330,7 @@ namespace kumi
     @code
     namespace kumi
     {
-      template<typename T> struct is_power_type;
+      template<typename T> struct is_homogeneous;
     }
     @endcode
   **/
@@ -480,6 +480,8 @@ namespace kumi
     @ingroup kumi_traits
     @brief    Extracts the common product_type of a parameter pack.
 
+    @note If the pack is empty, there is no common product type to build and the type alias is not defined.
+
     If all the types are record types then it returns an empty record type, otherwise returns an empty product type.
     As we are unable to properly compute the Least Restrictive Subtype of a pack this trait is specialized
     in the following way.
@@ -505,7 +507,7 @@ namespace kumi
   template<typename... Ts> struct common_product_type;
 
   template<typename T, typename... Ts>
-  requires((kumi::is_product_type_v<Ts> && ...) &&
+  requires(kumi::is_product_type_v<T> && (kumi::is_product_type_v<Ts> && ...) &&
            ((std::same_as<T, Ts> && ...) || (kumi::is_instance_of_v<T, Ts> && ...)))
   struct common_product_type<T, Ts...>
   {
@@ -661,6 +663,43 @@ namespace kumi
   template<typename T, typename U> struct is_equality_comparable
   {
     static constexpr bool value = kumi::is_equality_comparable_v<T, U>;
+  };
+
+  namespace _
+  {
+    template<typename L, typename R>
+    inline constexpr bool uniform = std::same_as<kumi::element_t<0, L>, kumi::element_t<0, R>>;
+
+    template<typename L, typename R>
+    requires(kumi::size_v<L> == 0 || kumi::size_v<R> == 0)
+    inline constexpr bool uniform<L, R> = true;
+  }
+
+  //====================================================================================================================
+  /**
+    @ingroup kumi_traits
+    @brief   Checks if a list of product types are homogeneous and of the same underlying type.
+
+    @tparam Ts The list of product type to access
+
+    ## Helper type-trait
+    @code
+    namespace kumi
+    {
+      template<typename T, typename U> struct are_uniform_product_types;
+    }
+    @endcode
+  **/
+  //====================================================================================================================
+  template<typename... Ts> inline constexpr bool are_uniform_product_types_v = sizeof...(Ts) == 0;
+
+  template<typename T, typename... Ts>
+  requires(kumi::is_homogeneous_v<T> && (kumi::is_homogeneous_v<Ts> && ...))
+  inline constexpr bool are_uniform_product_types_v<T, Ts...> = (kumi::_::uniform<T, Ts> && ...);
+
+  template<typename... Ts> struct are_uniform_product_types
+  {
+    static constexpr bool value = kumi::are_uniform_product_types_v<Ts...>;
   };
 
   //====================================================================================================================

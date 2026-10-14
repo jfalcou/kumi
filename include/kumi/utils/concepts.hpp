@@ -506,5 +506,76 @@ namespace kumi
     concept queryable_by_label =
       kumi::_::label<L> && kumi::concepts::product_type<T> &&
       kumi::_::can_query<kumi::_::index_of_label, L, T, std::make_index_sequence<kumi::size_v<T>>>;
+
+    //==================================================================================================================
+    /**
+      @ingroup kumi_concepts
+      @brief Concept specifying that a pack is composed of kumi::concepts::product_type
+
+      @note It is used for proper subsumption in packs.
+    **/
+    //==================================================================================================================
+    template<typename... Ts>
+    concept product_types = sizeof...(Ts) > 0 && (kumi::concepts::product_type<Ts> && ...);
+
+    //==================================================================================================================
+    /**
+      @ingroup kumi_concepts
+      @brief Concept specifying that a pack is composed of kumi::concepts::power_types
+
+      @note It is used for proper subsumption in packs.
+    **/
+    //==================================================================================================================
+    template<typename... Ts>
+    concept power_types = kumi::concepts::product_types<Ts...> && (kumi::concepts::power_type<Ts> && ...);
+
+    //==================================================================================================================
+    /**
+      @ingroup kumi_concepts
+      @brief Concept specifying that a pack is composed of kumi::concepts::record_types
+
+      @note It is used for proper subsumption in packs.
+    **/
+    //==================================================================================================================
+    template<typename... Ts>
+    concept record_types = kumi::concepts::product_types<Ts...> && (kumi::concepts::record_type<Ts> && ...);
+
+    //==================================================================================================================
+    /**
+      @ingroup kumi_concepts
+      @brief Concept specifying that a pack is composed of kumi::concepts::homogeneous_product_type all of which share
+      the same type.
+
+      @note It is used for proper subsumption in packs.
+    **/
+    //==================================================================================================================
+    template<typename... Ts>
+    concept uniform_product_types = kumi::concepts::product_types<Ts...> && kumi::are_uniform_product_types_v<Ts...>;
   }
+
+#ifndef KUMI_DOXYGEN_INVOKED
+  // As we are lacking a proper mechanism to find the least restrictive subtype, we fallback to a specializable trait
+  template<typename... Ts>
+  requires(concepts::product_types<Ts...>)
+  struct common_product_type<Ts...>
+  {
+    using type = kumi::tuple<>;
+  };
+
+  template<typename... Rs>
+  requires(concepts::record_types<Rs...>)
+  struct common_product_type<Rs...>
+  {
+    using type = kumi::record<>;
+  };
+
+  // The power_type constraint subsumes the plain product_type one (power_type <: product_type), so this
+  // specialization wins for arrays while heterogeneous tuples / records still fall back to the tuple<> one.
+  template<typename... Ps>
+  requires(concepts::power_types<Ps...> && (kumi::concepts::uniform_product_types<Ps...>))
+  struct common_product_type<Ps...>
+  {
+    using type = kumi::array<>;
+  };
+#endif
 }
