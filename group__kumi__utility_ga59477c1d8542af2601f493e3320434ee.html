@@ -192,11 +192,11 @@ Example:</h2>
 <div class="line"> </div>
 <div class="line">  <span class="keyword">auto</span> field = ( <span class="stringliteral">&quot;x&quot;</span>_id = <span class="charliteral">&#39;x&#39;</span> ); </div>
 <div class="line">  </div>
-<div class="line">  <span class="keyword">auto</span> caster = ( <span class="stringliteral">&quot;y&quot;</span>_id = 1 );</div>
+<div class="line">  <span class="keyword">using </span>caster_t = <span class="keyword">decltype</span>( <span class="stringliteral">&quot;y&quot;</span>_id = 1 );</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; field &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; kumi::field_cast&lt;int&gt;(field) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">  std::cout &lt;&lt; kumi::field_cast&lt;decltype(caster)&gt;(field) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; kumi::field_cast&lt;caster_t&gt;(field) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 </div><!-- fragment --> 
 </div>

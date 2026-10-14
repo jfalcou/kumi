@@ -27,7 +27,7 @@
     </tr>
     <tr>
       <th scope="row">Date:</th>
-      <td>2026-10-11 11:37:58</td>
+      <td>2026-10-14 16:33:56</td>
     </tr>
   </table>
 </div>
@@ -47,9 +47,9 @@
     </tr>
     <tr>
       <th scope="row">Functions:</th>
-      <td>359</td>
-      <td>484</td>
-      <td class="coverage-low">74.2%</td>
+      <td>361</td>
+      <td>486</td>
+      <td class="coverage-low">74.3%</td>
     </tr>
     <tr>
       <th scope="row">Branches:</th>
@@ -212,7 +212,9 @@
     <tr><td><a href="#l33">auto kumi::_::lexicographic_compare&lt;kumi::tuple&lt;int&gt;, kumi::tuple&lt;int&gt;, 0ul&gt;(kumi::tuple&lt;int&gt; const&amp;, kumi::tuple&lt;int&gt; const&amp;, std::integer_sequence&lt;unsigned long, 0ul&gt;) (line 33)</a></td><td>called 42 times, returned 42 times</td><td>100.0%</td></tr>
     <tr><td><a href="#l33">auto kumi::_::lexicographic_compare&lt;kumi::tuple&lt;short, int, long, double&gt;, kumi::tuple&lt;short, int, long, double&gt;, 0ul, 1ul, 2ul, 3ul&gt;(kumi::tuple&lt;short, int, long, double&gt; const&amp;, kumi::tuple&lt;short, int, long, double&gt; const&amp;, std::integer_sequence&lt;unsigned long, 0ul, 1ul, 2ul, 3ul&gt;) (line 33)</a></td><td>called 26244 times, returned 26244 times</td><td>100.0%</td></tr>
     <tr><td><a href="#l15">kumi::tuple&lt;char, int, double&gt; kumi::_::static_cast_&lt;kumi::tuple&lt;char, int, double&gt;, kumi::tuple&lt;int, double, float&gt;&amp;, 0ul, 1ul, 2ul&gt;(kumi::tuple&lt;int, double, float&gt;&amp;, std::integer_sequence&lt;unsigned long, 0ul, 1ul, 2ul&gt;) (line 15)</a></td><td>called 1 time, returned 1 time</td><td>100.0%</td></tr>
+    <tr><td><a href="#l15">kumi::tuple&lt;char, int&gt; kumi::_::static_cast_&lt;kumi::tuple&lt;char, int&gt;, kumi::tuple&lt;short, float&gt; const&amp;, 0ul, 1ul&gt;(kumi::tuple&lt;short, float&gt; const&amp;, std::integer_sequence&lt;unsigned long, 0ul, 1ul&gt;) (line 15)</a></td><td>called 1 time, returned 1 time</td><td>100.0%</td></tr>
     <tr><td><a href="#l15">kumi::tuple&lt;char, int&gt; kumi::_::static_cast_&lt;kumi::tuple&lt;char, int&gt;, kumi::tuple&lt;short, float&gt;&amp;, 0ul, 1ul&gt;(kumi::tuple&lt;short, float&gt;&amp;, std::integer_sequence&lt;unsigned long, 0ul, 1ul&gt;) (line 15)</a></td><td>called 1 time, returned 1 time</td><td>100.0%</td></tr>
+    <tr><td><a href="#l15">kumi::tuple&lt;int, double&gt; kumi::_::static_cast_&lt;kumi::tuple&lt;int, double&gt;, kumi::tuple&lt;short, float&gt; const&amp;, 0ul, 1ul&gt;(kumi::tuple&lt;short, float&gt; const&amp;, std::integer_sequence&lt;unsigned long, 0ul, 1ul&gt;) (line 15)</a></td><td>called 1 time, returned 1 time</td><td>100.0%</td></tr>
     <tr><td><a href="#l15">kumi::tuple&lt;int, double&gt; kumi::_::static_cast_&lt;kumi::tuple&lt;int, double&gt;, kumi::tuple&lt;short, float&gt;&amp;, 0ul, 1ul&gt;(kumi::tuple&lt;short, float&gt;&amp;, std::integer_sequence&lt;unsigned long, 0ul, 1ul&gt;) (line 15)</a></td><td>called 1 time, returned 1 time</td><td>100.0%</td></tr>
     <tr><td><a href="#l15">kumi::tuple&lt;tts::text&gt; kumi::_::static_cast_&lt;kumi::tuple&lt;tts::text&gt;, kumi::tuple&lt;char const*&gt;&amp;, 0ul&gt;(kumi::tuple&lt;char const*&gt;&amp;, std::integer_sequence&lt;unsigned long, 0ul&gt;) (line 15)</a></td><td>called 1 time, returned 1 time</td><td>100.0%</td></tr>
     <tr><td><a href="#l47">std::ostream&amp; kumi::_::print&lt;std::ostream, kumi::record&lt;kumi::field&lt;kumi::identifier&lt;kumi::name&lt;kumi::str&lt;5ul&gt;{char [6]{(char)108, (char)97, (char)114, (char)103, (char)101}}&gt;, kumi::traits_check&lt;is_big&gt; &gt;, double&gt; &gt; const&amp;&gt;(std::ostream&amp;, kumi::record&lt;kumi::field&lt;kumi::identifier&lt;kumi::name&lt;kumi::str&lt;5ul&gt;{char [6]{(char)108, (char)97, (char)114, (char)103, (char)101}}&gt;, kumi::traits_check&lt;is_big&gt; &gt;, double&gt; &gt; const&amp;, char, char, char, std::integer_sequence&lt;unsigned long&gt;) (line 47)</a></td><td>called 1 time, returned 1 time</td><td>100.0%</td></tr>
@@ -673,7 +675,7 @@
       <td class="lineno"><a id="l15" href="#l15">15</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">7</td>
+      <td class="linecount coveredLine">11</td>
       <td class="src coveredLine"><span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">T</span><span class="p">,</span><span class="w"> </span><span class="k">typename</span><span class="w"> </span><span class="nc">U</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="kt">size_t</span><span class="p">...</span><span class="w"> </span><span class="n">I</span><span class="o">&gt;</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="n">T</span><span class="w"> </span><span class="n">static_cast_</span><span class="p">(</span><span class="n">U</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">u</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">index_sequence</span><span class="o">&lt;</span><span class="n">I</span><span class="p">...</span><span class="o">&gt;</span><span class="p">)</span></td>
     </tr>
     <tr class="source-line">
@@ -687,7 +689,7 @@
       <td class="lineno"><a id="l17" href="#l17">17</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">20</td>
+      <td class="linecount coveredLine">32</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="p">{</span><span class="k">static_cast</span><span class="o">&lt;</span><span class="n">kumi</span><span class="o">::</span><span class="n">element_t</span><span class="o">&lt;</span><span class="n">I</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="n">I</span><span class="o">&gt;</span><span class="p">(</span><span class="n">KUMI_FWD</span><span class="p">(</span><span class="n">u</span><span class="p">)))...};</span></td>
     </tr>
     <tr class="source-line">
