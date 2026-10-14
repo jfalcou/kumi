@@ -125,4 +125,13 @@ namespace kumi::_
   template<template<typename...> typename Meta, typename Target, typename PT, std::size_t... I>
   inline constexpr bool can_query<Meta, Target, PT, std::index_sequence<I...>> =
     Meta<Target, std::tuple_element_t<I, PT>...>::value != kumi::_::invalid{};
+
+  //====================================================================================================================
+  // Helper meta functions to retrieve first type of a pack (defaults to void when empty)
+  //====================================================================================================================
+  template<typename... Ts> extern std::type_identity<void> first_;
+
+  template<typename T, typename... Ts> extern std::type_identity<T> first_<T, Ts...>;
+
+  template<typename... Ts> using first_t = typename decltype(first_<Ts...>)::type;
 }

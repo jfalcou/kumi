@@ -10,6 +10,7 @@
 
 namespace kumi
 {
+
   namespace _
   {
     template<typename T, typename U, std::size_t... I> constexpr T static_cast_(U&& u, std::index_sequence<I...>)
