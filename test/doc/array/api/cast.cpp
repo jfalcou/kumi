@@ -8,8 +8,8 @@
 
 int main()
 {
-  kumi::array a = { 65, 2, 4};
-  auto b = static_cast<kumi::array<char,char,char>>(a);
+  kumi::array a = { 65, 2, 4 };
+  auto b = static_cast<kumi::array<char, 3>>(a);
 
   std::cout << a << "\n";
   std::cout << b << "\n";

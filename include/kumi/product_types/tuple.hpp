@@ -1303,7 +1303,10 @@ namespace kumi
   };
 
   // As we are lacking a proper mechanism to find the least restrictive subtype, we fallback to a specializable trait
-  template<kumi::concepts::product_type... Ts> struct common_product_type<Ts...>
+  // Power types (kumi::array) are handled by a more specific specialization in array.hpp, so exclude them here.
+  template<kumi::concepts::product_type... Ts>
+  requires(!kumi::concepts::power_type<Ts> && ...)
+  struct common_product_type<Ts...>
   {
     using type = kumi::tuple<>;
   };

@@ -8,6 +8,8 @@
 //======================================================================================================================
 #pragma once
 
+#include <kumi/product_types/shared.hpp>
+
 namespace kumi
 {
   //====================================================================================================================
@@ -30,7 +32,7 @@ namespace kumi
     @include doc/array/api/introduction.cpp
   **/
   //====================================================================================================================
-  template<typename T, std::size_t N> struct array
+  template<typename T = void, std::size_t N = 0> struct array
   {
     using binder_t = kumi::_::make_binder_t<std::make_index_sequence<N>, T>;
     using value_type = std::remove_cvref_t<T>;
@@ -128,7 +130,7 @@ namespace kumi
     }
 
     /// @overload
-    template<typename... Us>
+    template<typename U, std::size_t M>
     [[nodiscard]] KUMI_ABI
 #ifndef KUMI_DOXYGEN_INVOKED
       explicit(!std::convertible_to<T&, U>)
@@ -159,18 +161,18 @@ namespace kumi
     requires(std::convertible_to<T, U> && N == M)
 #endif
     {
-      kumi::_::assign_(*this, other, std::make_index_sequence<N>{});
+      kumi::_::assign(*this, other, std::make_index_sequence<N>{});
       return *this;
     }
 
     /// @overload
     template<typename U, std::size_t M>
-    KUMI_ABI constexpr array& operator=(array<T, M>&& other)
+    KUMI_ABI constexpr array& operator=(array<U, M>&& other)
 #ifndef KUMI_DOXYGEN_INVOKED
     requires(std::convertible_to<T, U> && N == M)
 #endif
     {
-      kumi::_::assign_(*this, other, std::make_index_sequence<N>{});
+      kumi::_::assign(*this, other, std::make_index_sequence<N>{});
       return *this;
     }
 
@@ -209,7 +211,7 @@ namespace kumi
     requires(kumi::_::comparable<T, U> && N == M)
 #endif
     {
-      return kumi::_::lexicographical_compare_(lhs, rhs, std::make_index_sequence<N>{});
+      return kumi::_::lexicographic_compare(lhs, rhs, std::make_index_sequence<N>{});
     }
 
     /// @brief Compares arrays for lexicographical is less or equal relation
@@ -253,8 +255,15 @@ namespace kumi
     }
   };
 
+  //====================================================================================================================
+  // Empty power type: array<T, 0> — a power type of a known element type with arity zero (τ⁰ of T).
+  // The canonical empty power type array<> == array<void, 0> is specialised further below and is the
+  // unit/void power type.
+  //====================================================================================================================
   template<typename T> struct array<T, 0>
   {
+    using value_type = std::remove_cvref_t<T>;
+
     static constexpr bool is_homogeneous = true;
 
     static constexpr auto size() noexcept { return 0; }
@@ -285,6 +294,45 @@ namespace kumi
   };
 
   //====================================================================================================================
+  // The canonical empty power type: array<> == array<void, 0>.
+  // In power-type algebra τ⁰ collapses to the unit type, isomorphic to void: an array you create with
+  // `kumi::array{}` "ends up being void" — it is the unit power type, interconvertible with
+  // kumi::unit / std::nullptr_t / tuple<>. This full specialization takes precedence over array<T,0>.
+  //====================================================================================================================
+  template<> struct array<void, 0>
+  {
+    using value_type = void;
+
+    static constexpr bool is_homogeneous = true;
+
+    static constexpr auto size() noexcept { return 0; }
+
+    static constexpr auto empty() noexcept { return true; }
+
+    friend constexpr auto operator<=>(array<void, 0>, array<void, 0>) noexcept = default;
+
+    template<typename U>
+    [[nodiscard]] KUMI_ABI constexpr operator U() const noexcept
+    requires(kumi::concepts::unit_type<U>)
+    {
+      return {};
+    }
+
+    template<typename U>
+    [[nodiscard]] KUMI_ABI constexpr operator U() noexcept
+    requires(kumi::concepts::unit_type<U>)
+    {
+      return {};
+    }
+
+    template<typename CharT, typename Traits>
+    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, array<void, 0>) noexcept
+    {
+      return os << "[]";
+    }
+  };
+
+  //====================================================================================================================
   /**
     @name Array deduction guides
     @{
@@ -301,6 +349,9 @@ namespace kumi
   template<typename T, typename... Ts>
   requires(kumi::_::all_the_same<T, Ts...>)
   array(T&&, Ts&&...) -> array<T, sizeof...(Ts) + 1>;
+
+  /// @brief Deduction guide for the empty power type: `kumi::array{}` -> `kumi::array<>` (== array<void, 0>)
+  array() -> array<>;
 
   //====================================================================================================================
   //! @}
@@ -333,9 +384,10 @@ namespace kumi
   //====================================================================================================================
   template<typename T, typename... Ts>
   requires(kumi::_::all_the_same<T, Ts...>)
-  [[nodiscard]] KUMI_ABI constexpr auto forward_as_array(Ts&&... ts) -> kumi::array<T&&, sizeof...(Ts) + 1>
+  [[nodiscard]] KUMI_ABI constexpr auto forward_as_array(T&& t, Ts&&... ts)
+    -> kumi::array<decltype(KUMI_FWD(t)), sizeof...(Ts) + 1>
   {
-    return {KUMI_FWD(ts)...};
+    return {KUMI_FWD(t), KUMI_FWD(ts)...};
   }
 
   //====================================================================================================================
@@ -422,11 +474,15 @@ namespace kumi
   requires(!kumi::concepts::empty_product_type<T>)
   [[nodiscard]] KUMI_ABI constexpr auto to_array(T&& t)
   {
-    // if constexpr (kumi::concepts::empty_product_type<T>) return kumi::array{};
-    // else
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
       return kumi::array{get<I>(KUMI_FWD(t))...};
     }(std::make_index_sequence<kumi::size_v<T>>{});
+  }
+
+  /// @overload
+  template<kumi::concepts::empty_product_type T> [[nodiscard]] KUMI_ABI constexpr auto to_array(T&&)
+  {
+    return kumi::array<>{};
   }
 
   /// @overload
@@ -435,8 +491,6 @@ namespace kumi
   requires(!kumi::concepts::product_type<S>)
   {
     constexpr std::size_t N = kumi::container_size_v<S>;
-    // if constexpr (N == 0) return kumi::array{};
-    // else
     return [&]<std::size_t... I>(std::index_sequence<I...>) {
       return kumi::array{KUMI_FWD(s)[I]...};
     }(std::make_index_sequence<N>{});
@@ -564,12 +618,15 @@ namespace kumi
   constexpr auto get(T&& r) = delete;
 #endif
 
-  // Builder protocole
+  // Builder protocol
   template<kumi::concepts::power_type T> struct builder<T>
   {
     using type = T;
 
-    template<typename... Us> using to = kumi::array<Us...>;
+    // A kumi::array is homogeneous, so rebuild it with the element type and the element count.
+    template<typename... Us>
+    requires(kumi::_::all_the_same<Us...>)
+    using to = kumi::array<kumi::element_t<0, kumi::tuple<Us...>>, sizeof...(Us)>;
 
     template<typename... Args> [[nodiscard]] KUMI_ABI static constexpr auto make(Args&&... args)
     {
@@ -583,10 +640,10 @@ namespace kumi
   };
 
   // As we are lacking a proper mechanism to find the least restrictive subtype, we fallback to a specializable trait
-  template<kumi::concepts::product_type... Ts>
-  requires(!kumi::concepts::record_type<Ts> && ...)
-  struct common_product_type<Ts...>
+  // The power_type constraint subsumes the plain product_type one (power_type <: product_type), so this
+  // specialization wins for arrays while heterogeneous tuples / records still fall back to the tuple<> one.
+  template<kumi::concepts::power_type... Ts> struct common_product_type<Ts...>
   {
-    using type = kumi::array<void>;
+    using type = kumi::array<>;
   };
 }
