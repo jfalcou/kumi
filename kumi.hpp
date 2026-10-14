@@ -32,34 +32,66 @@ namespace kumi
 #endif
 #endif
 #define KUMI_FWD(...) static_cast<decltype(__VA_ARGS__)&&>(__VA_ARGS__)
-#if defined(__CUDACC__) || defined(__NVCC__)
-#define KUMI_CUDA __host__ __device__
+#if defined(__EDG__) || defined(__EDG_VERSION__) || defined(__NVCC__)
+#define KUMI_FRONTEND_EDG 1
+#elif defined(__clang__)
+#define KUMI_FRONTEND_CLANG 1
+#elif defined(__GNUC__)
+#define KUMI_FRONTEND_GCC 1
+#elif defined(_MSC_VER)
+#define KUMI_FRONTEND_MSVC 1
+#endif
+#if defined(__HIP_PLATFORM_NVIDIA__) || defined(__HIP_PLATFORM_NVCC__)
+#define KUMI_DEVICE_NVIDIA 1
+#elif defined(__HIP__) || defined(__HIPCC__) || defined(__HIP_PLATFORM_AMD__) || defined(__HIP_PLATFORM_HCC__)
+#define KUMI_DEVICE_AMD 1
+#elif defined(__CUDACC__) || defined(__NVCC__) || defined(__CUDA__)
+#define KUMI_DEVICE_NVIDIA 1
+#endif
+#if defined(KUMI_DEVICE_NVIDIA) || defined(KUMI_DEVICE_AMD)
+#define KUMI_GPU_COMPILER 1
+#define KUMI_GPU __host__ __device__
 #else
-#define KUMI_CUDA
+#define KUMI_GPU
+#endif
+#if (defined(KUMI_DEVICE_NVIDIA) && defined(__CUDA_ARCH__)) ||                                                         \
+  (defined(KUMI_DEVICE_AMD) && defined(__HIP_DEVICE_COMPILE__))
+#define KUMI_DEVICE_PASS 1
 #endif
 #if defined(KUMI_DEBUG)
-#define KUMI_ABI KUMI_CUDA
-#elif defined(__EDG__) || defined(__EDG_VERSION__) || defined(__CUDACC__) || defined(__NVCC__)
-#define KUMI_ABI KUMI_CUDA inline
-#elif defined(__GNUC__) || defined(__clang__)
-#define KUMI_ABI [[using gnu: always_inline, flatten, artificial]] KUMI_CUDA inline
-#elif defined(_MSC_VER)
-#define KUMI_ABI [[using msvc: forceinline, flatten]] KUMI_CUDA inline
+#define KUMI_ABI KUMI_GPU
+#elif defined(KUMI_DEVICE_PASS)
+#define KUMI_ABI KUMI_GPU __forceinline__
+#elif defined(KUMI_FRONTEND_EDG)
+#define KUMI_ABI inline
+#elif defined(KUMI_FRONTEND_CLANG)
+#define KUMI_ABI [[clang::always_inline, gnu::artificial]] KUMI_GPU inline
+#elif defined(KUMI_FRONTEND_GCC)
+#define KUMI_ABI [[using gnu: always_inline, flatten, artificial]] KUMI_GPU inline
+#elif defined(KUMI_FRONTEND_MSVC)
+#define KUMI_ABI [[msvc::forceinline, msvc::flatten]] KUMI_GPU inline
 #else
-#define KUMI_ABI KUMI_CUDA inline
+#define KUMI_ABI KUMI_GPU inline
 #endif
-#define KUMI_HIDDEN_ABI KUMI_CUDA inline
-#if defined(__CUDA_ARCH__)
+#define KUMI_HIDDEN_ABI KUMI_GPU inline
+#if defined(KUMI_DEVICE_PASS)
 #define KUMI_VARIABLE_ABI __device__
 #else
 #define KUMI_VARIABLE_ABI inline
 #endif
-#if defined(__CUDA_ARCH__)
-#define KUMI_ERROR(MESSAGE) __trap()
+#if defined(KUMI_DEVICE_PASS)
+#define KUMI_ERROR(MESSAGE) __builtin_trap()
 #else
 #define KUMI_ERROR(MESSAGE) throw MESSAGE
 #endif
-#if defined(__clang__)
+#if defined(__cpp_lib_unreachable)
+#define KUMI_UNREACHABLE() std::unreachable()
+#elif defined(KUMI_FRONTEND_MSVC)
+#define KUMI_UNREACHABLE() __assume(false)
+#else
+#define KUMI_UNREACHABLE() __builtin_unreachable()
+#endif
+#if defined(KUMI_FRONTEND_CLANG)
 #pragma clang diagnostic ignored "-Wmissing-braces"
 #endif
 namespace kumi::_
@@ -68,7 +100,8 @@ namespace kumi::_
   {
     struct adl_tag_t
     {
-    } KUMI_VARIABLE_ABI constexpr adl_tag;
+    };
+    KUMI_VARIABLE_ABI constexpr adl_tag_t adl_tag;
   }
 }
 #include <cstddef>
@@ -189,35 +222,43 @@ namespace kumi::_
     template<typename T> KUMI_HIDDEN_ABI constexpr auto& operator()(std::type_identity<T>) & noexcept                  \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_TYPE_LVALUE, T)                                                                       \
+      KUMI_UNREACHABLE();                                                                                              \
     }                                                                                                                  \
     template<typename T> KUMI_HIDDEN_ABI constexpr auto&& operator()(std::type_identity<T>) && noexcept                \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_TYPE_RVALUE, T)                                                                       \
+      KUMI_UNREACHABLE();                                                                                              \
     }                                                                                                                  \
     template<typename T> KUMI_HIDDEN_ABI constexpr auto const&& operator()(std::type_identity<T>) const&& noexcept     \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_TYPE_CONST_RVALUE, T)                                                                 \
+      KUMI_UNREACHABLE();                                                                                              \
     }                                                                                                                  \
     template<typename T> KUMI_HIDDEN_ABI constexpr auto const& operator()(std::type_identity<T>) const& noexcept       \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_TYPE_LVALUE, T)                                                                       \
+      KUMI_UNREACHABLE();                                                                                              \
     }                                                                                                                  \
                                                                                                                        \
     template<kumi::_::identifier I> KUMI_HIDDEN_ABI constexpr auto& operator()(I) & noexcept                           \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_NAME_LVALUE, I)                                                                       \
+      KUMI_UNREACHABLE();                                                                                              \
     }                                                                                                                  \
     template<kumi::_::identifier I> KUMI_HIDDEN_ABI constexpr auto&& operator()(I) && noexcept                         \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_NAME_RVALUE, I)                                                                       \
+      KUMI_UNREACHABLE();                                                                                              \
     }                                                                                                                  \
     template<kumi::_::identifier I> KUMI_HIDDEN_ABI constexpr auto const&& operator()(I) const&& noexcept              \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_NAME_CONST_RVALUE, I)                                                                 \
+      KUMI_UNREACHABLE();                                                                                              \
     }                                                                                                                  \
     template<kumi::_::identifier I> KUMI_HIDDEN_ABI constexpr auto const& operator()(I) const& noexcept                \
     {                                                                                                                  \
       KUMI_PP_REPEAT(N, KUMI_GET_NAME_LVALUE, I)                                                                       \
+      KUMI_UNREACHABLE();                                                                                              \
     }                                                                                                                  \
   };
 namespace kumi::_
@@ -2814,7 +2855,8 @@ namespace kumi
     struct identity_t
     {
       template<typename T> KUMI_ABI constexpr T&& operator()(T&& t) const noexcept { return KUMI_FWD(t); }
-    } KUMI_VARIABLE_ABI constexpr identity;
+    };
+    KUMI_VARIABLE_ABI constexpr identity_t identity;
     struct max_t
     {
       template<typename T, typename U>
@@ -2823,7 +2865,8 @@ namespace kumi
       {
         return KUMI_FWD(t) > KUMI_FWD(u) ? KUMI_FWD(t) : KUMI_FWD(u);
       }
-    } KUMI_VARIABLE_ABI constexpr max;
+    };
+    KUMI_VARIABLE_ABI constexpr max_t max;
     struct min_t
     {
       template<typename T, typename U>
@@ -2832,7 +2875,8 @@ namespace kumi
       {
         return KUMI_FWD(t) < KUMI_FWD(u) ? KUMI_FWD(t) : KUMI_FWD(u);
       }
-    } KUMI_VARIABLE_ABI constexpr min;
+    };
+    KUMI_VARIABLE_ABI constexpr min_t min;
     struct adressof_t
     {
       template<typename T>
@@ -2842,7 +2886,8 @@ namespace kumi
         return &t;
       }
       template<typename T> constexpr T const* operator()(T const&&) = delete;
-    } KUMI_VARIABLE_ABI constexpr adressof;
+    };
+    KUMI_VARIABLE_ABI constexpr adressof_t adressof;
   }
   namespace _
   {
@@ -3490,7 +3535,8 @@ namespace kumi
           return kumi::capture_field<kumi::identifier_of<V>()>(kumi::invoke(f, kumi::field_value_of(KUMI_FWD(v))));
         else return kumi::invoke(f, KUMI_FWD(v));
       }
-    } KUMI_VARIABLE_ABI constexpr flatten_all_case{};
+    };
+    KUMI_VARIABLE_ABI constexpr flatten_all_case_t flatten_all_case{};
     struct flatten_case_t
     {
       template<typename T, typename V> KUMI_HIDDEN_ABI constexpr auto operator()(T&&, V&& v, auto J) const
@@ -3505,7 +3551,8 @@ namespace kumi
         else if constexpr (kumi::concepts::follows_same_semantic<T, V>) return get<J>(KUMI_FWD(v));
         else return KUMI_FWD(v);
       }
-    } KUMI_VARIABLE_ABI constexpr flatten_case{};
+    };
+    KUMI_VARIABLE_ABI constexpr flatten_case_t flatten_case{};
     template<typename T, typename V, std::size_t... J, std::size_t... I>
     KUMI_HIDDEN_ABI constexpr auto flatten_intern_(
       kumi::_::adl_tag_t, T&& t, V visitor, std::index_sequence<J...>, std::index_sequence<I...>)
