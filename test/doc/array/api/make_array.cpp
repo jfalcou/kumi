@@ -4,17 +4,12 @@
   SPDX-License-Identifier: BSL-1.0
 **/
 #include <kumi/kumi.hpp>
-#include <functional>
 #include <iostream>
 
 int main()
 {
-  int k = 99;
-  auto t = kumi::make_array( 1, 2, 3, k );
+  // The element type is deduced from the (identical) types of the arguments.
+  auto a = kumi::make_array( 1, 2, 3, 4 );
 
-  std::cout << t << "\n";
-
-  // Reference access
-  get<4>(t)++;
-  std::cout << k << "\n";
+  std::cout << a << "\n";
 }

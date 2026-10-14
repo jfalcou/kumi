@@ -12,11 +12,11 @@ int main()
 
   kumi::array a = { 1, 2, 3, 4 };
 
-  std::cout << t[0_c] << "\n";
-  std::cout << t[1_c] << "\n";
-  std::cout << t[2_c] << "\n";
+  std::cout << a[0_c] << "\n";
+  std::cout << a[1_c] << "\n";
+  std::cout << a[2_c] << "\n";
 
-  t[3_c]++;
+  a[3_c]++;
 
-  std::cout << t[kumi::index<3>] << "\n";
+  std::cout << a[kumi::index<3>] << "\n";
 }
