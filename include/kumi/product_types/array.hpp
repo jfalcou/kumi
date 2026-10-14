@@ -177,83 +177,89 @@ namespace kumi
     }
 
     //==================================================================================================================
-    /**
-      @name Comparison operators
-      @{
-    **/
-    //==================================================================================================================
-
-    /// @brief Compares a array with an other for equality
-    template<typename U, std::size_t M>
-    KUMI_ABI friend constexpr auto operator==(array const& self, array<U, M> const& other) noexcept
-#ifndef KUMI_DOXYGEN_INVOKED
-    requires(kumi::_::comparable<T, U> && N == M)
-#endif
-    {
-      return kumi::_::compare(self, other, std::make_index_sequence<N>{});
-    }
-
-    /// @brief Compares a array with an other for inequality
-    template<typename U, std::size_t M>
-    KUMI_ABI friend constexpr auto operator!=(array const& self, array<U, M> const& other) noexcept
-#ifndef KUMI_DOXYGEN_INVOKED
-    requires(kumi::_::comparable<T, U> && N == M)
-#endif
-    {
-      return !(self == other);
-    }
-
-    /// @brief Compares arrays for lexicographical is less relation
-    /// @note This function does not participate in overload resolution if the array are not lexicographically ordered
-    template<typename U, std::size_t M>
-    KUMI_ABI friend constexpr auto operator<(array const& lhs, array<U, M> const& rhs) noexcept
-#ifndef KUMI_DOXYGEN_INVOKED
-    requires(kumi::_::comparable<T, U> && N == M)
-#endif
-    {
-      return kumi::_::lexicographic_compare(lhs, rhs, std::make_index_sequence<N>{});
-    }
-
-    /// @brief Compares arrays for lexicographical is less or equal relation
-    template<typename U, std::size_t M>
-    KUMI_ABI friend constexpr auto operator<=(array const& lhs, array<U, M> const& rhs) noexcept
-    requires requires { rhs < lhs; }
-    {
-      return !(rhs < lhs);
-    }
-
-    /// @brief Compares arrays for lexicographical is greater relation
-    template<typename U, std::size_t M>
-    KUMI_ABI friend constexpr auto operator>(array const& lhs, array<U, M> const& rhs) noexcept
-    requires requires { rhs < lhs; }
-    {
-      return rhs < lhs;
-    }
-
-    /// @brief Compares arrays for lexicographical is greater or equal relation
-    template<typename U, std::size_t M>
-    KUMI_ABI friend constexpr auto operator>=(array const& lhs, array<U, M> const& rhs) noexcept
-    requires requires { lhs < rhs; }
-    {
-      return !(lhs < rhs);
-    }
-
-    //==================================================================================================================
     //! @}
     //==================================================================================================================
-
-    //==================================================================================================================
-    /**
-      @related kumi::array
-      @brief Inserts a kumi::array in an output stream
-    **/
-    //==================================================================================================================
-    template<typename CharT, typename Traits>
-    friend std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, array const& a) noexcept
-    {
-      return kumi::_::print(os, a, '[', ',', ']', std::make_index_sequence<N - 1>{});
-    }
   };
+
+  //====================================================================================================================
+  /**
+    @name Comparison operators
+    @related kumi::array
+    @{
+  **/
+  //====================================================================================================================
+
+  /// @brief Compares an array with another for equality
+  template<typename T, std::size_t N, typename U, std::size_t M>
+  KUMI_ABI constexpr auto operator==(array<T, N> const& self, array<U, M> const& other) noexcept
+#ifndef KUMI_DOXYGEN_INVOKED
+  requires(N > 0) && (kumi::_::comparable<T, U> && N == M)
+#endif
+  {
+    return kumi::_::compare(self, other, std::make_index_sequence<N>{});
+  }
+
+  /// @brief Compares an array with another for inequality
+  template<typename T, std::size_t N, typename U, std::size_t M>
+  KUMI_ABI constexpr auto operator!=(array<T, N> const& self, array<U, M> const& other) noexcept
+#ifndef KUMI_DOXYGEN_INVOKED
+  requires(N > 0) && (kumi::_::comparable<T, U> && N == M)
+#endif
+  {
+    return !(self == other);
+  }
+
+  /// @brief Compares arrays for the lexicographical less-than relation
+  /// @note This function does not participate in overload resolution if the arrays are not lexicographically ordered
+  template<typename T, std::size_t N, typename U, std::size_t M>
+  KUMI_ABI constexpr auto operator<(array<T, N> const& lhs, array<U, M> const& rhs) noexcept
+#ifndef KUMI_DOXYGEN_INVOKED
+  requires(N > 0) && (kumi::_::comparable<T, U> && N == M)
+#endif
+  {
+    return kumi::_::lexicographic_compare(lhs, rhs, std::make_index_sequence<N>{});
+  }
+
+  /// @brief Compares arrays for the lexicographical less-than-or-equal relation
+  template<typename T, std::size_t N, typename U, std::size_t M>
+  KUMI_ABI constexpr auto operator<=(array<T, N> const& lhs, array<U, M> const& rhs) noexcept
+  requires requires { rhs < lhs; }
+  {
+    return !(rhs < lhs);
+  }
+
+  /// @brief Compares arrays for the lexicographical greater-than relation
+  template<typename T, std::size_t N, typename U, std::size_t M>
+  KUMI_ABI constexpr auto operator>(array<T, N> const& lhs, array<U, M> const& rhs) noexcept
+  requires requires { rhs < lhs; }
+  {
+    return rhs < lhs;
+  }
+
+  /// @brief Compares arrays for the lexicographical greater-than-or-equal relation
+  template<typename T, std::size_t N, typename U, std::size_t M>
+  KUMI_ABI constexpr auto operator>=(array<T, N> const& lhs, array<U, M> const& rhs) noexcept
+  requires requires { lhs < rhs; }
+  {
+    return !(lhs < rhs);
+  }
+
+  //====================================================================================================================
+  //! @}
+  //====================================================================================================================
+
+  //====================================================================================================================
+  /**
+    @related kumi::array
+    @brief Inserts a kumi::array in an output stream
+  **/
+  //====================================================================================================================
+  template<typename CharT, typename Traits, typename T, std::size_t N>
+  requires(N > 0)
+  std::basic_ostream<CharT, Traits>& operator<<(std::basic_ostream<CharT, Traits>& os, array<T, N> const& a) noexcept
+  {
+    return kumi::_::print(os, a, '[', ',', ']', std::make_index_sequence<N - 1>{});
+  }
 
   //====================================================================================================================
   // Empty power type: array<T, 0> — a power type of a known element type with arity zero (τ⁰ of T).
@@ -414,7 +420,7 @@ namespace kumi
   {
     template<kumi::concepts::power_type T, std::size_t... I>
     KUMI_HIDDEN_ABI constexpr auto to_ref_(kumi::_::adl_tag_t, T&& t, std::index_sequence<I...>)
-      -> kumi::array<kumi::element_t<0, T>, sizeof...(I)>
+      -> kumi::array<kumi::member_t<0, T>, sizeof...(I)>
     {
       return {get<I>(KUMI_FWD(t))...};
     }
@@ -619,23 +625,58 @@ namespace kumi
 #endif
 
   // Builder protocol
+  // Helper to compute the rebuilt homogeneous array from a pack, preserving the source element type
+  // for the (empty) case where no element is supplied.
+  namespace _
+  {
+    // Compute the element type of the rebuilt array: the first (decayed) supplied type for a non-empty
+    // pack (they are all the same), or the source element type for an empty pack.
+    template<typename Elem, typename... Ts> struct array_elem
+    {
+      using type = Elem;
+    };
+
+    template<typename Elem, typename T0, typename... Ts> struct array_elem<Elem, T0, Ts...>
+    {
+      using type = std::remove_cvref_t<T0>;
+    };
+
+    template<typename Elem, typename... Ts> struct array_to
+    {
+      using type = kumi::array<typename kumi::_::array_elem<Elem, Ts...>::type, sizeof...(Ts)>;
+    };
+  }
+
   template<kumi::concepts::power_type T> struct builder<T>
   {
     using type = T;
 
+    // Rebuild an array from the source array element type and the supplied count.
+    // The element type is deduced from the supplied arguments when they are homogeneous (the normal
+    // rebuild case, possibly after an element-type transformation such as map or as_flat_ptr), and
+    // falls back to the source element type for the (empty) case.
+    using source_t = std::remove_cvref_t<T>;
+    using elem_t = typename source_t::value_type;
+
     // A kumi::array is homogeneous, so rebuild it with the element type and the element count.
     template<typename... Us>
-    requires(kumi::_::all_the_same<Us...>)
-    using to = kumi::array<kumi::element_t<0, kumi::tuple<Us...>>, sizeof...(Us)>;
+    requires(sizeof...(Us) == 0 || kumi::_::all_the_same<std::decay_t<Us>...>)
+    using to = typename kumi::_::array_to<elem_t, Us...>::type;
 
-    template<typename... Args> [[nodiscard]] KUMI_ABI static constexpr auto make(Args&&... args)
+    template<typename... Args>
+    requires(sizeof...(Args) == 0 || kumi::_::all_the_same<std::decay_t<Args>...>)
+    [[nodiscard]] KUMI_ABI static constexpr auto make(Args&&... args)
     {
-      return kumi::make_array(KUMI_FWD(args)...);
+      using out_t = kumi::array<typename kumi::_::array_elem<elem_t, std::decay_t<Args>...>::type, sizeof...(Args)>;
+      return out_t{KUMI_FWD(args)...};
     }
 
-    template<typename... Args> [[nodiscard]] KUMI_ABI static constexpr auto build(Args&&... args)
+    template<typename... Args>
+    requires(sizeof...(Args) == 0 || kumi::_::all_the_same<std::decay_t<Args>...>)
+    [[nodiscard]] KUMI_ABI static constexpr auto build(Args&&... args)
     {
-      return kumi::array{KUMI_FWD(args)...};
+      using out_t = kumi::array<typename kumi::_::array_elem<elem_t, std::decay_t<Args>...>::type, sizeof...(Args)>;
+      return out_t{KUMI_FWD(args)...};
     }
   };
 
