@@ -6,8 +6,8 @@
 ## Read by copacabana's matrix.yml: kumi inside real kernels, on the card the runner carries.
 runs-on: cuda
 configs: [Debug, Release]
-build-targets: cuda.exe
-test-targets: cuda
+build-targets: device.exe
+test-targets: device
 rows:
   - { preset: "clang-cuda"   }
   - { preset: "nvcc"         }

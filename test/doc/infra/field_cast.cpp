@@ -12,9 +12,9 @@ int main()
 
   auto field = ( "x"_id = 'x' ); 
   
-  auto caster = ( "y"_id = 1 );
+  using caster_t = decltype( "y"_id = 1 );
 
   std::cout << field << "\n";
   std::cout << kumi::field_cast<int>(field) << "\n";
-  std::cout << kumi::field_cast<decltype(caster)>(field) << "\n";
+  std::cout << kumi::field_cast<caster_t>(field) << "\n";
 }

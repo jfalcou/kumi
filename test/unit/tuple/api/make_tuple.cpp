@@ -12,11 +12,11 @@
 
 TTS_CASE("Check tuple_element of kumi::tuple")
 {
-  auto made = kumi::make_tuple('1', 2., 3.f);
+  using made = decltype(kumi::make_tuple('1', 2., 3.f));
 
-  TTS_TYPE_IS((std::tuple_element_t<0, decltype(made)>), char);
-  TTS_TYPE_IS((std::tuple_element_t<1, decltype(made)>), double);
-  TTS_TYPE_IS((std::tuple_element_t<2, decltype(made)>), float);
+  TTS_TYPE_IS((std::tuple_element_t<0, made>), char);
+  TTS_TYPE_IS((std::tuple_element_t<1, made>), double);
+  TTS_TYPE_IS((std::tuple_element_t<2, made>), float);
 };
 
 TTS_CASE("Check construction of kumi::tuple via make_tuple")
@@ -29,6 +29,7 @@ TTS_CASE("Check construction of kumi::tuple via make_tuple")
 
   TTS_CONSTEXPR_EXPECT((kumi::concepts::sized_product_type<decltype(t0), 0>));
   TTS_EQUAL(t0.size(), 0ULL);
+  TTS_EXPECT_NOT_COMPILES(t0, { kumi::get<1>(t0); });
 
   TTS_CONSTEXPR_EXPECT((kumi::concepts::sized_product_type<decltype(t1), 1>));
   TTS_EQUAL(t1.size(), 1ULL);

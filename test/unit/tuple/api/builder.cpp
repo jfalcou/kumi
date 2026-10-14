@@ -44,39 +44,39 @@ TTS_CASE("Check tuple_element of the output of result::builder_make_t")
 
 TTS_CASE("Check tuple_element of the output of builder")
 {
-  auto tpl = kumi::builder<kumi::tuple<char, float>>::make('1', 2., 3.f);
-  TTS_TYPE_IS((decltype(tpl)), (kumi::tuple<char, double, float>));
-  TTS_TYPE_IS((std::tuple_element_t<0, decltype(tpl)>), char);
-  TTS_TYPE_IS((std::tuple_element_t<1, decltype(tpl)>), double);
-  TTS_TYPE_IS((std::tuple_element_t<2, decltype(tpl)>), float);
+  using tpl = decltype(kumi::builder<kumi::tuple<char, float>>::make('1', 2., 3.f));
+  TTS_TYPE_IS((tpl), (kumi::tuple<char, double, float>));
+  TTS_TYPE_IS((std::tuple_element_t<0, tpl>), char);
+  TTS_TYPE_IS((std::tuple_element_t<1, tpl>), double);
+  TTS_TYPE_IS((std::tuple_element_t<2, tpl>), float);
 
-  auto arr = kumi::builder<std::array<int, 5>>::make(1, 2, 3, 4, 5);
-  TTS_TYPE_IS((decltype(arr)), (kumi::tuple<int, int, int, int, int>));
-  TTS_TYPE_IS((std::tuple_element_t<0, decltype(arr)>), int);
-  TTS_TYPE_IS((std::tuple_element_t<1, decltype(arr)>), int);
-  TTS_TYPE_IS((std::tuple_element_t<2, decltype(arr)>), int);
-  TTS_TYPE_IS((std::tuple_element_t<3, decltype(arr)>), int);
-  TTS_TYPE_IS((std::tuple_element_t<4, decltype(arr)>), int);
+  using arr = decltype(kumi::builder<std::array<int, 5>>::make(1, 2, 3, 4, 5));
+  TTS_TYPE_IS((arr), (kumi::tuple<int, int, int, int, int>));
+  TTS_TYPE_IS((std::tuple_element_t<0, arr>), int);
+  TTS_TYPE_IS((std::tuple_element_t<1, arr>), int);
+  TTS_TYPE_IS((std::tuple_element_t<2, arr>), int);
+  TTS_TYPE_IS((std::tuple_element_t<3, arr>), int);
+  TTS_TYPE_IS((std::tuple_element_t<4, arr>), int);
 
-  auto pt = kumi::builder<tuple_box>::make(kumi::str{"Cain"}, 1, 2, 3.0f);
-  TTS_TYPE_IS((decltype(pt)), (kumi::tuple<kumi::str<4>, int, int, float>));
-  TTS_TYPE_IS((std::tuple_element_t<0, decltype(pt)>), kumi::str<4>);
-  TTS_TYPE_IS((std::tuple_element_t<1, decltype(pt)>), int);
-  TTS_TYPE_IS((std::tuple_element_t<2, decltype(pt)>), int);
-  TTS_TYPE_IS((std::tuple_element_t<3, decltype(pt)>), float);
+  using pt = decltype(kumi::builder<tuple_box>::make(kumi::str{"Cain"}, 1, 2, 3.0f));
+  TTS_TYPE_IS((pt), (kumi::tuple<kumi::str<4>, int, int, float>));
+  TTS_TYPE_IS((std::tuple_element_t<0, pt>), kumi::str<4>);
+  TTS_TYPE_IS((std::tuple_element_t<1, pt>), int);
+  TTS_TYPE_IS((std::tuple_element_t<2, pt>), int);
+  TTS_TYPE_IS((std::tuple_element_t<3, pt>), float);
 
-  auto tpt = kumi::builder<trivial_product_type<int, true>>::make(kumi::str{"Cain"}, 1, 2, 3.0f);
-  TTS_TYPE_IS((decltype(tpt)), (kumi::tuple<kumi::str<4>, int, int, float>));
-  TTS_TYPE_IS((std::tuple_element_t<0, decltype(tpt)>), kumi::str<4>);
-  TTS_TYPE_IS((std::tuple_element_t<1, decltype(tpt)>), int);
-  TTS_TYPE_IS((std::tuple_element_t<2, decltype(tpt)>), int);
-  TTS_TYPE_IS((std::tuple_element_t<3, decltype(tpt)>), float);
+  using tpt = decltype(kumi::builder<trivial_product_type<int, true>>::make(kumi::str{"Cain"}, 1, 2, 3.0f));
+  TTS_TYPE_IS((tpt), (kumi::tuple<kumi::str<4>, int, int, float>));
+  TTS_TYPE_IS((std::tuple_element_t<0, tpt>), kumi::str<4>);
+  TTS_TYPE_IS((std::tuple_element_t<1, tpt>), int);
+  TTS_TYPE_IS((std::tuple_element_t<2, tpt>), int);
+  TTS_TYPE_IS((std::tuple_element_t<3, tpt>), float);
 
-  auto nt = kumi::builder<kumi::tuple<>>::make(kumi::tuple{1});
-  TTS_TYPE_IS((decltype(nt)), (kumi::tuple<kumi::tuple<int>>));
+  using nt = decltype(kumi::builder<kumi::tuple<>>::make(kumi::tuple{1}));
+  TTS_TYPE_IS((nt), (kumi::tuple<kumi::tuple<int>>));
 
-  auto ft = kumi::builder<kumi::tuple<>>::build(kumi::tuple{1});
-  TTS_TYPE_IS((decltype(ft)), (kumi::tuple<int>));
+  using ft = decltype(kumi::builder<kumi::tuple<>>::build(kumi::tuple{1}));
+  TTS_TYPE_IS((ft), (kumi::tuple<int>));
 };
 
 TTS_CASE("Check constexpr tuple_element of the output of builder")

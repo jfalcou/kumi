@@ -20,14 +20,14 @@ TTS_CASE("Check result::map<F,Record...> behavior")
   using double_f = kumi::field<kumi::name<"d">, double>;
   using float_f = kumi::field<kumi::name<"d">, float>;
 
-  auto lambda = [](auto const& m) { return &m; };
-  using func_t = decltype(lambda);
+  [[maybe_unused]] auto func = [](auto const& m) { return &m; };
+  using func_t = decltype(func);
 
   TTS_TYPE_IS((kumi::result::map_t<func_t, kumi::record<char_f, short_f, int_f, double_f>>),
               (kumi::record<kumi::field<kumi::name<"a">, char const*>, kumi::field<kumi::name<"b">, short const*>,
                             kumi::field<kumi::name<"c">, int const*>, kumi::field<kumi::name<"d">, double const*>>));
 
-  auto add = [](auto a, auto b) { return a + b; };
+  [[maybe_unused]] auto add = [](auto a, auto b) { return a + b; };
   using add_t = decltype(add);
 
   TTS_TYPE_IS((kumi::result::map_t<add_t, kumi::record<char_f, short_f, int_f, double_f>,
@@ -39,7 +39,7 @@ TTS_CASE("Check result::map<F,Record...> behavior")
 TTS_CASE("Check map(f, {}) behavior")
 {
   bool was_run = false;
-  auto s = kumi::map(
+  [[maybe_unused]] auto s = kumi::map(
     [&](auto m) {
       was_run = true;
       return sizeof(m);
