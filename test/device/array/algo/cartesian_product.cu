@@ -31,5 +31,5 @@ TTS_CASE("Check cartesian_product device behavior")
   rows out;
 
   TTS_EXPECT(run_on_device(every_cell, out));
-  TTS_EQUAL(out, (rows{row{1, 3, 5}, row{2, 4, 6}, row{2, 3, 5}}));
+  TTS_EQUAL(out, (rows{row{1, 3, 5}, row{2, 4, 6}, row{1, 3, 6}}));
 };

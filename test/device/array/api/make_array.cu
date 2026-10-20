@@ -17,7 +17,7 @@ namespace
 
   __global__ void make_and_read(made* out)
   {
-    auto t = kumi::make_array(1, 2, 3);
+    auto t = kumi::make_array(1ULL, 2ULL, 3ULL);
     *out = {t.size(), kumi::get<0>(t), kumi::get<1>(t), kumi::get<2>(t)};
   }
 
@@ -34,7 +34,7 @@ namespace
   {
     constexpr auto t = kumi::make_array(1, 2, 3);
     static_assert(kumi::get<2>(kumi::make_array(1, 2, 3)) == 3);
-    *out = {t.size(), kumi::get<0>(t)};
+    *out = {t.size(), static_cast<std::size_t>(kumi::get<0>(t))};
   }
 }
 

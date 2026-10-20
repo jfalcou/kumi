@@ -22,7 +22,8 @@ namespace
     auto f0 = kumi::array{9, 1, 7, 4};
     auto size = [](auto m) { return sizeof(m); };
 
-    *out = {kumi::max(t0), kumi::max(t0, size), kumi::max(f0, size), kumi::max_flat(f0, size)};
+    *out = {static_cast<std::size_t>(kumi::max(t0)), kumi::max(t0, size), kumi::max(f0, size),
+            kumi::max_flat(f0, size)};
   }
 }
 

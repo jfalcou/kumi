@@ -35,6 +35,16 @@ TTS_CASE("Check EBO behavior of kumi::array construction")
   [[maybe_unused]] auto s6 = std::tuple<int, int>{};
   [[maybe_unused]] auto s7 = std::tuple<empty, empty, empty, empty, empty, empty, empty>{};
 
+#if defined(_MSC_VER)
+  TTS_EQUAL(sizeof(k0), sizeof(s0));
+  TTS_EQUAL(sizeof(k1), sizeof(s1));
+  TTS_EQUAL(sizeof(k2), sizeof(s2) - 1); // k2 should be optimized
+  TTS_EQUAL(sizeof(k3), sizeof(s3) - 1);
+  TTS_EQUAL(sizeof(k4), sizeof(s4) - 1);
+  TTS_EQUAL(sizeof(k5), sizeof(s5));
+  TTS_EQUAL(sizeof(k6), sizeof(s6));
+  TTS_EQUAL(sizeof(k7), sizeof(s7) - 1);
+#else
   TTS_EQUAL(sizeof(k0), sizeof(s0));
   TTS_EQUAL(sizeof(k1), sizeof(s1));
   TTS_EQUAL(sizeof(k2), sizeof(s2));
@@ -43,4 +53,5 @@ TTS_CASE("Check EBO behavior of kumi::array construction")
   TTS_EQUAL(sizeof(k5), sizeof(s5));
   TTS_EQUAL(sizeof(k6), sizeof(s6));
   TTS_EQUAL(sizeof(k7), sizeof(s7));
+#endif
 };

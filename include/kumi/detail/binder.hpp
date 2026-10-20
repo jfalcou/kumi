@@ -102,6 +102,7 @@ namespace kumi::_
   // Specific case for a single type
   template<std::size_t... Is, typename T> struct binder<std::index_sequence<Is...>, T> : kumi::_::leaf<Is, T>...
   {
+    static constexpr bool is_homogeneous = true;
     using kumi::_::leaf<Is, T>::operator()...;
   };
 
