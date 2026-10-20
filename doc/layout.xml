@@ -22,6 +22,7 @@
       <tab type="usergroup" visible="yes"   title="Types" url="@ref kumi_tuple_related">
         <tab type="user" url="@ref kumi_tuple_related"   title="Product Types and Functions"/>
         <tab type="user" url="@ref kumi_record_related"  title="Record Types and Functions"/>
+        <tab type="user" url="@ref kumi_array_related"  title="Power Types and Functions"/>
         <tab type="user" url="@ref kumi_types"   title="Types"/>
       </tab>
       <tab type="usergroup" visible="yes" title="Algorithms" url="@ref kumi_transforms">

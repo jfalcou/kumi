@@ -88,7 +88,7 @@ namespace kumi
     }
     @endcode
     ## Example:
-    @include doc/power/api/adapt.cpp
+    @include doc/array/api/adapt.cpp
   **/
   //====================================================================================================================
   template<typename T>

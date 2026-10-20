@@ -19,6 +19,9 @@ namespace kumi
 
     @defgroup kumi_record_related Record Types and associated Functions
     @brief    Definitions of kumi::record and associated functions
+
+    @defgroup kumi_array_related Power Types and associated Functions
+    @brief    Definitions of kumi::array and associated functions
   **/
   //====================================================================================================================
 }

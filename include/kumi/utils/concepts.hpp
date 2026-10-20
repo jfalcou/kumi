@@ -107,8 +107,6 @@ namespace kumi
 
       ## Example types:
       + kumi::array<...>;
-
-      @see @ref kumi_power_type
     **/
     //==================================================================================================================
     template<typename T>
