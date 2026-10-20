@@ -15,7 +15,7 @@
 namespace
 {
   using pair = kumi::array<int, 2>;
-  using zipped = kumi::array<pair, 4>;
+  using zipped = kumi::tuple<pair, pair, pair, pair>;
 
   __global__ void pairs(zipped* out)
   {
