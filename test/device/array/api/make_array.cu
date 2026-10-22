@@ -34,7 +34,7 @@ namespace
   {
     constexpr auto t = kumi::make_array(1, 2, 3);
     static_assert(kumi::get<2>(kumi::make_array(1, 2, 3)) == 3);
-    *out = {t.size(), kumi::get<0>(t)};
+    *out = {t.size(), static_cast<std::size_t>(kumi::get<0>(t))};
   }
 }
 
