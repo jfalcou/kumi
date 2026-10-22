@@ -16,7 +16,7 @@ namespace kumi::_
   template<std::size_t I, typename T> extern kumi::_::undefined<T> tuple_element;
 
   template<template<class...> class Box, typename Head, typename... Tail>
-  extern Head tuple_element<0, Box<Head, Tail...>>;
+  extern std::type_identity<Head> tuple_element<0, Box<Head, Tail...>>;
 
   template<std::size_t I, template<class...> typename Box, typename Head, typename... Tail>
   extern decltype(kumi::_::tuple_element<I - 1, Box<Tail...>>) tuple_element<I, Box<Head, Tail...>>;
@@ -31,7 +31,7 @@ namespace kumi::_
 template<std::size_t I, typename... Ts> struct std::tuple_element<I, kumi::tuple<Ts...>>
 {
   static_assert(I < sizeof...(Ts), "[KUMI] - Tuple index must be in range");
-  using type = decltype(kumi::_::tuple_element<I, kumi::tuple<Ts...>>);
+  using type = typename decltype(kumi::_::tuple_element<I, kumi::tuple<Ts...>>)::type;
 };
 
 template<typename... Ts> struct std::tuple_size<kumi::tuple<Ts...>> : std::integral_constant<std::size_t, sizeof...(Ts)>
@@ -44,7 +44,7 @@ template<typename... Ts> struct std::tuple_size<kumi::tuple<Ts...>> : std::integ
 template<std::size_t I, typename... Ts> struct std::tuple_element<I, kumi::record<Ts...>>
 {
   static_assert(I < sizeof...(Ts), "[KUMI] - Record index must be in range");
-  using type = decltype(kumi::_::tuple_element<I, kumi::record<Ts...>>);
+  using type = typename decltype(kumi::_::tuple_element<I, kumi::record<Ts...>>)::type;
 };
 
 template<typename... Ts>
@@ -53,7 +53,26 @@ struct std::tuple_size<kumi::record<Ts...>> : std::integral_constant<std::size_t
 };
 
 //======================================================================================================================
-// Adaptation of unit to the tuple protocol
+// Structured binding adaptation for arrays
+//======================================================================================================================
+template<std::size_t I, typename T, std::size_t N> struct std::tuple_element<I, kumi::array<T, N>>
+{
+  static_assert(I < N, "[KUMI] - Array index must be in range");
+  using type = T;
+};
+
+template<std::size_t I, typename T, std::size_t N> struct std::tuple_element<I, kumi::array<T, N> const>
+{
+  static_assert(I < N, "[KUMI] - Array index must be in range");
+  using type = T const;
+};
+
+template<typename T, std::size_t N> struct std::tuple_size<kumi::array<T, N>> : std::integral_constant<std::size_t, N>
+{
+};
+
+//======================================================================================================================
+// Structured binding adaptation for unit
 //======================================================================================================================
 template<> struct std::tuple_size<kumi::unit> : std::integral_constant<std::size_t, 0>
 {
