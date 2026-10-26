@@ -21,8 +21,6 @@ if(CMAKE_CUDA_COMPILER_ID MATCHES "NVIDIA")
   target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CUDA>:-Wno-deprecated-literal-operator --expt-relaxed-constexpr> )
 endif()
 
-# The HIP compiler is a clang frontend: same host options as the Clang branch above, applied to the
-# HIP compile language. The architecture comes from CMAKE_HIP_ARCHITECTURES, which CMake passes on its own.
 if(CMAKE_HIP_COMPILER_ID MATCHES "Clang")
   target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:HIP>:-std=c++20 ${KUMI_WARNINGS} -Wextra-semi> )
 endif()

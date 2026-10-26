@@ -15,7 +15,7 @@ if(DEFINED CMAKE_HIP_COMPILER)
 endif()
 
 ##======================================================================================================================
-
+## Retrieve dependencies
 ##======================================================================================================================
 include(${PROJECT_SOURCE_DIR}/cmake/dependencies.cmake)
 
@@ -31,10 +31,6 @@ copa_add_option(KUMI_ENABLE_SANITIZERS "Build tests with AddressSanitizer + Unde
 copa_add_option(KUMI_ENABLE_COVERAGE "Build tests with code coverage instrumentation" OFF LABEL "Coverage")
 copa_add_option(KUMI_COMPILE_COST "Measure what every test unit costs to compile" OFF)
 
-if(KUMI_BUILD_TEST)
-  CPMGetPackage(TTS)
-  include(${PROJECT_SOURCE_DIR}/cmake/compiler.cmake)
-endif()
 copa_project_version(MAJOR 5 MINOR 0 PATCH 0 REPOSITORY https://github.com/jfalcou/kumi)
 
 ##======================================================================================================================
@@ -89,6 +85,9 @@ copa_setup_standalone ( QUIET
 ## Tests setup
 ##======================================================================================================================
 if(KUMI_BUILD_TEST)
+  CPMGetPackage(TTS)
+  include(${PROJECT_SOURCE_DIR}/cmake/compiler.cmake)
+
   if(KUMI_ENABLE_SANITIZERS)
     copa_setup_sanitizers(kumi_opts ENABLE_ASAN ENABLE_UBSAN)
   endif()
