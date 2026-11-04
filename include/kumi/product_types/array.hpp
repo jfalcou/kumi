@@ -127,27 +127,21 @@ namespace kumi
       @include doc/array/api/soa.cpp
     **/
     //==================================================================================================================
-    template<typename U, std::size_t M>
-    [[nodiscard]] KUMI_ABI
-#ifndef KUMI_DOXYGEN_INVOKED
-      explicit(!std::convertible_to<T const&, U>)
-#endif
-        constexpr operator array<U, M>() const noexcept(std::is_nothrow_constructible_v<U, T const&>)
-    requires(N == M) && (!std::same_as<array<T, N>, array<U, M>>) && (std::is_constructible_v<U, T const&>)
+    template<typename U>
+    KUMI_ABI explicit(!std::convertible_to<T const&, U>) constexpr operator array<U, N>() const
+      noexcept(std::is_nothrow_constructible_v<U, T const&>)
+    requires(!std::same_as<T, U>) && (std::is_constructible_v<U, T const&>)
     {
-      return kumi::_::static_cast_<array<U, M>>(*this, std::make_index_sequence<N>{});
+      return kumi::_::static_cast_<array<U, N>>(*this, std::make_index_sequence<N>{});
     }
 
     /// @overload
-    template<typename U, std::size_t M>
-    [[nodiscard]] KUMI_ABI
-#ifndef KUMI_DOXYGEN_INVOKED
-      explicit(!std::convertible_to<T&, U>)
-#endif
-        constexpr operator array<U, M>() noexcept(std::is_nothrow_constructible_v<U, T&>)
-    requires(N == M) && (!std::same_as<array<T, N>, array<U, M>>) && (std::is_constructible_v<U, T&>)
+    template<typename U>
+    KUMI_ABI explicit(!std::convertible_to<T&, U>) constexpr operator array<U, N>()
+      noexcept(std::is_nothrow_constructible_v<U, T&>)
+    requires(!std::same_as<T, U>) && (std::is_constructible_v<U, T&>)
     {
-      return kumi::_::static_cast_<array<U, M>>(*this, std::make_index_sequence<N>{});
+      return kumi::_::static_cast_<array<U, N>>(*this, std::make_index_sequence<N>{});
     }
 
     //==================================================================================================================
@@ -164,25 +158,20 @@ namespace kumi
             be converted to the members of the current array.
     **/
     //==================================================================================================================
-    template<typename U, std::size_t M>
-    KUMI_ABI constexpr array& operator=(array<U, M> const& other)
-      noexcept(N == M && std::is_nothrow_assignable_v<T&, U const&>)
-#ifndef KUMI_DOXYGEN_INVOKED
-    requires(kumi::_::piecewise_assignable<array<U, M>, array<T, N>>)
-#endif
+    template<typename U>
+    KUMI_ABI constexpr array& operator=(array<U, N> const& other) noexcept(std::is_nothrow_assignable_v<T&, U const&>)
+    requires(std::is_assignable_v<T&, U const&>)
     {
       kumi::_::assign(*this, other, std::make_index_sequence<N>{});
       return *this;
     }
 
     /// @overload
-    template<typename U, std::size_t M>
-    KUMI_ABI constexpr array& operator=(array<U, M>&& other) noexcept(N == M && std::is_nothrow_assignable_v<T&, U&&>)
-#ifndef KUMI_DOXYGEN_INVOKED
-    requires(kumi::_::piecewise_move_assignable<array<U, M>, array<T, N>>)
-#endif
+    template<typename U>
+    KUMI_ABI constexpr array& operator=(array<U, N>&& other) noexcept(std::is_nothrow_assignable_v<T&, U&&>)
+    requires(std::is_assignable_v<T&, U&&>)
     {
-      kumi::_::assign(*this, other, std::make_index_sequence<N>{});
+      kumi::_::assign(*this, std::move(other), std::make_index_sequence<N>{});
       return *this;
     }
 
@@ -210,21 +199,21 @@ namespace kumi
   //====================================================================================================================
 
   /// @brief Compares an array with another for equality
-  template<typename T, std::size_t N, typename U, std::size_t M>
-  KUMI_ABI constexpr auto operator==(array<T, N> const& self, array<U, M> const& other) noexcept
+  template<typename T, typename U, std::size_t N>
+  KUMI_ABI constexpr auto operator==(array<T, N> const& self, array<U, N> const& other) noexcept
 #ifndef KUMI_DOXYGEN_INVOKED
-  requires(N == 0 || M == 0) || (N == M && kumi::_::comparable<T, U>)
+  requires(N == 0) || (kumi::_::comparable<T, U>)
 #endif
   {
-    if constexpr (N == 0 || M == 0) return N == M;
+    if constexpr (N == 0) return true;
     else return kumi::_::compare(self, other, std::make_index_sequence<N>{});
   }
 
   /// @brief Compares an array with another for inequality
-  template<typename T, std::size_t N, typename U, std::size_t M>
-  KUMI_ABI constexpr auto operator!=(array<T, N> const& self, array<U, M> const& other) noexcept
+  template<typename T, typename U, std::size_t N>
+  KUMI_ABI constexpr auto operator!=(array<T, N> const& self, array<U, N> const& other) noexcept
 #ifndef KUMI_DOXYGEN_INVOKED
-  requires(N == 0 || M == 0) || (N == M && kumi::_::comparable<T, U>)
+  requires(N == 0) || (kumi::_::comparable<T, U>)
 #endif
   {
     return !(self == other);
@@ -232,35 +221,35 @@ namespace kumi
 
   /// @brief Compares arrays for the lexicographical less-than relation
   /// @note This function does not participate in overload resolution if the arrays are not lexicographically ordered
-  template<typename T, std::size_t N, typename U, std::size_t M>
-  KUMI_ABI constexpr auto operator<(array<T, N> const& lhs, array<U, M> const& rhs) noexcept
+  template<typename T, typename U, std::size_t N>
+  KUMI_ABI constexpr auto operator<(array<T, N> const& lhs, array<U, N> const& rhs) noexcept
 #ifndef KUMI_DOXYGEN_INVOKED
-  requires(N == 0 || M == 0) || (N == M && kumi::_::comparable<T, U>)
+  requires(N == 0) || (kumi::_::comparable<T, U>)
 #endif
   {
-    if constexpr (N == 0 || M == 0) return N < M;
+    if constexpr (N == 0) return false;
     else return kumi::_::lexicographic_compare(lhs, rhs, std::make_index_sequence<N>{});
   }
 
   /// @brief Compares arrays for the lexicographical less-than-or-equal relation
-  template<typename T, std::size_t N, typename U, std::size_t M>
-  KUMI_ABI constexpr auto operator<=(array<T, N> const& lhs, array<U, M> const& rhs) noexcept
+  template<typename T, typename U, std::size_t N>
+  KUMI_ABI constexpr auto operator<=(array<T, N> const& lhs, array<U, N> const& rhs) noexcept
   requires requires { rhs < lhs; }
   {
     return !(rhs < lhs);
   }
 
   /// @brief Compares arrays for the lexicographical greater-than relation
-  template<typename T, std::size_t N, typename U, std::size_t M>
-  KUMI_ABI constexpr auto operator>(array<T, N> const& lhs, array<U, M> const& rhs) noexcept
+  template<typename T, typename U, std::size_t N>
+  KUMI_ABI constexpr auto operator>(array<T, N> const& lhs, array<U, N> const& rhs) noexcept
   requires requires { rhs < lhs; }
   {
     return rhs < lhs;
   }
 
   /// @brief Compares arrays for the lexicographical greater-than-or-equal relation
-  template<typename T, std::size_t N, typename U, std::size_t M>
-  KUMI_ABI constexpr auto operator>=(array<T, N> const& lhs, array<U, M> const& rhs) noexcept
+  template<typename T, typename U, std::size_t N>
+  KUMI_ABI constexpr auto operator>=(array<T, N> const& lhs, array<U, N> const& rhs) noexcept
   requires requires { lhs < rhs; }
   {
     return !(lhs < rhs);

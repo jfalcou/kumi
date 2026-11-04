@@ -8,42 +8,10 @@
 #define TTS_MAIN
 #include <kumi/array.hpp>
 #include <tts/tts.hpp>
+#include "test.hpp"
 #include <string>
 #include <type_traits>
 #include <utility>
-
-namespace
-{
-  struct may_throw
-  {
-    may_throw() = default;
-
-    may_throw(may_throw const&) noexcept(false) {}
-
-    may_throw(may_throw&&) noexcept(false) {}
-
-    may_throw& operator=(may_throw const&) noexcept(false) { return *this; }
-
-    may_throw& operator=(may_throw&&) noexcept(false) { return *this; }
-  };
-
-  struct throwing_swap
-  {
-    friend void swap(throwing_swap&, throwing_swap&) noexcept(false) {}
-  };
-
-  struct tracked
-  {
-    int value = 0;
-    inline static int swaps = 0;
-
-    friend void swap(tracked& a, tracked& b) noexcept
-    {
-      ++swaps;
-      std::swap(a.value, b.value);
-    }
-  };
-}
 
 //==================================================================================================
 // Assignment is gated on assignability of the destination's element, source -> dest.

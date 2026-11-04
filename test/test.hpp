@@ -401,3 +401,49 @@ template<kumi::concepts::record_type R> operations copy_assign_fwd(R&& r)
   local = r["d"_id];
   return local.value;
 }
+
+//==============================================================================================
+//! Assignment / swap probe types
+//==============================================================================================
+//! An element whose copy/move may throw, to check noexcept propagation on assignment.
+struct may_throw
+{
+  may_throw() = default;
+
+  may_throw(may_throw const&) noexcept(false) {}
+
+  may_throw(may_throw&&) noexcept(false) {}
+
+  may_throw& operator=(may_throw const&) noexcept(false) { return *this; }
+
+  may_throw& operator=(may_throw&&) noexcept(false) { return *this; }
+};
+
+//! An element whose ADL swap may throw, to check is_nothrow_swappable propagation.
+struct throwing_swap
+{
+  friend void swap(throwing_swap&, throwing_swap&) noexcept(false) {}
+};
+
+//! An element counting its ADL swaps, to verify ADL-reachable element swap is used.
+struct tracked
+{
+  int value = 0;
+  inline static int swaps = 0;
+
+  friend void swap(tracked& a, tracked& b) noexcept
+  {
+    ++swaps;
+    std::swap(a.value, b.value);
+  }
+};
+
+//! An element assignable from int but not constructible from it, to prove assignment is
+//! gated on assignability, not constructibility/conversion.
+struct assignable_from_int
+{
+  assignable_from_int() = default;
+  assignable_from_int(assignable_from_int const&) = default;
+
+  assignable_from_int& operator=(int) { return *this; }
+};

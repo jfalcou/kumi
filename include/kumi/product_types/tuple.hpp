@@ -281,32 +281,20 @@ namespace kumi
     //==================================================================================================================
     // nvcc with a clang host rejects [[nodiscard]] on a conversion operator once optimizing.
     template<typename... Us>
-    KUMI_ABI
-#ifndef KUMI_DOXYGEN_INVOKED
-      explicit(!kumi::_::piecewise_convertible<tuple<Ts const&...>, tuple<Us...>>)
-#endif
-        constexpr operator tuple<Us...>() const
-      noexcept(kumi::_::piecewise_nothrow_constructible<tuple<Ts const&...>, tuple<Us...>>)
-    requires(sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>)
-#ifndef KUMI_DOXYGEN_INVOKED
-            && (kumi::_::piecewise_constructible<tuple<Ts const&...>, tuple<Us...>>)
-#endif
+    KUMI_ABI explicit(!(std::is_convertible_v<Ts const&, Us> && ...)) constexpr operator tuple<Us...>() const
+      noexcept((std::is_nothrow_constructible_v<Us, Ts const&> && ...))
+    requires(sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>) &&
+            ((std::is_constructible_v<Us, Ts const&> && ...))
     {
       return kumi::_::static_cast_<tuple<Us...>>(*this, std::make_index_sequence<sizeof...(Ts)>{});
     }
 
     /// @overload
     template<typename... Us>
-    KUMI_ABI
-#ifndef KUMI_DOXYGEN_INVOKED
-      explicit(!kumi::_::piecewise_convertible<tuple<Ts&...>, tuple<Us...>>)
-#endif
-        constexpr operator tuple<Us...>()
-          noexcept(kumi::_::piecewise_nothrow_constructible<tuple<Ts&...>, tuple<Us...>>)
-    requires(sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>)
-#ifndef KUMI_DOXYGEN_INVOKED
-            && (kumi::_::piecewise_constructible<tuple<Ts&...>, tuple<Us...>>)
-#endif
+    KUMI_ABI explicit(!(std::is_convertible_v<Ts&, Us> && ...)) constexpr operator tuple<Us...>()
+      noexcept((std::is_nothrow_constructible_v<Us, Ts&> && ...))
+    requires(sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>) &&
+            ((std::is_constructible_v<Us, Ts&> && ...))
     {
       return kumi::_::static_cast_<tuple<Us...>>(*this, std::make_index_sequence<sizeof...(Ts)>{});
     }
@@ -327,10 +315,8 @@ namespace kumi
     //==================================================================================================================
     template<typename... Us>
     KUMI_ABI constexpr tuple& operator=(tuple<Us...> const& other)
-      noexcept(kumi::_::piecewise_nothrow_assignable<tuple<Us...>, tuple>)
-#ifndef KUMI_DOXYGEN_INVOKED
-    requires(kumi::_::piecewise_assignable<tuple<Us...>, tuple>)
-#endif
+      noexcept((std::is_nothrow_assignable_v<Ts&, Us const&> && ...))
+    requires(sizeof...(Ts) == sizeof...(Us)) && ((std::is_assignable_v<Ts&, Us const&> && ...))
     {
       kumi::_::assign(*this, other, std::make_index_sequence<sizeof...(Ts)>{});
       return *this;
@@ -338,13 +324,10 @@ namespace kumi
 
     /// @overload
     template<typename... Us>
-    KUMI_ABI constexpr tuple& operator=(tuple<Us...>&& other)
-      noexcept(kumi::_::piecewise_nothrow_move_assignable<tuple<Us...>, tuple>)
-#ifndef KUMI_DOXYGEN_INVOKED
-    requires(kumi::_::piecewise_move_assignable<tuple<Us...>, tuple>)
-#endif
+    KUMI_ABI constexpr tuple& operator=(tuple<Us...>&& other) noexcept((std::is_nothrow_assignable_v<Ts&, Us&&> && ...))
+    requires(sizeof...(Ts) == sizeof...(Us)) && ((std::is_assignable_v<Ts&, Us&&> && ...))
     {
-      kumi::_::assign(*this, other, std::make_index_sequence<sizeof...(Ts)>{});
+      kumi::_::assign(*this, std::move(other), std::make_index_sequence<sizeof...(Ts)>{});
       return *this;
     }
 
@@ -375,7 +358,7 @@ namespace kumi
   template<typename... Ts, typename... Us>
   KUMI_ABI constexpr auto operator==(tuple<Ts...> const& self, tuple<Us...> const& other) noexcept
 #ifndef KUMI_DOXYGEN_INVOKED
-  requires(sizeof...(Ts) > 0) && (kumi::_::piecewise_comparable<tuple<Ts...>, tuple<Us...>>)
+  requires(sizeof...(Ts) > 0) && (kumi::_::comparable<Ts, Us> && ...)
 #endif
   {
     return kumi::_::compare(self, other, std::make_index_sequence<sizeof...(Ts)>{});
@@ -385,7 +368,7 @@ namespace kumi
   template<typename... Ts, typename... Us>
   KUMI_ABI constexpr auto operator!=(tuple<Ts...> const& self, tuple<Us...> const& other) noexcept
 #ifndef KUMI_DOXYGEN_INVOKED
-  requires(sizeof...(Ts) > 0) && (kumi::_::piecewise_comparable<tuple<Ts...>, tuple<Us...>>)
+  requires(sizeof...(Ts) > 0) && (kumi::_::comparable<Ts, Us> && ...)
 #endif
   {
     return !(self == other);
@@ -397,7 +380,7 @@ namespace kumi
   KUMI_ABI constexpr auto operator<(tuple<Ts...> const& lhs, tuple<Us...> const& rhs) noexcept
   requires(sizeof...(Ts) > 0 && sizeof...(Ts) == sizeof...(Us))
 #ifndef KUMI_DOXYGEN_INVOKED
-          && (kumi::_::piecewise_ordered<tuple<Ts...>, tuple<Us...>>)
+          && (kumi::_::ordered<Ts, Us> && ...)
 #endif
   {
     // lexicographical order is defined as

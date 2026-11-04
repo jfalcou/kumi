@@ -8,54 +8,11 @@
 #define TTS_MAIN
 #include <kumi/tuple.hpp>
 #include <tts/tts.hpp>
+#include "test.hpp"
 #include <memory>
 #include <string>
 #include <type_traits>
 #include <utility>
-
-namespace
-{
-  // An element whose copy/move operations may throw, to check noexcept propagation.
-  struct may_throw
-  {
-    may_throw() = default;
-
-    may_throw(may_throw const&) noexcept(false) {}
-
-    may_throw(may_throw&&) noexcept(false) {}
-
-    may_throw& operator=(may_throw const&) noexcept(false) { return *this; }
-
-    may_throw& operator=(may_throw&&) noexcept(false) { return *this; }
-  };
-
-  // An element whose ADL swap may throw, to check is_nothrow_swappable propagation.
-  struct throwing_swap
-  {
-    friend void swap(throwing_swap&, throwing_swap&) noexcept(false) {}
-  };
-
-  // An element counting its ADL swaps, to verify ADL-reachable element swap is used.
-  struct tracked
-  {
-    int value = 0;
-    inline static int swaps = 0;
-
-    friend void swap(tracked& a, tracked& b) noexcept
-    {
-      ++swaps;
-      std::swap(a.value, b.value);
-    }
-  };
-
-  struct base
-  {
-  };
-
-  struct derived : base
-  {
-  };
-}
 
 //==================================================================================================
 // Assignment is gated on assignability of the destination's element, source -> dest,
@@ -184,7 +141,9 @@ TTS_CASE("Check empty tuple swap")
 
 TTS_CASE("Check tuple conversion is distinct from assignment")
 {
-  // Conversion is governed by the source-first piecewise_convertible concept, so converting from
-  // char const* into std::string is allowed even though the reverse assignment is not.
-  TTS_CONSTEXPR_EXPECT((kumi::_::piecewise_convertible<kumi::tuple<char const*>, kumi::tuple<std::string>>));
+  // A tuple of assignable_from_int is assignable from a tuple<int> even though assignable_from_int
+  // cannot be constructed from an int, hence no conversion from tuple<int> is available. This proves
+  // assignment is gated on per-element assignability (destination-driven), not on conversion.
+  TTS_CONSTEXPR_EXPECT((std::is_assignable_v<kumi::tuple<assignable_from_int>&, kumi::tuple<int> const&>));
+  TTS_CONSTEXPR_EXPECT((!std::is_convertible_v<kumi::tuple<int> const&, kumi::tuple<assignable_from_int>>));
 };
