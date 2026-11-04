@@ -19,3 +19,4 @@ jobs:
     with:
       project: kumi
       cxx-compiler: clang++
+      image: ghcr.io/jfalcou/compilers:v11

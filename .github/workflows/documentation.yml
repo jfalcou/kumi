@@ -21,3 +21,4 @@ jobs:
     with:
       project: kumi
       coverage: true
+      image: ghcr.io/jfalcou/compilers:v11
