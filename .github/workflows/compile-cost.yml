@@ -29,3 +29,4 @@ jobs:
       project: kumi
       series: true
       exclude: '^doc\.'
+      image: ghcr.io/jfalcou/compilers:v11
