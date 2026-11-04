@@ -132,7 +132,7 @@ namespace kumi
 #ifndef KUMI_DOXYGEN_INVOKED
       explicit(!std::convertible_to<T const&, U>)
 #endif
-        constexpr operator array<U, M>() const
+        constexpr operator array<U, M>() const noexcept(std::is_nothrow_constructible_v<U, T const&>)
     requires(N == M) && (!std::same_as<array<T, N>, array<U, M>>) && (std::is_constructible_v<U, T const&>)
     {
       return kumi::_::static_cast_<array<U, M>>(*this, std::make_index_sequence<N>{});
@@ -144,7 +144,7 @@ namespace kumi
 #ifndef KUMI_DOXYGEN_INVOKED
       explicit(!std::convertible_to<T&, U>)
 #endif
-        constexpr operator array<U, M>()
+        constexpr operator array<U, M>() noexcept(std::is_nothrow_constructible_v<U, T&>)
     requires(N == M) && (!std::same_as<array<T, N>, array<U, M>>) && (std::is_constructible_v<U, T&>)
     {
       return kumi::_::static_cast_<array<U, M>>(*this, std::make_index_sequence<N>{});
@@ -166,8 +166,9 @@ namespace kumi
     //==================================================================================================================
     template<typename U, std::size_t M>
     KUMI_ABI constexpr array& operator=(array<U, M> const& other)
+      noexcept(N == M && std::is_nothrow_assignable_v<T&, U const&>)
 #ifndef KUMI_DOXYGEN_INVOKED
-    requires(std::convertible_to<T, U> && N == M)
+    requires(kumi::_::piecewise_assignable<array<U, M>, array<T, N>>)
 #endif
     {
       kumi::_::assign(*this, other, std::make_index_sequence<N>{});
@@ -176,13 +177,27 @@ namespace kumi
 
     /// @overload
     template<typename U, std::size_t M>
-    KUMI_ABI constexpr array& operator=(array<U, M>&& other)
+    KUMI_ABI constexpr array& operator=(array<U, M>&& other) noexcept(N == M && std::is_nothrow_assignable_v<T&, U&&>)
 #ifndef KUMI_DOXYGEN_INVOKED
-    requires(std::convertible_to<T, U> && N == M)
+    requires(kumi::_::piecewise_move_assignable<array<U, M>, array<T, N>>)
 #endif
     {
       kumi::_::assign(*this, other, std::make_index_sequence<N>{});
       return *this;
+    }
+
+    //==================================================================================================================
+    /**
+      @brief Swaps the contents of two kumi::arrays.
+
+      @see Callable with the usual `using std::swap; swap(a, b)` idiom, exchanges every element through
+           ADL and does not participate in overload resolution if an element is not swappable.
+    **/
+    //==================================================================================================================
+    KUMI_ABI friend constexpr void swap(array& a, array& b) noexcept(std::is_nothrow_swappable_v<T>)
+    requires(std::is_swappable_v<T>)
+    {
+      kumi::_::swap(a, b, std::make_index_sequence<N>{});
     }
   };
 
@@ -282,6 +297,8 @@ namespace kumi
 
     static constexpr auto empty() noexcept { return true; }
 
+    KUMI_ABI friend constexpr void swap(array<T, 0>&, array<T, 0>&) noexcept {}
+
     template<typename U>
     [[nodiscard]] KUMI_ABI constexpr operator U() const noexcept
     requires(kumi::concepts::unit_type<U>)
@@ -318,7 +335,7 @@ namespace kumi
   **/
   //====================================================================================================================
   template<typename T, typename... Ts>
-  requires(kumi::_::all_the_same<T, Ts...>)
+  requires(kumi::_::all_the_same<std::unwrap_ref_decay_t<T>, std::unwrap_ref_decay_t<Ts>...>)
   array(T&&, Ts&&...) -> array<std::unwrap_ref_decay_t<T>, sizeof...(Ts) + 1>;
 
   /// @brief Deduction guide for the empty power type: `kumi::array{}` -> `kumi::array<>` (== array<void, 0>)
@@ -397,7 +414,7 @@ namespace kumi
     [[nodiscard]] KUMI_ABI constexpr auto operator()() const -> kumi::array<> { return {}; }
 
     template<typename T, typename... Ts>
-    requires(kumi::_::all_the_same<T, Ts...>)
+    requires(kumi::_::all_the_same<std::unwrap_ref_decay_t<T>, std::unwrap_ref_decay_t<Ts>...>)
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, Ts&&... ts) const
       -> kumi::array<std::unwrap_ref_decay_t<T>, sizeof...(Ts) + 1>
     {
@@ -615,14 +632,14 @@ namespace kumi
   template<typename T, template<typename...> class Meta = std::type_identity> struct as_array;
 
   template<typename T, template<typename...> class Meta>
-  requires(kumi::concepts::power_type<T>)
+  requires(kumi::concepts::homogeneous_product_type<T>)
   struct as_array<T, Meta>
   {
     using type = kumi::array<typename Meta<kumi::element_t<0, T>>::type, kumi::size_v<T>>;
   };
 
   template<typename T, template<typename...> class Meta>
-  requires(!kumi::concepts::power_type<T>)
+  requires(!kumi::concepts::homogeneous_product_type<T>)
   struct as_array<T, Meta>
   {
     using type = kumi::array<typename Meta<T>::type, 0>;
@@ -706,31 +723,43 @@ namespace kumi
   constexpr auto get(T&& r) = delete;
 #endif
 
+  namespace _
+  {
+    template<typename... Us> extern kumi::tuple<Us...> array_result;
+
+    template<typename... Ts>
+    requires(sizeof...(Ts) == 0)
+    extern kumi::array<> array_result<Ts...>;
+
+    template<typename U, typename... Us>
+    requires(kumi::_::all_the_same<U, Us...>)
+    extern kumi::array<U, sizeof...(Us) + 1> array_result<U, Us...>;
+  }
+
   template<kumi::concepts::power_type T> struct builder<T>
   {
     using type = T;
 
     // A kumi::array is homogeneous, so rebuild it with the element type and the element count.
-    template<typename... Us>
-    requires(sizeof...(Us) == 0 || kumi::_::all_the_same<Us...>)
-    using to = kumi::array<kumi::_::first_t<Us...>, sizeof...(Us)>;
+    template<typename... Us> using to = decltype(kumi::_::array_result<Us...>);
 
     [[nodiscard]] KUMI_ABI static constexpr auto make() { return kumi::make_array(); }
 
     [[nodiscard]] KUMI_ABI static constexpr auto build() { return kumi::array{}; }
 
     template<typename Arg, typename... Args>
-    requires(kumi::_::all_the_same<Arg, Args...>)
     [[nodiscard]] KUMI_ABI static constexpr auto make(Arg&& arg, Args&&... args)
     {
-      return kumi::make_array(KUMI_FWD(arg), KUMI_FWD(args)...);
+      if constexpr (kumi::_::all_the_same<std::unwrap_ref_decay_t<Arg>, std::unwrap_ref_decay_t<Args>...>)
+        return kumi::make_array(KUMI_FWD(arg), KUMI_FWD(args)...);
+      else return kumi::make_tuple(KUMI_FWD(arg), KUMI_FWD(args)...);
     }
 
     template<typename Arg, typename... Args>
-    requires(kumi::_::all_the_same<Arg, Args...>)
     [[nodiscard]] KUMI_ABI static constexpr auto build(Arg&& arg, Args&&... args)
     {
-      return kumi::array{KUMI_FWD(arg), KUMI_FWD(args)...};
+      if constexpr (kumi::_::all_the_same<Arg, Args...>) return kumi::array{KUMI_FWD(arg), KUMI_FWD(args)...};
+      else return kumi::tuple{KUMI_FWD(arg), KUMI_FWD(args)...};
     }
   };
 }

@@ -23,6 +23,13 @@ namespace kumi
       ((get<I>(KUMI_FWD(t)) = get<I>(KUMI_FWD(u))), ...);
     }
 
+    // Element-wise swap of two product-like objects sharing the same layout.
+    template<typename T, std::size_t... I> constexpr void swap(T& a, T& b, std::index_sequence<I...>)
+    {
+      using std::swap;
+      ((swap(get<I>(a), get<I>(b))), ...);
+    }
+
     template<typename T, typename U, std::size_t... I>
     constexpr auto compare(T&& t, U&& u, std::index_sequence<I...>) noexcept
     {

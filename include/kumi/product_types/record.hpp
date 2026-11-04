@@ -290,9 +290,10 @@ namespace kumi
     //==================================================================================================================
     template<typename... Us>
     KUMI_ABI constexpr record& operator=(record<Us...> const& other)
+      noexcept(kumi::_::fieldwise_nothrow_assignable<record<Us...>, record>)
     requires(kumi::concepts::equivalent<record, record<Us...>>)
 #ifndef KUMI_DOXYGEN_INVOKED
-            && (kumi::_::fieldwise_convertible<record, record<Us...>>)
+            && (kumi::_::fieldwise_assignable<record<Us...>, record>)
 #endif
     {
       ((get<kumi::identifier_of<Ts>()>(*this) = get<kumi::identifier_of<Ts>()>(KUMI_FWD(other))), ...);
@@ -302,13 +303,30 @@ namespace kumi
     /// @overload
     template<typename... Us>
     KUMI_ABI constexpr record& operator=(record<Us...>&& other)
+      noexcept(kumi::_::fieldwise_nothrow_move_assignable<record<Us...>, record>)
     requires(kumi::concepts::equivalent<record, record<Us...>>)
 #ifndef KUMI_DOXYGEN_INVOKED
-            && (kumi::_::fieldwise_convertible<record, record<Us...>>)
+            && (kumi::_::fieldwise_move_assignable<record<Us...>, record>)
 #endif
     {
       ((get<kumi::identifier_of<Ts>()>(*this) = get<kumi::identifier_of<Ts>()>(KUMI_FWD(other))), ...);
       return *this;
+    }
+
+    //==================================================================================================================
+    /**
+      @brief Swaps the fields of two kumi::records.
+
+      @see Callable with the usual `using std::swap; swap(a, b)` idiom, exchanges every matching field
+           through ADL and does not participate in overload resolution if a field is not swappable.
+    **/
+    //==================================================================================================================
+    KUMI_ABI friend constexpr void swap(record& a, record& b)
+      noexcept((std::is_nothrow_swappable_v<kumi::_::type_of_t<Ts>> && ...))
+    requires((std::is_swappable_v<kumi::_::type_of_t<Ts>> && ...))
+    {
+      using std::swap;
+      ((swap(get<kumi::identifier_of<Ts>()>(a), get<kumi::identifier_of<Ts>()>(b))), ...);
     }
   };
 
@@ -370,6 +388,8 @@ namespace kumi
     [[nodiscard]] KUMI_ABI static constexpr auto values() noexcept { return kumi::tuple{}; }
 
     KUMI_ABI friend constexpr auto operator<=>(record<>, record<>) noexcept = default;
+
+    KUMI_ABI friend constexpr void swap(record<>&, record<>&) noexcept {}
 
     template<typename T>
     [[nodiscard]] KUMI_ABI constexpr operator T() const noexcept

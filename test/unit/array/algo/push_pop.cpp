@@ -25,10 +25,17 @@ TTS_CASE("Check kumi::push_front/pop_front type computation")
   TTS_TYPE_IS((pop_front_t<kumi::array<int, 3>>), (kumi::array<int, 2>));
 };
 
-TTS_CASE("Check kumi::push_front function behavior")
+TTS_CASE("Check kumi::push_front/pop_front function behavior")
 {
+  auto a = kumi::array<int, 2>{1, 2};
+  int x = 3;
+
   TTS_EQUAL((kumi::push_front(kumi::array<int, 0>{}, 4)), (kumi::array{4}));
   TTS_EQUAL((kumi::push_front(kumi::array{3, 4}, 2)), (kumi::array{2, 3, 4}));
+  TTS_EQUAL((kumi::push_front(a, 3)), (kumi::array{3, 1, 2}));
+  TTS_EQUAL((kumi::push_front(a, x)), (kumi::array{3, 1, 2}));
+  TTS_EQUAL((kumi::push_front(kumi::array{1, 2}, x)), (kumi::array{3, 1, 2}));
+  TTS_EQUAL((kumi::push_front(kumi::array{1, 2}, 3.f)), (kumi::tuple{3.f, 1, 2}));
 
   TTS_EQUAL(kumi::pop_front(kumi::array<int, 0>{}), (kumi::array<int, 0>{}));
   TTS_EQUAL(kumi::pop_front(kumi::array{3}), (kumi::array<int, 0>{}));
@@ -38,8 +45,15 @@ TTS_CASE("Check kumi::push_front function behavior")
 
 TTS_CASE("Check kumi::push_front/pop_front constexpr behavior")
 {
+  constexpr auto a = kumi::array<int, 2>{1, 2};
+  constexpr int x = 3;
+
   TTS_CONSTEXPR_EQUAL((kumi::push_front(kumi::array<int, 0>{}, 4)), (kumi::array{4}));
   TTS_CONSTEXPR_EQUAL((kumi::push_front(kumi::array{3, 4}, 2)), (kumi::array{2, 3, 4}));
+  TTS_CONSTEXPR_EQUAL((kumi::push_front(a, 3)), (kumi::array{3, 1, 2}));
+  TTS_CONSTEXPR_EQUAL((kumi::push_front(a, x)), (kumi::array{3, 1, 2}));
+  TTS_CONSTEXPR_EQUAL((kumi::push_front(kumi::array{1, 2}, x)), (kumi::array{3, 1, 2}));
+  TTS_CONSTEXPR_EQUAL((kumi::push_front(kumi::array{1, 2}, 3.f)), (kumi::tuple{3.f, 1, 2}));
 
   TTS_CONSTEXPR_EQUAL(kumi::pop_front(kumi::array<int, 0>{}), (kumi::array<int, 0>{}));
   TTS_CONSTEXPR_EQUAL(kumi::pop_front(kumi::array{3}), (kumi::array<int, 0>{}));
@@ -63,8 +77,15 @@ TTS_CASE("Check kumi::push_back/pop_back type computation")
 
 TTS_CASE("Check kumi::push_back/pop_back function behavior")
 {
+  auto a = kumi::array<int, 2>{1, 2};
+  int x = 3;
+
   TTS_EQUAL((kumi::push_back(kumi::array<int, 0>{}, 4)), (kumi::array{4}));
   TTS_EQUAL((kumi::push_back(kumi::array{3, 4}, 5)), (kumi::array{3, 4, 5}));
+  TTS_EQUAL((kumi::push_back(a, 3)), (kumi::array{1, 2, 3}));
+  TTS_EQUAL((kumi::push_back(a, x)), (kumi::array{1, 2, 3}));
+  TTS_EQUAL((kumi::push_back(kumi::array{1, 2}, x)), (kumi::array{1, 2, 3}));
+  TTS_EQUAL((kumi::push_back(kumi::array{1, 2}, 3.f)), (kumi::tuple{1, 2, 3.f}));
 
   TTS_EQUAL(kumi::pop_back(kumi::array<int, 0>{}), (kumi::array<int, 0>{}));
   TTS_EQUAL(kumi::pop_back(kumi::array{3}), (kumi::array<int, 0>{}));
@@ -74,8 +95,15 @@ TTS_CASE("Check kumi::push_back/pop_back function behavior")
 
 TTS_CASE("Check kumi::push_back/pop_back constexpr behavior")
 {
+  constexpr auto a = kumi::array<int, 2>{1, 2};
+  constexpr int x = 3;
+
   TTS_CONSTEXPR_EQUAL((kumi::push_back(kumi::array<int, 0>{}, 4)), (kumi::array{4}));
   TTS_CONSTEXPR_EQUAL((kumi::push_back(kumi::array{3, 4}, 5)), (kumi::array{3, 4, 5}));
+  TTS_CONSTEXPR_EQUAL((kumi::push_back(a, 3)), (kumi::array{1, 2, 3}));
+  TTS_CONSTEXPR_EQUAL((kumi::push_back(a, x)), (kumi::array{1, 2, 3}));
+  TTS_CONSTEXPR_EQUAL((kumi::push_back(kumi::array{1, 2}, x)), (kumi::array{1, 2, 3}));
+  TTS_CONSTEXPR_EQUAL((kumi::push_back(kumi::array{1, 2}, 3.f)), (kumi::tuple{1, 2, 3.f}));
 
   TTS_CONSTEXPR_EQUAL(kumi::pop_back(kumi::array<int, 0>{}), (kumi::array<int, 0>{}));
   TTS_CONSTEXPR_EQUAL(kumi::pop_back(kumi::array{3}), (kumi::array<int, 0>{}));

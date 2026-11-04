@@ -163,6 +163,63 @@ namespace kumi::_
   concept piecewise_constructible =
     kumi::_::is_piecewise_constructible_v<std::remove_cvref_t<From>, std::remove_cvref_t<To>>;
 
+  template<typename, typename> inline constexpr bool is_piecewise_nothrow_constructible_v = false;
+
+  template<template<class...> class Box, typename... From, typename... To>
+  requires(sizeof...(From) == sizeof...(To))
+  inline constexpr bool is_piecewise_nothrow_constructible_v<Box<From...>, Box<To...>> =
+    (std::is_nothrow_constructible_v<To, From const&> && ...);
+
+  template<typename From, typename To>
+  concept piecewise_nothrow_constructible =
+    kumi::_::is_piecewise_nothrow_constructible_v<std::remove_cvref_t<From>, std::remove_cvref_t<To>>;
+
+  //====================================================================================================================
+  // Helper concepts for assignment checks.
+  //====================================================================================================================
+  template<typename, typename> inline constexpr bool is_piecewise_assignable_v = false;
+
+  template<template<class...> class Box, typename... From, typename... To>
+  requires(sizeof...(From) == sizeof...(To))
+  inline constexpr bool is_piecewise_assignable_v<Box<From...>, Box<To...>> =
+    (std::is_assignable_v<To&, From const&> && ...);
+
+  template<typename From, typename To>
+  concept piecewise_assignable = kumi::_::is_piecewise_assignable_v<std::remove_cvref_t<From>, std::remove_cvref_t<To>>;
+
+  template<typename, typename> inline constexpr bool is_piecewise_move_assignable_v = false;
+
+  template<template<class...> class Box, typename... From, typename... To>
+  requires(sizeof...(From) == sizeof...(To))
+  inline constexpr bool is_piecewise_move_assignable_v<Box<From...>, Box<To...>> =
+    (std::is_assignable_v<To&, From&&> && ...);
+
+  template<typename From, typename To>
+  concept piecewise_move_assignable =
+    kumi::_::is_piecewise_move_assignable_v<std::remove_cvref_t<From>, std::remove_cvref_t<To>>;
+
+  template<typename, typename> inline constexpr bool is_piecewise_nothrow_assignable_v = false;
+
+  template<template<class...> class Box, typename... From, typename... To>
+  requires(sizeof...(From) == sizeof...(To))
+  inline constexpr bool is_piecewise_nothrow_assignable_v<Box<From...>, Box<To...>> =
+    (std::is_nothrow_assignable_v<To&, From const&> && ...);
+
+  template<typename From, typename To>
+  concept piecewise_nothrow_assignable =
+    kumi::_::is_piecewise_nothrow_assignable_v<std::remove_cvref_t<From>, std::remove_cvref_t<To>>;
+
+  template<typename, typename> inline constexpr bool is_piecewise_nothrow_move_assignable_v = false;
+
+  template<template<class...> class Box, typename... From, typename... To>
+  requires(sizeof...(From) == sizeof...(To))
+  inline constexpr bool is_piecewise_nothrow_move_assignable_v<Box<From...>, Box<To...>> =
+    (std::is_nothrow_assignable_v<To&, From&&> && ...);
+
+  template<typename From, typename To>
+  concept piecewise_nothrow_move_assignable =
+    kumi::_::is_piecewise_nothrow_move_assignable_v<std::remove_cvref_t<From>, std::remove_cvref_t<To>>;
+
   //====================================================================================================================
   // Helper concepts for ordering checks
   //====================================================================================================================
@@ -234,4 +291,52 @@ namespace kumi::_
 
   template<typename From, typename To>
   concept fieldwise_comparable = kumi::_::is_fieldwise_comparable_v<std::remove_cvref_t<From>, std::remove_cvref_t<To>>;
+
+  // The type of the value a source record exposes for the field of a destination record.
+  template<typename To, typename... From>
+  using fieldwise_source_t = std::remove_reference_t<decltype(std::declval<kumi::_::set<From...>>()(
+    std::declval<kumi::_::identifier_of_t<To>>()))>;
+
+  template<typename, typename> inline constexpr bool is_fieldwise_assignable_v = false;
+
+  template<template<class...> class Box, typename... From, typename... To>
+  requires(sizeof...(From) == sizeof...(To))
+  inline constexpr bool is_fieldwise_assignable_v<Box<From...>, Box<To...>>{
+    (std::is_assignable_v<kumi::_::type_of_t<To>&, kumi::_::fieldwise_source_t<To, From...> const&> && ...)};
+
+  template<typename From, typename To>
+  concept fieldwise_assignable = kumi::_::is_fieldwise_assignable_v<std::remove_cvref_t<From>, std::remove_cvref_t<To>>;
+
+  template<typename, typename> inline constexpr bool is_fieldwise_move_assignable_v = false;
+
+  template<template<class...> class Box, typename... From, typename... To>
+  requires(sizeof...(From) == sizeof...(To))
+  inline constexpr bool is_fieldwise_move_assignable_v<Box<From...>, Box<To...>>{
+    (std::is_assignable_v<kumi::_::type_of_t<To>&, kumi::_::fieldwise_source_t<To, From...>&&> && ...)};
+
+  template<typename From, typename To>
+  concept fieldwise_move_assignable =
+    kumi::_::is_fieldwise_move_assignable_v<std::remove_cvref_t<From>, std::remove_cvref_t<To>>;
+
+  template<typename, typename> inline constexpr bool is_fieldwise_nothrow_assignable_v = false;
+
+  template<template<class...> class Box, typename... From, typename... To>
+  requires(sizeof...(From) == sizeof...(To))
+  inline constexpr bool is_fieldwise_nothrow_assignable_v<Box<From...>, Box<To...>>{
+    (std::is_nothrow_assignable_v<kumi::_::type_of_t<To>&, kumi::_::fieldwise_source_t<To, From...> const&> && ...)};
+
+  template<typename From, typename To>
+  concept fieldwise_nothrow_assignable =
+    kumi::_::is_fieldwise_nothrow_assignable_v<std::remove_cvref_t<From>, std::remove_cvref_t<To>>;
+
+  template<typename, typename> inline constexpr bool is_fieldwise_nothrow_move_assignable_v = false;
+
+  template<template<class...> class Box, typename... From, typename... To>
+  requires(sizeof...(From) == sizeof...(To))
+  inline constexpr bool is_fieldwise_nothrow_move_assignable_v<Box<From...>, Box<To...>>{
+    (std::is_nothrow_assignable_v<kumi::_::type_of_t<To>&, kumi::_::fieldwise_source_t<To, From...>&&> && ...)};
+
+  template<typename From, typename To>
+  concept fieldwise_nothrow_move_assignable =
+    kumi::_::is_fieldwise_nothrow_move_assignable_v<std::remove_cvref_t<From>, std::remove_cvref_t<To>>;
 }

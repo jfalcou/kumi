@@ -286,6 +286,7 @@ namespace kumi
       explicit(!kumi::_::piecewise_convertible<tuple<Ts const&...>, tuple<Us...>>)
 #endif
         constexpr operator tuple<Us...>() const
+      noexcept(kumi::_::piecewise_nothrow_constructible<tuple<Ts const&...>, tuple<Us...>>)
     requires(sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>)
 #ifndef KUMI_DOXYGEN_INVOKED
             && (kumi::_::piecewise_constructible<tuple<Ts const&...>, tuple<Us...>>)
@@ -301,6 +302,7 @@ namespace kumi
       explicit(!kumi::_::piecewise_convertible<tuple<Ts&...>, tuple<Us...>>)
 #endif
         constexpr operator tuple<Us...>()
+          noexcept(kumi::_::piecewise_nothrow_constructible<tuple<Ts&...>, tuple<Us...>>)
     requires(sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>)
 #ifndef KUMI_DOXYGEN_INVOKED
             && (kumi::_::piecewise_constructible<tuple<Ts&...>, tuple<Us...>>)
@@ -325,8 +327,9 @@ namespace kumi
     //==================================================================================================================
     template<typename... Us>
     KUMI_ABI constexpr tuple& operator=(tuple<Us...> const& other)
+      noexcept(kumi::_::piecewise_nothrow_assignable<tuple<Us...>, tuple>)
 #ifndef KUMI_DOXYGEN_INVOKED
-    requires(kumi::_::piecewise_convertible<tuple, tuple<Us...>>)
+    requires(kumi::_::piecewise_assignable<tuple<Us...>, tuple>)
 #endif
     {
       kumi::_::assign(*this, other, std::make_index_sequence<sizeof...(Ts)>{});
@@ -336,12 +339,27 @@ namespace kumi
     /// @overload
     template<typename... Us>
     KUMI_ABI constexpr tuple& operator=(tuple<Us...>&& other)
+      noexcept(kumi::_::piecewise_nothrow_move_assignable<tuple<Us...>, tuple>)
 #ifndef KUMI_DOXYGEN_INVOKED
-    requires(kumi::_::piecewise_convertible<tuple, tuple<Us...>>)
+    requires(kumi::_::piecewise_move_assignable<tuple<Us...>, tuple>)
 #endif
     {
       kumi::_::assign(*this, other, std::make_index_sequence<sizeof...(Ts)>{});
       return *this;
+    }
+
+    //==================================================================================================================
+    /**
+      @brief Swaps the contents of two kumi::tuples.
+
+      @see Callable with the usual `using std::swap; swap(a, b)` idiom, exchanges every element through
+           ADL and does not participate in overload resolution if an element is not swappable.
+    **/
+    //==================================================================================================================
+    KUMI_ABI friend constexpr void swap(tuple& a, tuple& b) noexcept((std::is_nothrow_swappable_v<Ts> && ...))
+    requires((std::is_swappable_v<Ts> && ...))
+    {
+      kumi::_::swap(a, b, std::make_index_sequence<sizeof...(Ts)>{});
     }
   };
 
@@ -439,6 +457,8 @@ namespace kumi
     [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept { return kumi::tuple{}; }
 
     KUMI_ABI friend constexpr auto operator<=>(tuple<>, tuple<>) noexcept = default;
+
+    KUMI_ABI friend constexpr void swap(tuple<>&, tuple<>&) noexcept {}
 
     template<typename T>
     [[nodiscard]] KUMI_ABI constexpr operator T() const noexcept

@@ -64,3 +64,19 @@ TTS_CASE("Check constexpr tuple_element of the output of builder")
   constexpr auto ft = kumi::builder<kumi::array<>>::build();
   TTS_TYPE_IS((decltype(ft)), (kumi::array<> const));
 };
+
+TTS_CASE("Check properties of the builder")
+{
+  using arr = kumi::array<int, 5>;
+  using std_arr = std::array<int, 5>;
+  using tup = kumi::tuple<int, int, int, int, float>;
+
+  int a = 1;
+
+  TTS_TYPE_IS(arr, (decltype(kumi::builder<arr>::make(1, 2, 3, 4, 5))));
+  TTS_TYPE_IS(arr, (decltype(kumi::builder<std_arr>::make(1, 2, 3, 4, 5))));
+  TTS_TYPE_IS(arr, (decltype(kumi::builder<arr>::make(1, 2, 3, 4, a))));
+
+  TTS_TYPE_IS(tup, (decltype(kumi::builder<arr>::make(1, 2, 3, 4, 5.f))));
+  TTS_TYPE_IS(tup, (decltype(kumi::builder<std_arr>::make(1, 2, 3, 4, 5.f))));
+};
