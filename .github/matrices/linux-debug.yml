@@ -10,11 +10,9 @@ configs: [Debug]
 build-targets: unit.exe doc.exe
 test-targets: unit|doc
 rows:
-  - { name: "gcc"           , preset: "gcc"           , image: "v10" }
-  - { name: "clang"         , preset: "clang"         , image: "v10" }
-  - { name: "clang libc++"  , preset: "clang-libc++"  , image: "v10" }
-  - { name: "gcc14"         , preset: "gcc"           , image: "v10"    , setup: "./.github/scripts/g++-14.sh"  }
-  - { name: "clang20"       , preset: "clang"         , image: "v10"    , setup: "./.github/scripts/clang20.sh" }
-  - { name: "clang20 libc++", preset: "clang-libc++"  , image: "v10"    , setup: "./.github/scripts/clang20.sh" }
+  - { name: "gcc"           , preset: "gcc"           , image: "v11" }
+  - { name: "clang"         , preset: "clang"         , image: "v11" }
+  - { name: "clang libc++"  , preset: "clang-libc++"  , image: "v11" }
+  - { name: "gcc16"         , preset: "gcc"           , image: "v11"    , setup: "./.github/scripts/g++-16.sh"  }
   - { name: "icpx"          , preset: "icpx"          , image: "sycl-v1", setup: "/opt/intel/oneapi/setvars.sh" }
-  - { name: "wasm"          , preset: "wasm"          , image: "v10"    , wrapper: "emcmake" }
+  - { name: "wasm"          , preset: "wasm"          , image: "v11"    , wrapper: "emcmake" }
