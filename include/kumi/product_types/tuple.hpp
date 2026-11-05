@@ -269,6 +269,8 @@ namespace kumi
             from the values of the source, if their size does not match or if they are the same type.
             The conversion is explicit if the conversion of some member to the target needs to be explicit.
 
+      @note EDG current implementation of explicit(bool) is broken so all conversions are implicit
+
       @qualifier explicit
 
       This permits the conversion from a tuple<T>& to a tuple<T&> which makes it suitable
@@ -281,8 +283,11 @@ namespace kumi
     //==================================================================================================================
     // nvcc with a clang host rejects [[nodiscard]] on a conversion operator once optimizing.
     template<typename... Us>
-    KUMI_ABI explicit(!(std::is_convertible_v<Ts const&, Us> && ...)) constexpr operator tuple<Us...>() const
-      noexcept((std::is_nothrow_constructible_v<Us, Ts const&> && ...))
+    KUMI_ABI
+#if !defined(KUMI_FRONTEND_EDG)
+      explicit(!(std::is_convertible_v<Ts const&, Us> && ...))
+#endif
+        constexpr operator tuple<Us...>() const noexcept((std::is_nothrow_constructible_v<Us, Ts const&> && ...))
     requires(sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>) &&
             ((std::is_constructible_v<Us, Ts const&> && ...))
     {
@@ -291,8 +296,11 @@ namespace kumi
 
     /// @overload
     template<typename... Us>
-    KUMI_ABI explicit(!(std::is_convertible_v<Ts&, Us> && ...)) constexpr operator tuple<Us...>()
-      noexcept((std::is_nothrow_constructible_v<Us, Ts&> && ...))
+    KUMI_ABI
+#if !defined(KUMI_FRONTEND_EDG)
+      explicit(!(std::is_convertible_v<Ts&, Us> && ...))
+#endif
+        constexpr operator tuple<Us...>() noexcept((std::is_nothrow_constructible_v<Us, Ts&> && ...))
     requires(sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>) &&
             ((std::is_constructible_v<Us, Ts&> && ...))
     {
@@ -335,8 +343,7 @@ namespace kumi
     /**
       @brief Swaps the contents of two kumi::tuples.
 
-      @see Callable with the usual `using std::swap; swap(a, b)` idiom, exchanges every element through
-           ADL and does not participate in overload resolution if an element is not swappable.
+      @note Does not participate in overload resolution if an element is not swappable.
     **/
     //==================================================================================================================
     KUMI_ABI friend constexpr void swap(tuple& a, tuple& b) noexcept((std::is_nothrow_swappable_v<Ts> && ...))
@@ -357,9 +364,7 @@ namespace kumi
   /// @brief Compares a tuple with another for equality
   template<typename... Ts, typename... Us>
   KUMI_ABI constexpr auto operator==(tuple<Ts...> const& self, tuple<Us...> const& other) noexcept
-#ifndef KUMI_DOXYGEN_INVOKED
-  requires(sizeof...(Ts) > 0) && (kumi::_::comparable<Ts, Us> && ...)
-#endif
+  requires(sizeof...(Ts) > 0) && (kumi::is_comparable_v<Ts, Us> && ...)
   {
     return kumi::_::compare(self, other, std::make_index_sequence<sizeof...(Ts)>{});
   }
@@ -367,9 +372,7 @@ namespace kumi
   /// @brief Compares a tuple with another for inequality
   template<typename... Ts, typename... Us>
   KUMI_ABI constexpr auto operator!=(tuple<Ts...> const& self, tuple<Us...> const& other) noexcept
-#ifndef KUMI_DOXYGEN_INVOKED
-  requires(sizeof...(Ts) > 0) && (kumi::_::comparable<Ts, Us> && ...)
-#endif
+  requires(sizeof...(Ts) > 0) && (kumi::is_comparable_v<Ts, Us> && ...)
   {
     return !(self == other);
   }
@@ -378,10 +381,7 @@ namespace kumi
   /// @note This function does not participate in overload resolution if the tuples are not lexicographically ordered
   template<typename... Ts, typename... Us>
   KUMI_ABI constexpr auto operator<(tuple<Ts...> const& lhs, tuple<Us...> const& rhs) noexcept
-  requires(sizeof...(Ts) > 0 && sizeof...(Ts) == sizeof...(Us))
-#ifndef KUMI_DOXYGEN_INVOKED
-          && (kumi::_::ordered<Ts, Us> && ...)
-#endif
+  requires(sizeof...(Ts) > 0 && sizeof...(Ts) == sizeof...(Us)) && (kumi::is_ordered_v<Ts, Us> && ...)
   {
     // lexicographical order is defined as
     // (v0 < w0) || ... andnot(wi < vi, vi+1 < wi+1) ... || andnot(wn-1 < vn-1, vn < wn);

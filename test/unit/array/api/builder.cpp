@@ -71,7 +71,7 @@ TTS_CASE("Check properties of the builder")
   using std_arr = std::array<int, 5>;
   using tup = kumi::tuple<int, int, int, int, float>;
 
-  int a = 1;
+  [[maybe_unused]] int a = 1;
 
   TTS_TYPE_IS(arr, (decltype(kumi::builder<arr>::make(1, 2, 3, 4, 5))));
   TTS_TYPE_IS(arr, (decltype(kumi::builder<std_arr>::make(1, 2, 3, 4, 5))));

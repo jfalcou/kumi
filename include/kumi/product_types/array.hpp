@@ -18,9 +18,14 @@ namespace kumi
     @ingroup kumi_array_related
     @brief Fixed-size collection of homogeneous values.
 
-    @note kumi::array is different from std::array in several aspects. It can hold reference type and it's possible
+    kumi::array is different from std::array in several aspects. It can hold reference type and it's possible
     to create an empty kumi::array<> that deduces to kumi::array<void,0>. This is the proper type representation
     of the identity of power types.
+
+    When passed into algorithms, kumi::array can decay to it's more general case that is kumi::tuple if at any point the
+    algorithms would generate heterogeneous types.
+
+    @note It is possible to defined a kumi::array<T> which deduces to an array of type T with arity 0.
 
     kumi::array provides an aggregate based implementation of an array. It provides algorithms and
     functions designed to facilitate array's handling and transformations.
@@ -124,7 +129,6 @@ namespace kumi
 
       ## Example :
       @include doc/array/api/cast.cpp
-      @include doc/array/api/soa.cpp
     **/
     //==================================================================================================================
     template<typename U>
@@ -201,9 +205,7 @@ namespace kumi
   /// @brief Compares an array with another for equality
   template<typename T, typename U, std::size_t N>
   KUMI_ABI constexpr auto operator==(array<T, N> const& self, array<U, N> const& other) noexcept
-#ifndef KUMI_DOXYGEN_INVOKED
-  requires(N == 0) || (kumi::_::comparable<T, U>)
-#endif
+  requires(N == 0) || (kumi::is_comparable_v<T, U>)
   {
     if constexpr (N == 0) return true;
     else return kumi::_::compare(self, other, std::make_index_sequence<N>{});
@@ -212,9 +214,7 @@ namespace kumi
   /// @brief Compares an array with another for inequality
   template<typename T, typename U, std::size_t N>
   KUMI_ABI constexpr auto operator!=(array<T, N> const& self, array<U, N> const& other) noexcept
-#ifndef KUMI_DOXYGEN_INVOKED
-  requires(N == 0) || (kumi::_::comparable<T, U>)
-#endif
+  requires(N == 0) || (kumi::is_comparable_v<T, U>)
   {
     return !(self == other);
   }
@@ -223,9 +223,7 @@ namespace kumi
   /// @note This function does not participate in overload resolution if the arrays are not lexicographically ordered
   template<typename T, typename U, std::size_t N>
   KUMI_ABI constexpr auto operator<(array<T, N> const& lhs, array<U, N> const& rhs) noexcept
-#ifndef KUMI_DOXYGEN_INVOKED
-  requires(N == 0) || (kumi::_::comparable<T, U>)
-#endif
+  requires(N == 0) || (kumi::is_ordered_v<T, U>)
   {
     if constexpr (N == 0) return false;
     else return kumi::_::lexicographic_compare(lhs, rhs, std::make_index_sequence<N>{});

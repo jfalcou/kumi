@@ -290,11 +290,13 @@ namespace kumi
     //==================================================================================================================
     template<typename... Us>
     KUMI_ABI constexpr record& operator=(record<Us...> const& other)
-      noexcept(kumi::_::fieldwise_nothrow_assignable<record<Us...>, record>)
-    requires(kumi::concepts::equivalent<record, record<Us...>>)
-#ifndef KUMI_DOXYGEN_INVOKED
-            && (kumi::_::fieldwise_assignable<record<Us...>, record>)
-#endif
+      noexcept((std::is_nothrow_assignable_v<typename Ts::type&,
+                                             std::remove_reference_t<kumi::field_of_t<Ts, record<Us...>>> const&> &&
+                ...))
+    requires(
+      kumi::concepts::equivalent<record, record<Us...>> &&
+      (std::is_assignable_v<typename Ts::type&, std::remove_reference_t<kumi::field_of_t<Ts, record<Us...>>> const&> &&
+       ...))
     {
       ((get<kumi::identifier_of<Ts>()>(*this) = get<kumi::identifier_of<Ts>()>(KUMI_FWD(other))), ...);
       return *this;
@@ -303,11 +305,12 @@ namespace kumi
     /// @overload
     template<typename... Us>
     KUMI_ABI constexpr record& operator=(record<Us...>&& other)
-      noexcept(kumi::_::fieldwise_nothrow_move_assignable<record<Us...>, record>)
-    requires(kumi::concepts::equivalent<record, record<Us...>>)
-#ifndef KUMI_DOXYGEN_INVOKED
-            && (kumi::_::fieldwise_move_assignable<record<Us...>, record>)
-#endif
+      noexcept((std::is_nothrow_assignable_v<typename Ts::type&,
+                                             std::remove_reference_t<kumi::field_of_t<Ts, record<Us...>>>&&> &&
+                ...))
+    requires(
+      kumi::concepts::equivalent<record, record<Us...>> &&
+      (std::is_assignable_v<typename Ts::type&, std::remove_reference_t<kumi::field_of_t<Ts, record<Us...>>>&&> && ...))
     {
       ((get<kumi::identifier_of<Ts>()>(*this) = get<kumi::identifier_of<Ts>()>(KUMI_FWD(other))), ...);
       return *this;
@@ -341,9 +344,8 @@ namespace kumi
   /// @brief Compares a record with another for equality
   template<typename... Ts, typename... Us>
   KUMI_ABI constexpr auto operator==(record<Ts...> const& self, record<Us...> const& other) noexcept
-#ifndef KUMI_DOXYGEN_INVOKED
-  requires(kumi::_::fieldwise_comparable<record<Ts...>, record<Us...>>)
-#endif
+  requires((kumi::is_comparable_v<std::remove_reference_t<kumi::field_of_t<Us, record<Ts...>>>, typename Us::type> &&
+            ...))
   {
     return ((get<kumi::identifier_of<Ts>()>(self) == get<kumi::identifier_of<Ts>()>(other)) && ...);
   }
@@ -351,9 +353,8 @@ namespace kumi
   /// @brief Compares a record with another for inequality
   template<typename... Ts, typename... Us>
   KUMI_ABI constexpr auto operator!=(record<Ts...> const& self, record<Us...> const& other) noexcept
-#ifndef KUMI_DOXYGEN_INVOKED
-  requires(kumi::_::fieldwise_comparable<record<Ts...>, record<Us...>>)
-#endif
+  requires((kumi::is_comparable_v<std::remove_reference_t<kumi::field_of_t<Us, record<Ts...>>>, typename Us::type> &&
+            ...))
   {
     return !(self == other);
   }

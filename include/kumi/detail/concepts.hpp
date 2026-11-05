@@ -11,17 +11,6 @@ namespace kumi::_
 {
   using invalid = std::integral_constant<std::size_t, static_cast<std::size_t>(-1)>;
 
-  template<typename From, typename To>
-  concept ordered = requires(From const& a, To const& b) {
-    { a < b };
-  };
-
-  // Helper for checking if two tuples can == each other
-  template<typename T, typename U>
-  concept comparable = requires(T t, U u) {
-    { t == u };
-  };
-
   template<typename T, typename... Args>
   concept implicit_constructible = requires(Args... args) { T{args...}; };
 
@@ -98,27 +87,38 @@ namespace kumi::_
     using type = kumi::_::tag_of_t<T>;
   };
 
-  //==================================================================================================================
-  // Helper concepts for tuple detection
-  //==================================================================================================================
-  // Concept specifying a type is non-empty standard tuple-like type.
-  template<typename T>
-  concept non_empty_tuple = requires {
-    typename std::tuple_element<0, std::remove_cvref_t<T>>::type;
-    { std::tuple_size<T>::value };
-  };
+  //====================================================================================================================
+  // Helper concepts for tuple property detection
+  //====================================================================================================================
+  template<typename T> inline constexpr bool has_tuple_size = requires { std::tuple_size<T>::value; };
 
-  // Concept specifying a type is an empty standard tuple-like type.
-  template<typename T>
-  concept empty_tuple = (std::tuple_size<std::remove_cvref_t<T>>::value == 0);
+  template<typename T> inline constexpr bool has_value_type = requires { typename T::value_type; };
 
+  template<typename T, typename Seq> inline constexpr bool has_tuple_element = false;
+
+  template<typename T, std::size_t... I>
+  inline constexpr bool has_tuple_element<T, std::index_sequence<I...>> =
+    (requires { typename std::tuple_element<I, T>::type; } && ...);
+
+  template<typename T, typename V, typename Seq> inline constexpr bool has_homogeneous_tuple_element = false;
+
+  template<typename T, typename V, std::size_t... I>
+  inline constexpr bool has_homogeneous_tuple_element<T, V, std::index_sequence<I...>> =
+    ((requires { typename std::tuple_element<I, T>::type; } && std::same_as<std::tuple_element_t<I, T>, V>) && ...);
+
+  //==================================================================================================================
+  // Helper concepts for detection of semantic on types
+  //==================================================================================================================
   // Concept specifying a type is a standard tuple-like type.
   template<typename T>
-  concept std_tuple_compatible = kumi::_::empty_tuple<T> || kumi::_::non_empty_tuple<T>;
+  concept tuple_like =
+    kumi::_::has_tuple_size<T> && kumi::_::has_tuple_element<T, std::make_index_sequence<std::tuple_size<T>::value>>;
 
-  //==================================================================================================================
-  // Helper concepts for container detection
-  //==================================================================================================================
+  template<typename T>
+  concept array_like =
+    has_tuple_size<T> && has_value_type<T> &&
+    has_homogeneous_tuple_element<T, typename T::value_type, std::make_index_sequence<std::tuple_size<T>::value>>;
+
   // Concept specifying a type is standard container-like type.
   template<typename T>
   concept container_like = requires(T const& t) {
@@ -144,64 +144,4 @@ namespace kumi::_
     using Ts::operator()...;
     consteval void operator()(...);
   };
-
-  template<typename, typename> inline constexpr bool is_fieldwise_comparable_v = false;
-
-  template<template<class...> class Box, typename... From, typename... To>
-  requires(sizeof...(From) == sizeof...(To))
-  inline constexpr bool is_fieldwise_comparable_v<Box<From...>, Box<To...>>{
-    (kumi::_::comparable<decltype(std::declval<kumi::_::set<From...>>()(std::declval<kumi::_::identifier_of_t<To>>())),
-                         kumi::_::type_of_t<To>> &&
-     ...)};
-
-  template<typename From, typename To>
-  concept fieldwise_comparable = kumi::_::is_fieldwise_comparable_v<std::remove_cvref_t<From>, std::remove_cvref_t<To>>;
-
-  // The type of the value a source record exposes for the field of a destination record.
-  template<typename To, typename... From>
-  using fieldwise_source_t = std::remove_reference_t<decltype(std::declval<kumi::_::set<From...>>()(
-    std::declval<kumi::_::identifier_of_t<To>>()))>;
-
-  template<typename, typename> inline constexpr bool is_fieldwise_assignable_v = false;
-
-  template<template<class...> class Box, typename... From, typename... To>
-  requires(sizeof...(From) == sizeof...(To))
-  inline constexpr bool is_fieldwise_assignable_v<Box<From...>, Box<To...>>{
-    (std::is_assignable_v<kumi::_::type_of_t<To>&, kumi::_::fieldwise_source_t<To, From...> const&> && ...)};
-
-  template<typename From, typename To>
-  concept fieldwise_assignable = kumi::_::is_fieldwise_assignable_v<std::remove_cvref_t<From>, std::remove_cvref_t<To>>;
-
-  template<typename, typename> inline constexpr bool is_fieldwise_move_assignable_v = false;
-
-  template<template<class...> class Box, typename... From, typename... To>
-  requires(sizeof...(From) == sizeof...(To))
-  inline constexpr bool is_fieldwise_move_assignable_v<Box<From...>, Box<To...>>{
-    (std::is_assignable_v<kumi::_::type_of_t<To>&, kumi::_::fieldwise_source_t<To, From...>&&> && ...)};
-
-  template<typename From, typename To>
-  concept fieldwise_move_assignable =
-    kumi::_::is_fieldwise_move_assignable_v<std::remove_cvref_t<From>, std::remove_cvref_t<To>>;
-
-  template<typename, typename> inline constexpr bool is_fieldwise_nothrow_assignable_v = false;
-
-  template<template<class...> class Box, typename... From, typename... To>
-  requires(sizeof...(From) == sizeof...(To))
-  inline constexpr bool is_fieldwise_nothrow_assignable_v<Box<From...>, Box<To...>>{
-    (std::is_nothrow_assignable_v<kumi::_::type_of_t<To>&, kumi::_::fieldwise_source_t<To, From...> const&> && ...)};
-
-  template<typename From, typename To>
-  concept fieldwise_nothrow_assignable =
-    kumi::_::is_fieldwise_nothrow_assignable_v<std::remove_cvref_t<From>, std::remove_cvref_t<To>>;
-
-  template<typename, typename> inline constexpr bool is_fieldwise_nothrow_move_assignable_v = false;
-
-  template<template<class...> class Box, typename... From, typename... To>
-  requires(sizeof...(From) == sizeof...(To))
-  inline constexpr bool is_fieldwise_nothrow_move_assignable_v<Box<From...>, Box<To...>>{
-    (std::is_nothrow_assignable_v<kumi::_::type_of_t<To>&, kumi::_::fieldwise_source_t<To, From...>&&> && ...)};
-
-  template<typename From, typename To>
-  concept fieldwise_nothrow_move_assignable =
-    kumi::_::is_fieldwise_nothrow_move_assignable_v<std::remove_cvref_t<From>, std::remove_cvref_t<To>>;
 }
