@@ -5,15 +5,35 @@
 ##======================================================================================================================
 
 ##======================================================================================================================
+## Take the dependencies from the environment, without CPM
+##======================================================================================================================
+option(KUMI_EXTERNAL_DEPENDENCIES "Take dependencies from the environment instead of fetching them" OFF)
+
+##======================================================================================================================
+## Retrieve a package declared below, from the environment or by CPM
+##======================================================================================================================
+macro(kumi_get_package name)
+  if(KUMI_EXTERNAL_DEPENDENCIES)
+    find_package(${name} CONFIG REQUIRED)
+  else()
+    CPMGetPackage(${name})
+  endif()
+endmacro()
+
+if(KUMI_EXTERNAL_DEPENDENCIES)
+  if(NOT COPACABANA_SOURCE_DIR)
+    message(FATAL_ERROR "[KUMI] - KUMI_EXTERNAL_DEPENDENCIES needs COPACABANA_SOURCE_DIR")
+  endif()
+  return()
+endif()
+
+##======================================================================================================================
 ## CPM is vendored: the download bootstrap reports nothing on a failure and leaves an empty file.
 ##======================================================================================================================
 include(${CMAKE_CURRENT_LIST_DIR}/CPM.cmake)
 
 ##======================================================================================================================
 ## Retrieve dependencies
-##
-## This file runs before the project can declare an option, copa_add_option arriving with copacabana, so a package
-## wanted only under an option is declared here and fetched after the options, in CMakeLists.txt.
 ##======================================================================================================================
 CPMAddPackage(NAME COPACABANA GITHUB_REPOSITORY jfalcou/copacabana GIT_TAG cc2bc58c53c64c7cc47b611fee219b0cefa27d43)
 
