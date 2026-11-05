@@ -30,6 +30,7 @@ copa_add_option(KUMI_BUILD_DOCUMENTATION "Build Doxygen for Kumi" OFF LABEL "Dox
 copa_add_option(KUMI_ENABLE_SANITIZERS "Build tests with AddressSanitizer + UndefinedBehaviorSanitizer" OFF LABEL "Sanitizers")
 copa_add_option(KUMI_ENABLE_COVERAGE "Build tests with code coverage instrumentation" OFF LABEL "Coverage")
 copa_add_option(KUMI_COMPILE_COST "Measure what every test unit costs to compile" OFF)
+copa_add_option(KUMI_EXTERNAL_DEPENDENCIES "Take dependencies from the environment instead of fetching them" OFF)
 
 copa_project_version(MAJOR 5 MINOR 0 PATCH 0 REPOSITORY https://github.com/jfalcou/kumi)
 
@@ -85,7 +86,7 @@ copa_setup_standalone ( QUIET
 ## Tests setup
 ##======================================================================================================================
 if(KUMI_BUILD_TEST)
-  CPMGetPackage(TTS)
+  kumi_get_package(TTS)
   include(${PROJECT_SOURCE_DIR}/cmake/compiler.cmake)
 
   if(KUMI_ENABLE_SANITIZERS)
