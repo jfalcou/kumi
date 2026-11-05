@@ -20,3 +20,43 @@ jobs:
       project: kumi
       cxx-compiler: clang++
       image: ghcr.io/jfalcou/compilers:v11
+
+  ## The configure of a package manager: copacabana and TTS taken from the environment, CPM never called.
+  external-dependencies:
+    name: Dependencies from the environment
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+    container:
+      image: ghcr.io/jfalcou/compilers:v11
+
+    steps:
+      - name: Fetch current branch
+        uses: actions/checkout@v7
+
+      ## The pins of cmake/dependencies.cmake, so that this job and CPM read the same copacabana and the same TTS.
+      - name: Fetch copacabana and TTS at their pins, and install TTS
+        shell: bash
+        run: |
+          copa=$(sed -n 's/.*NAME COPACABANA.*GIT_TAG \([^ )]*\).*/\1/p' cmake/dependencies.cmake)
+          tts=$(sed -n '/NAME TTS/,/)/s/.*GIT_TAG \([^ )]*\).*/\1/p' cmake/dependencies.cmake)
+          test -n "$copa" && test -n "$tts"
+          git clone --quiet https://github.com/jfalcou/copacabana deps/copacabana
+          git -C deps/copacabana checkout --quiet "$copa"
+          git clone --quiet https://github.com/jfalcou/tts deps/tts
+          git -C deps/tts checkout --quiet "$tts"
+          cmake -S deps/tts -B deps/tts/build -G Ninja -DTTS_BUILD_TEST=OFF -DTTS_BUILD_DOCUMENTATION=OFF -DTTS_QUIET=ON
+          cmake --install deps/tts/build --prefix "$PWD/deps/prefix"
+
+      ## No _deps directory afterwards: CPM ran nothing.
+      - name: Configure with the dependencies from the environment
+        shell: bash
+        run: |
+          cmake --preset clang -DKUMI_EXTERNAL_DEPENDENCIES=ON \
+                -DCOPACABANA_SOURCE_DIR="$PWD/deps/copacabana" -DCMAKE_PREFIX_PATH="$PWD/deps/prefix"
+          test ! -d build/clang/_deps
+
+      - name: Build and run the unit tests
+        shell: bash
+        run: |
+          cmake --build --preset clang --config Release --target unit.exe
+          ctest --preset clang --build-config Release -R unit -j 2 --output-on-failure --no-tests=error --timeout 300
