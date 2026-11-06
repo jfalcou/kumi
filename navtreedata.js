@@ -45,6 +45,7 @@ var NAVTREE =
       [ "Types", "group__kumi__tuple__related.html", [
         [ "Product Types and Functions", "group__kumi__tuple__related.html", null ],
         [ "Record Types and Functions", "group__kumi__record__related.html", null ],
+        [ "Power Types and Functions", "group__kumi__array__related.html", null ],
         [ "Types", "group__kumi__types.html", null ]
       ] ],
       [ "Algorithms", "group__kumi__transforms.html", [
@@ -67,7 +68,7 @@ var NAVTREE =
 
 var NAVTREEINDEX =
 [
-"group__kumi__concepts.html"
+"group__kumi__array__related.html"
 ];
 
 var SYNCONMSG = 'click to disable panel synchronization';

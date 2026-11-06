@@ -1,5 +1,6 @@
 var NAVTREEINDEX0 =
 {
+"group__kumi__array__related.html":[3,0,2],
 "group__kumi__concepts.html":[3,2,1],
 "group__kumi__functional.html":[3,2,3],
 "group__kumi__generators.html":[3,1,2],
@@ -12,12 +13,12 @@ var NAVTREEINDEX0 =
 "group__kumi__transforms.html":[3,1,0],
 "group__kumi__tuple__related.html":[3,0],
 "group__kumi__tuple__related.html":[3,0,0],
-"group__kumi__types.html":[3,0,2],
+"group__kumi__types.html":[3,0,3],
 "group__kumi__utility.html":[3,2,2],
 "index.html":[],
 "index.html":[0],
 "index.html#Examples":[0,0],
-"index.html#autotoc_md144":[0,1],
+"index.html#autotoc_md155":[0,1],
 "kumi_changelog.html":[1,1],
 "kumi_cpp_spec.html#kumi_cpp_spec":[2,1],
 "kumi_glossary.html":[2],

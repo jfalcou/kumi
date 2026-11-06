@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['s_20changed_0',['s Changed',['../kumi_changelog.html#autotoc_md89',1,'What&apos;s Changed'],['../kumi_changelog.html#autotoc_md94',1,'What&apos;s Changed'],['../kumi_changelog.html#autotoc_md100',1,'What&apos;s Changed'],['../kumi_changelog.html#autotoc_md104',1,'What&apos;s Changed']]],
+  ['s_20changed_0',['s Changed',['../kumi_changelog.html#autotoc_md100',1,'What&apos;s Changed'],['../kumi_changelog.html#autotoc_md105',1,'What&apos;s Changed'],['../kumi_changelog.html#autotoc_md111',1,'What&apos;s Changed'],['../kumi_changelog.html#autotoc_md115',1,'What&apos;s Changed']]],
   ['scannable_1',['scannable',['../structkumi_1_1function_1_1scannable.html',1,'kumi::function::scannable&lt; F, V &gt;'],['../structkumi_1_1function_1_1scannable_ac3570f9286b470ae88de5a142941751a.html#ac3570f9286b470ae88de5a142941751a',1,'kumi::function::scannable::scannable()'],['../structkumi_1_1function_1_1scannable_ac3570f9286b470ae88de5a142941751a.html#ac3570f9286b470ae88de5a142941751a',1,'kumi::function::scannable(F &amp;&amp;f, T &amp;&amp;t) -&gt; scannable&lt; F, std::unwrap_ref_decay_t&lt; T &gt; &gt;']]],
   ['select_5findex_5fsequence_2',['select_index_sequence',['../group__kumi__functional_gab3c7eda04b7101058c5bcf5bbda210b6.html#gab3c7eda04b7101058c5bcf5bbda210b6',1,'kumi::function']]],
   ['setup_3',['Setup',['../kumi_setup.html',1,'']]],
@@ -21,7 +21,8 @@ var searchData=
   ['stored_5felement_5ft_18',['stored_element_t',['../group__kumi__record__traits_gaa957535657d5741421f09c44c5faaa62.html#gaa957535657d5741421f09c44c5faaa62',1,'kumi']]],
   ['stored_5fmember_5ft_19',['stored_member_t',['../group__kumi__traits_ga17e8e213d54b65fdd4de0ec25916d3e6.html#ga17e8e213d54b65fdd4de0ec25916d3e6',1,'kumi']]],
   ['str_20',['str',['../structkumi_1_1str.html',1,'kumi']]],
-  ['structural_20type_21',['Structural type',['../kumi_cpp_spec.html#autotoc_md114',1,'']]],
+  ['structural_20type_21',['Structural type',['../kumi_cpp_spec.html#autotoc_md125',1,'']]],
   ['sum_22',['sum',['../group__kumi__reductions_ga3e8b585399de360c3ab55efc2fa0ed8c.html#ga3e8b585399de360c3ab55efc2fa0ed8c',1,'kumi']]],
-  ['summary_20table_23',['Summary Table',['../kumi_nomenclature.html#autotoc_md138',1,'']]]
+  ['summary_20table_23',['Summary Table',['../kumi_nomenclature.html#autotoc_md149',1,'']]],
+  ['swap_24',['swap',['../structkumi_1_1array_a152cfa24086d4f3f5c40c80245e8231c.html#a152cfa24086d4f3f5c40c80245e8231c',1,'kumi::array::swap()'],['../structkumi_1_1record_a92c78947b29dbd8a035032fef1e3b7d8.html#a92c78947b29dbd8a035032fef1e3b7d8',1,'kumi::record::swap()'],['../structkumi_1_1tuple_aa3508885774101340eb2db1d2b61ed28.html#aa3508885774101340eb2db1d2b61ed28',1,'kumi::tuple::swap()']]]
 ];

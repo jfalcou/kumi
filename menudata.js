@@ -40,6 +40,7 @@ var menudata={children:[
 {text:"Types",url:"group__kumi__tuple__related.html",children:[
 {text:"Product Types and Functions",url:"group__kumi__tuple__related.html"},
 {text:"Record Types and Functions",url:"group__kumi__record__related.html"},
+{text:"Power Types and Functions",url:"group__kumi__array__related.html"},
 {text:"Types",url:"group__kumi__types.html"}]},
 {text:"Algorithms",url:"group__kumi__transforms.html",children:[
 {text:"Transformations",url:"group__kumi__transforms.html"},

@@ -141,6 +141,7 @@ $(function(){initNavTree('structkumi_1_1common__product__type.html','',''); });
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><div class="compoundTemplParams">template&lt;typename... Ts&gt;<br />
 struct kumi::common_product_type&lt; Ts &gt;</div><p>Extracts the common product_type of a parameter pack. </p>
+<dl class="section note"><dt>Note</dt><dd>If the pack is empty, there is no common product type to build and the type alias is not defined.</dd></dl>
 <p>If all the types are record types then it returns an empty record type, otherwise returns an empty product type. As we are unable to properly compute the Least Restrictive Subtype of a pack this trait is specialized in the following way.</p>
 <ul>
 <li>If all input types are the same product_type, provide a type alias corresponding to it.</li>
@@ -155,14 +156,14 @@ struct kumi::common_product_type&lt; Ts &gt;</div><p>Extracts the common product
   </table>
   </dd>
 </dl>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md70"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md80"></a>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt; <span class="keyword">using </span>common_product_type_t = <span class="keyword">typename</span> <a class="code hl_struct" href="structkumi_1_1common__product__type.html">common_product_type</a>&lt;Ts...&gt;::type;</div>
 <div class="line">}</div>
 <div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
-<div class="ttc" id="astructkumi_1_1common__product__type_html"><div class="ttname"><a href="structkumi_1_1common__product__type.html">kumi::common_product_type</a></div><div class="ttdoc">Extracts the common product_type of a parameter pack.</div><div class="ttdef"><b>Definition</b> traits.hpp:475</div></div>
+<div class="ttc" id="astructkumi_1_1common__product__type_html"><div class="ttname"><a href="structkumi_1_1common__product__type.html">kumi::common_product_type</a></div><div class="ttdoc">Extracts the common product_type of a parameter pack.</div><div class="ttdef"><b>Definition</b> traits.hpp:559</div></div>
 </div><!-- fragment --> </div></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

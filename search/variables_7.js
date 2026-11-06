@@ -7,12 +7,15 @@ var searchData=
   ['index_4',['index',['../group__kumi__utility.html#gafa1ac4e53441436fe2c0a1aca7a91e5f',1,'kumi']]],
   ['inner_5fproduct_5',['inner_product',['../group__kumi__reductions_ga712c681a51bdbc86d41b160deddd2e1d.html#ga712c681a51bdbc86d41b160deddd2e1d',1,'kumi']]],
   ['iota_6',['iota',['../group__kumi__generators_gace6e022bb94a706731299b9d395ac10d.html#gace6e022bb94a706731299b9d395ac10d',1,'kumi']]],
-  ['is_5fcontainer_5fv_7',['is_container_v',['../group__kumi__traits_ga02b588394b12893e71b1d6162db0b4b4.html#ga02b588394b12893e71b1d6162db0b4b4',1,'kumi']]],
-  ['is_5fequality_5fcomparable_5fv_8',['is_equality_comparable_v',['../group__kumi__traits_ga156cb23641777bc9b29e3d3cff87aba4.html#ga156cb23641777bc9b29e3d3cff87aba4',1,'kumi']]],
-  ['is_5fequivalent_5fv_9',['is_equivalent_v',['../group__kumi__traits_ga65a2b6e28cd4ab58cfaffd90fea1b215.html#ga65a2b6e28cd4ab58cfaffd90fea1b215',1,'kumi']]],
-  ['is_5fhomogeneous_5fv_10',['is_homogeneous_v',['../group__kumi__tuple__traits_ga444ecc58235c6cb4f805f5bb03409e4c.html#ga444ecc58235c6cb4f805f5bb03409e4c',1,'kumi']]],
-  ['is_5finstance_5fof_5fv_11',['is_instance_of_v',['../group__kumi__traits_gaf70c64a5b0d21e1bcc3e51077c06d18d.html#gaf70c64a5b0d21e1bcc3e51077c06d18d',1,'kumi']]],
-  ['is_5fproduct_5ftype_5fv_12',['is_product_type_v',['../group__kumi__traits_ga543f9adb09ce98ab19a15e3a90c52656.html#ga543f9adb09ce98ab19a15e3a90c52656',1,'kumi']]],
-  ['is_5fprojection_5fmap_5fv_13',['is_projection_map_v',['../group__kumi__traits_gac535fd8eadc87407e3132a7fceda4ab1.html#gac535fd8eadc87407e3132a7fceda4ab1',1,'kumi']]],
-  ['is_5frecord_5ftype_5fv_14',['is_record_type_v',['../group__kumi__traits_ga75612200d87c3aa30f068205aa882e2a.html#ga75612200d87c3aa30f068205aa882e2a',1,'kumi']]]
+  ['is_5fcomparable_5fv_7',['is_comparable_v',['../group__kumi__traits_ga02be876fed0356a37924a4df900feace.html#ga02be876fed0356a37924a4df900feace',1,'kumi']]],
+  ['is_5fcontainer_5fv_8',['is_container_v',['../group__kumi__traits_ga02b588394b12893e71b1d6162db0b4b4.html#ga02b588394b12893e71b1d6162db0b4b4',1,'kumi']]],
+  ['is_5fequality_5fcomparable_5fv_9',['is_equality_comparable_v',['../group__kumi__traits_ga156cb23641777bc9b29e3d3cff87aba4.html#ga156cb23641777bc9b29e3d3cff87aba4',1,'kumi']]],
+  ['is_5fequivalent_5fv_10',['is_equivalent_v',['../group__kumi__traits_ga65a2b6e28cd4ab58cfaffd90fea1b215.html#ga65a2b6e28cd4ab58cfaffd90fea1b215',1,'kumi']]],
+  ['is_5fhomogeneous_5fv_11',['is_homogeneous_v',['../group__kumi__tuple__traits_ga444ecc58235c6cb4f805f5bb03409e4c.html#ga444ecc58235c6cb4f805f5bb03409e4c',1,'kumi']]],
+  ['is_5finstance_5fof_5fv_12',['is_instance_of_v',['../group__kumi__traits_gaf70c64a5b0d21e1bcc3e51077c06d18d.html#gaf70c64a5b0d21e1bcc3e51077c06d18d',1,'kumi']]],
+  ['is_5fordered_5fv_13',['is_ordered_v',['../group__kumi__traits_ga88b0cafd09ba2a1bbc6e301f70d9ba17.html#ga88b0cafd09ba2a1bbc6e301f70d9ba17',1,'kumi']]],
+  ['is_5fpower_5ftype_5fv_14',['is_power_type_v',['../group__kumi__traits_gaa1989d911d3452c800cd62f0c9d78607.html#gaa1989d911d3452c800cd62f0c9d78607',1,'kumi']]],
+  ['is_5fproduct_5ftype_5fv_15',['is_product_type_v',['../group__kumi__traits_ga543f9adb09ce98ab19a15e3a90c52656.html#ga543f9adb09ce98ab19a15e3a90c52656',1,'kumi']]],
+  ['is_5fprojection_5fmap_5fv_16',['is_projection_map_v',['../group__kumi__traits_gac535fd8eadc87407e3132a7fceda4ab1.html#gac535fd8eadc87407e3132a7fceda4ab1',1,'kumi']]],
+  ['is_5frecord_5ftype_5fv_17',['is_record_type_v',['../group__kumi__traits_ga75612200d87c3aa30f068205aa882e2a.html#ga75612200d87c3aa30f068205aa882e2a',1,'kumi']]]
 ];

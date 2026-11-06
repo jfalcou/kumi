@@ -143,7 +143,7 @@ $(function(){initNavTree('conceptkumi_1_1concepts_1_1static__container.html','',
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Concept specifying a type follows the Container Type semantic. </p>
 <p>A type <span class="tt">T</span> models <span class="tt">kumi::container</span> if it is a kumi::container of fixed size.</p>
-<h2 class="doxsection"><a class="anchor" id="autotoc_md28"></a>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md35"></a>
 Example types:</h2>
 <ul>
 <li>std::span&lt;T,N&gt;; </li>
@@ -151,9 +151,9 @@ Example types:</h2>
 </div><h2 id="header-conceptdef" class="groupheader">Concept definition</h2>
 <div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
 <div class="line">    <span class="keyword">concept </span><a class="code hl_concept" href="conceptkumi_1_1concepts_1_1static__container.html">static_container</a> = <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1container.html">kumi::concepts::container&lt;T&gt;</a> &amp;&amp; <a class="code hl_variable" href="group__kumi__traits_gaaaac9da4c0098fbf974cd6917827dae4.html#gaaaac9da4c0098fbf974cd6917827dae4">kumi::has_static_size_v&lt;std::remove_cvref_t&lt;T&gt;</a>&gt;</div>
-<div class="ttc" id="aconceptkumi_1_1concepts_1_1container_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1container.html">kumi::concepts::container</a></div><div class="ttdoc">Concept specifying a type follows the Container Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:110</div></div>
-<div class="ttc" id="aconceptkumi_1_1concepts_1_1static__container_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1static__container.html">kumi::concepts::static_container</a></div><div class="ttdoc">Concept specifying a type follows the Container Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:124</div></div>
-<div class="ttc" id="agroup__kumi__traits_gaaaac9da4c0098fbf974cd6917827dae4_html_gaaaac9da4c0098fbf974cd6917827dae4"><div class="ttname"><a href="group__kumi__traits_gaaaac9da4c0098fbf974cd6917827dae4.html#gaaaac9da4c0098fbf974cd6917827dae4">kumi::has_static_size_v</a></div><div class="ttdeci">constexpr bool has_static_size_v</div><div class="ttdoc">Detects if a given kumi::container instance size is static.</div><div class="ttdef"><b>Definition</b> traits.hpp:268</div></div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1container_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1container.html">kumi::concepts::container</a></div><div class="ttdoc">Concept specifying a type follows the Container Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:129</div></div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1static__container_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1static__container.html">kumi::concepts::static_container</a></div><div class="ttdoc">Concept specifying a type follows the Container Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:143</div></div>
+<div class="ttc" id="agroup__kumi__traits_gaaaac9da4c0098fbf974cd6917827dae4_html_gaaaac9da4c0098fbf974cd6917827dae4"><div class="ttname"><a href="group__kumi__traits_gaaaac9da4c0098fbf974cd6917827dae4.html#gaaaac9da4c0098fbf974cd6917827dae4">kumi::has_static_size_v</a></div><div class="ttdeci">constexpr bool has_static_size_v</div><div class="ttdoc">Detects if a given kumi::container instance size is static.</div><div class="ttdef"><b>Definition</b> traits.hpp:350</div></div>
 </div><!-- fragment --></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

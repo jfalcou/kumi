@@ -160,7 +160,7 @@ $(function(){initNavTree('group__kumi__tuple__related_ga934bd052835c7cc48a870fbc
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga934bd052835c7cc48a870fbc7c86e6ac">forward_as_tuple</a>(Ts&amp;&amp;... ts);</div>
-<div class="ttc" id="agroup__kumi__tuple__related_ga934bd052835c7cc48a870fbc7c86e6ac_html_ga934bd052835c7cc48a870fbc7c86e6ac"><div class="ttname"><a href="#ga934bd052835c7cc48a870fbc7c86e6ac">kumi::forward_as_tuple</a></div><div class="ttdeci">constexpr forward_as_tuple_t forward_as_tuple</div><div class="ttdoc">Creates a kumi::tuple of forwarding references to its arguments.</div><div class="ttdef"><b>Definition</b> tuple.hpp:590</div></div>
+<div class="ttc" id="agroup__kumi__tuple__related_ga934bd052835c7cc48a870fbc7c86e6ac_html_ga934bd052835c7cc48a870fbc7c86e6ac"><div class="ttname"><a href="#ga934bd052835c7cc48a870fbc7c86e6ac">kumi::forward_as_tuple</a></div><div class="ttdeci">constexpr forward_as_tuple_t forward_as_tuple</div><div class="ttdoc">Creates a kumi::tuple of forwarding references to its arguments.</div><div class="ttdef"><b>Definition</b> tuple.hpp:593</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">ts</span>: Zero or more arguments to construct the tuple from.</li>
@@ -179,8 +179,8 @@ $(function(){initNavTree('group__kumi__tuple__related_ga934bd052835c7cc48a870fbc
 <div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Data&gt;</div>
 <div class="line">std::vector&lt;std::string&gt; build(Data d)</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordflow">return</span> std::vector&lt;std::string&gt; ( <a class="code hl_function" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::get&lt;0&gt;</a>(d)</div>
-<div class="line">                                  , std::move(<a class="code hl_function" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::get&lt;1&gt;</a>(d))</div>
+<div class="line">  <span class="keywordflow">return</span> std::vector&lt;std::string&gt; ( <a class="code hl_function" href="structkumi_1_1array_a2a236814b119c1e3e0b1cc5ce062c282.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;0&gt;</a>(d)</div>
+<div class="line">                                  , std::move(<a class="code hl_function" href="structkumi_1_1array_a2a236814b119c1e3e0b1cc5ce062c282.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;1&gt;</a>(d))</div>
 <div class="line">                                  );</div>
 <div class="line">}</div>
 <div class="line"> </div>
@@ -191,7 +191,7 @@ $(function(){initNavTree('group__kumi__tuple__related_ga934bd052835c7cc48a870fbc
 <div class="line">  <span class="keywordflow">for</span>(<span class="keyword">auto</span> <span class="keyword">const</span>&amp; s : v)</div>
 <div class="line">    std::cout &lt;&lt; s &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1record_abc2cd329ad25d155458850c19cc3b137_html_abc2cd329ad25d155458850c19cc3b137"><div class="ttname"><a href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::record::get</a></div><div class="ttdeci">decltype(auto) constexpr get(record&lt; Ts... &gt; &amp;r) noexcept</div><div class="ttdoc">Extracts the Ith field from a kumi::record.</div><div class="ttdef"><b>Definition</b> record.hpp:766</div></div>
+<div class="ttc" id="astructkumi_1_1array_a2a236814b119c1e3e0b1cc5ce062c282_html_a2a236814b119c1e3e0b1cc5ce062c282"><div class="ttname"><a href="structkumi_1_1array_a2a236814b119c1e3e0b1cc5ce062c282.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::array::get</a></div><div class="ttdeci">decltype(auto) constexpr get(array&lt; T, N &gt; &amp;t) noexcept</div><div class="ttdoc">Extracts the Ith element from a kumi::array.</div><div class="ttdef"><b>Definition</b> array.hpp:669</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

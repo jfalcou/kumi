@@ -158,7 +158,7 @@ $(function(){initNavTree('group__kumi__record__related_ga931b45076a3ac621c248efa
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga931b45076a3ac621c248efa48881b59a">make_record</a>(Ts&amp;&amp;... ts);</div>
-<div class="ttc" id="agroup__kumi__record__related_ga931b45076a3ac621c248efa48881b59a_html_ga931b45076a3ac621c248efa48881b59a"><div class="ttname"><a href="#ga931b45076a3ac621c248efa48881b59a">kumi::make_record</a></div><div class="ttdeci">constexpr make_record_t make_record</div><div class="ttdoc">Creates a record object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> record.hpp:590</div></div>
+<div class="ttc" id="agroup__kumi__record__related_ga931b45076a3ac621c248efa48881b59a_html_ga931b45076a3ac621c248efa48881b59a"><div class="ttname"><a href="#ga931b45076a3ac621c248efa48881b59a">kumi::make_record</a></div><div class="ttdeci">constexpr make_record_t make_record</div><div class="ttdoc">Creates a record object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> record.hpp:611</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">ts</span>: Zero or more arguments to construct the record from.</li>
@@ -183,10 +183,10 @@ $(function(){initNavTree('group__kumi__record__related_ga931b45076a3ac621c248efa
 <div class="line">  std::cout &lt;&lt; t &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// Reference access</span></div>
-<div class="line">  <a class="code hl_function" href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::get</a>&lt;<span class="stringliteral">&quot;m&quot;</span>_id&gt;(t)++;</div>
+<div class="line">  <a class="code hl_function" href="structkumi_1_1array_a2a236814b119c1e3e0b1cc5ce062c282.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get</a>&lt;<span class="stringliteral">&quot;m&quot;</span>_id&gt;(t)++;</div>
 <div class="line">  std::cout &lt;&lt; k &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1record_abc2cd329ad25d155458850c19cc3b137_html_abc2cd329ad25d155458850c19cc3b137"><div class="ttname"><a href="structkumi_1_1record_abc2cd329ad25d155458850c19cc3b137.html#abc2cd329ad25d155458850c19cc3b137">kumi::record::get</a></div><div class="ttdeci">decltype(auto) constexpr get(record&lt; Ts... &gt; &amp;r) noexcept</div><div class="ttdoc">Extracts the Ith field from a kumi::record.</div><div class="ttdef"><b>Definition</b> record.hpp:766</div></div>
+<div class="ttc" id="astructkumi_1_1array_a2a236814b119c1e3e0b1cc5ce062c282_html_a2a236814b119c1e3e0b1cc5ce062c282"><div class="ttname"><a href="structkumi_1_1array_a2a236814b119c1e3e0b1cc5ce062c282.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::array::get</a></div><div class="ttdeci">decltype(auto) constexpr get(array&lt; T, N &gt; &amp;t) noexcept</div><div class="ttdoc">Extracts the Ith element from a kumi::array.</div><div class="ttdef"><b>Definition</b> array.hpp:669</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

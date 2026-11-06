@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="KUMI - The C++20 Compact Tuple Tools" />
 <meta name="twitter:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
 <meta name="twitter:image" content="https://jfalcou.github.io/kumi/card.png" />
-<title>KUMI: kumi::tuple::operator=</title>
+<title>KUMI: kumi::make_array</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -106,7 +106,7 @@ $(function() {
   </div>
 </div>
 <script type="text/javascript">
-$(function(){initNavTree('structkumi_1_1tuple_a2ea9ed2c89c9f857f9ea9e78d3e55415.html','',''); });
+$(function(){initNavTree('group__kumi__array__related_ga1f35cbd4396ea2b88d6c34f63c02c8c6.html','',''); });
 </script>
 <div id="container">
 <div id="doc-content">
@@ -132,43 +132,54 @@ $(function(){initNavTree('structkumi_1_1tuple_a2ea9ed2c89c9f857f9ea9e78d3e55415.
 </div>
 
 <div class="contents">
-<a id="a2ea9ed2c89c9f857f9ea9e78d3e55415" name="a2ea9ed2c89c9f857f9ea9e78d3e55415"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a2ea9ed2c89c9f857f9ea9e78d3e55415">&#9670;&#160;</a></span>operator=()</h2>
+<a id="ga1f35cbd4396ea2b88d6c34f63c02c8c6" name="ga1f35cbd4396ea2b88d6c34f63c02c8c6"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga1f35cbd4396ea2b88d6c34f63c02c8c6">&#9670;&#160;</a></span>make_array</h2>
 
 <div class="memitem">
 <div class="memproto">
-<div class="memtemplate">
-template&lt;typename... Ts&gt; </div>
-<div class="memtemplate">
-template&lt;typename... Us&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname"><a class="el" href="structkumi_1_1tuple_a612d97f050a7b0eb9999f40c045779bf.html#a612d97f050a7b0eb9999f40c045779bf">tuple</a> &amp; <a class="el" href="structkumi_1_1tuple.html">kumi::tuple</a>&lt; Ts &gt;::operator= </td>
-          <td>(</td>
-          <td class="paramtype"><a class="el" href="structkumi_1_1tuple_a612d97f050a7b0eb9999f40c045779bf.html#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Us... &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
-          <td></td>
+          <td class="memname">make_array_t kumi::make_array {}</td>
         </tr>
       </table>
   </td>
   <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span></span>  </td>
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
   </tr>
 </table>
 </div><div class="memdoc">
 
-<p>Replaces the contents of the tuple with the contents of another tuple. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">other</td><td><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> to copy or move from </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd><span class="tt">*this</span></dd></dl>
-<dl class="section note"><dt>Note</dt><dd>This function does not participate in overload resolution if the members from the source tuple cannot be converted to the members of the current tuple. </dd></dl>
-
+<p>Creates a array object, deducing the target type from the types of arguments. </p>
+<h2 class="groupheader">Header file </h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/product_types/array.hpp&gt;</span></div>
+</div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga1f35cbd4396ea2b88d6c34f63c02c8c6">make_array</a>(Ts&amp;&amp;... ts);</div>
+<div class="ttc" id="agroup__kumi__array__related_ga1f35cbd4396ea2b88d6c34f63c02c8c6_html_ga1f35cbd4396ea2b88d6c34f63c02c8c6"><div class="ttname"><a href="#ga1f35cbd4396ea2b88d6c34f63c02c8c6">kumi::make_array</a></div><div class="ttdeci">constexpr make_array_t make_array</div><div class="ttdoc">Creates a array object, deducing the target type from the types of arguments.</div><div class="ttdef"><b>Definition</b> array.hpp:449</div></div>
+</div><!-- fragment --><h3 class="groupheader">Parameters </h3>
+<ul>
+<li><span class="tt">ts</span>: Zero or more arguments to construct the array from.</li>
+</ul>
+<h3 class="groupheader">Return value </h3>
+<ul>
+<li>A <a class="el" href="structkumi_1_1array.html" title="Fixed-size collection of homogeneous values.">kumi::array</a> constructed from the arguments or their inner references when an argument is an instance of <span class="tt">std::reference_wrapper</span>.</li>
+</ul>
+<h2 class="groupheader">Example </h2>
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// The element type is deduced from the (identical) types of the arguments.</span></div>
+<div class="line">  <span class="keyword">auto</span> a = <a class="code hl_variable" href="#ga1f35cbd4396ea2b88d6c34f63c02c8c6">kumi::make_array</a>( 1, 2, 3, 4 );</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">}</div>
+</div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->
@@ -178,7 +189,7 @@ template&lt;typename... Us&gt; </div>
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="navelem"><a href="namespacekumi.html">kumi</a></li><li class="navelem"><a href="structkumi_1_1tuple.html">tuple</a></li>
+    <li class="navelem"><a href="namespacekumi.html">kumi</a></li>
   </ul>
 </div>
 </div> <!-- DOXYSTRAP RELATED -->
