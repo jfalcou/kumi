@@ -10,6 +10,13 @@
 #include <tts/tts.hpp>
 #include "device.hpp"
 
+/*
+ *
+ *  There is an open issue in EDG regarding the handling of explicit(bool).
+ *  This test is to be activated once [EDG PR 222](https://github.com/edgcpp/compiler/pull/222) is closed.
+ *  As it is not blocking ignoring the test at this point isn't an issue.
+ * */
+
 namespace
 {
   struct Int
@@ -39,7 +46,7 @@ namespace
     *out = {kumi::get<0>(to).value, kumi::get<1>(to).value};
   }
 
-  // nvcc 13.2.51 rejects this conversion, in host code as much as in a kernel; clang and g++ accept it.
+// nvcc 13.2.51 rejects these conversions, in host code as much as in a kernel; clang and g++ accept them.
 #if !defined(__NVCC__)
   __global__ void convert_explicit(kumi::tuple<int, int>* out)
   {

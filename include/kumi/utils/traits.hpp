@@ -30,7 +30,7 @@ namespace kumi
     @include doc/tuple/api/adapt.cpp
   **/
   //====================================================================================================================
-  template<typename T> inline constexpr bool is_product_type_v = kumi::_::std_tuple_compatible<T>;
+  template<typename T> inline constexpr bool is_product_type_v = kumi::_::tuple_like<std::remove_cvref_t<T>>;
 
   template<typename T> struct is_product_type
   {
@@ -63,11 +63,40 @@ namespace kumi
   **/
   //====================================================================================================================
   template<typename T>
-  inline constexpr bool is_record_type_v = requires { typename T::is_record_type; } && kumi::_::std_tuple_compatible<T>;
+  inline constexpr bool is_record_type_v =
+    requires { typename T::is_record_type; } && kumi::_::tuple_like<std::remove_cvref_t<T>>;
 
   template<typename T> struct is_record_type
   {
     static constexpr bool value = kumi::is_record_type_v<T>;
+  };
+
+  //====================================================================================================================
+  /**
+    @ingroup kumi_traits
+    @brief Opt-in traits for types behaving like a kumi::power_type
+
+    @tparam T Type to inspect
+
+    To be treated like a power type, an user defined type must support structured bindings as well as exposing a
+    `value_type` alias.
+
+    ## Helper type-trait
+    @code
+    namespace kumi
+    {
+      template<typename T> struct is_power_type;
+    }
+    @endcode
+    ## Example:
+    @include doc/array/api/adapt.cpp
+  **/
+  //====================================================================================================================
+  template<typename T> inline constexpr bool is_power_type_v = kumi::_::array_like<std::remove_cvref_t<T>>;
+
+  template<typename T> struct is_power_type
+  {
+    static constexpr bool value = kumi::is_power_type_v<T>;
   };
 
   //====================================================================================================================
@@ -141,6 +170,59 @@ namespace kumi
     using type = kumi::member_t<I, T>;
   };
 
+  //====================================================================================================================
+  /**
+    @ingroup kumi_traits
+    @brief   The type of the value of `T` selected by the field `Field`, resolved by name the same way as
+             `kumi::member` resolves by index (going through `kumi::get`).
+
+    @tparam Field A kumi::field describing the sought identifier
+    @tparam T     The product type to inspect
+
+    ## Helper type-trait
+    @code
+    namespace kumi
+    {
+      template<typename Field, typename T> struct field_of;
+    }
+    @endcode
+  **/
+  //====================================================================================================================
+  template<typename Field, typename T>
+  using field_of_t = decltype(get<kumi::_::identifier_of_t<Field>{}>(std::declval<T&&>()));
+
+  template<typename Field, typename T> struct field_of
+  {
+    using type = kumi::field_of_t<Field, T>;
+  };
+
+  //====================================================================================================================
+  /**
+    @ingroup kumi_traits
+    @brief   Checks if the expression `u == v` is well-formed.
+
+    @tparam U The type on the left of `==`
+    @tparam V The type on the right of `==`
+  **/
+  //====================================================================================================================
+  template<typename U, typename V>
+  inline constexpr bool is_comparable_v = requires(U u, V v) {
+    { u == v };
+  };
+
+  //====================================================================================================================
+  /**
+    @ingroup kumi_traits
+    @brief   Checks if the expression `a < b` is well-formed.
+
+    @tparam U The type on the left of `<`
+    @tparam V The type on the right of `<`
+  **/
+  //====================================================================================================================
+  template<typename U, typename V>
+  inline constexpr bool is_ordered_v = requires(U const& a, V const& b) {
+    { a < b };
+  };
 }
 
 namespace kumi
@@ -450,6 +532,8 @@ namespace kumi
     @ingroup kumi_traits
     @brief    Extracts the common product_type of a parameter pack.
 
+    @note If the pack is empty, there is no common product type to build and the type alias is not defined.
+
     If all the types are record types then it returns an empty record type, otherwise returns an empty product type.
     As we are unable to properly compute the Least Restrictive Subtype of a pack this trait is specialized
     in the following way.
@@ -475,7 +559,7 @@ namespace kumi
   template<typename... Ts> struct common_product_type;
 
   template<typename T, typename... Ts>
-  requires((kumi::is_product_type_v<Ts> && ...) &&
+  requires(kumi::is_product_type_v<T> && (kumi::is_product_type_v<Ts> && ...) &&
            ((std::same_as<T, Ts> && ...) || (kumi::is_instance_of_v<T, Ts> && ...)))
   struct common_product_type<T, Ts...>
   {
@@ -590,14 +674,14 @@ namespace kumi
     template<typename T, typename U, std::size_t... I>
     requires(kumi::is_record_type_v<T> && kumi::is_record_type_v<U>)
     inline constexpr bool is_equality_comparable<T, U, std::index_sequence<I...>>{
-      (kumi::_::comparable<decltype(std::declval<kumi::_::set<kumi::element_t<I, T>...>>()(
-                             std::declval<kumi::_::identifier_of_t<kumi::element_t<I, U>>>())),
-                           kumi::_::type_of_t<kumi::element_t<I, U>>> &&
+      (kumi::is_comparable_v<decltype(std::declval<kumi::_::set<kumi::element_t<I, T>...>>()(
+                               std::declval<kumi::_::identifier_of_t<kumi::element_t<I, U>>>())),
+                             kumi::_::type_of_t<kumi::element_t<I, U>>> &&
        ...)};
 
     template<typename T, typename U, std::size_t... I>
     inline constexpr bool is_equality_comparable<T, U, std::index_sequence<I...>>{
-      (kumi::_::comparable<kumi::element_t<I, T>, kumi::element_t<I, U>> && ...)};
+      (kumi::is_comparable_v<kumi::element_t<I, T>, kumi::element_t<I, U>> && ...)};
   }
 
   //====================================================================================================================
@@ -631,6 +715,43 @@ namespace kumi
   template<typename T, typename U> struct is_equality_comparable
   {
     static constexpr bool value = kumi::is_equality_comparable_v<T, U>;
+  };
+
+  namespace _
+  {
+    template<typename L, typename R>
+    inline constexpr bool uniform = std::same_as<kumi::element_t<0, L>, kumi::element_t<0, R>>;
+
+    template<typename L, typename R>
+    requires(kumi::size_v<L> == 0 || kumi::size_v<R> == 0)
+    inline constexpr bool uniform<L, R> = true;
+  }
+
+  //====================================================================================================================
+  /**
+    @ingroup kumi_traits
+    @brief   Checks if a list of product types are homogeneous and of the same underlying type.
+
+    @tparam Ts The list of product type to access
+
+    ## Helper type-trait
+    @code
+    namespace kumi
+    {
+      template<typename T, typename U> struct are_uniform_product_types;
+    }
+    @endcode
+  **/
+  //====================================================================================================================
+  template<typename... Ts> inline constexpr bool are_uniform_product_types_v = sizeof...(Ts) == 0;
+
+  template<typename T, typename... Ts>
+  requires(kumi::is_homogeneous_v<T> && (kumi::is_homogeneous_v<Ts> && ...))
+  inline constexpr bool are_uniform_product_types_v<T, Ts...> = (kumi::_::uniform<T, Ts> && ...);
+
+  template<typename... Ts> struct are_uniform_product_types
+  {
+    static constexpr bool value = kumi::are_uniform_product_types_v<Ts...>;
   };
 
   //====================================================================================================================
@@ -740,6 +861,14 @@ namespace kumi
   template<typename T> struct is_kumi_record
   {
     static constexpr bool value = kumi::is_kumi_record_v<T>;
+  };
+
+  template<typename T> inline constexpr bool is_kumi_array_v = false;
+  template<typename T, std::size_t N> inline constexpr bool is_kumi_array_v<kumi::array<T, N>> = true;
+
+  template<typename T> struct is_kumi_array
+  {
+    static constexpr bool value = kumi::is_kumi_array_v<T>;
   };
 #endif
 }

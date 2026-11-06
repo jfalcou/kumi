@@ -269,6 +269,8 @@ namespace kumi
             from the values of the source, if their size does not match or if they are the same type.
             The conversion is explicit if the conversion of some member to the target needs to be explicit.
 
+      @note EDG current implementation of explicit(bool) is broken so all conversions are implicit
+
       @qualifier explicit
 
       This permits the conversion from a tuple<T>& to a tuple<T&> which makes it suitable
@@ -282,14 +284,12 @@ namespace kumi
     // nvcc with a clang host rejects [[nodiscard]] on a conversion operator once optimizing.
     template<typename... Us>
     KUMI_ABI
-#ifndef KUMI_DOXYGEN_INVOKED
-      explicit(!kumi::_::piecewise_convertible<tuple<Ts const&...>, tuple<Us...>>)
+#if !defined(KUMI_FRONTEND_EDG)
+      explicit(!(std::is_convertible_v<Ts const&, Us> && ...))
 #endif
-        constexpr operator tuple<Us...>() const
-    requires(sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>)
-#ifndef KUMI_DOXYGEN_INVOKED
-            && (kumi::_::piecewise_constructible<tuple<Ts const&...>, tuple<Us...>>)
-#endif
+        constexpr operator tuple<Us...>() const noexcept((std::is_nothrow_constructible_v<Us, Ts const&> && ...))
+    requires(sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>) &&
+            ((std::is_constructible_v<Us, Ts const&> && ...))
     {
       return kumi::_::static_cast_<tuple<Us...>>(*this, std::make_index_sequence<sizeof...(Ts)>{});
     }
@@ -297,14 +297,12 @@ namespace kumi
     /// @overload
     template<typename... Us>
     KUMI_ABI
-#ifndef KUMI_DOXYGEN_INVOKED
-      explicit(!kumi::_::piecewise_convertible<tuple<Ts&...>, tuple<Us...>>)
+#if !defined(KUMI_FRONTEND_EDG)
+      explicit(!(std::is_convertible_v<Ts&, Us> && ...))
 #endif
-        constexpr operator tuple<Us...>()
-    requires(sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>)
-#ifndef KUMI_DOXYGEN_INVOKED
-            && (kumi::_::piecewise_constructible<tuple<Ts&...>, tuple<Us...>>)
-#endif
+        constexpr operator tuple<Us...>() noexcept((std::is_nothrow_constructible_v<Us, Ts&> && ...))
+    requires(sizeof...(Us) == sizeof...(Ts)) && (!std::same_as<tuple<Ts...>, tuple<Us...>>) &&
+            ((std::is_constructible_v<Us, Ts&> && ...))
     {
       return kumi::_::static_cast_<tuple<Us...>>(*this, std::make_index_sequence<sizeof...(Ts)>{});
     }
@@ -325,9 +323,8 @@ namespace kumi
     //==================================================================================================================
     template<typename... Us>
     KUMI_ABI constexpr tuple& operator=(tuple<Us...> const& other)
-#ifndef KUMI_DOXYGEN_INVOKED
-    requires(kumi::_::piecewise_convertible<tuple, tuple<Us...>>)
-#endif
+      noexcept((std::is_nothrow_assignable_v<Ts&, Us const&> && ...))
+    requires(sizeof...(Ts) == sizeof...(Us)) && ((std::is_assignable_v<Ts&, Us const&> && ...))
     {
       kumi::_::assign(*this, other, std::make_index_sequence<sizeof...(Ts)>{});
       return *this;
@@ -335,13 +332,24 @@ namespace kumi
 
     /// @overload
     template<typename... Us>
-    KUMI_ABI constexpr tuple& operator=(tuple<Us...>&& other)
-#ifndef KUMI_DOXYGEN_INVOKED
-    requires(kumi::_::piecewise_convertible<tuple, tuple<Us...>>)
-#endif
+    KUMI_ABI constexpr tuple& operator=(tuple<Us...>&& other) noexcept((std::is_nothrow_assignable_v<Ts&, Us&&> && ...))
+    requires(sizeof...(Ts) == sizeof...(Us)) && ((std::is_assignable_v<Ts&, Us&&> && ...))
     {
-      kumi::_::assign(*this, other, std::make_index_sequence<sizeof...(Ts)>{});
+      kumi::_::assign(*this, std::move(other), std::make_index_sequence<sizeof...(Ts)>{});
       return *this;
+    }
+
+    //==================================================================================================================
+    /**
+      @brief Swaps the contents of two kumi::tuples.
+
+      @note Does not participate in overload resolution if an element is not swappable.
+    **/
+    //==================================================================================================================
+    KUMI_ABI friend constexpr void swap(tuple& a, tuple& b) noexcept((std::is_nothrow_swappable_v<Ts> && ...))
+    requires((std::is_swappable_v<Ts> && ...))
+    {
+      kumi::_::swap(a, b, std::make_index_sequence<sizeof...(Ts)>{});
     }
   };
 
@@ -356,9 +364,7 @@ namespace kumi
   /// @brief Compares a tuple with another for equality
   template<typename... Ts, typename... Us>
   KUMI_ABI constexpr auto operator==(tuple<Ts...> const& self, tuple<Us...> const& other) noexcept
-#ifndef KUMI_DOXYGEN_INVOKED
-  requires(sizeof...(Ts) > 0) && (kumi::_::piecewise_comparable<tuple<Ts...>, tuple<Us...>>)
-#endif
+  requires(sizeof...(Ts) > 0) && (kumi::is_comparable_v<Ts, Us> && ...)
   {
     return kumi::_::compare(self, other, std::make_index_sequence<sizeof...(Ts)>{});
   }
@@ -366,9 +372,7 @@ namespace kumi
   /// @brief Compares a tuple with another for inequality
   template<typename... Ts, typename... Us>
   KUMI_ABI constexpr auto operator!=(tuple<Ts...> const& self, tuple<Us...> const& other) noexcept
-#ifndef KUMI_DOXYGEN_INVOKED
-  requires(sizeof...(Ts) > 0) && (kumi::_::piecewise_comparable<tuple<Ts...>, tuple<Us...>>)
-#endif
+  requires(sizeof...(Ts) > 0) && (kumi::is_comparable_v<Ts, Us> && ...)
   {
     return !(self == other);
   }
@@ -377,10 +381,7 @@ namespace kumi
   /// @note This function does not participate in overload resolution if the tuples are not lexicographically ordered
   template<typename... Ts, typename... Us>
   KUMI_ABI constexpr auto operator<(tuple<Ts...> const& lhs, tuple<Us...> const& rhs) noexcept
-  requires(sizeof...(Ts) > 0 && sizeof...(Ts) == sizeof...(Us))
-#ifndef KUMI_DOXYGEN_INVOKED
-          && (kumi::_::piecewise_ordered<tuple<Ts...>, tuple<Us...>>)
-#endif
+  requires(sizeof...(Ts) > 0 && sizeof...(Ts) == sizeof...(Us)) && (kumi::is_ordered_v<Ts, Us> && ...)
   {
     // lexicographical order is defined as
     // (v0 < w0) || ... andnot(wi < vi, vi+1 < wi+1) ... || andnot(wn-1 < vn-1, vn < wn);
@@ -439,6 +440,8 @@ namespace kumi
     [[nodiscard]] KUMI_ABI static constexpr auto names() noexcept { return kumi::tuple{}; }
 
     KUMI_ABI friend constexpr auto operator<=>(tuple<>, tuple<>) noexcept = default;
+
+    KUMI_ABI friend constexpr void swap(tuple<>&, tuple<>&) noexcept {}
 
     template<typename T>
     [[nodiscard]] KUMI_ABI constexpr operator T() const noexcept
@@ -1300,11 +1303,5 @@ namespace kumi
     {
       return kumi::tuple{KUMI_FWD(args)...};
     }
-  };
-
-  // As we are lacking a proper mechanism to find the least restrictive subtype, we fallback to a specializable trait
-  template<kumi::concepts::product_type... Ts> struct common_product_type<Ts...>
-  {
-    using type = kumi::tuple<>;
   };
 }

@@ -119,8 +119,8 @@ TTS_CASE("Check tuple to tuple conversion")
 #if !defined(__EDG__) || !defined(__EDG_VERSION__) // https://github.com/microsoft/STL/issues/1621
   TTS_EQUAL(static_cast<kumi::tuple<tts::text>>(kumi::tuple{"some text"}), kumi::tuple{tts::text("some text")});
   TTS_EXPECT_COMPILES(in, { requires_cast(static_cast<kumi::tuple<ExpInt, ExpInt>>(in)); });
-#endif
   TTS_EXPECT_NOT_COMPILES(in, { requires_cast(in); });
+#endif
 };
 
 TTS_CASE("Check tuple to tuple constexpr conversion")

@@ -290,10 +290,13 @@ namespace kumi
     //==================================================================================================================
     template<typename... Us>
     KUMI_ABI constexpr record& operator=(record<Us...> const& other)
-    requires(kumi::concepts::equivalent<record, record<Us...>>)
-#ifndef KUMI_DOXYGEN_INVOKED
-            && (kumi::_::fieldwise_convertible<record, record<Us...>>)
-#endif
+      noexcept((std::is_nothrow_assignable_v<typename Ts::type&,
+                                             std::remove_reference_t<kumi::field_of_t<Ts, record<Us...>>> const&> &&
+                ...))
+    requires(
+      kumi::concepts::equivalent<record, record<Us...>> &&
+      (std::is_assignable_v<typename Ts::type&, std::remove_reference_t<kumi::field_of_t<Ts, record<Us...>>> const&> &&
+       ...))
     {
       ((get<kumi::identifier_of<Ts>()>(*this) = get<kumi::identifier_of<Ts>()>(KUMI_FWD(other))), ...);
       return *this;
@@ -302,13 +305,31 @@ namespace kumi
     /// @overload
     template<typename... Us>
     KUMI_ABI constexpr record& operator=(record<Us...>&& other)
-    requires(kumi::concepts::equivalent<record, record<Us...>>)
-#ifndef KUMI_DOXYGEN_INVOKED
-            && (kumi::_::fieldwise_convertible<record, record<Us...>>)
-#endif
+      noexcept((std::is_nothrow_assignable_v<typename Ts::type&,
+                                             std::remove_reference_t<kumi::field_of_t<Ts, record<Us...>>>&&> &&
+                ...))
+    requires(
+      kumi::concepts::equivalent<record, record<Us...>> &&
+      (std::is_assignable_v<typename Ts::type&, std::remove_reference_t<kumi::field_of_t<Ts, record<Us...>>>&&> && ...))
     {
       ((get<kumi::identifier_of<Ts>()>(*this) = get<kumi::identifier_of<Ts>()>(KUMI_FWD(other))), ...);
       return *this;
+    }
+
+    //==================================================================================================================
+    /**
+      @brief Swaps the fields of two kumi::records.
+
+      @see Callable with the usual `using std::swap; swap(a, b)` idiom, exchanges every matching field
+           through ADL and does not participate in overload resolution if a field is not swappable.
+    **/
+    //==================================================================================================================
+    KUMI_ABI friend constexpr void swap(record& a, record& b)
+      noexcept((std::is_nothrow_swappable_v<kumi::_::type_of_t<Ts>> && ...))
+    requires((std::is_swappable_v<kumi::_::type_of_t<Ts>> && ...))
+    {
+      using std::swap;
+      ((swap(get<kumi::identifier_of<Ts>()>(a), get<kumi::identifier_of<Ts>()>(b))), ...);
     }
   };
 
@@ -323,9 +344,8 @@ namespace kumi
   /// @brief Compares a record with another for equality
   template<typename... Ts, typename... Us>
   KUMI_ABI constexpr auto operator==(record<Ts...> const& self, record<Us...> const& other) noexcept
-#ifndef KUMI_DOXYGEN_INVOKED
-  requires(kumi::_::fieldwise_comparable<record<Ts...>, record<Us...>>)
-#endif
+  requires((kumi::is_comparable_v<std::remove_reference_t<kumi::field_of_t<Us, record<Ts...>>>, typename Us::type> &&
+            ...))
   {
     return ((get<kumi::identifier_of<Ts>()>(self) == get<kumi::identifier_of<Ts>()>(other)) && ...);
   }
@@ -333,9 +353,8 @@ namespace kumi
   /// @brief Compares a record with another for inequality
   template<typename... Ts, typename... Us>
   KUMI_ABI constexpr auto operator!=(record<Ts...> const& self, record<Us...> const& other) noexcept
-#ifndef KUMI_DOXYGEN_INVOKED
-  requires(kumi::_::fieldwise_comparable<record<Ts...>, record<Us...>>)
-#endif
+  requires((kumi::is_comparable_v<std::remove_reference_t<kumi::field_of_t<Us, record<Ts...>>>, typename Us::type> &&
+            ...))
   {
     return !(self == other);
   }
@@ -370,6 +389,8 @@ namespace kumi
     [[nodiscard]] KUMI_ABI static constexpr auto values() noexcept { return kumi::tuple{}; }
 
     KUMI_ABI friend constexpr auto operator<=>(record<>, record<>) noexcept = default;
+
+    KUMI_ABI friend constexpr void swap(record<>&, record<>&) noexcept {}
 
     template<typename T>
     [[nodiscard]] KUMI_ABI constexpr operator T() const noexcept
@@ -1000,11 +1021,5 @@ namespace kumi
     {
       return kumi::record{KUMI_FWD(args)...};
     }
-  };
-
-  // As we are lacking a proper mechanism to find the least restrictive subtype, we fallback to a specializable trait
-  template<kumi::concepts::record_type... Ts> struct common_product_type<Ts...>
-  {
-    using type = kumi::record<>;
   };
 }
