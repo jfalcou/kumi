@@ -40,8 +40,12 @@ namespace kumi::_
   /// Used to detect duplicate types in a pack by enabling unique conversion overload resolution.
   template<std::size_t I, typename T> struct unique
   {
-    explicit(false) operator std::type_identity<T>();
-    explicit(false) operator std::integral_constant<std::size_t, I>();
+    // Helps doxygen parsing the file correctly
+    using type = std::type_identity<T>;
+    using idx = std::integral_constant<std::size_t, I>;
+
+    explicit(false) operator type();
+    explicit(false) operator idx();
 
     template<typename U>
     requires(std::same_as<T, U>)
@@ -51,8 +55,12 @@ namespace kumi::_
   /// Named variant of unique
   template<std::size_t I, kumi::_::field T> struct unique<I, T>
   {
-    explicit(false) operator std::type_identity<T>();
-    explicit(false) operator kumi::_::identifier_of_t<T>();
+    // Helps doxygen parsing the file correctly
+    using type = std::type_identity<T>;
+    using idx = kumi::_::identifier_of_t<T>;
+
+    explicit(false) operator type();
+    explicit(false) operator idx();
 
     template<typename U>
     requires(std::same_as<kumi::_::type_of_t<T>, U>)
