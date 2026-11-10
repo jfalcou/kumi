@@ -13,10 +13,7 @@ message(STATUS "Testing FetchContent for branch ${GIT_BRANCH}")
 include(FetchContent)
 
 # Retrieve KUMI from relative git directory
-FetchContent_Declare(kumi
-  GIT_REPOSITORY "https://github.com/jfalcou/kumi.git"
-  GIT_TAG ${GIT_BRANCH}
-)
+FetchContent_Declare(kumi GIT_REPOSITORY "https://github.com/jfalcou/kumi.git" GIT_TAG ${GIT_BRANCH})
 
 ## FetchContent has no per-package OPTIONS: what kumi reads is pinned here.
 set(KUMI_BUILD_TEST OFF CACHE BOOL "" FORCE)

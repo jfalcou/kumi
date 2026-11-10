@@ -9,34 +9,35 @@
 ##======================================================================================================================
 add_library(kumi_opts INTERFACE)
 
-target_compile_features ( kumi_opts INTERFACE cxx_std_20 )
+target_compile_features(kumi_opts INTERFACE cxx_std_20)
 
 set(KUMI_WARNINGS -Werror -Wall -Wextra -Wunused-variable -Wshadow)
 
 if(CMAKE_CUDA_COMPILER_ID MATCHES "NVIDIA")
-  target_compile_features( kumi_opts INTERFACE cuda_std_20 )
-  target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CUDA>:--Werror all-warnings -Xcompiler> )
+  target_compile_features(kumi_opts INTERFACE cuda_std_20)
+  target_compile_options(kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CUDA>:--Werror all-warnings -Xcompiler>)
   # The literal warning is set at the moment when using nvcc13.2.5 with clang20
   # A kernel calling kumi with a lambda goes through kumi::invoke, host and device both, which nvcc refuses without it
-  target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CUDA>:-Wno-deprecated-literal-operator --expt-relaxed-constexpr> )
+  target_compile_options(kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CUDA>:-Wno-deprecated-literal-operator
+                                             --expt-relaxed-constexpr>)
 endif()
 
 if(CMAKE_HIP_COMPILER_ID MATCHES "Clang")
-  target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:HIP>:-std=c++20 ${KUMI_WARNINGS} -Wextra-semi> )
+  target_compile_options(kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:HIP>:-std=c++20 ${KUMI_WARNINGS} -Wextra-semi>)
 endif()
 
 if(CMAKE_CXX_COMPILER_ID MATCHES "NVHPC")
-  target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CXX>:${KUMI_WARNINGS}> )
+  target_compile_options(kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CXX>:${KUMI_WARNINGS}>)
 elseif(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
   if(CMAKE_CXX_COMPILER_FRONTEND_VARIANT STREQUAL "MSVC")
-    target_compile_options( kumi_opts INTERFACE  $<$<COMPILE_LANGUAGE:CXX>:/W3 /WX /EHsc> )
+    target_compile_options(kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CXX>:/W3 /WX /EHsc>)
   else()
-    target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CXX>:${KUMI_WARNINGS} -Wdocumentation -Wextra-semi> )
+    target_compile_options(kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CXX>:${KUMI_WARNINGS} -Wdocumentation -Wextra-semi>)
   endif()
-elseif (CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
-  target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CXX>:/W3 /WX /EHsc /Zc:preprocessor> )
+elseif(CMAKE_CXX_COMPILER_ID MATCHES "MSVC")
+  target_compile_options(kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CXX>:/W3 /WX /EHsc /Zc:preprocessor>)
 else()
-  target_compile_options( kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CXX>:${KUMI_WARNINGS} -Wextra-semi> )
+  target_compile_options(kumi_opts INTERFACE $<$<COMPILE_LANGUAGE:CXX>:${KUMI_WARNINGS} -Wextra-semi>)
 endif()
 
 ##======================================================================================================================
@@ -45,10 +46,7 @@ endif()
 add_library(kumi_docs INTERFACE)
 
 target_link_libraries(kumi_docs INTERFACE kumi_opts)
-target_include_directories( kumi_docs INTERFACE
-                            ${PROJECT_SOURCE_DIR}/test
-                            ${PROJECT_SOURCE_DIR}/include
-                          )
+target_include_directories(kumi_docs INTERFACE ${PROJECT_SOURCE_DIR}/test ${PROJECT_SOURCE_DIR}/include)
 
 ##======================================================================================================================
 ## Compiler options for Unit Tests of include/
@@ -56,7 +54,4 @@ target_include_directories( kumi_docs INTERFACE
 add_library(kumi_test INTERFACE)
 
 target_link_libraries(kumi_test INTERFACE kumi_opts tts::tts)
-target_include_directories( kumi_test INTERFACE
-                            ${PROJECT_SOURCE_DIR}/test
-                            ${PROJECT_SOURCE_DIR}/include
-                          )
+target_include_directories(kumi_test INTERFACE ${PROJECT_SOURCE_DIR}/test ${PROJECT_SOURCE_DIR}/include)
