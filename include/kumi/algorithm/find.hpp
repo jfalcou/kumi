@@ -14,9 +14,10 @@ namespace kumi
     template<typename Pred, typename T, std::size_t... I>
     KUMI_HIDDEN_ABI constexpr std::size_t locate_(kumi::_::adl_tag_t, Pred p, T&& t, std::index_sequence<I...>) noexcept
     {
-      std::size_t index = kumi::size_v<T>;
-      ((kumi::invoke(p, get<I>(KUMI_FWD(t))) && ((index = I), true)) || ...);
-      return index;
+      std::size_t idx = kumi::size_v<T>;
+      ((kumi::invoke(p, get<I>(KUMI_FWD(t))) && ((idx = I), true)) ||
+       ...); // NOSONAR - S912: Intended side effect accumulating index from fold expression
+      return idx;
     }
   }
 

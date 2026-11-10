@@ -298,13 +298,17 @@ namespace kumi
 
   namespace _
   {
-    template<typename T> extern kumi::_::undefined<T> container_type;
+    template<typename T>
+    extern kumi::_::undefined<T>
+      container_type; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
     template<typename T>
     requires(kumi::_::container_like<T>)
-    extern typename T::value_type container_type<T>;
+    extern typename T::value_type
+      container_type<T>; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
-    template<typename T, std::size_t N> extern T container_type<T[N]>;
+    template<typename T, std::size_t N>
+    extern T container_type<T[N]>; // NOSONAR - S5421: Extern template partial specialization cannot be const
   }
 
   //====================================================================================================================
@@ -427,11 +431,14 @@ namespace kumi
 
   namespace _
   {
-    template<std::size_t I, typename T> extern kumi::member_t<I, T> stored_member;
+    template<std::size_t I, typename T>
+    extern kumi::member_t<I, T>
+      stored_member; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
     template<std::size_t I, typename T>
     requires(kumi::is_record_type_v<std::remove_cvref_t<T>>)
-    extern decltype(get<kumi::_::identifier_of_t<kumi::element_t<I, T>>{}>(std::declval<T&&>())) stored_member<I, T>;
+    extern decltype(get<kumi::_::identifier_of_t<kumi::element_t<I, T>>{}>(std::declval<T&&>()))
+      stored_member<I, T>; // NOSONAR - S5421: Extern template partial specialization cannot be const
   }
 
   //====================================================================================================================
@@ -461,11 +468,14 @@ namespace kumi
 
   namespace _
   {
-    template<std::size_t I, typename T> extern kumi::element_t<I, T> stored_element;
+    template<std::size_t I, typename T>
+    extern kumi::element_t<I, T>
+      stored_element; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
     template<std::size_t I, typename T>
     requires(kumi::is_record_type_v<std::remove_cvref_t<T>>)
-    extern typename kumi::element_t<I, T>::type stored_element<I, T>;
+    extern typename kumi::element_t<I, T>::type
+      stored_element<I, T>; // NOSONAR - S5421: Extern template partial specialization cannot be const
   }
 
   //====================================================================================================================

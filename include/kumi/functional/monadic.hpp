@@ -110,7 +110,7 @@ namespace kumi::function
     //==================================================================================================================
     template<typename C> KUMI_ABI friend constexpr decltype(auto) operator>>(foldable&& f, C&& c)
     {
-      return kumi::function::foldable{kumi::invoke(c, f.value)};
+      return kumi::function::foldable{kumi::invoke(KUMI_FWD(c), f.value)};
     }
 
     //==================================================================================================================
@@ -125,7 +125,7 @@ namespace kumi::function
     //==================================================================================================================
     template<typename C> KUMI_ABI friend constexpr decltype(auto) operator<<(C&& c, foldable&& f)
     {
-      return kumi::function::foldable{kumi::invoke(c, f.value)};
+      return kumi::function::foldable{kumi::invoke(KUMI_FWD(c), f.value)};
     }
 
     //==================================================================================================================
@@ -168,7 +168,7 @@ namespace kumi::function
     //==================================================================================================================
     template<typename C> KUMI_ABI friend constexpr decltype(auto) operator>>(scannable&& s, C&& c)
     {
-      auto res = kumi::invoke(c, s.value);
+      auto res = kumi::invoke(KUMI_FWD(c), s.value);
       return kumi::function::scannable{kumi::bind_front(std::move(s.func), std::move(s.value)), res};
     }
 
@@ -184,7 +184,7 @@ namespace kumi::function
     //==================================================================================================================
     template<typename C> KUMI_ABI friend constexpr decltype(auto) operator<<(C&& c, scannable&& s)
     {
-      auto res = kumi::invoke(c, s.value);
+      auto res = kumi::invoke(KUMI_FWD(c), s.value);
       return kumi::function::scannable{kumi::bind_back(std::move(s.func), std::move(s.value)), res};
     }
 

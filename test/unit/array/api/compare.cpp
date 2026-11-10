@@ -131,7 +131,7 @@ namespace
 
     int value;
 
-    friend constexpr boolean operator<(number a, number b) noexcept { return {a.value < b.value}; }
+    friend constexpr std::strong_ordering operator<=>(number a, number b) noexcept = default;
 
     friend constexpr bool operator==(number a, number b) noexcept = default;
 

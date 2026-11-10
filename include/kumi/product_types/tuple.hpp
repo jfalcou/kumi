@@ -346,7 +346,9 @@ namespace kumi
       @note Does not participate in overload resolution if an element is not swappable.
     **/
     //==================================================================================================================
-    KUMI_ABI friend constexpr void swap(tuple& a, tuple& b) noexcept((std::is_nothrow_swappable_v<Ts> && ...))
+    KUMI_ABI friend constexpr void swap(tuple& a, tuple& b)
+      noexcept((std::is_nothrow_swappable_v<Ts> &&
+                ...)) // NOSONAR - S5018: Swap intentionally omits noexcept when elements may throw
     requires((std::is_swappable_v<Ts> && ...))
     {
       kumi::_::swap(a, b, std::make_index_sequence<sizeof...(Ts)>{});

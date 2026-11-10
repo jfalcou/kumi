@@ -27,17 +27,21 @@ namespace kumi::_
   //====================================================================================================================
   // Helpers for uniqueness checking
   //====================================================================================================================
-  template<std::size_t I, typename T> extern std::integral_constant<std::size_t, I> index_or_key;
+  template<std::size_t I, typename T>
+  extern std::integral_constant<std::size_t, I>
+    index_or_key; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
-  template<std::size_t I, kumi::_::field T> extern kumi::_::identifier_of_t<T> index_or_key<I, T>;
+  template<std::size_t I, kumi::_::field T>
+  extern kumi::_::identifier_of_t<T>
+    index_or_key<I, T>; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
   template<std::size_t I, typename T> using index_or_key_t = decltype(index_or_key<I, T>);
 
   /// Used to detect duplicate types in a pack by enabling unique conversion overload resolution.
   template<std::size_t I, typename T> struct unique
   {
-    operator std::type_identity<T>();
-    operator std::integral_constant<std::size_t, I>();
+    explicit(false) operator std::type_identity<T>();
+    explicit(false) operator std::integral_constant<std::size_t, I>();
 
     template<typename U>
     requires(std::same_as<T, U>)
@@ -47,8 +51,8 @@ namespace kumi::_
   /// Named variant of unique
   template<std::size_t I, kumi::_::field T> struct unique<I, T>
   {
-    operator std::type_identity<T>();
-    operator kumi::_::identifier_of_t<T>();
+    explicit(false) operator std::type_identity<T>();
+    explicit(false) operator kumi::_::identifier_of_t<T>();
 
     template<typename U>
     requires(std::same_as<kumi::_::type_of_t<T>, U>)

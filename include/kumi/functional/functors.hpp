@@ -60,11 +60,13 @@ namespace kumi
 
   namespace _
   {
-    template<typename T, typename> extern T common_product_type;
+    template<typename T, typename>
+    extern T common_product_type; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
     template<typename T, std::size_t... I>
     extern kumi::common_product_type_t<std::remove_cvref_t<kumi::element_t<I, T>>...>
-      common_product_type<T, std::index_sequence<I...>>;
+      common_product_type<T, std::index_sequence<I...>>; // NOSONAR - S5421: Extern template partial specialization
+                                                         // cannot be const
 
     template<typename T> using common_product_type_t = decltype(common_product_type<T, kumi::function::indexes_for<T>>);
 

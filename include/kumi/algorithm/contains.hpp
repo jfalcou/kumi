@@ -41,7 +41,7 @@ namespace kumi
   struct contains_any_t
   {
     template<kumi::concepts::product_type T, kumi::concepts::identifier... Is>
-    [[nodiscard]] KUMI_ABI constexpr auto operator()([[maybe_unused]] T&& t, Is const&... ids) const noexcept
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&&, Is const&... ids) const noexcept
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return std::false_type{};
       else if constexpr (sizeof...(Is) == 0) return std::false_type{};
@@ -54,8 +54,7 @@ namespace kumi
   struct contains_only_t
   {
     template<kumi::concepts::product_type T, kumi::concepts::identifier... Is>
-    [[nodiscard]] KUMI_ABI constexpr auto operator()([[maybe_unused]] T&& t,
-                                                     [[maybe_unused]] Is const&... ids) const noexcept
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t, Is const&... ids) const noexcept
     {
       if constexpr (kumi::concepts::empty_product_type<T>) return std::false_type{};
       else if constexpr (sizeof...(Is) == 0) return std::false_type{};
@@ -67,7 +66,7 @@ namespace kumi
   struct contains_none_t : private contains_any_t
   {
     template<kumi::concepts::product_type T, kumi::concepts::identifier... Is>
-    [[nodiscard]] KUMI_ABI constexpr auto operator()([[maybe_unused]] T&& t, Is const&... ids) const noexcept
+    [[nodiscard]] KUMI_ABI constexpr auto operator()(T&&, Is const&... ids) const noexcept
     {
       using R = decltype(contains_any_t::operator()(std::declval<T>(), ids...));
       return std::bool_constant<!R{}>{};

@@ -9,56 +9,87 @@
 
 namespace kumi::_
 {
-  template<typename T, typename...> extern T cat_index_sequence;
+  template<typename T, typename...>
+  extern T cat_index_sequence; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
   template<std::size_t... I, std::size_t... J>
-  extern std::index_sequence<I..., J...> cat_index_sequence<std::index_sequence<I...>, std::index_sequence<J...>>;
+  extern std::index_sequence<I..., J...>
+    cat_index_sequence<std::index_sequence<I...>, std::index_sequence<J...>>; // NOSONAR - S5421: Extern template
+                                                                              // partial specialization cannot be const
 
   template<typename T, typename... Ts> using cat_index_sequence_t = decltype(kumi::_::cat_index_sequence<T, Ts...>);
 
   template<std::size_t... I, std::size_t... J, typename... Ts>
-  extern cat_index_sequence_t<std::index_sequence<I..., J...>, Ts...>
+  extern cat_index_sequence_t<std::index_sequence<I..., J...>,
+                              Ts...> // NOSONAR - S5421: Extern template partial specialization cannot be const
     cat_index_sequence<std::index_sequence<I...>, std::index_sequence<J...>, Ts...>;
 
-  template<std::size_t, typename T> extern T fill_index_sequence;
+  template<std::size_t, typename T>
+  extern T fill_index_sequence; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
   template<std::size_t E, std::size_t... I>
-  extern std::index_sequence<((void)I, E)...> fill_index_sequence<E, std::index_sequence<I...>>;
+  extern std::index_sequence<((void)I, E)...>
+    fill_index_sequence<E, std::index_sequence<I...>>; // NOSONAR - S5421: Extern template partial specialization cannot
+                                                       // be const
 
-  template<std::size_t B, std::size_t S, std::size_t n, typename T> extern T remove_index_sequence;
+  template<std::size_t B, std::size_t S, std::size_t n, typename T>
+  extern T remove_index_sequence; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
   template<std::size_t B, std::size_t S, std::size_t n, std::size_t... I>
-  extern std::index_sequence<(I + (I < B ? 0 : (1 + (I - B) / (S - 1) < n ? 1 + (I - B) / (S - 1) : n)))...>
+  extern std::index_sequence<(
+    I + (I < B ? 0
+               : (1 + (I - B) / (S - 1) < n ? 1 + (I - B) / (S - 1)
+                                            : n)))...> // NOSONAR - S5421: Extern template partial specialization cannot
+                                                       // be const
     remove_index_sequence<B, S, n, std::index_sequence<I...>>;
 
   template<std::size_t B, std::size_t n, std::size_t... I>
-  extern std::index_sequence<(I < B ? I : I + n)...> remove_index_sequence<B, 1, n, std::index_sequence<I...>>;
+  extern std::index_sequence<(I < B ? I : I + n)...>
+    remove_index_sequence<B, 1, n, std::index_sequence<I...>>; // NOSONAR - S5421: Extern template partial
+                                                               // specialization cannot be const
 
-  template<typename T> extern T reverse_index_sequence;
+  template<typename T>
+  extern T reverse_index_sequence; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
   template<std::size_t... I>
-  extern std::index_sequence<(sizeof...(I) - 1 - I)...> reverse_index_sequence<std::index_sequence<I...>>;
+  extern std::index_sequence<(sizeof...(I) - 1 - I)...> reverse_index_sequence<
+    std::index_sequence<I...>>; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
-  template<std::size_t, typename T> extern T rotate_index_sequence;
+  template<std::size_t, typename T>
+  extern T rotate_index_sequence; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
   template<std::size_t R, std::size_t... I>
-  extern std::index_sequence<((I + R) % sizeof...(I))...> rotate_index_sequence<R, std::index_sequence<I...>>;
+  extern std::index_sequence<((I + R) % sizeof...(I))...>
+    rotate_index_sequence<R, std::index_sequence<I...>>; // NOSONAR - S5421: Extern template partial specialization
+                                                         // cannot be const
 
-  template<std::size_t, typename T> extern T shift_index_sequence;
+  template<std::size_t, typename T>
+  extern T shift_index_sequence; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
   template<std::size_t O, std::size_t... I>
-  extern std::index_sequence<(I + O)...> shift_index_sequence<O, std::index_sequence<I...>>;
+  extern std::index_sequence<(I + O)...>
+    shift_index_sequence<O, std::index_sequence<I...>>; // NOSONAR - S5421: Extern template partial specialization
+                                                        // cannot be const
 
-  template<std::size_t B, std::size_t S, typename T> extern T slice_index_sequence;
+  template<std::size_t B, std::size_t S, typename T>
+  extern T slice_index_sequence; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
   template<std::size_t B, std::size_t S, std::size_t... I>
-  extern std::index_sequence<(B + I * S)...> slice_index_sequence<B, S, std::index_sequence<I...>>;
+  extern std::index_sequence<(B + I * S)...>
+    slice_index_sequence<B, S, std::index_sequence<I...>>; // NOSONAR - S5421: Extern template partial specialization
+                                                           // cannot be const
 
-  template<typename Sizes, typename Elts> extern Sizes strided_index_sequence;
+  template<typename Sizes, typename Elts>
+  extern Sizes strided_index_sequence; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
   template<std::size_t... I, std::size_t... J>
-  extern std::index_sequence<stride_at(J, std::index_sequence<I...>{}, std::index_sequence<J...>{})...>
-    strided_index_sequence<std::index_sequence<I...>, std::index_sequence<J...>>;
+  extern std::index_sequence<stride_at(
+    J,
+    std::index_sequence<I...>{},
+    std::index_sequence<J...>{})...> // NOSONAR - S5421: Extern template partial specialization cannot be const
+    strided_index_sequence<std::index_sequence<I...>,
+                           std::index_sequence<J...>>; // NOSONAR - S5421: Extern template partial specialization cannot
+                                                       // be const
 }
 
 namespace kumi::function

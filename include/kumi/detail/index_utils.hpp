@@ -26,7 +26,7 @@ namespace kumi::_
   //====================================================================================================================
   consteval std::size_t nth_pos(std::size_t I, std::same_as<bool> auto... b) noexcept
   {
-    std::size_t seen{}, i{}, idx{};
+    std::size_t seen{}, i{}, idx{}; // NOSONAR - S1659: Three trivial variables of same type in one declaration
     ((b ? (seen++ == I ? (i = idx, idx++) : idx++) : idx++), ...);
     return i;
   }

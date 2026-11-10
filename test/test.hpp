@@ -333,11 +333,12 @@ struct ctor_tracker
   operations value = operations::def_ctor;
   ctor_tracker() = default;
 
-  ctor_tracker(ctor_tracker&&) : value(operations::move_ctor) {}
+  ctor_tracker(ctor_tracker&&) noexcept
+    : value(operations::move_ctor) {} // NOSONAR - S3490: intentionally non-default to track operations
 
   ctor_tracker(ctor_tracker const&) : value(operations::copy_ctor) {}
 
-  ctor_tracker& operator=(ctor_tracker&&)
+  ctor_tracker& operator=(ctor_tracker&&) noexcept // NOSONAR - S3490: intentionally non-default to track operations
   {
     value = operations::move_assign;
     return *this;
@@ -410,19 +411,24 @@ struct may_throw
 {
   may_throw() = default;
 
-  may_throw(may_throw const&) noexcept(false) {}
+  may_throw(may_throw const&) noexcept(false) {} // NOSONAR - S3490: intentionally non-default to allow noexcept(false)
 
-  may_throw(may_throw&&) noexcept(false) {}
+  may_throw(may_throw&&) noexcept(false) {} // NOSONAR - S3490, expected weirdly defined type
 
-  may_throw& operator=(may_throw const&) noexcept(false) { return *this; }
+  may_throw& operator=(may_throw const&) noexcept(false)
+  {
+    return *this;
+  } // NOSONAR - S3490: intentionally non-default to allow noexcept(false)
 
-  may_throw& operator=(may_throw&&) noexcept(false) { return *this; }
+  may_throw& operator=(may_throw&&) noexcept(false) { return *this; } // NOSONAR - S3490, expected weirdly defined type
+
+  ~may_throw() = default; // NOSONAR - S3624: trivial destructor needed for noexcept propagation tests
 };
 
 //! An element whose ADL swap may throw, to check is_nothrow_swappable propagation.
 struct throwing_swap
 {
-  friend void swap(throwing_swap&, throwing_swap&) noexcept(false) {}
+  friend void swap(throwing_swap&, throwing_swap&) noexcept(false) {} // NOSONAR - expected wrongly defined swap
 };
 
 //! An element counting its ADL swaps, to verify ADL-reachable element swap is used.

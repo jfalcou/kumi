@@ -325,7 +325,8 @@ namespace kumi
     **/
     //==================================================================================================================
     KUMI_ABI friend constexpr void swap(record& a, record& b)
-      noexcept((std::is_nothrow_swappable_v<kumi::_::type_of_t<Ts>> && ...))
+      noexcept((std::is_nothrow_swappable_v<kumi::_::type_of_t<Ts>> &&
+                ...)) // NOSONAR - S5018: Swap intentionally omits noexcept when elements may throw
     requires((std::is_swappable_v<kumi::_::type_of_t<Ts>> && ...))
     {
       using std::swap;
@@ -393,14 +394,14 @@ namespace kumi
     KUMI_ABI friend constexpr void swap(record<>&, record<>&) noexcept {}
 
     template<typename T>
-    [[nodiscard]] KUMI_ABI constexpr operator T() const noexcept
+    [[nodiscard]] KUMI_ABI constexpr explicit(false) operator T() const noexcept
     requires(kumi::concepts::unit_type<T>)
     {
       return {};
     }
 
     template<typename T>
-    [[nodiscard]] KUMI_ABI constexpr operator T() noexcept
+    [[nodiscard]] KUMI_ABI constexpr explicit(false) operator T() noexcept
     requires(kumi::concepts::unit_type<T>)
     {
       return {};

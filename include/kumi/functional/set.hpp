@@ -34,20 +34,29 @@ namespace kumi
 
     template<typename... Ts> using make_multiset_t = typename kumi::_::multiset<Ts...>;
 
-    template<typename T, bool... Bs> extern T unique_index_sequence;
+    template<typename T, bool... Bs>
+    extern T unique_index_sequence; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
     template<std::size_t... I, bool... Bs>
-    extern std::index_sequence<kumi::_::nth_pos_v<I, Bs...>...> unique_index_sequence<std::index_sequence<I...>, Bs...>;
+    extern std::index_sequence<kumi::_::nth_pos_v<I, Bs...>...>
+      unique_index_sequence<std::index_sequence<I...>,
+                            Bs...>; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
-    template<typename T, bool... Bs> extern T select_index_sequence;
-
-    template<std::size_t... I, bool... Bs>
-    extern std::index_sequence<kumi::_::nth_pos_v<I, Bs...>...> select_index_sequence<std::index_sequence<I...>, Bs...>;
-
-    template<typename T, bool... Bs> extern T adjacent_index_sequence;
+    template<typename T, bool... Bs>
+    extern T select_index_sequence; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
     template<std::size_t... I, bool... Bs>
-    extern std::index_sequence<0, (kumi::_::nth_pos_v<I, Bs...> + 1)...>
+    extern std::index_sequence<kumi::_::nth_pos_v<I, Bs...>...>
+      select_index_sequence<std::index_sequence<I...>,
+                            Bs...>; // NOSONAR - S5421: Extern template partial specialization cannot be const
+
+    template<typename T, bool... Bs>
+    extern T adjacent_index_sequence; // NOSONAR - S5421: Extern template partial specialization cannot be const
+
+    template<std::size_t... I, bool... Bs>
+    extern std::index_sequence<0,
+                               (kumi::_::nth_pos_v<I, Bs...> +
+                                1)...> // NOSONAR - S5421: Extern template partial specialization cannot be const
       adjacent_index_sequence<std::index_sequence<I...>, Bs...>;
   }
 

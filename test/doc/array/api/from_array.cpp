@@ -8,7 +8,9 @@
 
 struct point3
 {
-  int x, y, z;
+  int x;
+  int y;
+  int z;
 };
 
 int main()
