@@ -305,8 +305,7 @@ namespace kumi
     requires(kumi::_::container_like<T>)
     extern typename T::value_type container_type<T>; // NOSONAR - S5421: Extern template variable is fine
 
-    template<typename T, std::size_t N>
-    extern T container_type<T[N]>; // NOSONAR - S5421: Extern template variable is fine
+    template<typename T, std::size_t N> extern T container_type<T[N]>; // NOSONAR
   }
 
   //====================================================================================================================
@@ -429,14 +428,14 @@ namespace kumi
 
   namespace _
   {
+    template<std::size_t I, typename T> using member_at = kumi::__::identifier_of_t<kumi::element_t<I, T>>;
+
     template<std::size_t I, typename T>
-    extern kumi::member_t<I, T>
-      stored_member; // NOSONAR - S5421: Extern template partial specialization cannot be const
+    extern kumi::member_t<I, T> stored_member; // NOSONAR - S5421: Extern template variable is fine
 
     template<std::size_t I, typename T>
     requires(kumi::is_record_type_v<std::remove_cvref_t<T>>)
-    extern decltype(get<kumi::_::identifier_of_t<kumi::element_t<I, T>>{}>(std::declval<T&&>()))
-      stored_member<I, T>; // NOSONAR - S5421: Extern template partial specialization cannot be const
+    extern decltype(get<kumi::_::member_at<I, T>>{} > (std::declval<T&&>())) stored_member<I, T>; // NOSONAR
   }
 
   //====================================================================================================================

@@ -30,8 +30,7 @@ namespace kumi::_
   template<std::size_t I, typename T>
   extern std::integral_constant<std::size_t, I> index_or_key; // NOSONAR - S5421: Extern template variable is fine
 
-  template<std::size_t I, kumi::_::field T>
-  extern kumi::_::identifier_of_t<T> index_or_key<I, T>; // NOSONAR - S5421: Extern template variable is fine
+  template<std::size_t I, kumi::_::field T> extern kumi::_::identifier_of_t<T> index_or_key<I, T>; // NOSONAR
 
   template<std::size_t I, typename T> using index_or_key_t = decltype(index_or_key<I, T>);
 
