@@ -13,11 +13,11 @@ message(STATUS "Testing CPM for branch ${GIT_BRANCH}")
 include(cpm.cmake)
 
 # Add dependencies
-CPMAddPackage ( NAME kumi
-                GIT_REPOSITORY "https://github.com/jfalcou/kumi.git"
-                GIT_TAG "${GIT_BRANCH}"
-                OPTIONS "KUMI_BUILD_TEST OFF"
-              )
+CPMAddPackage(
+  NAME kumi
+  GIT_REPOSITORY "https://github.com/jfalcou/kumi.git"
+  GIT_TAG "${GIT_BRANCH}"
+  OPTIONS "KUMI_BUILD_TEST OFF")
 
 # Use kumi
 add_executable(test_kumi ../main.cpp)

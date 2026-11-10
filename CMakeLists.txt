@@ -27,12 +27,17 @@ include(${COPACABANA_SOURCE_DIR}/copacabana/cmake/copacabana.cmake)
 
 copa_add_option(KUMI_BUILD_TEST "Build tests using Kumi headers" ON LABEL "Unit tests")
 copa_add_option(KUMI_BUILD_DOCUMENTATION "Build Doxygen for Kumi" OFF LABEL "Doxygen")
-copa_add_option(KUMI_ENABLE_SANITIZERS "Build tests with AddressSanitizer + UndefinedBehaviorSanitizer" OFF LABEL "Sanitizers")
+copa_add_option(KUMI_ENABLE_SANITIZERS "Build tests with AddressSanitizer + UndefinedBehaviorSanitizer" OFF
+                LABEL "Sanitizers")
 copa_add_option(KUMI_ENABLE_COVERAGE "Build tests with code coverage instrumentation" OFF LABEL "Coverage")
 copa_add_option(KUMI_COMPILE_COST "Measure what every test unit costs to compile" OFF)
 copa_add_option(KUMI_EXTERNAL_DEPENDENCIES "Take dependencies from the environment instead of fetching them" OFF)
 
-copa_project_version(MAJOR 5 MINOR 0 PATCH 0 REPOSITORY https://github.com/jfalcou/kumi)
+copa_project_version(
+  MAJOR 5
+  MINOR 0
+  PATCH 0
+  REPOSITORY https://github.com/jfalcou/kumi)
 
 ##======================================================================================================================
 ## Summary Display
@@ -53,34 +58,38 @@ copa_setup_precommit_hooks(${QUIET_OPTION})
 ##======================================================================================================================
 ## Install Process setup
 ##======================================================================================================================
-copa_setup_install( LIBRARY kumi
-                    FEATURES cxx_std_20
-                    DOC     ${PROJECT_SOURCE_DIR}/LICENSE.md
-                    INCLUDE ${PROJECT_SOURCE_DIR}/include/kumi
-                  )
+copa_setup_install(
+  LIBRARY kumi
+  FEATURES cxx_std_20
+  DOC ${PROJECT_SOURCE_DIR}/LICENSE.md
+  INCLUDE ${PROJECT_SOURCE_DIR}/include/kumi)
 
 ##======================================================================================================================
 ## Setup doxygen
 ##======================================================================================================================
 if(KUMI_BUILD_DOCUMENTATION)
-  copa_setup_doxygen(${QUIET_OPTION}
-                     TARGET kumi-doxygen
-                     DESTINATION "${PROJECT_BINARY_DIR}/doc"
-                     GODBOLT_LIBRARIES kumi
-                     GODBOLT_COMPILER clang1600
-                     GODBOLT_OPTIONS "-O3 -std=c++20 -DNDEBUG"
-                     COLOR_HUE 293
-                     COLOR_SATURATION 40
-                     COLOR_LIGHTNESS 50)
+  copa_setup_doxygen(
+    ${QUIET_OPTION}
+    TARGET kumi-doxygen
+    DESTINATION "${PROJECT_BINARY_DIR}/doc"
+    GODBOLT_LIBRARIES kumi
+    GODBOLT_COMPILER clang1600
+    GODBOLT_OPTIONS "-O3 -std=c++20 -DNDEBUG"
+    COLOR_HUE 293
+    COLOR_SATURATION 40
+    COLOR_LIGHTNESS 50)
 endif()
 
 ##======================================================================================================================
 ## Standalone generation
 ##======================================================================================================================
-copa_setup_standalone ( QUIET
-                        FILE kumi.hpp SOURCE include ROOT kumi TARGET kumi-standalone
-                        OUTPUT "${PROJECT_BINARY_DIR}"
-                      )
+copa_setup_standalone(
+  QUIET
+  FILE kumi.hpp
+  SOURCE include
+  ROOT kumi
+  TARGET kumi-standalone
+  OUTPUT "${PROJECT_BINARY_DIR}")
 
 ##======================================================================================================================
 ## Tests setup
@@ -94,7 +103,7 @@ if(KUMI_BUILD_TEST)
   endif()
 
   enable_testing()
-  add_custom_target(kumi-unit)
+  add_custom_target(kumi-unit COMMENT "[kumi] - Building the unit tests")
   add_subdirectory(test)
 
   # After the test targets exist, so the coverage targets can depend on them
