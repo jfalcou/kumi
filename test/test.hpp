@@ -415,10 +415,7 @@ struct may_throw
 
   may_throw(may_throw&&) noexcept(false) {} // NOSONAR - S3490, expected weirdly defined type
 
-  may_throw& operator=(may_throw const&) noexcept(false)
-  {
-    return *this;
-  } // NOSONAR - S3490: intentionally non-default to allow noexcept(false)
+  may_throw& operator=(may_throw const&) noexcept(false) { return *this; } // NOSONAR - S3490: intentionally non-default
 
   may_throw& operator=(may_throw&&) noexcept(false) { return *this; } // NOSONAR - S3490, expected weirdly defined type
 

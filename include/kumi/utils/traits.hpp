@@ -299,16 +299,14 @@ namespace kumi
   namespace _
   {
     template<typename T>
-    extern kumi::_::undefined<T>
-      container_type; // NOSONAR - S5421: Extern template partial specialization cannot be const
+    extern kumi::_::undefined<T> container_type; // NOSONAR - S5421: Extern template variable is fine
 
     template<typename T>
     requires(kumi::_::container_like<T>)
-    extern typename T::value_type
-      container_type<T>; // NOSONAR - S5421: Extern template partial specialization cannot be const
+    extern typename T::value_type container_type<T>; // NOSONAR - S5421: Extern template variable is fine
 
     template<typename T, std::size_t N>
-    extern T container_type<T[N]>; // NOSONAR - S5421: Extern template partial specialization cannot be const
+    extern T container_type<T[N]>; // NOSONAR - S5421: Extern template variable is fine
   }
 
   //====================================================================================================================
@@ -469,13 +467,11 @@ namespace kumi
   namespace _
   {
     template<std::size_t I, typename T>
-    extern kumi::element_t<I, T>
-      stored_element; // NOSONAR - S5421: Extern template partial specialization cannot be const
+    extern kumi::element_t<I, T> stored_element; // NOSONAR - S5421: Extern template variable is fine
 
     template<std::size_t I, typename T>
     requires(kumi::is_record_type_v<std::remove_cvref_t<T>>)
-    extern typename kumi::element_t<I, T>::type
-      stored_element<I, T>; // NOSONAR - S5421: Extern template partial specialization cannot be const
+    extern typename kumi::element_t<I, T>::type stored_element<I, T>; // NOSONAR
   }
 
   //====================================================================================================================
