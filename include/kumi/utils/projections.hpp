@@ -117,18 +117,24 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_projection_map kumi::projection_map
+  //! @ingroup kumi_utility
+  //! @brief kumi::projection_map deduction guide
+  //====================================================================================================================
   /**
-    @ingroup kumi_utility
-    @brief kumi::projection_map deduction guide
+    @ingroup kumi_projection_map
     @tparam Ts  Type lists to build the projections with.
   **/
   //====================================================================================================================
   template<kumi::concepts::projection... Ts> projection_map(Ts...) -> projection_map<Ts{}...>;
 
   //====================================================================================================================
+  //! @defgroup kumi_indexes kumi::indexes
+  //! @ingroup kumi_utility
+  //! @brief Creates a kumi::projection_map object, deducing the target type from the types of arguments.
+  //====================================================================================================================
   /**
-    @ingroup kumi_utility
-    @brief Creates a kumi::projection_map object, deducing the target type from the types of arguments.
+    @ingroup kumi_indexes
 
     @note The arguments should model kumi::index
 
@@ -145,9 +151,12 @@ namespace kumi
   }
 
   //====================================================================================================================
+  //! @defgroup kumi_make_indexes kumi::make_indexes
+  //! @ingroup kumi_utility
+  //! @brief Creates a kumi::projection_map object, deducing the target type from the types of arguments.
+  //====================================================================================================================
   /**
-    @ingroup kumi_utility
-    @brief Creates a kumi::projection_map object, deducing the target type from the types of arguments.
+    @ingroup kumi_make_indexes
 
     @note The arguments should model kumi::index
 
@@ -164,9 +173,12 @@ namespace kumi
   }
 
   //====================================================================================================================
+  //! @defgroup kumi_identifiers kumi::identifiers
+  //! @ingroup kumi_utility
+  //! @brief Creates a kumi::projection_map object, deducing the target type from the types of arguments.
+  //====================================================================================================================
   /**
-    @ingroup kumi_utility
-    @brief Creates a kumi::projection_map object, deducing the target type from the types of arguments.
+    @ingroup kumi_identifiers
 
     @note The arguments should model kumi::identifier
 

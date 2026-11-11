@@ -144,12 +144,15 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_compress kumi::compress
+  //! @ingroup kumi_generators
+  //! @brief Callable object converting a product type of product type into a single product type recursively, or
+  //!   returns the input.
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_compress
 
     @var compress
-    @brief Callable object converting a product type of product type into a single product type recursively, or returns
-    the input.
 
     This construction naturally arises from the definition of product types, a product type of the form T(T(x...)) is
     strictly equivalent to T(x...) as long as the T is the same type.
@@ -204,11 +207,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr compress_t compress{};
 
   //====================================================================================================================
+  //! @defgroup kumi_flatten kumi::flatten
+  //! @ingroup kumi_generators
+  //! @brief Callable object converting a product type of product types into a product type of all elements.
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_flatten
 
     @var flatten
-    @brief Callable object converting a product type of product types into a product type of all elements.
 
     On record types, the names of the outer record are concatenated to the inner ones ultimately constructing names
     such as "outer.inner". If the input is a product type containing record types or vice versa only the inner types
@@ -260,11 +266,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr flatten_t flatten{};
 
   //====================================================================================================================
+  //! @defgroup kumi_flatten_all kumi::flatten_all
+  //! @ingroup kumi_generators
+  //! @brief Callable object converting recursively a product type of product types into a product type of all elements.
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_flatten_all
 
     @var flatten_all
-    @brief Callable object converting recursively a product type of product types into a product type of all elements.
 
     Recursively converts a product type of product types `t` into a product type of all elements of
     said product types.
@@ -328,12 +337,15 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr flatten_all_t flatten_all{};
 
   //====================================================================================================================
+  //! @defgroup kumi_as_flat_ptr kumi::as_flat_ptr
+  //! @ingroup kumi_generators
+  //! @brief Callable object converting recursively a product type of product types into a flat product type of pointers
+  //!   to each of its components.
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_as_flat_ptr
 
     @var as_flat_ptr
-    @brief Callable object converting recursively a product type of product types into a flat product type of pointers
-  to each of its components.
 
     On record types, the names of the outer record are concatenated to the inner ones ultimately constructing names
     such as "outer.inner". If the input is a product type containing record types or vice versa only the inner types

@@ -352,11 +352,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_forward_as_array kumi::forward_as_array
+  //! @ingroup kumi_array_related
+  //! @brief Creates a kumi::array of forwarding references to its arguments.
+  //====================================================================================================================
   /**
-    @ingroup kumi_array_related
+    @ingroup kumi_forward_as_array
 
     @var forward_as_array
-    @brief Creates a kumi::array of forwarding references to its arguments.
 
     Constructs an array of references to the arguments in ts suitable for forwarding as an
     argument to a function. The tuple has rvalue reference data members when rvalues are used as
@@ -410,11 +413,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_make_array kumi::make_array
+  //! @ingroup kumi_array_related
+  //! @brief Creates a array object, deducing the target type from the types of arguments.
+  //====================================================================================================================
   /**
-    @ingroup kumi_array_related
+    @ingroup kumi_make_array
 
     @var make_array
-    @brief Creates a array object, deducing the target type from the types of arguments.
 
     @qualifier inline
     @qualifier constexpr
@@ -481,11 +487,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_from_array kumi::from_array
+  //! @ingroup kumi_array_related
+  //! @brief Converts a kumi::array to an instance of an arbitrary type
+  //====================================================================================================================
   /**
-    @ingroup kumi_array_related
+    @ingroup kumi_from_array
 
     @var from_array
-    @brief Converts a kumi::array to an instance of an arbitrary type
 
     Constructs an instance of `Type` by passing elements of `t` to the appropriate constructor.
 
@@ -547,11 +556,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_to_array kumi::to_array
+  //! @ingroup kumi_array_related
+  //! @brief Converts a kumi::concepts::product_type to an instance of kumi::array
+  //====================================================================================================================
   /**
-    @ingroup kumi_array_related
+    @ingroup kumi_to_array
 
     @var to_array
-    @brief Converts a kumi::concepts::product_type to an instance of kumi::array
 
     Constructs an instance of kumi::array from the elements of the kumi::concepts::product_type parameters
 

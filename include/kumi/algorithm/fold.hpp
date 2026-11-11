@@ -67,11 +67,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_fold_left kumi::fold_left
+  //! @ingroup kumi_reductions
+  //! @brief Callable object computing the generalized combination of all elements using a tail recursive call.
+  //====================================================================================================================
   /**
-    @ingroup kumi_reductions
+    @ingroup kumi_fold_left
 
     @var fold_left
-    @brief Callable object computing the generalized combination of all elements using a tail recursive call.
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 
@@ -128,11 +131,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr fold_left_t fold_left{};
 
   //====================================================================================================================
+  //! @defgroup kumi_fold_right kumi::fold_right
+  //! @ingroup kumi_reductions
+  //! @brief Callable object computing the generalized combination of all elements using a non-tail recursive call.
+  //====================================================================================================================
   /**
-    @ingroup kumi_reductions
+    @ingroup kumi_fold_right
 
     @var fold_right
-    @brief Callable object computing the generalized combination of all elements using a non-tail recursive call.
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 

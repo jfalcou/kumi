@@ -33,9 +33,12 @@ namespace kumi
   }
 
   //====================================================================================================================
+  //! @defgroup kumi_invoke kumi::invoke
+  //! @ingroup kumi_functional
+  //! @brief Invoke the Callable object c with a pack of arguments.
+  //====================================================================================================================
   /**
-    @ingroup kumi_functional
-    @brief    Invoke the Callable object c with a pack of arguments.
+    @ingroup kumi_invoke
 
     @param c	Callable object to be invoked
     @param ts elements to be used as arguments to c
@@ -51,9 +54,12 @@ namespace kumi
   }
 
   //====================================================================================================================
+  //! @defgroup kumi_invoke_r kumi::invoke_r
+  //! @ingroup kumi_functional
+  //! @brief Invoke the Callable object c with a pack of arguments with return type R.
+  //====================================================================================================================
   /**
-    @ingroup kumi_functional
-    @brief    Invoke the Callable object c with a pack of arguments with return type R.
+    @ingroup kumi_invoke_r
 
     @tparam R the return type of the callable
     @param  c	Callable object to be invoked

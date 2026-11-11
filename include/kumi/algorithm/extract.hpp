@@ -78,11 +78,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_extract kumi::extract
+  //! @ingroup kumi_generators
+  //! @brief Callable object extracting a sub product type from a product type
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_extract
 
     @var extract
-    @brief Callable object extracting a sub product type from a product type
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
@@ -145,11 +148,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr extract_t extract{};
 
   //====================================================================================================================
+  //! @defgroup kumi_remove kumi::remove
+  //! @ingroup kumi_generators
+  //! @brief Callable object removing a sub product type from a product type
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_remove
 
     @var remove
-    @brief Callable object removing a sub product type from a product type
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
@@ -212,11 +218,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr remove_t remove{};
 
   //====================================================================================================================
+  //! @defgroup kumi_split kumi::split
+  //! @ingroup kumi_generators
+  //! @brief Callable object splitting a product type into two
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_split
 
     @var split
-    @brief Callable object splitting a product type into two
 
     Split a product type in two product_type containing all the elements before and after a given index.
     On record types, this function operates on elements as if they were ordered. The considered order is the order

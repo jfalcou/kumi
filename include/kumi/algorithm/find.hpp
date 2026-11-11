@@ -32,11 +32,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_locate kumi::locate
+  //! @ingroup kumi_queries
+  //! @brief Callable object returning the index of a value whose type satisfies a given predicate
+  //====================================================================================================================
   /**
-    @ingroup kumi_queries
+    @ingroup kumi_locate
 
     @var locate
-    @brief Callable object returning the index of a value whose type satisfies a given predicate
 
     On record types, this function operates as if the elements are ordered. The considered order is the order of
     declaration.

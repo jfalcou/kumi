@@ -19,11 +19,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_reverse kumi::reverse
+  //! @ingroup kumi_generators
+  //! @brief Callable object reversing elements of a product type
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_reverse
 
     @var reverse
-    @brief Callable object reversing elements of a product type
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.

@@ -41,9 +41,12 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_index kumi::index
+  //! @ingroup kumi_utility
+  //! @brief Inline integral constant value for kumi::index_t
+  //====================================================================================================================
   /**
-    @ingroup kumi_utility
-    @brief Inline integral constant value for kumi::index_t
+    @ingroup kumi_index
   **/
   //====================================================================================================================
   template<std::size_t N> inline constexpr kumi::index_t<N> index = {};
@@ -75,9 +78,12 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_label kumi::label
+  //! @ingroup kumi_utility
+  //! @brief Inline literal constant value for kumi::label_t
+  //====================================================================================================================
   /**
-    @ingroup kumi_utility
-    @brief Inline literal constant value for kumi::label_t
+    @ingroup kumi_label
   **/
   //====================================================================================================================
   template<str Label> inline constexpr kumi::label_t<Label> label = {};
@@ -151,9 +157,12 @@ namespace kumi
   }
 
   //====================================================================================================================
+  //! @defgroup kumi_get_index_of_type kumi::get_index_of_type
+  //! @ingroup kumi_utility
+  //! @brief Helper to retrieve the index of a type in a product type by its type
+  //====================================================================================================================
   /**
-    @ingroup kumi_utility
-    @brief Helper to retrieve the index of a type in a product type by its type
+    @ingroup kumi_get_index_of_type
 
     @note This function does not participate in overload resolution if the product type has several instances of the
           same type or if it is empty.
@@ -171,9 +180,12 @@ namespace kumi
   }
 
   //====================================================================================================================
+  //! @defgroup kumi_get_index_of_field kumi::get_index_of_field
+  //! @ingroup kumi_utility
+  //! @brief Helper to retrieve the index of a type in a product type by its identifier
+  //====================================================================================================================
   /**
-    @ingroup kumi_utility
-    @brief Helper to retrieve the index of a type in a product type by its identifier
+    @ingroup kumi_get_index_of_field
 
     @note This function does not participate in overload resolution if the product type has several instances of the
           same identifier or has no identifier at all.
@@ -191,9 +203,12 @@ namespace kumi
   }
 
   //====================================================================================================================
+  //! @defgroup kumi_get_index_of_label kumi::get_index_of_label
+  //! @ingroup kumi_utility
+  //! @brief Helper to retrieve the index of a type in a product type by its identifier
+  //====================================================================================================================
   /**
-    @ingroup kumi_utility
-    @brief Helper to retrieve the index of a type in a product type by its identifier
+    @ingroup kumi_get_index_of_label
 
     @note This function does not participate in overload resolution if the product type has several instances of the
           same identifier or has no identifier at all.

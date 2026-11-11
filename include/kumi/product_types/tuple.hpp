@@ -500,11 +500,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_tie kumi::tie
+  //! @ingroup kumi_tuple_related
+  //! @brief Creates a kumi::tuple of lvalue references to its arguments.
+  //====================================================================================================================
   /**
-    @ingroup kumi_tuple_related
+    @ingroup kumi_tie
 
     @var tie
-    @brief Creates a kumi::tuple of lvalue references to its arguments.
 
     @qualifier inline
     @qualifier constexpr
@@ -547,11 +550,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_forward_as_tuple kumi::forward_as_tuple
+  //! @ingroup kumi_tuple_related
+  //! @brief Creates a kumi::tuple of forwarding references to its arguments.
+  //====================================================================================================================
   /**
-    @ingroup kumi_tuple_related
+    @ingroup kumi_forward_as_tuple
 
     @var forward_as_tuple
-    @brief Creates a kumi::tuple of forwarding references to its arguments.
 
     Constructs a tuple of references to the arguments in ts suitable for forwarding as an
     argument to a function. The tuple has rvalue reference data members when rvalues are used as
@@ -602,11 +608,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_make_tuple kumi::make_tuple
+  //! @ingroup kumi_tuple_related
+  //! @brief Creates a tuple object, deducing the target type from the types of arguments.
+  //====================================================================================================================
   /**
-    @ingroup kumi_tuple_related
+    @ingroup kumi_make_tuple
 
     @var make_tuple
-    @brief Creates a tuple object, deducing the target type from the types of arguments.
 
     @qualifier inline
     @qualifier constexpr
@@ -660,12 +669,15 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_to_ref kumi::to_ref
+  //! @ingroup kumi_generic_transforms
+  //! @brief Callable object creating a kumi::concepts::product_type of references given a reference to a
+  //!   kumi::concepts::product_type.
+  //====================================================================================================================
   /**
-    @ingroup kumi_transforms
+    @ingroup kumi_to_ref
 
     @var to_ref
-    @brief Callable object creating a kumi::concepts::product_type of references given a reference to a
-    kumi::concepts::product_type.
 
     If the input type matches the kumi::concepts::record_type protocol, return a kumi::record, returns a kumi::tuple
     otherwise.
@@ -731,11 +743,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_from_tuple kumi::from_tuple
+  //! @ingroup kumi_tuple_related
+  //! @brief Converts a kumi::tuple to an instance of an arbitrary type
+  //====================================================================================================================
   /**
-    @ingroup kumi_tuple_related
+    @ingroup kumi_from_tuple
 
     @var from_tuple
-    @brief Converts a kumi::tuple to an instance of an arbitrary type
 
     Constructs an instance of `Type` by passing elements of `t` to the appropriate constructor.
 
@@ -798,11 +813,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_to_tuple kumi::to_tuple
+  //! @ingroup kumi_tuple_related
+  //! @brief Converts a kumi::concepts::product_type to an instance of kumi::tuple
+  //====================================================================================================================
   /**
-    @ingroup kumi_tuple_related
+    @ingroup kumi_to_tuple
 
     @var to_tuple
-    @brief Converts a kumi::concepts::product_type to an instance of kumi::tuple
 
     Constructs an instance of kumi::tuple from the elements of the kumi::concepts::product_type parameters
 
@@ -929,11 +947,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_members_of kumi::members_of
+  //! @ingroup kumi_utility
+  //! @brief Extracts the names of the fields of a kumi::product_type.
+  //====================================================================================================================
   /**
-    @ingroup kumi_utility
+    @ingroup kumi_members_of
 
     @var members_of
-    @brief Extracts the names of the fields of a kumi::product_type.
 
     @note If some fields are unnamed, the associated name is kumi::unit.
 
@@ -986,11 +1007,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_values_of kumi::values_of
+  //! @ingroup kumi_utility
+  //! @brief Extracts the values of the fields of a kumi::product_type.
+  //====================================================================================================================
   /**
-    @ingroup kumi_utility
+    @ingroup kumi_values_of
 
     @var values_of
-    @brief Extracts the values of the fields of a kumi::product_type.
 
     @qualifier inline
     @qualifier constexpr

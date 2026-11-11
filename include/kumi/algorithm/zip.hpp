@@ -91,12 +91,15 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_zip kumi::zip
+  //! @ingroup kumi_generators
+  //! @brief Callable object constructing a tuple where the ith element is the product type of all ith elements of
+  //!   `t`,`ts`...
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_zip
 
     @var zip
-    @brief Callable object constructing a tuple where the ith element is the product type of all ith elements of
-  `t`,`ts`...
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
@@ -154,12 +157,15 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr zip_t zip{};
 
   //====================================================================================================================
+  //! @defgroup kumi_zip_min kumi::zip_min
+  //! @ingroup kumi_generators
+  //! @brief Callable object constructing a tuple where the ith element is the product type of all ith elements of
+  //!   `t`,`ts`...
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_zip_min
 
     @var zip_min
-    @brief Callable object constructing a tuple where the ith element is the product type of all ith elements of
-  `t`,`ts`...
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
@@ -219,12 +225,15 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr zip_min_t zip_min{};
 
   //====================================================================================================================
+  //! @defgroup kumi_zip_max kumi::zip_max
+  //! @ingroup kumi_generators
+  //! @brief Callable object constructing a tuple where the ith element is the product type of all ith elements of
+  //!   `t`,`ts`...
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_zip_max
 
     @var zip_max
-    @brief Callable object constructing a tuple where the ith element is the product type of all ith elements of
-  `t`,`ts`...
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.

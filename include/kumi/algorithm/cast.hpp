@@ -32,11 +32,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_member_cast kumi::member_cast
+  //! @ingroup kumi_generators
+  //! @brief Callable object converting a product_type<Ts...> to an instance of a product_type<Target...>
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_member_cast
 
     @var member_cast
-    @brief Callable object converting a product_type<Ts...> to an instance of a product_type<Target...>
 
     @qualifier nodiscard
     @qualifier inline

@@ -35,12 +35,15 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_tiles kumi::tiles
+  //! @ingroup kumi_generators
+  //! @brief Callable object creating a tuple of product types, each containing `N` consecutive elements from `t`. Tiles
+  //!   starts at 0 and advance by `O` element each time.
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_tiles
 
     @var tiles
-    @brief Callable object creating a tuple of product types, each containing `N` consecutive elements from `t`.
-            Tiles starts at 0 and advance by `O` element each time.
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
@@ -100,12 +103,15 @@ namespace kumi
   template<std::size_t N, std::size_t O> inline constexpr tiles_t<N, O> tiles{};
 
   //====================================================================================================================
+  //! @defgroup kumi_windows kumi::windows
+  //! @ingroup kumi_generators
+  //! @brief Callable object creating a tuple of product types, each containing `N` consecutive elements from `t`.
+  //!   Windows starts at 0 and advance by `1` element each time.
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_windows
 
     @var windows
-    @brief Callable object creating a tuple of product types, each containing `N` consecutive elements from `t`.
-           Windows starts at 0 and advance by `1` element each time.
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
@@ -163,12 +169,15 @@ namespace kumi
   template<std::size_t N> inline constexpr tiles_t<N, 1> windows{};
 
   //====================================================================================================================
+  //! @defgroup kumi_chunks kumi::chunks
+  //! @ingroup kumi_generators
+  //! @brief Callable object creating a tuple of product types, each containing `N` consecutive elements from `t`.
+  //!   Chunks starts at 0 and advance by `N` element each time.
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_chunks
 
     @var chunks
-    @brief Callable object creating a tuple of product types, each containing `N` consecutive elements from `t`.
-            Chunks starts at 0 and advance by `N` element each time.
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.

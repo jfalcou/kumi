@@ -65,11 +65,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_partition kumi::partition
+  //! @ingroup kumi_generators
+  //! @brief Callable object partitioning a product type over a predicate
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_partition
 
     @var partition
-    @brief Callable object partitioning a product type over a predicate
 
     On a record type, `Pred` is applied directly to the underlying elements of the fields.
 
@@ -125,11 +128,14 @@ namespace kumi
   template<template<typename> typename Pred> inline constexpr partition_t<Pred> partition{};
 
   //====================================================================================================================
+  //! @defgroup kumi_filter kumi::filter
+  //! @ingroup kumi_generators
+  //! @brief Callable object filtering a product type over a predicate
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_filter
 
     @var filter
-    @brief Callable object filtering a product type over a predicate
 
     On a record type, `Pred` is applied directly to the underlying elements of the fields.
 
@@ -184,11 +190,14 @@ namespace kumi
   template<template<typename> typename Pred> inline constexpr filter_t<Pred> filter{};
 
   //====================================================================================================================
+  //! @defgroup kumi_filter_not kumi::filter_not
+  //! @ingroup kumi_generators
+  //! @brief Callable object filtering a product type over a predicate
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_filter_not
 
     @var filter_not
-    @brief Callable object filtering a product type over a predicate
 
     On a record type, `Pred` is applied directly to the underlying elements of the fields.
 

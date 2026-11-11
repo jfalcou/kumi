@@ -138,12 +138,15 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_inclusive_scan_left kumi::inclusive_scan_left
+  //! @ingroup kumi_reductions
+  //! @brief Callable object computing the inclusive prefix scan of all elements of a product type using a tail
+  //!   recursive call.
+  //====================================================================================================================
   /**
-    @ingroup kumi_reductions
+    @ingroup kumi_inclusive_scan_left
 
     @var inclusive_scan_left
-    @brief Callable object computing the inclusive prefix scan of all elements of a product type using a tail recursive
-  call.
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 
@@ -205,12 +208,15 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr inclusive_scan_left_t inclusive_scan_left{};
 
   //====================================================================================================================
+  //! @defgroup kumi_exclusive_scan_left kumi::exclusive_scan_left
+  //! @ingroup kumi_reductions
+  //! @brief Callable object computing the exclusive prefix scan of all elements of a product type using a tail
+  //!   recursive call.
+  //====================================================================================================================
   /**
-    @ingroup kumi_reductions
+    @ingroup kumi_exclusive_scan_left
 
     @var exclusive_scan_left
-    @brief Callable object computing the exclusive prefix scan of all elements of a product type using a tail recursive
-  call.
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 
@@ -272,12 +278,15 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr exclusive_scan_left_t exclusive_scan_left{};
 
   //====================================================================================================================
+  //! @defgroup kumi_inclusive_scan_right kumi::inclusive_scan_right
+  //! @ingroup kumi_reductions
+  //! @brief Callable object computing the inclusive suffix scan of all elements of a product type using a non-tail
+  //!   recursive call.
+  //====================================================================================================================
   /**
-    @ingroup kumi_reductions
+    @ingroup kumi_inclusive_scan_right
 
     @var inclusive_scan_right
-    @brief Callable object computing the inclusive suffix scan of all elements of a product type using a non-tail
-  recursive call.
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 
@@ -339,12 +348,15 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr inclusive_scan_right_t inclusive_scan_right{};
 
   //====================================================================================================================
+  //! @defgroup kumi_exclusive_scan_right kumi::exclusive_scan_right
+  //! @ingroup kumi_reductions
+  //! @brief Callable object computing the exclusive suffix scan of all elements of a product type using a non-tail
+  //!   recursive call.
+  //====================================================================================================================
   /**
-    @ingroup kumi_reductions
+    @ingroup kumi_exclusive_scan_right
 
     @var exclusive_scan_right
-    @brief Callable object computing the exclusive suffix scan of all elements of a product type using a non-tail
-  recursive call.
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 

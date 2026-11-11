@@ -61,11 +61,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_push_front kumi::push_front
+  //! @ingroup kumi_generators
+  //! @brief Callable object constructing a product type by adding a value `v` at the beginning of `t`.
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_push_front
 
     @var push_front
-    @brief Callable object constructing a product type by adding a value `v` at the beginning of `t`.
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
@@ -117,11 +120,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr push_front_t push_front{};
 
   //====================================================================================================================
+  //! @defgroup kumi_pop_front kumi::pop_front
+  //! @ingroup kumi_generators
+  //! @brief Callable object removing the first (if any) element of `t`.
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_pop_front
 
     @var pop_front
-    @brief Callable object removing the first (if any) element of `t`.
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
@@ -172,11 +178,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr pop_front_t pop_front{};
 
   //====================================================================================================================
+  //! @defgroup kumi_push_back kumi::push_back
+  //! @ingroup kumi_generators
+  //! @brief Callable object constructing a product type by adding a value `v` at the end of `t`.
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_push_back
 
     @var push_back
-    @brief Callable object constructing a product type by adding a value `v` at the end of `t`.
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
@@ -228,11 +237,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr push_back_t push_back{};
 
   //====================================================================================================================
+  //! @defgroup kumi_pop_back kumi::pop_back
+  //! @ingroup kumi_generators
+  //! @brief Callable object removing the last (if any) element of `t`.
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_pop_back
 
     @var pop_back
-    @brief Callable object removing the last (if any) element of `t`.
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.

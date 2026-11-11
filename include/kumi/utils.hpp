@@ -17,7 +17,7 @@ namespace kumi
 {
   //====================================================================================================================
   /**
-    @defgroup kumi_utility   Helper Types and Functions
+    @defgroup kumi_utility   Utility Types and Functions
     @brief    Helpers to adapt, build and introspect kumi::product_type
 
     @defgroup kumi_concepts     Product Type Related Concepts
@@ -25,6 +25,10 @@ namespace kumi
 
     @defgroup kumi_traits     Product Type Related Traits
     @brief    Traits and extension points for product types
+
+    @defgroup kumi_generic_traits Generic Traits
+    @ingroup  kumi_traits
+    @brief    Traits and extension points for any product type
 
     @defgroup kumi_tuple_traits  Tuple Related Traits
     @ingroup  kumi_traits

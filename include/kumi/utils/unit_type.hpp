@@ -45,9 +45,12 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_none kumi::none
+  //! @ingroup kumi_utility
+  //! @brief Inline constant representing a kumi::unit.
+  //====================================================================================================================
   /**
-    @ingroup kumi_utility
-    @brief Inline constant representing a kumi::unit.
+    @ingroup kumi_none
   **/
   //====================================================================================================================
   inline constexpr kumi::unit none{};

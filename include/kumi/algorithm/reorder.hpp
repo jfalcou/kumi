@@ -65,11 +65,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_reorder kumi::reorder
+  //! @ingroup kumi_generators
+  //! @brief Callable object reordering elements of a product type
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_reorder
 
     @var reorder
-    @brief Callable object reordering elements of a product type
 
     This function will issue a compile time error if any Idx is outside [0, size_v<T>[.
 
@@ -131,11 +134,14 @@ namespace kumi
   template<std::size_t... I> inline constexpr reorder_t<I...> reorder{};
 
   //====================================================================================================================
+  //! @defgroup kumi_reorder_fields kumi::reorder_fields
+  //! @ingroup kumi_generators
+  //! @brief Callable object reordering elements of a Record Type
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_reorder_fields
 
     @var reorder_fields
-    @brief Callable object reordering elements of a Record Type
 
     This function will issue a compile time error if the identifiers are not in `t`
 
@@ -189,11 +195,14 @@ namespace kumi
   template<kumi::concepts::identifier auto... Name> inline constexpr reorder_fields_t<Name...> reorder_fields{};
 
   //====================================================================================================================
+  //! @defgroup kumi_reindex kumi::reindex
+  //! @ingroup kumi_generators
+  //! @brief Callable object reindex elements of a Product Type
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_reindex
 
     @var reindex
-    @brief Callable object reindex elements of a Product Type
 
     This function will issue a compile time error if one of the identifiers is not in `t` or
     if any index is outside [0, size_v<T>[ at any given level of the input type.

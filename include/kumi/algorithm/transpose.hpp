@@ -41,12 +41,15 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_transpose kumi::transpose
+  //! @ingroup kumi_generators
+  //! @brief Callable object transposing a product type of product types by shifting elements in their transposed
+  //!   position always returning a tuple as the external product type.
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_transpose
 
     @var transpose
-    @brief Callable object transposing a product type of product types by shifting elements in their
-            transposed position always returning a tuple as the external product type.
 
     @note This function will issue a compile time error if each element of the input product type is not
           itself a product type or if their sizes are not equal.

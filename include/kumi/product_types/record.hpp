@@ -514,11 +514,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_forward_as_record kumi::forward_as_record
+  //! @ingroup kumi_record_related
+  //! @brief Creates a kumi::record of forwarding references to its arguments.
+  //====================================================================================================================
   /**
-    @ingroup kumi_record_related
+    @ingroup kumi_forward_as_record
 
     @var forward_as_record
-    @brief Creates a kumi::record of forwarding references to its arguments.
 
     Constructs a record of references to the arguments in ts suitable for forwarding as an
     argument to a function. The record has rvalue reference data members when rvalues are used as
@@ -571,11 +574,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_make_record kumi::make_record
+  //! @ingroup kumi_record_related
+  //! @brief Creates a record object, deducing the target type from the types of arguments.
+  //====================================================================================================================
   /**
-    @ingroup kumi_record_related
+    @ingroup kumi_make_record
 
     @var make_record
-    @brief Creates a record object, deducing the target type from the types of arguments.
 
     @qualifier inline
     @qualifier constexpr
@@ -652,11 +658,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_from_record kumi::from_record
+  //! @ingroup kumi_record_related
+  //! @brief Converts a kumi::record to an instance of an arbitrary type that models kumi::record_type
+  //====================================================================================================================
   /**
-    @ingroup kumi_record_related
+    @ingroup kumi_from_record
 
     @var from_record
-    @brief Converts a kumi::record to an instance of an arbitrary type that models kumi::record_type
 
 
     Constructs an instance of `Type` by passing elements of `r` to the appropriate constructor.
@@ -713,11 +722,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_to_record kumi::to_record
+  //! @ingroup kumi_record_related
+  //! @brief Converts a kumi::concepts::record_type to an instance of kumi::record
+  //====================================================================================================================
   /**
-    @ingroup kumi_record_related
+    @ingroup kumi_to_record
 
     @var to_record
-    @brief Converts a kumi::concepts::record_type to an instance of kumi::record
 
     Constructs an instance of kumi::record from the elements of the kumi::concepts::record_type parameters
 

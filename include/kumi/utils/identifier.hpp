@@ -20,9 +20,12 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_only kumi::only
+  //! @ingroup kumi_utility
+  //! @brief Option restricting an identifier to accept a single type `T`.
+  //====================================================================================================================
   /**
-    @ingroup kumi_utility
-    @brief  Option restricting an identifier to accept a single type `T`.
+    @ingroup kumi_only
     @tparam T Type that the parametrized identifier will accept.
 
     @include doc/infra/only.cpp

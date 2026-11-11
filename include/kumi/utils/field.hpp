@@ -148,9 +148,12 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_identifier_of kumi::identifier_of
+  //! @ingroup kumi_utility
+  //! @brief Extracts the identifiers from a kumi::concepts::field or returns the parameter.
+  //====================================================================================================================
   /**
-    @ingroup kumi_utility
-    @brief    Extracts the identifiers from a kumi::concepts::field or returns the parameter.
+    @ingroup kumi_identifier_of
 
     @note     If the unqualified type of input does not model kumi::concepts::field, returns kumi::unknown.
     @tparam   T The type to extract the identifier from.
@@ -179,9 +182,12 @@ namespace kumi
   }
 
   //====================================================================================================================
+  //! @defgroup kumi_label_of kumi::label_of
+  //! @ingroup kumi_utility
+  //! @brief Extracts the label from a kumi::concepts::field or returns the parameter.
+  //====================================================================================================================
   /**
-    @ingroup kumi_utility
-    @brief    Extracts the label from a kumi::concepts::field or returns the parameter.
+    @ingroup kumi_label_of
 
     @note     If the unqualified type of input does not model kumi::concepts::field, returns kumi::unknown.
     @tparam   T The type to extract label from.
@@ -210,9 +216,12 @@ namespace kumi
   }
 
   //====================================================================================================================
+  //! @defgroup kumi_field_value_of kumi::field_value_of
+  //! @ingroup kumi_utility
+  //! @brief Extracts the value from a kumi::concepts::field or returns the parameter
+  //====================================================================================================================
   /**
-    @ingroup kumi_utility
-    @brief    Extracts the value from a kumi::concepts::field or returns the parameter
+    @ingroup kumi_field_value_of
 
     @note     If the unqualified type of input does not model kumi::concepts::field, simply forwards the parameter
     @tparam   T The type to extract the value from.
@@ -242,9 +251,12 @@ namespace kumi
   }
 
   //====================================================================================================================
+  //! @defgroup kumi_capture_field kumi::capture_field
+  //! @ingroup kumi_utility
+  //! @brief Creates a field from a given value keeping the qualifiers.
+  //====================================================================================================================
   /**
-    @ingroup kumi_utility
-    @brief    Creates a field from a given value keeping the qualifiers.
+    @ingroup kumi_capture_field
 
     @tparam   Name The label to associate to the field.
     @param    t A forwarding reference to the input object.
@@ -274,9 +286,12 @@ namespace kumi
   }
 
   //====================================================================================================================
+  //! @defgroup kumi_field_cast kumi::field_cast
+  //! @ingroup kumi_utility
+  //! @brief Casts the provided value to the target type using `static_cast`.
+  //====================================================================================================================
   /**
-    @ingroup kumi_utility
-    @brief    Casts the provided value to the target type using `static_cast`.
+    @ingroup kumi_field_cast
 
     @note If the type to convert models kumi::concepts::field, the function does not rename the input parameter.
 

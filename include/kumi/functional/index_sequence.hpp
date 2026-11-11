@@ -64,11 +64,14 @@ namespace kumi::_
 namespace kumi::function
 {
   //====================================================================================================================
+  //! @defgroup kumi_function_cartesian_strides kumi::function::cartesian_strides
+  //! @ingroup kumi_functional
+  //! @brief A helper alias template computing the strides associated to the cartesian product operation.
+  //====================================================================================================================
   /**
-    @ingroup kumi_functional
+    @ingroup kumi_function_cartesian_strides
 
     @typedef cartesian_strides
-    @brief A helper alias template computing the strides associated to the cartesian product operation.
 
     For a cartesian product of `M` tuples of sizes `N0, ..., N(M-1)`, the `K`-th element of the product
     selects, in the `i`-th input tuple, the element at index `(K / S_i) % N_i`. This alias computes the
@@ -106,11 +109,14 @@ namespace kumi::function
   using cartesian_strides = decltype(kumi::_::strided_index_sequence<Sizes, Elts>);
 
   //====================================================================================================================
+  //! @defgroup kumi_function_cat_index_sequence kumi::function::cat_index_sequence
+  //! @ingroup kumi_functional
+  //! @brief A helper alias template computing the index map associated to the concatenation operation.
+  //====================================================================================================================
   /**
-    @ingroup kumi_functional
+    @ingroup kumi_function_cat_index_sequence
 
     @typedef cat_index_sequence
-    @brief A helper alias template computing the index map associated to the concatenation operation.
 
     @groupheader{Header file}
     @code
@@ -133,11 +139,14 @@ namespace kumi::function
   template<typename... Ts> using cat_index_sequence = decltype(kumi::_::cat_index_sequence<Ts...>);
 
   //====================================================================================================================
+  //! @defgroup kumi_function_fill_index_sequence kumi::function::fill_index_sequence
+  //! @ingroup kumi_functional
+  //! @brief A helper alias template generating an index sequence repeating a constant value.
+  //====================================================================================================================
   /**
-    @ingroup kumi_functional
+    @ingroup kumi_function_fill_index_sequence
 
     @typedef fill_index_sequence
-    @brief A helper alias template generating an index sequence repeating a constant value.
 
     @groupheader{Header file}
     @code
@@ -162,11 +171,14 @@ namespace kumi::function
   using fill_index_sequence = decltype(kumi::_::fill_index_sequence<E, std::make_index_sequence<N>>);
 
   //====================================================================================================================
+  //! @defgroup kumi_function_indexes_for kumi::function::indexes_for
+  //! @ingroup kumi_functional
+  //! @brief A helper alias template extracting the projection map associated to a given `kumi::concepts::product_type`.
+  //====================================================================================================================
   /**
-    @ingroup kumi_functional
+    @ingroup kumi_function_indexes_for
 
     @typedef indexes_for
-    @brief A helper alias template extracting the projection map associated to a given `kumi::concepts::product_type`.
 
     @groupheader{Header file}
     @code
@@ -189,11 +201,14 @@ namespace kumi::function
   template<typename T> using indexes_for = std::make_index_sequence<kumi::size_v<T>>;
 
   //====================================================================================================================
+  //! @defgroup kumi_function_remove_index_sequence kumi::function::remove_index_sequence
+  //! @ingroup kumi_functional
+  //! @brief A helper alias template generating the index sequence associated to the remove operation.
+  //====================================================================================================================
   /**
-    @ingroup kumi_functional
+    @ingroup kumi_function_remove_index_sequence
 
     @typedef remove_index_sequence
-    @brief A helper alias template generating the index sequence associated to the remove operation.
 
     @groupheader{Header file}
     @code
@@ -225,11 +240,14 @@ namespace kumi::function
                                             std::make_index_sequence<N - ((E > B) ? (E - B + S - 1) / S : 0)>>);
 
   //====================================================================================================================
+  //! @defgroup kumi_function_reverse_index_sequence kumi::function::reverse_index_sequence
+  //! @ingroup kumi_functional
+  //! @brief A helper alias template computing the reversed index sequence.
+  //====================================================================================================================
   /**
-    @ingroup kumi_functional
+    @ingroup kumi_function_reverse_index_sequence
 
     @typedef reverse_index_sequence
-    @brief A helper alias template computing the reversed index sequence.
 
     @groupheader{Header file}
     @code
@@ -253,11 +271,14 @@ namespace kumi::function
   using reverse_index_sequence = decltype(kumi::_::reverse_index_sequence<std::make_index_sequence<N>>);
 
   //====================================================================================================================
+  //! @defgroup kumi_function_rotate_index_sequence kumi::function::rotate_index_sequence
+  //! @ingroup kumi_functional
+  //! @brief A helper alias template computing the index_sequence associated to the rotation operation.
+  //====================================================================================================================
   /**
-    @ingroup kumi_functional
+    @ingroup kumi_function_rotate_index_sequence
 
     @typedef rotate_index_sequence
-    @brief A helper alias template computing the index_sequence associated to the rotation operation.
 
     @groupheader{Header file}
     @code
@@ -282,11 +303,14 @@ namespace kumi::function
   using rotate_index_sequence = decltype(kumi::_::rotate_index_sequence<R, std::make_index_sequence<N>>);
 
   //====================================================================================================================
+  //! @defgroup kumi_function_shift_index_sequence kumi::function::shift_index_sequence
+  //! @ingroup kumi_functional
+  //! @brief A helper alias template computing linear indexing translations.
+  //====================================================================================================================
   /**
-    @ingroup kumi_functional
+    @ingroup kumi_function_shift_index_sequence
 
     @typedef shift_index_sequence
-    @brief A helper alias template computing linear indexing translations.
 
     @groupheader{Header file}
     @code
@@ -311,11 +335,14 @@ namespace kumi::function
   using shift_index_sequence = decltype(kumi::_::shift_index_sequence<O, std::make_index_sequence<N>>);
 
   //====================================================================================================================
+  //! @defgroup kumi_function_slice_index_sequence kumi::function::slice_index_sequence
+  //! @ingroup kumi_functional
+  //! @brief A helper alias template computing the index map associated to the slicing (begin, end, step) operation.
+  //====================================================================================================================
   /**
-    @ingroup kumi_functional
+    @ingroup kumi_function_slice_index_sequence
 
     @typedef slice_index_sequence
-    @brief A helper alias template computing the index map associated to the slicing (begin, end, step) operation.
 
     @groupheader{Header file}
     @code

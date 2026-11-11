@@ -67,9 +67,12 @@ namespace kumi
   }
 
   //====================================================================================================================
+  //! @defgroup kumi_bind_front kumi::bind_front
+  //! @ingroup kumi_functional
+  //! @brief Returns a callable object with `ts` bound as its leading arguments, reducing `c` arity.
+  //====================================================================================================================
   /**
-    @ingroup kumi_functional
-    @brief    Returns a callable object with `ts` bound as its leading arguments, reducing `c` arity.
+    @ingroup kumi_bind_front
 
     @param c	Callable object to be bound.
     @param ts Elements to be bound as the leading arguments of `c`.
@@ -88,9 +91,12 @@ namespace kumi
   }
 
   //====================================================================================================================
+  //! @defgroup kumi_bind_back kumi::bind_back
+  //! @ingroup kumi_functional
+  //! @brief Returns a callable object with `ts` bound as its trailing arguments, reducing `c` arity.
+  //====================================================================================================================
   /**
-    @ingroup kumi_functional
-    @brief    Returns a callable object with `ts` bound as its trailing arguments, reducing `c` arity.
+    @ingroup kumi_bind_back
 
     @param c	Callable object to be bound.
     @param ts Elements to be bound as the trailing arguments of `c`.

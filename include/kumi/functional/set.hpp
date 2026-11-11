@@ -54,11 +54,14 @@ namespace kumi
   namespace function
   {
     //==================================================================================================================
+    //! @defgroup kumi_function_unique_index_sequence kumi::function::unique_index_sequence
+    //! @ingroup kumi_functional
+    //! @brief A helper alias template generating the index map associated to the unique operations.
+    //==================================================================================================================
     /**
-      @ingroup kumi_functional
+      @ingroup kumi_function_unique_index_sequence
 
       @typedef unique_index_sequence
-      @brief A helper alias template generating the index map associated to the unique operations.
 
       @groupheader{Header file}
       @code
@@ -84,11 +87,14 @@ namespace kumi
       decltype(kumi::_::unique_index_sequence<std::make_index_sequence<(Bs + ... + 0)>, Bs...>);
 
     //==================================================================================================================
+    //! @defgroup kumi_function_select_index_sequence kumi::function::select_index_sequence
+    //! @ingroup kumi_functional
+    //! @brief A helper alias template generating the positions of the `true` flags in a pack of booleans.
+    //==================================================================================================================
     /**
-      @ingroup kumi_functional
+      @ingroup kumi_function_select_index_sequence
 
       @typedef select_index_sequence
-      @brief A helper alias template generating the positions of the `true` flags in a pack of booleans.
 
       @groupheader{Header file}
       @code
@@ -114,11 +120,14 @@ namespace kumi
       decltype(kumi::_::select_index_sequence<std::make_index_sequence<(Bs + ... + 0)>, Bs...>);
 
     //==================================================================================================================
+    //! @defgroup kumi_function_adjacent_index_sequence kumi::function::adjacent_index_sequence
+    //! @ingroup kumi_functional
+    //! @brief A helper alias template generating the index map associated to the adjacent unicity operation.
+    //==================================================================================================================
     /**
-      @ingroup kumi_functional
+      @ingroup kumi_function_adjacent_index_sequence
 
       @typedef adjacent_index_sequence
-      @brief A helper alias template generating the index map associated to the adjacent unicity operation.
 
       @groupheader{Header file}
       @code

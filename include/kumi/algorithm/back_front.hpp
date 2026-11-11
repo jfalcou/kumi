@@ -30,11 +30,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_front kumi::front
+  //! @ingroup kumi_queries
+  //! @brief Callable object used to retrieve the front of a product type
+  //====================================================================================================================
   /**
-    @ingroup kumi_queries
+    @ingroup kumi_front
 
     @var front
-    @brief Callable object used to retrieve the front of a product type
 
     @note This function does not take part in overload resolution if t is an empty product type.
 
@@ -84,11 +87,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr front_t front{};
 
   //====================================================================================================================
+  //! @defgroup kumi_back kumi::back
+  //! @ingroup kumi_queries
+  //! @brief Callable object used to retrieve the back of a product type
+  //====================================================================================================================
   /**
-    @ingroup kumi_queries
+    @ingroup kumi_back
 
     @var back
-    @brief Callable object used to retrieve the back of a product type
 
     @note This function does not take part in overload resolution if t is an empty product type.
 
