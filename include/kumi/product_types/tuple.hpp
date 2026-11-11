@@ -335,7 +335,7 @@ namespace kumi
     KUMI_ABI constexpr tuple& operator=(tuple<Us...>&& other) noexcept((std::is_nothrow_assignable_v<Ts&, Us&&> && ...))
     requires(sizeof...(Ts) == sizeof...(Us)) && ((std::is_assignable_v<Ts&, Us&&> && ...))
     {
-      kumi::_::assign(*this, std::move(other), std::make_index_sequence<sizeof...(Ts)>{});
+      kumi::_::assign(*this, KUMI_MOVE(other), std::make_index_sequence<sizeof...(Ts)>{});
       return *this;
     }
 
@@ -1083,7 +1083,7 @@ namespace kumi
       using type = kumi::result::members_of_t<T>;
     };
 
-    template<kumi::concepts::product_type T> using values_of_t = decltype(kumi::values_of(std::declval<T>()));
+    template<kumi::concepts::product_type T> using values_of_t = decltype(kumi::values_of(kumi::declval<T>()));
 
     template<kumi::concepts::product_type T> struct values_of
     {

@@ -341,7 +341,7 @@ namespace kumi
       using type = kumi::result::label_of_t<T>;
     };
 
-    template<typename T> using field_value_of_t = decltype(kumi::field_value_of(std::declval<T>()));
+    template<typename T> using field_value_of_t = decltype(kumi::field_value_of(kumi::declval<T>()));
 
     template<typename T> struct field_value_of
     {
@@ -349,14 +349,14 @@ namespace kumi
     };
 
     template<_::identifier auto Name, typename T>
-    using capture_field_t = decltype(kumi::capture_field<Name>(std::declval<T>()));
+    using capture_field_t = decltype(kumi::capture_field<Name>(kumi::declval<T>()));
 
     template<kumi::_::identifier auto Name, typename T> struct capture_field
     {
       using type = kumi::result::capture_field_t<Name, T>;
     };
 
-    template<typename U, typename T> using field_cast_t = decltype(kumi::field_cast<U, T>(std::declval<T>()));
+    template<typename U, typename T> using field_cast_t = decltype(kumi::field_cast<U, T>(kumi::declval<T>()));
 
     template<typename U, typename T> struct field_cast
     {

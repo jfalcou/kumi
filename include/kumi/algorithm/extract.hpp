@@ -309,7 +309,7 @@ namespace kumi
     //! [extract_t]
     template<kumi::concepts::product_type T, std::size_t... I>
     requires((sizeof...(I) == 1) || (sizeof...(I) == 2))
-    using extract_t = decltype(kumi::extract(std::declval<T>(), kumi::index_t<I>{}...));
+    using extract_t = decltype(kumi::extract(kumi::declval<T>(), kumi::index_t<I>{}...));
 
     template<kumi::concepts::product_type T, std::size_t... I>
     requires((sizeof...(I) == 1) || (sizeof...(I) == 2))
@@ -323,7 +323,7 @@ namespace kumi
     //! [remove_t]
     template<kumi::concepts::product_type T, std::size_t... I>
     requires((sizeof...(I) == 1) || (sizeof...(I) == 2))
-    using remove_t = decltype(kumi::remove(std::declval<T>(), kumi::index_t<I>{}...));
+    using remove_t = decltype(kumi::remove(kumi::declval<T>(), kumi::index_t<I>{}...));
 
     template<kumi::concepts::product_type T, std::size_t... I>
     requires((sizeof...(I) == 1) || (sizeof...(I) == 2))
@@ -336,7 +336,7 @@ namespace kumi
 
     //! [split_t]
     template<kumi::concepts::product_type T, std::size_t I>
-    using split_t = decltype(kumi::split(std::declval<T>(), kumi::index_t<I>{}));
+    using split_t = decltype(kumi::split(kumi::declval<T>(), kumi::index_t<I>{}));
 
     template<kumi::concepts::product_type T, std::size_t I> struct split
     {

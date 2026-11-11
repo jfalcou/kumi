@@ -19,7 +19,7 @@ namespace kumi
         if constexpr (kumi::concepts::projection_map<decltype(P)>) return C<P>{}(KUMI_FWD(t));
         else
         {
-          static_assert(requires { get<P>(std::declval<T>()); }, "[KUMI] - Invalid projection for input type");
+          static_assert(requires { get<P>(kumi::declval<T>()); }, "[KUMI] - Invalid projection for input type");
           return get<P>(KUMI_FWD(t));
         }
       }
@@ -47,7 +47,7 @@ namespace kumi
   {
     template<kumi::concepts::product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto operator()(Tuple&& t) const
     {
-      static_assert((requires { get<Name>(std::declval<Tuple>()); } && ...),
+      static_assert((requires { get<Name>(kumi::declval<Tuple>()); } && ...),
                     "[KUMI] - Identifier not present in input type");
       return builder<Tuple>::make(Name = get<Name>(KUMI_FWD(t))...);
     }
@@ -273,7 +273,7 @@ namespace kumi
   {
     //! [reorder_t]
     template<kumi::concepts::product_type T, std::size_t... Idx>
-    using reorder_t = decltype(kumi::reorder<Idx...>(std::declval<T>()));
+    using reorder_t = decltype(kumi::reorder<Idx...>(kumi::declval<T>()));
 
     template<kumi::concepts::product_type T, std::size_t... Idx> struct reorder
     {
@@ -284,7 +284,7 @@ namespace kumi
 
     //! [reorder_fields_t]
     template<kumi::concepts::product_type Tuple, kumi::concepts::identifier auto... Name>
-    using reorder_fields_t = decltype(kumi::reorder_fields<Name...>(std::declval<Tuple>()));
+    using reorder_fields_t = decltype(kumi::reorder_fields<Name...>(kumi::declval<Tuple>()));
 
     template<kumi::concepts::product_type Tuple, kumi::concepts::identifier auto... Name> struct reorder_fields
     {
@@ -295,7 +295,7 @@ namespace kumi
 
     //! [reindex_t]
     template<kumi::concepts::product_type T, kumi::concepts::projection_map auto Indexes>
-    using reindex_t = decltype(kumi::reindex<Indexes>(std::declval<T>()));
+    using reindex_t = decltype(kumi::reindex<Indexes>(kumi::declval<T>()));
 
     template<kumi::concepts::product_type T, kumi::concepts::projection_map auto Indexes> struct reindex
     {

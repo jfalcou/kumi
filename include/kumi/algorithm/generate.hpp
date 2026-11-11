@@ -219,7 +219,8 @@ namespace kumi
   namespace result
   {
     //! [generate_t]
-    template<std::size_t N, typename Function> using generate_t = decltype(kumi::generate<N>(std::declval<Function>()));
+    template<std::size_t N, typename Function>
+    using generate_t = decltype(kumi::generate<N>(kumi::declval<Function>()));
 
     template<std::size_t N, typename Function> struct generate
     {
@@ -229,7 +230,7 @@ namespace kumi
     //! [generate_t]
 
     //! [fill_t]
-    template<std::size_t N, typename T> using fill_t = decltype(kumi::fill<N>(std::declval<T>()));
+    template<std::size_t N, typename T> using fill_t = decltype(kumi::fill<N>(kumi::declval<T>()));
 
     template<std::size_t N, typename T> struct fill
     {
@@ -239,7 +240,7 @@ namespace kumi
     //! [fill_t]
 
     //! [iota_t]
-    template<std::size_t N, typename T> using iota_t = decltype(kumi::iota<N>(std::declval<T>()));
+    template<std::size_t N, typename T> using iota_t = decltype(kumi::iota<N>(kumi::declval<T>()));
 
     template<std::size_t N, typename T> struct iota
     {

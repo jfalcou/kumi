@@ -105,7 +105,7 @@ namespace kumi
   namespace result
   {
     //! [transpose_t]
-    template<kumi::concepts::product_type T> using transpose_t = decltype(kumi::transpose(std::declval<T>()));
+    template<kumi::concepts::product_type T> using transpose_t = decltype(kumi::transpose(kumi::declval<T>()));
 
     template<kumi::concepts::product_type T> struct transpose
     {

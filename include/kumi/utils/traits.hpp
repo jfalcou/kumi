@@ -166,7 +166,7 @@ namespace kumi
     @endcode
   **/
   //====================================================================================================================
-  template<std::size_t I, typename T> using member_t = decltype(get<I>(std::declval<T&&>()));
+  template<std::size_t I, typename T> using member_t = decltype(get<I>(kumi::declval<T&&>()));
 
   template<std::size_t I, typename T> struct member
   {
@@ -192,7 +192,7 @@ namespace kumi
   **/
   //====================================================================================================================
   template<typename Field, typename T>
-  using field_of_t = decltype(get<kumi::_::identifier_of_t<Field>{}>(std::declval<T&&>()));
+  using field_of_t = decltype(get<kumi::_::identifier_of_t<Field>{}>(kumi::declval<T&&>()));
 
   template<typename Field, typename T> struct field_of
   {
@@ -456,7 +456,7 @@ namespace kumi
 
     template<std::size_t I, typename T>
     requires(kumi::is_record_type_v<std::remove_cvref_t<T>>)
-    extern decltype(get<kumi::_::member_at<I, T>{}>(std::declval<T&&>())) stored_member<I, T>; // NOSONAR
+    extern decltype(get<kumi::_::member_at<I, T>{}>(kumi::declval<T&&>())) stored_member<I, T>; // NOSONAR
   }
 
   //====================================================================================================================
@@ -703,8 +703,8 @@ namespace kumi
     template<typename T, typename U, std::size_t... I>
     requires(kumi::is_record_type_v<T> && kumi::is_record_type_v<U>)
     inline constexpr bool is_equality_comparable<T, U, std::index_sequence<I...>>{
-      (kumi::is_comparable_v<decltype(std::declval<kumi::_::set<kumi::element_t<I, T>...>>()(
-                               std::declval<kumi::_::identifier_of_t<kumi::element_t<I, U>>>())),
+      (kumi::is_comparable_v<decltype(kumi::declval<kumi::_::set<kumi::element_t<I, T>...>>()(
+                               kumi::declval<kumi::_::identifier_of_t<kumi::element_t<I, U>>>())),
                              kumi::_::type_of_t<kumi::element_t<I, U>>> &&
        ...)};
 

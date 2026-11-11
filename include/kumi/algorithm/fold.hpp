@@ -202,7 +202,7 @@ namespace kumi
     template<typename Function, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     using fold_left_t =
-      decltype(kumi::fold_left(std::declval<Function>(), std::declval<T>(), std::declval<Value>()...));
+      decltype(kumi::fold_left(kumi::declval<Function>(), kumi::declval<T>(), kumi::declval<Value>()...));
 
     template<typename Function, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
@@ -217,7 +217,7 @@ namespace kumi
     template<typename Function, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     using fold_right_t =
-      decltype(kumi::fold_right(std::declval<Function>(), std::declval<T>(), std::declval<Value>()...));
+      decltype(kumi::fold_right(kumi::declval<Function>(), kumi::declval<T>(), kumi::declval<Value>()...));
 
     template<typename Function, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))

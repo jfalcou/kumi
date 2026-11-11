@@ -372,7 +372,7 @@ namespace kumi
     //! [max_t]
     template<typename T, typename... F>
     requires((sizeof...(F) == 0) || (sizeof...(F) == 1))
-    using max_t = decltype(kumi::max(std::declval<T>(), std::declval<F>()...));
+    using max_t = decltype(kumi::max(kumi::declval<T>(), kumi::declval<F>()...));
 
     template<typename T, typename... F>
     requires((sizeof...(F) == 0) || (sizeof...(F) == 1))
@@ -385,7 +385,8 @@ namespace kumi
 
     //! [max_flat_t]
     //
-    template<typename T, typename F> using max_flat_t = decltype(kumi::max_flat(std::declval<T>(), std::declval<F>()));
+    template<typename T, typename F>
+    using max_flat_t = decltype(kumi::max_flat(kumi::declval<T>(), kumi::declval<F>()));
 
     template<typename T, typename F> struct max_flat
     {
@@ -397,7 +398,7 @@ namespace kumi
     //! [min_t]
     template<typename T, typename... F>
     requires((sizeof...(F) == 0) || (sizeof...(F) == 1))
-    using min_t = decltype(kumi::min(std::declval<T>(), std::declval<F>()...));
+    using min_t = decltype(kumi::min(kumi::declval<T>(), kumi::declval<F>()...));
 
     template<typename T, typename... F>
     requires((sizeof...(F) == 0) || (sizeof...(F) == 1))
@@ -409,7 +410,8 @@ namespace kumi
     //! [min_t]
 
     //! [min_flat_t]
-    template<typename T, typename F> using min_flat_t = decltype(kumi::min_flat(std::declval<T>(), std::declval<F>()));
+    template<typename T, typename F>
+    using min_flat_t = decltype(kumi::min_flat(kumi::declval<T>(), kumi::declval<F>()));
 
     template<typename T, typename F> struct min_flat
     {

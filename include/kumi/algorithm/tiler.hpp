@@ -248,7 +248,7 @@ namespace kumi
   {
     //! [tiles_t]
     template<std::size_t N, std::size_t O, kumi::concepts::product_type T>
-    using tiles_t = decltype(kumi::tiles<N, O>(std::declval<T>()));
+    using tiles_t = decltype(kumi::tiles<N, O>(kumi::declval<T>()));
 
     template<std::size_t N, std::size_t O, kumi::concepts::product_type T> struct tiles
     {
@@ -259,7 +259,7 @@ namespace kumi
 
     //! [windows_t]
     template<std::size_t N, kumi::concepts::product_type T>
-    using windows_t = decltype(kumi::windows<N>(std::declval<T>()));
+    using windows_t = decltype(kumi::windows<N>(kumi::declval<T>()));
 
     template<std::size_t N, kumi::concepts::product_type T> struct windows
     {
@@ -270,7 +270,7 @@ namespace kumi
 
     //! [chunks_t]
     template<std::size_t N, kumi::concepts::product_type T>
-    using chunks_t = decltype(kumi::chunks<N>(std::declval<T>()));
+    using chunks_t = decltype(kumi::chunks<N>(kumi::declval<T>()));
 
     template<std::size_t N, kumi::concepts::product_type T> struct chunks
     {

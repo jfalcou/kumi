@@ -177,7 +177,7 @@ namespace kumi
   namespace result
   {
     //! [unique_t]
-    template<kumi::concepts::product_type T> using unique_t = decltype(kumi::unique(std::declval<T>()));
+    template<kumi::concepts::product_type T> using unique_t = decltype(kumi::unique(kumi::declval<T>()));
 
     template<kumi::concepts::product_type T> struct unique
     {
@@ -187,7 +187,7 @@ namespace kumi
     //! [unique_t]
 
     //! [all_unique_t]
-    template<kumi::concepts::product_type T> using all_unique_t = decltype(kumi::all_unique(std::declval<T>()));
+    template<kumi::concepts::product_type T> using all_unique_t = decltype(kumi::all_unique(kumi::declval<T>()));
 
     template<kumi::concepts::product_type T> struct all_unique
     {

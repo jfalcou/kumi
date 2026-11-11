@@ -165,7 +165,7 @@ namespace kumi
   {
     //! [apply_t]
     template<typename Function, kumi::concepts::product_type T>
-    using apply_t = decltype(kumi::apply(std::declval<Function>(), std::declval<T>()));
+    using apply_t = decltype(kumi::apply(kumi::declval<Function>(), kumi::declval<T>()));
 
     template<typename Function, kumi::concepts::product_type T> struct apply
     {
@@ -176,7 +176,7 @@ namespace kumi
 
     //! [apply_field_t]
     template<typename Function, concepts::record_type R>
-    using apply_field_t = decltype(kumi::apply_field(std::declval<Function>(), std::declval<R>()));
+    using apply_field_t = decltype(kumi::apply_field(kumi::declval<Function>(), kumi::declval<R>()));
 
     template<typename Function, kumi::concepts::record_type R> struct apply_field
     {
