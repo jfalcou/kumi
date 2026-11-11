@@ -185,20 +185,20 @@ Example:</h2>
 <div class="line">{</div>
 <div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> student0 = get_student(0);</div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;ID: 0, &quot;</span></div>
-<div class="line">              &lt;&lt; <span class="stringliteral">&quot;GPA: &quot;</span>    &lt;&lt; <a class="code hl_function" href="structkumi_1_1array_a2a236814b119c1e3e0b1cc5ce062c282.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;0&gt;</a>(student0) &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
-<div class="line">              &lt;&lt; <span class="stringliteral">&quot;grade: &quot;</span>  &lt;&lt; <a class="code hl_function" href="structkumi_1_1array_a2a236814b119c1e3e0b1cc5ce062c282.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;1&gt;</a>(student0) &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
-<div class="line">              &lt;&lt; <span class="stringliteral">&quot;name: &quot;</span>   &lt;&lt; <a class="code hl_function" href="structkumi_1_1array_a2a236814b119c1e3e0b1cc5ce062c282.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;2&gt;</a>(student0) &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">              &lt;&lt; <span class="stringliteral">&quot;GPA: &quot;</span>    &lt;&lt; <a class="code hl_function" href="#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;0&gt;</a>(student0) &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
+<div class="line">              &lt;&lt; <span class="stringliteral">&quot;grade: &quot;</span>  &lt;&lt; <a class="code hl_function" href="#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;1&gt;</a>(student0) &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
+<div class="line">              &lt;&lt; <span class="stringliteral">&quot;name: &quot;</span>   &lt;&lt; <a class="code hl_function" href="#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;2&gt;</a>(student0) &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">const</span> <span class="keyword">auto</span> student1 = get_student(1);</div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;ID: 1, &quot;</span></div>
-<div class="line">              &lt;&lt; <span class="stringliteral">&quot;GPA: &quot;</span>    &lt;&lt; <a class="code hl_function" href="structkumi_1_1array_a2a236814b119c1e3e0b1cc5ce062c282.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;double&gt;</a>(student1)      &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
-<div class="line">              &lt;&lt; <span class="stringliteral">&quot;grade: &quot;</span>  &lt;&lt; <a class="code hl_function" href="structkumi_1_1array_a2a236814b119c1e3e0b1cc5ce062c282.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;char&gt;</a>(student1)        &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
-<div class="line">              &lt;&lt; <span class="stringliteral">&quot;name: &quot;</span>   &lt;&lt; <a class="code hl_function" href="structkumi_1_1array_a2a236814b119c1e3e0b1cc5ce062c282.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;std::string&gt;</a>(student1) &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">              &lt;&lt; <span class="stringliteral">&quot;GPA: &quot;</span>    &lt;&lt; <a class="code hl_function" href="#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;double&gt;</a>(student1)      &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
+<div class="line">              &lt;&lt; <span class="stringliteral">&quot;grade: &quot;</span>  &lt;&lt; <a class="code hl_function" href="#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;char&gt;</a>(student1)        &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
+<div class="line">              &lt;&lt; <span class="stringliteral">&quot;name: &quot;</span>   &lt;&lt; <a class="code hl_function" href="#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;std::string&gt;</a>(student1) &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
 <div class="line"> </div>
 <div class="line">    <span class="keywordtype">double</span> gpa2;</div>
 <div class="line">    <span class="keywordtype">char</span> grade2;</div>
 <div class="line">    std::string name2;</div>
-<div class="line">    <a class="code hl_variable" href="group__kumi__tuple__related_ga79c564af50f6eb1c4aa6dac7f08337cf.html#ga79c564af50f6eb1c4aa6dac7f08337cf">kumi::tie</a>(gpa2, grade2, name2) = get_student(2);</div>
+<div class="line">    <a class="code hl_variable" href="group__kumi__tie.html#ga79c564af50f6eb1c4aa6dac7f08337cf">kumi::tie</a>(gpa2, grade2, name2) = get_student(2);</div>
 <div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;ID: 2, &quot;</span></div>
 <div class="line">              &lt;&lt; <span class="stringliteral">&quot;GPA: &quot;</span>    &lt;&lt; gpa2   &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
 <div class="line">              &lt;&lt; <span class="stringliteral">&quot;grade: &quot;</span>  &lt;&lt; grade2 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
@@ -211,8 +211,8 @@ Example:</h2>
 <div class="line">              &lt;&lt; <span class="stringliteral">&quot;grade: &quot;</span>  &lt;&lt; grade3 &lt;&lt; <span class="stringliteral">&quot;, &quot;</span></div>
 <div class="line">              &lt;&lt; <span class="stringliteral">&quot;name: &quot;</span>   &lt;&lt; name3  &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__kumi__tuple__related_ga79c564af50f6eb1c4aa6dac7f08337cf_html_ga79c564af50f6eb1c4aa6dac7f08337cf"><div class="ttname"><a href="group__kumi__tuple__related_ga79c564af50f6eb1c4aa6dac7f08337cf.html#ga79c564af50f6eb1c4aa6dac7f08337cf">kumi::tie</a></div><div class="ttdeci">constexpr tie_t tie</div><div class="ttdoc">Creates a kumi::tuple of lvalue references to its arguments.</div><div class="ttdef"><b>Definition</b> tuple.hpp:539</div></div>
-<div class="ttc" id="astructkumi_1_1array_a2a236814b119c1e3e0b1cc5ce062c282_html_a2a236814b119c1e3e0b1cc5ce062c282"><div class="ttname"><a href="structkumi_1_1array_a2a236814b119c1e3e0b1cc5ce062c282.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::array::get</a></div><div class="ttdeci">decltype(auto) constexpr get(array&lt; T, N &gt; &amp;t) noexcept</div><div class="ttdoc">Extracts the Ith element from a kumi::array.</div><div class="ttdef"><b>Definition</b> array.hpp:669</div></div>
+<div class="ttc" id="agroup__kumi__tie_html_ga79c564af50f6eb1c4aa6dac7f08337cf"><div class="ttname"><a href="group__kumi__tie.html#ga79c564af50f6eb1c4aa6dac7f08337cf">kumi::tie</a></div><div class="ttdeci">constexpr tie_t tie</div><div class="ttdef"><b>Definition</b> tuple.hpp:542</div></div>
+<div class="ttc" id="astructkumi_1_1array_html_a2a236814b119c1e3e0b1cc5ce062c282"><div class="ttname"><a href="#a2a236814b119c1e3e0b1cc5ce062c282">kumi::array::get</a></div><div class="ttdeci">decltype(auto) constexpr get(array&lt; T, N &gt; &amp;t) noexcept</div><div class="ttdoc">Extracts the Ith element from a kumi::array.</div><div class="ttdef"><b>Definition</b> array.hpp:681</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:35</div></div>
 </div><!-- fragment --> </div><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-pub-methods" class="groupheader"><a id="pub-methods" name="pub-methods"></a>
@@ -220,15 +220,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:aa6879ff5721afd317e81b8235c221feb" id="r_aa6879ff5721afd317e81b8235c221feb"><td class="memTemplParams" colspan="2"><a id="aa6879ff5721afd317e81b8235c221feb" name="aa6879ff5721afd317e81b8235c221feb"></a>
 template&lt;typename U&gt; <br />
 requires (std::is_assignable_v&lt;T&amp;, U&amp;&amp;&gt;)</td></tr>
-<tr class="memitem:aa6879ff5721afd317e81b8235c221feb template"><td class="memItemLeft">constexpr <a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a> &amp;&#160;</td><td class="memItemRight"><b>operator=</b> (<a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a>&lt; U, N &gt; &amp;&amp;other) noexcept(std::is_nothrow_assignable_v&lt; T &amp;, U &amp;&amp; &gt;)</td></tr>
+<tr class="memitem:aa6879ff5721afd317e81b8235c221feb template"><td class="memItemLeft">constexpr <a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a> &amp;&#160;</td><td class="memItemRight"><b>operator=</b> (<a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; U, N &gt; &amp;&amp;other) noexcept(std::is_nothrow_assignable_v&lt; T &amp;, U &amp;&amp; &gt;)</td></tr>
 <tr class="memdesc:aa6879ff5721afd317e81b8235c221feb"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
 <tr class="memitem:a0187989fae388367996e22660c80238b" id="r_a0187989fae388367996e22660c80238b"><td class="memTemplParams" colspan="2">template&lt;typename U&gt; <br />
 requires (std::is_assignable_v&lt;T&amp;, U const&amp;&gt;)</td></tr>
-<tr class="memitem:a0187989fae388367996e22660c80238b template"><td class="memItemLeft">constexpr <a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1array_a0187989fae388367996e22660c80238b.html#a0187989fae388367996e22660c80238b">operator=</a> (<a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a>&lt; U, N &gt; const &amp;other) noexcept(std::is_nothrow_assignable_v&lt; T &amp;, U const &amp; &gt;)</td></tr>
+<tr class="memitem:a0187989fae388367996e22660c80238b template"><td class="memItemLeft">constexpr <a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a> &amp;&#160;</td><td class="memItemRight"><a class="el" href="#a0187989fae388367996e22660c80238b">operator=</a> (<a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; U, N &gt; const &amp;other) noexcept(std::is_nothrow_assignable_v&lt; T &amp;, U const &amp; &gt;)</td></tr>
 <tr class="memdesc:a0187989fae388367996e22660c80238b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Replaces the contents of the array with the contents of another array.  <br /></td></tr>
 <tr class="memitem:a9dc623cf8ee077203f491d210e8d0205" id="r_a9dc623cf8ee077203f491d210e8d0205"><td class="memTemplParams" colspan="2">template&lt;std::size_t I&gt; <br />
 requires (I &lt; N)</td></tr>
-<tr class="memitem:a9dc623cf8ee077203f491d210e8d0205 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1array_a9dc623cf8ee077203f491d210e8d0205.html#a9dc623cf8ee077203f491d210e8d0205">operator[]</a> (<a class="el" href="structkumi_1_1index__t.html">kumi::index_t</a>&lt; I &gt; i) &amp;noexcept</td></tr>
+<tr class="memitem:a9dc623cf8ee077203f491d210e8d0205 template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="#a9dc623cf8ee077203f491d210e8d0205">operator[]</a> (<a class="el" href="structkumi_1_1index__t.html">kumi::index_t</a>&lt; I &gt; i) &amp;noexcept</td></tr>
 <tr class="memdesc:a9dc623cf8ee077203f491d210e8d0205"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the Ith element from a <a class="el" href="structkumi_1_1array.html" title="Fixed-size collection of homogeneous values.">kumi::array</a>.  <br /></td></tr>
 <tr class="memitem:a07ccbb74576a7a13ae44148f096d1f06" id="r_a07ccbb74576a7a13ae44148f096d1f06"><td class="memTemplParams" colspan="2"><a id="a07ccbb74576a7a13ae44148f096d1f06" name="a07ccbb74576a7a13ae44148f096d1f06"></a>
 template&lt;std::size_t I&gt; <br />
@@ -247,16 +247,16 @@ requires (I &lt; N)</td></tr>
 <tr class="memdesc:a7ba892cc39c773ecdae9d0d01d6d8768"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
 <tr id="pub-methods-0" class="groupHeader"><td colspan="2"><div class="groupHeader">Conversions</div></td></tr>
 <tr class="memitem:a10bef61fd0a02e497478798c7333237b" id="r_a10bef61fd0a02e497478798c7333237b"><td class="memTemplParams" colspan="2">template&lt;typename U&gt; </td></tr>
-<tr class="memitem:a10bef61fd0a02e497478798c7333237b template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1array_a10bef61fd0a02e497478798c7333237b.html#a10bef61fd0a02e497478798c7333237b">explicit</a> (!std::convertible_to&lt; T const &amp;, U &gt;) const expr operator <a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a>&lt; U</td></tr>
+<tr class="memitem:a10bef61fd0a02e497478798c7333237b template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#a10bef61fd0a02e497478798c7333237b">explicit</a> (!std::convertible_to&lt; T const &amp;, U &gt;) const expr operator <a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; U</td></tr>
 <tr class="memdesc:a10bef61fd0a02e497478798c7333237b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Enables static casting a array&lt;T,N&gt; to an array&lt;U,N&gt;, the conversions is explicit if the casting requires internal explicit conversions.  <br /></td></tr>
 <tr class="memitem:ad5ba7415a64f543253b7b09e85797a92" id="r_ad5ba7415a64f543253b7b09e85797a92"><td class="memTemplParams" colspan="2"><a id="ad5ba7415a64f543253b7b09e85797a92" name="ad5ba7415a64f543253b7b09e85797a92"></a>
 template&lt;typename U&gt; </td></tr>
-<tr class="memitem:ad5ba7415a64f543253b7b09e85797a92 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><b>explicit</b> (!std::convertible_to&lt; T &amp;, U &gt;) const expr operator <a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a>&lt; U</td></tr>
+<tr class="memitem:ad5ba7415a64f543253b7b09e85797a92 template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><b>explicit</b> (!std::convertible_to&lt; T &amp;, U &gt;) const expr operator <a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; U</td></tr>
 <tr class="memdesc:ad5ba7415a64f543253b7b09e85797a92"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-friends" class="groupheader"><a id="friends" name="friends"></a>
 Friends</h2></td></tr>
-<tr class="memitem:a152cfa24086d4f3f5c40c80245e8231c" id="r_a152cfa24086d4f3f5c40c80245e8231c"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1array_a152cfa24086d4f3f5c40c80245e8231c.html#a152cfa24086d4f3f5c40c80245e8231c">swap</a> (<a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a> &amp;a, <a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a> &amp;b) noexcept(std::is_nothrow_swappable_v&lt; T &gt;)</td></tr>
+<tr class="memitem:a152cfa24086d4f3f5c40c80245e8231c" id="r_a152cfa24086d4f3f5c40c80245e8231c"><td class="memItemLeft">constexpr void&#160;</td><td class="memItemRight"><a class="el" href="#a152cfa24086d4f3f5c40c80245e8231c">swap</a> (<a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a> &amp;a, <a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a> &amp;b) noexcept(std::is_nothrow_swappable_v&lt; T &gt;)</td></tr>
 <tr class="memdesc:a152cfa24086d4f3f5c40c80245e8231c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Swaps the contents of two kumi::arrays.  <br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-related" class="groupheader"><a id="related" name="related"></a>
@@ -265,47 +265,455 @@ Related Symbols</h2></td></tr>
 </td></tr>
 <tr class="memitem:a4d3790f976390b9c704529e436eb90dd" id="r_a4d3790f976390b9c704529e436eb90dd"><td class="memTemplParams" colspan="2"><a id="a4d3790f976390b9c704529e436eb90dd" name="a4d3790f976390b9c704529e436eb90dd"></a>
 template&lt;typename CharT, typename Traits, typename T, std::size_t N&gt; </td></tr>
-<tr class="memitem:a4d3790f976390b9c704529e436eb90dd template"><td class="memItemLeft">std::basic_ostream&lt; CharT, Traits &gt; &amp;&#160;</td><td class="memItemRight"><b>operator&lt;&lt;</b> (std::basic_ostream&lt; CharT, Traits &gt; &amp;os, <a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; const &amp;a) noexcept</td></tr>
+<tr class="memitem:a4d3790f976390b9c704529e436eb90dd template"><td class="memItemLeft">std::basic_ostream&lt; CharT, Traits &gt; &amp;&#160;</td><td class="memItemRight"><b>operator&lt;&lt;</b> (std::basic_ostream&lt; CharT, Traits &gt; &amp;os, <a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; const &amp;a) noexcept</td></tr>
 <tr class="memdesc:a4d3790f976390b9c704529e436eb90dd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Inserts a <a class="el" href="structkumi_1_1array.html" title="Fixed-size collection of homogeneous values.">kumi::array</a> in an output stream. <br /></td></tr>
 <tr id="related-0" class="groupHeader"><td colspan="2"><div class="groupHeader">Comparison operators</div></td></tr>
 <tr class="memitem:adcc8d526e4d5674f453716af6cc1e5f3" id="r_adcc8d526e4d5674f453716af6cc1e5f3"><td class="memTemplParams" colspan="2"><a id="adcc8d526e4d5674f453716af6cc1e5f3" name="adcc8d526e4d5674f453716af6cc1e5f3"></a>
 template&lt;typename T, typename U, std::size_t N&gt; </td></tr>
-<tr class="memitem:adcc8d526e4d5674f453716af6cc1e5f3 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator==</b> (<a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; const &amp;self, <a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a>&lt; U, N &gt; const &amp;other) noexcept</td></tr>
+<tr class="memitem:adcc8d526e4d5674f453716af6cc1e5f3 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator==</b> (<a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; const &amp;self, <a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; U, N &gt; const &amp;other) noexcept</td></tr>
 <tr class="memdesc:adcc8d526e4d5674f453716af6cc1e5f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares an array with another for equality. <br /></td></tr>
 <tr class="memitem:ae8cab8261c603e758154a0239ec2613c" id="r_ae8cab8261c603e758154a0239ec2613c"><td class="memTemplParams" colspan="2"><a id="ae8cab8261c603e758154a0239ec2613c" name="ae8cab8261c603e758154a0239ec2613c"></a>
 template&lt;typename T, typename U, std::size_t N&gt; </td></tr>
-<tr class="memitem:ae8cab8261c603e758154a0239ec2613c template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator!=</b> (<a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; const &amp;self, <a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a>&lt; U, N &gt; const &amp;other) noexcept</td></tr>
+<tr class="memitem:ae8cab8261c603e758154a0239ec2613c template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator!=</b> (<a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; const &amp;self, <a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; U, N &gt; const &amp;other) noexcept</td></tr>
 <tr class="memdesc:ae8cab8261c603e758154a0239ec2613c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares an array with another for inequality. <br /></td></tr>
 <tr class="memitem:a8d1bc1c4364b25df9b0431dc7ddad7b0" id="r_a8d1bc1c4364b25df9b0431dc7ddad7b0"><td class="memTemplParams" colspan="2">template&lt;typename T, typename U, std::size_t N&gt; </td></tr>
-<tr class="memitem:a8d1bc1c4364b25df9b0431dc7ddad7b0 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1array_a8d1bc1c4364b25df9b0431dc7ddad7b0.html#a8d1bc1c4364b25df9b0431dc7ddad7b0">operator&lt;</a> (<a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; const &amp;lhs, <a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a>&lt; U, N &gt; const &amp;rhs) noexcept</td></tr>
+<tr class="memitem:a8d1bc1c4364b25df9b0431dc7ddad7b0 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a8d1bc1c4364b25df9b0431dc7ddad7b0">operator&lt;</a> (<a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; const &amp;lhs, <a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; U, N &gt; const &amp;rhs) noexcept</td></tr>
 <tr class="memdesc:a8d1bc1c4364b25df9b0431dc7ddad7b0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares arrays for the lexicographical less-than relation.  <br /></td></tr>
 <tr class="memitem:a28abb6ace51e3cd5e4a112f7716d2d21" id="r_a28abb6ace51e3cd5e4a112f7716d2d21"><td class="memTemplParams" colspan="2"><a id="a28abb6ace51e3cd5e4a112f7716d2d21" name="a28abb6ace51e3cd5e4a112f7716d2d21"></a>
 template&lt;typename T, typename U, std::size_t N&gt; </td></tr>
-<tr class="memitem:a28abb6ace51e3cd5e4a112f7716d2d21 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator&lt;=</b> (<a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; const &amp;lhs, <a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a>&lt; U, N &gt; const &amp;rhs) noexcept</td></tr>
+<tr class="memitem:a28abb6ace51e3cd5e4a112f7716d2d21 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator&lt;=</b> (<a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; const &amp;lhs, <a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; U, N &gt; const &amp;rhs) noexcept</td></tr>
 <tr class="memdesc:a28abb6ace51e3cd5e4a112f7716d2d21"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares arrays for the lexicographical less-than-or-equal relation. <br /></td></tr>
 <tr class="memitem:a44b90ef96f6acd60c54c4d67becff521" id="r_a44b90ef96f6acd60c54c4d67becff521"><td class="memTemplParams" colspan="2"><a id="a44b90ef96f6acd60c54c4d67becff521" name="a44b90ef96f6acd60c54c4d67becff521"></a>
 template&lt;typename T, typename U, std::size_t N&gt; </td></tr>
-<tr class="memitem:a44b90ef96f6acd60c54c4d67becff521 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator&gt;</b> (<a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; const &amp;lhs, <a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a>&lt; U, N &gt; const &amp;rhs) noexcept</td></tr>
+<tr class="memitem:a44b90ef96f6acd60c54c4d67becff521 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator&gt;</b> (<a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; const &amp;lhs, <a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; U, N &gt; const &amp;rhs) noexcept</td></tr>
 <tr class="memdesc:a44b90ef96f6acd60c54c4d67becff521"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares arrays for the lexicographical greater-than relation. <br /></td></tr>
 <tr class="memitem:aebb96b62c4b451b9f7dfc72843937024" id="r_aebb96b62c4b451b9f7dfc72843937024"><td class="memTemplParams" colspan="2"><a id="aebb96b62c4b451b9f7dfc72843937024" name="aebb96b62c4b451b9f7dfc72843937024"></a>
 template&lt;typename T, typename U, std::size_t N&gt; </td></tr>
-<tr class="memitem:aebb96b62c4b451b9f7dfc72843937024 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator&gt;=</b> (<a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; const &amp;lhs, <a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a>&lt; U, N &gt; const &amp;rhs) noexcept</td></tr>
+<tr class="memitem:aebb96b62c4b451b9f7dfc72843937024 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><b>operator&gt;=</b> (<a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; const &amp;lhs, <a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; U, N &gt; const &amp;rhs) noexcept</td></tr>
 <tr class="memdesc:aebb96b62c4b451b9f7dfc72843937024"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compares arrays for the lexicographical greater-than-or-equal relation. <br /></td></tr>
 <tr id="related-1" class="groupHeader"><td colspan="2"><div class="groupHeader">Array deduction guides</div></td></tr>
 <tr class="memitem:aa65f3e4fcab288503da561d757da142c" id="r_aa65f3e4fcab288503da561d757da142c"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Ts&gt; </td></tr>
-<tr class="memitem:aa65f3e4fcab288503da561d757da142c template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a> (T &amp;&amp;, Ts &amp;&amp;...) -&gt; array&lt; std::unwrap_ref_decay_t&lt; T &gt;, sizeof...(Ts)+1 &gt;</td></tr>
+<tr class="memitem:aa65f3e4fcab288503da561d757da142c template"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a> (T &amp;&amp;, Ts &amp;&amp;...) -&gt; array&lt; std::unwrap_ref_decay_t&lt; T &gt;, sizeof...(Ts)+1 &gt;</td></tr>
 <tr class="memdesc:aa65f3e4fcab288503da561d757da142c"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structkumi_1_1array.html" title="Fixed-size collection of homogeneous values.">kumi::array</a> deduction guide  <br /></td></tr>
 <tr id="related-2" class="groupHeader"><td colspan="2"><div class="groupHeader">array Accessors</div></td></tr>
 <tr class="memitem:a2a236814b119c1e3e0b1cc5ce062c282" id="r_a2a236814b119c1e3e0b1cc5ce062c282"><td class="memTemplParams" colspan="2">template&lt;std::size_t I, typename T, std::size_t N&gt; </td></tr>
-<tr class="memitem:a2a236814b119c1e3e0b1cc5ce062c282 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1array_a2a236814b119c1e3e0b1cc5ce062c282.html#a2a236814b119c1e3e0b1cc5ce062c282">get</a> (<a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; &amp;t) noexcept</td></tr>
+<tr class="memitem:a2a236814b119c1e3e0b1cc5ce062c282 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a2a236814b119c1e3e0b1cc5ce062c282">get</a> (<a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; &amp;t) noexcept</td></tr>
 <tr class="memdesc:a2a236814b119c1e3e0b1cc5ce062c282"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the Ith element from a <a class="el" href="structkumi_1_1array.html" title="Fixed-size collection of homogeneous values.">kumi::array</a>.  <br /></td></tr>
 <tr class="memitem:abba9991ab8e8494fb1d1a5f045d26e4c" id="r_abba9991ab8e8494fb1d1a5f045d26e4c"><td class="memTemplParams" colspan="2">template&lt;std::size_t I, typename T, std::size_t N&gt; </td></tr>
-<tr class="memitem:abba9991ab8e8494fb1d1a5f045d26e4c template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1array_abba9991ab8e8494fb1d1a5f045d26e4c.html#abba9991ab8e8494fb1d1a5f045d26e4c">get</a> (<a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; &amp;&amp;arg) noexcept</td></tr>
+<tr class="memitem:abba9991ab8e8494fb1d1a5f045d26e4c template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#abba9991ab8e8494fb1d1a5f045d26e4c">get</a> (<a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; &amp;&amp;arg) noexcept</td></tr>
 <tr class="memitem:aff4433e919e93f04a68b424a83f8bffd" id="r_aff4433e919e93f04a68b424a83f8bffd"><td class="memTemplParams" colspan="2">template&lt;std::size_t I, typename T, std::size_t N&gt; </td></tr>
-<tr class="memitem:aff4433e919e93f04a68b424a83f8bffd template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1array_aff4433e919e93f04a68b424a83f8bffd.html#aff4433e919e93f04a68b424a83f8bffd">get</a> (<a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; const &amp;arg) noexcept</td></tr>
+<tr class="memitem:aff4433e919e93f04a68b424a83f8bffd template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#aff4433e919e93f04a68b424a83f8bffd">get</a> (<a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; const &amp;arg) noexcept</td></tr>
 <tr class="memitem:a6252775167e7b3740075a16689c7e278" id="r_a6252775167e7b3740075a16689c7e278"><td class="memTemplParams" colspan="2">template&lt;std::size_t I, typename T, std::size_t N&gt; </td></tr>
-<tr class="memitem:a6252775167e7b3740075a16689c7e278 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1array_a6252775167e7b3740075a16689c7e278.html#a6252775167e7b3740075a16689c7e278">get</a> (<a class="el" href="structkumi_1_1array_aa65f3e4fcab288503da561d757da142c.html#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; const &amp;&amp;arg) noexcept</td></tr>
+<tr class="memitem:a6252775167e7b3740075a16689c7e278 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a6252775167e7b3740075a16689c7e278">get</a> (<a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; const &amp;&amp;arg) noexcept</td></tr>
 </table>
+<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
+<a id="a10bef61fd0a02e497478798c7333237b" name="a10bef61fd0a02e497478798c7333237b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a10bef61fd0a02e497478798c7333237b">&#9670;&#160;</a></span>explicit()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, std::size_t N&gt; </div>
+<div class="memtemplate">
+template&lt;typename U&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="structkumi_1_1array.html">kumi::array</a>&lt; T, N &gt;::explicit </td>
+          <td>(</td>
+          <td class="paramtype">!std::convertible_to&lt; T const &amp;, U &gt;</td>          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td> const</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel explicit">explicit</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Enables static casting a array&lt;T,N&gt; to an array&lt;U,N&gt;, the conversions is explicit if the casting requires internal explicit conversions. </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">U</td><td>Type of the elements of the destination array</td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section note"><dt>Note</dt><dd>This function does not participate in overload resolution if the target array cannot be constructed from the values of the source, if their size does not match or if they are the same type. The conversion is explicit if the conversion of some member to the target needs to be explicit.</dd></dl>
+<p>This permits the conversion from an array&lt;T&gt;&amp; to an array&lt;T&amp;&gt; which makes it suitable for some zip-like cases such as building a structure of arrays iterator.</p>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md7"></a>
+Example :</h2>
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1array.html">kumi::array</a> a = { 65, 2, 4 };</div>
+<div class="line">  <span class="keyword">auto</span> b = <span class="keyword">static_cast&lt;</span><a class="code hl_class" href="structkumi_1_1array.html">kumi::array&lt;char, 3&gt;</a><span class="keyword">&gt;</span>(a);</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; b &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="astructkumi_1_1array_html"><div class="ttname"><a href="structkumi_1_1array.html">kumi::array</a></div><div class="ttdoc">Fixed-size collection of homogeneous values.</div><div class="ttdef"><b>Definition</b> array.hpp:43</div></div>
+</div><!-- fragment --> 
+</div>
+</div>
+<a id="a0187989fae388367996e22660c80238b" name="a0187989fae388367996e22660c80238b"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a0187989fae388367996e22660c80238b">&#9670;&#160;</a></span>operator=()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, std::size_t N&gt; </div>
+<div class="memtemplate">
+template&lt;typename U&gt; <br />
+requires (std::is_assignable_v&lt;T&amp;, U const&amp;&gt;)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname"><a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a> &amp; <a class="el" href="structkumi_1_1array.html">kumi::array</a>&lt; T, N &gt;::operator= </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; U, N &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>other</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Replaces the contents of the array with the contents of another array. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">other</td><td><a class="el" href="structkumi_1_1array.html" title="Fixed-size collection of homogeneous values.">kumi::array</a> to copy or move from </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd><span class="tt">*this</span></dd></dl>
+<dl class="section note"><dt>Note</dt><dd>This function does not participate in overload resolution if the members from the source array cannot be converted to the members of the current array. </dd></dl>
+
+</div>
+</div>
+<a id="a9dc623cf8ee077203f491d210e8d0205" name="a9dc623cf8ee077203f491d210e8d0205"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a9dc623cf8ee077203f491d210e8d0205">&#9670;&#160;</a></span>operator[]()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, std::size_t N&gt; </div>
+<div class="memtemplate">
+template&lt;std::size_t I&gt; <br />
+requires (I &lt; N)</div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) <a class="el" href="structkumi_1_1array.html">kumi::array</a>&lt; T, N &gt;::operator[] </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="structkumi_1_1index__t.html">kumi::index_t</a>&lt; I &gt;</td>          <td class="paramname"><span class="paramname"><em>i</em></span></td><td>)</td>
+          <td> &amp;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Extracts the Ith element from a <a class="el" href="structkumi_1_1array.html" title="Fixed-size collection of homogeneous values.">kumi::array</a>. </p>
+<dl class="section note"><dt>Note</dt><dd>Does not participate in overload resolution if <span class="tt">I</span> is not in [0, N). </dd></dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">i</td><td>Compile-time index of the element to access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the selected element of current array.</dd></dl>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md6"></a>
+Example:</h2>
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1array.html">kumi::array</a> a = { 1, 2, 3, 4 };</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; a[0_c] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; a[1_c] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; a[2_c] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  a[3_c]++;</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; a[kumi::index&lt;3&gt;] &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">}</div>
+</div><!-- fragment --> 
+</div>
+</div>
+<a name="doc-related-members" id="doc-related-members"></a><h2 id="header-doc-related-members" class="groupheader">Friends And Related Symbol Documentation</h2>
+<a id="aa65f3e4fcab288503da561d757da142c" name="aa65f3e4fcab288503da561d757da142c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aa65f3e4fcab288503da561d757da142c">&#9670;&#160;</a></span>array()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename... Ts&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">array </td>
+          <td>(</td>
+          <td class="paramtype">T &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em></em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">Ts &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>...</em></span>&#160;) -&gt;  array&lt; std::unwrap_ref_decay_t&lt; T &gt;, sizeof...(Ts)+1 &gt;</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel related">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><a class="el" href="structkumi_1_1array.html" title="Fixed-size collection of homogeneous values.">kumi::array</a> deduction guide </p>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">Ts</td><td>Type lists to build the array with. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a id="abba9991ab8e8494fb1d1a5f045d26e4c" name="abba9991ab8e8494fb1d1a5f045d26e4c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#abba9991ab8e8494fb1d1a5f045d26e4c">&#9670;&#160;</a></span>get() <span class="overload">[1/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::size_t I, typename T, std::size_t N&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) constexpr get </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel related">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+
+</div>
+</div>
+<a id="a2a236814b119c1e3e0b1cc5ce062c282" name="a2a236814b119c1e3e0b1cc5ce062c282"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a2a236814b119c1e3e0b1cc5ce062c282">&#9670;&#160;</a></span>get() <span class="overload">[2/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::size_t I, typename T, std::size_t N&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) constexpr get </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>t</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel related">related</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Extracts the Ith element from a <a class="el" href="structkumi_1_1array.html" title="Fixed-size collection of homogeneous values.">kumi::array</a>. </p>
+<dl class="section note"><dt>Note</dt><dd>Does not participate in overload resolution if <span class="tt">I</span> is not in [0, sizeof...(Ts)). </dd></dl>
+<dl class="tparams"><dt>Template Parameters</dt><dd>
+  <table class="tparams">
+    <tr><td class="paramname">I</td><td>Compile-time index of the element to access </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">t</td><td>array to index </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>A reference to the selected element of t.</dd></dl>
+<h2 class="doxsection"><a class="anchor" id="autotoc_md5"></a>
+Example:</h2>
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1array.html">kumi::array</a> a = { 1, 2, 3, 4 };</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; kumi::get&lt;0&gt;(a) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; kumi::get&lt;1&gt;(a) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; kumi::get&lt;2&gt;(a) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_function" href="#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;3&gt;</a>(a)++;</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; kumi::get&lt;3&gt;(a) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">}</div>
+</div><!-- fragment --> 
+</div>
+</div>
+<a id="a6252775167e7b3740075a16689c7e278" name="a6252775167e7b3740075a16689c7e278"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a6252775167e7b3740075a16689c7e278">&#9670;&#160;</a></span>get() <span class="overload">[3/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::size_t I, typename T, std::size_t N&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) constexpr get </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; const &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel related">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+
+</div>
+</div>
+<a id="aff4433e919e93f04a68b424a83f8bffd" name="aff4433e919e93f04a68b424a83f8bffd"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aff4433e919e93f04a68b424a83f8bffd">&#9670;&#160;</a></span>get() <span class="overload">[4/4]</span></h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;std::size_t I, typename T, std::size_t N&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">decltype(auto) constexpr get </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>arg</em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel related">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+<p>This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. </p>
+
+</div>
+</div>
+<a id="a8d1bc1c4364b25df9b0431dc7ddad7b0" name="a8d1bc1c4364b25df9b0431dc7ddad7b0"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8d1bc1c4364b25df9b0431dc7ddad7b0">&#9670;&#160;</a></span>operator&lt;()</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, typename U, std::size_t N&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">auto operator&lt; </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>lhs</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; U, N &gt; const &amp;</td>          <td class="paramname"><span class="paramname"><em>rhs</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel related">related</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Compares arrays for the lexicographical less-than relation. </p>
+<dl class="section note"><dt>Note</dt><dd>This function does not participate in overload resolution if the arrays are not lexicographically ordered </dd></dl>
+
+</div>
+</div>
+<a id="a152cfa24086d4f3f5c40c80245e8231c" name="a152cfa24086d4f3f5c40c80245e8231c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a152cfa24086d4f3f5c40c80245e8231c">&#9670;&#160;</a></span>swap</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T, std::size_t N&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void swap </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>a</em></span>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype"><a class="el" href="#aa65f3e4fcab288503da561d757da142c">array</a>&lt; T, N &gt; &amp;</td>          <td class="paramname"><span class="paramname"><em>b</em></span>&#160;)</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel friend">friend</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Swaps the contents of two kumi::arrays. </p>
+<dl class="section see"><dt>See also</dt><dd>Callable with the usual <span class="tt">using std::swap; swap(a, b)</span> idiom, exchanges every element through ADL and does not participate in overload resolution if an element is not swappable. </dd></dl>
+
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

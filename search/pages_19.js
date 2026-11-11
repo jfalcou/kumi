@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['value_0',['Helper value',['../group__kumi__functional_ga1aeb494d781c6a1d8f48168f4f093afe.html#autotoc_md0',1,'']]],
+  ['value_0',['Helper value',['../group__kumi__function__size__or__v.html#autotoc_md0',1,'']]],
   ['version_201_200_20amazing_20amethyst_1',['Version 1.0 - Amazing Amethyst',['../kumi_changelog.html#autotoc_md119',1,'']]],
   ['version_202_200_20bedazzling_20beryl_2',['Version 2.0 - Bedazzling Beryl',['../kumi_changelog.html#autotoc_md114',1,'']]],
   ['version_202_201_20charming_20chrysoprase_3',['Version 2.1 - Charming Chrysoprase',['../kumi_changelog.html#autotoc_md110',1,'']]],

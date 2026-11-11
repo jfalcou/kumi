@@ -133,6 +133,7 @@ $(function(){initNavTree('group__kumi__record__related.html','',''); });
 
 <div class="header">
   <div class="summary">
+<a href="#groups">Topics</a> &#124;
 <a href="#nested-classes">Classes</a>  </div>
   <div class="headertitle"><div class="title">Record Types and associated Functions </div></div>
 </div><!--header-->
@@ -141,6 +142,17 @@ $(function(){initNavTree('group__kumi__record__related.html','',''); });
 <p>Definitions of <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> and associated functions.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
+<tr class="heading"><td colspan="2"><h2 id="header-groups" class="groupheader"><a id="groups" name="groups"></a>
+Topics</h2></td></tr>
+<tr class="memitem:kumi_5Fforward_5Fas_5Frecord" id="r_kumi_5Fforward_5Fas_5Frecord"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__forward__as__record.html">kumi::forward_as_record</a></td></tr>
+<tr class="memdesc:group__kumi__forward__as__record"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> of forwarding references to its arguments. <br /></td></tr>
+<tr class="memitem:kumi_5Ffrom_5Frecord" id="r_kumi_5Ffrom_5Frecord"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__from__record.html">kumi::from_record</a></td></tr>
+<tr class="memdesc:group__kumi__from__record"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> to an instance of an arbitrary type that models kumi::record_type. <br /></td></tr>
+<tr class="memitem:kumi_5Fmake_5Frecord" id="r_kumi_5Fmake_5Frecord"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__make__record.html">kumi::make_record</a></td></tr>
+<tr class="memdesc:group__kumi__make__record"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a record object, deducing the target type from the types of arguments. <br /></td></tr>
+<tr class="memitem:kumi_5Fto_5Frecord" id="r_kumi_5Fto_5Frecord"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__to__record.html">kumi::to_record</a></td></tr>
+<tr class="memdesc:group__kumi__to__record"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a <a class="el" href="conceptkumi_1_1concepts_1_1record__type.html" title="Concept specifying a type follows the Record Type semantic.">kumi::concepts::record_type</a> to an instance of <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>. <br /></td></tr>
+</table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
 <tr class="memitem:kumi_3A_3Arecord_3C_20Ts_20_3E" id="r_kumi_3A_3Arecord_3C_20Ts_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1record.html">kumi::record&lt; Ts &gt;</a></td></tr>
@@ -149,22 +161,206 @@ Classes</h2></td></tr>
 <tr class="heading"><td colspan="2"><h2 id="header-member-group" class="groupheader"><a id="member-group" name="member-group"></a>
 Record construction</h2></td></tr>
 <tr class="memitem:ga45b4db8f009ab12f62d938338d29d536" id="r_ga45b4db8f009ab12f62d938338d29d536"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier</a> auto... Fields&gt; </td></tr>
-<tr class="memitem:ga45b4db8f009ab12f62d938338d29d536 template"><td class="memItemLeft">constexpr tie_as_record_t&lt; Fields... &gt;&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__record__related_ga45b4db8f009ab12f62d938338d29d536.html#ga45b4db8f009ab12f62d938338d29d536">kumi::tie_as_record</a> {}</td></tr>
+<tr class="memitem:ga45b4db8f009ab12f62d938338d29d536 template"><td class="memItemLeft">constexpr tie_as_record_t&lt; Fields... &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga45b4db8f009ab12f62d938338d29d536">kumi::tie_as_record</a> {}</td></tr>
 <tr class="memdesc:ga45b4db8f009ab12f62d938338d29d536"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> of lvalue references to its arguments.  <br /></td></tr>
 <tr class="memitem:gacfd38acd9ecb27bff2bb2ad0f885e326" id="r_gacfd38acd9ecb27bff2bb2ad0f885e326"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier</a> auto... Fields&gt; </td></tr>
-<tr class="memitem:gacfd38acd9ecb27bff2bb2ad0f885e326 template"><td class="memItemLeft">constexpr forward_as_record_t&lt; Fields... &gt;&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__record__related_gacfd38acd9ecb27bff2bb2ad0f885e326.html#gacfd38acd9ecb27bff2bb2ad0f885e326">kumi::forward_as_record</a> {}</td></tr>
-<tr class="memdesc:gacfd38acd9ecb27bff2bb2ad0f885e326"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> of forwarding references to its arguments.  <br /></td></tr>
-<tr class="memitem:ga931b45076a3ac621c248efa48881b59a" id="r_ga931b45076a3ac621c248efa48881b59a"><td class="memItemLeft">constexpr make_record_t&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__record__related_ga931b45076a3ac621c248efa48881b59a.html#ga931b45076a3ac621c248efa48881b59a">kumi::make_record</a> {}</td></tr>
-<tr class="memdesc:ga931b45076a3ac621c248efa48881b59a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates a record object, deducing the target type from the types of arguments.  <br /></td></tr>
-</table><table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-member-group" class="groupheader"><a id="member-group" name="member-group"></a>
-Record conversion</h2></td></tr>
-<tr class="memitem:gae4456196aadb75484ad0b061c83b3f95" id="r_gae4456196aadb75484ad0b061c83b3f95"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1record__type.html">kumi::concepts::record_type</a> Type&gt; </td></tr>
-<tr class="memitem:gae4456196aadb75484ad0b061c83b3f95 template"><td class="memItemLeft">constexpr from_record_t&lt; Type &gt;&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__record__related_gae4456196aadb75484ad0b061c83b3f95.html#gae4456196aadb75484ad0b061c83b3f95">kumi::from_record</a> {}</td></tr>
-<tr class="memdesc:gae4456196aadb75484ad0b061c83b3f95"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> to an instance of an arbitrary type that models kumi::record_type.  <br /></td></tr>
-<tr class="memitem:ga163224b58e43457f4cbc65f6817d738f" id="r_ga163224b58e43457f4cbc65f6817d738f"><td class="memItemLeft">constexpr to_record_t&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__record__related_ga163224b58e43457f4cbc65f6817d738f.html#ga163224b58e43457f4cbc65f6817d738f">kumi::to_record</a> {}</td></tr>
-<tr class="memdesc:ga163224b58e43457f4cbc65f6817d738f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a <a class="el" href="conceptkumi_1_1concepts_1_1record__type.html" title="Concept specifying a type follows the Record Type semantic.">kumi::concepts::record_type</a> to an instance of <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>.  <br /></td></tr>
+<tr class="memitem:gacfd38acd9ecb27bff2bb2ad0f885e326 template"><td class="memItemLeft">constexpr forward_as_record_t&lt; Fields... &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gacfd38acd9ecb27bff2bb2ad0f885e326">kumi::forward_as_record</a> {}</td></tr>
+<tr class="memitem:ga931b45076a3ac621c248efa48881b59a" id="r_ga931b45076a3ac621c248efa48881b59a"><td class="memItemLeft">constexpr make_record_t&#160;</td><td class="memItemRight"><a class="el" href="#ga931b45076a3ac621c248efa48881b59a">kumi::make_record</a> {}</td></tr>
 </table>
+<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="gacfd38acd9ecb27bff2bb2ad0f885e326" name="gacfd38acd9ecb27bff2bb2ad0f885e326"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gacfd38acd9ecb27bff2bb2ad0f885e326">&#9670;&#160;</a></span>forward_as_record</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier</a> auto... Fields&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">forward_as_record_t&lt;Fields...&gt; kumi::forward_as_record {}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;kumi/product_types/record.hpp&gt;</code></p>
+<p>Constructs a record of references to the arguments in ts suitable for forwarding as an argument to a function. The record has rvalue reference data members when rvalues are used as arguments, and otherwise has lvalue reference data members.</p>
+<dl class="section note"><dt>Note</dt><dd>If the arguments are temporaries, <span class="tt"><a class="el" href="#gacfd38acd9ecb27bff2bb2ad0f885e326">forward_as_record</a></span> does not extend their lifetime; they have to be used before the end of the full expression.</dd></dl>
+<h2 class="groupheader">Header file </h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/product_types/record.hpp&gt;</span></div>
+</div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gacfd38acd9ecb27bff2bb2ad0f885e326">forward_as_record</a>(Ts&amp;&amp;... ts);</div>
+<div class="ttc" id="agroup__kumi__record__related_html_gacfd38acd9ecb27bff2bb2ad0f885e326"><div class="ttname"><a href="#gacfd38acd9ecb27bff2bb2ad0f885e326">kumi::forward_as_record</a></div><div class="ttdeci">constexpr forward_as_record_t&lt; Fields... &gt; forward_as_record</div><div class="ttdef"><b>Definition</b> record.hpp:564</div></div>
+</div><!-- fragment --><h3 class="groupheader">Parameters </h3>
+<ul>
+<li><span class="tt">Fields</span>: Non type template parameters names to associate with each element.</li>
+<li><span class="tt">ts</span>: Zero or more lvalue arguments to construct the record from.</li>
+</ul>
+<h3 class="groupheader">Return value </h3>
+<ul>
+<li>A <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> constructed as <span class="tt"><a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>&lt;<a class="el" href="structkumi_1_1field.html" title="Named wrapper over a type.">kumi::field</a>&lt;decltype(Fields),Ts&amp;&amp;&gt;...&gt;(std::forward&lt;Ts&gt;(ts)...)</span></li>
+</ul>
+<h2 class="groupheader">Example </h2>
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Data&gt;</div>
+<div class="line">std::vector&lt;std::string&gt; build(Data d)</div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordflow">return</span> std::vector&lt;std::string&gt; ( <a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;&quot;a&quot;_id&gt;</a>(d)</div>
+<div class="line">                                  , std::move(<a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;&quot;b&quot;_id&gt;</a>(d))</div>
+<div class="line">                                  );</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">auto</span> v = build( <a class="code hl_variable" href="#gacfd38acd9ecb27bff2bb2ad0f885e326">kumi::forward_as_record&lt;&quot;a&quot;_id, &quot;b&quot;_id&gt;</a>(4,std::string{<span class="stringliteral">&quot;the text !&quot;</span>}));</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">for</span>(<span class="keyword">auto</span> <span class="keyword">const</span>&amp; s : v)</div>
+<div class="line">    std::cout &lt;&lt; s &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="astructkumi_1_1array_html_a2a236814b119c1e3e0b1cc5ce062c282"><div class="ttname"><a href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::array::get</a></div><div class="ttdeci">decltype(auto) constexpr get(array&lt; T, N &gt; &amp;t) noexcept</div><div class="ttdoc">Extracts the Ith element from a kumi::array.</div><div class="ttdef"><b>Definition</b> array.hpp:681</div></div>
+</div><!-- fragment --> 
+</div>
+</div>
+<a id="ga931b45076a3ac621c248efa48881b59a" name="ga931b45076a3ac621c248efa48881b59a"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga931b45076a3ac621c248efa48881b59a">&#9670;&#160;</a></span>make_record</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">make_record_t kumi::make_record {}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;kumi/product_types/record.hpp&gt;</code></p>
+<h2 class="groupheader">Header file </h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/product_types/record.hpp&gt;</span></div>
+</div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga931b45076a3ac621c248efa48881b59a">make_record</a>(Ts&amp;&amp;... ts);</div>
+<div class="ttc" id="agroup__kumi__record__related_html_ga931b45076a3ac621c248efa48881b59a"><div class="ttname"><a href="#ga931b45076a3ac621c248efa48881b59a">kumi::make_record</a></div><div class="ttdeci">constexpr make_record_t make_record</div><div class="ttdef"><b>Definition</b> record.hpp:617</div></div>
+</div><!-- fragment --><h3 class="groupheader">Parameters </h3>
+<ul>
+<li><span class="tt">ts</span>: Zero or more arguments to construct the record from.</li>
+</ul>
+<h3 class="groupheader">Return value </h3>
+<ul>
+<li>A <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> constructed from the arguments or their inner references when an argument is an instance of <span class="tt">std::reference_wrapper</span>.</li>
+</ul>
+<h2 class="groupheader">Example </h2>
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;functional&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordtype">int</span> k = 99;</div>
+<div class="line">  <span class="keyword">auto</span> t = <a class="code hl_variable" href="#ga931b45076a3ac621c248efa48881b59a">kumi::make_record</a>( <span class="stringliteral">&quot;x&quot;</span>_id = 1, <span class="stringliteral">&quot;y&quot;</span>_id = 2.3, <span class="stringliteral">&quot;z&quot;</span>_id = 4.5f, <span class="stringliteral">&quot;t&quot;</span>_id = <span class="charliteral">&#39;@&#39;</span>, <span class="stringliteral">&quot;m&quot;</span>_id = std::ref(k));</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; t &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// Reference access</span></div>
+<div class="line">  <a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get</a>&lt;<span class="stringliteral">&quot;m&quot;</span>_id&gt;(t)++;</div>
+<div class="line">  std::cout &lt;&lt; k &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">}</div>
+</div><!-- fragment --> 
+</div>
+</div>
+<a id="ga45b4db8f009ab12f62d938338d29d536" name="ga45b4db8f009ab12f62d938338d29d536"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga45b4db8f009ab12f62d938338d29d536">&#9670;&#160;</a></span>tie_as_record</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier</a> auto... Fields&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">tie_as_record_t&lt;Fields...&gt; kumi::tie_as_record {}</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p><code>#include &lt;kumi/product_types/record.hpp&gt;</code></p>
+
+<p>Creates a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> of lvalue references to its arguments. </p>
+<h2 class="groupheader">Header file </h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/product_types/record.hpp&gt;</span></div>
+</div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<a class="code hl_concept" href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier</a> <span class="keyword">auto</span>... Fields, <span class="keyword">typename</span>... Ts&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga45b4db8f009ab12f62d938338d29d536">tie_as_record</a>(Ts&amp;... ts);</div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1identifier_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier</a></div><div class="ttdoc">Concept specifying a type represents an identifier.</div><div class="ttdef"><b>Definition</b> concepts.hpp:204</div></div>
+<div class="ttc" id="agroup__kumi__record__related_html_ga45b4db8f009ab12f62d938338d29d536"><div class="ttname"><a href="#ga45b4db8f009ab12f62d938338d29d536">kumi::tie_as_record</a></div><div class="ttdeci">constexpr tie_as_record_t&lt; Fields... &gt; tie_as_record</div><div class="ttdoc">Creates a kumi::record of lvalue references to its arguments.</div><div class="ttdef"><b>Definition</b> record.hpp:504</div></div>
+</div><!-- fragment --><h3 class="groupheader">Parameters </h3>
+<ul>
+<li><span class="tt">Fields</span> : Non type template parameters names to associate with each element.</li>
+<li><span class="tt">ts</span>: Zero or more lvalue arguments to construct the record from.</li>
+</ul>
+<h3 class="groupheader">Return value </h3>
+<ul>
+<li>A <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> object containing lvalue references.</li>
+</ul>
+<h2 class="groupheader">Example </h2>
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">auto</span> <a class="code hl_variable" href="group__kumi__generate.html#gaba2efbda8df6baaccd4e35343d70163f">generate</a>()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordflow">return</span> <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;i&quot;</span>_id = 1,<span class="stringliteral">&quot;d&quot;</span>_id = 2.3,<span class="stringliteral">&quot;f&quot;</span>_id = 4.56f};</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordtype">int</span>    i;</div>
+<div class="line">  <span class="keywordtype">double</span> d;</div>
+<div class="line">  <span class="keywordtype">float</span>  f;</div>
+<div class="line"> </div>
+<div class="line">  <a class="code hl_variable" href="#ga45b4db8f009ab12f62d938338d29d536">kumi::tie_as_record</a>&lt;<span class="stringliteral">&quot;i&quot;</span>_id, <span class="stringliteral">&quot;d&quot;</span>_id, <span class="stringliteral">&quot;f&quot;</span>_id&gt;( i,d,f ) = <a class="code hl_variable" href="group__kumi__generate.html#gaba2efbda8df6baaccd4e35343d70163f">generate</a>();</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; i &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; d &lt;&lt; <span class="stringliteral">&quot; &quot;</span> &lt;&lt; f &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__kumi__generate_html_gaba2efbda8df6baaccd4e35343d70163f"><div class="ttname"><a href="group__kumi__generate.html#gaba2efbda8df6baaccd4e35343d70163f">kumi::generate</a></div><div class="ttdeci">constexpr generate_t&lt; N &gt; generate</div><div class="ttdef"><b>Definition</b> generate.hpp:102</div></div>
+<div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
+</div><!-- fragment --> 
+</div>
+</div>
 </div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->
