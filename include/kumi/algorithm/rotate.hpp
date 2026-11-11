@@ -35,11 +35,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_rotate_left kumi::rotate_left
+  //! @ingroup kumi_generators
+  //! @brief Callable object
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_rotate_left
 
     @var rotate_left
-    @brief Callable object
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
@@ -93,11 +96,14 @@ namespace kumi
   template<std::size_t R> inline constexpr rotate_left_t<R> rotate_left{};
 
   //====================================================================================================================
+  //! @defgroup kumi_rotate_right kumi::rotate_right
+  //! @ingroup kumi_generators
+  //! @brief Callable object
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_rotate_right
 
     @var rotate_right
-    @brief Callable object
 
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.

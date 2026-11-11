@@ -11,7 +11,7 @@ namespace kumi
 {
   //====================================================================================================================
   /**
-    @ingroup kumi_traits
+    @ingroup kumi_generic_traits
     @brief  Detects if a type follows the tuple protocol.
 
     @tparam T Type to inspect
@@ -38,9 +38,12 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_is_record_type_v kumi::is_record_type_v
+  //! @ingroup kumi_generic_traits
+  //! @brief Opt-in traits for types behaving like a kumi::record_type
+  //====================================================================================================================
   /**
-    @ingroup kumi_traits
-    @brief Opt-in traits for types behaving like a kumi::record_type
+    @ingroup kumi_is_record_type_v
 
     @tparam T Type to inspect
 
@@ -73,7 +76,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup kumi_traits
+    @ingroup kumi_generic_traits
     @brief Opt-in traits for types behaving like a kumi::power_type
 
     @tparam T Type to inspect
@@ -101,7 +104,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup kumi_traits
+    @ingroup kumi_generic_traits
     @brief Computes the number of elements of a kumi::product_type
 
     @tparam T kumi::product_type to inspect
@@ -124,7 +127,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup kumi_traits
+    @ingroup kumi_generic_traits
     @brief Provides indexed access to the types of the elements of a kumi::product_type.
 
     @tparam I Index of the type to retrieve
@@ -148,7 +151,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup kumi_traits
+    @ingroup kumi_generic_traits
     @brief Computes the return type of a call to kumi::get
 
     @tparam I Index of the type to retrieve
@@ -172,7 +175,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup kumi_traits
+    @ingroup kumi_generic_traits
     @brief   The type of the value of `T` selected by the field `Field`, resolved by name the same way as
              `kumi::member` resolves by index (going through `kumi::get`).
 
@@ -197,9 +200,12 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_is_comparable_v kumi::is_comparable_v
+  //! @ingroup kumi_generic_traits
+  //! @brief Checks if the expression `u == v` is well-formed.
+  //====================================================================================================================
   /**
-    @ingroup kumi_traits
-    @brief   Checks if the expression `u == v` is well-formed.
+    @ingroup kumi_is_comparable_v
 
     @tparam U The type on the left of `==`
     @tparam V The type on the right of `==`
@@ -211,9 +217,12 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_is_ordered_v kumi::is_ordered_v
+  //! @ingroup kumi_generic_traits
+  //! @brief Checks if the expression `a < b` is well-formed.
+  //====================================================================================================================
   /**
-    @ingroup kumi_traits
-    @brief   Checks if the expression `a < b` is well-formed.
+    @ingroup kumi_is_ordered_v
 
     @tparam U The type on the left of `<`
     @tparam V The type on the right of `<`
@@ -228,9 +237,12 @@ namespace kumi
 namespace kumi
 {
   //====================================================================================================================
+  //! @defgroup kumi_is_container_v kumi::is_container_v
+  //! @ingroup kumi_generic_traits
+  //! @brief Traits detecting types behaving like a kumi::container.
+  //====================================================================================================================
   /**
-    @ingroup kumi_traits
-    @brief Traits detecting types behaving like a kumi::container.
+    @ingroup kumi_is_container_v
 
     @tparam T Type to inspect
 
@@ -275,7 +287,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup kumi_traits
+    @ingroup kumi_generic_traits
     @brief Returns the statically known number of elements of a kumi::container.
 
     @tparam T kumi::container to inspect
@@ -309,7 +321,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup kumi_traits
+    @ingroup kumi_generic_traits
     @brief Provides access to the type of the elements of a kumi::concepts::container.
 
     @tparam T kumi::concepts::container to access
@@ -331,9 +343,12 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_has_static_size_v kumi::has_static_size_v
+  //! @ingroup kumi_generic_traits
+  //! @brief Detects if a given kumi::container instance size is static
+  //====================================================================================================================
   /**
-    @ingroup kumi_traits
-    @brief Detects if a given kumi::container instance size is static
+    @ingroup kumi_has_static_size_v
 
     @tparam T kumi::container to inspect
 
@@ -372,9 +387,12 @@ namespace kumi
   }
 
   //====================================================================================================================
+  //! @defgroup kumi_is_homogeneous_v kumi::is_homogeneous_v
+  //! @ingroup kumi_tuple_traits
+  //! @brief Detects if a given kumi::product_type instance is homogeneous
+  //====================================================================================================================
   /**
-    @ingroup kumi_tuple_traits
-    @brief Detects if a given kumi::product_type instance is homogeneous
+    @ingroup kumi_is_homogeneous_v
 
     @tparam T kumi::product_type to inspect
 
@@ -400,9 +418,12 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_is_projection_map_v kumi::is_projection_map_v
+  //! @ingroup kumi_generic_traits
+  //! @brief Checks if a type can be used as a kumi::projection_map
+  //====================================================================================================================
   /**
-    @ingroup kumi_traits
-    @brief Checks if a type can be used as a kumi::projection_map
+    @ingroup kumi_is_projection_map_v
 
     @tparam T The type to inspect
 
@@ -436,7 +457,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup kumi_traits
+    @ingroup kumi_generic_traits
     @brief Computes the return type of a call to kumi::get on a kumi::tuple and unwrap the
            field returned by kumi::get on a kumi::record
 
@@ -498,7 +519,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup kumi_traits
+    @ingroup kumi_generic_traits
 
     @brief Checks if a type is an instance of a specific template.
 
@@ -529,7 +550,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup kumi_traits
+    @ingroup kumi_generic_traits
     @brief    Extracts the common product_type of a parameter pack.
 
     @note If the pack is empty, there is no common product type to build and the type alias is not defined.
@@ -570,7 +591,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup kumi_traits
+    @ingroup kumi_generic_traits
     @brief   Checks if a parameter pack only contains distinct types.
 
     @tparam Ts   The types to access
@@ -593,7 +614,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup kumi_traits
+    @ingroup kumi_generic_traits
     @brief   Checks if a parameter pack only contains distinct kumi::field names.
              Evaluates to false if no type is a kumi::field.
 
@@ -628,9 +649,12 @@ namespace kumi
   }
 
   //====================================================================================================================
+  //! @defgroup kumi_is_equivalent_v kumi::is_equivalent_v
+  //! @ingroup kumi_generic_traits
+  //! @brief Checks if two product types are equivalent.
+  //====================================================================================================================
   /**
-    @ingroup kumi_traits
-    @brief   Checks if two product types are equivalent.
+    @ingroup kumi_is_equivalent_v
 
     Two product types are considered equivalent in the following case : if the two product types are
     concepts::record_type they need to both have the same fields, potentially in a different order. If one of the two or
@@ -685,9 +709,12 @@ namespace kumi
   }
 
   //====================================================================================================================
+  //! @defgroup kumi_is_equality_comparable_v kumi::is_equality_comparable_v
+  //! @ingroup kumi_generic_traits
+  //! @brief Checks if two product types are comparable for equality.
+  //====================================================================================================================
   /**
-    @ingroup kumi_traits
-    @brief   Checks if two product types are comparable for equality.
+    @ingroup kumi_is_equality_comparable_v
 
     Two product types are comparable for equality if each field in T has a corresponding field in U with each of their
     underlying types being comparable (the == operator can be used between them).
@@ -728,9 +755,12 @@ namespace kumi
   }
 
   //====================================================================================================================
+  //! @defgroup kumi_are_uniform_product_types_v kumi::are_uniform_product_types_v
+  //! @ingroup kumi_generic_traits
+  //! @brief Checks if a list of product types are homogeneous and of the same underlying type.
+  //====================================================================================================================
   /**
-    @ingroup kumi_traits
-    @brief   Checks if a list of product types are homogeneous and of the same underlying type.
+    @ingroup kumi_are_uniform_product_types_v
 
     @tparam Ts The list of product type to access
 
@@ -756,7 +786,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup kumi_traits
+    @ingroup kumi_generic_traits
     @brief   Unpacks a product type and applies its element types as arguments to a meta-function.
 
     ` apply_traits` takes a template meta-function (a template template parameter) and a product type. It expands the
@@ -800,7 +830,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup kumi_traits
+    @ingroup kumi_generic_traits
     @brief   Applies a unary meta-function to each element of a product type.
 
     `map_traits` transforms a product type by applying a given meta-function `Traits` to every element type

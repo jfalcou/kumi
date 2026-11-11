@@ -37,11 +37,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_cat kumi::cat
+  //! @ingroup kumi_generators
+  //! @brief Callable object concatenating multiple product types into a single one
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_cat
 
     @var cat
-    @brief Callable object concatenating multiple product types into a single one
 
     @note This function does not take part in overload resolution if the input product types do not follow the same
           semantic. @see concepts::follows_same_semantic

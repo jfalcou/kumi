@@ -85,11 +85,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_map kumi::map
+  //! @ingroup kumi_generic_transforms
+  //! @brief Callable object applying the Callable object `f` on each product types' elements
+  //====================================================================================================================
   /**
-    @ingroup kumi_transforms
+    @ingroup kumi_map
 
     @var map
-    @brief Callable object applying the Callable object `f` on each product types' elements
 
     Applies the given function to all the product types passed as arguments and stores the result in another product
     type, keeping the original elements order. On records, the order is determined via the order of definition of
@@ -150,11 +153,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr map_t map{};
 
   //====================================================================================================================
+  //! @defgroup kumi_map_index kumi::map_index
+  //! @ingroup kumi_tuple_transforms
+  //! @brief Callable object applying the Callable object `f` on each product types elements and their indexes
+  //====================================================================================================================
   /**
-    @ingroup kumi_tuple_transforms
+    @ingroup kumi_map_index
 
     @var map_index
-    @brief Callable object applying the Callable object `f` on each product types elements and their indexes
 
     Applies the given function to all the product types passed as arguments along with their indexes and stores the
   result in another product type, keeping the original elements order.
@@ -205,11 +211,15 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr map_index_t map_index{};
 
   //====================================================================================================================
+  //! @defgroup kumi_map_field kumi::map_field
+  //! @ingroup kumi_record_transforms
+  //! @brief Callable object applying the Callable object `f` on each product types elements and their associated
+  //!   labels.
+  //====================================================================================================================
   /**
-    @ingroup kumi_record_transforms
+    @ingroup kumi_map_field
 
     @var map_field
-    @brief Callable object applying the Callable object `f` on each product types elements and their associated labels.
 
     Applies the given function to all the records passed as arguments along with their names and
     stores the result in another records, keeping the original elements order.

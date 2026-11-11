@@ -49,11 +49,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_generate kumi::generate
+  //! @ingroup kumi_generators
+  //! @brief Callable object creating a kumi::tuple containing `N` applications of the `f` Callable.
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_generate
 
     @var generate
-    @brief Callable object creating a kumi::tuple containing `N` applications of the `f` Callable.
 
     @qualifier nodiscard
     @qualifier inline
@@ -99,11 +102,14 @@ namespace kumi
   template<std::size_t N> inline constexpr generate_t<N> generate{};
 
   //====================================================================================================================
+  //! @defgroup kumi_fill kumi::fill
+  //! @ingroup kumi_generators
+  //! @brief Callable object creating a kumi::tuple containing `N` copies of `v`.
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_fill
 
     @var fill
-    @brief Callable object creating a kumi::tuple containing `N` copies of `v`.
 
     @qualifier nodiscard
     @qualifier inline
@@ -149,11 +155,14 @@ namespace kumi
   template<std::size_t N> inline constexpr fill_t<N> fill{};
 
   //====================================================================================================================
+  //! @defgroup kumi_iota kumi::iota
+  //! @ingroup kumi_generators
+  //! @brief Callable object creating a kumi::tuple containing an increasing ramp of values.
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
+    @ingroup kumi_iota
 
     @var iota
-    @brief Callable object creating a kumi::tuple containing an increasing ramp of values.
 
     @qualifier nodiscard
     @qualifier inline

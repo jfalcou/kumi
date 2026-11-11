@@ -82,11 +82,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_for_each kumi::for_each
+  //! @ingroup kumi_generic_transforms
+  //! @brief Callable object applying the Callable object f on each element of a product type.
+  //====================================================================================================================
   /**
-    @ingroup kumi_transforms
+    @ingroup kumi_for_each
 
     @var for_each
-    @brief Callable object applying the Callable object f on each element of a product type.
 
     `f` is applied on the values if the given product_type is a record type.
 
@@ -135,11 +138,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr for_each_t for_each{};
 
   //====================================================================================================================
+  //! @defgroup kumi_for_each_index kumi::for_each_index
+  //! @ingroup kumi_tuple_transforms
+  //! @brief Callable object applying the Callable object f on each element of a product type and its index.
+  //====================================================================================================================
   /**
-    @ingroup kumi_tuple_transforms
+    @ingroup kumi_for_each_index
 
     @var for_each_index
-    @brief Callable object applying the Callable object f on each element of a product type and its index.
 
     @note This function does not take part in overload resolution if `f` can't be applied to the
           elements of `t` and/or `ts` and an integral constant. This function cannot be applied
@@ -177,11 +183,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr for_each_index_t for_each_index{};
 
   //====================================================================================================================
+  //! @defgroup kumi_for_each_field kumi::for_each_field
+  //! @ingroup kumi_record_transforms
+  //! @brief Callable object applying the Callable object f on each element of a product type and its field.
+  //====================================================================================================================
   /**
-    @ingroup kumi_record_transforms
+    @ingroup kumi_for_each_field
 
     @var for_each_field
-    @brief Callable object applying the Callable object f on each element of a product type and its field.
 
     @note This function does not take part in overload resolution if `f` can't be applied to the
           elements of `t` and/or `ts` and a field or if the product types are not compatible.

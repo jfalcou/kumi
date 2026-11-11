@@ -46,9 +46,12 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_cartesian_product kumi::cartesian_product
+  //! @ingroup kumi_generators
+  //! @brief Callable object returning the Cartesian Product of all elements of its arguments product types
+  //====================================================================================================================
   /**
-    @ingroup kumi_generators
-    @brief  Callable object returning the Cartesian Product of all elements of its arguments product types
+    @ingroup kumi_cartesian_product
 
     @var cartesian_product
 

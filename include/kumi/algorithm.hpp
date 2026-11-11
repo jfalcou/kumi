@@ -18,6 +18,9 @@ namespace kumi
       @defgroup kumi_transforms Product Type Transformations
       @brief Algorithms applying transformation to product types
       @{
+        @defgroup kumi_generic_transforms Generic Transformations
+        @brief Algorithms applying transformation to any product type
+
         @defgroup kumi_tuple_transforms Tuple Type Specific Transformations
         @brief Algorithms applying transformation to tuples
 

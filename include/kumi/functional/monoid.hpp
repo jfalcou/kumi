@@ -109,42 +109,62 @@ namespace kumi::function
     }
   };
 
+  //====================================================================================================================
+  //! @defgroup kumi_function_plus kumi::function::plus
+  //! @ingroup kumi_functional
+  //! @brief Callable object matching the `kumi::numeric_add` monoid, usable with kumi::algorithm.
+  //====================================================================================================================
   //==================================================================================================================
   /**
-    @ingroup kumi_functional
-    @brief Callable object matching the `kumi::numeric_add` monoid, usable with kumi::algorithm.
+    @ingroup kumi_function_plus
   **/
   //==================================================================================================================
   inline constexpr kumi::function::numeric_add plus{};
 
+  //====================================================================================================================
+  //! @defgroup kumi_function_multiplies kumi::function::multiplies
+  //! @ingroup kumi_functional
+  //! @brief Callable object matching the `kumi::numeric_prod` monoid, usable with kumi::algorithm.
+  //====================================================================================================================
   //==================================================================================================================
   /**
-    @ingroup kumi_functional
-    @brief Callable object matching the `kumi::numeric_prod` monoid, usable with kumi::algorithm.
+    @ingroup kumi_function_multiplies
   **/
   //==================================================================================================================
   inline constexpr kumi::function::numeric_prod multiplies{};
 
+  //====================================================================================================================
+  //! @defgroup kumi_function_bit_and kumi::function::bit_and
+  //! @ingroup kumi_functional
+  //! @brief Callable object matching the `kumi::boolean_and` monoid, usable with kumi::algorithm.
+  //====================================================================================================================
   //==================================================================================================================
   /**
-    @ingroup kumi_functional
-    @brief Callable object matching the `kumi::boolean_and` monoid, usable with kumi::algorithm.
+    @ingroup kumi_function_bit_and
   **/
   //==================================================================================================================
   inline constexpr kumi::function::boolean_and bit_and{};
 
+  //====================================================================================================================
+  //! @defgroup kumi_function_bit_or kumi::function::bit_or
+  //! @ingroup kumi_functional
+  //! @brief Callable object matching the `kumi::boolean_or` monoid, usable with kumi::algorithm.
+  //====================================================================================================================
   //==================================================================================================================
   /**
-    @ingroup kumi_functional
-    @brief Callable object matching the `kumi::boolean_or` monoid, usable with kumi::algorithm.
+    @ingroup kumi_function_bit_or
   **/
   //==================================================================================================================
   inline constexpr kumi::function::boolean_or bit_or{};
 
+  //====================================================================================================================
+  //! @defgroup kumi_function_bit_xor kumi::function::bit_xor
+  //! @ingroup kumi_functional
+  //! @brief Callable object matching the `kumi::boolean_xor` monoid, usable with kumi::algorithm.
+  //====================================================================================================================
   //==================================================================================================================
   /**
-    @ingroup kumi_functional
-    @brief Callable object matching the `kumi::boolean_xor` monoid, usable with kumi::algorithm.
+    @ingroup kumi_function_bit_xor
   **/
   //==================================================================================================================
   inline constexpr kumi::function::boolean_xor bit_xor{};

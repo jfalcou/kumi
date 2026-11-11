@@ -122,11 +122,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_max kumi::max
+  //! @ingroup kumi_reductions
+  //! @brief Callable object computing the maximum value of all elements of `t`.
+  //====================================================================================================================
   /**
-    @ingroup kumi_reductions
+    @ingroup kumi_max
 
     @var max
-    @brief Callable object computing the maximum value of all elements of `t`.
 
     @qualifier nodiscard
     @qualifier inline
@@ -181,11 +184,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr max_t max{};
 
   //====================================================================================================================
+  //! @defgroup kumi_max_flat kumi::max_flat
+  //! @ingroup kumi_reductions
+  //! @brief Callable object computing the maximum value of applications of `f` to all elements of kumi::flatten_all(t).
+  //====================================================================================================================
   /**
-    @ingroup kumi_reductions
+    @ingroup kumi_max_flat
 
     @var max_flat
-    @brief Callable object computing the maximum value of applications of `f` to all elements of kumi::flatten_all(t).
 
     @qualifier nodiscard
     @qualifier inline
@@ -235,11 +241,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr max_flat_t max_flat{};
 
   //====================================================================================================================
+  //! @defgroup kumi_min kumi::min
+  //! @ingroup kumi_reductions
+  //! @brief Callable object computing the minimum value of all elements of `t`.
+  //====================================================================================================================
   /**
-    @ingroup kumi_reductions
+    @ingroup kumi_min
 
     @var min
-    @brief Callable object computing the minimum value of all elements of `t`.
 
     @qualifier nodiscard
     @qualifier inline
@@ -294,11 +303,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr min_t min{};
 
   //====================================================================================================================
+  //! @defgroup kumi_min_flat kumi::min_flat
+  //! @ingroup kumi_reductions
+  //! @brief Callable object computing the minimum value of applications of `f` to all elements of kumi::flatten_all(t).
+  //====================================================================================================================
   /**
-    @ingroup kumi_reductions
+    @ingroup kumi_min_flat
 
     @var min_flat
-    @brief Callable object computing the minimum value of applications of `f` to all elements of kumi::flatten_all(t).
 
     @qualifier nodiscard
     @qualifier inline

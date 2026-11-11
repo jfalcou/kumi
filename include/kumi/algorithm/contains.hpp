@@ -75,11 +75,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_contains kumi::contains
+  //! @ingroup kumi_queries
+  //! @brief Callable object checking if a product type contains a given identifier
+  //====================================================================================================================
   /**
-    @ingroup kumi_queries
+    @ingroup kumi_contains
 
     @var contains
-    @brief Callable object checking if a product type contains a given identifier
 
     @qualifier nodiscard
     @qualifier inline
@@ -129,11 +132,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr contains_t contains{};
 
   //====================================================================================================================
+  //! @defgroup kumi_contains_any kumi::contains_any
+  //! @ingroup kumi_queries
+  //! @brief Callable object checking if a product type contains at least one of many identifier
+  //====================================================================================================================
   /**
-    @ingroup kumi_queries
+    @ingroup kumi_contains_any
 
     @var contains_any
-    @brief Callable object checking if a product type contains at least one of many identifier
 
     @qualifier nodiscard
     @qualifier inline
@@ -183,11 +189,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr contains_any_t contains_any{};
 
   //====================================================================================================================
+  //! @defgroup kumi_contains_only kumi::contains_only
+  //! @ingroup kumi_queries
+  //! @brief Callable object checking if a product type contains fields based on a selected identifier
+  //====================================================================================================================
   /**
-    @ingroup kumi_queries
+    @ingroup kumi_contains_only
 
     @var contains_only
-    @brief Callable object checking if a product type contains fields based on a selected identifier
 
     @qualifier nodiscard
     @qualifier inline
@@ -237,11 +246,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr contains_only_t contains_only{};
 
   //====================================================================================================================
+  //! @defgroup kumi_contains_none kumi::contains_none
+  //! @ingroup kumi_queries
+  //! @brief Callable object checking if a product type contains no fields based on any of the selected identifiers
+  //====================================================================================================================
   /**
-    @ingroup kumi_queries
+    @ingroup kumi_contains_none
 
     @var contains_none
-    @brief Callable object checking if a product type contains no fields based on any of the selected identifiers
 
     @qualifier nodiscard
     @qualifier inline

@@ -141,11 +141,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_reduce kumi::reduce
+  //! @ingroup kumi_reductions
+  //! @brief Callable object performing a tree-like reduction of all elements of a product type.
+  //====================================================================================================================
   /**
-    @ingroup kumi_reductions
+    @ingroup kumi_reduce
 
     @var reduce
-    @brief Callable object performing a tree-like reduction of all elements of a product type.
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 
@@ -216,12 +219,15 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr reduce_t reduce{};
 
   //====================================================================================================================
+  //! @defgroup kumi_map_reduce kumi::map_reduce
+  //! @ingroup kumi_reductions
+  //! @brief Callable object performing a tree-like reduction of all elements of a product type. The given map function
+  //!   is applied before executing the reduction to each element of the input.
+  //====================================================================================================================
   /**
-    @ingroup kumi_reductions
+    @ingroup kumi_map_reduce
 
     @var map_reduce
-    @brief Callable object performing a tree-like reduction of all elements of a product type. The given map
-              function is applied before executing the reduction to each element of the input.
 
 
     On record types, this function operates on the underlying values, not on the fields themselves.
@@ -295,11 +301,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr map_reduce_t map_reduce{};
 
   //====================================================================================================================
+  //! @defgroup kumi_sum kumi::sum
+  //! @ingroup kumi_reductions
+  //! @brief Callable object computing the sum of all elements.
+  //====================================================================================================================
   /**
-    @ingroup kumi_reductions
+    @ingroup kumi_sum
 
     @var sum
-    @brief Callable object computing the sum of all elements.
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 
@@ -364,11 +373,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr sum_t sum{};
 
   //====================================================================================================================
+  //! @defgroup kumi_prod kumi::prod
+  //! @ingroup kumi_reductions
+  //! @brief Callable object computing the product of all elements.
+  //====================================================================================================================
   /**
-    @ingroup kumi_reductions
+    @ingroup kumi_prod
 
     @var prod
-    @brief Callable object computing the product of all elements.
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 
@@ -433,11 +445,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr prod_t prod{};
 
   //====================================================================================================================
+  //! @defgroup kumi_bit_and kumi::bit_and
+  //! @ingroup kumi_reductions
+  //! @brief Callable object computing the bitwise AND of all elements.
+  //====================================================================================================================
   /**
-    @ingroup kumi_reductions
+    @ingroup kumi_bit_and
 
     @var bit_and
-    @brief Callable object computing the bitwise AND of all elements.
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 
@@ -502,11 +517,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr bit_and_t bit_and{};
 
   //====================================================================================================================
+  //! @defgroup kumi_bit_or kumi::bit_or
+  //! @ingroup kumi_reductions
+  //! @brief Callable object computing the bitwise OR of all elements.
+  //====================================================================================================================
   /**
-    @ingroup kumi_reductions
+    @ingroup kumi_bit_or
 
     @var bit_or
-    @brief Callable object computing the bitwise OR of all elements.
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 
@@ -571,11 +589,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr bit_or_t bit_or{};
 
   //====================================================================================================================
+  //! @defgroup kumi_bit_xor kumi::bit_xor
+  //! @ingroup kumi_reductions
+  //! @brief Callable object computing the bitwise XOR of all elements.
+  //====================================================================================================================
   /**
-    @ingroup kumi_reductions
+    @ingroup kumi_bit_xor
 
     @var bit_xor
-    @brief Callable object computing the bitwise XOR of all elements.
 
     On record types, this function operates on the underlying values, not on the fields themselves.
 

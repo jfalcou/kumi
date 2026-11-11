@@ -39,4 +39,3 @@ PREDEFINED            += "KUMI_ABI=inline" \
                          "KUMI_GPU="
 
 ## One page per callable member
-SEPARATE_MEMBER_PAGES  = YES

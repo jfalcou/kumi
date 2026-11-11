@@ -41,11 +41,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_apply kumi::apply
+  //! @ingroup kumi_generic_transforms
+  //! @brief Callable object invoking the callable object f with the elements of the product type unrolled as arguments.
+  //====================================================================================================================
   /**
-    @ingroup kumi_transforms
+    @ingroup kumi_apply
 
     @var apply
-    @brief Callable object invoking the callable object f with the elements of the product type unrolled as arguments.
 
     `f` is applied on the underlying values when the input `t` is a record type.
 
@@ -99,11 +102,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr apply_t apply{};
 
   //====================================================================================================================
+  //! @defgroup kumi_apply_field kumi::apply_field
+  //! @ingroup kumi_generic_transforms
+  //! @brief Callable object invoking the callable object f with the elements of the product type unrolled as arguments.
+  //====================================================================================================================
   /**
-    @ingroup kumi_transforms
+    @ingroup kumi_apply_field
 
     @var apply_field
-    @brief Callable object invoking the callable object f with the elements of the product type unrolled as arguments.
 
     `f` is applied on the fields when the input `t` is a record type.
 

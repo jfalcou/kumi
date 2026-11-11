@@ -10,9 +10,12 @@
 namespace kumi::function
 {
   //====================================================================================================================
+  //! @defgroup kumi_function_size_or_v kumi::function::size_or_v
+  //! @ingroup kumi_functional
+  //! @brief If T is a kumi::product_type, returns its number of elements, and V otherwise.
+  //====================================================================================================================
   /**
-    @ingroup kumi_functional
-    @brief    If T is a kumi::product_type, returns its number of elements otherwise returns V;
+    @ingroup kumi_function_size_or_v
 
     @tparam T type to inspect
     @tparam V fallback value
@@ -35,9 +38,12 @@ namespace kumi::function
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_function_get_or kumi::function::get_or
+  //! @ingroup kumi_functional
+  //! @brief Returns the Ith element of `t` if `t` is a kumi::product_type, an instance of `v` otherwise.
+  //====================================================================================================================
   /**
-    @ingroup kumi_functional
-    @brief    Returns the Ith element of `t` if `t` is a kumi::product_type, an instance of `v` otherwise.
+    @ingroup kumi_function_get_or
 
     @note Does not participate in overload resolution if `I` is out of [0, kumi::size_v<T>).
     @tparam   I Compile-time index of the element to access

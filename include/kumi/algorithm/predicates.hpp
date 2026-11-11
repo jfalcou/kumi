@@ -115,11 +115,14 @@ namespace kumi
   };
 
   //====================================================================================================================
+  //! @defgroup kumi_all_of kumi::all_of
+  //! @ingroup kumi_queries
+  //! @brief Callable object checking if a unary predicate p returns true for every element of t.
+  //====================================================================================================================
   /**
-    @ingroup kumi_queries
+    @ingroup kumi_all_of
 
     @var all_of
-    @brief Callable object checking if a unary predicate p returns true for every element of t.
 
     On a record type, the function operates on the underlying elements of the fields.
 
@@ -169,11 +172,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr all_of_t all_of{};
 
   //====================================================================================================================
+  //! @defgroup kumi_any_of kumi::any_of
+  //! @ingroup kumi_queries
+  //! @brief Callable object checking if a unary predicate p returns true for any element of t.
+  //====================================================================================================================
   /**
-    @ingroup kumi_queries
+    @ingroup kumi_any_of
 
     @var any_of
-    @brief Callable object checking if a unary predicate p returns true for any element of t.
 
     On a record type, the function operates on the underlying elements of the fields.
 
@@ -223,11 +229,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr any_of_t any_of{};
 
   //====================================================================================================================
+  //! @defgroup kumi_none_of kumi::none_of
+  //! @ingroup kumi_queries
+  //! @brief Callable object checking if a unary predicate p does not return true for any element in t.
+  //====================================================================================================================
   /**
-    @ingroup kumi_queries
+    @ingroup kumi_none_of
 
     @var none_of
-    @brief Callable object checking if a unary predicate p does not return true for any element in t.
 
     On a record type, the function operates on the underlying elements of the fields.
 
@@ -277,11 +286,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr none_of_t none_of{};
 
   //====================================================================================================================
+  //! @defgroup kumi_count_if kumi::count_if
+  //! @ingroup kumi_queries
+  //! @brief Callable object counting the number of elements of t satisfying predicates p.
+  //====================================================================================================================
   /**
-    @ingroup kumi_queries
+    @ingroup kumi_count_if
 
     @var count_if
-    @brief Callable object counting the number of elements of t satisfying predicates p.
 
     On a record type, the function operates on the underlying elements of the fields.
 
@@ -326,11 +338,14 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr count_if_t count_if{};
 
   //====================================================================================================================
+  //! @defgroup kumi_count kumi::count
+  //! @ingroup kumi_queries
+  //! @brief Callable object counting the number of elements of t not equivalent to false.
+  //====================================================================================================================
   /**
-    @ingroup kumi_queries
+    @ingroup kumi_count
 
     @var count
-    @brief Callable object counting the number of elements of t not equivalent to false.
 
     On a record type, the function operates on the underlying elements of the fields.
 
