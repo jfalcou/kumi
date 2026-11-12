@@ -11,9 +11,6 @@ namespace kumi
 {
   //====================================================================================================================
   /**
-    @defgroup kumi_types Kumi Types
-    @brief    Class definitions and associated functions
-
     @defgroup kumi_tuple_related Tuple Types and associated Functions
     @brief    Definitions of kumi::tuple and associated functions
 

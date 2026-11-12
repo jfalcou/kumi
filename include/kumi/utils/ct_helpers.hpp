@@ -21,7 +21,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup kumi_types
+    @ingroup kumi_utility
     @class index_t
     @brief Integral constant type
 
@@ -53,7 +53,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup kumi_types
+    @ingroup kumi_utility
     @class label_t
     @brief Literal constant type
 

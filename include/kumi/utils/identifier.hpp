@@ -69,7 +69,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup kumi_types
+    @ingroup kumi_utility
     @class    identifier
     @brief    identifier definition class
 
@@ -155,7 +155,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup kumi_types
+    @ingroup kumi_utility
     @class    name
     @brief Compile-time text based identifier
     @tparam ID Compile-time string representing an identifier

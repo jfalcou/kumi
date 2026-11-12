@@ -14,7 +14,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup kumi_types
+    @ingroup kumi_utility
     @class    str
     @brief    Static string used to create named fields.
 
@@ -285,7 +285,7 @@ namespace kumi
 
   //====================================================================================================================
   /**
-    @ingroup kumi_types
+    @ingroup kumi_utility
     @class    unknown
     @brief    Type indicating an identifier was not found in a given kumi::product_type
   **/

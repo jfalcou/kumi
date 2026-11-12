@@ -11,7 +11,7 @@ namespace kumi
 {
   //====================================================================================================================
   /**
-    @ingroup kumi_types
+    @ingroup kumi_utility
     @class unit
     @brief A type representing the product of no type, also called the unit type
 

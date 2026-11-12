@@ -11,7 +11,7 @@ namespace kumi
 {
   //====================================================================================================================
   /**
-    @ingroup kumi_types
+    @ingroup kumi_utility
     @class    field
     @brief    Named wrapper over a type.
 

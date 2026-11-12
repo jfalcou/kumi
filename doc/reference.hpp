@@ -8,7 +8,6 @@
 //! - @ref kumi_tuple_related
 //! - @ref kumi_record_related
 //! - @ref kumi_array_related
-//! - @ref kumi_types
 //!
 //! ### Algorithms
 //!
