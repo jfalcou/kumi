@@ -1429,5 +1429,43 @@
   "peak_kib": 229476,
   "sha": "2b56b5a35e91656ac7a8c27502c8458c2e0c54f4",
   "units": 168
+ },
+ {
+  "branch": "main",
+  "cpu_us": 138732531,
+  "date": "2026-11-12T19:13:29Z",
+  "link_cpu_us": 6352221,
+  "link_peak_kib": 77696,
+  "links": 168,
+  "modules": {
+   "unit/array": {
+    "cpu_us": 40956069,
+    "peak_kib": 173460,
+    "units": 52
+   },
+   "unit/infra": {
+    "cpu_us": 6614923,
+    "peak_kib": 165016,
+    "units": 10
+   },
+   "unit/record": {
+    "cpu_us": 42575571,
+    "peak_kib": 229020,
+    "units": 48
+   },
+   "unit/std": {
+    "cpu_us": 848502,
+    "peak_kib": 153156,
+    "units": 1
+   },
+   "unit/tuple": {
+    "cpu_us": 47737466,
+    "peak_kib": 203064,
+    "units": 57
+   }
+  },
+  "peak_kib": 229020,
+  "sha": "96fdb8b2f69db180f636205d074f40af833df80c",
+  "units": 168
  }
 ]
