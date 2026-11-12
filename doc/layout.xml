@@ -3,22 +3,8 @@
   <!-- Navigation index tabs for HTML output -->
   <navindex>
     <tab type="mainpage" visible="yes" title=""/>
-    <tab type="usergroup" visible="yes" title="About The Library" url="@ref kumi_setup">
-      <tab type="user" url="@ref kumi_setup"     title="Setup"/>
-      <tab type="user" url="@ref kumi_changelog" title="Changelog"/>
-      <tab type="user" url="@ref kumi_licence"   title="Licence"/>
-    </tab>
-    <tab type="usergroup" visible="yes" title="Glossary" url="@ref kumi_glossary">
-      <tab type="usergroup" visible="yes" title="Type Theory" url="@ref kumi_introduction">
-        <tab type="user" url="@ref kumi_introduction" title="Introduction"/>
-        <tab type="user" url="@ref kumi_identity" title="Identity Elements"/>
-        <tab type="user" url="@ref kumi_product" title="Product Types"/>
-      </tab>
-      <tab type="usergroup" visible="yes" title="References" url="@ref kumi_references">
-        <tab type="user" url="@ref kumi_references" title="Bibliography"/>
-        <tab type="user" url="@ref kumi_cpp_vocabulary" title="C++ Vocabulary"/>
-        <tab type="user" url="@ref kumi_nomenclature" title="Nomenclature"/>
-      </tab>
+    <tab type="usergroup" visible="yes" title="Getting Started" url="@ref kumi_setup">
+      <tab type="user" url="@ref kumi_setup"     title="Installation"/>
     </tab>
     <tab type="usergroup" visible="yes"   title="Reference Documentation" url="@ref kumi_reference">
       <tab type="usergroup" visible="yes"   title="Types" url="@ref kumi_tuple_related">
@@ -42,7 +28,22 @@
       </tab>
       <tab type="user" url="@ref kumi"    title="Kumi Namespace"/>
     </tab>
-    <tab type="user" url="mailto:joel.falcou+kumi@gmail.com?subject=The%20KUMI%20Library"    title="Contact"/>
+    <tab type="usergroup" visible="yes" title="Glossary" url="@ref kumi_glossary">
+      <tab type="usergroup" visible="yes" title="Type Theory" url="@ref kumi_introduction">
+        <tab type="user" url="@ref kumi_introduction" title="Introduction"/>
+        <tab type="user" url="@ref kumi_identity" title="Identity Elements"/>
+        <tab type="user" url="@ref kumi_product" title="Product Types"/>
+      </tab>
+      <tab type="usergroup" visible="yes" title="References" url="@ref kumi_references">
+        <tab type="user" url="@ref kumi_references" title="Bibliography"/>
+        <tab type="user" url="@ref kumi_cpp_vocabulary" title="C++ Vocabulary"/>
+        <tab type="user" url="@ref kumi_nomenclature" title="Nomenclature"/>
+      </tab>
+    </tab>
+    <tab type="usergroup" visible="yes" title="Informations" url="@ref kumi_changelog">
+      <tab type="user" url="@ref kumi_changelog" title="Changelog"/>
+      <tab type="user" url="@ref kumi_licence"   title="Licence"/>
+    </tab>
   </navindex>
 
   <!-- Layout definition for a class page -->
