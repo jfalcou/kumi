@@ -20,7 +20,7 @@ var searchData=
   ['compact_20tuple_20tools_17',['The C++20 Compact Tuple Tools',['../index.html',1,'']]],
   ['compatible_5fproduct_5ftypes_18',['compatible_product_types',['../conceptkumi_1_1concepts_1_1compatible__product__types.html',1,'kumi::concepts']]],
   ['compress_19',['compress',['../group__kumi__compress.html#gaa9d6196838118af0a837160d8bbf532c',1,'kumi']]],
-  ['concepts_20',['Product Type Related Concepts',['../group__kumi__concepts.html',1,'']]],
+  ['concepts_20',['Concepts',['../group__kumi__concepts.html',1,'']]],
   ['considerations_21',['Programming Languages Considerations',['../kumi_product.html#tuple_programming',1,'']]],
   ['constructions_20the_20logic_20of_20and_22',['Product Constructions (The Logic of &quot;AND&quot;)',['../kumi_product.html#product_construction',1,'']]],
   ['container_23',['container',['../conceptkumi_1_1concepts_1_1container.html',1,'kumi::concepts']]],

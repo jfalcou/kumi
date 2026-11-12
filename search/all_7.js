@@ -3,7 +3,7 @@ var searchData=
   ['a_20cmake_20dependency_0',['As a CMake dependency',['../kumi_setup.html#dependency',1,'']]],
   ['adjacent_5findex_5fsequence_1',['adjacent_index_sequence',['../group__kumi__function__adjacent__index__sequence.html#gae8a54a1753591f4aa7594a1f419072c6',1,'kumi::function']]],
   ['aggregate_20type_2',['Aggregate type',['../kumi_cpp_spec.html#autotoc_md123',1,'']]],
-  ['algorithms_3',['Algorithms',['../kumi_reference.html#autotoc_md157',1,'Algorithms'],['../group__kumi__algorithm.html',1,'Product Type Algorithms']]],
+  ['algorithms_3',['Algorithms',['../group__kumi__algorithm.html',1,'Algorithms'],['../kumi_reference.html#autotoc_md157',1,'Algorithms']]],
   ['all_5fof_4',['all_of',['../group__kumi__all__of.html#gaffdb8063b72f079107cd8a7e293ba298',1,'kumi']]],
   ['all_5funique_5',['all_unique',['../group__kumi__all__unique.html#ga71bbbe8da94919e242bd3ded80ab6776',1,'kumi']]],
   ['all_5funique_5fnames_5fv_6',['all_unique_names_v',['../group__kumi__generic__traits.html#ga29ec70c788b9f655ef3b0f013ad63cec',1,'kumi']]],
@@ -12,7 +12,7 @@ var searchData=
   ['amethyst_9',['Version 1.0 - Amazing Amethyst',['../kumi_changelog.html#autotoc_md119',1,'']]],
   ['and_10',['Product Constructions (The Logic of &quot;AND&quot;)',['../kumi_product.html#product_construction',1,'']]],
   ['and_201_20of_20types_11',['The Identity Elements (The &quot;0&quot; and &quot;1&quot; of Types)',['../kumi_identity.html',1,'kumi_glossary']]],
-  ['and_20associated_20functions_12',['and associated Functions',['../group__kumi__array__related.html',1,'Power Types and associated Functions'],['../group__kumi__tuple__related.html',1,'Product Types and associated Functions'],['../group__kumi__record__related.html',1,'Record Types and associated Functions']]],
+  ['and_20associated_20functions_12',['and associated Functions',['../group__kumi__array__related.html',1,'Power Types and associated Functions'],['../group__kumi__record__related.html',1,'Record Types and associated Functions'],['../group__kumi__tuple__related.html',1,'Tuple Types and associated Functions']]],
   ['and_20ci_20infra_13',['and CI infra',['../kumi_changelog.html#autotoc_md94',1,'DOC and CI infra'],['../kumi_changelog.html#autotoc_md98',1,'DOC and CI infra']]],
   ['and_20functions_14',['Utility Types and Functions',['../group__kumi__utility.html',1,'']]],
   ['and_20infrastructure_20changes_15',['API and Infrastructure Changes',['../kumi_changelog.html#autotoc_md106',1,'']]],
@@ -31,6 +31,6 @@ var searchData=
   ['as_5fflat_5fptr_28',['as_flat_ptr',['../group__kumi__as__flat__ptr.html#ga6368952a2f6a506de75aa0e01569eab6',1,'kumi']]],
   ['as_5fstreamable_29',['as_streamable',['../group__kumi__utility.html#gae8a72b55c5e0a89b70663342e2c36eaf',1,'streamable.hpp']]],
   ['as_5ftuple_30',['as_tuple',['../structkumi_1_1as__tuple.html',1,'kumi']]],
-  ['associated_20functions_31',['associated Functions',['../group__kumi__array__related.html',1,'Power Types and associated Functions'],['../group__kumi__tuple__related.html',1,'Product Types and associated Functions'],['../group__kumi__record__related.html',1,'Record Types and associated Functions']]],
+  ['associated_20functions_31',['associated Functions',['../group__kumi__array__related.html',1,'Power Types and associated Functions'],['../group__kumi__record__related.html',1,'Record Types and associated Functions'],['../group__kumi__tuple__related.html',1,'Tuple Types and associated Functions']]],
   ['autonomous_20public_20release_32',['First autonomous public release.',['../kumi_changelog.html#autotoc_md120',1,'']]]
 ];

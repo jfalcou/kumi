@@ -38,12 +38,13 @@ var menudata={children:[
 {text:"Nomenclature",url:"kumi_nomenclature.html#kumi_nomenclature"}]},
 {text:"Reference Documentation",url:"kumi_reference.html",children:[
 {text:"Types",url:"group__kumi__tuple__related.html",children:[
-{text:"Product Types and Functions",url:"group__kumi__tuple__related.html"},
+{text:"Tuple Types and Functions",url:"group__kumi__tuple__related.html"},
 {text:"Record Types and Functions",url:"group__kumi__record__related.html"},
-{text:"Power Types and Functions",url:"group__kumi__array__related.html"},
-{text:"Types",url:"group__kumi__types.html"}]},
+{text:"Power Types and Functions",url:"group__kumi__array__related.html"}]},
 {text:"Algorithms",url:"group__kumi__transforms.html",children:[
 {text:"Transformations",url:"group__kumi__transforms.html"},
+{text:"Projections",url:"group__kumi__projections.html"},
+{text:"Restructurings",url:"group__kumi__restructurings.html"},
 {text:"Queries",url:"group__kumi__queries.html"},
 {text:"Generators",url:"group__kumi__generators.html"},
 {text:"Reductions",url:"group__kumi__reductions.html"}]},

@@ -3476,6 +3476,74 @@
     <filename>namespaceliterals.html</filename>
   </compound>
   <compound kind="group">
+    <name>kumi_algorithm</name>
+    <title>Algorithms</title>
+    <filename>group__kumi__algorithm.html</filename>
+    <subgroup>kumi_reductions</subgroup>
+    <subgroup>kumi_generators</subgroup>
+    <subgroup>kumi_projections</subgroup>
+    <subgroup>kumi_queries</subgroup>
+    <subgroup>kumi_restructurings</subgroup>
+    <subgroup>kumi_transforms</subgroup>
+  </compound>
+  <compound kind="group">
+    <name>kumi_concepts</name>
+    <title>Concepts</title>
+    <filename>group__kumi__concepts.html</filename>
+    <concept>kumi::concepts::compatible_product_types</concept>
+    <concept>kumi::concepts::container</concept>
+    <concept>kumi::concepts::contains_identifier</concept>
+    <concept>kumi::concepts::contains_label</concept>
+    <concept>kumi::concepts::contains_type</concept>
+    <concept>kumi::concepts::empty_product_type</concept>
+    <concept>kumi::concepts::equality_comparable</concept>
+    <concept>kumi::concepts::equivalent</concept>
+    <concept>kumi::concepts::field</concept>
+    <concept>kumi::concepts::follows_same_semantic</concept>
+    <concept>kumi::concepts::fully_named</concept>
+    <concept>kumi::concepts::has_named_fields</concept>
+    <concept>kumi::concepts::homogeneous_product_type</concept>
+    <concept>kumi::concepts::identifier</concept>
+    <concept>kumi::concepts::monoid</concept>
+    <concept>kumi::concepts::non_empty_product_type</concept>
+    <concept>kumi::concepts::power_type</concept>
+    <concept>kumi::concepts::power_types</concept>
+    <concept>kumi::concepts::product_type</concept>
+    <concept>kumi::concepts::product_types</concept>
+    <concept>kumi::concepts::projection</concept>
+    <concept>kumi::concepts::projection_map</concept>
+    <concept>kumi::concepts::queryable_by_identifier</concept>
+    <concept>kumi::concepts::queryable_by_label</concept>
+    <concept>kumi::concepts::queryable_by_type</concept>
+    <concept>kumi::concepts::record_type</concept>
+    <concept>kumi::concepts::record_types</concept>
+    <concept>kumi::concepts::sized_product_type</concept>
+    <concept>kumi::concepts::sized_product_type_or_more</concept>
+    <concept>kumi::concepts::static_container</concept>
+    <concept>kumi::concepts::uniform_product_types</concept>
+    <concept>kumi::concepts::uniquely_labeled</concept>
+    <concept>kumi::concepts::uniquely_named</concept>
+    <concept>kumi::concepts::uniquely_typed</concept>
+    <concept>kumi::concepts::unit_type</concept>
+  </compound>
+  <compound kind="group">
+    <name>kumi_generic_transforms</name>
+    <title>Element-wise Transformations</title>
+    <filename>group__kumi__generic__transforms.html</filename>
+    <subgroup>kumi_apply</subgroup>
+    <subgroup>kumi_apply_field</subgroup>
+    <subgroup>kumi_for_each</subgroup>
+    <subgroup>kumi_map</subgroup>
+    <subgroup>kumi_to_ref</subgroup>
+  </compound>
+  <compound kind="group">
+    <name>kumi_record_transforms</name>
+    <title>Field-wise Transformations</title>
+    <filename>group__kumi__record__transforms.html</filename>
+    <subgroup>kumi_for_each_field</subgroup>
+    <subgroup>kumi_map_field</subgroup>
+  </compound>
+  <compound kind="group">
     <name>kumi_functional</name>
     <title>Functional Helpers</title>
     <filename>group__kumi__functional.html</filename>
@@ -3516,6 +3584,40 @@
       <anchor>ga11e943ab58829909243b4826d1f084d8</anchor>
       <arglist></arglist>
     </member>
+  </compound>
+  <compound kind="group">
+    <name>kumi_reductions</name>
+    <title>Generalized Reductions</title>
+    <filename>group__kumi__reductions.html</filename>
+    <subgroup>kumi_bit_and</subgroup>
+    <subgroup>kumi_bit_or</subgroup>
+    <subgroup>kumi_bit_xor</subgroup>
+    <subgroup>kumi_exclusive_scan_left</subgroup>
+    <subgroup>kumi_exclusive_scan_right</subgroup>
+    <subgroup>kumi_fold_left</subgroup>
+    <subgroup>kumi_fold_right</subgroup>
+    <subgroup>kumi_inclusive_scan_left</subgroup>
+    <subgroup>kumi_inclusive_scan_right</subgroup>
+    <subgroup>kumi_inner_product</subgroup>
+    <subgroup>kumi_map_reduce</subgroup>
+    <subgroup>kumi_max</subgroup>
+    <subgroup>kumi_max_flat</subgroup>
+    <subgroup>kumi_min</subgroup>
+    <subgroup>kumi_min_flat</subgroup>
+    <subgroup>kumi_prod</subgroup>
+    <subgroup>kumi_reduce</subgroup>
+    <subgroup>kumi_sum</subgroup>
+  </compound>
+  <compound kind="group">
+    <name>kumi_generators</name>
+    <title>Generators</title>
+    <filename>group__kumi__generators.html</filename>
+    <subgroup>kumi_fill</subgroup>
+    <subgroup>kumi_generate</subgroup>
+    <subgroup>kumi_iota</subgroup>
+    <subgroup>kumi_member_cast</subgroup>
+    <subgroup>kumi_push_back</subgroup>
+    <subgroup>kumi_push_front</subgroup>
   </compound>
   <compound kind="group">
     <name>kumi_generic_traits</name>
@@ -3619,33 +3721,33 @@
     </member>
   </compound>
   <compound kind="group">
-    <name>kumi_generic_transforms</name>
-    <title>Generic Transformations</title>
-    <filename>group__kumi__generic__transforms.html</filename>
-    <subgroup>kumi_apply</subgroup>
-    <subgroup>kumi_apply_field</subgroup>
-    <subgroup>kumi_for_each</subgroup>
-    <subgroup>kumi_map</subgroup>
-    <subgroup>kumi_to_ref</subgroup>
+    <name>kumi_index_projections</name>
+    <title>Index-wise Projections</title>
+    <filename>group__kumi__index__projections.html</filename>
+    <subgroup>kumi_back</subgroup>
+    <subgroup>kumi_extract</subgroup>
+    <subgroup>kumi_front</subgroup>
+    <subgroup>kumi_pop_back</subgroup>
+    <subgroup>kumi_pop_front</subgroup>
+    <subgroup>kumi_remove</subgroup>
+    <subgroup>kumi_reorder</subgroup>
+    <subgroup>kumi_reorder_fields</subgroup>
+    <subgroup>kumi_reverse</subgroup>
+    <subgroup>kumi_rotate_left</subgroup>
+    <subgroup>kumi_rotate_right</subgroup>
+    <subgroup>kumi_split</subgroup>
+  </compound>
+  <compound kind="group">
+    <name>kumi_tuple_transforms</name>
+    <title>Index-wise Transformations</title>
+    <filename>group__kumi__tuple__transforms.html</filename>
+    <subgroup>kumi_for_each_index</subgroup>
+    <subgroup>kumi_map_index</subgroup>
   </compound>
   <compound kind="group">
     <name>kumi_details</name>
     <title>Internal Implementation Helpers</title>
     <filename>group__kumi__details.html</filename>
-  </compound>
-  <compound kind="group">
-    <name>kumi_types</name>
-    <title>Kumi Types</title>
-    <filename>group__kumi__types.html</filename>
-    <class kind="class">kumi::as</class>
-    <class kind="class">kumi::field</class>
-    <class kind="class">kumi::identifier</class>
-    <class kind="class">kumi::index_t</class>
-    <class kind="class">kumi::label_t</class>
-    <class kind="class">kumi::name</class>
-    <class kind="class">kumi::str</class>
-    <class kind="class">kumi::unit</class>
-    <class kind="class">kumi::unknown</class>
   </compound>
   <compound kind="group">
     <name>kumi_array_related</name>
@@ -3659,161 +3761,26 @@
     <class kind="struct">kumi::as_array</class>
   </compound>
   <compound kind="group">
-    <name>kumi_algorithm</name>
-    <title>Product Type Algorithms</title>
-    <filename>group__kumi__algorithm.html</filename>
-    <subgroup>kumi_reductions</subgroup>
-    <subgroup>kumi_generators</subgroup>
-    <subgroup>kumi_queries</subgroup>
-    <subgroup>kumi_transforms</subgroup>
-  </compound>
-  <compound kind="group">
-    <name>kumi_reductions</name>
-    <title>Product Type Generalized Reductions</title>
-    <filename>group__kumi__reductions.html</filename>
-    <subgroup>kumi_bit_and</subgroup>
-    <subgroup>kumi_bit_or</subgroup>
-    <subgroup>kumi_bit_xor</subgroup>
-    <subgroup>kumi_exclusive_scan_left</subgroup>
-    <subgroup>kumi_exclusive_scan_right</subgroup>
-    <subgroup>kumi_fold_left</subgroup>
-    <subgroup>kumi_fold_right</subgroup>
-    <subgroup>kumi_inclusive_scan_left</subgroup>
-    <subgroup>kumi_inclusive_scan_right</subgroup>
-    <subgroup>kumi_inner_product</subgroup>
-    <subgroup>kumi_map_reduce</subgroup>
-    <subgroup>kumi_max</subgroup>
-    <subgroup>kumi_max_flat</subgroup>
-    <subgroup>kumi_min</subgroup>
-    <subgroup>kumi_min_flat</subgroup>
-    <subgroup>kumi_prod</subgroup>
-    <subgroup>kumi_reduce</subgroup>
-    <subgroup>kumi_sum</subgroup>
-  </compound>
-  <compound kind="group">
-    <name>kumi_generators</name>
-    <title>Product Type Generators</title>
-    <filename>group__kumi__generators.html</filename>
-    <subgroup>kumi_all_unique</subgroup>
-    <subgroup>kumi_as_flat_ptr</subgroup>
-    <subgroup>kumi_cartesian_product</subgroup>
-    <subgroup>kumi_cat</subgroup>
-    <subgroup>kumi_chunks</subgroup>
-    <subgroup>kumi_compress</subgroup>
-    <subgroup>kumi_extract</subgroup>
-    <subgroup>kumi_fill</subgroup>
-    <subgroup>kumi_filter</subgroup>
-    <subgroup>kumi_filter_not</subgroup>
-    <subgroup>kumi_flatten</subgroup>
-    <subgroup>kumi_flatten_all</subgroup>
-    <subgroup>kumi_generate</subgroup>
-    <subgroup>kumi_iota</subgroup>
-    <subgroup>kumi_member_cast</subgroup>
-    <subgroup>kumi_partition</subgroup>
-    <subgroup>kumi_pop_back</subgroup>
-    <subgroup>kumi_pop_front</subgroup>
-    <subgroup>kumi_push_back</subgroup>
-    <subgroup>kumi_push_front</subgroup>
-    <subgroup>kumi_reindex</subgroup>
-    <subgroup>kumi_remove</subgroup>
-    <subgroup>kumi_reorder</subgroup>
-    <subgroup>kumi_reorder_fields</subgroup>
-    <subgroup>kumi_reverse</subgroup>
-    <subgroup>kumi_rotate_left</subgroup>
-    <subgroup>kumi_rotate_right</subgroup>
-    <subgroup>kumi_split</subgroup>
-    <subgroup>kumi_tiles</subgroup>
-    <subgroup>kumi_transpose</subgroup>
-    <subgroup>kumi_unique</subgroup>
-    <subgroup>kumi_windows</subgroup>
-    <subgroup>kumi_zip</subgroup>
-    <subgroup>kumi_zip_max</subgroup>
-    <subgroup>kumi_zip_min</subgroup>
+    <name>kumi_projections</name>
+    <title>Projections</title>
+    <filename>group__kumi__projections.html</filename>
+    <subgroup>kumi_index_projections</subgroup>
+    <subgroup>kumi_type_projections</subgroup>
   </compound>
   <compound kind="group">
     <name>kumi_queries</name>
-    <title>Product Type Queries</title>
+    <title>Queries</title>
     <filename>group__kumi__queries.html</filename>
     <subgroup>kumi_all_of</subgroup>
     <subgroup>kumi_any_of</subgroup>
-    <subgroup>kumi_back</subgroup>
     <subgroup>kumi_contains</subgroup>
     <subgroup>kumi_contains_any</subgroup>
     <subgroup>kumi_contains_none</subgroup>
     <subgroup>kumi_contains_only</subgroup>
     <subgroup>kumi_count</subgroup>
     <subgroup>kumi_count_if</subgroup>
-    <subgroup>kumi_front</subgroup>
     <subgroup>kumi_locate</subgroup>
     <subgroup>kumi_none_of</subgroup>
-  </compound>
-  <compound kind="group">
-    <name>kumi_concepts</name>
-    <title>Product Type Related Concepts</title>
-    <filename>group__kumi__concepts.html</filename>
-    <concept>kumi::concepts::compatible_product_types</concept>
-    <concept>kumi::concepts::container</concept>
-    <concept>kumi::concepts::contains_identifier</concept>
-    <concept>kumi::concepts::contains_label</concept>
-    <concept>kumi::concepts::contains_type</concept>
-    <concept>kumi::concepts::empty_product_type</concept>
-    <concept>kumi::concepts::equality_comparable</concept>
-    <concept>kumi::concepts::equivalent</concept>
-    <concept>kumi::concepts::field</concept>
-    <concept>kumi::concepts::follows_same_semantic</concept>
-    <concept>kumi::concepts::fully_named</concept>
-    <concept>kumi::concepts::has_named_fields</concept>
-    <concept>kumi::concepts::homogeneous_product_type</concept>
-    <concept>kumi::concepts::identifier</concept>
-    <concept>kumi::concepts::monoid</concept>
-    <concept>kumi::concepts::non_empty_product_type</concept>
-    <concept>kumi::concepts::power_type</concept>
-    <concept>kumi::concepts::power_types</concept>
-    <concept>kumi::concepts::product_type</concept>
-    <concept>kumi::concepts::product_types</concept>
-    <concept>kumi::concepts::projection</concept>
-    <concept>kumi::concepts::projection_map</concept>
-    <concept>kumi::concepts::queryable_by_identifier</concept>
-    <concept>kumi::concepts::queryable_by_label</concept>
-    <concept>kumi::concepts::queryable_by_type</concept>
-    <concept>kumi::concepts::record_type</concept>
-    <concept>kumi::concepts::record_types</concept>
-    <concept>kumi::concepts::sized_product_type</concept>
-    <concept>kumi::concepts::sized_product_type_or_more</concept>
-    <concept>kumi::concepts::static_container</concept>
-    <concept>kumi::concepts::uniform_product_types</concept>
-    <concept>kumi::concepts::uniquely_labeled</concept>
-    <concept>kumi::concepts::uniquely_named</concept>
-    <concept>kumi::concepts::uniquely_typed</concept>
-    <concept>kumi::concepts::unit_type</concept>
-  </compound>
-  <compound kind="group">
-    <name>kumi_traits</name>
-    <title>Product Type Related Traits</title>
-    <filename>group__kumi__traits.html</filename>
-    <subgroup>kumi_generic_traits</subgroup>
-    <subgroup>kumi_record_traits</subgroup>
-    <subgroup>kumi_tuple_traits</subgroup>
-  </compound>
-  <compound kind="group">
-    <name>kumi_transforms</name>
-    <title>Product Type Transformations</title>
-    <filename>group__kumi__transforms.html</filename>
-    <subgroup>kumi_generic_transforms</subgroup>
-    <subgroup>kumi_record_transforms</subgroup>
-    <subgroup>kumi_tuple_transforms</subgroup>
-  </compound>
-  <compound kind="group">
-    <name>kumi_tuple_related</name>
-    <title>Product Types and associated Functions</title>
-    <filename>group__kumi__tuple__related.html</filename>
-    <subgroup>kumi_forward_as_tuple</subgroup>
-    <subgroup>kumi_from_tuple</subgroup>
-    <subgroup>kumi_make_tuple</subgroup>
-    <subgroup>kumi_tie</subgroup>
-    <subgroup>kumi_to_tuple</subgroup>
-    <class kind="struct">kumi::as_tuple</class>
-    <class kind="class">kumi::tuple</class>
   </compound>
   <compound kind="group">
     <name>kumi_record_traits</name>
@@ -3826,13 +3793,6 @@
       <anchor>gaa957535657d5741421f09c44c5faaa62</anchor>
       <arglist></arglist>
     </member>
-  </compound>
-  <compound kind="group">
-    <name>kumi_record_transforms</name>
-    <title>Record Type Specific Transformations</title>
-    <filename>group__kumi__record__transforms.html</filename>
-    <subgroup>kumi_for_each_field</subgroup>
-    <subgroup>kumi_map_field</subgroup>
   </compound>
   <compound kind="group">
     <name>kumi_record_related</name>
@@ -3866,17 +3826,67 @@
     </member>
   </compound>
   <compound kind="group">
+    <name>kumi_restructurings</name>
+    <title>Restructurings</title>
+    <filename>group__kumi__restructurings.html</filename>
+    <subgroup>kumi_as_flat_ptr</subgroup>
+    <subgroup>kumi_cartesian_product</subgroup>
+    <subgroup>kumi_cat</subgroup>
+    <subgroup>kumi_chunks</subgroup>
+    <subgroup>kumi_compress</subgroup>
+    <subgroup>kumi_flatten</subgroup>
+    <subgroup>kumi_flatten_all</subgroup>
+    <subgroup>kumi_reindex</subgroup>
+    <subgroup>kumi_tiles</subgroup>
+    <subgroup>kumi_transpose</subgroup>
+    <subgroup>kumi_windows</subgroup>
+    <subgroup>kumi_zip</subgroup>
+    <subgroup>kumi_zip_max</subgroup>
+    <subgroup>kumi_zip_min</subgroup>
+  </compound>
+  <compound kind="group">
+    <name>kumi_traits</name>
+    <title>Traits</title>
+    <filename>group__kumi__traits.html</filename>
+    <subgroup>kumi_generic_traits</subgroup>
+    <subgroup>kumi_record_traits</subgroup>
+    <subgroup>kumi_tuple_traits</subgroup>
+  </compound>
+  <compound kind="group">
+    <name>kumi_transforms</name>
+    <title>Transformations</title>
+    <filename>group__kumi__transforms.html</filename>
+    <subgroup>kumi_generic_transforms</subgroup>
+    <subgroup>kumi_record_transforms</subgroup>
+    <subgroup>kumi_tuple_transforms</subgroup>
+  </compound>
+  <compound kind="group">
     <name>kumi_tuple_traits</name>
     <title>Tuple Related Traits</title>
     <filename>group__kumi__tuple__traits.html</filename>
     <subgroup>kumi_is_homogeneous_v</subgroup>
   </compound>
   <compound kind="group">
-    <name>kumi_tuple_transforms</name>
-    <title>Tuple Type Specific Transformations</title>
-    <filename>group__kumi__tuple__transforms.html</filename>
-    <subgroup>kumi_for_each_index</subgroup>
-    <subgroup>kumi_map_index</subgroup>
+    <name>kumi_tuple_related</name>
+    <title>Tuple Types and associated Functions</title>
+    <filename>group__kumi__tuple__related.html</filename>
+    <subgroup>kumi_forward_as_tuple</subgroup>
+    <subgroup>kumi_from_tuple</subgroup>
+    <subgroup>kumi_make_tuple</subgroup>
+    <subgroup>kumi_tie</subgroup>
+    <subgroup>kumi_to_tuple</subgroup>
+    <class kind="struct">kumi::as_tuple</class>
+    <class kind="class">kumi::tuple</class>
+  </compound>
+  <compound kind="group">
+    <name>kumi_type_projections</name>
+    <title>Type-wise Projections</title>
+    <filename>group__kumi__type__projections.html</filename>
+    <subgroup>kumi_all_unique</subgroup>
+    <subgroup>kumi_filter</subgroup>
+    <subgroup>kumi_filter_not</subgroup>
+    <subgroup>kumi_partition</subgroup>
+    <subgroup>kumi_unique</subgroup>
   </compound>
   <compound kind="group">
     <name>kumi_utility</name>
@@ -3900,8 +3910,17 @@
     <subgroup>kumi_only</subgroup>
     <subgroup>kumi_projection_map</subgroup>
     <subgroup>kumi_values_of</subgroup>
+    <class kind="class">kumi::as</class>
     <class kind="class">kumi::builder</class>
+    <class kind="class">kumi::field</class>
+    <class kind="class">kumi::identifier</class>
+    <class kind="class">kumi::index_t</class>
+    <class kind="class">kumi::label_t</class>
+    <class kind="class">kumi::name</class>
     <class kind="class">kumi::projection_map</class>
+    <class kind="class">kumi::str</class>
+    <class kind="class">kumi::unit</class>
+    <class kind="class">kumi::unknown</class>
     <member kind="function">
       <type>auto</type>
       <name>as_streamable</name>

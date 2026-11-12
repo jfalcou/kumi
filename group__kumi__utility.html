@@ -142,7 +142,7 @@ $(function(){initNavTree('group__kumi__utility.html','',''); });
 </div><!--header-->
 <div class="contents">
 
-<p>Helpers to adapt, build and introspect kumi::product_type.  
+<p>Types and functions to adapt, build, name, index, and introspect product types.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-groups" class="groupheader"><a id="groups" name="groups"></a>
@@ -186,10 +186,28 @@ Topics</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-nested-classes" class="groupheader"><a id="nested-classes" name="nested-classes"></a>
 Classes</h2></td></tr>
+<tr class="memitem:kumi_3A_3Aas_3C_20T_20_3E" id="r_kumi_3A_3Aas_3C_20T_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1as.html">kumi::as&lt; T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Lightweight type-wrapper.  <a href="structkumi_1_1as.html#details">More...</a><br /></td></tr>
 <tr class="memitem:kumi_3A_3Abuilder_3C_20T_20_3E" id="r_kumi_3A_3Abuilder_3C_20T_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1builder.html">kumi::builder&lt; T &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight"><a class="el" href="structkumi_1_1builder.html" title="kumi::builder provides a generic way of defining a product type.">kumi::builder</a> provides a generic way of defining a product type.  <a href="structkumi_1_1builder.html#details">More...</a><br /></td></tr>
+<tr class="memitem:kumi_3A_3Afield_3C_20Id_2C_20T_20_3E" id="r_kumi_3A_3Afield_3C_20Id_2C_20T_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1field.html">kumi::field&lt; Id, T &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Named wrapper over a type.  <a href="structkumi_1_1field.html#details">More...</a><br /></td></tr>
+<tr class="memitem:kumi_3A_3Aidentifier_3C_20ID_2C_20Checker_20_3E" id="r_kumi_3A_3Aidentifier_3C_20ID_2C_20Checker_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1identifier.html">kumi::identifier&lt; ID, Checker &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">identifier definition class  <a href="structkumi_1_1identifier.html#details">More...</a><br /></td></tr>
+<tr class="memitem:kumi_3A_3Aindex_5Ft_3C_20N_20_3E" id="r_kumi_3A_3Aindex_5Ft_3C_20N_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1index__t.html">kumi::index_t&lt; N &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Integral constant type.  <a href="structkumi_1_1index__t.html#details">More...</a><br /></td></tr>
+<tr class="memitem:kumi_3A_3Alabel_5Ft_3C_20Label_20_3E" id="r_kumi_3A_3Alabel_5Ft_3C_20Label_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1label__t.html">kumi::label_t&lt; Label &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Literal constant type.  <a href="structkumi_1_1label__t.html#details">More...</a><br /></td></tr>
+<tr class="memitem:kumi_3A_3Aname_3C_20ID_20_3E" id="r_kumi_3A_3Aname_3C_20ID_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1name.html">kumi::name&lt; ID &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Compile-time text based identifier.  <a href="structkumi_1_1name.html#details">More...</a><br /></td></tr>
 <tr class="memitem:kumi_3A_3Aprojection_5Fmap_3C_20V_20_3E" id="r_kumi_3A_3Aprojection_5Fmap_3C_20V_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1projection__map.html">kumi::projection_map&lt; V &gt;</a></td></tr>
 <tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A stateless, compile-time schema for product type transformation.  <a href="structkumi_1_1projection__map.html#details">More...</a><br /></td></tr>
+<tr class="memitem:kumi_3A_3Astr_3C_20N_20_3E" id="r_kumi_3A_3Astr_3C_20N_20_3E"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1str.html">kumi::str&lt; N &gt;</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Static string used to create named fields.  <a href="structkumi_1_1str.html#details">More...</a><br /></td></tr>
+<tr class="memitem:kumi_3A_3Aunit" id="r_kumi_3A_3Aunit"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1unit.html">kumi::unit</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">A type representing the product of no type, also called the unit type.  <a href="structkumi_1_1unit.html#details">More...</a><br /></td></tr>
+<tr class="memitem:kumi_3A_3Aunknown" id="r_kumi_3A_3Aunknown"><td class="memItemLeft">class &#160;</td><td class="memItemRight"><a class="el" href="structkumi_1_1unknown.html">kumi::unknown</a></td></tr>
+<tr class="memdesc:"><td class="mdescLeft">&#160;</td><td class="mdescRight">Type indicating an identifier was not found in a given kumi::product_type.  <a href="structkumi_1_1unknown.html#details">More...</a><br /></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
@@ -228,7 +246,7 @@ Variables</h2></td></tr>
 <tr class="memdesc:gacadc026868e6654e80c57432643c804a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Option restricting an identifier to accept values whose type satisfies the trait <span class="tt">Traits</span>.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Helpers to adapt, build and introspect kumi::product_type. </p>
+<div class="textblock"><p>Types and functions to adapt, build, name, index, and introspect product types. </p>
 </div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="gae8a72b55c5e0a89b70663342e2c36eaf" name="gae8a72b55c5e0a89b70663342e2c36eaf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gae8a72b55c5e0a89b70663342e2c36eaf">&#9670;&#160;</a></span>as_streamable()</h2>

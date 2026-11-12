@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="KUMI - The C++20 Compact Tuple Tools" />
 <meta name="twitter:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
 <meta name="twitter:image" content="https://jfalcou.github.io/kumi/card.png" />
-<title>KUMI: Product Type Generators</title>
+<title>KUMI: Generators</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -134,88 +134,30 @@ $(function(){initNavTree('group__kumi__generators.html','',''); });
 <div class="header">
   <div class="summary">
 <a href="#groups">Topics</a>  </div>
-  <div class="headertitle"><div class="title">Product Type Generators <div class="ingroups"><a class="el" href="group__kumi__algorithm.html">Product Type Algorithms</a></div></div></div>
+  <div class="headertitle"><div class="title">Generators <div class="ingroups"><a class="el" href="group__kumi__algorithm.html">Algorithms</a></div></div></div>
 </div><!--header-->
 <div class="contents">
 
-<p>Algorithms generating product types.  
+<p>Algorithms building product types from values that no input product type holds.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-groups" class="groupheader"><a id="groups" name="groups"></a>
 Topics</h2></td></tr>
-<tr class="memitem:kumi_5Fall_5Funique" id="r_kumi_5Fall_5Funique"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__all__unique.html">kumi::all_unique</a></td></tr>
-<tr class="memdesc:group__kumi__all__unique"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object returning a product type containing the values of the first occurrence of each type in <span class="tt">t</span>. <br /></td></tr>
-<tr class="memitem:kumi_5Fas_5Fflat_5Fptr" id="r_kumi_5Fas_5Fflat_5Fptr"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__as__flat__ptr.html">kumi::as_flat_ptr</a></td></tr>
-<tr class="memdesc:group__kumi__as__flat__ptr"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object converting recursively a product type of product types into a flat product type of pointers to each of its components. <br /></td></tr>
-<tr class="memitem:kumi_5Fcartesian_5Fproduct" id="r_kumi_5Fcartesian_5Fproduct"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__cartesian__product.html">kumi::cartesian_product</a></td></tr>
-<tr class="memdesc:group__kumi__cartesian__product"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object returning the Cartesian Product of all elements of its arguments product types. <br /></td></tr>
-<tr class="memitem:kumi_5Fcat" id="r_kumi_5Fcat"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__cat.html">kumi::cat</a></td></tr>
-<tr class="memdesc:group__kumi__cat"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object concatenating multiple product types into a single one. <br /></td></tr>
-<tr class="memitem:kumi_5Fchunks" id="r_kumi_5Fchunks"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__chunks.html">kumi::chunks</a></td></tr>
-<tr class="memdesc:group__kumi__chunks"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object creating a tuple of product types, each containing <span class="tt">N</span> consecutive elements from <span class="tt">t</span>. Chunks starts at 0 and advance by <span class="tt">N</span> element each time. <br /></td></tr>
-<tr class="memitem:kumi_5Fcompress" id="r_kumi_5Fcompress"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__compress.html">kumi::compress</a></td></tr>
-<tr class="memdesc:group__kumi__compress"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object converting a product type of product type into a single product type recursively, or returns the input. <br /></td></tr>
-<tr class="memitem:kumi_5Fextract" id="r_kumi_5Fextract"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__extract.html">kumi::extract</a></td></tr>
-<tr class="memdesc:group__kumi__extract"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object extracting a sub product type from a product type. <br /></td></tr>
 <tr class="memitem:kumi_5Ffill" id="r_kumi_5Ffill"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__fill.html">kumi::fill</a></td></tr>
 <tr class="memdesc:group__kumi__fill"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object creating a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> containing <span class="tt">N</span> copies of <span class="tt">v</span>. <br /></td></tr>
-<tr class="memitem:kumi_5Ffilter" id="r_kumi_5Ffilter"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__filter.html">kumi::filter</a></td></tr>
-<tr class="memdesc:group__kumi__filter"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object filtering a product type over a predicate. <br /></td></tr>
-<tr class="memitem:kumi_5Ffilter_5Fnot" id="r_kumi_5Ffilter_5Fnot"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__filter__not.html">kumi::filter_not</a></td></tr>
-<tr class="memdesc:group__kumi__filter__not"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object filtering a product type over a predicate. <br /></td></tr>
-<tr class="memitem:kumi_5Fflatten" id="r_kumi_5Fflatten"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__flatten.html">kumi::flatten</a></td></tr>
-<tr class="memdesc:group__kumi__flatten"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object converting a product type of product types into a product type of all elements. <br /></td></tr>
-<tr class="memitem:kumi_5Fflatten_5Fall" id="r_kumi_5Fflatten_5Fall"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__flatten__all.html">kumi::flatten_all</a></td></tr>
-<tr class="memdesc:group__kumi__flatten__all"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object converting recursively a product type of product types into a product type of all elements. <br /></td></tr>
 <tr class="memitem:kumi_5Fgenerate" id="r_kumi_5Fgenerate"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__generate.html">kumi::generate</a></td></tr>
 <tr class="memdesc:group__kumi__generate"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object creating a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> containing <span class="tt">N</span> applications of the <span class="tt">f</span> Callable. <br /></td></tr>
 <tr class="memitem:kumi_5Fiota" id="r_kumi_5Fiota"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__iota.html">kumi::iota</a></td></tr>
 <tr class="memdesc:group__kumi__iota"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object creating a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> containing an increasing ramp of values. <br /></td></tr>
 <tr class="memitem:kumi_5Fmember_5Fcast" id="r_kumi_5Fmember_5Fcast"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__member__cast.html">kumi::member_cast</a></td></tr>
 <tr class="memdesc:group__kumi__member__cast"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object converting a product_type&lt;Ts...&gt; to an instance of a product_type&lt;Target...&gt;. <br /></td></tr>
-<tr class="memitem:kumi_5Fpartition" id="r_kumi_5Fpartition"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__partition.html">kumi::partition</a></td></tr>
-<tr class="memdesc:group__kumi__partition"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object partitioning a product type over a predicate. <br /></td></tr>
-<tr class="memitem:kumi_5Fpop_5Fback" id="r_kumi_5Fpop_5Fback"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__pop__back.html">kumi::pop_back</a></td></tr>
-<tr class="memdesc:group__kumi__pop__back"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object removing the last (if any) element of <span class="tt">t</span>. <br /></td></tr>
-<tr class="memitem:kumi_5Fpop_5Ffront" id="r_kumi_5Fpop_5Ffront"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__pop__front.html">kumi::pop_front</a></td></tr>
-<tr class="memdesc:group__kumi__pop__front"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object removing the first (if any) element of <span class="tt">t</span>. <br /></td></tr>
 <tr class="memitem:kumi_5Fpush_5Fback" id="r_kumi_5Fpush_5Fback"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__push__back.html">kumi::push_back</a></td></tr>
 <tr class="memdesc:group__kumi__push__back"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object constructing a product type by adding a value <span class="tt">v</span> at the end of <span class="tt">t</span>. <br /></td></tr>
 <tr class="memitem:kumi_5Fpush_5Ffront" id="r_kumi_5Fpush_5Ffront"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__push__front.html">kumi::push_front</a></td></tr>
 <tr class="memdesc:group__kumi__push__front"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object constructing a product type by adding a value <span class="tt">v</span> at the beginning of <span class="tt">t</span>. <br /></td></tr>
-<tr class="memitem:kumi_5Freindex" id="r_kumi_5Freindex"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__reindex.html">kumi::reindex</a></td></tr>
-<tr class="memdesc:group__kumi__reindex"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object reindex elements of a Product Type. <br /></td></tr>
-<tr class="memitem:kumi_5Fremove" id="r_kumi_5Fremove"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__remove.html">kumi::remove</a></td></tr>
-<tr class="memdesc:group__kumi__remove"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object removing a sub product type from a product type. <br /></td></tr>
-<tr class="memitem:kumi_5Freorder" id="r_kumi_5Freorder"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__reorder.html">kumi::reorder</a></td></tr>
-<tr class="memdesc:group__kumi__reorder"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object reordering elements of a product type. <br /></td></tr>
-<tr class="memitem:kumi_5Freorder_5Ffields" id="r_kumi_5Freorder_5Ffields"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__reorder__fields.html">kumi::reorder_fields</a></td></tr>
-<tr class="memdesc:group__kumi__reorder__fields"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object reordering elements of a Record Type. <br /></td></tr>
-<tr class="memitem:kumi_5Freverse" id="r_kumi_5Freverse"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__reverse.html">kumi::reverse</a></td></tr>
-<tr class="memdesc:group__kumi__reverse"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object reversing elements of a product type. <br /></td></tr>
-<tr class="memitem:kumi_5Frotate_5Fleft" id="r_kumi_5Frotate_5Fleft"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__rotate__left.html">kumi::rotate_left</a></td></tr>
-<tr class="memdesc:group__kumi__rotate__left"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object. <br /></td></tr>
-<tr class="memitem:kumi_5Frotate_5Fright" id="r_kumi_5Frotate_5Fright"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__rotate__right.html">kumi::rotate_right</a></td></tr>
-<tr class="memdesc:group__kumi__rotate__right"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object. <br /></td></tr>
-<tr class="memitem:kumi_5Fsplit" id="r_kumi_5Fsplit"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__split.html">kumi::split</a></td></tr>
-<tr class="memdesc:group__kumi__split"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object splitting a product type into two. <br /></td></tr>
-<tr class="memitem:kumi_5Ftiles" id="r_kumi_5Ftiles"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__tiles.html">kumi::tiles</a></td></tr>
-<tr class="memdesc:group__kumi__tiles"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object creating a tuple of product types, each containing <span class="tt">N</span> consecutive elements from <span class="tt">t</span>. Tiles starts at 0 and advance by <span class="tt">O</span> element each time. <br /></td></tr>
-<tr class="memitem:kumi_5Ftranspose" id="r_kumi_5Ftranspose"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__transpose.html">kumi::transpose</a></td></tr>
-<tr class="memdesc:group__kumi__transpose"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object transposing a product type of product types by shifting elements in their transposed position always returning a tuple as the external product type. <br /></td></tr>
-<tr class="memitem:kumi_5Funique" id="r_kumi_5Funique"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__unique.html">kumi::unique</a></td></tr>
-<tr class="memdesc:group__kumi__unique"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object returning a product type with consecutive duplicate types removed (pairwise uniqueness). <br /></td></tr>
-<tr class="memitem:kumi_5Fwindows" id="r_kumi_5Fwindows"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__windows.html">kumi::windows</a></td></tr>
-<tr class="memdesc:group__kumi__windows"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object creating a tuple of product types, each containing <span class="tt">N</span> consecutive elements from <span class="tt">t</span>. Windows starts at 0 and advance by <span class="tt">1</span> element each time. <br /></td></tr>
-<tr class="memitem:kumi_5Fzip" id="r_kumi_5Fzip"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__zip.html">kumi::zip</a></td></tr>
-<tr class="memdesc:group__kumi__zip"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object constructing a tuple where the ith element is the product type of all ith elements of <span class="tt">t</span>,<span class="tt">ts</span>... <br /></td></tr>
-<tr class="memitem:kumi_5Fzip_5Fmax" id="r_kumi_5Fzip_5Fmax"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__zip__max.html">kumi::zip_max</a></td></tr>
-<tr class="memdesc:group__kumi__zip__max"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object constructing a tuple where the ith element is the product type of all ith elements of <span class="tt">t</span>,<span class="tt">ts</span>... <br /></td></tr>
-<tr class="memitem:kumi_5Fzip_5Fmin" id="r_kumi_5Fzip_5Fmin"><td class="memItemLeft">&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__zip__min.html">kumi::zip_min</a></td></tr>
-<tr class="memdesc:group__kumi__zip__min"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object constructing a tuple where the ith element is the product type of all ith elements of <span class="tt">t</span>,<span class="tt">ts</span>... <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Algorithms generating product types. </p>
+<div class="textblock"><p>Algorithms building product types from values that no input product type holds. </p>
 </div></div><!-- contents -->
 </div><!-- doc-content -->
 </div><!-- container -->

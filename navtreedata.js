@@ -43,13 +43,14 @@ var NAVTREE =
     ] ],
     [ "Reference Documentation", "kumi_reference.html", [
       [ "Types", "group__kumi__tuple__related.html", [
-        [ "Product Types and Functions", "group__kumi__tuple__related.html", null ],
+        [ "Tuple Types and Functions", "group__kumi__tuple__related.html", null ],
         [ "Record Types and Functions", "group__kumi__record__related.html", null ],
-        [ "Power Types and Functions", "group__kumi__array__related.html", null ],
-        [ "Types", "group__kumi__types.html", null ]
+        [ "Power Types and Functions", "group__kumi__array__related.html", null ]
       ] ],
       [ "Algorithms", "group__kumi__transforms.html", [
         [ "Transformations", "group__kumi__transforms.html", null ],
+        [ "Projections", "group__kumi__projections.html", null ],
+        [ "Restructurings", "group__kumi__restructurings.html", null ],
         [ "Queries", "group__kumi__queries.html", null ],
         [ "Generators", "group__kumi__generators.html", null ],
         [ "Reductions", "group__kumi__reductions.html", null ]

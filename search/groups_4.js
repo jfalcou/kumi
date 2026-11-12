@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['helpers_0',['Helpers',['../group__kumi__functional.html',1,'Functional Helpers'],['../group__kumi__details.html',1,'Internal Implementation Helpers']]]
+  ['generalized_20reductions_0',['Generalized Reductions',['../group__kumi__reductions.html',1,'']]],
+  ['generators_1',['Generators',['../group__kumi__generators.html',1,'']]],
+  ['generic_20traits_2',['Generic Traits',['../group__kumi__generic__traits.html',1,'']]]
 ];
