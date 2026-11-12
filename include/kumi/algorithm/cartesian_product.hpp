@@ -47,7 +47,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_cartesian_product kumi::cartesian_product
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_restructurings
   //! @brief Callable object returning the Cartesian Product of all elements of its arguments product types
   //====================================================================================================================
   /**

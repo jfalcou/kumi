@@ -145,7 +145,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_compress kumi::compress
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_restructurings
   //! @brief Callable object converting a product type of product type into a single product type recursively, or
   //!   returns the input.
   //====================================================================================================================
@@ -208,7 +208,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_flatten kumi::flatten
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_restructurings
   //! @brief Callable object converting a product type of product types into a product type of all elements.
   //====================================================================================================================
   /**
@@ -267,7 +267,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_flatten_all kumi::flatten_all
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_restructurings
   //! @brief Callable object converting recursively a product type of product types into a product type of all elements.
   //====================================================================================================================
   /**
@@ -338,7 +338,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_as_flat_ptr kumi::as_flat_ptr
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_restructurings
   //! @brief Callable object converting recursively a product type of product types into a flat product type of pointers
   //!   to each of its components.
   //====================================================================================================================

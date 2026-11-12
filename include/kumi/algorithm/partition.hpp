@@ -66,7 +66,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_partition kumi::partition
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_type_projections
   //! @brief Callable object partitioning a product type over a predicate
   //====================================================================================================================
   /**
@@ -129,7 +129,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_filter kumi::filter
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_type_projections
   //! @brief Callable object filtering a product type over a predicate
   //====================================================================================================================
   /**
@@ -191,7 +191,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_filter_not kumi::filter_not
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_type_projections
   //! @brief Callable object filtering a product type over a predicate
   //====================================================================================================================
   /**

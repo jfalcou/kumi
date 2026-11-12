@@ -38,7 +38,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_cat kumi::cat
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_restructurings
   //! @brief Callable object concatenating multiple product types into a single one
   //====================================================================================================================
   /**

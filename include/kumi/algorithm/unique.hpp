@@ -56,7 +56,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_unique kumi::unique
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_type_projections
   //! @brief Callable object returning a product type with consecutive duplicate types removed (pairwise uniqueness).
   //====================================================================================================================
   /**
@@ -113,7 +113,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_all_unique kumi::all_unique
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_type_projections
   //! @brief Callable object returning a product type containing the values of the first occurrence of each type in `t`.
   //====================================================================================================================
   /**

@@ -92,7 +92,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_zip kumi::zip
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_restructurings
   //! @brief Callable object constructing a tuple where the ith element is the product type of all ith elements of
   //!   `t`,`ts`...
   //====================================================================================================================
@@ -158,7 +158,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_zip_min kumi::zip_min
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_restructurings
   //! @brief Callable object constructing a tuple where the ith element is the product type of all ith elements of
   //!   `t`,`ts`...
   //====================================================================================================================
@@ -226,7 +226,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_zip_max kumi::zip_max
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_restructurings
   //! @brief Callable object constructing a tuple where the ith element is the product type of all ith elements of
   //!   `t`,`ts`...
   //====================================================================================================================

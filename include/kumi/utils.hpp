@@ -18,12 +18,12 @@ namespace kumi
   //====================================================================================================================
   /**
     @defgroup kumi_utility   Utility Types and Functions
-    @brief    Helpers to adapt, build and introspect kumi::product_type
+    @brief    Types and functions to adapt, build, name, index, and introspect product types
 
-    @defgroup kumi_concepts     Product Type Related Concepts
+    @defgroup kumi_concepts     Concepts
     @brief    Concepts refining product type properties
 
-    @defgroup kumi_traits     Product Type Related Traits
+    @defgroup kumi_traits     Traits
     @brief    Traits and extension points for product types
 
     @defgroup kumi_generic_traits Generic Traits

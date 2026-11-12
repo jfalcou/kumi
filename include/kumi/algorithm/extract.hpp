@@ -79,7 +79,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_extract kumi::extract
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_index_projections
   //! @brief Callable object extracting a sub product type from a product type
   //====================================================================================================================
   /**
@@ -149,7 +149,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_remove kumi::remove
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_index_projections
   //! @brief Callable object removing a sub product type from a product type
   //====================================================================================================================
   /**
@@ -219,7 +219,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_split kumi::split
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_index_projections
   //! @brief Callable object splitting a product type into two
   //====================================================================================================================
   /**
