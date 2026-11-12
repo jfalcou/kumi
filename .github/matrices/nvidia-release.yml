@@ -8,7 +8,7 @@
 runs-on: cuda
 configs: [Release]
 build-targets: unit.exe
-test-targets: unit
+test-targets: ^unit\.
 rows:
   - { preset: "clang-cuda"                                }
   - { preset: "nvcc"                                      }

@@ -8,7 +8,7 @@
 runs-on: windows-2022
 configs: [Release]
 build-targets: unit.exe
-test-targets: unit
+test-targets: ^unit\.
 rows:
   - { name: "MSVC"    , preset: "msvc"    }
   - { name: "Clang-CL", preset: "clangcl" }

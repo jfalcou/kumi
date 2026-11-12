@@ -8,7 +8,7 @@
 runs-on: ubuntu-latest
 configs: [Release]
 build-targets: unit.exe
-test-targets: unit
+test-targets: ^unit\.
 rows:
   - { name: "gcc"           , preset: "gcc"           , image: "v11" }
   - { name: "clang"         , preset: "clang"         , image: "v11" }

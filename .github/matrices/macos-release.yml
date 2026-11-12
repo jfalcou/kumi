@@ -8,7 +8,7 @@
 runs-on: macos-15
 configs: [Release]
 build-targets: unit.exe
-test-targets: unit
+test-targets: ^unit\.
 rows:
   - { name: "apple-clang"       , preset: "clang"         }
   - { name: "apple-clang libc++", preset: "clang-libc++"  }
