@@ -38,7 +38,7 @@
         <tab type="user" url="@ref kumi_utility"   title="Utility"/>
         <tab type="user" url="@ref kumi_functional" title="Functional"/>
       </tab>
-      <tab type="user" url="@ref kumi"    title="Kumi Namespace"/>
+      <tab type="user" url="@ref kumi"    title="kumi Namespace"/>
     </tab>
     <tab type="user" url="mailto:joel.falcou+kumi@gmail.com?subject=The%20KUMI%20Library"    title="Contact"/>
   </navindex>
