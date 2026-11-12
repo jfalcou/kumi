@@ -165,9 +165,12 @@ template&lt;typename... Ts&gt; </div>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
-<div class="line"><span class="keyword">using </span><a class="code hl_typedef" href="#ga87c3ce71d1306bbe56aa7dd6bb789b5d">cat_index_sequence</a>;</div>
-<div class="ttc" id="agroup__kumi__function__cat__index__sequence_html_ga87c3ce71d1306bbe56aa7dd6bb789b5d"><div class="ttname"><a href="#ga87c3ce71d1306bbe56aa7dd6bb789b5d">kumi::function::cat_index_sequence</a></div><div class="ttdeci">decltype(kumi_implementation_defined) cat_index_sequence</div><div class="ttdef"><b>Definition</b> index_sequence.hpp:139</div></div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::function</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="#ga87c3ce71d1306bbe56aa7dd6bb789b5d">cat_index_sequence</a> = kumi_implementation_defined;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__kumi__function__cat__index__sequence_html_ga87c3ce71d1306bbe56aa7dd6bb789b5d"><div class="ttname"><a href="#ga87c3ce71d1306bbe56aa7dd6bb789b5d">kumi::function::cat_index_sequence</a></div><div class="ttdeci">decltype(kumi_implementation_defined) cat_index_sequence</div><div class="ttdef"><b>Definition</b> index_sequence.hpp:145</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">Ts...</span>: List of <span class="tt">std::index_sequence</span> to concatenate.</li>

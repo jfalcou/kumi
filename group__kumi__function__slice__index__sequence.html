@@ -167,9 +167,12 @@ template&lt;std::size_t B, std::size_t E, std::size_t S = 1&gt; </div>
 </div><!-- fragment --><h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> B Begin, std::<span class="keywordtype">size_t</span> B End, std::<span class="keywordtype">size_t</span> B Step&gt;</div>
-<div class="line"><span class="keyword">using </span><a class="code hl_typedef" href="#gab5f7e8b998190a1b17109811a279a6d6">slice_index_sequence</a>;</div>
-<div class="ttc" id="agroup__kumi__function__slice__index__sequence_html_gab5f7e8b998190a1b17109811a279a6d6"><div class="ttname"><a href="#gab5f7e8b998190a1b17109811a279a6d6">kumi::function::slice_index_sequence</a></div><div class="ttdeci">decltype(kumi_implementation_defined &gt;) slice_index_sequence</div><div class="ttdef"><b>Definition</b> index_sequence.hpp:366</div></div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::function</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> B, std::<span class="keywordtype">size_t</span> E, std::<span class="keywordtype">size_t</span> S = 1&gt;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="#gab5f7e8b998190a1b17109811a279a6d6">slice_index_sequence</a> = kumi_implementation_defined;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__kumi__function__slice__index__sequence_html_gab5f7e8b998190a1b17109811a279a6d6"><div class="ttname"><a href="#gab5f7e8b998190a1b17109811a279a6d6">kumi::function::slice_index_sequence</a></div><div class="ttdeci">decltype(kumi_implementation_defined &gt;) slice_index_sequence</div><div class="ttdef"><b>Definition</b> index_sequence.hpp:393</div></div>
 </div><!-- fragment --><h3 class="groupheader">Template Parameters </h3>
 <ul>
 <li><span class="tt">B</span>: Compile-time index marking the beginning of the slice range</li>
@@ -177,7 +180,7 @@ template&lt;std::size_t B, std::size_t E, std::size_t S = 1&gt; </div>
 <li><span class="tt">S</span>: Compile-time stride step hopping increment factor</li>
 </ul>
 <h3 class="groupheader">Return value </h3>
-<p>A <span class="tt">std::index_sequence</span> tracking linear jumps matching <span class="tt">Begin + I * Step</span>. </p>
+<p>A <span class="tt">std::index_sequence</span> tracking linear jumps matching <span class="tt">B + I * S</span>. </p>
 
 </div>
 </div>

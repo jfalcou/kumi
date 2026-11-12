@@ -172,9 +172,13 @@ Variables</h2></td></tr>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type T&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_variable" href="#ga4c69a49971100b7bc9c7effd7c43f191">apply</a>(Function &amp;&amp; f, T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__kumi__apply_html_ga4c69a49971100b7bc9c7effd7c43f191"><div class="ttname"><a href="#ga4c69a49971100b7bc9c7effd7c43f191">kumi::apply</a></div><div class="ttdeci">constexpr apply_t apply</div><div class="ttdef"><b>Definition</b> apply.hpp:102</div></div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, concepts::product_type T&gt;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_variable" href="#ga4c69a49971100b7bc9c7effd7c43f191">apply</a>(Function &amp;&amp; f, T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__kumi__apply_html_ga4c69a49971100b7bc9c7effd7c43f191"><div class="ttname"><a href="#ga4c69a49971100b7bc9c7effd7c43f191">kumi::apply</a></div><div class="ttdeci">constexpr apply_t apply</div><div class="ttdef"><b>Definition</b> apply.hpp:105</div></div>
+<div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">f</span>: Callable object to be invoked</li>

@@ -174,13 +174,18 @@ Variables</h2></td></tr>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type S1, product_type S2, <span class="keyword">typename</span> T, <span class="keyword">typename</span> Sum, <span class="keyword">typename</span> Prod&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga712c681a51bdbc86d41b160deddd2e1d">inner_product</a>(S1 &amp;&amp; s1, S2 &amp;&amp; s2, T init, Sum <a class="code hl_variable" href="group__kumi__sum.html#ga3e8b585399de360c3ab55efc2fa0ed8c">sum</a>, Prod <a class="code hl_variable" href="group__kumi__prod.html#ga6c139ebafaebc0f7dbca2fd57aee943c">prod</a>) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__kumi__inner__product_html_ga712c681a51bdbc86d41b160deddd2e1d"><div class="ttname"><a href="#ga712c681a51bdbc86d41b160deddd2e1d">kumi::inner_product</a></div><div class="ttdeci">constexpr inner_product_t inner_product</div><div class="ttdef"><b>Definition</b> inner_product.hpp:139</div></div>
-<div class="ttc" id="agroup__kumi__prod_html_ga6c139ebafaebc0f7dbca2fd57aee943c"><div class="ttname"><a href="group__kumi__prod.html#ga6c139ebafaebc0f7dbca2fd57aee943c">kumi::prod</a></div><div class="ttdeci">constexpr prod_t prod</div><div class="ttdef"><b>Definition</b> reduce.hpp:445</div></div>
-<div class="ttc" id="agroup__kumi__sum_html_ga3e8b585399de360c3ab55efc2fa0ed8c"><div class="ttname"><a href="group__kumi__sum.html#ga3e8b585399de360c3ab55efc2fa0ed8c">kumi::sum</a></div><div class="ttdeci">constexpr sum_t sum</div><div class="ttdef"><b>Definition</b> reduce.hpp:373</div></div>
-</div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type S1, product_type S2, <span class="keyword">typename</span> T&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga712c681a51bdbc86d41b160deddd2e1d">inner_product</a>(S1 &amp;&amp; s1, S2 &amp;&amp; s2, T init) <span class="keyword">noexcept</span>;</div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;concepts::product_type S1, concepts::product_type S2, <span class="keyword">typename</span> T, <span class="keyword">typename</span> Sum, <span class="keyword">typename</span> Prod&gt;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga712c681a51bdbc86d41b160deddd2e1d">inner_product</a>(S1 &amp;&amp; s1, S2 &amp;&amp; s2, T init, Sum <a class="code hl_variable" href="group__kumi__sum.html#ga3e8b585399de360c3ab55efc2fa0ed8c">sum</a>, Prod <a class="code hl_variable" href="group__kumi__prod.html#ga6c139ebafaebc0f7dbca2fd57aee943c">prod</a>) <span class="keyword">noexcept</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">template</span>&lt;concepts::product_type S1, concepts::product_type S2, <span class="keyword">typename</span> T&gt;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga712c681a51bdbc86d41b160deddd2e1d">inner_product</a>(S1 &amp;&amp; s1, S2 &amp;&amp; s2, T init) <span class="keyword">noexcept</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__kumi__inner__product_html_ga712c681a51bdbc86d41b160deddd2e1d"><div class="ttname"><a href="#ga712c681a51bdbc86d41b160deddd2e1d">kumi::inner_product</a></div><div class="ttdeci">constexpr inner_product_t inner_product</div><div class="ttdef"><b>Definition</b> inner_product.hpp:140</div></div>
+<div class="ttc" id="agroup__kumi__prod_html_ga6c139ebafaebc0f7dbca2fd57aee943c"><div class="ttname"><a href="group__kumi__prod.html#ga6c139ebafaebc0f7dbca2fd57aee943c">kumi::prod</a></div><div class="ttdeci">constexpr prod_t prod</div><div class="ttdef"><b>Definition</b> reduce.hpp:449</div></div>
+<div class="ttc" id="agroup__kumi__sum_html_ga3e8b585399de360c3ab55efc2fa0ed8c"><div class="ttname"><a href="group__kumi__sum.html#ga3e8b585399de360c3ab55efc2fa0ed8c">kumi::sum</a></div><div class="ttdeci">constexpr sum_t sum</div><div class="ttdef"><b>Definition</b> reduce.hpp:376</div></div>
+<div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">s1</span>: First product type to operate on</li>

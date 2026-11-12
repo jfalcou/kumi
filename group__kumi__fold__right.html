@@ -171,11 +171,16 @@ Variables</h2></td></tr>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type T, <span class="keyword">typename</span> Value&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaee418c18e09e3b1789c23ec00681db42">fold_right</a>(Function &amp;&amp; f, T &amp;&amp; t, Value init);</div>
-<div class="ttc" id="agroup__kumi__fold__right_html_gaee418c18e09e3b1789c23ec00681db42"><div class="ttname"><a href="#gaee418c18e09e3b1789c23ec00681db42">kumi::fold_right</a></div><div class="ttdeci">constexpr fold_right_t fold_right</div><div class="ttdef"><b>Definition</b> fold.hpp:195</div></div>
-</div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type T&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaee418c18e09e3b1789c23ec00681db42">fold_right</a>(Function &amp;&amp; f, T &amp;&amp; t);</div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, concepts::product_type T, <span class="keyword">typename</span> Value&gt;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaee418c18e09e3b1789c23ec00681db42">fold_right</a>(Function &amp;&amp; f, T &amp;&amp; t, Value init);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, concepts::product_type T&gt;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaee418c18e09e3b1789c23ec00681db42">fold_right</a>(Function &amp;&amp; f, T &amp;&amp; t);</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__kumi__fold__right_html_gaee418c18e09e3b1789c23ec00681db42"><div class="ttname"><a href="#gaee418c18e09e3b1789c23ec00681db42">kumi::fold_right</a></div><div class="ttdeci">constexpr fold_right_t fold_right</div><div class="ttdef"><b>Definition</b> fold.hpp:197</div></div>
+<div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">f</span>: Binary callable function to apply</li>

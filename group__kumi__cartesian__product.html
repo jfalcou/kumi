@@ -172,9 +172,14 @@ Variables</h2></td></tr>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type... Ts&gt;</div>
-<div class="line">[[nodiscard]] <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga39128fad2c11b9fea55558222a87721c">cartesian_product</a>(Ts &amp;&amp;... ts);</div>
-<div class="ttc" id="agroup__kumi__cartesian__product_html_ga39128fad2c11b9fea55558222a87721c"><div class="ttname"><a href="#ga39128fad2c11b9fea55558222a87721c">kumi::cartesian_product</a></div><div class="ttdeci">constexpr cartesian_product_t cartesian_product</div><div class="ttdef"><b>Definition</b> cartesian_product.hpp:104</div></div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;<a class="code hl_concept" href="conceptkumi_1_1concepts_1_1product__type.html">concepts::product_type</a>... Ts&gt;</div>
+<div class="line">  [[nodiscard]] <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga39128fad2c11b9fea55558222a87721c">cartesian_product</a>(Ts &amp;&amp;... ts);</div>
+<div class="line">}</div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:77</div></div>
+<div class="ttc" id="agroup__kumi__cartesian__product_html_ga39128fad2c11b9fea55558222a87721c"><div class="ttname"><a href="#ga39128fad2c11b9fea55558222a87721c">kumi::cartesian_product</a></div><div class="ttdeci">constexpr cartesian_product_t cartesian_product</div><div class="ttdef"><b>Definition</b> cartesian_product.hpp:107</div></div>
+<div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">ts</span>: Product Types to process</li>
@@ -215,7 +220,7 @@ Variables</h2></td></tr>
 <div class="line">                      , r</div>
 <div class="line">                      );</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__kumi__for__each__index_html_ga34623706699cbbd62d626e3cc49aa8dc"><div class="ttname"><a href="group__kumi__for__each__index.html#ga34623706699cbbd62d626e3cc49aa8dc">kumi::for_each_index</a></div><div class="ttdeci">constexpr for_each_index_t for_each_index</div><div class="ttdef"><b>Definition</b> for_each.hpp:183</div></div>
+<div class="ttc" id="agroup__kumi__for__each__index_html_ga34623706699cbbd62d626e3cc49aa8dc"><div class="ttname"><a href="group__kumi__for__each__index.html#ga34623706699cbbd62d626e3cc49aa8dc">kumi::for_each_index</a></div><div class="ttdeci">constexpr for_each_index_t for_each_index</div><div class="ttdef"><b>Definition</b> for_each.hpp:189</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:35</div></div>
 </div><!-- fragment --></li>
 <li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>

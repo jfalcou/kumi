@@ -168,9 +168,12 @@ template&lt;std::size_t N, std::size_t B, std::size_t E, std::size_t S = 1&gt; <
 </div><!-- fragment --><h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, std::<span class="keywordtype">size_t</span> B, std::<span class="keywordtype">size_t</span> E, std::<span class="keywordtype">size_t</span> S = 1&gt;</div>
-<div class="line"><span class="keyword">using </span><a class="code hl_typedef" href="#gaab08a06ed8795bacdf72336cf06b0e6a">remove_index_sequence</a>;</div>
-<div class="ttc" id="agroup__kumi__function__remove__index__sequence_html_gaab08a06ed8795bacdf72336cf06b0e6a"><div class="ttname"><a href="#gaab08a06ed8795bacdf72336cf06b0e6a">kumi::function::remove_index_sequence</a></div><div class="ttdeci">decltype(kumi_implementation_defined B) ?(E - B+S - 1)/S :0), std::make_index_sequence&lt; N -((E &gt; B) ?(E - B+S - 1)/S :0)&gt; &gt;) remove_index_sequence</div><div class="ttdef"><b>Definition</b> index_sequence.hpp:236</div></div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::function</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, std::<span class="keywordtype">size_t</span> B, std::<span class="keywordtype">size_t</span> E, std::<span class="keywordtype">size_t</span> S = 1&gt;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="#gaab08a06ed8795bacdf72336cf06b0e6a">remove_index_sequence</a> = kumi_implementation_defined;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__kumi__function__remove__index__sequence_html_gaab08a06ed8795bacdf72336cf06b0e6a"><div class="ttname"><a href="#gaab08a06ed8795bacdf72336cf06b0e6a">kumi::function::remove_index_sequence</a></div><div class="ttdeci">decltype(kumi_implementation_defined B) ?(E - B+S - 1)/S :0), std::make_index_sequence&lt; N -((E &gt; B) ?(E - B+S - 1)/S :0)&gt; &gt;) remove_index_sequence</div><div class="ttdef"><b>Definition</b> index_sequence.hpp:251</div></div>
 </div><!-- fragment --><h3 class="groupheader">Template Parameters </h3>
 <ul>
 <li><span class="tt">N</span>: Compile-time size of the input domain</li>

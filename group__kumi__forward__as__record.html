@@ -173,9 +173,13 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__kumi__record__related.html#gacfd38acd9ecb27bff2bb2ad0f885e326">forward_as_record</a>(Ts&amp;&amp;... ts);</div>
-<div class="ttc" id="agroup__kumi__record__related_html_gacfd38acd9ecb27bff2bb2ad0f885e326"><div class="ttname"><a href="group__kumi__record__related.html#gacfd38acd9ecb27bff2bb2ad0f885e326">kumi::forward_as_record</a></div><div class="ttdeci">constexpr forward_as_record_t&lt; Fields... &gt; forward_as_record</div><div class="ttdef"><b>Definition</b> record.hpp:564</div></div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__kumi__record__related.html#gacfd38acd9ecb27bff2bb2ad0f885e326">forward_as_record</a>(Ts&amp;&amp;... ts);</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__kumi__record__related_html_gacfd38acd9ecb27bff2bb2ad0f885e326"><div class="ttname"><a href="group__kumi__record__related.html#gacfd38acd9ecb27bff2bb2ad0f885e326">kumi::forward_as_record</a></div><div class="ttdeci">constexpr forward_as_record_t&lt; Fields... &gt; forward_as_record</div><div class="ttdef"><b>Definition</b> record.hpp:570</div></div>
+<div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">Fields</span>: Non type template parameters names to associate with each element.</li>
@@ -209,7 +213,7 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi
 <div class="line">  <span class="keywordflow">for</span>(<span class="keyword">auto</span> <span class="keyword">const</span>&amp; s : v)</div>
 <div class="line">    std::cout &lt;&lt; s &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1array_html_a2a236814b119c1e3e0b1cc5ce062c282"><div class="ttname"><a href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::array::get</a></div><div class="ttdeci">decltype(auto) constexpr get(array&lt; T, N &gt; &amp;t) noexcept</div><div class="ttdoc">Extracts the Ith element from a kumi::array.</div><div class="ttdef"><b>Definition</b> array.hpp:681</div></div>
+<div class="ttc" id="astructkumi_1_1array_html_a2a236814b119c1e3e0b1cc5ce062c282"><div class="ttname"><a href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::array::get</a></div><div class="ttdeci">decltype(auto) constexpr get(array&lt; T, N &gt; &amp;t) noexcept</div><div class="ttdoc">Extracts the Ith element from a kumi::array.</div><div class="ttdef"><b>Definition</b> array.hpp:693</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

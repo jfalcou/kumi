@@ -176,9 +176,14 @@ template&lt;std::size_t... I&gt; </div>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;std::size_t...Idx, product_type T&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga32af967d7f453426ccd564d3a0b6c689">reorder</a>&lt;Idx...&gt;(T &amp;&amp; t);</div>
-<div class="ttc" id="agroup__kumi__reorder_html_ga32af967d7f453426ccd564d3a0b6c689"><div class="ttname"><a href="#ga32af967d7f453426ccd564d3a0b6c689">kumi::reorder</a></div><div class="ttdeci">constexpr reorder_t&lt; I... &gt; reorder</div><div class="ttdef"><b>Definition</b> reorder.hpp:132</div></div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;std::size_t...Idx, <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1product__type.html">concepts::product_type</a> T&gt;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga32af967d7f453426ccd564d3a0b6c689">reorder</a>(T &amp;&amp; t);</div>
+<div class="line">}</div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:77</div></div>
+<div class="ttc" id="agroup__kumi__reorder_html_ga32af967d7f453426ccd564d3a0b6c689"><div class="ttname"><a href="#ga32af967d7f453426ccd564d3a0b6c689">kumi::reorder</a></div><div class="ttdeci">constexpr reorder_t&lt; I... &gt; reorder</div><div class="ttdef"><b>Definition</b> reorder.hpp:135</div></div>
+<div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
 </div><!-- fragment --><h3 class="groupheader">Template Parameters </h3>
 <ul>
 <li><span class="tt">Idx</span> Index of elements to reorder</li>

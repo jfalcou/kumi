@@ -170,9 +170,13 @@ Tuple construction</h2></td></tr>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__kumi__tie.html#ga934bd052835c7cc48a870fbc7c86e6ac">forward_as_tuple</a>(Ts&amp;&amp;... ts);</div>
-<div class="ttc" id="agroup__kumi__tie_html_ga934bd052835c7cc48a870fbc7c86e6ac"><div class="ttname"><a href="group__kumi__tie.html#ga934bd052835c7cc48a870fbc7c86e6ac">kumi::forward_as_tuple</a></div><div class="ttdeci">constexpr forward_as_tuple_t forward_as_tuple</div><div class="ttdef"><b>Definition</b> tuple.hpp:599</div></div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__kumi__tie.html#ga934bd052835c7cc48a870fbc7c86e6ac">forward_as_tuple</a>(Ts&amp;&amp;... ts);</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__kumi__tie_html_ga934bd052835c7cc48a870fbc7c86e6ac"><div class="ttname"><a href="group__kumi__tie.html#ga934bd052835c7cc48a870fbc7c86e6ac">kumi::forward_as_tuple</a></div><div class="ttdeci">constexpr forward_as_tuple_t forward_as_tuple</div><div class="ttdef"><b>Definition</b> tuple.hpp:605</div></div>
+<div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">ts</span>: Zero or more arguments to construct the tuple from.</li>
@@ -203,7 +207,7 @@ Tuple construction</h2></td></tr>
 <div class="line">  <span class="keywordflow">for</span>(<span class="keyword">auto</span> <span class="keyword">const</span>&amp; s : v)</div>
 <div class="line">    std::cout &lt;&lt; s &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1array_html_a2a236814b119c1e3e0b1cc5ce062c282"><div class="ttname"><a href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::array::get</a></div><div class="ttdeci">decltype(auto) constexpr get(array&lt; T, N &gt; &amp;t) noexcept</div><div class="ttdoc">Extracts the Ith element from a kumi::array.</div><div class="ttdef"><b>Definition</b> array.hpp:681</div></div>
+<div class="ttc" id="astructkumi_1_1array_html_a2a236814b119c1e3e0b1cc5ce062c282"><div class="ttname"><a href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::array::get</a></div><div class="ttdeci">decltype(auto) constexpr get(array&lt; T, N &gt; &amp;t) noexcept</div><div class="ttdoc">Extracts the Ith element from a kumi::array.</div><div class="ttdef"><b>Definition</b> array.hpp:693</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

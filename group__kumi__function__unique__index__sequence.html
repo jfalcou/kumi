@@ -167,9 +167,12 @@ template&lt;bool... Bs&gt; </div>
 </div><!-- fragment --><h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keywordtype">bool</span>... Bs&gt;</div>
-<div class="line"><span class="keyword">using </span><a class="code hl_typedef" href="#ga41fc6fa7af3a69b712e76929faa994d5">unique_index_sequence</a>;</div>
-<div class="ttc" id="agroup__kumi__function__unique__index__sequence_html_ga41fc6fa7af3a69b712e76929faa994d5"><div class="ttname"><a href="#ga41fc6fa7af3a69b712e76929faa994d5">kumi::function::unique_index_sequence</a></div><div class="ttdeci">decltype(kumi_implementation_defined) unique_index_sequence</div><div class="ttdef"><b>Definition</b> set.hpp:86</div></div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::function</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keywordtype">bool</span>... Bs&gt;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="#ga41fc6fa7af3a69b712e76929faa994d5">unique_index_sequence</a> = kumi_implementation_defined;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__kumi__function__unique__index__sequence_html_ga41fc6fa7af3a69b712e76929faa994d5"><div class="ttname"><a href="#ga41fc6fa7af3a69b712e76929faa994d5">kumi::function::unique_index_sequence</a></div><div class="ttdeci">decltype(kumi_implementation_defined) unique_index_sequence</div><div class="ttdef"><b>Definition</b> set.hpp:89</div></div>
 </div><!-- fragment --><h3 class="groupheader">Template Parameters </h3>
 <ul>
 <li><span class="tt">Bs</span>: Compile-time flags, one per input element, set to <span class="tt">true</span> when the element is kept</li>

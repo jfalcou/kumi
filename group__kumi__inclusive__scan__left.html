@@ -172,11 +172,16 @@ Variables</h2></td></tr>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type T, <span class="keyword">typename</span> Value&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga1389eee6fb884b34ed4957884ecd39a1">inclusive_scan_left</a>(Function f, T &amp;&amp; t, Value init);</div>
-<div class="ttc" id="agroup__kumi__inclusive__scan__left_html_ga1389eee6fb884b34ed4957884ecd39a1"><div class="ttname"><a href="#ga1389eee6fb884b34ed4957884ecd39a1">kumi::inclusive_scan_left</a></div><div class="ttdeci">constexpr inclusive_scan_left_t inclusive_scan_left</div><div class="ttdef"><b>Definition</b> scan.hpp:208</div></div>
-</div><!-- fragment --><div class="fragment"><div class="line"><span class="keyword">template</span>&lt;mono<span class="keywordtype">id</span> M, <span class="keyword">typename</span> Function, product_type T, <span class="keyword">typename</span> Value&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga1389eee6fb884b34ed4957884ecd39a1">inclusive_scan_left</a>(M &amp;&amp; m, T &amp;&amp; t);</div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, concepts::product_type T, <span class="keyword">typename</span> Value&gt;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga1389eee6fb884b34ed4957884ecd39a1">inclusive_scan_left</a>(Function f, T &amp;&amp; t, Value init);</div>
+<div class="line"> </div>
+<div class="line">  <span class="keyword">template</span>&lt;concepts::mono<span class="keywordtype">id</span> M, <span class="keyword">typename</span> Function, concepts::product_type T, <span class="keyword">typename</span> Value&gt;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga1389eee6fb884b34ed4957884ecd39a1">inclusive_scan_left</a>(M &amp;&amp; m, T &amp;&amp; t);</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__kumi__inclusive__scan__left_html_ga1389eee6fb884b34ed4957884ecd39a1"><div class="ttname"><a href="#ga1389eee6fb884b34ed4957884ecd39a1">kumi::inclusive_scan_left</a></div><div class="ttdeci">constexpr inclusive_scan_left_t inclusive_scan_left</div><div class="ttdef"><b>Definition</b> scan.hpp:209</div></div>
+<div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">m</span>: Monoid callable function to apply</li>

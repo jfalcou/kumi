@@ -172,9 +172,13 @@ Variables</h2></td></tr>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T&gt;</div>
-<div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga6368952a2f6a506de75aa0e01569eab6">as_flat_ptr</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>
-<div class="ttc" id="agroup__kumi__as__flat__ptr_html_ga6368952a2f6a506de75aa0e01569eab6"><div class="ttname"><a href="#ga6368952a2f6a506de75aa0e01569eab6">kumi::as_flat_ptr</a></div><div class="ttdeci">constexpr as_flat_ptr_t as_flat_ptr</div><div class="ttdef"><b>Definition</b> flatten.hpp:395</div></div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;concepts::product_type T&gt;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga6368952a2f6a506de75aa0e01569eab6">as_flat_ptr</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__kumi__as__flat__ptr_html_ga6368952a2f6a506de75aa0e01569eab6"><div class="ttname"><a href="#ga6368952a2f6a506de75aa0e01569eab6">kumi::as_flat_ptr</a></div><div class="ttdeci">constexpr as_flat_ptr_t as_flat_ptr</div><div class="ttdef"><b>Definition</b> flatten.hpp:405</div></div>
+<div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: Product type to process</li>
@@ -211,7 +215,7 @@ Variables</h2></td></tr>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__kumi__for__each_html_ga58c4bb5e62083b4b37396d39c6446164"><div class="ttname"><a href="group__kumi__for__each.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a></div><div class="ttdeci">constexpr for_each_t for_each</div><div class="ttdef"><b>Definition</b> for_each.hpp:138</div></div>
+<div class="ttc" id="agroup__kumi__for__each_html_ga58c4bb5e62083b4b37396d39c6446164"><div class="ttname"><a href="group__kumi__for__each.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a></div><div class="ttdeci">constexpr for_each_t for_each</div><div class="ttdef"><b>Definition</b> for_each.hpp:141</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:35</div></div>
 </div><!-- fragment --></li>
 <li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>

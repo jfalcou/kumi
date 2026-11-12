@@ -165,16 +165,19 @@ template&lt;std::size_t E, std::size_t N&gt; </div>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> Element, std::<span class="keywordtype">size_t</span> Count&gt;</div>
-<div class="line"><span class="keyword">using </span><a class="code hl_typedef" href="#ga8f23bb9bd9817ad2d807854bad64897c">fill_index_sequence</a>;</div>
-<div class="ttc" id="agroup__kumi__function__fill__index__sequence_html_ga8f23bb9bd9817ad2d807854bad64897c"><div class="ttname"><a href="#ga8f23bb9bd9817ad2d807854bad64897c">kumi::function::fill_index_sequence</a></div><div class="ttdeci">decltype(kumi_implementation_defined) fill_index_sequence</div><div class="ttdef"><b>Definition</b> index_sequence.hpp:171</div></div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::function</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> E, std::<span class="keywordtype">size_t</span> N&gt;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="#ga8f23bb9bd9817ad2d807854bad64897c">fill_index_sequence</a> = kumi_implementation_defined;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__kumi__function__fill__index__sequence_html_ga8f23bb9bd9817ad2d807854bad64897c"><div class="ttname"><a href="#ga8f23bb9bd9817ad2d807854bad64897c">kumi::function::fill_index_sequence</a></div><div class="ttdeci">decltype(kumi_implementation_defined) fill_index_sequence</div><div class="ttdef"><b>Definition</b> index_sequence.hpp:180</div></div>
 </div><!-- fragment --><h3 class="groupheader">Template Parameters </h3>
 <ul>
-<li><span class="tt">Element</span>: Compile-time value to replicate</li>
-<li><span class="tt">Count</span>: Number of repetitions to generate</li>
+<li><span class="tt">E</span>: Compile-time value to replicate</li>
+<li><span class="tt">N</span>: Number of repetitions to generate</li>
 </ul>
 <h3 class="groupheader">Return value </h3>
-<p>A <span class="tt">std::index_sequence</span> filled completely with <span class="tt">e</span>. </p>
+<p>A <span class="tt">std::index_sequence</span> filled completely with <span class="tt">E</span>. </p>
 
 </div>
 </div>

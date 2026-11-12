@@ -165,9 +165,12 @@ template&lt;typename T&gt; </div>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
-<div class="line"><span class="keyword">using </span><a class="code hl_typedef" href="#ga31ec47f07956e9676243754c7ccd6227">indexes_for</a>;</div>
-<div class="ttc" id="agroup__kumi__function__indexes__for_html_ga31ec47f07956e9676243754c7ccd6227"><div class="ttname"><a href="#ga31ec47f07956e9676243754c7ccd6227">kumi::function::indexes_for</a></div><div class="ttdeci">std::make_index_sequence&lt; kumi::size_v&lt; T &gt; &gt; indexes_for</div><div class="ttdef"><b>Definition</b> index_sequence.hpp:201</div></div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span>kumi::function</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</div>
+<div class="line">  <span class="keyword">using </span><a class="code hl_typedef" href="#ga31ec47f07956e9676243754c7ccd6227">indexes_for</a> = kumi_implementation_defined;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__kumi__function__indexes__for_html_ga31ec47f07956e9676243754c7ccd6227"><div class="ttname"><a href="#ga31ec47f07956e9676243754c7ccd6227">kumi::function::indexes_for</a></div><div class="ttdeci">std::make_index_sequence&lt; kumi::size_v&lt; T &gt; &gt; indexes_for</div><div class="ttdef"><b>Definition</b> index_sequence.hpp:213</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">T</span>: <span class="tt"><a class="el" href="conceptkumi_1_1concepts_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::concepts::product_type</a></span> to extract the projection map from.</li>

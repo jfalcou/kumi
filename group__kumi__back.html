@@ -171,9 +171,13 @@ Variables</h2></td></tr>
 <h2 class="groupheader">Header file </h2>
 <div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T&gt;</div>
-<div class="line">[[nodiscard]] <span class="keyword">constexpr</span> <span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_variable" href="#gae635e0c094282372ff5393840b6f52c2">back</a>(T &amp;&amp; t);</div>
-<div class="ttc" id="agroup__kumi__back_html_gae635e0c094282372ff5393840b6f52c2"><div class="ttname"><a href="#gae635e0c094282372ff5393840b6f52c2">kumi::back</a></div><div class="ttdeci">constexpr back_t back</div><div class="ttdef"><b>Definition</b> back_front.hpp:144</div></div>
+<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">template</span>&lt;concepts::product_type T&gt;</div>
+<div class="line">  [[nodiscard]] <span class="keyword">constexpr</span> <span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_variable" href="#gae635e0c094282372ff5393840b6f52c2">back</a>(T &amp;&amp; t);</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__kumi__back_html_gae635e0c094282372ff5393840b6f52c2"><div class="ttname"><a href="#gae635e0c094282372ff5393840b6f52c2">kumi::back</a></div><div class="ttdeci">constexpr back_t back</div><div class="ttdef"><b>Definition</b> back_front.hpp:150</div></div>
+<div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">t</span>: Product Type to access</li>
@@ -209,7 +213,7 @@ Variables</h2></td></tr>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; x &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__kumi__front_html_gaa1618c96c4c7003afeccfb19e25b35bb"><div class="ttname"><a href="group__kumi__front.html#gaa1618c96c4c7003afeccfb19e25b35bb">kumi::front</a></div><div class="ttdeci">constexpr front_t front</div><div class="ttdef"><b>Definition</b> back_front.hpp:87</div></div>
+<div class="ttc" id="agroup__kumi__front_html_gaa1618c96c4c7003afeccfb19e25b35bb"><div class="ttname"><a href="group__kumi__front.html#gaa1618c96c4c7003afeccfb19e25b35bb">kumi::front</a></div><div class="ttdeci">constexpr front_t front</div><div class="ttdef"><b>Definition</b> back_front.hpp:90</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:35</div></div>
 </div><!-- fragment --></li>
 <li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
