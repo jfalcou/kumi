@@ -61,7 +61,7 @@ var NAVTREE =
         [ "Utility", "group__kumi__utility.html", null ],
         [ "Functional", "group__kumi__functional.html", null ]
       ] ],
-      [ "Kumi Namespace", "namespacekumi.html", null ]
+      [ "kumi Namespace", "namespacekumi.html", null ]
     ] ],
     [ "Contact", "mailto:joel.falcou+kumi@gmail.com?subject=The%20KUMI%20Library", null ]
   ] ]

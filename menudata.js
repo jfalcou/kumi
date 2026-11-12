@@ -53,5 +53,5 @@ var menudata={children:[
 {text:"Concepts",url:"group__kumi__concepts.html"},
 {text:"Utility",url:"group__kumi__utility.html"},
 {text:"Functional",url:"group__kumi__functional.html"}]},
-{text:"Kumi Namespace",url:"namespacekumi.html"}]},
+{text:"kumi Namespace",url:"namespacekumi.html"}]},
 {text:"Contact",url:"mailto:joel.falcou+kumi@gmail.com?subject=The%20KUMI%20Library"}]}

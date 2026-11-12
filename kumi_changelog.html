@@ -138,7 +138,7 @@ $(function(){initNavTree('kumi_changelog.html','',''); });
 <div class="textblock"><p><a class="anchor" id="md__2____w_2kumi_2kumi_2doc_2changelog"></a></p>
 <h1 class="doxsection"><a class="anchor" id="autotoc_md90"></a>
 Version 5.0 - Gorgeous Garnet</h1>
-<p>kumi now runs inside CUDA kernels and compiles faster. Algorithms became callable objects, which breaks unqualified calls, hence the major version bump.</p>
+<p><b>KUMI</b> now runs inside CUDA kernels and compiles faster. Algorithms became callable objects, which breaks unqualified calls, hence the major version bump.</p>
 <h3 class="doxsection"><a class="anchor" id="autotoc_md91"></a>
 Breaking Changes</h3>
 <ul>
@@ -164,7 +164,7 @@ New Features</h3>
 </li>
 <li><b>CUDA</b>:<ul>
 <li>nvcc support (#193).</li>
-<li>kumi is tested inside CUDA kernels on every nvidia toolchain (#246, #252).</li>
+<li><b>KUMI</b> is tested inside CUDA kernels on every nvidia toolchain (#246, #252).</li>
 </ul>
 </li>
 <li><b>Compile Time</b>:<ul>
@@ -275,7 +275,7 @@ DOC and CI infra</h3>
 </ul>
 </li>
 <li><b>CI &amp; Infrastructure</b>:<ul>
-<li>Move KUMI standalone file to its own branch (#114, #120).</li>
+<li>Move <b>KUMI</b> standalone file to its own branch (#114, #120).</li>
 <li>Add explicit standalone tests and proper standalone file (#116, #176,#174).</li>
 <li>Move to CI v10 and update to latest CI infra (#105, #196).</li>
 <li>Migration to <span class="tt">precommit</span> (#157).</li>
@@ -343,7 +343,7 @@ What's Changed</h2>
 API and Infrastructure Changes</h3>
 <ul>
 <li><a class="el" href="group__kumi__extract.html#ga1a7617bafd6f8598cca8e7e6a5c6f383">kumi::extract</a> and <a class="el" href="group__kumi__split.html#gadb81f4533e81830674c3fc9577d3de93">kumi::split</a> are now free functions (See #40)</li>
-<li>KUMI implementation is now done in split file that get aggregated (See #34)</li>
+<li><b>KUMI</b> implementation is now done in split file that get aggregated (See #34)</li>
 <li>Massive documentation revamping (See #27, #28)</li>
 <li>Added proper integration tests (See #35)</li>
 </ul>
@@ -377,7 +377,7 @@ What's Changed</h2>
 Bug Fixes</h3>
 <ul>
 <li>Improve <span class="tt"><a class="el" href="group__kumi__cat.html#ga4550222df58187f71b1b1347500e324a">kumi::cat</a></span> implementation to perform <span class="tt">O(N)</span> copies.</li>
-<li>Use include guards to prevent issue when different project use KUMI concurrently.</li>
+<li>Use include guards to prevent issue when different project use <b>KUMI</b> concurrently.</li>
 </ul>
 <h3 class="doxsection"><a class="anchor" id="autotoc_md113"></a>
 New Features</h3>
