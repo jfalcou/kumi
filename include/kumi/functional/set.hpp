@@ -65,7 +65,7 @@ namespace kumi
 
       @groupheader{Header file}
       @code
-      #include <kumi/functional/set.hpp>
+      #include <kumi/kumi.hpp>
       @endcode
 
       @groupheader{Call Signature}
@@ -98,7 +98,7 @@ namespace kumi
 
       @groupheader{Header file}
       @code
-      #include <kumi/functional/set.hpp>
+      #include <kumi/kumi.hpp>
       @endcode
 
       @groupheader{Call Signature}
@@ -131,7 +131,7 @@ namespace kumi
 
       @groupheader{Header file}
       @code
-      #include <kumi/functional/set.hpp>
+      #include <kumi/kumi.hpp>
       @endcode
 
       @groupheader{Call Signature}

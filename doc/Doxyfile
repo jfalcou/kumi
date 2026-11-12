@@ -39,3 +39,6 @@ PREDEFINED            += "KUMI_ABI=inline" \
                          "KUMI_GPU="
 
 ## One page per callable member
+
+## The entries name kumi/kumi.hpp in their Header file block, the header of a definition not compiling alone (#296).
+SHOW_GROUPED_MEMB_INC  = NO
