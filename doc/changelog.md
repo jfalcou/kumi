@@ -3,7 +3,7 @@ Change Log {#kumi_changelog}
 
 # Version 5.0 - Gorgeous Garnet
 
-kumi now runs inside CUDA kernels and compiles faster. Algorithms became callable objects, which breaks
+**KUMI** now runs inside CUDA kernels and compiles faster. Algorithms became callable objects, which breaks
 unqualified calls, hence the major version bump.
 
 ### Breaking Changes
@@ -21,7 +21,7 @@ unqualified calls, hence the major version bump.
     * `string_view` utilities on [`kumi::str`](@ref kumi::str), which compiles without conversion warnings (#211, #216).
 * **CUDA**:
     * nvcc support (#193).
-    * kumi is tested inside CUDA kernels on every nvidia toolchain (#246, #252).
+    * **KUMI** is tested inside CUDA kernels on every nvidia toolchain (#246, #252).
 * **Compile Time**:
     * Internal lambdas removed, internal calls fully qualified, and the memory footprint of algorithm
       instantiation reduced (#205, #208, #220, #223).
@@ -102,7 +102,7 @@ unqualified calls, hence the major version bump.
     * Fix README code block and badge appearance (#187, #194).
 
 * **CI & Infrastructure**:
-    * Move KUMI standalone file to its own branch (#114, #120).
+    * Move **KUMI** standalone file to its own branch (#114, #120).
     * Add explicit standalone tests and proper standalone file (#116, #176,#174).
     * Move to CI v10 and update to latest CI infra (#105, #196).
     * Migration to `precommit` (#157).
@@ -161,7 +161,7 @@ This Release is an API break release.
 
 ### API and Infrastructure Changes
  - kumi::extract and kumi::split are now free functions (See #40)
- - KUMI implementation is now done in split file that get aggregated (See #34)
+ - **KUMI** implementation is now done in split file that get aggregated (See #34)
  - Massive documentation revamping (See #27, #28)
  - Added proper integration tests (See #35)
 
@@ -188,7 +188,7 @@ This Release is an API break release.
 
 ### Bug Fixes
  - Improve `kumi::cat` implementation to perform `O(N)` copies.
- - Use include guards to prevent issue when different project use KUMI concurrently.
+ - Use include guards to prevent issue when different project use **KUMI** concurrently.
 
 ### New Features
  - Added the `kumi::sized_product_type_or_more` concept
