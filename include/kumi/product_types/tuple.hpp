@@ -233,10 +233,10 @@ namespace kumi
     **/
     //==================================================================================================================
 
-    /// @return Returns the number of elements in a kumi::tuple
+    /// @brief Returns the number of elements in a kumi::tuple
     [[nodiscard]] KUMI_ABI static constexpr auto size() noexcept { return sizeof...(Ts); }
 
-    /// @return Returns `true` if a kumi::tuple contains 0 elements
+    /// @brief Returns `true` if a kumi::tuple contains 0 elements
     [[nodiscard]] KUMI_ABI static constexpr bool empty() noexcept { return sizeof...(Ts) == 0; }
 
     /// Returns the identifiers associated to the elements of a kumi::tuple

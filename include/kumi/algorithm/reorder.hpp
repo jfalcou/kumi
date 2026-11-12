@@ -79,10 +79,8 @@ namespace kumi
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
 
-    @note Nothing prevents the number of reordered indexes from being lesser or greater than the size of t or
-          from appearing multiple times.
-
-    @note reorder(tuple) works and is equivalent to reorder<>(tuple)
+    @note The number of indexes may be lesser or greater than the size of `t`, and an index may appear several times,
+          except on a record, where a repeated index fails to compile since a record holds each label once.
 
     @qualifier nodiscard
     @qualifier inline
@@ -148,10 +146,9 @@ namespace kumi
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
 
-    @note Nothing prevents the number of reordered names from being lesser or greater than the size of t or
-          from appearing multiple times if it is applied on a named tuple.
-
-    @note reorder(tuple) works and is equivalent to reorder<>(tuple)
+    @note The number of identifiers may be lesser or greater than the size of `t`. An identifier may appear several
+          times on a kumi::tuple of fields, and a repeated identifier fails to compile on a record, since a record
+          holds each label once.
 
     @qualifier nodiscard
     @qualifier inline
