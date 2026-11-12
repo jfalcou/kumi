@@ -1,75 +1,119 @@
-C++ Specific Terms {#kumi_cpp_spec}
+C++ Vocabulary {#kumi_cpp_vocabulary}
 ==========
 
 ## Empty Base Optimization
-[EBO](https://eel.is/c++draft/intro.object#7) is a compiler optimization technique. In C++, even an empty struct (one with no data members)
-must have a size of at least 1 byte to ensure it has a unique address in memory.
 
-However, if that empty struct is used as a base class, the compiler is allowed to optimize that
-space away to 0 bytes. This is critical for high-performance libraries that use many "tag" types
-or "stateless" functors, as it prevents memory bloat.
+A class is empty when it is a class type other than a union, with no non-static data member other than subobjects of
+zero size, no virtual function, no virtual base class, and no non-empty base class
+([[meta.unary.prop]](https://eel.is/c++draft/meta.unary.prop), `is_empty`). An object of an empty class still occupies
+at least one byte, so that two distinct objects have distinct addresses, unless it is a potentially-overlapping
+subobject, that is, a base class subobject or a member declared `[[no_unique_address]]`
+([[intro.object]/7](https://eel.is/c++draft/intro.object#7)).
+
+The [empty base optimization](https://eel.is/c++draft/intro.object#8) gives an empty base class subobject the size zero,
+which the standard requires for a base of a standard-layout class without non-static data members and leaves to the
+implementation otherwise ([[intro.object]/8](https://eel.is/c++draft/intro.object#8)), and which two subobjects of
+similar types at the same address forbid ([[intro.object]/10](https://eel.is/c++draft/intro.object#10)).
+
+A library that stores many tag types or stateless function objects saves, through the optimization, one byte and the
+padding that follows it for each such object. **KUMI** applies it to the empty, non-final element types of kumi::tuple,
+and does not use `[[no_unique_address]]`, so that an empty class costs a byte as a member, nothing as a base class, and
+nothing as an element of a kumi::tuple:
+
+@godbolt{doc/glossary/vocabulary_ebo.cpp}
 
 ---
 
 ## Aggregate type
-An [Aggregate](https://eel.is/c++draft/dcl.init.aggr) is a specific kind of class or struct in C++ that is "simple" enough to be initialized
-directly with braces {}.
 
-To be an aggregate, a type generally must have:
+An [aggregate](https://eel.is/c++draft/dcl.init.aggr) is an array, or a class with no user-declared or inherited
+constructor, no private or protected direct non-static data member, no private or protected direct base class, and no
+virtual function or virtual base class ([[dcl.init.aggr]/1](https://eel.is/c++draft/dcl.init.aggr#1)). Its elements are
+its direct base classes, then its non-static data members, which a braced list initializes in order, with the elision of
+the inner braces, and which a parenthesized list initializes as well since C++20, without brace elision.
 
-+ No private or protected non-static data members.
-+ No user-declared constructors.
-+ No virtual functions.
+kumi::tuple and kumi::record are aggregates holding a single member that stores the elements, so that a braced list
+initializes them by brace elision, whereas a parenthesized list such as `kumi::tuple<int, float> t(1, 2.f)` does not
+compile:
 
-Aggregates allow for Aggregate Initialization, which is often faster and allows for cleaner syntax
-than defining complex constructors.
+@godbolt{doc/glossary/vocabulary_aggregate.cpp}
 
 ---
 
 ## Structural type
 
-Introduced in C++20, a [Structural Type](https://eel.is/c++draft/temp#param-12) is a class type that can be used as a Non-Type Template Parameter
-(NTTP).
+A [structural type](https://eel.is/c++draft/temp.param#12) is a scalar type, an lvalue reference type, or a literal
+class type whose base classes and non-static data members are all public, non-mutable, and of structural types or arrays
+of them ([[temp.param]/12](https://eel.is/c++draft/temp.param#12)).
 
-Previously, template parameters were limited to integers or pointers. Now, one can pass complex objects
-(like a tuple) as a template argument, provided the type is "Structural" (roughly: public members, 
-no complex copying logic).
+Since C++20, the type of a non-type template parameter may be any structural type, where C++17 restricted it to integral
+and enumeration types, pointers and lvalue references to objects and functions, pointers to members, `std::nullptr_t`,
+and placeholder types, so that floating-point types and structural class types became valid.
+
+**KUMI** takes a label as a template argument of the structural type kumi::str, as the projection `get<"x">` of a record
+does. A kumi::tuple whose element types are structural is a valid type of a template parameter, whose values are valid
+template arguments, whereas `std::tuple`, whose libstdc++ implementation has non-public base classes, is not:
+
+@godbolt{doc/glossary/vocabulary_structural.cpp}
 
 ---
 
 ## Tuple Protocol
 
-The [Tuple Protocol](https://eel.is/c++draft/dcl.struct.bind) is a set of standardized "hooks" in the C++ Standard Library. By implementing these
-hooks for a custom class, one tells the compiler to treat the class like a tuple.
+The tuple protocol is the informal name of the conditions under which a structured binding decomposes a class through
+`std::tuple_size`, `std::tuple_element`, and `get`, a term that the standard does not define.
 
-To satisfy the protocol, a type T must specialize:
+By [[dcl.struct.bind]/7](https://eel.is/c++draft/dcl.struct.bind#7), a structured binding decomposes a type `E` this way
+when `std::tuple_size<E>` names a complete class type with a member named `value`: the binding of index `i` has the type
+`std::tuple_element<i, E>::type`, and it is initialized by the member function template `e.get<i>()` when the lookup of
+`get` in `E` finds a template whose first template parameter is a non-type parameter, and by `get<i>(e)`, found by
+argument-dependent lookup alone, otherwise.
 
-```cpp
-std::tuple_size<T>; //Reports how many elements are in the structure.
+Structured bindings decompose two other kinds of types without the protocol
+([[dcl.struct.bind]/8](https://eel.is/c++draft/dcl.struct.bind#8)): the arrays, and the classes whose non-static data
+members are all direct members of the class or of one of its base classes, accessible where the binding is declared. C++
+having no reflection before C++26, a class whose members are not accessible describes its decomposition by hand, through
+these specializations.
 
-std::tuple_element<I, T>;   //Reports the type of the element at index I.
+**KUMI** reads a product type through the same three pieces, with one difference: its algorithms call `get<I>(t)`
+unqualified, which finds a free function by argument-dependent lookup and never a member function, so that a class that
+provides `get` as a member decomposes in a structured binding and fails kumi::apply. The concept
+kumi::concepts::product_type tests `std::tuple_size` and `std::tuple_element` alone.
 
-type.get<I>() / get<I>(type); //A function to access the element.
-```
+A class for which these two templates are specialized, and which provides a free `get<I>` returning references to its
+members for each value category, is accepted by the algorithms of the library as kumi::tuple is, as `ns::people` is
+below.
 
-It enables Structured Bindings, allowing one to unpack custom types easily
+@godbolt{doc/glossary/vocabulary_adapt_tuple.cpp}
 
-Structured bindings and kumi share the same decomposition hooks: the elements of a product type are
-extracted through `std::tuple_size`, `std::tuple_element` and `get<I>`, used both by structured bindings
-and by every kumi algorithm. This is why a user type implementing the tuple protocol (together with the
-kumi::concepts::product_type criterion) is accepted by kumi on equal footing with its own kumi::tuple and
-kumi::record.
+A class becomes a record when its elements are kumi::field types, its `get` takes an identifier, and
+kumi::is_record_type_v is specialized for it, or it declares a member alias `is_record_type`. The class `geo::point` is
+adapted as a record this way, its `get` taking the identifier of a field and returning a reference for each value
+category:
 
-This serves as a manual reflection mechanism, as C++ (prior to C++26) lacks a proper reflection
-mechanism to inspect structures, these functions specifications are giving the necessary informations
-to the compiler in order to natively adapt your structure to be a tuple.
+@godbolt{doc/glossary/vocabulary_adapt_record.cpp}
 
 ---
 
 ## Containers
 
-In C++ [containers](https://eel.is/c++draft/containers) are structures built in order to store data. There can be different
-kinds of containers such as dynamic containers (ex : `std::vector`), there are also
-static containers (ex: `std::array`) or associative ones (ex: `std::set`). These
-types are often focusing on storing homogeneous data, and some of them have properties
-ressembling product types, namely static contiguous containers.
+A [container](https://eel.is/c++draft/containers) of the C++ standard library stores objects of a single value type. The
+library provides sequence containers, such as `std::vector` and `std::array`, associative containers, such as
+`std::set`, and unordered associative containers, such as `std::unordered_map`, beside the container adaptors, such as
+`std::stack`. A sequence container of fixed size and contiguous storage resembles a homogeneous product type, and
+`std::array` models kumi::concepts::product_type.
+
+**KUMI** describes containers by two concepts of its own: kumi::concepts::container accepts the built-in arrays and the
+classes with the member types `value_type` and `size_type` and the functions `size`, `begin`, and `end`, and
+kumi::concepts::static_container adds a size known at compile time, read from a built-in array or from a class template
+of the form `Container<T, N>`:
+
+@godbolt{doc/glossary/vocabulary_containers.cpp}
+
+<div class="section_buttons">
+
+| Previous                                |                                       Next |
+|:----------------------------------------|-------------------------------------------:|
+| [Bibliography](@ref kumi_references)    | [Nomenclature](@ref kumi_nomenclature)     |
+
+</div>
