@@ -59,4 +59,4 @@ jobs:
         shell: bash
         run: |
           cmake --build --preset clang --config Release --target unit.exe
-          ctest --preset clang --build-config Release -R unit -j 2 --output-on-failure --no-tests=error --timeout 300
+          ctest --preset clang --build-config Release -R '^unit\.' -j 2 --output-on-failure --no-tests=error --timeout 300
