@@ -136,70 +136,204 @@ $(function(){initNavTree('kumi_product.html','',''); });
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><h1 class="doxsection"><a class="anchor" id="product_construction"></a>
-Product Constructions (The Logic of "AND")</h1>
-<p>Products represent types where multiple elements exist simultaneously. The operands of the product are types. The structure of a product type is determined by the fixed order of the operands.</p>
+Product Constructions</h1>
+<p>A product combines several types into one, whose values hold a value of each combined type at once. Read as a proposition, the product \( A \times B \) is the conjunction \( A \land B \), whose proof is a proof of \( A \) together with a proof of \( B \). The product comes in two forms, which differ by the way that they designate their components: by position in a tuple, and by label in a record.</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="kumi_product_type"></a>
-Product Type \( (A \times B) \)</h1>
-<p>A <b>Product Type</b> is a compound type formed by combining multiple types.</p>
-<p>An instance of a product type in it's simplest form is a called a <a href="https://en.wikipedia.org/wiki/Tuple">tuple</a>.</p>
-<p>Such a type only accepts one constructor that takes a variadic number of inputs and builds the product of them. A product type has a fixed length and the types of the elements is fixed. Formally it can be written as :</p>
-<p>\( (x_1, x_2, ..., x_n) : T_1 \times T_2 \times ... \times T_n \)</p>
-<p>This can be read as : the tuple is composed of elements of types \( T_1 \) to \( T_n\) with corresponding values \( x_1 \) to \( x_n \).</p>
-<p>The corresponding definition in kumi could look like the following: </p><div class="fragment"><div class="line"><a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple&lt;int,float,char&gt;</a> a = { 42, 13.37f, <span class="charliteral">&#39;d&#39;</span> };</div>
-<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:35</div></div>
-</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>This <em>positional</em> product type \( (A, B) \) is implemented in kumi by <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>. The <em>labeled</em> variant \( \{l_1:T_1, l_2:T_2\} \) presented below is implemented by <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>. Both are documented in the <a class="el" href="group__kumi__tuple__related.html" title="Tuple Types and associated Functions">Tuple Types and associated Functions</a> and <a class="el" href="group__kumi__record__related.html" title="Record Types and associated Functions">Record Types and associated Functions</a> reference groups.</dd></dl>
-<p>To extract values from a tuple, there are projections that are term constructors. A projection (often noted \( \pi \)) is a function that given a product type returns the elements at the desired index. Formally it is denoted as :</p>
-<p>\( \pi_1(x) : T_1, \pi_2(x) : T_2, ..., \pi_n(x) : T_n \)</p>
-<p>In kumi this corresponds to the <span class="tt">get</span> functions </p><div class="fragment"><div class="line"><span class="keyword">auto</span> a = <a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;0&gt;</a>(<a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple&lt;int,float&gt;</a>{ 1, 2.f });</div>
+Product Type</h1>
+<p>A <b>product type</b> \( T_1 \times \dots \times T_n \) has as values the <a href="https://en.wikipedia.org/wiki/Tuple">tuples</a> \( (x_1, \dots, x_n) \) whose component \( x_i \) has the type \( T_i \), for a length \( n \) and component types fixed by the type:</p>
+<p class="formulaDsp">
+\[ (x_1, x_2, \dots, x_n) : T_1 \times T_2 \times \dots \times T_n \]
+</p>
+<p>The tuple is the single introduction form of the product, which takes exactly \( n \) components, and the projections are its elimination forms: for \( 1 \le i \le n \), the projection \( \pi_i \) maps a value \( x \) of the product to its \( i \)-th component,</p>
+<p class="formulaDsp">
+\[ \pi_i : T_1 \times \dots \times T_n \to T_i, \qquad \pi_i(x) : T_i. \]
+</p>
+<p>Two equations relate the two forms, the computation rule, by which a projection of a tuple yields its component, and the uniqueness rule, by which a value of the product is the tuple of its projections:</p>
+<p class="formulaDsp">
+\[ \pi_i(x_1, \dots, x_n) = x_i, \qquad (\pi_1(x), \dots, \pi_n(x)) = x. \]
+</p>
+<p>For a sequence of indices \( i_1, \dots, i_k \) between 1 and \( n \), with \( k \ge 0 \), the projection onto several indices maps a value of the product to the tuple of its components at these indices:</p>
+<p class="formulaDsp">
+\[ \pi_{i_1, \dots, i_k} : T_1 \times \dots \times T_n \to T_{i_1} \times \dots \times T_{i_k}, \qquad
+    \pi_{i_1, \dots, i_k}(x) = (\pi_{i_1}(x), \dots, \pi_{i_k}(x)). \]
+</p>
+<p>Its codomain is the unit type 1 when \( k = 0 \), and the product of the single type \( T_{i_1} \), isomorphic to \( T_{i_1} \), when \( k = 1 \). <b>KUMI</b> keeps these two types distinct, <span class="tt"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>&lt;T&gt;</span> and <span class="tt">T</span>, so that the projection onto the single index \( i \) is \( \pi_i \) followed by the isomorphism. The map deletes components when the indices omit some, permutes them when the indices change their order, and duplicates a component when its index repeats.</p>
+<p>The <a href="https://en.wikipedia.org/wiki/Projection_(relational_algebra)">projection</a> of relational algebra is the image of a relation under this map: it applies the map to every tuple of the relation and returns the set of the results, in which two tuples equal at the chosen indices become one. In the unnamed perspective of <a class="el" href="kumi_references.html#references_texts" title="Primary Texts">Abiteboul, Hull, and Vianu</a>, section 4.4, whose tuples take their components in a single domain of values, its indices form any sequence, repetitions included. In their named perspective, where a tuple maps attributes to values (section 3.2), the projection of section 4.4 takes a set of attributes, without repetition and without order.</p>
+<p>The product has two further properties:</p>
+<ul>
+<li><b>Order</b>: the types \( A \times B \) and \( B \times A \) are distinct when \( A \ne B \), and isomorphic through the swap of the two components. The position of a component designates it, which also tells apart the two components of \( A \times A \).</li>
+<li><b>Cardinality</b>: the number of values of the product is the product of the numbers of values of its components, \( \mathrm{Card}(A \times B) = \mathrm{Card}(A) \times \mathrm{Card}(B) \).</li>
+</ul>
+<p>The positional product of <b>KUMI</b> is <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> (see <a class="el" href="group__kumi__tuple__related.html" title="Tuple Types and associated Functions">Tuple Types and associated Functions</a>), an aggregate initialized from a braced list, whose template arguments its deduction guide deduces, or built by <a class="el" href="group__kumi__tie.html#ga2a3a7b464afb602d8a722178ac517da8">kumi::make_tuple</a>, <a class="el" href="group__kumi__tie.html#ga79c564af50f6eb1c4aa6dac7f08337cf">kumi::tie</a>, and <a class="el" href="group__kumi__tie.html#ga934bd052835c7cc48a870fbc7c86e6ac">kumi::forward_as_tuple</a>. A <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> may also hold fields, which give its components a name besides their position, and it applies the empty-base optimization to its empty, non-final element types.</p>
+<p>The projections are the functions <span class="tt">get</span> and the subscript by a compile-time index, which the literal <span class="tt">_c</span> of the namespace kumi::literals builds. They return a reference to the component and count from 0 where \( \pi_i \) counts from 1, so that the index 0 computes \( \pi_1 \):</p>
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple&lt;int, float, char&gt;</a> t = {42, 13.37f, <span class="charliteral">&#39;d&#39;</span>};</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// the index 0 computes the first projection</span></div>
+<div class="line">  std::cout &lt;&lt; t &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">  std::cout &lt;&lt; t[0_c] &lt;&lt; <span class="stringliteral">&quot; and &quot;</span> &lt;&lt; <a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;0&gt;</a>(t) &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">}</div>
 <div class="ttc" id="astructkumi_1_1array_html_a2a236814b119c1e3e0b1cc5ce062c282"><div class="ttname"><a href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::array::get</a></div><div class="ttdeci">decltype(auto) constexpr get(array&lt; T, N &gt; &amp;t) noexcept</div><div class="ttdoc">Extracts the Ith element from a kumi::array.</div><div class="ttdef"><b>Definition</b> array.hpp:693</div></div>
-</div><!-- fragment --><p>A product type follows <b>List Algebra</b>.</p><ul>
-<li><b>Order Dependence</b>: Position is identity. \( (A, B) \) is structurally distinct from \( (B, A) \) even though they contain the same underlying types.</li>
-<li><b>Cardinality</b>: The total state space is the <b>product</b> of the states of its components: \( Card(A \times B) = Card(A) \times Card(B) \).</li>
+<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:35</div></div>
+</div><!-- fragment --><p>The algorithms of the group <a class="el" href="group__kumi__projections.html" title="Projections">Projections</a> count the indices from 0 and compute three kinds of maps:</p>
+<ul>
+<li><b>Projection onto one index</b>: <a class="el" href="group__kumi__front.html#gaa1618c96c4c7003afeccfb19e25b35bb">kumi::front</a> and <a class="el" href="group__kumi__back.html#gae635e0c094282372ff5393840b6f52c2">kumi::back</a> return a reference to the first and the last component of a non-empty <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>, \( \pi_1 \) and \( \pi_n \). On a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>, they return the value of the first and the last field, where <span class="tt">get</span> by index returns the field.</li>
+<li><b>Projection onto several indices</b>:<ul>
+<li><a class="el" href="group__kumi__reorder.html#ga32af967d7f453426ccd564d3a0b6c689">kumi::reorder</a> computes \( \pi_{i_1, \dots, i_k} \) for any sequence of indices, <span class="tt">reorder&lt;i - 1&gt;</span> returning a product of one component. On a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>, it stores copies of the components, without their reference or <span class="tt">const</span> qualifier.</li>
+<li><a class="el" href="group__kumi__extract.html#ga1a7617bafd6f8598cca8e7e6a5c6f383">kumi::extract</a> takes the indices in increasing order, from <span class="tt">B</span> to <span class="tt">E</span> by steps of <span class="tt">S</span>, and <a class="el" href="group__kumi__filter.html#ga2c9b5ff6b698c7dcb0feb2da1679fa9b">kumi::filter</a> the indices of the components whose stored type, a reference included, satisfies a predicate. Both keep the element types of their argument, references and <span class="tt">const</span> included.</li>
+<li><a class="el" href="group__kumi__pop__front.html#ga38d1ddeb5090405e79e9b7d898a85133">kumi::pop_front</a>, <a class="el" href="group__kumi__pop__back.html#ga397f7c5161b7a3ace25c406e83af98fb">kumi::pop_back</a>, <a class="el" href="group__kumi__remove.html#ga0f52ba0b24ce54052784df91c54ac233">kumi::remove</a>, <a class="el" href="group__kumi__reverse.html#ga48f6e5775e61dca804eda8b0bd354d6f">kumi::reverse</a>, <a class="el" href="group__kumi__rotate__left.html#gadbc56977f82e2eaefe486c0a9457f01c">kumi::rotate_left</a>, <a class="el" href="group__kumi__rotate__right.html#gaffd5dbb36e1c70d2fc058ffe03afef3e">kumi::rotate_right</a>, <a class="el" href="group__kumi__filter__not.html#ga750bc3d3425c955e1be6ef1b3879c314">kumi::filter_not</a>, <a class="el" href="group__kumi__unique.html#ga6479cba59ee95d4a0779e94993ab55a9">kumi::unique</a>, and <a class="el" href="group__kumi__all__unique.html#ga71bbbe8da94919e242bd3ded80ab6776">kumi::all_unique</a> compute such projections as well.</li>
 </ul>
-<h2 class="doxsection"><a class="anchor" id="tuple_programming"></a>
-Programming Languages Considerations</h2>
-<p>Product types can also be composed of homogeneous types, such a tuple does not differ from array types. In most programming models homogeneous product types can be efficiently stored via contiguous location in memory without needing to insert padding. By definition, an homogeneous product type can be iterated on by indexing as the gap between two consecutive elements is fixed. This property does not hold for their heterogeneous counterpart.</p>
-<p>The C++ standard library provides an implementation of a tuple type as well as some special cases. Kumi provides a generic yet optimized representation of them. Each type provided in the standard can be represented efficiently.</p>
-<table class="markdownTable">
-<tr class="markdownTableHead">
-<th class="markdownTableHeadLeft">STL type  </th><th class="markdownTableHeadLeft">Kumi  </th></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft">std::pair&lt;T1,T2&gt;;  </td><td class="markdownTableBodyLeft"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple&lt;T1,T2&gt;</a>  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyLeft">std::tuple&lt;Ts...&gt;;  </td><td class="markdownTableBodyLeft"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple&lt;Ts...&gt;</a>  </td></tr>
-<tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft">std::array&lt;T,5&gt;;  </td><td class="markdownTableBodyLeft"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple&lt;T,T,T,T,T&gt;</a>  </td></tr>
-<tr class="markdownTableRowEven">
-<td class="markdownTableBodyLeft">std::complex&lt;T&gt;;  </td><td class="markdownTableBodyLeft"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple&lt;T,T&gt;</a>  </td></tr>
-</table>
+</li>
+<li><b>Pair of projections</b>: <a class="el" href="group__kumi__split.html#gadb81f4533e81830674c3fc9577d3de93">kumi::split</a> and <a class="el" href="group__kumi__partition.html#ga4643116b2dc0dfbd0d15fee408a9c18c">kumi::partition</a> return the pair \( (f(x), g(x)) \) of two projections \( f \) and \( g \) onto several indices.</li>
+</ul>
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple</a> t = {1, 2.5, <span class="charliteral">&#39;c&#39;</span>, 4.f};</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// the projection onto the indices 3, 1, 1, written 2, 0, 0 from 0</span></div>
+<div class="line">  std::cout &lt;&lt; kumi::reorder&lt;2, 0, 0&gt;(t) &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// every second component, from the index 0 to the end</span></div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="group__kumi__extract.html#ga1a7617bafd6f8598cca8e7e6a5c6f383">kumi::extract</a>(t, 0_c, 4_c, 2_c) &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// the components of integral type</span></div>
+<div class="line">  std::cout &lt;&lt; kumi::filter&lt;std::is_integral&gt;(t) &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// the pair of projections cut at the index 2</span></div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_variable" href="group__kumi__split.html#gadb81f4533e81830674c3fc9577d3de93">kumi::split</a>(t, 2_c) &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// a projection of values holds copies, so t keeps its first component</span></div>
+<div class="line">  <span class="keyword">auto</span> u = <a class="code hl_variable" href="group__kumi__reorder.html#ga32af967d7f453426ccd564d3a0b6c689">kumi::reorder&lt;0&gt;</a>(t);</div>
+<div class="line">  <a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;0&gt;</a>(u) = 42;</div>
+<div class="line">  std::cout &lt;&lt; t &lt;&lt; <span class="stringliteral">&quot; and &quot;</span> &lt;&lt; u &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__kumi__extract_html_ga1a7617bafd6f8598cca8e7e6a5c6f383"><div class="ttname"><a href="group__kumi__extract.html#ga1a7617bafd6f8598cca8e7e6a5c6f383">kumi::extract</a></div><div class="ttdeci">constexpr extract_t extract</div><div class="ttdef"><b>Definition</b> extract.hpp:158</div></div>
+<div class="ttc" id="agroup__kumi__reorder_html_ga32af967d7f453426ccd564d3a0b6c689"><div class="ttname"><a href="group__kumi__reorder.html#ga32af967d7f453426ccd564d3a0b6c689">kumi::reorder</a></div><div class="ttdeci">constexpr reorder_t&lt; I... &gt; reorder</div><div class="ttdef"><b>Definition</b> reorder.hpp:135</div></div>
+<div class="ttc" id="agroup__kumi__split_html_gadb81f4533e81830674c3fc9577d3de93"><div class="ttname"><a href="group__kumi__split.html#gadb81f4533e81830674c3fc9577d3de93">kumi::split</a></div><div class="ttdeci">constexpr split_t split</div><div class="ttdef"><b>Definition</b> extract.hpp:305</div></div>
+</div><!-- fragment --><p>On a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>, <a class="el" href="group__kumi__reorder.html#ga32af967d7f453426ccd564d3a0b6c689">kumi::reorder</a> and <a class="el" href="group__kumi__reorder__fields.html#ga8c42552c8f93dad0b83a3903468d02c6">kumi::reorder_fields</a>, which selects the fields by label, reject a repeated index or label, since a record holds each label once.</p>
 <hr  />
-<h1 class="doxsection"><a class="anchor" id="kumi_record_type"></a>
-Record Type \( (\{l_A: A\} \times \{l_B: B\}) \)</h1>
-<p>A <b>Record Type</b> identifies its components by a <b>unique label</b> rather than a position.</p>
-<p>An instance of a record type in it's simplest form is a called a <a href="https://en.wikipedia.org/wiki/Record_(computer_science)">record</a>. In many programming languages, it is refered to as a struct. (Let aside considerations about object oriented progamming, inheritance, etc...)</p>
-<p>A <b>Record Type</b> is the labeled version of a Product, it can be seen as the product of mathematical sets. Similarily to tuples, it accepts one constructor that takes a variadic number of input that are in this case fields.</p>
-<p>Formally it can be written as :</p>
-<p>\( \{l_1 : x_1, l_2 : x_2, ..., l_n : x_n\} : T_1 \times T_2 \times ... \times T_n \)</p>
-<p>This can be read as : the record is composed of elements of types \( T_1 \) to \( T_n\) with corresponding values \( x_1 \) to \( x_n \) that are labeled with \( l_1 \) to \( l_n \).</p>
-<p>The corresponding definition in kumi could look like the following: </p><div class="fragment"><div class="line"><span class="keyword">using namespace </span>kumi::literals;</div>
-<div class="line"><a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> a = { <span class="stringliteral">&quot;x&quot;</span>_id = 42, <span class="stringliteral">&quot;y&quot;</span>_id = 13.37f, <span class="stringliteral">&quot;z&quot;</span>_id = <span class="charliteral">&#39;d&#39;</span> };</div>
-<div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
-</div><!-- fragment --><p>To extract values from a record, there are projections that are term constructors. A projection (often noted \( \pi \)) is a function that given a product type returns the elements. In a record, projections are generally labeled instead of indexed. Formally it is denoted as :</p>
-<p>\( \pi_{l_1}(x) : T_1, \pi_{l_2}(x) : T_2, ..., \pi_{l_n}(x) : T_n \)</p>
-<p>In kumi this corresponds to the <span class="tt">get</span> functions </p><div class="fragment"><div class="line"><span class="keyword">auto</span> a = <a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get</a>&lt;<span class="stringliteral">&quot;x&quot;</span>&gt;(<a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{ <span class="stringliteral">&quot;x&quot;</span>_id = 42, <span class="stringliteral">&quot;y&quot;</span>_id = 13.37f, <span class="stringliteral">&quot;z&quot;</span>_id = <span class="charliteral">&#39;d&#39;</span> });</div>
-</div><!-- fragment --><p>One could also use standard projections that are index, this simply modifies the semantic and the type that is returned. Where \( T \) denotes the type of the value stored in a record, \( \{l:T\} \) denotes the combination of the label and the type of the field. This is the return type of an indexed access on a record.</p>
-<p>It follows <b>Set Algebra</b> on top of <b>List Algebra</b>.</p><ul>
-<li><b>Label Identity</b>: Components are identified by unique <b>Labels</b> (names) rather than position.</li>
-<li><b>Permutation</b>: Theoretically, a record is a set of field mappings. In many formal definitions, <span class="tt">{x: int, y: float}</span> is isomorphic to <span class="tt">{y: float, x: int}</span> because the set of labels and their associated types are identical.</li>
-<li><b>Semantic Access</b>: Access is performed via labels (<span class="tt">get&lt;"x"&gt;(r)</span>), adding semantic meaning to the structure.</li>
+<h1 class="doxsection"><a class="anchor" id="kumi_power_type"></a>
+Power Type</h1>
+<p>A <b>power type</b> \( T^n \) is the product of \( n \) copies of one type \( T \), isomorphic to the homogeneous product \( T \times \dots \times T \) and to the function type \( \{0, \dots, n - 1\} \to T \) from the indices to the components, the array of \( n \) values of type \( T \).</p>
+<p>Its cardinality is \( \mathrm{Card}(T)^n \), and \( T^0 \), the array without components, is isomorphic to the unit type 1, the identity element of the product.</p>
+<p>Since every component of a power type has the type \( T \), an index known only at run time selects a value of type \( T \). In a type system without dependent types, the same index into a heterogeneous product yields at most a value of the sum of the component types, a <span class="tt">std::variant</span> in C++, and only a compile-time index yields the component at its own type.</p>
+<p>The library keeps the two notions apart:</p>
+<ul>
+<li><a class="el" href="structkumi_1_1array.html" title="Fixed-size collection of homogeneous values.">kumi::array</a> of a cv-unqualified, non-reference element type models the concept <a class="el" href="conceptkumi_1_1concepts_1_1power__type.html" title="Concept specifying a type follows the Power Type semantic.">kumi::concepts::power_type</a>.</li>
+<li><a class="el" href="structkumi_1_1array.html" title="Fixed-size collection of homogeneous values.">kumi::array</a> of references or of <span class="tt">const</span> elements, like <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> of equal element types, models <a class="el" href="conceptkumi_1_1concepts_1_1homogeneous__product__type.html" title="Concept specifying is Product Type which types are all the same.">kumi::concepts::homogeneous_product_type</a> without being a power type.</li>
 </ul>
-<p>Operation on records are traditionally not structural in the sense that they operate per label, never per element. However, as they are internally represented by a tuple, such operation are permitted. As an example, one could "rotate" a record \( n \) positions to the left. Mathematically this might not make a lot of sense whereas for a programmer that has to consider memory representation, this is potentially critical to have.</p>
+<p><a class="el" href="structkumi_1_1array.html" title="Fixed-size collection of homogeneous values.">kumi::array</a> (see <a class="el" href="group__kumi__array__related.html" title="Power Types and associated Functions">Power Types and associated Functions</a>) is indexed at compile time only, through <span class="tt">operator[]</span> with a <a class="el" href="structkumi_1_1index__t.html" title="Integral constant type.">kumi::index_t</a>, as <span class="tt">a[1_c]</span>. The empty <span class="tt"><a class="el" href="structkumi_1_1array.html" title="Fixed-size collection of homogeneous values.">kumi::array</a>{}</span> deduces to <span class="tt"><a class="el" href="structkumi_1_1array.html" title="Fixed-size collection of homogeneous values.">kumi::array</a>&lt;void, 0&gt;</span>, the identity of the power types.</p>
+<p>An algorithm returns a power type when its results share one type, as <a class="el" href="group__kumi__map.html#gaeaba737291ba1085d77272eae38a016e">kumi::map</a> does with a function that returns one type, and a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> once they differ, as <a class="el" href="group__kumi__push__back.html#ga2d60bb8eaba1c8c697b0d4f1e9bf7ce6">kumi::push_back</a> of a <span class="tt">double</span> onto an array of <span class="tt">int</span> does.</p>
+<p><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> stores the elements of a homogeneous tuple of size greater than 1 as an array, when they are neither references nor empty types.</p>
+<p>The tuple types of the C++ standard library model <a class="el" href="conceptkumi_1_1concepts_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::concepts::product_type</a> as they are, which lets every algorithm of <b>KUMI</b> accept them without conversion, and each of them has a counterpart in the library:</p>
+<center></center><center><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadLeft">Standard library type  </th><th class="markdownTableHeadLeft"><b>KUMI</b> counterpart  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft"><span class="tt">std::pair&lt;T1, T2&gt;</span>  </td><td class="markdownTableBodyLeft"><span class="tt"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>&lt;T1, T2&gt;</span>  </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft"><span class="tt">std::tuple&lt;Ts...&gt;</span>  </td><td class="markdownTableBodyLeft"><span class="tt"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>&lt;Ts...&gt;</span>  </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft"><span class="tt">std::array&lt;T, N&gt;</span>  </td><td class="markdownTableBodyLeft"><span class="tt"><a class="el" href="structkumi_1_1array.html" title="Fixed-size collection of homogeneous values.">kumi::array</a>&lt;T, N&gt;</span>  </td></tr>
+</table>
+</center><center></center><p>A <a class="el" href="structkumi_1_1array.html" title="Fixed-size collection of homogeneous values.">kumi::array</a> prints its components between brackets, and a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> between parentheses:</p>
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> show(<span class="keywordtype">char</span> <span class="keyword">const</span>* text, <span class="keywordtype">bool</span> b)</div>
+<div class="line">{</div>
+<div class="line">  std::cout &lt;&lt; text &lt;&lt; <span class="stringliteral">&quot;: &quot;</span> &lt;&lt; std::boolalpha &lt;&lt; b &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line">  <span class="keyword">using </span>std::is_same_v;</div>
+<div class="line">  <span class="keyword">using </span>t_t = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple&lt;int, int, int&gt;</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// a power type of int, indexed at compile time</span></div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1array.html">kumi::array</a> a = {1, 2, 3};</div>
+<div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot; has &quot;</span> &lt;&lt; a[1_c] &lt;&lt; <span class="stringliteral">&quot; at index 1\n&quot;</span>;</div>
+<div class="line">  show(<span class="stringliteral">&quot;kumi::array&lt;int, 3&gt; is a power type&quot;</span>,</div>
+<div class="line">       <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1power__type.html">kumi::concepts::power_type</a>&lt;<span class="keyword">decltype</span>(a)&gt;);</div>
+<div class="line">  show(<span class="stringliteral">&quot;kumi::tuple&lt;int, int, int&gt; is a power type&quot;</span>,</div>
+<div class="line">       <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1power__type.html">kumi::concepts::power_type&lt;t_t&gt;</a>);</div>
+<div class="line">  show(<span class="stringliteral">&quot;kumi::tuple&lt;int, int, int&gt; is homogeneous&quot;</span>,</div>
+<div class="line">       <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1homogeneous__product__type.html">kumi::concepts::homogeneous_product_type&lt;t_t&gt;</a>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// the empty array, the identity of the power types</span></div>
+<div class="line">  show(<span class="stringliteral">&quot;kumi::array{} is kumi::array&lt;void, 0&gt;&quot;</span>,</div>
+<div class="line">       is_same_v&lt;<span class="keyword">decltype</span>(<a class="code hl_class" href="structkumi_1_1array.html">kumi::array</a>{}), <a class="code hl_class" href="structkumi_1_1array.html">kumi::array&lt;void, 0&gt;</a>&gt;);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// an algorithm that mixes types returns a kumi::tuple</span></div>
+<div class="line">  <span class="keyword">auto</span> m = <a class="code hl_variable" href="group__kumi__map.html#gaeaba737291ba1085d77272eae38a016e">kumi::map</a>([](<span class="keywordtype">int</span> x) { <span class="keywordflow">return</span> x * 2; }, a);</div>
+<div class="line">  <span class="keyword">auto</span> p = <a class="code hl_variable" href="group__kumi__push__back.html#ga2d60bb8eaba1c8c697b0d4f1e9bf7ce6">kumi::push_back</a>(a, 4.5);</div>
+<div class="line">  std::cout &lt;&lt; m &lt;&lt; <span class="stringliteral">&quot; and &quot;</span> &lt;&lt; p &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1homogeneous__product__type_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1homogeneous__product__type.html">kumi::concepts::homogeneous_product_type</a></div><div class="ttdoc">Concept specifying is Product Type which types are all the same.</div><div class="ttdef"><b>Definition</b> concepts.hpp:299</div></div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1power__type_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1power__type.html">kumi::concepts::power_type</a></div><div class="ttdoc">Concept specifying a type follows the Power Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:113</div></div>
+<div class="ttc" id="agroup__kumi__map_html_gaeaba737291ba1085d77272eae38a016e"><div class="ttname"><a href="group__kumi__map.html#gaeaba737291ba1085d77272eae38a016e">kumi::map</a></div><div class="ttdeci">constexpr map_t map</div><div class="ttdef"><b>Definition</b> map.hpp:156</div></div>
+<div class="ttc" id="agroup__kumi__push__back_html_ga2d60bb8eaba1c8c697b0d4f1e9bf7ce6"><div class="ttname"><a href="group__kumi__push__back.html#ga2d60bb8eaba1c8c697b0d4f1e9bf7ce6">kumi::push_back</a></div><div class="ttdeci">constexpr push_back_t push_back</div><div class="ttdef"><b>Definition</b> push_pop.hpp:246</div></div>
+<div class="ttc" id="astructkumi_1_1array_html"><div class="ttname"><a href="structkumi_1_1array.html">kumi::array</a></div><div class="ttdoc">Fixed-size collection of homogeneous values.</div><div class="ttdef"><b>Definition</b> array.hpp:43</div></div>
+</div><!-- fragment --><hr  />
+<h1 class="doxsection"><a class="anchor" id="kumi_record_type"></a>
+Record Type</h1>
+<p>A <b>record type</b> \( \{l_1 : T_1, \dots, l_n : T_n\} \) designates its components by labels, distinct from each other, instead of positions, and it is the product \( \prod_{l \in L} T_l \) indexed by a finite set \( L \) of labels. Its values are the <a href="https://en.wikipedia.org/wiki/Record_(computer_science)">records</a> \( \{l_1 = x_1, \dots, l_n = x_n\} \), in the notation of <a class="el" href="kumi_references.html#references_texts" title="Primary Texts">Pierce</a>, section 11.8:</p>
+<p class="formulaDsp">
+\[ \{l_1 = x_1, \dots, l_n = x_n\} : \{l_1 : T_1, \dots, l_n : T_n\} \]
+</p>
+<p>C, C++, and Rust call such a type a structure, while Pascal, Ada, and the languages of the ML family call it a record, setting aside what object-oriented programming adds to it, such as inheritance.</p>
+<p>The projections of a record are labeled, the projection \( \pi_l \) mapping a record to the value of its field labeled \( l \), which Pierce writes \( x.l \):</p>
+<p class="formulaDsp">
+\[ \pi_{l_i}(x) : T_i \]
+</p>
+<p>Two properties distinguish the record from the tuple:</p>
+<ul>
+<li><b>Labels</b>: a component is designated by its label, unique within the record, rather than by its position, so that a projection names the field that it reads, as <span class="tt">get&lt;"x"&gt;(r)</span> does.</li>
+<li><b>Permutation</b>: the record calculi differ on the order of the fields. Standard ML identifies the record types that differ by the order of their fields, whereas the basic calculus of Pierce keeps the order in the type and relates the permuted types by the subtyping rule S-RcdPerm, section 15.2.</li>
+</ul>
+<p>The labeled product of the library is <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> (see <a class="el" href="group__kumi__record__related.html" title="Record Types and associated Functions">Record Types and associated Functions</a>), an aggregate initialized, like <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>, from a braced list of fields, each binding an identifier to a value. Two records whose fields differ by their order are distinct types, and neither converts to the other, yet their comparison and their assignment match the fields by identifier, whatever their order.</p>
+<p>The projection by name takes the identifier of the field, <span class="tt">"x"_id</span>, in the subscript or in <span class="tt">get</span>, or the label alone, a <a class="el" href="structkumi_1_1str.html" title="Static string used to create named fields.">kumi::str</a>, in <span class="tt">get&lt;"x"&gt;</span>:</p>
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> r = {<span class="stringliteral">&quot;x&quot;</span>_id = 42, <span class="stringliteral">&quot;y&quot;</span>_id = 13.37f, <span class="stringliteral">&quot;z&quot;</span>_id = <span class="charliteral">&#39;d&#39;</span>};</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; r &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// the identifier of the field, in the subscript or in get</span></div>
+<div class="line">  std::cout &lt;&lt; r[<span class="stringliteral">&quot;x&quot;</span>_id] &lt;&lt; <span class="stringliteral">&quot; and &quot;</span> &lt;&lt; <a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get</a>&lt;<span class="stringliteral">&quot;x&quot;</span>_id&gt;(r) &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// the label alone, a kumi::str</span></div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get</a>&lt;<span class="stringliteral">&quot;x&quot;</span>&gt;(r) &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
+</div><!-- fragment --><p>A record also has an index order, the order in which its fields are declared, which <span class="tt">std::tuple_size</span>, <span class="tt">std::tuple_element</span>, and the <span class="tt">get</span> overloads that take an index expose. The positional algorithms that keep the fields of a record return a record, <a class="el" href="group__kumi__rotate__left.html#gadbc56977f82e2eaefe486c0a9457f01c">kumi::rotate_left</a> and <a class="el" href="group__kumi__reverse.html#ga48f6e5775e61dca804eda8b0bd354d6f">kumi::reverse</a> among them, while an algorithm that adds a component without a label, such as <a class="el" href="group__kumi__push__back.html#ga2d60bb8eaba1c8c697b0d4f1e9bf7ce6">kumi::push_back</a>, does not accept a record.</p>
+<p>An access by index returns the field, whose type \( \{l : T\} \) combines the label and the type of the value, while an access by label returns the value, of type \( T \).</p>
 <div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadLeft">Previous  </th></tr>
+<th class="markdownTableHeadLeft">Previous  </th><th class="markdownTableHeadRight">Next  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><a class="el" href="kumi_identity.html" title="The Identity Elements (The &quot;0&quot; and &quot;1&quot; of Types)">Identity Types</a>  </td></tr>
+<td class="markdownTableBodyLeft"><a class="el" href="kumi_identity.html" title="Identity Elements">Identity Elements</a>  </td><td class="markdownTableBodyRight"><a class="el" href="kumi_references.html" title="Bibliography">Bibliography</a>  </td></tr>
 </table>
 </div><div class="section_buttons"></div> </div></div><!-- contents -->
 </div><!-- PageDoc -->

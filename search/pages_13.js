@@ -1,8 +1,6 @@
 var searchData=
 [
-  ['of_20and_0',['Product Constructions (The Logic of &quot;AND&quot;)',['../kumi_product.html#product_construction',1,'']]],
-  ['of_20the_20glossary_1',['Grounding of the Glossary',['../kumi_references.html#references_terms',1,'']]],
-  ['of_20types_2',['The Identity Elements (The &quot;0&quot; and &quot;1&quot; of Types)',['../kumi_identity.html',1,'kumi_glossary']]],
-  ['optimization_3',['Empty Base Optimization',['../kumi_cpp_spec.html#autotoc_md121',1,'']]],
-  ['origin_4',['Origin',['../kumi_introduction.html#origin',1,'']]]
+  ['new_20contributors_0',['New Contributors',['../kumi_changelog.html#autotoc_md109',1,'']]],
+  ['new_20features_1',['New Features',['../kumi_changelog.html#autotoc_md92',1,'New Features'],['../kumi_changelog.html#autotoc_md96',1,'New Features'],['../kumi_changelog.html#autotoc_md102',1,'New Features'],['../kumi_changelog.html#autotoc_md107',1,'New Features'],['../kumi_changelog.html#autotoc_md113',1,'New Features'],['../kumi_changelog.html#autotoc_md118',1,'New Features']]],
+  ['nomenclature_2',['Nomenclature',['../kumi_nomenclature.html',1,'kumi_glossary']]]
 ];

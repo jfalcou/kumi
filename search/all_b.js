@@ -1,13 +1,13 @@
 var searchData=
 [
-  ['element_0',['Element',['../kumi_nomenclature.html#autotoc_md139',1,'']]],
+  ['element_0',['Element',['../kumi_nomenclature.html#kumi_nomenclature_element',1,'']]],
   ['element_20wise_20transformations_1',['Element-wise Transformations',['../group__kumi__generic__transforms.html',1,'']]],
   ['element_5for_5ft_2',['element_or_t',['../group__kumi__functional.html#ga11e943ab58829909243b4826d1f084d8',1,'kumi::function']]],
   ['element_5ft_3',['element_t',['../group__kumi__generic__traits.html#ga8ba508c6d1dfb63ff6fec24deb84d66e',1,'kumi']]],
-  ['elements_20the_200_20and_201_20of_20types_4',['The Identity Elements (The &quot;0&quot; and &quot;1&quot; of Types)',['../kumi_identity.html',1,'kumi_glossary']]],
+  ['elements_4',['Identity Elements',['../kumi_identity.html',1,'kumi_glossary']]],
   ['empty_5',['empty',['../structkumi_1_1record.html#a7e54e12c537c8dcbafabc215957f0abc',1,'kumi::record::empty()'],['../structkumi_1_1tuple.html#af1a74e00134be29916bb7fb6e8cda5f6',1,'kumi::tuple::empty()'],['../structkumi_1_1projection__map.html#a58deb29e4d5dd38ee994e8e65f667627',1,'kumi::projection_map::empty()']]],
-  ['empty_20base_20optimization_6',['Empty Base Optimization',['../kumi_cpp_spec.html#autotoc_md121',1,'']]],
-  ['empty_20type_20_3a_200_7',['Empty Type : \\( (0 / \\bot) \\)',['../kumi_identity.html#kumi_empty',1,'']]],
+  ['empty_20base_20optimization_6',['Empty Base Optimization',['../kumi_cpp_vocabulary.html#autotoc_md121',1,'']]],
+  ['empty_20type_7',['Empty Type',['../kumi_identity.html#kumi_empty',1,'']]],
   ['empty_5fproduct_5ftype_8',['empty_product_type',['../conceptkumi_1_1concepts_1_1empty__product__type.html',1,'kumi::concepts']]],
   ['epidote_9',['Version 3.1 - Exquisite Epidote',['../kumi_changelog.html#autotoc_md99',1,'']]],
   ['equality_5fcomparable_10',['equality_comparable',['../conceptkumi_1_1concepts_1_1equality__comparable.html',1,'kumi::concepts']]],

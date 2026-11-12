@@ -24,18 +24,8 @@
 */
 var menudata={children:[
 {text:"Main Page",url:"index.html"},
-{text:"About The Library",url:"kumi_setup.html",children:[
-{text:"Setup",url:"kumi_setup.html"},
-{text:"Changelog",url:"kumi_changelog.html"},
-{text:"Licence",url:"kumi_licence.html"}]},
-{text:"Glossary",url:"kumi_glossary.html",children:[
-{text:"Type Theory",url:"kumi_introduction.html#kumi_introduction",children:[
-{text:"Introduction",url:"kumi_introduction.html#kumi_introduction"},
-{text:"Identity Types",url:"kumi_identity.html#kumi_identity"},
-{text:"Product Types",url:"kumi_product.html#kumi_product"},
-{text:"References",url:"kumi_references.html#kumi_references"}]},
-{text:"C++ Vocabulary",url:"kumi_cpp_spec.html#kumi_cpp_spec"},
-{text:"Nomenclature",url:"kumi_nomenclature.html#kumi_nomenclature"}]},
+{text:"Getting Started",url:"kumi_setup.html",children:[
+{text:"Installation",url:"kumi_setup.html"}]},
 {text:"Reference Documentation",url:"kumi_reference.html",children:[
 {text:"Types",url:"group__kumi__tuple__related.html",children:[
 {text:"Tuple Types and Functions",url:"group__kumi__tuple__related.html"},
@@ -54,4 +44,15 @@ var menudata={children:[
 {text:"Utility",url:"group__kumi__utility.html"},
 {text:"Functional",url:"group__kumi__functional.html"}]},
 {text:"kumi Namespace",url:"namespacekumi.html"}]},
-{text:"Contact",url:"mailto:joel.falcou+kumi@gmail.com?subject=The%20KUMI%20Library"}]}
+{text:"Glossary",url:"kumi_glossary.html",children:[
+{text:"Type Theory",url:"kumi_introduction.html#kumi_introduction",children:[
+{text:"Introduction",url:"kumi_introduction.html#kumi_introduction"},
+{text:"Identity Elements",url:"kumi_identity.html#kumi_identity"},
+{text:"Product Types",url:"kumi_product.html#kumi_product"}]},
+{text:"References",url:"kumi_references.html#kumi_references",children:[
+{text:"Bibliography",url:"kumi_references.html#kumi_references"},
+{text:"C++ Vocabulary",url:"kumi_cpp_vocabulary.html#kumi_cpp_vocabulary"},
+{text:"Nomenclature",url:"kumi_nomenclature.html#kumi_nomenclature"}]}]},
+{text:"Informations",url:"kumi_changelog.html",children:[
+{text:"Changelog",url:"kumi_changelog.html"},
+{text:"Licence",url:"kumi_licence.html"}]}]}

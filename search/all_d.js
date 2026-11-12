@@ -10,7 +10,6 @@ var searchData=
   ['get_5findex_5fof_5flabel_7',['get_index_of_label',['../group__kumi__get__index__of__label.html#ga6c5b5c12c2baa75189a7d94e55fbfe17',1,'kumi']]],
   ['get_5findex_5fof_5ftype_8',['get_index_of_type',['../group__kumi__get__index__of__type.html#ga15172fcc47fe0c88931be39b9c3633fd',1,'kumi']]],
   ['get_5for_9',['get_or',['../group__kumi__function__get__or.html#ga42064b97f063feae3d934bd111ef74ec',1,'kumi::function']]],
-  ['glossary_10',['Glossary',['../kumi_glossary.html',1,'Glossary'],['../kumi_references.html#references_terms',1,'Grounding of the Glossary']]],
-  ['gorgeous_20garnet_11',['Version 5.0 - Gorgeous Garnet',['../kumi_changelog.html#autotoc_md90',1,'']]],
-  ['grounding_20of_20the_20glossary_12',['Grounding of the Glossary',['../kumi_references.html#references_terms',1,'']]]
+  ['glossary_10',['Glossary',['../kumi_glossary.html',1,'']]],
+  ['gorgeous_20garnet_11',['Version 5.0 - Gorgeous Garnet',['../kumi_changelog.html#autotoc_md90',1,'']]]
 ];

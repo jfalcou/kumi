@@ -27,7 +27,7 @@
     </tr>
     <tr>
       <th scope="row">Date:</th>
-      <td>2026-11-12 19:08:05</td>
+      <td>2026-11-12 19:12:05</td>
     </tr>
   </table>
 </div>
@@ -47,8 +47,8 @@
     </tr>
     <tr>
       <th scope="row">Functions:</th>
-      <td>38</td>
-      <td>38</td>
+      <td>39</td>
+      <td>39</td>
       <td class="coverage-high">100.0%</td>
     </tr>
     <tr>
@@ -82,6 +82,7 @@
     <tr><td><a href="#l21">auto kumi::_::push_back_&lt;kumi::array&lt;int, 2ul&gt;, int const&amp;, 0ul, 1ul&gt;(kumi::_::cxx20::adl_tag_t, kumi::array&lt;int, 2ul&gt;&amp;&amp;, int const&amp;, std::integer_sequence&lt;unsigned long, 0ul, 1ul&gt;) (line 21)</a></td><td>called 1 time, returned 1 time</td><td>100.0%</td></tr>
     <tr><td><a href="#l21">auto kumi::_::push_back_&lt;kumi::array&lt;int, 2ul&gt;, int&amp;, 0ul, 1ul&gt;(kumi::_::cxx20::adl_tag_t, kumi::array&lt;int, 2ul&gt;&amp;&amp;, int&amp;, std::integer_sequence&lt;unsigned long, 0ul, 1ul&gt;) (line 21)</a></td><td>called 1 time, returned 1 time</td><td>100.0%</td></tr>
     <tr><td><a href="#l21">auto kumi::_::push_back_&lt;kumi::array&lt;int, 2ul&gt;, int, 0ul, 1ul&gt;(kumi::_::cxx20::adl_tag_t, kumi::array&lt;int, 2ul&gt;&amp;&amp;, int&amp;&amp;, std::integer_sequence&lt;unsigned long, 0ul, 1ul&gt;) (line 21)</a></td><td>called 2 times, returned 2 times</td><td>100.0%</td></tr>
+    <tr><td><a href="#l21">auto kumi::_::push_back_&lt;kumi::array&lt;int, 3ul&gt;&amp;, double, 0ul, 1ul, 2ul&gt;(kumi::_::cxx20::adl_tag_t, kumi::array&lt;int, 3ul&gt;&amp;, double&amp;&amp;, std::integer_sequence&lt;unsigned long, 0ul, 1ul, 2ul&gt;) (line 21)</a></td><td>called 1 time, returned 1 time</td><td>100.0%</td></tr>
     <tr><td><a href="#l21">auto kumi::_::push_back_&lt;kumi::record&lt;&gt;, kumi::field&lt;kumi::name&lt;kumi::str&lt;1ul&gt;{char [2]{(char)97}}&gt;, double&gt;&gt;(kumi::_::cxx20::adl_tag_t, kumi::record&lt;&gt;&amp;&amp;, kumi::field&lt;kumi::name&lt;kumi::str&lt;1ul&gt;{char [2]{(char)97}}&gt;, double&gt;&amp;&amp;, std::integer_sequence&lt;unsigned long&gt;) (line 21)</a></td><td>called 1 time, returned 1 time</td><td>100.0%</td></tr>
     <tr><td><a href="#l21">auto kumi::_::push_back_&lt;kumi::record&lt;&gt;, kumi::field&lt;kumi::name&lt;kumi::str&lt;1ul&gt;{char [2]{(char)97}}&gt;, int&gt;&gt;(kumi::_::cxx20::adl_tag_t, kumi::record&lt;&gt;&amp;&amp;, kumi::field&lt;kumi::name&lt;kumi::str&lt;1ul&gt;{char [2]{(char)97}}&gt;, int&gt;&amp;&amp;, std::integer_sequence&lt;unsigned long&gt;) (line 21)</a></td><td>called 2 times, returned 2 times</td><td>100.0%</td></tr>
     <tr><td><a href="#l21">auto kumi::_::push_back_&lt;kumi::record&lt;kumi::field&lt;kumi::name&lt;kumi::str&lt;1ul&gt;{char [2]{(char)97}}&gt;, double&gt; &gt;, kumi::field&lt;kumi::name&lt;kumi::str&lt;1ul&gt;{char [2]{(char)98}}&gt;, int&gt;, 0ul&gt;(kumi::_::cxx20::adl_tag_t, kumi::record&lt;kumi::field&lt;kumi::name&lt;kumi::str&lt;1ul&gt;{char [2]{(char)97}}&gt;, double&gt; &gt;&amp;&amp;, kumi::field&lt;kumi::name&lt;kumi::str&lt;1ul&gt;{char [2]{(char)98}}&gt;, int&gt;&amp;&amp;, std::integer_sequence&lt;unsigned long, 0ul&gt;) (line 21)</a></td><td>called 2 times, returned 2 times</td><td>100.0%</td></tr>
@@ -269,7 +270,7 @@
       <td class="lineno"><a id="l21" href="#l21">21</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">60</td>
+      <td class="linecount coveredLine">61</td>
       <td class="src coveredLine"><span class="w">    </span><span class="n">KUMI_HIDDEN_ABI</span><span class="w"> </span><span class="k">constexpr</span><span class="w"> </span><span class="k">auto</span><span class="w"> </span><span class="n">push_back_</span><span class="p">(</span><span class="n">kumi</span><span class="o">::</span><span class="n">_</span><span class="o">::</span><span class="n">adl_tag_t</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">t</span><span class="p">,</span><span class="w"> </span><span class="n">V</span><span class="o">&amp;&amp;</span><span class="w"> </span><span class="n">v</span><span class="p">,</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">index_sequence</span><span class="o">&lt;</span><span class="n">I</span><span class="p">...</span><span class="o">&gt;</span><span class="p">)</span></td>
     </tr>
     <tr class="source-line">
@@ -283,7 +284,7 @@
       <td class="lineno"><a id="l23" href="#l23">23</a></td>
       <td class="linebranch">
       </td>
-      <td class="linecount coveredLine">142</td>
+      <td class="linecount coveredLine">146</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">kumi</span><span class="o">::</span><span class="n">builder</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;::</span><span class="n">make</span><span class="p">(</span><span class="n">get</span><span class="o">&lt;</span><span class="n">I</span><span class="o">&gt;</span><span class="p">(</span><span class="n">KUMI_FWD</span><span class="p">(</span><span class="n">t</span><span class="p">))...,</span><span class="w"> </span><span class="n">KUMI_FWD</span><span class="p">(</span><span class="n">v</span><span class="p">));</span></td>
     </tr>
     <tr class="source-line">
@@ -491,7 +492,7 @@
         <details class="linebranchDetails">
         <summary class="linebranchSummary">12/12</summary>
         <div class="linebranchContents">
-          <div class="takenBranch">&check; Branch 1 taken 6 times.</div>
+          <div class="takenBranch">&check; Branch 1 taken 7 times.</div>
           <div class="takenBranch">&check; Branch 4 taken 6 times.</div>
           <div class="takenBranch">&check; Branch 7 taken 3 times.</div>
           <div class="takenBranch">&check; Branch 10 taken 3 times.</div>
@@ -506,7 +507,7 @@
         </div>
         </details>
       </td>
-      <td class="linecount coveredLine">30</td>
+      <td class="linecount coveredLine">31</td>
       <td class="src coveredLine"><span class="w">      </span><span class="k">return</span><span class="w"> </span><span class="n">push_back_</span><span class="p">(</span><span class="n">kumi</span><span class="o">::</span><span class="n">_</span><span class="o">::</span><span class="n">adl_tag</span><span class="p">,</span><span class="w"> </span><span class="n">KUMI_FWD</span><span class="p">(</span><span class="n">t</span><span class="p">),</span><span class="w"> </span><span class="n">KUMI_FWD</span><span class="p">(</span><span class="n">v</span><span class="p">),</span><span class="w"> </span><span class="n">kumi</span><span class="o">::</span><span class="n">function</span><span class="o">::</span><span class="n">indexes_for</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">{});</span></td>
     </tr>
     <tr class="source-line">

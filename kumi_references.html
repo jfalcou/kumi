@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="KUMI - The C++20 Compact Tuple Tools" />
 <meta name="twitter:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
 <meta name="twitter:image" content="https://jfalcou.github.io/kumi/card.png" />
-<title>KUMI: References</title>
+<title>KUMI: Bibliography</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -132,33 +132,37 @@ $(function(){initNavTree('kumi_references.html','',''); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">References </div></div>
+  <div class="headertitle"><div class="title">Bibliography </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>The following is a short, non-exhaustive selection of references used to ground the terminology of this documentation, listed roughly in order of increasing depth.</p>
+<div class="textblock"><p>These texts ground the terminology of the Glossary, from the textbooks to the original papers, and its notations of products and sums follow them together with the standard mathematical notation for sets and tuples. The terms of the C++ language are defined on the <a class="el" href="kumi_cpp_vocabulary.html" title="C++ Vocabulary">C++ Vocabulary</a> page, and the terms specific to the library on the <a class="el" href="kumi_nomenclature.html" title="Nomenclature">Nomenclature</a> page.</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="references_texts"></a>
 Primary Texts</h1>
 <ul>
-<li>Benjamin C. Pierce, <b>Types and Programming Languages</b>, MIT Press, 2002. The standard introduction to type systems; the type-theoretic notation used in the <a class="el" href="kumi_introduction.html" title="Type Theoretic Foundations">Type Theoretic Foundations</a> mostly follows it.</li>
-<li>Robert Harper, <b>Practical Foundations for Programming Languages</b>, 2nd Edition, Cambridge University Press, 2016. A more advanced, judgment-centered account of the same material.</li>
-<li>Henk Barendregt, <b>The Lambda Calculus: Its Syntax and Semantics</b>, North-Holland, 1984. The classical reference for lambda terms, hence for the notion of formal variable and abstraction used in the introduction.</li>
+<li>Serge Abiteboul, Richard Hull, and Victor Vianu, <b>Foundations of Databases</b>, Addison-Wesley, 1995, ISBN 978-0-201-53771-0, <a href="http://webdam.inria.fr/Alice/">website</a>.</li>
+<li>Henk Barendregt, <b>The Lambda Calculus: Its Syntax and Semantics</b>, revised edition, <em>Studies in Logic and the Foundations of Mathematics</em> 103, North-Holland, 1984, ISBN 978-0-444-87508-2.</li>
+<li>Henk Barendregt, <b>Lambda calculi with types</b>, in S. Abramsky, D. M. Gabbay, and T. S. E. Maibaum (eds.), <em>Handbook of Logic in Computer Science</em> 2, Oxford University Press, 1992, <a href="https://doi.org/10.1093/oso/9780198537618.003.0002">DOI:10.1093/oso/9780198537618.003.0002</a>.</li>
+<li>Robert Harper, <b>Practical Foundations for Programming Languages</b>, 2nd edition, Cambridge University Press, 2016, <a href="https://doi.org/10.1017/CBO9781316576892">DOI:10.1017/CBO9781316576892</a>.</li>
+<li>Benjamin C. Pierce, <b>Types and Programming Languages</b>, MIT Press, 2002, <a href="https://www.cis.upenn.edu/~bcpierce/tapl/">website</a>.</li>
+<li>Wikipedia contributors, <b>Type theory</b>, <em>Wikipedia, The Free Encyclopedia</em>, <a href="https://en.wikipedia.org/wiki/Type_theory">website</a>.</li>
 </ul>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="references_curry_howard"></a>
 The Curry-Howard Correspondence</h1>
 <ul>
-<li>William A. Howard, "The formulae-as-types notion of construction", in To H.B. Curry: Essays on Combinatory Logic, Lambda Calculus and Formalism*, Academic Press, 1980.</li>
-<li>Philip Wadler, "Propositions as Types", <em>Communications of the ACM</em> 58(12), 2015. An accessible account of the correspondence summarized in the <a class="el" href="kumi_introduction.html" title="Type Theoretic Foundations">Introduction</a> table.</li>
+<li>Haskell B. Curry, <b>Functionality in Combinatory Logic</b>, <em>Proceedings of the National Academy of Sciences</em> 20(11), 1934, pp. 584-590, <a href="https://doi.org/10.1073/pnas.20.11.584">DOI:10.1073/pnas.20.11.584</a>.</li>
+<li>Timothy G. Griffin, <b>A formulae-as-type notion of control</b>, in <em>Proceedings of the 17th ACM SIGPLAN-SIGACT Symposium on Principles of Programming Languages</em>, POPL '90, 1990, pp. 47-58, <a href="https://doi.org/10.1145/96709.96714">DOI:10.1145/96709.96714</a>.</li>
+<li>William A. Howard, <b>The formulae-as-types notion of construction</b>, in J. P. Seldin and J. R. Hindley (eds.), <em>To H. B. Curry: Essays on Combinatory Logic, Lambda Calculus and Formalism</em>, Academic Press, 1980, pp. 479-490, <a href="https://www.cs.cmu.edu/~crary/819-f09/Howard80.pdf">PDF</a>.</li>
+<li>Philip Wadler, <b>Propositions as Types</b>, <em>Communications of the ACM</em> 58(12), 2015, pp. 75-84, <a href="https://doi.org/10.1145/2699407">DOI:10.1145/2699407</a>, <a href="https://homepages.inf.ed.ac.uk/wadler/papers/propositions-as-types/propositions-as-types.pdf">PDF</a>.</li>
 </ul>
-<hr  />
-<h1 class="doxsection"><a class="anchor" id="references_terms"></a>
-Grounding of the Glossary</h1>
-<ul>
-<li>The logical connectives and product/sum notations used in this glossary follow the conventions of the primary texts above and the standard mathematical notation for sets and tuples.</li>
-<li>Language-specific terms are grounded in the <a class="el" href="kumi_cpp_spec.html" title="C++ Specific Terms">C++ Vocabulary</a> page, and the terms specific to kumi in the <a class="el" href="kumi_nomenclature.html" title="Nomenclature">Nomenclature</a> page. </li>
-</ul>
-</div></div><!-- contents -->
+<div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadLeft">Previous  </th><th class="markdownTableHeadRight">Next  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft"><a class="el" href="kumi_product.html" title="Product Types">Product Types</a>  </td><td class="markdownTableBodyRight"><a class="el" href="kumi_cpp_vocabulary.html" title="C++ Vocabulary">C++ Vocabulary</a>  </td></tr>
+</table>
+</div><div class="section_buttons"></div> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 </div><!-- container -->

@@ -20,7 +20,7 @@
 <meta name="twitter:title" content="KUMI - The C++20 Compact Tuple Tools" />
 <meta name="twitter:description" content="KUMI is a fast-to-compile C++20 implementation of a tuple-like class. It offers a modern interface, algorithms on tuples, and record type handling." />
 <meta name="twitter:image" content="https://jfalcou.github.io/kumi/card.png" />
-<title>KUMI: The Identity Elements (The &quot;0&quot; and &quot;1&quot; of Types)</title>
+<title>KUMI: Identity Elements</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -132,35 +132,92 @@ $(function(){initNavTree('kumi_identity.html','',''); });
 </div>
 
 <div><div class="header">
-  <div class="headertitle"><div class="title">The Identity Elements (The "0" and "1" of Types) </div></div>
+  <div class="headertitle"><div class="title">Identity Elements </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>Just as there are neutral elements for mathematical operations, there are neutral elements for types. The neutral is a mathematical element that has no effect on the computation such that using it results in the identity. The simplest example might be adding 0 to some natural number. With this said, before building complex types, we must define the neutrals that govern type algebra. These types are the foundational "identity" elements.</p>
+<div class="textblock"><p>An <a href="https://en.wikipedia.org/wiki/Identity_element">identity element</a>, or neutral element, of a binary operation \( \ast \) on a set is an element \( e \) such that \( e \ast a = a \ast e = a \) for every element \( a \), as 0 is for the addition of the natural numbers and 1 for their multiplication.</p>
+<p>The sum and the product of types have identity elements as well, the empty type 0 and the unit type 1, for which the laws hold up to isomorphism rather than equality, \( A + 0 \cong A \) and \( A \times 1 \cong A \).</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="kumi_empty"></a>
-Empty Type : \( (0 / \bot) \)</h1>
-<p>The <b>Empty Type</b> is the identity element for <b>Sums</b> \( (A + 0 \cong A ) \). It represents a type with no inhabitants.</p>
-<p><b>Cardinality</b>: 0 states. It is mathematically impossible to construct an instance of this type.</p>
-<p><b>Algebraic Role</b>: In logic, it represents a contradiction. In code, it represents a path that can never be reached. A function returning the Empty Type is a "diverging" function (it never returns).</p>
-<p><b>Identity Property</b>: Just as \( x + 0 = x \), having a choice between Type A or an impossible Type 0 is logically equivalent to simply having Type A.</p>
-<p>One cannot write such a type, but could specify a function that returns empty, in C++ this can be expressed the following way. </p><div class="fragment"><div class="line">[[noreturn]] <span class="keywordtype">void</span> foo() { </div>
-<div class="line">  <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Never returns&quot;</span>);</div>
+Empty Type</h1>
+<p>The <b>empty type</b> 0 has no value. It is the identity element of the sum, \( A + 0 \cong A \), since a choice between a value of \( A \) and a value that cannot exist amounts to a value of \( A \), and it absorbs the product, \( A \times 0 \cong 0 \), since a pair whose second component cannot exist cannot exist either.</p>
+<ul>
+<li><b>Cardinality</b>: 0, so that no value of the type can be constructed.</li>
+<li><b>Logic</b>: the empty type reads as falsity, \( \bot \), and the function type \( A \to 0 \) as the negation \( \neg A \).</li>
+<li><b>Computation</b>: in a total calculus, a term of type \( A \to 0 \) exists only when \( A \) is empty itself. In a language with general recursion or effects, a function whose return type is empty never returns, since it loops, throws, or terminates the program, which makes the code after its call unreachable.</li>
+</ul>
+<p>C++ has no complete object type without values. The type <span class="tt">void</span> has an empty set of values, but it is an incomplete type that no object has, and a function returning <span class="tt">void</span> returns normally. A class whose default constructor is deleted keeps its copy and move constructors, so that a value of it can still be produced, by <span class="tt">std::bit_cast</span> among others.</p>
+<p>The attribute <span class="tt">[[noreturn]]</span> marks a function that never returns, the runtime counterpart of a function to the empty type, although the attribute lies outside the type of the function:</p>
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;stdexcept&gt;</span></div>
+<div class="line"> </div>
+<div class="line">[[noreturn]] <span class="keywordtype">void</span> fail() { <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;never returns&quot;</span>); }</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// the call never yields a value, the exception leaves it</span></div>
+<div class="line">  <span class="keywordflow">try</span></div>
+<div class="line">  {</div>
+<div class="line">    fail();</div>
+<div class="line">  }</div>
+<div class="line">  <span class="keywordflow">catch</span> (std::exception <span class="keyword">const</span>&amp; e)</div>
+<div class="line">  {</div>
+<div class="line">    std::cout &lt;&lt; <span class="stringliteral">&quot;fail: &quot;</span> &lt;&lt; e.what() &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">  }</div>
 <div class="line">}</div>
-</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>A function that never returns is the runtime counterpart of the empty type.</dd>
-<dd>
-As of today, kumi does not provide sum types, so this kind of type is not used. The focus was made on product types and their associated algebra.</dd></dl>
+</div><!-- fragment --><p>The empty type has no counterpart in <b>KUMI</b>, since the library provides no sum type and C++ provides no empty type.</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="kumi_unit"></a>
-Unit Type : \( (1 / \top) \)</h1>
-<p>The <b>Unit Type</b> is the identity element for <b>Products</b> \( (A \times 1 \cong A) \). It represents a type with exactly one inhabitant.</p>
-<dl class="section note"><dt>Note</dt><dd>It is also refered to as the product of no types.</dd></dl>
-<p><b>Cardinality</b>: 1 state. It contains exactly one possible value (often written as <span class="tt">()</span>).</p>
-<p><b>Algebraic Role</b>: It represents "no information" or "success without data." Because there is only one possible state, the value itself is predictable and thus carries zero entropy.</p>
-<p><b>Identity Property</b>: Just as \( x \times 1 = x \), a pair containing Type A and a Unit Type provides no more information than Type A alone.</p>
-<p>In C++ such a type can be written simply as an empty struct. </p><div class="fragment"><div class="line"><span class="keyword">struct </span>unit {};</div>
-</div><!-- fragment --><hr  />
-<p>In the next page, we will see how to combine the simple types we saw until now in order to create more complex types.</p>
-<div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
+Unit Type</h1>
+<p>The <b>unit type</b> 1 has exactly one value, often written \( () \). It is the identity element of the product, \( A \times 1 \cong A \), since the second component of a pair whose second type has a single value carries no information, and it is the product of no type, the empty tuple.</p>
+<ul>
+<li><b>Cardinality</b>: 1, so that every object of the type holds the same value.</li>
+<li><b>Logic</b>: the unit type reads as truth, \( \top \), whose proof is its single value.</li>
+<li><b>Information</b>: an object of the unit type carries no information, \( \log_2 1 = 0 \) bits.</li>
+</ul>
+<p>The unit type of <b>KUMI</b> is <a class="el" href="structkumi_1_1unit.html" title="A type representing the product of no type, also called the unit type.">kumi::unit</a>, with the constant <a class="el" href="group__kumi__none.html" title="kumi::none">kumi::none</a>, and the library recognizes a unit type through the concept <a class="el" href="conceptkumi_1_1concepts_1_1unit__type.html" title="Concept specifying a type represents a Unit Type.">kumi::concepts::unit_type</a>, which accepts a product type of size 0, <span class="tt"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>&lt;&gt;</span> among them, and <span class="tt">std::nullptr_t</span>:</p>
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;cstddef&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> show(<span class="keywordtype">char</span> <span class="keyword">const</span>* text, <span class="keywordtype">bool</span> b)</div>
+<div class="line">{</div>
+<div class="line">  std::cout &lt;&lt; text &lt;&lt; <span class="stringliteral">&quot;: &quot;</span> &lt;&lt; std::boolalpha &lt;&lt; b &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// the unit types of kumi, and its constant</span></div>
+<div class="line">  show(<span class="stringliteral">&quot;kumi::unit is a unit type&quot;</span>, <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1unit__type.html">kumi::concepts::unit_type&lt;kumi::unit&gt;</a>);</div>
+<div class="line">  show(<span class="stringliteral">&quot;kumi::tuple&lt;&gt; is a unit type&quot;</span>,</div>
+<div class="line">       <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1unit__type.html">kumi::concepts::unit_type</a>&lt;kumi::tuple&lt;&gt;&gt;);</div>
+<div class="line">  show(<span class="stringliteral">&quot;std::nullptr_t is a unit type&quot;</span>,</div>
+<div class="line">       <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1unit__type.html">kumi::concepts::unit_type&lt;std::nullptr_t&gt;</a>);</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;kumi::none prints as &quot;</span> &lt;&lt; kumi::none &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1unit__type_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1unit__type.html">kumi::concepts::unit_type</a></div><div class="ttdoc">Concept specifying a type represents a Unit Type.</div><div class="ttdef"><b>Definition</b> concepts.hpp:157</div></div>
+</div><!-- fragment --><p>An empty class such as <span class="tt">struct unit {};</span> has a single value as well, yet it models no product-type concept of the library, since neither <span class="tt">std::tuple_size</span> nor <span class="tt">std::tuple_element</span> is specialized for it:</p>
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> show(<span class="keywordtype">char</span> <span class="keyword">const</span>* text, <span class="keywordtype">bool</span> b)</div>
+<div class="line">{</div>
+<div class="line">  std::cout &lt;&lt; text &lt;&lt; <span class="stringliteral">&quot;: &quot;</span> &lt;&lt; std::boolalpha &lt;&lt; b &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">struct </span>unit {};</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="comment">// an empty class with one value, unknown to the tuple protocol</span></div>
+<div class="line">  show(<span class="stringliteral">&quot;struct unit is a unit type&quot;</span>, <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1unit__type.html">kumi::concepts::unit_type&lt;unit&gt;</a>);</div>
+<div class="line">  show(<span class="stringliteral">&quot;struct unit is a product type&quot;</span>, <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type&lt;unit&gt;</a>);</div>
+<div class="line">}</div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1product__type_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1product__type.html">kumi::concepts::product_type</a></div><div class="ttdoc">Concept specifying a type follows the Product Type semantic.</div><div class="ttdef"><b>Definition</b> concepts.hpp:77</div></div>
+</div><!-- fragment --><div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadLeft">Previous  </th><th class="markdownTableHeadRight">Next  </th></tr>
 <tr class="markdownTableRowOdd">

@@ -1,11 +1,11 @@
 var searchData=
 [
-  ['identifier_0',['Identifier',['../kumi_nomenclature.html#autotoc_md143',1,'']]],
+  ['identifier_0',['Identifier',['../kumi_nomenclature.html#kumi_nomenclature_identifier',1,'']]],
   ['identifier_1',['identifier',['../structkumi_1_1identifier.html',1,'kumi::identifier&lt; ID, Checker &gt;'],['../conceptkumi_1_1concepts_1_1identifier.html',1,'kumi::concepts'],['../structkumi_1_1identifier.html#a1cbb7d1e8b6adafe05c6b3f43c94db5d',1,'kumi::identifier::identifier() noexcept=default'],['../structkumi_1_1identifier.html#a3b9a31cc021cee475c3dd820c966a104',1,'kumi::identifier::identifier(ID const &amp;id, Checker const &amp;check) noexcept']]],
   ['identifier_5fof_2',['identifier_of',['../group__kumi__identifier__of.html#gab3919ec6f8098dd1fdafe9c3a79ef0dc',1,'kumi']]],
   ['identifiers_3',['identifiers',['../structkumi_1_1record.html#ac730d46c3db986909e0c910b74648b4a',1,'kumi::record::identifiers()'],['../structkumi_1_1tuple.html#a20bf7b884e66f42a41076a4b1535054b',1,'kumi::tuple::identifiers()'],['../group__kumi__identifiers.html#ga63a205c6c2502e733987043857abea05',1,'kumi::identifiers()']]],
   ['identity_4',['identity',['../structkumi_1_1function_1_1numeric__add.html#aa873c7638061899a652e97fdf45e1452',1,'kumi::function::numeric_add::identity'],['../structkumi_1_1function_1_1numeric__prod.html#a442630c534784c7794c0ced4bbaafcda',1,'kumi::function::numeric_prod::identity'],['../structkumi_1_1function_1_1boolean__and.html#ab76cd8c8f2059169433f16b45d02eecd',1,'kumi::function::boolean_and::identity'],['../structkumi_1_1function_1_1boolean__or.html#a2f7848820b2e45a83aa776a11a4617c7',1,'kumi::function::boolean_or::identity'],['../structkumi_1_1function_1_1boolean__xor.html#ae232a2d43a04338bb65254cbc736dbea',1,'kumi::function::boolean_xor::identity']]],
-  ['identity_20elements_20the_200_20and_201_20of_20types_5',['The Identity Elements (The &quot;0&quot; and &quot;1&quot; of Types)',['../kumi_identity.html',1,'kumi_glossary']]],
+  ['identity_20elements_5',['Identity Elements',['../kumi_identity.html',1,'kumi_glossary']]],
   ['if_5f_6',['if_',['../group__kumi__utility.html#gacadc026868e6654e80c57432643c804a',1,'kumi']]],
   ['implementation_20helpers_7',['Internal Implementation Helpers',['../group__kumi__details.html',1,'']]],
   ['inclusive_5fscan_5fleft_8',['inclusive_scan_left',['../group__kumi__inclusive__scan__left.html#ga1389eee6fb884b34ed4957884ecd39a1',1,'kumi']]],

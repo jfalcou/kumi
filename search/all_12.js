@@ -11,7 +11,7 @@ var searchData=
   ['map_5ftraits_8',['map_traits',['../structkumi_1_1map__traits.html',1,'kumi']]],
   ['max_9',['max',['../group__kumi__max.html#gab76e53ad197280669806cae2c0cc130c',1,'kumi']]],
   ['max_5fflat_10',['max_flat',['../group__kumi__max__flat.html#ga718f20d4004a2d3a409bfcfda289ba34',1,'kumi']]],
-  ['member_11',['Member',['../kumi_nomenclature.html#autotoc_md141',1,'']]],
+  ['member_11',['Member',['../kumi_nomenclature.html#kumi_nomenclature_member',1,'']]],
   ['member_5fcast_12',['member_cast',['../group__kumi__member__cast.html#gad2e4009d5d28df5090885b030f08f1f8',1,'kumi']]],
   ['member_5ft_13',['member_t',['../group__kumi__generic__traits.html#gaca6d42cbec766fb8d43a4060077e2624',1,'kumi']]],
   ['members_5fof_14',['members_of',['../group__kumi__members__of.html#ga50426580ce9abca59b6a14b398b312ed',1,'kumi']]],

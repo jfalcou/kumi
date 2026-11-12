@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['element_0',['Element',['../kumi_nomenclature.html#autotoc_md139',1,'']]],
-  ['elements_20the_200_20and_201_20of_20types_1',['The Identity Elements (The &quot;0&quot; and &quot;1&quot; of Types)',['../kumi_identity.html',1,'kumi_glossary']]],
-  ['empty_20base_20optimization_2',['Empty Base Optimization',['../kumi_cpp_spec.html#autotoc_md121',1,'']]],
-  ['empty_20type_20_3a_200_3',['Empty Type : \\( (0 / \\bot) \\)',['../kumi_identity.html#kumi_empty',1,'']]],
+  ['element_0',['Element',['../kumi_nomenclature.html#kumi_nomenclature_element',1,'']]],
+  ['elements_1',['Identity Elements',['../kumi_identity.html',1,'kumi_glossary']]],
+  ['empty_20base_20optimization_2',['Empty Base Optimization',['../kumi_cpp_vocabulary.html#autotoc_md121',1,'']]],
+  ['empty_20type_3',['Empty Type',['../kumi_identity.html#kumi_empty',1,'']]],
   ['epidote_4',['Version 3.1 - Exquisite Epidote',['../kumi_changelog.html#autotoc_md99',1,'']]],
   ['example_5',['Example',['../structkumi_1_1builder.html#autotoc_md30',1,'Example'],['../structkumi_1_1apply__traits.html#autotoc_md87',1,'Example'],['../structkumi_1_1map__traits.html#autotoc_md89',1,'Example']]],
   ['example_20_3a_6',['Example :',['../structkumi_1_1array.html#autotoc_md7',1,'Example :'],['../structkumi_1_1tuple.html#autotoc_md28',1,'Example :']]],

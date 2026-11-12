@@ -2,7 +2,7 @@ var searchData=
 [
   ['record_0',['record',['../structkumi_1_1record.html',1,'kumi::record&lt; Ts &gt;'],['../structkumi_1_1record.html#ae9ac76c2474af708950b35e4b58027d6',1,'kumi::record::record()'],['../structkumi_1_1record.html#ae9ac76c2474af708950b35e4b58027d6',1,'kumi::record()']]],
   ['record_20related_20traits_1',['Record Related Traits',['../group__kumi__record__traits.html',1,'']]],
-  ['record_20type_2046_2',['Record Type \\( (\\{l_A: A\\} \\times \\{l_B: B\\}) \\)',['../kumi_product.html#kumi_record_type',1,'']]],
+  ['record_20type_2',['Record Type',['../kumi_product.html#kumi_record_type',1,'']]],
   ['record_20types_20and_20associated_20functions_3',['Record Types and associated Functions',['../group__kumi__record__related.html',1,'']]],
   ['record_3c_20us_2e_2e_2e_20_3e_4',['record&lt; Us... &gt;',['../structkumi_1_1record.html',1,'kumi']]],
   ['record_5ftype_5',['record_type',['../conceptkumi_1_1concepts_1_1record__type.html',1,'kumi::concepts']]],
@@ -10,7 +10,7 @@ var searchData=
   ['reduce_7',['reduce',['../group__kumi__reduce.html#gaf7efbfa530d2396e2ed230cc03e4046e',1,'kumi']]],
   ['reductions_8',['Generalized Reductions',['../group__kumi__reductions.html',1,'']]],
   ['reference_20documentation_9',['Reference Documentation',['../kumi_reference.html',1,'']]],
-  ['references_10',['References',['../kumi_references.html',1,'kumi_glossary']]],
+  ['references_10',['References',['../kumi_glossary.html#autotoc_md131',1,'']]],
   ['reindex_11',['reindex',['../group__kumi__reindex.html#ga3594f15dbfba2f6fda0afc8d1542c449',1,'kumi']]],
   ['related_20traits_12',['Related Traits',['../group__kumi__record__traits.html',1,'Record Related Traits'],['../group__kumi__tuple__traits.html',1,'Tuple Related Traits']]],
   ['release_13',['First autonomous public release.',['../kumi_changelog.html#autotoc_md120',1,'']]],

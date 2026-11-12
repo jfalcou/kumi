@@ -26,20 +26,8 @@ var NAVTREE =
 [
   [ "KUMI", "index.html", [
     [ "The C++20 Compact Tuple Tools", "index.html", "index" ],
-    [ "About The Library", "kumi_setup.html", [
-      [ "Setup", "kumi_setup.html", null ],
-      [ "Changelog", "kumi_changelog.html", null ],
-      [ "Licence", "kumi_licence.html", null ]
-    ] ],
-    [ "Glossary", "kumi_glossary.html", [
-      [ "Type Theory", "kumi_introduction.html#kumi_introduction", [
-        [ "Introduction", "kumi_introduction.html#kumi_introduction", null ],
-        [ "Identity Types", "kumi_identity.html#kumi_identity", null ],
-        [ "Product Types", "kumi_product.html#kumi_product", null ],
-        [ "References", "kumi_references.html#kumi_references", null ]
-      ] ],
-      [ "C++ Vocabulary", "kumi_cpp_spec.html#kumi_cpp_spec", null ],
-      [ "Nomenclature", "kumi_nomenclature.html#kumi_nomenclature", null ]
+    [ "Getting Started", "kumi_setup.html", [
+      [ "Installation", "kumi_setup.html", null ]
     ] ],
     [ "Reference Documentation", "kumi_reference.html", [
       [ "Types", "group__kumi__tuple__related.html", [
@@ -63,7 +51,22 @@ var NAVTREE =
       ] ],
       [ "kumi Namespace", "namespacekumi.html", null ]
     ] ],
-    [ "Contact", "mailto:joel.falcou+kumi@gmail.com?subject=The%20KUMI%20Library", null ]
+    [ "Glossary", "kumi_glossary.html", [
+      [ "Type Theory", "kumi_introduction.html#kumi_introduction", [
+        [ "Introduction", "kumi_introduction.html#kumi_introduction", null ],
+        [ "Identity Elements", "kumi_identity.html#kumi_identity", null ],
+        [ "Product Types", "kumi_product.html#kumi_product", null ]
+      ] ],
+      [ "References", "kumi_references.html#kumi_references", [
+        [ "Bibliography", "kumi_references.html#kumi_references", null ],
+        [ "C++ Vocabulary", "kumi_cpp_vocabulary.html#kumi_cpp_vocabulary", null ],
+        [ "Nomenclature", "kumi_nomenclature.html#kumi_nomenclature", null ]
+      ] ]
+    ] ],
+    [ "Informations", "kumi_changelog.html", [
+      [ "Changelog", "kumi_changelog.html", null ],
+      [ "Licence", "kumi_licence.html", null ]
+    ] ]
   ] ]
 ];
 

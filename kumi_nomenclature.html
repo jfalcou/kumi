@@ -135,66 +135,172 @@ $(function(){initNavTree('kumi_nomenclature.html','',''); });
   <div class="headertitle"><div class="title">Nomenclature </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This document establishes the formal vocabulary used throughout the KUMI library to ensure consistency across API documentation, error messages, and internal implementation details.</p>
-<p>In the context of <b>KUMI</b>, a distinction is made between types as stored, types as accessed, and the metadata used to describe them.</p>
-<hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md139"></a>
-Element</h2>
-<p>An <b>element</b> is the fundamental constituent type of a heterogenous container. In literature, this corresponds to the <em>Value Type</em> ( \( T \)) stored within a node.</p><ul>
-<li><b>Definition:</b> The raw, decayed type provided during template instantiation.</li>
-<li><b>Example:</b> In <span class="tt"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>&lt;int, double&gt;</span>, the elements are <span class="tt">int</span> and <span class="tt">double</span>.</li>
-</ul>
-<hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md141"></a>
-Member</h2>
-<p>A <b>member</b> is the functional result of a sub-object access operation, the result of a projection.</p>
-<p>Formally, a member is an <b>Element</b> qualified by the value category of the container and the cv-qualifiers of the access path.</p>
-<ul>
-<li><b>Definition:</b> The result of <span class="tt">get&lt;I&gt;(container)</span>.</li>
-<li><b>Example:</b> Given <span class="tt"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>&lt;int&gt; t</span>, <span class="tt">get&lt;0&gt;(t)</span> yields the member <span class="tt">int&amp;</span>, while <span class="tt">get&lt;0&gt;(std::move(t))</span> yields <span class="tt">int&amp;&amp;</span>.</li>
-</ul>
-<hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md143"></a>
-Identifier</h2>
-<p>An <b>identifier</b> is a compile-time constant or type used as a key to resolve a specific sub-object within a structure.</p>
-<ul>
-<li><b>Definition:</b> A unique tag, integral constant, or symbolic name used for dispatching and name-binding.</li>
-<li><b>Role:</b> It decouples the logical "address" of a value from its physical offset in memory.</li>
-</ul>
-<hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md145"></a>
-Field</h2>
-<p>A <b>field</b> is the combination of an <b>Identifier</b> and its associated <b>Element</b>.</p>
-<ul>
-<li><b>Formal Logic:</b> Let \( I \) be an Identifier and \( E \) be an Element. Then \( Field = \{I, E\} \).</li>
-<li><b>Role:</b> Fields are used to define the schema of a tuple-like structure.</li>
-</ul>
-<hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md147"></a>
-Label</h2>
-<p>A <b>label</b> is the external, human-readable representation (string-equivalent) associated with an Identifier or Field.</p>
-<ul>
-<li><b>Definition:</b> The lexical name used for introspection, serialization, and diagnostic output.</li>
-<li><b>Note:</b> While an <b>Identifier</b> is a programmatic entity (like a type or index), a <b>Label</b> is a literal value (typically a <span class="tt">const char*</span> or <span class="tt">string_view</span>), in kumi, there is a special type used to describe these : <a class="el" href="structkumi_1_1str.html" title="Static string used to create named fields.">kumi::str</a>.</li>
-</ul>
-<hr  />
-<h2 class="doxsection"><a class="anchor" id="autotoc_md149"></a>
-Summary Table</h2>
-<table class="markdownTable">
+<div class="textblock"><p>The library distinguishes the types of a product type as stored, its types as accessed, and the metadata that designate its components, under five names:</p>
+<center></center><center><table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadLeft">Concept  </th><th class="markdownTableHeadLeft">Formal Analogy  </th><th class="markdownTableHeadLeft">Domain  </th><th class="markdownTableHeadLeft">Example  </th></tr>
+<th class="markdownTableHeadLeft">Notion  </th><th class="markdownTableHeadLeft">Formal analogy  </th><th class="markdownTableHeadLeft">Domain  </th><th class="markdownTableHeadLeft">Example  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><b>Element</b>  </td><td class="markdownTableBodyLeft">Value Type  </td><td class="markdownTableBodyLeft">Static Type  </td><td class="markdownTableBodyLeft"><span class="tt">float</span>  </td></tr>
+<td class="markdownTableBodyLeft"><a class="el" href="#kumi_nomenclature_element" title="Element">Element</a>  </td><td class="markdownTableBodyLeft">Component type \( T_i \)  </td><td class="markdownTableBodyLeft">Stored type  </td><td class="markdownTableBodyLeft"><span class="tt">float</span>  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyLeft"><b>Member</b>  </td><td class="markdownTableBodyLeft">Reference/Access Type  </td><td class="markdownTableBodyLeft">Invocation  </td><td class="markdownTableBodyLeft"><span class="tt">float const&amp;</span>  </td></tr>
+<td class="markdownTableBodyLeft"><a class="el" href="#kumi_nomenclature_member" title="Member">Member</a>  </td><td class="markdownTableBodyLeft">Type of a projection  </td><td class="markdownTableBodyLeft">Access  </td><td class="markdownTableBodyLeft"><span class="tt">float const&amp;</span>  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><b>Identifier</b>  </td><td class="markdownTableBodyLeft">Key / Index  </td><td class="markdownTableBodyLeft">Metadata  </td><td class="markdownTableBodyLeft">"my_data"_id  </td></tr>
+<td class="markdownTableBodyLeft"><a class="el" href="#kumi_nomenclature_identifier" title="Identifier">Identifier</a>  </td><td class="markdownTableBodyLeft">Key  </td><td class="markdownTableBodyLeft">Metadata  </td><td class="markdownTableBodyLeft"><span class="tt">"my_data"_id</span>  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyLeft"><b>Field</b>  </td><td class="markdownTableBodyLeft">Schema Attribute  </td><td class="markdownTableBodyLeft">Reflection  </td><td class="markdownTableBodyLeft"><span class="tt">{id, type}</span> pair  </td></tr>
+<td class="markdownTableBodyLeft"><a class="el" href="#kumi_nomenclature_field" title="Field">Field</a>  </td><td class="markdownTableBodyLeft">Pair \( (I, S) \)  </td><td class="markdownTableBodyLeft">Schema  </td><td class="markdownTableBodyLeft"><span class="tt">"velocity"_id = 1.f</span>  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft"><b>Label</b>  </td><td class="markdownTableBodyLeft">Symbolic Name  </td><td class="markdownTableBodyLeft">User Interface  </td><td class="markdownTableBodyLeft"><span class="tt">"velocity"</span>  </td></tr>
+<td class="markdownTableBodyLeft"><a class="el" href="#kumi_nomenclature_label" title="Label">Label</a>  </td><td class="markdownTableBodyLeft">Name  </td><td class="markdownTableBodyLeft">Keys, diagnostics  </td><td class="markdownTableBodyLeft"><span class="tt">"velocity"</span> as <a class="el" href="structkumi_1_1str.html" title="Static string used to create named fields.">kumi::str</a>  </td></tr>
 </table>
-</div></div><!-- contents -->
+</center><center></center><hr  />
+<h1 class="doxsection"><a class="anchor" id="kumi_nomenclature_element"></a>
+Element</h1>
+<p>An <b>element</b> is the type that a product type holds at a given position, the type \( T_i \) of the product \( T_1 \times \dots \times T_n \). The trait <a class="el" href="group__kumi__generic__traits.html#ga8ba508c6d1dfb63ff6fec24deb84d66e" title="Provides indexed access to the types of the elements of a kumi::product_type.">kumi::element_t</a> gives it as declared, <span class="tt">std::tuple_element_t&lt;I, std::remove_cvref_t&lt;T&gt;&gt;</span>, with its qualifiers and references kept, so that the elements of <span class="tt"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>&lt;int&amp;, int const&gt;</span> are <span class="tt">int&amp;</span> and <span class="tt">int const</span>.</p>
+<p>On a record, the element at an index is the type of the field, and <a class="el" href="group__kumi__record__traits.html#gaa957535657d5741421f09c44c5faaa62" title="Provides indexed access to the types of the elements of a product type and unwraps the returned field...">kumi::stored_element_t</a> gives the type of the value that the field holds, <span class="tt">float</span> for a record built from <span class="tt">"x"_id = 1.f</span>:</p>
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> show(<span class="keywordtype">char</span> <span class="keyword">const</span>* text, <span class="keywordtype">bool</span> b)</div>
+<div class="line">{</div>
+<div class="line">  std::cout &lt;&lt; text &lt;&lt; <span class="stringliteral">&quot;: &quot;</span> &lt;&lt; std::boolalpha &lt;&lt; b &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line">  <span class="keyword">using </span>std::is_same_v;</div>
+<div class="line">  <span class="keyword">using </span>t_t = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple&lt;int&amp;, int const&gt;</a>;</div>
+<div class="line">  <span class="keyword">using </span>r_t = <span class="keyword">decltype</span>(<a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a>{<span class="stringliteral">&quot;x&quot;</span>_id = 1.f});</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// the elements keep their reference and their const</span></div>
+<div class="line">  show(<span class="stringliteral">&quot;tuple element 0 is int&amp;&quot;</span>, is_same_v&lt;<a class="code hl_typedef" href="group__kumi__generic__traits.html#ga8ba508c6d1dfb63ff6fec24deb84d66e">kumi::element_t&lt;0, t_t&gt;</a>, <span class="keywordtype">int</span>&amp;&gt;);</div>
+<div class="line">  show(<span class="stringliteral">&quot;tuple element 1 is int const&quot;</span>,</div>
+<div class="line">       is_same_v&lt;<a class="code hl_typedef" href="group__kumi__generic__traits.html#ga8ba508c6d1dfb63ff6fec24deb84d66e">kumi::element_t&lt;1, t_t&gt;</a>, <span class="keywordtype">int</span> <span class="keyword">const</span>&gt;);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// a record stores its values in fields</span></div>
+<div class="line">  show(<span class="stringliteral">&quot;record stores a float&quot;</span>,</div>
+<div class="line">       is_same_v&lt;<a class="code hl_typedef" href="group__kumi__record__traits.html#gaa957535657d5741421f09c44c5faaa62">kumi::stored_element_t&lt;0, r_t&gt;</a>, <span class="keywordtype">float</span>&gt;);</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__kumi__generic__traits_html_ga8ba508c6d1dfb63ff6fec24deb84d66e"><div class="ttname"><a href="group__kumi__generic__traits.html#ga8ba508c6d1dfb63ff6fec24deb84d66e">kumi::element_t</a></div><div class="ttdeci">std::tuple_element_t&lt; I, std::remove_cvref_t&lt; T &gt; &gt; element_t</div><div class="ttdoc">Provides indexed access to the types of the elements of a kumi::product_type.</div><div class="ttdef"><b>Definition</b> traits.hpp:145</div></div>
+<div class="ttc" id="agroup__kumi__record__traits_html_gaa957535657d5741421f09c44c5faaa62"><div class="ttname"><a href="group__kumi__record__traits.html#gaa957535657d5741421f09c44c5faaa62">kumi::stored_element_t</a></div><div class="ttdeci">decltype(kumi_implementation_defined) stored_element_t</div><div class="ttdoc">Provides indexed access to the types of the elements of a product type and unwraps the returned field...</div><div class="ttdef"><b>Definition</b> traits.hpp:513</div></div>
+<div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
+<div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:35</div></div>
+</div><!-- fragment --><hr  />
+<h1 class="doxsection"><a class="anchor" id="kumi_nomenclature_member"></a>
+Member</h1>
+<p>A <b>member</b> is the type of the result of a projection, the type of <span class="tt">get&lt;I&gt;(t)</span>, which the trait <a class="el" href="group__kumi__generic__traits.html#gaca6d42cbec766fb8d43a4060077e2624" title="Computes the return type of a call to kumi::get.">kumi::member_t</a> gives as <span class="tt">decltype(get&lt;I&gt;(std::declval&lt;T&amp;&amp;&gt;()))</span>.</p>
+<p>On <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>, it is the element with the value category and the <span class="tt">const</span> of the product type applied by reference collapsing: given <span class="tt"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>&lt;int&gt; t</span>, <span class="tt">get&lt;0&gt;(t)</span> has the type <span class="tt">int&amp;</span>, <span class="tt">get&lt;0&gt;(std::move(t))</span> the type <span class="tt">int&amp;&amp;</span>, and <span class="tt">get&lt;0&gt;</span> of a <span class="tt"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>&lt;int&gt; const</span> the type <span class="tt">int const&amp;</span>, whereas on a <span class="tt"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>&lt;int&amp;&gt;</span> the first two have the type <span class="tt">int&amp;</span>.</p>
+<p>On an adapted type whose <span class="tt">get</span> returns by value, the member is that value type. On a record, the member at an index is a reference to the field, and <a class="el" href="group__kumi__generic__traits.html#ga17e8e213d54b65fdd4de0ec25916d3e6" title="Computes the return type of a call to kumi::get on a kumi::tuple and unwrap the field returned by kum...">kumi::stored_member_t</a> gives the reference to the value that the field holds:</p>
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> show(<span class="keywordtype">char</span> <span class="keyword">const</span>* text, <span class="keywordtype">bool</span> b)</div>
+<div class="line">{</div>
+<div class="line">  std::cout &lt;&lt; text &lt;&lt; <span class="stringliteral">&quot;: &quot;</span> &lt;&lt; std::boolalpha &lt;&lt; b &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">using </span>std::is_same_v;</div>
+<div class="line">  <span class="keyword">using </span>t_t = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple&lt;int&gt;</a>;</div>
+<div class="line">  <span class="keyword">using </span>r_t = <a class="code hl_class" href="structkumi_1_1tuple.html">kumi::tuple&lt;int&amp;&gt;</a>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// the value category and the const of the tuple reach the member</span></div>
+<div class="line">  show(<span class="stringliteral">&quot;lvalue tuple&lt;int&gt; gives int&amp;&quot;</span>,</div>
+<div class="line">       is_same_v&lt;<a class="code hl_typedef" href="group__kumi__generic__traits.html#gaca6d42cbec766fb8d43a4060077e2624">kumi::member_t&lt;0, t_t&amp;&gt;</a>, <span class="keywordtype">int</span>&amp;&gt;);</div>
+<div class="line">  show(<span class="stringliteral">&quot;rvalue tuple&lt;int&gt; gives int&amp;&amp;&quot;</span>,</div>
+<div class="line">       is_same_v&lt;<a class="code hl_typedef" href="group__kumi__generic__traits.html#gaca6d42cbec766fb8d43a4060077e2624">kumi::member_t&lt;0, t_t&amp;&amp;&gt;</a>, <span class="keywordtype">int</span>&amp;&amp;&gt;);</div>
+<div class="line">  show(<span class="stringliteral">&quot;const tuple&lt;int&gt; gives int const&amp;&quot;</span>,</div>
+<div class="line">       is_same_v&lt;<a class="code hl_typedef" href="group__kumi__generic__traits.html#gaca6d42cbec766fb8d43a4060077e2624">kumi::member_t&lt;0, t_t const&amp;&gt;</a>, <span class="keywordtype">int</span> <span class="keyword">const</span>&amp;&gt;);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// except through a reference element</span></div>
+<div class="line">  show(<span class="stringliteral">&quot;rvalue tuple&lt;int&amp;&gt; gives int&amp;&quot;</span>,</div>
+<div class="line">       is_same_v&lt;<a class="code hl_typedef" href="group__kumi__generic__traits.html#gaca6d42cbec766fb8d43a4060077e2624">kumi::member_t&lt;0, r_t&amp;&amp;&gt;</a>, <span class="keywordtype">int</span>&amp;&gt;);</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__kumi__generic__traits_html_gaca6d42cbec766fb8d43a4060077e2624"><div class="ttname"><a href="group__kumi__generic__traits.html#gaca6d42cbec766fb8d43a4060077e2624">kumi::member_t</a></div><div class="ttdeci">decltype(get&lt; I &gt;(std::declval&lt; T &amp;&amp; &gt;())) member_t</div><div class="ttdoc">Computes the return type of a call to kumi::get.</div><div class="ttdef"><b>Definition</b> traits.hpp:169</div></div>
+</div><!-- fragment --><hr  />
+<h1 class="doxsection"><a class="anchor" id="kumi_nomenclature_identifier"></a>
+Identifier</h1>
+<p>An <b>identifier</b> is a type that designates a field of a product type independently of its position and of its offset in memory. The value <span class="tt">"x"_id</span>, for instance, has the identifier type <span class="tt"><a class="el" href="structkumi_1_1name.html" title="Compile-time text based identifier.">kumi::name</a>&lt;"x"&gt;</span>. The concept <a class="el" href="conceptkumi_1_1concepts_1_1identifier.html" title="Concept specifying a type represents an identifier.">kumi::concepts::identifier</a> requires a nested type, and <a class="el" href="conceptkumi_1_1concepts_1_1index.html" title="index concept">kumi::concepts::index</a>, which describes the integral constants that designate a component by its position, requires a member <span class="tt">value</span>, so that a type with both, such as <span class="tt">std::integral_constant</span>, models both concepts. <a class="el" href="conceptkumi_1_1concepts_1_1projection.html" title="Concept specifying if a type is suitable to be used as a projection.">kumi::concepts::projection</a> accepts either:</p>
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> show(<span class="keywordtype">char</span> <span class="keyword">const</span>* text, <span class="keywordtype">bool</span> b)</div>
+<div class="line">{</div>
+<div class="line">  std::cout &lt;&lt; text &lt;&lt; <span class="stringliteral">&quot;: &quot;</span> &lt;&lt; std::boolalpha &lt;&lt; b &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">}</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line">  <span class="keyword">using </span>n_t = <a class="code hl_class" href="structkumi_1_1name.html">kumi::name</a>&lt;<span class="stringliteral">&quot;x&quot;</span>&gt;;</div>
+<div class="line">  <span class="keyword">using </span>i_t = std::integral_constant&lt;std::size_t, 0&gt;;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// &quot;x&quot;_id is a value of the identifier type kumi::name&lt;&quot;x&quot;&gt;</span></div>
+<div class="line">  show(<span class="stringliteral">&quot;\&quot;x\&quot;_id is a kumi::name&lt;\&quot;x\&quot;&gt;&quot;</span>,</div>
+<div class="line">       std::is_same_v&lt;<span class="keyword">decltype</span>(<span class="stringliteral">&quot;x&quot;</span>_id), n_t&gt;);</div>
+<div class="line">  show(<span class="stringliteral">&quot;kumi::name is an identifier&quot;</span>, <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier&lt;n_t&gt;</a>);</div>
+<div class="line">  show(<span class="stringliteral">&quot;kumi::name is an index&quot;</span>, <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1index.html">kumi::concepts::index&lt;n_t&gt;</a>);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// an integral constant models both concepts</span></div>
+<div class="line">  show(<span class="stringliteral">&quot;integral_constant is an identifier&quot;</span>,</div>
+<div class="line">       <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier&lt;i_t&gt;</a>);</div>
+<div class="line">  show(<span class="stringliteral">&quot;integral_constant is an index&quot;</span>, <a class="code hl_concept" href="conceptkumi_1_1concepts_1_1index.html">kumi::concepts::index&lt;i_t&gt;</a>);</div>
+<div class="line">}</div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1identifier_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier</a></div><div class="ttdoc">Concept specifying a type represents an identifier.</div><div class="ttdef"><b>Definition</b> concepts.hpp:204</div></div>
+<div class="ttc" id="aconceptkumi_1_1concepts_1_1index_html"><div class="ttname"><a href="conceptkumi_1_1concepts_1_1index.html">kumi::concepts::index</a></div><div class="ttdoc">index concept</div><div class="ttdef"><b>Definition</b> concepts.hpp:173</div></div>
+<div class="ttc" id="astructkumi_1_1name_html"><div class="ttname"><a href="structkumi_1_1name.html">kumi::name</a></div><div class="ttdoc">Compile-time text based identifier.</div><div class="ttdef"><b>Definition</b> identifier.hpp:165</div></div>
+</div><!-- fragment --><hr  />
+<h1 class="doxsection"><a class="anchor" id="kumi_nomenclature_field"></a>
+Field</h1>
+<p>A <b>field</b> binds an identifier to a value: <a class="el" href="structkumi_1_1field.html" title="Named wrapper over a type.">kumi::field</a> holds a value of a type <span class="tt">T</span> under an identifier <span class="tt">Id</span>, and the expression <span class="tt">"x"_id = 42</span> builds one, which prints as its label and its value.</p>
+<p>Its type is the ordered pair \( (I, S) \) of an identifier \( I \) and the type \( S \) of the value that it stores, given by <a class="el" href="group__kumi__record__traits.html#gaa957535657d5741421f09c44c5faaa62" title="Provides indexed access to the types of the elements of a product type and unwraps the returned field...">kumi::stored_element_t</a>, which is also the record type \( \{I : S\} \) of a single field. The fields of a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>, or of a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> that holds fields, define its schema:</p>
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// binding the identifier &quot;x&quot;_id to the value 42 builds a kumi::field</span></div>
+<div class="line">  <span class="keyword">auto</span> f = (<span class="stringliteral">&quot;x&quot;</span>_id = 42);</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; f &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">  std::cout &lt;&lt; f.value &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">}</div>
+</div><!-- fragment --><hr  />
+<h1 class="doxsection"><a class="anchor" id="kumi_nomenclature_label"></a>
+Label</h1>
+<p>A <b>label</b> is the name of an identifier as a string known at compile time, of type <a class="el" href="structkumi_1_1str.html" title="Static string used to create named fields.">kumi::str</a>, which the function <span class="tt">label()</span> of a field returns. The library uses a label as a key, in the projection <span class="tt">get&lt;"x"&gt;</span> of a record and in the subscript of a record by a label that the literal <span class="tt">_l</span> builds, and in its diagnostics.</p>
+<p>A <span class="tt">const char*</span> cannot point to a string literal as a template argument, and <span class="tt">std::string_view</span> is not a structural type, which is why the structural class <a class="el" href="structkumi_1_1str.html" title="Static string used to create named fields.">kumi::str</a>, of fixed size, holds a label:</p>
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
+<div class="line">  <a class="code hl_class" href="structkumi_1_1record.html">kumi::record</a> r = {<span class="stringliteral">&quot;x&quot;</span>_id = 42, <span class="stringliteral">&quot;y&quot;</span>_id = 13.37f};</div>
+<div class="line">  <span class="keyword">auto</span> f = (<span class="stringliteral">&quot;velocity&quot;</span>_id = 1.f);</div>
+<div class="line"> </div>
+<div class="line">  <span class="comment">// a label, a kumi::str, reads a field of a record by name</span></div>
+<div class="line">  std::cout &lt;&lt; <a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get</a>&lt;<span class="stringliteral">&quot;x&quot;</span>&gt;(r) &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">  std::cout &lt;&lt; r[<span class="stringliteral">&quot;y&quot;</span>_l] &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">  std::cout &lt;&lt; f.label() &lt;&lt; <span class="charliteral">&#39;\n&#39;</span>;</div>
+<div class="line">}</div>
+<div class="ttc" id="astructkumi_1_1array_html_a2a236814b119c1e3e0b1cc5ce062c282"><div class="ttname"><a href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::array::get</a></div><div class="ttdeci">decltype(auto) constexpr get(array&lt; T, N &gt; &amp;t) noexcept</div><div class="ttdoc">Extracts the Ith element from a kumi::array.</div><div class="ttdef"><b>Definition</b> array.hpp:693</div></div>
+</div><!-- fragment --><div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadLeft">Previous  </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft"><a class="el" href="kumi_cpp_vocabulary.html" title="C++ Vocabulary">C++ Vocabulary</a>  </td></tr>
+</table>
+</div><div class="section_buttons"></div> </div></div><!-- contents -->
 </div><!-- PageDoc -->
 </div><!-- doc-content -->
 </div><!-- container -->

@@ -5634,10 +5634,10 @@
     <docanchor file="kumi_changelog.html" title="/__w/kumi/kumi/doc/changelog.md">md__2____w_2kumi_2kumi_2doc_2changelog</docanchor>
   </compound>
   <compound kind="page">
-    <name>kumi_cpp_spec</name>
-    <title>C++ Specific Terms</title>
-    <filename>kumi_cpp_spec.html</filename>
-    <docanchor file="kumi_cpp_spec.html" title="/__w/kumi/kumi/doc/glossary/cpp_vocabulary.md">md__2____w_2kumi_2kumi_2doc_2glossary_2cpp__vocabulary</docanchor>
+    <name>kumi_cpp_vocabulary</name>
+    <title>C++ Vocabulary</title>
+    <filename>kumi_cpp_vocabulary.html</filename>
+    <docanchor file="kumi_cpp_vocabulary.html" title="/__w/kumi/kumi/doc/glossary/cpp_vocabulary.md">md__2____w_2kumi_2kumi_2doc_2glossary_2cpp__vocabulary</docanchor>
   </compound>
   <compound kind="page">
     <name>kumi_glossary</name>
@@ -5647,15 +5647,15 @@
     <subpage>kumi_identity.html</subpage>
     <subpage>kumi_product.html</subpage>
     <subpage>kumi_references.html</subpage>
-    <subpage>kumi_cpp_spec.html</subpage>
+    <subpage>kumi_cpp_vocabulary.html</subpage>
     <subpage>kumi_nomenclature.html</subpage>
   </compound>
   <compound kind="page">
     <name>kumi_identity</name>
-    <title>The Identity Elements (The &quot;0&quot; and &quot;1&quot; of Types)</title>
+    <title>Identity Elements</title>
     <filename>kumi_identity.html</filename>
-    <docanchor file="kumi_identity.html" title="Empty Type :  \_form#0">kumi_empty</docanchor>
-    <docanchor file="kumi_identity.html" title="Unit Type :  \_form#3">kumi_unit</docanchor>
+    <docanchor file="kumi_identity.html" title="Empty Type">kumi_empty</docanchor>
+    <docanchor file="kumi_identity.html" title="Unit Type">kumi_unit</docanchor>
   </compound>
   <compound kind="page">
     <name>kumi_introduction</name>
@@ -5665,28 +5665,33 @@
     <docanchor file="kumi_introduction.html" title="The Curry-Howard Correspondence">curry_howard</docanchor>
     <docanchor file="kumi_introduction.html" title="Fundamentals">fundamentals</docanchor>
     <docanchor file="kumi_introduction.html" title="Type Cardinality">cardinality</docanchor>
+    <docanchor file="kumi_introduction.html" title="Correspondence with KUMI">kumi_correspondence</docanchor>
   </compound>
   <compound kind="page">
     <name>kumi_nomenclature</name>
     <title>Nomenclature</title>
     <filename>kumi_nomenclature.html</filename>
+    <docanchor file="kumi_nomenclature.html" title="Element">kumi_nomenclature_element</docanchor>
+    <docanchor file="kumi_nomenclature.html" title="Member">kumi_nomenclature_member</docanchor>
+    <docanchor file="kumi_nomenclature.html" title="Identifier">kumi_nomenclature_identifier</docanchor>
+    <docanchor file="kumi_nomenclature.html" title="Field">kumi_nomenclature_field</docanchor>
+    <docanchor file="kumi_nomenclature.html" title="Label">kumi_nomenclature_label</docanchor>
   </compound>
   <compound kind="page">
     <name>kumi_product</name>
     <title>Product Types</title>
     <filename>kumi_product.html</filename>
-    <docanchor file="kumi_product.html" title="Product Constructions (The Logic of &quot;AND&quot;)">product_construction</docanchor>
-    <docanchor file="kumi_product.html" title="Product Type  \_form#34">kumi_product_type</docanchor>
-    <docanchor file="kumi_product.html" title="Programming Languages Considerations">tuple_programming</docanchor>
-    <docanchor file="kumi_product.html" title="Record Type  \_form#46">kumi_record_type</docanchor>
+    <docanchor file="kumi_product.html" title="Product Constructions">product_construction</docanchor>
+    <docanchor file="kumi_product.html" title="Product Type">kumi_product_type</docanchor>
+    <docanchor file="kumi_product.html" title="Power Type">kumi_power_type</docanchor>
+    <docanchor file="kumi_product.html" title="Record Type">kumi_record_type</docanchor>
   </compound>
   <compound kind="page">
     <name>kumi_references</name>
-    <title>References</title>
+    <title>Bibliography</title>
     <filename>kumi_references.html</filename>
     <docanchor file="kumi_references.html" title="Primary Texts">references_texts</docanchor>
     <docanchor file="kumi_references.html" title="The Curry-Howard Correspondence">references_curry_howard</docanchor>
-    <docanchor file="kumi_references.html" title="Grounding of the Glossary">references_terms</docanchor>
   </compound>
   <compound kind="page">
     <name>kumi_licence</name>

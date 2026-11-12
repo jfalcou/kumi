@@ -9,5 +9,6 @@ var searchData=
   ['version_203_200_20delicious_20datolite_6',['Version 3.0 - Delicious Datolite',['../kumi_changelog.html#autotoc_md104',1,'']]],
   ['version_203_201_20exquisite_20epidote_7',['Version 3.1 - Exquisite Epidote',['../kumi_changelog.html#autotoc_md99',1,'']]],
   ['version_204_200_20flawless_20fluorite_8',['Version 4.0 - Flawless Fluorite',['../kumi_changelog.html#autotoc_md95',1,'']]],
-  ['version_205_200_20gorgeous_20garnet_9',['Version 5.0 - Gorgeous Garnet',['../kumi_changelog.html#autotoc_md90',1,'']]]
+  ['version_205_200_20gorgeous_20garnet_9',['Version 5.0 - Gorgeous Garnet',['../kumi_changelog.html#autotoc_md90',1,'']]],
+  ['vocabulary_10',['C++ Vocabulary',['../kumi_cpp_vocabulary.html',1,'kumi_glossary']]]
 ];

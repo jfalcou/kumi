@@ -135,71 +135,79 @@ $(function(){initNavTree('kumi_introduction.html','',''); });
   <div class="headertitle"><div class="title">Type Theoretic Foundations </div></div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This introduction does not aim at providing full understanding of type theory, but is more focused on giving a brief yet extensive overview of the basis that might be of interest to any new or even experienced programmer. <b>Kumi</b> makes extensive use of some concepts that will be detailed in the following sections. In the current state, the <b>Kumi</b> library focuses on handling <a class="el" href="kumi_product.html#kumi_product_type" title="Product Type  \_form#34">product types</a>.</p>
+<div class="textblock"><p><a href="https://en.wikipedia.org/wiki/Type_theory">Type theory</a> studies type systems, the formal rules by which a language assigns types to its terms and builds new types from existing ones. <b>KUMI</b> implements one family of these constructions, the <a class="el" href="kumi_product.html#kumi_product_type" title="Product Type">product types</a>, and borrows from type theory the vocabulary with which its documentation describes them. Tuples and their projections are written in the <a href="https://en.wikipedia.org/wiki/Product_type">usual mathematical notation</a>, \( (x_1, \dots, x_n) \) and \( \pi_i \), and records in the notation of <a class="el" href="kumi_references.html#references_texts" title="Primary Texts">Pierce</a>, \( \{l_1 = x_1, \dots, l_n = x_n\} \).</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="origin"></a>
 Origin</h1>
-<p><a href="https://en.wikipedia.org/wiki/Type_theory">Type theory</a> is the academic study of type systems used to formalize how types are constructed and composed. While <a href="https://en.wikipedia.org/wiki/Set_theory">Set Theory</a> categorizes elements into sets, Type Theory categorizes data (propositions) and the transformations (proofs) applied to them.</p>
-<p>In this view:</p>
+<p>Bertrand Russell introduced a theory of types in 1908, the ramified theory, to avoid the paradoxes of naive <a href="https://en.wikipedia.org/wiki/Set_theory">set theory</a>, and Alonzo Church simplified it in 1940 into the simple theory of types, on which the typed lambda calculi rest.</p>
+<p>Two styles of typing coexist since: in the Church style, which the examples below follow, every term carries its type, whereas in the Curry style the terms are untyped and the type system assigns types to some of them. Under the Curry-Howard correspondence, the same construction admits a logical reading:</p>
 <ul>
-<li><b>Types</b> are classifications of data (propositions).</li>
-<li><b>Functions/Programs</b> are the logical steps that transform data (proofs).</li>
+<li>a <b>type</b> reads as a proposition,</li>
+<li>a <b>term</b> of that type, a value or a program, reads as a proof of that proposition.</li>
 </ul>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="curry_howard"></a>
 The Curry-Howard Correspondence</h1>
-<p>The <a href="https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence">Curry-Howard Correspondence</a> formalizes the direct link between logical reasoning and type-level reasoning. Every concept in logic has a direct counter part in type theory. The following table recapitulates the different operation that can be necessary to understand.</p>
-<table class="markdownTable">
+<p>The <a href="https://en.wikipedia.org/wiki/Curry%E2%80%93Howard_correspondence">Curry-Howard correspondence</a> relates intuitionistic logic to the typed lambda calculi: each connective of intuitionistic propositional logic has a counterpart type former, and a proof of a formula corresponds to a term of the matching type. Classical principles such as the excluded middle or Peirce's law have no closed term in the simply typed lambda calculus with products, sums, and the empty type, and Griffin showed in 1990 that control operators such as <span class="tt">call/cc</span> receive the types of these principles.</p>
+<p>The C++ column gives the nearest construct of the language, C++ having no empty type.</p>
+<center></center><center><table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadLeft">Logic Name  </th><th class="markdownTableHeadLeft">Logic Notation  </th><th class="markdownTableHeadLeft">Type Notation  </th><th class="markdownTableHeadLeft">Type Name  </th><th class="markdownTableHeadLeft">C++ Example  </th></tr>
+<th class="markdownTableHeadLeft">Logic name  </th><th class="markdownTableHeadLeft">Logic notation  </th><th class="markdownTableHeadLeft">Type notation  </th><th class="markdownTableHeadLeft">Type name  </th><th class="markdownTableHeadLeft">C++ approximation  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft">True  </td><td class="markdownTableBodyLeft">\( \top      \)  </td><td class="markdownTableBodyLeft">\( \top       \)  </td><td class="markdownTableBodyLeft">Unit Type  </td><td class="markdownTableBodyLeft"><span class="tt">std::monostate</span>  </td></tr>
+<td class="markdownTableBodyLeft">Truth  </td><td class="markdownTableBodyLeft">\( \top \)  </td><td class="markdownTableBodyLeft">\( 1 \)  </td><td class="markdownTableBodyLeft">Unit type  </td><td class="markdownTableBodyLeft"><span class="tt">std::monostate</span>, <a class="el" href="structkumi_1_1unit.html" title="A type representing the product of no type, also called the unit type.">kumi::unit</a>  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyLeft">False  </td><td class="markdownTableBodyLeft">\( \bot      \)  </td><td class="markdownTableBodyLeft">\( \bot       \)  </td><td class="markdownTableBodyLeft">Empty Type  </td><td class="markdownTableBodyLeft"><span class="tt">void</span> (as a non-return type)  </td></tr>
+<td class="markdownTableBodyLeft">Falsity  </td><td class="markdownTableBodyLeft">\( \bot \)  </td><td class="markdownTableBodyLeft">\( 0 \)  </td><td class="markdownTableBodyLeft">Empty type  </td><td class="markdownTableBodyLeft">none  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft">Implication  </td><td class="markdownTableBodyLeft">\( A \to B   \)  </td><td class="markdownTableBodyLeft">\( A \to B    \)  </td><td class="markdownTableBodyLeft">Function  </td><td class="markdownTableBodyLeft"><span class="tt">std::function&lt;B(A)&gt;</span>  </td></tr>
+<td class="markdownTableBodyLeft">Implication  </td><td class="markdownTableBodyLeft">\( A \to B \)  </td><td class="markdownTableBodyLeft">\( A \to B \)  </td><td class="markdownTableBodyLeft">Function type  </td><td class="markdownTableBodyLeft">the function type <span class="tt">B(A)</span>  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyLeft">Not  </td><td class="markdownTableBodyLeft">\( \neg A    \)  </td><td class="markdownTableBodyLeft">\( A \to 0    \)  </td><td class="markdownTableBodyLeft">Function to empty type  </td><td class="markdownTableBodyLeft"><span class="tt">[[noreturn]] void foo</span>  </td></tr>
+<td class="markdownTableBodyLeft">Negation  </td><td class="markdownTableBodyLeft">\( \neg A \)  </td><td class="markdownTableBodyLeft">\( A \to 0 \)  </td><td class="markdownTableBodyLeft">Function to the empty type  </td><td class="markdownTableBodyLeft"><span class="tt">[[noreturn]] void f(A)</span>  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft">And  </td><td class="markdownTableBodyLeft">\( A \land B \)  </td><td class="markdownTableBodyLeft">\( A \times B \)  </td><td class="markdownTableBodyLeft">Product type  </td><td class="markdownTableBodyLeft"><span class="tt">std::tuple&lt;A,B&gt;</span>  </td></tr>
+<td class="markdownTableBodyLeft">Conjunction  </td><td class="markdownTableBodyLeft">\( A \land B \)  </td><td class="markdownTableBodyLeft">\( A \times B \)  </td><td class="markdownTableBodyLeft">Product type  </td><td class="markdownTableBodyLeft"><span class="tt">std::tuple&lt;A, B&gt;</span>, <span class="tt"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>&lt;A, B&gt;</span>  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyLeft">Or  </td><td class="markdownTableBodyLeft">\( A \lor B  \)  </td><td class="markdownTableBodyLeft">\( A + B      \)  </td><td class="markdownTableBodyLeft">Sum type  </td><td class="markdownTableBodyLeft"><span class="tt">std::variant&lt;A,B&gt;</span>  </td></tr>
+<td class="markdownTableBodyLeft">Disjunction  </td><td class="markdownTableBodyLeft">\( A \lor B \)  </td><td class="markdownTableBodyLeft">\( A + B \)  </td><td class="markdownTableBodyLeft">Sum type  </td><td class="markdownTableBodyLeft"><span class="tt">std::variant&lt;A, B&gt;</span>  </td></tr>
 </table>
-<hr  />
+</center><center></center><hr  />
 <h1 class="doxsection"><a class="anchor" id="fundamentals"></a>
 Fundamentals</h1>
-<p>In order to be able to build more complex type, it is necessary to first define Atomic Terms. In common type theory, these can be of three different types. There are the natural numbers, often denotated <em>nat</em>, then there are boolean values notated <em>bool</em> and formal variables.</p>
-<p>A <b>formal variable</b> is a symbol that stands for an arbitrary term of a given type. It carries no computation of its own and only serves as a placeholder, such as \( x \) in the lambda term \( \lambda x. x \).</p>
-<div class="fragment"><div class="line">true : <span class="keywordtype">bool</span>   <span class="comment">// A boolean</span></div>
-<div class="line">42 : nat      <span class="comment">// A natural number</span></div>
-<div class="line">x : <span class="keywordtype">bool</span>      <span class="comment">// A formal variable</span></div>
-</div><!-- fragment --><p>Then in order to be able to manipulate these types, there is the concept of functions terms. This is simply a function in the programming sense. Given a parameter of a type \( \sigma \) and a return type \( \tau \) the associated function is noted \( \sigma \rightarrow \tau \). The addition of two real numbers can then written as : add : nat \( \rightarrow \) (nat \( \rightarrow \) nat)</p>
-<p>Finally, there are lambda terms, it is associated to concept of anonymous functions/lambdas functions in programming, these should sound familiar. They simply represent a way to define new function terms.</p>
+<p>A type theory starts from base types and builds every other type from them. The examples below use two base types, <b>nat</b>, whose values are 0 and the iterated applications of the successor \( S : \mathrm{nat} \to \mathrm{nat} \), written 1, 2, and so on, and <b>bool</b>, whose values are the constants true and false. The atomic terms are these constants together with the variables.</p>
+<p>A <b>formal variable</b> stands for an arbitrary term of a given type and carries no computation of its own. It is bound when an abstraction introduces it, as \( x \) is in \( \lambda x.\, x \), and free otherwise.</p>
+<p>A <b>typing judgment</b> \( \Gamma \vdash t : T \) states that the term \( t \) has the type \( T \) under the context \( \Gamma \), which assigns a type to each free variable of \( t \), so that a constant needs an empty context and a free variable an assumption on its type:</p>
+<p class="formulaDsp">
+\[  \vdash \mathrm{true} : \mathrm{bool} \qquad \vdash 42 : \mathrm{nat}
+  \qquad x : \mathrm{bool} \vdash x : \mathrm{bool}
+\]
+</p>
+<p>The type of the functions from \( \sigma \) to \( \tau \) is written \( \sigma \to \tau \). A function type has one argument, so that a function of two arguments is curried and takes them one at a time, and the arrow associates to the right by convention, which drops the parentheses of the type of the curried addition of two natural numbers:</p>
+<p class="formulaDsp">
+\[ \mathrm{add} : \mathrm{nat} \to (\mathrm{nat} \to \mathrm{nat}) \]
+</p>
+<p>The application of add to one argument yields a function of type \( \mathrm{nat} \to \mathrm{nat} \).</p>
+<p>A lambda term \( \lambda x.\, t \) defines a new function by abstraction over the variable \( x \) in the term \( t \). It corresponds to the anonymous function of programming languages, of which the C++ lambda expression is one, and \( \lambda x.\, x \) is the identity function, of type \( T \to T \) for any type \( T \).</p>
 <hr  />
 <h1 class="doxsection"><a class="anchor" id="cardinality"></a>
 Type Cardinality</h1>
-<p>In the context of Set Theory, the <b>Cardinality</b> of a set is simply the number of element it contains. When translating it to Type Theory, the cardinality of a type refers to the total number of unique values (or states) an instance of that type can possibly represent.</p>
-<p>By treating types as set of potential values, we can use standard arithmetic to predict the complexity of our data structures. A type like <span class="tt">bool</span> as a cardinality of 2, the set of it's values is \( {true, false} \)</p>
-<p>Understanding cardinality allows us to see types not just as labels, but as mathematical objects where the size of the state space dictates how much information a variable can have.</p>
+<p>The cardinality of a set is the number of its elements, and the cardinality of a type, read as the set of its values, is the number of distinct values that an object of that type can hold. The type bool has the cardinality 2, its set of values being \( \{\mathrm{true}, \mathrm{false}\} \), whereas nat has an infinite cardinality.</p>
+<p>For a finite type of cardinality \( n \), \( \log_2 n \) bits encode one value, an upper bound of the information that an object of the type carries, and the cardinality turns the constructions of types into arithmetic, by which the cardinality of a compound type follows from the cardinalities of its parts.</p>
 <hr  />
-<p>To tie these notions back to the library, it is useful to keep the following correspondence in mind: a lambda term denotes a function, a well-typed term denotes a value of a given type, and a kumi::product_type is how such a term is concretely stored and decomposed.</p>
-<table class="markdownTable">
+<h1 class="doxsection"><a class="anchor" id="kumi_correspondence"></a>
+Correspondence with KUMI</h1>
+<p>A lambda term denotes a function, and a well-typed term denotes a value of its type. <b>KUMI</b> stores and decomposes the values of product types: <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>, <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>, and <a class="el" href="structkumi_1_1array.html" title="Fixed-size collection of homogeneous values.">kumi::array</a> hold such values and model the concept <a class="el" href="conceptkumi_1_1concepts_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::concepts::product_type</a>.</p>
+<center></center><center><table class="markdownTable">
 <tr class="markdownTableHead">
-<th class="markdownTableHeadLeft">Lambda term  </th><th class="markdownTableHeadLeft">Well-typed term  </th><th class="markdownTableHeadLeft">Kumi side  </th></tr>
+<th class="markdownTableHeadLeft">Term  </th><th class="markdownTableHeadLeft">Type  </th><th class="markdownTableHeadLeft"><b>KUMI</b>  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft">\( \lambda x. x \)  </td><td class="markdownTableBodyLeft">\( T \to T \)  </td><td class="markdownTableBodyLeft">a callable applied to the elements of a product type  </td></tr>
+<td class="markdownTableBodyLeft">\( \lambda x.\, x \)  </td><td class="markdownTableBodyLeft">\( T \to T \)  </td><td class="markdownTableBodyLeft">a callable, which <a class="el" href="group__kumi__map.html#gaeaba737291ba1085d77272eae38a016e">kumi::map</a> applies to each element of a product type  </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyLeft">\( (x_1, ..., x_n) \)  </td><td class="markdownTableBodyLeft">\( T_1 \times ... \times T_n \)  </td><td class="markdownTableBodyLeft"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> / <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>  </td></tr>
+<td class="markdownTableBodyLeft">\( (x_1, \dots, x_n) \)  </td><td class="markdownTableBodyLeft">\( T_1 \times \dots \times T_n \)  </td><td class="markdownTableBodyLeft"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>, and <a class="el" href="structkumi_1_1array.html" title="Fixed-size collection of homogeneous values.">kumi::array</a> when all the \( T_i \) are equal  </td></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyLeft">projection \( \pi_i \)  </td><td class="markdownTableBodyLeft">\( T_i \)  </td><td class="markdownTableBodyLeft"><a class="el" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282" title="Extracts the Ith element from a kumi::array.">kumi::get&lt;...&gt;</a>  </td></tr>
+<td class="markdownTableBodyLeft">projection \( \pi_i \)  </td><td class="markdownTableBodyLeft">\( T_1 \times \dots \times T_n \to T_i \)  </td><td class="markdownTableBodyLeft">kumi::get at the index \( i - 1 \), which returns a reference to the component  </td></tr>
 </table>
-<dl class="section note"><dt>Note</dt><dd>Readers looking for a deeper treatment of these topics may consult the short selection of type-theory references gathered in the <a class="el" href="kumi_references.html" title="References">References</a> page.</dd></dl>
-<p>In the next page, we will see some more specific types that are used as a base for more complex operations.</p>
+</center><center></center><dl class="section note"><dt>Note</dt><dd>Pierce, Harper, Barendregt, and Wadler treat these notions, see the <a class="el" href="kumi_references.html" title="Bibliography">Bibliography</a>.</dd></dl>
 <div class="section_buttons"></div><div class="section_buttons"><table class="markdownTable">
 <tr class="markdownTableHead">
 <th class="markdownTableHeadRight">Next  </th></tr>
 <tr class="markdownTableRowOdd">
-<td class="markdownTableBodyRight"><a class="el" href="kumi_identity.html" title="The Identity Elements (The &quot;0&quot; and &quot;1&quot; of Types)">Identity Types</a>  </td></tr>
+<td class="markdownTableBodyRight"><a class="el" href="kumi_identity.html" title="Identity Elements">Identity Elements</a>  </td></tr>
 </table>
 </div><div class="section_buttons"></div> </div></div><!-- contents -->
 </div><!-- PageDoc -->
