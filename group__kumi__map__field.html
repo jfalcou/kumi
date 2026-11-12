@@ -145,7 +145,9 @@ $(function(){initNavTree('group__kumi__map__field.html','',''); });
 Variables</h2></td></tr>
 <tr class="memitem:gafe68ca583e3e822b20f60ff35e5aa9d3" id="r_gafe68ca583e3e822b20f60ff35e5aa9d3"><td class="memItemLeft">constexpr map_field_t&#160;</td><td class="memItemRight"><a class="el" href="#gafe68ca583e3e822b20f60ff35e5aa9d3">kumi::map_field</a> {}</td></tr>
 </table>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Callable object applying the Callable object <span class="tt">f</span> on each product types elements and their associated labels. </p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="gafe68ca583e3e822b20f60ff35e5aa9d3" name="gafe68ca583e3e822b20f60ff35e5aa9d3"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gafe68ca583e3e822b20f60ff35e5aa9d3">&#9670;&#160;</a></span>map_field</h2>
 
@@ -165,12 +167,10 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/algorithm/map.hpp&gt;</code></p>
 <p>Applies the given function to all the records passed as arguments along with their names and stores the result in another records, keeping the original elements order.</p>
 <dl class="section note"><dt>Note</dt><dd>Does not participate in overload resolution if records' size are not equal or if <span class="tt">f</span> can't be called on each record's fields and their names.</dd></dl>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/map.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type T, product_type... Ts&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gafe68ca583e3e822b20f60ff35e5aa9d3">map_field</a>(Function &amp;&amp; f, T &amp;&amp; t, Ts &amp;&amp;... ts);</div>

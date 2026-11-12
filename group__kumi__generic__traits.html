@@ -216,7 +216,9 @@ Variables</h2></td></tr>
 <tr class="memitem:ga4dd894f30adf7e5f7ae95124f66d8adb template"><td class="memItemLeft">constexpr std::size_t&#160;</td><td class="memItemRight"><a class="el" href="#ga4dd894f30adf7e5f7ae95124f66d8adb">kumi::size_v</a> = std::tuple_size&lt;std::remove_cvref_t&lt;T&gt;&gt;::value</td></tr>
 <tr class="memdesc:ga4dd894f30adf7e5f7ae95124f66d8adb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the number of elements of a kumi::product_type.  <br /></td></tr>
 </table>
-<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Traits and extension points for any product type. </p>
+</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
 <a id="gacf63a95bf29987c5639c10ce15e6937b" name="gacf63a95bf29987c5639c10ce15e6937b"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gacf63a95bf29987c5639c10ce15e6937b">&#9670;&#160;</a></span>container_type_t</h2>
 
@@ -230,8 +232,6 @@ template&lt;typename T&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/utils/traits.hpp&gt;</code></p>
 
 <p>Provides access to the type of the elements of a <a class="el" href="conceptkumi_1_1concepts_1_1container.html" title="Concept specifying a type follows the Container Type semantic.">kumi::concepts::container</a>. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -264,8 +264,6 @@ template&lt;std::size_t I, typename T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p><code>#include &lt;kumi/utils/traits.hpp&gt;</code></p>
-
 <p>Provides indexed access to the types of the elements of a kumi::product_type. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -296,8 +294,6 @@ template&lt;typename Field, typename T&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/utils/traits.hpp&gt;</code></p>
 
 <p>The type of the value of <span class="tt">T</span> selected by the field <span class="tt">Field</span>, resolved by name the same way as <span class="tt">kumi::member</span> resolves by index (going through <span class="tt"><a class="el" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282" title="Extracts the Ith element from a kumi::array.">kumi::get</a></span>). </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -330,8 +326,6 @@ template&lt;std::size_t I, typename T&gt; </div>
       </table>
 </div><div class="memdoc">
 
-<p><code>#include &lt;kumi/utils/traits.hpp&gt;</code></p>
-
 <p>Computes the return type of a call to <a class="el" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282" title="Extracts the Ith element from a kumi::array.">kumi::get</a>. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -362,8 +356,6 @@ template&lt;std::size_t I, typename T&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/utils/traits.hpp&gt;</code></p>
 
 <p>Computes the return type of a call to <a class="el" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282" title="Extracts the Ith element from a kumi::array.">kumi::get</a> on a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> and unwrap the field returned by <a class="el" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282" title="Extracts the Ith element from a kumi::array.">kumi::get</a> on a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -406,8 +398,6 @@ template&lt;typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p><code>#include &lt;kumi/utils/traits.hpp&gt;</code></p>
-
 <p>Checks if a parameter pack only contains distinct <a class="el" href="structkumi_1_1field.html" title="Named wrapper over a type.">kumi::field</a> names. Evaluates to false if no type is a <a class="el" href="structkumi_1_1field.html" title="Named wrapper over a type.">kumi::field</a>. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -445,8 +435,6 @@ template&lt;typename... Ts&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/utils/traits.hpp&gt;</code></p>
 
 <p>Checks if a parameter pack only contains distinct types. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -486,8 +474,6 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p><code>#include &lt;kumi/utils/traits.hpp&gt;</code></p>
-
 <p>Returns the statically known number of elements of a kumi::container. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -525,8 +511,6 @@ template&lt;typename T, typename U&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/utils/traits.hpp&gt;</code></p>
 
 <p>Checks if a type is an instance of a specific template. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -566,8 +550,6 @@ template&lt;typename T&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/utils/traits.hpp&gt;</code></p>
 
 <p>Opt-in traits for types behaving like a kumi::power_type. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
@@ -664,8 +646,6 @@ template&lt;typename T&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p><code>#include &lt;kumi/utils/traits.hpp&gt;</code></p>
-
 <p>Detects if a type follows the tuple protocol. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -755,8 +735,6 @@ template&lt;typename T&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/utils/traits.hpp&gt;</code></p>
 
 <p>Computes the number of elements of a kumi::product_type. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>

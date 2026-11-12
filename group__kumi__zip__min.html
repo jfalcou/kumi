@@ -145,7 +145,9 @@ $(function(){initNavTree('group__kumi__zip__min.html','',''); });
 Variables</h2></td></tr>
 <tr class="memitem:gaf4b9aea3cee7c30fc6a516c632805423" id="r_gaf4b9aea3cee7c30fc6a516c632805423"><td class="memItemLeft">constexpr zip_min_t&#160;</td><td class="memItemRight"><a class="el" href="#gaf4b9aea3cee7c30fc6a516c632805423">kumi::zip_min</a> {}</td></tr>
 </table>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Callable object constructing a tuple where the ith element is the product type of all ith elements of <span class="tt">t</span>,<span class="tt">ts</span>... </p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="gaf4b9aea3cee7c30fc6a516c632805423" name="gaf4b9aea3cee7c30fc6a516c632805423"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaf4b9aea3cee7c30fc6a516c632805423">&#9670;&#160;</a></span>zip_min</h2>
 
@@ -165,8 +167,6 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/algorithm/zip.hpp&gt;</code></p>
 <p>On record types, this function operates on elements as if they were ordered. The considered order is the order of declaration.</p>
 <dl class="section note"><dt>Note</dt><dd>This function does not take part in overload resolution if the product types do not follow the same semantic. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="conceptkumi_1_1concepts_1_1follows__same__semantic.html" title="Concept specifying if a pack of types follows the same semantic.">kumi::concepts::follows_same_semantic</a></dd></dl>
@@ -175,7 +175,7 @@ Variables</h2></td></tr>
 <dd>
 <a class="el" href="group__kumi__zip__max.html#ga0ce4823febfb00cfb197f73332ba7309">zip_max</a></dd></dl>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/zip.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T, product_type... Ts&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaf4b9aea3cee7c30fc6a516c632805423">zip_min</a>(T &amp;&amp; t, Ts &amp;&amp;... ts);</div>

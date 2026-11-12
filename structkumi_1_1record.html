@@ -349,7 +349,7 @@ template&lt;typename... Ts, typename... Us&gt; </td></tr>
 <tr class="memitem:a3dc6eb9adc6e77531fe60520794558a5 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a3dc6eb9adc6e77531fe60520794558a5">get</a> (<a class="el" href="#ae9ac76c2474af708950b35e4b58027d6">record</a>&lt; Ts... &gt; const &amp;&amp;r) noexcept</td></tr>
 <tr class="memitem:abc2cd329ad25d155458850c19cc3b137" id="r_abc2cd329ad25d155458850c19cc3b137"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier</a> auto Id, typename... Ts&gt; </td></tr>
 <tr class="memitem:abc2cd329ad25d155458850c19cc3b137 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#abc2cd329ad25d155458850c19cc3b137">get</a> (<a class="el" href="#ae9ac76c2474af708950b35e4b58027d6">record</a>&lt; Ts... &gt; &amp;r) noexcept</td></tr>
-<tr class="memdesc:abc2cd329ad25d155458850c19cc3b137"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the field identified by Id from a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> if it exists.  <br /></td></tr>
+<tr class="memdesc:abc2cd329ad25d155458850c19cc3b137"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the element of the field identified by Id from a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> if it exists.  <br /></td></tr>
 <tr class="memitem:add6a786a9f4cf8a88d85f0b3b88d4705" id="r_add6a786a9f4cf8a88d85f0b3b88d4705"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier</a> auto Id, typename... Ts&gt; </td></tr>
 <tr class="memitem:add6a786a9f4cf8a88d85f0b3b88d4705 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#add6a786a9f4cf8a88d85f0b3b88d4705">get</a> (<a class="el" href="#ae9ac76c2474af708950b35e4b58027d6">record</a>&lt; Ts... &gt; &amp;&amp;r) noexcept</td></tr>
 <tr class="memitem:a275ab6e86c6128f8f5e2c30ef3f26c4f" id="r_a275ab6e86c6128f8f5e2c30ef3f26c4f"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi::concepts::identifier</a> auto Id, typename... Ts&gt; </td></tr>
@@ -358,7 +358,7 @@ template&lt;typename... Ts, typename... Us&gt; </td></tr>
 <tr class="memitem:a3dc6eb9adc6e77531fe60520794558a5 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a3dc6eb9adc6e77531fe60520794558a5">get</a> (<a class="el" href="#ae9ac76c2474af708950b35e4b58027d6">record</a>&lt; Ts... &gt; const &amp;&amp;r) noexcept</td></tr>
 <tr class="memitem:abc2cd329ad25d155458850c19cc3b137" id="r_abc2cd329ad25d155458850c19cc3b137"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Ts&gt; </td></tr>
 <tr class="memitem:abc2cd329ad25d155458850c19cc3b137 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#abc2cd329ad25d155458850c19cc3b137">get</a> (<a class="el" href="#ae9ac76c2474af708950b35e4b58027d6">record</a>&lt; Ts... &gt; &amp;r) noexcept</td></tr>
-<tr class="memdesc:abc2cd329ad25d155458850c19cc3b137"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the field whose underlying type is T from a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> if it exists.  <br /></td></tr>
+<tr class="memdesc:abc2cd329ad25d155458850c19cc3b137"><td class="mdescLeft">&#160;</td><td class="mdescRight">Extracts the element of the field whose underlying type is T from a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> if it exists.  <br /></td></tr>
 <tr class="memitem:add6a786a9f4cf8a88d85f0b3b88d4705" id="r_add6a786a9f4cf8a88d85f0b3b88d4705"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Ts&gt; </td></tr>
 <tr class="memitem:add6a786a9f4cf8a88d85f0b3b88d4705 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#add6a786a9f4cf8a88d85f0b3b88d4705">get</a> (<a class="el" href="#ae9ac76c2474af708950b35e4b58027d6">record</a>&lt; Ts... &gt; &amp;&amp;r) noexcept</td></tr>
 <tr class="memitem:a275ab6e86c6128f8f5e2c30ef3f26c4f" id="r_a275ab6e86c6128f8f5e2c30ef3f26c4f"><td class="memTemplParams" colspan="2">template&lt;typename T, typename... Ts&gt; </td></tr>
@@ -374,8 +374,12 @@ constexpr auto&#160;</td><td class="memItemRight"><b>values</b> () noexcept</td>
 <tr class="memitem:aed4f570ae92586a34d7f03b4bc584ebc" id="r_aed4f570ae92586a34d7f03b4bc584ebc"><td class="memItemLeft"><a id="aed4f570ae92586a34d7f03b4bc584ebc" name="aed4f570ae92586a34d7f03b4bc584ebc"></a>
 constexpr auto&#160;</td><td class="memItemRight"><b>values</b> () const noexcept</td></tr>
 <tr class="memdesc:aed4f570ae92586a34d7f03b4bc584ebc"><td class="mdescLeft">&#160;</td><td class="mdescRight">This is an overloaded member function, provided for convenience. It differs from the above function only in what argument(s) it accepts. <br /></td></tr>
-<tr class="memitem:ae58c2eac14a343992ac19d9ba01ec6ae" id="r_ae58c2eac14a343992ac19d9ba01ec6ae"><td class="memItemLeft">static constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#ae58c2eac14a343992ac19d9ba01ec6ae">size</a> () noexcept</td></tr>
-<tr class="memitem:a7e54e12c537c8dcbafabc215957f0abc" id="r_a7e54e12c537c8dcbafabc215957f0abc"><td class="memItemLeft">static constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#a7e54e12c537c8dcbafabc215957f0abc">empty</a> () noexcept</td></tr>
+<tr class="memitem:ae58c2eac14a343992ac19d9ba01ec6ae" id="r_ae58c2eac14a343992ac19d9ba01ec6ae"><td class="memItemLeft"><a id="ae58c2eac14a343992ac19d9ba01ec6ae" name="ae58c2eac14a343992ac19d9ba01ec6ae"></a>
+static constexpr auto&#160;</td><td class="memItemRight"><b>size</b> () noexcept</td></tr>
+<tr class="memdesc:ae58c2eac14a343992ac19d9ba01ec6ae"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of elements in a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>. <br /></td></tr>
+<tr class="memitem:a7e54e12c537c8dcbafabc215957f0abc" id="r_a7e54e12c537c8dcbafabc215957f0abc"><td class="memItemLeft"><a id="a7e54e12c537c8dcbafabc215957f0abc" name="a7e54e12c537c8dcbafabc215957f0abc"></a>
+static constexpr bool&#160;</td><td class="memItemRight"><b>empty</b> () noexcept</td></tr>
+<tr class="memdesc:a7e54e12c537c8dcbafabc215957f0abc"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <span class="tt">true</span> if a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> contains 0 elements. <br /></td></tr>
 <tr class="memitem:ac730d46c3db986909e0c910b74648b4a" id="r_ac730d46c3db986909e0c910b74648b4a"><td class="memItemLeft"><a id="ac730d46c3db986909e0c910b74648b4a" name="ac730d46c3db986909e0c910b74648b4a"></a>
 static constexpr auto&#160;</td><td class="memItemRight"><b>identifiers</b> () noexcept</td></tr>
 <tr class="memdesc:ac730d46c3db986909e0c910b74648b4a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the identifiers associated to the elements of a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>. <br /></td></tr>
@@ -384,34 +388,6 @@ static constexpr auto&#160;</td><td class="memItemRight"><b>labels</b> () noexce
 <tr class="memdesc:a57fe20038a1592ea37e9a8954c013d80"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the labels associated to the elements of a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>. <br /></td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="a7e54e12c537c8dcbafabc215957f0abc" name="a7e54e12c537c8dcbafabc215957f0abc"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a7e54e12c537c8dcbafabc215957f0abc">&#9670;&#160;</a></span>empty()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename... Ts&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr bool <a class="el" href="structkumi_1_1record.html">kumi::record</a>&lt; Ts &gt;::empty </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>Returns <span class="tt">true</span> if a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> contains 0 elements </dd></dl>
-
-</div>
-</div>
 <a id="a88921ac5a098037c2166c9c7e1769200" name="a88921ac5a098037c2166c9c7e1769200"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a88921ac5a098037c2166c9c7e1769200">&#9670;&#160;</a></span>operator=()</h2>
 
@@ -706,34 +682,6 @@ Example:</h2>
 </div><!-- fragment --> 
 </div>
 </div>
-<a id="ae58c2eac14a343992ac19d9ba01ec6ae" name="ae58c2eac14a343992ac19d9ba01ec6ae"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ae58c2eac14a343992ac19d9ba01ec6ae">&#9670;&#160;</a></span>size()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename... Ts&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto <a class="el" href="structkumi_1_1record.html">kumi::record</a>&lt; Ts &gt;::size </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>Returns the number of elements in a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> </dd></dl>
-
-</div>
-</div>
 <a name="doc-related-members" id="doc-related-members"></a><h2 id="header-doc-related-members" class="groupheader">Friends And Related Symbol Documentation</h2>
 <a id="add6a786a9f4cf8a88d85f0b3b88d4705" name="add6a786a9f4cf8a88d85f0b3b88d4705"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#add6a786a9f4cf8a88d85f0b3b88d4705">&#9670;&#160;</a></span>get() <span class="overload">[1/16]</span></h2>
@@ -872,7 +820,7 @@ template&lt;typename T, typename... Ts&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p>Extracts the field whose underlying type is T from a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> if it exists. </p>
+<p>Extracts the element of the field whose underlying type is T from a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> if it exists. </p>
 <dl class="section note"><dt>Note</dt><dd>Does not participate in overload resolution if the types are not unique </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -935,7 +883,7 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi
 </table>
 </div><div class="memdoc">
 
-<p>Extracts the field identified by Id from a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> if it exists. </p>
+<p>Extracts the element of the field identified by Id from a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> if it exists. </p>
 <dl class="section note"><dt>Note</dt><dd>Does not participate in overload resolution if the names are not unique </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">

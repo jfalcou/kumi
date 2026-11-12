@@ -147,7 +147,9 @@ Functions</h2></td></tr>
 requires (<a class="el" href="conceptkumi_1_1concepts_1_1queryable__by__identifier.html">kumi::concepts::queryable_by_identifier</a>&lt;Id, T&gt;)</td></tr>
 <tr class="memitem:ga2fc46ed70d43d14ca52860896fd1e364 template"><td class="memItemLeft">consteval auto&#160;</td><td class="memItemRight"><a class="el" href="#ga2fc46ed70d43d14ca52860896fd1e364">kumi::get_index_of_field</a> ()</td></tr>
 </table>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Helper to retrieve the index of a type in a product type by its identifier. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="ga2fc46ed70d43d14ca52860896fd1e364" name="ga2fc46ed70d43d14ca52860896fd1e364"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga2fc46ed70d43d14ca52860896fd1e364">&#9670;&#160;</a></span>get_index_of_field()</h2>
 
@@ -173,8 +175,6 @@ requires (<a class="el" href="conceptkumi_1_1concepts_1_1queryable__by__identifi
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/utils/ct_helpers.hpp&gt;</code></p>
 <dl class="section note"><dt>Note</dt><dd>This function does not participate in overload resolution if the product type has several instances of the same identifier or has no identifier at all.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>the index of the element whose identifier matches Id in the product type if it exists </dd></dl>
 

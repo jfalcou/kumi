@@ -146,7 +146,9 @@ Typedefs</h2></td></tr>
 <tr class="memitem:gac3dc3023ed46df23816b0c0bfd4817dd" id="r_gac3dc3023ed46df23816b0c0bfd4817dd"><td class="memTemplParams" colspan="2">template&lt;typename Sizes, typename Elts&gt; </td></tr>
 <tr class="memitem:gac3dc3023ed46df23816b0c0bfd4817dd template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#gac3dc3023ed46df23816b0c0bfd4817dd">kumi::function::cartesian_strides</a> = decltype(kumi_implementation_defined)</td></tr>
 </table>
-<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>A helper alias template computing the strides associated to the cartesian product operation. </p>
+</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
 <a id="gac3dc3023ed46df23816b0c0bfd4817dd" name="gac3dc3023ed46df23816b0c0bfd4817dd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gac3dc3023ed46df23816b0c0bfd4817dd">&#9670;&#160;</a></span>cartesian_strides</h2>
 
@@ -160,11 +162,9 @@ template&lt;typename Sizes, typename Elts&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/functional/index_sequence.hpp&gt;</code></p>
 <p>For a cartesian product of <span class="tt">M</span> tuples of sizes <span class="tt">N0, ..., N(M-1)</span>, the <span class="tt">K</span>-th element of the product selects, in the <span class="tt">i</span>-th input tuple, the element at index <span class="tt">(K / S_i) % N_i</span>. This alias computes the strides <span class="tt">S_i</span>, i.e. the number of consecutive product elements sharing the same index in tuple <span class="tt">i</span>. The last tuple varies fastest, so <span class="tt">S_i</span> is the product of the sizes of all tuples following tuple <span class="tt">i</span> and the last stride is always <span class="tt">1</span>.</p>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/functional/indexable.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Sizes, <span class="keyword">typename</span> Elts&gt;</div>
 <div class="line"><span class="keyword">using </span><a class="code hl_typedef" href="#gac3dc3023ed46df23816b0c0bfd4817dd">cartesian_strides</a>;</div>

@@ -145,7 +145,9 @@ $(function(){initNavTree('group__kumi__map__index.html','',''); });
 Variables</h2></td></tr>
 <tr class="memitem:ga64a8c36072828fb7b724ba0ab8fc59bc" id="r_ga64a8c36072828fb7b724ba0ab8fc59bc"><td class="memItemLeft">constexpr map_index_t&#160;</td><td class="memItemRight"><a class="el" href="#ga64a8c36072828fb7b724ba0ab8fc59bc">kumi::map_index</a> {}</td></tr>
 </table>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Callable object applying the Callable object <span class="tt">f</span> on each product types elements and their indexes. </p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="ga64a8c36072828fb7b724ba0ab8fc59bc" name="ga64a8c36072828fb7b724ba0ab8fc59bc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga64a8c36072828fb7b724ba0ab8fc59bc">&#9670;&#160;</a></span>map_index</h2>
 
@@ -165,12 +167,10 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/algorithm/map.hpp&gt;</code></p>
 <p>Applies the given function to all the product types passed as arguments along with their indexes and stores the result in another product type, keeping the original elements order.</p>
 <dl class="section note"><dt>Note</dt><dd>Does not participate in overload resolution if tuples' size are not equal or if <span class="tt">f</span> can't be called on each tuple's elements and their indexes.</dd></dl>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/map.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type T, product_type... Ts&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga64a8c36072828fb7b724ba0ab8fc59bc">map_index</a>(Function &amp;&amp; f, T &amp;&amp; t, Ts &amp;&amp;... ts);</div>

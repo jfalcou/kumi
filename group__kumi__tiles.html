@@ -146,7 +146,9 @@ Variables</h2></td></tr>
 <tr class="memitem:ga3d1b4a8309328d854d7b6234fde3aeb0" id="r_ga3d1b4a8309328d854d7b6234fde3aeb0"><td class="memTemplParams" colspan="2">template&lt;std::size_t N, std::size_t O&gt; </td></tr>
 <tr class="memitem:ga3d1b4a8309328d854d7b6234fde3aeb0 template"><td class="memItemLeft">constexpr tiles_t&lt; N, O &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga3d1b4a8309328d854d7b6234fde3aeb0">kumi::tiles</a> {}</td></tr>
 </table>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Callable object creating a tuple of product types, each containing <span class="tt">N</span> consecutive elements from <span class="tt">t</span>. Tiles starts at 0 and advance by <span class="tt">O</span> element each time. </p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="ga3d1b4a8309328d854d7b6234fde3aeb0" name="ga3d1b4a8309328d854d7b6234fde3aeb0"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga3d1b4a8309328d854d7b6234fde3aeb0">&#9670;&#160;</a></span>tiles</h2>
 
@@ -168,12 +170,10 @@ template&lt;std::size_t N, std::size_t O&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/algorithm/tiler.hpp&gt;</code></p>
 <p>On record types, this function operates on elements as if they were ordered. The considered order is the order of declaration.</p>
 <dl class="section note"><dt>Note</dt><dd>Tiles is the most general form of tiling each inner product_type is a tile over <span class="tt">t</span> starting at index <span class="tt">tile_size * tile_number</span>. The last tile will be smaller if the size of the product type is not a multiple of the tile size.</dd></dl>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/tiler.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> N, std::<span class="keywordtype">size_t</span> O, product_type T&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga3d1b4a8309328d854d7b6234fde3aeb0">tiles&lt;N,O&gt;</a>(T &amp;&amp; t);</div>

@@ -215,7 +215,9 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ga11e943ab58829909243b4826d1f084d8 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ga11e943ab58829909243b4826d1f084d8">kumi::function::element_or_t</a> = std::remove_cvref_t&lt;decltype(<a class="el" href="group__kumi__function__get__or.html#ga42064b97f063feae3d934bd111ef74ec">kumi::function::get_or</a>&lt;I&gt;(std::declval&lt;T&gt;(), std::declval&lt;U&gt;()))&gt;</td></tr>
 <tr class="memdesc:ga11e943ab58829909243b4826d1f084d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the Ith element type of a kumi::product_type, or a fallback type <span class="tt">U</span> otherwise.  <br /></td></tr>
 </table>
-<a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Utilities to manipulate functions and types in a functional way. </p>
+</div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
 <a id="ga11e943ab58829909243b4826d1f084d8" name="ga11e943ab58829909243b4826d1f084d8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga11e943ab58829909243b4826d1f084d8">&#9670;&#160;</a></span>element_or_t</h2>
 
@@ -229,8 +231,6 @@ template&lt;std::size_t I, typename T, typename U&gt; </div>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/functional/monadic.hpp&gt;</code></p>
 
 <p>Computes the Ith element type of a kumi::product_type, or a fallback type <span class="tt">U</span> otherwise. </p>
 <p>If <span class="tt">T</span> is a kumi::product_type and <span class="tt">I</span> is within its size, this alias resolves to <span class="tt"><a class="el" href="group__kumi__generic__traits.html#ga8ba508c6d1dfb63ff6fec24deb84d66e" title="Provides indexed access to the types of the elements of a kumi::product_type.">element_t</a>&lt;I,T&gt;</span>, otherwise it resolves to <span class="tt">U</span>.</p>

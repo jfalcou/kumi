@@ -145,7 +145,9 @@ $(function(){initNavTree('group__kumi__flatten.html','',''); });
 Variables</h2></td></tr>
 <tr class="memitem:ga49acccc42ec8af7b96b63e8f38796df2" id="r_ga49acccc42ec8af7b96b63e8f38796df2"><td class="memItemLeft">constexpr flatten_t&#160;</td><td class="memItemRight"><a class="el" href="#ga49acccc42ec8af7b96b63e8f38796df2">kumi::flatten</a> {}</td></tr>
 </table>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Callable object converting a product type of product types into a product type of all elements. </p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="ga49acccc42ec8af7b96b63e8f38796df2" name="ga49acccc42ec8af7b96b63e8f38796df2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga49acccc42ec8af7b96b63e8f38796df2">&#9670;&#160;</a></span>flatten</h2>
 
@@ -165,11 +167,9 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/algorithm/flatten.hpp&gt;</code></p>
 <p>On record types, the names of the outer record are concatenated to the inner ones ultimately constructing names such as "outer.inner". If the input is a product type containing record types or vice versa only the inner types matching the outer semantic will be flattened. Thus a record inside a tuple will not be flattened.</p>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/flatten.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga49acccc42ec8af7b96b63e8f38796df2">flatten</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>

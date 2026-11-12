@@ -143,7 +143,9 @@ $(function(){initNavTree('group__kumi__to__ref.html','',''); });
 Tuple construction</h2></td></tr>
 <tr class="memitem:ga271223ada5937ca2e7ea77825b89b144" id="r_ga271223ada5937ca2e7ea77825b89b144"><td class="memItemLeft">constexpr to_ref_t&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__tie.html#ga271223ada5937ca2e7ea77825b89b144">kumi::to_ref</a> {}</td></tr>
 </table>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Callable object creating a <a class="el" href="conceptkumi_1_1concepts_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::concepts::product_type</a> of references given a reference to a <a class="el" href="conceptkumi_1_1concepts_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::concepts::product_type</a>. </p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="ga271223ada5937ca2e7ea77825b89b144" name="ga271223ada5937ca2e7ea77825b89b144"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga271223ada5937ca2e7ea77825b89b144">&#9670;&#160;</a></span>to_ref</h2>
 
@@ -163,11 +165,9 @@ Tuple construction</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/product_types/tuple.hpp&gt;</code></p>
 <p>If the input type matches the <a class="el" href="conceptkumi_1_1concepts_1_1record__type.html" title="Concept specifying a type follows the Record Type semantic.">kumi::concepts::record_type</a> protocol, return a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>, returns a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> otherwise.</p>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/tuple.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_variable" href="group__kumi__tie.html#ga271223ada5937ca2e7ea77825b89b144">to_ref</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>

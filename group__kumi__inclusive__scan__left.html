@@ -145,7 +145,9 @@ $(function(){initNavTree('group__kumi__inclusive__scan__left.html','',''); });
 Variables</h2></td></tr>
 <tr class="memitem:ga1389eee6fb884b34ed4957884ecd39a1" id="r_ga1389eee6fb884b34ed4957884ecd39a1"><td class="memItemLeft">constexpr inclusive_scan_left_t&#160;</td><td class="memItemRight"><a class="el" href="#ga1389eee6fb884b34ed4957884ecd39a1">kumi::inclusive_scan_left</a> {}</td></tr>
 </table>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Callable object computing the inclusive prefix scan of all elements of a product type using a tail recursive call. </p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="ga1389eee6fb884b34ed4957884ecd39a1" name="ga1389eee6fb884b34ed4957884ecd39a1"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga1389eee6fb884b34ed4957884ecd39a1">&#9670;&#160;</a></span>inclusive_scan_left</h2>
 
@@ -165,12 +167,10 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/algorithm/scan.hpp&gt;</code></p>
 <p>On record types, this function operates on the underlying values, not on the fields themselves.</p>
 <dl class="section note"><dt>Note</dt><dd>The first stored value is the result of the application of the function to the provided initial value and the first element of the product_type.</dd></dl>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/scan.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type T, <span class="keyword">typename</span> Value&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga1389eee6fb884b34ed4957884ecd39a1">inclusive_scan_left</a>(Function f, T &amp;&amp; t, Value init);</div>

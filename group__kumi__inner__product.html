@@ -145,7 +145,9 @@ $(function(){initNavTree('group__kumi__inner__product.html','',''); });
 Variables</h2></td></tr>
 <tr class="memitem:ga712c681a51bdbc86d41b160deddd2e1d" id="r_ga712c681a51bdbc86d41b160deddd2e1d"><td class="memItemLeft">constexpr inner_product_t&#160;</td><td class="memItemRight"><a class="el" href="#ga712c681a51bdbc86d41b160deddd2e1d">kumi::inner_product</a> {}</td></tr>
 </table>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Callable object computing the inner product (i.e. sum of products). </p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="ga712c681a51bdbc86d41b160deddd2e1d" name="ga712c681a51bdbc86d41b160deddd2e1d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga712c681a51bdbc86d41b160deddd2e1d">&#9670;&#160;</a></span>inner_product</h2>
 
@@ -165,14 +167,12 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/algorithm/inner_product.hpp&gt;</code></p>
 <p>Computes the generalized sum of products of the elements of two product types. By default, <span class="tt">+</span> and <span class="tt">*</span> are used.</p>
 <p>On record types, operates by pair of fields sharing the same label.</p>
 <dl class="section note"><dt>Note</dt><dd>Does not participate in overload resolution if product types' size are not equal or if any of the binary operations can't be applied on the product types' elements. Similarly, doesn't participate in overload resolution if the two inputs are not compatible. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="conceptkumi_1_1concepts_1_1compatible__product__types.html" title="Concept specifying if two product types are compatible.">concepts::compatible_product_types</a>.</dd></dl>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/inner_product.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type S1, product_type S2, <span class="keyword">typename</span> T, <span class="keyword">typename</span> Sum, <span class="keyword">typename</span> Prod&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga712c681a51bdbc86d41b160deddd2e1d">inner_product</a>(S1 &amp;&amp; s1, S2 &amp;&amp; s2, T init, Sum <a class="code hl_variable" href="group__kumi__sum.html#ga3e8b585399de360c3ab55efc2fa0ed8c">sum</a>, Prod <a class="code hl_variable" href="group__kumi__prod.html#ga6c139ebafaebc0f7dbca2fd57aee943c">prod</a>) <span class="keyword">noexcept</span>;</div>

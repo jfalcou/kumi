@@ -144,7 +144,9 @@ array construction</h2></td></tr>
 <tr class="memitem:gaa93098695e1bc5a6db9572a70b5a2cd8" id="r_gaa93098695e1bc5a6db9572a70b5a2cd8"><td class="memItemLeft">constexpr forward_as_array_t&#160;</td><td class="memItemRight"><a class="el" href="#gaa93098695e1bc5a6db9572a70b5a2cd8">kumi::forward_as_array</a> {}</td></tr>
 <tr class="memitem:ga1f35cbd4396ea2b88d6c34f63c02c8c6" id="r_ga1f35cbd4396ea2b88d6c34f63c02c8c6"><td class="memItemLeft">constexpr make_array_t&#160;</td><td class="memItemRight"><a class="el" href="#ga1f35cbd4396ea2b88d6c34f63c02c8c6">kumi::make_array</a> {}</td></tr>
 </table>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Creates a <a class="el" href="structkumi_1_1array.html" title="Fixed-size collection of homogeneous values.">kumi::array</a> of forwarding references to its arguments. </p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="gaa93098695e1bc5a6db9572a70b5a2cd8" name="gaa93098695e1bc5a6db9572a70b5a2cd8"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaa93098695e1bc5a6db9572a70b5a2cd8">&#9670;&#160;</a></span>forward_as_array</h2>
 
@@ -164,12 +166,10 @@ array construction</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/product_types/array.hpp&gt;</code></p>
 <p>Constructs an array of references to the arguments in ts suitable for forwarding as an argument to a function. The tuple has rvalue reference data members when rvalues are used as arguments, and otherwise has lvalue reference data members.</p>
 <dl class="section note"><dt>Note</dt><dd>If the arguments are temporaries, <span class="tt"><a class="el" href="#gaa93098695e1bc5a6db9572a70b5a2cd8">forward_as_array</a></span> does not extend their lifetime; they have to be used before the end of the full expression.</dd></dl>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/product_types/array.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaa93098695e1bc5a6db9572a70b5a2cd8">forward_as_array</a>(Ts&amp;&amp;... ts);</div>
@@ -226,10 +226,8 @@ array construction</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/product_types/array.hpp&gt;</code></p>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/product_types/array.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga1f35cbd4396ea2b88d6c34f63c02c8c6">make_array</a>(Ts&amp;&amp;... ts);</div>

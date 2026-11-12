@@ -146,7 +146,9 @@ Tuple construction</h2></td></tr>
 <tr class="memitem:ga2a3a7b464afb602d8a722178ac517da8" id="r_ga2a3a7b464afb602d8a722178ac517da8"><td class="memItemLeft">constexpr make_tuple_t&#160;</td><td class="memItemRight"><a class="el" href="#ga2a3a7b464afb602d8a722178ac517da8">kumi::make_tuple</a> {}</td></tr>
 <tr class="memitem:ga271223ada5937ca2e7ea77825b89b144" id="r_ga271223ada5937ca2e7ea77825b89b144"><td class="memItemLeft">constexpr to_ref_t&#160;</td><td class="memItemRight"><a class="el" href="#ga271223ada5937ca2e7ea77825b89b144">kumi::to_ref</a> {}</td></tr>
 </table>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Creates a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> of lvalue references to its arguments. </p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="ga934bd052835c7cc48a870fbc7c86e6ac" name="ga934bd052835c7cc48a870fbc7c86e6ac"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga934bd052835c7cc48a870fbc7c86e6ac">&#9670;&#160;</a></span>forward_as_tuple</h2>
 
@@ -166,12 +168,10 @@ Tuple construction</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/product_types/tuple.hpp&gt;</code></p>
 <p>Constructs a tuple of references to the arguments in ts suitable for forwarding as an argument to a function. The tuple has rvalue reference data members when rvalues are used as arguments, and otherwise has lvalue reference data members.</p>
 <dl class="section note"><dt>Note</dt><dd>If the arguments are temporaries, <span class="tt"><a class="el" href="#ga934bd052835c7cc48a870fbc7c86e6ac">forward_as_tuple</a></span> does not extend their lifetime; they have to be used before the end of the full expression.</dd></dl>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/product_types/tuple.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga934bd052835c7cc48a870fbc7c86e6ac">forward_as_tuple</a>(Ts&amp;&amp;... ts);</div>
@@ -229,10 +229,8 @@ Tuple construction</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/product_types/tuple.hpp&gt;</code></p>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/product_types/tuple.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga2a3a7b464afb602d8a722178ac517da8">make_tuple</a>(Ts&amp;&amp;... ts);</div>
@@ -284,10 +282,8 @@ Tuple construction</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/product_types/tuple.hpp&gt;</code></p>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/product_types/tuple.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga79c564af50f6eb1c4aa6dac7f08337cf">tie</a>(Ts&amp;... ts);</div>
@@ -344,11 +340,9 @@ Tuple construction</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/product_types/tuple.hpp&gt;</code></p>
 <p>If the input type matches the <a class="el" href="conceptkumi_1_1concepts_1_1record__type.html" title="Concept specifying a type follows the Record Type semantic.">kumi::concepts::record_type</a> protocol, return a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>, returns a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> otherwise.</p>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/tuple.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_variable" href="#ga271223ada5937ca2e7ea77825b89b144">to_ref</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>

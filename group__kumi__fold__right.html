@@ -145,7 +145,9 @@ $(function(){initNavTree('group__kumi__fold__right.html','',''); });
 Variables</h2></td></tr>
 <tr class="memitem:gaee418c18e09e3b1789c23ec00681db42" id="r_gaee418c18e09e3b1789c23ec00681db42"><td class="memItemLeft">constexpr fold_right_t&#160;</td><td class="memItemRight"><a class="el" href="#gaee418c18e09e3b1789c23ec00681db42">kumi::fold_right</a> {}</td></tr>
 </table>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Callable object computing the generalized combination of all elements using a non-tail recursive call. </p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="gaee418c18e09e3b1789c23ec00681db42" name="gaee418c18e09e3b1789c23ec00681db42"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaee418c18e09e3b1789c23ec00681db42">&#9670;&#160;</a></span>fold_right</h2>
 
@@ -165,11 +167,9 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/algorithm/fold.hpp&gt;</code></p>
 <p>On record types, this function operates on the underlying values, not on the fields themselves.</p>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/fold.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type T, <span class="keyword">typename</span> Value&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaee418c18e09e3b1789c23ec00681db42">fold_right</a>(Function &amp;&amp; f, T &amp;&amp; t, Value init);</div>

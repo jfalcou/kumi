@@ -146,7 +146,9 @@ Functions</h2></td></tr>
 <tr class="memitem:ga42064b97f063feae3d934bd111ef74ec" id="r_ga42064b97f063feae3d934bd111ef74ec"><td class="memTemplParams" colspan="2">template&lt;std::size_t I, typename T, typename V&gt; </td></tr>
 <tr class="memitem:ga42064b97f063feae3d934bd111ef74ec template"><td class="memItemLeft">constexpr decltype(auto)&#160;</td><td class="memItemRight"><a class="el" href="#ga42064b97f063feae3d934bd111ef74ec">kumi::function::get_or</a> (T &amp;&amp;t, V &amp;&amp;v)</td></tr>
 </table>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Returns the Ith element of <span class="tt">t</span> if <span class="tt">t</span> is a kumi::product_type, an instance of <span class="tt">v</span> otherwise. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="ga42064b97f063feae3d934bd111ef74ec" name="ga42064b97f063feae3d934bd111ef74ec"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga42064b97f063feae3d934bd111ef74ec">&#9670;&#160;</a></span>get_or()</h2>
 
@@ -175,8 +177,6 @@ template&lt;std::size_t I, typename T, typename V&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/functional/monadic.hpp&gt;</code></p>
 <dl class="section note"><dt>Note</dt><dd>Does not participate in overload resolution if <span class="tt">I</span> is out of [0, <a class="el" href="group__kumi__generic__traits.html#ga4dd894f30adf7e5f7ae95124f66d8adb" title="Computes the number of elements of a kumi::product_type.">kumi::size_v&lt;T&gt;</a>). </dd></dl>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">

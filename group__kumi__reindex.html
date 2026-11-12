@@ -146,7 +146,9 @@ Variables</h2></td></tr>
 <tr class="memitem:ga3594f15dbfba2f6fda0afc8d1542c449" id="r_ga3594f15dbfba2f6fda0afc8d1542c449"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1projection__map.html">kumi::concepts::projection_map</a> auto Projections&gt; </td></tr>
 <tr class="memitem:ga3594f15dbfba2f6fda0afc8d1542c449 template"><td class="memItemLeft">constexpr reindex_t&lt; Projections &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga3594f15dbfba2f6fda0afc8d1542c449">kumi::reindex</a> {}</td></tr>
 </table>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Callable object reindex elements of a Product Type. </p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="ga3594f15dbfba2f6fda0afc8d1542c449" name="ga3594f15dbfba2f6fda0afc8d1542c449"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga3594f15dbfba2f6fda0afc8d1542c449">&#9670;&#160;</a></span>reindex</h2>
 
@@ -168,17 +170,15 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1projection__map.html"
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/algorithm/reorder.hpp&gt;</code></p>
 <p>This function will issue a compile time error if one of the identifiers is not in <span class="tt">t</span> or if any index is outside [0, size_v&lt;T&gt;[ at any given level of the input type.</p>
 <p>On record types, this function operates on elements as if they were ordered. The considered order is the order of declaration.</p>
 <dl class="section note"><dt>Note</dt><dd>Nothing prevents the number of reordered names from being lesser or greater than the size of t or from appearing multiple times if it is applied on a named tuple.</dd></dl>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/reorder.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<a class="code hl_class" href="structkumi_1_1identifier.html">identifier</a> <span class="keyword">auto</span>...Ids, product_type T&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga3594f15dbfba2f6fda0afc8d1542c449">reindex</a>&lt;Ids...&gt;(T &amp;&amp; t);</div>
-<div class="ttc" id="agroup__kumi__reindex_html_ga3594f15dbfba2f6fda0afc8d1542c449"><div class="ttname"><a href="#ga3594f15dbfba2f6fda0afc8d1542c449">kumi::reindex</a></div><div class="ttdeci">constexpr reindex_t&lt; Projections &gt; reindex</div><div class="ttdef"><b>Definition</b> reorder.hpp:263</div></div>
+<div class="ttc" id="agroup__kumi__reindex_html_ga3594f15dbfba2f6fda0afc8d1542c449"><div class="ttname"><a href="#ga3594f15dbfba2f6fda0afc8d1542c449">kumi::reindex</a></div><div class="ttdeci">constexpr reindex_t&lt; Projections &gt; reindex</div><div class="ttdef"><b>Definition</b> reorder.hpp:260</div></div>
 <div class="ttc" id="astructkumi_1_1identifier_html"><div class="ttname"><a href="structkumi_1_1identifier.html">kumi::identifier</a></div><div class="ttdoc">identifier definition class</div><div class="ttdef"><b>Definition</b> identifier.hpp:89</div></div>
 </div><!-- fragment --><h3 class="groupheader">Template Parameters </h3>
 <ul>

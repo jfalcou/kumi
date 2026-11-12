@@ -227,7 +227,9 @@ Variables</h2></td></tr>
 <tr class="memitem:gacadc026868e6654e80c57432643c804a template"><td class="memItemLeft">constexpr traits_check&lt; Traits &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gacadc026868e6654e80c57432643c804a">kumi::if_</a> = {}</td></tr>
 <tr class="memdesc:gacadc026868e6654e80c57432643c804a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Option restricting an identifier to accept values whose type satisfies the trait <span class="tt">Traits</span>.  <br /></td></tr>
 </table>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Helpers to adapt, build and introspect kumi::product_type. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="gae8a72b55c5e0a89b70663342e2c36eaf" name="gae8a72b55c5e0a89b70663342e2c36eaf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gae8a72b55c5e0a89b70663342e2c36eaf">&#9670;&#160;</a></span>as_streamable()</h2>
 
@@ -242,8 +244,6 @@ Variables</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/utils/streamable.hpp&gt;</code></p>
 
 <p>Provides an extension point <span class="tt"><a class="el" href="#gae8a72b55c5e0a89b70663342e2c36eaf" title="Provides an extension point as_streamable in order to output types with no stream operator defined.">as_streamable</a></span> in order to output types with no stream operator defined. </p>
 <p>This function does not exist in the kumi namespace, it is supposed to be found via Argument Dependant Lookup for user defined types.</p>
@@ -315,8 +315,6 @@ template&lt;char... c&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p><code>#include &lt;kumi/utils/ct_helpers.hpp&gt;</code></p>
-
 <p>Forms a integral constant literal of the desired value. </p>
 <dl class="section return"><dt>Returns</dt><dd>An instance of <a class="el" href="structkumi_1_1index__t.html" title="Integral constant type.">kumi::index_t</a> for the specified integral value </dd></dl>
 <h2 class="doxsection"><a class="anchor" id="autotoc_md41"></a>
@@ -362,8 +360,6 @@ template&lt;<a class="el" href="structkumi_1_1str.html">kumi::str</a> ID&gt; </d
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/utils/ct_helpers.hpp&gt;</code></p>
 
 <p>Forms a constant string literal of the desired value. </p>
 <dl class="section return"><dt>Returns</dt><dd>An instance of <a class="el" href="structkumi_1_1name.html" title="Compile-time text based identifier.">kumi::name</a> for the specified string </dd></dl>
@@ -412,8 +408,6 @@ template&lt;<a class="el" href="structkumi_1_1str.html">kumi::str</a> ID&gt; </d
 </table>
 </div><div class="memdoc">
 
-<p><code>#include &lt;kumi/utils/ct_helpers.hpp&gt;</code></p>
-
 <p>Forms a constant string literal of the desired value. </p>
 <dl class="section return"><dt>Returns</dt><dd>An instance of kumi::label for the specified string</dd></dl>
 <dl class="section note"><dt>Note</dt><dd>It differs from the ""_id operator on the type and the overload that it will pick up. An identifier and a label are two different parts of a field. Label represents the value that is displayed.</dd></dl>
@@ -461,8 +455,6 @@ template&lt;template&lt; class &gt; class Pred&gt; </div>
 </table>
 </div><div class="memdoc">
 
-<p><code>#include &lt;kumi/utils/ct_helpers.hpp&gt;</code></p>
-
 <p>Convert a unary template meta-program in a running predicate. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>
   <table class="tparams">
@@ -496,8 +488,6 @@ template&lt;template&lt; class &gt; class Pred&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/utils/streamable.hpp&gt;</code></p>
 
 <p>Provides an extension point <span class="tt"><a class="el" href="#gaf4584fa9d1d39f32081265df16e00364" title="Provides an extension point to_str in order to output types with no textual representation defined.">to_str</a></span> in order to output types with no textual representation defined. </p>
 <p>This function does not exist in the kumi namespace, it is supposed to be found via Argument Dependant Lookup for user defined types. It is used in order to handle identifiers/fields display and manipulations. to_str needs to be constexpr callable, if not some concepts might fail unexpectedly.</p>
@@ -573,8 +563,6 @@ template&lt;template&lt; class &gt; typename Traits&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/utils/identifier.hpp&gt;</code></p>
 
 <p>Option restricting an identifier to accept values whose type satisfies the trait <span class="tt">Traits</span>. </p>
 <dl class="tparams"><dt>Template Parameters</dt><dd>

@@ -144,7 +144,9 @@ Tuple conversions</h2></td></tr>
 <tr class="memitem:gaebb54917d0e966b2f64aaa91dedcd5dc" id="r_gaebb54917d0e966b2f64aaa91dedcd5dc"><td class="memTemplParams" colspan="2">template&lt;typename Type&gt; </td></tr>
 <tr class="memitem:gaebb54917d0e966b2f64aaa91dedcd5dc template"><td class="memItemLeft">constexpr from_tuple_t&lt; Type &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gaebb54917d0e966b2f64aaa91dedcd5dc">kumi::from_tuple</a> {}</td></tr>
 </table>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Converts a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> to an instance of an arbitrary type. </p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="gaebb54917d0e966b2f64aaa91dedcd5dc" name="gaebb54917d0e966b2f64aaa91dedcd5dc"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaebb54917d0e966b2f64aaa91dedcd5dc">&#9670;&#160;</a></span>from_tuple</h2>
 
@@ -166,11 +168,9 @@ template&lt;typename Type&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/product_types/tuple.hpp&gt;</code></p>
 <p>Constructs an instance of <span class="tt">Type</span> by passing elements of <span class="tt">t</span> to the appropriate constructor.</p>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/product_types/tuple.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Type, product_type T&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaebb54917d0e966b2f64aaa91dedcd5dc">from_tuple</a>(T&amp;&amp; t);</div>

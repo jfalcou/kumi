@@ -146,7 +146,9 @@ Variables</h2></td></tr>
 <tr class="memitem:ga32af967d7f453426ccd564d3a0b6c689" id="r_ga32af967d7f453426ccd564d3a0b6c689"><td class="memTemplParams" colspan="2">template&lt;std::size_t... I&gt; </td></tr>
 <tr class="memitem:ga32af967d7f453426ccd564d3a0b6c689 template"><td class="memItemLeft">constexpr reorder_t&lt; I... &gt;&#160;</td><td class="memItemRight"><a class="el" href="#ga32af967d7f453426ccd564d3a0b6c689">kumi::reorder</a> {}</td></tr>
 </table>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Callable object reordering elements of a product type. </p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="ga32af967d7f453426ccd564d3a0b6c689" name="ga32af967d7f453426ccd564d3a0b6c689"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga32af967d7f453426ccd564d3a0b6c689">&#9670;&#160;</a></span>reorder</h2>
 
@@ -168,19 +170,15 @@ template&lt;std::size_t... I&gt; </div>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/algorithm/reorder.hpp&gt;</code></p>
 <p>This function will issue a compile time error if any Idx is outside [0, size_v&lt;T&gt;[.</p>
 <p>On record types, this function operates on elements as if they were ordered. The considered order is the order of declaration.</p>
-<dl class="section note"><dt>Note</dt><dd>Nothing prevents the number of reordered indexes from being lesser or greater than the size of t or from appearing multiple times.</dd>
-<dd>
-<a class="el" href="#ga32af967d7f453426ccd564d3a0b6c689">reorder(tuple)</a> works and is equivalent to <a class="el" href="#ga32af967d7f453426ccd564d3a0b6c689">reorder&lt;&gt;(tuple)</a></dd></dl>
+<dl class="section note"><dt>Note</dt><dd>The number of indexes may be lesser or greater than the size of <span class="tt">t</span>, and an index may appear several times, except on a record, where a repeated index fails to compile since a record holds each label once.</dd></dl>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/reorder.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;std::size_t...Idx, product_type T&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga32af967d7f453426ccd564d3a0b6c689">reorder</a>&lt;Idx...&gt;(T &amp;&amp; t);</div>
-<div class="ttc" id="agroup__kumi__reorder_html_ga32af967d7f453426ccd564d3a0b6c689"><div class="ttname"><a href="#ga32af967d7f453426ccd564d3a0b6c689">kumi::reorder</a></div><div class="ttdeci">constexpr reorder_t&lt; I... &gt; reorder</div><div class="ttdef"><b>Definition</b> reorder.hpp:134</div></div>
+<div class="ttc" id="agroup__kumi__reorder_html_ga32af967d7f453426ccd564d3a0b6c689"><div class="ttname"><a href="#ga32af967d7f453426ccd564d3a0b6c689">kumi::reorder</a></div><div class="ttdeci">constexpr reorder_t&lt; I... &gt; reorder</div><div class="ttdef"><b>Definition</b> reorder.hpp:132</div></div>
 </div><!-- fragment --><h3 class="groupheader">Template Parameters </h3>
 <ul>
 <li><span class="tt">Idx</span> Index of elements to reorder</li>

@@ -143,7 +143,9 @@ $(function(){initNavTree('group__kumi__to__tuple.html','',''); });
 Tuple conversions</h2></td></tr>
 <tr class="memitem:ga2642659e4d1dfee5339563fe65927385" id="r_ga2642659e4d1dfee5339563fe65927385"><td class="memItemLeft">constexpr to_tuple_t&#160;</td><td class="memItemRight"><a class="el" href="#ga2642659e4d1dfee5339563fe65927385">kumi::to_tuple</a> {}</td></tr>
 </table>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Converts a <a class="el" href="conceptkumi_1_1concepts_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::concepts::product_type</a> to an instance of <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>. </p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="ga2642659e4d1dfee5339563fe65927385" name="ga2642659e4d1dfee5339563fe65927385"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga2642659e4d1dfee5339563fe65927385">&#9670;&#160;</a></span>to_tuple</h2>
 
@@ -163,12 +165,10 @@ Tuple conversions</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/product_types/tuple.hpp&gt;</code></p>
 <p>Constructs an instance of <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> from the elements of the <a class="el" href="conceptkumi_1_1concepts_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::concepts::product_type</a> parameters</p>
 <dl class="section note"><dt>Note</dt><dd>An overload is provided for <a class="el" href="conceptkumi_1_1concepts_1_1static__container.html" title="Concept specifying a type follows the Container Type semantic.">kumi::concepts::static_container</a>.</dd></dl>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/product_types/tuple.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type T&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga2642659e4d1dfee5339563fe65927385">to_tuple</a>(T&amp;&amp; t);</div>

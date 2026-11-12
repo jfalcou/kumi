@@ -145,7 +145,9 @@ $(function(){initNavTree('group__kumi__map.html','',''); });
 Variables</h2></td></tr>
 <tr class="memitem:gaeaba737291ba1085d77272eae38a016e" id="r_gaeaba737291ba1085d77272eae38a016e"><td class="memItemLeft">constexpr map_t&#160;</td><td class="memItemRight"><a class="el" href="#gaeaba737291ba1085d77272eae38a016e">kumi::map</a> {}</td></tr>
 </table>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Callable object applying the Callable object <span class="tt">f</span> on each product types' elements. </p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="gaeaba737291ba1085d77272eae38a016e" name="gaeaba737291ba1085d77272eae38a016e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaeaba737291ba1085d77272eae38a016e">&#9670;&#160;</a></span>map</h2>
 
@@ -165,12 +167,10 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/algorithm/map.hpp&gt;</code></p>
 <p>Applies the given function to all the product types passed as arguments and stores the result in another product type, keeping the original elements order. On records, the order is determined via the order of definition of the fields.</p>
 <dl class="section note"><dt>Note</dt><dd>Does not participate in overload resolution if product types' size are not equal or if <span class="tt">f</span> can't be called on each product type's elements. All product type must either be record types or product types, mixing is not supported.</dd></dl>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/map.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type T, product_type... Ts&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaeaba737291ba1085d77272eae38a016e">map</a>(Function &amp;&amp; f, T &amp;&amp; t, Ts &amp;&amp;... ts);</div>

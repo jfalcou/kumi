@@ -147,7 +147,9 @@ Functions</h2></td></tr>
 requires (<a class="el" href="conceptkumi_1_1concepts_1_1queryable__by__type.html">kumi::concepts::queryable_by_type</a>&lt;U, T&gt;)</td></tr>
 <tr class="memitem:ga15172fcc47fe0c88931be39b9c3633fd template"><td class="memItemLeft">consteval auto&#160;</td><td class="memItemRight"><a class="el" href="#ga15172fcc47fe0c88931be39b9c3633fd">kumi::get_index_of_type</a> ()</td></tr>
 </table>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Helper to retrieve the index of a type in a product type by its type. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="ga15172fcc47fe0c88931be39b9c3633fd" name="ga15172fcc47fe0c88931be39b9c3633fd"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga15172fcc47fe0c88931be39b9c3633fd">&#9670;&#160;</a></span>get_index_of_type()</h2>
 
@@ -173,8 +175,6 @@ requires (<a class="el" href="conceptkumi_1_1concepts_1_1queryable__by__type.htm
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/utils/ct_helpers.hpp&gt;</code></p>
 <dl class="section note"><dt>Note</dt><dd>This function does not participate in overload resolution if the product type has several instances of the same type or if it is empty.</dd></dl>
 <dl class="section return"><dt>Returns</dt><dd>the index of the element of type U in the product type if it exists </dd></dl>
 

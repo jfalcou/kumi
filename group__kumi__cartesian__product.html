@@ -145,7 +145,9 @@ $(function(){initNavTree('group__kumi__cartesian__product.html','',''); });
 Variables</h2></td></tr>
 <tr class="memitem:ga39128fad2c11b9fea55558222a87721c" id="r_ga39128fad2c11b9fea55558222a87721c"><td class="memItemLeft">constexpr cartesian_product_t&#160;</td><td class="memItemRight"><a class="el" href="#ga39128fad2c11b9fea55558222a87721c">kumi::cartesian_product</a> {}</td></tr>
 </table>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Callable object returning the Cartesian Product of all elements of its arguments product types. </p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="ga39128fad2c11b9fea55558222a87721c" name="ga39128fad2c11b9fea55558222a87721c"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga39128fad2c11b9fea55558222a87721c">&#9670;&#160;</a></span>cartesian_product</h2>
 
@@ -165,12 +167,10 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/algorithm/cartesian_product.hpp&gt;</code></p>
 <dl class="section note"><dt>Note</dt><dd>This function does not take part in overload resolution if the input product types do not follow the same semantic. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="conceptkumi_1_1concepts_1_1follows__same__semantic.html" title="Concept specifying if a pack of types follows the same semantic.">concepts::follows_same_semantic</a></dd></dl>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/cartesian_product.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;product_type... Ts&gt;</div>
 <div class="line">[[nodiscard]] <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga39128fad2c11b9fea55558222a87721c">cartesian_product</a>(Ts &amp;&amp;... ts);</div>

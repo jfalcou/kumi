@@ -145,7 +145,9 @@ $(function(){initNavTree('group__kumi__reduce.html','',''); });
 Variables</h2></td></tr>
 <tr class="memitem:gaf7efbfa530d2396e2ed230cc03e4046e" id="r_gaf7efbfa530d2396e2ed230cc03e4046e"><td class="memItemLeft">constexpr reduce_t&#160;</td><td class="memItemRight"><a class="el" href="#gaf7efbfa530d2396e2ed230cc03e4046e">kumi::reduce</a> {}</td></tr>
 </table>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Callable object performing a tree-like reduction of all elements of a product type. </p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="gaf7efbfa530d2396e2ed230cc03e4046e" name="gaf7efbfa530d2396e2ed230cc03e4046e"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gaf7efbfa530d2396e2ed230cc03e4046e">&#9670;&#160;</a></span>reduce</h2>
 
@@ -165,13 +167,11 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/algorithm/reduce.hpp&gt;</code></p>
 <p>On record types, this function operates on the underlying values, not on the fields themselves.</p>
 <dl class="section note"><dt>Note</dt><dd>For associative operations, this produces the same result as a left or right fold, but has a different intermediate evaluation order.</dd></dl>
 <p>inline constexpr</p>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/reduce.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;mono<span class="keywordtype">id</span> M, product_type T&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaf7efbfa530d2396e2ed230cc03e4046e">reduce</a>(M &amp;&amp; m, T &amp;&amp; t);</div>

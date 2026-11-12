@@ -147,7 +147,9 @@ Functions</h2></td></tr>
 requires (std::is_move_constructible_v&lt;std::decay_t&lt;C&gt;&gt; &amp;&amp; (std::is_move_constructible_v&lt;std::decay_t&lt;Ts&gt;&gt; &amp;&amp; ...))</td></tr>
 <tr class="memitem:ga02fbf71873458cc8a364a7f6efcfadf2 template"><td class="memItemLeft">constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#ga02fbf71873458cc8a364a7f6efcfadf2">kumi::bind_back</a> (C &amp;&amp;c, Ts &amp;&amp;... ts) noexcept(std::is_nothrow_move_constructible_v&lt; std::decay_t&lt; C &gt; &gt; &amp;&amp;(std::is_nothrow_move_constructible_v&lt; std::decay_t&lt; Ts &gt; &gt; &amp;&amp;...))</td></tr>
 </table>
-<a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Returns a callable object with <span class="tt">ts</span> bound as its trailing arguments, reducing <span class="tt">c</span> arity. </p>
+</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
 <a id="ga02fbf71873458cc8a364a7f6efcfadf2" name="ga02fbf71873458cc8a364a7f6efcfadf2"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga02fbf71873458cc8a364a7f6efcfadf2">&#9670;&#160;</a></span>bind_back()</h2>
 
@@ -177,8 +179,6 @@ requires (std::is_move_constructible_v&lt;std::decay_t&lt;C&gt;&gt; &amp;&amp; (
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/functional/bind.hpp&gt;</code></p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">c</td><td>Callable object to be bound. </td></tr>

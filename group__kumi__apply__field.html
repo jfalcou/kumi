@@ -145,7 +145,9 @@ $(function(){initNavTree('group__kumi__apply__field.html','',''); });
 Variables</h2></td></tr>
 <tr class="memitem:ga992364930a4a5a5b64b26730773536ab" id="r_ga992364930a4a5a5b64b26730773536ab"><td class="memItemLeft">constexpr apply_field_t&#160;</td><td class="memItemRight"><a class="el" href="#ga992364930a4a5a5b64b26730773536ab">kumi::apply_field</a> {}</td></tr>
 </table>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Callable object invoking the callable object f with the elements of the product type unrolled as arguments. </p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="ga992364930a4a5a5b64b26730773536ab" name="ga992364930a4a5a5b64b26730773536ab"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga992364930a4a5a5b64b26730773536ab">&#9670;&#160;</a></span>apply_field</h2>
 
@@ -165,12 +167,10 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/algorithm/apply.hpp&gt;</code></p>
 <p><span class="tt">f</span> is applied on the fields when the input <span class="tt">t</span> is a record type.</p>
 <dl class="section note"><dt>Note</dt><dd>This function does not take part in overload resolution if <span class="tt">f</span> can't be applied to the elements of <span class="tt">t</span>.</dd></dl>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/apply.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type T&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_variable" href="#ga992364930a4a5a5b64b26730773536ab">apply_field</a>(Function &amp;&amp; f, T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>

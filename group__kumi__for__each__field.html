@@ -145,7 +145,9 @@ $(function(){initNavTree('group__kumi__for__each__field.html','',''); });
 Variables</h2></td></tr>
 <tr class="memitem:gafb2ad3366fa0af8cb1f3c32cb6c6970d" id="r_gafb2ad3366fa0af8cb1f3c32cb6c6970d"><td class="memItemLeft">constexpr for_each_field_t&#160;</td><td class="memItemRight"><a class="el" href="#gafb2ad3366fa0af8cb1f3c32cb6c6970d">kumi::for_each_field</a> {}</td></tr>
 </table>
-<a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
+<div class="textblock"><p>Callable object applying the Callable object f on each element of a product type and its field. </p>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="gafb2ad3366fa0af8cb1f3c32cb6c6970d" name="gafb2ad3366fa0af8cb1f3c32cb6c6970d"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gafb2ad3366fa0af8cb1f3c32cb6c6970d">&#9670;&#160;</a></span>for_each_field</h2>
 
@@ -165,13 +167,11 @@ Variables</h2></td></tr>
   </tr>
 </table>
 </div><div class="memdoc">
-
-<p><code>#include &lt;kumi/algorithm/for_each.hpp&gt;</code></p>
 <dl class="section note"><dt>Note</dt><dd>This function does not take part in overload resolution if <span class="tt">f</span> can't be applied to the elements of <span class="tt">t</span> and/or <span class="tt">ts</span> and a field or if the product types are not compatible. </dd></dl>
 <dl class="section see"><dt>See also</dt><dd><a class="el" href="conceptkumi_1_1concepts_1_1compatible__product__types.html" title="Concept specifying if two product types are compatible.">kumi::concepts::compatible_product_types</a></dd></dl>
 <p>This function can only be applied to record types. The function needs to be defined to handle types modeling <a class="el" href="conceptkumi_1_1concepts_1_1field.html" title="Concept specifying a type represents a field.">kumi::concepts::field</a>.</p>
 <h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/algorithm/for_each.hpp&gt;</span></div>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
 </div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
 <div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, product_type T, product_type... Ts&gt;</div>
 <div class="line"><span class="keyword">constexpr</span> <span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_variable" href="#gafb2ad3366fa0af8cb1f3c32cb6c6970d">for_each_field</a>(Function &amp;&amp; f, T &amp;&amp; t, Ts &amp;&amp;... ts);</div>

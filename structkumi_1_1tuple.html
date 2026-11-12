@@ -314,8 +314,12 @@ requires (sizeof...(Us) == sizeof...(Ts)) &amp;&amp; (!std::same_as&lt;<a class=
 <tr class="heading"><td colspan="2"><h2 id="header-pub-static-methods" class="groupheader"><a id="pub-static-methods" name="pub-static-methods"></a>
 Static Public Member Functions</h2></td></tr>
 <tr id="pub-static-methods-0" class="groupHeader"><td colspan="2"><div class="groupHeader">Properties</div></td></tr>
-<tr class="memitem:a0d0957e5314d780693c3d67344a42b3e" id="r_a0d0957e5314d780693c3d67344a42b3e"><td class="memItemLeft">static constexpr auto&#160;</td><td class="memItemRight"><a class="el" href="#a0d0957e5314d780693c3d67344a42b3e">size</a> () noexcept</td></tr>
-<tr class="memitem:af1a74e00134be29916bb7fb6e8cda5f6" id="r_af1a74e00134be29916bb7fb6e8cda5f6"><td class="memItemLeft">static constexpr bool&#160;</td><td class="memItemRight"><a class="el" href="#af1a74e00134be29916bb7fb6e8cda5f6">empty</a> () noexcept</td></tr>
+<tr class="memitem:a0d0957e5314d780693c3d67344a42b3e" id="r_a0d0957e5314d780693c3d67344a42b3e"><td class="memItemLeft"><a id="a0d0957e5314d780693c3d67344a42b3e" name="a0d0957e5314d780693c3d67344a42b3e"></a>
+static constexpr auto&#160;</td><td class="memItemRight"><b>size</b> () noexcept</td></tr>
+<tr class="memdesc:a0d0957e5314d780693c3d67344a42b3e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the number of elements in a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>. <br /></td></tr>
+<tr class="memitem:af1a74e00134be29916bb7fb6e8cda5f6" id="r_af1a74e00134be29916bb7fb6e8cda5f6"><td class="memItemLeft"><a id="af1a74e00134be29916bb7fb6e8cda5f6" name="af1a74e00134be29916bb7fb6e8cda5f6"></a>
+static constexpr bool&#160;</td><td class="memItemRight"><b>empty</b> () noexcept</td></tr>
+<tr class="memdesc:af1a74e00134be29916bb7fb6e8cda5f6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns <span class="tt">true</span> if a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> contains 0 elements. <br /></td></tr>
 <tr class="memitem:a20bf7b884e66f42a41076a4b1535054b" id="r_a20bf7b884e66f42a41076a4b1535054b"><td class="memItemLeft"><a id="a20bf7b884e66f42a41076a4b1535054b" name="a20bf7b884e66f42a41076a4b1535054b"></a>
 static constexpr auto&#160;</td><td class="memItemRight"><b>identifiers</b> () noexcept</td></tr>
 <tr class="memdesc:a20bf7b884e66f42a41076a4b1535054b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Returns the identifiers associated to the elements of a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>. <br /></td></tr>
@@ -403,34 +407,6 @@ template&lt;typename... Ts, typename... Us&gt; </td></tr>
 <tr class="memitem:a85bd7598dcbb6464a3a89990b0e64aa4 template"><td class="memItemLeft">decltype(auto) constexpr&#160;</td><td class="memItemRight"><a class="el" href="#a85bd7598dcbb6464a3a89990b0e64aa4">get</a> (<a class="el" href="#a612d97f050a7b0eb9999f40c045779bf">tuple</a>&lt; Ts... &gt; const &amp;&amp;t) noexcept</td></tr>
 </table>
 <a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Member Function Documentation</h2>
-<a id="af1a74e00134be29916bb7fb6e8cda5f6" name="af1a74e00134be29916bb7fb6e8cda5f6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#af1a74e00134be29916bb7fb6e8cda5f6">&#9670;&#160;</a></span>empty()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename... Ts&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr bool <a class="el" href="structkumi_1_1tuple.html">kumi::tuple</a>&lt; Ts &gt;::empty </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>Returns <span class="tt">true</span> if a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> contains 0 elements </dd></dl>
-
-</div>
-</div>
 <a id="ab932ad9cad261df1f0d2edfe464c23fe" name="ab932ad9cad261df1f0d2edfe464c23fe"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ab932ad9cad261df1f0d2edfe464c23fe">&#9670;&#160;</a></span>explicit()</h2>
 
@@ -843,34 +819,6 @@ Example:</h2>
 <div class="ttc" id="astructkumi_1_1identifier_html_a975f7d033f7f599bcdc6f2e049084a92"><div class="ttname"><a href="structkumi_1_1identifier.html#a975f7d033f7f599bcdc6f2e049084a92">kumi::identifier::to_str</a></div><div class="ttdeci">friend constexpr kumi_implementation_defined auto to_str(identifier const &amp;)</div><div class="ttdoc">A checked field str representation is the underlying type, checker is ignored.</div><div class="ttdef"><b>Definition</b> identifier.hpp:94</div></div>
 <div class="ttc" id="astructkumi_1_1str_html"><div class="ttname"><a href="structkumi_1_1str.html">kumi::str</a></div><div class="ttdoc">Static string used to create named fields.</div><div class="ttdef"><b>Definition</b> str.hpp:31</div></div>
 </div><!-- fragment --> 
-</div>
-</div>
-<a id="a0d0957e5314d780693c3d67344a42b3e" name="a0d0957e5314d780693c3d67344a42b3e"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0d0957e5314d780693c3d67344a42b3e">&#9670;&#160;</a></span>size()</h2>
-
-<div class="memitem">
-<div class="memproto">
-<div class="memtemplate">
-template&lt;typename... Ts&gt; </div>
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">constexpr auto <a class="el" href="structkumi_1_1tuple.html">kumi::tuple</a>&lt; Ts &gt;::size </td>
-          <td>(</td>
-          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel static">static</span><span class="mlabel nodiscard">nodiscard</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<dl class="section return"><dt>Returns</dt><dd>Returns the number of elements in a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> </dd></dl>
-
 </div>
 </div>
 <a name="doc-related-members" id="doc-related-members"></a><h2 id="header-doc-related-members" class="groupheader">Friends And Related Symbol Documentation</h2>
