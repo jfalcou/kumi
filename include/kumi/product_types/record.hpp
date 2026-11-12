@@ -244,10 +244,10 @@ namespace kumi
     **/
     //==================================================================================================================
 
-    /// @return Returns the number of elements in a kumi::record
+    /// @brief Returns the number of elements in a kumi::record
     [[nodiscard]] KUMI_ABI static constexpr auto size() noexcept { return sizeof...(Ts); }
 
-    /// @return Returns `true` if a kumi::record contains 0 elements
+    /// @brief Returns `true` if a kumi::record contains 0 elements
     [[nodiscard]] KUMI_ABI static constexpr bool empty() noexcept { return sizeof...(Ts) == 0; }
 
     /// Returns the identifiers associated to the elements of a kumi::record
@@ -475,7 +475,7 @@ namespace kumi
 
     @groupheader{Header file}
     @code
-    #include <kumi/product_types/record.hpp>
+    #include <kumi/kumi.hpp>
     @endcode
 
     @groupheader{Call Signature}
@@ -536,7 +536,7 @@ namespace kumi
 
     @groupheader{Header file}
     @code
-    #include <kumi/product_types/record.hpp>
+    #include <kumi/kumi.hpp>
     @endcode
 
     @groupheader{Call Signature}
@@ -589,7 +589,7 @@ namespace kumi
 
     @groupheader{Header file}
     @code
-    #include <kumi/product_types/record.hpp>
+    #include <kumi/kumi.hpp>
     @endcode
 
     @groupheader{Call Signature}
@@ -676,7 +676,7 @@ namespace kumi
 
     @groupheader{Header file}
     @code
-    #include <kumi/product_types/record.hpp>
+    #include <kumi/kumi.hpp>
     @endcode
 
     @groupheader{Call Signature}
@@ -739,7 +739,7 @@ namespace kumi
 
     @groupheader{Header file}
     @code
-    #include <kumi/product_types/record.hpp>
+    #include <kumi/kumi.hpp>
     @endcode
 
     @groupheader{Call Signature}
@@ -885,7 +885,7 @@ namespace kumi
   //====================================================================================================================
   /**
     @related record
-    @brief Extracts the field identified by Id from a kumi::record if it exists
+    @brief Extracts the element of the field identified by Id from a kumi::record if it exists
 
     @note     Does not participate in overload resolution if the names are not unique
     @tparam   Id Non type template parameter identifier of the element to access
@@ -938,7 +938,7 @@ namespace kumi
   //====================================================================================================================
   /**
     @related record
-    @brief Extracts the field whose underlying type is T from a kumi::record if it exists
+    @brief Extracts the element of the field whose underlying type is T from a kumi::record if it exists
 
     @note     Does not participate in overload resolution if the types are not unique
     @tparam   T Type of the element to access

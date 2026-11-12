@@ -55,7 +55,7 @@ namespace kumi
 
     @groupheader{Header file}
     @code
-    #include <kumi/algorithm/cat.hpp>
+    #include <kumi/kumi.hpp>
     @endcode
 
     @groupheader{Call Signature}

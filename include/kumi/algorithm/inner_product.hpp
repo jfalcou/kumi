@@ -90,7 +90,7 @@ namespace kumi
 
     @groupheader{Header file}
     @code
-    #include <kumi/algorithm/inner_product.hpp>
+    #include <kumi/kumi.hpp>
     @endcode
 
     @groupheader{Call Signature}

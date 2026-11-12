@@ -79,7 +79,7 @@ namespace kumi
 
     @groupheader{Header file}
     @code
-    #include <kumi/algorithm/push_pop.hpp>
+    #include <kumi/kumi.hpp>
     @endcode
 
     @groupheader{Call Signature}
@@ -138,7 +138,7 @@ namespace kumi
 
     @groupheader{Header file}
     @code
-    #include <kumi/algorithm/push_pop.hpp>
+    #include <kumi/kumi.hpp>
     @endcode
 
     @groupheader{Call Signature}
@@ -196,7 +196,7 @@ namespace kumi
 
     @groupheader{Header file}
     @code
-    #include <kumi/algorithm/push_pop.hpp>
+    #include <kumi/kumi.hpp>
     @endcode
 
     @groupheader{Call Signature}
@@ -255,7 +255,7 @@ namespace kumi
 
     @groupheader{Header file}
     @code
-    #include <kumi/algorithm/push_pop.hpp>
+    #include <kumi/kumi.hpp>
     @endcode
 
     @groupheader{Call Signature}

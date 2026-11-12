@@ -37,7 +37,7 @@ namespace kumi
 
     @groupheader{Header file}
     @code
-    #include <kumi/algorithm/reverse.hpp>
+    #include <kumi/kumi.hpp>
     @endcode
 
     @groupheader{Call Signature}

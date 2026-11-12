@@ -39,3 +39,5 @@ PREDEFINED            += "KUMI_ABI=inline" \
                          "KUMI_GPU="
 
 ## One page per callable member
+
+SHOW_GROUPED_MEMB_INC  = NO

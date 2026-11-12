@@ -81,7 +81,7 @@ namespace kumi::function
 
     @groupheader{Header file}
     @code
-    #include <kumi/functional/indexable.hpp>
+    #include <kumi/kumi.hpp>
     @endcode
 
     @groupheader{Call Signature}
@@ -120,7 +120,7 @@ namespace kumi::function
 
     @groupheader{Header file}
     @code
-    #include <kumi/functional/indexable.hpp>
+    #include <kumi/kumi.hpp>
     @endcode
 
     @groupheader{Call Signature}
@@ -150,7 +150,7 @@ namespace kumi::function
 
     @groupheader{Header file}
     @code
-    #include <kumi/functional/indexable.hpp>
+    #include <kumi/kumi.hpp>
     @endcode
 
     @groupheader{Call Signature}
@@ -182,7 +182,7 @@ namespace kumi::function
 
     @groupheader{Header file}
     @code
-    #include <kumi/functional/indexable.hpp>
+    #include <kumi/kumi.hpp>
     @endcode
 
     @groupheader{Call Signature}
@@ -212,7 +212,7 @@ namespace kumi::function
 
     @groupheader{Header file}
     @code
-    #include <kumi/functional/indexable.hpp>
+    #include <kumi/kumi.hpp>
     @endcode
 
     @groupheader{Call Signature}
@@ -251,7 +251,7 @@ namespace kumi::function
 
     @groupheader{Header file}
     @code
-    #include <kumi/functional/indexable.hpp>
+    #include <kumi/kumi.hpp>
     @endcode
 
     @groupheader{Call Signature}
@@ -282,7 +282,7 @@ namespace kumi::function
 
     @groupheader{Header file}
     @code
-    #include <kumi/functional/indexable.hpp>
+    #include <kumi/kumi.hpp>
     @endcode
 
     @groupheader{Call Signature}
@@ -314,7 +314,7 @@ namespace kumi::function
 
     @groupheader{Header file}
     @code
-    #include <kumi/functional/indexable.hpp>
+    #include <kumi/kumi.hpp>
     @endcode
 
     @groupheader{Call Signature}
@@ -346,7 +346,7 @@ namespace kumi::function
 
     @groupheader{Header file}
     @code
-    #include <kumi/functional/indexable.hpp>
+    #include <kumi/kumi.hpp>
     @endcode
 
     @groupheader{Call Signature}
