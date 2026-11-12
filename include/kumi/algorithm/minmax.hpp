@@ -144,13 +144,14 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto max(T && t) noexcept;
-    @endcode
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        constexpr auto max(T && t) noexcept;
 
-    @code
-      template<product_type T, typename Function>
-      constexpr auto max(T && t, Function f) noexcept;
+        template<concepts::product_type T, typename Function>
+        constexpr auto max(T && t, Function f) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -206,8 +207,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T, typename Function>
-      constexpr auto max_flat(T && t, Function f) noexcept;
+      namespace kumi
+      {
+        template<concepts::product_type T, typename Function>
+        constexpr auto max_flat(T && t, Function f) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -263,13 +267,14 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto min(T && t) noexcept;
-    @endcode
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        constexpr auto min(T && t) noexcept;
 
-    @code
-      template<product_type T, typename Function>
-      constexpr auto min(T && t, Function f) noexcept;
+        template<concepts::product_type T, typename Function>
+        constexpr auto min(T && t, Function f) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -325,8 +330,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T, typename Function>
-      constexpr auto min_flat(T && t, Function f) noexcept;
+      namespace kumi
+      {
+        template<concepts::product_type T, typename Function>
+        constexpr auto min_flat(T && t, Function f) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}

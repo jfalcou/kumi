@@ -59,8 +59,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<std::size_t R, product_type T>
-      constexpr auto rotate_left<R>(T && t) ;
+      namespace kumi
+      {
+        template<std::size_t R, concepts::product_type T>
+        constexpr auto rotate_left(T && t);
+      }
     @endcode
 
     @subgroupheader{Template Parameters}
@@ -120,8 +123,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<std::size_t R, product_type T>
-      constexpr auto rotate_right<R>(T && t) ;
+      namespace kumi
+      {
+        template<std::size_t R, concepts::product_type T>
+        constexpr auto rotate_right(T && t);
+      }
     @endcode
 
     @subgroupheader{Template Parameters}

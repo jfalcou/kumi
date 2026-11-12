@@ -90,8 +90,8 @@ namespace kumi
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
 
-    @note This function will issue a compile time error if `I0` and `I1` do not verify that
-          `0 <= I0 <= I1 <= size_v<T>`.
+    @note This function will issue a compile time error if `B` or `E` is greater than `kumi::size_v<T>`, or if `S` is 0.
+          It returns an empty product type when `E` is not greater than `B`.
 
     @qualifier nodiscard
     @qualifier inline
@@ -106,25 +106,35 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T, std::size_t I0, std::size_t I1>
-      constexpr auto extract(T && t, kumi::index_t<I0>, kumi::index_t<I1>) noexcept;  // 1
+      namespace kumi
+      {
+        template<concepts::product_type T, std::size_t B, std::size_t E, std::size_t S>
+        constexpr auto extract(T && t, kumi::index_t<B>, kumi::index_t<E>, kumi::index_t<S>) noexcept;  // 1
+
+        template<concepts::product_type T, std::size_t B, std::size_t E>
+        constexpr auto extract(T && t, kumi::index_t<B>, kumi::index_t<E>) noexcept;                    // 2
+
+        template<concepts::product_type T, std::size_t B>
+        constexpr auto extract(T && t, kumi::index_t<B>) noexcept;                                      // 3
+      }
     @endcode
 
-    @code
-      template<product_type T, std::size_t I0>
-      constexpr auto extract(T && t, kumi::index_t<I0>) noexcept;                      // 2
-    @endcode
+    @subgroupheader{Template Parameters}
+
+      - `B`: Compile-time index of the first element to extract
+      - `E`: Compile-time index past the last element to extract
+      - `S`: Compile-time distance between two extracted elements
 
     @subgroupheader{Parameters}
 
       - `t`: Product Type to extract elements from
-      - `i0`: Compile-time index of the first element to extract
-      - `i1`: Compile-time index past the last element to extract
 
     @subgroupheader{Return value}
 
-      - 1. A new product type containing the selected range of elements of `t`.
-      - 2. A new product type containing the selected elements of `t` using `size_v<T>` as the last index.
+      - 1. A new product type containing the elements of `t` at the indexes `B`, `B + S`, `B + 2 * S`, and so on,
+        lower than `E`.
+      - 2. A new product type containing the elements of `t` from the index `B` to the index `E`, `E` excluded.
+      - 3. A new product type containing the elements of `t` from the index `B` to the last one.
 
     @groupheader{Helper type}
 
@@ -160,8 +170,8 @@ namespace kumi
     On record types, this function operates on elements as if they were ordered. The considered order is the order
     of declaration.
 
-    @note This function will issue a compile time error if `I0` and `I1` do not verify that
-          `0 <= I0 <= I1 <= size_v<T>`.
+    @note This function will issue a compile time error if `B` or `E` is greater than `kumi::size_v<T>`, or if `S` is 0.
+          It returns every element of `t` when `E` is not greater than `B`.
 
     @qualifier nodiscard
     @qualifier inline
@@ -176,25 +186,36 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T, std::size_t I0, std::size_t I1>
-      constexpr auto remove(T && t, kumi::index_t<I0>, kumi::index_t<I1>) noexcept;  // 1
+      namespace kumi
+      {
+        template<concepts::product_type T, std::size_t B, std::size_t E, std::size_t S>
+        constexpr auto remove(T && t, kumi::index_t<B>, kumi::index_t<E>, kumi::index_t<S>) noexcept;  // 1
+
+        template<concepts::product_type T, std::size_t B, std::size_t E>
+        constexpr auto remove(T && t, kumi::index_t<B>, kumi::index_t<E>) noexcept;                    // 2
+
+        template<concepts::product_type T, std::size_t B>
+        constexpr auto remove(T && t, kumi::index_t<B>) noexcept;                                      // 3
+      }
     @endcode
 
-    @code
-      template<product_type T, std::size_t I0>
-      constexpr auto remove(T && t, kumi::index_t<I0>) noexcept;                      // 2
-    @endcode
+    @subgroupheader{Template Parameters}
+
+      - `B`: Compile-time index of the first element to remove
+      - `E`: Compile-time index past the last element to remove
+      - `S`: Compile-time distance between two removed elements
 
     @subgroupheader{Parameters}
 
       - `t`: Product Type to remove elements from
-      - `i0`: Compile-time index of the first element to extract
-      - `i1`: Compile-time index past the last element to extract
 
     @subgroupheader{Return value}
 
-      - 1. A new product type containing the elements of t without the range of elements from I0 to I1.
-      - 2. A new product type containing the elements of t without the range of elements from I0 to `size_v<T>`.
+      - 1. A new product type containing the elements of `t` except those at the indexes `B`, `B + S`, `B + 2 * S`,
+        and so on, lower than `E`.
+      - 2. A new product type containing the elements of `t` except those from the index `B` to the index `E`, `E`
+        excluded.
+      - 3. A new product type containing the elements of `t` before the index `B`.
 
     @groupheader{Helper type}
 
@@ -246,8 +267,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T, std::size_t I0>
-      constexpr auto split(T && t, kumi::index_t<I0>) noexcept;
+      namespace kumi
+      {
+        template<concepts::product_type T, std::size_t I0>
+        constexpr auto split(T && t, kumi::index_t<I0>) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}

@@ -165,13 +165,14 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<monoid M, product_type T>
-      constexpr auto reduce(M && m, T && t);
-    @endcode
+      namespace kumi
+      {
+        template<concepts::monoid M, concepts::product_type T>
+        constexpr auto reduce(M && m, T && t);
 
-    @code
-      template<monoid M, product_type T, typename V>
-      constexpr auto reduce(M && m, T && t, V init);
+        template<concepts::monoid M, concepts::product_type T, typename V>
+        constexpr auto reduce(M && m, T && t, V init);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -245,13 +246,14 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<typename Function, monoid M, product_type T>
-      constexpr auto map_reduce(Function f, M && m, T && t);
-    @endcode
+      namespace kumi
+      {
+        template<typename Function, concepts::monoid M, concepts::product_type T>
+        constexpr auto map_reduce(Function f, M && m, T && t);
 
-    @code
-      template<typename Function, monoid M, product_type T, typename V>
-      constexpr auto map_reduce(Function f, M && m, T && t, V init);
+        template<typename Function, concepts::monoid M, concepts::product_type T, typename V>
+        constexpr auto map_reduce(Function f, M && m, T && t, V init);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -325,13 +327,14 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto sum(T && t);
-    @endcode
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        constexpr auto sum(T && t);
 
-    @code
-      template<product_type T, typename V>
-      constexpr auto sum(T && t, V init);
+        template<concepts::product_type T, typename V>
+        constexpr auto sum(T && t, V init);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -397,13 +400,14 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto prod(T && t);
-    @endcode
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        constexpr auto prod(T && t);
 
-    @code
-      template<product_type T, typename V>
-      constexpr auto prod(T && t, V init);
+        template<concepts::product_type T, typename V>
+        constexpr auto prod(T && t, V init);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -469,13 +473,14 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto bit_and(T && t);
-    @endcode
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        constexpr auto bit_and(T && t);
 
-    @code
-      template<product_type T, typename V>
-      constexpr auto bit_and(T && t, V init);
+        template<concepts::product_type T, typename V>
+        constexpr auto bit_and(T && t, V init);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -541,13 +546,14 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto bit_or(T && t);
-    @endcode
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        constexpr auto bit_or(T && t);
 
-    @code
-      template<product_type T, typename V>
-      constexpr auto bit_or(T && t, V init);
+        template<concepts::product_type T, typename V>
+        constexpr auto bit_or(T && t, V init);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -613,13 +619,14 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto bit_xor(T && t);
-    @endcode
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        constexpr auto bit_xor(T && t);
 
-    @code
-      template<product_type T, typename V>
-      constexpr auto bit_xor(T && t, V init);
+        template<concepts::product_type T, typename V>
+        constexpr auto bit_xor(T && t, V init);
+      }
     @endcode
 
     @subgroupheader{Parameters}

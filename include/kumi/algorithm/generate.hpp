@@ -71,8 +71,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<std::size_t, typename Function>
-      constexpr auto generate<N>(Function && f) noexcept;
+      namespace kumi
+      {
+        template<std::size_t N, typename Function>
+        constexpr auto generate(Function && f) noexcept;
+      }
     @endcode
 
     @subgroupheader{Template Parameters}
@@ -124,8 +127,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<std::size_t N, typename V>
-      constexpr auto fill<N>(V const& v) noexcept;
+      namespace kumi
+      {
+        template<std::size_t N, typename V>
+        constexpr auto fill(V const& v) noexcept;
+      }
     @endcode
 
     @subgroupheader{Template Parameters}
@@ -177,8 +183,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<std::size_t N, typename V>
-      constexpr auto iota<N>(V v) noexcept;
+      namespace kumi
+      {
+        template<std::size_t N, typename V>
+        constexpr auto iota(V v) noexcept;
+      }
     @endcode
 
     @subgroupheader{Template Parameters}

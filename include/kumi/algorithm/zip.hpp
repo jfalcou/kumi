@@ -122,8 +122,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T, product_type... Ts>
-      constexpr auto zip(T && t, Ts &&... ts);
+      namespace kumi
+      {
+        template<concepts::product_type T, concepts::product_type... Ts>
+        constexpr auto zip(T && t, Ts &&... ts);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -190,8 +193,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T, product_type... Ts>
-      constexpr auto zip_min(T && t, Ts &&... ts);
+      namespace kumi
+      {
+        template<concepts::product_type T, concepts::product_type... Ts>
+        constexpr auto zip_min(T && t, Ts &&... ts);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -258,8 +264,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T, product_type... Ts>
-      constexpr auto zip_max(T && t, Ts &&... ts);
+      namespace kumi
+      {
+        template<concepts::product_type T, concepts::product_type... Ts>
+        constexpr auto zip_max(T && t, Ts &&... ts);
+      }
     @endcode
 
     @subgroupheader{Parameters}

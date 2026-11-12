@@ -89,8 +89,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto partition<Pred>(T && t) noexcept;
+      namespace kumi
+      {
+        template<template<typename> typename Pred, concepts::product_type T>
+        constexpr auto partition(T && t) noexcept;
+      }
     @endcode
 
     @subgroupheader{Template Parameters}
@@ -152,8 +155,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto filter<Pred>(T && t) noexcept;
+      namespace kumi
+      {
+        template<template<typename> typename Pred, concepts::product_type T>
+        constexpr auto filter(T && t) noexcept;
+      }
     @endcode
 
     @subgroupheader{Template Parameters}
@@ -214,8 +220,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto filter_not<Pred>(T && t) noexcept;
+      namespace kumi
+      {
+        template<template<typename> typename Pred, concepts::product_type T>
+        constexpr auto filter_not(T && t) noexcept;
+      }
     @endcode
 
     @subgroupheader{Template Parameters}

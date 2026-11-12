@@ -85,8 +85,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T, typename V>
-      constexpr auto push_front(T && t, V && v);
+      namespace kumi
+      {
+        template<concepts::product_type T, typename V>
+        constexpr auto push_front(T && t, V && v);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -144,8 +147,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto pop_front(T && t);
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        constexpr auto pop_front(T && t);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -202,8 +208,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T, typename V>
-      constexpr auto push_back(T && t, V && v);
+      namespace kumi
+      {
+        template<concepts::product_type T, typename V>
+        constexpr auto push_back(T && t, V && v);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -261,8 +270,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto pop_back(T && t);
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        constexpr auto pop_back(T && t);
+      }
     @endcode
 
     @subgroupheader{Parameters}

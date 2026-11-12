@@ -521,8 +521,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<typename... Ts>
-      constexpr auto tie(Ts&... ts);
+      namespace kumi
+      {
+        template<typename... Ts>
+        constexpr auto tie(Ts&... ts);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -578,8 +581,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<typename... Ts>
-      constexpr auto forward_as_tuple(Ts&&... ts);
+      namespace kumi
+      {
+        template<typename... Ts>
+        constexpr auto forward_as_tuple(Ts&&... ts);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -629,8 +635,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<typename... Ts>
-      constexpr auto make_tuple(Ts&&... ts);
+      namespace kumi
+      {
+        template<typename... Ts>
+        constexpr auto make_tuple(Ts&&... ts);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -695,8 +704,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr decltype(auto) to_ref(T && t) noexcept;
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        constexpr decltype(auto) to_ref(T && t) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -766,8 +778,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<typename Type, product_type T>
-      constexpr auto from_tuple(T&& t);
+      namespace kumi
+      {
+        template<typename Type, concepts::product_type T>
+        constexpr auto from_tuple(T&& t);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -838,8 +853,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto to_tuple(T&& t);
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        constexpr auto to_tuple(T&& t);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -970,8 +988,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto members_of(kumi::as<T> type);
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        constexpr auto members_of(kumi::as<T> type);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -1029,8 +1050,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto values_of(T && t) noexcept;
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        constexpr auto values_of(T && t) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}

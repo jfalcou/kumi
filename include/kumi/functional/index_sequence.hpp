@@ -86,8 +86,11 @@ namespace kumi::function
 
     @groupheader{Call Signature}
     @code
-    template<typename Sizes, typename Elts>
-    using cartesian_strides;
+      namespace kumi::function
+      {
+        template<typename Sizes, typename Elts>
+        using cartesian_strides = kumi_implementation_defined;
+      }
     @endcode
 
     @subgroupheader{Template Parameters}
@@ -125,8 +128,11 @@ namespace kumi::function
 
     @groupheader{Call Signature}
     @code
-      template<typename... Ts>
-      using cat_index_sequence;
+      namespace kumi::function
+      {
+        template<typename... Ts>
+        using cat_index_sequence = kumi_implementation_defined;
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -155,16 +161,19 @@ namespace kumi::function
 
     @groupheader{Call Signature}
     @code
-      template<std::size_t Element, std::size_t Count>
-      using fill_index_sequence;
+      namespace kumi::function
+      {
+        template<std::size_t E, std::size_t N>
+        using fill_index_sequence = kumi_implementation_defined;
+      }
     @endcode
 
     @subgroupheader{Template Parameters}
-      - `Element`: Compile-time value to replicate
-      - `Count`: Number of repetitions to generate
+      - `E`: Compile-time value to replicate
+      - `N`: Number of repetitions to generate
 
     @subgroupheader{Return value}
-      A `std::index_sequence` filled completely with `e`.
+      A `std::index_sequence` filled completely with `E`.
   **/
   //====================================================================================================================
   template<std::size_t E, std::size_t N>
@@ -187,8 +196,11 @@ namespace kumi::function
 
     @groupheader{Call Signature}
     @code
-      template<typename T>
-      using indexes_for;
+      namespace kumi::function
+      {
+        template<typename T>
+        using indexes_for = kumi_implementation_defined;
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -217,8 +229,11 @@ namespace kumi::function
 
     @groupheader{Call Signature}
     @code
-    template<std::size_t N, std::size_t B, std::size_t E, std::size_t S = 1>
-    using remove_index_sequence;
+      namespace kumi::function
+      {
+        template<std::size_t N, std::size_t B, std::size_t E, std::size_t S = 1>
+        using remove_index_sequence = kumi_implementation_defined;
+      }
     @endcode
 
     @subgroupheader{Template Parameters}
@@ -256,8 +271,11 @@ namespace kumi::function
 
     @groupheader{Call Signature}
     @code
-      template<typename Size>
-      using reverse_index_sequence;
+      namespace kumi::function
+      {
+        template<std::size_t N>
+        using reverse_index_sequence = kumi_implementation_defined;
+      }
     @endcode
 
     @subgroupheader{Template Parameters}
@@ -287,8 +305,11 @@ namespace kumi::function
 
     @groupheader{Call Signature}
     @code
-      template<std::size_t Rotation, std::size_t Size>
-      using rotate_index_sequence;
+      namespace kumi::function
+      {
+        template<std::size_t R, std::size_t N>
+        using rotate_index_sequence = kumi_implementation_defined;
+      }
     @endcode
 
     @subgroupheader{Template Parameters}
@@ -319,16 +340,19 @@ namespace kumi::function
 
     @groupheader{Call Signature}
     @code
-      template<std::size_t Offset, std::size_t Size>
-      using shift_index_sequence;
+      namespace kumi::function
+      {
+        template<std::size_t O, std::size_t N>
+        using shift_index_sequence = kumi_implementation_defined;
+      }
     @endcode
 
     @subgroupheader{Template Parameters}
-      - `Offset`: Offset to add to each element in the input domain
-      - `Size`: Size of the input domain
+      - `O`: Offset to add to each element in the input domain
+      - `N`: Size of the input domain
 
     @subgroupheader{Return value}
-      A `std::index_sequence` shifted uniformly forward by `o`.
+      A `std::index_sequence` shifted uniformly forward by `O`.
   **/
   //====================================================================================================================
   template<std::size_t O, std::size_t N>
@@ -351,8 +375,11 @@ namespace kumi::function
 
     @groupheader{Call Signature}
     @code
-      template<std::size_t B Begin, std::size_t B End, std::size_t B Step>
-      using slice_index_sequence;
+      namespace kumi::function
+      {
+        template<std::size_t B, std::size_t E, std::size_t S = 1>
+        using slice_index_sequence = kumi_implementation_defined;
+      }
     @endcode
 
     @subgroupheader{Template Parameters}
@@ -361,7 +388,7 @@ namespace kumi::function
       - `S`: Compile-time stride step hopping increment factor
 
     @subgroupheader{Return value}
-      A `std::index_sequence` tracking linear jumps matching `Begin + I * Step`.
+      A `std::index_sequence` tracking linear jumps matching `B + I * S`.
   **/
   //====================================================================================================================
   template<std::size_t B, std::size_t E, std::size_t S = 1>

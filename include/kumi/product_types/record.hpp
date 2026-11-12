@@ -481,8 +481,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<kumi::concepts::identifier auto... Fields, typename... Ts>
-      constexpr auto tie_as_record(Ts&... ts);
+      namespace kumi
+      {
+        template<kumi::concepts::identifier auto... Fields, typename... Ts>
+        constexpr auto tie_as_record(Ts&... ts);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -542,8 +545,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<typename... Ts>
-      constexpr auto forward_as_record(Ts&&... ts);
+      namespace kumi
+      {
+        template<typename... Ts>
+        constexpr auto forward_as_record(Ts&&... ts);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -595,8 +601,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<typename... Ts>
-      constexpr auto make_record(Ts&&... ts);
+      namespace kumi
+      {
+        template<typename... Ts>
+        constexpr auto make_record(Ts&&... ts);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -682,8 +691,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<typename Type, record_type R>
-      constexpr auto from_record(R&& r);
+      namespace kumi
+      {
+        template<typename Type, concepts::record_type R>
+        constexpr auto from_record(R&& r);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -745,8 +757,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<record_type R>
-      constexpr auto to_record(R&& r);
+      namespace kumi
+      {
+        template<concepts::record_type R>
+        constexpr auto to_record(R&& r);
+      }
     @endcode
 
     @subgroupheader{Parameters}

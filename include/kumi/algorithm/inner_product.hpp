@@ -96,13 +96,14 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type S1, product_type S2, typename T, typename Sum, typename Prod>
-      constexpr auto inner_product(S1 && s1, S2 && s2, T init, Sum sum, Prod prod) noexcept;
-    @endcode
+      namespace kumi
+      {
+        template<concepts::product_type S1, concepts::product_type S2, typename T, typename Sum, typename Prod>
+        constexpr auto inner_product(S1 && s1, S2 && s2, T init, Sum sum, Prod prod) noexcept;
 
-    @code
-      template<product_type S1, product_type S2, typename T>
-      constexpr auto inner_product(S1 && s1, S2 && s2, T init) noexcept;
+        template<concepts::product_type S1, concepts::product_type S2, typename T>
+        constexpr auto inner_product(S1 && s1, S2 && s2, T init) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}

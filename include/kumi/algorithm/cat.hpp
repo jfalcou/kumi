@@ -61,8 +61,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type... Ts>
-      constexpr decltype(auto) cat(Ts&&... ts);
+      namespace kumi
+      {
+        template<concepts::product_type... Ts>
+        constexpr decltype(auto) cat(Ts&&... ts);
+      }
     @endcode
 
     @subgroupheader{Parameters}

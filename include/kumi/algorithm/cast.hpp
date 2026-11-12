@@ -53,8 +53,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<typename Target, product_type T>
-      constexpr auto member_cast<Target>(T && t) noexcept;
+      namespace kumi
+      {
+        template<typename Target, concepts::product_type T>
+        constexpr auto member_cast(T && t) noexcept;
+      }
     @endcode
 
     @subgroupheader{Template Parameters}

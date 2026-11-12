@@ -43,8 +43,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto reverse(T && t) noexcept;
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        constexpr auto reverse(T && t) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}

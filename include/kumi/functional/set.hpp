@@ -70,8 +70,11 @@ namespace kumi
 
       @groupheader{Call Signature}
       @code
-        template<bool... Bs>
-        using unique_index_sequence;
+        namespace kumi::function
+        {
+          template<bool... Bs>
+          using unique_index_sequence = kumi_implementation_defined;
+        }
       @endcode
 
       @subgroupheader{Template Parameters}
@@ -103,8 +106,11 @@ namespace kumi
 
       @groupheader{Call Signature}
       @code
-        template<bool... Bs>
-        using select_index_sequence;
+        namespace kumi::function
+        {
+          template<bool... Bs>
+          using select_index_sequence = kumi_implementation_defined;
+        }
       @endcode
 
       @subgroupheader{Template Parameters}
@@ -136,8 +142,11 @@ namespace kumi
 
       @groupheader{Call Signature}
       @code
-        template<bool... Bs>
-        using adjacent_index_sequence;
+        namespace kumi::function
+        {
+          template<bool... Bs>
+          using adjacent_index_sequence = kumi_implementation_defined;
+        }
       @endcode
 
       @subgroupheader{Template Parameters}

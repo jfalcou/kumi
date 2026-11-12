@@ -380,8 +380,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<typename... Ts>
-      constexpr auto forward_as_array(Ts&&... ts);
+      namespace kumi
+      {
+        template<typename... Ts>
+        constexpr auto forward_as_array(Ts&&... ts);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -434,8 +437,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<typename... Ts>
-      constexpr auto make_array(Ts&&... ts);
+      namespace kumi
+      {
+        template<typename... Ts>
+        constexpr auto make_array(Ts&&... ts);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -510,8 +516,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<typename Type, product_type T>
-      constexpr auto from_array(T&& t);
+      namespace kumi
+      {
+        template<typename Type, concepts::product_type T>
+        constexpr auto from_array(T&& t);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -581,8 +590,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto to_array(T&& t);
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        constexpr auto to_array(T&& t);
+      }
     @endcode
 
     @subgroupheader{Parameters}

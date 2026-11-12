@@ -97,8 +97,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T, identifier ID>
-      constexpr auto contains(T && t, ID const& id) noexcept;
+      namespace kumi
+      {
+        template<concepts::product_type T, concepts::identifier ID>
+        constexpr auto contains(T && t, ID const& id) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -154,8 +157,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T, identifier... IDs>
-      constexpr auto contains_any(T && t, IDs const&... ids) noexcept;
+      namespace kumi
+      {
+        template<concepts::product_type T, concepts::identifier... IDs>
+        constexpr auto contains_any(T && t, IDs const&... ids) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -211,8 +217,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T, identifier... IDs>
-      constexpr auto contains_only(T && t, IDs const&... ids) noexcept;
+      namespace kumi
+      {
+        template<concepts::product_type T, concepts::identifier... IDs>
+        constexpr auto contains_only(T && t, IDs const&... ids) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -268,8 +277,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T, identifier... IDs>
-      constexpr auto contains_none(T && t, IDs const&... ids) noexcept;
+      namespace kumi
+      {
+        template<concepts::product_type T, concepts::identifier... IDs>
+        constexpr auto contains_none(T && t, IDs const&... ids) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}
