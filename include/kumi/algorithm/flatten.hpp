@@ -173,8 +173,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto compress(T && t) noexcept;
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        constexpr auto compress(T && t) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -232,8 +235,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto flatten(T && t) noexcept;
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        constexpr auto flatten(T && t) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -297,13 +303,14 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T, typename Function>
-      constexpr auto flatten_all(T && t, Function && f) noexcept;   // 1
-    @endcode
+      namespace kumi
+      {
+        template<concepts::product_type T, typename Function>
+        constexpr auto flatten_all(T && t, Function && f) noexcept;   // 1
 
-    @code
-      template<product_type T>
-      constexpr auto flatten_all(T && t) noexcept;                  // 2
+        template<concepts::product_type T>
+        constexpr auto flatten_all(T && t) noexcept;                  // 2
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -361,8 +368,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto as_flat_ptr(T && t) noexcept;
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        constexpr auto as_flat_ptr(T && t) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}

@@ -90,13 +90,14 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<typename Function, product_type T, typename Value>
-      constexpr auto fold_left(Function && f, T && t, Value init);
-    @endcode
+      namespace kumi
+      {
+        template<typename Function, concepts::product_type T, typename Value>
+        constexpr auto fold_left(Function && f, T && t, Value init);
 
-    @code
-      template<typename Function, product_type T>
-      constexpr auto fold_left(Function && f, T && t);
+        template<typename Function, concepts::product_type T>
+        constexpr auto fold_left(Function && f, T && t);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -154,13 +155,14 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<typename Function, product_type T, typename Value>
-      constexpr auto fold_right(Function && f, T && t, Value init);
-    @endcode
+      namespace kumi
+      {
+        template<typename Function, concepts::product_type T, typename Value>
+        constexpr auto fold_right(Function && f, T && t, Value init);
 
-    @code
-      template<typename Function, product_type T>
-      constexpr auto fold_right(Function && f, T && t);
+        template<typename Function, concepts::product_type T>
+        constexpr auto fold_right(Function && f, T && t);
+      }
     @endcode
 
     @subgroupheader{Parameters}

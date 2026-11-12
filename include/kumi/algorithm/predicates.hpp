@@ -138,13 +138,14 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T, typename Pred>
-      constexpr auto all_of(T && t, Pred p) noexcept;
-    @endcode
+      namespace kumi
+      {
+        template<concepts::product_type T, typename Pred>
+        constexpr auto all_of(T && t, Pred p) noexcept;
 
-    @code
-      template<product_type T, typename Pred>
-      constexpr auto all_of(T && t) noexcept;
+        template<concepts::product_type T, typename Pred>
+        constexpr auto all_of(T && t) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -195,13 +196,14 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T, typename Pred>
-      constexpr auto any_of(T && t, Pred p) noexcept;
-    @endcode
+      namespace kumi
+      {
+        template<concepts::product_type T, typename Pred>
+        constexpr auto any_of(T && t, Pred p) noexcept;
 
-    @code
-      template<product_type T, typename Pred>
-      constexpr auto any_of(T && t) noexcept;
+        template<concepts::product_type T, typename Pred>
+        constexpr auto any_of(T && t) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -252,13 +254,14 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T, typename Pred>
-      constexpr auto none_of(T && t, Pred p) noexcept;
-    @endcode
+      namespace kumi
+      {
+        template<concepts::product_type T, typename Pred>
+        constexpr auto none_of(T && t, Pred p) noexcept;
 
-    @code
-      template<product_type T, typename Pred>
-      constexpr auto none_of(T && t) noexcept;
+        template<concepts::product_type T, typename Pred>
+        constexpr auto none_of(T && t) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -309,8 +312,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T, typename Pred>
-      constexpr auto count_if(T && t, Pred p) noexcept;
+      namespace kumi
+      {
+        template<concepts::product_type T, typename Pred>
+        constexpr auto count_if(T && t, Pred p) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -361,8 +367,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto count(T && t) noexcept;
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        constexpr auto count(T && t) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}

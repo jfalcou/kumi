@@ -64,8 +64,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<std::size_t N, std::size_t O, product_type T>
-      constexpr auto tiles<N,O>(T && t);
+      namespace kumi
+      {
+        template<std::size_t N, std::size_t O, concepts::product_type T>
+        constexpr auto tiles(T && t);
+      }
     @endcode
 
     @subgroupheader{Template Parameters}
@@ -131,8 +134,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<std::size_t N, product_type T>
-      constexpr auto windows<N>(T && t);
+      namespace kumi
+      {
+        template<std::size_t N, concepts::product_type T>
+        constexpr auto windows(T && t);
+      }
     @endcode
 
     @subgroupheader{Template Parameters}
@@ -198,8 +204,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<std::size_t N, product_type T>
-      constexpr auto windows<N>(T && t);
+      namespace kumi
+      {
+        template<std::size_t N, concepts::product_type T>
+        constexpr auto chunks(T && t);
+      }
     @endcode
 
     @subgroupheader{Template Parameters}

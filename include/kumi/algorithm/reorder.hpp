@@ -94,8 +94,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<std::size_t...Idx, product_type T>
-      constexpr auto reorder<Idx...>(T && t);
+      namespace kumi
+      {
+        template<std::size_t...Idx, concepts::product_type T>
+        constexpr auto reorder(T && t);
+      }
     @endcode
 
     @subgroupheader{Template Parameters}
@@ -162,8 +165,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<identifier auto...Ids, product_type T>
-      constexpr auto reorder_fields<Ids...>(T && t);
+      namespace kumi
+      {
+        template<concepts::identifier auto...Ids, concepts::product_type T>
+        constexpr auto reorder_fields(T && t);
+      }
     @endcode
 
     @subgroupheader{Template Parameters}
@@ -222,13 +228,17 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<identifier auto...Ids, product_type T>
-      constexpr auto reindex<Ids...>(T && t);
+      namespace kumi
+      {
+        template<concepts::projection_map auto Projections, concepts::product_type T>
+        constexpr auto reindex(T && t);
+      }
     @endcode
 
     @subgroupheader{Template Parameters}
 
-      - `Ids` Identifiers of the elements to reorder
+      - `Projections`: kumi::projection_map of the indexes or identifiers to select, a nested map building a nested
+        product type
 
     @subgroupheader{Parameters}
 

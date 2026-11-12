@@ -67,8 +67,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<typename Function, product_type T>
-      constexpr decltype(auto) apply(Function && f, T && t) noexcept;
+      namespace kumi
+      {
+        template<typename Function, concepts::product_type T>
+        constexpr decltype(auto) apply(Function && f, T && t) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -128,8 +131,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<typename Function, product_type T>
-      constexpr decltype(auto) apply_field(Function && f, T && t) noexcept;
+      namespace kumi
+      {
+        template<typename Function, concepts::product_type T>
+        constexpr decltype(auto) apply_field(Function && f, T && t) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}

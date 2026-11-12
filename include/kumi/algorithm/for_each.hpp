@@ -109,8 +109,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<typename Function, product_type T, product_type... Ts>
-      constexpr decltype(auto) for_each(Function && f, T && t, Ts &&... ts);
+      namespace kumi
+      {
+        template<typename Function, concepts::product_type T, concepts::product_type... Ts>
+        constexpr decltype(auto) for_each(Function && f, T && t, Ts &&... ts);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -162,8 +165,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<typename Function, product_type T, product_type... Ts>
-      constexpr decltype(auto) for_each_index(Function && f, T && t, Ts &&... ts);
+      namespace kumi
+      {
+        template<typename Function, concepts::product_type T, concepts::product_type... Ts>
+        constexpr decltype(auto) for_each_index(Function && f, T && t, Ts &&... ts);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -211,8 +217,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<typename Function, product_type T, product_type... Ts>
-      constexpr decltype(auto) for_each_field(Function && f, T && t, Ts &&... ts);
+      namespace kumi
+      {
+        template<typename Function, concepts::product_type T, concepts::product_type... Ts>
+        constexpr decltype(auto) for_each_field(Function && f, T && t, Ts &&... ts);
+      }
     @endcode
 
     @subgroupheader{Parameters}

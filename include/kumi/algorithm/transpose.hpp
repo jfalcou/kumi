@@ -66,8 +66,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto transpose(T && t);
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        constexpr auto transpose(T && t);
+      }
     @endcode
 
     @subgroupheader{Parameters}

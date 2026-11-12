@@ -78,8 +78,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto unique(T && t);
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        constexpr auto unique(T && t);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -135,8 +138,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      constexpr auto all_unique(T && t);
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        constexpr auto all_unique(T && t);
+      }
     @endcode
 
     @subgroupheader{Parameters}

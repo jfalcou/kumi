@@ -57,8 +57,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T, typename Predicate>
-      constexpr auto locate(T && t, Pred p) noexcept;
+      namespace kumi
+      {
+        template<concepts::product_type T, typename Pred>
+        constexpr auto locate(T && t, Pred p) noexcept;
+      }
     @endcode
 
     @subgroupheader{Parameters}

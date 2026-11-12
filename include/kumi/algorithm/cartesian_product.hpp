@@ -70,8 +70,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type... Ts>
-      [[nodiscard]] constexpr auto cartesian_product(Ts &&... ts);
+      namespace kumi
+      {
+        template<concepts::product_type... Ts>
+        [[nodiscard]] constexpr auto cartesian_product(Ts &&... ts);
+      }
     @endcode
 
     @subgroupheader{Parameters}

@@ -165,13 +165,14 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<typename Function, product_type T, typename Value>
-      constexpr auto inclusive_scan_left(Function f, T && t, Value init);
-    @endcode
+      namespace kumi
+      {
+        template<typename Function, concepts::product_type T, typename Value>
+        constexpr auto inclusive_scan_left(Function f, T && t, Value init);
 
-    @code
-      template<monoid M, typename Function, product_type T, typename Value>
-      constexpr auto inclusive_scan_left(M && m, T && t);
+        template<concepts::monoid M, typename Function, concepts::product_type T, typename Value>
+        constexpr auto inclusive_scan_left(M && m, T && t);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -235,13 +236,14 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<typename Function, product_type T, typename Value>
-      constexpr auto exclusive_scan_left(Function f, T && t, Value init);
-    @endcode
+      namespace kumi
+      {
+        template<typename Function, concepts::product_type T, typename Value>
+        constexpr auto exclusive_scan_left(Function f, T && t, Value init);
 
-    @code
-      template<monoid M, typename Function, product_type T, typename Value>
-      constexpr auto exclusive_scan_left(M && m, T && t);
+        template<concepts::monoid M, typename Function, concepts::product_type T, typename Value>
+        constexpr auto exclusive_scan_left(M && m, T && t);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -305,13 +307,14 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<typename Function, product_type T, typename Value>
-      constexpr auto inclusive_scan_right(Function f, T && t, Value init);
-    @endcode
+      namespace kumi
+      {
+        template<typename Function, concepts::product_type T, typename Value>
+        constexpr auto inclusive_scan_right(Function f, T && t, Value init);
 
-    @code
-      template<monoid M, typename Function, product_type T, typename Value>
-      constexpr auto inclusive_scan_right(M && m, T && t);
+        template<concepts::monoid M, typename Function, concepts::product_type T, typename Value>
+        constexpr auto inclusive_scan_right(M && m, T && t);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -375,13 +378,14 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<typename Function, product_type T, typename Value>
-      constexpr auto exclusive_scan_right(Function f, T && t, Value init);
-    @endcode
+      namespace kumi
+      {
+        template<typename Function, concepts::product_type T, typename Value>
+        constexpr auto exclusive_scan_right(Function f, T && t, Value init);
 
-    @code
-      template<monoid M, typename Function, product_type T, typename Value>
-      constexpr auto exclusive_scan_right(M && m, T && t);
+        template<concepts::monoid M, typename Function, concepts::product_type T, typename Value>
+        constexpr auto exclusive_scan_right(M && m, T && t);
+      }
     @endcode
 
     @subgroupheader{Parameters}

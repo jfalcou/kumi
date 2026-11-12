@@ -53,8 +53,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      [[nodiscard]] constexpr decltype(auto) front(T && t);
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        [[nodiscard]] constexpr decltype(auto) front(T && t);
+      }
     @endcode
 
     @subgroupheader{Parameters}
@@ -110,8 +113,11 @@ namespace kumi
     @groupheader{Call Signature}
 
     @code
-      template<product_type T>
-      [[nodiscard]] constexpr decltype(auto) back(T && t);
+      namespace kumi
+      {
+        template<concepts::product_type T>
+        [[nodiscard]] constexpr decltype(auto) back(T && t);
+      }
     @endcode
 
     @subgroupheader{Parameters}
