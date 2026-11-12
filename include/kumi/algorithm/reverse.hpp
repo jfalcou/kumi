@@ -20,7 +20,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_reverse kumi::reverse
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_index_projections
   //! @brief Callable object reversing elements of a product type
   //====================================================================================================================
   /**

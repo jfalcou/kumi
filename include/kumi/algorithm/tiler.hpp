@@ -36,7 +36,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_tiles kumi::tiles
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_restructurings
   //! @brief Callable object creating a tuple of product types, each containing `N` consecutive elements from `t`. Tiles
   //!   starts at 0 and advance by `O` element each time.
   //====================================================================================================================
@@ -104,7 +104,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_windows kumi::windows
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_restructurings
   //! @brief Callable object creating a tuple of product types, each containing `N` consecutive elements from `t`.
   //!   Windows starts at 0 and advance by `1` element each time.
   //====================================================================================================================
@@ -170,7 +170,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_chunks kumi::chunks
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_restructurings
   //! @brief Callable object creating a tuple of product types, each containing `N` consecutive elements from `t`.
   //!   Chunks starts at 0 and advance by `N` element each time.
   //====================================================================================================================

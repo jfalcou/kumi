@@ -42,7 +42,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_transpose kumi::transpose
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_restructurings
   //! @brief Callable object transposing a product type of product types by shifting elements in their transposed
   //!   position always returning a tuple as the external product type.
   //====================================================================================================================

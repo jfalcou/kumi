@@ -31,7 +31,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_front kumi::front
-  //! @ingroup kumi_queries
+  //! @ingroup kumi_index_projections
   //! @brief Callable object used to retrieve the front of a product type
   //====================================================================================================================
   /**
@@ -88,7 +88,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_back kumi::back
-  //! @ingroup kumi_queries
+  //! @ingroup kumi_index_projections
   //! @brief Callable object used to retrieve the back of a product type
   //====================================================================================================================
   /**

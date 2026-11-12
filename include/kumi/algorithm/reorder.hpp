@@ -66,7 +66,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_reorder kumi::reorder
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_index_projections
   //! @brief Callable object reordering elements of a product type
   //====================================================================================================================
   /**
@@ -135,7 +135,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_reorder_fields kumi::reorder_fields
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_index_projections
   //! @brief Callable object reordering elements of a Record Type
   //====================================================================================================================
   /**
@@ -196,7 +196,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_reindex kumi::reindex
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_restructurings
   //! @brief Callable object reindex elements of a Product Type
   //====================================================================================================================
   /**

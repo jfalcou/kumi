@@ -121,7 +121,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_pop_front kumi::pop_front
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_index_projections
   //! @brief Callable object removing the first (if any) element of `t`.
   //====================================================================================================================
   /**
@@ -238,7 +238,7 @@ namespace kumi
 
   //====================================================================================================================
   //! @defgroup kumi_pop_back kumi::pop_back
-  //! @ingroup kumi_generators
+  //! @ingroup kumi_index_projections
   //! @brief Callable object removing the last (if any) element of `t`.
   //====================================================================================================================
   /**
