@@ -23,6 +23,13 @@
 //!
 //! </center>
 //!
+//! @warning Under clang 19 and 20, a fold expression of more than 256 arguments stops the compilation, and **KUMI**
+//! folds over the element types of a product type. A kumi::tuple of more than 256 elements, or a kumi::array deduced
+//! from more than 257 values, fails on an error that ends with `exceeded expression nesting limit of 256`. The option
+//! `-fbracket-depth=1024`, or any value above the number of elements, lifts the limit, set in CMake by
+//! `target_compile_options(my_target PRIVATE -fbracket-depth=1024)`. From clang 21 on, these product types compile
+//! without the option.
+//!
 //! @section setup-source Install from the source
 //!
 //! Code source of **KUMI** is available on GitHub and can be retrieved via the following command:
