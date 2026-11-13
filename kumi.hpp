@@ -32,7 +32,6 @@ namespace kumi
 #include "KUMI requires C++20 or higher. Use -std=c++20 or higher to enable C++20 features."
 #endif
 #endif
-#define KUMI_FWD(...) static_cast<decltype(__VA_ARGS__)&&>(__VA_ARGS__)
 #if defined(__EDG__) || defined(__EDG_VERSION__) || defined(__NVCC__)
 #define KUMI_FRONTEND_EDG 1
 #elif defined(__clang__)
@@ -110,6 +109,15 @@ namespace kumi::_
 #include <iosfwd>
 #include <type_traits>
 #include <utility>
+#define KUMI_FWD(...) static_cast<decltype(__VA_ARGS__)&&>(__VA_ARGS__)
+#define KUMI_MOVE(...) static_cast<std::remove_reference_t<decltype(__VA_ARGS__)>&&>(__VA_ARGS__)
+namespace kumi
+{
+  template<typename T> extern T && (*declval)() noexcept;
+  template<typename T>
+  requires(std::is_void_v<T>)
+  extern void (*declval<T>)() noexcept;
+}
 namespace kumi::_
 {
   consteval std::size_t min(std::same_as<std::size_t> auto... sizes) noexcept
@@ -387,13 +395,13 @@ namespace kumi::_
     std::integral_constant<std::size_t, I> operator()(U const&);
   };
   template<typename T, typename... Keys>
-  concept is_set = requires { (void(static_cast<Keys&&>(std::declval<T>())), ...); };
+  concept is_set = requires { (void(static_cast<Keys&&>(kumi::declval<T>())), ...); };
   template<typename Seq, typename... Ts> struct family;
   template<std::size_t... I, typename... Ts> struct family<std::index_sequence<I...>, Ts...> : kumi::_::unique<I, Ts>...
   {
     using kumi::_::unique<I, Ts>::operator()...;
     kumi::_::invalid operator()(...);
-    template<typename Ref> using type = decltype(std::declval<family>()(std::declval<Ref>()));
+    template<typename Ref> using type = decltype(kumi::declval<family>()(kumi::declval<Ref>()));
   };
   template<typename... Ts> using make_family = family<std::index_sequence_for<Ts...>, Ts...>;
   template<typename T> inline constexpr bool is_set_v = false;
@@ -605,13 +613,13 @@ namespace kumi
   {
     using type = kumi::element_t<I, T>;
   };
-  template<std::size_t I, typename T> using member_t = decltype(get<I>(std::declval<T&&>()));
+  template<std::size_t I, typename T> using member_t = decltype(get<I>(kumi::declval<T&&>()));
   template<std::size_t I, typename T> struct member
   {
     using type = kumi::member_t<I, T>;
   };
   template<typename Field, typename T>
-  using field_of_t = decltype(get<kumi::_::identifier_of_t<Field>{}>(std::declval<T&&>()));
+  using field_of_t = decltype(get<kumi::_::identifier_of_t<Field>{}>(kumi::declval<T&&>()));
   template<typename Field, typename T> struct field_of
   {
     using type = kumi::field_of_t<Field, T>;
@@ -701,7 +709,7 @@ namespace kumi
     extern kumi::member_t<I, T> stored_member;
     template<std::size_t I, typename T>
     requires(kumi::is_record_type_v<std::remove_cvref_t<T>>)
-    extern decltype(get<kumi::_::member_at<I, T>{}>(std::declval<T&&>())) stored_member<I, T>;
+    extern decltype(get<kumi::_::member_at<I, T>{}>(kumi::declval<T&&>())) stored_member<I, T>;
   }
   template<std::size_t I, typename T> using stored_member_t = decltype(kumi::_::stored_member<I, T>);
   template<std::size_t I, typename T> struct stored_member
@@ -778,8 +786,8 @@ namespace kumi
     template<typename T, typename U, std::size_t... I>
     requires(kumi::is_record_type_v<T> && kumi::is_record_type_v<U>)
     inline constexpr bool is_equality_comparable<T, U, std::index_sequence<I...>>{
-      (kumi::is_comparable_v<decltype(std::declval<kumi::_::set<kumi::element_t<I, T>...>>()(
-                               std::declval<kumi::_::identifier_of_t<kumi::element_t<I, U>>>())),
+      (kumi::is_comparable_v<decltype(kumi::declval<kumi::_::set<kumi::element_t<I, T>...>>()(
+                               kumi::declval<kumi::_::identifier_of_t<kumi::element_t<I, U>>>())),
                              kumi::_::type_of_t<kumi::element_t<I, U>>> &&
        ...)};
     template<typename T, typename U, std::size_t... I>
@@ -1436,18 +1444,18 @@ namespace kumi
     {
       using type = kumi::result::label_of_t<T>;
     };
-    template<typename T> using field_value_of_t = decltype(kumi::field_value_of(std::declval<T>()));
+    template<typename T> using field_value_of_t = decltype(kumi::field_value_of(kumi::declval<T>()));
     template<typename T> struct field_value_of
     {
       using type = kumi::result::field_value_of_t<T>;
     };
     template<_::identifier auto Name, typename T>
-    using capture_field_t = decltype(kumi::capture_field<Name>(std::declval<T>()));
+    using capture_field_t = decltype(kumi::capture_field<Name>(kumi::declval<T>()));
     template<kumi::_::identifier auto Name, typename T> struct capture_field
     {
       using type = kumi::result::capture_field_t<Name, T>;
     };
-    template<typename U, typename T> using field_cast_t = decltype(kumi::field_cast<U, T>(std::declval<T>()));
+    template<typename U, typename T> using field_cast_t = decltype(kumi::field_cast<U, T>(kumi::declval<T>()));
     template<typename U, typename T> struct field_cast
     {
       using type = kumi::result::field_cast_t<U, T>;
@@ -1928,7 +1936,7 @@ namespace kumi
     KUMI_ABI constexpr tuple& operator=(tuple<Us...>&& other) noexcept((std::is_nothrow_assignable_v<Ts&, Us&&> && ...))
     requires(sizeof...(Ts) == sizeof...(Us)) && ((std::is_assignable_v<Ts&, Us&&> && ...))
     {
-      kumi::_::assign(*this, std::move(other), std::make_index_sequence<sizeof...(Ts)>{});
+      kumi::_::assign(*this, KUMI_MOVE(other), std::make_index_sequence<sizeof...(Ts)>{});
       return *this;
     }
     KUMI_ABI friend constexpr void swap(tuple& a, tuple& b)
@@ -2155,7 +2163,7 @@ namespace kumi
     {
       using type = kumi::result::members_of_t<T>;
     };
-    template<kumi::concepts::product_type T> using values_of_t = decltype(kumi::values_of(std::declval<T>()));
+    template<kumi::concepts::product_type T> using values_of_t = decltype(kumi::values_of(kumi::declval<T>()));
     template<kumi::concepts::product_type T> struct values_of
     {
       using type = kumi::result::values_of_t<T>;
@@ -2344,7 +2352,7 @@ namespace kumi
     KUMI_ABI constexpr array& operator=(array<U, N>&& other) noexcept(std::is_nothrow_assignable_v<T&, U&&>)
     requires(std::is_assignable_v<T&, U&&>)
     {
-      kumi::_::assign(*this, std::move(other), std::make_index_sequence<N>{});
+      kumi::_::assign(*this, KUMI_MOVE(other), std::make_index_sequence<N>{});
       return *this;
     }
     KUMI_ABI friend constexpr void swap(array& a, array& b) noexcept(
@@ -3004,31 +3012,58 @@ namespace kumi
     inline constexpr bool is_reference_wrapper_v =
       !std::is_same_v<std::decay_t<typename std::unwrap_reference<T&&>::type>,
                       typename std::unwrap_ref_decay<T&&>::type>;
-    template<typename T> KUMI_HIDDEN_ABI constexpr decltype(auto) unwrap_memptr(T&& obj)
+    template<typename C, typename T> KUMI_HIDDEN_ABI constexpr decltype(auto) unwrap_memptr(T&& obj)
     {
-      if constexpr (kumi::_::is_reference_wrapper_v<std::remove_cvref_t<T>>) return KUMI_FWD(obj).get();
-      else if constexpr (std::is_pointer_v<std::remove_cvref_t<T>>) return *KUMI_FWD(obj);
-      else return KUMI_FWD(obj);
+      using U = std::remove_cvref_t<T>;
+      if constexpr (std::is_base_of_v<C, U>) return KUMI_FWD(obj);
+      else if constexpr (is_reference_wrapper_v<U>) return KUMI_FWD(obj).get();
+      else return *KUMI_FWD(obj);
     }
     template<typename C, typename P, typename O, typename... Ts>
     KUMI_HIDDEN_ABI constexpr decltype(auto) invoke_memptr(P C::* member, O&& o, Ts&&... ts)
     {
       using callable_t = P C::*;
-      if constexpr (std::is_member_object_pointer_v<callable_t>) return unwrap_memptr(KUMI_FWD(o)).*member;
-      else return (unwrap_memptr(KUMI_FWD(o)).*member)(KUMI_FWD(ts)...);
+      if constexpr (std::is_member_object_pointer_v<callable_t>) return unwrap_memptr<C>(KUMI_FWD(o)).*member;
+      else return (unwrap_memptr<C>(KUMI_FWD(o)).*member)(KUMI_FWD(ts)...);
     }
   }
-  template<typename C, typename... Ts> KUMI_ABI constexpr decltype(auto) invoke(C&& c, Ts&&... ts)
+  struct invoke_t
   {
-    if constexpr (std::is_member_pointer_v<std::decay_t<C>>) return kumi::_::invoke_memptr(c, KUMI_FWD(ts)...);
-    else return KUMI_FWD(c)(KUMI_FWD(ts)...);
-  }
-  template<typename R, typename C, typename... Ts>
-  KUMI_ABI constexpr R invoke_r(C&& c, Ts&&... ts) noexcept(std::is_nothrow_invocable_r_v<R, C, Ts...>)
-  requires(std::is_invocable_r_v<R, C, Ts...>)
+    template<typename C, typename... Ts>
+    KUMI_ABI constexpr decltype(auto) operator()(C&& c, Ts&&... ts) const
+      noexcept(std::is_nothrow_invocable_v<C, Ts...>)
+    requires(std::is_invocable_v<C, Ts...>)
+    {
+      if constexpr (std::is_member_pointer_v<std::decay_t<C>>) return kumi::_::invoke_memptr(c, KUMI_FWD(ts)...);
+      else return KUMI_FWD(c)(KUMI_FWD(ts)...);
+    }
+  };
+  KUMI_VARIABLE_ABI constexpr invoke_t invoke{};
+  template<typename R> struct invoke_r_t
   {
-    if constexpr (std::is_void_v<R>) kumi::invoke(KUMI_FWD(c), KUMI_FWD(ts)...);
-    else return kumi::invoke(KUMI_FWD(c), KUMI_FWD(ts)...);
+    template<typename C, typename... Ts>
+    KUMI_ABI constexpr R operator()(C&& c, Ts&&... ts) const noexcept(std::is_nothrow_invocable_r_v<R, C, Ts...>)
+    requires(std::is_invocable_r_v<R, C, Ts...>)
+    {
+      if constexpr (std::is_void_v<R>) kumi::invoke(KUMI_FWD(c), KUMI_FWD(ts)...);
+      else return kumi::invoke(KUMI_FWD(c), KUMI_FWD(ts)...);
+    }
+  };
+  template<typename R> KUMI_VARIABLE_ABI constexpr invoke_r_t<R> invoke_r{};
+  namespace result
+  {
+    template<typename C, typename... Ts>
+    using invoke_t = decltype(kumi::invoke(kumi::declval<C>(), kumi::declval<Ts>()...));
+    template<typename C, typename... Ts> struct invoke
+    {
+      using type = kumi::result::invoke_t<C, Ts...>;
+    };
+    template<typename R, typename C, typename... Ts>
+    using invoke_r_t = decltype(kumi::invoke_r<R>(kumi::declval<C>(), kumi::declval<Ts>()...));
+    template<typename R, typename C, typename... Ts> struct invoke_r
+    {
+      using type = kumi::result::invoke_r_t<R, C, Ts...>;
+    };
   }
 }
 namespace kumi
@@ -3058,11 +3093,11 @@ namespace kumi
       }
       template<typename... Args> KUMI_HIDDEN_ABI constexpr decltype(auto) operator()(Args&&... args) &&
       {
-        return impl(seq, std::move(*this), KUMI_FWD(args)...);
+        return impl(seq, KUMI_MOVE(*this), KUMI_FWD(args)...);
       }
       template<typename... Args> KUMI_HIDDEN_ABI constexpr decltype(auto) operator()(Args&&... args) const&&
       {
-        return impl(seq, std::move(*this), KUMI_FWD(args)...);
+        return impl(seq, KUMI_MOVE(*this), KUMI_FWD(args)...);
       }
       template<std::size_t... Is, typename Self, typename... Args>
       KUMI_HIDDEN_ABI static constexpr decltype(auto) impl(std::index_sequence<Is...>, Self&& s, Args&&... args)
@@ -3395,7 +3430,7 @@ namespace kumi::function
     else return KUMI_FWD(v);
   }
   template<std::size_t I, typename T, typename U>
-  using element_or_t = std::remove_cvref_t<decltype(kumi::function::get_or<I>(std::declval<T>(), std::declval<U>()))>;
+  using element_or_t = std::remove_cvref_t<decltype(kumi::function::get_or<I>(kumi::declval<T>(), kumi::declval<U>()))>;
   template<std::size_t I, typename T, typename U> struct element_or
   {
     using type = kumi::function::element_or_t<I, T, U>;
@@ -3420,12 +3455,12 @@ namespace kumi::function
     template<typename C> KUMI_ABI friend constexpr decltype(auto) operator>>(scannable&& s, C&& c)
     {
       auto res = kumi::invoke(KUMI_FWD(c), s.value);
-      return kumi::function::scannable{kumi::bind_front(std::move(s.func), std::move(s.value)), res};
+      return kumi::function::scannable{kumi::bind_front(KUMI_MOVE(s.func), KUMI_MOVE(s.value)), res};
     }
     template<typename C> KUMI_ABI friend constexpr decltype(auto) operator<<(C&& c, scannable&& s)
     {
       auto res = kumi::invoke(KUMI_FWD(c), s.value);
-      return kumi::function::scannable{kumi::bind_back(std::move(s.func), std::move(s.value)), res};
+      return kumi::function::scannable{kumi::bind_back(KUMI_MOVE(s.func), KUMI_MOVE(s.value)), res};
     }
     KUMI_ABI constexpr decltype(auto) operator()() const noexcept { return kumi::invoke(func, value); }
   };
@@ -3470,13 +3505,13 @@ namespace kumi
   namespace result
   {
     template<typename Function, kumi::concepts::product_type T>
-    using apply_t = decltype(kumi::apply(std::declval<Function>(), std::declval<T>()));
+    using apply_t = decltype(kumi::apply(kumi::declval<Function>(), kumi::declval<T>()));
     template<typename Function, kumi::concepts::product_type T> struct apply
     {
       using type = kumi::result::apply_t<Function, T>;
     };
     template<typename Function, concepts::record_type R>
-    using apply_field_t = decltype(kumi::apply_field(std::declval<Function>(), std::declval<R>()));
+    using apply_field_t = decltype(kumi::apply_field(kumi::declval<Function>(), kumi::declval<R>()));
     template<typename Function, kumi::concepts::record_type R> struct apply_field
     {
       using type = kumi::result::apply_field_t<Function, R>;
@@ -3557,7 +3592,7 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr cartesian_product_t cartesian_product{};
   namespace result
   {
-    template<typename... Ts> using cartesian_product_t = decltype(kumi::cartesian_product(std::declval<Ts>()...));
+    template<typename... Ts> using cartesian_product_t = decltype(kumi::cartesian_product(kumi::declval<Ts>()...));
     template<typename... Ts> struct cartesian_product
     {
       using type = kumi::result::cartesian_product_t<Ts...>;
@@ -3589,7 +3624,7 @@ namespace kumi
   namespace result
   {
     template<typename Target, kumi::concepts::product_type T>
-    using member_cast_t = decltype(kumi::member_cast<Target>(std::declval<T>()));
+    using member_cast_t = decltype(kumi::member_cast<Target>(kumi::declval<T>()));
     template<typename Target, kumi::concepts::product_type T> struct member_cast
     {
       using type = kumi::result::member_cast_t<Target, T>;
@@ -3626,7 +3661,7 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr cat_t cat{};
   namespace result
   {
-    template<concepts::product_type... Ts> using cat_t = decltype(kumi::cat(std::declval<Ts>()...));
+    template<concepts::product_type... Ts> using cat_t = decltype(kumi::cat(kumi::declval<Ts>()...));
     template<kumi::concepts::product_type... Ts> struct cat
     {
       using type = kumi::result::cat_t<Ts...>;
@@ -3669,7 +3704,7 @@ namespace kumi
       else if constexpr (sizeof...(Is) == 0) return std::false_type{};
       else
         return std::bool_constant<(
-          decltype(contains_(kumi::_::adl_tag, std::declval<T>(), ids, kumi::function::indexes_for<T>{})){} || ...)>{};
+          decltype(contains_(kumi::_::adl_tag, kumi::declval<T>(), ids, kumi::function::indexes_for<T>{})){} || ...)>{};
     }
   };
   struct contains_only_t
@@ -3688,7 +3723,7 @@ namespace kumi
     template<kumi::concepts::product_type T, kumi::concepts::identifier... Is>
     [[nodiscard]] KUMI_ABI constexpr auto operator()(T&&, Is const&... ids) const noexcept
     {
-      using R = decltype(contains_any_t::operator()(std::declval<T>(), ids...));
+      using R = decltype(contains_any_t::operator()(kumi::declval<T>(), ids...));
       return std::bool_constant<!R{}>{};
     }
   };
@@ -3699,25 +3734,25 @@ namespace kumi
   namespace result
   {
     template<kumi::concepts::product_type T, kumi::concepts::identifier ID>
-    using contains_t = decltype(kumi::contains(std::declval<T>(), std::declval<ID>()));
+    using contains_t = decltype(kumi::contains(kumi::declval<T>(), kumi::declval<ID>()));
     template<kumi::concepts::product_type T, kumi::concepts::identifier ID> struct contains
     {
       using type = kumi::result::contains_t<T, ID>;
     };
     template<kumi::concepts::product_type T, kumi::concepts::identifier... IDs>
-    using contains_any_t = decltype(kumi::contains_any(std::declval<T>(), std::declval<IDs>()...));
+    using contains_any_t = decltype(kumi::contains_any(kumi::declval<T>(), kumi::declval<IDs>()...));
     template<kumi::concepts::product_type T, kumi::concepts::identifier... IDs> struct contains_any
     {
       using type = kumi::result::contains_any_t<T, IDs...>;
     };
     template<kumi::concepts::product_type T, kumi::concepts::identifier... IDs>
-    using contains_only_t = decltype(kumi::contains_only(std::declval<T>(), std::declval<IDs>()...));
+    using contains_only_t = decltype(kumi::contains_only(kumi::declval<T>(), kumi::declval<IDs>()...));
     template<kumi::concepts::product_type T, kumi::concepts::identifier... IDs> struct contains_only
     {
       using type = kumi::result::contains_only_t<T, IDs...>;
     };
     template<kumi::concepts::product_type T, kumi::concepts::identifier... IDs>
-    using contains_none_t = decltype(kumi::contains_none(std::declval<T>(), std::declval<IDs>()...));
+    using contains_none_t = decltype(kumi::contains_none(kumi::declval<T>(), kumi::declval<IDs>()...));
     template<kumi::concepts::product_type T, kumi::concepts::identifier... IDs> struct contains_none
     {
       using type = kumi::result::contains_none_t<T, IDs...>;
@@ -3793,7 +3828,7 @@ namespace kumi
   {
     template<kumi::concepts::product_type T, std::size_t... I>
     requires((sizeof...(I) == 1) || (sizeof...(I) == 2))
-    using extract_t = decltype(kumi::extract(std::declval<T>(), kumi::index_t<I>{}...));
+    using extract_t = decltype(kumi::extract(kumi::declval<T>(), kumi::index_t<I>{}...));
     template<kumi::concepts::product_type T, std::size_t... I>
     requires((sizeof...(I) == 1) || (sizeof...(I) == 2))
     struct extract
@@ -3802,7 +3837,7 @@ namespace kumi
     };
     template<kumi::concepts::product_type T, std::size_t... I>
     requires((sizeof...(I) == 1) || (sizeof...(I) == 2))
-    using remove_t = decltype(kumi::remove(std::declval<T>(), kumi::index_t<I>{}...));
+    using remove_t = decltype(kumi::remove(kumi::declval<T>(), kumi::index_t<I>{}...));
     template<kumi::concepts::product_type T, std::size_t... I>
     requires((sizeof...(I) == 1) || (sizeof...(I) == 2))
     struct remove
@@ -3810,7 +3845,7 @@ namespace kumi
       using type = kumi::result::remove_t<T, I...>;
     };
     template<kumi::concepts::product_type T, std::size_t I>
-    using split_t = decltype(kumi::split(std::declval<T>(), kumi::index_t<I>{}));
+    using split_t = decltype(kumi::split(kumi::declval<T>(), kumi::index_t<I>{}));
     template<kumi::concepts::product_type T, std::size_t I> struct split
     {
       using type = kumi::result::split_t<T, I>;
@@ -4043,26 +4078,26 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr as_flat_ptr_t as_flat_ptr{};
   namespace result
   {
-    template<kumi::concepts::product_type T> using compress_t = decltype(kumi::compress(std::declval<T>()));
+    template<kumi::concepts::product_type T> using compress_t = decltype(kumi::compress(kumi::declval<T>()));
     template<kumi::concepts::product_type T> struct compress
     {
       using type = kumi::result::compress_t<T>;
     };
-    template<kumi::concepts::product_type T> using flatten_t = decltype(kumi::flatten(std::declval<T>()));
+    template<kumi::concepts::product_type T> using flatten_t = decltype(kumi::flatten(kumi::declval<T>()));
     template<kumi::concepts::product_type T> struct flatten
     {
       using type = kumi::result::flatten_t<T>;
     };
     template<kumi::concepts::product_type T, typename... Func>
     requires((sizeof...(Func) == 0) || (sizeof...(Func) == 1))
-    using flatten_all_t = decltype(kumi::flatten_all(std::declval<T>(), std::declval<Func>()...));
+    using flatten_all_t = decltype(kumi::flatten_all(kumi::declval<T>(), kumi::declval<Func>()...));
     template<kumi::concepts::product_type T, typename... Func>
     requires((sizeof...(Func) == 0) || (sizeof...(Func) == 1))
     struct flatten_all
     {
       using type = kumi::result::flatten_all_t<T>;
     };
-    template<kumi::concepts::product_type T> using as_flat_ptr_t = decltype(kumi::as_flat_ptr(std::declval<T>()));
+    template<kumi::concepts::product_type T> using as_flat_ptr_t = decltype(kumi::as_flat_ptr(kumi::declval<T>()));
     template<kumi::concepts::product_type T> struct as_flat_ptr
     {
       using type = kumi::result::as_flat_ptr_t<T>;
@@ -4110,17 +4145,18 @@ namespace kumi
   template<std::size_t N> inline constexpr iota_t<N> iota{};
   namespace result
   {
-    template<std::size_t N, typename Function> using generate_t = decltype(kumi::generate<N>(std::declval<Function>()));
+    template<std::size_t N, typename Function>
+    using generate_t = decltype(kumi::generate<N>(kumi::declval<Function>()));
     template<std::size_t N, typename Function> struct generate
     {
       using type = kumi::result::generate_t<N, Function>;
     };
-    template<std::size_t N, typename T> using fill_t = decltype(kumi::fill<N>(std::declval<T>()));
+    template<std::size_t N, typename T> using fill_t = decltype(kumi::fill<N>(kumi::declval<T>()));
     template<std::size_t N, typename T> struct fill
     {
       using type = kumi::result::fill_t<N, T>;
     };
-    template<std::size_t N, typename T> using iota_t = decltype(kumi::iota<N>(std::declval<T>()));
+    template<std::size_t N, typename T> using iota_t = decltype(kumi::iota<N>(kumi::declval<T>()));
     template<std::size_t N, typename T> struct iota
     {
       using type = kumi::result::iota_t<N, T>;
@@ -4188,7 +4224,7 @@ namespace kumi
              typename... Operators>
     requires((sizeof...(Operators) == 0) || (sizeof...(Operators) == 2))
     using inner_product_t = decltype(kumi::inner_product(
-      std::declval<S1>(), std::declval<S2>(), std::declval<T>(), std::declval<Operators>()...));
+      kumi::declval<S1>(), kumi::declval<S2>(), kumi::declval<T>(), kumi::declval<Operators>()...));
     template<kumi::concepts::product_type S1,
              kumi::concepts::sized_product_type<kumi::size_v<S1>> S2,
              typename T,
@@ -4280,7 +4316,7 @@ namespace kumi
     template<typename Function,
              kumi::concepts::product_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
-    using map_t = decltype(kumi::map(std::declval<Function>(), std::declval<T>(), std::declval<Ts>()...));
+    using map_t = decltype(kumi::map(kumi::declval<Function>(), kumi::declval<T>(), kumi::declval<Ts>()...));
     template<typename Function,
              kumi::concepts::product_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
@@ -4291,7 +4327,8 @@ namespace kumi
     template<typename Function,
              kumi::concepts::product_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
-    using map_index_t = decltype(kumi::map_index(std::declval<Function>(), std::declval<T>(), std::declval<Ts>()...));
+    using map_index_t =
+      decltype(kumi::map_index(kumi::declval<Function>(), kumi::declval<T>(), kumi::declval<Ts>()...));
     template<typename Function,
              kumi::concepts::product_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
@@ -4302,7 +4339,8 @@ namespace kumi
     template<typename Function,
              kumi::concepts::record_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
-    using map_field_t = decltype(kumi::map_field(std::declval<Function>(), std::declval<T>(), std::declval<Ts>()...));
+    using map_field_t =
+      decltype(kumi::map_field(kumi::declval<Function>(), kumi::declval<T>(), kumi::declval<Ts>()...));
     template<typename Function,
              kumi::concepts::record_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
@@ -4366,23 +4404,23 @@ namespace kumi
   namespace result
   {
     template<kumi::concepts::product_type T, typename V>
-    using push_front_t = decltype(kumi::push_front(std::declval<T>(), std::declval<V>()));
+    using push_front_t = decltype(kumi::push_front(kumi::declval<T>(), kumi::declval<V>()));
     template<kumi::concepts::product_type T, typename V> struct push_front
     {
       using type = kumi::result::push_front_t<T, V>;
     };
-    template<kumi::concepts::product_type T> using pop_front_t = decltype(kumi::pop_front(std::declval<T>()));
+    template<kumi::concepts::product_type T> using pop_front_t = decltype(kumi::pop_front(kumi::declval<T>()));
     template<kumi::concepts::product_type T> struct pop_front
     {
       using type = kumi::result::pop_front_t<T>;
     };
     template<kumi::concepts::product_type T, typename V>
-    using push_back_t = decltype(kumi::push_back(std::declval<T>(), std::declval<V>()));
+    using push_back_t = decltype(kumi::push_back(kumi::declval<T>(), kumi::declval<V>()));
     template<kumi::concepts::product_type T, typename V> struct push_back
     {
       using type = kumi::result::push_back_t<T, V>;
     };
-    template<kumi::concepts::product_type T> using pop_back_t = decltype(kumi::pop_back(std::declval<T>()));
+    template<kumi::concepts::product_type T> using pop_back_t = decltype(kumi::pop_back(kumi::declval<T>()));
     template<kumi::concepts::product_type T> struct pop_back
     {
       using type = kumi::result::pop_back_t<T>;
@@ -4449,7 +4487,7 @@ namespace kumi
     template<typename Function, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     using fold_left_t =
-      decltype(kumi::fold_left(std::declval<Function>(), std::declval<T>(), std::declval<Value>()...));
+      decltype(kumi::fold_left(kumi::declval<Function>(), kumi::declval<T>(), kumi::declval<Value>()...));
     template<typename Function, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     struct fold_left
@@ -4459,7 +4497,7 @@ namespace kumi
     template<typename Function, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     using fold_right_t =
-      decltype(kumi::fold_right(std::declval<Function>(), std::declval<T>(), std::declval<Value>()...));
+      decltype(kumi::fold_right(kumi::declval<Function>(), kumi::declval<T>(), kumi::declval<Value>()...));
     template<typename Function, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     struct fold_right
@@ -4579,28 +4617,30 @@ namespace kumi
   {
     template<typename T, typename... F>
     requires((sizeof...(F) == 0) || (sizeof...(F) == 1))
-    using max_t = decltype(kumi::max(std::declval<T>(), std::declval<F>()...));
+    using max_t = decltype(kumi::max(kumi::declval<T>(), kumi::declval<F>()...));
     template<typename T, typename... F>
     requires((sizeof...(F) == 0) || (sizeof...(F) == 1))
     struct max
     {
       using type = kumi::result::max_t<T, F...>;
     };
-    template<typename T, typename F> using max_flat_t = decltype(kumi::max_flat(std::declval<T>(), std::declval<F>()));
+    template<typename T, typename F>
+    using max_flat_t = decltype(kumi::max_flat(kumi::declval<T>(), kumi::declval<F>()));
     template<typename T, typename F> struct max_flat
     {
       using type = kumi::result::max_flat_t<T, F>;
     };
     template<typename T, typename... F>
     requires((sizeof...(F) == 0) || (sizeof...(F) == 1))
-    using min_t = decltype(kumi::min(std::declval<T>(), std::declval<F>()...));
+    using min_t = decltype(kumi::min(kumi::declval<T>(), kumi::declval<F>()...));
     template<typename T, typename... F>
     requires((sizeof...(F) == 0) || (sizeof...(F) == 1))
     struct min
     {
       using type = kumi::result::min_t<T, F...>;
     };
-    template<typename T, typename F> using min_flat_t = decltype(kumi::min_flat(std::declval<T>(), std::declval<F>()));
+    template<typename T, typename F>
+    using min_flat_t = decltype(kumi::min_flat(kumi::declval<T>(), kumi::declval<F>()));
     template<typename T, typename F> struct min_flat
     {
       using type = kumi::result::min_flat_t<T, F>;
@@ -4665,19 +4705,19 @@ namespace kumi
   namespace result
   {
     template<template<typename> typename Pred, kumi::concepts::product_type T>
-    using partition_t = decltype(kumi::partition<Pred>(std::declval<T>()));
+    using partition_t = decltype(kumi::partition<Pred>(kumi::declval<T>()));
     template<template<typename> typename Pred, kumi::concepts::product_type T> struct partition
     {
       using type = kumi::result::partition_t<Pred, T>;
     };
     template<template<typename> typename Pred, kumi::concepts::product_type T>
-    using filter_t = decltype(kumi::filter<Pred>(std::declval<T>()));
+    using filter_t = decltype(kumi::filter<Pred>(kumi::declval<T>()));
     template<template<typename> typename Pred, kumi::concepts::product_type T> struct filter
     {
       using type = kumi::result::filter_t<Pred, T>;
     };
     template<template<typename> typename Pred, kumi::concepts::product_type T>
-    using filter_not_t = decltype(kumi::filter_not<Pred>(std::declval<T>()));
+    using filter_not_t = decltype(kumi::filter_not<Pred>(kumi::declval<T>()));
     template<template<typename> typename Pred, kumi::concepts::product_type T> struct filter_not
     {
       using type = kumi::result::filter_not_t<Pred, T>;
@@ -4797,7 +4837,7 @@ namespace kumi
         if constexpr (kumi::concepts::projection_map<decltype(P)>) return C<P>{}(KUMI_FWD(t));
         else
         {
-          static_assert(requires { get<P>(std::declval<T>()); }, "[KUMI] - Invalid projection for input type");
+          static_assert(requires { get<P>(kumi::declval<T>()); }, "[KUMI] - Invalid projection for input type");
           return get<P>(KUMI_FWD(t));
         }
       }
@@ -4821,7 +4861,7 @@ namespace kumi
   {
     template<kumi::concepts::product_type Tuple> [[nodiscard]] KUMI_ABI constexpr auto operator()(Tuple&& t) const
     {
-      static_assert((requires { get<Name>(std::declval<Tuple>()); } && ...),
+      static_assert((requires { get<Name>(kumi::declval<Tuple>()); } && ...),
                     "[KUMI] - Identifier not present in input type");
       return builder<Tuple>::make(Name = get<Name>(KUMI_FWD(t))...);
     }
@@ -4842,19 +4882,19 @@ namespace kumi
   namespace result
   {
     template<kumi::concepts::product_type T, std::size_t... Idx>
-    using reorder_t = decltype(kumi::reorder<Idx...>(std::declval<T>()));
+    using reorder_t = decltype(kumi::reorder<Idx...>(kumi::declval<T>()));
     template<kumi::concepts::product_type T, std::size_t... Idx> struct reorder
     {
       using type = kumi::result::reorder_t<T, Idx...>;
     };
     template<kumi::concepts::product_type Tuple, kumi::concepts::identifier auto... Name>
-    using reorder_fields_t = decltype(kumi::reorder_fields<Name...>(std::declval<Tuple>()));
+    using reorder_fields_t = decltype(kumi::reorder_fields<Name...>(kumi::declval<Tuple>()));
     template<kumi::concepts::product_type Tuple, kumi::concepts::identifier auto... Name> struct reorder_fields
     {
       using type = kumi::result::reorder_fields_t<Tuple, Name...>;
     };
     template<kumi::concepts::product_type T, kumi::concepts::projection_map auto Indexes>
-    using reindex_t = decltype(kumi::reindex<Indexes>(std::declval<T>()));
+    using reindex_t = decltype(kumi::reindex<Indexes>(kumi::declval<T>()));
     template<kumi::concepts::product_type T, kumi::concepts::projection_map auto Indexes> struct reindex
     {
       using type = kumi::result::reindex_t<T, Indexes>;
@@ -4989,7 +5029,7 @@ namespace kumi
   {
     template<kumi::concepts::monoid M, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
-    using reduce_t = decltype(kumi::reduce(std::declval<M>(), std::declval<T>(), std::declval<Value>()...));
+    using reduce_t = decltype(kumi::reduce(kumi::declval<M>(), kumi::declval<T>(), kumi::declval<Value>()...));
     template<kumi::concepts::monoid M, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     struct reduce
@@ -4999,7 +5039,7 @@ namespace kumi
     template<typename F, kumi::concepts::monoid M, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     using map_reduce_t =
-      decltype(kumi::map_reduce(std::declval<F>(), std::declval<M>(), std::declval<T>(), std::declval<Value>()...));
+      decltype(kumi::map_reduce(kumi::declval<F>(), kumi::declval<M>(), kumi::declval<T>(), kumi::declval<Value>()...));
     template<typename F, kumi::concepts::monoid M, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     struct map_reduce
@@ -5008,7 +5048,7 @@ namespace kumi
     };
     template<kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
-    using sum_t = decltype(kumi::sum(std::declval<T>(), std::declval<Value>()...));
+    using sum_t = decltype(kumi::sum(kumi::declval<T>(), kumi::declval<Value>()...));
     template<kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     struct sum
@@ -5017,7 +5057,7 @@ namespace kumi
     };
     template<kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
-    using prod_t = decltype(kumi::prod(std::declval<T>(), std::declval<Value>()...));
+    using prod_t = decltype(kumi::prod(kumi::declval<T>(), kumi::declval<Value>()...));
     template<kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     struct prod
@@ -5026,7 +5066,7 @@ namespace kumi
     };
     template<kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
-    using bit_and_t = decltype(kumi::bit_and(std::declval<T>(), std::declval<Value>()...));
+    using bit_and_t = decltype(kumi::bit_and(kumi::declval<T>(), kumi::declval<Value>()...));
     template<kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     struct bit_and
@@ -5035,7 +5075,7 @@ namespace kumi
     };
     template<kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
-    using bit_or_t = decltype(kumi::bit_or(std::declval<T>(), std::declval<Value>()...));
+    using bit_or_t = decltype(kumi::bit_or(kumi::declval<T>(), kumi::declval<Value>()...));
     template<kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     struct bit_or
@@ -5044,7 +5084,7 @@ namespace kumi
     };
     template<kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
-    using bit_xor_t = decltype(kumi::bit_xor(std::declval<T>(), std::declval<Value>()...));
+    using bit_xor_t = decltype(kumi::bit_xor(kumi::declval<T>(), kumi::declval<Value>()...));
     template<kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     struct bit_xor
@@ -5066,7 +5106,7 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr reverse_t reverse{};
   namespace result
   {
-    template<kumi::concepts::product_type T> using reverse_t = decltype(kumi::reverse(std::declval<T>()));
+    template<kumi::concepts::product_type T> using reverse_t = decltype(kumi::reverse(kumi::declval<T>()));
     template<kumi::concepts::product_type T> struct reverse
     {
       using type = kumi::result::reverse_t<T>;
@@ -5103,13 +5143,13 @@ namespace kumi
   namespace result
   {
     template<std::size_t R, kumi::concepts::product_type T>
-    using rotate_left_t = decltype(kumi::rotate_left<R>(std::declval<T>()));
+    using rotate_left_t = decltype(kumi::rotate_left<R>(kumi::declval<T>()));
     template<std::size_t R, kumi::concepts::product_type T> struct rotate_left
     {
       using type = kumi::result::rotate_left_t<R, T>;
     };
     template<std::size_t R, kumi::concepts::product_type T>
-    using rotate_right_t = decltype(kumi::rotate_right<R>(std::declval<T>()));
+    using rotate_right_t = decltype(kumi::rotate_right<R>(kumi::declval<T>()));
     template<std::size_t R, kumi::concepts::product_type T> struct rotate_right
     {
       using type = kumi::result::rotate_right_t<R, T>;
@@ -5242,7 +5282,7 @@ namespace kumi
     template<typename Function, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     using inclusive_scan_right_t =
-      decltype(kumi::inclusive_scan_right(std::declval<Function>(), std::declval<T>(), std::declval<Value>()...));
+      decltype(kumi::inclusive_scan_right(kumi::declval<Function>(), kumi::declval<T>(), kumi::declval<Value>()...));
     template<typename Function, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     struct inclusive_scan_right
@@ -5252,7 +5292,7 @@ namespace kumi
     template<typename Function, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     using exclusive_scan_right_t =
-      decltype(kumi::exclusive_scan_right(std::declval<Function>(), std::declval<T>(), std::declval<Value>()...));
+      decltype(kumi::exclusive_scan_right(kumi::declval<Function>(), kumi::declval<T>(), kumi::declval<Value>()...));
     template<typename Function, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     struct exclusive_scan_right
@@ -5262,7 +5302,7 @@ namespace kumi
     template<typename Function, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     using inclusive_scan_left_t =
-      decltype(kumi::inclusive_scan_left(std::declval<Function>(), std::declval<T>(), std::declval<Value>()...));
+      decltype(kumi::inclusive_scan_left(kumi::declval<Function>(), kumi::declval<T>(), kumi::declval<Value>()...));
     template<typename Function, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     struct inclusive_scan_left
@@ -5272,7 +5312,7 @@ namespace kumi
     template<typename Function, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     using exclusive_scan_left_t =
-      decltype(kumi::exclusive_scan_left(std::declval<Function>(), std::declval<T>(), std::declval<Value>()...));
+      decltype(kumi::exclusive_scan_left(kumi::declval<Function>(), kumi::declval<T>(), kumi::declval<Value>()...));
     template<typename Function, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     struct exclusive_scan_left
@@ -5311,19 +5351,19 @@ namespace kumi
   namespace result
   {
     template<std::size_t N, std::size_t O, kumi::concepts::product_type T>
-    using tiles_t = decltype(kumi::tiles<N, O>(std::declval<T>()));
+    using tiles_t = decltype(kumi::tiles<N, O>(kumi::declval<T>()));
     template<std::size_t N, std::size_t O, kumi::concepts::product_type T> struct tiles
     {
       using type = kumi::result::tiles_t<N, O, T>;
     };
     template<std::size_t N, kumi::concepts::product_type T>
-    using windows_t = decltype(kumi::windows<N>(std::declval<T>()));
+    using windows_t = decltype(kumi::windows<N>(kumi::declval<T>()));
     template<std::size_t N, kumi::concepts::product_type T> struct windows
     {
       using type = kumi::result::windows_t<N, T>;
     };
     template<std::size_t N, kumi::concepts::product_type T>
-    using chunks_t = decltype(kumi::chunks<N>(std::declval<T>()));
+    using chunks_t = decltype(kumi::chunks<N>(kumi::declval<T>()));
     template<std::size_t N, kumi::concepts::product_type T> struct chunks
     {
       using type = kumi::result::chunks_t<N, T>;
@@ -5363,7 +5403,7 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr transpose_t transpose{};
   namespace result
   {
-    template<kumi::concepts::product_type T> using transpose_t = decltype(kumi::transpose(std::declval<T>()));
+    template<kumi::concepts::product_type T> using transpose_t = decltype(kumi::transpose(kumi::declval<T>()));
     template<kumi::concepts::product_type T> struct transpose
     {
       using type = kumi::result::transpose_t<T>;
@@ -5417,12 +5457,12 @@ namespace kumi
   KUMI_VARIABLE_ABI constexpr all_unique_t all_unique{};
   namespace result
   {
-    template<kumi::concepts::product_type T> using unique_t = decltype(kumi::unique(std::declval<T>()));
+    template<kumi::concepts::product_type T> using unique_t = decltype(kumi::unique(kumi::declval<T>()));
     template<kumi::concepts::product_type T> struct unique
     {
       using type = kumi::result::unique_t<T>;
     };
-    template<kumi::concepts::product_type T> using all_unique_t = decltype(kumi::all_unique(std::declval<T>()));
+    template<kumi::concepts::product_type T> using all_unique_t = decltype(kumi::all_unique(kumi::declval<T>()));
     template<kumi::concepts::product_type T> struct all_unique
     {
       using type = kumi::result::all_unique_t<T>;
@@ -5512,19 +5552,19 @@ namespace kumi
   namespace result
   {
     template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
-    using zip_t = decltype(kumi::zip(std::declval<T0>(), std::declval<Ts>()...));
+    using zip_t = decltype(kumi::zip(kumi::declval<T0>(), kumi::declval<Ts>()...));
     template<kumi::concepts::product_type T0, kumi::concepts::sized_product_type<kumi::size_v<T0>>... Ts> struct zip
     {
       using type = kumi::result::zip_t<T0, Ts...>;
     };
     template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
-    using zip_min_t = decltype(kumi::zip_min(std::declval<T0>(), std::declval<Ts>()...));
+    using zip_min_t = decltype(kumi::zip_min(kumi::declval<T0>(), kumi::declval<Ts>()...));
     template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts> struct zip_min
     {
       using type = kumi::result::zip_min_t<T0, Ts...>;
     };
     template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
-    using zip_max_t = decltype(kumi::zip_max(std::declval<T0>(), std::declval<Ts>()...));
+    using zip_max_t = decltype(kumi::zip_max(kumi::declval<T0>(), kumi::declval<Ts>()...));
     template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts> struct zip_max
     {
       using type = kumi::result::zip_max_t<T0, Ts...>;
