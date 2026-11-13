@@ -150,7 +150,7 @@ namespace kumi
   //====================================================================================================================
   //! @defgroup kumi_identifier_of kumi::identifier_of
   //! @ingroup kumi_utility
-  //! @brief Extracts the identifiers from a kumi::concepts::field or returns the parameter.
+  //! @brief Extracts the identifier of a kumi::concepts::field, or returns kumi::unknown.
   //====================================================================================================================
   /**
     @ingroup kumi_identifier_of
@@ -184,12 +184,13 @@ namespace kumi
   //====================================================================================================================
   //! @defgroup kumi_label_of kumi::label_of
   //! @ingroup kumi_utility
-  //! @brief Extracts the label from a kumi::concepts::field or returns the parameter.
+  //! @brief Extracts the label of a kumi::concepts::field, or returns the value of kumi::unknown.
   //====================================================================================================================
   /**
     @ingroup kumi_label_of
 
-    @note     If the unqualified type of input does not model kumi::concepts::field, returns kumi::unknown.
+    @note     If the unqualified type of input does not model kumi::concepts::field, returns kumi::unknown::value, the
+              kumi::str `"kumi::unknown"`.
     @tparam   T The type to extract label from.
     @return   The label of the field as a kumi::str.
 

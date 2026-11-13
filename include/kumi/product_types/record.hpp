@@ -16,7 +16,7 @@ namespace kumi
   /**
     @class record
     @ingroup kumi_record_related
-    @brief Fixed-size collection of heterogeneous tagged fields, tags are unique.
+    @brief Fixed-size collection of heterogeneous fields with distinct labels.
 
     kumi::record provides an aggregate based implementation of a record. It provides algorithms and
     functions designed to facilitate record's handling and transformations.
@@ -422,9 +422,9 @@ namespace kumi
            !kumi::concepts::uniquely_labeled<Ts...>)
   struct record<Ts...>
   {
-    static_assert(kumi::concepts::uniquely_named<Ts...>, "Duplicate fields in record definition");
-    static_assert(kumi::concepts::uniquely_labeled<Ts...>, "Duplicate identifier representation in record definition");
-    static_assert(kumi::concepts::fully_named<Ts...>, "Anonymous field usage in record definition");
+    static_assert(kumi::concepts::uniquely_named<Ts...>, "Duplicate identifier in record definition");
+    static_assert(kumi::concepts::uniquely_labeled<Ts...>, "Duplicate label in record definition");
+    static_assert(kumi::concepts::fully_named<Ts...>, "Element that is not a field in record definition");
     record(Ts&&...) = delete;
   };
 

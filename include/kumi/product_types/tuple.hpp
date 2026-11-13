@@ -942,17 +942,18 @@ namespace kumi
   //====================================================================================================================
   //! @defgroup kumi_members_of kumi::members_of
   //! @ingroup kumi_utility
-  //! @brief Extracts the names of the fields of a kumi::product_type.
+  //! @brief Extracts the identifiers of the fields of a kumi::product_type.
   //====================================================================================================================
   /**
     @ingroup kumi_members_of
 
     @var members_of
 
-    @note If some fields are unnamed, the associated name is kumi::unit.
+    @note An element that is not a field yields kumi::unknown.
 
     @qualifier inline
     @qualifier constexpr
+    @qualifier noexcept
     @qualifier nodiscard
 
     @groupheader{Header file}
@@ -966,16 +967,16 @@ namespace kumi
       namespace kumi
       {
         template<concepts::product_type T>
-        constexpr auto members_of(kumi::as<T> type);
+        constexpr auto members_of(kumi::as<T> type) noexcept;
       }
     @endcode
 
     @subgroupheader{Parameters}
-      - `type`: the type of the kumi::concepts::product_type from which to extract names.
+      - `type`: the kumi::as wrapping the product type whose identifiers are extracted.
 
     @subgroupheader{Return value}
 
-      - A tuple of the names of a kumi::product_type.
+      - A kumi::tuple of the identifiers of the elements, in their order.
 
     @groupheader{Example}
 
