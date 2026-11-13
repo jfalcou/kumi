@@ -1,9 +1,9 @@
 var searchData=
 [
-  ['make_5farray_0',['make_array',['../group__kumi__forward__as__array.html#ga1f35cbd4396ea2b88d6c34f63c02c8c6',1,'kumi']]],
+  ['make_5farray_0',['make_array',['../group__kumi__make__array.html#ga1f35cbd4396ea2b88d6c34f63c02c8c6',1,'kumi']]],
   ['make_5findexes_1',['make_indexes',['../group__kumi__make__indexes.html#gadba148c334bcf52088dc64992c270fdd',1,'kumi']]],
-  ['make_5frecord_2',['make_record',['../group__kumi__record__related.html#ga931b45076a3ac621c248efa48881b59a',1,'kumi']]],
-  ['make_5ftuple_3',['make_tuple',['../group__kumi__tie.html#ga2a3a7b464afb602d8a722178ac517da8',1,'kumi']]],
+  ['make_5frecord_2',['make_record',['../group__kumi__make__record.html#ga931b45076a3ac621c248efa48881b59a',1,'kumi']]],
+  ['make_5ftuple_3',['make_tuple',['../group__kumi__make__tuple.html#ga2a3a7b464afb602d8a722178ac517da8',1,'kumi']]],
   ['map_4',['map',['../group__kumi__map.html#gaeaba737291ba1085d77272eae38a016e',1,'kumi']]],
   ['map_5ffield_5',['map_field',['../group__kumi__map__field.html#gafe68ca583e3e822b20f60ff35e5aa9d3',1,'kumi']]],
   ['map_5findex_6',['map_index',['../group__kumi__map__index.html#ga64a8c36072828fb7b724ba0ab8fc59bc',1,'kumi']]],

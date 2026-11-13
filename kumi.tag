@@ -2491,6 +2491,48 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
+      <type>constexpr forward_as_array_t</type>
+      <name>forward_as_array</name>
+      <anchorfile>group__kumi__forward__as__array.html</anchorfile>
+      <anchor>gaa93098695e1bc5a6db9572a70b5a2cd8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr forward_as_record_t&lt; Fields... &gt;</type>
+      <name>forward_as_record</name>
+      <anchorfile>group__kumi__forward__as__record.html</anchorfile>
+      <anchor>gacfd38acd9ecb27bff2bb2ad0f885e326</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr forward_as_tuple_t</type>
+      <name>forward_as_tuple</name>
+      <anchorfile>group__kumi__forward__as__tuple.html</anchorfile>
+      <anchor>ga934bd052835c7cc48a870fbc7c86e6ac</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr from_array_t&lt; Type &gt;</type>
+      <name>from_array</name>
+      <anchorfile>group__kumi__from__array.html</anchorfile>
+      <anchor>gaca20d574b6dd574d6628fae65ea688fe</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr from_record_t&lt; Type &gt;</type>
+      <name>from_record</name>
+      <anchorfile>group__kumi__from__record.html</anchorfile>
+      <anchor>gae4456196aadb75484ad0b061c83b3f95</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr from_tuple_t&lt; Type &gt;</type>
+      <name>from_tuple</name>
+      <anchorfile>group__kumi__from__tuple.html</anchorfile>
+      <anchor>gaebb54917d0e966b2f64aaa91dedcd5dc</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
       <type>constexpr front_t</type>
       <name>front</name>
       <anchorfile>group__kumi__front.html</anchorfile>
@@ -2631,6 +2673,27 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
+      <type>constexpr make_array_t</type>
+      <name>make_array</name>
+      <anchorfile>group__kumi__make__array.html</anchorfile>
+      <anchor>ga1f35cbd4396ea2b88d6c34f63c02c8c6</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr make_record_t</type>
+      <name>make_record</name>
+      <anchorfile>group__kumi__make__record.html</anchorfile>
+      <anchor>ga931b45076a3ac621c248efa48881b59a</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr make_tuple_t</type>
+      <name>make_tuple</name>
+      <anchorfile>group__kumi__make__tuple.html</anchorfile>
+      <anchor>ga2a3a7b464afb602d8a722178ac517da8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
       <type>constexpr map_t</type>
       <name>map</name>
       <anchorfile>group__kumi__map.html</anchorfile>
@@ -2677,6 +2740,13 @@
       <name>member_cast</name>
       <anchorfile>group__kumi__member__cast.html</anchorfile>
       <anchor>gad2e4009d5d28df5090885b030f08f1f8</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr members_of_t</type>
+      <name>members_of</name>
+      <anchorfile>group__kumi__members__of.html</anchorfile>
+      <anchor>ga50426580ce9abca59b6a14b398b312ed</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -2834,10 +2904,52 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
+      <type>constexpr tie_t</type>
+      <name>tie</name>
+      <anchorfile>group__kumi__tie.html</anchorfile>
+      <anchor>ga79c564af50f6eb1c4aa6dac7f08337cf</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr tie_as_record_t&lt; Fields... &gt;</type>
+      <name>tie_as_record</name>
+      <anchorfile>group__kumi__record__related.html</anchorfile>
+      <anchor>ga45b4db8f009ab12f62d938338d29d536</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
       <type>constexpr tiles_t&lt; N, O &gt;</type>
       <name>tiles</name>
       <anchorfile>group__kumi__tiles.html</anchorfile>
       <anchor>ga3d1b4a8309328d854d7b6234fde3aeb0</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr to_array_t</type>
+      <name>to_array</name>
+      <anchorfile>group__kumi__to__array.html</anchorfile>
+      <anchor>ga915a6c331bad66be764b814af9f2260f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr to_record_t</type>
+      <name>to_record</name>
+      <anchorfile>group__kumi__to__record.html</anchorfile>
+      <anchor>ga163224b58e43457f4cbc65f6817d738f</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr to_ref_t</type>
+      <name>to_ref</name>
+      <anchorfile>group__kumi__to__ref.html</anchorfile>
+      <anchor>ga271223ada5937ca2e7ea77825b89b144</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr to_tuple_t</type>
+      <name>to_tuple</name>
+      <anchorfile>group__kumi__to__tuple.html</anchorfile>
+      <anchor>ga2642659e4d1dfee5339563fe65927385</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -2852,6 +2964,13 @@
       <name>unique</name>
       <anchorfile>group__kumi__unique.html</anchorfile>
       <anchor>ga6479cba59ee95d4a0779e94993ab55a9</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr values_of_t</type>
+      <name>values_of</name>
+      <anchorfile>group__kumi__values__of.html</anchorfile>
+      <anchor>gaa217e07b135cc3295e25689ac4ac2933</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -2880,216 +2999,6 @@
       <name>zip_min</name>
       <anchorfile>group__kumi__zip__min.html</anchorfile>
       <anchor>gaf4b9aea3cee7c30fc6a516c632805423</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr forward_as_array_t</type>
-      <name>forward_as_array</name>
-      <anchorfile>group__kumi__forward__as__array.html</anchorfile>
-      <anchor>gaa93098695e1bc5a6db9572a70b5a2cd8</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr make_array_t</type>
-      <name>make_array</name>
-      <anchorfile>group__kumi__forward__as__array.html</anchorfile>
-      <anchor>ga1f35cbd4396ea2b88d6c34f63c02c8c6</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr tie_as_record_t&lt; Fields... &gt;</type>
-      <name>tie_as_record</name>
-      <anchorfile>group__kumi__record__related.html</anchorfile>
-      <anchor>ga45b4db8f009ab12f62d938338d29d536</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr forward_as_record_t&lt; Fields... &gt;</type>
-      <name>forward_as_record</name>
-      <anchorfile>group__kumi__record__related.html</anchorfile>
-      <anchor>gacfd38acd9ecb27bff2bb2ad0f885e326</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr make_record_t</type>
-      <name>make_record</name>
-      <anchorfile>group__kumi__record__related.html</anchorfile>
-      <anchor>ga931b45076a3ac621c248efa48881b59a</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr from_record_t&lt; Type &gt;</type>
-      <name>from_record</name>
-      <anchorfile>group__kumi__from__record.html</anchorfile>
-      <anchor>gae4456196aadb75484ad0b061c83b3f95</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr to_record_t</type>
-      <name>to_record</name>
-      <anchorfile>group__kumi__from__record.html</anchorfile>
-      <anchor>ga163224b58e43457f4cbc65f6817d738f</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr tie_t</type>
-      <name>tie</name>
-      <anchorfile>group__kumi__tie.html</anchorfile>
-      <anchor>ga79c564af50f6eb1c4aa6dac7f08337cf</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr forward_as_tuple_t</type>
-      <name>forward_as_tuple</name>
-      <anchorfile>group__kumi__tie.html</anchorfile>
-      <anchor>ga934bd052835c7cc48a870fbc7c86e6ac</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr make_tuple_t</type>
-      <name>make_tuple</name>
-      <anchorfile>group__kumi__tie.html</anchorfile>
-      <anchor>ga2a3a7b464afb602d8a722178ac517da8</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr to_ref_t</type>
-      <name>to_ref</name>
-      <anchorfile>group__kumi__tie.html</anchorfile>
-      <anchor>ga271223ada5937ca2e7ea77825b89b144</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr members_of_t</type>
-      <name>members_of</name>
-      <anchorfile>group__kumi__members__of.html</anchorfile>
-      <anchor>ga50426580ce9abca59b6a14b398b312ed</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr values_of_t</type>
-      <name>values_of</name>
-      <anchorfile>group__kumi__members__of.html</anchorfile>
-      <anchor>gaa217e07b135cc3295e25689ac4ac2933</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr from_array_t&lt; Type &gt;</type>
-      <name>from_array</name>
-      <anchorfile>group__kumi__from__array.html</anchorfile>
-      <anchor>gaca20d574b6dd574d6628fae65ea688fe</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr to_array_t</type>
-      <name>to_array</name>
-      <anchorfile>group__kumi__to__array.html</anchorfile>
-      <anchor>ga915a6c331bad66be764b814af9f2260f</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr from_tuple_t&lt; Type &gt;</type>
-      <name>from_tuple</name>
-      <anchorfile>group__kumi__from__tuple.html</anchorfile>
-      <anchor>gaebb54917d0e966b2f64aaa91dedcd5dc</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr to_tuple_t</type>
-      <name>to_tuple</name>
-      <anchorfile>group__kumi__to__tuple.html</anchorfile>
-      <anchor>ga2642659e4d1dfee5339563fe65927385</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr forward_as_array_t</type>
-      <name>forward_as_array</name>
-      <anchorfile>group__kumi__forward__as__array.html</anchorfile>
-      <anchor>gaa93098695e1bc5a6db9572a70b5a2cd8</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr make_array_t</type>
-      <name>make_array</name>
-      <anchorfile>group__kumi__forward__as__array.html</anchorfile>
-      <anchor>ga1f35cbd4396ea2b88d6c34f63c02c8c6</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr tie_as_record_t&lt; Fields... &gt;</type>
-      <name>tie_as_record</name>
-      <anchorfile>group__kumi__record__related.html</anchorfile>
-      <anchor>ga45b4db8f009ab12f62d938338d29d536</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr forward_as_record_t&lt; Fields... &gt;</type>
-      <name>forward_as_record</name>
-      <anchorfile>group__kumi__record__related.html</anchorfile>
-      <anchor>gacfd38acd9ecb27bff2bb2ad0f885e326</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr make_record_t</type>
-      <name>make_record</name>
-      <anchorfile>group__kumi__record__related.html</anchorfile>
-      <anchor>ga931b45076a3ac621c248efa48881b59a</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr from_record_t&lt; Type &gt;</type>
-      <name>from_record</name>
-      <anchorfile>group__kumi__from__record.html</anchorfile>
-      <anchor>gae4456196aadb75484ad0b061c83b3f95</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr to_record_t</type>
-      <name>to_record</name>
-      <anchorfile>group__kumi__from__record.html</anchorfile>
-      <anchor>ga163224b58e43457f4cbc65f6817d738f</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr tie_t</type>
-      <name>tie</name>
-      <anchorfile>group__kumi__tie.html</anchorfile>
-      <anchor>ga79c564af50f6eb1c4aa6dac7f08337cf</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr forward_as_tuple_t</type>
-      <name>forward_as_tuple</name>
-      <anchorfile>group__kumi__tie.html</anchorfile>
-      <anchor>ga934bd052835c7cc48a870fbc7c86e6ac</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr make_tuple_t</type>
-      <name>make_tuple</name>
-      <anchorfile>group__kumi__tie.html</anchorfile>
-      <anchor>ga2a3a7b464afb602d8a722178ac517da8</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr to_ref_t</type>
-      <name>to_ref</name>
-      <anchorfile>group__kumi__tie.html</anchorfile>
-      <anchor>ga271223ada5937ca2e7ea77825b89b144</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr members_of_t</type>
-      <name>members_of</name>
-      <anchorfile>group__kumi__members__of.html</anchorfile>
-      <anchor>ga50426580ce9abca59b6a14b398b312ed</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr values_of_t</type>
-      <name>values_of</name>
-      <anchorfile>group__kumi__members__of.html</anchorfile>
-      <anchor>gaa217e07b135cc3295e25689ac4ac2933</anchor>
       <arglist></arglist>
     </member>
     <member kind="function">
@@ -3810,20 +3719,6 @@
       <anchor>ga45b4db8f009ab12f62d938338d29d536</anchor>
       <arglist></arglist>
     </member>
-    <member kind="variable">
-      <type>constexpr forward_as_record_t&lt; Fields... &gt;</type>
-      <name>kumi::forward_as_record</name>
-      <anchorfile>group__kumi__record__related.html</anchorfile>
-      <anchor>gacfd38acd9ecb27bff2bb2ad0f885e326</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr make_record_t</type>
-      <name>kumi::make_record</name>
-      <anchorfile>group__kumi__record__related.html</anchorfile>
-      <anchor>ga931b45076a3ac621c248efa48881b59a</anchor>
-      <arglist></arglist>
-    </member>
   </compound>
   <compound kind="group">
     <name>kumi_restructurings</name>
@@ -4464,13 +4359,6 @@
       <anchor>gaa93098695e1bc5a6db9572a70b5a2cd8</anchor>
       <arglist></arglist>
     </member>
-    <member kind="variable">
-      <type>constexpr make_array_t</type>
-      <name>kumi::make_array</name>
-      <anchorfile>group__kumi__forward__as__array.html</anchorfile>
-      <anchor>ga1f35cbd4396ea2b88d6c34f63c02c8c6</anchor>
-      <arglist></arglist>
-    </member>
   </compound>
   <compound kind="group">
     <name>kumi_forward_as_record</name>
@@ -4479,7 +4367,7 @@
     <member kind="variable">
       <type>constexpr forward_as_record_t&lt; Fields... &gt;</type>
       <name>kumi::forward_as_record</name>
-      <anchorfile>group__kumi__record__related.html</anchorfile>
+      <anchorfile>group__kumi__forward__as__record.html</anchorfile>
       <anchor>gacfd38acd9ecb27bff2bb2ad0f885e326</anchor>
       <arglist></arglist>
     </member>
@@ -4491,7 +4379,7 @@
     <member kind="variable">
       <type>constexpr forward_as_tuple_t</type>
       <name>kumi::forward_as_tuple</name>
-      <anchorfile>group__kumi__tie.html</anchorfile>
+      <anchorfile>group__kumi__forward__as__tuple.html</anchorfile>
       <anchor>ga934bd052835c7cc48a870fbc7c86e6ac</anchor>
       <arglist></arglist>
     </member>
@@ -4517,13 +4405,6 @@
       <name>kumi::from_record</name>
       <anchorfile>group__kumi__from__record.html</anchorfile>
       <anchor>gae4456196aadb75484ad0b061c83b3f95</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr to_record_t</type>
-      <name>kumi::to_record</name>
-      <anchorfile>group__kumi__from__record.html</anchorfile>
-      <anchor>ga163224b58e43457f4cbc65f6817d738f</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -5049,7 +4930,7 @@
     <member kind="variable">
       <type>constexpr make_array_t</type>
       <name>kumi::make_array</name>
-      <anchorfile>group__kumi__forward__as__array.html</anchorfile>
+      <anchorfile>group__kumi__make__array.html</anchorfile>
       <anchor>ga1f35cbd4396ea2b88d6c34f63c02c8c6</anchor>
       <arglist></arglist>
     </member>
@@ -5073,7 +4954,7 @@
     <member kind="variable">
       <type>constexpr make_record_t</type>
       <name>kumi::make_record</name>
-      <anchorfile>group__kumi__record__related.html</anchorfile>
+      <anchorfile>group__kumi__make__record.html</anchorfile>
       <anchor>ga931b45076a3ac621c248efa48881b59a</anchor>
       <arglist></arglist>
     </member>
@@ -5085,7 +4966,7 @@
     <member kind="variable">
       <type>constexpr make_tuple_t</type>
       <name>kumi::make_tuple</name>
-      <anchorfile>group__kumi__tie.html</anchorfile>
+      <anchorfile>group__kumi__make__tuple.html</anchorfile>
       <anchor>ga2a3a7b464afb602d8a722178ac517da8</anchor>
       <arglist></arglist>
     </member>
@@ -5183,13 +5064,6 @@
       <name>kumi::members_of</name>
       <anchorfile>group__kumi__members__of.html</anchorfile>
       <anchor>ga50426580ce9abca59b6a14b398b312ed</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr values_of_t</type>
-      <name>kumi::values_of</name>
-      <anchorfile>group__kumi__members__of.html</anchorfile>
-      <anchor>gaa217e07b135cc3295e25689ac4ac2933</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -5461,27 +5335,6 @@
       <anchor>ga79c564af50f6eb1c4aa6dac7f08337cf</anchor>
       <arglist></arglist>
     </member>
-    <member kind="variable">
-      <type>constexpr forward_as_tuple_t</type>
-      <name>kumi::forward_as_tuple</name>
-      <anchorfile>group__kumi__tie.html</anchorfile>
-      <anchor>ga934bd052835c7cc48a870fbc7c86e6ac</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr make_tuple_t</type>
-      <name>kumi::make_tuple</name>
-      <anchorfile>group__kumi__tie.html</anchorfile>
-      <anchor>ga2a3a7b464afb602d8a722178ac517da8</anchor>
-      <arglist></arglist>
-    </member>
-    <member kind="variable">
-      <type>constexpr to_ref_t</type>
-      <name>kumi::to_ref</name>
-      <anchorfile>group__kumi__tie.html</anchorfile>
-      <anchor>ga271223ada5937ca2e7ea77825b89b144</anchor>
-      <arglist></arglist>
-    </member>
   </compound>
   <compound kind="group">
     <name>kumi_tiles</name>
@@ -5514,7 +5367,7 @@
     <member kind="variable">
       <type>constexpr to_record_t</type>
       <name>kumi::to_record</name>
-      <anchorfile>group__kumi__from__record.html</anchorfile>
+      <anchorfile>group__kumi__to__record.html</anchorfile>
       <anchor>ga163224b58e43457f4cbc65f6817d738f</anchor>
       <arglist></arglist>
     </member>
@@ -5526,7 +5379,7 @@
     <member kind="variable">
       <type>constexpr to_ref_t</type>
       <name>kumi::to_ref</name>
-      <anchorfile>group__kumi__tie.html</anchorfile>
+      <anchorfile>group__kumi__to__ref.html</anchorfile>
       <anchor>ga271223ada5937ca2e7ea77825b89b144</anchor>
       <arglist></arglist>
     </member>
@@ -5574,7 +5427,7 @@
     <member kind="variable">
       <type>constexpr values_of_t</type>
       <name>kumi::values_of</name>
-      <anchorfile>group__kumi__members__of.html</anchorfile>
+      <anchorfile>group__kumi__values__of.html</anchorfile>
       <anchor>gaa217e07b135cc3295e25689ac4ac2933</anchor>
       <arglist></arglist>
     </member>

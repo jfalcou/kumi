@@ -132,6 +132,8 @@ $(function(){initNavTree('group__kumi__make__array.html','',''); });
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">kumi::make_array <div class="ingroups"><a class="el" href="group__kumi__array__related.html">Power Types and associated Functions</a></div></div></div>
 </div><!--header-->
 <div class="contents">
@@ -139,9 +141,9 @@ $(function(){initNavTree('group__kumi__make__array.html','',''); });
 <p>Creates a array object, deducing the target type from the types of arguments.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-member-group" class="groupheader"><a id="member-group" name="member-group"></a>
-array construction</h2></td></tr>
-<tr class="memitem:ga1f35cbd4396ea2b88d6c34f63c02c8c6" id="r_ga1f35cbd4396ea2b88d6c34f63c02c8c6"><td class="memItemLeft">constexpr make_array_t&#160;</td><td class="memItemRight"><a class="el" href="group__kumi__forward__as__array.html#ga1f35cbd4396ea2b88d6c34f63c02c8c6">kumi::make_array</a> {}</td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:ga1f35cbd4396ea2b88d6c34f63c02c8c6" id="r_ga1f35cbd4396ea2b88d6c34f63c02c8c6"><td class="memItemLeft">constexpr make_array_t&#160;</td><td class="memItemRight"><a class="el" href="#ga1f35cbd4396ea2b88d6c34f63c02c8c6">kumi::make_array</a> {}</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Creates a array object, deducing the target type from the types of arguments. </p>
@@ -171,9 +173,9 @@ array construction</h2></td></tr>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
 <div class="line">{</div>
 <div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="group__kumi__forward__as__array.html#ga1f35cbd4396ea2b88d6c34f63c02c8c6">make_array</a>(Ts&amp;&amp;... ts);</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga1f35cbd4396ea2b88d6c34f63c02c8c6">make_array</a>(Ts&amp;&amp;... ts);</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__kumi__forward__as__array_html_ga1f35cbd4396ea2b88d6c34f63c02c8c6"><div class="ttname"><a href="group__kumi__forward__as__array.html#ga1f35cbd4396ea2b88d6c34f63c02c8c6">kumi::make_array</a></div><div class="ttdeci">constexpr make_array_t make_array</div><div class="ttdef"><b>Definition</b> array.hpp:462</div></div>
+<div class="ttc" id="agroup__kumi__make__array_html_ga1f35cbd4396ea2b88d6c34f63c02c8c6"><div class="ttname"><a href="#ga1f35cbd4396ea2b88d6c34f63c02c8c6">kumi::make_array</a></div><div class="ttdeci">constexpr make_array_t make_array</div><div class="ttdef"><b>Definition</b> array.hpp:455</div></div>
 <div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
@@ -191,7 +193,7 @@ array construction</h2></td></tr>
 <div class="line"><span class="keywordtype">int</span> main()</div>
 <div class="line">{</div>
 <div class="line">  <span class="comment">// The element type is deduced from the (identical) types of the arguments.</span></div>
-<div class="line">  <span class="keyword">auto</span> a = <a class="code hl_variable" href="group__kumi__forward__as__array.html#ga1f35cbd4396ea2b88d6c34f63c02c8c6">kumi::make_array</a>( 1, 2, 3, 4 );</div>
+<div class="line">  <span class="keyword">auto</span> a = <a class="code hl_variable" href="#ga1f35cbd4396ea2b88d6c34f63c02c8c6">kumi::make_array</a>( 1, 2, 3, 4 );</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>

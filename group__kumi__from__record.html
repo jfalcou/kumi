@@ -132,6 +132,8 @@ $(function(){initNavTree('group__kumi__from__record.html','',''); });
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">kumi::from_record <div class="ingroups"><a class="el" href="group__kumi__record__related.html">Record Types and associated Functions</a></div></div></div>
 </div><!--header-->
 <div class="contents">
@@ -139,11 +141,10 @@ $(function(){initNavTree('group__kumi__from__record.html','',''); });
 <p>Converts a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> to an instance of an arbitrary type that models kumi::record_type.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-member-group" class="groupheader"><a id="member-group" name="member-group"></a>
-Record conversion</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
 <tr class="memitem:gae4456196aadb75484ad0b061c83b3f95" id="r_gae4456196aadb75484ad0b061c83b3f95"><td class="memTemplParams" colspan="2">template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1record__type.html">kumi::concepts::record_type</a> Type&gt; </td></tr>
 <tr class="memitem:gae4456196aadb75484ad0b061c83b3f95 template"><td class="memItemLeft">constexpr from_record_t&lt; Type &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gae4456196aadb75484ad0b061c83b3f95">kumi::from_record</a> {}</td></tr>
-<tr class="memitem:ga163224b58e43457f4cbc65f6817d738f" id="r_ga163224b58e43457f4cbc65f6817d738f"><td class="memItemLeft">constexpr to_record_t&#160;</td><td class="memItemRight"><a class="el" href="#ga163224b58e43457f4cbc65f6817d738f">kumi::to_record</a> {}</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Converts a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> to an instance of an arbitrary type that models kumi::record_type. </p>
@@ -178,7 +179,7 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1record__type.html">ku
 <div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Type, concepts::record_type R&gt;</div>
 <div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gae4456196aadb75484ad0b061c83b3f95">from_record</a>(R&amp;&amp; r);</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__kumi__from__record_html_gae4456196aadb75484ad0b061c83b3f95"><div class="ttname"><a href="#gae4456196aadb75484ad0b061c83b3f95">kumi::from_record</a></div><div class="ttdeci">constexpr from_record_t&lt; Type &gt; from_record</div><div class="ttdef"><b>Definition</b> record.hpp:717</div></div>
+<div class="ttc" id="agroup__kumi__from__record_html_gae4456196aadb75484ad0b061c83b3f95"><div class="ttname"><a href="#gae4456196aadb75484ad0b061c83b3f95">kumi::from_record</a></div><div class="ttdeci">constexpr from_record_t&lt; Type &gt; from_record</div><div class="ttdef"><b>Definition</b> record.hpp:699</div></div>
 <div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
@@ -237,7 +238,7 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1record__type.html">ku
 <div class="line">{</div>
 <div class="line">  <span class="keyword">using namespace </span>kumi::literals;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> a = <a class="code hl_variable" href="group__kumi__record__related.html#ga931b45076a3ac621c248efa48881b59a">kumi::make_record</a>(<span class="stringliteral">&quot;f&quot;</span>_id=2.3475f, <span class="stringliteral">&quot;name&quot;</span>_id=<span class="stringliteral">&quot;John&quot;</span>, <span class="stringliteral">&quot;i&quot;</span>_id=1337);</div>
+<div class="line">  <span class="keyword">auto</span> a = <a class="code hl_variable" href="group__kumi__make__record.html#ga931b45076a3ac621c248efa48881b59a">kumi::make_record</a>(<span class="stringliteral">&quot;f&quot;</span>_id=2.3475f, <span class="stringliteral">&quot;name&quot;</span>_id=<span class="stringliteral">&quot;John&quot;</span>, <span class="stringliteral">&quot;i&quot;</span>_id=1337);</div>
 <div class="line">  <span class="keyword">auto</span> b = <a class="code hl_variable" href="#gae4456196aadb75484ad0b061c83b3f95">kumi::from_record&lt;my_struct&gt;</a>( a );</div>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
@@ -245,99 +246,9 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1record__type.html">ku
 <div class="line">}</div>
 <div class="ttc" id="agroup__kumi__capture__field_html_gafc8e80ba53336a0142f3267959c1ba71"><div class="ttname"><a href="group__kumi__capture__field.html#gafc8e80ba53336a0142f3267959c1ba71">kumi::field::capture_field</a></div><div class="ttdeci">decltype(auto) constexpr capture_field(T &amp;&amp;t) noexcept</div><div class="ttdef"><b>Definition</b> field.hpp:283</div></div>
 <div class="ttc" id="agroup__kumi__is__record__type__v_html_ga75612200d87c3aa30f068205aa882e2a"><div class="ttname"><a href="group__kumi__is__record__type__v.html#ga75612200d87c3aa30f068205aa882e2a">kumi::is_record_type_v</a></div><div class="ttdeci">constexpr bool is_record_type_v</div><div class="ttdef"><b>Definition</b> traits.hpp:69</div></div>
-<div class="ttc" id="agroup__kumi__record__related_html_ga931b45076a3ac621c248efa48881b59a"><div class="ttname"><a href="group__kumi__record__related.html#ga931b45076a3ac621c248efa48881b59a">kumi::make_record</a></div><div class="ttdeci">constexpr make_record_t make_record</div><div class="ttdef"><b>Definition</b> record.hpp:627</div></div>
-<div class="ttc" id="astructkumi_1_1array_html_a2a236814b119c1e3e0b1cc5ce062c282"><div class="ttname"><a href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::array::get</a></div><div class="ttdeci">decltype(auto) constexpr get(array&lt; T, N &gt; &amp;t) noexcept</div><div class="ttdoc">Extracts the Ith element from a kumi::array.</div><div class="ttdef"><b>Definition</b> array.hpp:694</div></div>
+<div class="ttc" id="agroup__kumi__make__record_html_ga931b45076a3ac621c248efa48881b59a"><div class="ttname"><a href="group__kumi__make__record.html#ga931b45076a3ac621c248efa48881b59a">kumi::make_record</a></div><div class="ttdeci">constexpr make_record_t make_record</div><div class="ttdef"><b>Definition</b> record.hpp:620</div></div>
+<div class="ttc" id="astructkumi_1_1array_html_a2a236814b119c1e3e0b1cc5ce062c282"><div class="ttname"><a href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::array::get</a></div><div class="ttdeci">decltype(auto) constexpr get(array&lt; T, N &gt; &amp;t) noexcept</div><div class="ttdoc">Extracts the Ith element from a kumi::array.</div><div class="ttdef"><b>Definition</b> array.hpp:672</div></div>
 <div class="ttc" id="astructkumi_1_1name_html"><div class="ttname"><a href="structkumi_1_1name.html">kumi::name</a></div><div class="ttdoc">Compile-time text based identifier.</div><div class="ttdef"><b>Definition</b> identifier.hpp:165</div></div>
-</div><!-- fragment --> 
-</div>
-</div>
-<a id="ga163224b58e43457f4cbc65f6817d738f" name="ga163224b58e43457f4cbc65f6817d738f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga163224b58e43457f4cbc65f6817d738f">&#9670;&#160;</a></span>to_record</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">to_record_t kumi::to_record {}</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Constructs an instance of <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> from the elements of the <a class="el" href="conceptkumi_1_1concepts_1_1record__type.html" title="Concept specifying a type follows the Record Type semantic.">kumi::concepts::record_type</a> parameters</p>
-<h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
-</div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;concepts::record_type R&gt;</div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga163224b58e43457f4cbc65f6817d738f">to_record</a>(R&amp;&amp; r);</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__kumi__from__record_html_ga163224b58e43457f4cbc65f6817d738f"><div class="ttname"><a href="#ga163224b58e43457f4cbc65f6817d738f">kumi::to_record</a></div><div class="ttdeci">constexpr to_record_t to_record</div><div class="ttdef"><b>Definition</b> record.hpp:782</div></div>
-</div><!-- fragment --><h3 class="groupheader">Parameters </h3>
-<ul>
-<li><span class="tt">r</span>: <a class="el" href="conceptkumi_1_1concepts_1_1record__type.html" title="Concept specifying a type follows the Record Type semantic.">kumi::concepts::record_type</a> to convert</li>
-</ul>
-<h3 class="groupheader">Return value </h3>
-<ul>
-<li>An instance of <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> constructed from each element of <span class="tt">r</span> in order.</li>
-</ul>
-<h2 class="groupheader">Example </h2>
-<div class="fragment"><div class="line"></div>
-<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;cstdint&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;type_traits&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;utility&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">using namespace </span>kumi::literals;</div>
-<div class="line"><span class="keyword">struct </span>pixel</div>
-<div class="line">{</div>
-<div class="line">  <span class="keywordtype">int</span> r, g, b;</div>
-<div class="line">};</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">template</span>&lt;kumi::concepts::<span class="keywordtype">id</span>entifier auto ID&gt;</div>
-<div class="line"><span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">get</a>(pixel <span class="keyword">const</span>&amp; p) <span class="keyword">noexcept</span></div>
-<div class="line">{</div>
-<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(ID == <span class="stringliteral">&quot;r&quot;</span>_id) <span class="keywordflow">return</span> p.r;</div>
-<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(ID == <span class="stringliteral">&quot;g&quot;</span>_id) <span class="keywordflow">return</span> p.g;</div>
-<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(ID == <span class="stringliteral">&quot;b&quot;</span>_id) <span class="keywordflow">return</span> p.b;</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">template</span>&lt;kumi::concepts::<span class="keywordtype">id</span>entifier auto ID&gt;</div>
-<div class="line"><span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">get</a>(pixel&amp; p) <span class="keyword">noexcept</span></div>
-<div class="line">{</div>
-<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(ID == <span class="stringliteral">&quot;r&quot;</span>_id) <span class="keywordflow">return</span> p.r;</div>
-<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(ID == <span class="stringliteral">&quot;g&quot;</span>_id) <span class="keywordflow">return</span> p.g;</div>
-<div class="line">  <span class="keywordflow">if</span> <span class="keyword">constexpr</span>(ID == <span class="stringliteral">&quot;b&quot;</span>_id) <span class="keywordflow">return</span> p.b;</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Opt-in for Record Type semantic</span></div>
-<div class="line"><span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><span class="keyword">inline</span> <span class="keyword">constexpr</span> <span class="keywordtype">bool</span> <a class="code hl_variable" href="group__kumi__is__record__type__v.html#ga75612200d87c3aa30f068205aa882e2a">kumi::is_record_type_v&lt;pixel&gt;</a> = <span class="keyword">true</span>;</div>
-<div class="line"> </div>
-<div class="line"><span class="comment">// Adapt as structured bindable type</span></div>
-<div class="line"><span class="keyword">template</span>&lt;&gt;</div>
-<div class="line"><span class="keyword">struct  </span>std::tuple_size&lt;pixel&gt; : std::integral_constant&lt;std::size_t,3&gt; </div>
-<div class="line">{};</div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">template</span>&lt;&gt; <span class="keyword">struct </span>std::tuple_element&lt;0,pixel&gt; { <span class="keyword">using </span>type = kumi::field&lt;kumi::name&lt;<span class="stringliteral">&quot;r&quot;</span>&gt;, <span class="keywordtype">int</span>&gt;; };</div>
-<div class="line"><span class="keyword">template</span>&lt;&gt; <span class="keyword">struct </span>std::tuple_element&lt;1,pixel&gt; { <span class="keyword">using </span>type = kumi::field&lt;kumi::name&lt;<span class="stringliteral">&quot;g&quot;</span>&gt;, <span class="keywordtype">int</span>&gt;; };</div>
-<div class="line"><span class="keyword">template</span>&lt;&gt; <span class="keyword">struct </span>std::tuple_element&lt;2,pixel&gt; { <span class="keyword">using </span>type = kumi::field&lt;kumi::name&lt;<span class="stringliteral">&quot;b&quot;</span>&gt;, <span class="keywordtype">int</span>&gt;; };</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line">  pixel a = { 37, 15, 27 };</div>
-<div class="line">  <span class="keyword">auto</span> b = <a class="code hl_variable" href="#ga163224b58e43457f4cbc65f6817d738f">kumi::to_record</a>(a);</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; b &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">}</div>
 </div><!-- fragment --> 
 </div>
 </div>

@@ -224,7 +224,7 @@ template&lt;std::size_t N&gt; </div>
 <div class="line">  },w);</div>
 <div class="line">  std::cout &lt;&lt; t &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> w2 = <a class="code hl_variable" href="#gade96292292ae11da69415a778ef45ad0">kumi::windows&lt;3&gt;</a>(<a class="code hl_variable" href="group__kumi__tie.html#ga271223ada5937ca2e7ea77825b89b144">kumi::to_ref</a>(t)); </div>
+<div class="line">  <span class="keyword">auto</span> w2 = <a class="code hl_variable" href="#gade96292292ae11da69415a778ef45ad0">kumi::windows&lt;3&gt;</a>(<a class="code hl_variable" href="group__kumi__to__ref.html#ga271223ada5937ca2e7ea77825b89b144">kumi::to_ref</a>(t)); </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;  Windows with references &quot;</span> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; w2 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
@@ -235,7 +235,7 @@ template&lt;std::size_t N&gt; </div>
 <div class="line">  std::cout &lt;&lt; t &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;   </div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__kumi__for__each_html_ga58c4bb5e62083b4b37396d39c6446164"><div class="ttname"><a href="group__kumi__for__each.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a></div><div class="ttdeci">constexpr for_each_t for_each</div><div class="ttdef"><b>Definition</b> for_each.hpp:141</div></div>
-<div class="ttc" id="agroup__kumi__tie_html_ga271223ada5937ca2e7ea77825b89b144"><div class="ttname"><a href="group__kumi__tie.html#ga271223ada5937ca2e7ea77825b89b144">kumi::to_ref</a></div><div class="ttdeci">constexpr to_ref_t to_ref</div><div class="ttdef"><b>Definition</b> tuple.hpp:729</div></div>
+<div class="ttc" id="agroup__kumi__to__ref_html_ga271223ada5937ca2e7ea77825b89b144"><div class="ttname"><a href="group__kumi__to__ref.html#ga271223ada5937ca2e7ea77825b89b144">kumi::to_ref</a></div><div class="ttdeci">constexpr to_ref_t to_ref</div><div class="ttdef"><b>Definition</b> tuple.hpp:722</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:35</div></div>
 </div><!-- fragment --></li>
 <li><b class="tab-title">Record</b> <div class="fragment"><div class="line"></div>
@@ -255,22 +255,22 @@ template&lt;std::size_t N&gt; </div>
 <div class="line"> </div>
 <div class="line">  <a class="code hl_variable" href="group__kumi__for__each.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
 <div class="line">  {</div>
-<div class="line">    <a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">get&lt;0&gt;</a>(<a class="code hl_variable" href="group__kumi__members__of.html#gaa217e07b135cc3295e25689ac4ac2933">kumi::values_of</a>(tile))++;</div>
+<div class="line">    <a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">get&lt;0&gt;</a>(<a class="code hl_variable" href="group__kumi__values__of.html#gaa217e07b135cc3295e25689ac4ac2933">kumi::values_of</a>(tile))++;</div>
 <div class="line">  },w);</div>
 <div class="line">  std::cout &lt;&lt; r &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
-<div class="line">  <span class="keyword">auto</span> w2 = <a class="code hl_variable" href="#gade96292292ae11da69415a778ef45ad0">kumi::windows&lt;3&gt;</a>(<a class="code hl_variable" href="group__kumi__tie.html#ga271223ada5937ca2e7ea77825b89b144">kumi::to_ref</a>(r)); </div>
+<div class="line">  <span class="keyword">auto</span> w2 = <a class="code hl_variable" href="#gade96292292ae11da69415a778ef45ad0">kumi::windows&lt;3&gt;</a>(<a class="code hl_variable" href="group__kumi__to__ref.html#ga271223ada5937ca2e7ea77825b89b144">kumi::to_ref</a>(r)); </div>
 <div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;  Windows with references &quot;</span> &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; w2 &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line"> </div>
 <div class="line">  <a class="code hl_variable" href="group__kumi__for__each.html#ga58c4bb5e62083b4b37396d39c6446164">kumi::for_each</a>([&amp;](<span class="keyword">auto</span> tile)</div>
 <div class="line">  {</div>
-<div class="line">    <a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">get&lt;0&gt;</a>(<a class="code hl_variable" href="group__kumi__members__of.html#gaa217e07b135cc3295e25689ac4ac2933">kumi::values_of</a>(tile))++;</div>
+<div class="line">    <a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">get&lt;0&gt;</a>(<a class="code hl_variable" href="group__kumi__values__of.html#gaa217e07b135cc3295e25689ac4ac2933">kumi::values_of</a>(tile))++;</div>
 <div class="line">  },w2);</div>
 <div class="line">  std::cout &lt;&lt; r &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;   </div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__kumi__members__of_html_gaa217e07b135cc3295e25689ac4ac2933"><div class="ttname"><a href="group__kumi__members__of.html#gaa217e07b135cc3295e25689ac4ac2933">kumi::values_of</a></div><div class="ttdeci">constexpr values_of_t values_of</div><div class="ttdef"><b>Definition</b> tuple.hpp:1075</div></div>
-<div class="ttc" id="astructkumi_1_1array_html_a2a236814b119c1e3e0b1cc5ce062c282"><div class="ttname"><a href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::array::get</a></div><div class="ttdeci">decltype(auto) constexpr get(array&lt; T, N &gt; &amp;t) noexcept</div><div class="ttdoc">Extracts the Ith element from a kumi::array.</div><div class="ttdef"><b>Definition</b> array.hpp:694</div></div>
+<div class="ttc" id="agroup__kumi__values__of_html_gaa217e07b135cc3295e25689ac4ac2933"><div class="ttname"><a href="group__kumi__values__of.html#gaa217e07b135cc3295e25689ac4ac2933">kumi::values_of</a></div><div class="ttdeci">constexpr values_of_t values_of</div><div class="ttdef"><b>Definition</b> tuple.hpp:1048</div></div>
+<div class="ttc" id="astructkumi_1_1array_html_a2a236814b119c1e3e0b1cc5ce062c282"><div class="ttname"><a href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::array::get</a></div><div class="ttdeci">decltype(auto) constexpr get(array&lt; T, N &gt; &amp;t) noexcept</div><div class="ttdoc">Extracts the Ith element from a kumi::array.</div><div class="ttdef"><b>Definition</b> array.hpp:672</div></div>
 <div class="ttc" id="astructkumi_1_1record_html"><div class="ttname"><a href="structkumi_1_1record.html">kumi::record</a></div><div class="ttdoc">Fixed-size collection of heterogeneous tagged fields, tags are unique.</div><div class="ttdef"><b>Definition</b> record.hpp:36</div></div>
 </div><!-- fragment --></li>
 </ul>

@@ -132,6 +132,8 @@ $(function(){initNavTree('group__kumi__forward__as__array.html','',''); });
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">kumi::forward_as_array <div class="ingroups"><a class="el" href="group__kumi__array__related.html">Power Types and associated Functions</a></div></div></div>
 </div><!--header-->
 <div class="contents">
@@ -139,10 +141,9 @@ $(function(){initNavTree('group__kumi__forward__as__array.html','',''); });
 <p>Creates a <a class="el" href="structkumi_1_1array.html" title="Fixed-size collection of homogeneous values.">kumi::array</a> of forwarding references to its arguments.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-member-group" class="groupheader"><a id="member-group" name="member-group"></a>
-array construction</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
 <tr class="memitem:gaa93098695e1bc5a6db9572a70b5a2cd8" id="r_gaa93098695e1bc5a6db9572a70b5a2cd8"><td class="memItemLeft">constexpr forward_as_array_t&#160;</td><td class="memItemRight"><a class="el" href="#gaa93098695e1bc5a6db9572a70b5a2cd8">kumi::forward_as_array</a> {}</td></tr>
-<tr class="memitem:ga1f35cbd4396ea2b88d6c34f63c02c8c6" id="r_ga1f35cbd4396ea2b88d6c34f63c02c8c6"><td class="memItemLeft">constexpr make_array_t&#160;</td><td class="memItemRight"><a class="el" href="#ga1f35cbd4396ea2b88d6c34f63c02c8c6">kumi::make_array</a> {}</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Creates a <a class="el" href="structkumi_1_1array.html" title="Fixed-size collection of homogeneous values.">kumi::array</a> of forwarding references to its arguments. </p>
@@ -176,7 +177,7 @@ array construction</h2></td></tr>
 <div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
 <div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#gaa93098695e1bc5a6db9572a70b5a2cd8">forward_as_array</a>(Ts&amp;&amp;... ts);</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__kumi__forward__as__array_html_gaa93098695e1bc5a6db9572a70b5a2cd8"><div class="ttname"><a href="#gaa93098695e1bc5a6db9572a70b5a2cd8">kumi::forward_as_array</a></div><div class="ttdeci">constexpr forward_as_array_t forward_as_array</div><div class="ttdef"><b>Definition</b> array.hpp:404</div></div>
+<div class="ttc" id="agroup__kumi__forward__as__array_html_gaa93098695e1bc5a6db9572a70b5a2cd8"><div class="ttname"><a href="#gaa93098695e1bc5a6db9572a70b5a2cd8">kumi::forward_as_array</a></div><div class="ttdeci">constexpr forward_as_array_t forward_as_array</div><div class="ttdef"><b>Definition</b> array.hpp:397</div></div>
 <div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
@@ -209,58 +210,7 @@ array construction</h2></td></tr>
 <div class="line">  std::cout &lt;&lt; sum(arr) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
 <div class="ttc" id="agroup__kumi__sum_html_ga3e8b585399de360c3ab55efc2fa0ed8c"><div class="ttname"><a href="group__kumi__sum.html#ga3e8b585399de360c3ab55efc2fa0ed8c">kumi::sum</a></div><div class="ttdeci">constexpr sum_t sum</div><div class="ttdef"><b>Definition</b> reduce.hpp:376</div></div>
-<div class="ttc" id="astructkumi_1_1array_html_a2a236814b119c1e3e0b1cc5ce062c282"><div class="ttname"><a href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::array::get</a></div><div class="ttdeci">decltype(auto) constexpr get(array&lt; T, N &gt; &amp;t) noexcept</div><div class="ttdoc">Extracts the Ith element from a kumi::array.</div><div class="ttdef"><b>Definition</b> array.hpp:694</div></div>
-</div><!-- fragment --> 
-</div>
-</div>
-<a id="ga1f35cbd4396ea2b88d6c34f63c02c8c6" name="ga1f35cbd4396ea2b88d6c34f63c02c8c6"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga1f35cbd4396ea2b88d6c34f63c02c8c6">&#9670;&#160;</a></span>make_array</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">make_array_t kumi::make_array {}</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
-</div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga1f35cbd4396ea2b88d6c34f63c02c8c6">make_array</a>(Ts&amp;&amp;... ts);</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__kumi__forward__as__array_html_ga1f35cbd4396ea2b88d6c34f63c02c8c6"><div class="ttname"><a href="#ga1f35cbd4396ea2b88d6c34f63c02c8c6">kumi::make_array</a></div><div class="ttdeci">constexpr make_array_t make_array</div><div class="ttdef"><b>Definition</b> array.hpp:462</div></div>
-</div><!-- fragment --><h3 class="groupheader">Parameters </h3>
-<ul>
-<li><span class="tt">ts</span>: Zero or more arguments to construct the array from.</li>
-</ul>
-<h3 class="groupheader">Return value </h3>
-<ul>
-<li>A <a class="el" href="structkumi_1_1array.html" title="Fixed-size collection of homogeneous values.">kumi::array</a> constructed from the arguments or their inner references when an argument is an instance of <span class="tt">std::reference_wrapper</span>.</li>
-</ul>
-<h2 class="groupheader">Example </h2>
-<div class="fragment"><div class="line"></div>
-<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line">  <span class="comment">// The element type is deduced from the (identical) types of the arguments.</span></div>
-<div class="line">  <span class="keyword">auto</span> a = <a class="code hl_variable" href="#ga1f35cbd4396ea2b88d6c34f63c02c8c6">kumi::make_array</a>( 1, 2, 3, 4 );</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">}</div>
+<div class="ttc" id="astructkumi_1_1array_html_a2a236814b119c1e3e0b1cc5ce062c282"><div class="ttname"><a href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::array::get</a></div><div class="ttdeci">decltype(auto) constexpr get(array&lt; T, N &gt; &amp;t) noexcept</div><div class="ttdoc">Extracts the Ith element from a kumi::array.</div><div class="ttdef"><b>Definition</b> array.hpp:672</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

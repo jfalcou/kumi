@@ -132,6 +132,8 @@ $(function(){initNavTree('group__kumi__tie.html','',''); });
 </div>
 
 <div class="header">
+  <div class="summary">
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">kumi::tie <div class="ingroups"><a class="el" href="group__kumi__tuple__related.html">Tuple Types and associated Functions</a></div></div></div>
 </div><!--header-->
 <div class="contents">
@@ -139,137 +141,13 @@ $(function(){initNavTree('group__kumi__tie.html','',''); });
 <p>Creates a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> of lvalue references to its arguments.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-member-group" class="groupheader"><a id="member-group" name="member-group"></a>
-Tuple construction</h2></td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
 <tr class="memitem:ga79c564af50f6eb1c4aa6dac7f08337cf" id="r_ga79c564af50f6eb1c4aa6dac7f08337cf"><td class="memItemLeft">constexpr tie_t&#160;</td><td class="memItemRight"><a class="el" href="#ga79c564af50f6eb1c4aa6dac7f08337cf">kumi::tie</a> {}</td></tr>
-<tr class="memitem:ga934bd052835c7cc48a870fbc7c86e6ac" id="r_ga934bd052835c7cc48a870fbc7c86e6ac"><td class="memItemLeft">constexpr forward_as_tuple_t&#160;</td><td class="memItemRight"><a class="el" href="#ga934bd052835c7cc48a870fbc7c86e6ac">kumi::forward_as_tuple</a> {}</td></tr>
-<tr class="memitem:ga2a3a7b464afb602d8a722178ac517da8" id="r_ga2a3a7b464afb602d8a722178ac517da8"><td class="memItemLeft">constexpr make_tuple_t&#160;</td><td class="memItemRight"><a class="el" href="#ga2a3a7b464afb602d8a722178ac517da8">kumi::make_tuple</a> {}</td></tr>
-<tr class="memitem:ga271223ada5937ca2e7ea77825b89b144" id="r_ga271223ada5937ca2e7ea77825b89b144"><td class="memItemLeft">constexpr to_ref_t&#160;</td><td class="memItemRight"><a class="el" href="#ga271223ada5937ca2e7ea77825b89b144">kumi::to_ref</a> {}</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Creates a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> of lvalue references to its arguments. </p>
 </div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
-<a id="ga934bd052835c7cc48a870fbc7c86e6ac" name="ga934bd052835c7cc48a870fbc7c86e6ac"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga934bd052835c7cc48a870fbc7c86e6ac">&#9670;&#160;</a></span>forward_as_tuple</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">forward_as_tuple_t kumi::forward_as_tuple {}</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>Constructs a tuple of references to the arguments in ts suitable for forwarding as an argument to a function. The tuple has rvalue reference data members when rvalues are used as arguments, and otherwise has lvalue reference data members.</p>
-<dl class="section note"><dt>Note</dt><dd>If the arguments are temporaries, <span class="tt"><a class="el" href="#ga934bd052835c7cc48a870fbc7c86e6ac">forward_as_tuple</a></span> does not extend their lifetime; they have to be used before the end of the full expression.</dd></dl>
-<h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
-</div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga934bd052835c7cc48a870fbc7c86e6ac">forward_as_tuple</a>(Ts&amp;&amp;... ts);</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__kumi__tie_html_ga934bd052835c7cc48a870fbc7c86e6ac"><div class="ttname"><a href="#ga934bd052835c7cc48a870fbc7c86e6ac">kumi::forward_as_tuple</a></div><div class="ttdeci">constexpr forward_as_tuple_t forward_as_tuple</div><div class="ttdef"><b>Definition</b> tuple.hpp:607</div></div>
-<div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
-</div><!-- fragment --><h3 class="groupheader">Parameters </h3>
-<ul>
-<li><span class="tt">ts</span>: Zero or more arguments to construct the tuple from.</li>
-</ul>
-<h3 class="groupheader">Return value </h3>
-<ul>
-<li>A <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> constructed as <span class="tt"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>&lt;Ts&amp;&amp;...&gt;(std::forward&lt;Ts&gt;(ts)...)</span></li>
-</ul>
-<h2 class="groupheader">Example </h2>
-<div class="fragment"><div class="line"></div>
-<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;vector&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> Data&gt;</div>
-<div class="line">std::vector&lt;std::string&gt; build(Data d)</div>
-<div class="line">{</div>
-<div class="line">  <span class="keywordflow">return</span> std::vector&lt;std::string&gt; ( <a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;0&gt;</a>(d)</div>
-<div class="line">                                  , std::move(<a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;1&gt;</a>(d))</div>
-<div class="line">                                  );</div>
-<div class="line">}</div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> v = build( <a class="code hl_variable" href="#ga934bd052835c7cc48a870fbc7c86e6ac">kumi::forward_as_tuple</a>(4,std::string{<span class="stringliteral">&quot;the text !&quot;</span>}));</div>
-<div class="line"> </div>
-<div class="line">  <span class="keywordflow">for</span>(<span class="keyword">auto</span> <span class="keyword">const</span>&amp; s : v)</div>
-<div class="line">    std::cout &lt;&lt; s &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1array_html_a2a236814b119c1e3e0b1cc5ce062c282"><div class="ttname"><a href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::array::get</a></div><div class="ttdeci">decltype(auto) constexpr get(array&lt; T, N &gt; &amp;t) noexcept</div><div class="ttdoc">Extracts the Ith element from a kumi::array.</div><div class="ttdef"><b>Definition</b> array.hpp:694</div></div>
-</div><!-- fragment --> 
-</div>
-</div>
-<a id="ga2a3a7b464afb602d8a722178ac517da8" name="ga2a3a7b464afb602d8a722178ac517da8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga2a3a7b464afb602d8a722178ac517da8">&#9670;&#160;</a></span>make_tuple</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">make_tuple_t kumi::make_tuple {}</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
-</div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga2a3a7b464afb602d8a722178ac517da8">make_tuple</a>(Ts&amp;&amp;... ts);</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__kumi__tie_html_ga2a3a7b464afb602d8a722178ac517da8"><div class="ttname"><a href="#ga2a3a7b464afb602d8a722178ac517da8">kumi::make_tuple</a></div><div class="ttdeci">constexpr make_tuple_t make_tuple</div><div class="ttdef"><b>Definition</b> tuple.hpp:662</div></div>
-</div><!-- fragment --><h3 class="groupheader">Parameters </h3>
-<ul>
-<li><span class="tt">ts</span>: Zero or more arguments to construct the tuple from.</li>
-</ul>
-<h3 class="groupheader">Return value </h3>
-<ul>
-<li>A <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> constructed from the arguments or their inner references when an argument is an instance of <span class="tt">std::reference_wrapper</span>.</li>
-</ul>
-<h2 class="groupheader">Example </h2>
-<div class="fragment"><div class="line"></div>
-<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;functional&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"> </div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line">  <span class="keywordtype">int</span> k = 99;</div>
-<div class="line">  <span class="keyword">auto</span> t = <a class="code hl_variable" href="#ga2a3a7b464afb602d8a722178ac517da8">kumi::make_tuple</a>( 1, 2.3, 4.5f, <span class="charliteral">&#39;@&#39;</span>, std::ref(k));</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; t &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">  <span class="comment">// Reference access</span></div>
-<div class="line">  <a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">get&lt;4&gt;</a>(t)++;</div>
-<div class="line">  std::cout &lt;&lt; k &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">}</div>
-</div><!-- fragment --> 
-</div>
-</div>
 <a id="ga79c564af50f6eb1c4aa6dac7f08337cf" name="ga79c564af50f6eb1c4aa6dac7f08337cf"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#ga79c564af50f6eb1c4aa6dac7f08337cf">&#9670;&#160;</a></span>tie</h2>
 
@@ -297,7 +175,8 @@ Tuple construction</h2></td></tr>
 <div class="line">  <span class="keyword">template</span>&lt;<span class="keyword">typename</span>... Ts&gt;</div>
 <div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga79c564af50f6eb1c4aa6dac7f08337cf">tie</a>(Ts&amp;... ts);</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__kumi__tie_html_ga79c564af50f6eb1c4aa6dac7f08337cf"><div class="ttname"><a href="#ga79c564af50f6eb1c4aa6dac7f08337cf">kumi::tie</a></div><div class="ttdeci">constexpr tie_t tie</div><div class="ttdef"><b>Definition</b> tuple.hpp:547</div></div>
+<div class="ttc" id="agroup__kumi__tie_html_ga79c564af50f6eb1c4aa6dac7f08337cf"><div class="ttname"><a href="#ga79c564af50f6eb1c4aa6dac7f08337cf">kumi::tie</a></div><div class="ttdeci">constexpr tie_t tie</div><div class="ttdef"><b>Definition</b> tuple.hpp:540</div></div>
+<div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">ts</span>: Zero or more lvalue arguments to construct the tuple from.</li>
@@ -328,63 +207,6 @@ Tuple construction</h2></td></tr>
 <div class="line">}</div>
 <div class="ttc" id="agroup__kumi__generate_html_gaba2efbda8df6baaccd4e35343d70163f"><div class="ttname"><a href="group__kumi__generate.html#gaba2efbda8df6baaccd4e35343d70163f">kumi::generate</a></div><div class="ttdeci">constexpr generate_t&lt; N &gt; generate</div><div class="ttdef"><b>Definition</b> generate.hpp:105</div></div>
 <div class="ttc" id="astructkumi_1_1tuple_html"><div class="ttname"><a href="structkumi_1_1tuple.html">kumi::tuple</a></div><div class="ttdoc">Fixed-size collection of heterogeneous values.</div><div class="ttdef"><b>Definition</b> tuple.hpp:35</div></div>
-</div><!-- fragment --> 
-</div>
-</div>
-<a id="ga271223ada5937ca2e7ea77825b89b144" name="ga271223ada5937ca2e7ea77825b89b144"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga271223ada5937ca2e7ea77825b89b144">&#9670;&#160;</a></span>to_ref</h2>
-
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">to_ref_t kumi::to_ref {}</td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel inline">inline</span><span class="mlabel constexpr">constexpr</span><span class="mlabel noexcept">noexcept</span><span class="mlabel nodiscard">nodiscard</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-<p>If the input type matches the <a class="el" href="conceptkumi_1_1concepts_1_1record__type.html" title="Concept specifying a type follows the Record Type semantic.">kumi::concepts::record_type</a> protocol, return a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>, returns a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> otherwise.</p>
-<h2 class="groupheader">Header file </h2>
-<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
-</div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
-<div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;concepts::product_type T&gt;</div>
-<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">decltype</span>(<span class="keyword">auto</span>) <a class="code hl_variable" href="#ga271223ada5937ca2e7ea77825b89b144">to_ref</a>(T &amp;&amp; t) <span class="keyword">noexcept</span>;</div>
-<div class="line">}</div>
-<div class="ttc" id="agroup__kumi__tie_html_ga271223ada5937ca2e7ea77825b89b144"><div class="ttname"><a href="#ga271223ada5937ca2e7ea77825b89b144">kumi::to_ref</a></div><div class="ttdeci">constexpr to_ref_t to_ref</div><div class="ttdef"><b>Definition</b> tuple.hpp:729</div></div>
-</div><!-- fragment --><h3 class="groupheader">Parameters </h3>
-<ul>
-<li><span class="tt">t</span>: Product Type whose elements are to be referenced.</li>
-</ul>
-<h3 class="groupheader">Return value </h3>
-<ul>
-<li>A <a class="el" href="conceptkumi_1_1concepts_1_1product__type.html" title="Concept specifying a type follows the Product Type semantic.">kumi::concepts::product_type</a> with each element being a reference to the corresponding element in the input.</li>
-</ul>
-<h2 class="groupheader">Examples </h2>
-<div class="fragment"><div class="line"></div>
-<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
-<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
-<div class="line"><span class="keywordtype">int</span> main()</div>
-<div class="line">{</div>
-<div class="line">  <span class="keyword">auto</span> original = <a class="code hl_variable" href="#ga2a3a7b464afb602d8a722178ac517da8">kumi::make_tuple</a>(0,<span class="charliteral">&#39;0&#39;</span>,0.f);</div>
-<div class="line">  <span class="keyword">auto</span> ref      = <a class="code hl_variable" href="#ga271223ada5937ca2e7ea77825b89b144">kumi::to_ref</a>( original );</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; original &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line"> </div>
-<div class="line">  <a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;0&gt;</a>(ref) = 9;</div>
-<div class="line">  <a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;1&gt;</a>(ref) = <span class="charliteral">&#39;z&#39;</span>;</div>
-<div class="line">  <a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::get&lt;2&gt;</a>(ref) = 3.14159f;</div>
-<div class="line"> </div>
-<div class="line">  std::cout &lt;&lt; original &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
-<div class="line">}</div>
 </div><!-- fragment --> 
 </div>
 </div>
