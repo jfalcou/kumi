@@ -30,7 +30,7 @@ namespace kumi
     //! @brief Wrapped type
     using type = T;
 
-    constexpr as() noexcept {}
+    constexpr as() noexcept = default;
 
     explicit constexpr as(T const&) noexcept {}
 
@@ -41,6 +41,6 @@ namespace kumi
   {
     using type = void;
 
-    constexpr as() noexcept {}
+    constexpr as() noexcept = default;
   };
 }

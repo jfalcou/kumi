@@ -13,16 +13,20 @@
 //======================================================================================================================
 namespace kumi::_
 {
-  template<std::size_t I, typename T> extern kumi::_::undefined<T> tuple_element;
+  template<std::size_t I, typename T>
+  extern kumi::_::undefined<T> tuple_element; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
   template<template<class...> class Box, typename Head, typename... Tail>
-  extern std::type_identity<Head> tuple_element<0, Box<Head, Tail...>>;
+  extern std::type_identity<Head>
+    tuple_element<0, Box<Head, Tail...>>; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
   template<std::size_t I, template<class...> typename Box, typename Head, typename... Tail>
-  extern decltype(kumi::_::tuple_element<I - 1, Box<Tail...>>) tuple_element<I, Box<Head, Tail...>>;
+  extern decltype(kumi::_::tuple_element<I - 1, Box<Tail...>>)
+    tuple_element<I, Box<Head, Tail...>>; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
   template<std::size_t I, template<class...> typename Box, typename... Ts>
-  extern decltype(kumi::_::tuple_element<I, Box<Ts...>>) const tuple_element<I, Box<Ts...> const>;
+  extern decltype(kumi::_::tuple_element<I, Box<Ts...>>)
+    const tuple_element<I, Box<Ts...> const>; // NOSONAR - S5421: Extern template partial specialization cannot be const
 }
 
 //======================================================================================================================

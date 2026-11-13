@@ -14,7 +14,9 @@ int sum(Data d)
 
 int main()
 {
-  int a = 1, b = 2, c = 3;
+  int a = 1;
+  int b = 2;
+  int c = 3;
 
   // forward_as_array builds an array of references, here an array<int&, 3>.
   auto arr = kumi::forward_as_array(a, b, c);

@@ -22,7 +22,7 @@ namespace kumi
     KUMI_HIDDEN_ABI constexpr auto cartesian_product_(
       kumi::_::adl_tag_t, T&& t, Sizes s, Elts e, Strides st, std::index_sequence<I...>)
     {
-      return kumi::make_tuple(cartesian_element_<I>(kumi::_::adl_tag, t, s, e, st)...);
+      return kumi::make_tuple(cartesian_element_<I>(kumi::_::adl_tag, KUMI_FWD(t), s, e, st)...);
     }
   }
 

@@ -11,7 +11,8 @@ namespace kumi
 {
   namespace _
   {
-    template<std::size_t I, typename T> extern std::size_t value_at;
+    template<std::size_t I, typename T>
+    extern std::size_t value_at; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
     template<std::size_t I, auto Head, auto... Tail>
     inline constexpr auto value_at<I, kumi::projection_map<Head, Tail...>> =

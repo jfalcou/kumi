@@ -187,7 +187,8 @@ namespace kumi
            ADL and does not participate in overload resolution if an element is not swappable.
     **/
     //==================================================================================================================
-    KUMI_ABI friend constexpr void swap(array& a, array& b) noexcept(std::is_nothrow_swappable_v<T>)
+    KUMI_ABI friend constexpr void swap(array& a, array& b) noexcept(
+      std::is_nothrow_swappable_v<T>) // NOSONAR - S5018: Swap intentionally omits noexcept when elements may throw
     requires(std::is_swappable_v<T>)
     {
       kumi::_::swap(a, b, std::make_index_sequence<N>{});
@@ -287,14 +288,14 @@ namespace kumi
     KUMI_ABI friend constexpr void swap(array<T, 0>&, array<T, 0>&) noexcept {}
 
     template<typename U>
-    [[nodiscard]] KUMI_ABI constexpr operator U() const noexcept
+    [[nodiscard]] KUMI_ABI constexpr explicit(false) operator U() const noexcept
     requires(kumi::concepts::unit_type<U>)
     {
       return {};
     }
 
     template<typename U>
-    [[nodiscard]] KUMI_ABI constexpr operator U() noexcept
+    [[nodiscard]] KUMI_ABI constexpr explicit(false) operator U() noexcept
     requires(kumi::concepts::unit_type<U>)
     {
       return {};
@@ -736,15 +737,17 @@ namespace kumi
 
   namespace _
   {
-    template<typename... Us> extern kumi::tuple<Us...> array_result;
+    template<typename... Us>
+    extern kumi::tuple<Us...> array_result; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
     template<typename... Ts>
     requires(sizeof...(Ts) == 0)
-    extern kumi::array<> array_result<Ts...>;
+    extern kumi::array<> array_result<Ts...>; // NOSONAR - S5421: Extern template partial specialization cannot be const
 
     template<typename U, typename... Us>
     requires(kumi::_::all_the_same<U, Us...>)
-    extern kumi::array<U, sizeof...(Us) + 1> array_result<U, Us...>;
+    extern kumi::array<U, sizeof...(Us) + 1>
+      array_result<U, Us...>; // NOSONAR - S5421: Extern template partial specialization cannot be const
   }
 
   template<kumi::concepts::power_type T> struct builder<T>

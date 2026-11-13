@@ -11,7 +11,9 @@
 
 struct pixel
 {
-  int r, g, b;
+  int r;
+  int g;
+  int b;
 };
 
 template<std::size_t I>

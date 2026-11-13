@@ -33,7 +33,7 @@ namespace kumi
     template<typename T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T const& v) const noexcept
     {
       if constexpr (N == 0) return kumi::tuple{};
-      else return generate_(kumi::_::adl_tag, [&](auto) { return v; }, std::make_index_sequence<N>{});
+      else return generate_(kumi::_::adl_tag, [&v](auto) { return v; }, std::make_index_sequence<N>{});
     }
   };
 
@@ -44,7 +44,7 @@ namespace kumi
       if constexpr (N == 0) return kumi::tuple{};
       else
         return generate_(
-          kumi::_::adl_tag, [&](auto I) { return static_cast<T>(v + I); }, std::make_index_sequence<N>{});
+          kumi::_::adl_tag, [&v](auto I) { return static_cast<T>(v + I); }, std::make_index_sequence<N>{});
     }
   };
 

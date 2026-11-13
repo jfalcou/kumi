@@ -121,8 +121,6 @@ namespace
     friend constexpr boolean operator||(boolean a, boolean b) noexcept { return {a.value || b.value}; }
 
     friend constexpr bool operator==(boolean a, bool b) noexcept { return a.value == b; }
-
-    // friend std::ostream& operator<<(std::ostream& os, boolean a) { return os << a.value; }
   };
 
   struct number
@@ -134,8 +132,6 @@ namespace
     friend constexpr boolean operator<(number a, number b) noexcept { return {a.value < b.value}; }
 
     friend constexpr bool operator==(number a, number b) noexcept = default;
-
-    // friend std::ostream& operator<<(std::ostream& os, number a) { return os << a.value; }
   };
 }
 
