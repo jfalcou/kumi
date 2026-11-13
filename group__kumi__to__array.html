@@ -175,7 +175,7 @@ array conversions</h2></td></tr>
 <div class="line">  <span class="keyword">template</span>&lt;concepts::product_type T&gt;</div>
 <div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> <a class="code hl_variable" href="#ga915a6c331bad66be764b814af9f2260f">to_array</a>(T&amp;&amp; t);</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__kumi__to__array_html_ga915a6c331bad66be764b814af9f2260f"><div class="ttname"><a href="#ga915a6c331bad66be764b814af9f2260f">kumi::to_array</a></div><div class="ttdeci">constexpr to_array_t to_array</div><div class="ttdef"><b>Definition</b> array.hpp:613</div></div>
+<div class="ttc" id="agroup__kumi__to__array_html_ga915a6c331bad66be764b814af9f2260f"><div class="ttname"><a href="#ga915a6c331bad66be764b814af9f2260f">kumi::to_array</a></div><div class="ttdeci">constexpr to_array_t to_array</div><div class="ttdef"><b>Definition</b> array.hpp:614</div></div>
 <div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
@@ -195,7 +195,9 @@ array conversions</h2></td></tr>
 <div class="line"> </div>
 <div class="line"><span class="keyword">struct </span>pixel</div>
 <div class="line">{</div>
-<div class="line">  <span class="keywordtype">int</span> r, g, b;</div>
+<div class="line">  <span class="keywordtype">int</span> r;</div>
+<div class="line">  <span class="keywordtype">int</span> g;</div>
+<div class="line">  <span class="keywordtype">int</span> b;</div>
 <div class="line">};</div>
 <div class="line"> </div>
 <div class="line"><span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I&gt;</div>
@@ -228,7 +230,7 @@ array conversions</h2></td></tr>
 <div class="line"> </div>
 <div class="line">  std::cout &lt;&lt; b &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="astructkumi_1_1array_html_a2a236814b119c1e3e0b1cc5ce062c282"><div class="ttname"><a href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::array::get</a></div><div class="ttdeci">decltype(auto) constexpr get(array&lt; T, N &gt; &amp;t) noexcept</div><div class="ttdoc">Extracts the Ith element from a kumi::array.</div><div class="ttdef"><b>Definition</b> array.hpp:693</div></div>
+<div class="ttc" id="astructkumi_1_1array_html_a2a236814b119c1e3e0b1cc5ce062c282"><div class="ttname"><a href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::array::get</a></div><div class="ttdeci">decltype(auto) constexpr get(array&lt; T, N &gt; &amp;t) noexcept</div><div class="ttdoc">Extracts the Ith element from a kumi::array.</div><div class="ttdef"><b>Definition</b> array.hpp:694</div></div>
 </div><!-- fragment --> 
 </div>
 </div>

@@ -332,12 +332,12 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kumi/detail/binder.hpp",
-            "function_covered": 443,
-            "function_percent": 99.6,
-            "function_total": 445,
-            "line_covered": 8,
+            "function_covered": 438,
+            "function_percent": 99.5,
+            "function_total": 440,
+            "line_covered": 7,
             "line_percent": 100.0,
-            "line_total": 8
+            "line_total": 7
         },
         {
             "branch_covered": 0,
@@ -464,12 +464,12 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kumi/utils/as.hpp",
-            "function_covered": 9,
+            "function_covered": 3,
             "function_percent": 100.0,
-            "function_total": 9,
-            "line_covered": 3,
+            "function_total": 3,
+            "line_covered": 1,
             "line_percent": 100.0,
-            "line_total": 3
+            "line_total": 1
         },
         {
             "branch_covered": 0,
@@ -556,12 +556,12 @@
             "line_total": 3
         }
     ],
-    "function_covered": 7597,
+    "function_covered": 7586,
     "function_percent": 94.6,
-    "function_total": 8030,
+    "function_total": 8019,
     "gcovr/summary_format_version": "0.6",
-    "line_covered": 699,
+    "line_covered": 696,
     "line_percent": 99.7,
-    "line_total": 701,
+    "line_total": 698,
     "root": "../../.."
 }
