@@ -194,7 +194,8 @@ Variables</h2></td></tr>
 <div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function,</div>
 <div class="line">             kumi::concepts::record_type T,</div>
 <div class="line">             kumi::concepts::sized_product_type&lt;kumi::size_v&lt;T&gt;&gt;... Ts&gt;</div>
-<div class="line">    <span class="keyword">using </span>map_field_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gafe68ca583e3e822b20f60ff35e5aa9d3">kumi::map_field</a>(std::declval&lt;Function&gt;(), std::declval&lt;T&gt;(), std::declval&lt;Ts&gt;()...));</div>
+<div class="line">    <span class="keyword">using </span>map_field_t =</div>
+<div class="line">      <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gafe68ca583e3e822b20f60ff35e5aa9d3">kumi::map_field</a>(<a class="code hl_variable" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval&lt;Function&gt;</a>(), <a class="code hl_variable" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval&lt;T&gt;</a>(), <a class="code hl_variable" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval&lt;Ts&gt;</a>()...));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function,</div>
 <div class="line">             kumi::concepts::record_type T,</div>

@@ -188,7 +188,7 @@ Variables</h2></td></tr>
 <li>A flat product type composed of pointers to each element of <span class="tt">t</span>.</li>
 </ul>
 <h2 class="groupheader">Helper type </h2>
-<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>as_flat_ptr_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga6368952a2f6a506de75aa0e01569eab6">kumi::as_flat_ptr</a>(std::declval&lt;T&gt;()));</div>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">using </span>as_flat_ptr_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga6368952a2f6a506de75aa0e01569eab6">kumi::as_flat_ptr</a>(<a class="code hl_variable" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval&lt;T&gt;</a>()));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T&gt; <span class="keyword">struct </span>as_flat_ptr</div>
 <div class="line">    {</div>

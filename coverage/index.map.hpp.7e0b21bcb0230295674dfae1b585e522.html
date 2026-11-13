@@ -27,7 +27,7 @@
     </tr>
     <tr>
       <th scope="row">Date:</th>
-      <td>2026-11-13 10:48:20</td>
+      <td>2026-11-13 12:27:37</td>
     </tr>
   </table>
 </div>
@@ -2222,7 +2222,7 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">map_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">decltype</span><span class="p">(</span><span class="n">kumi</span><span class="o">::</span><span class="n">map</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">declval</span><span class="o">&lt;</span><span class="n">Function</span><span class="o">&gt;</span><span class="p">(),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">declval</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">declval</span><span class="o">&lt;</span><span class="n">Ts</span><span class="o">&gt;</span><span class="p">()...));</span></td>
+      <td class="src "><span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">map_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">decltype</span><span class="p">(</span><span class="n">kumi</span><span class="o">::</span><span class="n">map</span><span class="p">(</span><span class="n">kumi</span><span class="o">::</span><span class="n">declval</span><span class="o">&lt;</span><span class="n">Function</span><span class="o">&gt;</span><span class="p">(),</span><span class="w"> </span><span class="n">kumi</span><span class="o">::</span><span class="n">declval</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(),</span><span class="w"> </span><span class="n">kumi</span><span class="o">::</span><span class="n">declval</span><span class="o">&lt;</span><span class="n">Ts</span><span class="o">&gt;</span><span class="p">()...));</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l288" href="#l288">288</a></td>
@@ -2334,206 +2334,220 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">map_index_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">decltype</span><span class="p">(</span><span class="n">kumi</span><span class="o">::</span><span class="n">map_index</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">declval</span><span class="o">&lt;</span><span class="n">Function</span><span class="o">&gt;</span><span class="p">(),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">declval</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">declval</span><span class="o">&lt;</span><span class="n">Ts</span><span class="o">&gt;</span><span class="p">()...));</span></td>
+      <td class="src "><span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">map_index_t</span><span class="w"> </span><span class="o">=</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l304" href="#l304">304</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "></td>
+      <td class="src "><span class="w">      </span><span class="k">decltype</span><span class="p">(</span><span class="n">kumi</span><span class="o">::</span><span class="n">map_index</span><span class="p">(</span><span class="n">kumi</span><span class="o">::</span><span class="n">declval</span><span class="o">&lt;</span><span class="n">Function</span><span class="o">&gt;</span><span class="p">(),</span><span class="w"> </span><span class="n">kumi</span><span class="o">::</span><span class="n">declval</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(),</span><span class="w"> </span><span class="n">kumi</span><span class="o">::</span><span class="n">declval</span><span class="o">&lt;</span><span class="n">Ts</span><span class="o">&gt;</span><span class="p">()...));</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l305" href="#l305">305</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">Function</span><span class="p">,</span></td>
+      <td class="src "></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l306" href="#l306">306</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">             </span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">product_type</span><span class="w"> </span><span class="n">T</span><span class="p">,</span></td>
+      <td class="src "><span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">Function</span><span class="p">,</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l307" href="#l307">307</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">             </span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">sized_product_type</span><span class="o">&lt;</span><span class="n">kumi</span><span class="o">::</span><span class="n">size_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="p">...</span><span class="w"> </span><span class="n">Ts</span><span class="o">&gt;</span></td>
+      <td class="src "><span class="w">             </span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">product_type</span><span class="w"> </span><span class="n">T</span><span class="p">,</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l308" href="#l308">308</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">map_index</span></td>
+      <td class="src "><span class="w">             </span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">sized_product_type</span><span class="o">&lt;</span><span class="n">kumi</span><span class="o">::</span><span class="n">size_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="p">...</span><span class="w"> </span><span class="n">Ts</span><span class="o">&gt;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l309" href="#l309">309</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="p">{</span></td>
+      <td class="src "><span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">map_index</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l310" href="#l310">310</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">      </span><span class="k">using</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kumi</span><span class="o">::</span><span class="n">result</span><span class="o">::</span><span class="n">map_index_t</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">Ts</span><span class="p">...</span><span class="o">&gt;</span><span class="p">;</span></td>
+      <td class="src "><span class="w">    </span><span class="p">{</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l311" href="#l311">311</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="p">};</span></td>
+      <td class="src "><span class="w">      </span><span class="k">using</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kumi</span><span class="o">::</span><span class="n">result</span><span class="o">::</span><span class="n">map_index_t</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">Ts</span><span class="p">...</span><span class="o">&gt;</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l312" href="#l312">312</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "></td>
+      <td class="src "><span class="w">    </span><span class="p">};</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l313" href="#l313">313</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="c1">//! [map_index_t]</span></td>
+      <td class="src "></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l314" href="#l314">314</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "></td>
+      <td class="src "><span class="w">    </span><span class="c1">//! [map_index_t]</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l315" href="#l315">315</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="c1">//! [map_field_t]</span></td>
+      <td class="src "></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l316" href="#l316">316</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">Function</span><span class="p">,</span></td>
+      <td class="src "><span class="w">    </span><span class="c1">//! [map_field_t]</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l317" href="#l317">317</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">             </span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">record_type</span><span class="w"> </span><span class="n">T</span><span class="p">,</span></td>
+      <td class="src "><span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">Function</span><span class="p">,</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l318" href="#l318">318</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">             </span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">sized_product_type</span><span class="o">&lt;</span><span class="n">kumi</span><span class="o">::</span><span class="n">size_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="p">...</span><span class="w"> </span><span class="n">Ts</span><span class="o">&gt;</span></td>
+      <td class="src "><span class="w">             </span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">record_type</span><span class="w"> </span><span class="n">T</span><span class="p">,</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l319" href="#l319">319</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">map_field_t</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="k">decltype</span><span class="p">(</span><span class="n">kumi</span><span class="o">::</span><span class="n">map_field</span><span class="p">(</span><span class="n">std</span><span class="o">::</span><span class="n">declval</span><span class="o">&lt;</span><span class="n">Function</span><span class="o">&gt;</span><span class="p">(),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">declval</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(),</span><span class="w"> </span><span class="n">std</span><span class="o">::</span><span class="n">declval</span><span class="o">&lt;</span><span class="n">Ts</span><span class="o">&gt;</span><span class="p">()...));</span></td>
+      <td class="src "><span class="w">             </span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">sized_product_type</span><span class="o">&lt;</span><span class="n">kumi</span><span class="o">::</span><span class="n">size_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="p">...</span><span class="w"> </span><span class="n">Ts</span><span class="o">&gt;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l320" href="#l320">320</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "></td>
+      <td class="src "><span class="w">    </span><span class="k">using</span><span class="w"> </span><span class="n">map_field_t</span><span class="w"> </span><span class="o">=</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l321" href="#l321">321</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">Function</span><span class="p">,</span></td>
+      <td class="src "><span class="w">      </span><span class="k">decltype</span><span class="p">(</span><span class="n">kumi</span><span class="o">::</span><span class="n">map_field</span><span class="p">(</span><span class="n">kumi</span><span class="o">::</span><span class="n">declval</span><span class="o">&lt;</span><span class="n">Function</span><span class="o">&gt;</span><span class="p">(),</span><span class="w"> </span><span class="n">kumi</span><span class="o">::</span><span class="n">declval</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;</span><span class="p">(),</span><span class="w"> </span><span class="n">kumi</span><span class="o">::</span><span class="n">declval</span><span class="o">&lt;</span><span class="n">Ts</span><span class="o">&gt;</span><span class="p">()...));</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l322" href="#l322">322</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">             </span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">record_type</span><span class="w"> </span><span class="n">T</span><span class="p">,</span></td>
+      <td class="src "></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l323" href="#l323">323</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">             </span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">sized_product_type</span><span class="o">&lt;</span><span class="n">kumi</span><span class="o">::</span><span class="n">size_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="p">...</span><span class="w"> </span><span class="n">Ts</span><span class="o">&gt;</span></td>
+      <td class="src "><span class="w">    </span><span class="k">template</span><span class="o">&lt;</span><span class="k">typename</span><span class="w"> </span><span class="nc">Function</span><span class="p">,</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l324" href="#l324">324</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">map_field</span></td>
+      <td class="src "><span class="w">             </span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">record_type</span><span class="w"> </span><span class="n">T</span><span class="p">,</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l325" href="#l325">325</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="p">{</span></td>
+      <td class="src "><span class="w">             </span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">sized_product_type</span><span class="o">&lt;</span><span class="n">kumi</span><span class="o">::</span><span class="n">size_v</span><span class="o">&lt;</span><span class="n">T</span><span class="o">&gt;&gt;</span><span class="p">...</span><span class="w"> </span><span class="n">Ts</span><span class="o">&gt;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l326" href="#l326">326</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">      </span><span class="k">using</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kumi</span><span class="o">::</span><span class="n">result</span><span class="o">::</span><span class="n">map_field_t</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">Ts</span><span class="p">...</span><span class="o">&gt;</span><span class="p">;</span></td>
+      <td class="src "><span class="w">    </span><span class="k">struct</span><span class="w"> </span><span class="nc">map_field</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l327" href="#l327">327</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="p">};</span></td>
+      <td class="src "><span class="w">    </span><span class="p">{</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l328" href="#l328">328</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "></td>
+      <td class="src "><span class="w">      </span><span class="k">using</span><span class="w"> </span><span class="n">type</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">kumi</span><span class="o">::</span><span class="n">result</span><span class="o">::</span><span class="n">map_field_t</span><span class="o">&lt;</span><span class="n">Function</span><span class="p">,</span><span class="w"> </span><span class="n">T</span><span class="p">,</span><span class="w"> </span><span class="n">Ts</span><span class="p">...</span><span class="o">&gt;</span><span class="p">;</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l329" href="#l329">329</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="c1">//! [map_field_t]</span></td>
+      <td class="src "><span class="w">    </span><span class="p">};</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l330" href="#l330">330</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">  </span><span class="p">}</span></td>
+      <td class="src "></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l331" href="#l331">331</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="p">}</span></td>
+      <td class="src "><span class="w">    </span><span class="c1">//! [map_field_t]</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l332" href="#l332">332</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount "></td>
+      <td class="src "><span class="w">  </span><span class="p">}</span></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l333" href="#l333">333</a></td>
+      <td class="linebranch">
+      </td>
+      <td class="linecount "></td>
+      <td class="src "><span class="p">}</span></td>
+    </tr>
+    <tr class="source-line">
+      <td class="lineno"><a id="l334" href="#l334">334</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>

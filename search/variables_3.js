@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['exclusive_5fscan_5fleft_0',['exclusive_scan_left',['../group__kumi__exclusive__scan__left.html#ga529950ddf6573473b2f9b7ec886c61f9',1,'kumi']]],
-  ['exclusive_5fscan_5fright_1',['exclusive_scan_right',['../group__kumi__exclusive__scan__right.html#gaa66bb36d76db2d7854196bc156fb35c2',1,'kumi']]],
-  ['extract_2',['extract',['../group__kumi__extract.html#ga1a7617bafd6f8598cca8e7e6a5c6f383',1,'kumi']]]
+  ['declval_0',['declval',['../group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8',1,'kumi']]]
 ];

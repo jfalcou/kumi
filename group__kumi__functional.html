@@ -211,15 +211,15 @@ Classes</h2></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-typedef-members" class="groupheader"><a id="typedef-members" name="typedef-members"></a>
 Typedefs</h2></td></tr>
-<tr class="memitem:ga11e943ab58829909243b4826d1f084d8" id="r_ga11e943ab58829909243b4826d1f084d8"><td class="memTemplParams" colspan="2">template&lt;std::size_t I, typename T, typename U&gt; </td></tr>
-<tr class="memitem:ga11e943ab58829909243b4826d1f084d8 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ga11e943ab58829909243b4826d1f084d8">kumi::function::element_or_t</a> = std::remove_cvref_t&lt;decltype(<a class="el" href="group__kumi__function__get__or.html#ga42064b97f063feae3d934bd111ef74ec">kumi::function::get_or</a>&lt;I&gt;(std::declval&lt;T&gt;(), std::declval&lt;U&gt;()))&gt;</td></tr>
-<tr class="memdesc:ga11e943ab58829909243b4826d1f084d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the Ith element type of a kumi::product_type, or a fallback type <span class="tt">U</span> otherwise.  <br /></td></tr>
+<tr class="memitem:ga6873d41c13eb4d4c359209131f6327fb" id="r_ga6873d41c13eb4d4c359209131f6327fb"><td class="memTemplParams" colspan="2">template&lt;std::size_t I, typename T, typename U&gt; </td></tr>
+<tr class="memitem:ga6873d41c13eb4d4c359209131f6327fb template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ga6873d41c13eb4d4c359209131f6327fb">kumi::function::element_or_t</a> = std::remove_cvref_t&lt;decltype(<a class="el" href="group__kumi__function__get__or.html#ga42064b97f063feae3d934bd111ef74ec">kumi::function::get_or</a>&lt;I&gt;(<a class="el" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval</a>&lt;T&gt;(), <a class="el" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval</a>&lt;U&gt;()))&gt;</td></tr>
+<tr class="memdesc:ga6873d41c13eb4d4c359209131f6327fb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the Ith element type of a kumi::product_type, or a fallback type <span class="tt">U</span> otherwise.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Utilities to manipulate functions and types in a functional way. </p>
 </div><a name="doc-typedef-members" id="doc-typedef-members"></a><h2 id="header-doc-typedef-members" class="groupheader">Typedef Documentation</h2>
-<a id="ga11e943ab58829909243b4826d1f084d8" name="ga11e943ab58829909243b4826d1f084d8"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga11e943ab58829909243b4826d1f084d8">&#9670;&#160;</a></span>element_or_t</h2>
+<a id="ga6873d41c13eb4d4c359209131f6327fb" name="ga6873d41c13eb4d4c359209131f6327fb"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga6873d41c13eb4d4c359209131f6327fb">&#9670;&#160;</a></span>element_or_t</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -227,7 +227,7 @@ Typedefs</h2></td></tr>
 template&lt;std::size_t I, typename T, typename U&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#ga11e943ab58829909243b4826d1f084d8">kumi::function::element_or_t</a> = std::remove_cvref_t&lt;decltype(<a class="el" href="group__kumi__function__get__or.html#ga42064b97f063feae3d934bd111ef74ec">kumi::function::get_or</a>&lt;I&gt;(std::declval&lt;T&gt;(), std::declval&lt;U&gt;()))&gt;</td>
+          <td class="memname">using <a class="el" href="#ga6873d41c13eb4d4c359209131f6327fb">kumi::function::element_or_t</a> = std::remove_cvref_t&lt;decltype(<a class="el" href="group__kumi__function__get__or.html#ga42064b97f063feae3d934bd111ef74ec">kumi::function::get_or</a>&lt;I&gt;(<a class="el" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval</a>&lt;T&gt;(), <a class="el" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval</a>&lt;U&gt;()))&gt;</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -246,9 +246,9 @@ template&lt;std::size_t I, typename T, typename U&gt; </div>
 Helper type</h2>
 <div class="fragment"><div class="line"><span class="keyword">namespace </span><a class="code hl_namespace" href="namespacekumi.html">kumi</a></div>
 <div class="line">{</div>
-<div class="line">  <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I, <span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt; <span class="keyword">using </span><a class="code hl_typedef" href="#ga11e943ab58829909243b4826d1f084d8">element_or_t</a> = <span class="keyword">typename</span> element_or&lt;I,T,U&gt;::type;</div>
+<div class="line">  <span class="keyword">template</span>&lt;std::<span class="keywordtype">size_t</span> I, <span class="keyword">typename</span> T, <span class="keyword">typename</span> U&gt; <span class="keyword">using </span><a class="code hl_typedef" href="#ga6873d41c13eb4d4c359209131f6327fb">element_or_t</a> = <span class="keyword">typename</span> element_or&lt;I,T,U&gt;::type;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__kumi__functional_html_ga11e943ab58829909243b4826d1f084d8"><div class="ttname"><a href="#ga11e943ab58829909243b4826d1f084d8">kumi::function::element_or_t</a></div><div class="ttdeci">std::remove_cvref_t&lt; decltype(kumi::function::get_or&lt; I &gt;(std::declval&lt; T &gt;(), std::declval&lt; U &gt;()))&gt; element_or_t</div><div class="ttdoc">Computes the Ith element type of a kumi::product_type, or a fallback type U otherwise.</div><div class="ttdef"><b>Definition</b> monadic.hpp:83</div></div>
+<div class="ttc" id="agroup__kumi__functional_html_ga6873d41c13eb4d4c359209131f6327fb"><div class="ttname"><a href="#ga6873d41c13eb4d4c359209131f6327fb">kumi::function::element_or_t</a></div><div class="ttdeci">std::remove_cvref_t&lt; decltype(kumi::function::get_or&lt; I &gt;(kumi::declval&lt; T &gt;(), kumi::declval&lt; U &gt;()))&gt; element_or_t</div><div class="ttdoc">Computes the Ith element type of a kumi::product_type, or a fallback type U otherwise.</div><div class="ttdef"><b>Definition</b> monadic.hpp:83</div></div>
 <div class="ttc" id="anamespacekumi_html"><div class="ttname"><a href="namespacekumi.html">kumi</a></div><div class="ttdoc">Main KUMI namespace.</div><div class="ttdef"><b>Definition</b> algorithm.hpp:11</div></div>
 </div><!-- fragment --> 
 </div>

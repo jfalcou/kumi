@@ -188,7 +188,7 @@ Element</h1>
 </div><!-- fragment --><hr  />
 <h1 class="doxsection"><a class="anchor" id="kumi_nomenclature_member"></a>
 Member</h1>
-<p>A <b>member</b> is the type of the result of a projection, the type of <span class="tt">get&lt;I&gt;(t)</span>, which the trait <a class="el" href="group__kumi__generic__traits.html#gaca6d42cbec766fb8d43a4060077e2624" title="Computes the return type of a call to kumi::get.">kumi::member_t</a> gives as <span class="tt">decltype(get&lt;I&gt;(std::declval&lt;T&amp;&amp;&gt;()))</span>.</p>
+<p>A <b>member</b> is the type of the result of a projection, the type of <span class="tt">get&lt;I&gt;(t)</span>, which the trait <a class="el" href="group__kumi__generic__traits.html#gad546d78e5079e691e577af3b840d4fce" title="Computes the return type of a call to kumi::get.">kumi::member_t</a> gives as <span class="tt">decltype(get&lt;I&gt;(std::declval&lt;T&amp;&amp;&gt;()))</span>.</p>
 <p>On <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>, it is the element with the value category and the <span class="tt">const</span> of the product type applied by reference collapsing: given <span class="tt"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>&lt;int&gt; t</span>, <span class="tt">get&lt;0&gt;(t)</span> has the type <span class="tt">int&amp;</span>, <span class="tt">get&lt;0&gt;(std::move(t))</span> the type <span class="tt">int&amp;&amp;</span>, and <span class="tt">get&lt;0&gt;</span> of a <span class="tt"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>&lt;int&gt; const</span> the type <span class="tt">int const&amp;</span>, whereas on a <span class="tt"><a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a>&lt;int&amp;&gt;</span> the first two have the type <span class="tt">int&amp;</span>.</p>
 <p>On an adapted type whose <span class="tt">get</span> returns by value, the member is that value type. On a record, the member at an index is a reference to the field, and <a class="el" href="group__kumi__generic__traits.html#ga17e8e213d54b65fdd4de0ec25916d3e6" title="Computes the return type of a call to kumi::get on a kumi::tuple and unwrap the field returned by kum...">kumi::stored_member_t</a> gives the reference to the value that the field holds:</p>
 <div class="fragment"><div class="line"></div>
@@ -209,17 +209,17 @@ Member</h1>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// the value category and the const of the tuple reach the member</span></div>
 <div class="line">  show(<span class="stringliteral">&quot;lvalue tuple&lt;int&gt; gives int&amp;&quot;</span>,</div>
-<div class="line">       is_same_v&lt;<a class="code hl_typedef" href="group__kumi__generic__traits.html#gaca6d42cbec766fb8d43a4060077e2624">kumi::member_t&lt;0, t_t&amp;&gt;</a>, <span class="keywordtype">int</span>&amp;&gt;);</div>
+<div class="line">       is_same_v&lt;<a class="code hl_typedef" href="group__kumi__generic__traits.html#gad546d78e5079e691e577af3b840d4fce">kumi::member_t&lt;0, t_t&amp;&gt;</a>, <span class="keywordtype">int</span>&amp;&gt;);</div>
 <div class="line">  show(<span class="stringliteral">&quot;rvalue tuple&lt;int&gt; gives int&amp;&amp;&quot;</span>,</div>
-<div class="line">       is_same_v&lt;<a class="code hl_typedef" href="group__kumi__generic__traits.html#gaca6d42cbec766fb8d43a4060077e2624">kumi::member_t&lt;0, t_t&amp;&amp;&gt;</a>, <span class="keywordtype">int</span>&amp;&amp;&gt;);</div>
+<div class="line">       is_same_v&lt;<a class="code hl_typedef" href="group__kumi__generic__traits.html#gad546d78e5079e691e577af3b840d4fce">kumi::member_t&lt;0, t_t&amp;&amp;&gt;</a>, <span class="keywordtype">int</span>&amp;&amp;&gt;);</div>
 <div class="line">  show(<span class="stringliteral">&quot;const tuple&lt;int&gt; gives int const&amp;&quot;</span>,</div>
-<div class="line">       is_same_v&lt;<a class="code hl_typedef" href="group__kumi__generic__traits.html#gaca6d42cbec766fb8d43a4060077e2624">kumi::member_t&lt;0, t_t const&amp;&gt;</a>, <span class="keywordtype">int</span> <span class="keyword">const</span>&amp;&gt;);</div>
+<div class="line">       is_same_v&lt;<a class="code hl_typedef" href="group__kumi__generic__traits.html#gad546d78e5079e691e577af3b840d4fce">kumi::member_t&lt;0, t_t const&amp;&gt;</a>, <span class="keywordtype">int</span> <span class="keyword">const</span>&amp;&gt;);</div>
 <div class="line"> </div>
 <div class="line">  <span class="comment">// except through a reference element</span></div>
 <div class="line">  show(<span class="stringliteral">&quot;rvalue tuple&lt;int&amp;&gt; gives int&amp;&quot;</span>,</div>
-<div class="line">       is_same_v&lt;<a class="code hl_typedef" href="group__kumi__generic__traits.html#gaca6d42cbec766fb8d43a4060077e2624">kumi::member_t&lt;0, r_t&amp;&amp;&gt;</a>, <span class="keywordtype">int</span>&amp;&gt;);</div>
+<div class="line">       is_same_v&lt;<a class="code hl_typedef" href="group__kumi__generic__traits.html#gad546d78e5079e691e577af3b840d4fce">kumi::member_t&lt;0, r_t&amp;&amp;&gt;</a>, <span class="keywordtype">int</span>&amp;&gt;);</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__kumi__generic__traits_html_gaca6d42cbec766fb8d43a4060077e2624"><div class="ttname"><a href="group__kumi__generic__traits.html#gaca6d42cbec766fb8d43a4060077e2624">kumi::member_t</a></div><div class="ttdeci">decltype(get&lt; I &gt;(std::declval&lt; T &amp;&amp; &gt;())) member_t</div><div class="ttdoc">Computes the return type of a call to kumi::get.</div><div class="ttdef"><b>Definition</b> traits.hpp:169</div></div>
+<div class="ttc" id="agroup__kumi__generic__traits_html_gad546d78e5079e691e577af3b840d4fce"><div class="ttname"><a href="group__kumi__generic__traits.html#gad546d78e5079e691e577af3b840d4fce">kumi::member_t</a></div><div class="ttdeci">decltype(get&lt; I &gt;(kumi::declval&lt; T &amp;&amp; &gt;())) member_t</div><div class="ttdoc">Computes the return type of a call to kumi::get.</div><div class="ttdef"><b>Definition</b> traits.hpp:169</div></div>
 </div><!-- fragment --><hr  />
 <h1 class="doxsection"><a class="anchor" id="kumi_nomenclature_identifier"></a>
 Identifier</h1>

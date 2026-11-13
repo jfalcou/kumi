@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['only_0',['only',['../group__kumi__only.html#ga26690952147eaa66ecf74378070ee53b',1,'kumi']]]
+  ['none_5fof_0',['none_of',['../group__kumi__none__of.html#ga26e030c97733248f67dd2c8fbf527602',1,'kumi']]],
+  ['npos_1',['npos',['../namespacekumi.html#a864eeb606afbe8cb4df27a765e0411c9',1,'kumi']]]
 ];

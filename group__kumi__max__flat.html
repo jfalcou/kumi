@@ -188,7 +188,8 @@ Variables</h2></td></tr>
 </ul>
 <h2 class="groupheader">Helper type </h2>
 <div class="fragment"><div class="line">    <span class="comment">//</span></div>
-<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> F&gt; <span class="keyword">using </span>max_flat_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga718f20d4004a2d3a409bfcfda289ba34">kumi::max_flat</a>(std::declval&lt;T&gt;(), std::declval&lt;F&gt;()));</div>
+<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> F&gt;</div>
+<div class="line">    <span class="keyword">using </span>max_flat_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga718f20d4004a2d3a409bfcfda289ba34">kumi::max_flat</a>(<a class="code hl_variable" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval&lt;T&gt;</a>(), <a class="code hl_variable" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval&lt;F&gt;</a>()));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T, <span class="keyword">typename</span> F&gt; <span class="keyword">struct </span>max_flat</div>
 <div class="line">    {</div>

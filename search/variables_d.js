@@ -1,11 +1,9 @@
 var searchData=
 [
-  ['reduce_0',['reduce',['../group__kumi__reduce.html#gaf7efbfa530d2396e2ed230cc03e4046e',1,'kumi']]],
-  ['reindex_1',['reindex',['../group__kumi__reindex.html#ga3594f15dbfba2f6fda0afc8d1542c449',1,'kumi']]],
-  ['remove_2',['remove',['../group__kumi__remove.html#ga0f52ba0b24ce54052784df91c54ac233',1,'kumi']]],
-  ['reorder_3',['reorder',['../group__kumi__reorder.html#ga32af967d7f453426ccd564d3a0b6c689',1,'kumi']]],
-  ['reorder_5ffields_4',['reorder_fields',['../group__kumi__reorder__fields.html#ga8c42552c8f93dad0b83a3903468d02c6',1,'kumi']]],
-  ['reverse_5',['reverse',['../group__kumi__reverse.html#ga48f6e5775e61dca804eda8b0bd354d6f',1,'kumi']]],
-  ['rotate_5fleft_6',['rotate_left',['../group__kumi__rotate__left.html#gadbc56977f82e2eaefe486c0a9457f01c',1,'kumi']]],
-  ['rotate_5fright_7',['rotate_right',['../group__kumi__rotate__right.html#gaffd5dbb36e1c70d2fc058ffe03afef3e',1,'kumi']]]
+  ['partition_0',['partition',['../group__kumi__partition.html#ga4643116b2dc0dfbd0d15fee408a9c18c',1,'kumi']]],
+  ['pop_5fback_1',['pop_back',['../group__kumi__pop__back.html#ga397f7c5161b7a3ace25c406e83af98fb',1,'kumi']]],
+  ['pop_5ffront_2',['pop_front',['../group__kumi__pop__front.html#ga38d1ddeb5090405e79e9b7d898a85133',1,'kumi']]],
+  ['prod_3',['prod',['../group__kumi__prod.html#ga6c139ebafaebc0f7dbca2fd57aee943c',1,'kumi']]],
+  ['push_5fback_4',['push_back',['../group__kumi__push__back.html#ga2d60bb8eaba1c8c697b0d4f1e9bf7ce6',1,'kumi']]],
+  ['push_5ffront_5',['push_front',['../group__kumi__push__front.html#gad4bd53f162f63af0cbfbd68d8adb5d5c',1,'kumi']]]
 ];

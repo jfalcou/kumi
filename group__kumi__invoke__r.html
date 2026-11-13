@@ -133,7 +133,7 @@ $(function(){initNavTree('group__kumi__invoke__r.html','',''); });
 
 <div class="header">
   <div class="summary">
-<a href="#func-members">Functions</a>  </div>
+<a href="#var-members">Variables</a>  </div>
   <div class="headertitle"><div class="title">kumi::invoke_r <div class="ingroups"><a class="el" href="group__kumi__functional.html">Functional Helpers</a></div></div></div>
 </div><!--header-->
 <div class="contents">
@@ -141,36 +141,28 @@ $(function(){initNavTree('group__kumi__invoke__r.html','',''); });
 <p>Invoke the Callable object c with a pack of arguments with return type R.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
-<tr class="heading"><td colspan="2"><h2 id="header-func-members" class="groupheader"><a id="func-members" name="func-members"></a>
-Functions</h2></td></tr>
-<tr class="memitem:ga2ad666793ad04ea9b66c84b83f41f375" id="r_ga2ad666793ad04ea9b66c84b83f41f375"><td class="memTemplParams" colspan="2">template&lt;typename R, typename C, typename... Ts&gt; <br />
-requires (std::is_invocable_r_v&lt;R, C, Ts...&gt;)</td></tr>
-<tr class="memitem:ga2ad666793ad04ea9b66c84b83f41f375 template"><td class="memItemLeft">constexpr R&#160;</td><td class="memItemRight"><a class="el" href="#ga2ad666793ad04ea9b66c84b83f41f375">kumi::invoke_r</a> (C &amp;&amp;c, Ts &amp;&amp;... ts) noexcept(std::is_nothrow_invocable_r_v&lt; R, C, Ts... &gt;)</td></tr>
+<tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
+Variables</h2></td></tr>
+<tr class="memitem:gac130b26a28398c583ea439de89b8ff81" id="r_gac130b26a28398c583ea439de89b8ff81"><td class="memTemplParams" colspan="2">template&lt;typename R&gt; </td></tr>
+<tr class="memitem:gac130b26a28398c583ea439de89b8ff81 template"><td class="memItemLeft">constexpr invoke_r_t&lt; R &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gac130b26a28398c583ea439de89b8ff81">kumi::invoke_r</a> {}</td></tr>
+<tr class="memdesc:gac130b26a28398c583ea439de89b8ff81"><td class="mdescLeft">&#160;</td><td class="mdescRight">Callable object invoking the Callable object <span class="tt">c</span> with a pack of arguments and returning a value of type <span class="tt">R</span>.  <br /></td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Invoke the Callable object c with a pack of arguments with return type R. </p>
-</div><a name="doc-func-members" id="doc-func-members"></a><h2 id="header-doc-func-members" class="groupheader">Function Documentation</h2>
-<a id="ga2ad666793ad04ea9b66c84b83f41f375" name="ga2ad666793ad04ea9b66c84b83f41f375"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ga2ad666793ad04ea9b66c84b83f41f375">&#9670;&#160;</a></span>invoke_r()</h2>
+</div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="gac130b26a28398c583ea439de89b8ff81" name="gac130b26a28398c583ea439de89b8ff81"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac130b26a28398c583ea439de89b8ff81">&#9670;&#160;</a></span>invoke_r</h2>
 
 <div class="memitem">
 <div class="memproto">
 <div class="memtemplate">
-template&lt;typename R, typename C, typename... Ts&gt; <br />
-requires (std::is_invocable_r_v&lt;R, C, Ts...&gt;)</div>
+template&lt;typename R&gt; </div>
 <table class="mlabels">
   <tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">R kumi::invoke_r </td>
-          <td>(</td>
-          <td class="paramtype">C &amp;&amp;</td>          <td class="paramname"><span class="paramname"><em>c</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">Ts &amp;&amp;...</td>          <td class="paramname"><span class="paramname"><em>ts</em></span>&#160;)</td>
+          <td class="memname">invoke_r_t&lt;R&gt; kumi::invoke_r {}</td>
         </tr>
       </table>
   </td>
@@ -179,22 +171,137 @@ requires (std::is_invocable_r_v&lt;R, C, Ts...&gt;)</div>
   </tr>
 </table>
 </div><div class="memdoc">
-<dl class="tparams"><dt>Template Parameters</dt><dd>
-  <table class="tparams">
-    <tr><td class="paramname">R</td><td>the return type of the callable </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">c</td><td>Callable object to be invoked </td></tr>
-    <tr><td class="paramname">ts</td><td>elements to be used as arguments to c </td></tr>
-  </table>
-  </dd>
-</dl>
-<dl class="section return"><dt>Returns</dt><dd>The value returned by c with type R.</dd></dl>
-<dl class="section note"><dt>Note</dt><dd>Replaces std::invoke_r to avoid depending on <span class="tt">functional</span>. </dd></dl>
 
+<p>Callable object invoking the Callable object <span class="tt">c</span> with a pack of arguments and returning a value of type <span class="tt">R</span>. </p>
+<p><span class="tt"><a class="el" href="#gac130b26a28398c583ea439de89b8ff81" title="Callable object invoking the Callable object c with a pack of arguments and returning a value of type...">kumi::invoke_r</a></span> is a replacement for <span class="tt">std::invoke_r</span> that avoids depending on <span class="tt">&lt;functional&gt;</span>. It invokes <span class="tt">c</span> but returns a value of type <span class="tt">R</span> rather than the actual return type of <span class="tt">c</span>. If <span class="tt">R</span> is <span class="tt">void</span>, the return value of <span class="tt">c</span> is discarded.</p>
+<dl class="section note"><dt>Note</dt><dd>This function does not take part in overload resolution if <span class="tt">c</span> can't be invoked with the given arguments or if the result can't be converted to <span class="tt">R</span>.</dd></dl>
+<h2 class="groupheader">Header file </h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/functional/invoke.hpp&gt;</span></div>
+</div><!-- fragment --><h2 class="groupheader">Call Signature </h2>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">typename</span> R, <span class="keyword">typename</span> C, <span class="keyword">typename</span>... Ts&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> R <a class="code hl_variable" href="#gac130b26a28398c583ea439de89b8ff81">invoke_r</a>(C &amp;&amp; c, Ts &amp;&amp; ... ts) <span class="keyword">noexcept</span></div>
+<div class="ttc" id="agroup__kumi__invoke__r_html_gac130b26a28398c583ea439de89b8ff81"><div class="ttname"><a href="#gac130b26a28398c583ea439de89b8ff81">kumi::invoke_r</a></div><div class="ttdeci">constexpr invoke_r_t&lt; R &gt; invoke_r</div><div class="ttdoc">Callable object invoking the Callable object c with a pack of arguments and returning a value of type...</div><div class="ttdef"><b>Definition</b> invoke.hpp:173</div></div>
+</div><!-- fragment --><h3 class="groupheader">Parameters </h3>
+<ul>
+<li><span class="tt">R</span>: The type of the returned value</li>
+<li><span class="tt">c</span>: Callable object to be invoked</li>
+<li><span class="tt">ts</span>: Arguments to be passed to <span class="tt">c</span></li>
+</ul>
+<h3 class="groupheader">Return value </h3>
+<ul>
+<li>The value returned by <span class="tt">c</span>, converted to type <span class="tt">R</span>.</li>
+</ul>
+<h2 class="groupheader">Helper type </h2>
+<div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> R, <span class="keyword">typename</span> C, <span class="keyword">typename</span>... Ts&gt;</div>
+<div class="line">    <span class="keyword">using </span>invoke_r_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gac130b26a28398c583ea439de89b8ff81">kumi::invoke_r&lt;R&gt;</a>(<a class="code hl_variable" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval&lt;C&gt;</a>(), <a class="code hl_variable" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval&lt;Ts&gt;</a>()...));</div>
+<div class="line"> </div>
+<div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> R, <span class="keyword">typename</span> C, <span class="keyword">typename</span>... Ts&gt; <span class="keyword">struct </span>invoke_r</div>
+<div class="line">    {</div>
+<div class="line">      <span class="keyword">using </span>type = kumi::result::invoke_r_t&lt;R, C, Ts...&gt;;</div>
+<div class="line">    };</div>
+<div class="line"> </div>
+</div><!-- fragment --><p>Computes the return type of a call to <a class="el" href="#gac130b26a28398c583ea439de89b8ff81" title="Callable object invoking the Callable object c with a pack of arguments and returning a value of type...">kumi::invoke_r</a></p>
+<h2 class="groupheader">Example </h2>
+<div class="fragment"><div class="line"></div>
+<div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;iostream&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;memory&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;functional&gt;</span></div>
+<div class="line"><span class="preprocessor">#include &lt;string&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// --- Free function ---</span></div>
+<div class="line"><span class="keywordtype">int</span> add(<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b) { <span class="keywordflow">return</span> a + b; }</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// --- Callable objects ---</span></div>
+<div class="line"><span class="keyword">struct </span>Adder</div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordtype">int</span> operator()(<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> a + b; }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">struct </span>Multiplier</div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordtype">int</span> operator()(<span class="keywordtype">int</span> a, <span class="keywordtype">int</span> b)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> a * b; }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">struct </span>Greeter</div>
+<div class="line">{</div>
+<div class="line">  std::string operator()(std::string <span class="keyword">const</span>&amp; name)<span class="keyword"> const </span>{ <span class="keywordflow">return</span> <span class="stringliteral">&quot;Hello, &quot;</span> + name + <span class="stringliteral">&quot;!&quot;</span>; }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">struct </span>VoidCallable</div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordtype">void</span> operator()(<span class="keywordtype">int</span> x)<span class="keyword"> const </span>{ std::cout &lt;&lt; <span class="stringliteral">&quot;Value: &quot;</span> &lt;&lt; x &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>; }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// --- Member types ---</span></div>
+<div class="line"><span class="keyword">struct </span>MyClass</div>
+<div class="line">{</div>
+<div class="line">  <span class="keywordtype">int</span> value = 42;</div>
+<div class="line">  <span class="keywordtype">int</span> <a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">get</a>()<span class="keyword"> const </span>{ <span class="keywordflow">return</span> value; }</div>
+<div class="line">  <span class="keywordtype">void</span> set(<span class="keywordtype">int</span> v) { value = v; }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// --- invoke_r helpers ---</span></div>
+<div class="line"><span class="keyword">struct </span>FloatGetter</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keywordtype">float</span> <a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">get</a>() const noexcept { <span class="keywordflow">return</span> 42.0; }</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">struct </span>VoidGetter</div>
+<div class="line">{</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keywordtype">void</span> <a class="code hl_function" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">get</a>() const noexcept {}</div>
+<div class="line">};</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">void</span> void_func() { std::cout &lt;&lt; <span class="stringliteral">&quot;void_func called\n&quot;</span>; }</div>
+<div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> main()</div>
+<div class="line">{</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;===== invoke free function =====\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;invoke(add, 3, 4) = &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__kumi__invoke.html#ga9d51d7168bb2eeebb5a2bbfadf1e075b">kumi::invoke</a>(add, 3, 4) &lt;&lt; <span class="stringliteral">&quot;\n\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;===== invoke callable objects =====\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Adder(3, 4): &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__kumi__invoke.html#ga9d51d7168bb2eeebb5a2bbfadf1e075b">kumi::invoke</a>(Adder{}, 3, 4) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Multiplier(3, 4): &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__kumi__invoke.html#ga9d51d7168bb2eeebb5a2bbfadf1e075b">kumi::invoke</a>(Multiplier{}, 3, 4) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;Greeter(\&quot;World\&quot;): &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__kumi__invoke.html#ga9d51d7168bb2eeebb5a2bbfadf1e075b">kumi::invoke</a>(Greeter{}, <span class="stringliteral">&quot;World&quot;</span>) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;VoidCallable(42): &quot;</span>;</div>
+<div class="line">  <a class="code hl_variable" href="group__kumi__invoke.html#ga9d51d7168bb2eeebb5a2bbfadf1e075b">kumi::invoke</a>(VoidCallable{}, 42);</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\n===== invoke member function pointer =====\n&quot;</span>;</div>
+<div class="line">  MyClass obj{100};</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;obj.get() via invoke: &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__kumi__invoke.html#ga9d51d7168bb2eeebb5a2bbfadf1e075b">kumi::invoke</a>(&amp;MyClass::get, obj) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\n===== invoke member object pointer =====\n&quot;</span>;</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;obj.value via invoke: &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__kumi__invoke.html#ga9d51d7168bb2eeebb5a2bbfadf1e075b">kumi::invoke</a>(&amp;MyClass::value, obj) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\n===== invoke with unique_ptr =====\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> ptr = std::make_unique&lt;MyClass&gt;(200);</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;ptr-&gt;value via invoke: &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__kumi__invoke.html#ga9d51d7168bb2eeebb5a2bbfadf1e075b">kumi::invoke</a>(&amp;MyClass::value, ptr) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\n===== invoke with shared_ptr =====\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">auto</span> shared = std::make_shared&lt;MyClass&gt;(300);</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;shared-&gt;value via invoke: &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__kumi__invoke.html#ga9d51d7168bb2eeebb5a2bbfadf1e075b">kumi::invoke</a>(&amp;MyClass::value, shared) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\n===== invoke with reference_wrapper =====\n&quot;</span>;</div>
+<div class="line">  MyClass obj3{42};</div>
+<div class="line">  std::reference_wrapper&lt;MyClass&gt; ref{obj3};</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;ref.get() via invoke: &quot;</span> &lt;&lt; <a class="code hl_variable" href="group__kumi__invoke.html#ga9d51d7168bb2eeebb5a2bbfadf1e075b">kumi::invoke</a>(&amp;MyClass::get, ref) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\n===== invoke_r with type conversion =====\n&quot;</span>;</div>
+<div class="line">  <span class="keyword">constexpr</span> <span class="keyword">auto</span> getter = FloatGetter{};</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;invoke_r&lt;int&gt;(3.14f) = &quot;</span> &lt;&lt; <a class="code hl_variable" href="#gac130b26a28398c583ea439de89b8ff81">kumi::invoke_r&lt;double&gt;</a>(&amp;FloatGetter::get, getter) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;invoke_r&lt;double&gt;(42) = &quot;</span> &lt;&lt; <a class="code hl_variable" href="#gac130b26a28398c583ea439de89b8ff81">kumi::invoke_r&lt;std::size_t&gt;</a>(&amp;add, 1, 2) &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;\n===== invoke_r&lt;void&gt; =====\n&quot;</span>;</div>
+<div class="line">  <a class="code hl_variable" href="#gac130b26a28398c583ea439de89b8ff81">kumi::invoke_r&lt;void&gt;</a>(&amp;void_func);</div>
+<div class="line">  <a class="code hl_variable" href="#gac130b26a28398c583ea439de89b8ff81">kumi::invoke_r&lt;void&gt;</a>(&amp;VoidGetter::get, VoidGetter{});</div>
+<div class="line">  std::cout &lt;&lt; <span class="stringliteral">&quot;invoke_r&lt;void&gt; works correctly\n&quot;</span>;</div>
+<div class="line"> </div>
+<div class="line">  <span class="keywordflow">return</span> 0;</div>
+<div class="line">}</div>
+<div class="ttc" id="agroup__kumi__invoke_html_ga9d51d7168bb2eeebb5a2bbfadf1e075b"><div class="ttname"><a href="group__kumi__invoke.html#ga9d51d7168bb2eeebb5a2bbfadf1e075b">kumi::invoke</a></div><div class="ttdeci">constexpr invoke_t invoke</div><div class="ttdoc">Callable object invoking the Callable object c with a pack of arguments.</div><div class="ttdef"><b>Definition</b> invoke.hpp:105</div></div>
+<div class="ttc" id="astructkumi_1_1array_html_a2a236814b119c1e3e0b1cc5ce062c282"><div class="ttname"><a href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::array::get</a></div><div class="ttdeci">decltype(auto) constexpr get(array&lt; T, N &gt; &amp;t) noexcept</div><div class="ttdoc">Extracts the Ith element from a kumi::array.</div><div class="ttdef"><b>Definition</b> array.hpp:672</div></div>
+</div><!-- fragment --> 
 </div>
 </div>
 </div><!-- contents -->

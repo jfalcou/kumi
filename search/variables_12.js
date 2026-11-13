@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['windows_0',['windows',['../group__kumi__windows.html#gade96292292ae11da69415a778ef45ad0',1,'kumi']]]
+  ['value_0',['value',['../structkumi_1_1index__t.html#ab659f5d62c79ae49fe525448df86765b',1,'kumi::index_t::value'],['../structkumi_1_1label__t.html#a872221f3e54f331778f4971e6e7407ed',1,'kumi::label_t::value']]],
+  ['values_5fof_1',['values_of',['../group__kumi__values__of.html#gaa217e07b135cc3295e25689ac4ac2933',1,'kumi']]]
 ];

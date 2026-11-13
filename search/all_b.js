@@ -2,7 +2,7 @@ var searchData=
 [
   ['element_0',['Element',['../kumi_nomenclature.html#kumi_nomenclature_element',1,'']]],
   ['element_20wise_20transformations_1',['Element-wise Transformations',['../group__kumi__generic__transforms.html',1,'']]],
-  ['element_5for_5ft_2',['element_or_t',['../group__kumi__functional.html#ga11e943ab58829909243b4826d1f084d8',1,'kumi::function']]],
+  ['element_5for_5ft_2',['element_or_t',['../group__kumi__functional.html#ga6873d41c13eb4d4c359209131f6327fb',1,'kumi::function']]],
   ['element_5ft_3',['element_t',['../group__kumi__generic__traits.html#ga8ba508c6d1dfb63ff6fec24deb84d66e',1,'kumi']]],
   ['elements_4',['Identity Elements',['../kumi_identity.html',1,'kumi_glossary']]],
   ['empty_5',['empty',['../structkumi_1_1record.html#a7e54e12c537c8dcbafabc215957f0abc',1,'kumi::record::empty()'],['../structkumi_1_1tuple.html#af1a74e00134be29916bb7fb6e8cda5f6',1,'kumi::tuple::empty()'],['../structkumi_1_1projection__map.html#a58deb29e4d5dd38ee994e8e65f667627',1,'kumi::projection_map::empty()']]],

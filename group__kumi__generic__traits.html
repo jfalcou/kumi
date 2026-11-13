@@ -182,12 +182,12 @@ Typedefs</h2></td></tr>
 <tr class="memitem:ga8ba508c6d1dfb63ff6fec24deb84d66e" id="r_ga8ba508c6d1dfb63ff6fec24deb84d66e"><td class="memTemplParams" colspan="2">template&lt;std::size_t I, typename T&gt; </td></tr>
 <tr class="memitem:ga8ba508c6d1dfb63ff6fec24deb84d66e template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ga8ba508c6d1dfb63ff6fec24deb84d66e">kumi::element_t</a> = std::tuple_element_t&lt;I, std::remove_cvref_t&lt;T&gt;&gt;</td></tr>
 <tr class="memdesc:ga8ba508c6d1dfb63ff6fec24deb84d66e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Provides indexed access to the types of the elements of a kumi::product_type.  <br /></td></tr>
-<tr class="memitem:gad4afc653b2f97e5be9ed92756cfc32ba" id="r_gad4afc653b2f97e5be9ed92756cfc32ba"><td class="memTemplParams" colspan="2">template&lt;typename Field, typename T&gt; </td></tr>
-<tr class="memitem:gad4afc653b2f97e5be9ed92756cfc32ba template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#gad4afc653b2f97e5be9ed92756cfc32ba">kumi::field_of_t</a> = decltype(<a class="el" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">get</a>&lt;kumi_implementation_defined{}&gt;(std::declval&lt;T&amp;&amp;&gt;()))</td></tr>
-<tr class="memdesc:gad4afc653b2f97e5be9ed92756cfc32ba"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the value of <span class="tt">T</span> selected by the field <span class="tt">Field</span>, resolved by name the same way as <span class="tt">kumi::member</span> resolves by index (going through <span class="tt"><a class="el" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282" title="Extracts the Ith element from a kumi::array.">kumi::get</a></span>).  <br /></td></tr>
-<tr class="memitem:gaca6d42cbec766fb8d43a4060077e2624" id="r_gaca6d42cbec766fb8d43a4060077e2624"><td class="memTemplParams" colspan="2">template&lt;std::size_t I, typename T&gt; </td></tr>
-<tr class="memitem:gaca6d42cbec766fb8d43a4060077e2624 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#gaca6d42cbec766fb8d43a4060077e2624">kumi::member_t</a> = decltype(<a class="el" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">get</a>&lt;I&gt;(std::declval&lt;T&amp;&amp;&gt;()))</td></tr>
-<tr class="memdesc:gaca6d42cbec766fb8d43a4060077e2624"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the return type of a call to <a class="el" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282" title="Extracts the Ith element from a kumi::array.">kumi::get</a>.  <br /></td></tr>
+<tr class="memitem:gac18bf5bcf32dd14d3ef490e3251ad7cf" id="r_gac18bf5bcf32dd14d3ef490e3251ad7cf"><td class="memTemplParams" colspan="2">template&lt;typename Field, typename T&gt; </td></tr>
+<tr class="memitem:gac18bf5bcf32dd14d3ef490e3251ad7cf template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#gac18bf5bcf32dd14d3ef490e3251ad7cf">kumi::field_of_t</a> = decltype(<a class="el" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">get</a>&lt;kumi_implementation_defined{}&gt;(<a class="el" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval</a>&lt;T&amp;&amp;&gt;()))</td></tr>
+<tr class="memdesc:gac18bf5bcf32dd14d3ef490e3251ad7cf"><td class="mdescLeft">&#160;</td><td class="mdescRight">The type of the value of <span class="tt">T</span> selected by the field <span class="tt">Field</span>, resolved by name the same way as <span class="tt">kumi::member</span> resolves by index (going through <span class="tt"><a class="el" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282" title="Extracts the Ith element from a kumi::array.">kumi::get</a></span>).  <br /></td></tr>
+<tr class="memitem:gad546d78e5079e691e577af3b840d4fce" id="r_gad546d78e5079e691e577af3b840d4fce"><td class="memTemplParams" colspan="2">template&lt;std::size_t I, typename T&gt; </td></tr>
+<tr class="memitem:gad546d78e5079e691e577af3b840d4fce template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#gad546d78e5079e691e577af3b840d4fce">kumi::member_t</a> = decltype(<a class="el" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">get</a>&lt;I&gt;(<a class="el" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval</a>&lt;T&amp;&amp;&gt;()))</td></tr>
+<tr class="memdesc:gad546d78e5079e691e577af3b840d4fce"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the return type of a call to <a class="el" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282" title="Extracts the Ith element from a kumi::array.">kumi::get</a>.  <br /></td></tr>
 <tr class="memitem:ga17e8e213d54b65fdd4de0ec25916d3e6" id="r_ga17e8e213d54b65fdd4de0ec25916d3e6"><td class="memTemplParams" colspan="2">template&lt;std::size_t I, typename T&gt; </td></tr>
 <tr class="memitem:ga17e8e213d54b65fdd4de0ec25916d3e6 template"><td class="memItemLeft">using&#160;</td><td class="memItemRight"><a class="el" href="#ga17e8e213d54b65fdd4de0ec25916d3e6">kumi::stored_member_t</a> = decltype(kumi_implementation_defined)</td></tr>
 <tr class="memdesc:ga17e8e213d54b65fdd4de0ec25916d3e6"><td class="mdescLeft">&#160;</td><td class="mdescRight">Computes the return type of a call to <a class="el" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282" title="Extracts the Ith element from a kumi::array.">kumi::get</a> on a <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> and unwrap the field returned by <a class="el" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282" title="Extracts the Ith element from a kumi::array.">kumi::get</a> on a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a>.  <br /></td></tr>
@@ -281,8 +281,8 @@ Helper type-trait</h2>
 </div><!-- fragment --> 
 </div>
 </div>
-<a id="gad4afc653b2f97e5be9ed92756cfc32ba" name="gad4afc653b2f97e5be9ed92756cfc32ba"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gad4afc653b2f97e5be9ed92756cfc32ba">&#9670;&#160;</a></span>field_of_t</h2>
+<a id="gac18bf5bcf32dd14d3ef490e3251ad7cf" name="gac18bf5bcf32dd14d3ef490e3251ad7cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gac18bf5bcf32dd14d3ef490e3251ad7cf">&#9670;&#160;</a></span>field_of_t</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -290,7 +290,7 @@ Helper type-trait</h2>
 template&lt;typename Field, typename T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#gad4afc653b2f97e5be9ed92756cfc32ba">kumi::field_of_t</a> = decltype(<a class="el" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">get</a>&lt;kumi_implementation_defined{}&gt;(std::declval&lt;T&amp;&amp;&gt;()))</td>
+          <td class="memname">using <a class="el" href="#gac18bf5bcf32dd14d3ef490e3251ad7cf">kumi::field_of_t</a> = decltype(<a class="el" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">get</a>&lt;kumi_implementation_defined{}&gt;(<a class="el" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval</a>&lt;T&amp;&amp;&gt;()))</td>
         </tr>
       </table>
 </div><div class="memdoc">
@@ -312,8 +312,8 @@ Helper type-trait</h2>
 </div><!-- fragment --> 
 </div>
 </div>
-<a id="gaca6d42cbec766fb8d43a4060077e2624" name="gaca6d42cbec766fb8d43a4060077e2624"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#gaca6d42cbec766fb8d43a4060077e2624">&#9670;&#160;</a></span>member_t</h2>
+<a id="gad546d78e5079e691e577af3b840d4fce" name="gad546d78e5079e691e577af3b840d4fce"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#gad546d78e5079e691e577af3b840d4fce">&#9670;&#160;</a></span>member_t</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -321,7 +321,7 @@ Helper type-trait</h2>
 template&lt;std::size_t I, typename T&gt; </div>
       <table class="memname">
         <tr>
-          <td class="memname">using <a class="el" href="#gaca6d42cbec766fb8d43a4060077e2624">kumi::member_t</a> = decltype(<a class="el" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">get</a>&lt;I&gt;(std::declval&lt;T&amp;&amp;&gt;()))</td>
+          <td class="memname">using <a class="el" href="#gad546d78e5079e691e577af3b840d4fce">kumi::member_t</a> = decltype(<a class="el" href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">get</a>&lt;I&gt;(<a class="el" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval</a>&lt;T&amp;&amp;&gt;()))</td>
         </tr>
       </table>
 </div><div class="memdoc">

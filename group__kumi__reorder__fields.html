@@ -199,7 +199,7 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1identifier.html">kumi
 </ul>
 <h2 class="groupheader">Helper type </h2>
 <div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type Tuple, kumi::concepts::identifier <span class="keyword">auto</span>... Name&gt;</div>
-<div class="line">    <span class="keyword">using </span>reorder_fields_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga8c42552c8f93dad0b83a3903468d02c6">kumi::reorder_fields</a>&lt;Name...&gt;(std::declval&lt;Tuple&gt;()));</div>
+<div class="line">    <span class="keyword">using </span>reorder_fields_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga8c42552c8f93dad0b83a3903468d02c6">kumi::reorder_fields</a>&lt;Name...&gt;(<a class="code hl_variable" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval&lt;Tuple&gt;</a>()));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type Tuple, kumi::concepts::identifier <span class="keyword">auto</span>... Name&gt; <span class="keyword">struct </span>reorder_fields</div>
 <div class="line">    {</div>

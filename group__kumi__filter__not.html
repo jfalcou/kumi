@@ -196,7 +196,7 @@ template&lt;template&lt; typename &gt; typename Pred&gt; </div>
 </ul>
 <h2 class="groupheader">Helper type </h2>
 <div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Pred, kumi::concepts::product_type T&gt;</div>
-<div class="line">    <span class="keyword">using </span>filter_not_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga750bc3d3425c955e1be6ef1b3879c314">kumi::filter_not&lt;Pred&gt;</a>(std::declval&lt;T&gt;()));</div>
+<div class="line">    <span class="keyword">using </span>filter_not_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga750bc3d3425c955e1be6ef1b3879c314">kumi::filter_not&lt;Pred&gt;</a>(<a class="code hl_variable" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval&lt;T&gt;</a>()));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">template</span>&lt;<span class="keyword">typename</span>&gt; <span class="keyword">typename</span> Pred, kumi::concepts::product_type T&gt; <span class="keyword">struct </span>filter_not</div>
 <div class="line">    {</div>

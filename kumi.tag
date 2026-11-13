@@ -2071,17 +2071,17 @@
       <arglist></arglist>
     </member>
     <member kind="typedef">
-      <type>decltype(get&lt; kumi_implementation_defined{}&gt;(std::declval&lt; T &amp;&amp; &gt;()))</type>
+      <type>decltype(get&lt; kumi_implementation_defined{}&gt;(kumi::declval&lt; T &amp;&amp; &gt;()))</type>
       <name>field_of_t</name>
       <anchorfile>group__kumi__generic__traits.html</anchorfile>
-      <anchor>gad4afc653b2f97e5be9ed92756cfc32ba</anchor>
+      <anchor>gac18bf5bcf32dd14d3ef490e3251ad7cf</anchor>
       <arglist></arglist>
     </member>
     <member kind="typedef">
-      <type>decltype(get&lt; I &gt;(std::declval&lt; T &amp;&amp; &gt;()))</type>
+      <type>decltype(get&lt; I &gt;(kumi::declval&lt; T &amp;&amp; &gt;()))</type>
       <name>member_t</name>
       <anchorfile>group__kumi__generic__traits.html</anchorfile>
-      <anchor>gaca6d42cbec766fb8d43a4060077e2624</anchor>
+      <anchor>gad546d78e5079e691e577af3b840d4fce</anchor>
       <arglist></arglist>
     </member>
     <member kind="typedef">
@@ -2160,20 +2160,6 @@
       <anchorfile>group__kumi__indexes.html</anchorfile>
       <anchor>ga6882a4ada4935fa0fd4ef32ce3716ffb</anchor>
       <arglist>(Ts...) noexcept</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
-      <name>invoke</name>
-      <anchorfile>group__kumi__invoke.html</anchorfile>
-      <anchor>gace270cfbaa7b0d519fdf03f8225f2908</anchor>
-      <arglist>(C &amp;&amp;c, Ts &amp;&amp;... ts)</arglist>
-    </member>
-    <member kind="function">
-      <type>constexpr R</type>
-      <name>invoke_r</name>
-      <anchorfile>group__kumi__invoke__r.html</anchorfile>
-      <anchor>ga2ad666793ad04ea9b66c84b83f41f375</anchor>
-      <arglist>(C &amp;&amp;c, Ts &amp;&amp;... ts) noexcept(std::is_nothrow_invocable_r_v&lt; R, C, Ts... &gt;)</arglist>
     </member>
     <member kind="function">
       <type>consteval kumi_implementation_defined auto</type>
@@ -2400,6 +2386,13 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
+      <type>T &amp;&amp;(*</type>
+      <name>declval</name>
+      <anchorfile>group__kumi__utility.html</anchorfile>
+      <anchor>ga0ed1f5a6ee3ac66decf465ae8112b3d8</anchor>
+      <arglist>)() noexcept</arglist>
+    </member>
+    <member kind="variable">
       <type>constexpr exclusive_scan_left_t</type>
       <name>exclusive_scan_left</name>
       <anchorfile>group__kumi__exclusive__scan__left.html</anchorfile>
@@ -2579,6 +2572,20 @@
       <name>inner_product</name>
       <anchorfile>group__kumi__inner__product.html</anchorfile>
       <anchor>ga712c681a51bdbc86d41b160deddd2e1d</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr invoke_t</type>
+      <name>invoke</name>
+      <anchorfile>group__kumi__invoke.html</anchorfile>
+      <anchor>ga9d51d7168bb2eeebb5a2bbfadf1e075b</anchor>
+      <arglist></arglist>
+    </member>
+    <member kind="variable">
+      <type>constexpr invoke_r_t&lt; R &gt;</type>
+      <name>invoke_r</name>
+      <anchorfile>group__kumi__invoke__r.html</anchorfile>
+      <anchor>gac130b26a28398c583ea439de89b8ff81</anchor>
       <arglist></arglist>
     </member>
     <member kind="variable">
@@ -3487,10 +3494,10 @@
     <class kind="class">kumi::function::numeric_prod</class>
     <class kind="class">kumi::function::scannable</class>
     <member kind="typedef">
-      <type>std::remove_cvref_t&lt; decltype(kumi::function::get_or&lt; I &gt;(std::declval&lt; T &gt;(), std::declval&lt; U &gt;()))&gt;</type>
+      <type>std::remove_cvref_t&lt; decltype(kumi::function::get_or&lt; I &gt;(kumi::declval&lt; T &gt;(), kumi::declval&lt; U &gt;()))&gt;</type>
       <name>kumi::function::element_or_t</name>
       <anchorfile>group__kumi__functional.html</anchorfile>
-      <anchor>ga11e943ab58829909243b4826d1f084d8</anchor>
+      <anchor>ga6873d41c13eb4d4c359209131f6327fb</anchor>
       <arglist></arglist>
     </member>
   </compound>
@@ -3559,17 +3566,17 @@
       <arglist></arglist>
     </member>
     <member kind="typedef">
-      <type>decltype(get&lt; kumi_implementation_defined{}&gt;(std::declval&lt; T &amp;&amp; &gt;()))</type>
+      <type>decltype(get&lt; kumi_implementation_defined{}&gt;(kumi::declval&lt; T &amp;&amp; &gt;()))</type>
       <name>kumi::field_of_t</name>
       <anchorfile>group__kumi__generic__traits.html</anchorfile>
-      <anchor>gad4afc653b2f97e5be9ed92756cfc32ba</anchor>
+      <anchor>gac18bf5bcf32dd14d3ef490e3251ad7cf</anchor>
       <arglist></arglist>
     </member>
     <member kind="typedef">
-      <type>decltype(get&lt; I &gt;(std::declval&lt; T &amp;&amp; &gt;()))</type>
+      <type>decltype(get&lt; I &gt;(kumi::declval&lt; T &amp;&amp; &gt;()))</type>
       <name>kumi::member_t</name>
       <anchorfile>group__kumi__generic__traits.html</anchorfile>
-      <anchor>gaca6d42cbec766fb8d43a4060077e2624</anchor>
+      <anchor>gad546d78e5079e691e577af3b840d4fce</anchor>
       <arglist></arglist>
     </member>
     <member kind="typedef">
@@ -3871,6 +3878,13 @@
       <anchorfile>group__kumi__utility.html</anchorfile>
       <anchor>ga34969da06ac58348bc220ebf522233f1</anchor>
       <arglist>(std::basic_ostream&lt; CharT, Traits &gt; &amp;os, field const &amp;w) noexcept</arglist>
+    </member>
+    <member kind="variable">
+      <type>T &amp;&amp;(*</type>
+      <name>kumi::declval</name>
+      <anchorfile>group__kumi__utility.html</anchorfile>
+      <anchor>ga0ed1f5a6ee3ac66decf465ae8112b3d8</anchor>
+      <arglist>)() noexcept</arglist>
     </member>
     <member kind="variable">
       <type>constexpr traits_check&lt; Traits &gt;</type>
@@ -4766,24 +4780,24 @@
     <name>kumi_invoke</name>
     <title>kumi::invoke</title>
     <filename>group__kumi__invoke.html</filename>
-    <member kind="function">
-      <type>constexpr decltype(auto)</type>
+    <member kind="variable">
+      <type>constexpr invoke_t</type>
       <name>kumi::invoke</name>
       <anchorfile>group__kumi__invoke.html</anchorfile>
-      <anchor>gace270cfbaa7b0d519fdf03f8225f2908</anchor>
-      <arglist>(C &amp;&amp;c, Ts &amp;&amp;... ts)</arglist>
+      <anchor>ga9d51d7168bb2eeebb5a2bbfadf1e075b</anchor>
+      <arglist></arglist>
     </member>
   </compound>
   <compound kind="group">
     <name>kumi_invoke_r</name>
     <title>kumi::invoke_r</title>
     <filename>group__kumi__invoke__r.html</filename>
-    <member kind="function">
-      <type>constexpr R</type>
+    <member kind="variable">
+      <type>constexpr invoke_r_t&lt; R &gt;</type>
       <name>kumi::invoke_r</name>
       <anchorfile>group__kumi__invoke__r.html</anchorfile>
-      <anchor>ga2ad666793ad04ea9b66c84b83f41f375</anchor>
-      <arglist>(C &amp;&amp;c, Ts &amp;&amp;... ts) noexcept(std::is_nothrow_invocable_r_v&lt; R, C, Ts... &gt;)</arglist>
+      <anchor>gac130b26a28398c583ea439de89b8ff81</anchor>
+      <arglist></arglist>
     </member>
   </compound>
   <compound kind="group">

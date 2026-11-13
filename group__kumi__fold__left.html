@@ -195,7 +195,7 @@ Variables</h2></td></tr>
 <div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, kumi::concepts::product_type T, <span class="keyword">typename</span>... Value&gt;</div>
 <div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(Value) == 0) || (<span class="keyword">sizeof</span>...(Value) == 1))</div>
 <div class="line">    <span class="keyword">using</span> fold_left_t =</div>
-<div class="line">      <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gac7fc6bc4e0aff96cca71f0a64b0f2aa1">kumi::fold_left</a>(std::declval&lt;Function&gt;(), std::declval&lt;T&gt;(), std::declval&lt;Value&gt;()...));</div>
+<div class="line">      <span class="keyword">decltype</span>(<a class="code hl_variable" href="#gac7fc6bc4e0aff96cca71f0a64b0f2aa1">kumi::fold_left</a>(<a class="code hl_variable" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval&lt;Function&gt;</a>(), <a class="code hl_variable" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval&lt;T&gt;</a>(), <a class="code hl_variable" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval&lt;Value&gt;</a>()...));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Function, kumi::concepts::product_type T, <span class="keyword">typename</span>... Value&gt;</div>
 <div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(Value) == 0) || (<span class="keyword">sizeof</span>...(Value) == 1))</div>

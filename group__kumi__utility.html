@@ -241,6 +241,9 @@ template&lt;typename CharT, typename Traits&gt; </td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
 Variables</h2></td></tr>
+<tr class="memitem:ga0ed1f5a6ee3ac66decf465ae8112b3d8" id="r_ga0ed1f5a6ee3ac66decf465ae8112b3d8"><td class="memTemplParams" colspan="2">template&lt;typename T&gt; </td></tr>
+<tr class="memitem:ga0ed1f5a6ee3ac66decf465ae8112b3d8 template"><td class="memItemLeft">T &amp;&amp;(*&#160;</td><td class="memItemRight"><a class="el" href="#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval</a> )() noexcept</td></tr>
+<tr class="memdesc:ga0ed1f5a6ee3ac66decf465ae8112b3d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Converts a type <span class="tt">T</span> to an rvalue reference type for use in unevaluated contexts.  <br /></td></tr>
 <tr class="memitem:gacadc026868e6654e80c57432643c804a" id="r_gacadc026868e6654e80c57432643c804a"><td class="memTemplParams" colspan="2">template&lt;template&lt; class &gt; typename Traits&gt; </td></tr>
 <tr class="memitem:gacadc026868e6654e80c57432643c804a template"><td class="memItemLeft">constexpr traits_check&lt; Traits &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gacadc026868e6654e80c57432643c804a">kumi::if_</a> = {}</td></tr>
 <tr class="memdesc:gacadc026868e6654e80c57432643c804a"><td class="mdescLeft">&#160;</td><td class="mdescRight">Option restricting an identifier to accept values whose type satisfies the trait <span class="tt">Traits</span>.  <br /></td></tr>
@@ -560,6 +563,47 @@ Example:</h2>
 </div>
 </div>
 <a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
+<a id="ga0ed1f5a6ee3ac66decf465ae8112b3d8" name="ga0ed1f5a6ee3ac66decf465ae8112b3d8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ga0ed1f5a6ee3ac66decf465ae8112b3d8">&#9670;&#160;</a></span>declval</h2>
+
+<div class="memitem">
+<div class="memproto">
+<div class="memtemplate">
+template&lt;typename T&gt; </div>
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void(* kumi::declval) () noexcept </td>
+          <td>(</td>
+          <td class="paramname"><span class="paramname"><em></em></span></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel extern">extern</span><span class="mlabel noexcept">noexcept</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Converts a type <span class="tt">T</span> to an rvalue reference type for use in unevaluated contexts. </p>
+<h2 class="groupheader">Call Signature </h2>
+<div class="fragment"><div class="line"><span class="keyword">template</span>&lt;<span class="keyword">class</span> T&gt;</div>
+<div class="line"><span class="keyword">constexpr</span> std::add_rvalue_reference_t&lt;T&gt; <a class="code hl_variable" href="#ga0ed1f5a6ee3ac66decf465ae8112b3d8">declval</a>() noexcept;</div>
+<div class="ttc" id="agroup__kumi__utility_html_ga0ed1f5a6ee3ac66decf465ae8112b3d8"><div class="ttname"><a href="#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval</a></div><div class="ttdeci">T &amp;&amp;(* declval)() noexcept</div><div class="ttdoc">Converts a type T to an rvalue reference type for use in unevaluated contexts.</div><div class="ttdef"><b>Definition</b> dependencies.hpp:57</div></div>
+</div><!-- fragment --><h2 class="groupheader">Examples </h2>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;kumi/kumi.hpp&gt;</span></div>
+<div class="line"> </div>
+<div class="line"><span class="keyword">struct </span>Foo { <span class="keywordtype">int</span> bar(); };</div>
+<div class="line"> </div>
+<div class="line"><span class="comment">// Determine the return type without constructing Foo</span></div>
+<div class="line"><span class="keyword">using </span>bar_type = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval&lt;Foo&gt;</a>().bar()); <span class="comment">// bar_type is int</span></div>
+</div><!-- fragment --><dl class="section note"><dt>Note</dt><dd>The function has no defined body because it is only used in unevaluated contexts. Attempting to call it results in a linker error (or a compile-time error in the documentation generation context). </dd></dl>
+
+</div>
+</div>
 <a id="gacadc026868e6654e80c57432643c804a" name="gacadc026868e6654e80c57432643c804a"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gacadc026868e6654e80c57432643c804a">&#9670;&#160;</a></span>if_</h2>
 

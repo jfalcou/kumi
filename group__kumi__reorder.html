@@ -198,7 +198,7 @@ template&lt;std::size_t... I&gt; </div>
 </ul>
 <h2 class="groupheader">Helper type </h2>
 <div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::size_t... Idx&gt;</div>
-<div class="line">    <span class="keyword">using </span>reorder_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga32af967d7f453426ccd564d3a0b6c689">kumi::reorder</a>&lt;Idx...&gt;(std::declval&lt;T&gt;()));</div>
+<div class="line">    <span class="keyword">using </span>reorder_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga32af967d7f453426ccd564d3a0b6c689">kumi::reorder</a>&lt;Idx...&gt;(<a class="code hl_variable" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval&lt;T&gt;</a>()));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::size_t... Idx&gt; <span class="keyword">struct </span>reorder</div>
 <div class="line">    {</div>

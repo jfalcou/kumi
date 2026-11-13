@@ -205,7 +205,7 @@ Variables</h2></td></tr>
 <div class="line">             <span class="keyword">typename</span>... Operators&gt;</div>
 <div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(Operators) == 0) || (<span class="keyword">sizeof</span>...(Operators) == 2))</div>
 <div class="line">    <span class="keyword">using</span> inner_product_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga712c681a51bdbc86d41b160deddd2e1d">kumi::inner_product</a>(</div>
-<div class="line">      std::declval&lt;S1&gt;(), std::declval&lt;S2&gt;(), std::declval&lt;T&gt;(), std::declval&lt;Operators&gt;()...));</div>
+<div class="line">      <a class="code hl_variable" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval&lt;S1&gt;</a>(), <a class="code hl_variable" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval&lt;S2&gt;</a>(), <a class="code hl_variable" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval&lt;T&gt;</a>(), <a class="code hl_variable" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval&lt;Operators&gt;</a>()...));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type S1,</div>
 <div class="line">             kumi::concepts::sized_product_type&lt;kumi::size_v&lt;S1&gt;&gt; S2,</div>
