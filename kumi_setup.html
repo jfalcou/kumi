@@ -176,7 +176,8 @@ Pre-requisites</h1>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyLeft">nvc++  </td><td class="markdownTableBodyLeft">26.3.0  </td></tr>
 </table>
-</center><center></center><h1 class="doxsection"><a class="anchor" id="setup-source"></a>
+</center><center></center><dl class="section warning"><dt>Warning</dt><dd>Under clang 19 and 20, a fold expression of more than 256 arguments stops the compilation, and <b>KUMI</b> folds over the element types of a product type. A <a class="el" href="structkumi_1_1tuple.html" title="Fixed-size collection of heterogeneous values.">kumi::tuple</a> of more than 256 elements, or a <a class="el" href="structkumi_1_1array.html" title="Fixed-size collection of homogeneous values.">kumi::array</a> deduced from more than 257 values, fails on an error that ends with <span class="tt">exceeded expression nesting limit of 256</span>. The option <span class="tt">-fbracket-depth=1024</span>, or any value above the number of elements, lifts the limit, set in CMake by <span class="tt">target_compile_options(my_target PRIVATE -fbracket-depth=1024)</span>. From clang 21 on, these product types compile without the option.</dd></dl>
+<h1 class="doxsection"><a class="anchor" id="setup-source"></a>
 Install from the source</h1>
 <p>Code source of <b>KUMI</b> is available on GitHub and can be retrieved via the following command:</p>
 <div class="fragment"><div class="line">$ git clone https:<span class="comment">//github.com/jfalcou/kumi.git</span></div>
@@ -187,7 +188,7 @@ Install from the source</h1>
 <div class="fragment"><div class="line">$ cmake -S . -B build -G Ninja</div>
 </div><!-- fragment --></li>
 <li><p class="startli"><b class="tab-title">Visual Studio</b></p>
-<div class="fragment"><div class="line">$ cmake -S . -B build -G <span class="stringliteral">&quot;Visual Studio 17 2022&quot;</span> -A x64 </div>
+<div class="fragment"><div class="line">$ cmake -S . -B build -G <span class="stringliteral">&quot;Visual Studio 17 2022&quot;</span> -A x64</div>
 </div><!-- fragment --></li>
 </ul>
 </div><div class="tabbed"></div><p>Once <b>CMake</b> completes, you can use the <span class="tt">install</span> target to build and install <b>KUMI</b>. By default, the library will be installed in the <span class="tt">/usr/local</span> directory, thus requiring root privileges.</p>
