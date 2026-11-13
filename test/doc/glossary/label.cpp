@@ -15,6 +15,7 @@ int main()
   std::cout << kumi::get<"x">(r) << '\n';
   std::cout << r["y"_l] << '\n';
 
-  // label() of a field returns its label
-  std::cout << ("velocity"_id = 1.f).label() << '\n';
+  // label() of a field type returns its label
+  using velocity = decltype("velocity"_id = 1.f);
+  std::cout << velocity::label() << '\n';
 }
