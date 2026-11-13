@@ -2792,9 +2792,9 @@ namespace kumi
            !kumi::concepts::uniquely_labeled<Ts...>)
   struct record<Ts...>
   {
-    static_assert(kumi::concepts::uniquely_named<Ts...>, "Duplicate fields in record definition");
-    static_assert(kumi::concepts::uniquely_labeled<Ts...>, "Duplicate identifier representation in record definition");
-    static_assert(kumi::concepts::fully_named<Ts...>, "Anonymous field usage in record definition");
+    static_assert(kumi::concepts::uniquely_named<Ts...>, "Duplicate identifier in record definition");
+    static_assert(kumi::concepts::uniquely_labeled<Ts...>, "Duplicate label in record definition");
+    static_assert(kumi::concepts::fully_named<Ts...>, "Element that is not a field in record definition");
     record(Ts&&...) = delete;
   };
   template<typename... Ts> record(Ts&&...) -> record<std::unwrap_ref_decay_t<Ts>...>;
