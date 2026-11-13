@@ -27,7 +27,7 @@
     </tr>
     <tr>
       <th scope="row">Date:</th>
-      <td>2026-11-13 18:56:00</td>
+      <td>2026-11-13 18:57:34</td>
     </tr>
   </table>
 </div>
@@ -383,7 +383,7 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="cm">    @brief Fixed-size collection of heterogeneous tagged fields, tags are unique.</span></td>
+      <td class="src "><span class="cm">    @brief Fixed-size collection of heterogeneous fields with distinct labels.</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l20" href="#l20">20</a></td>
@@ -3392,21 +3392,21 @@
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="k">static_assert</span><span class="p">(</span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">uniquely_named</span><span class="o">&lt;</span><span class="n">Ts</span><span class="p">...</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Duplicate fields in record definition&quot;</span><span class="p">);</span></td>
+      <td class="src "><span class="w">    </span><span class="k">static_assert</span><span class="p">(</span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">uniquely_named</span><span class="o">&lt;</span><span class="n">Ts</span><span class="p">...</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Duplicate identifier in record definition&quot;</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l426" href="#l426">426</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="k">static_assert</span><span class="p">(</span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">uniquely_labeled</span><span class="o">&lt;</span><span class="n">Ts</span><span class="p">...</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Duplicate identifier representation in record definition&quot;</span><span class="p">);</span></td>
+      <td class="src "><span class="w">    </span><span class="k">static_assert</span><span class="p">(</span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">uniquely_labeled</span><span class="o">&lt;</span><span class="n">Ts</span><span class="p">...</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Duplicate label in record definition&quot;</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l427" href="#l427">427</a></td>
       <td class="linebranch">
       </td>
       <td class="linecount "></td>
-      <td class="src "><span class="w">    </span><span class="k">static_assert</span><span class="p">(</span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">fully_named</span><span class="o">&lt;</span><span class="n">Ts</span><span class="p">...</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Anonymous field usage in record definition&quot;</span><span class="p">);</span></td>
+      <td class="src "><span class="w">    </span><span class="k">static_assert</span><span class="p">(</span><span class="n">kumi</span><span class="o">::</span><span class="n">concepts</span><span class="o">::</span><span class="n">fully_named</span><span class="o">&lt;</span><span class="n">Ts</span><span class="p">...</span><span class="o">&gt;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;Element that is not a field in record definition&quot;</span><span class="p">);</span></td>
     </tr>
     <tr class="source-line">
       <td class="lineno"><a id="l428" href="#l428">428</a></td>

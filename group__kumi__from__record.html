@@ -138,7 +138,7 @@ $(function(){initNavTree('group__kumi__from__record.html','',''); });
 </div><!--header-->
 <div class="contents">
 
-<p>Converts a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> to an instance of an arbitrary type that models kumi::record_type.  
+<p>Converts a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields with distinct labels.">kumi::record</a> to an instance of an arbitrary type that models kumi::record_type.  
 <a href="#details">More...</a></p>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 id="header-var-members" class="groupheader"><a id="var-members" name="var-members"></a>
@@ -147,7 +147,7 @@ Variables</h2></td></tr>
 <tr class="memitem:gae4456196aadb75484ad0b061c83b3f95 template"><td class="memItemLeft">constexpr from_record_t&lt; Type &gt;&#160;</td><td class="memItemRight"><a class="el" href="#gae4456196aadb75484ad0b061c83b3f95">kumi::from_record</a> {}</td></tr>
 </table>
 <a name="details" id="details"></a><h2 id="header-details" class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>Converts a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> to an instance of an arbitrary type that models kumi::record_type. </p>
+<div class="textblock"><p>Converts a <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields with distinct labels.">kumi::record</a> to an instance of an arbitrary type that models kumi::record_type. </p>
 </div><a name="doc-var-members" id="doc-var-members"></a><h2 id="header-doc-var-members" class="groupheader">Variable Documentation</h2>
 <a id="gae4456196aadb75484ad0b061c83b3f95" name="gae4456196aadb75484ad0b061c83b3f95"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#gae4456196aadb75484ad0b061c83b3f95">&#9670;&#160;</a></span>from_record</h2>
@@ -184,7 +184,7 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1record__type.html">ku
 </div><!-- fragment --><h3 class="groupheader">Parameters </h3>
 <ul>
 <li><span class="tt">Type</span> : Type to generate</li>
-<li><span class="tt">r</span>: <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous tagged fields, tags are unique.">kumi::record</a> to convert.</li>
+<li><span class="tt">r</span>: <a class="el" href="structkumi_1_1record.html" title="Fixed-size collection of heterogeneous fields with distinct labels.">kumi::record</a> to convert.</li>
 </ul>
 <h3 class="groupheader">Return value </h3>
 <ul>
@@ -244,7 +244,7 @@ template&lt;<a class="el" href="conceptkumi_1_1concepts_1_1record__type.html">ku
 <div class="line">  std::cout &lt;&lt; a &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">  std::cout &lt;&lt; b.i &lt;&lt; <span class="charliteral">&#39; &#39;</span> &lt;&lt; b.f &lt;&lt; <span class="charliteral">&#39; &#39;</span> &lt;&lt; b.name &lt;&lt; <span class="stringliteral">&quot;\n&quot;</span>;</div>
 <div class="line">}</div>
-<div class="ttc" id="agroup__kumi__capture__field_html_gafc8e80ba53336a0142f3267959c1ba71"><div class="ttname"><a href="group__kumi__capture__field.html#gafc8e80ba53336a0142f3267959c1ba71">kumi::field::capture_field</a></div><div class="ttdeci">decltype(auto) constexpr capture_field(T &amp;&amp;t) noexcept</div><div class="ttdef"><b>Definition</b> field.hpp:283</div></div>
+<div class="ttc" id="agroup__kumi__capture__field_html_gafc8e80ba53336a0142f3267959c1ba71"><div class="ttname"><a href="group__kumi__capture__field.html#gafc8e80ba53336a0142f3267959c1ba71">kumi::field::capture_field</a></div><div class="ttdeci">decltype(auto) constexpr capture_field(T &amp;&amp;t) noexcept</div><div class="ttdef"><b>Definition</b> field.hpp:284</div></div>
 <div class="ttc" id="agroup__kumi__is__record__type__v_html_ga75612200d87c3aa30f068205aa882e2a"><div class="ttname"><a href="group__kumi__is__record__type__v.html#ga75612200d87c3aa30f068205aa882e2a">kumi::is_record_type_v</a></div><div class="ttdeci">constexpr bool is_record_type_v</div><div class="ttdef"><b>Definition</b> traits.hpp:69</div></div>
 <div class="ttc" id="agroup__kumi__make__record_html_ga931b45076a3ac621c248efa48881b59a"><div class="ttname"><a href="group__kumi__make__record.html#ga931b45076a3ac621c248efa48881b59a">kumi::make_record</a></div><div class="ttdeci">constexpr make_record_t make_record</div><div class="ttdef"><b>Definition</b> record.hpp:620</div></div>
 <div class="ttc" id="astructkumi_1_1array_html_a2a236814b119c1e3e0b1cc5ce062c282"><div class="ttname"><a href="structkumi_1_1array.html#a2a236814b119c1e3e0b1cc5ce062c282">kumi::array::get</a></div><div class="ttdeci">decltype(auto) constexpr get(array&lt; T, N &gt; &amp;t) noexcept</div><div class="ttdoc">Extracts the Ith element from a kumi::array.</div><div class="ttdef"><b>Definition</b> array.hpp:672</div></div>
