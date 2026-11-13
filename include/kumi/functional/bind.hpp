@@ -39,12 +39,12 @@ namespace kumi
 
       template<typename... Args> KUMI_HIDDEN_ABI constexpr decltype(auto) operator()(Args&&... args) &&
       {
-        return impl(seq, std::move(*this), KUMI_FWD(args)...);
+        return impl(seq, KUMI_MOVE(*this), KUMI_FWD(args)...);
       }
 
       template<typename... Args> KUMI_HIDDEN_ABI constexpr decltype(auto) operator()(Args&&... args) const&&
       {
-        return impl(seq, std::move(*this), KUMI_FWD(args)...);
+        return impl(seq, KUMI_MOVE(*this), KUMI_FWD(args)...);
       }
 
       template<std::size_t... Is, typename Self, typename... Args>

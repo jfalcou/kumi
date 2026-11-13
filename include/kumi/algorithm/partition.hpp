@@ -264,7 +264,7 @@ namespace kumi
   {
     //! [partition_t]
     template<template<typename> typename Pred, kumi::concepts::product_type T>
-    using partition_t = decltype(kumi::partition<Pred>(std::declval<T>()));
+    using partition_t = decltype(kumi::partition<Pred>(kumi::declval<T>()));
 
     template<template<typename> typename Pred, kumi::concepts::product_type T> struct partition
     {
@@ -275,7 +275,7 @@ namespace kumi
 
     //! [filter_t]
     template<template<typename> typename Pred, kumi::concepts::product_type T>
-    using filter_t = decltype(kumi::filter<Pred>(std::declval<T>()));
+    using filter_t = decltype(kumi::filter<Pred>(kumi::declval<T>()));
 
     template<template<typename> typename Pred, kumi::concepts::product_type T> struct filter
     {
@@ -286,7 +286,7 @@ namespace kumi
 
     //! [filter_not_t]
     template<template<typename> typename Pred, kumi::concepts::product_type T>
-    using filter_not_t = decltype(kumi::filter_not<Pred>(std::declval<T>()));
+    using filter_not_t = decltype(kumi::filter_not<Pred>(kumi::declval<T>()));
 
     template<template<typename> typename Pred, kumi::concepts::product_type T> struct filter_not
     {

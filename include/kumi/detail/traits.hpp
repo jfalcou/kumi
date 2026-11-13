@@ -72,7 +72,7 @@ namespace kumi::_
 
   /// Concept checking if a type T can be considered a set with respect to the given keys
   template<typename T, typename... Keys>
-  concept is_set = requires { (void(static_cast<Keys&&>(std::declval<T>())), ...); };
+  concept is_set = requires { (void(static_cast<Keys&&>(kumi::declval<T>())), ...); };
 
   //====================================================================================================================
   // Helper type for types behavior detection, only one type to instantiate for all traits
@@ -84,7 +84,7 @@ namespace kumi::_
     using kumi::_::unique<I, Ts>::operator()...;
     kumi::_::invalid operator()(...);
 
-    template<typename Ref> using type = decltype(std::declval<family>()(std::declval<Ref>()));
+    template<typename Ref> using type = decltype(kumi::declval<family>()(kumi::declval<Ref>()));
   };
 
   template<typename... Ts> using make_family = family<std::index_sequence_for<Ts...>, Ts...>;

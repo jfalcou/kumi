@@ -672,7 +672,7 @@ namespace kumi
     //! [reduce_t]
     template<kumi::concepts::monoid M, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
-    using reduce_t = decltype(kumi::reduce(std::declval<M>(), std::declval<T>(), std::declval<Value>()...));
+    using reduce_t = decltype(kumi::reduce(kumi::declval<M>(), kumi::declval<T>(), kumi::declval<Value>()...));
 
     template<kumi::concepts::monoid M, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
@@ -687,7 +687,7 @@ namespace kumi
     template<typename F, kumi::concepts::monoid M, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
     using map_reduce_t =
-      decltype(kumi::map_reduce(std::declval<F>(), std::declval<M>(), std::declval<T>(), std::declval<Value>()...));
+      decltype(kumi::map_reduce(kumi::declval<F>(), kumi::declval<M>(), kumi::declval<T>(), kumi::declval<Value>()...));
 
     template<typename F, kumi::concepts::monoid M, kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
@@ -701,7 +701,7 @@ namespace kumi
     //! [sum_t]
     template<kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
-    using sum_t = decltype(kumi::sum(std::declval<T>(), std::declval<Value>()...));
+    using sum_t = decltype(kumi::sum(kumi::declval<T>(), kumi::declval<Value>()...));
 
     template<kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
@@ -715,7 +715,7 @@ namespace kumi
     //! [prod_t]
     template<kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
-    using prod_t = decltype(kumi::prod(std::declval<T>(), std::declval<Value>()...));
+    using prod_t = decltype(kumi::prod(kumi::declval<T>(), kumi::declval<Value>()...));
 
     template<kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
@@ -729,7 +729,7 @@ namespace kumi
     //! [bit_and_t]
     template<kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
-    using bit_and_t = decltype(kumi::bit_and(std::declval<T>(), std::declval<Value>()...));
+    using bit_and_t = decltype(kumi::bit_and(kumi::declval<T>(), kumi::declval<Value>()...));
 
     template<kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
@@ -743,7 +743,7 @@ namespace kumi
     //! [bit_or_t]
     template<kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
-    using bit_or_t = decltype(kumi::bit_or(std::declval<T>(), std::declval<Value>()...));
+    using bit_or_t = decltype(kumi::bit_or(kumi::declval<T>(), kumi::declval<Value>()...));
 
     template<kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
@@ -757,7 +757,7 @@ namespace kumi
     //! [bit_xor_t]
     template<kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))
-    using bit_xor_t = decltype(kumi::bit_xor(std::declval<T>(), std::declval<Value>()...));
+    using bit_xor_t = decltype(kumi::bit_xor(kumi::declval<T>(), kumi::declval<Value>()...));
 
     template<kumi::concepts::product_type T, typename... Value>
     requires((sizeof...(Value) == 0) || (sizeof...(Value) == 1))

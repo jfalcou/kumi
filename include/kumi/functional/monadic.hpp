@@ -80,7 +80,7 @@ namespace kumi::function
   **/
   //====================================================================================================================
   template<std::size_t I, typename T, typename U>
-  using element_or_t = std::remove_cvref_t<decltype(kumi::function::get_or<I>(std::declval<T>(), std::declval<U>()))>;
+  using element_or_t = std::remove_cvref_t<decltype(kumi::function::get_or<I>(kumi::declval<T>(), kumi::declval<U>()))>;
 
   template<std::size_t I, typename T, typename U> struct element_or
   {
@@ -175,7 +175,7 @@ namespace kumi::function
     template<typename C> KUMI_ABI friend constexpr decltype(auto) operator>>(scannable&& s, C&& c)
     {
       auto res = kumi::invoke(KUMI_FWD(c), s.value);
-      return kumi::function::scannable{kumi::bind_front(std::move(s.func), std::move(s.value)), res};
+      return kumi::function::scannable{kumi::bind_front(KUMI_MOVE(s.func), KUMI_MOVE(s.value)), res};
     }
 
     //==================================================================================================================
@@ -191,7 +191,7 @@ namespace kumi::function
     template<typename C> KUMI_ABI friend constexpr decltype(auto) operator<<(C&& c, scannable&& s)
     {
       auto res = kumi::invoke(KUMI_FWD(c), s.value);
-      return kumi::function::scannable{kumi::bind_back(std::move(s.func), std::move(s.value)), res};
+      return kumi::function::scannable{kumi::bind_back(KUMI_MOVE(s.func), KUMI_MOVE(s.value)), res};
     }
 
     //==================================================================================================================

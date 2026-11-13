@@ -98,7 +98,7 @@ namespace kumi
   namespace result
   {
     //! [cat_t]
-    template<concepts::product_type... Ts> using cat_t = decltype(kumi::cat(std::declval<Ts>()...));
+    template<concepts::product_type... Ts> using cat_t = decltype(kumi::cat(kumi::declval<Ts>()...));
 
     template<kumi::concepts::product_type... Ts> struct cat
     {

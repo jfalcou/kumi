@@ -284,7 +284,7 @@ namespace kumi
     template<typename Function,
              kumi::concepts::product_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
-    using map_t = decltype(kumi::map(std::declval<Function>(), std::declval<T>(), std::declval<Ts>()...));
+    using map_t = decltype(kumi::map(kumi::declval<Function>(), kumi::declval<T>(), kumi::declval<Ts>()...));
 
     template<typename Function,
              kumi::concepts::product_type T,
@@ -300,7 +300,8 @@ namespace kumi
     template<typename Function,
              kumi::concepts::product_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
-    using map_index_t = decltype(kumi::map_index(std::declval<Function>(), std::declval<T>(), std::declval<Ts>()...));
+    using map_index_t =
+      decltype(kumi::map_index(kumi::declval<Function>(), kumi::declval<T>(), kumi::declval<Ts>()...));
 
     template<typename Function,
              kumi::concepts::product_type T,
@@ -316,7 +317,8 @@ namespace kumi
     template<typename Function,
              kumi::concepts::record_type T,
              kumi::concepts::sized_product_type<kumi::size_v<T>>... Ts>
-    using map_field_t = decltype(kumi::map_field(std::declval<Function>(), std::declval<T>(), std::declval<Ts>()...));
+    using map_field_t =
+      decltype(kumi::map_field(kumi::declval<Function>(), kumi::declval<T>(), kumi::declval<Ts>()...));
 
     template<typename Function,
              kumi::concepts::record_type T,

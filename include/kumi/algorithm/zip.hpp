@@ -299,7 +299,7 @@ namespace kumi
     //! [zip_t]
     //
     template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
-    using zip_t = decltype(kumi::zip(std::declval<T0>(), std::declval<Ts>()...));
+    using zip_t = decltype(kumi::zip(kumi::declval<T0>(), kumi::declval<Ts>()...));
 
     template<kumi::concepts::product_type T0, kumi::concepts::sized_product_type<kumi::size_v<T0>>... Ts> struct zip
     {
@@ -311,7 +311,7 @@ namespace kumi
     //! [zip_min_t]
     //
     template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
-    using zip_min_t = decltype(kumi::zip_min(std::declval<T0>(), std::declval<Ts>()...));
+    using zip_min_t = decltype(kumi::zip_min(kumi::declval<T0>(), kumi::declval<Ts>()...));
 
     template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts> struct zip_min
     {
@@ -322,7 +322,7 @@ namespace kumi
 
     //! [zip_max_t]
     template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts>
-    using zip_max_t = decltype(kumi::zip_max(std::declval<T0>(), std::declval<Ts>()...));
+    using zip_max_t = decltype(kumi::zip_max(kumi::declval<T0>(), kumi::declval<Ts>()...));
 
     template<kumi::concepts::product_type T0, kumi::concepts::product_type... Ts> struct zip_max
     {

@@ -310,7 +310,7 @@ namespace kumi
   {
     //! [push_front_t]
     template<kumi::concepts::product_type T, typename V>
-    using push_front_t = decltype(kumi::push_front(std::declval<T>(), std::declval<V>()));
+    using push_front_t = decltype(kumi::push_front(kumi::declval<T>(), kumi::declval<V>()));
 
     template<kumi::concepts::product_type T, typename V> struct push_front
     {
@@ -320,7 +320,7 @@ namespace kumi
     //! [push_front_t]
 
     //! [pop_front_t]
-    template<kumi::concepts::product_type T> using pop_front_t = decltype(kumi::pop_front(std::declval<T>()));
+    template<kumi::concepts::product_type T> using pop_front_t = decltype(kumi::pop_front(kumi::declval<T>()));
 
     template<kumi::concepts::product_type T> struct pop_front
     {
@@ -331,7 +331,7 @@ namespace kumi
 
     //! [push_back_t]
     template<kumi::concepts::product_type T, typename V>
-    using push_back_t = decltype(kumi::push_back(std::declval<T>(), std::declval<V>()));
+    using push_back_t = decltype(kumi::push_back(kumi::declval<T>(), kumi::declval<V>()));
 
     template<kumi::concepts::product_type T, typename V> struct push_back
     {
@@ -341,7 +341,7 @@ namespace kumi
     //! [push_back_t]
 
     //! [pop_back_t]
-    template<kumi::concepts::product_type T> using pop_back_t = decltype(kumi::pop_back(std::declval<T>()));
+    template<kumi::concepts::product_type T> using pop_back_t = decltype(kumi::pop_back(kumi::declval<T>()));
 
     template<kumi::concepts::product_type T> struct pop_back
     {

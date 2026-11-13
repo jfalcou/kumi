@@ -175,7 +175,7 @@ namespace kumi
     KUMI_ABI constexpr array& operator=(array<U, N>&& other) noexcept(std::is_nothrow_assignable_v<T&, U&&>)
     requires(std::is_assignable_v<T&, U&&>)
     {
-      kumi::_::assign(*this, std::move(other), std::make_index_sequence<N>{});
+      kumi::_::assign(*this, KUMI_MOVE(other), std::make_index_sequence<N>{});
       return *this;
     }
 

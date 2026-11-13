@@ -166,7 +166,7 @@ namespace kumi
   {
     //! [rotate_left_t]
     template<std::size_t R, kumi::concepts::product_type T>
-    using rotate_left_t = decltype(kumi::rotate_left<R>(std::declval<T>()));
+    using rotate_left_t = decltype(kumi::rotate_left<R>(kumi::declval<T>()));
 
     template<std::size_t R, kumi::concepts::product_type T> struct rotate_left
     {
@@ -177,7 +177,7 @@ namespace kumi
 
     //! [rotate_right_t]
     template<std::size_t R, kumi::concepts::product_type T>
-    using rotate_right_t = decltype(kumi::rotate_right<R>(std::declval<T>()));
+    using rotate_right_t = decltype(kumi::rotate_right<R>(kumi::declval<T>()));
 
     template<std::size_t R, kumi::concepts::product_type T> struct rotate_right
     {
