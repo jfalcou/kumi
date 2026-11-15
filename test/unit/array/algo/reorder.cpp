@@ -131,3 +131,17 @@ TTS_CASE("Check reorder<I...>(array) constexpr behavior")
     TTS_CONSTEXPR_EQUAL(s, (kumi::array{1, 2, 3, 4, 3, 2, 1}));
   }
 };
+
+TTS_CASE("Check reorder<I...>(array) yields an array while the result stays homogeneous")
+{
+  auto t = kumi::array{1, 2, 3, 4};
+
+  TTS_TYPE_IS((decltype(kumi::reorder<0, 1, 2, 3>(t))), (kumi::array<int, 4>));
+  TTS_TYPE_IS((decltype(kumi::reorder<3, 2, 1, 0>(t))), (kumi::array<int, 4>));
+  TTS_TYPE_IS((decltype(kumi::reorder<0, 0, 0, 0>(t))), (kumi::array<int, 4>));
+  TTS_TYPE_IS((decltype(kumi::reorder<3, 2, 1, 0, 1, 2, 3>(t))), (kumi::array<int, 7>));
+  TTS_TYPE_IS((decltype(kumi::reorder<>(t))), kumi::array<>);
+
+  TTS_EQUAL((kumi::reorder<0, 0, 0, 0>(t)), (kumi::array{1, 1, 1, 1}));
+  TTS_EQUAL((kumi::reorder<3, 2, 1, 0, 1, 2, 3>(t)), (kumi::array{4, 3, 2, 1, 2, 3, 4}));
+};
