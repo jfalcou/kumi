@@ -11,6 +11,17 @@
 #include <tts/tts.hpp>
 #include "test.hpp"
 
+TTS_CASE("Check result::remove<Array, I...> behavior on arrays")
+{
+  using T = kumi::array<int, 4>;
+  TTS_TYPE_IS((kumi::result::remove_t<T, 0>), kumi::array<>);
+  TTS_TYPE_IS((kumi::result::remove_t<T, 1>), (kumi::array<int, 1>));
+  TTS_TYPE_IS((kumi::result::remove_t<T, 1, 3>), (kumi::array<int, 2>));
+  TTS_TYPE_IS((kumi::result::remove_t<T, 0, 1>), (kumi::array<int, 3>));
+  TTS_TYPE_IS((kumi::result::remove_t<T, 0, 4, 2>), (kumi::array<int, 2>));
+  TTS_TYPE_IS((kumi::result::remove_t<T, 1, 4, 2>), (kumi::array<int, 2>));
+};
+
 TTS_CASE("Check kumi::remove behavior on arrays")
 {
   using namespace kumi::literals;
