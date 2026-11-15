@@ -297,7 +297,8 @@ namespace kumi
     //==================================================================================================================
     template<typename T>
     concept homogeneous_product_type =
-      kumi::concepts::product_type<T> && kumi::is_homogeneous_v<std::remove_cvref_t<T>>;
+      kumi::concepts::power_type<T> ||
+      (kumi::concepts::product_type<T> && kumi::is_homogeneous_v<std::remove_cvref_t<T>>);
 
     //==================================================================================================================
     /**
