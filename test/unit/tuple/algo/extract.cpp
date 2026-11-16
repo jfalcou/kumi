@@ -11,6 +11,20 @@
 #include <tts/tts.hpp>
 #include "test.hpp"
 
+TTS_CASE("Check result::extract<T, I...> behavior on tuples")
+{
+  using T = kumi::tuple<int, float, double, char>;
+  TTS_TYPE_IS((kumi::result::extract_t<T, 0>), T);
+  TTS_TYPE_IS((kumi::result::extract_t<T, 1>), (kumi::tuple<float, double, char>));
+  TTS_TYPE_IS((kumi::result::extract_t<T, 1, 3>), (kumi::tuple<float, double>));
+  TTS_TYPE_IS((kumi::result::extract_t<T, 0, 4>), T);
+  TTS_TYPE_IS((kumi::result::extract_t<T, 0, 4, 2>), (kumi::tuple<int, double>));
+  TTS_TYPE_IS((kumi::result::extract_t<T, 1, 4, 2>), (kumi::tuple<float, char>));
+
+  using R = kumi::tuple<int&, float, double const&, char>;
+  TTS_TYPE_IS((kumi::result::extract_t<R, 0, 4, 2>), (kumi::tuple<int&, double const&>));
+};
+
 TTS_CASE("Check tuple::extract behavior")
 {
   using namespace kumi::literals;

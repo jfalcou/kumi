@@ -11,6 +11,17 @@
 #include <tts/tts.hpp>
 #include "test.hpp"
 
+TTS_CASE("Check result::extract<Array, I...> behavior on arrays")
+{
+  using T = kumi::array<int, 4>;
+  TTS_TYPE_IS((kumi::result::extract_t<T, 0>), T);
+  TTS_TYPE_IS((kumi::result::extract_t<T, 1>), (kumi::array<int, 3>));
+  TTS_TYPE_IS((kumi::result::extract_t<T, 1, 3>), (kumi::array<int, 2>));
+  TTS_TYPE_IS((kumi::result::extract_t<T, 0, 4>), T);
+  TTS_TYPE_IS((kumi::result::extract_t<T, 0, 4, 2>), (kumi::array<int, 2>));
+  TTS_TYPE_IS((kumi::result::extract_t<T, 1, 4, 2>), (kumi::array<int, 2>));
+};
+
 TTS_CASE("Check array::extract behavior")
 {
   using namespace kumi::literals;

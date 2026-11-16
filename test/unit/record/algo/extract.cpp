@@ -10,6 +10,22 @@
 #include <kumi/algorithm/extract.hpp>
 #include <tts/tts.hpp>
 
+TTS_CASE("Check result::extract<Record, I...> behavior on records")
+{
+  using int_f = kumi::field<kumi::name<"a">, int>;
+  using float_f = kumi::field<kumi::name<"b">, float>;
+  using double_f = kumi::field<kumi::name<"c">, double>;
+  using char_f = kumi::field<kumi::name<"d">, char>;
+  using R = kumi::record<int_f, float_f, double_f, char_f>;
+
+  TTS_TYPE_IS((kumi::result::extract_t<R, 0>), R);
+  TTS_TYPE_IS((kumi::result::extract_t<R, 1>), (kumi::record<float_f, double_f, char_f>));
+  TTS_TYPE_IS((kumi::result::extract_t<R, 1, 3>), (kumi::record<float_f, double_f>));
+  TTS_TYPE_IS((kumi::result::extract_t<R, 0, 4>), R);
+  TTS_TYPE_IS((kumi::result::extract_t<R, 0, 4, 2>), (kumi::record<int_f, double_f>));
+  TTS_TYPE_IS((kumi::result::extract_t<R, 1, 4, 2>), (kumi::record<float_f, char_f>));
+};
+
 TTS_CASE("Check kumi::extract behavior on records")
 {
   using namespace kumi::literals;

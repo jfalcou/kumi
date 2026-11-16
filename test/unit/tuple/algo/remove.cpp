@@ -11,6 +11,20 @@
 #include <tts/tts.hpp>
 #include "test.hpp"
 
+TTS_CASE("Check result::remove<T, I...> behavior on tuples")
+{
+  using T = kumi::tuple<int, float, double, char>;
+  TTS_TYPE_IS((kumi::result::remove_t<T, 0>), kumi::tuple<>);
+  TTS_TYPE_IS((kumi::result::remove_t<T, 1>), (kumi::tuple<int>));
+  TTS_TYPE_IS((kumi::result::remove_t<T, 1, 3>), (kumi::tuple<int, char>));
+  TTS_TYPE_IS((kumi::result::remove_t<T, 0, 1>), (kumi::tuple<float, double, char>));
+  TTS_TYPE_IS((kumi::result::remove_t<T, 0, 4, 2>), (kumi::tuple<float, char>));
+  TTS_TYPE_IS((kumi::result::remove_t<T, 1, 4, 2>), (kumi::tuple<int, double>));
+
+  using R = kumi::tuple<int&, float, double const&, char>;
+  TTS_TYPE_IS((kumi::result::remove_t<R, 1, 4, 2>), (kumi::tuple<int&, double const&>));
+};
+
 TTS_CASE("Check kumi::remove behavior on tuples")
 {
   using namespace kumi::literals;
