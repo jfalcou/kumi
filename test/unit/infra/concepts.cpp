@@ -135,9 +135,12 @@ TTS_CASE("homogeneous non-power types still select the homogeneous overload")
 
   TTS_EXPECT_COMPILES(a, { only_homogeneous(a); });
   TTS_EXPECT_COMPILES(a, { only_power(a); });
+  TTS_EXPECT(only_homogeneous(a));
+  TTS_EXPECT(only_power(a));
 
   TTS_EXPECT_COMPILES(h, { only_homogeneous(h); });
   TTS_EXPECT_NOT_COMPILES(h, { only_power(h); });
+  TTS_EXPECT(only_homogeneous(h));
 };
 
 TTS_CASE("non-homogeneous types match neither overload")
