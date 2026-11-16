@@ -368,9 +368,9 @@
             "branch_percent": 75.0,
             "branch_total": 28,
             "filename": "include/kumi/functional/functors.hpp",
-            "function_covered": 587,
+            "function_covered": 613,
             "function_percent": 100.0,
-            "function_total": 587,
+            "function_total": 613,
             "line_covered": 11,
             "line_percent": 100.0,
             "line_total": 11
@@ -488,9 +488,9 @@
             "branch_percent": null,
             "branch_total": 0,
             "filename": "include/kumi/utils/field.hpp",
-            "function_covered": 562,
+            "function_covered": 563,
             "function_percent": 94.3,
-            "function_total": 596,
+            "function_total": 597,
             "line_covered": 23,
             "line_percent": 100.0,
             "line_total": 23
@@ -556,9 +556,9 @@
             "line_total": 3
         }
     ],
-    "function_covered": 7615,
+    "function_covered": 7642,
     "function_percent": 94.6,
-    "function_total": 8048,
+    "function_total": 8075,
     "gcovr/summary_format_version": "0.6",
     "line_covered": 706,
     "line_percent": 99.7,
