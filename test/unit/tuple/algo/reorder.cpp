@@ -148,7 +148,7 @@ TTS_CASE("Check reorder<I...>(tuple) preserves references and const")
   kumi::get<0>(kumi::reorder<1, 0>(t)) = 7.5;
   TTS_EQUAL(b, 7.5);
 
-  kumi::tuple<int const, double> c{1, 2.5};
+  [[maybe_unused]] kumi::tuple<int const, double> c{1, 2.5};
   TTS_TYPE_IS((decltype(kumi::reorder<0>(c))), (kumi::tuple<int const>));
   TTS_TYPE_IS((decltype(kumi::reorder<0, 1>(c))), (kumi::tuple<int const, double>));
 };
