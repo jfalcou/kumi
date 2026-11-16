@@ -134,3 +134,21 @@ TTS_CASE("Check reorder<I...>(tuple) constexpr behavior")
     TTS_CONSTEXPR_EQUAL(s, (kumi::tuple{1, 2., 3.4f, '5', 3.4f, 2., 1}));
   }
 };
+
+TTS_CASE("Check reorder<I...>(tuple) preserves references and const")
+{
+  int a = 1;
+  double b = 2.5;
+
+  auto t = kumi::tie(a, b);
+  TTS_TYPE_IS((decltype(kumi::reorder<0, 1>(t))), (kumi::tuple<int&, double&>));
+  TTS_TYPE_IS((decltype(kumi::reorder<1, 0>(t))), (kumi::tuple<double&, int&>));
+  TTS_TYPE_IS((decltype(kumi::reorder<1>(t))), (kumi::tuple<double&>));
+
+  kumi::get<0>(kumi::reorder<1, 0>(t)) = 7.5;
+  TTS_EQUAL(b, 7.5);
+
+  [[maybe_unused]] kumi::tuple<int const, double> c{1, 2.5};
+  TTS_TYPE_IS((decltype(kumi::reorder<0>(c))), (kumi::tuple<int const>));
+  TTS_TYPE_IS((decltype(kumi::reorder<0, 1>(c))), (kumi::tuple<int const, double>));
+};

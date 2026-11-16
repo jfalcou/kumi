@@ -224,3 +224,16 @@ TTS_CASE("Check reorder_fields<Name...>(record) constexpr behavior")
 }
 }
 ;
+
+TTS_CASE("Check reorder<I...>(record) preserves references")
+{
+  int x = 1;
+  double y = 2.5;
+
+  auto r = kumi::tie_as_record<"x"_id, "y"_id>(x, y);
+  TTS_TYPE_IS((decltype(kumi::reorder<1, 0>(r))),
+              (kumi::record<kumi::field<kumi::name<"y">, double&>, kumi::field<kumi::name<"x">, int&>>));
+
+  kumi::reorder<1, 0>(r)["y"_id] = 7.5;
+  TTS_EQUAL(y, 7.5);
+};
