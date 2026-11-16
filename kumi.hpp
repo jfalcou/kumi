@@ -4854,7 +4854,7 @@ namespace kumi
     template<kumi::concepts::product_type T> [[nodiscard]] KUMI_ABI constexpr auto operator()(T&& t) const
     {
       static_assert(((Idx < kumi::size_v<T>) && ...), "[KUMI] - Index out of bounds");
-      return builder<T>::make(get<Idx>(KUMI_FWD(t))...);
+      return kumi::_::builder(KUMI_FWD(t), std::index_sequence<Idx...>{});
     }
   };
   template<kumi::concepts::identifier auto... Name> struct reorder_fields_t
