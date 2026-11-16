@@ -204,11 +204,11 @@ Variables</h2></td></tr>
 </ul>
 <h2 class="groupheader">Helper type </h2>
 <div class="fragment"><div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::size_t... I&gt;</div>
-<div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(I) == 1) || (<span class="keyword">sizeof</span>...(I) == 2))</div>
+<div class="line">    <span class="keyword">requires</span>((1 &lt;= <span class="keyword">sizeof</span>...(I)) &amp;&amp; (<span class="keyword">sizeof</span>...(I) &lt;= 3))</div>
 <div class="line">    <span class="keyword">using</span> remove_t = <span class="keyword">decltype</span>(<a class="code hl_variable" href="#ga0f52ba0b24ce54052784df91c54ac233">kumi::remove</a>(<a class="code hl_variable" href="group__kumi__utility.html#ga0ed1f5a6ee3ac66decf465ae8112b3d8">kumi::declval&lt;T&gt;</a>(), kumi::index_t&lt;I&gt;{}...));</div>
 <div class="line"> </div>
 <div class="line">    <span class="keyword">template</span>&lt;kumi::concepts::product_type T, std::size_t... I&gt;</div>
-<div class="line">    <span class="keyword">requires</span>((<span class="keyword">sizeof</span>...(I) == 1) || (<span class="keyword">sizeof</span>...(I) == 2))</div>
+<div class="line">    <span class="keyword">requires</span>((1 &lt;= <span class="keyword">sizeof</span>...(I)) &amp;&amp; (<span class="keyword">sizeof</span>...(I) &lt;= 3))</div>
 <div class="line">    <span class="keyword">struct</span> remove</div>
 <div class="line">    {</div>
 <div class="line">      <span class="keyword">using </span>type = kumi::result::remove_t&lt;T, I...&gt;;</div>
