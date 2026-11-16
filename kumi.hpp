@@ -3827,19 +3827,19 @@ namespace kumi
   namespace result
   {
     template<kumi::concepts::product_type T, std::size_t... I>
-    requires((sizeof...(I) == 1) || (sizeof...(I) == 2))
+    requires((1 <= sizeof...(I)) && (sizeof...(I) <= 3))
     using extract_t = decltype(kumi::extract(kumi::declval<T>(), kumi::index_t<I>{}...));
     template<kumi::concepts::product_type T, std::size_t... I>
-    requires((sizeof...(I) == 1) || (sizeof...(I) == 2))
+    requires((1 <= sizeof...(I)) && (sizeof...(I) <= 3))
     struct extract
     {
       using type = kumi::result::extract_t<T, I...>;
     };
     template<kumi::concepts::product_type T, std::size_t... I>
-    requires((sizeof...(I) == 1) || (sizeof...(I) == 2))
+    requires((1 <= sizeof...(I)) && (sizeof...(I) <= 3))
     using remove_t = decltype(kumi::remove(kumi::declval<T>(), kumi::index_t<I>{}...));
     template<kumi::concepts::product_type T, std::size_t... I>
-    requires((sizeof...(I) == 1) || (sizeof...(I) == 2))
+    requires((1 <= sizeof...(I)) && (sizeof...(I) <= 3))
     struct remove
     {
       using type = kumi::result::remove_t<T, I...>;
