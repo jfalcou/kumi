@@ -937,7 +937,8 @@ namespace kumi
     concept non_empty_product_type = kumi::concepts::product_type<T> && (kumi::size_v<T> != 0);
     template<typename T>
     concept homogeneous_product_type =
-      kumi::concepts::product_type<T> && kumi::is_homogeneous_v<std::remove_cvref_t<T>>;
+      kumi::concepts::power_type<T> ||
+      (kumi::concepts::product_type<T> && kumi::is_homogeneous_v<std::remove_cvref_t<T>>);
     template<typename... Ts>
     concept has_named_fields = (... || kumi::concepts::field<Ts>);
     template<typename... Ts>
