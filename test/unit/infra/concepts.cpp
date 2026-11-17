@@ -78,3 +78,85 @@ TTS_CASE("Check generic concepts on product_types")
     }
   }
 };
+
+namespace
+{
+  template<kumi::concepts::homogeneous_product_type T> constexpr int pick(T const&)
+  {
+    return 1;
+  }
+
+  template<kumi::concepts::power_type T> constexpr int pick(T const&)
+  {
+    return 2;
+  }
+
+  template<kumi::concepts::homogeneous_product_type T> constexpr int only_homogeneous(T const&)
+  {
+    return 1;
+  }
+
+  template<kumi::concepts::power_type T> constexpr int only_power(T const&)
+  {
+    return 1;
+  }
+
+  template<typename T>
+  concept can_pick = requires(T&& t) { pick(std::forward<T>(t)); };
+}
+
+TTS_CASE("power_type and homogeneous_product_type overloads are not ambiguous")
+{
+  TTS_EXPECT((can_pick<kumi::array<int, 3>>));
+  TTS_EXPECT((can_pick<kumi::array<int, 3> const&>));
+  TTS_EXPECT((can_pick<kumi::array<int, 3>&>));
+  TTS_EXPECT((can_pick<kumi::array<int, 3>&&>));
+
+  kumi::array<int, 3> a{1, 2, 3};
+  TTS_EQUAL(pick(a), 2);
+  TTS_EQUAL((pick(kumi::array<int, 3>{1, 2, 3})), 2);
+
+  kumi::array<double, 1> single{1.};
+  TTS_EQUAL(pick(single), 2);
+};
+
+TTS_CASE("homogeneous non-power types still select the homogeneous overload")
+{
+  TTS_EXPECT((can_pick<kumi::tuple<int, int, int>>));
+  TTS_EQUAL((pick(kumi::tuple<int, int, int>{1, 2, 3})), 1);
+  TTS_EQUAL((only_homogeneous(kumi::array<int, 3>{1, 2, 3})), 1);
+
+  auto t = kumi::tuple{1, 'x', 3.f};
+  auto a = kumi::array{1, 2, 3, 4, 5};
+  auto h = kumi::tuple{1, 2, 3, 4, 5};
+
+  TTS_EXPECT_NOT_COMPILES(t, { only_homogeneous(t); });
+  TTS_EXPECT_NOT_COMPILES(t, { only_power(t); });
+
+  TTS_EXPECT_COMPILES(a, { only_homogeneous(a); });
+  TTS_EXPECT_COMPILES(a, { only_power(a); });
+  TTS_EXPECT(only_homogeneous(a));
+  TTS_EXPECT(only_power(a));
+
+  TTS_EXPECT_COMPILES(h, { only_homogeneous(h); });
+  TTS_EXPECT_NOT_COMPILES(h, { only_power(h); });
+  TTS_EXPECT(only_homogeneous(h));
+};
+
+TTS_CASE("non-homogeneous types match neither overload")
+{
+  TTS_EXPECT_NOT((can_pick<kumi::tuple<int, float>>));
+  TTS_EXPECT_NOT(can_pick<int>);
+};
+
+TTS_CASE("concept relationship is as documented")
+{
+  using arr_t = kumi::array<int, 3>;
+  using tup_t = kumi::tuple<int, int, int>;
+
+  TTS_EXPECT(kumi::concepts::power_type<arr_t>);
+  TTS_EXPECT(kumi::concepts::homogeneous_product_type<arr_t>);
+
+  TTS_EXPECT(kumi::concepts::homogeneous_product_type<tup_t>);
+  TTS_EXPECT_NOT(kumi::concepts::power_type<tup_t>);
+};
