@@ -19,7 +19,7 @@ jobs:
   documentation:
     permissions:
       contents: write
-    uses: jfalcou/copacabana/.github/workflows/documentation.yml@main
+    uses: jfalcou/copacabana/.github/workflows/documentation.yml@eb45d6163c3cafed95d34b541400500f500ad585
     with:
       project: kumi
       coverage: true

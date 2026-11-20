@@ -14,7 +14,7 @@ jobs:
     permissions:
       contents: write
       pull-requests: write
-    uses: jfalcou/copacabana/.github/workflows/package-standalone.yml@main
+    uses: jfalcou/copacabana/.github/workflows/package-standalone.yml@eb45d6163c3cafed95d34b541400500f500ad585
     with:
       project: kumi
       image: ghcr.io/jfalcou/compilers:v11
