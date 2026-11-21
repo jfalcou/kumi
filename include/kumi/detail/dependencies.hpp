@@ -20,6 +20,7 @@
 // Faster std::declval
 namespace kumi
 {
+  template<typename T> using declfn_t = auto (*)() noexcept -> T;
   //====================================================================================================================
   /**
     @ingroup kumi_utility
@@ -46,13 +47,10 @@ namespace kumi
     @endcode
 
     @note The function has no defined body because it is only used in unevaluated contexts.
-    Attempting to call it results in a linker error (or a compile-time error in the
-    documentation generation context).
+    Attempting to call it results in a linker error
   **/
   //====================================================================================================================
-  template<typename T> extern T && (*declval)() noexcept;
+  template<typename T, typename...> extern kumi::declfn_t<T&&> declval;
 
-  template<typename T>
-  requires(std::is_void_v<T>)
-  extern void (*declval<T>)() noexcept;
+  template<typename... Ts> extern kumi::declfn_t<void> declval<void, Ts...>;
 }
