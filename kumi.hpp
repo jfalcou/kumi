@@ -113,10 +113,9 @@ namespace kumi::_
 #define KUMI_MOVE(...) static_cast<std::remove_reference_t<decltype(__VA_ARGS__)>&&>(__VA_ARGS__)
 namespace kumi
 {
-  template<typename T> extern T && (*declval)() noexcept;
-  template<typename T>
-  requires(std::is_void_v<T>)
-  extern void (*declval<T>)() noexcept;
+  template<typename T> using declfn_t = auto (*)() noexcept -> T;
+  template<typename T, typename...> extern kumi::declfn_t<T&&> declval;
+  template<typename... Ts> extern kumi::declfn_t<void> declval<void, Ts...>;
 }
 namespace kumi::_
 {
