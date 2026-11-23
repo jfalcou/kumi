@@ -2386,11 +2386,11 @@
       <arglist></arglist>
     </member>
     <member kind="variable">
-      <type>T &amp;&amp;(*</type>
+      <type>kumi::declfn_t&lt; T &amp;&amp; &gt;</type>
       <name>declval</name>
       <anchorfile>group__kumi__utility.html</anchorfile>
-      <anchor>ga0ed1f5a6ee3ac66decf465ae8112b3d8</anchor>
-      <arglist>)() noexcept</arglist>
+      <anchor>gaeb8631f5a745442b660b4b3776773e69</anchor>
+      <arglist></arglist>
     </member>
     <member kind="variable">
       <type>constexpr exclusive_scan_left_t</type>
@@ -3880,11 +3880,11 @@
       <arglist>(std::basic_ostream&lt; CharT, Traits &gt; &amp;os, field const &amp;w) noexcept</arglist>
     </member>
     <member kind="variable">
-      <type>T &amp;&amp;(*</type>
+      <type>kumi::declfn_t&lt; T &amp;&amp; &gt;</type>
       <name>kumi::declval</name>
       <anchorfile>group__kumi__utility.html</anchorfile>
-      <anchor>ga0ed1f5a6ee3ac66decf465ae8112b3d8</anchor>
-      <arglist>)() noexcept</arglist>
+      <anchor>gaeb8631f5a745442b660b4b3776773e69</anchor>
+      <arglist></arglist>
     </member>
     <member kind="variable">
       <type>constexpr traits_check&lt; Traits &gt;</type>
