@@ -28,7 +28,7 @@ jobs:
   ##################################################################################################
   precommit:
     name: Meta Checks
-    uses: jfalcou/copacabana/.github/workflows/precommit.yml@eb45d6163c3cafed95d34b541400500f500ad585
+    uses: jfalcou/copacabana/.github/workflows/precommit.yml@e96014671dfb262482346ddcaa3a1a810b3eebaf
 
   ##======================================================================================================================
   ## Ensure Standalone is viable
@@ -57,7 +57,7 @@ jobs:
   ##################################################################################################
   sanitizer-tests:
     name: Sanitizers
-    uses: jfalcou/copacabana/.github/workflows/sanitizers.yml@eb45d6163c3cafed95d34b541400500f500ad585
+    uses: jfalcou/copacabana/.github/workflows/sanitizers.yml@e96014671dfb262482346ddcaa3a1a810b3eebaf
     with:
       build-targets: unit.exe doc.exe
       test-targets: unit|doc
@@ -68,7 +68,7 @@ jobs:
   ##################################################################################################
   coverage-report:
     name: Coverage
-    uses: jfalcou/copacabana/.github/workflows/coverage.yml@eb45d6163c3cafed95d34b541400500f500ad585
+    uses: jfalcou/copacabana/.github/workflows/coverage.yml@e96014671dfb262482346ddcaa3a1a810b3eebaf
     with:
       project: kumi
       build-targets: kumi-test
@@ -80,56 +80,56 @@ jobs:
   linux-debug-tests:
     name: Linux
     needs: [precommit, standalone-generation, sanitizer-tests]
-    uses: jfalcou/copacabana/.github/workflows/matrix.yml@eb45d6163c3cafed95d34b541400500f500ad585
+    uses: jfalcou/copacabana/.github/workflows/matrix.yml@e96014671dfb262482346ddcaa3a1a810b3eebaf
     with:
       file: .github/matrices/linux-debug.yml
 
   linux-release-tests:
     name: Linux
     needs: [precommit, standalone-generation, sanitizer-tests]
-    uses: jfalcou/copacabana/.github/workflows/matrix.yml@eb45d6163c3cafed95d34b541400500f500ad585
+    uses: jfalcou/copacabana/.github/workflows/matrix.yml@e96014671dfb262482346ddcaa3a1a810b3eebaf
     with:
       file: .github/matrices/linux-release.yml
 
   macos-debug-tests:
     name: MacOS
     needs: [precommit, standalone-generation, sanitizer-tests]
-    uses: jfalcou/copacabana/.github/workflows/matrix.yml@eb45d6163c3cafed95d34b541400500f500ad585
+    uses: jfalcou/copacabana/.github/workflows/matrix.yml@e96014671dfb262482346ddcaa3a1a810b3eebaf
     with:
       file: .github/matrices/macos-debug.yml
 
   macos-release-tests:
     name: MacOS
     needs: [precommit, standalone-generation, sanitizer-tests]
-    uses: jfalcou/copacabana/.github/workflows/matrix.yml@eb45d6163c3cafed95d34b541400500f500ad585
+    uses: jfalcou/copacabana/.github/workflows/matrix.yml@e96014671dfb262482346ddcaa3a1a810b3eebaf
     with:
       file: .github/matrices/macos-release.yml
 
   windows-debug-tests:
     name: Windows
     needs: [precommit, standalone-generation, sanitizer-tests]
-    uses: jfalcou/copacabana/.github/workflows/matrix.yml@eb45d6163c3cafed95d34b541400500f500ad585
+    uses: jfalcou/copacabana/.github/workflows/matrix.yml@e96014671dfb262482346ddcaa3a1a810b3eebaf
     with:
       file: .github/matrices/windows-debug.yml
 
   windows-release-tests:
     name: Windows
     needs: [precommit, standalone-generation, sanitizer-tests]
-    uses: jfalcou/copacabana/.github/workflows/matrix.yml@eb45d6163c3cafed95d34b541400500f500ad585
+    uses: jfalcou/copacabana/.github/workflows/matrix.yml@e96014671dfb262482346ddcaa3a1a810b3eebaf
     with:
       file: .github/matrices/windows-release.yml
 
   nvidia-debug-tests:
     name: Nvidia
     needs: [precommit, standalone-generation, sanitizer-tests]
-    uses: jfalcou/copacabana/.github/workflows/matrix.yml@eb45d6163c3cafed95d34b541400500f500ad585
+    uses: jfalcou/copacabana/.github/workflows/matrix.yml@e96014671dfb262482346ddcaa3a1a810b3eebaf
     with:
       file: .github/matrices/nvidia-debug.yml
 
   nvidia-release-tests:
     name: Nvidia
     needs: [precommit, standalone-generation, sanitizer-tests]
-    uses: jfalcou/copacabana/.github/workflows/matrix.yml@eb45d6163c3cafed95d34b541400500f500ad585
+    uses: jfalcou/copacabana/.github/workflows/matrix.yml@e96014671dfb262482346ddcaa3a1a810b3eebaf
     with:
       file: .github/matrices/nvidia-release.yml
 
@@ -139,6 +139,6 @@ jobs:
   nvidia-device-tests:
     name: Device
     needs: [precommit, standalone-generation, sanitizer-tests]
-    uses: jfalcou/copacabana/.github/workflows/matrix.yml@eb45d6163c3cafed95d34b541400500f500ad585
+    uses: jfalcou/copacabana/.github/workflows/matrix.yml@e96014671dfb262482346ddcaa3a1a810b3eebaf
     with:
       file: .github/matrices/nvidia-device.yml

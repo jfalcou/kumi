@@ -24,7 +24,7 @@ jobs:
     permissions:
       actions: read
       contents: write
-    uses: jfalcou/copacabana/.github/workflows/compile-cost.yml@eb45d6163c3cafed95d34b541400500f500ad585
+    uses: jfalcou/copacabana/.github/workflows/compile-cost.yml@e96014671dfb262482346ddcaa3a1a810b3eebaf
     with:
       project: kumi
       series: true
